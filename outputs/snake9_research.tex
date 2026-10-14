@@ -1,0 +1,430 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
+    pdftitle={The Ninth-Dimensional Snake-in-the-Box Problem},
+    pdfauthor={Iori Hironaka}
+}
+
+\usepackage{microtype}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Q}{Q}
+\newcommand{\Ham}{d_{\mathrm H}}
+\title{The Ninth-Dimensional Snake-in-the-Box Problem:\\
+A Sequence-Based Conjecture, Verified Bounds, and Construction Obstructions}
+\author{Iori Hironaka}
+\date{14 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The maximum length of an induced path in the binary hypercube is known through dimension eight, with values $1,2,4,7,13,26,50,98$. Subtracting a common exponential baseline gives two constant three-term correction blocks. Extrapolating their doubling suggests the independent conjecture $a(9)=196$. A second equally exact fit predicts 195, demonstrating the limited force of this numerical evidence. This paper presents proofs and explicit finite checks for a verified 191-edge witness, the reduction of optimality to exclusion of the next length, a counterexample to an endpoint-maximality argument, a cycle-deletion construction, the exact two-layer joining criterion, a spectral bound $a(9)\le255$ obtained from Huang's degree theorem, and a square-face argument refining the bound to 254. The spectral bound, explicit witnesses, and local singleton-square lemma have independent machine checks. The square-face refinement has a complete written argument below; verification of its global incidence count remains in progress. Restricted searches exclude several construction families, including all two-vertex deletion neighborhoods of 131 published 191-edge examples. These restricted solver results have not been independently certified. No 192-edge improvement, 196-edge construction, or matching upper bound has been established. The exact ninth-dimensional optimum remains open in this investigation.
+\end{abstract}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\clearpage
+
+\section{Problem, conventions, and prior observations}
+\begin{definition}
+The graph $\Q_n$ has vertex set $\{0,1\}^n$, with adjacency $u\sim v$ when $\Ham(u,v)=1$. A snake of length $L$ is a sequence of distinct vertices $v_0,\ldots,v_L$ such that
+\[
+v_i\sim v_j\quad\Longleftrightarrow\quad |i-j|=1\qquad(i\ne j).
+\]
+Length counts edges. Thus a length-$L$ snake has $L+1$ vertices. Let $a(n)$ denote the largest possible length.
+\end{definition}
+Finiteness of $\Q_n$ ensures that a maximum exists. A transition sequence $t_1\cdots t_L$, with $0\le t_i<n$, specifies a path from the zero vertex by
+\[
+v_0=0,\qquad v_i=v_{i-1}\mathbin{\oplus}2^{t_i}.
+\]
+Integers encode binary words; $\oplus$ is exclusive-or. Translation by exclusive-or with a fixed word, coordinate permutations, and reversal preserve the snake conditions.
+
+The exact values through dimension eight are listed in OEIS A099155 \cite{oeis}. Carlson and Hougen constructed a length-98 snake in dimension eight; the upper bound was established by exhaustive search by Östergård and Pettersson \cite{ostergard}. The universal bound $a(8)=98$ is used as a cited result here; this project checks a witness of that length but does not reproduce the complete eight-dimensional classification.
+
+Orland et al. supply 191-edge snakes in dimension nine and a public collection of 131 inequivalent examples \cite{orland,data}. Optimality is unresolved. The collection is a discovered bank, with no proved global completeness. Its examples cannot be extended at their endpoints; that observation alone gives no maximum-length theorem.
+
+\paragraph{Evidence conventions.}
+Theoretical statements are accompanied by proofs, and explicit witnesses are checked against the defining pairwise conditions. Search outcomes are recorded separately: \textsc{Infeasible} covers the specified model and restrictions, while \textsc{Unknown} establishes neither existence nor nonexistence. The restricted search exclusions have not been independently certified. The results include standard consequences and independently checked reductions; no new mathematical record is claimed.
+
+\section{Independent hypothesis from the first eight terms}
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$n$ & $a(n)$ & $3\cdot2^{n-3}$ & correction\\
+\midrule
+3&4&3&1\\4&7&6&1\\5&13&12&1\\
+6&26&24&2\\7&50&48&2\\8&98&96&2\\
+\bottomrule
+\end{tabular}
+\end{center}
+The baseline coefficient is also recovered from successive differences within the two triples:
+\[
+\frac{7-4}{2^4-2^3}=\frac{13-7}{2^5-2^4}
+=\frac{50-26}{2^7-2^6}=\frac{98-50}{2^8-2^7}=\frac38.
+\]
+Continuing the correction as $1,1,1,2,2,2,4,4,4,\ldots$ gives
+\begin{equation}\label{eq:model}
+\widehat a(n)=3\cdot2^{n-3}+2^{\lfloor(n-3)/3\rfloor},\qquad n\ge3.
+\end{equation}
+The terms at dimensions one and two are assigned separately as 1 and 2.
+
+\begin{conjecture}\label{conj:196}
+The maximum snake length in $\Q_9$ is $196$ edges.
+\end{conjecture}
+This is a low-confidence conjecture. It is selected as a concrete target for construction and refutation, not inferred as a consequence of the known values. Equation~\eqref{eq:model} predicts $3\cdot64+4=196$.
+
+\begin{proposition}[Model recurrence]
+For $n\ge3$, the model satisfies
+\[
+\widehat a(n+3)+6\cdot2^{\lfloor(n-3)/3\rfloor}=8\widehat a(n).
+\]
+\end{proposition}
+\begin{proof}
+Put $t=n-3$ and $c=2^{\lfloor t/3\rfloor}$. Since $\lfloor(t+3)/3\rfloor=\lfloor t/3\rfloor+1$, the left side is
+$24\cdot2^t+2c+6c=8(3\cdot2^t+c)$.
+\end{proof}
+At $n=6$ the recurrence predicts $8\cdot26-12=196$. This is the same evidence as the correction table, not an independent argument.
+
+\begin{proposition}[The supplied terms do not determine the ninth prediction]
+The model
+\[
+\widetilde a(n)=3\cdot2^{n-3}+1+\left\lfloor\frac{n-3}{3}\right\rfloor
+\qquad(n\ge3)
+\]
+agrees with every supplied term, after assigning the first two terms separately, and gives $\widetilde a(9)=195\ne196$.
+\end{proposition}
+\begin{proof}
+For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, the corrections are respectively 3 and 4. Direct substitution proves the claim.
+\end{proof}
+Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
+
+\section{Exact targets for an optimality proof}
+\begin{lemma}[Prefix restriction]\label{lem:prefix}
+Every prefix of a snake is a snake.
+\end{lemma}
+\begin{proof}
+Restrict the vertex sequence to its initial indices. Distinctness is inherited. Adjacency between any two retained indices has the same value and the same consecutive-index condition as in the original sequence.
+\end{proof}
+
+\begin{theorem}[Next-length exclusion]\label{thm:next}
+For every integer $b\ge0$, all snakes in $\Q_9$ have length at most $b$ if and only if no snake has length $b+1$.
+\end{theorem}
+\begin{proof}
+The upper bound directly excludes $b+1$. Conversely, a snake of any length larger than $b$ has a prefix of length $b+1$ by Lemma~\ref{lem:prefix}.
+\end{proof}
+
+\begin{corollary}
+Conjecture~\ref{conj:196} is equivalent to the conjunction of a 196-edge construction and nonexistence of a 197-edge snake. A 196-edge construction would contain a 192-edge prefix and would refute the proposed upper bound 191.
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{thm:next} with $b=196$, and restrict a 196-edge snake to its first 193 vertices.
+\end{proof}
+For the competing optimum 191, the missing exclusion is the finite statement that no sequence $v_0,\ldots,v_{192}\in\{0,1\}^9$ is distinct and satisfies
+\[
+\Ham(v_i,v_j)=1\quad\Longleftrightarrow\quad |i-j|=1.
+\]
+The pairwise condition is required for every $0\le i<j\le192$. Neither next-length exclusion has been proved.
+
+\section{Witnesses, endpoint obstruction, and an invalid inference}
+\begin{theorem}[Verified lower bound]\label{thm:lower}
+A 191-edge snake exists in $\Q_9$.
+\end{theorem}
+\begin{proof}
+The first transition sequence in Appendix~\ref{app:witness} is the published Appendix E example of \cite{orland}. Starting at zero reconstructs 192 vertices. For each $0\le i<j\le191$, direct calculation gives $v_i\ne v_j$ and $\Ham(v_i,v_j)=1$ exactly when $j=i+1$. This is a finite verification of $\binom{192}{2}=18\,336$ unordered pairs using the displayed transition sequence, and establishes a snake of length 191.
+\end{proof}
+
+\begin{definition}
+A snake $P=(v_0,\ldots,v_L)$ is blocked at its right endpoint when every neighbor $w$ of $v_L$ either equals a vertex $v_i$ with $i<L$, or is adjacent to such a vertex.
+\end{definition}
+\begin{lemma}[Blocking prevents endpoint extension]\label{lem:block}
+A right-blocked snake cannot be extended by appending one vertex while retaining its entire ordered sequence.
+\end{lemma}
+\begin{proof}
+An appended $w$ must be adjacent to $v_L$. If $w=v_i$ for an earlier index, distinctness fails. If $w\sim v_i$ for $i<L$, the appended vertex has a chord to an index at least two positions earlier. Both alternatives contradict the snake definition.
+\end{proof}
+
+\begin{theorem}[Endpoint maximality does not imply maximum length]
+There is a 93-edge snake in $\Q_9$ blocked at both endpoints, although a 191-edge snake exists in the same cube.
+\end{theorem}
+\begin{proof}
+The second sequence in Appendix~\ref{app:witness} specifies 94 vertices. Direct calculation verifies distinctness and the induced adjacency condition for all $\binom{94}{2}=4\,371$ unordered pairs. The appendix gives an earlier blocking vertex for each of the nine endpoint moves, in both the original and reversed orderings. Lemma~\ref{lem:block} excludes extension at either end. Theorem~\ref{thm:lower} supplies a strictly longer snake.
+\end{proof}
+
+\begin{theorem}[A sufficient universal blocking condition]
+If every 191-edge snake in $\Q_9$ is blocked at its right endpoint, then $a(9)=191$.
+\end{theorem}
+\begin{proof}
+If a 192-edge snake existed, its 191-edge prefix would admit extension by its remaining final vertex. This contradicts the universal blocking premise. Apply Theorem~\ref{thm:next} and the verified lower bound.
+\end{proof}
+The premise concerns every 191-edge snake. Blocking the 131 recorded classes is insufficient until completeness of the collection is established. Repeated recovery of the same classes is not a completeness proof.
+
+\section{Cycles as an alternative construction route}
+\begin{theorem}[Deleting a cycle vertex]
+Deleting one vertex from an induced cycle of $C$ vertices leaves a snake of length $C-2$.
+\end{theorem}
+\begin{proof}
+Order the cycle as $v_0,\ldots,v_{C-1},v_0$ and delete $v_{C-1}$. Among the remaining vertices, the only surviving cycle edges join consecutive indices. The closing edge involved the deleted vertex; the induced-cycle hypothesis forbids all other edges. The resulting path has $C-1$ vertices and $C-2$ edges.
+\end{proof}
+\begin{corollary}
+An induced cycle with 194 vertices in $\Q_9$ would disprove the upper bound 191.
+\end{corollary}
+\begin{proof}
+Deletion gives a 192-edge snake.
+\end{proof}
+In particular, a 192-vertex coil gives only a 190-edge snake through this deletion operation. Edge and vertex counts cannot be interchanged.
+
+\section{The two-layer construction and its obstruction}
+Write a vertex of $\Q_9$ as $(v,b)$ with $v\in\Q_8$ and $b\in\{0,1\}$. Vertices in the same layer retain their original adjacency. Across the layers,
+\[
+(u,0)\sim(v,1)\quad\Longleftrightarrow\quad u=v.
+\]
+The same description defines the product of an arbitrary graph with a binary edge. Taylor discusses such lifts in \cite{taylor}.
+
+\begin{theorem}[Exact joining condition]\label{thm:join}
+Let $P=(p_0,\ldots,p_r)$ and $R=(q_0,\ldots,q_s)$ be induced paths in a graph. The ordered sequence
+\[
+(p_0,0),\ldots,(p_r,0),(q_0,1),\ldots,(q_s,1)
+\]
+is an induced path precisely when
+\[
+p_i=q_j\quad\Longleftrightarrow\quad i=r\ \hbox{and}\ j=0.
+\]
+When valid, its length is $r+s+1$.
+\end{theorem}
+\begin{proof}
+The layer labels ensure that vertices in different layers are distinct. Each individual path retains its distinctness and induced adjacency conditions. Every cross-layer edge is caused by equality of the base vertices. In the displayed order there is exactly one consecutive pair across layers, at $(p_r,0),(q_0,1)$. Therefore the induced condition requires exactly the stated equality and forbids all other equalities. These conditions also suffice, since all possible pairs have been covered. The vertex count is $(r+1)+(s+1)$, hence the edge count is $r+s+1$.
+\end{proof}
+
+\begin{corollary}[Single-crossing length constraints]
+Assume the known bound $a(8)=98$. A single-crossing snake in $\Q_9$ has length at most 197. Length 196 requires layer lengths $(98,97)$ or $(97,98)$; length 197 requires $(98,98)$.
+\end{corollary}
+\begin{proof}
+The two layer segments are eight-dimensional snakes. Thus $r,s\le98$ and $L=r+s+1$. For $L=196$, $r+s=195$ forces the two possibilities; for $L=197$, both upper bounds must be attained.
+\end{proof}
+\begin{theorem}[Integer realization of the layer construction]
+The map $J(u,b)=u+256b$, for $0\le u<256$ and $b\in\{0,1\}$, is injective and preserves adjacency in both directions between $\Q_8\mathbin{\square}K_2$ and the integer encoding of $\Q_9$. Consequently, compatible layer paths of lengths 98 and 97 give a 196-edge snake under the same definition as the verified witness. Compatible paths of lengths 98 and 98 give a 197-edge snake and would refute the conjectured upper bound 196.
+\end{theorem}
+\begin{proof}
+The intervals $[0,255]$ and $[256,511]$ are disjoint, so equality of images forces equality of both components. Flipping a coordinate $k<8$ preserves the layer, because
+\[
+(u+256)\mathbin{\oplus}2^k=(u\mathbin{\oplus}2^k)+256,
+\qquad u\mathbin{\oplus}2^k<256.
+\]
+Flipping coordinate 8 exchanges $u$ and $u+256$. These are all nine possible flips. Thus adjacency within a layer is exactly eight-dimensional adjacency, while adjacency between layers requires equal base vertices. Compose this map with Theorem~\ref{thm:join}. The lengths become $98+97+1=196$ and $98+98+1=197$. Conversely, every unwanted equality between base vertices creates a nonconsecutive cross-layer edge, so the compatibility condition remains necessary after applying $J$.
+\end{proof}
+This argument covers snakes that cross a chosen coordinate exactly once. A general snake can cross every coordinate repeatedly. Its intersection with a layer can then be a disjoint union of paths, so bounding that entire intersection by a single-snake length would be invalid.
+
+The length-98 seed in Appendix~\ref{app:witness} is taken from \cite{records} and independently checked against all pairwise conditions. Two tests were performed. First, truncate either endpoint of an isometric copy to length 97, choose both joining endpoints, and enumerate all $8!$ coordinate permutations. Translation is forced by identifying the chosen endpoints. The $2\cdot2\cdot2\cdot8!=322\,560$ placements, counted with possible duplication, have minimum overlap 15. Theorem~\ref{thm:join} requires overlap one. Second, a constraint solver searched for an arbitrary length-97 partner avoiding every seed vertex except the chosen endpoint. Both endpoint instances were infeasible. These restricted computational exclusions have not been independently certified; other length-98 seeds and multiple-crossing constructions remain possible.
+
+\section{A global upper bound}
+\begin{theorem}[Huang's degree theorem]\label{thm:huang}
+Let $n\ge1$. If $H\subseteq\{0,1\}^n$ and $|H|>2^{n-1}$, then the subgraph induced by $H$ has a vertex of degree at least $\sqrt n$.
+\end{theorem}
+\begin{proof}[Proof argument]
+Define real symmetric matrices recursively by $A_0=(0)$ and
+\[
+A_n=\begin{pmatrix}A_{n-1}&I\\I&-A_{n-1}\end{pmatrix}.
+\]
+Induction gives $A_n^2=nI$. Its nonzero entries are precisely signed hypercube edges. For $n\ge1$, its trace is zero, so its eigenvalues $+\sqrt n$ and $-\sqrt n$ each have multiplicity $2^{n-1}$. The subspace of vectors supported on $H$ has dimension $|H|$. If $|H|>2^{n-1}$, it has nonzero intersection with the positive eigenspace, by the dimension inequality for intersections. Choose a nonzero vector $y$ in that intersection and $q\in H$ maximizing $|y_q|>0$. Then
+\[
+\sqrt n\,|y_q|=|(A_ny)_q|
+\le\sum_{p\in H,\ p\sim q}|y_p|
+\le \deg_H(q)|y_q|.
+\]
+Division proves the assertion. This is Huang's argument \cite{huang}, included to make the dependence of the upper bound explicit.
+\end{proof}
+
+\begin{lemma}[Compatibility of the integer and bit-function encodings]
+Map $v\in\{0,\ldots,511\}$ to its nine binary digits $E(v)(k)$. This map is injective. If $E(u)$ and $E(v)$ differ in exactly one coordinate, then $v=u\oplus2^k$ for some $k<9$.
+\end{lemma}
+\begin{proof}
+All digits at indices at least nine vanish because $v<2^9$. Equality of the first nine digits therefore gives equality at every digit and hence equality of integers. If exactly digit $k$ differs, exclusive-or with $2^k$ changes that digit and preserves every other digit. Equality of all digits then gives the stated integer identity.
+\end{proof}
+
+\begin{lemma}[Degree bound for an encoded snake]
+The set of bit-function encodings of a snake's vertices induces maximum degree at most two.
+\end{lemma}
+\begin{proof}
+For a vertex with index $i$, any encoded neighbor corresponds, by the preceding lemma, to an integer-encoded adjacent vertex. The snake condition forces its index to be $i-1$ or $i+1$, when those indices exist. There are at most two such vertices. Distinctness and injectivity of $E$ preserve the vertex count.
+\end{proof}
+
+\begin{theorem}[Verified universal bound]\label{thm:upper}
+Every snake in $\Q_9$ has at most 255 edges. Consequently,
+\[
+\boxed{191\le a(9)\le255.}
+\]
+\end{theorem}
+\begin{proof}
+A snake of at least 256 edges would have at least 257 vertices, exceeding $2^8$. Theorem~\ref{thm:huang} would give an induced degree of at least $\sqrt9=3$, contradicting the preceding degree bound. Combine the upper bound with Theorem~\ref{thm:lower}.
+\end{proof}
+The bound is a standard consequence of Huang's theorem. Its contribution here is a checked global guarantee and an explicit connection between the two cube representations. It does not distinguish 191, 195, or 196.
+
+
+\section{Square faces and the role of endpoints}
+For a vertex set $S\subseteq\Q_9$ and $x\in S$, let $\alpha_S(x)$ be the number of two-dimensional coordinate faces whose intersection with $S$ is exactly $\{x\}$. Such a face will be called a singleton square at $x$. Square-face counting occurs in the cycle bounds reviewed by Lukito and van Zanten \cite{lukito}. Their cycle argument uses a lower bound of two singleton squares at each selected vertex. A direct extension of that condition to every internal vertex of every open snake is false.
+
+\begin{theorem}[An internal-vertex counterexample]\label{thm:square-counterexample}
+There is a 137-edge snake $P=(v_0,\ldots,v_{137})$ in $\Q_9$ with $v_{127}=0$ and $\alpha_{V(P)}(0)=1$. The vertex $v_{127}$ is at least ten path edges from either endpoint.
+\end{theorem}
+\begin{proof}
+Use the transition sequence in Appendix~\ref{app:square-counterexample}, starting at the integer vertex 145. Direct calculation checks all $\binom{138}{2}=9\,453$ unordered vertex pairs: the vertices are distinct, and adjacency holds precisely for consecutive indices. It also gives
+\[
+v_0=145,\qquad v_{127}=0,\qquad v_{137}=288.
+\]
+The selected neighbors of zero are 1 and 2. Every square at zero involving coordinate 0 or 1 therefore contains another selected vertex. For $2\le a<b\le8$, neither $2^a$ nor $2^b$ is selected, and the opposite vertex $2^a+2^b$ is selected except when $(a,b)=(2,3)$. Thus the unique singleton square is $\{0,4,8,12\}$. Finally, the path distances from $v_{127}$ to the endpoints are 127 and 10.
+\end{proof}
+The Hamming distances from zero to the two endpoints are 3 and 2. Distance along the path is therefore insufficient for ignoring endpoint effects in this local cube configuration. This example concerns a 137-edge path; it makes no claim about the corresponding local condition for all longest paths.
+
+\begin{lemma}[At least one singleton square]\label{lem:one-square}
+If $S$ is the vertex set of an induced path in $\Q_9$, then $\alpha_S(x)\ge1$ for every $x\in S$.
+\end{lemma}
+\begin{proof}
+Translate $x$ to zero. Translation preserves adjacency and the induced-path property. Addition below is coordinatewise modulo two, and $e_i$ denotes the unit vector in coordinate $i$.
+
+First suppose that the path has at most two edges. The three coordinate squares using the pairs $(0,1)$, $(2,3)$, and $(4,5)$ have mutually disjoint sets of nonzero vertices. If none were a singleton square, they would contribute three distinct selected vertices besides zero, exceeding the number of vertices in the path. Thus at least one is a singleton square.
+
+Now suppose that the path has at least three edges, and assume for contradiction that no singleton square exists at zero. For any two distinct coordinates $i,j$ whose unit vectors are absent, the opposite vertex $e_i+e_j$ must then be selected.
+
+Every vertex of a path with at least three edges has an internal path vertex as a neighbor. Choose such a neighbor $e_a$ of zero, and let $c$ be its other path neighbor. Write $c=e_a+e_i$, where $i\ne a$ because $c\ne0$. The unit vector $e_i$ is absent: otherwise $0,e_a,c,e_i,0$ would be a selected four-cycle, which an induced path cannot contain.
+
+At most two unit vectors are selected, since zero has induced degree at most two. Choose a coordinate $b\notin\{a,i\}$ so that every selected unit vector is indexed by $a$ or $b$. If there is a second selected unit vector, take its coordinate; otherwise any coordinate outside $\{a,i\}$ suffices. Set
+\[
+U=\{0,\ldots,8\}\setminus\{a,b\}.
+\]
+Then $i\in U$, every unit vector indexed by $U$ is absent, and every pair vertex $e_j+e_k$ with distinct $j,k\in U$ is selected. Every triple vertex $e_j+e_k+e_l$ with distinct $j,k,l\in U$ is absent, because its three pair-vertex neighbors are selected and a path has maximum degree two.
+
+Choose four distinct coordinates $j\in U\setminus\{i\}$; six are available. For each of these four coordinates, define
+\[
+p_j=e_i+e_j,\qquad q_j=e_a+e_i+e_j.
+\]
+All four $p_j$ are selected. The four $q_j$ are distinct neighbors of $c$, distinct also from its already selected neighbor $e_a$. Therefore at most one $q_j$ is selected, and at least three are absent.
+
+For each absent $q_j$, the corresponding $p_j$ has at most one selected neighbor. Flipping coordinate $i$ or $j$ gives an absent unit vector; flipping any other coordinate in $U$ gives an excluded triple; and flipping $a$ gives the absent $q_j$. Only the neighbor $e_b+e_i+e_j$ can remain selected. Hence at least three distinct selected vertices have induced degree at most one. In a path with at least three edges, precisely the two endpoints have degree at most one. This contradiction proves the lemma.
+\end{proof}
+
+\begin{theorem}[Square-face refinement]\label{thm:square-upper}
+Every snake in $\Q_9$ has at most 254 edges. Together with the explicit witness, this gives
+\[
+\boxed{191\le a(9)\le254.}
+\]
+\end{theorem}
+\begin{proof}
+A path with one vertex satisfies the assertion, so let $S$ be a path vertex set of size $v\ge2$. For $r=0,1,2,3,4$, let $A_r$ count the coordinate squares containing exactly $r$ vertices of $S$. There are $\binom92 2^7=4\,608$ coordinate squares, and every cube vertex belongs to 36 of them. No square has all four vertices selected, since a path contains no cycle. Therefore
+\[
+A_0+A_1+A_2+A_3=4\,608,
+\qquad A_1+2A_2+3A_3=36v.
+\]
+There is a bijection between internal path vertices and squares with exactly three selected vertices. The two incident path edges at an internal vertex determine one square; its fourth vertex is absent, since it would close a four-cycle. Conversely, the selected middle vertex of a three-vertex square has precisely those two path neighbors. Thus $A_3=v-2$. Eliminating $A_2$ and $A_3$ from the preceding equations yields
+\[
+2A_0+A_1+35v+2=9\,216.
+\]
+Each singleton square is counted by exactly one $\alpha_S(x)$. Lemma~\ref{lem:one-square} gives $A_1=\sum_{x\in S}\alpha_S(x)\ge v$. Since $A_0\ge0$, it follows that $36v+2\le9\,216$. Hence $v\le255$ and the number of edges is $v-1\le254$.
+\end{proof}
+\paragraph{Verification status.}
+The explicit counterexample, the general statement of Lemma~\ref{lem:one-square} for every path length and every selected vertex, and the integer arithmetic of the square-face refinement have independent machine checks. The checked lemma includes the short-path cases and the translation back from zero. Verification of the global square-incidence bijections remains in progress, so the bound 254 is not yet checked end to end. The earlier spectral bound 255 is already checked end to end. No claim of a new best published upper bound is made.
+
+\section{Computational investigations and their exact scope}
+\subsection{Published bank audit and endpoint regrowth}
+Independent Python checks verified all 131 published nine-dimensional examples, including their transition and vertex lists, every pairwise adjacency condition, and blocked endpoints. The total number of unordered pairs checked was $131\binom{192}{2}=2\,402\,016$. Canonical transition sequences, normalized by first coordinate occurrence and compared with their reversals, distinguish 131 classes under translation, coordinate permutation, and reversal. This audit makes no completeness claim.
+
+Endpoint regrowth retained a prefix of each example in each orientation, then searched every legal continuation to 193 total vertices. A vertex is forbidden after it has been used, or when it is adjacent to a retained vertex preceding the current endpoint. Adding a vertex blocks all neighbors of the previous endpoint. The resulting depth-first search covers the permitted continuations. Node limits produce \textsc{Unknown} rather than a nonexistence result.
+\begin{center}\begin{tabular}{rrrrr}
+\toprule
+Removed & Retained & Excluded & Unresolved & Nodes\\\midrule
+32&160&262&0&488,450\\
+40&152&262&0&16,561,030\\
+48&144&209&53&66,968,134\\\bottomrule
+\end{tabular}\end{center}
+The final row used one million nodes per orientation. These exhaustive-search results concern only the listed prefixes and have not been independently certified.
+
+\subsection{Constraint models and vertex replacement}
+The exact model selects cube vertices and directed cube-edge arcs. A single directed circuit through an auxiliary vertex encodes one connected path; deleting the auxiliary vertex gives its endpoints. Unselected cube vertices use self-loops. Every cube edge whose two endpoints are selected is required to appear in the path. Together these constraints enforce distinctness, connectivity, and absence of chords. Small feasible and infeasible thresholds in dimensions three through five were reproduced. The unrestricted 192-edge run returned \textsc{Unknown} after 300 seconds.
+
+A broader local model permits both endpoints to change and imposes only
+\[
+|V(P)\setminus V(T)|\le k,\qquad |V(T)|=193,
+\]
+where $P$ is a recorded 191-edge snake. Thus changes may occur anywhere in the path. For $k=2$, all 131 models were infeasible, with about 241 seconds total solver time. In vertex-set terms, a 192-edge improvement would have to delete at least three vertices from each tested representative. A two-vertex deletion allows three added vertices, since the target has one extra vertex overall. This excludes a restricted neighborhood, without excluding a distant snake. The corresponding model with $k=8$ returned \textsc{Unknown} on the first three seeds within 30 seconds each. The implementations and exclusions have not been independently certified.
+
+\subsection{Other searches and unresolved cases}
+Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
+
+For the fixed eight-dimensional seed, searches for partner lengths 93, 92, and 91 at both endpoints were each unresolved after 30 seconds. A relaxation imposing only induced degree at most two admits 106 vertices in the permitted region, so that local degree condition alone is insufficient. Retaining 50 initial seed vertices in either orientation and exhaustively completing to length 98 recovered only the original completion, after 1,926,810 nodes in total. Retaining 42 vertices reached its twenty-million-node limit in both orientations. Neither result classifies all length-98 snakes.
+
+\section{Scope of the results and remaining obligations}
+The preceding arguments establish explicit lower-bound witnesses, reductions of the optimality question, conditional constructions, and a universal upper bound. The numerical extrapolation remains conjectural. The single-crossing length constraints use the cited eight-dimensional maximum $a(8)=98$; this paper does not repeat the exhaustive proof of that result. No compatible pair yielding length 196 or 197 has been found. The restricted search results cover precisely the recorded seeds and construction families, and provide no global exclusion.
+
+The remaining obligations for Conjecture~\ref{conj:196} are exact: construct and check a 196-edge snake, then exclude length 197. A 192-edge witness would already refute the competing optimum 191. Conversely, excluding every 192-edge snake would establish 191 and refute Conjecture~\ref{conj:196}. At present neither outcome has been achieved. The numerical hypothesis is retained provisionally while both directions remain under investigation.
+
+\appendix
+\section{Explicit transition sequences and blockers}\label{app:witness}
+All coordinates are numbered from zero. Spaces only separate groups; start at the zero vertex unless another initial vertex is stated, and apply each coordinate flip in order.
+\subsection{Verified 191-edge nine-dimensional witness}
+\begin{quote}\small\ttfamily
+0120314506 2106502631 4321035023 6210623607 4063260126\\
+3206483026 3153263120 3623402362 0162360750 6326012632\\
+0652362013 4120132610 2156210263 0210674601 2063201260\\
+4816201351 2013261021 4621026302 1067560120 6
+\end{quote}
+Its last vertex is 118. For moves in coordinates $0,\ldots,8$, respectively, earlier blocking indices are
+\[
+(19,37,13,13,27,19,189,43,91).
+\]
+For each coordinate $k$, put $w=v_{191}\mathbin{\oplus}2^k$. Direct calculation gives $w=v_i$ or $\Ham(w,v_i)=1$ for the corresponding displayed index $i<191$.
+
+\subsection{Verified 93-edge endpoint-maximal counterexample}
+\begin{quote}\small\ttfamily
+8624301806 7812851450 7860736287 5286237138 0746235243\\
+8145783485 6180720370 4716078615 6326120174 036
+\end{quote}
+The terminal vertex is 289. Blocking indices for its nine moves are
+\[
+(1,33,51,91,45,1,91,81,45).
+\]
+For the reversed ordering, whose terminal vertex is zero, the blocking indices in that reversed ordering are
+\[
+(25,19,43,27,19,61,21,23,91).
+\]
+The reversed ordering is $v_{93},v_{92},\ldots,v_0$. Its pairwise distances are unchanged. Each listed blocker precedes the reversed endpoint and either equals the candidate next vertex or has Hamming distance one from it.
+
+\subsection{Verified 98-edge eight-dimensional seed}
+\begin{quote}\small\ttfamily
+0123104154 3146340134 6743104274 0147514016 3104154314\\
+2340134274 3104674014 7561340142 7410431641 04764013
+\end{quote}
+The seed is attributed to Carlson and Hougen by the source page \cite{records}. The exact transition and vertex data for all four witnesses accompany the paper in JSON files.
+
+\subsection{A 137-edge counterexample for singleton squares}\label{app:square-counterexample}
+Start at the integer vertex 145, rather than zero, and use the following coordinate transitions:
+\begin{quote}\small\ttfamily
+0132518601 5823563751 0231051201 8510231061 2714831024\\
+7201352471 3814601234 6187510231 0512018510 2376320158\\
+1021501320 1871023158 1321531023 1581320
+\end{quote}
+The resulting ordered path has 138 distinct vertices. Its vertex at index 127 is zero, and its last vertex is 288. At zero, the only singleton coordinate square uses coordinates 2 and 3.
+
+\begin{thebibliography}{9}\raggedright
+\bibitem{oeis} OEIS Foundation. \emph{A099155: Maximum length of a simple path with no chords in the $n$-dimensional hypercube}. \url{https://oeis.org/A099155}. Accessed 13 October 2026.
+\bibitem{ostergard} P.~R.~J. Östergård and V.~H. Pettersson. Exhaustive Search for Snake-in-the-Box Codes. \emph{Graphs and Combinatorics} 31 (2015), 1019--1028. \url{https://doi.org/10.1007/s00373-014-1423-3}.
+\bibitem{orland} P.~Orland et al. \emph{New Snake-in-the-Box Records via Snakepit Surgery and Learned Construction}. arXiv:2607.15270v3, 30 September 2026. \url{https://arxiv.org/html/2607.15270v3}.
+\bibitem{data} Math-AI-Caltech. \emph{Snake-in-the-Box: public record data}. \url{https://github.com/Math-AI-Caltech/Snake-in-the-Box}. Downloaded archive SHA-256 is recorded in the accompanying bank audit.
+\bibitem{records} T.~Ace. \emph{Snake-in-the-Box lower bounds and transition sequences}. \url{https://www.minortriad.com/snake/}. Accessed 13 October 2026.
+\bibitem{taylor} T.~Taylor. \emph{Constructing longer snakes and improved asymptotic bounds in hypercubes}. arXiv:2609.27483v1, 23 September 2026. \url{https://arxiv.org/html/2609.27483v1}.
+\bibitem{huang} H.~Huang. Induced subgraphs of hypercubes and a proof of the Sensitivity Conjecture. \emph{Annals of Mathematics} 190 (2019), 949--955. \url{https://annals.math.princeton.edu/2019/190-3/p06}.
+\bibitem{lukito} A.~Lukito and A.~J. van Zanten. A New Non-Asymptotic Upper Bound for Snake-in-the-Box Codes. \emph{Journal of Combinatorial Mathematics and Combinatorial Computing} 39 (2001), 147--156. \url{https://combinatorialpress.com/article/jcmcc/Volume%20039/vol-039-paper%2012.pdf}.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,52 @@
+# Build products and downloaded dependencies
+**/.lake/
+**/.verification/
+**/__pycache__/
+*.pyc
+*.olean
+*.ilean
+*.pdf
+*.png
+*.zip
+*.aux
+*.out
+*.toc
+*.synctex.gz
+work/solver_packages/
+work/spectral/Archive/
+work/spectral/Probe.lean
+work/spectral-reproduction/
+work/lean/
+work/record_snakes.csv
+work/*.html
+work/*thesis.txt
+work/lukito-zanten.txt
+# Local transfer/editor metadata
+WORKSPACE.md
+transfer-manifest.json
+outputs/manuscript_revision.json
+outputs/paper_validation.json
+outputs/snake9_research.log
+outputs/paper-build.log
+# Duplicate exports; core proofs live in work/final_lean
+outputs/*.lean
+outputs/lakefile.toml
+outputs/lean-toolchain
+# Local document generators and migration helpers
+work/add_square_section.py
+work/audit_paper.py
+work/audit_square_manuscript.py
+work/build_paper.py
+work/bundle_research.py
+work/package_research.py
+work/package_spectral.py
+work/record_singleton_proof.py
+work/revise_paper_presentation.py
+work/transfer_project.ps1
+work/prepare_repository.py
+# Environment files
+.env
+.env.*
+.venv/
+
+work/paper-build/
