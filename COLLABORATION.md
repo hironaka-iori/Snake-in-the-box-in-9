@@ -1,6 +1,6 @@
 # Collaborator handoff
 
-Checkpoint: 15 October 2026. Manuscript authors: Iori Hironaka and Tommy Ma.
+Checkpoint: 15 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Where the investigation stands
 
@@ -113,7 +113,7 @@ These are independent tasks suitable for separate branches. The current handoff 
 | Explicit witnesses and search records | `outputs/*.json` |
 | Published 131-example subset | `work/bank9.json` |
 
-The authoritative standard-library Lean sources are in `work/final_lean/`; maintained mathlib-dependent proofs are in `work/spectral/` and `work/spectral/stronger/`. Do not create divergent proof copies in `outputs/`. The authoritative paper is the existing LaTeX source. Keep implementation filenames and theorem identifiers in technical notes rather than the paper. Retain Iori Hironaka and Tommy Ma in the author field. Contributor PDFs are snapshots; the maintained main paper is the TeX source.
+The authoritative standard-library Lean sources are in `work/final_lean/`; maintained mathlib-dependent proofs are in `work/spectral/` and `work/spectral/stronger/`. Do not create divergent proof copies in `outputs/`. The authoritative paper is the existing LaTeX source. Keep implementation filenames and theorem identifiers in technical notes rather than the paper. Retain Iori Hironaka, Tommy Ma, and Steven Zhan in the author field. Contributor PDFs are snapshots; the maintained main paper is the TeX source.
 
 A search timeout, a blocked endpoint, and a restricted exclusion cannot establish global optimality. For every claimed theorem, state exactly which assumptions are discharged. The repository is a research checkpoint, and its documentation must retain the unresolved status until a matching construction and global upper bound are verified.
 

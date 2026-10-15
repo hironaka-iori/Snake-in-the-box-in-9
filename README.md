@@ -1,6 +1,6 @@
 # Snake-in-the-box in dimension nine
 
-Authors of the manuscript: **Iori Hironaka and Tommy Ma**.
+Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
@@ -37,7 +37,7 @@ Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact pr
 
 ## Files
 
-- `paper/snake9_research.tex`: current manuscript, with authors Iori Hironaka and Tommy Ma.
+- `paper/snake9_research.tex`: current manuscript, with authors Iori Hironaka, Tommy Ma, and Steven Zhan.
 - `work/final_lean/`: authoritative standard-library proof project, with the maintained core and integrated DFS modules.
 - `work/spectral/`: authoritative mathlib-dependent bounds 245, 247, 248, 251, 254, and 255, with reproduction instructions.
 - `work/spectral/stronger/`: 150 maintained geometric, classification, and aggregate proof modules.
