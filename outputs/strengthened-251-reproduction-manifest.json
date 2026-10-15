@@ -1,0 +1,702 @@
+{
+  "started_utc": "2026-10-15T06:05:39.189708+00:00",
+  "mathlib_commit": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "lean_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "build_directory": "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+  "source_sha256": {
+    "work/final_lean/CoilReduction.lean": "4c683eceec5f7650e82e7b8be2600404c7c8b997195ca9a6334945e026566e1f",
+    "work/final_lean/CubeLocal.lean": "45b6486fd3d5bf4dbac3d57252028a1946724aa78762b0cddc10b51ec7fe7a43",
+    "work/final_lean/IntegerLayerBridge.lean": "dd7245218a2066598d9e58421d6fc573ad45bf48106dd05b52c3e584a5f86656",
+    "work/final_lean/JointLayerSeed.lean": "945d427f627315656b92ce0d6a15c012a154b5bea5bb09075d37d2d219ad4e70",
+    "work/final_lean/LayerJoining.lean": "30687e190d96818b64569e90faaff50eba28acf7698e4ffa8c6d89d8fe640a74",
+    "work/final_lean/MaximalityCounterexample.lean": "ea9bd0b610008f65b0635eb7c00bbbd022d1801823f38b1172d5168a37978aec",
+    "work/final_lean/OptimalityTarget.lean": "50cdd9f7459ff97e45a074555ddcad097fe85df17af37bae2c3d263df62f5e94",
+    "work/final_lean/PathStructure.lean": "6267168775a17ce9a256fba7e6f6b58d46f6fa38f85ada282df525b200d341bd",
+    "work/final_lean/SingletonSquareLemma.lean": "7ee84c92ec3ae698c1be31bcee0ad17af31c22dd3e6c6d5de03f2314667e0668",
+    "work/final_lean/Snake8.lean": "1379fcb402d48ac62605cbca5768a2226121a67767175cedf8c0cb1d2359b3f1",
+    "work/final_lean/Snake9.lean": "025260b9c1533d606a6cfd058aa025d9544d5cd6ccb1f8f5f2143e5657df4740",
+    "work/final_lean/Snake9Logic.lean": "a65916b9fa782804ad9ab083b996db7bb9ef90e5b738c9f135f79603e1464915",
+    "work/final_lean/SquareCounterexample.lean": "6ee4b1f855213fd51f03732f35bd237a507ae4e5cbfa34792f12d8548c426630",
+    "work/final_lean/SquareCountingLogic.lean": "682c563d41f0651e721230e3063f2ecd5b3609b4461ebe81de75714f7fd66a58",
+    "work/final_lean/TrendHypothesis.lean": "b05909aad978aab0db77b7299d8c589f9becf83a5853b332809f9a58bebc95ce",
+    "work/final_lean/lakefile.toml": "0d20ed5ee2ce17d835093bc5b3104f419c1e1da9ac063e8b0c2e584e75a46c24",
+    "work/final_lean/lean-toolchain": "f28855f24b5253d7e8949f38027066a06cdde238520086d421ba7ad24c27a691",
+    "work/final_lean/lake-manifest.json": "5c556a0a3845a3fcbef6cddb17a429f6665adad0546687d0ade5765fea3fbf8d",
+    "work/spectral/SquareIncidence.lean": "4c4aae454b41627fa57b8e881160eb336c3548109fe811874edb7600b1270d2a",
+    "work/spectral/stronger/FreshCoordinates.lean": "affefd490b251cc604892ce44440d4488bec670fb9660d928579c9a7048bbec5",
+    "work/spectral/stronger/CubeCoordinateAlgebra.lean": "5703f6266668e59aad0218392ecc6934df1662edd0ba3d85c2fa09a4c1b1dc9f",
+    "work/spectral/stronger/EndpointGroups.lean": "18779f4f32a384cf833ade0acab4655b450def041de374a764af20157920e48c",
+    "work/spectral/stronger/CycleStructure.lean": "72d0f5fa7a842eda23da04f51e0ec2b64457aadb738ac3d122399b5abed8863b",
+    "work/spectral/stronger/SingletonGeometry.lean": "f2635485fb65ae09881db76a4464ce2f73fa4d60d1d51f5eac0022db9599ad92",
+    "work/spectral/stronger/AggregateSingletonBound.lean": "b22b36a8575f842ed633b5a218a7b7a0d3f22909b8dde68b9e51f3f9aea593aa",
+    "work/spectral/stronger/ExactWedgeCount.lean": "8c32d293ad63ddc94d53a086bf3af40c3993127324457ee7955cb8ba4efb74d0",
+    "work/spectral/stronger/SingletonAlphaBridge.lean": "878fc26aaa359ffa8a61724096afb5f347b6139bee71baa81cea99fedb148cfb",
+    "work/spectral/stronger/NormalizeAdjacentSingletons.lean": "c2bd8c45c48c4f047975512a69eea215328a68e7c164378b4e968ac4f90f09ec",
+    "work/spectral/stronger/AdjacentConfiguration.lean": "c049ac0719bfec10f2ae9792aa5fa16ee333b7d28de17cf1762d0f89881800a8",
+    "work/spectral/stronger/AdjacentNeighborhood.lean": "087b7a94471a997cc2409453dad8ef1b2aaad6a37383efa457f8b3795382ec1c",
+    "work/spectral/stronger/ExceptionRowNeighbors.lean": "968cabd22c899faa039cbae8ad00416c052f1c4b28bbb9f4847ef8a54b81fd4c",
+    "work/spectral/stronger/CoordinateCycle.lean": "98931ec63c2738e30981bdfa6d2a21f3a17efc125c617684ccf90c7ce548fb6e",
+    "work/spectral/stronger/AdjacentSingletonExclusion.lean": "3e9b728ed2bfe9cbc2b7925f99de8dec15306a71a24b4affc46c6e4de23dd8df",
+    "work/spectral/stronger/UpperBound251.lean": "94bdb014eff8c3d5b6e0dae9ef31737b262028e5051789d130b7ec9c68406421"
+  },
+  "steps": [
+    {
+      "label": "core",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "build"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SquareIncidence",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\SquareIncidence.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\SquareIncidence.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "FreshCoordinates",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\FreshCoordinates.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\FreshCoordinates.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CubeCoordinateAlgebra",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\CubeCoordinateAlgebra.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\CubeCoordinateAlgebra.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EndpointGroups",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\EndpointGroups.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\EndpointGroups.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CycleStructure",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\CycleStructure.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\CycleStructure.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingletonGeometry",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\SingletonGeometry.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\SingletonGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AggregateSingletonBound",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\AggregateSingletonBound.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\AggregateSingletonBound.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ExactWedgeCount",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\ExactWedgeCount.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\ExactWedgeCount.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingletonAlphaBridge",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\SingletonAlphaBridge.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\SingletonAlphaBridge.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "NormalizeAdjacentSingletons",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\NormalizeAdjacentSingletons.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\NormalizeAdjacentSingletons.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AdjacentConfiguration",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\AdjacentConfiguration.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\AdjacentConfiguration.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AdjacentNeighborhood",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\AdjacentNeighborhood.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\AdjacentNeighborhood.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ExceptionRowNeighbors",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\ExceptionRowNeighbors.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\ExceptionRowNeighbors.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CoordinateCycle",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\CoordinateCycle.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\CoordinateCycle.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AdjacentSingletonExclusion",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\AdjacentSingletonExclusion.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\AdjacentSingletonExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "UpperBound251",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\UpperBound251.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\UpperBound251.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "FinalAudit",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\spectral\\.verification\\strengthened-57gjrzkg\\FinalAudit.lean"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "axiom_audits": {
+    "SquareCountingLogic.square_count_identity": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCountingLogic.upper_254_of_census": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCountingLogic.six_candidates_exceed_two_endpoints": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SnakeTrend.geometricTail_step": [
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.join": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.compatibility_necessary": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.lengths_for_196": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.lengths_for_197": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.single_crossing_upper": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.no192_iff_upperBound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.target192_impossible_iff_upperBound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.witness_distinct": [
+      "propext"
+    ],
+    "Snake9.witness_induced": [
+      "propext"
+    ],
+    "Snake9.lower_bound": [
+      "propext"
+    ],
+    "Snake9.optimality_of_no192": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake8.witness_distinct": [
+      "propext"
+    ],
+    "Snake8.witness_induced": [
+      "propext"
+    ],
+    "Snake8.lower_bound": [
+      "propext"
+    ],
+    "IntegerLayerBridge.adjacency_bridge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.join": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.compatible_98_97_gives_196": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.compatible_98_98_gives_197": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.no197_excludes_compatible_98": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.compatibility_iff_encoded_join_is_induced": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.prefix192_not_blocked": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.all191_blocked_implies_optimal": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.witness_right_blocked": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.short_cannot_extend_either_end": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.reverse_matches": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.endpoint_maximality_does_not_prove_maximum": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.deleteLastOfCoil": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.coil194_disproves_191": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.noNext_iff_upperBound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.hypothesis196_iff_witness_and_exclusion": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.witness196_implies_witness192": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.hypothesis196_refutes_upper191": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.no_four_cycle": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_three_neighbors_repeat": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.low_degree_index_is_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.three_low_degree_vertices_repeat": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.four_candidates_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCounterexample.witness_distinct": [
+      "propext"
+    ],
+    "SquareCounterexample.witness_induced": [
+      "propext"
+    ],
+    "SquareCounterexample.exactly_one_singleton_square": [
+      "propext"
+    ],
+    "SquareCounterexample.unique_square_characterization": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCounterexample.universal_internal_two_square_claim_false": [
+      "propext"
+    ],
+    "JointLayerSeed.compatible": [
+      "propext"
+    ],
+    "JointLayerSeed.normalized_join": [
+      "propext"
+    ],
+    "JointLayerSeed.joined": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "JointLayerSeed.adjacent_to_join_distinct": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.translate": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.freshCoords_spec": [
+      "propext"
+    ],
+    "Snake9.singleton_square_exists": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.singleton_pairs_positive": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.forced_pairs_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.universal_upper_bound_254": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.verified_bounds_254": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.singleton_total_lower": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.local_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.global_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.selected_total": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exists_four_coords_outside_five": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exists_five_coords_outside_four": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.bit_quad": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.neighbor_triple": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.quad_cancel_first": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exists_good_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.force_two_neighbors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_cycle8_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_cycle6_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.missing_candidate_low_degree_except": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.arm_outside_missing_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.arm_coordinate_in_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.totalSingleton_eq_path_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.internal_pair_bound_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.upper_251_of_no_adjacent_internal_singletons": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.internal_has_wedge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.wedge_total_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.exact_defect_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.localAlpha_translate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.alpha_one_forced_pairs_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.config_of_adjacent_internal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.translate_pair_membership": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.absent_triple_ack": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.triple_neighbor_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.selected_abek_excludes_bek": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exception_row_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.row_d_neighbors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.row_c_neighbors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_coordinate_cycle8_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_configuration_distinct_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_configuration_equal_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_configuration_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_internal_alpha_one_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.upper_bound_251": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.verified_interval_191_251": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "status": "success",
+  "completed_utc": "2026-10-15T06:12:55.481542+00:00"
+}

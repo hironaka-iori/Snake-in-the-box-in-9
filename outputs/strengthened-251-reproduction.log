@@ -1,0 +1,147 @@
+Fresh source-only reproduction of the 191--251 interval
+Started UTC: 10/15/2026 14:05:39
+Completed UTC: 10/15/2026 14:12:55
+Compiler: Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)
+mathlib: c44e0c8ee63ca166450922a373c7409c5d26b00b
+Module core; exit 0
+ℹ [2/31] Built SquareCountingLogic
+info: .\.\.\.\SquareCountingLogic.lean:30:0: 'SquareCountingLogic.square_count_identity' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\SquareCountingLogic.lean:31:0: 'SquareCountingLogic.upper_254_of_census' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\SquareCountingLogic.lean:32:0: 'SquareCountingLogic.six_candidates_exceed_two_endpoints' depends on axioms: [propext, Quot.sound]
+ℹ [4/31] Built TrendHypothesis
+info: .\.\.\.\TrendHypothesis.lean:41:0: 'SnakeTrend.geometric_matches_known' does not depend on any axioms
+info: .\.\.\.\TrendHypothesis.lean:42:0: 'SnakeTrend.geometric_prediction' does not depend on any axioms
+info: .\.\.\.\TrendHypothesis.lean:43:0: 'SnakeTrend.first_eight_do_not_determine_ninth' does not depend on any axioms
+info: .\.\.\.\TrendHypothesis.lean:44:0: 'SnakeTrend.geometricTail_step' depends on axioms: [propext, Quot.sound]
+ℹ [6/31] Built LayerJoining
+info: .\.\.\.\LayerJoining.lean:92:0: 'LayerJoining.join' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\LayerJoining.lean:93:0: 'LayerJoining.compatibility_necessary' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\LayerJoining.lean:94:0: 'LayerJoining.lengths_for_196' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\LayerJoining.lean:95:0: 'LayerJoining.lengths_for_197' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\LayerJoining.lean:96:0: 'LayerJoining.single_crossing_upper' depends on axioms: [propext, Quot.sound]
+ℹ [8/31] Built Snake9
+info: .\.\.\.\Snake9.lean:61:0: 'Snake9.no192_iff_upperBound' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\Snake9.lean:62:0: 'Snake9.target192_impossible_iff_upperBound' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\Snake9.lean:88:0: 'Snake9.witness_distinct' depends on axioms: [propext]
+info: .\.\.\.\Snake9.lean:89:0: 'Snake9.witness_induced' depends on axioms: [propext]
+info: .\.\.\.\Snake9.lean:90:0: 'Snake9.lower_bound' depends on axioms: [propext]
+info: .\.\.\.\Snake9.lean:91:0: 'Snake9.optimality_of_no192' depends on axioms: [propext, Quot.sound]
+ℹ [10/31] Built Snake8
+info: .\.\.\.\Snake8.lean:21:0: 'Snake8.witness_distinct' depends on axioms: [propext]
+info: .\.\.\.\Snake8.lean:22:0: 'Snake8.witness_induced' depends on axioms: [propext]
+info: .\.\.\.\Snake8.lean:23:0: 'Snake8.lower_bound' depends on axioms: [propext]
+ℹ [12/31] Built IntegerLayerBridge
+info: .\.\.\.\IntegerLayerBridge.lean:125:0: 'IntegerLayerBridge.adjacency_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\IntegerLayerBridge.lean:126:0: 'IntegerLayerBridge.join' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\IntegerLayerBridge.lean:127:0: 'IntegerLayerBridge.compatible_98_97_gives_196' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\IntegerLayerBridge.lean:128:0: 'IntegerLayerBridge.compatible_98_98_gives_197' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\IntegerLayerBridge.lean:129:0: 'IntegerLayerBridge.no197_excludes_compatible_98' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\IntegerLayerBridge.lean:130:0: 'IntegerLayerBridge.compatibility_iff_encoded_join_is_induced' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ℹ [14/31] Built Snake9Logic
+info: .\.\.\.\Snake9Logic.lean:66:0: 'Snake9.prefix192_not_blocked' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\Snake9Logic.lean:67:0: 'Snake9.all191_blocked_implies_optimal' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\Snake9Logic.lean:68:0: 'Snake9.witness_right_blocked' depends on axioms: [propext, Quot.sound]
+ℹ [16/31] Built MaximalityCounterexample
+info: .\.\.\.\MaximalityCounterexample.lean:103:0: 'Snake9.short_cannot_extend_either_end' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\MaximalityCounterexample.lean:104:0: 'Snake9.reverse_matches' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\MaximalityCounterexample.lean:105:0: 'Snake9.endpoint_maximality_does_not_prove_maximum' depends on axioms: [propext, Quot.sound]
+ℹ [18/31] Built CoilReduction
+info: .\.\.\.\CoilReduction.lean:37:0: 'Snake9.deleteLastOfCoil' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\CoilReduction.lean:38:0: 'Snake9.coil194_disproves_191' depends on axioms: [propext, Quot.sound]
+ℹ [20/31] Built OptimalityTarget
+info: .\.\.\.\OptimalityTarget.lean:38:0: 'Snake9.noNext_iff_upperBound' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\OptimalityTarget.lean:39:0: 'Snake9.hypothesis196_iff_witness_and_exclusion' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\OptimalityTarget.lean:40:0: 'Snake9.witness196_implies_witness192' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\OptimalityTarget.lean:41:0: 'Snake9.hypothesis196_refutes_upper191' depends on axioms: [propext, Quot.sound]
+ℹ [22/31] Built PathStructure
+info: .\.\.\.\PathStructure.lean:177:0: 'Snake9.no_four_cycle' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\PathStructure.lean:178:0: 'Snake9.selected_three_neighbors_repeat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\PathStructure.lean:179:0: 'Snake9.low_degree_index_is_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\PathStructure.lean:180:0: 'Snake9.three_low_degree_vertices_repeat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\PathStructure.lean:181:0: 'Snake9.four_candidates_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [24/31] Built SquareCounterexample
+info: .\.\.\.\SquareCounterexample.lean:70:0: 'SquareCounterexample.witness_distinct' depends on axioms: [propext]
+info: .\.\.\.\SquareCounterexample.lean:71:0: 'SquareCounterexample.witness_induced' depends on axioms: [propext]
+info: .\.\.\.\SquareCounterexample.lean:72:0: 'SquareCounterexample.exactly_one_singleton_square' depends on axioms: [propext]
+info: .\.\.\.\SquareCounterexample.lean:73:0: 'SquareCounterexample.unique_square_characterization' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\SquareCounterexample.lean:74:0: 'SquareCounterexample.universal_internal_two_square_claim_false' depends on axioms: [propext]
+ℹ [26/31] Built JointLayerSeed
+info: .\.\.\.\JointLayerSeed.lean:49:0: 'JointLayerSeed.compatible' depends on axioms: [propext]
+info: .\.\.\.\JointLayerSeed.lean:50:0: 'JointLayerSeed.normalized_join' depends on axioms: [propext]
+info: .\.\.\.\JointLayerSeed.lean:51:0: 'JointLayerSeed.joined' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\JointLayerSeed.lean:52:0: 'JointLayerSeed.adjacent_to_join_distinct' depends on axioms: [propext, Quot.sound]
+ℹ [28/31] Built CubeLocal
+info: .\.\.\.\CubeLocal.lean:105:0: 'Snake9.translate' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\CubeLocal.lean:106:0: 'Snake9.freshCoords_spec' depends on axioms: [propext]
+ℹ [30/31] Built SingletonSquareLemma
+info: .\.\.\.\SingletonSquareLemma.lean:239:0: 'Snake9.singleton_square_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\SingletonSquareLemma.lean:240:0: 'Snake9.singleton_pairs_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\SingletonSquareLemma.lean:241:0: 'Snake9.forced_pairs_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully.
+Module SquareIncidence; exit 0
+'Snake9.SquareIncidence.universal_upper_bound_254' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.verified_bounds_254' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.singleton_total_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.local_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.global_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.selected_total' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module FreshCoordinates; exit 0
+'Snake9.exists_four_coords_outside_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.exists_five_coords_outside_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module CubeCoordinateAlgebra; exit 0
+'Snake9.bit_quad' depends on axioms: [propext, Quot.sound]
+'Snake9.neighbor_triple' depends on axioms: [propext, Quot.sound]
+'Snake9.quad_cancel_first' depends on axioms: [propext, Quot.sound]
+Module EndpointGroups; exit 0
+'Snake9.exists_good_group' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.force_two_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module CycleStructure; exit 0
+'Snake9.selected_cycle8_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.selected_cycle6_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module SingletonGeometry; exit 0
+'Snake9.missing_candidate_low_degree_except' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.arm_outside_missing_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.arm_coordinate_in_missing' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module AggregateSingletonBound; exit 0
+'Snake9.SquareIncidence.totalSingleton_eq_path_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.internal_pair_bound_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.upper_251_of_no_adjacent_internal_singletons' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Module ExactWedgeCount; exit 0
+'Snake9.SquareIncidence.internal_has_wedge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.wedge_total_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.exact_defect_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module SingletonAlphaBridge; exit 0
+'Snake9.SquareIncidence.localAlpha_translate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.SquareIncidence.alpha_one_forced_pairs_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module NormalizeAdjacentSingletons; exit 0
+'Snake9.config_of_adjacent_internal' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module AdjacentConfiguration; exit 0
+'Snake9.translate_pair_membership' depends on axioms: [propext, Quot.sound]
+'Snake9.AdjacentConfig.absent_triple_ack' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module AdjacentNeighborhood; exit 0
+'Snake9.AdjacentConfig.triple_neighbor_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.AdjacentConfig.selected_abek_excludes_bek' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module ExceptionRowNeighbors; exit 0
+'Snake9.exception_row_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.AdjacentConfig.row_d_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.AdjacentConfig.row_c_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module CoordinateCycle; exit 0
+'Snake9.selected_coordinate_cycle8_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module AdjacentSingletonExclusion; exit 0
+'Snake9.adjacent_configuration_distinct_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.adjacent_configuration_equal_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.adjacent_configuration_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module UpperBound251; exit 0
+'Snake9.adjacent_internal_alpha_one_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.upper_bound_251' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.verified_interval_191_251' depends on axioms: [propext, Classical.choice, Quot.sound]
+Module FinalAudit; exit 0
+'Snake9.lower_bound' depends on axioms: [propext]
+'Snake9.noNext_iff_upperBound' depends on axioms: [propext, Quot.sound]
+'Snake9.adjacent_internal_alpha_one_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.upper_bound_251' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.verified_interval_191_251' depends on axioms: [propext, Classical.choice, Quot.sound]

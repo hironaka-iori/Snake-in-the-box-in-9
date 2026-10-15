@@ -12,6 +12,15 @@ Research checkpoint: 15 October 2026.
 | Every snake has at most 255 edges | Lean proof using Huang's degree theorem through pinned mathlib |
 | Every selected vertex has at least one singleton coordinate square | Lean-checked for every path length and vertex |
 | Every snake has at most 254 edges | Lean-checked end to end by four-corner incidence counting |
+| Adjacent internal vertices cannot both have singleton-square count one | Lean-checked geometric exclusion |
+| Every snake has at most 251 edges | Lean-checked aggregate consequence of that exclusion |
+| Adjacent internal singleton-square counts cannot be 1 and 2 | Lean-checked finite geometric case analysis |
+| Every snake has at most 248 edges | Lean-checked end to end, including endpoint corrections |
+| Every endpoint has at least four singleton squares | Lean-checked; a checked example attains four |
+| Every snake has at most 247 edges | Lean-checked using the stronger endpoint estimate |
+| Adjacent internal singleton-square counts cannot be 1 and 3 | Lean-checked symbolic finite-set and endpoint argument |
+| Three consecutive internal vertices cannot all have singleton-square count 2 | Lean-checked exhaustive local classification and geometric exclusions |
+| Every snake has at most 245 edges | Lean-checked aggregate consequence, with every local premise discharged |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
@@ -21,7 +30,9 @@ Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact pr
 
 - `outputs/snake9_research.tex`: current manuscript, with author Iori Hironaka.
 - `work/final_lean/`: authoritative standard-library proof project, with 15 modules.
-- `work/spectral/`: mathlib-dependent incidence bound 254, spectral bound 255, and reproduction instructions.
+- `work/spectral/`: authoritative mathlib-dependent bounds 245, 247, 248, 251, 254, and 255, with reproduction instructions.
+- `work/spectral/stronger/`: 148 maintained geometric, classification, and aggregate proof modules.
+- `RESEARCH_LEDGER.md`: continuing research status, evidence, and unresolved directions.
 - `work/*.py`: independent verification and experimental search programs.
 - `work/bank9.json`: 131 nine-dimensional examples extracted from the cited published dataset.
 - `outputs/*.json`: witness data and recorded experimental results.
@@ -39,7 +50,7 @@ cd work/final_lean
 lake build
 ```
 
-This project uses Lean's standard library. Its theorem audits contain only the standard logical foundations, with no proof placeholders, custom optimality axioms, or unchecked native computation. It proves the 191-edge witness, the general singleton-square lemma, several construction and exclusion reductions, and explicit counterexamples. The mathlib-dependent [incidence and spectral project](work/spectral/README.md) proves the upper bounds 254 and 255. The stronger incidence proof uses the core singleton-square theorem and derives the counting identity without census assumptions.
+This project uses Lean's standard library. Its theorem audits contain only the standard logical foundations, with no proof placeholders, custom optimality axioms, or unchecked native computation. It proves the 191-edge witness, the general singleton-square lemma, several construction and exclusion reductions, and explicit counterexamples. The mathlib-dependent [incidence and spectral project](work/spectral/README.md) proves the upper bounds 245, 247, 248, 251, 254, and 255. The strongest proof combines endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive count-two vertices. A finite potential argument gives `3*T >= 7*v+5`; the incidence identity then gives at most 245 edges. The current Lean-checked interval is **191 <= a(9) <= 245**; exact optimality remains unresolved.
 
 With the pinned mathlib checkout prepared as described in `work/spectral/README.md`, reproduce the bound 254 from the repository root:
 
@@ -48,6 +59,16 @@ python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-
 ```
 
 The optional `--fresh-core` flag rebuilds a source-only copy of all current core modules before checking the incidence theorem.
+
+Reproduce the stronger bound 245 and its transitive axiom audit with:
+
+```sh
+python work/spectral/verify_strengthened.py --mathlib-dir /path/to/mathlib
+```
+
+This always builds a source-only core and all strengthening modules in a new directory. It saves source hashes, compiler output, and axiom audits, and rejects any final theorem using foundations beyond `propext`, `Classical.choice`, and `Quot.sound`. The core prefix theorem verifies that excluding a snake of length L+1 excludes every longer snake.
+
+The fresh source-only reproduction succeeded for all 148 strengthening modules, the core, the incidence theorem, and the final audits (151 steps). Every recorded source hash matches the maintained source. Evidence is saved in `outputs/strengthened-reproduction-manifest.json` and `outputs/strengthened-reproduction.log`, with identical versioned copies under `outputs/strengthened-245-reproduction-*`. An independent final import audit also passed.
 
 ## Reproduce the independent checks and searches
 
