@@ -54,6 +54,8 @@ All 131 published 191-edge examples have minimum local alpha at least three: 67 
 
 For exact optimality, proof-producing exhaustive computation or a structural classification would be needed if analytic bounds remain weak. The current global solver returned UNKNOWN at 192 edges, and supplies no impossibility certificate. Scaling it without a symmetry argument or certifiable decomposition is an uncertain long-term route.
 
+The latest local result narrows one-singleton configurations: under the explicitly stated internal-pair-vertex premises, the two continuations must use opposite coordinates of the exceptional pair. This is Lean-checked. A separate checked 60-vertex, 14-component forest satisfies all the radius-three degree and acyclicity requirements, so those requirements alone cannot exclude the remaining case. The endpoint-proximity conjecture still needs global connectivity or constraints involving higher-weight vertices; see `outputs/low_singleton_investigation.md` before pursuing a purely local proof.
+
 ## Suggested division of work
 
 - Proof contributor: independently review the completed incidence proof, then prove stronger aggregate inequalities or long-path restrictions.

@@ -363,6 +363,38 @@ Thus $v\le255$, and the number of edges is $v-1\le254$.
 \paragraph{Verification status.}
 The explicit counterexample, Lemma~\ref{lem:one-square}, the local identity~\eqref{eq:local-square-identity}, its global summation~\eqref{eq:anchored-square-count}, and the upper bound 254 are independently machine-checked. The upper bound is derived from the same induced-path definition used for the 191-edge witness; no census equations or optimality assumptions are supplied as premises. The earlier spectral bound 255 provides an independent, weaker check. No claim of a new best published upper bound is made. Neither a 196-edge construction nor a matching upper bound has been obtained.
 
+\subsection{A restriction on one-singleton configurations}
+A possible route to a stronger aggregate bound is to show that vertices with only one singleton square must lie near an endpoint. The following result narrows the local configuration without establishing that claim.
+
+\begin{theorem}[The two continuations use different missing coordinates]\label{thm:split-arms}
+Let $S$ be an induced path vertex set in $\Q_9$ containing zero. Suppose its selected unit vectors are exactly $e_a,e_b$, where $a\ne b$, and put $U=\{0,\ldots,8\}\setminus\{a,b\}$. Let $u,v\in U$ be distinct. Assume every pair vertex $e_s+e_t$ with distinct $s,t\in U$, other than possibly $e_u+e_v$, is selected, and every selected pair vertex indexed by $U$ is internal in the path. Suppose also that $e_a+e_i$ and $e_b+e_j$ are selected for some $i,j\in U$. Then
+\[
+(i,j)=(u,v)\quad\text{or}\quad(i,j)=(v,u).
+\]
+\end{theorem}
+\begin{proof}
+First suppose that $i\notin\{u,v\}$. Choose two distinct coordinates $k$ outside $\{a,b,i,u,v\}$; at least four are available. For either choice, $e_i+e_k$ is selected and internal. Its only possible selected neighbors are $e_a+e_i+e_k$ and $e_b+e_i+e_k$. Indeed, deleting $i$ or $k$ gives an absent unit vector. Adding any other coordinate $t\in U$ gives a triple with three selected pair neighbors: none of its three pairs can be the exceptional pair $\{u,v\}$, since both $i$ and $k$ lie outside that pair. Such a triple is forbidden by degree at most two.
+
+Both possible neighbors of the internal vertex $e_i+e_k$ must therefore be selected. The two choices of $k$ give two distinct neighbors of $e_a+e_i$, in addition to its selected neighbor $e_a$, a contradiction. Hence $i\in\{u,v\}$. Interchanging $a,b$ proves $j\in\{u,v\}$.
+
+Suppose next that $i=j=u$. Choose three distinct $k\in U\setminus\{u,v\}$. Each selected internal vertex $e_u+e_k$ has possible selected neighbors only among
+\[
+e_a+e_u+e_k,\qquad e_b+e_u+e_k,\qquad e_u+e_v+e_k.
+\]
+All other triples have three selected pair neighbors, while unit neighbors are absent. At least one of the first two displayed vertices must therefore be selected, since an internal vertex requires two selected neighbors. However, $e_a+e_u$ already has selected neighbor $e_a$, and can have at most one of the three vertices $e_a+e_u+e_k$ as another selected neighbor. The same argument applies to $e_b+e_u$. Thus at most two of the three choices of $k$ can be covered, a contradiction. Interchanging $u,v$ excludes $i=j=v$. The two remaining ordered pairs are exactly those asserted.
+\end{proof}
+
+The theorem has an independent machine check under its stated geometric premises. If zero has exactly one singleton square and all endpoints have Hamming distance at least three from zero, the missing square supplies $u,v$, and every selected pair vertex is internal. The root and its two unit neighbors are internal as well; their second neighbors supply the two continuations. Thus the theorem identifies the remaining local arrangement. It does not prove that such a full path is impossible.
+
+\begin{proposition}[Radius-three constraints do not suffice]\label{prop:radius-three}
+There is an induced linear forest on 60 vertices of $\Q_9$, consisting of 14 pairwise separated paths, such that every selected vertex lies within Hamming distance three of zero, every selected vertex at distance at most two has degree two, and zero has exactly one singleton square.
+\end{proposition}
+\begin{proof}
+Take the 14 ordered paths in Appendix~\ref{app:radius-three}. Direct checks show that every path is induced, their vertex sets are disjoint, and no edge joins different paths. Counting selected neighbors gives degree two at every selected vertex of weight at most two. Every listed vertex has weight at most three. Among the 36 coordinate squares through zero, exactly the square using coordinates two and three contains no other listed vertex. These finite checks have independent machine checks.
+\end{proof}
+
+The forest satisfies the local degree and acyclicity requirements but is disconnected. It is therefore not a counterexample to a statement about a single full snake. Its existence shows that these radius-three requirements alone cannot complete the proposed endpoint-proximity argument. Connections through higher-weight vertices, or another global restriction, remain necessary.
+
 \section{Computational investigations and their exact scope}
 \subsection{Published bank audit and endpoint regrowth}
 Independent Python checks verified all 131 published nine-dimensional examples, including their transition and vertex lists, every pairwise adjacency condition, and blocked endpoints. The total number of unordered pairs checked was $131\binom{192}{2}=2\,402\,016$. Canonical transition sequences, normalized by first coordinate occurrence and compared with their reversals, distinguish 131 classes under translation, coordinate permutation, and reversal. This audit makes no completeness claim.
@@ -483,6 +515,26 @@ For the second path use
 2130450130 4120310721 0312431032 6523013241 3012
 \end{quote}
 The projected vertex sets have intersection $\{0\}$ only. Reverse the first sequence of vertices, place it in layer zero, cross at zero, and follow the second path in layer one.
+
+\subsection{A radius-three linear forest}\label{app:radius-three}
+The following lists give vertices as decimal integers encoding nine-bit words. Each row is one path; the rows are distinct connected components of the induced graph on their union.
+\begin{align*}
+P_{1}&=(134,132,140,136,138,10,2,0,1,5,261,260,268,264,265)\\
+P_{2}&=(22,20,28,24,25)\\
+P_{3}&=(38,36,44,40,41)\\
+P_{4}&=(49,48,50)\\
+P_{5}&=(70,68,76,72,73)\\
+P_{6}&=(81,80,82)\\
+P_{7}&=(97,96,98)\\
+P_{8}&=(145,144,146)\\
+P_{9}&=(161,160,162)\\
+P_{10}&=(193,192,194)\\
+P_{11}&=(273,272,274)\\
+P_{12}&=(289,288,290)\\
+P_{13}&=(321,320,322)\\
+P_{14}&=(385,384,386)
+\end{align*}
+The union has 60 vertices, including zero. It is a linear forest with 14 components, not a single snake.
 
 \begin{thebibliography}{9}\raggedright
 \bibitem{oeis} OEIS Foundation. \emph{A099155: Maximum length of a simple path with no chords in the $n$-dimensional hypercube}. \url{https://oeis.org/A099155}. Accessed 13 October 2026.

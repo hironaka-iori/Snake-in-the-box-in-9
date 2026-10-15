@@ -25,3 +25,13 @@ python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-
 This driver checks the dependency version, rebuilds a fresh copy of all current core sources, and checks the incidence theorem. Omit `--fresh-core` to reuse the normal core build after running `lake build`. The fresh build is recorded in `outputs/incidence-reproduction.log`. The theorem audit must contain no `sorryAx` or custom axioms. The exact optimum remains unresolved.
 
 The portable driver was run successfully for this checkpoint; see `outputs/spectral-portable-build.log` at the repository root.
+
+## Low-singleton arm restriction
+
+`LowSingletonArms.lean` proves the continuation restriction under explicit membership and internal-vertex premises. It does not prove the endpoint-proximity conjecture. Check it with the same pinned dependency:
+
+```sh
+python work/spectral/verify_incidence.py --module LowSingletonArms --mathlib-dir /path/to/mathlib
+```
+
+The separate radius-three forest certificate is part of the standard-library core. See `outputs/low_singleton_investigation.md` for scope and the distinction from a full connected snake.
