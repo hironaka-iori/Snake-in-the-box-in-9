@@ -4,14 +4,14 @@ Author of the manuscript: **Iori Hironaka**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Research checkpoint: 14 October 2026.
+Research checkpoint: 15 October 2026.
 
 | Claim | Current evidence |
 |---|---|
 | A 191-edge snake exists | Explicit witness checked in Lean |
 | Every snake has at most 255 edges | Lean proof using Huang's degree theorem through pinned mathlib |
 | Every selected vertex has at least one singleton coordinate square | Lean-checked for every path length and vertex |
-| Every snake has at most 254 edges | Complete written proof; local lemma and arithmetic checked; global incidence bijections still pending |
+| Every snake has at most 254 edges | Lean-checked end to end by four-corner incidence counting |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
@@ -21,7 +21,7 @@ Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact pr
 
 - `outputs/snake9_research.tex`: current manuscript, with author Iori Hironaka.
 - `work/final_lean/`: authoritative standard-library proof project, with 14 modules.
-- `work/spectral/`: mathlib-dependent global upper bound and reproduction instructions.
+- `work/spectral/`: mathlib-dependent incidence bound 254, spectral bound 255, and reproduction instructions.
 - `work/*.py`: independent verification and experimental search programs.
 - `work/bank9.json`: 131 nine-dimensional examples extracted from the cited published dataset.
 - `outputs/*.json`: witness data and recorded experimental results.
@@ -39,7 +39,15 @@ cd work/final_lean
 lake build
 ```
 
-This project uses Lean's standard library. Its theorem audits contain only the standard logical foundations, with no proof placeholders, custom optimality axioms, or unchecked native computation. It proves the 191-edge witness, the general singleton-square lemma, several construction and exclusion reductions, and explicit counterexamples. The bound 255 is in the separate [spectral project](work/spectral/README.md), whose portable driver also completed successfully for this checkpoint.
+This project uses Lean's standard library. Its theorem audits contain only the standard logical foundations, with no proof placeholders, custom optimality axioms, or unchecked native computation. It proves the 191-edge witness, the general singleton-square lemma, several construction and exclusion reductions, and explicit counterexamples. The mathlib-dependent [incidence and spectral project](work/spectral/README.md) proves the upper bounds 254 and 255. The stronger incidence proof uses the core singleton-square theorem and derives the counting identity without census assumptions.
+
+With the pinned mathlib checkout prepared as described in `work/spectral/README.md`, reproduce the bound 254 from the repository root:
+
+```sh
+python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-core
+```
+
+The optional `--fresh-core` flag rebuilds a source-only copy of all 14 core modules before checking the incidence theorem.
 
 ## Reproduce the independent checks and searches
 

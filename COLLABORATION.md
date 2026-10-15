@@ -1,35 +1,36 @@
 # Collaborator handoff
 
-Checkpoint: 14 October 2026. Manuscript author: Iori Hironaka.
+Checkpoint: 15 October 2026. Manuscript author: Iori Hironaka.
 
 ## Where the investigation stands
 
 The working conjecture is **a(9) = 196**, with low confidence. For n = 3,...,8, subtracting 3*2^(n-3) from the known maxima leaves 1,1,1,2,2,2. Continuing the correction in doubling blocks of three predicts 196. An equally exact additive-block fit predicts 195. The first eight values therefore do not determine the ninth, and interpolation supplies no geometric proof.
 
-The fully Lean-checked global interval is **191 <= a(9) <= 255**. The manuscript contains a complete written square-face proof of **191 <= a(9) <= 254**, but the incidence counting has not yet been checked in Lean. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
+The fully Lean-checked global interval is now **191 <= a(9) <= 254**. The square-face bound is checked end to end using an anchored-incidence identity; the independent spectral argument still supplies the weaker bound 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
 
-The most recent completed result is the universal singleton-square lemma: every vertex of every induced path in Q9 has at least one coordinate square containing no other path vertex. This is checked for all path lengths, including the short cases, and translated back from zero to arbitrary vertices. The 14-module core builds successfully.
+The most recent completed result is the global upper bound 254. The proof sums each square from its four corners, uses the checked singleton-square lemma, and injects selected two-edge corners into internal path vertices. The proof audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The exact optimum remains open.
 
 The earlier universal two-singleton-square claim for internal vertices is false. A checked 137-edge counterexample has zero at path index 127, endpoints 145 and 288, and exactly one singleton square, {0,4,8,12}. Its distance along the path from the nearer endpoint is ten. Thus simply excluding the first few vertices near the endpoints does not repair that universal assertion. This example does not exclude a stronger statement restricted to longest paths.
 
-## Priority 1: complete the incidence proof
+## Completed milestone: incidence proof
 
-This is the nearest well-defined verification milestone. It will certify 254 end to end, although it will still leave a large gap to the conjectured optimum.
+The formerly pending upper-bound verification is complete. `work/spectral/SquareIncidence.lean` proves the following quantities directly from the cube and path definitions:
 
-For a path with v >= 2 vertices, let A_r count coordinate squares containing exactly r selected vertices. The remaining geometric obligations are:
+- E: total number of empty squares counted from each possible corner.
+- T: total singleton incidences, counted at their selected vertex.
+- W: total selected centers with both neighbors in a distinct coordinate pair selected.
 
-1. There are 4,608 coordinate squares, each cube vertex belongs to 36, and no square contains four selected vertices.
-2. Double counting gives A_1 + 2*A_2 + 3*A_3 = 36*v and A_0 + A_1 + A_2 + A_3 = 4608.
-3. Squares with three selected vertices correspond bijectively to internal path vertices, giving A_3 = v-2.
-4. Singleton squares correspond to the pairs counted locally at each vertex, giving A_1 = sum_x alpha(x) >= v.
+For a path on v vertices, the checked identity is
 
-The arithmetic consequence 2*A_0 + A_1 + 35*v + 2 = 9216 and the deduction of 254 are already checked conditionally. The task is to derive their premises from the actual snake and coordinate-square definitions.
+`2*E + 4*T + 144*v = 36864 + 4*W`.
 
-Use `work/final_lean/SingletonSquareLemma.lean` for the proved local lemma and `SquareCountingLogic.lean` for the conditional arithmetic. `PathStructure.lean` proves the endpoint, degree, and four-cycle facts; `CubeLocal.lean` proves coordinate and translation facts. Avoid assuming a census identity as an axiom.
+The checked estimates T >= v and W <= v-2 (for v >= 2) give v <= 255, hence at most 254 edges. The proof handles all path lengths. It uses the same snake definition as the 191-edge witness and assumes no census equation.
 
-A possible shorter route is to prove A_3 <= v-2 by injection rather than the complete bijection; that inequality suffices for the upper-bound argument, though the equality would verify the manuscript as written.
+This replaces the need to certify all original canonical-square bijections before establishing 254. The old conditional arithmetic module remains as a record of the first approach. The exact canonical census equalities have not separately been certified; they are unnecessary for the new theorem. The paper now presents the checked proof.
 
-## Priority 2: find a longer construction outside the exhausted families
+Reproduce with `python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-core` after preparing the pinned dependency. The next priorities concern improving the mathematics beyond 254.
+
+## Priority 1: find a longer construction outside the exhausted families
 
 A verified 192-edge example would immediately disprove the candidate optimum 191. A 196-edge example would establish the conjectured lower bound, but still would not prove optimality.
 
@@ -43,7 +44,7 @@ Useful constructive directions are structurally different Q8 seeds, construction
 
 An alternative is an induced cycle on 194 vertices, which yields a 192-edge snake after deleting one vertex. Four restricted symmetric cycle searches returned UNKNOWN; asymmetric constructions remain available. None of these routes is guaranteed to succeed.
 
-## Priority 3: obtain a much stronger global restriction
+## Priority 2: obtain a much stronger global restriction
 
 The square-count identity could support stronger bounds through aggregate constraints on empty and singleton squares. The universal local bound alpha >= 2 is already false, so any stronger statement needs a justified restriction or an aggregate correction.
 
@@ -53,7 +54,7 @@ For exact optimality, proof-producing exhaustive computation or a structural cla
 
 ## Suggested division of work
 
-- Proof contributor: the global incidence model and the 254 theorem.
+- Proof contributor: independently review the completed incidence proof, then prove stronger aggregate inequalities or long-path restrictions.
 - Construction contributor: diverse Q8 seeds, multiple layer crossings, and asymmetric cycle constructions.
 - Extremal contributor: long-path restrictions on low-alpha configurations and aggregate square inequalities.
 
@@ -65,8 +66,8 @@ These are independent tasks suitable for separate branches. The current handoff 
 |---|---|
 | Current mathematical paper | `outputs/snake9_research.tex` |
 | All standard-library proofs | `work/final_lean/` |
-| Bound 255 using pinned mathlib | `work/spectral/` |
-| Latest core build | `outputs/singleton-lean-build.log` |
+| Bounds 254 and 255 using pinned mathlib | `work/spectral/` |
+| Fresh core and incidence build | `outputs/incidence-reproduction.log` |
 | Square investigation and its limitations | `outputs/square_investigation.md` |
 | Layer construction and restricted exclusions | `outputs/layer_investigation.md` |
 | Competing trend fits | `outputs/trend_hypothesis.md` |

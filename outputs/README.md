@@ -1,12 +1,12 @@
 # Nine-dimensional snake-in-the-box investigation
 
-Research checkpoint: 14 October 2026.
+Research checkpoint: 15 October 2026.
 
 The authoritative evolving paper is [`snake9_research.tex`](snake9_research.tex), authored by Iori Hironaka. It is compiled in the document editor. The existing exported PDF and full research bundle are earlier snapshots and do not contain the latest revisions. The paper includes prior observations, the hypothesis, mathematical proofs, search evidence, explicit witnesses, references, and verification limits. Lean implementation details are kept outside the manuscript.
 
-**New written refinement:** a square-face argument gives `a(9) <= 254`. The local singleton-square lemma is now Lean-checked for every path length and vertex. Its global incidence counting still awaits Lean verification. `SquareCountingLogic.lean` checks the arithmetic deduction from explicit census premises only. `SquareCounterexample.lean` fully verifies a 137-edge path refuting the universal two-singleton-square condition for internal vertices of open snakes. See [square-face investigation](square_investigation.md).
+**Global Lean-checked bounds:** 191 <= a(9) <= 254. The new `work/spectral/SquareIncidence.lean` derives the upper bound from the cube and path definitions, the checked singleton-square lemma, and four-corner incidence summation. It assumes no census equations. See [the square-face investigation](square_investigation.md) and the root collaborator handoff.
 
-**Global Lean-checked bounds:** 191 ≤ a(9) ≤ 255. `SpectralUpperBound.lean` derives the upper bound from the maintained Lean proof of Huang's degree theorem and connects it to the same integer-based `Snake9.Snake` definition as the witness. See [spectral verification](spectral_verification.md). The mathlib-dependent extension has its own archive, `snake9_spectral_project.zip`; the core archive remains standard-library-only.
+The independent `SpectralUpperBound.lean` still supplies the weaker bound 255 through pinned mathlib's proof of Huang's degree theorem. Both extensions use Lean 4.19.0 and mathlib commit `c44e0c8ee63ca166450922a373c7409c5d26b00b`; the 14-module core remains standard-library-only. `SquareCounterexample.lean` verifies the 137-edge counterexample to the universal two-singleton-square condition.
 
 **Revised working conjecture:** the maximum induced-path length in the nine-dimensional binary cube is 196 edges, based on the pattern in the first eight exact values. This is a low-confidence extrapolation, explained in [the trend analysis](trend_hypothesis.md). **Status:** a lower bound of 191 is verified in Lean; no 196-edge construction or matching upper bound has been obtained. No 192-edge counterexample was found in the searches described below. The earlier candidate optimum of 191 remains under active challenge.
 

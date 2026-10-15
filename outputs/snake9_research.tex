@@ -33,7 +33,7 @@ A Sequence-Based Conjecture, Verified Bounds, and Construction Obstructions}
 \begin{document}
 \maketitle
 \begin{abstract}
-The maximum length of an induced path in the binary hypercube is known through dimension eight, with values $1,2,4,7,13,26,50,98$. Subtracting a common exponential baseline gives two constant three-term correction blocks. Extrapolating their doubling suggests the independent conjecture $a(9)=196$. A second equally exact fit predicts 195, demonstrating the limited force of this numerical evidence. This paper presents proofs and explicit finite checks for a verified 191-edge witness, the reduction of optimality to exclusion of the next length, a counterexample to an endpoint-maximality argument, a cycle-deletion construction, the exact two-layer joining criterion, a spectral bound $a(9)\le255$ obtained from Huang's degree theorem, and a square-face argument refining the bound to 254. The spectral bound, explicit witnesses, and local singleton-square lemma have independent machine checks. The square-face refinement has a complete written argument below; verification of its global incidence count remains in progress. Restricted searches exclude several construction families, including all two-vertex deletion neighborhoods of 131 published 191-edge examples. These restricted solver results have not been independently certified. No 192-edge improvement, 196-edge construction, or matching upper bound has been established. The exact ninth-dimensional optimum remains open in this investigation.
+The maximum length of an induced path in the binary hypercube is known through dimension eight, with values $1,2,4,7,13,26,50,98$. Subtracting a common exponential baseline gives two constant three-term correction blocks. Extrapolating their doubling suggests the independent conjecture $a(9)=196$. A second equally exact fit predicts 195, demonstrating the limited force of this numerical evidence. This paper presents proofs and explicit finite checks for a verified 191-edge witness, the reduction of optimality to exclusion of the next length, a counterexample to an endpoint-maximality argument, a cycle-deletion construction, the exact two-layer joining criterion, a spectral bound $a(9)\le255$ obtained from Huang's degree theorem, and a square-face argument refining the bound to 254. The spectral bound, explicit witnesses, local singleton-square lemma, and square-face upper bound all have independent machine checks. The square-face proof counts incidences from the four possible corners and bounds selected two-edge corners by the number of internal path vertices. Restricted searches exclude several construction families, including all two-vertex deletion neighborhoods of 131 published 191-edge examples. These restricted solver results have not been independently certified. No 192-edge improvement, 196-edge construction, or matching upper bound has been established. The exact ninth-dimensional optimum remains open in this investigation.
 \end{abstract}
 \setcounter{tocdepth}{1}
 \tableofcontents
@@ -323,19 +323,45 @@ Every snake in $\Q_9$ has at most 254 edges. Together with the explicit witness,
 \]
 \end{theorem}
 \begin{proof}
-A path with one vertex satisfies the assertion, so let $S$ be a path vertex set of size $v\ge2$. For $r=0,1,2,3,4$, let $A_r$ count the coordinate squares containing exactly $r$ vertices of $S$. There are $\binom92 2^7=4\,608$ coordinate squares, and every cube vertex belongs to 36 of them. No square has all four vertices selected, since a path contains no cycle. Therefore
+A path with one vertex satisfies the assertion, so let $S$ be a path vertex set of size $v\ge2$. For $0\le a<b\le8$ and $x\in\Q_9$, write
 \[
-A_0+A_1+A_2+A_3=4\,608,
-\qquad A_1+2A_2+3A_3=36v.
+C_{ab}(x)=\{x,x+e_a,x+e_b,x+e_a+e_b\},
 \]
-There is a bijection between internal path vertices and squares with exactly three selected vertices. The two incident path edges at an internal vertex determine one square; its fourth vertex is absent, since it would close a four-cycle. Conversely, the selected middle vertex of a three-vertex square has precisely those two path neighbors. Thus $A_3=v-2$. Eliminating $A_2$ and $A_3$ from the preceding equations yields
+where addition is coordinatewise modulo two. Define three indicators, each taking values in $\{0,1\}$:
+\begin{align*}
+s_{ab}(x)&=1\quad\Longleftrightarrow\quad C_{ab}(x)\cap S=\{x\},\\
+w_{ab}(x)&=1\quad\Longleftrightarrow\quad x,x+e_a,x+e_b\in S,\\
+e_{ab}(x)&=1\quad\Longleftrightarrow\quad C_{ab}(x)\cap S=\varnothing.
+\end{align*}
+All three indicators are zero when their stated condition fails. Let
 \[
-2A_0+A_1+35v+2=9\,216.
+T=\sum_{a<b}\sum_{x\in\Q_9}s_{ab}(x),\qquad
+W=\sum_{a<b}\sum_{x\in\Q_9}w_{ab}(x),\qquad
+E=\sum_{a<b}\sum_{x\in\Q_9}e_{ab}(x).
 \]
-Each singleton square is counted by exactly one $\alpha_S(x)$. Lemma~\ref{lem:one-square} gives $A_1=\sum_{x\in S}\alpha_S(x)\ge v$. Since $A_0\ge0$, it follows that $36v+2\le9\,216$. Hence $v\le255$ and the number of edges is $v-1\le254$.
+No square has all four vertices selected, since that would be a four-cycle in the induced path. For each square, considering its possible numbers of selected vertices, zero through three, gives
+\begin{equation}\label{eq:local-square-identity}
+2e_{ab}(x)+\sum_{y\in C_{ab}(x)}s_{ab}(y)
+ +\sum_{y\in C_{ab}(x)}\mathbf{1}_S(y)
+=2+\sum_{y\in C_{ab}(x)}w_{ab}(y).
+\end{equation}
+For three selected vertices, exactly one is adjacent to the other two, so the last sum is one. For zero, one, or two selected vertices, the last sum is zero; the other terms give the asserted identity directly.
+
+For each fixed coordinate pair, the four translations taking $x$ to the corners of $C_{ab}(x)$ are permutations of $\Q_9$. Summing~\eqref{eq:local-square-identity} over all 512 choices of $x$ and all 36 coordinate pairs therefore gives
+\begin{equation}\label{eq:anchored-square-count}
+2E+4T+144v=36\,864+4W.
+\end{equation}
+Here every selected vertex contributes four times for each coordinate pair to the vertex-incidence sum.
+
+Lemma~\ref{lem:one-square} implies $T\ge v$. A nonzero contribution to $W$ requires two distinct selected neighbors of its selected center, so the center is an internal path vertex. Since an induced path has degree at most two, at most one unordered coordinate pair contributes at any such center. There are $v-2$ internal vertices, hence $W\le v-2$. Using $E\ge0$ in~\eqref{eq:anchored-square-count},
+\[
+4v+144v\le36\,864+4(v-2),
+\qquad\text{so}\qquad144v\le36\,856<144\cdot256.
+\]
+Thus $v\le255$, and the number of edges is $v-1\le254$.
 \end{proof}
 \paragraph{Verification status.}
-The explicit counterexample, the general statement of Lemma~\ref{lem:one-square} for every path length and every selected vertex, and the integer arithmetic of the square-face refinement have independent machine checks. The checked lemma includes the short-path cases and the translation back from zero. Verification of the global square-incidence bijections remains in progress, so the bound 254 is not yet checked end to end. The earlier spectral bound 255 is already checked end to end. No claim of a new best published upper bound is made.
+The explicit counterexample, Lemma~\ref{lem:one-square}, the local identity~\eqref{eq:local-square-identity}, its global summation~\eqref{eq:anchored-square-count}, and the upper bound 254 are independently machine-checked. The upper bound is derived from the same induced-path definition used for the 191-edge witness; no census equations or optimality assumptions are supplied as premises. The earlier spectral bound 255 provides an independent, weaker check. No claim of a new best published upper bound is made. Neither a 196-edge construction nor a matching upper bound has been obtained.
 
 \section{Computational investigations and their exact scope}
 \subsection{Published bank audit and endpoint regrowth}

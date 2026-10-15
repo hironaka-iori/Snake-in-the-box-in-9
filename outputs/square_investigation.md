@@ -1,6 +1,6 @@
 # Square-face investigation
 
-The manuscript now contains a complete written argument for the bound `a(9) <= 254`. The local singleton-square lemma is now proved in Lean for every path length and every selected vertex. The global square-incidence bijections remain to be checked. The end-to-end Lean-checked interval remains `191 <= a(9) <= 255`.
+The manuscript's bound `a(9) <= 254` is now checked end to end in Lean. The verified interval is `191 <= a(9) <= 254`. The new proof uses four-corner summation, replacing the previously pending canonical-square census argument.
 
 ## Fully checked counterexample
 
@@ -10,15 +10,19 @@ The module checks all 9,453 unordered path-vertex pairs, the complete square enu
 
 This refutes a direct extension to all open paths of a local condition used in cycle upper bounds. It does not refute a statement restricted to longest paths.
 
-## Written refinement and remaining proof obligations
+## Fully checked incidence refinement
 
-The manuscript proves that every vertex of an induced path in Q9 has at least one singleton square. The argument classifies the selected neighbors of a translated vertex, forces pair vertices when no singleton square exists, and derives more than two endpoints. Counting all 4,608 square faces then gives, for a path on v >= 2 vertices,
+`work/spectral/SquareIncidence.lean` imports the general singleton-square theorem from the standard-library core and uses pinned mathlib for finite sums. Let E count empty squares from their corners, T count singleton incidences at selected vertices, and W count selected centers with two selected coordinate neighbors. The module derives
 
-`2*A0 + A1 + 35*v + 2 = 9216`.
+`2*E + 4*T + 144*v = 36864 + 4*W`.
 
-Since A1 is the sum of the local singleton-square counts, the lemma gives A1 >= v. Therefore 36*v+2 <= 9216, yielding at most 255 vertices and 254 edges.
+The proof verifies that coordinate flips are involutive permutations, excludes fully selected squares, checks the local four-corner identity, sums it over all 36 coordinate pairs and 512 cube vertices, and proves that the selected-vertex indicator sums to v.
 
-`SquareCountingLogic.lean` checks the arithmetic identity and the upper-bound deduction **conditional on** the incidence and singleton-count premises. It also checks the elementary endpoint-count contradictions. It does not yet derive these premises from `Snake9.Snake`. The local geometric theorem is now proved in `SingletonSquareLemma.lean`, supported by `PathStructure.lean` and `CubeLocal.lean`. It proves both existence of a singleton square under the same predicate used by the counterexample and positivity of its enumerated count. It includes short paths and XOR translation. The axiom audit lists only `propext`, `Classical.choice`, and `Quot.sound`. All 14 core modules build successfully; see `singleton-lean-build.log`. The global incidence bijections are the remaining Lean obligation for 254.
+The singleton-square lemma gives T >= v. A selected two-edge corner determines an internal path vertex, and at most one coordinate pair contributes at each center. This gives W <= v-2 for v >= 2. The resulting bound is at most 255 vertices and 254 edges. The final theorem uses `Snake9.Snake` and supplies the paired lower and upper bounds.
+
+Axiom audits list only `propext`, `Classical.choice`, and `Quot.sound`. There are no proof placeholders, added mathematical axioms, unchecked native computations, or assumed census premises. The portable reproduction driver is `work/spectral/verify_incidence.py`; `--fresh-core` rebuilds all 14 core modules from source in a new directory. Its output is recorded in `outputs/incidence-reproduction.log`.
+
+The original unoriented census identity `2*A0 + A1 + 35*v + 2 = 9216` remains a written mathematical observation. `SquareCountingLogic.lean` checks its arithmetic conditionally; its exact census bijections are not separately certified. The upper bound 254 no longer depends on completing those bijections. The paper now follows the checked four-corner proof.
 
 ## Solver evidence
 
