@@ -1018,6 +1018,46 @@ The incidence estimate gives $T+35v\le9214$. Therefore $75v+3\le18428$, or $75v\
 
 The sequence inequality and its conditional numerical consequence have also been checked in Lean. The exclusion of $(2,2,3)$ is not established here. Even such an exclusion would leave a gap between the upper bound and the known construction.
 
+\subsection{Local experiments on the pattern $(2,2,3)$}
+A five-vertex induced window has, up to translation and permutation of coordinates, transition sequence $(0,1,2,0)$ or $(0,1,2,3)$. Around its three internal vertices, consider the union of Hamming balls of radius $r$. Require the five window vertices to be selected, selected degree at most two, and degree at least one wherever all nine neighbors are represented. Permit at most two degree-one vertices in this interior, and exclude selected cycles. At each center, its two prescribed neighbors leave 21 eligible opposite square corners; exactly $\alpha$ of these must be absent when its singleton count is $\alpha$.
+
+For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. Their translation into Lean is still in progress after single-file translations exceeded available memory. These experiments do not yet prove the geometric premise of Proposition~\ref{prop:conditional244}.
+
+\subsection{A limitation of uniform singleton-density estimates}
+The published bank includes a 192-vertex snake for which independent counting gives $T=1632$. This particular census has been checked in Python; its complete connection to the Lean incidence development remains to be checked. It implies that any valid uniform estimate $T\ge cv$ has $c\le17/2$.
+
+The elementary square-census equations alone cannot turn such an estimate into an upper bound below 210 edges. Indeed, the numerical census
+\[
+(v,a_0,a_1,a_2,a_3)=(211,17,1795,2587,209)
+\]
+satisfies
+\[
+a_0+a_1+a_2+a_3=4608,\qquad
+ a_1+2a_2+3a_3=36v,\qquad a_3=v-2,
+\]
+and $a_1\ge(17/2)v$. No path realizing this census is asserted. It demonstrates that these numerical premises permit 211 vertices. The arithmetic implication has been checked in Lean. A stronger conclusion requires additional geometric restrictions, a length-dependent estimate, or another invariant.
+
+\subsection{Overlapping endpoint demands}
+Local geometric arguments often produce sets that must contain an endpoint. Their overlap can be retained in the counting argument.
+\begin{proposition}[Weighted endpoint accounting]
+Let $P$ be a nontrivial snake, and let $(G_i)_{i\in I}$ be a finite family of vertex sets, each containing at least one endpoint of $P$. Assign nonnegative rational weights $w_i$. If
+\[
+\sum_{i:\,x\in G_i} w_i\le1
+\quad\text{for every vertex }x,
+\]
+then $\sum_{i\in I}w_i\le2$.
+\end{proposition}
+\begin{proof}
+Let $B$ be the two-element endpoint set. Each $G_i$ meets $B$, so
+\[
+\sum_i w_i\le\sum_i\sum_{x\in B\cap G_i}w_i
+=\sum_{x\in B}\sum_{i:\,x\in G_i}w_i\le2.
+\]
+The integer-weight version, obtained by clearing a common denominator, has been checked in Lean.
+\end{proof}
+
+For example, suppose five distinct candidate vertices $u_0,\ldots,u_4$ yield demands $G_i=\{u_i,u_{i+1}\}$, with subscripts taken modulo five. Giving each demand weight $1/2$ satisfies the per-vertex condition, but the total weight is $5/2$, a contradiction. No three of these pairs are disjoint, so a test limited to three disjoint endpoint demands would miss this obstruction. The five-pair contradiction is also checked independently in Lean. Identifying a forced occurrence of this arrangement, or another weighted obstruction, in low-singleton geometry is an open research direction. The counting principle is standard; no claim of historical novelty is made for it.
+
 \subsection{The exact optimum}
 The unconditional conclusion remains $191\le a(9)\le245$. No 192-edge construction or universal exclusion of length 192 has been obtained. A solution requires a length $L$ for which both an explicit snake and an exclusion of length $L+1$ are established; the prefix argument then excludes all longer paths. Conjecture~\ref{conj:196} would require a 196-edge construction and an exclusion of length 197, but the proved bounds do not single out that value. Further progress may come from stronger restrictions on singleton counts or from constructions outside the tested families.
 

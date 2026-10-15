@@ -38,6 +38,17 @@ theorem endpoint_weight_budget (n r D : Nat) (w : Fin n → Nat)
     _ ≤ ∑ _e : Fin r, D := Finset.sum_le_sum (fun e _ => capacity e)
     _ = r * D := by simp
 
+/-- Five cyclic pair demands cannot be met by only two endpoint indicators. -/
+theorem five_cycle_endpoint_demands :
+    ∀ a b c d e : Bool,
+    (a = true ∨ b = true) → (b = true ∨ c = true) →
+    (c = true ∨ d = true) → (d = true ∨ e = true) →
+    (e = true ∨ a = true) →
+    ¬ ([a,b,c,d,e].count true ≤ 2) := by
+  intro a b c d e
+  cases a <;> cases b <;> cases c <;> cases d <;> cases e <;> decide
+
+#print axioms five_cycle_endpoint_demands
 #print axioms uniform_density_cap
 #print axioms density_only_census_feasible
 #print axioms endpoint_weight_budget

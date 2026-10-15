@@ -25,6 +25,37 @@ for line in Path(args.prefix+'.lrat').read_text(encoding='utf-8').splitlines():
     z = a.index(0)
     steps[a[0]] = (a[1:z], a[z+1:-1])
 assert steps and not steps[max(steps)][0]
+# Retain only propagation steps that support the final conflict of each RUP proof.
+# This is an untrusted optimization: each retained step is still checked in Lean.
+all_raw = {i: c for i, c in enumerate(data['clauses'], 1)}
+all_raw.update({i: c for i, (c, _) in steps.items()})
+raw_hint_count = sum(len(hs) for _, hs in steps.values())
+for identifier, (target_clause, hints) in list(steps.items()):
+    assigned = {abs(v): (v < 0, None) for v in target_clause}
+    parents = {}
+    final_hint = None
+    for hint in hints:
+        assert hint > 0, 'Only positive-hint RUP is supported'
+        clause = all_raw[hint]
+        assert not any(abs(v) in assigned and assigned[abs(v)][0] == (v > 0) for v in clause)
+        unknown = [v for v in clause if abs(v) not in assigned]
+        assert len(unknown) <= 1
+        parents[hint] = {assigned[abs(v)][1] for v in clause if abs(v) in assigned} - {None}
+        if not unknown:
+            final_hint = hint
+            break
+        literal = unknown[0]
+        assigned[abs(literal)] = (literal > 0, hint)
+    assert final_hint is not None
+    used, pending = set(), [final_hint]
+    while pending:
+        hint = pending.pop()
+        if hint in used:
+            continue
+        used.add(hint)
+        pending.extend(parents[hint])
+    steps[identifier] = (target_clause, [hint for hint in hints if hint in used])
+print(f'Propagation hints: {raw_hint_count} -> {sum(len(hs) for _, hs in steps.values())}')
 needed = {max(steps)}
 todo = list(needed)
 while todo:
