@@ -91,4 +91,4 @@ The second condition rules out every longer path by taking an initial segment. L
 
 The existing Lean-verified construction has 191 edges. No 196-edge construction or 196-edge upper bound has been obtained. The proposed value 196 is a new sequence-based search target, with low confidence, and the optimality goal remains active.
 
-The subsequent [layer investigation](layer_investigation.md) checks a concrete construction route. Lean verifies the exact joining condition and a published 98-edge eight-dimensional seed. Restricted computational searches exclude a compatible 97-edge partner for that seed. This supplies an obstruction to that construction, without resolving the global conjecture.
+The subsequent [layer investigation](../02-layer-constructions/layer_investigation.md) checks a concrete construction route. Lean verifies the exact joining condition and a published 98-edge eight-dimensional seed. Restricted computational searches exclude a compatible 97-edge partner for that seed. This supplies an obstruction to that construction, without resolving the global conjecture.

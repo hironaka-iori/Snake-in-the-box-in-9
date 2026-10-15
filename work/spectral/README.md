@@ -54,7 +54,7 @@ The fresh source-only build succeeded for all 151 steps, including the core, inc
 python work/spectral/verify_incidence.py --module LowSingletonArms --mathlib-dir /path/to/mathlib
 ```
 
-The separate radius-three forest certificate is part of the standard-library core. See `outputs/low_singleton_investigation.md` for scope and the distinction from a full connected snake.
+The separate radius-three forest certificate is part of the standard-library core. See `milestones/04-singleton-geometry/low_singleton_investigation.md` for scope and the distinction from a full connected snake.
 
 ## General cycle exclusion
 
@@ -64,4 +64,4 @@ The separate radius-three forest certificate is part of the standard-library cor
 python work/spectral/verify_incidence.py --module CycleExclusion --mathlib-dir /path/to/mathlib
 ```
 
-The finite Boolean contradiction is in the standard-library core project. Its complete connection to the normalized geometric model remains pending; see `outputs/ball_certificate_investigation.md`.
+The finite Boolean contradiction is in the standard-library core project. Its complete connection to the normalized geometric model remains pending; see `milestones/06-radius-five/ball_certificate_investigation.md`.

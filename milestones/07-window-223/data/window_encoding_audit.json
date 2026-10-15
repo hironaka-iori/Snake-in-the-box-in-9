@@ -1,0 +1,74 @@
+{
+  "controls": [
+    {
+      "shape": "repeated",
+      "radius": 2,
+      "compact": false,
+      "clauses_satisfied": 968366
+    },
+    {
+      "shape": "repeated",
+      "radius": 2,
+      "compact": true,
+      "clauses_satisfied": 5713
+    },
+    {
+      "shape": "repeated",
+      "radius": 3,
+      "compact": false,
+      "clauses_satisfied": 979118
+    },
+    {
+      "shape": "repeated",
+      "radius": 3,
+      "compact": true,
+      "clauses_satisfied": 16465
+    },
+    {
+      "shape": "distinct",
+      "radius": 2,
+      "compact": false,
+      "clauses_satisfied": 731930
+    },
+    {
+      "shape": "distinct",
+      "radius": 2,
+      "compact": true,
+      "clauses_satisfied": 5549
+    },
+    {
+      "shape": "distinct",
+      "radius": 3,
+      "compact": false,
+      "clauses_satisfied": 742682
+    },
+    {
+      "shape": "distinct",
+      "radius": 3,
+      "compact": true,
+      "clauses_satisfied": 16301
+    }
+  ],
+  "boolean_recurrence_truth_table": "all 16 cases passed",
+  "proof_replay": {
+    "repeated": {
+      "proof_steps": 3744,
+      "input_clauses": 15235,
+      "sha256": {
+        ".json": "499632bd5a6edb897a3ad24faacfc8d6f900c64d5a4e2f35317676e088b73e83",
+        ".cnf": "3b9a9150d1b004d2b83e1b2f90be8b85fd997ebae66e78f9569ab30984f767af",
+        ".lrat": "38c250be905f7f615956e232fa5c0e35b7f2e1733b0c3dfbe7e662c00dddcc8f"
+      }
+    },
+    "distinct": {
+      "proof_steps": 24895,
+      "input_clauses": 15242,
+      "sha256": {
+        ".json": "1c802d45c32cc8f75321a92a5fa56e72f353b29271d8f51bffe4bc4c3939b9d0",
+        ".cnf": "7d4f88fff4f91c0ae39297918a7fdd7efe7f72bc8499f367cdc023c934ea1e45",
+        ".lrat": "5b2477db031864fd2c4a0a70e136cf269a8f61969e1401974aaccad17c8738a9"
+      }
+    }
+  },
+  "scope": "Python validation only; geometry-to-CNF Lean proof remains open."
+}

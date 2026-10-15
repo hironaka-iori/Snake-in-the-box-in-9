@@ -74,13 +74,13 @@ The current evidence favors widening structural diversity over repeating small c
 
 Useful constructive directions are structurally different Q8 seeds, constructions with multiple crossings between layers, and larger changes that replace internal portions and endpoints together. The exact joining theorem states that projected layer paths must intersect only at their joining endpoint. Compatible lengths 98 and 97 would produce 196; compatible lengths 98 and 98 would produce 197 and refute the present conjecture. Testing 197 should remain part of the investigation.
 
-A C bitset search (`outputs/dfs_investigation.md`) has since exhausted end regrowth with up to 80 freed vertices at either end of every bank snake, without reaching 192 edges. It also shows that internal windows of the bank snakes are nearly frozen, and that the known 98-edge Q8 seed has no alternative optimal completion when 59 vertices are freed. Parity forbids reaching 192 by internal replacement alone. The most promising remaining routes are (a) a full classification of 97/98-edge Q8 snakes, which would decide the single-crossing (98,97) and (98,98) cases exactly, and (b) generating new 191-edge basins from scratch rather than perturbing the bank.
+A C bitset search (`milestones/08-exhaustive-search/dfs_investigation.md`) has since exhausted end regrowth with up to 80 freed vertices at either end of every bank snake, without reaching 192 edges. It also shows that internal windows of the bank snakes are nearly frozen, and that the known 98-edge Q8 seed has no alternative optimal completion when 59 vertices are freed. Parity forbids reaching 192 by internal replacement alone. The most promising remaining routes are (a) a full classification of 97/98-edge Q8 snakes, which would decide the single-crossing (98,97) and (98,98) cases exactly, and (b) generating new 191-edge basins from scratch rather than perturbing the bank.
 
-**Lean-checked progress on this route.** `DfsParity.lean` proves that internal rewiring of a 191-edge snake can never give 192 edges. `DfsDecide.lean` is a kernel-friendly exhaustive search with verified parity and leaf-peeling bounds, and `bank_no192_keep160` proves that no 192-edge snake shares a 160-vertex end segment with any bank snake. With version 2, `bank_no192_keep152v2` extends this to 152-vertex end segments: 2616 kernel-checked theorems in 60 modules covering about 2.2e5 search nodes, in 40 minutes on three cores, with the same axiom audit. Deeper certificates cost about 6x more per 8 freed vertices; see `outputs/dfs_investigation.md`.
+**Lean-checked progress on this route.** `DfsParity.lean` proves that internal rewiring of a 191-edge snake can never give 192 edges. `DfsDecide.lean` is a kernel-friendly exhaustive search with verified parity and leaf-peeling bounds, and `bank_no192_keep160` proves that no 192-edge snake shares a 160-vertex end segment with any bank snake. With version 2, `bank_no192_keep152v2` extends this to 152-vertex end segments: 2616 kernel-checked theorems in 60 modules covering about 2.2e5 search nodes, in 40 minutes on three cores, with the same axiom audit. Deeper certificates cost about 6x more per 8 freed vertices; see `milestones/08-exhaustive-search/dfs_investigation.md`.
 
 An alternative is an induced cycle on 194 vertices, which yields a 192-edge snake after deleting one vertex. Four restricted symmetric cycle searches returned UNKNOWN; asymmetric constructions remain available. None of these routes is guaranteed to succeed.
 
-The joint-search route now has a checked starting point: bank example 0 decomposes into compatible 96- and 94-edge Q8 paths, and its 191-edge join is Lean-checked. A new model varies both paths. It passed 42 exhaustive small-cube controls and the fixed 191-edge benchmark. Searches for (98,97), (98,98), and (96,95) each returned UNKNOWN at 120 seconds; the last used the checked pair as an unfixed hint. See `outputs/joint_layer_investigation.md`. These results establish no exclusion of any target. Consider diverse hints or multiple-crossing models rather than treating the timeouts as structural evidence.
+The joint-search route now has a checked starting point: bank example 0 decomposes into compatible 96- and 94-edge Q8 paths, and its 191-edge join is Lean-checked. A new model varies both paths. It passed 42 exhaustive small-cube controls and the fixed 191-edge benchmark. Searches for (98,97), (98,98), and (96,95) each returned UNKNOWN at 120 seconds; the last used the checked pair as an unfixed hint. See `milestones/02-layer-constructions/joint_layer_investigation.md`. These results establish no exclusion of any target. Consider diverse hints or multiple-crossing models rather than treating the timeouts as structural evidence.
 
 ## Priority 2: obtain a much stronger global restriction
 
@@ -102,32 +102,40 @@ These are independent tasks suitable for separate branches. The current handoff 
 
 | Material | Location |
 |---|---|
-| Current mathematical paper | `outputs/snake9_research.tex` |
+| Current mathematical paper | `paper/snake9_research.tex` |
 | All standard-library proofs | `work/final_lean/` |
 | Bounds 245, 247, 248, 251, 254 and 255 using pinned mathlib | `work/spectral/` |
 | Fresh 245 build and verified source hashes | `outputs/strengthened-reproduction-manifest.json`, `outputs/strengthened-reproduction.log` |
 | Fresh core and incidence build | `outputs/incidence-reproduction.log` |
-| Square investigation and its limitations | `outputs/square_investigation.md` |
-| Layer construction and restricted exclusions | `outputs/layer_investigation.md` |
-| Competing trend fits | `outputs/trend_hypothesis.md` |
+| Square investigation and its limitations | `milestones/03-square-incidence/square_investigation.md` |
+| Layer construction and restricted exclusions | `milestones/02-layer-constructions/layer_investigation.md` |
+| Competing trend fits | `milestones/01-foundations/trend_hypothesis.md` |
 | Explicit witnesses and search records | `outputs/*.json` |
 | Published 131-example subset | `work/bank9.json` |
 
-The authoritative standard-library Lean sources are in `work/final_lean/`; maintained mathlib-dependent proofs are in `work/spectral/` and `work/spectral/stronger/`. Do not create divergent proof copies in `outputs/`. The authoritative paper is the existing LaTeX source. Keep implementation filenames and theorem identifiers in technical notes rather than the paper. Retain Iori Hironaka in the author field. No old exported PDF is included because it predates the current source.
+The authoritative standard-library Lean sources are in `work/final_lean/`; maintained mathlib-dependent proofs are in `work/spectral/` and `work/spectral/stronger/`. Do not create divergent proof copies in `outputs/`. The authoritative paper is the existing LaTeX source. Keep implementation filenames and theorem identifiers in technical notes rather than the paper. Retain Iori Hironaka and Tommy Ma in the author field. Contributor PDFs are snapshots; the maintained main paper is the TeX source.
 
 A search timeout, a blocked endpoint, and a restricted exclusion cannot establish global optimality. For every claimed theorem, state exactly which assumptions are discharged. The repository is a research checkpoint, and its documentation must retain the unresolved status until a matching construction and global upper bound are verified.
 
 ## Additional local research direction: certify the radius-five obstruction
 
-The latest experiments sharpen the remaining split-arm case. A radius-four forest is feasible with at most two interior endpoints. At radius five, the solver reports infeasibility with budgets two and three, while finding a forest with budget four. Allowing cycles restores feasibility at budget two. The saved feasible assignments passed independent Python checks; the exclusions remain uncertified. See `outputs/low_singleton_investigation.md` and the seven accompanying JSON records.
+The latest experiments sharpen the remaining split-arm case. A radius-four forest is feasible with at most two interior endpoints. At radius five, the solver reports infeasibility with budgets two and three, while finding a forest with budget four. Allowing cycles restores feasibility at budget two. The saved feasible assignments passed independent Python checks; the exclusions remain uncertified. See `milestones/04-singleton-geometry/low_singleton_investigation.md` and the seven accompanying JSON records.
 
 A checked Boolean certificate for radius five and budget two is now available. Its geometric interpretation remains a separate proof obligation; the current numerical priority is the (2,2,3) restriction described below. The general-to-normalized geometric reduction is also unfinished. The certificate for the encoded model leaves this reduction to prove. These experiments do not change the global interval.
 
 
-The upstream split-arm proof, radius-three forest certificate, and ball-search records remain included; see `outputs/low_singleton_investigation.md`. Their restricted solver exclusions are not premises of the 245 bound.
+The upstream split-arm proof, radius-three forest certificate, and ball-search records remain included; see `milestones/04-singleton-geometry/low_singleton_investigation.md`. Their restricted solver exclusions are not premises of the 245 bound.
 
 ## Integrated Boolean certificate investigation
 
-The separately developed radius-five experiment now has a Lean-checked contradiction for an explicit core of 567 clauses and 252 Boolean variables, using 398 derived clauses. All 41 recorded cycle cuts and the general degree/endpoint clause rules are also checked. The complete interpretation of the concrete input clauses as geometric conditions on a snake is unfinished. See [the certificate investigation](outputs/ball_certificate_investigation.md) for the evidence boundary and reproduction instructions.
+The separately developed radius-five experiment now has a Lean-checked contradiction for an explicit core of 567 clauses and 252 Boolean variables, using 398 derived clauses. All 41 recorded cycle cuts and the general degree/endpoint clause rules are also checked. The complete interpretation of the concrete input clauses as geometric conditions on a snake is unfinished. See [the certificate investigation](milestones/06-radius-five/ball_certificate_investigation.md) for the evidence boundary and reproduction instructions.
 
 This work does not improve the unconditional bound 245. Its earlier conditional 250 arithmetic is retained as historical motivation, rather than a current strengthening target. The most direct numerical target remains exclusion of the singleton-count pattern (2,2,3), which would discharge the existing conditional bound 244. The Boolean-certificate method may provide an independent route to local geometric exclusions.
+
+## 16 October 2026 integration and organization
+
+GitHub PR2 is integrated at b0a78f1. The main paper is now `paper/snake9_research.tex`, with both authors and the local hyperlink settings preserved. All maintained TeX files live under `paper/`; milestone folders separate investigations. Historical raw data and shared proof projects retain stable paths.
+
+The fresh pre-DFS rebuild succeeded: 153 steps, 172 source hashes, 343 theorem axiom audits. See `milestones/05-upper-bound-245/integrated-reproduction-manifest.json`. This does not claim a new independent rebuild of every incoming DFS certificate.
+
+The (2,2,3) work is in `milestones/07-window-223/`. Both radius-three encodings have solver proofs and independent Python replay; both large Lean translations exhausted memory. Splitting their proof declarations into separately compiled modules is the next implementation step. The geometric interpretation and arbitrary-window reduction remain required before 244 can be asserted.

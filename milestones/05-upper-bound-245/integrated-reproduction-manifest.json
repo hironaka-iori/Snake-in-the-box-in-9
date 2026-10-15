@@ -1,0 +1,3809 @@
+{
+  "started_utc": "2026-10-15T11:45:16.450862+00:00",
+  "mathlib_commit": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "lean_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "build_directory": "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+  "source_sha256": {
+    "work/final_lean/BallCertificate.lean": "68a5f1d98168907eef4a4dbbe1e3c83a82340f7bcd5ba4d2497607e6b34844c0",
+    "work/final_lean/BallClauseLogic.lean": "991354fa1f8558fe1803dc0f190e4d9b171d125eaca2901f5b3c0c28808954cb",
+    "work/final_lean/CoilReduction.lean": "4c683eceec5f7650e82e7b8be2600404c7c8b997195ca9a6334945e026566e1f",
+    "work/final_lean/CubeLocal.lean": "10f2d167a0ffe91f2081d04025fae699c6f484125972833731257dfab73f2483",
+    "work/final_lean/IntegerLayerBridge.lean": "dd7245218a2066598d9e58421d6fc573ad45bf48106dd05b52c3e584a5f86656",
+    "work/final_lean/JointLayerSeed.lean": "cd7f5b93583a87fde6c344f83e9a9bc17c09109b1310198462c843ae0ad668ba",
+    "work/final_lean/LayerJoining.lean": "30687e190d96818b64569e90faaff50eba28acf7698e4ffa8c6d89d8fe640a74",
+    "work/final_lean/MaximalityCounterexample.lean": "d359d22442040b4cee9056cb2d336c542cc2b28b97a24f166501485774414e9e",
+    "work/final_lean/OptimalityTarget.lean": "50cdd9f7459ff97e45a074555ddcad097fe85df17af37bae2c3d263df62f5e94",
+    "work/final_lean/PathStructure.lean": "6267168775a17ce9a256fba7e6f6b58d46f6fa38f85ada282df525b200d341bd",
+    "work/final_lean/RadiusThreeForest.lean": "fa5126348d83754309927356a66ac9f396c0681b3678abb3bc58ab145af481dd",
+    "work/final_lean/SingletonSquareLemma.lean": "be53cd87064bc99cf53336995c57de65018ee9b6b4385205c97110df6cbb2d02",
+    "work/final_lean/Snake8.lean": "bd0360ef297e6ae32985508c2ad69eb29c4979a3d39617eddf07179e6753f8f4",
+    "work/final_lean/Snake9.lean": "e0a835b04a42837495aee7d389b1a66dc562573bcbdab33777cb69aac8da9dc0",
+    "work/final_lean/Snake9Logic.lean": "a65916b9fa782804ad9ab083b996db7bb9ef90e5b738c9f135f79603e1464915",
+    "work/final_lean/SquareCounterexample.lean": "e675bbce84264e624b7170fa3034f6f190b09943b5bdb40beadcb5bb063d225f",
+    "work/final_lean/SquareCountingLogic.lean": "414f072075fc47f315e57b806cde5de299425be621b10985ab786299852d8558",
+    "work/final_lean/TrendHypothesis.lean": "b05909aad978aab0db77b7299d8c589f9becf83a5853b332809f9a58bebc95ce",
+    "work/final_lean/lakefile.toml": "3698faf79823055bce45a9c80c25a8d1e25811094a46de85ff37864a5ffbc1a9",
+    "work/final_lean/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "work/final_lean/lake-manifest.json": "5c556a0a3845a3fcbef6cddb17a429f6665adad0546687d0ade5765fea3fbf8d",
+    "work/spectral/SquareIncidence.lean": "3813aa1d9b451cf93c643ab8c954d599be1c646d5c633133bbef9dc9de261518",
+    "work/spectral/stronger/FreshCoordinates.lean": "affefd490b251cc604892ce44440d4488bec670fb9660d928579c9a7048bbec5",
+    "work/spectral/stronger/CubeCoordinateAlgebra.lean": "5703f6266668e59aad0218392ecc6934df1662edd0ba3d85c2fa09a4c1b1dc9f",
+    "work/spectral/stronger/EndpointGroups.lean": "18779f4f32a384cf833ade0acab4655b450def041de374a764af20157920e48c",
+    "work/spectral/stronger/CycleStructure.lean": "72d0f5fa7a842eda23da04f51e0ec2b64457aadb738ac3d122399b5abed8863b",
+    "work/spectral/stronger/SingletonGeometry.lean": "f2635485fb65ae09881db76a4464ce2f73fa4d60d1d51f5eac0022db9599ad92",
+    "work/spectral/stronger/AggregateSingletonBound.lean": "b22b36a8575f842ed633b5a218a7b7a0d3f22909b8dde68b9e51f3f9aea593aa",
+    "work/spectral/stronger/ExactWedgeCount.lean": "96f925e3cc259f6f69798c3a0632edab9cff8c98abdef7213d408463c143cd86",
+    "work/spectral/stronger/SingletonAlphaBridge.lean": "878fc26aaa359ffa8a61724096afb5f347b6139bee71baa81cea99fedb148cfb",
+    "work/spectral/stronger/NormalizeAdjacentSingletons.lean": "c2bd8c45c48c4f047975512a69eea215328a68e7c164378b4e968ac4f90f09ec",
+    "work/spectral/stronger/AdjacentConfiguration.lean": "c049ac0719bfec10f2ae9792aa5fa16ee333b7d28de17cf1762d0f89881800a8",
+    "work/spectral/stronger/AdjacentNeighborhood.lean": "087b7a94471a997cc2409453dad8ef1b2aaad6a37383efa457f8b3795382ec1c",
+    "work/spectral/stronger/ExceptionRowNeighbors.lean": "968cabd22c899faa039cbae8ad00416c052f1c4b28bbb9f4847ef8a54b81fd4c",
+    "work/spectral/stronger/CoordinateCycle.lean": "98931ec63c2738e30981bdfa6d2a21f3a17efc125c617684ccf90c7ce548fb6e",
+    "work/spectral/stronger/AdjacentSingletonExclusion.lean": "3e9b728ed2bfe9cbc2b7925f99de8dec15306a71a24b4affc46c6e4de23dd8df",
+    "work/spectral/stronger/UpperBound251.lean": "94bdb014eff8c3d5b6e0dae9ef31737b262028e5051789d130b7ec9c68406421",
+    "work/spectral/stronger/ExtraFreshCoordinates.lean": "f9658fe69bca9c7cde607613fc7b3697efbaebdbc53bc003e3f7205c61a8678b",
+    "work/spectral/stronger/TwoMissingPairs.lean": "5d0f3b445de69e334c9d03345604ae516876c1e85cbf3dd3a037683d497325e4",
+    "work/spectral/stronger/OneTwoLocal.lean": "ffb23feca39f9361d6c5e42044d259f592e08b9f8c301c74b65fc91bc8ac8847",
+    "work/spectral/stronger/NormalizeOneTwo.lean": "f6be5d8bfa70ea588f5346a75e978c7deb9bfcf7b86a4a81d2e30e3cd833c22f",
+    "work/spectral/stronger/OneTwoGeometry.lean": "e78f265518d60c8785293de11704d46e438ce3107d93974627e942089deaba3a",
+    "work/spectral/stronger/FiniteEndpointCounting.lean": "45452351bdd4df26f7816f8609a2ba82d34c3d54c6d45936b1da571f582b341d",
+    "work/spectral/stronger/OneTwoNoB.lean": "5622f2b619834f5ed6159ce699c8a58c55aa540d6ebf4e041d1f23e190375b0f",
+    "work/spectral/stronger/OneTwoBDCases.lean": "40ea0c244932574a9a37a6ebc8c763d3c923a5b42167c7d1ed6ec3a981413c70",
+    "work/spectral/stronger/OneTwoBECases.lean": "58058ae7ff29a43a2a88494bff5f3388ca4895f27ef59143c550d183bec490d2",
+    "work/spectral/stronger/OneTwoDispatch.lean": "d3e45fc74ecc148b6157a0ff273cb681877265c894e525f62c5fef0617b9522c",
+    "work/spectral/stronger/Aggregate248.lean": "a24ee98e7e52de3c3d9ad161a95253a579d64c91d85b939ef411fc7b211a811f",
+    "work/spectral/stronger/UpperBound248.lean": "fbb7d0d34d2455431393cf1012f7f17acce200d5387df05a5578557e3292e48e",
+    "work/spectral/stronger/EndpointMissingConfig.lean": "6b7f7dd9427b683793fe8ba96198e14bf5e702d9510d5286dba47729de6334d3",
+    "work/spectral/stronger/SmallPairFamilies.lean": "68f53e3cd8c07f77701e1b23c665a95512e36e83cf552babb165ff2836a3e4db",
+    "work/spectral/stronger/EndpointGeometry.lean": "94d8baa864aedd97144c2794dbe0c4c8980e9cfe8346648774d04b05df9f4e40",
+    "work/spectral/stronger/Aggregate247.lean": "c33e90119aadb9f4c029841fe1c92b378b6048e0c4ea44d2fcb0ba167503d368",
+    "work/spectral/stronger/UpperBound247.lean": "10de776e354f113dab257cadb7dd43e7e55d54e950e386a44d5224403070258f",
+    "work/spectral/stronger/EndpointFourWitness.lean": "4230bd9c30607e89f8ad6c1190624cfbc4edcb7ae711efacb54731d9bf0ffa9e",
+    "work/spectral/stronger/GeneralMissingFamily.lean": "9f2de9f9dd8491b391c0857ac06de049532bb489025f3499e5ff4e1b0eeab4d8",
+    "work/spectral/stronger/GeneralMissingGeometry.lean": "6e70b001d793375369c18c3b9df18ca7b5a73122635283d5ebbb507348b250cc",
+    "work/spectral/stronger/GeneralOneTwoLocal.lean": "501e06f4eb8776d5e23804d9589c604316e487085d7198925b51f171507032e4",
+    "work/spectral/stronger/GeneralGoodIndex.lean": "8d48b8013c8f5b46d762680cbc7037adf5d22b257b80620ca5795a72de2d72a3",
+    "work/spectral/stronger/ThreeMissingClassification.lean": "c1093a75dc778cb6bdf42ab5e96cbeebc9b138f7c77d782837b524107e0f9d6b",
+    "work/spectral/stronger/GeneralEndpointGroups.lean": "e6c3fc4567a82f0ae6897ccafc45d4241b2524bc1688120064242e8f668f65a2",
+    "work/spectral/stronger/OneThreeExclusion.lean": "901e69598b2d7e31ebfeb4d88bab5a0b1d4bb12d363e1269b1b12a26b5bdb905",
+    "work/spectral/stronger/AdjacentOneThreeExclusion.lean": "a2354ac7a724ab7bb879ded9c1f5b767ea775908cd6229f73e3b390211f46fcb",
+    "work/spectral/stronger/OuterMatchingCount.lean": "56f3971d07b64f8b5cda8d075b5899f08ed9258b995ced7faaaac05d51298e99",
+    "work/spectral/stronger/RepeatedOuterConfig.lean": "d0adcc4e520f15438f485c87ddddaa96894c33b0dcfccb2dde89511a67d198e3",
+    "work/spectral/stronger/RepeatedOuterGeometry.lean": "c5a251d227c5cb0667e08ac7b4b1a621177d9d450da9d09d5c2099bb1b7254d0",
+    "work/spectral/stronger/PairFamilySplitting.lean": "e449ae00580e51bc700805f13e4aae4e0e6af68349fbce98bced7c3600b75777",
+    "work/spectral/stronger/DistinctOuterConfig.lean": "8ffaf7e1dea192e8d37dd2fd3a68e67724b6fc2b4298c1c2970d951845a09ae0",
+    "work/spectral/stronger/MiddleMatchingGeometry.lean": "2c16e81baf059bf095541e68a96e7abc3318e12c6feacb92fcccd305da7ba748",
+    "work/spectral/stronger/SingleDeltaResources.lean": "69e284349bca8a1511cf7c14d4bc8c7762868d5daf319f4e1992076d71f2ff5c",
+    "work/spectral/stronger/SingleDeltaBase.lean": "fa8c7f132ffab8ec3a0c55b65d0b345229dfc57a9ecf6c70b86b5ae83b555036",
+    "work/spectral/stronger/CubeFlipSaturation.lean": "79e3fe1878f74640a7fbb66d62af9d5b0b66671e5e6e62a4ac0f0eb4ae6e2bd3",
+    "work/spectral/stronger/CommonHoleBase.lean": "c05e28a63cb97794c830e1eb1ac02f58623c268fe382917a05e8dc1836915a48",
+    "work/spectral/stronger/DenseOuterBase.lean": "09f43521563079d8f47dbd3eb6e623e0761a603061dcbdcd8591f0a2e6a3d0b2",
+    "work/spectral/stronger/LocalDenseRows.lean": "52a029143cff9eafd1ffaa8749f865eaf5eaf40958259e9f9cfff7d046c14090",
+    "work/spectral/stronger/DenseRowGroups.lean": "18d1fad327e8d84444317da4099aaf676194c2f321fb36a404dfcdc3f9891314",
+    "work/spectral/stronger/CommonHoleIsolated.lean": "e4dcc54c97930af5f666bca5323c5eef30291e71a5a37e616097a9ff7d3a221b",
+    "work/spectral/stronger/DistinctOuterGeometry.lean": "5d5513f075dc26a8272072a805668e9b4f6a98fd777d91e6fd294acaffb020d3",
+    "work/spectral/stronger/DistinctOuterFamilies.lean": "eead8e93e721ee9c8e8d5dbd8bd0e29d3ffb9dfaa41051c6e6e4fe0dbfb44232",
+    "work/spectral/stronger/DistinctOuterCounting.lean": "153870cfd14fd32bd6b9979ed52a244c34b9e0d5989e99d994fbdca8f23e143e",
+    "work/spectral/stronger/DistinctOuterResources.lean": "950b1178fdc880194410cb054c8dedf54af7c2c273bc8524a3baa2fb15c05572",
+    "work/spectral/stronger/RepeatedOuterMatching.lean": "a21e4077ae1f9cb6bb62d5a32cef1414de4dc417baab18018f4a8842cf705cb6",
+    "work/spectral/stronger/SingleDeltaMiddle.lean": "342d75fdb8ac3d0fe5a9339f1d394104a7bbfb39666ee1bbf98817815687f87e",
+    "work/spectral/stronger/SingleDeltaEndpoints.lean": "cd80b8adff3650cf8376dfd023042a20f95fbe09bc82caa3caa403b7724fb2df",
+    "work/spectral/stronger/SingleDeltaExclusion.lean": "ee7285245e7ab7d61663e7e334f7eea5b391e1d05daa22c61d9158bb74bd262e",
+    "work/spectral/stronger/DistinctOuterClassification.lean": "db1d56e03cd8fefd7092412735eeb43fc04ec00c27ac3a11b55d6a6adf23d9af",
+    "work/spectral/stronger/DistinctOuterMirror.lean": "9851334e98b0398744c590451b54095ce6e3ce365a7e0df5f9953f5dd87cf42e",
+    "work/spectral/stronger/CommonHolePairs.lean": "5ba67a2f090d123e69d127746a8c7f3418609c950e25d4d986e74ed0acceb18b",
+    "work/spectral/stronger/StarOuterBase.lean": "3c4594adc0f674e9529a6d796fca00778780468bccb84b66417648656c2732a8",
+    "work/spectral/stronger/EqualOuterPairBase.lean": "b37d2893d84072d7c112404ae14d7d0f96b005b2a6a5b7d3ffb73bc330c7c9fe",
+    "work/spectral/stronger/OrdinaryOuterBase.lean": "ffff291662a20cbc74e13e4c0414733c33a7cbd1290c68f8f39500bfee54d4de",
+    "work/spectral/stronger/OrdinaryOuterCountingDefs.lean": "0e40697abe30481389705f86fc4cffbfcfa278d1855469e241e023a21b43d737",
+    "work/spectral/stronger/SharedFiniteClassification.lean": "cfb20b18cda0eb4ff774a22e7131a24f1101094a23fc851b420e56e8ff9aab74",
+    "work/spectral/stronger/OrdinaryOuterHoleEndpoints.lean": "8e569b291cb1a642a01d26bc0ad68c96e3d705249eedc533b1f870fae3d34e62",
+    "work/spectral/stronger/RowWindowGeometry.lean": "ad5347386000938840c9a69cb8360a750a06138abac73fbe9f0435efcd94380c",
+    "work/spectral/stronger/OrdinaryRowGeometry.lean": "6498c8f75b3797b343e95cd65cf8912256b09482a2a9ba5869bbf2b68bcdb8b9",
+    "work/spectral/stronger/OrdinaryPairEndpoints.lean": "a3ff618fb9d118f467dcbee72d261d2b3b393c4b2ae06948a5c6d846a87ba91a",
+    "work/spectral/stronger/SharedOuterBase.lean": "95b6f3cf9915e105723b7cd94eb1934bc93f07698d70bf22a5621588ee52d29f",
+    "work/spectral/stronger/OrdinaryIsolatedGeometry.lean": "b79a53df26604e87ff1b1f8147901001632cb0dd23490c66b4c2762910cd1da3",
+    "work/spectral/stronger/CommonHoleCounting.lean": "ab842b4a4f4bffca4eb8056b5636e7c344146bcca5297fcc4dbb0e48c2b7be24",
+    "work/spectral/stronger/CommonHoleEndpointGroups.lean": "bc0e92cd551550f8fbabab560abe564e1cd23ffca72db63ce0cf2a4b906d1f3e",
+    "work/spectral/stronger/OrdinaryIsolatedOneSide.lean": "eab72e2c8418c9bac09431c0b27d386b270c4f574e22021fbeb4b16fdaa55c07",
+    "work/spectral/stronger/OrdinaryHoleResources.lean": "1308922a70c11e8bf44821be266129e6ade05f92e8b33ee0eb2549e415ecdb8b",
+    "work/spectral/stronger/FourEndpointCounting.lean": "d614bac0ae4823b87bb9546381e5b5e641f10c9bce8468ae1d38d2c560d47f85",
+    "work/spectral/stronger/OrdinaryEndpointCount.lean": "c359d7e99a9d60049b2bdafd9c133cfcb44e033255d9f386fc05ebc5894c8be6",
+    "work/spectral/stronger/SharedFiniteReduction.lean": "c1bd9b7a69cad4b5b0dca59fe1254a9d457e4517ba1da8a10b99e927379ba5cd",
+    "work/spectral/stronger/OrdinaryTwoEndpoints.lean": "9c3eae65bb9d9bb77a26b23de2605d98b183000ce68df81aa354a5803fe3f15f",
+    "work/spectral/stronger/StarOuterResidual.lean": "48f4c25060fade2d12c14e8b97f5d22bd13c49de7f238b0642f02cda0af2729f",
+    "work/spectral/stronger/SharedMissingRight.lean": "89ce501b5ace95c715b75d748265eccfebad13145a1e0284f17e29e13e2ec774",
+    "work/spectral/stronger/SharedCleanRows.lean": "adc5e317e5f0c1b6878de368f90395dacba2c8b957c54832c0c04d80a097c4e0",
+    "work/spectral/stronger/SharedMissingRightFamilies.lean": "bbaa92899ea1cf40131b094cc0acf6c75aa5adcae2a2134e3678873fc87cb6bd",
+    "work/spectral/stronger/SharedMissingHoleWrappers.lean": "fb7bd50a0c2c44944a61ee003f562978e432c6819e6aae939375ee3c403efe20",
+    "work/spectral/stronger/SharedOuterSwitch.lean": "1859e817a9cb925abc5d825985a1f26824819a0321faca26e40ca28c77bd32c5",
+    "work/spectral/stronger/OrdinaryEndpointSeparation.lean": "f31e86a0daf763b2f585223c95ea44be6f8bc2d445abbfdafb2913f012434963",
+    "work/spectral/stronger/SharedCentralGeometry.lean": "d34093d6fb392e076f0bce9d334c8a16d9662ee61bd6f064728bb61159965c62",
+    "work/spectral/stronger/SharedCentralMissing.lean": "bf2589c9145860c3bb3ac21fed502aa0f890ec326d955a1c8fd7f0e43303c485",
+    "work/spectral/stronger/OrdinaryGoodRowMirror.lean": "c0e076a250d5043a351742dba8cd51629706d55a7923e7b7a0dd85bcf406a410",
+    "work/spectral/stronger/SharedCentralMissingExclusion.lean": "f5e84af67c7c5fc9f023931563ed9696045ecdd88e8d94c80a77fd02fa032f8a",
+    "work/spectral/stronger/SharedCoreEndpoints.lean": "933947651e278c595e962e46cf0fa6ba3e7d8dc51a2457e969aa2cd42c8b1320",
+    "work/spectral/stronger/SharedCentralDouble.lean": "9e9c5a02d60e6b907b6c11e876562b3dddbde268643a35a542dc796449c0d2a3",
+    "work/spectral/stronger/SharedCentralCSelected.lean": "77196f9a706d0566cafd057edb002a4117dd297a62f6d89dcc0e9f3ce1e2e1e7",
+    "work/spectral/stronger/SharedCentralDoubleExclusion.lean": "14949fecf03a37c8066b9de2f4e568ef8daca1ea8ce61af590c5562b9071c811",
+    "work/spectral/stronger/OrdinaryPartialRows.lean": "9f56d718acc901f1a0535c0884da62b036cff9d1c4e2fe283dd44e2e14ea4e0b",
+    "work/spectral/stronger/OrdinaryMissingStar.lean": "f34b12bcfa8a8c7d1b1253371986364e99df42c1267dc5dbce203813001fc0b7",
+    "work/spectral/stronger/SharedCrossStars.lean": "bf65fd69e9a81ef5d65557c6b00a79fb6c3c0b48df4c23602f2eb4fa56b24d4c",
+    "work/spectral/stronger/OrdinaryMissingStarCover.lean": "005bd89108fd012f137068a88d7cabc82a7cf46c1291e74c7ea06e8e0d892e05",
+    "work/spectral/stronger/SharedCrossedStars.lean": "d1ca488932515f824edb39492922dab62edccd143c6663afb7fc3ddb8b19ce0b",
+    "work/spectral/stronger/SharedCrossMissingStar.lean": "6211c83d9384be5719cd54e9ec42c13d70eea5ce4e86e0f70f9c9eb520e4be7f",
+    "work/spectral/stronger/SharedCrossStarExclusion.lean": "7ab03298c5d7def58d827f75f5a380d5a039abdaaa1f6e5253dd196430b64d23",
+    "work/spectral/stronger/SharedSwitchExclusion.lean": "57dd01a8af24c6b02cd5fd9a334a02a9224d05ce9a998131c22595223fff469e",
+    "work/spectral/stronger/SharedOrdinaryFork.lean": "39bb331868c19782c116f340d2da74d2f8dd5e2cd2a12f5a19073fa51765a766",
+    "work/spectral/stronger/SharedOuterExclusion.lean": "ad99d036ffaa74049e3ff61a1e4e2478dadf4038e0f622921d099d84c0d8be3d",
+    "work/spectral/stronger/RepeatedThreeTwosExclusion.lean": "a83c6d597e6032c5bdad1022b7f2ca4e17f854d70768b7e454a7f7143ade1563",
+    "work/spectral/stronger/NormalizeThreeCenters.lean": "ea763c8f6777d8c8b7a6a0e03ac1925c5888035120e23260eb5e96134b0a5ef5",
+    "work/spectral/stronger/NormalizeDistinctThreeTwos.lean": "2cca14258f43016d2ac11da10998baef8811a08f835f2435f989561b1c136d0b",
+    "work/spectral/stronger/CommonHoleMiddleRestrictions.lean": "134a2d4e6d51573d6b0ef2aa788dbc1c8d8aa397720018fec97e8871e85ed217",
+    "work/spectral/stronger/CommonHoleStarGroups.lean": "9c0b143baf61ec033813de1b49ca2cc1dec5f9c0bd10b2bf47c9f4df5436dd08",
+    "work/spectral/stronger/CommonHoleExclusion.lean": "3ce3628bc68d4cfa9cc971cf28cfa5b724b3a8037980f62387ff52665fc3c9b6",
+    "work/spectral/stronger/ThreeEndpointCounting.lean": "d092c328c58c197a389ba7728ab61db3ee5c67e30917cbaddb4fa08580f62b46",
+    "work/spectral/stronger/StarOuterCounting.lean": "1add77ca45468863b910aa66a984b6e3a8ac23aad24e369fac50b6df2762dfcd",
+    "work/spectral/stronger/StarOuterEndpointCount.lean": "c65cc0522371878109b0dfb58dbae85ea89cf78aead761d4a249fd706f23237b",
+    "work/spectral/stronger/StarOuterExclusion.lean": "d0558626e1d4c27ddf96fc6671f02780ff5d0ecfa68fff406dd61538886ce222",
+    "work/spectral/stronger/ThreeTwosRemainingOrdinary.lean": "6474be9f1ceadcad33a65fdacd5ffd5eecfff2e29af6e76e64f87de24f8552a6",
+    "work/spectral/stronger/StarLeftGeometry.lean": "757601b2d90237f97db2b028c65fc02368e1cd2aaba7e9efeda0476defaefc61",
+    "work/spectral/stronger/MixedOuterBase.lean": "c15fb387fb49b4bfc75eb135d7232901d8efda23ed05dab48b2b24c99cc1322c",
+    "work/spectral/stronger/EqualOuterPairCounting.lean": "3977deacf9498c1956614e932ad2026e348715111445c5b7ab124ac5ef188feb",
+    "work/spectral/stronger/MixedPartnerCounting.lean": "2e8bc4c6e3babbd500713873627765583593824cc54b7aa4053681ac4a3735d3",
+    "work/spectral/stronger/MixedIsolatedGeometry.lean": "486a02972319cfae706a6542a0079adc2d117bea31a7419f6ef86232a8ae5609",
+    "work/spectral/stronger/MixedIsolatedOneSide.lean": "fcc03d92a185a856682b1de3feb15ae3b4975285b7d10bf0f67459b4131fbb48",
+    "work/spectral/stronger/MixedIsolatedEndpoints.lean": "2b85444ac8c2b6c90fe788f7a2eec285da724c0135de6369a6a187d2d9ad64ca",
+    "work/spectral/stronger/TwoEdgeEndpointDemand.lean": "c17f24be6556c4ab8921426e03021a96d1b9e3347f54e0220b8506de1a826d66",
+    "work/spectral/stronger/MixedEndpointCounting.lean": "01e4710ffa1b73726bfce3a1f885c8f2e4fac7d67cea2487ce61191c059033fe",
+    "work/spectral/stronger/MixedOrdinaryEndpoints.lean": "7b3ea92d14b8d7338cfee5ca99e97a088b870628fcafc92c5f0092fbdffe7811",
+    "work/spectral/stronger/MixedOuterExclusion.lean": "88deec4045f0d47af6cfff57174c14a90f34e3830813927ddd6e9cd4fad7708e",
+    "work/spectral/stronger/EqualOuterPairEndpoints.lean": "f3df73b9bfb16c3177dd98c6aff2eb887b813e16b505183ea806b08b5f4e3dfd",
+    "work/spectral/stronger/EqualOuterPairForce.lean": "5a2b9e2d10d72c7e4de5d6ad797ba738697e170cfa2ca94a5e849d1942ba70bb",
+    "work/spectral/stronger/EqualOuterPairIncident.lean": "aa12eae9220758fa62d7366505c6e6b0813462c8ba59c01085cce90225360bab",
+    "work/spectral/stronger/EqualOuterPairStar.lean": "3de8a8f275205960b43217d3b415e04ddfacde089083e4306b2aa1a6132d15ca",
+    "work/spectral/stronger/EqualOuterPairResidual.lean": "ea87a704a896b4c5ce44cb3cb44e8b0d946125cd736d9d7d8d5d3e0f54dee3f8",
+    "work/spectral/stronger/EqualOuterPairExclusion.lean": "0fd94279f08461099a514b572bf32cb60286f8084bf27caa4ae69b3077f3b0a3",
+    "work/spectral/stronger/ThreeTwosRemainingUnequal.lean": "4a49e196d3892d47bf749093552886c8c5ee7a7f6e7ae8a87251720c6cda7f13",
+    "work/spectral/stronger/DisjointOrdinaryPartners.lean": "cb43b37cb7e24e5a2743259097a83bf2bf7db7b2bed1cb53a92993f826c6a4ed",
+    "work/spectral/stronger/DisjointOneOrdinaryCount.lean": "964c015440fc53043cb74de53366de0cde25ac4ffd39ddef0d3b000ca4802911",
+    "work/spectral/stronger/OrdinaryTwoEdgeDemand.lean": "cff01e4b36f5ed521824db3345c3ec0dc65c6730941dd31688c69dc00e3c8855",
+    "work/spectral/stronger/DisjointOrdinaryDemand.lean": "b9761175d086d3177dedf849b2265246507d66ccf0049399d66f99a0bc612fbe",
+    "work/spectral/stronger/OrdinaryDisjointExclusion.lean": "a82460b5954b622678044f27c53cc87e9c81326bed3d9b72bf50af45cf5f9fbc",
+    "work/spectral/stronger/NormalizeSharedThreeTwos.lean": "09895080809a5ab7bdab2f471c0c9504d4dac860f4146792e76773ebcd6cbb3f",
+    "work/spectral/stronger/AlphaRunPotential.lean": "fc175c7f8f0ea33c5235b7315e5612c1cb8d584e9537768c42f93ffbec2f2498",
+    "work/spectral/stronger/Aggregate245Conditional.lean": "5e33dfe1ab8b63dd8e3510d448996c4ee949ea92ecc835c212ba0f2b757ecc4b",
+    "work/spectral/stronger/UpperBound245.lean": "5007cc28d6ff60f09382ac83c3cbccb2a512fd331291a7f89ad6c55c25c0dd48",
+    "work/spectral/stronger/Alpha223Potential.lean": "6d8bf887ca3989d574f6d5216574c7e401ededf18e6d2ec866b2c68a14201dd3",
+    "work/spectral/stronger/Aggregate244Conditional.lean": "cc3d7abd9ac45931107747af3e58f285e2ee9a5310720a0ed473d4f93d1b9a68"
+  },
+  "steps": [
+    {
+      "label": "core",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "build"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SquareIncidence",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SquareIncidence.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SquareIncidence.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "FreshCoordinates",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\FreshCoordinates.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\FreshCoordinates.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CubeCoordinateAlgebra",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CubeCoordinateAlgebra.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CubeCoordinateAlgebra.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EndpointGroups",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EndpointGroups.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EndpointGroups.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CycleStructure",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CycleStructure.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CycleStructure.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingletonGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingletonGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingletonGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AggregateSingletonBound",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AggregateSingletonBound.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AggregateSingletonBound.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ExactWedgeCount",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ExactWedgeCount.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ExactWedgeCount.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingletonAlphaBridge",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingletonAlphaBridge.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingletonAlphaBridge.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "NormalizeAdjacentSingletons",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeAdjacentSingletons.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeAdjacentSingletons.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AdjacentConfiguration",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AdjacentConfiguration.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AdjacentConfiguration.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AdjacentNeighborhood",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AdjacentNeighborhood.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AdjacentNeighborhood.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ExceptionRowNeighbors",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ExceptionRowNeighbors.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ExceptionRowNeighbors.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CoordinateCycle",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CoordinateCycle.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CoordinateCycle.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AdjacentSingletonExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AdjacentSingletonExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AdjacentSingletonExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "UpperBound251",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\UpperBound251.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\UpperBound251.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ExtraFreshCoordinates",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ExtraFreshCoordinates.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ExtraFreshCoordinates.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "TwoMissingPairs",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\TwoMissingPairs.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\TwoMissingPairs.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OneTwoLocal",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoLocal.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoLocal.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "NormalizeOneTwo",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeOneTwo.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeOneTwo.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OneTwoGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "FiniteEndpointCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\FiniteEndpointCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\FiniteEndpointCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OneTwoNoB",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoNoB.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoNoB.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OneTwoBDCases",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoBDCases.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoBDCases.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OneTwoBECases",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoBECases.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoBECases.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OneTwoDispatch",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoDispatch.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneTwoDispatch.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "Aggregate248",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Aggregate248.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Aggregate248.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "UpperBound248",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\UpperBound248.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\UpperBound248.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EndpointMissingConfig",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EndpointMissingConfig.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EndpointMissingConfig.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SmallPairFamilies",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SmallPairFamilies.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SmallPairFamilies.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EndpointGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EndpointGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EndpointGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "Aggregate247",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Aggregate247.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Aggregate247.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "UpperBound247",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\UpperBound247.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\UpperBound247.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EndpointFourWitness",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EndpointFourWitness.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EndpointFourWitness.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "GeneralMissingFamily",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralMissingFamily.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralMissingFamily.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "GeneralMissingGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralMissingGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralMissingGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "GeneralOneTwoLocal",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralOneTwoLocal.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralOneTwoLocal.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "GeneralGoodIndex",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralGoodIndex.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralGoodIndex.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ThreeMissingClassification",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ThreeMissingClassification.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ThreeMissingClassification.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "GeneralEndpointGroups",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralEndpointGroups.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\GeneralEndpointGroups.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OneThreeExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneThreeExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OneThreeExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AdjacentOneThreeExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AdjacentOneThreeExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AdjacentOneThreeExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OuterMatchingCount",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OuterMatchingCount.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OuterMatchingCount.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "RepeatedOuterConfig",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RepeatedOuterConfig.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RepeatedOuterConfig.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "RepeatedOuterGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RepeatedOuterGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RepeatedOuterGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "PairFamilySplitting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\PairFamilySplitting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\PairFamilySplitting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DistinctOuterConfig",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterConfig.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterConfig.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MiddleMatchingGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MiddleMatchingGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MiddleMatchingGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingleDeltaResources",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaResources.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaResources.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingleDeltaBase",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaBase.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaBase.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CubeFlipSaturation",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CubeFlipSaturation.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CubeFlipSaturation.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CommonHoleBase",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleBase.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleBase.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DenseOuterBase",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DenseOuterBase.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DenseOuterBase.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "LocalDenseRows",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\LocalDenseRows.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\LocalDenseRows.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DenseRowGroups",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DenseRowGroups.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DenseRowGroups.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CommonHoleIsolated",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleIsolated.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleIsolated.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DistinctOuterGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DistinctOuterFamilies",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterFamilies.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterFamilies.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DistinctOuterCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DistinctOuterResources",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterResources.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterResources.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "RepeatedOuterMatching",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RepeatedOuterMatching.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RepeatedOuterMatching.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingleDeltaMiddle",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaMiddle.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaMiddle.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingleDeltaEndpoints",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaEndpoints.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaEndpoints.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SingleDeltaExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SingleDeltaExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DistinctOuterClassification",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterClassification.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterClassification.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DistinctOuterMirror",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterMirror.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DistinctOuterMirror.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CommonHolePairs",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHolePairs.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHolePairs.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "StarOuterBase",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterBase.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterBase.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EqualOuterPairBase",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairBase.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairBase.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryOuterBase",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryOuterBase.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryOuterBase.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryOuterCountingDefs",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryOuterCountingDefs.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryOuterCountingDefs.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedFiniteClassification",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedFiniteClassification.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedFiniteClassification.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryOuterHoleEndpoints",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryOuterHoleEndpoints.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryOuterHoleEndpoints.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "RowWindowGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RowWindowGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RowWindowGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryRowGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryRowGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryRowGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryPairEndpoints",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryPairEndpoints.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryPairEndpoints.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedOuterBase",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedOuterBase.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedOuterBase.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryIsolatedGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryIsolatedGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryIsolatedGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CommonHoleCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CommonHoleEndpointGroups",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleEndpointGroups.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleEndpointGroups.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryIsolatedOneSide",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryIsolatedOneSide.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryIsolatedOneSide.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryHoleResources",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryHoleResources.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryHoleResources.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "FourEndpointCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\FourEndpointCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\FourEndpointCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryEndpointCount",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryEndpointCount.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryEndpointCount.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedFiniteReduction",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedFiniteReduction.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedFiniteReduction.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryTwoEndpoints",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryTwoEndpoints.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryTwoEndpoints.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "StarOuterResidual",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterResidual.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterResidual.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedMissingRight",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedMissingRight.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedMissingRight.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCleanRows",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCleanRows.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCleanRows.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedMissingRightFamilies",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedMissingRightFamilies.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedMissingRightFamilies.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedMissingHoleWrappers",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedMissingHoleWrappers.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedMissingHoleWrappers.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedOuterSwitch",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedOuterSwitch.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedOuterSwitch.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryEndpointSeparation",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryEndpointSeparation.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryEndpointSeparation.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCentralGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCentralMissing",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralMissing.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralMissing.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryGoodRowMirror",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryGoodRowMirror.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryGoodRowMirror.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCentralMissingExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralMissingExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralMissingExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCoreEndpoints",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCoreEndpoints.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCoreEndpoints.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCentralDouble",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralDouble.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralDouble.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCentralCSelected",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralCSelected.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralCSelected.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCentralDoubleExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralDoubleExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCentralDoubleExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryPartialRows",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryPartialRows.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryPartialRows.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryMissingStar",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryMissingStar.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryMissingStar.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCrossStars",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCrossStars.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCrossStars.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryMissingStarCover",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryMissingStarCover.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryMissingStarCover.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCrossedStars",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCrossedStars.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCrossedStars.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCrossMissingStar",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCrossMissingStar.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCrossMissingStar.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedCrossStarExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCrossStarExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedCrossStarExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedSwitchExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedSwitchExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedSwitchExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedOrdinaryFork",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedOrdinaryFork.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedOrdinaryFork.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "SharedOuterExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedOuterExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SharedOuterExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "RepeatedThreeTwosExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RepeatedThreeTwosExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\RepeatedThreeTwosExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "NormalizeThreeCenters",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeThreeCenters.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeThreeCenters.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "NormalizeDistinctThreeTwos",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeDistinctThreeTwos.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeDistinctThreeTwos.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CommonHoleMiddleRestrictions",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleMiddleRestrictions.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleMiddleRestrictions.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CommonHoleStarGroups",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleStarGroups.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleStarGroups.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "CommonHoleExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\CommonHoleExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ThreeEndpointCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ThreeEndpointCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ThreeEndpointCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "StarOuterCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "StarOuterEndpointCount",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterEndpointCount.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterEndpointCount.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "StarOuterExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarOuterExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ThreeTwosRemainingOrdinary",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ThreeTwosRemainingOrdinary.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ThreeTwosRemainingOrdinary.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "StarLeftGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarLeftGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\StarLeftGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MixedOuterBase",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedOuterBase.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedOuterBase.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EqualOuterPairCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MixedPartnerCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedPartnerCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedPartnerCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MixedIsolatedGeometry",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedIsolatedGeometry.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedIsolatedGeometry.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MixedIsolatedOneSide",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedIsolatedOneSide.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedIsolatedOneSide.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MixedIsolatedEndpoints",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedIsolatedEndpoints.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedIsolatedEndpoints.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "TwoEdgeEndpointDemand",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\TwoEdgeEndpointDemand.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\TwoEdgeEndpointDemand.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MixedEndpointCounting",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedEndpointCounting.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedEndpointCounting.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MixedOrdinaryEndpoints",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedOrdinaryEndpoints.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedOrdinaryEndpoints.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "MixedOuterExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedOuterExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\MixedOuterExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EqualOuterPairEndpoints",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairEndpoints.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairEndpoints.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EqualOuterPairForce",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairForce.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairForce.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EqualOuterPairIncident",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairIncident.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairIncident.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EqualOuterPairStar",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairStar.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairStar.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EqualOuterPairResidual",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairResidual.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairResidual.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "EqualOuterPairExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\EqualOuterPairExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ThreeTwosRemainingUnequal",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ThreeTwosRemainingUnequal.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\ThreeTwosRemainingUnequal.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DisjointOrdinaryPartners",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DisjointOrdinaryPartners.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DisjointOrdinaryPartners.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DisjointOneOrdinaryCount",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DisjointOneOrdinaryCount.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DisjointOneOrdinaryCount.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryTwoEdgeDemand",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryTwoEdgeDemand.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryTwoEdgeDemand.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "DisjointOrdinaryDemand",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DisjointOrdinaryDemand.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\DisjointOrdinaryDemand.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "OrdinaryDisjointExclusion",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryDisjointExclusion.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\OrdinaryDisjointExclusion.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "NormalizeSharedThreeTwos",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeSharedThreeTwos.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\NormalizeSharedThreeTwos.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "AlphaRunPotential",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AlphaRunPotential.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\AlphaRunPotential.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "Aggregate245Conditional",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Aggregate245Conditional.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Aggregate245Conditional.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "UpperBound245",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\UpperBound245.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\UpperBound245.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "Alpha223Potential",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Alpha223Potential.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Alpha223Potential.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "Aggregate244Conditional",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "-o",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Aggregate244Conditional.olean",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\Aggregate244Conditional.lean"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "FinalAudit",
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.EXE",
+        "env",
+        "lean",
+        "--root=E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+        "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\FinalAudit.lean"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "axiom_audits": {
+    "SnakeTrend.geometricTail_step": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCountingLogic.square_count_identity": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCountingLogic.upper_254_of_census": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCountingLogic.six_candidates_exceed_two_endpoints": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCountingLogic.upper_250_of_singleton_surplus": [
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.join": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.compatibility_necessary": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.lengths_for_196": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.lengths_for_197": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "LayerJoining.single_crossing_upper": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake8.witness_distinct": [
+      "propext"
+    ],
+    "Snake8.witness_induced": [
+      "propext"
+    ],
+    "Snake8.lower_bound": [
+      "propext"
+    ],
+    "Snake9.no192_iff_upperBound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.target192_impossible_iff_upperBound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.witness_distinct": [
+      "propext"
+    ],
+    "Snake9.witness_induced": [
+      "propext"
+    ],
+    "Snake9.lower_bound": [
+      "propext"
+    ],
+    "Snake9.optimality_of_no192": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.prefix192_not_blocked": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.all191_blocked_implies_optimal": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.witness_right_blocked": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.noNext_iff_upperBound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.hypothesis196_iff_witness_and_exclusion": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.witness196_implies_witness192": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.hypothesis196_refutes_upper191": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.short_cannot_extend_either_end": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.reverse_matches": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.endpoint_maximality_does_not_prove_maximum": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.deleteLastOfCoil": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.coil194_disproves_191": [
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.adjacency_bridge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.join": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.compatible_98_97_gives_196": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.compatible_98_98_gives_197": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.no197_excludes_compatible_98": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "IntegerLayerBridge.compatibility_iff_encoded_join_is_induced": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.no_four_cycle": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_three_neighbors_repeat": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.low_degree_index_is_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.three_low_degree_vertices_repeat": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.four_candidates_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCounterexample.witness_distinct": [
+      "propext"
+    ],
+    "SquareCounterexample.witness_induced": [
+      "propext"
+    ],
+    "SquareCounterexample.exactly_one_singleton_square": [
+      "propext"
+    ],
+    "SquareCounterexample.unique_square_characterization": [
+      "Quot.sound",
+      "propext"
+    ],
+    "SquareCounterexample.universal_internal_two_square_claim_false": [
+      "propext"
+    ],
+    "Snake9.translate": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.freshCoords_spec": [
+      "propext"
+    ],
+    "Snake9.BallClauseLogic.degree_clause": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.BallClauseLogic.endpoint_triple_clause": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.BallClauseLogic.endpoint_degree_clause": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.BallClauseLogic.other_neighbor_or_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.BallClauseLogic.neighbor_list_clause": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.BallClauseLogic.internal_neighbor_list_clause": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "JointLayerSeed.compatible": [
+      "propext"
+    ],
+    "JointLayerSeed.normalized_join": [
+      "propext"
+    ],
+    "JointLayerSeed.joined": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "JointLayerSeed.adjacent_to_join_distinct": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.singleton_square_exists": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.singleton_pairs_positive": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.forced_pairs_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RadiusThreeForest.path": [
+      "propext"
+    ],
+    "RadiusThreeForest.components_separated": [
+      "propext"
+    ],
+    "RadiusThreeForest.inside_radius_three": [
+      "propext"
+    ],
+    "RadiusThreeForest.radius_two_vertices_internal": [
+      "propext"
+    ],
+    "RadiusThreeForest.one_singleton_square": [
+      "propext"
+    ],
+    "BallCertificate.formula_unsat": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.universal_upper_bound_254": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.verified_bounds_254": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.singleton_total_lower": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.local_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.global_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.selected_total": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exists_four_coords_outside_five": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exists_five_coords_outside_four": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.bit_quad": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.neighbor_triple": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.quad_cancel_first": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exists_good_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.force_two_neighbors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_cycle8_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_cycle6_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.missing_candidate_low_degree_except": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.arm_outside_missing_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.arm_coordinate_in_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.totalSingleton_eq_path_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.internal_pair_bound_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.upper_251_of_no_adjacent_internal_singletons": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.internal_has_wedge": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.wedge_total_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.exact_defect_identity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.localAlpha_translate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.alpha_one_forced_pairs_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.config_of_adjacent_internal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.translate_pair_membership": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.absent_triple_ack": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.triple_neighbor_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.selected_abek_excludes_bek": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exception_row_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.row_d_neighbors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.AdjacentConfig.row_c_neighbors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_coordinate_cycle8_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_configuration_distinct_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_configuration_equal_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_configuration_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_internal_alpha_one_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.upper_bound_251": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.verified_interval_191_251": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.exists_two_coords_outside_seven": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.missingPairSupports_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.mem_missingPairSupports_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.missingPairSupports_two": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.quad_two_rows_excludes_side": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.hole_connection_low_degree": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.missing_connection_low_degree": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.cycle_group_low_degree": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.twoMissingAtNeighbor_of_alpha_two": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.oneTwoConfig_of_adjacent_internal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.no_b_endpoint_alternative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selectedEndpoints_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.two_endpoint_images_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.five_not_covered_by_two_endpoints": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.edgeVertex_injective_on_pairs": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.no_b_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.bd_nonb_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.bd_hole_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.bd_in_missing_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.single_hole_alternative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.two_holes_alternative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.be_nonb_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.oneTwoRoot_impossible_of_nonb": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.internal_pair_four_bound_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.upper_248_of_no_adjacent_one_two": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.one_two_configuration_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_internal_one_two_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.upper_bound_248": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.verified_interval_191_248": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.endpointMissingConfig_of_small_alpha": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.pair_family_overlap_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.small_pair_family_cases": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EndpointMissingConfig.three_isolated_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EndpointMissingConfig.matching_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.internal_pair_four_endpoint_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.adjacent_internal_alpha_sum_ge_four": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SquareIncidence.upper_247_of_endpoint_alpha": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.endpoint_missing_config_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.endpoint_alpha_ge_four": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.upper_bound_247": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.verified_interval_191_247": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "EndpointFourWitness.distinct": [
+      "propext"
+    ],
+    "EndpointFourWitness.induced": [
+      "propext"
+    ],
+    "EndpointFourWitness.endpoint_singleton_squares": [
+      "propext"
+    ],
+    "EndpointFourWitness.endpoint_singleton_count": [
+      "propext"
+    ],
+    "Snake9.missingAtNeighbor_of_alpha": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.missingConfig_of_adjacent_internal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.family_no_b_endpoint_alternative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.missing_ordinary_connection_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.isolated_neighbor_pair_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.good_index_endpoint_alternative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.three_missing_classification": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.three_good_indices_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.two_good_isolated_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OneTwoRoot.three_missing_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.adjacent_internal_one_three_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.alpha_one_internal_neighbor_ge_four": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.outer_matching_classification": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.twoMissingAtZero_of_alpha": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.RepeatedOuterConfig.same_hole": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.RepeatedOuterConfig.row_connection_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.pair_family_split_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.pair_family_matching_of_card_union": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.same_hole": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.row_neighbor_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MiddleMatchingConfig.middle_family_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MiddleMatchingConfig.middle_matching_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.two_neighbors_exhaust_resources": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.single_delta_resource_use_unique": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SingleDeltaConfig.selected_outer_k": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.selected_flip_forbidden": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.two_layer_saturation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.row_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.toDense": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.LocalDenseRows.isolated_endpoint_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DenseRowConfig.isolated_endpoint_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DenseOuterConfig.isolated_endpoint_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.row_connection_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.c_connection_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.d_connection_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.left_count_present": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.right_count_present": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.outer_zero_delta_count_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.outer_one_delta_count": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.one_delta_resource_shape": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.zero_delta_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.one_delta_remainder_shape": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.RepeatedOuterConfig.outer_matching": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SingleDeltaConfig.ck_resource_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SingleDeltaConfig.middle_ij_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SingleDeltaConfig.middle_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SingleDeltaConfig.fresh_row_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SingleDeltaConfig.triple_not_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SingleDeltaConfig.impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.single_delta_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.double_delta_cases": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.mirror": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.opposite_delta_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.missing_ordinary_pair_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.missing_ordinary_quad_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.StarOuterConfig.missing_quad_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.extension_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.special_extension_missing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.left_pair_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.absent_pair_a": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.shared_finite_classification": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.left_hole_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.right_hole_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.row_window_endpoint_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.ordinary_b_absent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.isolated_side_saturation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.missing_ordinary_pair_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.missing_ordinary_quad_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.mirror": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.isolated_endpoint_group_of_partners": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.common_hole_rr_cases": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.common_hole_cd_three_isolated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.common_hole_double_star_three_isolated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.three_active_endpoint_groups_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.ordinary_pair_and_isolated_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.two_ordinary_missing_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.good_row_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.isolated_endpoint_group_of_c_partner": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.isolated_endpoint_group_of_d_partner": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.ordinaryHoleVertex_bits": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.active_ne_ordinaryHoleVertex": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.four_endpoint_finsets_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.endpoint_demand_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.finite_cases": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.nonlow_outside_two": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.StarOuterConfig.residual_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.right_hole_pair_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.missing_right_c_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.missing_right_core_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.missing_right_two_rows_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.two_clean_indices": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.clean_isolated_good": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.missing_right_family_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cx_B_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.dx_B_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cy_A_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.dy_A_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.A_B_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cross_pair_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.switch_left_hole_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.switch_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.nonlow_two_ordinary_bits": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.central_ladder_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cd_ce_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.mirror_good_row": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cd_ce_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cd_de_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.core_internal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.ce_de_adex_selected": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.ce_de_cde_selected": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.central_c_pair_selected": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.ce_de_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.partial_side_saturation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.partial_c_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.partial_d_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.missing_d_row_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cx_dy_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.missing_d_row_endpoint_of_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.crossed_d_pair_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cy_dx_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cross_c_core_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cross_c_two_rows_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.dr_xy_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.cr_xy_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.switch_family_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.B_xy_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.A_xy_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.SharedOuterConfig.impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.repeated_outer_middle_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.repeated_three_twos_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.normalize_five_vertex_window": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.normalize_three_twos_to_distinct_window": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.normalize_three_twos": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.remaining_double_delta_cases": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.middle_restrictions": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.all_active_endpoint_groups_false": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.ordinary_c_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.missing_d_endpoint_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.missing_c_endpoint_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.both_middle_endpoint_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.active_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CommonHoleConfig.impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.three_endpoint_images_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.star_outer_small_endpoint_count": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.StarOuterConfig.endpoint_resource_count": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.StarOuterConfig.impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.remaining_ordinary_case": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.StarLeftConfig.missing_pair_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.StarLeftConfig.missing_e_endpoint_group": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MixedOuterConfig.isolated_side_saturation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.outside_edge_two_isolated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.fork_family_two_isolated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.two_outside_edges_three_isolated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MixedOuterConfig.partner_alternative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MixedOuterConfig.isolated_endpoint_group_of_partners": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MixedOuterConfig.isolated_endpoint_group_of_c_partner": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MixedOuterConfig.isolated_endpoint_group_of_d_partner": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MixedOuterConfig.clean_touched": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MixedOuterConfig.isolated_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.two_edge_endpoint_demand": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.isolated_ordinary_resource_count": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.StarLeftConfig.missing_ordinary_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.MixedOuterConfig.impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.nonlow_outside_two": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.missing_clean_quad_low": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.no_clean_missing_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.middle_hole_forced": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.incident_middle_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.star_d_middle_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.star_c_middle_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.incident_j_middle_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.common_missing_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.EqualOuterPairConfig.impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.DistinctOuterConfig.remaining_unequal_ordinary_case": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.disjoint_bad_isolated_family": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.disjoint_good_rows_or_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.disjoint_one_ordinary_demand": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.ordinary_two_edge_demand": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.disjoint_ordinary_endpoint_demand": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.disjoint_impossible": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.OrdinaryOuterConfig.shared_config": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.normalize_three_twos_to_shared": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.alpha_sequence_cost": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.upper_245_of_no_three_twos": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.no_three_consecutive_internal_twos": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.upper_bound_245": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.verified_interval_191_245": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.alpha223_sequence_cost": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.upper_244_of_no_two_two_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "status": "success",
+  "completed_utc": "2026-10-15T13:57:07.419853+00:00"
+}

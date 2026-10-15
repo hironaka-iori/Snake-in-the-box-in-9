@@ -24,19 +24,28 @@ Research checkpoint: 15 October 2026.
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
-Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact proof gaps, and search limitations. The [paper](outputs/snake9_research.tex) contains mathematical exposition, proofs, explicit transition sequences, and references. It deliberately keeps implementation identifiers outside the paper.
+Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact proof gaps, and search limitations. The [paper](paper/snake9_research.tex) contains mathematical exposition, proofs, explicit transition sequences, and references. It deliberately keeps implementation identifiers outside the paper.
+
+## Repository structure
+
+- `paper/`: all maintained LaTeX sources, including the main paper and the collaborator's DFS report.
+- [milestones/](milestones/README.md): separate folders for each research task, its status, notes, and dedicated new artifacts.
+- `work/final_lean/`: shared standard-library Lean project, including the new DFS modules.
+- `work/spectral/`: shared mathlib-dependent proofs and reproduction tools.
+- `outputs/`: historical machine-readable evidence at stable reproduction paths.
+- `othercontributors/`: locally supplied contributions awaiting comparison or integration.
 
 ## Files
 
-- `outputs/snake9_research.tex`: current manuscript, with authors Iori Hironaka and Tommy Ma.
-- `work/final_lean/`: authoritative standard-library proof project, with 18 modules.
+- `paper/snake9_research.tex`: current manuscript, with authors Iori Hironaka and Tommy Ma.
+- `work/final_lean/`: authoritative standard-library proof project, with the maintained core and integrated DFS modules.
 - `work/spectral/`: authoritative mathlib-dependent bounds 245, 247, 248, 251, 254, and 255, with reproduction instructions.
 - `work/spectral/stronger/`: 150 maintained geometric, classification, and aggregate proof modules.
 - `RESEARCH_LEDGER.md`: continuing research status, evidence, and unresolved directions.
 - `work/*.py`: independent verification and experimental search programs.
 - `work/bank9.json`: 131 nine-dimensional examples extracted from the cited published dataset.
 - `outputs/*.json`: witness data and recorded experimental results.
-- `outputs/*investigation.md`, `outputs/trend_hypothesis.md`: detailed research notes.
+- `outputs/*investigation.md`, `milestones/01-foundations/trend_hypothesis.md`: detailed research notes.
 - `outputs/*lean-build.log`: proof-checking evidence from the local research environment.
 
 Old PDF exports, compiled proof caches, large upstream downloads, installed dependencies, and local workspace metadata are excluded. The LaTeX source is the current paper. Older notes can refer to local ZIP snapshots that are not needed to use this repository.
@@ -101,19 +110,19 @@ The published 191-edge witness and bank derive from [Orland et al., version 3](h
 
 ## Joint construction experiments
 
-A checked decomposition of published bank example 0 supplies compatible Q8 paths of 96 and 94 edges, whose join has 191 edges. The new joint model varies both paths. Its 42 small-cube exhaustive controls and fixed 191-edge benchmark passed. The 196-, 197-, and hinted 192-edge searches each returned UNKNOWN after 120 seconds. See [the joint investigation](outputs/joint_layer_investigation.md) for reproduction and exact scope. The bounds and conjecture are unchanged.
+A checked decomposition of published bank example 0 supplies compatible Q8 paths of 96 and 94 edges, whose join has 191 edges. The new joint model varies both paths. Its 42 small-cube exhaustive controls and fixed 191-edge benchmark passed. The 196-, 197-, and hinted 192-edge searches each returned UNKNOWN after 120 seconds. See [the joint investigation](milestones/02-layer-constructions/joint_layer_investigation.md) for reproduction and exact scope. The bounds and conjecture are unchanged.
 
 ## One-singleton structural restriction
 
-A new checked theorem restricts the two path continuations at a one-singleton configuration under explicit internal-vertex premises: they must use different coordinates of the exceptional pair. A separate Lean-checked example is a 60-vertex forest of 14 paths inside the radius-three ball, with all selected radius-two vertices of degree two and exactly one singleton square at zero. It shows why these local constraints alone cannot prove endpoint proximity. See [the local investigation](outputs/low_singleton_investigation.md). No numerical bound changed.
+A new checked theorem restricts the two path continuations at a one-singleton configuration under explicit internal-vertex premises: they must use different coordinates of the exceptional pair. A separate Lean-checked example is a 60-vertex forest of 14 paths inside the radius-three ball, with all selected radius-two vertices of degree two and exactly one singleton square at zero. It shows why these local constraints alone cannot prove endpoint proximity. See [the local investigation](milestones/04-singleton-geometry/low_singleton_investigation.md). No numerical bound changed.
 
 ## Latest experimental lead
 
-Seven additional ball-model records test the normalized one-singleton configuration at radii four through six. The radius-five forest model is solver-infeasible with at most three interior endpoints and feasible with four. These exclusions are **not Lean-certified**. The [local investigation](outputs/low_singleton_investigation.md) records the model, all outcomes, reproduction command, and the geometric reduction still required. The verified bounds remain unchanged.
+Seven additional ball-model records test the normalized one-singleton configuration at radii four through six. The radius-five forest model is solver-infeasible with at most three interior endpoints and feasible with four. These exclusions are **not Lean-certified**. The [local investigation](milestones/04-singleton-geometry/low_singleton_investigation.md) records the model, all outcomes, reproduction command, and the geometric reduction still required. The verified bounds remain unchanged.
 
 ## Exhaustive DFS construction experiments
 
-A standalone C search (`work/snake_dfs.c`, controls in `work/dfs_controls.py`) extends the endpoint regrowth experiments. With the first 112 vertices of either end of every bank snake fixed, no 192-edge extension exists; all 262 runs were exhausted. Internal windows of up to 80 vertices almost always have a unique filling. Because Q9 is bipartite, an internal replacement alone can never yield 192 edges. A random sample of 528 million combined window-and-end moves found nothing longer, and the known 98-edge Q8 snake has no other optimal completion after freeing 59 of its vertices. Except where marked as Lean-checked below, these are uncertified exclusions in restricted families. See [the DFS investigation](outputs/dfs_investigation.md). No bound changed.
+A standalone C search (`work/snake_dfs.c`, controls in `work/dfs_controls.py`) extends the endpoint regrowth experiments. With the first 112 vertices of either end of every bank snake fixed, no 192-edge extension exists; all 262 runs were exhausted. Internal windows of up to 80 vertices almost always have a unique filling. Because Q9 is bipartite, an internal replacement alone can never yield 192 edges. A random sample of 528 million combined window-and-end moves found nothing longer, and the known 98-edge Q8 snake has no other optimal completion after freeing 59 of its vertices. Except where marked as Lean-checked below, these are uncertified exclusions in restricted families. See [the DFS investigation](milestones/08-exhaustive-search/dfs_investigation.md). No bound changed.
 
 ## Kernel-checked search (Lean)
 
@@ -139,6 +148,6 @@ Use a separate branch for each proof or experiment. Keep claims labelled as prov
 
 ## Integrated Boolean certificate investigation
 
-The separately developed radius-five experiment now has a Lean-checked contradiction for an explicit core of 567 clauses and 252 Boolean variables, using 398 derived clauses. All 41 recorded cycle cuts and the general degree/endpoint clause rules are also checked. The complete interpretation of the concrete input clauses as geometric conditions on a snake is unfinished. See [the certificate investigation](outputs/ball_certificate_investigation.md) for the evidence boundary and reproduction instructions.
+The separately developed radius-five experiment now has a Lean-checked contradiction for an explicit core of 567 clauses and 252 Boolean variables, using 398 derived clauses. All 41 recorded cycle cuts and the general degree/endpoint clause rules are also checked. The complete interpretation of the concrete input clauses as geometric conditions on a snake is unfinished. See [the certificate investigation](milestones/06-radius-five/ball_certificate_investigation.md) for the evidence boundary and reproduction instructions.
 
 This work does not improve the unconditional bound 245. Its earlier conditional 250 arithmetic is retained as historical motivation, rather than a current strengthening target. The most direct numerical target remains exclusion of the singleton-count pattern (2,2,3), which would discharge the existing conditional bound 244. The Boolean-certificate method may provide an independent route to local geometric exclusions.

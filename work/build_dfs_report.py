@@ -1,4 +1,4 @@
-"""Generate data fragments for outputs/dfs_report/dfs_report.tex.
+"""Generate data fragments for paper/dfs_report/dfs_report.tex.
 
 Runs small live demonstrations with work/snake_dfs and summarises the saved
 outputs/dfs_*.json records.  Rerun after long searches finish, then rebuild:
@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BIN = str(ROOT / 'work' / 'snake_dfs')
-OUT = ROOT / 'outputs' / 'dfs_report'
+OUT = ROOT / 'paper' / 'dfs_report'
 OUT.mkdir(exist_ok=True)
 bank = [e['vertex_sequence'] for e in json.loads((ROOT / 'work' / 'bank9.json').read_text())]
 
