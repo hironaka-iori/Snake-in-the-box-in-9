@@ -20,7 +20,7 @@ Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact pr
 ## Files
 
 - `outputs/snake9_research.tex`: current manuscript, with author Iori Hironaka.
-- `work/final_lean/`: authoritative standard-library proof project, with 14 modules.
+- `work/final_lean/`: authoritative standard-library proof project, with 15 modules.
 - `work/spectral/`: mathlib-dependent incidence bound 254, spectral bound 255, and reproduction instructions.
 - `work/*.py`: independent verification and experimental search programs.
 - `work/bank9.json`: 131 nine-dimensional examples extracted from the cited published dataset.
@@ -47,7 +47,7 @@ With the pinned mathlib checkout prepared as described in `work/spectral/README.
 python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-core
 ```
 
-The optional `--fresh-core` flag rebuilds a source-only copy of all 14 core modules before checking the incidence theorem.
+The optional `--fresh-core` flag rebuilds a source-only copy of all current core modules before checking the incidence theorem.
 
 ## Reproduce the independent checks and searches
 
@@ -77,6 +77,10 @@ The source-data extraction program `work/verify_bank.py` additionally needs the 
 ## Sources and attribution
 
 The published 191-edge witness and bank derive from [Orland et al., version 3](https://arxiv.org/html/2607.15270v3) and the [Math-AI-Caltech dataset](https://github.com/Math-AI-Caltech/Snake-in-the-Box). The manuscript distinguishes these published constructions from this project's deductions and experiments. The spectral argument uses [Huang's degree theorem](https://annals.math.princeton.edu/2019/190-3/p06) and its maintained mathlib proof. The first eight exact sequence terms are recorded in [OEIS A099155](https://oeis.org/A099155). Full references appear in the paper.
+
+## Joint construction experiments
+
+A checked decomposition of published bank example 0 supplies compatible Q8 paths of 96 and 94 edges, whose join has 191 edges. The new joint model varies both paths. Its 42 small-cube exhaustive controls and fixed 191-edge benchmark passed. The 196-, 197-, and hinted 192-edge searches each returned UNKNOWN after 120 seconds. See [the joint investigation](outputs/joint_layer_investigation.md) for reproduction and exact scope. The bounds and conjecture are unchanged.
 
 ## Collaboration
 

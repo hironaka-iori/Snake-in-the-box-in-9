@@ -44,6 +44,8 @@ Useful constructive directions are structurally different Q8 seeds, construction
 
 An alternative is an induced cycle on 194 vertices, which yields a 192-edge snake after deleting one vertex. Four restricted symmetric cycle searches returned UNKNOWN; asymmetric constructions remain available. None of these routes is guaranteed to succeed.
 
+The joint-search route now has a checked starting point: bank example 0 decomposes into compatible 96- and 94-edge Q8 paths, and its 191-edge join is Lean-checked. A new model varies both paths. It passed 42 exhaustive small-cube controls and the fixed 191-edge benchmark. Searches for (98,97), (98,98), and (96,95) each returned UNKNOWN at 120 seconds; the last used the checked pair as an unfixed hint. See `outputs/joint_layer_investigation.md`. These results establish no exclusion of any target. Consider diverse hints or multiple-crossing models rather than treating the timeouts as structural evidence.
+
 ## Priority 2: obtain a much stronger global restriction
 
 The square-count identity could support stronger bounds through aggregate constraints on empty and singleton squares. The universal local bound alpha >= 2 is already false, so any stronger statement needs a justified restriction or an aggregate correction.

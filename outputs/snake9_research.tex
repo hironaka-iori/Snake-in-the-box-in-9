@@ -391,6 +391,34 @@ Four structured searches for a 194-vertex coil used quotient-cube constructions 
 
 For the fixed eight-dimensional seed, searches for partner lengths 93, 92, and 91 at both endpoints were each unresolved after 30 seconds. A relaxation imposing only induced degree at most two admits 106 vertices in the permitted region, so that local degree condition alone is insufficient. Retaining 50 initial seed vertices in either orientation and exhaustively completing to length 98 recovered only the original completion, after 1,926,810 nodes in total. Retaining 42 vertices reached its twenty-million-node limit in both orientations. Neither result classifies all length-98 snakes.
 
+\subsection{Joint search with both layer paths variable}
+The fixed-seed obstruction does not exclude other pairs. A joint model therefore selects both projected paths, requires each to start at zero, and forbids every shared nonzero projected vertex. A circuit constraint with one auxiliary vertex enforces a single connected path in each layer; selected adjacent cube vertices must be consecutive in that path. The only cross-layer edge is then the intended join at zero.
+
+The two first coordinate directions must differ, since a common first neighbor would be an additional shared vertex. A common coordinate permutation may therefore send those directions to coordinates zero and one. With and without this symmetry restriction, all 42 tested cases in dimensions two and three agreed with independent exhaustive enumeration.
+
+\begin{proposition}[A checked starting pair]\label{prop:joint-seed}
+There are induced paths of lengths 96 and 94 in $\Q_8$ whose vertex sets intersect only at their common initial vertex. Their two-layer join has 191 edges.
+\end{proposition}
+\begin{proof}
+Use the two transition sequences in Appendix~\ref{app:joint-seed}, both starting at zero. They reconstruct 97 and 95 vertices. All $\binom{97}{2}=4\,656$ and $\binom{95}{2}=4\,465$ within-path pairs satisfy the distinctness and induced-adjacency conditions. Checking all $97\cdot95=9\,215$ cross pairs gives equality exactly for the two initial vertices. Reversing the first path and applying the two-layer joining criterion gives $96+94+1=191$ edges. These finite checks and the joining deduction have independent machine checks.
+\end{proof}
+
+The pair was extracted from the first example in the supplied bank: coordinate five changes only once, at edge index 96, when edge indices start at zero. Deleting that coordinate and applying a common translation and coordinate permutation gives the displayed pair. This is a decomposition of a published example, not a new record. Fixing both selected vertex sets to this pair gave a feasible solver control.
+
+Three searches then left both paths variable. Each used four workers, random seed 13, and a 120-second limit:
+\begin{center}
+\begin{tabular}{rrrrl}
+\toprule
+First length & Second length & Joined target & Starting hint & Status\\
+\midrule
+98 & 97 & 196 & none & \texttt{UNKNOWN}\\
+98 & 98 & 197 & none & \texttt{UNKNOWN}\\
+96 & 95 & 192 & 96,94 pair & \texttt{UNKNOWN}\\
+\bottomrule
+\end{tabular}
+\end{center}
+The hint in the last run does not fix either path. These timeouts establish no existence or impossibility result. The model and its search implementation have not been independently certified; the explicit starting pair and the mathematical joining criterion have been checked separately.
+
 \section{Scope of the results and remaining obligations}
 The preceding arguments establish explicit lower-bound witnesses, reductions of the optimality question, conditional constructions, and a universal upper bound. The numerical extrapolation remains conjectural. The single-crossing length constraints use the cited eight-dimensional maximum $a(8)=98$; this paper does not repeat the exhaustive proof of that result. No compatible pair yielding length 196 or 197 has been found. The restricted search results cover precisely the recorded seeds and construction families, and provide no global exclusion.
 
@@ -442,6 +470,19 @@ Start at the integer vertex 145, rather than zero, and use the following coordin
 1021501320 1871023158 1321531023 1581320
 \end{quote}
 The resulting ordered path has 138 distinct vertices. Its vertex at index 127 is zero, and its last vertex is 288. At zero, the only singleton coordinate square uses coordinates 2 and 3.
+
+\subsection{Compatible paths of lengths 96 and 94}\label{app:joint-seed}
+Both projected paths start at zero in $\Q_8$. For the first path use
+\begin{quote}\small\ttfamily
+0213047013 0412031052 1031243103 2672301324 1301237103\\
+1240541240 1342147314 2130214236 0135231421 032142
+\end{quote}
+For the second path use
+\begin{quote}\small\ttfamily
+1031240741 2401342145 3142130214 2367324123 0124132714\\
+2130450130 4120310721 0312431032 6523013241 3012
+\end{quote}
+The projected vertex sets have intersection $\{0\}$ only. Reverse the first sequence of vertices, place it in layer zero, cross at zero, and follow the second path in layer one.
 
 \begin{thebibliography}{9}\raggedright
 \bibitem{oeis} OEIS Foundation. \emph{A099155: Maximum length of a simple path with no chords in the $n$-dimensional hypercube}. \url{https://oeis.org/A099155}. Accessed 13 October 2026.

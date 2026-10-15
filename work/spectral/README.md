@@ -22,6 +22,6 @@ The spectral theorem proves at most 255 edges. The stronger bound 254 is now pro
 python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-core
 ```
 
-This driver checks the dependency version, rebuilds a fresh copy of all core sources, and checks the incidence theorem. Omit `--fresh-core` to reuse the normal core build after running `lake build`. The fresh build is recorded in `outputs/incidence-reproduction.log`. The theorem audit must contain no `sorryAx` or custom axioms. The exact optimum remains unresolved.
+This driver checks the dependency version, rebuilds a fresh copy of all current core sources, and checks the incidence theorem. Omit `--fresh-core` to reuse the normal core build after running `lake build`. The fresh build is recorded in `outputs/incidence-reproduction.log`. The theorem audit must contain no `sorryAx` or custom axioms. The exact optimum remains unresolved.
 
 The portable driver was run successfully for this checkpoint; see `outputs/spectral-portable-build.log` at the repository root.
