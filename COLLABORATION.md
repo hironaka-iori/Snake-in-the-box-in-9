@@ -1,14 +1,14 @@
 # Collaborator handoff
 
-Checkpoint: 15 October 2026. Manuscript author: Iori Hironaka.
+Checkpoint: 15 October 2026. Manuscript authors: Iori Hironaka and Tommy Ma.
 
 ## Where the investigation stands
 
-The working conjecture is **a(9) = 196**, with low confidence. For n = 3,...,8, subtracting 3*2^(n-3) from the known maxima leaves 1,1,1,2,2,2. Continuing the correction in doubling blocks of three predicts 196. An equally exact additive-block fit predicts 195. The first eight values therefore do not determine the ninth, and interpolation supplies no geometric proof.
+The exact optimum is unresolved; no candidate value receives privileged status. The earlier conjecture **a(9) = 196** has low confidence. For n = 3,...,8, subtracting 3*2^(n-3) from the known maxima leaves 1,1,1,2,2,2. Continuing the correction in doubling blocks of three predicts 196. An equally exact additive-block fit predicts 195. The first eight values therefore do not determine the ninth, and interpolation supplies no geometric proof.
 
-The fully Lean-checked global interval is now **191 <= a(9) <= 254**. The square-face bound is checked end to end using an anchored-incidence identity; the independent spectral argument still supplies the weaker bound 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
+The fully Lean-checked global interval is now **191 <= a(9) <= 245**. The strengthened square-face bound combines the incidence identity with endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. The earlier arguments still supply the weaker bounds 247, 248, 251, 254, and 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
 
-The strongest completed global bound is 254. The proof sums each square from its four corners, uses the checked singleton-square lemma, and injects selected two-edge corners into internal path vertices. The proof audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The exact optimum remains open.
+The most recent completed theorem is the global upper bound 245. Normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
 
 The earlier universal two-singleton-square claim for internal vertices is false. A checked 137-edge counterexample has zero at path index 127, endpoints 145 and 288, and exactly one singleton square, {0,4,8,12}. Its distance along the path from the nearer endpoint is ten. Thus simply excluding the first few vertices near the endpoints does not repair that universal assertion. This example does not exclude a stronger statement restricted to longest paths.
 
@@ -28,15 +28,41 @@ The checked estimates T >= v and W <= v-2 (for v >= 2) give v <= 255, hence at m
 
 This replaces the need to certify all original canonical-square bijections before establishing 254. The old conditional arithmetic module remains as a record of the first approach. The exact canonical census equalities have not separately been certified; they are unnecessary for the new theorem. The paper now presents the checked proof.
 
-Reproduce with `python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-core` after preparing the pinned dependency. The next priorities concern improving the mathematics beyond 254.
+Reproduce with `python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-core` after preparing the pinned dependency.
 
-## Immediate proof target: certify the radius-five obstruction
+## Completed milestone: adjacent singleton exclusion and bound 251
 
-The latest experiments sharpen the remaining split-arm case. A radius-four forest is feasible with at most two interior endpoints. At radius five, the solver reports infeasibility with budgets two and three, while finding a forest with budget four. Allowing cycles restores feasibility at budget two. The saved feasible assignments passed independent Python checks; the exclusions remain uncertified. See `outputs/low_singleton_investigation.md` and the seven accompanying JSON records.
+Write alpha(x) for the number of singleton coordinate squares at a selected vertex x. The new theorem states that two adjacent internal path vertices cannot both have alpha = 1. At a normalized internal vertex with selected unit neighbors a,b, a unique missing pair c,d forces every other eligible pair vertex to be selected. The continuation through a must use c or d; otherwise three distinct selected vertices would have degree at most one. Applying this geometry at the adjacent vertex yields either three disjoint groups each requiring an endpoint, or a selected eight-cycle. Both are impossible in an induced path.
 
-This is the most concrete next proof direction: obtain a checkable exclusion certificate for radius five and budget two, then prove that a genuine snake with a one-singleton root far from both endpoints maps into that model. The general-to-normalized geometric reduction is also unfinished. A certificate for the encoded model alone would leave this reduction to prove. These experiments do not change the global interval.
+Together with alpha >= 1, this gives alpha(x)+alpha(y) >= 3 for consecutive internal vertices. The checked finite-sum argument handles both endpoints and all short paths, and gives 3*m <= 2*T for a path with m edges. Substitution in the same incidence identity proves m <= 251. No solver exclusion is used in this proof.
 
-## Construction priority: find a longer construction outside the exhausted families
+The maintained proof sources are `work/spectral/stronger/`. Reproduce the full strengthened proof with `python work/spectral/verify_strengthened.py --mathlib-dir /path/to/mathlib`. This driver always builds a fresh source-only core, then the incidence theorem and all strengthening modules, and audits the final interval and general prefix theorem. Per-step logs and a SHA256 manifest are retained in its ignored build directory. The research directories retain explicitly frozen development snapshots, not alternative maintained proof projects.
+
+## Completed milestone: adjacent counts (1,2) and bound 248
+
+The next local theorem excludes adjacent internal singleton counts (1,2). After translating the count-one vertex to zero, its unique missing pair forces the root geometry as above. At its count-two neighbor, exactly two missing coordinate pairs remain. The proof treats all possibilities for their incidence with the other root arm: neither missing pair contains it, a missing pair uses the root's exceptional coordinate, two pairs use the arm, or one does and the other does not. Every branch forces more than two distinct path endpoints or a selected cycle. The finite-set classification and geometric contradictions are checked in Lean without solver premises.
+
+Consequently every consecutive internal pair has singleton-count sum at least four. Including both endpoints gives `4*m <= 2*T+2`; the same incidence identity then proves `m <= 248`. `UpperBound248.lean` combines this unconditional upper bound with the existing 191-edge witness. The reproduction command above now checks both strengthenings and the final 191--248 interval.
+
+## Completed milestone: endpoint count four and bound 247
+
+At an endpoint, translate its sole selected neighbor to unit coordinate a. Singleton squares correspond to missing pairs among the other eight coordinates. Three or fewer missing pairs leave either at least three isolated coordinates, or exactly two isolated coordinates and three disjoint missing edges. The first case creates three endpoint demands. The second forces selected triples that prevent the neighbor a from continuing, again creating too many endpoints. The normalization, finite-family classification, and geometric contradictions are all checked in Lean.
+
+Combining endpoint counts at least four with the internal pair sum at least four gives `4*m+10 <= 2*T`. The incidence identity proves `m <= 247`. A separate checked 120-edge path attains exactly four singleton squares at its first endpoint, so that local estimate is sharp. The reproduction driver checks the unconditional `verified_interval_191_247` and all preceding strengthening theorems.
+
+## Completed local strengthening: adjacent counts (1,3)
+
+`AdjacentOneThreeExclusion.lean` unconditionally excludes adjacent internal counts (1,3), so an internal neighbor of an internal count-one vertex has count at least four. A symbolic finite-set argument with three missing pairs produces either three disjoint endpoint groups, or two such groups and an additional group from isolated coordinates. Every step and arbitrary-index normalization is compiled with the standard foundations only. This milestone had41 maintained modules. The local theorem alone did not improve247, because an all-two internal count sequence still satisfied those adjacent restrictions.
+
+## Completed milestone: no three consecutive twos and bound 245
+
+`UpperBound245.lean` proves that three consecutive internal vertices cannot all have singleton count two, and derives the unconditional interval191--245. The proof first normalizes the five-vertex window into repeated- or distinct-coordinate shapes. The latter's outer missing families reduce through exceptional, common-hole, star, mixed, equal-pair, and disjoint-pair cases to ordinary pairs sharing one coordinate. A kernel-checked finite classification reduces this last case to20 labelled middle families, all excluded by explicit endpoint, degree, or cycle arguments. Every coordinate reduction is proved; no solver result or incomplete bank census is assumed.
+
+For v selected vertices and total singleton count T, a finite potential yields `3*T >= 7*v+5`. The incidence identity and `W <= v-2` give `T+35*v <= 9214`, hence `112*v <= 27637`. Therefore v<=246 and the edge count is at most245. The final theorem uses the original `Snake9.Snake` and the original checked191-edge witness. The project now has148 maintained strengthening modules.
+
+The next priorities concern improving beyond245 and finding a longer verified construction. Probes excluding adjacent counts (1,4) and two internal count-one vertices at path distance two remain uncertified observations. A checked (2,2) example prevents assuming every adjacent pair has sum at least five. The repeating count pattern (2,2,3) still meets the established local count restrictions and is a bottleneck for improving their aggregate consequence.
+
+## Priority 1: find a longer construction outside the exhausted families
 
 A verified 192-edge example would immediately disprove the candidate optimum 191. A 196-edge example would establish the conjectured lower bound, but still would not prove optimality.
 
@@ -52,7 +78,7 @@ An alternative is an induced cycle on 194 vertices, which yields a 192-edge snak
 
 The joint-search route now has a checked starting point: bank example 0 decomposes into compatible 96- and 94-edge Q8 paths, and its 191-edge join is Lean-checked. A new model varies both paths. It passed 42 exhaustive small-cube controls and the fixed 191-edge benchmark. Searches for (98,97), (98,98), and (96,95) each returned UNKNOWN at 120 seconds; the last used the checked pair as an unfixed hint. See `outputs/joint_layer_investigation.md`. These results establish no exclusion of any target. Consider diverse hints or multiple-crossing models rather than treating the timeouts as structural evidence.
 
-## Global proof priority: obtain a much stronger restriction
+## Priority 2: obtain a much stronger global restriction
 
 The square-count identity could support stronger bounds through aggregate constraints on empty and singleton squares. The universal local bound alpha >= 2 is already false, so any stronger statement needs a justified restriction or an aggregate correction.
 
@@ -60,11 +86,9 @@ All 131 published 191-edge examples have minimum local alpha at least three: 67 
 
 For exact optimality, proof-producing exhaustive computation or a structural classification would be needed if analytic bounds remain weak. The current global solver returned UNKNOWN at 192 edges, and supplies no impossibility certificate. Scaling it without a symmetry argument or certifiable decomposition is an uncertain long-term route.
 
-The latest local result narrows one-singleton configurations: under the explicitly stated internal-pair-vertex premises, the two continuations must use opposite coordinates of the exceptional pair. This is Lean-checked. A separate checked 60-vertex, 14-component forest satisfies all the radius-three degree and acyclicity requirements, so those requirements alone cannot exclude the remaining case. The endpoint-proximity conjecture still needs global connectivity or constraints involving higher-weight vertices; see `outputs/low_singleton_investigation.md` before pursuing a purely local proof.
-
 ## Suggested division of work
 
-- Proof contributor: certify the radius-five obstruction and the geometric reduction, while independently reviewing the completed incidence proof.
+- Proof contributor: independently review the completed incidence proof, then prove stronger aggregate inequalities or long-path restrictions.
 - Construction contributor: diverse Q8 seeds, multiple layer crossings, and asymmetric cycle constructions.
 - Extremal contributor: long-path restrictions on low-alpha configurations and aggregate square inequalities.
 
@@ -76,19 +100,24 @@ These are independent tasks suitable for separate branches. The current handoff 
 |---|---|
 | Current mathematical paper | `outputs/snake9_research.tex` |
 | All standard-library proofs | `work/final_lean/` |
-| Bounds 254 and 255 using pinned mathlib | `work/spectral/` |
+| Bounds 245, 247, 248, 251, 254 and 255 using pinned mathlib | `work/spectral/` |
+| Fresh 245 build and verified source hashes | `outputs/strengthened-reproduction-manifest.json`, `outputs/strengthened-reproduction.log` |
 | Fresh core and incidence build | `outputs/incidence-reproduction.log` |
 | Square investigation and its limitations | `outputs/square_investigation.md` |
 | Layer construction and restricted exclusions | `outputs/layer_investigation.md` |
 | Competing trend fits | `outputs/trend_hypothesis.md` |
-| Local restrictions and uncertified ball experiments | `outputs/low_singleton_investigation.md` |
 | Explicit witnesses and search records | `outputs/*.json` |
 | Published 131-example subset | `work/bank9.json` |
 
-The authoritative Lean sources are in `work/final_lean/`; do not create divergent proof copies in `outputs/`. The authoritative paper is the existing LaTeX source. Keep implementation filenames and theorem identifiers in technical notes rather than the paper. Retain Iori Hironaka in the author field. No old exported PDF is included because it predates the current source.
+The authoritative standard-library Lean sources are in `work/final_lean/`; maintained mathlib-dependent proofs are in `work/spectral/` and `work/spectral/stronger/`. Do not create divergent proof copies in `outputs/`. The authoritative paper is the existing LaTeX source. Keep implementation filenames and theorem identifiers in technical notes rather than the paper. Retain Iori Hironaka in the author field. No old exported PDF is included because it predates the current source.
 
 A search timeout, a blocked endpoint, and a restricted exclusion cannot establish global optimality. For every claimed theorem, state exactly which assumptions are discharged. The repository is a research checkpoint, and its documentation must retain the unresolved status until a matching construction and global upper bound are verified.
 
-## Publication status
+## Additional local research direction: certify the radius-five obstruction
 
-The manuscript, core Lean sources, mathlib-dependent proofs, reproduction instructions, witness data, and existing experiments are included. The manuscript compiles, its author is Iori Hironaka, and its authoritative source is in `E:\Snake-in-a-box`. During this handoff, all four primary witnesses and all 131 bank examples passed the independent all-pairs verification. No new research claim was promoted to a theorem. Further research is stopped at this handoff pending a continuation request.
+The latest experiments sharpen the remaining split-arm case. A radius-four forest is feasible with at most two interior endpoints. At radius five, the solver reports infeasibility with budgets two and three, while finding a forest with budget four. Allowing cycles restores feasibility at budget two. The saved feasible assignments passed independent Python checks; the exclusions remain uncertified. See `outputs/low_singleton_investigation.md` and the seven accompanying JSON records.
+
+This is the most concrete next proof direction: obtain a checkable exclusion certificate for radius five and budget two, then prove that a genuine snake with a one-singleton root far from both endpoints maps into that model. The general-to-normalized geometric reduction is also unfinished. A certificate for the encoded model alone would leave this reduction to prove. These experiments do not change the global interval.
+
+
+The upstream split-arm proof, radius-three forest certificate, and ball-search records remain included; see `outputs/low_singleton_investigation.md`. Their restricted solver exclusions are not premises of the 245 bound.

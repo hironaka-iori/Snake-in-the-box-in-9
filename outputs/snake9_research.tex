@@ -5,13 +5,16 @@
 \usepackage{amsmath,amssymb,amsthm,booktabs,longtable,array}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
+\usepackage{enumitem}
+\setlist{itemsep=3pt,topsep=5pt}
+\setlength{\emergencystretch}{2em}
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue,
+    linkcolor=black,
     urlcolor=blue,
-    citecolor=blue,
-    pdftitle={The Ninth-Dimensional Snake-in-the-Box Problem},
-    pdfauthor={Iori Hironaka}
+    citecolor=black,
+    pdftitle={Singleton-Square Bounds for the Nine-Dimensional Snake-in-the-Box Problem},
+    pdfauthor={Iori Hironaka and Tommy Ma}
 }
 
 \usepackage{microtype}
@@ -26,20 +29,21 @@
 \newtheorem{remark}[theorem]{Remark}
 \newcommand{\Q}{Q}
 \newcommand{\Ham}{d_{\mathrm H}}
-\title{The Ninth-Dimensional Snake-in-the-Box Problem:\\
-A Sequence-Based Conjecture, Verified Bounds, and Construction Obstructions}
-\author{Iori Hironaka}
-\date{14 October 2026}
+\title{Singleton-Square Bounds for the\\
+Nine-Dimensional Snake-in-the-Box Problem}
+\author{Iori Hironaka \and Tommy Ma}
+\date{15 October 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-The maximum length of an induced path in the binary hypercube is known through dimension eight, with values $1,2,4,7,13,26,50,98$. Subtracting a common exponential baseline gives two constant three-term correction blocks. Extrapolating their doubling suggests the independent conjecture $a(9)=196$. A second equally exact fit predicts 195, demonstrating the limited force of this numerical evidence. This paper presents proofs and explicit finite checks for a verified 191-edge witness, the reduction of optimality to exclusion of the next length, a counterexample to an endpoint-maximality argument, a cycle-deletion construction, the exact two-layer joining criterion, a spectral bound $a(9)\le255$ obtained from Huang's degree theorem, and a square-face argument refining the bound to 254. The spectral bound, explicit witnesses, local singleton-square lemma, and square-face upper bound all have independent machine checks. The square-face proof counts incidences from the four possible corners and bounds selected two-edge corners by the number of internal path vertices. Restricted searches exclude several construction families, including all two-vertex deletion neighborhoods of 131 published 191-edge examples. These restricted solver results have not been independently certified. No 192-edge improvement, 196-edge construction, or matching upper bound has been established. The exact ninth-dimensional optimum remains open in this investigation.
+Let $a(9)$ be the maximum number of edges in an induced path of the nine-dimensional binary hypercube. We establish the interval $191\le a(9)\le245$. The lower bound is the published construction of Orland et al., reproduced here as an explicit transition sequence. For the upper bound, we count coordinate squares meeting a path at exactly one vertex. A square-incidence identity converts lower bounds on these singleton counts into upper bounds on path length. We prove endpoint and adjacent-vertex restrictions, and exclude three consecutive internal vertices with singleton counts $2,2,2$. A finite potential argument then yields the bound 245. The construction and the unconditional upper bound have been formally checked in Lean under the same induced-path definition; the longest local classification is presented as a proof outline. We also give an endpoint-maximality counterexample, exact conditions for joining paths in two layers, and explicit compatible paths of lengths 96 and 94. Restricted construction searches and a numerical conjecture are distinguished from the proved bounds. A further potential argument gives a conditional upper bound of 244 if the local pattern $2,2,3$ can be excluded. The exact value of $a(9)$ remains unresolved.
 \end{abstract}
+\clearpage
 \setcounter{tocdepth}{1}
 \tableofcontents
 \clearpage
 
-\section{Problem, conventions, and prior observations}
+\section{Introduction and main results}
 \begin{definition}
 The graph $\Q_n$ has vertex set $\{0,1\}^n$, with adjacency $u\sim v$ when $\Ham(u,v)=1$. A snake of length $L$ is a sequence of distinct vertices $v_0,\ldots,v_L$ such that
 \[
@@ -53,64 +57,22 @@ v_0=0,\qquad v_i=v_{i-1}\mathbin{\oplus}2^{t_i}.
 \]
 Integers encode binary words; $\oplus$ is exclusive-or. Translation by exclusive-or with a fixed word, coordinate permutations, and reversal preserve the snake conditions.
 
-The exact values through dimension eight are listed in OEIS A099155 \cite{oeis}. Carlson and Hougen constructed a length-98 snake in dimension eight; the upper bound was established by exhaustive search by Östergård and Pettersson \cite{ostergard}. The universal bound $a(8)=98$ is used as a cited result here; this project checks a witness of that length but does not reproduce the complete eight-dimensional classification.
+The exact values through dimension eight are listed in OEIS A099155 \cite{oeis}. Carlson and Hougen constructed a length-98 snake in dimension eight; the upper bound was established by exhaustive search by Östergård and Pettersson \cite{ostergard}. The universal bound $a(8)=98$ is used as a cited result here; a witness of that length is reproduced in Appendix~\ref{app:witness}, while the exhaustive upper bound is taken from that reference.
 
-Orland et al. supply 191-edge snakes in dimension nine and a public collection of 131 inequivalent examples \cite{orland,data}. Optimality is unresolved. The collection is a discovered bank, with no proved global completeness. Its examples cannot be extended at their endpoints; that observation alone gives no maximum-length theorem.
+Orland et al. supply 191-edge snakes in dimension nine and a public collection of 131 inequivalent examples \cite{orland,data}. Optimality is unresolved. These examples are not known to exhaust all isometry classes of longest snakes. Its examples cannot be extended at their endpoints; that observation alone gives no maximum-length theorem.
 
-\paragraph{Evidence conventions.}
-Theoretical statements are accompanied by proofs, and explicit witnesses are checked against the defining pairwise conditions. Search outcomes are recorded separately: \textsc{Infeasible} covers the specified model and restrictions, while \textsc{Unknown} establishes neither existence nor nonexistence. The restricted search exclusions have not been independently certified. The results include standard consequences and independently checked reductions; no new mathematical record is claimed.
 
-\section{Independent hypothesis from the first eight terms}
-\begin{center}
-\begin{tabular}{rrrr}
-\toprule
-$n$ & $a(n)$ & $3\cdot2^{n-3}$ & correction\\
-\midrule
-3&4&3&1\\4&7&6&1\\5&13&12&1\\
-6&26&24&2\\7&50&48&2\\8&98&96&2\\
-\bottomrule
-\end{tabular}
-\end{center}
-The baseline coefficient is also recovered from successive differences within the two triples:
+
+
+\begin{theorem}[Main result]\label{thm:main}
+The maximum length of an induced path in $\Q_9$ satisfies
 \[
-\frac{7-4}{2^4-2^3}=\frac{13-7}{2^5-2^4}
-=\frac{50-26}{2^7-2^6}=\frac{98-50}{2^8-2^7}=\frac38.
+\boxed{191\le a(9)\le245.}
 \]
-Continuing the correction as $1,1,1,2,2,2,4,4,4,\ldots$ gives
-\begin{equation}\label{eq:model}
-\widehat a(n)=3\cdot2^{n-3}+2^{\lfloor(n-3)/3\rfloor},\qquad n\ge3.
-\end{equation}
-The terms at dimensions one and two are assigned separately as 1 and 2.
+\end{theorem}
+The lower bound is verified from an explicit published sequence in Theorem~\ref{thm:lower}. The upper bound is proved in Theorem~\ref{thm:upper245}. Its main ingredients are the positivity of every singleton-square count, an endpoint count of at least four, the exclusion of adjacent internal counts $(1,1)$, $(1,2)$ and $(1,3)$, and the exclusion of three consecutive internal counts $(2,2,2)$. The earlier bounds 254, 251, 248 and 247 appear as intermediate consequences of the same counting identity.
 
-\begin{conjecture}\label{conj:196}
-The maximum snake length in $\Q_9$ is $196$ edges.
-\end{conjecture}
-This is a low-confidence conjecture. It is selected as a concrete target for construction and refutation, not inferred as a consequence of the known values. Equation~\eqref{eq:model} predicts $3\cdot64+4=196$.
-
-\begin{proposition}[Model recurrence]
-For $n\ge3$, the model satisfies
-\[
-\widehat a(n+3)+6\cdot2^{\lfloor(n-3)/3\rfloor}=8\widehat a(n).
-\]
-\end{proposition}
-\begin{proof}
-Put $t=n-3$ and $c=2^{\lfloor t/3\rfloor}$. Since $\lfloor(t+3)/3\rfloor=\lfloor t/3\rfloor+1$, the left side is
-$24\cdot2^t+2c+6c=8(3\cdot2^t+c)$.
-\end{proof}
-At $n=6$ the recurrence predicts $8\cdot26-12=196$. This is the same evidence as the correction table, not an independent argument.
-
-\begin{proposition}[The supplied terms do not determine the ninth prediction]
-The model
-\[
-\widetilde a(n)=3\cdot2^{n-3}+1+\left\lfloor\frac{n-3}{3}\right\rfloor
-\qquad(n\ge3)
-\]
-agrees with every supplied term, after assigning the first two terms separately, and gives $\widetilde a(9)=195\ne196$.
-\end{proposition}
-\begin{proof}
-For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, the corrections are respectively 3 and 4. Direct substitution proves the claim.
-\end{proof}
-Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
+The exposition separates three kinds of evidence. Explicit constructions and the upper-bound theorems are formally verified. The longest finite classification is described as a proof outline, with its precise counting definitions included. Solver outcomes are reported only for their stated restricted search spaces and are not premises of the upper-bound proof. The conjectured value 196 arises from a separate numerical extrapolation and has no privileged role in the main theorem.
 
 \section{Exact targets for an optimality proof}
 \begin{lemma}[Prefix restriction]\label{lem:prefix}
@@ -172,64 +134,6 @@ If a 192-edge snake existed, its 191-edge prefix would admit extension by its re
 \end{proof}
 The premise concerns every 191-edge snake. Blocking the 131 recorded classes is insufficient until completeness of the collection is established. Repeated recovery of the same classes is not a completeness proof.
 
-\section{Cycles as an alternative construction route}
-\begin{theorem}[Deleting a cycle vertex]
-Deleting one vertex from an induced cycle of $C$ vertices leaves a snake of length $C-2$.
-\end{theorem}
-\begin{proof}
-Order the cycle as $v_0,\ldots,v_{C-1},v_0$ and delete $v_{C-1}$. Among the remaining vertices, the only surviving cycle edges join consecutive indices. The closing edge involved the deleted vertex; the induced-cycle hypothesis forbids all other edges. The resulting path has $C-1$ vertices and $C-2$ edges.
-\end{proof}
-\begin{corollary}
-An induced cycle with 194 vertices in $\Q_9$ would disprove the upper bound 191.
-\end{corollary}
-\begin{proof}
-Deletion gives a 192-edge snake.
-\end{proof}
-In particular, a 192-vertex coil gives only a 190-edge snake through this deletion operation. Edge and vertex counts cannot be interchanged.
-
-\section{The two-layer construction and its obstruction}
-Write a vertex of $\Q_9$ as $(v,b)$ with $v\in\Q_8$ and $b\in\{0,1\}$. Vertices in the same layer retain their original adjacency. Across the layers,
-\[
-(u,0)\sim(v,1)\quad\Longleftrightarrow\quad u=v.
-\]
-The same description defines the product of an arbitrary graph with a binary edge. Taylor discusses such lifts in \cite{taylor}.
-
-\begin{theorem}[Exact joining condition]\label{thm:join}
-Let $P=(p_0,\ldots,p_r)$ and $R=(q_0,\ldots,q_s)$ be induced paths in a graph. The ordered sequence
-\[
-(p_0,0),\ldots,(p_r,0),(q_0,1),\ldots,(q_s,1)
-\]
-is an induced path precisely when
-\[
-p_i=q_j\quad\Longleftrightarrow\quad i=r\ \hbox{and}\ j=0.
-\]
-When valid, its length is $r+s+1$.
-\end{theorem}
-\begin{proof}
-The layer labels ensure that vertices in different layers are distinct. Each individual path retains its distinctness and induced adjacency conditions. Every cross-layer edge is caused by equality of the base vertices. In the displayed order there is exactly one consecutive pair across layers, at $(p_r,0),(q_0,1)$. Therefore the induced condition requires exactly the stated equality and forbids all other equalities. These conditions also suffice, since all possible pairs have been covered. The vertex count is $(r+1)+(s+1)$, hence the edge count is $r+s+1$.
-\end{proof}
-
-\begin{corollary}[Single-crossing length constraints]
-Assume the known bound $a(8)=98$. A single-crossing snake in $\Q_9$ has length at most 197. Length 196 requires layer lengths $(98,97)$ or $(97,98)$; length 197 requires $(98,98)$.
-\end{corollary}
-\begin{proof}
-The two layer segments are eight-dimensional snakes. Thus $r,s\le98$ and $L=r+s+1$. For $L=196$, $r+s=195$ forces the two possibilities; for $L=197$, both upper bounds must be attained.
-\end{proof}
-\begin{theorem}[Integer realization of the layer construction]
-The map $J(u,b)=u+256b$, for $0\le u<256$ and $b\in\{0,1\}$, is injective and preserves adjacency in both directions between $\Q_8\mathbin{\square}K_2$ and the integer encoding of $\Q_9$. Consequently, compatible layer paths of lengths 98 and 97 give a 196-edge snake under the same definition as the verified witness. Compatible paths of lengths 98 and 98 give a 197-edge snake and would refute the conjectured upper bound 196.
-\end{theorem}
-\begin{proof}
-The intervals $[0,255]$ and $[256,511]$ are disjoint, so equality of images forces equality of both components. Flipping a coordinate $k<8$ preserves the layer, because
-\[
-(u+256)\mathbin{\oplus}2^k=(u\mathbin{\oplus}2^k)+256,
-\qquad u\mathbin{\oplus}2^k<256.
-\]
-Flipping coordinate 8 exchanges $u$ and $u+256$. These are all nine possible flips. Thus adjacency within a layer is exactly eight-dimensional adjacency, while adjacency between layers requires equal base vertices. Compose this map with Theorem~\ref{thm:join}. The lengths become $98+97+1=196$ and $98+98+1=197$. Conversely, every unwanted equality between base vertices creates a nonconsecutive cross-layer edge, so the compatibility condition remains necessary after applying $J$.
-\end{proof}
-This argument covers snakes that cross a chosen coordinate exactly once. A general snake can cross every coordinate repeatedly. Its intersection with a layer can then be a disjoint union of paths, so bounding that entire intersection by a single-snake length would be invalid.
-
-The length-98 seed in Appendix~\ref{app:witness} is taken from \cite{records} and independently checked against all pairwise conditions. Two tests were performed. First, truncate either endpoint of an isometric copy to length 97, choose both joining endpoints, and enumerate all $8!$ coordinate permutations. Translation is forced by identifying the chosen endpoints. The $2\cdot2\cdot2\cdot8!=322\,560$ placements, counted with possible duplication, have minimum overlap 15. Theorem~\ref{thm:join} requires overlap one. Second, a constraint solver searched for an arbitrary length-97 partner avoiding every seed vertex except the chosen endpoint. Both endpoint instances were infeasible. These restricted computational exclusions have not been independently certified; other length-98 seeds and multiple-crossing constructions remain possible.
-
 \section{A global upper bound}
 \begin{theorem}[Huang's degree theorem]\label{thm:huang}
 Let $n\ge1$. If $H\subseteq\{0,1\}^n$ and $|H|>2^{n-1}$, then the subgraph induced by $H$ has a vertex of degree at least $\sqrt n$.
@@ -271,7 +175,7 @@ Every snake in $\Q_9$ has at most 255 edges. Consequently,
 \begin{proof}
 A snake of at least 256 edges would have at least 257 vertices, exceeding $2^8$. Theorem~\ref{thm:huang} would give an induced degree of at least $\sqrt9=3$, contradicting the preceding degree bound. Combine the upper bound with Theorem~\ref{thm:lower}.
 \end{proof}
-The bound is a standard consequence of Huang's theorem. Its contribution here is a checked global guarantee and an explicit connection between the two cube representations. It does not distinguish 191, 195, or 196.
+The bound is a standard consequence of Huang's theorem. The square-incidence arguments below give a stronger bound.
 
 
 \section{Square faces and the role of endpoints}
@@ -351,7 +255,7 @@ For each fixed coordinate pair, the four translations taking $x$ to the corners 
 \begin{equation}\label{eq:anchored-square-count}
 2E+4T+144v=36\,864+4W.
 \end{equation}
-Here every selected vertex contributes four times for each coordinate pair to the vertex-incidence sum.
+Here every selected vertex contributes four times for each coordinate pair to the vertex-incidence sum. The quantity $E$ counts each empty square once from each of its four corners, so it is four times the number of distinct empty squares.
 
 Lemma~\ref{lem:one-square} implies $T\ge v$. A nonzero contribution to $W$ requires two distinct selected neighbors of its selected center, so the center is an internal path vertex. Since an induced path has degree at most two, at most one unordered coordinate pair contributes at any such center. There are $v-2$ internal vertices, hence $W\le v-2$. Using $E\ge0$ in~\eqref{eq:anchored-square-count},
 \[
@@ -360,8 +264,602 @@ Lemma~\ref{lem:one-square} implies $T\ge v$. A nonzero contribution to $W$ requi
 \]
 Thus $v\le255$, and the number of edges is $v-1\le254$.
 \end{proof}
-\paragraph{Verification status.}
-The explicit counterexample, Lemma~\ref{lem:one-square}, the local identity~\eqref{eq:local-square-identity}, its global summation~\eqref{eq:anchored-square-count}, and the upper bound 254 are independently machine-checked. The upper bound is derived from the same induced-path definition used for the 191-edge witness; no census equations or optimality assumptions are supplied as premises. The earlier spectral bound 255 provides an independent, weaker check. No claim of a new best published upper bound is made. Neither a 196-edge construction nor a matching upper bound has been obtained.
+
+
+\section{Adjacent singleton minima and the bound 251}
+This section strengthens the preceding incidence estimate by restricting how vertices with exactly one singleton square can occur along a path. The 137-edge counterexample still shows that such a vertex can occur internally. The additional restriction concerns two adjacent internal vertices, rather than either vertex in isolation.
+
+Fix an induced path with vertex set $S$. In this section, call a vertex selected when it belongs to $S$, and abbreviate $e_a$ by $a$, $e_a+e_b$ by $ab$, and similarly for longer coordinate sums. All additions are in $\mathbb F_2^9$. Within a missing-pair family, the abbreviation $ij$ instead denotes the unordered coordinate pair $\{i,j\}$; in a vertex expression it denotes the sum of the corresponding unit vectors. Coordinate letters in a displayed sum are distinct unless stated otherwise. Every selected vertex has at most two selected neighbors, and the only selected vertices with at most one selected neighbor are the two endpoints, provided the path has an edge. The selected graph contains no cycle.
+
+\begin{lemma}[Restriction on a continuation]\label{lem:singleton-arm}
+Suppose that zero is an internal selected vertex with selected neighbors $a,b$, and that its unique singleton square uses coordinates $c,d$. Then $a,b,c,d$ are distinct. If $ai$ is selected and $i\ne a$, then $i\in\{c,d\}$. The analogous assertion holds with $a,b$ interchanged.
+\end{lemma}
+\begin{proof}
+A square involving coordinate $a$ or $b$ is not a singleton at zero, so $c,d$ avoid $a,b$. Put $U=\{0,\ldots,8\}\setminus\{a,b\}$. The unit vertices indexed by $U$ are absent, and every pair vertex indexed by two distinct elements of $U$ is selected except $cd$.
+
+If $i=b$, the vertices $0,a,ab,b$ form a selected four-cycle. Thus a selected continuation $ai\ne0$ has $i\in U$. Suppose that $i\notin\{c,d\}$. There are four coordinates $j$ outside $\{a,b,i,c,d\}$; choose all four. Each $ij$ is selected. For any $k\in U\setminus\{i,j\}$, all three pair vertices $ij,ik,jk$ are selected: neither $i$ nor $j$ is $c$ or $d$, so none of these pairs can be the exceptional pair $cd$. Hence $ijk$ is absent, since otherwise it would have three selected neighbors.
+
+Consequently, the only possible selected neighbors of $ij$ are $aij$ and $bij$. The four vertices $aij$ are distinct neighbors of the selected vertex $ai$, which already has the selected neighbor $a$. At most one $aij$ is selected. For at least three of the chosen coordinates $j$, the selected vertex $ij$ therefore has at most one selected neighbor. These are three distinct endpoints, a contradiction. This also covers a selected neighbor $a$ that might initially have been an endpoint: the existence of a further selected neighbor $ai\ne0$ itself makes $a$ internal.
+\end{proof}
+
+\begin{theorem}[No adjacent internal singleton minima]\label{thm:no-adjacent-singletons}
+If $x,y$ are adjacent internal vertices of an induced path in $\Q_9$, then they cannot both satisfy $\alpha_S(x)=\alpha_S(y)=1$.
+\end{theorem}
+\begin{proof}
+Assume otherwise and translate $x$ to zero. Write $y=a$, let $b$ be the other selected neighbor of zero, and let $ac$ be the other selected neighbor of $a$. The coordinates $a,b,c$ are distinct: equality $a=c$ repeats zero, while $b=c$ creates the selected four-cycle $0,a,ab,b$.
+
+By Lemma~\ref{lem:singleton-arm}, the unique singleton square at zero uses a pair $\{c,d\}$, where $d$ avoids $a,b,c$. Apply the same lemma after translating $a$ to zero. Its selected neighbors then have coordinates $a,c$, and the continuation through the original zero to $b$ has second coordinate $b$. Thus its unique singleton square uses $\{b,e\}$, where $e$ avoids $a,b,c$. The coordinates $d,e$ may coincide. The two singleton-square hypotheses give the following complete pair information:
+\begin{itemize}
+\item Every pair $ij$ with $i,j\notin\{a,b\}$ is selected except $cd$.
+\item Every vertex $aij$ with $i,j\notin\{a,c\}$ is selected except $abe$.
+\end{itemize}
+
+Let $R$ be the coordinates outside $\{a,b,c,d,e\}$. There are at least four such coordinates. For $k\in R$, set $t_k=abk$, which is selected by the second pair statement. We first classify all possible selected neighbors of $t_k$.
+
+The vertices $ak$ and $ab$ are absent, since the selected vertex $a$ already has selected neighbors $0,ac$. The vertex $bk$ is absent by Lemma~\ref{lem:singleton-arm} at zero. The same lemma at the translated vertex $a$ shows that $ack$ is absent. These conclusions do not assume that $b$ or $ac$ is internal: a selected continuation would make the corresponding vertex internal, so the lemma still rules it out.
+
+For any coordinate $l\notin\{a,b,c,e,k\}$, the three vertices $abk,abl,akl$ are selected. They are distinct neighbors of $abkl$, which must therefore be absent. Enumerating the nine possible coordinate flips now shows that the only possible selected neighbors of $t_k$ are
+\[
+abck\quad\hbox{and}\quad abek.
+\]
+In particular, if $t_k$ is internal, both are selected. Whenever $abek$ is selected, the vertex $bek$ is absent: otherwise $abek$ would have the three distinct selected neighbors $abk,aek,bek$.
+
+\paragraph{Case $e\ne d$.}
+For each $k\in R$, the pair $ek$ is selected. Choose three distinct coordinates $k$ in $R$. The three sets $\{t_k,ek\}$ are pairwise disjoint: every vertex in one set contains its corresponding coordinate $k$ and contains neither of the other two chosen coordinates. Since a path has only two endpoints, at least one of these sets consists entirely of internal vertices. Fix its coordinate $k$.
+
+The internal vertex $t_k$ forces $abek$ to be selected and hence $bek$ to be absent. We claim that the selected vertex $ek$ can then have only the selected neighbor $aek$. Flipping $e$ or $k$ gives an absent unit vertex. Flipping $b$ gives the absent $bek$. For any other coordinate $l\notin\{a,b,e,k\}$, the three pair vertices $ek,el,kl$ are selected: neither $e$ nor $k$ belongs to the exceptional pair $\{c,d\}$. Thus $ekl$ is absent because it would have three selected neighbors. Only the flip in coordinate $a$ remains. This makes $ek$ an endpoint, contradicting its choice as internal.
+
+\paragraph{Case $e=d$.}
+For $k\in R$, the vertices $t_k,ck,dk$ are all selected. Choose three distinct coordinates in $R$. The corresponding three sets $\{t_k,ck,dk\}$ are pairwise disjoint by the same coordinate argument. One of these sets therefore contains no endpoint. Fix its coordinate $k$.
+
+Since $t_k$ is internal, both $abck$ and $abdk$ are selected, and the preceding degree argument makes $bdk$ absent. The only possible selected neighbors of $dk$ are now $adk$ and $cdk$. Indeed, its unit neighbors are absent, $bdk$ is absent, and any triple $dkl$ with $l\notin\{a,b,c,d,k\}$ has the three selected pair neighbors $dk,dl,kl$. Since $dk$ is internal, $cdk$ is selected.
+
+Likewise, the only possible selected neighbors of $ck$ are $bck$ and $cdk$: the candidate $ack$ is absent by the continuation lemma, and every remaining triple outside the exceptional coordinate $d$ has three selected pair neighbors. Since $ck$ is internal, $bck$ is selected. The second pair statement also gives the selected vertex $adk$. We have therefore obtained the selected eight-cycle
+\[
+abk,\ abck,\ bck,\ ck,\ cdk,\ dk,\ adk,\ abdk,\ abk.
+\]
+Its eight vertices are distinct because $a,b,c,d,k$ are distinct, and every displayed edge flips one coordinate. A path cannot contain this cycle. Both cases are contradictory, proving the theorem.
+\end{proof}
+
+\begin{lemma}[Aggregate singleton count]\label{lem:aggregate-singleton}
+For a snake with $m\ge1$ edges, let $T=\sum_{i=0}^{m}\alpha_S(v_i)$. Then $2T\ge3m$.
+\end{lemma}
+\begin{proof}
+Write $\alpha_i=\alpha_S(v_i)$. Lemma~\ref{lem:one-square} gives $\alpha_i\ge1$. If $m=1$, then $2T\ge4\ge3m$. For $m\ge2$, each pair of adjacent internal vertices has singleton counts summing to at least three by Theorem~\ref{thm:no-adjacent-singletons}. The first and last adjacent pairs each have sum at least two. Summing all $m$ adjacent pairs gives
+\[
+2T-\alpha_0-\alpha_m
+=\sum_{i=0}^{m-1}(\alpha_i+\alpha_{i+1})
+\ge 3m-2.
+\]
+Adding $\alpha_0+\alpha_m\ge2$ proves $2T\ge3m$.
+\end{proof}
+
+\begin{theorem}[Verified aggregate refinement]\label{thm:upper251}
+Every snake in $\Q_9$ has at most 251 edges. In particular,
+\[
+\boxed{191\le a(9)\le251.}
+\]
+\end{theorem}
+\begin{proof}
+A one-vertex path is immediate. Otherwise let $v=m+1\ge2$ be the vertex count. The anchored incidence identity~\eqref{eq:anchored-square-count}, together with $E\ge0$ and $W\le v-2$, gives
+\[
+140v+4T\le36\,856.
+\]
+Lemma~\ref{lem:aggregate-singleton} gives $4T\ge6(v-1)$, so
+\[
+146v\le36\,862<146\cdot253.
+\]
+Thus $v\le252$, hence $m\le251$. Combine this with Theorem~\ref{thm:lower}.
+\end{proof}
+
+
+
+\section{Adjacent singleton counts one and two: the bound 248}
+We retain the selected-vertex and coordinate-sum notation of the preceding section. A selected vertex with at most one selected neighbor will be called an endpoint in the argument below. There are at most two such vertices in an induced path, including the degenerate one-vertex case.
+
+\begin{theorem}[Exclusion of adjacent counts one and two]\label{thm:no-adjacent-one-two}
+If $x,y$ are adjacent internal vertices of an induced path in $\Q_9$, then $\alpha_S(x)=1$ and $\alpha_S(y)=2$ cannot hold simultaneously.
+\end{theorem}
+\begin{proof}
+Translate $x$ to zero and write $y=a$. As before, let $b$ be the other selected neighbor of zero and $ac$ the other selected neighbor of $a$. Lemma~\ref{lem:singleton-arm} shows that the unique missing pair at zero is $cd$, with $a,b,c,d$ distinct. Put
+\[
+U=\{0,\ldots,8\}\setminus\{a,b,c,d\},\qquad |U|=5.
+\]
+Let $F$ be the two missing unordered coordinate pairs at $a$. Since the selected neighbors of $a$ have directions $a,c$, each member of $F$ is a two-element subset of $\{b,d\}\cup U$. For distinct $i,j$ outside $\{a,c\}$, the vertex $aij$ is selected if and only if $\{i,j\}\notin F$. This is exactly the singleton-square definition after translation by $a$; the two missing pairs are distinct.
+
+Write $t_i=abi$ for $i\in U$, and also $t_d=abd$. Every pair vertex $ij$ with $i,j$ outside $\{a,b\}$ is selected except $cd$. For $i\in U$, the vertices $ai,ab$ are absent because $a$ already has selected neighbors $0,ac$, while $bi$ is absent by Lemma~\ref{lem:singleton-arm}. Thus the only possible selected neighbors of $t_i$ are $abci$ and
+\[
+abij\qquad\bigl(j\in\{d\}\cup(U\setminus\{i\})\bigr).
+\]
+For distinct $i,j\in\{d\}\cup U$ with at least one index in $U$, the selected pair $ij$ can have selected neighbors only $aij,bij$ and, when one index is $d$, possibly $cij$. To see this, its unit neighbors are absent. Any other triple neighbor has three selected pair neighbors and is therefore absent; the only possible failure of this three-neighbor argument involves the exceptional missing pair $cd$.
+
+We use four consequences of these observations.
+\begin{enumerate}
+\item If $t_i,t_j,aij$ are selected, then $abij$ is absent, because it would have these three distinct selected neighbors.
+\item If $t_i,t_j,abij$ are selected and $\{i,j\}\in F$, then $ij$ is an endpoint. Indeed, $aij$ is absent by membership in $F$, and $bij$ is absent because $abij$ already has selected neighbors $t_i,t_j$. The pair-neighbor classification leaves at most the single candidate $cij$.
+\item Suppose $h,i$ are distinct elements of $U$, $\{b,h\}\in F$, $\{h,i\}\notin F$, and $t_i,abhi$ are selected. Then $hi$ is an endpoint. The vertex $ahi$ is selected, so the two selected neighbors $t_i,ahi$ of $abhi$ force $bhi$ to be absent. The only possible selected neighbor of $hi$ is consequently $ahi$.
+\item Suppose $i\in U$, both $t_i,adi$ are selected, and the only possible selected neighbors of $t_i$ are $abci,abdi$. Then at least one of $t_i,ci,di$ is an endpoint. Otherwise both quads are selected. The vertex $aci$ is absent, since it would have the three selected neighbors $ac,ci,abci$. Also $bdi$ is absent, since $abdi$ already has selected neighbors $t_i,adi$. The internal pair $di$ then forces $cdi$ to be selected, and the internal pair $ci$ forces $bci$ to be selected. This gives the impossible selected eight-cycle
+\[
+t_i,\ abci,\ bci,\ ci,\ cdi,\ di,\ adi,\ abdi,\ t_i.
+\]
+This last observation uses no singleton-count-one assumption at $a$.
+\end{enumerate}
+
+\paragraph{Case 1: neither member of $F$ contains $b$.}
+All five $t_i$ and $t_d$ are selected. A non-endpoint $t_i$ needs a selected neighbor other than $abci$, hence some $abij$. Consequence 1 forces $\{i,j\}\in F$, and consequence 2 makes $ij$ an endpoint.
+
+Let $E$ consist of those pairs in $F$ whose pair vertices are endpoints, and set $k=|E|\le2$. These $k$ distinct pair vertices differ from all $t_i$, whose supports have size three. At most $2-k$ of the five $t_i$ are endpoints, so at least $3+k$ are not. Each of these indices lies in a member of $E$, but $k$ pairs cover at most $2k$ indices. Thus $3+k\le2k$, impossible for $k\le2$.
+
+\paragraph{Case 2: $\{b,d\}\in F$.}
+First suppose the other missing pair is $\{f,g\}$ and does not contain $b$. At least three indices $i\in U$ avoid $f,g$. For each such index, $t_i,adi$ are selected. Every possible $abij$ with $j\in U\setminus\{i\}$ is absent by consequence 1, since $t_i,t_j,aij$ are selected. Only $abci,abdi$ remain as possible selected neighbors. Consequence 4 gives an endpoint in each of the three sets $\{t_i,ci,di\}$.
+
+These sets are pairwise disjoint. Indeed, every vertex in the set indexed by $i$ contains coordinate $i$ and contains none of the other chosen indices. This would give at least three endpoints.
+
+Otherwise $F=\{\{b,d\},\{b,h\}\}$ with $h\in U$. For each of the four $i\in U\setminus\{h\}$, the only possible selected neighbors of $t_i$ are $abci,abdi,abhi$, and $t_i,adi$ are selected. If $abhi$ is selected, consequence 3 makes $hi$ an endpoint. If it is absent, consequence 4 supplies an endpoint among $t_i,ci,di$. The four sets $\{t_i,ci,di,hi\}$ are pairwise disjoint by the same coordinate argument, again impossible.
+
+\paragraph{Case 3: $\{b,d\}\notin F$, but $\{b,e\}\in F$ for some $e\in U$.}
+If the other missing pair is $\{b,h\}$, with $h\in U\setminus\{e\}$, consider the three indices $i\in U\setminus\{e,h\}$. The vertices $t_d,t_i,adi$ are selected, so consequence 1 excludes $abdi$. Every possible selected neighbor of $t_i$ other than $abci,abei,abhi$ is similarly excluded. If $t_i$ is not an endpoint, at least one of $abei,abhi$ is selected, and consequence 3 makes respectively $ei$ or $hi$ an endpoint. The three sets $\{t_i,ei,hi\}$ are pairwise disjoint, a contradiction.
+
+It remains that the other missing pair is $\{f,g\}$ and does not contain $b$. Put $U_0=U\setminus\{e\}$. Any $i\in U_0\setminus\{f,g\}$ has $t_i,t_d,adi,aei$ selected. Consequence 1 excludes $abdi$ and every other possible selected neighbor of $t_i$ except $abci,abei$. Hence either $t_i$ is an endpoint or $abei$ is selected; in the latter event consequence 3 makes $ei$ an endpoint. If at most one of $f,g$ lies in $U_0$, there are at least three pairwise disjoint endpoint-containing sets $\{t_i,ei\}$.
+
+The final possibility has distinct $f,g\in U_0$. The other two indices of $U_0$ already give two disjoint endpoint-containing sets. If $abfg$ is selected, consequence 2 gives the third endpoint $fg$, distinct from both sets. If $abfg$ is absent, the same two-neighbor argument applies also to $f$ and $g$: the only additional potential quad for either index was $abfg$. Consequently all four pairwise disjoint sets $\{t_i,ei\}$, for $i\in U_0$, contain endpoints. Both alternatives are impossible.
+
+The three cases exhaust every two-element missing-pair set $F$, proving the theorem. Reversing the orientation of the adjacent pair also excludes counts $(2,1)$.
+\end{proof}
+
+\begin{lemma}[Strengthened aggregate count]\label{lem:aggregate-four}
+For a snake with $m\ge1$ edges and total singleton count $T$, one has $4m\le2T+2$.
+\end{lemma}
+\begin{proof}
+Every singleton count is a positive integer. Theorems~\ref{thm:no-adjacent-singletons} and~\ref{thm:no-adjacent-one-two} therefore imply that the counts of any two adjacent internal vertices sum to at least four. For $m\ge2$, summing the $m$ adjacent-pair counts, with the first and last pairs bounded below by two, gives
+\[
+2T-\alpha_0-\alpha_m\ge4m-4.
+\]
+Since $\alpha_0+\alpha_m\ge2$, this proves $2T\ge4m-2$. If $m=1$, the universal lower bound $T\ge2$ proves the assertion directly.
+\end{proof}
+
+\begin{theorem}[Verified upper bound 248]\label{thm:upper248}
+Every snake in $\Q_9$ has at most 248 edges. Thus
+\[
+\boxed{191\le a(9)\le248.}
+\]
+\end{theorem}
+\begin{proof}
+The one-vertex path is immediate. For $v=m+1\ge2$, the same incidence estimate used for Theorem~\ref{thm:upper251} gives $140v+4T\le36\,856$. Lemma~\ref{lem:aggregate-four} gives $4T\ge8m-4=8v-12$. Therefore
+\[
+148v\le36\,868<148\cdot250.
+\]
+It follows that $v\le249$, so $m\le248$. The lower bound is Theorem~\ref{thm:lower}.
+\end{proof}
+
+
+
+\section{Endpoint singleton squares and the bound 247}
+\begin{theorem}[At least four singleton squares at an endpoint]\label{thm:endpoint-four}
+If $x$ is an endpoint of a snake in $\Q_9$ having at least one edge, then $\alpha_S(x)\ge4$.
+\end{theorem}
+\begin{proof}
+Translate $x$ to zero and let $a$ be its sole selected unit neighbor. Suppose, for contradiction, that its family $F$ of missing coordinate pairs has at most three members. Every member of $F$ is a two-element subset of the eight coordinates other than $a$. For distinct $i,j\ne a$, the pair vertex $ij$ is selected if and only if $\{i,j\}\notin F$.
+
+Call a coordinate isolated if it is different from $a$ and occurs in no member of $F$. The members of $F$ cover at most six coordinates, so there are at least two isolated coordinates. If $u,v$ are distinct isolated coordinates, then $uv$ is selected and has at most one selected neighbor, namely $auv$. Its unit neighbors are absent. For every other coordinate $k\notin\{a,u,v\}$, the three vertices $uv,uk,vk$ are selected, so $uvk$ is absent. Thus $uv$ is an endpoint.
+
+There cannot be three isolated coordinates $u,v,w$: the three distinct vertices $0,uv,uw$ would all be endpoints. Consequently there are exactly two isolated coordinates, say $u,v$. The other six coordinates, apart from $a$, must be covered by the at most three missing pairs. They are therefore covered by exactly three pairwise disjoint pairs. In particular, each coordinate $t\notin\{a,u,v\}$ has a unique partner $j$, with $\{t,j\}\in F$ and $j\notin\{a,u,v,t\}$.
+
+The selected vertices $0$ and $uv$ already account for the only two possible endpoints. Fix any $t\notin\{a,u,v\}$ and let $j$ be its partner. The selected pair $tu$ differs from both endpoints and is therefore internal. Its only possible selected neighbors are $atu$ and $tju$: for a third coordinate $k\notin\{a,t,u,j\}$, all three pair vertices $tu,tk,uk$ are selected, making $tuk$ absent. Both $atu,tju$ must therefore be selected. Applying the same argument to $tv$ forces $atv$ to be selected.
+
+It follows that $at$ is absent for every $t\notin\{a,u,v\}$, since otherwise it would have the three distinct selected neighbors $a,atu,atv$. Choose two distinct coordinates $r,s$ outside $\{a,u,v\}$. The preceding argument also gives the selected triples $aru,asu$, so $au$ is absent because its three neighbors $a,aru,asu$ would be selected. Likewise $av$ is absent, using $arv,asv$.
+
+All pair vertices $at$ with $t\ne a$ are now absent. Thus the selected vertex $a$ has only the selected neighbor zero and is itself an endpoint. The vertices $0,uv,a$ are distinct, giving a third endpoint and the required contradiction.
+\end{proof}
+
+\begin{lemma}[Aggregate count with endpoint contributions]\label{lem:aggregate-endpoints}
+For a snake with $m\ge1$ edges and total singleton count $T$, one has $4m+10\le2T$.
+\end{lemma}
+\begin{proof}
+For $m=1$, both endpoints have count at least four, so $2T\ge16\ge14$. Let $m\ge2$. Each of the first and last adjacent pairs has singleton counts summing to at least five, by Theorem~\ref{thm:endpoint-four} and the universal positive count. Each intervening adjacent internal pair has sum at least four by Theorems~\ref{thm:no-adjacent-singletons} and~\ref{thm:no-adjacent-one-two}. Therefore
+\[
+2T-\alpha_0-\alpha_m\ge4(m-2)+10=4m+2.
+\]
+Adding the endpoint contributions $\alpha_0+\alpha_m\ge8$ proves the result.
+\end{proof}
+
+\begin{theorem}[Verified upper bound 247]\label{thm:upper247}
+Every snake in $\Q_9$ has at most 247 edges. Hence
+\[
+\boxed{191\le a(9)\le247.}
+\]
+\end{theorem}
+\begin{proof}
+Again the one-vertex path is immediate. For $v=m+1\ge2$, combine $140v+4T\le36\,856$ with Lemma~\ref{lem:aggregate-endpoints}, which gives $4T\ge8m+20=8v+12$. Then
+\[
+148v\le36\,844<148\cdot249.
+\]
+Thus $v\le248$ and $m\le247$. Combine this with the explicit 191-edge witness.
+\end{proof}
+
+
+
+\section{A further local exclusion: adjacent counts one and three}
+\begin{theorem}\label{thm:no-adjacent-one-three}
+Adjacent internal vertices cannot have singleton-square counts one and three. Consequently, every internal neighbor of an internal count-one vertex has singleton-square count at least four.
+\end{theorem}
+\begin{proof}
+Use the same normalization as for Theorem~\ref{thm:no-adjacent-one-two}: zero has selected unit neighbors $a,b$, the vertex $ac$ is selected, and $cd$ is the unique missing root pair. Let $F$ now contain the three missing coordinate pairs at $a$, all avoiding $a,c$. Write $W$ for the five coordinates outside $\{a,b,c,d\}$ and put $t_i=abi$.
+
+Let $H=\{h:\{b,h\}\in F\}$, and let $G$ consist of the members of $F$ not containing $b$. Thus $|H|+|G|=3$. For $e\in G$, put $Q_e=e\setminus H$ when $e\cap H\ne\varnothing$, and $Q_e=\varnothing$ otherwise. Set
+\[
+B=H\cup\bigcup_{e\in G}Q_e.
+\]
+Since every $e$ has two elements, $|Q_e|\le1$ and hence $|B|\le3$. Call an index $i\in W\setminus B$ good. Such an index satisfies $\{b,i\}\notin F$, and no missing pair $\{i,j\}$ joins it to a coordinate $j\in H$. In particular $t_i$ is selected.
+
+We first identify an endpoint group for each good index. Apart from $abci$, the only possible selected neighbors of $t_i$ have the form $abij$, with $j\notin\{a,b,c,i\}$. A selected $abij$ requires $\{b,j\}\in F$ or $\{i,j\}\in F$; otherwise it would have the three selected neighbors $t_i,t_j,aij$.
+
+Suppose $j\in W$ and $\{b,j\}\notin F$. Then $t_j$ is selected, so $aij$ is absent and $abij$ forces $bij$ absent. The selected root pair $ij$ has only $aij,bij$ as possible selected neighbors: every other triple $ijk$ is excluded by the three selected pair vertices $ij,ik,jk$. Thus $ij$ would be isolated in a nontrivial path, which is impossible. If instead $j\in H\setminus\{d\}$, goodness gives $\{i,j\}\notin F$. The selected vertices $t_i,aij$ then force $bij$ absent, making the selected pair $ij$ an endpoint.
+
+For the remaining coordinate $j=d$, if $\{b,d\}\notin F$, then $t_d$ is selected. A selected $abdi$ forces $\{d,i\}\in F$ and makes $di$ an endpoint by the earlier exceptional-row neighbor classification. If $\{b,d\}\in F$, goodness ensures $\{d,i\}\notin F$, so $adi$ is selected. Unless an endpoint has already occurred among the pairs $hi$ with $h\in H\setminus\{d\}$, only $abci,abdi$ remain as possible selected neighbors of $t_i$. The eight-cycle argument from the preceding adjacent-count proof then forces an endpoint among $t_i,ci,di$.
+
+Therefore every good index $i$ has an endpoint in the selected-vertex group consisting of $t_i$, all pairs $hi$ for $h\in H\setminus\{d\}$, the pair $di$ when $\{d,i\}\in F$ or $\{b,d\}\in F$, and the pair $ci$ when $\{b,d\}\in F$. Groups for different good indices are disjoint: each vertex in a group contains that group's index and no other good index. Thus there cannot be three good indices.
+
+There are at least two good indices because $|W|=5$ and $|B|\le3$. If there are only two, say $u,v$, equality forces $|B|=3$ and $B\subseteq W$. Every member of $G$ must meet $H$, since otherwise its empty contribution $Q_e$ would make $|B|\le|H|+|G|-1=2$. Every edge of $G$ therefore lies in $B$, and every other edge of $F$ lies in $\{b\}\cup B$. In particular $d,u,v$ occur in no member of $F$.
+
+The two endpoint groups now reduce to $\{t_u\}\cup\{hu:h\in H\}$ and its $v$ analogue. A third, disjoint selected group is $\{cu,adu\}$. To see that it contains an endpoint, note that $adu$ has only $du,acdu$ as possible selected neighbors. Indeed, for any other eligible coordinate $j$, the isolation of $d,u$ in $F$ makes $adj,auj$ selected, excluding the quad $aduj$ by its three selected neighbors. If $adu$ is internal, it forces $acdu$ selected. Then $cdu$ is absent because its neighbors $cu,du,acdu$ are selected. If $cu$ is also internal, its remaining neighbor possibilities force $acu$ selected. But $acu$ would have the three selected neighbors $ac,cu,acdu$. Thus $cu$ or $adu$ is an endpoint, giving the impossible third endpoint.
+
+This proves the exclusion. The final assertion combines it with the previous exclusions of adjacent counts $(1,1)$ and $(1,2)$, and positivity of the singleton count.
+\end{proof}
+
+
+
+\section{Three consecutive count-two vertices and the bound 245}
+
+\begin{theorem}[No three consecutive twos]\label{thm:no-three-twos}
+There are no three consecutive internal vertices of a snake in $\Q_9$ whose singleton-square counts are all two.
+\end{theorem}
+
+\paragraph{Proof outline by finite geometric classification.}
+The theorem is established by a finite geometric classification, formally checked in Lean. The following proof outline gives the normalization, classification, and principal contradictions. It does not reproduce every branch of the formal derivation. All coordinate labels in the classification are arbitrary distinct coordinates, and no solver infeasibility result is assumed.
+
+Translate the first of the three vertices to zero and write the five consecutive selected vertices as
+\[
+c,\quad 0,\quad a,\quad ab,\quad abd.
+\]
+Here concatenation denotes exclusive-or of coordinate units. Inducedness implies that $a,b,c$ are distinct and $d$ differs from $a,b$. Thus either $d=c$ or all four coordinates are distinct. At each of the three internal centers, count two means that precisely two eligible unordered coordinate pairs have absent opposite corners. Each missing family has exactly two distinct members.
+
+Three facts drive the case analysis. A selected vertex has at most two selected neighbors; at most two selected vertices have at most one selected neighbor; and a selected cycle is impossible. In particular, if the selected middle vertex $aij$ has both outer neighbors $ij,abij$, every other neighbor of $aij$ is absent. This saturation rule sharply limits ordinary extensions. Endpoint demands are counted only after proving their vertex sets disjoint, using coordinate bits.
+
+If $d=c$, there are six remaining coordinates. Counting possible extensions of the selected rows $bk$, allowing at most two endpoint rows, forces the two outer missing families to be the same matching of two disjoint pairs. The two unused coordinates $u,v$ give endpoints $bu,bv$. The middle missing family must equal that matching: otherwise a selected middle vertex associated with a matching edge has at most one possible neighbor and supplies a third endpoint. The selected vertices $acu,acv$ are consequently internal and force $cu,cv$, giving the selected vertex $c$ the three neighbors $0,cu,cv$.
+
+Now let $a,b,c,d$ be distinct, and let $R$ contain the other five coordinates. Denote the outer missing families by $F_0,F_2$, with the second expressed relative to the center $ab$. The common absent-row set is
+\[
+H=\{k\in R:\{b,k\}\in F_0\}
+ =\{k\in R:\{a,k\}\in F_2\}.
+\]
+Put $h=|H|$, $\delta_0=[\{b,d\}\in F_0]$, and $\delta_2=[\{a,c\}\in F_2]$. Removing these specified edges leaves budgets $2-h-\delta_0$ and $2-h-\delta_2$. Every selected row $bk$ can continue only toward $bck,bdk$, or an ordinary extension $bkl$. Counting which missing edges can permit these continuations gives an exhaustive classification. The case $(\delta_0,\delta_2)=(0,0)$ is impossible. If exactly one indicator is one, reflection reduces to
+\[
+F_0=\{bd,ij\},\qquad F_2=\{ij,ck\},
+\]
+where $i,j,k\in R$ are distinct. The two remaining row endpoints force the middle family to be $\{ck,ij\}$, after which a fresh middle vertex has at most one neighbor, a third endpoint.
+
+If both indicators are one, a common row hole gives $F_0=\{bd,be\}$ and $F_2=\{ac,ae\}$. Otherwise write
+\[
+F_0=\{bd,E_0\},\qquad F_2=\{ac,E_2\},
+\]
+where $E_0\subseteq\{d\}\cup R$ and $E_2\subseteq\{c\}\cup R$. The remaining branches are as follows.
+\begin{itemize}
+\item In the common-hole case, isolated middle rows and missing ordinary corners require at least three disjoint endpoint groups.
+\item If $E_0=de$ and $E_2=cf$ are both stars, endpoint counting leaves two isolated groups; the resulting internal vertices force a vertex with three selected neighbors. This includes $e=f$.
+\item If one remainder is a star and the other is an ordinary pair, every middle-isolated row and every ordinary middle missing edge supplies a disjoint endpoint resource. A two-edge family on five coordinates requires at least three such resources. Reflection handles the other orientation.
+\item If $E_0=E_2=ij$ is ordinary, the three coordinates outside $i,j$ first force $ij$ to be middle-missing. Every possible second middle edge then forces three endpoints or a degree-three selected vertex.
+\item Distinct ordinary remainders are treated by the endpoint count below.
+\end{itemize}
+
+\subsection*{The endpoint count for distinct ordinary remainders}
+Consider the normalized window $c,0,a,ab,abd$, where $a,b,c,d$ are distinct,
+and let $R$ be the other five coordinates. In this branch the outer missing
+families are
+\[
+ F_0=\{\{b,d\},A\},\qquad F_2=\{\{a,c\},B\},
+ \qquad A,B\in\binom{R}{2},\quad A\ne B.
+\]
+Here $F_2$ is expressed relative to the center $ab$. Let
+$F\subseteq\binom{\{c,d\}\cup R}{2}$ be the two missing pairs at the middle
+vertex $a$, so that $|F|=2$ and
+\[
+ aij\text{ is selected}\quad\Longleftrightarrow\quad\{i,j\}\notin F
+ \qquad(i,j\notin\{a,b\},\ i\ne j).
+\]
+As throughout the argument, a string of coordinate labels denotes their
+exclusive-or. For a two-element set $S=\{i,j\}$ we also write $[S]=ij$ and
+$a[S]=aij$.
+
+A coordinate $k\in R$ is \emph{middle-isolated} if it belongs to no member
+of $F$. For $s\in\{c,d\}$ define the condition
+\[
+ C_s(k):\quad
+ \text{for every }r\in R,\quad
+ \{k,r\}\in\{A,B\}\ \Longrightarrow\ \{s,r\}\notin F.
+\]
+Call $k$ a \emph{good row} if it is middle-isolated and
+\[
+ \bigl(C_c(k)\wedge C_d(k)\bigr)
+ \quad\vee\quad
+ \bigl(\{c,d\}\notin F\ \wedge\ (C_c(k)\vee C_d(k))\bigr).
+\]
+Write $I$ for the set of good rows, and set
+\[
+ L=\{S\in F:S\subseteq R,\ S\cap A=\varnothing\},\qquad
+ Q=\{S\in F:S\subseteq R,\ S\cap B=\varnothing\}.
+\]
+
+For $(H,K)=(A,B)$ or $(B,A)$, say that the outer hole $H$ is
+\emph{eligible} when all three conditions hold:
+\begin{enumerate}
+\item $H\notin F$;
+\item $\{c,s\},\{d,s\}\notin F$ for every $s\in H$;
+\item for every $r\in R\setminus H$, some $s\in H$ satisfies
+      $\{s,r\}\notin F$ and $\{s,r\}\ne K$.
+\end{enumerate}
+Let $\varepsilon_A,\varepsilon_B$ be the indicators of these respective
+eligibility conditions. The endpoint demand is the explicit integer
+\begin{equation}\label{eq:ordinary-endpoint-demand}
+ D=|I|+|L|+|Q|+\varepsilon_A+\varepsilon_B.
+\end{equation}
+
+\paragraph{Why these quantities count endpoints.}
+Every $bk$, with $k\in R$, is selected. For a good row $k$, the selected
+set
+\[
+ \Gamma_k=\{bk,ack,adk\}
+\]
+contains an endpoint. To see the mechanism, an ordinary extension $bkr$
+is excluded: $bk,br$ are selected, and at least one of $kr,abkr$ is selected
+because $A\ne B$. Thus an internal $bk$ forces both $bck$ and $bdk$.
+The vertex $ck$ is then absent, since its three neighbors $c,ack,bck$
+would otherwise be selected. Likewise $abdk$ is absent, using its three
+neighbors $abd,adk,bdk$.
+
+The condition $C_c(k)$ leaves only $abck,acdk$ as possible selected
+neighbors of $ack$; $C_d(k)$ leaves only $dk,acdk$ for $adk$. For an
+ordinary extension, this follows either from saturation of a selected
+middle triple with both outer corners present, or from three selected
+middle triples when its pair is $A$ or $B$. If both conditions hold and
+none of $\Gamma_k$ is an endpoint, the forced continuations form the
+selected eight-cycle
+\[
+ bk,\ bck,\ abck,\ ack,\ acdk,\ adk,\ dk,\ bdk,\ bk.
+\]
+If instead $\{c,d\}\notin F$, the vertex $acdk$ is absent because
+$acd,ack,adk$ are selected. Either clear direction then already gives
+an endpoint in $\Gamma_k$.
+
+Each $S=\{i,j\}\in L$ gives the endpoint $[S]=ij$. It is selected, while
+$aij$ is absent. Its unit neighbors are absent; the extension $bij$ is
+excluded by $bi,bj,ij$, and $dij$ by $di,dj,ij$. Every other ordinary
+extension $ijr$ is excluded by $ij,ir,jr$, since $S$ is disjoint from $A$.
+Only $cij$ can remain. Reflection gives the endpoint $ab[S]$ for each
+$S\in Q$.
+
+An eligible hole $H=\{i,j\}$ gives the selected endpoint $a[H]$.
+Exactly one of its outer neighbors $[H],ab[H]$ is selected. The second
+eligibility condition excludes its $c$- and $d$-extensions by the
+three-neighbor rule. For each other coordinate $r$, the third condition
+provides a selected middle triple $asr$ with both outer corners present;
+its saturation excludes the extension $aijr$. There is therefore at
+most one selected neighbor of $a[H]$.
+
+\paragraph{Why the endpoint counts do not overlap.}
+Different row groups $\Gamma_k$ are disjoint: every member contains
+exactly the ordinary coordinate $k$. Moreover, $k\in I$ lies in no
+member of $F$, so that group cannot meet either corner counted by $L$
+or $Q$. Root corners $[S]$, translated corners $ab[S]$, and hole
+vertices $a[H]$ have respectively the $(a,b)$ bit patterns $(0,0)$,
+$(1,1)$, and $(1,0)$. These distinguish the three kinds. Within each
+kind, distinct pairs give distinct vertices, including the two holes
+because $A\ne B$. Finally a row vertex $bk$ has $a$-bit zero, whereas
+$ack,adk$ have respectively $c$- or $d$-bit one; neither can equal a
+hole vertex, whose $c,d$ bits are both zero. Thus choosing one endpoint
+from each good-row group and adding the other counted endpoints gives
+$D$ distinct endpoints. A path has at most two, so
+\begin{equation}\label{eq:ordinary-demand-upper}
+ D\le2.
+\end{equation}
+
+\subsection*{The final finite classification: scope of the outline}
+The remaining finite argument has two parts. If $A$ and $B$ are disjoint,
+two-edge counting gives $D\ge3$, contradicting
+\eqref{eq:ordinary-demand-upper}. Its cases are indexed by the number
+of members of $F$ wholly contained in $R$, which is zero, one, or two.
+The isolated rows, clean corners, and eligible-hole terms in
+\eqref{eq:ordinary-endpoint-demand} supply the required three endpoints.
+The intermediate counting inequalities of these cases are not expanded
+in this outline.
+
+Otherwise $A=\{e,x\}$ and $B=\{e,y\}$ for distinct $e,x,y\in R$.
+Let $u,w$ be the remaining two coordinates. Every middle missing edge
+is one of the 21 pairs from $\{c,d,e,x,y,u,w\}$. Substituting these
+possibilities in the explicit definition of $D$, and retaining two
+distinct edges with $D\le2$, leaves exactly the following twenty
+labelled families:
+\[
+\begin{gathered}
+ \{cd,ce\},\ \{cd,de\},\ \{ce,de\},\ \{cx,dy\},\ \{cy,dx\},\\
+ \{cx,ey\},\ \{dx,ey\},\ \{cy,ex\},\ \{dy,ex\},\\
+ \{cr,xy\},\ \{dr,xy\}\quad(r=e,u,w),\\
+ \{ex,ey\},\ \{ex,xy\},\ \{ey,xy\},\ \{eu,xy\},\ \{ew,xy\}.
+\end{gathered}
+\]
+There are $21^2=441$ ordered choices, of which 21 repeat the same edge. The remaining 420 ordered choices represent 210 unordered two-edge families. The twenty displayed families are the unordered survivors of the endpoint-demand inequality. This classification does not assume a symmetry quotient. Each
+family has a geometric exclusion by the degree-two and two-endpoint
+conditions. The central and crossed-star families force a third neighbor
+or a third endpoint after their clean row groups are accounted for.
+For $\{dr,xy\}$, the required internal continuations force $acxy$ to
+have the selected neighbors $acx,acy,cxy$; reflection treats the
+$\{cr,xy\}$ family. The same mechanism covers $\{ex,xy\}$ and
+$\{ey,xy\}$. For $\{ek,xy\}$ with $k=u$ or $w$, the other clean row
+requires one endpoint. If $aexy$ is absent, $aex,aey$ provide two more;
+if it is selected, saturation instead makes $xy,abxy$ two more.
+The residual deductions complete the formal classification outlined here.
+
+
+\begin{lemma}[Aggregate bound with forbidden runs]\label{lem:run-potential}
+Let $v\ge2$ be the number of vertices of a snake and let $T$ be its total singleton count. Then
+\[
+3T\ge7v+5.
+\]
+\end{lemma}
+\begin{proof}
+Write the counts as $\alpha_0,\ldots,\alpha_{v-1}$. They are positive, both endpoint counts are at least four, and every neighbor of a count-one vertex has count at least four. Theorem~\ref{thm:no-three-twos} excludes every run $2,2,2$; a run involving an endpoint is also excluded by the endpoint bound.
+
+Define a nonnegative potential
+\[
+P_i=\begin{cases}
+4,&\alpha_i=1,\\
+2,&\alpha_i=2,\ i>0,\ \alpha_{i-1}=2,\\
+1,&\alpha_i=2\text{ in every other case},\\
+0,&\alpha_i\ge3.
+\end{cases}
+\]
+For each $i<v-1$ the local restrictions give
+\[
+7+P_i\le3\alpha_{i+1}+P_{i+1}.
+\]
+Indeed, if $\alpha_{i+1}=1$, then $\alpha_i\ge4$ and both sides equal seven. If $\alpha_{i+1}=2$ and $\alpha_i=2$, the previous count cannot also be two, so $P_i=1$, $P_{i+1}=2$ and both sides equal eight. If $\alpha_{i+1}=2$ but $\alpha_i\ne2$, then $\alpha_i\ge3$, giving seven on both sides. Finally, if $\alpha_{i+1}\ge3$, either $P_i\le2$, or $\alpha_i=1$ forces $\alpha_{i+1}\ge4$; the inequality follows in either case.
+
+The endpoint bounds give $P_0=P_{v-1}=0$ and $3\alpha_0\ge12$. Summing the $v-1$ inequalities therefore gives
+\[
+3T\ge12+7(v-1)=7v+5.
+\]
+This argument does not assume that every three-term window sums to at least seven: the abstract sequence $1,4,1$ satisfies the numerical restrictions used in this lemma and shows why that inference would be invalid. This observation does not assert that the sequence occurs along an actual snake.
+\end{proof}
+
+\begin{theorem}[Verified upper bound 245]\label{thm:upper245}
+Every snake in $\Q_9$ has at most 245 edges. Hence
+\[
+\boxed{191\le a(9)\le245.}
+\]
+\end{theorem}
+\begin{proof}
+The zero-edge case is immediate. Otherwise put $v=m+1\ge2$. The established incidence identity, nonnegativity of $E$, and $W\le v-2$ give
+\[
+4T+144v\le36864+4(v-2),\qquad T+35v\le9214.
+\]
+Combining this with Lemma~\ref{lem:run-potential} gives
+\[
+112v+5\le27642,\qquad112v\le27637.
+\]
+Since $112\cdot247=27664$, one has $v\le246$ and $m\le245$. The lower bound is the unchanged explicit 191-edge witness.
+\end{proof}
+
+
+
+\section{Cycles as an alternative construction route}
+\begin{theorem}[Deleting a cycle vertex]
+Deleting one vertex from an induced cycle of $C$ vertices leaves a snake of length $C-2$.
+\end{theorem}
+\begin{proof}
+Order the cycle as $v_0,\ldots,v_{C-1},v_0$ and delete $v_{C-1}$. Among the remaining vertices, the only surviving cycle edges join consecutive indices. The closing edge involved the deleted vertex; the induced-cycle hypothesis forbids all other edges. The resulting path has $C-1$ vertices and $C-2$ edges.
+\end{proof}
+\begin{corollary}
+An induced cycle with 194 vertices in $\Q_9$ would disprove the upper bound 191.
+\end{corollary}
+\begin{proof}
+Deletion gives a 192-edge snake.
+\end{proof}
+In particular, a 192-vertex coil gives only a 190-edge snake through this deletion operation. Edge and vertex counts cannot be interchanged.
+
+\section{The two-layer construction and its obstruction}
+Write a vertex of $\Q_9$ as $(v,b)$ with $v\in\Q_8$ and $b\in\{0,1\}$. Vertices in the same layer retain their original adjacency. Across the layers,
+\[
+(u,0)\sim(v,1)\quad\Longleftrightarrow\quad u=v.
+\]
+The same description defines the product of an arbitrary graph with a binary edge. Taylor discusses such lifts in \cite{taylor}.
+
+\begin{theorem}[Exact joining condition]\label{thm:join}
+Let $P=(p_0,\ldots,p_r)$ and $R=(q_0,\ldots,q_s)$ be induced paths in a graph. The ordered sequence
+\[
+(p_0,0),\ldots,(p_r,0),(q_0,1),\ldots,(q_s,1)
+\]
+is an induced path precisely when
+\[
+p_i=q_j\quad\Longleftrightarrow\quad i=r\ \hbox{and}\ j=0.
+\]
+When valid, its length is $r+s+1$.
+\end{theorem}
+\begin{proof}
+The layer labels ensure that vertices in different layers are distinct. Each individual path retains its distinctness and induced adjacency conditions. Every cross-layer edge is caused by equality of the base vertices. In the displayed order there is exactly one consecutive pair across layers, at $(p_r,0),(q_0,1)$. Therefore the induced condition requires exactly the stated equality and forbids all other equalities. These conditions also suffice, since all possible pairs have been covered. The vertex count is $(r+1)+(s+1)$, hence the edge count is $r+s+1$.
+\end{proof}
+
+\begin{corollary}[Single-crossing length constraints]
+Assume the known bound $a(8)=98$. A single-crossing snake in $\Q_9$ has length at most 197. Length 196 requires layer lengths $(98,97)$ or $(97,98)$; length 197 requires $(98,98)$.
+\end{corollary}
+\begin{proof}
+The two layer segments are eight-dimensional snakes. Thus $r,s\le98$ and $L=r+s+1$. For $L=196$, $r+s=195$ forces the two possibilities; for $L=197$, both upper bounds must be attained.
+\end{proof}
+\begin{theorem}[Integer realization of the layer construction]
+The map $J(u,b)=u+256b$, for $0\le u<256$ and $b\in\{0,1\}$, is injective and preserves adjacency in both directions between $\Q_8\mathbin{\square}K_2$ and the integer encoding of $\Q_9$. Consequently, compatible layer paths of lengths 98 and 97 give a 196-edge snake under the same definition as the verified witness. Compatible paths of lengths 98 and 98 give a 197-edge snake and would refute the conjectured upper bound 196.
+\end{theorem}
+\begin{proof}
+The intervals $[0,255]$ and $[256,511]$ are disjoint, so equality of images forces equality of both components. Flipping a coordinate $k<8$ preserves the layer, because
+\[
+(u+256)\mathbin{\oplus}2^k=(u\mathbin{\oplus}2^k)+256,
+\qquad u\mathbin{\oplus}2^k<256.
+\]
+Flipping coordinate 8 exchanges $u$ and $u+256$. These are all nine possible flips. Thus adjacency within a layer is exactly eight-dimensional adjacency, while adjacency between layers requires equal base vertices. Compose this map with Theorem~\ref{thm:join}. The lengths become $98+97+1=196$ and $98+98+1=197$. Conversely, every unwanted equality between base vertices creates a nonconsecutive cross-layer edge, so the compatibility condition remains necessary after applying $J$.
+\end{proof}
+This argument covers snakes that cross a chosen coordinate exactly once. A general snake can cross every coordinate repeatedly. Its intersection with a layer can then be a disjoint union of paths, so bounding that entire intersection by a single-snake length would be invalid.
+
+The length-98 seed in Appendix~\ref{app:witness} is taken from \cite{records} and independently checked against all pairwise conditions. Two tests were performed. First, truncate either endpoint of an isometric copy to length 97, choose both joining endpoints, and enumerate all $8!$ coordinate permutations. Translation is forced by identifying the chosen endpoints. The $2\cdot2\cdot2\cdot8!=322\,560$ placements, counted with possible duplication, have minimum overlap 15. Theorem~\ref{thm:join} requires overlap one. Second, a constraint solver searched for an arbitrary length-97 partner avoiding every seed vertex except the chosen endpoint. Both endpoint instances were infeasible. These restricted computational exclusions have not been independently certified; other length-98 seeds and multiple-crossing constructions remain possible.
+
+\section{Independent hypothesis from the first eight terms}
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$n$ & $a(n)$ & $3\cdot2^{n-3}$ & correction\\
+\midrule
+3&4&3&1\\4&7&6&1\\5&13&12&1\\
+6&26&24&2\\7&50&48&2\\8&98&96&2\\
+\bottomrule
+\end{tabular}
+\end{center}
+The baseline coefficient is also recovered from successive differences within the two triples:
+\[
+\frac{7-4}{2^4-2^3}=\frac{13-7}{2^5-2^4}
+=\frac{50-26}{2^7-2^6}=\frac{98-50}{2^8-2^7}=\frac38.
+\]
+Continuing the correction as $1,1,1,2,2,2,4,4,4,\ldots$ gives
+\begin{equation}\label{eq:model}
+\widehat a(n)=3\cdot2^{n-3}+2^{\lfloor(n-3)/3\rfloor},\qquad n\ge3.
+\end{equation}
+The terms at dimensions one and two are assigned separately as 1 and 2.
+
+\begin{conjecture}\label{conj:196}
+The maximum snake length in $\Q_9$ is $196$ edges.
+\end{conjecture}
+This numerical conjecture is motivated only by the displayed extrapolation; it is not used in any proof below. Equation~\eqref{eq:model} predicts $3\cdot64+4=196$.
+
+\begin{proposition}[Model recurrence]
+For $n\ge3$, the model satisfies
+\[
+\widehat a(n+3)+6\cdot2^{\lfloor(n-3)/3\rfloor}=8\widehat a(n).
+\]
+\end{proposition}
+\begin{proof}
+Put $t=n-3$ and $c=2^{\lfloor t/3\rfloor}$. Since $\lfloor(t+3)/3\rfloor=\lfloor t/3\rfloor+1$, the left side is
+$24\cdot2^t+2c+6c=8(3\cdot2^t+c)$.
+\end{proof}
+At $n=6$ the recurrence predicts $8\cdot26-12=196$. This is the same evidence as the correction table, not an independent argument.
+
+\begin{proposition}[The known terms do not determine the ninth prediction]
+The model
+\[
+\widetilde a(n)=3\cdot2^{n-3}+1+\left\lfloor\frac{n-3}{3}\right\rfloor
+\qquad(n\ge3)
+\]
+agrees with every known term, after assigning the first two terms separately, and gives $\widetilde a(9)=195\ne196$.
+\end{proposition}
+\begin{proof}
+For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, the corrections are respectively 3 and 4. Direct substitution proves the claim.
+\end{proof}
+Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
 
 \subsection{A restriction on one-singleton configurations}
 A possible route to a stronger aggregate bound is to show that vertices with only one singleton square must lie near an endpoint. The following result narrows the local configuration without establishing that claim.
@@ -402,12 +900,12 @@ Independent Python checks verified all 131 published nine-dimensional examples, 
 Endpoint regrowth retained a prefix of each example in each orientation, then searched every legal continuation to 193 total vertices. A vertex is forbidden after it has been used, or when it is adjacent to a retained vertex preceding the current endpoint. Adding a vertex blocks all neighbors of the previous endpoint. The resulting depth-first search covers the permitted continuations. Node limits produce \textsc{Unknown} rather than a nonexistence result.
 \begin{center}\begin{tabular}{rrrrr}
 \toprule
-Removed & Retained & Excluded & Unresolved & Nodes\\\midrule
+Removed vertices & Retained vertices & Excluded cases & Unresolved cases & Nodes\\\midrule
 32&160&262&0&488,450\\
 40&152&262&0&16,561,030\\
 48&144&209&53&66,968,134\\\bottomrule
 \end{tabular}\end{center}
-The final row used one million nodes per orientation. These exhaustive-search results concern only the listed prefixes and have not been independently certified.
+Each case is one of the 262 oriented prefixes obtained from 131 paths and their reversals. The final row used one million nodes per orientation. These exhaustive-search results concern only the listed prefixes and have not been independently certified.
 
 \subsection{Constraint models and vertex replacement}
 The exact model selects cube vertices and directed cube-edge arcs. A single directed circuit through an auxiliary vertex encodes one connected path; deleting the auxiliary vertex gives its endpoints. Unselected cube vertices use self-loops. Every cube edge whose two endpoints are selected is required to appear in the path. Together these constraints enforce distinctness, connectivity, and absence of chords. Small feasible and infeasible thresholds in dimensions three through five were reproduced. The unrestricted 192-edge run returned \textsc{Unknown} after 300 seconds.
@@ -435,7 +933,7 @@ There are induced paths of lengths 96 and 94 in $\Q_8$ whose vertex sets interse
 Use the two transition sequences in Appendix~\ref{app:joint-seed}, both starting at zero. They reconstruct 97 and 95 vertices. All $\binom{97}{2}=4\,656$ and $\binom{95}{2}=4\,465$ within-path pairs satisfy the distinctness and induced-adjacency conditions. Checking all $97\cdot95=9\,215$ cross pairs gives equality exactly for the two initial vertices. Reversing the first path and applying the two-layer joining criterion gives $96+94+1=191$ edges. These finite checks and the joining deduction have independent machine checks.
 \end{proof}
 
-The pair was extracted from the first example in the supplied bank: coordinate five changes only once, at edge index 96, when edge indices start at zero. Deleting that coordinate and applying a common translation and coordinate permutation gives the displayed pair. This is a decomposition of a published example, not a new record. Fixing both selected vertex sets to this pair gave a feasible solver control.
+The pair was extracted from a published nine-dimensional example: coordinate five changes only once, at edge index 96, when edge indices start at zero. Deleting that coordinate and applying a common translation and coordinate permutation gives the displayed pair. This is a decomposition of a published example, not a new record. Fixing both selected vertex sets to this pair gave a feasible solver control.
 
 Three searches then left both paths variable. Each used four workers, random seed 13, and a 120-second limit:
 \begin{center}
@@ -451,10 +949,41 @@ First length & Second length & Joined target & Starting hint & Status\\
 \end{center}
 The hint in the last run does not fix either path. These timeouts establish no existence or impossibility result. The model and its search implementation have not been independently certified; the explicit starting pair and the mathematical joining criterion have been checked separately.
 
-\section{Scope of the results and remaining obligations}
-The preceding arguments establish explicit lower-bound witnesses, reductions of the optimality question, conditional constructions, and a universal upper bound. The numerical extrapolation remains conjectural. The single-crossing length constraints use the cited eight-dimensional maximum $a(8)=98$; this paper does not repeat the exhaustive proof of that result. No compatible pair yielding length 196 or 197 has been found. The restricted search results cover precisely the recorded seeds and construction families, and provide no global exclusion.
+\section{Formal verification and further questions}
+\subsection{Verification of the mathematical statements}
+The explicit 191-edge construction, prefix restriction, singleton-square incidence identity, endpoint and adjacent-count restrictions, exclusion of three consecutive twos, and final upper bound have been checked in Lean 4.19.0. All use the induced-path definition stated in Section~1. The final result has no unresolved proof obligations, additional optimality axioms, or unchecked computational premises. Its logical dependencies are propositional extensionality, classical choice, and quotient soundness, the standard foundations used by the formal library. A complete reconstruction of the proof and an independent audit of the final theorem's dependencies succeeded.
 
-The remaining obligations for Conjecture~\ref{conj:196} are exact: construct and check a 196-edge snake, then exclude length 197. A 192-edge witness would already refute the competing optimum 191. Conversely, excluding every 192-edge snake would establish 191 and refute Conjecture~\ref{conj:196}. At present neither outcome has been achieved. The numerical hypothesis is retained provisionally while both directions remain under investigation.
+Formal verification and computational search serve different purposes here. The finite geometric case analysis is discharged by checked proof terms. The restricted infeasibility reports in the search section are experimental evidence and have not been converted into independently checked impossibility certificates. The 191-edge witness is a published construction; the elementary finite verification procedure in Appendix~\ref{app:finite-check} also allows its defining conditions to be checked directly from the sequence printed here.
+
+\subsection{A conditional strengthening}
+The next proposition isolates a sufficient additional local restriction. It is a conditional result, not an improvement of the unconditional bound in Theorem~\ref{thm:main}.
+
+\begin{proposition}[Conditional upper bound of 244]\label{prop:conditional244}
+If no snake in $\Q_9$ contains three consecutive internal vertices with singleton-square counts $(2,2,3)$, then every snake in $\Q_9$ has at most 244 edges.
+\end{proposition}
+\begin{proof}
+For a snake with $v\ge2$ vertices, write its singleton counts as $\alpha_0,\ldots,\alpha_{v-1}$ and their sum as $T$. Define
+\[
+R_i=\begin{cases}
+3,&\alpha_i=1,\\
+2,&\alpha_i=2,\ i>0,\ \alpha_{i-1}=2,\\
+1,&\alpha_i=2\text{ in every other case},\\
+0,&\alpha_i\ge3.
+\end{cases}
+\]
+We claim that $5+R_i\le2\alpha_{i+1}+R_{i+1}$ for every $i<v-1$. If $\alpha_{i+1}=1$, its predecessor has count at least four, and both sides equal five. If $\alpha_{i+1}=2$, either its predecessor is at least three and both sides equal five, or its predecessor is two. In the latter case the exclusion of $(2,2,2)$ gives $R_i=1$, $R_{i+1}=2$, so both sides equal six. A predecessor of one is impossible in this case. If $\alpha_{i+1}=3$, a predecessor of one is again impossible; a predecessor of two has $R_i=1$ by the assumed exclusion of $(2,2,3)$, so the left side is at most six. Finally, if $\alpha_{i+1}\ge4$, then $5+R_i\le8\le2\alpha_{i+1}$.
+
+Both endpoint counts are at least four, so $R_0=R_{v-1}=0$ and $2\alpha_0\ge8$. Summing gives
+\[
+2T\ge8+5(v-1)=5v+3.
+\]
+The incidence estimate gives $T+35v\le9214$. Therefore $75v+3\le18428$, or $75v\le18425<75\cdot246$. Thus $v\le245$ and the edge count is at most 244. The zero-edge case is immediate.
+\end{proof}
+
+The sequence inequality and its conditional numerical consequence have also been checked in Lean. The exclusion of $(2,2,3)$ is not established here. Even such an exclusion would leave a gap between the upper bound and the known construction.
+
+\subsection{The exact optimum}
+The unconditional conclusion remains $191\le a(9)\le245$. No 192-edge construction or universal exclusion of length 192 has been obtained. A solution requires a length $L$ for which both an explicit snake and an exclusion of length $L+1$ are established; the prefix argument then excludes all longer paths. Conjecture~\ref{conj:196} would require a 196-edge construction and an exclusion of length 197, but the proved bounds do not single out that value. Further progress may come from stronger restrictions on singleton counts or from constructions outside the tested families.
 
 \appendix
 \section{Explicit transition sequences and blockers}\label{app:witness}
@@ -492,7 +1021,7 @@ The reversed ordering is $v_{93},v_{92},\ldots,v_0$. Its pairwise distances are 
 0123104154 3146340134 6743104274 0147514016 3104154314\\
 2340134274 3104674014 7561340142 7410431641 04764013
 \end{quote}
-The seed is attributed to Carlson and Hougen by the source page \cite{records}. The exact transition and vertex data for all four witnesses accompany the paper in JSON files.
+The seed is attributed to Carlson and Hougen by the source page \cite{records}. Each transition sequence in this appendix determines every vertex by the recurrence stated at the start of the paper.
 
 \subsection{A 137-edge counterexample for singleton squares}\label{app:square-counterexample}
 Start at the integer vertex 145, rather than zero, and use the following coordinate transitions:
@@ -516,6 +1045,20 @@ For the second path use
 \end{quote}
 The projected vertex sets have intersection $\{0\}$ only. Reverse the first sequence of vertices, place it in layer zero, cross at zero, and follow the second path in layer one.
 
+
+\section{Finite verification of the printed witnesses}\label{app:finite-check}
+For a transition sequence $t_1,\ldots,t_L$ in dimension $n$ and initial vertex $z$, the following finite procedure verifies the snake conditions without any additional data.
+\begin{enumerate}
+\item Check $0\le z<2^n$ and $0\le t_k<n$ for every $k$. Starting with $v_0=z$, compute $v_k=v_{k-1}\oplus2^{t_k}$ for $1\le k\le L$.
+\item For every $0\le i<j\le L$, compute the number of nonzero binary digits of $v_i\oplus v_j$. Reject if this number is zero. Also reject if it equals one and $j\ne i+1$, or if it differs from one and $j=i+1$.
+\item Accept if no pair is rejected. The reconstructed sequence is then an induced path of exactly $L$ edges by definition.
+\end{enumerate}
+For a displayed endpoint blocker $i$ in coordinate $k$, compute $w=v_L\oplus2^k$ and check $i<L$ and either $w=v_i$ or $\Ham(w,v_i)=1$. Apply the same calculation to the reversed vertex ordering for left-endpoint blocking. For the two compatible layer paths, verify each path separately and check that their projected vertex sets intersect only at zero.
+
+This procedure requires $\binom{L+1}{2}$ pair tests for a single witness. It verifies the explicit constructions and counterexamples; it does not test all possible snakes and therefore supplies no global upper bound.
+
+\clearpage
+\addcontentsline{toc}{section}{References}
 \subsection{A radius-three linear forest}\label{app:radius-three}
 The following lists give vertices as decimal integers encoding nine-bit words. Each row is one path; the rows are distinct connected components of the induced graph on their union.
 \begin{align*}
@@ -536,11 +1079,11 @@ P_{14}&=(385,384,386)
 \end{align*}
 The union has 60 vertices, including zero. It is a linear forest with 14 components, not a single snake.
 
-\begin{thebibliography}{9}\raggedright
+\begin{thebibliography}{99}\raggedright
 \bibitem{oeis} OEIS Foundation. \emph{A099155: Maximum length of a simple path with no chords in the $n$-dimensional hypercube}. \url{https://oeis.org/A099155}. Accessed 13 October 2026.
 \bibitem{ostergard} P.~R.~J. Östergård and V.~H. Pettersson. Exhaustive Search for Snake-in-the-Box Codes. \emph{Graphs and Combinatorics} 31 (2015), 1019--1028. \url{https://doi.org/10.1007/s00373-014-1423-3}.
 \bibitem{orland} P.~Orland et al. \emph{New Snake-in-the-Box Records via Snakepit Surgery and Learned Construction}. arXiv:2607.15270v3, 30 September 2026. \url{https://arxiv.org/html/2607.15270v3}.
-\bibitem{data} Math-AI-Caltech. \emph{Snake-in-the-Box: public record data}. \url{https://github.com/Math-AI-Caltech/Snake-in-the-Box}. Downloaded archive SHA-256 is recorded in the accompanying bank audit.
+\bibitem{data} Math-AI-Caltech. \emph{Snake-in-the-Box: public record data}. \url{https://github.com/Math-AI-Caltech/Snake-in-the-Box}. Accessed 15 October 2026.
 \bibitem{records} T.~Ace. \emph{Snake-in-the-Box lower bounds and transition sequences}. \url{https://www.minortriad.com/snake/}. Accessed 13 October 2026.
 \bibitem{taylor} T.~Taylor. \emph{Constructing longer snakes and improved asymptotic bounds in hypercubes}. arXiv:2609.27483v1, 23 September 2026. \url{https://arxiv.org/html/2609.27483v1}.
 \bibitem{huang} H.~Huang. Induced subgraphs of hypercubes and a proof of the Sensitivity Conjecture. \emph{Annals of Mathematics} 190 (2019), 949--955. \url{https://annals.math.princeton.edu/2019/190-3/p06}.
