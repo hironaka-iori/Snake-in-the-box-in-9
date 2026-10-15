@@ -1,6 +1,6 @@
 # Collaborator handoff
 
-Checkpoint: 15 October 2026. Manuscript author: Iori Hironaka.
+Checkpoint: 15 October 2026. Manuscript authors: Iori Hironaka and Tommy Ma.
 
 ## Where the investigation stands
 
@@ -112,3 +112,12 @@ These are independent tasks suitable for separate branches. The current handoff 
 The authoritative standard-library Lean sources are in `work/final_lean/`; maintained mathlib-dependent proofs are in `work/spectral/` and `work/spectral/stronger/`. Do not create divergent proof copies in `outputs/`. The authoritative paper is the existing LaTeX source. Keep implementation filenames and theorem identifiers in technical notes rather than the paper. Retain Iori Hironaka in the author field. No old exported PDF is included because it predates the current source.
 
 A search timeout, a blocked endpoint, and a restricted exclusion cannot establish global optimality. For every claimed theorem, state exactly which assumptions are discharged. The repository is a research checkpoint, and its documentation must retain the unresolved status until a matching construction and global upper bound are verified.
+
+## Additional local research direction: certify the radius-five obstruction
+
+The latest experiments sharpen the remaining split-arm case. A radius-four forest is feasible with at most two interior endpoints. At radius five, the solver reports infeasibility with budgets two and three, while finding a forest with budget four. Allowing cycles restores feasibility at budget two. The saved feasible assignments passed independent Python checks; the exclusions remain uncertified. See `outputs/low_singleton_investigation.md` and the seven accompanying JSON records.
+
+This is the most concrete next proof direction: obtain a checkable exclusion certificate for radius five and budget two, then prove that a genuine snake with a one-singleton root far from both endpoints maps into that model. The general-to-normalized geometric reduction is also unfinished. A certificate for the encoded model alone would leave this reduction to prove. These experiments do not change the global interval.
+
+
+The upstream split-arm proof, radius-three forest certificate, and ball-search records remain included; see `outputs/low_singleton_investigation.md`. Their restricted solver exclusions are not premises of the 245 bound.

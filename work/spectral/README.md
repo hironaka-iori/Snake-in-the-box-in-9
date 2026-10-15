@@ -36,8 +36,22 @@ With the same pinned dependency and toolchain, run from the repository root:
 python work/spectral/verify_strengthened.py --mathlib-dir /path/to/mathlib
 ```
 
-This driver always copies the current core sources and all 148 maintained strengthening modules into a fresh ignored directory, rebuilds the core, then checks the incidence and strengthening modules in dependency order. It clears inherited `LEAN_PATH`, so old research build products cannot satisfy imports. It checks the Lean version and mathlib commit, rejects modified tracked mathlib source, and saves each command, exit code, source SHA256, and compiler log in a manifest. All four strengthened intervals, the geometric exclusions including adjacent counts (1,3) and runs (2,2,2), endpoint bound and sharpness example, lower-bound witness, and general prefix theorem are audited transitively; only `propext`, `Classical.choice`, and `Quot.sound` are allowed.
+This driver always copies the current core sources and all 150 maintained strengthening modules into a fresh ignored directory, rebuilds the core, then checks the incidence and strengthening modules in dependency order. It clears inherited `LEAN_PATH`, so old research build products cannot satisfy imports. It checks the Lean version and mathlib commit, rejects modified tracked mathlib source, and saves each command, exit code, source SHA256, and compiler log in a manifest. All four strengthened intervals, the geometric exclusions including adjacent counts (1,3) and runs (2,2,2), endpoint bound and sharpness example, lower-bound witness, and general prefix theorem are audited transitively; only `propext`, `Classical.choice`, and `Quot.sound` are allowed.
 
 The fresh source-only build succeeded for all 151 steps, including the core, incidence theorem, all 148 strengthening modules, and final theorem audits. Every recorded source hash was checked against the maintained source. The manifest and combined log are saved in `outputs/strengthened-reproduction-*` and `outputs/strengthened-245-reproduction-*`. The independent final import audit also passed.
 
-`stronger/` is the authoritative strengthening source. The dated research directories contain frozen development snapshots and exploratory results. `ExactWedgeCount.lean` also proves the exact selected-wedge count and resulting defect identity, although the 251-edge theorem needs only the earlier upper estimate on wedges.
+`stronger/` is the authoritative strengthening source. Dated development directories are local research material and are not required or included in this PR. `ExactWedgeCount.lean` also proves the exact selected-wedge count and resulting defect identity, although the 251-edge theorem needs only the earlier upper estimate on wedges.
+
+## Conditional 244 target
+
+`Alpha223Potential.lean` and `Aggregate244Conditional.lean` are included in the reproduction driver. The no-(2,2,3) premise remains unproved. The original 151-step source-only build covers the unconditional 245 result. The PR integration audit separately checks these two additions against hash-matched compiled dependencies. A new complete driver run has 153 steps.
+
+## Low-singleton arm restriction
+
+`LowSingletonArms.lean` proves the continuation restriction under explicit membership and internal-vertex premises. It does not prove the endpoint-proximity conjecture. Check it with the same pinned dependency:
+
+```sh
+python work/spectral/verify_incidence.py --module LowSingletonArms --mathlib-dir /path/to/mathlib
+```
+
+The separate radius-three forest certificate is part of the standard-library core. See `outputs/low_singleton_investigation.md` for scope and the distinction from a full connected snake.

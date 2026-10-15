@@ -1,3 +1,7 @@
+# Scope of this archived ledger
+
+Entries below are chronological development history. The current unconditional bound is 245; 244 remains conditional. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
+
 # Research ledger — 15 October 2026
 
 ## Objective and status

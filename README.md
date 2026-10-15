@@ -1,6 +1,6 @@
 # Snake-in-the-box in dimension nine
 
-Author of the manuscript: **Iori Hironaka**.
+Authors of the manuscript: **Iori Hironaka and Tommy Ma**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
@@ -28,10 +28,10 @@ Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact pr
 
 ## Files
 
-- `outputs/snake9_research.tex`: current manuscript, with author Iori Hironaka.
-- `work/final_lean/`: authoritative standard-library proof project, with 15 modules.
+- `outputs/snake9_research.tex`: current manuscript, with authors Iori Hironaka and Tommy Ma.
+- `work/final_lean/`: authoritative standard-library proof project, with 16 modules.
 - `work/spectral/`: authoritative mathlib-dependent bounds 245, 247, 248, 251, 254, and 255, with reproduction instructions.
-- `work/spectral/stronger/`: 148 maintained geometric, classification, and aggregate proof modules.
+- `work/spectral/stronger/`: 150 maintained geometric, classification, and aggregate proof modules.
 - `RESEARCH_LEDGER.md`: continuing research status, evidence, and unresolved directions.
 - `work/*.py`: independent verification and experimental search programs.
 - `work/bank9.json`: 131 nine-dimensional examples extracted from the cited published dataset.
@@ -102,6 +102,14 @@ The published 191-edge witness and bank derive from [Orland et al., version 3](h
 ## Joint construction experiments
 
 A checked decomposition of published bank example 0 supplies compatible Q8 paths of 96 and 94 edges, whose join has 191 edges. The new joint model varies both paths. Its 42 small-cube exhaustive controls and fixed 191-edge benchmark passed. The 196-, 197-, and hinted 192-edge searches each returned UNKNOWN after 120 seconds. See [the joint investigation](outputs/joint_layer_investigation.md) for reproduction and exact scope. The bounds and conjecture are unchanged.
+
+## One-singleton structural restriction
+
+A new checked theorem restricts the two path continuations at a one-singleton configuration under explicit internal-vertex premises: they must use different coordinates of the exceptional pair. A separate Lean-checked example is a 60-vertex forest of 14 paths inside the radius-three ball, with all selected radius-two vertices of degree two and exactly one singleton square at zero. It shows why these local constraints alone cannot prove endpoint proximity. See [the local investigation](outputs/low_singleton_investigation.md). No numerical bound changed.
+
+## Latest experimental lead
+
+Seven additional ball-model records test the normalized one-singleton configuration at radii four through six. The radius-five forest model is solver-infeasible with at most three interior endpoints and feasible with four. These exclusions are **not Lean-certified**. The [local investigation](outputs/low_singleton_investigation.md) records the model, all outcomes, reproduction command, and the geometric reduction still required. The verified bounds remain unchanged.
 
 ## Collaboration
 

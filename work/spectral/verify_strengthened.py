@@ -66,7 +66,7 @@ MODULES = [
     "ThreeTwosRemainingUnequal", "DisjointOrdinaryPartners", "DisjointOneOrdinaryCount",
     "OrdinaryTwoEdgeDemand", "DisjointOrdinaryDemand", "OrdinaryDisjointExclusion",
     "NormalizeSharedThreeTwos", "AlphaRunPotential", "Aggregate245Conditional",
-    "UpperBound245",
+    "UpperBound245", "Alpha223Potential", "Aggregate244Conditional",
 ]
 
 
@@ -161,7 +161,8 @@ def main():
                 mathlib, env)
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
+            "import Aggregate244Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
+            "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.lower_bound\n"
             "#print axioms Snake9.noNext_iff_upperBound\n"
             "#print axioms Snake9.adjacent_internal_alpha_one_impossible\n"
@@ -184,7 +185,7 @@ def main():
                 "#print axioms Snake9.verified_interval_191_245\n"
             )
         run("FinalAudit", [lake, "env", "lean", f"--root={build}", str(audit)], mathlib, env)
-        expected = {"Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
+        expected = {"Snake9.upper_244_of_no_two_two_three", "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
                     "Snake9.adjacent_internal_alpha_one_impossible",
                     "Snake9.upper_bound_251", "Snake9.verified_interval_191_251",
                     "Snake9.adjacent_internal_one_two_impossible",
