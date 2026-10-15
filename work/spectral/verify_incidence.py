@@ -4,7 +4,7 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--mathlib-dir", required=True, type=Path)
-parser.add_argument("--module", choices=["SquareIncidence","LowSingletonArms"],default="SquareIncidence")
+parser.add_argument("--module", choices=["SquareIncidence","LowSingletonArms","CycleExclusion"],default="SquareIncidence")
 parser.add_argument("--fresh-core", action="store_true", help="Rebuild a source-only core copy")
 args = parser.parse_args()
 mathlib = args.mathlib_dir.resolve()
@@ -34,4 +34,5 @@ if "version 4.19.0" not in version:
 subprocess.run(["lake","env","lean",f"--root={build}","-o",str(build/(args.module+".olean")),
                 str(build/(args.module+".lean"))],cwd=mathlib,env=env,check=True)
 print("Square-incidence proof checked: every Q9 snake has at most 254 edges." if args.module=="SquareIncidence"
-      else "Low-singleton arm restriction checked under its explicit geometric premises.")
+      else "Low-singleton arm restriction checked under its explicit geometric premises." if args.module=="LowSingletonArms"
+      else "Finite-subset cycle exclusion and recorded cycle cuts checked.")

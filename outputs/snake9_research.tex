@@ -11,7 +11,7 @@
     urlcolor=blue,
     citecolor=blue,
     pdftitle={The Ninth-Dimensional Snake-in-the-Box Problem},
-    pdfauthor={Iori Hironaka}
+    pdfauthor={広中依緒璃}
 }
 
 \usepackage{microtype}
@@ -29,7 +29,7 @@
 \title{The Ninth-Dimensional Snake-in-the-Box Problem:\\
 A Sequence-Based Conjecture, Verified Bounds, and Construction Obstructions}
 \author{Iori Hironaka}
-\date{14 October 2026}
+\date{\today}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -395,6 +395,16 @@ Take the 14 ordered paths in Appendix~\ref{app:radius-three}. Direct checks show
 
 The forest satisfies the local degree and acyclicity requirements but is disconnected. It is therefore not a counterexample to a statement about a single full snake. Its existence shows that these radius-three requirements alone cannot complete the proposed endpoint-proximity argument. Connections through higher-weight vertices, or another global restriction, remain necessary.
 
+
+\subsection{Cycle constraints beyond four-cycles}
+\begin{lemma}[A finite subset has a vertex of degree at most one]\label{lem:subset-low-degree}
+Let $P=(p_0,\ldots,p_m)$ be an induced path and let $A$ be a nonempty subset of its vertex set. Some vertex of $A$ has at most one neighbor in $A$.
+\end{lemma}
+\begin{proof}
+Choose the least index $i$ for which $p_i\in A$. Any neighbor $p_j\in A$ of $p_i$ satisfies $j\ge i$ by minimality and $|j-i|=1$ by the induced-path condition. Thus $j=i+1$. There is at most one such vertex.
+\end{proof}
+Consequently, a finite nonempty vertex set having two distinct neighbors within the set at every vertex cannot be contained in an induced path. This excludes cycles of arbitrary length and also applies to disconnected unions of cycles. The lemma and the validity of all 41 recorded cycle cuts in the radius-five experiment have been independently machine-checked.
+
 \section{Computational investigations and their exact scope}
 \subsection{Published bank audit and endpoint regrowth}
 Independent Python checks verified all 131 published nine-dimensional examples, including their transition and vertex lists, every pairwise adjacency condition, and blocked endpoints. The total number of unordered pairs checked was $131\binom{192}{2}=2\,402\,016$. Canonical transition sequences, normalized by first coordinate occurrence and compared with their reversals, distinguish 131 classes under translation, coordinate permutation, and reversal. This audit makes no completeness claim.
@@ -450,6 +460,34 @@ First length & Second length & Joined target & Starting hint & Status\\
 \end{tabular}
 \end{center}
 The hint in the last run does not fix either path. These timeouts establish no existence or impossibility result. The model and its search implementation have not been independently certified; the explicit starting pair and the mathematical joining criterion have been checked separately.
+
+
+\subsection{A radius-five exclusion and its verification boundary}
+Fix the normalized radius-two selected set
+\[
+F=\{0,1,2,5,10\}\cup
+\{2^a+2^b:2\le a<b\le8,\ (a,b)\ne(2,3)\},
+\]
+where integers encode binary vertices. In the ball of Hamming radius $r$ about zero, the model selects exactly $F$ at weights at most two. Every selected vertex strictly inside the ball has degree one or two; selected vertices of weight at most two have degree two. Boundary vertices have degree at most two. The number of interior vertices of degree one is bounded by a prescribed budget. Connectedness is not imposed. Cycle cuts exclude specified cyclic components.
+
+At radius four, a forest exists with interior endpoint budget two. At radius five, the solver reports infeasibility for budgets two and three, and finds a forest with budget four. Allowing cycles restores feasibility at budget two. The feasible assignments have been checked independently. These findings distinguish an obstruction involving both endpoint count and cycles from the weaker radius-three conditions in Proposition~\ref{prop:radius-three}.
+
+A Boolean encoding of the radius-five, budget-two model records the exact cycle cuts. Removing irrelevant clauses and replacing auxiliary counters by direct restrictions on triples of endpoint indicators gives a 567-clause core involving 252 Boolean variables. Its certificate consists of 398 derived clauses obtained by reverse unit propagation: assume the negation of the proposed clause, propagate the cited clauses, and obtain a contradiction. The resulting Boolean contradiction has been independently machine-checked through ordinary logical proof steps. This certifies the explicit formula; no geometric exclusion is asserted without the remaining interpretation proof.
+
+The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the interval $191\le a(9)\le254$.
+
+\subsection{A quantitative target for the endpoint argument}
+\begin{proposition}[Conditional improvement from a singleton surplus]
+With the quantities in~\eqref{eq:anchored-square-count}, suppose a snake with $v\ge2$ vertices satisfies $T+92\ge2v$. Then it has at most 250 edges.
+\end{proposition}
+\begin{proof}
+The checked incidence identity, $E\ge0$, and $W\le v-2$ give
+\[
+140v+4T\le36\,856.
+\]
+Substituting $T\ge2v-92$ yields $148v\le37\,224$. Since $148\cdot252=37\,296$, it follows that $v\le251$ and hence $v-1\le250$. The arithmetic implication has been independently machine-checked; its new aggregate premise remains unproved.
+\end{proof}
+A Hamming ball of radius two in $\Q_9$ contains $1+9+\binom92=46$ vertices. Thus, if every vertex with exactly one singleton square were proved to lie within distance two of an endpoint, at most 92 vertices could be exceptional. Lemma~\ref{lem:one-square} would then suggest the required aggregate inequality: nonexceptional vertices contribute at least two singleton incidences and exceptional vertices at least one. The endpoint statement and its checked aggregation remain open. The bound 250 is therefore a conditional target, not an established global bound.
 
 \section{Scope of the results and remaining obligations}
 The preceding arguments establish explicit lower-bound witnesses, reductions of the optimality question, conditional constructions, and a universal upper bound. The numerical extrapolation remains conjectural. The single-crossing length constraints use the cited eight-dimensional maximum $a(8)=98$; this paper does not repeat the exhaustive proof of that result. No compatible pair yielding length 196 or 197 has been found. The restricted search results cover precisely the recorded seeds and construction families, and provide no global exclusion.

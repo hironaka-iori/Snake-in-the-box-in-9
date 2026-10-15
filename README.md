@@ -20,7 +20,7 @@ Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact pr
 ## Files
 
 - `outputs/snake9_research.tex`: current manuscript, with author Iori Hironaka.
-- `work/final_lean/`: authoritative standard-library proof project, with 16 modules.
+- `work/final_lean/`: authoritative standard-library proof project, with 18 modules.
 - `work/spectral/`: mathlib-dependent incidence bound 254, spectral bound 255, and reproduction instructions.
 - `work/*.py`: independent verification and experimental search programs.
 - `work/bank9.json`: 131 nine-dimensional examples extracted from the cited published dataset.
@@ -88,7 +88,7 @@ A new checked theorem restricts the two path continuations at a one-singleton co
 
 ## Latest experimental lead
 
-Seven additional ball-model records test the normalized one-singleton configuration at radii four through six. The radius-five forest model is solver-infeasible with at most three interior endpoints and feasible with four. These exclusions are **not Lean-certified**. The [local investigation](outputs/low_singleton_investigation.md) records the model, all outcomes, reproduction command, and the geometric reduction still required. The verified bounds remain unchanged.
+Seven additional ball-model records test the normalized one-singleton configuration at radii four through six. The radius-five forest model is solver-infeasible with at most three interior endpoints and feasible with four. A finite Boolean core of the radius-five, budget-two exclusion is now Lean-checked, and all its recorded cycle cuts are justified for snakes. The complete geometry-to-formula bridge remains unfinished; see the [certificate investigation](outputs/ball_certificate_investigation.md). The other solver exclusions remain uncertified. The [local investigation](outputs/low_singleton_investigation.md) records the model, all outcomes, reproduction command, and the geometric reduction still required. The verified bounds remain unchanged.
 
 ## Collaboration
 

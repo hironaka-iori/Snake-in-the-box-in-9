@@ -61,3 +61,7 @@ python work/low_singleton_ball.py --radius 5 --endpoint-budget 2 --seconds 30
 ```
 
 This publication includes existing experimental work only; further proof and search work is deferred.
+
+## Certificate follow-up
+
+The budget-two radius-five run was repeated while preserving all 41 cycle cuts. A separate Boolean encoding and proof translation now certify a 567-clause contradiction in Lean. The recorded cycle cuts and generic degree/endpoint clause implications are also checked. The complete geometric interpretation of the input clauses remains unfinished. See `ball_certificate_investigation.md` for the current evidence boundary and reproduction steps. The older solver records above remain unchanged.

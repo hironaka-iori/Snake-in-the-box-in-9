@@ -27,7 +27,16 @@ theorem six_candidates_exceed_two_endpoints (selected missing : Nat)
 theorem twenty_eight_pairs_exceed_two_endpoints (endpoints : Nat)
     (many : 28 ≤ endpoints) (only_two : endpoints ≤ 2) : False := by omega
 
+/-- Conditional arithmetic target for a stronger aggregate singleton estimate.
+The premise on T has not yet been established for every snake. -/
+theorem upper_250_of_singleton_surplus (length E T W : Nat)
+    (identity : 2*E + 4*T + 144*(length+1) = 36864 + 4*W)
+    (corners : W+2 ≤ length+1)
+    (surplus : 2*(length+1) ≤ T+92) : length ≤ 250 := by
+  omega
+
 #print axioms square_count_identity
 #print axioms upper_254_of_census
 #print axioms six_candidates_exceed_two_endpoints
+#print axioms upper_250_of_singleton_surplus
 end SquareCountingLogic

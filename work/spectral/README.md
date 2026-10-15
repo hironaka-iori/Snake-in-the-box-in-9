@@ -35,3 +35,13 @@ python work/spectral/verify_incidence.py --module LowSingletonArms --mathlib-dir
 ```
 
 The separate radius-three forest certificate is part of the standard-library core. See `outputs/low_singleton_investigation.md` for scope and the distinction from a full connected snake.
+
+## General cycle exclusion
+
+`CycleExclusion.lean` checks that every nonempty finite subset of a snake has a vertex with at most one neighbor in the subset. It then checks all 41 recorded cycle cuts from the radius-five experiment. Reproduce with:
+
+```sh
+python work/spectral/verify_incidence.py --module CycleExclusion --mathlib-dir /path/to/mathlib
+```
+
+The finite Boolean contradiction is in the standard-library core project. Its complete connection to the normalized geometric model remains pending; see `outputs/ball_certificate_investigation.md`.

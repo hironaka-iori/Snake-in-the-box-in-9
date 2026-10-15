@@ -30,11 +30,11 @@ This replaces the need to certify all original canonical-square bijections befor
 
 Reproduce with `python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-core` after preparing the pinned dependency. The next priorities concern improving the mathematics beyond 254.
 
-## Immediate proof target: certify the radius-five obstruction
+## Immediate proof target: connect the checked certificate to geometry
 
-The latest experiments sharpen the remaining split-arm case. A radius-four forest is feasible with at most two interior endpoints. At radius five, the solver reports infeasibility with budgets two and three, while finding a forest with budget four. Allowing cycles restores feasibility at budget two. The saved feasible assignments passed independent Python checks; the exclusions remain uncertified. See `outputs/low_singleton_investigation.md` and the seven accompanying JSON records.
+The latest experiments sharpen the remaining split-arm case. A radius-four forest is feasible with at most two interior endpoints. At radius five, the solver reports infeasibility with budgets two and three, while finding a forest with budget four. Allowing cycles restores feasibility at budget two. The saved feasible assignments passed independent Python checks. A 567-clause Boolean core for radius five and budget two now has a Lean-checked contradiction, using 398 derived clauses. All 41 recorded cycle cuts and the generic degree and endpoint clause rules are checked separately. The complete geometry-to-formula bridge remains unfinished; see `outputs/ball_certificate_investigation.md`. See `outputs/low_singleton_investigation.md` and the seven accompanying JSON records.
 
-This is the most concrete next proof direction: obtain a checkable exclusion certificate for radius five and budget two, then prove that a genuine snake with a one-singleton root far from both endpoints maps into that model. The general-to-normalized geometric reduction is also unfinished. A certificate for the encoded model alone would leave this reduction to prove. These experiments do not change the global interval.
+This is the most concrete next proof direction: prove that a genuine normalized snake maps to a satisfying assignment of the checked Boolean formula, contradicting its certified unsatisfiability. The general-to-normalized geometric reduction is also unfinished. The existing certificate for the encoded model leaves this reduction to prove. These experiments do not change the global interval. The checked conditional arithmetic shows the intended payoff: an aggregate singleton estimate T+92 >= 2v would improve the upper bound to 250 edges. Endpoint proximity could supply this estimate, but that argument and its aggregation remain unfinished.
 
 ## Construction priority: find a longer construction outside the exhausted families
 
@@ -64,7 +64,7 @@ The latest local result narrows one-singleton configurations: under the explicit
 
 ## Suggested division of work
 
-- Proof contributor: certify the radius-five obstruction and the geometric reduction, while independently reviewing the completed incidence proof.
+- Proof contributor: complete the geometric interpretation of the checked radius-five certificate, while independently reviewing the completed incidence proof.
 - Construction contributor: diverse Q8 seeds, multiple layer crossings, and asymmetric cycle constructions.
 - Extremal contributor: long-path restrictions on low-alpha configurations and aggregate square inequalities.
 
@@ -91,4 +91,4 @@ A search timeout, a blocked endpoint, and a restricted exclusion cannot establis
 
 ## Publication status
 
-The manuscript, core Lean sources, mathlib-dependent proofs, reproduction instructions, witness data, and existing experiments are included. The manuscript compiles, its author is Iori Hironaka, and its authoritative source is in `E:\Snake-in-a-box`. During this handoff, all four primary witnesses and all 131 bank examples passed the independent all-pairs verification. No new research claim was promoted to a theorem. Further research is stopped at this handoff pending a continuation request.
+The manuscript, core Lean sources, mathlib-dependent proofs, reproduction instructions, witness data, and existing experiments are included. The manuscript compiles, its author is Iori Hironaka, and its authoritative source is in `E:\Snake-in-a-box`. During this handoff, all four primary witnesses and all 131 bank examples passed the independent all-pairs verification. No new research claim was promoted to a theorem. Research resumed after the handoff. The current priority is the geometric bridge for the checked finite certificate; exact optimality remains unresolved.
