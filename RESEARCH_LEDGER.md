@@ -1,0 +1,126 @@
+# Scope of this archived ledger
+
+Entries below are chronological development history. The current unconditional bound is 245; 244 remains conditional. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
+
+# Research ledger — 15 October 2026
+
+## Objective and status
+
+Determine the exact maximum **edge** length of an induced path in Q9. Completion requires an explicit length-L snake and an unconditional exclusion of length L+1, both compiled in Lean with audited dependencies. **Unresolved.** No preferred value of L is assumed.
+
+Base repository: `hironaka-iori/Snake-in-the-box-in-9`, commit `37ec31e9c5667bf3cc2795e4cbec89537ebe9af6`. Cloned using the user's existing local Git access into the requested folder. Working branch: `research/2026-10-15-autonomous-audit`. Original tracked proof sources are preserved. Documentation and the authoritative manuscript are being updated from backed-up originals to record the new verified bound.
+
+## Inherited evidence, awaiting fresh proof reproduction
+
+- Repository interval: 191 <= a(9) <= 254. Historical Lean logs support the stated proofs; new local compilation is tracked separately below.
+- General prefix theorem already exists in `work/final_lean/OptimalityTarget.lean`; it uses precisely `Snake9.Snake` from the construction theorem.
+- Endpoint-blocked does not mean globally longest. The repository contains a 93-edge counterexample.
+- The 131-example bank is not a complete classification. Orland et al. arXiv:2607.15270v3 explicitly labels it a discovered bank, not a census.
+- The 196 extrapolation has neither a witness nor an exclusion of 197. It receives no privileged search status.
+- Fixed-prefix searches, fixed-seed layer searches, and two-deletion neighborhoods have restricted scopes. UNKNOWN yields no exclusion. Saved restricted solver exclusions have no Lean certificates.
+
+## Parallel work and ownership
+
+- `work/research_20261015/proof/`: fresh Lean/toolchain and pinned mathlib reproduction, definition/dependency audit.
+- `work/research_20261015/construction/`: independent bank/witness validation, materially different multi-cut construction search.
+- `work/research_20261015/upper_bounds/`: aggregate singleton-square restrictions with counterexample testing.
+- `work/research_20261015/audit/`: primary-source/dataset refresh and global encoding/symmetry audit.
+
+## Fresh findings
+
+1. The construction worker independently ran the repository's read-only witness validator with bundled Python 3.12. All four witnesses and 131 bank snakes passed. This is executable checking, not fresh Lean reproduction.
+2. Inspected README, COLLABORATION, manuscript, core snake definition, next-length theorem, exact-search model, local-square model and saved search summaries.
+3. Current primary sources opened: arXiv:2607.15270v3; arXiv:2609.27483v1; Math-AI-Caltech public data repository; Lukito–van Zanten (2001) publisher PDF. Do not transfer cycle upper bounds to paths without proving a bridge.
+
+## Search record requirements
+
+Every new search records model/code hash, source data, dimension, target, exact fixed restrictions, symmetry justification, solver/version, seed, workers, limits, status, and elapsed time. A feasible result needs an independent distinctness and all-pairs adjacency check. An infeasible result needs an encoding audit and proof certificate before any formally verified exclusion is claimed.
+
+## Next actions
+
+Complete fresh proof compilation; refresh the public subset with hashes; test and prove the proposed low-singleton/endpoint restriction; run construction search beyond previously exhausted neighborhoods; independently audit global model symmetry with exhaustive small-cube controls. Maintain this ledger and per-worker notes as results arrive.
+
+## Live update: proof reproduction and new candidate bound
+
+- Fresh Lean 4.19.0 core build (all15 modules) and both pinned-mathlib bounds254/255 succeeded. Logs and source hashes live under `work/research_20261015/proof/logs/`. Only `propext`, `Classical.choice`, `Quot.sound` occur in audited theorem dependencies. The witness itself uses `propext` only.
+- Public archive refresh matches the inherited SHA256 and all131 ordered transitions exactly;2,402,016 unordered pairs independently checked. The same archive contains1,042 inequivalent190-edge snakes, now available to construction search.
+- New written lemma: adjacent internal vertices cannot both have singleton-square count1. Its arm restriction is Lean checked. Two final geometric cases force too many endpoints or a selected8-cycle. Full geometry integration is ongoing. A conditional Lean theorem already derives251 edges from this local lemma, but **do not call251 an unconditional Lean bound until the geometric premise is discharged**.
+- Root compiled `CycleStructure.lean`, `SingletonAlphaBridge.lean`, `NormalizeAdjacentSingletons.lean`: six/eight-cycle exclusion; exact alpha=1 to unique missing pair; translation invariance; normalization from arbitrary adjacent internal path indices. Standard foundations only. Proof worker owns final normalized contradiction.
+- Built-in Lean4.19 `bv_decide`/`bv_check` route was inspected and invokes `Lean.ofReduceBool`; it is not being used to evade the kernel-checking requirement. All new compiled lemmas use ordinary proof terms/kernel `decide`.
+- Independent global-model audit passed35 exhaustive Q1–Q4 controls. Its positive-length/n>=2 symmetry coverage is justified analytically. Degenerate n=1/target>=2 symmetry and target0 issues are recorded as out-of-scope API limitations.
+- Exhaustive Q4 local-forest incidence relaxation (65,536 masks;14,911 forests;84 statistic vectors) yields no improvement over254. Saved as a failed strategy to avoid repetition.
+- Stronger adjacent-alpha probes: (1,2) and(1,3) returned INFEASIBLE under the full connected-path encoding; these are solver evidence only. A(2,2) counterexample of127 edges was independently checked. Upper worker found a(1,5) witness and solver minimum5 under justified local normalization; not yet a theorem.
+- Construction rotation/short-bridge closure exhausted330 labelled paths, all belonging to the original131 isometry classes. No record improvement. Multi-cut repairs, diverse190 seeds, and targeted endpoint-blocker repairs are recorded in the construction ledger; restricted INFEASIBLE and UNKNOWN remain distinct.
+
+## Completed unconditional strengthening: 191 <= a(9) <= 251
+
+Both normalized geometric cases, translation/normalization from arbitrary adjacent internal vertices, and the final global wrapper compiled successfully under Lean 4.19.0 with the pinned mathlib. The final theorem `Snake9.verified_interval_191_251` uses only `propext`, `Classical.choice`, and `Quot.sound`. An independently written wrapper compiled to the same interval. The earlier warning that 251 was conditional is now discharged.
+
+The authoritative new sources are in `work/spectral/stronger/`. Dated research `.lean` files are frozen development snapshots; future maintenance belongs in the authoritative directory. The portable `verify_strengthened.py` completed a fresh source-only core build and every strengthening module successfully, with final transitive audits. Saved evidence: `outputs/strengthened-reproduction-manifest.json` and `outputs/strengthened-reproduction.log`. The manuscript, README, and collaborator handoff are synchronized; author Iori Hironaka is preserved. The updated manuscript compiled successfully in the desktop LaTeX compiler. No exact optimum or novelty priority is claimed.
+
+The next mathematical target is excluding adjacent counts (1,2). A complete written proof passed independent review and finite case-bookkeeping checks; geometric formalization is ongoing. The conditional aggregate theorem `upper_248_of_no_adjacent_one_two` compiled, but its new premise is not yet discharged, so 248 is not yet a verified bound. Construction work produced five new-to-our-input 97-edge Q8 classes; all ten 94-edge partner searches returned UNKNOWN at 20 seconds. Diverse fixed-layer searches now use known shorter compatible partners as unfixed hints. No 192-edge Q9 witness has been obtained.
+
+## Completed unconditional strengthening: 191 <= a(9) <= 248
+
+The remaining premise above has now been discharged. `UpperBound248.lean` compiled successfully, including the normalized configuration exclusion, exclusion for arbitrary adjacent internal vertices, global `upper_bound_248`, and `verified_interval_191_248`. All four transitive audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The proof uses the same original snake definition and lower-bound witness. The exact optimum remains unresolved.
+
+Twelve additional modules are integrated into `work/spectral/stronger/`, bringing the maintained strengthening project to27 modules. The portable driver is undergoing a new source-only rebuild of the full 248 proof. The prior successful 251 build is preserved separately as `outputs/strengthened-251-reproduction-manifest.json` and `outputs/strengthened-251-reproduction.log`. README and handoff now report248; the authoritative manuscript is being updated from a backup of its251 version.
+
+Further probes found no path with three consecutive internal alpha2 vertices in either of the two exhaustive five-vertex window shapes; both returned INFEASIBLE. The same two shapes also excluded internal alpha1 vertices at distance two with the intervening count unrestricted. These remain solver evidence, with no formal certification. Human investigation of the distance-two restriction is underway. The direct square-indicator model passed a positive (2,2) control with an independently verified110-edge path.
+
+## Completed unconditional strengthening: 191 <= a(9) <= 247
+
+`UpperBound247.lean` compiled the endpoint lower bound four and the global upper bound247 using only `propext`, `Classical.choice`, and `Quot.sound`. The finite missing-pair classification and both geometric cases are discharged. The aggregate estimate is `4*m+10 <= 2*T`; there is no new solver premise. `EndpointFourWitness.lean` independently checks a120-edge example with exactly four singleton squares at its first endpoint, using only `propext`. Its four coordinate pairs are {1,5}, {2,7}, {3,8}, {4,6}.
+
+The maintained project now has33 strengthening modules. The fresh248 source-only reproduction succeeded and is preserved as `outputs/strengthened-248-reproduction-manifest.json` and its log. The fresh247 reproduction also succeeded:36 steps including the core, incidence theorem, all33 strengthening modules, and final audits. Every recorded source hash matches the maintained files. Its manifest and combined log are saved both under `outputs/strengthened-reproduction-*` and the versioned247 filenames. README, collaborator handoff, and manuscript report247; manuscript author Iori Hironaka is preserved and desktop LaTeX compilation succeeded. Earlier ledger statements are historical checkpoints, not competing current bounds.
+
+Research continues on adjacent counts(1,3), distance-two count-one vertices, and runs of three count-two vertices. Construction searches have not produced192 edges. A deliberately shortened188-edge class regrew to191 but returned to an existing isometry class. A new overlay search permits multiple crossings between two Q8 paths, beyond the previously exhausted single-join families. The exact optimum remains unresolved.
+
+## Adjacent (1,3) exclusion and triple-two research
+
+The adjacent (1,3) exclusion is now unconditional for arbitrary internal path indices. Its eight additional maintained modules bring the strengthening project to41. A complete fresh source-only build succeeded at2026-10-15T07:44:23Z; all recorded source hashes were rechecked against current files. The manifest and combined compiler output are saved under both `outputs/strengthened-reproduction-*` and `outputs/strengthened-247-one-three-reproduction-*`. Only the three standard foundations occur in the audited dependencies. The manuscript includes the human proof and compiles successfully. This local exclusion alone does not improve247.
+
+The repeated-coordinate five-vertex window with three consecutive internal alpha2 vertices is excluded in compiled Lean, including the outer matching classification, middle contradiction, and normalization. These new development modules have not yet been integrated into the maintained driver. The distinct-coordinate window remains open; its outer-family classification and middle geometry are being formalized separately. Exploratory propagation/DPLL closed366 symmetry representatives of the both-exception case, but its computational exclusions are not yet kernel certificates and are not used as theorem premises. The exact optimum remains unresolved and the verified numerical interval remains191--247.
+
+## Triple-two classification: only unequal ordinary outer remainders remain
+
+All exceptional-count cases, the common-hole case, the star/star case, both mixed star/ordinary orientations, and the equal ordinary-pair case have now been excluded by compiled Lean proof terms. The final development theorem `DistinctOuterConfig.remaining_unequal_ordinary_case` in `proof/ThreeTwosRemainingUnequal.lean` reduces any still-possible distinct-coordinate triple-two window to two distinct 2-element sets A,B in the five ordinary coordinates, with outer missing families `{bd,A}` and `{ac,B}`. These new modules use only the standard three foundations and remain development sources pending the next maintained-project integration and fresh source-only build.
+
+The mixed-case proof is symbolic: three clean rows force a middle edge to touch them; the two-edge budget then makes every middle-isolated row supply an endpoint; each ordinary middle missing edge supplies another endpoint, possibly at its associated row. The resource families are disjoint, and two missing edges on five coordinates demand at least three endpoints. No exploratory solver result is a premise. `MixedOuterExclusion.lean` completes this argument. `EqualOuterPairExclusion.lean` independently closes A=B.
+
+The remaining unequal A,B cases are being separated into disjoint and shared-coordinate pairs. Generic row geometry and ordinary-pair endpoint lemmas have compiled in `audit/OrdinaryRowGeometry.lean`, `OrdinaryIsolatedGeometry.lean`, `OrdinaryIsolatedOneSide.lean`, and `OrdinaryPairEndpoints.lean`. These are intermediate lemmas, not yet the final exclusion of all triple-two windows.
+
+The global aggregation step has been proved separately and is explicitly conditional. `audit/AlphaRunPotential.lean` proves `7*n+5 <= 3*sum(alpha)` for a positive sequence whose ends are at least4, whose count-one entries have neighbors at least4, and which has no three consecutive twos. A five-state potential handles the valid pattern1,4,1, which invalidates a naive three-term lower bound. `audit/Aggregate245Conditional.lean` compiles `upper_245_of_no_three_twos`: once the remaining local exclusion is supplied, the same incidence identity gives at most245 edges. **245 is not yet an unconditional bound. The verified interval remains191--247; the exact optimum remains unresolved.**
+
+Construction work has moved beyond fixed input banks to joint variable Q8 layers. The model retains a fully checked191-edge positive control; several bounded runs timed out, and degree-only relaxations produced disconnected cycles which were explicitly rejected or cut. No192-edge construction has been obtained. Restricted finite neighborhood exclusions and timeouts remain distinct from an unrestricted impossibility theorem; details and scopes are in the construction ledger and `construction/JOINT_LAYER_METHOD.md`.
+
+### Subsequent local milestone: disjoint ordinary remainders excluded
+
+`OrdinaryEndpointCount.lean` now proves that the combined distinct endpoint resources of an unequal ordinary outer pair have cardinality at most2. `DisjointOrdinaryDemand.lean` proves at least3 when those outer pairs are disjoint, and `OrdinaryDisjointExclusion.lean` combines them. All compile with standard foundations only. The two-ordinary-middle-edge subcase is proved symbolically in `audit/OrdinaryTwoEdgeDemand.lean`: a failed hole endpoint criterion forces a two-edge wedge, which leaves two isolated coordinates and makes the other hole an endpoint. No solver exclusion or unchecked computation is used.
+
+`NormalizeSharedThreeTwos.lean` therefore reduces every remaining triple-two window to outer pairs A={e,x}, B={e,y}. In that shared-coordinate case, `SharedOuterSwitch.lean` closes the difficult middle family F={{e,k},{x,y}} for clean k by a present/absent central-square argument. Several other exact families are compiled, including central F={{c,d},{c,e}} and its mirror, root's `SharedMissingRightFamilies.lean` (F={{e,y},S}, S contained in {c,d,e,x}, S different from {c,d} and {c,e}), and `SharedCrossStars.lean` (F={{c,x},{d,y}}). Remaining shared families and the complete finite coverage proof are still being completed. The maintained numerical bound remains247 until the full no-three-twos theorem and its global wrapper are complete and freshly reproduced.
+
+
+## Completed theorem: unconditional interval 191 <= a(9) <= 245
+
+The complete arbitrary-path no-three-consecutive-twos theorem and unconditional `upper_bound_245` / `verified_interval_191_245` compiled successfully. All final transitive audits contain only `propext`, `Classical.choice`, and `Quot.sound`; an independent import audit also passed. Every shared-coordinate residual family is now excluded. The final symbolic classification covers all441 ordered choices of two edges among21 coordinate pairs; arbitrary-coordinate injectivity and coverage are proved, and equal-edge choices are rejected. The final ordinary-hole/xy branches are in `SharedOrdinaryFork.lean`. No solver premise or unchecked computation enters these proofs.
+
+The maintained strengthening project now contains148 modules (107 new beyond the previous41), with the same original core snake definition and191-edge witness. The dependency closure was independently reconstructed and agreed. Maintained `CoordinateCycle.lean` takes precedence over its historical development copy; only proof tactics differ. The strengthened reproduction driver includes all148 modules and final no222/245 audits. A fresh source-only rebuild is running in `work/spectral/.verification/strengthened-l_md7bys/`. The saved `outputs/strengthened-reproduction-*` files still describe the previous successful247 checkpoint until the new run completes.
+
+README, handoff and manuscript now state245 and distinguish completed theorem compilation from the ongoing clean reproduction. Pre-update files are backed up in `audit/backups/pre-245/`. The manuscript retains Iori Hironaka, gives the complete potential argument and numerical deduction, and explicitly labels its longer geometric classification account as a summary of the full formal proof. Exact optimality remains unresolved; no192-edge construction has been found.
+
+Further research is testing whether the surviving count pattern223 or related consecutive patterns can occur. Excluding adjacent(1,4) alone cannot improve the present aggregate bound, because periodic223 still attains average7/3 under all those restrictions. Construction research also continues beyond fixed-layer and small-neighborhood families.
+
+
+### Work after the 245 theorem
+
+The updated authoritative manuscript compiled successfully in the desktop compiler. The fresh148-module proof reproduction continues without a reported failure. `Alpha223Potential.lean` and `Aggregate244Conditional.lean` compile a conditional next target: excluding internal counts223, together with the proved no222 result, gives `2*T >= 5*v+3` and at most244 edges. The no223 premise is explicitly retained. It is not a new unconditional upper bound.
+
+An independent Fourier/distance-distribution relaxation was tested in `audit/probe_distance_distribution.py`. Its ordered distance-two identity `y2=23*v+10-T` and other necessary constraints passed all131 known-bank controls. The relaxation admits an exactly checked rational vector at246 vertices, so these aggregate constraints do not improve245. That vector is not a snake construction. A second continuous relaxation of the local223 degree model also remains feasible with all square cuts, the known global size bound and all ten sampled cycle cuts; it provides no short linear contradiction. Scripts/results are preserved rather than treated as exclusions.
+
+Root has compiled generic counted outer-family geometry and repeated-window resource counting in `CountedOuterConfig.lean`, `RepeatedResourceData.lean`, and `Repeated23HoleFree.lean`. For outer counts2 and3, at most one common row hole is possible. With no common hole, the left missing family is a two-edge matching contained in the three-edge right family, and the two unused coordinates force both endpoints. These are development lemmas only; the repeated223 exclusion is not yet complete. All successful theorem audits use only standard foundations.
+
+
+### Fresh 245 reproduction completed
+
+The source-only build in `strengthened-l_md7bys` completed successfully at 2026-10-15T10:44:35.144919+00:00. All151 steps passed: the original core, incidence theorem,148 strengthening modules, and final transitive audits. All167 recorded source hashes match the maintained files. The manifest and combined log are saved as both `outputs/strengthened-reproduction-*` and `outputs/strengthened-245-reproduction-*`. The general prefix theorem and unchanged191 witness were included in the final audit. README, handoff, spectral instructions, and manuscript now record this successful reproduction. Earlier running-status paragraphs above are historical. The exact optimum remains unresolved.

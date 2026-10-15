@@ -1,6 +1,6 @@
 # Radius-five Boolean certificate
 
-Checkpoint: 15 October 2026. The global interval remains 191 <= a(9) <= 254.
+Checkpoint: 15 October 2026. The current global interval is 191 <= a(9) <= 245 after integrating the collaborator contribution.
 
 ## Exact scope
 
@@ -63,3 +63,5 @@ The checked formula is the authority for the finite contradiction. The JSON prov
 ## Quantitative consequence to target
 
 The checked arithmetic lemma `upper_250_of_singleton_surplus` states that the existing incidence identity, the corner bound, and the additional premise T+92 >= 2v imply at most 250 edges. A radius-two ball has 46 vertices; two endpoint balls have at most 92. Proving endpoint proximity for every one-singleton vertex would therefore supply a route to the surplus premise, followed by its aggregation in Lean. That premise remains open, so 250 is a conditional target and the established upper bound is still 254.
+
+Integration note: the unconditional 245-edge bound supersedes the earlier conditional 250 target. The local certificate remains useful as a separate structural investigation; its geometric interpretation remains incomplete.
