@@ -111,6 +111,28 @@ A new checked theorem restricts the two path continuations at a one-singleton co
 
 Seven additional ball-model records test the normalized one-singleton configuration at radii four through six. The radius-five forest model is solver-infeasible with at most three interior endpoints and feasible with four. These exclusions are **not Lean-certified**. The [local investigation](outputs/low_singleton_investigation.md) records the model, all outcomes, reproduction command, and the geometric reduction still required. The verified bounds remain unchanged.
 
+## Exhaustive DFS construction experiments
+
+A standalone C search (`work/snake_dfs.c`, controls in `work/dfs_controls.py`) extends the endpoint regrowth experiments. With the first 112 vertices of either end of every bank snake fixed, no 192-edge extension exists; all 262 runs were exhausted. Internal windows of up to 80 vertices almost always have a unique filling. Because Q9 is bipartite, an internal replacement alone can never yield 192 edges. A random sample of 528 million combined window-and-end moves found nothing longer, and the known 98-edge Q8 snake has no other optimal completion after freeing 59 of its vertices. Except where marked as Lean-checked below, these are uncertified exclusions in restricted families. See [the DFS investigation](outputs/dfs_investigation.md). No bound changed.
+
+## Kernel-checked search (Lean)
+
+Four new modules in `work/final_lean/` use only the standard library. Their axiom audits list only `propext`, `Classical.choice` and `Quot.sound`, with no `sorry` and no `native_decide`.
+
+- `DfsParity.lean` proves that two snakes with the same endpoints have lengths of equal parity. In particular, no 192-edge snake has the endpoints of a 191-edge snake, so rewiring the interior alone can never reach 192.
+- `DfsCertificate.lean` (version 1) and `DfsDecide.lean` (version 2) are kernel-evaluable exhaustive regrowth searches on 512-bit bitsets, with soundness theorems connecting a `false` answer to `Snake9.Snake 192` (`no192_from_prefix`, `no192_from_prefix2`). Version 2 prunes with verified parity and leaf-peeling bounds and checks all 262 bank prefixes with 160 fixed vertices in under 4 minutes on three cores.
+- `DfsBankCert160.lean` / `DfsBankCert160v2.lean` (generated) prove `bank_no192_keep160`: no 192-edge snake begins or ends with a 160-vertex end segment of any of the 131 bank snakes. With version 2, `bank_no192_keep152v2` extends this to 152-vertex end segments: 2616 kernel-checked theorems in 60 modules covering about 2.2e5 search nodes, in 40 minutes on three cores, with the same axiom audit.
+
+Regenerate and check, from the repository root:
+
+```sh
+python3 work/build_lean_certificates.py --keep 160 --shards 20 --v2
+sh work/run_lean_certificates.sh 160v2 3
+```
+
+The runner builds three shards at a time, because each kernel check holds its memory until the process exits.
+
+
 ## Collaboration
 
 Use a separate branch for each proof or experiment. Keep claims labelled as proved, conditional, computationally observed, or conjectured. Include transition sequences for every proposed longer snake and verify all unordered vertex pairs. Record solver parameters, seed, time limit, and termination status. Submit changes through pull requests so collaborators can review the mathematical scope as well as the code.
