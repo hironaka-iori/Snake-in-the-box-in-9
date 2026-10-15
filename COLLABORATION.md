@@ -8,7 +8,7 @@ The working conjecture is **a(9) = 196**, with low confidence. For n = 3,...,8, 
 
 The fully Lean-checked global interval is now **191 <= a(9) <= 254**. The square-face bound is checked end to end using an anchored-incidence identity; the independent spectral argument still supplies the weaker bound 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
 
-The most recent completed result is the global upper bound 254. The proof sums each square from its four corners, uses the checked singleton-square lemma, and injects selected two-edge corners into internal path vertices. The proof audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The exact optimum remains open.
+The strongest completed global bound is 254. The proof sums each square from its four corners, uses the checked singleton-square lemma, and injects selected two-edge corners into internal path vertices. The proof audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The exact optimum remains open.
 
 The earlier universal two-singleton-square claim for internal vertices is false. A checked 137-edge counterexample has zero at path index 127, endpoints 145 and 288, and exactly one singleton square, {0,4,8,12}. Its distance along the path from the nearer endpoint is ten. Thus simply excluding the first few vertices near the endpoints does not repair that universal assertion. This example does not exclude a stronger statement restricted to longest paths.
 
@@ -30,7 +30,13 @@ This replaces the need to certify all original canonical-square bijections befor
 
 Reproduce with `python work/spectral/verify_incidence.py --mathlib-dir /path/to/mathlib --fresh-core` after preparing the pinned dependency. The next priorities concern improving the mathematics beyond 254.
 
-## Priority 1: find a longer construction outside the exhausted families
+## Immediate proof target: certify the radius-five obstruction
+
+The latest experiments sharpen the remaining split-arm case. A radius-four forest is feasible with at most two interior endpoints. At radius five, the solver reports infeasibility with budgets two and three, while finding a forest with budget four. Allowing cycles restores feasibility at budget two. The saved feasible assignments passed independent Python checks; the exclusions remain uncertified. See `outputs/low_singleton_investigation.md` and the seven accompanying JSON records.
+
+This is the most concrete next proof direction: obtain a checkable exclusion certificate for radius five and budget two, then prove that a genuine snake with a one-singleton root far from both endpoints maps into that model. The general-to-normalized geometric reduction is also unfinished. A certificate for the encoded model alone would leave this reduction to prove. These experiments do not change the global interval.
+
+## Construction priority: find a longer construction outside the exhausted families
 
 A verified 192-edge example would immediately disprove the candidate optimum 191. A 196-edge example would establish the conjectured lower bound, but still would not prove optimality.
 
@@ -46,7 +52,7 @@ An alternative is an induced cycle on 194 vertices, which yields a 192-edge snak
 
 The joint-search route now has a checked starting point: bank example 0 decomposes into compatible 96- and 94-edge Q8 paths, and its 191-edge join is Lean-checked. A new model varies both paths. It passed 42 exhaustive small-cube controls and the fixed 191-edge benchmark. Searches for (98,97), (98,98), and (96,95) each returned UNKNOWN at 120 seconds; the last used the checked pair as an unfixed hint. See `outputs/joint_layer_investigation.md`. These results establish no exclusion of any target. Consider diverse hints or multiple-crossing models rather than treating the timeouts as structural evidence.
 
-## Priority 2: obtain a much stronger global restriction
+## Global proof priority: obtain a much stronger restriction
 
 The square-count identity could support stronger bounds through aggregate constraints on empty and singleton squares. The universal local bound alpha >= 2 is already false, so any stronger statement needs a justified restriction or an aggregate correction.
 
@@ -58,7 +64,7 @@ The latest local result narrows one-singleton configurations: under the explicit
 
 ## Suggested division of work
 
-- Proof contributor: independently review the completed incidence proof, then prove stronger aggregate inequalities or long-path restrictions.
+- Proof contributor: certify the radius-five obstruction and the geometric reduction, while independently reviewing the completed incidence proof.
 - Construction contributor: diverse Q8 seeds, multiple layer crossings, and asymmetric cycle constructions.
 - Extremal contributor: long-path restrictions on low-alpha configurations and aggregate square inequalities.
 
@@ -75,9 +81,14 @@ These are independent tasks suitable for separate branches. The current handoff 
 | Square investigation and its limitations | `outputs/square_investigation.md` |
 | Layer construction and restricted exclusions | `outputs/layer_investigation.md` |
 | Competing trend fits | `outputs/trend_hypothesis.md` |
+| Local restrictions and uncertified ball experiments | `outputs/low_singleton_investigation.md` |
 | Explicit witnesses and search records | `outputs/*.json` |
 | Published 131-example subset | `work/bank9.json` |
 
 The authoritative Lean sources are in `work/final_lean/`; do not create divergent proof copies in `outputs/`. The authoritative paper is the existing LaTeX source. Keep implementation filenames and theorem identifiers in technical notes rather than the paper. Retain Iori Hironaka in the author field. No old exported PDF is included because it predates the current source.
 
 A search timeout, a blocked endpoint, and a restricted exclusion cannot establish global optimality. For every claimed theorem, state exactly which assumptions are discharged. The repository is a research checkpoint, and its documentation must retain the unresolved status until a matching construction and global upper bound are verified.
+
+## Publication status
+
+The manuscript, core Lean sources, mathlib-dependent proofs, reproduction instructions, witness data, and existing experiments are included. The manuscript compiles, its author is Iori Hironaka, and its authoritative source is in `E:\Snake-in-a-box`. During this handoff, all four primary witnesses and all 131 bank examples passed the independent all-pairs verification. No new research claim was promoted to a theorem. Further research is stopped at this handoff pending a continuation request.

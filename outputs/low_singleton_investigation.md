@@ -33,3 +33,31 @@ python work/low_singleton_radius3.py
 ```
 
 The static Lean certificate is the authoritative evidence for the displayed forest; a new solver run should be compared with it before treating a different output as checked.
+
+## Uncertified radius-four to radius-six experiments
+
+The additional program `work/low_singleton_ball.py` fixes the same normalized radius-two selection. Selected vertices strictly inside the ball have degree one or two, with no endpoints at weight at most two; the total number of interior endpoints is bounded by the stated budget. Boundary vertices may have degree zero, one, or two. Global connectivity is not required. Forest runs remove cyclic components through valid cycle cuts.
+
+| Radius | Interior endpoint budget | Cycles | Solver status | Cycle cuts |
+|---|---|---|---|---|
+| 4 | 2 | Allowed | OPTIMAL | 0 |
+| 4 | 2 | Forbidden | OPTIMAL | 22 |
+| 5 | 2 | Allowed | OPTIMAL | 0 |
+| 5 | 2 | Forbidden | INFEASIBLE | 41 |
+| 5 | 3 | Forbidden | INFEASIBLE | 40 |
+| 5 | 4 | Forbidden | OPTIMAL | 24 |
+| 6 | 2 | Forbidden | INFEASIBLE | 53 |
+
+All seven records use one worker and seed 29; time limits, elapsed times, and per-iteration solver statistics are saved in `outputs/low_singleton_ball_*.json`. For a feasibility problem, OPTIMAL means a feasible assignment was found; it does not mean that a longest snake was found. The four saved feasible assignments were independently checked during the publication audit for the normalized selection, degrees, endpoint budget, and, where required, absence of cycles.
+
+The radius-five model is infeasible with at most three interior endpoints and feasible with four, according to the solver. Allowing cycles makes the radius-five model feasible with budget two. This identifies a concrete candidate obstruction involving both acyclicity and endpoint count. These exclusions have no Lean-checked certificate. The saved records contain cycle-cut counts, not the actual cycle clauses, so they do not by themselves reconstruct an impossibility proof.
+
+The most focused next proof task is to certify the radius-five, budget-two exclusion and prove that the normalized restriction of an actual snake satisfies the encoded constraints. The earlier arm theorem still requires its explicit geometric premises; deriving those premises and the normalization from a general one-singleton vertex must also be checked. Only after those steps could this support an endpoint-proximity theorem. No improved global bound follows from the present records.
+
+Reproduce a representative run with the pinned solver dependency, preserving the old output first:
+
+```sh
+python work/low_singleton_ball.py --radius 5 --endpoint-budget 2 --seconds 30
+```
+
+This publication includes existing experimental work only; further proof and search work is deferred.

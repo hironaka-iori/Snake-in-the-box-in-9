@@ -86,6 +86,10 @@ A checked decomposition of published bank example 0 supplies compatible Q8 paths
 
 A new checked theorem restricts the two path continuations at a one-singleton configuration under explicit internal-vertex premises: they must use different coordinates of the exceptional pair. A separate Lean-checked example is a 60-vertex forest of 14 paths inside the radius-three ball, with all selected radius-two vertices of degree two and exactly one singleton square at zero. It shows why these local constraints alone cannot prove endpoint proximity. See [the local investigation](outputs/low_singleton_investigation.md). No numerical bound changed.
 
+## Latest experimental lead
+
+Seven additional ball-model records test the normalized one-singleton configuration at radii four through six. The radius-five forest model is solver-infeasible with at most three interior endpoints and feasible with four. These exclusions are **not Lean-certified**. The [local investigation](outputs/low_singleton_investigation.md) records the model, all outcomes, reproduction command, and the geometric reduction still required. The verified bounds remain unchanged.
+
 ## Collaboration
 
 Use a separate branch for each proof or experiment. Keep claims labelled as proved, conditional, computationally observed, or conjectured. Include transition sequences for every proposed longer snake and verify all unordered vertex pairs. Record solver parameters, seed, time limit, and termination status. Submit changes through pull requests so collaborators can review the mathematical scope as well as the code.
