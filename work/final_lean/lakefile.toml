@@ -1,6 +1,6 @@
 name = "snake9_audit"
 version = "0.1.0"
-defaultTargets = ["Snake9", "Snake9Logic", "MaximalityCounterexample", "CoilReduction", "TrendHypothesis", "OptimalityTarget", "LayerJoining", "Snake8", "IntegerLayerBridge", "SquareCounterexample", "SquareCountingLogic", "PathStructure", "CubeLocal", "SingletonSquareLemma", "JointLayerSeed", "RadiusThreeForest", "BallCertificate", "BallClauseLogic"]
+defaultTargets = ["Snake9", "Snake9Logic", "MaximalityCounterexample", "CoilReduction", "TrendHypothesis", "OptimalityTarget", "LayerJoining", "Snake8", "IntegerLayerBridge", "SquareCounterexample", "SquareCountingLogic", "PathStructure", "CubeLocal", "SingletonSquareLemma", "JointLayerSeed", "RadiusThreeForest", "BallCertificate", "BallClauseLogic", "DfsParity", "DfsCertificate", "DfsBankData", "DfsDecide"]
 
 [[lean_lib]]
 name = "Snake9"
@@ -55,3 +55,386 @@ name = "BallCertificate"
 
 [[lean_lib]]
 name = "BallClauseLogic"
+
+# Kernel-checked regrowth search (DfsParity/DfsCertificate/DfsDecide) and the generated
+# bank certificates; the certificate modules are not default targets (see README).
+[[lean_lib]]
+name = "DfsParity"
+
+[[lean_lib]]
+name = "DfsCertificate"
+
+[[lean_lib]]
+name = "DfsBankData"
+
+[[lean_lib]]
+name = "DfsDecide"
+
+[[lean_lib]]
+name = "DfsBankCert160_0"
+
+[[lean_lib]]
+name = "DfsBankCert160_1"
+
+[[lean_lib]]
+name = "DfsBankCert160_2"
+
+[[lean_lib]]
+name = "DfsBankCert160_3"
+
+[[lean_lib]]
+name = "DfsBankCert160_4"
+
+[[lean_lib]]
+name = "DfsBankCert160_5"
+
+[[lean_lib]]
+name = "DfsBankCert160_6"
+
+[[lean_lib]]
+name = "DfsBankCert160_7"
+
+[[lean_lib]]
+name = "DfsBankCert160_8"
+
+[[lean_lib]]
+name = "DfsBankCert160_9"
+
+[[lean_lib]]
+name = "DfsBankCert160_10"
+
+[[lean_lib]]
+name = "DfsBankCert160_11"
+
+[[lean_lib]]
+name = "DfsBankCert160_12"
+
+[[lean_lib]]
+name = "DfsBankCert160_13"
+
+[[lean_lib]]
+name = "DfsBankCert160_14"
+
+[[lean_lib]]
+name = "DfsBankCert160_15"
+
+[[lean_lib]]
+name = "DfsBankCert160_16"
+
+[[lean_lib]]
+name = "DfsBankCert160_17"
+
+[[lean_lib]]
+name = "DfsBankCert160_18"
+
+[[lean_lib]]
+name = "DfsBankCert160_19"
+
+[[lean_lib]]
+name = "DfsBankCert160_20"
+
+[[lean_lib]]
+name = "DfsBankCert160_21"
+
+[[lean_lib]]
+name = "DfsBankCert160_22"
+
+[[lean_lib]]
+name = "DfsBankCert160_23"
+
+[[lean_lib]]
+name = "DfsBankCert160_24"
+
+[[lean_lib]]
+name = "DfsBankCert160_25"
+
+[[lean_lib]]
+name = "DfsBankCert160_26"
+
+[[lean_lib]]
+name = "DfsBankCert160_27"
+
+[[lean_lib]]
+name = "DfsBankCert160_28"
+
+[[lean_lib]]
+name = "DfsBankCert160_29"
+
+[[lean_lib]]
+name = "DfsBankCert160_30"
+
+[[lean_lib]]
+name = "DfsBankCert160_31"
+
+[[lean_lib]]
+name = "DfsBankCert160_32"
+
+[[lean_lib]]
+name = "DfsBankCert160_33"
+
+[[lean_lib]]
+name = "DfsBankCert160_34"
+
+[[lean_lib]]
+name = "DfsBankCert160_35"
+
+[[lean_lib]]
+name = "DfsBankCert160_36"
+
+[[lean_lib]]
+name = "DfsBankCert160_37"
+
+[[lean_lib]]
+name = "DfsBankCert160_38"
+
+[[lean_lib]]
+name = "DfsBankCert160_39"
+
+[[lean_lib]]
+name = "DfsBankCert160"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_0"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_1"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_2"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_3"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_4"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_5"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_6"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_7"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_8"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_9"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_10"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_11"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_12"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_13"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_14"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_15"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_16"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_17"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_18"
+
+[[lean_lib]]
+name = "DfsBankCert160v2_19"
+
+[[lean_lib]]
+name = "DfsBankCert160v2"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_0"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_1"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_2"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_3"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_4"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_5"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_6"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_7"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_8"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_9"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_10"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_11"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_12"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_13"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_14"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_15"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_16"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_17"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_18"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_19"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_20"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_21"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_22"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_23"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_24"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_25"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_26"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_27"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_28"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_29"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_30"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_31"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_32"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_33"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_34"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_35"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_36"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_37"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_38"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_39"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_40"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_41"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_42"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_43"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_44"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_45"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_46"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_47"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_48"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_49"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_50"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_51"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_52"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_53"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_54"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_55"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_56"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_57"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_58"
+
+[[lean_lib]]
+name = "DfsBankCert152v2_59"
+
+[[lean_lib]]
+name = "DfsBankCert152v2"
