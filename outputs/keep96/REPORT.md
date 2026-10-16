@@ -32,8 +32,11 @@ the binary hash and environment are in each result. Solver times are not portabl
 benchmarks: bounded certificate checks ran concurrently for part of the survey.
 The parent's 0.1-second polling may cause small wall-limit overshoot.
 
-Proof-check statuses: `{'NOT_CHECKED': 238, 'PASSED_EXECUTABLE_RUP_CHECK': 21, 'UNKNOWN_TIMEOUT': 3}`. These refer to executable
-RUP checking, not Lean. A failed/timed-out proof check does not upgrade the solver
+Proof-check statuses: `{'NOT_CHECKED': 238, 'PASSED_EXECUTABLE_RUP_CHECK': 22, 'PASSED_NATIVE_DRAT_CHECK': 2}`. These refer to executable
+certificate checking, not Lean. Native DRAT-trim statuses (overlapping checks):
+`{'NOT_CHECKED': 259, 'PASSED_NATIVE_DRAT_CHECK': 3}`. The original sixty-second audit is retained;
+successful later checks supersede its timeouts in this combined table.
+A failed/timed-out proof check does not upgrade the solver
 result to a verified theorem. All available UNSAT certificates remain locally
 preserved. `certificate-index.json` records paths, sizes and SHA256 hashes, including
 large proofs omitted from Git. To restore those on another computer, transfer them
@@ -66,3 +69,18 @@ formula/configuration identity and saved hashes, without new solver calls.
 Run `finalize.py` only once both phases finish. A `started.json` without a result is
 an incomplete attempt, never a completed proof. Full proof locations remain local
 even when the appropriately sized Git evidence subset is used elsewhere.
+
+## Follow-up: large certificates
+
+The three original certificate-check timeouts were revisited with native DRAT-trim.
+The fixed upstream source, build configuration, controls, hashes and complete logs
+are preserved in `work/keep96/vendor/drat-trim/` and `outputs/keep96/native-audit/`.
+
+| Entry | Native certificate status | Seconds |
+|---|---|---:|
+| 258 | PASSED_NATIVE_DRAT_CHECK | 33.902 |
+| 133 | PASSED_NATIVE_DRAT_CHECK | 74.386 |
+| 256 | PASSED_NATIVE_DRAT_CHECK | 133.398 |
+
+These native checks used 1800-second and 2048-MiB limits. They verify the Boolean
+UNSAT certificates, not Lean theorems. The 20 solver UNKNOWN cases remain unchanged.

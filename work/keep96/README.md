@@ -128,3 +128,47 @@ investigation). It also applies the 2 GiB memory cap. Non-RUP steps are rejected
 deletions may be ignored because all retained learned clauses were justified.
 Empty proof output is accepted only if original clauses have a unit-propagation
 contradiction. No Lean campaigns are launched by any of these commands.
+
+## Follow-up: three large certificates
+
+The original 60-second pilot audit remains unchanged. To run the separately
+budgeted RUP checks for entries 258, 133, and 256 (30 minutes each, 2 GiB):
+
+```powershell
+python work/keep96/recheck_large.py
+```
+
+Results are saved after each entry in `outputs/keep96/large-proof-audit.json`.
+Successful results with matching inputs, checker and output hashes are reused.
+
+An independent native DRAT-trim check is available on Windows:
+
+```powershell
+python -m pip install --only-binary=:all: --target work/keep96/.native-packages ziglang==0.13.0
+python work/keep96/native_audit.py
+python work/keep96/finalize.py
+```
+
+Unmodified upstream DRAT-trim sources and license are vendored at commit
+`2e3b2dc0ecf938addbd779d42877b6ed69d9a985` from
+https://github.com/marijnheule/drat-trim. Compilation uses `zig cc -O2 -std=c99
+-Dgetc_unlocked=getc`; the macro supplies the standard locked character reader
+on Windows. The compiler and checker hashes, command line, raw logs, and positive,
+invalid-proof and truncated-proof controls are saved under
+`outputs/keep96/native-audit/`. The native checker must exit zero and print
+`s VERIFIED`; timeout, memory failure, or other exits cannot count as success.
+Each native check has a 30-minute external wall limit and a 2 GiB inherited
+Windows Job Object process-memory cap. Native checks and extended RUP checks may
+overlap, so their timings are not isolated benchmarks. The native runner reruns
+its three checks when explicitly invoked; it does not alter the original proofs.
+The raw logs include warnings for deletions of clauses absent from the checker's
+database (10, 6, and 19 for entries 258, 133, and 256). Upstream treats those
+deletions as no-ops; this does not bypass checks of proof additions. All three
+checks finish with `s VERIFIED`, with zero RAT lemmas in their verified cores.
+After native verification succeeded for all three, redundant extended RUP replay
+of entry 133 was stopped; `extended-rup-interruption.json` records that event.
+Entry 258's completed RUP check is retained. A stopped replay is not RUP success.
+
+These are executable certificate checks, not a Lean kernel verification or a
+universal proof of the encoder's geometric interpretation. The 20 solver UNKNOWN
+entries are a separate unresolved group and are not searched by these commands.
