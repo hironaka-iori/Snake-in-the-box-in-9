@@ -1,5 +1,40 @@
 # First complete KEEP=112 entry
 
+The first entry has now passed the full build and axiom audit, and is saved
+in commit `37a5d1e`. The remaining stage is being built by `run_bank.py`.
+
+## Full-bank continuation
+
+Run `work/lean112/start-bank.ps1` to launch or resume the hidden proof worker.
+It keeps two independent compilation streams, locks against duplicate runs,
+and saves every completed module together with source, artifact and import
+hashes. The live dashboard remains at `http://127.0.0.1:51993/`.
+
+`prepare_cover.py` proposes 86 representative regions, covering all 262
+oriented bank entries by cube translations and region inclusion. This is a
+proof reduction only after each finite inclusion has been checked by Lean.
+`generate_cover.py` emits those inclusion proofs, exact prefix-to-bank
+identities, and individual bank exclusion theorems. Each representative has
+its own complete geometric/Boolean proof. A region containing a translated
+smaller region can exclude snakes in that smaller region as well.
+
+`LocalRup.lean` and `TreeRup.lean` prove that unit propagation from already
+satisfied clauses derives a valid new clause. `export_local_rup.py` emits
+the retained inference sequence and kernel-reduced checks. The generator and
+saved SAT certificates are not trusted. Auxiliary count variables are given
+explicit threshold semantics in `generate_bank_bridge.py`.
+
+`outputs/lean112/bank-proof.json` records completed representatives, completed
+bank entries and failures. `bank-module-checks.json` contains per-module
+receipts, and `bank-logs/` contains compiler output. Failed groups retain their
+checkpoints while independent groups continue. The authorized heartbeat can
+repair failures and resume after the process releases its lock. There is no
+claim of completion until all 262 entries and `Bank112Results` pass the final
+standard-axiom audit. The final results concern fixed bank end segments, not
+a global upper bound for arbitrary snakes.
+
+## First-entry theorem
+
 The target is the **forward orientation of bank entry 0**, with its first 112
 vertices fixed. This is one of 262 oriented entries. It is a conditional
 extension exclusion, not a global upper bound for the nine-dimensional cube.

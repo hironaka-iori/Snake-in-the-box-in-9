@@ -1,5 +1,46 @@
 # KEEP=112 continuation contract
 
+## Current implementation (2026-10-16)
+
+The first full geometric entry is PASSED, audited and pushed in commit
+37a5d1e. `First112Complete.lean` proves exclusion of 192 and all longer
+edge lengths for the fixed 112-vertex prefix. Its immutable completion
+receipt is `outputs/lean112/first-geometric-proof.json`.
+
+`run_bank.py` now generates and checks actual Boolean proofs, geometry,
+translation inclusions and bank-indexed exclusion theorems. It holds
+`bank-runner.lock`, saves `bank-module-checks.json` after every module,
+and saves `bank-proof.json` after every complete entry. Check the PID in
+`bank-runner.json` before doing anything. Never launch a duplicate runner,
+modify a source while its compiler is using it, or overwrite its status.
+The old dashboard service is separate and must remain on port 51993.
+
+There are 86 proposed representative regions, using cube translations
+and containment to cover 262 entries. `cover.json` is untrusted input;
+each containment and prefix identity is separately checked by Lean.
+The representatives require 255165 retained Boolean inference steps.
+`LocalRup.lean` and `TreeRup.lean` prove the soundness of the small RUP
+checks; the generated certificates are reduced by the Lean kernel.
+`generate_bank_bridge.py` emits explicit geometry and count semantics.
+Only final `Bank112EntryNNN` declarations passing an axiom audit count.
+
+If the runner is active and making progress, leave it running quietly.
+If a group fails, inspect its exact error in `bank-proof.json` and
+`bank-logs/`, finish any missing Lean proof, and resume the runner after
+its lock is released. Successful modules are reused against source,
+artifact and direct-import hashes. The final aggregate `Bank112Results`
+is required before declaring the 112 stage complete. After all checks,
+document and commit/push on the existing research branch and disable the
+heartbeat. Do not imply that completing this stage solves the global
+nine-dimensional snake problem.
+
+Normal launch: run `start-bank.ps1`. A terminal-only targeted repair can
+use `python work/lean112/run_bank.py --workers 2 --representatives N ...`
+after confirming that no runner is alive. A targeted run does not complete
+the whole stage unless all 262 entries and the aggregate pass.
+
+## Earlier stage context
+
 The user authorized continued proof work, background execution and a live
 monitor. Work only in this checkout, on research/dfs-lean-completion. Do not
 alter main or claim global optimality. Do not spawn agents unless separately

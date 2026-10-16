@@ -12,7 +12,7 @@
 <section class="events"><h2>最近保存的进度</h2><div id="events"></div></section><footer id="updated">每 5 秒自动刷新。日志与检查结果持续保存。</footer>
 </main><script>
 const $=id=>document.getElementById(id);let latest={},selected=null;
-const labels={RUNNING:'运行中',FAILED:'需要处理错误',PASSED_BOOLEAN_ONLY:'布尔证明已通过',SURVEY_COMPLETE:'首轮调查完成',PENDING:'待推进',IN_PROGRESS:'证明编写中',COMPLETE:'已完成'};
+const labels={RUNNING:'运行中',FAILED:'需要处理错误',NEEDS_REPAIR:'需要修复',PASSED:'全部核验通过',PASSED_BOOLEAN_ONLY:'布尔证明已通过',SURVEY_COMPLETE:'首轮调查完成',PENDING:'待推进',IN_PROGRESS:'证明核验中',COMPLETE:'已完成'};
 const fmt=s=>s?new Date(s).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}):'—';
 function detail(){if(selected===null)return;if((latest.reasoning?.completed_entry_indices||[]).includes(+selected)){$('chosen').textContent=`入口 ${+selected+1}：完整112档排除定理已通过 Lean，包含路径到约束的数学连接及最终公理审计。`;return;}let e=latest.survey?.entries?.[selected];$('chosen').textContent=e?`入口 ${+selected+1}：${e.status}；${e.seconds??0} 秒${e.reused_from!==undefined?'；复用相同公式的入口 '+(e.reused_from+1):''}。求解器结果尚非几何定理。`:`入口 ${+selected+1}：尚未调查。`;}
 for(let j=0;j<262;j++){let b=document.createElement('button');b.className='cell';b.textContent=j+1;b.title='入口 '+(j+1);b.setAttribute('aria-label','查看入口 '+(j+1));b.onclick=()=>{selected=String(j);detail()};$('entries').append(b)}
