@@ -25,6 +25,13 @@ they do not assert that any particular unverified prefix is excluded.
 Both additions have compiled under Lean 4.19.0. Their axiom audits contain only
 `propext`, `Classical.choice`, and `Quot.sound` (some use fewer).
 
+`work/final_lean/DfsBankCert144Results.lean` now combines the completed bank
+certificate with these implications. For every one of the 262 oriented bank
+entries, it excludes a matching initial or terminal 144-vertex segment in any
+snake of at least 192 edges. Equivalently, any snake with such an end segment
+has at most 191 edges. These are restricted end-segment results, not a global
+upper bound.
+
 ## Certificate status
 
 - The original `DfsCertificate`, `DfsDecide`, `DfsParity`, and bank-data modules
@@ -34,13 +41,20 @@ Both additions have compiled under Lean 4.19.0. Their axiom audits contain only
   generated theorems in 721 dependency modules, plus the aggregate. The producer
   reports 1,073,970 cost units, which include leaf-search nodes and bookkeeping;
   this number is not the full C search-tree node count.
-- **KEEP=144 verification was paused at the user's request on 16 October 2026.
-  169 of 721 dependency modules finished successfully; 2 of 97 aggregate
-  dependency targets finished. The aggregate and final axiom audit did not run.
-  Generated source alone is not a
-  certificate.** The authoritative status and source hashes are recorded by
-  `outputs/dfs-lean-144v2/manifest.json`; success requires `PASSED`, a successful
-  aggregate build, and a fresh transitive axiom audit.
+- **KEEP=144 verification PASSED on 16 October 2026 at 11:21:48 China time.**
+  All 721 dependency modules and all 97 dependency targets completed, followed
+  by the aggregate and the final end-segment consequence module. A fresh audit
+  of all four final theorems found only `propext`, `Classical.choice` and
+  `Quot.sound`. Source hashes were unchanged throughout the successful run,
+  and no dependency modules were missing. The authoritative record is
+  `outputs/dfs-lean-144v2/manifest.json`; detailed evidence is in
+  `outputs/dfs-lean-144v2/runs/20261016T023308-52964/`.
+  The earlier 169-module pause remains archived separately in
+  `outputs/dfs-lean-144v2-paused-20261016/`.
+- The independent executable data audit in `outputs/dfs144-source-audit.json`
+  checks all 131 bank paths for inducedness, matches both orientations to the
+  Lean data, and confirms that all 721 modules and 262 entry theorems are
+  covered. This supplements the Lean proof rather than replacing it.
 - KEEP=128, KEEP=120 and KEEP=112 remain uncertified computation results. This
   work does not relabel them as Lean theorems.
 - Internal-window uniqueness and the Q8 completion experiments are also not
@@ -54,7 +68,8 @@ uses `work/snake_dfs.exe`; on other platforms it uses `work/snake_dfs`.
 ```sh
 cc -O3 -o work/snake_dfs work/snake_dfs.c
 python work/build_lean_certificates.py --keep 144 --v2 --cap 3500 --split 100
-python work/check_lean_certificates.py 144v2 --workers 2
+python work/audit_regrowth_sources.py 144v2 --output outputs/dfs144-source-audit.json
+python work/check_lean_certificates.py 144v2 --workers 2 --results-module DfsBankCert144Results --audit-theorem Snake9.Dfs.bank_no_long_prefix_keep144 --audit-theorem Snake9.Dfs.bank_no_long_suffix_keep144 --audit-theorem Snake9.Dfs.bank_end_segment_length_le191
 ```
 
 The producer rejects incomplete or successful searches when preparing an
@@ -62,6 +77,10 @@ exclusion. Search-mode environment variables are cleared explicitly. The Python
 runner preserves every build log, returns failure on any failed dependency or
 aggregate, checks the final axiom list, and verifies that the source hashes did
 not change during the run. Lake can resume already compiled dependencies.
+Every attempt keeps separate logs and an append-only event record. Module
+completion records are flushed to disk, and the latest manifest is replaced
+atomically with retries for transient Windows file locks. Historical logs
+are retained even when a subsequent run succeeds.
 
 ## Cost investigation
 
@@ -96,4 +115,5 @@ experiment must therefore not be cited as a KEEP=112 exclusion theorem.
 
 The checkpoint archive preserves the experimental encodings, LRAT certificate,
 exported Lean modules, partial build caches, logs and explicit paused manifests.
-No search or certificate checker remains running after the pause.
+The KEEP=112 experiment remains paused. The subsequent KEEP=144 check completed
+successfully; its final state is recorded in `outputs/dfs-lean-144v2/manifest.json`.

@@ -1,13 +1,19 @@
 {
   "tag": "144v2",
-  "status": "PAUSED_BY_USER",
-  "workers": 2,
+  "status": "PASSED",
+  "workers": 3,
+  "pid": 52964,
+  "run_id": "20261016T023308-52964",
+  "started_utc": "2026-10-16T02:33:08.285867+00:00",
+  "updated_utc": "2026-10-16T03:21:48.551609+00:00",
+  "log_directory": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964",
   "sources_sha256": {
     "BallCertificate.lean": "acb4e00473e82959127dbc4380cf7905012db09a3ef4aa8b5930875914e2d37b",
     "BallClauseLogic.lean": "991354fa1f8558fe1803dc0f190e4d9b171d125eaca2901f5b3c0c28808954cb",
     "BooleanCounterLogic.lean": "3d29a9dfeebb3b739f533db832e3981fdc01ac4b3d42646dbb2181fd0a4a99e1",
     "CoilReduction.lean": "4c683eceec5f7650e82e7b8be2600404c7c8b997195ca9a6334945e026566e1f",
     "CubeLocal.lean": "45b6486fd3d5bf4dbac3d57252028a1946724aa78762b0cddc10b51ec7fe7a43",
+    "DfsBankCert144Results.lean": "284d28bdb17bb8050f486b0f81a42facb6715f0f1e554275c86b098c60b249a2",
     "DfsBankCert144v2.lean": "a098949f9eeadc6974bd73f0b4608f04bc1c50c471743b9ec78c2b16182a48fb",
     "DfsBankCert144v2_g0.lean": "2d6991460583deb67ef2ccb4b031d63dcb5db2ba5b817d1759188d688114a535",
     "DfsBankCert144v2_g1.lean": "1d5088304fccc0e72043ebe083d133fc242d069eee5ef791ea65c04e2f8b8f84",
@@ -858,6 +864,7 @@
     "DfsDecide.lean": "87745e3cce70407725188535ef43eb72cbdb10d5b63395ff000536c3b8f7b58a",
     "DfsMemo.lean": "d299271ea96777cb8455967a4001c7b301f55a6cfde6288aaea73da60c74fd49",
     "DfsParity.lean": "c92b3421c70fc530cd48b4e02add01b07a44693b5f8b2669223cc5db62e01a0a",
+    "DfsPrefix.lean": "75991e89f4fd34dee6e6b5e90fcea06bf1f21722726e891407da8f02202fc3b4",
     "IntegerLayerBridge.lean": "dd7245218a2066598d9e58421d6fc573ad45bf48106dd05b52c3e584a5f86656",
     "JointLayerSeed.lean": "945d427f627315656b92ce0d6a15c012a154b5bea5bb09075d37d2d219ad4e70",
     "LayerJoining.lean": "30687e190d96818b64569e90faaff50eba28acf7698e4ffa8c6d89d8fe640a74",
@@ -872,25 +879,91 @@
     "SquareCounterexample.lean": "6ee4b1f855213fd51f03732f35bd237a507ae4e5cbfa34792f12d8548c426630",
     "SquareCountingLogic.lean": "414f072075fc47f315e57b806cde5de299425be621b10985ab786299852d8558",
     "TrendHypothesis.lean": "b05909aad978aab0db77b7299d8c589f9becf83a5853b332809f9a58bebc95ce",
-    "lakefile.toml": "55f8286dbdf8053a0039daff7631077a427ffe213469fed2cfb284e0b49d9f8d",
+    "lakefile.toml": "f03be8fce4731628b09c2baeca8ee4b3320c1f6ac8333708bc9b43a80d77671a",
     "lean-toolchain": "f28855f24b5253d7e8949f38027066a06cdde238520086d421ba7ad24c27a691"
   },
-  "completed": {
-    "DfsBankCert144v2_j52c60": {
-      "returncode": 0,
-      "seconds": 1631.687,
-      "log": "outputs\\dfs-lean-144v2\\DfsBankCert144v2_j52c60.log"
-    },
-    "DfsBankCert144v2_j57c60": {
-      "returncode": 0,
-      "seconds": 1631.703,
-      "log": "outputs\\dfs-lean-144v2\\DfsBankCert144v2_j57c60.log"
-    }
-  },
-  "aggregate": null,
-  "paused_utc": "2026-10-16T01:25:20.873310+00:00",
-  "pause_reason": "User requested stopping work and packaging the current results.",
-  "successful_dependency_modules": [
+  "dependency_modules_total": 721,
+  "targets_total": 97,
+  "initial_cached_modules": [
+    "DfsBankCert144v2_j186c0",
+    "DfsBankCert144v2_j186c1",
+    "DfsBankCert144v2_j186c10",
+    "DfsBankCert144v2_j186c11",
+    "DfsBankCert144v2_j186c12",
+    "DfsBankCert144v2_j186c13",
+    "DfsBankCert144v2_j186c14",
+    "DfsBankCert144v2_j186c15",
+    "DfsBankCert144v2_j186c16",
+    "DfsBankCert144v2_j186c17",
+    "DfsBankCert144v2_j186c18",
+    "DfsBankCert144v2_j186c19",
+    "DfsBankCert144v2_j186c2",
+    "DfsBankCert144v2_j186c20",
+    "DfsBankCert144v2_j186c21",
+    "DfsBankCert144v2_j186c22",
+    "DfsBankCert144v2_j186c23",
+    "DfsBankCert144v2_j186c24",
+    "DfsBankCert144v2_j186c25",
+    "DfsBankCert144v2_j186c26",
+    "DfsBankCert144v2_j186c27",
+    "DfsBankCert144v2_j186c28",
+    "DfsBankCert144v2_j186c29",
+    "DfsBankCert144v2_j186c3",
+    "DfsBankCert144v2_j186c30",
+    "DfsBankCert144v2_j186c31",
+    "DfsBankCert144v2_j186c4",
+    "DfsBankCert144v2_j186c5",
+    "DfsBankCert144v2_j186c6",
+    "DfsBankCert144v2_j186c7",
+    "DfsBankCert144v2_j186c8",
+    "DfsBankCert144v2_j186c9",
+    "DfsBankCert144v2_j255c0",
+    "DfsBankCert144v2_j255c1",
+    "DfsBankCert144v2_j255c10",
+    "DfsBankCert144v2_j255c11",
+    "DfsBankCert144v2_j255c12",
+    "DfsBankCert144v2_j255c13",
+    "DfsBankCert144v2_j255c2",
+    "DfsBankCert144v2_j255c3",
+    "DfsBankCert144v2_j255c4",
+    "DfsBankCert144v2_j255c5",
+    "DfsBankCert144v2_j255c6",
+    "DfsBankCert144v2_j255c7",
+    "DfsBankCert144v2_j255c8",
+    "DfsBankCert144v2_j255c9",
+    "DfsBankCert144v2_j257c0",
+    "DfsBankCert144v2_j257c1",
+    "DfsBankCert144v2_j257c2",
+    "DfsBankCert144v2_j257c3",
+    "DfsBankCert144v2_j257c4",
+    "DfsBankCert144v2_j259c0",
+    "DfsBankCert144v2_j259c1",
+    "DfsBankCert144v2_j259c2",
+    "DfsBankCert144v2_j259c3",
+    "DfsBankCert144v2_j259c4",
+    "DfsBankCert144v2_j261c0",
+    "DfsBankCert144v2_j261c1",
+    "DfsBankCert144v2_j261c2",
+    "DfsBankCert144v2_j50c0",
+    "DfsBankCert144v2_j50c1",
+    "DfsBankCert144v2_j50c10",
+    "DfsBankCert144v2_j50c11",
+    "DfsBankCert144v2_j50c12",
+    "DfsBankCert144v2_j50c13",
+    "DfsBankCert144v2_j50c14",
+    "DfsBankCert144v2_j50c15",
+    "DfsBankCert144v2_j50c16",
+    "DfsBankCert144v2_j50c17",
+    "DfsBankCert144v2_j50c18",
+    "DfsBankCert144v2_j50c19",
+    "DfsBankCert144v2_j50c2",
+    "DfsBankCert144v2_j50c3",
+    "DfsBankCert144v2_j50c4",
+    "DfsBankCert144v2_j50c5",
+    "DfsBankCert144v2_j50c6",
+    "DfsBankCert144v2_j50c7",
+    "DfsBankCert144v2_j50c8",
+    "DfsBankCert144v2_j50c9",
     "DfsBankCert144v2_j52c0",
     "DfsBankCert144v2_j52c1",
     "DfsBankCert144v2_j52c10",
@@ -952,6 +1025,27 @@
     "DfsBankCert144v2_j52c7",
     "DfsBankCert144v2_j52c8",
     "DfsBankCert144v2_j52c9",
+    "DfsBankCert144v2_j55c0",
+    "DfsBankCert144v2_j55c1",
+    "DfsBankCert144v2_j55c10",
+    "DfsBankCert144v2_j55c11",
+    "DfsBankCert144v2_j55c12",
+    "DfsBankCert144v2_j55c13",
+    "DfsBankCert144v2_j55c14",
+    "DfsBankCert144v2_j55c15",
+    "DfsBankCert144v2_j55c16",
+    "DfsBankCert144v2_j55c17",
+    "DfsBankCert144v2_j55c18",
+    "DfsBankCert144v2_j55c19",
+    "DfsBankCert144v2_j55c2",
+    "DfsBankCert144v2_j55c20",
+    "DfsBankCert144v2_j55c3",
+    "DfsBankCert144v2_j55c4",
+    "DfsBankCert144v2_j55c5",
+    "DfsBankCert144v2_j55c6",
+    "DfsBankCert144v2_j55c7",
+    "DfsBankCert144v2_j55c8",
+    "DfsBankCert144v2_j55c9",
     "DfsBankCert144v2_j57c0",
     "DfsBankCert144v2_j57c1",
     "DfsBankCert144v2_j57c10",
@@ -1029,13 +1123,83 @@
     "DfsBankCert144v2_j59c20",
     "DfsBankCert144v2_j59c21",
     "DfsBankCert144v2_j59c22",
+    "DfsBankCert144v2_j59c23",
+    "DfsBankCert144v2_j59c24",
+    "DfsBankCert144v2_j59c25",
+    "DfsBankCert144v2_j59c26",
+    "DfsBankCert144v2_j59c27",
+    "DfsBankCert144v2_j59c28",
+    "DfsBankCert144v2_j59c29",
     "DfsBankCert144v2_j59c3",
+    "DfsBankCert144v2_j59c30",
+    "DfsBankCert144v2_j59c31",
+    "DfsBankCert144v2_j59c32",
+    "DfsBankCert144v2_j59c33",
+    "DfsBankCert144v2_j59c34",
+    "DfsBankCert144v2_j59c35",
+    "DfsBankCert144v2_j59c36",
+    "DfsBankCert144v2_j59c37",
+    "DfsBankCert144v2_j59c38",
+    "DfsBankCert144v2_j59c39",
     "DfsBankCert144v2_j59c4",
+    "DfsBankCert144v2_j59c40",
+    "DfsBankCert144v2_j59c41",
+    "DfsBankCert144v2_j59c42",
+    "DfsBankCert144v2_j59c43",
+    "DfsBankCert144v2_j59c44",
+    "DfsBankCert144v2_j59c45",
+    "DfsBankCert144v2_j59c46",
+    "DfsBankCert144v2_j59c47",
+    "DfsBankCert144v2_j59c48",
+    "DfsBankCert144v2_j59c49",
     "DfsBankCert144v2_j59c5",
+    "DfsBankCert144v2_j59c50",
+    "DfsBankCert144v2_j59c51",
+    "DfsBankCert144v2_j59c52",
+    "DfsBankCert144v2_j59c53",
+    "DfsBankCert144v2_j59c54",
+    "DfsBankCert144v2_j59c55",
+    "DfsBankCert144v2_j59c56",
+    "DfsBankCert144v2_j59c57",
+    "DfsBankCert144v2_j59c58",
+    "DfsBankCert144v2_j59c59",
     "DfsBankCert144v2_j59c6",
+    "DfsBankCert144v2_j59c60",
     "DfsBankCert144v2_j59c7",
     "DfsBankCert144v2_j59c8",
     "DfsBankCert144v2_j59c9",
+    "DfsBankCert144v2_j63c0",
+    "DfsBankCert144v2_j63c1",
+    "DfsBankCert144v2_j63c10",
+    "DfsBankCert144v2_j63c11",
+    "DfsBankCert144v2_j63c12",
+    "DfsBankCert144v2_j63c13",
+    "DfsBankCert144v2_j63c14",
+    "DfsBankCert144v2_j63c15",
+    "DfsBankCert144v2_j63c16",
+    "DfsBankCert144v2_j63c17",
+    "DfsBankCert144v2_j63c18",
+    "DfsBankCert144v2_j63c19",
+    "DfsBankCert144v2_j63c2",
+    "DfsBankCert144v2_j63c20",
+    "DfsBankCert144v2_j63c21",
+    "DfsBankCert144v2_j63c22",
+    "DfsBankCert144v2_j63c23",
+    "DfsBankCert144v2_j63c24",
+    "DfsBankCert144v2_j63c25",
+    "DfsBankCert144v2_j63c26",
+    "DfsBankCert144v2_j63c27",
+    "DfsBankCert144v2_j63c28",
+    "DfsBankCert144v2_j63c29",
+    "DfsBankCert144v2_j63c3",
+    "DfsBankCert144v2_j63c30",
+    "DfsBankCert144v2_j63c31",
+    "DfsBankCert144v2_j63c4",
+    "DfsBankCert144v2_j63c5",
+    "DfsBankCert144v2_j63c6",
+    "DfsBankCert144v2_j63c7",
+    "DfsBankCert144v2_j63c8",
+    "DfsBankCert144v2_j63c9",
     "DfsBankCert144v2_j78c0",
     "DfsBankCert144v2_j78c1",
     "DfsBankCert144v2_j78c10",
@@ -1053,7 +1217,16 @@
     "DfsBankCert144v2_j78c21",
     "DfsBankCert144v2_j78c22",
     "DfsBankCert144v2_j78c23",
+    "DfsBankCert144v2_j78c24",
+    "DfsBankCert144v2_j78c25",
+    "DfsBankCert144v2_j78c26",
+    "DfsBankCert144v2_j78c27",
+    "DfsBankCert144v2_j78c28",
+    "DfsBankCert144v2_j78c29",
     "DfsBankCert144v2_j78c3",
+    "DfsBankCert144v2_j78c30",
+    "DfsBankCert144v2_j78c31",
+    "DfsBankCert144v2_j78c32",
     "DfsBankCert144v2_j78c4",
     "DfsBankCert144v2_j78c5",
     "DfsBankCert144v2_j78c6",
@@ -1061,5 +1234,2038 @@
     "DfsBankCert144v2_j78c8",
     "DfsBankCert144v2_j78c9"
   ],
-  "sources_unchanged_at_pause": true
+  "module_events": {
+    "DfsBankCert144v2_j50c20": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:33:39.583428+00:00"
+    },
+    "DfsBankCert144v2_j257c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:33:41.525325+00:00"
+    },
+    "DfsBankCert144v2_j55c21": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:33:44.890631+00:00"
+    },
+    "DfsBankCert144v2_j257c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:34:09.077166+00:00"
+    },
+    "DfsBankCert144v2_j50c21": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:34:12.982794+00:00"
+    },
+    "DfsBankCert144v2_j55c22": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:34:17.130647+00:00"
+    },
+    "DfsBankCert144v2_j257c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:34:30.634212+00:00"
+    },
+    "DfsBankCert144v2_j55c23": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:34:45.637433+00:00"
+    },
+    "DfsBankCert144v2_j50c22": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:34:47.009412+00:00"
+    },
+    "DfsBankCert144v2_j257c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:34:56.180118+00:00"
+    },
+    "DfsBankCert144v2_j55c24": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:35:12.365040+00:00"
+    },
+    "DfsBankCert144v2_j50c23": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:35:13.635050+00:00"
+    },
+    "DfsBankCert144v2_j257c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:35:23.688739+00:00"
+    },
+    "DfsBankCert144v2_j55c25": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:35:35.672668+00:00"
+    },
+    "DfsBankCert144v2_j50c24": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:35:48.802679+00:00"
+    },
+    "DfsBankCert144v2_j257c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:35:52.420516+00:00"
+    },
+    "DfsBankCert144v2_j55c26": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:36:02.612529+00:00"
+    },
+    "DfsBankCert144v2_j50c25": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:36:18.812314+00:00"
+    },
+    "DfsBankCert144v2_j257c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:36:23.461885+00:00"
+    },
+    "DfsBankCert144v2_j55c27": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:36:33.287193+00:00"
+    },
+    "DfsBankCert144v2_j50c26": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:36:41.725077+00:00"
+    },
+    "DfsBankCert144v2_j55c28": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:36:51.233702+00:00"
+    },
+    "DfsBankCert144v2_j257c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:36:55.263345+00:00"
+    },
+    "DfsBankCert144v2_j257c13": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:37:02.880185+00:00"
+    },
+    "DfsBankCert144v2_j50c27": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:37:05.004132+00:00"
+    },
+    "DfsBankCert144v2_j50c28": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:37:18.805751+00:00"
+    },
+    "DfsBankCert144v2_j259c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:37:21.701427+00:00"
+    },
+    "DfsBankCert144v2_j261c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:37:35.915613+00:00"
+    },
+    "DfsBankCert144v2_j68c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:37:55.481978+00:00"
+    },
+    "DfsBankCert144v2_j259c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:37:56.145939+00:00"
+    },
+    "DfsBankCert144v2_j261c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:38:13.017131+00:00"
+    },
+    "DfsBankCert144v2_j259c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:38:23.867824+00:00"
+    },
+    "DfsBankCert144v2_j68c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:38:34.198164+00:00"
+    },
+    "DfsBankCert144v2_j261c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:38:49.728218+00:00"
+    },
+    "DfsBankCert144v2_j259c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:38:50.478962+00:00"
+    },
+    "DfsBankCert144v2_j68c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:39:08.425693+00:00"
+    },
+    "DfsBankCert144v2_j259c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:39:21.925988+00:00"
+    },
+    "DfsBankCert144v2_j261c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:39:22.864713+00:00"
+    },
+    "DfsBankCert144v2_j68c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:39:42.594360+00:00"
+    },
+    "DfsBankCert144v2_j261c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:39:43.875103+00:00"
+    },
+    "DfsBankCert144v2_j259c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:39:49.504441+00:00"
+    },
+    "DfsBankCert144v2_j261c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:40:05.889681+00:00"
+    },
+    "DfsBankCert144v2_j68c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:40:16.699543+00:00"
+    },
+    "DfsBankCert144v2_j259c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:40:20.442365+00:00"
+    },
+    "DfsBankCert144v2_j261c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:40:33.086226+00:00"
+    },
+    "DfsBankCert144v2_j68c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:40:46.198411+00:00"
+    },
+    "DfsBankCert144v2_j259c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:40:57.874530+00:00"
+    },
+    "DfsBankCert144v2_j68c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:41:04.021577+00:00"
+    },
+    "DfsBankCert144v2_j259c13": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:41:05.514992+00:00"
+    },
+    "DfsBankCert144v2_j261c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:41:06.472679+00:00"
+    },
+    "DfsBankCert144v2_j68c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:41:31.044630+00:00"
+    },
+    "DfsBankCert144v2_j81c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:41:33.061833+00:00"
+    },
+    "DfsBankCert144v2_j261c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:41:35.371908+00:00"
+    },
+    "DfsBankCert144v2_j68c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:41:55.636889+00:00"
+    },
+    "DfsBankCert144v2_j81c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:42:06.293016+00:00"
+    },
+    "DfsBankCert144v2_j261c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:42:11.195902+00:00"
+    },
+    "DfsBankCert144v2_j261c13": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:42:19.281781+00:00"
+    },
+    "DfsBankCert144v2_j68c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:42:23.772971+00:00"
+    },
+    "DfsBankCert144v2_j81c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:42:36.610823+00:00"
+    },
+    "DfsBankCert144v2_j68c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:42:48.409891+00:00"
+    },
+    "DfsBankCert144v2_j191c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:42:50.220577+00:00"
+    },
+    "DfsBankCert144v2_j81c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:43:06.968914+00:00"
+    },
+    "DfsBankCert144v2_j191c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:43:14.546746+00:00"
+    },
+    "DfsBankCert144v2_j68c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:43:19.028554+00:00"
+    },
+    "DfsBankCert144v2_j68c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:43:25.226028+00:00"
+    },
+    "DfsBankCert144v2_j81c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:43:36.008364+00:00"
+    },
+    "DfsBankCert144v2_j191c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:43:45.304952+00:00"
+    },
+    "DfsBankCert144v2_j203c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:43:51.787329+00:00"
+    },
+    "DfsBankCert144v2_j81c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:43:58.976275+00:00"
+    },
+    "DfsBankCert144v2_j191c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:44:08.371191+00:00"
+    },
+    "DfsBankCert144v2_j81c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:44:12.853898+00:00"
+    },
+    "DfsBankCert144v2_j203c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:44:16.237705+00:00"
+    },
+    "DfsBankCert144v2_j191c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:44:34.113328+00:00"
+    },
+    "DfsBankCert144v2_j81c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:44:37.535255+00:00"
+    },
+    "DfsBankCert144v2_j203c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:44:46.279007+00:00"
+    },
+    "DfsBankCert144v2_j81c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:44:58.573079+00:00"
+    },
+    "DfsBankCert144v2_j191c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:45:02.118865+00:00"
+    },
+    "DfsBankCert144v2_j203c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:45:08.611959+00:00"
+    },
+    "DfsBankCert144v2_j81c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:45:18.134575+00:00"
+    },
+    "DfsBankCert144v2_j191c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:45:29.130822+00:00"
+    },
+    "DfsBankCert144v2_j203c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:45:34.191692+00:00"
+    },
+    "DfsBankCert144v2_j81c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:45:39.289176+00:00"
+    },
+    "DfsBankCert144v2_j191c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:45:54.510799+00:00"
+    },
+    "DfsBankCert144v2_j203c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:02.282777+00:00"
+    },
+    "DfsBankCert144v2_j81c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:08.843504+00:00"
+    },
+    "DfsBankCert144v2_j81c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:15.094333+00:00"
+    },
+    "DfsBankCert144v2_j191c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:19.318181+00:00"
+    },
+    "DfsBankCert144v2_j203c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:30.016945+00:00"
+    },
+    "DfsBankCert144v2_j191c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:37.056663+00:00"
+    },
+    "DfsBankCert144v2_j74c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:42.536511+00:00"
+    },
+    "DfsBankCert144v2_j191c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:54.689329+00:00"
+    },
+    "DfsBankCert144v2_j203c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:46:55.620795+00:00"
+    },
+    "DfsBankCert144v2_j74c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:47:06.660625+00:00"
+    },
+    "DfsBankCert144v2_j203c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:47:20.628833+00:00"
+    },
+    "DfsBankCert144v2_j191c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:47:26.495464+00:00"
+    },
+    "DfsBankCert144v2_j191c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:47:32.998175+00:00"
+    },
+    "DfsBankCert144v2_j74c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:47:35.708642+00:00"
+    },
+    "DfsBankCert144v2_j203c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:47:38.629978+00:00"
+    },
+    "DfsBankCert144v2_j203c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:47:56.813517+00:00"
+    },
+    "DfsBankCert144v2_j74c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:00.612944+00:00"
+    },
+    "DfsBankCert144v2_j93c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:00.651554+00:00"
+    },
+    "DfsBankCert144v2_j74c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:14.756248+00:00"
+    },
+    "DfsBankCert144v2_j93c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:24.686707+00:00"
+    },
+    "DfsBankCert144v2_j203c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:28.637273+00:00"
+    },
+    "DfsBankCert144v2_j74c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:34.126259+00:00"
+    },
+    "DfsBankCert144v2_j203c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:34.489847+00:00"
+    },
+    "DfsBankCert144v2_j93c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:53.797487+00:00"
+    },
+    "DfsBankCert144v2_j74c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:48:57.500901+00:00"
+    },
+    "DfsBankCert144v2_j115c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:49:01.552580+00:00"
+    },
+    "DfsBankCert144v2_j74c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:49:16.778444+00:00"
+    },
+    "DfsBankCert144v2_j93c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:49:18.002840+00:00"
+    },
+    "DfsBankCert144v2_j115c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:49:25.532827+00:00"
+    },
+    "DfsBankCert144v2_j93c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:49:32.096050+00:00"
+    },
+    "DfsBankCert144v2_j74c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:49:43.951243+00:00"
+    },
+    "DfsBankCert144v2_j93c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:49:51.094349+00:00"
+    },
+    "DfsBankCert144v2_j115c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:49:54.189945+00:00"
+    },
+    "DfsBankCert144v2_j74c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:50:07.594052+00:00"
+    },
+    "DfsBankCert144v2_j93c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:50:14.388082+00:00"
+    },
+    "DfsBankCert144v2_j115c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:50:18.639129+00:00"
+    },
+    "DfsBankCert144v2_j74c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:50:32.796104+00:00"
+    },
+    "DfsBankCert144v2_j115c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:50:33.790314+00:00"
+    },
+    "DfsBankCert144v2_j93c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:50:34.966978+00:00"
+    },
+    "DfsBankCert144v2_j115c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:50:57.029783+00:00"
+    },
+    "DfsBankCert144v2_j74c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:51:00.832151+00:00"
+    },
+    "DfsBankCert144v2_j93c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:51:06.628871+00:00"
+    },
+    "DfsBankCert144v2_j74c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:51:09.693521+00:00"
+    },
+    "DfsBankCert144v2_j115c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:51:20.938486+00:00"
+    },
+    "DfsBankCert144v2_j93c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:51:30.228431+00:00"
+    },
+    "DfsBankCert144v2_j117c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:51:36.733714+00:00"
+    },
+    "DfsBankCert144v2_j115c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:51:40.476076+00:00"
+    },
+    "DfsBankCert144v2_j93c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:51:54.565982+00:00"
+    },
+    "DfsBankCert144v2_j117c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:00.063518+00:00"
+    },
+    "DfsBankCert144v2_j115c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:07.582829+00:00"
+    },
+    "DfsBankCert144v2_j93c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:17.610316+00:00"
+    },
+    "DfsBankCert144v2_j93c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:26.461112+00:00"
+    },
+    "DfsBankCert144v2_j117c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:28.758464+00:00"
+    },
+    "DfsBankCert144v2_j115c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:31.468631+00:00"
+    },
+    "DfsBankCert144v2_j117c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:52.412718+00:00"
+    },
+    "DfsBankCert144v2_j115c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:55.655509+00:00"
+    },
+    "DfsBankCert144v2_j198c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:52:57.877675+00:00"
+    },
+    "DfsBankCert144v2_j117c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:53:06.691968+00:00"
+    },
+    "DfsBankCert144v2_j115c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:53:19.085467+00:00"
+    },
+    "DfsBankCert144v2_j117c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:53:26.271983+00:00"
+    },
+    "DfsBankCert144v2_j198c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:53:27.810713+00:00"
+    },
+    "DfsBankCert144v2_j115c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:53:28.128929+00:00"
+    },
+    "DfsBankCert144v2_j117c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:53:49.456150+00:00"
+    },
+    "DfsBankCert144v2_j198c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:53:57.785293+00:00"
+    },
+    "DfsBankCert144v2_j213c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:53:59.372465+00:00"
+    },
+    "DfsBankCert144v2_j117c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:54:08.807400+00:00"
+    },
+    "DfsBankCert144v2_j198c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:54:19.838807+00:00"
+    },
+    "DfsBankCert144v2_j213c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:54:27.909843+00:00"
+    },
+    "DfsBankCert144v2_j117c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:54:34.806556+00:00"
+    },
+    "DfsBankCert144v2_j198c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:54:37.710111+00:00"
+    },
+    "DfsBankCert144v2_j213c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:54:56.952621+00:00"
+    },
+    "DfsBankCert144v2_j198c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:54:57.516401+00:00"
+    },
+    "DfsBankCert144v2_j117c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:54:57.677529+00:00"
+    },
+    "DfsBankCert144v2_j213c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:55:18.868227+00:00"
+    },
+    "DfsBankCert144v2_j198c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:55:20.026349+00:00"
+    },
+    "DfsBankCert144v2_j117c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:55:21.197071+00:00"
+    },
+    "DfsBankCert144v2_j213c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:55:36.560321+00:00"
+    },
+    "DfsBankCert144v2_j117c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:55:43.463195+00:00"
+    },
+    "DfsBankCert144v2_j198c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:55:45.201926+00:00"
+    },
+    "DfsBankCert144v2_j117c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:55:52.089272+00:00"
+    },
+    "DfsBankCert144v2_j213c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:55:56.547607+00:00"
+    },
+    "DfsBankCert144v2_j198c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:56:06.663695+00:00"
+    },
+    "DfsBankCert144v2_j213c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:56:20.024586+00:00"
+    },
+    "DfsBankCert144v2_j215c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:56:23.723439+00:00"
+    },
+    "DfsBankCert144v2_j198c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:56:31.501987+00:00"
+    },
+    "DfsBankCert144v2_j213c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:56:46.705507+00:00"
+    },
+    "DfsBankCert144v2_j215c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:56:53.163978+00:00"
+    },
+    "DfsBankCert144v2_j198c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:56:58.168858+00:00"
+    },
+    "DfsBankCert144v2_j213c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:57:07.442601+00:00"
+    },
+    "DfsBankCert144v2_j198c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:57:20.494996+00:00"
+    },
+    "DfsBankCert144v2_j215c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:57:22.670793+00:00"
+    },
+    "DfsBankCert144v2_j198c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:57:26.758170+00:00"
+    },
+    "DfsBankCert144v2_j213c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:57:32.558225+00:00"
+    },
+    "DfsBankCert144v2_j215c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:57:45.746369+00:00"
+    },
+    "DfsBankCert144v2_j217c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:57:57.811007+00:00"
+    },
+    "DfsBankCert144v2_j213c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:00.168597+00:00"
+    },
+    "DfsBankCert144v2_j215c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:04.811853+00:00"
+    },
+    "DfsBankCert144v2_j213c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:21.639111+00:00"
+    },
+    "DfsBankCert144v2_j215c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:23.761960+00:00"
+    },
+    "DfsBankCert144v2_j217c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:28.358581+00:00"
+    },
+    "DfsBankCert144v2_j213c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:28.404152+00:00"
+    },
+    "DfsBankCert144v2_j215c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:48.749479+00:00"
+    },
+    "DfsBankCert144v2_j64c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:57.548300+00:00"
+    },
+    "DfsBankCert144v2_j217c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:58:58.478383+00:00"
+    },
+    "DfsBankCert144v2_j215c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:59:13.923300+00:00"
+    },
+    "DfsBankCert144v2_j64c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:59:19.305057+00:00"
+    },
+    "DfsBankCert144v2_j217c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:59:21.503165+00:00"
+    },
+    "DfsBankCert144v2_j215c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:59:35.743226+00:00"
+    },
+    "DfsBankCert144v2_j217c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:59:40.010375+00:00"
+    },
+    "DfsBankCert144v2_j64c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T02:59:45.879086+00:00"
+    },
+    "DfsBankCert144v2_j217c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:00.415568+00:00"
+    },
+    "DfsBankCert144v2_j215c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:00.441570+00:00"
+    },
+    "DfsBankCert144v2_j64c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:09.521148+00:00"
+    },
+    "DfsBankCert144v2_j217c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:24.028412+00:00"
+    },
+    "DfsBankCert144v2_j215c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:26.804660+00:00"
+    },
+    "DfsBankCert144v2_j64c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:31.494699+00:00"
+    },
+    "DfsBankCert144v2_j64c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:48.506338+00:00"
+    },
+    "DfsBankCert144v2_j215c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:54.407961+00:00"
+    },
+    "DfsBankCert144v2_j217c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:00:55.153843+00:00"
+    },
+    "DfsBankCert144v2_j215c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:01:01.187785+00:00"
+    },
+    "DfsBankCert144v2_j64c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:01:13.274037+00:00"
+    },
+    "DfsBankCert144v2_j217c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:01:17.831716+00:00"
+    },
+    "DfsBankCert144v2_j77c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:01:30.613647+00:00"
+    },
+    "DfsBankCert144v2_j64c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:01:34.712877+00:00"
+    },
+    "DfsBankCert144v2_j217c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:01:43.326060+00:00"
+    },
+    "DfsBankCert144v2_j77c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:01:52.791442+00:00"
+    },
+    "DfsBankCert144v2_j64c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:02:05.653397+00:00"
+    },
+    "DfsBankCert144v2_j217c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:02:14.232744+00:00"
+    },
+    "DfsBankCert144v2_j77c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:02:23.994772+00:00"
+    },
+    "DfsBankCert144v2_j217c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:02:38.026727+00:00"
+    },
+    "DfsBankCert144v2_j64c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:02:38.601561+00:00"
+    },
+    "DfsBankCert144v2_j217c12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:02:43.687488+00:00"
+    },
+    "DfsBankCert144v2_j77c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:02:48.564141+00:00"
+    },
+    "DfsBankCert144v2_j77c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:03:10.132547+00:00"
+    },
+    "DfsBankCert144v2_j64c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:03:13.362040+00:00"
+    },
+    "DfsBankCert144v2_j193c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:03:13.473296+00:00"
+    },
+    "DfsBankCert144v2_j64c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:03:17.697971+00:00"
+    },
+    "DfsBankCert144v2_j77c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:03:24.357221+00:00"
+    },
+    "DfsBankCert144v2_j193c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:03:39.512892+00:00"
+    },
+    "DfsBankCert144v2_j77c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:03:46.501668+00:00"
+    },
+    "DfsBankCert144v2_j207c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:03:47.416693+00:00"
+    },
+    "DfsBankCert144v2_j193c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:04:06.805086+00:00"
+    },
+    "DfsBankCert144v2_j77c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:04:07.856868+00:00"
+    },
+    "DfsBankCert144v2_j207c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:04:13.383057+00:00"
+    },
+    "DfsBankCert144v2_j193c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:04:32.751117+00:00"
+    },
+    "DfsBankCert144v2_j77c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:04:36.580227+00:00"
+    },
+    "DfsBankCert144v2_j207c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:04:40.474053+00:00"
+    },
+    "DfsBankCert144v2_j193c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:00.295370+00:00"
+    },
+    "DfsBankCert144v2_j207c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:06.502833+00:00"
+    },
+    "DfsBankCert144v2_j77c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:06.577119+00:00"
+    },
+    "DfsBankCert144v2_j193c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:23.719349+00:00"
+    },
+    "DfsBankCert144v2_j207c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:34.740633+00:00"
+    },
+    "DfsBankCert144v2_j77c10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:40.868859+00:00"
+    },
+    "DfsBankCert144v2_j193c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:46.011290+00:00"
+    },
+    "DfsBankCert144v2_j77c11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:46.102321+00:00"
+    },
+    "DfsBankCert144v2_j207c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:05:57.789681+00:00"
+    },
+    "DfsBankCert144v2_j193c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:06:06.899080+00:00"
+    },
+    "DfsBankCert144v2_j6c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:06:09.316123+00:00"
+    },
+    "DfsBankCert144v2_j207c6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:06:19.323344+00:00"
+    },
+    "DfsBankCert144v2_j6c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:06:37.416420+00:00"
+    },
+    "DfsBankCert144v2_j207c7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:06:39.944203+00:00"
+    },
+    "DfsBankCert144v2_j193c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:06:42.465973+00:00"
+    },
+    "DfsBankCert144v2_j193c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:06:55.177329+00:00"
+    },
+    "DfsBankCert144v2_j6c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:07:09.477973+00:00"
+    },
+    "DfsBankCert144v2_j207c8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:07:15.106798+00:00"
+    },
+    "DfsBankCert144v2_j20c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:07:18.502566+00:00"
+    },
+    "DfsBankCert144v2_j207c9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:07:27.879173+00:00"
+    },
+    "DfsBankCert144v2_j6c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:07:35.258734+00:00"
+    },
+    "DfsBankCert144v2_j20c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:07:45.259094+00:00"
+    },
+    "DfsBankCert144v2_j22c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:07:51.660691+00:00"
+    },
+    "DfsBankCert144v2_j6c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:07:59.681768+00:00"
+    },
+    "DfsBankCert144v2_j6c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:08:08.274621+00:00"
+    },
+    "DfsBankCert144v2_j20c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:08:16.809504+00:00"
+    },
+    "DfsBankCert144v2_j22c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:08:18.924744+00:00"
+    },
+    "DfsBankCert144v2_j5c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:08:32.280225+00:00"
+    },
+    "DfsBankCert144v2_j20c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:08:42.561562+00:00"
+    },
+    "DfsBankCert144v2_j22c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:08:51.196795+00:00"
+    },
+    "DfsBankCert144v2_j5c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:00.301791+00:00"
+    },
+    "DfsBankCert144v2_j20c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:07.605946+00:00"
+    },
+    "DfsBankCert144v2_j20c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:13.740377+00:00"
+    },
+    "DfsBankCert144v2_j22c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:14.858908+00:00"
+    },
+    "DfsBankCert144v2_j5c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:33.267068+00:00"
+    },
+    "DfsBankCert144v2_j41c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:36.285644+00:00"
+    },
+    "DfsBankCert144v2_j22c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:38.810020+00:00"
+    },
+    "DfsBankCert144v2_j22c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:46.068665+00:00"
+    },
+    "DfsBankCert144v2_j5c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:09:56.796586+00:00"
+    },
+    "DfsBankCert144v2_j41c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:10:04.256002+00:00"
+    },
+    "DfsBankCert144v2_j105c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:10:05.909424+00:00"
+    },
+    "DfsBankCert144v2_j5c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:10:21.178201+00:00"
+    },
+    "DfsBankCert144v2_j5c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:10:27.126053+00:00"
+    },
+    "DfsBankCert144v2_j105c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:10:29.634093+00:00"
+    },
+    "DfsBankCert144v2_j41c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:10:37.551263+00:00"
+    },
+    "DfsBankCert144v2_j105c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:10:49.710529+00:00"
+    },
+    "DfsBankCert144v2_j89c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:04.384523+00:00"
+    },
+    "DfsBankCert144v2_j41c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:07.277751+00:00"
+    },
+    "DfsBankCert144v2_j105c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:10.616793+00:00"
+    },
+    "DfsBankCert144v2_j89c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:25.529904+00:00"
+    },
+    "DfsBankCert144v2_j105c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:28.400041+00:00"
+    },
+    "DfsBankCert144v2_j41c4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:32.286618+00:00"
+    },
+    "DfsBankCert144v2_j41c5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:38.897157+00:00"
+    },
+    "DfsBankCert144v2_j89c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:47.523173+00:00"
+    },
+    "DfsBankCert144v2_j89c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:54.840160+00:00"
+    },
+    "DfsBankCert144v2_j146c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:11:59.248925+00:00"
+    },
+    "DfsBankCert144v2_j90c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:10.255195+00:00"
+    },
+    "DfsBankCert144v2_j171c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:13.515028+00:00"
+    },
+    "DfsBankCert144v2_j146c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:24.469773+00:00"
+    },
+    "DfsBankCert144v2_j90c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:35.736654+00:00"
+    },
+    "DfsBankCert144v2_j171c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:37.004438+00:00"
+    },
+    "DfsBankCert144v2_j90c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:38.191177+00:00"
+    },
+    "DfsBankCert144v2_j146c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:43.702859+00:00"
+    },
+    "DfsBankCert144v2_j146c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:46.363820+00:00"
+    },
+    "DfsBankCert144v2_j171c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:54.844660+00:00"
+    },
+    "DfsBankCert144v2_j171c3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:12:56.446158+00:00"
+    },
+    "DfsBankCert144v2_j183c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:03.278202+00:00"
+    },
+    "DfsBankCert144v2_j158c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:18.992731+00:00"
+    },
+    "DfsBankCert144v2_j94c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:23.322136+00:00"
+    },
+    "DfsBankCert144v2_j158c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:30.270775+00:00"
+    },
+    "DfsBankCert144v2_j183c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:32.894910+00:00"
+    },
+    "DfsBankCert144v2_j183c2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:34.242852+00:00"
+    },
+    "DfsBankCert144v2_j94c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:35.823861+00:00"
+    },
+    "DfsBankCert144v2_j11c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:56.870209+00:00"
+    },
+    "DfsBankCert144v2_j167c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:13:57.205195+00:00"
+    },
+    "DfsBankCert144v2_j173c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:01.281412+00:00"
+    },
+    "DfsBankCert144v2_j11c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:09.046682+00:00"
+    },
+    "DfsBankCert144v2_j167c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:09.492401+00:00"
+    },
+    "DfsBankCert144v2_j173c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:13.686729+00:00"
+    },
+    "DfsBankCert144v2_j17c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:30.188206+00:00"
+    },
+    "DfsBankCert144v2_j1c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:34.800793+00:00"
+    },
+    "DfsBankCert144v2_j168c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:39.179505+00:00"
+    },
+    "DfsBankCert144v2_j17c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:42.476310+00:00"
+    },
+    "DfsBankCert144v2_j1c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:45.811511+00:00"
+    },
+    "DfsBankCert144v2_j168c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:55.108757+00:00"
+    },
+    "DfsBankCert144v2_j161c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:14:56.385510+00:00"
+    },
+    "DfsBankCert144v2_j161c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:00.865158+00:00"
+    },
+    "DfsBankCert144v2_j14c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:03.732899+00:00"
+    },
+    "DfsBankCert144v2_j14c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:13.558972+00:00"
+    },
+    "DfsBankCert144v2_j24c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:19.975443+00:00"
+    },
+    "DfsBankCert144v2_j24c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:23.830651+00:00"
+    },
+    "DfsBankCert144v2_j148c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:24.223419+00:00"
+    },
+    "DfsBankCert144v2_j148c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:27.420609+00:00"
+    },
+    "DfsBankCert144v2_j150c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:27.986781+00:00"
+    },
+    "DfsBankCert144v2_j150c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:29.579205+00:00"
+    },
+    "DfsBankCert144v2_j0c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:48.845797+00:00"
+    },
+    "DfsBankCert144v2_j0c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:50.439702+00:00"
+    },
+    "DfsBankCert144v2_j10c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:52.633324+00:00"
+    },
+    "DfsBankCert144v2_j10c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:54.218993+00:00"
+    },
+    "DfsBankCert144v2_j16c0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:54.763488+00:00"
+    },
+    "DfsBankCert144v2_j16c1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:15:56.251939+00:00"
+    },
+    "DfsBankCert144v2_g2": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:16.469360+00:00"
+    },
+    "DfsBankCert144v2_g0": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:16.913488+00:00"
+    },
+    "DfsBankCert144v2_g1": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:20.721639+00:00"
+    },
+    "DfsBankCert144v2_g3": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:32.159101+00:00"
+    },
+    "DfsBankCert144v2_g4": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:39.105873+00:00"
+    },
+    "DfsBankCert144v2_g5": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:42.932177+00:00"
+    },
+    "DfsBankCert144v2_g6": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:43.473617+00:00"
+    },
+    "DfsBankCert144v2_g7": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:50.513262+00:00"
+    },
+    "DfsBankCert144v2_g8": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:54.243199+00:00"
+    },
+    "DfsBankCert144v2_g9": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:16:54.565419+00:00"
+    },
+    "DfsBankCert144v2_g10": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:17:01.930742+00:00"
+    },
+    "DfsBankCert144v2_g11": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:17:22.651885+00:00"
+    },
+    "DfsBankCert144v2_g12": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:17:22.847983+00:00"
+    },
+    "DfsBankCert144v2_g13": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:17:30.329645+00:00"
+    },
+    "DfsBankCert144v2_g14": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:17:50.479503+00:00"
+    },
+    "DfsBankCert144v2_g16": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:17:50.584526+00:00"
+    },
+    "DfsBankCert144v2_g15": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:17:51.530888+00:00"
+    },
+    "DfsBankCert144v2_g19": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:18:06.357261+00:00"
+    },
+    "DfsBankCert144v2_g18": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:18:09.878500+00:00"
+    },
+    "DfsBankCert144v2_g17": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:18:10.745419+00:00"
+    },
+    "DfsBankCert144v2_g20": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:18:24.586911+00:00"
+    },
+    "DfsBankCert144v2_g21": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:18:37.504604+00:00"
+    },
+    "DfsBankCert144v2_g22": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:18:41.471588+00:00"
+    },
+    "DfsBankCert144v2_g23": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:18:49.957851+00:00"
+    },
+    "DfsBankCert144v2_g26": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:19:04.986873+00:00"
+    },
+    "DfsBankCert144v2_g24": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:19:08.945202+00:00"
+    },
+    "DfsBankCert144v2_g25": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:19:10.141722+00:00"
+    },
+    "DfsBankCert144v2_g27": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:19:25.711425+00:00"
+    },
+    "DfsBankCert144v2_g28": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:19:31.362112+00:00"
+    },
+    "DfsBankCert144v2_g29": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:19:36.733417+00:00"
+    },
+    "DfsBankCert144v2_g30": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:19:47.695564+00:00"
+    },
+    "DfsBankCert144v2_g31": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:19:55.383486+00:00"
+    },
+    "DfsBankCert144v2_g32": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:20:02.866557+00:00"
+    },
+    "DfsBankCert144v2_g33": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:20:14.229914+00:00"
+    },
+    "DfsBankCert144v2_g34": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:20:17.747110+00:00"
+    },
+    "DfsBankCert144v2_g35": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:20:24.386871+00:00"
+    },
+    "DfsBankCert144v2_g36": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:20:35.342757+00:00"
+    },
+    "DfsBankCert144v2_g37": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:20:42.066335+00:00"
+    },
+    "DfsBankCert144v2_g38": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:20:57.804568+00:00"
+    },
+    "DfsBankCert144v2_g39": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:21:00.002514+00:00"
+    },
+    "DfsBankCert144v2_g40": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:21:22.194632+00:00"
+    },
+    "DfsBankCert144v2_g41": {
+      "result": "Built",
+      "time_utc": "2026-10-16T03:21:24.468093+00:00"
+    },
+    "DfsBankCert144v2": {
+      "result": "Replayed",
+      "time_utc": "2026-10-16T03:21:30.389516+00:00"
+    }
+  },
+  "active": {},
+  "completed": {
+    "DfsBankCert144v2_j59c60": {
+      "returncode": 0,
+      "seconds": 0.219,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j59c60.log"
+    },
+    "DfsBankCert144v2_j57c60": {
+      "returncode": 0,
+      "seconds": 0.219,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j57c60.log"
+    },
+    "DfsBankCert144v2_j52c60": {
+      "returncode": 0,
+      "seconds": 0.235,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j52c60.log"
+    },
+    "DfsBankCert144v2_j78c32": {
+      "returncode": 0,
+      "seconds": 0.187,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j78c32.log"
+    },
+    "DfsBankCert144v2_j63c31": {
+      "returncode": 0,
+      "seconds": 0.188,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j63c31.log"
+    },
+    "DfsBankCert144v2_j186c31": {
+      "returncode": 0,
+      "seconds": 0.188,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j186c31.log"
+    },
+    "DfsBankCert144v2_j255c13": {
+      "returncode": 0,
+      "seconds": 0.203,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j255c13.log"
+    },
+    "DfsBankCert144v2_j55c28": {
+      "returncode": 0,
+      "seconds": 222.187,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j55c28.log"
+    },
+    "DfsBankCert144v2_j257c13": {
+      "returncode": 0,
+      "seconds": 233.625,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j257c13.log"
+    },
+    "DfsBankCert144v2_j50c28": {
+      "returncode": 0,
+      "seconds": 249.781,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j50c28.log"
+    },
+    "DfsBankCert144v2_j259c13": {
+      "returncode": 0,
+      "seconds": 254.266,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j259c13.log"
+    },
+    "DfsBankCert144v2_j261c13": {
+      "returncode": 0,
+      "seconds": 316.391,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j261c13.log"
+    },
+    "DfsBankCert144v2_j68c12": {
+      "returncode": 0,
+      "seconds": 366.406,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j68c12.log"
+    },
+    "DfsBankCert144v2_j81c12": {
+      "returncode": 0,
+      "seconds": 309.546,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j81c12.log"
+    },
+    "DfsBankCert144v2_j191c12": {
+      "returncode": 0,
+      "seconds": 313.703,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j191c12.log"
+    },
+    "DfsBankCert144v2_j203c12": {
+      "returncode": 0,
+      "seconds": 309.266,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j203c12.log"
+    },
+    "DfsBankCert144v2_j74c12": {
+      "returncode": 0,
+      "seconds": 294.594,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j74c12.log"
+    },
+    "DfsBankCert144v2_j93c12": {
+      "returncode": 0,
+      "seconds": 293.453,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j93c12.log"
+    },
+    "DfsBankCert144v2_j115c12": {
+      "returncode": 0,
+      "seconds": 293.64,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j115c12.log"
+    },
+    "DfsBankCert144v2_j117c12": {
+      "returncode": 0,
+      "seconds": 282.375,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j117c12.log"
+    },
+    "DfsBankCert144v2_j198c12": {
+      "returncode": 0,
+      "seconds": 300.281,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j198c12.log"
+    },
+    "DfsBankCert144v2_j213c12": {
+      "returncode": 0,
+      "seconds": 300.25,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j213c12.log"
+    },
+    "DfsBankCert144v2_j215c12": {
+      "returncode": 0,
+      "seconds": 309.094,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j215c12.log"
+    },
+    "DfsBankCert144v2_j217c12": {
+      "returncode": 0,
+      "seconds": 316.922,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j217c12.log"
+    },
+    "DfsBankCert144v2_j64c11": {
+      "returncode": 0,
+      "seconds": 289.281,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j64c11.log"
+    },
+    "DfsBankCert144v2_j77c11": {
+      "returncode": 0,
+      "seconds": 284.906,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j77c11.log"
+    },
+    "DfsBankCert144v2_j193c9": {
+      "returncode": 0,
+      "seconds": 251.484,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j193c9.log"
+    },
+    "DfsBankCert144v2_j207c9": {
+      "returncode": 0,
+      "seconds": 250.172,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j207c9.log"
+    },
+    "DfsBankCert144v2_j6c5": {
+      "returncode": 0,
+      "seconds": 142.156,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j6c5.log"
+    },
+    "DfsBankCert144v2_j20c5": {
+      "returncode": 0,
+      "seconds": 138.563,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j20c5.log"
+    },
+    "DfsBankCert144v2_j22c5": {
+      "returncode": 0,
+      "seconds": 138.188,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j22c5.log"
+    },
+    "DfsBankCert144v2_j5c5": {
+      "returncode": 0,
+      "seconds": 138.843,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j5c5.log"
+    },
+    "DfsBankCert144v2_j105c4": {
+      "returncode": 0,
+      "seconds": 102.329,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j105c4.log"
+    },
+    "DfsBankCert144v2_j41c5": {
+      "returncode": 0,
+      "seconds": 145.157,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j41c5.log"
+    },
+    "DfsBankCert144v2_j89c3": {
+      "returncode": 0,
+      "seconds": 87.703,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j89c3.log"
+    },
+    "DfsBankCert144v2_j90c2": {
+      "returncode": 0,
+      "seconds": 43.344,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j90c2.log"
+    },
+    "DfsBankCert144v2_j146c3": {
+      "returncode": 0,
+      "seconds": 77.938,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j146c3.log"
+    },
+    "DfsBankCert144v2_j171c3": {
+      "returncode": 0,
+      "seconds": 77.516,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j171c3.log"
+    },
+    "DfsBankCert144v2_j158c1": {
+      "returncode": 0,
+      "seconds": 43.891,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j158c1.log"
+    },
+    "DfsBankCert144v2_j183c2": {
+      "returncode": 0,
+      "seconds": 56.032,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j183c2.log"
+    },
+    "DfsBankCert144v2_j94c1": {
+      "returncode": 0,
+      "seconds": 39.36,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j94c1.log"
+    },
+    "DfsBankCert144v2_j11c1": {
+      "returncode": 0,
+      "seconds": 33.204,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j11c1.log"
+    },
+    "DfsBankCert144v2_j167c1": {
+      "returncode": 0,
+      "seconds": 39.203,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j167c1.log"
+    },
+    "DfsBankCert144v2_j173c1": {
+      "returncode": 0,
+      "seconds": 39.422,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j173c1.log"
+    },
+    "DfsBankCert144v2_j17c1": {
+      "returncode": 0,
+      "seconds": 33.422,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j17c1.log"
+    },
+    "DfsBankCert144v2_j1c1": {
+      "returncode": 0,
+      "seconds": 32.125,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j1c1.log"
+    },
+    "DfsBankCert144v2_j168c1": {
+      "returncode": 0,
+      "seconds": 45.594,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j168c1.log"
+    },
+    "DfsBankCert144v2_j161c1": {
+      "returncode": 0,
+      "seconds": 15.047,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j161c1.log"
+    },
+    "DfsBankCert144v2_j14c1": {
+      "returncode": 0,
+      "seconds": 31.078,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j14c1.log"
+    },
+    "DfsBankCert144v2_j24c1": {
+      "returncode": 0,
+      "seconds": 28.718,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j24c1.log"
+    },
+    "DfsBankCert144v2_j148c1": {
+      "returncode": 0,
+      "seconds": 13.844,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j148c1.log"
+    },
+    "DfsBankCert144v2_j150c1": {
+      "returncode": 0,
+      "seconds": 28.688,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j150c1.log"
+    },
+    "DfsBankCert144v2_j0c1": {
+      "returncode": 0,
+      "seconds": 26.61,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j0c1.log"
+    },
+    "DfsBankCert144v2_j10c1": {
+      "returncode": 0,
+      "seconds": 26.781,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j10c1.log"
+    },
+    "DfsBankCert144v2_j16c1": {
+      "returncode": 0,
+      "seconds": 26.672,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_j16c1.log"
+    },
+    "DfsBankCert144v2_g2": {
+      "returncode": 0,
+      "seconds": 20.203,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g2.log"
+    },
+    "DfsBankCert144v2_g0": {
+      "returncode": 0,
+      "seconds": 26.469,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g0.log"
+    },
+    "DfsBankCert144v2_g1": {
+      "returncode": 0,
+      "seconds": 26.5,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g1.log"
+    },
+    "DfsBankCert144v2_g3": {
+      "returncode": 0,
+      "seconds": 15.688,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g3.log"
+    },
+    "DfsBankCert144v2_g4": {
+      "returncode": 0,
+      "seconds": 22.172,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g4.log"
+    },
+    "DfsBankCert144v2_g5": {
+      "returncode": 0,
+      "seconds": 22.203,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g5.log"
+    },
+    "DfsBankCert144v2_g6": {
+      "returncode": 0,
+      "seconds": 11.297,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g6.log"
+    },
+    "DfsBankCert144v2_g7": {
+      "returncode": 0,
+      "seconds": 11.39,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g7.log"
+    },
+    "DfsBankCert144v2_g8": {
+      "returncode": 0,
+      "seconds": 11.297,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g8.log"
+    },
+    "DfsBankCert144v2_g9": {
+      "returncode": 0,
+      "seconds": 11.062,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g9.log"
+    },
+    "DfsBankCert144v2_g10": {
+      "returncode": 0,
+      "seconds": 11.406,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g10.log"
+    },
+    "DfsBankCert144v2_g11": {
+      "returncode": 0,
+      "seconds": 28.391,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g11.log"
+    },
+    "DfsBankCert144v2_g12": {
+      "returncode": 0,
+      "seconds": 28.281,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g12.log"
+    },
+    "DfsBankCert144v2_g13": {
+      "returncode": 0,
+      "seconds": 28.39,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g13.log"
+    },
+    "DfsBankCert144v2_g14": {
+      "returncode": 0,
+      "seconds": 27.812,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g14.log"
+    },
+    "DfsBankCert144v2_g16": {
+      "returncode": 0,
+      "seconds": 20.25,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g16.log"
+    },
+    "DfsBankCert144v2_g15": {
+      "returncode": 0,
+      "seconds": 28.656,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g15.log"
+    },
+    "DfsBankCert144v2_g19": {
+      "returncode": 0,
+      "seconds": 14.812,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g19.log"
+    },
+    "DfsBankCert144v2_g18": {
+      "returncode": 0,
+      "seconds": 19.297,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g18.log"
+    },
+    "DfsBankCert144v2_g17": {
+      "returncode": 0,
+      "seconds": 20.25,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g17.log"
+    },
+    "DfsBankCert144v2_g20": {
+      "returncode": 0,
+      "seconds": 18.218,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g20.log"
+    },
+    "DfsBankCert144v2_g21": {
+      "returncode": 0,
+      "seconds": 27.609,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g21.log"
+    },
+    "DfsBankCert144v2_g22": {
+      "returncode": 0,
+      "seconds": 30.719,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g22.log"
+    },
+    "DfsBankCert144v2_g23": {
+      "returncode": 0,
+      "seconds": 25.359,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g23.log"
+    },
+    "DfsBankCert144v2_g26": {
+      "returncode": 0,
+      "seconds": 15.016,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g26.log"
+    },
+    "DfsBankCert144v2_g24": {
+      "returncode": 0,
+      "seconds": 31.438,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g24.log"
+    },
+    "DfsBankCert144v2_g25": {
+      "returncode": 0,
+      "seconds": 28.656,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g25.log"
+    },
+    "DfsBankCert144v2_g27": {
+      "returncode": 0,
+      "seconds": 20.703,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g27.log"
+    },
+    "DfsBankCert144v2_g28": {
+      "returncode": 0,
+      "seconds": 22.407,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g28.log"
+    },
+    "DfsBankCert144v2_g29": {
+      "returncode": 0,
+      "seconds": 26.594,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g29.log"
+    },
+    "DfsBankCert144v2_g30": {
+      "returncode": 0,
+      "seconds": 21.969,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g30.log"
+    },
+    "DfsBankCert144v2_g31": {
+      "returncode": 0,
+      "seconds": 24.0,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g31.log"
+    },
+    "DfsBankCert144v2_g32": {
+      "returncode": 0,
+      "seconds": 26.125,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g32.log"
+    },
+    "DfsBankCert144v2_g33": {
+      "returncode": 0,
+      "seconds": 26.547,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g33.log"
+    },
+    "DfsBankCert144v2_g34": {
+      "returncode": 0,
+      "seconds": 22.344,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g34.log"
+    },
+    "DfsBankCert144v2_g35": {
+      "returncode": 0,
+      "seconds": 21.5,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g35.log"
+    },
+    "DfsBankCert144v2_g36": {
+      "returncode": 0,
+      "seconds": 21.109,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g36.log"
+    },
+    "DfsBankCert144v2_g37": {
+      "returncode": 0,
+      "seconds": 24.313,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g37.log"
+    },
+    "DfsBankCert144v2_g38": {
+      "returncode": 0,
+      "seconds": 33.406,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g38.log"
+    },
+    "DfsBankCert144v2_g39": {
+      "returncode": 0,
+      "seconds": 24.641,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g39.log"
+    },
+    "DfsBankCert144v2_g40": {
+      "returncode": 0,
+      "seconds": 40.125,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g40.log"
+    },
+    "DfsBankCert144v2_g41": {
+      "returncode": 0,
+      "seconds": 26.64,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2_g41.log"
+    },
+    "DfsBankCert144v2": {
+      "returncode": 0,
+      "seconds": 5.5,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2.log"
+    },
+    "DfsBankCert144Results": {
+      "returncode": 0,
+      "seconds": 8.5,
+      "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144Results.log"
+    }
+  },
+  "aggregate": {
+    "returncode": 0,
+    "seconds": 5.5,
+    "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144v2.log"
+  },
+  "results_module": "DfsBankCert144Results",
+  "results": {
+    "returncode": 0,
+    "seconds": 8.5,
+    "log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\DfsBankCert144Results.log"
+  },
+  "cache_scope": "Available caches are provisional until Lake validates each dependency.",
+  "finished_utc": "2026-10-16T03:21:48.549292+00:00",
+  "axioms": {
+    "Snake9.Dfs.bank_no192_keep144v2": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Snake9.Dfs.bank_no_long_prefix_keep144": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Snake9.Dfs.bank_no_long_suffix_keep144": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Snake9.Dfs.bank_end_segment_length_le191": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "sources_unchanged": true,
+  "missing_modules": [],
+  "axiom_audit_log": "outputs\\dfs-lean-144v2\\runs\\20261016T023308-52964\\axioms.log"
 }

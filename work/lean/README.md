@@ -32,4 +32,8 @@ is not part of the maintained certificate pipeline. The general encoder
 must be compared with the experimental formula before reusing a certificate.
 
 Build caches, downloaded toolchains and the local checkpoint archive are not
-included in this branch. No checks are scheduled or running at this checkpoint.
+included in this branch. The KEEP=112 experiment remains paused. KEEP=144
+subsequently PASSED all 721 dependency modules, the aggregate, its end-segment
+consequences and a fresh axiom audit on 16 October 2026. Consult
+`outputs/dfs-lean-144v2/manifest.json` for that result rather than the historical
+logs in this directory.
