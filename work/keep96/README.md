@@ -96,9 +96,26 @@ is not a completed result and cannot be reused. Different limits/code/formulas
 produce a different identity directory. Never run two drivers for the same phase
 at the same time. Preserve the repository's baseline bank and encoder.
 
-Only after inspecting pilot evidence, use `--phase survey` (all 262, reusing
-matching pilot attempts) or specify a bounded subset with `--entries ...`.
-There is no automatic escalation or unbounded search.
+The recorded pilot passed the explicit scaling gate (at least nine UNSAT, at
+least six under ten seconds). The remaining 250 entries were screened once with
+a ten-second worker limit; the mathematical target stayed at 193 vertices.
+Reproduce that decision and the final evidence audit with:
+
+```powershell
+python work/keep96/screen_remaining.py
+python work/keep96/audit_results.py --phase pilot
+python work/keep96/sample_proof_checks.py
+python work/keep96/finalize.py
+```
+
+The survey proof audit samples twelve UNSAT runtime rank quantiles; it is not an
+audit of every certificate. Each replay has a sixty-second limit. There is no
+automatic escalation or unbounded search. The final combined table records both
+budgets separately. Full certificates remain in the original isolated clone;
+Git includes only certificates at most one MiB each, with a combined twenty MiB
+budget. `outputs/keep96/certificate-index.json` identifies every omitted proof by
+path and hash. Transfer omitted proofs from the original clone, or rerun their
+recorded configurations. A fresh checkout cannot reuse missing proof artifacts.
 
 For a saved UNSAT attempt, an optional executable RUP replay is:
 
