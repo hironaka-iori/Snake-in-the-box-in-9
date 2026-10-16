@@ -21,6 +21,32 @@ def main():
                 proof_checks[r['entry']]=r.get('proof_check','NOT_CHECKED')
                 if 'proof_check_log' in r and sha(ROOT/r['proof_check_log'])!=r['proof_check_log_sha256']:
                     raise ValueError('proof check log changed')
+    # Later bounded checks supersede the original timeout only when successful.
+    # Original audits remain intact as historical records.
+    native_checks={}
+    native_rows=[]
+    native_path=OUT/'native-audit/results.json'
+    if native_path.exists():
+        native=json.loads(native_path.read_text())
+        native_rows=native['entries']
+        if sha(HERE/'vendor/drat-trim/drat-trim.c')!=native['build']['source_sha256']:
+            raise ValueError('native source changed')
+        for r in native['entries']:
+            if sha(ROOT/r['log'])!=r['log_sha256']:raise ValueError('native log changed')
+            original=next(x for x in rows if x['entry']==r['entry'])
+            if sha(ROOT/original['certificate'])!=r['certificate_sha256']:raise ValueError('native certificate changed')
+            cnf=next(p for p in original['identity']['formula_hashes'] if p.endswith('.cnf.gz'))
+            if sha(ROOT/cnf)!=r['formula_sha256']:raise ValueError('native formula changed')
+            native_checks[r['entry']]=r['status']
+            if r['status']=='PASSED_NATIVE_DRAT_CHECK':proof_checks[r['entry']]=r['status']
+    extended_path=OUT/'large-proof-audit.json'
+    if extended_path.exists():
+        for r in json.loads(extended_path.read_text())['entries']:
+            if sha(ROOT/r['log'])!=r['log_sha256']:raise ValueError('extended log changed')
+            if r['status']=='PASSED_EXECUTABLE_RUP_CHECK':
+                if sha(ROOT/r['check_result'])!=r['check_result_sha256']:raise ValueError('extended check changed')
+                if sha(HERE/'check_proof.py')!=r['identity']['checker_sha256']:raise ValueError('RUP checker changed')
+                proof_checks[r['entry']]=r['status']
     table=[]
     for r in sorted(rows,key=lambda r:r['entry']):
         for name,value in r['artifact_hashes'].items():
@@ -49,11 +75,13 @@ def main():
             certificate_sha256=sha(ROOT/r['certificate']) if r.get('certificate') else None,
             certificate_bytes=(ROOT/r['certificate']).stat().st_size if r.get('certificate') else 0,
             proof_status=proof_checks.get(r['entry'],'NOT_CHECKED'),
+            native_proof_status=native_checks.get(r['entry'],'NOT_CHECKED'),
             genuine_snake_verified=r.get('diagnosis',{}).get('full_snake_verified',False)))
     counts=dict(Counter(r['status'] for r in table));unsolved=[r['entry'] for r in table if r['status']=='UNKNOWN']
     summary=dict(keep=96,total_vertices=193,entries_tested=262,status_counts=counts,unknown_entries=unsolved,
                  unique_dimacs_formulas=len({r['cnf_gzip_sha256'] for r in table}),
                  proof_status_counts=dict(Counter(r['proof_status'] for r in table)),
+                 native_proof_status_counts=dict(Counter(r['native_proof_status'] for r in table)),
                  positive_controls=262,full_lean_formalization_started=False,
                  scope='Solver necessary-condition results; executable checks are not Lean proofs; no global optimum claim')
     save(OUT/'summary.json',summary);save(OUT/'results.json',dict(summary=summary,entries=table))
@@ -115,7 +143,10 @@ benchmarks: bounded certificate checks ran concurrently for part of the survey.
 The parent's 0.1-second polling may cause small wall-limit overshoot.
 
 Proof-check statuses: `{summary['proof_status_counts']}`. These refer to executable
-RUP checking, not Lean. A failed/timed-out proof check does not upgrade the solver
+certificate checking, not Lean. Native DRAT-trim statuses (overlapping checks):
+`{summary['native_proof_status_counts']}`. The original sixty-second audit is retained;
+successful later checks supersede its timeouts in this combined table.
+A failed/timed-out proof check does not upgrade the solver
 result to a verified theorem. All available UNSAT certificates remain locally
 preserved. `certificate-index.json` records paths, sizes and SHA256 hashes, including
 large proofs omitted from Git. To restore those on another computer, transfer them
@@ -149,6 +180,15 @@ Run `finalize.py` only once both phases finish. A `started.json` without a resul
 an incomplete attempt, never a completed proof. Full proof locations remain local
 even when the appropriately sized Git evidence subset is used elsewhere.
 '''
+    if native_rows:
+        report+='\n## Follow-up: large certificates\n\n'
+        report+='The three original certificate-check timeouts were revisited with native DRAT-trim.\n'
+        report+='The fixed upstream source, build configuration, controls, hashes and complete logs\n'
+        report+='are preserved in `work/keep96/vendor/drat-trim/` and `outputs/keep96/native-audit/`.\n\n'
+        report+='| Entry | Native certificate status | Seconds |\n|---|---|---:|\n'
+        for r in native_rows:report+=f"| {r['entry']} | {r['status']} | {r['seconds']:.3f} |\n"
+        report+='\nThese native checks used 1800-second and 2048-MiB limits. They verify the Boolean\n'
+        report+='UNSAT certificates, not Lean theorems. The 20 solver UNKNOWN cases remain unchanged.\n'
     (OUT/'REPORT.md').write_text(report,encoding='utf-8')
     print(json.dumps(summary,indent=2),flush=True)
 
