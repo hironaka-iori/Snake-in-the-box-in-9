@@ -1,0 +1,29 @@
+import DfsDecide
+import DfsBankData
+import DfsBankCert144v2_j171c2
+
+namespace Snake9.Dfs
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+theorem keep144v2_171_lit : search2 142 13407807929942597099574024998131604731112579909527945636175085062304537103849651533960387091208589563383183253341599938377273033703902299703751135327115228 49 = false :=
+  search2_of_children 142 13407807929942597099574024998131604731112579909527945636175085062304537103849651533960387091208589563383183253341599938377273033703902299703751135327115228 48 (fun k hk => by
+    match k, hk with
+    | 0, _ => exact Or.inl (by decide +kernel)
+    | 1, _ => exact Or.inr (by
+        rw [show 142 ^^^ 2 ^ 1 = 140 from by decide +kernel,
+          show 13407807929942597099574024998131604731112579909527945636175085062304537103849651533960387091208589563383183253341599938377273033703902299703751135327115228 ||| cnMask 142 = 13407807929942597099574024998131604731112579909527945636175085062304537103849651533960387091208589563383183253342993734952181197650248282095791657921239004 from by decide +kernel]
+        exact keep144v2_171_lit_1)
+    | 2, _ => exact Or.inl (by decide +kernel)
+    | 3, _ => exact Or.inl (by decide +kernel)
+    | 4, _ => exact Or.inl (by decide +kernel)
+    | 5, _ => exact Or.inl (by decide +kernel)
+    | 6, _ => exact Or.inl (by decide +kernel)
+    | 7, _ => exact Or.inl (by decide +kernel)
+    | 8, _ => exact Or.inl (by decide +kernel)
+    | n + 9, h => exact absurd h (by omega))
+theorem keep144v2_171 : search2 (oriented 171)[143]! (banFrom (fun i => (oriented 171)[i]!) 143) 49 = false := by
+  rw [show (oriented 171)[143]! = 142 from by decide +kernel,
+    show banFrom (fun i => (oriented 171)[i]!) 143 = 13407807929942597099574024998131604731112579909527945636175085062304537103849651533960387091208589563383183253341599938377273033703902299703751135327115228 from by decide +kernel]
+  exact keep144v2_171_lit
+
+end Snake9.Dfs
