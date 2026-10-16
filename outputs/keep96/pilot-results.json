@@ -1,0 +1,892 @@
+{
+  "config": {
+    "keep": 96,
+    "total_vertices": 193,
+    "worker_wall_limit_seconds": 300,
+    "memory_limit_mib": 2048,
+    "solver": "Glucose 4.1 (PySAT g4)",
+    "python_sat": "1.9.dev16",
+    "proof_logging": true,
+    "solver_parameters": "defaults; no custom seed or incremental mode",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+    "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+    "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+    "sources": {
+      "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+      "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+      "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+    }
+  },
+  "entries": [
+    {
+      "status": "UNSAT",
+      "solver_seconds": 114.03831070009619,
+      "statistics": {
+        "restarts": 2678,
+        "conflicts": 1591931,
+        "decisions": 1981415,
+        "propagations": 187525111
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry256/03d701b6a17e0620/20261016T061237264002Z/proof.drup.gz",
+      "proof_lines": 3143497,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 256,
+      "bank_index": 128,
+      "reversed": false,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry256.cnf.gz": "97317c8a27d3dacf9fd17c30d34510abc67f51bf97fe2f83b11e40680e751ccd",
+          "outputs/keep96/formulas/entry256.json.gz": "4c9d06d182a040236ce9aa65931f545f936134f1e61ef30222f5fa6d8ebbdfa7"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 221.70094130001962,
+      "peak_rss_bytes": 960118784,
+      "attempt": "outputs/keep96/runs/entry256/03d701b6a17e0620/20261016T061237264002Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "256",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry256\\03d701b6a17e0620\\20261016T061237264002Z"
+      ],
+      "formula_sha256": "97317c8a27d3dacf9fd17c30d34510abc67f51bf97fe2f83b11e40680e751ccd",
+      "variables": 2636,
+      "clauses": 17816,
+      "region_vertices": 167,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry256.cnf.gz": "97317c8a27d3dacf9fd17c30d34510abc67f51bf97fe2f83b11e40680e751ccd",
+        "outputs/keep96/formulas/entry256.json.gz": "4c9d06d182a040236ce9aa65931f545f936134f1e61ef30222f5fa6d8ebbdfa7",
+        "outputs/keep96/runs/entry256/03d701b6a17e0620/20261016T061237264002Z/proof.drup.gz": "5f3703958344c96e842f5ce00d5546c23c9d4966e42a1ce55bce9778cfab5db2",
+        "outputs/keep96/runs/entry256/03d701b6a17e0620/20261016T061237264002Z/solver.log": "9b2070dc55905ecb314fa684fbbde00c60190d4ec1a637820665705574634b0b",
+        "outputs/keep96/runs/entry256/03d701b6a17e0620/20261016T061237264002Z/started.json": "5ca42e95341328c36660a19427382ea71f0797af0547224fb13a3073122cd9b1",
+        "outputs/keep96/runs/entry256/03d701b6a17e0620/20261016T061237264002Z/worker-result.json": "d82179d9d90e45943b6ef4ebdeb8b27efdcb6fdf6880726241c0e261d5f251e2"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 0.009726300137117505,
+      "statistics": {
+        "restarts": 2,
+        "conflicts": 623,
+        "decisions": 996,
+        "propagations": 85068
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry135/127e62edbb1f4c8d/20261016T061619366267Z/proof.drup.gz",
+      "proof_lines": 1654,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 135,
+      "bank_index": 67,
+      "reversed": true,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry135.cnf.gz": "9fb7437befdcad9ce6ae4c57b5146b7fe7fae924462c9a694dc71c3c85a3517d",
+          "outputs/keep96/formulas/entry135.json.gz": "6a0f096481f1785655ba09cbe0ca893f47fe498bb5a662c67b23d36c18cfd58e"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 0.2191392001695931,
+      "peak_rss_bytes": 29999104,
+      "attempt": "outputs/keep96/runs/entry135/127e62edbb1f4c8d/20261016T061619366267Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "135",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry135\\127e62edbb1f4c8d\\20261016T061619366267Z"
+      ],
+      "formula_sha256": "9fb7437befdcad9ce6ae4c57b5146b7fe7fae924462c9a694dc71c3c85a3517d",
+      "variables": 1831,
+      "clauses": 8738,
+      "region_vertices": 127,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry135.cnf.gz": "9fb7437befdcad9ce6ae4c57b5146b7fe7fae924462c9a694dc71c3c85a3517d",
+        "outputs/keep96/formulas/entry135.json.gz": "6a0f096481f1785655ba09cbe0ca893f47fe498bb5a662c67b23d36c18cfd58e",
+        "outputs/keep96/runs/entry135/127e62edbb1f4c8d/20261016T061619366267Z/proof.drup.gz": "9f695de5104fb3f1ae2cafd9b6a1cb81a860afb163d1d95c7e4b0429cf71a8d9",
+        "outputs/keep96/runs/entry135/127e62edbb1f4c8d/20261016T061619366267Z/solver.log": "8ae50446e284ee830f14c72ea5f921f0e2154b906dba4660e1d31fe865cd234b",
+        "outputs/keep96/runs/entry135/127e62edbb1f4c8d/20261016T061619366267Z/started.json": "e723745284248a7bee53b11fbd4be5f2c8fb897c8ecc2022b9d7c097d3ebec0d",
+        "outputs/keep96/runs/entry135/127e62edbb1f4c8d/20261016T061619366267Z/worker-result.json": "780add636e55b222dc88364b480f86998a1f4a0b4eb25dff684d72b1cd9a1e5e"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 0.030740200076252222,
+      "statistics": {
+        "restarts": 4,
+        "conflicts": 3022,
+        "decisions": 4365,
+        "propagations": 321484
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry198/538c1d1a60f60e56/20261016T061620044747Z/proof.drup.gz",
+      "proof_lines": 5445,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 198,
+      "bank_index": 99,
+      "reversed": false,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry198.cnf.gz": "eab381675a5f7cfb0ff5df33b50e473674049be3d6503a590cb5a9ca016abe3f",
+          "outputs/keep96/formulas/entry198.json.gz": "8c0e245d2d2fd7fdb7fbe231037913ecfebe4313511dbeb975480e121c0690f0"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 0.31392590003088117,
+      "peak_rss_bytes": 57511936,
+      "attempt": "outputs/keep96/runs/entry198/538c1d1a60f60e56/20261016T061620044747Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "198",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry198\\538c1d1a60f60e56\\20261016T061620044747Z"
+      ],
+      "formula_sha256": "eab381675a5f7cfb0ff5df33b50e473674049be3d6503a590cb5a9ca016abe3f",
+      "variables": 2056,
+      "clauses": 11003,
+      "region_vertices": 138,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry198.cnf.gz": "eab381675a5f7cfb0ff5df33b50e473674049be3d6503a590cb5a9ca016abe3f",
+        "outputs/keep96/formulas/entry198.json.gz": "8c0e245d2d2fd7fdb7fbe231037913ecfebe4313511dbeb975480e121c0690f0",
+        "outputs/keep96/runs/entry198/538c1d1a60f60e56/20261016T061620044747Z/proof.drup.gz": "8759bd17c073442f9063468bbb8e35618bb9dadd29493d41a50a078f7999a903",
+        "outputs/keep96/runs/entry198/538c1d1a60f60e56/20261016T061620044747Z/solver.log": "bad1a793fdc4dd1d6c2d217296ea96a27b577319cb30f40fe3a190ff92e22851",
+        "outputs/keep96/runs/entry198/538c1d1a60f60e56/20261016T061620044747Z/started.json": "e598a3d4445e61398c2bfe353138a765a0354cbd4d7008355fb72133e3af9cf0",
+        "outputs/keep96/runs/entry198/538c1d1a60f60e56/20261016T061620044747Z/worker-result.json": "d3a5e81667b523a4e595d6469538dcca0c166b238817bf1c20581b4829fa1a9f"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 69.72200249996968,
+      "statistics": {
+        "restarts": 1620,
+        "conflicts": 1144046,
+        "decisions": 1396328,
+        "propagations": 166752037
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry133/7d1aa7df39c4e857/20261016T061620909096Z/proof.drup.gz",
+      "proof_lines": 2271136,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 133,
+      "bank_index": 66,
+      "reversed": true,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry133.cnf.gz": "1708f7dd4f05c0d215a4942456561de6621b14ab3e8f966666da72d3445403b9",
+          "outputs/keep96/formulas/entry133.json.gz": "879c54c5479c437359e9b188a8ae055cc4d1e2bdccf6abd15024e90e08f73245"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 152.82188590010628,
+      "peak_rss_bytes": 758595584,
+      "attempt": "outputs/keep96/runs/entry133/7d1aa7df39c4e857/20261016T061620909096Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "133",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry133\\7d1aa7df39c4e857\\20261016T061620909096Z"
+      ],
+      "formula_sha256": "1708f7dd4f05c0d215a4942456561de6621b14ab3e8f966666da72d3445403b9",
+      "variables": 2496,
+      "clauses": 16835,
+      "region_vertices": 160,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry133.cnf.gz": "1708f7dd4f05c0d215a4942456561de6621b14ab3e8f966666da72d3445403b9",
+        "outputs/keep96/formulas/entry133.json.gz": "879c54c5479c437359e9b188a8ae055cc4d1e2bdccf6abd15024e90e08f73245",
+        "outputs/keep96/runs/entry133/7d1aa7df39c4e857/20261016T061620909096Z/proof.drup.gz": "83b36938b0838dc49c5dbfa0530f1962d153ec8a5aaef21c1413f89820695de7",
+        "outputs/keep96/runs/entry133/7d1aa7df39c4e857/20261016T061620909096Z/solver.log": "cc84dd50cc4ab3f42fdb9d190749762ae9bb50ff39ec09659d02cb40920e6c7c",
+        "outputs/keep96/runs/entry133/7d1aa7df39c4e857/20261016T061620909096Z/started.json": "136bb21d53a1922121cfb71b6026e33767b9e60f007b406984e776607b92e2b4",
+        "outputs/keep96/runs/entry133/7d1aa7df39c4e857/20261016T061620909096Z/worker-result.json": "835cf4a8406e7a82bb87e80952ba40ca33a4ad977287605d0690ffe9dbfbba76"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 0.008711599977687001,
+      "statistics": {
+        "restarts": 1,
+        "conflicts": 543,
+        "decisions": 1060,
+        "propagations": 64464
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry090/fd5379fd15fa8945/20261016T061854091753Z/proof.drup.gz",
+      "proof_lines": 1307,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 90,
+      "bank_index": 45,
+      "reversed": false,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry090.cnf.gz": "615214d56b2ba6aae60cd6c0701e5d00f3d995986a18f0a0752f11688704797c",
+          "outputs/keep96/formulas/entry090.json.gz": "94cf858910d7aea926aef45029d65be9cb772e8bf659a32fdf16f4e21d4fb54f"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 0.21411640010774136,
+      "peak_rss_bytes": 24109056,
+      "attempt": "outputs/keep96/runs/entry090/fd5379fd15fa8945/20261016T061854091753Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "90",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry090\\fd5379fd15fa8945\\20261016T061854091753Z"
+      ],
+      "formula_sha256": "615214d56b2ba6aae60cd6c0701e5d00f3d995986a18f0a0752f11688704797c",
+      "variables": 1996,
+      "clauses": 10091,
+      "region_vertices": 135,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry090.cnf.gz": "615214d56b2ba6aae60cd6c0701e5d00f3d995986a18f0a0752f11688704797c",
+        "outputs/keep96/formulas/entry090.json.gz": "94cf858910d7aea926aef45029d65be9cb772e8bf659a32fdf16f4e21d4fb54f",
+        "outputs/keep96/runs/entry090/fd5379fd15fa8945/20261016T061854091753Z/proof.drup.gz": "c2bfe408ec14bcf4e7e6bb528d4a8ae5102b70b9cd33580e821319b7b00b4b3d",
+        "outputs/keep96/runs/entry090/fd5379fd15fa8945/20261016T061854091753Z/solver.log": "ebd5eed8498629f9f615e4666c9302f963774310d380bb2681b84a42e90411e5",
+        "outputs/keep96/runs/entry090/fd5379fd15fa8945/20261016T061854091753Z/started.json": "10945a2c6a57b3f400fd166e27299043318d8552f51054bde26aa8a1fa59b9c9",
+        "outputs/keep96/runs/entry090/fd5379fd15fa8945/20261016T061854091753Z/worker-result.json": "cec0ce2872193929fb5a5111e878f232586e50dbcac98f0a72c52c05d8c0f1c4"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 0.1058904998935759,
+      "statistics": {
+        "restarts": 7,
+        "conflicts": 9284,
+        "decisions": 12712,
+        "propagations": 1031010
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry159/d2c470c685ca2221/20261016T061854778197Z/proof.drup.gz",
+      "proof_lines": 16928,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 159,
+      "bank_index": 79,
+      "reversed": true,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry159.cnf.gz": "7f39dd2b9e7561b3619ea582d7198dafc1d2071113b11bb2687807f00f201e79",
+          "outputs/keep96/formulas/entry159.json.gz": "9034f72686d8c654cd80e63d4fd6b9b937c4d8219d2d71c81ef2deca9695afc2"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 0.5179058001376688,
+      "peak_rss_bytes": 67342336,
+      "attempt": "outputs/keep96/runs/entry159/d2c470c685ca2221/20261016T061854778197Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "159",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry159\\d2c470c685ca2221\\20261016T061854778197Z"
+      ],
+      "formula_sha256": "7f39dd2b9e7561b3619ea582d7198dafc1d2071113b11bb2687807f00f201e79",
+      "variables": 2256,
+      "clauses": 12975,
+      "region_vertices": 148,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry159.cnf.gz": "7f39dd2b9e7561b3619ea582d7198dafc1d2071113b11bb2687807f00f201e79",
+        "outputs/keep96/formulas/entry159.json.gz": "9034f72686d8c654cd80e63d4fd6b9b937c4d8219d2d71c81ef2deca9695afc2",
+        "outputs/keep96/runs/entry159/d2c470c685ca2221/20261016T061854778197Z/proof.drup.gz": "40e2b407382fd7533b57257f1a1dad3b7cce2a6b90fc2ea8c3abe160ba7e054f",
+        "outputs/keep96/runs/entry159/d2c470c685ca2221/20261016T061854778197Z/solver.log": "9ef5ddcb2eb369d5d05eb46303befe7f8b4ce52dcc7ab84e3dcad68feee12f88",
+        "outputs/keep96/runs/entry159/d2c470c685ca2221/20261016T061854778197Z/started.json": "e809b4c1483708a6b3bfd4f89aa3ab857d3187a8cce5cd3495a0cb7492add6ff",
+        "outputs/keep96/runs/entry159/d2c470c685ca2221/20261016T061854778197Z/worker-result.json": "4003a0668c90ee48d7073e77ae7e91f95c97dd1650826f3430f77942e7e4b603"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 32.61357340007089,
+      "statistics": {
+        "restarts": 1027,
+        "conflicts": 615111,
+        "decisions": 761969,
+        "propagations": 72311101
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry258/1e1c2a68ecfba9fe/20261016T061855865309Z/proof.drup.gz",
+      "proof_lines": 1200433,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 258,
+      "bank_index": 129,
+      "reversed": false,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry258.cnf.gz": "a36eaae5a300bd957b0cbb26c15b861e3ae02e285794eb804f82359b4d3b67bc",
+          "outputs/keep96/formulas/entry258.json.gz": "2e7a0d0ff33140242478abeb2ef66f87a7670f93ee2a925def1d4c1eb8683a99"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 77.3906968999654,
+      "peak_rss_bytes": 416407552,
+      "attempt": "outputs/keep96/runs/entry258/1e1c2a68ecfba9fe/20261016T061855865309Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "258",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry258\\1e1c2a68ecfba9fe\\20261016T061855865309Z"
+      ],
+      "formula_sha256": "a36eaae5a300bd957b0cbb26c15b861e3ae02e285794eb804f82359b4d3b67bc",
+      "variables": 2536,
+      "clauses": 16720,
+      "region_vertices": 162,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry258.cnf.gz": "a36eaae5a300bd957b0cbb26c15b861e3ae02e285794eb804f82359b4d3b67bc",
+        "outputs/keep96/formulas/entry258.json.gz": "2e7a0d0ff33140242478abeb2ef66f87a7670f93ee2a925def1d4c1eb8683a99",
+        "outputs/keep96/runs/entry258/1e1c2a68ecfba9fe/20261016T061855865309Z/proof.drup.gz": "f11e0b0adabd75d19adb32347a2ac593ea280560057564a6656064c5362a9bca",
+        "outputs/keep96/runs/entry258/1e1c2a68ecfba9fe/20261016T061855865309Z/solver.log": "b97d2d6661008543046d92c941717683119b373f47c2f20d549d0e17192447b9",
+        "outputs/keep96/runs/entry258/1e1c2a68ecfba9fe/20261016T061855865309Z/started.json": "8b96b5cc9240e29834d18917478116e6799786cd6b20aad011e6fb3fb7a4c307",
+        "outputs/keep96/runs/entry258/1e1c2a68ecfba9fe/20261016T061855865309Z/worker-result.json": "0ef36f4d7aa60ba94bcacdf84167564cfa833212b1028deced86af88e6d85dd5"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 1.9041645999532193,
+      "statistics": {
+        "restarts": 209,
+        "conflicts": 96228,
+        "decisions": 129473,
+        "propagations": 13276982
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry033/4ed80985fd4063fb/20261016T062013874980Z/proof.drup.gz",
+      "proof_lines": 179276,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 33,
+      "bank_index": 16,
+      "reversed": true,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry033.cnf.gz": "22e3107b285ccfe94de6bd571e2c505cd4f36fe7aacbcfc85837d34586a92e5e",
+          "outputs/keep96/formulas/entry033.json.gz": "dd7b4e9ef627ccab128fda2b314015fcda885b1994b9780f653b20be87a36135"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 6.284761500079185,
+      "peak_rss_bytes": 135880704,
+      "attempt": "outputs/keep96/runs/entry033/4ed80985fd4063fb/20261016T062013874980Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "33",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry033\\4ed80985fd4063fb\\20261016T062013874980Z"
+      ],
+      "formula_sha256": "22e3107b285ccfe94de6bd571e2c505cd4f36fe7aacbcfc85837d34586a92e5e",
+      "variables": 2536,
+      "clauses": 16667,
+      "region_vertices": 162,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry033.cnf.gz": "22e3107b285ccfe94de6bd571e2c505cd4f36fe7aacbcfc85837d34586a92e5e",
+        "outputs/keep96/formulas/entry033.json.gz": "dd7b4e9ef627ccab128fda2b314015fcda885b1994b9780f653b20be87a36135",
+        "outputs/keep96/runs/entry033/4ed80985fd4063fb/20261016T062013874980Z/proof.drup.gz": "446532d48206f80dcc0a6d77f0e88f2767096601d779d8ceb722e22e5f1482e1",
+        "outputs/keep96/runs/entry033/4ed80985fd4063fb/20261016T062013874980Z/solver.log": "4b49fcd0abfff1cb6c01d347925fa565d963b04cec1e19b38550d5830861df63",
+        "outputs/keep96/runs/entry033/4ed80985fd4063fb/20261016T062013874980Z/started.json": "b9e0c0342a74f750752dd3bb47eaa42befc4311e6ac387264e7afb2dfc4130bc",
+        "outputs/keep96/runs/entry033/4ed80985fd4063fb/20261016T062013874980Z/worker-result.json": "b5121d838e04dc3c2d3f8df009d8d111fd22a1fb36391f87e8b0a3a304c9a86a"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 0.010401600040495396,
+      "statistics": {
+        "restarts": 1,
+        "conflicts": 763,
+        "decisions": 1207,
+        "propagations": 90131
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry098/33ab82f5cfc0a69c/20261016T062020576264Z/proof.drup.gz",
+      "proof_lines": 1538,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 98,
+      "bank_index": 49,
+      "reversed": false,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry098.cnf.gz": "32551ce2b87b1da93e7e65632ac5ef68c2075c3c2bfc9da0ce39dc042e91ae07",
+          "outputs/keep96/formulas/entry098.json.gz": "2f36797566b7c063e0f0e3ed72551f56f8b5f03c83871074fff6e846d1c4c82d"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 0.22049179999157786,
+      "peak_rss_bytes": 31260672,
+      "attempt": "outputs/keep96/runs/entry098/33ab82f5cfc0a69c/20261016T062020576264Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "98",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry098\\33ab82f5cfc0a69c\\20261016T062020576264Z"
+      ],
+      "formula_sha256": "32551ce2b87b1da93e7e65632ac5ef68c2075c3c2bfc9da0ce39dc042e91ae07",
+      "variables": 1896,
+      "clauses": 9168,
+      "region_vertices": 130,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry098.cnf.gz": "32551ce2b87b1da93e7e65632ac5ef68c2075c3c2bfc9da0ce39dc042e91ae07",
+        "outputs/keep96/formulas/entry098.json.gz": "2f36797566b7c063e0f0e3ed72551f56f8b5f03c83871074fff6e846d1c4c82d",
+        "outputs/keep96/runs/entry098/33ab82f5cfc0a69c/20261016T062020576264Z/proof.drup.gz": "f8a33dcff0deb1d4dffafd60dc894a6dd7eb4f40f692da3506a3deeab06a8de7",
+        "outputs/keep96/runs/entry098/33ab82f5cfc0a69c/20261016T062020576264Z/solver.log": "7129bce1bd6d01cab2ecf71f07ddade74ba068c849272834d2476a7fa1f2e578",
+        "outputs/keep96/runs/entry098/33ab82f5cfc0a69c/20261016T062020576264Z/started.json": "30c96b26cd322d7d2142389988e7d85a56e4959b0a6014225a0ee4639931a919",
+        "outputs/keep96/runs/entry098/33ab82f5cfc0a69c/20261016T062020576264Z/worker-result.json": "853e02dd641b9deee7c63c0ee97e0a3fdc6db6b902762db4e64b02f89da5a7fe"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 15.681234499905258,
+      "statistics": {
+        "restarts": 377,
+        "conflicts": 382932,
+        "decisions": 481915,
+        "propagations": 53444151
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry007/9c905ce6a750b82a/20261016T062021326064Z/proof.drup.gz",
+      "proof_lines": 742959,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 7,
+      "bank_index": 3,
+      "reversed": true,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry007.cnf.gz": "13980300b534c96f55a1392631e6a5089250cd964fb7c7eb526bb9013fa5282b",
+          "outputs/keep96/formulas/entry007.json.gz": "08a58a870d7b1285bc2dcc6987659ac1ba84631278b01c9d95e97f9692343b7d"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 39.900031900033355,
+      "peak_rss_bytes": 307011584,
+      "attempt": "outputs/keep96/runs/entry007/9c905ce6a750b82a/20261016T062021326064Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "7",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry007\\9c905ce6a750b82a\\20261016T062021326064Z"
+      ],
+      "formula_sha256": "13980300b534c96f55a1392631e6a5089250cd964fb7c7eb526bb9013fa5282b",
+      "variables": 2536,
+      "clauses": 16645,
+      "region_vertices": 162,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry007.cnf.gz": "13980300b534c96f55a1392631e6a5089250cd964fb7c7eb526bb9013fa5282b",
+        "outputs/keep96/formulas/entry007.json.gz": "08a58a870d7b1285bc2dcc6987659ac1ba84631278b01c9d95e97f9692343b7d",
+        "outputs/keep96/runs/entry007/9c905ce6a750b82a/20261016T062021326064Z/proof.drup.gz": "892f4acc073ace549da87c8675ddefd8dc56f80ebf55391f2324f0175c1c8b59",
+        "outputs/keep96/runs/entry007/9c905ce6a750b82a/20261016T062021326064Z/solver.log": "8780a13afb399a205bbbb10b709e110176d944e1d76ea586134b58db14072dec",
+        "outputs/keep96/runs/entry007/9c905ce6a750b82a/20261016T062021326064Z/started.json": "437497064cdded2f394c90e011202f5eab1b6c0e0361bad6499d08d7f3fe44c0",
+        "outputs/keep96/runs/entry007/9c905ce6a750b82a/20261016T062021326064Z/worker-result.json": "f2330182881b3c6c3345451ee74beedddbf25c6926f303b4133edb13d9c20f4d"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 0.005278999917209148,
+      "statistics": {
+        "restarts": 1,
+        "conflicts": 105,
+        "decisions": 232,
+        "propagations": 16104
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry184/ca5711b05cde0e50/20261016T062101528824Z/proof.drup.gz",
+      "proof_lines": 533,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 184,
+      "bank_index": 92,
+      "reversed": false,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry184.cnf.gz": "e39a2274c356c3ab8852720017a5076583094a0d80423fbb6922e4ee5712dcca",
+          "outputs/keep96/formulas/entry184.json.gz": "12ad16afd98bc75aec5191ceb24466e8fbc7a2a516abcdd230906137b9908abd"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 0.2143629000056535,
+      "peak_rss_bytes": 30605312,
+      "attempt": "outputs/keep96/runs/entry184/ca5711b05cde0e50/20261016T062101528824Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "184",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry184\\ca5711b05cde0e50\\20261016T062101528824Z"
+      ],
+      "formula_sha256": "e39a2274c356c3ab8852720017a5076583094a0d80423fbb6922e4ee5712dcca",
+      "variables": 1832,
+      "clauses": 8602,
+      "region_vertices": 127,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry184.cnf.gz": "e39a2274c356c3ab8852720017a5076583094a0d80423fbb6922e4ee5712dcca",
+        "outputs/keep96/formulas/entry184.json.gz": "12ad16afd98bc75aec5191ceb24466e8fbc7a2a516abcdd230906137b9908abd",
+        "outputs/keep96/runs/entry184/ca5711b05cde0e50/20261016T062101528824Z/proof.drup.gz": "a82249d228f3f0c5aec36999ad2bb9dae5ec92e18a33fc4820b932045d6e34ad",
+        "outputs/keep96/runs/entry184/ca5711b05cde0e50/20261016T062101528824Z/solver.log": "48f1c1616948950850e3f653e766738b0f4732951b0784902b3d10ca7e6f48ae",
+        "outputs/keep96/runs/entry184/ca5711b05cde0e50/20261016T062101528824Z/started.json": "83508b54290c56f49ecbd3daad89e3ee4b94d790cf76e7ade12262b72cd7151a",
+        "outputs/keep96/runs/entry184/ca5711b05cde0e50/20261016T062101528824Z/worker-result.json": "96377ca745ee5dab0371320f9ed72d96d19ece00335d63851f63efbc2d27da01"
+      }
+    },
+    {
+      "status": "UNSAT",
+      "solver_seconds": 0.007162799825891852,
+      "statistics": {
+        "restarts": 1,
+        "conflicts": 356,
+        "decisions": 616,
+        "propagations": 56178
+      },
+      "memory_policy": "Windows Job Object PROCESS_MEMORY hard commit limit",
+      "certificate": "outputs/keep96/runs/entry179/fa36f3497bd90212/20261016T062102080632Z/proof.drup.gz",
+      "proof_lines": 1013,
+      "certificate_validation": "NOT_CHECKED",
+      "interpretation": "Solver UNSAT only; not a Lean proof",
+      "entry": 179,
+      "bank_index": 89,
+      "reversed": true,
+      "identity": {
+        "config": {
+          "keep": 96,
+          "total_vertices": 193,
+          "worker_wall_limit_seconds": 300,
+          "memory_limit_mib": 2048,
+          "solver": "Glucose 4.1 (PySAT g4)",
+          "python_sat": "1.9.dev16",
+          "proof_logging": true,
+          "solver_parameters": "defaults; no custom seed or incremental mode",
+          "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+          "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+          "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+          "sources": {
+            "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+            "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+            "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+          }
+        },
+        "formula_hashes": {
+          "outputs/keep96/formulas/entry179.cnf.gz": "a17f89c6641d9ab0ab0f6f38dd51b035cfa50fb06f74dbbbc2cf51361a8afd1e",
+          "outputs/keep96/formulas/entry179.json.gz": "d92b194ba8586c884f39a9321073bcfa0cfb664c66b45e4d91e28fa0c9675f5b"
+        }
+      },
+      "termination": "PROCESS_EXIT",
+      "exit_code": 0,
+      "runtime_seconds": 0.2164743000175804,
+      "peak_rss_bytes": 29556736,
+      "attempt": "outputs/keep96/runs/entry179/fa36f3497bd90212/20261016T062102080632Z",
+      "command": [
+        "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+        "--entry",
+        "179",
+        "--memory-mib",
+        "2048",
+        "--attempt",
+        "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry179\\fa36f3497bd90212\\20261016T062102080632Z"
+      ],
+      "formula_sha256": "a17f89c6641d9ab0ab0f6f38dd51b035cfa50fb06f74dbbbc2cf51361a8afd1e",
+      "variables": 1874,
+      "clauses": 9071,
+      "region_vertices": 129,
+      "artifact_hashes": {
+        "outputs/keep96/formulas/entry179.cnf.gz": "a17f89c6641d9ab0ab0f6f38dd51b035cfa50fb06f74dbbbc2cf51361a8afd1e",
+        "outputs/keep96/formulas/entry179.json.gz": "d92b194ba8586c884f39a9321073bcfa0cfb664c66b45e4d91e28fa0c9675f5b",
+        "outputs/keep96/runs/entry179/fa36f3497bd90212/20261016T062102080632Z/proof.drup.gz": "73e0d5a2fa5609e87c4508baf664d9f565749f7513f3c2d3b49136ce8ab41f82",
+        "outputs/keep96/runs/entry179/fa36f3497bd90212/20261016T062102080632Z/solver.log": "c2270c30a077ef22bad75e92026093fa30616d6b0e0a4a00948d2579856f7884",
+        "outputs/keep96/runs/entry179/fa36f3497bd90212/20261016T062102080632Z/started.json": "34f6e4cc9c9fcb27ac880894515224f43340635ca42066ad8bee64e5348b93d3",
+        "outputs/keep96/runs/entry179/fa36f3497bd90212/20261016T062102080632Z/worker-result.json": "c6fa8363f7977361c417b21caea3e546c4a553c90b77fd7b63c554873eb47900"
+      }
+    }
+  ],
+  "planned_entries": [
+    256,
+    135,
+    198,
+    133,
+    90,
+    159,
+    258,
+    33,
+    98,
+    7,
+    184,
+    179
+  ],
+  "complete": true,
+  "interpretation": "Computational relaxation results, not Lean proofs"
+}
