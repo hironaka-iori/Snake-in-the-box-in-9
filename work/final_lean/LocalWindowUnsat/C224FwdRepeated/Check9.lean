@@ -1,0 +1,25 @@
+import LocalWindowUnsat.C224FwdRepeated.Data36
+
+/-! Kernel checks of segments 33-36 of `224_fwd_repeated` (generated). -/
+
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+
+set_option Elab.async false
+
+namespace Snake9.LocalWindow.C224FwdRepeated
+open Snake9.Lrat
+
+theorem ok33 : andB (check start33 proof33) (cpOk (replay start33 proof33) cp34) = true := by
+  decide +kernel
+
+theorem ok34 : check start34 proof34 = true := by
+  decide +kernel
+
+theorem ok35 : check start35 proof35 = true := by
+  decide +kernel
+
+theorem ok36 : andB (check start36 proof36) (cpOk (replay start36 proof36) cp37) = true := by
+  decide +kernel
+
+end Snake9.LocalWindow.C224FwdRepeated
