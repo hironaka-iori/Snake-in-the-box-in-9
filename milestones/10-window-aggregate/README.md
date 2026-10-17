@@ -2,7 +2,7 @@
 
 Checkpoint: 17 October 2026.
 
-**Status.** Two new *conditional* upper bounds are stated in Lean, and their core sequence lemmas compile. The fresh mathlib compilation of the wrapper module is pending; see the note under item 6. The bounds are at most **242 edges**, and at most **241 edges** with one extra premise. The premises are exclusions of certain singleton-count patterns on three or four consecutive internal path vertices. Each premise has a **DRAT-checked** unsatisfiability certificate for an explicit local CNF. None is a Lean theorem yet. The unconditional checked interval therefore remains **191 <= a(9) <= 245**.
+**Status.** Two new *conditional* upper bounds are proved in Lean: at most **242 edges**, and at most **241 edges** with one extra premise. The premises are exclusions of certain singleton-count patterns on three or four consecutive internal path vertices. Each premise has a **DRAT-checked** unsatisfiability certificate for an explicit local CNF. None is a Lean theorem yet. The unconditional checked interval therefore remains **191 <= a(9) <= 245**.
 
 ## What this milestone adds
 
@@ -31,7 +31,7 @@ This milestone asks which count windows a local ball model allows. It then deriv
    - `work/spectral/stronger/WindowPotential242.lean` and `WindowPotential241.lean` use core Lean only. They prove the sequence inequalities `14*n <= 5*sum + 12` and `3*n <= sum + 4` by potentials checked by kernel evaluation of finite tables.
    - `AggregateWindowConditional.lean` uses mathlib and combines them with the existing incidence identity. It proves `upper_242_of_certified_windows` and `upper_241_of_certified_windows` for the original `Snake9.Snake`.
    - The (2,2,2) case is discharged by the existing theorem, and the count-one neighbour bound and endpoint bound are reused. Only the listed window premises remain as hypotheses.
-   - *Compilation status at this checkpoint:* both core modules compile with only `propext`, `Classical.choice`, and `Quot.sound`. A fresh `verify_strengthened.py` run including `AggregateWindowConditional` was still in progress when this commit was pushed.
+   - *Reproduction:* a fresh source-only run of `verify_strengthened.py` succeeded. It covered 156 steps: core, incidence theorem, every strengthening module including these three, and the final audit. Both conditional theorems, and the unconditional 245 interval, audit to `propext`, `Classical.choice`, and `Quot.sound` only. The manifest and combined log are `outputs/strengthened-window-reproduction-manifest.json` and `outputs/strengthened-window-reproduction.log`. The run used `--core-targets Snake9 PathStructure CubeLocal SquareCounterexample SingletonSquareLemma OptimalityTarget`, the only core modules the chain imports.
 
 7. **Independent judge** (`scripts/judge.py`, `data/judge.json`). This is a high-level decision procedure that reuses none of the generating code. Its verdict is **ACCEPT**:
    - (A) It re-encodes every premise from the definitions, with a different variable order and a different cardinality encoding. It checks the recorded cycle cuts are genuine cycles, refutes each formula with Glucose, and verifies each proof with `drat-trim`. All 22 are verified.
