@@ -13,7 +13,7 @@ import pysolvers
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--phase',choices=['pilot','survey'],default='pilot')
+    ap.add_argument('--phase',choices=['pilot','survey','retry20'],default='pilot')
     ap.add_argument('--seconds',type=float,default=300);ap.add_argument('--memory-mib',type=int,default=2048)
     ap.add_argument('--entries',type=int,nargs='+');ap.add_argument('--retry-unknown',action='store_true')
     a=ap.parse_args()
