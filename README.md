@@ -24,7 +24,7 @@ Research checkpoint: 15 October 2026.
 | At most 242, resp. 241, edges if five, resp. six, local count-window patterns are excluded | Lean-checked conditional theorems (fresh 156-step reproduction); each window exclusion has a DRAT-checked certificate for a local CNF, not yet a Lean proof |
 | At most 239 edges if 145 direction-aware count-window patterns are excluded | Lean-checked conditional theorem (kernel-checked 2592-state potential); every pattern has a DRAT-checked certificate, not yet a Lean proof |
 | At most 238 edges if 325 five-centre window patterns are excluded | Lean-checked conditional theorem (44,064-state potential, kernel-checked in 34 shards); every pattern DRAT-certified |
-| At most 235 edges if 2,579 six-centre window patterns are excluded | Lean-checked conditional theorem (264,384-state potential, 34 kernel shards); every pattern DRAT-certified |
+| At most 235 edges if 2,635 six-centre window patterns are excluded | Lean-checked conditional theorem (264,384-state potential, 34 kernel shards); every pattern DRAT-certified |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
@@ -152,7 +152,7 @@ The current potential argument stops at 245 because count sequences repeating `2
 
 The needed exclusions are (2,2,3), (2,2,4), (2,3,2), (3,2,3), (4,1,4..6), and (2,4,2,3), with reversals and every window shape. Each has a CNF certificate verified by `drat-trim`. `AggregateWindowConditional.lean` proves in Lean that these premises imply at most 242 and 241 edges respectively. The premises themselves are **not** Lean theorems. The geometric bridge from a snake to the local CNF is not formalized, so the unconditional bound is still 245. See [the milestone](milestones/10-window-aggregate/README.md).
 
-A direction-aware automaton goes further: states remember the shape of the last six transition directions and the last three counts, and a counterexample-guided refinement loop raises the average to 10/3 with 145 solver-refuted windows (each DRAT-verified). The kernel checks the resulting 2592-state potential in about a minute, and `upper_239_of_direction_windows` gives **239 edges** under that premise. With five-centre windows and seven directions of memory the same loop reaches average 7/2 with 325 certified windows, and `upper_238_of_direction_windows5` gives **238 edges**; its 44,064-state table is kernel-checked in 34 shards. Six-centre windows raise the average to 4 with 2,579 certified windows, and `upper_235_of_direction_windowsK6R3` gives **235 edges**. Radius four at four centres gives no gain.
+A direction-aware automaton goes further: states remember the shape of the last six transition directions and the last three counts, and a counterexample-guided refinement loop raises the average to 10/3 with 145 solver-refuted windows (each DRAT-verified). The kernel checks the resulting 2592-state potential in about a minute, and `upper_239_of_direction_windows` gives **239 edges** under that premise. With five-centre windows and seven directions of memory the same loop reaches average 7/2 with 325 certified windows, and `upper_238_of_direction_windows5` gives **238 edges**; its 44,064-state table is kernel-checked in 34 shards. Six-centre windows raise the average to 4 with 2,635 certified windows, and `upper_235_of_direction_windowsK6R3` gives **235 edges**. Radius four at four centres gives no gain.
 
 ## Collaboration
 

@@ -17,11 +17,21 @@ from refine import Oracle, DATA
 from refine_fast import FastAutomaton, prune, howard, bellman_ford, vertex_bound
 
 
-def sym_code(alpha, ns):
-    code = 0
-    for lo, hi in alpha:
-        code = code * ns + ((lo if lo == hi else ns) - 1)
-    return code
+def sym_codes(alpha, ns, K):
+    """All symbol codes covered by a certified count-range pattern (symbol s <= K: count s;
+    symbol K+1: count >= K+1)."""
+    import itertools
+    opts = [[s for s in range(1, ns + 1) if ((lo <= s <= hi) if s <= K else (lo <= s and hi >= 21))]
+            for lo, hi in alpha]
+    if any(not o for o in opts):
+        return np.zeros(0, np.int64)
+    out = []
+    for syms in itertools.product(*opts):
+        code = 0
+        for s2 in syms:
+            code = code * ns + (s2 - 1)
+        out.append(code)
+    return np.array(sorted(set(out)), np.int64)
 
 
 class Blockers:
@@ -38,15 +48,20 @@ class Blockers:
                 step = ns ** cc
                 js = np.arange(ns ** (k - cc)) * step
                 for x in self.by_shape.get(fw, []):
-                    c0 = sym_code(x[1], ns)
-                    codes = c0 + js
-                    if rv == fw and A.rev[cc][c0] != c0:
-                        codes = np.concatenate([codes, A.rev[cc][c0] + js])
+                    c0 = sym_codes(x[1], ns, A.K)
+                    if len(c0) == 0:
+                        continue
+                    base = c0
+                    if rv == fw:
+                        base = np.union1d(c0, A.rev[cc][c0])
+                    codes = (base[:, None] + js[None, :]).ravel()
                     self.hits.setdefault(x, []).append((e, codes))
                 if rv != fw:
                     for x in self.by_shape.get(rv, []):
-                        c0 = A.rev[cc][sym_code(x[1], ns)]
-                        self.hits.setdefault(x, []).append((e, c0 + js))
+                        c0 = A.rev[cc][sym_codes(x[1], ns, A.K)]
+                        if len(c0) == 0:
+                            continue
+                        self.hits.setdefault(x, []).append((e, (c0[:, None] + js[None, :]).ravel()))
         for x, lst in self.hits.items():
             for e, codes in lst:
                 self.cnt[e][codes] += 1
@@ -92,7 +107,7 @@ def main():
         for e in json.load(open(a.avoid)):
             O.known[(tuple(e['dirs']), tuple(tuple(x) for x in e['alpha']))] = 'AVOID'
     keys = [x for x, st in O.known.items() if st == 'UNSAT' and 2 <= len(x[1]) <= a.k
-            and all(1 <= (lo if lo == hi else A.ns) <= A.ns for lo, hi in x[1])]
+            and len(sym_codes(x[1], A.ns, A.K)) > 0]
     Bk = Blockers(A, keys)
     keep = {x for x in keys if x in Bk.hits}
     print('relevant exclusions', len(keep), flush=True)
