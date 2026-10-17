@@ -164,7 +164,19 @@ theorem other_count_bound (q : Snake 97) (h : Conditions q) :
   rw [h.head_fixed]
   exact head_not_others
 '''
-write('First96Semantics',s+footer)
+# Bound elaboration memory by compiling declarations in separate modules.
+body=s.removeprefix('import First96Data\n'+header)
+declarations=re.split(r'(?=^(?:def|theorem|structure) )',body,flags=re.MULTILINE)
+declarations=[x for x in declarations if x.strip()]
+previous='First96Data'
+semantic_modules=[]
+for offset in range(0,len(declarations),24):
+    name=f'First96SemanticsPart{offset//24:04d}'
+    write(name,'import '+previous+'\n'+header.replace('instance propDec ',f'instance semDec{offset//24} ')+''.join(declarations[offset:offset+24])+footer)
+    semantic_modules.append(name.replace('First96',PN))
+    previous=name
+write('First96Semantics','import '+previous+'\n')
+(DEST/(PN+'Semantics.modules.json')).write_text(json.dumps(semantic_modules),encoding='utf-8')
 
 def cntexpr(w):
     return f'{countof[w]} q' if w>2*N else f'countLit q [{w}]'
@@ -296,3 +308,4 @@ theorem no_long_suffix {m : Nat} (hm : 192 ≤ m) (p : Snake m) :
 #print axioms region_exclusion
 '''
 write('First96Complete',s+footer)
+

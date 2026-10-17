@@ -173,7 +173,7 @@ def group(rep):
         evidence(rep)
         boolean=emit_boolean(rep);geometry(rep)
         core=read(OUT/f'cores/entry{rep:03d}.json');prefix=f'E96{rep:03d}'
-        modules=boolean+[prefix+'Data',prefix+'Semantics']+[prefix+f'Clauses{i:02d}' for i in range((len(core['clauses'])+31)//32)]+[prefix+'Complete']
+        modules=boolean+[prefix+'Data']+read(BANK/(prefix+'Semantics.modules.json'))+[prefix+'Semantics']+[prefix+f'Clauses{i:02d}' for i in range((len(core['clauses'])+31)//32)]+[prefix+'Complete']
         for name in modules:check(name,rep)
         axes={t:audit(prefix+'Complete',f'Snake9.Regrowth96.{prefix}.'+t) for t in ['region_exclusion','no192','no_long_prefix','no_long_suffix']}
         with MUTEX:
