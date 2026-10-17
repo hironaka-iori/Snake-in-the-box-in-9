@@ -1,5 +1,13 @@
 # KEEP=112 continuation contract
 
+## Completed (2026-10-17)
+
+All 262 entries, all 86 representatives, and the final `Bank112Results`
+aggregate passed. The four aggregate axiom audits contain only `propext`,
+`Classical.choice`, and `Quot.sound`. See `RESULTS.md` and the saved final
+audit receipt. The continuation instructions below describe the historical
+build workflow; do not restart a completed campaign without a new request.
+
 ## Current implementation (2026-10-16)
 
 The first full geometric entry is PASSED, audited and pushed in commit

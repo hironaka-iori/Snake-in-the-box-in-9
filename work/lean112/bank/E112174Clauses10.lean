@@ -1,0 +1,269 @@
+import E112174Semantics
+import B112E174Inputs
+namespace Snake9.Regrowth.E112174
+noncomputable section
+local instance blockDec10 (p : Prop) : Decidable p := Classical.propDecidable p
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+set_option linter.unusedVariables false
+theorem counterClause321 (q : Nat → Bool) : valuationOf q 118 = false ∨ valuationOf q 231 = true := by
+  have hs : count231 q = (countLit q [118]) + (countLit q [119]) := List.countP_append (p := literal q) (l₁ := [118]) (l₂ := [119])
+  have hm := merge_left (literal (valuationOf q) (118)) (literal (valuationOf q) (231)) (countLit q [118]) (countLit q [119]) (count231 q) 1 (meaning118 q) (meaning231 q) hs
+  change valuationOf q 118 = false ∨ valuationOf q 231 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause321 (q : Snake 81) (h : Conditions q) : valuation q 118 = false ∨ valuation q 231 = true := counterClause321 (baseVal q)
+
+theorem counterClause322 (q : Nat → Bool) : valuationOf q 231 = false ∨ valuationOf q 233 = true := by
+  have hs : count233 q = (countLit q [117]) + (countLit q [118, 119]) := List.countP_append (p := literal q) (l₁ := [117]) (l₂ := [118, 119])
+  have hm := merge_right (literal (valuationOf q) (231)) (literal (valuationOf q) (233)) (countLit q [117]) (countLit q [118, 119]) (count233 q) 1 (meaning231 q) (meaning233 q) hs
+  change valuationOf q 231 = false ∨ valuationOf q 233 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause322 (q : Snake 81) (h : Conditions q) : valuation q 231 = false ∨ valuation q 233 = true := counterClause322 (baseVal q)
+
+theorem counterClause323 (q : Nat → Bool) : valuationOf q 122 = false ∨ valuationOf q 235 = true := by
+  have hs : count235 q = (countLit q [121]) + (countLit q [122]) := List.countP_append (p := literal q) (l₁ := [121]) (l₂ := [122])
+  have hm := merge_right (literal (valuationOf q) (122)) (literal (valuationOf q) (235)) (countLit q [121]) (countLit q [122]) (count235 q) 1 (meaning122 q) (meaning235 q) hs
+  change valuationOf q 122 = false ∨ valuationOf q 235 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause323 (q : Snake 81) (h : Conditions q) : valuation q 122 = false ∨ valuation q 235 = true := counterClause323 (baseVal q)
+
+theorem counterClause324 (q : Nat → Bool) : valuationOf q 121 = false ∨ valuationOf q 235 = true := by
+  have hs : count235 q = (countLit q [121]) + (countLit q [122]) := List.countP_append (p := literal q) (l₁ := [121]) (l₂ := [122])
+  have hm := merge_left (literal (valuationOf q) (121)) (literal (valuationOf q) (235)) (countLit q [121]) (countLit q [122]) (count235 q) 1 (meaning121 q) (meaning235 q) hs
+  change valuationOf q 121 = false ∨ valuationOf q 235 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause324 (q : Snake 81) (h : Conditions q) : valuation q 121 = false ∨ valuation q 235 = true := counterClause324 (baseVal q)
+
+theorem counterClause325 (q : Nat → Bool) : valuationOf q 235 = false ∨ valuationOf q 237 = true := by
+  have hs : count237 q = (countLit q [120]) + (countLit q [121, 122]) := List.countP_append (p := literal q) (l₁ := [120]) (l₂ := [121, 122])
+  have hm := merge_right (literal (valuationOf q) (235)) (literal (valuationOf q) (237)) (countLit q [120]) (countLit q [121, 122]) (count237 q) 1 (meaning235 q) (meaning237 q) hs
+  change valuationOf q 235 = false ∨ valuationOf q 237 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause325 (q : Snake 81) (h : Conditions q) : valuation q 235 = false ∨ valuation q 237 = true := counterClause325 (baseVal q)
+
+theorem counterClause326 (q : Nat → Bool) : valuationOf q 120 = false ∨ valuationOf q 237 = true := by
+  have hs : count237 q = (countLit q [120]) + (countLit q [121, 122]) := List.countP_append (p := literal q) (l₁ := [120]) (l₂ := [121, 122])
+  have hm := merge_left (literal (valuationOf q) (120)) (literal (valuationOf q) (237)) (countLit q [120]) (countLit q [121, 122]) (count237 q) 1 (meaning120 q) (meaning237 q) hs
+  change valuationOf q 120 = false ∨ valuationOf q 237 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause326 (q : Snake 81) (h : Conditions q) : valuation q 120 = false ∨ valuation q 237 = true := counterClause326 (baseVal q)
+
+theorem counterClause327 (q : Nat → Bool) : valuationOf q 237 = false ∨ valuationOf q 239 = true := by
+  have hs : count239 q = (countLit q [117, 118, 119]) + (countLit q [120, 121, 122]) := List.countP_append (p := literal q) (l₁ := [117, 118, 119]) (l₂ := [120, 121, 122])
+  have hm := merge_right (literal (valuationOf q) (237)) (literal (valuationOf q) (239)) (countLit q [117, 118, 119]) (countLit q [120, 121, 122]) (count239 q) 1 (meaning237 q) (meaning239 q) hs
+  change valuationOf q 237 = false ∨ valuationOf q 239 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause327 (q : Snake 81) (h : Conditions q) : valuation q 237 = false ∨ valuation q 239 = true := counterClause327 (baseVal q)
+
+theorem counterClause328 (q : Nat → Bool) : valuationOf q 233 = false ∨ valuationOf q 239 = true := by
+  have hs : count239 q = (countLit q [117, 118, 119]) + (countLit q [120, 121, 122]) := List.countP_append (p := literal q) (l₁ := [117, 118, 119]) (l₂ := [120, 121, 122])
+  have hm := merge_left (literal (valuationOf q) (233)) (literal (valuationOf q) (239)) (countLit q [117, 118, 119]) (countLit q [120, 121, 122]) (count239 q) 1 (meaning233 q) (meaning239 q) hs
+  change valuationOf q 233 = false ∨ valuationOf q 239 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause328 (q : Snake 81) (h : Conditions q) : valuation q 233 = false ∨ valuation q 239 = true := counterClause328 (baseVal q)
+
+theorem counterClause329 (q : Nat → Bool) : valuationOf q 233 = false ∨ valuationOf q 237 = false ∨ valuationOf q 240 = true := by
+  have hs : count239 q = (countLit q [117, 118, 119]) + (countLit q [120, 121, 122]) := List.countP_append (p := literal q) (l₁ := [117, 118, 119]) (l₂ := [120, 121, 122])
+  have hm := merge_two (literal (valuationOf q) (233)) (literal (valuationOf q) (237)) (literal (valuationOf q) (240)) (countLit q [117, 118, 119]) (countLit q [120, 121, 122]) (count239 q) 1 1 (meaning233 q) (meaning237 q) (meaning240 q) hs
+  change valuationOf q 233 = false ∨ valuationOf q 237 = false ∨ valuationOf q 240 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause329 (q : Snake 81) (h : Conditions q) : valuation q 233 = false ∨ valuation q 237 = false ∨ valuation q 240 = true := counterClause329 (baseVal q)
+
+theorem counterClause330 (q : Nat → Bool) : valuationOf q 125 = false ∨ valuationOf q 241 = true := by
+  have hs : count241 q = (countLit q [124]) + (countLit q [125]) := List.countP_append (p := literal q) (l₁ := [124]) (l₂ := [125])
+  have hm := merge_right (literal (valuationOf q) (125)) (literal (valuationOf q) (241)) (countLit q [124]) (countLit q [125]) (count241 q) 1 (meaning125 q) (meaning241 q) hs
+  change valuationOf q 125 = false ∨ valuationOf q 241 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause330 (q : Snake 81) (h : Conditions q) : valuation q 125 = false ∨ valuation q 241 = true := counterClause330 (baseVal q)
+
+theorem counterClause331 (q : Nat → Bool) : valuationOf q 241 = false ∨ valuationOf q 243 = true := by
+  have hs : count243 q = (countLit q [123]) + (countLit q [124, 125]) := List.countP_append (p := literal q) (l₁ := [123]) (l₂ := [124, 125])
+  have hm := merge_right (literal (valuationOf q) (241)) (literal (valuationOf q) (243)) (countLit q [123]) (countLit q [124, 125]) (count243 q) 1 (meaning241 q) (meaning243 q) hs
+  change valuationOf q 241 = false ∨ valuationOf q 243 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause331 (q : Snake 81) (h : Conditions q) : valuation q 241 = false ∨ valuation q 243 = true := counterClause331 (baseVal q)
+
+theorem counterClause332 (q : Nat → Bool) : valuationOf q 126 = false ∨ valuationOf q 245 = true := by
+  have hs : count245 q = (countLit q [126]) + (countLit q [127]) := List.countP_append (p := literal q) (l₁ := [126]) (l₂ := [127])
+  have hm := merge_left (literal (valuationOf q) (126)) (literal (valuationOf q) (245)) (countLit q [126]) (countLit q [127]) (count245 q) 1 (meaning126 q) (meaning245 q) hs
+  change valuationOf q 126 = false ∨ valuationOf q 245 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause332 (q : Snake 81) (h : Conditions q) : valuation q 126 = false ∨ valuation q 245 = true := counterClause332 (baseVal q)
+
+theorem counterClause333 (q : Nat → Bool) : valuationOf q 129 = false ∨ valuationOf q 247 = true := by
+  have hs : count247 q = (countLit q [128]) + (countLit q [129]) := List.countP_append (p := literal q) (l₁ := [128]) (l₂ := [129])
+  have hm := merge_right (literal (valuationOf q) (129)) (literal (valuationOf q) (247)) (countLit q [128]) (countLit q [129]) (count247 q) 1 (meaning129 q) (meaning247 q) hs
+  change valuationOf q 129 = false ∨ valuationOf q 247 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause333 (q : Snake 81) (h : Conditions q) : valuation q 129 = false ∨ valuation q 247 = true := counterClause333 (baseVal q)
+
+theorem counterClause334 (q : Nat → Bool) : valuationOf q 247 = false ∨ valuationOf q 249 = true := by
+  have hs : count249 q = (countLit q [126, 127]) + (countLit q [128, 129]) := List.countP_append (p := literal q) (l₁ := [126, 127]) (l₂ := [128, 129])
+  have hm := merge_right (literal (valuationOf q) (247)) (literal (valuationOf q) (249)) (countLit q [126, 127]) (countLit q [128, 129]) (count249 q) 1 (meaning247 q) (meaning249 q) hs
+  change valuationOf q 247 = false ∨ valuationOf q 249 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause334 (q : Snake 81) (h : Conditions q) : valuation q 247 = false ∨ valuation q 249 = true := counterClause334 (baseVal q)
+
+theorem counterClause335 (q : Nat → Bool) : valuationOf q 245 = false ∨ valuationOf q 249 = true := by
+  have hs : count249 q = (countLit q [126, 127]) + (countLit q [128, 129]) := List.countP_append (p := literal q) (l₁ := [126, 127]) (l₂ := [128, 129])
+  have hm := merge_left (literal (valuationOf q) (245)) (literal (valuationOf q) (249)) (countLit q [126, 127]) (countLit q [128, 129]) (count249 q) 1 (meaning245 q) (meaning249 q) hs
+  change valuationOf q 245 = false ∨ valuationOf q 249 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause335 (q : Snake 81) (h : Conditions q) : valuation q 245 = false ∨ valuation q 249 = true := counterClause335 (baseVal q)
+
+theorem counterClause336 (q : Nat → Bool) : valuationOf q 249 = false ∨ valuationOf q 251 = true := by
+  have hs : count251 q = (countLit q [123, 124, 125]) + (countLit q [126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [123, 124, 125]) (l₂ := [126, 127, 128, 129])
+  have hm := merge_right (literal (valuationOf q) (249)) (literal (valuationOf q) (251)) (countLit q [123, 124, 125]) (countLit q [126, 127, 128, 129]) (count251 q) 1 (meaning249 q) (meaning251 q) hs
+  change valuationOf q 249 = false ∨ valuationOf q 251 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause336 (q : Snake 81) (h : Conditions q) : valuation q 249 = false ∨ valuation q 251 = true := counterClause336 (baseVal q)
+
+theorem counterClause337 (q : Nat → Bool) : valuationOf q 243 = false ∨ valuationOf q 251 = true := by
+  have hs : count251 q = (countLit q [123, 124, 125]) + (countLit q [126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [123, 124, 125]) (l₂ := [126, 127, 128, 129])
+  have hm := merge_left (literal (valuationOf q) (243)) (literal (valuationOf q) (251)) (countLit q [123, 124, 125]) (countLit q [126, 127, 128, 129]) (count251 q) 1 (meaning243 q) (meaning251 q) hs
+  change valuationOf q 243 = false ∨ valuationOf q 251 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause337 (q : Snake 81) (h : Conditions q) : valuation q 243 = false ∨ valuation q 251 = true := counterClause337 (baseVal q)
+
+theorem counterClause338 (q : Nat → Bool) : valuationOf q 251 = false ∨ valuationOf q 253 = true := by
+  have hs : count253 q = (countLit q [117, 118, 119, 120, 121, 122]) + (countLit q [123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [117, 118, 119, 120, 121, 122]) (l₂ := [123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_right (literal (valuationOf q) (251)) (literal (valuationOf q) (253)) (countLit q [117, 118, 119, 120, 121, 122]) (countLit q [123, 124, 125, 126, 127, 128, 129]) (count253 q) 1 (meaning251 q) (meaning253 q) hs
+  change valuationOf q 251 = false ∨ valuationOf q 253 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause338 (q : Snake 81) (h : Conditions q) : valuation q 251 = false ∨ valuation q 253 = true := counterClause338 (baseVal q)
+
+theorem counterClause339 (q : Nat → Bool) : valuationOf q 239 = false ∨ valuationOf q 253 = true := by
+  have hs : count253 q = (countLit q [117, 118, 119, 120, 121, 122]) + (countLit q [123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [117, 118, 119, 120, 121, 122]) (l₂ := [123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_left (literal (valuationOf q) (239)) (literal (valuationOf q) (253)) (countLit q [117, 118, 119, 120, 121, 122]) (countLit q [123, 124, 125, 126, 127, 128, 129]) (count253 q) 1 (meaning239 q) (meaning253 q) hs
+  change valuationOf q 239 = false ∨ valuationOf q 253 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause339 (q : Snake 81) (h : Conditions q) : valuation q 239 = false ∨ valuation q 253 = true := counterClause339 (baseVal q)
+
+theorem counterClause340 (q : Nat → Bool) : valuationOf q 239 = false ∨ valuationOf q 251 = false ∨ valuationOf q 254 = true := by
+  have hs : count253 q = (countLit q [117, 118, 119, 120, 121, 122]) + (countLit q [123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [117, 118, 119, 120, 121, 122]) (l₂ := [123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_two (literal (valuationOf q) (239)) (literal (valuationOf q) (251)) (literal (valuationOf q) (254)) (countLit q [117, 118, 119, 120, 121, 122]) (countLit q [123, 124, 125, 126, 127, 128, 129]) (count253 q) 1 1 (meaning239 q) (meaning251 q) (meaning254 q) hs
+  change valuationOf q 239 = false ∨ valuationOf q 251 = false ∨ valuationOf q 254 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause340 (q : Snake 81) (h : Conditions q) : valuation q 239 = false ∨ valuation q 251 = false ∨ valuation q 254 = true := counterClause340 (baseVal q)
+
+theorem counterClause341 (q : Nat → Bool) : valuationOf q 240 = false ∨ valuationOf q 254 = true := by
+  have hs : count253 q = (countLit q [117, 118, 119, 120, 121, 122]) + (countLit q [123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [117, 118, 119, 120, 121, 122]) (l₂ := [123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_left (literal (valuationOf q) (240)) (literal (valuationOf q) (254)) (countLit q [117, 118, 119, 120, 121, 122]) (countLit q [123, 124, 125, 126, 127, 128, 129]) (count253 q) 2 (meaning240 q) (meaning254 q) hs
+  change valuationOf q 240 = false ∨ valuationOf q 254 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause341 (q : Snake 81) (h : Conditions q) : valuation q 240 = false ∨ valuation q 254 = true := counterClause341 (baseVal q)
+
+theorem counterClause342 (q : Nat → Bool) : valuationOf q 253 = false ∨ valuationOf q 255 = true := by
+  have hs : count255 q = (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) + (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (l₂ := [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_right (literal (valuationOf q) (253)) (literal (valuationOf q) (255)) (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) (count255 q) 1 (meaning253 q) (meaning255 q) hs
+  change valuationOf q 253 = false ∨ valuationOf q 255 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause342 (q : Snake 81) (h : Conditions q) : valuation q 253 = false ∨ valuation q 255 = true := counterClause342 (baseVal q)
+
+theorem counterClause343 (q : Nat → Bool) : valuationOf q 254 = false ∨ valuationOf q 256 = true := by
+  have hs : count255 q = (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) + (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (l₂ := [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_right (literal (valuationOf q) (254)) (literal (valuationOf q) (256)) (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) (count255 q) 2 (meaning254 q) (meaning256 q) hs
+  change valuationOf q 254 = false ∨ valuationOf q 256 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause343 (q : Snake 81) (h : Conditions q) : valuation q 254 = false ∨ valuation q 256 = true := counterClause343 (baseVal q)
+
+theorem counterClause344 (q : Nat → Bool) : valuationOf q 229 = false ∨ valuationOf q 255 = true := by
+  have hs : count255 q = (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) + (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (l₂ := [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_left (literal (valuationOf q) (229)) (literal (valuationOf q) (255)) (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) (count255 q) 1 (meaning229 q) (meaning255 q) hs
+  change valuationOf q 229 = false ∨ valuationOf q 255 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause344 (q : Snake 81) (h : Conditions q) : valuation q 229 = false ∨ valuation q 255 = true := counterClause344 (baseVal q)
+
+theorem counterClause345 (q : Nat → Bool) : valuationOf q 229 = false ∨ valuationOf q 253 = false ∨ valuationOf q 256 = true := by
+  have hs : count255 q = (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) + (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (l₂ := [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_two (literal (valuationOf q) (229)) (literal (valuationOf q) (253)) (literal (valuationOf q) (256)) (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) (count255 q) 1 1 (meaning229 q) (meaning253 q) (meaning256 q) hs
+  change valuationOf q 229 = false ∨ valuationOf q 253 = false ∨ valuationOf q 256 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause345 (q : Snake 81) (h : Conditions q) : valuation q 229 = false ∨ valuation q 253 = false ∨ valuation q 256 = true := counterClause345 (baseVal q)
+
+theorem counterClause346 (q : Nat → Bool) : valuationOf q 230 = false ∨ valuationOf q 256 = true := by
+  have hs : count255 q = (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) + (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) := List.countP_append (p := literal q) (l₁ := [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (l₂ := [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129])
+  have hm := merge_left (literal (valuationOf q) (230)) (literal (valuationOf q) (256)) (countLit q [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116]) (countLit q [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129]) (count255 q) 2 (meaning230 q) (meaning256 q) hs
+  change valuationOf q 230 = false ∨ valuationOf q 256 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause346 (q : Snake 81) (h : Conditions q) : valuation q 230 = false ∨ valuation q 256 = true := counterClause346 (baseVal q)
+
+theorem counterClause347 (q : Nat → Bool) : valuationOf q 132 = false ∨ valuationOf q 257 = true := by
+  have hs : count257 q = (countLit q [131]) + (countLit q [132]) := List.countP_append (p := literal q) (l₁ := [131]) (l₂ := [132])
+  have hm := merge_right (literal (valuationOf q) (132)) (literal (valuationOf q) (257)) (countLit q [131]) (countLit q [132]) (count257 q) 1 (meaning132 q) (meaning257 q) hs
+  change valuationOf q 132 = false ∨ valuationOf q 257 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause347 (q : Snake 81) (h : Conditions q) : valuation q 132 = false ∨ valuation q 257 = true := counterClause347 (baseVal q)
+
+theorem counterClause348 (q : Nat → Bool) : valuationOf q 131 = false ∨ valuationOf q 257 = true := by
+  have hs : count257 q = (countLit q [131]) + (countLit q [132]) := List.countP_append (p := literal q) (l₁ := [131]) (l₂ := [132])
+  have hm := merge_left (literal (valuationOf q) (131)) (literal (valuationOf q) (257)) (countLit q [131]) (countLit q [132]) (count257 q) 1 (meaning131 q) (meaning257 q) hs
+  change valuationOf q 131 = false ∨ valuationOf q 257 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause348 (q : Snake 81) (h : Conditions q) : valuation q 131 = false ∨ valuation q 257 = true := counterClause348 (baseVal q)
+
+theorem counterClause349 (q : Nat → Bool) : valuationOf q 257 = false ∨ valuationOf q 259 = true := by
+  have hs : count259 q = (countLit q [130]) + (countLit q [131, 132]) := List.countP_append (p := literal q) (l₁ := [130]) (l₂ := [131, 132])
+  have hm := merge_right (literal (valuationOf q) (257)) (literal (valuationOf q) (259)) (countLit q [130]) (countLit q [131, 132]) (count259 q) 1 (meaning257 q) (meaning259 q) hs
+  change valuationOf q 257 = false ∨ valuationOf q 259 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause349 (q : Snake 81) (h : Conditions q) : valuation q 257 = false ∨ valuation q 259 = true := counterClause349 (baseVal q)
+
+theorem counterClause350 (q : Nat → Bool) : valuationOf q 135 = false ∨ valuationOf q 261 = true := by
+  have hs : count261 q = (countLit q [134]) + (countLit q [135]) := List.countP_append (p := literal q) (l₁ := [134]) (l₂ := [135])
+  have hm := merge_right (literal (valuationOf q) (135)) (literal (valuationOf q) (261)) (countLit q [134]) (countLit q [135]) (count261 q) 1 (meaning135 q) (meaning261 q) hs
+  change valuationOf q 135 = false ∨ valuationOf q 261 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause350 (q : Snake 81) (h : Conditions q) : valuation q 135 = false ∨ valuation q 261 = true := counterClause350 (baseVal q)
+
+theorem counterClause351 (q : Nat → Bool) : valuationOf q 261 = false ∨ valuationOf q 263 = true := by
+  have hs : count263 q = (countLit q [133]) + (countLit q [134, 135]) := List.countP_append (p := literal q) (l₁ := [133]) (l₂ := [134, 135])
+  have hm := merge_right (literal (valuationOf q) (261)) (literal (valuationOf q) (263)) (countLit q [133]) (countLit q [134, 135]) (count263 q) 1 (meaning261 q) (meaning263 q) hs
+  change valuationOf q 261 = false ∨ valuationOf q 263 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause351 (q : Snake 81) (h : Conditions q) : valuation q 261 = false ∨ valuation q 263 = true := counterClause351 (baseVal q)
+
+theorem counterClause352 (q : Nat → Bool) : valuationOf q 263 = false ∨ valuationOf q 265 = true := by
+  have hs : count265 q = (countLit q [130, 131, 132]) + (countLit q [133, 134, 135]) := List.countP_append (p := literal q) (l₁ := [130, 131, 132]) (l₂ := [133, 134, 135])
+  have hm := merge_right (literal (valuationOf q) (263)) (literal (valuationOf q) (265)) (countLit q [130, 131, 132]) (countLit q [133, 134, 135]) (count265 q) 1 (meaning263 q) (meaning265 q) hs
+  change valuationOf q 263 = false ∨ valuationOf q 265 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause352 (q : Snake 81) (h : Conditions q) : valuation q 263 = false ∨ valuation q 265 = true := counterClause352 (baseVal q)
+
+theorem block10 (q : Snake 81) (h : Conditions q) : B112E174.Block10 (valuation q) :=
+  ⟨clause321 q h, clause322 q h, clause323 q h, clause324 q h, clause325 q h, clause326 q h, clause327 q h, clause328 q h, clause329 q h, clause330 q h, clause331 q h, clause332 q h, clause333 q h, clause334 q h, clause335 q h, clause336 q h, clause337 q h, clause338 q h, clause339 q h, clause340 q h, clause341 q h, clause342 q h, clause343 q h, clause344 q h, clause345 q h, clause346 q h, clause347 q h, clause348 q h, clause349 q h, clause350 q h, clause351 q h, clause352 q h⟩
+
+end
+end Snake9.Regrowth.E112174
