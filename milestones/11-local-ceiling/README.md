@@ -68,14 +68,17 @@ For three-centre windows, no radius-3 ball contains a complete 26-cycle (`data/a
 
 ## Floors
 
-All values are in edges and are approximate (`m + 1 ≈ 9214/(35 + μ)`).
+All values are in edges and are approximate (`m + 1 ≈ 9214/(35 + μ)`). A real snake is itself a witness: it satisfies every local constraint, so no local argument can prove a smaller weighted mean than real snakes have.
 
-| method family | floor |
-|---|---|
-| count/direction automaton, radius 3, ≤4 centres (the conditional 239) | ≈ 233 |
-| count/direction automaton, radius 3 with 5 centres, or radius 4 with ≤4 centres (the conditional 238) | ≈ 227 |
-| the same with `s0` counted exactly | ≈ 207 |
-| any radius-3 three-centre local argument | ≈ 207 |
+| method family | floor | witness |
+|---|---|---|
+| any method using only `min(α,6)` (any radius) | ≈ 224 | real bank snakes: lumped mean 5.92 |
+| any method using only `α`, without lumping (any radius) | ≈ 209 | real bank snakes: mean 8.77 |
+| `α` plus the cheap empty-square charge `2e(x)/21` (radius 3) | ≈ 217.5 | 208-adversary (`scripts/cheap_s0.py`) |
+| count/direction automaton, radius 3, ≤4 centres (the conditional 239) | ≈ 233 | 224-adversary |
+| count/direction automaton, radius 3 with 5 centres, or radius 4 with ≤4 centres (the conditional 238) | ≈ 227 | 208-adversary |
+| the same with `s0` counted exactly | ≈ 207 | 208-adversary |
+| any radius-3 three-centre local argument | ≈ 207 | 208-adversary (no complete cycle inside a ball) |
 
 **What this means for the target 196.** Local window arguments cannot get below about 207 unless their radius and state see complete 26-cycles spanning six coordinates. The obstruction comes from fibre unions of long cycles. Fibres over `Q2` would need two disjoint induced cycles in `Q7`, whose total is at most about 96 vertices out of 128 (two 48-coils). That gives at most about 192 vertices, which no longer obstructs 196. So the fibre construction stops mattering only at locality comparable to `Q7`. Below about 207, progress needs either such large localities, with joint configurations and the `s0` term, or a genuinely global argument that uses connectivity: these adversaries have many components, and a snake has one.
 
