@@ -2,7 +2,7 @@
 
 Checkpoint: 17 October 2026.
 
-**Status.** Three new *conditional* upper bounds are proved in Lean: at most **242 edges**, at most **241 edges** with one extra premise, at most **239 edges** from a direction-aware automaton with 145 certified window exclusions, and at most **238 edges** with five-centre windows (325 exclusions). The premises are exclusions of certain singleton-count patterns on three or four consecutive internal path vertices. Each premise has a **DRAT-checked** unsatisfiability certificate for an explicit local CNF. None is a Lean theorem yet. The unconditional checked interval therefore remains **191 <= a(9) <= 245**.
+**Status.** Three new *conditional* upper bounds are proved in Lean: at most **242 edges**, at most **241 edges** with one extra premise, at most **239 edges** from a direction-aware automaton with 145 certified window exclusions, at most **238 edges** with five-centre windows (325 exclusions), and at most **235 edges** with six-centre windows (2,546 exclusions). The premises are exclusions of certain singleton-count patterns on three or four consecutive internal path vertices. Each premise has a **DRAT-checked** unsatisfiability certificate for an explicit local CNF. None is a Lean theorem yet. The unconditional checked interval therefore remains **191 <= a(9) <= 245**.
 
 ## What this milestone adds
 
@@ -66,6 +66,7 @@ The shape-blind ceiling above is 3 (241 edges). Tracking which coordinates the p
 | L=6, k=4 (potential, Lean) | 145 | 10/3 | 8 | **239** |
 | L=6, k=4 (exact DP) | 93 | 23/7 | — | 239 |
 | L=7, k=5 (potential, Lean) | 325 | 7/2 | 6 | **238** |
+| L=7, k=6 (potential, Lean) | 2546 | 4 | 6 | **235** |
 
 Arithmetic for 239: the potential gives `3 Σ_{j=6}^{m-1} min(alpha_j,6) ≥ 10 (m-6) - 8`; with `alpha_1..alpha_5 ≥ 1` and endpoints at least four, `3 T ≥ 10 m - 36`; with `T ≤ 9214 - 35 (m+1)` this is `115 m ≤ 27573`, so `m ≤ 239`.
 
@@ -98,7 +99,13 @@ python gen_lean_automaton.py --index ../data/direction_certificates.json
 
 The first command needs the survey files as a seed and about ten minutes; the rest take a few minutes each.
 
-**Still not established.** The geometric bridge from a snake window to the local CNF, and a kernel-checked replay of the refutations, are the same gaps as for 242 and 241; the direction-aware premise has 145 windows instead of 22. Beyond 238: `scripts/refine_fast.py` is a vectorised rewrite of the refinement loop (allowed-transition masks per shape pair from per-window-shape tables, `reduceat` Bellman-Ford and dynamic programme) that handles 10^5-10^6 states; `scripts/minimize_fast.py` is the matching minimiser (blocker counts per extension); `scripts/gen_lean_automaton_k.py` generates the whole Lean chain for any (L, k, lambda) with sharded kernel checks. Radius four with four-centre windows converges to the same 10/3 as radius three (`data/refine_L6_k4_K5_r4.json`, the cycle (2,2,6) survives), so radius alone does not help at k = 4. Six-centre windows at radius three are cheap (ball of 316 vertices, about 0.1 s per query, real-snake controls pass) and the (L=7, k=6) refinement climbs past 15/4; see the next section once it is certified.
+**Still not established.** The geometric bridge from a snake window to the local CNF, and a kernel-checked replay of the refutations, are the same gaps as for 242 and 241; the direction-aware premise has 145 windows instead of 22. Beyond 238: `scripts/refine_fast.py` is a vectorised rewrite of the refinement loop (allowed-transition masks per shape pair from per-window-shape tables, `reduceat` Bellman-Ford and dynamic programme) that handles 10^5-10^6 states; `scripts/minimize_fast.py` is the matching minimiser (blocker counts per extension); `scripts/gen_lean_automaton_k.py` generates the whole Lean chain for any (L, k, lambda) with sharded kernel checks. Radius four with four-centre windows converges to the same 10/3 as radius three (`data/refine_L6_k4_K5_r4.json`, the cycle (2,2,6) survives), so radius alone does not help at k = 4. Six-centre windows at radius three are cheap (ball of 316 vertices, about 0.1 s per query, real-snake controls pass), which makes the next step affordable.
+
+## Six-centre windows: conditional bound 235
+
+With seven directions of memory and windows of up to six centres (34 shapes × 6^5 counts = 264,384 states, up to 2.7 million allowed transitions) the refinement loop reaches mean **4** after 186 rounds (`data/refine_L7_k6_K5_r3.json`). Batching the windows of every near-minimal cycle of Howard's policy graph, not only the minimum one, is what made the later rounds productive. The vectorised minimiser keeps **2,546** windows (3 two-, 64 three-, 300 four-, 1,998 five- and 181 six-centre), with an integer potential of range 6 (`data/minimal_L7_k6_K5_r3.json`). Arithmetic: `Σ_{j=7}^{m-1} min(alpha_j,6) ≥ 4 (m-7) - 6`, so `T ≥ 4 m - 26` and `39 m ≤ 9199`, giving `m ≤ 235`; the exact dynamic programme gives the same 235.
+
+All 2,546 windows are drat-trim-certified (`data/direction_certificates_k6.json`); `refine_fast.py --index` rebuilds the automaton from the index alone and re-checks the potential on every allowed edge (`data/direction_bound_L7_k6.json`); the independent judge re-encodes and refutes them (`data/judge_direction_k6.json`). The Lean chain is produced by `scripts/gen_lean_automaton_k.py` (modules `WindowAutomatonK6R3*`, 34 shards, and `AggregateDirectionK6R3Conditional.lean` with `upper_235_of_direction_windowsK6R3`); the generated potential is defined as `min 6 field`, so its range bound is definitional and the Lean constant matches the dynamic programme. Radius four with four-centre windows gave no gain (10/3, `data/refine_L6_k4_K5_r4.json`).
 
 ## What is not established
 
