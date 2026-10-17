@@ -1,5 +1,5 @@
 """Resumable source compilation; certificate-only success is not geometry."""
-import ctypes,hashlib,json,msvcrt,os,pathlib,re,subprocess,time
+import argparse,ctypes,hashlib,json,msvcrt,os,pathlib,re,subprocess,time
 from export_certificate import emit
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 HERE=ROOT/'work/window244';OUT=ROOT/'outputs/window244';CACHE=OUT/'cache';LOG=OUT/'logs'
@@ -30,13 +30,26 @@ def bounded_run(command,log):
     return code,peak,exceeded
 def save(p,data):
     tmp=p.with_suffix('.tmp');tmp.write_text(json.dumps(data,indent=2)+'\n');tmp.replace(p)
-guard=(OUT/'certificate.lock').open('a+b');guard.seek(0);guard.write(b'0');guard.flush();guard.seek(0);msvcrt.locking(guard.fileno(),msvcrt.LK_NBLCK,1)
-manifest=OUT/'certificate-build.json';state=json.loads(manifest.read_text()) if manifest.exists() else dict(modules={})
+parser=argparse.ArgumentParser();parser.add_argument('--shape',choices=['all','repeated','distinct'],default='all');args=parser.parse_args()
+def lock(name):
+    f=(OUT/name).open('a+b');f.write(b'0');f.flush();f.seek(0);msvcrt.locking(f.fileno(),msvcrt.LK_NBLCK,1);return f
+guard=lock('certificate.lock')
+if args.shape!='all':
+    shape_guard=lock('certificate-'+args.shape+'.lock')
+    guard.seek(0);msvcrt.locking(guard.fileno(),msvcrt.LK_UNLCK,1);guard.close()
+else:shape_guards=[lock('certificate-'+s+'.lock') for s in ['repeated','distinct']]
+manifest=OUT/('certificate-build.json' if args.shape=='all' else 'certificate-'+args.shape+'-build.json')
+seed=manifest if manifest.exists() else OUT/'certificate-build.json'
+state=json.loads(seed.read_text()) if seed.exists() else dict(modules={})
 state.update(status='RUNNING',pid=os.getpid(),scope='Boolean certificates only; geometric bridge still required')
 state.pop('error',None)
 env=os.environ.copy();env['LEAN_PATH']=str(CACHE)
 modules=[ROOT/'work/lean112/LocalRup.lean',ROOT/'work/lean112/TreeRup.lean']
-for shape in ['repeated','distinct']:modules += [HERE/'generated'/(n+'.lean') for n in emit(shape)]
+shapes=['repeated','distinct'] if args.shape=='all' else [args.shape]
+for shape in shapes:modules += [HERE/'generated'/(n+'.lean') for n in emit(shape)]
+state['module_order']=[s.stem for s in modules]
+state['modules']={n:r for n,r in state['modules'].items() if n in state['module_order']}
+save(manifest,state)
 for source in modules:
     name=source.stem;target=CACHE/(name+'.olean');log=LOG/(name+'.log')
     text=source.read_text(encoding='utf-8');assert not re.search(r'\b(sorry|admit|native_decide|bv_decide)\b|^\s*axiom\s',text,re.M),name
@@ -53,9 +66,21 @@ for source in modules:
     print(name,code,round(r['seconds'],2),flush=True)
     if code:
         state.update(status='FAILED',error=log.read_text()[-3000:]);save(manifest,state);raise SystemExit(code)
-for name in ['W223Repeated','W223Distinct']:
+for name in ['W223'+s.title() for s in shapes]:
     text=(LOG/(name+'.log')).read_text()
     line=next(x for x in text.splitlines() if f"'{name}.constraints_unsat' depends on axioms:" in x)
     ax=set(filter(None,re.search(r'\[(.*)\]',line)[1].split(', ')))
     assert ax<={'propext','Classical.choice','Quot.sound'},line
 state.update(status='PASSED_BOOLEAN_ONLY',active=None);save(manifest,state)
+if args.shape!='all':
+    reports=[OUT/('certificate-'+s+'-build.json') for s in ['repeated','distinct']]
+    if all(p.exists() for p in reports):
+        parts=[json.loads(p.read_text()) for p in reports]
+        if all(p['status']=='PASSED_BOOLEAN_ONLY' for p in parts):
+            merged=dict(status='PASSED_BOOLEAN_ONLY',scope='Both Boolean certificates only; geometry and normalization audits are separate',modules={},module_order=[])
+            for part in parts:
+                for n,r in part['modules'].items():
+                    if n in merged['modules']:assert merged['modules'][n]['olean_sha256']==r['olean_sha256']
+                    merged['modules'][n]=r
+                merged['module_order']+= [n for n in part['module_order'] if n not in merged['module_order']]
+            save(OUT/'certificate-build.json',merged)

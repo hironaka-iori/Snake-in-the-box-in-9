@@ -73,7 +73,17 @@ MODULES = [
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mathlib-dir", required=True, type=Path)
+    parser.add_argument("--window244", action="store_true", help="Rebuild the unconditional window-244 chain from source")
+    parser.add_argument("--resume-build", type=Path, help="Resume a window-244 source-only build directory")
     args = parser.parse_args()
+    if args.window244:
+        import sys
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"window244"))
+        from fresh_rebuild import run as run_window244
+        run_window244(args.mathlib_dir,args.resume_build)
+        return
+    if args.resume_build:
+        parser.error("--resume-build requires --window244")
     project = Path(__file__).resolve().parent
     repo = project.parent.parent
     mathlib = args.mathlib_dir.resolve()

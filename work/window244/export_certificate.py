@@ -41,17 +41,24 @@ def emit(shape,folder=None):
     chunk=8
     for part,start in enumerate(range(0,len(core['proof']),chunk)):
         s='import '+modules[-1]+'\n'+header
-        split = shape=='repeated' and part==102
+        split = (shape=='repeated' and part==102) or (shape=='repeated' and part>=108) or shape=='distinct'
+        weight=0;subpart=0
         for offset,(ident,c,hints) in enumerate(core['proof'][start:start+chunk]):
+            if split and weight and weight+len(hints)>200:
+                modules.append(write(prefix+f'Part{part:04d}Batch{subpart}',s+end))
+                s='import '+modules[-1]+'\n'+header
+                subpart+=1;weight=0
             s+=f'def c{ident} : List Lit := {ls(c)}\n'
             hs=f'sat_nil p'
             for h in reversed(hints):hs=f'sat_cons (step{h} p h) ({hs})'
             s+=f'theorem step{ident} (p : Nat → Bool) (h : Constraints p) : clause p c{ident} = true :=\n'
             helper='Snake9.TreeRup.prove_clause' if len(hints)>60 else 'Snake9.LocalRup.prove_clause'
             s+=f'  {helper} ['+', '.join(f'c{h}' for h in hints)+f'] c{ident} (by decide) p ({hs})\n'
-            if split:
+            weight+=len(hints)
+            if shape=='repeated' and part==102:
                 modules.append(write(prefix+f'Part{part:04d}Step{offset}',s+end))
                 s='import '+modules[-1]+'\n'+header
+                weight=0
         modules.append(write(prefix+f'Part{part:04d}',s+end))
     final=core['proof'][-1][0]
     s='import '+modules[-1]+'\n'+header
