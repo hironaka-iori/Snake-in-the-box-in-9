@@ -68,6 +68,8 @@ MODULES = [
     "NormalizeSharedThreeTwos", "AlphaRunPotential", "Aggregate245Conditional",
     "UpperBound245", "Alpha223Potential", "Aggregate244Conditional",
     "WindowPotential242", "WindowPotential241", "AggregateWindowConditional",
+    "WindowAutomatonDefs", "WindowAutomatonData", "WindowAutomatonLemmas",
+    "WindowAutomatonSequence", "WindowAutomatonBridge", "AggregateDirectionConditional",
 ]
 
 
@@ -164,10 +166,12 @@ def main():
                 mathlib, env)
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
+            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.upper_242_of_certified_windows\n"
             "#print axioms Snake9.upper_241_of_certified_windows\n"
+            "#print axioms Snake9.upper_239_of_direction_windows\n"
+            "#print axioms Snake9.WindowAutomaton.step_table\n"
             "#print axioms Snake9.lower_bound\n"
             "#print axioms Snake9.noNext_iff_upperBound\n"
             "#print axioms Snake9.adjacent_internal_alpha_one_impossible\n"
@@ -191,7 +195,8 @@ def main():
             )
         run("FinalAudit", [lake, "env", "lean", f"--root={build}", str(audit)], mathlib, env)
         expected = {"Snake9.upper_244_of_no_two_two_three",
-                    "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows", "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
+                    "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows",
+                    "Snake9.upper_239_of_direction_windows", "Snake9.WindowAutomaton.step_table", "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
                     "Snake9.adjacent_internal_alpha_one_impossible",
                     "Snake9.upper_bound_251", "Snake9.verified_interval_191_251",
                     "Snake9.adjacent_internal_one_two_impossible",
