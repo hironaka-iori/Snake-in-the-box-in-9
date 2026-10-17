@@ -67,12 +67,19 @@ MODULES = [
     "OrdinaryTwoEdgeDemand", "DisjointOrdinaryDemand", "OrdinaryDisjointExclusion",
     "NormalizeSharedThreeTwos", "AlphaRunPotential", "Aggregate245Conditional",
     "UpperBound245", "Alpha223Potential", "Aggregate244Conditional",
+    "WindowPotential242", "WindowPotential241", "AggregateWindowConditional",
+    "WindowAutomatonDefs", "WindowAutomatonData", "WindowAutomatonLemmas",
+    "WindowAutomatonSequence", "WindowAutomatonBridge", "AggregateDirectionConditional",
+    "WindowAutomaton5Data", "WindowAutomaton5Shard0", "WindowAutomaton5Shard1", "WindowAutomaton5Shard2", "WindowAutomaton5Shard3", "WindowAutomaton5Shard4", "WindowAutomaton5Shard5", "WindowAutomaton5Shard6", "WindowAutomaton5Shard7", "WindowAutomaton5Shard8", "WindowAutomaton5Shard9", "WindowAutomaton5Shard10", "WindowAutomaton5Shard11", "WindowAutomaton5Shard12", "WindowAutomaton5Shard13", "WindowAutomaton5Shard14", "WindowAutomaton5Shard15", "WindowAutomaton5Shard16", "WindowAutomaton5Shard17", "WindowAutomaton5Shard18", "WindowAutomaton5Shard19", "WindowAutomaton5Shard20", "WindowAutomaton5Shard21", "WindowAutomaton5Shard22", "WindowAutomaton5Shard23", "WindowAutomaton5Shard24", "WindowAutomaton5Shard25", "WindowAutomaton5Shard26", "WindowAutomaton5Shard27", "WindowAutomaton5Shard28", "WindowAutomaton5Shard29", "WindowAutomaton5Shard30", "WindowAutomaton5Shard31", "WindowAutomaton5Shard32", "WindowAutomaton5Shard33",
+    "WindowAutomaton5Table", "WindowAutomaton5Sequence", "AggregateDirection238Conditional",
 ]
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mathlib-dir", required=True, type=Path)
+    parser.add_argument("--core-targets", nargs="*", default=None,
+                        help="build only these core modules (default: the core default targets)")
     args = parser.parse_args()
     project = Path(__file__).resolve().parent
     repo = project.parent.parent
@@ -150,7 +157,7 @@ def main():
             copy(source, core / source.name)
         env = os.environ.copy()
         env.pop("LEAN_PATH", None)
-        run("core", [lake, "build"], core, env)
+        run("core", [lake, "build", *(args.core_targets or [])], core, env)
         copy(project / "SquareIncidence.lean", build / "SquareIncidence.lean")
         for module in MODULES:
             copy(project / "stronger" / (module + ".lean"), build / (module + ".lean"))
@@ -161,8 +168,13 @@ def main():
                 mathlib, env)
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import Aggregate244Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
+            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection238Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
+            "#print axioms Snake9.upper_242_of_certified_windows\n"
+            "#print axioms Snake9.upper_241_of_certified_windows\n"
+            "#print axioms Snake9.upper_239_of_direction_windows\n"
+            "#print axioms Snake9.WindowAutomaton.step_table\n"
+            "#print axioms Snake9.upper_238_of_direction_windows5\n"
             "#print axioms Snake9.lower_bound\n"
             "#print axioms Snake9.noNext_iff_upperBound\n"
             "#print axioms Snake9.adjacent_internal_alpha_one_impossible\n"
@@ -185,7 +197,10 @@ def main():
                 "#print axioms Snake9.verified_interval_191_245\n"
             )
         run("FinalAudit", [lake, "env", "lean", f"--root={build}", str(audit)], mathlib, env)
-        expected = {"Snake9.upper_244_of_no_two_two_three", "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
+        expected = {"Snake9.upper_244_of_no_two_two_three",
+                    "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows",
+                    "Snake9.upper_239_of_direction_windows", "Snake9.WindowAutomaton.step_table",
+                    "Snake9.upper_238_of_direction_windows5", "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
                     "Snake9.adjacent_internal_alpha_one_impossible",
                     "Snake9.upper_bound_251", "Snake9.verified_interval_191_251",
                     "Snake9.adjacent_internal_one_two_impossible",
