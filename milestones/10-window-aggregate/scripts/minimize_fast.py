@@ -114,7 +114,7 @@ def main():
     lam2 = Fr(int(W[cyc].sum()), len(cyc)); assert lam2 == lam, (lam, lam2)
     vb = vertex_bound(A, U, V, W)
     R = int(pi.max() - pi.min()); L = a.L
-    C = p * L - q * (L - 1) + 15
+    C = p * L - q * (L - 1) + R
     Bp = (9179 * q + C - 8 * q) // (p + 35 * q)
     from collections import Counter
     out = {'L': a.L, 'k': a.k, 'K': a.K, 'radius': a.radius, 'min_mean': str(lam), 'potential_range': R,

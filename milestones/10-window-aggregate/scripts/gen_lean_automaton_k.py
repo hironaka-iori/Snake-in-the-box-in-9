@@ -74,7 +74,7 @@ def main():
     assert pi.max() <= 15, pi.max()
     R = int(pi.max())
     vb = vertex_bound(A, U, V, W)
-    C = P * L - Q * (L - 1) + 15
+    C = P * L - Q * (L - 1) + R
     B = (9179 * Q + C - 8 * Q) // (P + 35 * Q)
     print(f'lambda {lam} range {R} dp-bound {vb-1} edges, potential-bound {B} edges', flush=True)
 
@@ -99,7 +99,7 @@ def main():
         code = shape_code(tuple(canon(h)))
         if code not in sidx:
             return None
-        return (pot >> (4 * (sidx[code] * M1 + cnt_idx(t)))) & 15
+        return min(R, (pot >> (4 * (sidx[code] * M1 + cnt_idx(t)))) & 15)
 
     def wforb(ds, syms):
         def one(d, s):
@@ -157,8 +157,9 @@ def cntIdx{S} : List Nat → Nat → Nat
   | [], acc => acc
   | s :: l, acc => cntIdx{S} l (acc * 6 + (s - 1))
 
+/-- Potential; the `min` makes the range bound `{R}` definitional (every table entry is at most {R}). -/
 def pot{S} (h : List Nat) (t : List Nat) : Nat :=
-  (potMask{S} >>> (4 * (shapeIdx{S} (shapeCode (canon h)) * {M1} + cntIdx{S} t 0))) &&& 15
+  min {R} ((potMask{S} >>> (4 * (shapeIdx{S} (shapeCode (canon h)) * {M1} + cntIdx{S} t 0))) &&& 15)
 
 def wforb{S}a (ds : List Nat) (syms : List Nat) : Bool :=
   (forbMask{S} >>> (wshapeIdx{S} (shapeCode (canon ds)) * {WBASE} + symIdx syms 0)) &&& 1 == 1
@@ -175,9 +176,7 @@ def check{S} (c : List Nat) : Bool :=
 
 def shapes{S} : List (List Nat) := {lst(lst(c) for c in shapes)}
 
-theorem pot{S}_le (h t : List Nat) : pot{S} h t ≤ 15 := by
-  unfold pot{S}
-  exact Nat.le_of_lt_succ (Nat.and_lt_two_pow _ (by decide : 15 < 2 ^ 4))
+theorem pot{S}_le (h t : List Nat) : pot{S} h t ≤ {R} := Nat.min_le_left _ _
 
 end Snake9.WindowAutomaton
 '''
@@ -320,7 +319,7 @@ def syms{S} (a : Nat → Nat) (i : Nat) : List Nat := {al(first, k - 1)}
 
 def Φ{S} (d a : Nat → Nat) (i : Nat) : Nat := pot{S} (hist{S} d i) (syms{S} a i)
 
-theorem Φ{S}_le (d a : Nat → Nat) (i : Nat) : Φ{S} d a i ≤ 15 := pot{S}_le _ _
+theorem Φ{S}_le (d a : Nat → Nat) (i : Nat) : Φ{S} d a i ≤ {R} := pot{S}_le _ _
 
 theorem step{S} (d a : Nat → Nat) (i : Nat)
     {' '.join(f'(h{j} : 1 ≤ a (i+{first + j}))' for j in range(k))}
