@@ -98,7 +98,7 @@ python gen_lean_automaton.py --index ../data/direction_certificates.json
 
 The first command needs the survey files as a seed and about ten minutes; the rest take a few minutes each.
 
-**Still not established.** The geometric bridge from a snake window to the local CNF, and a kernel-checked replay of the refutations, are the same gaps as for 242 and 241; the direction-aware premise has 145 windows instead of 22. Beyond 238, the next levers are six-centre windows or eight directions of memory (each multiplies the state space by six or so), radius four, and the empty-square term.
+**Still not established.** The geometric bridge from a snake window to the local CNF, and a kernel-checked replay of the refutations, are the same gaps as for 242 and 241; the direction-aware premise has 145 windows instead of 22. Beyond 238: `scripts/refine_fast.py` is a vectorised rewrite of the refinement loop (allowed-transition masks per shape pair from per-window-shape tables, `reduceat` Bellman-Ford and dynamic programme) that handles 10^5-10^6 states; `scripts/minimize_fast.py` is the matching minimiser (blocker counts per extension); `scripts/gen_lean_automaton_k.py` generates the whole Lean chain for any (L, k, lambda) with sharded kernel checks. Radius four with four-centre windows converges to the same 10/3 as radius three (`data/refine_L6_k4_K5_r4.json`, the cycle (2,2,6) survives), so radius alone does not help at k = 4. Six-centre windows at radius three are cheap (ball of 316 vertices, about 0.1 s per query, real-snake controls pass) and the (L=7, k=6) refinement climbs past 15/4; see the next section once it is certified.
 
 ## What is not established
 
