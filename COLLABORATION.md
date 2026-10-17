@@ -73,7 +73,7 @@ The next priorities concern improving beyond245 and finding a longer verified co
 
 - A direction-aware automaton (last six transition directions up to relabelling, last three counts; 2592 states) refined against the SAT oracle reaches mean 10/3 with 145 certified windows. `upper_239_of_direction_windows` gives **239 edges**; the potential table is kernel-checked and the parity bridge from `Snake9.Snake` is proved. With five-centre windows the same loop reaches 7/2 with 325 certified windows and `upper_238_of_direction_windows5` gives **238 edges** (44,064 states, kernel-checked in 34 shards).
 
-- Six-centre windows (264,384 states) reach mean 4 with 2,546 certified windows; `upper_235_of_direction_windowsK6R3` gives **235 edges**. Radius four at four centres gives nothing beyond 10/3.
+- Six-centre windows (264,384 states) reach mean 4 with 2,579 certified windows; `upper_235_of_direction_windowsK6R3` gives **235 edges**. Radius four at four centres gives nothing beyond 10/3.
 
 Remaining work to make 241, 239, 238 or 235 unconditional:
 

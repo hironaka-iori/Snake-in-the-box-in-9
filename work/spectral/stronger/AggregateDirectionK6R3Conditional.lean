@@ -9,7 +9,7 @@ set_option maxHeartbeats 1600000
 theorem winK6R3_eq (p : Snake m) (i : Nat) : winK6R3 (pathDir p) i = blockList p i 8 := rfl
 
 /-- Conditional 235-edge bound: no window of 2..6 consecutive internal vertices has a
-direction shape and lumped counts listed in `forbMaskK6R3` (2546 certified exclusions,
+direction shape and lumped counts listed in `forbMaskK6R3` (2579 certified exclusions,
 radius 3).  The premise is NOT proved in Lean; the unconditional bound remains 245. -/
 theorem upper_235_of_direction_windowsK6R3 {m : Nat} (p : Snake m)
     (hw2 : ∀ j, j + 3 ≤ m → wforbK6R3 [pathDir p j, pathDir p (j+1), pathDir p (j+2)]

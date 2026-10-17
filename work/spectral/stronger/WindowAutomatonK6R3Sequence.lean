@@ -7,20 +7,15 @@ import WindowAutomatonSequence
 
 namespace Snake9.WindowAutomaton
 
-theorem wforbK6R3_canon_drop (ds syms : List Nat) (n : Nat) :
-    wforbK6R3 ((canon ds).drop n) syms = wforbK6R3 (ds.drop n) syms := by
-  unfold wforbK6R3 wforbK6R3a
-  rw [canon_canon_drop, canon_canon_drop_reverse]
-
-theorem potK6R3_canon_drop (ds t : List Nat) (n : Nat) :
-    potK6R3 ((canon ds).drop n) t = potK6R3 (ds.drop n) t := by
-  unfold potK6R3
-  rw [canon_canon_drop]
-
-theorem potK6R3_canon_take (ds t : List Nat) (n : Nat) :
-    potK6R3 ((canon ds).take n) t = potK6R3 (ds.take n) t := by
-  unfold potK6R3
-  rw [canon_canon_take]
+theorem wshK6R3_canon_drop (ds : List Nat) (n : Nat) : wshK6R3 ((canon ds).drop n) = wshK6R3 (ds.drop n) := by
+  unfold wshK6R3; rw [canon_canon_drop]
+theorem wshK6R3_canon_drop_rev (ds : List Nat) (n : Nat) :
+    wshK6R3 ((canon ds).drop n).reverse = wshK6R3 (ds.drop n).reverse := by
+  unfold wshK6R3; rw [canon_canon_drop_reverse]
+theorem shK6R3_canon_drop (ds : List Nat) (n : Nat) : shK6R3 ((canon ds).drop n) = shK6R3 (ds.drop n) := by
+  unfold shK6R3; rw [canon_canon_drop]
+theorem shK6R3_canon_take (ds : List Nat) (n : Nat) : shK6R3 ((canon ds).take n) = shK6R3 (ds.take n) := by
+  unfold shK6R3; rw [canon_canon_take]
 
 theorem stepK6R3_raw (x : List Nat) (hx : x.length = 8) (t1 t2 t3 t4 t5 s : Nat)
     (h1 : 1 ≤ t1) (h2 : 1 ≤ t2) (h3 : 1 ≤ t3) (h4 : 1 ≤ t4) (h5 : 1 ≤ t5) (hs : 1 ≤ s)
@@ -36,8 +31,32 @@ theorem stepK6R3_raw (x : List Nat) (hx : x.length = 8) (t1 t2 t3 t4 t5 s : Nat)
   unfold checkK6R3 at hc
   rw [inducedPattern_canon, hind] at hc
   simp only [Bool.not_true, Bool.false_or] at hc
-  have h := allSym_spec _ (allSym_spec _ (allSym_spec _ (allSym_spec _ (allSym_spec _ (allSym_spec _ (hc) (sym t1) (sym_ge_one _ h1) (sym_le_six _)) (sym t2) (sym_ge_one _ h2) (sym_le_six _)) (sym t3) (sym_ge_one _ h3) (sym_le_six _)) (sym t4) (sym_ge_one _ h4) (sym_le_six _)) (sym t5) (sym_ge_one _ h5) (sym_le_six _)) (sym s) (sym_ge_one _ hs) (sym_le_six _)
-  rw [wforbK6R3_canon_drop, wforbK6R3_canon_drop, wforbK6R3_canon_drop, wforbK6R3_canon_drop, wforbK6R3_canon_drop, hw2, hw3, hw4, hw5, hw6, potK6R3_canon_drop, potK6R3_canon_take] at h
+  rw [wshK6R3_canon_drop, wshK6R3_canon_drop_rev, wshK6R3_canon_drop, wshK6R3_canon_drop_rev, wshK6R3_canon_drop, wshK6R3_canon_drop_rev, wshK6R3_canon_drop, wshK6R3_canon_drop_rev, wshK6R3_canon_drop, wshK6R3_canon_drop_rev, shK6R3_canon_take, shK6R3_canon_drop] at hc
+  have hsyms : 1 ≤ sym t1 ∧ sym t1 ≤ 6 ∧ 1 ≤ sym t2 ∧ sym t2 ≤ 6 ∧ 1 ≤ sym t3 ∧ sym t3 ≤ 6 ∧ 1 ≤ sym t4 ∧ sym t4 ≤ 6 ∧ 1 ≤ sym t5 ∧ sym t5 ≤ 6 ∧ 1 ≤ sym s ∧ sym s ≤ 6 := ⟨sym_ge_one _ h1, sym_le_six _, sym_ge_one _ h2, sym_le_six _, sym_ge_one _ h3, sym_le_six _, sym_ge_one _ h4, sym_le_six _, sym_ge_one _ h5, sym_le_six _, sym_ge_one _ hs, sym_le_six _⟩
+  let code := (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1)
+  have hcode : code < 46656 := by omega
+  have h := allBelow2_spec 216 216 _ hc code (by omega)
+  unfold stepNK6R3 at h
+  have e2 : code % 36 = (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e3 : code % 216 = (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e4 : code % 1296 = (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e5 : code % 7776 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e6 : code % 46656 = (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e0 : code / 6 = (sym t1 - 1) * 1296 + (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym t5 - 1) := by omega
+  have e1 : code % 7776 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have es : code % 6 + 1 = sym s := by omega
+  rw [e2, e3, e4, e5, e6, e0, e1, es] at h
+  unfold potK6R3 wforbK6R3 at *
+  simp only [List.length_cons, List.length_nil, Nat.zero_add, Nat.reduceAdd] at hw2 hw3 hw4 hw5 hw6 ⊢
+  have c2 : code6 [sym t5, sym s] 0 = (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c3 : code6 [sym t4, sym t5, sym s] 0 = (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c4 : code6 [sym t3, sym t4, sym t5, sym s] 0 = (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c5 : code6 [sym t2, sym t3, sym t4, sym t5, sym s] 0 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c6 : code6 [sym t1, sym t2, sym t3, sym t4, sym t5, sym s] 0 = (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c0 : code6 [sym t1, sym t2, sym t3, sym t4, sym t5] 0 = (sym t1 - 1) * 1296 + (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym t5 - 1) := by simp only [code6]; omega
+  have c1 : code6 [sym t2, sym t3, sym t4, sym t5, sym s] 0 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  rw [c2, c3, c4, c5, c6, c0, c1] at *
+  rw [hw2, hw3, hw4, hw5, hw6] at h
   simpa using h
 
 def winK6R3 (d : Nat → Nat) (i : Nat) : List Nat := [d i, d (i+1), d (i+2), d (i+3), d (i+4), d (i+5), d (i+6), d (i+7)]
