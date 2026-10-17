@@ -80,7 +80,7 @@ Arithmetic for 239: the potential gives `3 Σ_{j=6}^{m-1} min(alpha_j,6) ≥ 10 
 - `WindowAutomatonBridge.lean` (core, imports the standard-library core): `pathDir` extracts the flipped coordinate of each edge; the XOR of a block of unit vectors has bit `b` equal to the parity of the count of `b`, so `distinct` and `induced` of `Snake9.Snake` give `inducedPattern` for every window.
 - `AggregateDirectionConditional.lean` (mathlib): `upper_239_of_direction_windows`. Its only premise is that no two-, three- or four-centre window of the snake has a direction shape and lumped counts listed in `forbMask`; everything else is proved.
 
-All six audit to `propext`, `Classical.choice`, `Quot.sound`. They are included in `verify_strengthened.py`.
+All six audit to `propext`, `Classical.choice`, `Quot.sound`. They are included in `verify_strengthened.py`; a fresh 162-step source-only run (core, incidence, every strengthening module, final audit) is recorded in `outputs/strengthened-direction-reproduction-manifest.json` and `outputs/strengthened-direction-reproduction.log`.
 
 Reproduce:
 

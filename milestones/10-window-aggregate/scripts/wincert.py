@@ -149,22 +149,25 @@ class Encoding:
 
 
 def decide(enc, max_rounds=10000, certify=True):
-    """Return ('SAT', selection) or ('UNSAT', proof-check info)."""
+    """Return ('SAT', selection, cuts) or ('UNSAT', proof-check info, cuts).
+
+    Cycle cuts are added incrementally to one solver instance; the proof run
+    (when certifying) is a separate cold solve of the final clause set."""
     cuts = 0
-    while True:
-        with Cadical153(bootstrap_with=enc.clauses) as s:
-            if s.solve():
-                model = s.get_model()
-                sel = [v for v in enc.ball if model[enc.var[v] - 1] > 0]
-                cyc = cycles_of(sel)
-                if not cyc:
-                    return 'SAT', sel, cuts
-                for c in cyc:
-                    enc.add_cycle_cut(c); cuts += 1
-                if cuts > max_rounds:
-                    return 'UNKNOWN', None, cuts
-                continue
-        break
+    with Cadical153(bootstrap_with=enc.clauses) as s:
+        while True:
+            if not s.solve():
+                break
+            model = s.get_model()
+            sel = [v for v in enc.ball if model[enc.var[v] - 1] > 0]
+            cyc = cycles_of(sel)
+            if not cyc:
+                return 'SAT', sel, cuts
+            for c in cyc:
+                enc.add_cycle_cut(c); cuts += 1
+                s.add_clause(enc.clauses[-1])
+            if cuts > max_rounds:
+                return 'UNKNOWN', None, cuts
     if not certify:
         return 'UNSAT', None, cuts
     return 'UNSAT', certify_unsat(enc), cuts
