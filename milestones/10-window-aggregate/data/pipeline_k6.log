@@ -123,3 +123,13 @@
 + sleep 30
 + grep -qE 'min_mean|Traceback' ../data/refine_L7_k6_r3.log
 + sleep 30
++ grep -qE 'min_mean|Traceback' ../data/refine_L7_k6_r3.log
++ sleep 30
++ grep -qE 'min_mean|Traceback' ../data/refine_L7_k6_r3.log
++ sleep 30
++ grep -qE 'min_mean|Traceback' ../data/refine_L7_k6_r3.log
++ sleep 30
++ grep -qE 'min_mean|Traceback' ../data/refine_L7_k6_r3.log
++ grep -q Traceback ../data/refine_L7_k6_r3.log
++ python3 minimize_fast.py --L 7 --k 6 --K 5 --radius 3
++ python3 certify_direction.py --set ../data/minimal_L7_k6_K5_r3.json --workers 4 --out ../data/direction_certificates_k6.json
