@@ -286,8 +286,22 @@ def reverify_index(path, workers=4):
     data = json.load(open(path))
     jobs = [(c['dirs'], [tuple(x) for x in c['alpha']], c['radius']) for c in data['cases']
             if c.get('drat_trim_verified')]
-    with Pool(workers) as p:
-        res = p.map(_reverify_one, jobs)
+    # resumable: finished cases are appended to <index>.judge-progress.jsonl as they complete
+    prog_path = path + '.judge-progress.jsonl'
+    done = {}
+    if os.path.exists(prog_path):
+        for line in open(prog_path):
+            try:
+                e = json.loads(line)
+                done[json.dumps(e['job'])] = e['result']
+            except ValueError:
+                continue
+    todo = [j for j in jobs if json.dumps(j) not in done]
+    with Pool(workers) as p, open(prog_path, 'a', buffering=1) as f:
+        for j, r in zip(todo, p.imap(_reverify_one, todo)):
+            done[json.dumps(j)] = r
+            f.write(json.dumps({'job': j, 'result': r}) + '\n')
+    res = [done[json.dumps(j)] for j in jobs]
     return {'cases': len(jobs), 'verified': sum(r == 'VERIFIED' for r in res),
             'failures': [j[:2] for j, r in zip(jobs, res) if r != 'VERIFIED']}
 
