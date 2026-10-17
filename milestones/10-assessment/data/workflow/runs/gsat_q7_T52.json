@@ -1,0 +1,18 @@
+Exception in thread {"n": 7, "T": 52, "solver": "cadical195", "status": "UNKNOWN", "seconds": 5434.05, "cegar_iters": 56, "cycle_cuts": 216, "vars": 2424, "clauses": 23160, "conflicts": 10481112}
+Thread-56:
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/threading.py", line 1044, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/threading.py", line 1345, in run
+    self.function(*self.args, **self.kwargs)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/wf/global_sat.py", line 48, in <lambda>
+    timer = threading.Timer(rem, lambda: s.interrupt()); timer.start()
+                                         ~~~~~~~~~~~^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/venv/lib/python3.13/site-packages/pysat/solvers.py", line 1230, in interrupt
+    self.solver.interrupt()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/venv/lib/python3.13/site-packages/pysat/solvers.py", line 2762, in interrupt
+    raise NotImplementedError('Limited solve is currently unsupported by CaDiCaL.')
+NotImplementedError: Limited solve is currently unsupported by CaDiCaL.

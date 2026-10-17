@@ -1,0 +1,23 @@
+{"entry": 0, "rev": 0, "keep": 112, "freed": 81, "solver": "cadical195", "status": "UNSAT", "seconds": 0.258, "encode_s": 0.04, "vars": 1780, "clauses": 9459, "region": 122, "conflicts": 7944, "decisions": 13594}
+{"entry": 0, "rev": 0, "keep": 104, "freed": 89, "solver": "cadical195", "status": "UNSAT", "seconds": 0.883, "encode_s": 0.04, "vars": 2152, "clauses": 12653, "region": 142, "conflicts": 28836, "decisions": 50252}
+{"entry": 0, "rev": 0, "keep": 96, "freed": 97, "solver": "cadical195", "status": "UNSAT", "seconds": 1.569, "encode_s": 0.04, "vars": 2556, "clauses": 16715, "region": 163, "conflicts": 41003, "decisions": 79054}
+{"entry": 0, "rev": 0, "keep": 88, "freed": 105, "solver": "cadical195", "status": "UNSAT", "seconds": 25.743, "encode_s": 0.05, "vars": 2900, "clauses": 21328, "region": 181, "conflicts": 402697, "decisions": 635695}
+Exception in thread Thread-1:
+{"entry": 0, "rev": 0, "keep": 80, "freed": 113, "solver": "cadical195", "status": "UNSAT", "seconds": 1204.356, "encode_s": 0.09, "vars": 3264, "clauses": 26575, "region": 200, "conflicts": 6194899, "decisions": 9043626}
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/threading.py", line 1044, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/threading.py", line 1345, in run
+    self.function(*self.args, **self.kwargs)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/wf/sat_scaling.py", line 19, in <lambda>
+    timer = threading.Timer(timeout, lambda: s.interrupt())
+                                             ~~~~~~~~~~~^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/venv/lib/python3.13/site-packages/pysat/solvers.py", line 1230, in interrupt
+    self.solver.interrupt()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/venv/lib/python3.13/site-packages/pysat/solvers.py", line 2762, in interrupt
+    raise NotImplementedError('Limited solve is currently unsupported by CaDiCaL.')
+NotImplementedError: Limited solve is currently unsupported by CaDiCaL.
+/bin/bash: line 1:  5425 Killed                  ../venv/bin/python sat_scaling.py 0 0 $K 900

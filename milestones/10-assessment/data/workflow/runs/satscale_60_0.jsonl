@@ -1,0 +1,24 @@
+{"entry": 60, "rev": 0, "keep": 112, "freed": 81, "solver": "cadical195", "status": "UNSAT", "seconds": 0.016, "encode_s": 0.03, "vars": 1672, "clauses": 8437, "region": 116, "conflicts": 680, "decisions": 1210}
+{"entry": 60, "rev": 0, "keep": 104, "freed": 89, "solver": "cadical195", "status": "UNSAT", "seconds": 0.128, "encode_s": 0.03, "vars": 2052, "clauses": 11511, "region": 137, "conflicts": 3498, "decisions": 5238}
+{"entry": 60, "rev": 0, "keep": 96, "freed": 97, "solver": "cadical195", "status": "UNSAT", "seconds": 0.678, "encode_s": 0.04, "vars": 2356, "clauses": 15183, "region": 153, "conflicts": 20292, "decisions": 32890}
+{"entry": 60, "rev": 0, "keep": 88, "freed": 105, "solver": "cadical195", "status": "UNSAT", "seconds": 8.583, "encode_s": 0.05, "vars": 2720, "clauses": 19382, "region": 172, "conflicts": 173203, "decisions": 284045}
+{"entry": 60, "rev": 0, "keep": 80, "freed": 113, "solver": "cadical195", "status": "UNSAT", "seconds": 156.33, "encode_s": 0.08, "vars": 3024, "clauses": 23305, "region": 188, "conflicts": 1579431, "decisions": 2486478}
+{"entry": 60, "rev": 0, "keep": 72, "freed": 121, "solver": "cadical195", "status": "UNSAT", "seconds": 281.354, "encode_s": 0.07, "vars": 3328, "clauses": 27699, "region": 204, "conflicts": 2159547, "decisions": 3349309}
+Exception in thread Thread-1:
+{"entry": 60, "rev": 0, "keep": 64, "freed": 129, "solver": "cadical195", "status": "UNSAT", "seconds": 1324.77, "encode_s": 0.07, "vars": 3692, "clauses": 32525, "region": 223, "conflicts": 6847969, "decisions": 10049576}
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/threading.py", line 1044, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/threading.py", line 1345, in run
+    self.function(*self.args, **self.kwargs)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/wf/sat_scaling.py", line 19, in <lambda>
+    timer = threading.Timer(timeout, lambda: s.interrupt())
+                                             ~~~~~~~~~~~^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/venv/lib/python3.13/site-packages/pysat/solvers.py", line 1230, in interrupt
+    self.solver.interrupt()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/tmp/claude-0/-home-user-Snake-in-the-box-in-9/54df6b79-3551-5be0-97ec-edf141639c5c/scratchpad/venv/lib/python3.13/site-packages/pysat/solvers.py", line 2762, in interrupt
+    raise NotImplementedError('Limited solve is currently unsupported by CaDiCaL.')
+NotImplementedError: Limited solve is currently unsupported by CaDiCaL.
