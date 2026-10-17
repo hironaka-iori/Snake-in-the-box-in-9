@@ -71,9 +71,9 @@ The next priorities concern improving beyond245 and finding a longer verified co
 - Also excluding (2,4,2,3), the theorem `upper_241_of_certified_windows` gives 241 edges.
 - All 22 premise cases have `drat-trim`-verified refutations of explicit CNFs, and 532 real-snake windows pass as positive controls.
 
-- A direction-aware automaton (last six transition directions up to relabelling, last three counts; 2592 states) refined against the SAT oracle reaches mean 10/3 with 145 certified windows. `upper_239_of_direction_windows` gives **239 edges**; the potential table is kernel-checked and the parity bridge from `Snake9.Snake` is proved. With five-centre windows the solver reaches 7/2 (238 edges, 325 windows), not formalised.
+- A direction-aware automaton (last six transition directions up to relabelling, last three counts; 2592 states) refined against the SAT oracle reaches mean 10/3 with 145 certified windows. `upper_239_of_direction_windows` gives **239 edges**; the potential table is kernel-checked and the parity bridge from `Snake9.Snake` is proved. With five-centre windows the same loop reaches 7/2 with 325 certified windows and `upper_238_of_direction_windows5` gives **238 edges** (44,064 states, kernel-checked in 34 shards).
 
-Remaining work to make 241 (or 239) unconditional:
+Remaining work to make 241, 239 or 238 unconditional:
 
 1. Formalize the normalization of an arbitrary snake window to the canonical local CNF. This is the same bridge needed for the earlier (2,2,3) certificates.
 2. Replay the refutations in Lean, in chunks or with a verified checker.

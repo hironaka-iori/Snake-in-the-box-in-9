@@ -332,11 +332,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--bridge-limit', type=int, default=3000)
     ap.add_argument('--index', help='direction-certificate index to re-verify independently')
+    ap.add_argument('--workers', type=int, default=4)
+    ap.add_argument('--out', default=os.path.join(DATA, 'judge_direction.json'))
     a = ap.parse_args()
     if a.index:
-        r = reverify_index(a.index)
+        r = reverify_index(a.index, a.workers)
         print(json.dumps(r))
-        json.dump(r, open(os.path.join(DATA, 'judge_direction.json'), 'w'), indent=1)
+        json.dump(r, open(a.out, 'w'), indent=1)
         return
     meta = json.load(open(os.path.join(DATA, 'certificates.json')))
     verdict = {'A_reencoding': {}, 'B_clause_audit': {}, 'C_bridge': None, 'D_aggregate': {}}

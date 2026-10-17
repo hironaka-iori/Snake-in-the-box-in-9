@@ -296,16 +296,16 @@ theorem mem_blocks_eq : ∀ (l seg : List Nat), seg ∈ blocks l →
     · obtain ⟨s, len, h1, h2, rfl⟩ := mem_blocks_eq l seg h
       exact ⟨s + 1, len, h1, by simp; omega, by simp [List.drop_succ_cons]⟩
 
-/-- Every seven-direction window of a snake has the induced parity pattern. -/
-theorem snake_inducedPattern (p : Snake m) (i : Nat) (hi : i + 7 ≤ m) :
-    inducedPattern (win7 (pathDir p) i) = true := by
+/-- Every block of consecutive directions of a snake has the induced parity pattern. -/
+theorem snake_inducedPattern_block (p : Snake m) (i n : Nat) (hi : i + n ≤ m) :
+    inducedPattern (blockList p i n) = true := by
   unfold inducedPattern
-  rw [List.all_eq_true, win7_eq]
+  rw [List.all_eq_true]
   intro seg hseg
   obtain ⟨s, len, h1, h2, rfl⟩ := mem_blocks_eq _ seg hseg
-  have hlen : (blockList p i 7).length = 7 := by simp [blockList, List.length_range']
+  have hlen : (blockList p i n).length = n := by simp [blockList, List.length_range']
   rw [hlen] at h2
-  rw [drop_take_blockList p i s len 7 h2]
+  rw [drop_take_blockList p i s len n h2]
   apply blockOK_of_path _ (xv p (i + s)) (xv p (i + s + len))
   · exact chain p (i + s) len (by omega)
   · exact xv_ne p _ _ (by omega) (by omega) (by omega)
@@ -316,6 +316,11 @@ theorem snake_inducedPattern (p : Snake m) (i : Nat) (hi : i + 7 ≤ m) :
     simp only [blockList, List.mem_map] at ht
     obtain ⟨_, _, rfl⟩ := ht
     exact pathDir_lt p _
+
+/-- Every seven-direction window of a snake has the induced parity pattern. -/
+theorem snake_inducedPattern (p : Snake m) (i : Nat) (hi : i + 7 ≤ m) :
+    inducedPattern (win7 (pathDir p) i) = true :=
+  snake_inducedPattern_block p i 7 hi
 
 end Snake9.WindowAutomaton
 

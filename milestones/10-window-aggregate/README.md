@@ -2,7 +2,7 @@
 
 Checkpoint: 17 October 2026.
 
-**Status.** Three new *conditional* upper bounds are proved in Lean: at most **242 edges**, at most **241 edges** with one extra premise, and at most **239 edges** from a direction-aware automaton with 145 certified window exclusions. The premises are exclusions of certain singleton-count patterns on three or four consecutive internal path vertices. Each premise has a **DRAT-checked** unsatisfiability certificate for an explicit local CNF. None is a Lean theorem yet. The unconditional checked interval therefore remains **191 <= a(9) <= 245**.
+**Status.** Three new *conditional* upper bounds are proved in Lean: at most **242 edges**, at most **241 edges** with one extra premise, at most **239 edges** from a direction-aware automaton with 145 certified window exclusions, and at most **238 edges** with five-centre windows (325 exclusions). The premises are exclusions of certain singleton-count patterns on three or four consecutive internal path vertices. Each premise has a **DRAT-checked** unsatisfiability certificate for an explicit local CNF. None is a Lean theorem yet. The unconditional checked interval therefore remains **191 <= a(9) <= 245**.
 
 ## What this milestone adds
 
@@ -65,11 +65,11 @@ The shape-blind ceiling above is 3 (241 edges). Tracking which coordinates the p
 |---|---|---|---|---|
 | L=6, k=4 (potential, Lean) | 145 | 10/3 | 8 | **239** |
 | L=6, k=4 (exact DP) | 93 | 23/7 | — | 239 |
-| L=7, k=5 (exact DP) | 325 | 7/2 | — | 238 |
+| L=7, k=5 (potential, Lean) | 325 | 7/2 | 6 | **238** |
 
 Arithmetic for 239: the potential gives `3 Σ_{j=6}^{m-1} min(alpha_j,6) ≥ 10 (m-6) - 8`; with `alpha_1..alpha_5 ≥ 1` and endpoints at least four, `3 T ≥ 10 m - 36`; with `T ≤ 9214 - 35 (m+1)` this is `115 m ≤ 27573`, so `m ≤ 239`.
 
-**Certificates** (`scripts/certify_direction.py`, `data/direction_certificates.json`, `certificates/direction/*.cnf.gz`). Every one of the 145 windows has a drat-trim-verified refutation. The CNF files are committed; the DRUP proofs (250 MB) are not, their SHA256 is recorded and the script regenerates them. `scripts/judge.py --index` re-encodes all 145 independently and refutes them with Glucose: 145 verified (one case needed a solo rerun because the batch hit the checker's time limit under CPU contention; `data/judge_direction.json`). `scripts/direction_bound.py` rebuilds the automaton from the certificate index alone, checks the integer potential on every one of the 29,559 allowed edges and recomputes the exact bound (`data/direction_bound_L6_k4.json`). The 325-window set for 7/2 is being certified into `data/direction_certificates_k5.json`; it is not used by any Lean theorem.
+**Certificates** (`scripts/certify_direction.py`, `data/direction_certificates.json`, `certificates/direction/*.cnf.gz`). Every one of the 145 windows has a drat-trim-verified refutation. The CNF files are committed; the DRUP proofs (250 MB) are not, their SHA256 is recorded and the script regenerates them. `scripts/judge.py --index` re-encodes all 145 independently and refutes them with Glucose: 145 verified (one case needed a solo rerun because the batch hit the checker's time limit under CPU contention; `data/judge_direction.json`). `scripts/direction_bound.py` rebuilds the automaton from the certificate index alone, checks the integer potential on every one of the 29,559 allowed edges and recomputes the exact bound (`data/direction_bound_L6_k4.json`). The 325-window set for 7/2 is certified the same way (`data/direction_certificates_k5.json`, all 325 verified; `data/direction_bound_L7_k5.json` re-checks its potential and bound). Certifying it became practical only after the lazy cycle-cut loop was made incremental (one CaDiCaL instance per window instead of a cold restart per cut): the remaining 219 windows then took minutes instead of hours.
 
 **Lean.** Six modules in `work/spectral/stronger/`:
 
@@ -80,7 +80,9 @@ Arithmetic for 239: the potential gives `3 Σ_{j=6}^{m-1} min(alpha_j,6) ≥ 10 
 - `WindowAutomatonBridge.lean` (core, imports the standard-library core): `pathDir` extracts the flipped coordinate of each edge; the XOR of a block of unit vectors has bit `b` equal to the parity of the count of `b`, so `distinct` and `induced` of `Snake9.Snake` give `inducedPattern` for every window.
 - `AggregateDirectionConditional.lean` (mathlib): `upper_239_of_direction_windows`. Its only premise is that no two-, three- or four-centre window of the snake has a direction shape and lumped counts listed in `forbMask`; everything else is proved.
 
-All six audit to `propext`, `Classical.choice`, `Quot.sound`. They are included in `verify_strengthened.py`; a fresh 162-step source-only run (core, incidence, every strengthening module, final audit) is recorded in `outputs/strengthened-direction-reproduction-manifest.json` and `outputs/strengthened-direction-reproduction.log`.
+The five-centre automaton (34 shapes, 44,064 states) is handled the same way by `WindowAutomaton5Data/Table/Sequence.lean` and `AggregateDirection238Conditional.lean` (`upper_238_of_direction_windows5`). Its step table is too large for one kernel evaluation (a single file was killed after 12 minutes), so `scripts/gen_lean_automaton5.py` emits one module per canonical 7-shape, `WindowAutomaton5Shard0..33.lean`, each enumerating the next label and all 6^5 symbol combinations in about a minute, and a kernel-checked membership lemma shows every induced restricted growth string of length eight is a listed shape followed by a label below nine (`check5_of_rgs`). Arithmetic: `2 Σ_{j=7}^{m-1} min(alpha_j,6) ≥ 7 (m-7) - 6`, so `2 T ≥ 7 m - 21 - 6` and `77 m ≤ 18385`, giving `m ≤ 238`.
+
+All of these audit to `propext`, `Classical.choice`, `Quot.sound`. They are included in `verify_strengthened.py`; a fresh 162-step source-only run (core, incidence, every strengthening module, final audit) is recorded in `outputs/strengthened-direction-reproduction-manifest.json` and `outputs/strengthened-direction-reproduction.log`.
 
 Reproduce:
 
@@ -96,7 +98,7 @@ python gen_lean_automaton.py --index ../data/direction_certificates.json
 
 The first command needs the survey files as a seed and about ten minutes; the rest take a few minutes each.
 
-**Still not established.** The geometric bridge from a snake window to the local CNF, and a kernel-checked replay of the refutations, are the same gaps as for 242 and 241; the direction-aware premise has 145 windows instead of 22. Beyond 239, the next levers are five-centre windows (7/2, 238 by solver, too many states for the present kernel route), radius four, and the empty-square term.
+**Still not established.** The geometric bridge from a snake window to the local CNF, and a kernel-checked replay of the refutations, are the same gaps as for 242 and 241; the direction-aware premise has 145 windows instead of 22. Beyond 238, the next levers are six-centre windows or eight directions of memory (each multiplies the state space by six or so), radius four, and the empty-square term.
 
 ## What is not established
 
