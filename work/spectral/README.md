@@ -51,6 +51,7 @@ The fresh source-only build succeeded for all 151 steps, including the core, inc
 - `WindowPotential242.lean` and `WindowPotential241.lean` use core Lean only and prove the sequence potentials.
 - `AggregateWindowConditional.lean` proves `upper_242_of_certified_windows` and `upper_241_of_certified_windows`. Their window-exclusion premises are DRAT-certified for a local model, see `milestones/10-window-aggregate/`, but they are not Lean theorems.
 - A fresh 156-step run with `--core-targets Snake9 PathStructure CubeLocal SquareCounterexample SingletonSquareLemma OptimalityTarget` succeeded. It is saved as `outputs/strengthened-window-reproduction-*`.
+- `AggregateWindowUnconditional.lean` proves `upper_242_of_refuted` and `upper_241_of_refuted`. Their only hypothesis is `LocalWindow.AllRefuted`, the 22 statements `Refuted window bounds` of the local window certificates. The core module `final_lean/LocalWindowBridge.lean` moves each snake window to canonical position by a translation and a coordinate permutation, proves the abstract `Axioms` of `LocalWindowModel.lean` there, and selects the certificate from the direction shape. A window with directions 0,1,2,3,1 is read backwards. This module identifies `localAlpha` with the core count `coreAlpha`. When passing `--core-targets`, include `LocalWindowBridge`.
 
 ## Conditional 239 target (direction-aware automaton)
 
