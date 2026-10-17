@@ -71,12 +71,12 @@ def check(name,worker='setup',force=False):
     log=folder/(str(time.time_ns())+'.log');t=time.monotonic()
     print('CHECK',name,flush=True)
     memory=12288 if name=='Snake9' else 4096
-    rc=limited([LEAN,'-j','1','--root='+str(src.parent),'-o',target,src],log,memory=memory)
+    rc=limited([LEAN,'-j','1','-s','16384','--root='+str(src.parent),'-o',target,src],log,memory=memory)
     output=log.read_text(encoding='utf-8')
-    status='PASSED' if rc==0 else ('TIMEOUT' if rc==124 else ('RESOURCE_FAILURE' if 'out of memory' in output.lower() else 'COMPILATION_ERROR'))
+    status='PASSED' if rc==0 else ('TIMEOUT' if rc==124 else ('RESOURCE_FAILURE' if any(x in output.lower() for x in ['out of memory','failed to create thread']) else 'COMPILATION_ERROR'))
     if sha(src)!=fingerprint or any(sha(object_path(n))!=h for n,h in deps.items()):raise ValueError('Inputs changed during compilation')
     rec=dict(status=status,returncode=rc,source=str(src.relative_to(ROOT)),source_sha256=fingerprint,dependencies=deps,
-        compiler_sha256=compiler,memory_mib=memory,seconds=time.monotonic()-t,finished=now(),log=str(log.relative_to(ROOT)),log_sha256=sha(log))
+        compiler_sha256=compiler,memory_mib=memory,thread_stack_kib=16384,seconds=time.monotonic()-t,finished=now(),log=str(log.relative_to(ROOT)),log_sha256=sha(log))
     if rc==0:rec['artifact_sha256']=sha(target)
     save(log.with_suffix('.json'),rec)
     with MUTEX:RECORDS[name]=rec;publish()
@@ -112,6 +112,17 @@ def evidence(entry,trim_required=True):
         with MUTEX:STATE['active'][str(entry)]=dict(stage='CERTIFICATE_PREPARATION',started=now());publish()
         folder=OUT/'artifacts'/f'entry{entry:03d}'/str(time.time_ns());folder.mkdir(parents=True)
         cert=ROOT/row['certificate'] if row.get('certificate') else None
+        if cert is None:
+            # A changed trimmer must not trigger duplicate SAT search. Reuse a
+            # successful local solver attempt only after checking its identities.
+            for saved in sorted(folder.parent.glob('*/result.json'),reverse=True):
+                result=read(saved,{})
+                config=read(saved.parent/'config.json',{})
+                candidate=ROOT/result.get('certificate','__missing__')
+                if (result.get('status')=='UNSAT' and config.get('formula_sha256')==identity['formula_sha256']
+                    and config.get('encoder_sha256')==sha(ROOT/'work/build_regrowth_cnf.py')
+                    and candidate.is_file() and sha(candidate)==result.get('certificate_sha256')):
+                    cert=candidate;break
         if not cert or not cert.exists():
             save(folder/'started.json',dict(entry=entry,formula_sha256=identity['formula_sha256'],solver_limit_seconds=300,memory_mib=2048,started=now()))
             rc=limited([sys.executable,'-X','utf8',HERE/'solver_worker.py',entry,folder],folder/'solver.log',300,2048)
@@ -208,6 +219,7 @@ def main():
     # Do not display previous completion counts until their saved identities pass.
     valid=True
     for name,r in RECORDS.items():
+        if r['status']!='PASSED':continue
         try:
             if r['status']!='PASSED' or sha(ROOT/r['source'])!=r['source_sha256'] or sha(object_path(name))!=r['artifact_sha256'] or sha(ROOT/r['log'])!=r['log_sha256'] or r['compiler_sha256']!=sha(LEAN):valid=False;break
             if any(sha(object_path(d))!=h for d,h in r['dependencies'].items()):valid=False;break

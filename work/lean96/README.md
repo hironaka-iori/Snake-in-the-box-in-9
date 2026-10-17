@@ -102,6 +102,24 @@ available. After shutdown, rerun the launch script to resume from saved work.
 
 ## Artifacts and final packaging
 
+### Resource repair checkpoint (17 October 2026)
+
+The first representative and its region-reuse entries passed; the initial batch
+then completed 11 entries / 3 representatives before stopping with resource
+failures. Large monolithic Boolean input modules exhausted allocation or failed
+to create threads. Input proof declarations are now split into modules of 32
+clauses, and Lean explicitly uses a 16384-KiB thread stack. The entry-246 pilot
+checks the changed method before a two-worker retry. Launch that guarded
+continuation with `work/lean96/start.ps1 -Workers 2 -AfterRepair`; it waits for
+the pilot to stop and requires its complete theorem and axiom audit to pass.
+No identical failed full-bank run is automatically repeated.
+
+Entry 256's trimming failure occurred while building a huge JSON string after
+the mathematical trimming computation. `trim_worker.py` now streams compact
+JSON to an atomic temporary file. Successful earlier solver attempts are reused
+only after formula, encoder and certificate hashes match. Original attempts and
+failure logs are retained. These repairs do not change the target or axioms.
+
 Large raw DRUP/LRAT certificates, decompressed formulas and compiled objects are
 local-only under `outputs/lean96/artifacts/` and `outputs/lean96/cache/`. Each
 prepared entry has `cores/entryNNN.receipt.json` with exact paths and SHA256

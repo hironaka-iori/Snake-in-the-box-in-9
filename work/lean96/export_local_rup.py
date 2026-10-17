@@ -25,10 +25,15 @@ def emit(entry,folder=None):
         for k in range(block*32,min((block+1)*32,count)):
             s+=f'  clause{k+1} : {goal(core["clauses"][k])}\n'
     s+='structure Constraints (p : Nat → Bool) : Prop where\n'+''.join(f'  block{b} : Block{b} p\n' for b in range(blocks))
+    modules.append(write(prefix+'InputTypes',s+end))
+    s='import '+modules[-1]+'\n'+header
     for k,c in enumerate(core['clauses'],1):
         s+=f'def c{k} : List Lit := {ls(c)}\n'
         s+=f'theorem step{k} (p : Nat → Bool) (h : Constraints p) : clause p c{k} = true := by\n'
         s+=f'  simpa only [c{k},clause,value,List.any_cons,List.any_nil,Bool.or_eq_true,beq_iff_eq,Bool.false_eq_true,or_false] using h.block{(k-1)//32}.clause{k}\n'
+        if k%32==0:
+            modules.append(write(prefix+f'InputPart{k//32:04d}',s+end))
+            s='import '+modules[-1]+'\n'+header
     modules.append(write(prefix+'Inputs',s+end))
     chunk=64
     for part,start in enumerate(range(0,len(core['proof']),chunk)):
