@@ -11,5 +11,6 @@ The exact optimum remains unresolved. The strongest checked global interval is 1
 - [Three-center pattern(2,2,3)](07-window-223/README.md)
 - [Exhaustive search and regrowth certificates](08-exhaustive-search/README.md)
 - [Method limits and endpoint accounting](09-research-directions/README.md)
+- [Window exclusions and conditional bounds 242/241](10-window-aggregate/README.md)
 
 The relocation manifest records moved files. Historical proof logs and source-hash manifests retain their original recorded paths as provenance.
