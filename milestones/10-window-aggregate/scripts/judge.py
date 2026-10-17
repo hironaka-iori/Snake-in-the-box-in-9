@@ -280,10 +280,64 @@ def max_vertices(triples, quads, K=10):
     return best
 
 
+def reverify_index(path, workers=4):
+    """Re-encode every case of a direction-certificate index independently and refute it."""
+    from multiprocessing import Pool
+    data = json.load(open(path))
+    jobs = [(c['dirs'], [tuple(x) for x in c['alpha']], c['radius']) for c in data['cases']
+            if c.get('drat_trim_verified')]
+    with Pool(workers) as p:
+        res = p.map(_reverify_one, jobs)
+    return {'cases': len(jobs), 'verified': sum(r == 'VERIFIED' for r in res),
+            'failures': [j[:2] for j, r in zip(jobs, res) if r != 'VERIFIED']}
+
+
+def _reverify_one(arg):
+    dirs, alpha, radius = arg
+    window = path_vertices(dirs)
+    al = [a if a[0] != a[1] else a[0] for a in alpha]
+    cuts = []
+    while True:
+        cls, X = encode(window, al, radius, cuts)
+        with Glucose4(bootstrap_with=cls) as s:
+            if not s.solve():
+                break
+            model = s.get_model()
+            sel = [v for v in X if model[X[v] - 1] > 0]
+        cyc = [c for c in components_cycles(sel)]
+        if not cyc:
+            return 'SAT'
+        cuts += cyc
+    st, _ = refute(cls)
+    return st
+
+
+def components_cycles(sel):
+    s = set(sel); seen = set(); out = []
+    for v in sorted(s):
+        if v in seen:
+            continue
+        comp, st = [], [v]
+        while st:
+            x = st.pop()
+            if x in seen:
+                continue
+            seen.add(x); comp.append(x); st.extend(w for w in nbrs(x) if w in s)
+        if len(comp) > 2 and all(sum(adjacent(x, w) for w in comp) == 2 for x in comp):
+            out.append(sorted(comp))
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--bridge-limit', type=int, default=3000)
+    ap.add_argument('--index', help='direction-certificate index to re-verify independently')
     a = ap.parse_args()
+    if a.index:
+        r = reverify_index(a.index)
+        print(json.dumps(r))
+        json.dump(r, open(os.path.join(DATA, 'judge_direction.json'), 'w'), indent=1)
+        return
     meta = json.load(open(os.path.join(DATA, 'certificates.json')))
     verdict = {'A_reencoding': {}, 'B_clause_audit': {}, 'C_bridge': None, 'D_aggregate': {}}
     for rec in meta['cases']:
