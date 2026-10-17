@@ -67,7 +67,7 @@ The next priorities concern improving beyond245 and finding a longer verified co
 `milestones/10-window-aggregate/` addresses "Priority 2" below. Because `alpha >= 2` fails universally, it bounds how often low counts can occur, via local window exclusions rather than a pointwise bound.
 
 - The radius-three local model allows only 144 of the 216 count triples in 1..6. The resulting aggregate ceiling is mean 14/5, versus 7/3 from the proved premises.
-- With (2,2,3), (2,2,4), (2,3,2), (3,2,3), and (4,1,4..6) excluded, the Lean theorem `upper_242_of_certified_windows` gives 242 edges.
+- With (2,2,3), (2,2,4), (2,3,2), (3,2,3), and (4,1,4..6) excluded, the Lean theorem `upper_242_of_certified_windows` gives 242 edges. The wrapper's fresh mathlib compile was pending at this checkpoint.
 - Also excluding (2,4,2,3), the theorem `upper_241_of_certified_windows` gives 241 edges.
 - All 22 premise cases have `drat-trim`-verified refutations of explicit CNFs, and 532 real-snake windows pass as positive controls.
 
