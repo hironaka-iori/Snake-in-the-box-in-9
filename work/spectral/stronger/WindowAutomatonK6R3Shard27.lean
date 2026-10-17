@@ -5,8 +5,20 @@ import WindowAutomatonK6R3Data
 
 namespace Snake9.WindowAutomaton
 
-set_option maxRecDepth 100000 in
+set_option maxRecDepth 100000
+
+theorem shardK6R3_27_0 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [0]) = true := by decide +kernel
+theorem shardK6R3_27_1 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [1]) = true := by decide +kernel
+theorem shardK6R3_27_2 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [2]) = true := by decide +kernel
+theorem shardK6R3_27_3 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [3]) = true := by decide +kernel
+theorem shardK6R3_27_4 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [4]) = true := by decide +kernel
+theorem shardK6R3_27_5 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [5]) = true := by decide +kernel
+theorem shardK6R3_27_6 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [6]) = true := by decide +kernel
+theorem shardK6R3_27_7 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [7]) = true := by decide +kernel
+theorem shardK6R3_27_8 : checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [8]) = true := by decide +kernel
+
+/-- The nine labels combined; each piece is a separate kernel evaluation to bound memory. -/
 theorem shardK6R3_27 : allBelow 9 (fun d => checkK6R3 ([0, 1, 2, 3, 4, 2, 1] ++ [d])) = true := by
-  decide +kernel
+  simp only [allBelow, shardK6R3_27_0, shardK6R3_27_1, shardK6R3_27_2, shardK6R3_27_3, shardK6R3_27_4, shardK6R3_27_5, shardK6R3_27_6, shardK6R3_27_7, shardK6R3_27_8, Bool.and_self]
 
 end Snake9.WindowAutomaton
