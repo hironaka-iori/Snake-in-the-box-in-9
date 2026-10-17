@@ -100,34 +100,45 @@ def main():
             digs = [(t // 6 ** j) % 6 + 1 for j in range(k - 2, -1, -1)]
             pot |= int(pi[i * M1 + t]) << (4 * (i * M1 + cnt_idx(digs)))
 
-    # ---- Python mirror of the Lean check ------------------------------------
-    def phi(h, t):
-        code = shape_code(tuple(canon(h)))
-        if code not in sidx:
-            return None
-        return min(R, (pot >> (4 * (sidx[code] * M1 + cnt_idx(t)))) & 15)
-
-    def wforb(ds, syms):
-        def one(d, s):
-            code = shape_code(tuple(canon(d)))
-            return code in ws and (forb >> (ws[code] * WBASE + sym_idx(s))) & 1
-        return one(ds, syms) or one(tuple(reversed(ds)), tuple(reversed(syms)))
-
+    # ---- Vectorised Python mirror of the Lean check -------------------------
+    # Lean indexing: window symbols in base 7 (digits 1..6), state counts in base 6 (digits 0..5).
+    ns = 6
+    ncodes = ns ** k
+    D = np.array([[(x // ns ** (k - 1 - j)) % ns for j in range(k)] for x in range(ncodes)])  # D[:, j]: j-th symbol-1, oldest first
+    forb_arr = {}
+    for dirs, alpha in keys:
+        syms = [lo if lo == hi else 6 for lo, hi in alpha]
+        forb_arr.setdefault(dirs, np.zeros(WBASE, bool))[sym_idx(syms)] = True
+    pot_arr = np.zeros(len(shapes) * M1, np.int64)
+    for i in range(len(shapes)):
+        for t in range(M1):
+            digs = [(t // 6 ** j) % 6 + 1 for j in range(k - 2, -1, -1)]
+            pot_arr[i * M1 + cnt_idx(digs)] = min(R, int(pi[i * M1 + t]))
+    cur_cnt = (D[:, :k - 1] * (6 ** np.arange(k - 2, -1, -1))).sum(1)
+    nxt_cnt = (D[:, 1:] * (6 ** np.arange(k - 2, -1, -1))).sum(1)
+    snew = D[:, -1] + 1
     checked = 0
     for c0 in shapes:
+        i0 = sidx[shape_code(c0)]
         for d in range(9):
             c = c0 + (d,)
             if not induced(c):
                 continue
-            for t in itertools.product(range(1, 7), repeat=k - 1):
-                for s in range(1, 7):
-                    al = t + (s,)
-                    if any(wforb(c[L + 1 - (cc + 1):], al[k - cc:]) for cc in range(2, k + 1)):
-                        continue
-                    p0, p1 = phi(c[:L], t), phi(c[1:], al[1:])
-                    assert p0 is not None and p1 is not None, (c, t, s)
-                    assert Q * s + p0 >= P + p1, (c, t, s, p0, p1)
-                    checked += 1
+            allowed = np.ones(ncodes, bool)
+            for cc in range(2, k + 1):
+                sub = D[:, k - cc:] + 1
+                code7 = (sub * (7 ** np.arange(cc - 1, -1, -1))).sum(1)
+                code7r = (sub[:, ::-1] * (7 ** np.arange(cc - 1, -1, -1))).sum(1)
+                fw = tuple(canon(c[L + 1 - (cc + 1):])); rv = tuple(canon(tuple(reversed(c[L + 1 - (cc + 1):]))))
+                if fw in forb_arr:
+                    allowed &= ~forb_arr[fw][code7]
+                if rv in forb_arr:
+                    allowed &= ~forb_arr[rv][code7r]
+            i1 = sidx[shape_code(tuple(canon(c[1:])))]
+            p0 = pot_arr[i0 * M1 + cur_cnt[allowed]]
+            p1 = pot_arr[i1 * M1 + nxt_cnt[allowed]]
+            assert (Q * snew[allowed] + p0 >= P + p1).all(), (c,)
+            checked += int(allowed.sum())
     for c in rgs(L + 1):
         if induced(c):
             assert c[:L] in shapes and c[L] < 9
