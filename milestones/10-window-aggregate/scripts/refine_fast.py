@@ -125,6 +125,7 @@ def howard(n, U, V, W, iters=300):
         cost = np.where(pol >= 0, W[np.maximum(pol, 0)], 0.0)
         eta = np.full(n, np.inf); val = np.zeros(n)
         state = np.zeros(n, np.int8)
+        all_cycles = []
         for s0 in range(n):
             if state[s0] or pol[s0] < 0:
                 continue
@@ -134,6 +135,7 @@ def howard(n, U, V, W, iters=300):
             if x >= 0 and state[x] == 1:
                 i = path.index(x); cyc = path[i:]
                 mu = sum(cost[y] for y in cyc) / len(cyc)
+                all_cycles.append((mu, cyc))
                 for y in cyc:
                     eta[y] = mu
                 val[x] = 0.0
@@ -174,6 +176,7 @@ def howard(n, U, V, W, iters=300):
     while x not in seen:
         seen[x] = len(seq); seq.append(x); x = int(V[pol[x]])
     cyc = seq[seen[x]:]
+    howard.extra = sorted(((m_, [int(order[pol[y]]) for y in c]) for m_, c in all_cycles), key=lambda t: t[0])
     return mu, [int(order[pol[y]]) for y in cyc]
 
 
@@ -232,6 +235,8 @@ def main():
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--rounds', type=int, default=300)
     ap.add_argument('--workers', type=int, default=4)
+    ap.add_argument('--slack', type=float, default=0.3, help='also query cycles with mean <= min + slack')
+    ap.add_argument('--batch', type=int, default=200, help='max extra cycles per round')
     ap.add_argument('--index', help='certificate index: rebuild from these exclusions only and verify')
     ap.add_argument('--out')
     a = ap.parse_args()
@@ -271,12 +276,16 @@ def main():
         cyc = [idx[e] for e in cyc]
         exact = Fr(int(W[cyc].sum()), len(cyc))
         wins = []
-        for e in cyc:
-            ds, al = A.decode(U[e], EXT[e], W[e])
-            for cc in range(2, a.k + 1):
-                wins.append(A.window_key(tuple(ds[-(cc + 1):]), tuple(al[-cc:])))
+        batch = [c for m_, c in howard.extra if m_ <= mu + a.slack][:a.batch]
+        for cyc2 in [cyc] + batch:
+            for e in cyc2:
+                e = idx[e] if cyc2 is not cyc else e
+                ds, al = A.decode(U[e], EXT[e], W[e])
+                for cc in range(2, a.k + 1):
+                    wins.append(A.window_key(tuple(ds[-(cc + 1):]), tuple(al[-cc:])))
+        wins = list(dict.fromkeys(wins))
         newq = oracle.query(wins, a.workers)
-        unsat = [x for x in set(wins) if oracle.status(x) == 'UNSAT']
+        unsat = [x for x in wins if oracle.status(x) == 'UNSAT']
         print(f'round {rnd}: edges {len(idx)} mean {exact} ({mu:.4f}) cycle {[int(x) for x in W[cyc]]} '
               f'queried {newq} unsat-on-cycle {len(unsat)} [{time.time()-t:.0f}s]', flush=True)
         log.append({'round': rnd, 'mean': str(exact), 'cycle_counts': [int(x) for x in W[cyc]],
