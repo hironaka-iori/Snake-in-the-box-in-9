@@ -54,8 +54,12 @@ def cycles_of(sel):
 
 
 class Encoding:
-    def __init__(self, window, alpha, radius, ends=2):
+    def __init__(self, window, alpha, radius, ends=2, empties=None):
         self.window, self.alpha, self.radius, self.ends = list(window), list(alpha), radius, ends
+        # empties[i]: None, k, or (lo, hi) for e(x_{i+1}) = number of empty squares Q with
+        # x_{i+1} adjacent to a vertex of Q (252 squares, all inside the radius-3 ball).
+        self.empties = list(empties) if empties is not None else [None] * len(self.alpha)
+        self.esq = {}
         centers = window[1:-1]
         self.ball = [v for v in range(512) if min((v ^ c).bit_count() for c in centers) <= radius]
         self.B = set(self.ball)
@@ -107,6 +111,30 @@ class Encoding:
                 self.atmost(absent, hi, f'alpha<={hi}@{c}')
             if lo > 0:
                 self.atmost(corners, 21 - lo, f'alpha>={lo}@{c}')
+        for i, c in enumerate(centers, 1):
+            k = self.empties[i - 1]
+            if k is None:
+                continue
+            lo, hi = k if isinstance(k, tuple) else (k, k)
+            evars = []
+            for y in (c ^ 1 << d for d in range(9)):
+                for a, b in combinations(range(9), 2):
+                    sq = sorted({y, y ^ 1 << a, y ^ 1 << b, y ^ 1 << a ^ 1 << b})
+                    if c in sq:
+                        continue
+                    assert all(w in B for w in sq), (c, sq)
+                    key = tuple(sq)
+                    if key not in self.esq:
+                        e = self.fresh(); self.esq[key] = e
+                        for w in sq:
+                            self.add([-e, -X[w]], 'empty->unselected')
+                        self.add([e] + [X[w] for w in sq], 'selected_or_empty')
+                    evars.append(self.esq[key])
+            assert len(evars) == 252, len(evars)
+            if hi < 252:
+                self.atmost(evars, hi, f'e<={hi}@{c}')
+            if lo > 0:
+                self.atmost([-e for e in evars], 252 - lo, f'e>={lo}@{c}')
         for v in self.ball:
             for a, b in combinations(range(9), 2):
                 if v >> a & 1 or v >> b & 1:

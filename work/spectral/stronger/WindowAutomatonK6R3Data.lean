@@ -7,6 +7,7 @@ Tables are indexed by the base-6 code of the window symbols (digit = count-1, ne
 significant), so that inside the step loop every lookup is a truncation of the loop variable.
 -/
 import WindowAutomatonDefs
+import WindowAutomatonLoop
 
 namespace Snake9.WindowAutomaton
 
@@ -145,52 +146,59 @@ def code6 : List Nat → Nat → Nat
   | [], acc => acc
   | s :: l, acc => code6 l (acc * 6 + (s - 1))
 
-def wtestK6R3 (c F V code : Nat) : Bool :=
-  ((forwardTK6R3 c F >>> code) &&& 1 == 1) || ((reverseTK6R3 c V >>> code) &&& 1 == 1)
-
-def ptestK6R3 (i code : Nat) : Nat := min 6 ((potXK6R3 i >>> (4 * code)) &&& 15)
-
 def wshK6R3 (ds : List Nat) : Nat := wshapeIdxK6R3 (shapeCode (canon ds))
 def shK6R3 (ds : List Nat) : Nat := shapeIdxK6R3 (shapeCode (canon ds))
 
 /-- Is the window (directions `ds`, symbols `syms`) excluded, in either orientation? -/
-def wforbK6R3 (ds syms : List Nat) : Bool := wtestK6R3 syms.length (wshK6R3 ds) (wshK6R3 ds.reverse) (code6 syms 0)
+def wforbK6R3 (ds syms : List Nat) : Bool :=
+  wtestT (forwardTK6R3 syms.length (wshK6R3 ds)) (reverseTK6R3 syms.length (wshK6R3 ds.reverse)) (code6 syms 0)
 
 /-- Potential of a state. -/
-def potK6R3 (h t : List Nat) : Nat := ptestK6R3 (shK6R3 h) (code6 t 0)
+def potK6R3 (h t : List Nat) : Nat := fldT 6 (potXK6R3 (shK6R3 h)) (code6 t 0)
 
-theorem potK6R3_le (h t : List Nat) : potK6R3 h t ≤ 6 := Nat.min_le_left _ _
+theorem potK6R3_le (h t : List Nat) : potK6R3 h t ≤ 6 := clip_le _ _
 
-/-- Numeric step test: `x` encodes the 5 previous symbols and the new one in base 6. -/
-def stepNK6R3 (F2 V2 F3 V3 F4 V4 F5 V5 F6 V6 i0 i1 x : Nat) : Bool :=
-  wtestK6R3 2 F2 V2 (x % 36) ||
-    wtestK6R3 3 F3 V3 (x % 216) ||
-    wtestK6R3 4 F4 V4 (x % 1296) ||
-    wtestK6R3 5 F5 V5 (x % 7776) ||
-    wtestK6R3 6 F6 V6 (x % 46656) ||
-  decide (4 + ptestK6R3 i1 (x % 7776) ≤ 1 * (x % 6 + 1) + ptestK6R3 i0 (x / 6))
+/-- Inner step test on the 36 low codes `l` (two newest symbols) with pre-windowed tables. -/
+def stepSK6R3 (T2 R2 T3 R3 T4 R4 T5 R5 T6 R6 P0 P1 l : Nat) : Bool :=
+  wtestT T2 R2 l ||
+  wtestT T3 R3 l ||
+  wtestT T4 R4 l ||
+  wtestT T5 R5 l ||
+  wtestT T6 R6 l ||
+  Nat.ble (4 + fldT 6 P1 l) (1 * (l % 6 + 1) + fldT 6 P0 (l / 6))
 
-/-- Two-level enumeration of `[0, a*b)`: the kernel recursion depth stays at `a + b`. -/
-def allBelow2 (a b : Nat) (p : Nat → Bool) : Bool :=
-  allBelow a (fun i => allBelow b (fun j => p (i * b + j)))
+/-- All 46656 symbol codes: outer loop over the 4 oldest symbols, every table
+windowed once per outer step and re-entered as a numeral (`letN`), inner loop over the two
+newest symbols. -/
+def checkTK6R3 (T2 R2 T3 R3 T4 R4 T5 R5 T6 R6 P0 P1 : Nat) : Bool :=
+  letN (T2 + 1) fun W2 => letN (R2 + 1) fun V2 =>
+  allBelowR 1296 fun h =>
+    letN (winT T3 (36 * (h % 6)) 36 + 1) fun W3 => letN (winT R3 (36 * (h % 6)) 36 + 1) fun V3 =>
+    letN (winT T4 (36 * (h % 36)) 36 + 1) fun W4 => letN (winT R4 (36 * (h % 36)) 36 + 1) fun V4 =>
+    letN (winT T5 (36 * (h % 216)) 36 + 1) fun W5 => letN (winT R5 (36 * (h % 216)) 36 + 1) fun V5 =>
+    letN (winT T6 (36 * (h % 1296)) 36 + 1) fun W6 => letN (winT R6 (36 * (h % 1296)) 36 + 1) fun V6 =>
+    letN (winT P0 (4 * (6 * h)) 24 + 1) fun Q0 => letN (winT P1 (4 * (36 * (h % 216))) 144 + 1) fun Q1 =>
+    allBelowR 36 (stepSK6R3 W2 V2 W3 V3 W4 V4 W5 V5 W6 V6 Q0 Q1)
 
-theorem allBelow2_spec (a b : Nat) (p : Nat → Bool) (h : allBelow2 a b p = true) (x : Nat) (hx : x < a * b) :
-    p x = true := by
-  have hb : 0 < b := by
-    rcases Nat.eq_zero_or_pos b with hb | hb
-    · subst hb; simp at hx
-    · exact hb
-  have hi : x / b < a := Nat.div_lt_of_lt_mul (by rwa [Nat.mul_comm])
-  have h1 := allBelow_spec a _ h (x / b) hi
-  have h2 := allBelow_spec b _ h1 (x % b) (Nat.mod_lt x hb)
-  have he : x / b * b + x % b = x := by rw [Nat.mul_comm]; exact Nat.div_add_mod x b
-  rwa [he] at h2
+/-- One transition of the loop, for abstract tables (so the kernel never evaluates the loop here). -/
+theorem checkTK6R3_spec (T2 R2 T3 R3 T4 R4 T5 R5 T6 R6 P0 P1 : Nat) (hc : checkTK6R3 T2 R2 T3 R3 T4 R4 T5 R5 T6 R6 P0 P1 = true)
+    (code : Nat) (hcode : code < 46656) :
+    stepSK6R3 T2 R2 (winT T3 (36 * (code / 36 % 6)) 36) (winT R3 (36 * (code / 36 % 6)) 36) (winT T4 (36 * (code / 36 % 36)) 36) (winT R4 (36 * (code / 36 % 36)) 36) (winT T5 (36 * (code / 36 % 216)) 36) (winT R5 (36 * (code / 36 % 216)) 36) (winT T6 (36 * (code / 36 % 1296)) 36) (winT R6 (36 * (code / 36 % 1296)) 36) (winT P0 (4 * (6 * (code / 36))) 24) (winT P1 (4 * (36 * (code / 36 % 216))) 144) (code % 36) = true := by
+  unfold checkTK6R3 at hc
+  rw [letN_succ, letN_succ] at hc
+  have h1 := allBelowR_spec _ _ hc (code / 36) (by omega)
+  simp only [letN_succ] at h1
+  exact allBelowR_spec 36 _ h1 (code % 36) (Nat.mod_lt _ (by decide))
 
 /-- Step test for one window of 8 directions. -/
 def checkK6R3 (c : List Nat) : Bool :=
-  !inducedPattern c ||
-  allBelow2 216 216 (stepNK6R3 (wshK6R3 (c.drop 5)) (wshK6R3 (c.drop 5).reverse) (wshK6R3 (c.drop 4)) (wshK6R3 (c.drop 4).reverse) (wshK6R3 (c.drop 3)) (wshK6R3 (c.drop 3).reverse) (wshK6R3 (c.drop 2)) (wshK6R3 (c.drop 2).reverse) (wshK6R3 (c.drop 1)) (wshK6R3 (c.drop 1).reverse)
-    (shK6R3 (c.take 7)) (shK6R3 (c.drop 1)))
+  !inducedPattern c || checkTK6R3
+    (forwardTK6R3 2 (wshK6R3 (c.drop 5))) (reverseTK6R3 2 (wshK6R3 (c.drop 5).reverse))
+    (forwardTK6R3 3 (wshK6R3 (c.drop 4))) (reverseTK6R3 3 (wshK6R3 (c.drop 4).reverse))
+    (forwardTK6R3 4 (wshK6R3 (c.drop 3))) (reverseTK6R3 4 (wshK6R3 (c.drop 3).reverse))
+    (forwardTK6R3 5 (wshK6R3 (c.drop 2))) (reverseTK6R3 5 (wshK6R3 (c.drop 2).reverse))
+    (forwardTK6R3 6 (wshK6R3 (c.drop 1))) (reverseTK6R3 6 (wshK6R3 (c.drop 1).reverse))
+    (potXK6R3 (shK6R3 (c.take 7))) (potXK6R3 (shK6R3 (c.drop 1)))
 
 def shapesK6R3 : List (List Nat) := [[0, 1, 2, 0, 3, 1, 0], [0, 1, 2, 0, 3, 1, 4], [0, 1, 2, 0, 3, 2, 4], [0, 1, 2, 0, 3, 4, 0], [0, 1, 2, 0, 3, 4, 1], [0, 1, 2, 0, 3, 4, 2], [0, 1, 2, 0, 3, 4, 5], [0, 1, 2, 3, 0, 1, 4], [0, 1, 2, 3, 0, 2, 4], [0, 1, 2, 3, 0, 4, 1], [0, 1, 2, 3, 0, 4, 2], [0, 1, 2, 3, 0, 4, 3], [0, 1, 2, 3, 0, 4, 5], [0, 1, 2, 3, 1, 0, 4], [0, 1, 2, 3, 1, 4, 0], [0, 1, 2, 3, 1, 4, 2], [0, 1, 2, 3, 1, 4, 3], [0, 1, 2, 3, 1, 4, 5], [0, 1, 2, 3, 4, 0, 1], [0, 1, 2, 3, 4, 0, 2], [0, 1, 2, 3, 4, 0, 3], [0, 1, 2, 3, 4, 0, 5], [0, 1, 2, 3, 4, 1, 0], [0, 1, 2, 3, 4, 1, 2], [0, 1, 2, 3, 4, 1, 3], [0, 1, 2, 3, 4, 1, 5], [0, 1, 2, 3, 4, 2, 0], [0, 1, 2, 3, 4, 2, 1], [0, 1, 2, 3, 4, 2, 5], [0, 1, 2, 3, 4, 5, 0], [0, 1, 2, 3, 4, 5, 1], [0, 1, 2, 3, 4, 5, 2], [0, 1, 2, 3, 4, 5, 3], [0, 1, 2, 3, 4, 5, 6]]
 

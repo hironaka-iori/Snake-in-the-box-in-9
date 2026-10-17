@@ -65,13 +65,20 @@ class FastAutomaton:
             cc = len(alpha)
             if cc < 2 or cc > self.k:
                 continue
-            syms = [lo if lo == hi else self.ns for lo, hi in alpha]
-            if any(s < 1 or s > self.ns for s in syms):
+            # every symbol whose count range lies inside the certified range is excluded too
+            # (symbol s <= K means count s exactly, symbol K+1 means count >= K+1)
+            opts = []
+            for lo, hi in alpha:
+                opts.append([s for s in range(1, self.ns + 1)
+                             if ((lo <= s <= hi) if s <= self.K else (lo <= s and hi >= 21))])
+            if any(not o for o in opts):
                 continue
-            code = 0
-            for s in syms:
-                code = code * self.ns + (s - 1)
-            T.setdefault(dirs, np.zeros(self.ns ** cc, bool))[code] = True
+            tbl = T.setdefault(dirs, np.zeros(self.ns ** cc, bool))
+            for syms in itertools.product(*opts):
+                code = 0
+                for s in syms:
+                    code = code * self.ns + (s - 1)
+                tbl[code] = True
         return T
 
     def edges(self, oracle):

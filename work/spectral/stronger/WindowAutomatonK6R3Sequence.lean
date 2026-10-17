@@ -33,31 +33,45 @@ theorem stepK6R3_raw (x : List Nat) (hx : x.length = 8) (t1 t2 t3 t4 t5 s : Nat)
   simp only [Bool.not_true, Bool.false_or] at hc
   rw [wshK6R3_canon_drop, wshK6R3_canon_drop_rev, wshK6R3_canon_drop, wshK6R3_canon_drop_rev, wshK6R3_canon_drop, wshK6R3_canon_drop_rev, wshK6R3_canon_drop, wshK6R3_canon_drop_rev, wshK6R3_canon_drop, wshK6R3_canon_drop_rev, shK6R3_canon_take, shK6R3_canon_drop] at hc
   have hsyms : 1 ≤ sym t1 ∧ sym t1 ≤ 6 ∧ 1 ≤ sym t2 ∧ sym t2 ≤ 6 ∧ 1 ≤ sym t3 ∧ sym t3 ≤ 6 ∧ 1 ≤ sym t4 ∧ sym t4 ≤ 6 ∧ 1 ≤ sym t5 ∧ sym t5 ≤ 6 ∧ 1 ≤ sym s ∧ sym s ≤ 6 := ⟨sym_ge_one _ h1, sym_le_six _, sym_ge_one _ h2, sym_le_six _, sym_ge_one _ h3, sym_le_six _, sym_ge_one _ h4, sym_le_six _, sym_ge_one _ h5, sym_le_six _, sym_ge_one _ hs, sym_le_six _⟩
-  let code := (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1)
+  obtain ⟨code, hcd⟩ : ∃ code, code = (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := ⟨_, rfl⟩
   have hcode : code < 46656 := by omega
-  have h := allBelow2_spec 216 216 _ hc code (by omega)
-  unfold stepNK6R3 at h
+  have hl : code % 36 < 36 := Nat.mod_lt _ (by decide)
+  have h := checkTK6R3_spec _ _ _ _ _ _ _ _ _ _ _ _ hc code hcode
+  unfold stepSK6R3 at h
+  have w3 := wtestT_win (forwardTK6R3 3 (wshK6R3 (x.drop 4))) (reverseTK6R3 3 (wshK6R3 (x.drop 4).reverse)) (36 * (code / 36 % 6)) 36 (code % 36) hl
+  have w4 := wtestT_win (forwardTK6R3 4 (wshK6R3 (x.drop 3))) (reverseTK6R3 4 (wshK6R3 (x.drop 3).reverse)) (36 * (code / 36 % 36)) 36 (code % 36) hl
+  have w5 := wtestT_win (forwardTK6R3 5 (wshK6R3 (x.drop 2))) (reverseTK6R3 5 (wshK6R3 (x.drop 2).reverse)) (36 * (code / 36 % 216)) 36 (code % 36) hl
+  have w6 := wtestT_win (forwardTK6R3 6 (wshK6R3 (x.drop 1))) (reverseTK6R3 6 (wshK6R3 (x.drop 1).reverse)) (36 * (code / 36 % 1296)) 36 (code % 36) hl
+  have f0 := fldT_win 6 (potXK6R3 (shK6R3 (x.take 7))) (6 * (code / 36)) 24 (code % 36 / 6) (by omega)
+  have f1 := fldT_win 6 (potXK6R3 (shK6R3 (x.drop 1))) (36 * (code / 36 % 216)) 144 (code % 36) (by omega)
+  rw [w3, w4, w5, w6, f0, f1] at h
+  have e6 : 36 * (code / 36 % 1296) + code % 36 = (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e5 : 36 * (code / 36 % 216) + code % 36 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e4 : 36 * (code / 36 % 36) + code % 36 = (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e3 : 36 * (code / 36 % 6) + code % 36 = (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
+  have e0 : 6 * (code / 36) + code % 36 / 6 = (sym t1 - 1) * 1296 + (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym t5 - 1) := by omega
+  have es : code % 36 % 6 + 1 = sym s := by omega
   have e2 : code % 36 = (sym t5 - 1) * 6 + (sym s - 1) := by omega
-  have e3 : code % 216 = (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
-  have e4 : code % 1296 = (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
-  have e5 : code % 7776 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
-  have e6 : code % 46656 = (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
-  have e0 : code / 6 = (sym t1 - 1) * 1296 + (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym t5 - 1) := by omega
-  have e1 : code % 7776 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
-  have es : code % 6 + 1 = sym s := by omega
-  rw [e2, e3, e4, e5, e6, e0, e1, es] at h
-  unfold potK6R3 wforbK6R3 at *
-  simp only [List.length_cons, List.length_nil, Nat.zero_add, Nat.reduceAdd] at hw2 hw3 hw4 hw5 hw6 ⊢
+  rw [e6, e5, e4, e3, e0, es, e2] at h
+  unfold wforbK6R3 at hw2 hw3 hw4 hw5 hw6
+  unfold potK6R3
+  simp only [List.length_cons, List.length_nil, Nat.zero_add, Nat.reduceAdd] at hw2 hw3 hw4 hw5 hw6
   have c2 : code6 [sym t5, sym s] 0 = (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  rw [c2] at hw2
   have c3 : code6 [sym t4, sym t5, sym s] 0 = (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  rw [c3] at hw3
   have c4 : code6 [sym t3, sym t4, sym t5, sym s] 0 = (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  rw [c4] at hw4
   have c5 : code6 [sym t2, sym t3, sym t4, sym t5, sym s] 0 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  rw [c5] at hw5
   have c6 : code6 [sym t1, sym t2, sym t3, sym t4, sym t5, sym s] 0 = (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  rw [c6] at hw6
   have c0 : code6 [sym t1, sym t2, sym t3, sym t4, sym t5] 0 = (sym t1 - 1) * 1296 + (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym t5 - 1) := by simp only [code6]; omega
   have c1 : code6 [sym t2, sym t3, sym t4, sym t5, sym s] 0 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
-  rw [c2, c3, c4, c5, c6, c0, c1] at *
+  rw [c0, c1]
   rw [hw2, hw3, hw4, hw5, hw6] at h
-  simpa using h
+  simp only [Bool.false_or] at h
+  exact Nat.le_of_ble_eq_true h
 
 def winK6R3 (d : Nat → Nat) (i : Nat) : List Nat := [d i, d (i+1), d (i+2), d (i+3), d (i+4), d (i+5), d (i+6), d (i+7)]
 def histK6R3 (d : Nat → Nat) (i : Nat) : List Nat := [d i, d (i+1), d (i+2), d (i+3), d (i+4), d (i+5), d (i+6)]
