@@ -80,6 +80,10 @@ def run(mathlib,resume=None):
             copy(src,build/src.name)
         env['LEAN_PATH']=os.pathsep.join(map(str,[core/'.lake/build/lib/lean',build]))
         env['LEAN_PATH']=subprocess.check_output([lake,'env',sys.executable,'-c',"import os;print(os.environ['LEAN_PATH'])"],cwd=mathlib,env=env,text=True).strip()
+        # Lake emits dependency paths relative to mathlib; lean runs in build.
+        env['LEAN_PATH']=os.pathsep.join(str((mathlib/pathlib.Path(p)).resolve())
+            for p in env['LEAN_PATH'].split(os.pathsep) if p)
+        state['lean_path']=env['LEAN_PATH'].split(os.pathsep)
         state['module_order']=[s.stem for s in sources];save()
         for original in sources:
             name=original.stem;src=build/original.name;obj=build/(name+'.olean');logpath=logs/(name+'.log')
