@@ -74,6 +74,8 @@ MODULES = [
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mathlib-dir", required=True, type=Path)
+    parser.add_argument("--core-targets", nargs="*", default=None,
+                        help="build only these core modules (default: the core default targets)")
     args = parser.parse_args()
     project = Path(__file__).resolve().parent
     repo = project.parent.parent
@@ -151,7 +153,7 @@ def main():
             copy(source, core / source.name)
         env = os.environ.copy()
         env.pop("LEAN_PATH", None)
-        run("core", [lake, "build"], core, env)
+        run("core", [lake, "build", *(args.core_targets or [])], core, env)
         copy(project / "SquareIncidence.lean", build / "SquareIncidence.lean")
         for module in MODULES:
             copy(project / "stronger" / (module + ".lean"), build / (module + ".lean"))
