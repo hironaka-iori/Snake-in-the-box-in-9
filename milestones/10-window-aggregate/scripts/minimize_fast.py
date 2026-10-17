@@ -83,9 +83,14 @@ def main():
     ap.add_argument('--k', type=int, default=6)
     ap.add_argument('--K', type=int, default=5)
     ap.add_argument('--radius', type=int, default=3)
+    ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows never to keep (expensive certificates)')
+    ap.add_argument('--tag', default='')
     a = ap.parse_args()
     A = FastAutomaton(a.L, a.k, a.K)
     O = Oracle(a.radius)
+    if a.avoid:
+        for e in json.load(open(a.avoid)):
+            O.known[(tuple(e['dirs']), tuple(tuple(x) for x in e['alpha']))] = 'AVOID'
     keys = [x for x, st in O.known.items() if st == 'UNSAT' and 2 <= len(x[1]) <= a.k
             and all(1 <= (lo if lo == hi else A.ns) <= A.ns for lo, hi in x[1])]
     Bk = Blockers(A, keys)
@@ -121,7 +126,7 @@ def main():
            'potential_bound_edges': Bp, 'dp_bound_edges': vb - 1, 'edges': int(len(U)),
            'by_centres': dict(Counter(len(x[1]) for x in keep)),
            'exclusions': [{'dirs': list(x[0]), 'alpha': [list(r) for r in x[1]]} for x in sorted(keep)]}
-    path = os.path.join(DATA, f'minimal_L{a.L}_k{a.k}_K{a.K}_r{a.radius}.json')
+    path = os.path.join(DATA, f'minimal_L{a.L}_k{a.k}_K{a.K}_r{a.radius}{a.tag}.json')
     json.dump(out, open(path, 'w'), indent=1)
     print(json.dumps({k2: v for k2, v in out.items() if k2 != 'exclusions'}))
     print('wrote', path)

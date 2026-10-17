@@ -82,12 +82,27 @@ class Oracle:
     def status(self, k):
         return self.known.get(k)
 
-    def query(self, keys, workers=4):
+    def query(self, keys, workers=4, timeout=None):
         keys = [k for k in set(keys) if k not in self.known]
         if not keys:
             return 0
-        with Pool(workers) as p:
-            res = p.map(_solve, [(k, self.radius) for k in keys])
+        if timeout is None:
+            with Pool(workers) as p:
+                res = p.map(_solve, [(k, self.radius) for k in keys])
+        else:
+            # per-query time limit: windows that are expensive to refute are recorded as
+            # UNKNOWN (treated as feasible) so that only cheap certificates are ever needed
+            res = []
+            pool = Pool(workers)
+            pending = [(k, pool.apply_async(_solve, ((k, self.radius),))) for k in keys]
+            import time as _t
+            deadline = _t.time() + timeout * (len(keys) / workers + 1)
+            for k, ar in pending:
+                try:
+                    res.append(ar.get(max(1, min(timeout, deadline - _t.time()))))
+                except Exception:
+                    res.append((k, 'UNKNOWN', timeout))
+            pool.terminate(); pool.join()
         with open(CACHE, 'a', buffering=1) as f:
             for k, st, secs in res:
                 self.known[k] = st

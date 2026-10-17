@@ -88,49 +88,36 @@ def main():
     sidx = {shape_code(c): i for i, c in enumerate(shapes)}
     wshapes = sorted({kk[0] for kk in keys}, key=lambda c: (len(c), c))
     ws = {shape_code(c): i for i, c in enumerate(wshapes)}
-    WBASE = 7 ** k
-    # forbidden tables split by (window shape, leading symbol): each constant has 7^(c-1) bits
-    forbT = {}
+    # Tables indexed by the base-6 code of the window symbols (digits sym-1, newest least
+    # significant).  forwardT[(c, w)]: patterns of window shape w (c centres) in forward order;
+    # reverseT[(c, w)]: the same patterns stored with symbols reversed, so that a window whose
+    # *reversed* direction list has shape w is tested with its own (forward) symbol code.
+    def code6(syms):
+        acc = 0
+        for t in syms:
+            acc = acc * 6 + (t - 1)
+        return acc
+    forwardT, reverseT = {}, {}
     for dirs, alpha in keys:
         syms = [lo if lo == hi else 6 for lo, hi in alpha]
-        cc = len(syms)
-        w = ws[shape_code(dirs)]
-        forbT[(w, syms[0])] = forbT.get((w, syms[0]), 0) | (1 << sym_idx(syms[1:]))
+        cc = len(syms); w = ws[shape_code(dirs)]
+        forwardT[(cc, w)] = forwardT.get((cc, w), 0) | (1 << code6(syms))
+        reverseT[(cc, w)] = reverseT.get((cc, w), 0) | (1 << code6(syms[::-1]))
     M1 = 6 ** (k - 1)
-    M2 = 6 ** (k - 2)
-    # potential tables split by (shape, leading count digit): 6^(k-2) fields of 4 bits
-    potT = {}
+    potX = {}
     for i, c in enumerate(shapes):
+        acc = 0
         for t in range(M1):
             digs = [(t // 6 ** j) % 6 + 1 for j in range(k - 2, -1, -1)]
-            val = min(R, int(pi[i * M1 + t]))
-            potT[(i, digs[0] - 1)] = potT.get((i, digs[0] - 1), 0) | (val << (4 * cnt_idx(digs[1:])))
-    wlen = {ws[shape_code(c)]: len(c) - 1 for c in wshapes}      # window shape index -> centres
-
-    # ---- Vectorised Python mirror of the Lean check -------------------------
-    # Lean indexing: window symbols in base 7 (digits 1..6), state counts in base 6 (digits 0..5).
-    ns = 6
-    ncodes = ns ** k
-    D = np.array([[(x // ns ** (k - 1 - j)) % ns for j in range(k)] for x in range(ncodes)])  # D[:, j]: j-th symbol-1, oldest first
-    forb_arr = {}
-    for c in wshapes:
-        w = ws[shape_code(c)]; cc = len(c) - 1
-        arr = np.zeros(7 ** cc, bool)
-        for s1 in range(1, 7):
-            T0 = forbT.get((w, s1), 0)
-            for rest in range(7 ** (cc - 1)):
-                if (T0 >> rest) & 1:
-                    arr[s1 * 7 ** (cc - 1) + rest] = True
-        forb_arr[c] = arr
-    pot_arr = np.zeros(len(shapes) * M1, np.int64)
-    for i in range(len(shapes)):
-        for t1 in range(6):
-            T0 = potT.get((i, t1), 0)
-            for rest in range(M2):
-                pot_arr[i * M1 + t1 * M2 + rest] = (T0 >> (4 * rest)) & 15
-    cur_cnt = (D[:, :k - 1] * (6 ** np.arange(k - 2, -1, -1))).sum(1)
-    nxt_cnt = (D[:, 1:] * (6 ** np.arange(k - 2, -1, -1))).sum(1)
-    snew = D[:, -1] + 1
+            acc |= min(R, int(pi[i * M1 + t])) << (4 * code6(digs))
+        potX[i] = acc
+    # ---- Vectorised Python mirror of the Lean step test --------------------
+    ncodes = 6 ** k
+    X = np.arange(ncodes)
+    def tbl_bits(T, n):
+        return np.array([(T >> j) & 1 for j in range(n)], bool) if T else np.zeros(n, bool)
+    def pot_arr(i):
+        return np.array([min(R, (potX[i] >> (4 * j)) & 15) for j in range(M1)])
     checked = 0
     for c0 in shapes:
         i0 = sidx[shape_code(c0)]
@@ -138,21 +125,20 @@ def main():
             c = c0 + (d,)
             if not induced(c):
                 continue
-            allowed = np.ones(ncodes, bool)
+            blocked = np.zeros(ncodes, bool)
             for cc in range(2, k + 1):
-                sub = D[:, k - cc:] + 1
-                code7 = (sub * (7 ** np.arange(cc - 1, -1, -1))).sum(1)
-                code7r = (sub[:, ::-1] * (7 ** np.arange(cc - 1, -1, -1))).sum(1)
-                fw = tuple(canon(c[L + 1 - (cc + 1):])); rv = tuple(canon(tuple(reversed(c[L + 1 - (cc + 1):]))))
-                if fw in forb_arr:
-                    allowed &= ~forb_arr[fw][code7]
-                if rv in forb_arr:
-                    allowed &= ~forb_arr[rv][code7r]
+                sub = c[L + 1 - (cc + 1):]
+                F = ws.get(shape_code(tuple(canon(sub)))); V = ws.get(shape_code(tuple(canon(tuple(reversed(sub))))))
+                code = X % (6 ** cc)
+                if F is not None and (cc, F) in forwardT:
+                    blocked |= tbl_bits(forwardT[(cc, F)], 6 ** cc)[code]
+                if V is not None and (cc, V) in reverseT:
+                    blocked |= tbl_bits(reverseT[(cc, V)], 6 ** cc)[code]
             i1 = sidx[shape_code(tuple(canon(c[1:])))]
-            p0 = pot_arr[i0 * M1 + cur_cnt[allowed]]
-            p1 = pot_arr[i1 * M1 + nxt_cnt[allowed]]
-            assert (Q * snew[allowed] + p0 >= P + p1).all(), (c,)
-            checked += int(allowed.sum())
+            p0 = pot_arr(i0)[X // 6]; p1 = pot_arr(i1)[X % M1]; snew = X % 6 + 1
+            ok = blocked | (Q * snew + p0 >= P + p1)
+            assert ok.all(), (c,)
+            checked += int((~blocked).sum())
     for c in rgs(L + 1):
         if induced(c):
             assert c[:L] in shapes and c[L] < 9
@@ -166,24 +152,32 @@ def main():
         f'wforb{S} (c.drop {L + 1 - (cc + 1)}) {lst(T[k - cc:] + ["s"])}' for cc in range(2, k + 1))
     ineq = (f'decide ({P} + pot{S} (c.drop 1) {lst(T[1:] + ["s"])} ≤ '
             f'{Q} * s + pot{S} (c.take {L}) {lst(T)})')
-    def chain2(name_pairs, default='0'):
-        # nested if-chain over (a, b) keys with Nat constant values
+    def chain2(name, var1, var2, table):
         by_a = {}
-        for (x, y), v in name_pairs.items():
+        for (x, y), v in table.items():
             by_a.setdefault(x, {})[y] = v
-        lines = []
+        lines = [f'def {name} ({var1} {var2} : Nat) : Nat :=']
         for x in sorted(by_a):
-            inner = ' else '.join(f'if {"s1" if name_pairs is forbT else "t1"} = {y} then {v}' for y, v in sorted(by_a[x].items()))
-            lines.append(f'  if {"w" if name_pairs is forbT else "i"} = {x} then ({inner} else 0) else')
-        lines.append(f'  {default}')
+            inner = ' else '.join(f'if {var2} = {y} then {v}' for y, v in sorted(by_a[x].items()))
+            lines.append(f'  if {var1} = {x} then ({inner} else 0) else')
+        lines.append('  0')
         return '\n'.join(lines)
-    forb_chain = chain2(forbT)
-    pot_chain = chain2(potT)
+    def chain1(name, var, table):
+        lines = [f'def {name} ({var} : Nat) : Nat :=']
+        for x, v in sorted(table.items()):
+            lines.append(f'  if {var} = {x} then {v} else')
+        lines.append('  0')
+        return '\n'.join(lines)
+    # window test arguments for stepN: for each c: F_c (forward shape idx), V_c (reversed shape idx)
+    argnames = [f'{p}{cc}' for cc in range(2, k + 1) for p in ('F', 'V')] + ['i0', 'i1']
+    wtests = ' ||\n    '.join(f'wtest{S} {cc} F{cc} V{cc} (x % {6 ** cc})' for cc in range(2, k + 1))
     data = f'''/-
 Generated by milestones/10-window-aggregate/scripts/gen_lean_automaton_k.py.  Do not edit.
 L = {L} directions of memory, k = {k} (windows of 2..{k} centres), radius {a.radius},
-{len(keys)} exclusions (source: {source}),
-lambda = {P}/{Q}, potential range {R} on {A.n} states.
+{len(keys)} exclusions (source: {source}), lambda = {P}/{Q}, potential range {R} on {A.n} states.
+
+Tables are indexed by the base-6 code of the window symbols (digit = count-1, newest least
+significant), so that inside the step loop every lookup is a truncation of the loop variable.
 -/
 import WindowAutomatonDefs
 
@@ -193,43 +187,63 @@ namespace Snake9.WindowAutomaton
 
 {ifchain(f'wshapeIdx{S}', ws, len(wshapes))}
 
-/-- Forbidden symbol patterns, split by window shape and leading symbol so that every
-lookup shifts a small constant. -/
-def forbTab{S} (w s1 : Nat) : Nat :=
-{forb_chain}
+/-- Excluded patterns of window shape `w` with `c` centres, forward symbol order. -/
+{chain2(f'forwardT{S}', 'c', 'w', forwardT)}
 
-/-- Potential fields (4 bits), split by shape and leading count digit. -/
-def potTab{S} (i t1 : Nat) : Nat :=
-{pot_chain}
+/-- Excluded patterns of window shape `w`, stored with the symbols reversed. -/
+{chain2(f'reverseT{S}', 'c', 'w', reverseT)}
 
-def cntIdx{S} : List Nat → Nat → Nat
+/-- Potential fields (4 bits) of shape `i`, indexed by the base-6 code of the {k - 1} counts. -/
+{chain1(f'potX{S}', 'i', potX)}
+
+/-- Base-6 code of a symbol list (digits sym-1, last symbol least significant). -/
+def code6 : List Nat → Nat → Nat
   | [], acc => acc
-  | s :: l, acc => cntIdx{S} l (acc * 6 + (s - 1))
+  | s :: l, acc => code6 l (acc * 6 + (s - 1))
 
-/-- Potential; the `min` makes the range bound `{R}` definitional (every table entry is at most {R}). -/
-def pot{S} (h : List Nat) (t : List Nat) : Nat :=
-  match t with
-  | [] => 0
-  | t1 :: rest => min {R} ((potTab{S} (shapeIdx{S} (shapeCode (canon h))) (t1 - 1) >>> (4 * cntIdx{S} rest 0)) &&& 15)
+def wtest{S} (c F V code : Nat) : Bool :=
+  ((forwardT{S} c F >>> code) &&& 1 == 1) || ((reverseT{S} c V >>> code) &&& 1 == 1)
 
-def wforb{S}a (ds : List Nat) (syms : List Nat) : Bool :=
-  match syms with
-  | [] => false
-  | s1 :: rest => (forbTab{S} (wshapeIdx{S} (shapeCode (canon ds))) s1 >>> symIdx rest 0) &&& 1 == 1
+def ptest{S} (i code : Nat) : Nat := min {R} ((potX{S} i >>> (4 * code)) &&& 15)
 
-def wforb{S} (ds : List Nat) (syms : List Nat) : Bool :=
-  wforb{S}a ds syms || wforb{S}a ds.reverse syms.reverse
+def wsh{S} (ds : List Nat) : Nat := wshapeIdx{S} (shapeCode (canon ds))
+def sh{S} (ds : List Nat) : Nat := shapeIdx{S} (shapeCode (canon ds))
+
+/-- Is the window (directions `ds`, symbols `syms`) excluded, in either orientation? -/
+def wforb{S} (ds syms : List Nat) : Bool := wtest{S} syms.length (wsh{S} ds) (wsh{S} ds.reverse) (code6 syms 0)
+
+/-- Potential of a state. -/
+def pot{S} (h t : List Nat) : Nat := ptest{S} (sh{S} h) (code6 t 0)
+
+theorem pot{S}_le (h t : List Nat) : pot{S} h t ≤ {R} := Nat.min_le_left _ _
+
+/-- Numeric step test: `x` encodes the {k - 1} previous symbols and the new one in base 6. -/
+def stepN{S} ({' '.join(argnames)} x : Nat) : Bool :=
+  {wtests} ||
+  decide ({P} + ptest{S} i1 (x % {M1}) ≤ {Q} * (x % 6 + 1) + ptest{S} i0 (x / 6))
+
+/-- Two-level enumeration of `[0, a*b)`: the kernel recursion depth stays at `a + b`. -/
+def allBelow2 (a b : Nat) (p : Nat → Bool) : Bool :=
+  allBelow a (fun i => allBelow b (fun j => p (i * b + j)))
+
+theorem allBelow2_spec (a b : Nat) (p : Nat → Bool) (h : allBelow2 a b p = true) (x : Nat) (hx : x < a * b) :
+    p x = true := by
+  have hb : 0 < b := by
+    rcases Nat.eq_zero_or_pos b with hb | hb
+    · subst hb; simp at hx
+    · exact hb
+  have hi : x / b < a := Nat.div_lt_of_lt_mul (by rwa [Nat.mul_comm])
+  have h1 := allBelow_spec a _ h (x / b) hi
+  have h2 := allBelow_spec b _ h1 (x % b) (Nat.mod_lt x hb)
+  rwa [Nat.div_add_mod' x b] at h2
 
 /-- Step test for one window of {L + 1} directions. -/
 def check{S} (c : List Nat) : Bool :=
   !inducedPattern c ||
-  {allsym_open}
-    {win_terms} ||
-    {ineq}{close}
+  allBelow2 {6 ** ((k + 1) // 2)} {6 ** (k // 2)} (stepN{S} {' '.join(f'(wsh{S} (c.drop {L + 1 - (cc + 1)})) (wsh{S} (c.drop {L + 1 - (cc + 1)}).reverse)' for cc in range(2, k + 1))}
+    (sh{S} (c.take {L})) (sh{S} (c.drop 1)))
 
 def shapes{S} : List (List Nat) := {lst(lst(c) for c in shapes)}
-
-theorem pot{S}_le (h t : List Nat) : pot{S} h t ≤ {R} := Nat.min_le_left _ _
 
 end Snake9.WindowAutomaton
 '''
@@ -332,6 +346,29 @@ end Snake9.WindowAutomaton
         f'    (hw{cc} : ∀ j, j + {cc + 1} ≤ m → wforb{S} {dj(cc + 1)} {aj(cc)} = false)' for cc in range(2, k + 1))
     hw_names = ' '.join(f'hw{cc}' for cc in range(2, k + 1))
     pos_list = '\n'.join(f'    have := hpos {j} (by omega) (by omega)' for j in range(1, L))
+    syms_all = sym_t + ['sym s']                           # oldest first
+    # code = Σ (sym_j - 1) 6^(k-1-j)
+    code_expr = ' + '.join(f'({v} - 1) * {6 ** (k - 1 - j)}' if j < k - 1 else f'({v} - 1)' for j, v in enumerate(syms_all))
+    digit_binds = (f'have hs1 := sym_ge_one _ h1\n  ' if False else '') + \
+        'have hsyms : ' + ' ∧ '.join(f'1 ≤ {v} ∧ {v} ≤ 6' for v in syms_all) + ' := ⟨' + \
+        ', '.join(f'sym_ge_one _ {hv}, sym_le_six _' for hv in [f'h{i}' for i in range(1, k)] + ['hs']) + '⟩\n  ' + \
+        f'let code := {code_expr}'
+    # inside stepN: x % 6^c = code6 of the last c symbols; x / 6 = code6 of first k-1; x % M1 = code6 of last k-1; x % 6 + 1 = sym s
+    code6_of = lambda syms: ' + '.join(f'({v} - 1) * {6 ** (len(syms) - 1 - j)}' if j < len(syms) - 1 else f'({v} - 1)' for j, v in enumerate(syms))
+    eqs = []
+    for cc in range(2, k + 1):
+        eqs.append(f'have e{cc} : code % {6 ** cc} = {code6_of(syms_all[k - cc:])} := by omega')
+    eqs.append(f'have e0 : code / 6 = {code6_of(syms_all[:k - 1])} := by omega')
+    eqs.append(f'have e1 : code % {M1} = {code6_of(syms_all[1:])} := by omega')
+    eqs.append(f'have es : code % 6 + 1 = sym s := by omega')
+    digit_rewrites = '\n  '.join(eqs) + '\n  rw [' + ', '.join([f'e{cc}' for cc in range(2, k + 1)] + ['e0', 'e1', 'es']) + '] at h'
+    # list codes: code6 [a, b, ...] 0 unfolds to the same polynomial
+    code_rewrites = '\n  '.join(
+        f'have c{cc} : code6 {lst(syms_all[k - cc:])} 0 = {code6_of(syms_all[k - cc:])} := by simp only [code6]; omega'
+        for cc in range(2, k + 1)) + '\n  ' + \
+        f'have c0 : code6 {lst(syms_all[:k - 1])} 0 = {code6_of(syms_all[:k - 1])} := by simp only [code6]; omega\n  ' + \
+        f'have c1 : code6 {lst(syms_all[1:])} 0 = {code6_of(syms_all[1:])} := by simp only [code6]; omega\n  ' + \
+        'rw [' + ', '.join([f'c{cc}' for cc in range(2, k + 1)] + ['c0', 'c1']) + '] at *'
     seq = f'''/-
 Generated by gen_lean_automaton_k.py.  Sequence consequence for L = {L}, k = {k}, lambda = {P}/{Q}.
 Core Lean only.
@@ -341,20 +378,15 @@ import WindowAutomatonSequence
 
 namespace Snake9.WindowAutomaton
 
-theorem wforb{S}_canon_drop (ds syms : List Nat) (n : Nat) :
-    wforb{S} ((canon ds).drop n) syms = wforb{S} (ds.drop n) syms := by
-  unfold wforb{S} wforb{S}a
-  rw [canon_canon_drop, canon_canon_drop_reverse]
-
-theorem pot{S}_canon_drop (ds t : List Nat) (n : Nat) :
-    pot{S} ((canon ds).drop n) t = pot{S} (ds.drop n) t := by
-  unfold pot{S}
-  rw [canon_canon_drop]
-
-theorem pot{S}_canon_take (ds t : List Nat) (n : Nat) :
-    pot{S} ((canon ds).take n) t = pot{S} (ds.take n) t := by
-  unfold pot{S}
-  rw [canon_canon_take]
+theorem wsh{S}_canon_drop (ds : List Nat) (n : Nat) : wsh{S} ((canon ds).drop n) = wsh{S} (ds.drop n) := by
+  unfold wsh{S}; rw [canon_canon_drop]
+theorem wsh{S}_canon_drop_rev (ds : List Nat) (n : Nat) :
+    wsh{S} ((canon ds).drop n).reverse = wsh{S} (ds.drop n).reverse := by
+  unfold wsh{S}; rw [canon_canon_drop_reverse]
+theorem sh{S}_canon_drop (ds : List Nat) (n : Nat) : sh{S} ((canon ds).drop n) = sh{S} (ds.drop n) := by
+  unfold sh{S}; rw [canon_canon_drop]
+theorem sh{S}_canon_take (ds : List Nat) (n : Nat) : sh{S} ((canon ds).take n) = sh{S} (ds.take n) := by
+  unfold sh{S}; rw [canon_canon_take]
 
 theorem step{S}_raw (x : List Nat) (hx : x.length = {L + 1}) ({tvars} s : Nat)
     {pos_raw}
@@ -366,8 +398,16 @@ theorem step{S}_raw (x : List Nat) (hx : x.length = {L + 1}) ({tvars} s : Nat)
   unfold check{S} at hc
   rw [inducedPattern_canon, hind] at hc
   simp only [Bool.not_true, Bool.false_or] at hc
-  have h := {spec_chain}
-  rw [{rw_list}] at h
+  rw [{', '.join([f'wsh{S}_canon_drop' , f'wsh{S}_canon_drop_rev'] * (k - 1) + [f'sh{S}_canon_take', f'sh{S}_canon_drop'])}] at hc
+  {digit_binds}
+  have hcode : code < {6 ** k} := by omega
+  have h := allBelow2_spec {6 ** ((k + 1) // 2)} {6 ** (k // 2)} _ hc code (by omega)
+  unfold stepN{S} at h
+  {digit_rewrites}
+  unfold pot{S} wforb{S} at *
+  simp only [List.length_cons, List.length_nil, Nat.zero_add, Nat.reduceAdd] at hw2 hw3 {' '.join(f'hw{cc}' for cc in range(4, k + 1))} ⊢
+  {code_rewrites}
+  rw [hw2, hw3, {', '.join(f'hw{cc}' for cc in range(4, k + 1))}] at h
   simpa using h
 
 def win{S} (d : Nat → Nat) (i : Nat) : List Nat := {dl(0, L + 1)}

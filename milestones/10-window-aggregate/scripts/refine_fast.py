@@ -238,6 +238,8 @@ def main():
     ap.add_argument('--slack', type=float, default=0.3, help='also query cycles with mean <= min + slack')
     ap.add_argument('--batch', type=int, default=200, help='max extra cycles per round')
     ap.add_argument('--index', help='certificate index: rebuild from these exclusions only and verify')
+    ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows to treat as feasible (expensive certificates)')
+    ap.add_argument('--query-timeout', type=float, default=None, help='seconds per oracle query; slower windows count as feasible')
     ap.add_argument('--out')
     a = ap.parse_args()
     if a.index:
@@ -264,6 +266,9 @@ def main():
             json.dump(out, open(a.out, 'w'), indent=1)
         return
     oracle = Oracle(a.radius)
+    if a.avoid:
+        for e in json.load(open(a.avoid)):
+            oracle.known[(tuple(e['dirs']), tuple(tuple(x) for x in e['alpha']))] = 'AVOID'
     A = FastAutomaton(a.L, a.k, a.K)
     print('shapes', len(A.shapes), 'states', A.n, 'extensions', len(A.ext), flush=True)
     log = []
@@ -284,7 +289,7 @@ def main():
                 for cc in range(2, a.k + 1):
                     wins.append(A.window_key(tuple(ds[-(cc + 1):]), tuple(al[-cc:])))
         wins = list(dict.fromkeys(wins))
-        newq = oracle.query(wins, a.workers)
+        newq = oracle.query(wins, a.workers, a.query_timeout)
         unsat = [x for x in wins if oracle.status(x) == 'UNSAT']
         print(f'round {rnd}: edges {len(idx)} mean {exact} ({mu:.4f}) cycle {[int(x) for x in W[cyc]]} '
               f'queried {newq} unsat-on-cycle {len(unsat)} [{time.time()-t:.0f}s]', flush=True)
