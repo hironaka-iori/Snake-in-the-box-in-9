@@ -45,8 +45,8 @@ theorem countSeq_facts {m : Nat} (p : Snake m) (hm3 : 3≤m) :
     have hsplit : (∑j∈Finset.range (m+1),countSeq p j)=
         countSeq p 0+psum (fun j => countSeq p (j+1)) (m-1)+countSeq p m := by
       rw [psum_eq_sum,Finset.sum_range_succ]
-      have he : m=(m-1)+1 := by omega
-      conv_lhs => rw [he,Finset.sum_range_succ']
+      have he : Finset.range m=Finset.range ((m-1)+1) := by congr 1; omega
+      rw [he,Finset.sum_range_succ']
       omega
     have hidentity := global_identity p
     rw [selected_total p] at hidentity
