@@ -1,0 +1,10 @@
+import B112E096Part0026
+namespace B112E096
+open Snake9.LocalRup
+set_option maxHeartbeats 0
+set_option maxRecDepth 1000000
+theorem constraints_unsat (p : Nat → Bool) (h : Constraints p) : False := by
+  have hh := step2702 p h
+  contradiction
+#print axioms constraints_unsat
+end B112E096

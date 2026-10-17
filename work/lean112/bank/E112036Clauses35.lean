@@ -1,0 +1,269 @@
+import E112036Semantics
+import B112E036Inputs
+namespace Snake9.Regrowth.E112036
+noncomputable section
+local instance blockDec35 (p : Prop) : Decidable p := Classical.propDecidable p
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+set_option linter.unusedVariables false
+theorem counterClause1121 (q : Nat → Bool) : valuationOf q 45 = true ∨ valuationOf q 1621 = true := by
+  have hs : count1621 q = (countLit q [-44]) + (countLit q [-45]) := List.countP_append (p := literal q) (l₁ := [-44]) (l₂ := [-45])
+  have hm := merge_right (literal (valuationOf q) (-45)) (literal (valuationOf q) (1621)) (countLit q [-44]) (countLit q [-45]) (count1621 q) 1 (meaningNeg45 q) (meaning1621 q) hs
+  change (! (valuationOf q 45)) = false ∨ valuationOf q 1621 = true at hm
+  simpa only [Bool.not_eq_false'] using hm
+
+theorem clause1121 (q : Snake 81) (h : Conditions q) : valuation q 45 = true ∨ valuation q 1621 = true := counterClause1121 (baseVal q)
+
+theorem counterClause1122 (q : Nat → Bool) : valuationOf q 44 = true ∨ valuationOf q 1621 = true := by
+  have hs : count1621 q = (countLit q [-44]) + (countLit q [-45]) := List.countP_append (p := literal q) (l₁ := [-44]) (l₂ := [-45])
+  have hm := merge_left (literal (valuationOf q) (-44)) (literal (valuationOf q) (1621)) (countLit q [-44]) (countLit q [-45]) (count1621 q) 1 (meaningNeg44 q) (meaning1621 q) hs
+  change (! (valuationOf q 44)) = false ∨ valuationOf q 1621 = true at hm
+  simpa only [Bool.not_eq_false'] using hm
+
+theorem clause1122 (q : Snake 81) (h : Conditions q) : valuation q 44 = true ∨ valuation q 1621 = true := counterClause1122 (baseVal q)
+
+theorem counterClause1123 (q : Nat → Bool) : valuationOf q 44 = true ∨ valuationOf q 45 = true ∨ valuationOf q 1622 = true := by
+  have hs : count1621 q = (countLit q [-44]) + (countLit q [-45]) := List.countP_append (p := literal q) (l₁ := [-44]) (l₂ := [-45])
+  have hm := merge_two (literal (valuationOf q) (-44)) (literal (valuationOf q) (-45)) (literal (valuationOf q) (1622)) (countLit q [-44]) (countLit q [-45]) (count1621 q) 1 1 (meaningNeg44 q) (meaningNeg45 q) (meaning1622 q) hs
+  change (! (valuationOf q 44)) = false ∨ (! (valuationOf q 45)) = false ∨ valuationOf q 1622 = true at hm
+  simpa only [Bool.not_eq_false'] using hm
+
+theorem clause1123 (q : Snake 81) (h : Conditions q) : valuation q 44 = true ∨ valuation q 45 = true ∨ valuation q 1622 = true := counterClause1123 (baseVal q)
+
+theorem counterClause1124 (q : Nat → Bool) : valuationOf q 1621 = false ∨ valuationOf q 1623 = true := by
+  have hs : count1623 q = (countLit q [-39, -41]) + (countLit q [-44, -45]) := List.countP_append (p := literal q) (l₁ := [-39, -41]) (l₂ := [-44, -45])
+  have hm := merge_right (literal (valuationOf q) (1621)) (literal (valuationOf q) (1623)) (countLit q [-39, -41]) (countLit q [-44, -45]) (count1623 q) 1 (meaning1621 q) (meaning1623 q) hs
+  change valuationOf q 1621 = false ∨ valuationOf q 1623 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1124 (q : Snake 81) (h : Conditions q) : valuation q 1621 = false ∨ valuation q 1623 = true := counterClause1124 (baseVal q)
+
+theorem counterClause1125 (q : Nat → Bool) : valuationOf q 1622 = false ∨ valuationOf q 1624 = true := by
+  have hs : count1623 q = (countLit q [-39, -41]) + (countLit q [-44, -45]) := List.countP_append (p := literal q) (l₁ := [-39, -41]) (l₂ := [-44, -45])
+  have hm := merge_right (literal (valuationOf q) (1622)) (literal (valuationOf q) (1624)) (countLit q [-39, -41]) (countLit q [-44, -45]) (count1623 q) 2 (meaning1622 q) (meaning1624 q) hs
+  change valuationOf q 1622 = false ∨ valuationOf q 1624 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1125 (q : Snake 81) (h : Conditions q) : valuation q 1622 = false ∨ valuation q 1624 = true := counterClause1125 (baseVal q)
+
+theorem counterClause1126 (q : Nat → Bool) : valuationOf q 1619 = false ∨ valuationOf q 1623 = true := by
+  have hs : count1623 q = (countLit q [-39, -41]) + (countLit q [-44, -45]) := List.countP_append (p := literal q) (l₁ := [-39, -41]) (l₂ := [-44, -45])
+  have hm := merge_left (literal (valuationOf q) (1619)) (literal (valuationOf q) (1623)) (countLit q [-39, -41]) (countLit q [-44, -45]) (count1623 q) 1 (meaning1619 q) (meaning1623 q) hs
+  change valuationOf q 1619 = false ∨ valuationOf q 1623 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1126 (q : Snake 81) (h : Conditions q) : valuation q 1619 = false ∨ valuation q 1623 = true := counterClause1126 (baseVal q)
+
+theorem counterClause1127 (q : Nat → Bool) : valuationOf q 1619 = false ∨ valuationOf q 1621 = false ∨ valuationOf q 1624 = true := by
+  have hs : count1623 q = (countLit q [-39, -41]) + (countLit q [-44, -45]) := List.countP_append (p := literal q) (l₁ := [-39, -41]) (l₂ := [-44, -45])
+  have hm := merge_two (literal (valuationOf q) (1619)) (literal (valuationOf q) (1621)) (literal (valuationOf q) (1624)) (countLit q [-39, -41]) (countLit q [-44, -45]) (count1623 q) 1 1 (meaning1619 q) (meaning1621 q) (meaning1624 q) hs
+  change valuationOf q 1619 = false ∨ valuationOf q 1621 = false ∨ valuationOf q 1624 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1127 (q : Snake 81) (h : Conditions q) : valuation q 1619 = false ∨ valuation q 1621 = false ∨ valuation q 1624 = true := counterClause1127 (baseVal q)
+
+theorem counterClause1128 (q : Nat → Bool) : valuationOf q 1619 = false ∨ valuationOf q 1622 = false ∨ valuationOf q 1625 = true := by
+  have hs : count1623 q = (countLit q [-39, -41]) + (countLit q [-44, -45]) := List.countP_append (p := literal q) (l₁ := [-39, -41]) (l₂ := [-44, -45])
+  have hm := merge_two (literal (valuationOf q) (1619)) (literal (valuationOf q) (1622)) (literal (valuationOf q) (1625)) (countLit q [-39, -41]) (countLit q [-44, -45]) (count1623 q) 1 2 (meaning1619 q) (meaning1622 q) (meaning1625 q) hs
+  change valuationOf q 1619 = false ∨ valuationOf q 1622 = false ∨ valuationOf q 1625 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1128 (q : Snake 81) (h : Conditions q) : valuation q 1619 = false ∨ valuation q 1622 = false ∨ valuation q 1625 = true := counterClause1128 (baseVal q)
+
+theorem counterClause1129 (q : Nat → Bool) : valuationOf q 1620 = false ∨ valuationOf q 1624 = true := by
+  have hs : count1623 q = (countLit q [-39, -41]) + (countLit q [-44, -45]) := List.countP_append (p := literal q) (l₁ := [-39, -41]) (l₂ := [-44, -45])
+  have hm := merge_left (literal (valuationOf q) (1620)) (literal (valuationOf q) (1624)) (countLit q [-39, -41]) (countLit q [-44, -45]) (count1623 q) 2 (meaning1620 q) (meaning1624 q) hs
+  change valuationOf q 1620 = false ∨ valuationOf q 1624 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1129 (q : Snake 81) (h : Conditions q) : valuation q 1620 = false ∨ valuation q 1624 = true := counterClause1129 (baseVal q)
+
+theorem counterClause1130 (q : Nat → Bool) : valuationOf q 1620 = false ∨ valuationOf q 1621 = false ∨ valuationOf q 1625 = true := by
+  have hs : count1623 q = (countLit q [-39, -41]) + (countLit q [-44, -45]) := List.countP_append (p := literal q) (l₁ := [-39, -41]) (l₂ := [-44, -45])
+  have hm := merge_two (literal (valuationOf q) (1620)) (literal (valuationOf q) (1621)) (literal (valuationOf q) (1625)) (countLit q [-39, -41]) (countLit q [-44, -45]) (count1623 q) 2 1 (meaning1620 q) (meaning1621 q) (meaning1625 q) hs
+  change valuationOf q 1620 = false ∨ valuationOf q 1621 = false ∨ valuationOf q 1625 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1130 (q : Snake 81) (h : Conditions q) : valuation q 1620 = false ∨ valuation q 1621 = false ∨ valuation q 1625 = true := counterClause1130 (baseVal q)
+
+theorem counterClause1131 (q : Nat → Bool) : valuationOf q 1620 = false ∨ valuationOf q 1622 = false ∨ valuationOf q 1626 = true := by
+  have hs : count1623 q = (countLit q [-39, -41]) + (countLit q [-44, -45]) := List.countP_append (p := literal q) (l₁ := [-39, -41]) (l₂ := [-44, -45])
+  have hm := merge_two (literal (valuationOf q) (1620)) (literal (valuationOf q) (1622)) (literal (valuationOf q) (1626)) (countLit q [-39, -41]) (countLit q [-44, -45]) (count1623 q) 2 2 (meaning1620 q) (meaning1622 q) (meaning1626 q) hs
+  change valuationOf q 1620 = false ∨ valuationOf q 1622 = false ∨ valuationOf q 1626 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1131 (q : Snake 81) (h : Conditions q) : valuation q 1620 = false ∨ valuation q 1622 = false ∨ valuation q 1626 = true := counterClause1131 (baseVal q)
+
+theorem counterClause1132 (q : Nat → Bool) : valuationOf q 1623 = false ∨ valuationOf q 1627 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_right (literal (valuationOf q) (1623)) (literal (valuationOf q) (1627)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 1 (meaning1623 q) (meaning1627 q) hs
+  change valuationOf q 1623 = false ∨ valuationOf q 1627 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1132 (q : Snake 81) (h : Conditions q) : valuation q 1623 = false ∨ valuation q 1627 = true := counterClause1132 (baseVal q)
+
+theorem counterClause1133 (q : Nat → Bool) : valuationOf q 1624 = false ∨ valuationOf q 1628 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_right (literal (valuationOf q) (1624)) (literal (valuationOf q) (1628)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 2 (meaning1624 q) (meaning1628 q) hs
+  change valuationOf q 1624 = false ∨ valuationOf q 1628 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1133 (q : Snake 81) (h : Conditions q) : valuation q 1624 = false ∨ valuation q 1628 = true := counterClause1133 (baseVal q)
+
+theorem counterClause1134 (q : Nat → Bool) : valuationOf q 1625 = false ∨ valuationOf q 1629 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_right (literal (valuationOf q) (1625)) (literal (valuationOf q) (1629)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 3 (meaning1625 q) (meaning1629 q) hs
+  change valuationOf q 1625 = false ∨ valuationOf q 1629 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1134 (q : Snake 81) (h : Conditions q) : valuation q 1625 = false ∨ valuation q 1629 = true := counterClause1134 (baseVal q)
+
+theorem counterClause1135 (q : Nat → Bool) : valuationOf q 1626 = false ∨ valuationOf q 1630 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_right (literal (valuationOf q) (1626)) (literal (valuationOf q) (1630)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 4 (meaning1626 q) (meaning1630 q) hs
+  change valuationOf q 1626 = false ∨ valuationOf q 1630 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1135 (q : Snake 81) (h : Conditions q) : valuation q 1626 = false ∨ valuation q 1630 = true := counterClause1135 (baseVal q)
+
+theorem counterClause1136 (q : Nat → Bool) : valuationOf q 1615 = false ∨ valuationOf q 1627 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_left (literal (valuationOf q) (1615)) (literal (valuationOf q) (1627)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 1 (meaning1615 q) (meaning1627 q) hs
+  change valuationOf q 1615 = false ∨ valuationOf q 1627 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1136 (q : Snake 81) (h : Conditions q) : valuation q 1615 = false ∨ valuation q 1627 = true := counterClause1136 (baseVal q)
+
+theorem counterClause1137 (q : Nat → Bool) : valuationOf q 1615 = false ∨ valuationOf q 1623 = false ∨ valuationOf q 1628 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1615)) (literal (valuationOf q) (1623)) (literal (valuationOf q) (1628)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 1 1 (meaning1615 q) (meaning1623 q) (meaning1628 q) hs
+  change valuationOf q 1615 = false ∨ valuationOf q 1623 = false ∨ valuationOf q 1628 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1137 (q : Snake 81) (h : Conditions q) : valuation q 1615 = false ∨ valuation q 1623 = false ∨ valuation q 1628 = true := counterClause1137 (baseVal q)
+
+theorem counterClause1138 (q : Nat → Bool) : valuationOf q 1615 = false ∨ valuationOf q 1624 = false ∨ valuationOf q 1629 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1615)) (literal (valuationOf q) (1624)) (literal (valuationOf q) (1629)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 1 2 (meaning1615 q) (meaning1624 q) (meaning1629 q) hs
+  change valuationOf q 1615 = false ∨ valuationOf q 1624 = false ∨ valuationOf q 1629 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1138 (q : Snake 81) (h : Conditions q) : valuation q 1615 = false ∨ valuation q 1624 = false ∨ valuation q 1629 = true := counterClause1138 (baseVal q)
+
+theorem counterClause1139 (q : Nat → Bool) : valuationOf q 1615 = false ∨ valuationOf q 1625 = false ∨ valuationOf q 1630 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1615)) (literal (valuationOf q) (1625)) (literal (valuationOf q) (1630)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 1 3 (meaning1615 q) (meaning1625 q) (meaning1630 q) hs
+  change valuationOf q 1615 = false ∨ valuationOf q 1625 = false ∨ valuationOf q 1630 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1139 (q : Snake 81) (h : Conditions q) : valuation q 1615 = false ∨ valuation q 1625 = false ∨ valuation q 1630 = true := counterClause1139 (baseVal q)
+
+theorem counterClause1140 (q : Nat → Bool) : valuationOf q 1615 = false ∨ valuationOf q 1626 = false ∨ valuationOf q 1631 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1615)) (literal (valuationOf q) (1626)) (literal (valuationOf q) (1631)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 1 4 (meaning1615 q) (meaning1626 q) (meaning1631 q) hs
+  change valuationOf q 1615 = false ∨ valuationOf q 1626 = false ∨ valuationOf q 1631 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1140 (q : Snake 81) (h : Conditions q) : valuation q 1615 = false ∨ valuation q 1626 = false ∨ valuation q 1631 = true := counterClause1140 (baseVal q)
+
+theorem counterClause1141 (q : Nat → Bool) : valuationOf q 1616 = false ∨ valuationOf q 1628 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_left (literal (valuationOf q) (1616)) (literal (valuationOf q) (1628)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 2 (meaning1616 q) (meaning1628 q) hs
+  change valuationOf q 1616 = false ∨ valuationOf q 1628 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1141 (q : Snake 81) (h : Conditions q) : valuation q 1616 = false ∨ valuation q 1628 = true := counterClause1141 (baseVal q)
+
+theorem counterClause1142 (q : Nat → Bool) : valuationOf q 1616 = false ∨ valuationOf q 1623 = false ∨ valuationOf q 1629 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1616)) (literal (valuationOf q) (1623)) (literal (valuationOf q) (1629)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 2 1 (meaning1616 q) (meaning1623 q) (meaning1629 q) hs
+  change valuationOf q 1616 = false ∨ valuationOf q 1623 = false ∨ valuationOf q 1629 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1142 (q : Snake 81) (h : Conditions q) : valuation q 1616 = false ∨ valuation q 1623 = false ∨ valuation q 1629 = true := counterClause1142 (baseVal q)
+
+theorem counterClause1143 (q : Nat → Bool) : valuationOf q 1616 = false ∨ valuationOf q 1624 = false ∨ valuationOf q 1630 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1616)) (literal (valuationOf q) (1624)) (literal (valuationOf q) (1630)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 2 2 (meaning1616 q) (meaning1624 q) (meaning1630 q) hs
+  change valuationOf q 1616 = false ∨ valuationOf q 1624 = false ∨ valuationOf q 1630 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1143 (q : Snake 81) (h : Conditions q) : valuation q 1616 = false ∨ valuation q 1624 = false ∨ valuation q 1630 = true := counterClause1143 (baseVal q)
+
+theorem counterClause1144 (q : Nat → Bool) : valuationOf q 1616 = false ∨ valuationOf q 1625 = false ∨ valuationOf q 1631 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1616)) (literal (valuationOf q) (1625)) (literal (valuationOf q) (1631)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 2 3 (meaning1616 q) (meaning1625 q) (meaning1631 q) hs
+  change valuationOf q 1616 = false ∨ valuationOf q 1625 = false ∨ valuationOf q 1631 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1144 (q : Snake 81) (h : Conditions q) : valuation q 1616 = false ∨ valuation q 1625 = false ∨ valuation q 1631 = true := counterClause1144 (baseVal q)
+
+theorem counterClause1145 (q : Nat → Bool) : valuationOf q 1617 = false ∨ valuationOf q 1629 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_left (literal (valuationOf q) (1617)) (literal (valuationOf q) (1629)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 3 (meaning1617 q) (meaning1629 q) hs
+  change valuationOf q 1617 = false ∨ valuationOf q 1629 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1145 (q : Snake 81) (h : Conditions q) : valuation q 1617 = false ∨ valuation q 1629 = true := counterClause1145 (baseVal q)
+
+theorem counterClause1146 (q : Nat → Bool) : valuationOf q 1617 = false ∨ valuationOf q 1623 = false ∨ valuationOf q 1630 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1617)) (literal (valuationOf q) (1623)) (literal (valuationOf q) (1630)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 3 1 (meaning1617 q) (meaning1623 q) (meaning1630 q) hs
+  change valuationOf q 1617 = false ∨ valuationOf q 1623 = false ∨ valuationOf q 1630 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1146 (q : Snake 81) (h : Conditions q) : valuation q 1617 = false ∨ valuation q 1623 = false ∨ valuation q 1630 = true := counterClause1146 (baseVal q)
+
+theorem counterClause1147 (q : Nat → Bool) : valuationOf q 1617 = false ∨ valuationOf q 1624 = false ∨ valuationOf q 1631 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1617)) (literal (valuationOf q) (1624)) (literal (valuationOf q) (1631)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 3 2 (meaning1617 q) (meaning1624 q) (meaning1631 q) hs
+  change valuationOf q 1617 = false ∨ valuationOf q 1624 = false ∨ valuationOf q 1631 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1147 (q : Snake 81) (h : Conditions q) : valuation q 1617 = false ∨ valuation q 1624 = false ∨ valuation q 1631 = true := counterClause1147 (baseVal q)
+
+theorem counterClause1148 (q : Nat → Bool) : valuationOf q 1617 = false ∨ valuationOf q 1625 = false ∨ valuationOf q 1632 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1617)) (literal (valuationOf q) (1625)) (literal (valuationOf q) (1632)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 3 3 (meaning1617 q) (meaning1625 q) (meaning1632 q) hs
+  change valuationOf q 1617 = false ∨ valuationOf q 1625 = false ∨ valuationOf q 1632 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1148 (q : Snake 81) (h : Conditions q) : valuation q 1617 = false ∨ valuation q 1625 = false ∨ valuation q 1632 = true := counterClause1148 (baseVal q)
+
+theorem counterClause1149 (q : Nat → Bool) : valuationOf q 1618 = false ∨ valuationOf q 1630 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_left (literal (valuationOf q) (1618)) (literal (valuationOf q) (1630)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 4 (meaning1618 q) (meaning1630 q) hs
+  change valuationOf q 1618 = false ∨ valuationOf q 1630 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1149 (q : Snake 81) (h : Conditions q) : valuation q 1618 = false ∨ valuation q 1630 = true := counterClause1149 (baseVal q)
+
+theorem counterClause1150 (q : Nat → Bool) : valuationOf q 1618 = false ∨ valuationOf q 1623 = false ∨ valuationOf q 1631 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1618)) (literal (valuationOf q) (1623)) (literal (valuationOf q) (1631)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 4 1 (meaning1618 q) (meaning1623 q) (meaning1631 q) hs
+  change valuationOf q 1618 = false ∨ valuationOf q 1623 = false ∨ valuationOf q 1631 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1150 (q : Snake 81) (h : Conditions q) : valuation q 1618 = false ∨ valuation q 1623 = false ∨ valuation q 1631 = true := counterClause1150 (baseVal q)
+
+theorem counterClause1151 (q : Nat → Bool) : valuationOf q 1618 = false ∨ valuationOf q 1624 = false ∨ valuationOf q 1632 = true := by
+  have hs : count1627 q = (countLit q [-32, -33, -37, -38]) + (countLit q [-39, -41, -44, -45]) := List.countP_append (p := literal q) (l₁ := [-32, -33, -37, -38]) (l₂ := [-39, -41, -44, -45])
+  have hm := merge_two (literal (valuationOf q) (1618)) (literal (valuationOf q) (1624)) (literal (valuationOf q) (1632)) (countLit q [-32, -33, -37, -38]) (countLit q [-39, -41, -44, -45]) (count1627 q) 4 2 (meaning1618 q) (meaning1624 q) (meaning1632 q) hs
+  change valuationOf q 1618 = false ∨ valuationOf q 1624 = false ∨ valuationOf q 1632 = true at hm
+  simpa only [Bool.not_eq_false] using hm
+
+theorem clause1151 (q : Snake 81) (h : Conditions q) : valuation q 1618 = false ∨ valuation q 1624 = false ∨ valuation q 1632 = true := counterClause1151 (baseVal q)
+
+theorem counterClause1152 (q : Nat → Bool) : valuationOf q 50 = true ∨ valuationOf q 1635 = true := by
+  have hs : count1635 q = (countLit q [-47]) + (countLit q [-50]) := List.countP_append (p := literal q) (l₁ := [-47]) (l₂ := [-50])
+  have hm := merge_right (literal (valuationOf q) (-50)) (literal (valuationOf q) (1635)) (countLit q [-47]) (countLit q [-50]) (count1635 q) 1 (meaningNeg50 q) (meaning1635 q) hs
+  change (! (valuationOf q 50)) = false ∨ valuationOf q 1635 = true at hm
+  simpa only [Bool.not_eq_false'] using hm
+
+theorem clause1152 (q : Snake 81) (h : Conditions q) : valuation q 50 = true ∨ valuation q 1635 = true := counterClause1152 (baseVal q)
+
+theorem block35 (q : Snake 81) (h : Conditions q) : B112E036.Block35 (valuation q) :=
+  ⟨clause1121 q h, clause1122 q h, clause1123 q h, clause1124 q h, clause1125 q h, clause1126 q h, clause1127 q h, clause1128 q h, clause1129 q h, clause1130 q h, clause1131 q h, clause1132 q h, clause1133 q h, clause1134 q h, clause1135 q h, clause1136 q h, clause1137 q h, clause1138 q h, clause1139 q h, clause1140 q h, clause1141 q h, clause1142 q h, clause1143 q h, clause1144 q h, clause1145 q h, clause1146 q h, clause1147 q h, clause1148 q h, clause1149 q h, clause1150 q h, clause1151 q h, clause1152 q h⟩
+
+end
+end Snake9.Regrowth.E112036

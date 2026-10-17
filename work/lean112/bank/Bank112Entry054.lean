@@ -1,0 +1,25 @@
+import E112054Data
+import DfsBankData
+import CubeLocal
+import E112058Complete
+namespace Snake9.Regrowth.Bank112
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+theorem prefix_match54 : ∀ i : Fin 112, E112054.pre[i.val]! = (Dfs.oriented 54)[i.val]! := by decide
+theorem translate_region54 : ∀ v : Vertex, v ∈ E112054.region → vxor (85 : Vertex) v ∈ E112058.region := by decide
+theorem translate_head54 : vxor (85 : Vertex) E112054.head = E112058.head := by decide
+theorem entry54 (p : Snake 192) (hp : Dfs.StartsWith p (Dfs.oriented 54) 112) : False := by
+  have hp' : Dfs.StartsWith p E112054.pre 112 := by
+    intro i hi hpLen
+    rw [prefix_match54 ⟨i,hi⟩]
+    exact hp i hi hpLen
+  let q := translate (suffix p) (85 : Vertex)
+  apply E112058.region_exclusion q
+  constructor
+  · change vxor (85 : Vertex) ((suffix p).vertex 0) = E112058.head
+    rw [E112054.suffix_head p hp',translate_head54]
+  · intro v hv
+    obtain ⟨i,rfl⟩ := hv
+    exact translate_region54 _ (E112054.suffix_covered p hp' _ ⟨i,rfl⟩)
+#print axioms entry54
+end Snake9.Regrowth.Bank112
