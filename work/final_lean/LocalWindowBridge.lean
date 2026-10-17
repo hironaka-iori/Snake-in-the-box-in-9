@@ -659,6 +659,36 @@ theorem frame_absent_eq (ht : t < 512) {k : Nat} (h0 : 0 < k) (hm : k < m) :
 
 end Frame
 
+/-! ## The identity frame -/
+
+theorem bperm_id {v : Nat} (hv : v < 512) : bperm CPerm.id v = v := by
+  apply Nat.eq_of_testBit_eq
+  intro i
+  rw [testBit_bperm]
+  by_cases hi : i < 9
+  · simp [hi, CPerm.id]
+  · simp [hi, testBit_of_lt_512 hv hi]
+
+theorem amap_id {v : Nat} (hv : v < 512) : amap CPerm.id 0 v = v := by
+  unfold amap
+  rw [Nat.xor_zero, bperm_id hv]
+
+theorem sel_amap_id {m : Nat} (p : Snake m) : sel p (amap CPerm.id 0) = sel p (fun v => v) := by
+  funext w
+  apply Bool.eq_iff_iff.2
+  rw [sel_iff, sel_iff]
+  constructor
+  · rintro ⟨i, hi, h⟩; exact ⟨i, hi, by rw [← h, amap_id (vx_lt p i)]⟩
+  · rintro ⟨i, hi, h⟩; exact ⟨i, hi, by rw [amap_id (vx_lt p i)]; exact h⟩
+
+/-- At an internal vertex with path directions `dir p (k-1)` and `dir p k`, the
+absent-corner count of the snake's own vertex set is its singleton count. -/
+theorem absentCorners_eq_coreAlpha {m : Nat} (p : Snake m) {k : Nat} (h0 : 0 < k) (hm : k < m) :
+    absentCorners (sel p (fun v => v)) (vx p k) (dir p (k - 1)) (dir p k) = coreAlpha p k := by
+  have := frame_absent_eq p CPerm.id 0 (by decide) h0 hm
+  rw [sel_amap_id, amap_id (vx_lt p k)] at this
+  exact this
+
 /-! ## Canonical windows -/
 
 /-- `W` starts at `0` and follows the direction list `cs`. -/
