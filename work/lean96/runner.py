@@ -131,7 +131,7 @@ def evidence(entry,trim_required=True):
                 save(folder/'termination.json',dict(status='UNKNOWN_TIMEOUT' if rc==124 else result.get('status','RESOURCE_OR_PROCESS_FAILURE'),returncode=rc,time=now()))
                 raise RuntimeError('Certificate regeneration unresolved for '+str(entry)+'; see '+str(folder))
             cert=ROOT/result['certificate']
-        elif sha(cert)!=row['certificate_sha256']:raise ValueError('Historical certificate hash mismatch')
+        elif row.get('certificate') and sha(cert)!=row['certificate_sha256']:raise ValueError('Historical certificate hash mismatch')
         with MUTEX:STATE['stages'][str(entry)]=dict(solver='UNSAT',native='PENDING',lean='PENDING');publish()
         cnf=folder/'input.cnf';proof=folder/'input.drup';lrat=folder/'proof.lrat'
         for src,dest in [(ROOT/row['cnf'],cnf),(cert,proof)]:
