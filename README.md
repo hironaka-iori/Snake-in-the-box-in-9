@@ -23,7 +23,7 @@ Research checkpoint: 15 October 2026.
 | Every snake has at most 245 edges | Lean-checked aggregate consequence, with every local premise discharged |
 | At most 242, resp. 241, edges if five, resp. six, local count-window patterns are excluded | Lean-checked conditional theorems (fresh 156-step reproduction); each window exclusion has a DRAT-checked certificate for a local CNF, not yet a Lean proof |
 | At most 239 edges if 145 direction-aware count-window patterns are excluded | Lean-checked conditional theorem (kernel-checked 2592-state potential); every pattern has a DRAT-checked certificate, not yet a Lean proof |
-| At most 238 edges if 325 five-centre window patterns are excluded | Lean-checked conditional theorem (44,064-state potential, kernel-checked in 34 shards); every pattern DRAT-certified |
+| At most 238 edges if 325 five-center window patterns are excluded | Lean-checked conditional theorem (44,064-state potential, kernel-checked in 34 shards); every pattern DRAT-certified |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
@@ -155,7 +155,7 @@ A direction-aware automaton goes further: states remember the shape of the last 
 
 ## Collaboration
 
-Use a separate branch for each proof or experiment. Keep claims labelled as proved, conditional, computationally observed, or conjectured. Include transition sequences for every proposed longer snake and verify all unordered vertex pairs. Record solver parameters, seed, time limit, and termination status. Submit changes through pull requests so collaborators can review the mathematical scope as well as the code.
+Use a separate branch for each proof or experiment. Keep claims labeled as proved, conditional, computationally observed, or conjectured. Include transition sequences for every proposed longer snake and verify all unordered vertex pairs. Record solver parameters, seed, time limit, and termination status. Submit changes through pull requests so collaborators can review the mathematical scope as well as the code.
 
 ## Integrated Boolean certificate investigation
 
