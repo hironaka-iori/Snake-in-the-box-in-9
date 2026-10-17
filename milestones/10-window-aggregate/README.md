@@ -82,7 +82,7 @@ Arithmetic for 239: the potential gives `3 Σ_{j=6}^{m-1} min(alpha_j,6) ≥ 10 
 
 The five-centre automaton (34 shapes, 44,064 states) is handled the same way by `WindowAutomaton5Data/Table/Sequence.lean` and `AggregateDirection238Conditional.lean` (`upper_238_of_direction_windows5`). Its step table is too large for one kernel evaluation (a single file was killed after 12 minutes), so `scripts/gen_lean_automaton5.py` emits one module per canonical 7-shape, `WindowAutomaton5Shard0..33.lean`, each enumerating the next label and all 6^5 symbol combinations in about a minute, and a kernel-checked membership lemma shows every induced restricted growth string of length eight is a listed shape followed by a label below nine (`check5_of_rgs`). Arithmetic: `2 Σ_{j=7}^{m-1} min(alpha_j,6) ≥ 7 (m-7) - 6`, so `2 T ≥ 7 m - 21 - 6` and `77 m ≤ 18385`, giving `m ≤ 238`.
 
-All of these audit to `propext`, `Classical.choice`, `Quot.sound`. They are included in `verify_strengthened.py`; a fresh 162-step source-only run (core, incidence, every strengthening module, final audit) is recorded in `outputs/strengthened-direction-reproduction-manifest.json` and `outputs/strengthened-direction-reproduction.log`.
+All of these audit to `propext`, `Classical.choice`, `Quot.sound`. They are included in `verify_strengthened.py`; a fresh 200-step source-only run (core, incidence, every strengthening module including the 34 shards, final audit) is recorded in `outputs/strengthened-direction-reproduction-manifest.json` and `outputs/strengthened-direction-reproduction.log`.
 
 Reproduce:
 
