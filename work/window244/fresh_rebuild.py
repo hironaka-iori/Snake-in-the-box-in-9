@@ -27,11 +27,22 @@ def run(mathlib,resume=None):
     build=pathlib.Path(resume).resolve() if resume else pathlib.Path(tempfile.mkdtemp(prefix='window244-',dir=base_dir)).resolve()
     assert build.is_relative_to(base_dir.resolve()) and build.name.startswith('window244-')
     core=build/'core';logs=build/'logs';core.mkdir(exist_ok=True);logs.mkdir(exist_ok=True)
+    guard=(build/'build.lock').open('a+b')
+    guard.write(b'0');guard.flush();guard.seek(0)
+    if os.name=='nt':
+        import msvcrt
+        msvcrt.locking(guard.fileno(),msvcrt.LK_NBLCK,1)
+    else:
+        import fcntl
+        fcntl.flock(guard,fcntl.LOCK_EX|fcntl.LOCK_NB)
     manifest=build/'manifest.json'
     state=json.loads(manifest.read_text()) if manifest.exists() else dict(modules={},source_sha256={},axioms={})
     assert state.get('mathlib_commit',PIN)==PIN
     state.update(status='RUNNING',started_utc=state.get('started_utc',now()),mathlib_commit=PIN,
-                 lean_sha256=sha(lean),build_directory=str(build),scope='SOURCE_ONLY_CUSTOM_CHAIN')
+                 lean_sha256=sha(lean),build_directory=str(build),scope='SOURCE_ONLY_CUSTOM_CHAIN',pid=os.getpid())
+    state.pop('error',None)
+    state['driver_sha256']={p.relative_to(ROOT).as_posix():sha(p) for p in
+        [HERE/'fresh_rebuild.py',HERE/'resource_limits.py',HERE/'export_certificate.py',HERE/'generate_bridge.py',ROOT/'work/spectral/verify_strengthened.py']}
     def save():
         tmp=manifest.with_suffix('.tmp');tmp.write_text(json.dumps(state,indent=2)+'\n');tmp.replace(manifest)
     def copy(src,dst):
@@ -81,7 +92,9 @@ def run(mathlib,resume=None):
                         deps[dep]=sha(depobj)
             identity=dict(source_sha256=sha(src),imports=deps,lean_sha256=sha(lean))
             prior=state['modules'].get(name,{})
-            if prior.get('identity')==identity and prior.get('exit_code')==0 and obj.exists() and prior.get('olean_sha256')==sha(obj):continue
+            if prior.get('identity')==identity and prior.get('exit_code')==0 and obj.exists() and prior.get('olean_sha256')==sha(obj) and logpath.exists() and prior.get('log_sha256')==sha(logpath):
+                audit(logpath.read_text(encoding='utf-8'))
+                continue
             state['active']=name;save();start=time.monotonic()
             with logpath.open('w',encoding='utf-8') as log:
                 if original.is_relative_to(HERE) or name in ['LocalRup','TreeRup']:
@@ -107,4 +120,6 @@ def run(mathlib,resume=None):
         print('Verified 191 <= a(9) <= 244; exact optimum unresolved.',flush=True)
     except BaseException as exc:
         state.update(status='FAILED',error=str(exc));raise
-    finally:save()
+    finally:
+        save()
+        guard.close()

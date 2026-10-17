@@ -1,5 +1,24 @@
 # Scope of this archived ledger
 
+## 17 October 2026: window-244 proof engineering checkpoint
+
+- **Lean checked, development build:** generic geometric and counter clause
+  families; equality between singleton counts and absent eligible corners;
+  translation, arbitrary coordinate-permutation and reversal invariance;
+  normalization of every five-vertex window to the repeated or distinct shape.
+- **Executable evidence:** both original LRAT traces and retained RUP cores
+  replay; compact encodings and their clause/auxiliary-variable maps agree.
+  Independent exact sequence DP reproduces 245 and conditional 244.
+- **Pending:** all concrete clause instances, both full refutations, final
+  no-(2,2,3)/no-(3,2,2) assembly, and a fresh source-only transitive axiom audit.
+  Thus the unconditional global bound remains 245.
+- Work is isolated on `research/window-244`, based on main `537513d`.
+  The 144/112 certificates and main are unchanged. No new solver run or
+  Stage-2 pattern survey has been performed.
+- Reproduction and live checkpoint locations: `work/window244/PLAN.md`.
+
+## Earlier ledger
+
 Entries below are chronological development history. The current unconditional bound is 245; 244 remains conditional. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
 
 # Research ledger — 15 October 2026

@@ -4,6 +4,17 @@ Checkpoint: 15 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and St
 
 ## Where the investigation stands
 
+**17 October 2026 window checkpoint.** Branch `research/window-244` contains
+kernel-checked generic geometry/counter lemmas and a normalization theorem covering
+both window shapes while preserving every singleton count. The retained cores
+have 2,327 and 18,461 RUP steps, respectively; these differ from the original
+3,744 and 24,895 LRAT steps. Complete concrete semantic checks and refutation
+checks remain in progress. `Window223Exclusion.lean` and `UpperBound244.lean`
+are integration sources awaiting their full dependencies and fresh audit; their
+existence is not a completed upper-bound theorem. Do not begin the 242 campaign
+or treat a Boolean-only success as the geometric exclusion. Current manifests,
+logs, commands and remaining obligations are described in `work/window244/PLAN.md`.
+
 The exact optimum is unresolved; no candidate value receives privileged status. The earlier conjecture **a(9) = 196** has low confidence. For n = 3,...,8, subtracting 3*2^(n-3) from the known maxima leaves 1,1,1,2,2,2. Continuing the correction in doubling blocks of three predicts 196. An equally exact additive-block fit predicts 195. The first eight values therefore do not determine the ninth, and interpolation supplies no geometric proof.
 
 The fully Lean-checked global interval is now **191 <= a(9) <= 245**. The strengthened square-face bound combines the incidence identity with endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. The earlier arguments still supply the weaker bounds 247, 248, 251, 254, and 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.

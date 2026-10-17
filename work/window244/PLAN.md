@@ -31,6 +31,20 @@ Stage-1 theorem, fresh source rebuild and transitive axiom audit.
 
 ## In progress
 
+An independent source-only reconstruction is now running in
+`work/spectral/.verification/window244-i53n2a5_/`; its `manifest.json` is the
+authoritative state of that build. Output streams are
+`outputs/window244/fresh-rebuild.stdout.log` and `fresh-rebuild.stderr.log`.
+It imports no custom development objects. The build has its own lock and
+records the driver hashes as well as source, object, dependency and log hashes.
+If it fails, correct the reported proof obligation and resume that directory;
+do not interpret a running manifest as a successful theorem audit.
+
+The assembly from the two standardized contexts to arbitrary internal indices
+also passed an isolated conditional development probe (`AssemblyProbe.log`).
+Its two explicit hypotheses are still to be discharged by the complete concrete
+geometry and refutations. This probe is not the unconditional exclusion.
+
 Split Boolean certificate compilation by `check_certificates.py --shape repeated`
 and `--shape distinct`, with separate locks and checkpoints. Status, module
 source/object/import hashes, timings and peak private memory are in

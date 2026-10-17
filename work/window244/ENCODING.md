@@ -63,8 +63,10 @@ At each centre the two window neighbours saturate its available degree. The
 other seven coordinate neighbours are absent. A singleton square cannot use
 either of the two window directions. Among the remaining 21 axis pairs, it is
 a singleton precisely when the opposite corner is absent. Proving this equality
-with `SquareIncidence.localAlpha`, including under normalization, remains a
-required Lean obligation.
+with `SquareIncidence.localAlpha` is proved by `WindowAlpha.localAlpha_corner_list`.
+`WindowNormalization.normalize_five_to_standard` preserves these counts under
+normalization. Both have passed Lean development checks; complete concrete
+instances and the final fresh-source audit remain required.
 
 Boolean constants, repeated literals and tautologies are simplified by the
 encoder. Their simplification must be accounted for in the Lean instantiation;

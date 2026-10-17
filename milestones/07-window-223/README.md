@@ -4,6 +4,15 @@ Checkpoint: 16 October 2026.
 
 Both radius-three encodings are solver-infeasible and their proofs replay in Python. Radius two is feasible. The two large Lean certificate builds exhausted memory; no geometric exclusion or 244 bound is claimed.
 
+Update, 17 October 2026: the maintained replacement pipeline is
+[`work/window244`](../../work/window244/PLAN.md). It uses the existing checked
+LocalRup/TreeRup mechanisms, resumable small modules and an external 1800 MiB
+per-process memory budget. Generic semantic lemmas and alpha-preserving
+normalization of both shapes have passed Lean development checks. Full concrete
+semantics and Boolean refutations are still being checked, and an isolated
+source-only reconstruction has started. This replaces the earlier single-file
+attempt; it does not yet establish the unconditional 244 theorem.
+
 Sources and evidence: scripts/; data/; lean/; logs/
 
 Paths beginning with `work/`, `outputs/`, or `paper/` are relative to the repository root. Shared proof projects and historical machine data keep stable paths; this folder holds the milestone narrative and new dedicated work.

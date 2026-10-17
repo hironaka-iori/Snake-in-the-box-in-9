@@ -26,6 +26,17 @@ Research checkpoint: 15 October 2026.
 
 Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact proof gaps, and search limitations. The [paper](paper/snake9_research.tex) contains mathematical exposition, proofs, explicit transition sequences, and references. It deliberately keeps implementation identifiers outside the paper.
 
+### Window-244 verification in progress (17 October 2026)
+
+On `research/window-244`, the generic clause-family proofs, coordinate-permutation
+and reversal invariance of singleton counts, and normalization covering both
+five-vertex shapes have passed Lean development checks. Both existing contradiction
+certificates independently replay. Complete concrete clause and split-certificate
+checks are running, alongside an isolated source-only reconstruction. The global
+interval remains **191 <= a(9) <= 245** until the complete 244 chain and its final
+axiom audit pass. See [the verification plan](work/window244/PLAN.md) and
+[the encoding map](work/window244/ENCODING.md). Stage 2 has not started.
+
 ## Repository structure
 
 - `paper/`: all maintained LaTeX sources, including the main paper and the collaborator's DFS report.
