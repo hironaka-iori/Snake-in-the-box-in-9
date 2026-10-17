@@ -1,6 +1,6 @@
 name = "snake9_audit"
 version = "0.1.0"
-defaultTargets = ["Snake9", "Snake9Logic", "MaximalityCounterexample", "CoilReduction", "TrendHypothesis", "OptimalityTarget", "LayerJoining", "Snake8", "IntegerLayerBridge", "SquareCounterexample", "SquareCountingLogic", "PathStructure", "CubeLocal", "SingletonSquareLemma", "JointLayerSeed", "RadiusThreeForest", "BallCertificate", "BallClauseLogic", "DfsParity", "DfsCertificate", "DfsBankData", "DfsDecide", "LocalWindowModel", "LocalWindowBridge"]
+defaultTargets = ["Snake9", "Snake9Logic", "MaximalityCounterexample", "CoilReduction", "TrendHypothesis", "OptimalityTarget", "LayerJoining", "Snake8", "IntegerLayerBridge", "SquareCounterexample", "SquareCountingLogic", "PathStructure", "CubeLocal", "SingletonSquareLemma", "JointLayerSeed", "RadiusThreeForest", "BallCertificate", "BallClauseLogic", "DfsParity", "DfsCertificate", "DfsBankData", "DfsDecide", "LocalWindowModel", "LocalWindowBridge", "LocalWindowDirModel", "LocalWindowDirKeys", "LocalWindowDirBridge"]
 
 [[lean_lib]]
 name = "Snake9"
@@ -2640,3 +2640,16 @@ globs = ["LocalWindowUnsat.+"]
 
 [[lean_lib]]
 name = "LocalWindowRefuted"
+
+# Direction-aware windows behind the conditional bound 239.
+[[lean_lib]]
+name = "LocalWindowDirModel"
+
+[[lean_lib]]
+name = "LocalWindowDirKeys"
+
+[[lean_lib]]
+name = "LocalWindowDirBridge"
+
+[[lean_lib]]
+name = "LocalWindowDirSat"
