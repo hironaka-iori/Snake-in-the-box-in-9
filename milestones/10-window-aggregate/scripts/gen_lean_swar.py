@@ -136,7 +136,10 @@ def main():
     ncodes = NS ** k; X = np.arange(ncodes)
 
     def tbl_bits(Fbits, n):
-        return np.array([(Fbits >> j) & 1 for j in range(n)], bool) if Fbits else np.zeros(n, bool)
+        if not Fbits:
+            return np.zeros(n, bool)
+        raw = np.frombuffer(Fbits.to_bytes((n + 7) // 8, 'little'), dtype=np.uint8)
+        return np.unpackbits(raw, bitorder='little')[:n].astype(bool)
 
     def pot_arr(i):
         return np.array([(potC[i] >> (8 * y)) & 255 for y in range(M1)])
