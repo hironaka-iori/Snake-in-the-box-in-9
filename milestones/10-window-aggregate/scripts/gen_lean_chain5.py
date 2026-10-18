@@ -16,7 +16,8 @@ m <= N.  With --tag '' (the radius-3 set of the bound 238) the bridge, unconditi
 upper-bound modules reproduce the hand-written ones; the sequence and conditional modules
 of that set are the hand-written WindowAutomaton5Sequence / AggregateDirection238Conditional.
 
-  python gen_lean_chain5.py --tag R4 --bound 236 --keys 5xx --P 42 --Q 11 --pot-bits 6
+  python gen_lean_chain5.py --bound 238 --keys 325 --P 7 --Q 2 --shapes 9
+  python gen_lean_chain5.py --tag R4 --bound 236 --keys 5xx --P 42 --Q 11 --pot-bits 6 --shapes 9
 """
 import argparse, os
 
@@ -186,7 +187,7 @@ end Snake9
 '''
 
 
-def bridge(T, N, nkeys):
+def bridge(T, N, nkeys, nshapes):
     data = f'WindowAutomaton5{T}Data'
     keys = f'dirKeys{T or "5"}'
     premise = f'AllRefuted{N}'
@@ -202,6 +203,9 @@ Core Lean only (imports the standard-library core modules `LocalWindowDirBridge`
 * `cover_table5` (kernel evaluation, one theorem per window length): every bit of the
   exclusion table `forbMask5{T}` that is looked up for a canonical shape of two to five
   centres belongs to one of the {nkeys} certificate keys `{keys}` (`LocalWindowDirKeys{T or "5"}.lean`).
+  Shapes outside the {nshapes} listed ones use the empty slot {nshapes} of the table
+  (`unlisted_zero`), so only listed shapes are enumerated: this keeps the kernel's term cache
+  small (a lookup shifts the whole table).
 * `window_refute5`: a window of a snake whose canonical shape and lumped counts hit a
   set bit contradicts the corresponding certificate (`refuted_dir` realises the
   first-occurrence relabelling `canon` by a coordinate permutation).
@@ -229,7 +233,17 @@ def forbBit5 (c syms : List Nat) : Bool :=
 
 theorem wforb5a_eq (ds syms : List Nat) : wforb5a{T} ds syms = forbBit5 (canon ds) syms := rfl
 
+/-- Slot {nshapes} of the table (unlisted shapes) is empty. -/
+theorem unlisted_zero : forbMask5{T} >>> ({nshapes} * 16807) = 0 := by decide +kernel
+
+theorem forbBit5_unlisted (c syms : List Nat) (h : wshapeIdx5{T} (shapeCode c) = {nshapes}) :
+    forbBit5 c syms = false := by
+  unfold forbBit5
+  rw [h, Nat.shiftRight_add, unlisted_zero, Nat.zero_shiftRight]
+  rfl
+
 def coverOK5 (c : List Nat) : Bool :=
+  wshapeIdx5{T} (shapeCode c) == {nshapes} ||
   allSyms0 (c.length - 1) (fun syms => !forbBit5 c syms || decide ((c, syms) ∈ {keys}))
 
 set_option maxRecDepth 100000 in
@@ -260,8 +274,13 @@ theorem cover5 {{c syms : List Nat}} (hc : isRGS c 0 = true)
     · exact allRGS_spec 4 0 _ cover_table5_4 c hn hc
     · exact allRGS_spec 5 0 _ cover_table5_5 c hn hc
     · exact allRGS_spec 6 0 _ cover_table5_6 c hn hc
-  have := allSyms0_spec _ _ hok syms hl hs
-  simpa [hb] using this
+  unfold coverOK5 at hok
+  rcases Bool.or_eq_true_iff.1 hok with hu | hok
+  · have hu' : wshapeIdx5{T} (shapeCode c) = {nshapes} := by simpa using hu
+    rw [forbBit5_unlisted c syms hu'] at hb
+    exact absurd hb (by decide)
+  · have := allSyms0_spec _ _ hok syms hl hs
+    simpa [hb] using this
 
 /-! ## Windows of a snake -/
 
@@ -461,6 +480,7 @@ def main():
     ap.add_argument('--P', type=int, required=True)
     ap.add_argument('--Q', type=int, required=True)
     ap.add_argument('--pot-bits', type=int, default=4)
+    ap.add_argument('--shapes', type=int, required=True, help='number of listed window shapes (wshapeIdx5 default slot)')
     ap.add_argument('--check', action='store_true', help='compare with the existing files only')
     a = ap.parse_args()
     T, N = a.tag, a.bound
@@ -472,7 +492,7 @@ def main():
     if T:
         write(os.path.join(STRONGER, f'WindowAutomaton5{T}Sequence.lean'), sequence(T, a.P, a.Q, MAXP, C), a.check)
         write(os.path.join(STRONGER, f'AggregateDirection{N}Conditional.lean'), conditional(T, N, a.keys, a.P, a.Q, C), a.check)
-    write(os.path.join(STRONGER, f'DirectionWindowBridge5{T}.lean'), bridge(T, N, a.keys), a.check)
+    write(os.path.join(STRONGER, f'DirectionWindowBridge5{T}.lean'), bridge(T, N, a.keys, a.shapes), a.check)
     write(os.path.join(STRONGER, f'AggregateDirection{N}Unconditional.lean'), unconditional(T, N, a.keys), a.check)
     write(os.path.join(STRONGER, f'UpperBound{N}.lean'), upper(T, N, a.keys), a.check)
     print(f'lambda {a.P}/{a.Q}, potential <= {MAXP}, C = {C}, bound {N}')

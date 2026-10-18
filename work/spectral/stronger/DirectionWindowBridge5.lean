@@ -9,6 +9,9 @@ Core Lean only (imports the standard-library core modules `LocalWindowDirBridge`
 * `cover_table5` (kernel evaluation, one theorem per window length): every bit of the
   exclusion table `forbMask5` that is looked up for a canonical shape of two to five
   centres belongs to one of the 325 certificate keys `dirKeys5` (`LocalWindowDirKeys5.lean`).
+  Shapes outside the 9 listed ones use the empty slot 9 of the table
+  (`unlisted_zero`), so only listed shapes are enumerated: this keeps the kernel's term cache
+  small (a lookup shifts the whole table).
 * `window_refute5`: a window of a snake whose canonical shape and lumped counts hit a
   set bit contradicts the corresponding certificate (`refuted_dir` realises the
   first-occurrence relabelling `canon` by a coordinate permutation).
@@ -36,7 +39,17 @@ def forbBit5 (c syms : List Nat) : Bool :=
 
 theorem wforb5a_eq (ds syms : List Nat) : wforb5a ds syms = forbBit5 (canon ds) syms := rfl
 
+/-- Slot 9 of the table (unlisted shapes) is empty. -/
+theorem unlisted_zero : forbMask5 >>> (9 * 16807) = 0 := by decide +kernel
+
+theorem forbBit5_unlisted (c syms : List Nat) (h : wshapeIdx5 (shapeCode c) = 9) :
+    forbBit5 c syms = false := by
+  unfold forbBit5
+  rw [h, Nat.shiftRight_add, unlisted_zero, Nat.zero_shiftRight]
+  rfl
+
 def coverOK5 (c : List Nat) : Bool :=
+  wshapeIdx5 (shapeCode c) == 9 ||
   allSyms0 (c.length - 1) (fun syms => !forbBit5 c syms || decide ((c, syms) ∈ dirKeys5))
 
 set_option maxRecDepth 100000 in
@@ -67,8 +80,13 @@ theorem cover5 {c syms : List Nat} (hc : isRGS c 0 = true)
     · exact allRGS_spec 4 0 _ cover_table5_4 c hn hc
     · exact allRGS_spec 5 0 _ cover_table5_5 c hn hc
     · exact allRGS_spec 6 0 _ cover_table5_6 c hn hc
-  have := allSyms0_spec _ _ hok syms hl hs
-  simpa [hb] using this
+  unfold coverOK5 at hok
+  rcases Bool.or_eq_true_iff.1 hok with hu | hok
+  · have hu' : wshapeIdx5 (shapeCode c) = 9 := by simpa using hu
+    rw [forbBit5_unlisted c syms hu'] at hb
+    exact absurd hb (by decide)
+  · have := allSyms0_spec _ _ hok syms hl hs
+    simpa [hb] using this
 
 /-! ## Windows of a snake -/
 

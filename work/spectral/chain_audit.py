@@ -55,6 +55,9 @@ def main():
     ap.add_argument('--log', required=True)
     ap.add_argument('--build-dir', default=str(SPECTRAL / '.verification' / 'chain'),
                     help='where the chain .olean files go')
+    ap.add_argument('--reuse', action='store_true',
+                    help='skip modules whose .olean in the build dir is newer than their source '
+                         '(development only; a clean audit recompiles everything)')
     a = ap.parse_args()
     mathlib = a.mathlib_dir.resolve()
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=mathlib, text=True).strip()
@@ -77,6 +80,10 @@ def main():
     t0 = time.time()
     for m in mods:
         shutil.copy2(src(m), build / (m + '.lean'))
+        olean = build / (m + '.olean')
+        if a.reuse and olean.exists() and olean.stat().st_mtime > src(m).stat().st_mtime:
+            out(f'{m}: reused')
+            continue
         t = time.time()
         r = subprocess.run([lake, 'env', 'lean', f'--root={build}', '-o', str(build / (m + '.olean')),
                             str(build / (m + '.lean'))], cwd=mathlib, env=env, capture_output=True, text=True)
