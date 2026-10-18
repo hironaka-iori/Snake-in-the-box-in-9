@@ -1,25 +1,25 @@
 # Collaborator handoff
 
-Checkpoint: 15 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 18 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Where the investigation stands
 
-**17 October 2026 window checkpoint.** Branch `research/window-244` contains
-kernel-checked generic geometry/counter lemmas and a normalization theorem covering
-both window shapes while preserving every singleton count. The retained cores
-have 2,327 and 18,461 RUP steps, respectively; these differ from the original
-3,744 and 24,895 LRAT steps. Complete concrete semantic checks and refutation
-checks remain in progress. `Window223Exclusion.lean` and `UpperBound244.lean`
-are integration sources awaiting their full dependencies and fresh audit; their
-existence is not a completed upper-bound theorem. Do not begin the 242 campaign
-or treat a Boolean-only success as the geometric exclusion. Current manifests,
-logs, commands and remaining obligations are described in `work/window244/PLAN.md`.
+**18 October 2026: window-244 completed.** The unconditional interval is now
+**191 <= a(9) <= 244**. Generic semantics, all concrete clauses, both complete
+refutations, both window shapes and arbitrary-index normalization passed an
+isolated source-only reconstruction (8,229 modules). Final theorem axioms are
+exactly `propext`, `Classical.choice`, `Quot.sound`. The original 191-edge witness
+and `Snake9.Snake` definition are used. The retained core steps are 2,327 and
+18,461, distinct from the original LRAT lengths. Sources are in `work/window244/`;
+final hashes and audits are in `outputs/window244/final-reproduction-manifest.json`
+and `FinalAudit.log`. Stage 2 may now begin with independent census reproduction
+and a minimal necessary forbidden-pattern set.
 
 The exact optimum is unresolved; no candidate value receives privileged status. The earlier conjecture **a(9) = 196** has low confidence. For n = 3,...,8, subtracting 3*2^(n-3) from the known maxima leaves 1,1,1,2,2,2. Continuing the correction in doubling blocks of three predicts 196. An equally exact additive-block fit predicts 195. The first eight values therefore do not determine the ninth, and interpolation supplies no geometric proof.
 
-The fully Lean-checked global interval is now **191 <= a(9) <= 245**. The strengthened square-face bound combines the incidence identity with endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. The earlier arguments still supply the weaker bounds 247, 248, 251, 254, and 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
+The earlier fully Lean-checked global interval was **191 <= a(9) <= 245**. The strengthened square-face bound combines the incidence identity with endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. The earlier arguments still supply the weaker bounds 247, 248, 251, 254, and 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
 
-The most recent completed theorem is the global upper bound 245. Normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
+The previous completed strengthening was the global upper bound 245. Normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
 
 The earlier universal two-singleton-square claim for internal vertices is false. A checked 137-edge counterexample has zero at path index 127, endpoints 145 and 288, and exactly one singleton square, {0,4,8,12}. Its distance along the path from the nearer endpoint is ten. Thus simply excluding the first few vertices near the endpoints does not repair that universal assertion. This example does not exclude a stronger statement restricted to longest paths.
 
@@ -71,7 +71,7 @@ Combining endpoint counts at least four with the internal pair sum at least four
 
 For v selected vertices and total singleton count T, a finite potential yields `3*T >= 7*v+5`. The incidence identity and `W <= v-2` give `T+35*v <= 9214`, hence `112*v <= 27637`. Therefore v<=246 and the edge count is at most245. The final theorem uses the original `Snake9.Snake` and the original checked191-edge witness. The project now has148 maintained strengthening modules.
 
-The next priorities concern improving beyond245 and finding a longer verified construction. Probes excluding adjacent counts (1,4) and two internal count-one vertices at path distance two remain uncertified observations. A checked (2,2) example prevents assuming every adjacent pair has sum at least five. The repeating count pattern (2,2,3) still meets the established local count restrictions and is a bottleneck for improving their aggregate consequence.
+The next priorities concern improving beyond244 and finding a longer verified construction. Probes excluding adjacent counts (1,4) and two internal count-one vertices at path distance two remain uncertified observations. A checked (2,2) example prevents assuming every adjacent pair has sum at least five. The repeating count pattern (2,2,3) has now been excluded by the completed window proof.
 
 ## Priority 1: find a longer construction outside the exhausted families
 
@@ -141,7 +141,7 @@ The upstream split-arm proof, radius-three forest certificate, and ball-search r
 
 The separately developed radius-five experiment now has a Lean-checked contradiction for an explicit core of 567 clauses and 252 Boolean variables, using 398 derived clauses. All 41 recorded cycle cuts and the general degree/endpoint clause rules are also checked. The complete interpretation of the concrete input clauses as geometric conditions on a snake is unfinished. See [the certificate investigation](milestones/06-radius-five/ball_certificate_investigation.md) for the evidence boundary and reproduction instructions.
 
-This work does not improve the unconditional bound 245. Its earlier conditional 250 arithmetic is retained as historical motivation, rather than a current strengthening target. The most direct numerical target remains exclusion of the singleton-count pattern (2,2,3), which would discharge the existing conditional bound 244. The Boolean-certificate method may provide an independent route to local geometric exclusions.
+This work does not improve the unconditional bound 245. Its earlier conditional 250 arithmetic is retained as historical motivation, rather than a current strengthening target. That separate investigation was not used to establish 244; the completed radius-three window proof now discharges the required (2,2,3) exclusion. The Boolean-certificate method may provide an independent route to local geometric exclusions.
 
 ## 16 October 2026 integration and organization
 
@@ -149,4 +149,4 @@ GitHub PR2 is integrated at b0a78f1. The main paper is now `paper/snake9_researc
 
 The fresh pre-DFS rebuild succeeded: 153 steps, 172 source hashes, 343 theorem axiom audits. See `milestones/05-upper-bound-245/integrated-reproduction-manifest.json`. This does not claim a new independent rebuild of every incoming DFS certificate.
 
-The (2,2,3) work is in `milestones/07-window-223/`. Both radius-three encodings have solver proofs and independent Python replay; both large Lean translations exhausted memory. Splitting their proof declarations into separately compiled modules is the next implementation step. The geometric interpretation and arbitrary-window reduction remain required before 244 can be asserted.
+The (2,2,3) work is in `milestones/07-window-223/`. The earlier monolithic translations exhausted memory; the replacement split pipeline in `work/window244/` has now checked both full refutations, the geometric interpretation, arbitrary-window normalization and the unconditional 244 theorem.

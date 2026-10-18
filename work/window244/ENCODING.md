@@ -1,6 +1,6 @@
 # Window encoding audit and semantic map
 
-Status: executable audit passed; the complete Lean semantic bridge is pending.
+Status: complete Lean semantic bridge, both exclusions and global 244 passed the final source-only audit.
 Neither this document nor a refutation of the Boolean formula proves a geometric
 exclusion by itself. Base: main commit 537513d; Lean 4.19.0.
 
@@ -65,8 +65,7 @@ either of the two window directions. Among the remaining 21 axis pairs, it is
 a singleton precisely when the opposite corner is absent. Proving this equality
 with `SquareIncidence.localAlpha` is proved by `WindowAlpha.localAlpha_corner_list`.
 `WindowNormalization.normalize_five_to_standard` preserves these counts under
-normalization. Both have passed Lean development checks; complete concrete
-instances and the final fresh-source audit remain required.
+normalization. Both, all concrete instances and the final source-only audit have passed.
 
 Boolean constants, repeated literals and tautologies are simplified by the
 encoder. Their simplification must be accounted for in the Lean instantiation;
@@ -95,8 +94,7 @@ this audit. Replay is executable evidence, not kernel verification.
 
 `WindowGeometry.lean` proves generic cycle exclusion, endpoint-count ≤2,
 positive-degree neighbour existence, missing-threshold recurrence and its four
-clause templates. The prototype was compiled against existing foundation
-objects; this is not yet a fresh source-only rebuild.
+clause templates. The final chain was reconstructed from source, including every custom foundation dependency.
 
 `check_certificates.py` independently compiles split RUP proof sources and
 records source/import/object hashes. Success is explicitly named
@@ -106,8 +104,9 @@ observed peak recorded. Lean 4.19.0 on Windows rejects its advertised `-M`
 option as an unknown `max_memory` configuration. The initial monolithic input
 module exceeded budget; input structures and input lemmas are now split too.
 
-Pending: a single parameterized assignment, family-by-family satisfaction,
-finite geometry checks, alpha/absent-corner identity, coordinate-permutation
-and reversal normalization, both geometric exclusions, global integration,
-fresh rebuild and final transitive axiom audit. The unconditional global bound
-remains 245 until these obligations are discharged.
+Completed: parameterized assignment, family-by-family satisfaction, finite
+geometry checks, alpha/absent-corner identity, both shapes under normalization,
+reversal, both exclusions, global integration, source-only reconstruction and
+final transitive axiom audit. The unconditional global upper bound is 244.
+Final records are in `outputs/window244/final-verification.json`,
+`final-reproduction-manifest.json` and `FinalAudit.log`.

@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Research checkpoint: 15 October 2026.
+Research checkpoint: 18 October 2026.
 
 | Claim | Current evidence |
 |---|---|
@@ -21,21 +21,33 @@ Research checkpoint: 15 October 2026.
 | Adjacent internal singleton-square counts cannot be 1 and 3 | Lean-checked symbolic finite-set and endpoint argument |
 | Three consecutive internal vertices cannot all have singleton-square count 2 | Lean-checked exhaustive local classification and geometric exclusions |
 | Every snake has at most 245 edges | Lean-checked aggregate consequence, with every local premise discharged |
+| Every snake has at most 244 edges | Lean-checked exclusion of internal (2,2,3), with fresh source-only reconstruction |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
 Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact proof gaps, and search limitations. The [paper](paper/snake9_research.tex) contains mathematical exposition, proofs, explicit transition sequences, and references. It deliberately keeps implementation identifiers outside the paper.
 
-### Window-244 verification in progress (17 October 2026)
+### Window-244 verification completed (18 October 2026)
 
-On `research/window-244`, the generic clause-family proofs, coordinate-permutation
-and reversal invariance of singleton counts, and normalization covering both
-five-vertex shapes have passed Lean development checks. Both existing contradiction
-certificates independently replay. Complete concrete clause and split-certificate
-checks are running, alongside an isolated source-only reconstruction. The global
-interval remains **191 <= a(9) <= 245** until the complete 244 chain and its final
-axiom audit pass. See [the verification plan](work/window244/PLAN.md) and
-[the encoding map](work/window244/ENCODING.md). Stage 2 has not started.
+The unconditional interval is **191 <= a(9) <= 244**. Theorems
+`Snake9.no_two_two_three_internal`, `Snake9.no_three_two_two_internal`,
+`Snake9.upper_bound_244` and `Snake9.verified_interval_191_244` passed an isolated
+source-only reconstruction of all 8,229 modules and the final transitive axiom
+audit. Only `propext`, `Classical.choice` and `Quot.sound` occur.
+Both shapes' 4,316 concrete clauses and 20,788 retained RUP steps are checked.
+
+With Lean 4.19.0 on PATH and pinned mathlib prepared, run:
+
+```sh
+python work/spectral/verify_strengthened.py --window244 --mathlib-dir /path/to/mathlib
+```
+
+The driver regenerates the small proof modules and compiles every custom dependency
+from source. See [the final report](work/window244/REPORT.zh-CN.md),
+[manifest](outputs/window244/final-reproduction-manifest.json),
+[axiom audit](outputs/window244/FinalAudit.log), and
+[encoding map](work/window244/ENCODING.md). Exact optimality remains unresolved.
+Stage 2 is a separate investigation.
 
 ## Repository structure
 
@@ -70,7 +82,7 @@ cd work/final_lean
 lake build
 ```
 
-This project uses Lean's standard library. Its theorem audits contain only the standard logical foundations, with no proof placeholders, custom optimality axioms, or unchecked native computation. It proves the 191-edge witness, the general singleton-square lemma, several construction and exclusion reductions, and explicit counterexamples. The mathlib-dependent [incidence and spectral project](work/spectral/README.md) proves the upper bounds 245, 247, 248, 251, 254, and 255. The strongest proof combines endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive count-two vertices. A finite potential argument gives `3*T >= 7*v+5`; the incidence identity then gives at most 245 edges. The current Lean-checked interval is **191 <= a(9) <= 245**; exact optimality remains unresolved.
+This project uses Lean's standard library. Its theorem audits contain only the standard logical foundations, with no proof placeholders, custom optimality axioms, or unchecked native computation. It proves the 191-edge witness, the general singleton-square lemma, several construction and exclusion reductions, and explicit counterexamples. The mathlib-dependent [incidence and spectral project](work/spectral/README.md) proves the upper bounds 245, 247, 248, 251, 254, and 255. The strongest proof combines endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive count-two vertices. A finite potential argument gives `3*T >= 7*v+5`; the incidence identity then gives at most 245 edges. The window exclusion described above strengthens this to **191 <= a(9) <= 244**; exact optimality remains unresolved.
 
 With the pinned mathlib checkout prepared as described in `work/spectral/README.md`, reproduce the bound 254 from the repository root:
 
@@ -161,4 +173,4 @@ Use a separate branch for each proof or experiment. Keep claims labelled as prov
 
 The separately developed radius-five experiment now has a Lean-checked contradiction for an explicit core of 567 clauses and 252 Boolean variables, using 398 derived clauses. All 41 recorded cycle cuts and the general degree/endpoint clause rules are also checked. The complete interpretation of the concrete input clauses as geometric conditions on a snake is unfinished. See [the certificate investigation](milestones/06-radius-five/ball_certificate_investigation.md) for the evidence boundary and reproduction instructions.
 
-This work does not improve the unconditional bound 245. Its earlier conditional 250 arithmetic is retained as historical motivation, rather than a current strengthening target. The most direct numerical target remains exclusion of the singleton-count pattern (2,2,3), which would discharge the existing conditional bound 244. The Boolean-certificate method may provide an independent route to local geometric exclusions.
+This separate experiment is not used in the unconditional bound 244. Its earlier conditional 250 arithmetic is retained as historical motivation. The completed radius-three window proof described above supplies the (2,2,3) exclusion.

@@ -36,7 +36,7 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ be the maximum number of edges in an induced path of the nine-dimensional binary hypercube. We establish the interval $191\le a(9)\le245$. The lower bound is the published construction of Orland et al., reproduced here as an explicit transition sequence. For the upper bound, we count coordinate squares meeting a path at exactly one vertex. A square-incidence identity converts lower bounds on these singleton counts into upper bounds on path length. We prove endpoint and adjacent-vertex restrictions, and exclude three consecutive internal vertices with singleton counts $2,2,2$. A finite potential argument then yields the bound 245. The construction and the unconditional upper bound have been checked in Lean under the same induced-path definition; the longest local classification is presented as a proof outline. We also give an endpoint-maximality counterexample, exact conditions for joining paths in two layers, and explicit compatible paths of lengths 96 and 94. Restricted construction searches and a numerical conjecture are distinguished from the proved bounds. A further potential argument gives a conditional upper bound of 244 if the local pattern $2,2,3$ can be excluded. The exact value of $a(9)$ remains unresolved.
+Let $a(9)$ be the maximum number of edges in an induced path of the nine-dimensional binary hypercube. We establish the interval $191\le a(9)\le244$. The lower bound is the published construction of Orland et al., reproduced here as an explicit transition sequence. For the upper bound, we count coordinate squares meeting a path at exactly one vertex. A square-incidence identity converts lower bounds on these singleton counts into upper bounds on path length. We prove endpoint and adjacent-vertex restrictions, and exclude three consecutive internal vertices with singleton counts $2,2,2$. A finite potential argument then yields the bound 245. The construction and the unconditional upper bound have been checked in Lean under the same induced-path definition; the longest local classification is presented as a proof outline. We also give an endpoint-maximality counterexample, exact conditions for joining paths in two layers, and explicit compatible paths of lengths 96 and 94. Restricted construction searches and a numerical conjecture are distinguished from the proved bounds. We exclude the additional internal pattern $2,2,3$ by two kernel-checked finite refutations and a geometric semantic bridge; a stronger potential argument then gives the unconditional bound 244. The exact value of $a(9)$ remains unresolved.
 \end{abstract}
 \clearpage
 \setcounter{tocdepth}{1}
@@ -67,12 +67,12 @@ Orland et al. supply 191-edge snakes in dimension nine and a public collection o
 \begin{theorem}[Main result]\label{thm:main}
 The maximum length of an induced path in $\Q_9$ satisfies
 \[
-\boxed{191\le a(9)\le245.}
+\boxed{191\le a(9)\le244.}
 \]
 \end{theorem}
-The lower bound is verified from an explicit published sequence in Theorem~\ref{thm:lower}. The upper bound is proved in Theorem~\ref{thm:upper245}. Its main ingredients are the positivity of every singleton-square count, an endpoint count of at least four, the exclusion of adjacent internal counts $(1,1)$, $(1,2)$ and $(1,3)$, and the exclusion of three consecutive internal counts $(2,2,2)$. The earlier bounds 254, 251, 248 and 247 appear as intermediate consequences of the same counting identity.
+The lower bound is verified from an explicit published sequence in Theorem~\ref{thm:lower}. The upper bound follows from Theorem~\ref{thm:upper244}. Its main ingredients are the positivity of every singleton-square count, an endpoint count of at least four, the exclusion of adjacent internal counts $(1,1)$, $(1,2)$ and $(1,3)$, and the exclusions of consecutive internal counts $(2,2,2)$ and $(2,2,3)$. The earlier bounds 254, 251, 248, 247 and 245 appear as intermediate consequences of the same counting identity.
 
-The exposition separates three kinds of evidence. Explicit constructions and the upper-bound theorems are formally verified. The longest finite classification is described as a proof outline, with its precise counting definitions included. Solver outcomes are reported only for their stated restricted search spaces and are not premises of the upper-bound proof. The conjectured value 196 arises from a separate numerical extrapolation and has no privileged role in the main theorem.
+The exposition separates three kinds of evidence. Explicit constructions and the upper-bound theorems are formally verified. The longest finite classification is described as a proof outline, with its precise counting definitions included. Uncertified solver outcomes are reported only for their stated restricted search spaces. The finite refutations used for the upper bound are independently checked in the Lean kernel, together with their geometric interpretation. The conjectured value 196 arises from a separate numerical extrapolation and has no privileged role in the main theorem.
 
 \section{Exact targets for an optimality proof}
 \begin{lemma}[Prefix restriction]\label{lem:prefix}
@@ -970,7 +970,7 @@ At radius four, a forest exists with interior endpoint budget two. At radius fiv
 
 A Boolean encoding of the radius-five, budget-two model records the exact cycle cuts. Removing irrelevant clauses and replacing auxiliary counters by direct restrictions on triples of endpoint indicators gives a 567-clause core involving 252 Boolean variables. Its certificate consists of 398 derived clauses obtained by reverse unit propagation: assume the negation of the proposed clause, propagate the cited clauses, and obtain a contradiction. The resulting Boolean contradiction has been independently machine-checked through ordinary logical proof steps. This certifies the explicit formula; no geometric exclusion is asserted without the remaining interpretation proof.
 
-The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the interval $191\le a(9)\le245$.
+The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the interval $191\le a(9)\le244$.
 
 \subsection{An auxiliary conditional singleton estimate}
 \begin{proposition}[Conditional estimate from a singleton surplus]
@@ -983,7 +983,7 @@ The checked incidence identity, $E\ge0$, and $W\le v-2$ give
 \]
 Substituting $T\ge2v-92$ yields $148v\le37\,224$. Since $148\cdot252=37\,296$, it follows that $v\le251$ and hence $v-1\le250$. The arithmetic implication has been independently machine-checked; its new aggregate premise remains unproved.
 \end{proof}
-A Hamming ball of radius two in $\Q_9$ contains $1+9+\binom92=46$ vertices. Thus, if every vertex with exactly one singleton square were proved to lie within distance two of an endpoint, at most 92 vertices could be exceptional. Lemma~\ref{lem:one-square} would then suggest the required aggregate inequality: nonexceptional vertices contribute at least two singleton incidences and exceptional vertices at least one. The endpoint statement and its checked aggregation remain open. This conditional estimate is weaker than the unconditional bound 245 proved above. It records the quantitative consequence originally motivating the endpoint-proximity investigation.
+A Hamming ball of radius two in $\Q_9$ contains $1+9+\binom92=46$ vertices. Thus, if every vertex with exactly one singleton square were proved to lie within distance two of an endpoint, at most 92 vertices could be exceptional. Lemma~\ref{lem:one-square} would then suggest the required aggregate inequality: nonexceptional vertices contribute at least two singleton incidences and exceptional vertices at least one. The endpoint statement and its checked aggregation remain open. This conditional estimate is weaker than the unconditional bound 244 proved here. It records the quantitative consequence originally motivating the endpoint-proximity investigation.
 
 \section{Formal verification and further questions}
 \subsection{Verification of the mathematical statements}
@@ -991,8 +991,8 @@ The explicit 191-edge construction, prefix restriction, singleton-square inciden
 
 Formal verification and computational search serve different purposes here. The finite geometric case analysis is discharged by checked proof terms. The restricted infeasibility reports in the search section are experimental evidence and have not been converted into independently checked impossibility certificates. The 191-edge witness is a published construction; the elementary finite verification procedure in Appendix~\ref{app:finite-check} also allows its defining conditions to be checked directly from the sequence printed here.
 
-\subsection{A conditional strengthening}
-The next proposition isolates a sufficient additional local restriction. It is a conditional result, not an improvement of the unconditional bound in Theorem~\ref{thm:main}.
+\subsection{The potential estimate for the bound 244}
+The next proposition gives the arithmetic implication used after the local exclusion proved below.
 
 \begin{proposition}[Conditional upper bound of 244]\label{prop:conditional244}
 If no snake in $\Q_9$ contains three consecutive internal vertices with singleton-square counts $(2,2,3)$, then every snake in $\Q_9$ has at most 244 edges.
@@ -1016,12 +1016,37 @@ Both endpoint counts are at least four, so $R_0=R_{v-1}=0$ and $2\alpha_0\ge8$. 
 The incidence estimate gives $T+35v\le9214$. Therefore $75v+3\le18428$, or $75v\le18425<75\cdot246$. Thus $v\le245$ and the edge count is at most 244. The zero-edge case is immediate.
 \end{proof}
 
-The sequence inequality and its conditional numerical consequence have also been checked in Lean. The exclusion of $(2,2,3)$ is not established here. Even such an exclusion would leave a gap between the upper bound and the known construction.
+The sequence inequality and its numerical consequence have been checked in Lean. We now discharge its geometric premise. The resulting bound still leaves a gap above the known construction.
 
-\subsection{Local experiments on the pattern $(2,2,3)$}
+\subsection{Excluding the pattern $(2,2,3)$}
 A five-vertex induced window has, up to translation and permutation of coordinates, transition sequence $(0,1,2,0)$ or $(0,1,2,3)$. Around its three internal vertices, consider the union of Hamming balls of radius $r$. Require the five window vertices to be selected, selected degree at most two, and degree at least one wherever all nine neighbors are represented. Permit at most two degree-one vertices in this interior, and exclude selected cycles. At each center, its two prescribed neighbors leave 21 eligible opposite square corners; exactly $\alpha$ of these must be absent when its singleton count is $\alpha$.
 
-For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. Generic geometric and counter implications, invariance of singleton counts under cube automorphisms and path reversal, and normalization covering both five-vertex shapes have now been checked in Lean. The complete concrete encodings and contradiction certificates are being checked in small modules after single-file translations exceeded available memory. Until their assembly and an independent reconstruction of the full proof succeed, the geometric premise of Proposition~\ref{prop:conditional244} remains unproved, and the unconditional bound remains 245.
+For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. Radius three suffices for exclusion. The finite proofs below certify the larger local model, so they apply to every full snake whose restriction gives such a local assignment.
+
+\begin{theorem}[Three-center exclusion]\label{thm:no223}
+No snake in $\Q_9$ has three consecutive internal vertices with singleton-square counts $(2,2,3)$ or $(3,2,2)$.
+\end{theorem}
+\begin{proof}[Computer-assisted proof]
+Write the five consecutive vertices surrounding the three centers as a window. Translate one vertex to zero and permute coordinates. The first three transition coordinates are distinct: repeating a coordinate immediately revisits a vertex, while a two-step repetition creates a chord. The fourth coordinate can repeat the first or be new. Thus the window becomes $(0,1,3,7,6)$ or $(0,1,3,7,15)$, where integers encode binary vertices. Translation and coordinate permutation preserve squares and path membership, and hence preserve every singleton count.
+
+For either shape take the union of the radius-three balls about the centers $1,3,7$. Assign a Boolean variable to membership of each represented vertex in the whole snake. Assign endpoint indicators according to whether a selected vertex has at most one selected neighbor. At vertices whose nine neighbors are represented, a selected vertex has positive degree, because the window ensures a nontrivial path. Every selected vertex has degree at most two. There are at most two selected vertices of degree one, so the corresponding prefix counters never exceed two. A nonempty finite vertex set in which every vertex has two distinct neighbors within the set cannot be contained in a path; this justifies all recorded cycle cuts.
+
+At each center its two prescribed neighbors saturate its possible selected degree. Its other seven coordinate neighbors are absent. A singleton square therefore uses two of those seven directions and is a singleton exactly when its opposite corner is absent. Consequently the singleton count is the number of missing corners among the $\binom72=21$ eligible pairs. Auxiliary threshold variables mean that at least a specified number of these corners are absent in a prefix. Their recurrence and the exact-count clauses are proved from this assignment. These arguments establish each clause family uniformly; all concrete coordinate facts and the correspondence to the numbered clauses are checked by kernel reduction.
+
+For the repeated-coordinate shape, a retained core has 1,588 clauses and a contradiction proof with 2,327 reverse-unit-propagation steps. For the distinct-coordinate shape the corresponding figures are 2,728 clauses and 18,461 steps. Every propagation step is checked in Lean against previously established clauses; each proof ends with the empty clause. Thus neither standard shape can realize $(2,2,3)$. Applying the proved normalization gives the exclusion for arbitrary internal indices. Reversing the path preserves singleton counts and excludes $(3,2,2)$ as well. No unverified solver result is a premise of this argument.
+\end{proof}
+
+\begin{theorem}[Verified upper bound 244]\label{thm:upper244}
+Every snake in $\Q_9$ has at most 244 edges. In particular,
+\[
+191\le a(9)\le244.
+\]
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:no223} supplies the premise of Proposition~\ref{prop:conditional244}. That proposition gives the upper bound for every path length, and the explicit 191-edge witness gives the lower bound.
+\end{proof}
+
+The complete geometric interpretation, both finite refutations, normalization, and final theorem have passed a source-only reconstruction in Lean 4.19.0. Their transitive logical dependencies are only propositional extensionality, classical choice and quotient soundness. The proof does not assume a census of longest snakes or an optimality claim.
 
 \subsection{A limitation of uniform singleton-density estimates}
 The published bank includes a 192-vertex snake for which independent counting gives $T=1632$. This particular census has been checked in Python; its complete connection to the Lean incidence development remains to be checked. It implies that any valid uniform estimate $T\ge cv$ has $c\le17/2$.
@@ -1059,7 +1084,7 @@ The integer-weight version, obtained by clearing a common denominator, has been 
 For example, suppose five distinct candidate vertices $u_0,\ldots,u_4$ yield demands $G_i=\{u_i,u_{i+1}\}$, with subscripts taken modulo five. Giving each demand weight $1/2$ satisfies the per-vertex condition, but the total weight is $5/2$, a contradiction. No three of these pairs are disjoint, so a test limited to three disjoint endpoint demands would miss this obstruction. The five-pair contradiction is also checked independently in Lean. Identifying a forced occurrence of this arrangement, or another weighted obstruction, in low-singleton geometry is an open research direction. The counting principle is standard; no claim of historical novelty is made for it.
 
 \subsection{The exact optimum}
-The unconditional conclusion remains $191\le a(9)\le245$. No 192-edge construction or universal exclusion of length 192 has been obtained. A solution requires a length $L$ for which both an explicit snake and an exclusion of length $L+1$ are established; the prefix argument then excludes all longer paths. Conjecture~\ref{conj:196} would require a 196-edge construction and an exclusion of length 197, but the proved bounds do not single out that value. Further progress may come from stronger restrictions on singleton counts or from constructions outside the tested families.
+The unconditional conclusion is $191\le a(9)\le244$. No 192-edge construction or universal exclusion of length 192 has been obtained. A solution requires a length $L$ for which both an explicit snake and an exclusion of length $L+1$ are established; the prefix argument then excludes all longer paths. Conjecture~\ref{conj:196} would require a 196-edge construction and an exclusion of length 197, but the proved bounds do not single out that value. Further progress may come from stronger restrictions on singleton counts or from constructions outside the tested families.
 
 \appendix
 \section{Explicit transition sequences and blockers}\label{app:witness}

@@ -1,5 +1,16 @@
 # Scope of this archived ledger
 
+## 18 October 2026: unconditional 244 verified
+
+The source-only reconstruction completed at 00:48 UTC (08:48 Shanghai), status
+`SUCCESS_191_244`. All 8,229 modules passed; 9,103 source hashes and the saved
+object/log hashes were rechecked. All four final target audits contain only
+`propext`, `Classical.choice`, `Quot.sound`. Both retained refutations and all
+4,316 concrete input clauses are included. The global interval is now 191..244.
+Final evidence: `outputs/window244/final-verification.json`,
+`final-reproduction-manifest.json`, `FinalAudit.log`. Stage 2 remains separate.
+
+
 ## 17 October 2026: window-244 proof engineering checkpoint
 
 - **Lean checked, development build:** generic geometric and counter clause
@@ -19,7 +30,7 @@
 
 ## Earlier ledger
 
-Entries below are chronological development history. The current unconditional bound is 245; 244 remains conditional. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
+Entries below are chronological development history. The current unconditional bound is 244; older conditional and pending statements describe their dated checkpoints. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
 
 # Research ledger — 15 October 2026
 

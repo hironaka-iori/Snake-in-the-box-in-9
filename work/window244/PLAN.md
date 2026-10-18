@@ -1,8 +1,31 @@
 # Unconditional 244 project
 
 Branch: `research/window-244`, created from main `537513d`.
-The checked global interval remains **191..245**. Stage 2 is gated on the full
-Stage-1 theorem, fresh source rebuild and transitive axiom audit.
+The checked global interval is **191..244**. Stage 1 completed on 18 October 2026.
+Stage 2 may now begin; it is not part of this completed verification.
+
+## Final verification
+
+- `Snake9.no_two_two_three_internal` and `Snake9.no_three_two_two_internal`:
+  `Window223Exclusion.lean`.
+- `Snake9.upper_bound_244` and `Snake9.verified_interval_191_244`:
+  `UpperBound244.lean`.
+- Source-only build: **SUCCESS_191_244**, completed 2026-10-18 00:48 UTC.
+  All 8,229 modules passed; all 9,103 source hashes and saved object/log hashes
+  were rechecked. The final target axioms are only `propext`, `Classical.choice`,
+  `Quot.sound`. Peak externally observed memory for the new modules was about
+  1,716 MiB, within the 1,800 MiB monitoring budget.
+- Versioned evidence: `outputs/window244/final-verification.json`,
+  `final-reproduction-manifest.json`, `FinalAudit.log`, `source-build-logs.tar.gz`.
+- The driver regenerates every emitted Lean source from preserved inputs;
+  generated source hashes are in the manifest. No custom development objects
+  are copied into the final build.
+- No Stage-1 proof obligations remain. Exact optimality and Stage 2 remain open.
+
+## Historical development checkpoints
+
+The entries below describe development stages before the final audit. Their
+pending/running statements are historical, not current status.
 
 ## Completed checkpoint
 
