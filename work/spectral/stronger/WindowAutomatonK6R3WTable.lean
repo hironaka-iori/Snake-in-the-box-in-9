@@ -70,7 +70,7 @@ theorem checkK6R3W_of_rgs (c : List Nat) (hc : c.length = 8) (hr : isRGS c 0 = t
       have hall := shapesK6R3W_ok
       simp only [List.all_eq_true, Bool.and_eq_true, beq_iff_eq, decide_eq_true_eq] at hall
       exact hall s hs
-    have hpre : (c.take 7).length = 7 := by simp [hc]
+    have hpre : (c.take 7).length = 7 := by rw [List.length_take, hc]; decide
     have hr7 : isRGS (c.take 7) 0 = true :=
       isRGS_append _ _ _ (by rw [List.take_append_drop]; exact hr)
     have hb7 : ∀ a, a ∈ c.take 7 → a < 8 := fun a ha => by

@@ -701,7 +701,7 @@ theorem check{S}_of_rgs (c : List Nat) (hc : c.length = {L + 1}) (hr : isRGS c 0
       have hall := shapes{S}_ok
       simp only [List.all_eq_true, Bool.and_eq_true, beq_iff_eq, decide_eq_true_eq] at hall
       exact hall s hs
-    have hpre : (c.take {L}).length = {L} := by simp [hc]
+    have hpre : (c.take {L}).length = {L} := by rw [List.length_take, hc]; decide
     have hr7 : isRGS (c.take {L}) 0 = true :=
       isRGS_append _ _ _ (by rw [List.take_append_drop]; exact hr)
     have hb7 : ∀ a, a ∈ c.take {L} → a < 8 := fun a ha => by
