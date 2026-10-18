@@ -1,0 +1,63 @@
+import RegrowthParityCounts
+namespace Snake9.Regrowth.E112232
+open Dfs
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+set_option exponentiation.threshold 600
+def pre : Array Nat := #[0, 1, 3, 7, 15, 13, 29, 28, 20, 22, 18, 26, 27, 155, 411, 410, 402, 406, 404, 412, 413, 397, 399, 391, 387, 385, 384, 392, 136, 168, 172, 173, 175, 167, 163, 179, 243, 247, 245, 253, 249, 233, 235, 234, 238, 230, 228, 224, 480, 481, 483, 487, 495, 493, 492, 508, 500, 502, 498, 506, 507, 379, 315, 314, 306, 310, 308, 316, 317, 301, 303, 295, 291, 289, 288, 296, 360, 328, 332, 333, 335, 327, 323, 339, 83, 87, 85, 69, 68, 70, 78, 74, 75, 73, 89, 88, 80, 336, 272, 280, 281, 265, 267, 266, 258, 262, 260, 261, 277, 279, 287, 286]
+def region : List Vertex := [(34 : Vertex), (36 : Vertex), (37 : Vertex), (38 : Vertex), (41 : Vertex), (42 : Vertex), (43 : Vertex), (46 : Vertex), (48 : Vertex), (49 : Vertex), (53 : Vertex), (55 : Vertex), (56 : Vertex), (57 : Vertex), (62 : Vertex), (63 : Vertex), (97 : Vertex), (98 : Vertex), (99 : Vertex), (103 : Vertex), (108 : Vertex), (109 : Vertex), (111 : Vertex), (113 : Vertex), (114 : Vertex), (116 : Vertex), (118 : Vertex), (122 : Vertex), (124 : Vertex), (126 : Vertex), (127 : Vertex), (130 : Vertex), (132 : Vertex), (133 : Vertex), (134 : Vertex), (142 : Vertex), (144 : Vertex), (145 : Vertex), (149 : Vertex), (151 : Vertex), (158 : Vertex), (176 : Vertex), (180 : Vertex), (182 : Vertex), (186 : Vertex), (190 : Vertex), (193 : Vertex), (194 : Vertex), (195 : Vertex), (199 : Vertex), (204 : Vertex), (205 : Vertex), (207 : Vertex), (209 : Vertex), (210 : Vertex), (212 : Vertex), (214 : Vertex), (218 : Vertex), (220 : Vertex), (222 : Vertex), (223 : Vertex), (286 : Vertex), (342 : Vertex), (346 : Vertex), (350 : Vertex), (354 : Vertex), (356 : Vertex), (357 : Vertex), (358 : Vertex), (366 : Vertex), (369 : Vertex), (373 : Vertex), (375 : Vertex), (382 : Vertex), (418 : Vertex), (420 : Vertex), (421 : Vertex), (422 : Vertex), (425 : Vertex), (426 : Vertex), (427 : Vertex), (430 : Vertex), (432 : Vertex), (433 : Vertex), (437 : Vertex), (439 : Vertex), (440 : Vertex), (441 : Vertex), (446 : Vertex), (447 : Vertex), (450 : Vertex), (452 : Vertex), (453 : Vertex), (454 : Vertex), (457 : Vertex), (458 : Vertex), (459 : Vertex), (462 : Vertex), (465 : Vertex), (469 : Vertex), (471 : Vertex), (472 : Vertex), (473 : Vertex), (478 : Vertex), (479 : Vertex)]
+def oddSide : List Vertex := [(37 : Vertex), (38 : Vertex), (41 : Vertex), (42 : Vertex), (49 : Vertex), (55 : Vertex), (56 : Vertex), (62 : Vertex), (97 : Vertex), (98 : Vertex), (103 : Vertex), (109 : Vertex), (118 : Vertex), (122 : Vertex), (124 : Vertex), (127 : Vertex), (133 : Vertex), (134 : Vertex), (145 : Vertex), (151 : Vertex), (158 : Vertex), (176 : Vertex), (182 : Vertex), (186 : Vertex), (193 : Vertex), (194 : Vertex), (199 : Vertex), (205 : Vertex), (214 : Vertex), (218 : Vertex), (220 : Vertex), (223 : Vertex), (286 : Vertex), (342 : Vertex), (346 : Vertex), (357 : Vertex), (358 : Vertex), (369 : Vertex), (375 : Vertex), (382 : Vertex), (421 : Vertex), (422 : Vertex), (425 : Vertex), (426 : Vertex), (433 : Vertex), (439 : Vertex), (440 : Vertex), (446 : Vertex), (453 : Vertex), (454 : Vertex), (457 : Vertex), (458 : Vertex), (465 : Vertex), (471 : Vertex), (472 : Vertex), (478 : Vertex)]
+def evenSide : List Vertex := [(34 : Vertex), (36 : Vertex), (43 : Vertex), (46 : Vertex), (48 : Vertex), (53 : Vertex), (57 : Vertex), (63 : Vertex), (99 : Vertex), (108 : Vertex), (111 : Vertex), (113 : Vertex), (114 : Vertex), (116 : Vertex), (126 : Vertex), (130 : Vertex), (132 : Vertex), (142 : Vertex), (144 : Vertex), (149 : Vertex), (180 : Vertex), (190 : Vertex), (195 : Vertex), (204 : Vertex), (207 : Vertex), (209 : Vertex), (210 : Vertex), (212 : Vertex), (222 : Vertex), (350 : Vertex), (354 : Vertex), (356 : Vertex), (366 : Vertex), (373 : Vertex), (418 : Vertex), (420 : Vertex), (427 : Vertex), (430 : Vertex), (432 : Vertex), (437 : Vertex), (441 : Vertex), (447 : Vertex), (450 : Vertex), (452 : Vertex), (459 : Vertex), (462 : Vertex), (469 : Vertex), (473 : Vertex), (479 : Vertex)]
+def others : List Vertex := [(34 : Vertex), (36 : Vertex), (37 : Vertex), (38 : Vertex), (41 : Vertex), (42 : Vertex), (43 : Vertex), (46 : Vertex), (48 : Vertex), (49 : Vertex), (53 : Vertex), (55 : Vertex), (56 : Vertex), (57 : Vertex), (62 : Vertex), (63 : Vertex), (97 : Vertex), (98 : Vertex), (99 : Vertex), (103 : Vertex), (108 : Vertex), (109 : Vertex), (111 : Vertex), (113 : Vertex), (114 : Vertex), (116 : Vertex), (118 : Vertex), (122 : Vertex), (124 : Vertex), (126 : Vertex), (127 : Vertex), (130 : Vertex), (132 : Vertex), (133 : Vertex), (134 : Vertex), (142 : Vertex), (144 : Vertex), (145 : Vertex), (149 : Vertex), (151 : Vertex), (158 : Vertex), (176 : Vertex), (180 : Vertex), (182 : Vertex), (186 : Vertex), (190 : Vertex), (193 : Vertex), (194 : Vertex), (195 : Vertex), (199 : Vertex), (204 : Vertex), (205 : Vertex), (207 : Vertex), (209 : Vertex), (210 : Vertex), (212 : Vertex), (214 : Vertex), (218 : Vertex), (220 : Vertex), (222 : Vertex), (223 : Vertex), (342 : Vertex), (346 : Vertex), (350 : Vertex), (354 : Vertex), (356 : Vertex), (357 : Vertex), (358 : Vertex), (366 : Vertex), (369 : Vertex), (373 : Vertex), (375 : Vertex), (382 : Vertex), (418 : Vertex), (420 : Vertex), (421 : Vertex), (422 : Vertex), (425 : Vertex), (426 : Vertex), (427 : Vertex), (430 : Vertex), (432 : Vertex), (433 : Vertex), (437 : Vertex), (439 : Vertex), (440 : Vertex), (441 : Vertex), (446 : Vertex), (447 : Vertex), (450 : Vertex), (452 : Vertex), (453 : Vertex), (454 : Vertex), (457 : Vertex), (458 : Vertex), (459 : Vertex), (462 : Vertex), (465 : Vertex), (469 : Vertex), (471 : Vertex), (472 : Vertex), (473 : Vertex), (478 : Vertex), (479 : Vertex)]
+def head : Vertex := 286
+def ban : Nat := 13407807927556971373001677897059831919999204154309352559773585850268135483665013933596880956791008735492038011166607091798101318390866726701216020876492799
+def reachable : Nat := 2385625726572347101146014207480161666283040817949975593453628546408533043204993341375894692197993847019878959055652564421079843245217628129591296
+theorem ban_eq : banFrom (fun i => pre[i]!) 111 = ban := by decide
+theorem head_eq : pre[111]! = head.val := by decide
+theorem region_closed : expand reachable &&& freeOf ban = reachable := by decide
+theorem region_start : ∀ y : Fin 512,
+    (expand (2^head.val) &&& freeOf ban).testBit y.val = true →
+    reachable.testBit y.val = true := by decide
+theorem region_mem : ∀ v : Vertex,
+    v = head ∨ reachable.testBit v.val = true → v ∈ region := by decide
+theorem odd_mem : ∀ v : Vertex, v ∈ region → bitParity v.val = true → v ∈ oddSide := by decide
+theorem even_mem : ∀ v : Vertex, v ∈ region → bitParity v.val = false → v ∈ evenSide := by decide
+theorem others_mem : ∀ v : Vertex, v ∈ region → v ≠ head → v ∈ others := by decide
+theorem others_nodup : others.Nodup := by decide
+theorem head_not_others : head ∉ others := by decide
+theorem oddSide_length : oddSide.length = 56 := by decide
+theorem evenSide_length : evenSide.length = 49 := by decide
+
+theorem suffix_head (p : Snake 192) (hp : StartsWith p pre 112) :
+    (suffix p).vertex 0 = head := by
+  apply Fin.ext
+  exact (hp 111 (by decide) (by decide)).trans head_eq
+
+theorem suffix_covered (p : Snake 192) (hp : StartsWith p pre 112) :
+    ∀ v, InPath (suffix p) v → v ∈ region := by
+  have hb : banFrom (vals p) 111 = ban := by
+    rw [← ban_eq]
+    apply banFrom_congr
+    intro i hi
+    have hi' : i < 193 := by omega
+    simpa only [vals, dif_pos hi'] using hp i (by omega) hi'
+  have hh : vals p 111 = head.val := by
+    exact congrArg Fin.val (suffix_head p hp)
+  have hv := tail_valid p 81 111 (by decide)
+  rw [hb,hh] at hv
+  intro v hsel
+  obtain ⟨i,rfl⟩ := hsel
+  apply region_mem
+  by_cases hi : i.val = 0
+  · left
+    have he : i = 0 := Fin.ext hi
+    rw [he]
+    exact suffix_head p hp
+  · right
+    apply hv.in_region region_closed region_start (Or.inl rfl) (fun _ h => h)
+    apply List.mem_map.mpr
+    refine ⟨i.val-1,List.mem_range.mpr (by omega),?_⟩
+    have he : 111+1+(i.val-1) = 111+i.val := by omega
+    simp only [he,vals,dif_pos (show 111+i.val < 193 by omega),suffix]
+
+end Snake9.Regrowth.E112232

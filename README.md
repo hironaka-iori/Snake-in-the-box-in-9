@@ -22,6 +22,9 @@ Research checkpoint: 16 October 2026.
 | Three consecutive internal vertices cannot all have singleton-square count 2 | Lean-checked exhaustive local classification and geometric exclusions |
 | Every snake has at most 245 edges | Lean-checked aggregate consequence, with every local premise discharged |
 | The repeated-coordinate radius-three (2,2,3) Boolean core is inconsistent | Lean-checked in 61 modules; complete geometric interpretation remains open |
+| At most 242, resp. 241, edges if five, resp. six, local count-window patterns are excluded | Lean-checked conditional theorems (fresh 156-step reproduction); each window exclusion has a DRAT-checked certificate for a local CNF, not yet a Lean proof |
+| At most 239 edges if 145 direction-aware count-window patterns are excluded | Lean-checked conditional theorem (kernel-checked 2592-state potential); every pattern has a DRAT-checked certificate, not yet a Lean proof |
+| At most 238 edges if 325 five-center window patterns are excluded | Lean-checked conditional theorem (44,064-state potential, kernel-checked in 34 shards); every pattern DRAT-certified |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
@@ -143,9 +146,17 @@ sh work/run_lean_certificates.sh 160v2 3
 The runner builds three shards at a time, because each kernel check holds its memory until the process exits.
 
 
+## Window exclusions and conditional bounds 242 and 241
+
+The current potential argument stops at 245 because count sequences repeating `2,2,3` average 7/3. A radius-three local ball model was surveyed for every count triple with entries 1..6. The survey gives an aggregate ceiling of 14/5 for three-vertex windows. One additional four-vertex exclusion, (2,4,2,3), raises it to 3.
+
+The needed exclusions are (2,2,3), (2,2,4), (2,3,2), (3,2,3), (4,1,4..6), and (2,4,2,3), with reversals and every window shape. Each has a CNF certificate verified by `drat-trim`. `AggregateWindowConditional.lean` proves in Lean that these premises imply at most 242 and 241 edges respectively. The premises themselves are **not** Lean theorems. The geometric bridge from a snake to the local CNF is not formalized, so the unconditional bound is still 245. See [the milestone](milestones/10-window-aggregate/README.md).
+
+A direction-aware automaton goes further: states remember the shape of the last six transition directions and the last three counts, and a counterexample-guided refinement loop raises the average to 10/3 with 145 solver-refuted windows (each DRAT-verified). The kernel checks the resulting 2592-state potential in about a minute, and `upper_239_of_direction_windows` gives **239 edges** under that premise. With five-centre windows and seven directions of memory the same loop reaches average 7/2 with 325 certified windows, and `upper_238_of_direction_windows5` gives **238 edges**; its 44,064-state table is kernel-checked in 34 shards.
+
 ## Collaboration
 
-Use a separate branch for each proof or experiment. Keep claims labelled as proved, conditional, computationally observed, or conjectured. Include transition sequences for every proposed longer snake and verify all unordered vertex pairs. Record solver parameters, seed, time limit, and termination status. Submit changes through pull requests so collaborators can review the mathematical scope as well as the code.
+Use a separate branch for each proof or experiment. Keep claims labeled as proved, conditional, computationally observed, or conjectured. Include transition sequences for every proposed longer snake and verify all unordered vertex pairs. Record solver parameters, seed, time limit, and termination status. Submit changes through pull requests so collaborators can review the mathematical scope as well as the code.
 
 ## Integrated Boolean certificate investigation
 

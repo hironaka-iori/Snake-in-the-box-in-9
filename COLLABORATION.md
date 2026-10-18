@@ -68,6 +68,24 @@ For v selected vertices and total singleton count T, a finite potential yields `
 
 The next priorities concern improving beyond245 and finding a longer verified construction. Probes excluding adjacent counts (1,4) and two internal count-one vertices at path distance two remain uncertified observations. A checked (2,2) example prevents assuming every adjacent pair has sum at least five. The repeating count pattern (2,2,3) still meets the established local count restrictions and is a bottleneck for improving their aggregate consequence.
 
+## Latest aggregate work: window exclusions (17 October 2026)
+
+`milestones/10-window-aggregate/` addresses "Priority 2" below. Because `alpha >= 2` fails universally, it bounds how often low counts can occur, via local window exclusions rather than a pointwise bound.
+
+- The radius-three local model allows only 144 of the 216 count triples in 1..6. The resulting aggregate ceiling is mean 14/5, versus 7/3 from the proved premises.
+- With (2,2,3), (2,2,4), (2,3,2), (3,2,3), and (4,1,4..6) excluded, the Lean theorem `upper_242_of_certified_windows` gives 242 edges. A fresh 156-step source-only reproduction, in `outputs/strengthened-window-reproduction-*`, also re-proved 245.
+- Also excluding (2,4,2,3), the theorem `upper_241_of_certified_windows` gives 241 edges.
+- All 22 premise cases have `drat-trim`-verified refutations of explicit CNFs, and 532 real-snake windows pass as positive controls.
+
+- A direction-aware automaton (last six transition directions up to relabelling, last three counts; 2592 states) refined against the SAT oracle reaches mean 10/3 with 145 certified windows. `upper_239_of_direction_windows` gives **239 edges**; the potential table is kernel-checked and the parity bridge from `Snake9.Snake` is proved. With five-centre windows the same loop reaches 7/2 with 325 certified windows and `upper_238_of_direction_windows5` gives **238 edges** (44,064 states, kernel-checked in 34 shards).
+
+Remaining work to make 241, 239 or 238 unconditional:
+
+1. Formalize the normalization of an arbitrary snake window to the canonical local CNF. This is the same bridge needed for the earlier (2,2,3) certificates.
+2. Replay the refutations in Lean, in chunks or with a verified checker.
+
+Untested four-vertex windows were counted as feasible, radius four was not used, and the empty-square term `s0` is still discarded. 241 is therefore not the limit of this method.
+
 ## Priority 1: find a longer construction outside the exhausted families
 
 A verified 192-edge example would immediately disprove the candidate optimum 191. A 196-edge example would establish the conjectured lower bound, but still would not prove optimality.

@@ -13,7 +13,7 @@ Lean checker uses.  Shards are balanced so that `lake build` checks them in para
   python3 work/build_lean_certificates.py --keep 160 --shards 4
   cd work/final_lean && lake build DfsBankCert160
 """
-import argparse, json, re, subprocess
+import argparse, json, os, re, subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -27,6 +27,8 @@ ap.add_argument('--split', type=int, default=300)
 ap.add_argument('--v2', action='store_true',
                 help='use search2 (parity + leaf-peeling bound) with literal search states')
 a = ap.parse_args()
+if not 2 <= a.keep <= 192 or a.cap < 100 or a.split < 1:
+    ap.error('require 2 <= keep <= 192, cap >= 100, split >= 1')
 K, need = a.keep, 193 - a.keep
 
 bank = [e['vertex_sequence'] for e in json.loads((ROOT / 'work' / 'bank9.json').read_text())]
@@ -36,10 +38,19 @@ oriented = [r for s in bank for r in (s, s[::-1])]
 def c_nodes(paths):
     """Node counts of the Lean search (reachable-count bound) from each path, via the C tool."""
     text = ''.join(f"{len(p)} {' '.join(map(str, p))}\n" for p in paths)
-    out = subprocess.run([str(ROOT / 'work' / 'snake_dfs'), 'regrow', '9', '999', '193', str(10**11), '-1', '1'],
+    env = os.environ.copy()
+    for key in ('SNAKE_NO_PEEL', 'SNAKE_COUNT_ONLY', 'SNAKE_ENUM'):
+        env.pop(key, None)
+    if not a.v2:
+        env['SNAKE_COUNT_ONLY'] = '1'
+    executable = ROOT / 'work' / ('snake_dfs.exe' if os.name == 'nt' else 'snake_dfs')
+    out = subprocess.run([str(executable), 'regrow', '9', '999', '193', str(10**11), '-1', '1'],
                          input=text, capture_output=True, text=True, check=True,
-                         env={} if a.v2 else {'SNAKE_COUNT_ONLY': '1'}).stdout
-    res = [json.loads(l)['nodes'] for l in out.splitlines() if '"regrow"' in l]
+                         env=env).stdout
+    records = [json.loads(l) for l in out.splitlines() if '"regrow"' in l]
+    if any(r['status'] != 'INFEASIBLE' for r in records):
+        raise RuntimeError('Refusing to generate exclusions from FOUND or UNKNOWN searches')
+    res = [r['nodes'] for r in records]
     assert len(res) == len(paths)
     return res
 
@@ -113,6 +124,7 @@ def plan2(path, H, B, name, out):
 
 
 tag = f"{K}v2" if a.v2 else f"{K}"
+roots = {}
 for j, s in enumerate(oriented):
     out = []
     if a.v2:
@@ -120,18 +132,28 @@ for j, s in enumerate(oriented):
         B = 0
         for v in pre[:-1]:
             B |= cn(v)
-        plan2(pre, pre[-1], B, f"keep{tag}_{j}_lit", out)
+        state = (pre[-1], B)
+        owner = roots.get(state)
+        if owner is None:
+            roots[state] = j
+            plan2(pre, pre[-1], B, f"keep{tag}_{j}_lit", out)
+        else:
+            out = theorems[owner]
         out.append((f"keep{tag}_{j}",
                     f"theorem keep{tag}_{j} : search2 (oriented {j})[{K - 1}]! "
                     f"(banFrom (fun i => (oriented {j})[i]!) {K - 1}) {need} = false := by\n"
                     f"  rw [show (oriented {j})[{K - 1}]! = {pre[-1]} from by decide +kernel,\n"
                     f"    show banFrom (fun i => (oriented {j})[i]!) {K - 1} = {B} from by decide +kernel]\n"
-                    f"  exact keep{tag}_{j}_lit", 60))
+                    f"  exact keep{tag}_{j if owner is None else owner}_lit", 60))
+        if owner is not None:
+            print(f'entry {j+1}/{len(oriented)}: reuses exact state of {owner}', flush=True)
+            continue
     else:
         plan(j, s[:K], f"(oriented {j})[{K - 1}]!", f"(banFrom (fun i => (oriented {j})[i]!) {K - 1})",
              f"keep{K}_{j}", out)
     theorems[j] = out
-nodes = [sum(c for _, _, c in theorems[j]) for j in range(len(oriented))]
+    print(f'entry {j+1}/{len(oriented)}: {len(out)} proof steps planned', flush=True)
+nodes = [sum(c for _, _, c in out) for out in theorems.values()]
 
 # Module layout.  A Lean process keeps its kernel memory until it exits, so every module
 # is capped at CAP cost units (~ search nodes).  Instances below the cap are packed
@@ -213,5 +235,5 @@ for n in names + [f'DfsBankCert{tag}']:
         lake += f'\n[[lean_lib]]\nname = "{n}"\n'
 (LEAN / 'lakefile.toml').write_text(lake)
 print(f'keep={K}: {len(oriented)} instances, {sum(len(theorems[j]) for j in theorems)} theorems, '
-      f'{sum(nodes)} leaf nodes, {len(modules)} modules, {len(targets)} runner targets, '
+      f'{sum(nodes)} estimated cost units (not full search nodes), {len(modules)} modules, {len(targets)} runner targets, '
       f'max instance cost {max(load)}')

@@ -1,0 +1,57 @@
+{
+  "status": "UNKNOWN",
+  "entry": 125,
+  "bank_index": 62,
+  "reversed": true,
+  "identity": {
+    "config": {
+      "keep": 96,
+      "total_vertices": 193,
+      "worker_wall_limit_seconds": 10.0,
+      "memory_limit_mib": 2048,
+      "solver": "Glucose 4.1 (PySAT g4)",
+      "python_sat": "1.9.dev16",
+      "proof_logging": true,
+      "solver_parameters": "defaults; no custom seed or incremental mode",
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "pysolvers_sha256": "9d2da0ff17fff9f59335187d59e6dcc195d18e9e5b219744009a634c6a6ef6a9",
+      "encoder_sha256": "4b6e83f2c595f605163df65f5799c87c3f73535bb7d0c7c9635e221f712fd59f",
+      "bank_sha256": "0b973ddcd371680ad4efe07c01008c29437280514926daf1a67d99b6ba510edb",
+      "sources": {
+        "common.py": "a83111dea59c80d6ad433cdee8d771325690da62166412ee41ef0d2bab3537fa",
+        "worker.py": "e47afd90bd419ebf1f13c415352f759fbe8541d5b8f6d33174dde93f5742238c",
+        "run.py": "903bcdd78a6264262ba56c7a6ab7f14522596edeca6de5160387896e5b95edc9"
+      }
+    },
+    "formula_hashes": {
+      "outputs/keep96/formulas/entry125.cnf.gz": "a39ac8bd1aaa12df68a18f934349b2e1ead28439f195211576f4ee41df028125",
+      "outputs/keep96/formulas/entry125.json.gz": "a4229b27fe7ba7ab3820e07bdf3487a82b5baffbfc2a87bbe66c0e8b3d51bc30"
+    }
+  },
+  "termination": "TIMEOUT",
+  "exit_code": 1,
+  "runtime_seconds": 10.080317999934778,
+  "peak_rss_bytes": 83783680,
+  "attempt": "outputs/keep96/runs/entry125/51d64862c7ef9e93/20261016T062931642908Z",
+  "command": [
+    "C:\\Users\\zhanb\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "E:\\codex-research\\keep96-feasibility\\work\\keep96\\worker.py",
+    "--entry",
+    "125",
+    "--memory-mib",
+    "2048",
+    "--attempt",
+    "E:\\codex-research\\keep96-feasibility\\outputs\\keep96\\runs\\entry125\\51d64862c7ef9e93\\20261016T062931642908Z"
+  ],
+  "formula_sha256": "a39ac8bd1aaa12df68a18f934349b2e1ead28439f195211576f4ee41df028125",
+  "variables": 2496,
+  "clauses": 16752,
+  "region_vertices": 160,
+  "artifact_hashes": {
+    "outputs/keep96/formulas/entry125.cnf.gz": "a39ac8bd1aaa12df68a18f934349b2e1ead28439f195211576f4ee41df028125",
+    "outputs/keep96/formulas/entry125.json.gz": "a4229b27fe7ba7ab3820e07bdf3487a82b5baffbfc2a87bbe66c0e8b3d51bc30",
+    "outputs/keep96/runs/entry125/51d64862c7ef9e93/20261016T062931642908Z/solver.log": "42d4c0a783dfc48ff451730c0e0746288fd97107d75a9eb5d8aedb20af1264cd",
+    "outputs/keep96/runs/entry125/51d64862c7ef9e93/20261016T062931642908Z/started.json": "46135c8ce8e5172127c8f0ea09ec78a5ae210a5196d51e0b34cabd50f917dacb"
+  }
+}
