@@ -1062,6 +1062,28 @@ The expanded model recovered the fixed 191-edge witness with an outside budget o
 
 Whole-cell replacement was tested separately. With the remaining vertices fixed to the selected witness, all sixteen one-cell searches and all 32 adjacent two-cell searches for exactly 192 edges returned \texttt{INFEASIBLE}. These are restricted solver results without Lean infeasibility certificates. A 191-edge control succeeded. Allowing an equal-length change in cells 0 and 2 replaced one vertex and produced a snake equivalent to bank entry 127 under translation, coordinate permutation and reversal. The rearrangement changes the starting configuration but adds no new symmetry class to the bank. The next constructive step is to vary the coordinate partition or replace connections across more cells simultaneously.
 
+\subsection{Coordinate-face replacements and a two-arm construction}
+Changing the internal coordinate partition gives 672 six-dimensional coordinate faces in $Q_9$, since $\binom96 2^3=672$. For the selected aligned witness, the search fixed every selected and unselected vertex outside each face and allowed its interior to change. All 672 searches for exactly 192 edges returned \texttt{INFEASIBLE}, as did the 672 searches for exactly 196 edges. A 191-edge control succeeded. These are restricted solver results without Lean infeasibility certificates.
+
+The geometric meaning of this restriction can be stated exactly. For a nonempty set $D$ of changed vertices, let $J(D)$ contain the coordinates on which two members of $D$ differ.
+\begin{proposition}[Support of a face replacement]
+The set $D$ is contained in a six-dimensional coordinate face if and only if $|J(D)|\le6$. For selected vertex sets $S,T$, agreement outside a region $R$ is equivalent to $S\mathbin{\triangle}T\subseteq R$.
+\end{proposition}
+\begin{proof}
+If $D$ lies in a face whose six free coordinates form $I$, all members agree outside $I$, so $J(D)\subseteq I$. Conversely, extend $J(D)$ to a six-element coordinate set $I$ and choose $a\in D$. Every member of $D$ agrees with $a$ outside $I$, so $D$ lies in the corresponding face. The second assertion follows directly from the definition of symmetric difference.
+\end{proof}
+These statements have been checked in Lean. They identify the geometry covered by the search; they do not certify its solver exclusions.
+
+The analogous seven-dimensional sweep has $\binom97 2^2=144$ faces. At both target lengths, a two-second limit per face gave 142 exclusions and two unresolved cases. Longer runs excluded one further case at each target. The remaining face fixes coordinates 7 and 8 to zero, in the aligned coordinates, and contains the first 50 vertices of the seed. Its complement retains a single 142-vertex path $F$.
+
+This remaining case admits a smaller constructive model. The only vertices of the face adjacent to the two endpoints of $F$ are 53 and 44. Removing all face vertices adjacent to the interior of $F$ leaves an induced subgraph of $Q_7$ with 78 vertices and 147 edges. Seek two vertex-disjoint induced paths $L,R$ in this subgraph, ending at 53 and 44 respectively, with no edges between the two paths. Joining them through $F$ gives an induced path with
+\[
+|V(L)|+142+|V(R)|
+\]
+vertices. The 196-edge target therefore requires $|V(L)|+|V(R)|=55$. Computationally, $F$ is replaced by one artificial edge between 53 and 44; every feasible output is expanded and independently checked in $Q_9$.
+
+The two-arm model reproduced a 143-edge control. Its 196-edge feasibility run returned \texttt{INFEASIBLE}; the 192-edge run remained unresolved after 60 seconds. A 120-second length-maximizing run produced a verified 186-edge snake, using 45 vertices in the face and the fixed 142 vertices of $F$. This path is below the known record. It is not equivalent to a contiguous 186-edge subpath of any of the 131 stored witnesses under translation, coordinate permutation and reversal, according to the finite comparison. It supplies a different starting configuration for subsequent construction searches. The next search must allow changes to $F$ as well, since retaining the two-arm restriction already gave a solver exclusion at 196 edges. The compressed model and its infeasibility result are computational evidence, not a Lean-certified exclusion.
+
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
 
