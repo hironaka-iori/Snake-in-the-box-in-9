@@ -96,6 +96,11 @@ RUP 段和检查点复制，仍触及预算；其清单保存为
 超限 RUP 模块应用，持久记录 `split_rup_modules`，不重复修补单个段的
 数学论证；第 18 与第 27 段继续使用已证拼接引理恢复原始检查结论。
 
+第 27 段的两个分段与组合也已通过。累计 523 个模块通过后，第 30 段
+触及同一预算，首轮清单保存为 `upstream241-check30-first-attempt.json`。
+本次无需修改生成器或证明：恢复驱动根据已保存的超限记录，对第 30 段
+应用同一个已证分段机制，其余有效断点继续复用。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
