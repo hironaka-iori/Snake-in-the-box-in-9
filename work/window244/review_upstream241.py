@@ -43,7 +43,7 @@ state.pop('error',None)
 split_rup_modules=set(state.get('split_rup_modules',[]))
 split_rup_modules.add('LocalWindowUnsat.C224FwdDistinct.Check5Part2Check')
 split_rup_modules.update(n for n,r in state['modules'].items()
-    if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+Part\d+(?:Check)?',n) and r.get('memory_exceeded'))
+    if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+Part\d+(?:Check)?(?:Half[12])*',n) and r.get('memory_exceeded'))
 state['split_rup_modules']=sorted(split_rup_modules)
 split_semantic_modules=set(state.get('split_semantic_modules',[]))
 split_semantic_modules.add('LocalWindowSat.C232FwdDistinct')
@@ -112,19 +112,25 @@ try:
             raw=(''.join('import '+p+'\n' for p in parts)).encode()
         if name in split_rup_modules:
             text=raw.decode()
-            match=re.search(r'theorem (ok\d+(?:_Check)?) : check (start\d+) (proof\d+) = true',text);assert match
-            theorem_name,start,proof_name=match.groups()
+            match=re.search(r'theorem (ok\d+(?:_Check)?) : check (start\d+) (proof\d+) = true',text)
+            if match:
+                theorem_name,start,proof_name=match.groups()
+            else:
+                match=re.search(r'theorem (\w+) : check \((.*)\) \((.*)\) = true',text);assert match
+                theorem_name,start,proof_name=match.groups()
+                start='('+start+')';proof_name='('+proof_name+')'
+            cut=107 if 'Half' in name else 214
             header=text[:match.start()]
             namespace=re.search(r'^namespace (.+)$',text,re.M).group(1)
             header='import ReviewCheckAppend\n'+header
             pieces=[]
             for index,(tree,proof) in enumerate([
-                (start,proof_name+'.take 214'),
-                (f'advanceChecks {start} ({proof_name}.take 214)',proof_name+'.drop 214')]):
+                (start,proof_name+f'.take {cut}'),
+                (f'advanceChecks {start} ({proof_name}.take {cut})',proof_name+f'.drop {cut}')]):
                 part=name+f'Half{index+1}';pieces.append(part)
                 synthetic[part]=(header+f'theorem {theorem_name}_half{index+1} : check ({tree}) ({proof}) = true := by\n  decide +kernel\nend '+namespace+'\n').encode()
                 synthetic_origin[part]=upstream_sha;mapping[part]=mapping[name]
-            raw=(''.join('import '+part+'\n' for part in pieces)+'namespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\n'+f'theorem {theorem_name} : check {start} {proof_name} = true := by\n  have h := check_append_true {start} ({proof_name}.take 214) ({proof_name}.drop 214) {theorem_name}_half1 {theorem_name}_half2\n  rw [List.take_append_drop] at h\n  exact h\nend '+namespace+'\n').encode()
+            raw=(''.join('import '+part+'\n' for part in pieces)+'namespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\n'+f'theorem {theorem_name} : check {start} {proof_name} = true := by\n  have h := check_append_true {start} ({proof_name}.take {cut}) ({proof_name}.drop {cut}) {theorem_name}_half1 {theorem_name}_half2\n  rw [List.take_append_drop] at h\n  exact h\nend '+namespace+'\n').encode()
         if name in {'Snake9','SquareCounterexample'}:
             # Preserve every definition and theorem statement. Kernel reduction
             # avoids elaborating the enormous default `decide` proof term.

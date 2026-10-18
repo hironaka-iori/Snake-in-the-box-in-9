@@ -123,6 +123,11 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 恢复驱动现将已有分段机制也用于不含检查点合取的单独 `ok` 定理，继续
 以已证 `check_append_true` 合并，保持所有原始定理陈述及证书数据不变。
 
+323 第 1 段的前半通过（7.42 秒），后半仍超限，保存为
+`upstream241-rup323-half-attempt.json`。现进一步将后半按前 107 步与剩余
+步骤拆分，以同一个精确拼接引理组合；保留其真实起始数据库，绝不把
+中间数据库或剩余检查结果作为假设。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
