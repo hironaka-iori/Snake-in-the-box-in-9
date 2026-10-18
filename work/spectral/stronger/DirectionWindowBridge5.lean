@@ -7,11 +7,10 @@ Core Lean only (imports the standard-library core modules `LocalWindowDirBridge`
 `DirectionWindowBridge` for the 145 certificates of the bound 239:
 
 * `cover_table5` (kernel evaluation, one theorem per window length): every bit of the
-  exclusion table `forbMask5` that is looked up for a canonical shape of two to five
+  exclusion table `forbMaskOf5` that is looked up for a canonical shape of two to five
   centres belongs to one of the 325 certificate keys `dirKeys5` (`LocalWindowDirKeys5.lean`).
-  Shapes outside the 9 listed ones use the empty slot 9 of the table
-  (`unlisted_zero`), so only listed shapes are enumerated: this keeps the kernel's term cache
-  small (a lookup shifts the whole table).
+  Shapes outside the 9 listed ones have the empty mask (`unlisted_zero`), so only
+  listed shapes are enumerated.
 * `window_refute5`: a window of a snake whose canonical shape and lumped counts hit a
   set bit contradicts the corresponding certificate (`refuted_dir` realises the
   first-occurrence relabelling `canon` by a coordinate permutation).
@@ -33,19 +32,19 @@ set_option maxHeartbeats 1000000
 
 /-! ## The 325 keys cover the exclusion table -/
 
-/-- The bit of `forbMask5` looked up by `wforb5a` for the canonical shape `c`. -/
+/-- The bit of `forbMaskOf5` looked up by `wforb5a` for the canonical shape `c`. -/
 def forbBit5 (c syms : List Nat) : Bool :=
-  (forbMask5 >>> (wshapeIdx5 (shapeCode c) * 16807 + symIdx syms 0)) &&& 1 == 1
+  (forbMaskOf5 (wshapeIdx5 (shapeCode c)) >>> symIdx syms 0) &&& 1 == 1
 
 theorem wforb5a_eq (ds syms : List Nat) : wforb5a ds syms = forbBit5 (canon ds) syms := rfl
 
-/-- Slot 9 of the table (unlisted shapes) is empty. -/
-theorem unlisted_zero : forbMask5 >>> (9 * 16807) = 0 := by decide +kernel
+/-- Unlisted shapes (index 9) have the empty mask. -/
+theorem unlisted_zero : forbMaskOf5 9 = 0 := by decide
 
 theorem forbBit5_unlisted (c syms : List Nat) (h : wshapeIdx5 (shapeCode c) = 9) :
     forbBit5 c syms = false := by
   unfold forbBit5
-  rw [h, Nat.shiftRight_add, unlisted_zero, Nat.zero_shiftRight]
+  rw [h, unlisted_zero, Nat.zero_shiftRight]
   rfl
 
 def coverOK5 (c : List Nat) : Bool :=
@@ -93,7 +92,7 @@ theorem cover5 {c syms : List Nat} (hc : isRGS c 0 = true)
 section Window
 variable {m : Nat} (p : Snake m)
 
-/-- A window whose canonical shape and lumped counts hit a set bit of `forbMask5`
+/-- A window whose canonical shape and lumped counts hit a set bit of `forbMaskOf5`
 contradicts the certificate of that key. -/
 theorem window_refute5 (h : AllRefuted238) (r n : Nat) (hn : n = 3 ∨ n = 4 ∨ n = 5 ∨ n = 6)
     (hr : r + n ≤ m) (hb : wforb5a (dsOf p r n) (symsOf p r n) = true) : False := by
