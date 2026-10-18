@@ -70,9 +70,9 @@ MODULES = [
     "WindowPotential242", "WindowPotential241", "AggregateWindowConditional",
     "WindowAutomatonDefs", "WindowAutomatonData", "WindowAutomatonLemmas",
     "WindowAutomatonSequence", "WindowAutomatonBridge", "AggregateDirectionConditional",
-    "WindowAutomaton5Data", "WindowAutomaton5Shard0", "WindowAutomaton5Shard1", "WindowAutomaton5Shard2", "WindowAutomaton5Shard3", "WindowAutomaton5Shard4", "WindowAutomaton5Shard5", "WindowAutomaton5Shard6", "WindowAutomaton5Shard7", "WindowAutomaton5Shard8", "WindowAutomaton5Shard9", "WindowAutomaton5Shard10", "WindowAutomaton5Shard11", "WindowAutomaton5Shard12", "WindowAutomaton5Shard13", "WindowAutomaton5Shard14", "WindowAutomaton5Shard15", "WindowAutomaton5Shard16", "WindowAutomaton5Shard17", "WindowAutomaton5Shard18", "WindowAutomaton5Shard19", "WindowAutomaton5Shard20", "WindowAutomaton5Shard21", "WindowAutomaton5Shard22", "WindowAutomaton5Shard23", "WindowAutomaton5Shard24", "WindowAutomaton5Shard25", "WindowAutomaton5Shard26", "WindowAutomaton5Shard27", "WindowAutomaton5Shard28", "WindowAutomaton5Shard29", "WindowAutomaton5Shard30", "WindowAutomaton5Shard31", "WindowAutomaton5Shard32", "WindowAutomaton5Shard33",
-    "WindowAutomaton5Table", "WindowAutomaton5Sequence", "AggregateDirection238Conditional",
-    "WindowAutomatonLoop", "WindowAutomatonK6R3Data", "WindowAutomatonK6R3Shard0", "WindowAutomatonK6R3Shard1", "WindowAutomatonK6R3Shard2", "WindowAutomatonK6R3Shard3", "WindowAutomatonK6R3Shard4", "WindowAutomatonK6R3Shard5", "WindowAutomatonK6R3Shard6", "WindowAutomatonK6R3Shard7", "WindowAutomatonK6R3Shard8", "WindowAutomatonK6R3Shard9", "WindowAutomatonK6R3Shard10", "WindowAutomatonK6R3Shard11", "WindowAutomatonK6R3Shard12", "WindowAutomatonK6R3Shard13", "WindowAutomatonK6R3Shard14", "WindowAutomatonK6R3Shard15", "WindowAutomatonK6R3Shard16", "WindowAutomatonK6R3Shard17", "WindowAutomatonK6R3Shard18", "WindowAutomatonK6R3Shard19", "WindowAutomatonK6R3Shard20", "WindowAutomatonK6R3Shard21", "WindowAutomatonK6R3Shard22", "WindowAutomatonK6R3Shard23", "WindowAutomatonK6R3Shard24", "WindowAutomatonK6R3Shard25", "WindowAutomatonK6R3Shard26", "WindowAutomatonK6R3Shard27", "WindowAutomatonK6R3Shard28", "WindowAutomatonK6R3Shard29", "WindowAutomatonK6R3Shard30", "WindowAutomatonK6R3Shard31", "WindowAutomatonK6R3Shard32", "WindowAutomatonK6R3Shard33",
+    "WindowAutomatonLoop", "WindowAutomatonK5R3Data", "WindowAutomatonK5R3Shard0", "WindowAutomatonK5R3Shard1", "WindowAutomatonK5R3Shard2", "WindowAutomatonK5R3Shard3", "WindowAutomatonK5R3Shard4", "WindowAutomatonK5R3Shard5", "WindowAutomatonK5R3Shard6", "WindowAutomatonK5R3Shard7", "WindowAutomatonK5R3Shard8", "WindowAutomatonK5R3Shard9", "WindowAutomatonK5R3Shard10", "WindowAutomatonK5R3Shard11", "WindowAutomatonK5R3Shard12", "WindowAutomatonK5R3Shard13", "WindowAutomatonK5R3Shard14", "WindowAutomatonK5R3Shard15", "WindowAutomatonK5R3Shard16", "WindowAutomatonK5R3Shard17", "WindowAutomatonK5R3Shard18", "WindowAutomatonK5R3Shard19", "WindowAutomatonK5R3Shard20", "WindowAutomatonK5R3Shard21", "WindowAutomatonK5R3Shard22", "WindowAutomatonK5R3Shard23", "WindowAutomatonK5R3Shard24", "WindowAutomatonK5R3Shard25", "WindowAutomatonK5R3Shard26", "WindowAutomatonK5R3Shard27", "WindowAutomatonK5R3Shard28", "WindowAutomatonK5R3Shard29", "WindowAutomatonK5R3Shard30", "WindowAutomatonK5R3Shard31", "WindowAutomatonK5R3Shard32", "WindowAutomatonK5R3Shard33",
+    "WindowAutomatonK5R3Table", "WindowAutomatonK5R3Sequence", "AggregateDirectionK5R3Conditional",
+    "WindowAutomatonK6R3Data", "WindowAutomatonK6R3Shard0", "WindowAutomatonK6R3Shard1", "WindowAutomatonK6R3Shard2", "WindowAutomatonK6R3Shard3", "WindowAutomatonK6R3Shard4", "WindowAutomatonK6R3Shard5", "WindowAutomatonK6R3Shard6", "WindowAutomatonK6R3Shard7", "WindowAutomatonK6R3Shard8", "WindowAutomatonK6R3Shard9", "WindowAutomatonK6R3Shard10", "WindowAutomatonK6R3Shard11", "WindowAutomatonK6R3Shard12", "WindowAutomatonK6R3Shard13", "WindowAutomatonK6R3Shard14", "WindowAutomatonK6R3Shard15", "WindowAutomatonK6R3Shard16", "WindowAutomatonK6R3Shard17", "WindowAutomatonK6R3Shard18", "WindowAutomatonK6R3Shard19", "WindowAutomatonK6R3Shard20", "WindowAutomatonK6R3Shard21", "WindowAutomatonK6R3Shard22", "WindowAutomatonK6R3Shard23", "WindowAutomatonK6R3Shard24", "WindowAutomatonK6R3Shard25", "WindowAutomatonK6R3Shard26", "WindowAutomatonK6R3Shard27", "WindowAutomatonK6R3Shard28", "WindowAutomatonK6R3Shard29", "WindowAutomatonK6R3Shard30", "WindowAutomatonK6R3Shard31", "WindowAutomatonK6R3Shard32", "WindowAutomatonK6R3Shard33",
     "WindowAutomatonK6R3Table", "WindowAutomatonK6R3Sequence", "AggregateDirectionK6R3Conditional",
 ]
 
@@ -182,6 +182,7 @@ def main():
             if cached(module, build / (module + ".lean"), build / (module + ".olean")):
                 print(f"Checking {module} ... (object up to date from an earlier run)", flush=True)
                 manifest["steps"].append({"label": module, "cached": True})
+                save()
                 continue
             run(module, [lake, "env", "lean", f"--root={build}", "-o",
                          str(build / (module + ".olean")), str(build / (module + ".lean"))],
@@ -194,7 +195,7 @@ def main():
             "#print axioms Snake9.upper_241_of_certified_windows\n"
             "#print axioms Snake9.upper_239_of_direction_windows\n"
             "#print axioms Snake9.WindowAutomaton.step_table\n"
-            "#print axioms Snake9.upper_238_of_direction_windows5\n"
+            "#print axioms Snake9.upper_238_of_direction_windowsK5R3\n"
             "#print axioms Snake9.upper_235_of_direction_windowsK6R3\n"
             "#print axioms Snake9.lower_bound\n"
             "#print axioms Snake9.noNext_iff_upperBound\n"
@@ -221,7 +222,7 @@ def main():
         expected = {"Snake9.upper_244_of_no_two_two_three",
                     "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows",
                     "Snake9.upper_239_of_direction_windows", "Snake9.WindowAutomaton.step_table",
-                    "Snake9.upper_238_of_direction_windows5", "Snake9.upper_235_of_direction_windowsK6R3", "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
+                    "Snake9.upper_238_of_direction_windowsK5R3", "Snake9.upper_235_of_direction_windowsK6R3", "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
                     "Snake9.adjacent_internal_alpha_one_impossible",
                     "Snake9.upper_bound_251", "Snake9.verified_interval_191_251",
                     "Snake9.adjacent_internal_one_two_impossible",
