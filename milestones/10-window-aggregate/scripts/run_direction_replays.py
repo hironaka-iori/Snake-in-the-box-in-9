@@ -19,23 +19,37 @@ DATA = os.path.join(HERE, '..', 'data', 'lean_core_direction')
 UNSAT = os.path.join(ROOT, 'work', 'final_lean', 'LocalWindowUnsat')
 
 
-def cases():
-    summary = json.load(open(os.path.join(DATA, '_summary.json')))['per_case']
+def data_dir(a):
+    return DATA + ('5' if a.set == 'direction5' else '')
+
+
+def cases(a):
+    summary = json.load(open(os.path.join(data_dir(a), '_summary.json')))['per_case']
     return sorted(summary.items(), key=lambda kv: kv[1]['hints'])
 
 
 def gen(a):
-    for name, info in cases():
+    for name, info in cases(a):
         mod = info['module']
         if os.path.exists(os.path.join(UNSAT, mod + '.lean')):
             continue
-        for bits in (13, 14):
+        meta = json.load(open(os.path.join(data_dir(a), name + '.json')))
+        if meta.get('lrat_producer', '').startswith('core_lrat'):
+            # cadical-cored window of the 238 set: the proof is regenerated from the core
+            import gen_lean_core
+            cadical = a.cadical or os.path.join(
+                subprocess.check_output(['lean', '--print-prefix'], text=True).strip(), 'bin', 'cadical')
+            gen_lean_core.core_lrat(name, meta['core_ids'], a.work, cadical, list(range(1, a.seeds + 1)))
+        # literal offset 3000 for CNFs with 2400 or more variables (the five-centre windows)
+        off = 3000 if meta.get('variables', 0) >= 2400 else 2400
+        for bits in ((13, 14, 15) if off == 3000 else (13, 14)):
             cmd = [sys.executable, os.path.join(HERE, 'gen_lean_lrat.py'), '--work', a.work,
-                   '--data', DATA, '--seg', str(a.seg), '--cp', str(a.cp), '--group', str(a.group),
-                   '--wbits', str(bits), '--noncomputable-data', '--fast', name]
+                   '--data', data_dir(a), '--seg', str(a.seg), '--cp', str(a.cp), '--group', str(a.group),
+                   '--wbits', str(bits), '--off', str(off), '--noncomputable-data', '--fast', name]
             r = subprocess.run(cmd, capture_output=True, text=True)
             if r.returncode == 0:
-                print(json.dumps({'case': name, 'module': mod, 'wbits': bits, 'hints': info['hints']}), flush=True)
+                print(json.dumps({'case': name, 'module': mod, 'wbits': bits, 'off': off,
+                                  'hints': info['hints']}), flush=True)
                 break
             if 'nslots <= M' not in r.stderr and 'assert nslots' not in r.stderr:
                 print(r.stderr[-2000:], file=sys.stderr)
@@ -45,7 +59,7 @@ def gen(a):
 
 
 def build(a):
-    mods = ['LocalWindowUnsat.' + info['module'] for _, info in cases()]
+    mods = ['LocalWindowUnsat.' + info['module'] for _, info in cases(a)]
     if a.limit:
         mods = mods[:a.limit]
     cmd = [sys.executable, os.path.join(ROOT, 'work', 'guarded_lake_build.py'), '--jobs', str(a.jobs),
@@ -57,12 +71,16 @@ def build(a):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--set', choices=['direction', 'direction5'], default='direction',
+                    help='the 145 windows of the 239 bound, or the 325 of the 238 bound')
     sub = ap.add_subparsers(dest='cmd', required=True)
     g = sub.add_parser('gen')
     g.add_argument('--work', required=True)
     g.add_argument('--seg', type=int, default=25000)
     g.add_argument('--cp', type=int, default=3)
     g.add_argument('--group', type=int, default=4)
+    g.add_argument('--cadical', default=None, help='direction5: cadical binary (default: toolchain)')
+    g.add_argument('--seeds', type=int, default=2, help='direction5: cadical seeds per core proof')
     b = sub.add_parser('build')
     b.add_argument('--jobs', type=int, default=3, help='light (data) modules at a time')
     b.add_argument('--heavy-jobs', type=int, default=3, help='kernel-check modules at a time')
