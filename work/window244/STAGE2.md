@@ -3,6 +3,13 @@
 Stage 1 passed: `outputs/window244/final-verification.json`, unconditional 244.
 No bound 243/242 is claimed. Keep the completed Stage-1 Lean sources and data fixed.
 
+**18 October update:** upstream branch `research/unconditional-241` now supplies
+an unconditional 241 theorem and passing audit log. The duplicate local 242 case
+checks were stopped with all valid checkpoints retained. The active task is
+the independent source-only review described in `UPSTREAM_REVIEW.md`; do not
+restart the superseded coordinator while that review is running. The running
+descriptions below record the preceding development checkpoint.
+
 ## Completed independent census and subset calculation
 
 `survey_stage2.py` completed all 48 radius-three cases with OR-Tools 9.15.6755,
