@@ -226,4 +226,36 @@ theorem stretch6_rep6 (F : Nat) : stretch6 F * rep6 = pack (tab (fun l => digit 
   simp only [stretch6, rep6, tab, pack, Nat.reduceAdd, Nat.reduceDiv, Nat.reducePow]
   omega
 
+theorem tab_congr (f g : Nat → Nat) (n : Nat) (h : ∀ j, j < n → f j = g j) : tab f n = tab g n := by
+  induction n generalizing f g with
+  | zero => rfl
+  | succ n ih => simp only [tab]; rw [h 0 (by omega), ih _ _ (fun j hj => h (j + 1) (by omega))]
+
+theorem pack_tab_append (f : Nat → Nat) (n m : Nat) :
+    pack (tab f (n + m)) = pack (tab f n) + 256 ^ n * pack (tab (fun j => f (n + j)) m) := by
+  induction n generalizing f with
+  | zero => simp [tab, pack]
+  | succ n ih =>
+    rw [Nat.succ_add]
+    simp only [tab, pack]
+    rw [ih (fun j => f (j + 1))]
+    simp only [Nat.pow_succ]
+    have : (fun j => f (n + j + 1)) = fun j => f (n + 1 + j) := by funext j; congr 1; omega
+    rw [this, Nat.mul_comm (256 ^ n) 256, Nat.mul_assoc]
+    omega
+
+/-- `[f 0, ..., f (n-1)]` repeated `m` times is the pack times `1 + 256^n + ... + 256^(n (m-1))`. -/
+def repK (n : Nat) : Nat → Nat
+  | 0 => 0
+  | m + 1 => repK n m + 256 ^ (n * m)
+
+theorem pack_tab_rep (f : Nat → Nat) (n : Nat) : ∀ m, pack (tab (fun l => f (l % n)) (n * m)) = pack (tab f n) * repK n m
+  | 0 => by simp [tab, pack, repK]
+  | m + 1 => by
+    rw [Nat.mul_succ, pack_tab_append, pack_tab_rep f n m]
+    have h2 : tab (fun j => f ((n * m + j) % n)) n = tab f n := by
+      apply tab_congr; intro j hj
+      rw [show n * m + j = j + n * m by omega, Nat.add_mul_mod_self_left, Nat.mod_eq_of_lt hj]
+    rw [h2, repK, Nat.mul_add, Nat.mul_comm (pack (tab f n)) (256 ^ (n * m))]
+
 end Snake9.WindowAutomaton
