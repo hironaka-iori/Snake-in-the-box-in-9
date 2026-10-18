@@ -54,9 +54,9 @@ def set_width(bits, fast=False, off=2400):
     3000); the checker is LratCheck / LratCheck14 / LratCheckO3k, or with `fast`
     LratFast{,14} / LratFastO3k{,14,15} (see gen_checker_variants.py)."""
     global W, M, CHECKER_IMPORT, CHECKER_OPEN, FAST, OFF, BASE_NS
-    assert bits in (13, 14, 15) and off in (2400, 3000)
+    assert bits in (13, 14, 15) and off in (2400, 3000, 4000)
     W, M, FAST, OFF = bits, (1 << bits) - 1, fast, off
-    osfx = 'O3k' if off == 3000 else ''
+    osfx = {2400: '', 3000: 'O3k', 4000: 'O4k'}[off]
     wsfx = str(bits) if bits != 13 else ''
     BASE_NS = 'Snake9.Lrat' + osfx
     if fast:
@@ -446,7 +446,7 @@ def main():
     ap.add_argument('--check', action='store_true', help='simulate the checker first')
     ap.add_argument('--data', default=DATA, help='core JSON directory (lean_core_direction for the 239 set)')
     ap.add_argument('--wbits', type=int, default=13, help='13, 14 or 15: more than 8191 / 16383 live clauses')
-    ap.add_argument('--off', type=int, default=2400, help='literal offset: 2400, or 3000 for more than 2399 variables')
+    ap.add_argument('--off', type=int, default=2400, help='literal offset: 2400, 3000 or 4000 (above the variable count)')
     ap.add_argument('--noncomputable-data', action='store_true',
                     help='declare the proof data `noncomputable def` (smaller build output)')
     ap.add_argument('--fast', action='store_true', help='emit proofs for LratFast (see above)')

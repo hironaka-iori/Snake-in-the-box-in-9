@@ -8,6 +8,7 @@ The variants are the same files with those constants replaced:
   LratCheck14 / LratFast14        14-bit words (clause keys up to 16383)
   LratCheckO3k / LratFastO3k      OFF = 3000, for CNFs with more than 2399 variables
   LratFastO3k14, LratFastO3k15    OFF = 3000 with 14- or 15-bit words
+  LratCheckO4k, LratFastO4k{,14,15}  OFF = 4000 (radius-4 five-centre CNFs)
 
 A fast variant imports the base variant with the same offset.  Existing files are only
 rewritten when their content changes.
@@ -56,8 +57,8 @@ def main():
     fast = open(os.path.join(LEAN, 'LratFast.lean')).read()
     assert '4800' not in base and '4800' not in fast
     # (bits, off) -> names
-    bases = {2400: ('LratCheck', 'Lrat'), 3000: ('LratCheckO3k', 'LratO3k')}
-    todo = [(13, 3000), (14, 2400), (14, 3000), (15, 3000)]
+    bases = {2400: ('LratCheck', 'Lrat'), 3000: ('LratCheckO3k', 'LratO3k'), 4000: ('LratCheckO4k', 'LratO4k')}
+    todo = [(13, 3000), (14, 2400), (14, 3000), (15, 3000), (13, 4000), (14, 4000), (15, 4000)]
     for off, (mod, ns) in bases.items():
         if off == 2400:
             continue
@@ -66,7 +67,7 @@ def main():
         print(mod, 'written' if write(os.path.join(LEAN, mod + '.lean'), text) else 'unchanged')
     for bits, off in todo:
         bmod, bns = bases[off]
-        fmod = 'LratFast' + ('O3k' if off == 3000 else '') + (str(bits) if bits != 13 else '')
+        fmod = 'LratFast' + {2400: '', 3000: 'O3k', 4000: 'O4k'}[off] + (str(bits) if bits != 13 else '')
         fns = fmod
         text = fast.replace('import LratCheck\n', 'import LratCheck\n\n' + header('LratFast', bits, off), 1)
         text = variant(text, bits, off, bns, fns, bmod)

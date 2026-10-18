@@ -151,8 +151,8 @@ def dir_bounds(syms):
     return [(s, s) if s < 6 else (6, 21) for s in syms]
 
 
-def dir_module(dirs, syms):
-    return 'D' + ''.join(map(str, dirs)) + 'A' + ''.join(map(str, syms))
+def dir_module(dirs, syms, prefix='D'):
+    return prefix + ''.join(map(str, dirs)) + 'A' + ''.join(map(str, syms))
 
 
 def window_from_dirs(ds):
@@ -253,6 +253,19 @@ def dir_one(arg):
 
 DCORE5 = os.path.join(DATA, 'lean_core_direction5')
 
+# cadical-cored certificate sets: index, committed CNFs, core directory, Lean module prefix,
+# keys module / list / premise / bound, and the set whose cores are reused (same keys)
+CADICAL_SETS = {
+    'direction5': dict(index='direction_certificates_k5.json', certs=DCERTS, core=DCORE5, prefix='D',
+                       keys_mod='LocalWindowDirKeys5', keys='dirKeys5', premise='AllRefuted238', bound=238,
+                       reuse='direction_certificates.json', title='The 325 five-centre window certificates',
+                       radius=3),
+    'r4': dict(index='direction_certificates_r4.json', certs=os.path.join(CERTS, 'direction_r4'),
+               core=os.path.join(DATA, 'lean_core_direction_r4'), prefix='R',
+               keys_mod='LocalWindowDirKeysR4', keys='dirKeysR4', premise='AllRefuted236', bound=236,
+               reuse=None, title='The radius-4 five-centre window certificates', radius=4),
+}
+
 
 def trim_lrat(src, dst, ncl):
     """Keep only the lemmas on which the final empty clause depends (RUP hints only;
@@ -324,9 +337,9 @@ def best_cadical_proof(cnf, out_prefix, cadical, seeds):
     return nl, nh, seed, used
 
 
-def full_core_ids(name, work, cadical, seeds):
+def full_core_ids(name, work, cadical, seeds, certs=DCERTS):
     """Core of the committed CNF: the original clauses a trimmed cadical proof uses."""
-    cnf = extract_cnf(name, work)
+    cnf = extract_cnf(name, work, certs)
     nl, nh, seed, used = best_cadical_proof(cnf, os.path.join(work, name + '.full'), cadical, seeds)
     os.remove(os.path.join(work, name + '.full.lrat'))
     return used, {'full_lemmas': nl, 'full_hints': nh, 'full_seed': seed}
@@ -369,68 +382,76 @@ def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS):
 
 
 def dir5_one(arg):
-    case, work, cadical, seeds = arg
+    case, work, cadical, seeds, setname = arg
+    S = CADICAL_SETS[setname]
     name = case['case']
     dirs, alpha = case['dirs'], [tuple(x) for x in case['alpha']]
     syms = dir_syms(alpha)
     assert dir_bounds(syms) == alpha and len(syms) + 1 == len(dirs), name
-    meta_path = os.path.join(DCORE5, name + '.json')
+    assert case.get('radius', 3) == S['radius'], name
+    meta_path = os.path.join(S['core'], name + '.json')
     if os.path.exists(meta_path):   # resume: the core was generated earlier
         meta = json.load(open(meta_path))
         if os.path.exists(os.path.join(LEAN, 'LocalWindowCnf', meta['module'].split('.')[-1] + '.lean')):
             return (name, meta['module'].split('.')[-1], dirs, syms, len(meta['core_ids']),
                     meta['cnf_clauses'], 'cadical', meta['lrat'])
-    cnf_sha = sha_gz(os.path.join(DCERTS, name + '.cnf.gz'))
+    cnf_sha = sha_gz(os.path.join(S['certs'], name + '.cnf.gz'))
     assert cnf_sha == case['cnf_sha256'], name
-    ids, finfo = full_core_ids(name, work, cadical, seeds)
-    lrat, info = core_lrat(name, ids, work, cadical, seeds)
-    clauses = read_cnf(extract_cnf(name, work))
+    ids, finfo = full_core_ids(name, work, cadical, seeds, S['certs'])
+    lrat, info = core_lrat(name, ids, work, cadical, seeds, S['certs'])
+    clauses = read_cnf(extract_cnf(name, work, S['certs']))
     assert len(clauses) == case['clauses'], name
     stats = lrat_stats(lrat)
     assert (stats['lemmas'], stats['hints']) == (info['lemmas'], info['hints']), name
     core = [clauses[i - 1] for i in ids]
-    module = dir_module(dirs, syms)
+    module = dir_module(dirs, syms, S['prefix'])
     meta = {'name': name, 'module': 'LocalWindowCnf.' + module, 'dirs': dirs, 'syms': syms,
-            'window': window_from_dirs(dirs), 'bounds': dir_bounds(syms),
-            'cnf_clauses': len(clauses), 'cnf_sha256': cnf_sha, 'hash_source': 'direction_certificates_k5.json',
+            'window': window_from_dirs(dirs), 'bounds': dir_bounds(syms), 'radius': S['radius'],
+            'cnf_clauses': len(clauses), 'cnf_sha256': cnf_sha, 'hash_source': S['index'],
             'core_producer': f"cadical --lrat --seed={finfo['full_seed']} on the committed CNF, trimmed "
                              f"({finfo['full_lemmas']} lemmas, {finfo['full_hints']} hints)",
             'lrat_producer': 'core_lrat (cadical on the core; regenerated, not committed)',
             'variables': case['variables'], 'lrat': stats, 'core_ids': ids}
-    json.dump(meta, open(os.path.join(DCORE5, name + '.json'), 'w'))
+    json.dump(meta, open(os.path.join(S['core'], name + '.json'), 'w'))
     body = ',\n  '.join('[' + ', '.join(str(2 * l if l > 0 else -2 * l + 1) for l in c) + ']' for c in core)
     src = DIR_TEMPLATE.format(name=name, ncore=len(core), ncl=len(clauses), dirs=dirs, syms=syms,
                               module=module, body=body)
     src = src.replace('(generated by\n`milestones/10-window-aggregate/scripts/gen_lean_core.py --set direction`)',
-                      '(generated by\n`milestones/10-window-aggregate/scripts/gen_lean_core.py --set direction5`)')
+                      '(generated by\n`milestones/10-window-aggregate/scripts/gen_lean_core.py --set %s`)' % setname)
+    if S['radius'] != 3:
+        src = src.replace('UNSAT core of direction certificate', 'UNSAT core of radius-%d direction certificate' % S['radius'])
     open(os.path.join(LEAN, 'LocalWindowCnf', module + '.lean'), 'w').write(src)
     return name, module, dirs, syms, len(core), len(clauses), 'cadical', stats
 
 
 def main_direction5(a):
-    os.makedirs(DCORE5, exist_ok=True)
-    cases = json.load(open(os.path.join(DATA, 'direction_certificates_k5.json')))['cases']
-    assert len(cases) == 325
+    S = CADICAL_SETS[a.set]
+    os.makedirs(S['core'], exist_ok=True)
+    cases = [c for c in json.load(open(os.path.join(DATA, S['index'])))['cases'] if c['drat_trim_verified']]
+    n = len(cases)
     old = {}
-    for c in json.load(open(os.path.join(DATA, 'direction_certificates.json')))['cases']:
-        old[(tuple(c['dirs']), tuple(map(tuple, c['alpha'])))] = c['case']
+    if S['reuse']:
+        for c in json.load(open(os.path.join(DATA, S['reuse'])))['cases']:
+            old[(tuple(c['dirs']), tuple(map(tuple, c['alpha'])))] = c['case']
     res, jobs = [], []
     for c in cases:
         k = (tuple(c['dirs']), tuple(map(tuple, c['alpha'])))
         if k in old:   # reuse the 239 core and its drat-trim LRAT
             meta = json.load(open(os.path.join(DCORE, old[k] + '.json')))
             assert meta['name'] == old[k] == c['case'], (old[k], c['case'])
-            shutil.copy2(os.path.join(DCORE, old[k] + '.json'), os.path.join(DCORE5, old[k] + '.json'))
+            shutil.copy2(os.path.join(DCORE, old[k] + '.json'), os.path.join(S['core'], old[k] + '.json'))
             res.append((meta['name'], meta['module'].split('.')[-1], meta['dirs'], meta['syms'],
                         len(meta['core_ids']), meta['cnf_clauses'], meta['hash_source'], meta['lrat']))
         else:
-            jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1))))
-    assert len(res) == 145 and len(jobs) == 180, (len(res), len(jobs))
+            jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1)), a.set))
+    if a.set == 'direction5':
+        assert n == 325 and len(res) == 145 and len(jobs) == 180, (n, len(res), len(jobs))
+    print(f'{a.set}: {n} cases, {len(res)} reused, {len(jobs)} to core', flush=True)
     with Pool(a.jobs) as p:
         res += list(p.imap_unordered(dir5_one, jobs))
     res.sort(key=lambda r: r[1])
     keys = sorted(((r[2], r[3]) for r in res), key=lambda k: (len(k[0]), k[0], k[1]))
-    assert len({(tuple(d), tuple(s)) for d, s in keys}) == 325 and len({r[1] for r in res}) == 325
+    assert len({(tuple(d), tuple(s)) for d, s in keys}) == n and len({r[1] for r in res}) == n
     tot = {'core_clauses': 0, 'cnf_clauses': 0, 'lemmas': 0, 'hints': 0, 'lemma_literals': 0, 'cadical': 0}
     for name, module, dirs, syms, ncore, ncl, source, st in res:
         tot['core_clauses'] += ncore; tot['cnf_clauses'] += ncl
@@ -441,23 +462,23 @@ def main_direction5(a):
     print('total', tot)
     body = ',\n  '.join(f'({d}, {s})' for d, s in keys)
     src = KEYS_TEMPLATE.format(body=body)
-    src = (src.replace('# The 145 direction-aware window certificates', '# The 325 five-centre window certificates')
-              .replace('--set direction`', '--set direction5`')
-              .replace('direction_certificates.json', 'direction_certificates_k5.json')
-              .replace('def dirKeys :', 'def dirKeys5 :')
+    src = (src.replace('# The 145 direction-aware window certificates', '# ' + S['title'])
+              .replace('--set direction`', '--set %s`' % a.set)
+              .replace('direction_certificates.json', S['index'])
+              .replace('def dirKeys :', 'def %s :' % S['keys'])
               .replace('/-- The 145 certificate statements behind the conditional bound 239. -/\n'
                        'def AllRefuted239 : Prop := AllRefutedList dirKeys',
-                       '/-- The 325 certificate statements behind the conditional bound 238. -/\n'
-                       'def AllRefuted238 : Prop := AllRefutedList dirKeys5'))
-    assert 'dirKeys5' in src and 'AllRefuted238' in src and '145' not in src
-    open(os.path.join(LEAN, 'LocalWindowDirKeys5.lean'), 'w').write(src)
-    json.dump({'set': 'direction5', 'cases': len(res), 'totals': tot,
+                       '/-- The %d certificate statements behind the conditional bound %d. -/\n'
+                       'def %s : Prop := AllRefutedList %s' % (n, S['bound'], S['premise'], S['keys'])))
+    assert S['keys'] in src and S['premise'] in src and '145' not in src
+    open(os.path.join(LEAN, S['keys_mod'] + '.lean'), 'w').write(src)
+    json.dump({'set': a.set, 'cases': len(res), 'totals': tot,
                'per_case': {r[0]: {'module': r[1], 'core_clauses': r[4], 'cnf_clauses': r[5],
                                    'hash_source': r[6], **r[7]} for r in res},
-               'note': 'The 145 keys shared with the direction set keep their drat-trim LRAT; the 180 '
-                       'new windows have cadical --lrat proofs trimmed to the dependencies of the empty '
-                       'clause (producer and SHA256 per case; not committed).'},
-              open(os.path.join(DCORE5, '_summary.json'), 'w'), indent=1)
+               'note': 'Keys shared with the direction set keep their drat-trim LRAT; the other windows '
+                       'have cadical --lrat proofs trimmed to the dependencies of the empty clause '
+                       '(producer and SHA256 per case; not committed).'},
+              open(os.path.join(S['core'], '_summary.json'), 'w'), indent=1)
 
 
 def main_direction(a):
@@ -494,13 +515,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--work', required=True)
     ap.add_argument('--drat', default=os.path.join(HERE, '..', '.build', 'drat-trim'))
-    ap.add_argument('--set', choices=['window', 'direction', 'direction5'], default='window')
+    ap.add_argument('--set', choices=['window', 'direction', 'direction5', 'r4'], default='window')
     ap.add_argument('--jobs', type=int, default=4)
     ap.add_argument('--cadical', default=None, help='cadical binary (default: the Lean toolchain one)')
     ap.add_argument('--seeds', type=int, default=3, help='direction5: cadical seeds to try per window')
     a = ap.parse_args()
     os.makedirs(a.work, exist_ok=True)
-    if a.set == 'direction5':
+    if a.set in CADICAL_SETS:
         if a.cadical is None:
             prefix = subprocess.check_output(['lean', '--print-prefix'], text=True).strip()
             a.cadical = os.path.join(prefix, 'bin', 'cadical')

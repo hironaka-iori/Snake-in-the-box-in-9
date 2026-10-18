@@ -20,7 +20,7 @@ UNSAT = os.path.join(ROOT, 'work', 'final_lean', 'LocalWindowUnsat')
 
 
 def data_dir(a):
-    return DATA + ('5' if a.set == 'direction5' else '')
+    return DATA + {'direction': '', 'direction5': '5', 'r4': '_r4'}[a.set]
 
 
 def cases(a):
@@ -39,10 +39,13 @@ def gen(a):
             import gen_lean_core
             cadical = a.cadical or os.path.join(
                 subprocess.check_output(['lean', '--print-prefix'], text=True).strip(), 'bin', 'cadical')
-            gen_lean_core.core_lrat(name, meta['core_ids'], a.work, cadical, list(range(1, a.seeds + 1)))
-        # literal offset 3000 for CNFs with 2400 or more variables (the five-centre windows)
-        off = 3000 if meta.get('variables', 0) >= 2400 else 2400
-        for bits in ((13, 14, 15) if off == 3000 else (13, 14)):
+            certs = gen_lean_core.CADICAL_SETS[a.set]['certs']
+            gen_lean_core.core_lrat(name, meta['core_ids'], a.work, cadical, list(range(1, a.seeds + 1)), certs)
+        # literal offset above the variable count: 2400 / 3000 / 4000 (see gen_checker_variants.py)
+        nv = meta.get('variables', 0)
+        off = 2400 if nv < 2400 else 3000 if nv < 3000 else 4000
+        assert nv < 4000, (name, nv)
+        for bits in ((13, 14, 15) if off > 2400 else (13, 14)):
             cmd = [sys.executable, os.path.join(HERE, 'gen_lean_lrat.py'), '--work', a.work,
                    '--data', data_dir(a), '--seg', str(a.seg), '--cp', str(a.cp), '--group', str(a.group),
                    '--wbits', str(bits), '--off', str(off), '--noncomputable-data', '--fast', name]
@@ -71,8 +74,8 @@ def build(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--set', choices=['direction', 'direction5'], default='direction',
-                    help='the 145 windows of the 239 bound, or the 325 of the 238 bound')
+    ap.add_argument('--set', choices=['direction', 'direction5', 'r4'], default='direction',
+                    help='the 145 windows of the 239 bound, the 325 of the 238 bound, or the radius-4 set')
     sub = ap.add_subparsers(dest='cmd', required=True)
     g = sub.add_parser('gen')
     g.add_argument('--work', required=True)

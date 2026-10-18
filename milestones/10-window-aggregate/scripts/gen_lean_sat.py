@@ -205,8 +205,9 @@ def process(name, emit, certs=CERTS, core_dir=CORE):
     if 'dirs' in meta:  # direction certificate: the window is `winOf dirs`
         assert window == wincert.window_from_dirs(meta['dirs']), name
     alpha = [b[0] if b[0] == b[1] else b for b in bounds]
-    enc = TaggedEncoding(window, alpha)
-    ref = wincert.Encoding(window, alpha, radius=3)
+    radius = meta.get('radius', 3)
+    enc = TaggedEncoding(window, alpha, radius=radius)
+    ref = wincert.Encoding(window, alpha, radius=radius)
     assert ref.clauses == enc.clauses and ref.nv == enc.nv, name
     nv, committed = read_cnf(os.path.join(certs, name + '.cnf.gz'))
     assert nv == enc.nv, (name, nv, enc.nv)
@@ -282,7 +283,11 @@ DCORE5 = os.path.join(HERE, '..', 'data', 'lean_core_direction5')
 
 # per certificate set: keys module, key list, number of keys, aggregate module, premise, bound
 DIR_SETS = {'direction': ('LocalWindowDirKeys', 'dirKeys', 145, 'LocalWindowDirSat', 'AllRefuted239', 239),
-            'direction5': ('LocalWindowDirKeys5', 'dirKeys5', 325, 'LocalWindowDirSat5', 'AllRefuted238', 238)}
+            'direction5': ('LocalWindowDirKeys5', 'dirKeys5', 325, 'LocalWindowDirSat5', 'AllRefuted238', 238),
+            'r4': ('LocalWindowDirKeysR4', 'dirKeysR4', None, 'LocalWindowDirSatR4', 'AllRefuted236', 236)}
+DIR_DIRS = {'direction': (DCERTS, DCORE), 'direction5': (DCERTS, DCORE5),
+            'r4': (os.path.join(HERE, '..', 'certificates', 'direction_r4'),
+                   os.path.join(HERE, '..', 'data', 'lean_core_direction_r4'))}
 
 
 def dir_key_order(metas, dset='direction'):
@@ -292,17 +297,19 @@ def dir_key_order(metas, dset='direction'):
     keys = [([int(x) for x in d.split(',')], [int(x) for x in s.split(',')])
             for d, s in re.findall(r'\(\[([0-9, ]*)\], \[([0-9, ]*)\]\)', src)]
     by_key = {(tuple(m['dirs']), tuple(m['syms'])): m['module'].split('.', 1)[1] for m in metas}
-    assert len(keys) == len(by_key) == n and {(tuple(d), tuple(s)) for d, s in keys} == set(by_key)
+    assert len(keys) == len(by_key) and (n is None or n == len(keys)), (len(keys), len(by_key), n)
+    assert {(tuple(d), tuple(s)) for d, s in keys} == set(by_key)
     return [by_key[(tuple(d), tuple(s))] for d, s in keys]
 
 
 def write_dir_aggregate(order, dset='direction'):
     keys_mod, keys, n, agg, premise, bound = DIR_SETS[dset]
+    n = len(order)
     imports = ''.join(f'import LocalWindowSat.{m}\n' for m in sorted(order))
     unsat = ' ∧\n  '.join(f'Unsat {m}.cnf' for m in order)
     hs = ', '.join(f'h{i}' for i in range(len(order)))
     terms = ''.join(f'\n    (And.intro (Tags.refuted_of_sat {m}.sat h{i})' for i, m in enumerate(order))
-    what = 'direction' if dset == 'direction' else 'five-centre'
+    what = {'direction': 'direction', 'direction5': 'five-centre', 'r4': 'radius-4'}[dset]
     src = f'''import {keys_mod}
 import LocalWindowTags
 {imports}
@@ -336,8 +343,9 @@ def write_dir_unsat(order, dset='direction'):
     """LocalWindowDirUnsat[5].lean: the replays `LocalWindowUnsat.D*` (generated, not
     committed) combined with the `sat` theorems into the premise of the bound."""
     keys_mod, keys, n, agg, premise, bound = DIR_SETS[dset]
-    what = 'direction-window' if dset == 'direction' else 'five-centre-window'
-    unsat_mod = 'LocalWindowDirUnsat' + ('5' if dset == 'direction5' else '')
+    n = len(order)
+    what = {'direction': 'direction-window', 'direction5': 'five-centre-window', 'r4': 'radius-4-window'}[dset]
+    unsat_mod = 'LocalWindowDirUnsat' + {'direction': '', 'direction5': '5', 'r4': 'R4'}[dset]
     imports = ''.join(f'import LocalWindowUnsat.{m}\n' for m in order)
     terms = ',\n   '.join(f'{m}.unsat' for m in order)
     src = f'''import {agg}
@@ -367,11 +375,10 @@ end Snake9.LocalWindow
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--check', action='store_true', help='run the checks without writing Lean files')
-    ap.add_argument('--set', choices=['window', 'direction', 'direction5'], default='window')
+    ap.add_argument('--set', choices=['window', 'direction', 'direction5', 'r4'], default='window')
     ap.add_argument('names', nargs='*')
     a = ap.parse_args()
-    certs, core_dir = {'window': (CERTS, CORE), 'direction': (DCERTS, DCORE),
-                       'direction5': (DCERTS, DCORE5)}[a.set]
+    certs, core_dir = (CERTS, CORE) if a.set == 'window' else DIR_DIRS[a.set]
     names = a.names or sorted(f[:-5] for f in os.listdir(core_dir)
                               if f.endswith('.json') and not f.startswith('_'))
     mods = []
