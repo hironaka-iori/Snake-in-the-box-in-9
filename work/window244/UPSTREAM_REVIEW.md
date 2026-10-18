@@ -153,6 +153,11 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 该实例全部 RUP 段采用与 323-distinct 相同的两层拆分与已证组合方法。
 此改动仅改变核验模块的划分，原始数据、检查器和结论保持不变。
 
+前向实例的两层拆分核验已通过。随后反向 `C2423RevS01230` 第 13 段
+触及预算；失败记录及相关哈希保存为 `upstream241-rup2423rev-check13-attempt.json`。
+该反向实例现在同样采用已证两层拆分，按实际原始反向证书逐项核验，
+不将前向通过当作反向证明。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
