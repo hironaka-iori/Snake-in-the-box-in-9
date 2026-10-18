@@ -70,6 +70,12 @@ RUP 段和检查点复制，仍触及预算；其清单保存为
 到 1,244 个模块。生成子模块的来源哈希统一指向原始 Git 父模块，实际
 子模块另有独立源码哈希；没有改变检查器、证书或最终目标。
 
+拆开的两个布尔检查均已通过（17.64 秒、7.22 秒）。合并时使用 `simp`
+仍意外展开了大型计算而超限；该次清单保存为
+`outputs/window244/upstream241-check-assembly-attempt.json`。现改用对任意两个
+布尔值证明的 `combineChecks` 引理，直接应用两个已证结果，避免再次展开
+证书计算；原 `ok3` 陈述不变。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。

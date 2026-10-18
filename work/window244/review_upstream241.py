@@ -87,7 +87,7 @@ try:
                         sub=part+suffix;subparts.append(sub)
                         synthetic[sub]=(header+f'theorem ok3_{suffix} : {expr} = true := by\n  decide +kernel\n\nend '+namespace+'\n').encode()
                         synthetic_origin[sub]=upstream_sha;mapping[sub]=mapping[name]
-                    synthetic[part]=(''.join('import '+sub+'\n' for sub in subparts)+'\nnamespace '+namespace+'\nopen Snake9.Lrat\n'+body[:body.index(':= by')]+':= by\n  simpa only [andB, ok3_Check] using ok3_Checkpoint\nend '+namespace+'\n').encode()
+                    synthetic[part]=(''.join('import '+sub+'\n' for sub in subparts)+'\nnamespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\nprivate theorem combineChecks {a b : Bool} (ha : a = true) (hb : b = true) : andB a b = true := by\n  rw [ha, hb]\n  rfl\n'+body[:body.index(':= by')]+':= by\n  exact combineChecks ok3_Check ok3_Checkpoint\nend '+namespace+'\n').encode()
             raw=(''.join('import '+p+'\n' for p in parts)).encode()
         if name in {'Snake9','SquareCounterexample'}:
             # Preserve every definition and theorem statement. Kernel reduction
