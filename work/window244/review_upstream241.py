@@ -65,6 +65,10 @@ try:
         if name in done:return
         assert name not in visiting,'Import cycle: '+name
         visiting.add(name)
+        if name=='ReviewCheckAppend':
+            synthetic[name]=(ROOT/'work/window244/CheckAppend.lean').read_bytes()
+            synthetic_origin[name]=hashlib.sha256(synthetic[name]).hexdigest()
+            mapping[name]='LOCAL:work/window244/CheckAppend.lean'
         if name not in mapping:raise RuntimeError('Unresolved custom import: '+name)
         raw=synthetic[name] if name in synthetic else read_blob(mapping[name]);upstream_sha=synthetic_origin[name] if name in synthetic else hashlib.sha256(raw).hexdigest()
         if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+',name):
@@ -92,6 +96,18 @@ try:
                         synthetic_origin[sub]=upstream_sha;mapping[sub]=mapping[name]
                     synthetic[part]=(''.join('import '+sub+'\n' for sub in subparts)+'\nnamespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\nprivate theorem combineChecks {a b : Bool} (ha : a = true) (hb : b = true) : andB a b = true := by\n  rw [ha, hb]\n  rfl\n'+body[:body.index(':= by')]+f':= by\n  exact combineChecks {theorem_name}_Check {theorem_name}_Checkpoint\nend '+namespace+'\n').encode()
             raw=(''.join('import '+p+'\n' for p in parts)).encode()
+        if name=='LocalWindowUnsat.C224FwdDistinct.Check5Part2Check':
+            text=raw.decode();header=text[:text.index('theorem ok18_Check')]
+            namespace='Snake9.LocalWindow.C224FwdDistinct'
+            header='import ReviewCheckAppend\n'+header
+            pieces=[]
+            for index,(tree,proof) in enumerate([
+                ('start18','proof18.take 214'),
+                ('advanceChecks start18 (proof18.take 214)','proof18.drop 214')]):
+                part=name+f'Half{index+1}';pieces.append(part)
+                synthetic[part]=(header+f'theorem ok18_half{index+1} : check ({tree}) ({proof}) = true := by\n  decide +kernel\nend '+namespace+'\n').encode()
+                synthetic_origin[part]=upstream_sha;mapping[part]=mapping[name]
+            raw=(''.join('import '+part+'\n' for part in pieces)+'namespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\ntheorem ok18_Check : check start18 proof18 = true := by\n  have h := check_append_true start18 (proof18.take 214) (proof18.drop 214) ok18_half1 ok18_half2\n  rw [List.take_append_drop] at h\n  exact h\nend '+namespace+'\n').encode()
         if name in {'Snake9','SquareCounterexample'}:
             # Preserve every definition and theorem statement. Kernel reduction
             # avoids elaborating the enormous default `decide` proof term.

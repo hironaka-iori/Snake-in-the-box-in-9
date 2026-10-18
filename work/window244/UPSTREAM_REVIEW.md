@@ -83,6 +83,13 @@ RUP 段和检查点复制，仍触及预算；其清单保存为
 检查器及预算不变。适配后的完整闭包为 2,563 个模块；清单逐项记录来源、
 实际源码、导入产物、编译器及日志哈希，继续从有效断点恢复。
 
+累计 483 个模块通过后，`C224FwdDistinct.Check5Part2Check` 的第 18 段
+独立 RUP 检查触及预算；保存清单为 `upstream241-check18-first-attempt.json`。
+新增 `CheckAppend.lean`，以对证明列表的归纳证明检查器的精确拼接恒等式，
+从而把该段按前 214 步与剩余步骤分别核验，再组合回原始 `ok18_Check`。
+第二段的数据库由原检查器的 `ins` 逐步得到，不假定任何求解器状态正确。
+检查器及原证书数据保持不变，预算不变，当前闭包为 2,566 个模块。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
