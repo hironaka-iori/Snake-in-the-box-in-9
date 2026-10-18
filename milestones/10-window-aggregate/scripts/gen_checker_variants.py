@@ -71,8 +71,6 @@ def main():
         fns = fmod
         text = fast.replace('import LratCheck\n', 'import LratCheck\n\n' + header('LratFast', bits, off), 1)
         text = variant(text, bits, off, bns, fns, bmod)
-        if fmod == 'LratFast14' and os.path.exists(os.path.join(LEAN, 'LratFast14.lean')):
-            continue   # hand-made earlier with its own header; equivalent
         print(fmod, 'written' if write(os.path.join(LEAN, fmod + '.lean'), text) else 'unchanged')
 
 

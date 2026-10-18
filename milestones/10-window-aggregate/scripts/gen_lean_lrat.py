@@ -27,8 +27,9 @@ With --fast the checker is work/final_lean/LratFast.lean (LratFast14 for 14-bit 
 the database is the perfect tree of height h = nslots.bit_length() whose keys are the
 in-order positions 1 .. 2^h - 1 (heap node s at depth d, index i in its level, has key
 (2i+1) 2^(h-1-d)), so the initial shape is built by one recursion (`perf`), and a
-checkpoint lists the clause words of every node of that tree in pre-order, `0` for a free
-slot (`build`, checked by `cpOk`).
+checkpoint is the stream of the clause words of every node of that tree in pre-order
+(`(lit+1) … (lit+1) 0` per node, `0` alone for a free slot), packed --cp-chunk nodes per
+Nat (`build`, checked by `cpOk`).
 
   python gen_lean_lrat.py --work DIR [--seg N] [--cp M] [--group G] [--check] [--data DIR] NAME ...
 """
@@ -70,6 +71,7 @@ def set_width(bits, fast=False, off=2400):
 # --noncomputable-data they are declared `noncomputable def`: no compiled code is
 # generated, which makes the .olean files several times smaller and the .c files empty.
 DATA_DEF = 'def'
+CP_CHUNK = 64   # checkpoint entries per Nat (--cp-chunk)
 
 
 def module_name(name):
@@ -308,9 +310,19 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
             j = cuts[k - 1]
             live = sorted((slot_at[c], c) for c, l in last.items() if born[c] < j and l >= j)
             if FAST:
-                by_key = {key[s]: pack([bit(l) + 1 for l in lits_of[c]]) for s, c in live}
-                assert all(by_key.values())
-                cps[k] = [by_key.get(kk, 0) for kk in preorder_keys(height)]
+                by_key = {key[s]: [bit(l) + 1 for l in lits_of[c]] + [0] for s, c in live}
+                words = [w for kk in preorder_keys(height) for w in by_key.get(kk, [0])]
+                # split into chunks of CP_CHUNK entries (an entry ends with a 0 word)
+                chunks, cur, n = [], [], 0
+                for w in words:
+                    cur.append(w)
+                    if w == 0:
+                        n += 1
+                        if n == CP_CHUNK:
+                            chunks.append(pack(cur)); cur, n = [], 0
+                if cur:
+                    chunks.append(pack(cur))
+                cps[k] = chunks
             else:
                 cps[k] = [pack([key[s]] + [bit(l) + 1 for l in lits_of[c]]) for s, c in live]
     final_key = key[steps[-1][0]]
@@ -327,10 +339,18 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         for k in range(1, nseg + 1):
             if is_cp[k] and FAST:
                 ndb = {}
-                for kk, e in zip(preorder_keys(height), cps[k]):
-                    c = taut if e == 0 else sim_lits(unpack(e), 0)[0]
-                    assert c == taut or db.get(kk) == c, ('checkpoint', k, kk)
-                    ndb[kk] = c
+                keys_left = preorder_keys(height)
+                for x in cps[k]:   # exactly CP_CHUNK entries per chunk, trailing zero words implicit
+                    ws, pos = unpack(x) + [0] * (CP_CHUNK + 1), 0
+                    for kk in keys_left[:CP_CHUNK]:
+                        c, pos = sim_lits(ws, pos)
+                        c = taut if c == 0 else c
+                        assert c == taut or db.get(kk) == c, ('checkpoint', k, kk)
+                        ndb[kk] = c
+                    keys_left = keys_left[CP_CHUNK:]
+                assert not keys_left or all(not live_key for live_key in [db.get(kk, taut) != taut for kk in keys_left])
+                for kk in keys_left:
+                    ndb[kk] = taut
                 db = ndb
             elif is_cp[k]:
                 ndb = {key[s]: taut for s in range(1, nslots + 1)}
@@ -365,7 +385,11 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
          else 'noncomputable def start1 : Tree := loadRaw (shape .nil shapeKeys) raw inputSlots'), '',
         'end ' + ns, ''])
     for k in range(1, nseg + 1):
-        body = ['import LocalWindowUnsat.%s.Data%d' % (mod, k - 1), '',
+        # Data_k needs start_k (from Data_{k-1}) only to define start_{k+1} as a replay; at a
+        # checkpoint, and for the last segment, it imports Data0 alone, so that import chains
+        # have at most --cp links instead of growing with the segment index.
+        needs_prev = k < nseg and not is_cp[k + 1]
+        body = ['import LocalWindowUnsat.%s.Data%d' % (mod, k - 1 if needs_prev else 0), '',
                 '/-! LRAT refutation of the core of `%s`: segment %d of %d (generated). -/' % (name, k, nseg), '',
                 HEADER, 'namespace ' + ns, CHECKER_OPEN, '',
                 DATA_DEF + ' proof%d : List Nat := %s' % (k, hexlist(nums[cuts[k - 1]:cuts[k]])), '']
@@ -373,7 +397,7 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
             if is_cp[k + 1]:
                 body += ['/-- Checkpoint: the live clauses before segment %d. -/' % (k + 1),
                          DATA_DEF + ' cp%d : List Nat := %s' % (k + 1, hexlist(cps[k + 1])), '',
-                         ('noncomputable def start%d : Tree := build %d cp%d' % (k + 1, height, k + 1) if FAST
+                         ('noncomputable def start%d : Tree := build %d %d cp%d' % (k + 1, height, CP_CHUNK, k + 1) if FAST
                           else 'noncomputable def start%d : Tree := build (shape .nil shapeKeys) cp%d'
                           % (k + 1, k + 1)), '']
             else:
@@ -393,7 +417,8 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
 
     groups = [list(range(g, min(g + group, nseg + 1))) for g in range(1, nseg + 1, group)]
     for gi, ks in enumerate(groups, start=1):
-        body = ['import LocalWindowUnsat.%s.Data%d' % (mod, ks[-1]), '',
+        # start_k lives in Data_{k-1}, proof_k in Data_k: import the whole range explicitly
+        body = ['import LocalWindowUnsat.%s.Data%d' % (mod, j) for j in range(ks[0] - 1, ks[-1] + 1)] + ['',
                 '/-! Kernel checks of segments %d-%d of `%s` (generated). -/' % (ks[0], ks[-1], name), '',
                 HEADER, 'set_option Elab.async false', '', 'namespace ' + ns, CHECKER_OPEN, '']
         for k in ks:
@@ -450,9 +475,12 @@ def main():
     ap.add_argument('--noncomputable-data', action='store_true',
                     help='declare the proof data `noncomputable def` (smaller build output)')
     ap.add_argument('--fast', action='store_true', help='emit proofs for LratFast (see above)')
+    ap.add_argument('--cp-chunk', type=int, default=64, help='checkpoint entries per Nat (LratFast)')
     ap.add_argument('names', nargs='+')
     a = ap.parse_args()
     set_width(a.wbits, a.fast, a.off)
+    global CP_CHUNK
+    CP_CHUNK = a.cp_chunk
     if a.noncomputable_data:
         global DATA_DEF
         DATA_DEF = 'noncomputable def'
