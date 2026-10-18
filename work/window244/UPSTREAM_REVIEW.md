@@ -106,6 +106,12 @@ RUP 段和检查点复制，仍触及预算；其清单保存为
 `upstream241-sat232-first-attempt.json`。本次首先关闭该模块的异步
 elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预算保持不变。
 
+该语义检查关闭异步后仍超限，清单已保存为
+`upstream241-sat232-sequential-attempt.json`。现把其定义、计数器检查、前
+1,200 条子句与剩余子句分别放入模块；新增 `SemanticAppend.lean`，通过
+列表归纳证明等长标签与子句的拼接规则，合并回原始 `checkAll` 和 `sat`。
+原始定义、全部子句、标签与最终语义定理不变，不增加未经证明的假设。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。

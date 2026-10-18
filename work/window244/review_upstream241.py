@@ -74,6 +74,10 @@ try:
             synthetic[name]=(ROOT/'work/window244/CheckAppend.lean').read_bytes()
             synthetic_origin[name]=hashlib.sha256(synthetic[name]).hexdigest()
             mapping[name]='LOCAL:work/window244/CheckAppend.lean'
+        if name=='ReviewSemanticAppend':
+            synthetic[name]=(ROOT/'work/window244/SemanticAppend.lean').read_bytes()
+            synthetic_origin[name]=hashlib.sha256(synthetic[name]).hexdigest()
+            mapping[name]='LOCAL:work/window244/SemanticAppend.lean'
         if name not in mapping:raise RuntimeError('Unresolved custom import: '+name)
         raw=synthetic[name] if name in synthetic else read_blob(mapping[name]);upstream_sha=synthetic_origin[name] if name in synthetic else hashlib.sha256(raw).hexdigest()
         if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+',name):
@@ -149,6 +153,26 @@ try:
             raw=raw.replace(b'set_option maxHeartbeats 0',b'set_option maxHeartbeats 0\nset_option Elab.async false')
         if name=='LocalWindowBridge':
             raw=raw.replace(b'set_option maxRecDepth 10000',b'set_option maxRecDepth 10000\nset_option Elab.async false')
+        if name=='LocalWindowSat.C232FwdDistinct':
+            text=raw.decode();offset=text.index('theorem check :')
+            namespace=re.search(r'^namespace (.+)$',text,re.M).group(1)
+            base=name+'Definitions';mapping[base]=mapping[name];synthetic_origin[base]=upstream_sha
+            synthetic[base]=(text[:offset]+'\nend '+namespace+'\n').encode()
+            header=f'import {base}\nimport ReviewSemanticAppend\nset_option Elab.async false\nset_option maxRecDepth 100000\nset_option maxHeartbeats 0\nnamespace {namespace}\nopen Snake9.LocalWindow.Tags\n'
+            pieces=[]
+            for suffix,prop in [('Counters','ctrs.all (ctrOK meaning (centresK window bounds)) = true'),
+                ('First','ckAll meaning ctrs window (tags.take 1200) (raw.take 1200) = true'),
+                ('Last','ckAll meaning ctrs window (tags.drop 1200) (raw.drop 1200) = true')]:
+                part=name+suffix;pieces.append(part);mapping[part]=mapping[name];synthetic_origin[part]=upstream_sha
+                synthetic[part]=(header+f'theorem check{suffix} : {prop} := by decide +kernel\nend {namespace}\n').encode()
+            raw=(''.join(f'import {p}\n' for p in pieces)+header+'''theorem checkClauses : ckAll meaning ctrs window tags raw = true := by
+  have h := ckAll_append_true meaning ctrs window (tags.take 1200) (raw.take 1200)
+    (tags.drop 1200) (raw.drop 1200) (by decide +kernel) checkFirst checkLast
+  rw [List.take_append_drop, List.take_append_drop] at h
+  exact h
+theorem check : checkAll meaning ctrs window bounds tags raw = true := by
+  exact Bool.and_eq_true.mpr ⟨checkCounters, checkClauses⟩
+'''+text[text.index('theorem sat :'):]).encode()
         src=build/(name.replace('.','/')+'.lean')
         src.parent.mkdir(parents=True,exist_ok=True)
         if not src.exists() or src.read_bytes()!=raw:src.write_bytes(raw)
