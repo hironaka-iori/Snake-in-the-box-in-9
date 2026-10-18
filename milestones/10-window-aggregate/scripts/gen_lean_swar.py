@@ -14,7 +14,8 @@ of 216 packed 8-bit fields per outer step instead of a 36-iteration inner loop:
     multiplication, the new symbol's weight is a constant pattern;
   * swarOK A B BL HI compares all 216 fields at once (WindowAutomatonSwar.lean).
 
-Suffix: K{k}R{radius}W.
+Suffix: K{k}R{radius}W (lump cap 5, six symbols); `--K 7` gives eight symbols, blocks of 512 fields and
+suffix K{k}R{radius}C7W (the constants 6/36/216 above become NS/NS^2/NS^3).
 
   python gen_lean_swar.py --index ../data/direction_certificates_k6.json --set ../data/minimal_L7_k6_K5_r3_fix.json --L 7 --k 6 --radius 3
 """
@@ -31,11 +32,12 @@ from minimize_fast import sym_codes
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 STRONGER = os.path.join(ROOT, 'work', 'spectral', 'stronger')
-NS = 6
 
 
-def pos(z):
-    return 216 * (z // 216) + 36 * (z % 6) + (z // 6) % 36
+def pos(z, NS):
+    """Stored field of code `z`: the three newest base-NS digits (a, b, c) go to `N2 c + NS a + b`."""
+    N2, N3 = NS * NS, NS ** 3
+    return N3 * (z // N3) + N2 * (z % NS) + (z // NS) % N2
 
 
 def main():
@@ -45,11 +47,20 @@ def main():
     ap.add_argument('--L', type=int, required=True)
     ap.add_argument('--k', type=int, required=True)
     ap.add_argument('--radius', type=int, default=3)
+    ap.add_argument('--K', type=int, default=5, help='lump cap: symbols 1..K+1 (K+1 = count >= K+1)')
     a = ap.parse_args()
-    L, k, K = a.L, a.k, 5
+    L, k, K = a.L, a.k, a.K
     assert k >= 4, 'the SWAR block holds three symbols; use k >= 4'
-    S = f'K{k}R{a.radius}W'
+    NS = K + 1; N2 = NS * NS; N3 = NS ** 3; B3 = 8 * N3; B2 = 8 * N2
+    S = f'K{k}R{a.radius}W' if K == 5 else f'K{k}R{a.radius}C{K}W'
     CODE = f'code{S}'
+    # names of the block-position lemmas and the symbol function (shared ones for NS = 6)
+    POS = 'pos3' if NS == 6 else f'pos{S}'
+    REPL = 'pack_tab_rep36' if NS == 6 else f'pack_tab_rep{S}'
+    SYM = 'sym' if NS == 6 else f'symK {NS}'
+    GE1 = (lambda h: f'sym_ge_one _ {h}') if NS == 6 else (lambda h: f'symK_ge_one {NS} _ (by decide) {h}')
+    LEK = 'sym_le_six _' if NS == 6 else f'symK_le_K {NS} _'
+    LE = 'sym_le' if NS == 6 else f'symK_le {NS}'
     if a.index:
         cases = [c for c in json.load(open(a.index))['cases'] if c['drat_trim_verified']]
         keys = [(tuple(c['dirs']), tuple(tuple(x) for x in c['alpha'])) for c in cases]
@@ -73,7 +84,7 @@ def main():
     assert pi is not None
     pi = pi - pi.min()
     R = int(pi.max())
-    assert R <= 15 and P + R <= 128 and 6 * Q + R < 128, (P, Q, R)
+    assert R <= 15 and P + R <= 128 and NS * Q + R < 128, (P, Q, R)
     vb = vertex_bound(A, U, V, W)
     C = P * L - Q * (L - 1) + R
     B = (9179 * Q + C - 8 * Q) // (P + 35 * Q)
@@ -106,10 +117,10 @@ def main():
         for z in range(NS ** cc):
             if Fbits >> z & 1:
                 if cc == 2:
-                    for aa in range(6):
-                        s |= 1 << (8 * (36 * (z % 6) + 6 * aa + z // 6) + 7)
+                    for aa in range(NS):
+                        s |= 1 << (8 * (N2 * (z % NS) + NS * aa + z // NS) + 7)
                 else:
-                    s |= 1 << (8 * pos(z) + 7)
+                    s |= 1 << (8 * pos(z, NS) + 7)
         return s
     sfwd = {key: spread(v, key[0]) for key, v in forwardB.items()}
     srev = {key: spread(v, key[0]) for key, v in reverseB.items()}
@@ -119,7 +130,7 @@ def main():
         vals = [min(R, int(pi[i * M1 + code6(digits(t, k - 1))])) for t in range(M1)]
         # vals[y] = potential of the state whose k-1 counts have natural code y
         potC[i] = sum(v << (8 * y) for y, v in enumerate(vals))
-        potT[i] = sum(v << (8 * pos(y)) for y, v in enumerate(vals))
+        potT[i] = sum(v << (8 * pos(y, NS)) for y, v in enumerate(vals))
 
     # ---- Python mirror of the transition inequality (natural codes) --------------
     ncodes = NS ** k; X = np.arange(ncodes)
@@ -189,14 +200,14 @@ def main():
         lines.append('  0')
         return '\n'.join(lines)
 
-    ONES = sum(1 << (8 * l) for l in range(216)); HI = 128 * ONES
+    ONES = sum(1 << (8 * l) for l in range(N3)); HI = 128 * ONES
     ONESP = sum(1 << (8 * l) for l in range(M1))
-    WPAT = sum((l // 36 + 1) << (8 * l) for l in range(216)); REP = sum(1 << (288 * i) for i in range(6))
+    WPAT = sum((l // N2 + 1) << (8 * l) for l in range(N3)); REP = sum(1 << (B2 * i) for i in range(NS))
     argn = [f'{p}{cc}' for cc in range(2, k + 1) for p in ('T', 'R')] + ['PC0', 'PT1']
     outer_lets = '  letN ((blk T2 R2 ||| blk T3 R3) + 1) fun BL3 =>\n' + ''.join(
         f'  letN (blk T{cc} R{cc} + 1) fun M{cc} =>\n' for cc in range(4, k + 1))
     inner_lets = ''.join(
-        f'    letN (winT M{cc} (1728 * (h % {NS ** (cc - 3)})) 1728 + 1) fun W{cc} =>\n' for cc in range(4, k + 1))
+        f'    letN (winT M{cc} ({B3} * (h % {NS ** (cc - 3)})) {B3} + 1) fun W{cc} =>\n' for cc in range(4, k + 1))
     blmask = ' ||| '.join(['BL3'] + [f'W{cc}' for cc in range(4, k + 1)])
     hp1 = f'(h % {NS ** (k - 4)})'
     check_args = '\n    '.join(
@@ -207,7 +218,7 @@ def main():
     for name, tbl in (('sfwd', sfwd), ('srev', srev)):
         for w in w2:
             if (2, w) in tbl:
-                rep_thms.append(f'''theorem {name}{S}_rep_{w} : allBelowR 216 (fun l => Nat.testBit ({name}{S} 2 {w}) (8 * l + 7) == Nat.testBit ({name}{S} 2 {w}) (8 * (36 * (l / 36) + l % 6) + 7)) = true := by
+                rep_thms.append(f'''theorem {name}{S}_rep_{w} : allBelowR {N3} (fun l => Nat.testBit ({name}{S} 2 {w}) (8 * l + 7) == Nat.testBit ({name}{S} 2 {w}) (8 * ({N2} * (l / {N2}) + l % {NS}) + 7)) = true := by
   decide +kernel''')
     def rep_universal(name, tbl):
         ws2 = [w for w in w2 if (2, w) in tbl]
@@ -215,8 +226,8 @@ def main():
   · subst hw{w}; exact eq_of_beq (allBelowR_spec _ _ {name}{S}_rep_{w} l hl)
 ''' for w in ws2)
         hyps = ', '.join(f'hw{w}' for w in ws2)
-        return f'''theorem {name}{S}_rep (w : Nat) : ∀ l, l < 216 →
-    Nat.testBit ({name}{S} 2 w) (8 * l + 7) = Nat.testBit ({name}{S} 2 w) (8 * (36 * (l / 36) + l % 6) + 7) := by
+        return f'''theorem {name}{S}_rep (w : Nat) : ∀ l, l < {N3} →
+    Nat.testBit ({name}{S} 2 w) (8 * l + 7) = Nat.testBit ({name}{S} 2 w) (8 * ({N2} * (l / {N2}) + l % {NS}) + 7) := by
   intro l hl
 {cases}  have h0 : {name}{S} 2 w = 0 := by
     unfold {name}{S}
@@ -230,7 +241,7 @@ def main():
             # expected type (unifying a separately elaborated Bool statement overflows the stack).
             pot_thms.append(f'theorem {nm}{S}_bnd_{i} (y : Nat) (hy : y < {M1}) : digit ({nm}{S} {i}) y + {127 - R} < 128 :=\n'
                             f'  bytes_lt_of_masks _ _ _ _ _ hiP{S}_eq onesP{S}_eq (by decide) (by decide +kernel) y hy')
-        pot_thms.append(f'theorem potT{S}_cons_{i} : allBelowR {M1} (fun y => Nat.beq (digit (potT{S} {i}) (pos3 y)) (digit (potC{S} {i}) y)) = true := by decide +kernel')
+        pot_thms.append(f'theorem potT{S}_cons_{i} : allBelowR {M1} (fun y => Nat.beq (digit (potT{S} {i}) ({POS} y)) (digit (potC{S} {i}) y)) = true := by decide +kernel')
     def by_shape(name, body_i, default):
         cases = ''.join(f'''  by_cases hi{i} : i = {i}
   · subst hi{i}; {body_i(i)}
@@ -244,25 +255,25 @@ def main():
 {by_shape(f'potC{S}', lambda i: f'have h := potC{S}_bnd_{i} y hy; omega', f'rw [h0]; simp [digit]')}'''
     potT_le = f'''theorem potT{S}_digit_le (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) y ≤ {R} := by
 {by_shape(f'potT{S}', lambda i: f'have h := potT{S}_bnd_{i} y hy; omega', f'rw [h0]; simp [digit]')}'''
-    potT_eq = f'''theorem potT{S}_digit (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) (pos3 y) = digit (potC{S} i) y := by
+    potT_eq = f'''theorem potT{S}_digit (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) ({POS} y) = digit (potC{S} i) y := by
 {by_shape(f'potT{S}', lambda i: f'exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potT{S}_cons_{i} y hy)', f'''have h0c : potC{S} i = 0 := by
     unfold potC{S}
     simp [{', '.join(f'hi{i}' for i in range(len(shapes)))}]
   rw [h0, h0c]; simp [digit]''')}'''
     # ---- spec lemma text
-    bits = [f'Nat.testBit (blk T2 R2) (8 * pos3 (code % 36) + 7)'] + \
-        [f'Nat.testBit (blk T{cc} R{cc}) (8 * pos3 (code % {NS ** cc}) + 7)' for cc in range(3, k + 1)]
+    bits = [f'Nat.testBit (blk T2 R2) (8 * {POS} (code % {N2}) + 7)'] + \
+        [f'Nat.testBit (blk T{cc} R{cc}) (8 * {POS} (code % {NS ** cc}) + 7)' for cc in range(3, k + 1)]
     bool_or = bits[0]
     for bb in bits[1:]:
         bool_or = f'({bool_or} || {bb})'
-    conclusion = (f'{bool_or} = true ∨\n      {P} + digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + pos3 (code % 216)) ≤ '
-                  f'{Q} * (code % 6 + 1) + digit PC0 (code / 6)')
+    conclusion = (f'{bool_or} = true ∨\n      {P} + digit PT1 ({N3} * (code / {N3} % {NS ** (k - 4)}) + {POS} (code % {N3})) ≤ '
+                  f'{Q} * (code % {NS} + 1) + digit PC0 (code / {NS})')
     n_outer = 1 + (k - 3)                                  # BL3 and M4..Mk
-    ew_haves = ''.join(f'''  have ew{cc} : Nat.testBit (winT (blk T{cc} R{cc}) (1728 * (code / 216 % {NS ** (cc - 3)})) 1728) (8 * pos3 (code % 216) + 7)
-      = Nat.testBit (blk T{cc} R{cc}) (8 * pos3 (code % {NS ** cc}) + 7) := by
+    ew_haves = ''.join(f'''  have ew{cc} : Nat.testBit (winT (blk T{cc} R{cc}) ({B3} * (code / {N3} % {NS ** (cc - 3)})) {B3}) (8 * {POS} (code % {N3}) + 7)
+      = Nat.testBit (blk T{cc} R{cc}) (8 * {POS} (code % {NS ** cc}) + 7) := by
     unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1
-    have ps := pos3_split code {NS ** (cc - 3)} (by decide)
-    rw [show 216 * {NS ** (cc - 3)} = {NS ** cc} by rfl] at ps
+    have ps := {POS}_split code {NS ** (cc - 3)} (by decide)
+    rw [show {N3} * {NS ** (cc - 3)} = {NS ** cc} by rfl] at ps
     rw [ps]; omega
 ''' for cc in range(4, k + 1))
     ew_names = ''.join(f', ew{cc}' for cc in range(4, k + 1))
@@ -270,39 +281,87 @@ def main():
 theorem checkT{S}_spec ({' '.join(argn)} : Nat) (hc : checkT{S} {' '.join(argn)} = true)
     (code : Nat) (hcode : code < {NS ** k})
     (hb0 : ∀ y, y < {M1} → digit PC0 y ≤ {R}) (hb1 : ∀ y, y < {M1} → digit PT1 y ≤ {R})
-    (h2f : ∀ l, l < 216 → Nat.testBit T2 (8 * l + 7) = Nat.testBit T2 (8 * (36 * (l / 36) + l % 6) + 7))
-    (h2r : ∀ l, l < 216 → Nat.testBit R2 (8 * l + 7) = Nat.testBit R2 (8 * (36 * (l / 36) + l % 6) + 7)) :
+    (h2f : ∀ l, l < {N3} → Nat.testBit T2 (8 * l + 7) = Nat.testBit T2 (8 * ({N2} * (l / {N2}) + l % {NS}) + 7))
+    (h2r : ∀ l, l < {N3} → Nat.testBit R2 (8 * l + 7) = Nat.testBit R2 (8 * ({N2} * (l / {N2}) + l % {NS}) + 7)) :
     {conclusion} := by
   unfold checkT{S} at hc
   rw [{', '.join(['letN_succ'] * n_outer)}] at hc
-  have h1 := allBelowR_spec _ _ hc (code / 216) (by omega)
+  have h1 := allBelowR_spec _ _ hc (code / {N3}) (by omega)
 {chr(10).join(['  rw [letN_succ] at h1; try dsimp only at h1'] * (k - 3 + 2))}
-  have hl : pos3 (code % 216) < 216 := pos3_lt code
+  have hl : {POS} (code % {N3}) < {N3} := {POS}_lt code
   -- A and B as packs of their fields
-  have hA : winT PT1 (1728 * (code / 216 % {NS ** (k - 4)})) 1728 + {P} * ones{S}
-      = pack (tab (fun l => {P} + digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + l)) 216) := by
+  have hA : winT PT1 ({B3} * (code / {N3} % {NS ** (k - 4)})) {B3} + {P} * ones{S}
+      = pack (tab (fun l => {P} + digit PT1 ({N3} * (code / {N3} % {NS ** (k - 4)}) + l)) {N3}) := by
     unfold winT
-    rw [show 1728 * (code / 216 % {NS ** (k - 4)}) = 8 * (216 * (code / 216 % {NS ** (k - 4)})) by omega,
-      show (1728 : Nat) = 8 * 216 by rfl, winT_pack, ones{S}_eq, pack_tab_mul, pack_tab_add]
+    rw [show {B3} * (code / {N3} % {NS ** (k - 4)}) = 8 * ({N3} * (code / {N3} % {NS ** (k - 4)})) by omega,
+      show ({B3} : Nat) = 8 * {N3} by rfl, winT_pack, ones{S}_eq, pack_tab_mul, pack_tab_add]
     all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
-  have hB : {Q} * wpat{S} + winT PC0 (288 * (code / 216)) 288 * rep{S}
-      = pack (tab (fun l => {Q} * (l / 36 + 1) + digit PC0 (36 * (code / 216) + l % 36)) 216) := by
+  have hB : {Q} * wpat{S} + winT PC0 ({B2} * (code / {N3})) {B2} * rep{S}
+      = pack (tab (fun l => {Q} * (l / {N2} + 1) + digit PC0 ({N2} * (code / {N3}) + l % {N2})) {N3}) := by
     unfold winT
-    rw [show 288 * (code / 216) = 8 * (36 * (code / 216)) by omega, show (288 : Nat) = 8 * 36 by rfl,
-      winT_pack, rep{S}_eq, ← pack_tab_rep36, wpat{S}_eq, pack_tab_mul, pack_tab_add]
+    rw [show {B2} * (code / {N3}) = 8 * ({N2} * (code / {N3})) by omega, show ({B2} : Nat) = 8 * {N2} by rfl,
+      winT_pack, rep{S}_eq, ← {REPL}, wpat{S}_eq, pack_tab_mul, pack_tab_add]
     all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
-  have key := swarOK_spec 216 (fun l => {P} + digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + l))
-    (fun l => {Q} * (l / 36 + 1) + digit PC0 (36 * (code / 216) + l % 36)) _ _ _ _ hA hB hi{S}_eq
-    (fun l hl' => by dsimp only; have := hb1 (216 * (code / 216 % {NS ** (k - 4)}) + l) (by omega); omega)
-    (fun l hl' => by dsimp only; have := hb0 (36 * (code / 216) + l % 36) (by omega); omega) h1 _ hl
+  have key := swarOK_spec {N3} (fun l => {P} + digit PT1 ({N3} * (code / {N3} % {NS ** (k - 4)}) + l))
+    (fun l => {Q} * (l / {N2} + 1) + digit PC0 ({N2} * (code / {N3}) + l % {N2})) _ _ _ _ hA hB hi{S}_eq
+    (fun l hl' => by dsimp only; have := hb1 ({N3} * (code / {N3} % {NS ** (k - 4)}) + l) (by omega); omega)
+    (fun l hl' => by dsimp only; have := hb0 ({N2} * (code / {N3}) + l % {N2}) (by omega); omega) h1 _ hl
   simp only [Nat.testBit_or] at key
-  have eb2 : Nat.testBit (blk T2 R2) (8 * pos3 (code % 216) + 7) = Nat.testBit (blk T2 R2) (8 * pos3 (code % 36) + 7) := by
-    rw [testBit_blk, testBit_blk, h2f _ hl, h2r _ hl, pos3_div36, pos3_mod6, pos3_mod36']
+  have eb2 : Nat.testBit (blk T2 R2) (8 * {POS} (code % {N3}) + 7) = Nat.testBit (blk T2 R2) (8 * {POS} (code % {N2}) + 7) := by
+    rw [testBit_blk, testBit_blk, h2f _ hl, h2r _ hl, {POS}_div{N2}, {POS}_mod{NS}, {POS}_mod{N2}']
 {ew_haves}  rw [eb2{ew_names}] at key
-  have e1 : pos3 (code % 216) / 36 = code % 6 := pos3_div36 code
-  have e2 : 36 * (code / 216) + pos3 (code % 216) % 36 = code / 6 := by rw [pos3_mod36]; omega
+  have e1 : {POS} (code % {N3}) / {N2} = code % {NS} := {POS}_div{N2} code
+  have e2 : {N2} * (code / {N3}) + {POS} (code % {N3}) % {N2} = code / {NS} := by rw [{POS}_mod{N2}]; omega
   rw [e1, e2] at key
   exact key
+'''
+    pos_block = '' if NS == 6 else f'''
+/-- Stored position of a symbol code: the three newest base-{NS} digits (a, b, c) of `z`
+(c least significant) go to field `{N2} c + {NS} a + b` of their {N3}-block. -/
+def {POS} (z : Nat) : Nat := {N3} * (z / {N3}) + {N2} * (z % {NS}) + z / {NS} % {N2}
+
+theorem {POS}_mod{N3} (z : Nat) : {POS} (z % {N3}) = {N2} * (z % {NS}) + z / {NS} % {N2} := by
+  unfold {POS}
+  have h1 : z % {N3} / {N3} = 0 := Nat.div_eq_of_lt (Nat.mod_lt _ (by decide))
+  have h2 : z % {N3} % {NS} = z % {NS} := Nat.mod_mod_of_dvd z (by decide)
+  have h3 : z % {N3} / {NS} % {N2} = z / {NS} % {N2} := by
+    rw [show ({N3} : Nat) = {NS} * {N2} by rfl, Nat.mod_mul_right_div_self, Nat.mod_mod]
+  rw [h1, h2, h3]
+  omega
+
+theorem {POS}_lt (z : Nat) : {POS} (z % {N3}) < {N3} := by rw [{POS}_mod{N3}]; omega
+
+theorem {POS}_div{N2} (z : Nat) : {POS} (z % {N3}) / {N2} = z % {NS} := by rw [{POS}_mod{N3}]; omega
+
+theorem {POS}_mod{N2} (z : Nat) : {POS} (z % {N3}) % {N2} = z / {NS} % {N2} := by rw [{POS}_mod{N3}]; omega
+
+theorem {POS}_mod{NS} (z : Nat) : {POS} (z % {N3}) % {NS} = z / {NS} % {NS} := by rw [{POS}_mod{N3}]; omega
+
+theorem {POS}_mod{N2}' (z : Nat) : {POS} (z % {N2}) = {N2} * (z % {NS}) + z / {NS} % {NS} := by
+  unfold {POS}
+  have h1 : z % {N2} / {N3} = 0 := Nat.div_eq_of_lt (by have := Nat.mod_lt z (by decide : 0 < {N2}); omega)
+  have h2 : z % {N2} % {NS} = z % {NS} := Nat.mod_mod_of_dvd z (by decide)
+  have h3 : z % {N2} / {NS} % {N2} = z / {NS} % {NS} := by
+    rw [show ({N2} : Nat) = {NS} * {NS} by rfl, Nat.mod_mul_right_div_self]
+    exact Nat.mod_eq_of_lt (by have := Nat.mod_lt (z / {NS}) (by decide : 0 < {NS}); omega)
+  rw [h1, h2, h3]
+  omega
+
+theorem {POS}_split (z m : Nat) (hm : 0 < m) : {POS} (z % ({N3} * m)) = {N3} * (z / {N3} % m) + {POS} (z % {N3}) := by
+  unfold {POS}
+  have h1 : z % ({N3} * m) / {N3} = z / {N3} % m := Nat.mod_mul_right_div_self z {N3} m
+  have h2 : z % ({N3} * m) % {NS} = z % {NS} := Nat.mod_mod_of_dvd z ⟨{N2} * m, by omega⟩
+  have h3 : z % ({N3} * m) / {NS} % {N2} = z / {NS} % {N2} := by
+    rw [show {N3} * m = {NS} * ({N2} * m) by omega, Nat.mod_mul_right_div_self, Nat.mod_mul_right_mod]
+  have h4 : z % {N3} / {N3} = 0 := Nat.div_eq_of_lt (Nat.mod_lt _ (by decide))
+  have h5 : z % {N3} % {NS} = z % {NS} := Nat.mod_mod_of_dvd z (by decide)
+  have h6 : z % {N3} / {NS} % {N2} = z / {NS} % {N2} := by
+    rw [show ({N3} : Nat) = {NS} * {N2} by rfl, Nat.mod_mul_right_div_self, Nat.mod_mod]
+  rw [h1, h2, h3, h4, h5, h6]
+  omega
+
+theorem {REPL} (f : Nat → Nat) : pack (tab (fun l => f (l % {N2})) {N3}) = pack (tab f {N2}) * repK {N2} {NS} :=
+  pack_tab_rep f {N2} {NS}
 '''
     data = f'''/-
 Generated by milestones/10-window-aggregate/scripts/gen_lean_swar.py.  Do not edit.
@@ -312,18 +371,18 @@ Word-parallel kernel check: see the header of gen_lean_swar.py and WindowAutomat
 -/
 import WindowAutomatonDefs
 import WindowAutomatonLoop
-import WindowAutomatonSwar
+import WindowAutomatonSwar{chr(10) + 'import WindowAutomatonSym' if NS != 6 else ''}
 
 namespace Snake9.WindowAutomaton
 
 set_option maxRecDepth 100000
-
+{pos_block}
 {ifchain(f'shapeIdx{S}', sidx, len(shapes))}
 
 {ifchain(f'wshapeIdx{S}', ws, len(wshapes))}
 
 /-- Excluded patterns of window shape `w` with `c` centres: bit `8 * pos z + 7` for code `z`
-(two-centre tables carry the six copies of each entry that a 216-field block needs). -/
+(two-centre tables carry the {['', '', '', '', '', '', 'six', 'seven', 'eight', 'nine'][NS]} copies of each entry that a {N3}-field block needs). -/
 {chain2(f'sfwd{S}', 'c', 'w', sfwd)}
 
 /-- The same for windows whose reversed direction list has shape `w` (symbols reversed). -/
@@ -337,14 +396,14 @@ set_option maxRecDepth 100000
 
 def {CODE} : List Nat → Nat → Nat
   | [], acc => acc
-  | s :: l, acc => {CODE} l (acc * 6 + (s - 1))
+  | s :: l, acc => {CODE} l (acc * {NS} + (s - 1))
 
 def wsh{S} (ds : List Nat) : Nat := wshapeIdx{S} (shapeCode (canon ds))
 def sh{S} (ds : List Nat) : Nat := shapeIdx{S} (shapeCode (canon ds))
 
 /-- Is the window (directions `ds`, symbols `syms`) excluded, in either orientation? -/
 def wforb{S} (ds syms : List Nat) : Bool :=
-  Nat.testBit (blk (sfwd{S} syms.length (wsh{S} ds)) (srev{S} syms.length (wsh{S} ds.reverse))) (8 * pos3 ({CODE} syms 0) + 7)
+  Nat.testBit (blk (sfwd{S} syms.length (wsh{S} ds)) (srev{S} syms.length (wsh{S} ds.reverse))) (8 * {POS} ({CODE} syms 0) + 7)
 
 /-- Potential of a state. -/
 def pot{S} (h t : List Nat) : Nat := clip {R} (digit (potC{S} (sh{S} h)) ({CODE} t 0))
@@ -357,27 +416,27 @@ def onesP{S} : Nat := {lit(ONESP)}
 def hiP{S} : Nat := {lit(128 * ONESP)}
 def wpat{S} : Nat := {WPAT}
 def rep{S} : Nat := {REP}
-theorem ones{S}_eq : ones{S} = pack (tab (fun _ => 1) 216) := by decide +kernel
-theorem hi{S}_eq : hi{S} = pack (tab (fun _ => 128) 216) := by decide +kernel
+theorem ones{S}_eq : ones{S} = pack (tab (fun _ => 1) {N3}) := by decide +kernel
+theorem hi{S}_eq : hi{S} = pack (tab (fun _ => 128) {N3}) := by decide +kernel
 theorem onesP{S}_eq : onesP{S} = pack (tab (fun _ => 1) {M1}) := by
-  have h := pack_tab_rep (fun _ => 1) 216 {M1 // 216}
+  have h := pack_tab_rep (fun _ => 1) {N3} {M1 // N3}
   rw [← ones{S}_eq] at h
-  have e : onesP{S} = ones{S} * repK 216 {M1 // 216} := by decide +kernel
+  have e : onesP{S} = ones{S} * repK {N3} {M1 // N3} := by decide +kernel
   rw [e]; exact h.symm
 theorem hiP{S}_eq : hiP{S} = pack (tab (fun _ => 128) {M1}) := by
-  have h := pack_tab_rep (fun _ => 128) 216 {M1 // 216}
+  have h := pack_tab_rep (fun _ => 128) {N3} {M1 // N3}
   rw [← hi{S}_eq] at h
-  have e : hiP{S} = hi{S} * repK 216 {M1 // 216} := by decide +kernel
+  have e : hiP{S} = hi{S} * repK {N3} {M1 // N3} := by decide +kernel
   rw [e]; exact h.symm
-theorem wpat{S}_eq : wpat{S} = pack (tab (fun l => l / 36 + 1) 216) := by decide +kernel
-theorem rep{S}_eq : rep{S} = repK 36 6 := by decide +kernel
+theorem wpat{S}_eq : wpat{S} = pack (tab (fun l => l / {N2} + 1) {N3}) := by decide +kernel
+theorem rep{S}_eq : rep{S} = repK {N2} {NS} := by decide +kernel
 
 /-- All {NS ** k} symbol codes: outer loop over the {k - 3} oldest symbols, one packed
-comparison of the 216 fields of the three newest per step. -/
+comparison of the {N3} fields of the three newest per step. -/
 def checkT{S} ({' '.join(argn)} : Nat) : Bool :=
 {outer_lets}  allBelowR {NS ** (k - 3)} fun h =>
-{inner_lets}    letN (winT PT1 (1728 * {hp1}) 1728 + {P} * ones{S} + 1) fun A =>
-    letN ({Q} * wpat{S} + winT PC0 (288 * h) 288 * rep{S} + 1) fun B =>
+{inner_lets}    letN (winT PT1 ({B3} * {hp1}) {B3} + {P} * ones{S} + 1) fun A =>
+    letN ({Q} * wpat{S} + winT PC0 ({B2} * h) {B2} * rep{S} + 1) fun B =>
     swarOK A B ({blmask}) hi{S}
 
 {chr(10).join(rep_thms)}
@@ -504,19 +563,20 @@ end Snake9.WindowAutomaton
     def dl(start, n):
         return lst(f'd (i+{start + j})' if start + j else 'd i' for j in range(n))
     def al(start, n):
-        return lst(f'sym (a (i+{start + j}))' for j in range(n))
+        return lst(f'{SYM} (a (i+{start + j}))' for j in range(n))
     def dj(n):
         return lst('d j' if j == 0 else f'd (j+{j})' for j in range(n))
     def aj(n):
-        return lst(f'sym (a (j+{j + 1}))' for j in range(n))
+        return lst(f'{SYM} (a (j+{j + 1}))' for j in range(n))
     def dpj(n):
         return lst('pathDir p j' if j == 0 else f'pathDir p (j+{j})' for j in range(n))
     def apj(n):
-        return lst(f'sym (countSeq p (j+{j + 1}))' for j in range(n))
+        return lst(f'{SYM} (countSeq p (j+{j + 1}))' for j in range(n))
     tvars = ' '.join(T)
-    sym_t = [f'sym {v}' for v in T]
+    sym_t = [f'{SYM} {v}' for v in T]
+    sym_s = f'{SYM} s'
     hyps_raw = '\n'.join(
-        f'    (hw{cc} : wforb{S} (x.drop {L + 1 - (cc + 1)}) {lst(sym_t[k - cc:] + ["sym s"])} = false)' for cc in range(2, k + 1))
+        f'    (hw{cc} : wforb{S} (x.drop {L + 1 - (cc + 1)}) {lst(sym_t[k - cc:] + [sym_s])} = false)' for cc in range(2, k + 1))
     pos_raw = ' '.join(f'(h{i} : 1 ≤ {v})' for i, v in enumerate(T, 1)) + ' (hs : 1 ≤ s)'
     first = L - k + 1
     step_hyps = '\n'.join(
@@ -527,15 +587,15 @@ end Snake9.WindowAutomaton
         f'    (hw{cc} : ∀ j, j + {cc + 1} ≤ m → wforb{S} {dj(cc + 1)} {aj(cc)} = false)' for cc in range(2, k + 1))
     hw_names = ' '.join(f'hw{cc}' for cc in range(2, k + 1))
     pos_list = '\n'.join(f'    have := hpos {j} (by omega) (by omega)' for j in range(1, L))
-    syms_all = sym_t + ['sym s']
+    syms_all = sym_t + [sym_s]
     code_expr = ' + '.join(f'({v} - 1) * {NS ** (k - 1 - j)}' if j < k - 1 else f'({v} - 1)' for j, v in enumerate(syms_all))
-    digit_binds = 'have hsyms : ' + ' ∧ '.join(f'1 ≤ {v} ∧ {v} ≤ 6' for v in syms_all) + ' := ⟨' + \
-        ', '.join(f'sym_ge_one _ {hv}, sym_le_six _' for hv in [f'h{i}' for i in range(1, k)] + ['hs']) + '⟩\n  ' + \
+    digit_binds = 'have hsyms : ' + ' ∧ '.join(f'1 ≤ {v} ∧ {v} ≤ {NS}' for v in syms_all) + ' := ⟨' + \
+        ', '.join(f'{GE1(hv)}, {LEK}' for hv in [f'h{i}' for i in range(1, k)] + ['hs']) + '⟩\n  ' + \
         f'obtain ⟨code, hcd⟩ : ∃ code, code = {code_expr} := ⟨_, rfl⟩'
     code6_of = lambda syms: ' + '.join(f'({v} - 1) * {NS ** (len(syms) - 1 - j)}' if j < len(syms) - 1 else f'({v} - 1)' for j, v in enumerate(syms))
     eqs = [f'have e{cc} : code % {NS ** cc} = {code6_of(syms_all[k - cc:])} := by omega' for cc in range(k, 1, -1)]
-    eqs.append(f'have e0 : code / 6 = {code6_of(syms_all[:k - 1])} := by omega')
-    eqs.append('have es : code % 6 + 1 = sym s := by omega')
+    eqs.append(f'have e0 : code / {NS} = {code6_of(syms_all[:k - 1])} := by omega')
+    eqs.append(f'have es : code % {NS} + 1 = {sym_s} := by omega')
     digit_rewrites = '\n  '.join(eqs) + '\n  rw [' + ', '.join([f'e{cc}' for cc in range(k, 1, -1)] + ['e0', 'es']) + '] at h'
     code_rewrites = '\n  '.join(
         f'have c{cc} : {CODE} {lst(syms_all[k - cc:])} 0 = {code6_of(syms_all[k - cc:])} := by simp only [{CODE}]; omega\n  rw [c{cc}] at hw{cc}'
@@ -566,8 +626,8 @@ theorem step{S}_raw (x : List Nat) (hx : x.length = {L + 1}) ({tvars} s : Nat)
     {pos_raw}
     (hind : inducedPattern x = true)
 {hyps_raw} :
-    {P} + pot{S} (x.drop 1) {lst(sym_t[1:] + ["sym s"])} ≤
-      {Q} * sym s + pot{S} (x.take {L}) {lst(sym_t)} := by
+    {P} + pot{S} (x.drop 1) {lst(sym_t[1:] + [sym_s])} ≤
+      {Q} * {sym_s} + pot{S} (x.take {L}) {lst(sym_t)} := by
   have hc := check{S}_of_rgs (canon x) (by rw [length_canon, hx]) (canon_isRGS x)
   unfold check{S} at hc
   rw [inducedPattern_canon, hind] at hc
@@ -577,9 +637,9 @@ theorem step{S}_raw (x : List Nat) (hx : x.length = {L + 1}) ({tvars} s : Nat)
   have hcode : code < {NS ** k} := by omega
   have h := checkT{S}_spec {' '.join(['_'] * (2 * (k - 1) + 2))} hc code hcode
     (fun y hy => potC{S}_digit_le _ y hy) (fun y hy => potT{S}_digit_le _ y hy) (sfwd{S}_rep _) (srev{S}_rep _)
-  have e1 : 216 * (code / 216 % {NS ** (k - 4)}) + pos3 (code % 216) = pos3 (code % {M1}) := by
-    have ps := pos3_split code {NS ** (k - 4)} (by decide)
-    rw [show 216 * {NS ** (k - 4)} = {M1} by rfl] at ps
+  have e1 : {N3} * (code / {N3} % {NS ** (k - 4)}) + {POS} (code % {N3}) = {POS} (code % {M1}) := by
+    have ps := {POS}_split code {NS ** (k - 4)} (by decide)
+    rw [show {N3} * {NS ** (k - 4)} = {M1} by rfl] at ps
     exact ps.symm
   rw [e1, potT{S}_digit _ _ (by omega)] at h
   unfold wforb{S} at {hw_names}
@@ -605,14 +665,14 @@ theorem step{S} (d a : Nat → Nat) (i : Nat)
     {' '.join(f'(h{j} : 1 ≤ a (i+{first + j}))' for j in range(k))}
     (hind : inducedPattern (win{S} d i) = true)
 {step_hyps} :
-    {P} + Φ{S} d a (i+1) ≤ {Q} * sym (a (i+{L})) + Φ{S} d a i := by
+    {P} + Φ{S} d a (i+1) ≤ {Q} * {SYM} (a (i+{L})) + Φ{S} d a i := by
   have h := step{S}_raw (win{S} d i) rfl {' '.join(f'(a (i+{first + j}))' for j in range(k))}
     {' '.join(f'h{j}' for j in range(k))} hind {' '.join(f'hw{cc}' for cc in range(2, k + 1))}
   exact h
 
 def S{S} (a : Nat → Nat) : Nat → Nat
   | 0 => 0
-  | n + 1 => S{S} a n + sym (a (n+{L}))
+  | n + 1 => S{S} a n + {SYM} (a (n+{L}))
 
 theorem invariant{S} (d a : Nat → Nat) (m : Nat)
     (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j)
@@ -635,8 +695,8 @@ theorem sumA_ge{S} (a : Nat → Nat) (m : Nat) (hpos : ∀ j, 1 ≤ j → j + 1 
     omega
   | n + 1, h => by
     have ih := sumA_ge{S} a m hpos n (by omega)
-    have := sym_le (a (n+{L}))
-    show {L - 1} + (S{S} a n + sym (a (n+{L}))) ≤ sumA a (n+{L - 1}) + a (n+{L - 1}+1)
+    have := {LE} (a (n+{L}))
+    show {L - 1} + (S{S} a n + {SYM} (a (n+{L}))) ≤ sumA a (n+{L - 1}) + a (n+{L - 1}+1)
     have he2 : n + {L - 1} + 1 = n + {L} := by omega
     rw [he2]
     omega
@@ -693,7 +753,8 @@ end
 end Snake9
 """
     open(os.path.join(STRONGER, f'AggregateDirection{S}Conditional.lean'), 'w').write(wrapper)
-    mods = ['WindowAutomatonLoop', 'WindowAutomatonSwar', 'WindowAutomatonCode', f'WindowAutomaton{S}Data', f'WindowAutomaton{S}Spec'] + \
+    mods = ['WindowAutomatonLoop', 'WindowAutomatonSwar', 'WindowAutomatonCode'] + (['WindowAutomatonSym'] if NS != 6 else []) + \
+        [f'WindowAutomaton{S}Data', f'WindowAutomaton{S}Spec'] + \
         [f'WindowAutomaton{S}Shard{i}' for i in range(len(shapes))] + \
         [f'WindowAutomaton{S}Table', f'WindowAutomaton{S}Sequence', f'AggregateDirection{S}Conditional']
     json.dump({'suffix': S, 'L': L, 'k': k, 'K': K, 'radius': a.radius, 'lambda': str(lam), 'range': R,
