@@ -23,6 +23,13 @@ The checker is work/final_lean/LratCheck.lean.  Encoding:
   (the live clauses, `build`) that the previous segment verifies with `cpOk`;
 * the last segment also verifies that the empty clause is in the final database.
 
+With --fast the checker is work/final_lean/LratFast.lean (LratFast14 for 14-bit words):
+the database is the perfect tree of height h = nslots.bit_length() whose keys are the
+in-order positions 1 .. 2^h - 1 (heap node s at depth d, index i in its level, has key
+(2i+1) 2^(h-1-d)), so the initial shape is built by one recursion (`perf`), and a
+checkpoint lists the clause words of every node of that tree in pre-order, `0` for a free
+slot (`build`, checked by `cpOk`).
+
   python gen_lean_lrat.py --work DIR [--seg N] [--cp M] [--group G] [--check] [--data DIR] NAME ...
 """
 import argparse, collections, heapq, json, os, sys
@@ -37,13 +44,21 @@ M = (1 << W) - 1
 CHECKER_IMPORT, CHECKER_OPEN = 'import LratCheck', 'open Snake9.Lrat'
 
 
-def set_width(bits):
-    """Word width of the proof encoding: 13 (LratCheck) or 14 (LratCheck14)."""
-    global W, M, CHECKER_IMPORT, CHECKER_OPEN
+FAST = False
+
+
+def set_width(bits, fast=False):
+    """Word width of the proof encoding: 13 (LratCheck) or 14 (LratCheck14); with
+    `fast` the checker is LratFast / LratFast14."""
+    global W, M, CHECKER_IMPORT, CHECKER_OPEN, FAST
     assert bits in (13, 14)
-    W, M = bits, (1 << bits) - 1
+    W, M, FAST = bits, (1 << bits) - 1, fast
     if bits == 14:
         CHECKER_IMPORT, CHECKER_OPEN = 'import LratCheck14', 'open Snake9.Lrat14'
+    if fast:
+        suffix = '14' if bits == 14 else ''
+        CHECKER_IMPORT = 'import LratFast' + suffix
+        CHECKER_OPEN = 'open Snake9.LratFast%s\nopen Snake9.Lrat (Tree TreeTrue)' % suffix
 OFF = 2400
 
 # Keyword of the proof-data definitions.  The kernel checks only unfold them, so with
@@ -140,6 +155,32 @@ def inorder_keys(n):
     return key
 
 
+def perfect_keys(n):
+    """Keys of heap nodes 1..n in the perfect tree of height h = n.bit_length(): the
+    in-order positions, as in `perf h 0` of LratFast."""
+    h = n.bit_length()
+    key = {}
+    for s in range(1, n + 1):
+        d = s.bit_length() - 1
+        key[s] = (2 * (s - (1 << d)) + 1) << (h - 1 - d)
+    return h, key
+
+
+def preorder_keys(h):
+    """Keys of `perf h 0` in pre-order."""
+    out = []
+
+    def visit(d, b):
+        if d == 0:
+            return
+        k = b + (1 << (d - 1))
+        out.append(k)
+        visit(d - 1, b)
+        visit(d - 1, k)
+    visit(h, 0)
+    return out
+
+
 def bit(l):
     v = abs(l)
     assert 0 < v < OFF
@@ -232,8 +273,11 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
     core_cls = read_cnf_core(os.path.join(work, name + '.cnf'), core_ids)
     lemmas = read_lrat(os.path.join(work, name + '.lrat'))
     input_slots, steps, last, nslots = plan(core_ids, lemmas)
-    key = inorder_keys(nslots)
     assert nslots <= M
+    if FAST:
+        height, key = perfect_keys(nslots)
+    else:
+        key = inorder_keys(nslots)
     nums = [pack([key[s]] + [bit(l) + 1 for l in lits] + [0] + [key[h] for h in hs] + [0])
             for s, lits, hs in steps]
     # segments
@@ -258,7 +302,12 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
             is_cp[k] = True
             j = cuts[k - 1]
             live = sorted((slot_at[c], c) for c, l in last.items() if born[c] < j and l >= j)
-            cps[k] = [pack([key[s]] + [bit(l) + 1 for l in lits_of[c]]) for s, c in live]
+            if FAST:
+                by_key = {key[s]: pack([bit(l) + 1 for l in lits_of[c]]) for s, c in live}
+                assert all(by_key.values())
+                cps[k] = [by_key.get(kk, 0) for kk in preorder_keys(height)]
+            else:
+                cps[k] = [pack([key[s]] + [bit(l) + 1 for l in lits_of[c]]) for s, c in live]
     final_key = key[steps[-1][0]]
     stats = dict(name=name, module=mod, lemmas=len(steps), hints=sum(len(h) for _, _, h in steps),
                  slots=nslots, segments=nseg, checkpoints=len(cps),
@@ -266,10 +315,19 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
     if check:
         taut = 1 | (1 << OFF)
         db = {key[s]: taut for s in range(1, nslots + 1)}
+        if FAST:
+            db = {kk: taut for kk in range(1, 1 << height)}
         for s, cl in zip(input_slots, core_cls):
             db[key[s]] = cmask(cl)
         for k in range(1, nseg + 1):
-            if is_cp[k]:
+            if is_cp[k] and FAST:
+                ndb = {}
+                for kk, e in zip(preorder_keys(height), cps[k]):
+                    c = taut if e == 0 else sim_lits(unpack(e), 0)[0]
+                    assert c == taut or db.get(kk) == c, ('checkpoint', k, kk)
+                    ndb[kk] = c
+                db = ndb
+            elif is_cp[k]:
                 ndb = {key[s]: taut for s in range(1, nslots + 1)}
                 for e in cps[k]:
                     kk, c = sim_ent(e)
@@ -292,11 +350,14 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         '/-! LRAT refutation of the core of `%s`: database shape and input slots' % name,
         '(generated by `milestones/10-window-aggregate/scripts/gen_lean_lrat.py`). -/', '',
         HEADER, 'namespace ' + ns, CHECKER_OPEN, '',
-        '/-- Keys of the database nodes in breadth-first order. -/',
-        DATA_DEF + ' shapeKeys : List Nat := ' + declist([key[s] for s in range(1, nslots + 1)]), '',
+        *([] if FAST else [
+            '/-- Keys of the database nodes in breadth-first order. -/',
+            DATA_DEF + ' shapeKeys : List Nat := ' + declist([key[s] for s in range(1, nslots + 1)]),
+            '']),
         '/-- Key of each core clause. -/',
         DATA_DEF + ' inputSlots : List Nat := ' + declist([key[s] for s in input_slots]), '',
-        'noncomputable def start1 : Tree := loadRaw (shape .nil shapeKeys) raw inputSlots', '',
+        ('noncomputable def start1 : Tree := loadRaw (perf %d 0) raw inputSlots' % height if FAST
+         else 'noncomputable def start1 : Tree := loadRaw (shape .nil shapeKeys) raw inputSlots'), '',
         'end ' + ns, ''])
     for k in range(1, nseg + 1):
         body = ['import LocalWindowUnsat.%s.Data%d' % (mod, k - 1), '',
@@ -307,7 +368,9 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
             if is_cp[k + 1]:
                 body += ['/-- Checkpoint: the live clauses before segment %d. -/' % (k + 1),
                          DATA_DEF + ' cp%d : List Nat := %s' % (k + 1, hexlist(cps[k + 1])), '',
-                         'noncomputable def start%d : Tree := build (shape .nil shapeKeys) cp%d' % (k + 1, k + 1), '']
+                         ('noncomputable def start%d : Tree := build %d cp%d' % (k + 1, height, k + 1) if FAST
+                          else 'noncomputable def start%d : Tree := build (shape .nil shapeKeys) cp%d'
+                          % (k + 1, k + 1)), '']
             else:
                 body += ['noncomputable def start%d : Tree := replay start%d proof%d' % (k + 1, k, k), '']
         body += ['end ' + ns, '']
@@ -317,6 +380,8 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         base = 'check start%d proof%d' % (k, k)
         if k == nseg:
             return 'andB (%s) (hasEmpty (replay start%d proof%d) %d) = true' % (base, k, k, final_key)
+        if is_cp[k + 1] and FAST:
+            return 'andB (%s) (cpOk (replay start%d proof%d) start%d) = true' % (base, k, k, k + 1)
         if is_cp[k + 1]:
             return 'andB (%s) (cpOk (replay start%d proof%d) cp%d) = true' % (base, k, k, k + 1)
         return '%s = true' % base
@@ -338,14 +403,19 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
              '  apply unsat_of_raw',
              '  intro τ h',
              '  have h1 : TreeTrue τ start1 :=',
-             '    start_true (raw := raw) (keys := shapeKeys) (slots := inputSlots) τ h']
+             ('    start_true (raw := raw) (h := %d) (slots := inputSlots) τ h' % height if FAST else
+              '    start_true (raw := raw) (keys := shapeKeys) (slots := inputSlots) τ h')]
     for k in range(1, nseg + 1):
         if k == nseg:
             main.append('  exact final_false (s := start%d) (ps := proof%d) τ ok%d h%d' % (k, k, k, k))
         elif is_cp[k + 1]:
             main.append('  have h%d : TreeTrue τ start%d :=' % (k + 1, k + 1))
-            main.append('    cp_true (s := start%d) (ps := proof%d) (cp := cp%d) (keys := shapeKeys) τ ok%d h%d'
-                        % (k, k, k + 1, k, k))
+            if FAST:
+                main.append('    cp_true (s := start%d) (ps := proof%d) (t := start%d) τ ok%d h%d'
+                            % (k, k, k + 1, k, k))
+            else:
+                main.append('    cp_true (s := start%d) (ps := proof%d) (cp := cp%d) (keys := shapeKeys) τ ok%d h%d'
+                            % (k, k, k + 1, k, k))
         else:
             main.append('  have h%d : TreeTrue τ start%d :=' % (k + 1, k + 1))
             main.append('    replay_true (t := start%d) (ps := proof%d) τ ok%d h%d' % (k, k, k, k))
@@ -373,9 +443,10 @@ def main():
     ap.add_argument('--wbits', type=int, default=13, help='13, or 14 for more than 8191 live clauses')
     ap.add_argument('--noncomputable-data', action='store_true',
                     help='declare the proof data `noncomputable def` (smaller build output)')
+    ap.add_argument('--fast', action='store_true', help='emit proofs for LratFast (see above)')
     ap.add_argument('names', nargs='+')
     a = ap.parse_args()
-    set_width(a.wbits)
+    set_width(a.wbits, a.fast)
     if a.noncomputable_data:
         global DATA_DEF
         DATA_DEF = 'noncomputable def'
