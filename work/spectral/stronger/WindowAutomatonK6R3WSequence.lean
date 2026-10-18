@@ -57,7 +57,6 @@ theorem stepK6R3W_raw (x : List Nat) (hx : x.length = 8) (t1 t2 t3 t4 t5 s : Nat
   rw [c6] at hw6
   have c0 : codeK6R3W [sym t1, sym t2, sym t3, sym t4, sym t5] 0 = (sym t1 - 1) * 1296 + (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym t5 - 1) := by simp only [codeK6R3W]; omega
   have c1 : codeK6R3W [sym t2, sym t3, sym t4, sym t5, sym s] 0 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by simp only [codeK6R3W]; omega
-  rw [c0, c1]
   have e6 : code % 46656 = (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
   have e5 : code % 7776 = (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
   have e4 : code % 1296 = (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := by omega
@@ -69,6 +68,7 @@ theorem stepK6R3W_raw (x : List Nat) (hx : x.length = 8) (t1 t2 t3 t4 t5 s : Nat
   rw [hw2, hw3, hw4, hw5, hw6] at h
   simp only [Bool.false_or, Bool.false_eq_true, false_or] at h
   unfold potK6R3W
+  rw [c0, c1]
   rw [clip_eq_of_le _ _ (potCK6R3W_digit_le _ _ (by omega)), clip_eq_of_le _ _ (potCK6R3W_digit_le _ _ (by omega))]
   exact h
 
