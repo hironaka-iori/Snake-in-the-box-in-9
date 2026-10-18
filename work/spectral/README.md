@@ -51,6 +51,7 @@ The fresh source-only build succeeded for all 151 steps, including the core, inc
 - `WindowPotential242.lean` and `WindowPotential241.lean` use core Lean only and prove the sequence potentials.
 - `AggregateWindowConditional.lean` proves `upper_242_of_certified_windows` and `upper_241_of_certified_windows`. Their window-exclusion premises are DRAT-certified for a local model, see `milestones/10-window-aggregate/`, but they are not Lean theorems.
 - A fresh 156-step run with `--core-targets Snake9 PathStructure CubeLocal SquareCounterexample SingletonSquareLemma OptimalityTarget` succeeded. It is saved as `outputs/strengthened-window-reproduction-*`.
+- A 239-step run (`outputs/strengthened-direction-k6-reproduction-manifest.json`) covers the direction-aware chains for 239, 238 (`WindowAutomatonK5R3*`, regenerated with the fast kernel loop) and 235 (`WindowAutomatonK6R3*`, 2,635 certified windows). `--build-dir DIR` reuses a build directory: modules whose object is newer than their source and whose earlier check succeeded are skipped, so a run survives machine restarts; the manifest marks such steps `cached`.
 
 ## Conditional 239 target (direction-aware automaton)
 

@@ -11,7 +11,11 @@ therefore test every field at once:
 
 Core Lean only.
 -/
+import WindowAutomatonLoop
+
 namespace Snake9.WindowAutomaton
+
+-- `clip` comes from WindowAutomatonLoop
 
 /-- `pack [d0, d1, ...] = d0 + 256 (d1 + 256 (...))`. -/
 def pack : List Nat → Nat
@@ -257,5 +261,10 @@ theorem pack_tab_rep (f : Nat → Nat) (n : Nat) : ∀ m, pack (tab (fun l => f 
       apply tab_congr; intro j hj
       rw [show n * m + j = j + n * m by omega, Nat.add_mul_mod_self_left, Nat.mod_eq_of_lt hj]
     rw [h2, repK, Nat.mul_add, Nat.mul_comm (pack (tab f n)) (256 ^ (n * m))]
+
+theorem clip_eq_of_le (R v : Nat) (h : v ≤ R) : clip R v = v := by
+  unfold clip; rw [Nat.ble_eq_true_of_le h]; rfl
+
+theorem digit_lt (n j : Nat) : digit n j < 256 := Nat.mod_lt _ (by decide)
 
 end Snake9.WindowAutomaton
