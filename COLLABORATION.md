@@ -1,6 +1,6 @@
 # Collaborator handoff
 
-Checkpoint: 15 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 16 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Where the investigation stands
 
@@ -8,9 +8,15 @@ The exact optimum is unresolved; no candidate value receives privileged status. 
 
 The fully Lean-checked global interval is now **191 <= a(9) <= 245**. The strengthened square-face bound combines the incidence identity with endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. The earlier arguments still supply the weaker bounds 247, 248, 251, 254, and 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
 
-The most recent completed theorem is the global upper bound 245. Normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
+The strongest completed global upper bound is 245. Normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
 
 The earlier universal two-singleton-square claim for internal vertices is false. A checked 137-edge counterexample has zero at path index 127, endpoints 145 and 288, and exactly one singleton square, {0,4,8,12}. Its distance along the path from the nearer endpoint is ten. Thus simply excluding the first few vertices near the endpoints does not repair that universal assertion. This example does not exclude a stronger statement restricted to longest paths.
+
+## Window-certificate checkpoint, 16 October 2026
+
+The repeated-coordinate radius-three (2,2,3) Boolean certificate passed all 61 Lean modules and its final axiom audit. The distinct-coordinate certificate is still being checked. The completed counter proof connects actual singleton counts to the ordered lists of 21 eligible corners and supplies the full auxiliary threshold assignment. Endpoint rules and all 112 retained cycle cuts are also checked. Exact assembly of all Boolean input clauses and arbitrary-window coordinate normalization remain open, so the global interval is unchanged.
+
+See [milestone 07](milestones/07-window-223/README.md) for the source hashes, reproduction commands, and remaining obligations. The collaborator branch review is recorded [separately](milestones/08-exhaustive-search/upstream-review-2026-10-16.md); its restricted DFS results do not settle the global optimum.
 
 ## Completed milestone: incidence proof
 

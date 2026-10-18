@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Research checkpoint: 15 October 2026.
+Research checkpoint: 16 October 2026.
 
 | Claim | Current evidence |
 |---|---|
@@ -21,6 +21,7 @@ Research checkpoint: 15 October 2026.
 | Adjacent internal singleton-square counts cannot be 1 and 3 | Lean-checked symbolic finite-set and endpoint argument |
 | Three consecutive internal vertices cannot all have singleton-square count 2 | Lean-checked exhaustive local classification and geometric exclusions |
 | Every snake has at most 245 edges | Lean-checked aggregate consequence, with every local premise discharged |
+| The repeated-coordinate radius-three (2,2,3) Boolean core is inconsistent | Lean-checked in 61 modules; complete geometric interpretation remains open |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 

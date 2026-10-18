@@ -1021,7 +1021,36 @@ The sequence inequality and its conditional numerical consequence have also been
 \subsection{Local experiments on the pattern $(2,2,3)$}
 A five-vertex induced window has, up to translation and permutation of coordinates, transition sequence $(0,1,2,0)$ or $(0,1,2,3)$. Around its three internal vertices, consider the union of Hamming balls of radius $r$. Require the five window vertices to be selected, selected degree at most two, and degree at least one wherever all nine neighbors are represented. Permit at most two degree-one vertices in this interior, and exclude selected cycles. At each center, its two prescribed neighbors leave 21 eligible opposite square corners; exactly $\alpha$ of these must be absent when its singleton count is $\alpha$.
 
-For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. Their translation into Lean is still in progress after single-file translations exceeded available memory. These experiments do not yet prove the geometric premise of Proposition~\ref{prop:conditional244}.
+For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. For the repeated-coordinate case, the explicit Boolean contradiction has now been checked in Lean, using a sequence of smaller proofs after the single-file translation exceeded available memory. The distinct-coordinate certificate remains under verification. These results do not yet prove the geometric premise of Proposition~\ref{prop:conditional244}.
+
+\begin{lemma}[Missing corners at a prescribed internal vertex]\label{lem:window-missing-corners}
+Let $S$ be the vertex set of a snake, and suppose $v,v+e_a,v+e_b\in S$, with $a\ne b$. Among the 21 unordered coordinate pairs $\{c,d\}$ disjoint from $\{a,b\}$, exactly $\alpha_S(v)$ have $v+e_c+e_d\notin S$.
+\end{lemma}
+\begin{proof}
+The two specified neighbors exhaust the selected neighbors of $v$, since a vertex of an induced path has degree at most two. A coordinate square using $a$ or $b$ therefore contains another selected vertex and is not a singleton square at $v$. For a pair avoiding $a$ and $b$, both adjacent corners $v+e_c$ and $v+e_d$ are absent. The square is a singleton precisely when its opposite corner is absent. There are $\binom{7}{2}=21$ such pairs, and every singleton square is counted once.
+\end{proof}
+
+\begin{proposition}[Exact threshold counters]\label{prop:window-counter}
+Let $y_1,\ldots,y_N\in\{0,1\}$ indicate absent corners, and let $k\ge0$ be an integer. Introduce Boolean variables $t_{i,j}$ for $0\le i\le N$ and $0\le j\le k+1$. Set $t_{i,0}$ true and $t_{0,j}$ false for $j>0$. For every $0\le i<N$ and $1\le j\le k+1$, impose the four clauses
+\[
+\begin{aligned}
+&\neg t_{i,j}\lor t_{i+1,j},\\
+&\neg y_{i+1}\lor\neg t_{i,j-1}\lor t_{i+1,j},\\
+&\neg t_{i+1,j}\lor t_{i,j}\lor y_{i+1},\\
+&\neg t_{i+1,j}\lor t_{i,j}\lor t_{i,j-1}.
+\end{aligned}
+\]
+Here $y_i$ is read as true when its value is one. Together with $t_{N,k}$ true and $t_{N,k+1}$ false, these clauses admit a satisfying assignment exactly when $\sum_{i=1}^N y_i=k$.
+\end{proposition}
+\begin{proof}
+Write $C_i=\sum_{h=1}^i y_h$, with $C_0=0$. The four transition clauses are equivalent to
+\[
+t_{i+1,j}\ \Longleftrightarrow\ t_{i,j}\lor(y_{i+1}\land t_{i,j-1}).
+\]
+For positive $j$, the integer inequality $C_i+y_{i+1}\ge j$ holds precisely when $C_i\ge j$, or when $y_{i+1}=1$ and $C_i\ge j-1$. Thus the assignment $t_{i,j}=[C_i\ge j]$ satisfies every initial and transition clause. Conversely, induction on $i$ shows that those clauses force this assignment at every represented threshold. The final two clauses are therefore equivalent to $k\le C_N<k+1$, which is $C_N=k$.
+\end{proof}
+
+The missing-corner identity, the threshold-counter equivalence, and their connection for each normalized center have been checked in Lean. The finite corner lists have 21 distinct entries and agree with the eligible coordinate pairs. Generic endpoint-count and degree clauses, together with all 112 distinct cycle cuts retained by the two Boolean cores, have also been checked. A complete proof must still assemble the exact input clauses under one assignment and establish the reduction from arbitrary five-vertex windows. The unconditional interval remains $191\le a(9)\le245$.
 
 \subsection{A limitation of uniform singleton-density estimates}
 The published bank includes a 192-vertex snake for which independent counting gives $T=1632$. This particular census has been checked in Python; its complete connection to the Lean incidence development remains to be checked. It implies that any valid uniform estimate $T\ge cv$ has $c\le17/2$.
