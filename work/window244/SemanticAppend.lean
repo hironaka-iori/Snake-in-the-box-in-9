@@ -16,8 +16,8 @@ theorem ckAll_append_true (M : MT) (cs : List Ctr) (w : List Nat)
     | nil => simp at hlen
     | cons r rs =>
       have hlen' : ts.length = rs.length := Nat.succ.inj hlen
-      change ckClause M cs w t r && ckAll M cs w ts rs = true at ha
-      change ckClause M cs w t r && ckAll M cs w (ts ++ us) (rs ++ vs) = true
+      change (ckClause M cs w t r && ckAll M cs w ts rs) = true at ha
+      change (ckClause M cs w t r && ckAll M cs w (ts ++ us) (rs ++ vs)) = true
       exact Bool.and_eq_true.mpr ⟨(Bool.and_eq_true.mp ha).1,
         ih rs hlen' (Bool.and_eq_true.mp ha).2⟩
 end Snake9.LocalWindow.Tags
