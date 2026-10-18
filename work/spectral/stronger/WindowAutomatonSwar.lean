@@ -267,4 +267,52 @@ theorem clip_eq_of_le (R v : Nat) (h : v ≤ R) : clip R v = v := by
 
 theorem digit_lt (n j : Nat) : digit n j < 256 := Nat.mod_lt _ (by decide)
 
+theorem pack_tab_rep36 (f : Nat → Nat) : pack (tab (fun l => f (l % 36)) 216) = pack (tab f 36) * repK 36 6 :=
+  pack_tab_rep f 36 6
+
+/-- Stored position of a symbol code: the three newest base-6 digits (a, b, c) of `z`
+(c least significant) go to field `36 c + 6 a + b` of their 216-block. -/
+def pos3 (z : Nat) : Nat := 216 * (z / 216) + 36 * (z % 6) + z / 6 % 36
+
+theorem pos3_mod216 (z : Nat) : pos3 (z % 216) = 36 * (z % 6) + z / 6 % 36 := by
+  unfold pos3
+  have h1 : z % 216 / 216 = 0 := Nat.div_eq_of_lt (Nat.mod_lt _ (by decide))
+  have h2 : z % 216 % 6 = z % 6 := Nat.mod_mod_of_dvd z (by decide)
+  have h3 : z % 216 / 6 % 36 = z / 6 % 36 := by
+    rw [show (216 : Nat) = 6 * 36 by rfl, Nat.mod_mul_right_div_self, Nat.mod_mod]
+  rw [h1, h2, h3]
+  omega
+
+theorem pos3_lt (z : Nat) : pos3 (z % 216) < 216 := by rw [pos3_mod216]; omega
+
+theorem pos3_div36 (z : Nat) : pos3 (z % 216) / 36 = z % 6 := by rw [pos3_mod216]; omega
+
+theorem pos3_mod36 (z : Nat) : pos3 (z % 216) % 36 = z / 6 % 36 := by rw [pos3_mod216]; omega
+
+theorem pos3_mod6 (z : Nat) : pos3 (z % 216) % 6 = z / 6 % 6 := by rw [pos3_mod216]; omega
+
+theorem pos3_mod36' (z : Nat) : pos3 (z % 36) = 36 * (z % 6) + z / 6 % 6 := by
+  unfold pos3
+  have h1 : z % 36 / 216 = 0 := Nat.div_eq_of_lt (by have := Nat.mod_lt z (by decide : 0 < 36); omega)
+  have h2 : z % 36 % 6 = z % 6 := Nat.mod_mod_of_dvd z (by decide)
+  have h3 : z % 36 / 6 % 36 = z / 6 % 6 := by
+    rw [show (36 : Nat) = 6 * 6 by rfl, Nat.mod_mul_right_div_self]
+    exact Nat.mod_eq_of_lt (by have := Nat.mod_lt (z / 6) (by decide : 0 < 6); omega)
+  rw [h1, h2, h3]
+  omega
+
+/-- `pos3 (z % 6^c) = 216 (z / 216 % 6^(c-3)) + pos3 (z % 216)` for `6^c = 216 m`. -/
+theorem pos3_split (z m : Nat) (hm : 0 < m) : pos3 (z % (216 * m)) = 216 * (z / 216 % m) + pos3 (z % 216) := by
+  unfold pos3
+  have h1 : z % (216 * m) / 216 = z / 216 % m := Nat.mod_mul_right_div_self z 216 m
+  have h2 : z % (216 * m) % 6 = z % 6 := Nat.mod_mod_of_dvd z ⟨36 * m, by omega⟩
+  have h3 : z % (216 * m) / 6 % 36 = z / 6 % 36 := by
+    rw [show 216 * m = 6 * (36 * m) by omega, Nat.mod_mul_right_div_self, Nat.mod_mul_right_mod]
+  have h4 : z % 216 / 216 = 0 := Nat.div_eq_of_lt (Nat.mod_lt _ (by decide))
+  have h5 : z % 216 % 6 = z % 6 := Nat.mod_mod_of_dvd z (by decide)
+  have h6 : z % 216 / 6 % 36 = z / 6 % 36 := by
+    rw [show (216 : Nat) = 6 * 36 by rfl, Nat.mod_mul_right_div_self, Nat.mod_mod]
+  rw [h1, h2, h3, h4, h5, h6]
+  omega
+
 end Snake9.WindowAutomaton

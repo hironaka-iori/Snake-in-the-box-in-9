@@ -178,7 +178,7 @@ def main():
     ONES = sum(1 << (8 * l) for l in range(216)); HI = 128 * ONES
     WPAT = sum((l // 36 + 1) << (8 * l) for l in range(216)); REP = sum(1 << (288 * i) for i in range(6))
     argn = [f'{p}{cc}' for cc in range(2, k + 1) for p in ('T', 'R')] + ['PC0', 'PT1']
-    outer_lets = '  letN (blk T2 R2 ||| blk T3 R3 + 1) fun BL3 =>\n' + ''.join(
+    outer_lets = '  letN ((blk T2 R2 ||| blk T3 R3) + 1) fun BL3 =>\n' + ''.join(
         f'  letN (blk T{cc} R{cc} + 1) fun M{cc} =>\n' for cc in range(4, k + 1))
     inner_lets = ''.join(
         f'    letN (winT M{cc} (1728 * (h % {NS ** (cc - 3)})) 1728 + 1) fun W{cc} =>\n' for cc in range(4, k + 1))
@@ -212,7 +212,7 @@ def main():
     for i in range(len(shapes)):
         pot_thms.append(f'theorem potC{S}_bnd_{i} : allBelowR {M1} (fun y => Nat.ble (digit (potC{S} {i}) y) {R}) = true := by decide +kernel')
         pot_thms.append(f'theorem potT{S}_bnd_{i} : allBelowR {M1} (fun y => Nat.ble (digit (potT{S} {i}) y) {R}) = true := by decide +kernel')
-        pot_thms.append(f'theorem potT{S}_cons_{i} : allBelowR {M1} (fun y => Nat.beq (digit (potT{S} {i}) (pos{S} y)) (digit (potC{S} {i}) y)) = true := by decide +kernel')
+        pot_thms.append(f'theorem potT{S}_cons_{i} : allBelowR {M1} (fun y => Nat.beq (digit (potT{S} {i}) (pos3 y)) (digit (potC{S} {i}) y)) = true := by decide +kernel')
     def by_shape(name, body_i, default):
         cases = ''.join(f'''  by_cases hi{i} : i = {i}
   · subst hi{i}; {body_i(i)}
@@ -226,20 +226,28 @@ def main():
 {by_shape(f'potC{S}', lambda i: f'exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potC{S}_bnd_{i} y hy)', f'rw [h0]; simp [digit]')}'''
     potT_le = f'''theorem potT{S}_digit_le (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) y ≤ {R} := by
 {by_shape(f'potT{S}', lambda i: f'exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potT{S}_bnd_{i} y hy)', f'rw [h0]; simp [digit]')}'''
-    potT_eq = f'''theorem potT{S}_digit (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) (pos{S} y) = digit (potC{S} i) y := by
+    potT_eq = f'''theorem potT{S}_digit (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) (pos3 y) = digit (potC{S} i) y := by
 {by_shape(f'potT{S}', lambda i: f'exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potT{S}_cons_{i} y hy)', f'''have h0c : potC{S} i = 0 := by
     unfold potC{S}
     simp [{', '.join(f'hi{i}' for i in range(len(shapes)))}]
-  rw [h0, h0c]''')}'''
+  rw [h0, h0c]; simp [digit]''')}'''
     # ---- spec lemma text
-    bits = [f'Nat.testBit (blk T2 R2) (8 * pos{S} (code % 36) + 7)'] + \
-        [f'Nat.testBit (blk T{cc} R{cc}) (8 * pos{S} (code % {NS ** cc}) + 7)' for cc in range(3, k + 1)]
+    bits = [f'Nat.testBit (blk T2 R2) (8 * pos3 (code % 36) + 7)'] + \
+        [f'Nat.testBit (blk T{cc} R{cc}) (8 * pos3 (code % {NS ** cc}) + 7)' for cc in range(3, k + 1)]
     bool_or = bits[0]
     for bb in bits[1:]:
         bool_or = f'({bool_or} || {bb})'
-    conclusion = (f'{bool_or} = true ∨\n      {P} + digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + pos{S} (code % 216)) ≤ '
+    conclusion = (f'{bool_or} = true ∨\n      {P} + digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + pos3 (code % 216)) ≤ '
                   f'{Q} * (code % 6 + 1) + digit PC0 (code / 6)')
     n_outer = 1 + (k - 3)                                  # BL3 and M4..Mk
+    ew_haves = ''.join(f'''  have ew{cc} : Nat.testBit (winT (blk T{cc} R{cc}) (1728 * (code / 216 % {NS ** (cc - 3)})) 1728) (8 * pos3 (code % 216) + 7)
+      = Nat.testBit (blk T{cc} R{cc}) (8 * pos3 (code % {NS ** cc}) + 7) := by
+    unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1
+    have ps := pos3_split code {NS ** (cc - 3)} (by decide)
+    rw [show 216 * {NS ** (cc - 3)} = {NS ** cc} by rfl] at ps
+    rw [ps]; omega
+''' for cc in range(4, k + 1))
+    ew_names = ''.join(f', ew{cc}' for cc in range(4, k + 1))
     spec = f'''/-- One transition of the loop, for abstract tables. -/
 theorem checkT{S}_spec ({' '.join(argn)} : Nat) (hc : checkT{S} {' '.join(argn)} = true)
     (code : Nat) (hcode : code < {NS ** k})
@@ -251,24 +259,33 @@ theorem checkT{S}_spec ({' '.join(argn)} : Nat) (hc : checkT{S} {' '.join(argn)}
   rw [{', '.join(['letN_succ'] * n_outer)}] at hc
   have h1 := allBelowR_spec _ _ hc (code / 216) (by omega)
   simp only [letN_succ] at h1
-  have hl : pos{S} (code % 216) < 216 := by unfold pos{S}; omega
+  have hl : pos3 (code % 216) < 216 := pos3_lt code
   -- A and B as packs of their fields
   have hA : winT PT1 (1728 * (code / 216 % {NS ** (k - 4)})) 1728 + {P} * ones{S}
-      = pack (tab (fun l => digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + l) + {P}) 216) := by
+      = pack (tab (fun l => {P} + digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + l)) 216) := by
     unfold winT
     rw [show 1728 * (code / 216 % {NS ** (k - 4)}) = 8 * (216 * (code / 216 % {NS ** (k - 4)})) by omega,
       show (1728 : Nat) = 8 * 216 by rfl, winT_pack, ones{S}_eq, pack_tab_mul, pack_tab_add]
-    apply congrArg; apply tab_congr; intro j _; omega
+    all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
   have hB : {Q} * wpat{S} + winT PC0 (288 * (code / 216)) 288 * rep{S}
       = pack (tab (fun l => {Q} * (l / 36 + 1) + digit PC0 (36 * (code / 216) + l % 36)) 216) := by
     unfold winT
     rw [show 288 * (code / 216) = 8 * (36 * (code / 216)) by omega, show (288 : Nat) = 8 * 36 by rfl,
-      winT_pack, rep{S}_eq, ← pack_tab_rep, wpat{S}_eq, pack_tab_mul, pack_tab_add]
+      winT_pack, rep{S}_eq, ← pack_tab_rep36, wpat{S}_eq, pack_tab_mul, pack_tab_add]
+    all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
   rw [hA, hB, hi{S}_eq] at h1
-  have key := swarOK_spec 216 _ _ _ _ _ rfl rfl
-    (fun l hl' => by have := hb1 (216 * (code / 216 % {NS ** (k - 4)}) + l) (by omega); omega)
-    (fun l hl' => by have := hb0 (36 * (code / 216) + l % 36) (by omega); omega) h1 _ hl
-  sorry
+  have key := swarOK_spec 216 (fun l => {P} + digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + l))
+    (fun l => {Q} * (l / 36 + 1) + digit PC0 (36 * (code / 216) + l % 36)) _ _ _ rfl rfl
+    (fun l hl' => by dsimp only; have := hb1 (216 * (code / 216 % {NS ** (k - 4)}) + l) (by omega); omega)
+    (fun l hl' => by dsimp only; have := hb0 (36 * (code / 216) + l % 36) (by omega); omega) h1 _ hl
+  simp only [Nat.testBit_or] at key
+  have eb2 : Nat.testBit (blk T2 R2) (8 * pos3 (code % 216) + 7) = Nat.testBit (blk T2 R2) (8 * pos3 (code % 36) + 7) := by
+    rw [testBit_blk, testBit_blk, h2f _ hl, h2r _ hl, pos3_div36, pos3_mod6, pos3_mod36']
+{ew_haves}  rw [eb2{ew_names}] at key
+  have e1 : pos3 (code % 216) / 36 = code % 6 := pos3_div36 code
+  have e2 : 36 * (code / 216) + pos3 (code % 216) % 36 = code / 6 := by rw [pos3_mod36]; omega
+  rw [e1, e2] at key
+  exact key
 '''
     data = f'''/-
 Generated by milestones/10-window-aggregate/scripts/gen_lean_swar.py.  Do not edit.
@@ -287,9 +304,6 @@ set_option maxRecDepth 100000
 {ifchain(f'shapeIdx{S}', sidx, len(shapes))}
 
 {ifchain(f'wshapeIdx{S}', ws, len(wshapes))}
-
-/-- Stored position of a symbol code: the three newest symbols (a, b, c) go to field 36 c + 6 a + b. -/
-def pos{S} (z : Nat) : Nat := 216 * (z / 216) + 36 * (z % 6) + z / 6 % 36
 
 /-- Excluded patterns of window shape `w` with `c` centres: bit `8 * pos z + 7` for code `z`
 (two-centre tables carry the six copies of each entry that a 216-field block needs). -/
@@ -313,7 +327,7 @@ def sh{S} (ds : List Nat) : Nat := shapeIdx{S} (shapeCode (canon ds))
 
 /-- Is the window (directions `ds`, symbols `syms`) excluded, in either orientation? -/
 def wforb{S} (ds syms : List Nat) : Bool :=
-  Nat.testBit (blk (sfwd{S} syms.length (wsh{S} ds)) (srev{S} syms.length (wsh{S} ds.reverse))) (8 * pos{S} ({CODE} syms 0) + 7)
+  Nat.testBit (blk (sfwd{S} syms.length (wsh{S} ds)) (srev{S} syms.length (wsh{S} ds.reverse))) (8 * pos3 ({CODE} syms 0) + 7)
 
 /-- Potential of a state. -/
 def pot{S} (h t : List Nat) : Nat := clip {R} (digit (potC{S} (sh{S} h)) ({CODE} t 0))
@@ -372,7 +386,267 @@ namespace Snake9.WindowAutomaton
 {spec}
 end Snake9.WindowAutomaton
 ''')
-    print('wrote Data for', S, 'exclusions', len(keys), 'w2 shapes', w2)
+    # ---- shards, table (same scheme as gen_lean_automaton_k.py) --------------
+    for i, c in enumerate(shapes):
+        open(os.path.join(STRONGER, f'WindowAutomaton{S}Shard{i}.lean'), 'w').write(f"""/-
+Generated by gen_lean_swar.py.  Shard {i}: shape {lst(c)} extended by every label below 9.
+-/
+import WindowAutomaton{S}Data
+
+namespace Snake9.WindowAutomaton
+
+set_option maxRecDepth 100000
+
+{chr(10).join(f'theorem shard{S}_{i}_{d} : check{S} ({lst(c)} ++ [{d}]) = true := by decide +kernel' for d in range(9))}
+
+theorem shard{S}_{i} : allBelow 9 (fun d => check{S} ({lst(c)} ++ [d])) = true := by
+  simp only [allBelow, {', '.join(f'shard{S}_{i}_{d}' for d in range(9))}, Bool.and_self]
+
+end Snake9.WindowAutomaton
+""")
+    rcases_pat = ' | '.join(['rfl'] * len(shapes))
+    shard_apply = '\n'.join(f'    · exact allBelow_spec 9 _ shard{S}_{i} d hd' for i in range(len(shapes)))
+    open(os.path.join(STRONGER, f'WindowAutomaton{S}Table.lean'), 'w').write(f"""/-
+Generated by gen_lean_swar.py.  Combines the {len(shapes)} shards.
+-/
+{chr(10).join(f'import WindowAutomaton{S}Shard{i}' for i in range(len(shapes)))}
+
+namespace Snake9.WindowAutomaton
+
+set_option maxRecDepth 100000
+
+theorem rgs{S}_shape : allRGS {L + 1} 0 (fun c => !inducedPattern c ||
+    (decide (c.take {L} ∈ shapes{S}) && (c.drop {L}).all (· < 9))) = true := by
+  decide +kernel
+
+theorem check{S}_of_rgs (c : List Nat) (hc : c.length = {L + 1}) (hr : isRGS c 0 = true) :
+    check{S} c = true := by
+  have hm := allRGS_spec {L + 1} 0 _ rgs{S}_shape c hc hr
+  by_cases hind : inducedPattern c = true
+  · rw [hind] at hm
+    simp only [Bool.not_true, Bool.false_or, Bool.and_eq_true, decide_eq_true_eq,
+      List.all_eq_true, decide_eq_true_eq] at hm
+    obtain ⟨hmem, hlt⟩ := hm
+    have hsplit : c = c.take {L} ++ c.drop {L} := (List.take_append_drop {L} c).symm
+    have hlen : (c.drop {L}).length = 1 := by simp [hc]
+    obtain ⟨d, hd7⟩ : ∃ d, c.drop {L} = [d] := by
+      match h : c.drop {L}, hlen with
+      | [d], _ => exact ⟨d, rfl⟩
+    have hd : d < 9 := hlt d (by rw [hd7]; exact List.mem_singleton.mpr rfl)
+    rw [hsplit, hd7]
+    generalize hp : c.take {L} = pre at hmem ⊢
+    simp only [shapes{S}, List.mem_cons, List.mem_singleton, List.not_mem_nil, or_false] at hmem
+    rcases hmem with {rcases_pat}
+{shard_apply}
+  · unfold check{S}
+    simp [hind]
+
+end Snake9.WindowAutomaton
+""")
+
+    # ---- Sequence module -----------------------------------------------------
+    T = [f't{i}' for i in range(1, k)]
+    def dl(start, n):
+        return lst(f'd (i+{start + j})' if start + j else 'd i' for j in range(n))
+    def al(start, n):
+        return lst(f'sym (a (i+{start + j}))' for j in range(n))
+    def dj(n):
+        return lst('d j' if j == 0 else f'd (j+{j})' for j in range(n))
+    def aj(n):
+        return lst(f'sym (a (j+{j + 1}))' for j in range(n))
+    def dpj(n):
+        return lst('pathDir p j' if j == 0 else f'pathDir p (j+{j})' for j in range(n))
+    def apj(n):
+        return lst(f'sym (countSeq p (j+{j + 1}))' for j in range(n))
+    tvars = ' '.join(T)
+    sym_t = [f'sym {v}' for v in T]
+    hyps_raw = '\n'.join(
+        f'    (hw{cc} : wforb{S} (x.drop {L + 1 - (cc + 1)}) {lst(sym_t[k - cc:] + ["sym s"])} = false)' for cc in range(2, k + 1))
+    pos_raw = ' '.join(f'(h{i} : 1 ≤ {v})' for i, v in enumerate(T, 1)) + ' (hs : 1 ≤ s)'
+    first = L - k + 1
+    step_hyps = '\n'.join(
+        f'    (hw{cc} : wforb{S} {dl(L - cc, cc + 1)} {al(L - cc + 1, cc)} = false)' for cc in range(2, k + 1))
+    step_args_pos = ' '.join(f'(hpos (n+{first + j}) (by omega) (by omega))' for j in range(k))
+    step_args_w = ' '.join(f'(hw{cc} (n+{L - cc}) (by omega))' for cc in range(2, k + 1))
+    inv_hyps = '\n'.join(
+        f'    (hw{cc} : ∀ j, j + {cc + 1} ≤ m → wforb{S} {dj(cc + 1)} {aj(cc)} = false)' for cc in range(2, k + 1))
+    hw_names = ' '.join(f'hw{cc}' for cc in range(2, k + 1))
+    pos_list = '\n'.join(f'    have := hpos {j} (by omega) (by omega)' for j in range(1, L))
+    syms_all = sym_t + ['sym s']
+    code_expr = ' + '.join(f'({v} - 1) * {NS ** (k - 1 - j)}' if j < k - 1 else f'({v} - 1)' for j, v in enumerate(syms_all))
+    digit_binds = 'have hsyms : ' + ' ∧ '.join(f'1 ≤ {v} ∧ {v} ≤ 6' for v in syms_all) + ' := ⟨' + \
+        ', '.join(f'sym_ge_one _ {hv}, sym_le_six _' for hv in [f'h{i}' for i in range(1, k)] + ['hs']) + '⟩\n  ' + \
+        f'obtain ⟨code, hcd⟩ : ∃ code, code = {code_expr} := ⟨_, rfl⟩'
+    code6_of = lambda syms: ' + '.join(f'({v} - 1) * {NS ** (len(syms) - 1 - j)}' if j < len(syms) - 1 else f'({v} - 1)' for j, v in enumerate(syms))
+    eqs = [f'have e{cc} : code % {NS ** cc} = {code6_of(syms_all[k - cc:])} := by omega' for cc in range(k, 1, -1)]
+    eqs.append(f'have e0 : code / 6 = {code6_of(syms_all[:k - 1])} := by omega')
+    eqs.append('have es : code % 6 + 1 = sym s := by omega')
+    digit_rewrites = '\n  '.join(eqs) + '\n  rw [' + ', '.join([f'e{cc}' for cc in range(k, 1, -1)] + ['e0', 'es']) + '] at h'
+    code_rewrites = '\n  '.join(
+        f'have c{cc} : {CODE} {lst(syms_all[k - cc:])} 0 = {code6_of(syms_all[k - cc:])} := by simp only [{CODE}]; omega\n  rw [c{cc}] at hw{cc}'
+        for cc in range(2, k + 1)) + '\n  ' + \
+        f'have c0 : {CODE} {lst(syms_all[:k - 1])} 0 = {code6_of(syms_all[:k - 1])} := by simp only [{CODE}]; omega\n  ' + \
+        f'have c1 : {CODE} {lst(syms_all[1:])} 0 = {code6_of(syms_all[1:])} := by simp only [{CODE}]; omega\n  ' + \
+        'rw [c0, c1]'
+    seq = f"""/-
+Generated by gen_lean_swar.py.  Sequence consequence for L = {L}, k = {k}, lambda = {P}/{Q}.
+Core Lean only.
+-/
+import WindowAutomaton{S}Table
+import WindowAutomaton{S}Spec
+import WindowAutomatonSequence
+
+namespace Snake9.WindowAutomaton
+
+theorem wsh{S}_canon_drop (ds : List Nat) (n : Nat) : wsh{S} ((canon ds).drop n) = wsh{S} (ds.drop n) := by
+  unfold wsh{S}; rw [canon_canon_drop]
+theorem wsh{S}_canon_drop_rev (ds : List Nat) (n : Nat) :
+    wsh{S} ((canon ds).drop n).reverse = wsh{S} (ds.drop n).reverse := by
+  unfold wsh{S}; rw [canon_canon_drop_reverse]
+theorem sh{S}_canon_drop (ds : List Nat) (n : Nat) : sh{S} ((canon ds).drop n) = sh{S} (ds.drop n) := by
+  unfold sh{S}; rw [canon_canon_drop]
+theorem sh{S}_canon_take (ds : List Nat) (n : Nat) : sh{S} ((canon ds).take n) = sh{S} (ds.take n) := by
+  unfold sh{S}; rw [canon_canon_take]
+
+theorem step{S}_raw (x : List Nat) (hx : x.length = {L + 1}) ({tvars} s : Nat)
+    {pos_raw}
+    (hind : inducedPattern x = true)
+{hyps_raw} :
+    {P} + pot{S} (x.drop 1) {lst(sym_t[1:] + ["sym s"])} ≤
+      {Q} * sym s + pot{S} (x.take {L}) {lst(sym_t)} := by
+  have hc := check{S}_of_rgs (canon x) (by rw [length_canon, hx]) (canon_isRGS x)
+  unfold check{S} at hc
+  rw [inducedPattern_canon, hind] at hc
+  simp only [Bool.not_true, Bool.false_or] at hc
+  rw [{', '.join([f'wsh{S}_canon_drop', f'wsh{S}_canon_drop_rev'] * (k - 1) + [f'sh{S}_canon_take', f'sh{S}_canon_drop'])}] at hc
+  {digit_binds}
+  have hcode : code < {NS ** k} := by omega
+  have h := checkT{S}_spec {' '.join(['_'] * (2 * (k - 1) + 2))} hc code hcode
+    (fun y hy => potC{S}_digit_le _ y hy) (fun y hy => potT{S}_digit_le _ y hy) (sfwd{S}_rep _) (srev{S}_rep _)
+  have e1 : 216 * (code / 216 % {NS ** (k - 4)}) + pos3 (code % 216) = pos3 (code % {M1}) := by
+    have ps := pos3_split code {NS ** (k - 4)} (by decide)
+    rw [show 216 * {NS ** (k - 4)} = {M1} by rfl] at ps
+    exact ps.symm
+  rw [e1, potT{S}_digit _ _ (by omega)] at h
+  unfold wforb{S} at {hw_names}
+  simp only [List.length_cons, List.length_nil, Nat.zero_add, Nat.reduceAdd] at {hw_names}
+  {code_rewrites}
+  {digit_rewrites}
+  rw [{', '.join(f'hw{cc}' for cc in range(2, k + 1))}] at h
+  simp only [Bool.false_or, Bool.false_eq_true, false_or] at h
+  unfold pot{S}
+  rw [clip_eq_of_le _ _ (potC{S}_digit_le _ _ (by omega)), clip_eq_of_le _ _ (potC{S}_digit_le _ _ (by omega))]
+  exact h
+
+def win{S} (d : Nat → Nat) (i : Nat) : List Nat := {dl(0, L + 1)}
+def hist{S} (d : Nat → Nat) (i : Nat) : List Nat := {dl(0, L)}
+def syms{S} (a : Nat → Nat) (i : Nat) : List Nat := {al(first, k - 1)}
+
+def Φ{S} (d a : Nat → Nat) (i : Nat) : Nat := pot{S} (hist{S} d i) (syms{S} a i)
+
+theorem Φ{S}_le (d a : Nat → Nat) (i : Nat) : Φ{S} d a i ≤ {R} := pot{S}_le _ _
+
+theorem step{S} (d a : Nat → Nat) (i : Nat)
+    {' '.join(f'(h{j} : 1 ≤ a (i+{first + j}))' for j in range(k))}
+    (hind : inducedPattern (win{S} d i) = true)
+{step_hyps} :
+    {P} + Φ{S} d a (i+1) ≤ {Q} * sym (a (i+{L})) + Φ{S} d a i := by
+  have h := step{S}_raw (win{S} d i) rfl {' '.join(f'(a (i+{first + j}))' for j in range(k))}
+    {' '.join(f'h{j}' for j in range(k))} hind {' '.join(f'hw{cc}' for cc in range(2, k + 1))}
+  exact h
+
+def S{S} (a : Nat → Nat) : Nat → Nat
+  | 0 => 0
+  | n + 1 => S{S} a n + sym (a (n+{L}))
+
+theorem invariant{S} (d a : Nat → Nat) (m : Nat)
+    (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j)
+    (hind : ∀ i, i + {L + 1} ≤ m → inducedPattern (win{S} d i) = true)
+{inv_hyps} :
+    ∀ n, n + {L} ≤ m → {P} * n + Φ{S} d a n ≤ {Q} * S{S} a n + Φ{S} d a 0
+  | 0, _ => by simp [S{S}]
+  | n + 1, hn => by
+    have ih := invariant{S} d a m hpos hind {hw_names} n (by omega)
+    have hs := step{S} d a n {step_args_pos}
+      (hind n (by omega)) {step_args_w}
+    simp only [S{S}]
+    omega
+
+theorem sumA_ge{S} (a : Nat → Nat) (m : Nat) (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j) :
+    ∀ n, n + {L} ≤ m → {L - 1} + S{S} a n ≤ sumA a (n + {L - 1})
+  | 0, h => by
+    simp only [S{S}, sumA, Nat.zero_add, Nat.reduceAdd]
+{pos_list}
+    omega
+  | n + 1, h => by
+    have ih := sumA_ge{S} a m hpos n (by omega)
+    have := sym_le (a (n+{L}))
+    show {L - 1} + (S{S} a n + sym (a (n+{L}))) ≤ sumA a (n+{L - 1}) + a (n+{L - 1}+1)
+    have he2 : n + {L - 1} + 1 = n + {L} := by omega
+    rw [he2]
+    omega
+
+theorem total_bound{S} (d a : Nat → Nat) (m : Nat) (hm : {L} ≤ m)
+    (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j)
+    (hind : ∀ i, i + {L + 1} ≤ m → inducedPattern (win{S} d i) = true)
+{inv_hyps} :
+    {P} * m ≤ {Q} * sumA a (m - 1) + {C} := by
+  have hinv := invariant{S} d a m hpos hind {hw_names} (m - {L}) (by omega)
+  have hsum := sumA_ge{S} a m hpos (m - {L}) (by omega)
+  have h0 := Φ{S}_le d a 0
+  have he : m - {L} + {L - 1} = m - 1 := by omega
+  rw [he] at hsum
+  omega
+
+end Snake9.WindowAutomaton
+
+#print axioms Snake9.WindowAutomaton.total_bound{S}
+"""
+    open(os.path.join(STRONGER, f'WindowAutomaton{S}Sequence.lean'), 'w').write(seq)
+    wr_hyps = '\n'.join(
+        f'    (hw{cc} : ∀ j, j + {cc + 1} ≤ m → wforb{S} {dpj(cc + 1)}\n      {apj(cc)} = false)' for cc in range(2, k + 1))
+    wrapper = f"""import WindowAutomaton{S}Sequence
+import AggregateDirectionConditional
+
+namespace Snake9
+open SquareIncidence Finset Classical WindowAggregate WindowAutomaton
+noncomputable section
+set_option maxHeartbeats 1600000
+
+theorem win{S}_eq (p : Snake m) (i : Nat) : win{S} (pathDir p) i = blockList p i {L + 1} := rfl
+
+/-- Conditional {B}-edge bound: no window of 2..{k} consecutive internal vertices has a
+direction shape and lumped counts listed in the tables of `WindowAutomaton{S}Data`
+({len(keys)} certified exclusions, radius {a.radius}).  The premise is NOT proved in Lean; the
+unconditional bound remains 245. -/
+theorem upper_{B}_of_direction_windows{S} {{m : Nat}} (p : Snake m)
+{wr_hyps} : m ≤ {B} := by
+  by_cases hm : m < {L}
+  · omega
+  obtain ⟨h0, h1, hpos, _, hid⟩ := countSeq_facts p (by omega)
+  have hpos' : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ countSeq p j := by
+    intro j hj hjm
+    have := hpos (j - 1) (by omega)
+    simpa [show j - 1 + 1 = j by omega] using this
+  have htot := total_bound{S} (pathDir p) (countSeq p) m (by omega) hpos'
+    (fun i hi => by rw [win{S}_eq]; exact snake_inducedPattern_block p i {L + 1} hi) {hw_names}
+  rw [sumA_eq_psum] at htot
+  omega
+
+#print axioms upper_{B}_of_direction_windows{S}
+end
+end Snake9
+"""
+    open(os.path.join(STRONGER, f'AggregateDirection{S}Conditional.lean'), 'w').write(wrapper)
+    mods = ['WindowAutomatonLoop', 'WindowAutomatonSwar', f'WindowAutomaton{S}Data', f'WindowAutomaton{S}Spec'] + \
+        [f'WindowAutomaton{S}Shard{i}' for i in range(len(shapes))] + \
+        [f'WindowAutomaton{S}Table', f'WindowAutomaton{S}Sequence', f'AggregateDirection{S}Conditional']
+    json.dump({'suffix': S, 'L': L, 'k': k, 'K': K, 'radius': a.radius, 'lambda': str(lam), 'range': R,
+               'bound_edges': B, 'dp_bound_edges': vb - 1, 'exclusions': len(keys), 'states': A.n,
+               'shapes': len(shapes), 'modules': mods, 'kernel_check': 'swar',
+               'theorem': f'Snake9.upper_{B}_of_direction_windows{S}'},
+              open(os.path.join(HERE, '..', 'data', f'lean_chain_{S}.json'), 'w'), indent=1)
+    print('wrote', len(mods), 'modules; theorem', f'upper_{B}_of_direction_windows{S}', 'w2 shapes', w2)
 
 
 if __name__ == '__main__':

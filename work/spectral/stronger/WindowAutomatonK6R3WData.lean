@@ -212,7 +212,7 @@ theorem repK6R3W_eq : repK6R3W = repK 36 6 := by decide +kernel
 /-- All 46656 symbol codes: outer loop over the 3 oldest symbols, one packed
 comparison of the 216 fields of the three newest per step. -/
 def checkTK6R3W (T2 R2 T3 R3 T4 R4 T5 R5 T6 R6 PC0 PT1 : Nat) : Bool :=
-  letN (blk T2 R2 ||| blk T3 R3 + 1) fun BL3 =>
+  letN ((blk T2 R2 ||| blk T3 R3) + 1) fun BL3 =>
   letN (blk T4 R4 + 1) fun M4 =>
   letN (blk T5 R5 + 1) fun M5 =>
   letN (blk T6 R6 + 1) fun M6 =>
@@ -575,7 +575,7 @@ theorem potTK6R3W_digit (i y : Nat) (hy : y < 7776) : digit (potTK6R3W i) (posK6
   have h0c : potCK6R3W i = 0 := by
     unfold potCK6R3W
     simp [hi0, hi1, hi2, hi3, hi4, hi5, hi6, hi7, hi8, hi9, hi10, hi11, hi12, hi13, hi14, hi15, hi16, hi17, hi18, hi19, hi20, hi21, hi22, hi23, hi24, hi25, hi26, hi27, hi28, hi29, hi30, hi31, hi32, hi33]
-  rw [h0, h0c]
+  rw [h0, h0c]; simp [digit]
 
 /-- Step test for one window of 8 directions. -/
 def checkK6R3W (c : List Nat) : Bool :=
