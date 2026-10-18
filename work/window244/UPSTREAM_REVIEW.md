@@ -134,6 +134,11 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 已通过的两层拆分（214，再各拆 107），每个子结果仍由内核检查并经
 拼接引理还原。检查点复制检查和原证书均不改动。
 
+累计 1,324 个模块通过后，Windows 在原子替换清单时返回 `WinError 5`
+（拒绝访问），证明检查本身没有报错。错误与当时清单哈希保存为
+`upstream241-manifest-sharing-failure.json`。清单保存现对短暂的共享占用
+重试最多六秒，仍采用原子替换；从原有效检查点恢复，不改变 Lean 源码。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。

@@ -51,7 +51,16 @@ split_semantic_modules.update(n for n,r in state['modules'].items()
     if re.fullmatch(r'LocalWindowSat\.[^.]+(?:Distinct|Repeated|S\d+)',n) and r.get('memory_exceeded'))
 state['split_semantic_modules']=sorted(split_semantic_modules)
 def save():
-    tmp=manifest.with_suffix('.tmp');tmp.write_bytes((json.dumps(state,indent=2)+'\n').encode());tmp.replace(manifest)
+    tmp=manifest.with_suffix('.tmp');tmp.write_bytes((json.dumps(state,indent=2)+'\n').encode())
+    # Windows readers/scanners may briefly hold the destination without
+    # delete sharing. Preserve atomic replacement and retry that condition.
+    for attempt in range(30):
+        try:
+            tmp.replace(manifest)
+            break
+        except PermissionError:
+            if attempt==29:raise
+            time.sleep(.2)
 save()
 print('Independent build:',build,flush=True)
 try:
