@@ -82,6 +82,9 @@ def main():
     parser.add_argument("--mathlib-dir", required=True, type=Path)
     parser.add_argument("--core-targets", nargs="*", default=None,
                         help="build only these core modules (default: the core default targets)")
+    parser.add_argument("--build-dir", type=Path, default=None,
+                        help="reuse this build directory: steps whose object is newer than its source and "
+                             "whose previous run succeeded are not repeated (for machines that restart)")
     args = parser.parse_args()
     project = Path(__file__).resolve().parent
     repo = project.parent.parent
@@ -106,11 +109,15 @@ def main():
 
     build_parent = project / ".verification"
     build_parent.mkdir(exist_ok=True)
-    build = Path(tempfile.mkdtemp(prefix="strengthened-", dir=build_parent)).resolve()
+    if args.build_dir is not None:
+        build = args.build_dir.resolve()
+        build.mkdir(parents=True, exist_ok=True)
+    else:
+        build = Path(tempfile.mkdtemp(prefix="strengthened-", dir=build_parent)).resolve()
     core = build / "core"
-    core.mkdir()
+    core.mkdir(exist_ok=True)
     logs = build / "logs"
-    logs.mkdir()
+    logs.mkdir(exist_ok=True)
     manifest = {
         "started_utc": datetime.now(timezone.utc).isoformat(),
         "mathlib_commit": actual, "lean_version": version,
@@ -128,6 +135,12 @@ def main():
         manifest["source_sha256"][source.relative_to(repo).as_posix()] = source_hash
         shutil.copy2(source, target)
         assert hashlib.sha256(target.read_bytes()).hexdigest() == source_hash
+
+    def cached(label, source, target):
+        marker = logs / (label + ".ok")
+        return (args.build_dir is not None and marker.exists() and target.exists()
+                and target.stat().st_mtime >= source.stat().st_mtime
+                and marker.stat().st_mtime >= source.stat().st_mtime)
 
     def run(label, command, cwd, env=None):
         print(f"Checking {label} ...", flush=True)
@@ -150,6 +163,7 @@ def main():
         if result.returncode or "declaration uses 'sorry'" in result.stdout:
             print(result.stdout, flush=True)
             raise RuntimeError(f"{label} failed; see {logs / (label + '.log')}")
+        (logs / (label + ".ok")).write_text(datetime.now(timezone.utc).isoformat() + "\n")
 
     try:
         core_source = project.parent / "final_lean"
@@ -165,6 +179,10 @@ def main():
             copy(project / "stronger" / (module + ".lean"), build / (module + ".lean"))
         env["LEAN_PATH"] = os.pathsep.join([str(core / ".lake/build/lib/lean"), str(build)])
         for module in ["SquareIncidence", *MODULES]:
+            if cached(module, build / (module + ".lean"), build / (module + ".olean")):
+                print(f"Checking {module} ... (object up to date from an earlier run)", flush=True)
+                manifest["steps"].append({"label": module, "cached": True})
+                continue
             run(module, [lake, "env", "lean", f"--root={build}", "-o",
                          str(build / (module + ".olean")), str(build / (module + ".lean"))],
                 mathlib, env)
