@@ -145,7 +145,7 @@ try:
                 original=original.replace('set_option maxHeartbeats 0','set_option maxHeartbeats 0\nset_option Elab.async false')
                 original=original.replace(':= by decide\n',':= by decide +kernel\n')
             raw=original.encode('utf-8')
-        if name=='SharedFiniteClassification':
+        if name in {'SharedFiniteClassification','LocalWindowSat.C232FwdDistinct'}:
             raw=raw.replace(b'set_option maxHeartbeats 0',b'set_option maxHeartbeats 0\nset_option Elab.async false')
         if name=='LocalWindowBridge':
             raw=raw.replace(b'set_option maxRecDepth 10000',b'set_option maxRecDepth 10000\nset_option Elab.async false')
@@ -153,7 +153,7 @@ try:
         src.parent.mkdir(parents=True,exist_ok=True)
         if not src.exists() or src.read_bytes()!=raw:src.write_bytes(raw)
         state['sources'][name]=dict(git_path=mapping[name],sha256=sha(src),upstream_sha256=upstream_sha,
-            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'sequential elaboration' if name in {'SharedFiniteClassification','LocalWindowBridge'} else 'one certificate theorem and one Boolean check per module' if re.match(r'LocalWindowUnsat\.[^.]+\.Check\d+',name) else None))
+            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'sequential elaboration' if name in {'SharedFiniteClassification','LocalWindowBridge','LocalWindowSat.C232FwdDistinct'} else 'one certificate theorem and one Boolean check per module' if re.match(r'LocalWindowUnsat\.[^.]+\.Check\d+',name) else None))
         imports=[]
         for line in raw.decode('utf-8').splitlines():
             if line.startswith('import '):

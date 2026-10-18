@@ -101,6 +101,11 @@ RUP 段和检查点复制，仍触及预算；其清单保存为
 本次无需修改生成器或证明：恢复驱动根据已保存的超限记录，对第 30 段
 应用同一个已证分段机制，其余有效断点继续复用。
 
+第 30 段恢复后继续通过，累计 1,061 个模块已核验。随后
+`LocalWindowSat.C232FwdDistinct` 的原始语义检查触及预算，保存清单为
+`upstream241-sat232-first-attempt.json`。本次首先关闭该模块的异步
+elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预算保持不变。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
