@@ -316,4 +316,41 @@ theorem pos3_split (z m : Nat) (hm : 0 < m) : pos3 (z % (216 * m)) = 216 * (z / 
   rw [h1, h2, h3, h4, h5, h6]
   omega
 
+/-- `P &&& HI = 0`, with `HI` the top bit of every field: every field of `P` is below 128. -/
+theorem digit_lt_128_of_and (P n : Nat) (h : (P &&& pack (tab (fun _ => 128) n)) = 0)
+    (y : Nat) (hy : y < n) : digit P y < 128 := by
+  have hb : Nat.testBit (P &&& pack (tab (fun _ => 128) n)) (8 * y + 7) = false := by
+    rw [h]; simp
+  rw [Nat.testBit_and, testBit_digit, testBit_digit,
+    digit_pack _ (tab_bounded _ _ _ (fun _ _ => by decide)) y, tab_getD _ _ y hy,
+    show Nat.testBit 128 7 = true by decide, Bool.and_true, testBit_top _ (digit_lt _ _)] at hb
+  simpa using hb
+
+/-- Field-wise bound `digit P y + c < 128` from two mask tests: no field of `P` has its top bit
+set, and neither has any field of `P + c * ONE` (`ONE` is 1 in every field; `c <= 127` so the
+addition never carries).  With `c = 127 - R` this is `digit P y <= R`. -/
+theorem bytes_lt_of_masks (P n c HI ONE : Nat) (hHI : HI = pack (tab (fun _ => 128) n))
+    (hONE : ONE = pack (tab (fun _ => 1) n)) (hc : c ≤ 127)
+    (h : (Nat.ble (P + 1) (256 ^ n) && Nat.beq (P &&& HI) 0 && Nat.beq ((P + c * ONE) &&& HI) 0) = true)
+    (y : Nat) (hy : y < n) : digit P y + c < 128 := by
+  subst hHI hONE
+  simp only [Bool.and_eq_true] at h
+  obtain ⟨⟨h0, h1⟩, h2⟩ := h
+  have hP : P < 256 ^ n := Nat.le_of_ble_eq_true h0
+  have hlt : ∀ j, j < n → digit P j < 128 := digit_lt_128_of_and P n (Nat.eq_of_beq_eq_true h1)
+  have hsum : pack (tab (digit P) n) + c * pack (tab (fun _ => 1) n) =
+      pack (tab (fun j => digit P j + c) n) := by
+    rw [pack_tab_mul, pack_tab_add]
+    simp
+  rw [pack_tab_digit P n hP] at hsum
+  have hbd : Bounded 256 (tab (fun j => digit P j + c) n) :=
+    tab_bounded _ _ _ (fun j hj => by have := hlt j hj; omega)
+  have h2' := digit_lt_128_of_and _ n (Nat.eq_of_beq_eq_true h2) y hy
+  rw [hsum, digit_pack _ hbd y, tab_getD _ _ y hy] at h2'
+  exact h2'
+
+/-- A numeral given as little-endian 8192-bit chunks (large table literals are written this way
+because the parser's decimal conversion is quadratic in the number of digits). -/
+def ofChunks (l : List Nat) : Nat := l.foldr (fun c acc => acc <<< 8192 + c) 0
+
 end Snake9.WindowAutomaton

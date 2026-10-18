@@ -157,13 +157,27 @@ def main():
     print('python re-check passed on', checked, 'shard transitions', flush=True)
 
     # ---- Lean text ------------------------------------------------------------
+    CHUNK = 8192
+
+    def lit(v):
+        """A numeral.  Lean parses a decimal literal digit by digit (quadratic in its length: a
+        347,000-bit table costs four seconds), so large values are written as a list of 8192-bit
+        chunks folded by `ofChunks`; the kernel rebuilds the numeral once per forced `letN`."""
+        if v.bit_length() <= CHUNK:
+            return str(v)
+        chunks = []
+        while v:
+            chunks.append(v & ((1 << CHUNK) - 1))
+            v >>= CHUNK
+        return 'ofChunks [' + ', '.join(str(c) for c in chunks) + ']'
+
     def chain2(name, var1, var2, table):
         by_a = {}
         for (x, y), v in table.items():
             by_a.setdefault(x, {})[y] = v
         lines = [f'def {name} ({var1} {var2} : Nat) : Nat :=']
         for x in sorted(by_a):
-            inner = ' else '.join(f'if {var2} = {y} then {v}' for y, v in sorted(by_a[x].items()))
+            inner = ' else '.join(f'if {var2} = {y} then {lit(v)}' for y, v in sorted(by_a[x].items()))
             lines.append(f'  if {var1} = {x} then ({inner} else 0) else')
         lines.append('  0')
         return '\n'.join(lines)
@@ -171,11 +185,12 @@ def main():
     def chain1(name, var, table):
         lines = [f'def {name} ({var} : Nat) : Nat :=']
         for x, v in sorted(table.items()):
-            lines.append(f'  if {var} = {x} then {v} else')
+            lines.append(f'  if {var} = {x} then {lit(v)} else')
         lines.append('  0')
         return '\n'.join(lines)
 
     ONES = sum(1 << (8 * l) for l in range(216)); HI = 128 * ONES
+    ONESP = sum(1 << (8 * l) for l in range(M1))
     WPAT = sum((l // 36 + 1) << (8 * l) for l in range(216)); REP = sum(1 << (288 * i) for i in range(6))
     argn = [f'{p}{cc}' for cc in range(2, k + 1) for p in ('T', 'R')] + ['PC0', 'PT1']
     outer_lets = '  letN ((blk T2 R2 ||| blk T3 R3) + 1) fun BL3 =>\n' + ''.join(
@@ -210,8 +225,11 @@ def main():
     # potential theorems
     pot_thms = []
     for i in range(len(shapes)):
-        pot_thms.append(f'theorem potC{S}_bnd_{i} : allBelowR {M1} (fun y => Nat.ble (digit (potC{S} {i}) y) {R}) = true := by decide +kernel')
-        pot_thms.append(f'theorem potT{S}_bnd_{i} : allBelowR {M1} (fun y => Nat.ble (digit (potT{S} {i}) y) {R}) = true := by decide +kernel')
+        for nm in ('potC', 'potT'):
+            # Stated as the field bound itself: the mask test is kernel-evaluated against the
+            # expected type (unifying a separately elaborated Bool statement overflows the stack).
+            pot_thms.append(f'theorem {nm}{S}_bnd_{i} (y : Nat) (hy : y < {M1}) : digit ({nm}{S} {i}) y + {127 - R} < 128 :=\n'
+                            f'  bytes_lt_of_masks _ _ _ _ _ hiP{S}_eq onesP{S}_eq (by decide) (by decide +kernel) y hy')
         pot_thms.append(f'theorem potT{S}_cons_{i} : allBelowR {M1} (fun y => Nat.beq (digit (potT{S} {i}) (pos3 y)) (digit (potC{S} {i}) y)) = true := by decide +kernel')
     def by_shape(name, body_i, default):
         cases = ''.join(f'''  by_cases hi{i} : i = {i}
@@ -223,9 +241,9 @@ def main():
     simp [{hyps}]
   {default}'''
     potC_le = f'''theorem potC{S}_digit_le (i y : Nat) (hy : y < {M1}) : digit (potC{S} i) y ≤ {R} := by
-{by_shape(f'potC{S}', lambda i: f'exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potC{S}_bnd_{i} y hy)', f'rw [h0]; simp [digit]')}'''
+{by_shape(f'potC{S}', lambda i: f'have h := potC{S}_bnd_{i} y hy; omega', f'rw [h0]; simp [digit]')}'''
     potT_le = f'''theorem potT{S}_digit_le (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) y ≤ {R} := by
-{by_shape(f'potT{S}', lambda i: f'exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potT{S}_bnd_{i} y hy)', f'rw [h0]; simp [digit]')}'''
+{by_shape(f'potT{S}', lambda i: f'have h := potT{S}_bnd_{i} y hy; omega', f'rw [h0]; simp [digit]')}'''
     potT_eq = f'''theorem potT{S}_digit (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) (pos3 y) = digit (potC{S} i) y := by
 {by_shape(f'potT{S}', lambda i: f'exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potT{S}_cons_{i} y hy)', f'''have h0c : potC{S} i = 0 := by
     unfold potC{S}
@@ -335,10 +353,22 @@ theorem pot{S}_le (h t : List Nat) : pot{S} h t ≤ {R} := clip_le _ _
 
 def ones{S} : Nat := {ONES}
 def hi{S} : Nat := {HI}
+def onesP{S} : Nat := {lit(ONESP)}
+def hiP{S} : Nat := {lit(128 * ONESP)}
 def wpat{S} : Nat := {WPAT}
 def rep{S} : Nat := {REP}
 theorem ones{S}_eq : ones{S} = pack (tab (fun _ => 1) 216) := by decide +kernel
 theorem hi{S}_eq : hi{S} = pack (tab (fun _ => 128) 216) := by decide +kernel
+theorem onesP{S}_eq : onesP{S} = pack (tab (fun _ => 1) {M1}) := by
+  have h := pack_tab_rep (fun _ => 1) 216 {M1 // 216}
+  rw [← ones{S}_eq] at h
+  have e : onesP{S} = ones{S} * repK 216 {M1 // 216} := by decide +kernel
+  rw [e]; exact h.symm
+theorem hiP{S}_eq : hiP{S} = pack (tab (fun _ => 128) {M1}) := by
+  have h := pack_tab_rep (fun _ => 128) 216 {M1 // 216}
+  rw [← hi{S}_eq] at h
+  have e : hiP{S} = hi{S} * repK 216 {M1 // 216} := by decide +kernel
+  rw [e]; exact h.symm
 theorem wpat{S}_eq : wpat{S} = pack (tab (fun l => l / 36 + 1) 216) := by decide +kernel
 theorem rep{S}_eq : rep{S} = repK 36 6 := by decide +kernel
 
