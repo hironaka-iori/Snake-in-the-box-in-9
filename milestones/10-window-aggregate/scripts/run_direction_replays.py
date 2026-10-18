@@ -1,8 +1,8 @@
 """Generate and kernel-check the LRAT replays of the 145 direction-window cores.
 
 Step 1 (`gen`): for each case of data/lean_core_direction (smallest proof first) run
-gen_lean_lrat.py with 13-bit words, or 14-bit words when the database has more than
-8191 slots.  Cases whose main module already exists are skipped, so the step resumes.
+gen_lean_lrat.py --fast (checker LratFast) with 13-bit words, or 14-bit words
+(LratFast14) when the database has more than 8191 slots.  Cases whose main module already exists are skipped, so the step resumes.
 Generation runs one case at a time (the largest LRAT files need a few GB in Python).
 
 Step 2 (`build`): build every LocalWindowUnsat.D* module through
@@ -32,7 +32,7 @@ def gen(a):
         for bits in (13, 14):
             cmd = [sys.executable, os.path.join(HERE, 'gen_lean_lrat.py'), '--work', a.work,
                    '--data', DATA, '--seg', str(a.seg), '--cp', str(a.cp), '--group', str(a.group),
-                   '--wbits', str(bits), '--noncomputable-data', name]
+                   '--wbits', str(bits), '--noncomputable-data', '--fast', name]
             r = subprocess.run(cmd, capture_output=True, text=True)
             if r.returncode == 0:
                 print(json.dumps({'case': name, 'module': mod, 'wbits': bits, 'hints': info['hints']}), flush=True)
