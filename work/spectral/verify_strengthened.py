@@ -71,15 +71,15 @@ MODULES = [
     "WindowPotential242", "WindowPotential241", "AggregateWindowConditional",
     "WindowAutomatonDefs", "WindowAutomatonData", "WindowAutomatonLemmas",
     "WindowAutomatonSequence", "WindowAutomatonBridge", "AggregateDirectionConditional",
-    "WindowAutomatonLoop", "WindowAutomatonK5R3Data", "WindowAutomatonK5R3Shard0", "WindowAutomatonK5R3Shard1", "WindowAutomatonK5R3Shard2", "WindowAutomatonK5R3Shard3", "WindowAutomatonK5R3Shard4", "WindowAutomatonK5R3Shard5", "WindowAutomatonK5R3Shard6", "WindowAutomatonK5R3Shard7", "WindowAutomatonK5R3Shard8", "WindowAutomatonK5R3Shard9", "WindowAutomatonK5R3Shard10", "WindowAutomatonK5R3Shard11", "WindowAutomatonK5R3Shard12", "WindowAutomatonK5R3Shard13", "WindowAutomatonK5R3Shard14", "WindowAutomatonK5R3Shard15", "WindowAutomatonK5R3Shard16", "WindowAutomatonK5R3Shard17", "WindowAutomatonK5R3Shard18", "WindowAutomatonK5R3Shard19", "WindowAutomatonK5R3Shard20", "WindowAutomatonK5R3Shard21", "WindowAutomatonK5R3Shard22", "WindowAutomatonK5R3Shard23", "WindowAutomatonK5R3Shard24", "WindowAutomatonK5R3Shard25", "WindowAutomatonK5R3Shard26", "WindowAutomatonK5R3Shard27", "WindowAutomatonK5R3Shard28", "WindowAutomatonK5R3Shard29", "WindowAutomatonK5R3Shard30", "WindowAutomatonK5R3Shard31", "WindowAutomatonK5R3Shard32", "WindowAutomatonK5R3Shard33",
-    "WindowAutomatonK5R3Table", "WindowAutomatonK5R3Sequence", "AggregateDirectionK5R3Conditional",
+    "WindowAutomatonLoop",
 ]
 
 
-def k6_modules(chain):
-    """The k = 6 chain: K6R3W checks the table with the SWAR kernel (216 transitions per
-    big-integer step), K6R3 is the earlier one-transition-per-step design (both prove 235);
-    K6R3C7W is the SWAR chain with lump cap 7 (eight symbols, its own bound)."""
+def chain_modules(chain):
+    """Modules of a generated direction-automaton chain.  Suffixes ending in `W` are the SWAR
+    kernel chains (all transitions of a shape pair in one packed comparison; `gen_lean_swar.py`),
+    the others the one-transition-per-step design (`gen_lean_automaton_k.py`); a `C` in the
+    suffix marks a lump cap other than 5 (`WindowAutomatonSym`)."""
     extra = (["WindowAutomatonSwar", "WindowAutomatonCode"] if chain.endswith("W") else []) + \
         (["WindowAutomatonSym"] if "C" in chain else [])
     spec = [f"WindowAutomaton{chain}Spec"] if chain.endswith("W") else []
@@ -92,18 +92,24 @@ def main():
     parser.add_argument("--mathlib-dir", required=True, type=Path)
     parser.add_argument("--core-targets", nargs="*", default=None,
                         help="build only these core modules (default: the core default targets)")
+    parser.add_argument("--k5-chain", choices=["K5R3W", "K5R3"], default="K5R3W",
+                        help="which Lean chain proves the conditional 238 (default: the SWAR kernel chain)")
     parser.add_argument("--k6-chain", choices=["K6R3W", "K6R3", "K6R3C7W"], default="K6R3W",
                         help="which Lean chain proves the conditional 235 (default: the SWAR kernel chain)")
     parser.add_argument("--build-dir", type=Path, default=None,
                         help="reuse this build directory: steps whose object is newer than its source and "
                              "whose previous run succeeded are not repeated (for machines that restart)")
     args = parser.parse_args()
-    modules = MODULES + k6_modules(args.k6_chain)
-    k6 = args.k6_chain
+    k5, k6 = args.k5_chain, args.k6_chain
+    # the five-centre chain goes before the six-centre one, after the shared modules
+    modules = MODULES + [m for m in chain_modules(k5) if m not in MODULES] + \
+        [m for m in chain_modules(k6) if m not in MODULES and m not in chain_modules(k5)]
     project = Path(__file__).resolve().parent
-    # the bound the chosen chain proves, read from its wrapper theorem's name
-    k6_theorem = re.search(r"theorem (upper_\d+_of_direction_windows" + k6 + r")\b",
-                           (project / "stronger" / f"AggregateDirection{k6}Conditional.lean").read_text()).group(1)
+    # the bounds the chosen chains prove, read from their wrapper theorems' names
+    def chain_theorem(chain):
+        return re.search(r"theorem (upper_\d+_of_direction_windows" + chain + r")\b",
+                         (project / "stronger" / f"AggregateDirection{chain}Conditional.lean").read_text()).group(1)
+    k5_theorem, k6_theorem = chain_theorem(k5), chain_theorem(k6)
     repo = project.parent.parent
     mathlib = args.mathlib_dir.resolve()
     lake = shutil.which("lake")
@@ -138,7 +144,7 @@ def main():
     manifest = {
         "started_utc": datetime.now(timezone.utc).isoformat(),
         "mathlib_commit": actual, "lean_version": version,
-        "build_directory": str(build), "k6_chain": k6, "source_sha256": {},
+        "build_directory": str(build), "k5_chain": k5, "k6_chain": k6, "source_sha256": {},
         "steps": [], "axiom_audits": {}, "status": "running",
     }
 
@@ -218,13 +224,13 @@ def main():
                 mathlib, env)
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirectionK5R3Conditional\nimport AggregateDirection" + k6 + "Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
+            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.upper_242_of_certified_windows\n"
             "#print axioms Snake9.upper_241_of_certified_windows\n"
             "#print axioms Snake9.upper_239_of_direction_windows\n"
             "#print axioms Snake9.WindowAutomaton.step_table\n"
-            "#print axioms Snake9.upper_238_of_direction_windowsK5R3\n"
+            "#print axioms Snake9." + k5_theorem + "\n"
             "#print axioms Snake9." + k6_theorem + "\n"
             "#print axioms Snake9.lower_bound\n"
             "#print axioms Snake9.noNext_iff_upperBound\n"
@@ -251,7 +257,7 @@ def main():
         expected = {"Snake9.upper_244_of_no_two_two_three",
                     "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows",
                     "Snake9.upper_239_of_direction_windows", "Snake9.WindowAutomaton.step_table",
-                    "Snake9.upper_238_of_direction_windowsK5R3", "Snake9." + k6_theorem, "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
+                    "Snake9." + k5_theorem, "Snake9." + k6_theorem, "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
                     "Snake9.adjacent_internal_alpha_one_impossible",
                     "Snake9.upper_bound_251", "Snake9.verified_interval_191_251",
                     "Snake9.adjacent_internal_one_two_impossible",
