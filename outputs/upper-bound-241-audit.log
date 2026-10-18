@@ -1,0 +1,45 @@
+# Audit of the unconditional 241/242 bounds (2026-10-18T00:36Z)
+# Lean 4.19.0, mathlib c44e0c8; core built by work/guarded_lake_build.py (1083 modules incl. 22 LocalWindowUnsat replays);
+# mathlib-side chain compiled one module at a time with the same invocation as verify_strengthened.py.
+MixedOrdinaryEndpoints: ok 2s
+MixedOuterExclusion: ok 1s
+EqualOuterPairEndpoints: ok 2s
+EqualOuterPairForce: ok 2s
+EqualOuterPairIncident: ok 2s
+EqualOuterPairStar: ok 2s
+EqualOuterPairResidual: ok 1s
+EqualOuterPairExclusion: ok 1s
+ThreeTwosRemainingUnequal: ok 2s
+DisjointOrdinaryPartners: ok 2s
+DisjointOneOrdinaryCount: ok 2s
+OrdinaryTwoEdgeDemand: ok 2s
+DisjointOrdinaryDemand: ok 2s
+OrdinaryDisjointExclusion: ok 1s
+NormalizeSharedThreeTwos: ok 2s
+AdjacentSingletonExclusion: ok 2s
+UpperBound251: ok 2s
+Aggregate248: ok 2s
+UpperBound248: ok 2s
+Aggregate247: ok 2s
+AlphaRunPotential: ok 2s
+UpperBound247: ok 2s
+GeneralMissingGeometry: ok 1s
+GeneralGoodIndex: ok 1s
+GeneralEndpointGroups: ok 2s
+ThreeMissingClassification: ok 2s
+OneThreeExclusion: ok 1s
+AdjacentOneThreeExclusion: ok 2s
+Aggregate245Conditional: ok 2s
+UpperBound245: ok 3s
+AggregateWindowConditional: ok 3s
+AggregateWindowUnconditional: ok 2s
+UpperBound241: ok 8s
+'Snake9.upper_bound_241' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.upper_bound_242' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.verified_interval_191_241' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+      342.61 real       816.52 user        82.92 sys
+          5114904576  maximum resident set size
+             9519512  peak memory footprint
+
+[exited with code 0]
