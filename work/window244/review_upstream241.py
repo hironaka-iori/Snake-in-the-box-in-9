@@ -96,11 +96,13 @@ try:
                 original=original.replace('set_option maxHeartbeats 0','set_option maxHeartbeats 0\nset_option Elab.async false')
                 original=original.replace(':= by decide\n',':= by decide +kernel\n')
             raw=original.encode('utf-8')
+        if name=='SharedFiniteClassification':
+            raw=raw.replace(b'set_option maxHeartbeats 0',b'set_option maxHeartbeats 0\nset_option Elab.async false')
         src=build/(name.replace('.','/')+'.lean')
         src.parent.mkdir(parents=True,exist_ok=True)
         if not src.exists() or src.read_bytes()!=raw:src.write_bytes(raw)
         state['sources'][name]=dict(git_path=mapping[name],sha256=sha(src),upstream_sha256=upstream_sha,
-            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else None))
+            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'sequential elaboration of 21 classification rows' if name=='SharedFiniteClassification' else None))
         imports=[]
         for line in raw.decode('utf-8').splitlines():
             if line.startswith('import '):

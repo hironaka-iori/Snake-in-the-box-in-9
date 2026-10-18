@@ -46,6 +46,11 @@ python work/window244/review_upstream241.py --lean-bin /path/to/lean-4.19.0/bin 
 对它采用相同的 138 行拆分，关闭异步 elaboration，其余有限检查使用
 `decide +kernel`。原始和实际源码哈希继续分别记录，预算保持不变。
 
+第二个示例模块已通过。随后 `SharedFiniteClassification` 原始模块触及预算，
+其首轮清单保存在 `outputs/window244/upstream241-classification-first-attempt.json`。
+恢复时仅关闭该模块的异步 elaboration，使已有的 21 行分类证明顺序处理；
+证明内容和定理陈述均不变，适配及双份源码哈希已纳入清单。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
