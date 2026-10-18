@@ -6,7 +6,8 @@ driver computes the local import closure of the requested modules and builds it 
 dependency order, one module per `lake build` call (its imports are already built,
 so lake starts a single Lean process).  It
 
-* runs at most --jobs builds at a time;
+* runs at most --heavy-jobs memory-heavy builds (kernel checks) and --jobs light
+  builds at a time;
 * starts a build only when at least --min-free-gb of memory is available;
 * kills a build whose process group exceeds --rss-cap-gb, and stops launching
   new builds (and kills the newest one) while available memory is below --floor-gb.
@@ -72,7 +73,10 @@ def main():
     global ROOT
     ap = argparse.ArgumentParser()
     ap.add_argument('targets', nargs='+')
-    ap.add_argument('--jobs', type=int, default=3)
+    ap.add_argument('--jobs', type=int, default=3, help='concurrent light builds')
+    ap.add_argument('--heavy', default=r'\.Check\d+$',
+                    help='regex of memory-heavy modules (kernel checks), limited by --heavy-jobs')
+    ap.add_argument('--heavy-jobs', type=int, default=None, help='default: --jobs')
     ap.add_argument('--min-free-gb', type=float, default=5.0)
     ap.add_argument('--rss-cap-gb', type=float, default=6.0)
     ap.add_argument('--floor-gb', type=float, default=1.5)
@@ -85,6 +89,9 @@ def main():
         (ROOT / '.lake').mkdir(exist_ok=True)
         a.log = str(ROOT / '.lake' / 'guarded_build.jsonl')
 
+    if a.heavy_jobs is None:
+        a.heavy_jobs = a.jobs
+    heavy = re.compile(a.heavy)
     deps = closure(a.targets)
     done, failed, running = set(), {}, {}   # running: module -> (Popen, start, peak)
     lock = threading.Lock()
@@ -134,8 +141,12 @@ def main():
         # launch
         ready = [m for m in sorted(deps) if m not in done and m not in failed and m not in running
                  and all(d in done for d in deps[m])]
-        if ready and len(running) < a.jobs and available_gb() >= a.min_free_gb:
-            m = ready[0]
+        n_heavy = sum(1 for m in running if heavy.search(m))
+        n_light = len(running) - n_heavy
+        ready = [m for m in ready if (n_heavy < a.heavy_jobs if heavy.search(m) else n_light < a.jobs)]
+        if ready and available_gb() >= a.min_free_gb:
+            # prefer heavy modules so the slow kernel checks start as early as possible
+            m = next((x for x in ready if heavy.search(x)), ready[0])
             with open(logdir / (m + '.log'), 'w') as out:
                 proc = subprocess.Popen([a.lake, 'build', m], cwd=ROOT, stdout=out,
                                         stderr=subprocess.STDOUT, start_new_session=True)

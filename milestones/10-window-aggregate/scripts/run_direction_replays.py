@@ -49,6 +49,7 @@ def build(a):
     if a.limit:
         mods = mods[:a.limit]
     cmd = [sys.executable, os.path.join(ROOT, 'work', 'guarded_lake_build.py'), '--jobs', str(a.jobs),
+           '--heavy-jobs', str(a.heavy_jobs),
            '--min-free-gb', str(a.min_free_gb), '--rss-cap-gb', str(a.rss_cap_gb), *mods]
     raise SystemExit(subprocess.run(cmd).returncode)
 
@@ -62,7 +63,8 @@ def main():
     g.add_argument('--cp', type=int, default=3)
     g.add_argument('--group', type=int, default=4)
     b = sub.add_parser('build')
-    b.add_argument('--jobs', type=int, default=3)
+    b.add_argument('--jobs', type=int, default=3, help='light (data) modules at a time')
+    b.add_argument('--heavy-jobs', type=int, default=3, help='kernel-check modules at a time')
     b.add_argument('--min-free-gb', type=float, default=5.0)
     b.add_argument('--rss-cap-gb', type=float, default=6.0)
     b.add_argument('--limit', type=int, default=0, help='only the N smallest cases')
