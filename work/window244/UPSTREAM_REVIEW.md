@@ -40,6 +40,12 @@ python work/window244/review_upstream241.py --lean-bin /path/to/lean-4.19.0/bin 
 清单分别保存原始 Git 源码和实际核验源码的 SHA256，并注明这一适配。
 这不使用 `native_decide`，最终仍必须检查传递公理。
 
+首个适配后的 `Snake9` 已通过（566.89 秒），`PathStructure` 和 `CubeLocal`
+也通过。随后 `SquareCounterexample` 的原始 138 顶点示例同样触及预算；
+该次清单已保存为 `outputs/window244/upstream241-square-first-attempt.json`。
+对它采用相同的 138 行拆分，关闭异步 elaboration，其余有限检查使用
+`decide +kernel`。原始和实际源码哈希继续分别记录，预算保持不变。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
