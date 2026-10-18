@@ -914,7 +914,7 @@ Removed vertices & Retained vertices & Excluded cases & Unresolved cases & Nodes
 40&152&262&0&16,561,030\\
 48&144&209&53&66,968,134\\\bottomrule
 \end{tabular}\end{center}
-Each case is one of the 262 oriented prefixes obtained from 131 paths and their reversals. The final row used one million nodes per orientation. These exhaustive-search results concern only the listed prefixes and have not been independently certified.
+Each case is one of the 262 oriented prefixes obtained from 131 paths and their reversals. The final row used one million nodes per orientation. This table records the initial bounded search. Subsequent certificate work excludes 192-edge extensions for all 262 orientations while retaining the first 112 vertices, with a completed Lean verification receipt. The exclusion concerns these particular retained segments; it neither classifies all snakes nor prevents improvements that change the interior.
 
 \subsection{Constraint models and vertex replacement}
 The exact model selects cube vertices and directed cube-edge arcs. A single directed circuit through an auxiliary vertex encodes one connected path; deleting the auxiliary vertex gives its endpoints. Unselected cube vertices use self-loops. Every cube edge whose two endpoints are selected is required to appear in the path. Together these constraints enforce distinctness, connectivity, and absence of chords. Small feasible and infeasible thresholds in dimensions three through five were reproduced. The unrestricted 192-edge run returned \textsc{Unknown} after 300 seconds.
@@ -924,6 +924,31 @@ A broader local model permits both endpoints to change and imposes only
 |V(P)\setminus V(T)|\le k,\qquad |V(T)|=193,
 \]
 where $P$ is a recorded 191-edge snake. Thus changes may occur anywhere in the path. For $k=2$, all 131 models were infeasible, with about 241 seconds total solver time. In vertex-set terms, a 192-edge improvement would have to delete at least three vertices from each tested representative. A two-vertex deletion allows three added vertices, since the target has one extra vertex overall. This excludes a restricted neighborhood, without excluding a distant snake. The corresponding model with $k=8$ returned \textsc{Unknown} on the first three seeds within 30 seconds each. The implementations and exclusions have not been independently certified.
+
+\subsection{Fixed-length walks with temporary defects}
+To search directly for 196 edges, consider a walk $v_0,\ldots,v_L$ in $\Q_9$ with $\Ham(v_i,v_{i+1})=1$. Distinctness and the absence of chords are temporarily relaxed. Define
+\[
+D(v)=\bigl|\{(i,j):0\le i<j\le L,\ v_i=v_j\}\bigr|,
+\qquad
+C(v)=\bigl|\{(i,j):0\le i<j-1\le L-1,\ \Ham(v_i,v_j)=1\}\bigr|,
+\]
+and set $E(v)=4D(v)+C(v)$. The positive weight four is a search choice.
+
+\begin{proposition}\label{prop:zero-defect}
+An adjacent walk is an induced path if and only if $E(v)=0$.
+\end{proposition}
+\begin{proof}
+Both counts are nonnegative. Therefore $E(v)=0$ is equivalent to $D(v)=C(v)=0$. The first equality gives distinct vertices. The second excludes all nonconsecutive adjacencies, while consecutive adjacency is already assumed. Conversely, an induced path has neither repeated vertices nor chords.
+\end{proof}
+This equivalence has been checked in Lean under the same path definition as the 191-edge witness. It supplies an acceptance criterion and does not establish that the search reaches zero.
+
+Two types of move preserve consecutive adjacency. Exchanging two distinct transition directions translates the intervening vertex interval by their binary sum. Changing one transition direction translates the entire suffix by the sum of its old and new directions. Distances within the translated interval and its complement remain unchanged, so only pairs crossing its boundary affect the score. These moves permit interior changes and moving endpoints. Simulated annealing permits temporary increases in $E$.
+
+Two 90-second runs at $L=196$ each reduced the best score from 10 to 7, after approximately 10.3 and 10.4 million proposals. Both saved walks have 197 distinct vertices and seven forbidden chords. A diagnostic run at $L=192$ retained its initial score of one after approximately 10.2 million proposals. No valid path longer than 191 edges was found. Independent pairwise checks confirmed the saved scores and valid segments. A separate implementation audit compared 104,939 evaluated move scores with direct pair counts. These computational checks do not constitute a proof of the search implementation.
+
+Exact repair then released neighborhoods of all defects and both endpoints, requiring the remaining vertices to be selected but leaving their order unrestricted. For one 196-edge candidate, fixing 145 vertices gave infeasibility in the restricted model; fixing 105 vertices was unresolved after 90 seconds. For the other candidate, fixing 85 vertices was unresolved after 60 seconds. A 192-edge repair fixing 160 vertices was infeasible. A control fixing a known 191-edge path succeeded and passed an independent check of all 18,336 unordered vertex pairs. The infeasibility reports have no Lean certificate and exclude only their specified fixed vertex sets.
+
+The score measures violations, rather than the number of edits needed to obtain a snake. Seven chords may require substantial changes to remove. A further experiment should retain diverse walks of equal score and compare simultaneous replacement of separated interior fragments with repair concentrated near the defects. The present results neither establish nor refute the proposed value 196.
 
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.

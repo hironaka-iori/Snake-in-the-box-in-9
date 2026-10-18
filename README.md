@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Research checkpoint: 16 October 2026.
+Research checkpoint: 18 October 2026. The current construction task targets 196 edges through walks with temporary defects and interior-fragment repair. No improved witness has been found. See [the construction milestone](milestones/12-construction-196/README.md) for the Lean-checked acceptance rule, completed experiments, and collaborator review.
 
 | Claim | Current evidence |
 |---|---|
@@ -26,6 +26,7 @@ Research checkpoint: 16 October 2026.
 | At most 239 edges if 145 direction-aware count-window patterns are excluded | Lean-checked conditional theorem (kernel-checked 2592-state potential); every pattern has a DRAT-checked certificate, not yet a Lean proof |
 | At most 238 edges if 325 five-center window patterns are excluded | Lean-checked conditional theorem (44,064-state potential, kernel-checked in 34 shards); every pattern DRAT-certified |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
+| A zero-defect adjacent walk is a snake | Lean-checked equivalence; the best saved 196-edge pilot walks still have seven chords |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
 Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact proof gaps, and search limitations. The [paper](paper/snake9_research.tex) contains mathematical exposition, proofs, explicit transition sequences, and references. It deliberately keeps implementation identifiers outside the paper.

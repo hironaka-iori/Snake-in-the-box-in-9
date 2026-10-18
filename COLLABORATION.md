@@ -1,6 +1,24 @@
 # Collaborator handoff
 
-Checkpoint: 16 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 18 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+
+## Current assignment: constructive search
+
+This investigation now concentrates on a 196-edge construction; collaborators
+continue the upper-bound work. The [new construction milestone](milestones/12-construction-196/README.md)
+records a Lean-checked zero-defect criterion, approximately 31 million pilot
+proposals, and exact fragment-repair experiments. No valid improvement over
+191 edges was found. The two best 196-edge walks have seven chords each.
+The next proposed experiment retains diverse equal-score walks and replaces
+several separated interior fragments together.
+
+Synchronization incorporated the completed KEEP=112 aggregate receipt covering
+all 262 oriented bank entries, the bounded KEEP=96 survey, and conditional
+window bounds through 238. The separate `research/unconditional-241-only`
+branch at `890c486` contains an unconditional 241 theorem and a saved successful
+audit. That branch was inspected, not independently rebuilt or merged here.
+Historical priorities below describe previous checkpoints; they do not assign
+new upper-bound work to this constructive investigation.
 
 ## Where the investigation stands
 
