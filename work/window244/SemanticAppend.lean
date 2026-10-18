@@ -18,6 +18,6 @@ theorem ckAll_append_true (M : MT) (cs : List Ctr) (w : List Nat)
       have hlen' : ts.length = rs.length := Nat.succ.inj hlen
       change (ckClause M cs w t r && ckAll M cs w ts rs) = true at ha
       change (ckClause M cs w t r && ckAll M cs w (ts ++ us) (rs ++ vs)) = true
-      exact Bool.and_eq_true.mpr ⟨(Bool.and_eq_true.mp ha).1,
-        ih rs hlen' (Bool.and_eq_true.mp ha).2⟩
+      rw [Bool.and_eq_true] at ha ⊢
+      exact ⟨ha.1, ih rs hlen' ha.2⟩
 end Snake9.LocalWindow.Tags

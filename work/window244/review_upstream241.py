@@ -171,7 +171,9 @@ try:
   rw [List.take_append_drop, List.take_append_drop] at h
   exact h
 theorem check : checkAll meaning ctrs window bounds tags raw = true := by
-  exact Bool.and_eq_true.mpr ⟨checkCounters, checkClauses⟩
+  unfold checkAll
+  rw [Bool.and_eq_true]
+  exact ⟨checkCounters, checkClauses⟩
 '''+text[text.index('theorem sat :'):]).encode()
         src=build/(name.replace('.','/')+'.lean')
         src.parent.mkdir(parents=True,exist_ok=True)
