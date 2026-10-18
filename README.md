@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Research checkpoint: 18 October 2026. The current construction task targets 196 edges. The [component-construction milestone](milestones/14-component-construction/README.md) supplies a checked 197-vertex starting configuration; sequential cuts reached a 40-edge path and six cycles. [Targeted mergers](milestones/15-component-mergers/README.md) and [larger cycle configurations](milestones/16-cycle-reservoirs/README.md) now lead to a cell-based search with two 4,973-row local-state tables and a Lean-checked connector-cost lemma. No improved snake witness has been found.
+Research checkpoint: 18 October 2026. The current construction task targets 196 edges. The [global cell construction](milestones/17-global-cell-construction/README.md) implements simultaneous cell changes, checks 160 cycle cuts in Lean, and independently verifies a 101-edge control path. A complete Python census diagnoses why this particular four-connector family cannot reach the target: its acyclic local states permit at most 168 vertices in total. Lean checks the numerical profiles and conditional sum; census completeness remains computational. The next construction step is to permit opposite-base vertices within cells. No improved snake witness has been found.
 
 | Claim | Current evidence |
 |---|---|

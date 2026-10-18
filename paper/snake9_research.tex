@@ -1024,7 +1024,25 @@ A selected vertex has at most two selected neighbors. The neighbor outside $N$ l
 \end{proof}
 This statement has been checked in Lean. In the cell construction, a cross-cell edge at a connector with four base-cycle neighbors therefore requires omitting at least three of those neighbors. Different connector costs can share omitted vertices; adding them as independent losses would be unjustified.
 
-An enumeration of all $2^{18}$ local subsets retained 4,973 degree-compatible states for each cell type. A state specifies its selected vertices, selected connectors and their internal degrees, number of nonconnector endpoints, and vertex count. Nonconnector vertices must have selected internal degree one or two, while connectors can have degree zero before external edges are added. At most two nonconnector endpoints are permitted. Internal cycles remain allowed. Every saved row passed an independent adjacency check; enumeration completeness is not Lean-certified. A global construction model must still combine the states, enforce total connector degrees, exactly two endpoints and 197 vertices, and eliminate all cyclic components. The table is preparation for that search, not a completed construction.
+An enumeration of all $2^{18}$ local subsets retained 4,973 degree-compatible states for each cell type. A state specifies its selected vertices, selected connectors and their internal degrees, number of nonconnector endpoints, and vertex count. Nonconnector vertices must have selected internal degree one or two, while connectors can have degree zero before external edges are added. At most two nonconnector endpoints are permitted. Internal cycles remain allowed. Every saved row passed an independent adjacency check; enumeration completeness is not Lean-certified.
+
+The global construction model now permits all sixteen cells to change simultaneously. It imposes 197 selected vertices, selected degree one or two, and exactly two endpoints. Ten distinct cyclic components occur in each local table; their translations give 160 cycle cuts, all checked in Lean. A second model also requires one connected component. Both 196-edge searches returned \texttt{UNKNOWN} after 120 seconds. A length-maximizing version found a 101-edge induced path, independently checked by pairwise adjacency. This path is a control for the construction method and does not improve the known lower bound.
+
+\paragraph{A restriction that must be removed.}
+A separate enumeration, using edge lists and cycle detection, examined all $2^{18}$ subsets of each cell and reproduced both local tables exactly. Removing states containing a cycle leaves 4,142 states per type. If $e$ is the number of selected nonconnector vertices of internal degree one, the maximum selected size in this acyclic census is
+\[
+\begin{array}{c|rrr}
+e&0&1&2\\\hline
+\text{maximum selected size}&10&14&14.
+\end{array}
+\]
+Consequently, every enumerated acyclic state satisfies $c\le10+4e$. For a single induced path in the restricted family, nonconnectors have no neighbors in other cells, so their internal endpoints are actual path endpoints. Therefore $\sum_{h=0}^{15}e_h\le2$, and the census gives
+\[
+\sum_{h=0}^{15}c_h\le160+4\sum_{h=0}^{15}e_h\le168.
+\]
+Lean checks the numerical profiles and this summation under the local census premise. The exhaustive correspondence between all geometric subsets and those profiles remains computational evidence rather than a Lean completeness theorem. This restriction concerns only the alternating $A\cup U$, $B\cup U$ family. It does not challenge the conjectured maximum 196 in $Q_9$.
+
+The constructive consequence is to enlarge the allowed vertices within cells. A useful next search permits vertices from the opposite base cycle, which can create cross-cell connections beyond the four shared connectors. The local census explains why retaining the original four-connector restriction is an unsuitable route to a 196-edge construction.
 
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.

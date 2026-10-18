@@ -1,0 +1,89 @@
+{
+  "status": "PASSED",
+  "scope": "Independent witnesses, cycle cuts, source hashes, and Lean audit; no solver infeasibility certificate.",
+  "runs": {
+    "all-cells-196.json": [
+      {
+        "status": "UNKNOWN"
+      }
+    ],
+    "connected-196.json": [
+      {
+        "status": "UNKNOWN"
+      }
+    ],
+    "connected-control.json": [
+      {
+        "status": "OPTIMAL",
+        "path_edges": 28,
+        "cycle_lengths": []
+      }
+    ],
+    "connectivity-rejection-control.json": [
+      {
+        "status": "INFEASIBLE"
+      }
+    ],
+    "cycle-control.json": [
+      {
+        "status": "INFEASIBLE"
+      }
+    ],
+    "growth-196.json": [
+      {
+        "status": "FEASIBLE",
+        "path_edges": 101,
+        "cycle_lengths": []
+      }
+    ],
+    "positive-control.json": [
+      {
+        "status": "OPTIMAL",
+        "path_edges": 28,
+        "cycle_lengths": [
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14,
+          14
+        ]
+      }
+    ]
+  },
+  "sha256_lf": {
+    "milestones/17-global-cell-construction/data/all-cells-196.json": "18cfe6a8a7fcd2a4ed413f59c12cd7a77d1136f775d59ebe3dab2cfa845268bb",
+    "milestones/17-global-cell-construction/data/capacity-audit.json": "e01909820b3795b1cc44f27a2fe12e8948f48caacca0b5419901fcf653def5e7",
+    "milestones/17-global-cell-construction/data/collaborator-heads.json": "a7ac2e0a4592a11bff00466d904d13d8503940bfae6079fac268dc909575b5d8",
+    "milestones/17-global-cell-construction/data/connected-196.json": "df0ea8cd75ef3863ed9cea41832c7ec5b021dd5bf5548a32c16739be4ef76995",
+    "milestones/17-global-cell-construction/data/connected-control.json": "5ffe78c1dee674fcd3fa075c9b35e8b7afaf66d8eb52c6711d310c363c57a03a",
+    "milestones/17-global-cell-construction/data/connectivity-rejection-control.json": "732d01f0ef0669d86034ce3efc44da9f1d9386817a5ba382fec2b8faa24ce38a",
+    "milestones/17-global-cell-construction/data/cycle-control.json": "f60a838d6233ce3e2bdbd4a5b416110ccb6a9f322d9236a4d5fcd06fabee9551",
+    "milestones/17-global-cell-construction/data/growth-196.json": "96071e7dea4c0008cabe194f19e9a585ee333e0461972afa0c6005966f41dde2",
+    "milestones/17-global-cell-construction/data/path-control-input.json": "2410bd8b0ea81320c9dd2b70e37d0f5b3538fc800d86a30d40ada4ceb57c30e4",
+    "milestones/17-global-cell-construction/data/positive-control.json": "7f9cfd3129a8dd57e35c2feafd4e728a64ce79a87e9eed02128c08d8d712b767",
+    "milestones/17-global-cell-construction/lean/Capacity.lean": "c2f19022eb6de81563aa8f972cbd94e6bdcfc90054fb4135674d09028d9f6c6f",
+    "milestones/17-global-cell-construction/lean/LocalCycles.lean": "fdc1a1a423396d1f71f44c89524632edf3e5a068b94577a9d4995a54b20d1426",
+    "milestones/17-global-cell-construction/logs/capacity.log": "bb13cd52ae1e8f84ac1ae4a22dfb2f1ec7a0865cf4af7c83f2b3d498d51000aa",
+    "milestones/17-global-cell-construction/logs/local-cycles.log": "d995ee780fe80f15d4b245b95461f5d18e7178fd6e5a1f7cb53afff92da7f189",
+    "milestones/17-global-cell-construction/scripts/audit_capacity.py": "fe8ce225a7f9cafc0e7713f443b30f5e7349d2ae78f933ca55bb4b51440e15bd",
+    "milestones/17-global-cell-construction/scripts/search.py": "7b8420de3c42cebbb5c3ef2b861724ef882174ec62e4769b118349046be8162a",
+    "milestones/17-global-cell-construction/scripts/snapshots/search-v1.py": "3a4ab1c9adc5e5448f711bba89e9e4d3400e451f5e90150a397899eb0246a7a7",
+    "milestones/17-global-cell-construction/scripts/verify.py": "5740554e5894c04f6a32c0ba5542075685b54df30014605d7f615ec0eb88926d"
+  },
+  "lean_audits": [
+    "Snake9.GlobalCells.cycle_count",
+    "Snake9.GlobalCells.cycles_checked",
+    "Snake9.GlobalCells.cuts_valid",
+    "Snake9.GlobalCells.Capacity.profile_bound",
+    "Snake9.GlobalCells.Capacity.conditional_total",
+    "Snake9.GlobalCells.Capacity.table_total",
+    "Snake9.GlobalCells.Capacity.profiles_checked"
+  ]
+}

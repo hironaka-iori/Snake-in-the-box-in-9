@@ -106,7 +106,9 @@ input. The Lean module uses the pinned runtime and library paths from milestone
 Nine theorem audits pass with only standard axioms. The combined checkpoint
 manifest also covers the two frozen-cut theorems from milestone 15.
 
-The next step is to build the global construction model from these cell tables
-and independently validate every resulting vertex set. The final target
-remains a single 196-edge induced path, followed by an optimality proof handled
-in coordination with the separate upper-bound investigations.
+The global model and its controls are now implemented in
+[milestone 17](../17-global-cell-construction/README.md). That investigation
+found a restrictive capacity in the acyclic cell tables and redirects the
+construction toward allowing opposite-base vertices. The final target
+remains a single 196-edge induced path; global upper-bound work remains with
+the separate investigations.
