@@ -5,3 +5,8 @@
 *.md text eol=lf
 *.json text eol=lf
 *.toml text eol=lf
+
+# Preserve the exact bytes referenced by the final verification hashes.
+outputs/window244/final-reproduction-manifest.json -text
+outputs/window244/final-verification.json -text
+outputs/window244/FinalAudit.log -text
