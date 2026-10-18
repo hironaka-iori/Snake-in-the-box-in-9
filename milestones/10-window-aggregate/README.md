@@ -107,6 +107,23 @@ With seven directions of memory and windows of up to six centres (34 shapes × 6
 
 A fresh source-only reproduction (`verify_strengthened.py --build-dir`, resumable across the machine restarts; `outputs/strengthened-direction-k6-reproduction-manifest.json`, 239 steps) re-checked the core, every strengthening module, the three automaton chains (239, the regenerated 238, the sound 235) and the final audit; every bound audits to `propext`, `Classical.choice`, `Quot.sound`. All 2,635 windows are drat-trim-certified (`data/direction_certificates_k6.json`); `refine_fast.py --index` rebuilds the automaton from the index alone and re-checks the potential on every allowed edge (`data/direction_bound_L7_k6.json`); the independent judge re-encodes and refutes them (`data/judge_direction_k6.json`). The Lean chain is produced by `scripts/gen_lean_automaton_k.py` (modules `WindowAutomatonK6R3*`, 34 shards, and `AggregateDirectionK6R3Conditional.lean` with `upper_235_of_direction_windowsK6R3`); the generated potential is defined as `min 6 field`, so its range bound is definitional and the Lean constant matches the dynamic programme. Radius four with four-centre windows gave no gain (10/3, `data/refine_L6_k4_K5_r4.json`).
 
+### SWAR kernel check: 36 transitions per big-integer step
+
+The second kernel design (`work/spectral/stronger/WindowAutomatonSwar.lean`, generator `scripts/gen_lean_swar.py`, modules `WindowAutomatonK6R3W*`, theorem `upper_235_of_direction_windowsK6R3W`) replaces the inner loop over the two newest symbols by arithmetic on packed 8-bit fields ("SIMD within a register", here within one `Nat`). The potentials of a shape are stored as a 7,776-byte number, one byte per symbol label (`potC`), and again in a transposed order (`potT`) in which the 216 labels sharing the three oldest symbols are consecutive; the window tables of two to six centres are spread to one bit per 8-bit field (`sfwd`/`srev`, bit `8 l + 7` of field `l`; tables of fewer centres carry copies so the same field index serves every width). For a shape pair and the three oldest symbols `h` the check of all 216 transitions (newest three symbols) is one `letN` chain: the 216-field windows of the exclusion tables are or-ed together (`BL`), the next-state potentials come out of `potT` as one 1,728-bit window plus `P * ones`, the current-state potentials out of `potC` as a 288-bit window replicated 36 times (`rep`) plus `Q * wpat`, and `swarOK A B BL HI = Nat.beq ((((B + HI) - A) &&& HI) ||| BL) HI` decides `A ≤ B` field-wise with the usual carry trick (`swarOK_spec`, proved for abstract field lists with `pack`/`tab`/`digit`). Soundness is again a generic extraction lemma (`checkT_spec`) on abstract tables; the only per-shape kernel facts are byte bounds (`potC_bnd`, `potT_bnd`), the consistency of the two potential layouts (`potT_cons`) and the copy structure of the spread tables (`sfwd_rep`, `srev_rep`).
+
+Measured on the same machine as the `letN` loop (four cores, three other jobs running):
+
+| step | `letN` loop (K6R3) | SWAR (K6R3W) |
+| --- | --- | --- |
+| one (shape, label) pair, 46,656 transitions | 5.8 s, 0.6 GB | 0.63 s |
+| one shard (up to nine pairs) | 35-55 s | 2.6-8.2 s |
+| all 34 shards | about 25 CPU-minutes | 130 CPU-seconds |
+| `Table` (shape membership) | similar | 142 s |
+| `Sequence`, wrapper | 10 s, 1 min | 10 s, 1 min |
+| `Data` (tables, byte bounds, layout consistency) | 1 min | 7-9 min, 7.6 GB (elaboration of 5 MB of numerals; now the bottleneck) |
+
+The kernel work per pair fell by nine times; what remains is elaborator cost on the data module, which the profile in `data/swar_data_profile.txt` breaks down. `verify_strengthened.py --k6-chain K6R3W` (the default) reproduces the 235 bound through this chain; `--k6-chain K6R3` keeps the earlier design.
+
 ## Ceilings of count-only window methods
 
 Explicit adversaries (found by the collaborating local session and re-checked here with `scripts/wincert.py`) bound what any automaton over lumped singleton counts can prove:

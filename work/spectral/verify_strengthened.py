@@ -12,6 +12,7 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import time
 import tempfile
 
 PIN = "c44e0c8ee63ca166450922a373c7409c5d26b00b"
@@ -72,9 +73,15 @@ MODULES = [
     "WindowAutomatonSequence", "WindowAutomatonBridge", "AggregateDirectionConditional",
     "WindowAutomatonLoop", "WindowAutomatonK5R3Data", "WindowAutomatonK5R3Shard0", "WindowAutomatonK5R3Shard1", "WindowAutomatonK5R3Shard2", "WindowAutomatonK5R3Shard3", "WindowAutomatonK5R3Shard4", "WindowAutomatonK5R3Shard5", "WindowAutomatonK5R3Shard6", "WindowAutomatonK5R3Shard7", "WindowAutomatonK5R3Shard8", "WindowAutomatonK5R3Shard9", "WindowAutomatonK5R3Shard10", "WindowAutomatonK5R3Shard11", "WindowAutomatonK5R3Shard12", "WindowAutomatonK5R3Shard13", "WindowAutomatonK5R3Shard14", "WindowAutomatonK5R3Shard15", "WindowAutomatonK5R3Shard16", "WindowAutomatonK5R3Shard17", "WindowAutomatonK5R3Shard18", "WindowAutomatonK5R3Shard19", "WindowAutomatonK5R3Shard20", "WindowAutomatonK5R3Shard21", "WindowAutomatonK5R3Shard22", "WindowAutomatonK5R3Shard23", "WindowAutomatonK5R3Shard24", "WindowAutomatonK5R3Shard25", "WindowAutomatonK5R3Shard26", "WindowAutomatonK5R3Shard27", "WindowAutomatonK5R3Shard28", "WindowAutomatonK5R3Shard29", "WindowAutomatonK5R3Shard30", "WindowAutomatonK5R3Shard31", "WindowAutomatonK5R3Shard32", "WindowAutomatonK5R3Shard33",
     "WindowAutomatonK5R3Table", "WindowAutomatonK5R3Sequence", "AggregateDirectionK5R3Conditional",
-    "WindowAutomatonK6R3Data", "WindowAutomatonK6R3Shard0", "WindowAutomatonK6R3Shard1", "WindowAutomatonK6R3Shard2", "WindowAutomatonK6R3Shard3", "WindowAutomatonK6R3Shard4", "WindowAutomatonK6R3Shard5", "WindowAutomatonK6R3Shard6", "WindowAutomatonK6R3Shard7", "WindowAutomatonK6R3Shard8", "WindowAutomatonK6R3Shard9", "WindowAutomatonK6R3Shard10", "WindowAutomatonK6R3Shard11", "WindowAutomatonK6R3Shard12", "WindowAutomatonK6R3Shard13", "WindowAutomatonK6R3Shard14", "WindowAutomatonK6R3Shard15", "WindowAutomatonK6R3Shard16", "WindowAutomatonK6R3Shard17", "WindowAutomatonK6R3Shard18", "WindowAutomatonK6R3Shard19", "WindowAutomatonK6R3Shard20", "WindowAutomatonK6R3Shard21", "WindowAutomatonK6R3Shard22", "WindowAutomatonK6R3Shard23", "WindowAutomatonK6R3Shard24", "WindowAutomatonK6R3Shard25", "WindowAutomatonK6R3Shard26", "WindowAutomatonK6R3Shard27", "WindowAutomatonK6R3Shard28", "WindowAutomatonK6R3Shard29", "WindowAutomatonK6R3Shard30", "WindowAutomatonK6R3Shard31", "WindowAutomatonK6R3Shard32", "WindowAutomatonK6R3Shard33",
-    "WindowAutomatonK6R3Table", "WindowAutomatonK6R3Sequence", "AggregateDirectionK6R3Conditional",
 ]
+
+
+def k6_modules(chain):
+    """The k = 6 (235-edge) chain: K6R3W checks the table with the SWAR kernel (36 transitions per
+    big-integer step), K6R3 is the earlier one-transition-per-step design; both prove the same bound."""
+    extra = ["WindowAutomatonSwar"] if chain == "K6R3W" else []
+    return extra + [f"WindowAutomaton{chain}Data"] + [f"WindowAutomaton{chain}Shard{i}" for i in range(34)] + [
+        f"WindowAutomaton{chain}Table", f"WindowAutomaton{chain}Sequence", f"AggregateDirection{chain}Conditional"]
 
 
 def main():
@@ -82,10 +89,14 @@ def main():
     parser.add_argument("--mathlib-dir", required=True, type=Path)
     parser.add_argument("--core-targets", nargs="*", default=None,
                         help="build only these core modules (default: the core default targets)")
+    parser.add_argument("--k6-chain", choices=["K6R3W", "K6R3"], default="K6R3W",
+                        help="which Lean chain proves the conditional 235 (default: the SWAR kernel chain)")
     parser.add_argument("--build-dir", type=Path, default=None,
                         help="reuse this build directory: steps whose object is newer than its source and "
                              "whose previous run succeeded are not repeated (for machines that restart)")
     args = parser.parse_args()
+    modules = MODULES + k6_modules(args.k6_chain)
+    k6 = args.k6_chain
     project = Path(__file__).resolve().parent
     repo = project.parent.parent
     mathlib = args.mathlib_dir.resolve()
@@ -121,7 +132,7 @@ def main():
     manifest = {
         "started_utc": datetime.now(timezone.utc).isoformat(),
         "mathlib_commit": actual, "lean_version": version,
-        "build_directory": str(build), "source_sha256": {},
+        "build_directory": str(build), "k6_chain": k6, "source_sha256": {},
         "steps": [], "axiom_audits": {}, "status": "running",
     }
 
@@ -144,13 +155,15 @@ def main():
 
     def run(label, command, cwd, env=None):
         print(f"Checking {label} ...", flush=True)
+        started = time.monotonic()
         result = subprocess.run(
             command, cwd=cwd, env=env, stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace",
         )
         (logs / f"{label}.log").write_text(result.stdout, encoding="utf-8")
         manifest["steps"].append({"label": label, "command": command,
-                                   "exit_code": result.returncode})
+                                   "exit_code": result.returncode,
+                                   "seconds": round(time.monotonic() - started, 1)})
         for theorem, raw in re.findall(
             r"'([^']+)' depends on axioms: \[([^\]]*)\]", result.stdout
         ):
@@ -175,7 +188,7 @@ def main():
         env.pop("LEAN_PATH", None)
         run("core", [lake, "build", *(args.core_targets or [])], core, env)
         copy(project / "SquareIncidence.lean", build / "SquareIncidence.lean")
-        for module in MODULES:
+        for module in modules:
             copy(project / "stronger" / (module + ".lean"), build / (module + ".lean"))
         # The mathlib workspace environment, captured once (`lake env` costs tens of seconds per call).
         lake_env = {}
@@ -188,7 +201,7 @@ def main():
         env["LEAN_PATH"] = os.pathsep.join(
             [path for path in lake_env.get("LEAN_PATH", "").split(os.pathsep) if path]
             + [str(core / ".lake/build/lib/lean"), str(build)])
-        for module in ["SquareIncidence", *MODULES]:
+        for module in ["SquareIncidence", *modules]:
             if cached(module, build / (module + ".lean"), build / (module + ".olean")):
                 print(f"Checking {module} ... (object up to date from an earlier run)", flush=True)
                 manifest["steps"].append({"label": module, "cached": True})
@@ -199,14 +212,14 @@ def main():
                 mathlib, env)
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirectionK5R3Conditional\nimport AggregateDirectionK6R3Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
+            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirectionK5R3Conditional\nimport AggregateDirection" + k6 + "Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.upper_242_of_certified_windows\n"
             "#print axioms Snake9.upper_241_of_certified_windows\n"
             "#print axioms Snake9.upper_239_of_direction_windows\n"
             "#print axioms Snake9.WindowAutomaton.step_table\n"
             "#print axioms Snake9.upper_238_of_direction_windowsK5R3\n"
-            "#print axioms Snake9.upper_235_of_direction_windowsK6R3\n"
+            "#print axioms Snake9.upper_235_of_direction_windows" + k6 + "\n"
             "#print axioms Snake9.lower_bound\n"
             "#print axioms Snake9.noNext_iff_upperBound\n"
             "#print axioms Snake9.adjacent_internal_alpha_one_impossible\n"
@@ -232,7 +245,7 @@ def main():
         expected = {"Snake9.upper_244_of_no_two_two_three",
                     "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows",
                     "Snake9.upper_239_of_direction_windows", "Snake9.WindowAutomaton.step_table",
-                    "Snake9.upper_238_of_direction_windowsK5R3", "Snake9.upper_235_of_direction_windowsK6R3", "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
+                    "Snake9.upper_238_of_direction_windowsK5R3", "Snake9.upper_235_of_direction_windows" + k6, "Snake9.lower_bound", "Snake9.noNext_iff_upperBound",
                     "Snake9.adjacent_internal_alpha_one_impossible",
                     "Snake9.upper_bound_251", "Snake9.verified_interval_191_251",
                     "Snake9.adjacent_internal_one_two_impossible",
