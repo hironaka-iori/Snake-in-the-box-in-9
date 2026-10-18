@@ -67,9 +67,9 @@ try:
         visiting.add(name)
         if name not in mapping:raise RuntimeError('Unresolved custom import: '+name)
         raw=synthetic[name] if name in synthetic else read_blob(mapping[name]);upstream_sha=synthetic_origin[name] if name in synthetic else hashlib.sha256(raw).hexdigest()
-        if name=='LocalWindowUnsat.C223FwdDistinct.Check1':
+        if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+',name):
             text=raw.decode('utf-8')
-            matches=list(re.finditer(r'^theorem ok\d+\s*:',text,re.M));assert len(matches)==4
+            matches=list(re.finditer(r'^theorem ok\d+\s*:',text,re.M));assert matches
             namespace=re.search(r'^namespace (.+)$',text,re.M).group(1)
             header=text[:matches[0].start()]
             tail=text.rindex('end '+namespace)
@@ -80,14 +80,17 @@ try:
                 synthetic[part]=(header+body+'\nend '+namespace+'\n').encode()
                 synthetic_origin[part]=upstream_sha
                 mapping[part]=mapping[name]
-                if i==2:
-                    expressions=[('Check','check start3 proof3'),('Checkpoint','cpOk (replay start3 proof3) cp4')]
+                statement=re.match(r'theorem (ok\d+)\s*:\s*(.*?)\s*= true := by',body,re.S);assert statement
+                theorem_name,expr=statement.groups()
+                conjunction=re.fullmatch(r'andB \((.*)\) \((.*)\)',expr,re.S)
+                if conjunction:
+                    expressions=list(zip(['Check','Checkpoint'],conjunction.groups()))
                     subparts=[]
                     for suffix,expr in expressions:
                         sub=part+suffix;subparts.append(sub)
-                        synthetic[sub]=(header+f'theorem ok3_{suffix} : {expr} = true := by\n  decide +kernel\n\nend '+namespace+'\n').encode()
+                        synthetic[sub]=(header+f'theorem {theorem_name}_{suffix} : {expr} = true := by\n  decide +kernel\n\nend '+namespace+'\n').encode()
                         synthetic_origin[sub]=upstream_sha;mapping[sub]=mapping[name]
-                    synthetic[part]=(''.join('import '+sub+'\n' for sub in subparts)+'\nnamespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\nprivate theorem combineChecks {a b : Bool} (ha : a = true) (hb : b = true) : andB a b = true := by\n  rw [ha, hb]\n  rfl\n'+body[:body.index(':= by')]+':= by\n  exact combineChecks ok3_Check ok3_Checkpoint\nend '+namespace+'\n').encode()
+                    synthetic[part]=(''.join('import '+sub+'\n' for sub in subparts)+'\nnamespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\nprivate theorem combineChecks {a b : Bool} (ha : a = true) (hb : b = true) : andB a b = true := by\n  rw [ha, hb]\n  rfl\n'+body[:body.index(':= by')]+f':= by\n  exact combineChecks {theorem_name}_Check {theorem_name}_Checkpoint\nend '+namespace+'\n').encode()
             raw=(''.join('import '+p+'\n' for p in parts)).encode()
         if name in {'Snake9','SquareCounterexample'}:
             # Preserve every definition and theorem statement. Kernel reduction
@@ -126,7 +129,7 @@ try:
         src.parent.mkdir(parents=True,exist_ok=True)
         if not src.exists() or src.read_bytes()!=raw:src.write_bytes(raw)
         state['sources'][name]=dict(git_path=mapping[name],sha256=sha(src),upstream_sha256=upstream_sha,
-            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'sequential elaboration' if name in {'SharedFiniteClassification','LocalWindowBridge'} else 'one certificate theorem per module' if name.startswith('LocalWindowUnsat.C223FwdDistinct.Check1') else None))
+            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'sequential elaboration' if name in {'SharedFiniteClassification','LocalWindowBridge'} else 'one certificate theorem and one Boolean check per module' if re.match(r'LocalWindowUnsat\.[^.]+\.Check\d+',name) else None))
         imports=[]
         for line in raw.decode('utf-8').splitlines():
             if line.startswith('import '):

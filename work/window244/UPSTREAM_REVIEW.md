@@ -76,6 +76,13 @@ RUP 段和检查点复制，仍触及预算；其清单保存为
 布尔值证明的 `combineChecks` 引理，直接应用两个已证结果，避免再次展开
 证书计算；原 `ok3` 陈述不变。
 
+上述组合已通过，之后 `Check2` 也通过（42.69 秒）。原始 `Check3` 再次
+触及预算，保存首轮清单为 `outputs/window244/upstream241-check3-first-attempt.json`。
+现将已经通过的拆分与组合方法推广至全部证书 `Check` 模块：每个原定理
+单独核验，复合布尔检查分别核验后用通用引理合并。全部陈述、证书数据、
+检查器及预算不变。适配后的完整闭包为 2,563 个模块；清单逐项记录来源、
+实际源码、导入产物、编译器及日志哈希，继续从有效断点恢复。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
