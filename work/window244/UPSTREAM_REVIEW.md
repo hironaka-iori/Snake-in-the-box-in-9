@@ -118,6 +118,11 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 应用到它，并在清单的 `split_semantic_modules` 中持久记录。无需改变
 几何规则、标签、子句或最终语义陈述。
 
+323 的分段语义检查与组合全部通过。累计 1,301 个模块通过后，其第一个
+独立 RUP 段触及预算，保存为 `upstream241-rup323-first-attempt.json`。
+恢复驱动现将已有分段机制也用于不含检查点合取的单独 `ok` 定理，继续
+以已证 `check_append_true` 合并，保持所有原始定理陈述及证书数据不变。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。

@@ -43,7 +43,7 @@ state.pop('error',None)
 split_rup_modules=set(state.get('split_rup_modules',[]))
 split_rup_modules.add('LocalWindowUnsat.C224FwdDistinct.Check5Part2Check')
 split_rup_modules.update(n for n,r in state['modules'].items()
-    if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+Part\d+Check',n) and r.get('memory_exceeded'))
+    if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+Part\d+(?:Check)?',n) and r.get('memory_exceeded'))
 state['split_rup_modules']=sorted(split_rup_modules)
 split_semantic_modules=set(state.get('split_semantic_modules',[]))
 split_semantic_modules.add('LocalWindowSat.C232FwdDistinct')
@@ -112,7 +112,7 @@ try:
             raw=(''.join('import '+p+'\n' for p in parts)).encode()
         if name in split_rup_modules:
             text=raw.decode()
-            match=re.search(r'theorem (ok\d+_Check) : check (start\d+) (proof\d+) = true',text);assert match
+            match=re.search(r'theorem (ok\d+(?:_Check)?) : check (start\d+) (proof\d+) = true',text);assert match
             theorem_name,start,proof_name=match.groups()
             header=text[:match.start()]
             namespace=re.search(r'^namespace (.+)$',text,re.M).group(1)
