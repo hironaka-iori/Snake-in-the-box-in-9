@@ -45,6 +45,11 @@ split_rup_modules.add('LocalWindowUnsat.C224FwdDistinct.Check5Part2Check')
 split_rup_modules.update(n for n,r in state['modules'].items()
     if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+Part\d+Check',n) and r.get('memory_exceeded'))
 state['split_rup_modules']=sorted(split_rup_modules)
+split_semantic_modules=set(state.get('split_semantic_modules',[]))
+split_semantic_modules.add('LocalWindowSat.C232FwdDistinct')
+split_semantic_modules.update(n for n,r in state['modules'].items()
+    if re.fullmatch(r'LocalWindowSat\.[^.]+(?:Distinct|Repeated|S\d+)',n) and r.get('memory_exceeded'))
+state['split_semantic_modules']=sorted(split_semantic_modules)
 def save():
     tmp=manifest.with_suffix('.tmp');tmp.write_bytes((json.dumps(state,indent=2)+'\n').encode());tmp.replace(manifest)
 save()
@@ -149,11 +154,11 @@ try:
                 original=original.replace('set_option maxHeartbeats 0','set_option maxHeartbeats 0\nset_option Elab.async false')
                 original=original.replace(':= by decide\n',':= by decide +kernel\n')
             raw=original.encode('utf-8')
-        if name in {'SharedFiniteClassification','LocalWindowSat.C232FwdDistinct'}:
+        if name=='SharedFiniteClassification' or name in split_semantic_modules:
             raw=raw.replace(b'set_option maxHeartbeats 0',b'set_option maxHeartbeats 0\nset_option Elab.async false')
         if name=='LocalWindowBridge':
             raw=raw.replace(b'set_option maxRecDepth 10000',b'set_option maxRecDepth 10000\nset_option Elab.async false')
-        if name=='LocalWindowSat.C232FwdDistinct':
+        if name in split_semantic_modules:
             text=raw.decode();offset=text.index('theorem check :')
             namespace=re.search(r'^namespace (.+)$',text,re.M).group(1)
             base=name+'Definitions';mapping[base]=mapping[name];synthetic_origin[base]=upstream_sha
@@ -179,7 +184,7 @@ theorem check : checkAll meaning ctrs window bounds tags raw = true := by
         src.parent.mkdir(parents=True,exist_ok=True)
         if not src.exists() or src.read_bytes()!=raw:src.write_bytes(raw)
         state['sources'][name]=dict(git_path=mapping[name],sha256=sha(src),upstream_sha256=upstream_sha,
-            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'sequential elaboration' if name in {'SharedFiniteClassification','LocalWindowBridge','LocalWindowSat.C232FwdDistinct'} else 'one certificate theorem and one Boolean check per module' if re.match(r'LocalWindowUnsat\.[^.]+\.Check\d+',name) else None))
+            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'split semantic checker with proved list concatenation' if name in split_semantic_modules else 'sequential elaboration' if name in {'SharedFiniteClassification','LocalWindowBridge'} else 'one certificate theorem and one Boolean check per module' if re.match(r'LocalWindowUnsat\.[^.]+\.Check\d+',name) else None))
         imports=[]
         for line in raw.decode('utf-8').splitlines():
             if line.startswith('import '):

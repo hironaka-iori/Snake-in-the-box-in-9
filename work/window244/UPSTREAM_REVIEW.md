@@ -112,6 +112,12 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 列表归纳证明等长标签与子句的拼接规则，合并回原始 `checkAll` 和 `sat`。
 原始定义、全部子句、标签与最终语义定理不变，不增加未经证明的假设。
 
+232 的组合引理、三项有限检查及原始语义定理全部通过。累计 1,291 个
+模块通过后，`LocalWindowSat.C323FwdDistinct` 触及预算；首轮清单保存为
+`upstream241-sat323-first-attempt.json`。现把同一个已通过的语义分段机制
+应用到它，并在清单的 `split_semantic_modules` 中持久记录。无需改变
+几何规则、标签、子句或最终语义陈述。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
