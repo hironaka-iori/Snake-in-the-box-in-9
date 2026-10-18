@@ -11,13 +11,17 @@ theorem checkTK6R3W_spec (T2 R2 T3 R3 T4 R4 T5 R5 T6 R6 PC0 PT1 : Nat) (hc : che
     (hb0 : ∀ y, y < 7776 → digit PC0 y ≤ 6) (hb1 : ∀ y, y < 7776 → digit PT1 y ≤ 6)
     (h2f : ∀ l, l < 216 → Nat.testBit T2 (8 * l + 7) = Nat.testBit T2 (8 * (36 * (l / 36) + l % 6) + 7))
     (h2r : ∀ l, l < 216 → Nat.testBit R2 (8 * l + 7) = Nat.testBit R2 (8 * (36 * (l / 36) + l % 6) + 7)) :
-    ((((Nat.testBit (blk T2 R2) (8 * posK6R3W (code % 36) + 7) || Nat.testBit (blk T3 R3) (8 * posK6R3W (code % 216) + 7)) || Nat.testBit (blk T4 R4) (8 * posK6R3W (code % 1296) + 7)) || Nat.testBit (blk T5 R5) (8 * posK6R3W (code % 7776) + 7)) || Nat.testBit (blk T6 R6) (8 * posK6R3W (code % 46656) + 7)) = true ∨
-      4 + digit PT1 (216 * (code / 216 % 36) + posK6R3W (code % 216)) ≤ 1 * (code % 6 + 1) + digit PC0 (code / 6) := by
+    ((((Nat.testBit (blk T2 R2) (8 * pos3 (code % 36) + 7) || Nat.testBit (blk T3 R3) (8 * pos3 (code % 216) + 7)) || Nat.testBit (blk T4 R4) (8 * pos3 (code % 1296) + 7)) || Nat.testBit (blk T5 R5) (8 * pos3 (code % 7776) + 7)) || Nat.testBit (blk T6 R6) (8 * pos3 (code % 46656) + 7)) = true ∨
+      4 + digit PT1 (216 * (code / 216 % 36) + pos3 (code % 216)) ≤ 1 * (code % 6 + 1) + digit PC0 (code / 6) := by
   unfold checkTK6R3W at hc
   rw [letN_succ, letN_succ, letN_succ, letN_succ] at hc
   have h1 := allBelowR_spec _ _ hc (code / 216) (by omega)
-  simp only [letN_succ] at h1
-  have hl : posK6R3W (code % 216) < 216 := by unfold posK6R3W; omega
+  rw [letN_succ] at h1; try dsimp only at h1
+  rw [letN_succ] at h1; try dsimp only at h1
+  rw [letN_succ] at h1; try dsimp only at h1
+  rw [letN_succ] at h1; try dsimp only at h1
+  rw [letN_succ] at h1; try dsimp only at h1
+  have hl : pos3 (code % 216) < 216 := pos3_lt code
   -- A and B as packs of their fields
   have hA : winT PT1 (1728 * (code / 216 % 36)) 1728 + 4 * onesK6R3W
       = pack (tab (fun l => 4 + digit PT1 (216 * (code / 216 % 36) + l)) 216) := by
@@ -31,27 +35,34 @@ theorem checkTK6R3W_spec (T2 R2 T3 R3 T4 R4 T5 R5 T6 R6 PC0 PT1 : Nat) (hc : che
     rw [show 288 * (code / 216) = 8 * (36 * (code / 216)) by omega, show (288 : Nat) = 8 * 36 by rfl,
       winT_pack, repK6R3W_eq, ← pack_tab_rep36, wpatK6R3W_eq, pack_tab_mul, pack_tab_add]
     all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
-  rw [hA, hB, hiK6R3W_eq] at h1
   have key := swarOK_spec 216 (fun l => 4 + digit PT1 (216 * (code / 216 % 36) + l))
-    (fun l => 1 * (l / 36 + 1) + digit PC0 (36 * (code / 216) + l % 36)) _ _ _ rfl rfl
+    (fun l => 1 * (l / 36 + 1) + digit PC0 (36 * (code / 216) + l % 36)) _ _ _ _ hA hB hiK6R3W_eq
     (fun l hl' => by dsimp only; have := hb1 (216 * (code / 216 % 36) + l) (by omega); omega)
     (fun l hl' => by dsimp only; have := hb0 (36 * (code / 216) + l % 36) (by omega); omega) h1 _ hl
   simp only [Nat.testBit_or] at key
-  have eb2 : Nat.testBit (blk T2 R2) (8 * posK6R3W (code % 216) + 7) = Nat.testBit (blk T2 R2) (8 * posK6R3W (code % 36) + 7) := by
-    rw [testBit_blk, testBit_blk, h2f _ hl, h2r _ hl,
-      show 8 * (36 * (posK6R3W (code % 216) / 36) + posK6R3W (code % 216) % 6) + 7 = 8 * posK6R3W (code % 36) + 7 by unfold posK6R3W; omega]
-  have ew4 : Nat.testBit (winT (blk T4 R4) (1728 * (code / 216 % 6)) 1728) (8 * posK6R3W (code % 216) + 7)
-      = Nat.testBit (blk T4 R4) (8 * posK6R3W (code % 1296) + 7) := by
-    unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1; unfold posK6R3W; omega
-  have ew5 : Nat.testBit (winT (blk T5 R5) (1728 * (code / 216 % 36)) 1728) (8 * posK6R3W (code % 216) + 7)
-      = Nat.testBit (blk T5 R5) (8 * posK6R3W (code % 7776) + 7) := by
-    unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1; unfold posK6R3W; omega
-  have ew6 : Nat.testBit (winT (blk T6 R6) (1728 * (code / 216 % 216)) 1728) (8 * posK6R3W (code % 216) + 7)
-      = Nat.testBit (blk T6 R6) (8 * posK6R3W (code % 46656) + 7) := by
-    unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1; unfold posK6R3W; omega
+  have eb2 : Nat.testBit (blk T2 R2) (8 * pos3 (code % 216) + 7) = Nat.testBit (blk T2 R2) (8 * pos3 (code % 36) + 7) := by
+    rw [testBit_blk, testBit_blk, h2f _ hl, h2r _ hl, pos3_div36, pos3_mod6, pos3_mod36']
+  have ew4 : Nat.testBit (winT (blk T4 R4) (1728 * (code / 216 % 6)) 1728) (8 * pos3 (code % 216) + 7)
+      = Nat.testBit (blk T4 R4) (8 * pos3 (code % 1296) + 7) := by
+    unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1
+    have ps := pos3_split code 6 (by decide)
+    rw [show 216 * 6 = 1296 by rfl] at ps
+    rw [ps]; omega
+  have ew5 : Nat.testBit (winT (blk T5 R5) (1728 * (code / 216 % 36)) 1728) (8 * pos3 (code % 216) + 7)
+      = Nat.testBit (blk T5 R5) (8 * pos3 (code % 7776) + 7) := by
+    unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1
+    have ps := pos3_split code 36 (by decide)
+    rw [show 216 * 36 = 7776 by rfl] at ps
+    rw [ps]; omega
+  have ew6 : Nat.testBit (winT (blk T6 R6) (1728 * (code / 216 % 216)) 1728) (8 * pos3 (code % 216) + 7)
+      = Nat.testBit (blk T6 R6) (8 * pos3 (code % 46656) + 7) := by
+    unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1
+    have ps := pos3_split code 216 (by decide)
+    rw [show 216 * 216 = 46656 by rfl] at ps
+    rw [ps]; omega
   rw [eb2, ew4, ew5, ew6] at key
-  have e1 : posK6R3W (code % 216) / 36 = code % 6 := by unfold posK6R3W; omega
-  have e2 : 36 * (code / 216) + posK6R3W (code % 216) % 36 = code / 6 := by unfold posK6R3W; omega
+  have e1 : pos3 (code % 216) / 36 = code % 6 := pos3_div36 code
+  have e2 : 36 * (code / 216) + pos3 (code % 216) % 36 = code / 6 := by rw [pos3_mod36]; omega
   rw [e1, e2] at key
   exact key
 

@@ -160,11 +160,12 @@ theorem testBit_top (d : Nat) (hd : d < 256) : Nat.testBit d 7 = decide (128 ≤
 /-- The field-wise test. -/
 def swarOK (A B BL HI : Nat) : Bool := Nat.beq ((((B + HI) - A) &&& HI) ||| BL) HI
 
-theorem swarOK_spec (n : Nat) (a b : Nat → Nat) (A B BL : Nat)
-    (hA : A = pack (tab a n)) (hB : B = pack (tab b n))
+theorem swarOK_spec (n : Nat) (a b : Nat → Nat) (A B BL HI : Nat)
+    (hA : A = pack (tab a n)) (hB : B = pack (tab b n)) (hHI : HI = pack (tab (fun _ => 128) n))
     (ha : ∀ l, l < n → a l ≤ 128) (hb : ∀ l, l < n → b l < 128)
-    (h : swarOK A B BL (pack (tab (fun _ => 128) n)) = true) (l : Nat) (hl : l < n) :
+    (h : swarOK A B BL HI = true) (l : Nat) (hl : l < n) :
     Nat.testBit BL (8 * l + 7) = true ∨ a l ≤ b l := by
+  subst hHI
   unfold swarOK at h
   have heq := Nat.eq_of_beq_eq_true h
   subst hA hB

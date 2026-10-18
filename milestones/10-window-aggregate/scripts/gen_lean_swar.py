@@ -258,7 +258,7 @@ theorem checkT{S}_spec ({' '.join(argn)} : Nat) (hc : checkT{S} {' '.join(argn)}
   unfold checkT{S} at hc
   rw [{', '.join(['letN_succ'] * n_outer)}] at hc
   have h1 := allBelowR_spec _ _ hc (code / 216) (by omega)
-  simp only [letN_succ] at h1
+{chr(10).join(['  rw [letN_succ] at h1; try dsimp only at h1'] * (k - 3 + 2))}
   have hl : pos3 (code % 216) < 216 := pos3_lt code
   -- A and B as packs of their fields
   have hA : winT PT1 (1728 * (code / 216 % {NS ** (k - 4)})) 1728 + {P} * ones{S}
@@ -273,9 +273,8 @@ theorem checkT{S}_spec ({' '.join(argn)} : Nat) (hc : checkT{S} {' '.join(argn)}
     rw [show 288 * (code / 216) = 8 * (36 * (code / 216)) by omega, show (288 : Nat) = 8 * 36 by rfl,
       winT_pack, rep{S}_eq, ← pack_tab_rep36, wpat{S}_eq, pack_tab_mul, pack_tab_add]
     all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
-  rw [hA, hB, hi{S}_eq] at h1
   have key := swarOK_spec 216 (fun l => {P} + digit PT1 (216 * (code / 216 % {NS ** (k - 4)}) + l))
-    (fun l => {Q} * (l / 36 + 1) + digit PC0 (36 * (code / 216) + l % 36)) _ _ _ rfl rfl
+    (fun l => {Q} * (l / 36 + 1) + digit PC0 (36 * (code / 216) + l % 36)) _ _ _ _ hA hB hi{S}_eq
     (fun l hl' => by dsimp only; have := hb1 (216 * (code / 216 % {NS ** (k - 4)}) + l) (by omega); omega)
     (fun l hl' => by dsimp only; have := hb0 (36 * (code / 216) + l % 36) (by omega); omega) h1 _ hl
   simp only [Nat.testBit_or] at key

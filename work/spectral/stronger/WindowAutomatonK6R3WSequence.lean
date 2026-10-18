@@ -38,7 +38,10 @@ theorem stepK6R3W_raw (x : List Nat) (hx : x.length = 8) (t1 t2 t3 t4 t5 s : Nat
   have hcode : code < 46656 := by omega
   have h := checkTK6R3W_spec _ _ _ _ _ _ _ _ _ _ _ _ hc code hcode
     (fun y hy => potCK6R3W_digit_le _ y hy) (fun y hy => potTK6R3W_digit_le _ y hy) (sfwdK6R3W_rep _) (srevK6R3W_rep _)
-  have e1 : 216 * (code / 216 % 36) + posK6R3W (code % 216) = posK6R3W (code % 7776) := by unfold posK6R3W; omega
+  have e1 : 216 * (code / 216 % 36) + pos3 (code % 216) = pos3 (code % 7776) := by
+    have ps := pos3_split code 36 (by decide)
+    rw [show 216 * 36 = 7776 by rfl] at ps
+    exact ps.symm
   rw [e1, potTK6R3W_digit _ _ (by omega)] at h
   unfold wforbK6R3W at hw2 hw3 hw4 hw5 hw6
   simp only [List.length_cons, List.length_nil, Nat.zero_add, Nat.reduceAdd] at hw2 hw3 hw4 hw5 hw6

@@ -86,9 +86,6 @@ def wshapeIdxK6R3W (c : Nat) : Nat :=
   if c = 2139950 then 33 else
   34
 
-/-- Stored position of a symbol code: the three newest symbols (a, b, c) go to field 36 c + 6 a + b. -/
-def posK6R3W (z : Nat) : Nat := 216 * (z / 216) + 36 * (z % 6) + z / 6 % 36
-
 /-- Excluded patterns of window shape `w` with `c` centres: bit `8 * pos z + 7` for code `z`
 (two-centre tables carry the six copies of each entry that a 216-field block needs). -/
 def sfwdK6R3W (c w : Nat) : Nat :=
@@ -193,7 +190,7 @@ def shK6R3W (ds : List Nat) : Nat := shapeIdxK6R3W (shapeCode (canon ds))
 
 /-- Is the window (directions `ds`, symbols `syms`) excluded, in either orientation? -/
 def wforbK6R3W (ds syms : List Nat) : Bool :=
-  Nat.testBit (blk (sfwdK6R3W syms.length (wshK6R3W ds)) (srevK6R3W syms.length (wshK6R3W ds.reverse))) (8 * posK6R3W (codeK6R3W syms 0) + 7)
+  Nat.testBit (blk (sfwdK6R3W syms.length (wshK6R3W ds)) (srevK6R3W syms.length (wshK6R3W ds.reverse))) (8 * pos3 (codeK6R3W syms 0) + 7)
 
 /-- Potential of a state. -/
 def potK6R3W (h t : List Nat) : Nat := clip 6 (digit (potCK6R3W (shK6R3W h)) (codeK6R3W t 0))
@@ -251,106 +248,106 @@ theorem srevK6R3W_rep (w : Nat) : ∀ l, l < 216 →
 
 theorem potCK6R3W_bnd_0 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 0) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_0 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 0) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_0 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 0) (posK6R3W y)) (digit (potCK6R3W 0) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_0 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 0) (pos3 y)) (digit (potCK6R3W 0) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_1 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 1) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_1 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 1) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_1 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 1) (posK6R3W y)) (digit (potCK6R3W 1) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_1 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 1) (pos3 y)) (digit (potCK6R3W 1) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_2 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 2) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_2 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 2) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_2 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 2) (posK6R3W y)) (digit (potCK6R3W 2) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_2 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 2) (pos3 y)) (digit (potCK6R3W 2) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_3 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 3) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_3 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 3) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_3 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 3) (posK6R3W y)) (digit (potCK6R3W 3) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_3 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 3) (pos3 y)) (digit (potCK6R3W 3) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_4 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 4) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_4 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 4) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_4 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 4) (posK6R3W y)) (digit (potCK6R3W 4) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_4 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 4) (pos3 y)) (digit (potCK6R3W 4) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_5 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 5) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_5 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 5) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_5 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 5) (posK6R3W y)) (digit (potCK6R3W 5) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_5 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 5) (pos3 y)) (digit (potCK6R3W 5) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_6 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 6) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_6 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 6) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_6 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 6) (posK6R3W y)) (digit (potCK6R3W 6) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_6 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 6) (pos3 y)) (digit (potCK6R3W 6) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_7 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 7) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_7 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 7) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_7 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 7) (posK6R3W y)) (digit (potCK6R3W 7) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_7 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 7) (pos3 y)) (digit (potCK6R3W 7) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_8 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 8) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_8 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 8) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_8 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 8) (posK6R3W y)) (digit (potCK6R3W 8) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_8 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 8) (pos3 y)) (digit (potCK6R3W 8) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_9 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 9) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_9 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 9) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_9 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 9) (posK6R3W y)) (digit (potCK6R3W 9) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_9 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 9) (pos3 y)) (digit (potCK6R3W 9) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_10 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 10) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_10 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 10) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_10 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 10) (posK6R3W y)) (digit (potCK6R3W 10) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_10 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 10) (pos3 y)) (digit (potCK6R3W 10) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_11 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 11) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_11 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 11) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_11 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 11) (posK6R3W y)) (digit (potCK6R3W 11) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_11 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 11) (pos3 y)) (digit (potCK6R3W 11) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_12 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 12) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_12 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 12) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_12 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 12) (posK6R3W y)) (digit (potCK6R3W 12) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_12 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 12) (pos3 y)) (digit (potCK6R3W 12) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_13 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 13) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_13 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 13) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_13 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 13) (posK6R3W y)) (digit (potCK6R3W 13) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_13 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 13) (pos3 y)) (digit (potCK6R3W 13) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_14 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 14) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_14 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 14) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_14 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 14) (posK6R3W y)) (digit (potCK6R3W 14) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_14 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 14) (pos3 y)) (digit (potCK6R3W 14) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_15 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 15) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_15 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 15) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_15 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 15) (posK6R3W y)) (digit (potCK6R3W 15) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_15 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 15) (pos3 y)) (digit (potCK6R3W 15) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_16 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 16) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_16 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 16) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_16 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 16) (posK6R3W y)) (digit (potCK6R3W 16) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_16 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 16) (pos3 y)) (digit (potCK6R3W 16) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_17 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 17) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_17 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 17) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_17 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 17) (posK6R3W y)) (digit (potCK6R3W 17) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_17 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 17) (pos3 y)) (digit (potCK6R3W 17) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_18 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 18) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_18 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 18) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_18 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 18) (posK6R3W y)) (digit (potCK6R3W 18) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_18 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 18) (pos3 y)) (digit (potCK6R3W 18) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_19 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 19) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_19 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 19) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_19 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 19) (posK6R3W y)) (digit (potCK6R3W 19) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_19 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 19) (pos3 y)) (digit (potCK6R3W 19) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_20 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 20) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_20 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 20) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_20 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 20) (posK6R3W y)) (digit (potCK6R3W 20) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_20 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 20) (pos3 y)) (digit (potCK6R3W 20) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_21 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 21) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_21 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 21) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_21 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 21) (posK6R3W y)) (digit (potCK6R3W 21) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_21 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 21) (pos3 y)) (digit (potCK6R3W 21) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_22 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 22) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_22 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 22) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_22 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 22) (posK6R3W y)) (digit (potCK6R3W 22) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_22 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 22) (pos3 y)) (digit (potCK6R3W 22) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_23 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 23) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_23 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 23) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_23 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 23) (posK6R3W y)) (digit (potCK6R3W 23) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_23 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 23) (pos3 y)) (digit (potCK6R3W 23) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_24 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 24) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_24 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 24) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_24 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 24) (posK6R3W y)) (digit (potCK6R3W 24) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_24 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 24) (pos3 y)) (digit (potCK6R3W 24) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_25 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 25) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_25 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 25) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_25 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 25) (posK6R3W y)) (digit (potCK6R3W 25) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_25 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 25) (pos3 y)) (digit (potCK6R3W 25) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_26 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 26) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_26 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 26) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_26 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 26) (posK6R3W y)) (digit (potCK6R3W 26) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_26 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 26) (pos3 y)) (digit (potCK6R3W 26) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_27 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 27) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_27 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 27) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_27 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 27) (posK6R3W y)) (digit (potCK6R3W 27) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_27 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 27) (pos3 y)) (digit (potCK6R3W 27) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_28 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 28) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_28 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 28) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_28 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 28) (posK6R3W y)) (digit (potCK6R3W 28) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_28 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 28) (pos3 y)) (digit (potCK6R3W 28) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_29 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 29) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_29 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 29) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_29 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 29) (posK6R3W y)) (digit (potCK6R3W 29) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_29 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 29) (pos3 y)) (digit (potCK6R3W 29) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_30 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 30) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_30 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 30) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_30 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 30) (posK6R3W y)) (digit (potCK6R3W 30) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_30 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 30) (pos3 y)) (digit (potCK6R3W 30) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_31 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 31) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_31 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 31) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_31 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 31) (posK6R3W y)) (digit (potCK6R3W 31) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_31 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 31) (pos3 y)) (digit (potCK6R3W 31) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_32 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 32) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_32 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 32) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_32 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 32) (posK6R3W y)) (digit (potCK6R3W 32) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_32 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 32) (pos3 y)) (digit (potCK6R3W 32) y)) = true := by decide +kernel
 theorem potCK6R3W_bnd_33 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 33) y) 6) = true := by decide +kernel
 theorem potTK6R3W_bnd_33 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 33) y) 6) = true := by decide +kernel
-theorem potTK6R3W_cons_33 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 33) (posK6R3W y)) (digit (potCK6R3W 33) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_33 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 33) (pos3 y)) (digit (potCK6R3W 33) y)) = true := by decide +kernel
 
 theorem potCK6R3W_digit_le (i y : Nat) (hy : y < 7776) : digit (potCK6R3W i) y ≤ 6 := by
   by_cases hi0 : i = 0
@@ -500,7 +497,7 @@ theorem potTK6R3W_digit_le (i y : Nat) (hy : y < 7776) : digit (potTK6R3W i) y �
     simp [hi0, hi1, hi2, hi3, hi4, hi5, hi6, hi7, hi8, hi9, hi10, hi11, hi12, hi13, hi14, hi15, hi16, hi17, hi18, hi19, hi20, hi21, hi22, hi23, hi24, hi25, hi26, hi27, hi28, hi29, hi30, hi31, hi32, hi33]
   rw [h0]; simp [digit]
 
-theorem potTK6R3W_digit (i y : Nat) (hy : y < 7776) : digit (potTK6R3W i) (posK6R3W y) = digit (potCK6R3W i) y := by
+theorem potTK6R3W_digit (i y : Nat) (hy : y < 7776) : digit (potTK6R3W i) (pos3 y) = digit (potCK6R3W i) y := by
   by_cases hi0 : i = 0
   · subst hi0; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_0 y hy)
   by_cases hi1 : i = 1
