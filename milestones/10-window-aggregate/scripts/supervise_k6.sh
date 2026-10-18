@@ -40,4 +40,11 @@ if [ ! -f $D/judge_direction_k6.json ] && ! running "judge.py --index"; then
   (cd $S && nohup nice -n 19 python3 judge.py --index ../data/direction_certificates_k6.json --workers 1 \
      --out ../data/judge_direction_k6.json >> ../data/judge_direction_k6.log 2>&1 &)
 fi
+# 5. empty-square-aware (omega) refinement, five centres, eight buckets (resumable from its cache)
+if [ ! -f $D/refine_omega_L7_k5_K8_r3.json ] && ! running "refine_omega.py --L 7 --k 5 --K 8"; then
+  log "starting omega refinement"
+  (cd $M && nohup nice -n 10 python3 scripts/refine_omega.py --L 7 --k 5 --K 8 --radius 3 --workers 1 \
+     >> data/refine_omega_L7_k5_K8_r3.log 2>&1 &)
+fi
+
 log "supervisor pass done"
