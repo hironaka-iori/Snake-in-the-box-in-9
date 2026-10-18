@@ -19,3 +19,14 @@ round 8: edges 12085722 mean 102/25 (4.0800) cycle [5, 2, 4, 5, 5, 3, 2, 6, 5, 5
 shapes 34 states 1114112 extensions 132
 shapes 34 states 1114112 extensions 132
 round 0: edges 12065549 mean 102/25 (4.0800) cycle [4, 6, 4, 3, 4, 4, 4, 5, 4, 3, 5, 3, 6, 3, 3, 6, 3, 5, 3, 4, 5, 4, 4, 4, 3] queried 24 unsat-on-cycle 20 [486s]
+Traceback (most recent call last):
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine_fast.py", line 319, in <module>
+    main()
+    ~~~~^^
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine_fast.py", line 275, in main
+    oracle = Oracle(a.radius)
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 70, in __init__
+    self.known[(tuple(e['dirs']), tuple(map(tuple, e['alpha'])))] = e['status']
+                                                   ~^^^^^^^^^
+KeyError: 'alpha'
+shapes 34 states 1114112 extensions 132

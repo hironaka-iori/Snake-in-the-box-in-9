@@ -196,10 +196,10 @@ def main():
   decide +kernel''')
     def rep_universal(name, tbl):
         ws2 = [w for w in w2 if (2, w) in tbl]
-        cases = ''.join(f'''  by_cases h{w} : w = {w}
-  · subst h{w}; exact eq_of_beq (allBelowR_spec _ _ {name}{S}_rep_{w} l hl)
+        cases = ''.join(f'''  by_cases hw{w} : w = {w}
+  · subst hw{w}; exact eq_of_beq (allBelowR_spec _ _ {name}{S}_rep_{w} l hl)
 ''' for w in ws2)
-        hyps = ', '.join(f'h{w}' for w in ws2)
+        hyps = ', '.join(f'hw{w}' for w in ws2)
         return f'''theorem {name}{S}_rep (w : Nat) : ∀ l, l < 216 →
     Nat.testBit ({name}{S} 2 w) (8 * l + 7) = Nat.testBit ({name}{S} 2 w) (8 * (36 * (l / 36) + l % 6) + 7) := by
   intro l hl
@@ -214,10 +214,10 @@ def main():
         pot_thms.append(f'theorem potT{S}_bnd_{i} : allBelowR {M1} (fun y => Nat.ble (digit (potT{S} {i}) y) {R}) = true := by decide +kernel')
         pot_thms.append(f'theorem potT{S}_cons_{i} : allBelowR {M1} (fun y => Nat.beq (digit (potT{S} {i}) (pos{S} y)) (digit (potC{S} {i}) y)) = true := by decide +kernel')
     def by_shape(name, body_i, default):
-        cases = ''.join(f'''  by_cases h{i} : i = {i}
-  · subst h{i}; {body_i(i)}
+        cases = ''.join(f'''  by_cases hi{i} : i = {i}
+  · subst hi{i}; {body_i(i)}
 ''' for i in range(len(shapes)))
-        hyps = ', '.join(f'h{i}' for i in range(len(shapes)))
+        hyps = ', '.join(f'hi{i}' for i in range(len(shapes)))
         return cases + f'''  have h0 : {name} i = 0 := by
     unfold {name}
     simp [{hyps}]
@@ -229,7 +229,7 @@ def main():
     potT_eq = f'''theorem potT{S}_digit (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) (pos{S} y) = digit (potC{S} i) y := by
 {by_shape(f'potT{S}', lambda i: f'exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potT{S}_cons_{i} y hy)', f'''have h0c : potC{S} i = 0 := by
     unfold potC{S}
-    simp [{', '.join(f'h{i}' for i in range(len(shapes)))}]
+    simp [{', '.join(f'hi{i}' for i in range(len(shapes)))}]
   rw [h0, h0c]''')}'''
     # ---- spec lemma text
     bits = [f'Nat.testBit (blk T2 R2) (8 * pos{S} (code % 36) + 7)'] + \

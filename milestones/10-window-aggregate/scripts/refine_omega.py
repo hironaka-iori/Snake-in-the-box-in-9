@@ -8,7 +8,7 @@ sum_x omega(x) <= 21 (9214 - 35 v), the same arithmetic as the alpha-only chains
 States and transitions are those of refine_fast.FastAutomaton (shape of the last L directions,
 last k-1 symbols); a window of c centres ending at the new vertex is excluded when the bucket
 query (dirs, buckets) is INFEASIBLE at the chosen radius.  Answers are cached in
-data/oracle_cache_omega_r{radius}.jsonl; timeouts count as feasible.
+data/omega_cache_r{radius}.jsonl; timeouts count as feasible.
 
   python refine_omega.py --L 6 --k 4 --K 11 --radius 3 --workers 2
 """
@@ -58,7 +58,7 @@ def _solve(arg):
 class OmegaOracle:
     def __init__(self, radius, cap, limit):
         self.radius, self.cap, self.limit = radius, cap, limit
-        self.path = os.path.join(DATA, f'oracle_cache_omega_r{radius}.jsonl')
+        self.path = os.path.join(DATA, f'omega_cache_r{radius}.jsonl')      # not oracle_cache*: refine.Oracle globs those
         self.known = {}
         if os.path.exists(self.path):
             for line in open(self.path):

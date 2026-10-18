@@ -232,21 +232,21 @@ theorem srevK6R3W_rep_0 : allBelowR 216 (fun l => Nat.testBit (srevK6R3W 2 0) (8
 theorem sfwdK6R3W_rep (w : Nat) : ∀ l, l < 216 →
     Nat.testBit (sfwdK6R3W 2 w) (8 * l + 7) = Nat.testBit (sfwdK6R3W 2 w) (8 * (36 * (l / 36) + l % 6) + 7) := by
   intro l hl
-  by_cases h0 : w = 0
-  · subst h0; exact eq_of_beq (allBelowR_spec _ _ sfwdK6R3W_rep_0 l hl)
+  by_cases hw0 : w = 0
+  · subst hw0; exact eq_of_beq (allBelowR_spec _ _ sfwdK6R3W_rep_0 l hl)
   have h0 : sfwdK6R3W 2 w = 0 := by
     unfold sfwdK6R3W
-    simp [h0]
+    simp [hw0]
   rw [h0]; simp
 
 theorem srevK6R3W_rep (w : Nat) : ∀ l, l < 216 →
     Nat.testBit (srevK6R3W 2 w) (8 * l + 7) = Nat.testBit (srevK6R3W 2 w) (8 * (36 * (l / 36) + l % 6) + 7) := by
   intro l hl
-  by_cases h0 : w = 0
-  · subst h0; exact eq_of_beq (allBelowR_spec _ _ srevK6R3W_rep_0 l hl)
+  by_cases hw0 : w = 0
+  · subst hw0; exact eq_of_beq (allBelowR_spec _ _ srevK6R3W_rep_0 l hl)
   have h0 : srevK6R3W 2 w = 0 := by
     unfold srevK6R3W
-    simp [h0]
+    simp [hw0]
   rw [h0]; simp
 
 theorem potCK6R3W_bnd_0 : allBelowR 7776 (fun y => Nat.ble (digit (potCK6R3W 0) y) 6) = true := by decide +kernel
@@ -353,228 +353,228 @@ theorem potTK6R3W_bnd_33 : allBelowR 7776 (fun y => Nat.ble (digit (potTK6R3W 33
 theorem potTK6R3W_cons_33 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 33) (posK6R3W y)) (digit (potCK6R3W 33) y)) = true := by decide +kernel
 
 theorem potCK6R3W_digit_le (i y : Nat) (hy : y < 7776) : digit (potCK6R3W i) y ≤ 6 := by
-  by_cases h0 : i = 0
-  · subst h0; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_0 y hy)
-  by_cases h1 : i = 1
-  · subst h1; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_1 y hy)
-  by_cases h2 : i = 2
-  · subst h2; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_2 y hy)
-  by_cases h3 : i = 3
-  · subst h3; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_3 y hy)
-  by_cases h4 : i = 4
-  · subst h4; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_4 y hy)
-  by_cases h5 : i = 5
-  · subst h5; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_5 y hy)
-  by_cases h6 : i = 6
-  · subst h6; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_6 y hy)
-  by_cases h7 : i = 7
-  · subst h7; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_7 y hy)
-  by_cases h8 : i = 8
-  · subst h8; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_8 y hy)
-  by_cases h9 : i = 9
-  · subst h9; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_9 y hy)
-  by_cases h10 : i = 10
-  · subst h10; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_10 y hy)
-  by_cases h11 : i = 11
-  · subst h11; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_11 y hy)
-  by_cases h12 : i = 12
-  · subst h12; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_12 y hy)
-  by_cases h13 : i = 13
-  · subst h13; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_13 y hy)
-  by_cases h14 : i = 14
-  · subst h14; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_14 y hy)
-  by_cases h15 : i = 15
-  · subst h15; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_15 y hy)
-  by_cases h16 : i = 16
-  · subst h16; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_16 y hy)
-  by_cases h17 : i = 17
-  · subst h17; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_17 y hy)
-  by_cases h18 : i = 18
-  · subst h18; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_18 y hy)
-  by_cases h19 : i = 19
-  · subst h19; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_19 y hy)
-  by_cases h20 : i = 20
-  · subst h20; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_20 y hy)
-  by_cases h21 : i = 21
-  · subst h21; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_21 y hy)
-  by_cases h22 : i = 22
-  · subst h22; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_22 y hy)
-  by_cases h23 : i = 23
-  · subst h23; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_23 y hy)
-  by_cases h24 : i = 24
-  · subst h24; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_24 y hy)
-  by_cases h25 : i = 25
-  · subst h25; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_25 y hy)
-  by_cases h26 : i = 26
-  · subst h26; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_26 y hy)
-  by_cases h27 : i = 27
-  · subst h27; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_27 y hy)
-  by_cases h28 : i = 28
-  · subst h28; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_28 y hy)
-  by_cases h29 : i = 29
-  · subst h29; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_29 y hy)
-  by_cases h30 : i = 30
-  · subst h30; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_30 y hy)
-  by_cases h31 : i = 31
-  · subst h31; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_31 y hy)
-  by_cases h32 : i = 32
-  · subst h32; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_32 y hy)
-  by_cases h33 : i = 33
-  · subst h33; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_33 y hy)
+  by_cases hi0 : i = 0
+  · subst hi0; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_0 y hy)
+  by_cases hi1 : i = 1
+  · subst hi1; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_1 y hy)
+  by_cases hi2 : i = 2
+  · subst hi2; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_2 y hy)
+  by_cases hi3 : i = 3
+  · subst hi3; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_3 y hy)
+  by_cases hi4 : i = 4
+  · subst hi4; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_4 y hy)
+  by_cases hi5 : i = 5
+  · subst hi5; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_5 y hy)
+  by_cases hi6 : i = 6
+  · subst hi6; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_6 y hy)
+  by_cases hi7 : i = 7
+  · subst hi7; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_7 y hy)
+  by_cases hi8 : i = 8
+  · subst hi8; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_8 y hy)
+  by_cases hi9 : i = 9
+  · subst hi9; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_9 y hy)
+  by_cases hi10 : i = 10
+  · subst hi10; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_10 y hy)
+  by_cases hi11 : i = 11
+  · subst hi11; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_11 y hy)
+  by_cases hi12 : i = 12
+  · subst hi12; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_12 y hy)
+  by_cases hi13 : i = 13
+  · subst hi13; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_13 y hy)
+  by_cases hi14 : i = 14
+  · subst hi14; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_14 y hy)
+  by_cases hi15 : i = 15
+  · subst hi15; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_15 y hy)
+  by_cases hi16 : i = 16
+  · subst hi16; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_16 y hy)
+  by_cases hi17 : i = 17
+  · subst hi17; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_17 y hy)
+  by_cases hi18 : i = 18
+  · subst hi18; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_18 y hy)
+  by_cases hi19 : i = 19
+  · subst hi19; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_19 y hy)
+  by_cases hi20 : i = 20
+  · subst hi20; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_20 y hy)
+  by_cases hi21 : i = 21
+  · subst hi21; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_21 y hy)
+  by_cases hi22 : i = 22
+  · subst hi22; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_22 y hy)
+  by_cases hi23 : i = 23
+  · subst hi23; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_23 y hy)
+  by_cases hi24 : i = 24
+  · subst hi24; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_24 y hy)
+  by_cases hi25 : i = 25
+  · subst hi25; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_25 y hy)
+  by_cases hi26 : i = 26
+  · subst hi26; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_26 y hy)
+  by_cases hi27 : i = 27
+  · subst hi27; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_27 y hy)
+  by_cases hi28 : i = 28
+  · subst hi28; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_28 y hy)
+  by_cases hi29 : i = 29
+  · subst hi29; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_29 y hy)
+  by_cases hi30 : i = 30
+  · subst hi30; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_30 y hy)
+  by_cases hi31 : i = 31
+  · subst hi31; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_31 y hy)
+  by_cases hi32 : i = 32
+  · subst hi32; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_32 y hy)
+  by_cases hi33 : i = 33
+  · subst hi33; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potCK6R3W_bnd_33 y hy)
   have h0 : potCK6R3W i = 0 := by
     unfold potCK6R3W
-    simp [h0, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23, h24, h25, h26, h27, h28, h29, h30, h31, h32, h33]
+    simp [hi0, hi1, hi2, hi3, hi4, hi5, hi6, hi7, hi8, hi9, hi10, hi11, hi12, hi13, hi14, hi15, hi16, hi17, hi18, hi19, hi20, hi21, hi22, hi23, hi24, hi25, hi26, hi27, hi28, hi29, hi30, hi31, hi32, hi33]
   rw [h0]; simp [digit]
 
 theorem potTK6R3W_digit_le (i y : Nat) (hy : y < 7776) : digit (potTK6R3W i) y ≤ 6 := by
-  by_cases h0 : i = 0
-  · subst h0; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_0 y hy)
-  by_cases h1 : i = 1
-  · subst h1; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_1 y hy)
-  by_cases h2 : i = 2
-  · subst h2; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_2 y hy)
-  by_cases h3 : i = 3
-  · subst h3; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_3 y hy)
-  by_cases h4 : i = 4
-  · subst h4; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_4 y hy)
-  by_cases h5 : i = 5
-  · subst h5; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_5 y hy)
-  by_cases h6 : i = 6
-  · subst h6; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_6 y hy)
-  by_cases h7 : i = 7
-  · subst h7; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_7 y hy)
-  by_cases h8 : i = 8
-  · subst h8; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_8 y hy)
-  by_cases h9 : i = 9
-  · subst h9; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_9 y hy)
-  by_cases h10 : i = 10
-  · subst h10; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_10 y hy)
-  by_cases h11 : i = 11
-  · subst h11; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_11 y hy)
-  by_cases h12 : i = 12
-  · subst h12; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_12 y hy)
-  by_cases h13 : i = 13
-  · subst h13; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_13 y hy)
-  by_cases h14 : i = 14
-  · subst h14; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_14 y hy)
-  by_cases h15 : i = 15
-  · subst h15; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_15 y hy)
-  by_cases h16 : i = 16
-  · subst h16; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_16 y hy)
-  by_cases h17 : i = 17
-  · subst h17; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_17 y hy)
-  by_cases h18 : i = 18
-  · subst h18; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_18 y hy)
-  by_cases h19 : i = 19
-  · subst h19; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_19 y hy)
-  by_cases h20 : i = 20
-  · subst h20; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_20 y hy)
-  by_cases h21 : i = 21
-  · subst h21; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_21 y hy)
-  by_cases h22 : i = 22
-  · subst h22; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_22 y hy)
-  by_cases h23 : i = 23
-  · subst h23; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_23 y hy)
-  by_cases h24 : i = 24
-  · subst h24; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_24 y hy)
-  by_cases h25 : i = 25
-  · subst h25; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_25 y hy)
-  by_cases h26 : i = 26
-  · subst h26; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_26 y hy)
-  by_cases h27 : i = 27
-  · subst h27; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_27 y hy)
-  by_cases h28 : i = 28
-  · subst h28; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_28 y hy)
-  by_cases h29 : i = 29
-  · subst h29; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_29 y hy)
-  by_cases h30 : i = 30
-  · subst h30; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_30 y hy)
-  by_cases h31 : i = 31
-  · subst h31; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_31 y hy)
-  by_cases h32 : i = 32
-  · subst h32; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_32 y hy)
-  by_cases h33 : i = 33
-  · subst h33; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_33 y hy)
+  by_cases hi0 : i = 0
+  · subst hi0; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_0 y hy)
+  by_cases hi1 : i = 1
+  · subst hi1; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_1 y hy)
+  by_cases hi2 : i = 2
+  · subst hi2; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_2 y hy)
+  by_cases hi3 : i = 3
+  · subst hi3; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_3 y hy)
+  by_cases hi4 : i = 4
+  · subst hi4; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_4 y hy)
+  by_cases hi5 : i = 5
+  · subst hi5; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_5 y hy)
+  by_cases hi6 : i = 6
+  · subst hi6; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_6 y hy)
+  by_cases hi7 : i = 7
+  · subst hi7; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_7 y hy)
+  by_cases hi8 : i = 8
+  · subst hi8; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_8 y hy)
+  by_cases hi9 : i = 9
+  · subst hi9; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_9 y hy)
+  by_cases hi10 : i = 10
+  · subst hi10; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_10 y hy)
+  by_cases hi11 : i = 11
+  · subst hi11; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_11 y hy)
+  by_cases hi12 : i = 12
+  · subst hi12; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_12 y hy)
+  by_cases hi13 : i = 13
+  · subst hi13; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_13 y hy)
+  by_cases hi14 : i = 14
+  · subst hi14; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_14 y hy)
+  by_cases hi15 : i = 15
+  · subst hi15; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_15 y hy)
+  by_cases hi16 : i = 16
+  · subst hi16; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_16 y hy)
+  by_cases hi17 : i = 17
+  · subst hi17; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_17 y hy)
+  by_cases hi18 : i = 18
+  · subst hi18; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_18 y hy)
+  by_cases hi19 : i = 19
+  · subst hi19; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_19 y hy)
+  by_cases hi20 : i = 20
+  · subst hi20; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_20 y hy)
+  by_cases hi21 : i = 21
+  · subst hi21; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_21 y hy)
+  by_cases hi22 : i = 22
+  · subst hi22; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_22 y hy)
+  by_cases hi23 : i = 23
+  · subst hi23; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_23 y hy)
+  by_cases hi24 : i = 24
+  · subst hi24; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_24 y hy)
+  by_cases hi25 : i = 25
+  · subst hi25; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_25 y hy)
+  by_cases hi26 : i = 26
+  · subst hi26; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_26 y hy)
+  by_cases hi27 : i = 27
+  · subst hi27; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_27 y hy)
+  by_cases hi28 : i = 28
+  · subst hi28; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_28 y hy)
+  by_cases hi29 : i = 29
+  · subst hi29; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_29 y hy)
+  by_cases hi30 : i = 30
+  · subst hi30; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_30 y hy)
+  by_cases hi31 : i = 31
+  · subst hi31; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_31 y hy)
+  by_cases hi32 : i = 32
+  · subst hi32; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_32 y hy)
+  by_cases hi33 : i = 33
+  · subst hi33; exact Nat.le_of_ble_eq_true (allBelowR_spec _ _ potTK6R3W_bnd_33 y hy)
   have h0 : potTK6R3W i = 0 := by
     unfold potTK6R3W
-    simp [h0, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23, h24, h25, h26, h27, h28, h29, h30, h31, h32, h33]
+    simp [hi0, hi1, hi2, hi3, hi4, hi5, hi6, hi7, hi8, hi9, hi10, hi11, hi12, hi13, hi14, hi15, hi16, hi17, hi18, hi19, hi20, hi21, hi22, hi23, hi24, hi25, hi26, hi27, hi28, hi29, hi30, hi31, hi32, hi33]
   rw [h0]; simp [digit]
 
 theorem potTK6R3W_digit (i y : Nat) (hy : y < 7776) : digit (potTK6R3W i) (posK6R3W y) = digit (potCK6R3W i) y := by
-  by_cases h0 : i = 0
-  · subst h0; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_0 y hy)
-  by_cases h1 : i = 1
-  · subst h1; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_1 y hy)
-  by_cases h2 : i = 2
-  · subst h2; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_2 y hy)
-  by_cases h3 : i = 3
-  · subst h3; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_3 y hy)
-  by_cases h4 : i = 4
-  · subst h4; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_4 y hy)
-  by_cases h5 : i = 5
-  · subst h5; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_5 y hy)
-  by_cases h6 : i = 6
-  · subst h6; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_6 y hy)
-  by_cases h7 : i = 7
-  · subst h7; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_7 y hy)
-  by_cases h8 : i = 8
-  · subst h8; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_8 y hy)
-  by_cases h9 : i = 9
-  · subst h9; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_9 y hy)
-  by_cases h10 : i = 10
-  · subst h10; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_10 y hy)
-  by_cases h11 : i = 11
-  · subst h11; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_11 y hy)
-  by_cases h12 : i = 12
-  · subst h12; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_12 y hy)
-  by_cases h13 : i = 13
-  · subst h13; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_13 y hy)
-  by_cases h14 : i = 14
-  · subst h14; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_14 y hy)
-  by_cases h15 : i = 15
-  · subst h15; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_15 y hy)
-  by_cases h16 : i = 16
-  · subst h16; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_16 y hy)
-  by_cases h17 : i = 17
-  · subst h17; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_17 y hy)
-  by_cases h18 : i = 18
-  · subst h18; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_18 y hy)
-  by_cases h19 : i = 19
-  · subst h19; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_19 y hy)
-  by_cases h20 : i = 20
-  · subst h20; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_20 y hy)
-  by_cases h21 : i = 21
-  · subst h21; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_21 y hy)
-  by_cases h22 : i = 22
-  · subst h22; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_22 y hy)
-  by_cases h23 : i = 23
-  · subst h23; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_23 y hy)
-  by_cases h24 : i = 24
-  · subst h24; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_24 y hy)
-  by_cases h25 : i = 25
-  · subst h25; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_25 y hy)
-  by_cases h26 : i = 26
-  · subst h26; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_26 y hy)
-  by_cases h27 : i = 27
-  · subst h27; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_27 y hy)
-  by_cases h28 : i = 28
-  · subst h28; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_28 y hy)
-  by_cases h29 : i = 29
-  · subst h29; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_29 y hy)
-  by_cases h30 : i = 30
-  · subst h30; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_30 y hy)
-  by_cases h31 : i = 31
-  · subst h31; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_31 y hy)
-  by_cases h32 : i = 32
-  · subst h32; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_32 y hy)
-  by_cases h33 : i = 33
-  · subst h33; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_33 y hy)
+  by_cases hi0 : i = 0
+  · subst hi0; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_0 y hy)
+  by_cases hi1 : i = 1
+  · subst hi1; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_1 y hy)
+  by_cases hi2 : i = 2
+  · subst hi2; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_2 y hy)
+  by_cases hi3 : i = 3
+  · subst hi3; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_3 y hy)
+  by_cases hi4 : i = 4
+  · subst hi4; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_4 y hy)
+  by_cases hi5 : i = 5
+  · subst hi5; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_5 y hy)
+  by_cases hi6 : i = 6
+  · subst hi6; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_6 y hy)
+  by_cases hi7 : i = 7
+  · subst hi7; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_7 y hy)
+  by_cases hi8 : i = 8
+  · subst hi8; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_8 y hy)
+  by_cases hi9 : i = 9
+  · subst hi9; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_9 y hy)
+  by_cases hi10 : i = 10
+  · subst hi10; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_10 y hy)
+  by_cases hi11 : i = 11
+  · subst hi11; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_11 y hy)
+  by_cases hi12 : i = 12
+  · subst hi12; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_12 y hy)
+  by_cases hi13 : i = 13
+  · subst hi13; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_13 y hy)
+  by_cases hi14 : i = 14
+  · subst hi14; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_14 y hy)
+  by_cases hi15 : i = 15
+  · subst hi15; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_15 y hy)
+  by_cases hi16 : i = 16
+  · subst hi16; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_16 y hy)
+  by_cases hi17 : i = 17
+  · subst hi17; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_17 y hy)
+  by_cases hi18 : i = 18
+  · subst hi18; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_18 y hy)
+  by_cases hi19 : i = 19
+  · subst hi19; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_19 y hy)
+  by_cases hi20 : i = 20
+  · subst hi20; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_20 y hy)
+  by_cases hi21 : i = 21
+  · subst hi21; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_21 y hy)
+  by_cases hi22 : i = 22
+  · subst hi22; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_22 y hy)
+  by_cases hi23 : i = 23
+  · subst hi23; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_23 y hy)
+  by_cases hi24 : i = 24
+  · subst hi24; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_24 y hy)
+  by_cases hi25 : i = 25
+  · subst hi25; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_25 y hy)
+  by_cases hi26 : i = 26
+  · subst hi26; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_26 y hy)
+  by_cases hi27 : i = 27
+  · subst hi27; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_27 y hy)
+  by_cases hi28 : i = 28
+  · subst hi28; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_28 y hy)
+  by_cases hi29 : i = 29
+  · subst hi29; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_29 y hy)
+  by_cases hi30 : i = 30
+  · subst hi30; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_30 y hy)
+  by_cases hi31 : i = 31
+  · subst hi31; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_31 y hy)
+  by_cases hi32 : i = 32
+  · subst hi32; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_32 y hy)
+  by_cases hi33 : i = 33
+  · subst hi33; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_33 y hy)
   have h0 : potTK6R3W i = 0 := by
     unfold potTK6R3W
-    simp [h0, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23, h24, h25, h26, h27, h28, h29, h30, h31, h32, h33]
+    simp [hi0, hi1, hi2, hi3, hi4, hi5, hi6, hi7, hi8, hi9, hi10, hi11, hi12, hi13, hi14, hi15, hi16, hi17, hi18, hi19, hi20, hi21, hi22, hi23, hi24, hi25, hi26, hi27, hi28, hi29, hi30, hi31, hi32, hi33]
   have h0c : potCK6R3W i = 0 := by
     unfold potCK6R3W
-    simp [h0, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23, h24, h25, h26, h27, h28, h29, h30, h31, h32, h33]
+    simp [hi0, hi1, hi2, hi3, hi4, hi5, hi6, hi7, hi8, hi9, hi10, hi11, hi12, hi13, hi14, hi15, hi16, hi17, hi18, hi19, hi20, hi21, hi22, hi23, hi24, hi25, hi26, hi27, hi28, hi29, hi30, hi31, hi32, hi33]
   rw [h0, h0c]
 
 /-- Step test for one window of 8 directions. -/

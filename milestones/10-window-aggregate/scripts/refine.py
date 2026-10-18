@@ -66,7 +66,7 @@ class Oracle:
                     e = json.loads(line)
                 except ValueError:
                     continue
-                if e['radius'] == radius:
+                if e.get('radius') == radius and 'alpha' in e:          # omega caches carry 'buckets'
                     self.known[(tuple(e['dirs']), tuple(map(tuple, e['alpha'])))] = e['status']
         self.seed_from_surveys()
 
