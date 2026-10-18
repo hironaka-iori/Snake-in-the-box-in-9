@@ -36,8 +36,11 @@ theorem stepK6R3W_raw (x : List Nat) (hx : x.length = 8) (t1 t2 t3 t4 t5 s : Nat
   have hsyms : 1 ≤ sym t1 ∧ sym t1 ≤ 6 ∧ 1 ≤ sym t2 ∧ sym t2 ≤ 6 ∧ 1 ≤ sym t3 ∧ sym t3 ≤ 6 ∧ 1 ≤ sym t4 ∧ sym t4 ≤ 6 ∧ 1 ≤ sym t5 ∧ sym t5 ≤ 6 ∧ 1 ≤ sym s ∧ sym s ≤ 6 := ⟨sym_ge_one _ h1, sym_le_six _, sym_ge_one _ h2, sym_le_six _, sym_ge_one _ h3, sym_le_six _, sym_ge_one _ h4, sym_le_six _, sym_ge_one _ h5, sym_le_six _, sym_ge_one _ hs, sym_le_six _⟩
   obtain ⟨code, hcd⟩ : ∃ code, code = (sym t1 - 1) * 7776 + (sym t2 - 1) * 1296 + (sym t3 - 1) * 216 + (sym t4 - 1) * 36 + (sym t5 - 1) * 6 + (sym s - 1) := ⟨_, rfl⟩
   have hcode : code < 46656 := by omega
-  have h := checkTK6R3W_spec _ _ _ _ _ _ _ _ _ _ _ _ hc code hcode
-    (fun y hy => potCK6R3W_digit_le _ y hy) (fun y hy => potTK6R3W_digit_le _ y hy) (sfwdK6R3W_rep _) (srevK6R3W_rep _)
+  have h := checkTK6R3W_spec _ _ _ _ _ _ _ _ _ _ _ _ (potCK6R3W (shK6R3W (x.take 7))) hc code hcode
+    (fun y hy => potCK6R3W_digit_le _ y hy) (fun y hy => potTK6R3W_digit_le _ y hy) (potTK6R3W_lt _) (potRK6R3W_lt _)
+    (fun hb l hh hl => potRK6R3W_digit _ hb l hh hl) (sfwdK6R3W_rep _) (srevK6R3W_rep _)
+    (Nat.or_lt_two_pow (Nat.or_lt_two_pow (sfwdK6R3W_lt2 _) (srevK6R3W_lt2 _)) (Nat.or_lt_two_pow (sfwdK6R3W_lt3 _) (srevK6R3W_lt3 _)))
+    (Nat.or_lt_two_pow (sfwdK6R3W_lt4 _) (srevK6R3W_lt4 _)) (Nat.or_lt_two_pow (sfwdK6R3W_lt5 _) (srevK6R3W_lt5 _))
   have e1 : 216 * (code / 216 % 36) + pos3 (code % 216) = pos3 (code % 7776) := by
     have ps := pos3_split code 36 (by decide)
     rw [show 216 * 36 = 7776 by rfl] at ps

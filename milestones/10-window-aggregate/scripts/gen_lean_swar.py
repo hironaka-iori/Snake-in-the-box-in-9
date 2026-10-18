@@ -125,12 +125,14 @@ def main():
     sfwd = {key: spread(v, key[0]) for key, v in forwardB.items()}
     srev = {key: spread(v, key[0]) for key, v in reverseB.items()}
     M1 = NS ** (k - 1)
-    potC, potT = {}, {}
+    potC, potT, potR = {}, {}, {}
     for i, c in enumerate(shapes):
         vals = [min(R, int(pi[i * M1 + code6(digits(t, k - 1))])) for t in range(M1)]
         # vals[y] = potential of the state whose k-1 counts have natural code y
         potC[i] = sum(v << (8 * y) for y, v in enumerate(vals))
         potT[i] = sum(v << (8 * pos(y, NS)) for y, v in enumerate(vals))
+        # potR: every N2-field block of potC repeated NS times (field N3 h + l holds potC field N2 h + l % N2)
+        potR[i] = sum(vals[N2 * (f // N3) + f % N2] << (8 * f) for f in range(NS ** k))
 
     # ---- Python mirror of the transition inequality (natural codes) --------------
     ncodes = NS ** k; X = np.arange(ncodes)
@@ -167,8 +169,43 @@ def main():
     for c in rgs(L + 1):
         if induced(c):
             assert c[:L] in shapes and c[L] < 9
-    # mirror of the SWAR semantics: for each (shape,d,h) the packed comparison equals the per-field truth
+    F = NS ** k                                            # fields of the full comparison
+    ONES = sum(1 << (8 * l) for l in range(N3)); HI = 128 * ONES
+    ONESP = sum(1 << (8 * l) for l in range(M1))
+    WPAT = sum((l // N2 + 1) << (8 * l) for l in range(N3))
+    def repk(n, m):
+        return sum(1 << (8 * n * j) for j in range(m))
+    ONESF, HIF = repk(N3, F // N3) * ONES, repk(N3, F // N3) * HI
+    WPATF = repk(N3, F // N3) * WPAT
+    REPB = repk(N2, NS)                                    # block replication inside consR
+    REPA = repk(M1, NS)                                    # next-state table, repeated NS times
+    REPC = {cc: repk(NS ** cc, NS ** (k - cc)) for cc in range(3, k)}   # window tables, c = 3..k-1
     print('python re-check passed on', checked, 'shard transitions', flush=True)
+    # mirror of the packed check itself (big integers, exactly as `checkT` computes it)
+    def swar_ok(A, Bv, BL, HIv):
+        return ((((Bv + HIv) - A) & HIv) | BL) == HIv
+    pairs = 0
+    for c0 in shapes:
+        i0 = sidx[shape_code(c0)]
+        for d in range(9):
+            c = c0 + (d,)
+            if not induced(c):
+                continue
+            i1 = sidx[shape_code(tuple(canon(c[1:])))]
+            tabs = {}
+            for cc in range(2, k + 1):
+                sub = c[L + 1 - (cc + 1):]
+                Fw = ws.get(shape_code(tuple(canon(sub)))); Vw = ws.get(shape_code(tuple(canon(tuple(reversed(sub))))))
+                tabs[cc] = sfwd.get((cc, Fw), 0) | srev.get((cc, Vw), 0)
+            BL = (tabs[2] | tabs[3]) * REPC[3]
+            for cc in range(4, k):
+                BL |= tabs[cc] * REPC[cc]
+            BL |= tabs[k]
+            Av = potT[i1] * REPA + P * ONESF
+            Bv = Q * WPATF + potR[i0]
+            assert swar_ok(Av, Bv, BL, HIF), ('packed check fails', c)
+            pairs += 1
+    print('packed check mirrors', pairs, 'pairs', flush=True)
 
     # ---- Lean text ------------------------------------------------------------
     CHUNK = 8192
@@ -203,18 +240,31 @@ def main():
         lines.append('  0')
         return '\n'.join(lines)
 
-    ONES = sum(1 << (8 * l) for l in range(N3)); HI = 128 * ONES
-    ONESP = sum(1 << (8 * l) for l in range(M1))
-    WPAT = sum((l // N2 + 1) << (8 * l) for l in range(N3)); REP = sum(1 << (B2 * i) for i in range(NS))
-    argn = [f'{p}{cc}' for cc in range(2, k + 1) for p in ('T', 'R')] + ['PC0', 'PT1']
-    outer_lets = '  letN ((blk T2 R2 ||| blk T3 R3) + 1) fun BL3 =>\n' + ''.join(
-        f'  letN (blk T{cc} R{cc} + 1) fun M{cc} =>\n' for cc in range(4, k + 1))
-    inner_lets = ''.join(
-        f'    letN (winT M{cc} ({B3} * (h % {NS ** (cc - 3)})) {B3} + 1) fun W{cc} =>\n' for cc in range(4, k + 1))
-    blmask = ' ||| '.join(['BL3'] + [f'W{cc}' for cc in range(4, k + 1)])
-    hp1 = f'(h % {NS ** (k - 4)})'
+    argn = [f'{p}{cc}' for cc in range(2, k + 1) for p in ('T', 'R')] + ['PR0', 'PT1']
+    bl_terms = [f'(blk T2 R2 ||| blk T3 R3) * rep3{S}'] + \
+        [f'blk T{cc} R{cc} * rep{cc}{S}' for cc in range(4, k)] + [f'blk T{k} R{k}']
+    blmask = ' ||| '.join(bl_terms)
     check_args = '\n    '.join(
         f'(sfwd{S} {cc} (wsh{S} (c.drop {L - cc}))) (srev{S} {cc} (wsh{S} (c.drop {L - cc}).reverse))' for cc in range(2, k + 1))
+    # size of the table of `cc` centres (two-centre tables carry copies up to N3 fields)
+    def tsize(cc):
+        return max(NS ** cc, N3)
+    # per-table bounds and the universal statements (needed for the replication by multiplication)
+    lt_thms = []
+    def lt_universal(name, tbl, cc):
+        ws_c = sorted(w for (c2, w) in tbl if c2 == cc)
+        for w in ws_c:
+            lt_thms.append(f'theorem {name}{S}_lt_{cc}_{w} : {name}{S} {cc} {w} < 2 ^ {8 * tsize(cc)} := by decide +kernel')
+        cases = ''.join(f'''  by_cases hw{w} : w = {w}
+  · subst hw{w}; exact {name}{S}_lt_{cc}_{w}
+''' for w in ws_c)
+        hyps = ', '.join(f'hw{w}' for w in ws_c)
+        return f'''theorem {name}{S}_lt{cc} (w : Nat) : {name}{S} {cc} w < 2 ^ {8 * tsize(cc)} := by
+{cases}  have h0 : {name}{S} {cc} w = 0 := by
+    unfold {name}{S}
+    simp [{hyps}]
+  rw [h0]; exact Nat.two_pow_pos _'''
+    lt_univ = [lt_universal(name, tbl, cc) for name, tbl in (('sfwd', sfwd), ('srev', srev)) for cc in range(2, k)]
     w2 = sorted({w for (cc, w) in sfwd if cc == 2} | {w for (cc, w) in srev if cc == 2})
     # per-table replication theorems for the two-centre tables, and the universal statement
     rep_thms = []
@@ -247,6 +297,9 @@ def main():
         # layout consistency, block by block: both {N3}-field windows are forced to numerals first,
         # so the inner loop divides small numbers only
         pot_thms.append(f'theorem potT{S}_cons_{i} : consT{S} (potT{S} {i}) (potC{S} {i}) = true := by decide +kernel')
+        pot_thms.append(f'theorem potT{S}_lt_{i} : potT{S} {i} < 256 ^ {M1} := by decide +kernel')
+        pot_thms.append(f'theorem potR{S}_lt_{i} : potR{S} {i} < 256 ^ {F} := by decide +kernel')
+        pot_thms.append(f'theorem potR{S}_cons_{i} : consR{S} (potR{S} {i}) (potC{S} {i}) = true := by decide +kernel')
     def by_shape(name, body_i, default):
         cases = ''.join(f'''  by_cases hi{i} : i = {i}
   · subst hi{i}; {body_i(i)}
@@ -265,6 +318,16 @@ def main():
     unfold potC{S}
     simp [{', '.join(f'hi{i}' for i in range(len(shapes)))}]
   rw [h0, h0c]; simp [digit]''')}'''
+    potT_lt = f'''theorem potT{S}_lt (i : Nat) : potT{S} i < 256 ^ {M1} := by
+{by_shape(f'potT{S}', lambda i: f'exact potT{S}_lt_{i}', f'rw [h0]; exact Nat.pow_pos (by decide)')}'''
+    potR_lt = f'''theorem potR{S}_lt (i : Nat) : potR{S} i < 256 ^ {F} := by
+{by_shape(f'potR{S}', lambda i: f'exact potR{S}_lt_{i}', f'rw [h0]; exact Nat.pow_pos (by decide)')}'''
+    potR_eq = f'''theorem potR{S}_digit (i hb l : Nat) (hh : hb < {M1 // N2}) (hl : l < {N3}) :
+    digit (potR{S} i) ({N3} * hb + l) = digit (potC{S} i) ({N2} * hb + l % {N2}) := by
+{by_shape(f'potR{S}', lambda i: f'exact consR{S}_spec _ _ potR{S}_cons_{i} hb l hh hl', f'''have h0c : potC{S} i = 0 := by
+    unfold potC{S}
+    simp [{', '.join(f'hi{i}' for i in range(len(shapes)))}]
+  rw [h0, h0c]; simp [digit]''')}'''
     # ---- spec lemma text
     bits = [f'Nat.testBit (blk T2 R2) (8 * {POS} (code % {N2}) + 7)'] + \
         [f'Nat.testBit (blk T{cc} R{cc}) (8 * {POS} (code % {NS ** cc}) + 7)' for cc in range(3, k + 1)]
@@ -273,51 +336,76 @@ def main():
         bool_or = f'({bool_or} || {bb})'
     conclusion = (f'{bool_or} = true ∨\n      {P} + digit PT1 ({N3} * (code / {N3} % {NS ** (k - 4)}) + {POS} (code % {N3})) ≤ '
                   f'{Q} * (code % {NS} + 1) + digit PC0 (code / {NS})')
-    n_outer = 1 + (k - 3)                                  # BL3 and M4..Mk
-    ew_haves = ''.join(f'''  have ew{cc} : Nat.testBit (winT (blk T{cc} R{cc}) ({B3} * (code / {N3} % {NS ** (cc - 3)})) {B3}) (8 * {POS} (code % {N3}) + 7)
+    # bits of the replicated window tables
+    ew_haves = ''.join(f'''  have ew{cc} : Nat.testBit (blk T{cc} R{cc} * rep{cc}{S}) (8 * f + 7)
       = Nat.testBit (blk T{cc} R{cc}) (8 * {POS} (code % {NS ** cc}) + 7) := by
-    unfold winT; rw [testBit_win _ _ _ _ (by omega)]; congr 1
+    rw [rep{cc}{S}_eq, testBit_mul_rep _ _ _ _ h{cc} (by omega)]
+    congr 2
     have ps := {POS}_split code {NS ** (cc - 3)} (by decide)
     rw [show {N3} * {NS ** (cc - 3)} = {NS ** cc} by rfl] at ps
     rw [ps]; omega
-''' for cc in range(4, k + 1))
-    ew_names = ''.join(f', ew{cc}' for cc in range(4, k + 1))
-    spec = f'''/-- One transition of the loop, for abstract tables. -/
-theorem checkT{S}_spec ({' '.join(argn)} : Nat) (hc : checkT{S} {' '.join(argn)} = true)
-    (code : Nat) (hcode : code < {NS ** k})
+''' for cc in range(4, k))
+    ew_names = ''.join(f', ew{cc}' for cc in range(4, k))
+    ek = f'''  have ew{k} : Nat.testBit (blk T{k} R{k}) (8 * f + 7) = Nat.testBit (blk T{k} R{k}) (8 * {POS} (code % {NS ** k}) + 7) := by
+    congr 2
+    have ps := {POS}_split code {NS ** (k - 3)} (by decide)
+    rw [show {N3} * {NS ** (k - 3)} = {NS ** k} by rfl] at ps
+    rw [ps]; omega
+'''
+    hlt_hyps = f'    (h3 : blk T2 R2 ||| blk T3 R3 < 2 ^ {8 * N3})' + ''.join(
+        f' (h{cc} : blk T{cc} R{cc} < 2 ^ {8 * NS ** cc})' for cc in range(4, k))
+    spec = f'''/-- The packed check implies the transition inequality for every code (abstract tables). -/
+theorem checkT{S}_spec ({' '.join(argn)} PC0 : Nat) (hc : checkT{S} {' '.join(argn)} = true)
+    (code : Nat) (hcode : code < {F})
     (hb0 : ∀ y, y < {M1} → digit PC0 y ≤ {R}) (hb1 : ∀ y, y < {M1} → digit PT1 y ≤ {R})
+    (hT : PT1 < 256 ^ {M1}) (hRl : PR0 < 256 ^ {F})
+    (hR : ∀ hb l, hb < {M1 // N2} → l < {N3} → digit PR0 ({N3} * hb + l) = digit PC0 ({N2} * hb + l % {N2}))
     (h2f : ∀ l, l < {N3} → Nat.testBit T2 (8 * l + 7) = Nat.testBit T2 (8 * ({N2} * (l / {N2}) + l % {NS}) + 7))
-    (h2r : ∀ l, l < {N3} → Nat.testBit R2 (8 * l + 7) = Nat.testBit R2 (8 * ({N2} * (l / {N2}) + l % {NS}) + 7)) :
+    (h2r : ∀ l, l < {N3} → Nat.testBit R2 (8 * l + 7) = Nat.testBit R2 (8 * ({N2} * (l / {N2}) + l % {NS}) + 7))
+{hlt_hyps} :
     {conclusion} := by
   unfold checkT{S} at hc
-  rw [{', '.join(['letN_succ'] * n_outer)}] at hc
-  have h1 := allBelowR_spec _ _ hc (code / {N3}) (by omega)
-{chr(10).join(['  rw [letN_succ] at h1; try dsimp only at h1'] * (k - 3 + 2))}
-  have hl : {POS} (code % {N3}) < {N3} := {POS}_lt code
+  have hp : {POS} (code % {N3}) < {N3} := {POS}_lt code
+  have hf : {N3} * (code / {N3}) + {POS} (code % {N3}) < {F} := by omega
   -- A and B as packs of their fields
-  have hA : winT PT1 ({B3} * (code / {N3} % {NS ** (k - 4)})) {B3} + {P} * ones{S}
-      = pack (tab (fun l => {P} + digit PT1 ({N3} * (code / {N3} % {NS ** (k - 4)}) + l)) {N3}) := by
-    unfold winT
-    rw [show {B3} * (code / {N3} % {NS ** (k - 4)}) = 8 * ({N3} * (code / {N3} % {NS ** (k - 4)})) by omega,
-      show ({B3} : Nat) = 8 * {N3} by rfl, winT_pack, ones{S}_eq, pack_tab_mul, pack_tab_add]
-    all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
-  have hB : {Q} * wpat{S} + winT PC0 ({B2} * (code / {N3})) {B2} * rep{S}
-      = pack (tab (fun l => {Q} * (l / {N2} + 1) + digit PC0 ({N2} * (code / {N3}) + l % {N2})) {N3}) := by
-    unfold winT
-    rw [show {B2} * (code / {N3}) = 8 * ({N2} * (code / {N3})) by omega, show ({B2} : Nat) = 8 * {N2} by rfl,
-      winT_pack, rep{S}_eq, ← {REPL}, wpat{S}_eq, pack_tab_mul, pack_tab_add]
-    all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
-  have key := swarOK_spec {N3} (fun l => {P} + digit PT1 ({N3} * (code / {N3} % {NS ** (k - 4)}) + l))
-    (fun l => {Q} * (l / {N2} + 1) + digit PC0 ({N2} * (code / {N3}) + l % {N2})) _ _ _ _ hA hB hi{S}_eq
-    (fun l hl' => by dsimp only; have := hb1 ({N3} * (code / {N3} % {NS ** (k - 4)}) + l) (by omega); omega)
-    (fun l hl' => by dsimp only; have := hb0 ({N2} * (code / {N3}) + l % {N2}) (by omega); omega) h1 _ hl
+  have hPT : PT1 * repK {M1} {NS} = pack (tab (fun l => digit PT1 (l % {M1})) {F}) := by
+    have h := pack_tab_rep (digit PT1) {M1} {NS}
+    rw [pack_tab_digit PT1 {M1} hT] at h
+    exact h.symm
+  have hA : PT1 * repA{S} + {P} * onesF{S} = pack (tab (fun l => {P} + digit PT1 (l % {M1})) {F}) := by
+    rw [repA{S}_eq, hPT, onesF{S}_eq, pack_tab_mul, pack_tab_add]
+    apply congrArg; apply tab_congr; intro j _; omega
+  have hB : {Q} * wpatF{S} + PR0 = pack (tab (fun l => {Q} * (l % {N3} / {N2} + 1) + digit PR0 l) {F}) := by
+    have hPR : PR0 = pack (tab (digit PR0) {F}) := (pack_tab_digit PR0 {F} hRl).symm
+    conv_lhs => rw [hPR]
+    rw [wpatF{S}_eq, pack_tab_mul, pack_tab_add]
+  have key := swarOK_spec {F} (fun l => {P} + digit PT1 (l % {M1})) (fun l => {Q} * (l % {N3} / {N2} + 1) + digit PR0 l)
+    _ _ _ _ hA hB hiF{S}_eq
+    (fun l hl' => by dsimp only; have := hb1 (l % {M1}) (Nat.mod_lt _ (by decide)); omega)
+    (fun l hl' => by
+      dsimp only
+      have e := hR (l / {N3}) (l % {N3}) (by omega) (Nat.mod_lt _ (by decide))
+      rw [show {N3} * (l / {N3}) + l % {N3} = l by omega] at e
+      rw [e]
+      have := hb0 ({N2} * (l / {N3}) + l % {N3} % {N2}) (by omega)
+      have : l % {N3} / {N2} < {NS} := by omega
+      omega)
+    hc _ hf
   simp only [Nat.testBit_or] at key
-  have eb2 : Nat.testBit (blk T2 R2) (8 * {POS} (code % {N3}) + 7) = Nat.testBit (blk T2 R2) (8 * {POS} (code % {N2}) + 7) := by
-    rw [testBit_blk, testBit_blk, h2f _ hl, h2r _ hl, {POS}_div{N2}, {POS}_mod{NS}, {POS}_mod{N2}']
-{ew_haves}  rw [eb2{ew_names}] at key
-  have e1 : {POS} (code % {N3}) / {N2} = code % {NS} := {POS}_div{N2} code
-  have e2 : {N2} * (code / {N3}) + {POS} (code % {N3}) % {N2} = code / {NS} := by rw [{POS}_mod{N2}]; omega
-  rw [e1, e2] at key
+  generalize hfdef : {N3} * (code / {N3}) + {POS} (code % {N3}) = f at key hf
+  have e23 : Nat.testBit ((blk T2 R2 ||| blk T3 R3) * rep3{S}) (8 * f + 7)
+      = (Nat.testBit (blk T2 R2) (8 * {POS} (code % {N2}) + 7) || Nat.testBit (blk T3 R3) (8 * {POS} (code % {N3}) + 7)) := by
+    rw [rep3{S}_eq, testBit_mul_rep _ _ _ _ h3 (by omega), show f % {N3} = {POS} (code % {N3}) by omega, Nat.testBit_or]
+    congr 1
+    rw [testBit_blk, testBit_blk, h2f _ hp, h2r _ hp, {POS}_div{N2}, {POS}_mod{NS}, {POS}_mod{N2}']
+{ew_haves}{ek}  rw [e23{ew_names}, ew{k}] at key
+  have e1 : f % {M1} = {N3} * (code / {N3} % {NS ** (k - 4)}) + {POS} (code % {N3}) := by omega
+  have e2 : f % {N3} / {N2} + 1 = code % {NS} + 1 := by
+    rw [show f % {N3} = {POS} (code % {N3}) by omega, {POS}_div{N2}]
+  have e3 : digit PR0 f = digit PC0 (code / {NS}) := by
+    rw [← hfdef, hR (code / {N3}) _ (by omega) hp, {POS}_mod{N2}]
+    congr 1; omega
+  rw [e1, e2, e3] at key
   exact key
 '''
     pos_block = '' if NS == 6 else f'''
@@ -399,6 +487,10 @@ set_option maxRecDepth 100000
 /-- The same potentials stored at `pos y`. -/
 {chain1(f'potT{S}', 'i', potT)}
 
+/-- The same potentials with every {N2}-field block repeated {NS} times (field `{N3} h + l` holds
+field `{N2} h + l % {N2}` of `potC`). -/
+{chain1(f'potR{S}', 'i', potR)}
+
 def {CODE} : List Nat → Nat → Nat
   | [], acc => acc
   | s :: l, acc => {CODE} l (acc * {NS} + (s - 1))
@@ -417,12 +509,36 @@ theorem pot{S}_le (h t : List Nat) : pot{S} h t ≤ {R} := clip_le _ _
 
 def ones{S} : Nat := {ONES}
 def hi{S} : Nat := {HI}
+def wpat{S} : Nat := {WPAT}
 def onesP{S} : Nat := {lit(ONESP)}
 def hiP{S} : Nat := {lit(128 * ONESP)}
-def wpat{S} : Nat := {WPAT}
-def rep{S} : Nat := {REP}
+def onesF{S} : Nat := {lit(ONESF)}
+def hiF{S} : Nat := {lit(HIF)}
+def wpatF{S} : Nat := {lit(WPATF)}
+def repB{S} : Nat := {lit(REPB)}
+def repA{S} : Nat := {lit(REPA)}
+{chr(10).join(f'def rep{cc}{S} : Nat := {lit(REPC[cc])}' for cc in range(3, k))}
 theorem ones{S}_eq : ones{S} = pack (tab (fun _ => 1) {N3}) := by decide +kernel
 theorem hi{S}_eq : hi{S} = pack (tab (fun _ => 128) {N3}) := by decide +kernel
+theorem wpat{S}_eq : wpat{S} = pack (tab (fun l => l / {N2} + 1) {N3}) := by decide +kernel
+theorem onesF{S}_eq : onesF{S} = pack (tab (fun _ => 1) {F}) := by
+  have h := pack_tab_rep (fun _ => 1) {N3} {F // N3}
+  rw [← ones{S}_eq] at h
+  have e : onesF{S} = ones{S} * repK {N3} {F // N3} := by decide +kernel
+  rw [e]; exact h.symm
+theorem hiF{S}_eq : hiF{S} = pack (tab (fun _ => 128) {F}) := by
+  have h := pack_tab_rep (fun _ => 128) {N3} {F // N3}
+  rw [← hi{S}_eq] at h
+  have e : hiF{S} = hi{S} * repK {N3} {F // N3} := by decide +kernel
+  rw [e]; exact h.symm
+theorem wpatF{S}_eq : wpatF{S} = pack (tab (fun l => l % {N3} / {N2} + 1) {F}) := by
+  have h := pack_tab_rep (fun l => l / {N2} + 1) {N3} {F // N3}
+  rw [← wpat{S}_eq] at h
+  have e : wpatF{S} = wpat{S} * repK {N3} {F // N3} := by decide +kernel
+  rw [e]; exact h.symm
+theorem repB{S}_eq : repB{S} = repK {N2} {NS} := by decide +kernel
+theorem repA{S}_eq : repA{S} = repK {M1} {NS} := by decide +kernel
+{chr(10).join(f'theorem rep{cc}{S}_eq : rep{cc}{S} = repK {NS ** cc} {NS ** (k - cc)} := by decide +kernel' for cc in range(3, k))}
 theorem onesP{S}_eq : onesP{S} = pack (tab (fun _ => 1) {M1}) := by
   have h := pack_tab_rep (fun _ => 1) {N3} {M1 // N3}
   rw [← ones{S}_eq] at h
@@ -433,8 +549,6 @@ theorem hiP{S}_eq : hiP{S} = pack (tab (fun _ => 128) {M1}) := by
   rw [← hi{S}_eq] at h
   have e : hiP{S} = hi{S} * repK {N3} {M1 // N3} := by decide +kernel
   rw [e]; exact h.symm
-theorem wpat{S}_eq : wpat{S} = pack (tab (fun l => l / {N2} + 1) {N3}) := by decide +kernel
-theorem rep{S}_eq : rep{S} = repK {N2} {NS} := by decide +kernel
 
 /-- `T` holds the fields of `C` at the positions `{POS} y`, checked block by block on numerals. -/
 def consT{S} (T C : Nat) : Bool :=
@@ -457,19 +571,37 @@ theorem consT{S}_spec (T C : Nat) (h : consT{S} T C = true) (y : Nat) (hy : y < 
   unfold {POS}
   omega
 
-/-- All {NS ** k} symbol codes: outer loop over the {k - 3} oldest symbols, one packed
-comparison of the {N3} fields of the three newest per step. -/
+/-- `Rt` holds every {N2}-field block of `C` {NS} times in a row (`potR` against `potC`). -/
+def consR{S} (Rt C : Nat) : Bool :=
+  allBelowR {M1 // N2} fun h => Nat.beq (winT Rt ({B3} * h) {B3}) (winT C ({B2} * h) {B2} * repB{S})
+
+theorem consR{S}_spec (Rt C : Nat) (h : consR{S} Rt C = true) (hb l : Nat) (hh : hb < {M1 // N2}) (hl : l < {N3}) :
+    digit Rt ({N3} * hb + l) = digit C ({N2} * hb + l % {N2}) := by
+  unfold consR{S} at h
+  have h1 := Nat.eq_of_beq_eq_true (allBelowR_spec _ _ h hb hh)
+  have h2 := congrArg (fun X => digit X l) h1
+  simp only at h2
+  rw [show {B3} * hb = 8 * ({N3} * hb) by omega, show ({B3} : Nat) = 8 * {N3} by rfl, digit_winT _ _ _ _ hl] at h2
+  rw [h2]
+  unfold winT
+  rw [show {B2} * hb = 8 * ({N2} * hb) by omega, show ({B2} : Nat) = 8 * {N2} by rfl, winT_pack, repB{S}_eq,
+    ← pack_tab_rep, digit_pack _ (tab_bounded _ _ _ (fun _ _ => digit_lt _ _)) l, tab_getD _ _ l (by omega)]
+
+/-- All {NS ** k} symbol codes at once: the next-state table repeated {NS} times, the
+block-replicated current-state table, and the window tables replicated to {F} fields,
+compared field-wise in one step. -/
 def checkT{S} ({' '.join(argn)} : Nat) : Bool :=
-{outer_lets}  allBelowR {NS ** (k - 3)} fun h =>
-{inner_lets}    letN (winT PT1 ({B3} * {hp1}) {B3} + {P} * ones{S} + 1) fun A =>
-    letN ({Q} * wpat{S} + winT PC0 ({B2} * h) {B2} * rep{S} + 1) fun B =>
-    swarOK A B ({blmask}) hi{S}
+  swarOK (PT1 * repA{S} + {P} * onesF{S}) ({Q} * wpatF{S} + PR0) ({blmask}) hiF{S}
 
 {chr(10).join(rep_thms)}
 
 {rep_universal('sfwd', sfwd)}
 
 {rep_universal('srev', srev)}
+
+{chr(10).join(lt_thms)}
+
+{chr(10).join(lt_univ)}
 
 {chr(10).join(pot_thms)}
 
@@ -479,11 +611,17 @@ def checkT{S} ({' '.join(argn)} : Nat) : Bool :=
 
 {potT_eq}
 
+{potT_lt}
+
+{potR_lt}
+
+{potR_eq}
+
 /-- Step test for one window of {L + 1} directions. -/
 def check{S} (c : List Nat) : Bool :=
   !inducedPattern c || checkT{S}
     {check_args}
-    (potC{S} (sh{S} (c.take {L}))) (potT{S} (sh{S} (c.drop 1)))
+    (potR{S} (sh{S} (c.take {L}))) (potT{S} (sh{S} (c.drop 1)))
 
 def shapes{S} : List (List Nat) := {lst(lst(c) for c in shapes)}
 
@@ -661,8 +799,11 @@ theorem step{S}_raw (x : List Nat) (hx : x.length = {L + 1}) ({tvars} s : Nat)
   rw [{', '.join([f'wsh{S}_canon_drop', f'wsh{S}_canon_drop_rev'] * (k - 1) + [f'sh{S}_canon_take', f'sh{S}_canon_drop'])}] at hc
   {digit_binds}
   have hcode : code < {NS ** k} := by omega
-  have h := checkT{S}_spec {' '.join(['_'] * (2 * (k - 1) + 2))} hc code hcode
-    (fun y hy => potC{S}_digit_le _ y hy) (fun y hy => potT{S}_digit_le _ y hy) (sfwd{S}_rep _) (srev{S}_rep _)
+  have h := checkT{S}_spec {' '.join(['_'] * (2 * (k - 1) + 2))} (potC{S} (sh{S} (x.take {L}))) hc code hcode
+    (fun y hy => potC{S}_digit_le _ y hy) (fun y hy => potT{S}_digit_le _ y hy) (potT{S}_lt _) (potR{S}_lt _)
+    (fun hb l hh hl => potR{S}_digit _ hb l hh hl) (sfwd{S}_rep _) (srev{S}_rep _)
+    (Nat.or_lt_two_pow (Nat.or_lt_two_pow (sfwd{S}_lt2 _) (srev{S}_lt2 _)) (Nat.or_lt_two_pow (sfwd{S}_lt3 _) (srev{S}_lt3 _)))
+    {' '.join(f'(Nat.or_lt_two_pow (sfwd{S}_lt{cc} _) (srev{S}_lt{cc} _))' for cc in range(4, k))}
   have e1 : {N3} * (code / {N3} % {NS ** (k - 4)}) + {POS} (code % {N3}) = {POS} (code % {M1}) := by
     have ps := {POS}_split code {NS ** (k - 4)} (by decide)
     rw [show {N3} * {NS ** (k - 4)} = {M1} by rfl] at ps

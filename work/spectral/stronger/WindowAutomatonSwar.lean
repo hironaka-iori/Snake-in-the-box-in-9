@@ -354,6 +354,17 @@ theorem digit_winT (T a n m : Nat) (hm : m < n) : digit (winT T (8 * a) (8 * n))
   unfold winT
   rw [winT_pack, digit_pack _ (tab_bounded _ _ _ (fun _ _ => digit_lt _ _)), tab_getD _ _ m hm]
 
+/-- Bit `8 f + 7` of a table of `n` fields replicated `m` times by multiplication with `repK`. -/
+theorem testBit_mul_rep (X n m f : Nat) (hX : X < 2 ^ (8 * n)) (hf : f < n * m) :
+    Nat.testBit (X * repK n m) (8 * f + 7) = Nat.testBit X (8 * (f % n) + 7) := by
+  have hX' : X < 256 ^ n := by
+    have e8 : (2 : Nat) ^ (8 * n) = 256 ^ n := by simp [Nat.pow_mul]
+    rw [← e8]; exact hX
+  have h := pack_tab_rep (digit X) n m
+  rw [pack_tab_digit X n hX'] at h
+  rw [← h, testBit_digit, digit_pack _ (tab_bounded _ _ _ (fun _ _ => digit_lt _ _)), tab_getD _ _ f hf,
+    ← testBit_digit]
+
 /-- A numeral given as little-endian 8192-bit chunks (large table literals are written this way
 because the parser's decimal conversion is quadratic in the number of digits). -/
 def ofChunks (l : List Nat) : Nat := l.foldr (fun c acc => acc <<< 8192 + c) 0
