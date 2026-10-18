@@ -339,18 +339,18 @@ def main():
     # bits of the replicated window tables
     ew_haves = ''.join(f'''  have ew{cc} : Nat.testBit (blk T{cc} R{cc} * rep{cc}{S}) (8 * f + 7)
       = Nat.testBit (blk T{cc} R{cc}) (8 * {POS} (code % {NS ** cc}) + 7) := by
-    rw [rep{cc}{S}_eq, testBit_mul_rep _ _ _ _ h{cc} (by omega)]
-    congr 2
+    rw [rep{cc}{S}_eq, testBit_mul_rep _ {NS ** cc} {NS ** (k - cc)} _ h{cc} (by omega)]
     have ps := {POS}_split code {NS ** (cc - 3)} (by decide)
     rw [show {N3} * {NS ** (cc - 3)} = {NS ** cc} by rfl] at ps
-    rw [ps]; omega
+    have hidx : 8 * (f % {NS ** cc}) + 7 = 8 * {POS} (code % {NS ** cc}) + 7 := by rw [ps]; omega
+    rw [hidx]
 ''' for cc in range(4, k))
     ew_names = ''.join(f', ew{cc}' for cc in range(4, k))
     ek = f'''  have ew{k} : Nat.testBit (blk T{k} R{k}) (8 * f + 7) = Nat.testBit (blk T{k} R{k}) (8 * {POS} (code % {NS ** k}) + 7) := by
-    congr 2
     have ps := {POS}_split code {NS ** (k - 3)} (by decide)
     rw [show {N3} * {NS ** (k - 3)} = {NS ** k} by rfl] at ps
-    rw [ps]; omega
+    have hidx : 8 * f + 7 = 8 * {POS} (code % {NS ** k}) + 7 := by rw [ps]; omega
+    rw [hidx]
 '''
     hlt_hyps = f'    (h3 : blk T2 R2 ||| blk T3 R3 < 2 ^ {8 * N3})' + ''.join(
         f' (h{cc} : blk T{cc} R{cc} < 2 ^ {8 * NS ** cc})' for cc in range(4, k))
@@ -374,11 +374,12 @@ theorem checkT{S}_spec ({' '.join(argn)} PC0 : Nat) (hc : checkT{S} {' '.join(ar
     exact h.symm
   have hA : PT1 * repA{S} + {P} * onesF{S} = pack (tab (fun l => {P} + digit PT1 (l % {M1})) {F}) := by
     rw [repA{S}_eq, hPT, onesF{S}_eq, pack_tab_mul, pack_tab_add]
-    apply congrArg; apply tab_congr; intro j _; omega
+    all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
   have hB : {Q} * wpatF{S} + PR0 = pack (tab (fun l => {Q} * (l % {N3} / {N2} + 1) + digit PR0 l) {F}) := by
     have hPR : PR0 = pack (tab (digit PR0) {F}) := (pack_tab_digit PR0 {F} hRl).symm
-    conv_lhs => rw [hPR]
+    conv => lhs; rw [hPR]
     rw [wpatF{S}_eq, pack_tab_mul, pack_tab_add]
+    all_goals (apply congrArg; apply tab_congr; intro j _; first | rfl | omega)
   have key := swarOK_spec {F} (fun l => {P} + digit PT1 (l % {M1})) (fun l => {Q} * (l % {N3} / {N2} + 1) + digit PR0 l)
     _ _ _ _ hA hB hiF{S}_eq
     (fun l hl' => by dsimp only; have := hb1 (l % {M1}) (Nat.mod_lt _ (by decide)); omega)
@@ -395,16 +396,19 @@ theorem checkT{S}_spec ({' '.join(argn)} PC0 : Nat) (hc : checkT{S} {' '.join(ar
   generalize hfdef : {N3} * (code / {N3}) + {POS} (code % {N3}) = f at key hf
   have e23 : Nat.testBit ((blk T2 R2 ||| blk T3 R3) * rep3{S}) (8 * f + 7)
       = (Nat.testBit (blk T2 R2) (8 * {POS} (code % {N2}) + 7) || Nat.testBit (blk T3 R3) (8 * {POS} (code % {N3}) + 7)) := by
-    rw [rep3{S}_eq, testBit_mul_rep _ _ _ _ h3 (by omega), show f % {N3} = {POS} (code % {N3}) by omega, Nat.testBit_or]
-    congr 1
-    rw [testBit_blk, testBit_blk, h2f _ hp, h2r _ hp, {POS}_div{N2}, {POS}_mod{NS}, {POS}_mod{N2}']
+    rw [rep3{S}_eq, testBit_mul_rep _ {N3} {NS ** (k - 3)} _ h3 (by omega), show f % {N3} = {POS} (code % {N3}) by omega, Nat.testBit_or]
+    have e2' : Nat.testBit (blk T2 R2) (8 * {POS} (code % {N3}) + 7) = Nat.testBit (blk T2 R2) (8 * {POS} (code % {N2}) + 7) := by
+      rw [testBit_blk, testBit_blk, h2f _ hp, h2r _ hp, {POS}_div{N2}, {POS}_mod{NS}, {POS}_mod{N2}']
+    rw [e2']
 {ew_haves}{ek}  rw [e23{ew_names}, ew{k}] at key
   have e1 : f % {M1} = {N3} * (code / {N3} % {NS ** (k - 4)}) + {POS} (code % {N3}) := by omega
   have e2 : f % {N3} / {N2} + 1 = code % {NS} + 1 := by
     rw [show f % {N3} = {POS} (code % {N3}) by omega, {POS}_div{N2}]
   have e3 : digit PR0 f = digit PC0 (code / {NS}) := by
-    rw [← hfdef, hR (code / {N3}) _ (by omega) hp, {POS}_mod{N2}]
-    congr 1; omega
+    have hR' := hR (code / {N3}) ({POS} (code % {N3})) (by omega) hp
+    rw [hfdef, {POS}_mod{N2}] at hR'
+    have hi : {N2} * (code / {N3}) + code / {NS} % {N2} = code / {NS} := by omega
+    rw [hR', hi]
   rw [e1, e2, e3] at key
   exact key
 '''
