@@ -66,10 +66,36 @@ try:
         assert name not in visiting,'Import cycle: '+name
         visiting.add(name)
         if name not in mapping:raise RuntimeError('Unresolved custom import: '+name)
-        raw=read_blob(mapping[name]);src=build/(name.replace('.','/')+'.lean')
+        raw=read_blob(mapping[name]);upstream_sha=hashlib.sha256(raw).hexdigest()
+        if name=='Snake9':
+            # Preserve every definition and theorem statement. Kernel reduction
+            # avoids elaborating the enormous default `decide` proof term.
+            original=raw.decode('utf-8')
+            assert original==(ROOT/'work/final_lean/Snake9.lean').read_text(encoding='utf-8')
+            assert original.count(':= by decide')==2
+            # Split the outer finite quantifier: each kernel check has only
+            # 192 pairs, instead of a single 192-by-192 reduction.
+            for label,predicate in [
+                ('distinct','witnessVertex i = witnessVertex j → i = j'),
+                ('induced','i.val < j.val → (Adj (witnessVertex i) (witnessVertex j) ↔ i.val + 1 = j.val)')]:
+                rows=[]
+                for i in range(192):
+                    prop=predicate.replace('witnessVertex i',f'witnessVertex ({i} : Fin 192)').replace('i.val',f'({i} : Fin 192).val').replace('i = j',f'({i} : Fin 192) = j')
+                    rows.append(f'theorem witness_{label}_row_{i} : ∀ j : Fin 192, {prop} := by decide +kernel\n')
+                term='(fun i => Fin.elim0 i)'
+                for i in reversed(range(192)):
+                    term=f'(Fin.cases witness_{label}_row_{i} {term})'
+                pattern=r'theorem witness_'+label+r'\s*:[\s\S]*?:= by decide'
+                match=re.search(pattern,original);assert match
+                replacement='\n'.join(rows)+'\n'+match.group(0).replace('by decide',f'by\n  exact {term}')
+                original=original[:match.start()]+replacement+original[match.end():]
+            original=original.replace('-- BEGIN WITNESS','-- BEGIN WITNESS\nset_option Elab.async false')
+            raw=original.encode('utf-8')
+        src=build/(name.replace('.','/')+'.lean')
         src.parent.mkdir(parents=True,exist_ok=True)
         if not src.exists() or src.read_bytes()!=raw:src.write_bytes(raw)
-        state['sources'][name]=dict(git_path=mapping[name],sha256=sha(src))
+        state['sources'][name]=dict(git_path=mapping[name],sha256=sha(src),upstream_sha256=upstream_sha,
+            adaptation='two witness proofs: 192 kernel-checked rows and Fin.cases each' if name=='Snake9' else None)
         imports=[]
         for line in raw.decode('utf-8').splitlines():
             if line.startswith('import '):
@@ -80,7 +106,6 @@ try:
     try:visit('UpperBound241')
     finally:
         batch.stdin.close();batch.stdout.close();batch.wait()
-    assert (build/'Snake9.lean').read_text(encoding='utf-8')==(ROOT/'work/final_lean/Snake9.lean').read_text(encoding='utf-8'),'Snake definition differs'
     state.update(module_order=order,dependencies=deps);save()
     print('Source closure:',len(order),'modules',flush=True)
     env=os.environ.copy();env['LEAN_PATH']=str(build)

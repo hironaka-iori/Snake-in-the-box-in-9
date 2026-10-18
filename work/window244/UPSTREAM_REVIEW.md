@@ -31,6 +31,15 @@ python work/window244/review_upstream241.py --lean-bin /path/to/lean-4.19.0/bin 
 重新运行同一命令可从通过且哈希仍匹配的模块恢复，有文件锁防止重复启动。
 每个 Lean 进程保持原来的 1,800 MiB 外部内存预算。
 
+首轮在原始 `Snake9` 的有限示例检查处触及该预算，尚未进入新增 241
+证书。首轮清单已保存为 `outputs/window244/upstream241-first-attempt.json`。
+直接改为 `by decide +kernel` 仍超限。恢复版本把两个示例定理分别拆成
+192 个行检查，每行用 `by decide +kernel` 检查 192 对顶点，以 `Fin.cases`
+合并，并关闭此部分的异步 elaboration。定义、最终定理陈述和上游其余源码
+均未改变。
+清单分别保存原始 Git 源码和实际核验源码的 SHA256，并注明这一适配。
+这不使用 `native_decide`，最终仍必须检查传递公理。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
