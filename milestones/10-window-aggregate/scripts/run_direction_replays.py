@@ -32,7 +32,7 @@ def gen(a):
         for bits in (13, 14):
             cmd = [sys.executable, os.path.join(HERE, 'gen_lean_lrat.py'), '--work', a.work,
                    '--data', DATA, '--seg', str(a.seg), '--cp', str(a.cp), '--group', str(a.group),
-                   '--wbits', str(bits), name]
+                   '--wbits', str(bits), '--noncomputable-data', name]
             r = subprocess.run(cmd, capture_output=True, text=True)
             if r.returncode == 0:
                 print(json.dumps({'case': name, 'module': mod, 'wbits': bits, 'hints': info['hints']}), flush=True)
