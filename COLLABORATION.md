@@ -18,6 +18,13 @@ has a known bank prefix and all defects touching its five appended vertices.
 Four solver-guided interior repairs ended unresolved. The next constructive
 direction relaxes connectivity, allowing a path and cyclic components, then
 excludes those cycles using the existing checked cycle-exclusion lemma.
+This is now implemented in [milestone 14](milestones/14-component-construction/README.md).
+A concrete 197-vertex seed consists of one 14-edge path and seven 26-cycles;
+its vertex count, degrees, partition, and cycle-cut validity passed Lean.
+Sequential cycle cuts produced a 40-edge path and six 26-cycles on the same
+number of vertices. The next round was unresolved. Continue from the saved
+seven-component state with both accumulated cuts retained. It remains a
+disconnected intermediate configuration, not an improved snake witness.
 
 Synchronization incorporated the completed KEEP=112 aggregate receipt covering
 all 262 oriented bank entries, the bounded KEEP=96 survey, and conditional

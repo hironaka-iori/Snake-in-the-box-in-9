@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Research checkpoint: 18 October 2026. The current construction task targets 196 edges. The [initial milestone](milestones/12-construction-196/README.md) gives the Lean-checked defect criterion. The [population and adaptive-repair comparison](milestones/13-diverse-construction/README.md) adds 440 million proposals, independently checked six-chord candidates, and a diagnosis of their retained bank prefixes. No improved witness has been found; the next proposed method relaxes connectivity and eliminates cyclic components.
+Research checkpoint: 18 October 2026. The current construction task targets 196 edges. The [population and adaptive-repair comparison](milestones/13-diverse-construction/README.md) adds 440 million proposals and a diagnosis of retained bank prefixes. The [component-construction milestone](milestones/14-component-construction/README.md) now supplies a Lean-checked 197-vertex starting configuration with one path and seven cycles. Sequential cycle cuts reached one 40-edge path and six cycles. This remains disconnected; no improved snake witness has been found.
 
 | Claim | Current evidence |
 |---|---|

@@ -957,7 +957,27 @@ Every saved best walk from the four longer runs has a 191-edge prefix equivalent
 
 Two six-chord candidates were also subjected to adaptive repair. A minimum set of positions meeting every chord was removed first, leaving 192 or 194 initially fixed vertices. After an infeasible restricted model, the solver supplied a sufficient conflicting subset of the requirements that particular vertices remain selected. One policy released a vertex from that subset together with nearby positions along the walk; another released up to five scattered vertices from the subset. These subsets were not claimed to be minimum. Four runs ended unresolved, with 140, 97, 131, and 84 fixed vertices respectively. The preceding 17, 19, 20, and 22 infeasible rounds concern only their recorded fixed sets and have no Lean impossibility certificates. Different final constraints prevent interpreting these counts as a ranking of the policies. Independent checks verified the saved walks, the minimum initial chord covers, the successive releases, and a successful 191-edge control.
 
-These results motivate a construction search that relaxes connectivity. Select 197 vertices, require exactly two selected vertices to have selected degree one, and require all other selected vertices to have selected degree two. A finite graph satisfying these conditions is a path together with zero or more disjoint cycles. A disconnected candidate can therefore be rejected by a constraint forbidding each complete cyclic component, and the selection can be reconsidered globally. Lemma~\ref{lem:subset-low-degree} justifies every such cycle exclusion. This proposed search avoids a fixed long prefix; neither its termination within practical resources nor the existence of a 196-edge solution follows from the reduction.
+\subsection{A construction through cyclic components}
+These results motivate a construction search that relaxes connectivity. Select 197 vertices, require exactly two selected vertices to have selected degree one, and require all other selected vertices to have selected degree two. A finite connected graph with degrees at most two is a path or a cycle. Since every path component here has two degree-one vertices and isolated vertices are excluded, the selected graph consists of one path and zero or more disjoint cycles.
+
+For a cyclic component with vertex set $C$, add the constraint
+\[
+|C\cap V(P)|\le |C|-1.
+\]
+Lemma~\ref{lem:subset-low-degree} justifies this inequality for every induced path $P$. The cardinality inequality and its connection to the finite cycle checker have been checked in Lean. The search can then reconsider the entire vertex selection. Neither practical termination nor the existence of a 196-edge solution follows from this reduction.
+
+A concrete starting configuration comes from two vertex-disjoint induced 26-cycles $A,B\subseteq\Q_6$. Put $A$ in each even-parity layer of $\Q_3\mathbin{\square}\Q_6$ and $B$ in each odd-parity layer. Adjacent layers have different parity, and a cross-layer edge requires equal projected vertices; disjointness therefore forbids all cross-layer edges. The product has eight induced 26-cycles and 208 vertices. Deleting eleven consecutive vertices from one cycle leaves one path on 15 vertices and seven intact cycles. Writing $P_r$ for a path on $r$ vertices and $C_r$ for a cycle on $r$ vertices, this gives
+\[
+P_{15}\sqcup 7C_{26},\qquad
+|V|=15+7\cdot26=197,\qquad |E|=14+7\cdot26=196.
+\]
+The explicit 197-vertex set has passed Lean checks of its cardinality, distinctness, selected degrees, and partition; its seven cycle exclusions are also checked. An independent pairwise audit verifies the component sizes and the ordered path. These are facts about a disconnected graph and provide no improved snake lower bound. The construction uses cycles; the published 208-edge product of paths in \cite{orland} instead has 224 vertices.
+
+Three initial 196-edge probes, with and without square cuts or a defective-walk hint, found no candidate within 20 seconds. The product hint supplied a feasible first-round configuration. Adding all seven cycle exclusions then gave an unresolved second round. Adding one cycle exclusion at a time produced a further candidate
+\[
+P_{41}\sqcup 6C_{26}
+\]
+after about 0.93 seconds, preserving all 197 selected vertices in number while replacing five vertices of the preceding candidate. Its path has 40 edges. The next round was unresolved after 20 seconds. Thus one component merger has been achieved in this experiment, while six cyclic components remain. The full solver implementation is not Lean-verified; its saved feasible sets and the returned paths have independent adjacency checks. Continuing from this configuration must retain the previously accumulated cycle exclusions.
 
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
