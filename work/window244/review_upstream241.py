@@ -110,7 +110,8 @@ try:
                         synthetic_origin[sub]=upstream_sha;mapping[sub]=mapping[name]
                     synthetic[part]=(''.join('import '+sub+'\n' for sub in subparts)+'\nnamespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\nprivate theorem combineChecks {a b : Bool} (ha : a = true) (hb : b = true) : andB a b = true := by\n  rw [ha, hb]\n  rfl\n'+body[:body.index(':= by')]+f':= by\n  exact combineChecks {theorem_name}_Check {theorem_name}_Checkpoint\nend '+namespace+'\n').encode()
             raw=(''.join('import '+p+'\n' for p in parts)).encode()
-        if name in split_rup_modules:
+        split_323 = bool(re.fullmatch(r'LocalWindowUnsat\.C323FwdDistinct\.Check\d+Part\d+(?:Check)?(?:Half[12])?',name)) and bool(re.search(r'theorem \w+ : check ',raw.decode()))
+        if name in split_rup_modules or split_323:
             text=raw.decode()
             match=re.search(r'theorem (ok\d+(?:_Check)?) : check (start\d+) (proof\d+) = true',text)
             if match:

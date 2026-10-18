@@ -128,6 +128,12 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 步骤拆分，以同一个精确拼接引理组合；保留其真实起始数据库，绝不把
 中间数据库或剩余检查结果作为假设。
 
+进一步拆分后的后半检查及整个第 1 段均已通过。随后第 2 段的原始
+检查触及预算，清单保存为 `upstream241-rup323-second-attempt.json`。
+为避免同一批次逐段等待重试，对 323-distinct 的全部 RUP 段统一采用
+已通过的两层拆分（214，再各拆 107），每个子结果仍由内核检查并经
+拼接引理还原。检查点复制检查和原证书均不改动。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
