@@ -56,6 +56,13 @@ python work/window244/review_upstream241.py --lean-bin /path/to/lean-4.19.0/bin 
 `outputs/window244/upstream241-bridge-first-attempt.json`。恢复版本同样仅关闭
 该模块的异步 elaboration，保留所有证明和定理陈述，预算不变。
 
+桥接模块已通过，累计 167 个模块已核验。第一个证书检查模块
+`LocalWindowUnsat.C223FwdDistinct.Check1` 触及预算；保存该次清单后，
+将其四个既有 `ok` 定理分别放入四个子模块，原模块只导入这些子模块。
+每个证明和命名空间保持原样，内核检查方式及 1,800 MiB 预算不变。
+因此实际重建闭包为 1,242 个模块（比原始闭包增加四个），不代表新增证明义务。
+首轮证据为 `outputs/window244/upstream241-check1-first-attempt.json`。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。

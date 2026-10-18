@@ -54,7 +54,7 @@ try:
                 rel=path[len(prefix):]
                 if prefix=='work/spectral/' and '/' in rel:continue
                 mapping.setdefault(rel[:-5].replace('/','.'),path)
-    order=[];deps={};visiting=set();done=set()
+    order=[];deps={};visiting=set();done=set();synthetic={}
     batch=subprocess.Popen(['git','cat-file','--batch'],cwd=ROOT,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
     def read_blob(path):
         batch.stdin.write((REV+':'+path+'\n').encode());batch.stdin.flush()
@@ -66,7 +66,20 @@ try:
         assert name not in visiting,'Import cycle: '+name
         visiting.add(name)
         if name not in mapping:raise RuntimeError('Unresolved custom import: '+name)
-        raw=read_blob(mapping[name]);upstream_sha=hashlib.sha256(raw).hexdigest()
+        raw=synthetic[name] if name in synthetic else read_blob(mapping[name]);upstream_sha=hashlib.sha256(raw).hexdigest()
+        if name=='LocalWindowUnsat.C223FwdDistinct.Check1':
+            text=raw.decode('utf-8')
+            matches=list(re.finditer(r'^theorem ok\d+\s*:',text,re.M));assert len(matches)==4
+            namespace=re.search(r'^namespace (.+)$',text,re.M).group(1)
+            header=text[:matches[0].start()]
+            tail=text.rindex('end '+namespace)
+            parts=[]
+            for i,match in enumerate(matches):
+                part=name+f'Part{i+1}';parts.append(part)
+                body=text[match.start():matches[i+1].start() if i+1<len(matches) else tail]
+                synthetic[part]=(header+body+'\nend '+namespace+'\n').encode()
+                mapping[part]=mapping[name]
+            raw=(''.join('import '+p+'\n' for p in parts)).encode()
         if name in {'Snake9','SquareCounterexample'}:
             # Preserve every definition and theorem statement. Kernel reduction
             # avoids elaborating the enormous default `decide` proof term.
@@ -104,7 +117,7 @@ try:
         src.parent.mkdir(parents=True,exist_ok=True)
         if not src.exists() or src.read_bytes()!=raw:src.write_bytes(raw)
         state['sources'][name]=dict(git_path=mapping[name],sha256=sha(src),upstream_sha256=upstream_sha,
-            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'sequential elaboration' if name in {'SharedFiniteClassification','LocalWindowBridge'} else None))
+            adaptation=(f'two witness proofs: {size} kernel-checked rows and Fin.cases each' if name in {'Snake9','SquareCounterexample'} else 'sequential elaboration' if name in {'SharedFiniteClassification','LocalWindowBridge'} else 'one certificate theorem per module' if name.startswith('LocalWindowUnsat.C223FwdDistinct.Check1') else None))
         imports=[]
         for line in raw.decode('utf-8').splitlines():
             if line.startswith('import '):
