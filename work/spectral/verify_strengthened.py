@@ -177,19 +177,29 @@ def main():
         copy(project / "SquareIncidence.lean", build / "SquareIncidence.lean")
         for module in MODULES:
             copy(project / "stronger" / (module + ".lean"), build / (module + ".lean"))
-        env["LEAN_PATH"] = os.pathsep.join([str(core / ".lake/build/lib/lean"), str(build)])
+        # The mathlib workspace environment, captured once (`lake env` costs tens of seconds per call).
+        lake_env = {}
+        for line in subprocess.check_output([lake, "env"], cwd=mathlib, env=env, text=True).splitlines():
+            if "=" in line:
+                key, value = line.split("=", 1)
+                lake_env[key] = value
+        lean_bin = lake_env.get("LEAN") or shutil.which("lean")
+        env.update(lake_env)
+        env["LEAN_PATH"] = os.pathsep.join(
+            [path for path in lake_env.get("LEAN_PATH", "").split(os.pathsep) if path]
+            + [str(core / ".lake/build/lib/lean"), str(build)])
         for module in ["SquareIncidence", *MODULES]:
             if cached(module, build / (module + ".lean"), build / (module + ".olean")):
                 print(f"Checking {module} ... (object up to date from an earlier run)", flush=True)
                 manifest["steps"].append({"label": module, "cached": True})
                 save()
                 continue
-            run(module, [lake, "env", "lean", f"--root={build}", "-o",
+            run(module, [lean_bin, f"--root={build}", "-o",
                          str(build / (module + ".olean")), str(build / (module + ".lean"))],
                 mathlib, env)
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection238Conditional\nimport AggregateDirectionK6R3Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
+            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirectionK5R3Conditional\nimport AggregateDirectionK6R3Conditional\nimport UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.upper_242_of_certified_windows\n"
             "#print axioms Snake9.upper_241_of_certified_windows\n"
@@ -218,7 +228,7 @@ def main():
                 "#print axioms Snake9.upper_bound_245\n"
                 "#print axioms Snake9.verified_interval_191_245\n"
             )
-        run("FinalAudit", [lake, "env", "lean", f"--root={build}", str(audit)], mathlib, env)
+        run("FinalAudit", [lean_bin, f"--root={build}", str(audit)], mathlib, env)
         expected = {"Snake9.upper_244_of_no_two_two_three",
                     "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows",
                     "Snake9.upper_239_of_direction_windows", "Snake9.WindowAutomaton.step_table",
