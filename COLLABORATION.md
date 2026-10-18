@@ -9,8 +9,15 @@ continue the upper-bound work. The [new construction milestone](milestones/12-co
 records a Lean-checked zero-defect criterion, approximately 31 million pilot
 proposals, and exact fragment-repair experiments. No valid improvement over
 191 edges was found. The two best 196-edge walks have seven chords each.
-The next proposed experiment retains diverse equal-score walks and replaces
-several separated interior fragments together.
+That initial experiment is now followed by the
+[population and adaptive-repair comparison](milestones/13-diverse-construction/README.md).
+The added 440 million proposals found no valid improvement; the best saved
+walks have six chords. Retaining multiple candidates showed no consistent
+benefit at the longer budget. Every saved best walk from those four long runs
+has a known bank prefix and all defects touching its five appended vertices.
+Four solver-guided interior repairs ended unresolved. The next constructive
+direction relaxes connectivity, allowing a path and cyclic components, then
+excludes those cycles using the existing checked cycle-exclusion lemma.
 
 Synchronization incorporated the completed KEEP=112 aggregate receipt covering
 all 262 oriented bank entries, the bounded KEEP=96 survey, and conditional

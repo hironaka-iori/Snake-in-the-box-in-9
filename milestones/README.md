@@ -13,6 +13,7 @@ The exact optimum remains unresolved. The strongest checked global interval is 1
 - [Method limits and endpoint accounting](09-research-directions/README.md)
 - [Window exclusions and conditional bounds 242/241](10-window-aggregate/README.md)
 - [Constructive search targeting 196 edges](12-construction-196/README.md)
+- [Diverse walks and solver-guided repair](13-diverse-construction/README.md)
 
 Active direction as of 18 October: construct a longer snake through interior changes and defect repair. Upper-bound work continues on collaborator branches; the separate 241 branch has a saved successful audit but has not been independently rebuilt or merged into this checkpoint.
 
