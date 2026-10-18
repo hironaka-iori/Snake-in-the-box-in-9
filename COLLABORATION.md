@@ -26,6 +26,17 @@ number of vertices. The next round was unresolved. Continue from the saved
 seven-component state with both accumulated cuts retained. It remains a
 disconnected intermediate configuration, not an improved snake witness.
 
+Further targeted mergers are recorded in [milestone 15](milestones/15-component-mergers/README.md).
+The fixed 40-edge path is locally blocked, while unrestricted replacements of
+the path and one or two cycles remained unresolved. The signed frozen-cycle
+constraint has a Lean proof. [Milestone 16](milestones/16-cycle-reservoirs/README.md)
+supplies two checked disjoint 14-cycles in Q5, a 224-vertex product, and additional
+197-vertex disconnected states. The next constructive task is to use its two
+4,973-row local-state tables in a global cell model. Four shared connector
+vertices govern cross-cell edges; a checked local cost lemma explains why a
+connector with four internal neighbors must omit at least three when it uses
+an external edge. Costs can overlap and do not give a global bound.
+
 Synchronization incorporated the completed KEEP=112 aggregate receipt covering
 all 262 oriented bank entries, the bounded KEEP=96 survey, and conditional
 window bounds through 238. The separate `research/unconditional-241-only`

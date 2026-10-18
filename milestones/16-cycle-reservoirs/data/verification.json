@@ -1,0 +1,229 @@
+{
+  "status": "PASSED",
+  "scope": "Feasible witnesses, model bookkeeping, and local-table row validity; no solver UNSAT or table-completeness certificate.",
+  "mergers": {
+    "control40.json": {
+      "status": "OPTIMAL",
+      "target_path_edges": 40,
+      "allowed_vertices": 76,
+      "seconds": 0.09400000000096043
+    },
+    "one-keep.json": {
+      "status": "INFEASIBLE",
+      "target_path_edges": 66,
+      "allowed_vertices": 114,
+      "seconds": 0.031000000002677552
+    },
+    "one.json": {
+      "status": "UNKNOWN",
+      "target_path_edges": 66,
+      "allowed_vertices": 114,
+      "seconds": 60.01499999999942
+    },
+    "pending-cut-control.json": {
+      "status": "INFEASIBLE",
+      "target_path_edges": 40,
+      "allowed_vertices": 76,
+      "seconds": 0.01599999999962165
+    },
+    "release-116.json": {
+      "status": "INFEASIBLE",
+      "target_path_edges": 66,
+      "allowed_vertices": 114,
+      "seconds": 0.1720000000022992
+    },
+    "release-17-116-90-72-89.json": {
+      "status": "INFEASIBLE",
+      "target_path_edges": 66,
+      "allowed_vertices": 114,
+      "seconds": 0.1720000000022992
+    },
+    "release-17-116.json": {
+      "status": "INFEASIBLE",
+      "target_path_edges": 66,
+      "allowed_vertices": 114,
+      "seconds": 0.1720000000022992
+    },
+    "release-17.json": {
+      "status": "INFEASIBLE",
+      "target_path_edges": 66,
+      "allowed_vertices": 114,
+      "seconds": 0.1720000000022992
+    },
+    "two-01.json": {
+      "status": "UNKNOWN",
+      "target_path_edges": 92,
+      "allowed_vertices": 152,
+      "seconds": 60.03200000000288
+    },
+    "two-02.json": {
+      "status": "UNKNOWN",
+      "target_path_edges": 92,
+      "allowed_vertices": 178,
+      "seconds": 60.03099999999904
+    }
+  },
+  "base_pairs": {
+    "base5-size14.json": {
+      "status": "OPTIMAL",
+      "n": 5,
+      "size_per_set": 14,
+      "q9_product_vertices_if_feasible": 224
+    },
+    "base6-size26.json": {
+      "status": "OPTIMAL",
+      "n": 6,
+      "size_per_set": 26,
+      "q9_product_vertices_if_feasible": 208
+    },
+    "base6-size28.json": {
+      "status": "OPTIMAL",
+      "n": 6,
+      "size_per_set": 28,
+      "q9_product_vertices_if_feasible": 224
+    },
+    "base7-size54.json": {
+      "status": "UNKNOWN",
+      "n": 7,
+      "size_per_set": 54,
+      "q9_product_vertices_if_feasible": 216
+    }
+  },
+  "dense_seeds": {
+    "seed-0-1-2-3.json": {
+      "status": "OPTIMAL",
+      "target_path_edges": 28,
+      "allowed_vertices": 72,
+      "seconds": 0.2362073
+    },
+    "seed-0-1-2-4.json": {
+      "status": "OPTIMAL",
+      "target_path_edges": 28,
+      "allowed_vertices": 72,
+      "seconds": 0.7921691000000001
+    },
+    "seed-0-1-2.json": {
+      "status": "OPTIMAL",
+      "target_path_edges": 14,
+      "allowed_vertices": 54,
+      "seconds": 0.09799540000000001
+    },
+    "seed-first5.json": {
+      "status": "UNKNOWN",
+      "target_path_edges": 42,
+      "allowed_vertices": 90,
+      "seconds": 60.013044300000004
+    },
+    "seed-first6.json": {
+      "status": "UNKNOWN",
+      "target_path_edges": 56,
+      "allowed_vertices": 108,
+      "seconds": 60.0353147
+    },
+    "seed-first7.json": {
+      "status": "UNKNOWN",
+      "target_path_edges": 70,
+      "allowed_vertices": 126,
+      "seconds": 60.0116628
+    },
+    "seed-first8.json": {
+      "status": "UNKNOWN",
+      "target_path_edges": 84,
+      "allowed_vertices": 144,
+      "seconds": 60.011577300000006
+    }
+  },
+  "lean_audits": {
+    "Snake9.ComponentMergers.frozen_cut_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.ComponentMergers.frozen_complete_cycle_impossible": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.base_sizes": [
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.bases_distinct": [
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.bases_disjoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.a_induced_cycle": [
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.b_induced_cycle": [
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.opposite_colors_disjoint": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.no_simple_197_trim": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.connector_degrees": [
+      "propext"
+    ],
+    "Snake9.CycleReservoirs.four_neighbor_connector_cost": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sha256_lf": {
+    "milestones/15-component-mergers/scripts/endpoint_diagnostic.py": "e4e0fccc1dc1d3a80704f4f31dbed6a855a3e0282fd5989bbc2ef4660f7e9b69",
+    "milestones/15-component-mergers/scripts/merge_components.py": "0861ddd574d266834cf64f5d3addd1ef83b15f95285da00a7fe36bccc688dca6",
+    "milestones/15-component-mergers/scripts/snapshots/merge_components_v1.py": "3a683d9befba25215920cd529f168bed726681e610ea4c177c04e0c1531ce873",
+    "milestones/15-component-mergers/lean/FrozenCycleCuts.lean": "9ca1d0dc72acc346f7af4388513720d9d4757d465a6b258c57c785ad75cb3f4d",
+    "milestones/15-component-mergers/logs/frozen-cycle-cuts.log": "0335c53c88b7bf8c0256f63657961ab5c6fbbabf6d88ee2b6d35af4cba34155d",
+    "milestones/15-component-mergers/data/control-seed.json": "a02531be1c23667bbe4228443f7b2adbf2ec16cdecf1ea8a35b89b44d0102ee9",
+    "milestones/15-component-mergers/data/control40.json": "d8eebe58fe5f7a9b43da6326e319e2a8f0d90171a71369a14e217eb25574758d",
+    "milestones/15-component-mergers/data/endpoint-diagnostic.json": "afe5fe4585fd512d4e82678a912be9a3f1f837da3855ccfcc981426f2c5c6af6",
+    "milestones/15-component-mergers/data/one-keep.json": "8c7fb7e13355d3b88adb56c2e4b34bb35cf66f564d8f736e45b0b3f9163fd729",
+    "milestones/15-component-mergers/data/one.json": "65cdf885db1e27d62eb0cc5cc8ed16e7c27bc8faa8daa584aa1b42ff6838428f",
+    "milestones/15-component-mergers/data/pending-cut-control.json": "0a58b58147111706a0b05f1903ae13494b38c42f4d4af01c3880dda23f6bb0c8",
+    "milestones/15-component-mergers/data/release-116.json": "0a962f6f8f5a51b8742f391d96174af6c74797216c50f98cdb9a8b760a46e1ff",
+    "milestones/15-component-mergers/data/release-17-116-90-72-89.json": "53c8386677764c478cf3eb9a6ed1b854ac8ffb19625cf81c32ca364a9bdef254",
+    "milestones/15-component-mergers/data/release-17-116.json": "6e563f2c219fa84cc48f77efc7f2fa8a73e46e891714911a8257e648305acd2f",
+    "milestones/15-component-mergers/data/release-17.json": "dddaae241a092130b7d2851bf8972040e8741e49425970435bdb00adc50a3bc6",
+    "milestones/15-component-mergers/data/two-01.json": "e69e85b19b458630b58037a02bde0feab0f94058986ee82ff66d39cab39fef38",
+    "milestones/15-component-mergers/data/two-02.json": "c9172f435531e006a37ba2e4bbc69ee19c9a6eb0304cdcc8465b4f511fe0d18e",
+    "milestones/16-cycle-reservoirs/scripts/build_dense_seed.py": "d1d7ea50ad2cabc6f3974ec9947605275e7418155536d24f582ff25dcb85e1ff",
+    "milestones/16-cycle-reservoirs/scripts/cell_census.py": "a6a474aa7c06ecd09b65820db0364a67961e12652da395bf9bf09f53bb538638",
+    "milestones/16-cycle-reservoirs/scripts/probe_base_pairs.py": "583caef666dc342c07dea1c6fdc7398d2e354959d51201b040bca8a20ade76bf",
+    "milestones/16-cycle-reservoirs/scripts/verify_checkpoint.py": "aa7548727295a08866b45d9cfdb444d3550386638cf519d71296b2cae34ed4bc",
+    "milestones/16-cycle-reservoirs/lean/BasePair.lean": "4cd886c8de26890cad25d029aa51ddddb5f94719212580bf5b7a133694008979",
+    "milestones/16-cycle-reservoirs/logs/base-pair.log": "301e3cd90b1892f24e03b7d680ee83928e1d03dc1466fec090d66a066ae766ec",
+    "milestones/16-cycle-reservoirs/logs/latex-preview-status.txt": "b46806d8c0aa5916d4fd68c87546f5a803d748b255ceb67b6ac71b29954e5590",
+    "milestones/16-cycle-reservoirs/data/base5-size14.json": "73aa6f45120d61c8317bc3e61e258741f188ab4b6c30e67602fe6ce4a031bc68",
+    "milestones/16-cycle-reservoirs/data/base6-size26.json": "38423c235168306717b783f08575edb7b98fb8ca48df16a49511e3b0c3b2f137",
+    "milestones/16-cycle-reservoirs/data/base6-size28.json": "84a913eda0d17eb391a2c75fb043536ce266b594ff71d1696bcb406410b88948",
+    "milestones/16-cycle-reservoirs/data/base7-size54.json": "4f89a28f4af5aecc48d3df0dd3b76c69a4a35b08825f81219c1b72e89e0797b4",
+    "milestones/16-cycle-reservoirs/data/cell-census.json": "4f25dfc725880dd9c2280558c27ea7c072d6644985261b77e55e0ba0cb3806a3",
+    "milestones/16-cycle-reservoirs/data/cell-states.json": "5d6c30853ed41b1c8ac98c89d5246f08ffdfc4f8bc70ea349e4f555ffdf5e5a4",
+    "milestones/16-cycle-reservoirs/data/seed-0-1-2-3.json": "0c28e0050414714ebe4abed50743167ae86f29f15669596250bcb35a85ae6b16",
+    "milestones/16-cycle-reservoirs/data/seed-0-1-2-4.json": "18c0edadc27d485766144d111a328a20650539a6bc0106ba6fdf4d4faf5fedbf",
+    "milestones/16-cycle-reservoirs/data/seed-0-1-2.json": "5e372bccbdc8517181390ff4e8796868f23ad02b706b5e08cef5ce18ace17bd5",
+    "milestones/16-cycle-reservoirs/data/seed-first5.json": "c40d3e70e0e49cfc35310e53d950e19e0208ff4b6680e10a9f575a2e1ff74fc7",
+    "milestones/16-cycle-reservoirs/data/seed-first6.json": "8e161e5be6276d4ad07d06e86d683340faa262f5dac95f60a5bb72a66af952e5",
+    "milestones/16-cycle-reservoirs/data/seed-first7.json": "5e5a82345b17e79c3a5e48d25ac996adc2f8b8286f8dd224977b2fa7dd842bf3",
+    "milestones/16-cycle-reservoirs/data/seed-first8.json": "3a96a89d24a5f33c746bf18b4edf03dbc0a1041350ad335898a2b5242a7e13cf",
+    "work/neighborhood_search.py": "1e3f1cf619c46ce0bbcc32f0cd37b204079835b31fd83cc04999a408c0aa2a66",
+    "work/exact_search.py": "51fb9b7d6f43b9bdf520b2eff4a15c6ae5c9f875db42cc0a0d2fe4fbf9d1cdb6",
+    "work/check_snake.py": "583ef540939111a80789c7191d079acf4d020d9cb0ad608c89410627b0b5da72",
+    "work/final_lean/PathStructure.lean": "6267168775a17ce9a256fba7e6f6b58d46f6fa38f85ada282df525b200d341bd",
+    "work/spectral/CycleExclusion.lean": "6b2adc31e496acf56d59c6c4c4036a2abc4605ed2b9cf1f88f69e5747904799e",
+    "milestones/14-component-construction/lean/CycleCuts.lean": "0d5f0ae20f655647aab33b44c67da6be30fe332e2a9b904517ca21a248b87ad9"
+  },
+  "cell_rows_checked": [
+    4973,
+    4973
+  ]
+}

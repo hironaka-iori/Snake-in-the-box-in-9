@@ -979,6 +979,53 @@ P_{41}\sqcup 6C_{26}
 \]
 after about 0.93 seconds, preserving all 197 selected vertices in number while replacing five vertices of the preceding candidate. Its path has 40 edges. The next round was unresolved after 20 seconds. Thus one component merger has been achieved in this experiment, while six cyclic components remain. The full solver implementation is not Lean-verified; its saved feasible sets and the returned paths have independent adjacency checks. Continuing from this configuration must retain the previously accumulated cycle exclusions.
 
+\subsection{Frozen components and larger cycle configurations}
+Further mergers retained five or four of the 26-cycles and replaced the remaining selected vertices by one path of 66 or 92 edges. Both accumulated cycle exclusions were preserved, and both path endpoints were free. Retaining the entire preceding 40-edge path gave infeasibility in the restricted model. Releasing that path, or allowing either of two pairs of cycles to change, remained unresolved after 60 seconds. The fixed-path diagnostic found no first extension from endpoint 120, and only the addition of vertex 2 from endpoint 0, with no further available continuation. These are restrictions of this intermediate configuration and provide no global bound.
+
+If $F$ is the frozen vertex set and $R$ is the changing path, then $F\cap R=\varnothing$. A cycle exclusion for a set $C$ becomes
+\[
+|C\cap R|\le |C|-1-|C\cap F|.
+\]
+Indeed, $|C\cap(F\cup R)|=|C\cap F|+|C\cap R|$. The subtraction is over the integers: when $C\subseteq F$, the right-hand side is $-1$, correctly making the condition impossible. This equivalence and the fully frozen case have been checked in Lean. In particular, freezing a cycle that the latest cut asks the search to change is an invalid positive control; removing that pending cut recovers the known 40-edge path.
+
+A larger starting configuration uses the following two cyclic orders in $\Q_5$, with vertices encoded by integers from 0 to 31:
+\[
+\begin{aligned}
+A&=(0,1,17,25,27,31,15,13,12,28,20,22,18,2),\\
+B&=(3,11,9,8,24,26,30,14,6,4,5,21,23,19).
+\end{aligned}
+\]
+Both are induced 14-cycles, and their vertex sets are disjoint. Their lengths, distinctness, cyclic adjacency equivalences, and disjointness have been checked in Lean. Alternating $A$ and $B$ according to the parity of the sixteen cells of $\Q_4\mathbin{\square}\Q_5$ gives sixteen nonadjacent cycles and 224 vertices. As before, disjoint base sets exclude cross-cell edges. A separate size-28 base search in $\Q_6$ found two disjoint unions of two 14-cycles each, also giving 224 product vertices; it did not find 28-cycles. A size-54 pair search in $\Q_7$ was unresolved after 60 seconds.
+
+The larger vertex count does not make a 197-vertex starting state automatic. Keeping whole 14-cycles and a nontrivial proper path from one further cycle leaves $14k+r$ vertices with $2\le r\le13$. Such a number cannot equal $197=14\cdot14+1$. This arithmetic obstruction has been checked in Lean and applies only to that trimming operation.
+
+Joint cell replacement avoids the obstruction. Releasing cells $0,1,2$ and replacing their contents by a 14-edge path gave $P_{15}\sqcup13C_{14}$. Releasing either $0,1,2,3$ or $0,1,2,4$ gave $P_{29}\sqcup12C_{14}$. Each selected graph has 197 vertices and passed independent adjacency checks. Releasing the first five through eight cells, with target path lengths 42, 56, 70, and 84, remained unresolved after 60 seconds each. These disconnected constructions do not improve the snake lower bound.
+
+\subsection{Connector costs and a finite cell model}
+The four unused base vertices are
+\[
+U=\{7,10,16,29\}.
+\]
+Consider the restricted family in which each even cell permits $A\cup U$ and each odd cell permits $B\cup U$. Each cell has 18 available vertices. Since $(A\cup U)\cap(B\cup U)=U$, only the four shared vertices can carry an edge between adjacent cells. Their numbers of neighbors on the two base cycles are
+\[
+\begin{array}{c|rrrr}
+u&7&10&16&29\\\hline
+|N(u)\cap A|&1&1&4&4\\
+|N(u)\cap B|&4&4&1&1
+\end{array}
+\]
+and these finite counts have been checked in Lean.
+
+\begin{proposition}[A local connector cost]
+Let a selected vertex of an induced path have four possible neighbors in a specified set $N$ and one selected neighbor outside $N$. At least three vertices of $N$ are absent from the path.
+\end{proposition}
+\begin{proof}
+A selected vertex has at most two selected neighbors. The neighbor outside $N$ leaves room for at most one selected member of $N$. Since $|N|=4$, at least three members are absent.
+\end{proof}
+This statement has been checked in Lean. In the cell construction, a cross-cell edge at a connector with four base-cycle neighbors therefore requires omitting at least three of those neighbors. Different connector costs can share omitted vertices; adding them as independent losses would be unjustified.
+
+An enumeration of all $2^{18}$ local subsets retained 4,973 degree-compatible states for each cell type. A state specifies its selected vertices, selected connectors and their internal degrees, number of nonconnector endpoints, and vertex count. Nonconnector vertices must have selected internal degree one or two, while connectors can have degree zero before external edges are added. At most two nonconnector endpoints are permitted. Internal cycles remain allowed. Every saved row passed an independent adjacency check; enumeration completeness is not Lean-certified. A global construction model must still combine the states, enforce total connector degrees, exactly two endpoints and 197 vertices, and eliminate all cyclic components. The table is preparation for that search, not a completed construction.
+
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
 

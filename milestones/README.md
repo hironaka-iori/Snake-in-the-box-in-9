@@ -15,6 +15,8 @@ The exact optimum remains unresolved. The strongest checked global interval is 1
 - [Constructive search targeting 196 edges](12-construction-196/README.md)
 - [Diverse walks and solver-guided repair](13-diverse-construction/README.md)
 - [Construction through a path and cyclic components](14-component-construction/README.md)
+- [Targeted mergers and frozen-cycle accounting](15-component-mergers/README.md)
+- [Larger cycle configurations and local cell states](16-cycle-reservoirs/README.md)
 
 Active direction as of 18 October: construct a longer snake through interior changes and defect repair. Upper-bound work continues on collaborator branches; the separate 241 branch has a saved successful audit but has not been independently rebuilt or merged into this checkpoint.
 
