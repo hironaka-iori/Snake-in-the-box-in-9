@@ -144,6 +144,10 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 `upstream241-rup2423-check12-attempt.json`。无需修改生成器或 Lean 证明，
 恢复驱动按既有超限记录应用已经验证的分段机制，继续保留全部有效断点。
 
+第 12 段分段及组合已通过；累计 3,247 个模块通过后，同一实例第 21 段
+触及预算。失败记录和相关哈希保存为 `upstream241-rup2423-check21-attempt.json`。
+按原驱动从断点恢复，对该段应用相同已证分段机制，不修改检查器或证书。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
