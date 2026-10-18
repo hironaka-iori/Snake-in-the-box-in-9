@@ -86,6 +86,9 @@ def main():
     parser.add_argument("--with-239", action="store_true",
                         help="also check UpperBound239; needs the 145 generated replays "
                              "(milestones/10-window-aggregate/scripts/run_direction_replays.py gen)")
+    parser.add_argument("--with-238", action="store_true",
+                        help="also check UpperBound238; needs the 325 generated replays "
+                             "(run_direction_replays.py --set direction5 gen)")
     parser.add_argument("--core-jobs", type=int, default=3,
                         help="concurrent Lean processes for the guarded core build")
     parser.add_argument("--core-heavy-jobs", type=int, default=None,
@@ -192,10 +195,13 @@ def main():
                      "--rss-cap-gb", str(args.core_rss_cap_gb),
                      "--lake", lake, *targets], core, env)
         copy(project / "SquareIncidence.lean", build / "SquareIncidence.lean")
-        for module in [*MODULES, *(["UpperBound239"] if args.with_239 else [])]:
+        extra = [*(["UpperBound239"] if args.with_239 else []),
+                 *(["DirectionWindowBridge5", "AggregateDirection238Unconditional", "UpperBound238"]
+                   if args.with_238 else [])]
+        for module in [*MODULES, *extra]:
             copy(project / "stronger" / (module + ".lean"), build / (module + ".lean"))
         env["LEAN_PATH"] = os.pathsep.join([str(core / ".lake/build/lib/lean"), str(build)])
-        modules = [*MODULES, *(["UpperBound239"] if args.with_239 else [])]
+        modules = [*MODULES, *extra]
         for module in ["SquareIncidence", *modules]:
             run(module, [lake, "env", "lean", f"--root={build}", "-o",
                          str(build / (module + ".olean")), str(build / (module + ".lean"))],
@@ -241,6 +247,12 @@ def main():
                 "import UpperBound239\n" + audit.read_text(encoding="utf-8")
                 + "#print axioms Snake9.upper_bound_239\n"
                 + "#print axioms Snake9.verified_interval_191_239\n", encoding="utf-8")
+        if args.with_238:
+            audit.write_text(
+                "import UpperBound238\n" + audit.read_text(encoding="utf-8")
+                + "#print axioms Snake9.upper_238_of_refuted\n"
+                + "#print axioms Snake9.upper_bound_238\n"
+                + "#print axioms Snake9.verified_interval_191_238\n", encoding="utf-8")
         run("FinalAudit", [lake, "env", "lean", f"--root={build}", str(audit)], mathlib, env)
         expected = {"Snake9.upper_244_of_no_two_two_three",
                     "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows",
