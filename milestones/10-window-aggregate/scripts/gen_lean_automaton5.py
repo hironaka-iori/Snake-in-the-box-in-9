@@ -73,24 +73,27 @@ def main():
     s7 = {shape_code(c): i for i, c in enumerate(shapes7)}
     wshapes = sorted({k[0] for k in keys}, key=lambda c: (len(c), c))
     ws = {shape_code(c): i for i, c in enumerate(wshapes)}
-    forb = 0
+    # one mask per window shape and per 7-shape: a kernel lookup shifts only a small
+    # literal, so the kernel's term cache stays small (the full tables would be 143k and
+    # 176k bits, and every shifted copy is cached)
+    forbs = [0] * len(wshapes)
     for dirs, alpha in keys:
         syms = [lo if lo == hi else 6 for lo, hi in alpha]
-        forb |= 1 << (ws[shape_code(dirs)] * 16807 + sym_idx(syms))
-    pot = 0
+        forbs[ws[shape_code(dirs)]] |= 1 << sym_idx(syms)
+    pots = [0] * len(shapes7)
     for (c, t), sid in A.sid.items():
-        pot |= int(pi[sid]) << (BITS * (s7[shape_code(c)] * 1296 + cnt_idx(t)))
+        pots[s7[shape_code(c)]] |= int(pi[sid]) << (BITS * cnt_idx(t))
 
     def phi(h, t):
         code = shape_code(tuple(canon(h)))
         if code not in s7:
             return None
-        return (pot >> (BITS * (s7[code] * 1296 + cnt_idx(t)))) & MAXP
+        return (pots[s7[code]] >> (BITS * cnt_idx(t))) & MAXP
 
     def wforb(ds, syms):
         def one(d, s):
             code = shape_code(tuple(canon(d)))
-            return code in ws and (forb >> (ws[code] * 16807 + sym_idx(s))) & 1
+            return code in ws and (forbs[ws[code]] >> sym_idx(s)) & 1
         return one(ds, syms) or one(tuple(reversed(ds)), tuple(reversed(syms)))
 
     # Python mirror of check5 over shards (shape ++ [d], d < 9)
@@ -120,6 +123,13 @@ def main():
         for code, i in sorted(table.items()):
             lines.append(f'  if c = {code} then {i} else')
         lines.append(f'  {default}')
+        return '\n'.join(lines)
+
+    def maskchain(name, masks):
+        lines = [f'def {name} (s : Nat) : Nat :=']
+        for i, m in enumerate(masks):
+            lines.append(f'  if s = {i} then {m} else')
+        lines.append('  0')
         return '\n'.join(lines)
 
     stronger = STRONGER
@@ -160,19 +170,21 @@ namespace Snake9.WindowAutomaton
 /-- Canonical window shapes (3 to 6 directions). -/
 {ifchain('wshapeIdx5' + T, ws, len(wshapes))}
 
-def forbMask5{T} : Nat := {forb}
+/-- Exclusion mask of each window shape (bit `symIdx syms 0`); `0` for unlisted shapes. -/
+{maskchain('forbMaskOf5' + T, forbs)}
 
-def potMask5{T} : Nat := {pot}
+/-- Potential table of each 7-shape ({BITS}-bit fields at `cntIdx5` positions). -/
+{maskchain('potMaskOf5' + T, pots)}
 
 def cntIdx5{T} : List Nat → Nat → Nat
   | [], acc => acc
   | s :: l, acc => cntIdx5{T} l (acc * 6 + (s - 1))
 
 def pot5{T} (h : List Nat) (t : List Nat) : Nat :=
-  (potMask5{T} >>> ({BITS} * (shapeIdx7{T} (shapeCode (canon h)) * 1296 + cntIdx5{T} t 0))) &&& {MAXP}
+  (potMaskOf5{T} (shapeIdx7{T} (shapeCode (canon h))) >>> ({BITS} * cntIdx5{T} t 0)) &&& {MAXP}
 
 def wforb5a{T} (ds : List Nat) (syms : List Nat) : Bool :=
-  (forbMask5{T} >>> (wshapeIdx5{T} (shapeCode (canon ds)) * 16807 + symIdx syms 0)) &&& 1 == 1
+  (forbMaskOf5{T} (wshapeIdx5{T} (shapeCode (canon ds))) >>> symIdx syms 0) &&& 1 == 1
 
 def wforb5{T} (ds : List Nat) (syms : List Nat) : Bool :=
   wforb5a{T} ds syms || wforb5a{T} ds.reverse syms.reverse
