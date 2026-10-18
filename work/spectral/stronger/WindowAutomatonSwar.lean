@@ -349,6 +349,11 @@ theorem bytes_lt_of_masks (P n c HI ONE : Nat) (hHI : HI = pack (tab (fun _ => 1
   rw [hsum, digit_pack _ hbd y, tab_getD _ _ y hy] at h2'
   exact h2'
 
+/-- Field `m` of the `n`-field window of `T` starting at field `a`. -/
+theorem digit_winT (T a n m : Nat) (hm : m < n) : digit (winT T (8 * a) (8 * n)) m = digit T (a + m) := by
+  unfold winT
+  rw [winT_pack, digit_pack _ (tab_bounded _ _ _ (fun _ _ => digit_lt _ _)), tab_getD _ _ m hm]
+
 /-- A numeral given as little-endian 8192-bit chunks (large table literals are written this way
 because the parser's decimal conversion is quadratic in the number of digits). -/
 def ofChunks (l : List Nat) : Nat := l.foldr (fun c acc => acc <<< 8192 + c) 0

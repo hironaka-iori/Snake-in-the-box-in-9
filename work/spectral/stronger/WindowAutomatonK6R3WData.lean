@@ -218,6 +218,27 @@ theorem hiPK6R3W_eq : hiPK6R3W = pack (tab (fun _ => 128) 7776) := by
 theorem wpatK6R3W_eq : wpatK6R3W = pack (tab (fun l => l / 36 + 1) 216) := by decide +kernel
 theorem repK6R3W_eq : repK6R3W = repK 36 6 := by decide +kernel
 
+/-- `T` holds the fields of `C` at the positions `pos3 y`, checked block by block on numerals. -/
+def consTK6R3W (T C : Nat) : Bool :=
+  allBelowR 36 fun j =>
+    letN (winT T (1728 * j) 1728 + 1) fun WT =>
+    letN (winT C (1728 * j) 1728 + 1) fun WC =>
+    allBelowR 216 fun y => Nat.beq (digit WT (36 * (y % 6) + y / 6)) (digit WC y)
+
+theorem consTK6R3W_spec (T C : Nat) (h : consTK6R3W T C = true) (y : Nat) (hy : y < 7776) :
+    digit T (pos3 y) = digit C y := by
+  unfold consTK6R3W at h
+  have h1 := allBelowR_spec _ _ h (y / 216) (by omega)
+  rw [letN_succ, letN_succ] at h1
+  have h2 := Nat.eq_of_beq_eq_true (allBelowR_spec _ _ h1 (y % 216) (by omega))
+  rw [show 1728 * (y / 216) = 8 * (216 * (y / 216)) by omega, show (1728 : Nat) = 8 * 216 by rfl,
+    digit_winT _ _ _ _ (by omega), digit_winT _ _ _ _ (by omega)] at h2
+  rw [show 216 * (y / 216) + y % 216 = y by omega] at h2
+  rw [← h2]
+  congr 1
+  unfold pos3
+  omega
+
 /-- All 46656 symbol codes: outer loop over the 3 oldest symbols, one packed
 comparison of the 216 fields of the three newest per step. -/
 def checkTK6R3W (T2 R2 T3 R3 T4 R4 T5 R5 T6 R6 PC0 PT1 : Nat) : Bool :=
@@ -262,172 +283,172 @@ theorem potCK6R3W_bnd_0 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 0) y + 121 
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_0 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 0) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_0 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 0) (pos3 y)) (digit (potCK6R3W 0) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_0 : consTK6R3W (potTK6R3W 0) (potCK6R3W 0) = true := by decide +kernel
 theorem potCK6R3W_bnd_1 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 1) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_1 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 1) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_1 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 1) (pos3 y)) (digit (potCK6R3W 1) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_1 : consTK6R3W (potTK6R3W 1) (potCK6R3W 1) = true := by decide +kernel
 theorem potCK6R3W_bnd_2 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 2) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_2 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 2) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_2 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 2) (pos3 y)) (digit (potCK6R3W 2) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_2 : consTK6R3W (potTK6R3W 2) (potCK6R3W 2) = true := by decide +kernel
 theorem potCK6R3W_bnd_3 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 3) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_3 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 3) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_3 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 3) (pos3 y)) (digit (potCK6R3W 3) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_3 : consTK6R3W (potTK6R3W 3) (potCK6R3W 3) = true := by decide +kernel
 theorem potCK6R3W_bnd_4 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 4) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_4 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 4) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_4 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 4) (pos3 y)) (digit (potCK6R3W 4) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_4 : consTK6R3W (potTK6R3W 4) (potCK6R3W 4) = true := by decide +kernel
 theorem potCK6R3W_bnd_5 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 5) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_5 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 5) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_5 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 5) (pos3 y)) (digit (potCK6R3W 5) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_5 : consTK6R3W (potTK6R3W 5) (potCK6R3W 5) = true := by decide +kernel
 theorem potCK6R3W_bnd_6 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 6) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_6 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 6) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_6 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 6) (pos3 y)) (digit (potCK6R3W 6) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_6 : consTK6R3W (potTK6R3W 6) (potCK6R3W 6) = true := by decide +kernel
 theorem potCK6R3W_bnd_7 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 7) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_7 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 7) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_7 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 7) (pos3 y)) (digit (potCK6R3W 7) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_7 : consTK6R3W (potTK6R3W 7) (potCK6R3W 7) = true := by decide +kernel
 theorem potCK6R3W_bnd_8 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 8) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_8 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 8) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_8 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 8) (pos3 y)) (digit (potCK6R3W 8) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_8 : consTK6R3W (potTK6R3W 8) (potCK6R3W 8) = true := by decide +kernel
 theorem potCK6R3W_bnd_9 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 9) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_9 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 9) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_9 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 9) (pos3 y)) (digit (potCK6R3W 9) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_9 : consTK6R3W (potTK6R3W 9) (potCK6R3W 9) = true := by decide +kernel
 theorem potCK6R3W_bnd_10 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 10) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_10 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 10) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_10 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 10) (pos3 y)) (digit (potCK6R3W 10) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_10 : consTK6R3W (potTK6R3W 10) (potCK6R3W 10) = true := by decide +kernel
 theorem potCK6R3W_bnd_11 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 11) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_11 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 11) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_11 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 11) (pos3 y)) (digit (potCK6R3W 11) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_11 : consTK6R3W (potTK6R3W 11) (potCK6R3W 11) = true := by decide +kernel
 theorem potCK6R3W_bnd_12 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 12) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_12 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 12) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_12 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 12) (pos3 y)) (digit (potCK6R3W 12) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_12 : consTK6R3W (potTK6R3W 12) (potCK6R3W 12) = true := by decide +kernel
 theorem potCK6R3W_bnd_13 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 13) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_13 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 13) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_13 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 13) (pos3 y)) (digit (potCK6R3W 13) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_13 : consTK6R3W (potTK6R3W 13) (potCK6R3W 13) = true := by decide +kernel
 theorem potCK6R3W_bnd_14 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 14) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_14 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 14) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_14 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 14) (pos3 y)) (digit (potCK6R3W 14) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_14 : consTK6R3W (potTK6R3W 14) (potCK6R3W 14) = true := by decide +kernel
 theorem potCK6R3W_bnd_15 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 15) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_15 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 15) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_15 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 15) (pos3 y)) (digit (potCK6R3W 15) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_15 : consTK6R3W (potTK6R3W 15) (potCK6R3W 15) = true := by decide +kernel
 theorem potCK6R3W_bnd_16 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 16) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_16 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 16) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_16 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 16) (pos3 y)) (digit (potCK6R3W 16) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_16 : consTK6R3W (potTK6R3W 16) (potCK6R3W 16) = true := by decide +kernel
 theorem potCK6R3W_bnd_17 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 17) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_17 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 17) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_17 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 17) (pos3 y)) (digit (potCK6R3W 17) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_17 : consTK6R3W (potTK6R3W 17) (potCK6R3W 17) = true := by decide +kernel
 theorem potCK6R3W_bnd_18 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 18) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_18 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 18) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_18 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 18) (pos3 y)) (digit (potCK6R3W 18) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_18 : consTK6R3W (potTK6R3W 18) (potCK6R3W 18) = true := by decide +kernel
 theorem potCK6R3W_bnd_19 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 19) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_19 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 19) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_19 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 19) (pos3 y)) (digit (potCK6R3W 19) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_19 : consTK6R3W (potTK6R3W 19) (potCK6R3W 19) = true := by decide +kernel
 theorem potCK6R3W_bnd_20 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 20) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_20 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 20) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_20 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 20) (pos3 y)) (digit (potCK6R3W 20) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_20 : consTK6R3W (potTK6R3W 20) (potCK6R3W 20) = true := by decide +kernel
 theorem potCK6R3W_bnd_21 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 21) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_21 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 21) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_21 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 21) (pos3 y)) (digit (potCK6R3W 21) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_21 : consTK6R3W (potTK6R3W 21) (potCK6R3W 21) = true := by decide +kernel
 theorem potCK6R3W_bnd_22 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 22) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_22 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 22) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_22 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 22) (pos3 y)) (digit (potCK6R3W 22) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_22 : consTK6R3W (potTK6R3W 22) (potCK6R3W 22) = true := by decide +kernel
 theorem potCK6R3W_bnd_23 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 23) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_23 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 23) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_23 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 23) (pos3 y)) (digit (potCK6R3W 23) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_23 : consTK6R3W (potTK6R3W 23) (potCK6R3W 23) = true := by decide +kernel
 theorem potCK6R3W_bnd_24 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 24) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_24 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 24) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_24 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 24) (pos3 y)) (digit (potCK6R3W 24) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_24 : consTK6R3W (potTK6R3W 24) (potCK6R3W 24) = true := by decide +kernel
 theorem potCK6R3W_bnd_25 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 25) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_25 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 25) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_25 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 25) (pos3 y)) (digit (potCK6R3W 25) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_25 : consTK6R3W (potTK6R3W 25) (potCK6R3W 25) = true := by decide +kernel
 theorem potCK6R3W_bnd_26 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 26) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_26 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 26) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_26 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 26) (pos3 y)) (digit (potCK6R3W 26) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_26 : consTK6R3W (potTK6R3W 26) (potCK6R3W 26) = true := by decide +kernel
 theorem potCK6R3W_bnd_27 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 27) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_27 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 27) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_27 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 27) (pos3 y)) (digit (potCK6R3W 27) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_27 : consTK6R3W (potTK6R3W 27) (potCK6R3W 27) = true := by decide +kernel
 theorem potCK6R3W_bnd_28 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 28) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_28 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 28) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_28 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 28) (pos3 y)) (digit (potCK6R3W 28) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_28 : consTK6R3W (potTK6R3W 28) (potCK6R3W 28) = true := by decide +kernel
 theorem potCK6R3W_bnd_29 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 29) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_29 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 29) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_29 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 29) (pos3 y)) (digit (potCK6R3W 29) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_29 : consTK6R3W (potTK6R3W 29) (potCK6R3W 29) = true := by decide +kernel
 theorem potCK6R3W_bnd_30 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 30) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_30 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 30) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_30 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 30) (pos3 y)) (digit (potCK6R3W 30) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_30 : consTK6R3W (potTK6R3W 30) (potCK6R3W 30) = true := by decide +kernel
 theorem potCK6R3W_bnd_31 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 31) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_31 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 31) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_31 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 31) (pos3 y)) (digit (potCK6R3W 31) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_31 : consTK6R3W (potTK6R3W 31) (potCK6R3W 31) = true := by decide +kernel
 theorem potCK6R3W_bnd_32 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 32) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_32 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 32) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_32 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 32) (pos3 y)) (digit (potCK6R3W 32) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_32 : consTK6R3W (potTK6R3W 32) (potCK6R3W 32) = true := by decide +kernel
 theorem potCK6R3W_bnd_33 (y : Nat) (hy : y < 7776) : digit (potCK6R3W 33) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
 theorem potTK6R3W_bnd_33 (y : Nat) (hy : y < 7776) : digit (potTK6R3W 33) y + 121 < 128 :=
   bytes_lt_of_masks _ _ _ _ _ hiPK6R3W_eq onesPK6R3W_eq (by decide) (by decide +kernel) y hy
-theorem potTK6R3W_cons_33 : allBelowR 7776 (fun y => Nat.beq (digit (potTK6R3W 33) (pos3 y)) (digit (potCK6R3W 33) y)) = true := by decide +kernel
+theorem potTK6R3W_cons_33 : consTK6R3W (potTK6R3W 33) (potCK6R3W 33) = true := by decide +kernel
 
 theorem potCK6R3W_digit_le (i y : Nat) (hy : y < 7776) : digit (potCK6R3W i) y ≤ 6 := by
   by_cases hi0 : i = 0
@@ -579,73 +600,73 @@ theorem potTK6R3W_digit_le (i y : Nat) (hy : y < 7776) : digit (potTK6R3W i) y �
 
 theorem potTK6R3W_digit (i y : Nat) (hy : y < 7776) : digit (potTK6R3W i) (pos3 y) = digit (potCK6R3W i) y := by
   by_cases hi0 : i = 0
-  · subst hi0; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_0 y hy)
+  · subst hi0; exact consTK6R3W_spec _ _ potTK6R3W_cons_0 y hy
   by_cases hi1 : i = 1
-  · subst hi1; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_1 y hy)
+  · subst hi1; exact consTK6R3W_spec _ _ potTK6R3W_cons_1 y hy
   by_cases hi2 : i = 2
-  · subst hi2; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_2 y hy)
+  · subst hi2; exact consTK6R3W_spec _ _ potTK6R3W_cons_2 y hy
   by_cases hi3 : i = 3
-  · subst hi3; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_3 y hy)
+  · subst hi3; exact consTK6R3W_spec _ _ potTK6R3W_cons_3 y hy
   by_cases hi4 : i = 4
-  · subst hi4; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_4 y hy)
+  · subst hi4; exact consTK6R3W_spec _ _ potTK6R3W_cons_4 y hy
   by_cases hi5 : i = 5
-  · subst hi5; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_5 y hy)
+  · subst hi5; exact consTK6R3W_spec _ _ potTK6R3W_cons_5 y hy
   by_cases hi6 : i = 6
-  · subst hi6; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_6 y hy)
+  · subst hi6; exact consTK6R3W_spec _ _ potTK6R3W_cons_6 y hy
   by_cases hi7 : i = 7
-  · subst hi7; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_7 y hy)
+  · subst hi7; exact consTK6R3W_spec _ _ potTK6R3W_cons_7 y hy
   by_cases hi8 : i = 8
-  · subst hi8; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_8 y hy)
+  · subst hi8; exact consTK6R3W_spec _ _ potTK6R3W_cons_8 y hy
   by_cases hi9 : i = 9
-  · subst hi9; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_9 y hy)
+  · subst hi9; exact consTK6R3W_spec _ _ potTK6R3W_cons_9 y hy
   by_cases hi10 : i = 10
-  · subst hi10; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_10 y hy)
+  · subst hi10; exact consTK6R3W_spec _ _ potTK6R3W_cons_10 y hy
   by_cases hi11 : i = 11
-  · subst hi11; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_11 y hy)
+  · subst hi11; exact consTK6R3W_spec _ _ potTK6R3W_cons_11 y hy
   by_cases hi12 : i = 12
-  · subst hi12; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_12 y hy)
+  · subst hi12; exact consTK6R3W_spec _ _ potTK6R3W_cons_12 y hy
   by_cases hi13 : i = 13
-  · subst hi13; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_13 y hy)
+  · subst hi13; exact consTK6R3W_spec _ _ potTK6R3W_cons_13 y hy
   by_cases hi14 : i = 14
-  · subst hi14; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_14 y hy)
+  · subst hi14; exact consTK6R3W_spec _ _ potTK6R3W_cons_14 y hy
   by_cases hi15 : i = 15
-  · subst hi15; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_15 y hy)
+  · subst hi15; exact consTK6R3W_spec _ _ potTK6R3W_cons_15 y hy
   by_cases hi16 : i = 16
-  · subst hi16; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_16 y hy)
+  · subst hi16; exact consTK6R3W_spec _ _ potTK6R3W_cons_16 y hy
   by_cases hi17 : i = 17
-  · subst hi17; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_17 y hy)
+  · subst hi17; exact consTK6R3W_spec _ _ potTK6R3W_cons_17 y hy
   by_cases hi18 : i = 18
-  · subst hi18; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_18 y hy)
+  · subst hi18; exact consTK6R3W_spec _ _ potTK6R3W_cons_18 y hy
   by_cases hi19 : i = 19
-  · subst hi19; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_19 y hy)
+  · subst hi19; exact consTK6R3W_spec _ _ potTK6R3W_cons_19 y hy
   by_cases hi20 : i = 20
-  · subst hi20; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_20 y hy)
+  · subst hi20; exact consTK6R3W_spec _ _ potTK6R3W_cons_20 y hy
   by_cases hi21 : i = 21
-  · subst hi21; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_21 y hy)
+  · subst hi21; exact consTK6R3W_spec _ _ potTK6R3W_cons_21 y hy
   by_cases hi22 : i = 22
-  · subst hi22; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_22 y hy)
+  · subst hi22; exact consTK6R3W_spec _ _ potTK6R3W_cons_22 y hy
   by_cases hi23 : i = 23
-  · subst hi23; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_23 y hy)
+  · subst hi23; exact consTK6R3W_spec _ _ potTK6R3W_cons_23 y hy
   by_cases hi24 : i = 24
-  · subst hi24; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_24 y hy)
+  · subst hi24; exact consTK6R3W_spec _ _ potTK6R3W_cons_24 y hy
   by_cases hi25 : i = 25
-  · subst hi25; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_25 y hy)
+  · subst hi25; exact consTK6R3W_spec _ _ potTK6R3W_cons_25 y hy
   by_cases hi26 : i = 26
-  · subst hi26; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_26 y hy)
+  · subst hi26; exact consTK6R3W_spec _ _ potTK6R3W_cons_26 y hy
   by_cases hi27 : i = 27
-  · subst hi27; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_27 y hy)
+  · subst hi27; exact consTK6R3W_spec _ _ potTK6R3W_cons_27 y hy
   by_cases hi28 : i = 28
-  · subst hi28; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_28 y hy)
+  · subst hi28; exact consTK6R3W_spec _ _ potTK6R3W_cons_28 y hy
   by_cases hi29 : i = 29
-  · subst hi29; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_29 y hy)
+  · subst hi29; exact consTK6R3W_spec _ _ potTK6R3W_cons_29 y hy
   by_cases hi30 : i = 30
-  · subst hi30; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_30 y hy)
+  · subst hi30; exact consTK6R3W_spec _ _ potTK6R3W_cons_30 y hy
   by_cases hi31 : i = 31
-  · subst hi31; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_31 y hy)
+  · subst hi31; exact consTK6R3W_spec _ _ potTK6R3W_cons_31 y hy
   by_cases hi32 : i = 32
-  · subst hi32; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_32 y hy)
+  · subst hi32; exact consTK6R3W_spec _ _ potTK6R3W_cons_32 y hy
   by_cases hi33 : i = 33
-  · subst hi33; exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potTK6R3W_cons_33 y hy)
+  · subst hi33; exact consTK6R3W_spec _ _ potTK6R3W_cons_33 y hy
   have h0 : potTK6R3W i = 0 := by
     unfold potTK6R3W
     simp [hi0, hi1, hi2, hi3, hi4, hi5, hi6, hi7, hi8, hi9, hi10, hi11, hi12, hi13, hi14, hi15, hi16, hi17, hi18, hi19, hi20, hi21, hi22, hi23, hi24, hi25, hi26, hi27, hi28, hi29, hi30, hi31, hi32, hi33]

@@ -241,7 +241,9 @@ def main():
             # expected type (unifying a separately elaborated Bool statement overflows the stack).
             pot_thms.append(f'theorem {nm}{S}_bnd_{i} (y : Nat) (hy : y < {M1}) : digit ({nm}{S} {i}) y + {127 - R} < 128 :=\n'
                             f'  bytes_lt_of_masks _ _ _ _ _ hiP{S}_eq onesP{S}_eq (by decide) (by decide +kernel) y hy')
-        pot_thms.append(f'theorem potT{S}_cons_{i} : allBelowR {M1} (fun y => Nat.beq (digit (potT{S} {i}) ({POS} y)) (digit (potC{S} {i}) y)) = true := by decide +kernel')
+        # layout consistency, block by block: both {N3}-field windows are forced to numerals first,
+        # so the inner loop divides small numbers only
+        pot_thms.append(f'theorem potT{S}_cons_{i} : consT{S} (potT{S} {i}) (potC{S} {i}) = true := by decide +kernel')
     def by_shape(name, body_i, default):
         cases = ''.join(f'''  by_cases hi{i} : i = {i}
   · subst hi{i}; {body_i(i)}
@@ -256,7 +258,7 @@ def main():
     potT_le = f'''theorem potT{S}_digit_le (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) y ≤ {R} := by
 {by_shape(f'potT{S}', lambda i: f'have h := potT{S}_bnd_{i} y hy; omega', f'rw [h0]; simp [digit]')}'''
     potT_eq = f'''theorem potT{S}_digit (i y : Nat) (hy : y < {M1}) : digit (potT{S} i) ({POS} y) = digit (potC{S} i) y := by
-{by_shape(f'potT{S}', lambda i: f'exact Nat.eq_of_beq_eq_true (allBelowR_spec _ _ potT{S}_cons_{i} y hy)', f'''have h0c : potC{S} i = 0 := by
+{by_shape(f'potT{S}', lambda i: f'exact consT{S}_spec _ _ potT{S}_cons_{i} y hy', f'''have h0c : potC{S} i = 0 := by
     unfold potC{S}
     simp [{', '.join(f'hi{i}' for i in range(len(shapes)))}]
   rw [h0, h0c]; simp [digit]''')}'''
@@ -430,6 +432,27 @@ theorem hiP{S}_eq : hiP{S} = pack (tab (fun _ => 128) {M1}) := by
   rw [e]; exact h.symm
 theorem wpat{S}_eq : wpat{S} = pack (tab (fun l => l / {N2} + 1) {N3}) := by decide +kernel
 theorem rep{S}_eq : rep{S} = repK {N2} {NS} := by decide +kernel
+
+/-- `T` holds the fields of `C` at the positions `{POS} y`, checked block by block on numerals. -/
+def consT{S} (T C : Nat) : Bool :=
+  allBelowR {M1 // N3} fun j =>
+    letN (winT T ({B3} * j) {B3} + 1) fun WT =>
+    letN (winT C ({B3} * j) {B3} + 1) fun WC =>
+    allBelowR {N3} fun y => Nat.beq (digit WT ({N2} * (y % {NS}) + y / {NS})) (digit WC y)
+
+theorem consT{S}_spec (T C : Nat) (h : consT{S} T C = true) (y : Nat) (hy : y < {M1}) :
+    digit T ({POS} y) = digit C y := by
+  unfold consT{S} at h
+  have h1 := allBelowR_spec _ _ h (y / {N3}) (by omega)
+  rw [letN_succ, letN_succ] at h1
+  have h2 := Nat.eq_of_beq_eq_true (allBelowR_spec _ _ h1 (y % {N3}) (by omega))
+  rw [show {B3} * (y / {N3}) = 8 * ({N3} * (y / {N3})) by omega, show ({B3} : Nat) = 8 * {N3} by rfl,
+    digit_winT _ _ _ _ (by omega), digit_winT _ _ _ _ (by omega)] at h2
+  rw [show {N3} * (y / {N3}) + y % {N3} = y by omega] at h2
+  rw [← h2]
+  congr 1
+  unfold {POS}
+  omega
 
 /-- All {NS ** k} symbol codes: outer loop over the {k - 3} oldest symbols, one packed
 comparison of the {N3} fields of the three newest per step. -/
