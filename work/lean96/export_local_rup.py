@@ -35,7 +35,7 @@ def emit(entry,folder=None):
             modules.append(write(prefix+f'InputPart{k//32:04d}',s+end))
             s='import '+modules[-1]+'\n'+header
     modules.append(write(prefix+'Inputs',s+end))
-    chunk=64
+    chunk=8
     for part,start in enumerate(range(0,len(core['proof']),chunk)):
         s='import '+modules[-1]+'\n'+header
         for ident,c,hints in core['proof'][start:start+chunk]:

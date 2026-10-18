@@ -73,7 +73,7 @@ def check(name,worker='setup',force=False):
     memory=12288 if name=='Snake9' else 4096
     rc=limited([LEAN,'-j','1','-s','16384','--root='+str(src.parent),'-o',target,src],log,memory=memory)
     output=log.read_text(encoding='utf-8')
-    status='PASSED' if rc==0 else ('TIMEOUT' if rc==124 else ('RESOURCE_FAILURE' if any(x in output.lower() for x in ['out of memory','failed to create thread']) else 'COMPILATION_ERROR'))
+    status='PASSED' if rc==0 else ('TIMEOUT' if rc==124 else ('RESOURCE_FAILURE' if any(x in output.lower() for x in ['out of memory','failed to create thread','std::bad_alloc']) else 'COMPILATION_ERROR'))
     if sha(src)!=fingerprint or any(sha(object_path(n))!=h for n,h in deps.items()):raise ValueError('Inputs changed during compilation')
     rec=dict(status=status,returncode=rc,source=str(src.relative_to(ROOT)),source_sha256=fingerprint,dependencies=deps,
         compiler_sha256=compiler,memory_mib=memory,thread_stack_kib=16384,seconds=time.monotonic()-t,finished=now(),log=str(log.relative_to(ROOT)),log_sha256=sha(log))

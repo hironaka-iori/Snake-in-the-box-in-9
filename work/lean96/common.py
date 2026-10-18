@@ -19,8 +19,14 @@ def read(p,default=None):
     return json.loads(Path(p).read_text(encoding='utf-8')) if Path(p).exists() else default
 def save(p,value):
     p=Path(p);p.parent.mkdir(parents=True,exist_ok=True)
-    tmp=p.with_name(p.name+'.tmp')
+    tmp=p.with_name(p.name+'.'+str(os.getpid())+'.'+str(time.time_ns())+'.tmp')
     tmp.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-    os.replace(tmp,p)
+    for attempt in range(10):
+        try:
+            os.replace(tmp,p)
+            break
+        except PermissionError:
+            if attempt==9:raise
+            time.sleep(0.05*(attempt+1))
 def now():return datetime.now(timezone.utc).isoformat()
 def formula(i):return json.loads(gzip.decompress((ROOT/f'outputs/keep96/formulas/entry{i:03d}.json.gz').read_bytes()))

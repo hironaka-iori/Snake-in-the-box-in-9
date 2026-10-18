@@ -135,3 +135,14 @@ the four `Snake9.Regrowth96.Bank96` aggregate statements, all source/dependency/
 object hashes, and preserved certificate hashes. After success, produce an
 English results report, push only `research/keep96-lean-completion`, mark the
 dashboard complete, and disable the continuation heartbeat. Do not merge.
+
+### Second resource repair (18 October 2026)
+
+The bounded batch stopped with 83 audited entries / 24 representatives.
+Derived RUP modules of 64 steps still exceeded the 4096-MiB process limit
+on many entries. New derived modules contain eight steps; the mathematical
+inference checker and target are unchanged. Entry 179 is the new full-proof
+validation gate before a two-worker retry. Original logs remain available.
+Atomic JSON publication now uses unique temporary files and up to ten bounded
+retries for transient Windows replacement conflicts (2.25 seconds total delay).
+Failed writes remain failures; no completion is inferred from them.
