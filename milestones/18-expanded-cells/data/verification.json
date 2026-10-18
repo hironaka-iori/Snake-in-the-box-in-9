@@ -1,0 +1,58 @@
+{
+  "status": "PASSED",
+  "scope": "Witnesses, recorded symmetry transforms, source versions, and Lean map proof. The optimization coverage and solver exclusions are computational, not Lean completeness results.",
+  "aligned_witnesses": 131,
+  "searches": {
+    "control-budget28.json": "INFEASIBLE",
+    "control191.json": "OPTIMAL",
+    "search192-budget40.json": "UNKNOWN",
+    "search192-unrestricted-palette.json": "UNKNOWN",
+    "search196-budget34.json": "UNKNOWN"
+  },
+  "repairs": {
+    "neutral-pair.json": {
+      "INFEASIBLE": 1,
+      "OPTIMAL": 1
+    },
+    "repair-1-cells.json": {
+      "INFEASIBLE": 16
+    },
+    "repair-2-cells.json": {
+      "INFEASIBLE": 32
+    },
+    "repair-control191.json": {
+      "OPTIMAL": 1
+    }
+  },
+  "sha256_lf": {
+    "milestones/18-expanded-cells/data/aligned-seed.json": "5b979ae96d7e4c52ce208a814a639b358651b661ecb53117516907972bd61df1",
+    "milestones/18-expanded-cells/data/bank-alignments.json": "711953b13019fd6a35ff6094fe97db88a66bf2e228eb408c720b8ea142eb842a",
+    "milestones/18-expanded-cells/data/control-budget28.json": "ae114a64cd9b525685f760ef60ae9fa5eb69c918f74081a30e84cf217fd40653",
+    "milestones/18-expanded-cells/data/control191.json": "c886ea3d463d89a9a7c78d6c7dbcdfaebd38f9f267e87130cc7d8140220cf0bd",
+    "milestones/18-expanded-cells/data/neutral-comparison.json": "9bdccc8d2d2486e056813681cfecb764af5f04a3e466b33c6afab0aeb5724995",
+    "milestones/18-expanded-cells/data/neutral-pair.json": "81217637400f68978c0d2098daac6a42ad30d3057178c5c71c9113201930bf6b",
+    "milestones/18-expanded-cells/data/repair-1-cells.json": "cd819f389dc0eaae1bd3aec768e6fa8961fba773494406beb7dfa1a8cc35913a",
+    "milestones/18-expanded-cells/data/repair-2-cells.json": "e0719278b14bb7f8aecb2bfd055ba5b06374977727a091498991aae96e87188b",
+    "milestones/18-expanded-cells/data/repair-control191.json": "38c0725f26ec7e41a178116d66024bb32162525ef904f26e47d3abf6735c920b",
+    "milestones/18-expanded-cells/data/search192-budget40.json": "1548fa938c9e491cc761a05a11627c2bb58fbc0f4b0d4fa1a455a886cdcde2e7",
+    "milestones/18-expanded-cells/data/search192-unrestricted-palette.json": "2672eae38bda060c430aa48d82f529798c21fab998b17a7179670d0c2390c24c",
+    "milestones/18-expanded-cells/data/search196-budget34.json": "84702b46f916a5f371e4b54acc976a50bb3f253a4cf247a007e6c44a50a61f84",
+    "milestones/18-expanded-cells/lean/Alignment.lean": "cb33052fa53205330bc78c0d1b0bee8394efa9546040f969eb4f12f68282c732",
+    "milestones/18-expanded-cells/logs/alignment.log": "bb6ff01f294ce437ea0b4b43d193ee002415c4998cd182078a63ad216e748fe2",
+    "milestones/18-expanded-cells/scripts/align_bank.py": "8fc9a8016051d9674eb16a9db05d2c22be6c9a71fe9c9c97bbef7cd5c998db99",
+    "milestones/18-expanded-cells/scripts/make_alignment_certificate.py": "4b285239faab03ce4b744f5eb1d33787150a762d00272e6ac2915552b32afa2c",
+    "milestones/18-expanded-cells/scripts/repair_cells.py": "ee6e02dcad7b670a53754cccfaa4f7cc22e72102410fd91ad13197aab8910c0e",
+    "milestones/18-expanded-cells/scripts/search.py": "f63c6d64bb34a191367c7fce6dbb1d6f241586335b0299d54d0b9a080951eadb",
+    "milestones/18-expanded-cells/scripts/snapshots/repair-cells-v1.py": "93ed791b26845b5340a5d4ac9aacb386a5b8f2aa2e77610c5743d3c2d4d5be67",
+    "milestones/18-expanded-cells/scripts/verify.py": "b8e96b0dd92d7e4339e24a35155578e000ad52fcea01ce6c39518566c74aacfc"
+  },
+  "lean_audits": [
+    "Snake9.ExpandedCells.undo_align",
+    "Snake9.ExpandedCells.flip_rule",
+    "Snake9.ExpandedCells.edge_checks_sound",
+    "Snake9.ExpandedCells.bitPerm_surjective",
+    "Snake9.ExpandedCells.align_injective",
+    "Snake9.ExpandedCells.align_adj",
+    "Snake9.ExpandedCells.alignSnake"
+  ]
+}

@@ -1044,6 +1044,24 @@ Lean checks the numerical profiles and this summation under the local census pre
 
 The constructive consequence is to enlarge the allowed vertices within cells. A useful next search permits vertices from the opposite base cycle, which can create cross-cell connections beyond the four shared connectors. The local census explains why retaining the original four-connector restriction is an unsuitable route to a 196-edge construction.
 
+\subsection{Expanded cells and alignment with known snakes}
+The enlarged model permits all 512 cube vertices and places a budget on the number selected outside the original 288-vertex cell palette. To choose a starting configuration, each of the 131 published 191-edge witnesses was aligned with that palette. The computation examined all 126 choices of five internal coordinates, all 120 orders of those coordinates, 32 internal translations, and two outer translation parities. Permuting the four outer coordinates or translating them by a word of even weight leaves palette membership unchanged. Thus these 967,680 representatives suffice for this alignment objective. Within each internal coordinate set, identical palette patterns reduced the 7,680 representatives to 960 distinct patterns.
+
+The computed minimum numbers of outside-palette vertices range from 29 to 38 across the bank. Their frequencies are
+\[
+\begin{array}{c|rrrrrr}
+\text{outside vertices}&29&30&35&36&37&38\\\hline
+\text{bank witnesses}&2&2&3&57&63&4.
+\end{array}
+\]
+Every transformed witness passed a separate pairwise induced-path check. These minima concern the finite bank and the specified alignment objective; they do not give a lower bound on outside-palette use by arbitrary snakes.
+
+The selected witness is bank entry 129, using zero-based indexing, with 29 outside-palette vertices. Its alignment sends input bits to output bits in the order $(1,5,4,2,7,0,3,6,8)$ and then translates by the word with decimal value 7. A coordinate permutation followed by translation preserves which pairs differ in exactly one bit. For this particular map, Lean checks an inverse, every coordinate-flip identity, injectivity, adjacency in both directions, and the induced transformation on snakes of any length. This certifies the relabeling; the bank-wide minimization remains computational.
+
+The expanded model recovered the fixed 191-edge witness with an outside budget of 29 and rejected it with budget 28. A 196-edge search allowing up to 32 deleted seed vertices and 34 outside-palette vertices returned \texttt{UNKNOWN} after 120 seconds. Two 192-edge searches, each allowing 16 deletions, also remained unresolved after 120 seconds: one allowed 40 outside vertices and the other imposed no effective palette restriction.
+
+Whole-cell replacement was tested separately. With the remaining vertices fixed to the selected witness, all sixteen one-cell searches and all 32 adjacent two-cell searches for exactly 192 edges returned \texttt{INFEASIBLE}. These are restricted solver results without Lean infeasibility certificates. A 191-edge control succeeded. Allowing an equal-length change in cells 0 and 2 replaced one vertex and produced a snake equivalent to bank entry 127 under translation, coordinate permutation and reversal. The rearrangement changes the starting configuration but adds no new symmetry class to the bank. The next constructive step is to vary the coordinate partition or replace connections across more cells simultaneously.
+
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
 
