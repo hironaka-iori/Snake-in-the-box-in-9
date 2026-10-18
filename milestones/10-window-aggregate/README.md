@@ -1,8 +1,8 @@
 # Window exclusions and stronger aggregate bounds
 
-Checkpoint: 17 October 2026.
+Checkpoint: 18 October 2026.
 
-**Status.** Three new *conditional* upper bounds are proved in Lean: at most **242 edges**, at most **241 edges** with one extra premise, at most **239 edges** from a direction-aware automaton with 145 certified window exclusions, and at most **238 edges** with five-centre windows (325 exclusions). The premises are exclusions of certain singleton-count patterns on three or four consecutive internal path vertices. Each premise has a **DRAT-checked** unsatisfiability certificate for an explicit local CNF. None is a Lean theorem yet. The unconditional checked interval therefore remains **191 <= a(9) <= 245**.
+**Status.** Every snake in Q9 has at most **242 edges**, and at most **241 edges**: both are now unconditional Lean theorems (`UpperBound241.lean`), so the checked interval is **191 <= a(9) <= 241**. Their premises, exclusions of 22 singleton-count windows on three or four consecutive internal path vertices, are proved in Lean by a geometric bridge to a local CNF, clause-by-clause soundness of its UNSAT core, and a kernel replay of the drat-trim LRAT refutation with a verified checker (see *Lean proofs of the 22 exclusions* below). Two further bounds remain *conditional*: at most **239 edges** from a direction-aware automaton with 145 window exclusions, and at most **238 edges** with five-centre windows (325 exclusions). Each of their premises has a **DRAT-checked** certificate for an explicit local CNF; for 239 the bridge and clause soundness are also proved in Lean, and only the kernel replay of the 145 refutations is not yet complete.
 
 ## What this milestone adds
 
@@ -39,14 +39,21 @@ This milestone asks which count windows a local ball model allows. It then deriv
    - (C) It normalises 4,979 windows of real snakes, every window with a count at most 4 plus a sample. Each satisfies the judge's encoding with its true counts.
    - (D) An independent dynamic program reproduces 245 for the proved premises and 244 for the existing (2,2,3) condition, and gives 242 and 241 for the new premise sets.
 
-   This gives two independent implementations of the encoding, but it is still a test of the bridge, not a proof.
+   This gives two independent implementations of the encoding, but it is still a test of the bridge, not a proof. The bridge is now proved in Lean (next item), which supersedes this test for the 22 windows.
+
+8. **Lean proofs of the 22 exclusions** (core Lean in `work/final_lean/` unless noted).
+   - `LocalWindowModel.lean` fixes `Axioms S E window centres`: necessary conditions on the vertex set `S` and endpoint set `E` of a snake whose window sits in canonical position. `LocalWindowBridge.lean` moves every snake window there by a translation and a coordinate permutation, proves `Axioms`, and identifies the local count with the core count.
+   - `scripts/gen_lean_core.py` trims each CNF/DRUP pair with drat-trim to an UNSAT core (`LocalWindowCnf/`). `scripts/gen_lean_sat.py` proves that every core clause follows from `Axioms` (`LocalWindowSat/`, theorem `sat`), so the CNF generator is not trusted.
+   - `scripts/gen_lean_lrat.py` turns the drat-trim LRAT proof into proof data and kernel checks (`LocalWindowUnsat/C*`): `LratCheck.lean` is a reverse-unit-propagation checker written for kernel evaluation, with a Lean soundness proof; the proof is cut into segments of tens of thousands of hints, each checked by `decide +kernel`, with checkpoints of the live clauses. drat-trim is therefore not trusted either.
+   - `LocalWindowRefuted.lean` combines them into `allRefuted : AllRefuted`, and `work/spectral/stronger/UpperBound241.lean` proves `upper_bound_242`, `upper_bound_241` and `verified_interval_191_241`. Their axioms are exactly `propext`, `Classical.choice`, `Quot.sound` (no `sorryAx`, no `Lean.ofReduceBool`).
+   - *Builds.* The core closure has 1086 modules; 203 are kernel checks of 2-4.5 GB each, and must be built through `work/guarded_lake_build.py` (bounded concurrency and memory), never a plain `lake build`. Audited on macOS (2.3 kernel-hours; `outputs/upper-bound-241-audit.log`) and again from a fresh Linux environment (Lean 4.19.0, mathlib c44e0c8 built from source, 4 cores and 15 GB; 5.7 kernel-hours under CPU contention, 183 min wall time for the core and 19 min for the 152-module mathlib chain; `outputs/upper-bound-241-audit-linux.log`).
 
 | Assumed window exclusions | Minimum mean | Bound |
 |---|---|---|
 | proved Lean premises only | 7/3 | 245 edges (unconditional) |
 | + (2,2,3) | 5/2 | 244 (existing conditional theorem) |
-| + (2,2,4), (2,3,2), (3,2,3), (4,1,4..6) | 14/5 | **242** (new conditional theorem) |
-| + (2,4,2,3) | 3 | **241** (new conditional theorem) |
+| + (2,2,4), (2,3,2), (3,2,3), (4,1,4..6) | 14/5 | **242** (now unconditional) |
+| + (2,4,2,3) | 3 | **241** (now unconditional) |
 
 The constants follow from `5*T >= 14*(v-2) - 12 + 40` and `T >= 3*(v-2) - 4 + 8` respectively. Exact dynamic programming over count sequences, in `scripts/aggregate.py`, confirms that the patterns admit 243 and 242 vertices. They exclude one more vertex in each case.
 
@@ -100,12 +107,13 @@ The first command needs the survey files as a seed and about ten minutes; the re
 
 **Geometric bridge (Lean).** `AggregateDirectionUnconditional.lean` proves `upper_239_of_refuted (h : AllRefuted239) (p : Snake m) : m ≤ 239`, where `AllRefuted239` (`work/final_lean/LocalWindowDirKeys.lean`) is the conjunction of the 145 statements `Refuted (winOf ds) (boundsOf syms)`, one per certificate key. The window premises of `upper_239_of_direction_windows` are discharged in `DirectionWindowBridge.lean`: `cover_table` (kernel evaluation) shows that every set bit of `forbMask` looked up for a canonical shape of two to four centres is one of the 145 keys; first-occurrence relabelling is realised by a coordinate permutation; and the reversed lookup of `wforb` is the same statement for the reversed snake (`LocalWindowDirBridge.lean`, core, reuses the frame of `LocalWindowBridge`). On the certificate side, `scripts/gen_lean_core.py --set direction` trims each committed CNF/DRUP pair with drat-trim to an UNSAT core (`LocalWindowCnf/D<dirs>A<syms>.lean`, 244,777 clauses in total; hashes and LRAT statistics in `data/lean_core_direction/`), and `scripts/gen_lean_sat.py --set direction` proves that every core clause follows from the snake axioms (`LocalWindowSat/D*.lean`, theorem `sat`). `LocalWindowDirSat.allRefuted239_of_unsat` turns the 145 core refutations into `AllRefuted239`. For the 48 windows with cycle cuts the committed CNF/DRUP pairs match the SHA256 values of `direction_certificates_k5.json`, not the stale ones of `direction_certificates.json`.
 
-**Still not established.** A kernel-checked replay of the 145 core refutations (`Unsat D*.cnf`); the drat-trim LRAT proofs total about 4.1 million lemmas and 249 million hints, 40% of them in four windows. Beyond 238, the next levers are six-centre windows or eight directions of memory (each multiplies the state space by six or so), radius four, and the empty-square term.
+**Kernel replay of the 145 refutations.** `scripts/run_direction_replays.py gen` writes the replays `LocalWindowUnsat/D*` (not committed; 145 roots, 12,879 data and check modules, 1.9 GB of source, six cases with 14-bit words through `LratCheck14.lean`), and `run_direction_replays.py build` builds their 2575 kernel-check modules through the guarded builder. The drat-trim LRAT proofs total about 4.1 million lemmas and 249 million hints, 40% of them in four windows. The generated proof data are declared `noncomputable def`: the kernel checks only unfold them, and without compiled code the build output is several times smaller (about 40 GB otherwise). `LocalWindowDirUnsat.lean` combines the replays with `LocalWindowSat/D*` into `allRefuted239`, and `work/spectral/stronger/UpperBound239.lean` would then give `upper_bound_239`. **Status:** the replay build is not complete, so 239 is still conditional.
+
+**Still not established beyond that.** Beyond 238, the next levers are six-centre windows or eight directions of memory (each multiplies the state space by six or so), radius four, and the empty-square term.
 
 ## What is not established
 
-- **The geometric bridge.** A snake with such a window can be normalized so that the window has a canonical shape, by a translation and a coordinate permutation. Its intersection with the ball then satisfies every clause. That argument is short and standard, but it is not formalized here. The same gap exists for the earlier radius-three (2,2,3) certificates in `milestones/07-window-223/`.
-- **DRAT is not Lean.** `drat-trim` is an independent, widely used checker, but it is not part of the Lean kernel. The CNF generator is also unverified, though the positive controls exercise it. Converting these certificates into Lean, as was attempted for (2,2,3), remains open.
+- **The 238 premises.** The 325 five-centre windows have DRAT-checked certificates only; their bridge, clause soundness and replays are not done. For 239 see the replay status above. (The bridge and the DRAT-to-Lean gap described in earlier checkpoints are closed for the 22 windows behind 242 and 241.)
 - **Beyond 241.** The shape-blind four-window ceiling is 3, so further progress here needs more information:
   - *Direction-aware states.* Feasible low quadruples such as `(3,3,3,3)` occur only in shape `0,1,2,3,0`. Three consecutive windows of that shape would make `x_7` adjacent to `x_0`, so an automaton that also tracks directions should exceed mean 3. `scripts/direction_automaton.py` does this: it tracks the last seven directions and checks each window against the survey for its own shape. Its minimum mean is about **10/3**, found by binary search. With small constants that would give roughly 239–240 edges. It relies on many more solver-only exclusions, none certified yet.
   - *Radius four.*
@@ -126,4 +134,4 @@ python judge.py                 # independent end-to-end verdict
 python direction_automaton.py   # exploratory, about 10/3
 ```
 
-`wincert.ensure_drat` compiles the vendored `drat-trim` into the ignored `.build/` directory after checking its source hash. For the Lean modules, run `python work/spectral/verify_strengthened.py --mathlib-dir /path/to/mathlib`. It now includes the three new modules and audits both conditional theorems.
+`wincert.ensure_drat` compiles the vendored `drat-trim` into the ignored `.build/` directory after checking its source hash. For the Lean modules, run `python work/spectral/verify_strengthened.py --mathlib-dir /path/to/mathlib --core-targets LocalWindowRefuted LocalWindowBridge Snake9 PathStructure CubeLocal SquareCounterexample SingletonSquareLemma OptimalityTarget`; it builds the core through `work/guarded_lake_build.py` and audits the conditional and the unconditional theorems. `--with-239` adds `UpperBound239` once the 145 replays have been generated.

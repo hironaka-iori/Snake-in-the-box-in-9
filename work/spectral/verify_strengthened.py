@@ -88,6 +88,12 @@ def main():
                              "(milestones/10-window-aggregate/scripts/run_direction_replays.py gen)")
     parser.add_argument("--core-jobs", type=int, default=3,
                         help="concurrent Lean processes for the guarded core build")
+    parser.add_argument("--core-heavy-jobs", type=int, default=None,
+                        help="concurrent kernel-check modules (default: --core-jobs); "
+                             "about (RAM_GB - 4) / 5")
+    parser.add_argument("--core-rss-cap-gb", type=float, default=9.0,
+                        help="per-module memory cap of the guarded core build; "
+                             "Snake9 alone needs about 7.4 GB on Linux")
     args = parser.parse_args()
     project = Path(__file__).resolve().parent
     repo = project.parent.parent
@@ -182,6 +188,8 @@ def main():
         ).group(1).replace('"', "").replace(",", " ").split()
         run("core", [sys.executable, str(repo / "work" / "guarded_lake_build.py"),
                      "--root", str(core), "--jobs", str(args.core_jobs),
+                     "--heavy-jobs", str(args.core_heavy_jobs or args.core_jobs),
+                     "--rss-cap-gb", str(args.core_rss_cap_gb),
                      "--lake", lake, *targets], core, env)
         copy(project / "SquareIncidence.lean", build / "SquareIncidence.lean")
         for module in [*MODULES, *(["UpperBound239"] if args.with_239 else [])]:
