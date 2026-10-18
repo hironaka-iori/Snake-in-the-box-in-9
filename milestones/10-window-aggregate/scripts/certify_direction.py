@@ -23,7 +23,7 @@ def tag_of(dirs, alpha):
 
 
 def one(arg):
-    dirs, alpha, radius, drat = arg
+    dirs, alpha, radius, drat, out_dir = arg
     t = time.time()
     al = [lo if lo == hi else (lo, hi) for lo, hi in alpha]
     enc = Encoding(window_from_dirs(dirs), al, radius)
@@ -44,7 +44,7 @@ def one(arg):
         for f in (cnf, prf):
             data = open(f, 'rb').read()
             shas[os.path.splitext(f)[1][1:]] = hashlib.sha256(data).hexdigest()
-            with gzip.GzipFile(os.path.join(OUT, os.path.basename(f) + '.gz'), 'wb', mtime=0) as g:
+            with gzip.GzipFile(os.path.join(out_dir, os.path.basename(f) + '.gz'), 'wb', mtime=0) as g:
                 g.write(data)
     return {'case': tag, 'dirs': dirs, 'alpha': alpha, 'radius': radius, 'endpoint_budget': 2,
             'variables': enc.nv, 'clauses': len(enc.clauses), 'cycle_cuts': cuts,
@@ -58,11 +58,13 @@ def main():
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--workers', type=int, default=4)
     ap.add_argument('--out', default=os.path.join(HERE, '..', 'data', 'direction_certificates.json'))
+    ap.add_argument('--certs-dir', default=OUT, help='where the gzipped CNF/DRUP pairs go '
+                    '(use a separate directory per radius: case names only encode the window)')
     a = ap.parse_args()
-    os.makedirs(OUT, exist_ok=True)
+    os.makedirs(a.certs_dir, exist_ok=True)
     drat = ensure_drat()
     spec = json.load(open(a.set))
-    jobs = [(e['dirs'], [tuple(r) for r in e['alpha']], a.radius, drat) for e in spec['exclusions']]
+    jobs = [(e['dirs'], [tuple(r) for r in e['alpha']], a.radius, drat, a.certs_dir) for e in spec['exclusions']]
     # largest windows first for better load balance
     jobs.sort(key=lambda j: -len(j[0]))
     done = {}
@@ -77,8 +79,9 @@ def main():
         for rec in p.imap_unordered(one, todo):
             print(rec.get('case', rec['dirs']), rec['drat_trim_verified'], rec.get('seconds'), flush=True)
             results.append(rec)
-            json.dump({'scope': 'DRAT-checked UNSAT of explicit local CNFs (radius-three ball model); '
-                                'not Lean-checked.', 'source_set': os.path.basename(a.set),
+            json.dump({'scope': f'DRAT-checked UNSAT of explicit local CNFs (radius-{a.radius} ball model); '
+                                'not Lean-checked.', 'source_set': os.path.basename(a.set), 'radius': a.radius,
+                       'certs_dir': os.path.relpath(a.certs_dir, os.path.join(HERE, '..')),
                        'drat_trim_source_sha256': DRAT_SOURCE_SHA256, 'cases': results},
                       open(a.out, 'w'), indent=1)
     bad = [r for r in results if not r['drat_trim_verified']]

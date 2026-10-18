@@ -56,9 +56,10 @@ def main():
     ap.add_argument('--K', type=int, default=5)
     ap.add_argument('--target-edges', type=int, default=None)
     ap.add_argument('--greedy-exact', action='store_true')
+    ap.add_argument('--radius', type=int, default=3, help='oracle radius (cache entries of that radius)')
     a = ap.parse_args()
     A = Automaton(a.L, a.k, a.K)
-    O = Oracle(3)
+    O = Oracle(a.radius)
     U, V, W, WIN = all_candidates(A)
     unsat = {x for ws in WIN for x in ws if O.status(x) == 'UNSAT'}
     blockers = [frozenset(x for x in ws if x in unsat) for ws in WIN]
@@ -116,9 +117,10 @@ def main():
             vb = bound(A, U[mask].astype(np.int64), V[mask].astype(np.int64), W[mask].astype(float))
             if vb - 1 <= a.target_edges:
                 break
-    out = {'L': a.L, 'k': a.k, 'K': a.K, 'min_mean': str(lam), 'max_vertices': vb, 'max_edges': vb - 1,
+    out = {'L': a.L, 'k': a.k, 'K': a.K, 'radius': a.radius, 'min_mean': str(lam), 'max_vertices': vb,
+           'max_edges': vb - 1,
            'exclusions': [{'dirs': list(x[0]), 'alpha': [list(r) for r in x[1]]} for x in sorted(keep)]}
-    path = os.path.join(DATA, f'minimal_L{a.L}_k{a.k}_K{a.K}.json')
+    path = os.path.join(DATA, f'minimal_L{a.L}_k{a.k}_K{a.K}' + (f'_r{a.radius}' if a.radius != 3 else '') + '.json')
     json.dump(out, open(path, 'w'), indent=1)
     print('wrote', path, len(keep), 'exclusions')
 
