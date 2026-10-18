@@ -83,6 +83,9 @@ def main():
     parser.add_argument("--mathlib-dir", required=True, type=Path)
     parser.add_argument("--core-targets", nargs="*", default=None,
                         help="build only these core modules (default: the core default targets)")
+    parser.add_argument("--with-239", action="store_true",
+                        help="also check UpperBound239; needs the 145 generated replays "
+                             "(milestones/10-window-aggregate/scripts/run_direction_replays.py gen)")
     parser.add_argument("--core-jobs", type=int, default=3,
                         help="concurrent Lean processes for the guarded core build")
     args = parser.parse_args()
@@ -181,10 +184,11 @@ def main():
                      "--root", str(core), "--jobs", str(args.core_jobs),
                      "--lake", lake, *targets], core, env)
         copy(project / "SquareIncidence.lean", build / "SquareIncidence.lean")
-        for module in MODULES:
+        for module in [*MODULES, *(["UpperBound239"] if args.with_239 else [])]:
             copy(project / "stronger" / (module + ".lean"), build / (module + ".lean"))
         env["LEAN_PATH"] = os.pathsep.join([str(core / ".lake/build/lib/lean"), str(build)])
-        for module in ["SquareIncidence", *MODULES]:
+        modules = [*MODULES, *(["UpperBound239"] if args.with_239 else [])]
+        for module in ["SquareIncidence", *modules]:
             run(module, [lake, "env", "lean", f"--root={build}", "-o",
                          str(build / (module + ".olean")), str(build / (module + ".lean"))],
                 mathlib, env)
@@ -224,6 +228,11 @@ def main():
                 "#print axioms Snake9.upper_bound_245\n"
                 "#print axioms Snake9.verified_interval_191_245\n"
             )
+        if args.with_239:
+            audit.write_text(
+                "import UpperBound239\n" + audit.read_text(encoding="utf-8")
+                + "#print axioms Snake9.upper_bound_239\n"
+                + "#print axioms Snake9.verified_interval_191_239\n", encoding="utf-8")
         run("FinalAudit", [lake, "env", "lean", f"--root={build}", str(audit)], mathlib, env)
         expected = {"Snake9.upper_244_of_no_two_two_three",
                     "Snake9.upper_242_of_certified_windows", "Snake9.upper_241_of_certified_windows",
