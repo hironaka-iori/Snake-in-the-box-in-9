@@ -148,6 +148,11 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 触及预算。失败记录和相关哈希保存为 `upstream241-rup2423-check21-attempt.json`。
 按原驱动从断点恢复，对该段应用相同已证分段机制，不修改检查器或证书。
 
+第 21 段分段与组合通过；随后同一实例第 22 段触及预算，记录保存为
+`upstream241-rup2423-check22-attempt.json`。为避免同批证书逐段重复超限，
+该实例全部 RUP 段采用与 323-distinct 相同的两层拆分与已证组合方法。
+此改动仅改变核验模块的划分，原始数据、检查器和结论保持不变。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
