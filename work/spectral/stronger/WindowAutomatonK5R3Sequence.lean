@@ -53,16 +53,16 @@ theorem stepK5R3_raw (x : List Nat) (hx : x.length = 8) (t1 t2 t3 t4 s : Nat)
   unfold wforbK5R3 at hw2 hw3 hw4 hw5
   unfold potK5R3
   simp only [List.length_cons, List.length_nil, Nat.zero_add, Nat.reduceAdd] at hw2 hw3 hw4 hw5
-  have c2 : code6 [sym t4, sym s] 0 = (sym t4 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c2 : codeK5R3 [sym t4, sym s] 0 = (sym t4 - 1) * 6 + (sym s - 1) := by simp only [codeK5R3]; omega
   rw [c2] at hw2
-  have c3 : code6 [sym t3, sym t4, sym s] 0 = (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c3 : codeK5R3 [sym t3, sym t4, sym s] 0 = (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym s - 1) := by simp only [codeK5R3]; omega
   rw [c3] at hw3
-  have c4 : code6 [sym t2, sym t3, sym t4, sym s] 0 = (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c4 : codeK5R3 [sym t2, sym t3, sym t4, sym s] 0 = (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym s - 1) := by simp only [codeK5R3]; omega
   rw [c4] at hw4
-  have c5 : code6 [sym t1, sym t2, sym t3, sym t4, sym s] 0 = (sym t1 - 1) * 1296 + (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c5 : codeK5R3 [sym t1, sym t2, sym t3, sym t4, sym s] 0 = (sym t1 - 1) * 1296 + (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym s - 1) := by simp only [codeK5R3]; omega
   rw [c5] at hw5
-  have c0 : code6 [sym t1, sym t2, sym t3, sym t4] 0 = (sym t1 - 1) * 216 + (sym t2 - 1) * 36 + (sym t3 - 1) * 6 + (sym t4 - 1) := by simp only [code6]; omega
-  have c1 : code6 [sym t2, sym t3, sym t4, sym s] 0 = (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym s - 1) := by simp only [code6]; omega
+  have c0 : codeK5R3 [sym t1, sym t2, sym t3, sym t4] 0 = (sym t1 - 1) * 216 + (sym t2 - 1) * 36 + (sym t3 - 1) * 6 + (sym t4 - 1) := by simp only [codeK5R3]; omega
+  have c1 : codeK5R3 [sym t2, sym t3, sym t4, sym s] 0 = (sym t2 - 1) * 216 + (sym t3 - 1) * 36 + (sym t4 - 1) * 6 + (sym s - 1) := by simp only [codeK5R3]; omega
   rw [c0, c1]
   rw [hw2, hw3, hw4, hw5] at h
   simp only [Bool.false_or] at h

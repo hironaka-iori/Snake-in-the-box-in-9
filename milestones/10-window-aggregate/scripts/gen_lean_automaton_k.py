@@ -69,7 +69,7 @@ def main():
     GE1 = (lambda h: f'sym_ge_one _ {h}') if ns == 6 else (lambda h: f'symK_ge_one {ns} _ (by decide) {h}')
     LEK = 'sym_le_six _' if ns == 6 else f'symK_le_K {ns} _'
     LE = 'sym_le' if ns == 6 else f'symK_le {ns}'
-    CODE = 'code6' if ns == 6 else f'code{S}'
+    CODE = 'code6' if S == 'K6R3' else f'code{S}'      # one chain keeps the legacy name; others are suffixed so chains can be imported together
     from minimize_fast import sym_codes
     if a.index:
         cases = [c for c in json.load(open(a.index))['cases'] if c['drat_trim_verified']]

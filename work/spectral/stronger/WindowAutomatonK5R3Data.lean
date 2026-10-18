@@ -115,19 +115,19 @@ def potXK5R3 (i : Nat) : Nat :=
   0
 
 /-- Base-6 code of a symbol list (digits sym-1, last symbol least significant). -/
-def code6 : List Nat → Nat → Nat
+def codeK5R3 : List Nat → Nat → Nat
   | [], acc => acc
-  | s :: l, acc => code6 l (acc * 6 + (s - 1))
+  | s :: l, acc => codeK5R3 l (acc * 6 + (s - 1))
 
 def wshK5R3 (ds : List Nat) : Nat := wshapeIdxK5R3 (shapeCode (canon ds))
 def shK5R3 (ds : List Nat) : Nat := shapeIdxK5R3 (shapeCode (canon ds))
 
 /-- Is the window (directions `ds`, symbols `syms`) excluded, in either orientation? -/
 def wforbK5R3 (ds syms : List Nat) : Bool :=
-  wtestT (forwardTK5R3 syms.length (wshK5R3 ds)) (reverseTK5R3 syms.length (wshK5R3 ds.reverse)) (code6 syms 0)
+  wtestT (forwardTK5R3 syms.length (wshK5R3 ds)) (reverseTK5R3 syms.length (wshK5R3 ds.reverse)) (codeK5R3 syms 0)
 
 /-- Potential of a state. -/
-def potK5R3 (h t : List Nat) : Nat := fldT 6 (potXK5R3 (shK5R3 h)) (code6 t 0)
+def potK5R3 (h t : List Nat) : Nat := fldT 6 (potXK5R3 (shK5R3 h)) (codeK5R3 t 0)
 
 theorem potK5R3_le (h t : List Nat) : potK5R3 h t ≤ 6 := clip_le _ _
 
