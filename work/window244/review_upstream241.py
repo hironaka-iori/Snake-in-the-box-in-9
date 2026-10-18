@@ -40,6 +40,11 @@ state.update(status='RUNNING',pid=os.getpid(),upstream_commit=REV,mathlib_commit
     started_utc=state.get('started_utc',now()),lean_sha256=sha(lean),
     scope='SOURCE_ONLY_UPSTREAM_241_IMPORT_CLOSURE',driver_sha256=sha(pathlib.Path(__file__)))
 state.pop('error',None)
+split_rup_modules=set(state.get('split_rup_modules',[]))
+split_rup_modules.add('LocalWindowUnsat.C224FwdDistinct.Check5Part2Check')
+split_rup_modules.update(n for n,r in state['modules'].items()
+    if re.fullmatch(r'LocalWindowUnsat\.[^.]+\.Check\d+Part\d+Check',n) and r.get('memory_exceeded'))
+state['split_rup_modules']=sorted(split_rup_modules)
 def save():
     tmp=manifest.with_suffix('.tmp');tmp.write_bytes((json.dumps(state,indent=2)+'\n').encode());tmp.replace(manifest)
 save()
@@ -96,18 +101,21 @@ try:
                         synthetic_origin[sub]=upstream_sha;mapping[sub]=mapping[name]
                     synthetic[part]=(''.join('import '+sub+'\n' for sub in subparts)+'\nnamespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\nprivate theorem combineChecks {a b : Bool} (ha : a = true) (hb : b = true) : andB a b = true := by\n  rw [ha, hb]\n  rfl\n'+body[:body.index(':= by')]+f':= by\n  exact combineChecks {theorem_name}_Check {theorem_name}_Checkpoint\nend '+namespace+'\n').encode()
             raw=(''.join('import '+p+'\n' for p in parts)).encode()
-        if name=='LocalWindowUnsat.C224FwdDistinct.Check5Part2Check':
-            text=raw.decode();header=text[:text.index('theorem ok18_Check')]
-            namespace='Snake9.LocalWindow.C224FwdDistinct'
+        if name in split_rup_modules:
+            text=raw.decode()
+            match=re.search(r'theorem (ok\d+_Check) : check (start\d+) (proof\d+) = true',text);assert match
+            theorem_name,start,proof_name=match.groups()
+            header=text[:match.start()]
+            namespace=re.search(r'^namespace (.+)$',text,re.M).group(1)
             header='import ReviewCheckAppend\n'+header
             pieces=[]
             for index,(tree,proof) in enumerate([
-                ('start18','proof18.take 214'),
-                ('advanceChecks start18 (proof18.take 214)','proof18.drop 214')]):
+                (start,proof_name+'.take 214'),
+                (f'advanceChecks {start} ({proof_name}.take 214)',proof_name+'.drop 214')]):
                 part=name+f'Half{index+1}';pieces.append(part)
-                synthetic[part]=(header+f'theorem ok18_half{index+1} : check ({tree}) ({proof}) = true := by\n  decide +kernel\nend '+namespace+'\n').encode()
+                synthetic[part]=(header+f'theorem {theorem_name}_half{index+1} : check ({tree}) ({proof}) = true := by\n  decide +kernel\nend '+namespace+'\n').encode()
                 synthetic_origin[part]=upstream_sha;mapping[part]=mapping[name]
-            raw=(''.join('import '+part+'\n' for part in pieces)+'namespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\ntheorem ok18_Check : check start18 proof18 = true := by\n  have h := check_append_true start18 (proof18.take 214) (proof18.drop 214) ok18_half1 ok18_half2\n  rw [List.take_append_drop] at h\n  exact h\nend '+namespace+'\n').encode()
+            raw=(''.join('import '+part+'\n' for part in pieces)+'namespace '+namespace+'\nopen Snake9.Lrat\nset_option Elab.async false\n'+f'theorem {theorem_name} : check {start} {proof_name} = true := by\n  have h := check_append_true {start} ({proof_name}.take 214) ({proof_name}.drop 214) {theorem_name}_half1 {theorem_name}_half2\n  rw [List.take_append_drop] at h\n  exact h\nend '+namespace+'\n').encode()
         if name in {'Snake9','SquareCounterexample'}:
             # Preserve every definition and theorem statement. Kernel reduction
             # avoids elaborating the enormous default `decide` proof term.

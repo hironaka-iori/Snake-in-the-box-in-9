@@ -90,6 +90,12 @@ RUP 段和检查点复制，仍触及预算；其清单保存为
 第二段的数据库由原检查器的 `ins` 逐步得到，不假定任何求解器状态正确。
 检查器及原证书数据保持不变，预算不变，当前闭包为 2,566 个模块。
 
+拼接引理、两个分段检查和第 18 段的重新组合全部通过。累计 511 个模块
+通过后，第 27 段的独立检查触及预算，保存清单为
+`upstream241-check27-first-attempt.json`。相同分段机制现按清单中记录的
+超限 RUP 模块应用，持久记录 `split_rup_modules`，不重复修补单个段的
+数学论证；第 18 与第 27 段继续使用已证拼接引理恢复原始检查结论。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
