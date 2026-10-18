@@ -58,7 +58,7 @@ def set_width(bits, fast=False):
     if fast:
         suffix = '14' if bits == 14 else ''
         CHECKER_IMPORT = 'import LratFast' + suffix
-        CHECKER_OPEN = 'open Snake9.LratFast%s\nopen Snake9.Lrat (Tree TreeTrue)' % suffix
+        CHECKER_OPEN = 'open Snake9.LratFast%s\nopen Snake9.Lrat (Tree TreeTrue andB)' % suffix
 OFF = 2400
 
 # Keyword of the proof-data definitions.  The kernel checks only unfold them, so with
