@@ -1,5 +1,18 @@
 # Scope of this archived ledger
 
+## 18 October 2026: upstream unconditional 241 independently reconstructed
+
+The fixed upstream commit `7d418905e17fd2ea0d4666682f0019789490236a` passed
+an independent source reconstruction, status `SUCCESS_INDEPENDENT_191_241`,
+at 15:21:40 UTC. All 4,457 modules passed and all saved source/object/import/log
+hashes were rechecked. Final 242, 241 and interval theorem audits contain only
+the three permitted axioms. Sources/logs, manifest and archive hashes are saved
+under `outputs/window244/upstream241/`. Equivalent proof decomposition is documented
+in `work/window244/UPSTREAM_REVIEW.md`. The earlier 244 evidence is unchanged.
+The local 242 runner is superseded, with its checkpoints preserved. The 239
+claim remains conditional in the reviewed commit, and no optimum is asserted.
+
+
 ## 18 October 2026: unconditional 244 verified
 
 The source-only reconstruction completed at 00:48 UTC (08:48 Shanghai), status

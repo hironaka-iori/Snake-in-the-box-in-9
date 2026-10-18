@@ -36,7 +36,7 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ be the maximum number of edges in an induced path of the nine-dimensional binary hypercube. We establish the interval $191\le a(9)\le244$. The lower bound is the published construction of Orland et al., reproduced here as an explicit transition sequence. For the upper bound, we count coordinate squares meeting a path at exactly one vertex. A square-incidence identity converts lower bounds on these singleton counts into upper bounds on path length. We prove endpoint and adjacent-vertex restrictions, and exclude three consecutive internal vertices with singleton counts $2,2,2$. A finite potential argument then yields the bound 245. The construction and the unconditional upper bound have been checked in Lean under the same induced-path definition; the longest local classification is presented as a proof outline. We also give an endpoint-maximality counterexample, exact conditions for joining paths in two layers, and explicit compatible paths of lengths 96 and 94. Restricted construction searches and a numerical conjecture are distinguished from the proved bounds. We exclude the additional internal pattern $2,2,3$ by two kernel-checked finite refutations and a geometric semantic bridge; a stronger potential argument then gives the unconditional bound 244. The exact value of $a(9)$ remains unresolved.
+Let $a(9)$ be the maximum number of edges in an induced path of the nine-dimensional binary hypercube. We establish the interval $191\le a(9)\le241$. The lower bound is the published construction of Orland et al., reproduced here as an explicit transition sequence. For the upper bound, we count coordinate squares meeting a path at exactly one vertex. A square-incidence identity converts lower bounds on these singleton counts into upper bounds on path length. We prove endpoint and adjacent-vertex restrictions, and exclude three consecutive internal vertices with singleton counts $2,2,2$. A finite potential argument then yields the bound 245. The construction and the unconditional upper bound have been checked in Lean under the same induced-path definition; the longest local classification is presented as a proof outline. We also give an endpoint-maximality counterexample, exact conditions for joining paths in two layers, and explicit compatible paths of lengths 96 and 94. Restricted construction searches and a numerical conjecture are distinguished from the proved bounds. We exclude the additional internal pattern $2,2,3$ by two kernel-checked finite refutations and a geometric semantic bridge; a stronger potential argument then gives the unconditional bound 244. Further kernel-checked triple and four-centre window exclusions yield an internal singleton-count sum of at least three times the number of internal vertices minus four, strengthening the unconditional upper bound to 241. The exact value of $a(9)$ remains unresolved.
 \end{abstract}
 \clearpage
 \setcounter{tocdepth}{1}
@@ -67,10 +67,10 @@ Orland et al. supply 191-edge snakes in dimension nine and a public collection o
 \begin{theorem}[Main result]\label{thm:main}
 The maximum length of an induced path in $\Q_9$ satisfies
 \[
-\boxed{191\le a(9)\le244.}
+\boxed{191\le a(9)\le241.}
 \]
 \end{theorem}
-The lower bound is verified from an explicit published sequence in Theorem~\ref{thm:lower}. The upper bound follows from Theorem~\ref{thm:upper244}. Its main ingredients are the positivity of every singleton-square count, an endpoint count of at least four, the exclusion of adjacent internal counts $(1,1)$, $(1,2)$ and $(1,3)$, and the exclusions of consecutive internal counts $(2,2,2)$ and $(2,2,3)$. The earlier bounds 254, 251, 248, 247 and 245 appear as intermediate consequences of the same counting identity.
+The lower bound is verified from an explicit published sequence in Theorem~\ref{thm:lower}. The upper bound follows from Theorem~\ref{thm:upper241}, using additional triple and four-centre exclusions and a telescoping potential. Theorem~\ref{thm:upper244} records the preceding 244 bound. Its main ingredients are the positivity of every singleton-square count, an endpoint count of at least four, the exclusion of adjacent internal counts $(1,1)$, $(1,2)$ and $(1,3)$, and the exclusions of consecutive internal counts $(2,2,2)$ and $(2,2,3)$. The earlier bounds 254, 251, 248, 247 and 245 appear as intermediate consequences of the same counting identity.
 
 The exposition separates three kinds of evidence. Explicit constructions and the upper-bound theorems are formally verified. The longest finite classification is described as a proof outline, with its precise counting definitions included. Uncertified solver outcomes are reported only for their stated restricted search spaces. The finite refutations used for the upper bound are independently checked in the Lean kernel, together with their geometric interpretation. The conjectured value 196 arises from a separate numerical extrapolation and has no privileged role in the main theorem.
 
@@ -1048,6 +1048,8 @@ Theorem~\ref{thm:no223} supplies the premise of Proposition~\ref{prop:conditiona
 
 The complete geometric interpretation, both finite refutations, normalization, and final theorem have passed a source-only reconstruction in Lean 4.19.0. Their transitive logical dependencies are only propositional extensionality, classical choice and quotient soundness. The proof does not assume a census of longest snakes or an optimality claim.
 
+\input{window241}
+
 \subsection{A limitation of uniform singleton-density estimates}
 The published bank includes a 192-vertex snake for which independent counting gives $T=1632$. This particular census has been checked in Python; its complete connection to the Lean incidence development remains to be checked. It implies that any valid uniform estimate $T\ge cv$ has $c\le17/2$.
 
@@ -1084,7 +1086,7 @@ The integer-weight version, obtained by clearing a common denominator, has been 
 For example, suppose five distinct candidate vertices $u_0,\ldots,u_4$ yield demands $G_i=\{u_i,u_{i+1}\}$, with subscripts taken modulo five. Giving each demand weight $1/2$ satisfies the per-vertex condition, but the total weight is $5/2$, a contradiction. No three of these pairs are disjoint, so a test limited to three disjoint endpoint demands would miss this obstruction. The five-pair contradiction is also checked independently in Lean. Identifying a forced occurrence of this arrangement, or another weighted obstruction, in low-singleton geometry is an open research direction. The counting principle is standard; no claim of historical novelty is made for it.
 
 \subsection{The exact optimum}
-The unconditional conclusion is $191\le a(9)\le244$. No 192-edge construction or universal exclusion of length 192 has been obtained. A solution requires a length $L$ for which both an explicit snake and an exclusion of length $L+1$ are established; the prefix argument then excludes all longer paths. Conjecture~\ref{conj:196} would require a 196-edge construction and an exclusion of length 197, but the proved bounds do not single out that value. Further progress may come from stronger restrictions on singleton counts or from constructions outside the tested families.
+The unconditional conclusion is $191\le a(9)\le241$. No 192-edge construction or universal exclusion of length 192 has been obtained. A solution requires a length $L$ for which both an explicit snake and an exclusion of length $L+1$ are established; the prefix argument then excludes all longer paths. Conjecture~\ref{conj:196} would require a 196-edge construction and an exclusion of length 197, but the proved bounds do not single out that value. Further progress may come from stronger restrictions on singleton counts or from constructions outside the tested families.
 
 \appendix
 \section{Explicit transition sequences and blockers}\label{app:witness}

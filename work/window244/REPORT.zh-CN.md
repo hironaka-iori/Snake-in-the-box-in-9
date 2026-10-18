@@ -1,8 +1,50 @@
 # 244 窗口路线：阶段一完成报告
 
+## 阶段二完成：独立复核更强的无条件 241 上界
+
+**当前已证区间：191 ≤ a(9) ≤ 241。** 本次复用上游分支
+`research/unconditional-241` 固定提交 `7d418905e17fd2ea0d4666682f0019789490236a`，
+不是把上游成果算作本机新发现。独立源码重建于 2026-10-18 15:21:40 UTC
+完成，状态 `SUCCESS_INDEPENDENT_191_241`。原始闭包 1,238 个模块，经记录的
+等价拆分后实际核验 4,457 个模块，不使用自定义模块编译缓存。
+
+| 结论 | 证据等级 | 文件和定理 |
+| --- | --- | --- |
+| 22 项标准窗口反驳及任意蛇的几何语义桥 | Lean 已证，独立源码复核通过 | 固定提交的 `LocalWindowRefuted`、`LocalWindowBridge`、`AggregateWindowUnconditional` |
+| 每条蛇至多 242 边 | Lean 已证 | `UpperBound241.lean`：`Snake9.upper_bound_242` |
+| 每条蛇至多 241 边 | Lean 已证 | `UpperBound241.lean`：`Snake9.upper_bound_241` |
+| 191 ≤ a(9) ≤ 241 | Lean 已证 | `UpperBound241.lean`：`Snake9.verified_interval_191_241` |
+| 上游 239 / 238 | 条件结果，尚未无条件认证 | 所复核提交仍有未完成的反驳前提 |
+| 本机普查排除与最小模式子集 | 仅求解器/精确有限计算证据 | 原阶段二归档；未冒充新的 Lean 定理 |
+
+三个最终定理的传递公理均恰为 `propext`、`Classical.choice`、`Quot.sound`。
+峰值私有提交内存为 1,875,918,848 字节，低于每进程 1,800 MiB 限额。
+完成后逐项重查全部源码、产物、导入产物与日志哈希，原 244/144/112 证据不变。
+
+复现：先取得上游固定提交所需的 Git 对象，再运行：
+
+```sh
+git fetch origin research/unconditional-241
+python work/window244/review_upstream241.py --lean-bin /path/to/lean-4.19.0/bin --mathlib-dir /path/to/mathlib
+python work/window244/finalize_upstream241.py
+```
+
+证据目录 `outputs/window244/upstream241/` 包含 `verification.json`、完整
+`manifest.json`、`IndependentAudit.log` 与 `sources-and-logs.tar.gz`。
+清单和归档 SHA256 分别为
+`64e1f85671510474cb4c3c2ff97b084897cd781dd770f77e4b4e164703cbf5eb`、
+`74bc9d7b57a8c77b38dafc7eff1b579535491b0a611678eded259d53439eb342`。
+
+原阶段二目标是争取 242，现已由更强的已证 241 达到，**本轮无剩余证明义务**。
+已保存本机原 242 路线断点并停止重复计算。本轮不扩展到 239 的大规模认证。
+窗口路线已产生实际强化，值得保留；继续求更强界应另行明确认证范围，
+也需要评估长窗口和新不变量，而非盲目扩大半径。精确最优值仍未解决，
+191 边构造下界未提高。下文保留阶段一历史报告。
+
+
 **结论：无条件证明 191 ≤ a(9) ≤ 244。**
 全新源码重建于 2026 年 10 月 18 日 08:48（上海时间）完成，状态为
-`SUCCESS_191_244`。这不是全局最优性证明，阶段二尚无新的已证上界。
+`SUCCESS_191_244`。这不是全局最优性证明；此处为阶段一历史报告，阶段二结果见上文。
 
 | 结论 | 证据等级 | 文件与定理 |
 | --- | --- | --- |

@@ -1,5 +1,14 @@
 # Unconditional 244 project
 
+## Authorized stages complete
+
+Stage 1 remains verified at 244. Stage 2's 242 objective is superseded by an
+independently reconstructed unconditional 241 bound from fixed upstream commit
+`7d418905e17fd2ea0d4666682f0019789490236a`. All final axioms passed;
+see `UPSTREAM_REVIEW.md` and `outputs/window244/upstream241/verification.json`.
+The following Stage-1 plan is historical. No 239 certification is started.
+
+
 Branch: `research/window-244`, created from main `537513d`.
 The checked global interval is **191..244**. Stage 1 completed on 18 October 2026.
 Stage 2 may now begin; it is not part of this completed verification.

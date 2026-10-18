@@ -1,10 +1,22 @@
 # Collaborator handoff
 
+## Strongest completed result: independently verified 241
+
+The current checked interval is **191 <= a(9) <= 241**. The upstream fixed
+commit `7d418905e17fd2ea0d4666682f0019789490236a` has been reconstructed
+independently in 4,457 adapted modules, within 1,800 MiB per process.
+All three final targets passed the permitted-axiom audit. Evidence and exact
+reproduction instructions are in `outputs/window244/upstream241/` and
+`work/window244/UPSTREAM_REVIEW.md`. This result supersedes the local Stage-2
+242 target. Do not restart its saved runner. The completed 244 evidence is unchanged.
+239 is still conditional in the reviewed upstream commit; no exact optimum is claimed.
+
+
 Checkpoint: 18 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Where the investigation stands
 
-**18 October 2026: window-244 completed.** The unconditional interval is now
+**18 October 2026: window-244 completed.** Stage 1 established
 **191 <= a(9) <= 244**. Generic semantics, all concrete clauses, both complete
 refutations, both window shapes and arbitrary-index normalization passed an
 isolated source-only reconstruction (8,229 modules). Final theorem axioms are

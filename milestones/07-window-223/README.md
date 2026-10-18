@@ -1,5 +1,11 @@
 # Three-center pattern (2,2,3)
 
+Latest global result: **191 <= a(9) <= 241**, independently reconstructed from
+upstream commit `7d418905e17fd2ea0d4666682f0019789490236a`.
+See [the independent review](../../work/window244/UPSTREAM_REVIEW.md).
+The following 244 milestone and its evidence remain intact as the preceding stage.
+
+
 Completed: 18 October 2026. **Lean-proved global interval: 191 <= a(9) <= 244.**
 
 Both radius-three window shapes are unconditionally excluded, including their

@@ -1,5 +1,15 @@
 # 外部 241 成果的独立复核
 
+## 最终结果：复核通过
+
+`SUCCESS_INDEPENDENT_191_241`，2026-10-18 15:21:40 UTC。
+全部 4,457 个实际模块通过，三个最终目标公理仅为允许的三项。
+所有源码、产物、导入产物、日志哈希已再次核对。
+完整复现清单、最终审计和源码/日志归档位于 `outputs/window244/upstream241/`。
+原阶段二 242 目标已由更强的 241 达到；本轮不继续认证 239。
+下文记录固定来源、等价适配和失败修复过程。
+
+
 2026 年 10 月 18 日发现研究分支 `research/unconditional-241` 已提交无条件
 241 的 Lean 定理及成功日志。为避免重复冲击 242，已保存本地阶段二检查点，
 停止重复的两路核验，优先独立复核这个更强结果。原 244 证明和证据未改动。
@@ -13,7 +23,7 @@
 - 上游 `outputs/upper-bound-241-audit.log` 报告三者公理仅为
   `propext`、`Classical.choice`、`Quot.sound`。
 - 已直接比较，`Snake9.lean` 与本地原始定义相同。
-- **本机独立重建仍在进行中**。上游日志和定理源码尚不等于本机复核完成。
+- **本机独立重建及最终审计已通过**。完整结果见上方及中文报告。
 - 239 仍要求 `AllRefuted239`。上游说明 145 份内核反驳尚未完成，约有
   410 万步和 2.49 亿条提示；238 也是条件结果。本轮不扩大到其批量认证。
 
@@ -25,6 +35,7 @@
 `c44e0c8ee63ca166450922a373c7409c5d26b00b`。
 
 ```sh
+git fetch origin research/unconditional-241
 python work/window244/review_upstream241.py --lean-bin /path/to/lean-4.19.0/bin --mathlib-dir /path/to/mathlib
 ```
 

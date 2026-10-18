@@ -1,5 +1,27 @@
 # Snake-in-the-box in dimension nine
 
+## Independent 241 verification completed (18 October 2026)
+
+The strongest independently reconstructed interval is **191 <= a(9) <= 241**.
+This reuses upstream `research/unconditional-241`, fixed commit
+`7d418905e17fd2ea0d4666682f0019789490236a`; it is not a new local discovery.
+All 4,457 adapted custom modules passed from source, with no custom object cache,
+under the 1,800 MiB per-process budget. The original closure has 1,238 modules;
+documented equivalent proof decomposition accounts for the additional modules.
+`Snake9.upper_bound_242`, `upper_bound_241`, and `verified_interval_191_241`
+all have only `propext`, `Classical.choice`, and `Quot.sound` as axioms.
+All source, object, dependency-object and log hashes were checked again.
+
+Evidence: [verification](outputs/window244/upstream241/verification.json),
+[manifest](outputs/window244/upstream241/manifest.json),
+[audit](outputs/window244/upstream241/IndependentAudit.log), and
+[source/log archive](outputs/window244/upstream241/sources-and-logs.tar.gz).
+See [the review and reproduction instructions](work/window244/UPSTREAM_REVIEW.md).
+The 191-edge lower bound is unchanged. Exact optimality is unresolved;
+239 remains conditional on uncompleted refutations in the reviewed upstream commit.
+The duplicate local 242 route retains its checkpoints and has been superseded.
+
+
 Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
@@ -22,6 +44,7 @@ Research checkpoint: 18 October 2026.
 | Three consecutive internal vertices cannot all have singleton-square count 2 | Lean-checked exhaustive local classification and geometric exclusions |
 | Every snake has at most 245 edges | Lean-checked aggregate consequence, with every local premise discharged |
 | Every snake has at most 244 edges | Lean-checked exclusion of internal (2,2,3), with fresh source-only reconstruction |
+| Every snake has at most 241 edges | Independently reconstructed upstream Lean proof and transitive axiom audit |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
@@ -29,7 +52,7 @@ Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact pr
 
 ### Window-244 verification completed (18 October 2026)
 
-The unconditional interval is **191 <= a(9) <= 244**. Theorems
+The completed Stage-1 interval was **191 <= a(9) <= 244**. Theorems
 `Snake9.no_two_two_three_internal`, `Snake9.no_three_two_two_internal`,
 `Snake9.upper_bound_244` and `Snake9.verified_interval_191_244` passed an isolated
 source-only reconstruction of all 8,229 modules and the final transitive axiom

@@ -1,7 +1,16 @@
 # Stage 2: independent census and minimal forbidden sets
 
+## Completed by a stronger independently verified result
+
+The unconditional interval is now **191 <= a(9) <= 241**.
+The fixed upstream 241 import closure passed independent source reconstruction
+and final transitive axiom audits. Evidence: `outputs/window244/upstream241/`.
+The former local 242 development runner remains stopped with checkpoints saved.
+The earlier census/DP/solver work below remains distinct from Lean evidence.
+
+
 Stage 1 passed: `outputs/window244/final-verification.json`, unconditional 244.
-No bound 243/242 is claimed. Keep the completed Stage-1 Lean sources and data fixed.
+The separate local development pipeline did not finish its own 243/242 proof; the independently verified upstream 241 supersedes it. Keep the completed Stage-1 Lean sources and data fixed.
 
 **18 October update:** upstream branch `research/unconditional-241` now supplies
 an unconditional 241 theorem and passing audit log. The duplicate local 242 case

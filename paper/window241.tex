@@ -1,0 +1,99 @@
+\subsection{Certified windows and the upper bound 241}
+\begin{lemma}[Additional internal window exclusions]\label{lem:windows241}
+The singleton counts at consecutive internal vertices of a snake cannot form
+any of
+\[
+(2,2,2),\ (2,2,3),\ (2,2,4),\ (2,3,2),\ (3,2,3),
+\quad (4,1,c)\quad(4\le c\le6),
+\]
+or their reversals. Four consecutive internal counts cannot be
+$(2,4,2,3)$ or $(3,2,4,2)$.
+\end{lemma}
+\begin{proof}[Computer-assisted proof]
+The first pattern is excluded by the preceding geometric classification.
+For the remaining triples, normalize the surrounding five path vertices
+to transition sequences $0,1,2,0$ or $0,1,2,3$. For the quadruples,
+the surrounding six vertices reduce, allowing reversal, to
+$0,1,2,0,3$, $0,1,2,3,0$, or $0,1,2,3,4$.
+Translation and coordinate permutation preserve membership, adjacency and
+singleton-square counts; reversal also preserves these counts.
+
+Use the union of radius-three Hamming balls about the internal centres.
+Assign each selected-vertex variable its membership in the transformed snake,
+and each endpoint variable its membership in the two endpoints. The path
+degree, endpoint, square and cycle restrictions are necessary conditions,
+as in the preceding finite refutations. At each centre the two incident
+path directions cannot occur in a singleton square. Each of the remaining
+$\binom72=21$ coordinate pairs has its two neighbouring vertices outside the
+snake, so its square is a singleton precisely when its opposite corner is
+absent. Thus the prescribed missing-corner bounds express the actual
+singleton counts. Auxiliary counters receive their values from these
+vertex and endpoint assignments; their clauses follow from counter semantics.
+
+Twenty-two finite certificates cover the triples, range $4\le c\le6$,
+quadruples, reversals and canonical shapes. Every input clause is checked
+against its geometric or counter rule. Reverse unit propagation verifies
+each derived clause until the empty clause is obtained. Consequently the
+assignment constructed from a snake cannot exist. Both these Boolean
+refutations and their semantic interpretation, including arbitrary-index
+normalization, are checked by the Lean kernel. An independent reconstruction
+from source confirms the complete argument; no solver assertion is an axiom.
+\end{proof}
+
+\begin{lemma}[Internal singleton density]\label{lem:density241}
+If a snake has $n\ge3$ internal vertices with counts $h_0,\ldots,h_{n-1}$,
+then
+\[
+\sum_{j=0}^{n-1}h_j\ge3n-4.
+\]
+\end{lemma}
+\begin{proof}
+Put $q(t)=\min(t,7)$ and $P(a,b,c)=P_0(q(a),q(b),q(c))$, where
+Table~\ref{tab:potential241} specifies $P_0$. All counts are positive;
+a neighbour of count one has count at least four. Exclude the triples and
+quadruples in Lemma~\ref{lem:windows241}. Direct finite verification on
+$\{1,\ldots,7\}$ gives, for every permitted triple and quadruple,
+\[
+0\le P(a,b,c)\le4,\qquad
+9\le a+b+c+P(a,b,c),
+\]
+\[
+3+P(a,b,c)\le d+P(b,c,d).
+\]
+These are finite integer comparisons, also checked in the kernel.
+The truncation is faithful: all excluded entries are at most six,
+so a value replaced by seven cannot create an excluded pattern. It
+preserves the count-one neighbour condition, and only decreases the
+right-hand costs. Hence the inequalities hold for the actual counts.
+
+Start with the inequality for the first three counts, then apply the
+four-count inequality successively. The potentials telescope, giving
+\[
+3n\le \sum_{j=0}^{n-1}h_j+P(h_{n-3},h_{n-2},h_{n-1})
+\le\sum_{j=0}^{n-1}h_j+4.
+\]
+\end{proof}
+
+\input{window241-potential-table}
+
+\begin{theorem}[Verified upper bound 241]\label{thm:upper241}
+Every snake in $\Q_9$ has at most 241 edges. Therefore
+\[
+\boxed{191\le a(9)\le241.}
+\]
+\end{theorem}
+\begin{proof}
+Let $v$ be the number of vertices. For $v\le4$ the conclusion is immediate.
+Otherwise there are $n=v-2\ge3$ internal vertices. Lemma~\ref{lem:density241}
+and the two endpoint counts, each at least four, imply
+\[
+T\ge3(v-2)-4+8=3v-2.
+\]
+The square-incidence identity and nonnegativity of empty-square counts give
+$T+35v\le9214$. Thus $38v\le9216<38\cdot243$, so $v\le242$ and the
+edge count is at most 241. The published 191-edge witness supplies the
+lower bound. The unconditional upper bound and interval theorem have
+both passed an independent source reconstruction and transitive axiom
+audit in Lean 4.19.0; the only axioms are propositional extensionality,
+classical choice and quotient soundness.
+\end{proof}
