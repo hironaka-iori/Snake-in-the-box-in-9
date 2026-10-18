@@ -82,7 +82,8 @@ def k6_modules(chain):
     K6R3C7W is the SWAR chain with lump cap 7 (eight symbols, its own bound)."""
     extra = (["WindowAutomatonSwar", "WindowAutomatonCode"] if chain.endswith("W") else []) + \
         (["WindowAutomatonSym"] if "C" in chain else [])
-    return extra + [f"WindowAutomaton{chain}Data"] + [f"WindowAutomaton{chain}Shard{i}" for i in range(34)] + [
+    spec = [f"WindowAutomaton{chain}Spec"] if chain.endswith("W") else []
+    return extra + [f"WindowAutomaton{chain}Data"] + spec + [f"WindowAutomaton{chain}Shard{i}" for i in range(34)] + [
         f"WindowAutomaton{chain}Table", f"WindowAutomaton{chain}Sequence", f"AggregateDirection{chain}Conditional"]
 
 
