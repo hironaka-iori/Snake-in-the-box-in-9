@@ -3,7 +3,7 @@ import LratCheck
 namespace Snake9.Lrat
 set_option Elab.async false
 
-def advanceChecks (t : Tree) (xs : List Nat) : Tree := xs.foldl ins t
+noncomputable def advanceChecks (t : Tree) (xs : List Nat) : Tree := xs.foldl ins t
 
 theorem check_append_exact (t : Tree) (xs ys : List Nat) :
     check t (xs ++ ys) = andB (check t xs) (check (advanceChecks t xs) ys) := by
