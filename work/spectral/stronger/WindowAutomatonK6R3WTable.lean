@@ -35,23 +35,49 @@ import WindowAutomatonK6R3WShard30
 import WindowAutomatonK6R3WShard31
 import WindowAutomatonK6R3WShard32
 import WindowAutomatonK6R3WShard33
+import WindowAutomatonCode
 
 namespace Snake9.WindowAutomaton
 
 set_option maxRecDepth 100000
 
-theorem rgsK6R3W_shape : allRGS 8 0 (fun c => !inducedPattern c ||
-    (decide (c.take 7 ∈ shapesK6R3W) && (c.drop 7).all (· < 9))) = true := by
+/-- Bitset of the shape codes: membership of a prefix is one bit test instead of a list search. -/
+def shapeMaskK6R3W : Nat := maskOf shapeCode shapesK6R3W
+
+theorem shapesK6R3W_ok : shapesK6R3W.all (fun s => s.length == 7 && s.all (· < 8)) = true := by decide
+
+/-- Every restricted growth string of length 8 that passes the xor-mask induced test (a
+consequence of `inducedPattern`, `inducedFast_of_inducedPattern`) is a listed shape followed by a
+label below nine. -/
+theorem rgsK6R3W_shape : letN (shapeMaskK6R3W + 1) (fun M => allRGS 8 0 (fun c => !inducedFast c ||
+    (Nat.testBit M (shapeCode (c.take 7)) && (c.drop 7).all (· < 9)))) = true := by
   decide +kernel
 
 theorem checkK6R3W_of_rgs (c : List Nat) (hc : c.length = 8) (hr : isRGS c 0 = true) :
     checkK6R3W c = true := by
-  have hm := allRGS_spec 8 0 _ rgsK6R3W_shape c hc hr
+  have hm := rgsK6R3W_shape
+  rw [letN_succ] at hm
+  have hm := allRGS_spec 8 0 _ hm c hc hr
   by_cases hind : inducedPattern c = true
-  · rw [hind] at hm
+  · have hfast := inducedFast_of_inducedPattern c
+      (fun d hd => by have := isRGS_bound c 0 hr d hd; omega) hind
+    rw [hfast] at hm
     simp only [Bool.not_true, Bool.false_or, Bool.and_eq_true, decide_eq_true_eq,
       List.all_eq_true, decide_eq_true_eq] at hm
-    obtain ⟨hmem, hlt⟩ := hm
+    obtain ⟨hbit, hlt⟩ := hm
+    obtain ⟨s, hs, hcode⟩ := testBit_maskOf _ _ _ hbit
+    have hsh : s.length = 7 ∧ ∀ a, a ∈ s → a < 8 := by
+      have hall := shapesK6R3W_ok
+      simp only [List.all_eq_true, Bool.and_eq_true, beq_iff_eq, decide_eq_true_eq] at hall
+      exact hall s hs
+    have hpre : (c.take 7).length = 7 := by simp [hc]
+    have hr7 : isRGS (c.take 7) 0 = true :=
+      isRGS_append _ _ _ (by rw [List.take_append_drop]; exact hr)
+    have hb7 : ∀ a, a ∈ c.take 7 → a < 8 := fun a ha => by
+      have := isRGS_bound _ _ hr7 a ha; omega
+    have hmem : c.take 7 ∈ shapesK6R3W := by
+      unfold shapeCode at hcode
+      rw [codeFrom_inj (c.take 7) s 1 (by rw [hpre, hsh.1]) hb7 hsh.2 hcode.symm]; exact hs
     have hsplit : c = c.take 7 ++ c.drop 7 := (List.take_append_drop 7 c).symm
     have hlen : (c.drop 7).length = 1 := by simp [hc]
     obtain ⟨d, hd7⟩ : ∃ d, c.drop 7 = [d] := by

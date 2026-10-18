@@ -79,7 +79,7 @@ MODULES = [
 def k6_modules(chain):
     """The k = 6 (235-edge) chain: K6R3W checks the table with the SWAR kernel (36 transitions per
     big-integer step), K6R3 is the earlier one-transition-per-step design; both prove the same bound."""
-    extra = ["WindowAutomatonSwar"] if chain == "K6R3W" else []
+    extra = ["WindowAutomatonSwar", "WindowAutomatonCode"] if chain == "K6R3W" else []
     return extra + [f"WindowAutomaton{chain}Data"] + [f"WindowAutomaton{chain}Shard{i}" for i in range(34)] + [
         f"WindowAutomaton{chain}Table", f"WindowAutomaton{chain}Sequence", f"AggregateDirection{chain}Conditional"]
 
