@@ -54,7 +54,7 @@ try:
                 rel=path[len(prefix):]
                 if prefix=='work/spectral/' and '/' in rel:continue
                 mapping.setdefault(rel[:-5].replace('/','.'),path)
-    order=[];deps={};visiting=set();done=set();synthetic={}
+    order=[];deps={};visiting=set();done=set();synthetic={};synthetic_origin={}
     batch=subprocess.Popen(['git','cat-file','--batch'],cwd=ROOT,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
     def read_blob(path):
         batch.stdin.write((REV+':'+path+'\n').encode());batch.stdin.flush()
@@ -66,7 +66,7 @@ try:
         assert name not in visiting,'Import cycle: '+name
         visiting.add(name)
         if name not in mapping:raise RuntimeError('Unresolved custom import: '+name)
-        raw=synthetic[name] if name in synthetic else read_blob(mapping[name]);upstream_sha=hashlib.sha256(raw).hexdigest()
+        raw=synthetic[name] if name in synthetic else read_blob(mapping[name]);upstream_sha=synthetic_origin[name] if name in synthetic else hashlib.sha256(raw).hexdigest()
         if name=='LocalWindowUnsat.C223FwdDistinct.Check1':
             text=raw.decode('utf-8')
             matches=list(re.finditer(r'^theorem ok\d+\s*:',text,re.M));assert len(matches)==4
@@ -78,7 +78,16 @@ try:
                 part=name+f'Part{i+1}';parts.append(part)
                 body=text[match.start():matches[i+1].start() if i+1<len(matches) else tail]
                 synthetic[part]=(header+body+'\nend '+namespace+'\n').encode()
+                synthetic_origin[part]=upstream_sha
                 mapping[part]=mapping[name]
+                if i==2:
+                    expressions=[('Check','check start3 proof3'),('Checkpoint','cpOk (replay start3 proof3) cp4')]
+                    subparts=[]
+                    for suffix,expr in expressions:
+                        sub=part+suffix;subparts.append(sub)
+                        synthetic[sub]=(header+f'theorem ok3_{suffix} : {expr} = true := by\n  decide +kernel\n\nend '+namespace+'\n').encode()
+                        synthetic_origin[sub]=upstream_sha;mapping[sub]=mapping[name]
+                    synthetic[part]=(''.join('import '+sub+'\n' for sub in subparts)+'\nnamespace '+namespace+'\nopen Snake9.Lrat\n'+body[:body.index(':= by')]+':= by\n  simpa only [andB, ok3_Check] using ok3_Checkpoint\nend '+namespace+'\n').encode()
             raw=(''.join('import '+p+'\n' for p in parts)).encode()
         if name in {'Snake9','SquareCounterexample'}:
             # Preserve every definition and theorem statement. Kernel reduction

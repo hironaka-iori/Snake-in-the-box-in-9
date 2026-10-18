@@ -63,6 +63,13 @@ python work/window244/review_upstream241.py --lean-bin /path/to/lean-4.19.0/bin 
 因此实际重建闭包为 1,242 个模块（比原始闭包增加四个），不代表新增证明义务。
 首轮证据为 `outputs/window244/upstream241-check1-first-attempt.json`。
 
+前两个单定理模块已通过（14.44 秒、13.23 秒）。第三个定理同时检查
+RUP 段和检查点复制，仍触及预算；其清单保存为
+`outputs/window244/upstream241-check1part3-first-attempt.json`。进一步把两个
+布尔检查分开，分别内核核验，再按 `andB` 定义组合成原定理。闭包因此增加
+到 1,244 个模块。生成子模块的来源哈希统一指向原始 Git 父模块，实际
+子模块另有独立源码哈希；没有改变检查器、证书或最终目标。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
