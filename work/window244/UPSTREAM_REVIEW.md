@@ -139,6 +139,11 @@ elaboration，顺序核验原有 `check` 和 `sat`；源码内容、目标与预
 `upstream241-manifest-sharing-failure.json`。清单保存现对短暂的共享占用
 重试最多六秒，仍采用原子替换；从原有效检查点恢复，不改变 Lean 源码。
 
+累计 3,215 个模块通过后，`C2423FwdS01230` 第 12 段的独立 RUP 检查
+触及预算。该模块的确切失败记录、源码/依赖/日志哈希和当时清单哈希保存于
+`upstream241-rup2423-check12-attempt.json`。无需修改生成器或 Lean 证明，
+恢复驱动按既有超限记录应用已经验证的分段机制，继续保留全部有效断点。
+
 - 清单：`work/spectral/.verification/upstream241-7d41890/manifest.json`。
 - 日志：该目录的 `logs/`；输出流在
   `outputs/window244/upstream241-review.stdout.log` 和 `.stderr.log`。
