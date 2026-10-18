@@ -50,7 +50,8 @@ def build(a):
         mods = mods[:a.limit]
     cmd = [sys.executable, os.path.join(ROOT, 'work', 'guarded_lake_build.py'), '--jobs', str(a.jobs),
            '--heavy-jobs', str(a.heavy_jobs),
-           '--min-free-gb', str(a.min_free_gb), '--rss-cap-gb', str(a.rss_cap_gb), *mods]
+           '--min-free-gb', str(a.min_free_gb), '--rss-cap-gb', str(a.rss_cap_gb),
+           *(['--trust-mtime'] if a.trust_mtime else []), *mods]
     raise SystemExit(subprocess.run(cmd).returncode)
 
 
@@ -68,6 +69,8 @@ def main():
     b.add_argument('--min-free-gb', type=float, default=5.0)
     b.add_argument('--rss-cap-gb', type=float, default=6.0)
     b.add_argument('--limit', type=int, default=0, help='only the N smallest cases')
+    b.add_argument('--trust-mtime', action='store_true',
+                   help='resume quickly: skip modules whose .olean is up to date by mtime')
     a = ap.parse_args()
     {'gen': gen, 'build': build}[a.cmd](a)
 

@@ -14,7 +14,10 @@ so lake starts a single Lean process).  It
 
 Every finished module is logged to --log as one JSON line (module, status, seconds,
 peak RSS).  Rerunning skips nothing explicitly: lake itself makes up-to-date modules
-a fast no-op.
+a fast no-op (about two seconds per module).  With --trust-mtime a module whose .olean
+is newer than its source and than the .olean files of its imports is marked done
+without calling lake, which makes resuming a large build instant; lake re-checks its
+own traces when the final target is built normally.
 
   python3 work/guarded_lake_build.py UpperBound241Core LocalWindowRefuted --jobs 3
 """
@@ -54,6 +57,21 @@ def module_path(mod):
     return ROOT / (mod.replace('.', '/') + '.lean')
 
 
+def olean_path(mod):
+    return ROOT / '.lake' / 'build' / 'lib' / 'lean' / (mod.replace('.', '/') + '.olean')
+
+
+def uptodate(mod, deps):
+    """The .olean of `mod` is newer than its source and than its imports' .olean files."""
+    o = olean_path(mod)
+    if not o.exists():
+        return False
+    t = o.stat().st_mtime
+    if t < module_path(mod).stat().st_mtime:
+        return False
+    return all(olean_path(d).exists() and olean_path(d).stat().st_mtime <= t for d in deps)
+
+
 def closure(targets):
     deps, stack = {}, list(targets)
     while stack:
@@ -83,6 +101,8 @@ def main():
     ap.add_argument('--root', default=str(ROOT), help='Lean project directory')
     ap.add_argument('--log', default=None, help='default: ROOT/.lake/guarded_build.jsonl')
     ap.add_argument('--lake', default=os.environ.get('LAKE', 'lake'))
+    ap.add_argument('--trust-mtime', action='store_true',
+                    help='skip modules whose .olean is newer than their source and imports')
     a = ap.parse_args()
     ROOT = Path(a.root).resolve()
     if a.log is None:
@@ -141,6 +161,15 @@ def main():
         # launch
         ready = [m for m in sorted(deps) if m not in done and m not in failed and m not in running
                  and all(d in done for d in deps[m])]
+        if a.trust_mtime:
+            skipped = [m for m in ready if uptodate(m, deps[m])]
+            if skipped:
+                done.update(skipped)
+                for m in skipped:
+                    log.write(json.dumps({'module': m, 'status': 'uptodate', 'seconds': 0,
+                                          'peak_rss_gb': 0, 'note': ''}) + '\n')
+                log.flush()
+                continue
         n_heavy = sum(1 for m in running if heavy.search(m))
         n_light = len(running) - n_heavy
         ready = [m for m in ready if (n_heavy < a.heavy_jobs if heavy.search(m) else n_light < a.jobs)]
