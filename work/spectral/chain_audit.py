@@ -26,6 +26,18 @@ def src(mod):
     return None
 
 
+def imports(m):
+    return re.findall(r'^import\s+(\S+)', src(m).read_text(), re.M)
+
+
+def dep_mtime(d, build):
+    """mtime of the .olean an import resolves to (0 for toolchain and Mathlib modules)."""
+    for p in (build / (d + '.olean'), CORE / '.lake/build/lib/lean' / (d.replace('.', '/') + '.olean')):
+        if p.exists():
+            return p.stat().st_mtime
+    return 0
+
+
 def order(target):
     """Chain modules in dependency order (core and Mathlib imports are leaves)."""
     seen, out = set(), []
@@ -57,6 +69,7 @@ def main():
                     help='where the chain .olean files go')
     ap.add_argument('--reuse', action='store_true',
                     help='skip modules whose .olean in the build dir is newer than their source '
+                         'and than the .olean of each of their imports '
                          '(development only; a clean audit recompiles everything)')
     a = ap.parse_args()
     mathlib = a.mathlib_dir.resolve()
@@ -81,7 +94,8 @@ def main():
     for m in mods:
         shutil.copy2(src(m), build / (m + '.lean'))
         olean = build / (m + '.olean')
-        if a.reuse and olean.exists() and olean.stat().st_mtime > src(m).stat().st_mtime:
+        if a.reuse and olean.exists() and olean.stat().st_mtime > max(
+                [src(m).stat().st_mtime, *(dep_mtime(d, build) for d in imports(m))]):
             out(f'{m}: reused')
             continue
         t = time.time()
