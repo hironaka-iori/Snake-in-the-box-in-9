@@ -79,9 +79,11 @@ def chain_modules(chain):
     """Modules of a generated direction-automaton chain.  Suffixes ending in `W` are the SWAR
     kernel chains (all transitions of a shape pair in one packed comparison; `gen_lean_swar.py`),
     the others the one-transition-per-step design (`gen_lean_automaton_k.py`); a `C` in the
-    suffix marks a lump cap other than 5 (`WindowAutomatonSym`)."""
+    suffix marks a lump cap other than 5 (`WindowAutomatonSym`); the 8-symbol (cap 7) SWAR chains
+    check their table layout with delta swaps (`WindowAutomatonTranspose`)."""
     extra = (["WindowAutomatonSwar", "WindowAutomatonCode"] if chain.endswith("W") else []) + \
-        (["WindowAutomatonSym"] if "C" in chain else [])
+        (["WindowAutomatonSym"] if "C" in chain else []) + \
+        (["WindowAutomatonTranspose"] if chain.endswith("C7W") else [])
     spec = [f"WindowAutomaton{chain}Spec"] if chain.endswith("W") else []
     return extra + [f"WindowAutomaton{chain}Data"] + spec + [f"WindowAutomaton{chain}Shard{i}" for i in range(34)] + [
         f"WindowAutomaton{chain}Table", f"WindowAutomaton{chain}Sequence", f"AggregateDirection{chain}Conditional"]

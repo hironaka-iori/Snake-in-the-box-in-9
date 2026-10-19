@@ -151,7 +151,6 @@ theorem total_boundK6R3C7W (d a : Nat → Nat) (m : Nat) (hm : 7 ≤ m)
   have he : m - 7 + 6 = m - 1 := by omega
   rw [he] at hsum
   omega
-
 end Snake9.WindowAutomaton
 
 #print axioms Snake9.WindowAutomaton.total_boundK6R3C7W
