@@ -25,11 +25,40 @@ import argparse, itertools, json, os, time
 from fractions import Fraction as Fr
 from multiprocessing import Pool
 import numpy as np
-from wincert import Encoding, decide, window_from_dirs
+from wincert import Encoding, decide, window_from_dirs, cycles_of
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
 CACHE = os.environ.get('ORACLE_CACHE', os.path.join(DATA, 'oracle_cache.jsonl'))
+# cycle cuts found by the oracle, per (canonical direction shape, radius): valid for every window
+# of that shape, so each query starts with them (see certify_direction.py)
+CUT_STORE = os.environ.get('ORACLE_CUTS', os.path.join(DATA, 'cycle_cuts_oracle.json'))
+
+
+def load_cuts(path):
+    out = {}
+    if path and os.path.exists(path):
+        try:
+            for k, v in json.load(open(path)).items():
+                dirs, radius = k.rsplit('/', 1)
+                out[(tuple(int(x) for x in dirs.split(',')), int(radius))] = [tuple(c) for c in v]
+        except ValueError:
+            pass
+    return out
+
+
+def save_cuts(path, cuts):
+    tmp = path + '.tmp'
+    with open(tmp, 'w') as f:
+        json.dump({','.join(map(str, d)) + '/' + str(r): v for (d, r), v in cuts.items() if v}, f)
+    os.replace(tmp, path)
+
+
+def merge_cuts(cuts, key, new):
+    if new:
+        known = cuts.setdefault(key, [])
+        have = set(known)
+        known.extend(c for c in map(tuple, new) if c not in have)
 
 
 def canon(ds):
@@ -59,6 +88,7 @@ class Oracle:
     def __init__(self, radius):
         self.radius = radius
         self.known = {}
+        self.cuts = load_cuts(CUT_STORE)
         import glob
         for path in sorted(glob.glob(os.path.join(DATA, 'oracle_cache*.jsonl'))):
             for line in open(path):
@@ -91,20 +121,25 @@ class Oracle:
         # each answer is appended to the cache as soon as it arrives, so an interrupted batch
         # (the cloud machine restarts) keeps everything already decided
         pool = _shared_pool(workers) if timeout is None else None
+        args = [(k, self.radius, self.cuts.get((k[0], self.radius), [])) for k in keys]
         with open(CACHE, 'a', buffering=1) as f:
-            def record(k, st, secs):
+            def record(res):
+                k, st, secs = res[:3]
                 self.known[k] = st
+                if len(res) > 3:
+                    merge_cuts(self.cuts, (k[0], self.radius), res[3])
                 f.write(json.dumps({'dirs': list(k[0]), 'alpha': [list(a) for a in k[1]],
                                     'radius': self.radius, 'status': st, 'seconds': secs}) + '\n')
             if timeout is None:
-                for k, st, secs in pool.imap_unordered(_solve, [(k, self.radius) for k in keys]):
-                    record(k, st, secs)
+                for res in pool.imap_unordered(_solve, args):
+                    record(res)
             else:
                 # hard per-query time limit (CaDiCaL cannot be interrupted, so each query runs in
                 # its own process and is killed at the limit): windows that are expensive to refute
                 # are recorded as UNKNOWN (treated as feasible), so only cheap certificates are needed
-                for k2, st, secs in run_limited([(k, self.radius) for k in keys], workers, timeout):
-                    record(k2, st, secs)
+                for res in run_limited(args, workers, timeout):
+                    record(res)
+        save_cuts(CUT_STORE, self.cuts)
         return len(keys)
 
 
@@ -177,6 +212,7 @@ class TwoLevelOracle(Oracle):
         self.upper = Oracle.__new__(Oracle)                 # an Oracle at the larger radius
         self.upper.radius = up
         self.upper.known = {}
+        self.upper.cuts = self.cuts                         # keys carry the radius
         import glob
         for path in sorted(glob.glob(os.path.join(DATA, 'oracle_cache*.jsonl'))):
             for line in open(path):
@@ -219,11 +255,29 @@ class TwoLevelOracle(Oracle):
 
 
 def _solve(arg):
-    (ds, al), radius = arg
+    """Decide one window; the cycle cuts already known for its shape are added before the first
+    solve.  Returns (key, status, seconds, new cuts)."""
+    (ds, al), radius = arg[:2]
+    pre = arg[2] if len(arg) > 2 else []
     t = time.time()
-    st, _, _ = decide(Encoding(window_from_dirs(ds), [a if a[0] != a[1] else a[0] for a in al], radius),
-                      certify=False)
-    return (ds, al), st, round(time.time() - t, 2)
+    enc = Encoding(window_from_dirs(ds), [a if a[0] != a[1] else a[0] for a in al], radius)
+    for c in pre:
+        enc.add_cycle_cut(c)
+    from pysat.solvers import Cadical153
+    found, st = [], 'UNSAT'
+    with Cadical153(bootstrap_with=enc.clauses) as s:
+        while s.solve():
+            model = s.get_model()
+            sel = [v for v in enc.ball if model[enc.var[v] - 1] > 0]
+            cyc = cycles_of(sel)
+            if not cyc:
+                st = 'SAT'; break
+            if len(found) > 10000:
+                st = 'UNKNOWN'; break
+            for c in cyc:
+                enc.add_cycle_cut(c); s.add_clause(enc.clauses[-1])
+                found.append(tuple(sorted(c)))
+    return (ds, al), st, round(time.time() - t, 2), found
 
 
 class Automaton:
