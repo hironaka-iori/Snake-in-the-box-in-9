@@ -365,6 +365,37 @@ theorem testBit_mul_rep (X n m f : Nat) (hX : X < 2 ^ (8 * n)) (hf : f < n * m) 
   rw [← h, testBit_digit, digit_pack _ (tab_bounded _ _ _ (fun _ _ => digit_lt _ _)), tab_getD _ _ f hf,
     ← testBit_digit]
 
+/-- Geometric sum: `repK n m` is `(256^(n m) - 1) / (256^n - 1)`, so the kernel can compute a
+replicator with one power and one division instead of reading it as a numeral. -/
+theorem repK_geom (n : Nat) : ∀ m, repK n m * (256 ^ n - 1) + 1 = 256 ^ (n * m)
+  | 0 => by simp [repK]
+  | m + 1 => by
+    have ih := repK_geom n m
+    have hB : 1 ≤ 256 ^ n := Nat.pow_pos (by decide)
+    simp only [repK]
+    rw [Nat.mul_succ, Nat.pow_add]
+    generalize 256 ^ (n * m) = A at ih ⊢
+    generalize repK n m = r at ih ⊢
+    generalize hBdef : 256 ^ n = B at ih hB ⊢
+    obtain ⟨c, rfl⟩ : ∃ c, B = c + 1 := ⟨B - 1, by omega⟩
+    simp only [Nat.add_sub_cancel] at ih ⊢
+    rw [Nat.add_mul, Nat.mul_succ]
+    omega
+
+theorem repK_eq_div (n m : Nat) (hn : 0 < n) : repK n m = (256 ^ (n * m) - 1) / (256 ^ n - 1) := by
+  have h := repK_geom n m
+  have hpos : 0 < 256 ^ n - 1 := by
+    have : 256 ≤ 256 ^ n := by
+      calc 256 = 256 ^ 1 := by rfl
+        _ ≤ 256 ^ n := Nat.pow_le_pow_right (by decide) hn
+    omega
+  exact (Nat.div_eq_of_eq_mul_left hpos (by omega)).symm
+
+/-- `letN` for a Nat-valued body: the kernel normalises `n + 1` to a numeral before `k` sees it. -/
+def letNat (n : Nat) (k : Nat → Nat) : Nat := Nat.rec (motive := fun _ => Nat) (k 0) (fun m _ => k m) n
+
+theorem letNat_succ (n : Nat) (k : Nat → Nat) : letNat (n + 1) k = k n := rfl
+
 /-- A numeral given as little-endian 8192-bit chunks (large table literals are written this way
 because the parser's decimal conversion is quadratic in the number of digits). -/
 def ofChunks (l : List Nat) : Nat := l.foldr (fun c acc => acc <<< 8192 + c) 0

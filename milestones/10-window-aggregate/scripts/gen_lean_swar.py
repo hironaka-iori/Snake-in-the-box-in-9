@@ -48,6 +48,9 @@ def main():
     ap.add_argument('--k', type=int, required=True)
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--K', type=int, default=5, help='lump cap: symbols 1..K+1 (K+1 = count >= K+1)')
+    ap.add_argument('--potr', choices=['literal', 'computed'], default='literal',
+                    help='store the block-replicated potentials as numerals, or compute them from potC in the '
+                         'kernel (smaller data module, slower shards)')
     ap.add_argument('--lam', help='prove the bound with this mean p/q (<= the minimum mean) instead of the minimum')
     a = ap.parse_args()
     L, k, K = a.L, a.k, a.K
@@ -213,9 +216,24 @@ def main():
             assert swar_ok(Av, Bv, BL, HIF), ('packed check fails', c)
             pairs += 1
     print('packed check mirrors', pairs, 'pairs', flush=True)
+    # mirror of the Lean `spreadR` recursion (divide and conquer over blocks) for every shape
+    DEPTH = (M1 // N2 - 1).bit_length()
+    def spread(Cv, d):
+        if d == 0:
+            return Cv & ((1 << B2) - 1)
+        h = d - 1
+        return spread(Cv & ((1 << (B2 << h)) - 1), h) | (spread(Cv >> (B2 << h), h) << (B3 << h))
+    REPB_INT = sum(1 << (B2 * j) for j in range(NS))
+    for i in potR:
+        assert spread(potC[i], DEPTH) * REPB_INT == potR[i], ('spreadR mirror', i)
+    print('spreadR mirrors potR for', len(potR), 'shapes', flush=True)
 
     # ---- Lean text ------------------------------------------------------------
     CHUNK = 8192
+
+    def geo(n, m):
+        """Lean text of `repK n m` in closed form (see `repK_eq_div`)."""
+        return f'((256 ^ ({n} * {m}) - 1) / (256 ^ {n} - 1))'
 
     def lit(v):
         """A numeral.  Lean parses a decimal literal digit by digit (quadratic in its length: a
@@ -237,6 +255,13 @@ def main():
         for x in sorted(by_a):
             inner = ' else '.join(f'if {var2} = {y} then {lit(v)}' for y, v in sorted(by_a[x].items()))
             lines.append(f'  if {var1} = {x} then ({inner} else 0) else')
+        lines.append('  0')
+        return '\n'.join(lines)
+
+    def chain1e(name, var, exprs):
+        lines = [f'def {name} ({var} : Nat) : Nat :=']
+        for x, e in sorted(exprs.items()):
+            lines.append(f'  if {var} = {x} then {e} else')
         lines.append('  0')
         return '\n'.join(lines)
 
@@ -500,9 +525,19 @@ set_option maxHeartbeats 0
 /-- The same potentials stored at `pos y`. -/
 {chain1(f'potT{S}', 'i', potT)}
 
-/-- The same potentials with every {N2}-field block repeated {NS} times (field `{N3} h + l` holds
+/-- Every {N2}-field block of `C` moved to the start of its own {N3}-field block and repeated {NS}
+times there (field `{N3} h + l` holds field `{N2} h + l % {N2}` of `C`).  Divide and conquer over
+the blocks (each half forced to a numeral by `letNat`), so the kernel's work grows with the
+logarithm of the number of blocks; `potR_cons` checks the result against `potC` for every shape. -/
+def spreadR{S} (C : Nat) : Nat :=
+  (Nat.rec (motive := fun _ => Nat → Nat) (fun C => C &&& (2 ^ {B2} - 1))
+    (fun d rec C => letNat (C + 1) fun C =>
+      rec (C &&& (2 ^ ({B2} * 2 ^ d) - 1)) ||| (rec (C >>> ({B2} * 2 ^ d)) <<< ({B3} * 2 ^ d)))
+    {(M1 // N2 - 1).bit_length()} C) * {geo(N2, NS)}
+
+/-- The potentials with every {N2}-field block repeated {NS} times (field `{N3} h + l` holds
 field `{N2} h + l % {N2}` of `potC`). -/
-{chain1(f'potR{S}', 'i', potR)}
+{chain1e(f'potR{S}', 'i', {i: f'spreadR{S} (potC{S} {i})' for i in potR}) if a.potr == 'computed' else chain1(f'potR{S}', 'i', potR)}
 
 def {CODE} : List Nat → Nat → Nat
   | [], acc => acc
@@ -523,44 +558,46 @@ theorem pot{S}_le (h t : List Nat) : pot{S} h t ≤ {R} := clip_le _ _
 def ones{S} : Nat := {ONES}
 def hi{S} : Nat := {HI}
 def wpat{S} : Nat := {WPAT}
-def onesP{S} : Nat := {lit(ONESP)}
-def hiP{S} : Nat := {lit(128 * ONESP)}
-def onesF{S} : Nat := {lit(ONESF)}
-def hiF{S} : Nat := {lit(HIF)}
-def wpatF{S} : Nat := {lit(WPATF)}
-def repB{S} : Nat := {lit(REPB)}
-def repA{S} : Nat := {lit(REPA)}
-{chr(10).join(f'def rep{cc}{S} : Nat := {lit(REPC[cc])}' for cc in range(3, k))}
+-- replicated constants as closed forms of the geometric sums `repK` (`repK_eq_div`): the kernel
+-- computes them with one power and one division instead of reading megabytes of numerals
+def onesP{S} : Nat := ones{S} * {geo(N3, M1 // N3)}
+def hiP{S} : Nat := hi{S} * {geo(N3, M1 // N3)}
+def onesF{S} : Nat := ones{S} * {geo(N3, F // N3)}
+def hiF{S} : Nat := hi{S} * {geo(N3, F // N3)}
+def wpatF{S} : Nat := wpat{S} * {geo(N3, F // N3)}
+def repB{S} : Nat := {geo(N2, NS)}
+def repA{S} : Nat := {geo(M1, NS)}
+{chr(10).join(f'def rep{cc}{S} : Nat := {geo(NS ** cc, NS ** (k - cc))}' for cc in range(3, k))}
 theorem ones{S}_eq : ones{S} = pack (tab (fun _ => 1) {N3}) := by decide +kernel
 theorem hi{S}_eq : hi{S} = pack (tab (fun _ => 128) {N3}) := by decide +kernel
 theorem wpat{S}_eq : wpat{S} = pack (tab (fun l => l / {N2} + 1) {N3}) := by decide +kernel
 theorem onesF{S}_eq : onesF{S} = pack (tab (fun _ => 1) {F}) := by
   have h := pack_tab_rep (fun _ => 1) {N3} {F // N3}
   rw [← ones{S}_eq] at h
-  have e : onesF{S} = ones{S} * repK {N3} {F // N3} := by decide +kernel
+  have e : onesF{S} = ones{S} * repK {N3} {F // N3} := by rw [repK_eq_div _ _ (by decide)]; rfl
   rw [e]; exact h.symm
 theorem hiF{S}_eq : hiF{S} = pack (tab (fun _ => 128) {F}) := by
   have h := pack_tab_rep (fun _ => 128) {N3} {F // N3}
   rw [← hi{S}_eq] at h
-  have e : hiF{S} = hi{S} * repK {N3} {F // N3} := by decide +kernel
+  have e : hiF{S} = hi{S} * repK {N3} {F // N3} := by rw [repK_eq_div _ _ (by decide)]; rfl
   rw [e]; exact h.symm
 theorem wpatF{S}_eq : wpatF{S} = pack (tab (fun l => l % {N3} / {N2} + 1) {F}) := by
   have h := pack_tab_rep (fun l => l / {N2} + 1) {N3} {F // N3}
   rw [← wpat{S}_eq] at h
-  have e : wpatF{S} = wpat{S} * repK {N3} {F // N3} := by decide +kernel
+  have e : wpatF{S} = wpat{S} * repK {N3} {F // N3} := by rw [repK_eq_div _ _ (by decide)]; rfl
   rw [e]; exact h.symm
-theorem repB{S}_eq : repB{S} = repK {N2} {NS} := by decide +kernel
-theorem repA{S}_eq : repA{S} = repK {M1} {NS} := by decide +kernel
-{chr(10).join(f'theorem rep{cc}{S}_eq : rep{cc}{S} = repK {NS ** cc} {NS ** (k - cc)} := by decide +kernel' for cc in range(3, k))}
+theorem repB{S}_eq : repB{S} = repK {N2} {NS} := (repK_eq_div _ _ (by decide)).symm
+theorem repA{S}_eq : repA{S} = repK {M1} {NS} := (repK_eq_div _ _ (by decide)).symm
+{chr(10).join(f'theorem rep{cc}{S}_eq : rep{cc}{S} = repK {NS ** cc} {NS ** (k - cc)} := (repK_eq_div _ _ (by decide)).symm' for cc in range(3, k))}
 theorem onesP{S}_eq : onesP{S} = pack (tab (fun _ => 1) {M1}) := by
   have h := pack_tab_rep (fun _ => 1) {N3} {M1 // N3}
   rw [← ones{S}_eq] at h
-  have e : onesP{S} = ones{S} * repK {N3} {M1 // N3} := by decide +kernel
+  have e : onesP{S} = ones{S} * repK {N3} {M1 // N3} := by rw [repK_eq_div _ _ (by decide)]; rfl
   rw [e]; exact h.symm
 theorem hiP{S}_eq : hiP{S} = pack (tab (fun _ => 128) {M1}) := by
   have h := pack_tab_rep (fun _ => 128) {N3} {M1 // N3}
   rw [← hi{S}_eq] at h
-  have e : hiP{S} = hi{S} * repK {N3} {M1 // N3} := by decide +kernel
+  have e : hiP{S} = hi{S} * repK {N3} {M1 // N3} := by rw [repK_eq_div _ _ (by decide)]; rfl
   rw [e]; exact h.symm
 
 /-- `T` holds the fields of `C` at the positions `{POS} y`, checked block by block on numerals. -/
