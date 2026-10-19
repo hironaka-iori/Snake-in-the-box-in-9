@@ -14,6 +14,8 @@ import shutil
 import subprocess
 import time
 import tempfile
+import threading
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 
 PIN = "c44e0c8ee63ca166450922a373c7409c5d26b00b"
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
@@ -100,6 +102,9 @@ def main():
                         help="which Lean chain proves the conditional 235 (default: the SWAR kernel chain)")
     parser.add_argument("--extra-chains", nargs="*", default=[],
                         help="further generated chains to check and audit, e.g. K6R3C7W (the cap-7 233 chain)")
+    parser.add_argument("--jobs", type=int, default=1,
+                        help="check up to this many independent modules at once (a module starts when every "
+                             "module it imports is checked; the shards of a chain are independent)")
     parser.add_argument("--build-dir", type=Path, default=None,
                         help="reuse this build directory: steps whose object is newer than its source and "
                              "whose previous run succeeded are not repeated (for machines that restart)")
@@ -155,10 +160,13 @@ def main():
         "steps": [], "axiom_audits": {}, "status": "running",
     }
 
+    lock = threading.RLock()
+
     def save():
-        (build / "manifest.json").write_text(
-            json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
-        )
+        with lock:
+            (build / "manifest.json").write_text(
+                json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+            )
 
     def copy(source, target):
         source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
@@ -196,18 +204,19 @@ def main():
             stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace",
         )
         (logs / f"{label}.log").write_text(result.stdout, encoding="utf-8")
-        manifest["steps"].append({"label": label, "command": command,
-                                   "exit_code": result.returncode,
-                                   "seconds": round(time.monotonic() - started, 1)})
-        for theorem, raw in re.findall(
-            r"'([^']+)' depends on axioms: \[([^\]]*)\]", result.stdout
-        ):
-            axioms = {item.strip() for item in raw.split(",") if item.strip()}
-            manifest["axiom_audits"][theorem] = sorted(axioms)
-            if not axioms <= ALLOWED_AXIOMS:
-                save()
-                raise RuntimeError(f"Unexpected axioms for {theorem}: {axioms}")
-        save()
+        with lock:
+            manifest["steps"].append({"label": label, "command": command,
+                                       "exit_code": result.returncode,
+                                       "seconds": round(time.monotonic() - started, 1)})
+            for theorem, raw in re.findall(
+                r"'([^']+)' depends on axioms: \[([^\]]*)\]", result.stdout
+            ):
+                axioms = {item.strip() for item in raw.split(",") if item.strip()}
+                manifest["axiom_audits"][theorem] = sorted(axioms)
+                if not axioms <= ALLOWED_AXIOMS:
+                    save()
+                    raise RuntimeError(f"Unexpected axioms for {theorem}: {axioms}")
+            save()
         if result.returncode or "declaration uses 'sorry'" in result.stdout:
             print(result.stdout, flush=True)
             raise RuntimeError(f"{label} failed; see {logs / (label + '.log')}")
@@ -236,15 +245,36 @@ def main():
         env["LEAN_PATH"] = os.pathsep.join(
             [path for path in lake_env.get("LEAN_PATH", "").split(os.pathsep) if path]
             + [str(core / ".lake/build/lib/lean"), str(build)])
-        for module in ["SquareIncidence", *modules]:
+        order = ["SquareIncidence", *modules]
+        # dependencies among the modules of this run, from their import lines
+        deps = {m: {name for name in re.findall(r"^import\s+(\S+)",
+                                                (build / (m + ".lean")).read_text(encoding="utf-8"), re.M)
+                    if name in order} for m in order}
+
+        def check(module):
+            # decided when every import is checked, so a rebuilt import makes the object stale
             if cached(module, build / (module + ".lean"), build / (module + ".olean")):
                 print(f"Checking {module} ... (object up to date from an earlier run)", flush=True)
-                manifest["steps"].append({"label": module, "cached": True})
-                save()
-                continue
+                with lock:
+                    manifest["steps"].append({"label": module, "cached": True})
+                    save()
+                return
             run(module, [lean_bin, f"--root={build}", "-o",
                          str(build / (module + ".olean")), str(build / (module + ".lean"))],
                 mathlib, env)
+
+        finished, pending, running = set(), list(order), {}
+        with ThreadPoolExecutor(max_workers=max(1, args.jobs)) as pool:
+            while pending or running:
+                for module in [m for m in pending if deps[m] <= finished][:max(1, args.jobs) - len(running)]:
+                    pending.remove(module)
+                    running[pool.submit(check, module)] = module
+                if not running:
+                    raise RuntimeError(f"unsatisfiable imports among {pending}")
+                done, _ = wait(running, return_when=FIRST_COMPLETED)
+                for future in done:
+                    future.result()            # re-raises a failed check
+                    finished.add(running.pop(future))
         audit = build / "FinalAudit.lean"
         audit.write_text(
             "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
