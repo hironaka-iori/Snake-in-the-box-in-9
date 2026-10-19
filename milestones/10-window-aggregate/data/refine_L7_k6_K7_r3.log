@@ -174,3 +174,128 @@ round 2: edges 10213013 mean 112/25 (4.4800) cycle [4, 8, 4, 3, 5, 3, 3, 8, 4, 5
   greedy: 77 queries, 19 of 108 cycles locally feasible
 round 3: edges 10086453 mean 9/2 (4.5000) cycle [5, 4, 4, 5, 5, 4, 5, 5, 4, 4, 5, 4] extra-cycles 107 queried 3609 unsat-on-cycle 2568 [1421s: graph 8 howard 1 cycles 108 decode 0 query 1304]
   querying 3119 windows
+shapes 34 states 1114112 extensions 132
+  querying 1938 windows
+  greedy: 34 queries, 21 of 82 cycles locally feasible
+round 0: edges 9843825 mean 9/2 (4.5000) cycle [5, 4] extra-cycles 81 queried 1972 unsat-on-cycle 1335 [888s: graph 8 howard 3 cycles 66 decode 0 query 811]
+  querying 4113 windows
+Process ForkServerProcess-2117:
+Traceback (most recent call last):
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 148, in _child
+    conn.send(_solve(arg))
+    ~~~~~~~~~^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 150, in _child
+    conn.send(None)
+    ~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+Process ForkServerProcess-2118:
+Traceback (most recent call last):
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 148, in _child
+    conn.send(_solve(arg))
+    ~~~~~~~~~^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 150, in _child
+    conn.send(None)
+    ~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+Process ForkServerProcess-2111:
+Traceback (most recent call last):
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 148, in _child
+    conn.send(_solve(arg))
+    ~~~~~~~~~^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 150, in _child
+    conn.send(None)
+    ~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+shapes 34 states 1114112 extensions 132
+  querying 1980 windows
+shapes 34 states 1114112 extensions 132
+  querying 4757 windows
+  greedy: retried 8 timed-out windows with 120 s: 3 refuted
+  greedy: retried 8 timed-out windows with 120 s: 3 refuted
+  greedy: retried 8 timed-out windows with 120 s: 5 refuted
+  greedy: retried 8 timed-out windows with 120 s: 7 refuted
+  greedy: retried 8 timed-out windows with 120 s: 6 refuted
+  greedy: retried 5 timed-out windows with 120 s: 3 refuted
+  greedy: 187 queries, 3 of 138 cycles locally feasible
+round 0: edges 9711139 mean 9/2 (4.5000) cycle [3, 5, 6, 5, 3, 5] extra-cycles 137 queried 4944 unsat-on-cycle 3403 [2900s: graph 6 howard 3 cycles 120 decode 0 query 2770]
