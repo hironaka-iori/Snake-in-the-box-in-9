@@ -17,16 +17,19 @@ several times faster:
   definitions and instances at every use;
 * the initial database shape is the perfect tree `perf h 0` with keys `1 … 2^h - 1` in
   order, built by one recursion instead of thousands of insertions;
-* a checkpoint is the stream of the clauses of `perf h 0` in pre-order, packed `k` entries
-  per `Nat` (`(lit+1) … (lit+1) 0` per entry, `0` alone for an unused slot), built into a
-  tree by one pass (`pre`); `cpOk` checks that each of its clauses is stored under the same
-  key in the replayed database, so no property of `pre` is needed for soundness.
+* a checkpoint is a list of clauses in pre-order of `perf h 0` (the word `0` for an unused
+  slot), built into a tree by one pass (`pre`); `cpOk` checks that each of its clauses is
+  stored under the same key in the replayed database, so no property of `pre` is needed
+  for soundness.  (Each tree clause is then a small closed term `entC x` with a literal
+  `x`, which the kernel evaluates once and caches; a packed stream of entries, parsed with
+  a running state, made every clause term depend on the whole stream and the checks about
+  twice as slow.)
 
 Proof data are lists of `Nat`s, one per lemma, holding 14-bit words (lowest first):
 
   `slot  (lit+1) … (lit+1)  0  hint … hint  0`
 
-and a checkpoint chunk holds `k` entries `(lit+1) … (lit+1) 0` (`0` alone for a free slot).
+and a checkpoint entry is `(lit+1) … (lit+1)` (or `0`).
 -/
 
 namespace Snake9.LratFastO3k14
@@ -135,48 +138,21 @@ def loadRaw (t : Tree) (raw : List (List Nat)) (slots : List Nat) : Tree :=
     (fun c _ ih t sl => List.rec (motive := fun _ => Tree) t
       (fun k rest _ => let t' := insertF t k (rawMask c); LratO3k.seqT t' (ih t' rest)) sl) raw t slots
 
-/-- A checkpoint clause: the tautology for an unused slot (entry `0`). -/
-def entC (c : Nat) : Nat := kif Nat.beq c 0 then taut else c
+/-- A checkpoint entry: its clause, or the tautology for `0`. -/
+def entC (x : Nat) : Nat := kif Nat.beq x 0 then taut else (litsL 255 0 x).1
 
-/-- Checkpoint stream: the current chunk, the number of entries read from it, the remaining
-chunks.  `refill` moves to the next chunk after `k` entries. -/
-def refill (k : Nat) (st : Nat × Nat × List Nat) : Nat × Nat × List Nat :=
-  kif Nat.beq st.2.1 k then
-    List.rec (motive := fun _ => Nat × Nat × List Nat) (0, 0, List.nil)
-      (fun c rest _ => (c, 0, rest)) st.2.2
-  else st
+/-- The tree of depth `d` (keys as in `perf d b`) whose clauses are the entries `es` in
+pre-order; also returns the unused entries. -/
+def pre (d : Nat) : Nat → List Nat → Tree × List Nat :=
+  Nat.rec (motive := fun _ => Nat → List Nat → Tree × List Nat) (fun _ es => (Tree.nil, es))
+    (fun d ih b es => List.rec (motive := fun _ => Tree × List Nat) (Tree.nil, List.nil)
+      (fun x rest _ =>
+        let L := ih b rest
+        let R := ih (Nat.add b (Nat.pow 2 d)) L.2
+        (Tree.node (Nat.add b (Nat.pow 2 d)) (entC x) L.1 R.1, R.2)) es) d
 
-/-- Evaluate a `Nat` (to a literal) before continuing with `r`. -/
-def seqN {α : Sort u} (n : Nat) (r : α) : α := Nat.rec (motive := fun _ => α) r (fun _ _ => r) n
-
-/-- Evaluate a list to its first constructor before continuing with `r`. -/
-def seqL {α : Sort u} (l : List Nat) (r : α) : α :=
-  List.rec (motive := fun _ => α) r (fun _ _ _ => r) l
-
-/-- Evaluate every component of a stream state before continuing with `r`. -/
-def seqS {α : Sort u} (st : Nat × Nat × List Nat) (r : α) : α :=
-  seqN st.1 (seqN st.2.1 (seqL st.2.2 r))
-
-/-- The tree of depth `d` (keys as in `perf d b`) whose clauses are the next entries of the
-stream in pre-order; also returns the rest of the stream.  The state is forced at every
-node, so that no chain of suspended stream states builds up across the tree. -/
-def pre (k d : Nat) : Nat → (Nat × Nat × List Nat) → Tree × (Nat × Nat × List Nat) :=
-  Nat.rec (motive := fun _ => Nat → (Nat × Nat × List Nat) → Tree × (Nat × Nat × List Nat))
-    (fun _ st => (Tree.nil, st))
-    (fun d ih b st =>
-      let st1 := refill k st
-      let e := litsL 255 0 st1.1
-      let c := e.1
-      let st2 := (e.2, Nat.add st1.2.1 1, st1.2.2)
-      seqN c (seqS st2 (
-        let L := ih b st2
-        let sL := L.2
-        seqS sL (
-          let R := ih (Nat.add b (Nat.pow 2 d)) sL
-          (Tree.node (Nat.add b (Nat.pow 2 d)) (entC c) L.1 R.1, R.2))))) d
-
-/-- The database of a checkpoint of height `h` with `k` entries per chunk. -/
-def build (h k : Nat) (es : List Nat) : Tree := (pre k h 0 (0, k, es)).1
+/-- The database of a checkpoint. -/
+def build (h : Nat) (es : List Nat) : Tree := (pre h 0 es).1
 
 /-- Every clause of `t` is the tautology or stored under the same key in `R`. -/
 def cpOk (R t : Tree) : Bool :=
