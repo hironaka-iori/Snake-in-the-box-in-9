@@ -32,6 +32,13 @@ slot (`build`, checked by `cpOk`).  With --fast all proof data are written as ra
 (`nat_lit`): no `OfNat` instance per element, so data modules elaborate about twice as fast,
 their .olean files are a third smaller, and the kernel never unfolds a numeral.
 
+With --split (and --fast) the checker is work/final_lean/LratFast2.lean: each segment is
+checked by `check2 start_k (perf h 0) proof_k`, which keeps the start database fixed and
+puts the segment's lemmas into a second tree; a hint whose clause was already in the
+database when the segment started carries the flag bit 2^(W-1) and is looked up in the
+start database through a term the kernel caches (about 94% of the hints, on few distinct
+keys), so slots must stay below 2^(W-1).
+
   python gen_lean_lrat.py --work DIR [--seg N] [--cp M] [--group G] [--check] [--data DIR] NAME ...
 """
 import argparse, collections, heapq, json, os, sys
@@ -47,21 +54,29 @@ CHECKER_IMPORT, CHECKER_OPEN = 'import LratCheck', 'open Snake9.Lrat'
 
 
 FAST = False
+SPLIT = False   # LratFast2: hints into the segment's start database carry the flag bit
+FLAG = 1 << 12
 OFF = 2400
 BASE_NS = 'Snake9.Lrat'
 
 
-def set_width(bits, fast=False, off=2400):
+def set_width(bits, fast=False, off=2400, split=False):
     """Word width of the proof encoding (13, 14 or 15 bits) and literal offset (2400 or
     3000); the checker is LratCheck / LratCheck14 / LratCheckO3k, or with `fast`
     LratFast{,14} / LratFastO3k{,14,15} (see gen_checker_variants.py)."""
-    global W, M, CHECKER_IMPORT, CHECKER_OPEN, FAST, OFF, BASE_NS
-    assert bits in (13, 14, 15) and off in (2400, 3000, 4000)
-    W, M, FAST, OFF = bits, (1 << bits) - 1, fast, off
+    global W, M, CHECKER_IMPORT, CHECKER_OPEN, FAST, OFF, BASE_NS, SPLIT, FLAG
+    assert bits in (13, 14, 15, 16) and off in (2400, 3000, 4000)
+    assert fast or not split
+    W, M, FAST, OFF, SPLIT, FLAG = bits, (1 << bits) - 1, fast, off, split, 1 << (bits - 1)
     osfx = {2400: '', 3000: 'O3k', 4000: 'O4k'}[off]
     wsfx = str(bits) if bits != 13 else ''
     BASE_NS = 'Snake9.Lrat' + osfx
-    if fast:
+    if split:
+        f2 = 'LratFast2' + ('_' + osfx + wsfx if osfx + wsfx else '')
+        CHECKER_IMPORT = 'import ' + f2
+        CHECKER_OPEN = 'open Snake9.LratFast%s%s\nopen Snake9.%s\nopen %s (Tree TreeTrue andB)' % (
+            osfx, wsfx, f2, BASE_NS)
+    elif fast:
         CHECKER_IMPORT = 'import LratFast' + osfx + wsfx
         CHECKER_OPEN = 'open Snake9.LratFast%s%s\nopen %s (Tree TreeTrue andB)' % (osfx, wsfx, BASE_NS)
     else:
@@ -253,6 +268,30 @@ def sim_rup(db, x):
             z |= (u << OFF) if u < (1 << OFF) else (u >> OFF)
 
 
+def sim_rup2(S, D, x):
+    """`rup2` of LratFast2: a flagged hint is looked up in S, the others in D."""
+    ws = unpack(x)
+    c, pos = sim_lits(ws, 1)
+    z = c
+    first = pos
+    taut = 1 | (1 << OFF)
+    while True:
+        assert pos - first < HINT_FUEL, 'more hints than the Lean hint fuel'
+        w = ws[pos] if pos < len(ws) else 0
+        pos += 1
+        if w >= FLAG:
+            d = S.get(w - FLAG, taut)
+        elif w in D:
+            d = D[w]
+        else:
+            return False
+        u = d & ~z
+        if u == 0:
+            return True
+        if u & (u - 1) == 0:
+            z |= (u << OFF) if u < (1 << OFF) else (u >> OFF)
+
+
 def sim_ins(db, x):
     ws = unpack(x)
     c, _ = sim_lits(ws, 1)
@@ -298,13 +337,11 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
     core_cls = read_cnf_core(os.path.join(work, name + '.cnf'), core_ids)
     lemmas = read_lrat(os.path.join(work, name + '.lrat'))
     input_slots, steps, last, nslots = plan(core_ids, lemmas)
-    assert nslots <= M
+    assert nslots <= M and (not SPLIT or nslots < FLAG), ('too many slots for the word width', nslots)
     if FAST:
         height, key = perfect_keys(nslots)
     else:
         key = inorder_keys(nslots)
-    nums = [pack([key[s]] + [bit(l) + 1 for l in lits] + [0] + [key[h] for h in hs] + [0])
-            for s, lits, hs in steps]
     # segments
     cuts = [0]
     acc = 0
@@ -320,6 +357,15 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         lits_of[c], born[c], slot_at[c] = cl, -1, s
     for i, ((cid, lits, _), (s, _, _)) in enumerate(zip(lemmas, steps)):
         lits_of[cid], born[cid], slot_at[cid] = lits, i, s
+    seg_of = [k for k in range(1, nseg + 1) for _ in range(cuts[k - 1], cuts[k])]
+    nums = []
+    for i, ((s, lits, hs), (_, _, hids)) in enumerate(zip(steps, lemmas)):
+        if SPLIT:   # flag the hints whose clause was in the database when the segment started
+            j = cuts[seg_of[i] - 1]
+            hw = [key[h] + (FLAG if born[c] < j else 0) for h, c in zip(hs, hids)]
+        else:
+            hw = [key[h] for h in hs]
+        nums.append(pack([key[s]] + [bit(l) + 1 for l in lits] + [0] + hw + [0]))
     is_cp = [False] * (nseg + 2)   # is_cp[k]: segment k starts from a checkpoint
     cps = {}
     for k in range(2, nseg + 1):
@@ -359,8 +405,14 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
                     assert db.get(kk) == c, ('checkpoint', k, kk)
                     ndb[kk] = c
                 db = ndb
+            if SPLIT:
+                S, D = dict(db), {kk: taut for kk in range(1, 1 << height)}
             for x in nums[cuts[k - 1]:cuts[k]]:
-                assert sim_rup(db, x), ('rup failed', k)
+                if SPLIT:
+                    assert sim_rup2(S, D, x), ('rup failed', k)
+                    sim_ins(D, x)
+                else:
+                    assert sim_rup(db, x), ('rup failed', k)
                 sim_ins(db, x)
         assert db.get(final_key) == 0
         stats['simulated'] = True
@@ -406,7 +458,8 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         files[os.path.join(sub, 'Data%d.lean' % k)] = '\n'.join(body)
 
     def seg_prop(k):
-        base = 'check start%d proof%d' % (k, k)
+        base = ('check2 start%d (perf %d 0) proof%d' % (k, height, k) if SPLIT
+                else 'check start%d proof%d' % (k, k))
         if k == nseg:
             return 'andB (%s) (hasEmpty (replay start%d proof%d) %d) = true' % (base, k, k, final_key)
         if is_cp[k + 1] and FAST:
@@ -437,10 +490,17 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
               '    start_true (raw := raw) (keys := shapeKeys) (slots := inputSlots) τ h')]
     for k in range(1, nseg + 1):
         if k == nseg:
-            main.append('  exact final_false (s := start%d) (ps := proof%d) τ ok%d h%d' % (k, k, k, k))
+            if SPLIT:
+                main.append('  exact final_false2 (s := start%d) (ps := proof%d) (h := %d) τ ok%d h%d'
+                            % (k, k, height, k, k))
+            else:
+                main.append('  exact final_false (s := start%d) (ps := proof%d) τ ok%d h%d' % (k, k, k, k))
         elif is_cp[k + 1]:
             main.append('  have h%d : TreeTrue τ start%d :=' % (k + 1, k + 1))
-            if FAST:
+            if SPLIT:
+                main.append('    cp_true2 (s := start%d) (ps := proof%d) (t := start%d) (h := %d) τ ok%d h%d'
+                            % (k, k, k + 1, height, k, k))
+            elif FAST:
                 main.append('    cp_true (s := start%d) (ps := proof%d) (t := start%d) τ ok%d h%d'
                             % (k, k, k + 1, k, k))
             else:
@@ -448,7 +508,11 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
                             % (k, k, k + 1, k, k))
         else:
             main.append('  have h%d : TreeTrue τ start%d :=' % (k + 1, k + 1))
-            main.append('    replay_true (t := start%d) (ps := proof%d) τ ok%d h%d' % (k, k, k, k))
+            if SPLIT:
+                main.append('    replay_true2 (t := start%d) (ps := proof%d) (h := %d) τ ok%d h%d'
+                            % (k, k, height, k, k))
+            else:
+                main.append('    replay_true (t := start%d) (ps := proof%d) τ ok%d h%d' % (k, k, k, k))
     main += ['', 'end ' + ns, '']
     files[os.path.join(outdir, mod + '.lean')] = '\n'.join(main)
     total = 0
@@ -470,14 +534,17 @@ def main():
     ap.add_argument('--out', default=LEAN)
     ap.add_argument('--check', action='store_true', help='simulate the checker first')
     ap.add_argument('--data', default=DATA, help='core JSON directory (lean_core_direction for the 239 set)')
-    ap.add_argument('--wbits', type=int, default=13, help='13, 14 or 15: more than 8191 / 16383 live clauses')
+    ap.add_argument('--wbits', type=int, default=13,
+                    help='13 to 16 bits per word (with --split the slots must stay below 2^(bits-1))')
     ap.add_argument('--off', type=int, default=2400, help='literal offset: 2400, 3000 or 4000 (above the variable count)')
     ap.add_argument('--noncomputable-data', action='store_true',
                     help='declare the proof data `noncomputable def` (smaller build output)')
     ap.add_argument('--fast', action='store_true', help='emit proofs for LratFast (see above)')
+    ap.add_argument('--split', action='store_true',
+                    help='with --fast: emit proofs for LratFast2 (cached start database, flagged hints)')
     ap.add_argument('names', nargs='+')
     a = ap.parse_args()
-    set_width(a.wbits, a.fast, a.off)
+    set_width(a.wbits, a.fast, a.off, a.split)
     if a.noncomputable_data:
         global DATA_DEF
         DATA_DEF = 'noncomputable def'

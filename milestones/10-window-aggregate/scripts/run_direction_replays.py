@@ -6,11 +6,16 @@ five-centre windows of the 238 bound; `--set r4`: the radius-4 set.
 Step 1 (`gen`): for each case of the set's core directory (smallest proof first) run
 gen_lean_lrat.py --fast (checker LratFast) with the literal offset chosen from the
 variable count (2400, 3000 or 4000) and 13-, 14- or 15-bit words (LratFast14/15), the
-smallest width whose database fits.  Cases whose main module already exists are skipped, so the step resumes.
+smallest width whose database fits.  With --split the checker is LratFast2 (cached start
+database, about 1.7 times faster kernel checks), whose keys must stay below 2^(bits-1), and
+16-bit words are also tried.  Cases whose main module already exists are skipped, so the
+step resumes.
 Generation runs one case at a time (the largest LRAT files need a few GB in Python).
 
 Step 2 (`build`): build every LocalWindowUnsat.D* module through
-work/guarded_lake_build.py, which bounds concurrent Lean processes and memory.
+work/guarded_lake_build.py, which bounds concurrent Lean processes and memory (with
+--direct it calls `lean` itself instead of `lake build`, which saves several seconds of
+lake start-up per module).
 
   python run_direction_replays.py gen   --work ~/lean-deps/lrat-direction
   python run_direction_replays.py build --jobs 3
@@ -49,20 +54,21 @@ def gen(a):
         nv = meta.get('variables', 0)
         off = 2400 if nv < 2400 else 3000 if nv < 3000 else 4000
         assert nv < 4000, (name, nv)
-        for bits in (13, 14, 15):
+        for bits in ((13, 14, 15, 16) if a.split else (13, 14, 15)):
             cmd = [sys.executable, os.path.join(HERE, 'gen_lean_lrat.py'), '--work', a.work,
                    '--data', data_dir(a), '--seg', str(a.seg), '--cp', str(a.cp), '--group', str(a.group),
-                   '--wbits', str(bits), '--off', str(off), '--noncomputable-data', '--fast', name]
+                   '--wbits', str(bits), '--off', str(off), '--noncomputable-data', '--fast',
+                   *(['--split'] if a.split else []), name]
             r = subprocess.run(cmd, capture_output=True, text=True)
             if r.returncode == 0:
                 print(json.dumps({'case': name, 'module': mod, 'wbits': bits, 'off': off,
-                                  'hints': info['hints']}), flush=True)
+                                  'split': a.split, 'hints': info['hints']}), flush=True)
                 break
-            if 'nslots <= M' not in r.stderr and 'assert nslots' not in r.stderr:
+            if 'too many slots' not in r.stderr and 'assert nslots' not in r.stderr:
                 print(r.stderr[-2000:], file=sys.stderr)
                 raise SystemExit(f'generation failed for {name}')
         else:
-            raise SystemExit(f'{name}: too many slots even for 15-bit words')
+            raise SystemExit(f'{name}: too many slots even for the widest words')
 
 
 def build(a):
@@ -72,7 +78,7 @@ def build(a):
     cmd = [sys.executable, os.path.join(ROOT, 'work', 'guarded_lake_build.py'), '--jobs', str(a.jobs),
            '--heavy-jobs', str(a.heavy_jobs),
            '--min-free-gb', str(a.min_free_gb), '--rss-cap-gb', str(a.rss_cap_gb),
-           *(['--trust-mtime'] if a.trust_mtime else []), *mods]
+           *(['--trust-mtime'] if a.trust_mtime else []), *(['--direct'] if a.direct else []), *mods]
     raise SystemExit(subprocess.run(cmd).returncode)
 
 
@@ -88,12 +94,14 @@ def main():
     g.add_argument('--group', type=int, default=4)
     g.add_argument('--cadical', default=None, help='direction5: cadical binary (default: toolchain)')
     g.add_argument('--seeds', type=int, default=2, help='direction5: cadical seeds per core proof')
+    g.add_argument('--split', action='store_true', help='emit proofs for LratFast2 (see above)')
     b = sub.add_parser('build')
     b.add_argument('--jobs', type=int, default=3, help='light (data) modules at a time')
     b.add_argument('--heavy-jobs', type=int, default=3, help='kernel-check modules at a time')
     b.add_argument('--min-free-gb', type=float, default=5.0)
     b.add_argument('--rss-cap-gb', type=float, default=6.0)
     b.add_argument('--limit', type=int, default=0, help='only the N smallest cases')
+    b.add_argument('--direct', action='store_true', help='compile with `lean` instead of `lake build`')
     b.add_argument('--trust-mtime', action='store_true',
                    help='resume quickly: skip modules whose .olean is up to date by mtime')
     a = ap.parse_args()

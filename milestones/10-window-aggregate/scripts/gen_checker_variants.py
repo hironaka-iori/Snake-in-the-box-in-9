@@ -10,6 +10,9 @@ The variants are the same files with those constants replaced:
   LratCheckO3k / LratFastO3k      OFF = 3000, for CNFs with more than 2399 variables
   LratFastO3k14, LratFastO3k15    OFF = 3000 with 14- or 15-bit words
   LratCheckO4k, LratFastO4k{,14,15}  OFF = 4000 (radius-4 five-centre CNFs)
+  LratFast{,O3k,O4k}16            16-bit words (clause keys up to 65535)
+  LratFast2_{O3k,O4k}{,14,15,16}, LratFast2_{14,15,16}: the same variants of LratFast2 (cached start database;
+                                  keys below 2^(bits-1), the top bit flags a start key)
 
 A fast variant imports the base variant with the same offset.  Existing files are only
 rewritten when their content changes.
@@ -59,7 +62,8 @@ def main():
     assert '4800' not in base and '4800' not in fast
     # (bits, off) -> names
     bases = {2400: ('LratCheck', 'Lrat'), 3000: ('LratCheckO3k', 'LratO3k'), 4000: ('LratCheckO4k', 'LratO4k')}
-    todo = [(13, 3000), (14, 2400), (15, 2400), (14, 3000), (15, 3000), (13, 4000), (14, 4000), (15, 4000)]
+    todo = [(13, 3000), (14, 2400), (15, 2400), (14, 3000), (15, 3000), (13, 4000), (14, 4000), (15, 4000),
+            (16, 2400), (16, 3000), (16, 4000)]
     for off, (mod, ns) in bases.items():
         if off == 2400:
             continue
@@ -73,6 +77,23 @@ def main():
         text = fast.replace('import LratCheck\n', 'import LratCheck\n\n' + header('LratFast', bits, off), 1)
         text = variant(text, bits, off, bns, fns, bmod)
         print(fmod, 'written' if write(os.path.join(LEAN, fmod + '.lean'), text) else 'unchanged')
+    # LratFast2 (cached start database) for every width and offset, over the LratFast variant
+    fast2 = open(os.path.join(LEAN, 'LratFast2.lean')).read()
+    assert '2400' not in fast2
+    for bits, off in [(13, 2400)] + todo:
+        sfx = {2400: '', 3000: 'O3k', 4000: 'O4k'}[off] + (str(bits) if bits != 13 else '')
+        if not sfx:
+            continue
+        bmod, bns = bases[off]
+        text = fast2.replace('import LratFast\n', 'import LratFast%s\n\n%s' % (sfx, header('LratFast2', bits, off)), 1)
+        text = text.replace('4096', str(1 << (bits - 1)))
+        if bits != 13:
+            text = text.replace('8191', str((1 << bits) - 1)).replace('13', str(bits))
+        text = text.replace('Snake9.LratFast2', '@@F2@@').replace('Snake9.LratFast', 'Snake9.LratFast' + sfx)
+        text = text.replace('Snake9.Lrat ', 'Snake9.%s ' % bns).replace('Snake9.Lrat.', 'Snake9.%s.' % bns)
+        text = text.replace('@@F2@@', 'Snake9.LratFast2_' + sfx)
+        mod2 = 'LratFast2_' + sfx
+        print(mod2, 'written' if write(os.path.join(LEAN, mod2 + '.lean'), text) else 'unchanged')
 
 
 if __name__ == '__main__':

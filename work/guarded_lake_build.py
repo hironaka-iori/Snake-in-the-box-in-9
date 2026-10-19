@@ -19,6 +19,12 @@ is newer than its source and than the .olean files of its imports is marked done
 without calling lake, which makes resuming a large build instant; lake re-checks its
 own traces when the final target is built normally.
 
+With --direct each module is compiled by `lean -o` itself (LEAN_PATH = the project's
+build directory), without starting lake.  Starting lake costs several seconds per call in a
+project with thousands of modules, which dominated the build time of small modules; lake
+writes no trace files then, so keep using --direct (with --trust-mtime to resume) for a
+project built this way, and audit it with `lean` (e.g. work/spectral/chain_audit.py).
+
   python3 work/guarded_lake_build.py UpperBound241Core LocalWindowRefuted --jobs 3
 """
 import argparse, json, os, re, signal, subprocess, sys, threading, time
@@ -61,6 +67,10 @@ def olean_path(mod):
     return ROOT / '.lake' / 'build' / 'lib' / 'lean' / (mod.replace('.', '/') + '.olean')
 
 
+def ilean_path(mod):
+    return ROOT / '.lake' / 'build' / 'lib' / 'lean' / (mod.replace('.', '/') + '.ilean')
+
+
 def uptodate(mod, deps):
     """The .olean of `mod` is newer than its source and than its imports' .olean files."""
     o = olean_path(mod)
@@ -101,6 +111,9 @@ def main():
     ap.add_argument('--root', default=str(ROOT), help='Lean project directory')
     ap.add_argument('--log', default=None, help='default: ROOT/.lake/guarded_build.jsonl')
     ap.add_argument('--lake', default=os.environ.get('LAKE', 'lake'))
+    ap.add_argument('--direct', action='store_true',
+                    help='compile each module with `lean -o` instead of `lake build` (see above)')
+    ap.add_argument('--lean', default=os.environ.get('LEAN', 'lean'))
     ap.add_argument('--trust-mtime', action='store_true',
                     help='skip modules whose .olean is newer than their source and imports')
     a = ap.parse_args()
@@ -146,7 +159,7 @@ def main():
                 finish(mod, 'killed', f'RSS {cur:.1f} GB over cap')
             elif proc.poll() is not None:
                 out = (logdir / (mod + '.log')).read_text(errors='replace')
-                ok = proc.returncode == 0
+                ok = proc.returncode == 0 and "declaration uses 'sorry'" not in out
                 finish(mod, 'ok' if ok else 'failed', '' if ok else out[-3000:])
         if avail < a.floor_gb and len(running) > 1:
             newest = max(running, key=lambda m: running[m][1])
@@ -176,12 +189,21 @@ def main():
         if ready and available_gb() >= a.min_free_gb:
             # prefer heavy modules so the slow kernel checks start as early as possible
             m = next((x for x in ready if heavy.search(x)), ready[0])
+            if a.direct:
+                olean_path(m).parent.mkdir(parents=True, exist_ok=True)
+                cmd = [a.lean, f'--root={ROOT}', '-o', str(olean_path(m)), '-i', str(ilean_path(m)),
+                       str(module_path(m))]
+                lp = [str(ROOT / '.lake' / 'build' / 'lib' / 'lean')] + (
+                    [os.environ['LEAN_PATH']] if os.environ.get('LEAN_PATH') else [])
+                env = dict(os.environ, LEAN_PATH=os.pathsep.join(lp))
+            else:
+                cmd, env = [a.lake, 'build', m], None
             with open(logdir / (m + '.log'), 'w') as out:
-                proc = subprocess.Popen([a.lake, 'build', m], cwd=ROOT, stdout=out,
+                proc = subprocess.Popen(cmd, cwd=ROOT, stdout=out, env=env,
                                         stderr=subprocess.STDOUT, start_new_session=True)
             running[m] = (proc, time.time(), 0.0)
             continue
-        time.sleep(2)
+        time.sleep(0.25 if a.direct else 2)
 
     print(f'done {len(done)}/{len(deps)} in {time.time() - t_begin:.0f}s; failed {len(failed)}', flush=True)
     for m, rec in failed.items():
