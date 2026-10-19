@@ -21,7 +21,7 @@ fi
 
 # 2. cap-7 refinement (state lives in the oracle cache; result file marks termination)
 if [ ! -f $D/refine_L7_k6_K7_r3.json ]; then
-  if ! running "refine_fast.py --L 7 --k 6 --K 7"; then
+  if [ ! -f $D/refine_k6c7_paused ] && ! running "refine_fast.py --L 7 --k 6 --K 7"; then
     log "starting cap-7 refinement"
     (cd $M && nohup python3 scripts/refine_fast.py --L 7 --k 6 --K 7 --radius 3 --workers 3 --slack 0.3 \
        --batch 200 --query-timeout 120 --avoid data/avoid_k6.json >> data/refine_L7_k6_K7_r3.log 2>&1 &)
