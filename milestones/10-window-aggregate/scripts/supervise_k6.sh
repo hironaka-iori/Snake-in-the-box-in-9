@@ -62,4 +62,12 @@ if [ -f $D/pipeline_c7_certified ] && [ ! -f $D/judge_direction_k6c7.json ] && [
      --out ../data/judge_direction_k6c7.json >> ../data/judge_direction_k6c7.log 2>&1 &)
 fi
 
+# 8. the 232 set (start-state accounting, two-level radius): certify into the same index
+if [ -f $D/minimal_L7_k6_K7_r3_r34.json ] && ! grep -q "failed 0" $D/certify_direction_r34.log 2>/dev/null \
+   && ! running "certify_direction.py"; then
+  log "starting r34 certification"
+  (cd $S && nohup python3 certify_direction.py --set ../data/minimal_L7_k6_K7_r3_r34.json --workers 4 \
+     --out ../data/direction_certificates_k6.json >> ../data/certify_direction_r34.log 2>&1 &)
+fi
+
 log "supervisor pass done"

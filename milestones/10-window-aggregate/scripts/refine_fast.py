@@ -271,6 +271,9 @@ def main():
     ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows to treat as feasible (expensive certificates)')
     ap.add_argument('--query-timeout', type=float, default=None, help='seconds per oracle query; slower windows count as feasible')
     ap.add_argument('--out')
+    ap.add_argument('--start', action='store_true',
+                    help='with --index: also the start-state constant D = max(pi - Q * symbol sum) of the '
+                         'smallest-D potential and the bound C = L*P - Q*(L-k) + D gives')
     ap.add_argument('--cycle-budget', type=float, default=120.0,
                     help='seconds per round for extracting extra cycles (C Howard, delete-and-resolve)')
     ap.add_argument('--python-howard', action='store_true', help='use the pure-Python Howard (slow, one policy graph)')
@@ -303,6 +306,19 @@ def main():
         out = {'L': a.L, 'k': a.k, 'K': a.K, 'listed_exclusions': len(keys), 'states': A.n, 'edges': int(len(U)),
                'min_mean': str(lam), 'potential_checked_on_every_edge': True,
                'potential_range': int(pi.max() - pi.min()), 'max_vertices': vb, 'max_edges': vb - 1}
+        P, Q = lam.numerator, lam.denominator
+        out['potential_bound_edges'] = (9179 * Q + P * a.L - Q * (a.L - 1) + out['potential_range'] - 8 * Q) // (P + 35 * Q)
+        if a.start:
+            from min_range import min_start_potential, init_sums
+            D, pi2 = min_start_potential(A, U, V, W, P, Q, 300)
+            assert pi2 is not None
+            init = init_sums(A)
+            assert (pi2 >= 0).all() and (pi2 <= D + Q * init).all()
+            assert (Q * W - P + pi2[U] - pi2[V] >= 0).all()
+            C = P * a.L - Q * (a.L - a.k) + D
+            out.update({'start_constant_D': int(D), 'start_potential_range': int(pi2.max()),
+                        'start_potential_checked_on_every_edge': True,
+                        'start_potential_bound_edges': (9179 * Q + C - 8 * Q) // (P + 35 * Q)})
         print(json.dumps(out))
         if a.out:
             json.dump(out, open(a.out, 'w'), indent=1)
