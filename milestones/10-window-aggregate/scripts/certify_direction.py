@@ -23,10 +23,9 @@ def tag_of(dirs, alpha):
 
 
 def one(arg):
-    """One window: a single proof-logging solver adds the lazy cycle cuts incrementally, so the
-    window is solved once (the earlier version solved it a second time from cold for the proof).
-    Every lemma of the proof is implied by the clauses present when it was derived, a subset of
-    the final clause set written to the CNF, so the proof checks against that CNF."""
+    """One window.  The proof-logging solver decides the window directly; most windows need no
+    cycle cut, and then this single solve also gives the proof (the earlier version always solved
+    twice).  Windows that needed cuts are proved again from cold on the final clause set."""
     dirs, alpha, radius, drat = arg
     t = time.time()
     al = [lo if lo == hi else (lo, hi) for lo, hi in alpha]
@@ -44,6 +43,13 @@ def one(arg):
                 enc.add_cycle_cut(c); cuts += 1
                 s.add_clause(enc.clauses[-1])
         proof = s.get_proof()
+    if cuts:
+        # clauses added after a solve can force CaDiCaL to restore clauses that variable
+        # elimination already deleted in the proof; drat-trim rejects such proofs, so windows
+        # that needed cuts get a cold proof solve of the final clause set
+        with Cadical153(bootstrap_with=enc.clauses, with_proof=True) as s:
+            assert not s.solve()
+            proof = s.get_proof()
     tag = tag_of(dirs, alpha)
     with tempfile.TemporaryDirectory() as td:
         cnf, prf = os.path.join(td, tag + '.cnf'), os.path.join(td, tag + '.drup')
