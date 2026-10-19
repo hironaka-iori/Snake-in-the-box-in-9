@@ -1,6 +1,49 @@
 # Collaborator handoff
 
-Checkpoint: 15 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 18 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+
+## Current assignment: constructive search
+
+This investigation now concentrates on a 196-edge construction; collaborators
+continue the upper-bound work. The [new construction milestone](milestones/12-construction-196/README.md)
+records a Lean-checked zero-defect criterion, approximately 31 million pilot
+proposals, and exact fragment-repair experiments. No valid improvement over
+191 edges was found. The two best 196-edge walks have seven chords each.
+That initial experiment is now followed by the
+[population and adaptive-repair comparison](milestones/13-diverse-construction/README.md).
+The added 440 million proposals found no valid improvement; the best saved
+walks have six chords. Retaining multiple candidates showed no consistent
+benefit at the longer budget. Every saved best walk from those four long runs
+has a known bank prefix and all defects touching its five appended vertices.
+Four solver-guided interior repairs ended unresolved. The next constructive
+direction relaxes connectivity, allowing a path and cyclic components, then
+excludes those cycles using the existing checked cycle-exclusion lemma.
+This is now implemented in [milestone 14](milestones/14-component-construction/README.md).
+A concrete 197-vertex seed consists of one 14-edge path and seven 26-cycles;
+its vertex count, degrees, partition, and cycle-cut validity passed Lean.
+Sequential cycle cuts produced a 40-edge path and six 26-cycles on the same
+number of vertices. The next round was unresolved. Continue from the saved
+seven-component state with both accumulated cuts retained. It remains a
+disconnected intermediate configuration, not an improved snake witness.
+
+Further targeted mergers are recorded in [milestone 15](milestones/15-component-mergers/README.md).
+The fixed 40-edge path is locally blocked, while unrestricted replacements of
+the path and one or two cycles remained unresolved. The signed frozen-cycle
+constraint has a Lean proof. [Milestone 16](milestones/16-cycle-reservoirs/README.md)
+supplies two checked disjoint 14-cycles in Q5, a 224-vertex product, and additional
+197-vertex disconnected states. The next constructive task is to use its two
+4,973-row local-state tables in a global cell model. Four shared connector
+vertices govern cross-cell edges; a checked local cost lemma explains why a
+connector with four internal neighbors must omit at least three when it uses
+an external edge. Costs can overlap and do not give a global bound.
+
+Synchronization incorporated the completed KEEP=112 aggregate receipt covering
+all 262 oriented bank entries, the bounded KEEP=96 survey, and conditional
+window bounds through 238. The separate `research/unconditional-241-only`
+branch at `890c486` contains an unconditional 241 theorem and a saved successful
+audit. That branch was inspected, not independently rebuilt or merged here.
+Historical priorities below describe previous checkpoints; they do not assign
+new upper-bound work to this constructive investigation.
 
 ## Where the investigation stands
 
@@ -8,9 +51,15 @@ The exact optimum is unresolved; no candidate value receives privileged status. 
 
 The fully Lean-checked global interval is now **191 <= a(9) <= 241** (see the window-exclusion section below). The 245 argument: the strengthened square-face bound combines the incidence identity with endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. The earlier arguments still supply the weaker bounds 247, 248, 251, 254, and 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
 
-The most recent completed theorem is the global upper bound 245. Normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
+The strongest completed global upper bound is 245. Normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
 
 The earlier universal two-singleton-square claim for internal vertices is false. A checked 137-edge counterexample has zero at path index 127, endpoints 145 and 288, and exactly one singleton square, {0,4,8,12}. Its distance along the path from the nearer endpoint is ten. Thus simply excluding the first few vertices near the endpoints does not repair that universal assertion. This example does not exclude a stronger statement restricted to longest paths.
+
+## Window-certificate checkpoint, 16 October 2026
+
+The repeated-coordinate radius-three (2,2,3) Boolean certificate passed all 61 Lean modules and its final axiom audit. The distinct-coordinate certificate is still being checked. The completed counter proof connects actual singleton counts to the ordered lists of 21 eligible corners and supplies the full auxiliary threshold assignment. Endpoint rules and all 112 retained cycle cuts are also checked. Exact assembly of all Boolean input clauses and arbitrary-window coordinate normalization remain open, so the global interval is unchanged.
+
+See [milestone 07](milestones/07-window-223/README.md) for the source hashes, reproduction commands, and remaining obligations. The collaborator branch review is recorded [separately](milestones/08-exhaustive-search/upstream-review-2026-10-16.md); its restricted DFS results do not settle the global optimum.
 
 ## Completed milestone: incidence proof
 

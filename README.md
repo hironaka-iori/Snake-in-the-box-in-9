@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Research checkpoint: 18 October 2026.
+Research checkpoint: 19 October 2026. The current construction task targets 196 edges. The [coordinate-face investigation](milestones/19-coordinate-face-repair/README.md) tests all six- and seven-dimensional faces of the selected 191-edge seed. Lean checks the geometry of face replacements. The remaining difficult face reduces to a two-arm search on 78 vertices, which produced a verified 186-edge seed with a different endpoint arrangement. It is below the known record but is not equivalent to any contiguous 186-edge subpath in the stored bank. The next search will also change its formerly fixed middle path. No improved snake witness has been found.
 
 | Claim | Current evidence |
 |---|---|
@@ -23,8 +23,12 @@ Research checkpoint: 18 October 2026.
 | Every snake has at most 245 edges | Lean-checked aggregate consequence, with every local premise discharged |
 | Every snake has at most 242 edges, and at most 241 edges | Lean-checked end to end: the 22 local count-window exclusions are Lean theorems (geometric bridge, clause soundness, kernel replay of the LRAT refutations by a verified checker); axiom audits on macOS and, from a fresh environment, on Linux |
 | At most 239 edges if 145 direction-aware count-window patterns are excluded | Lean-checked conditional theorem (kernel-checked 2592-state potential); the bridge and clause soundness for all 145 patterns are proved in Lean, the kernel replay of their refutations is not yet complete |
+| The repeated-coordinate radius-three (2,2,3) Boolean core is inconsistent | Lean-checked in 61 modules; complete geometric interpretation remains open |
+| At most 242, resp. 241, edges if five, resp. six, local count-window patterns are excluded | Lean-checked conditional theorems (fresh 156-step reproduction); each window exclusion has a DRAT-checked certificate for a local CNF, not yet a Lean proof |
+| At most 239 edges if 145 direction-aware count-window patterns are excluded | Lean-checked conditional theorem (kernel-checked 2592-state potential); every pattern has a DRAT-checked certificate, not yet a Lean proof |
 | At most 238 edges if 325 five-center window patterns are excluded | Lean-checked conditional theorem (44,064-state potential, kernel-checked in 34 shards); every pattern DRAT-certified |
 | The optimum is 196 | Low-confidence independent conjecture; no construction or optimality proof |
+| A zero-defect adjacent walk is a snake | Lean-checked equivalence; the best saved 196-edge walks still have six chords |
 | Every internal vertex has at least two singleton squares | False: a Lean-checked 137-edge counterexample |
 
 Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact proof gaps, and search limitations. The [paper](paper/snake9_research.tex) contains mathematical exposition, proofs, explicit transition sequences, and references. It deliberately keeps implementation identifiers outside the paper.

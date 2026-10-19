@@ -1,0 +1,82 @@
+{
+  "status": "PASSED",
+  "scope": "Face enumeration, witness checks, compressed-graph bookkeeping, source hashes and Lean receipts; solver UNSAT claims are not kernel certificates.",
+  "face_searches": {
+    "control191.json": {
+      "OPTIMAL": 1
+    },
+    "faces6-target192.json": {
+      "INFEASIBLE": 672
+    },
+    "faces6-target196.json": {
+      "INFEASIBLE": 672
+    },
+    "faces7-long-target192.json": {
+      "UNKNOWN": 1,
+      "INFEASIBLE": 1
+    },
+    "faces7-long-target196.json": {
+      "UNKNOWN": 1,
+      "INFEASIBLE": 1
+    },
+    "faces7-target192.json": {
+      "UNKNOWN": 2,
+      "INFEASIBLE": 142
+    },
+    "faces7-target196.json": {
+      "UNKNOWN": 2,
+      "INFEASIBLE": 142
+    }
+  },
+  "two_arm_searches": {
+    "two-arm-control143.json": {
+      "status": "OPTIMAL",
+      "actual_edges": 143
+    },
+    "two-arm-growth.json": {
+      "status": "FEASIBLE",
+      "actual_edges": 186
+    },
+    "two-arm-target192.json": {
+      "status": "UNKNOWN",
+      "actual_edges": null
+    },
+    "two-arm-target196.json": {
+      "status": "INFEASIBLE",
+      "actual_edges": null
+    }
+  },
+  "sha256_lf": {
+    "milestones/19-coordinate-face-repair/data/collaborator-review.json": "62ca5213e77850af20577f4b6d8930068724ff853c2bf106caee5da9e2468457",
+    "milestones/19-coordinate-face-repair/data/control191.json": "e8c5ba9007669ce36674cdeb8383923bc690a0e4dc80c5719330bc51d5ae99a4",
+    "milestones/19-coordinate-face-repair/data/faces6-target192.json": "9591b5ef993a9691b4da31aabd2fc07ebfba4353ff932177d9a84311ace3e4c0",
+    "milestones/19-coordinate-face-repair/data/faces6-target196.json": "f15ad9af5ff5227ea59727513d71101ef95591e68511885053efc2e56544ee0d",
+    "milestones/19-coordinate-face-repair/data/faces7-long-target192.json": "f93a65f4356cbd87c0c29f8502ae5d5795f00d703dc6ffc5bc71b24883bbef5e",
+    "milestones/19-coordinate-face-repair/data/faces7-long-target196.json": "33dbb0a30c374e1115ed26e64f56ae994972a5c3eccdf0e4c61c89c91194478a",
+    "milestones/19-coordinate-face-repair/data/faces7-target192.json": "d09e07560591e6c37acbbf6d81e6a28fc9e65d4a41e61d4cc9fba072ec7e8eec",
+    "milestones/19-coordinate-face-repair/data/faces7-target196.json": "fb8ab02e4b6779557d17fe66d9c99ac2d982f3f09c3f4739c9ff179724947fc6",
+    "milestones/19-coordinate-face-repair/data/two-arm-control143.json": "3eec4213ccf4d449fa65818c5e12a8f69d64ec60859e4d0dea8f8b0a3f8f5f48",
+    "milestones/19-coordinate-face-repair/data/two-arm-growth.json": "a245d851d9de70cd3ea286f200bd7aa87a6bb18ad5527985b80ea41c77782690",
+    "milestones/19-coordinate-face-repair/data/two-arm-seed186.json": "5a5137d2539630143715b079efebc61ae7f9687c56f7a274da86307af19f9337",
+    "milestones/19-coordinate-face-repair/data/two-arm-target192.json": "0851e2b1a4f5c3dcc4d85e553f1abc0d226f6fb4192403faca8d2dd5ad7d8ff9",
+    "milestones/19-coordinate-face-repair/data/two-arm-target196.json": "eac9682a371a4855eb63e56423f819db337618cd574348051cc8b63f25124030",
+    "milestones/19-coordinate-face-repair/lean/FaceRepair.lean": "67709ae644596e2452404d05de27db1a93a353514ce054bc2fae9c117d1ede4a",
+    "milestones/19-coordinate-face-repair/logs/face-repair.log": "ac16d23738c71f439c91b72c27eb7f6959d89f7ab0e060b112d4507168903759",
+    "milestones/19-coordinate-face-repair/scripts/search_faces.py": "46a5ddb30c200d126f84d792f9fc4a454ff0ea93395a8a2d673c460cfec0bcbd",
+    "milestones/19-coordinate-face-repair/scripts/snapshots/search-faces-v1.py": "e78107d319c3cfd33b829f1a3a27f634336d1b08bac01c8d6e0de4693a4277de",
+    "milestones/19-coordinate-face-repair/scripts/snapshots/two-arms-v1.py": "daacc4a950570ac78d3100048f25d7af695ad5ced2c2e2398187d2d7fd1e0520",
+    "milestones/19-coordinate-face-repair/scripts/two_arms.py": "735cf003493041d3048ebeed6e420af0c608c563d8440ea41ff341ae9d7f934d",
+    "milestones/19-coordinate-face-repair/scripts/verify.py": "bb172e6c52d350a34588ab9edf0864b2404ea18fc5f14f541a7e69d99eec9cab"
+  },
+  "reusable_seed_edges": 186,
+  "lean_audits": [
+    "Snake9.FaceRepair.outside_agreement_iff",
+    "Snake9.FaceRepair.varying_subset_of_face",
+    "Snake9.FaceRepair.subset_face_varying",
+    "Snake9.FaceRepair.face_mono",
+    "Snake9.FaceRepair.contained_six_face_iff",
+    "Snake9.FaceRepair.repair_six_face_iff",
+    "Snake9.FaceRepair.six_face_count_arithmetic",
+    "Snake9.FaceRepair.seven_face_count_arithmetic"
+  ]
+}

@@ -8,8 +8,16 @@ The subsequent KEEP=144 certificate passed Lean 4.19.0 on 16 October 2026:
 721 dependency modules, all 262 oriented bank entries, the aggregate theorem,
 both-end consequences for every length of at least 192 edges, and a fresh
 axiom audit. See [the completion report](lean_completion.md) for the exact
-scope, evidence and reproduction commands. KEEP=128, 120 and 112 remain
-uncertified; the global optimum is unresolved.
+scope, evidence and reproduction commands. This was the 16 October checkpoint.
+
+Update, 18 October: the integrated KEEP=112 work has a PASSED receipt for all
+262 oriented bank entries and the aggregate `Bank112Results`, recorded in
+`outputs/lean112/bank-proof.json`. The earlier statement that KEEP=112 remained
+uncertified is superseded. This receipt was inspected during synchronization;
+the large certificate was not independently rebuilt in that round. The result
+excludes 192-edge regrowth retaining those particular 112-vertex prefixes,
+with the recorded both-end and longer-length consequences. The global optimum
+remains unresolved. KEEP=96 work continues separately.
 
 Sources and evidence: work/snake_dfs.c; work/dfs_driver.py; work/final_lean/Dfs*.lean; paper/dfs_report/
 

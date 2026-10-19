@@ -914,7 +914,7 @@ Removed vertices & Retained vertices & Excluded cases & Unresolved cases & Nodes
 40&152&262&0&16,561,030\\
 48&144&209&53&66,968,134\\\bottomrule
 \end{tabular}\end{center}
-Each case is one of the 262 oriented prefixes obtained from 131 paths and their reversals. The final row used one million nodes per orientation. These exhaustive-search results concern only the listed prefixes and have not been independently certified.
+Each case is one of the 262 oriented prefixes obtained from 131 paths and their reversals. The final row used one million nodes per orientation. This table records the initial bounded search. Subsequent certificate work excludes 192-edge extensions for all 262 orientations while retaining the first 112 vertices, with a completed Lean verification receipt. The exclusion concerns these particular retained segments; it neither classifies all snakes nor prevents improvements that change the interior.
 
 \subsection{Constraint models and vertex replacement}
 The exact model selects cube vertices and directed cube-edge arcs. A single directed circuit through an auxiliary vertex encodes one connected path; deleting the auxiliary vertex gives its endpoints. Unselected cube vertices use self-loops. Every cube edge whose two endpoints are selected is required to appear in the path. Together these constraints enforce distinctness, connectivity, and absence of chords. Small feasible and infeasible thresholds in dimensions three through five were reproduced. The unrestricted 192-edge run returned \textsc{Unknown} after 300 seconds.
@@ -924,6 +924,165 @@ A broader local model permits both endpoints to change and imposes only
 |V(P)\setminus V(T)|\le k,\qquad |V(T)|=193,
 \]
 where $P$ is a recorded 191-edge snake. Thus changes may occur anywhere in the path. For $k=2$, all 131 models were infeasible, with about 241 seconds total solver time. In vertex-set terms, a 192-edge improvement would have to delete at least three vertices from each tested representative. A two-vertex deletion allows three added vertices, since the target has one extra vertex overall. This excludes a restricted neighborhood, without excluding a distant snake. The corresponding model with $k=8$ returned \textsc{Unknown} on the first three seeds within 30 seconds each. The implementations and exclusions have not been independently certified.
+
+\subsection{Fixed-length walks with temporary defects}
+To search directly for 196 edges, consider a walk $v_0,\ldots,v_L$ in $\Q_9$ with $\Ham(v_i,v_{i+1})=1$. Distinctness and the absence of chords are temporarily relaxed. Define
+\[
+D(v)=\bigl|\{(i,j):0\le i<j\le L,\ v_i=v_j\}\bigr|,
+\qquad
+C(v)=\bigl|\{(i,j):0\le i<j-1\le L-1,\ \Ham(v_i,v_j)=1\}\bigr|,
+\]
+and set $E(v)=4D(v)+C(v)$. The positive weight four is a search choice.
+
+\begin{proposition}\label{prop:zero-defect}
+An adjacent walk is an induced path if and only if $E(v)=0$.
+\end{proposition}
+\begin{proof}
+Both counts are nonnegative. Therefore $E(v)=0$ is equivalent to $D(v)=C(v)=0$. The first equality gives distinct vertices. The second excludes all nonconsecutive adjacencies, while consecutive adjacency is already assumed. Conversely, an induced path has neither repeated vertices nor chords.
+\end{proof}
+This equivalence has been checked in Lean under the same path definition as the 191-edge witness. It supplies an acceptance criterion and does not establish that the search reaches zero.
+
+Two types of move preserve consecutive adjacency. Exchanging two distinct transition directions translates the intervening vertex interval by their binary sum. Changing one transition direction translates the entire suffix by the sum of its old and new directions. Distances within the translated interval and its complement remain unchanged, so only pairs crossing its boundary affect the score. These moves permit interior changes and moving endpoints. Simulated annealing permits temporary increases in $E$.
+
+Two 90-second runs at $L=196$ each reduced the best score from 10 to 7, after approximately 10.3 and 10.4 million proposals. Both saved walks have 197 distinct vertices and seven forbidden chords. A diagnostic run at $L=192$ retained its initial score of one after approximately 10.2 million proposals. No valid path longer than 191 edges was found. Independent pairwise checks confirmed the saved scores and valid segments. A separate implementation audit compared 104,939 evaluated move scores with direct pair counts. These computational checks do not constitute a proof of the search implementation.
+
+Exact repair then released neighborhoods of all defects and both endpoints, requiring the remaining vertices to be selected but leaving their order unrestricted. For one 196-edge candidate, fixing 145 vertices gave infeasibility in the restricted model; fixing 105 vertices was unresolved after 90 seconds. For the other candidate, fixing 85 vertices was unresolved after 60 seconds. A 192-edge repair fixing 160 vertices was infeasible. A control fixing a known 191-edge path succeeded and passed an independent check of all 18,336 unordered vertex pairs. The infeasibility reports have no Lean certificate and exclude only their specified fixed vertex sets.
+
+The score measures violations, rather than the number of edits needed to obtain a snake. Seven chords may require substantial changes to remove. The present results neither establish nor refute the proposed value 196.
+
+\subsection{Diverse candidates and solver-guided interior repair}
+A subsequent comparison retained either one walk or up to 32 distinct walks attaining the current best score. Translation, coordinate permutation, and reversal were removed when identifying duplicate candidates. Both variants used equal proposal budgets. With random seeds 41 and 113, the single-candidate runs reached scores 8 and 9 after ten million proposals, while the population runs reached 6 and 7. Extending each run to one hundred million proposals gave scores 6 and 6 for the single-candidate variant, and 6 and 7 for the population variant. Thus the initial advantage did not persist consistently. These eight runs used 440 million proposals in total and found no valid improvement over 191 edges.
+
+Every saved best walk from the four longer runs has a 191-edge prefix equivalent to a member of the published bank. All its forbidden chords touch one of the final five vertices. This observation concerns the saved states and does not classify the intermediate search states. It indicates that reducing this score can return to a known path with a defective appended tail even when interior moves are permitted.
+
+Two six-chord candidates were also subjected to adaptive repair. A minimum set of positions meeting every chord was removed first, leaving 192 or 194 initially fixed vertices. After an infeasible restricted model, the solver supplied a sufficient conflicting subset of the requirements that particular vertices remain selected. One policy released a vertex from that subset together with nearby positions along the walk; another released up to five scattered vertices from the subset. These subsets were not claimed to be minimum. Four runs ended unresolved, with 140, 97, 131, and 84 fixed vertices respectively. The preceding 17, 19, 20, and 22 infeasible rounds concern only their recorded fixed sets and have no Lean impossibility certificates. Different final constraints prevent interpreting these counts as a ranking of the policies. Independent checks verified the saved walks, the minimum initial chord covers, the successive releases, and a successful 191-edge control.
+
+\subsection{A construction through cyclic components}
+These results motivate a construction search that relaxes connectivity. Select 197 vertices, require exactly two selected vertices to have selected degree one, and require all other selected vertices to have selected degree two. A finite connected graph with degrees at most two is a path or a cycle. Since every path component here has two degree-one vertices and isolated vertices are excluded, the selected graph consists of one path and zero or more disjoint cycles.
+
+For a cyclic component with vertex set $C$, add the constraint
+\[
+|C\cap V(P)|\le |C|-1.
+\]
+Lemma~\ref{lem:subset-low-degree} justifies this inequality for every induced path $P$. The cardinality inequality and its connection to the finite cycle checker have been checked in Lean. The search can then reconsider the entire vertex selection. Neither practical termination nor the existence of a 196-edge solution follows from this reduction.
+
+A concrete starting configuration comes from two vertex-disjoint induced 26-cycles $A,B\subseteq\Q_6$. Put $A$ in each even-parity layer of $\Q_3\mathbin{\square}\Q_6$ and $B$ in each odd-parity layer. Adjacent layers have different parity, and a cross-layer edge requires equal projected vertices; disjointness therefore forbids all cross-layer edges. The product has eight induced 26-cycles and 208 vertices. Deleting eleven consecutive vertices from one cycle leaves one path on 15 vertices and seven intact cycles. Writing $P_r$ for a path on $r$ vertices and $C_r$ for a cycle on $r$ vertices, this gives
+\[
+P_{15}\sqcup 7C_{26},\qquad
+|V|=15+7\cdot26=197,\qquad |E|=14+7\cdot26=196.
+\]
+The explicit 197-vertex set has passed Lean checks of its cardinality, distinctness, selected degrees, and partition; its seven cycle exclusions are also checked. An independent pairwise audit verifies the component sizes and the ordered path. These are facts about a disconnected graph and provide no improved snake lower bound. The construction uses cycles; the published 208-edge product of paths in \cite{orland} instead has 224 vertices.
+
+Three initial 196-edge probes, with and without square cuts or a defective-walk hint, found no candidate within 20 seconds. The product hint supplied a feasible first-round configuration. Adding all seven cycle exclusions then gave an unresolved second round. Adding one cycle exclusion at a time produced a further candidate
+\[
+P_{41}\sqcup 6C_{26}
+\]
+after about 0.93 seconds, preserving all 197 selected vertices in number while replacing five vertices of the preceding candidate. Its path has 40 edges. The next round was unresolved after 20 seconds. Thus one component merger has been achieved in this experiment, while six cyclic components remain. The full solver implementation is not Lean-verified; its saved feasible sets and the returned paths have independent adjacency checks. Continuing from this configuration must retain the previously accumulated cycle exclusions.
+
+\subsection{Frozen components and larger cycle configurations}
+Further mergers retained five or four of the 26-cycles and replaced the remaining selected vertices by one path of 66 or 92 edges. Both accumulated cycle exclusions were preserved, and both path endpoints were free. Retaining the entire preceding 40-edge path gave infeasibility in the restricted model. Releasing that path, or allowing either of two pairs of cycles to change, remained unresolved after 60 seconds. The fixed-path diagnostic found no first extension from endpoint 120, and only the addition of vertex 2 from endpoint 0, with no further available continuation. These are restrictions of this intermediate configuration and provide no global bound.
+
+If $F$ is the frozen vertex set and $R$ is the changing path, then $F\cap R=\varnothing$. A cycle exclusion for a set $C$ becomes
+\[
+|C\cap R|\le |C|-1-|C\cap F|.
+\]
+Indeed, $|C\cap(F\cup R)|=|C\cap F|+|C\cap R|$. The subtraction is over the integers: when $C\subseteq F$, the right-hand side is $-1$, correctly making the condition impossible. This equivalence and the fully frozen case have been checked in Lean. In particular, freezing a cycle that the latest cut asks the search to change is an invalid positive control; removing that pending cut recovers the known 40-edge path.
+
+A larger starting configuration uses the following two cyclic orders in $\Q_5$, with vertices encoded by integers from 0 to 31:
+\[
+\begin{aligned}
+A&=(0,1,17,25,27,31,15,13,12,28,20,22,18,2),\\
+B&=(3,11,9,8,24,26,30,14,6,4,5,21,23,19).
+\end{aligned}
+\]
+Both are induced 14-cycles, and their vertex sets are disjoint. Their lengths, distinctness, cyclic adjacency equivalences, and disjointness have been checked in Lean. Alternating $A$ and $B$ according to the parity of the sixteen cells of $\Q_4\mathbin{\square}\Q_5$ gives sixteen nonadjacent cycles and 224 vertices. As before, disjoint base sets exclude cross-cell edges. A separate size-28 base search in $\Q_6$ found two disjoint unions of two 14-cycles each, also giving 224 product vertices; it did not find 28-cycles. A size-54 pair search in $\Q_7$ was unresolved after 60 seconds.
+
+The larger vertex count does not make a 197-vertex starting state automatic. Keeping whole 14-cycles and a nontrivial proper path from one further cycle leaves $14k+r$ vertices with $2\le r\le13$. Such a number cannot equal $197=14\cdot14+1$. This arithmetic obstruction has been checked in Lean and applies only to that trimming operation.
+
+Joint cell replacement avoids the obstruction. Releasing cells $0,1,2$ and replacing their contents by a 14-edge path gave $P_{15}\sqcup13C_{14}$. Releasing either $0,1,2,3$ or $0,1,2,4$ gave $P_{29}\sqcup12C_{14}$. Each selected graph has 197 vertices and passed independent adjacency checks. Releasing the first five through eight cells, with target path lengths 42, 56, 70, and 84, remained unresolved after 60 seconds each. These disconnected constructions do not improve the snake lower bound.
+
+\subsection{Connector costs and a finite cell model}
+The four unused base vertices are
+\[
+U=\{7,10,16,29\}.
+\]
+Consider the restricted family in which each even cell permits $A\cup U$ and each odd cell permits $B\cup U$. Each cell has 18 available vertices. Since $(A\cup U)\cap(B\cup U)=U$, only the four shared vertices can carry an edge between adjacent cells. Their numbers of neighbors on the two base cycles are
+\[
+\begin{array}{c|rrrr}
+u&7&10&16&29\\\hline
+|N(u)\cap A|&1&1&4&4\\
+|N(u)\cap B|&4&4&1&1
+\end{array}
+\]
+and these finite counts have been checked in Lean.
+
+\begin{proposition}[A local connector cost]
+Let a selected vertex of an induced path have four possible neighbors in a specified set $N$ and one selected neighbor outside $N$. At least three vertices of $N$ are absent from the path.
+\end{proposition}
+\begin{proof}
+A selected vertex has at most two selected neighbors. The neighbor outside $N$ leaves room for at most one selected member of $N$. Since $|N|=4$, at least three members are absent.
+\end{proof}
+This statement has been checked in Lean. In the cell construction, a cross-cell edge at a connector with four base-cycle neighbors therefore requires omitting at least three of those neighbors. Different connector costs can share omitted vertices; adding them as independent losses would be unjustified.
+
+An enumeration of all $2^{18}$ local subsets retained 4,973 degree-compatible states for each cell type. A state specifies its selected vertices, selected connectors and their internal degrees, number of nonconnector endpoints, and vertex count. Nonconnector vertices must have selected internal degree one or two, while connectors can have degree zero before external edges are added. At most two nonconnector endpoints are permitted. Internal cycles remain allowed. Every saved row passed an independent adjacency check; enumeration completeness is not Lean-certified.
+
+The global construction model now permits all sixteen cells to change simultaneously. It imposes 197 selected vertices, selected degree one or two, and exactly two endpoints. Ten distinct cyclic components occur in each local table; their translations give 160 cycle cuts, all checked in Lean. A second model also requires one connected component. Both 196-edge searches returned \texttt{UNKNOWN} after 120 seconds. A length-maximizing version found a 101-edge induced path, independently checked by pairwise adjacency. This path is a control for the construction method and does not improve the known lower bound.
+
+\paragraph{A restriction that must be removed.}
+A separate enumeration, using edge lists and cycle detection, examined all $2^{18}$ subsets of each cell and reproduced both local tables exactly. Removing states containing a cycle leaves 4,142 states per type. If $e$ is the number of selected nonconnector vertices of internal degree one, the maximum selected size in this acyclic census is
+\[
+\begin{array}{c|rrr}
+e&0&1&2\\\hline
+\text{maximum selected size}&10&14&14.
+\end{array}
+\]
+Consequently, every enumerated acyclic state satisfies $c\le10+4e$. For a single induced path in the restricted family, nonconnectors have no neighbors in other cells, so their internal endpoints are actual path endpoints. Therefore $\sum_{h=0}^{15}e_h\le2$, and the census gives
+\[
+\sum_{h=0}^{15}c_h\le160+4\sum_{h=0}^{15}e_h\le168.
+\]
+Lean checks the numerical profiles and this summation under the local census premise. The exhaustive correspondence between all geometric subsets and those profiles remains computational evidence rather than a Lean completeness theorem. This restriction concerns only the alternating $A\cup U$, $B\cup U$ family. It does not challenge the conjectured maximum 196 in $Q_9$.
+
+The constructive consequence is to enlarge the allowed vertices within cells. A useful next search permits vertices from the opposite base cycle, which can create cross-cell connections beyond the four shared connectors. The local census explains why retaining the original four-connector restriction is an unsuitable route to a 196-edge construction.
+
+\subsection{Expanded cells and alignment with known snakes}
+The enlarged model permits all 512 cube vertices and places a budget on the number selected outside the original 288-vertex cell palette. To choose a starting configuration, each of the 131 published 191-edge witnesses was aligned with that palette. The computation examined all 126 choices of five internal coordinates, all 120 orders of those coordinates, 32 internal translations, and two outer translation parities. Permuting the four outer coordinates or translating them by a word of even weight leaves palette membership unchanged. Thus these 967,680 representatives suffice for this alignment objective. Within each internal coordinate set, identical palette patterns reduced the 7,680 representatives to 960 distinct patterns.
+
+The computed minimum numbers of outside-palette vertices range from 29 to 38 across the bank. Their frequencies are
+\[
+\begin{array}{c|rrrrrr}
+\text{outside vertices}&29&30&35&36&37&38\\\hline
+\text{bank witnesses}&2&2&3&57&63&4.
+\end{array}
+\]
+Every transformed witness passed a separate pairwise induced-path check. These minima concern the finite bank and the specified alignment objective; they do not give a lower bound on outside-palette use by arbitrary snakes.
+
+The selected witness is bank entry 129, using zero-based indexing, with 29 outside-palette vertices. Its alignment sends input bits to output bits in the order $(1,5,4,2,7,0,3,6,8)$ and then translates by the word with decimal value 7. A coordinate permutation followed by translation preserves which pairs differ in exactly one bit. For this particular map, Lean checks an inverse, every coordinate-flip identity, injectivity, adjacency in both directions, and the induced transformation on snakes of any length. This certifies the relabeling; the bank-wide minimization remains computational.
+
+The expanded model recovered the fixed 191-edge witness with an outside budget of 29 and rejected it with budget 28. A 196-edge search allowing up to 32 deleted seed vertices and 34 outside-palette vertices returned \texttt{UNKNOWN} after 120 seconds. Two 192-edge searches, each allowing 16 deletions, also remained unresolved after 120 seconds: one allowed 40 outside vertices and the other imposed no effective palette restriction.
+
+Whole-cell replacement was tested separately. With the remaining vertices fixed to the selected witness, all sixteen one-cell searches and all 32 adjacent two-cell searches for exactly 192 edges returned \texttt{INFEASIBLE}. These are restricted solver results without Lean infeasibility certificates. A 191-edge control succeeded. Allowing an equal-length change in cells 0 and 2 replaced one vertex and produced a snake equivalent to bank entry 127 under translation, coordinate permutation and reversal. The rearrangement changes the starting configuration but adds no new symmetry class to the bank. The next constructive step is to vary the coordinate partition or replace connections across more cells simultaneously.
+
+\subsection{Coordinate-face replacements and a two-arm construction}
+Changing the internal coordinate partition gives 672 six-dimensional coordinate faces in $Q_9$, since $\binom96 2^3=672$. For the selected aligned witness, the search fixed every selected and unselected vertex outside each face and allowed its interior to change. All 672 searches for exactly 192 edges returned \texttt{INFEASIBLE}, as did the 672 searches for exactly 196 edges. A 191-edge control succeeded. These are restricted solver results without Lean infeasibility certificates.
+
+The geometric meaning of this restriction can be stated exactly. For a nonempty set $D$ of changed vertices, let $J(D)$ contain the coordinates on which two members of $D$ differ.
+\begin{proposition}[Support of a face replacement]
+The set $D$ is contained in a six-dimensional coordinate face if and only if $|J(D)|\le6$. For selected vertex sets $S,T$, agreement outside a region $R$ is equivalent to $S\mathbin{\triangle}T\subseteq R$.
+\end{proposition}
+\begin{proof}
+If $D$ lies in a face whose six free coordinates form $I$, all members agree outside $I$, so $J(D)\subseteq I$. Conversely, extend $J(D)$ to a six-element coordinate set $I$ and choose $a\in D$. Every member of $D$ agrees with $a$ outside $I$, so $D$ lies in the corresponding face. The second assertion follows directly from the definition of symmetric difference.
+\end{proof}
+These statements have been checked in Lean. They identify the geometry covered by the search; they do not certify its solver exclusions.
+
+The analogous seven-dimensional sweep has $\binom97 2^2=144$ faces. At both target lengths, a two-second limit per face gave 142 exclusions and two unresolved cases. Longer runs excluded one further case at each target. The remaining face fixes coordinates 7 and 8 to zero, in the aligned coordinates, and contains the first 50 vertices of the seed. Its complement retains a single 142-vertex path $F$.
+
+This remaining case admits a smaller constructive model. The only vertices of the face adjacent to the two endpoints of $F$ are 53 and 44. Removing all face vertices adjacent to the interior of $F$ leaves an induced subgraph of $Q_7$ with 78 vertices and 147 edges. Seek two vertex-disjoint induced paths $L,R$ in this subgraph, ending at 53 and 44 respectively, with no edges between the two paths. Joining them through $F$ gives an induced path with
+\[
+|V(L)|+142+|V(R)|
+\]
+vertices. The 196-edge target therefore requires $|V(L)|+|V(R)|=55$. Computationally, $F$ is replaced by one artificial edge between 53 and 44; every feasible output is expanded and independently checked in $Q_9$.
+
+The two-arm model reproduced a 143-edge control. Its 196-edge feasibility run returned \texttt{INFEASIBLE}; the 192-edge run remained unresolved after 60 seconds. A 120-second length-maximizing run produced a verified 186-edge snake, using 45 vertices in the face and the fixed 142 vertices of $F$. This path is below the known record. It is not equivalent to a contiguous 186-edge subpath of any of the 131 stored witnesses under translation, coordinate permutation and reversal, according to the finite comparison. It supplies a different starting configuration for subsequent construction searches. The next search must allow changes to $F$ as well, since retaining the two-arm restriction already gave a solver exclusion at 196 edges. The compressed model and its infeasibility result are computational evidence, not a Lean-certified exclusion.
 
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
@@ -1021,7 +1180,36 @@ The sequence inequality and its conditional numerical consequence have also been
 \subsection{Local experiments on the pattern $(2,2,3)$}
 A five-vertex induced window has, up to translation and permutation of coordinates, transition sequence $(0,1,2,0)$ or $(0,1,2,3)$. Around its three internal vertices, consider the union of Hamming balls of radius $r$. Require the five window vertices to be selected, selected degree at most two, and degree at least one wherever all nine neighbors are represented. Permit at most two degree-one vertices in this interior, and exclude selected cycles. At each center, its two prescribed neighbors leave 21 eligible opposite square corners; exactly $\alpha$ of these must be absent when its singleton count is $\alpha$.
 
-For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. Their translation into Lean is still in progress after single-file translations exceeded available memory. These experiments do not yet prove the geometric premise of Proposition~\ref{prop:conditional244}.
+For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. For the repeated-coordinate case, the explicit Boolean contradiction has now been checked in Lean, using a sequence of smaller proofs after the single-file translation exceeded available memory. The distinct-coordinate certificate remains under verification. These results do not yet prove the geometric premise of Proposition~\ref{prop:conditional244}.
+
+\begin{lemma}[Missing corners at a prescribed internal vertex]\label{lem:window-missing-corners}
+Let $S$ be the vertex set of a snake, and suppose $v,v+e_a,v+e_b\in S$, with $a\ne b$. Among the 21 unordered coordinate pairs $\{c,d\}$ disjoint from $\{a,b\}$, exactly $\alpha_S(v)$ have $v+e_c+e_d\notin S$.
+\end{lemma}
+\begin{proof}
+The two specified neighbors exhaust the selected neighbors of $v$, since a vertex of an induced path has degree at most two. A coordinate square using $a$ or $b$ therefore contains another selected vertex and is not a singleton square at $v$. For a pair avoiding $a$ and $b$, both adjacent corners $v+e_c$ and $v+e_d$ are absent. The square is a singleton precisely when its opposite corner is absent. There are $\binom{7}{2}=21$ such pairs, and every singleton square is counted once.
+\end{proof}
+
+\begin{proposition}[Exact threshold counters]\label{prop:window-counter}
+Let $y_1,\ldots,y_N\in\{0,1\}$ indicate absent corners, and let $k\ge0$ be an integer. Introduce Boolean variables $t_{i,j}$ for $0\le i\le N$ and $0\le j\le k+1$. Set $t_{i,0}$ true and $t_{0,j}$ false for $j>0$. For every $0\le i<N$ and $1\le j\le k+1$, impose the four clauses
+\[
+\begin{aligned}
+&\neg t_{i,j}\lor t_{i+1,j},\\
+&\neg y_{i+1}\lor\neg t_{i,j-1}\lor t_{i+1,j},\\
+&\neg t_{i+1,j}\lor t_{i,j}\lor y_{i+1},\\
+&\neg t_{i+1,j}\lor t_{i,j}\lor t_{i,j-1}.
+\end{aligned}
+\]
+Here $y_i$ is read as true when its value is one. Together with $t_{N,k}$ true and $t_{N,k+1}$ false, these clauses admit a satisfying assignment exactly when $\sum_{i=1}^N y_i=k$.
+\end{proposition}
+\begin{proof}
+Write $C_i=\sum_{h=1}^i y_h$, with $C_0=0$. The four transition clauses are equivalent to
+\[
+t_{i+1,j}\ \Longleftrightarrow\ t_{i,j}\lor(y_{i+1}\land t_{i,j-1}).
+\]
+For positive $j$, the integer inequality $C_i+y_{i+1}\ge j$ holds precisely when $C_i\ge j$, or when $y_{i+1}=1$ and $C_i\ge j-1$. Thus the assignment $t_{i,j}=[C_i\ge j]$ satisfies every initial and transition clause. Conversely, induction on $i$ shows that those clauses force this assignment at every represented threshold. The final two clauses are therefore equivalent to $k\le C_N<k+1$, which is $C_N=k$.
+\end{proof}
+
+The missing-corner identity, the threshold-counter equivalence, and their connection for each normalized center have been checked in Lean. The finite corner lists have 21 distinct entries and agree with the eligible coordinate pairs. Generic endpoint-count and degree clauses, together with all 112 distinct cycle cuts retained by the two Boolean cores, have also been checked. A complete proof must still assemble the exact input clauses under one assignment and establish the reduction from arbitrary five-vertex windows. The unconditional interval remains $191\le a(9)\le245$.
 
 \subsection{The aggregate limit of local windows, and conditional bounds 242 and 241}\label{sec:window-aggregate}
 The same local model can be used for every count pattern. It indicates how far the potential method can go. We decided the radius-three model for every triple of prescribed counts in $\{1,\ldots,6\}^3$ and both window shapes. Of the 216 triples, 144 admit an assignment for at least one shape. Two independent solvers with separate encodings returned the same answer in all 432 cases. Over bi-infinite sequences whose consecutive triples are admitted, the minimum mean count is $14/5$. It is attained by repeating $2,3,3,2,4$. The local restrictions proved above allow mean $7/3$. Larger counts were treated as unrestricted, so these values are lower bounds for the mean.

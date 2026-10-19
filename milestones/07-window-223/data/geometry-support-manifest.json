@@ -1,0 +1,161 @@
+{
+  "status": "success",
+  "started_utc": "2026-10-16T06:36:42.412008+00:00",
+  "lean_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "mathlib_commit": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "build_directory": "E:\\Snake-in-a-box\\milestones\\07-window-223\\lean\\generated\\geometry\\support-ci2y7deg",
+  "upstream_manifest_sha256": "c2d95bc79425c266e890494ff1a3a779928030e3b2c469da02abc77f66919f81",
+  "scope": "Five rebuilt support modules; reused checked upstream dependencies. No complete window exclusion or new global upper bound.",
+  "steps": [
+    {
+      "source": "work/spectral/CycleExclusion.lean",
+      "source_sha256": "888a8fecf77e94d9597a00121040deb5cfe89b54b48b2152add0122858c945a8",
+      "exit_code": 0,
+      "log": "milestones/07-window-223/logs/CycleExclusion-support-build.log",
+      "axiom_audits": {
+        "Snake9.CycleExclusion.recordedCycles_excluded": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.CycleExclusion.subset_has_low_degree": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.CycleExclusion.two_neighbor_set_not_selected": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "olean_sha256": "8538b1da6765df80e1da8dc0918975e1f5a4e6d9efc5d2db73e042ce806936ee"
+    },
+    {
+      "source": "milestones/07-window-223/lean/WindowCornerData.lean",
+      "source_sha256": "744896f6d1eefa9b7d53bc6fef41e4399995b1a4ac93d9d7cb1e82a924458439",
+      "exit_code": 0,
+      "log": "milestones/07-window-223/logs/WindowCornerData-support-build.log",
+      "axiom_audits": {
+        "Snake9.WindowCornerData.eligible_pairs_complete": [
+          "propext",
+          "Quot.sound"
+        ],
+        "Snake9.WindowCornerData.configurations_checked": [
+          "propext"
+        ],
+        "Snake9.WindowCornerData.missing_transition": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowCornerData.exact_count_clauses": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowCornerData.missing_counter_exists": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowCornerData.missing_counter_unique": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowCornerData.missing_counter_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowCornerData.eligible_pairs_count": []
+      },
+      "olean_sha256": "0bd65558a0e9eaa843c806dcbbd000b1831be53403469722bae8aaddc86f2c3b"
+    },
+    {
+      "source": "milestones/07-window-223/lean/WindowGeometry.lean",
+      "source_sha256": "eda3fc1b48ef9382157ac7d06640b588b2f430d50079ee4ba75eb0507d2ab480",
+      "exit_code": 0,
+      "log": "milestones/07-window-223/logs/WindowGeometry-support-build.log",
+      "axiom_audits": {
+        "Snake9.WindowGeometry.selected_has_neighbor": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowGeometry.positive_degree_clause": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowGeometry.endpoint_list_budget": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowGeometry.endpoint_counter_clauses": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "olean_sha256": "d3228daa6b3675e85f2de3e7daee66c81da0cb4d4424105132358b6ca0c8fae5"
+    },
+    {
+      "source": "milestones/07-window-223/lean/WindowCycles.lean",
+      "source_sha256": "32cfa02e3750ea74be874e36855c0f0590742093826e3029c8d2d289e64bcb8b",
+      "exit_code": 0,
+      "log": "milestones/07-window-223/logs/WindowCycles-support-build.log",
+      "axiom_audits": {
+        "Snake9.WindowCycles.cycles_checked": [
+          "propext"
+        ],
+        "Snake9.WindowCycles.cycles_excluded": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "olean_sha256": "8d2bc86571e612b5764537b5de620abb6dac4469939644f513ab177ee4c8cbd4"
+    },
+    {
+      "source": "milestones/07-window-223/lean/WindowSingletons.lean",
+      "source_sha256": "aa7eefd39f985a4ea1406aa3b9f70c1769dd1bc7a5ca13dff61cdf331cb2f47a",
+      "exit_code": 0,
+      "log": "milestones/07-window-223/logs/WindowSingletons-support-build.log",
+      "axiom_audits": {
+        "Snake9.WindowSingletons.missingCorners_zero": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowSingletons.missingCorners_card": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowSingletons.encoded_pairs_checked": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowSingletons.corner_agreements": [
+          "propext"
+        ],
+        "Snake9.WindowSingletons.encoded_missing_count": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "Snake9.WindowSingletons.encoded_counter_exists": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "olean_sha256": "c8537399ac74bcfd6abb86db4d8e7a9712269c6e7ff5abb33a8265db241a44ce"
+    }
+  ],
+  "completed_utc": "2026-10-16T06:37:38.649068+00:00"
+}

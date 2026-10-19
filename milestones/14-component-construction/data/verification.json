@@ -1,0 +1,108 @@
+{
+  "status": "PASSED",
+  "scope": "Saved feasible sets and witnesses checked independently; no UNSAT or completeness claim.",
+  "runs": {
+    "control191.json": {
+      "status": "INDEPENDENTLY_CHECKED_WITNESS",
+      "rounds": 1,
+      "cycle_cuts": 0,
+      "source_version": "milestones/14-component-construction/scripts/snapshots/component_search_v1.py"
+    },
+    "control4.json": {
+      "status": "INDEPENDENTLY_CHECKED_WITNESS",
+      "rounds": 1,
+      "cycle_cuts": 0,
+      "source_version": "milestones/14-component-construction/scripts/snapshots/component_search_v1.py"
+    },
+    "pilot196-hinted.json": {
+      "status": "UNKNOWN",
+      "rounds": 1,
+      "cycle_cuts": 0,
+      "source_version": "milestones/14-component-construction/scripts/snapshots/component_search_v1.py"
+    },
+    "pilot196-no-squares.json": {
+      "status": "UNKNOWN",
+      "rounds": 1,
+      "cycle_cuts": 0,
+      "source_version": "milestones/14-component-construction/scripts/snapshots/component_search_v1.py"
+    },
+    "pilot196-one-cut.json": {
+      "status": "UNKNOWN",
+      "rounds": 3,
+      "cycle_cuts": 2,
+      "source_version": "milestones/14-component-construction/scripts/component_search.py"
+    },
+    "pilot196-product.json": {
+      "status": "UNKNOWN",
+      "rounds": 2,
+      "cycle_cuts": 7,
+      "source_version": "milestones/14-component-construction/scripts/snapshots/component_search_v2.py"
+    },
+    "pilot196-squares.json": {
+      "status": "UNKNOWN",
+      "rounds": 1,
+      "cycle_cuts": 0,
+      "source_version": "milestones/14-component-construction/scripts/snapshots/component_search_v1.py"
+    }
+  },
+  "lean_audits": {
+    "Snake9.ComponentConstruction.cycle_cut_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.ComponentConstruction.checked_cycle_cut": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.ComponentConstruction.unit_square_checked": [
+      "propext"
+    ],
+    "Snake9.ComponentConstruction.Seed.vertex_count": [
+      "propext"
+    ],
+    "Snake9.ComponentConstruction.Seed.vertices_distinct": [
+      "propext"
+    ],
+    "Snake9.ComponentConstruction.Seed.degrees_checked": [
+      "propext"
+    ],
+    "Snake9.ComponentConstruction.Seed.partition_checked": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.ComponentConstruction.Seed.cuts_valid": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "sha256_lf": {
+    "milestones/14-component-construction/data/control191.json": "f4258327654442d3c728134efb6c15f0ef9ed7880168b83c9bfd5255b0f37ac3",
+    "milestones/14-component-construction/data/control4.json": "6fa7d13f74bcb66ee07627a719c146c61ee7e08c3cda898d83874974505c74b9",
+    "milestones/14-component-construction/data/improved-seed.json": "195cd49460f1f7ffae82d0d9370c1ae2708530a2f36f120de709f8bbfc9f1c1b",
+    "milestones/14-component-construction/data/pilot196-hinted.json": "822f8b3d137c2d3d77d37269f15988bc1c84755cecb1ced4b10879c13d621956",
+    "milestones/14-component-construction/data/pilot196-no-squares.json": "dc7d7e28756464f407ef96f28afd518058ddb15a6e9768a59cc257ebda39b4d4",
+    "milestones/14-component-construction/data/pilot196-one-cut.json": "601f30ded0305febc8c95f3bfbae418986a1b2dbebc22cc84412041eff73ab12",
+    "milestones/14-component-construction/data/pilot196-product.json": "f26961749816b81a6f5c0bab6bf703d7f2c7cd0780059b398c15689ce245a546",
+    "milestones/14-component-construction/data/pilot196-squares.json": "6cf4cae13c33144af27f7f78c5433f6fdd0d78c272f532b9799e693cb15b3a5d",
+    "milestones/14-component-construction/data/product-seed.json": "13aced36dcbacefd8d0f0414a30f9a7789395b6b45b5e12ff997d5902d8b385f",
+    "milestones/14-component-construction/data/seed-audit.json": "754f4739ddcdf9f6d2096e764ae44ee8d502d84a83a1fc28c8128b51c4e8676c",
+    "milestones/14-component-construction/scripts/component_search.py": "570e148dd408b3665f99d1f68b481a2e7e227e5f9f2cd4d6b19d8a42815451ae",
+    "milestones/14-component-construction/scripts/product_seed.py": "8d3268cb49edb855398a473d1587dc94d72864cb37aacfa5e61e8a7c575de01b",
+    "milestones/14-component-construction/scripts/snapshots/component_search_v1.py": "57898a864eeaa46f753c29516917431d0d29f7facabe8d314feefd20eaebc110",
+    "milestones/14-component-construction/scripts/snapshots/component_search_v2.py": "804e1f5e3fd8e1bae80caeb4e1fc3201f225a8ccd5285d32af2a899c2b17bb43",
+    "milestones/14-component-construction/scripts/verify_results.py": "91850947c06444db1f290b2db538f89f0f5fcac776eaecde3c1844f2e2536a12",
+    "milestones/14-component-construction/scripts/verify_seed.py": "11f8288ba7376aca3c93c338d4990ab5d436ebcbfe285cb20b143e2ba8a3ec92",
+    "milestones/14-component-construction/lean/CycleCuts.lean": "0d5f0ae20f655647aab33b44c67da6be30fe332e2a9b904517ca21a248b87ad9",
+    "milestones/14-component-construction/lean/SeedCertificate.lean": "561209b7459442536995902272e1bda6bb03d90c23d530ee7a9bc32598a02973",
+    "milestones/14-component-construction/logs/cycle-cuts.log": "63d0ee105d95b1fc113fbc82a5153a611a9e4c0e044ae2044582958bac4c8aa7",
+    "milestones/14-component-construction/logs/latex-preview-status.txt": "a518dbf0b7765f845be2e73d6724779de2d6d28340fde34e205ba32895bfde8a",
+    "milestones/14-component-construction/logs/seed-certificate.log": "71f7d9943030f7cdb786c5e0a7173d35b207c5f6065b77f5ced966776e0d8031",
+    "work/spectral/CycleExclusion.lean": "6b2adc31e496acf56d59c6c4c4036a2abc4605ed2b9cf1f88f69e5747904799e",
+    "work/neighborhood_search.py": "1e3f1cf619c46ce0bbcc32f0cd37b204079835b31fd83cc04999a408c0aa2a66",
+    "work/check_snake.py": "583ef540939111a80789c7191d079acf4d020d9cb0ad608c89410627b0b5da72"
+  }
+}
