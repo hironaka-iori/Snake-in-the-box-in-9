@@ -331,6 +331,8 @@ PORTFOLIO = [[], ['--unsat'], ['--chrono=0'], ['--unsat', '--probe=0'], ['--unsa
 # (on a 400k-hint core: 401k with one default run, 309k with the portfolio, 200k after
 # two rounds of shrinking).
 ROUNDS = 1
+# configurations for extracting the core from the full CNF (full_core_ids)
+FULL_PORTFOLIO = [['--unsat'], []]
 
 
 def _cnf_clauses(cnf):
@@ -405,7 +407,9 @@ def best_cadical_proof(cnf, out_prefix, cadical, seeds, portfolio=None, rounds=N
 def full_core_ids(name, work, cadical, seeds, certs=DCERTS, rounds=None):
     """Core of the committed CNF: the original clauses a trimmed cadical proof uses."""
     cnf = extract_cnf(name, work, certs)
-    nl, nh, seed, used = best_cadical_proof(cnf, os.path.join(work, name + '.full'), cadical, seeds, rounds=rounds)
+    # the core only needs to be small, not its proof short: two configurations, one round
+    nl, nh, seed, used = best_cadical_proof(cnf, os.path.join(work, name + '.full'), cadical, seeds,
+                                            portfolio=FULL_PORTFOLIO, rounds=1)
     os.remove(os.path.join(work, name + '.full.lrat'))
     return used, {'full_lemmas': nl, 'full_hints': nh, 'full_seed': seed}   # seed: description of the run
 
@@ -464,15 +468,18 @@ def dir5_one(arg):
     cnf_sha = sha_gz(os.path.join(S['certs'], name + '.cnf.gz'))
     assert cnf_sha == case['cnf_sha256'], name
     ids, finfo = full_core_ids(name, work, cadical, seeds, S['certs'], rounds)
-    lrat, info = core_lrat(name, ids, work, cadical, seeds, S['certs'], rounds)
     clauses = read_cnf(extract_cnf(name, work, S['certs']))
     assert len(clauses) == case['clauses'], name
-    stats = lrat_stats(lrat)
-    if drop:   # run_direction_replays.py gen regenerates it (deterministically) when needed
-        for ext in ('.lrat', '.lrat.json', '.core.cnf'):
-            if os.path.exists(os.path.join(work, name + ext)):
-                os.remove(os.path.join(work, name + ext))
-    assert (stats['lemmas'], stats['hints']) == (info['lemmas'], info['hints']), name
+    if drop == 'skip':   # the replay generator makes the core LRAT; record the full proof's size
+        stats = {'lemmas': finfo['full_lemmas'], 'hints': finfo['full_hints'], 'estimated_from_full_proof': True}
+    else:
+        lrat, info = core_lrat(name, ids, work, cadical, seeds, S['certs'], rounds)
+        stats = lrat_stats(lrat)
+        if drop:   # run_direction_replays.py gen regenerates it (deterministically) when needed
+            for ext in ('.lrat', '.lrat.json', '.core.cnf'):
+                if os.path.exists(os.path.join(work, name + ext)):
+                    os.remove(os.path.join(work, name + ext))
+        assert (stats['lemmas'], stats['hints']) == (info['lemmas'], info['hints']), name
     core = [clauses[i - 1] for i in ids]
     module = dir_module(dirs, syms, S['prefix'])
     meta = {'name': name, 'module': 'LocalWindowCnf.' + module, 'dirs': dirs, 'syms': syms,
@@ -519,7 +526,8 @@ def main_direction5(a):
             res.append((meta['name'], meta['module'].split('.')[-1], meta['dirs'], meta['syms'],
                         len(meta['core_ids']), meta['cnf_clauses'], meta['hash_source'], meta['lrat']))
         else:
-            jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1)), a.set, a.rounds, a.drop_lrat))
+            jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1)), a.set, a.rounds,
+                         'skip' if a.no_core_lrat else a.drop_lrat))
     if a.set == 'direction5' and not a.index:
         assert n == 325 and len(res) == 145 and len(jobs) == 180, (n, len(res), len(jobs))
     print(f'{a.set}: {n} cases, {len(res)} reused, {len(jobs)} to core', flush=True)
@@ -532,7 +540,7 @@ def main_direction5(a):
     for name, module, dirs, syms, ncore, ncl, source, st in res:
         tot['core_clauses'] += ncore; tot['cnf_clauses'] += ncl
         tot['lemmas'] += st['lemmas']; tot['hints'] += st['hints']
-        tot['lemma_literals'] += st['lemma_literals']; tot['cadical'] += source == 'cadical'
+        tot['lemma_literals'] += st.get('lemma_literals', 0); tot['cadical'] += source == 'cadical'
         print(f'{name:28s} {module:18s} core {ncore:5d}/{ncl:5d}  lemmas {st["lemmas"]:7d}  '
               f'hints {st["hints"]:9d}  [{source}]')
     print('total', tot)
@@ -598,6 +606,9 @@ def main():
     ap.add_argument('--seeds', type=int, default=3, help='direction5: cadical seeds to try per window')
     ap.add_argument('--rounds', type=int, default=1,
                     help='rounds of core shrinking per proof (see ROUNDS); 3 roughly halves the hints')
+    ap.add_argument('--no-core-lrat', action='store_true',
+                    help='do not make the core LRAT here (run_direction_replays.py gen makes it once); '
+                         'the recorded LRAT size is that of the full proof')
     ap.add_argument('--drop-lrat', action='store_true',
                     help='direction5/r4: delete each core LRAT after recording its statistics (saves disk)')
     ap.add_argument('--index', default=None, help='direction5/r4: use this (subset) certificate index')
