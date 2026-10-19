@@ -86,28 +86,32 @@ class Oracle:
         keys = [k for k in set(keys) if k not in self.known]
         if not keys:
             return 0
-        if timeout is None:
-            with Pool(workers) as p:
-                res = p.map(_solve, [(k, self.radius) for k in keys])
-        else:
-            # per-query time limit: windows that are expensive to refute are recorded as
-            # UNKNOWN (treated as feasible) so that only cheap certificates are ever needed
-            res = []
-            pool = Pool(workers)
-            pending = [(k, pool.apply_async(_solve, ((k, self.radius),))) for k in keys]
-            import time as _t
-            deadline = _t.time() + timeout * (len(keys) / workers + 1)
-            for k, ar in pending:
-                try:
-                    res.append(ar.get(max(1, min(timeout, deadline - _t.time()))))
-                except Exception:
-                    res.append((k, 'UNKNOWN', timeout))
-            pool.terminate(); pool.join()
+        print(f'  querying {len(keys)} windows', flush=True)
+        # each answer is appended to the cache as soon as it arrives, so an interrupted batch
+        # (the cloud machine restarts) keeps everything already decided
         with open(CACHE, 'a', buffering=1) as f:
-            for k, st, secs in res:
+            def record(k, st, secs):
                 self.known[k] = st
                 f.write(json.dumps({'dirs': list(k[0]), 'alpha': [list(a) for a in k[1]],
                                     'radius': self.radius, 'status': st, 'seconds': secs}) + '\n')
+            if timeout is None:
+                with Pool(workers) as p:
+                    for k, st, secs in p.imap_unordered(_solve, [(k, self.radius) for k in keys]):
+                        record(k, st, secs)
+            else:
+                # per-query time limit: windows that are expensive to refute are recorded as
+                # UNKNOWN (treated as feasible) so that only cheap certificates are ever needed
+                pool = Pool(workers)
+                pending = [(k, pool.apply_async(_solve, ((k, self.radius),))) for k in keys]
+                import time as _t
+                deadline = _t.time() + timeout * (len(keys) / workers + 1)
+                for k, ar in pending:
+                    try:
+                        k2, st, secs = ar.get(max(1, min(timeout, deadline - _t.time())))
+                    except Exception:
+                        k2, st, secs = k, 'UNKNOWN', timeout
+                    record(k2, st, secs)
+                pool.terminate(); pool.join()
         return len(keys)
 
 
