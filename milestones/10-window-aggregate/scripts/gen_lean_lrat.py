@@ -219,11 +219,18 @@ def unpack(x):
 
 # ---------------------------------------------------------------- simulator ---
 
+# Fuel of the Lean checker: `litsL 255` reads a clause, `hints t 4095` runs a RUP step.
+# The simulator stays strictly below both so that it never accepts what Lean would reject.
+LIT_FUEL, HINT_FUEL = 255, 4095
+
+
 def sim_lits(ws, pos):
     c = 0
+    start = pos
     while pos < len(ws) and ws[pos] != 0:
         c |= 1 << (ws[pos] - 1)
         pos += 1
+    assert pos - start < LIT_FUEL, 'clause longer than the Lean literal fuel'
     return c, pos + 1
 
 
@@ -231,7 +238,9 @@ def sim_rup(db, x):
     ws = unpack(x)
     c, pos = sim_lits(ws, 1)
     z = c
+    first = pos
     while True:
+        assert pos - first < HINT_FUEL, 'more hints than the Lean hint fuel'
         w = ws[pos] if pos < len(ws) else 0
         pos += 1
         if w not in db:

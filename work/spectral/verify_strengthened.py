@@ -87,7 +87,7 @@ def main():
                         help="also check UpperBound239; needs the 145 generated replays "
                              "(milestones/10-window-aggregate/scripts/run_direction_replays.py gen)")
     parser.add_argument("--with-238", action="store_true",
-                        help="also check UpperBound238; needs the 325 generated replays "
+                        help="also check UpperBound238; needs the 175 generated replays "
                              "(run_direction_replays.py --set direction5 gen)")
     parser.add_argument("--core-jobs", type=int, default=3,
                         help="concurrent Lean processes for the guarded core build")
@@ -174,9 +174,11 @@ def main():
         # gen_lean_lrat.py).
         tracked = subprocess.check_output(
             ["git", "ls-files", "--", "."], cwd=core_source, text=True).split()
+        unsat = core_source / "LocalWindowUnsat"
         generated = [p.relative_to(core_source).as_posix()
-                     for p in (core_source / "LocalWindowUnsat").rglob("D*.lean")] \
-            if (core_source / "LocalWindowUnsat").exists() else []
+                     for p in [*unsat.glob("D*.lean"),
+                               *(q for d in unsat.glob("D*") if d.is_dir() for q in d.rglob("*.lean"))]] \
+            if unsat.exists() else []
         for rel in sorted(set(tracked) | set(generated)):
             if rel.endswith(".lean") or rel in ("lakefile.toml", "lean-toolchain", "lake-manifest.json"):
                 (core / rel).parent.mkdir(parents=True, exist_ok=True)
@@ -189,6 +191,9 @@ def main():
         targets = args.core_targets or re.search(
             r"defaultTargets = \[([^\]]*)\]", (core / "lakefile.toml").read_text()
         ).group(1).replace('"', "").replace(",", " ").split()
+        # The direction-window roots are not default targets.
+        targets = [*targets, *(["LocalWindowDirUnsat"] if args.with_239 else []),
+                   *(["LocalWindowDirUnsat5"] if args.with_238 else [])]
         run("core", [sys.executable, str(repo / "work" / "guarded_lake_build.py"),
                      "--root", str(core), "--jobs", str(args.core_jobs),
                      "--heavy-jobs", str(args.core_heavy_jobs or args.core_jobs),
@@ -270,12 +275,18 @@ def main():
                     "Snake9.adjacent_internal_one_three_impossible", "Snake9.alpha_one_internal_neighbor_ge_four",
                     "Snake9.no_three_consecutive_internal_twos", "Snake9.upper_bound_245",
                     "Snake9.verified_interval_191_245"}
+        if args.with_239:
+            expected |= {"Snake9.upper_bound_239", "Snake9.verified_interval_191_239"}
+        if args.with_238:
+            expected |= {"Snake9.upper_238_of_refuted", "Snake9.upper_bound_238",
+                         "Snake9.verified_interval_191_238"}
         missing = expected - manifest["axiom_audits"].keys()
         if missing:
             raise RuntimeError(f"Missing final theorem audits: {missing}")
         manifest["status"] = "success"
         manifest["completed_utc"] = datetime.now(timezone.utc).isoformat()
-        print("Verified: 191 <= a(9) <= 245 edges. Exact optimum unresolved.", flush=True)
+        best = 238 if args.with_238 else 239 if args.with_239 else 241
+        print(f"Verified: 191 <= a(9) <= {best} edges. Exact optimum unresolved.", flush=True)
         print(f"Source hashes, commands, and transitive axiom audits: {build / 'manifest.json'}")
     except BaseException as exc:
         manifest["status"] = "failed"
