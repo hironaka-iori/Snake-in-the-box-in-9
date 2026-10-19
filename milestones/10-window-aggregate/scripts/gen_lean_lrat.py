@@ -263,7 +263,7 @@ def hexlist(xs):
     lit = (lambda x: 'nat_lit ' + (hex(x) if x > 9 else str(x))) if FAST else (lambda x: hex(x) if x > 9 else str(x))
     if len(xs) > 16384:
         # a single literal this long overflows the elaborator's stack: append chunks
-        parts = ['[\n  ' + ',\n  '.join(lit(x) for x in xs[i:i + 8192]) + ']' for i in range(0, len(xs), 8192)]
+        parts = ['[\n  ' + ',\n  '.join(lit(x) for x in xs[i:i + 2048]) + ']' for i in range(0, len(xs), 2048)]
         out = parts[-1]
         for p in reversed(parts[:-1]):
             out = 'List.append ' + p + '\n (' + out + ')'
