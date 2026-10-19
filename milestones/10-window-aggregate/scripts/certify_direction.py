@@ -11,7 +11,7 @@ coordinate relabelling and reversal, so one certificate per key suffices.
 import argparse, gzip, hashlib, json, os, subprocess, tempfile, time
 from multiprocessing import Pool
 from pysat.solvers import Cadical153
-from wincert import Encoding, decide, window_from_dirs, write_cnf, ensure_drat, DRAT_SOURCE_SHA256
+from wincert import Encoding, decide, window_from_dirs, write_cnf, ensure_drat, DRAT_SOURCE_SHA256, cycles_of
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'certificates', 'direction')
@@ -23,21 +23,33 @@ def tag_of(dirs, alpha):
 
 
 def one(arg):
+    """One window: a single proof-logging solver adds the lazy cycle cuts incrementally, so the
+    window is solved once (the earlier version solved it a second time from cold for the proof).
+    Every lemma of the proof is implied by the clauses present when it was derived, a subset of
+    the final clause set written to the CNF, so the proof checks against that CNF."""
     dirs, alpha, radius, drat = arg
     t = time.time()
     al = [lo if lo == hi else (lo, hi) for lo, hi in alpha]
     enc = Encoding(window_from_dirs(dirs), al, radius)
-    st, _, cuts = decide(enc, certify=False)
-    if st != 'UNSAT':
-        return {'dirs': dirs, 'alpha': alpha, 'status': st, 'drat_trim_verified': False}
+    cuts = 0
+    with Cadical153(bootstrap_with=enc.clauses, with_proof=True) as s:
+        while s.solve():
+            model = s.get_model()
+            sel = [v for v in enc.ball if model[enc.var[v] - 1] > 0]
+            cyc = cycles_of(sel)
+            if not cyc or cuts > 10000:
+                return {'dirs': dirs, 'alpha': alpha, 'status': 'SAT' if not cyc else 'UNKNOWN',
+                        'drat_trim_verified': False}
+            for c in cyc:
+                enc.add_cycle_cut(c); cuts += 1
+                s.add_clause(enc.clauses[-1])
+        proof = s.get_proof()
     tag = tag_of(dirs, alpha)
     with tempfile.TemporaryDirectory() as td:
         cnf, prf = os.path.join(td, tag + '.cnf'), os.path.join(td, tag + '.drup')
         write_cnf(enc, cnf)
-        with Cadical153(bootstrap_with=enc.clauses, with_proof=True) as s:
-            assert not s.solve()
-            proof = s.get_proof()
-        open(prf, 'w').write('\n'.join(proof) + '\n')
+        with open(prf, 'w') as f:
+            f.write('\n'.join(proof) + '\n')
         r = subprocess.run([drat, cnf, prf, '-t', '3600'], capture_output=True, text=True)
         ok = 's VERIFIED' in r.stdout
         shas = {}
