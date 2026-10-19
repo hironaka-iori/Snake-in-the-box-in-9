@@ -55,6 +55,7 @@ CHECKER_IMPORT, CHECKER_OPEN = 'import LratCheck', 'open Snake9.Lrat'
 
 
 FAST = False
+GROUPED = False   # --data-group: one data module per check group (fewer Lean start-ups)
 SPLIT = False   # LratFast2: hints into the segment's start database carry the flag bit
 FLAG = 1 << 12
 OFF = 2400
@@ -437,7 +438,25 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         ('noncomputable def start1 : Tree := loadRaw (perf %d 0) raw inputSlots' % height if FAST
          else 'noncomputable def start1 : Tree := loadRaw (shape .nil shapeKeys) raw inputSlots'), '',
         'end ' + ns, ''])
-    for k in range(1, nseg + 1):
+    for g, ks in (enumerate([list(range(k0, min(k0 + group, nseg + 1))) for k0 in range(1, nseg + 1, group)], 1)
+                  if GROUPED else []):
+        # grouped layout: Data<g> holds segments ks; checkpoints sit at the group starts, so every
+        # group module imports Data0 alone; start_k is defined next to proof_k
+        body = ['import LocalWindowUnsat.%s.Data0' % mod, '',
+                '/-! LRAT refutation of the core of `%s`: segments %d-%d of %d (generated). -/'
+                % (name, ks[0], ks[-1], nseg), '', HEADER, 'namespace ' + ns, CHECKER_OPEN, '']
+        for k in ks:
+            if k == ks[0] and k > 1:
+                assert is_cp[k]
+                body += ['/-- Checkpoint: the live clauses before segment %d. -/' % k,
+                         DATA_DEF + ' cp%d : List Nat := %s' % (k, hexlist(cps[k])), '',
+                         'noncomputable def start%d : Tree := build %d cp%d' % (k, height, k), '']
+            elif k > ks[0]:
+                body += ['noncomputable def start%d : Tree := replay start%d proof%d' % (k, k - 1, k - 1), '']
+            body += [DATA_DEF + ' proof%d : List Nat := %s' % (k, hexlist(nums[cuts[k - 1]:cuts[k]])), '']
+        body += ['end ' + ns, '']
+        files[os.path.join(sub, 'Data%d.lean' % g)] = '\n'.join(body)
+    for k in (range(1, nseg + 1) if not GROUPED else []):
         # Data_k needs start_k (from Data_{k-1}) only to define start_{k+1} as a replay; at a
         # checkpoint, and for the last segment, it imports Data0 alone, so that import chains
         # have at most --cp links instead of growing with the segment index.
@@ -474,7 +493,11 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
     groups = [list(range(g, min(g + group, nseg + 1))) for g in range(1, nseg + 1, group)]
     for gi, ks in enumerate(groups, start=1):
         # start_k lives in Data_{k-1}, proof_k in Data_k: import the whole range explicitly
-        body = ['import LocalWindowUnsat.%s.Data%d' % (mod, j) for j in range(ks[0] - 1, ks[-1] + 1)] + ['',
+        if GROUPED:   # this group's data, and the next group's checkpoint for the last cpZ
+            body = ['import LocalWindowUnsat.%s.Data%d' % (mod, j) for j in ([gi, gi + 1] if ks[-1] < nseg else [gi])]
+        else:
+            body = ['import LocalWindowUnsat.%s.Data%d' % (mod, j) for j in range(ks[0] - 1, ks[-1] + 1)]
+        body += ['',
                 '/-! Kernel checks of segments %d-%d of `%s` (generated). -/' % (ks[0], ks[-1], name), '',
                 HEADER, 'set_option Elab.async false', '', 'namespace ' + ns, CHECKER_OPEN, '']
         for k in ks:
@@ -543,11 +566,17 @@ def main():
     ap.add_argument('--noncomputable-data', action='store_true',
                     help='declare the proof data `noncomputable def` (smaller build output)')
     ap.add_argument('--fast', action='store_true', help='emit proofs for LratFast (see above)')
+    ap.add_argument('--data-group', action='store_true',
+                    help='one data module per --group segments (needs --cp equal to --group, --fast)')
     ap.add_argument('--split', action='store_true',
                     help='with --fast: emit proofs for LratFast2 (cached start database, flagged hints)')
     ap.add_argument('names', nargs='+')
     a = ap.parse_args()
     set_width(a.wbits, a.fast, a.off, a.split)
+    if a.data_group:
+        assert a.fast and a.cp == a.group, 'grouped data modules need --fast and --cp equal to --group'
+        global GROUPED
+        GROUPED = True
     if a.noncomputable_data:
         global DATA_DEF
         DATA_DEF = 'noncomputable def'
