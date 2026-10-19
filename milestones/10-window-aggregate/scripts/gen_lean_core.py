@@ -6,8 +6,9 @@ Two certificate sets are supported:
 * `--set direction`: the 145 direction-aware certificates of
   `certificates/direction/` behind the conditional bound 239 (index
   `data/direction_certificates.json`);
-* `--set direction5`: the 325 five-centre certificates behind the conditional bound
-  238 (index `data/direction_certificates_k5.json`).  The 145 keys of the direction set
+* `--set direction5`: the five-centre certificates behind the conditional bound 238
+  (index `data/direction_certificates_k5.json`, 325 windows; `--index` selects the 175
+  kept by `prune_costly.py`, `data/direction_certificates_k5p.json`).  Keys shared with the direction set
   are reused unchanged (their cores and LRAT statistics are copied); for the 180 new
   windows the committed CNF is solved again by the CaDiCaL binary of the Lean toolchain
   with `--lrat` (several seeds, the smallest dependency-trimmed proof is kept), since

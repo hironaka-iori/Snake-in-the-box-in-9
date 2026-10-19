@@ -1,8 +1,12 @@
-"""Generate and kernel-check the LRAT replays of the 145 direction-window cores.
+"""Generate and kernel-check the LRAT replays of the direction-window cores.
 
-Step 1 (`gen`): for each case of data/lean_core_direction (smallest proof first) run
-gen_lean_lrat.py --fast (checker LratFast) with 13-bit words, or 14-bit words
-(LratFast14) when the database has more than 8191 slots.  Cases whose main module already exists are skipped, so the step resumes.
+`--set direction`: the 145 windows of the 239 bound; `--set direction5`: the 175 pruned
+five-centre windows of the 238 bound; `--set r4`: the radius-4 set.
+
+Step 1 (`gen`): for each case of the set's core directory (smallest proof first) run
+gen_lean_lrat.py --fast (checker LratFast) with the literal offset chosen from the
+variable count (2400, 3000 or 4000) and 13-, 14- or 15-bit words (LratFast14/15), the
+smallest width whose database fits.  Cases whose main module already exists are skipped, so the step resumes.
 Generation runs one case at a time (the largest LRAT files need a few GB in Python).
 
 Step 2 (`build`): build every LocalWindowUnsat.D* module through
@@ -58,7 +62,7 @@ def gen(a):
                 print(r.stderr[-2000:], file=sys.stderr)
                 raise SystemExit(f'generation failed for {name}')
         else:
-            raise SystemExit(f'{name}: too many slots even for 14-bit words')
+            raise SystemExit(f'{name}: too many slots even for 15-bit words')
 
 
 def build(a):
@@ -75,7 +79,7 @@ def build(a):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--set', choices=['direction', 'direction5', 'r4'], default='direction',
-                    help='the 145 windows of the 239 bound, the 325 of the 238 bound, or the radius-4 set')
+                    help='the 145 windows of the 239 bound, the 175 of the 238 bound, or the radius-4 set')
     sub = ap.add_subparsers(dest='cmd', required=True)
     g = sub.add_parser('gen')
     g.add_argument('--work', required=True)

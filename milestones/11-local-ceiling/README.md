@@ -20,7 +20,7 @@ All 131 bank snakes (`scripts/stats.py`):
 
 A bound of 196 edges (`v = 197`) needs `(T + 2*s0)/v >= 11.77`. Current Lean bounds use `T/v >= 7/3` and discard `s0`. The conditional automata reach `T/v >= 7/2`.
 
-Charging every empty square to the selected vertices adjacent to it loses nothing on real snakes: every empty square has a selected neighbour (`scripts/s0local.py`). The per-vertex share varies, though: its minimum over internal vertices is 4.0. An empty square touches between 5 and 20 selected vertices.
+Charging every empty square to the selected vertices adjacent to it loses nothing on real snakes: every empty square has a selected neighbour (`scripts/s0local.py`). The per-vertex share varies, though: the minimum of `α + share` over internal vertices of all 131 bank snakes is 3.45 (bank snake 45, path index 179, `α = 3`; `scripts/s0local.py` samples only the first 40 snakes, whose minimum is 4.04). An empty square touches between 5 and 20 selected vertices.
 
 ## An explicit adversary: 224 vertices of 14-cycles
 

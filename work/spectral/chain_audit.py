@@ -3,12 +3,12 @@ given theorems, against the ALREADY BUILT core in work/final_lean/.lake.
 
 This is the cheap counterpart of verify_strengthened.py (which copies and rebuilds the
 whole core from scratch): one Lean process at a time, the same `lake env lean --root
--o` invocation, no solver output enters the build.  Used for the 241 and 239 audits
-(outputs/upper-bound-24*-audit-linux.log).
+-o` invocation, no solver output enters the build.  Used for the Linux 241 audit
+(outputs/upper-bound-241-audit-linux.log); the 238 audit uses the same invocation:
 
   python3 work/spectral/chain_audit.py --mathlib-dir ~/lean-deps/mathlib4 \
-      --target UpperBound239 --log outputs/upper-bound-239-audit-linux.log \
-      --axioms Snake9.upper_bound_239 Snake9.verified_interval_191_239
+      --target UpperBound238 --log outputs/upper-bound-238-audit-linux.log \
+      --axioms Snake9.upper_bound_238 Snake9.verified_interval_191_238
 """
 import argparse, os, re, resource, shutil, subprocess, sys, time
 from pathlib import Path
