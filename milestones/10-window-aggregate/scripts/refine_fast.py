@@ -256,20 +256,29 @@ def greedy_break(oracle, cyc_wins, workers, timeout, chunk=None, long_timeout=No
                     count[x] = count.get(x, 0) + 1
         if not count and long_timeout:
             retried = oracle.__dict__.setdefault('retried', set())
+            upper = getattr(oracle, 'upper', None)
             slow = {}
             for i in alive:
                 for x in cyc_wins[i]:
-                    if oracle.status(x) == 'UNKNOWN' and x not in retried:
+                    # retry only windows no ball has decided (a timeout at every level tried)
+                    if (oracle.status(x) == 'UNKNOWN' and x not in retried
+                            and (upper is None or upper.known.get(x) in (None, 'UNKNOWN'))):
                         slow[x] = slow.get(x, 0) + 1
             if slow:
                 pick = sorted(slow, key=lambda x: (-slow[x], len(x[1])))[:long_max]
                 retried.update(pick)
-                for x in pick:
-                    oracle.known.pop(x, None)
-                    getattr(oracle, 'base', {}).pop(x, None)
-                try:
-                    n = oracle.query(pick, workers, long_timeout, verbose=False, escalate=False)
-                except TypeError:
+                if upper is not None:
+                    # the larger ball refutes these much faster (measured: 30-40 s at radius four
+                    # against 205 s at radius three for a window of the 9/2 cycle)
+                    for x in pick:
+                        upper.known.pop(x, None)
+                    n = upper.query(pick, workers, long_timeout, verbose=False)
+                    for x in pick:
+                        if upper.known.get(x) == 'UNSAT':
+                            oracle.known[x] = 'UNSAT'
+                else:
+                    for x in pick:
+                        oracle.known.pop(x, None)
                     n = oracle.query(pick, workers, long_timeout, verbose=False)
                 asked += n
                 print(f'  greedy: retried {len(pick)} timed-out windows with {long_timeout:.0f} s: '
