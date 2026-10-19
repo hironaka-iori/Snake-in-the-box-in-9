@@ -234,10 +234,14 @@ def vertex_bound(A, U, V, W, vmax=260):
     return best
 
 
-def greedy_break(oracle, cyc_wins, workers, timeout, chunk=None):
+def greedy_break(oracle, cyc_wins, workers, timeout, chunk=None, long_timeout=None, long_max=None):
     """Query windows until every cycle contains an excluded window.  Each step asks, in parallel,
-    the windows shared by the most still-unbroken cycles (fewer centres first on ties)."""
+    the windows shared by the most still-unbroken cycles (fewer centres first on ties).  With
+    `long_timeout`, cycles that only windows killed at the short limit could still break get
+    those windows again (once each, at most `long_max` per step) with the long limit: a timeout
+    is not feasibility, and a cycle kept alive by timeouts alone would end the refinement early."""
     asked = 0
+    long_max = long_max or 2 * workers
     chunk = chunk or 16 * workers          # a chunk waits for its slowest window; keep the workers busy
     while True:
         alive = [i for i, cw in enumerate(cyc_wins) if not any(oracle.status(x) == 'UNSAT' for x in cw)]
@@ -250,6 +254,27 @@ def greedy_break(oracle, cyc_wins, workers, timeout, chunk=None):
             for x in cyc_wins[i]:
                 if oracle.status(x) is None or (esc is not None and esc(x)):
                     count[x] = count.get(x, 0) + 1
+        if not count and long_timeout:
+            retried = oracle.__dict__.setdefault('retried', set())
+            slow = {}
+            for i in alive:
+                for x in cyc_wins[i]:
+                    if oracle.status(x) == 'UNKNOWN' and x not in retried:
+                        slow[x] = slow.get(x, 0) + 1
+            if slow:
+                pick = sorted(slow, key=lambda x: (-slow[x], len(x[1])))[:long_max]
+                retried.update(pick)
+                for x in pick:
+                    oracle.known.pop(x, None)
+                    getattr(oracle, 'base', {}).pop(x, None)
+                try:
+                    n = oracle.query(pick, workers, long_timeout, verbose=False, escalate=False)
+                except TypeError:
+                    n = oracle.query(pick, workers, long_timeout, verbose=False)
+                asked += n
+                print(f'  greedy: retried {len(pick)} timed-out windows with {long_timeout:.0f} s: '
+                      f'{sum(oracle.status(x) == "UNSAT" for x in pick)} refuted', flush=True)
+                continue
         if not count:
             print(f'  greedy: {asked} queries, {len(alive)} of {len(cyc_wins)} cycles locally feasible', flush=True)
             return asked
@@ -271,6 +296,9 @@ def main():
     ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows to treat as feasible (expensive certificates)')
     ap.add_argument('--query-timeout', type=float, default=None, help='seconds per oracle query; slower windows count as feasible')
     ap.add_argument('--out')
+    ap.add_argument('--long-timeout', type=float, default=None,
+                    help='retry windows killed at --query-timeout with this limit when they are all that '
+                         'could still break a cycle (each window once)')
     ap.add_argument('--start', action='store_true',
                     help='with --index: also the start-state constant D = max(pi - Q * symbol sum) of the '
                          'smallest-D potential and the bound C = L*P - Q*(L-k) + D gives')
@@ -372,9 +400,9 @@ def main():
         ph['decode'] = time.time() - t1; t2 = time.time()
         if a.hybrid:
             newq = oracle.query(wins, a.workers, a.query_timeout, escalate=False)
-            newq += greedy_break(oracle, cyc_wins, a.workers, a.query_timeout)
+            newq += greedy_break(oracle, cyc_wins, a.workers, a.query_timeout, long_timeout=a.long_timeout)
         elif a.greedy:
-            newq = greedy_break(oracle, cyc_wins, a.workers, a.query_timeout)
+            newq = greedy_break(oracle, cyc_wins, a.workers, a.query_timeout, long_timeout=a.long_timeout)
         else:
             newq = oracle.query(wins, a.workers, a.query_timeout)
         ph['query'] = time.time() - t2

@@ -24,7 +24,7 @@ if [ ! -f $D/refine_L7_k6_K7_r3.json ]; then
   if [ ! -f $D/refine_k6c7_paused ] && ! running "refine_fast.py --L 7 --k 6 --K 7"; then
     log "starting cap-7 refinement"
     (cd $M && nohup python3 scripts/refine_fast.py --L 7 --k 6 --K 7 --radius 3 --escalate 4 --hybrid --workers 4 --slack 0.3 \
-       --batch 200 --query-timeout 10 --avoid data/avoid_k6.json >> data/refine_L7_k6_K7_r3.log 2>&1 &)
+       --batch 200 --query-timeout 10 --long-timeout 600 --avoid data/avoid_k6.json >> data/refine_L7_k6_K7_r3.log 2>&1 &)
   fi
 else
   # 3. the chain: minimise -> certify -> rebuild from the index -> Lean -> build
