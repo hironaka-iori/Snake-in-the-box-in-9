@@ -23,7 +23,7 @@ fi
 if [ ! -f $D/refine_L7_k6_K7_r3.json ]; then
   if [ ! -f $D/refine_k6c7_paused ] && ! running "refine_fast.py --L 7 --k 6 --K 7"; then
     log "starting cap-7 refinement"
-    (cd $M && nohup python3 scripts/refine_fast.py --L 7 --k 6 --K 7 --radius 3 --workers 3 --slack 0.3 \
+    (cd $M && nohup python3 scripts/refine_fast.py --L 7 --k 6 --K 7 --radius 3 --escalate 4 --workers 3 --slack 0.3 \
        --batch 200 --query-timeout 120 --avoid data/avoid_k6.json >> data/refine_L7_k6_K7_r3.log 2>&1 &)
   fi
 else
@@ -53,6 +53,13 @@ if [ -f $D/minimal_L7_k6_K7_r3.json ] && ! grep -q "failed 0" $D/certify_directi
   log "starting cap-7 certification"
   (cd $S && nohup python3 certify_direction.py --set ../data/minimal_L7_k6_K7_r3.json --workers 4 \
      --out ../data/direction_certificates_k6.json >> ../data/certify_direction_k6c7.log 2>&1 &)
+fi
+
+# 7. independent judge of the cap-7 certificates (resumable through the same progress file)
+if [ -f $D/pipeline_c7_certified ] && [ ! -f $D/judge_direction_k6c7.json ] && ! running "judge.py --index"; then
+  log "starting cap-7 judge"
+  (cd $S && nohup nice -n 5 python3 judge.py --index ../data/direction_certificates_k6.json --workers 2 \
+     --out ../data/judge_direction_k6c7.json >> ../data/judge_direction_k6c7.log 2>&1 &)
 fi
 
 log "supervisor pass done"

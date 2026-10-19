@@ -273,6 +273,8 @@ def main():
     ap.add_argument('--cycle-budget', type=float, default=120.0,
                     help='seconds per round for extracting extra cycles (C Howard, delete-and-resolve)')
     ap.add_argument('--python-howard', action='store_true', help='use the pure-Python Howard (slow, one policy graph)')
+    ap.add_argument('--escalate', type=int, default=None,
+                    help='decide windows feasible at --radius again at this larger radius (two-level oracle)')
     ap.add_argument('--greedy', action='store_true',
                     help='query only until every extracted cycle has an excluded window: windows shared by the most '
                          'unbroken cycles first, in parallel chunks')
@@ -301,7 +303,11 @@ def main():
         if a.out:
             json.dump(out, open(a.out, 'w'), indent=1)
         return
-    oracle = Oracle(a.radius)
+    if a.escalate:
+        from refine import TwoLevelOracle
+        oracle = TwoLevelOracle(a.radius, a.escalate)
+    else:
+        oracle = Oracle(a.radius)
     if a.avoid:
         for e in json.load(open(a.avoid)):
             oracle.known[(tuple(e['dirs']), tuple(tuple(x) for x in e['alpha']))] = 'AVOID'

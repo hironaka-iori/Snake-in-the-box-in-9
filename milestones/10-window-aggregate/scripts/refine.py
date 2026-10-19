@@ -116,6 +116,56 @@ class Oracle:
         return len(keys)
 
 
+class TwoLevelOracle(Oracle):
+    """Radius `radius` first; windows feasible (or undecided) there are decided again in the
+    larger ball of radius `up`.  Both models consist of necessary conditions on a snake, so a
+    refutation at either radius excludes the window; `level(k)` names the radius that refutes it."""
+
+    def __init__(self, radius=3, up=4):
+        super().__init__(radius)
+        self.up = up
+        self.base = dict(self.known)                        # statuses at the base radius
+        self.upper = Oracle.__new__(Oracle)                 # an Oracle at the larger radius
+        self.upper.radius = up
+        self.upper.known = {}
+        import glob
+        for path in sorted(glob.glob(os.path.join(DATA, 'oracle_cache*.jsonl'))):
+            for line in open(path):
+                try:
+                    e = json.loads(line)
+                except ValueError:
+                    continue
+                if e.get('radius') == up and 'alpha' in e:
+                    self.upper.known[(tuple(e['dirs']), tuple(map(tuple, e['alpha'])))] = e['status']
+        for k, st in self.upper.known.items():
+            if st == 'UNSAT' and self.known.get(k) != 'AVOID':
+                self.known[k] = 'UNSAT'
+
+    def level(self, k):
+        if self.base.get(k) == 'UNSAT':
+            return self.radius
+        if self.upper.known.get(k) == 'UNSAT':
+            return self.up
+        return None
+
+    def query(self, keys, workers=4, timeout=None, verbose=True):
+        keys = list(set(keys))
+        before = {k: self.known.get(k) for k in keys}
+        n = Oracle.query(self, keys, workers, timeout, verbose)
+        for k in keys:
+            if before[k] is None and k in self.known:
+                self.base[k] = self.known[k]
+        esc = [k for k in keys if self.known.get(k) in ('SAT', 'UNKNOWN') and k not in self.upper.known]
+        if esc:
+            if verbose:
+                print(f'  escalating {len(esc)} windows to radius {self.up}', flush=True)
+            n += self.upper.query(esc, workers, timeout, verbose=False)
+            for k in esc:
+                if self.upper.known.get(k) == 'UNSAT':
+                    self.known[k] = 'UNSAT'
+        return n
+
+
 def _solve(arg):
     (ds, al), radius = arg
     t = time.time()

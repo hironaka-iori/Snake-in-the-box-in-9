@@ -84,7 +84,9 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     drat = ensure_drat()
     spec = json.load(open(a.set))
-    jobs = [(e['dirs'], [tuple(r) for r in e['alpha']], a.radius, drat, a.keep_files) for e in spec['exclusions']]
+    # an exclusion may name the radius of the ball that refutes it (two-level oracle)
+    jobs = [(e['dirs'], [tuple(r) for r in e['alpha']], e.get('radius', a.radius), drat, a.keep_files)
+            for e in spec['exclusions']]
     # largest windows first for better load balance
     jobs.sort(key=lambda j: -len(j[0]))
     done = {}
@@ -102,7 +104,7 @@ def main():
             # atomic replace: a machine restart during the write must not truncate the index
             tmp = a.out + '.tmp'
             with open(tmp, 'w') as f:
-                json.dump({'scope': 'DRAT-checked UNSAT of explicit local CNFs (radius-three ball model); '
+                json.dump({'scope': 'DRAT-checked UNSAT of explicit local CNFs (radius-three or radius-four ball model, per case); '
                                     'not Lean-checked.', 'source_set': os.path.basename(a.set),
                            'drat_trim_source_sha256': DRAT_SOURCE_SHA256, 'cases': results}, f, indent=1)
             os.replace(tmp, a.out)

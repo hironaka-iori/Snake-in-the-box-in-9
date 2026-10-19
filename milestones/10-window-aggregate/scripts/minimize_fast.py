@@ -101,12 +101,17 @@ def main():
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows never to keep (expensive certificates)')
     ap.add_argument('--tag', default='')
+    ap.add_argument('--escalate', type=int, default=None, help='also use windows refuted only at this larger radius')
     ap.add_argument('--prefer', help='certificate index: windows verified there are dropped last (they cost nothing)')
     ap.add_argument('--lam', help='keep only what a potential at this mean p/q needs (<= the minimum mean); '
                                   'a smaller mean with a small denominator gives a smaller set and potential range')
     a = ap.parse_args()
     A = FastAutomaton(a.L, a.k, a.K)
-    O = Oracle(a.radius)
+    if a.escalate:
+        from refine import TwoLevelOracle
+        O = TwoLevelOracle(a.radius, a.escalate)
+    else:
+        O = Oracle(a.radius)
     if a.avoid:
         for e in json.load(open(a.avoid)):
             O.known[(tuple(e['dirs']), tuple(tuple(x) for x in e['alpha']))] = 'AVOID'
@@ -157,7 +162,8 @@ def main():
            'potential_bound_edges': Bp, 'dp_bound_edges': vb - 1, 'edges': int(len(U)),
            'by_centres': dict(Counter(len(x[1]) for x in keep)),
            'already_certified': len(keep & certified),
-           'exclusions': [{'dirs': list(x[0]), 'alpha': [list(r) for r in x[1]]} for x in sorted(keep)]}
+           'exclusions': [{'dirs': list(x[0]), 'alpha': [list(r) for r in x[1]],
+                           **({'radius': O.level(x)} if a.escalate else {})} for x in sorted(keep)]}
     path = os.path.join(DATA, f'minimal_L{a.L}_k{a.k}_K{a.K}_r{a.radius}{a.tag}.json')
     json.dump(out, open(path, 'w'), indent=1)
     print(json.dumps({k2: v for k2, v in out.items() if k2 != 'exclusions'}))

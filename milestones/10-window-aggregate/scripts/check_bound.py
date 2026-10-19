@@ -21,9 +21,14 @@ def main():
     ap.add_argument('--K', type=int, default=7)
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--avoid')
+    ap.add_argument('--escalate', type=int, default=None)
     a = ap.parse_args()
     t = time.time()
-    O = Oracle(a.radius)
+    if a.escalate:
+        from refine import TwoLevelOracle
+        O = TwoLevelOracle(a.radius, a.escalate)
+    else:
+        O = Oracle(a.radius)
     if a.avoid:
         for e in json.load(open(a.avoid)):
             O.known[(tuple(e['dirs']), tuple(tuple(x) for x in e['alpha']))] = 'AVOID'
