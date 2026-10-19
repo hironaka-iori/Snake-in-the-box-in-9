@@ -22,15 +22,35 @@ def tag_of(dirs, alpha):
         f'{lo}' if lo == hi else f'{lo}-{hi}' for lo, hi in alpha)
 
 
+# Cycle cuts found so far, per (direction shape, radius).  A cut forbids one cycle of the ball
+# from being entirely selected; a snake induces a path, so every cut is valid for every window
+# of that shape (same ball, same variables).  Adding the known cuts before the first solve lets
+# most windows finish without the solve-and-cut loop and without the cold re-proof.
+CUTS = {}
+
+
+def init_cuts(path):
+    if path and os.path.exists(path):
+        for k, v in json.load(open(path)).items():
+            dirs, radius = k.rsplit('/', 1)
+            CUTS[(tuple(int(x) for x in dirs.split(',')), int(radius))] = [tuple(c) for c in v]
+
+
 def one(arg):
-    """One window.  The proof-logging solver decides the window directly; most windows need no
-    cycle cut, and then this single solve also gives the proof (the earlier version always solved
-    twice).  Windows that needed cuts are proved again from cold on the final clause set."""
+    """One window.  The proof-logging solver decides the window directly, with the cycle cuts
+    already known for its shape added up front; most windows need no further cut, and then this
+    single solve also gives the proof.  Windows that needed new cuts are proved again from cold
+    on the final clause set."""
     dirs, alpha, radius, drat, keep = arg
     t = time.time()
     al = [lo if lo == hi else (lo, hi) for lo, hi in alpha]
     enc = Encoding(window_from_dirs(dirs), al, radius)
-    cuts = 0
+    key = (tuple(dirs), radius)
+    known = CUTS.setdefault(key, [])
+    for c in known:
+        enc.add_cycle_cut(c)
+    shared = len(known)
+    cuts, found = 0, []
     with Cadical153(bootstrap_with=enc.clauses, with_proof=True) as s:
         while s.solve():
             model = s.get_model()
@@ -42,7 +62,10 @@ def one(arg):
             for c in cyc:
                 enc.add_cycle_cut(c); cuts += 1
                 s.add_clause(enc.clauses[-1])
+                found.append(tuple(sorted(c)))
         proof = s.get_proof()
+    have = set(known)
+    known.extend(c for c in found if c not in have)
     if cuts:
         # clauses added after a solve can force CaDiCaL to restore clauses that variable
         # elimination already deleted in the proof; drat-trim rejects such proofs, so windows
@@ -66,7 +89,8 @@ def one(arg):
                 with gzip.GzipFile(os.path.join(OUT, os.path.basename(f) + '.gz'), 'wb', mtime=0) as g:
                     g.write(data)
     return {'case': tag, 'dirs': dirs, 'alpha': alpha, 'radius': radius, 'endpoint_budget': 2,
-            'variables': enc.nv, 'clauses': len(enc.clauses), 'cycle_cuts': cuts,
+            'variables': enc.nv, 'clauses': len(enc.clauses), 'cycle_cuts': cuts, 'shared_cuts': shared,
+            'new_cuts': found,
             'proof_lines': len(proof), 'drat_trim_verified': ok, 'cnf_sha256': shas['cnf'],
             'drup_sha256': shas['drup'], 'seconds': round(time.time() - t, 2)}
 
@@ -77,6 +101,8 @@ def main():
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--workers', type=int, default=4)
     ap.add_argument('--out', default=os.path.join(HERE, '..', 'data', 'direction_certificates.json'))
+    ap.add_argument('--cuts', default=os.path.join(HERE, '..', 'data', 'cycle_cuts.json'),
+                    help='store of cycle cuts per direction shape, shared by the workers and kept across runs')
     ap.add_argument('--keep-files', action='store_true',
                     help='store the gzipped CNF and proof of every window (the index keeps their SHA-256 either way; '
                          'thousands of cap-7 proofs take tens of GB and are regenerated deterministically)')
@@ -97,9 +123,21 @@ def main():
     todo = [j for j in jobs if (tuple(j[0]), tuple(j[1])) not in done]
     print('cases', len(jobs), 'already verified', len(done), 'to do', len(todo), flush=True)
     results = list(done.values())
-    with Pool(a.workers) as p:
-        for rec in p.imap_unordered(one, todo):
+    cut_file = a.cuts
+    init_cuts(cut_file)
+    with Pool(a.workers, initializer=init_cuts, initargs=(cut_file,)) as p:
+        for n, rec in enumerate(p.imap_unordered(one, todo)):
             print(rec.get('case', rec['dirs']), rec['drat_trim_verified'], rec.get('seconds'), flush=True)
+            new = rec.pop('new_cuts', [])
+            if new:
+                known = CUTS.setdefault((tuple(rec['dirs']), rec['radius']), [])
+                have = set(known)
+                known.extend(c for c in new if c not in have)
+            if cut_file and (new or n % 50 == 0):
+                tmp = cut_file + '.tmp'
+                with open(tmp, 'w') as f:
+                    json.dump({','.join(map(str, d)) + '/' + str(r): v for (d, r), v in CUTS.items() if v}, f)
+                os.replace(tmp, cut_file)
             results.append(rec)
             # atomic replace: a machine restart during the write must not truncate the index
             tmp = a.out + '.tmp'
