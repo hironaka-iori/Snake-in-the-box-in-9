@@ -261,7 +261,8 @@ def main():
         A = FastAutomaton(a.L, a.k, a.K)
         U, V, W, EXT = A.edges(Listed())
         m = prune(A.n, U, V); idx = np.nonzero(m)[0]
-        mu, cyc = howard(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
+        from howard_fast import min_cycle
+        mu, cyc = min_cycle(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
         lam = Fr(int(W[cyc].sum()), len(cyc))
         pi = bellman_ford(A.n, U, V, W, lam.numerator, lam.denominator)
         assert pi is not None

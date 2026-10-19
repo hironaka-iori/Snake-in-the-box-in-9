@@ -15,6 +15,7 @@ from fractions import Fraction as Fr
 import numpy as np
 from refine import Oracle, DATA
 from refine_fast import FastAutomaton, prune, howard, bellman_ford, vertex_bound
+from howard_fast import min_cycle
 
 
 def sym_codes(alpha, ns, K):
@@ -113,7 +114,7 @@ def main():
     print('relevant exclusions', len(keep), flush=True)
     U, V, W = Bk.edges()
     m = prune(A.n, U, V); idx = np.nonzero(m)[0]
-    mu, cyc = howard(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
+    mu, cyc = min_cycle(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
     lam = Fr(int(W[cyc].sum()), len(cyc)); p, q = lam.numerator, lam.denominator
     pi = bellman_ford(A.n, U, V, W, p, q); assert pi is not None
     print('full set: mean', lam, 'range', int(pi.max() - pi.min()), flush=True)
@@ -130,7 +131,7 @@ def main():
         if dropped == 0:
             break
     m = prune(A.n, U, V); idx = np.nonzero(m)[0]
-    mu, cyc = howard(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
+    mu, cyc = min_cycle(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
     lam2 = Fr(int(W[cyc].sum()), len(cyc)); assert lam2 == lam, (lam, lam2)
     vb = vertex_bound(A, U, V, W)
     R = int(pi.max() - pi.min()); L = a.L

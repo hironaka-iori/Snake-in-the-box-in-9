@@ -86,3 +86,8 @@ class HowardGraph:
                 break
         self.pol = saved_pol; self.alive = saved_alive
         return out
+
+
+def min_cycle(n, U, V, W):
+    """Drop-in replacement for refine_fast.howard: (min mean as float, cycle edges in input numbering)."""
+    return HowardGraph(n, U, V, W).solve()
