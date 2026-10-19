@@ -168,14 +168,17 @@ class TwoLevelOracle(Oracle):
             return self.up
         return None
 
-    def query(self, keys, workers=4, timeout=None, verbose=True):
+    def escalatable(self, k):
+        return self.known.get(k) in ('SAT', 'UNKNOWN') and k not in self.upper.known
+
+    def query(self, keys, workers=4, timeout=None, verbose=True, escalate=True):
         keys = list(set(keys))
         before = {k: self.known.get(k) for k in keys}
         n = Oracle.query(self, keys, workers, timeout, verbose)
         for k in keys:
             if before[k] is None and k in self.known:
                 self.base[k] = self.known[k]
-        esc = [k for k in keys if self.known.get(k) in ('SAT', 'UNKNOWN') and k not in self.upper.known]
+        esc = [k for k in keys if self.escalatable(k)] if escalate else []
         if esc:
             if verbose:
                 print(f'  escalating {len(esc)} windows to radius {self.up}', flush=True)

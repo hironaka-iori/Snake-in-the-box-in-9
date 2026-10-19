@@ -245,9 +245,10 @@ def greedy_break(oracle, cyc_wins, workers, timeout, chunk=None):
             print(f'  greedy: {asked} queries broke all {len(cyc_wins)} cycles', flush=True)
             return asked
         count = {}
+        esc = getattr(oracle, 'escalatable', None)
         for i in alive:
             for x in cyc_wins[i]:
-                if oracle.status(x) is None:
+                if oracle.status(x) is None or (esc is not None and esc(x)):
                     count[x] = count.get(x, 0) + 1
         if not count:
             print(f'  greedy: {asked} queries, {len(alive)} of {len(cyc_wins)} cycles locally feasible', flush=True)
@@ -275,6 +276,9 @@ def main():
     ap.add_argument('--python-howard', action='store_true', help='use the pure-Python Howard (slow, one policy graph)')
     ap.add_argument('--escalate', type=int, default=None,
                     help='decide windows feasible at --radius again at this larger radius (two-level oracle)')
+    ap.add_argument('--hybrid', action='store_true',
+                    help='query every window of every extracted cycle at the base radius, then break the cycles '
+                         'still unbroken greedily with the escalated radius (needs --escalate)')
     ap.add_argument('--greedy', action='store_true',
                     help='query only until every extracted cycle has an excluded window: windows shared by the most '
                          'unbroken cycles first, in parallel chunks')
@@ -316,10 +320,11 @@ def main():
     log = []
     prefer = None
     for rnd in range(a.rounds):
-        t = time.time()
+        t = time.time(); ph = {}
         U, V, W, EXT = A.edges(oracle)
         m = prune(A.n, U, V)
         idx = np.nonzero(m)[0]
+        ph['graph'] = time.time() - t
         if a.python_howard:
             mu, cyc = howard(A.n, U[idx], V[idx], W[idx])
             batch = [c for m_, c in howard.extra if m_ <= mu + a.slack][:a.batch]
@@ -330,7 +335,10 @@ def main():
             G = HowardGraph(A.n, U[idx], V[idx], W[idx], prefer=prefer)
             mu, cyc = G.solve()
             prefer = G.successors()
+            ph['howard'] = time.time() - t - ph['graph']
             batch = [c for m_, c in G.cycles(a.batch + 1, mu + a.slack, budget=a.cycle_budget)[1:]]
+            ph['cycles'] = time.time() - t - ph['graph'] - ph['howard']
+        t1 = time.time()
         cyc = [idx[e] for e in cyc]
         exact = Fr(int(W[cyc].sum()), len(cyc))
         wins = []
@@ -345,13 +353,19 @@ def main():
             cyc_wins.append(set(cw))
             wins.extend(cw)
         wins = list(dict.fromkeys(wins))
-        if a.greedy:
+        ph['decode'] = time.time() - t1; t2 = time.time()
+        if a.hybrid:
+            newq = oracle.query(wins, a.workers, a.query_timeout, escalate=False)
+            newq += greedy_break(oracle, cyc_wins, a.workers, a.query_timeout)
+        elif a.greedy:
             newq = greedy_break(oracle, cyc_wins, a.workers, a.query_timeout)
         else:
             newq = oracle.query(wins, a.workers, a.query_timeout)
+        ph['query'] = time.time() - t2
         unsat = [x for x in wins if oracle.status(x) == 'UNSAT']
         print(f'round {rnd}: edges {len(idx)} mean {exact} ({mu:.4f}) cycle {[int(x) for x in W[cyc]]} '
-              f'extra-cycles {len(batch)} queried {newq} unsat-on-cycle {len(unsat)} [{time.time()-t:.0f}s]', flush=True)
+              f'extra-cycles {len(batch)} queried {newq} unsat-on-cycle {len(unsat)} [{time.time()-t:.0f}s: '
+              + ' '.join(f'{k} {v:.0f}' for k, v in ph.items()) + ']', flush=True)
         log.append({'round': rnd, 'mean': str(exact), 'cycle_counts': [int(x) for x in W[cyc]],
                     'queried': newq, 'killed': len(unsat)})
         if not unsat:
