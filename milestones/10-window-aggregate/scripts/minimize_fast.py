@@ -101,6 +101,7 @@ def main():
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows never to keep (expensive certificates)')
     ap.add_argument('--tag', default='')
+    ap.add_argument('--prefer', help='certificate index: windows verified there are dropped last (they cost nothing)')
     ap.add_argument('--lam', help='keep only what a potential at this mean p/q needs (<= the minimum mean); '
                                   'a smaller mean with a small denominator gives a smaller set and potential range')
     a = ap.parse_args()
@@ -126,7 +127,13 @@ def main():
     p, q = lam.numerator, lam.denominator
     pi = bellman_ford(A.n, U, V, W, p, q); assert pi is not None
     print('full set: mean', lam, 'range', int(pi.max() - pi.min()), flush=True)
-    order = sorted(keep, key=lambda x: (-len(x[1]), -len(set(x[0]))))     # drop long windows first
+    certified = set()
+    if a.prefer:
+        certified = {(tuple(c['dirs']), tuple(map(tuple, c['alpha']))) for c in json.load(open(a.prefer))['cases']
+                     if c.get('drat_trim_verified')}
+        print('already certified among the relevant exclusions:', len(keep & certified), flush=True)
+    # drop uncertified windows first, long windows first within each group
+    order = sorted(keep, key=lambda x: (x in certified, -len(x[1]), -len(set(x[0]))))
     while True:
         dropped = 0
         for x in order:
@@ -149,6 +156,7 @@ def main():
     out = {'L': a.L, 'k': a.k, 'K': a.K, 'radius': a.radius, 'min_mean': str(lam), 'potential_range': R,
            'potential_bound_edges': Bp, 'dp_bound_edges': vb - 1, 'edges': int(len(U)),
            'by_centres': dict(Counter(len(x[1]) for x in keep)),
+           'already_certified': len(keep & certified),
            'exclusions': [{'dirs': list(x[0]), 'alpha': [list(r) for r in x[1]]} for x in sorted(keep)]}
     path = os.path.join(DATA, f'minimal_L{a.L}_k{a.k}_K{a.K}_r{a.radius}{a.tag}.json')
     json.dump(out, open(path, 'w'), indent=1)
