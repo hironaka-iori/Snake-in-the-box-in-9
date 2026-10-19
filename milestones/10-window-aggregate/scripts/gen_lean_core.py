@@ -261,10 +261,12 @@ CADICAL_SETS = {
                        keys_mod='LocalWindowDirKeys5', keys='dirKeys5', premise='AllRefuted238', bound=238,
                        reuse='direction_certificates.json', title='The {n} five-centre window certificates',
                        radius=3),
+    # reuses the cores (and their Lean modules Q*) of the 237 set for the shared windows
     'r4': dict(index='direction_certificates_r4.json', certs=os.path.join(CERTS, 'direction_r4'),
                core=os.path.join(DATA, 'lean_core_direction_r4'), prefix='R',
                keys_mod='LocalWindowDirKeysR4', keys='dirKeysR4', premise='AllRefuted236', bound=236,
-               reuse=None, title='The {n} radius-4 five-centre window certificates', radius=4),
+               reuse='direction_certificates_r4b.json', reuse_core=os.path.join(DATA, 'lean_core_direction_r4b'),
+               title='The {n} radius-4 five-centre window certificates', radius=4),
     # the bound 237 from a cheaper radius-4 subset (prune_costly --target-edges 237); its own
     # module prefix, so that its cores never share modules with the 236 set
     'r4b': dict(index='direction_certificates_r4b.json', certs=os.path.join(CERTS, 'direction_r4'),
@@ -509,10 +511,11 @@ def main_direction5(a):
     res, jobs = [], []
     for c in cases:
         k = (tuple(c['dirs']), tuple(map(tuple, c['alpha'])))
-        if k in old:   # reuse the 239 core and its drat-trim LRAT
-            meta = json.load(open(os.path.join(DCORE, old[k] + '.json')))
+        if k in old:   # reuse the core of the earlier set (239: with its drat-trim LRAT)
+            rcore = S.get('reuse_core', DCORE)
+            meta = json.load(open(os.path.join(rcore, old[k] + '.json')))
             assert meta['name'] == old[k] == c['case'], (old[k], c['case'])
-            shutil.copy2(os.path.join(DCORE, old[k] + '.json'), os.path.join(S['core'], old[k] + '.json'))
+            shutil.copy2(os.path.join(rcore, old[k] + '.json'), os.path.join(S['core'], old[k] + '.json'))
             res.append((meta['name'], meta['module'].split('.')[-1], meta['dirs'], meta['syms'],
                         len(meta['core_ids']), meta['cnf_clauses'], meta['hash_source'], meta['lrat']))
         else:
