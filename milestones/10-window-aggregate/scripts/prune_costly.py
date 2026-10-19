@@ -46,6 +46,8 @@ def main():
                     help='use the LRAT hint counts of a lean_core summary (+ index) as costs where known')
     ap.add_argument('--index', default=None,
                     help='certificate index to filter to the kept exclusions (written next to --out as *_index.json)')
+    ap.add_argument('--costs', default=None,
+                    help='jsonl of costs overriding data/proof_cost_r<r>.jsonl (field proof_lines)')
     ap.add_argument('--first', nargs='*', default=[],
                     help='module names (e.g. D0120A334) to try first, in this order')
     a = ap.parse_args()
@@ -53,6 +55,10 @@ def main():
     L, k, K, radius = spec['L'], spec['k'], spec['K'], spec.get('radius', 3)
     keep = {(tuple(e['dirs']), tuple(map(tuple, e['alpha']))) for e in spec['exclusions']}
     _, costs = load_costs(radius)
+    if a.costs:   # e.g. estimated LRAT hints instead of DRUP lines (same jsonl format)
+        for line in open(a.costs):
+            e = json.loads(line)
+            costs[(tuple(e['dirs']), tuple(map(tuple, e['alpha'])))] = e['proof_lines']
     first = []
     if a.hints_from:
         summ = json.load(open(os.path.join(a.hints_from, '_summary.json')))['per_case']

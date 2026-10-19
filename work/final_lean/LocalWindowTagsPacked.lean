@@ -16,7 +16,7 @@ whatever they produce is checked by `checkAll`.
   each: `0` for `.z`, `1 + 4 v` for `.p v`, `2 + 4 v` for `.e v`,
   `3 + 4 (c + 2^8 i + 2^24 j)` for `.r c i j`.
 * `tagsOf n st`: `n` tags, 48 bits each: the constructor index (4 bits) and its
-  arguments in fields of 8, 16 and 16 bits.
+  arguments in fields of 8, 16 and 16 bits; `tagsOfL` for long lists, in chunks of 64.
 -/
 
 namespace Snake9.LocalWindow.Tags
@@ -64,6 +64,12 @@ def tagOf (x : Nat) : Tag :=
 def tagsOf (n : Nat) : Nat → List Tag :=
   Nat.rec (motive := fun _ => Nat → List Tag) (fun _ => [])
     (fun _ ih st => tagOf (Nat.land st 281474976710655) :: ih (Nat.shiftRight st 48)) n
+
+/-- Tags from a list of chunks, each `n + 2^8 st` with `n ≤ 64` tags in `st` (long tag
+lists: decoding one stream shifts it once per tag, quadratic in its length). -/
+def tagsOfL (cs : List Nat) : List Tag :=
+  List.rec (motive := fun _ => List Tag) []
+    (fun x _ ih => List.append (tagsOf (Nat.land x 255) (Nat.shiftRight x 8)) ih) cs
 
 end
 

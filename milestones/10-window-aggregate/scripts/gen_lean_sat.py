@@ -290,7 +290,11 @@ def write_module(name, module, meta, enc, tags, packed=False):
         ctr_terms.append(f'⟨[{", ".join(str(code(l)) for l in lits)}], {k}, {kt}⟩')
     tag_body = ',\n  '.join(', '.join(lean_tag(t) for t in tags[i:i + 8]) for i in range(0, len(tags), 8))
     if packed:   # single literals decoded in the kernel (LocalWindowTagsPacked.lean)
-        tags_term = 'tagsOf %d (nat_lit 0x%x)' % (len(tags), packed_tags(tags))
+        if len(tags) <= 2048:
+            tags_term = 'tagsOf %d (nat_lit 0x%x)' % (len(tags), packed_tags(tags))
+        else:   # chunks of 64: one long stream would be shifted once per tag (quadratic)
+            chunks = [len(tags[i:i + 64]) + (packed_tags(tags[i:i + 64]) << 8) for i in range(0, len(tags), 64)]
+            tags_term = 'tagsOfL [\n  ' + ',\n  '.join('nat_lit 0x%x' % c for c in chunks) + ']'
         meaning_def = '(mtB %d 64 0 1 (nat_lit 0x%x)).1' % (enc.nv, packed_tree(enc.meaning, enc.nv))
     else:
         meaning_def = lean_tree_terms(enc.meaning, enc.nv)
@@ -331,7 +335,9 @@ end Snake9.LocalWindow.{module}
     if packed:   # the kernel only unfolds the data: no compiled code, 12x smaller .olean
         src = src.replace('\ndef ', '\nnoncomputable def ')
     os.makedirs(os.path.join(LEAN, 'LocalWindowSat'), exist_ok=True)
-    open(os.path.join(LEAN, 'LocalWindowSat', module + '.lean'), 'w').write(src)
+    path = os.path.join(LEAN, 'LocalWindowSat', module + '.lean')
+    if not (os.path.exists(path) and open(path).read() == src):   # keep the mtime of unchanged modules
+        open(path, 'w').write(src)
 
 
 DCERTS = os.path.join(CERTS, 'direction')
