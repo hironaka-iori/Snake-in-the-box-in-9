@@ -34,6 +34,7 @@ Core Lean only.  Mirrors `WindowAutomaton5Sequence` with the potential bound {MA
 -/
 import WindowAutomaton5{T}Table
 import WindowAutomatonSequence
+import WindowAutomaton5Sequence
 
 namespace Snake9.WindowAutomaton
 
