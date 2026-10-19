@@ -1,8 +1,14 @@
 # Collaborator handoff
 
-Checkpoint: 18 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 20 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-## Current assignment: constructive search
+## Latest construction checkpoint
+
+[Milestone 21](milestones/21-endpoint-recombination/README.md) tests the shared-endpoint recombination proposed in milestone 20. Across 5,760 alignments, every valid positive single exchange gives back the 190-edge donor. Two exchanges on twelve selected alignments do the same. Shared-intersection 196 models are solver-infeasible; freely varying union models at 192/196 remain unresolved. Three diversity searches returned only the donor. Four Lean audits check the joining construction and endpoint identities. Next: use complete 191-edge donors without requiring the donor endpoint pair to match the recipient.
+
+The successful 238 proof receipts from collaborator commits c45ffa76 and 5c55ddd5 are integrated. The corresponding proof sources already agree with this checkout. The manuscript now states 191 <= a(9) <= 238, with the incremental Linux-build limitation explicit. Upper-bound research remains assigned to collaborators.
+
+## Construction history
 
 This investigation now concentrates on a 196-edge construction; collaborators
 continue the upper-bound work. The [new construction milestone](milestones/12-construction-196/README.md)
