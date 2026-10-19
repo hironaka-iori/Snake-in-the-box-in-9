@@ -1,6 +1,6 @@
 name = "snake9_audit"
 version = "0.1.0"
-defaultTargets = ["Snake9", "Snake9Logic", "MaximalityCounterexample", "CoilReduction", "TrendHypothesis", "OptimalityTarget", "LayerJoining", "Snake8", "IntegerLayerBridge", "SquareCounterexample", "SquareCountingLogic", "PathStructure", "CubeLocal", "SingletonSquareLemma", "JointLayerSeed", "RadiusThreeForest", "BallCertificate", "BallClauseLogic", "DfsParity", "DfsCertificate", "DfsBankData", "DfsDecide"]
+defaultTargets = ["Snake9", "Snake9Logic", "MaximalityCounterexample", "CoilReduction", "TrendHypothesis", "OptimalityTarget", "LayerJoining", "Snake8", "IntegerLayerBridge", "SquareCounterexample", "SquareCountingLogic", "PathStructure", "CubeLocal", "SingletonSquareLemma", "JointLayerSeed", "RadiusThreeForest", "BallCertificate", "BallClauseLogic", "DfsParity", "DfsCertificate", "DfsBankData", "DfsDecide", "LocalWindowModel", "LocalWindowBridge", "LocalWindowDirModel", "LocalWindowDirKeys", "LocalWindowDirBridge", "LocalWindowDirKeys5"]
 
 [[lean_lib]]
 name = "Snake9"
@@ -2613,3 +2613,91 @@ name = "DfsPrefix"
 
 [[lean_lib]]
 name = "DfsBankCert144Results"
+
+[[lean_lib]]
+name = "LocalWindowModel"
+
+[[lean_lib]]
+name = "LocalWindowBridge"
+
+[[lean_lib]]
+name = "LocalWindowCnf"
+globs = ["LocalWindowCnf.+"]
+
+[[lean_lib]]
+name = "LocalWindowTags"
+
+[[lean_lib]]
+name = "LocalWindowSat"
+globs = ["LocalWindowSat.*"]
+
+[[lean_lib]]
+name = "LratCheck"
+
+[[lean_lib]]
+name = "LocalWindowUnsat"
+globs = ["LocalWindowUnsat.+"]
+
+[[lean_lib]]
+name = "LocalWindowRefuted"
+
+# Direction-aware windows behind the conditional bound 239.
+[[lean_lib]]
+name = "LocalWindowDirModel"
+
+[[lean_lib]]
+name = "LocalWindowDirKeys"
+
+[[lean_lib]]
+name = "LocalWindowDirBridge"
+
+[[lean_lib]]
+name = "LocalWindowDirSat"
+
+[[lean_lib]]
+name = "LratCheck14"
+
+[[lean_lib]]
+name = "LratFast"
+
+[[lean_lib]]
+name = "LratFast14"
+
+[[lean_lib]]
+name = "LratFast15"
+
+[[lean_lib]]
+name = "LratCheckO3k"
+
+[[lean_lib]]
+name = "LratFastO3k"
+
+[[lean_lib]]
+name = "LratFastO3k14"
+
+[[lean_lib]]
+name = "LratFastO3k15"
+
+[[lean_lib]]
+name = "LratCheckO4k"
+
+[[lean_lib]]
+name = "LratFastO4k"
+
+[[lean_lib]]
+name = "LratFastO4k14"
+
+[[lean_lib]]
+name = "LratFastO4k15"
+
+[[lean_lib]]
+name = "LocalWindowDirUnsat"
+
+[[lean_lib]]
+name = "LocalWindowDirKeys5"
+
+[[lean_lib]]
+name = "LocalWindowDirSat5"
+
+[[lean_lib]]
+name = "LocalWindowDirUnsat5"

@@ -21,6 +21,8 @@ Research checkpoint: 19 October 2026. The current construction task targets 196 
 | Adjacent internal singleton-square counts cannot be 1 and 3 | Lean-checked symbolic finite-set and endpoint argument |
 | Three consecutive internal vertices cannot all have singleton-square count 2 | Lean-checked exhaustive local classification and geometric exclusions |
 | Every snake has at most 245 edges | Lean-checked aggregate consequence, with every local premise discharged |
+| Every snake has at most 242 edges, and at most 241 edges | Lean-checked end to end: the 22 local count-window exclusions are Lean theorems (geometric bridge, clause soundness, kernel replay of the LRAT refutations by a verified checker); axiom audits on macOS and, from a fresh environment, on Linux |
+| At most 239 edges if 145 direction-aware count-window patterns are excluded | Lean-checked conditional theorem (kernel-checked 2592-state potential); the bridge and clause soundness for all 145 patterns are proved in Lean, the kernel replay of their refutations is not yet complete |
 | The repeated-coordinate radius-three (2,2,3) Boolean core is inconsistent | Lean-checked in 61 modules; complete geometric interpretation remains open |
 | At most 242, resp. 241, edges if five, resp. six, local count-window patterns are excluded | Lean-checked conditional theorems (fresh 156-step reproduction); each window exclusion has a DRAT-checked certificate for a local CNF, not yet a Lean proof |
 | At most 239 edges if 145 direction-aware count-window patterns are excluded | Lean-checked conditional theorem (kernel-checked 2592-state potential); every pattern has a DRAT-checked certificate, not yet a Lean proof |
@@ -44,7 +46,7 @@ Start with the [collaborator handoff](COLLABORATION.md) for priorities, exact pr
 
 - `paper/snake9_research.tex`: current manuscript, with authors Iori Hironaka, Tommy Ma, and Steven Zhan.
 - `work/final_lean/`: authoritative standard-library proof project, with the maintained core and integrated DFS modules.
-- `work/spectral/`: authoritative mathlib-dependent bounds 245, 247, 248, 251, 254, and 255, with reproduction instructions.
+- `work/spectral/`: authoritative mathlib-dependent bounds 241, 242, 245, 247, 248, 251, 254, and 255, with reproduction instructions.
 - `work/spectral/stronger/`: 150 maintained geometric, classification, and aggregate proof modules.
 - `RESEARCH_LEDGER.md`: continuing research status, evidence, and unresolved directions.
 - `work/*.py`: independent verification and experimental search programs.
@@ -77,10 +79,13 @@ The optional `--fresh-core` flag rebuilds a source-only copy of all current core
 Reproduce the stronger bound 245 and its transitive axiom audit with:
 
 ```sh
-python work/spectral/verify_strengthened.py --mathlib-dir /path/to/mathlib
+python work/spectral/verify_strengthened.py --mathlib-dir /path/to/mathlib \
+  --core-targets LocalWindowRefuted LocalWindowBridge Snake9 PathStructure CubeLocal \
+                 SquareCounterexample SingletonSquareLemma OptimalityTarget \
+  --core-jobs 3 --core-heavy-jobs 2
 ```
 
-This always builds a source-only core and all strengthening modules in a new directory. It saves source hashes, compiler output, and axiom audits, and rejects any final theorem using foundations beyond `propext`, `Classical.choice`, and `Quot.sound`. The core prefix theorem verifies that excluding a snake of length L+1 excludes every longer snake.
+The `--core-targets` above include the 1086-module certificate closure of `LocalWindowRefuted`, which the final audit of 241 and 242 imports; choose `--core-heavy-jobs` as about (RAM in GB - 4) / 5. This always builds a source-only core and all strengthening modules in a new directory. It saves source hashes, compiler output, and axiom audits, and rejects any final theorem using foundations beyond `propext`, `Classical.choice`, and `Quot.sound`. The core prefix theorem verifies that excluding a snake of length L+1 excludes every longer snake.
 
 The fresh source-only reproduction succeeded for all 148 strengthening modules, the core, the incidence theorem, and the final audits (151 steps). Every recorded source hash matches the maintained source. Evidence is saved in `outputs/strengthened-reproduction-manifest.json` and `outputs/strengthened-reproduction.log`, with identical versioned copies under `outputs/strengthened-245-reproduction-*`. An independent final import audit also passed.
 
@@ -147,11 +152,11 @@ sh work/run_lean_certificates.sh 160v2 3
 The runner builds three shards at a time, because each kernel check holds its memory until the process exits.
 
 
-## Window exclusions and conditional bounds 242 and 241
+## Window exclusions and the bounds 242 and 241
 
 The current potential argument stops at 245 because count sequences repeating `2,2,3` average 7/3. A radius-three local ball model was surveyed for every count triple with entries 1..6. The survey gives an aggregate ceiling of 14/5 for three-vertex windows. One additional four-vertex exclusion, (2,4,2,3), raises it to 3.
 
-The needed exclusions are (2,2,3), (2,2,4), (2,3,2), (3,2,3), (4,1,4..6), and (2,4,2,3), with reversals and every window shape. Each has a CNF certificate verified by `drat-trim`. `AggregateWindowConditional.lean` proves in Lean that these premises imply at most 242 and 241 edges respectively. The premises themselves are **not** Lean theorems. The geometric bridge from a snake to the local CNF is not formalized, so the unconditional bound is still 245. See [the milestone](milestones/10-window-aggregate/README.md).
+The needed exclusions are (2,2,3), (2,2,4), (2,3,2), (3,2,3), (4,1,4..6), and (2,4,2,3), with reversals and every window shape. Each has a CNF certificate verified by `drat-trim`. `AggregateWindowConditional.lean` proves in Lean that these premises imply at most 242 and 241 edges respectively, and the premises are now Lean theorems: `LocalWindowBridge.lean` moves each snake window to canonical position and proves the abstract axioms of `LocalWindowModel.lean` there; `LocalWindowSat/` proves that every clause of each UNSAT core follows from those axioms; and `LocalWindowUnsat/` replays the drat-trim LRAT refutation of each core, segment by segment with `decide +kernel`, through the checker `LratCheck.lean`, whose soundness is proved in Lean. `UpperBound241.lean` proves `upper_bound_242`, `upper_bound_241` and `verified_interval_191_241`; their axioms are only `propext`, `Classical.choice` and `Quot.sound`. Neither drat-trim nor the CNF generator is trusted any more: the LRAT proof is only data for the checker, and every core clause is derived from the snake axioms. The core closure has 1086 modules, 203 of them kernel checks (2.3 kernel-hours on macOS, 5.7 on four shared cloud cores); it was built and audited on macOS (`outputs/upper-bound-241-audit.log`) and again from scratch on Linux (`outputs/upper-bound-241-audit-linux.log`). Build the certificate modules with `work/guarded_lake_build.py`, not a plain `lake build`: each kernel check needs 2-4.5 GB and `lake` would start one per core. See [the milestone](milestones/10-window-aggregate/README.md).
 
 A direction-aware automaton goes further: states remember the shape of the last six transition directions and the last three counts, and a counterexample-guided refinement loop raises the average to 10/3 with 145 solver-refuted windows (each DRAT-verified). The kernel checks the resulting 2592-state potential in about a minute, and `upper_239_of_direction_windows` gives **239 edges** under that premise. With five-centre windows and seven directions of memory the same loop reaches average 7/2 with 325 certified windows, and `upper_238_of_direction_windows5` gives **238 edges**; its 44,064-state table is kernel-checked in 34 shards.
 
@@ -163,4 +168,4 @@ Use a separate branch for each proof or experiment. Keep claims labeled as prove
 
 The separately developed radius-five experiment now has a Lean-checked contradiction for an explicit core of 567 clauses and 252 Boolean variables, using 398 derived clauses. All 41 recorded cycle cuts and the general degree/endpoint clause rules are also checked. The complete interpretation of the concrete input clauses as geometric conditions on a snake is unfinished. See [the certificate investigation](milestones/06-radius-five/ball_certificate_investigation.md) for the evidence boundary and reproduction instructions.
 
-This work does not improve the unconditional bound 245. Its earlier conditional 250 arithmetic is retained as historical motivation, rather than a current strengthening target. The most direct numerical target remains exclusion of the singleton-count pattern (2,2,3), which would discharge the existing conditional bound 244. The Boolean-certificate method may provide an independent route to local geometric exclusions.
+This work does not improve the unconditional bounds. Its earlier conditional 250 arithmetic is retained as historical motivation, rather than a current strengthening target. The exclusion of the singleton-count pattern (2,2,3), the premise of the conditional bound 244, is now one of the 22 Lean-proved window exclusions behind the unconditional bound 241. The Boolean-certificate method may provide an independent route to local geometric exclusions.

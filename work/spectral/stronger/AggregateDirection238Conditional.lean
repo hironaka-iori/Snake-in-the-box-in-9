@@ -8,10 +8,11 @@ set_option maxHeartbeats 1600000
 
 theorem win8_eq (p : Snake m) (i : Nat) : win8 (pathDir p) i = blockList p i 8 := rfl
 
-/-- Conditional 238-edge bound from the five-centre direction-aware automaton
-(`forbMask5`: 325 windows).  Same premise shape as `upper_239_of_direction_windows`,
-with windows of up to five consecutive internal vertices.  The premises are NOT
-proved in Lean, so the unconditional bound remains 245. -/
+/-- Conditional 238-edge bound from the five-centre direction-aware automaton (the
+exclusion masks `forbMaskOf5` of `WindowAutomaton5Data`).  Same premise shape as
+`upper_239_of_direction_windows`, with windows of up to five consecutive internal
+vertices.  `AggregateDirection238Unconditional` discharges the premises from the window
+certificates. -/
 theorem upper_238_of_direction_windows5 {m : Nat} (p : Snake m)
     (hw2 : ∀ j, j + 3 ≤ m → wforb5 [pathDir p j, pathDir p (j+1), pathDir p (j+2)]
       [sym (countSeq p (j+1)), sym (countSeq p (j+2))] = false)

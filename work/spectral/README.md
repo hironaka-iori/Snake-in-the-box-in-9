@@ -46,11 +46,13 @@ The fresh source-only build succeeded for all 151 steps, including the core, inc
 
 `Alpha223Potential.lean` and `Aggregate244Conditional.lean` are included in the reproduction driver. The no-(2,2,3) premise remains unproved. The original 151-step source-only build covers the unconditional 245 result. The PR integration audit separately checks these two additions against hash-matched compiled dependencies. A new complete driver run has 153 steps.
 
-## Conditional 242 and 241 targets
+## Bounds 242 and 241 (unconditional)
 
 - `WindowPotential242.lean` and `WindowPotential241.lean` use core Lean only and prove the sequence potentials.
-- `AggregateWindowConditional.lean` proves `upper_242_of_certified_windows` and `upper_241_of_certified_windows`. Their window-exclusion premises are DRAT-certified for a local model, see `milestones/10-window-aggregate/`, but they are not Lean theorems.
+- `AggregateWindowConditional.lean` proves `upper_242_of_certified_windows` and `upper_241_of_certified_windows`. Their window-exclusion premises are DRAT-certified for a local model, see `milestones/10-window-aggregate/`; the next items make them Lean theorems.
 - A fresh 156-step run with `--core-targets Snake9 PathStructure CubeLocal SquareCounterexample SingletonSquareLemma OptimalityTarget` succeeded. It is saved as `outputs/strengthened-window-reproduction-*`.
+- `AggregateWindowUnconditional.lean` proves `upper_242_of_refuted` and `upper_241_of_refuted`. Their only hypothesis is `LocalWindow.AllRefuted`, the 22 statements `Refuted window bounds` of the local window certificates. The core module `final_lean/LocalWindowBridge.lean` moves each snake window to canonical position by a translation and a coordinate permutation, proves the abstract `Axioms` of `LocalWindowModel.lean` there, and selects the certificate from the direction shape. A window with directions 0,1,2,3,1 is read backwards. This module identifies `localAlpha` with the core count `coreAlpha`. When passing `--core-targets`, include `LocalWindowBridge`.
+- `UpperBound241.lean` discharges `AllRefuted` with `LocalWindow.allRefuted` from the core module `final_lean/LocalWindowRefuted.lean` (clause soundness `LocalWindowSat/` plus the kernel-checked LRAT replays `LocalWindowUnsat/C*` through `LratCheck.lean`) and proves `upper_bound_242`, `upper_bound_241` and `verified_interval_191_241`. All three audit to `propext`, `Classical.choice`, `Quot.sound`: on macOS (`outputs/upper-bound-241-audit.log`) and from a fresh Linux environment with mathlib built from source (`outputs/upper-bound-241-audit-linux.log`). The core closure of `LocalWindowRefuted` has 1086 modules; `verify_strengthened.py` builds it through `work/guarded_lake_build.py`, which bounds the number of concurrent kernel checks and their memory. `Snake9.lean` itself peaks at about 7.4 GB on Linux, so the guard's per-module cap must be above that (`--core-rss-cap-gb`, default 9); choose `--core-heavy-jobs` as about (RAM in GB - 4) / 5.
 
 ## Conditional 239 target (direction-aware automaton)
 

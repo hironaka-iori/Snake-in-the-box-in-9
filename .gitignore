@@ -51,3 +51,10 @@ work/prepare_repository.py
 work/*.exe
 
 work/paper-build/
+
+# Generated LRAT replays of the 145 direction windows (about 1 GB);
+# regenerate with milestones/10-window-aggregate/scripts/gen_lean_lrat.py --data .../lean_core_direction
+work/final_lean/LocalWindowUnsat/D*
+
+# radius-4 DRUP proofs are large; the CNFs and the index are committed
+milestones/10-window-aggregate/certificates/direction_r4/*.drup.gz

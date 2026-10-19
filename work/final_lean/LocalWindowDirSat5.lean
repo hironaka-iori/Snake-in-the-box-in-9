@@ -1,0 +1,549 @@
+import LocalWindowDirKeys5
+import LocalWindowTags
+import LocalWindowSat.D01203A2261
+import LocalWindowSat.D01203A2262
+import LocalWindowSat.D01203A2263
+import LocalWindowSat.D01203A2451
+import LocalWindowSat.D01203A2452
+import LocalWindowSat.D01203A2542
+import LocalWindowSat.D01203A2622
+import LocalWindowSat.D01203A3262
+import LocalWindowSat.D01203A3351
+import LocalWindowSat.D01203A3352
+import LocalWindowSat.D01203A3442
+import LocalWindowSat.D01203A3622
+import LocalWindowSat.D01203A4251
+import LocalWindowSat.D01203A4252
+import LocalWindowSat.D01203A4253
+import LocalWindowSat.D01203A4262
+import LocalWindowSat.D01203A4343
+import LocalWindowSat.D01203A4351
+import LocalWindowSat.D01203A4352
+import LocalWindowSat.D01203A4432
+import LocalWindowSat.D01203A4433
+import LocalWindowSat.D01203A4442
+import LocalWindowSat.D01203A4522
+import LocalWindowSat.D01203A5251
+import LocalWindowSat.D01203A5332
+import LocalWindowSat.D01203A5333
+import LocalWindowSat.D01203A6152
+import LocalWindowSat.D01203A6332
+import LocalWindowSat.D0120A141
+import LocalWindowSat.D0120A142
+import LocalWindowSat.D0120A143
+import LocalWindowSat.D0120A144
+import LocalWindowSat.D0120A145
+import LocalWindowSat.D0120A151
+import LocalWindowSat.D0120A152
+import LocalWindowSat.D0120A153
+import LocalWindowSat.D0120A154
+import LocalWindowSat.D0120A162
+import LocalWindowSat.D0120A222
+import LocalWindowSat.D0120A223
+import LocalWindowSat.D0120A224
+import LocalWindowSat.D0120A225
+import LocalWindowSat.D0120A232
+import LocalWindowSat.D0120A233
+import LocalWindowSat.D0120A234
+import LocalWindowSat.D0120A235
+import LocalWindowSat.D0120A242
+import LocalWindowSat.D0120A243
+import LocalWindowSat.D0120A244
+import LocalWindowSat.D0120A252
+import LocalWindowSat.D0120A253
+import LocalWindowSat.D0120A323
+import LocalWindowSat.D0120A324
+import LocalWindowSat.D0120A325
+import LocalWindowSat.D0120A333
+import LocalWindowSat.D0120A334
+import LocalWindowSat.D0120A343
+import LocalWindowSat.D0120A415
+import LocalWindowSat.D0120A424
+import LocalWindowSat.D0120A515
+import LocalWindowSat.D012301A22622
+import LocalWindowSat.D012301A23432
+import LocalWindowSat.D012301A23433
+import LocalWindowSat.D012304A15343
+import LocalWindowSat.D012304A22623
+import LocalWindowSat.D012304A22624
+import LocalWindowSat.D012304A22633
+import LocalWindowSat.D012304A23443
+import LocalWindowSat.D012304A26233
+import LocalWindowSat.D012304A26234
+import LocalWindowSat.D012304A26235
+import LocalWindowSat.D012304A26243
+import LocalWindowSat.D012304A26244
+import LocalWindowSat.D012304A26324
+import LocalWindowSat.D012304A26325
+import LocalWindowSat.D012304A26332
+import LocalWindowSat.D012304A26333
+import LocalWindowSat.D012304A34344
+import LocalWindowSat.D01230A1532
+import LocalWindowSat.D01230A1533
+import LocalWindowSat.D01230A1622
+import LocalWindowSat.D01230A2252
+import LocalWindowSat.D01230A2253
+import LocalWindowSat.D01230A2254
+import LocalWindowSat.D01230A2332
+import LocalWindowSat.D01230A2333
+import LocalWindowSat.D01230A2334
+import LocalWindowSat.D01230A2335
+import LocalWindowSat.D01230A2342
+import LocalWindowSat.D01230A2423
+import LocalWindowSat.D01230A2516
+import LocalWindowSat.D01230A2523
+import LocalWindowSat.D01230A3243
+import LocalWindowSat.D01234A1522
+import LocalWindowSat.D01234A1523
+import LocalWindowSat.D01234A1524
+import LocalWindowSat.D01234A1525
+import LocalWindowSat.D01234A1526
+import LocalWindowSat.D01234A1532
+import LocalWindowSat.D01234A1533
+import LocalWindowSat.D01234A1534
+import LocalWindowSat.D01234A1542
+import LocalWindowSat.D01234A1622
+import LocalWindowSat.D01234A2252
+import LocalWindowSat.D01234A2253
+import LocalWindowSat.D01234A2254
+import LocalWindowSat.D01234A2262
+import LocalWindowSat.D01234A2263
+import LocalWindowSat.D01234A2332
+import LocalWindowSat.D01234A2333
+import LocalWindowSat.D01234A2334
+import LocalWindowSat.D01234A2335
+import LocalWindowSat.D01234A2342
+import LocalWindowSat.D01234A2343
+import LocalWindowSat.D01234A2344
+import LocalWindowSat.D01234A2352
+import LocalWindowSat.D01234A2362
+import LocalWindowSat.D01234A2423
+import LocalWindowSat.D01234A2424
+import LocalWindowSat.D01234A2425
+import LocalWindowSat.D01234A2426
+import LocalWindowSat.D01234A2433
+import LocalWindowSat.D01234A2434
+import LocalWindowSat.D01234A2435
+import LocalWindowSat.D01234A2442
+import LocalWindowSat.D01234A2443
+import LocalWindowSat.D01234A2444
+import LocalWindowSat.D01234A2452
+import LocalWindowSat.D01234A2515
+import LocalWindowSat.D01234A2516
+import LocalWindowSat.D01234A2523
+import LocalWindowSat.D01234A2524
+import LocalWindowSat.D01234A2533
+import LocalWindowSat.D01234A2534
+import LocalWindowSat.D01234A3243
+import LocalWindowSat.D01234A3244
+import LocalWindowSat.D01234A3245
+import LocalWindowSat.D01234A3253
+import LocalWindowSat.D01234A3324
+import LocalWindowSat.D01234A3325
+import LocalWindowSat.D01234A3333
+import LocalWindowSat.D01234A3334
+import LocalWindowSat.D01234A3335
+import LocalWindowSat.D01234A3343
+import LocalWindowSat.D01234A3344
+import LocalWindowSat.D01234A3424
+import LocalWindowSat.D01234A3425
+import LocalWindowSat.D01234A3434
+import LocalWindowSat.D01234A3515
+import LocalWindowSat.D01234A3524
+import LocalWindowSat.D01234A4234
+import LocalWindowSat.D01234A4235
+import LocalWindowSat.D01234A4244
+import LocalWindowSat.D01234A4245
+import LocalWindowSat.D01234A4325
+import LocalWindowSat.D01234A4334
+import LocalWindowSat.D01234A4425
+import LocalWindowSat.D01234A4515
+import LocalWindowSat.D01234A5155
+import LocalWindowSat.D01234A5235
+import LocalWindowSat.D0123A141
+import LocalWindowSat.D0123A142
+import LocalWindowSat.D0123A143
+import LocalWindowSat.D0123A144
+import LocalWindowSat.D0123A145
+import LocalWindowSat.D0123A151
+import LocalWindowSat.D0123A222
+import LocalWindowSat.D0123A223
+import LocalWindowSat.D0123A224
+import LocalWindowSat.D0123A232
+import LocalWindowSat.D0123A323
+import LocalWindowSat.D0123A415
+import LocalWindowSat.D012A11
+import LocalWindowSat.D012A12
+import LocalWindowSat.D012A13
+
+/-!
+# The 175 five-centre certificates from their core refutations
+
+Generated by `milestones/10-window-aggregate/scripts/gen_lean_sat.py --set direction5`.
+Each module `LocalWindowSat.D…` proves that its UNSAT core follows from the snake
+axioms (`sat`).  Hence the 175 refutations `Unsat D….cnf` (listed in the order of
+`dirKeys5`) give `AllRefuted238`, the only hypothesis of `upper_238_of_refuted`.
+-/
+
+set_option maxRecDepth 100000
+
+namespace Snake9.LocalWindow
+
+/-- Refutations of the 175 five-centre cores, in the order of `dirKeys5`. -/
+def AllUnsat238 : Prop :=
+  Unsat D012A11.cnf ∧
+  Unsat D012A12.cnf ∧
+  Unsat D012A13.cnf ∧
+  Unsat D0120A141.cnf ∧
+  Unsat D0120A142.cnf ∧
+  Unsat D0120A143.cnf ∧
+  Unsat D0120A144.cnf ∧
+  Unsat D0120A145.cnf ∧
+  Unsat D0120A151.cnf ∧
+  Unsat D0120A152.cnf ∧
+  Unsat D0120A153.cnf ∧
+  Unsat D0120A154.cnf ∧
+  Unsat D0120A162.cnf ∧
+  Unsat D0120A222.cnf ∧
+  Unsat D0120A223.cnf ∧
+  Unsat D0120A224.cnf ∧
+  Unsat D0120A225.cnf ∧
+  Unsat D0120A232.cnf ∧
+  Unsat D0120A233.cnf ∧
+  Unsat D0120A234.cnf ∧
+  Unsat D0120A235.cnf ∧
+  Unsat D0120A242.cnf ∧
+  Unsat D0120A243.cnf ∧
+  Unsat D0120A244.cnf ∧
+  Unsat D0120A252.cnf ∧
+  Unsat D0120A253.cnf ∧
+  Unsat D0120A323.cnf ∧
+  Unsat D0120A324.cnf ∧
+  Unsat D0120A325.cnf ∧
+  Unsat D0120A333.cnf ∧
+  Unsat D0120A334.cnf ∧
+  Unsat D0120A343.cnf ∧
+  Unsat D0120A415.cnf ∧
+  Unsat D0120A424.cnf ∧
+  Unsat D0120A515.cnf ∧
+  Unsat D0123A141.cnf ∧
+  Unsat D0123A142.cnf ∧
+  Unsat D0123A143.cnf ∧
+  Unsat D0123A144.cnf ∧
+  Unsat D0123A145.cnf ∧
+  Unsat D0123A151.cnf ∧
+  Unsat D0123A222.cnf ∧
+  Unsat D0123A223.cnf ∧
+  Unsat D0123A224.cnf ∧
+  Unsat D0123A232.cnf ∧
+  Unsat D0123A323.cnf ∧
+  Unsat D0123A415.cnf ∧
+  Unsat D01203A2261.cnf ∧
+  Unsat D01203A2262.cnf ∧
+  Unsat D01203A2263.cnf ∧
+  Unsat D01203A2451.cnf ∧
+  Unsat D01203A2452.cnf ∧
+  Unsat D01203A2542.cnf ∧
+  Unsat D01203A2622.cnf ∧
+  Unsat D01203A3262.cnf ∧
+  Unsat D01203A3351.cnf ∧
+  Unsat D01203A3352.cnf ∧
+  Unsat D01203A3442.cnf ∧
+  Unsat D01203A3622.cnf ∧
+  Unsat D01203A4251.cnf ∧
+  Unsat D01203A4252.cnf ∧
+  Unsat D01203A4253.cnf ∧
+  Unsat D01203A4262.cnf ∧
+  Unsat D01203A4343.cnf ∧
+  Unsat D01203A4351.cnf ∧
+  Unsat D01203A4352.cnf ∧
+  Unsat D01203A4432.cnf ∧
+  Unsat D01203A4433.cnf ∧
+  Unsat D01203A4442.cnf ∧
+  Unsat D01203A4522.cnf ∧
+  Unsat D01203A5251.cnf ∧
+  Unsat D01203A5332.cnf ∧
+  Unsat D01203A5333.cnf ∧
+  Unsat D01203A6152.cnf ∧
+  Unsat D01203A6332.cnf ∧
+  Unsat D01230A1532.cnf ∧
+  Unsat D01230A1533.cnf ∧
+  Unsat D01230A1622.cnf ∧
+  Unsat D01230A2252.cnf ∧
+  Unsat D01230A2253.cnf ∧
+  Unsat D01230A2254.cnf ∧
+  Unsat D01230A2332.cnf ∧
+  Unsat D01230A2333.cnf ∧
+  Unsat D01230A2334.cnf ∧
+  Unsat D01230A2335.cnf ∧
+  Unsat D01230A2342.cnf ∧
+  Unsat D01230A2423.cnf ∧
+  Unsat D01230A2516.cnf ∧
+  Unsat D01230A2523.cnf ∧
+  Unsat D01230A3243.cnf ∧
+  Unsat D01234A1522.cnf ∧
+  Unsat D01234A1523.cnf ∧
+  Unsat D01234A1524.cnf ∧
+  Unsat D01234A1525.cnf ∧
+  Unsat D01234A1526.cnf ∧
+  Unsat D01234A1532.cnf ∧
+  Unsat D01234A1533.cnf ∧
+  Unsat D01234A1534.cnf ∧
+  Unsat D01234A1542.cnf ∧
+  Unsat D01234A1622.cnf ∧
+  Unsat D01234A2252.cnf ∧
+  Unsat D01234A2253.cnf ∧
+  Unsat D01234A2254.cnf ∧
+  Unsat D01234A2262.cnf ∧
+  Unsat D01234A2263.cnf ∧
+  Unsat D01234A2332.cnf ∧
+  Unsat D01234A2333.cnf ∧
+  Unsat D01234A2334.cnf ∧
+  Unsat D01234A2335.cnf ∧
+  Unsat D01234A2342.cnf ∧
+  Unsat D01234A2343.cnf ∧
+  Unsat D01234A2344.cnf ∧
+  Unsat D01234A2352.cnf ∧
+  Unsat D01234A2362.cnf ∧
+  Unsat D01234A2423.cnf ∧
+  Unsat D01234A2424.cnf ∧
+  Unsat D01234A2425.cnf ∧
+  Unsat D01234A2426.cnf ∧
+  Unsat D01234A2433.cnf ∧
+  Unsat D01234A2434.cnf ∧
+  Unsat D01234A2435.cnf ∧
+  Unsat D01234A2442.cnf ∧
+  Unsat D01234A2443.cnf ∧
+  Unsat D01234A2444.cnf ∧
+  Unsat D01234A2452.cnf ∧
+  Unsat D01234A2515.cnf ∧
+  Unsat D01234A2516.cnf ∧
+  Unsat D01234A2523.cnf ∧
+  Unsat D01234A2524.cnf ∧
+  Unsat D01234A2533.cnf ∧
+  Unsat D01234A2534.cnf ∧
+  Unsat D01234A3243.cnf ∧
+  Unsat D01234A3244.cnf ∧
+  Unsat D01234A3245.cnf ∧
+  Unsat D01234A3253.cnf ∧
+  Unsat D01234A3324.cnf ∧
+  Unsat D01234A3325.cnf ∧
+  Unsat D01234A3333.cnf ∧
+  Unsat D01234A3334.cnf ∧
+  Unsat D01234A3335.cnf ∧
+  Unsat D01234A3343.cnf ∧
+  Unsat D01234A3344.cnf ∧
+  Unsat D01234A3424.cnf ∧
+  Unsat D01234A3425.cnf ∧
+  Unsat D01234A3434.cnf ∧
+  Unsat D01234A3515.cnf ∧
+  Unsat D01234A3524.cnf ∧
+  Unsat D01234A4234.cnf ∧
+  Unsat D01234A4235.cnf ∧
+  Unsat D01234A4244.cnf ∧
+  Unsat D01234A4245.cnf ∧
+  Unsat D01234A4325.cnf ∧
+  Unsat D01234A4334.cnf ∧
+  Unsat D01234A4425.cnf ∧
+  Unsat D01234A4515.cnf ∧
+  Unsat D01234A5155.cnf ∧
+  Unsat D01234A5235.cnf ∧
+  Unsat D012301A22622.cnf ∧
+  Unsat D012301A23432.cnf ∧
+  Unsat D012301A23433.cnf ∧
+  Unsat D012304A15343.cnf ∧
+  Unsat D012304A22623.cnf ∧
+  Unsat D012304A22624.cnf ∧
+  Unsat D012304A22633.cnf ∧
+  Unsat D012304A23443.cnf ∧
+  Unsat D012304A26233.cnf ∧
+  Unsat D012304A26234.cnf ∧
+  Unsat D012304A26235.cnf ∧
+  Unsat D012304A26243.cnf ∧
+  Unsat D012304A26244.cnf ∧
+  Unsat D012304A26324.cnf ∧
+  Unsat D012304A26325.cnf ∧
+  Unsat D012304A26332.cnf ∧
+  Unsat D012304A26333.cnf ∧
+  Unsat D012304A34344.cnf
+
+theorem allRefuted238_of_unsat (h : AllUnsat238) : AllRefuted238 := by
+  obtain ⟨h0, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h20, h21, h22, h23, h24, h25, h26, h27, h28, h29, h30, h31, h32, h33, h34, h35, h36, h37, h38, h39, h40, h41, h42, h43, h44, h45, h46, h47, h48, h49, h50, h51, h52, h53, h54, h55, h56, h57, h58, h59, h60, h61, h62, h63, h64, h65, h66, h67, h68, h69, h70, h71, h72, h73, h74, h75, h76, h77, h78, h79, h80, h81, h82, h83, h84, h85, h86, h87, h88, h89, h90, h91, h92, h93, h94, h95, h96, h97, h98, h99, h100, h101, h102, h103, h104, h105, h106, h107, h108, h109, h110, h111, h112, h113, h114, h115, h116, h117, h118, h119, h120, h121, h122, h123, h124, h125, h126, h127, h128, h129, h130, h131, h132, h133, h134, h135, h136, h137, h138, h139, h140, h141, h142, h143, h144, h145, h146, h147, h148, h149, h150, h151, h152, h153, h154, h155, h156, h157, h158, h159, h160, h161, h162, h163, h164, h165, h166, h167, h168, h169, h170, h171, h172, h173, h174⟩ := h
+  exact
+    (And.intro (Tags.refuted_of_sat D012A11.sat h0)
+    (And.intro (Tags.refuted_of_sat D012A12.sat h1)
+    (And.intro (Tags.refuted_of_sat D012A13.sat h2)
+    (And.intro (Tags.refuted_of_sat D0120A141.sat h3)
+    (And.intro (Tags.refuted_of_sat D0120A142.sat h4)
+    (And.intro (Tags.refuted_of_sat D0120A143.sat h5)
+    (And.intro (Tags.refuted_of_sat D0120A144.sat h6)
+    (And.intro (Tags.refuted_of_sat D0120A145.sat h7)
+    (And.intro (Tags.refuted_of_sat D0120A151.sat h8)
+    (And.intro (Tags.refuted_of_sat D0120A152.sat h9)
+    (And.intro (Tags.refuted_of_sat D0120A153.sat h10)
+    (And.intro (Tags.refuted_of_sat D0120A154.sat h11)
+    (And.intro (Tags.refuted_of_sat D0120A162.sat h12)
+    (And.intro (Tags.refuted_of_sat D0120A222.sat h13)
+    (And.intro (Tags.refuted_of_sat D0120A223.sat h14)
+    (And.intro (Tags.refuted_of_sat D0120A224.sat h15)
+    (And.intro (Tags.refuted_of_sat D0120A225.sat h16)
+    (And.intro (Tags.refuted_of_sat D0120A232.sat h17)
+    (And.intro (Tags.refuted_of_sat D0120A233.sat h18)
+    (And.intro (Tags.refuted_of_sat D0120A234.sat h19)
+    (And.intro (Tags.refuted_of_sat D0120A235.sat h20)
+    (And.intro (Tags.refuted_of_sat D0120A242.sat h21)
+    (And.intro (Tags.refuted_of_sat D0120A243.sat h22)
+    (And.intro (Tags.refuted_of_sat D0120A244.sat h23)
+    (And.intro (Tags.refuted_of_sat D0120A252.sat h24)
+    (And.intro (Tags.refuted_of_sat D0120A253.sat h25)
+    (And.intro (Tags.refuted_of_sat D0120A323.sat h26)
+    (And.intro (Tags.refuted_of_sat D0120A324.sat h27)
+    (And.intro (Tags.refuted_of_sat D0120A325.sat h28)
+    (And.intro (Tags.refuted_of_sat D0120A333.sat h29)
+    (And.intro (Tags.refuted_of_sat D0120A334.sat h30)
+    (And.intro (Tags.refuted_of_sat D0120A343.sat h31)
+    (And.intro (Tags.refuted_of_sat D0120A415.sat h32)
+    (And.intro (Tags.refuted_of_sat D0120A424.sat h33)
+    (And.intro (Tags.refuted_of_sat D0120A515.sat h34)
+    (And.intro (Tags.refuted_of_sat D0123A141.sat h35)
+    (And.intro (Tags.refuted_of_sat D0123A142.sat h36)
+    (And.intro (Tags.refuted_of_sat D0123A143.sat h37)
+    (And.intro (Tags.refuted_of_sat D0123A144.sat h38)
+    (And.intro (Tags.refuted_of_sat D0123A145.sat h39)
+    (And.intro (Tags.refuted_of_sat D0123A151.sat h40)
+    (And.intro (Tags.refuted_of_sat D0123A222.sat h41)
+    (And.intro (Tags.refuted_of_sat D0123A223.sat h42)
+    (And.intro (Tags.refuted_of_sat D0123A224.sat h43)
+    (And.intro (Tags.refuted_of_sat D0123A232.sat h44)
+    (And.intro (Tags.refuted_of_sat D0123A323.sat h45)
+    (And.intro (Tags.refuted_of_sat D0123A415.sat h46)
+    (And.intro (Tags.refuted_of_sat D01203A2261.sat h47)
+    (And.intro (Tags.refuted_of_sat D01203A2262.sat h48)
+    (And.intro (Tags.refuted_of_sat D01203A2263.sat h49)
+    (And.intro (Tags.refuted_of_sat D01203A2451.sat h50)
+    (And.intro (Tags.refuted_of_sat D01203A2452.sat h51)
+    (And.intro (Tags.refuted_of_sat D01203A2542.sat h52)
+    (And.intro (Tags.refuted_of_sat D01203A2622.sat h53)
+    (And.intro (Tags.refuted_of_sat D01203A3262.sat h54)
+    (And.intro (Tags.refuted_of_sat D01203A3351.sat h55)
+    (And.intro (Tags.refuted_of_sat D01203A3352.sat h56)
+    (And.intro (Tags.refuted_of_sat D01203A3442.sat h57)
+    (And.intro (Tags.refuted_of_sat D01203A3622.sat h58)
+    (And.intro (Tags.refuted_of_sat D01203A4251.sat h59)
+    (And.intro (Tags.refuted_of_sat D01203A4252.sat h60)
+    (And.intro (Tags.refuted_of_sat D01203A4253.sat h61)
+    (And.intro (Tags.refuted_of_sat D01203A4262.sat h62)
+    (And.intro (Tags.refuted_of_sat D01203A4343.sat h63)
+    (And.intro (Tags.refuted_of_sat D01203A4351.sat h64)
+    (And.intro (Tags.refuted_of_sat D01203A4352.sat h65)
+    (And.intro (Tags.refuted_of_sat D01203A4432.sat h66)
+    (And.intro (Tags.refuted_of_sat D01203A4433.sat h67)
+    (And.intro (Tags.refuted_of_sat D01203A4442.sat h68)
+    (And.intro (Tags.refuted_of_sat D01203A4522.sat h69)
+    (And.intro (Tags.refuted_of_sat D01203A5251.sat h70)
+    (And.intro (Tags.refuted_of_sat D01203A5332.sat h71)
+    (And.intro (Tags.refuted_of_sat D01203A5333.sat h72)
+    (And.intro (Tags.refuted_of_sat D01203A6152.sat h73)
+    (And.intro (Tags.refuted_of_sat D01203A6332.sat h74)
+    (And.intro (Tags.refuted_of_sat D01230A1532.sat h75)
+    (And.intro (Tags.refuted_of_sat D01230A1533.sat h76)
+    (And.intro (Tags.refuted_of_sat D01230A1622.sat h77)
+    (And.intro (Tags.refuted_of_sat D01230A2252.sat h78)
+    (And.intro (Tags.refuted_of_sat D01230A2253.sat h79)
+    (And.intro (Tags.refuted_of_sat D01230A2254.sat h80)
+    (And.intro (Tags.refuted_of_sat D01230A2332.sat h81)
+    (And.intro (Tags.refuted_of_sat D01230A2333.sat h82)
+    (And.intro (Tags.refuted_of_sat D01230A2334.sat h83)
+    (And.intro (Tags.refuted_of_sat D01230A2335.sat h84)
+    (And.intro (Tags.refuted_of_sat D01230A2342.sat h85)
+    (And.intro (Tags.refuted_of_sat D01230A2423.sat h86)
+    (And.intro (Tags.refuted_of_sat D01230A2516.sat h87)
+    (And.intro (Tags.refuted_of_sat D01230A2523.sat h88)
+    (And.intro (Tags.refuted_of_sat D01230A3243.sat h89)
+    (And.intro (Tags.refuted_of_sat D01234A1522.sat h90)
+    (And.intro (Tags.refuted_of_sat D01234A1523.sat h91)
+    (And.intro (Tags.refuted_of_sat D01234A1524.sat h92)
+    (And.intro (Tags.refuted_of_sat D01234A1525.sat h93)
+    (And.intro (Tags.refuted_of_sat D01234A1526.sat h94)
+    (And.intro (Tags.refuted_of_sat D01234A1532.sat h95)
+    (And.intro (Tags.refuted_of_sat D01234A1533.sat h96)
+    (And.intro (Tags.refuted_of_sat D01234A1534.sat h97)
+    (And.intro (Tags.refuted_of_sat D01234A1542.sat h98)
+    (And.intro (Tags.refuted_of_sat D01234A1622.sat h99)
+    (And.intro (Tags.refuted_of_sat D01234A2252.sat h100)
+    (And.intro (Tags.refuted_of_sat D01234A2253.sat h101)
+    (And.intro (Tags.refuted_of_sat D01234A2254.sat h102)
+    (And.intro (Tags.refuted_of_sat D01234A2262.sat h103)
+    (And.intro (Tags.refuted_of_sat D01234A2263.sat h104)
+    (And.intro (Tags.refuted_of_sat D01234A2332.sat h105)
+    (And.intro (Tags.refuted_of_sat D01234A2333.sat h106)
+    (And.intro (Tags.refuted_of_sat D01234A2334.sat h107)
+    (And.intro (Tags.refuted_of_sat D01234A2335.sat h108)
+    (And.intro (Tags.refuted_of_sat D01234A2342.sat h109)
+    (And.intro (Tags.refuted_of_sat D01234A2343.sat h110)
+    (And.intro (Tags.refuted_of_sat D01234A2344.sat h111)
+    (And.intro (Tags.refuted_of_sat D01234A2352.sat h112)
+    (And.intro (Tags.refuted_of_sat D01234A2362.sat h113)
+    (And.intro (Tags.refuted_of_sat D01234A2423.sat h114)
+    (And.intro (Tags.refuted_of_sat D01234A2424.sat h115)
+    (And.intro (Tags.refuted_of_sat D01234A2425.sat h116)
+    (And.intro (Tags.refuted_of_sat D01234A2426.sat h117)
+    (And.intro (Tags.refuted_of_sat D01234A2433.sat h118)
+    (And.intro (Tags.refuted_of_sat D01234A2434.sat h119)
+    (And.intro (Tags.refuted_of_sat D01234A2435.sat h120)
+    (And.intro (Tags.refuted_of_sat D01234A2442.sat h121)
+    (And.intro (Tags.refuted_of_sat D01234A2443.sat h122)
+    (And.intro (Tags.refuted_of_sat D01234A2444.sat h123)
+    (And.intro (Tags.refuted_of_sat D01234A2452.sat h124)
+    (And.intro (Tags.refuted_of_sat D01234A2515.sat h125)
+    (And.intro (Tags.refuted_of_sat D01234A2516.sat h126)
+    (And.intro (Tags.refuted_of_sat D01234A2523.sat h127)
+    (And.intro (Tags.refuted_of_sat D01234A2524.sat h128)
+    (And.intro (Tags.refuted_of_sat D01234A2533.sat h129)
+    (And.intro (Tags.refuted_of_sat D01234A2534.sat h130)
+    (And.intro (Tags.refuted_of_sat D01234A3243.sat h131)
+    (And.intro (Tags.refuted_of_sat D01234A3244.sat h132)
+    (And.intro (Tags.refuted_of_sat D01234A3245.sat h133)
+    (And.intro (Tags.refuted_of_sat D01234A3253.sat h134)
+    (And.intro (Tags.refuted_of_sat D01234A3324.sat h135)
+    (And.intro (Tags.refuted_of_sat D01234A3325.sat h136)
+    (And.intro (Tags.refuted_of_sat D01234A3333.sat h137)
+    (And.intro (Tags.refuted_of_sat D01234A3334.sat h138)
+    (And.intro (Tags.refuted_of_sat D01234A3335.sat h139)
+    (And.intro (Tags.refuted_of_sat D01234A3343.sat h140)
+    (And.intro (Tags.refuted_of_sat D01234A3344.sat h141)
+    (And.intro (Tags.refuted_of_sat D01234A3424.sat h142)
+    (And.intro (Tags.refuted_of_sat D01234A3425.sat h143)
+    (And.intro (Tags.refuted_of_sat D01234A3434.sat h144)
+    (And.intro (Tags.refuted_of_sat D01234A3515.sat h145)
+    (And.intro (Tags.refuted_of_sat D01234A3524.sat h146)
+    (And.intro (Tags.refuted_of_sat D01234A4234.sat h147)
+    (And.intro (Tags.refuted_of_sat D01234A4235.sat h148)
+    (And.intro (Tags.refuted_of_sat D01234A4244.sat h149)
+    (And.intro (Tags.refuted_of_sat D01234A4245.sat h150)
+    (And.intro (Tags.refuted_of_sat D01234A4325.sat h151)
+    (And.intro (Tags.refuted_of_sat D01234A4334.sat h152)
+    (And.intro (Tags.refuted_of_sat D01234A4425.sat h153)
+    (And.intro (Tags.refuted_of_sat D01234A4515.sat h154)
+    (And.intro (Tags.refuted_of_sat D01234A5155.sat h155)
+    (And.intro (Tags.refuted_of_sat D01234A5235.sat h156)
+    (And.intro (Tags.refuted_of_sat D012301A22622.sat h157)
+    (And.intro (Tags.refuted_of_sat D012301A23432.sat h158)
+    (And.intro (Tags.refuted_of_sat D012301A23433.sat h159)
+    (And.intro (Tags.refuted_of_sat D012304A15343.sat h160)
+    (And.intro (Tags.refuted_of_sat D012304A22623.sat h161)
+    (And.intro (Tags.refuted_of_sat D012304A22624.sat h162)
+    (And.intro (Tags.refuted_of_sat D012304A22633.sat h163)
+    (And.intro (Tags.refuted_of_sat D012304A23443.sat h164)
+    (And.intro (Tags.refuted_of_sat D012304A26233.sat h165)
+    (And.intro (Tags.refuted_of_sat D012304A26234.sat h166)
+    (And.intro (Tags.refuted_of_sat D012304A26235.sat h167)
+    (And.intro (Tags.refuted_of_sat D012304A26243.sat h168)
+    (And.intro (Tags.refuted_of_sat D012304A26244.sat h169)
+    (And.intro (Tags.refuted_of_sat D012304A26324.sat h170)
+    (And.intro (Tags.refuted_of_sat D012304A26325.sat h171)
+    (And.intro (Tags.refuted_of_sat D012304A26332.sat h172)
+    (And.intro (Tags.refuted_of_sat D012304A26333.sat h173)
+    (And.intro (Tags.refuted_of_sat D012304A34344.sat h174) trivial)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+end Snake9.LocalWindow
