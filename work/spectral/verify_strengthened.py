@@ -166,11 +166,27 @@ def main():
         shutil.copy2(source, target)
         assert hashlib.sha256(target.read_bytes()).hexdigest() == source_hash
 
+    def imported_objects(source):
+        """Objects of the modules `source` imports that this build produces (the build directory
+        or the core project); mathlib is pinned and not tracked."""
+        objects = []
+        for name in re.findall(r"^import\s+(\S+)", source.read_text(encoding="utf-8"), re.M):
+            rel = name.replace(".", "/") + ".olean"
+            for candidate in (build / rel, core / ".lake/build/lib/lean" / rel):
+                if candidate.exists():
+                    objects.append(candidate)
+                    break
+        return objects
+
     def cached(label, source, target):
+        # an object is reused only if it is newer than its source AND than every object it
+        # imports: a rebuilt dependency (whose definitions may have changed) forces a rebuild,
+        # and modules are checked in dependency order, so this propagates transitively
         marker = logs / (label + ".ok")
         return (args.build_dir is not None and marker.exists() and target.exists()
                 and target.stat().st_mtime >= source.stat().st_mtime
-                and marker.stat().st_mtime >= source.stat().st_mtime)
+                and marker.stat().st_mtime >= source.stat().st_mtime
+                and all(target.stat().st_mtime >= dep.stat().st_mtime for dep in imported_objects(source)))
 
     def run(label, command, cwd, env=None):
         print(f"Checking {label} ...", flush=True)
