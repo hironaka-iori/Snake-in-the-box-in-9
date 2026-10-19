@@ -56,7 +56,7 @@ if [ -f $D/minimal_L7_k6_K7_r3.json ] && ! grep -q "failed 0" $D/certify_directi
 fi
 
 # 7. independent judge of the cap-7 certificates (resumable through the same progress file)
-if [ -f $D/pipeline_c7_certified ] && [ ! -f $D/judge_direction_k6c7.json ] && ! running "judge.py --index"; then
+if [ -f $D/pipeline_c7_certified ] && [ ! -f $D/judge_direction_k6c7.json ] && [ ! -f $D/judge_paused ] && ! running "judge.py --index"; then
   log "starting cap-7 judge"
   (cd $S && nohup nice -n 5 python3 judge.py --index ../data/direction_certificates_k6.json --workers 2 \
      --out ../data/judge_direction_k6c7.json >> ../data/judge_direction_k6c7.log 2>&1 &)
