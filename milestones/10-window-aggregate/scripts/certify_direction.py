@@ -26,7 +26,7 @@ def one(arg):
     """One window.  The proof-logging solver decides the window directly; most windows need no
     cycle cut, and then this single solve also gives the proof (the earlier version always solved
     twice).  Windows that needed cuts are proved again from cold on the final clause set."""
-    dirs, alpha, radius, drat = arg
+    dirs, alpha, radius, drat, keep = arg
     t = time.time()
     al = [lo if lo == hi else (lo, hi) for lo, hi in alpha]
     enc = Encoding(window_from_dirs(dirs), al, radius)
@@ -62,8 +62,9 @@ def one(arg):
         for f in (cnf, prf):
             data = open(f, 'rb').read()
             shas[os.path.splitext(f)[1][1:]] = hashlib.sha256(data).hexdigest()
-            with gzip.GzipFile(os.path.join(OUT, os.path.basename(f) + '.gz'), 'wb', mtime=0) as g:
-                g.write(data)
+            if keep:
+                with gzip.GzipFile(os.path.join(OUT, os.path.basename(f) + '.gz'), 'wb', mtime=0) as g:
+                    g.write(data)
     return {'case': tag, 'dirs': dirs, 'alpha': alpha, 'radius': radius, 'endpoint_budget': 2,
             'variables': enc.nv, 'clauses': len(enc.clauses), 'cycle_cuts': cuts,
             'proof_lines': len(proof), 'drat_trim_verified': ok, 'cnf_sha256': shas['cnf'],
@@ -76,11 +77,14 @@ def main():
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--workers', type=int, default=4)
     ap.add_argument('--out', default=os.path.join(HERE, '..', 'data', 'direction_certificates.json'))
+    ap.add_argument('--keep-files', action='store_true',
+                    help='store the gzipped CNF and proof of every window (the index keeps their SHA-256 either way; '
+                         'thousands of cap-7 proofs take tens of GB and are regenerated deterministically)')
     a = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
     drat = ensure_drat()
     spec = json.load(open(a.set))
-    jobs = [(e['dirs'], [tuple(r) for r in e['alpha']], a.radius, drat) for e in spec['exclusions']]
+    jobs = [(e['dirs'], [tuple(r) for r in e['alpha']], a.radius, drat, a.keep_files) for e in spec['exclusions']]
     # largest windows first for better load balance
     jobs.sort(key=lambda j: -len(j[0]))
     done = {}
