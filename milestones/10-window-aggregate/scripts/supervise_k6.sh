@@ -47,4 +47,12 @@ if [ ! -f $D/refine_omega_L7_k5_K8_r3.json ] && [ ! -f $D/omega_paused ] && ! ru
      >> data/refine_omega_L7_k5_K8_r3.log 2>&1 &)
 fi
 
+# 6. DRAT certification of the cap-7 minimal set (resumable from the index)
+if [ -f $D/minimal_L7_k6_K7_r3.json ] && ! grep -q "failed 0" $D/certify_direction_k6c7.log 2>/dev/null \
+   && ! running "certify_direction.py"; then
+  log "starting cap-7 certification"
+  (cd $S && nohup python3 certify_direction.py --set ../data/minimal_L7_k6_K7_r3.json --workers 4 \
+     --out ../data/direction_certificates_k6.json >> ../data/certify_direction_k6c7.log 2>&1 &)
+fi
+
 log "supervisor pass done"
