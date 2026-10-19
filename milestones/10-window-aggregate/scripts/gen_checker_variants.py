@@ -6,6 +6,7 @@ words and the literal offset OFF = 2400 (variable v is bit v, its negation bit v
 The variants are the same files with those constants replaced:
 
   LratCheck14 / LratFast14        14-bit words (clause keys up to 16383)
+  LratFast15                      15-bit words (clause keys up to 32767)
   LratCheckO3k / LratFastO3k      OFF = 3000, for CNFs with more than 2399 variables
   LratFastO3k14, LratFastO3k15    OFF = 3000 with 14- or 15-bit words
   LratCheckO4k, LratFastO4k{,14,15}  OFF = 4000 (radius-4 five-centre CNFs)
@@ -58,7 +59,7 @@ def main():
     assert '4800' not in base and '4800' not in fast
     # (bits, off) -> names
     bases = {2400: ('LratCheck', 'Lrat'), 3000: ('LratCheckO3k', 'LratO3k'), 4000: ('LratCheckO4k', 'LratO4k')}
-    todo = [(13, 3000), (14, 2400), (14, 3000), (15, 3000), (13, 4000), (14, 4000), (15, 4000)]
+    todo = [(13, 3000), (14, 2400), (15, 2400), (14, 3000), (15, 3000), (13, 4000), (14, 4000), (15, 4000)]
     for off, (mod, ns) in bases.items():
         if off == 2400:
             continue
