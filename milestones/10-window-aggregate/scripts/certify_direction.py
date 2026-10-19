@@ -77,10 +77,13 @@ def main():
         for rec in p.imap_unordered(one, todo):
             print(rec.get('case', rec['dirs']), rec['drat_trim_verified'], rec.get('seconds'), flush=True)
             results.append(rec)
-            json.dump({'scope': 'DRAT-checked UNSAT of explicit local CNFs (radius-three ball model); '
-                                'not Lean-checked.', 'source_set': os.path.basename(a.set),
-                       'drat_trim_source_sha256': DRAT_SOURCE_SHA256, 'cases': results},
-                      open(a.out, 'w'), indent=1)
+            # atomic replace: a machine restart during the write must not truncate the index
+            tmp = a.out + '.tmp'
+            with open(tmp, 'w') as f:
+                json.dump({'scope': 'DRAT-checked UNSAT of explicit local CNFs (radius-three ball model); '
+                                    'not Lean-checked.', 'source_set': os.path.basename(a.set),
+                           'drat_trim_source_sha256': DRAT_SOURCE_SHA256, 'cases': results}, f, indent=1)
+            os.replace(tmp, a.out)
     bad = [r for r in results if not r['drat_trim_verified']]
     print('verified', len(results) - len(bad), 'failed', len(bad))
 
