@@ -101,6 +101,8 @@ def main():
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows never to keep (expensive certificates)')
     ap.add_argument('--tag', default='')
+    ap.add_argument('--lam', help='keep only what a potential at this mean p/q needs (<= the minimum mean); '
+                                  'a smaller mean with a small denominator gives a smaller set and potential range')
     a = ap.parse_args()
     A = FastAutomaton(a.L, a.k, a.K)
     O = Oracle(a.radius)
@@ -115,7 +117,13 @@ def main():
     U, V, W = Bk.edges()
     m = prune(A.n, U, V); idx = np.nonzero(m)[0]
     mu, cyc = min_cycle(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
-    lam = Fr(int(W[cyc].sum()), len(cyc)); p, q = lam.numerator, lam.denominator
+    lam = Fr(int(W[cyc].sum()), len(cyc))
+    if a.lam:
+        target = Fr(a.lam)
+        assert target <= lam, (target, lam)
+        print('full set: minimum mean', lam, '; minimising for', target, flush=True)
+        lam = target
+    p, q = lam.numerator, lam.denominator
     pi = bellman_ford(A.n, U, V, W, p, q); assert pi is not None
     print('full set: mean', lam, 'range', int(pi.max() - pi.min()), flush=True)
     order = sorted(keep, key=lambda x: (-len(x[1]), -len(set(x[0]))))     # drop long windows first
@@ -132,7 +140,7 @@ def main():
             break
     m = prune(A.n, U, V); idx = np.nonzero(m)[0]
     mu, cyc = min_cycle(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
-    lam2 = Fr(int(W[cyc].sum()), len(cyc)); assert lam2 == lam, (lam, lam2)
+    lam2 = Fr(int(W[cyc].sum()), len(cyc)); assert lam2 >= lam, (lam, lam2)
     vb = vertex_bound(A, U, V, W)
     R = int(pi.max() - pi.min()); L = a.L
     C = p * L - q * (L - 1) + R

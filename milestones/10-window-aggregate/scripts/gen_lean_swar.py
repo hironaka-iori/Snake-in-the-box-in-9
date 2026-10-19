@@ -48,6 +48,7 @@ def main():
     ap.add_argument('--k', type=int, required=True)
     ap.add_argument('--radius', type=int, default=3)
     ap.add_argument('--K', type=int, default=5, help='lump cap: symbols 1..K+1 (K+1 = count >= K+1)')
+    ap.add_argument('--lam', help='prove the bound with this mean p/q (<= the minimum mean) instead of the minimum')
     a = ap.parse_args()
     L, k, K = a.L, a.k, a.K
     assert k >= 4, 'the SWAR block holds three symbols; use k >= 4'
@@ -80,12 +81,17 @@ def main():
     m = prune(A.n, U, V); idx = np.nonzero(m)[0]
     from howard_fast import min_cycle
     mu, cyc = min_cycle(A.n, U[idx], V[idx], W[idx]); cyc = [idx[e] for e in cyc]
-    lam = Fr(int(W[cyc].sum()), len(cyc)); P, Q = lam.numerator, lam.denominator
+    lam = Fr(int(W[cyc].sum()), len(cyc))
+    if a.lam:
+        assert Fr(a.lam) <= lam, (a.lam, lam)
+        lam = Fr(a.lam)
+    P, Q = lam.numerator, lam.denominator
     pi = bellman_ford(A.n, U, V, W, P, Q)
     assert pi is not None
     pi = pi - pi.min()
     R = int(pi.max())
-    assert R <= 15 and P + R <= 128 and NS * Q + R < 128, (P, Q, R)
+    # 8-bit fields: next-state field P + pot <= 128, current-state field Q * s + pot < 128
+    assert P + R <= 128 and NS * Q + R < 128, ('fields do not fit 8 bits; try --lam with a smaller denominator', P, Q, R)
     vb = vertex_bound(A, U, V, W)
     C = P * L - Q * (L - 1) + R
     B = (9179 * Q + C - 8 * Q) // (P + 35 * Q)
