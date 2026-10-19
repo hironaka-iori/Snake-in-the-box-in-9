@@ -234,6 +234,28 @@ def vertex_bound(A, U, V, W, vmax=260):
     return best
 
 
+def greedy_break(oracle, cyc_wins, workers, timeout):
+    """Query windows until every cycle contains an excluded window.  Each step asks, in parallel,
+    the windows shared by the most still-unbroken cycles (fewer centres first on ties)."""
+    asked = 0
+    chunk = 4 * workers
+    while True:
+        alive = [i for i, cw in enumerate(cyc_wins) if not any(oracle.status(x) == 'UNSAT' for x in cw)]
+        if not alive:
+            print(f'  greedy: {asked} queries broke all {len(cyc_wins)} cycles', flush=True)
+            return asked
+        count = {}
+        for i in alive:
+            for x in cyc_wins[i]:
+                if oracle.status(x) is None:
+                    count[x] = count.get(x, 0) + 1
+        if not count:
+            print(f'  greedy: {asked} queries, {len(alive)} of {len(cyc_wins)} cycles locally feasible', flush=True)
+            return asked
+        pick = sorted(count, key=lambda x: (-count[x], len(x[1])))[:chunk]
+        asked += oracle.query(pick, workers, timeout, verbose=False)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--L', type=int, default=7)
@@ -251,6 +273,9 @@ def main():
     ap.add_argument('--cycle-budget', type=float, default=120.0,
                     help='seconds per round for extracting extra cycles (C Howard, delete-and-resolve)')
     ap.add_argument('--python-howard', action='store_true', help='use the pure-Python Howard (slow, one policy graph)')
+    ap.add_argument('--greedy', action='store_true',
+                    help='query only until every extracted cycle has an excluded window: windows shared by the most '
+                         'unbroken cycles first, in parallel chunks')
     a = ap.parse_args()
     if a.index:
         cases = [c for c in json.load(open(a.index))['cases'] if c['drat_trim_verified']]
@@ -303,14 +328,21 @@ def main():
         cyc = [idx[e] for e in cyc]
         exact = Fr(int(W[cyc].sum()), len(cyc))
         wins = []
+        cyc_wins = []
         for cyc2 in [cyc] + batch:
+            cw = []
             for e in cyc2:
                 e = idx[e] if cyc2 is not cyc else e
                 ds, al = A.decode(U[e], EXT[e], W[e])
                 for cc in range(2, a.k + 1):
-                    wins.append(A.window_key(tuple(ds[-(cc + 1):]), tuple(al[-cc:])))
+                    cw.append(A.window_key(tuple(ds[-(cc + 1):]), tuple(al[-cc:])))
+            cyc_wins.append(set(cw))
+            wins.extend(cw)
         wins = list(dict.fromkeys(wins))
-        newq = oracle.query(wins, a.workers, a.query_timeout)
+        if a.greedy:
+            newq = greedy_break(oracle, cyc_wins, a.workers, a.query_timeout)
+        else:
+            newq = oracle.query(wins, a.workers, a.query_timeout)
         unsat = [x for x in wins if oracle.status(x) == 'UNSAT']
         print(f'round {rnd}: edges {len(idx)} mean {exact} ({mu:.4f}) cycle {[int(x) for x in W[cyc]]} '
               f'extra-cycles {len(batch)} queried {newq} unsat-on-cycle {len(unsat)} [{time.time()-t:.0f}s]', flush=True)

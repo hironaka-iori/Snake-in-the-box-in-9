@@ -82,11 +82,12 @@ class Oracle:
     def status(self, k):
         return self.known.get(k)
 
-    def query(self, keys, workers=4, timeout=None):
+    def query(self, keys, workers=4, timeout=None, verbose=True):
         keys = [k for k in set(keys) if k not in self.known]
         if not keys:
             return 0
-        print(f'  querying {len(keys)} windows', flush=True)
+        if verbose:
+            print(f'  querying {len(keys)} windows', flush=True)
         # each answer is appended to the cache as soon as it arrives, so an interrupted batch
         # (the cloud machine restarts) keeps everything already decided
         with open(CACHE, 'a', buffering=1) as f:
