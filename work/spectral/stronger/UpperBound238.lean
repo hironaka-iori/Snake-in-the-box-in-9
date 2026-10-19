@@ -4,7 +4,7 @@ import LocalWindowDirUnsat5
 /-!
 # Unconditional bound 238
 
-The premise of `upper_238_of_refuted` is discharged by the 325 kernel-checked
+The premise of `upper_238_of_refuted` is discharged by the 175 kernel-checked
 five-centre window refutations (`allRefuted238`).
 -/
 

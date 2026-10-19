@@ -283,7 +283,7 @@ DCORE5 = os.path.join(HERE, '..', 'data', 'lean_core_direction5')
 
 # per certificate set: keys module, key list, number of keys, aggregate module, premise, bound
 DIR_SETS = {'direction': ('LocalWindowDirKeys', 'dirKeys', 145, 'LocalWindowDirSat', 'AllRefuted239', 239),
-            'direction5': ('LocalWindowDirKeys5', 'dirKeys5', 325, 'LocalWindowDirSat5', 'AllRefuted238', 238),
+            'direction5': ('LocalWindowDirKeys5', 'dirKeys5', None, 'LocalWindowDirSat5', 'AllRefuted238', 238),
             'r4': ('LocalWindowDirKeysR4', 'dirKeysR4', None, 'LocalWindowDirSatR4', 'AllRefuted236', 236)}
 DIR_DIRS = {'direction': (DCERTS, DCORE), 'direction5': (DCERTS, DCORE5),
             'r4': (os.path.join(HERE, '..', 'certificates', 'direction_r4'),
@@ -379,8 +379,12 @@ def main():
     ap.add_argument('names', nargs='*')
     a = ap.parse_args()
     certs, core_dir = (CERTS, CORE) if a.set == 'window' else DIR_DIRS[a.set]
-    names = a.names or sorted(f[:-5] for f in os.listdir(core_dir)
-                              if f.endswith('.json') and not f.startswith('_'))
+    if a.names:
+        names = a.names
+    elif a.set in ('direction5', 'r4'):   # the set is the summary (possibly a subset of the cores)
+        names = sorted(json.load(open(os.path.join(core_dir, '_summary.json')))['per_case'])
+    else:
+        names = sorted(f[:-5] for f in os.listdir(core_dir) if f.endswith('.json') and not f.startswith('_'))
     mods = []
     for name in names:
         module, ncore, fam, ncuts = process(name, not a.check, certs, core_dir)

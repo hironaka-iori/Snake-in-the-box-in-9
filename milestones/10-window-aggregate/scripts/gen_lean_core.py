@@ -258,12 +258,12 @@ DCORE5 = os.path.join(DATA, 'lean_core_direction5')
 CADICAL_SETS = {
     'direction5': dict(index='direction_certificates_k5.json', certs=DCERTS, core=DCORE5, prefix='D',
                        keys_mod='LocalWindowDirKeys5', keys='dirKeys5', premise='AllRefuted238', bound=238,
-                       reuse='direction_certificates.json', title='The 325 five-centre window certificates',
+                       reuse='direction_certificates.json', title='The {n} five-centre window certificates',
                        radius=3),
     'r4': dict(index='direction_certificates_r4.json', certs=os.path.join(CERTS, 'direction_r4'),
                core=os.path.join(DATA, 'lean_core_direction_r4'), prefix='R',
                keys_mod='LocalWindowDirKeysR4', keys='dirKeysR4', premise='AllRefuted236', bound=236,
-               reuse=None, title='The radius-4 five-centre window certificates', radius=4),
+               reuse=None, title='The {n} radius-4 five-centre window certificates', radius=4),
 }
 
 
@@ -425,7 +425,10 @@ def dir5_one(arg):
 
 
 def main_direction5(a):
-    S = CADICAL_SETS[a.set]
+    S = dict(CADICAL_SETS[a.set])
+    if a.index:
+        S['index'] = os.path.relpath(os.path.abspath(a.index), os.path.abspath(DATA))
+    CADICAL_SETS[a.set] = S
     os.makedirs(S['core'], exist_ok=True)
     cases = [c for c in json.load(open(os.path.join(DATA, S['index'])))['cases'] if c['drat_trim_verified']]
     n = len(cases)
@@ -444,7 +447,7 @@ def main_direction5(a):
                         len(meta['core_ids']), meta['cnf_clauses'], meta['hash_source'], meta['lrat']))
         else:
             jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1)), a.set))
-    if a.set == 'direction5':
+    if a.set == 'direction5' and not a.index:
         assert n == 325 and len(res) == 145 and len(jobs) == 180, (n, len(res), len(jobs))
     print(f'{a.set}: {n} cases, {len(res)} reused, {len(jobs)} to core', flush=True)
     with Pool(a.jobs) as p:
@@ -462,7 +465,8 @@ def main_direction5(a):
     print('total', tot)
     body = ',\n  '.join(f'({d}, {s})' for d, s in keys)
     src = KEYS_TEMPLATE.format(body=body)
-    src = (src.replace('# The 145 direction-aware window certificates', '# ' + S['title'])
+    src = (src.replace('# The 145 direction-aware window certificates', '# ' + S['title'].format(n=n))
+              .replace('the 145 direction', 'the %d' % n)
               .replace('--set direction`', '--set %s`' % a.set)
               .replace('direction_certificates.json', S['index'])
               .replace('def dirKeys :', 'def %s :' % S['keys'])
@@ -470,7 +474,7 @@ def main_direction5(a):
                        'def AllRefuted239 : Prop := AllRefutedList dirKeys',
                        '/-- The %d certificate statements behind the conditional bound %d. -/\n'
                        'def %s : Prop := AllRefutedList %s' % (n, S['bound'], S['premise'], S['keys'])))
-    assert S['keys'] in src and S['premise'] in src and '145' not in src
+    assert S['keys'] in src and S['premise'] in src
     open(os.path.join(LEAN, S['keys_mod'] + '.lean'), 'w').write(src)
     json.dump({'set': a.set, 'cases': len(res), 'totals': tot,
                'per_case': {r[0]: {'module': r[1], 'core_clauses': r[4], 'cnf_clauses': r[5],
@@ -519,6 +523,7 @@ def main():
     ap.add_argument('--jobs', type=int, default=4)
     ap.add_argument('--cadical', default=None, help='cadical binary (default: the Lean toolchain one)')
     ap.add_argument('--seeds', type=int, default=3, help='direction5: cadical seeds to try per window')
+    ap.add_argument('--index', default=None, help='direction5/r4: use this (subset) certificate index')
     a = ap.parse_args()
     os.makedirs(a.work, exist_ok=True)
     if a.set in CADICAL_SETS:

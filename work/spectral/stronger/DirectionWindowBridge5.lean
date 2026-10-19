@@ -1,5 +1,5 @@
 /-
-The direction-aware window premises of the conditional bound 238 from the 325
+The direction-aware window premises of the conditional bound 238 from the 175
 five-centre window certificates.
 
 Core Lean only (imports the standard-library core modules `LocalWindowDirBridge`,
@@ -8,8 +8,8 @@ Core Lean only (imports the standard-library core modules `LocalWindowDirBridge`
 
 * `cover_table5` (kernel evaluation, one theorem per window length): every bit of the
   exclusion table `forbMaskOf5` that is looked up for a canonical shape of two to five
-  centres belongs to one of the 325 certificate keys `dirKeys5` (`LocalWindowDirKeys5.lean`).
-  Shapes outside the 9 listed ones have the empty mask (`unlisted_zero`), so only
+  centres belongs to one of the 175 certificate keys `dirKeys5` (`LocalWindowDirKeys5.lean`).
+  Shapes outside the 8 listed ones have the empty mask (`unlisted_zero`), so only
   listed shapes are enumerated.
 * `window_refute5`: a window of a snake whose canonical shape and lumped counts hit a
   set bit contradicts the corresponding certificate (`refuted_dir` realises the
@@ -30,7 +30,7 @@ open Snake9 Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow
 
 set_option maxHeartbeats 1000000
 
-/-! ## The 325 keys cover the exclusion table -/
+/-! ## The 175 keys cover the exclusion table -/
 
 /-- The bit of `forbMaskOf5` looked up by `wforb5a` for the canonical shape `c`. -/
 def forbBit5 (c syms : List Nat) : Bool :=
@@ -38,17 +38,17 @@ def forbBit5 (c syms : List Nat) : Bool :=
 
 theorem wforb5a_eq (ds syms : List Nat) : wforb5a ds syms = forbBit5 (canon ds) syms := rfl
 
-/-- Unlisted shapes (index 9) have the empty mask. -/
-theorem unlisted_zero : forbMaskOf5 9 = 0 := by decide
+/-- Unlisted shapes (index 8) have the empty mask. -/
+theorem unlisted_zero : forbMaskOf5 8 = 0 := by decide
 
-theorem forbBit5_unlisted (c syms : List Nat) (h : wshapeIdx5 (shapeCode c) = 9) :
+theorem forbBit5_unlisted (c syms : List Nat) (h : wshapeIdx5 (shapeCode c) = 8) :
     forbBit5 c syms = false := by
   unfold forbBit5
   rw [h, unlisted_zero, Nat.zero_shiftRight]
   rfl
 
 def coverOK5 (c : List Nat) : Bool :=
-  wshapeIdx5 (shapeCode c) == 9 ||
+  wshapeIdx5 (shapeCode c) == 8 ||
   allSyms0 (c.length - 1) (fun syms => !forbBit5 c syms || decide ((c, syms) ∈ dirKeys5))
 
 set_option maxRecDepth 100000 in
@@ -63,10 +63,10 @@ theorem cover_table5_5 : allRGS 5 0 coverOK5 = true := by decide +kernel
 set_option maxRecDepth 100000 in
 theorem cover_table5_6 : allRGS 6 0 coverOK5 = true := by decide +kernel
 
-/-- Conversely every one of the 325 keys is a set bit (not needed for the bound; it
+/-- Conversely every one of the 175 keys is a set bit (not needed for the bound; it
 confirms that the key list and the table agree exactly). -/
 theorem keys_in_table5 :
-    (dirKeys5.length == 325 && dirKeys5.all (fun k => forbBit5 k.1 k.2)) = true := by
+    (dirKeys5.length == 175 && dirKeys5.all (fun k => forbBit5 k.1 k.2)) = true := by
   decide +kernel
 
 theorem cover5 {c syms : List Nat} (hc : isRGS c 0 = true)
@@ -81,7 +81,7 @@ theorem cover5 {c syms : List Nat} (hc : isRGS c 0 = true)
     · exact allRGS_spec 6 0 _ cover_table5_6 c hn hc
   unfold coverOK5 at hok
   rcases Bool.or_eq_true_iff.1 hok with hu | hok
-  · have hu' : wshapeIdx5 (shapeCode c) = 9 := by simpa using hu
+  · have hu' : wshapeIdx5 (shapeCode c) = 8 := by simpa using hu
     rw [forbBit5_unlisted c syms hu'] at hb
     exact absurd hb (by decide)
   · have := allSyms0_spec _ _ hok syms hl hs
@@ -147,7 +147,7 @@ theorem no_forb_window5 (h : AllRefuted238) (r n : Nat) (hn : n = 3 ∨ n = 4 �
 end Window
 
 /-- The premises of `upper_238_of_direction_windows5`, with `coreAlpha` for the
-singleton count, from the 325 certificate statements. -/
+singleton count, from the 175 certificate statements. -/
 theorem direction_windows_core5 (h : AllRefuted238) {m : Nat} (p : Snake m) :
     (∀ j, j + 3 ≤ m → wforb5 [pathDir p j, pathDir p (j+1), pathDir p (j+2)]
       [symC (coreAlpha p (j+1)), symC (coreAlpha p (j+2))] = false) ∧
