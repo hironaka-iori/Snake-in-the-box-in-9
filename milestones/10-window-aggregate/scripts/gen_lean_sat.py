@@ -193,6 +193,56 @@ def lean_tree_terms(meaning, nv):
     return build(0, 1)
 
 
+TAG_KINDS = ['window', 'deg2', 'degPos', 'endSel', 'lowEnd', 'endLow', 'cut', 'first', 'zero', 'mono',
+             'step', 'over']
+
+
+def packed_tree(meaning, nv):
+    """Leaf codes of `lean_tree_terms` in traversal order, 48 bits each, as one Nat
+    (decoded by `Tags.mtB` of LocalWindowTagsPacked.lean)."""
+    codes = []
+
+    def leaf(x):
+        m = meaning.get(x)
+        if m is None:
+            return 0
+        if m[0] in ('p', 'e'):
+            assert m[1] < 1 << 46
+            return (1 if m[0] == 'p' else 2) + 4 * m[1]
+        c, i, j = m[1], m[2], m[3]
+        assert c < 256 and i < 65536 and j < 1 << 20, m
+        return 3 + 4 * (c + 256 * i + (1 << 24) * j)
+
+    def build(r, s):
+        if r + s > nv:
+            codes.append(leaf(r))
+        else:
+            build(r, 2 * s)
+            build(r + s, 2 * s)
+    build(0, 1)
+    return sum(c << (48 * k) for k, c in enumerate(codes))
+
+
+def packed_tags(tags):
+    out = 0
+    for k, t in enumerate(tags):
+        args = list(t[1:])
+        c = i = j = 0
+        if t[0] == 'lowEnd':
+            c, = args
+        elif t[0] in ('first', 'over'):
+            c, i = args
+        elif t[0] == 'zero':
+            c, j = args
+        elif t[0] in ('mono', 'step'):
+            c, i, j = args
+        else:
+            assert not args, t
+        assert c < 256 and i < 65536 and j < 65536, t
+        out |= (TAG_KINDS.index(t[0]) + 16 * (c + 256 * i + 65536 * 256 * j)) << (48 * k)
+    return out
+
+
 def lean_tag(t):
     if len(t) == 1:
         return '.' + t[0]
@@ -229,17 +279,23 @@ def process(name, emit, certs=CERTS, core_dir=CORE, noncomputable=False):
     for t in tags:
         fam[t[0]] = fam.get(t[0], 0) + 1
     if emit:
-        write_module(name, module, meta, enc, tags)
+        write_module(name, module, meta, enc, tags, packed=noncomputable)
     return module, len(core), fam, len(committed) - npre
 
 
-def write_module(name, module, meta, enc, tags):
+def write_module(name, module, meta, enc, tags, packed=False):
     ctr_terms = []
     for lits, k, kind in enc.ctrs:
         kt = '.ends' if kind[0] == 'ends' else f'(.{kind[0]} {kind[1]})'
         ctr_terms.append(f'⟨[{", ".join(str(code(l)) for l in lits)}], {k}, {kt}⟩')
     tag_body = ',\n  '.join(', '.join(lean_tag(t) for t in tags[i:i + 8]) for i in range(0, len(tags), 8))
-    src = f'''import LocalWindowTags
+    if packed:   # single literals decoded in the kernel (LocalWindowTagsPacked.lean)
+        tags_term = 'tagsOf %d (nat_lit 0x%x)' % (len(tags), packed_tags(tags))
+        meaning_def = '(mtB %d 64 0 1 (nat_lit 0x%x)).1' % (enc.nv, packed_tree(enc.meaning, enc.nv))
+    else:
+        meaning_def = lean_tree_terms(enc.meaning, enc.nv)
+        tags_term = '[\n  ' + tag_body + ']'
+    src = f'''import {'LocalWindowTagsPacked' if packed else 'LocalWindowTags'}
 import {meta["module"]}
 
 /-! Every clause of the UNSAT core `{meta["module"]}.cnf` (certificate `{name}`)
@@ -257,13 +313,12 @@ namespace Snake9.LocalWindow.{module}
 open Snake9.LocalWindow.Tags
 
 def meaning : MT :=
-  {lean_tree_terms(enc.meaning, enc.nv)}
+  {meaning_def}
 
 def ctrs : List Ctr := [
   {(','+chr(10)+'  ').join(ctr_terms)}]
 
-def tags : List Tag := [
-  {tag_body}]
+def tags : List Tag := {tags_term}
 
 theorem check : checkAll meaning ctrs window bounds tags raw = true := by decide +kernel
 
@@ -273,7 +328,7 @@ theorem sat : ∀ S E : Nat → Bool,
 
 end Snake9.LocalWindow.{module}
 '''
-    if noncomputable:   # the kernel only unfolds the data: no compiled code, 12x smaller .olean
+    if packed:   # the kernel only unfolds the data: no compiled code, 12x smaller .olean
         src = src.replace('\ndef ', '\nnoncomputable def ')
     os.makedirs(os.path.join(LEAN, 'LocalWindowSat'), exist_ok=True)
     open(os.path.join(LEAN, 'LocalWindowSat', module + '.lean'), 'w').write(src)
