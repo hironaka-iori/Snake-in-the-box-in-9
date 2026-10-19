@@ -23,7 +23,7 @@ fi
 if [ ! -f $D/refine_L7_k6_K7_r3.json ]; then
   if ! running "refine_fast.py --L 7 --k 6 --K 7"; then
     log "starting cap-7 refinement"
-    (cd $M && nohup python3 scripts/refine_fast.py --L 7 --k 6 --K 7 --radius 3 --workers 2 --slack 0.3 \
+    (cd $M && nohup python3 scripts/refine_fast.py --L 7 --k 6 --K 7 --radius 3 --workers 3 --slack 0.3 \
        --batch 200 --query-timeout 120 --avoid data/avoid_k6.json >> data/refine_L7_k6_K7_r3.log 2>&1 &)
   fi
 else
@@ -41,7 +41,7 @@ if [ ! -f $D/judge_direction_k6.json ] && ! running "judge.py --index"; then
      --out ../data/judge_direction_k6.json >> ../data/judge_direction_k6.log 2>&1 &)
 fi
 # 5. empty-square-aware (omega) refinement, five centres, eight buckets (resumable from its cache)
-if [ ! -f $D/refine_omega_L7_k5_K8_r3.json ] && ! running "refine_omega.py --L 7 --k 5 --K 8"; then
+if [ ! -f $D/refine_omega_L7_k5_K8_r3.json ] && [ ! -f $D/omega_paused ] && ! running "refine_omega.py --L 7 --k 5 --K 8"; then
   log "starting omega refinement"
   (cd $M && nohup nice -n 10 python3 scripts/refine_omega.py --L 7 --k 5 --K 8 --radius 3 --workers 1 \
      >> data/refine_omega_L7_k5_K8_r3.log 2>&1 &)

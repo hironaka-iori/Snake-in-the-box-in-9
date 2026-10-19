@@ -248,6 +248,9 @@ def main():
     ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows to treat as feasible (expensive certificates)')
     ap.add_argument('--query-timeout', type=float, default=None, help='seconds per oracle query; slower windows count as feasible')
     ap.add_argument('--out')
+    ap.add_argument('--cycle-budget', type=float, default=120.0,
+                    help='seconds per round for extracting extra cycles (C Howard, delete-and-resolve)')
+    ap.add_argument('--python-howard', action='store_true', help='use the pure-Python Howard (slow, one policy graph)')
     a = ap.parse_args()
     if a.index:
         cases = [c for c in json.load(open(a.index))['cases'] if c['drat_trim_verified']]
@@ -279,16 +282,26 @@ def main():
     A = FastAutomaton(a.L, a.k, a.K)
     print('shapes', len(A.shapes), 'states', A.n, 'extensions', len(A.ext), flush=True)
     log = []
+    prefer = None
     for rnd in range(a.rounds):
         t = time.time()
         U, V, W, EXT = A.edges(oracle)
         m = prune(A.n, U, V)
         idx = np.nonzero(m)[0]
-        mu, cyc = howard(A.n, U[idx], V[idx], W[idx])
+        if a.python_howard:
+            mu, cyc = howard(A.n, U[idx], V[idx], W[idx])
+            batch = [c for m_, c in howard.extra if m_ <= mu + a.slack][:a.batch]
+        else:
+            # C Howard, warm-started from the previous round's policy; then many near-minimal
+            # cycles by deleting each found cycle's edges and re-solving
+            from howard_fast import HowardGraph
+            G = HowardGraph(A.n, U[idx], V[idx], W[idx], prefer=prefer)
+            mu, cyc = G.solve()
+            prefer = G.successors()
+            batch = [c for m_, c in G.cycles(a.batch + 1, mu + a.slack, budget=a.cycle_budget)[1:]]
         cyc = [idx[e] for e in cyc]
         exact = Fr(int(W[cyc].sum()), len(cyc))
         wins = []
-        batch = [c for m_, c in howard.extra if m_ <= mu + a.slack][:a.batch]
         for cyc2 in [cyc] + batch:
             for e in cyc2:
                 e = idx[e] if cyc2 is not cyc else e
@@ -299,7 +312,7 @@ def main():
         newq = oracle.query(wins, a.workers, a.query_timeout)
         unsat = [x for x in wins if oracle.status(x) == 'UNSAT']
         print(f'round {rnd}: edges {len(idx)} mean {exact} ({mu:.4f}) cycle {[int(x) for x in W[cyc]]} '
-              f'queried {newq} unsat-on-cycle {len(unsat)} [{time.time()-t:.0f}s]', flush=True)
+              f'extra-cycles {len(batch)} queried {newq} unsat-on-cycle {len(unsat)} [{time.time()-t:.0f}s]', flush=True)
         log.append({'round': rnd, 'mean': str(exact), 'cycle_counts': [int(x) for x in W[cyc]],
                     'queried': newq, 'killed': len(unsat)})
         if not unsat:
