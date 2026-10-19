@@ -396,6 +396,29 @@ def letNat (n : Nat) (k : Nat → Nat) : Nat := Nat.rec (motive := fun _ => Nat)
 
 theorem letNat_succ (n : Nat) (k : Nat → Nat) : letNat (n + 1) k = k n := rfl
 
+theorem clip_le_self (R v : Nat) : clip R v ≤ v := by
+  unfold clip
+  cases h : Nat.ble v R
+  · simp only [cond_false]
+    have : ¬ v ≤ R := fun hv => by rw [Nat.ble_eq_true_of_le hv] at h; cases h
+    omega
+  · simp
+
+/-- Field-wise `digit Pt y + c <= digit St y` for all `n` fields from one packed comparison with
+an empty blocking mask (`c * ONE` adds `c` to every field without carries). -/
+theorem field_le_of_swarOK (n Pt St HI ONE c : Nat) (hP : Pt < 256 ^ n) (hS : St < 256 ^ n)
+    (hHI : HI = pack (tab (fun _ => 128) n)) (hONE : ONE = pack (tab (fun _ => 1) n))
+    (ha : ∀ y, y < n → digit Pt y + c ≤ 128) (hb : ∀ y, y < n → digit St y < 128)
+    (h : swarOK (Pt + c * ONE) St 0 HI = true) (y : Nat) (hy : y < n) : digit Pt y + c ≤ digit St y := by
+  have hA : Pt + c * ONE = pack (tab (fun l => digit Pt l + c) n) := by
+    have e := pack_tab_digit Pt n hP
+    conv => lhs; rw [← e]
+    rw [hONE, pack_tab_mul, pack_tab_add]
+    apply congrArg; apply tab_congr; intro j _; simp
+  have hB : St = pack (tab (digit St) n) := (pack_tab_digit St n hS).symm
+  have key := swarOK_spec n (fun l => digit Pt l + c) (digit St) _ _ 0 HI hA hB hHI ha hb h y hy
+  simpa using key
+
 /-- A numeral given as little-endian 8192-bit chunks (large table literals are written this way
 because the parser's decimal conversion is quadratic in the number of digits). -/
 def ofChunks (l : List Nat) : Nat := l.foldr (fun c acc => acc <<< 8192 + c) 0

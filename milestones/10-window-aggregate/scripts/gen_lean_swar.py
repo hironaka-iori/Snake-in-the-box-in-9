@@ -51,6 +51,9 @@ def main():
     ap.add_argument('--potr', choices=['literal', 'computed'], default='literal',
                     help='store the block-replicated potentials as numerals, or compute them from potC in the '
                          'kernel (smaller data module, slower shards)')
+    ap.add_argument('--start', action='store_true',
+                    help='charge the start state its own symbols: potential chosen to minimise '
+                         'D = max(pi - Q * symbol sum); constant L*P - Q*(L-k) + D instead of L*P - Q*(L-1) + R')
     ap.add_argument('--lam', help='prove the bound with this mean p/q (<= the minimum mean) instead of the minimum')
     a = ap.parse_args()
     L, k, K = a.L, a.k, a.K
@@ -95,16 +98,30 @@ def main():
         assert Fr(a.lam) <= lam, (a.lam, lam)
         lam = Fr(a.lam)
     P, Q = lam.numerator, lam.denominator
-    pi = bellman_ford(A.n, U, V, W, P, Q)
-    assert pi is not None
-    pi = pi - pi.min()
+    if a.start:
+        from min_range import min_start_potential, init_sums
+        Dst, pi = min_start_potential(A, U, V, W, P, Q, 300)
+        assert pi is not None, 'no start-bounded potential found'
+        pi = pi - pi.min()
+        Dst = int((pi - Q * init_sums(A)).max())
+    else:
+        pi = bellman_ford(A.n, U, V, W, P, Q)
+        assert pi is not None
+        pi = pi - pi.min()
     R = int(pi.max())
     # 8-bit fields: next-state field P + pot <= 128, current-state field Q * s + pot < 128
     assert P + R <= 128 and NS * Q + R < 128, ('fields do not fit 8 bits; try --lam with a smaller denominator', P, Q, R)
     vb = vertex_bound(A, U, V, W)
-    C = P * L - Q * (L - 1) + R
+    if a.start:
+        C = P * L - Q * (L - k) + Dst
+        Dpos, Dneg = max(Dst, 0), max(-Dst, 0)
+        assert Q * NS * (k - 1) + Dpos < 128 and R + Dneg <= 128, ('start table does not fit 8 bits', Q, Dst, R)
+    else:
+        C = P * L - Q * (L - 1) + R
+    assert C >= 0
     B = (9179 * Q + C - 8 * Q) // (P + 35 * Q)
-    print(f'lambda {lam} range {R} dp-bound {vb-1} edges, potential-bound {B} edges', flush=True)
+    print(f'lambda {lam} range {R} dp-bound {vb-1} edges, potential-bound {B} edges'
+          + (f' (start constant D = {Dst})' if a.start else ''), flush=True)
 
     shapes = A.shapes
     sidx = {shape_code(c): i for i, c in enumerate(shapes)}
@@ -450,6 +467,60 @@ theorem checkT{S}_spec ({' '.join(argn)} PC0 : Nat) (hc : checkT{S} {' '.join(ar
   rw [e1, e2, e3] at key
   exact key
 '''
+    start_block = ''
+    if a.start:
+        def symsum_py(y):
+            return sum((y // NS ** j) % NS + 1 for j in range(k - 1))
+        SINIT = sum((Dpos + Q * symsum_py(y)) << (8 * y) for y in range(M1))
+        for i in potC:                                   # mirror of the start check
+            for y in range(M1):
+                assert ((potC[i] >> (8 * y)) & 255) + Dneg <= Dpos + Q * symsum_py(y), ('start bound', i, y)
+        terms = ' + '.join(f'(y % {NS} + 1)' if j == 0 else f'(y / {NS ** j} % {NS} + 1)' for j in range(k - 1))
+        start_thms = []
+        for i in range(len(shapes)):
+            start_thms.append(f'theorem potC{S}_lt_{i} : potC{S} {i} < 256 ^ {M1} := by decide +kernel')
+            start_thms.append(f'theorem potC{S}_start_{i} : swarOK (potC{S} {i} + {Dneg} * onesP{S}) sinit{S} 0 hiP{S} = true := by decide +kernel')
+        start_case = lambda i: (f'have h := field_le_of_swarOK {M1} _ _ _ _ {Dneg} potC{S}_lt_{i} sinit{S}_lt hiP{S}_eq onesP{S}_eq '
+                                f'(fun y hy => by have := potC{S}_digit_le {i} y hy; omega) '
+                                f'(fun y hy => by rw [sinit{S}_digit y hy]; have := symsum{S}_le y; omega) potC{S}_start_{i} y hy; '
+                                f'rw [sinit{S}_digit y hy] at h; exact h')
+        start_block = f'''
+/-! ### Start states: `pot + {Dneg} <= {Dpos} + {Q} * (sum of the state's symbols)` -/
+
+/-- Sum of the {k - 1} symbols (base-{NS} digits plus one) of a state code. -/
+def symsum{S} (y : Nat) : Nat := {terms}
+
+theorem symsum{S}_le (y : Nat) : symsum{S} y ≤ {(k - 1) * NS} := by unfold symsum{S}; omega
+theorem symsum{S}_ge (y : Nat) : {k - 1} ≤ symsum{S} y := by unfold symsum{S}; omega
+
+/-- Field `y` holds `{Dpos} + {Q} * symsum y`. -/
+def sinit{S} : Nat := {lit(SINIT)}
+
+def sinitOK{S} : Bool :=
+  allBelowR {M1 // N3} fun h =>
+    letN (winT sinit{S} ({B3} * h) {B3} + 1) fun Wd =>
+    allBelowR {N3} fun l => Nat.beq (digit Wd l) ({Dpos} + {Q} * symsum{S} ({N3} * h + l))
+
+theorem sinitOK{S}_eq : sinitOK{S} = true := by decide +kernel
+theorem sinit{S}_lt : sinit{S} < 256 ^ {M1} := by decide +kernel
+
+theorem sinit{S}_digit (y : Nat) (hy : y < {M1}) : digit sinit{S} y = {Dpos} + {Q} * symsum{S} y := by
+  have h := sinitOK{S}_eq
+  unfold sinitOK{S} at h
+  have h1 := allBelowR_spec _ _ h (y / {N3}) (by omega)
+  rw [letN_succ] at h1
+  have h2 := Nat.eq_of_beq_eq_true (allBelowR_spec _ _ h1 (y % {N3}) (by omega))
+  rw [show {B3} * (y / {N3}) = 8 * ({N3} * (y / {N3})) by omega, show ({B3} : Nat) = 8 * {N3} by rfl,
+    digit_winT _ _ _ _ (by omega)] at h2
+  rw [show {N3} * (y / {N3}) + y % {N3} = y by omega] at h2
+  exact h2
+
+{chr(10).join(start_thms)}
+
+theorem potC{S}_start (i y : Nat) (hy : y < {M1}) : digit (potC{S} i) y + {Dneg} ≤ {Dpos} + {Q} * symsum{S} y := by
+{by_shape(f'potC{S}', start_case, f'rw [h0]; have := symsum{S}_ge y; simp only [digit, Nat.zero_div, Nat.zero_mod]; omega')}
+'''
+
     pos_block = '' if NS == 6 else f'''
 /-- Stored position of a symbol code: the three newest base-{NS} digits (a, b, c) of `z`
 (c least significant) go to field `{N2} c + {NS} a + b` of their {N3}-block. -/
@@ -672,7 +743,7 @@ def checkT{S} ({' '.join(argn)} : Nat) : Bool :=
 {potR_lt}
 
 {potR_eq}
-
+{start_block}
 /-- Step test for one window of {L + 1} directions. -/
 def check{S} (c : List Nat) : Bool :=
   !inducedPattern c || checkT{S}
@@ -822,6 +893,97 @@ end Snake9.WindowAutomaton
         for cc in range(2, k + 1)) + '\n  ' + \
         f'have c0 : {CODE} {lst(syms_all[:k - 1])} 0 = {code6_of(syms_all[:k - 1])} := by simp only [{CODE}]; omega\n  ' + \
         f'have c1 : {CODE} {lst(syms_all[1:])} 0 = {code6_of(syms_all[1:])} := by simp only [{CODE}]; omega'
+    if not a.start:
+        sum_total = f"""theorem sumA_ge{S} (a : Nat → Nat) (m : Nat) (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j) :
+    ∀ n, n + {L} ≤ m → {L - 1} + S{S} a n ≤ sumA a (n + {L - 1})
+  | 0, h => by
+    simp only [S{S}, sumA, Nat.zero_add, Nat.reduceAdd]
+{pos_list}
+    omega
+  | n + 1, h => by
+    have ih := sumA_ge{S} a m hpos n (by omega)
+    have := {LE} (a (n+{L}))
+    show {L - 1} + (S{S} a n + {SYM} (a (n+{L}))) ≤ sumA a (n+{L - 1}) + a (n+{L - 1}+1)
+    have he2 : n + {L - 1} + 1 = n + {L} := by omega
+    rw [he2]
+    omega
+
+theorem total_bound{S} (d a : Nat → Nat) (m : Nat) (hm : {L} ≤ m)
+    (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j)
+    (hind : ∀ i, i + {L + 1} ≤ m → inducedPattern (win{S} d i) = true)
+{inv_hyps} :
+    {P} * m ≤ {Q} * sumA a (m - 1) + {C} := by
+  have hinv := invariant{S} d a m hpos hind {hw_names} (m - {L}) (by omega)
+  have hsum := sumA_ge{S} a m hpos (m - {L}) (by omega)
+  have h0 := Φ{S}_le d a 0
+  have he : m - {L} + {L - 1} = m - 1 := by omega
+  rw [he] at hsum
+  omega"""
+    else:
+        st_syms = [f'{SYM} (a (i+{first + j}))' for j in range(k - 1)]
+        st_list = lst(st_syms)
+        st_hyps = ' '.join(f'(h{j} : 1 ≤ a (i+{first + j}))' for j in range(k - 1))
+        st_bounds = '\n  '.join(f'have hb{j} : 1 ≤ {SYM} (a (i+{first + j})) := {GE1(f"h{j}")}\n  '
+                                 f'have hc{j} : {SYM} (a (i+{first + j})) ≤ {NS} := {LEK}' for j in range(k - 1))
+        prefix = ' + '.join(f'a {j}' for j in range(1, first)) if first > 1 else '0'
+        symlist = ' + '.join(f'{SYM} (a {first + j})' for j in range(k - 1))
+        sym0 = [f'{SYM} (a {first + j})' for j in range(k - 1)]
+        pos_prefix = '\n'.join(f'  have hp{j} := hpos {j} (by omega) (by omega)' for j in range(1, first))
+        st_args = ' '.join(f'(hpos ({first + j}) (by omega) (by omega))' for j in range(k - 1))
+        le_list = '\n'.join(f'    have := {LE} (a {first + j})' for j in range(k - 1))
+        vs = [f's{j}' for j in range(k - 1)]
+        v_hyps = ' '.join(f'(b{j} : 1 ≤ s{j})' for j in range(k - 1)) + ' ' + ' '.join(f'(c{j} : s{j} ≤ {NS})' for j in range(k - 1))
+        v_code = code6_of(vs)
+        v_sum = ' + '.join(vs)
+        st_ge = ' '.join(f'({GE1(f"h{j}")})' for j in range(k - 1))
+        st_le = ' '.join(f'({LEK})' for j in range(k - 1))
+        sum_total = f"""/-- The start state's potential is bounded by its own symbols (plain variables keep the
+arithmetic small: every big table term is generalized away before omega). -/
+theorem pot{S}_start (h : List Nat) ({' '.join(vs)} : Nat) {v_hyps} :
+    pot{S} h {lst(vs)} + {Dneg} ≤ {Dpos} + {Q} * ({v_sum}) := by
+  have hs : {CODE} {lst(vs)} 0 = {v_code} := by simp only [{CODE}]; omega
+  have h3 : symsum{S} ({v_code}) = {v_sum} := by unfold symsum{S}; omega
+  unfold pot{S}
+  rw [hs]
+  generalize hy : {v_code} = y at h3 ⊢
+  have h1 := potC{S}_start (sh{S} h) y (by omega)
+  have h2 := clip_le_self {R} (digit (potC{S} (sh{S} h)) y)
+  generalize digit (potC{S} (sh{S} h)) y = z at h1 h2 ⊢
+  generalize clip {R} z = w at h2 ⊢
+  omega
+
+theorem Φ{S}_start (d a : Nat → Nat) (i : Nat) {st_hyps} :
+    Φ{S} d a i + {Dneg} ≤ {Dpos} + {Q} * ({' + '.join(st_syms)}) :=
+  pot{S}_start _ {' '.join('_' for _ in vs)} {st_ge} {st_le}
+
+theorem sumA_ge{S} (a : Nat → Nat) (m : Nat) (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j) :
+    ∀ n, n + {L} ≤ m → {prefix} + ({symlist}) + S{S} a n ≤ sumA a (n + {L - 1})
+  | 0, h => by
+    simp only [S{S}, sumA, Nat.zero_add, Nat.reduceAdd]
+{le_list}
+    omega
+  | n + 1, h => by
+    have ih := sumA_ge{S} a m hpos n (by omega)
+    have := {LE} (a (n+{L}))
+    show {prefix} + ({symlist}) + (S{S} a n + {SYM} (a (n+{L}))) ≤ sumA a (n+{L - 1}) + a (n+{L - 1}+1)
+    have he2 : n + {L - 1} + 1 = n + {L} := by omega
+    rw [he2]
+    omega
+
+theorem total_bound{S} (d a : Nat → Nat) (m : Nat) (hm : {L} ≤ m)
+    (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j)
+    (hind : ∀ i, i + {L + 1} ≤ m → inducedPattern (win{S} d i) = true)
+{inv_hyps} :
+    {P} * m ≤ {Q} * sumA a (m - 1) + {C} := by
+  have hinv := invariant{S} d a m hpos hind {hw_names} (m - {L}) (by omega)
+  have hsum := sumA_ge{S} a m hpos (m - {L}) (by omega)
+  have h0 := Φ{S}_start d a 0 {st_args}
+  simp only [Nat.zero_add] at h0
+{pos_prefix}
+  have he : m - {L} + {L - 1} = m - 1 := by omega
+  rw [he] at hsum
+  omega
+"""
     seq = f"""/-
 Generated by gen_lean_swar.py.  Sequence consequence for L = {L}, k = {k}, lambda = {P}/{Q}.
 Core Lean only.
@@ -910,32 +1072,7 @@ theorem invariant{S} (d a : Nat → Nat) (m : Nat)
     simp only [S{S}]
     omega
 
-theorem sumA_ge{S} (a : Nat → Nat) (m : Nat) (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j) :
-    ∀ n, n + {L} ≤ m → {L - 1} + S{S} a n ≤ sumA a (n + {L - 1})
-  | 0, h => by
-    simp only [S{S}, sumA, Nat.zero_add, Nat.reduceAdd]
-{pos_list}
-    omega
-  | n + 1, h => by
-    have ih := sumA_ge{S} a m hpos n (by omega)
-    have := {LE} (a (n+{L}))
-    show {L - 1} + (S{S} a n + {SYM} (a (n+{L}))) ≤ sumA a (n+{L - 1}) + a (n+{L - 1}+1)
-    have he2 : n + {L - 1} + 1 = n + {L} := by omega
-    rw [he2]
-    omega
-
-theorem total_bound{S} (d a : Nat → Nat) (m : Nat) (hm : {L} ≤ m)
-    (hpos : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ a j)
-    (hind : ∀ i, i + {L + 1} ≤ m → inducedPattern (win{S} d i) = true)
-{inv_hyps} :
-    {P} * m ≤ {Q} * sumA a (m - 1) + {C} := by
-  have hinv := invariant{S} d a m hpos hind {hw_names} (m - {L}) (by omega)
-  have hsum := sumA_ge{S} a m hpos (m - {L}) (by omega)
-  have h0 := Φ{S}_le d a 0
-  have he : m - {L} + {L - 1} = m - 1 := by omega
-  rw [he] at hsum
-  omega
-
+{sum_total}
 end Snake9.WindowAutomaton
 
 #print axioms Snake9.WindowAutomaton.total_bound{S}

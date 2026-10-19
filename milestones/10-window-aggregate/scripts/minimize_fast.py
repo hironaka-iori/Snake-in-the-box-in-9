@@ -102,6 +102,8 @@ def main():
     ap.add_argument('--avoid', help='JSON list of {dirs, alpha} windows never to keep (expensive certificates)')
     ap.add_argument('--tag', default='')
     ap.add_argument('--escalate', type=int, default=None, help='also use windows refuted only at this larger radius')
+    ap.add_argument('--start', action='store_true',
+                    help='keep what the start-bounded potential (smallest D = max(pi - Q * symbol sum)) needs')
     ap.add_argument('--prefer', help='certificate index: windows verified there are dropped last (they cost nothing)')
     ap.add_argument('--lam', help='keep only what a potential at this mean p/q needs (<= the minimum mean); '
                                   'a smaller mean with a small denominator gives a smaller set and potential range')
@@ -130,8 +132,16 @@ def main():
         print('full set: minimum mean', lam, '; minimising for', target, flush=True)
         lam = target
     p, q = lam.numerator, lam.denominator
-    pi = bellman_ford(A.n, U, V, W, p, q); assert pi is not None
-    print('full set: mean', lam, 'range', int(pi.max() - pi.min()), flush=True)
+    if a.start:
+        from min_range import min_start_potential, init_sums
+        Dst, pi = min_start_potential(A, U, V, W, p, q, 300)
+        assert pi is not None
+        pi = pi - pi.min()
+        Dst = int((pi - q * init_sums(A)).max())
+        print('full set: mean', lam, 'start constant D', Dst, 'range', int(pi.max()), flush=True)
+    else:
+        pi = bellman_ford(A.n, U, V, W, p, q); assert pi is not None
+        print('full set: mean', lam, 'range', int(pi.max() - pi.min()), flush=True)
     certified = set()
     if a.prefer:
         certified = {(tuple(c['dirs']), tuple(map(tuple, c['alpha']))) for c in json.load(open(a.prefer))['cases']
@@ -145,8 +155,9 @@ def main():
             if x in keep and Bk.removable(x, pi, p, q):
                 Bk.remove(x); keep.discard(x); dropped += 1
         U, V, W = Bk.edges()
-        pi2 = bellman_ford(A.n, U, V, W, p, q); assert pi2 is not None
-        pi = pi2
+        if not a.start:                     # the start potential stays valid: dropped windows only
+            pi2 = bellman_ford(A.n, U, V, W, p, q); assert pi2 is not None   # added edges it allows
+            pi = pi2
         print('kept', len(keep), 'dropped', dropped, 'range', int(pi.max() - pi.min()), flush=True)
         if dropped == 0:
             break
@@ -156,6 +167,8 @@ def main():
     vb = vertex_bound(A, U, V, W)
     R = int(pi.max() - pi.min()); L = a.L
     C = p * L - q * (L - 1) + R
+    if a.start:
+        C = p * L - q * (L - a.k) + Dst
     Bp = (9179 * q + C - 8 * q) // (p + 35 * q)
     from collections import Counter
     out = {'L': a.L, 'k': a.k, 'K': a.K, 'radius': a.radius, 'min_mean': str(lam), 'potential_range': R,
