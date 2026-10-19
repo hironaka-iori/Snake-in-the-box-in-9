@@ -234,11 +234,11 @@ def vertex_bound(A, U, V, W, vmax=260):
     return best
 
 
-def greedy_break(oracle, cyc_wins, workers, timeout):
+def greedy_break(oracle, cyc_wins, workers, timeout, chunk=None):
     """Query windows until every cycle contains an excluded window.  Each step asks, in parallel,
     the windows shared by the most still-unbroken cycles (fewer centres first on ties)."""
     asked = 0
-    chunk = 4 * workers
+    chunk = chunk or 16 * workers          # a chunk waits for its slowest window; keep the workers busy
     while True:
         alive = [i for i, cw in enumerate(cyc_wins) if not any(oracle.status(x) == 'UNSAT' for x in cw)]
         if not alive:
