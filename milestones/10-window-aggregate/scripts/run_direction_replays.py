@@ -29,7 +29,7 @@ UNSAT = os.path.join(ROOT, 'work', 'final_lean', 'LocalWindowUnsat')
 
 
 def data_dir(a):
-    return DATA + {'direction': '', 'direction5': '5', 'r4': '_r4'}[a.set]
+    return DATA + {'direction': '', 'direction5': '5', 'r4': '_r4', 'r4b': '_r4b'}[a.set]
 
 
 def cases(a):
@@ -90,7 +90,7 @@ def build(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--set', choices=['direction', 'direction5', 'r4'], default='direction',
+    ap.add_argument('--set', choices=['direction', 'direction5', 'r4', 'r4b'], default='direction',
                     help='the 145 windows of the 239 bound, the 175 of the 238 bound, or the radius-4 set')
     sub = ap.add_subparsers(dest='cmd', required=True)
     g = sub.add_parser('gen')

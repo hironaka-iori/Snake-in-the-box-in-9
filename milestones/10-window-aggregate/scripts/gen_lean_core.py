@@ -265,6 +265,12 @@ CADICAL_SETS = {
                core=os.path.join(DATA, 'lean_core_direction_r4'), prefix='R',
                keys_mod='LocalWindowDirKeysR4', keys='dirKeysR4', premise='AllRefuted236', bound=236,
                reuse=None, title='The {n} radius-4 five-centre window certificates', radius=4),
+    # the bound 237 from a cheaper radius-4 subset (prune_costly --target-edges 237); its own
+    # module prefix, so that its cores never share modules with the 236 set
+    'r4b': dict(index='direction_certificates_r4b.json', certs=os.path.join(CERTS, 'direction_r4'),
+                core=os.path.join(DATA, 'lean_core_direction_r4b'), prefix='Q',
+                keys_mod='LocalWindowDirKeysR4b', keys='dirKeysR4b', premise='AllRefuted237', bound=237,
+                reuse=None, title='The {n} radius-4 five-centre window certificates of the bound 237', radius=4),
 }
 
 
@@ -581,7 +587,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--work', required=True)
     ap.add_argument('--drat', default=os.path.join(HERE, '..', '.build', 'drat-trim'))
-    ap.add_argument('--set', choices=['window', 'direction', 'direction5', 'r4'], default='window')
+    ap.add_argument('--set', choices=['window', 'direction', 'direction5', 'r4', 'r4b'], default='window')
     ap.add_argument('--jobs', type=int, default=4)
     ap.add_argument('--cadical', default=None, help='cadical binary (default: the Lean toolchain one)')
     ap.add_argument('--seeds', type=int, default=3, help='direction5: cadical seeds to try per window')
