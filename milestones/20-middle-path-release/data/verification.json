@@ -1,0 +1,93 @@
+{
+  "status": "PASSED",
+  "scope": "Witnesses, local replacement scopes, finite bank comparison and Lean audits; solver exclusions are not kernel certificates.",
+  "growth": {
+    "even-growth6.json": {
+      "accepted_lengths": [],
+      "best_edges": 186,
+      "last_pass_counts": {
+        "INFEASIBLE": 672
+      }
+    },
+    "even-growth7.json": {
+      "accepted_lengths": [],
+      "best_edges": 186,
+      "last_pass_counts": {
+        "INFEASIBLE": 144
+      }
+    },
+    "growth6.json": {
+      "accepted_lengths": [
+        187,
+        188,
+        189,
+        190,
+        191
+      ],
+      "best_edges": 191,
+      "last_pass_counts": {
+        "INFEASIBLE": 672
+      }
+    }
+  },
+  "fixed_search": {
+    "fixed-control190.json": "OPTIMAL",
+    "fixed-target192.json": "UNKNOWN",
+    "fixed-target196.json": "UNKNOWN"
+  },
+  "sha256_lf": {
+    "milestones/20-middle-path-release/data/direct196.json": "ebc7fabdfade750e935b1b0d2dd577fb3daa6ebc66bfa8f927f144ff15323e0c",
+    "milestones/20-middle-path-release/data/even-growth6.json": "c0a5cbc9d59fb8c0549f7f6fe8658dc533ca4141ae3a15426ac4982cbe27c3d2",
+    "milestones/20-middle-path-release/data/even-growth7.json": "6a0027c34928bac637ec12f2a31a79e84598027f97e2c4ea1353a0610053ced9",
+    "milestones/20-middle-path-release/data/fixed-control190.json": "2d827034ed25d8db00143bf641474571727e49fa76e3e0fea7a804807fae86ea",
+    "milestones/20-middle-path-release/data/fixed-target192.json": "a791b97ecff739e8a27c95acf3763c7b2bca100a4a786ae63125ab51886a1783",
+    "milestones/20-middle-path-release/data/fixed-target196.json": "4fa04f012ba62300c59e9857d9640b43ffe0b6d6462479de5aba36a27c51f23c",
+    "milestones/20-middle-path-release/data/growth6.json": "b1651d0ec4d9d08f3dd89e20fe2c9413acbf649cb6b05ca97a0b57bc8674d14b",
+    "milestones/20-middle-path-release/data/integration-review.json": "de0571b8e0e29fd7b11773c3da654053a0d085cee30af53ef0b8e111072a40e5",
+    "milestones/20-middle-path-release/data/paired-seed190.json": "f954fd8287d3eeaf5d8748d32f910aac6c9095b80ae1f7c908405184675cd6aa",
+    "milestones/20-middle-path-release/lean/EndpointParity.lean": "bd49d9ab8a18a1de136a3440b5f973bd56537d70ab14e3a2259e2f78af9ff3ea",
+    "milestones/20-middle-path-release/lean/PairedSeed.lean": "9f74cd57aae73c71a1f40aa1f65ff914f1e79d86a330b678ef469d68915c26e2",
+    "milestones/20-middle-path-release/logs/endpoint-parity.log": "59be195f140b1c4cb595792d965e7cec13f7527560f12814b167efce3332b326",
+    "milestones/20-middle-path-release/logs/paired-seed.log": "1d92706cf4f77410b8f01c37dfc100b2d5ad86f1ed03a0bdf71dd7178826b198",
+    "milestones/20-middle-path-release/logs/parity.log": "f90e7743396dfb8fade514a527d8b5cfb5b075eba524a9a91957e8007369eb07",
+    "milestones/20-middle-path-release/scripts/direct.py": "c550ceda781721ccc1e4c5a78c5d3d9153725e3e5148402c6446b31bda326c4e",
+    "milestones/20-middle-path-release/scripts/fixed_search.py": "e18c8cd49a17810c7b0974ab5980cfe381a43087c03868e6ea3fb4d146452b92",
+    "milestones/20-middle-path-release/scripts/grow.py": "2dc179e5d70f853f0adf5a834fc3ff296e6bf34fcc8c0d2a32a1037c7d74353d",
+    "milestones/20-middle-path-release/scripts/paired_seed.py": "ad7681e71d9aabb8bfc589ff3ddbb22b95da4f8ab6dd6e8ebcde98bc6720227a",
+    "milestones/20-middle-path-release/scripts/snapshots/grow-v1.py": "5c58bd315573d7d852702e7af348de95ca551ca42db7523ab420f5c4ece411f2",
+    "milestones/20-middle-path-release/scripts/verify.py": "c314fead5b1cf55244c6e42ead9c3f8f94b9096b051dee13dfd8293efe3e8c3a"
+  },
+  "final_growth_bank_matches": [
+    127
+  ],
+  "direct196_status": "UNKNOWN",
+  "lean_audits": {
+    "paired-seed": [
+      "Snake9.PairedSeed.undo_align",
+      "Snake9.PairedSeed.flip_rule",
+      "Snake9.PairedSeed.edge_checks_sound",
+      "Snake9.PairedSeed.bitPerm_surjective",
+      "Snake9.PairedSeed.align_injective",
+      "Snake9.PairedSeed.align_adj",
+      "Snake9.PairedSeed.alignSnake",
+      "Snake9.PairedSeed.paired_start",
+      "Snake9.PairedSeed.paired_end",
+      "Snake9.PairedSeed.paired_exists"
+    ],
+    "parity": [
+      "Snake9.bitParity_flip",
+      "Snake9.endpoint_parity",
+      "Snake9.same_endpoints_same_parity",
+      "Snake9.no_192_with_endpoints_of_191"
+    ],
+    "endpoint-parity": [
+      "Snake9.PairedSeed.endpoints_41_67_even",
+      "Snake9.PairedSeed.fixed_pair_not191"
+    ]
+  },
+  "dependency_sha256_lf": {
+    "work\\final_lean\\Snake9.lean": "025260b9c1533d606a6cfd058aa025d9544d5cd6ccb1f8f5f2143e5657df4740",
+    "work\\final_lean\\DfsParity.lean": "c92b3421c70fc530cd48b4e02add01b07a44693b5f8b2669223cc5db62e01a0a",
+    "milestones\\18-expanded-cells\\lean\\Alignment.lean": "cb33052fa53205330bc78c0d1b0bee8394efa9546040f969eb4f12f68282c732"
+  }
+}
