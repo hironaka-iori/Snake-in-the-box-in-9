@@ -37,7 +37,8 @@ checked by `check2 start_k (perf h 0) proof_k`, which keeps the start database f
 puts the segment's lemmas into a second tree; a hint whose clause was already in the
 database when the segment started carries the flag bit 2^(W-1) and is looked up in the
 start database through a term the kernel caches (about 94% of the hints, on few distinct
-keys), so slots must stay below 2^(W-1).
+keys), so slots must stay below 2^(W-1); a checkpoint is verified by `cpZ`, which walks
+it together with the replayed database instead of looking every clause up.
 
   python gen_lean_lrat.py --work DIR [--seg N] [--cp M] [--group G] [--check] [--data DIR] NAME ...
 """
@@ -462,6 +463,8 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
                 else 'check start%d proof%d' % (k, k))
         if k == nseg:
             return 'andB (%s) (hasEmpty (replay start%d proof%d) %d) = true' % (base, k, k, final_key)
+        if is_cp[k + 1] and SPLIT:
+            return 'andB (%s) (cpZ (replay start%d proof%d) start%d) = true' % (base, k, k, k + 1)
         if is_cp[k + 1] and FAST:
             return 'andB (%s) (cpOk (replay start%d proof%d) start%d) = true' % (base, k, k, k + 1)
         if is_cp[k + 1]:
@@ -498,7 +501,7 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         elif is_cp[k + 1]:
             main.append('  have h%d : TreeTrue τ start%d :=' % (k + 1, k + 1))
             if SPLIT:
-                main.append('    cp_true2 (s := start%d) (ps := proof%d) (t := start%d) (h := %d) τ ok%d h%d'
+                main.append('    cpz_true2 (s := start%d) (ps := proof%d) (t := start%d) (h := %d) τ ok%d h%d'
                             % (k, k, k + 1, height, k, k))
             elif FAST:
                 main.append('    cp_true (s := start%d) (ps := proof%d) (t := start%d) τ ok%d h%d'

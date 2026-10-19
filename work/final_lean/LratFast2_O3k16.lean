@@ -68,6 +68,15 @@ def check2 (S : Tree) : Tree → List Nat → Bool := fun D ps =>
   List.rec (motive := fun _ => Tree → Bool) (fun _ => true)
     (fun x _ ih D => andB (rup2 S D x) (ih (ins D x))) ps D
 
+/-- Every clause of `t` is the tautology or equal to the clause at the same position of
+`R` (the two trees are walked together; checkpoints and replayed databases have the same
+perfect shape).  `cpOk` instead looks every clause up by key. -/
+def cpZ (R t : Tree) : Bool :=
+  Tree.rec (motive := fun _ => Tree → Bool) (fun _ => true)
+    (fun _ c _ _ fl fr R => Tree.rec (motive := fun _ => Bool) false
+      (fun _ c' l' r' _ _ => andB (kif Nat.beq c taut then true else Nat.beq c' c)
+        (andB (fl l') (fr r'))) R) t R
+
 end
 
 /-! ## Soundness -/
@@ -155,6 +164,27 @@ theorem cp_true2 (τ : Nat → Bool) {s : Tree} {ps : List Nat} {t : Tree} {h : 
     (hc : andB (check2 s (perf h 0) ps) (cpOk (replay s ps) t) = true) (hs : TreeTrue τ s) :
     TreeTrue τ t :=
   cpOk_true τ (replay_true2 τ (andB_eq_true hc).1 hs) t (andB_eq_true hc).2
+
+theorem cpZ_true (τ : Nat → Bool) : ∀ t R, TreeTrue τ R → cpZ R t = true → TreeTrue τ t
+  | .nil, _, _, _ => .nil
+  | .node _ c l r, .nil, _, h => absurd h (by
+      show ¬ (false = true)
+      decide)
+  | .node k c l r, .node k' c' l' r', .node hc' hl' hr', h => by
+    have h' := andB_eq_true h
+    have h'' := andB_eq_true h'.2
+    refine .node ?_ (cpZ_true τ l l' hl' h''.1) (cpZ_true τ r r' hr' h''.2)
+    have hc := h'.1
+    revert hc
+    show Bool.rec (Nat.beq c' c) true (Nat.beq c taut) = true → MaskTrue τ c
+    cases hct : Nat.beq c taut
+    · intro h; exact (Nat.eq_of_beq_eq_true h) ▸ hc'
+    · intro _; exact (Nat.eq_of_beq_eq_true hct) ▸ maskTrue_taut τ
+
+theorem cpz_true2 (τ : Nat → Bool) {s : Tree} {ps : List Nat} {t : Tree} {h : Nat}
+    (hc : andB (check2 s (perf h 0) ps) (cpZ (replay s ps) t) = true) (hs : TreeTrue τ s) :
+    TreeTrue τ t :=
+  cpZ_true τ t _ (replay_true2 τ (andB_eq_true hc).1 hs) (andB_eq_true hc).2
 
 theorem final_false2 (τ : Nat → Bool) {s : Tree} {ps : List Nat} {k h : Nat}
     (hc : andB (check2 s (perf h 0) ps) (hasEmpty (replay s ps) k) = true) (hs : TreeTrue τ s) :
