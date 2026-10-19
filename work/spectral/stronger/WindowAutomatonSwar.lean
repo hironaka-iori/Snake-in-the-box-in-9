@@ -423,4 +423,7 @@ theorem field_le_of_swarOK (n Pt St HI ONE c : Nat) (hP : Pt < 256 ^ n) (hS : St
 because the parser's decimal conversion is quadratic in the number of digits). -/
 def ofChunks (l : List Nat) : Nat := l.foldr (fun c acc => acc <<< 8192 + c) 0
 
+/-- The same with chunks `w` bits apart (sparse tables: each chunk is a short numeral). -/
+def ofChunksW (w : Nat) (l : List Nat) : Nat := l.foldr (fun c acc => acc <<< w + c) 0
+
 end Snake9.WindowAutomaton

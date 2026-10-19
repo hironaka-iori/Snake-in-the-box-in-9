@@ -51,9 +51,10 @@ def main():
     ap.add_argument('--transpose', choices=['swap', 'loop'], default='swap',
                     help='8-symbol chains: check the potT layout with six delta swaps (one big-number equality per '
                          'shape, WindowAutomatonTranspose) or field by field (the earlier loop, ~16 s per shape)')
-    ap.add_argument('--potr', choices=['literal', 'computed'], default='literal',
-                    help='store the block-replicated potentials as numerals, or compute them from potC in the '
-                         'kernel (smaller data module, slower shards)')
+    ap.add_argument('--potr', choices=['blocks', 'literal', 'computed'], default='blocks',
+                    help='the block-replicated potentials: as the blocks of potC at the replicated stride times the '
+                         'replicator (blocks; NS times less text than the full numeral), as full numerals, or computed '
+                         'from potC by spreadR in the kernel (slower shards)')
     ap.add_argument('--start', action='store_true',
                     help='charge the start state its own symbols: potential chosen to minimise '
                          'D = max(pi - Q * symbol sum); constant L*P - Q*(L-k) + D instead of L*P - Q*(L-1) + R')
@@ -277,12 +278,19 @@ def main():
         by_a = {}
         for (x, y), v in table.items():
             by_a.setdefault(x, {})[y] = v
-        lines = [f'def {name} ({var1} {var2} : Nat) : Nat :=']
+        # large values become their own constants, so `unfold name` and `simp` see a short term
+        consts, lines = [], [f'def {name} ({var1} {var2} : Nat) : Nat :=']
         for x in sorted(by_a):
-            inner = ' else '.join(f'if {var2} = {y} then {lit(v)}' for y, v in sorted(by_a[x].items()))
-            lines.append(f'  if {var1} = {x} then ({inner} else 0) else')
+            parts = []
+            for y, v in sorted(by_a[x].items()):
+                t = lit(v)
+                if len(t) > 64:
+                    consts.append(f'def {name}v{x}_{y} : Nat := {t}')
+                    t = f'{name}v{x}_{y}'
+                parts.append(f'if {var2} = {y} then {t}')
+            lines.append(f'  if {var1} = {x} then ({' else '.join(parts)} else 0) else')
         lines.append('  0')
-        return '\n'.join(lines)
+        return '\n'.join(consts + lines)
 
     def chain1e(name, var, exprs):
         lines = [f'def {name} ({var} : Nat) : Nat :=']
@@ -292,11 +300,15 @@ def main():
         return '\n'.join(lines)
 
     def chain1(name, var, table):
-        lines = [f'def {name} ({var} : Nat) : Nat :=']
+        consts, lines = [], [f'def {name} ({var} : Nat) : Nat :=']
         for x, v in sorted(table.items()):
-            lines.append(f'  if {var} = {x} then {lit(v)} else')
+            t = lit(v)
+            if len(t) > 64:
+                consts.append(f'def {name}v{x} : Nat := {t}')
+                t = f'{name}v{x}'
+            lines.append(f'  if {var} = {x} then {t} else')
         lines.append('  0')
-        return '\n'.join(lines)
+        return '\n'.join(consts + lines)
 
     argn = [f'{p}{cc}' for cc in range(2, k + 1) for p in ('T', 'R')] + ['PR0', 'PT1']
     bl_terms = [f'(blk T2 R2 ||| blk T3 R3) * rep3{S}'] + \
@@ -572,6 +584,24 @@ theorem {POS}_split (z m : Nat) (hm : 0 < m) : {POS} (z % ({N3} * m)) = {N3} * (
 theorem {REPL} (f : Nat → Nat) : pack (tab (fun l => f (l % {N2})) {N3}) = pack (tab f {N2}) * repK {N2} {NS} :=
   pack_tab_rep f {N2} {NS}
 '''
+    if a.potr == 'computed':
+        potR_def = chain1e(f'potR{S}', 'i', {i: f'spreadR{S} (potC{S} {i})' for i in potR})
+    elif a.potr == 'blocks':
+        # potR = (the N2-field blocks of potC placed N3 fields apart) * (1 + 256^N2 + ... ), the
+        # blocks written as one list of B2-bit numerals folded at B3-bit stride: NS times less
+        # text than the numeral itself; potR_cons still checks the result against potC
+        consts, body = [], [f'def potR{S} (i : Nat) : Nat :=']
+        for i in sorted(potR):
+            blocks = [(potC[i] >> (B2 * h)) & ((1 << B2) - 1) for h in range(M1 // N2)]
+            while blocks and blocks[-1] == 0:
+                blocks.pop()
+            assert sum(b << (B3 * h) for h, b in enumerate(blocks)) * REPB_INT == potR[i], ('potR blocks', i)
+            consts.append(f'def potR{S}v{i} : Nat := ofChunksW {B3} [{", ".join(map(str, blocks))}] * {geo(N2, NS)}')
+            body.append(f'  if i = {i} then potR{S}v{i} else')
+        body.append('  0')
+        potR_def = '\n'.join(consts + body)
+    else:
+        potR_def = chain1(f'potR{S}', 'i', potR)
     if NS == 8 and a.transpose == 'swap':
         consT_block = f'''/-- `T` holds the fields of `C` at the positions `{POS} y`: six delta swaps map `C` to `T`
 (`WindowAutomatonTranspose`), one kernel equality of big numbers per shape. -/
@@ -662,7 +692,7 @@ def spreadR{S} (C : Nat) : Nat :=
 
 /-- The potentials with every {N2}-field block repeated {NS} times (field `{N3} h + l` holds
 field `{N2} h + l % {N2}` of `potC`). -/
-{chain1e(f'potR{S}', 'i', {i: f'spreadR{S} (potC{S} {i})' for i in potR}) if a.potr == 'computed' else chain1(f'potR{S}', 'i', potR)}
+{potR_def}
 
 def {CODE} : List Nat → Nat → Nat
   | [], acc => acc
