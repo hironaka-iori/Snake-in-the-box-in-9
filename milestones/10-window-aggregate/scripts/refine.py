@@ -90,7 +90,7 @@ class Oracle:
             print(f'  querying {len(keys)} windows', flush=True)
         # each answer is appended to the cache as soon as it arrives, so an interrupted batch
         # (the cloud machine restarts) keeps everything already decided
-        pool = _shared_pool(workers)
+        pool = _shared_pool(workers) if timeout is None else None
         with open(CACHE, 'a', buffering=1) as f:
             def record(k, st, secs):
                 self.known[k] = st
@@ -100,22 +100,51 @@ class Oracle:
                 for k, st, secs in pool.imap_unordered(_solve, [(k, self.radius) for k in keys]):
                     record(k, st, secs)
             else:
-                # per-query time limit: windows that are expensive to refute are recorded as
-                # UNKNOWN (treated as feasible) so that only cheap certificates are ever needed
-                pending = [(k, pool.apply_async(_solve, ((k, self.radius),))) for k in keys]
-                import time as _t
-                deadline = _t.time() + timeout * (len(keys) / workers + 1)
-                stuck = False
-                for k, ar in pending:
-                    try:
-                        k2, st, secs = ar.get(max(1, min(timeout, deadline - _t.time())))
-                    except Exception:
-                        k2, st, secs = k, 'UNKNOWN', timeout
-                        stuck = True
+                # hard per-query time limit (CaDiCaL cannot be interrupted, so each query runs in
+                # its own process and is killed at the limit): windows that are expensive to refute
+                # are recorded as UNKNOWN (treated as feasible), so only cheap certificates are needed
+                for k2, st, secs in run_limited([(k, self.radius) for k in keys], workers, timeout):
                     record(k2, st, secs)
-                if stuck:                       # a worker may still be busy with a timed-out window
-                    _reset_pool()
         return len(keys)
+
+
+def _child(arg, conn):
+    try:
+        conn.send(_solve(arg))
+    except Exception:
+        conn.send(None)
+    conn.close()
+
+
+def run_limited(args, workers, timeout):
+    """Run _solve on every arg in at most `workers` processes from a forkserver (cheap to start,
+    independent of the size of the calling process); a query running longer than `timeout`
+    seconds is killed and reported as UNKNOWN.  Yields (key, status, seconds) as they finish."""
+    import multiprocessing as mp
+    from multiprocessing.connection import wait
+    ctx = mp.get_context('forkserver')
+    pending = list(args)[::-1]
+    running = {}
+    while pending or running:
+        while pending and len(running) < workers:
+            a = pending.pop()
+            r, w = ctx.Pipe(duplex=False)
+            p = ctx.Process(target=_child, args=(a, w))
+            p.start(); w.close()
+            running[p] = (a, r, time.time())
+        ready = wait([v[1] for v in running.values()], timeout=0.25)
+        now = time.time()
+        for p, (a, r, t0) in list(running.items()):
+            if r in ready:
+                try:
+                    res = r.recv()
+                except EOFError:
+                    res = None
+                p.join(); r.close(); del running[p]
+                yield res if res else (a[0], 'UNKNOWN', round(now - t0, 2))
+            elif now - t0 > timeout:
+                p.kill(); p.join(); r.close(); del running[p]
+                yield a[0], 'UNKNOWN', round(timeout, 2)
 
 
 _POOL = [None, 0]
