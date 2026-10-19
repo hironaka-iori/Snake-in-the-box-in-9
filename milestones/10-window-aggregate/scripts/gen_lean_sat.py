@@ -199,7 +199,7 @@ def lean_tag(t):
     return '(.' + t[0] + ' ' + ' '.join(map(str, t[1:])) + ')'
 
 
-def process(name, emit, certs=CERTS, core_dir=CORE):
+def process(name, emit, certs=CERTS, core_dir=CORE, noncomputable=False):
     meta = json.load(open(os.path.join(core_dir, name + '.json')))
     window, bounds = meta['window'], [tuple(b) for b in meta['bounds']]
     if 'dirs' in meta:  # direction certificate: the window is `winOf dirs`
@@ -273,6 +273,8 @@ theorem sat : ∀ S E : Nat → Bool,
 
 end Snake9.LocalWindow.{module}
 '''
+    if noncomputable:   # the kernel only unfolds the data: no compiled code, 12x smaller .olean
+        src = src.replace('\ndef ', '\nnoncomputable def ')
     os.makedirs(os.path.join(LEAN, 'LocalWindowSat'), exist_ok=True)
     open(os.path.join(LEAN, 'LocalWindowSat', module + '.lean'), 'w').write(src)
 
@@ -391,7 +393,7 @@ def main():
         names = sorted(f[:-5] for f in os.listdir(core_dir) if f.endswith('.json') and not f.startswith('_'))
     mods = []
     for name in names:
-        module, ncore, fam, ncuts = process(name, not a.check, certs, core_dir)
+        module, ncore, fam, ncuts = process(name, not a.check, certs, core_dir, a.set in ('r4', 'r4b'))
         mods.append(module)
         print(f'{name:18s} {module:18s} core {ncore:5d}  cuts(all) {ncuts:4d}  ' +
               ' '.join(f'{k}:{v}' for k, v in sorted(fam.items())))

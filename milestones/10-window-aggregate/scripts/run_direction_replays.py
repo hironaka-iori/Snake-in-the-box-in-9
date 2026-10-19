@@ -38,7 +38,10 @@ def cases(a):
 
 
 def gen(a):
-    for name, info in cases(a):
+    si, sn = map(int, a.shard.split('/'))
+    for i, (name, info) in enumerate(cases(a)):
+        if i % sn != si:
+            continue
         mod = info['module']
         if os.path.exists(os.path.join(UNSAT, mod + '.lean')):
             continue
@@ -101,6 +104,7 @@ def main():
     g.add_argument('--cadical', default=None, help='direction5: cadical binary (default: toolchain)')
     g.add_argument('--seeds', type=int, default=2, help='direction5: cadical seeds per core proof')
     g.add_argument('--split', action='store_true', help='emit proofs for LratFast2 (see above)')
+    g.add_argument('--shard', default='0/1', help='i/n: only every n-th case from i (run n processes in parallel)')
     g.add_argument('--drop-lrat', action='store_true',
                    help='delete each LRAT (and core CNF) once its Lean modules are written (saves disk)')
     g.add_argument('--rounds', type=int, default=1,
