@@ -49,7 +49,8 @@ def gen(a):
             cadical = a.cadical or os.path.join(
                 subprocess.check_output(['lean', '--print-prefix'], text=True).strip(), 'bin', 'cadical')
             certs = gen_lean_core.CADICAL_SETS[a.set]['certs']
-            gen_lean_core.core_lrat(name, meta['core_ids'], a.work, cadical, list(range(1, a.seeds + 1)), certs)
+            gen_lean_core.core_lrat(name, meta['core_ids'], a.work, cadical, list(range(1, a.seeds + 1)), certs,
+                                    rounds=a.rounds)
         # literal offset above the variable count: 2400 / 3000 / 4000 (see gen_checker_variants.py)
         nv = meta.get('variables', 0)
         off = 2400 if nv < 2400 else 3000 if nv < 3000 else 4000
@@ -95,6 +96,8 @@ def main():
     g.add_argument('--cadical', default=None, help='direction5: cadical binary (default: toolchain)')
     g.add_argument('--seeds', type=int, default=2, help='direction5: cadical seeds per core proof')
     g.add_argument('--split', action='store_true', help='emit proofs for LratFast2 (see above)')
+    g.add_argument('--rounds', type=int, default=1,
+                   help='cadical portfolio rounds of core shrinking per regenerated proof (3 roughly halves the hints)')
     b = sub.add_parser('build')
     b.add_argument('--jobs', type=int, default=3, help='light (data) modules at a time')
     b.add_argument('--heavy-jobs', type=int, default=3, help='kernel-check modules at a time')

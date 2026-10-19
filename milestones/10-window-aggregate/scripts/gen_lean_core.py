@@ -314,39 +314,95 @@ def extract_cnf(name, work, certs=DCERTS):
     return cnf
 
 
-def best_cadical_proof(cnf, out_prefix, cadical, seeds):
-    """Run cadical --lrat on `cnf` for each seed, trim, keep the smallest proof as
-    `out_prefix.lrat`.  Returns (lemmas, hints, seed, used clause ids)."""
-    ncl = sum(1 for line in open(cnf) if line[0] not in 'pc' and line.strip())
-    best = None
-    for seed in seeds:
-        raw = f'{out_prefix}.s{seed}.raw.lrat'
-        r = subprocess.run([cadical, '-q', '--lrat', '--no-binary', f'--seed={seed}', cnf, raw],
-                           capture_output=True, text=True)
-        assert 's UNSATISFIABLE' in r.stdout, (cnf, seed, r.stdout[-300:], r.stderr[-300:])
-        tmp = f'{out_prefix}.s{seed}.lrat'
-        nl, nh, used = trim_lrat(raw, tmp, ncl)
-        os.remove(raw)
-        if best is None or nh < best[1]:
-            if best is not None:
-                os.remove(best[3])
-            best = (nl, nh, seed, tmp, used)
-        else:
-            os.remove(tmp)
-    nl, nh, seed, tmp, used = best
-    os.replace(tmp, out_prefix + '.lrat')
-    return nl, nh, seed, used
+# CaDiCaL configurations tried for every proof (with --no-binary --lrat).  Trimmed hint
+# counts vary by up to 25% between them on the same core; seeds only matter without --unsat.
+PORTFOLIO = [[], ['--unsat'], ['--chrono=0'], ['--unsat', '--probe=0'], ['--unsat', '--shrink=0'],
+             ['--unsat', '--chrono=0'], ['--unsat', '--subsume=0']]
+# Rounds of core shrinking: the next round solves only the clauses the best proof so far
+# used.  Hint counts are not monotone over rounds, so the best proof of any round is kept
+# (on a 400k-hint core: 401k with one default run, 309k with the portfolio, 200k after
+# two rounds of shrinking).
+ROUNDS = 1
 
 
-def full_core_ids(name, work, cadical, seeds, certs=DCERTS):
+def _cnf_clauses(cnf):
+    nv, cl = 0, []
+    for line in open(cnf):
+        if line.startswith('p'):
+            nv = int(line.split()[2])
+        elif line[0] != 'c' and line.strip():
+            cl.append(line)
+    return nv, cl
+
+
+def best_cadical_proof(cnf, out_prefix, cadical, seeds, portfolio=None, rounds=None):
+    """Run cadical --lrat on `cnf` with every configuration of `portfolio` (default
+    PORTFOLIO; each seed of `seeds` for configurations without --unsat), trim, and keep the
+    proof with the fewest hints; with `rounds` > 1 repeat on the clauses that proof uses.
+    Writes `out_prefix.lrat` with the clause ids of `cnf` (lemma ids above its clause
+    count).  Returns (lemmas, hints, description of the run, used clause ids)."""
+    portfolio = PORTFOLIO if portfolio is None else portfolio
+    rounds = ROUNDS if rounds is None else rounds
+    nv, clauses = _cnf_clauses(cnf)
+    ncl = len(clauses)
+    idmap = list(range(1, ncl + 1))   # clause of the current CNF -> clause id of `cnf`
+    cur = cnf
+    best = None                       # (hints, lemmas, desc, used ids of `cnf`)
+    for rnd in range(rounds):
+        nloc = len(idmap)
+        rb = None                     # best of this round: (hints, lemmas, tmp, used, desc)
+        for extra in portfolio:
+            for seed in (seeds[:1] if '--unsat' in extra else seeds):
+                raw = f'{out_prefix}.raw.lrat'
+                r = subprocess.run([cadical, '-q', '--lrat', '--no-binary', f'--seed={seed}', *extra, cur, raw],
+                                   capture_output=True, text=True)
+                assert 's UNSATISFIABLE' in r.stdout, (cur, seed, extra, r.stdout[-300:], r.stderr[-300:])
+                tmp = f'{out_prefix}.cand.lrat'
+                nl, nh, used = trim_lrat(raw, tmp, nloc)
+                os.remove(raw)
+                if rb is None or nh < rb[0]:
+                    os.replace(tmp, f'{out_prefix}.round.lrat')
+                    desc = ' '.join(['--seed=%d' % seed, *extra]) + (' (core round %d)' % (rnd + 1) if rnd else '')
+                    rb = (nh, nl, f'{out_prefix}.round.lrat', used, desc)
+                else:
+                    os.remove(tmp)
+        nh, nl, path, used, desc = rb
+        if best is None or nh < best[0]:
+            # rewrite the proof with the ids of `cnf`: clause j -> idmap[j-1], lemma j -> j - nloc + ncl
+            with open(path) as f, open(out_prefix + '.lrat', 'w') as g:
+                for line in f:
+                    t = line.split()
+                    z = t.index('0', 1)
+                    rm = lambda h: idmap[h - 1] if h <= nloc else h - nloc + ncl
+                    g.write(' '.join([str(rm(int(t[0])))] + t[1:z + 1] + [str(rm(int(h))) for h in t[z + 1:-1]] + ['0']) + '\n')
+            best = (nh, nl, desc, sorted(idmap[u - 1] for u in used))
+        os.remove(path)
+        if rnd + 1 == rounds or len(used) == nloc:
+            break
+        # next round: the clauses this round's proof used
+        nxt = f'{out_prefix}.r{rnd + 1}.cnf'
+        with open(nxt, 'w') as g:
+            g.write(f'p cnf {nv} {len(used)}\n')
+            for u in used:
+                g.write(clauses[idmap[u - 1] - 1])
+        if cur != cnf:
+            os.remove(cur)
+        cur, idmap = nxt, [idmap[u - 1] for u in used]
+    if cur != cnf:
+        os.remove(cur)
+    nh, nl, desc, used = best
+    return nl, nh, desc, used
+
+
+def full_core_ids(name, work, cadical, seeds, certs=DCERTS, rounds=None):
     """Core of the committed CNF: the original clauses a trimmed cadical proof uses."""
     cnf = extract_cnf(name, work, certs)
-    nl, nh, seed, used = best_cadical_proof(cnf, os.path.join(work, name + '.full'), cadical, seeds)
+    nl, nh, seed, used = best_cadical_proof(cnf, os.path.join(work, name + '.full'), cadical, seeds, rounds=rounds)
     os.remove(os.path.join(work, name + '.full.lrat'))
-    return used, {'full_lemmas': nl, 'full_hints': nh, 'full_seed': seed}
+    return used, {'full_lemmas': nl, 'full_hints': nh, 'full_seed': seed}   # seed: description of the run
 
 
-def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS):
+def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS, rounds=None):
     """NAME.lrat in `work`: a cadical proof of the core alone, with clause ids remapped to
     the numbering of the committed CNF (core clause i -> core_ids[i-1], lemma j ->
     ncl + j - ncore), so that gen_lean_lrat.py reads it like a drat-trim proof.  Regenerated
@@ -364,7 +420,8 @@ def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS):
         g.write(f'p cnf {nv} {ncore}\n')
         for i in core_ids:
             g.write(clauses[i - 1])
-    nl, nh, seed, used = best_cadical_proof(core_cnf, os.path.join(work, name + '.core'), cadical, seeds)
+    nl, nh, seed, used = best_cadical_proof(core_cnf, os.path.join(work, name + '.core'), cadical, seeds,
+                                            rounds=rounds)
 
     def remap(h):
         return core_ids[h - 1] if h <= ncore else ncl + h - ncore
@@ -374,7 +431,7 @@ def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS):
             z = t.index('0', 1)
             g.write(' '.join([str(remap(int(t[0])))] + t[1:z + 1] + [str(remap(int(h))) for h in t[z + 1:-1]] + ['0']) + '\n')
     os.remove(os.path.join(work, name + '.core.lrat'))
-    info = {'producer': f'cadical --lrat --no-binary --seed={seed} on the core CNF, trimmed to the '
+    info = {'producer': f'cadical --lrat --no-binary {seed} on the core CNF, trimmed to the '
                         f'dependencies of the empty clause, ids remapped to the committed CNF',
             'seeds_tried': list(seeds), 'lemmas': nl, 'hints': nh, 'core_clauses_used': len(used),
             'lrat_sha256': hashlib.sha256(open(lrat, 'rb').read()).hexdigest()}
@@ -383,7 +440,7 @@ def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS):
 
 
 def dir5_one(arg):
-    case, work, cadical, seeds, setname = arg
+    case, work, cadical, seeds, setname, rounds = arg
     S = CADICAL_SETS[setname]
     name = case['case']
     dirs, alpha = case['dirs'], [tuple(x) for x in case['alpha']]
@@ -398,8 +455,8 @@ def dir5_one(arg):
                     meta['cnf_clauses'], 'cadical', meta['lrat'])
     cnf_sha = sha_gz(os.path.join(S['certs'], name + '.cnf.gz'))
     assert cnf_sha == case['cnf_sha256'], name
-    ids, finfo = full_core_ids(name, work, cadical, seeds, S['certs'])
-    lrat, info = core_lrat(name, ids, work, cadical, seeds, S['certs'])
+    ids, finfo = full_core_ids(name, work, cadical, seeds, S['certs'], rounds)
+    lrat, info = core_lrat(name, ids, work, cadical, seeds, S['certs'], rounds)
     clauses = read_cnf(extract_cnf(name, work, S['certs']))
     assert len(clauses) == case['clauses'], name
     stats = lrat_stats(lrat)
@@ -409,7 +466,7 @@ def dir5_one(arg):
     meta = {'name': name, 'module': 'LocalWindowCnf.' + module, 'dirs': dirs, 'syms': syms,
             'window': window_from_dirs(dirs), 'bounds': dir_bounds(syms), 'radius': S['radius'],
             'cnf_clauses': len(clauses), 'cnf_sha256': cnf_sha, 'hash_source': S['index'],
-            'core_producer': f"cadical --lrat --seed={finfo['full_seed']} on the committed CNF, trimmed "
+            'core_producer': f"cadical --lrat {finfo['full_seed']} on the committed CNF, trimmed "
                              f"({finfo['full_lemmas']} lemmas, {finfo['full_hints']} hints)",
             'lrat_producer': 'core_lrat (cadical on the core; regenerated, not committed)',
             'variables': case['variables'], 'lrat': stats, 'core_ids': ids}
@@ -447,7 +504,7 @@ def main_direction5(a):
             res.append((meta['name'], meta['module'].split('.')[-1], meta['dirs'], meta['syms'],
                         len(meta['core_ids']), meta['cnf_clauses'], meta['hash_source'], meta['lrat']))
         else:
-            jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1)), a.set))
+            jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1)), a.set, a.rounds))
     if a.set == 'direction5' and not a.index:
         assert n == 325 and len(res) == 145 and len(jobs) == 180, (n, len(res), len(jobs))
     print(f'{a.set}: {n} cases, {len(res)} reused, {len(jobs)} to core', flush=True)
@@ -524,6 +581,8 @@ def main():
     ap.add_argument('--jobs', type=int, default=4)
     ap.add_argument('--cadical', default=None, help='cadical binary (default: the Lean toolchain one)')
     ap.add_argument('--seeds', type=int, default=3, help='direction5: cadical seeds to try per window')
+    ap.add_argument('--rounds', type=int, default=1,
+                    help='rounds of core shrinking per proof (see ROUNDS); 3 roughly halves the hints')
     ap.add_argument('--index', default=None, help='direction5/r4: use this (subset) certificate index')
     a = ap.parse_args()
     os.makedirs(a.work, exist_ok=True)
