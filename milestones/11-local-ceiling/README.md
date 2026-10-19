@@ -18,7 +18,7 @@ All 131 bank snakes (`scripts/stats.py`):
 - `2*s0/v = 4.22`;
 - `(T + 2*s0)/v = 12.99`, the exact value forced by the identity at `v = 192`.
 
-A bound of 196 edges (`v = 197`) needs `(T + 2*s0)/v >= 11.77`. Current Lean bounds use `T/v >= 7/3` and discard `s0`. The conditional automata reach `T/v >= 7/2`.
+A bound of 196 edges (`v = 197`) needs `(T + 2*s0)/v >= 11.77`. Current Lean bounds discard `s0`. The strongest, the unconditional 238, rests on a count/direction automaton with `T/v >= 7/2` (radius 3, five centres).
 
 Charging every empty square to the selected vertices adjacent to it loses nothing on real snakes: every empty square has a selected neighbour (`scripts/s0local.py`). The per-vertex share varies, though: the minimum of `α + share` over internal vertices of all 131 bank snakes is 3.45 (bank snake 45, path index 179, `α = 3`; `scripts/s0local.py` samples only the first 40 snakes, whose minimum is 4.04). An empty square touches between 5 and 20 selected vertices.
 
@@ -76,7 +76,7 @@ All values are in edges and are approximate (`m + 1 ≈ 9214/(35 + μ)`). A real
 | any method using only `α`, without lumping (any radius) | ≈ 209 | real bank snakes: mean 8.77 |
 | `α` plus the cheap empty-square charge `2e(x)/21` (radius 3) | ≈ 217.5 | 208-adversary (`scripts/cheap_s0.py`) |
 | count/direction automaton, radius 3, ≤4 centres (the conditional 239) | ≈ 233 | 224-adversary |
-| count/direction automaton, radius 3 with 5 centres, or radius 4 with ≤4 centres (the conditional 238) | ≈ 227 | 208-adversary |
+| count/direction automaton, radius 3 with 5 centres, or radius 4 with ≤4 centres (the 238 type; 238 is now an unconditional Lean theorem) | ≈ 227 | 208-adversary |
 | the same with `s0` counted exactly | ≈ 207 | 208-adversary |
 | any radius-3 three-centre local argument | ≈ 207 | 208-adversary (no complete cycle inside a ball) |
 

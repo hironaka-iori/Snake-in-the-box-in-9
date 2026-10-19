@@ -1,6 +1,6 @@
 # Collaborator handoff
 
-Checkpoint: 18 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 19 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Current assignment: constructive search
 
@@ -40,7 +40,8 @@ an external edge. Costs can overlap and do not give a global bound.
 Synchronization incorporated the completed KEEP=112 aggregate receipt covering
 all 262 oriented bank entries, the bounded KEEP=96 survey, and conditional
 window bounds through 238. The unconditional 241 theorem is now part of this
-branch and was audited on macOS and again from a fresh Linux environment (see
+branch and was audited on macOS and again from a fresh Linux environment. The
+bound 238 is now also an unconditional Lean theorem, audited on Linux (see
 the window-exclusion section below). Historical priorities below describe previous checkpoints; they do not assign
 new upper-bound work to this constructive investigation.
 
@@ -48,9 +49,9 @@ new upper-bound work to this constructive investigation.
 
 The exact optimum is unresolved; no candidate value receives privileged status. The earlier conjecture **a(9) = 196** has low confidence. For n = 3,...,8, subtracting 3*2^(n-3) from the known maxima leaves 1,1,1,2,2,2. Continuing the correction in doubling blocks of three predicts 196. An equally exact additive-block fit predicts 195. The first eight values therefore do not determine the ninth, and interpolation supplies no geometric proof.
 
-The fully Lean-checked global interval is now **191 <= a(9) <= 241** (see the window-exclusion section below). The 245 argument: the strengthened square-face bound combines the incidence identity with endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. The earlier arguments still supply the weaker bounds 247, 248, 251, 254, and 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
+The fully Lean-checked global interval is now **191 <= a(9) <= 238** (see the window-exclusion section below). The 245 argument: the strengthened square-face bound combines the incidence identity with endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. The earlier arguments still supply the weaker bounds 241, 242, 247, 248, 251, 254, and 255. No 192-edge improvement, 196-edge construction, exclusion of 197 edges, or exact optimality result has been obtained.
 
-The strongest completed global upper bound is 241 (window-exclusion section below). For the 245 step, normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
+The strongest completed global upper bound is 238 (window-exclusion section below; `outputs/upper-bound-238-audit-linux.log`). For the 245 step, normalization from arbitrary path indices, both five-vertex window shapes, all outer missing-family cases, the final shared-coordinate classification, and the aggregate potential estimate are checked in Lean. An independent final import audit passed. All theorem audits contain only `propext`, `Classical.choice`, and `Quot.sound`. The fresh source-only reproduction succeeded for all151 steps, including the148 strengthening modules, with every source hash rechecked. Saved manifests and logs are in `outputs/strengthened-reproduction-*` and the versioned `outputs/strengthened-245-reproduction-*` files. The exact optimum remains open.
 
 The earlier universal two-singleton-square claim for internal vertices is false. A checked 137-edge counterexample has zero at path index 127, endpoints 145 and 288, and exactly one singleton square, {0,4,8,12}. Its distance along the path from the nearer endpoint is ten. Thus simply excluding the first few vertices near the endpoints does not repair that universal assertion. This example does not exclude a stronger statement restricted to longest paths.
 
@@ -110,7 +111,7 @@ For v selected vertices and total singleton count T, a finite potential yields `
 
 The next priorities concern improving beyond245 and finding a longer verified construction. Probes excluding adjacent counts (1,4) and two internal count-one vertices at path distance two remain uncertified observations. A checked (2,2) example prevents assuming every adjacent pair has sum at least five. The repeating count pattern (2,2,3) still meets the established local count restrictions and is a bottleneck for improving their aggregate consequence.
 
-## Latest aggregate work: window exclusions (17 October 2026)
+## Latest aggregate work: window exclusions (17-19 October 2026)
 
 `milestones/10-window-aggregate/` addresses "Priority 2" below. Because `alpha >= 2` fails universally, it bounds how often low counts can occur, via local window exclusions rather than a pointwise bound.
 
@@ -120,11 +121,13 @@ The next priorities concern improving beyond245 and finding a longer verified co
 - **These 22 exclusions are now Lean theorems, so 242 and 241 are unconditional** (`UpperBound241.lean`: `upper_bound_242`, `upper_bound_241`, `verified_interval_191_241`, axioms `propext`, `Classical.choice`, `Quot.sound` only). `LocalWindowBridge.lean` moves each snake window to canonical position and proves the abstract axioms of `LocalWindowModel.lean` there; `LocalWindowSat/` proves that every clause of each UNSAT core follows from those axioms; and `LocalWindowUnsat/` replays the drat-trim LRAT refutation of each core, segment by segment with `decide +kernel`, through the checker `LratCheck.lean`, whose soundness is proved in Lean. Audited on macOS (`outputs/upper-bound-241-audit.log`) and from a fresh Linux environment (`outputs/upper-bound-241-audit-linux.log`).
 - All 22 premise cases have `drat-trim`-verified refutations of explicit CNFs, and 532 real-snake windows pass as positive controls.
 
-- A direction-aware automaton (last six transition directions up to relabelling, last three counts; 2592 states) refined against the SAT oracle reaches mean 10/3 with 145 certified windows. `upper_239_of_direction_windows` gives **239 edges**; the potential table is kernel-checked and the parity bridge from `Snake9.Snake` is proved. With five-centre windows the same loop reaches 7/2 with 325 certified windows; pruning keeps 175 of them with the same mean (potential range 10), and `upper_238_of_direction_windows5` gives **238 edges** (44,064 states, checked in 34 shards). Both bounds remain conditional.
+- A direction-aware automaton (last six transition directions up to relabelling, last three counts; 2592 states) refined against the SAT oracle reaches mean 10/3 with 145 certified windows. `upper_239_of_direction_windows` gives **239 edges**; the potential table is kernel-checked and the parity bridge from `Snake9.Snake` is proved. With five-centre windows the same loop reaches 7/2 with 325 certified windows; pruning keeps 175 of them with the same mean (potential range 10), and `upper_238_of_direction_windows5` gives **238 edges** (44,064 states, checked in 34 shards).
+- **The 175 exclusions are now Lean theorems, so 238 is unconditional** (`UpperBound238.lean`: `upper_bound_238`, `verified_interval_191_238`, axioms `propext`, `Classical.choice`, `Quot.sound` only; `outputs/upper-bound-238-audit-linux.log`, Lean 4.19.0, mathlib c44e0c8e). The bridge is `DirectionWindowBridge5` with `AggregateDirection238Unconditional.upper_238_of_refuted`; clause soundness is `LocalWindowDirSat5` (175 Sat modules); the kernel replays of the 175 LRAT refutations built completely (14,206/14,206 modules, 0 failed; 2,803 check modules, 39.5 kernel-hours, at most 3.93 GB each; 11,038 data modules, 13.5 h; `LocalWindowDirUnsat5` in 230 s at 7.63 GB; `outputs/upper-bound-238-replay-linux.log`). The chain modules were reused from the compile in `outputs/aggregate-238-chain-175-linux.log` (47 min); `UpperBound238` itself took 163 s and 9.7 GB. The audit was made on Linux only against the incrementally built core; the fresh source-only path `work/spectral/verify_strengthened.py --with-238` has not been run yet.
+- 239 stays a conditional theorem: it is subsumed by 238, so the replay of its 145 refutations was stopped unfinished and no `UpperBound239` build exists.
 
-Remaining work to make 238 unconditional: the same pipeline applies, and an unconditional 238 subsumes 239. The bridge (`DirectionWindowBridge5`, `AggregateDirection238Unconditional.upper_238_of_refuted`), the 175 cores and their clause-soundness modules (`LocalWindowSat/D*`) are generated, and `UpperBound238.lean` discharges `AllRefuted238` with the replays. The 175-window chain to `upper_238_of_refuted` compiles with standard axioms only (`outputs/aggregate-238-chain-175-linux.log`). The clause-soundness collector `LocalWindowDirSat5` and the kernel replays of the 175 LRAT refutations (2,803 check modules, generated by `milestones/10-window-aggregate/scripts/run_direction_replays.py --set direction5`) are being built, followed by an axiom audit of `UpperBound238`. For 239 the bridge and clause soundness of all 145 cores are proved, but the replay of their refutations was stopped unfinished; no `UpperBound239` build exists.
+Remaining upper-bound work: 238 is done. The next step is radius-four windows, whose refinement reaches mean 42/11 and would give 236; their certificates are being generated and 236 is not a theorem. After that, the empty-square term `s0` is the main lever (a target near 231). Local window methods of this kind are capped near 227 edges (`milestones/11-local-ceiling/`), so reaching 196 needs global arguments.
 
-Untested four-vertex windows were counted as feasible, radius four was not used, and the empty-square term `s0` is still discarded. 241 is therefore not the limit of this method.
+For the 241 step, untested four-vertex windows were counted as feasible, radius four was not used, and the empty-square term `s0` was discarded; the direction-aware windows behind 238 showed that 241 was not the limit of this method. The term `s0` is still discarded.
 
 ## Priority 1: find a longer construction outside the exhausted families
 
@@ -168,8 +171,9 @@ These are independent tasks suitable for separate branches. The current handoff 
 |---|---|
 | Current mathematical paper | `paper/snake9_research.tex` |
 | All standard-library proofs | `work/final_lean/` |
-| Bounds 241, 242, 245, 247, 248, 251, 254 and 255 using pinned mathlib | `work/spectral/` |
+| Bounds 238, 241, 242, 245, 247, 248, 251, 254 and 255 using pinned mathlib | `work/spectral/` |
 | Audits of the unconditional 241 and 242 bounds | `outputs/upper-bound-241-audit.log` (macOS), `outputs/upper-bound-241-audit-linux.log` (fresh Linux build) |
+| Audit and kernel replays of the unconditional 238 bound | `outputs/upper-bound-238-audit-linux.log`, `outputs/upper-bound-238-replay-linux.log`, `outputs/aggregate-238-chain-175-linux.log` (Linux, incremental build) |
 | Fresh 245 build and verified source hashes | `outputs/strengthened-reproduction-manifest.json`, `outputs/strengthened-reproduction.log` |
 | Fresh core and incidence build | `outputs/incidence-reproduction.log` |
 | Square investigation and its limitations | `milestones/03-square-incidence/square_investigation.md` |
