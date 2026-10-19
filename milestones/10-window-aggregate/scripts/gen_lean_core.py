@@ -440,7 +440,7 @@ def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS, rounds=None):
 
 
 def dir5_one(arg):
-    case, work, cadical, seeds, setname, rounds = arg
+    case, work, cadical, seeds, setname, rounds, drop = arg
     S = CADICAL_SETS[setname]
     name = case['case']
     dirs, alpha = case['dirs'], [tuple(x) for x in case['alpha']]
@@ -460,6 +460,10 @@ def dir5_one(arg):
     clauses = read_cnf(extract_cnf(name, work, S['certs']))
     assert len(clauses) == case['clauses'], name
     stats = lrat_stats(lrat)
+    if drop:   # run_direction_replays.py gen regenerates it (deterministically) when needed
+        for ext in ('.lrat', '.lrat.json', '.core.cnf'):
+            if os.path.exists(os.path.join(work, name + ext)):
+                os.remove(os.path.join(work, name + ext))
     assert (stats['lemmas'], stats['hints']) == (info['lemmas'], info['hints']), name
     core = [clauses[i - 1] for i in ids]
     module = dir_module(dirs, syms, S['prefix'])
@@ -504,7 +508,7 @@ def main_direction5(a):
             res.append((meta['name'], meta['module'].split('.')[-1], meta['dirs'], meta['syms'],
                         len(meta['core_ids']), meta['cnf_clauses'], meta['hash_source'], meta['lrat']))
         else:
-            jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1)), a.set, a.rounds))
+            jobs.append((c, a.work, a.cadical, list(range(1, a.seeds + 1)), a.set, a.rounds, a.drop_lrat))
     if a.set == 'direction5' and not a.index:
         assert n == 325 and len(res) == 145 and len(jobs) == 180, (n, len(res), len(jobs))
     print(f'{a.set}: {n} cases, {len(res)} reused, {len(jobs)} to core', flush=True)
@@ -583,6 +587,8 @@ def main():
     ap.add_argument('--seeds', type=int, default=3, help='direction5: cadical seeds to try per window')
     ap.add_argument('--rounds', type=int, default=1,
                     help='rounds of core shrinking per proof (see ROUNDS); 3 roughly halves the hints')
+    ap.add_argument('--drop-lrat', action='store_true',
+                    help='direction5/r4: delete each core LRAT after recording its statistics (saves disk)')
     ap.add_argument('--index', default=None, help='direction5/r4: use this (subset) certificate index')
     a = ap.parse_args()
     os.makedirs(a.work, exist_ok=True)

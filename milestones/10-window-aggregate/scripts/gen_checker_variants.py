@@ -79,7 +79,7 @@ def main():
         print(fmod, 'written' if write(os.path.join(LEAN, fmod + '.lean'), text) else 'unchanged')
     # LratFast2 (cached start database) for every width and offset, over the LratFast variant
     fast2 = open(os.path.join(LEAN, 'LratFast2.lean')).read()
-    assert '2400' not in fast2
+    assert '9600' not in fast2
     for bits, off in [(13, 2400)] + todo:
         sfx = {2400: '', 3000: 'O3k', 4000: 'O4k'}[off] + (str(bits) if bits != 13 else '')
         if not sfx:
@@ -87,6 +87,8 @@ def main():
         bmod, bns = bases[off]
         text = fast2.replace('import LratFast\n', 'import LratFast%s\n\n%s' % (sfx, header('LratFast2', bits, off)), 1)
         text = text.replace('4096', str(1 << (bits - 1)))
+        if off != 2400:
+            text = text.replace('4800', str(2 * off)).replace('2400', str(off))
         if bits != 13:
             text = text.replace('8191', str((1 << bits) - 1)).replace('13', str(bits))
         text = text.replace('Snake9.LratFast2', '@@F2@@').replace('Snake9.LratFast', 'Snake9.LratFast' + sfx)

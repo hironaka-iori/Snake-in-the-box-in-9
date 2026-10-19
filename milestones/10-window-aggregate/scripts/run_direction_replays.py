@@ -64,6 +64,11 @@ def gen(a):
             if r.returncode == 0:
                 print(json.dumps({'case': name, 'module': mod, 'wbits': bits, 'off': off,
                                   'split': a.split, 'hints': info['hints']}), flush=True)
+                if a.drop_lrat:   # regenerated deterministically by core_lrat when needed again
+                    for ext in ('.lrat', '.lrat.json', '.core.cnf'):
+                        p = os.path.join(a.work, name + ext)
+                        if os.path.exists(p):
+                            os.remove(p)
                 break
             if 'too many slots' not in r.stderr and 'assert nslots' not in r.stderr:
                 print(r.stderr[-2000:], file=sys.stderr)
@@ -96,6 +101,8 @@ def main():
     g.add_argument('--cadical', default=None, help='direction5: cadical binary (default: toolchain)')
     g.add_argument('--seeds', type=int, default=2, help='direction5: cadical seeds per core proof')
     g.add_argument('--split', action='store_true', help='emit proofs for LratFast2 (see above)')
+    g.add_argument('--drop-lrat', action='store_true',
+                   help='delete each LRAT (and core CNF) once its Lean modules are written (saves disk)')
     g.add_argument('--rounds', type=int, default=1,
                    help='cadical portfolio rounds of core shrinking per regenerated proof (3 roughly halves the hints)')
     b = sub.add_parser('build')
