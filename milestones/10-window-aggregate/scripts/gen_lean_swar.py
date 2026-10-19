@@ -480,6 +480,8 @@ import WindowAutomatonSwar{chr(10) + 'import WindowAutomatonSym' if NS != 6 else
 namespace Snake9.WindowAutomaton
 
 set_option maxRecDepth 100000
+-- the tables are large numerals; elaborating them is slow but involves no search
+set_option maxHeartbeats 0
 {pos_block}
 {ifchain(f'shapeIdx{S}', sidx, len(shapes))}
 
