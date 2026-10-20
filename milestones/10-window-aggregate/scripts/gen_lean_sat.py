@@ -389,6 +389,7 @@ axioms (`sat`).  Hence the {n} refutations `Unsat D….cnf` (listed in the order
 -/
 
 set_option maxRecDepth 100000
+set_option maxHeartbeats 0
 
 namespace Snake9.LocalWindow
 
