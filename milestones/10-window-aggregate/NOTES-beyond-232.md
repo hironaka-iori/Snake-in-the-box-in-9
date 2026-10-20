@@ -22,6 +22,14 @@ Status: working notes. Every bound below 245 in this milestone is **conditional*
 - 231 needs a mean above about 4.679. With eight directions of memory the constant is `8 P - Q + D`, and the bound is `floor((9170 Q + 8 P + D) / (P + 35 Q))`.
 - The cap-5 variant (6.2 million states) reached only 4.24 after 45 rounds, because lumping counts at six hides the structure.
 
+**Status at 20 October, 10:50 UTC.**
+- The seven-centre cap-7 refinement reached mean 103/22, about 4.682, on the solver-refuted windows (these are not certified yet).
+- On those windows the exact walk bound of the automaton (`vertex_bound`, computed by `lean_minimize.py --lam 103/22 --start`, 564 million edges, 4.9 GB, 5 minutes) is already **231**.
+- The start-accounting potential still gives 232: at 103/22 it needs `D < -28`, and the best start potential has range 884.
+- As the mean rises, the requirement relaxes: at 89/19 it is `D < -14`, at 75/16 it is `D < 0`.
+- Those denominators exceed the 8-bit SWAR fields, so the Lean side needs 16-bit fields (in progress).
+- The set for 103/22 keeps 57,831 windows (8,535 of them seven-centre). Most are not certified yet.
+
 ## 3. Lean side for seven-centre chains (prototype, not yet in the repository)
 
 - A generator prototype (scratchpad `genk7/`) produces and compiles a provisional L = 8, k = 7, cap-7 chain end to end, with standard axioms only.
