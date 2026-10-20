@@ -79,6 +79,9 @@ MODULES = [
     "W223RepS02", "W223RepMain", "W223DisInputs", "W223DisS00", "W223DisS01", "W223DisS02",
     "W223DisS03", "W223DisS04", "W223DisS05", "W223DisS06", "W223DisS07", "W223DisS08",
     "W223DisS09", "W223DisMain", "W223",
+    # bridge step G1 and the unconditional 244
+    "W223G1Defs", "W223G1Data", "W223G1Sound", "W223G1CheckRep", "W223G1CheckDis", "W223G1Snake",
+    "W223G1Inst", "UpperBound244",
 ]
 
 
@@ -282,7 +285,7 @@ def main():
                     finished.add(running.pop(future))
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import Aggregate244Conditional\nimport CubePermutation\nimport W223\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
+            "import Aggregate244Conditional\nimport CubePermutation\nimport W223\nimport UpperBound244\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
             + "".join(f"import AggregateDirection{c}Conditional\n" for c in args.extra_chains)
             + "import UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
@@ -301,7 +304,10 @@ def main():
             "#print axioms Snake9.CubePerm.exists_normalizing_cubeMap\n"
             "#print axioms Snake9.CubePerm.no223_window_cubeMap\n"
             "#print axioms w223_rep_unsat\n"
-            "#print axioms w223_dis_unsat\n", encoding="utf-8"
+            "#print axioms w223_dis_unsat\n"
+            "#print axioms W223G1.no_223\n"
+            "#print axioms Snake9.upper_bound_244\n"
+            "#print axioms Snake9.verified_interval_191_244\n", encoding="utf-8"
         )
         with audit.open("a", encoding="utf-8") as stream:
             stream.write(
@@ -338,7 +344,7 @@ def main():
             raise RuntimeError(f"Missing final theorem audits: {missing}")
         manifest["status"] = "success"
         manifest["completed_utc"] = datetime.now(timezone.utc).isoformat()
-        print("Verified: 191 <= a(9) <= 245 edges. Exact optimum unresolved.", flush=True)
+        print("Verified: 191 <= a(9) <= 244 edges (verified_interval_191_244). Exact optimum unresolved.", flush=True)
         print(f"Source hashes, commands, and transitive axiom audits: {build / 'manifest.json'}")
     except BaseException as exc:
         manifest["status"] = "failed"

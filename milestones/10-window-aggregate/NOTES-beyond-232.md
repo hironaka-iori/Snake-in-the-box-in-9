@@ -1,6 +1,6 @@
 # Beyond 232: findings of 19-20 October 2026 and how they connect to earlier work
 
-Status: working notes. Every bound below 245 in this milestone is **conditional**: the Lean theorems prove "no listed window occurs => at most N edges"; the windows are refuted by drat-trim-checked DRAT proofs of local CNFs, and the geometric step from a snake window to that CNF is not formalized. The unconditional, Lean-checked interval is still 191 <= a(9) <= 245 (`FinalAudit` of every reproduction manifest).
+Status: working notes. Every bound below 245 in this milestone is **conditional**: the Lean theorems prove "no listed window occurs => at most N edges"; the windows are refuted by drat-trim-checked DRAT proofs of local CNFs, and the geometric step from a snake window to that CNF is not formalized. Since 20 October the unconditional, Lean-checked interval is **191 <= a(9) <= 244** (`verified_interval_191_244`, section 4).
 
 ## 1. The six-centre ceiling is 9/2
 
@@ -54,7 +54,7 @@ Status: working notes. Every bound below 245 in this milestone is **conditional*
 | 239 | 145 | about 4 million | about 3 days |
 | 235 / 233 / 232 | 2,635 / 8,182 / 15,959 | 10^7.7 - 10^8.8 | months to years |
 
-**Cheapest first milestone:** 244 unconditional, which moves the proved interval from 245 to 244 with two certificates. Before the large chains, the proofs must shrink by about 100x. Options: minimisation weighted by proof cost (oracle time predicts certification time, log correlation 0.95), incremental certification per shape, and re-solving on the used clauses.
+**Done:** 244 is unconditional, moving the proved interval from 245 to 244 with two certificates (`milestones/07-window-223/bridge/README.md`). The total kernel work is about 260 s, far below the estimate, because the trimmed LRAT proofs have 1,629 and 17,101 steps. Before the large chains, the proofs must shrink by about 100x. Options: minimisation weighted by proof cost (oracle time predicts certification time, log correlation 0.95), incremental certification per shape, and re-solving on the used clauses.
 
 ## 5. Lower-bound side
 
