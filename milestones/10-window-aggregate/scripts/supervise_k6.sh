@@ -84,4 +84,12 @@ if [ ! -f $D/refine_L8_k7_K7_r3.json ] && [ ! -f $D/refine_k7_paused ] && ! runn
      --batch 40 --query-timeout 10 --long-timeout 120 --avoid data/avoid_k6.json >> data/refine_L8_k7_K7_r3.log 2>&1 &)
 fi
 
+# 11. the 231 set (seven-centre, cap 7, mean 89/19, start accounting): certify into the shared index
+if [ -f $D/minimal_L8_k7_K7_r3_89_19.json ] && ! grep -q "failed 0" $D/certify_direction_231.log 2>/dev/null \
+   && ! running "certify_direction.py"; then
+  log "starting 231 certification"
+  (cd $S && nohup python3 certify_direction.py --set ../data/minimal_L8_k7_K7_r3_89_19.json --workers 4 \
+     --out ../data/direction_certificates_k6.json >> ../data/certify_direction_231.log 2>&1 &)
+fi
+
 log "supervisor pass done"
