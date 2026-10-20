@@ -12,9 +12,11 @@ The user explicitly broadened the construction objective: pursue any valuable im
 
 [Milestone 24](milestones/24-contracted-face-search/README.md) implements that contraction and maximizes expanded length. Both the base and cycle-strengthened models passed 592 exhaustive controls. All twenty Q9 runs returned FEASIBLE at 191; none proved optimality. Five Lean results establish path contiguity, the count identity and the position obstruction to cycles. The complete optimizer correspondence remains a written argument with finite controls.
 
-Next: obtain alternative 191-edge fillings with different selected sets, then change the free region. A different seed can release the outside pattern held fixed in all current face runs. Diversity is an intermediate search result, not an improved lower bound.
+[Milestone 25](milestones/25-alternative-fillings/README.md) explicitly maximizes changed selected vertices at lengths 191 and 190. Four faces gave seven feasible paths and one UNKNOWN. The changed 191-edge path is equivalent to bank example 130. The most changed 190-edge path is exactly a new endpoint followed by a 190-vertex tail of that known path. Six growth attempts reached at most 191; all four recovered 191-edge paths matched bank example 130. Eight searches requiring the new vertex to remain selected returned UNKNOWN. The models passed 608 plus 256 exhaustive controls, and three Lean results passed with standard axiom audits.
 
-GitHub refresh: `research/unconditional-241` reached 2a7fe4e4, with a successful final Linux audit for 237 after 387 radius-four refutations. This round inspected the receipt without importing or rebuilding its source closure. Main's integrated theorem remains 238. The branch `claude/relaxed-keller-60ks7i` reached 73ce64d9 with seven-centre refinement work. The saturated-face classification branch remains a separate finite investigation.
+Next: require an interior change as well as retaining the new vertex, then compare each candidate with the known bank before growth. The observed endpoint modification is not evidence of a new construction class.
+
+GitHub refresh: `research/unconditional-241` reached 5fb6c286 with clause-collector settings, and `claude/relaxed-keller-60ks7i` reached e2d9f7fc with a seven-centre certificate generator. The earlier successful 237 audit at 2a7fe4e4 remains recorded separately. Main's integrated theorem remains 238; the 237 source closure has not been imported or independently rebuilt here.
 
 ## Construction history
 

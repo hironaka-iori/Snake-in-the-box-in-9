@@ -29,3 +29,6 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Internal-anchor donors](22-internal-anchor-donors/README.md)
 - [Parity-compatible face searches](23-parity-compatible-faces/README.md)
 - [Contracted fixed-path search](24-contracted-face-search/README.md)
+
+- [Alternative fillings and retained changes](25-alternative-fillings/README.md)
+- [Global cell construction](17-global-cell-construction/README.md)

@@ -1185,6 +1185,31 @@ Two versions of this model were compared with an independent exhaustive enumerat
 
 Both versions were run on the ten unresolved eight-dimensional faces of the aligned 191-edge seed. Each run used two workers and a 20-second limit, with a fixed-seed feasibility control. All twenty controls recovered 191 edges. All twenty optimization runs also returned 191 edges, with optimality unresolved. Every expanded result passed an independent check of all unordered vertex pairs. The cycle constraints produced no longer construction in this comparison. A subsequent construction direction is to obtain alternative 191-edge fillings and then change the free region, allowing the outside pattern to change between successive repairs.
 
+\subsection{Alternative fillings and a one-edge retreat}
+The preceding twenty optimization runs all returned the seed's original selected vertex set. A more specific construction hypothesis is that an alternative filling, possibly after temporarily losing one edge, permits growth when a different region is freed.
+
+\begin{lemma}[Order and exchange counts]
+Two snakes of the same length with the same selected vertex set have identical vertex order up to reversal. If $S$ and $T$ are finite selected sets with $|S|=|T|$, then
+\[
+|T\setminus S|=|S\setminus T|.
+\]
+If instead $|T|+1=|S|$, then
+\[
+|S\setminus T|=|T\setminus S|+1.
+\]
+\end{lemma}
+\begin{proof}
+For the first assertion, apply the selected-subpath contiguity lemma to the two equally long snakes. A consecutive interval containing all positions must begin at zero in the forward direction or at the last position in the reverse direction. For the cardinality statements, write each set as the disjoint union of its intersection with the other set and its remaining vertices, then subtract the common intersection count. All three assertions are checked in Lean.
+\end{proof}
+
+At a fixed length, maximizing $|T\setminus S|$ therefore measures a change of selected set rather than a different presentation of the same snake. The contracted model was modified to maximize this quantity at 191 and 190 edges in four coordinate faces. It passed 608 comparisons with exhaustive small-cube subset enumeration.
+
+Among the eight searches, seven returned a valid path and one remained unresolved without a feasible result. A 191-edge filling exchanged three vertices. A 190-edge filling added one vertex while removing two, and another added four while removing five. A comparison under coordinate permutations, translations and reversal identified the changed 191-edge filling with published bank example 130. The two changed 190-edge fillings were not equivalent to either one-vertex endpoint truncation of any of the 131 bank examples. This comparison establishes no wider novelty claim.
+
+The most changed 190-edge filling has a further restrictive description. In the aligned order of the changed 191-edge path, replace its initial pair $(7,15)$ by the single vertex $12$ and keep the remaining 190 vertices. The result is exactly that 190-edge filling. Its difference from the known family is consequently confined to one end.
+
+Six subsequent maximization runs changed the free face while retaining the new seed's outside selected set. They returned two 190-edge paths and four 191-edge paths. All four 191-edge results were equivalent to bank example 130. In particular, the recovery from the shortened seed discarded vertex 12. This motivates a separate test requiring vertex 12 to remain selected while seeking 191 or 192 edges; it does not require that vertex to remain an endpoint. The additional membership constraint passed 256 exhaustive small-cube comparisons. All eight searches with that constraint remained unresolved after 20 seconds, without a feasible result. No length was excluded. Further diversification must distinguish an interior change from a modification confined to the ends.
+
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
 
