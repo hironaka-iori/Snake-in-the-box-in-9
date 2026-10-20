@@ -1,6 +1,6 @@
 # Research milestones
 
-The exact optimum remains unresolved. The strongest checked global interval is 191 <= a(9) <=245 edges.
+The exact optimum remains unresolved. This checkout integrates 191 <= a(9) <=238 edges. Collaborator commit 2a7fe4e4 reports a completed Lean audit for 237; its source closure is not yet integrated here.
 
 - [Foundations, witnesses, and numerical hypotheses](01-foundations/README.md)
 - [Layer constructions](02-layer-constructions/README.md)
@@ -18,6 +18,14 @@ The exact optimum remains unresolved. The strongest checked global interval is 1
 - [Targeted mergers and frozen-cycle accounting](15-component-mergers/README.md)
 - [Larger cycle configurations and local cell states](16-cycle-reservoirs/README.md)
 
-Active direction as of 18 October: construct a longer snake through interior changes and defect repair. Upper-bound work continues on collaborator branches; the separate 241 branch has a saved successful audit but has not been independently rebuilt or merged into this checkpoint.
+Active direction as of 20 October: construct any verified improvement beyond 191 edges. Upper-bound research continues on collaborator branches. See the current collaborator handoff for evidence boundaries.
 
 The relocation manifest records moved files. Historical proof logs and source-hash manifests retain their original recorded paths as provenance.
+
+- [Expanded cells](18-expanded-cells/README.md)
+- [Coordinate-face repair](19-coordinate-face-repair/README.md)
+- [Middle-path release](20-middle-path-release/README.md)
+- [Endpoint recombination](21-endpoint-recombination/README.md)
+- [Internal-anchor donors](22-internal-anchor-donors/README.md)
+- [Parity-compatible face searches](23-parity-compatible-faces/README.md)
+- [Contracted fixed-path search](24-contracted-face-search/README.md)

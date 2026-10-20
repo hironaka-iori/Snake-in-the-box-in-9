@@ -10,9 +10,11 @@ The user explicitly broadened the construction objective: pursue any valuable im
 
 [Milestone 23](milestones/23-parity-compatible-faces/README.md) targets 193 to permit fixed-endpoint improvements. All 672 Q6 faces and 1,008 opposite Q5 pairs were solver-infeasible. One Q7 face remains unresolved after retries. At both 192 and 193, ten Q8 faces remain UNKNOWN and eight are excluded. Four Lean deductions check the target logic and third-neighbor exclusion.
 
-Next: build and validate a contracted model for those ten Q8 faces, starting with face 3 (165 retained model vertices). Maximize the expanded length and use the known 191-edge witness as a control. Expand every feasible result and check all vertex pairs. The contraction is currently an inventory and mathematical proposal, not an implemented solver.
+[Milestone 24](milestones/24-contracted-face-search/README.md) implements that contraction and maximizes expanded length. Both the base and cycle-strengthened models passed 592 exhaustive controls. All twenty Q9 runs returned FEASIBLE at 191; none proved optimality. Five Lean results establish path contiguity, the count identity and the position obstruction to cycles. The complete optimizer correspondence remains a written argument with finite controls.
 
-GitHub main was unchanged at the initial fetch. The collaborator branch `research/unconditional-241` advanced to 7d7ee17b with certificate-generation and disk-use improvements; no further bound is adopted. The manuscript retains 191 <= a(9) <= 238 and the existing incremental-build limitation.
+Next: obtain alternative 191-edge fillings with different selected sets, then change the free region. A different seed can release the outside pattern held fixed in all current face runs. Diversity is an intermediate search result, not an improved lower bound.
+
+GitHub refresh: `research/unconditional-241` reached 2a7fe4e4, with a successful final Linux audit for 237 after 387 radius-four refutations. This round inspected the receipt without importing or rebuilding its source closure. Main's integrated theorem remains 238. The branch `claude/relaxed-keller-60ks7i` reached 73ce64d9 with seven-centre refinement work. The saturated-face classification branch remains a separate finite investigation.
 
 ## Construction history
 

@@ -1155,7 +1155,35 @@ Suppose a selected vertex $v$ in an induced path has two distinct selected neigh
 \begin{proof}
 Every vertex of a path has at most two neighbors in the path. Selecting $c$ would give three distinct neighbors of $v$.
 \end{proof}
-The lemma is checked in Lean and supplies a preprocessing rule for the unresolved face searches. Fixed outside vertices induce disjoint paths. An internal vertex of such a path already has two selected outside neighbors, so all its inside neighbors can be removed from the candidate set. In the smallest remaining case, two outside paths contain 99 vertices, of which 95 are internal. The surviving region contains 161 candidate inside vertices and four outside endpoints. Contracting the two fixed paths to connections between their endpoints would therefore give a model with 165 vertices. This contraction still requires implementation and validation. Maximizing the expanded path length would permit any improvement, without imposing a single numerical target.
+The lemma is checked in Lean and supplies a preprocessing rule for the unresolved face searches. Fixed outside vertices induce disjoint paths. An internal vertex of such a path already has two selected outside neighbors, so all its inside neighbors can be removed from the candidate set. In the smallest remaining case, two outside paths contain 99 vertices, of which 95 are internal. The surviving region contains 161 candidate inside vertices and four outside endpoints. Contracting the two fixed paths gives a model with 165 vertices. The following construction implements this reduction and maximizes the expanded length.
+
+\subsection{Contracting fixed outside paths}
+\begin{lemma}[Contiguity of a selected subpath]
+Let $P=(v_0,\ldots,v_m)$ and $R=(w_0,\ldots,w_k)$ be induced paths, with every vertex of $R$ selected in $P$. There is an index $b$ such that either $w_i=v_{b+i}$ for every $i$, or $w_i=v_{b-i}$ for every $i$, with all displayed indices in range.
+\end{lemma}
+\begin{proof}
+Write $w_i=v_{e_i}$. Distinctness makes the positions $e_i$ distinct. Adjacency in the induced path $P$ gives $|e_{i+1}-e_i|=1$. A change of direction would give $e_{i+2}=e_i$, contradicting distinctness. All steps therefore have the same direction, proving the assertion. The index argument and its application to snakes are checked in Lean.
+\end{proof}
+
+Fix a free region $U$ and the required selected set $F$ outside $U$, obtained from a known snake. Each component of the graph induced by $F$ is a path. Let $I$ be the union of their internal vertices, and delete from $U$ all vertices adjacent to $I$. Keep the endpoints of each component and its isolated vertices. Replace every component with at least three vertices by an artificial edge joining its endpoints. Retain all cube edges between the surviving vertices.
+
+\begin{proposition}[Expansion of the contracted model]
+An induced path in this augmented graph that contains every retained vertex of $F$ expands to a cube snake with selected set outside $U$ exactly $F$. Conversely, every cube snake with that outside selected set contracts to such a path. If the contracted path has $c$ vertices and $r=|I|$, its expanded length is
+\[
+L=c+r-1.
+\]
+\end{proposition}
+\begin{proof}
+Each artificial edge has two required selected endpoints, so inducedness forces the contracted path to traverse it. Expand it along its fixed component, in the direction of traversal. The components are disjoint. An expanded internal vertex has no neighbor in a different outside component, by the component definition, and no selected inside neighbor, by the deletion rule. All remaining possible chords are represented by cube edges of the augmented graph and excluded by its induced-path condition. Expansion therefore yields a snake.
+
+Conversely, a snake containing $F$ cannot select an inside neighbor of a vertex of $I$, since that vertex already has two selected outside neighbors. By the contiguity lemma, each fixed component is traversed consecutively. Replacing those traversals by artificial edges introduces no nonconsecutive adjacency: cube edges are inherited, and an artificial edge represents a required consecutive traversal. The result is the stated contracted path. Expansion inserts exactly $r$ vertices, proving the length formula.
+\end{proof}
+
+The contiguity and length-counting statements are checked in Lean. The full contraction correspondence above is a written proof; the implemented optimization model has finite validation rather than a complete Lean proof.
+
+Two versions of this model were compared with an independent exhaustive enumeration of induced path vertex sets in dimensions two through four. Each passed 592 comparisons. The second version additionally excludes triangles and four-cycles in the augmented graph. Such a cycle cannot have all its vertices selected in a path: injective consecutive path positions have constant direction and cannot close. The index contradiction is also checked in Lean. An augmented cycle can include an artificial edge and thus represent a longer cycle before contraction.
+
+Both versions were run on the ten unresolved eight-dimensional faces of the aligned 191-edge seed. Each run used two workers and a 20-second limit, with a fixed-seed feasibility control. All twenty controls recovered 191 edges. All twenty optimization runs also returned 191 edges, with optimality unresolved. Every expanded result passed an independent check of all unordered vertex pairs. The cycle constraints produced no longer construction in this comparison. A subsequent construction direction is to obtain alternative 191-edge fillings and then change the free region, allowing the outside pattern to change between successive repairs.
 
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
