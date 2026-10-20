@@ -1,0 +1,373 @@
+{
+  "base_git": "53a47850c564fced0fd7e528636521ba859e1120",
+  "run_git": "393ad80fa02caab523b3a61efe2995939a2c3cfd",
+  "code_sha256": "83269307ec28c6db8fc2054782e6e651f4de9f4400da03d78c677073233b5702",
+  "input_sha256": "2b2e5595adf4e8484e36d014ff4c1ca32084eb8cff217ea637eeb34f74b84147",
+  "python": "3.12.14",
+  "started_by_pid": 12200,
+  "finished": "2026-10-20T06:03:14.060336+00:00",
+  "elapsed_seconds": 1.8900000000139698,
+  "result": {
+    "status": "OPTIMAL",
+    "solver": "OR-Tools CP-SAT",
+    "version": "9.15.6755",
+    "seed": 20261020,
+    "threads": 1,
+    "time_limit_seconds": 10.0,
+    "memory_soft_limit_mb": 512,
+    "model_sha256": "3546350cc46446722076cd76517ef50bac158371d387e693a696f620ca52a30a",
+    "model_file": "P2D2.model.txt",
+    "log_sha256": "9de747d6b4dbddb08a55cf2bd1fdabdb01caaa149634185a788e49c42be95567",
+    "wall_seconds": 1.6528889,
+    "response": "CpSolverResponse summary:\nstatus: OPTIMAL\nobjective: 0\nbest_bound: 0\nintegers: 6483\nbooleans: 6483\nconflicts: 417\nbranches: 76181\npropagations: 3784720\ninteger_propagations: 3705487\nrestarts: 1\nlp_iterations: 1110\nwalltime: 1.65289\nusertime: 1.65289\ndeterministic_time: 1.09562\ngap_integral: 0\nsolution_fingerprint: 0xc26768cf657c43c9\n",
+    "visible_vertices": 512,
+    "selected": [
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      16,
+      18,
+      19,
+      23,
+      28,
+      29,
+      30,
+      33,
+      34,
+      35,
+      45,
+      46,
+      47,
+      64,
+      66,
+      67,
+      73,
+      76,
+      77,
+      78,
+      89,
+      96,
+      97,
+      110,
+      128,
+      130,
+      131,
+      136,
+      141,
+      142,
+      143,
+      158,
+      173,
+      195,
+      256,
+      257,
+      259,
+      267,
+      268,
+      269,
+      270,
+      272,
+      285,
+      290,
+      306,
+      312,
+      314,
+      345,
+      376,
+      377
+    ],
+    "faces": [
+      {
+        "face": [
+          0,
+          1,
+          0
+        ],
+        "empty": true,
+        "b": 21,
+        "misses": [
+          {
+            "normal": 2,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 3,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 4,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 5,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 6,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 7,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 8,
+            "corner": 2,
+            "local_parity": 1
+          }
+        ],
+        "mixed": true
+      },
+      {
+        "face": [
+          0,
+          1,
+          12
+        ],
+        "empty": true,
+        "b": 21,
+        "misses": [
+          {
+            "normal": 2,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 3,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 4,
+            "corner": 3,
+            "local_parity": 0
+          },
+          {
+            "normal": 5,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 6,
+            "corner": 3,
+            "local_parity": 0
+          },
+          {
+            "normal": 7,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 8,
+            "corner": 3,
+            "local_parity": 0
+          }
+        ],
+        "mixed": true
+      }
+    ],
+    "path": [
+      4,
+      6,
+      7,
+      23,
+      19,
+      18,
+      16,
+      272,
+      256,
+      257,
+      259,
+      267,
+      11,
+      10,
+      8,
+      136,
+      128,
+      130,
+      131,
+      195,
+      67,
+      66,
+      64,
+      96,
+      97,
+      33,
+      35,
+      34,
+      290,
+      306,
+      314,
+      312,
+      376,
+      377,
+      345,
+      89,
+      73,
+      77,
+      76,
+      78,
+      110,
+      46,
+      47,
+      45,
+      173,
+      141,
+      143,
+      142,
+      158,
+      30,
+      28,
+      29,
+      285,
+      269,
+      268,
+      270
+    ],
+    "census": {
+      "vertices": 56,
+      "edges": 55,
+      "s0": 3150,
+      "E": 12600,
+      "T": 954,
+      "H": 6806,
+      "D": 59344,
+      "saturated": [
+        {
+          "face": [
+            0,
+            1,
+            0
+          ],
+          "empty": true,
+          "b": 21,
+          "misses": [
+            {
+              "normal": 2,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 3,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 4,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 5,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 6,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 7,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 8,
+              "corner": 2,
+              "local_parity": 1
+            }
+          ],
+          "mixed": true
+        },
+        {
+          "face": [
+            0,
+            1,
+            12
+          ],
+          "empty": true,
+          "b": 21,
+          "misses": [
+            {
+              "normal": 2,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 3,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 4,
+              "corner": 3,
+              "local_parity": 0
+            },
+            {
+              "normal": 5,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 6,
+              "corner": 3,
+              "local_parity": 0
+            },
+            {
+              "normal": 7,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 8,
+              "corner": 3,
+              "local_parity": 0
+            }
+          ],
+          "mixed": true
+        }
+      ],
+      "b_histogram": {
+        "0": 841,
+        "1": 659,
+        "2": 449,
+        "3": 438,
+        "4": 336,
+        "5": 192,
+        "6": 125,
+        "7": 62,
+        "8": 20,
+        "9": 19,
+        "10": 4,
+        "11": 2,
+        "12": 1,
+        "21": 2
+      },
+      "pairs": [
+        {
+          "Q": [
+            0,
+            1,
+            0
+          ],
+          "R": [
+            0,
+            1,
+            12
+          ],
+          "id": "P2D2"
+        }
+      ]
+    }
+  }
+}

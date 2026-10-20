@@ -1,0 +1,474 @@
+{
+  "base_git": "53a47850c564fced0fd7e528636521ba859e1120",
+  "run_git": "393ad80fa02caab523b3a61efe2995939a2c3cfd",
+  "code_sha256": "83269307ec28c6db8fc2054782e6e651f4de9f4400da03d78c677073233b5702",
+  "input_sha256": "b8dc403d9aefd43f12449a8eb1aee42a122214bc3bea95746ac2d8b3e22cd48e",
+  "python": "3.12.14",
+  "started_by_pid": 12200,
+  "finished": "2026-10-20T06:02:50.517967+00:00",
+  "elapsed_seconds": 5.264999999955762,
+  "result": {
+    "status": "OPTIMAL",
+    "solver": "OR-Tools CP-SAT",
+    "version": "9.15.6755",
+    "seed": 20261020,
+    "threads": 1,
+    "time_limit_seconds": 10.0,
+    "memory_soft_limit_mb": 512,
+    "model_sha256": "07e35656cb09f2b47717bc14b4a74fccc30e0362a318d670936735b3b6141819",
+    "model_file": "P1D2.model.txt",
+    "log_sha256": "e6aff43dee711f3c15c1175061ffa3fe83b72e7ac23a1db983f7b3d650fa7fef",
+    "wall_seconds": 5.0116861,
+    "response": "CpSolverResponse summary:\nstatus: OPTIMAL\nobjective: 0\nbest_bound: 0\nintegers: 6002\nbooleans: 6002\nconflicts: 480\nbranches: 72075\npropagations: 3975961\ninteger_propagations: 3947587\nrestarts: 3\nlp_iterations: 27533\nwalltime: 5.01169\nusertime: 5.01169\ndeterministic_time: 3.0261\ngap_integral: 0\nsolution_fingerprint: 0x496c17941e449cfd\n",
+    "visible_vertices": 512,
+    "selected": [
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      13,
+      16,
+      17,
+      19,
+      20,
+      27,
+      30,
+      31,
+      33,
+      34,
+      35,
+      46,
+      50,
+      54,
+      56,
+      60,
+      61,
+      64,
+      65,
+      66,
+      71,
+      74,
+      79,
+      88,
+      89,
+      93,
+      118,
+      125,
+      128,
+      130,
+      131,
+      133,
+      153,
+      156,
+      157,
+      158,
+      161,
+      170,
+      171,
+      174,
+      184,
+      185,
+      193,
+      207,
+      208,
+      210,
+      216,
+      225,
+      237,
+      239,
+      242,
+      246,
+      256,
+      258,
+      259,
+      269,
+      280,
+      284,
+      285,
+      288,
+      302,
+      318,
+      328,
+      332,
+      338,
+      342,
+      352,
+      355,
+      359,
+      360,
+      365,
+      367,
+      370,
+      378,
+      379,
+      387,
+      389,
+      393,
+      408,
+      410,
+      425,
+      427,
+      442,
+      446,
+      453,
+      457,
+      459,
+      460,
+      462,
+      468,
+      469,
+      470,
+      475,
+      482,
+      483,
+      490,
+      493,
+      494,
+      507
+    ],
+    "faces": [
+      {
+        "face": [
+          0,
+          1,
+          0
+        ],
+        "empty": true,
+        "b": 21,
+        "misses": [
+          {
+            "normal": 2,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 3,
+            "corner": 3,
+            "local_parity": 0
+          },
+          {
+            "normal": 4,
+            "corner": 2,
+            "local_parity": 1
+          },
+          {
+            "normal": 5,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 6,
+            "corner": 3,
+            "local_parity": 0
+          },
+          {
+            "normal": 7,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 8,
+            "corner": 1,
+            "local_parity": 1
+          }
+        ],
+        "mixed": true
+      },
+      {
+        "face": [
+          0,
+          2,
+          24
+        ],
+        "empty": true,
+        "b": 21,
+        "misses": [
+          {
+            "normal": 1,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 3,
+            "corner": 5,
+            "local_parity": 0
+          },
+          {
+            "normal": 4,
+            "corner": 4,
+            "local_parity": 1
+          },
+          {
+            "normal": 5,
+            "corner": 1,
+            "local_parity": 1
+          },
+          {
+            "normal": 6,
+            "corner": 4,
+            "local_parity": 1
+          },
+          {
+            "normal": 7,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 8,
+            "corner": 1,
+            "local_parity": 1
+          }
+        ],
+        "mixed": true
+      }
+    ],
+    "path": [
+      128,
+      130,
+      131,
+      387,
+      259,
+      258,
+      256,
+      288,
+      352,
+      360,
+      328,
+      332,
+      460,
+      462,
+      494,
+      490,
+      482,
+      483,
+      355,
+      359,
+      367,
+      365,
+      493,
+      237,
+      239,
+      207,
+      79,
+      71,
+      7,
+      6,
+      4,
+      20,
+      16,
+      17,
+      19,
+      27,
+      31,
+      30,
+      158,
+      156,
+      157,
+      153,
+      185,
+      184,
+      56,
+      60,
+      61,
+      125,
+      93,
+      89,
+      88,
+      216,
+      208,
+      210,
+      242,
+      246,
+      118,
+      54,
+      50,
+      34,
+      35,
+      33,
+      161,
+      225,
+      193,
+      65,
+      64,
+      66,
+      74,
+      10,
+      8,
+      9,
+      13,
+      269,
+      285,
+      284,
+      280,
+      408,
+      410,
+      442,
+      446,
+      318,
+      302,
+      46,
+      174,
+      170,
+      171,
+      427,
+      425,
+      393,
+      457,
+      459,
+      475,
+      507,
+      379,
+      378,
+      370,
+      338,
+      342,
+      470,
+      468,
+      469,
+      453,
+      389,
+      133
+    ],
+    "census": {
+      "vertices": 105,
+      "edges": 104,
+      "s0": 1914,
+      "E": 7656,
+      "T": 1711,
+      "H": 10507,
+      "D": 29687,
+      "saturated": [
+        {
+          "face": [
+            0,
+            1,
+            0
+          ],
+          "empty": true,
+          "b": 21,
+          "misses": [
+            {
+              "normal": 2,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 3,
+              "corner": 3,
+              "local_parity": 0
+            },
+            {
+              "normal": 4,
+              "corner": 2,
+              "local_parity": 1
+            },
+            {
+              "normal": 5,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 6,
+              "corner": 3,
+              "local_parity": 0
+            },
+            {
+              "normal": 7,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 8,
+              "corner": 1,
+              "local_parity": 1
+            }
+          ],
+          "mixed": true
+        },
+        {
+          "face": [
+            0,
+            2,
+            24
+          ],
+          "empty": true,
+          "b": 21,
+          "misses": [
+            {
+              "normal": 1,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 3,
+              "corner": 5,
+              "local_parity": 0
+            },
+            {
+              "normal": 4,
+              "corner": 4,
+              "local_parity": 1
+            },
+            {
+              "normal": 5,
+              "corner": 1,
+              "local_parity": 1
+            },
+            {
+              "normal": 6,
+              "corner": 4,
+              "local_parity": 1
+            },
+            {
+              "normal": 7,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 8,
+              "corner": 1,
+              "local_parity": 1
+            }
+          ],
+          "mixed": true
+        }
+      ],
+      "b_histogram": {
+        "0": 20,
+        "1": 63,
+        "2": 111,
+        "3": 196,
+        "4": 272,
+        "5": 312,
+        "6": 303,
+        "7": 268,
+        "8": 197,
+        "9": 82,
+        "10": 56,
+        "11": 16,
+        "12": 11,
+        "13": 3,
+        "14": 1,
+        "15": 1,
+        "21": 2
+      },
+      "pairs": [
+        {
+          "Q": [
+            0,
+            1,
+            0
+          ],
+          "R": [
+            0,
+            2,
+            24
+          ],
+          "id": "P1D2"
+        }
+      ]
+    }
+  }
+}

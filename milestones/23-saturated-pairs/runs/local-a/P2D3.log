@@ -1,0 +1,82 @@
+
+Starting CP-SAT solver v9.15.6755
+Parameters: random_seed: 20261020 max_time_in_seconds: 5 max_memory_in_mb: 512 log_search_progress: true num_search_workers: 1 log_to_stdout: false
+
+Initial satisfaction model '': (model_fingerprint: 0x282cd6d79682ec6c)
+#Variables: 272 (250 primary variables)
+  - 272 Booleans in [0,1]
+#kLinear1: 8
+#kLinear2: 64
+#kLinearN: 1'099 (#enforced: 208) (#terms: 5'032)
+
+Starting presolve at 0.00s
+  1.23e-04s  0.00e+00d  [DetectDominanceRelations] 
+  1.90e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=2 #num_dual_strengthening=1 
+  8.30e-06s  0.00e+00d  [operations_research::sat::CpModelPresolver::ExtractEncodingFromLinear] #potential_supersets=14 
+  4.81e-05s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  4.55e-05s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] #duplicates=56 
+[Symmetry] Graph for symmetry has 1'505 nodes and 4'664 arcs.
+[Symmetry] Symmetry computation done. time: 0.0043154 dtime: 0.0105376
+[Symmetry] #generators: 9, average support size: 152.889
+[Symmetry] 6 orbits on 256 variables with sizes: 96,48,32,32,24,24
+[Symmetry] Found orbitope of size 48 x 2
+[SAT presolve] num removable Booleans: 0 / 256
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:706 literals:2'712 vars:256 one_side_vars:200 simple_definition:56 singleton_clauses:0
+[SAT presolve] [3.72e-05s] clauses:706 literals:2'712 vars:256 one_side_vars:200 simple_definition:56 singleton_clauses:0
+[SAT presolve] [5.32e-05s] clauses:706 literals:2'712 vars:256 one_side_vars:200 simple_definition:56 singleton_clauses:0
+INFEASIBLE: 'during probing'
+  8.55e-04s  3.03e-05d  [operations_research::sat::CpModelPresolver::Probe] #probed=5 
+  7.00e-07s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+
+Presolve summary:
+  - 0 affine relations were detected.
+  - rule 'bool_or: implications' was applied 56 times.
+  - rule 'dual: add implication' was applied 56 times.
+  - rule 'duplicate: removed constraint' was applied 56 times.
+  - rule 'enforcement: false literal' was applied 8 times.
+  - rule 'linear1: x in domain' was applied 8 times.
+  - rule 'linear2: convert ax + by != cte to clauses' was applied 56 times.
+  - rule 'linear: always true' was applied 226 times.
+  - rule 'linear: empty' was applied 8 times.
+  - rule 'linear: fixed or dup variables' was applied 73 times.
+  - rule 'linear: negative clause' was applied 650 times.
+  - rule 'linear: negative equal one' was applied 14 times.
+  - rule 'linear: reduced variable domains' was applied 8 times.
+  - rule 'presolve: iteration' was applied 1 time.
+  - rule 'probing: simplified clauses' was applied 7 times.
+Problem closed by presolve.
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.0100763
+usertime: 0.0100763
+deterministic_time: 3.035e-05
+gap_integral: 0
+
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.0100763
+usertime: 0.0100763
+deterministic_time: 3.035e-05
+gap_integral: 0
+

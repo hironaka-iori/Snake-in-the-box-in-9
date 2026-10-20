@@ -1,0 +1,97 @@
+
+Starting CP-SAT solver v9.15.6755
+Parameters: random_seed: 20261020 max_time_in_seconds: 10 max_memory_in_mb: 512 log_search_progress: true num_search_workers: 1 log_to_stdout: false
+
+Initial satisfaction model '': (model_fingerprint: 0xdff3b27497f16944)
+#Variables: 6'656 (6'123 primary variables)
+  - 6'656 Booleans in [0,1]
+#kCircuit: 1
+#kLinear1: 8
+#kLinear2: 9'728
+#kLinear3: 512
+#kLinearN: 5'136 (#enforced: 512) (#terms: 24'632)
+
+Starting presolve at 0.03s
+  1.80e-03s  0.00e+00d  [DetectDominanceRelations] 
+  5.08e-02s  1.00e-08d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=3 #num_dual_strengthening=1 
+  1.02e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::ExtractEncodingFromLinear] #potential_supersets=466 
+  4.05e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  5.25e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+[Symmetry] Graph for symmetry has 26'305 nodes and 62'290 arcs.
+[Symmetry] Symmetry computation done. time: 0.0929459 dtime: 0.120376
+[Symmetry] #generators: 54, average support size: 397.333
+[Symmetry] The model contains 2 duplicate constraints !
+[Symmetry] 202 orbits on 5690 variables with sizes: 120,120,120,120,120,120,80,80,80,80,...
+[Symmetry] Num fixable by binary propagation in orbit: 4 / 120
+[Symmetry] Found orbitope of size 1696 x 2
+[SAT presolve] num removable Booleans: 0 / 5'698
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:11'645 literals:30'158 vars:4'732 one_side_vars:4275 simple_definition:0 singleton_clauses:0
+[SAT presolve] [0.0012898s] clauses:11'645 literals:30'158 vars:4'732 one_side_vars:4275 simple_definition:0 singleton_clauses:0
+[SAT presolve] [0.0017279s] clauses:11'645 literals:30'158 vars:4'732 one_side_vars:4275 simple_definition:0 singleton_clauses:0
+INFEASIBLE: 'during probing'
+  4.41e-02s  6.96e-03d  [operations_research::sat::CpModelPresolver::Probe] #probed=1'805 
+  4.00e-07s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+
+Presolve summary:
+  - 14 affine relations were detected.
+  - rule 'TODO dual: only one blocking constraint?' was applied 3'828 times.
+  - rule 'affine: new relation' was applied 14 times.
+  - rule 'bool_or: always true' was applied 2'306 times.
+  - rule 'bool_or: implications' was applied 8'104 times.
+  - rule 'bool_or: only one literal' was applied 41 times.
+  - rule 'circuit: degree 2' was applied 16 times.
+  - rule 'circuit: removed false arcs' was applied 2 times.
+  - rule 'circuit: set literal to false' was applied 740 times.
+  - rule 'enforcement: false literal' was applied 48 times.
+  - rule 'enforcement: true literal' was applied 8 times.
+  - rule 'exactly_one: satisfied' was applied 49 times.
+  - rule 'linear1: x in domain' was applied 117 times.
+  - rule 'linear2: convert ax + by != cte to clauses' was applied 9'541 times.
+  - rule 'linear: always true' was applied 331 times.
+  - rule 'linear: empty' was applied 30 times.
+  - rule 'linear: fixed or dup variables' was applied 375 times.
+  - rule 'linear: negative clause' was applied 4'344 times.
+  - rule 'linear: negative equal one' was applied 515 times.
+  - rule 'linear: reduced variable domains' was applied 27 times.
+  - rule 'presolve: iteration' was applied 1 time.
+  - rule 'probing: bool_or reduced to implication' was applied 560 times.
+  - rule 'probing: simplified clauses' was applied 60 times.
+  - rule 'propagators: fixed booleans' was applied 48 times.
+  - rule 'symmetry: added orbit symmetry breaking implications' was applied 1 time.
+  - rule 'symmetry: fixed to false in general orbit' was applied 4 times.
+Problem closed by presolve.
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.346791
+usertime: 0.346792
+deterministic_time: 0.00696451
+gap_integral: 0
+
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.346791
+usertime: 0.346792
+deterministic_time: 0.00696451
+gap_integral: 0
+

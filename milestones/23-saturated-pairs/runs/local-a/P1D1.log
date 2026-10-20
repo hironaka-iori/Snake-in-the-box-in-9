@@ -1,0 +1,59 @@
+
+Starting CP-SAT solver v9.15.6755
+Parameters: random_seed: 20261020 max_time_in_seconds: 5 max_memory_in_mb: 512 log_search_progress: true num_search_workers: 1 log_to_stdout: false
+
+Initial satisfaction model '': (model_fingerprint: 0xc3cb4dc62ddfd8f4)
+#Variables: 232 (212 primary variables)
+  - 232 Booleans in [0,1]
+#kLinear1: 8
+#kLinear2: 56
+#kLinearN: 805 (#enforced: 176) (#terms: 3'688)
+
+Starting presolve at 0.00s
+INFEASIBLE: 'proven during initial copy of constraint #249:
+linear {
+  vars: [0, 1, 4, 5]
+  coeffs: [1, 1, 1, 1]
+  domain: [3, 3]
+}
+With current variable domains:
+var:0 domain:[0]
+var:1 domain:[0]
+var:4 domain:[0,1]
+var:5 domain:[0,1]
+'
+Problem proven infeasible during initial copy.
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.000801
+usertime: 0.0008011
+deterministic_time: 0
+gap_integral: 0
+
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.000801
+usertime: 0.0008011
+deterministic_time: 0
+gap_integral: 0
+

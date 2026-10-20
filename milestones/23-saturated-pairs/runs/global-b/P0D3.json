@@ -1,0 +1,372 @@
+{
+  "base_git": "53a47850c564fced0fd7e528636521ba859e1120",
+  "run_git": "93daa4613a334802daad6beb1e83365ebe0515f4",
+  "code_sha256": "93553901527239dbd45e5acc94c85ef788f369cbe6fa1c2ac5bef4c85693a276",
+  "input_sha256": "1a8285a0a3aff430ca83aa5882826569da1f2e92b14d19eaaf049b2cd5e08350",
+  "python": "3.12.14",
+  "started_by_pid": 14608,
+  "finished": "2026-10-20T06:06:47.771640+00:00",
+  "elapsed_seconds": 8.84299999999348,
+  "result": {
+    "status": "OPTIMAL",
+    "solver": "OR-Tools CP-SAT",
+    "version": "9.15.6755",
+    "seed": 20261020,
+    "threads": 1,
+    "time_limit_seconds": 12.0,
+    "memory_soft_limit_mb": 512,
+    "model_sha256": "317e173287193171ee9382272e6e443659512e5f06e51d86fdb61b2cc7eebcd3",
+    "model_file": "P0D3.model.txt",
+    "log_sha256": "9cb2d0afbd7d0b90e7c7abbf8b28c1988ccd6c3b68e91f67c59ddaf7a9547456",
+    "wall_seconds": 8.1008533,
+    "response": "CpSolverResponse summary:\nstatus: OPTIMAL\nobjective: 0\nbest_bound: 0\nintegers: 6492\nbooleans: 6492\nconflicts: 905\nbranches: 142191\npropagations: 8165480\ninteger_propagations: 7968049\nrestarts: 5\nlp_iterations: 38166\nwalltime: 8.10085\nusertime: 8.10085\ndeterministic_time: 5.83973\ngap_integral: 0\nsolution_fingerprint: 0xacd290fc391206c1\n",
+    "visible_vertices": 512,
+    "selected": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      17,
+      18,
+      19,
+      25,
+      32,
+      33,
+      35,
+      38,
+      48,
+      52,
+      60,
+      64,
+      65,
+      67,
+      80,
+      84,
+      92,
+      99,
+      100,
+      102,
+      104,
+      108,
+      113,
+      114,
+      121,
+      122,
+      125,
+      126,
+      127,
+      129,
+      130,
+      131,
+      133,
+      138,
+      188,
+      240,
+      241,
+      244,
+      252,
+      257,
+      258,
+      259,
+      274,
+      360,
+      370,
+      372,
+      374,
+      376,
+      380
+    ],
+    "faces": [
+      {
+        "face": [
+          0,
+          1,
+          0
+        ],
+        "empty": true,
+        "b": 21,
+        "misses": [
+          {
+            "normal": 2,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 3,
+            "corner": 3,
+            "local_parity": 0
+          },
+          {
+            "normal": 4,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 5,
+            "corner": 2,
+            "local_parity": 1
+          },
+          {
+            "normal": 6,
+            "corner": 2,
+            "local_parity": 1
+          },
+          {
+            "normal": 7,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 8,
+            "corner": 0,
+            "local_parity": 0
+          }
+        ],
+        "mixed": true
+      },
+      {
+        "face": [
+          2,
+          3,
+          112
+        ],
+        "empty": true,
+        "b": 21,
+        "misses": [
+          {
+            "normal": 0,
+            "corner": 4,
+            "local_parity": 1
+          },
+          {
+            "normal": 1,
+            "corner": 4,
+            "local_parity": 1
+          },
+          {
+            "normal": 4,
+            "corner": 0,
+            "local_parity": 0
+          },
+          {
+            "normal": 5,
+            "corner": 8,
+            "local_parity": 1
+          },
+          {
+            "normal": 6,
+            "corner": 8,
+            "local_parity": 1
+          },
+          {
+            "normal": 7,
+            "corner": 8,
+            "local_parity": 1
+          },
+          {
+            "normal": 8,
+            "corner": 0,
+            "local_parity": 0
+          }
+        ],
+        "mixed": true
+      }
+    ],
+    "path": [
+      92,
+      84,
+      80,
+      64,
+      65,
+      67,
+      99,
+      35,
+      33,
+      32,
+      48,
+      52,
+      60,
+      188,
+      252,
+      244,
+      240,
+      241,
+      113,
+      121,
+      125,
+      127,
+      126,
+      122,
+      114,
+      370,
+      374,
+      372,
+      380,
+      376,
+      360,
+      104,
+      108,
+      100,
+      102,
+      38,
+      6,
+      7,
+      5,
+      133,
+      129,
+      131,
+      130,
+      138,
+      10,
+      8,
+      9,
+      25,
+      17,
+      19,
+      18,
+      274,
+      258,
+      259,
+      257
+    ],
+    "census": {
+      "vertices": 55,
+      "edges": 54,
+      "s0": 3173,
+      "E": 12692,
+      "T": 943,
+      "H": 6750,
+      "D": 59883,
+      "saturated": [
+        {
+          "face": [
+            0,
+            1,
+            0
+          ],
+          "empty": true,
+          "b": 21,
+          "misses": [
+            {
+              "normal": 2,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 3,
+              "corner": 3,
+              "local_parity": 0
+            },
+            {
+              "normal": 4,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 5,
+              "corner": 2,
+              "local_parity": 1
+            },
+            {
+              "normal": 6,
+              "corner": 2,
+              "local_parity": 1
+            },
+            {
+              "normal": 7,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 8,
+              "corner": 0,
+              "local_parity": 0
+            }
+          ],
+          "mixed": true
+        },
+        {
+          "face": [
+            2,
+            3,
+            112
+          ],
+          "empty": true,
+          "b": 21,
+          "misses": [
+            {
+              "normal": 0,
+              "corner": 4,
+              "local_parity": 1
+            },
+            {
+              "normal": 1,
+              "corner": 4,
+              "local_parity": 1
+            },
+            {
+              "normal": 4,
+              "corner": 0,
+              "local_parity": 0
+            },
+            {
+              "normal": 5,
+              "corner": 8,
+              "local_parity": 1
+            },
+            {
+              "normal": 6,
+              "corner": 8,
+              "local_parity": 1
+            },
+            {
+              "normal": 7,
+              "corner": 8,
+              "local_parity": 1
+            },
+            {
+              "normal": 8,
+              "corner": 0,
+              "local_parity": 0
+            }
+          ],
+          "mixed": true
+        }
+      ],
+      "b_histogram": {
+        "0": 890,
+        "1": 545,
+        "2": 528,
+        "3": 493,
+        "4": 310,
+        "5": 211,
+        "6": 104,
+        "7": 50,
+        "8": 18,
+        "9": 14,
+        "10": 4,
+        "11": 1,
+        "12": 1,
+        "13": 2,
+        "21": 2
+      },
+      "pairs": [
+        {
+          "Q": [
+            0,
+            1,
+            0
+          ],
+          "R": [
+            2,
+            3,
+            112
+          ],
+          "id": "P0D3"
+        }
+      ]
+    }
+  }
+}

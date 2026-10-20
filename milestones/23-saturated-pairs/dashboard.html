@@ -1,0 +1,24 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>两个饱和空方块 · 研究记录</title>
+<style>body{font-family:system-ui,sans-serif;max-width:1100px;margin:36px auto;padding:0 20px;background:#f5f6f7;color:#1d2832;line-height:1.6}h1{font-size:27px}h2{font-size:19px;margin-top:32px}.cards{display:flex;gap:14px;flex-wrap:wrap}.card{padding:16px 22px;background:white;border:1px solid #d9dee3;border-radius:8px;min-width:140px}.card strong{font-size:26px;display:block}table{border-collapse:collapse;width:100%;background:white}th,td{padding:9px 12px;text-align:left;border-bottom:1px solid #e1e5e8}th{color:#475765;font-size:14px}small,.muted{color:#526472}.good{color:#16634f}.proof{color:#785410}pre{white-space:pre-wrap;background:white;border:1px solid #d9dee3;padding:15px}a{color:#245ea5}code{background:#e8edf1;padding:2px 4px}#error{color:#933}</style>
+<h1>两个饱和空方块</h1><p>问题：同一条真实蛇中的两个重数 21 空面能否共存，限制能否改善全局上界？</p>
+<p class="muted">已完成本轮有界实验。证据分级显示；分类覆盖率不表示数学问题解决比例。</p><p id="error"></p>
+<div class="cards" id="cards"></div>
+<h2>收益检查</h2><p>平行且距离 3 的两个空面满足 <code>b(Q)+b(R)≤39</code>；饱和空面两两顶点不交。
+这些是数学证明待形式化。本轮没有新的数值上界，也没有新增 Lean 定理。</p>
+<p>仍缺独立的 H 下界，以及足够多空面配对的保证。当前排斥与数量界仍允许 m=238 的计数松弛见证。</p>
+<h2>20 类相对位置</h2><table><thead><tr><th>编号</th><th>自由坐标交集</th><th>最小距离</th><th>证据</th><th>真实见证边数</th><th>共享外邻点数</th></tr></thead><tbody id="rows"></tbody></table>
+<h2>进程与保存点</h2><p id="process"></p><p id="saved"></p>
+<details><summary>最近日志</summary><p id="logname"></p><pre id="log"></pre></details>
+<h2>尚未完成的义务</h2><ul><li>把 H 与 T、v 联系起来的独立下界。</li><li>对接近上界的蛇强迫足够多距离 3 空面配对。</li><li>多个两两兼容的饱和面能否共同实现。</li><li>总重数 39 是否尖锐：一次 15 秒搜索为 UNKNOWN。</li></ul>
+<p><a href="README.zh-CN.md">研究报告</a> · <a href="PROOFS.zh-CN.md">完整数学证明</a> · <a href="analysis.json">分类、收益及历史实验清单</a></p>
+<script>
+async function refresh(){try{let response=await fetch('/api/status',{cache:'no-store'});let s=await response.json();
+document.getElementById('cards').innerHTML=[['位置类别','20 / 20'],['数学排除（未 Lean）','5'],['独立检查的真实见证','15'],['历史 UNKNOWN','7'],['未解决的尖锐性实验','1']].map(([a,b])=>`<div class="card"><small>${a}</small><strong>${b}</strong></div>`).join('');
+document.getElementById('rows').innerHTML=s.classes.map(c=>`<tr><td>${c.id}</td><td>${c.r}</td><td>${c.d}</td><td class="${c.witness?'good':'proof'}">${c.witness?'仅计算证据 · 已独立检查':'数学证明待形式化'}</td><td>${c.witness?c.witness.edges:'不可共存'}</td><td>${c.shell_intersection.length}</td></tr>`).join('');
+document.getElementById('process').textContent=`实验进程：${s.jobs.filter(j=>j.process_alive).length}。只读面板进程：${s.monitor_pid}。共 43 次求解记录，全部已保存；6 次旧 UNKNOWN 已由后续见证解决，旧记录保留。`;
+document.getElementById('saved').textContent='最近实验保存（UTC）：'+s.last_saved;
+document.getElementById('logname').textContent=s.recent_log;document.getElementById('log').textContent=s.recent_log_tail;
+}catch(e){document.getElementById('error').textContent='无法读取本地监控服务。请启动 scripts/dashboard.py；静态研究报告仍可阅读。';}}
+refresh();setInterval(refresh,15000);
+</script></html>
