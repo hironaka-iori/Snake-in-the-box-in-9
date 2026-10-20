@@ -1,0 +1,153 @@
+
+Starting CP-SAT solver v9.15.6755
+Parameters: random_seed: 20261020 max_time_in_seconds: 20 max_memory_in_mb: 512 log_search_progress: true num_search_workers: 1 log_to_stdout: false
+
+Initial satisfaction model '': (model_fingerprint: 0x9efb5f857e1d1f7b)
+#Variables: 6'656 (6'135 primary variables)
+  - 6'656 Booleans in [0,1]
+#kCircuit: 1
+#kLinear1: 8
+#kLinear2: 9'728
+#kLinear3: 512
+#kLinearN: 526 (#enforced: 512) (#terms: 6'396)
+
+Starting presolve at 0.01s
+  1.33e-03s  0.00e+00d  [DetectDominanceRelations] 
+  3.39e-02s  1.00e-08d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=3 #num_dual_strengthening=1 
+  8.50e-05s  0.00e+00d  [operations_research::sat::CpModelPresolver::ExtractEncodingFromLinear] #potential_supersets=473 
+  2.59e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  4.68e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] #duplicates=1 
+[Symmetry] Graph for symmetry has 23'403 nodes and 49'876 arcs.
+[Symmetry] Symmetry computation done. time: 0.0226273 dtime: 0.0386304
+[Symmetry] #generators: 40, average support size: 263.75
+[Symmetry] 995 orbits on 5518 variables with sizes: 38,12,12,12,12,12,12,12,12,12,...
+[Symmetry] Num fixable by intersecting at_most_one with orbits: 3 largest_orbit: 38
+[Symmetry] Found orbitope of size 1746 x 2
+[SAT presolve] num removable Booleans: 0 / 5'886
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:8'300 literals:16'654 vars:4'854 one_side_vars:4799 simple_definition:50 singleton_clauses:0
+[SAT presolve] [0.0003319s] clauses:8'300 literals:16'654 vars:4'854 one_side_vars:4799 simple_definition:50 singleton_clauses:0
+[SAT presolve] [0.0005594s] clauses:8'300 literals:16'654 vars:4'854 one_side_vars:4799 simple_definition:50 singleton_clauses:0
+  5.36e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] 
+  1.41e-01s  1.77e-01d  [operations_research::sat::CpModelPresolver::Probe] #probed=8'570 #fixed_bools=1'739 #equiv=57 #new_binary_clauses=34'191 
+  9.26e-03s  2.53e-02d  [MaxClique] Merged 8'300 constraints with 16'654 literals into 4'034 constraints with 12'350 literals
+  1.06e-03s  0.00e+00d  [DetectDominanceRelations] 
+  1.26e-02s  1.00e-08d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=4 #num_dual_strengthening=1 
+  1.30e-03s  0.00e+00d  [operations_research::sat::CpModelPresolver::ProcessAtMostOneAndLinear] #num_changes=35 
+  2.27e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+  1.77e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraintsWithDifferentEnforcements] #without_enforcements=3 
+  1.84e-04s  1.13e-05d  [operations_research::sat::CpModelPresolver::DetectDominatedLinearConstraints] #relevant_constraints=347 
+  9.41e-05s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDifferentVariables] 
+  8.01e-04s  3.12e-05d  [operations_research::sat::CpModelPresolver::ProcessSetPPC] #relevant_constraints=1'794 #num_inclusions=2 
+  6.76e-04s  2.30e-06d  [operations_research::sat::CpModelPresolver::TransformClausesToExactlyOne] #num_amos=1'205 #num_clauses=30 #num_checked=30 
+  7.51e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+  4.59e-04s  4.00e-08d  [operations_research::sat::CpModelPresolver::FindAlmostIdenticalLinearConstraints] #num_tested_pairs=2 
+  2.35e-03s  2.44e-03d  [operations_research::sat::CpModelPresolver::FindBigAtMostOneAndLinearOverlap] 
+  6.44e-04s  8.98e-04d  [operations_research::sat::CpModelPresolver::FindBigVerticalLinearOverlap] 
+  5.83e-04s  6.26e-04d  [operations_research::sat::CpModelPresolver::FindBigHorizontalLinearOverlap] #linears=335 
+  1.97e-04s  5.00e-07d  [operations_research::sat::CpModelPresolver::MergeClauses] #num_collisions=4 #num_merges=4 #num_saved_literals=8 
+  1.25e-03s  0.00e+00d  [DetectDominanceRelations] 
+  9.24e-03s  1.00e-08d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  1.43e-03s  0.00e+00d  [DetectDominanceRelations] 
+  7.84e-03s  1.00e-08d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=1 #num_dual_strengthening=1 
+  3.16e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  2.24e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] 
+[Symmetry] Graph for symmetry has 13'891 nodes and 24'196 arcs.
+[Symmetry] Symmetry computation done. time: 0.0028849 dtime: 0.00671591
+[Symmetry] #generators: 103, average support size: 2
+[Symmetry] 1 orbits on 104 variables with sizes: 104
+[Symmetry] Found orbitope of size 1 x 104
+[SAT presolve] num removable Booleans: 0 / 4'082
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:448 literals:936 vars:583 one_side_vars:490 simple_definition:87 singleton_clauses:0
+[SAT presolve] [6.01e-05s] clauses:438 literals:906 vars:583 one_side_vars:500 simple_definition:77 singleton_clauses:10
+[SAT presolve] [0.0001897s] clauses:438 literals:906 vars:583 one_side_vars:500 simple_definition:77 singleton_clauses:10
+INFEASIBLE: 'during probing'
+  1.84e-02s  1.37e-02d  [operations_research::sat::CpModelPresolver::Probe] #probed=1'529 
+  3.00e-07s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+
+Presolve summary:
+  - 95 affine relations were detected.
+  - rule 'TODO dual: only one blocking constraint?' was applied 11'627 times.
+  - rule 'affine: new relation' was applied 95 times.
+  - rule 'at_most_one: empty or all false' was applied 260 times.
+  - rule 'at_most_one: removed literals' was applied 1'900 times.
+  - rule 'at_most_one: satisfied' was applied 1'078 times.
+  - rule 'at_most_one: size one' was applied 1'638 times.
+  - rule 'at_most_one: transformed into max clique' was applied 1 time.
+  - rule 'bool_or: always true' was applied 1'149 times.
+  - rule 'bool_or: fixed literals' was applied 1 time.
+  - rule 'bool_or: implications' was applied 8'390 times.
+  - rule 'bool_or: only one literal' was applied 38 times.
+  - rule 'bool_or: removed enforcement literal' was applied 20 times.
+  - rule 'circuit: degree 2' was applied 24 times.
+  - rule 'circuit: removed false arcs' was applied 4 times.
+  - rule 'circuit: set literal to false' was applied 694 times.
+  - rule 'duplicate: merged rhs of linear constraint' was applied 1 time.
+  - rule 'duplicate: removed constraint' was applied 1 time.
+  - rule 'enforcement: false literal' was applied 104 times.
+  - rule 'enforcement: true literal' was applied 41 times.
+  - rule 'exactly_one: removed literals' was applied 15 times.
+  - rule 'exactly_one: satisfied' was applied 147 times.
+  - rule 'exactly_one: size two' was applied 14 times.
+  - rule 'exactly_one: x and not(x)' was applied 1 time.
+  - rule 'linear + amo: added implications' was applied 18 times.
+  - rule 'linear + amo: empty after processing' was applied 10 times.
+  - rule 'linear + amo: extracted enforcement literal' was applied 30 times.
+  - rule 'linear + amo: fixed literal implied by enforcement' was applied 43 times.
+  - rule 'linear1: x in domain' was applied 8 times.
+  - rule 'linear2: convert ax + by != cte to clauses' was applied 9'576 times.
+  - rule 'linear2: convert implied ax + by == cte to clauses' was applied 10 times.
+  - rule 'linear2: implied ax + by = cte has only one solution' was applied 8 times.
+  - rule 'linear: always true' was applied 155 times.
+  - rule 'linear: empty' was applied 16 times.
+  - rule 'linear: fixed or dup variables' was applied 559 times.
+  - rule 'linear: negative at most one' was applied 3 times.
+  - rule 'linear: negative clause' was applied 3 times.
+  - rule 'linear: negative equal one' was applied 513 times.
+  - rule 'linear: negative reified and' was applied 8 times.
+  - rule 'linear: never in domain' was applied 10 times.
+  - rule 'linear: positive equal one' was applied 12 times.
+  - rule 'linear: reduced variable domains' was applied 6 times.
+  - rule 'linear: remapped using affine relations' was applied 12 times.
+  - rule 'presolve: iteration' was applied 2 times.
+  - rule 'probing: bool_or reduced to implication' was applied 20 times.
+  - rule 'probing: simplified clauses' was applied 33 times.
+  - rule 'propagators: fixed booleans' was applied 344 times.
+  - rule 'setppc: bool_or in at_most_one' was applied 2 times.
+  - rule 'symmetry: fixed to false in general orbit' was applied 3 times.
+Problem closed by presolve.
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.306723
+usertime: 0.306723
+deterministic_time: 0.219871
+gap_integral: 0
+
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.306723
+usertime: 0.306723
+deterministic_time: 0.219871
+gap_integral: 0
+

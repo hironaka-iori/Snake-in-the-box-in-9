@@ -1,0 +1,105 @@
+
+Starting CP-SAT solver v9.15.6755
+Parameters: random_seed: 20261020 max_time_in_seconds: 20 max_memory_in_mb: 512 log_search_progress: true num_search_workers: 1 log_to_stdout: false
+
+Initial satisfaction model '': (model_fingerprint: 0xcada240f6f55802f)
+#Variables: 6'656 (6'133 primary variables)
+  - 6'656 Booleans in [0,1]
+#kCircuit: 1
+#kLinear1: 10
+#kLinear2: 9'728
+#kLinear3: 512
+#kLinearN: 530 (#enforced: 512) (#terms: 6'480)
+
+Starting presolve at 0.01s
+  1.01e-03s  0.00e+00d  [DetectDominanceRelations] 
+  4.08e-02s  1.00e-08d  [operations_research::sat::CpModelPresolver::PresolveToFixPoint] #num_loops=4 #num_dual_strengthening=1 
+  1.01e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::ExtractEncodingFromLinear] #potential_supersets=378 
+  5.38e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateColumns] 
+  4.63e-04s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectDuplicateConstraints] #duplicates=1 
+[Symmetry] Graph for symmetry has 17'583 nodes and 31'213 arcs.
+[Symmetry] Symmetry computation done. time: 0.0043766 dtime: 0.00905492
+[Symmetry] #generators: 135, average support size: 2
+[Symmetry] The model contains 1 duplicate constraints !
+[Symmetry] 2 orbits on 137 variables with sizes: 135,2
+[Symmetry] Found orbitope of size 1 x 2
+[SAT presolve] num removable Booleans: 0 / 3'892
+[SAT presolve] num trivial clauses: 0
+[SAT presolve] [0s] clauses:5'008 literals:10'033 vars:2'988 one_side_vars:2909 simple_definition:21 singleton_clauses:0
+[SAT presolve] [0.0003004s] clauses:4'986 literals:9'967 vars:2'988 one_side_vars:2909 simple_definition:21 singleton_clauses:22
+[SAT presolve] [0.0004785s] clauses:4'986 literals:9'967 vars:2'988 one_side_vars:2909 simple_definition:21 singleton_clauses:22
+INFEASIBLE: 'during probing'
+  1.21e-02s  3.98e-04d  [operations_research::sat::CpModelPresolver::Probe] #probed=7 
+  2.80e-06s  0.00e+00d  [operations_research::sat::CpModelPresolver::DetectEncodedComplexDomains] 
+
+Presolve summary:
+  - 58 affine relations were detected.
+  - rule 'TODO dual: only one blocking constraint?' was applied 2'420 times.
+  - rule 'affine: new relation' was applied 58 times.
+  - rule 'bool_and: fixed literals' was applied 8 times.
+  - rule 'bool_and: non-reified' was applied 1'404 times.
+  - rule 'bool_or: always true' was applied 2'450 times.
+  - rule 'bool_or: implications' was applied 7'029 times.
+  - rule 'bool_or: only one literal' was applied 115 times.
+  - rule 'circuit: degree 2' was applied 38 times.
+  - rule 'circuit: removed false arcs' was applied 3 times.
+  - rule 'circuit: set literal to false' was applied 1'046 times.
+  - rule 'duplicate: merged rhs of linear constraint' was applied 1 time.
+  - rule 'duplicate: removed constraint' was applied 1 time.
+  - rule 'enforcement: false literal' was applied 79 times.
+  - rule 'enforcement: true literal' was applied 1'466 times.
+  - rule 'exactly_one: removed literals' was applied 21 times.
+  - rule 'exactly_one: satisfied' was applied 153 times.
+  - rule 'exactly_one: size one' was applied 1 time.
+  - rule 'exactly_one: size two' was applied 14 times.
+  - rule 'linear1: x in domain' was applied 10 times.
+  - rule 'linear2: convert ax + by != cte to clauses' was applied 9'538 times.
+  - rule 'linear: always true' was applied 199 times.
+  - rule 'linear: empty' was applied 21 times.
+  - rule 'linear: fixed or dup variables' was applied 721 times.
+  - rule 'linear: negative at most one' was applied 1 time.
+  - rule 'linear: negative clause' was applied 1 time.
+  - rule 'linear: negative equal one' was applied 523 times.
+  - rule 'linear: negative reified and' was applied 26 times.
+  - rule 'linear: never in domain' was applied 56 times.
+  - rule 'linear: positive equal one' was applied 22 times.
+  - rule 'linear: reduced variable domains' was applied 21 times.
+  - rule 'linear: remapped using affine relations' was applied 1 time.
+  - rule 'presolve: iteration' was applied 1 time.
+  - rule 'probing: simplified clauses' was applied 2 times.
+  - rule 'propagators: fixed booleans' was applied 135 times.
+Problem closed by presolve.
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.0946881
+usertime: 0.0946882
+deterministic_time: 0.00039799
+gap_integral: 0
+
+CpSolverResponse summary:
+status: INFEASIBLE
+objective: NA
+best_bound: NA
+integers: 0
+booleans: 0
+conflicts: 0
+branches: 0
+propagations: 0
+integer_propagations: 0
+restarts: 0
+lp_iterations: 0
+walltime: 0.0946881
+usertime: 0.0946882
+deterministic_time: 0.00039799
+gap_integral: 0
+

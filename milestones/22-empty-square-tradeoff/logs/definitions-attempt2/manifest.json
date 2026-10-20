@@ -1,0 +1,34 @@
+{
+  "git": "7435802a48857f9d90b6c9c62f952fa76f862e90",
+  "compiler": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "upstream_source_sha256": "025260b9c1533d606a6cfd058aa025d9544d5cd6ccb1f8f5f2143e5657df4740",
+  "definition_prefix_sha256": "4db553c66eb890930b3db31714e98bdc65afdb39b9e9e016f006b0c0d2ec6fb2",
+  "new_source_sha256": "dbe5a05390aa38153602704f3191d964e36cfa1ab4af4ba46e1855df4dcdc6da",
+  "driver_sha256": "723609b1922dff00567ef6f7f1644fec211362c3ddc6e710a2215a5511af4413",
+  "dependency_scope": "Exact upstream prefix ending after Snake; no 191/238 rebuild or object reuse",
+  "steps": [
+    {
+      "module": "Snake9",
+      "exit_code": 0,
+      "seconds": 0.3899999999557622,
+      "source_sha256": "4db553c66eb890930b3db31714e98bdc65afdb39b9e9e016f006b0c0d2ec6fb2",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "module": "TradeoffChecks",
+      "exit_code": 0,
+      "seconds": 1.797000000020489,
+      "source_sha256": "dbe5a05390aa38153602704f3191d964e36cfa1ab4af4ba46e1855df4dcdc6da",
+      "log_sha256": "50cdb09999c32c52aeba51adfc68144f9e871e7710fe43da3c16c0879bd8654e"
+    }
+  ],
+  "axioms": {
+    "Snake9.EmptySquareTradeoff.sharp_distinct": "propext, Quot.sound",
+    "Snake9.EmptySquareTradeoff.sharp_induced": "propext, Quot.sound",
+    "Snake9.EmptySquareTradeoff.sharp_face_empty": "propext, Quot.sound",
+    "Snake9.EmptySquareTradeoff.sharp_touch_count": "propext, Quot.sound",
+    "Snake9.EmptySquareTradeoff.cap_twenty_false": "propext, Quot.sound",
+    "Snake9.EmptySquareTradeoff.no_bad_block": "propext, Quot.sound"
+  },
+  "status": "PASS"
+}

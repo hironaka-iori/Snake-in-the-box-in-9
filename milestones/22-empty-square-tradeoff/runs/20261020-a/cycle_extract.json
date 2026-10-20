@@ -1,0 +1,209 @@
+{
+  "base_git": "ad5a7862c52ea1d7345aec8d94c1d2fdc6ede206",
+  "run_git": "c15ee4dd287a5f5e009976562b4d93437073fdea",
+  "code_sha256": "12916fd1577724e2e8d9bb93a5d14d21f2498628973a47d3b51c1aba9ea831a0",
+  "input_sha256": "0e4ca8f0347fe320bc795f462a11ff126f198d5319e9bc6030e9e2db0bf2951d",
+  "python": "3.12.14",
+  "started_by_pid": 70612,
+  "finished": "2026-10-20T05:33:33.574457+00:00",
+  "elapsed_seconds": 0.031000000017229468,
+  "solver": "none unless specified in result",
+  "threads": 1,
+  "seed": null,
+  "time_limit": null,
+  "result": {
+    "status": "CYCLE_FOUND",
+    "counts": [
+      3,
+      6,
+      2,
+      2,
+      6,
+      2
+    ],
+    "edges": [
+      {
+        "shape": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          2
+        ],
+        "phase": 1,
+        "next_shape": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2
+        ],
+        "append_label": 3,
+        "count": 3,
+        "window_statuses": [
+          "SAT",
+          "SAT",
+          "SAT",
+          "SAT"
+        ]
+      },
+      {
+        "shape": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2
+        ],
+        "phase": 2,
+        "next_shape": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4
+        ],
+        "append_label": 0,
+        "count": 6,
+        "window_statuses": [
+          "SAT",
+          "SAT",
+          "SAT",
+          "SAT"
+        ]
+      },
+      {
+        "shape": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4
+        ],
+        "phase": 3,
+        "next_shape": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          2
+        ],
+        "append_label": 3,
+        "count": 2,
+        "window_statuses": [
+          "SAT",
+          "SAT",
+          "SAT",
+          "SAT"
+        ]
+      },
+      {
+        "shape": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          2
+        ],
+        "phase": 4,
+        "next_shape": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2
+        ],
+        "append_label": 3,
+        "count": 2,
+        "window_statuses": [
+          "SAT",
+          "SAT",
+          "SAT",
+          "SAT"
+        ]
+      },
+      {
+        "shape": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2
+        ],
+        "phase": 5,
+        "next_shape": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4
+        ],
+        "append_label": 0,
+        "count": 6,
+        "window_statuses": [
+          "SAT",
+          "SAT",
+          "SAT",
+          "SAT"
+        ]
+      },
+      {
+        "shape": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4
+        ],
+        "phase": 0,
+        "next_shape": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          2
+        ],
+        "append_label": 3,
+        "count": 2,
+        "window_statuses": [
+          "SAT",
+          "SAT",
+          "SAT",
+          "SAT"
+        ]
+      }
+    ],
+    "mean": "7/2",
+    "frozen_175_windows_avoided": true,
+    "inputs": {
+      "milestones\\10-window-aggregate\\data\\oracle_cache.jsonl": "ecbd11db5a09b8900b46f1efc50537f26fe6eded23708826367cf0ad480d8705",
+      "milestones\\10-window-aggregate\\data\\survey_c3_r3.json": "7f196990826163052ff1a56ca8ae0e02430c14c524e7a7875a29c794d6c4e5ae",
+      "milestones\\10-window-aggregate\\data\\survey_c4_r3_k5.json": "e90a716fa46576121ae3dc00c4bf6b21c39794e78ece5e1af952f8559447b78e",
+      "milestones\\10-window-aggregate\\data\\direction_certificates_k5p.json": "97e61b74db38d1a1d9134449493c0bd982f3ce2d3d744f58c689218b4796cc1a"
+    }
+  }
+}

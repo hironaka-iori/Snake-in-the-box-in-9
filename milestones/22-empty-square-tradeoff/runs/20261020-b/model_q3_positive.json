@@ -1,0 +1,62 @@
+{
+  "base_git": "ad5a7862c52ea1d7345aec8d94c1d2fdc6ede206",
+  "run_git": "927f24d95642abcf9e72b62ceadf815e59e68d46",
+  "code_sha256": "f808fd18b66dfbfd102e6de659e83ea84adea2c6ebec8bb870ca944cfa0a367e",
+  "input_sha256": "0074a32ac04b8a13232f3b22c160d835e5ce0159b05e4d952cd6375c759c9fc5",
+  "python": "3.12.14",
+  "started_by_pid": 96968,
+  "finished": "2026-10-20T05:34:13.953309+00:00",
+  "elapsed_seconds": 0.8910000000032596,
+  "solver": "none unless specified in result",
+  "threads": 1,
+  "seed": null,
+  "time_limit": null,
+  "result": {
+    "status": "OPTIMAL",
+    "solver": "OR-Tools CP-SAT",
+    "version": "9.15.6755",
+    "seed": 20261020,
+    "threads": 1,
+    "time_limit_seconds": 5,
+    "memory_limit_mb": 512,
+    "wall_seconds": 0.0445378,
+    "model_sha256": "4a1e02faaf8d9aef554a14079cd75b70acb8ac42fe3710f0b29da1a3aaf1d016",
+    "response": "CpSolverResponse summary:\nstatus: OPTIMAL\nobjective: 0\nbest_bound: 0\nintegers: 2\nbooleans: 2\nconflicts: 0\nbranches: 5\npropagations: 1\ninteger_propagations: 5\nrestarts: 0\nlp_iterations: 0\nwalltime: 0.0445378\nusertime: 0.0445378\ndeterministic_time: 1.622e-05\ngap_integral: 0\nsolution_fingerprint: 0xed0c5ef1264d0755\n",
+    "scope": "Exact selected-vertex induced-path model; solver outcomes are not Lean proofs.",
+    "witness": {
+      "n": 3,
+      "v": 3,
+      "edges": 2,
+      "E": 4,
+      "s0": 1,
+      "T": 2,
+      "alpha_min": 0,
+      "alpha_max": 1,
+      "max_empty_face_touch": 3,
+      "homogeneous_saturated_faces": [
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "path": [
+        5,
+        7,
+        6
+      ],
+      "alpha": [
+        1,
+        0,
+        1
+      ],
+      "empty_faces": [
+        [
+          0,
+          1,
+          0
+        ]
+      ]
+    }
+  }
+}
