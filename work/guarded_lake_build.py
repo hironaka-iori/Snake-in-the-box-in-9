@@ -76,13 +76,18 @@ def uptodate(mod, deps):
     o = olean_path(mod)
     if not o.exists():
         return False
+    if mod in PREBUILT:
+        return True
     t = o.stat().st_mtime
     if t < module_path(mod).stat().st_mtime:
         return False
     return all(olean_path(d).exists() and olean_path(d).stat().st_mtime <= t for d in deps)
 
 
-def closure(targets):
+PREBUILT = set()   # modules whose source is gone but whose .olean exists (--trust-mtime)
+
+
+def closure(targets, trust_mtime=False):
     deps, stack = {}, list(targets)
     while stack:
         m = stack.pop()
@@ -90,9 +95,16 @@ def closure(targets):
             continue
         p = module_path(m)
         if not p.exists():
+            if trust_mtime and olean_path(m).exists():
+                # generated data whose source was deleted to save disk: its .olean is all
+                # that importing modules need
+                PREBUILT.add(m)
+                deps[m] = []
+                continue
             raise SystemExit(f'no source for module {m}: {p}')
         imps = re.findall(r'^import\s+(\S+)', p.read_text(), re.M)
-        deps[m] = [d for d in imps if module_path(d).exists()]
+        deps[m] = [d for d in imps if module_path(d).exists()
+                   or (trust_mtime and olean_path(d).exists() and d.startswith('LocalWindow'))]
         stack += deps[m]
     return deps
 
@@ -125,7 +137,7 @@ def main():
     if a.heavy_jobs is None:
         a.heavy_jobs = a.jobs
     heavy = re.compile(a.heavy)
-    deps = closure(a.targets)
+    deps = closure(a.targets, a.trust_mtime)
     done, failed, running = set(), {}, {}   # running: module -> (Popen, start, peak)
     lock = threading.Lock()
     log = open(a.log, 'a')
