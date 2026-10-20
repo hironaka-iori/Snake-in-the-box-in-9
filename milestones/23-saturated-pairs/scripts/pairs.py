@@ -137,12 +137,15 @@ def solve(spec, logpath, modelpath):
         else:
             model.add(sum(visible)<=2).only_enforce_if(x[v])
     model.add(sum(end.values()) == 2 if spec['mode']=='global' else sum(end.values())<=2)
-    for f in (Q,R):
+    for idx,f in enumerate((Q,R)):
         for v in vertices(f):
             model.add(x[v]==0)
-        for _,L in layers(f):
-            model.add(sum(x[v] for v in L)==3)
-        if spec.get('mixed',False):
+        touch=21 if idx==0 else spec.get('r_touch',21)
+        model.add(sum(x[v] for v in shell(f))==touch)
+        if touch==21:
+            for _,L in layers(f):
+                model.add(sum(x[v] for v in L)==3)
+        if spec.get('mixed',False) and touch==21:
             # Under saturation each layer has one missing corner. Both local parities occur.
             odd_missing=sum(1-x[v] for k,L in layers(f) for v in L
                             if ((v^(1<<k)^f[2]).bit_count()%2)==1)
@@ -214,6 +217,7 @@ def main():
     ap.add_argument('--min-vertices',type=int,default=28)
     ap.add_argument('--max-vertices',type=int)
     ap.add_argument('--mixed',action='store_true')
+    ap.add_argument('--r-touch',type=int,default=21)
     args=ap.parse_args()
     run=HERE/'runs'/args.run
     run.mkdir(parents=True,exist_ok=True)
@@ -251,7 +255,7 @@ def main():
                 key=row['id']
                 if args.classes and key not in args.classes: continue
                 spec=dict(mode=args.mode,Q=row['Q'],R=row['R'],id=key,seconds=args.seconds,
-                    seed=20261020,min_vertices=args.min_vertices,mixed=args.mixed)
+                    seed=20261020,min_vertices=args.min_vertices,mixed=args.mixed,r_touch=args.r_touch)
                 if args.max_vertices is not None: spec['max_vertices']=args.max_vertices
                 case(key,spec,lambda s=spec,k=key:solve(s,run/(k+'.log'),run/(k+'.model.txt')))
     finally:
