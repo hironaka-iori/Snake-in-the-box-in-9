@@ -30,7 +30,7 @@ def variant(src, bits, off, base_name, fast_name, base_import):
     if off != 2400:
         s = s.replace('2400', str(off))
     if bits != 13:
-        s = s.replace('8191', str((1 << bits) - 1)).replace('13', str(bits))
+        s = re.sub(r'\b13\b', str(bits), s.replace('8191', str((1 << bits) - 1)))
     s = s.replace('import LratCheck\n', 'import %s\n' % base_import)
     s = s.replace('Snake9.LratFast', '@@FAST@@').replace('Snake9.Lrat', 'Snake9.' + base_name)
     s = s.replace('@@FAST@@', 'Snake9.' + fast_name)
@@ -90,7 +90,7 @@ def main():
         if off != 2400:
             text = text.replace('4800', str(2 * off)).replace('2400', str(off))
         if bits != 13:
-            text = text.replace('8191', str((1 << bits) - 1)).replace('13', str(bits))
+            text = re.sub(r'\b13\b', str(bits), text.replace('8191', str((1 << bits) - 1)))
         text = text.replace('Snake9.LratFast2', '@@F2@@').replace('Snake9.LratFast', 'Snake9.LratFast' + sfx)
         text = text.replace('Snake9.Lrat ', 'Snake9.%s ' % bns).replace('Snake9.Lrat.', 'Snake9.%s.' % bns)
         text = text.replace('@@F2@@', 'Snake9.LratFast2_' + sfx)
