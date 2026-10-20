@@ -61,3 +61,40 @@ Status: working notes. Every bound below 245 in this milestone is **conditional*
 - See README "Lower bound" and `milestones/08-exhaustive-search`.
 - No snake longer than the published 191 edges (Orland et al., arXiv:2607.15270) was found.
 - A longer construction would be an unconditional improvement, but its chance of success is low.
+
+## 6. Previous research on upper bounds (literature check, 20 October 2026)
+
+A web check of the literature was made. Only search-result snippets were reachable: arXiv, OEIS, Wikipedia and the publishers' pages were blocked by the network proxy. On that evidence, nothing better than the counting bounds near 2^(n-1) has been published for Q9, and no SAT, DRAT or proof-assistant upper bound has been published for snakes or coils.
+
+**Analytic upper bounds.** All are counting or weighting arguments, and most are stated for coils (induced cycles), so carrying them over to open snakes needs a separate argument.
+
+| Source | Bound at n = 9 |
+| --- | --- |
+| Trivial / Huang (2019) | 255 edges (the repository's earlier Lean bound) |
+| Snevily (1994), `2^(n-1) (1 - 1/(20n - 41))` | about 254, if the formula applies at n = 9 (its stated range is unverified) |
+| Zémor (1997) | asymptotic only |
+| Emelyanov-Lukito (2000) | best only for 37 <= n <= 19079 |
+| Lukito-van Zanten (2001), square-face counting | value at n = 9 not found |
+
+The Lean-checked 245 of this repository (milestone 05) and the conditional bounds of this milestone are well below all of these.
+
+**Exact values for n <= 8.** These come from exhaustive search with symmetry or isomorph rejection, without proof certificates:
+- Kochut (1996), Q7 coils;
+- Östergård and Pettersson (2015), snakes up to Q8, 98 edges;
+- Hood, Recoskie, Sawada and Wong (2015), spread-k snakes and coils.
+
+**Lower bounds for Q9 come from construction:** Wynn (2012), 190 edges; Kinny (2012); Meyerson et al. (2015); Allison and Paulusma (2016); Orland et al. (arXiv:2607.15270), 191 edges.
+
+**Citations verified from bibliographic snippets:**
+- K. Deimer, Combinatorica 5 (1985) 109-120.
+- F. I. Solov'eva, Metody Diskret. Analiz. 45 (1987) 71-76.
+- H. L. Abbott and M. Katchalski, J. Combin. Theory Ser. B (1988), volume 44 or 45 (the snippets disagree).
+- H. S. Snevily, Discrete Math. 133 (1994) 307-314.
+- G. Zémor, Combinatorica 17 (1997) 287-298.
+- P. G. Emelyanov and A. Lukito, Discrete Math. 218 (2000) 51-59.
+- P. R. J. Östergård and V. H. Pettersson, Graphs Combin. 31 (2015) 1019-1028.
+- E. Wynn, arXiv:1201.1647.
+- D. Allison and D. Paulusma, arXiv:1603.05119.
+- A. Palombo et al., SoCS 2015.
+
+The paper draft (`paper/snake9_research.tex`) does not yet cite Kautz (1958), Danzer-Klee, Douglas, Deimer, Solov'eva, Abbott-Katchalski, Snevily, Zémor, Emelyanov-Lukito or the search papers, and does not compare with Snevily's or Zémor's bounds.
