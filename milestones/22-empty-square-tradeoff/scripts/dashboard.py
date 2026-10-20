@@ -34,6 +34,8 @@ def snapshot():
     passed=[x for x in proofs if x.get('status')=='PASS']
     files=[f for f in (P/'runs').rglob('*') if f.is_file() and f.suffix in ['.log','.json']]
     recent=max(files,key=lambda f:f.stat().st_mtime) if files else None
+    logfiles=[f for f in files if f.suffix=='.log']
+    recentlog=max(logfiles,key=lambda f:f.stat().st_mtime) if logfiles else None
     raw_unknown=sum(c['status']=='UNKNOWN' for c in cases)
     later=P/'logs/independent-check-final.json'
     derived=json.loads(later.read_text()).get('resolved_timeouts',[]) if later.exists() else []
@@ -49,6 +51,8 @@ def snapshot():
         'processes':processes,'cases':cases,
         'small_cube_audit':'Q2/Q3/Q4 共 332 条根定向路径；Q3 全部 256 个选点集合的编码对照',
         'recent_file':str(recent.relative_to(P)) if recent else None,
+        'recent_log':str(recentlog.relative_to(P)) if recentlog else None,
+        'recent_log_tail':'\n'.join(recentlog.read_text(encoding='utf-8',errors='replace').splitlines()[-12:]) if recentlog else '',
         'recent_save':datetime.fromtimestamp(recent.stat().st_mtime,timezone.utc).isoformat() if recent else None,
         'evidence':'Lean 已证 / 数学证明待形式化 / 仅计算证据，分别标注',
         'new_global_bound':False}
@@ -60,9 +64,10 @@ HTML='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>Q9 空方
 <p class="muted">以上是实验进度，不是数学问题的解决百分比。未给出剩余时间预测。</p>
 <h2>证据与证明义务</h2><p id="lean"></p><p id="math"></p><ul id="open"></ul><p id="audit"></p>
 <h2>运行状态</h2><p id="process"></p><small id="save"></small>
+<details><summary>最近日志</summary><pre id="log"></pre></details>
 <h2>实验记录</h2><table><thead><tr><th>实验</th><th>状态</th><th>秒</th><th>证据等级</th></tr></thead><tbody id="rows"></tbody></table>
 <p class="muted">面板只读取本地记录，每 15 秒刷新。它不会继续研究、启动求解器或发送通知。</p>
-<script>async function load(){let s=await(await fetch('/api')).json();for(let [id,value] of Object.entries({hyp:s.hypothesis,scope:s.scope,total:s.total,done:s.completed,unknown:s.unresolved,lean:s.lean,math:s.mathematical,audit:s.small_cube_audit,process:s.processes.length?JSON.stringify(s.processes):'没有运行中的研究进程；仅此只读面板服务运行。',save:'最近保存：'+s.recent_save+' · '+s.recent_file}))document.getElementById(id).textContent=value;let list=document.getElementById('open');list.replaceChildren(...s.open.map(x=>{let l=document.createElement('li');l.textContent=x;return l}));document.getElementById('rows').replaceChildren(...s.cases.map(c=>{let tr=document.createElement('tr');for(let x of [c.case,c.status,c.seconds,c.evidence]){let td=document.createElement('td');td.textContent=x;tr.append(td)}return tr}));}load();setInterval(load,15000)</script></html>'''
+<script>async function load(){let s=await(await fetch('/api')).json();for(let [id,value] of Object.entries({hyp:s.hypothesis,scope:s.scope,total:s.total,done:s.completed,unknown:s.unresolved,lean:s.lean,math:s.mathematical,audit:s.small_cube_audit,log:s.recent_log+'\n'+s.recent_log_tail,process:s.processes.length?JSON.stringify(s.processes):'没有运行中的研究进程；仅此只读面板服务运行。',save:'最近保存：'+s.recent_save+' · '+s.recent_file}))document.getElementById(id).textContent=value;let list=document.getElementById('open');list.replaceChildren(...s.open.map(x=>{let l=document.createElement('li');l.textContent=x;return l}));document.getElementById('rows').replaceChildren(...s.cases.map(c=>{let tr=document.createElement('tr');for(let x of [c.case,c.status,c.seconds,c.evidence]){let td=document.createElement('td');td.textContent=x;tr.append(td)}return tr}));}load();setInterval(load,15000)</script></html>'''
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
