@@ -47,6 +47,21 @@ def main():
             'git':subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),
             'checker_sha256':digest(pathlib.Path(__file__)),'seconds':time.monotonic()-start,
             'witnesses':records,'cycle':{'directions':ds,'vertices':vs,'unique_chord_indices':[0,9]}}
+    # Earlier UNKNOWN receipts remain intact; a later verified witness resolves their feasibility.
+    run=P/'runs/20261020-b'
+    w=json.loads((run/'joint_cycle_03.json').read_text())['result']['witness']
+    S=set(w['path']); av=dict(zip(w['path'],w['alpha'])); derived=[]
+    for k in [1,2]:
+        f=run/f'joint_cycle_{k:02}.input.json'; spec=json.loads(f.read_text())
+        assert set(spec['selected'])<=S
+        for v,a,b,lo,hi in spec['centres']:
+            idx=w['path'].index(v)
+            assert 0<idx<len(w['path'])-1
+            assert {w['path'][idx-1]^v,w['path'][idx+1]^v}=={1<<a,1<<b}
+            assert lo<=av[v]<=hi
+        derived.append({'case':f'joint_cycle_{k:02}','status':'SAT_BY_LATER_WITNESS',
+                        'input_sha256':digest(f),'witness_sha256':digest(run/'joint_cycle_03.json')})
+    result['resolved_timeouts']=derived
     pathlib.Path(args.out).write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(result,indent=2))
 
