@@ -73,7 +73,7 @@ MODULES = [
     "WindowPotential242", "WindowPotential241", "AggregateWindowConditional",
     "WindowAutomatonDefs", "WindowAutomatonData", "WindowAutomatonLemmas",
     "WindowAutomatonSequence", "WindowAutomatonBridge", "AggregateDirectionConditional",
-    "WindowAutomatonLoop",
+    "WindowAutomatonLoop", "CubePermutation",
 ]
 
 
@@ -277,7 +277,7 @@ def main():
                     finished.add(running.pop(future))
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import Aggregate244Conditional\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
+            "import Aggregate244Conditional\nimport CubePermutation\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
             + "".join(f"import AggregateDirection{c}Conditional\n" for c in args.extra_chains)
             + "import UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
@@ -292,7 +292,9 @@ def main():
             "#print axioms Snake9.noNext_iff_upperBound\n"
             "#print axioms Snake9.adjacent_internal_alpha_one_impossible\n"
             "#print axioms Snake9.upper_bound_251\n"
-            "#print axioms Snake9.verified_interval_191_251\n", encoding="utf-8"
+            "#print axioms Snake9.verified_interval_191_251\n"
+            "#print axioms Snake9.CubePerm.exists_normalizing_cubeMap\n"
+            "#print axioms Snake9.CubePerm.no223_window_cubeMap\n", encoding="utf-8"
         )
         with audit.open("a", encoding="utf-8") as stream:
             stream.write(
