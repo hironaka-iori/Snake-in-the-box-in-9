@@ -30,6 +30,11 @@ Status: working notes. Every bound below 245 in this milestone is **conditional*
 - Those denominators exceed the 8-bit SWAR fields, so the Lean side needs 16-bit fields (in progress).
 - The set for 103/22 keeps 57,831 windows (8,535 of them seven-centre). Most are not certified yet.
 
+**Status at 20 October, 15:10 UTC: 231 is proved only provisionally.**
+- The refinement reached mean 89/19 (about 4.684). At that mean the start potential has `D = -15`, and `-14` is enough: `lean_minimize --lam 89/19 --start` keeps 58,817 windows (`data/minimal_L8_k7_K7_r3_89_19.json`) with potential bound and exact walk bound both **231**.
+- The generator with 16-bit fields builds a chain from that set and proves `upper_231_of_direction_windowsK7R34C7W16` with standard axioms (184 modules, about 30 minutes, scratch only). Its premise list comes from solver answers, not certificates, so it is not in the repository yet.
+- Certification of the 44,738 uncertified windows of the set is running (`data/certify_direction_231.log`, 938 done before a machine restart). At the present rate it needs days; an incremental per-shape certifier is being built to cut that.
+
 ## 3. Lean side for seven-centre chains (prototype, not yet in the repository)
 
 - A generator prototype (scratchpad `genk7/`) produces and compiles a provisional L = 8, k = 7, cap-7 chain end to end, with standard axioms only.
