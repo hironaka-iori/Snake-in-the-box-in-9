@@ -96,6 +96,18 @@ def main():
         text = text.replace('@@F2@@', 'Snake9.LratFast2_' + sfx)
         mod2 = 'LratFast2_' + sfx
         print(mod2, 'written' if write(os.path.join(LEAN, mod2 + '.lean'), text) else 'unchanged')
+    # LratFast2F (check2 with the lemma tree forced) over each LratFast2 variant
+    fast2f = open(os.path.join(LEAN, 'LratFast2F.lean')).read()
+    for bits, off in todo:
+        sfx = {2400: '', 3000: 'O3k', 4000: 'O4k'}[off] + (str(bits) if bits != 13 else '')
+        bmod, bns = bases[off]
+        text = fast2f.replace('import LratFast2\n', 'import LratFast2_%s\n\n%s' % (sfx, header('LratFast2F', bits, off)), 1)
+        text = (text.replace('Snake9.LratFast2F', '@@F2F@@').replace('Snake9.LratFast2', '@@F2@@')
+                .replace('Snake9.LratFast', 'Snake9.LratFast' + sfx)
+                .replace('Snake9.Lrat ', 'Snake9.%s ' % bns).replace('Snake9.Lrat.', 'Snake9.%s.' % bns)
+                .replace('@@F2F@@', 'Snake9.LratFast2F_' + sfx).replace('@@F2@@', 'Snake9.LratFast2_' + sfx))
+        modf = 'LratFast2F_' + sfx
+        print(modf, 'written' if write(os.path.join(LEAN, modf + '.lean'), text) else 'unchanged')
 
 
 if __name__ == '__main__':
