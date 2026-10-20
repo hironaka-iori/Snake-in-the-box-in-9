@@ -1,0 +1,28 @@
+# Toward an unconditional 244: kernel-checked refutations of the (2,2,3) windows
+
+`upper_244_of_no_two_two_three` is conditional on no snake containing three consecutive internal vertices with local counts 2, 2, 3. Two radius-three window CNFs carry that premise (path vertices `0,1,3,7,6` and `0,1,3,7,15`, centres 1, 3, 7). Their DRAT refutations were checked by drat-trim only.
+
+**G2, the refutation (done).** The repository now proves both CNFs unsatisfiable in Lean, with every unit-propagation step checked by the kernel and only the standard axioms:
+- `w223_rep_unsat : WinCNF.unsat W223Rep.F`: 1,629 steps, 148,089 hints, 1,245 used clauses;
+- `w223_dis_unsat : WinCNF.unsat W223Dis.F`: 17,101 steps, 926,950 hints, 2,172 used clauses.
+
+Where things are:
+- Lean modules: `work/spectral/stronger/WinCNF.lean`, `WinRup.lean`, `WinRupCmd.lean`, `W223Rep*.lean`, `W223Dis*.lean`, `W223.lean`.
+- Clause semantics: `WinCNF` (`Lit := Int`, `clauseSat`, `unsat F := ∀ τ, (∀ c ∈ F, clauseSat τ c) → False`).
+- Bitmask RUP checker with its soundness proof: `WinRup.rup_sound`.
+- `WinRupCmd.rup_step` only builds proof terms and hands them to `addDecl`, so the kernel evaluates every check. A corrupted step is rejected; no `ofReduceBool` or native code is used.
+- Each `*Inputs.lean` holds the clauses the proof uses, their indices in the full CNF and their kinds, with SHA-256 hashes of both in its header.
+- The reproduction driver checks the 21 modules in about 200 s (`outputs/strengthened-direction-232-reproduction-manifest.json`).
+- Tools in this folder:
+  - `gen2.py` rebuilds the CNF with `wincert.Encoding` and trims the proof to LRAT with drat-trim `-L`;
+  - `export_lean.py` writes the Lean modules;
+  - `check_data.py` independently checks that the Lean clauses match the CNF file.
+
+**Normalisation (done).** `work/spectral/stronger/CubePermutation.lean` shows that cube automorphisms map snakes to snakes and keep `pathDir` (mapped by the coordinate permutation), `localAlpha` and the (2,2,3) window. Any window with pairwise distinct directions can be normalised.
+
+**Still open:**
+- G1, the geometric step: the assignment read off a normalised snake satisfies every clause in `W223Rep.F` and `W223Dis.F`.
+- The window-shape case split.
+- The assembly into an unconditional `m <= 244`.
+
+Until these are done, 244 remains conditional and the unconditional interval stays 191 <= a(9) <= 245.

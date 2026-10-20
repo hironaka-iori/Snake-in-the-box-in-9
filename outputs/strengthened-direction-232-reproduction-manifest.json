@@ -1,5 +1,5 @@
 {
-  "started_utc": "2026-10-20T06:22:31.437707+00:00",
+  "started_utc": "2026-10-20T07:04:39.464953+00:00",
   "mathlib_commit": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
   "lean_version": "Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)",
   "build_directory": "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
@@ -1046,6 +1046,27 @@
     "work/spectral/stronger/AggregateDirectionConditional.lean": "3fcf58e68acccb36f139c39c5c899f43e8c8a569665e0b10527546fe53ff2ad7",
     "work/spectral/stronger/WindowAutomatonLoop.lean": "e75db23776d8b23e1d41be1f972b155d8af4ea3c3d29d2d220ef0e2f7753c07e",
     "work/spectral/stronger/CubePermutation.lean": "7e95c76544ed5d9beb1fe2a884756b0c2ba60cb8ce4607ef6594d486e8cfe119",
+    "work/spectral/stronger/WinCNF.lean": "67d999546b6590c31603dd67cf5a26e1928407cfff0e4f014a9382ae57e30eeb",
+    "work/spectral/stronger/WinRup.lean": "b1629784c4ed3a7bb6f6c246896507847fed457be847777498688fe6bef38da6",
+    "work/spectral/stronger/WinRupCmd.lean": "45cd071bb7d4dd774c24578c1b0fdf9fb7a3e34361291cdfe1f700ab593abeb8",
+    "work/spectral/stronger/W223RepInputs.lean": "a2eaa3b2361028ba7c46cc3a0a8fdc7b1ea5be68e0b7b2753b84d21ee09502be",
+    "work/spectral/stronger/W223RepS00.lean": "20b020ed21226f19e10a308340361be94ec0967460e8cddba838b48cb328c2a8",
+    "work/spectral/stronger/W223RepS01.lean": "a06b46c45b04e7f064d982854ac5605daa70cbaff264c40896e10a016497af93",
+    "work/spectral/stronger/W223RepS02.lean": "7a1ac5ebbca2d2a4540db955f2e6e30d829b48d1cae18c5f12af0aace20ca169",
+    "work/spectral/stronger/W223RepMain.lean": "202bc8bdada4f0f3c0d50bd47344b7f38ece5e592a08142bdcf2a835f18db2f0",
+    "work/spectral/stronger/W223DisInputs.lean": "92427ee019701c623a77389abd2821d41cac58e546b41c3f27f7eb9c790bda8a",
+    "work/spectral/stronger/W223DisS00.lean": "bd1a68ea45e69f96510c360a38764e5e2f54ec40ddd09e3a17ca10b1b9082c8f",
+    "work/spectral/stronger/W223DisS01.lean": "4c07f6b1f1c898d1ece87f2855d24dd09b360c5134f99b8f744857bfbed5acfc",
+    "work/spectral/stronger/W223DisS02.lean": "50d889624582df1cc8643c96ea12d5f0e4d014fc36aa21d7ff084dbc2982a9c8",
+    "work/spectral/stronger/W223DisS03.lean": "20a38af14d884d8241a69120f7c5e81b4e1ef974d5f4079c05dec8cc97a31fbf",
+    "work/spectral/stronger/W223DisS04.lean": "32b67585fc93b41ca1964fa5544189e7ceca288a82c72c0334eb60e07d3c5959",
+    "work/spectral/stronger/W223DisS05.lean": "0de9f7ed2120f341148d914793518c9f83066b46c6753b892eef9416faa06356",
+    "work/spectral/stronger/W223DisS06.lean": "5130501131c500562ef36e8819a0fed18c1b205bbd373389a4c79e2dbadce818",
+    "work/spectral/stronger/W223DisS07.lean": "06a94a07d19ed6a540cafe5cc469a7aef0530189ed058ad7e8b80380e0616a44",
+    "work/spectral/stronger/W223DisS08.lean": "e5c619d65fef72a14012bab216ebffbe6d1f9ae5122438b1b8c39091e14c8d73",
+    "work/spectral/stronger/W223DisS09.lean": "d7d3a2d89177f855e82171740e209b66f5feaeae9a0b42010dd5d16bfca2b1da",
+    "work/spectral/stronger/W223DisMain.lean": "036949810da33e12483185b36e04082f800c2085774567ad266c1c7dcbf3ec51",
+    "work/spectral/stronger/W223.lean": "6c9b91db8d13d48e2e8b17bd916aab05dbb4e7afc050d490bf9d7c86da20e182",
     "work/spectral/stronger/WindowAutomatonSwar.lean": "f498c1fcf728f6a871093ad989a0906dbf370b8fe1e3f6e0c46402157204bd51",
     "work/spectral/stronger/WindowAutomatonCode.lean": "9c2dc2b256ba058e60139a5df11cbfb131d736f97b0a15ce165b95d4116c1a6c",
     "work/spectral/stronger/WindowAutomatonK5R3WData.lean": "77a0b6c0e4b287b02c91d84d37e1310da8251a1a1e5c155a8f57c524ba135ada",
@@ -1221,7 +1242,7 @@
         "OptimalityTarget"
       ],
       "exit_code": 0,
-      "seconds": 0.2
+      "seconds": 0.3
     },
     {
       "label": "SquareIncidence",
@@ -1869,15 +1890,259 @@
     },
     {
       "label": "CubePermutation",
+      "cached": true
+    },
+    {
+      "label": "WinCNF",
       "command": [
         "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
         "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
         "-o",
-        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/CubePermutation.olean",
-        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/CubePermutation.lean"
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/WinCNF.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/WinCNF.lean"
       ],
       "exit_code": 0,
-      "seconds": 4.3
+      "seconds": 0.3
+    },
+    {
+      "label": "WinRup",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/WinRup.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/WinRup.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6
+    },
+    {
+      "label": "WinRupCmd",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/WinRupCmd.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/WinRupCmd.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7
+    },
+    {
+      "label": "W223RepInputs",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepInputs.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepInputs.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 16.4
+    },
+    {
+      "label": "W223RepS00",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepS00.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepS00.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 9.0
+    },
+    {
+      "label": "W223RepS01",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepS01.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepS01.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 8.3
+    },
+    {
+      "label": "W223RepS02",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepS02.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepS02.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 4.1
+    },
+    {
+      "label": "W223RepMain",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepMain.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223RepMain.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5
+    },
+    {
+      "label": "W223DisInputs",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisInputs.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisInputs.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 33.0
+    },
+    {
+      "label": "W223DisS00",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS00.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS00.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 14.6
+    },
+    {
+      "label": "W223DisS01",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS01.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS01.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 14.3
+    },
+    {
+      "label": "W223DisS02",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS02.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS02.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 12.7
+    },
+    {
+      "label": "W223DisS03",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS03.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS03.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 12.7
+    },
+    {
+      "label": "W223DisS04",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS04.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS04.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 12.0
+    },
+    {
+      "label": "W223DisS05",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS05.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS05.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 12.1
+    },
+    {
+      "label": "W223DisS06",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS06.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS06.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 12.2
+    },
+    {
+      "label": "W223DisS07",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS07.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS07.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 11.9
+    },
+    {
+      "label": "W223DisS08",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS08.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS08.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 12.4
+    },
+    {
+      "label": "W223DisS09",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS09.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisS09.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 3.4
+    },
+    {
+      "label": "W223DisMain",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisMain.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223DisMain.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6
+    },
+    {
+      "label": "W223",
+      "command": [
+        "/root/.elan/toolchains/leanprover--lean4---v4.19.0/bin/lean",
+        "--root=/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume",
+        "-o",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223.olean",
+        "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/W223.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 3.4
     },
     {
       "label": "WindowAutomatonSwar",
@@ -2527,7 +2792,7 @@
         "/home/user/Snake-in-the-box-in-9/work/spectral/.verification/strengthened-k6-resume/FinalAudit.lean"
       ],
       "exit_code": 0,
-      "seconds": 9.9
+      "seconds": 12.3
     }
   ],
   "axiom_audits": {
@@ -2631,107 +2896,12 @@
       "Quot.sound",
       "propext"
     ],
-    "Snake9.CubePerm.permV_bijective": [
+    "w223_rep_unsat": [
       "Classical.choice",
       "Quot.sound",
       "propext"
     ],
-    "Snake9.CubePerm.permV_vxor": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.permV_unit": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.adj_permV": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.weight_permV": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.dist_permV": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.cubeAut_bijective": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.adj_cubeAut": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.dist_cubeAut": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.permSnake": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.cubeMap": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.pathDir_permSnake": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.pathDir_translate": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.pathDir_cubeMap": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.localAlpha_permSnake": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.localAlpha_cubeMap": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.countSeq_cubeMap": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.totalSingleton_cubeMap": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.no223_window_cubeMap": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.exists_perm_relabel": [
-      "Classical.choice",
-      "Quot.sound",
-      "propext"
-    ],
-    "Snake9.CubePerm.exists_normalizing_cubeMap": [
+    "w223_dis_unsat": [
       "Classical.choice",
       "Quot.sound",
       "propext"
@@ -2791,6 +2961,16 @@
       "propext"
     ],
     "Snake9.verified_interval_191_251": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CubePerm.exists_normalizing_cubeMap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Snake9.CubePerm.no223_window_cubeMap": [
       "Classical.choice",
       "Quot.sound",
       "propext"
@@ -2855,5 +3035,5 @@
     ]
   },
   "status": "success",
-  "completed_utc": "2026-10-20T06:22:52.327548+00:00"
+  "completed_utc": "2026-10-20T07:08:12.808649+00:00"
 }
