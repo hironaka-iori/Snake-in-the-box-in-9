@@ -58,7 +58,7 @@ def gen(a):
         nv = meta.get('variables', 0)
         off = 2400 if nv < 2400 else 3000 if nv < 3000 else 4000
         assert nv < 4000, (name, nv)
-        for bits in ((13, 14, 15, 16) if a.split else (13, 14, 15)):
+        for bits in ((13, 14, 15, 16, 17) if a.split else (13, 14, 15, 16)):
             cmd = [sys.executable, os.path.join(HERE, 'gen_lean_lrat.py'), '--work', a.work,
                    '--data', data_dir(a), '--seg', str(a.seg), '--cp', str(a.cp), '--group', str(a.group),
                    '--wbits', str(bits), '--off', str(off), '--noncomputable-data', '--fast',

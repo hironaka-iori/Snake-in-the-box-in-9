@@ -69,7 +69,7 @@ def set_width(bits, fast=False, off=2400, split=False):
     3000); the checker is LratCheck / LratCheck14 / LratCheckO3k, or with `fast`
     LratFast{,14} / LratFastO3k{,14,15} (see gen_checker_variants.py)."""
     global W, M, CHECKER_IMPORT, CHECKER_OPEN, FAST, OFF, BASE_NS, SPLIT, FLAG
-    assert bits in (13, 14, 15, 16) and off in (2400, 3000, 4000)
+    assert bits in (13, 14, 15, 16, 17) and off in (2400, 3000, 4000)
     assert fast or not split
     W, M, FAST, OFF, SPLIT, FLAG = bits, (1 << bits) - 1, fast, off, split, 1 << (bits - 1)
     osfx = {2400: '', 3000: 'O3k', 4000: 'O4k'}[off]
@@ -576,7 +576,7 @@ def main():
     ap.add_argument('--check', action='store_true', help='simulate the checker first')
     ap.add_argument('--data', default=DATA, help='core JSON directory (lean_core_direction for the 239 set)')
     ap.add_argument('--wbits', type=int, default=13,
-                    help='13 to 16 bits per word (with --split the slots must stay below 2^(bits-1))')
+                    help='13 to 17 bits per word (with --split the slots must stay below 2^(bits-1))')
     ap.add_argument('--off', type=int, default=2400, help='literal offset: 2400, 3000 or 4000 (above the variable count)')
     ap.add_argument('--noncomputable-data', action='store_true',
                     help='declare the proof data `noncomputable def` (smaller build output)')

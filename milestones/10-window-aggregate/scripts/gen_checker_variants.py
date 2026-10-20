@@ -10,7 +10,7 @@ The variants are the same files with those constants replaced:
   LratCheckO3k / LratFastO3k      OFF = 3000, for CNFs with more than 2399 variables
   LratFastO3k14, LratFastO3k15    OFF = 3000 with 14- or 15-bit words
   LratCheckO4k, LratFastO4k{,14,15}  OFF = 4000 (radius-4 five-centre CNFs)
-  LratFast{,O3k,O4k}16            16-bit words (clause keys up to 65535)
+  LratFast{,O3k,O4k}16, ...17     16- and 17-bit words (clause keys up to 65535 / 131071)
   LratFast2_{O3k,O4k}{,14,15,16}, LratFast2_{14,15,16}: the same variants of LratFast2 (cached start database;
                                   keys below 2^(bits-1), the top bit flags a start key)
 
@@ -63,7 +63,7 @@ def main():
     # (bits, off) -> names
     bases = {2400: ('LratCheck', 'Lrat'), 3000: ('LratCheckO3k', 'LratO3k'), 4000: ('LratCheckO4k', 'LratO4k')}
     todo = [(13, 3000), (14, 2400), (15, 2400), (14, 3000), (15, 3000), (13, 4000), (14, 4000), (15, 4000),
-            (16, 2400), (16, 3000), (16, 4000)]
+            (16, 2400), (16, 3000), (16, 4000), (17, 2400), (17, 3000), (17, 4000)]
     for off, (mod, ns) in bases.items():
         if off == 2400:
             continue
