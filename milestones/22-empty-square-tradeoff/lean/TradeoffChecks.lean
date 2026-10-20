@@ -55,6 +55,7 @@ theorem no_bad_block {m : Nat} (p : Snake m) (s : Nat) (hs : s+9 ≤ m)
     rw [h0,h9]
     exact bad_endpoints_adjacent
   have hc := hi.mp ha
+  change s + 1 = s + 9 at hc
   omega
 
 #print axioms sharp_distinct
