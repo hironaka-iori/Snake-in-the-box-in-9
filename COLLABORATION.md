@@ -4,9 +4,15 @@ Checkpoint: 20 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and St
 
 ## Latest construction checkpoint
 
-[Milestone 21](milestones/21-endpoint-recombination/README.md) tests the shared-endpoint recombination proposed in milestone 20. Across 5,760 alignments, every valid positive single exchange gives back the 190-edge donor. Two exchanges on twelve selected alignments do the same. Shared-intersection 196 models are solver-infeasible; freely varying union models at 192/196 remain unresolved. Three diversity searches returned only the donor. Four Lean audits check the joining construction and endpoint identities. Next: use complete 191-edge donors without requiring the donor endpoint pair to match the recipient.
+The user explicitly broadened the construction objective: pursue any valuable improvement, without exclusive focus on 196. Upper-bound work remains assigned to collaborators.
 
-The successful 238 proof receipts from collaborator commits c45ffa76 and 5c55ddd5 are integrated. The corresponding proof sources already agree with this checkout. The manuscript now states 191 <= a(9) <= 238, with the incremental Linux-build limitation explicit. Upper-bound research remains assigned to collaborators.
+[Milestone 22](milestones/22-internal-anchor-donors/README.md) tests the complete 191-edge donor through four anchor pairs and 23,040 alignments. No candidate of at least 192 edges survived; the five saved near candidates have 24 to 45 chords. Four new Lean audits certify the full donor and its relation to the prior prefix.
+
+[Milestone 23](milestones/23-parity-compatible-faces/README.md) targets 193 to permit fixed-endpoint improvements. All 672 Q6 faces and 1,008 opposite Q5 pairs were solver-infeasible. One Q7 face remains unresolved after retries. At both 192 and 193, ten Q8 faces remain UNKNOWN and eight are excluded. Four Lean deductions check the target logic and third-neighbor exclusion.
+
+Next: build and validate a contracted model for those ten Q8 faces, starting with face 3 (165 retained model vertices). Maximize the expanded length and use the known 191-edge witness as a control. Expand every feasible result and check all vertex pairs. The contraction is currently an inventory and mathematical proposal, not an implemented solver.
+
+GitHub main was unchanged at the initial fetch. The collaborator branch `research/unconditional-241` advanced to 7d7ee17b with certificate-generation and disk-use improvements; no further bound is adopted. The manuscript retains 191 <= a(9) <= 238 and the existing incremental-build limitation.
 
 ## Construction history
 

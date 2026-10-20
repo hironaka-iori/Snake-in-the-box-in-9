@@ -1122,7 +1122,40 @@ The construction and its endpoint identities are checked in Lean. It supplies a 
 
 Twelve alignments were selected, including the six largest overlaps and representatives across the overlap ranking. Their parent unions contain between 272 and 325 vertices. For each union, a 196-edge solver model retaining every shared vertex returned \texttt{INFEASIBLE}. Releasing the shared vertices left both the 192- and 196-edge models unresolved after six seconds per run. Controls reproduced both parent lengths. These are restricted solver outcomes without Lean infeasibility certificates.
 
-The same twelve alignments were then tested for exchanges of two recipient intervals with disjoint interiors, allowing an individual exchange to lose length provided their combined gain is positive. The $104\,649$ positive-gain pairs produced $1305$ valid exchanges, all equal to one of the twelve aligned 190-edge donors. Three 30-second searches for a 190-edge path using vertices exclusive to both parents also returned only the donor. They did not prove that a mixed path is impossible. No new record follows. The next construction test will use complete 191-edge donors without requiring their two endpoints to coincide with those of the recipient.
+The same twelve alignments were then tested for exchanges of two recipient intervals with disjoint interiors, allowing an individual exchange to lose length provided their combined gain is positive. The $104\,649$ positive-gain pairs produced $1305$ valid exchanges, all equal to one of the twelve aligned 190-edge donors. Three 30-second searches for a 190-edge path using vertices exclusive to both parents also returned only the donor. They did not prove that a mixed path is impossible. No new record follows. The following investigation uses complete 191-edge donors without requiring their two endpoints to coincide with those of the recipient.
+
+
+\subsection{Complete donors and internal anchor pairs}
+Extending the paired control by the final vertex of its source witness gives a 191-edge snake with first vertex 41, vertex 67 at position 190, and final vertex 83. Its prefix of length 190 is exactly the preceding paired control. These endpoint and prefix identities are checked in Lean.
+
+Four donor anchor pairs were selected, with indices $(0,190)$, $(6,186)$, $(26,166)$ and $(46,146)$. Each pair has Hamming distance four. For each pair, the $5760$ coordinate isometries mapping its unordered vertex pair to $\{41,67\}$ were enumerated, including both orientations. The final three pairs lie strictly inside the donor. For each resulting alignment, the search considered interval replacement and replacement of either recipient end by either donor tail. Every candidate of length at least 192 was tested. The census examined $27\,374\,032$ interior candidates and $3\,204\,120$ tail candidates before rejecting repetitions and cross-adjacencies. No candidate was an induced path. These are generated candidates rather than distinct symmetry classes, and the exclusion covers only the specified family.
+
+An independent direct-pair audit checked $23\,785$ rejected candidates from sixteen sampled alignments. Five saved simple 196-edge walks had 25, 26, 45, 31 and 24 chords. They were selected by the number of conflicting retained vertices, so 24 is only the smallest chord count among those saved walks. None gives a lower bound. The full census remains ordinary computation rather than a kernel-checked certificate.
+
+\subsection{Construction targets compatible with endpoint parity}
+The construction objective is any improvement above 191 edges. The numerical conjecture 196 does not restrict which successful constructions are relevant.
+
+\begin{proposition}[First improvement and fixed endpoints]
+A snake longer than 191 edges exists if and only if a 192-edge snake exists. If a snake longer than 191 has the same endpoints as a 191-edge snake, its length is odd and at least 193.
+\end{proposition}
+\begin{proof}
+Every prefix of an induced path is an induced path, so the first assertion follows by taking the 192-edge prefix. Conversely, a 192-edge snake is already an improvement. Each cube edge changes binary-weight parity. Paths with identical endpoints therefore have the same length parity; a length exceeding 191 with odd parity is at least 193.
+\end{proof}
+These statements, and the particular 193-to-192 prefix construction, are checked in Lean. The proposition motivates searching at 193 when retaining endpoints is useful. It does not say that every longer path with prescribed endpoints has a 193-edge prefix with those same endpoints.
+
+For the aligned 191-edge witness used in the coordinate-face experiments, all 672 six-dimensional faces were tested at exact target 193. Every model returned \texttt{INFEASIBLE}. Among the 144 seven-dimensional faces, 142 were excluded at a two-second limit; after thirty-second retries, one more was excluded and one remained unresolved. The models preserve both selected and unselected vertices outside the chosen face and allow arbitrary induced-path order inside it. Endpoints may move when the remaining constraints permit.
+
+A separate survey released two opposite five-dimensional cells at once. Each union has 64 vertices and varies all nine coordinates, because the two cells differ in all four fixed coordinates. There are $\binom95\,2^3=1008$ such unions. Every exact 193-edge model returned \texttt{INFEASIBLE}; a 191-edge control passed independent pairwise checking. This tests changes not confined to any proper coordinate face. Finally, all eighteen eight-dimensional faces were tested at both 192 and 193 edges with five-second limits. At each target, eight were excluded and the same ten remained unresolved. No improved witness follows.
+
+All of these infeasibility results are restricted solver observations without Lean certificates. An exclusion at exact length 193 within a region also does not exclude length 195 there: truncation can remove vertices whose outside membership was prescribed.
+
+\begin{lemma}[Excluding a third neighbor]
+Suppose a selected vertex $v$ in an induced path has two distinct selected neighbors $a,b$. If a third vertex $c$, distinct from $a,b$, is adjacent to $v$, then $c$ is unselected.
+\end{lemma}
+\begin{proof}
+Every vertex of a path has at most two neighbors in the path. Selecting $c$ would give three distinct neighbors of $v$.
+\end{proof}
+The lemma is checked in Lean and supplies a preprocessing rule for the unresolved face searches. Fixed outside vertices induce disjoint paths. An internal vertex of such a path already has two selected outside neighbors, so all its inside neighbors can be removed from the candidate set. In the smallest remaining case, two outside paths contain 99 vertices, of which 95 are internal. The surviving region contains 161 candidate inside vertices and four outside endpoints. Contracting the two fixed paths to connections between their endpoints would therefore give a model with 165 vertices. This contraction still requires implementation and validation. Maximizing the expanded path length would permit any improvement, without imposing a single numerical target.
 
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
