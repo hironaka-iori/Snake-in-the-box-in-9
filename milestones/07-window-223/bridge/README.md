@@ -30,3 +30,24 @@ Where things are:
 - Reproduction: `outputs/strengthened-244-reproduction-manifest.json`, 353 steps, success, standard axioms only. The G1 modules take about 60 s and G2 about 200 s.
 
 **Result: 191 <= a(9) <= 244, unconditional and Lean-checked.**
+
+## 242 and 241 unconditional (20 October 2026)
+
+The same machinery discharges every premise of `upper_242_of_certified_windows` and `upper_241_of_certified_windows`:
+- `WinG1Gen.lean`: a generic G1 layer whose counter blocks are classified by the kernel as endpoint budget, `alpha <= hi` or `alpha >= lo`, so ranges such as 4..6 work.
+- `WinShape.lean`:
+  - chord exclusion for direction patterns `abcab`;
+  - normalisation forwards or backwards, which covers the 3-window shapes 0120/0123 and the 4-window shapes 01203/01230/01231/01234;
+  - reversed patterns are read backwards.
+- 12 window cases, each with its inputs, kernel-checked RUP steps (`WinRupImp.rup_imp_step`, curried hint arguments, about 40% smaller objects) and a G1 check: `W224*`, `W232*`, `W323*`, `W41c*`, `W2423A/B/C*`, `W3242A*`. The (2,2,3) refutations are reused for (3,2,2).
+- The final theorems:
+  - `UpperBound242.lean`: `Snake9.upper_bound_242`;
+  - `UpperBound241.lean`: `Snake9.upper_bound_241` and `Snake9.verified_interval_191_241`.
+
+The generator `u242/gen.py` checks the SHA-256 hashes of the committed certificate CNF and DRUP files and that `wincert.Encoding` reproduces each CNF up to the cycle cuts. It then trims the proofs with `drat-trim -L` (`u242/trim.sh`) and writes the modules.
+
+Reproduction `outputs/strengthened-241-reproduction-manifest.json`: 606 steps, success, 26 minutes with `--jobs 2`. The 255 new modules take 2,741 module-seconds; the largest single refutation is (3,2,3) with distinct directions, 575 s. Every audited theorem uses only `propext`, `Classical.choice`, `Quot.sound`.
+
+**Result: 191 <= a(9) <= 241, unconditional and Lean-checked.**
+
+What is not re-derived in Lean: the CNF encodings themselves. As for 244, the kernel checks that the clauses actually used by each refutation hold for every snake (G1) and that they are unsatisfiable (G2), and that is all the theorem needs.

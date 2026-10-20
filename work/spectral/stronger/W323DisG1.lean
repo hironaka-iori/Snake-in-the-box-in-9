@@ -1,0 +1,27 @@
+import WinG1Gen
+import W323DisInputs
+/-! G1 decoding tables of `323_fwd_distinct` (window [0, 1, 3, 7, 15], alpha [3, 2, 3]), generated from
+wincert.Encoding by scripts/gen.py.  Untrusted hints, validated by the kernel checker. -/
+namespace W323Dis
+open WinCNF W223G1
+set_option maxRecDepth 100000
+def ballL : List Nat := [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 45, 46, 47, 48, 49, 50, 51, 53, 54, 55, 57, 59, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87, 89, 91, 95, 96, 97, 98, 99, 101, 102, 103, 105, 107, 111, 113, 115, 119, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 141, 142, 143, 144, 145, 146, 147, 149, 150, 151, 153, 155, 159, 160, 161, 162, 163, 165, 166, 167, 169, 171, 175, 177, 179, 183, 192, 193, 194, 195, 197, 198, 199, 201, 203, 207, 209, 211, 215, 225, 227, 231, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 269, 270, 271, 272, 273, 274, 275, 277, 278, 279, 281, 283, 287, 288, 289, 290, 291, 293, 294, 295, 297, 299, 303, 305, 307, 311, 320, 321, 322, 323, 325, 326, 327, 329, 331, 335, 337, 339, 343, 353, 355, 359, 384, 385, 386, 387, 389, 390, 391, 393, 395, 399, 401, 403, 407, 417, 419, 423, 449, 451, 455]
+def endsL : List Nat := [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 25, 27, 31, 32, 33, 34, 35, 37, 38, 39, 41, 43, 47, 49, 51, 55, 64, 65, 66, 67, 69, 70, 71, 73, 75, 79, 81, 83, 87, 97, 99, 103, 128, 129, 130, 131, 133, 134, 135, 137, 139, 143, 145, 147, 151, 161, 163, 167, 193, 195, 199, 256, 257, 258, 259, 261, 262, 263, 265, 267, 271, 273, 275, 279, 289, 291, 295, 321, 323, 327, 385, 387, 391]
+/-- endpoint_budget -/
+def B0 : Block := ⟨317, 2, 95, [pos 222, pos 223, pos 224, pos 225, pos 226, pos 227, pos 228, pos 229, pos 230, pos 231, pos 232, pos 233, pos 234, pos 235, pos 236, pos 237, pos 238, pos 239, pos 240, pos 241, pos 242, pos 243, pos 244, pos 245, pos 246, pos 247, pos 248, pos 249, pos 250, pos 251, pos 252, pos 253, pos 254, pos 255, pos 256, pos 257, pos 258, pos 259, pos 260, pos 261, pos 262, pos 263, pos 264, pos 265, pos 266, pos 267, pos 268, pos 269, pos 270, pos 271, pos 272, pos 273, pos 274, pos 275, pos 276, pos 277, pos 278, pos 279, pos 280, pos 281, pos 282, pos 283, pos 284, pos 285, pos 286, pos 287, pos 288, pos 289, pos 290, pos 291, pos 292, pos 293, pos 294, pos 295, pos 296, pos 297, pos 298, pos 299, pos 300, pos 301, pos 302, pos 303, pos 304, pos 305, pos 306, pos 307, pos 308, pos 309, pos 310, pos 311, pos 312, pos 313, pos 314, pos 315, pos 316]⟩
+/-- alpha<=3@1 -/
+def B1 : Block := ⟨507, 3, 21, [neg 14, neg 22, neg 37, neg 62, neg 100, neg 154, neg 26, neg 41, neg 66, neg 104, neg 158, neg 48, neg 73, neg 111, neg 165, neg 83, neg 121, neg 175, neg 134, neg 188, neg 204]⟩
+/-- alpha>=3@1 -/
+def B2 : Block := ⟨570, 18, 21, [pos 14, pos 22, pos 37, pos 62, pos 100, pos 154, pos 26, pos 41, pos 66, pos 104, pos 158, pos 48, pos 73, pos 111, pos 165, pos 83, pos 121, pos 175, pos 134, pos 188, pos 204]⟩
+/-- alpha<=2@3 -/
+def B3 : Block := ⟨948, 2, 21, [neg 11, neg 19, neg 34, neg 59, neg 97, neg 151, neg 28, neg 43, neg 68, neg 106, neg 160, neg 50, neg 75, neg 113, neg 167, neg 85, neg 123, neg 177, neg 136, neg 190, neg 206]⟩
+/-- alpha>=2@3 -/
+def B4 : Block := ⟨990, 19, 21, [pos 11, pos 19, pos 34, pos 59, pos 97, pos 151, pos 28, pos 43, pos 68, pos 106, pos 160, pos 50, pos 75, pos 113, pos 167, pos 85, pos 123, pos 177, pos 136, pos 190, pos 206]⟩
+/-- alpha<=3@7 -/
+def B5 : Block := ⟨1389, 3, 21, [neg 5, neg 23, neg 38, neg 63, neg 101, neg 155, neg 22, neg 37, neg 62, neg 100, neg 154, neg 53, neg 78, neg 116, neg 170, neg 88, neg 126, neg 180, neg 139, neg 193, neg 209]⟩
+/-- alpha>=3@7 -/
+def B6 : Block := ⟨1452, 18, 21, [pos 5, pos 23, pos 38, pos 63, pos 101, pos 155, pos 22, pos 37, pos 62, pos 100, pos 154, pos 53, pos 78, pos 116, pos 170, pos 88, pos 126, pos 180, pos 139, pos 193, pos 209]⟩
+def blocks : List Block := [B0, B1, B2, B3, B4, B5, B6]
+def T : Tables := ⟨221, 95, ballL, endsL, [0, 1, 3, 7, 15], blocks⟩
+theorem blocksOK_T : blocksOK T = true := by decide +kernel
+end W323Dis

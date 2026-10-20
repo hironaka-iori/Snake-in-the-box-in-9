@@ -82,6 +82,50 @@ MODULES = [
     # bridge step G1 and the unconditional 244
     "W223G1Defs", "W223G1Data", "W223G1Sound", "W223G1CheckRep", "W223G1CheckDis", "W223G1Snake",
     "W223G1Inst", "UpperBound244",
+    # unconditional 242 and 241: kernel-checked refutations and bridges for the remaining windows
+    "WinRupImp", "WinG1Gen", "WinShape", "W41cRepInputs", "W41cRepS00", "W41cRepMain",
+    "W41cRepG1", "W41cRepG1C0", "W41cRepG1Check", "W41cDisInputs", "W41cDisS00", "W41cDisS01",
+    "W41cDisMain", "W41cDisG1", "W41cDisG1C0", "W41cDisG1C1", "W41cDisG1C2", "W41cDisG1Check",
+    "W232RepInputs", "W232RepS00", "W232RepMain", "W232RepG1", "W232RepG1C0", "W232RepG1C1",
+    "W232RepG1C2", "W232RepG1C3", "W232RepG1Check", "W224RepInputs", "W224RepS00", "W224RepS01",
+    "W224RepS02", "W224RepS03", "W224RepS04", "W224RepS05", "W224RepS06", "W224RepS07",
+    "W224RepS08", "W224RepS09", "W224RepMain", "W224RepG1", "W224RepG1C0", "W224RepG1C1",
+    "W224RepG1C2", "W224RepG1C3", "W224RepG1C4", "W224RepG1C5", "W224RepG1Check", "W323RepInputs",
+    "W323RepS00", "W323RepS01", "W323RepS02", "W323RepS03", "W323RepS04", "W323RepS05",
+    "W323RepS06", "W323RepS07", "W323RepS08", "W323RepS09", "W323RepS10", "W323RepS11",
+    "W323RepS12", "W323RepS13", "W323RepS14", "W323RepS15", "W323RepS16", "W323RepMain",
+    "W323RepG1", "W323RepG1C0", "W323RepG1C1", "W323RepG1C2", "W323RepG1C3", "W323RepG1C4",
+    "W323RepG1C5", "W323RepG1Check", "W224DisInputs", "W224DisS00", "W224DisS01", "W224DisS02",
+    "W224DisS03", "W224DisS04", "W224DisS05", "W224DisS06", "W224DisS07", "W224DisS08",
+    "W224DisS09", "W224DisS10", "W224DisS11", "W224DisS12", "W224DisS13", "W224DisS14",
+    "W224DisS15", "W224DisS16", "W224DisMain", "W224DisG1", "W224DisG1C0", "W224DisG1C1",
+    "W224DisG1C2", "W224DisG1C3", "W224DisG1C4", "W224DisG1C5", "W224DisG1Check", "W232DisInputs",
+    "W232DisS00", "W232DisS01", "W232DisS02", "W232DisS03", "W232DisS04", "W232DisS05",
+    "W232DisS06", "W232DisS07", "W232DisS08", "W232DisS09", "W232DisS10", "W232DisS11",
+    "W232DisS12", "W232DisS13", "W232DisS14", "W232DisS15", "W232DisS16", "W232DisS17",
+    "W232DisMain", "W232DisG1", "W232DisG1C0", "W232DisG1C1", "W232DisG1C2", "W232DisG1C3",
+    "W232DisG1C4", "W232DisG1C5", "W232DisG1C6", "W232DisG1Check", "W323DisInputs", "W323DisInputsD0",
+    "W323DisInputsD1", "W323DisS00", "W323DisS01", "W323DisS02", "W323DisS03", "W323DisS04",
+    "W323DisS05", "W323DisS06", "W323DisS07", "W323DisS08", "W323DisS09", "W323DisS10",
+    "W323DisS11", "W323DisS12", "W323DisS13", "W323DisS14", "W323DisS15", "W323DisS16",
+    "W323DisS17", "W323DisS18", "W323DisS19", "W323DisS20", "W323DisS21", "W323DisS22",
+    "W323DisS23", "W323DisS24", "W323DisS25", "W323DisS26", "W323DisS27", "W323DisS28",
+    "W323DisS29", "W323DisS30", "W323DisS31", "W323DisS32", "W323DisS33", "W323DisS34",
+    "W323DisS35", "W323DisS36", "W323DisS37", "W323DisS38", "W323DisS39", "W323DisS40",
+    "W323DisS41", "W323DisS42", "W323DisS43", "W323DisS44", "W323DisMain", "W323DisG1",
+    "W323DisG1C0", "W323DisG1C1", "W323DisG1C2", "W323DisG1C3", "W323DisG1C4", "W323DisG1C5",
+    "W323DisG1C6", "W323DisG1C7", "W323DisG1Check", "W3242AInputs", "W3242AS00", "W3242AMain",
+    "W3242AG1", "W3242AG1C0", "W3242AG1C1", "W3242AG1C2", "W3242AG1Check", "W2423AInputs",
+    "W2423AS00", "W2423AMain", "W2423AG1", "W2423AG1C0", "W2423AG1C1", "W2423AG1C2",
+    "W2423AG1C3", "W2423AG1Check", "W2423CInputs", "W2423CS00", "W2423CS01", "W2423CS02",
+    "W2423CMain", "W2423CG1", "W2423CG1C0", "W2423CG1C1", "W2423CG1C2", "W2423CG1C3",
+    "W2423CG1Check", "W2423BInputs", "W2423BInputsD0", "W2423BInputsD1", "W2423BS00", "W2423BS01",
+    "W2423BS02", "W2423BS03", "W2423BS04", "W2423BS05", "W2423BS06", "W2423BS07",
+    "W2423BS08", "W2423BS09", "W2423BS10", "W2423BS11", "W2423BS12", "W2423BS13",
+    "W2423BS14", "W2423BS15", "W2423BS16", "W2423BS17", "W2423BS18", "W2423BS19",
+    "W2423BMain", "W2423BG1", "W2423BG1C0", "W2423BG1C1", "W2423BG1C2", "W2423BG1C3",
+    "W2423BG1C4", "W2423BG1C5", "W2423BG1C6", "W2423BG1C7", "W2423BG1Check", "UpperBound242",
+    "UpperBound241",
 ]
 
 
@@ -285,7 +329,7 @@ def main():
                     finished.add(running.pop(future))
         audit = build / "FinalAudit.lean"
         audit.write_text(
-            "import Aggregate244Conditional\nimport CubePermutation\nimport W223\nimport UpperBound244\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
+            "import Aggregate244Conditional\nimport CubePermutation\nimport W223\nimport UpperBound244\nimport UpperBound241\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
             + "".join(f"import AggregateDirection{c}Conditional\n" for c in args.extra_chains)
             + "import UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
@@ -307,7 +351,10 @@ def main():
             "#print axioms w223_dis_unsat\n"
             "#print axioms W223G1.no_223\n"
             "#print axioms Snake9.upper_bound_244\n"
-            "#print axioms Snake9.verified_interval_191_244\n", encoding="utf-8"
+            "#print axioms Snake9.verified_interval_191_244\n"
+            "#print axioms Snake9.upper_bound_242\n"
+            "#print axioms Snake9.upper_bound_241\n"
+            "#print axioms Snake9.verified_interval_191_241\n", encoding="utf-8"
         )
         with audit.open("a", encoding="utf-8") as stream:
             stream.write(
@@ -344,7 +391,7 @@ def main():
             raise RuntimeError(f"Missing final theorem audits: {missing}")
         manifest["status"] = "success"
         manifest["completed_utc"] = datetime.now(timezone.utc).isoformat()
-        print("Verified: 191 <= a(9) <= 244 edges (verified_interval_191_244). Exact optimum unresolved.", flush=True)
+        print("Verified: 191 <= a(9) <= 241 edges (verified_interval_191_241). Exact optimum unresolved.", flush=True)
         print(f"Source hashes, commands, and transitive axiom audits: {build / 'manifest.json'}")
     except BaseException as exc:
         manifest["status"] = "failed"
