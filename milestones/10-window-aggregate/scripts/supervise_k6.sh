@@ -80,7 +80,7 @@ fi
 #     4,8,4,3,5,3 is feasible in every window of at most six centres up to radius five)
 if [ ! -f $D/refine_L8_k7_K7_r3.json ] && [ ! -f $D/refine_k7_paused ] && ! running "refine_fast.py --L 8 --k 7"; then
   log "starting seven-centre refinement"
-  (cd $M && nohup python3 scripts/refine_fast.py --L 8 --k 7 --K 7 --lean --radius 3 --escalate 4 --hybrid --workers 4 --slack 0.3 \
+  (cd $M && nohup python3 scripts/refine_fast.py --L 8 --k 7 --K 7 --lean --incremental --rc-cycles --rc-R 0.1 --radius 3 --escalate 4 --hybrid --workers 4 --slack 0.3 \
      --batch 200 --query-timeout 10 --long-timeout 120 --avoid data/avoid_k6.json >> data/refine_L8_k7_K7_r3.log 2>&1 &)
 fi
 
