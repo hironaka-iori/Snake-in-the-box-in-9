@@ -322,7 +322,15 @@ def main():
     ap.add_argument('--greedy', action='store_true',
                     help='query only until every extracted cycle has an excluded window: windows shared by the most '
                          'unbroken cycles first, in parallel chunks')
+    ap.add_argument('--lean', action='store_true',
+                    help='LeanAutomaton: int32/uint8/int16 CSR edge arrays (~12 B/edge), chunked prune, '
+                         'C Howard in place on the CSR (lean_automaton.py)')
+    ap.add_argument('--final-max-edges', type=int, default=60_000_000,
+                    help='with --lean: skip the final int64 Bellman-Ford / vertex bound above this many edges')
     a = ap.parse_args()
+    if a.lean:
+        assert not a.python_howard, '--lean needs the C Howard'
+        from lean_automaton import LeanAutomaton, prune_lean, LeanHowardGraph, IdentityIndex
     if a.index:
         cases = [c for c in json.load(open(a.index))['cases'] if c['drat_trim_verified']]
         keys = [(tuple(c['dirs']), tuple(tuple(x) for x in c['alpha'])) for c in cases]
@@ -368,15 +376,21 @@ def main():
     if a.avoid:
         for e in json.load(open(a.avoid)):
             oracle.known[(tuple(e['dirs']), tuple(tuple(x) for x in e['alpha']))] = 'AVOID'
-    A = FastAutomaton(a.L, a.k, a.K)
+    A = (LeanAutomaton if a.lean else FastAutomaton)(a.L, a.k, a.K)
     print('shapes', len(A.shapes), 'states', A.n, 'extensions', len(A.ext), flush=True)
     log = []
     prefer = None
     for rnd in range(a.rounds):
         t = time.time(); ph = {}
-        U, V, W, EXT = A.edges(oracle)
-        m = prune(A.n, U, V)
-        idx = np.nonzero(m)[0]
+        if a.lean:
+            U = V = W = EXT = m = G = None              # free last round's graph before building the next
+            U, V, W, EXT = A.edges(oracle)
+            m = prune_lean(A.n, A.starts, V)
+            idx = IdentityIndex(m.sum())                # the lean Howard keeps the full edge numbering
+        else:
+            U, V, W, EXT = A.edges(oracle)
+            m = prune(A.n, U, V)
+            idx = np.nonzero(m)[0]
         ph['graph'] = time.time() - t
         if a.python_howard:
             mu, cyc = howard(A.n, U[idx], V[idx], W[idx])
@@ -385,7 +399,10 @@ def main():
             # C Howard, warm-started from the previous round's policy; then many near-minimal
             # cycles by deleting each found cycle's edges and re-solving
             from howard_fast import HowardGraph
-            G = HowardGraph(A.n, U[idx], V[idx], W[idx], prefer=prefer)
+            if a.lean:
+                G = LeanHowardGraph(A.n, A.starts, V, W, m, prefer=prefer)
+            else:
+                G = HowardGraph(A.n, U[idx], V[idx], W[idx], prefer=prefer)
             mu, cyc = G.solve()
             prefer = G.successors()
             ph['howard'] = time.time() - t - ph['graph']
@@ -423,12 +440,18 @@ def main():
                     'queried': newq, 'killed': len(unsat)})
         if not unsat:
             break
-    pi = bellman_ford(A.n, U, V, W, exact.numerator, exact.denominator)
-    vb = vertex_bound(A, U, V, W)
+    skipped = a.lean and len(V) > a.final_max_edges
+    if skipped:
+        pi = vb = None                                  # int64 Bellman-Ford needs ~45 B/edge: not at this size
+    else:
+        if a.lean:
+            G = m = None; U = U.astype(np.int64); W = W.astype(np.int64)   # uint8 W wraps in q*W - p
+        pi = bellman_ford(A.n, U, V, W, exact.numerator, exact.denominator)
+        vb = vertex_bound(A, U, V, W)
     out = {'L': a.L, 'k': a.k, 'K': a.K, 'radius': a.radius, 'min_mean': str(exact),
-           'exact_potential_found': pi is not None,
+           'exact_potential_found': None if skipped else pi is not None,
            'potential_range': int(pi.max() - pi.min()) if pi is not None else None,
-           'max_vertices': vb, 'max_edges': vb - 1, 'edges': int(len(U)),
+           'max_vertices': vb, 'max_edges': vb - 1 if vb is not None else None, 'edges': int(len(V)),
            'final_cycle_counts': [int(x) for x in W[cyc]], 'rounds': log}
     json.dump(out, open(os.path.join(DATA, f'refine_L{a.L}_k{a.k}_K{a.K}_r{a.radius}.json'), 'w'), indent=1)
     print(json.dumps({k2: v for k2, v in out.items() if k2 != 'rounds'}))

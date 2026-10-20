@@ -76,12 +76,12 @@ if grep -q "failed 0" $D/certify_direction_r34.log 2>/dev/null && [ ! -f $D/pipe
   (nohup bash $S/pipeline_r34.sh >> $D/pipeline_r34.log 2>&1 &)
 fi
 
-# 10. seven-centre windows (the six-centre automaton is capped at 9/2: a cycle of counts
+# 10. seven-centre windows at cap 7, lean graph (the six-centre automaton is capped at 9/2: a cycle of counts
 #     4,8,4,3,5,3 is feasible in every window of at most six centres up to radius five)
-if [ ! -f $D/refine_L8_k7_K5_r3.json ] && [ ! -f $D/refine_k7_paused ] && ! running "refine_fast.py --L 8 --k 7"; then
+if [ ! -f $D/refine_L8_k7_K7_r3.json ] && [ ! -f $D/refine_k7_paused ] && ! running "refine_fast.py --L 8 --k 7"; then
   log "starting seven-centre refinement"
-  (cd $M && nohup python3 scripts/refine_fast.py --L 8 --k 7 --K 5 --radius 3 --escalate 4 --hybrid --workers 4 --slack 0.3 \
-     --batch 200 --query-timeout 10 --long-timeout 120 --avoid data/avoid_k6.json >> data/refine_L8_k7_K5_r3.log 2>&1 &)
+  (cd $M && nohup python3 scripts/refine_fast.py --L 8 --k 7 --K 7 --lean --radius 3 --escalate 4 --hybrid --workers 4 --slack 0.3 \
+     --batch 200 --query-timeout 10 --long-timeout 120 --avoid data/avoid_k6.json >> data/refine_L8_k7_K7_r3.log 2>&1 &)
 fi
 
 log "supervisor pass done"
