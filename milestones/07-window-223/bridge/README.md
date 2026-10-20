@@ -51,3 +51,12 @@ Reproduction `outputs/strengthened-241-reproduction-manifest.json`: 606 steps, s
 **Result: 191 <= a(9) <= 241, unconditional and Lean-checked.**
 
 What is not re-derived in Lean: the CNF encodings themselves. As for 244, the kernel checks that the clauses actually used by each refutation hold for every snake (G1) and that they are unsatisfiable (G2), and that is all the theorem needs.
+
+## Independent audit (20 October 2026)
+
+A separate review of the whole chain returned **sound, with notes**:
+- `Snake` is the core definition (`work/final_lean/Snake9.lean`), with no shadowing in any of the 686 modules; `verified_interval_191_241` quantifies over all `m` and is inhabited by the checked 191-edge witness. A test that builds a 299-edge `Snake` from raw fields and derives `False` from the theorem confirms it constrains arbitrary induced paths.
+- The only `set_option`s in the 283 new modules are `Elab.async false` and `maxRecDepth`; no `native_decide`, `ofReduceBool`, `implemented_by`, `extern`, `unsafe`, `sorry`, `axiom`, `partial` or `opaque` anywhere; the step commands only build terms and submit them through `addDecl`, so the kernel evaluates every check.
+- The clause checker's soundness rules are theorems about the snake's vertex set, `localAlpha` is the single constant used by the conditional theorems, and the shape case split is exhaustive (d3 = d0 or new; for five edges d4 ∈ {new, d0, d1}, with `abcab` excluded by a chord).
+- One `def F` per refutation namespace is shared by the unsatisfiability theorem and the clause check.
+- Note on provenance: the manifest `outputs/strengthened-241-reproduction-manifest.json` is a resumed run (351 of 606 steps cached by mtime, all source hashes equal to HEAD). A from-scratch run in an empty build directory is planned to remove that caveat.

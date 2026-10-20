@@ -1,4 +1,4 @@
-"""Fresh source-only build and transitive axiom audit of the 245-edge bound.
+"""Fresh source-only build and transitive axiom audit of the unconditional 241-edge bound (and the earlier 245).
 
 Requires Python 3.12+, Lean 4.19.0 on PATH, and the pinned mathlib checkout.
 No solver results or research-directory compiled objects enter this build.
