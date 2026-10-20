@@ -346,6 +346,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--run', default='20261020-a')
     ap.add_argument('--group', choices=['controls','cycles','solver'], required=True)
+    ap.add_argument('--source-run', default='20261020-a', help='Frozen cycle extraction to read for solver probes')
     args = ap.parse_args()
     run = HERE / 'runs' / args.run
     run.mkdir(parents=True, exist_ok=True)
@@ -413,8 +414,19 @@ def main():
                 spec={'n':9,'selected':selected,'absent':absent,'min_vertices':minv,'seconds':30}
                 name='mixed_shell40' if mixed else 'homogeneous_shell28'
                 case(name,spec,lambda spec=spec,name=name:solve_model(spec,run/(name+'.log')))
-            lift=json.loads((run/'cycle_lift.json').read_text())['result']
-            path,ds,counts=lift['path'],lift['directions'],lift['counts_at_indices_7_onward']
+            cyc=json.loads((HERE/'runs'/args.source_run/'cycle_extract.json').read_text())['result']
+            ds=cyc['edges'][0]['shape'][:]
+            counts=[]
+            for t in range(10):
+                edge=cyc['edges'][t % len(cyc['edges'])]
+                assert list(canon(ds[-7:])) == edge['shape']
+                labels=list(dict.fromkeys(ds[-7:]))
+                assert edge['append_label'] < len(labels), 'This probe requires a deterministic cycle lift'
+                ds.append(labels[edge['append_label']])
+                counts.append(edge['count'])
+            path=[0]
+            for d in ds:
+                path.append(path[-1] ^ (1<<d))
             for length in [1,2,3,4,5,6,8,10]:
                 if length>len(counts):
                     continue
