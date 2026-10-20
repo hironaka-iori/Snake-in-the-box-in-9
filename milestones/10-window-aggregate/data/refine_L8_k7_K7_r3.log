@@ -69,3 +69,135 @@ round 1: edges 191591595 mean 51/11 (4.6364) cycle [5, 5, 5, 4, 4, 5, 5, 5, 5, 4
   greedy: 81 queries broke all 41 cycles
 round 2: edges 190507970 mean 116/25 (4.6400) cycle [4, 4, 5, 6, 4, 4, 5, 5, 4, 5, 5, 4, 5, 5, 4, 4, 6, 5, 4, 4, 4, 5, 6, 5, 4] extra-cycles 40 queried 1548 unsat-on-cycle 1167 [1527s: graph 4 howard 31 cycles 21 decode 0 query 1470]
   incremental: 1167 new exclusions block 462314 edges
+  rc-subgraph R=0.1: 77889 edges, 37269 states, 40 cycles (34.7s)
+  querying 1483 windows
+  greedy: 0 queries broke all 41 cycles
+round 3: edges 190086468 mean 93/20 (4.6500) cycle [4, 5, 6, 5, 4, 4, 4, 5, 6, 4, 4, 5, 5, 5, 4, 4, 6, 5, 4, 4] extra-cycles 40 queried 1483 unsat-on-cycle 1145 [771s: graph 3 howard 23 cycles 35 decode 0 query 710]
+  incremental: 1145 new exclusions block 283878 edges
+  rc-subgraph R=0.1: 39696 edges, 21196 states, 40 cycles (38.5s)
+  querying 761 windows
+  greedy: 0 queries broke all 41 cycles
+round 4: edges 189795823 mean 107/23 (4.6522) cycle [4, 6, 5, 4, 4, 4, 5, 6, 5, 4, 4, 4, 5, 6, 4, 4, 5, 5, 5, 4, 5, 5, 4] extra-cycles 40 queried 761 unsat-on-cycle 551 [580s: graph 3 howard 36 cycles 38 decode 0 query 502]
+  incremental: 551 new exclusions block 367256 edges
+  rc-subgraph R=0.1: 26700 edges, 14904 states, 20 cycles (10.7s)
+  rc-subgraph R=0.2: 343866 edges, 117895 states, 20 cycles (7.9s)
+  querying 2987 windows
+  greedy: retried 8 timed-out windows with 120 s: 7 refuted
+  greedy: 30 queries broke all 41 cycles
+round 5: edges 189520434 mean 107/23 (4.6522) cycle [5, 4, 4, 4, 5, 6, 4, 4, 5, 5, 5, 4, 5, 5, 4, 4, 6, 5, 4, 4, 4, 5, 6] extra-cycles 40 queried 3017 unsat-on-cycle 2341 [1420s: graph 4 howard 16 cycles 19 decode 0 query 1381]
+  incremental: 2341 new exclusions block 791270 edges
+  rc-subgraph R=0.1: 161 edges, 122 states, 3 cycles (10.9s)
+  rc-subgraph R=0.2: 350644 edges, 119520 states, 37 cycles (10.4s)
+  querying 3817 windows
+Process ForkServerProcess-12487:
+Traceback (most recent call last):
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 148, in _child
+    conn.send(_solve(arg))
+    ~~~~~~~~~^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 150, in _child
+    conn.send(None)
+    ~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+Process ForkServerProcess-12484:
+Traceback (most recent call last):
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 148, in _child
+    conn.send(_solve(arg))
+    ~~~~~~~~~^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 150, in _child
+    conn.send(None)
+    ~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+Process ForkServerProcess-12480:
+Traceback (most recent call last):
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 148, in _child
+    conn.send(_solve(arg))
+    ~~~~~~~~~^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/usr/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts/refine.py", line 150, in _child
+    conn.send(None)
+    ~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 211, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 432, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/multiprocessing/connection.py", line 389, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+shapes 132 states 34603008 extensions 505
+  rc-subgraph R=0.1: 75 edges, 55 states, 3 cycles (12.7s)
+  rc-subgraph R=0.2: 321263 edges, 111898 states, 37 cycles (9.8s)
+  querying 3089 windows
