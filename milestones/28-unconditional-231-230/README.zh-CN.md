@@ -325,5 +325,31 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py FastShare00.L
 ```
 
 完整输入、源码、模块和日志 hash、公理及耗时记录在
-`data/fast-rup-case00-benchmark.json`。现有两个批次尚未切换；后续应在保留
-匹配检查点和精确核心对应关系的前提下采用这一加速结果，不重跑 SAT 搜索。
+`data/fast-rup-case00-benchmark.json`。此单例基准不能直接作为整个批次的
+预计用时；完整批次状态以各自检查点为准。
+
+## 保留检查点的 FastRup 批次切换
+
+`scripts/fast_share_batch.py` 使用相同的原始 CNF/LRAT，从末尾空子句提取
+精确依赖核心，再使用上述冻结的 FastRup 导出器。新旧提取方式在已有的
+00、01、02 三份核心上产生逐字节相同的 CNF、LRAT、变量映射和 Lean
+CNF。新版精简 ready 格式经现有适用性生成器读取后，case 00 的 89 个
+输出文件也全部相同，记录在 `data/fast-share-core-equivalence.json`。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/fast_share_batch.py prepare
+PYTHON milestones/28-unconditional-231-230/scripts/fast_share_batch.py handoff
+PYTHON milestones/28-unconditional-231-230/scripts/fast_share_batch.py run
+PYTHON milestones/28-unconditional-231-230/scripts/fast_share_batch.py serve --port 8798
+```
+
+`prepare` 校验已完成旧结果的全部源码、依赖和产物，冻结当前提交及导出器。
+`handoff` 核对旧 worker 的实际命令后，停止旧重放并保留其全部已完成和
+部分检查点；它不会停止独立的适用性或聚合作业。新 worker 同时持有新旧
+工作锁，避免重复运行，并为每份新结果用 `rfl` 检查完整 CNF 对应关系，
+审计 `unsat` 与 `original_unsat`。新状态在 `runtime/fast-kernel/`。
+
+尚未准备的核心只生成紧凑证明及 CNF 源码，避免生成不再使用的旧重放模块。
+这仍兼容适用性批次，但旧 `kernel_batch.py run` 不能直接处理这种新格式；
+切换后应续跑新 worker。所有内存用量只观察，单模块超时仍记为未完成。
+三项独立检查在新看板分开显示，均不等同于无条件全局上界。
