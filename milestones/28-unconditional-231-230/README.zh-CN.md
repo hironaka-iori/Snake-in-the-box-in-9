@@ -416,3 +416,22 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py FastCountD012
 ```text
 PYTHON milestones/28-unconditional-231-230/scripts/develop_from_fresh.py CountWindowPairs231
 ```
+
+## 保留已完成证明的适用性分片细化
+
+case 00 的 `Check44` 达到原有 1800 秒上限，批次如实记为未完成。
+`refine_applicability_shards.py` 在持有停止批次的锁时，将该例尚未完成的
+128 子句检查细分为 16 子句检查，保留此前通过的所有模块。原 Data、CNF、
+赋值、子句及目标命题均保持相同；新模块用 `take`、`drop` 分片，合并时
+由 Lean 的 `rfl` 和已证明的 `checkRaw_flatMap` 检查精确拼接。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/refine_applicability_shards.py --case 0 --from-shard 44 --piece-size 16
+PYTHON milestones/28-unconditional-231-230/scripts/applicability_batch.py run
+```
+
+修复前的状态、输入清单、失败模块日志和被替换源码保存在
+`runtime/applicability/history/refine-1792607108368296200/`；脚本提交、
+原清单 hash 和每个分片记录在 `data/applicability-shard-refinement.json`。
+恢复后首批细分模块已经通过并写入检查点，完整适用性结果仍以批次为准。
+此处没有把超时当作几何反例，也没有放宽检查器或使用不可信计算。

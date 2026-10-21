@@ -90,3 +90,13 @@ The 181-module hash-validated development closure and allowed-axiom audits
 are recorded in `data/count-window-pairs-development.json`. This is a table
 and semantic bridge, not a substitute for the remaining concrete refutations
 or the final independent fresh rebuild.
+
+After case 00's `Check44` timed out, the stopped batch's unfinished checks
+were split into 16-clause slices. The original Data and CNF files are unchanged.
+Each slice uses the original `checkRaw`; the replacement theorem has the exact
+original statement, and `rfl` validates concatenation of its take/drop slices.
+Completed modules are retained only through the existing dependency-hash checks.
+The original source, receipt and failed log were archived before replacement;
+the refinement script's committed source and hashes are recorded separately in
+`data/applicability-shard-refinement.json`. Split-module progress alone does not
+establish the whole case's geometric applicability.
