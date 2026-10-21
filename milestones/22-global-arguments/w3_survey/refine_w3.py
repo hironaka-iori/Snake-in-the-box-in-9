@@ -55,6 +55,7 @@ class Sub:
             if len(kk[0]) == 2:
                 self.single[kk[1][0]] = max(s['lb'], survey.SINGLE_LB)
         self.cache = {}
+        self.A = W3Oracle()          # alpha-conditioned sub-window results (sub_sweep.py)
 
     def single_lb(self, a):
         best = survey.SINGLE_LB
@@ -67,7 +68,8 @@ class Sub:
         if len(al) == 1:
             return self.single_lb(al[0])
         s = self.O.st.get(key(ds, [FREE] * len(al)))
-        return s['lb'] if s else 0
+        t = self.A.st.get(key(ds, al))
+        return max(s['lb'] if s else 0, t['lb'] if t else 0)
 
     def floor5(self, k):
         if k in self.cache:
