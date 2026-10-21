@@ -92,4 +92,10 @@ if [ -f $D/minimal_L8_k7_K7_r3_89_19.json ] && ! grep -q "failed 0" $D/certify_d
      --out ../data/direction_certificates_k6.json >> ../data/certify_direction_231.log 2>&1 &)
 fi
 
+# 12. the 231 chain once the set is certified
+if grep -q "failed 0" $D/certify_direction_231.log 2>/dev/null && [ ! -f $D/pipeline_231.done ] && ! running pipeline_231.sh; then
+  log "starting 231 pipeline"
+  (nohup bash $S/pipeline_231.sh >> $D/pipeline_231.log 2>&1 &)
+fi
+
 log "supervisor pass done"

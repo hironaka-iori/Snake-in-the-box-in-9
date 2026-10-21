@@ -128,14 +128,33 @@ MODULES = [
     "UpperBound241",
 ]
 
+# shapes of the seven-centre (L = 8) direction automaton: one shard each in the split 16-bit chains
+SPLIT16_SHAPES = 132
+
 
 def chain_modules(chain):
     """Modules of a generated direction-automaton chain.  Suffixes ending in `W` are the SWAR
     kernel chains (all transitions of a shape pair in one packed comparison; `gen_lean_swar.py`),
     the others the one-transition-per-step design (`gen_lean_automaton_k.py`); a `C` in the
     suffix marks a lump cap other than 5 (`WindowAutomatonSym`); the 8-symbol (cap 7) SWAR chains
-    check their table layout with delta swaps (`WindowAutomatonTranspose`)."""
-    extra = (["WindowAutomatonSwar", "WindowAutomatonCode"] if chain.endswith("W") else []) + \
+    check their table layout with delta swaps (`WindowAutomatonTranspose`).
+
+    Suffixes ending in `W16` are the split-layout 16-bit-field SWAR chains of the seven-centre
+    automaton (`gen_lean_swar.py`, more than 2^22 states): Base, one potential module per group of
+    four shapes (132 shapes: Pot0..Pot32), Tab, Data, Spec, one shard per shape, Table, Sequence and
+    the wrapper, after the split/16-bit helper modules in dependency order."""
+    if chain.endswith("W16"):
+        shapes, group = SPLIT16_SHAPES, 4
+        helpers = ["WindowAutomatonSwar", "WindowAutomatonCode", "WindowAutomatonSym",
+                   "WindowAutomatonTranspose", "WindowAutomatonConsD", "WindowAutomatonLit", "WindowAutomatonRGS",
+                   "WindowAutomatonSwar16", "WindowAutomatonTranspose16", "WindowAutomatonConsD16",
+                   "WindowAutomatonLit16"]
+        return helpers + [f"WindowAutomaton{chain}Base"] + \
+            [f"WindowAutomaton{chain}Pot{g}" for g in range(-(-shapes // group))] + \
+            [f"WindowAutomaton{chain}{part}" for part in ("Tab", "Data", "Spec")] + \
+            [f"WindowAutomaton{chain}Shard{i}" for i in range(shapes)] + \
+            [f"WindowAutomaton{chain}Table", f"WindowAutomaton{chain}Sequence", f"AggregateDirection{chain}Conditional"]
+    extra =(["WindowAutomatonSwar", "WindowAutomatonCode"] if chain.endswith("W") else []) + \
         (["WindowAutomatonSym"] if "C" in chain else []) + \
         (["WindowAutomatonTranspose"] if chain.endswith("C7W") else [])
     spec = [f"WindowAutomaton{chain}Spec"] if chain.endswith("W") else []
