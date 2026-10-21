@@ -5,7 +5,9 @@ minimal.py counts only the exclusions acting inside it.  Here every candidate k5
 automaton is enumerated; for one that is absent from the pickle and blocked by known-UNSAT windows,
 each k6 lift (u, a0) -> (v, a[0]) is checked against the potential of the chosen lambda:
   * both ends in the lifted graph and slack q*w - p + pi[src] - pi[dst] >= 0: harmless;
-  * otherwise (negative slack, or an end outside the graph): conservatively needs a blocker.
+  * a target lift outside the graph is a new node whose out-edges all lie in the graph; it gets the
+    least admissible potential L(v) (6-window exclusions on its out-edges ignored, conservative);
+  * otherwise (negative slack, or a source with no lift in the graph): conservatively needs a blocker.
 A greedy hitting set over those blocker sets gives the base count (an upper bound: an end outside
 the graph may well be harmless).
 usage: base.py A|B LAMBDA   (LAMBDA = p/q in edge-weight units, e.g. 4 for A)
@@ -47,6 +49,13 @@ def main():
     keep = ~b5[G['K5']] & ~b6[G['K6']]
     W = unit * G['S'].astype(np.int64) + T5[G['K5']]
     pi, _ = potential(G['n6'], G['U'][keep], G['V'][keep], q * W[keep] - p)
+    # a lift target (v, a0) outside the graph is a new node whose out-edges are lifts of pickle edges
+    # out of v (into graph nodes); its least admissible potential is L(v) = max(pi[dst] - (q w - p))
+    nk5 = np.zeros(G['n6'], np.int64)
+    for (x, _a0), i in nodes.items():
+        nk5[i] = x
+    Lv = np.full(len(inv), -(1 << 62), np.int64)
+    np.maximum.at(Lv, nk5[G['U']], pi[G['V']] - (q * W - p))
     lb5 = {}
     if var == 'B':
         lb5 = {k: O.st[k]['lb'] for k in O.st}
@@ -68,7 +77,8 @@ def main():
                 lifts = [a0 for a0 in range(1, 7) if (u, a0) in nodes] or [None]
                 for a0 in lifts:
                     src = nodes.get((u, a0)); dst = nodes.get((v, a[0]))
-                    if src is None or dst is None or q * w - p + pi[src] - pi[dst] < 0:
+                    pd = pi[dst] if dst is not None else Lv[v]
+                    if src is None or q * w - p + pi[src] - pd < 0:
                         bad = True; break
                 if bad:
                     need.append(frozenset(bl))

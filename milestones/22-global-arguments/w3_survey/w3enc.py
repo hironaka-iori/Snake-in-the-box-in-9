@@ -59,8 +59,12 @@ def w3_60(sel, x):
 
 
 class W3Encoding(wincert.Encoding):
-    def __init__(self, window, alpha=None, radius=4, cap=None, ends=2):
+    SYM = os.environ.get("W3SYM", "1") == "1"   # lex-leader symmetry breaking (see sym_break)
+
+    def __init__(self, window, alpha=None, radius=4, cap=None, ends=2, sym=None):
         self.cap = cap
+        if sym is not None:
+            self.SYM = sym
         if alpha is None:
             alpha = [None] * (len(window) - 2)
         super().__init__(window, alpha, radius, ends)
@@ -68,8 +72,34 @@ class W3Encoding(wincert.Encoding):
     def build(self):
         super().build()
         self.nbase_clauses, self.nbase_vars = len(self.clauses), self.nv
+        if self.SYM:
+            self.sym_break()
         if self.cap is not None:
             self.build_w3()
+
+    def sym_break(self, depth=400):
+        """x <=_lex sigma(x) for every transposition sigma of two coordinates that no window
+        step uses (the window, the model, alpha and the charge are invariant under sigma, and the
+        lex-least element of an orbit satisfies all these constraints, so this is sound for
+        bounds on the minimum).  Vertices in increasing order, truncated at `depth` positions."""
+        X, w = self.var, self.window
+        used = {(w[i] ^ w[i + 1]).bit_length() - 1 for i in range(len(w) - 1)}
+        free = [d for d in range(9) if d not in used]
+        order = sorted(self.ball)
+        for a, b in itertools.combinations(free, 2):
+            def sg(v):
+                ba, bb = v >> a & 1, v >> b & 1
+                return v & ~(1 << a | 1 << b) | ba << b | bb << a
+            pos = [v for v in order if sg(v) != v and v < sg(v)][:depth]
+            e = None
+            for v in pos:
+                x, y = X[v], X[sg(v)]
+                # e -> (x -> y) ;  first position unconditional
+                self.add(([-e] if e else []) + [-x, y], 'symLex')
+                e2 = self.fresh()
+                self.add(([-e] if e else []) + [-x, e2], 'symLex')   # equal (both 1) -> continue
+                self.add(([-e] if e else []) + [y, e2], 'symLex')    # equal (both 0) -> continue
+                e = e2
 
     def totalizer(self, lits, up=True, down=False, limit=None, kind_up='totUp', kind_down='totDown'):
         lim = limit if limit is not None else len(lits)
@@ -122,7 +152,9 @@ class W3Encoding(wincert.Encoding):
         if capp < 0:
             self.add([], 'w3Cap')            # trivially UNSAT: impossible threshold
             return
-        if capp < len(wl):
+        if getattr(self, 'noUnit', False):
+            self.root_outputs = self.totalizer(wl, up=True, limit=min(capp + 1, len(wl)))
+        elif capp < len(wl):
             o = self.totalizer(wl, up=True, limit=capp + 1)
             self.add([-o[capp + 1]], 'w3Cap')
 

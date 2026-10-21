@@ -40,7 +40,7 @@ def potential(n, U, V, w):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('variant'); ap.add_argument('--target', type=int); ap.add_argument('--bits', type=int, default=8)
+    ap = argparse.ArgumentParser(); ap.add_argument('variant'); ap.add_argument('--target', type=int); ap.add_argument('--bits', type=int, default=8); ap.add_argument('--lam')
     a = ap.parse_args()
     G = K.build(); P = K.Plain()
     unit = 1 if a.variant == 'A' else K.UNIT
@@ -86,6 +86,8 @@ def main():
                     break
         if cands:
             lam = min(cands)
+    if a.lam:
+        lam = Fr(a.lam)
     p, q = lam.numerator, lam.denominator
     print(f'variant {a.variant}: min mean {lam0} (mu {float(lam0)/unit:.5f}); using lambda {lam} (mu {float(lam)/unit:.5f}, '
           f'm <= {K.bound_m(float(lam)/unit):.3f}); {len(ukeys)} UNSAT keys act on the lifted graph', flush=True)
@@ -123,6 +125,17 @@ def main():
     _, cyc = howard(G['n6'], G['U'][idx], G['V'][idx], W[idx])
     lam2 = Fr(int(W[idx][cyc].sum()), len(cyc))
     pi, _ = potential(G['n6'], G['U'][keep], G['V'][keep], q * W[keep] - p)
+    # share charges actually needed: a key's T5 can drop to 0 if every kept edge with it keeps slack >= 0
+    nshare = None
+    if unit > 1:
+        sl = q * W - p + pi[G['U']] - pi[G['V']]
+        k5 = G['K5'][keep]; need = np.zeros(len(G['keys5']), bool)
+        bad = (sl[keep] - q * T5[k5]) < 0
+        need[k5[bad]] = True
+        need &= T5 > 0
+        nshare = int(need.sum())
+        lv = np.zeros(len(G['keys5']), bool); lv[G['K5'][idx]] = True
+        print(f' share keys with lb > 0 on live edges: {int(((T5 > 0) & lv).sum())}, needed: {nshare}', flush=True)
     kept = [inv[x] for x in ukeys.values() if x not in dropped]
     by_k = {}
     for k in kept:
@@ -133,13 +146,13 @@ def main():
     states = len(np.unique(np.concatenate([G['U'][idx], G['V'][idx]])))
     bits = max(1, int(pi.max() - pi.min()).bit_length())
     Pq = (p, q)
-    out = dict(lean_bound=(9171 * q + (1 << bits) - 1 + 7 * p - 6 * q) // (p + 35 * q) if unit == 1 else None, P=p, Q=q, pot_bits=bits, variant=a.variant, min_mean=str(lam0), lam_used=str(lam), mu_used=float(lam) / unit,
+    out = dict(share_needed=nshare, lean_bound=(9171 * q + (1 << bits) - 1 + 7 * p - 6 * q) // (p + 35 * q) if unit == 1 else None, P=p, Q=q, pot_bits=bits, variant=a.variant, min_mean=str(lam0), lam_used=str(lam), mu_used=float(lam) / unit,
                mean_after=str(lam2), m_le=K.bound_m(float(lam2) / unit), kept=len(kept), kept_by_centres=by_k,
                kept_by_source=src, potential_range=int(pi.max() - pi.min()), live_states=int(states),
                live_edges=int(len(idx)), graph_nodes=G['n6'], graph_edges=int(len(G['U'])))
     print(json.dumps(out), flush=True)
     json.dump(dict(out, keys=[[list(k[0]), [list(x) for x in k[1]]] for k in sorted(kept)]),
-              open(os.path.join(K.HERE, f'minimal_{a.variant}{"_t%d" % a.target if a.target else ""}.json'), 'w'))
+              open(os.path.join(K.HERE, f'minimal_{a.variant}{"_t%d" % a.target if a.target else ""}{"_l" + a.lam.replace("/", "_") if a.lam else ""}.json'), 'w'))
 
 
 if __name__ == '__main__':
