@@ -539,3 +539,26 @@ PYTHON milestones/28-unconditional-231-230/scripts/serial_recovery.py --wait-pid
 
 队列状态在 `runtime/serial-recovery/state.json`；PID 仅作为本次历史
 记录，后续须核对实际命令和创建时间。最终无条件 231/230 仍未完成。
+
+## 两中心连接源码已准备，等待第四个反证
+
+`lean/CountWindowPairs231Assembly.lean` 已写出四键 `all_refuted` 和真实
+聚合条件 `hw2` 的连接。它不接受额外反证族参数，但当前没有编译通过
+记录，不能计为已完成定理。准备时前三个具体反证已过，仍等待
+`FastCountQ012A14.LocalWindow`；记录在
+`data/count-pair-assembly-preparation.json`。
+
+第四份通过后，使用以下脚本保留四份证明的全部生成源码，逐项验证两处
+供体的源码、依赖闭包与产物 hash，在独立的 `runtime/count-pair-assembly/`
+目录中只编译新连接并审计公理。任何依赖缺少匹配完成记录都停止，避免
+与现有任务重复构建。该脚本不会修改运行中的恢复队列或其控制器。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/assemble_count_pairs.py --check-ready
+PYTHON milestones/28-unconditional-231-230/scripts/assemble_count_pairs.py
+```
+
+成功证据应包括 `data/count-pair-assembly-input.json` 和
+`data/count-pair-assembly-development.json`，尚不能用准备记录代替。
+即使此连接完成，仍须完整消去三至六中心与 share 族前提并进行最终
+独立重建，才可宣称无条件全局 231。

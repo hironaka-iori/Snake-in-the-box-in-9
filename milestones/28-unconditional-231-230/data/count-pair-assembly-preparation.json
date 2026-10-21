@@ -1,0 +1,21 @@
+{
+  "recorded": "2026-10-21T19:25:14.329519+00:00",
+  "status": "SOURCE_PREPARED_NOT_COMPILED",
+  "readiness": {
+    "status": "waiting_for_refutations",
+    "missing": [
+      "FastCountQ012A14.LocalWindow"
+    ],
+    "target": "CountWindowPairs231Assembly",
+    "global_231": "UNRESOLVED"
+  },
+  "source_files": {
+    "lean/CountWindowPairs231Assembly.lean": "8cf187d77d292096d021d1fa10e5861aa597f48b0719c232330f03396174da4a",
+    "scripts/assemble_count_pairs.py": "1258f232cd22796dfde54dfb23ad09710887aa118bca9748cac4c9d57a6a0da4"
+  },
+  "command": "PYTHON milestones/28-unconditional-231-230/scripts/assemble_count_pairs.py",
+  "readiness_command": "PYTHON milestones/28-unconditional-231-230/scripts/assemble_count_pairs.py --check-ready",
+  "scope": "Await fourth exact count refutation, then validate donors and compile the isolated assembly; no new theorem has been checked yet",
+  "active_queue_controllers_unchanged": true,
+  "queue_pid": 27584
+}
