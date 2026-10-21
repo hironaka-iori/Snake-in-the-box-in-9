@@ -111,3 +111,33 @@ runner 首先重建本轮辅助组件和两类 share 的已有全局计数组件
 停止，因此恢复 `runner.py run --phase all`，取消内存中止，仅保留用量观测。
 迁移前核对所有冻结源码和编码输入与新提交完全一致，控制器版本与原始输入
 提交分别记录。已完成的证书仅在产物 hash 一致时续用；自定义 Lean 组件重新编译。
+
+## 第二阶段：真正的 Lean Boolean 证书重放
+
+取消内存中止后，第一阶段于北京时间 2026-10-21 23:40 完成：12/12 个自定义
+组件从冻结源码编译，34/34 个原始模型生成 LRAT 并独立 RUP 重放。恢复后的
+总耗时约 9 分 11 秒，单项最高 RSS 为 5234.1 MiB。此完成状态只对应上述批次。
+
+新增 `ParallelShareCounter.lean` 证明完整的抽象总计数器：重复 unary 叶子、
+截断合并、逐中心累积，以及总和有界时每个溢出单元成立。
+`LocalWindowRename.lean` 证明把压缩变量映回原始 DIMACS 变量仍保持不可满足。
+两者已实际通过 Lean 4.19.0，打印的公理仅为 `propext`、`Quot.sound`，部分
+有限 Boolean 结论不依赖公理。计数器与具体 CNF 的识别和几何赋值仍须接通。
+
+`scripts/kernel_batch.py` 继续第二阶段：从已重放证明的空子句向后取完整依赖，
+保留所需原始子句；压缩变量并记录逆映射；对压缩后的 CNF/LRAT 再独立重放；
+使用现有已证明 LRAT 检查器生成分片，逐片运行 `decide +kernel`。
+每片保存源码、依赖闭包、编译产物 hash；每个形状最终审计 `original_unsat`。
+生成数据、原始子句索引与双向追溯元数据均保存在 `runtime/kernel/`。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/kernel_batch.py prepare
+PYTHON milestones/28-unconditional-231-230/scripts/kernel_batch.py run
+PYTHON milestones/28-unconditional-231-230/scripts/kernel_batch.py serve --port 8796
+```
+
+`prepare` 要求第一阶段的 34 份匹配证书和已提交源码；使用原 manifest 的工具链。
+内存只记录，不设中止阈值。单个模块时间上限为 1800 秒；超时为未完成。
+本批次只证明指定 Boolean 公式不可满足，不证明这些公式覆盖任意蛇。
+全局 231/230、15,959 个计数窗口的完整 Lean 反证、几何桥接和最终独立重建
+仍是目标的一部分，不能用本批次完成替代。

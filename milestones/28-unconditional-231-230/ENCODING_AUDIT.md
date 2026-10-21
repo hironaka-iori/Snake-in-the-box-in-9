@@ -19,8 +19,8 @@ This is different from the radius-four corner-share model.
 | `g1`, `g3` | With the centre selected, let `n` count the other three parallel-square corners. Set `g1=E∧(n≤1)`, `g3=E∧(n=0)` | Unfixed, one-fixed, and two-fixed gate lemmas compiled in `ParallelShareTerm.lean` |
 | Share unary leaves | `[E,E,g1,g3,g3,g3]` has weight 6, 3, or 2 for parallel-square selected count 1, 2, or 3 | `unary_weight` compiled. Count four is ruled out by selected-square geometry, still to connect |
 | Omitted terms / fixed bits | An empty square meeting the fixed window has share zero. Fixed parallel-square corners make indicated gate bits zero | Fixed-count Boolean cases compiled; identification with concrete geometric terms remains |
-| Totalizer tree, sequential centre merge | Output t is the semantic threshold on the exact sum of descendant leaf weights, clipped at cap+1 | `clipped_merge` proves the arithmetic implication. Full recursive assignment and list indexing remain unproved |
-| Overflow and truncated accumulator | Whole sum ≤ cap implies every prefix sum ≤ cap because all weights are nonnegative; discarded overflow threshold is false | Must be included in the full circuit assignment proof; no false lower bound inferred from arbitrary auxiliary assignments |
+| Totalizer tree, sequential centre merge | Output t is the semantic threshold on the exact sum of descendant leaf weights, clipped at cap+1 | `ParallelShareCounter.Circuit.satisfies` proves all merges and list indices in the abstract circuit; exact identification with emitted clauses remains |
+| Overflow and truncated accumulator | Whole sum ≤ cap implies every prefix sum ≤ cap because all weights are nonnegative; discarded overflow threshold is false | `ParallelShareCounter.sequential_counter_sound` includes every intermediate overflow unit and trimmed accumulator; connect actual encoder trace next |
 
 The path directions omitted from the share sum have a selected neighbor in the
 corresponding square, hence zero contribution. For all remaining terms the three
