@@ -12,7 +12,8 @@ implied bound  m <= 5 + (5 (64512 - 336) + R) / lambda  (shape_aut.bound).
 
 Each round, every window on the lo cycle (and the hi cycle) gets one threshold test (static cap
 CNF, cap = T - 1): UNSAT -> lb = T; SAT -> ub = exact charge of the witness; TIMEOUT -> fail.
-T ladder (per centre): 272, 278, 284, 290, 298, 308, then the ub.
+T ladder (per centre): first 284, then 292, 300, 310, 322; after a timeout the highest
+lower level (278, 272); finally the ub.
 State: data/w3_alpha_oracle.jsonl (one line per call), data/w3_rounds.jsonl.
 usage: refine_w3.py --hours 3 [--tl 120]
 """
@@ -33,7 +34,8 @@ SCR = os.environ.get('STAGE3', '/tmp/claude-0/-home-user-Snake-in-the-box-in-9/9
 PROOF = '/tmp/claude-0/-home-user-Snake-in-the-box-in-9/9d4b5ea1-0097-55fa-8dda-100e9a084d22/scratchpad/w3/proof'
 ORACLE = os.path.join(HERE, 'data', 'w3_alpha_oracle.jsonl')
 ROUNDS = os.path.join(HERE, 'data', 'w3_rounds.jsonl')
-LEVELS = [272, 278, 284, 290, 298, 308]
+LEVELS = [272, 278, 284, 292, 300, 310, 322]
+FIRST = 284          # first test per centre; lower levels only after a timeout
 INF = 10 ** 6
 K = 5
 
@@ -106,7 +108,8 @@ class W3Oracle:
             return None
         cand = [K * L for L in LEVELS if K * L > lb and K * L < s['fail']]
         if cand:
-            T = cand[0]
+            pref = [c for c in cand if c >= K * FIRST]
+            T = pref[0] if pref else cand[-1]
             return min(T, s['ub']) if s['ub'] < INF else T
         if s['ub'] < INF and s['ub'] < s['fail']:
             return s['ub']
