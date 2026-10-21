@@ -353,3 +353,37 @@ PYTHON milestones/28-unconditional-231-230/scripts/fast_share_batch.py serve --p
 这仍兼容适用性批次，但旧 `kernel_batch.py run` 不能直接处理这种新格式；
 切换后应续跑新 worker。所有内存用量只观察，单模块超时仍记为未完成。
 三项独立检查在新看板分开显示，均不等同于无条件全局上界。
+
+## 计数窗口的阈值、区间与已有文件
+
+`CountWindowBridge.lean` 已通过 Lean 检查和公理审计，记录在
+`data/count-window-bridge-development.json`。231 路线使用 `symK 8`：
+1 至 7 是精确计数，8 代表 `[8,21]`。它不能直接套用旧的阈值 6 接口。
+新的桥接证明任意阈值的完整区间解释、自动坐标归一化和窗口反转；
+`coversK` 还允许 `[6,21]` 这类较宽的既有证书覆盖计数 6、7、8 三类。
+`no_interval_hit` 和 `no_reverse_interval_hit` 仍明确要求对应局部反证族；
+它们尚未证明 15,959 个反证或原聚合表的完整覆盖。
+
+对冻结的 15,959 个目标逐项检查本地文件：313 份 CNF 与记录 hash 相同，
+其中 202 份同时有 hash 相同的 DRUP；15,646 项未找到匹配 CNF。
+另有 15 个候选文件与对应记录 hash 不符，未作为该记录的证据采纳。
+这不是对这些文件数学有效性的判决。逐项清单见
+`data/count-window-artifact-inventory.json`；没有把索引中的“已验证”标记
+视为本机已经具备全部证明文件。
+
+最短的四个目标是方向 `[0,1,2]` 下的计数 `(1,1)`、`(1,2)`、`(1,3)`、
+`(1,4)`。`prepare_count_pairs.py` 复用现有 `D012A11`、`D012A12`、
+`D012A13`、`Q012A14` 的精确 Lean CNF 和适用性源码，以固定单线程、
+seed 1 配置重现缺少的 LRAT。四份新 LRAT 已独立 RUP 重放通过。
+生成的 Lean 目标尚在检查，不能把这些运行准备称为四个局部定理已经完成。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/prepare_count_pairs.py
+PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py FastCountD012A11.LocalWindow FastCountD012A12.LocalWindow FastCountD012A13.LocalWindow FastCountQ012A14.LocalWindow --source-root milestones/28-unconditional-231-230/runtime/count-pairs/src
+```
+
+`LocalWindowSelectedClauses.unsat_of_selected` 已通过公理审计，证明反证可以
+从合法选出的子句子集提升回完整几何核心。每个生成实例还须在 Lean 中
+检查所选索引有效、FastRup 公式与选出的子句完全相同，才能接入原适用性
+定理。原始核心及适用性源码均未改变。输入、命令、工具 hash、种子、
+重放结果和生成源码清单保存在 `runtime/count-pairs/`。
