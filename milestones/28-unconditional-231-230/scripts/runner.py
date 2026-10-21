@@ -35,7 +35,15 @@ def atomic(p,d):
     p=Path(p); p.parent.mkdir(parents=True,exist_ok=True)
     tmp=p.with_name(p.name+f'.{os.getpid()}.tmp')
     tmp.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-    os.replace(tmp,p)
+    # Windows readers/antivirus can briefly deny delete sharing. Never replace
+    # atomic persistence with an in-place write; retry the atomic rename only.
+    for attempt in range(50):
+        try:
+            os.replace(tmp,p)
+            break
+        except PermissionError:
+            if attempt==49:raise
+            time.sleep(0.05)
 def read(p):return json.loads(Path(p).read_text(encoding='utf-8'))
 def git(*args):return subprocess.check_output(['git',*args],cwd=ROOT)
 def blob(commit,p):return git('show',commit+':'+p)
