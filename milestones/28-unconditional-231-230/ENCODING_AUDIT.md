@@ -15,8 +15,8 @@ This is different from the radius-four corner-share model.
 | Endpoint sequential counter | Prefix threshold `s[i][j]` means at least `j+1` endpoint bits among the first `i+1`; budget two implies overflow clauses | Existing counter framework; full exact instance assignment still to connect |
 | Singleton counts | For an internal centre, pairs using its two path directions cannot be singleton; the other 21 pairs are singleton exactly when the opposite corner is absent | In these share-only models `(0,21)` adds no count clauses. Count-chain instances require their own exact circuit and lumping audit |
 | Four/six-cycle and saved cycle cuts | A selected cycle cannot lie in an induced path. Saved cuts have every vertex of degree two in the induced cut graph | Each generated model checks cut adjacency. To formalize: use arbitrary-length cycle exclusion, not merely a four-cycle argument |
-| Empty square bit `E[Q]` | True iff all four selected-vertex bits vanish; both implication directions are emitted | All four corners lie within radius three of the relevant centre; no outside-square truncation |
-| `g1`, `g3` | With the centre selected, let `n` count the other three parallel-square corners. Set `g1=E∧(n≤1)`, `g3=E∧(n=0)` | Unfixed, one-fixed, and two-fixed gate lemmas compiled in `ParallelShareTerm.lean` |
+| Empty square bit `E[Q]` | True iff all four selected-vertex bits vanish; both implication directions are emitted | `ParallelShareBoolean.square_eval` identifies the Boolean formula; two exact core clauses checked in `ParallelShare01GatePilot`. All instances and their shared assignment remain to integrate |
+| `g1`, `g3` | With the centre selected, let `n` count the other three parallel-square corners. Set `g1=E∧(n≤1)`, `g3=E∧(n=0)` | Unfixed/fixed gate lemmas and formula identification compiled. Four exact `g1` core clauses passed `checkClauses_sound`; the pilot core has no `g3` clauses |
 | Share unary leaves | `[E,E,g1,g3,g3,g3]` has weight 6, 3, or 2 for parallel-square selected count 1, 2, or 3 | `Snake9.LocalWindow.Axioms.parallel_unary_weight` compiled: count four is excluded from path acyclicity. Mapping concrete CNF leaf variables to these semantic bits remains |
 | Omitted terms / fixed bits | An empty square meeting the fixed window has share zero. Fixed parallel-square corners make indicated gate bits zero | Fixed-count Boolean cases compiled; identification with concrete geometric terms remains |
 | Totalizer tree, sequential centre merge | Output t is the semantic threshold on the exact sum of descendant leaf weights, clipped at cap+1 | `ParallelShareCounter.Circuit.satisfies` proves all merges and list indices in the abstract circuit; exact identification with emitted clauses remains |
@@ -43,6 +43,13 @@ entire CNF, followed by exact model identification and all 34 shape refutations.
 The new bridge/geometry/identification modules passed a hash-checked incremental
 development build, with only the three allowed axioms in all printed audits.
 This is not the required final fresh rebuild of the complete global theorem.
+
+The six gate clauses of the committed `ParallelShare01` core now have a kernel
+applicability proof, under only the displayed window-selection premise and the
+explicit meanings of the compact variables. The source references the committed
+core data directly. A deliberately corrupted first clause is kernel-checked to
+be rejected. This does not yet provide a single satisfying assignment for all
+81 core clauses; base, totalizer and overflow integration remains.
 
 The local executable replay rejects RAT/negative hints rather than trusting them.
 It has positive controls and corrupt-proof rejection controls. It remains

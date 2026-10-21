@@ -173,3 +173,28 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py ParallelShare
 **仍缺完整 CNF 的几何满足赋值与逐子句识别**：上述组件尚未把 Boolean
 `original_unsat` 接成 `RefutedParallel`。34 个内核反证、15,959 个计数窗口
 反证、覆盖与最终聚合也仍须完成；无条件 231/230 仍未解决。
+
+## 实际门电路子句的首个适用性检查
+
+`ParallelShareBoolean.lean` 给出有限 Boolean 检查器及完整正确性证明。
+它只在证明了窗口顶点被选中的前提下把相应位替换为真；燃料不足会拒绝。
+`square_eval`、`one_eval`、`zero_eval` 将公式解释为实际空方块与两种 gate。
+`checkClauses_sound` 把检查成功转成同一构造赋值满足输入 CNF 的结论。
+
+`LocalWindowSat/ParallelShare01Gates.lean` 对已经冻结的 `ParallelShare01.raw`
+直接取第 14 至 19 项（零基），在 Lean 内核中检查其全部六条子句，得到
+`Snake9.LocalWindow.ParallelShare01GatePilot.gates_sound`。原模型中的子句编号
+为 30712、30762、39093、39293、41163、41425；包括两个空方块子句和四个
+`g1` 子句。删除首条子句中的空方块文字后，内核确认检查器拒绝。
+
+生成器重新核对原模型的完整 CNF hash、81 条核心子句和变量映射，不以 Python
+检查代替 Lean 证明。输入追溯在 `data/parallel-share-gate-pilot-inputs.json`，
+增量编译与公理审计摘要在 `data/parallel-share-gate-development.json`。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/generate_gate_pilot.py
+PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py LocalWindowSat.ParallelShare01Gates
+```
+
+这仍是六条门电路子句的适用性结论。后续须让同一变量赋值同时满足窗口/度数、
+总计数器及溢出子句，才能将完整 Boolean 反证转换为 `RefutedParallel`。

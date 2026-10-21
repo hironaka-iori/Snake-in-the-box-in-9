@@ -13,7 +13,8 @@ HERE=runner.HERE
 BUILD=HERE/'runtime/bridge-development'
 SOURCE=BUILD/'src'
 BASE=HERE/'build/frozen/src'
-SEARCH=['work/final_lean','work/spectral/stronger','work/spectral','milestones/27-empty-square-packing/lean']
+SEARCH=['work/final_lean','work/spectral/stronger','work/spectral','milestones/27-empty-square-packing/lean',
+    'milestones/28-unconditional-231-230/lean']
 
 def main(targets):
     BUILD.mkdir(parents=True,exist_ok=True);SOURCE.mkdir(exist_ok=True)
