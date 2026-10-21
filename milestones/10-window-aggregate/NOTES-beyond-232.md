@@ -87,6 +87,20 @@ Local minima are far lower:
 
 So the count automaton stays necessary. A share bonus on the unconditional 239 chain (L = 6, windows of four centres, `10 m <= 3 Σ α + 60`) gives 237-238 with these certificates, and 231 even with the real-snake share minimum. The cost of an unconditional bound below 239 is therefore the kernel cost of thousands of window premises. That is the target of the checker work: FastRup (bridge/fast) gives 2.3-3.6x, and one shared incremental proof per direction shape is being measured.
 
+## 4c. Kernel cost of window premises: measured levers (21 October)
+
+The cost unit is LRAT hints, at about 70 µs each with FastRup (2.3-3.6x faster than WinRup).
+
+| Lever | Hints saved | Notes |
+| --- | --- | --- |
+| Lex-leader symmetry breaking per window | 3.6-4x | free and parallel; the Lean symmetry lemma exists (D239Lex) |
+| One incremental session per direction shape (CaDiCaL `--lidrup`, one cube per window, backward trim from all targets) | 1.8-3.2x, 2.07x overall | grows with windows per shape; the proof becomes one sequential chain per shape |
+| One CNF per shape with totalizer counters | none for G2 | G1 checked once per shape instead of once per window: 52 checks instead of 15,959 |
+
+Estimated totals with symmetry breaking and sharing: the 232 set about 5e9 hints (about 100 kernel CPU-hours), the 235 set about 4e8 (7-10 CPU-hours). The current certificates, with no symmetry breaking, would need about 4e10 and 3e9.
+
+The failed assumption cores use only 4-6 of the 10-12 count-range literals of a window. So the premises are far more specific than the refutations need, and generalising them to count boxes is the next lever being measured.
+
 ## 5. Lower-bound side
 
 - See README "Lower bound" and `milestones/08-exhaustive-search`.
