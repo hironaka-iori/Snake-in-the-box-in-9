@@ -39,6 +39,8 @@ Status: working notes. Every bound below 245 in this milestone is **conditional*
 - Every six-centre window has empty-square share sum at least 21 (34 count-free shape certificates, DRAT-checked). Adding that to the 232 chain gives `upper_231_of_direction_windows_and_shares` (README, "Empty-square shares: conditional bound 231").
 - For 230, the 132 seven-centre shapes are certified at share sum at least 27 (`data/share/final_b_X26.jsonl`). With the 89/19 set this gives 230.97, so 230, once all 58,817 windows of that set are certified and the 16-bit chain is wrapped the same way.
 
+**Status at 21 October, 17:00 UTC: conditional 230 proved.** All 58,817 windows of the 89/19 set are certified. The seven-centre chain proves 231, and with the 132 share-shape certificates it proves 230 (README, "Seven-centre windows and shares").
+
 ## 3. Lean side for seven-centre chains (prototype, not yet in the repository)
 
 - A generator prototype (scratchpad `genk7/`) produces and compiles a provisional L = 8, k = 7, cap-7 chain end to end, with standard axioms only.
