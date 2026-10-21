@@ -35,6 +35,10 @@ Status: working notes. Every bound below 245 in this milestone is **conditional*
 - The generator with 16-bit fields builds a chain from that set and proves `upper_231_of_direction_windowsK7R34C7W16` with standard axioms (184 modules, about 30 minutes, scratch only). Its premise list comes from solver answers, not certificates, so it is not in the repository yet.
 - Certification of the 44,738 uncertified windows of the set is running (`data/certify_direction_231.log`, 938 done before a machine restart). At the present rate it needs days; an incremental per-shape certifier is being built to cut that.
 
+**Status at 21 October, 11:00 UTC: conditional 231 proved by another route.**
+- Every six-centre window has empty-square share sum at least 21 (34 count-free shape certificates, DRAT-checked). Adding that to the 232 chain gives `upper_231_of_direction_windows_and_shares` (README, "Empty-square shares: conditional bound 231").
+- For 230, the 132 seven-centre shapes are certified at share sum at least 27 (`data/share/final_b_X26.jsonl`). With the 89/19 set this gives 230.97, so 230, once all 58,817 windows of that set are certified and the 16-bit chain is wrapped the same way.
+
 ## 3. Lean side for seven-centre chains (prototype, not yet in the repository)
 
 - A generator prototype (scratchpad `genk7/`) produces and compiles a provisional L = 8, k = 7, cap-7 chain end to end, with standard axioms only.
