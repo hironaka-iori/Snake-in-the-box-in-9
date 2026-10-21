@@ -23,7 +23,6 @@ theorem windowShare_eq_core {m : Nat} (p : Snake m) (r : Nat) (hr : r + 7 ≤ m)
     shareSeq_eq_core p (r + 5) (by omega), shareSeq_eq_core p (r + 6) (by omega)]
   simp only [List.range_succ, List.range_zero, List.map_append, List.map_cons, List.map_nil,
     List.sum_append, List.sum_cons, List.sum_nil, Nat.add_zero, Nat.zero_add]
-  omega
 
 /-- Exactly the share premise of `upper_231_of_direction_windows_and_shares_all`.
 Only the 34 concrete local refutations remain to instantiate this adapter. -/
