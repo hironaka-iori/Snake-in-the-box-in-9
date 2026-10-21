@@ -141,3 +141,10 @@ PYTHON milestones/28-unconditional-231-230/scripts/kernel_batch.py serve --port 
 本批次只证明指定 Boolean 公式不可满足，不证明这些公式覆盖任意蛇。
 全局 231/230、15,959 个计数窗口的完整 Lean 反证、几何桥接和最终独立重建
 仍是目标的一部分，不能用本批次完成替代。
+
+首份试运行已通过：`Snake9.LocalWindow.ParallelShare01.original_unsat`，
+只依赖 `propext`、`Classical.choice`、`Quot.sound`。该模型的核心含 81 条
+输入子句、80 个变量，保留 73 条推导、180 条提示。它的全部 10 个自定义
+依赖源码精确保存在 `lean/`，hash、公理及映射见 `data/kernel-pilot-01*.json`。
+这证明原模型的一组明确子句不可满足；尚不证明任意蛇满足这些子句。
+剩余形状已启动后台内核重放，监测使用 `runtime/kernel/state.json`。

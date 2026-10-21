@@ -12,6 +12,15 @@ The nine new auxiliary theorems are not unconditional bounds. Final 231 and 230
 remain unresolved. The 237 dependency closure needs 387 omitted generated imports
 restored before a fresh source rebuild; existing contributor logs remain distinct.
 
+Update, 22 October: the frozen 12-component source rebuild and all 34 independent
+share RUP replays completed. Generic clipped-totalizer/overflow semantics and
+variable-renaming soundness are now Lean-proved. One exact share Boolean core,
+`ParallelShare01.original_unsat`, passed a fresh ten-module build with only the
+permitted axioms. Its source closure is saved in milestone 28 `lean/`; the remaining
+share cores are in a resumable kernel replay batch. Arbitrary-snake share semantics
+and the full count-window proof chain remain open. The active count-certificate
+work on `claude/relaxed-keller-60ks7i` remains owned upstream and is not duplicated.
+
 Checkpoint: 19 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Current assignment: constructive search
