@@ -23,8 +23,20 @@ KERNEL=HERE/'runtime/kernel'
 CONTROLLERS=['applicability_batch.py','generate_parallel_cases.py','generate_parallel_pilot.py',
     'generate_gate_pilot.py','runner.py','replay.py','develop_lean.py']
 
-def prepare():
-    if (JOB/'manifest.json').exists():raise RuntimeError('Existing batch: use run')
+def prepare(refresh=False):
+    previous=None;held=None
+    if (JOB/'manifest.json').exists():
+        if not refresh:raise RuntimeError('Existing batch: use run')
+        # The worker lock forbids changing a frozen batch while Lean is active.
+        held=lock();previous=common.read(JOB/'manifest.json')
+        assert common.digest(HERE/'runtime/manifest.json')==previous['original_manifest_sha256']
+        assert common.digest(KERNEL/'manifest.json')==previous['kernel_manifest_sha256']
+        for name,d in previous['frozen_modules'].items():
+            assert common.digest(SRC/(name.replace('.','/')+'.lean'))==d['source_sha256']
+        # A controller repair may retain generated cases only when all code
+        # generating those cases is unchanged. Otherwise use a new batch.
+        for p,h in previous['controllers'].items():
+            if Path(p).name!='applicability_batch.py':assert common.digest(p)==h,('changed generator/input controller',p)
     original=common.read(HERE/'runtime/manifest.json');common.validate(original)
     commit=common.git('rev-parse','HEAD').decode().strip()
     files=set(common.git('ls-tree','-r','--name-only',commit).decode().splitlines())
@@ -39,7 +51,7 @@ def prepare():
                 for dep in line.split('--')[0].split()[1:]:freeze(dep)
         dest=SRC/rel;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data)
         frozen[name]=dict(source_path=path,source_sha256=common.digest(dest))
-    freeze('ParallelShareCertificateBatch')
+    for root in ['ParallelShareCertificateBatch','LocalWindowRename']:freeze(root)
     controls={str(HERE/'scripts'/f):common.digest(HERE/'scripts'/f) for f in CONTROLLERS}
     gp=ROOT/'milestones/10-window-aggregate/scripts/gen_lean_sat.py';controls[str(gp)]=common.digest(gp)
     for path,h in controls.items():
@@ -50,9 +62,20 @@ def prepare():
         original_manifest_sha256=common.digest(HERE/'runtime/manifest.json'),
         kernel_manifest_sha256=common.digest(KERNEL/'manifest.json'),chunk_clauses=128,
         scope='Geometric applicability of 34 exact Boolean cores; global 231/230 remain unresolved')
-    common.atomic(JOB/'manifest.json',manifest)
-    common.atomic(JOB/'state.json',dict(status='prepared',completed={},cases={},failures=[],source_commit=commit,
-        applicability_cases=0,total_cases=34,global_231='UNRESOLVED',global_230='UNRESOLVED'))
+    if previous:
+        history=JOB/'history'/str(time.time_ns())
+        state=common.read(JOB/'state.json')
+        common.atomic(history/'manifest.json',previous);common.atomic(history/'state.json',state)
+        manifest['previous_manifest_sha256']=common.digest(JOB/'manifest.json')
+        manifest['previous_snapshot']=str(history)
+        state.update(status='prepared',source_commit=commit,cases={},applicability_cases=0,
+            current_item=None,last_progress=common.now())
+        state.pop('failure',None)
+    else:
+        state=dict(status='prepared',completed={},cases={},failures=[],source_commit=commit,
+            applicability_cases=0,total_cases=34,global_231='UNRESOLVED',global_230='UNRESOLVED')
+    common.atomic(JOB/'manifest.json',manifest);common.atomic(JOB/'state.json',state)
+    if held:held.close()
     print(json.dumps({'source_commit':commit,'modules':len(frozen),'manifest':str(JOB/'manifest.json')}))
 
 def validate(m):
@@ -172,7 +195,10 @@ def serve(port):
     http.server.ThreadingHTTPServer(('127.0.0.1',port),Handler).serve_forever()
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('mode',choices=['prepare','run','serve']);ap.add_argument('--port',type=int,default=8797);a=ap.parse_args()
-    if a.mode=='prepare':prepare()
+    ap=argparse.ArgumentParser();ap.add_argument('mode',choices=['prepare','run','serve']);ap.add_argument('--port',type=int,default=8797)
+    ap.add_argument('--refresh',action='store_true',help='Refreeze a stopped batch after a committed controller/dependency repair, preserving hash-validated checkpoints')
+    a=ap.parse_args()
+    if a.refresh and a.mode!='prepare':ap.error('--refresh requires prepare')
+    if a.mode=='prepare':prepare(a.refresh)
     elif a.mode=='run':run()
     else:serve(a.port)

@@ -257,6 +257,12 @@ PYTHON milestones/28-unconditional-231-230/scripts/applicability_batch.py serve 
 后续核心尚未由 Boolean 批次导出时，状态为 `waiting_for_core`，不重复求解。
 内存仅观测，单模块时间上限为 1800 秒；失败或超时均为未完成。
 
+冻结闭包同时包含证书检查器与核心 CNF 导入的 `LocalWindowRename`。
+首轮发现这一独立导入根遗漏，尚未到达任何模型的最终适用性定理；修复后
+使用 `prepare --refresh` 保存原 manifest/state 的历史副本并重新冻结。
+该操作须取得工作锁，并拒绝保留生成器已改变的模型；重新运行时逐项核对
+原有检查点的源码、依赖及产物 hash，不把历史失败清除为成功。
+
 该批次证明任意满足指定局部几何条件的蛇产生一个满足核心的赋值。
 `refuted_of_unsat` 仍是带不可满足性前提的接口，须另接匹配的 Boolean
 反证及任意窗口桥接；不能将两个批次的完成数直接称为最终定理的完成数。
