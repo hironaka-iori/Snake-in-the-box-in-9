@@ -312,11 +312,11 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py LocalWindowSa
 变量、10,988 条核心子句、13,291 个推导和 905,775 条提示。
 
 旧重放的 152 个数据/检查/根模块累计约 756.27 秒；FastRup 的对应重放约
-89.86 秒，加上公理审计和原核心接口转换约 112.18 秒。两次运行均存在其他
+89.86 秒，加上公理审计和原核心接口转换约 112.19 秒。两次运行均存在其他
 作业，且未计入共享 CNF 和通用检查器的编译；这是单份证书比较。
 有效控制通过，删除冲突提示的控制被内核拒绝。两种检查器对应的核心 CNF
 已由 `rfl` 直接核对，最终 `FastParallelShare00.unsat` 的公理只有允许的三项。
-`FastRupLocalWindow.unsat_of_fastRup` 还处理了两种语义对文字零的不同约定，
+`Snake9.LocalWindow.unsat_of_fastRup` 还处理了两种语义对文字零的不同约定，
 因而转换不需要未证明的非零文字假设。
 
 ```text

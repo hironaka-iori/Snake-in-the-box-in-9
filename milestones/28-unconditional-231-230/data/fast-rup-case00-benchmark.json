@@ -480,6 +480,34 @@
       "elapsed_seconds": 0.375,
       "axioms": [],
       "completed": "2026-10-21T17:27:06.829268+00:00"
+    },
+    "FastShare00.Audit": {
+      "source_sha256": "28c8fb95b56f0e5ac9a7a44360a00b4750a2d862c86e59a4ba5d1698fbb8f089",
+      "dependency_hashes": {
+        "FastShare00.Main": "5d9e35534be31b491791ac9717330204cc0af735aef5df2efa2e02059ebf1c80"
+      },
+      "closure_hash": "5e9233476ece2c426a3ca1628b51cf095d8ff97402ca935166b1ff11efd7aaa2",
+      "artifact_sha256": "e10836766b4fe4d4113adc93c436a0960af7c593d47d82a3f5af23dfd547b18c",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\FastShare00\\Audit.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\FastShare00\\Audit.lean"
+      ],
+      "log_sha256": "12edd805a59d29fe75801d16a1c6e87e7fd0d28d66b9c905a6f382da73ede771",
+      "elapsed_seconds": 3.4840000000040163,
+      "axioms": [
+        {
+          "theorem": "FastShare00_unsat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T17:28:50.115464+00:00"
     }
   },
   "negative_control": {
@@ -491,7 +519,7 @@
     "original_module_count": 152,
     "original_seconds": 756.2689999999857,
     "fast_proof_seconds": 89.8599999999933,
-    "fast_with_audit_and_transport_seconds": 108.70399999999063,
+    "fast_with_audit_and_transport_seconds": 112.18799999999464,
     "note": "Shared CNF and checker infrastructure compilation excluded; module elapsed times from separate runs with other live jobs"
   }
 }
