@@ -164,3 +164,129 @@ python3 $S/summarize2.py   # data/round2-summary.json
 `milestones/19-coordinate-face-repair/data/two-arm-seed186.json`. Because
 the caps are wall-clock limits on a shared machine, the UNSAT/UNKNOWN split
 near the frontier depends on the load.
+
+## Round 3: global search for reversal-symmetric snakes
+
+Checkpoint: 21 October 2026, about 4.5 hours on one core at `nice -n 19`.
+**No snake longer than 191 edges was found.** The longest symmetric snake
+found has 178 edges, and the longest snake grown from it has 183 edges. No
+Lean module was added. All UNSAT/UNKNOWN statements below are restricted
+solver results without proof certificates.
+
+### Choice of method
+
+Milestone 02 and `work/joint_layer_search.py` already searched joins of two
+Q8 paths across one coordinate (option b). Milestones 12-18 tried defect
+annealing, cycle-component merging and Q5-cell products. Round 3 therefore
+tests option (a), a global family that none of these touches: snakes that an
+automorphism of Q9 maps onto themselves. No entry of the bank has this
+property: for all 131 entries, no coordinate permutation maps the transition
+sequence onto its reverse. Every symmetric snake therefore lies outside
+the bank. The quotient model has half as many variables, so a release
+of W orbit positions frees about 2W path positions.
+
+### Which symmetries are possible (`scripts/sym3.py`)
+
+Let g be an automorphism with g(P) = P for a snake P that uses all nine
+directions. Then g acts on P as a path automorphism, so it is either the
+identity or the reversal. P spans the cube affinely. Hence g = id, or g
+reverses P and g² = id. **Order 4 is impossible**, and only involutions
+g(x) = π(x) ⊕ c can occur. Up to conjugation, the class of g is (k, w): π
+has k transpositions, c is zero on the transposed pairs and has weight w on
+the fixed coordinates.
+
+- If P has an odd number of vertices, its middle vertex is fixed, so w = 0.
+- If P has an even number of vertices, g swaps the two ends of the middle
+  edge, so g(v) = v ⊕ e_f for some v. This forces w = 1.
+- Classes with w ≥ 2 admit no symmetric snake. In class (0, 1), g is a
+  translation, which would make the two path ends adjacent.
+
+Thus 192, 194 and 196 edges need a class (k, 0), and 193 and 195 edges
+need a class (k, 1), for k = 1..4. That gives eight classes in Q9. A
+fixed-point-free g allows only odd edge counts.
+
+The model has one Boolean per g-orbit, lifted to all vertices with
+multiplicities. Every selected vertex has selected degree 1 or 2. There is
+exactly one orbit of endpoints. Coordinate squares and hexagons are cut,
+and every Q4 holds at most 8 selected vertices. The vertex count is exact.
+There is exactly one selected fixed vertex (w = 0), or exactly one selected
+orbit {v, g(v)} that is an edge (w = 1). Cycle components are cut lazily.
+Symmetry breaking by the centralizer of g puts the middle vertex at 0 (w = 0)
+or the middle edge at {0, e_f} (w = 1). Solver: CaDiCaL 1.9.5 in
+conflict-budget chunks, as in round 2. Every snake is checked by
+`is_snake` and for g-invariance.
+
+**Validation.** In Q5 and Q6, the maximum symmetric length per class from
+SAT equals the maximum from brute-force DFS over all snakes:
+
+| | (1,0) | (1,1) | (2,0) | (2,1) | (3,0) |
+|---|---|---|---|---|---|
+| Q5 | 10 | 11 | 12 | 11 | - |
+| Q6 | 16 | 17 | 22 | 23 | 26 |
+
+Symmetric snakes reach a(6) = 26 but not a(5) = 13. In Q7, the best is
+48 edges for class (3,0), where 50 is UNSAT. Class (2,1) gives 47, with 49
+UNSAT. Class (1,0) is UNSAT already at 30 edges, and class (1,1) at 45.
+So in Q7 the best symmetric snakes are 2 edges below a(7) = 50.
+
+### Experiments (`data/r3-*.jsonl.gz`, `data/round3-summary.json`)
+
+| Run | What | Result |
+|---|---|---|
+| `q9a`, `q9b` | Q9 from scratch, ladders with a 90-120 s cap | (4,0) and (3,0): 160 SAT (12-32 s), 170 UNKNOWN. (4,1) and (3,1): 161 SAT. (2,0): 140 SAT, 150 UNKNOWN. (2,1): 151 UNKNOWN. (1,0): 140 UNSAT in 3 s |
+| `q8b`, `q8lns`, `q8cal` | Q8 calibration | (4,0) and (3,0): 90 SAT in at most 34 s. Symmetric LNS: 90 -> 94 by step 3, then 219 steps without progress. Direct (4,0) 96 and (3,1) 95, 97: UNKNOWN at 300-600 s |
+| `q9lns-k4a`, `-k4w0b` | Symmetric LNS (`scripts/symlns.py`), class (4,0), from 160 | 160 -> 178 in 49 steps. Then 300+ steps at 178 (neutral moves, kicks to 176, climbs back) |
+| `q9lns-k4w1` | class (4,1) from 161 | best 171 |
+| `q9lns-k3w0` | class (3,0) from 160 | best 168 |
+| `q9lns-k3w1` | class (3,1) from 161 | best 173 |
+| `grow11` | Round-2 asymmetric LNS (`drive2.py grow`) from the 178-edge (4,0) snake | 178 -> 183 in 51 steps, then 228 steps at 183 (279 steps, 45 min) |
+
+Symmetric LNS (`scripts/symlns.py`) releases a set of half-positions
+r(i) = min(i, len-1-i). It passes the kept orbits as assumptions to one
+persistent model per length, so learned clauses and cycle cuts carry over
+between steps. Each step first asks for +2 edges (one more orbit). If that
+fails, it asks for a different filling of the same length (neutral move).
+After 30-40 steps without progress, it asks for a different filling 2 edges
+shorter (kick). Released sets are windows, two windows, both ends, or
+Hamming balls of radius 3-4. Their size adapts: +2 after an UNSAT up-move
+and -3 after an UNKNOWN. The usual size settled at 45-60 of the about 90
+half-positions, that is 90-120 path positions, with 30 s caps.
+
+The best snakes are in `data/r3-best/`. Each passes `lns.is_snake`, and
+the symmetric ones are g-invariant. All are far below 191. The 178-, 171-
+and 183-edge snakes dominate all or all but one vertex of Q9, like the
+bank snakes.
+
+### Interpretation
+
+The symmetric family is a poor place to look for a 192-edge snake:
+
+1. In Q5-Q7 the symmetric maximum is 0-2 edges below a(n).
+2. In Q9 the four strongest classes stalled at 168-178 edges. Release
+   regions of 90-120 path positions were mostly refuted within seconds.
+3. Classes (1, w) are capped far lower. Classes (2, w) were already UNKNOWN
+   at 150-151 edges from scratch.
+
+Leaving the symmetry and repairing the 178-edge snake with the round-2
+encoding gained only 5 edges, and stopped at 183. So a 192-edge snake, if
+one exists, is unlikely to be a symmetric snake within 20 edges of a
+symmetric LNS optimum. The Q8 calibration is inconclusive (94 found, 95-97
+UNKNOWN), so these stalls do not prove a ceiling. A complete answer for
+one class would need an exhaustive quotient search, for example proving
+(4,0) UNSAT at 192 edges. At 170 edges the solver is already UNKNOWN after
+2 minutes.
+
+### Reproduction
+
+```sh
+S=milestones/20-lower-bound-search/scripts
+nice -n 19 python3 $S/drive3.py --n 9 --ks 4 3 --edges 160 170 --tl 120 --log q9a.jsonl --outdir out --stop-unknown
+nice -n 19 python3 $S/symlns.py --n 9 --k 4 --start out/sym-n9-k4-e160.json --hours 0.75 --tl 30 --wmin 20 --wmax 90 --patience 30 --log k4.jsonl --outdir out
+nice -n 19 python3 $S/drive2.py grow --start-file milestones/20-lower-bound-search/data/r3-best/sym-k4w0-e178.json --seed 11 --hours 0.75 --tl 30 --log grow11.jsonl --outdir out
+python3 $S/summarize3.py   # data/round3-summary.json
+```
+
+The walks depend on wall-clock caps on a shared machine, so their
+trajectories do not reproduce exactly. In the first (4,0) run (`q9lns-k4a`),
+the region size grew only after failed neutral moves. The adaptation was
+then changed to the rule above.
