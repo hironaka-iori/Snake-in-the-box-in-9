@@ -1,0 +1,58 @@
+{
+  "recorded": "2026-10-21T19:12:25.306934+00:00",
+  "scope": "Operational failure and checkpoint-preserving recovery; no theorem result changed",
+  "failures": [
+    {
+      "job": "fast-kernel",
+      "observed": "2026-10-21T19:12:25.036238+00:00",
+      "parent_pid": 57948,
+      "child_pid": 41948,
+      "processes_absent": true,
+      "prior_status": "action_required",
+      "prior_state_sha256": "2a4ff9731fec4af3a25943517e07a25d8ea5a30807616670f418ab90fed80a2a",
+      "failure": "Windows 1455 while observing process descendants; cleanup also failed.",
+      "evidence": "Previously returned managed-session terminal errors, plus current absence of both identified processes.",
+      "archive": "runtime\\resource-failure-history\\1792609945013701200\\fast-kernel",
+      "module_log_sha256": "91a88060802cb8fb161f777abeb3ab73caaeb46aa0be2de6e44da5fcfc03abb1",
+      "completed_modules": 133
+    },
+    {
+      "job": "applicability",
+      "observed": "2026-10-21T19:12:25.171046+00:00",
+      "parent_pid": 65568,
+      "child_pid": 41284,
+      "processes_absent": true,
+      "prior_status": "running",
+      "prior_state_sha256": "561e8f367d9aa5ab475f792888d4fe76871d17e120de77ccb79576a97a1e148f",
+      "failure": "Windows 1455 while observing descendants; cleanup failed and MemoryError prevented final state serialization.",
+      "evidence": "Previously returned managed-session terminal errors, plus current absence of both identified processes.",
+      "archive": "runtime\\resource-failure-history\\1792609945013701200\\applicability",
+      "module_log_sha256": "5b63996888b720aabd4c9e902d3da7717ba93fc86381ddcc1651a02c9e93fcdb",
+      "completed_modules": 444
+    },
+    {
+      "job": "count-tables",
+      "observed": "2026-10-21T19:12:25.245623+00:00",
+      "parent_pid": 2964,
+      "child_pid": 61396,
+      "processes_absent": true,
+      "prior_status": "running",
+      "prior_state_sha256": "74bcc13359b9d8921b93ab67eeffbdca2388d3154c0b4da43f4f446304346e8b",
+      "failure": "MemoryError during heartbeat state serialization; cleanup encountered Windows 1455 and final state save failed.",
+      "evidence": "Previously returned managed-session terminal errors, plus current absence of both identified processes.",
+      "archive": "runtime\\resource-failure-history\\1792609945013701200\\count-tables",
+      "module_log_sha256": "6d81c0a0481314909f95eb340046da50c568becdac147dca1454bde440055841",
+      "completed_modules": 184
+    }
+  ],
+  "waiting_for_existing_pids": [
+    51960,
+    12884,
+    54904,
+    50544
+  ],
+  "memory_policy": "Observe only; no process killed by the recovery queue; no OS pagefile changes",
+  "recovery_script": "scripts/serial_recovery.py",
+  "global_231": "UNRESOLVED",
+  "global_230": "UNRESOLVED"
+}

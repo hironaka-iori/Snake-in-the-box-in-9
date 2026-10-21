@@ -515,3 +515,27 @@ PYTHON milestones/28-unconditional-231-230/scripts/assemble_share_case.py --inde
 也不代表 730 个推论已通过 Lean。完整见证与复核脚本为
 `data/count-subwindow-redundancy.json`、`scripts/audit_count_subwindows.py`。
 该规则不足以明显缩小主缺口，因此继续现有证书路线。
+
+## 资源错误后的串行恢复
+
+三个控制任务实际遇到 Windows 1455 或 Python `MemoryError` 后退出：
+Boolean 停在 `FastShare13.S34`（已完成 13/34），适用性停在 case 02
+的 Data（已完成 2/34），表覆盖停在五中心 Data。后两者最后写出的
+`running` 状态未能更新；已核对父子进程均不存在，保存原状态、末项
+日志和全部完成记录，再将运行状态更正为等待串行恢复。记录见
+`data/resource-failure-serial-recovery.json`。这些是资源错误，不是反例。
+
+`scripts/serial_recovery.py` 核对既有两个开发任务及其 Lean 子进程的
+命令和创建时间，等它们全部退出后，依次续跑四个最短计数反证、
+Boolean、几何适用性、四至六中心表覆盖。它不停止现有进程、不改变
+系统页面文件，也不按内存预算中止作业。每次续跑前保存检查点和末项
+日志，核对控制脚本未变化；续跑使用原控制器的源码、依赖和产物
+hash 检查。只有子任务退出成功且检查点达到相应完成状态才启动下一项。
+实际失败则暂停队列供定时监控处理，不能把进程结束当作证明通过。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/serial_recovery.py --wait-pids 51960 12884 54904 50544
+```
+
+队列状态在 `runtime/serial-recovery/state.json`；PID 仅作为本次历史
+记录，后续须核对实际命令和创建时间。最终无条件 231/230 仍未完成。
