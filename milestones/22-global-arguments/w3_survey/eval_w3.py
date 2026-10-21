@@ -3,9 +3,10 @@ integer potential), ceiling (hi), what-if means, the binding windows and the fin
 
 Final arithmetic (see README): with lambda = P/Q the lo min cycle mean of T5 and R the range of
 an integer potential for the weights Q*T5 - P,
-    5 sum_{j=1}^{m-1} c(x_j) >= sum_{j=1}^{m-5} T5(W_j) + 20*257 >= (P (m-5) - R)/Q + 5140,
-    sum_{j=1}^{m-1} c(x_j) <= 64512 - 2*168 = 64176,
-so  m <= 5 + (Q (320880 - 5140) + R) / P = 5 + (315740 Q + R) / P.
+    5 sum_{j=1}^{m-1} c(x_j) >= sum_{j=1}^{m-5} T5(W_j) + 20*257 >= (P (m-7) - R)/Q + 5140
+(the windows W_3..W_{m-5} are the edges of an automaton walk -- the state needs seven directions
+-- and W_1, W_2 are dropped), and  sum_{j=1}^{m-1} c(x_j) <= 64512 - 2*168 = 64176,  so
+    m <= 7 + (Q (320880 - 5140) + R) / P = 7 + (315740 Q + R) / P.
 usage: eval_w3.py [--whatif F ...]
 """
 import argparse, json, os, sys
@@ -20,7 +21,7 @@ OUT = os.path.join(HERE, 'data', 'w3_eval.json')
 
 
 def final_m(P, Q, Rg):
-    return 5 + (315740 * Q + Rg) / P
+    return 7 + (315740 * Q + Rg) / P
 
 
 def main():
