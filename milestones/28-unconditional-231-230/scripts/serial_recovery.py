@@ -41,14 +41,16 @@ def run(wait_pids):
     jobs = [
         ('count-pairs', [str(scripts/'develop_lean.py'), *count_targets, '--source-root',
                          'milestones/28-unconditional-231-230/runtime/count-pairs/src'],
-         r.HERE/'runtime/bridge-development/state.json', None),
+         r.HERE/'runtime/bridge-development/state.json', count_targets),
+        ('count-pair-assembly', [str(scripts/'assemble_count_pairs.py')],
+         r.HERE/'runtime/count-pair-assembly/state.json', ['CountWindowPairs231Assembly']),
         ('fast-share', [str(scripts/'fast_share_batch.py'), 'run'], r.HERE/'runtime/fast-kernel/state.json', 'boolean_complete'),
         ('applicability', [str(scripts/'applicability_batch.py'), 'run'], r.HERE/'runtime/applicability/state.json', 'applicability_complete'),
         ('count-tables', [str(scripts/'count_table_batch.py'), 'run'], r.HERE/'runtime/count-tables/state.json', 'coverage_complete')]
     state['controller_sha256'] = {str(p): r.digest(p) for p in
         [scripts/'serial_recovery.py', scripts/'runner.py', scripts/'replay.py',
          scripts/'develop_lean.py', scripts/'fast_share_batch.py',
-         scripts/'applicability_batch.py', scripts/'count_table_batch.py']}
+         scripts/'applicability_batch.py', scripts/'count_table_batch.py', scripts/'assemble_count_pairs.py']}
     print(json.dumps(dict(pid=os.getpid(), status=state['status'], wait_pids=[x['pid'] for x in state['waiting']])), flush=True)
     try:
         while True:
@@ -72,8 +74,11 @@ def run(wait_pids):
                 assert r.digest(path) == digest, ('Controller changed while queued', path)
             archive = JOB/'history'/f'{time.time_ns()}-{label}'
             archive.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(checkpoint, archive/'state-before.json')
-            prior = r.read(checkpoint)
+            if checkpoint.exists():
+                shutil.copyfile(checkpoint, archive/'state-before.json')
+                prior = r.read(checkpoint)
+            else:
+                prior = {}
             logs = [prior['latest_log']] if prior.get('latest_log') else []
             if label == 'count-pairs':
                 logs.extend(str(checkpoint.parent/(name.replace('.', '_')+'.log')) for name in count_targets)
@@ -94,8 +99,8 @@ def run(wait_pids):
                 while child.poll() is None:
                     state['heartbeat'] = r.now(); r.atomic(JOB/'state.json',state); time.sleep(10)
             result = r.read(checkpoint)
-            if expected is None:
-                success = all(name in result.get('completed',{}) for name in count_targets)
+            if isinstance(expected, list):
+                success = all(name in result.get('completed',{}) for name in expected)
             else:
                 success = result.get('status') == expected
             state['jobs'].append(dict(name=label, returncode=child.returncode, status=result.get('status'),

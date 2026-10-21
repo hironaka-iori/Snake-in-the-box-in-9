@@ -562,3 +562,34 @@ PYTHON milestones/28-unconditional-231-230/scripts/assemble_count_pairs.py
 `data/count-pair-assembly-development.json`，尚不能用准备记录代替。
 即使此连接完成，仍须完整消去三至六中心与 share 族前提并进行最终
 独立重建，才可宣称无条件全局 231。
+
+## 中断后的证明分片与恢复
+
+随后复查发现原两个开发检查、恢复队列及其所有已记录子进程均已消失，
+托管会话句柄也不可用。最后两个目标没有完成记录，日志只含启动命令；
+退出原因未知，不能推断为通过或数学失败。原状态与日志已存档，见
+`data/process-interruption-recovery.json`。
+
+`refine_count_pair_selection.py` 保留 Q012A14 的同一 3,156 子句 CNF、
+2,924 个选择索引、LRAT 和 RUP 证明，将未完成的完整子句相等性拆为
+46 个最多 64 子句的 `rfl` 检查，根证明再核验所有块的完整拼接。
+索引范围检查先证明 CNF 长度再使用该等式，避免每个索引重复计算长度。
+最终 `unsat`、`refuted` 的源码保持原样；原根与清单已存档。
+记录为 `data/count-pair-selection-refinement.json`。新证明必须实际编译，
+计算上的列表相等不能替代 Lean 核验。
+
+四中心覆盖也改用全部 64 个两符号前缀，与五、六中心同一完整性桥接。
+567 个四中心键、所有五/六中心源码以及 `no_count_window`、`hw4_of_counts`
+的定理类型均保持不变。现有输入收据保留原清单归档位置，共 198 个
+生成模块；新四中心具体分片尚待检查。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/refine_count_pair_selection.py
+PYTHON milestones/28-unconditional-231-230/scripts/prepare_count_higher_tables.py --refine-four
+PYTHON milestones/28-unconditional-231-230/scripts/count_table_batch.py prepare --refresh
+PYTHON milestones/28-unconditional-231-230/scripts/serial_recovery.py
+```
+
+更新后的串行队列在四个计数反证完成后立即运行两中心连接，再继续
+Boolean、几何适用性、表覆盖。它仍逐项验证实际完成记录，不启动并发
+大检查；没有发生新的完整全局证明完成。
