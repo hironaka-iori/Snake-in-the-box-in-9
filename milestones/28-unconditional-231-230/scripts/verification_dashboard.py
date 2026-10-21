@@ -13,6 +13,7 @@ TARGETS=['FastCountD012A11.LocalWindow','FastCountD012A12.LocalWindow',
 PAGE=PAGE.replace('条件式聚合独立重建','条件式聚合闭包核验')
 PAGE=PAGE.replace("Object.keys(f.completed??{}).length+' / 220'", "f.completed_count+' / 220'")
 PAGE=PAGE.replace("['检查点',s.checkpoint]", "['两中心计数局部反证',s.counts.completed+' / 4'],['计数检查状态 / 当前项',s.counts.status+' / '+s.counts.current],['检查点',s.checkpoint]")
+PAGE=PAGE.replace("['检查点',s.checkpoint]", "['四至六中心表覆盖（仍需局部反证）',s.table_coverage.completed+' / 3'],['表覆盖前缀检查块',s.table_coverage.shards+' / 128'],['表覆盖状态 / 当前项',s.table_coverage.status+' / '+s.table_coverage.current],['表覆盖错误',s.table_coverage.failure],['检查点',s.checkpoint]")
 
 def state():
     kernel=r.read(RUNTIME/'fast-kernel/state.json')
@@ -37,9 +38,14 @@ def state():
                 children=p.children(recursive=True)
                 counts['current']=Path(children[-1].cmdline()[-1]).stem if children else '准备下一模块'
             except r.psutil.NoSuchProcess:pass
+    table_state=RUNTIME/'count-tables/state.json'
+    tables=r.read(table_state) if table_state.exists() else {}
+    coverage=dict(completed=len(tables.get('coverage_results',{})),status=tables.get('status','尚未启动'),
+        current=tables.get('current'),failure=tables.get('failure'),
+        shards=sum(k.startswith(('CountWindowFive231.P','CountWindowSix231.P')) for k in tables.get('completed',{})))
     return dict(kernel={k:kernel.get(k) for k in ['kernel_cases','status','current_item','phase','last_progress','resources','failures']},
         applicability={k:app.get(k) for k in ['applicability_cases','status','current_item','last_progress','failures']},
-        live=r.read(RUNTIME/'applicability/live.json'),aggregate=aggregate,counts=counts,
+        live=r.read(RUNTIME/'applicability/live.json'),aggregate=aggregate,counts=counts,table_coverage=coverage,
         checkpoint=str(RUNTIME/'fast-kernel/state.json'))
 
 def serve(port):
@@ -48,7 +54,12 @@ def serve(port):
             if self.path=='/state':data=json.dumps(state(),ensure_ascii=False).encode();kind='application/json'
             elif self.path=='/log':
                 p=r.read(RUNTIME/'fast-kernel/state.json').get('latest_log')
-                data=('\n'.join(Path(p).read_text(encoding='utf-8',errors='replace').splitlines()[-20:]) if p else '').encode();kind='text/plain'
+                text='Boolean 反证\n'+('\n'.join(Path(p).read_text(encoding='utf-8',errors='replace').splitlines()[-20:]) if p else '')
+                table_state=RUNTIME/'count-tables/state.json'
+                q=r.read(table_state).get('latest_log') if table_state.exists() else None
+                if q and Path(q).exists():
+                    text+='\n\n计数表覆盖\n'+'\n'.join(Path(q).read_text(encoding='utf-8',errors='replace').splitlines()[-20:])
+                data=text.encode();kind='text/plain'
             else:data=PAGE.encode();kind='text/html'
             self.send_response(200);self.send_header('Content-Type',kind+'; charset=utf-8')
             self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(data)
