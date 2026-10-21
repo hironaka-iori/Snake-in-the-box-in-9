@@ -57,7 +57,7 @@ def main():
         Sz = [x ^ z for x in S]; winz = [x ^ z for x in win]
         true = w3enc.window_charge(winz, Sz)
         for cap, want in ((true, True), (true - 1, False)):
-            enc = w3enc.W3Encoding(winz, None, 4, cap)
+            enc = w3enc.W3Encoding(winz, None, 4, cap, sym=False)
             Ss = set(Sz)
             assum = [enc.var[v] if v in Ss else -enc.var[v] for v in enc.ball]
             with Cadical153(bootstrap_with=enc.clauses) as s:
