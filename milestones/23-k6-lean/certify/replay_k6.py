@@ -16,7 +16,8 @@ Differences:
 
   python3 replay_k6.py gen --work DIR [--out work/final_lean] [--shard i/n] [--limit N] [NAME ...]
   python3 replay_k6.py measure --work DIR     # hints of the core proofs only (no Lean files)
-  python3 replay_k6.py build [--limit N]      # guarded, one module per `lean` call
+  python3 replay_k6.py build [--limit N]      # guarded, one module per `lean` call (generated cases only)
+  python3 replay_k6.py sweep [--dry-run]      # delete built data sources (K*/Data*.lean)
 
 Cases run smallest first (by the recorded hint estimate); a case whose main module exists is
 skipped, so both steps resume.
@@ -67,7 +68,7 @@ def gen(a):
     K.register(certs)
     cadical = K.cadical_wrapper(a.work)
     si, sn = map(int, a.shard.split('/'))
-    done = 0
+    done = spent = 0
     for i, (name, info) in enumerate(cases()):
         if i % sn != si or (a.names and name not in a.names):
             continue
@@ -107,7 +108,8 @@ def gen(a):
                 os.remove(p)
         os.remove(os.path.join(certs, name + '.cnf.gz'))
         done += 1
-        if a.limit and done >= a.limit:
+        spent += rec['hints']
+        if (a.limit and done >= a.limit) or (a.budget_hints and spent >= a.budget_hints):
             break
 
 
@@ -141,13 +143,40 @@ def measure(a):
 
 
 def build(a):
-    mods = ['LocalWindowUnsat.' + info['module'] for _, info in cases()]
+    # only the cases generated so far (generation and building alternate under the disk cap)
+    mods = ['LocalWindowUnsat.' + info['module'] for _, info in cases()
+            if os.path.exists(os.path.join(LEAN, 'LocalWindowUnsat', info['module'] + '.lean'))]
     if a.limit:
         mods = mods[:a.limit]
+    if not mods:
+        raise SystemExit('no generated replay modules')
     cmd = [sys.executable, os.path.join(ROOT, 'work', 'guarded_lake_build.py'), '--jobs', str(a.jobs),
            '--heavy-jobs', str(a.heavy_jobs), '--min-free-gb', str(a.min_free_gb), '--rss-cap-gb', str(a.rss_cap_gb),
-           '--trust-mtime', '--direct', *mods]
+           '--trust-mtime', '--direct', '--log', os.path.join(LEAN, '.lake', 'guarded_build_k6.jsonl'), *mods]
     raise SystemExit(subprocess.run(cmd, cwd=LEAN).returncode)
+
+
+def sweep(a):
+    """Delete the data sources `LocalWindowUnsat/K*/Data*.lean` whose `.olean` is built and newer
+    (imports only need the `.olean`; `guarded_lake_build.py --trust-mtime` treats them as
+    prebuilt).  The same rule as the sweep of the R sets."""
+    unsat = os.path.join(LEAN, 'LocalWindowUnsat')
+    olean = os.path.join(LEAN, '.lake', 'build', 'lib', 'lean', 'LocalWindowUnsat')
+    n = freed = 0
+    for d in sorted(os.listdir(unsat)):
+        if not d.startswith('K') or not os.path.isdir(os.path.join(unsat, d)):
+            continue
+        for f in os.listdir(os.path.join(unsat, d)):
+            if not (f.startswith('Data') and f.endswith('.lean')):
+                continue
+            src, o = os.path.join(unsat, d, f), os.path.join(olean, d, f[:-5] + '.olean')
+            if os.path.exists(o) and os.path.getmtime(o) > os.path.getmtime(src):
+                freed += os.path.getsize(src)
+                if not a.dry_run:
+                    os.remove(src)
+                n += 1
+    print('%s %d data sources, %.1f MB; %d MB free' % ('would delete' if a.dry_run else 'deleted', n,
+                                                       freed / 2**20, K.disk_free_mb()), flush=True)
 
 
 def main():
@@ -163,6 +192,8 @@ def main():
     g.add_argument('--rounds', type=int, default=1)
     g.add_argument('--shard', default='0/1')
     g.add_argument('--limit', type=int, default=0)
+    g.add_argument('--budget-hints', type=float, default=0,
+                   help='stop after the cases generated in this call reach this many hints (a batch)')
     g.add_argument('--min-disk-mb', type=int, default=1500)
     g.add_argument('names', nargs='*')
     m = sub.add_parser('measure')
@@ -176,8 +207,10 @@ def main():
     b.add_argument('--min-free-gb', type=float, default=6.0)
     b.add_argument('--rss-cap-gb', type=float, default=6.0)
     b.add_argument('--limit', type=int, default=0)
+    w = sub.add_parser('sweep')
+    w.add_argument('--dry-run', action='store_true')
     a = ap.parse_args()
-    {'gen': gen, 'measure': measure, 'build': build}[a.cmd](a)
+    {'gen': gen, 'measure': measure, 'build': build, 'sweep': sweep}[a.cmd](a)
 
 
 if __name__ == '__main__':
