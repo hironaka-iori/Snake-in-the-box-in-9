@@ -1,4 +1,5 @@
-"""Fresh source-only build and transitive axiom audit of the unconditional 241-edge bound (and the earlier 245).
+"""Fresh source-only build and transitive axiom audit of the unconditional 241-edge bound (and the earlier 245);
+with --bound239, of the unconditional 239-edge bound.
 
 Requires Python 3.12+, Lean 4.19.0 on PATH, and the pinned mathlib checkout.
 No solver results or research-directory compiled objects enter this build.
@@ -182,6 +183,17 @@ def main():
     parser.add_argument("--jobs", type=int, default=1,
                         help="check up to this many independent modules at once (a module starts when every "
                              "module it imports is checked; the shards of a chain are independent)")
+    parser.add_argument("--bound239", action="store_true",
+                        help="also check the unconditional 239 bound (UpperBound239): the hand-written D239 "
+                             "modules and the 1,813 generated ones listed in "
+                             "milestones/07-window-223/bridge/u239/build_order.txt; the generated DV*.lean "
+                             "sources are not committed and must first be written into stronger/ by "
+                             "milestones/07-window-223/bridge/u239/regen.py")
+    parser.add_argument("--seed-objects", type=Path, default=None,
+                        help="directory of objects compiled outside this driver, with a file SOURCES.sha256 "
+                             "(`sha256  Module.lean` lines): a module whose source is byte-identical to the "
+                             "listed one and none of whose imports was compiled in this run takes that "
+                             "object instead of being compiled again (recorded as `seeded` in the manifest)")
     parser.add_argument("--build-dir", type=Path, default=None,
                         help="reuse this build directory: steps whose object is newer than its source and "
                              "whose previous run succeeded are not repeated (for machines that restart)")
@@ -198,6 +210,19 @@ def main():
     share_theorems = (["upper_231_of_direction_windows_and_shares",
                        "upper_231_of_direction_windows_and_shares_all"] if args.share231 else [])
     project = Path(__file__).resolve().parent
+    repo_root = project.parent.parent
+    if args.bound239:
+        order239 = (repo_root / "milestones/07-window-223/bridge/u239/build_order.txt").read_text().split()
+        absent = [m for m in order239 if not (project / "stronger" / f"{m}.lean").exists()]
+        if absent:
+            raise SystemExit(f"{len(absent)} sources of the 239 bound are missing (e.g. {absent[0]}.lean); "
+                             "run milestones/07-window-223/bridge/u239/regen.py WORK work/spectral/stronger first")
+        modules += [m for m in order239 if m not in modules]
+    seeds = {}
+    if args.seed_objects is not None:
+        for line in (args.seed_objects / "SOURCES.sha256").read_text().splitlines():
+            digest, name = line.split()
+            seeds[name[:-len(".lean")]] = digest
     if args.share_wrappers:
         modules += [m for m in ["WindowAutomatonRGS", "EmptyShareBound", "ShareBonus", *args.share_wrappers]
                     if m not in modules]
@@ -246,7 +271,8 @@ def main():
         "mathlib_commit": actual, "lean_version": version,
         "build_directory": str(build), "k5_chain": k5, "k6_chain": k6,
         "extra_chains": args.extra_chains, "share231": args.share231,
-        "share_wrappers": args.share_wrappers, "source_sha256": {},
+        "share_wrappers": args.share_wrappers, "bound239": args.bound239,
+        "seed_objects": str(args.seed_objects.resolve()) if args.seed_objects else None, "source_sha256": {},
         "steps": [], "axiom_audits": {}, "status": "running",
     }
 
@@ -341,6 +367,8 @@ def main():
                                                 (build / (m + ".lean")).read_text(encoding="utf-8"), re.M)
                     if name in order} for m in order}
 
+        compiled = set()      # modules compiled by this run (their importers cannot be seeded)
+
         def check(module):
             # decided when every import is checked, so a rebuilt import makes the object stale
             if cached(module, build / (module + ".lean"), build / (module + ".olean")):
@@ -349,6 +377,28 @@ def main():
                     manifest["steps"].append({"label": module, "cached": True})
                     save()
                 return
+            seed = args.seed_objects / (module + ".olean") if module in seeds else None
+            if seed is not None and seed.exists() and not (deps[module] & compiled):
+                digest = hashlib.sha256((build / (module + ".lean")).read_bytes()).hexdigest()
+                if digest == seeds[module]:
+                    target = build / (module + ".olean")
+                    target.unlink(missing_ok=True)
+                    try:
+                        os.link(seed, target)
+                    except OSError:
+                        shutil.copy2(seed, target)
+                    os.utime(target)
+                    print(f"Checking {module} ... (seeded: object compiled from the identical source)", flush=True)
+                    with lock:
+                        manifest["steps"].append({"label": module, "cached": True, "seeded": True,
+                                                  "source_sha256": digest})
+                        save()
+                    (logs / (module + ".ok")).write_text(
+                        f"seeded from {seed} (source sha256 {digest}) "
+                        + datetime.now(timezone.utc).isoformat() + "\n")
+                    return
+            with lock:
+                compiled.add(module)
             run(module, [lean_bin, f"--root={build}", "-o",
                          str(build / (module + ".olean")), str(build / (module + ".lean"))],
                 mathlib, env)
@@ -371,6 +421,7 @@ def main():
             + "".join(f"import AggregateDirection{c}Conditional\n" for c in args.extra_chains)
             + ("import AggregateDirectionK6R34C7WShare231\n" if args.share231 else "")
             + "".join(f"import {w}\n" for w in args.share_wrappers)
+            + ("import UpperBound239\n" if args.bound239 else "")
             + "import UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.upper_242_of_certified_windows\n"
@@ -394,7 +445,11 @@ def main():
             "#print axioms Snake9.verified_interval_191_244\n"
             "#print axioms Snake9.upper_bound_242\n"
             "#print axioms Snake9.upper_bound_241\n"
-            "#print axioms Snake9.verified_interval_191_241\n", encoding="utf-8"
+            "#print axioms Snake9.verified_interval_191_241\n"
+            + ("#print axioms D239.ref_012\n#print axioms D239.ref_0120\n#print axioms D239.ref_0123\n"
+               "#print axioms D239.ref_01203\n#print axioms D239.ref_01230\n#print axioms D239.ref_01234\n"
+               "#print axioms Snake9.upper_bound_239\n#print axioms Snake9.verified_interval_191_239\n"
+               if args.bound239 else ""), encoding="utf-8"
         )
         with audit.open("a", encoding="utf-8") as stream:
             stream.write(
@@ -426,12 +481,18 @@ def main():
                     "Snake9.no_three_consecutive_internal_twos", "Snake9.upper_bound_245",
                     "Snake9.verified_interval_191_245"}
         expected |= {"Snake9." + t for t in extra_theorems + share_theorems}
+        if args.bound239:
+            expected |= {"Snake9.upper_bound_239", "Snake9.verified_interval_191_239",
+                         *(f"D239.ref_{s}" for s in ("012", "0120", "0123", "01203", "01230", "01234"))}
         missing = expected - manifest["axiom_audits"].keys()
         if missing:
             raise RuntimeError(f"Missing final theorem audits: {missing}")
         manifest["status"] = "success"
         manifest["completed_utc"] = datetime.now(timezone.utc).isoformat()
-        print("Verified: 191 <= a(9) <= 241 edges (verified_interval_191_241). Exact optimum unresolved.", flush=True)
+        if args.bound239:
+            print("Verified: 191 <= a(9) <= 239 edges (verified_interval_191_239). Exact optimum unresolved.", flush=True)
+        else:
+            print("Verified: 191 <= a(9) <= 241 edges (verified_interval_191_241). Exact optimum unresolved.", flush=True)
         print(f"Source hashes, commands, and transitive axiom audits: {build / 'manifest.json'}")
     except BaseException as exc:
         manifest["status"] = "failed"

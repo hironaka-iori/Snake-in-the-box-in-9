@@ -1,6 +1,6 @@
 # Beyond 232: findings of 19-20 October 2026 and how they connect to earlier work
 
-Status: working notes. Every bound below 245 in this milestone is **conditional**: the Lean theorems prove "no listed window occurs => at most N edges"; the windows are refuted by drat-trim-checked DRAT proofs of local CNFs, and the geometric step from a snake window to that CNF is not formalized. Since 20 October the unconditional, Lean-checked interval is **191 <= a(9) <= 241** (`verified_interval_191_241`; 244 first, then 242 and 241 with the same bridge, `milestones/07-window-223/bridge/README.md`).
+Status: working notes. Every bound below 245 in this milestone is **conditional**: the Lean theorems prove "no listed window occurs => at most N edges"; the windows are refuted by drat-trim-checked DRAT proofs of local CNFs, and the geometric step from a snake window to that CNF is not formalized. Since 21 October the unconditional, Lean-checked interval is **191 <= a(9) <= 239** (`verified_interval_191_239`; 244 first, then 242 and 241, then the 145 direction-aware windows of 239 with the same bridge, `milestones/07-window-223/bridge/README.md`).
 
 ## 1. The six-centre ceiling is 9/2
 
