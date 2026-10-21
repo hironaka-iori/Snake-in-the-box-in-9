@@ -173,6 +173,9 @@ def main():
                         help="which Lean chain proves the conditional 235 (default: the SWAR kernel chain)")
     parser.add_argument("--extra-chains", nargs="*", default=[],
                         help="further generated chains to check and audit, e.g. K6R3C7W (the cap-7 233 chain)")
+    parser.add_argument("--share231", action="store_true",
+                        help="also check the conditional 231 of the 232 chain plus the empty-square share "
+                             "bonus (AggregateDirectionK6R34C7WShare231; needs K6R34C7W in --extra-chains)")
     parser.add_argument("--jobs", type=int, default=1,
                         help="check up to this many independent modules at once (a module starts when every "
                              "module it imports is checked; the shards of a chain are independent)")
@@ -185,6 +188,12 @@ def main():
     modules = list(MODULES)
     for chain in [k5, k6, *args.extra_chains]:
         modules += [m for m in chain_modules(chain) if m not in modules]
+    if args.share231:
+        if "K6R34C7W" not in [k6, *args.extra_chains]:
+            raise SystemExit("--share231 needs the K6R34C7W chain (--extra-chains K6R34C7W)")
+        modules += [m for m in ("EmptyShareBound", "AggregateDirectionK6R34C7WShare231") if m not in modules]
+    share_theorems = (["upper_231_of_direction_windows_and_shares",
+                       "upper_231_of_direction_windows_and_shares_all"] if args.share231 else [])
     project = Path(__file__).resolve().parent
     # the bounds the chosen chains prove, read from their wrapper theorems' names
     def chain_theorem(chain):
@@ -227,7 +236,7 @@ def main():
         "started_utc": datetime.now(timezone.utc).isoformat(),
         "mathlib_commit": actual, "lean_version": version,
         "build_directory": str(build), "k5_chain": k5, "k6_chain": k6,
-        "extra_chains": args.extra_chains, "source_sha256": {},
+        "extra_chains": args.extra_chains, "share231": args.share231, "source_sha256": {},
         "steps": [], "axiom_audits": {}, "status": "running",
     }
 
@@ -350,6 +359,7 @@ def main():
         audit.write_text(
             "import Aggregate244Conditional\nimport CubePermutation\nimport W223\nimport UpperBound244\nimport UpperBound241\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
             + "".join(f"import AggregateDirection{c}Conditional\n" for c in args.extra_chains)
+            + ("import AggregateDirectionK6R34C7WShare231\n" if args.share231 else "")
             + "import UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.upper_242_of_certified_windows\n"
@@ -358,7 +368,7 @@ def main():
             "#print axioms Snake9.WindowAutomaton.step_table\n"
             "#print axioms Snake9." + k5_theorem + "\n"
             "#print axioms Snake9." + k6_theorem + "\n"
-            + "".join(f"#print axioms Snake9.{t}\n" for t in extra_theorems) +
+            + "".join(f"#print axioms Snake9.{t}\n" for t in extra_theorems + share_theorems) +
             "#print axioms Snake9.lower_bound\n"
             "#print axioms Snake9.noNext_iff_upperBound\n"
             "#print axioms Snake9.adjacent_internal_alpha_one_impossible\n"
@@ -404,7 +414,7 @@ def main():
                     "Snake9.adjacent_internal_one_three_impossible", "Snake9.alpha_one_internal_neighbor_ge_four",
                     "Snake9.no_three_consecutive_internal_twos", "Snake9.upper_bound_245",
                     "Snake9.verified_interval_191_245"}
-        expected |= {"Snake9." + t for t in extra_theorems}
+        expected |= {"Snake9." + t for t in extra_theorems + share_theorems}
         missing = expected - manifest["axiom_audits"].keys()
         if missing:
             raise RuntimeError(f"Missing final theorem audits: {missing}")
