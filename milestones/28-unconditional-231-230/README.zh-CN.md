@@ -488,3 +488,30 @@ PYTHON milestones/28-unconditional-231-230/scripts/count_table_batch.py run
 逐项相等性证据在 `data/applicability-case00-stack-repair.json`。目前
 适用性已完成 00、01 两个形状，新的冻结提交为
 `c5edbd7c802c6592829ce4a036343693d7125fd0`。
+
+## 第二个完整任意窗口结果
+
+`LocalWindowSat/ParallelShare00CanonicalWindow.lean` 将已通过的 FastRup
+精确核心反证与 case 00 的完整几何赋值连接。其 `canonical_refuted` 与
+`share_ge_21` 均已通过 Lean 和允许公理审计：任意蛇中规范方向为
+`[0,1,2,0,3,1,0]` 的七边窗口，六个中心的 share 和至少为 21。
+该定理没有额外证书或局部反证前提；形状条件仍是这个单形状结果的范围。
+它与原有 case 01 合计完成两个形状，不是全部 34 个形状的全局结论。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/assemble_share_case.py --index 0
+```
+
+432 个所需证明源文件已保存到本里程碑的 `lean/` 中；已有的 462 个模块
+在源码、依赖与产物 hash 匹配后复用，新连接模块约 104.36 秒通过。
+输入与完整有效开发闭包分别见 `data/share-assembly-00-input.json`、
+`data/share-assembly-00-development.json`。输出使用独立的
+`runtime/share-assembly/`，不改动活跃验证作业；最终仍须冻结整个全局
+定理并进行不复用自定义产物的新鲜构建。
+
+对“是否能由短窗口减少大量证书”另做了精确区间包含检查，包括反转及
+同长度较宽区间。15,959 个键中有 730 个具备这种计算上的包含见证，
+仍保留 15,229 个，减少约 4.6%。这些数字只描述该规则，不是数学最小值，
+也不代表 730 个推论已通过 Lean。完整见证与复核脚本为
+`data/count-subwindow-redundancy.json`、`scripts/audit_count_subwindows.py`。
+该规则不足以明显缩小主缺口，因此继续现有证书路线。

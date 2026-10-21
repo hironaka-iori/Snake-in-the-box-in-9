@@ -122,3 +122,12 @@ were identical before and after adding a 64 MiB Lean thread stack. The repaired
 final module passed, and both exported targets have only allowed axioms. The
 archived failure, successful command and exact comparison are recorded in
 `data/applicability-case00-stack-repair.json`; no failed audit was accepted.
+
+`LocalWindowSat.ParallelShare00CanonicalWindow` now joins the audited
+`FastParallelShare00.unsat` to `ParallelShare00Applicability.refuted_of_unsat`.
+Their compact CNF source is identical, and the FastRup bridge already proves
+formula equality inside Lean. The resulting canonical refutation and arbitrary
+matching-window bound have no certificate premise and only the allowed axioms.
+The 432 retained sources and 462 reused dependencies are individually hashed;
+the new root was compiled and audited separately. This completes shape 00, not
+the full shape family or the final global fresh build.
