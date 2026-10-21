@@ -176,6 +176,9 @@ def main():
     parser.add_argument("--share231", action="store_true",
                         help="also check the conditional 231 of the 232 chain plus the empty-square share "
                              "bonus (AggregateDirectionK6R34C7WShare231; needs K6R34C7W in --extra-chains)")
+    parser.add_argument("--share-wrappers", nargs="*", default=[],
+                        help="generated share-bonus wrappers to check and audit (gen_share_wrapper.py), e.g. "
+                             "AggregateDirectionK7R34C7W16Share230; their chains must be in --extra-chains")
     parser.add_argument("--jobs", type=int, default=1,
                         help="check up to this many independent modules at once (a module starts when every "
                              "module it imports is checked; the shards of a chain are independent)")
@@ -195,6 +198,12 @@ def main():
     share_theorems = (["upper_231_of_direction_windows_and_shares",
                        "upper_231_of_direction_windows_and_shares_all"] if args.share231 else [])
     project = Path(__file__).resolve().parent
+    if args.share_wrappers:
+        modules += [m for m in ["WindowAutomatonRGS", "EmptyShareBound", "ShareBonus", *args.share_wrappers]
+                    if m not in modules]
+        for w in args.share_wrappers:
+            share_theorems += re.findall(r"^theorem (upper_\d+_of_direction_windows_and_shares\w*)",
+                                         (project / "stronger" / f"{w}.lean").read_text(), re.M)
     # the bounds the chosen chains prove, read from their wrapper theorems' names
     def chain_theorem(chain):
         return re.search(r"theorem (upper_\d+_of_direction_windows" + chain + r")\b",
@@ -236,7 +245,8 @@ def main():
         "started_utc": datetime.now(timezone.utc).isoformat(),
         "mathlib_commit": actual, "lean_version": version,
         "build_directory": str(build), "k5_chain": k5, "k6_chain": k6,
-        "extra_chains": args.extra_chains, "share231": args.share231, "source_sha256": {},
+        "extra_chains": args.extra_chains, "share231": args.share231,
+        "share_wrappers": args.share_wrappers, "source_sha256": {},
         "steps": [], "axiom_audits": {}, "status": "running",
     }
 
@@ -360,6 +370,7 @@ def main():
             "import Aggregate244Conditional\nimport CubePermutation\nimport W223\nimport UpperBound244\nimport UpperBound241\nimport AggregateWindowConditional\nimport AggregateDirectionConditional\nimport AggregateDirection" + k5 + "Conditional\nimport AggregateDirection" + k6 + "Conditional\n"
             + "".join(f"import AggregateDirection{c}Conditional\n" for c in args.extra_chains)
             + ("import AggregateDirectionK6R34C7WShare231\n" if args.share231 else "")
+            + "".join(f"import {w}\n" for w in args.share_wrappers)
             + "import UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.upper_242_of_certified_windows\n"
