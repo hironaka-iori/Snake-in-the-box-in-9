@@ -17,7 +17,7 @@ This is different from the radius-four corner-share model.
 | Four/six-cycle and saved cycle cuts | A selected cycle cannot lie in an induced path. Saved cuts have every vertex of degree two in the induced cut graph | Each generated model checks cut adjacency. To formalize: use arbitrary-length cycle exclusion, not merely a four-cycle argument |
 | Empty square bit `E[Q]` | True iff all four selected-vertex bits vanish; both implication directions are emitted | All four corners lie within radius three of the relevant centre; no outside-square truncation |
 | `g1`, `g3` | With the centre selected, let `n` count the other three parallel-square corners. Set `g1=E∧(n≤1)`, `g3=E∧(n=0)` | Unfixed, one-fixed, and two-fixed gate lemmas compiled in `ParallelShareTerm.lean` |
-| Share unary leaves | `[E,E,g1,g3,g3,g3]` has weight 6, 3, or 2 for parallel-square selected count 1, 2, or 3 | `unary_weight` compiled. Count four is ruled out by selected-square geometry, still to connect |
+| Share unary leaves | `[E,E,g1,g3,g3,g3]` has weight 6, 3, or 2 for parallel-square selected count 1, 2, or 3 | `Snake9.LocalWindow.Axioms.parallel_unary_weight` compiled: count four is excluded from path acyclicity. Mapping concrete CNF leaf variables to these semantic bits remains |
 | Omitted terms / fixed bits | An empty square meeting the fixed window has share zero. Fixed parallel-square corners make indicated gate bits zero | Fixed-count Boolean cases compiled; identification with concrete geometric terms remains |
 | Totalizer tree, sequential centre merge | Output t is the semantic threshold on the exact sum of descendant leaf weights, clipped at cap+1 | `ParallelShareCounter.Circuit.satisfies` proves all merges and list indices in the abstract circuit; exact identification with emitted clauses remains |
 | Overflow and truncated accumulator | Whole sum ≤ cap implies every prefix sum ≤ cap because all weights are nonnegative; discarded overflow threshold is false | `ParallelShareCounter.sequential_counter_sound` includes every intermediate overflow unit and trimmed accumulator; connect actual encoder trace next |
@@ -29,11 +29,20 @@ square corners are at distance at most three. Thus the boundary creates no missi
 selected-vertex bit for these terms. No floor approximation is used: weights
 6, 3, 2 are exact. Multiplicity is handled by the separate global share theorem.
 
-Translation, coordinate permutations, and reversal preserve empty squares and
-parallel-square selected counts mathematically. The available corner-share
-normalization theorem is not a proof for this different share definition.
+`ParallelShareBridge.lean` now proves translation, coordinate permutation, and
+reversal invariance of the full parallel-share sum. Its local-to-window theorem
+still needs a `RefutedParallel` premise for the canonical model; this premise is
+not obtained merely from the existing Boolean UNSAT theorem.
+`ParallelShareIdentification.vertexShare_eq` and `share_eq_core` (in namespace
+`Snake9`) identify the global and local parallel-share quantities exactly,
+including at endpoints. These new proofs reuse generic cube-frame lemmas from
+the corner-share development, not its different share identification.
 The next formal step is an explicit satisfying-assignment construction for this
 entire CNF, followed by exact model identification and all 34 shape refutations.
+
+The new bridge/geometry/identification modules passed a hash-checked incremental
+development build, with only the three allowed axioms in all printed audits.
+This is not the required final fresh rebuild of the complete global theorem.
 
 The local executable replay rejects RAT/negative hints rather than trusting them.
 It has positive controls and corrupt-proof rejection controls. It remains

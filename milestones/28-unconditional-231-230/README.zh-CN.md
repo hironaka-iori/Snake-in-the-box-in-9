@@ -148,3 +148,28 @@ PYTHON milestones/28-unconditional-231-230/scripts/kernel_batch.py serve --port 
 依赖源码精确保存在 `lean/`，hash、公理及映射见 `data/kernel-pilot-01*.json`。
 这证明原模型的一组明确子句不可满足；尚不证明任意蛇满足这些子句。
 剩余形状已启动后台内核重放，监测使用 `runtime/kernel/state.json`。
+
+## 平行 share 的几何桥接组件
+
+2026-10-22 新增四个模块，均实际通过 Lean 4.19.0：
+
+- `ParallelShareModel.lean` 定义可计算的平行 share，包含 36 个轴对、九个平移方向及精确 6/3/2 权重。
+- `ParallelShareBridge.lean` 证明平移、坐标置换和路径反转不变性，并把局部 `RefutedParallel` 结论用于任意符合该规范形状的蛇窗口；share-only 情形的计数界 `[0,21]` 由既有蛇定理给出。
+- `ParallelShareGeometry.lean` 从路径无环性证明平行方块最多选中三个角，再证明几何项等于 `[E,E,g1,g3,g3,g3]` 的 unary 权重。
+- `ParallelShareIdentification.lean` 证明全局 `SquareIncidence.vertexShare` 与上述局部定义逐项相等，涵盖端点。
+
+这些模块的已打印公理均在 `propext`、`Classical.choice`、`Quot.sound` 内。
+验证使用有源码、依赖和产物 hash 检查的增量开发构建；不是最终全自定义闭包的新鲜构建。
+开发命令为：
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py ParallelShareGeometry ParallelShareIdentification
+```
+
+本机记录在 `runtime/bridge-development/state.json`，冻结摘要在
+`data/parallel-share-bridge-development.json`。复用第一阶段产物前，构建器验证其
+工具链、原始闭包记录、当前源码和每个自定义依赖均匹配，并避免旧开发产物遮蔽匹配文件。
+
+**仍缺完整 CNF 的几何满足赋值与逐子句识别**：上述组件尚未把 Boolean
+`original_unsat` 接成 `RefutedParallel`。34 个内核反证、15,959 个计数窗口
+反证、覆盖与最终聚合也仍须完成；无条件 231/230 仍未解决。
