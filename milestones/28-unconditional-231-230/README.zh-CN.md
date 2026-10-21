@@ -303,3 +303,27 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py LocalWindowSa
 实际使用的 `windowShare`。本次新增聚合闭包和适配模块尚待本机编译，
 不能由源码齐全推断检查通过。它们仍保留 34 个 share 反证和 15,959 个
 计数窗口对应的未完成前提。
+
+## 同一证书的 FastRup 本机比较
+
+导入贡献者提交 `4887deb02a3a51e2775ef5e81a2fb5ddc980a669` 的原始
+`WinCNF`、`FastRup` 和 `FastRupCmd`。该检查器构造证明项并交给 Lean
+内核检查。使用 case 00 的同一份 compact CNF 与同一份 LRAT：5,169 个
+变量、10,988 条核心子句、13,291 个推导和 905,775 条提示。
+
+旧重放的 152 个数据/检查/根模块累计约 756.27 秒；FastRup 的对应重放约
+89.86 秒，加上公理审计和原核心接口转换约 112.18 秒。两次运行均存在其他
+作业，且未计入共享 CNF 和通用检查器的编译；这是单份证书比较。
+有效控制通过，删除冲突提示的控制被内核拒绝。两种检查器对应的核心 CNF
+已由 `rfl` 直接核对，最终 `FastParallelShare00.unsat` 的公理只有允许的三项。
+`FastRupLocalWindow.unsat_of_fastRup` 还处理了两种语义对文字零的不同约定，
+因而转换不需要未证明的非零文字假设。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/prepare_fast_rup_benchmark.py --index 0
+PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py FastShare00.LocalWindowV2 --source-root milestones/28-unconditional-231-230/runtime/fast-rup/00/src
+```
+
+完整输入、源码、模块和日志 hash、公理及耗时记录在
+`data/fast-rup-case00-benchmark.json`。现有两个批次尚未切换；后续应在保留
+匹配检查点和精确核心对应关系的前提下采用这一加速结果，不重跑 SAT 搜索。
