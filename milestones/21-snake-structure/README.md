@@ -44,8 +44,8 @@ cells (A), only odd cells (B) or both (M) gives, in all 127 entries,
 - A and B are **induced 11-vertex paths of Q5** (the spines), with
   transition sequences 2,1,0,2,3,4,0,2,1,0 and 2,4,3,2,0,1,3,2,4,3;
 - **one single pair (A, B) up to Q5 symmetry** for all 127 entries
-  (`data/spine_classes.json`); a unique automorphism of Q5 swaps A and B
-  and none fixes both;
+  (`data/spine_classes.json`); exactly one automorphism of Q5 swaps A and B,
+  and only the identity fixes both;
 - every light transition happens at a vertex of M;
 - each strong cell contains 9-11 vertices of its own spine and 2-4 of M.
   Over the whole snake 142-146 of the 176 spine slots and 46-57 of the 160
@@ -65,24 +65,29 @@ The maximum induced linear forest inside A u M has 14 vertices
 under an involution, which is consistent with the symmetric-snake search
 of the other agent. That search is not duplicated here.
 
-**Q8 halves.** The least used light coordinate (1-4 uses) splits the snake
-into two Q8 halves of 96+96 (84 entries with 2 crossings) or 97+95 (25 entries
-with 1 crossing) vertices. Each half is itself a Q8 snake, or a union of a few
-paths, in the same palette. The record Q8 snake (Carlson-Hougen, 98 edges) is
-*not* of this kind: as Q5 x Q3 its profile is 14,14,13,13,12,12,12,9 with 17
-visits and pieces of at most 8 vertices, and its parity palette consists of
-linear forests (9 and 8 vertices) with |M| = 14. The Q9 records are therefore
-not glued from optimal Q8 pieces. Their halves are 2-3 vertices short of the
-Q8 optimum, and they reach only 12.0 vertices per Q5 cell against 12.4 in
-the Q8 record.
+**Q8 halves.** The least used light coordinate splits a family-A snake into
+two Q8 halves of 96+96 vertices (90 entries; the coordinate is used 2 or 4
+times) or 97+95 (37 entries; used once in 25 of them, three times in 12).
+With one crossing, each half is a single Q8 snake with 96 or 94 edges, inside
+the same palette. **No family-A half has more than 97 vertices**, and 97 is
+exactly the palette maximum in Q8 (H4 below). Family B splits as 94+94+4 along
+its lightest coordinate.
+
+The record Q8 snake (Carlson-Hougen, 98 edges) is *not* of this kind. As
+Q5 x Q3 its profile is 14,14,13,13,12,12,12,9, with 17 visits and pieces of at
+most 8 vertices, and its parity palette consists of linear forests with 9 and
+8 vertices and |M| = 14 (`data/pal_q8witness.json`). The Q9 records are
+therefore not glued from optimal Q8 pieces. Their halves are 2-3 vertices
+short of the Q8 optimum.
 
 **Other observations.** 12-vertex pieces are mostly subpaths of 14-coils of
 Q5 (426 of 436), but 13- and 14-vertex pieces mostly are not. Both spines lie
 in 14-coils. The endpoint distance is 3, 5 or 7. Repeated heavy coordinates
 are 3 to 14 positions apart, and only 12 normalised 6-windows of the
-transition sequence occur. The bank shows no recursive Abbott-Katchalski or
-Kautz pattern: the light walk is not a Gray code and the pieces are not
-copies of one Q5 snake.
+transition sequence occur. The bank shows no recursive pattern of the
+Abbott-Katchalski or Kautz type. Its 50 distinct quotient walks (up to Q4
+symmetry and reversal) revisit the weak cells instead of following a Gray
+code of Q4, and the pieces are not copies of one Q5 snake.
 
 ## 2. Hypotheses and tests
 
@@ -94,8 +99,10 @@ copies of one Q5 snake.
 | H3 | Removing the weak cells (Hamiltonian quotient walk, one piece per cell) | All 131 Hamiltonian paths of Q4 up to symmetry, bank palette, total >= 193 (`hamiltonian_walks.py`, `hamfree.c`) | Interior pieces >= 12: no Hamiltonian-quotient snake exists at all (exhaustive, 0.5 M nodes). Interior pieces >= 11: 131/131 UNSAT. Interior pieces >= 10: 131/131 UNSAT (<= 12 s) |
 | H3-Q8 | Same principle in Q8 = Q5 x Q3 | Hamiltonian quotient, bank palette, exhaustive (`hamfree.c`) | maximum 94 vertices (COMPLETE, 7.5 M nodes), against 99 for a(8) |
 | H4 | The palette itself is good in every dimension (palette tower Q5 x Qk) | Global SAT with only the palette restriction (`tower.py`) | Q6: max 26 vertices (opt. 27); Q7: max 49 (opt. 51); Q8: max 97 (98 UNSAT in 477 s; opt. 99); Q9: >= 192 (192 UNKNOWN in 150 s) |
-| H5 | Doubling: two palette Q8 halves joined across one crossing | Palette + light coordinate used exactly once (`doubling.py`) | DOUBLING_RESULT |
-| H6 | Family B (Q6 x Q3) is rigid in the same way | Own palette and walk, sizes >= bank - slack (`familyB_slack.py`) | FAMILYB_RESULT |
+| H5 | Doubling: two palette Q8 halves joined across one crossing | Palette + light coordinate used exactly once (`doubling.py`) | Not decided: control 192 UNKNOWN (300 s), 193 with both halves >= 96 UNKNOWN (600 s) |
+| H6 | Family B (Q6 x Q3) is rigid in the same way | Own palette and walk, sizes >= bank - slack, total >= 193 (`familyB_slack.py`) | Entries 127, 129: controls SAT (192, about 2 s); slack 0, 1, 2 UNSAT; entry 127 slack 4 UNSAT (6.9 s), slack 8 UNKNOWN |
+| H7 | Other spine pairs (A, sigma(A)), A an induced path, sigma an involution of Q5, are better | 20 random pairs with A of 11, 12 or 13 vertices, scored by the palette maxima in Q6 and Q7 (`palsearch.py`) | Q6 maxima 24-26, Q7 maxima at most 48. The bank pair (26, 49) beats all 20. The forest palette of the Q8 record reaches **27 in Q6, >= 51 in Q7 and 99 in Q8**: it is optimal at every level |
+| H8 | The palette of the Q8 record carries over to Q9 | Global SAT in that palette, Q5 x Q4, 376 free vertices | Target 160 already UNKNOWN (150 s): this needs a structured search, not plain SAT |
 
 All SAT answers were re-checked as snakes by an independent pairwise test.
 The searches used one core at `nice -n 19`; every run is listed in `data/`.
@@ -112,36 +119,45 @@ The searches used one core at `nice -n 19`; every run is listed in `data/`.
    piece must have 10 or more vertices (16 pieces averaging 12.06 are needed
    for 193). Pass-through cells are the price of turning between the strong
    cells while keeping adjacent M-contents disjoint.
-3. **The palette loses 1, 2 and 2 vertices in Q6, Q7 and Q8.** Under the
-   doubling bound (two Q8 halves), a single-crossing palette snake has at
-   most 97 + 97 = 194 vertices, that is 193 edges. The bank achieves
-   96 + 96 and 97 + 95.
+3. **The palette loses 1, 2 and 2 vertices in Q6, Q7 and Q8.** Each half
+   of a single-crossing palette snake is a palette Q8 snake. The other half
+   uses the swapped palette, and the swap is a symmetry. Such a snake
+   therefore has at most 97 + 97 = 194 vertices, that is 193 edges. The
+   bank reaches 97 + 95. Snakes with 2 or more crossings are not covered by
+   this bound.
 4. **Sanity checks.** The quotient model recovers the a(8) witness from its
-   walk. The bank palette does not reproduce a(6), a(7) or a(8): its tower
-   maxima are 25, 48 and 96 edges, against 26, 50 and 98. The records of
-   lower dimensions use a different palette, made of linear forests with a
-   larger M.
+   walk, but cannot prove the (true) impossibility of growing it. The bank
+   palette does not reproduce a(6), a(7) or a(8): its tower maxima are 25,
+   48 and 96 edges, against 26, 50 and 98. The forest palette of the Q8
+   record reproduces all three: it reaches 26, >= 50 and 98 edges.
+5. **Palette ranking.** Among symmetric spine-path palettes the bank pair is
+   the best one sampled, but every spine-path palette tried loses at least
+   2 vertices in Q7. The structurally different forest palette does not.
 
 ## 3. What this suggests about a(9)
 
-- The 191-edge snakes are a single structural class: one spine pair in
-  Q5 x Q4, 12 strong cells and 4 weak cells on two antipodal Q4 edges. They
-  are rigid within this class. The repeated recovery of bank entries by the
-  LNS of milestones 18-20 matches this observation.
-- In this palette, a longer snake needs Q8 halves at the palette Q8 maximum
-  (97 + 96 for 192 edges). The bank palette therefore leaves at most 1-2
-  vertices of room in the doubling regime. It is the wrong palette for a
-  large improvement.
-- **Most promising direction: change the palette, not the snake.** Choose
-  a pair (A, B) of disjoint spines (paths or linear forests, swapped by an
-  involution of Q5) by its tower values. Its palette Q7 and Q8 maxima
-  should be 51 and 99, as for the optimal lower-dimensional snakes. Then
-  search Q9 inside that palette with the fast monotone-size model of H2.
-  This model solves palette instances in seconds once a walk and a size
-  profile are given. The palette of the Q8 record (forests of 9 and 8
-  vertices, |M| = 14) is one candidate (`data/pal_q8witness.json`). A
-  larger M allows more transitions per cell, which removes the obstruction
-  behind the weak cells.
+- The 191-edge snakes form a single structural class: one spine pair in
+  Q5 x Q4, 12 strong cells and 4 weak cells on two antipodal Q4 edges, and
+  near-invariance under the swap of the spines. Within this class they are
+  rigid. This explains why the LNS of milestones 18-20 keeps recovering bank
+  entries: every local move stays in the same palette.
+- The bank palette caps the halves at 97 vertices. A single-crossing snake
+  in it has at most 193 edges, and it needs both halves at or near the
+  palette maximum. The bank palette therefore has at most 1-2 vertices of
+  room. a(9) = 196 or more would require a different palette, or
+  2 or more crossings with halves that are unions of paths.
+- **Most promising direction: change the palette, not the snake.** Rank
+  palettes (A, B, M) of Q5 by their tower maxima in Q6, Q7 and Q8. These
+  take seconds to minutes. Then search Q9 only inside palettes that are
+  optimal in lower dimensions. The forest palette of the Q8 record
+  (`data/pal_q8witness.json`: A and B are linear forests with 9 and 8
+  vertices, |M| = 14) is the first such palette found: it is optimal in Q6,
+  Q7 and Q8, whereas the bank palette is not. A larger M allows more light
+  transitions per cell, which weakens the obstruction behind the weak cells.
+  Plain global SAT cannot search Q9 in this palette (H8). The next step is
+  the walk-and-size model of H2/H3 with walks of the Q8-record type: about
+  17 visits per Q8 half, pieces of at most 8 vertices, and one weak cell per
+  half. In the bank palette that model settles instances in seconds.
 
 ## Files
 
@@ -158,8 +174,8 @@ The searches used one core at `nice -n 19`; every run is listed in `data/`.
   (Hamiltonian paths of Q_k up to symmetry): H3.
 - `scripts/freewalk.c`: branch and bound with revisits. Its bound is too weak:
   a Q8 run was truncated after 2.5e9 nodes. Not used for any claim.
-- `scripts/tower.py`, `scripts/doubling.py`: H4 and H5, built on the
-  milestone 20 `Model2`.
+- `scripts/tower.py`, `scripts/doubling.py`, `scripts/palsearch.py`: H4,
+  H5, H7 and H8, built on the milestone 20 `Model2`.
 - `data/*.jsonl`: one line per instance.
 
 Build the C programs with `gcc -O2 -o hamfree hamfree.c` in `scripts/`.
