@@ -105,6 +105,8 @@ def prepare(a):
     config=dict(source_commit=commit,lean_bin=str(lean_bin),mathlib=str(mathlib),lean_version=ver,
         mathlib_commit=PIN,mathlib_manifest_sha256=digest(mathlib/'lake-manifest.json'),tools=toolhashes,
         memory_mb=a.memory_mb or max(256,min(2048,int(psutil.virtual_memory().available/2**20*.6))),
+        enforce_memory_budget=not a.observe_memory_only,
+        memory_policy='observe_only' if a.observe_memory_only else 'enforced_budget',
         timeout_seconds=a.timeout,python=sys.executable,python_version=sys.version,
         solver_version=subprocess.check_output([str(lean_bin/'cadical.exe'),'--version'],text=True).strip(),
         worker_sha256=digest(__file__),replay_sha256=digest(HERE/'scripts/replay.py'))
@@ -113,7 +115,7 @@ def prepare(a):
         mods[m]['dependency_hashes']={d:mods[d]['closure_hash'] for d in mods[m]['imports'] if d in mods}
         mods[m]['closure_hash']=hashbytes(json.dumps([mods[m]['sha256'],mods[m]['dependency_hashes'],fingerprint],sort_keys=True).encode())
     cases=[json.loads(l) for l in (BUILD/'upstream/data/share/final_a_X20.jsonl').read_text().splitlines() if l]
-    frozen_files={str(p.relative_to(BUILD)):digest(p) for p in (BUILD/'upstream').rglob('*') if p.is_file()}
+    frozen_files={p.relative_to(BUILD).as_posix():digest(p) for p in (BUILD/'upstream').rglob('*') if p.is_file()}
     manifest=dict(created=now(),config=config,modules=mods,order=order,targets=targets,cases=cases,
         frozen_files=frozen_files,config_fingerprint=fingerprint,
         scope='Partial source rebuild and 34 independent local CNF/RUP replays; not unconditional 231')
@@ -161,7 +163,8 @@ def item(a):
         solver_version=config['solver_version'],command=command,solver_seconds=receipt['elapsed_seconds'],
         replay_seconds=time.monotonic()-solved,clause_families=clause_kinds,
         model_code_sha256={n:digest(BUILD/'upstream/scripts'/n) for n in ['share_enc.py','wincert.py']},
-        limit_seconds=config['timeout_seconds'],memory_budget_mb=config['memory_mb'])
+        limit_seconds=config['timeout_seconds'],memory_budget_mb=config['memory_mb'] if config.get('enforce_memory_budget',True) else None,
+        memory_policy=config.get('memory_policy','enforced_budget'))
     atomic(run/'result.json',replay)
     print(json.dumps(replay))
 
@@ -198,13 +201,16 @@ def supervise(command,log,config,state):
                 except psutil.NoSuchProcess:rss=0
                 mem=psutil.virtual_memory()
                 state['resources']=dict(rss_mb=round(rss/2**20,1),peak_rss_mb=round(peak/2**20,1),
-                    available_mb=round(mem.available/2**20,1),budget_mb=config['memory_mb'],cpu_percent=psutil.cpu_percent())
+                    available_mb=round(mem.available/2**20,1),
+                    budget_mb=config['memory_mb'] if config.get('enforce_memory_budget',True) else None,
+                    memory_policy=config.get('memory_policy','enforced_budget'),cpu_percent=psutil.cpu_percent())
                 state['heartbeat']=now()
                 state['solver_receipts']=len(list((BUILD/'cases').glob('*/solved.json')))
                 state['phase_detail']=read(RUNTIME/'item-progress.json') if (RUNTIME/'item-progress.json').exists() else None
                 atomic(RUNTIME/'state.json',state)
-                if rss>config['memory_mb']*2**20:raise RuntimeError('Resource budget exceeded; split or refactor before resuming')
-                if mem.available<128*2**20:raise RuntimeError('System available memory below 128 MiB')
+                if config.get('enforce_memory_budget',True):
+                    if rss>config['memory_mb']*2**20:raise RuntimeError('Resource budget exceeded; split or refactor before resuming')
+                    if mem.available<128*2**20:raise RuntimeError('System available memory below 128 MiB')
                 if time.monotonic()-start>config['timeout_seconds']:raise RuntimeError('Item timeout: unresolved, not UNSAT')
                 time.sleep(1)
             if p.returncode:raise RuntimeError(f'Command exit {p.returncode}; see {log}')
@@ -235,7 +241,8 @@ def validate(manifest):
 
 def run(a):
     held=lock();manifest=read(RUNTIME/'manifest.json');validate(manifest);c=manifest['config']
-    state=read(RUNTIME/'state.json');state.update(status='running',pid=os.getpid(),started=now(),
+    state=read(RUNTIME/'state.json');state.pop('failure',None)
+    state.update(status='running',pid=os.getpid(),started=now(),
         target='231: six-centre local prerequisites',global_231='UNRESOLVED',global_230='UNRESOLVED',
         semantic_obligations=['Full parallel-share CNF assignment and counter semantics',
             '34 Lean-checked share refutations with arbitrary-snake normalization',
@@ -302,6 +309,7 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser();sub=ap.add_subparsers(dest='action',required=True)
     p=sub.add_parser('prepare');p.add_argument('--lean-bin',required=True);p.add_argument('--mathlib',required=True)
     p.add_argument('--memory-mb',type=int,default=0);p.add_argument('--timeout',type=int,default=900)
+    p.add_argument('--observe-memory-only',action='store_true',help='Record memory usage without a supervisor memory cutoff')
     p=sub.add_parser('run');p.add_argument('--phase',choices=['all','lean','certificates'],default='all')
     p=sub.add_parser('item');p.add_argument('--index',type=int,required=True)
     p=sub.add_parser('serve');p.add_argument('--port',type=int,default=8796)

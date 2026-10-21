@@ -68,7 +68,7 @@ packing 则仍缺全序列下界，而且保存的缓存确实容许反例。因
 ```text
 PYTHON milestones/28-unconditional-231-230/scripts/audit.py
 PYTHON -m pip install --target milestones/28-unconditional-231-230/runtime/packages python-sat==1.9.dev17 psutil==7.2.2
-PYTHON milestones/28-unconditional-231-230/scripts/runner.py prepare --lean-bin PATH_TO_LEAN_4_19_BIN --mathlib PATH_TO_PINNED_MATHLIB
+PYTHON milestones/28-unconditional-231-230/scripts/runner.py prepare --lean-bin PATH_TO_LEAN_4_19_BIN --mathlib PATH_TO_PINNED_MATHLIB --observe-memory-only
 PYTHON milestones/28-unconditional-231-230/scripts/runner.py run
 PYTHON milestones/28-unconditional-231-230/scripts/runner.py serve --port 8796
 ```
@@ -76,8 +76,10 @@ PYTHON milestones/28-unconditional-231-230/scripts/runner.py serve --port 8796
 `prepare` 要求先提交源码；固定提交保存在 `runtime/manifest.json`，只从该提交
 导出自定义 Lean 依赖，不复用自定义 `.olean`。mathlib 固定为
 `c44e0c8ee63ca166450922a373c7409c5d26b00b`，工具链为 Lean 4.19.0。
-`--memory-mb`、`--timeout` 可在准备时指定；默认内存取当时可用内存的 60%，
-最多 2048 MiB，一次只运行一个任务。失败必须分析或拆分，不能换用不可信计算。
+`--timeout` 可在准备时指定。按用户后续明确要求，本轮采用 `--observe-memory-only`：
+记录内存用量和峰值，不因预设内存预算或可用内存阈值中止任务。一次只运行一个任务。
+省略此选项时仍可使用原来的 `--memory-mb` 预算模式。实际失败须按编译器或
+求解器错误处理，不能换用不可信计算。
 
 runner 首先重建本轮辅助组件和两类 share 的已有全局计数组件，再对 34 个
 六中心 share 模型逐例核对原始 SHA256、生成 LRAT、独立执行正提示 RUP 重放。
@@ -104,6 +106,8 @@ runner 首先重建本轮辅助组件和两类 share 的已有全局计数组件
 按当时可用内存自动计算的 640 MiB 预算，runner 终止了自己的编译进程。
 失败及产物保存在本机 `runtime/attempt-1/` 和 `build/frozen-attempt-1/`。
 这不是 Lean 逻辑失败，也不是任何上界的反例；完整组件构建仍未通过。
-在拆分该编译依赖之前，使用 `runner.py run --phase certificates` 继续独立的
-34 模型生成与重放；面板的 Lean 组件计数不会冒充已完成。这次阶段拆分
-不增加内存预算，也不复用自定义编译产物。
+随后独立证书阶段完成了两个模型的求解及 RUP 重放，第三项因 Windows 文件
+共享冲突中断；控制器已增加原子重命名重试。用户随后明确要求不因内存预算
+停止，因此恢复 `runner.py run --phase all`，取消内存中止，仅保留用量观测。
+迁移前核对所有冻结源码和编码输入与新提交完全一致，控制器版本与原始输入
+提交分别记录。已完成的证书仅在产物 hash 一致时续用；自定义 Lean 组件重新编译。
