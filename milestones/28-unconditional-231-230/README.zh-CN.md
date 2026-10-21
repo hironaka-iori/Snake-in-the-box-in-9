@@ -170,9 +170,10 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py ParallelShare
 `data/parallel-share-bridge-development.json`。复用第一阶段产物前，构建器验证其
 工具链、原始闭包记录、当前源码和每个自定义依赖均匹配，并避免旧开发产物遮蔽匹配文件。
 
-**仍缺完整 CNF 的几何满足赋值与逐子句识别**：上述组件尚未把 Boolean
-`original_unsat` 接成 `RefutedParallel`。34 个内核反证、15,959 个计数窗口
-反证、覆盖与最终聚合也仍须完成；无条件 231/230 仍未解决。
+上述组件阶段尚未把 Boolean `original_unsat` 接成 `RefutedParallel`。
+下文的首个完整证书现已接通 case 01，其余形状仍须完成实例检查。
+34 个内核反证、15,959 个计数窗口反证、覆盖与最终聚合也仍须完成；
+无条件 231/230 仍未解决。
 
 ## 实际门电路子句的首个适用性检查
 
@@ -198,3 +199,31 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py LocalWindowSa
 
 这仍是六条门电路子句的适用性结论。后续须让同一变量赋值同时满足窗口/度数、
 总计数器及溢出子句，才能将完整 Boolean 反证转换为 `RefutedParallel`。
+
+## 首个完整几何证书：case 01
+
+`ParallelShareBlocks.lean` 将计数位解释为实际几何 share 项之和的阈值；
+子序列检查保留重数，保证任意所选项片段的总和不超过完整窗口 share。
+`ParallelShareClauses.lean` 检查门电路、计数器合并和溢出子句；
+`ParallelShareCertificate.lean` 与原有窗口/端点计数器检查器使用同一赋值，
+证明 `sound` 和 `refuted_of_check`，不添加任何新的蛇几何假设。
+
+完整实例 `LocalWindowSat/ParallelShare01.lean` 已通过 Lean：81 条核心子句
+包括 8 个窗口单元、6 个度数限制、6 个空方块/gate 子句、60 个总计数器
+子句和 1 个溢出单元。它核对 1073 个真实 share 项的子序列数据，并将
+Boolean 反证接成 `Snake9.LocalWindow.ParallelShare01Certificate.refuted`。
+
+`Snake9.LocalWindow.ParallelShare01Window.share_ge_21` 进一步给出：任意真实
+`Snake m` 中，只要七个方向在一个单射坐标重标记下为 `[0,1,2,0,3,1,4]`，
+该窗口六个内部中心的平行 share 总和至少为 21。该定理没有 certificate
+假设；适用范围仍是这一个方向形状。公理只有允许的三项。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/generate_parallel_pilot.py
+PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py LocalWindowSat.ParallelShare01Window
+PYTHON milestones/28-unconditional-231-230/scripts/fresh_lean.py LocalWindowSat.ParallelShare01Window --commit COMMITTED_SOURCE
+```
+
+新鲜构建从指定 Git 提交导出全部自定义依赖，在独立目录中逐个编译；其
+`LEAN_PATH` 不包含旧自定义产物目录。完成证据将单独冻结，不以增量检查
+替代。**33 个其余 share 形状及完整计数窗口链尚未接通，全局 231/230 未解决。**

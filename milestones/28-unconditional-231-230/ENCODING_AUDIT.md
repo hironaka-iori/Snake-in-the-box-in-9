@@ -1,14 +1,15 @@
 # Six-centre parallel-share model: semantic audit
 
-This is a source-level mathematical audit of the frozen `wincert.py` and
-`share_enc.py`, not a completed Lean applicability theorem. Their exact hashes
+This audits the frozen `wincert.py` and `share_enc.py`. Generic clause soundness
+and the full applicability theorem for case 01 are now checked in Lean; the
+other 33 concrete share instances remain to be checked. Their exact hashes
 are in `data/provenance.json`. Radius is three, six internal centres, cap 20,
 `counter='stot'`, `exact=True`, alpha bounds `(0,21)`, endpoint budget two.
 This is different from the radius-four corner-share model.
 
 | Clause family / variable | Necessary assignment and reason | Formal status here |
 |---|---|---|
-| Selected vertex `X[v]`, window units | Membership in the translated/permuted snake; every window vertex selected | Existing general local-window framework available; new encoder not connected |
+| Selected vertex `X[v]`, window units | Membership in the translated/permuted snake; every window vertex selected | Existing local-window checker is integrated under the same assignment; case 01 passed |
 | `degree<=2` | An induced path has at most two selected neighbors at any selected vertex | Valid also at boundary, since omitting external neighbors only reduces degree |
 | Interior `degree>=1` | Used only where all nine neighbors are in the ball; a nontrivial snake has no isolated selected vertex | Window contains eight vertices, so short-path exception does not arise in this local contradiction |
 | Endpoint variable, `end_selected`, `degree1->end`, `end->degree<=1` | True exactly at selected vertices of global degree one; imposed only when full neighborhood is present | At most the two true path endpoints; no boundary endpoint is falsely charged |
@@ -19,8 +20,8 @@ This is different from the radius-four corner-share model.
 | `g1`, `g3` | With the centre selected, let `n` count the other three parallel-square corners. Set `g1=E∧(n≤1)`, `g3=E∧(n=0)` | Unfixed/fixed gate lemmas and formula identification compiled. Four exact `g1` core clauses passed `checkClauses_sound`; the pilot core has no `g3` clauses |
 | Share unary leaves | `[E,E,g1,g3,g3,g3]` has weight 6, 3, or 2 for parallel-square selected count 1, 2, or 3 | `Snake9.LocalWindow.Axioms.parallel_unary_weight` compiled: count four is excluded from path acyclicity. Mapping concrete CNF leaf variables to these semantic bits remains |
 | Omitted terms / fixed bits | An empty square meeting the fixed window has share zero. Fixed parallel-square corners make indicated gate bits zero | Fixed-count Boolean cases compiled; identification with concrete geometric terms remains |
-| Totalizer tree, sequential centre merge | Output t is the semantic threshold on the exact sum of descendant leaf weights, clipped at cap+1 | `ParallelShareCounter.Circuit.satisfies` proves all merges and list indices in the abstract circuit; exact identification with emitted clauses remains |
-| Overflow and truncated accumulator | Whole sum ≤ cap implies every prefix sum ≤ cap because all weights are nonnegative; discarded overflow threshold is false | `ParallelShareCounter.sequential_counter_sound` includes every intermediate overflow unit and trimmed accumulator; connect actual encoder trace next |
+| Totalizer tree, sequential centre merge | Output t is a threshold of the sum of actual geometric terms in its recorded block | `ParallelShareClauses.mergeCheck_sound` checks concrete input/output meanings and disjoint blocks. All 60 such clauses in case 01 passed |
+| Overflow and truncated accumulator | Whole sum ≤ cap bounds every recorded term block because the term list is a sublist of all window terms | `ParallelShareBlocks.blockMass_cap` and `ParallelShareClauses.boundCheck_sound` prove this for arbitrary checked blocks; case 01's overflow unit passed |
 
 The path directions omitted from the share sum have a selected neighbor in the
 corresponding square, hence zero contribution. For all remaining terms the three
@@ -37,8 +38,11 @@ not obtained merely from the existing Boolean UNSAT theorem.
 `Snake9`) identify the global and local parallel-share quantities exactly,
 including at endpoints. These new proofs reuse generic cube-frame lemmas from
 the corner-share development, not its different share identification.
-The next formal step is an explicit satisfying-assignment construction for this
-entire CNF, followed by exact model identification and all 34 shape refutations.
+`ParallelShareCertificate.sound` now constructs one assignment for all accepted
+clause families. `LocalWindowSat.ParallelShare01` checks all 81 exact core clauses,
+the variable meanings and the term sublist, then combines them with the existing
+kernel refutation. This proves `RefutedParallel` for case 01. Exact instance
+identification and the refutations for the remaining shapes still have to finish.
 
 The new bridge/geometry/identification modules passed a hash-checked incremental
 development build, with only the three allowed axioms in all printed audits.
@@ -48,8 +52,8 @@ The six gate clauses of the committed `ParallelShare01` core now have a kernel
 applicability proof, under only the displayed window-selection premise and the
 explicit meanings of the compact variables. The source references the committed
 core data directly. A deliberately corrupted first clause is kernel-checked to
-be rejected. This does not yet provide a single satisfying assignment for all
-81 core clauses; base, totalizer and overflow integration remains.
+be rejected. The later full pilot extends this to all 81 core clauses under one
+assignment, without relying on this earlier six-clause test as a substitute.
 
 The local executable replay rejects RAT/negative hints rather than trusting them.
 It has positive controls and corrupt-proof rejection controls. It remains
