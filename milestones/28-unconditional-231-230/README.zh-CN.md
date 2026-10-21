@@ -300,9 +300,13 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py LocalWindowSa
 中的条件式 231 主文件仍与该冻结版本相同；新 230 结果仍有局部前提。
 
 `ParallelShareAggregate231.lean` 把执行用的窗口 share 之和接到该聚合定理
-实际使用的 `windowShare`。本次新增聚合闭包和适配模块尚待本机编译，
-不能由源码齐全推断检查通过。它们仍保留 34 个 share 反证和 15,959 个
-计数窗口对应的未完成前提。
+实际使用的 `windowShare`。219 个依赖模块已在冻结提交 `97db4f74` 的
+独立目录从源码构建。最后的适配模块因一个多余的证明命令报错；提交
+`27bb46d0` 删除该命令后，逐项核对 219 个依赖在新提交的源码、依赖和
+产物 hash 均不变，再单独编译修复末项，公理审计通过。记录在
+`data/aggregate-231-repaired-build.json`。这是独立构建基础上的末项修复
+复检，不是新提交全闭包的再次新鲜构建；最终无条件定理仍须完整新鲜构建。
+该链仍保留 34 个 share 反证和 15,959 个计数窗口对应的未完成前提。
 
 ## 同一证书的 FastRup 本机比较
 
