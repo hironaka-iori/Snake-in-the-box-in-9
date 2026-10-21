@@ -62,6 +62,19 @@ axioms. This independently validates one shape, not the whole 34-shape family or
 the unconditional global bound. The complete receipt is
 `data/parallel-share-full-pilot-fresh.json`.
 
+The generalized `generate_parallel_cases.py` keeps every compact core variable
+unchanged and allocates additional IDs for counter inputs omitted from the core.
+This preserves the complete endpoint prefix-counter semantics in the same
+assignment. All used clauses are traced to the full hash-matched encoder;
+saved cycle cuts use the existing arbitrary-cycle tag. A binary meaning tree
+and the proved `checkRaw_flatMap` combine 128-clause shards without changing
+their assignment. The generated `exact_raw` theorem checks the concatenation
+against the original compact CNF in Lean. The generalized case 01 has passed;
+case 00 has passed its data checks and representative clause shards, with the
+full run pending. `runtime/applicability/state.json` records the frozen batch.
+Its `refuted_of_unsat` theorem is deliberately a conditional interface: completed
+applicability cases must still be joined to the matching Boolean refutations.
+
 The local executable replay rejects RAT/negative hints rather than trusting them.
 It has positive controls and corrupt-proof rejection controls. It remains
 executable evidence until its input refutations are replayed by Lean's proved

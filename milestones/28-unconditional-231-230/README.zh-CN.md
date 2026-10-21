@@ -231,3 +231,33 @@ PYTHON milestones/28-unconditional-231-230/scripts/fresh_lean.py LocalWindowSat.
 完整源码/依赖/产物/日志 hash、编译命令、工具链与公理审计保存在
 `data/parallel-share-full-pilot-fresh.json`。
 **33 个其余 share 形状及完整计数窗口链尚未接通，全局 231/230 未解决。**
+
+## 全部 34 个精确核心的适用性批次
+
+`generate_parallel_cases.py` 将通用检查器应用到 Boolean 批次实际保留的核心。
+它重新核对完整原始 CNF、核心子句索引和变量映射；为未进入核心但被端点
+计数器使用的输入分配额外变量，保持原核心的所有变量编号不变。保存的
+任意长度 cycle cut 使用原有无环性检查器。新增 `ParallelShareCertificateBatch`
+证明逐片检查可以拼成同一赋值下的完整子句检查；每片默认含 128 条子句。
+
+新版 case 01 的完整适用性实例已通过开发构建。case 00 含 10,988 条核心
+子句、1,054 个真实 share 项、86 个检查片；数据、首尾检查片以及部分中间
+检查片已通过开发构建。其完整批次结果以检查点为准，尚未宣告全部通过。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/applicability_batch.py prepare
+PYTHON milestones/28-unconditional-231-230/scripts/applicability_batch.py run
+PYTHON milestones/28-unconditional-231-230/scripts/applicability_batch.py serve --port 8797
+```
+
+批次冻结当前 Git 提交的通用自定义依赖及控制脚本，使用独立的自定义产物
+目录；每个模块记录源码、依赖、产物和日志 hash，并审计最终 `sat` 和
+`refuted_of_unsat`。状态、活动进程、生成输入和日志分别保存在
+`runtime/applicability/state.json`、`live.json`、`cases/` 和 `logs/`。
+后续核心尚未由 Boolean 批次导出时，状态为 `waiting_for_core`，不重复求解。
+内存仅观测，单模块时间上限为 1800 秒；失败或超时均为未完成。
+
+该批次证明任意满足指定局部几何条件的蛇产生一个满足核心的赋值。
+`refuted_of_unsat` 仍是带不可满足性前提的接口，须另接匹配的 Boolean
+反证及任意窗口桥接；不能将两个批次的完成数直接称为最终定理的完成数。
+case 01 既有的完整局部定理与 29 模块新鲜构建继续有效。

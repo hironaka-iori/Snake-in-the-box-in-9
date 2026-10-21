@@ -86,4 +86,5 @@ def main(targets):
     runner.atomic(receipt,state)
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('targets',nargs='+');a=ap.parse_args();main(a.targets)
+    ap=argparse.ArgumentParser();ap.add_argument('targets',nargs='+');ap.add_argument('--source-root',action='append',default=[])
+    a=ap.parse_args();SEARCH.extend(a.source_root);main(a.targets)
