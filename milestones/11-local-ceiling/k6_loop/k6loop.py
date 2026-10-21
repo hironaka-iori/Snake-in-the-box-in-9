@@ -235,8 +235,8 @@ def run_A(hours, tl):
 # ------------------------------------------------------------------ variant B
 def share_oracle():
     import refine_share as rs
-    rs.ORACLE = OSHARE
-    O = rs.ShareOracle()                       # share_oracle.jsonl + E1 seeds
+    O = rs.ShareOracle()                       # ../s0_share_loop/share_oracle.jsonl + E1 seeds
+    rs.ORACLE = OSHARE                         # new calls are written here
     for p in (os.path.join(HERE, '..', 's0_k6_ceiling', 'oracle5_extra.jsonl'), OSHARE):
         if os.path.exists(p):
             for l in open(p):

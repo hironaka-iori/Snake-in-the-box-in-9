@@ -18,6 +18,16 @@ import k6loop as K
 from refine import howard
 
 
+def lean_bound(lam, unit, bits):
+    """Plain variant only (unit 1): the gen_lean_chain5 arithmetic, (P + 35 Q) m <= 9171 Q + C with
+    C = (2^bits - 1) + 7 P - 6 Q.  For k = 6 the leading-step constant may differ slightly (not derived)."""
+    if unit != 1:
+        return None
+    P, Q = lam.numerator, lam.denominator
+    C = (1 << bits) - 1 + 7 * P - 6 * Q
+    return (9171 * Q + C) // (P + 35 * Q)
+
+
 def potential(n, U, V, w):
     pi = np.zeros(n, np.int64)
     for it in range(20000):
@@ -30,7 +40,7 @@ def potential(n, U, V, w):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('variant'); ap.add_argument('--target', type=int)
+    ap = argparse.ArgumentParser(); ap.add_argument('variant'); ap.add_argument('--target', type=int); ap.add_argument('--bits', type=int, default=8)
     a = ap.parse_args()
     G = K.build(); P = K.Plain()
     unit = 1 if a.variant == 'A' else K.UNIT
@@ -63,10 +73,17 @@ def main():
     lam = Fr(int(W[idx][cyc].sum()), len(cyc))
     lam0 = lam
     if a.target:
-        # lower lambda to the smallest p/q (q <= 30 edges) that still gives m <= target
-        need = (Fr(9171, a.target + 1) - 35) * unit
-        cands = [Fr(int(need * q) + 1, q) for q in range(1, 31)]
-        cands = [c for c in cands if c <= lam]
+        # lower lambda to the smallest p/q (q <= 40) whose Lean arithmetic still gives the target:
+        # (P + 35 Q unit) m <= 9171 Q unit + C,  C = (2^B - 1) + 7 P - 6 Q unit  (as gen_lean_chain5; B = 7 assumed)
+        cands = []
+        for q in range(1, 41):
+            for p in range(int(lam * q), int(Fr(7, 2) * unit * q), -1):
+                f = Fr(p, q)
+                C = (1 << a.bits) - 1 + 7 * p - 6 * q
+                if unit == 1 and (9171 * q + C) // (p + 35 * q) <= a.target:
+                    cands.append(f)
+                else:
+                    break
         if cands:
             lam = min(cands)
     p, q = lam.numerator, lam.denominator
@@ -114,7 +131,9 @@ def main():
     for k in kept:
         s = P.src.get(k, '?'); src[s] = src.get(s, 0) + 1
     states = len(np.unique(np.concatenate([G['U'][idx], G['V'][idx]])))
-    out = dict(variant=a.variant, min_mean=str(lam0), lam_used=str(lam), mu_used=float(lam) / unit,
+    bits = max(1, int(pi.max() - pi.min()).bit_length())
+    Pq = (p, q)
+    out = dict(lean_bound=(9171 * q + (1 << bits) - 1 + 7 * p - 6 * q) // (p + 35 * q) if unit == 1 else None, P=p, Q=q, pot_bits=bits, variant=a.variant, min_mean=str(lam0), lam_used=str(lam), mu_used=float(lam) / unit,
                mean_after=str(lam2), m_le=K.bound_m(float(lam2) / unit), kept=len(kept), kept_by_centres=by_k,
                kept_by_source=src, potential_range=int(pi.max() - pi.min()), live_states=int(states),
                live_edges=int(len(idx)), graph_nodes=G['n6'], graph_edges=int(len(G['U'])))
