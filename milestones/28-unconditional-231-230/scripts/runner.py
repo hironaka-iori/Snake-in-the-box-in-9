@@ -236,7 +236,8 @@ def run(a):
         totals=dict(lean_modules=len(manifest['order']),solver_cases=34,independent_replays=34),
         manifest=str(RUNTIME/'manifest.json'),checkpoint=str(RUNTIME/'state.json'))
     try:
-        for m in manifest['order']:
+        state['requested_phase']=a.phase
+        for m in (manifest['order'] if a.phase != 'certificates' else []):
             key='lean:'+m;d=manifest['modules'][m];src=BUILD/'src'/(m.replace('.','/')+'.lean');out=src.with_suffix('.olean')
             cached=state['completed'].get(key)
             if cached and cached.get('closure_hash')==d['closure_hash'] and out.exists() and digest(out)==cached.get('artifact_sha256'):
@@ -250,7 +251,7 @@ def run(a):
                 artifact_sha256=digest(out),axiom_audits=audits,completed=now())
             state['completed'][key]=result;state['last_progress']=now();atomic(RUNTIME/'state.json',state)
         # Deliberately replays only the already-finished share batch, not the active seven-centre count batch.
-        for i,rec in enumerate(manifest['cases']):
+        for i,rec in (enumerate(manifest['cases']) if a.phase != 'lean' else []):
             key=f'share:{i:02d}';path=BUILD/'cases'/f'{i:02d}';cached=state['completed'].get(key)
             if cached and (path/'result.json').exists() and digest(path/'result.json')==cached.get('result_sha256') and all(
                 (path/f).exists() and digest(path/f)==cached.get(f+'_sha256') for f in ['model.cnf','proof.lrat']):continue
@@ -262,7 +263,7 @@ def run(a):
             state['completed'][key]=result;state['last_progress']=now();atomic(RUNTIME/'state.json',state)
         validate(manifest)
         state.update(status='partial_batch_complete',phase='Mathematical integration still required',current_item=None,child_pid=None,
-                     last_progress=now(),completion_scope=manifest['scope'])
+                     last_progress=now(),completion_scope=manifest['scope'],completed_phase=a.phase)
     except BaseException as ex:
         state.update(status='action_required',failure=str(ex),child_pid=None)
         state['failures'].append(dict(time=now(),item=state.get('current_item'),error=str(ex)))
@@ -293,6 +294,7 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser();sub=ap.add_subparsers(dest='action',required=True)
     p=sub.add_parser('prepare');p.add_argument('--lean-bin',required=True);p.add_argument('--mathlib',required=True)
     p.add_argument('--memory-mb',type=int,default=0);p.add_argument('--timeout',type=int,default=900)
-    sub.add_parser('run');p=sub.add_parser('item');p.add_argument('--index',type=int,required=True)
+    p=sub.add_parser('run');p.add_argument('--phase',choices=['all','lean','certificates'],default='all')
+    p=sub.add_parser('item');p.add_argument('--index',type=int,required=True)
     p=sub.add_parser('serve');p.add_argument('--port',type=int,default=8796)
     a=ap.parse_args();globals()[a.action](a)
