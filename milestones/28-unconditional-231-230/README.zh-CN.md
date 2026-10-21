@@ -455,3 +455,36 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_from_fresh.py CountWi
 开发闭包在 `data/count-triples-table-development.json`。本次三中心表模块
 约 10.42 秒通过，属于复用已验证依赖的开发构建，不是最终全新鲜验证。
 三份最短两中心反证现已通过，第四份仍在运行。
+
+## 四至六中心覆盖的冻结检查批次
+
+`CountWindowTablePrefix231.no_window` 已通过 Lean 和允许公理审计：任意
+正计数序列都由其前两个符号及剩余后缀覆盖。183 个自定义依赖的源码、
+依赖及产物 hash 已复核，记录在 `data/count-prefix-bridge-development.json`。
+这证明了分片方法的完整性，尚未替代具体表检查或局部反证。
+
+`prepare_count_higher_tables.py` 从同一冻结源集导出四中心 567 个键、
+五中心 9,323 个键、六中心 5,974 个键。五、六中心各有 64 个前缀分片；
+它们合起来覆盖全部正符号组合及有效方向形状。输入、原始索引和 134 个
+生成文件 hash 在 `data/count-higher-table-input.json`。这些具体检查正在
+运行，文件中写出的定理不能提前计为已核验结果。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/prepare_count_higher_tables.py
+PYTHON milestones/28-unconditional-231-230/scripts/count_table_batch.py prepare
+PYTHON milestones/28-unconditional-231-230/scripts/count_table_batch.py run
+```
+
+批次冻结提交 `e5e98a61f6a2088a4e9f403e9369803580f3c389`，清单、状态和
+日志位于 `runtime/count-tables/`。317 个自定义模块中，184 个匹配既有
+核验闭包并复用，其他模块逐项运行、保存日志并检查目标公理。它先检查
+五、六中心；对独立运行中的四中心开发检查，只有源码、依赖及产物 hash
+匹配时才复用，仍在运行时等待实际进程，不重复计算。内存仅观察；模块
+真实超时仍作为未完成处理。看板已分别显示表覆盖与局部反证进度。
+
+适用性 case 00 的全部分片通过后，完整列表核对遇到内核求值错误。
+冻结相同源码与依赖，只增加 `--tstack=65536` 后，最终 `sat` 和
+`refuted_of_unsat` 约 12.19 秒通过，公理审计合格。失败日志已存档，
+逐项相等性证据在 `data/applicability-case00-stack-repair.json`。目前
+适用性已完成 00、01 两个形状，新的冻结提交为
+`c5edbd7c802c6592829ce4a036343693d7125fd0`。

@@ -110,3 +110,15 @@ keys from the frozen source set, and `hw3_of_triples` has the original aggregate
 premise's functions and indices. All printed axioms are allowed. These results
 are conditional on the concrete interval refutations, whose completion must be
 audited separately.
+
+`CountWindowTablePrefix231.no_window` proves that splitting by the first two
+positive symbols loses no sequence: the checked prefix and suffix concatenate
+to the original symbol list. The larger tables have all 64 prefixes for each
+of the five- and six-centre lengths. Their frozen concrete checks are pending;
+the compiled generic bridge alone is not evidence that those checks succeed.
+
+Applicability case 00's final source and all direct dependency closure hashes
+were identical before and after adding a 64 MiB Lean thread stack. The repaired
+final module passed, and both exported targets have only allowed axioms. The
+archived failure, successful command and exact comparison are recorded in
+`data/applicability-case00-stack-repair.json`; no failed audit was accepted.
