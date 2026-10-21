@@ -15,8 +15,18 @@ The oracle is wincert.Encoding at the chosen radius; answers are cached in
 data/oracle_cache*.jsonl exactly as refine.py does.
 
   python refine_fast.py --L 7 --k 6 --K 5 --radius 3
+
+Share-weighted refinement (--lean only; share_lb.py): --share-lb gives every edge the weight
+den * symbol + LB units of the k-centre window ending at its new vertex (den = 21 k, uint16 W); --lb-file
+seeds the LB table, --lb-refine asks the CP-SAT share oracle (share_lb.LBOracle, cached in --lb-cache) for
+the k-windows of the minimum cycle (and of the extra cycles with --lb-extra) each round, re-weights those
+edges (in place with --incremental) and goes on while any exclusion or LB changed.  Means are printed in
+weight units and in alpha units (/ den).
 """
-import argparse, itertools, json, os, time
+import argparse, itertools, json, os, sys, time
+SCRIPTS = '/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts'
+if SCRIPTS not in sys.path:
+    sys.path.append(SCRIPTS)
 from fractions import Fraction as Fr
 import numpy as np
 from refine import Oracle, canon, induced, key, DATA
@@ -208,7 +218,9 @@ def bellman_ford(n, U, V, W, p, q, max_iter=100000):
 
 
 def vertex_bound(A, U, V, W, vmax=260):
-    """Largest v with a walk realising T <= 9214 - 35 v (same accounting as direction_bound.bound)."""
+    """Largest v with a walk realising T <= 9214 - 35 v (same accounting as direction_bound.bound).
+    Share-weighted edges (A.den > 1 or LB): den (8 + pre + init) + sum w' <= den (9214 - 35 v)."""
+    den = getattr(A, 'den', 1)
     t0 = A.L - 1
     pre = t0 - (A.k - 1)
     order = np.argsort(V, kind='stable')
@@ -219,7 +231,7 @@ def vertex_bound(A, U, V, W, vmax=260):
     init = np.full(A.n, np.inf)
     digs = np.array([[(t // A.ns ** j) % A.ns + 1 for j in range(A.k - 1)] for t in range(A.m1)]).sum(1)
     for i in range(len(A.shapes)):
-        init[i * A.m1:(i + 1) * A.m1] = digs
+        init[i * A.m1:(i + 1) * A.m1] = den * digs
     dp = init.copy(); best = None; steps = 0
     for v in range(t0 + 2, vmax + 1):
         n = v - 2
@@ -228,10 +240,15 @@ def vertex_bound(A, U, V, W, vmax=260):
             new = np.full(A.n, np.inf)
             new[has] = np.minimum.reduceat(cand, seg)
             dp = new; steps += 1
-        T = 8 + pre + dp.min()
-        if T <= 9214 - 35 * v:
+        T = den * (8 + pre) + dp.min()
+        if T <= den * (9214 - 35 * v):
             best = v
     return best
+
+
+def edge_sym(A, V, W, e):
+    """New symbol of edge e: the target's low count digit for LeanAutomaton (W may be weighted)."""
+    return int(A.sym(V[e])) if hasattr(A, 'sym') else int(W[e])
 
 
 def greedy_break(oracle, cyc_wins, workers, timeout, chunk=None, long_timeout=None, long_max=None):
@@ -336,7 +353,23 @@ def main():
                          'Howard reduced cost <= --rc-R (doubling up to 4 when exhausted), not on the whole graph '
                          '(fastround.rc_cycles); same --batch / --slack / --cycle-budget')
     ap.add_argument('--rc-R', type=float, default=0.5, help='initial reduced-cost bound for --rc-cycles')
+    ap.add_argument('--share-lb', action='store_true',
+                    help='with --lean: edge weight den * symbol + share LB of the k-window ending at the new vertex')
+    ap.add_argument('--den', type=int, default=None, help='weight denominator (default 21 k); --slack and --rc-R '
+                    'stay in alpha units (scaled by den)')
+    ap.add_argument('--lb-file', help='initial share LB table (jsonl {dirs, alpha, lb}); implies --share-lb')
+    ap.add_argument('--lb-refine', action='store_true', help='ask the CP-SAT share oracle for the k-windows of the '
+                    'minimum cycle each round (implies --share-lb)')
+    ap.add_argument('--lb-extra', action='store_true', help='with --lb-refine: also the k-windows of the extra cycles')
+    ap.add_argument('--lb-timeout', type=float, default=30.0, help='CP-SAT seconds per share query')
+    ap.add_argument('--lb-max', type=int, default=None, help='at most this many new share queries per round')
+    ap.add_argument('--lb-cache', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lb_cache.jsonl'))
+    ap.add_argument('--lb-radius', type=int, default=3)
+    ap.add_argument('--readonly-oracle', action='store_true',
+                    help='testing: never run the exclusion oracle (unknown windows count as feasible; no cache writes)')
     a = ap.parse_args()
+    a.share_lb = a.share_lb or bool(a.lb_file) or a.lb_refine
+    assert a.lean or not a.share_lb, '--share-lb needs --lean'
     if a.lean:
         assert not a.python_howard, '--lean needs the C Howard'
         from lean_automaton import LeanAutomaton, prune_lean, LeanHowardGraph, IdentityIndex
@@ -387,7 +420,19 @@ def main():
     if a.avoid:
         for e in json.load(open(a.avoid)):
             oracle.known[(tuple(e['dirs']), tuple(tuple(x) for x in e['alpha']))] = 'AVOID'
+    if a.readonly_oracle:
+        oracle.query = lambda keys, *args_, **kw: 0
     A = (LeanAutomaton if a.lean else FastAutomaton)(a.L, a.k, a.K)
+    lbtab = lbo = None
+    den = 1
+    if a.share_lb:
+        import share_lb
+        den = a.den or share_lb.unit(a.k)
+        lbtab = share_lb.ShareTable.load(a.lb_file)
+        A.set_weights(den, lbtab)
+        if a.lb_refine:
+            lbo = share_lb.LBOracle(a.lb_cache, a.lb_radius, a.lb_timeout)
+        print(f'share weights: den {den}, {len(lbtab.lb)} LB windows, {len(A.lbx)} extensions carry LB', flush=True)
     print('shapes', len(A.shapes), 'states', A.n, 'extensions', len(A.ext), flush=True)
     log = []
     prefer = None
@@ -426,23 +471,27 @@ def main():
             prefer = G.successors()
             ph['howard'] = time.time() - t - ph['graph']
             if a.rc_cycles:
-                batch = [c for m_, c in rc_cycles(G, a.batch, mu + a.slack, R=a.rc_R, budget=a.cycle_budget,
+                batch = [c for m_, c in rc_cycles(G, a.batch, mu + a.slack * den, R=a.rc_R * den, max_R=4.0 * den,
+                                                  budget=a.cycle_budget,
                                                   exclude=cyc, verbose=True)]
             else:
-                batch = [c for m_, c in G.cycles(a.batch + 1, mu + a.slack, budget=a.cycle_budget)[1:]]
+                batch = [c for m_, c in G.cycles(a.batch + 1, mu + a.slack * den, budget=a.cycle_budget)[1:]]
             ph['cycles'] = time.time() - t - ph['graph'] - ph['howard']
         t1 = time.time()
         cyc = [idx[e] for e in cyc]
-        exact = Fr(int(W[cyc].sum()), len(cyc))
+        exact = Fr(int(W[cyc].astype(np.int64).sum()), len(cyc))
         wins = []
         cyc_wins = []
+        kwins = []                                      # k-centre windows (share LB keys), min cycle first
         for cyc2 in [cyc] + batch:
             cw = []
             for e in cyc2:
                 e = idx[e] if cyc2 is not cyc else e
-                ds, al = A.decode(U[e], EXT[e], W[e])
+                ds, al = A.decode(U[e], EXT[e], edge_sym(A, V, W, e))
                 for cc in range(2, a.k + 1):
                     cw.append(A.window_key(tuple(ds[-(cc + 1):]), tuple(al[-cc:])))
+                if cyc2 is cyc or a.lb_extra:
+                    kwins.append(cw[-1])
             cyc_wins.append(set(cw))
             wins.extend(cw)
         wins = list(dict.fromkeys(wins))
@@ -456,14 +505,29 @@ def main():
             newq = oracle.query(wins, a.workers, a.query_timeout)
         ph['query'] = time.time() - t2
         unsat = [x for x in wins if oracle.status(x) == 'UNSAT']
-        print(f'round {rnd}: edges {len(idx)} mean {exact} ({mu:.4f}) cycle {[int(x) for x in W[cyc]]} '
-              f'extra-cycles {len(batch)} queried {newq} unsat-on-cycle {len(unsat)} [{time.time()-t:.0f}s: '
+        cyc_w = [int(x) for x in W[cyc]]                # before any re-weighting below
+        risen = []
+        if lbo is not None:
+            t3 = time.time()
+            kw = [x for x in dict.fromkeys(kwins) if oracle.status(x) != 'UNSAT']
+            risen = lbo.query(kw, lbtab, max_new=a.lb_max, verbose=False)
+            if risen:
+                A.set_weights(den, lbtab)               # rebuild the per-extension LB tables
+                if inc is not None:
+                    ph['reweighted'] = inc.raise_lb(risen)
+            ph['lb'] = time.time() - t3
+        syms = [edge_sym(A, V, W, e) for e in cyc]
+        wtxt = f' weights {cyc_w} alpha-mean {exact / den} ({float(exact / den):.4f})' if den != 1 or lbtab else ''
+        print(f'round {rnd}: edges {len(idx)} mean {exact} ({mu:.4f}) cycle {syms}{wtxt} '
+              f'extra-cycles {len(batch)} queried {newq} unsat-on-cycle {len(unsat)}'
+              + (f' lb-raised {len(risen)}' if lbo is not None else '') + f' [{time.time()-t:.0f}s: '
               + ' '.join(f'{k} {v:.0f}' for k, v in ph.items()) + ']', flush=True)
-        log.append({'round': rnd, 'mean': str(exact), 'cycle_counts': [int(x) for x in W[cyc]],
-                    'queried': newq, 'killed': len(unsat)})
-        if not unsat:
+        log.append({'round': rnd, 'mean': str(exact), 'cycle_counts': syms,
+                    'queried': newq, 'killed': len(unsat),
+                    **({'cycle_weights': cyc_w, 'lb_raised': len(risen)} if a.share_lb else {})})
+        if not unsat and not risen:
             break
-    final_counts = [int(x) for x in W[cyc]]
+    final_counts = [edge_sym(A, V, W, e) for e in cyc]
     n_edges = len(V)
     if inc is not None:
         # the arrays still hold edges blocked since the build: rebuild the last round's graph (same exclusions)
@@ -488,7 +552,10 @@ def main():
            'potential_range': int(pi.max() - pi.min()) if pi is not None else None,
            'max_vertices': vb, 'max_edges': vb - 1 if vb is not None else None, 'edges': int(n_edges),
            'final_cycle_counts': final_counts, 'rounds': log}
-    json.dump(out, open(os.path.join(DATA, f'refine_L{a.L}_k{a.k}_K{a.K}_r{a.radius}.json'), 'w'), indent=1)
+    if a.share_lb:
+        out.update({'weight_denominator': den, 'min_mean_alpha_units': str(exact / den),
+                    'share_lb_windows': len(lbtab.lb)})
+    json.dump(out, open(a.out or os.path.join(DATA, f'refine_L{a.L}_k{a.k}_K{a.K}_r{a.radius}.json'), 'w'), indent=1)
     print(json.dumps({k2: v for k2, v in out.items() if k2 != 'rounds'}))
 
 

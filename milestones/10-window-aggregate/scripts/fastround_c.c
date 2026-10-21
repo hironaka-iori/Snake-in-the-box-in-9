@@ -2,6 +2,13 @@
    Graph in CSR form by source (LeanAutomaton.edges): edges starts[u] .. starts[u+1]-1 go to V[e].
    Build: cc -O2 -shared -fPIC -o fastround_c.so fastround_c.c */
 #include <stdint.h>
+/* Weight type: uint8_t (alpha), or uint16_t with -DWEIGHT16 (den * alpha + share lower bound; the
+   same source is built twice, fastround_c.so / fastround_c16.so, leanmin_c.so / leanmin_c16.so). */
+#ifdef WEIGHT16
+typedef uint16_t wt_t;
+#else
+typedef uint8_t wt_t;
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -51,7 +58,7 @@ int prune_masked(int64_t n, const int64_t *starts, const int32_t *V, uint8_t *m)
    Walks deeper than max_depth give up (the state is marked exhausted for that level).
    Output: cycle c has edges out_edges[out_off[c] .. out_off[c+1]-1] (in walk order).
    Returns the number of cycles. */
-int64_t tight_cycles(int64_t n, const int64_t *starts, const int32_t *V, const uint8_t *W, uint8_t *alive,
+int64_t tight_cycles(int64_t n, const int64_t *starts, const int32_t *V, const wt_t *W, uint8_t *alive,
                      const double *eta, const double *val, double mu0, double cap, double eps, int nlev,
                      int64_t max_cycles, int64_t max_len, int64_t max_depth, int64_t max_out,
                      int64_t *out_edges, int64_t *out_off)
@@ -121,7 +128,7 @@ int64_t tight_cycles(int64_t n, const int64_t *starts, const int32_t *V, const u
 /* rc_select: out[e] = 1 for alive edges u->v with eta[u] == eta[v] <= cap and reduced cost
    W - eta[u] + val[v] - val[u] <= R (the subgraph the cycles of mean <= cap mostly live in).
    Returns the number of selected edges. */
-int64_t rc_select(int64_t n, const int64_t *starts, const int32_t *V, const uint8_t *W, const uint8_t *alive,
+int64_t rc_select(int64_t n, const int64_t *starts, const int32_t *V, const wt_t *W, const uint8_t *alive,
                   const double *eta, const double *val, double cap, double R, uint8_t *out)
 {
     int64_t cnt = 0;
@@ -144,8 +151,8 @@ int64_t rc_select(int64_t n, const int64_t *starts, const int32_t *V, const uint
    pruned, so every endpoint of a selected edge has one) to 0..ns-1 in index order and write the CSR
    of the selected edges: out_starts (ns+1), out_V, out_W, out_idx (original edge number).  map is an
    n-sized scratch array (on return map[u] = compact id or -1).  Returns ns. */
-int64_t compact_subgraph(int64_t n, const int64_t *starts, const int32_t *V, const uint8_t *W, const uint8_t *sel,
-                         int32_t *map, int64_t *out_starts, int32_t *out_V, uint8_t *out_W, int32_t *out_idx)
+int64_t compact_subgraph(int64_t n, const int64_t *starts, const int32_t *V, const wt_t *W, const uint8_t *sel,
+                         int32_t *map, int64_t *out_starts, int32_t *out_V, wt_t *out_W, int32_t *out_idx)
 {
     int64_t ns = 0;
     for (int64_t u = 0; u < n; u++) {

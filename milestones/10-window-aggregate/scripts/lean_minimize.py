@@ -17,6 +17,12 @@ null, when the final graph has more edges).  Differences in the implementation o
 * minimum mean: prune_masked + LeanHowardGraph; walk bound: the same dynamic programme in C.
 
   python lean_minimize.py --L 8 --k 7 --K 7 --radius 3 --escalate 4 --start --lam 9/2 --prefer IDX
+
+Share-weighted edges (share_lb.py): --lb FILE (jsonl of {dirs, alpha, lb}) gives every edge the weight
+den * symbol + LB units of its k-centre window (uint16 W, den = 21 k by default); means, potentials and the
+walk bound are then in 1/den alpha units, init_digs is scaled by den, and the edge bound is
+share_lb.bound_edges.  removable() tests a re-enabled edge with LB 0 (a lower weight: sufficient, so the
+greedy stays sound but may keep a few more windows); the final potential is checked on the real weights.
 """
 import argparse, ctypes, json, os, resource, subprocess, sys, time
 from collections import Counter
@@ -25,39 +31,43 @@ import numpy as np
 
 SCRIPTS = '/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts'
 if SCRIPTS not in sys.path:
-    sys.path.insert(0, SCRIPTS)
+    sys.path.append(SCRIPTS)
 import refine                                                    # noqa: E402  (oracles looked up at call time)
 from refine import DATA                                          # noqa: E402
 from minimize_fast import sym_codes                              # noqa: E402
 from lean_automaton import LeanAutomaton, LeanHowardGraph        # noqa: E402
 from fastround import BlockMap, prune_masked                     # noqa: E402
+import share_lb                                                  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-_lib = None
+_libs = {}
 
 
-def _load():
-    global _lib
-    if _lib is None:
-        src = os.path.join(HERE, 'leanmin_c.c'); so = os.path.join(HERE, 'leanmin_c.so')
+def _load(wdt=np.uint8):
+    """leanmin_c.so (uint8 W) or leanmin_c16.so (uint16 W, -DWEIGHT16): the same source."""
+    wdt = np.dtype(wdt).type
+    if wdt not in _libs:
+        w16 = wdt == np.uint16
+        src = os.path.join(HERE, 'leanmin_c.c'); so = os.path.join(HERE, 'leanmin_c16.so' if w16 else 'leanmin_c.so')
         if not os.path.exists(so) or os.path.getmtime(so) < os.path.getmtime(src):
-            subprocess.check_call(['cc', '-O2', '-shared', '-fPIC', '-o', so, src])
+            subprocess.check_call(['cc', '-O2', '-shared', '-fPIC'] + (['-DWEIGHT16'] if w16 else []) + ['-o', so, src])
         lib = ctypes.CDLL(so)
         P = np.ctypeslib.ndpointer
         i64, i32 = ctypes.c_int64, ctypes.c_int
         I64, I32, U8, I16 = (P(np.int64, flags='C'), P(np.int32, flags='C'), P(np.uint8, flags='C'),
                              P(np.int16, flags='C'))
-        lib.bf_jacobi.argtypes = [i64, I64, I32, U8, i64, i64, I32, I32, U8, i64, i32, I64]
+        WT = P(wdt, flags='C')
+        lib.bf_jacobi.argtypes = [i64, I64, I32, WT, i64, i64, I32, I32, U8, i64, i32, I64]
         lib.bf_jacobi.restype = i64
-        lib.check_pot.argtypes = [i64, I64, I32, U8, i64, i64, I32, i32, i64, I32, i64]
+        lib.check_pot.argtypes = [i64, I64, I32, WT, i64, i64, I32, i32, i64, I32, i64]
         lib.check_pot.restype = i64
         lib.removable.argtypes = [i64, I32, U8, i64, I64, i32, i32, i64, i64, I32, I32, I16, I64, I64,
-                                  I32, I64, I32, i64, i64, I64]
+                                  I32, I64, I32, i64, i64, I64, i64]
         lib.removable.restype = i32
-        lib.dp_step.argtypes = [i64, I64, I32, U8, I32, I32]
+        lib.dp_step.argtypes = [i64, I64, I32, WT, I32, I32]
         lib.dp_step.restype = ctypes.c_int32
-        _lib = lib
-    return _lib
+        _libs[wdt] = lib
+    return _libs[wdt]
 
 
 def rss_mb():
@@ -72,8 +82,9 @@ class _Keys:
 
 
 def edges_vw(A, oracle, block_cells=1 << 21):
-    """LeanAutomaton.edges without U and EXT: (starts int64[n+1], V int32, W uint8), the same edges in the
-    same (source, extension, symbol) order.  5 B per edge plus the packed masks (1/8 B per candidate)."""
+    """LeanAutomaton.edges without U and EXT: (starts int64[n+1], V int32, W uint8 -- uint16 when A carries
+    share weights), the same edges in the same (source, extension, symbol) order.  5 B per edge (6 B
+    weighted) plus the packed masks (1/8 B per candidate)."""
     T = A.forb_tables(oracle)
     ns, k, m1 = A.ns, A.k, A.m1
     nc = ns ** k
@@ -93,7 +104,7 @@ def edges_vw(A, oracle, block_cells=1 << 21):
     np.cumsum(deg, out=starts[1:])
     del deg
     E = int(starts[-1])
-    V = np.empty(E, np.int32); W = np.empty(E, np.uint8)
+    V = np.empty(E, np.int32); W = np.empty(E, A.wdtype())
     for i, es in by_shape.items():
         assert es == list(range(es[0], es[0] + len(es)))
         nE = len(es)
@@ -109,13 +120,16 @@ def edges_vw(A, oracle, block_cells=1 << 21):
             j, w = np.divmod(r, ns)
             t += t0_
             V[a:b] = nxt[j] * m1 + (t * ns + w) % m1
-            W[a:b] = w + 1
+            if A.weighted:
+                W[a:b] = A.edge_weights(j + es[0], t * ns + w)
+            else:
+                W[a:b] = w + 1
         del M
     return starts, V, W
 
 
 class Graph:
-    """Allowed edges of the kept set in CSR form (starts, V int32, W uint8)."""
+    """Allowed edges of the kept set in CSR form (starts, V int32, W uint8 or uint16)."""
     def __init__(self, A, keys):
         self.n = A.n
         self.starts, self.V, self.W = edges_vw(A, _Keys(keys))
@@ -132,14 +146,15 @@ class Graph:
 
 
 def init_digs(A):
-    """min_range.init_sums(A) is np.tile(digs, #shapes): the m1-periodic table digs."""
+    """min_range.init_sums(A) is np.tile(digs, #shapes): the m1-periodic table digs (times A.den: the
+    k - 1 counts of the first state in weight units, without share credit)."""
     t = np.arange(A.m1, dtype=np.int64)
-    return sum((t // A.ns ** j) % A.ns + 1 for j in range(A.k - 1)).astype(np.int32)
+    return (getattr(A, 'den', 1) * sum((t // A.ns ** j) % A.ns + 1 for j in range(A.k - 1))).astype(np.int32)
 
 
 def bf(G, p, q, pi0, max_iter, neg_check):
     """Jacobi Bellman-Ford from pi0 (int32, overwritten).  Returns pi or None (value < 0 / cap)."""
-    lib = _load()
+    lib = _load(G.W.dtype)
     nw = np.empty(G.n, np.int32); chg = np.empty(G.n, np.uint8); it = np.zeros(1, np.int64)
     r = lib.bf_jacobi(G.n, G.starts, G.V, G.W, int(p), int(q), pi0, nw, chg, int(max_iter), int(neg_check), it)
     del nw, chg
@@ -157,7 +172,7 @@ def bellman_ford(G, p, q, max_iter=100000):
 def min_start_potential(A, G, p, q, hi, max_iter=4000, verbose=False):
     """min_range.min_start_potential: the same binary search over D and the same Jacobi iteration,
     returning (D, pi int32) or (None, None)."""
-    lib = _load()
+    lib = _load(G.W.dtype)
     digs = init_digs(A)
     lo, best = -q * int(digs.max()), None
     dmin = int(digs.min())
@@ -190,8 +205,10 @@ def start_constant(A, pi, q):
 
 
 def vertex_bound(A, G, vmax=260):
-    """refine_fast.vertex_bound on the CSR arrays (int32 dynamic programme, INT32_MAX = inf)."""
-    lib = _load()
+    """refine_fast.vertex_bound on the CSR arrays (int32 dynamic programme, INT32_MAX = inf); weighted:
+    den (8 + pre) + dp <= den (9214 - 35 v)."""
+    lib = _load(G.W.dtype)
+    den = getattr(A, 'den', 1)
     INF = np.iinfo(np.int32).max
     t0 = A.L - 1
     pre = t0 - (A.k - 1)
@@ -206,7 +223,7 @@ def vertex_bound(A, G, vmax=260):
         while steps < n - t0:
             dmin = int(lib.dp_step(G.n, G.starts, G.V, G.W, dp, out))
             dp, out = out, dp; steps += 1
-        if dmin != INF and 8 + pre + dmin <= 9214 - 35 * v:
+        if dmin != INF and den * (8 + pre) + dmin <= den * (9214 - 35 * v):
             best = v
     return best
 
@@ -274,10 +291,14 @@ class LeanBlockers:
         exts, ori = self.groups[g]
         return bool(_load().removable(len(exts), exts, ori, len(self.c0[x]), self.c0[x], g[1], A.k, A.ns, A.m1,
                                       self.esrc, self.enxt, self.tab, self.toff_f, self.toff_r, self.rev,
-                                      self.revoff, pi, int(p), int(q), self.checked))
+                                      self.revoff, pi, int(p), int(q), self.checked, int(A.den)))
 
     def remove(self, x):
         self.tab[self._idx(x)] -= 1
+
+
+def A_lb(A):
+    return [e for e in A.lbx]
 
 
 # ---- main --------------------------------------------------------------------------------------
@@ -295,11 +316,16 @@ def main(argv=None):
     ap.add_argument('--prefer', help='certificate index: windows verified there are dropped last (they cost nothing)')
     ap.add_argument('--lam', help='keep only what a potential at this mean p/q needs (<= the minimum mean)')
     ap.add_argument('--out', help='output JSON path (default ../data/minimal_L{L}_k{k}_K{K}_r{radius}{tag}.json)')
+    ap.add_argument('--lb', help='share lower bounds (jsonl {dirs, alpha, lb}) as edge weights (share_lb.py)')
+    ap.add_argument('--lb-certified-only', action='store_true', help='with --lb: only entries marked certified')
+    ap.add_argument('--den', type=int, default=None, help='weight denominator (default 21 k with --lb, else 1)')
     ap.add_argument('--vb-max-edges', type=int, default=None,
                     help='skip the exact walk bound (dp_bound_edges: null) above this many edges')
     a = ap.parse_args(argv)
     T0 = time.time()
     A = LeanAutomaton(a.L, a.k, a.K)
+    den = a.den or (share_lb.unit(a.k) if a.lb else 1)
+    A.set_weights(den, share_lb.ShareTable.load(a.lb, a.lb_certified_only) if a.lb else None)
     if a.escalate:
         O = refine.TwoLevelOracle(a.radius, a.escalate)
     else:
@@ -364,18 +390,20 @@ def main(argv=None):
     G = Graph(A, keep)
     lam2 = G.min_mean(); assert lam2 >= lam, (lam, lam2)
     # the potential is still valid on the final graph (checked, not assumed)
-    assert _load().check_pot(G.n, G.starts, G.V, G.W, p, q, pi - pi.min(), 0, 0, init_digs(A), A.m1) == 0
+    assert _load(G.W.dtype).check_pot(G.n, G.starts, G.V, G.W, p, q, pi - pi.min(), 0, 0, init_digs(A), A.m1) == 0
     if a.vb_max_edges is not None and G.E > a.vb_max_edges:
         vb = None
     else:
         t0 = time.time(); vb = vertex_bound(A, G)
         print(f'  walk bound {vb} ({time.time() - t0:.0f}s)', flush=True)
     R = int(pi.max()) - int(pi.min()); L = a.L
-    C = p * L - q * (L - 1) + R
+    # den = 1: C = p L - q (L - 1) + R (or p L - q (L - k) + Dst), Bp = (9179 q + C - 8 q) // (p + 35 q)
     if a.start:
-        C = p * L - q * (L - a.k) + Dst
-    Bp = (9179 * q + C - 8 * q) // (p + 35 * q)
+        Bp = share_lb.bound_edges(p, q, L, a.k, Dst, den)
+    else:
+        Bp = share_lb.bound_edges(p, q, L, 1, R, den)           # L - 1 counts outside the potential
     out = {'L': a.L, 'k': a.k, 'K': a.K, 'radius': a.radius, 'min_mean': str(lam), 'potential_range': R,
+           'weight_denominator': den, 'min_mean_alpha_units': str(lam / den), 'share_lb_extensions': len(A_lb(A)),
            'potential_bound_edges': Bp, 'dp_bound_edges': None if vb is None else vb - 1, 'edges': int(G.E),
            'by_centres': dict(Counter(len(x[1]) for x in keep)),
            'already_certified': len(keep & certified),

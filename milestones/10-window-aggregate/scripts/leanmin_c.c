@@ -11,9 +11,16 @@
    dp_step     : one step of refine_fast.vertex_bound's min-plus dynamic programme.
 */
 #include <stdint.h>
+/* Weight type: uint8_t (alpha), or uint16_t with -DWEIGHT16 (den * alpha + share lower bound; the
+   same source is built twice, fastround_c.so / fastround_c16.so, leanmin_c.so / leanmin_c16.so). */
+#ifdef WEIGHT16
+typedef uint16_t wt_t;
+#else
+typedef uint8_t wt_t;
+#endif
 #include <string.h>
 
-int64_t bf_jacobi(int64_t n, const int64_t *st, const int32_t *V, const uint8_t *W, int64_t p, int64_t q,
+int64_t bf_jacobi(int64_t n, const int64_t *st, const int32_t *V, const wt_t *W, int64_t p, int64_t q,
                   int32_t *pi, int32_t *nw, uint8_t *chg, int64_t max_iter, int neg_check, int64_t *iters)
 {
     /* returns 0 converged (pi holds the fixpoint), -1 a value < 0 (neg_check), -2 cap, -3 overflow */
@@ -50,7 +57,7 @@ done:
     return res;
 }
 
-int64_t check_pot(int64_t n, const int64_t *st, const int32_t *V, const uint8_t *W, int64_t p, int64_t q,
+int64_t check_pot(int64_t n, const int64_t *st, const int32_t *V, const wt_t *W, int64_t p, int64_t q,
                   const int32_t *pi, int use_ub, int64_t D, const int32_t *init, int64_t m1)
 {
     /* number of violations: edges with negative reduced cost, states with pi < 0 or pi > D + q*init */
@@ -69,7 +76,7 @@ int removable(int64_t nx, const int32_t *exts, const uint8_t *ori, int64_t nlow,
               int k, int64_t ns, int64_t m1, const int32_t *esrc, const int32_t *enxt,
               const int16_t *tab, const int64_t *toff_f, const int64_t *toff_r,
               const int32_t *rev, const int64_t *revoff, const int32_t *pi, int64_t p, int64_t q,
-              int64_t *checked)
+              int64_t *checked, int64_t den)
 {
     int64_t pw[32];
     pw[0] = 1;
@@ -96,7 +103,8 @@ int removable(int64_t nx, const int32_t *exts, const uint8_t *ori, int64_t nlow,
                     }
                     if (cnt != 1) continue;
                     chk++;
-                    int64_t u = ubase + code / ns, v = vbase + code % m1, w = code % ns + 1;
+                    /* weight of the re-enabled edge: den * symbol (its share lower bound taken as 0: a sufficient test) */
+                    int64_t u = ubase + code / ns, v = vbase + code % m1, w = den * (code % ns + 1);
                     if (q * w - p + (int64_t)pi[u] - (int64_t)pi[v] < 0) { *checked += chk; return 0; }
                 }
             }
@@ -106,7 +114,7 @@ int removable(int64_t nx, const int32_t *exts, const uint8_t *ori, int64_t nlow,
     return 1;
 }
 
-int32_t dp_step(int64_t n, const int64_t *st, const int32_t *V, const uint8_t *W,
+int32_t dp_step(int64_t n, const int64_t *st, const int32_t *V, const wt_t *W,
                 const int32_t *dp, int32_t *out)
 {
     /* out[v] = min over edges u->v of dp[u] + W (INT32_MAX = inf); returns min(out) */
@@ -114,7 +122,7 @@ int32_t dp_step(int64_t n, const int64_t *st, const int32_t *V, const uint8_t *W
     for (int64_t u = 0; u < n; u++) {
         if (dp[u] == INT32_MAX) continue;
         for (int64_t e = st[u]; e < st[u + 1]; e++) {
-            int32_t c = dp[u] + (int32_t)W[e];
+            int32_t c = dp[u] + (int32_t)W[e];   /* den * 9214 << 2^31: no overflow */
             if (c < out[V[e]]) out[V[e]] = c;
         }
     }

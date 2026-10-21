@@ -2,7 +2,7 @@
    Graph in CSR form by source: edges starts[u] .. starts[u+1]-1 go to V[e] with weight W[e].
    alive[e] != 0 marks usable edges (the caller deletes edges to extract further cycles).
    pol[u] is an edge index (or -1) on input (warm start) and output.
-   howard_run takes double weights, howard_run_u8 uint8 weights (same code).
+   howard_run takes double weights, howard_run_u8 uint8 weights, howard_run_u16 uint16 weights (same code).
    Build: cc -O2 -shared -fPIC -o howard_c.so howard_c.c */
 #include <stdint.h>
 #include <stdlib.h>
@@ -85,3 +85,4 @@ int NAME(int64_t n, const int64_t *starts, const int32_t *V, const WT *W, \
 
 HOWARD_BODY(howard_run, double)
 HOWARD_BODY(howard_run_u8, uint8_t)
+HOWARD_BODY(howard_run_u16, uint16_t)   /* weighted edges: den * alpha + share LB */

@@ -50,14 +50,16 @@ def min_range_potential(n, U, V, W, p, q, hi, max_iter=4000):
 
 
 def init_sums(A):
-    """Sum of the k-1 symbols of every state (the counts carried in the state)."""
+    """Sum of the k-1 symbols of every state (the counts carried in the state), times A.den when the
+    edges carry share weights (den * symbol + LB: the first state's counts get no share credit)."""
     digs = np.array([[(t // A.ns ** j) % A.ns + 1 for j in range(A.k - 1)] for t in range(A.m1)]).sum(1)
-    return np.tile(digs, len(A.shapes)).astype(np.int64)
+    return (getattr(A, 'den', 1) * np.tile(digs, len(A.shapes))).astype(np.int64)
 
 
 def min_start_potential(A, U, V, W, p, q, hi, max_iter=4000):
     """Smallest D with a potential 0 <= pi(v) <= D + q * init(v): the sequence bound then reads
-    q * sum(counts) >= p * (m - L) + q - D (first internal count >= 1, the next k-1 in the state)."""
+    q * sum(counts) >= p * (m - L) + q - D (first internal count >= 1, the next k-1 in the state).
+    Weighted edges: q * (den * init + sum w') >= p * steps - D; see share_lb.bound_edges."""
     init = init_sums(A)
     lo, best = -q * int(init.max()), None
     while lo <= hi:

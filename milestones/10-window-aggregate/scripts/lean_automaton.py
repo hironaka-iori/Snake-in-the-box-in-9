@@ -13,7 +13,12 @@ temporaries (~16 B/edge); prune_lean is the chunked equivalent (1 B/edge result)
 LeanHowardGraph runs the C Howard on the CSR arrays in place (uint8 weights,
 alive = prune mask), so edge numbers it returns are numbers in U/V/W/EXT.
 
-NOTE: W is uint8.  refine_fast.bellman_ford computes q*W - p, which under
+Weighted edges (share_lb.py): after A.set_weights(den, ShareTable), W is uint16 =
+den * symbol + LB units of the k-centre window ending at the new vertex; den = 1 with no LB keeps uint8
+and reproduces the unweighted arrays bit for bit.  The symbol of edge e is always A.sym(V[e]) =
+V[e] % ns + 1 (the low digit of the target's count state), so decode / BlockMap no longer read W.
+
+NOTE: W is uint8 (or uint16).  refine_fast.bellman_ford computes q*W - p, which under
 numpy 2 promotion stays uint8 and wraps; pass W.astype(np.int64) there.
 """
 import ctypes, itertools, os, subprocess, sys, time
@@ -21,9 +26,10 @@ import numpy as np
 
 SCRIPTS = '/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts'
 if SCRIPTS not in sys.path:
-    sys.path.insert(0, SCRIPTS)
+    sys.path.append(SCRIPTS)                            # patched copies next to this file win
 from refine import canon, induced                      # noqa: E402
 from refine_fast import FastAutomaton                    # noqa: E402
+from share_lb import lookup as _lookup                   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -44,6 +50,38 @@ def fast_shapes(L):
 
 
 class LeanAutomaton(FastAutomaton):
+    den = 1
+    lbx = {}
+
+    def set_weights(self, den=1, table=None):
+        """Edge weight den * symbol + LB units (share_lb.ShareTable); den = 1, no table: unweighted."""
+        self.den = int(den)
+        self.lbx = table.ext_tables(self, self.den) if table is not None else {}
+        return self
+
+    @property
+    def weighted(self):
+        return self.den != 1 or bool(self.lbx)
+
+    def wdtype(self):
+        return np.uint16 if self.weighted else np.uint8
+
+    def sym(self, v):
+        """New symbol of an edge from its target state (works for any weights)."""
+        return v % self.ns + 1
+
+    def edge_weights(self, e_arr, codes):
+        """Weights of edges (extension e_arr, k-digit code) -- den * symbol + LB units."""
+        w = self.den * (codes % self.ns + 1)
+        if self.lbx:
+            w = w.astype(np.int64)
+            for e in np.unique(e_arr):
+                tab = self.lbx.get(int(e))
+                if tab is not None:
+                    sel = e_arr == e
+                    w[sel] += _lookup(tab, codes[sel])
+        return w
+
     def __init__(self, L, k, K, slow_init=False):
         if slow_init:
             FastAutomaton.__init__(self, L, k, K)
@@ -118,7 +156,7 @@ class LeanAutomaton(FastAutomaton):
         if count_only:
             return E, starts
         U = np.empty(E, np.int32); V = np.empty(E, np.int32)
-        W = np.empty(E, np.uint8); EXT = np.empty(E, np.int16)
+        W = np.empty(E, self.wdtype()); EXT = np.empty(E, np.int16)
         assert len(self.ext) < 2 ** 15 and self.n < 2 ** 31 and ns < 256
         # pass 2: fill in (source, extension, symbol) order
         for i, es in by_shape.items():
@@ -136,7 +174,10 @@ class LeanAutomaton(FastAutomaton):
                 t += t0_
                 U[a:b] = i * m1 + t
                 V[a:b] = nxt[j] * m1 + (t * ns + w) % m1
-                W[a:b] = w + 1
+                if self.weighted:
+                    W[a:b] = self.edge_weights(j + es[0], t * ns + w)
+                else:
+                    W[a:b] = w + 1
                 EXT[a:b] = j + es[0]
             del M
         self.starts = starts
@@ -210,6 +251,9 @@ def _load():
                                       P(np.uint8, flags='C'), P(np.uint8, flags='C'), P(np.int64, flags='C'),
                                       P(np.float64, flags='C'), P(np.float64, flags='C'), ctypes.c_int]
         lib.howard_run_u8.restype = ctypes.c_int
+        at16 = list(lib.howard_run_u8.argtypes); at16[3] = P(np.uint16, flags='C')
+        lib.howard_run_u16.argtypes = at16
+        lib.howard_run_u16.restype = ctypes.c_int
         _lib = lib
     return _lib
 
@@ -222,7 +266,7 @@ class LeanHowardGraph:
     def __init__(self, n, starts, V, W, alive, prefer=None, blocks=None):
         self.n = int(n)
         self.starts, self.V, self.W = starts, V, W
-        assert V.dtype == np.int32 and W.dtype == np.uint8 and starts.dtype == np.int64
+        assert V.dtype == np.int32 and W.dtype in (np.uint8, np.uint16) and starts.dtype == np.int64
         self.alive = alive.view(np.uint8) if alive.dtype == bool else alive
         self.pol = np.full(self.n, -1, np.int64)
         if prefer is not None:
@@ -239,7 +283,8 @@ class LeanHowardGraph:
         self.iters = 0
 
     def solve(self, iters=10000):
-        self.iters = _load().howard_run_u8(self.n, self.starts, self.V, self.W, self.alive, self.pol,
+        run = _load().howard_run_u16 if self.W.dtype == np.uint16 else _load().howard_run_u8
+        self.iters = run(self.n, self.starts, self.V, self.W, self.alive, self.pol,
                                            self.eta, self.val, iters)
         fin = np.isfinite(self.eta)
         if not fin.any():

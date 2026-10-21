@@ -23,39 +23,42 @@ import numpy as np
 
 SCRIPTS = '/home/user/Snake-in-the-box-in-9/milestones/10-window-aggregate/scripts'
 if SCRIPTS not in sys.path:
-    sys.path.insert(0, SCRIPTS)
+    sys.path.append(SCRIPTS)
 from minimize_fast import sym_codes                      # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-_lib = None
+_libs = {}
 
 
-def _load():
-    global _lib
-    if _lib is None:
-        src = os.path.join(HERE, 'fastround_c.c'); so = os.path.join(HERE, 'fastround_c.so')
+def _load(wdt=np.uint8):
+    """fastround_c.so (uint8 weights) or fastround_c16.so (uint16, -DWEIGHT16) -- the same source."""
+    wdt = np.dtype(wdt).type
+    if wdt not in _libs:
+        w16 = wdt == np.uint16
+        src = os.path.join(HERE, 'fastround_c.c'); so = os.path.join(HERE, 'fastround_c16.so' if w16 else 'fastround_c.so')
         if not os.path.exists(so) or os.path.getmtime(so) < os.path.getmtime(src):
-            subprocess.check_call(['cc', '-O2', '-shared', '-fPIC', '-o', so, src])
+            subprocess.check_call(['cc', '-O2', '-shared', '-fPIC'] + (['-DWEIGHT16'] if w16 else []) + ['-o', so, src])
         lib = ctypes.CDLL(so)
         P = np.ctypeslib.ndpointer
+        WT = P(wdt, flags='C')
         i64, f64 = ctypes.c_int64, ctypes.c_double
         lib.prune_masked.argtypes = [i64, P(np.int64, flags='C'), P(np.int32, flags='C'), P(np.uint8, flags='C')]
         lib.prune_masked.restype = ctypes.c_int
-        lib.tight_cycles.argtypes = [i64, P(np.int64, flags='C'), P(np.int32, flags='C'), P(np.uint8, flags='C'),
+        lib.tight_cycles.argtypes = [i64, P(np.int64, flags='C'), P(np.int32, flags='C'), WT,
                                      P(np.uint8, flags='C'), P(np.float64, flags='C'), P(np.float64, flags='C'),
                                      f64, f64, f64, ctypes.c_int, i64, i64, i64, i64,
                                      P(np.int64, flags='C'), P(np.int64, flags='C')]
         lib.tight_cycles.restype = ctypes.c_int64
-        lib.rc_select.argtypes = [i64, P(np.int64, flags='C'), P(np.int32, flags='C'), P(np.uint8, flags='C'),
+        lib.rc_select.argtypes = [i64, P(np.int64, flags='C'), P(np.int32, flags='C'), WT,
                                   P(np.uint8, flags='C'), P(np.float64, flags='C'), P(np.float64, flags='C'),
                                   f64, f64, P(np.uint8, flags='C')]
         lib.rc_select.restype = ctypes.c_int64
-        lib.compact_subgraph.argtypes = [i64, P(np.int64, flags='C'), P(np.int32, flags='C'), P(np.uint8, flags='C'),
+        lib.compact_subgraph.argtypes = [i64, P(np.int64, flags='C'), P(np.int32, flags='C'), WT,
                                          P(np.uint8, flags='C'), P(np.int32, flags='C'), P(np.int64, flags='C'),
-                                         P(np.int32, flags='C'), P(np.uint8, flags='C'), P(np.int32, flags='C')]
+                                         P(np.int32, flags='C'), WT, P(np.int32, flags='C')]
         lib.compact_subgraph.restype = ctypes.c_int64
-        _lib = lib
-    return _lib
+        _libs[wdt] = lib
+    return _libs[wdt]
 
 
 def prune_masked(n, starts, V, m):
@@ -100,8 +103,9 @@ class BlockMap:
             out.append((e, (low[:, None] + js[None, :]).ravel()))
         return out
 
-    def blocked_edges(self, keys, starts, EXT, W, chunk=1 << 22):
-        """Sorted unique edge ids (in the built arrays) of edges blocked by any of `keys`."""
+    def blocked_edges(self, keys, starts, EXT, V, chunk=1 << 22):
+        """Sorted unique edge ids (in the built arrays) of edges blocked by any of `keys`.  The new symbol of
+        an edge is read from its target, V % ns + 1 (W may carry share weights)."""
         A = self.A
         ns, m1 = A.ns, A.m1
         maxdeg = int(np.diff(starts).max()) if len(starts) > 1 else 0
@@ -120,13 +124,13 @@ class BlockMap:
                 if not act.any():
                     break
                 mid = (lo + hi) >> 1
-                km = EXT[np.minimum(mid, len(EXT) - 1)].astype(np.int64) * ns + W[np.minimum(mid, len(W) - 1)] - 1
+                km = EXT[np.minimum(mid, len(EXT) - 1)].astype(np.int64) * ns + V[np.minimum(mid, len(V) - 1)] % ns
                 less = act & (km < t)
                 lo = np.where(less, mid + 1, lo)
                 hi = np.where(act & ~less, mid, hi)
             ok = lo < starts[u + 1]
             lo, t = lo[ok], t[ok]
-            hit = (EXT[lo].astype(np.int64) * ns + W[lo] - 1) == t
+            hit = (EXT[lo].astype(np.int64) * ns + V[lo] % ns) == t
             found.append(lo[hit])
 
         for x in keys:
@@ -157,7 +161,7 @@ class IncrementalLean:
         if not self.built <= cur:
             return None
         new = cur - self.built
-        ids = self.bmap.blocked_edges(new, self.starts, self.EXT, self.W) if new else np.zeros(0, np.int64)
+        ids = self.bmap.blocked_edges(new, self.starts, self.EXT, self.V) if new else np.zeros(0, np.int64)
         if len(ids):
             mu8 = self.m.view(np.uint8) if self.m.dtype == bool else self.m
             had = mu8[ids].any()
@@ -166,6 +170,20 @@ class IncrementalLean:
                 prune_masked(self.A.n, self.starts, self.V, self.m)
         self.built = cur
         return len(new), ids
+
+    def raise_lb(self, keys):
+        """Re-weight in place the edges of the k-centre windows `keys` after their LB rose (A.lbx must be
+        rebuilt first: A.set_weights(den, table)).  Weights only grow; the prune mask is unchanged.  Returns
+        the number of edges re-weighted."""
+        A = self.A
+        assert self.W.dtype == np.uint16, 'raise_lb needs the weighted (uint16) arrays'
+        keys = [x for x in keys if len(x[1]) == A.k]
+        ids = self.bmap.blocked_edges(keys, self.starts, self.EXT, self.V) if keys else np.zeros(0, np.int64)
+        if len(ids):
+            code = (np.searchsorted(self.starts, ids, side='right') - 1) % A.m1 * A.ns + self.V[ids] % A.ns
+            new = A.edge_weights(self.EXT[ids].astype(np.int64), code.astype(np.int64))
+            self.W[ids] = np.maximum(self.W[ids], new)
+        return len(ids)
 
 
 def tight_cycles(G, count, cap, eps=4.0, exclude=(), max_len=48, max_depth=None, max_out=1 << 22, raw=10,
@@ -187,7 +205,7 @@ def tight_cycles(G, count, cap, eps=4.0, exclude=(), max_len=48, max_depth=None,
     saved = G.alive[ex].copy(); G.alive[ex] = 0
     try:
         out_edges = np.empty(max_out, np.int64); out_off = np.zeros(raw * count + 1, np.int64)
-        nc = _load().tight_cycles(G.n, G.starts, G.V, G.W, G.alive, G.eta, G.val, mu0, float(cap), float(eps),
+        nc = _load(G.W.dtype).tight_cycles(G.n, G.starts, G.V, G.W, G.alive, G.eta, G.val, mu0, float(cap), float(eps),
                                   int(levels), raw * count, int(max_len), int(max_depth), int(max_out),
                                   out_edges, out_off)
     finally:
@@ -234,7 +252,7 @@ def rc_subgraph(G, cap, R, exclude=(), max_edges=None):
     than max_edges edges are selected (before pruning).  Memory: 1 B per edge of G, 4 B per state of G,
     ~9 B per selected edge."""
     from lean_automaton import LeanHowardGraph
-    lib = _load()
+    lib = _load(G.W.dtype)
     sel = np.empty(len(G.V), np.uint8)
     cnt = lib.rc_select(G.n, G.starts, G.V, G.W, G.alive, G.eta, G.val, float(cap), float(R), sel)
     if max_edges is not None and cnt > max_edges:
@@ -246,7 +264,7 @@ def rc_subgraph(G, cap, R, exclude=(), max_edges=None):
         return None, None
     smap = np.empty(G.n, np.int32)
     starts = np.empty(G.n + 1, np.int64)               # trimmed below
-    Vs = np.empty(nsel, np.int32); Ws = np.empty(nsel, np.uint8); idx = np.empty(nsel, np.int32)
+    Vs = np.empty(nsel, np.int32); Ws = np.empty(nsel, G.W.dtype); idx = np.empty(nsel, np.int32)
     ns = lib.compact_subgraph(G.n, G.starts, G.V, G.W, sel, smap, starts, Vs, Ws, idx)
     del sel
     starts = starts[:ns + 1].copy()
