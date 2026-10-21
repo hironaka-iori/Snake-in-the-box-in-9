@@ -528,6 +528,7 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
              '  have h1 : TreeTrue τ start1 :=',
              ('    start_true (raw := raw) (h := %d) (slots := inputSlots) τ h' % height if FAST else
               '    start_true (raw := raw) (keys := shapeKeys) (slots := inputSlots) τ h')]
+    steps = {}   # k -> the two lines deriving h(k+1) from h(k)
     for k in range(1, nseg + 1):
         if k == nseg:
             if SPLIT:
@@ -553,6 +554,24 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
                             % ('f' if k in forced else '', k, k, height, k, k))
             else:
                 main.append('    replay_true (t := start%d) (ps := proof%d) τ ok%d h%d' % (k, k, k, k))
+        if k < nseg:
+            steps[k] = main[-2:]
+    if nseg > MAIN_CHUNK:
+        # thousands of nested `have`s overflow the elaborator's stack: prove runs of
+        # MAIN_CHUNK steps as separate lemmas and chain those
+        final = main[-1]
+        main = main[:-(2 * (nseg - 1) + 1)]
+        thm = main.index('theorem unsat : Unsat cnf := by')
+        lemmas, chain = [], []
+        for a in range(1, nseg, MAIN_CHUNK):
+            b = min(a + MAIN_CHUNK, nseg)
+            lemmas += ['theorem steps%d (τ : Nat → Bool) (h%d : TreeTrue τ start%d) : TreeTrue τ start%d := by'
+                       % (a, a, a, b)]
+            for k in range(a, b):
+                lemmas += steps[k]
+            lemmas += ['  exact h%d' % b, '']
+            chain += ['  have h%d : TreeTrue τ start%d := steps%d τ h%d' % (b, b, a, a)]
+        main = main[:thm] + lemmas + main[thm:] + chain + [final]
     main += ['', 'end ' + ns, '']
     files[os.path.join(outdir, mod + '.lean')] = '\n'.join(main)
     total = 0
@@ -564,6 +583,9 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
     stats['lean_bytes'] = total
     stats['check_modules'] = len(groups)
     return stats
+
+
+MAIN_CHUNK = 1000   # segments per step lemma of the main theorem
 
 
 def main():
