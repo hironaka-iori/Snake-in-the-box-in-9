@@ -79,3 +79,14 @@ The local executable replay rejects RAT/negative hints rather than trusting them
 It has positive controls and corrupt-proof rejection controls. It remains
 executable evidence until its input refutations are replayed by Lean's proved
 checker. Raw CNFs, LRAT proofs, solver commands and tool/code hashes are retained.
+
+`CountWindowPairs231.table_checked` checks the actual packed two-centre table
+at threshold 8, over every positive symbol pair. Its accepted covering keys
+are `(1,1)`, `(1,2)`, `(1,3)` and `(1,4)` with exact count intervals, including
+reversal. The shape proof covers every valid three-edge window. The compiled
+`hw2_of_pairs` uses the same `countSeq`, `pathDir` and packed-table functions as
+the conditional 231 aggregate, with the four refutations still explicit.
+The 181-module hash-validated development closure and allowed-axiom audits
+are recorded in `data/count-window-pairs-development.json`. This is a table
+and semantic bridge, not a substitute for the remaining concrete refutations
+or the final independent fresh rebuild.

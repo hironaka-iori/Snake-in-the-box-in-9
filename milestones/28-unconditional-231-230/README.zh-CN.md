@@ -401,3 +401,18 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py FastCountD012
 检查所选索引有效、FastRup 公式与选出的子句完全相同，才能接入原适用性
 定理。原始核心及适用性源码均未改变。输入、命令、工具 hash、种子、
 重放结果和生成源码清单保存在 `runtime/count-pairs/`。
+
+`CountWindowPairs231.lean` 已检查两中心表的全部 64 个正计数组合，证明
+表中禁止的组合都被上述四个区间键或其反转覆盖。任意三条连续蛇边的
+规范方向均为 `[0,1,2]`，因此 `hw2_of_pairs` 将这四个局部反证准确接到
+现有 231 聚合定理的 `hw2` 前提。三个目标的公理审计全部合格。
+四个反证仍作为显式前提；另外两份具体反证完成前，不称为无条件 `hw2`。
+`hw3` 至 `hw6` 与完整 share 族仍未消去。
+
+本次使用独立目录复用逐项核对源码、依赖、工具、日志及产物 hash 的既有
+构建，避免干扰运行中的四个反证。181 个自定义模块的有效闭包记录在
+`data/count-window-pairs-development.json`，这不是最终全新鲜构建。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/develop_from_fresh.py CountWindowPairs231
+```
