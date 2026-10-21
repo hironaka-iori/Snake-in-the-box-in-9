@@ -1,0 +1,116 @@
+{
+  "upstream_commit": "fcf168386b4797e90a2553d8996b84120bf0294f",
+  "controls": 240,
+  "cache_records": {
+    "threshold_results.jsonl": 13,
+    "ceiling_results.jsonl": 27,
+    "probe_results.jsonl": 5,
+    "refshare_results.jsonl": 153
+  },
+  "distinct_five_window_bounds": 137,
+  "excluded_windows": 8,
+  "cycles": [
+    {
+      "uniform": "1889/5",
+      "packed": "464",
+      "gain": "431/5",
+      "weights": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "loads": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "source": "aut_base.json",
+      "status": "conditional_on_solver_lower_bounds",
+      "period": 11,
+      "bounds": [
+        163,
+        0,
+        108,
+        108,
+        292,
+        301,
+        301,
+        292,
+        108,
+        108,
+        108
+      ],
+      "alpha_mean": "42/11",
+      "uniform_charge_mean": "6929/1320",
+      "packed_charge_mean": "184/33",
+      "line_dp_share_per_period": "464",
+      "line_dp_windows": 200
+    },
+    {
+      "source": "aut_pair_lo.json",
+      "status": "excluded_by_collaborator_model_result"
+    },
+    {
+      "source": "aut_single_lo.json",
+      "status": "five_centre_windows_not_saved"
+    },
+    {
+      "uniform": "717/5",
+      "packed": "245",
+      "gain": "508/5",
+      "weights": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "loads": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "source": "aut_single_ub.json",
+      "status": "conditional_on_solver_lower_bounds",
+      "period": 6,
+      "bounds": [
+        245,
+        0,
+        0,
+        244,
+        108,
+        120
+      ],
+      "alpha_mean": "23/6",
+      "uniform_charge_mean": "1159/240",
+      "packed_charge_mean": "797/144",
+      "line_dp_share_per_period": "245",
+      "line_dp_windows": 100
+    },
+    {
+      "source": "aut_tri_lo.json",
+      "status": "five_centre_windows_not_saved"
+    }
+  ],
+  "warning": "No new universal upper bound. Local lower bounds have not been replayed in Lean."
+}
