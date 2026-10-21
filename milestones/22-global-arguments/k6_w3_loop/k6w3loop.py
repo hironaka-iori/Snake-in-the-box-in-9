@@ -172,7 +172,7 @@ def range_test(P, mem):
     rk = (ds, ((lo, hi),) + rest)
     k6loop.wait_res()
     enc = k6loop.ws.from_key(rk)
-    st, sel, cuts, sec = k6loop.ws.solve(enc, 20)
+    st, sel, cuts, sec = k6loop.ws.solve(enc, 5)
     with open(OPL, 'a') as f:
         f.write(json.dumps(dict(dirs=list(ds), alpha=[list(a) for a in rk[1]], kind='plainrange', k=6, result=st,
                                 cuts=cuts, seconds=round(sec, 2), members=len(mem))) + '\n')
