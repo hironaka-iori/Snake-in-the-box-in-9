@@ -50,9 +50,10 @@ from collections import Counter
 
 def setup():
     G = build(); P = Plain()
-    for f in (os.path.join(K6W3, 'plain_k6w3.jsonl'), OPL):
+    import gzip
+    for f in (os.path.join(K6W3, 'plain_k6w3.jsonl'), OPL, OPL + '.gz'):
         if os.path.exists(f):
-            for l in open(f):
+            for l in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f)):
                 r = json.loads(l)
                 P.put(k6loop.rkey(tuple(r['dirs']), tuple(tuple(a) for a in r['alpha'])), r['result'], 'here')
     k6loop.OPLAIN = OPL

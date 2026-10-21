@@ -112,7 +112,8 @@ def main():
                 chosen6[k] = t
         # plain 6-window exclusions of this run that are needed
         here = set()
-        for l in open(L.OPL):
+        import gzip
+        for l in (open(L.OPL) if os.path.exists(L.OPL) else gzip.open(L.OPL + '.gz', 'rt')):
             r = json.loads(l)
             if r['result'] == 'UNSAT':
                 here.add(k6loop.rkey(tuple(r['dirs']), tuple(tuple(a) for a in r['alpha'])))
