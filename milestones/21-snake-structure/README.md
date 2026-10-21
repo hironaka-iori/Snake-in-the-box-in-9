@@ -189,3 +189,83 @@ nice -n 19 python3 hamiltonian_walks.py 10 193 15 out.jsonl
 nice -n 19 python3 tower.py 3 98 600 1 out.jsonl
 python3 runham.py 5 3 1 1 0 0
 ```
+
+## Palette search
+
+Checkpoint: 21 October 2026. Follow-up to the recommendation above: search Q9
+only in palettes that are optimal in lower dimensions, along walks of the
+Q8-record type. **No snake with more than 191 edges was found.** All results
+below are solver answers inside the stated families. They have no proof
+certificates. Scripts are in `scripts/palette_search/`, data in
+`data/palette_search/`. Every run used one core at `nice -n 19`.
+
+**Models.**
+- `pmodel.py` is a fixed-walk, bounded-piece model for any palette (A, B) of
+  Q_h. Each visit selects exactly one directed induced path of Q_h inside
+  M u A (even cell) or M u B (odd cell). Its size lies in [lo_i, hi_i], and
+  its entry and exit vertices lie in M. Cross-visit constraints are those of
+  `qmodel.py`. No cycle cuts are needed.
+- For h = 6 the degree model `qmodel.py` is used, with `allowed` and
+  `bnd_allowed` set to the palette.
+- `halfkeep.py` fixes one Q8 half and leaves the rest free (milestone-20
+  `Model2` with kept vertices).
+- `ptower.py` / `palrank.py` compute the palette tower of a general palette
+  (Q_h x Q_k).
+
+**Sanity checks (a(8) = 98).** On the record's own Q5 x Q3 walk (17 visits),
+the piece model gives:
+- 99 vertices, SAT in 0.9 s with exact sizes;
+- 99, SAT in 48 s with sizes in [S_i - 1, 8];
+- 100, **UNSAT in 5 s** with sizes in [S_i, S_i + 1].
+
+On the bank walk of entry 0 (bank palette), it gives 192, SAT in 0.3 s, and
+"one piece grows" to 193, UNSAT in 0.4 s, which agrees with H2. Free sizes
+(only <= 8) are slow: even target 92 is UNKNOWN after 60 s. The fast regime
+needs size windows.
+
+| Id | Family | Result |
+|---|---|---|
+| P1 | Palettes of the Q8 record over all 56 (h = 5) and 28 (h = 6) heavy-coordinate splits, all Q8-optimal by construction. Tested: the 8 h = 5 splits with \|A\|+\|B\| >= 14, the 8 h = 6 splits with \|A\|+\|B\| >= 45, and the record palette with vertex 13 added. Tower checked at the optimum (27 in Q6, 51 in Q7), 150 s per instance | Optimal in Q6, Q7 and Q8: h = 5 splits {0,1,3,4,7} (the README palette, 9+8; also with vertex 13 added to A or to B, 18), **{0,1,2,3,4} (8+10)** and {0,2,3,4,7} (7+7; {1,2,3,4,7} is UNKNOWN in Q7); h = 6 splits {0,1,3,4,6,7} (26+25) and {0,1,2,3,4,7} (24+25). The larger h = 5 palettes {0,1,3,4,6} (11+9) and {0,1,3,4,5} (8+11), as well as {0,1,4,5,6} and {0,1,4,6,7}, already fail in Q6; the other six h = 6 splits fail in Q7 (`pw_palrank.jsonl`) |
+| P2 | Q5 x Q4, record palette, *doubling walks*: two images of the record's Q3 walk joined across light bit 3 (24 classes, 34 visits), record sizes carried along, sizes in [S_i - s, S_i], total >= 193 | s = 1: 24/24 UNSAT (17-30 s); s = 2: 24/24 UNSAT (65-120 s) |
+| P3 | Same, palette {0,1,2,3,4} (40 visits) and {0,2,3,4,7} (66 visits) | {0,1,2,3,4}: s = 1 and s = 2, 24/24 UNSAT each; {0,2,3,4,7}: s = 1, 24/24 UNSAT |
+| P4 | Q6 x Q3, doubling walks of the record's Q6 x Q2 walk (8 classes, 20 or 24 visits), `qmodel` | {0,1,3,4,6,7}: s = 1, 2, 4, 6: 8/8 UNSAT each (1-80 s); s = 4 with pieces up to S_i + 2: 8/8 UNSAT; s = 9: UNKNOWN (200 s). {0,1,2,3,4,7}: s = 2, 4, 6: 8/8 UNSAT |
+| P5 | Feasibility of P2/P4 without a length target (walk 0) | Q5 x Q4, s = 2: **no snake at all** (UNSAT, 83 s); s = 6: feasible, best found 110 vertices (130 UNKNOWN). Q6 x Q3, s = 6: UNSAT already for target 150. The UNSAT answers in P2-P4 therefore come from the size windows, not from the 193 target |
+| P6 | The Q8 record as one Q8 half of Q9, rest free, **no palette** | 193: **UNSAT** (53 s); record minus one vertex at each end kept: 193 UNSAT (100 s); minus 2, 3, 5 at each end or 10 at one end: UNKNOWN (200 s). With the record palette, record kept: 172 UNSAT (74 s), 160 and 168 UNKNOWN |
+| P7 | Global palette SAT, light bit 3 crossed exactly once (`dbl.py`) | 170: UNKNOWN (300 s) |
+
+**What this shows.**
+1. Up to the symmetries of Q9, no snake with 193 or more vertices contains
+   all 99 vertices of the Q8 record inside one Q8 subcube. This holds for
+   any palette (P6). The record also cannot be completed with its palette:
+   at most 171 vertices. Its M-slots (4-6 per cell, 41 in total, out of
+   |M| = 14) block the adjacent cells of the other half.
+2. Walks of the Q8-record type do not double. Two near-record halves
+   (every piece within 2 vertices of the record's in Q5 x Q4, within 6 in
+   Q6 x Q3) cannot coexist on a doubling walk at any length. Each half
+   needs about 5 M-vertices per cell, and the two halves must use disjoint
+   M-sets in matched cells c and c+8. The best snake found in this family
+   has 110 vertices (`pw_best_doubling_110.json`, verified).
+3. Being optimal in Q6, Q7 and Q8 does not make a palette good in Q9. The
+   five optimal palettes found here all come from the Q8 record, and in
+   all of them the doubling family is empty near the record sizes. A Q9
+   palette has to leave the M-budget for two halves. The bank palette does
+   this (|M| = 10, 46-57 M-slots in total over 16 cells). The record
+   palette does not (41 M-slots in 8 cells).
+4. Remaining open directions, all outside the tested families:
+   - walks with 2 or more crossings of the lightest coordinate;
+   - doubling walks with a large slack (s >= 4 in Q5 x Q4, s >= 9 in
+     Q6 x Q3: UNKNOWN);
+   - palettes not derived from the Q8 record, ranked by a two-halves
+     M-budget rather than by the tower alone.
+
+Example runs (from `scripts/palette_search/`):
+
+```sh
+nice -n 19 python3 ctrl.py                                    # Q8 sanity (99 SAT, 100 UNSAT) and Q9 control
+nice -n 19 python3 ctrl9.py                                   # bank entry 0 control in the piece model
+nice -n 19 python3 dblwalk.py 193 2 0 200 out.jsonl           # P2
+nice -n 19 python3 dblwalkH.py 0,1,2,3,4 193 1 0 120 out.jsonl  # P3
+nice -n 19 python3 dbl6.py 193 4 0 200 out.jsonl 0,1,3,4,6,7  # P4
+nice -n 19 python3 halfkeep.py 193 200 0,0 0                  # P6 (cut 0,0; palette off)
+nice -n 19 python3 palrank.py out.jsonl cands.json 150        # P1 (candidates from palrank.cands())
+```

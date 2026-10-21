@@ -1,0 +1,10 @@
+q8 grow {'h': 5, 'k': 3, 'visits': 17, 'target': 100, 'result': 'UNSAT', 'secs': 5.0, 'build': 0.7, 'pvars': 33029}
+q9 ctrl {'h': 5, 'k': 4, 'visits': 34, 'target': 116, 'result': 'UNSAT', 'secs': 3.4, 'build': 1.4, 'pvars': 50121}
+99 8 {'h': 5, 'k': 3, 'visits': 17, 'target': 99, 'result': 'UNKNOWN', 'secs': 212.7, 'build': 3.2, 'pvars': 82585}
+free 92 {'h': 5, 'k': 3, 'visits': 17, 'target': 92, 'result': 'UNKNOWN', 'secs': 66.6, 'build': 3.2, 'pvars': 82585}
+bank0 exact {'h': 5, 'k': 4, 'visits': 20, 'target': 192, 'result': 'SAT', 'secs': 0.3, 'build': 0.2, 'pvars': 2318, 'length': 192, 'valid': True}
+bank0 grow {'h': 5, 'k': 4, 'visits': 20, 'target': 193, 'result': 'UNSAT', 'secs': 0.3, 'build': 0.2, 'pvars': 4700}
+q8 exact sizes (piece model, record walk, sizes = record sizes) target 99: SAT 0.9 s, valid
+q8 sizes in [S-1, 8] target 99: SAT 47.6 s, valid
+feas_dblwalk walk 0 (Q8-record split) slack 2, no target: UNSAT 83.4 s; slack 4: UNKNOWN 122 s; slack 6: SAT 6.9 s (88 vertices, valid)
+best_dblwalk walk 0 slack 6, pieces <= record sizes: 110 SAT 39.9 s (valid); 130 UNKNOWN 150 s
