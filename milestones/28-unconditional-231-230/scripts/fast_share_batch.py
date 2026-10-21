@@ -45,8 +45,34 @@ def verify_legacy(state,manifest):
         assert row['axioms'] and all(set(a['axioms'])<=common.ALLOWED for a in row['axioms'])
     return checked
 
-def prepare():
-    if (JOB/'manifest.json').exists():raise RuntimeError('Existing batch: use run')
+def prepare(refresh=False):
+    exists=(JOB/'manifest.json').exists()
+    if exists and not refresh:raise RuntimeError('Existing batch: use run, or prepare --refresh for a stopped operational repair')
+    if refresh and not exists:raise RuntimeError('No existing batch to refresh')
+    held=[];previous=None;history=None
+    if refresh:
+        held=[file_lock(JOB/'runner.lock'),file_lock(OLD/'runner.lock')]
+        old=common.read(JOB/'manifest.json');previous=common.read(JOB/'state.json')
+        # This refresh changes only the worker invocation policy. The checker,
+        # exporter, generated proofs and all other controllers stay immutable.
+        for p,h in old['controllers'].items():
+            if Path(p).resolve()!=Path(__file__).resolve():assert common.digest(p)==h,p
+        assert common.digest(JOB/'gen_fast.py')==old['exporter_sha256']
+        assert common.digest(JOB/'legacy-inherited-state.json')==old['inherited_state_sha256']
+        head=common.git('rev-parse','HEAD').decode().strip()
+        for name,d in old['frozen_modules'].items():
+            assert common.digest(SRC/(name.replace('.','/')+'.lean'))==d['sha256']
+            assert common.hashbytes(common.blob(head,d['path']))==d['sha256'],('changed framework',name)
+        for file in (JOB/'cases').glob('*.json'):
+            row=common.read(file)
+            assert common.digest(OLD/'cases'/f"{row['index']:02d}"/'ready.json')==row['core_ready_sha256']
+            for p,h in row['files'].items():assert common.digest(SRC/p)==h,p
+        verify_legacy(common.read(JOB/'legacy-inherited-state.json'),common.read(OLD/'manifest.json'))
+        history=JOB/'history'/str(time.time_ns())
+        common.atomic(history/'manifest.json',old);common.atomic(history/'state.json',previous)
+        last_log=Path(previous.get('latest_log',''))
+        if previous.get('failure') and last_log.is_file():
+            (history/'failure.log').write_bytes(last_log.read_bytes())
     original=common.read(HERE/'runtime/manifest.json');common.validate(original)
     legacy=common.read(OLD/'manifest.json');state=common.read(OLD/'state.json')
     legacy_modules=verify_legacy(state,legacy)
@@ -72,17 +98,22 @@ def prepare():
         assert common.blob(commit,relative)==Path(p).read_bytes().replace(b'\r\n',b'\n'),('uncommitted controller',p)
     common.atomic(JOB/'legacy-inherited-state.json',state)
     config=original['config'].copy();config.update(source_commit=commit,timeout_seconds=1800,
-        enforce_memory_budget=False,memory_policy='observe_only')
+        enforce_memory_budget=False,memory_policy='observe_only',thread_stack_kb=65536)
     manifest=dict(created=common.now(),config=config,controllers=controls,frozen_modules=frozen,
         exporter_commit=EXPORT_COMMIT,exporter_sha256=common.digest(exporter),
         original_manifest_sha256=common.digest(HERE/'runtime/manifest.json'),
         legacy_manifest_sha256=common.digest(OLD/'manifest.json'),
         inherited_state_sha256=common.digest(JOB/'legacy-inherited-state.json'),legacy_modules=legacy_modules,
+        refresh_history=str(history) if history else None,
         scope='Exact Boolean refutations only; geometric applicability and global bounds remain separate')
     common.atomic(JOB/'manifest.json',manifest)
     cases={i:dict(**r,backend='legacy',verified_at=common.now()) for i,r in state['case_results'].items()}
-    common.atomic(JOB/'state.json',dict(status='prepared',source_commit=commit,completed={},cases=cases,
-        kernel_cases=len(cases),total_cases=34,failures=[],global_231='UNRESOLVED',global_230='UNRESOLVED'))
+    new=previous or dict(completed={},cases=cases,kernel_cases=len(cases),total_cases=34,
+        failures=[],global_231='UNRESOLVED',global_230='UNRESOLVED')
+    new.update(status='prepared',source_commit=commit,pid=None,child_pid=None)
+    new.pop('failure',None)
+    common.atomic(JOB/'state.json',new)
+    for lock in held:lock.close()
     print(json.dumps(dict(source_commit=commit,modules=len(frozen),inherited_cases=list(cases))))
 
 def validate(m):
@@ -243,7 +274,10 @@ def build(name,m,state,checked):
     log=JOB/'logs'/(name.replace('.','_')+'.log');log.parent.mkdir(parents=True,exist_ok=True)
     state.update(status='running',phase='FastRup kernel replay',current_item=name,latest_log=str(log),last_progress=common.now())
     common.atomic(JOB/'state.json',state)
-    result=common.supervise([str(Path(c['lean_bin'])/'lean.exe'),'--root='+str(SRC),'-o',str(out),str(source)],log,c,state)
+    # Lean 4.19's kernel recursion guard depends on the native thread stack.
+    # This changes capacity only; all proof terms still go through the same kernel.
+    result=common.supervise([str(Path(c['lean_bin'])/'lean.exe'),'--tstack='+str(c['thread_stack_kb']),
+        '--root='+str(SRC),'-o',str(out),str(source)],log,c,state)
     result.update(source_sha256=own,dependency_hashes=deps,closure_hash=closure,artifact_sha256=common.digest(out),
         log_sha256=common.digest(log),axiom_audits=common.audit_axioms(log.read_text(encoding='utf-8')),completed=common.now())
     state['completed'][name]=result;state['last_progress']=common.now();common.atomic(JOB/'state.json',state)
@@ -304,8 +338,10 @@ def serve(port):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('mode',choices=['prepare','handoff','run','serve']);p.add_argument('--port',type=int,default=8798)
+    p.add_argument('--refresh',action='store_true',help='Refreeze a stopped operational repair while retaining matching proof checkpoints')
     a=p.parse_args()
-    if a.mode=='prepare':prepare()
+    if a.refresh and a.mode!='prepare':p.error('--refresh requires prepare')
+    if a.mode=='prepare':prepare(a.refresh)
     elif a.mode=='handoff':handoff()
     elif a.mode=='run':run()
     else:serve(a.port)

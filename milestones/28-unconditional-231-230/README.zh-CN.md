@@ -354,6 +354,14 @@ PYTHON milestones/28-unconditional-231-230/scripts/fast_share_batch.py serve --p
 切换后应续跑新 worker。所有内存用量只观察，单模块超时仍记为未完成。
 三项独立检查在新看板分开显示，均不等同于无条件全局上界。
 
+case 02 的 RUP 模块通过后，完整 CNF 相等性最初触发了 Lean 内核的
+`deep recursion detected`。单独提高 `maxRecDepth` 到 1,000,000 仍失败；
+使用同一源码和固定 Lean 4.19.0，加 `--tstack=65536` 后约 62.88 秒通过，
+`unsat` 和 `original_unsat` 的公理均只有允许的三项。记录见
+`data/fast-share-stack-control.json`。此项只调整线程栈容量，没有跳过内核。
+停止的批次可用 `prepare --refresh` 保存旧 manifest、状态及失败日志，
+核对其余控制器、框架、导出器和生成证明未变后恢复；仍匹配的模块继续复用。
+
 ## 计数窗口的阈值、区间与已有文件
 
 `CountWindowBridge.lean` 已通过 Lean 检查和公理审计，记录在
@@ -376,6 +384,8 @@ PYTHON milestones/28-unconditional-231-230/scripts/fast_share_batch.py serve --p
 `D012A13`、`Q012A14` 的精确 Lean CNF 和适用性源码，以固定单线程、
 seed 1 配置重现缺少的 LRAT。四份新 LRAT 已独立 RUP 重放通过。
 生成的 Lean 目标尚在检查，不能把这些运行准备称为四个局部定理已经完成。
+其中 `(1,1)` 与 `(1,2)` 的 `refuted` 已通过 Lean 和公理审计；另外两项
+仍以当前构建结果为准。
 
 ```text
 PYTHON milestones/28-unconditional-231-230/scripts/prepare_count_pairs.py
