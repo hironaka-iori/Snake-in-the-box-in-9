@@ -86,3 +86,81 @@ python3 milestones/20-lower-bound-search/scripts/summarize.py
 
 The random runs depend on wall-clock interrupts, so their exact trajectories
 do not reproduce.
+
+## Round 2: stronger encoding, larger and two-sided neighbourhoods
+
+Checkpoint: 21 October 2026, about 3.5 hours on one core at `nice -n 19`.
+**No snake longer than 191 edges was found.** No new witness, so no Lean
+module was added. All results below are restricted solver results without
+proof certificates.
+
+### Stronger model (`scripts/lns2.py`)
+
+`Model2` keeps the round-1 search space (kept vertices fixed, selected degree
+1 or 2, exactly two endpoints, at least `target` selected, lazy cycle cuts)
+and adds constraints that every induced path of Q9 satisfies:
+
+- colour balance: the two colour classes of a path differ by at most one,
+  encoded by two full totalizers and linking clauses;
+- hexagon cuts: no induced 6-cycle (every 6-cycle of Q9 lies in a Q3);
+- subcube capacity: the trace of a snake on a Q4 is an induced linear
+  forest, so at most 8 of its 16 vertices are selected. `scripts/capq.py`
+  gives the maxima 5, 8, 16, 32 for Q3 to Q6, by enumeration for Q3 and Q4
+  and by SAT with cycle cuts for Q5 and Q6. A Q5 cap of 16 is optional; it
+  slowed the solver on the instance tried.
+
+The solver is CaDiCaL 1.9.5 through PySAT, run in conflict-budget chunks so
+that a wall-clock cap applies (its interrupt does not work from a thread).
+Every SAT answer is checked again by `lns.is_snake`. Controls: for target
+192, the original filling is found on several windows. On bank entry 129,
+window 72-151 (142 free vertices, UNKNOWN in round 1), Glucose stays UNKNOWN
+for target 192 at 60 s. For target 193, CaDiCaL proves UNSAT in 53-84 s
+with or without the added cuts. The main gain is the solver. Colour balance
+gave the fastest run, but timings under a shared load are noisy.
+
+### Experiments
+
+| Run (`data/r2-*.jsonl.gz`) | What | Result |
+|---|---|---|
+| `unknown` | The 26 round-1 UNKNOWN windows (80 positions, 127-142 free), target 193, 120 s cap | 26 UNSAT (1.2-116 s). With round 1, all 1965 windows of `sweep80` are now UNSAT |
+| `endsadapt` | Both ends at once: release positions [0,T/2) and [n-T/2,n), T = 110, 120, ..., stop at the first UNKNOWN; 20 s cap; all 131 entries | 240 instances, 109 UNSAT, 131 UNKNOWN. Largest UNSAT release: T = 120 for 25 entries, T = 110 for 59, none for 47. Largest UNSAT free set 188; smallest UNKNOWN 168 |
+| `pilot` | Entry 0, ends 40:40 to 60:60 and asymmetric 30:70, 70:30, 20:90 | UNSAT up to 55:55 and 30:70/70:30 (150-160 free); 60:60 (199 free) and 20:90 (186 free) UNKNOWN at 120-150 s. In a separate bench, 60:60 was UNSAT in 234 s |
+| `longends` | 300 s caps on ends releases that were UNKNOWN | see the table rows below |
+| `holes` | Entries 127-130 are the only bank snakes with undominated vertices (2-3 each). Release every position within distance 2 or 3 of them, 120 s cap | 6 UNSAT (up to 88 positions, 186 free); radius 3 for entries 128 and 130 (253-254 free) UNKNOWN |
+| `face7all` | Every Q7 coordinate face of every bank snake (131 x 144 = 18864): release the positions inside it | 18864 UNSAT, at most 109 free vertices |
+| `face8all` | Every Q8 face (18) of entries 0, 20, 71, 115, 127, 129, 30 s cap | 108 instances: 62 UNSAT, 46 UNKNOWN (161-211 free) |
+| `grow7` | LNS from the milestone 19 off-bank 186-edge seed: random windows, two windows, both ends, Hamming balls; uphill (L+1) or a different equal-length filling | 186 to 191 edges in 14 steps; all 191-edge states were bank entries 127-130; stopped after 27 steps |
+
+The coordinate faces used in milestone 19 are small neighbourhoods for bank
+snakes: the fixed part outside a Q7 face dominates most of the face. Releases
+by path position, in particular at both ends, give much larger free sets.
+
+### Interpretation
+
+The off-bank 186-edge seed is not off the basin: it shares 142 vertices with
+entry 129, and the first climb returns to entries 127-130. The bank has no
+192-edge extension within any 80-position window, both-end releases of 110
+positions, any Q7 face, or the undominated-vertex balls of radius 2. With
+the present encoding, the solver frontier is about 180-200 free vertices at
+20-300 s. Regions of 200-250 free vertices, needed for both-end releases
+of 60 or more positions per end or for Q8 faces, remain UNKNOWN. A 192-edge
+snake, if one exists, appears to need a global structure different from
+the bank rather than a local repair of it.
+
+### Reproduction
+
+```sh
+S=milestones/20-lower-bound-search/scripts
+nice -n 19 python3 $S/drive2.py unknown   --tl 120 --log unknown.jsonl --outdir out
+nice -n 19 python3 $S/drive2.py endsadapt --tl 20 --fracs 0.5 --t0 110 --log endsadapt.jsonl --outdir out
+nice -n 19 python3 $S/drive2.py holes     --radii 2 3 --tl 120 --log holes.jsonl --outdir out
+nice -n 19 python3 $S/drive2.py faceall   --dim 7 --tl 60 --log face7all.jsonl --outdir out
+nice -n 19 python3 $S/drive2.py faceall   --dim 8 --tl 30 --banks 0 20 71 115 127 129 --log face8all.jsonl --outdir out
+nice -n 19 python3 $S/drive2.py grow --start-file seed186.json --seed 7 --hours 0.8 --tl 30 --log grow7.jsonl --outdir out
+python3 $S/summarize2.py
+```
+
+`seed186.json` is `{"vertex_sequence": path_vertices}` from
+`milestones/19-coordinate-face-repair/data/two-arm-seed186.json`. Because
+the caps are wall-clock limits on a shared machine, the UNSAT/UNKNOWN split
+near the frontier depends on the load.
