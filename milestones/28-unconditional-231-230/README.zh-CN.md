@@ -225,5 +225,9 @@ PYTHON milestones/28-unconditional-231-230/scripts/fresh_lean.py LocalWindowSat.
 ```
 
 新鲜构建从指定 Git 提交导出全部自定义依赖，在独立目录中逐个编译；其
-`LEAN_PATH` 不包含旧自定义产物目录。完成证据将单独冻结，不以增量检查
-替代。**33 个其余 share 形状及完整计数窗口链尚未接通，全局 231/230 未解决。**
+`LEAN_PATH` 不包含旧自定义产物目录。提交
+`504a29de6a19e9accfe07bd46d1e61e9bdf2b439` 的全部 **29 个自定义模块**已重新
+编译通过，耗时约 121.6 秒；最终两个目标定理仅依赖允许的三项公理。
+完整源码/依赖/产物/日志 hash、编译命令、工具链与公理审计保存在
+`data/parallel-share-full-pilot-fresh.json`。
+**33 个其余 share 形状及完整计数窗口链尚未接通，全局 231/230 未解决。**

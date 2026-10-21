@@ -55,6 +55,13 @@ core data directly. A deliberately corrupted first clause is kernel-checked to
 be rejected. The later full pilot extends this to all 81 core clauses under one
 assignment, without relying on this earlier six-clause test as a substitute.
 
+The full pilot and arbitrary-window application passed a fresh build of all 29
+custom modules from commit `504a29de6a19e9accfe07bd46d1e61e9bdf2b439` in an
+isolated custom source directory. The final theorems use only the three allowed
+axioms. This independently validates one shape, not the whole 34-shape family or
+the unconditional global bound. The complete receipt is
+`data/parallel-share-full-pilot-fresh.json`.
+
 The local executable replay rejects RAT/negative hints rather than trusting them.
 It has positive controls and corrupt-proof rejection controls. It remains
 executable evidence until its input refutations are replayed by Lean's proved
