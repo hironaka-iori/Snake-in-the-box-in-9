@@ -289,3 +289,17 @@ PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py LocalWindowSa
 不是最终全局定理的新鲜构建；记录见
 `data/parallel-share-shape-coverage-development.json`。形状表与 34 个冻结 CNF
 记录逐项一致，未按反转合并形状。全局 231/230 仍未完成。
+
+## 条件式 231 聚合链的源码整合
+
+已从既有冻结提交 `75404cc705135dd1f0526ecc9f1d198d3fbf0366` 导入缺少的
+45 个聚合/有限状态模块，约 14 MB 的完整闭包含 207 个自定义模块。
+其余 162 个模块与本分支现有源码逐字节一致，未覆盖现有文件。
+源码与依赖清单在 `data/aggregate-231-source-import.json`。
+刷新远端后，贡献者分支 `4887deb02a3a51e2775ef5e81a2fb5ddc980a669`
+中的条件式 231 主文件仍与该冻结版本相同；新 230 结果仍有局部前提。
+
+`ParallelShareAggregate231.lean` 把执行用的窗口 share 之和接到该聚合定理
+实际使用的 `windowShare`。本次新增聚合闭包和适配模块尚待本机编译，
+不能由源码齐全推断检查通过。它们仍保留 34 个 share 反证和 15,959 个
+计数窗口对应的未完成前提。
