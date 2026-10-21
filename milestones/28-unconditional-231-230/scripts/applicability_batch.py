@@ -8,6 +8,7 @@ import http.server
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import time
 import traceback
@@ -57,7 +58,7 @@ def prepare(refresh=False):
     for path,h in controls.items():
         relative=Path(path).relative_to(ROOT).as_posix()
         assert common.hashbytes(common.blob(commit,relative))==common.hashbytes(Path(path).read_text(encoding='utf-8').replace('\r\n','\n').encode()),('uncommitted controller',path)
-    config=original['config'].copy();config.update(source_commit=commit,timeout_seconds=1800)
+    config=original['config'].copy();config.update(source_commit=commit,timeout_seconds=1800,thread_stack_kb=65536)
     manifest=dict(created=common.now(),config=config,controllers=controls,frozen_modules=frozen,
         original_manifest_sha256=common.digest(HERE/'runtime/manifest.json'),
         kernel_manifest_sha256=common.digest(KERNEL/'manifest.json'),chunk_clauses=128,
@@ -66,6 +67,8 @@ def prepare(refresh=False):
         history=JOB/'history'/str(time.time_ns())
         state=common.read(JOB/'state.json')
         common.atomic(history/'manifest.json',previous);common.atomic(history/'state.json',state)
+        if state.get('latest_log') and Path(state['latest_log']).exists():
+            shutil.copyfile(state['latest_log'],history/'last-module.log')
         manifest['previous_manifest_sha256']=common.digest(JOB/'manifest.json')
         manifest['previous_snapshot']=str(history)
         state.update(status='prepared',source_commit=commit,cases={},applicability_cases=0,
@@ -135,7 +138,8 @@ def build(name,m,state,checked):
     log=JOB/'logs'/(name.replace('.','_')+'.log')
     state.update(status='running',phase='Lean geometric applicability',current_item=name,latest_log=str(log),last_progress=common.now())
     common.atomic(JOB/'state.json',state)
-    result=execute([str(Path(config['lean_bin'])/'lean.exe'),'--root='+str(SRC),'-o',str(out),str(source)],log,config,state)
+    result=execute([str(Path(config['lean_bin'])/'lean.exe'),'--tstack='+str(config['thread_stack_kb']),
+        '--root='+str(SRC),'-o',str(out),str(source)],log,config,state)
     result.update(source_sha256=sha,dependency_hashes=deps,closure_hash=fingerprint,artifact_sha256=common.digest(out),
         log_sha256=common.digest(log),axiom_audits=common.audit_axioms(log.read_text(encoding='utf-8')),completed=common.now())
     state['completed'][name]=result;state['last_progress']=common.now();common.atomic(JOB/'state.json',state)
