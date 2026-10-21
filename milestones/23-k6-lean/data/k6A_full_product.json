@@ -1,0 +1,105 @@
+{
+ "what": "gen_lean_automaton6.py --lam auto --provisional --dry-run on the k6_loop plain (A) key set: minimal_A_t235.json + base_A.json (solver answers, not certificates)",
+ "keys": 3103,
+ "six_centre_keys": 141,
+ "states": 264384,
+ "allowed_transitions": 5506634,
+ "lambda_4_on_full_product": "fails: no potential (Bellman-Ford does not converge in 20000 rounds)",
+ "min_cycle_mean_full_product": "31/8",
+ "potential_range_at_31_8": 35,
+ "bits": 6,
+ "lean_bound_at_31_8": 236,
+ "cycle_new_counts": [
+  3,
+  3,
+  6,
+  2,
+  6,
+  3,
+  3,
+  5
+ ],
+ "cycle_states": [
+  [
+   "[0, 1, 2, 3, 0, 4, 1]",
+   [
+    2,
+    6,
+    3,
+    3,
+    5
+   ]
+  ],
+  [
+   "[0, 1, 2, 3, 4, 0, 2]",
+   [
+    6,
+    3,
+    3,
+    5,
+    3
+   ]
+  ],
+  [
+   "[0, 1, 2, 3, 4, 1, 2]",
+   [
+    3,
+    3,
+    5,
+    3,
+    3
+   ]
+  ],
+  [
+   "[0, 1, 2, 3, 0, 1, 4]",
+   [
+    3,
+    5,
+    3,
+    3,
+    6
+   ]
+  ],
+  [
+   "[0, 1, 2, 3, 0, 4, 1]",
+   [
+    5,
+    3,
+    3,
+    6,
+    2
+   ]
+  ],
+  [
+   "[0, 1, 2, 3, 4, 0, 2]",
+   [
+    3,
+    3,
+    6,
+    2,
+    6
+   ]
+  ],
+  [
+   "[0, 1, 2, 3, 4, 1, 2]",
+   [
+    3,
+    6,
+    2,
+    6,
+    3
+   ]
+  ],
+  [
+   "[0, 1, 2, 3, 0, 1, 4]",
+   [
+    6,
+    2,
+    6,
+    3,
+    3
+   ]
+  ]
+ ],
+ "note": "The k6_loop answer (lambda = 4 for 235) is on the lifted live graph of the k5 radius-4 pickle; the Lean check covers the full product, where this 8-cycle (period-4 count pattern 3,3,6,2 / 6,3,3,5) has mean 31/8 with these keys. Its windows must be tested and excluded (or the check restricted to a closed set) before a 235 chain can be generated."
+}
