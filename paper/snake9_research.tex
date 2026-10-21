@@ -1344,6 +1344,56 @@ The integer-weight version, obtained by clearing a common denominator, has been 
 
 For example, suppose five distinct candidate vertices $u_0,\ldots,u_4$ yield demands $G_i=\{u_i,u_{i+1}\}$, with subscripts taken modulo five. Giving each demand weight $1/2$ satisfies the per-vertex condition, but the total weight is $5/2$, a contradiction. No three of these pairs are disjoint, so a test limited to three disjoint endpoint demands would miss this obstruction. The five-pair contradiction is also checked independently in Lean. Identifying a forced occurrence of this arrangement, or another weighted obstruction, in low-singleton geometry is an open research direction. The counting principle is standard; no claim of historical novelty is made for it.
 
+\subsection{Conditional share targets and a finite relaxation obstruction}
+Two empty-square charges must be distinguished. For an empty-square corner $q$,
+let $e(q)$ count empty coordinate squares containing it and let $d(q)$ count its
+selected neighbours. The integer corner share received by a selected vertex $x$
+at resolution $M$ is
+\[
+s_M(x)=\sum_{q\sim x}\left\lfloor\frac{M e(q)}{d(q)}\right\rfloor,
+\]
+with division by zero assigned the value zero. Double counting and the division
+algorithm give the exact identity
+\[
+\sum_{x\in S}s_M(x)+\sum_q (M e(q)\bmod d(q))=M E,
+\]
+where $E=4s_0$ and $n\bmod0=n$. Thus undominated empty corners and integer rounding
+are both retained in the loss term. For $M=12$ put
+$G=\sum_{x\in S}(24\alpha_S(x)+s_{12}(x))$. For a nontrivial snake the incidence
+bound implies $G+840v\le221136$. Consequently $G\ge114v-1145$ would imply at most
+231 edges, and $G\ge114v-191$ would imply at most 230 edges: the excluded vertex
+counts would require respectively $954\cdot233\le222281$ and
+$954\cdot232\le221327$, both false by exactly one integer unit.
+These lower bounds for $G$ have not been proved for arbitrary snakes.
+
+Checking a few favourable periodic patterns is insufficient to prove such a
+lower bound. A finite abstract relaxation with 232 edges and 233 vertices has
+endpoint counts four, internal counts four except for the 46 indices divisible
+by five and index 116, which have count five. It has $T=979$, $E=160$, and may
+assign every corner share zero, giving $G=23496<25417$. It satisfies the existing
+five-centre exclusion and saved packing constraints. Its transition word repeats
+$0,1,\ldots,8$, so vertex 18 repeats vertex zero: it is not a snake. It identifies
+a missing restriction in this abstraction rather than a counterexample to the
+desired geometric theorem.
+
+A different charge assigns weights $6,3,2$ across parallel squares having one,
+two, or three selected corners. If $A$ is the total internal singleton count and
+$H$ is this total parallel-square share, its global bound is
+$21(A+8)+H+735(m+1)\le193494$. The proposed six-centre premises
+$9m\le2A+59$ and $21(m-7)\le6H$ then imply
+$1666m\le386470$, hence $m\le231$. For seven centres, premises
+$89m\le19A+C$ and $27(m-8)\le7H$ imply
+$111351m\le25618707+147C$; $C\le703$ suffices for 230 edges.
+The arithmetic and elementary share-gate identities have been checked in Lean.
+The complete Boolean refutations and their applicability to all snake windows
+remain required. The two share definitions and their certificates are not interchangeable.
+
+The earlier 237 bound retains its contributor audit. A fresh independent rebuild
+of its complete custom source dependencies has not been completed in this
+investigation; generated refutation modules omitted from the source archive
+must first be reconstructed. Neither 231 nor 230 is asserted as an unconditional
+theorem here.
+
 \subsection{The exact optimum}
 The unconditional conclusion is $191\le a(9)\le237$ (Theorem~\ref{thm:upper237}), which subsumes the earlier verified bounds 242, 241 and 238 of Theorems~\ref{thm:upper241} and~\ref{thm:upper238} and the conditional bound 239 of Proposition~\ref{prop:direction239}. The full radius-four window set of the refinement loop, 732 windows with mean $42/11$, would give 236 edges by the same arithmetic. Its refutation certificates have been checked outside Lean, the bound has been compiled in Lean conditionally on the window exclusions, and the kernel replays of the 361 refutations not shared with the 237 set are in progress. The bound 236 is not established yet. By the limits described in Section~\ref{sec:window-aggregate}, local window arguments of this kind cannot reach much below 227 edges.
 No 192-edge construction or universal exclusion of length 192 has been obtained. A solution requires a length $L$ for which both an explicit snake and an exclusion of length $L+1$ are established; the prefix argument then excludes all longer paths. Conjecture~\ref{conj:196} would require a 196-edge construction and an exclusion of length 197, but the proved bounds do not single out that value. Further progress may come from stronger restrictions on singleton counts or from constructions outside the tested families.

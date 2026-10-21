@@ -1,5 +1,17 @@
 # Collaborator handoff
 
+## 21 October 2026: isolated 231/230 integration branch
+
+`research/unconditional-231-230` starts at `9043328966d65647acba6efd62f88eceb896622d`.
+See [milestone 28](milestones/28-unconditional-231-230/README.zh-CN.md) for exact frozen
+sources, dependency obligations, arithmetic, and the abstract packing obstruction.
+This branch owns the independent replay of the already-completed 34 six-centre
+parallel-share records and partial Lean semantic integration. It does not duplicate
+the active seven-centre count certification batch or modify KEEP/244 evidence.
+The nine new auxiliary theorems are not unconditional bounds. Final 231 and 230
+remain unresolved. The 237 dependency closure needs 387 omitted generated imports
+restored before a fresh source rebuild; existing contributor logs remain distinct.
+
 Checkpoint: 19 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Current assignment: constructive search

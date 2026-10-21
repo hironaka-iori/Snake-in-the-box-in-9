@@ -1,5 +1,12 @@
 # Snake-in-the-box in dimension nine
 
+Research branch checkpoint (21 October 2026): [unconditional 231/230 audit](milestones/28-unconditional-231-230/README.zh-CN.md).
+No unconditional 231 or 230 theorem has been completed. The strongest contributor-audited
+unconditional bound inspected is 237; its independent full source rebuild has not been
+completed on this branch. New results are nine small Lean auxiliary lemmas and an exact
+counterexample to the sufficiency of the saved packing relaxation. The resumable runner
+checks partial components and 34 six-centre share certificates, with evidence stages separated.
+
 Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.

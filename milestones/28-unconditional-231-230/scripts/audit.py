@@ -58,7 +58,18 @@ def closure(target):
                 for d in line.split('--')[0].split()[1:]:
                     visit(d)
     visit(target)
-    return dict(target=target, existing_modules=found, missing_modules=sorted(missing))
+    revision=git('rev-parse','HEAD').decode().strip()
+    # Hash repository bytes, not platform-dependent checkout line endings.
+    keys=list(found)
+    requests=''.join(revision+':'+found[m]['path']+'\n' for m in keys).encode()
+    batch=subprocess.check_output(['git','cat-file','--batch'],input=requests,cwd=ROOT)
+    pos=0
+    for m in keys:
+        end=batch.index(b'\n',pos); header=batch[pos:end].split();pos=end+1
+        if header[-1]==b'missing':continue
+        size=int(header[-1]);found[m]['sha256']=sha(batch[pos:pos+size]);pos+=size+1
+    return dict(target=target, existing_modules=found, missing_modules=sorted(missing),
+                hash_source='Git blobs at '+revision)
 
 def main():
     files = [PREFIX+'scripts/'+s for s in ['wincert.py','share_enc.py','verify_share_certs.py',

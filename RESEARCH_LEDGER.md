@@ -1,5 +1,10 @@
 # Scope of this archived ledger
 
+Current branch addendum, 21 October 2026: milestone 28 records the frozen 231/230
+dependency audit, a finite abstract obstruction to the saved packing relaxation,
+nine compiled auxiliary lemmas, and a resumable independent verification batch.
+No unconditional 231/230 result is claimed. The following entries remain historical.
+
 Entries below are chronological development history. The current unconditional bound is 245; 244 remains conditional. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
 
 # Research ledger — 15 October 2026
