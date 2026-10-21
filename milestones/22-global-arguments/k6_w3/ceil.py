@@ -66,7 +66,7 @@ def descend(k, O, sec, steps=(60, 30, 15, 8)):
             while time.time() < t_end:
                 s = O.get(k)
                 T = s['ub'] - step + 1                 # sum <= ub - step
-                if T <= s['lb'] or (s['fail'] is not None and T >= s['fail']):
+                if T <= s['lb']:
                     break
                 idx = T - 168 * nc
                 if idx < 1 or idx >= len(root):
