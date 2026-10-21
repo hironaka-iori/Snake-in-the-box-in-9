@@ -1420,6 +1420,76 @@ a_0+a_1+a_2+a_3=4608,\qquad
 \]
 and $a_1\ge(17/2)v$. No path realizing this census is asserted. It demonstrates that these numerical premises permit 211 vertices. The arithmetic implication has been checked in Lean. A stronger conclusion requires additional geometric restrictions, a length-dependent estimate, or another invariant.
 
+\subsection{Retaining empty squares through weighted windows}\label{sec:empty-packing}
+Let $S$ be the vertex set of a nontrivial snake, let $v=|S|$, and let $s_0$ be the number of empty coordinate squares. For $q\in\Q_9$, define
+\[
+e(q)=\#\{\text{empty coordinate squares containing }q\},
+\qquad d(q)=|N(q)\cap S|.
+\]
+Then $\sum_q e(q)=4s_0$. For a positive integer $M$, assign to each selected vertex the integer share
+\[
+\sigma_M(x)=\sum_{q\sim x}\left\lfloor\frac{M e(q)}{d(q)}\right\rfloor.
+\]
+For $x\in S$ every denominator in this sum is positive. When summing over all cube vertices, define a zero-denominator contribution to be zero.
+
+\begin{proposition}[Corner-share loss identity]\label{prop:share-loss}
+Set $r_M(q)$ equal to the remainder of $M e(q)$ on division by $d(q)$ when $d(q)>0$, and set $r_M(q)=M e(q)$ when $d(q)=0$. Then
+\[
+\sum_{x\in S}\sigma_M(x)+\sum_{q\in\Q_9}r_M(q)=4M s_0.
+\]
+Consequently, with $T=\sum_{x\in S}\alpha_S(x)$,
+\[
+G_M:=2MT+\sum_{x\in S}\sigma_M(x),
+\qquad G_M+70Mv\le18428M.
+\]
+\end{proposition}
+\begin{proof}
+Interchanging the neighbor sums gives
+\[
+\sum_{x\in S}\sigma_M(x)=\sum_q d(q)\left\lfloor\frac{M e(q)}{d(q)}\right\rfloor.
+\]
+The division algorithm, together with the stated zero-degree convention, gives the first identity. Each internal path vertex contributes exactly one wedge and each endpoint contributes none, so $W=v-2$ in~\eqref{eq:anchored-square-count}. Hence $T+2s_0+35v=9214$. Multiply this equality by $2M$ and use the nonnegativity of the remainder sum.
+\end{proof}
+The loss identity includes both rounding and empty corners without selected neighbors. The integer identity and the displayed global inequality have been checked in Lean. The corner-share construction and its geometric interpretation were developed in the parallel upper-bound work; the exact remainder identity records the loss explicitly.
+
+\begin{lemma}[Weighted window packing]\label{lem:share-packing}
+Let $\sigma_j\ge0$ be shares at finitely many positions. Suppose that a family of windows $I_t$ has bounds $b_t\le\sum_{j\in I_t}\sigma_j$. If rational weights $w_t\ge0$ satisfy
+\[
+\sum_{t:\,j\in I_t}w_t\le1\quad\text{for every position }j,
+\]
+then $\sum_t w_t b_t\le\sum_j\sigma_j$.
+\end{lemma}
+\begin{proof}
+Multiply each window inequality by $w_t$, sum, and interchange the two finite sums:
+\[
+\sum_t w_t b_t\le\sum_j\sigma_j\sum_{t:\,j\in I_t}w_t\le\sum_j\sigma_j.
+\]
+Clearing a common denominator gives the integer statement checked in Lean.
+\end{proof}
+For five-position windows on a line, a useful integer choice selects disjoint windows. If $b_i$ bounds the share on positions $i,\ldots,i+4$, set $D(0)=0$ and
+\[
+D(n)=
+\begin{cases}
+D(n-1),&1\le n<5,\\
+\max\{D(n-1),D(n-5)+b_{n-5}\},&n\ge5.
+\end{cases}
+\]
+Induction gives $D(n)\le\sum_{j=0}^{n-1}\sigma_j$: the first alternative uses nonnegativity, and the second adds the last five positions to a bound on the preceding positions. This implication has also been checked in Lean. Zero may be used for any window whose lower bound is unknown.
+
+In saved radius-four computations at $M=12$, an eleven-position periodic pattern has singleton-count mean $42/11$. Its recorded five-window share bounds, ordered by starting position, are
+\[
+(163,0,108,108,292,301,301,292,108,108,108).
+\]
+Uniform weights $1/5$ give a share sum of at least $1889/5$. Selecting positions $0,\ldots,4$ and $6,\ldots,10$ instead gives $163+301=464$. The resulting lower estimate for the mean of $\alpha+\sigma_{12}/24$ increases from $6929/1320$ to $184/33$. A six-position pattern with singleton-count mean $23/6$ and bounds $(245,0,0,244,108,120)$ similarly improves from $1159/240$ to $797/144$. Both packing choices were checked by exact arithmetic. Their numerical local premises remain solver results; no universal density bound follows from testing these two patterns alone.
+
+\begin{proposition}[Explicit charge targets]\label{prop:charge-targets}
+If every nontrivial snake satisfies $G_{12}\ge114v-191$, then $a(9)\le230$. If the weaker estimate $G_{12}\ge114v-1145$ holds for every nontrivial snake, then $a(9)\le231$.
+\end{proposition}
+\begin{proof}
+Proposition~\ref{prop:share-loss} gives $G_{12}+840v\le221136$. The first hypothesis gives $954v\le221327<954\cdot232$, hence $v\le231$. The second gives $954v\le222281<954\cdot233$, hence $v\le232$. Subtract one to count edges. The one-vertex case satisfies both conclusions directly.
+\end{proof}
+These conditional implications have been checked in Lean. Neither hypothesis has been proved for all snakes. A complete improvement requires verified local share bounds, coverage of every allowed sequence, and control of the initial and terminal contributions. Weighted packing preserves more of the available local information while leaving those proof obligations explicit.
+
 \subsection{Overlapping endpoint demands}
 Local geometric arguments often produce sets that must contain an endpoint. Their overlap can be retained in the counting argument.
 \begin{proposition}[Weighted endpoint accounting]

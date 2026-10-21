@@ -1,10 +1,20 @@
 # Collaborator handoff
 
-Checkpoint: 20 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 21 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+
+## Active empty-square route
+
+The user's latest instruction explicitly requests the s0 route, superseding the earlier construction-only division of work. [Milestone 27](milestones/27-empty-square-packing/README.md) pins `research/unconditional-241` at fcf168386b4797e90a2553d8996b84120bf0294f. That branch has already supplied the share double count and geometric bridge. Our complementary contribution is weighted window packing, exact remainder loss, a checked disjoint-window recurrence, and precise conditional targets for 230/231.
+
+All six new Lean audits passed. On saved eleven- and six-position periodic patterns, packing improves the share bounds from 1889/5 to 464 and from 717/5 to 245. These are conditional on the existing solver records; the local numerical premises have not been replayed here. Exact packing certificates, 240 exhaustive controls and all 131 bank-path checks passed. No new unconditional bound is claimed.
+
+Next: certify the useful local bounds 163/301/245 and incorporate packing into a proof covering every allowed sequence, including boundary loss. Optimizing selected cycles alone is insufficient. The finite-state construction must represent the packing recurrence or establish an equivalent invariant; the ordinary count-only minimum-mean table cannot simply be reused with these optimized cycle values.
+
+The unfinished milestone 26 construction files remain local and are preserved. Their 186-edge interior-change witness does not improve the lower bound. Main still integrates 238; the collaborator's 237 audit remains branch-specific.
 
 ## Latest construction checkpoint
 
-The user explicitly broadened the construction objective: pursue any valuable improvement, without exclusive focus on 196. Upper-bound work remains assigned to collaborators.
+The earlier construction objective was any valuable improvement, without exclusive focus on 196. The current direction is recorded above.
 
 [Milestone 22](milestones/22-internal-anchor-donors/README.md) tests the complete 191-edge donor through four anchor pairs and 23,040 alignments. No candidate of at least 192 edges survived; the five saved near candidates have 24 to 45 chords. Four new Lean audits certify the full donor and its relation to the prior prefix.
 

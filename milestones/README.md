@@ -18,7 +18,7 @@ The exact optimum remains unresolved. This checkout integrates 191 <= a(9) <=238
 - [Targeted mergers and frozen-cycle accounting](15-component-mergers/README.md)
 - [Larger cycle configurations and local cell states](16-cycle-reservoirs/README.md)
 
-Active direction as of 20 October: construct any verified improvement beyond 191 edges. Upper-bound research continues on collaborator branches. See the current collaborator handoff for evidence boundaries.
+Active direction as of 21 October: retain the empty-square charge and improve the aggregation of certified local windows. See the current collaborator handoff for evidence boundaries.
 
 The relocation manifest records moved files. Historical proof logs and source-hash manifests retain their original recorded paths as provenance.
 
@@ -32,3 +32,4 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 
 - [Alternative fillings and retained changes](25-alternative-fillings/README.md)
 - [Global cell construction](17-global-cell-construction/README.md)
+- [Empty-square shares and weighted window packing](27-empty-square-packing/README.md)
