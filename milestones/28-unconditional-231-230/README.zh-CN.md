@@ -435,3 +435,23 @@ PYTHON milestones/28-unconditional-231-230/scripts/applicability_batch.py run
 原清单 hash 和每个分片记录在 `data/applicability-shard-refinement.json`。
 恢复后首批细分模块已经通过并写入检查点，完整适用性结果仍以批次为准。
 此处没有把超时当作几何反例，也没有放宽检查器或使用不可信计算。
+
+## 三中心计数表的完整覆盖
+
+`CountWindowTable231.lean` 证明任意长度的正计数枚举、规范化不变性，
+以及“具体表覆盖 + 对应局部反证族”蕴含任意蛇窗口满足实际禁止表条件。
+`CountWindowTriples231.lean` 从冻结源集准确导出 91 个三中心区间键，
+核对两种有效四边形状的全部 1,024 个正计数组合，并证明与聚合定理
+完全一致的 `hw3_of_triples` 接口。上述目标已通过 Lean 和允许公理审计。
+这仍要求 91 个具体反证；不能将表覆盖本身当作这些反证已完成。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/prepare_count_triples_table.py
+PYTHON milestones/28-unconditional-231-230/scripts/develop_from_fresh.py CountWindowTriples231
+```
+
+源集提交固定为 `75404cc705135dd1f0526ecc9f1d198d3fbf0366`。输入 hash、
+原始索引和输出源码 hash 在 `data/count-triples-table-input.json`；完整有效
+开发闭包在 `data/count-triples-table-development.json`。本次三中心表模块
+约 10.42 秒通过，属于复用已验证依赖的开发构建，不是最终全新鲜验证。
+三份最短两中心反证现已通过，第四份仍在运行。

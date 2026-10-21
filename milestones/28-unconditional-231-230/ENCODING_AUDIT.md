@@ -100,3 +100,13 @@ The original source, receipt and failed log were archived before replacement;
 the refinement script's committed source and hashes are recorded separately in
 `data/applicability-shard-refinement.json`. Split-module progress alone does not
 establish the whole case's geometric applicability.
+
+`CountWindowTable231.no_window` separates complete finite coverage from the
+required local refutation family at any window length. Positive symbols cover
+every actual internal count after truncation to 8. Canonical relabelling and
+reversal preserve both the original packed-table lookup and interval matching.
+`CountWindowTriples231.table_checked` applies this to the exact 91 three-centre
+keys from the frozen source set, and `hw3_of_triples` has the original aggregate
+premise's functions and indices. All printed axioms are allowed. These results
+are conditional on the concrete interval refutations, whose completion must be
+audited separately.
