@@ -1,0 +1,888 @@
+{
+ "alpha_conditioned_calls": {
+  "5-centre thr": {
+   "UNSAT": 263,
+   "SAT": 19,
+   "TIMEOUT": 19
+  },
+  "5-centre sweep": {
+   "UNSAT": 675,
+   "TIMEOUT": 65,
+   "SAT": 1
+  },
+  "2-centre subsweep": {
+   "UNSAT": 82,
+   "SAT": 4,
+   "TIMEOUT": 13
+  },
+  "3-centre subsweep": {
+   "UNSAT": 1164,
+   "SAT": 10,
+   "TIMEOUT": 6
+  }
+ },
+ "direction_only_calls": 139,
+ "five_centre_keys_tested": 964,
+ "proofs_in_loop": {
+  "n": 40,
+  "failed_over_cap": 1,
+  "median": 24127.0,
+  "mean": 444019.075,
+  "p90": 1910429,
+  "max": 3369674,
+  "total": 17760763
+ },
+ "proof_sample": [
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     0,
+     21
+    ]
+   ],
+   "T": 257,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 1.2,
+   "lrat_hints": 1557762,
+   "core_clauses": 7249,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     0,
+     21
+    ]
+   ],
+   "T": 257,
+   "sym": false,
+   "status": "UNSAT",
+   "solve_s": 27.8,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": "lrat run rc -25 (file cap?)"
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ]
+   ],
+   "T": 263,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 18.1,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": "lrat run rc -25 (file cap?)"
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ]
+   ],
+   "T": 263,
+   "sym": false,
+   "status": "TIMEOUT",
+   "solve_s": 120.3,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     3,
+     3
+    ]
+   ],
+   "T": 267,
+   "sym": true,
+   "status": "TIMEOUT",
+   "solve_s": 120.1,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     3,
+     3
+    ]
+   ],
+   "T": 267,
+   "sym": false,
+   "status": "TIMEOUT",
+   "solve_s": 120.1,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     4,
+     4
+    ]
+   ],
+   "T": 271,
+   "sym": true,
+   "status": "TIMEOUT",
+   "solve_s": 120.1,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     4,
+     4
+    ]
+   ],
+   "T": 271,
+   "sym": false,
+   "status": "TIMEOUT",
+   "solve_s": 120.2,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     5,
+     5
+    ]
+   ],
+   "T": 274,
+   "sym": true,
+   "status": "TIMEOUT",
+   "solve_s": 121.0,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     5,
+     5
+    ]
+   ],
+   "T": 274,
+   "sym": false,
+   "status": "TIMEOUT",
+   "solve_s": 120.3,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     6,
+     21
+    ]
+   ],
+   "T": 279,
+   "sym": true,
+   "status": "TIMEOUT",
+   "solve_s": 120.5,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "single",
+   "dirs": [
+    0,
+    1
+   ],
+   "alpha": [
+    [
+     6,
+     21
+    ]
+   ],
+   "T": 279,
+   "sym": false,
+   "status": "TIMEOUT",
+   "solve_s": 121.3,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    1,
+    4
+   ],
+   "alpha": [
+    [
+     5,
+     5
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "T": 1420,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 1.0,
+   "lrat_hints": 195384,
+   "core_clauses": 7952,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     1,
+     1
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "T": 1380,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 0.4,
+   "lrat_hints": 264,
+   "core_clauses": 102,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     1,
+     1
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "T": 1380,
+   "sym": false,
+   "status": "UNSAT",
+   "solve_s": 0.5,
+   "lrat_hints": 264,
+   "core_clauses": 102,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    0
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "T": 1420,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 0.5,
+   "lrat_hints": 7810,
+   "core_clauses": 915,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    0
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "T": 1420,
+   "sym": false,
+   "status": "UNSAT",
+   "solve_s": 0.6,
+   "lrat_hints": 10809,
+   "core_clauses": 1080,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "T": 1380,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 0.5,
+   "lrat_hints": 721,
+   "core_clauses": 273,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "T": 1380,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 1.6,
+   "lrat_hints": 560771,
+   "core_clauses": 14266,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "T": 1390,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 0.5,
+   "lrat_hints": 2882,
+   "core_clauses": 757,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "T": 1390,
+   "sym": false,
+   "status": "UNSAT",
+   "solve_s": 0.5,
+   "lrat_hints": 3502,
+   "core_clauses": 677,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    1,
+    4
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "T": 1420,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 1.4,
+   "lrat_hints": 247689,
+   "core_clauses": 9613,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     21
+    ]
+   ],
+   "T": 1420,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 14.7,
+   "lrat_hints": 3378899,
+   "core_clauses": 27851,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     21
+    ]
+   ],
+   "T": 1420,
+   "sym": false,
+   "status": "UNSAT",
+   "solve_s": 21.5,
+   "lrat_hints": null,
+   "core_clauses": null,
+   "failed": "lrat run rc -25 (file cap?)"
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    1,
+    4
+   ],
+   "alpha": [
+    [
+     1,
+     1
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     6,
+     21
+    ]
+   ],
+   "T": 1420,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 0.5,
+   "lrat_hints": 14478,
+   "core_clauses": 1053,
+   "failed": null
+  },
+  {
+   "kind": "five",
+   "dirs": [
+    0,
+    1,
+    2,
+    3,
+    0,
+    4
+   ],
+   "alpha": [
+    [
+     1,
+     1
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     6,
+     21
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "T": 1380,
+   "sym": true,
+   "status": "UNSAT",
+   "solve_s": 0.5,
+   "lrat_hints": 1292,
+   "core_clauses": 481,
+   "failed": null
+  }
+ ],
+ "cost_per_certificate_kernel_h": {
+  "median": 0.0028384705882352943,
+  "mean": 0.052237538235294124
+ },
+ "cost_1000_certificates_kernel_h_at_mean": 52.23753823529412,
+ "cost_5000_certificates_kernel_h_at_mean": 261.1876911764706,
+ "cost_11425_certificates_kernel_h_at_mean": 596.8138743382353,
+ "eval": {
+  "keys": 11425,
+  "tested": 964,
+  "lb_from_threshold": 888,
+  "sat_witness": 20,
+  "timeouts": 77,
+  "lo": {
+   "lam": "22995/17",
+   "per_vertex_c": 270.5294117647059,
+   "w3": 22.544117647058826,
+   "m_le_approx": 240.42378777995216,
+   "len": 34,
+   "potential_range": 406,
+   "m_le_rigorous": 240.44144379212872
+  },
+  "hi": {
+   "lam": "8497/6",
+   "per_vertex_c": 283.23333333333335,
+   "w3": 23.602777777777778,
+   "m_le_approx": 229.95398375897375,
+   "len": 6
+  },
+  "whatif_1380": {
+   "lam": "1380",
+   "per_vertex_c": 276.0,
+   "w3": 23.0,
+   "m_le_approx": 235.79710144927537,
+   "len": 3
+  },
+  "whatif_1400": {
+   "lam": "1400",
+   "per_vertex_c": 280.0,
+   "w3": 23.333333333333332,
+   "m_le_approx": 232.52857142857144,
+   "len": 3
+  },
+  "whatif_1420": {
+   "lam": "8491/6",
+   "per_vertex_c": 283.03333333333336,
+   "w3": 23.586111111111112,
+   "m_le_approx": 230.11152985514073,
+   "len": 6
+  }
+ }
+}
