@@ -36,7 +36,7 @@ cd $R
 nice -n 10 python3 work/spectral/verify_strengthened.py --mathlib-dir $MATHLIB \
   --build-dir work/spectral/.verification/strengthened-k6-resume \
   --core-targets Snake9 PathStructure CubeLocal SquareCounterexample SingletonSquareLemma OptimalityTarget \
-  --extra-chains K6R3C7W K6R34C7W K7R34C7W16 --jobs 2
+  --extra-chains K6R3C7W K6R34C7W K7R34C7W16 --share231 --jobs 2
 cp work/spectral/.verification/strengthened-k6-resume/manifest.json outputs/strengthened-direction-231-reproduction-manifest.json
 touch $D/pipeline_231.done
 log "done"
