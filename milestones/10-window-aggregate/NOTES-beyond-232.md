@@ -75,6 +75,18 @@ Status: working notes. Every bound below 245 in this milestone is **conditional*
 
 **Done:** 244 is unconditional, moving the proved interval from 245 to 244 with two certificates (`milestones/07-window-223/bridge/README.md`). The total kernel work is about 260 s, far below the estimate, because the trimmed LRAT proofs have 1,629 and 17,101 steps. Before the large chains, the proofs must shrink by about 100x. Options: minimisation weighted by proof cost (oracle time predicts certification time, log correlation 0.95), incremental certification per shape, and re-solving on the used clauses.
 
+## 4b. Count-free local certificates do not reach 225 (21 October, solver evidence)
+
+The question was whether a few count-free window certificates could replace the count automaton for an unconditional bound. Take ω(x) = 21 α(x) + share(x). Then `Σ ω <= 21 (9214 - 35 v)`; the identity `T + 2 s0 = 9214 - 35 v` is an equality, because `T = 21 v + 14 - 2 D2` and `s0 = 4600 - 28 v + D2`, where D2 counts non-consecutive path pairs at distance 2. There are m - k windows of k centres, each centre lies in at most k of them, and each endpoint has ω >= 84. So 224 needs every k-centre window to have Σ ω >= about 124 k (k = 6: 746).
+
+Local minima are far lower:
+- **ω, radius 3:** 0 at k = 1, 88 at k = 2, between 201 and 259 at k = 3, at most 353 at k = 4.
+- **ω, radius 4:** 29 at k = 1, 96 at k = 2. Radius 3 leaves the degree of the corners' neighbours unchecked.
+- **Share alone:** at least 21 at k = 4, at least 37 at k = 5, at least 21 at k = 6, at least 27 at k = 7.
+- **Real snakes**, for comparison (the minima over the 131 bank snakes, the witness and the counterexample): ω 217, 361, 539, 706, 874 and 1077 for k = 2..7, and share 179 for k = 6. Even these give 225 only from k = 3 and 219 at k = 6.
+
+So the count automaton stays necessary. A share bonus on the unconditional 239 chain (L = 6, windows of four centres, `10 m <= 3 Σ α + 60`) gives 237-238 with these certificates, and 231 even with the real-snake share minimum. The cost of an unconditional bound below 239 is therefore the kernel cost of thousands of window premises. That is the target of the checker work: FastRup (bridge/fast) gives 2.3-3.6x, and one shared incremental proof per direction shape is being measured.
+
 ## 5. Lower-bound side
 
 - See README "Lower bound" and `milestones/08-exhaustive-search`.
