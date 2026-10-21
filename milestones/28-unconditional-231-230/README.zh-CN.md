@@ -267,3 +267,25 @@ PYTHON milestones/28-unconditional-231-230/scripts/applicability_batch.py serve 
 `refuted_of_unsat` 仍是带不可满足性前提的接口，须另接匹配的 Boolean
 反证及任意窗口桥接；不能将两个批次的完成数直接称为最终定理的完成数。
 case 01 既有的完整局部定理与 29 模块新鲜构建继续有效。
+
+## 七方向形状覆盖与自动坐标归一化
+
+`ParallelShareShapeBridge.lean` 已通过 Lean 检查。`coverage_checked` 在内核中
+枚举七方向的所有 restricted growth strings，证明每个满足诱导路径条件的
+形状都在精确的 34 项列表中。`window_shape_mem` 随即证明任意真实蛇的
+七边窗口属于这张表；此结论不要求额外的覆盖假设或局部证书。
+
+`refuted_canonical_window` 复用既有首次出现重标记及坐标置换证明，自动构造
+所需坐标列表。`window_share_ge_21_of_family` 将 34 个明确的局部反证转换为
+任意窗口的 share 下界；它仍保留尚待批次完成的局部反证族前提。
+`LocalWindowSat/ParallelShare01CanonicalWindow.lean` 已将已完成的 case 01
+接入该桥接，仅需真实蛇窗口的规范形状匹配，不再要求用户提供坐标列表。
+
+```text
+PYTHON milestones/28-unconditional-231-230/scripts/develop_lean.py LocalWindowSat.ParallelShare01CanonicalWindow
+```
+
+所有目标公理只含允许的三项。该次是源码、依赖、产物 hash 匹配的开发构建，
+不是最终全局定理的新鲜构建；记录见
+`data/parallel-share-shape-coverage-development.json`。形状表与 34 个冻结 CNF
+记录逐项一致，未按反转合并形状。全局 231/230 仍未完成。

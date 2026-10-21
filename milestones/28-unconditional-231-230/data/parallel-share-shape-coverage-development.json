@@ -1,0 +1,1415 @@
+{
+  "created": "2026-10-21T17:21:36.145887+00:00",
+  "scope": "Hash-validated incremental development build: complete 34-shape coverage and canonical transport; 34-refutation family remains an explicit premise; unconditional 231/230 unresolved",
+  "target": [
+    "LocalWindowSat.ParallelShare01CanonicalWindow"
+  ],
+  "modules": {
+    "LocalWindowModel": {
+      "source_sha256": "5c374d6b74cbed0ebb91f93e53de21f6e33a85f64532dca6c09f7cefe3a6a8a0",
+      "dependency_hashes": {},
+      "closure_hash": "a3ae969d2712aa5ef9dafbb342a793d1ab784d75aa0f58544cde51adf1968314",
+      "artifact_sha256": "cdff343e0e81adb26337250528ae18a37d4294b6e00cb7ac77cbe223aa6645e9",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowModel.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowModel.lean"
+      ],
+      "log_sha256": "50ad6e501ac946c5b2e3b40928ffef896422f6cf5576a538f55885d25554dc59",
+      "elapsed_seconds": 0.6089999999967404,
+      "axioms": [],
+      "completed": "2026-10-21T16:07:20.756485+00:00"
+    },
+    "LocalWindowShareModel": {
+      "source_sha256": "3a9210925cbd9432b5c1022c9cd85abff80d8ee008ea8efb53affd75c931f3a3",
+      "dependency_hashes": {
+        "LocalWindowModel": "a3ae969d2712aa5ef9dafbb342a793d1ab784d75aa0f58544cde51adf1968314"
+      },
+      "closure_hash": "e67cd626da4f8fe2d029778ecee87698090baf8249d717e54088d702d7d455b7",
+      "artifact_sha256": "deab9f1d3413a3119f23f88e0eee71a7138b6b061c2fa19d0d1fd62605a16c6b",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowShareModel.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowShareModel.lean"
+      ],
+      "log_sha256": "45035e6fc53ac214947979234c4f1579860c82e36e4bfe72bda7b4ce91c21831",
+      "elapsed_seconds": 0.5630000000019209,
+      "axioms": [],
+      "completed": "2026-10-21T16:07:21.322871+00:00"
+    },
+    "ParallelShareModel": {
+      "source_sha256": "4596f3863aa6820e935a7ba0b6cc2192d114bd82356d34d0280ed72d8b4e1528",
+      "dependency_hashes": {
+        "LocalWindowShareModel": "e67cd626da4f8fe2d029778ecee87698090baf8249d717e54088d702d7d455b7"
+      },
+      "closure_hash": "dfa94eb30ffaa61aaa9add1d52e4cf33dc2c1b79d8e4d580f0e3bf0fd90a0248",
+      "artifact_sha256": "9ba1d3c2f494a0f1de14c5e99103b62e12bb89663cbb4ef3473ed12563123186",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareModel.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareModel.lean"
+      ],
+      "log_sha256": "aba374ebb39ed6568ed83a1bd2261641dbd088dcf1fb5dc645d9fc45e899c92f",
+      "elapsed_seconds": 0.5619999999980791,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.parallelTerm_symm",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.parallelTerm_zero_of_neighbor",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:07:29.077181+00:00"
+    },
+    "ParallelShareTerm": {
+      "source_sha256": "3167c50f8086a09bb86cb090d720e10e05e3e42ee4f91c9d09a7b3ffadb90b52",
+      "frozen_closure_hash": "904a7bbeec272957c01558face664ffcc9deea58008aa86a3a06e2cbd7666df7",
+      "closure_hash": "67bbba42b3c635ddd661e82076fd2457658dbd29fccf8ee8451c98804b3ab4f3",
+      "dependency_hashes": {},
+      "artifact_sha256": "fb7083a8fd19c6468091318f097c6d38374d482e2f1cc36711628512b200301e"
+    },
+    "Snake9": {
+      "source_sha256": "025260b9c1533d606a6cfd058aa025d9544d5cd6ccb1f8f5f2143e5657df4740",
+      "frozen_closure_hash": "9edd36d64b254c384033660ca912341e60a0d38df6fd2463799e7806629e213b",
+      "closure_hash": "e134513059cb402227347f3116b6d8446d57d76f3c6d176500f010e0191db491",
+      "dependency_hashes": {},
+      "artifact_sha256": "1068be3d102bce076158008a9f5045f284b2800ab99b0496a6ff2cd9e0ae884a"
+    },
+    "PathStructure": {
+      "source_sha256": "6267168775a17ce9a256fba7e6f6b58d46f6fa38f85ada282df525b200d341bd",
+      "frozen_closure_hash": "973c88cbc451f8954143e193a0bd53293055e7bc1a5565758cbefd5943d12db9",
+      "closure_hash": "1e49420afec767dc8932ba4762b89030161b936e3ead5801b1c8a160d2ffb39f",
+      "dependency_hashes": {
+        "Snake9": "e134513059cb402227347f3116b6d8446d57d76f3c6d176500f010e0191db491"
+      },
+      "artifact_sha256": "69c871f5e201fc151f1a724d40837804d06a79029b6cf4d6266a07a4a65afda7"
+    },
+    "LocalWindowBridge": {
+      "source_sha256": "f4079fec8009e019d048db4b5a6764291165308352e9281d6921ffa022c65def",
+      "dependency_hashes": {
+        "LocalWindowModel": "a3ae969d2712aa5ef9dafbb342a793d1ab784d75aa0f58544cde51adf1968314",
+        "PathStructure": "1e49420afec767dc8932ba4762b89030161b936e3ead5801b1c8a160d2ffb39f"
+      },
+      "closure_hash": "cc30a17483359e99a30dd00da4909bc917cc12c6c993196ce218e0a3c7a46238",
+      "artifact_sha256": "7e5f3e1ab34a7496eb0cf9fff465e5a6b48d6b523e0d4bec66dd1737a064425c",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowBridge.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowBridge.lean"
+      ],
+      "log_sha256": "ecd864ccb50f22320e5fcb69162efb863b713b3bf97b409665cfd679adc2efd8",
+      "elapsed_seconds": 13.093999999997322,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.no_certified_window_core",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.no_quad_window_core",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:07:42.173187+00:00"
+    },
+    "ParallelShareGeometry": {
+      "source_sha256": "1097a7b5d6093313c0aff00297192431a12b53aa3279a194b53077b95251a79d",
+      "dependency_hashes": {
+        "ParallelShareModel": "dfa94eb30ffaa61aaa9add1d52e4cf33dc2c1b79d8e4d580f0e3bf0fd90a0248",
+        "ParallelShareTerm": "67bbba42b3c635ddd661e82076fd2457658dbd29fccf8ee8451c98804b3ab4f3",
+        "LocalWindowBridge": "cc30a17483359e99a30dd00da4909bc917cc12c6c993196ce218e0a3c7a46238"
+      },
+      "closure_hash": "3dd63fb6f3dce3c5e6dedc9695077f955b6519197c8d772454a2069b9b4c6543",
+      "artifact_sha256": "459de3e34e6d1cf3b16ca8916acf77e1f75f1909baae77380384e8dc84536809",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareGeometry.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareGeometry.lean"
+      ],
+      "log_sha256": "58f356bf8c475fa77ea207299cb9b808ecb467f37775dd119d271b12f86192b0",
+      "elapsed_seconds": 0.9539999999979045,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.Axioms.parallelCount_le_three",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.Axioms.other_corners_le_two",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.Axioms.parallel_unary_weight",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:15:56.193867+00:00"
+    },
+    "ParallelShareBoolean": {
+      "source_sha256": "63004f48ae79edaded8ebcc1a840d353f6056a64a34ffdd51d04b7685033eea0",
+      "dependency_hashes": {
+        "ParallelShareGeometry": "3dd63fb6f3dce3c5e6dedc9695077f955b6519197c8d772454a2069b9b4c6543"
+      },
+      "closure_hash": "339ad73ffbdb7b875dca5cb8eac2f609c3e9e96767287c54b64b9c32243d4f84",
+      "artifact_sha256": "e841ea23377c3016a07cf311e56efe6641702053d25e8c637bb72695c79e7604",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareBoolean.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareBoolean.lean"
+      ],
+      "log_sha256": "d2ca6ad556ba440e27d31b8259d1f079a969b1baf0bd114eb765fe4fe5dc4f6f",
+      "elapsed_seconds": 0.7819999999992433,
+      "axioms": [
+        {
+          "theorem": "Snake9.ParallelShareBoolean.check_sound",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareBoolean.checkWindow_sound",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareBoolean.square_eval",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareBoolean.checkClause_sound",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareBoolean.checkClauses_sound",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareBoolean.one_eval",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.ParallelShareBoolean.zero_eval",
+          "axioms": []
+        }
+      ],
+      "completed": "2026-10-21T16:30:50.199099+00:00"
+    },
+    "ParallelShareBlocks": {
+      "source_sha256": "31cb00b532d4c683da84906f0ded0bcc6a5885748829b23d63b4f66069c84e5f",
+      "dependency_hashes": {
+        "ParallelShareBoolean": "339ad73ffbdb7b875dca5cb8eac2f609c3e9e96767287c54b64b9c32243d4f84"
+      },
+      "closure_hash": "57625854c19697d387b6312bdb444e15b81aeb6afacddc215d364733c44eea18",
+      "artifact_sha256": "58ae86fd45db193dc7d817cfb8d0575e36d2bf9c3fb0ce845ea69d40577a7d2c",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareBlocks.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareBlocks.lean"
+      ],
+      "log_sha256": "695555c44b193b9d0714f776950b2dbeaeec2f054fa3a35a0e07156be35b86cb",
+      "elapsed_seconds": 0.875,
+      "axioms": [
+        {
+          "theorem": "Snake9.ParallelShareBlocks.blockMass_cap",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareBlocks.blockMass_pair",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareBlocks.Term.leaf_sem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:48:34.616446+00:00"
+    },
+    "ParallelShareClauses": {
+      "source_sha256": "d3aa816f516c23dfbda5313976bbaa5795185ab9ed6d4c4c713eca5ff8b54bef",
+      "dependency_hashes": {
+        "ParallelShareBlocks": "57625854c19697d387b6312bdb444e15b81aeb6afacddc215d364733c44eea18"
+      },
+      "closure_hash": "e22694cca70358b4502374c69c477805f4435410b291a019b5dc88693112415f",
+      "artifact_sha256": "f860b6994d9db3243adce661615e4233305b82bed51e15462f6ace38a2f993f3",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareClauses.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareClauses.lean"
+      ],
+      "log_sha256": "d15c542961f1c881915a39fa281e43a4a451bb54c3bab36a781b87afd12cb1a7",
+      "elapsed_seconds": 1.110000000000582,
+      "axioms": [
+        {
+          "theorem": "Snake9.ParallelShareClauses.boolean_clause",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareClauses.info_sem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareClauses.subCheck_sem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareClauses.pairCheck_sem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareClauses.mergeCheck_sound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareClauses.boundCheck_sound",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:48:35.716535+00:00"
+    },
+    "LocalWindowTags": {
+      "source_sha256": "1e9aad3e4c99acf4fa01b00dcc65330a8d633826079a3d0955716ccb0f36ec71",
+      "dependency_hashes": {
+        "LocalWindowModel": "a3ae969d2712aa5ef9dafbb342a793d1ab784d75aa0f58544cde51adf1968314"
+      },
+      "closure_hash": "bf0fd3eff58ff19973b6ef6905a8fa7b0e1e7704ac4fc3b1a1537bbd700cd522",
+      "artifact_sha256": "4817fce74821d3f5c8c2e75e9ab6a996e9c65c0a37eae21d68485dc3849711c0",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowTags.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowTags.lean"
+      ],
+      "log_sha256": "cc3be33a33b1e6c0f756dede2288bf0dbf6071aed367092c811bdbcda19ab1a0",
+      "elapsed_seconds": 1.2660000000032596,
+      "axioms": [],
+      "completed": "2026-10-21T16:42:16.394952+00:00"
+    },
+    "ParallelShareCertificate": {
+      "source_sha256": "66145e96ed36faaa185678712873a36f9132f1c7ebd4dcd7b70ec9aa03042ff2",
+      "dependency_hashes": {
+        "ParallelShareClauses": "e22694cca70358b4502374c69c477805f4435410b291a019b5dc88693112415f",
+        "LocalWindowTags": "bf0fd3eff58ff19973b6ef6905a8fa7b0e1e7704ac4fc3b1a1537bbd700cd522"
+      },
+      "closure_hash": "5ed0af7495fc55f6038b342025afc3e7b550e13059bdf364c48076b8ca268b59",
+      "artifact_sha256": "f2d765fa4df7b3d7b5f3e6e8dfbaf1552f7b4090b10df8f0d07b30c21cbdc4d5",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareCertificate.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareCertificate.lean"
+      ],
+      "log_sha256": "c54e1e9a1963749157c6566b7fb2af6aa95db3c5b7447b7f1e42b4f84bd2045a",
+      "elapsed_seconds": 0.8119999999980791,
+      "axioms": [
+        {
+          "theorem": "Snake9.ParallelShareCertificate.sound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareCertificate.refuted_of_check",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:48:36.541609+00:00"
+    },
+    "LratCheckP2400": {
+      "source_sha256": "c009d64ca3cae5e41637467ad70ad520e1a8aefb2364683a5682db3b10137c2e",
+      "dependency_hashes": {
+        "LocalWindowModel": "a3ae969d2712aa5ef9dafbb342a793d1ab784d75aa0f58544cde51adf1968314"
+      },
+      "closure_hash": "b92f35b706a8086d99debd4acd8859c2327a6cf1d4985cdda91036533ba15bf3",
+      "artifact_sha256": "d9f76b101a6265ac232f60452053e1b6870ac755c9935af5cfbe98e2324ce5ba",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LratCheckP2400.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LratCheckP2400.lean"
+      ],
+      "log_sha256": "16700d8cdf0b10239f198a7c1c9b5fa012f38b79d26674fed3a8452613ed54a8",
+      "elapsed_seconds": 1.0310000000026776,
+      "axioms": [],
+      "completed": "2026-10-21T16:45:10.155635+00:00"
+    },
+    "LratFastP2400W17": {
+      "source_sha256": "4e9a54a4731742ac5284637fd9454f1219ca5dfb7636d366bc6471e7e5647dac",
+      "dependency_hashes": {
+        "LratCheckP2400": "b92f35b706a8086d99debd4acd8859c2327a6cf1d4985cdda91036533ba15bf3"
+      },
+      "closure_hash": "1ce54dd40bb043074685007b83cbfc955e420cea99b88ff0b99c177c1cc23c6f",
+      "artifact_sha256": "30158f442f11e6748309e760d78ed14f52a97a5587084100195d4874f18b7a6d",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LratFastP2400W17.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LratFastP2400W17.lean"
+      ],
+      "log_sha256": "c219ffe53605518c5858b5ac424cf71b849d0b0145926709bf60bb470e2273b3",
+      "elapsed_seconds": 0.6880000000019209,
+      "axioms": [],
+      "completed": "2026-10-21T16:45:10.850021+00:00"
+    },
+    "LratFast2P2400W17": {
+      "source_sha256": "2e30c2b099a3c2e7b09cb1464d60d467556d513b2d5acb55600c25ff0cb4394d",
+      "dependency_hashes": {
+        "LratFastP2400W17": "1ce54dd40bb043074685007b83cbfc955e420cea99b88ff0b99c177c1cc23c6f"
+      },
+      "closure_hash": "441c1743b8fa711522df815bb58c0071df46b35bb696bfd06d767f47b21181bf",
+      "artifact_sha256": "dd88898d12d77c0224f1b54869d8148987194b6d0fd2c8bbc9e3b9fa27481206",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LratFast2P2400W17.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LratFast2P2400W17.lean"
+      ],
+      "log_sha256": "0cc4cbf570e618bf2aacf6bcc0c90dfa9695a4e52bdc1ec0b2d411c6f0de86f1",
+      "elapsed_seconds": 0.625,
+      "axioms": [],
+      "completed": "2026-10-21T16:45:11.477818+00:00"
+    },
+    "LocalWindowRename": {
+      "source_sha256": "db06bd895d897415c31c69ab2ac8c0af0ba1cadd9874e253be07eeea8b991e38",
+      "dependency_hashes": {
+        "LocalWindowModel": "a3ae969d2712aa5ef9dafbb342a793d1ab784d75aa0f58544cde51adf1968314"
+      },
+      "closure_hash": "c55ce2f2fe17931e90b3fcbd5ed126de9182c3f9bcea49d8e587204db4057356",
+      "artifact_sha256": "34fe2a8ffcb9a3feee9bf2a38fcb368779904a49cc1d8a9ce02905ddb05e24ce",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowRename.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowRename.lean"
+      ],
+      "log_sha256": "8f3fcae447831a4d7e200c5b9172205b734e91a448eeef5893b9893812c1cf01",
+      "elapsed_seconds": 0.5,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.Unsat.rename",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:32:27.117021+00:00"
+    },
+    "LocalWindowCnf.ParallelShare01": {
+      "source_sha256": "87819f7a30c704d160d6d66b0c37454a74becd64697eae544e29df8cdb9901f4",
+      "dependency_hashes": {
+        "LocalWindowRename": "c55ce2f2fe17931e90b3fcbd5ed126de9182c3f9bcea49d8e587204db4057356"
+      },
+      "closure_hash": "02f09379d503d61f16720ba6d2154bc3241ab07893cbd6f3cfb7fe8dc03097f5",
+      "artifact_sha256": "3cb65c9cd237d34e9991dab365a89d16647e113b26e1a928bd61cf125a1b911b",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowCnf\\ParallelShare01.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowCnf\\ParallelShare01.lean"
+      ],
+      "log_sha256": "64d17d8c4b5b496754a51e63515554c7f2641bd472d668839d48d509a9543569",
+      "elapsed_seconds": 0.5789999999979045,
+      "axioms": [],
+      "completed": "2026-10-21T16:32:27.683690+00:00"
+    },
+    "LocalWindowUnsat.ParallelShare01.Data0": {
+      "source_sha256": "06c0c691904d438b07f4f376c575cf6805182638e947d497895eb89e1e73ed68",
+      "dependency_hashes": {
+        "LratFast2P2400W17": "441c1743b8fa711522df815bb58c0071df46b35bb696bfd06d767f47b21181bf",
+        "LocalWindowCnf.ParallelShare01": "02f09379d503d61f16720ba6d2154bc3241ab07893cbd6f3cfb7fe8dc03097f5"
+      },
+      "closure_hash": "62f91dbfcfc6485924f2395c92772181dfca4c6328e9541cb0025110c6397b54",
+      "artifact_sha256": "1e100d37f0266a41eea52ac6f4223fd61f762f0ef685cf8ce81f4239e6fc22a7",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowUnsat\\ParallelShare01\\Data0.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowUnsat\\ParallelShare01\\Data0.lean"
+      ],
+      "log_sha256": "410fb7579d8c9e640cba7737543674a4c576fa7dd6e5da749bb3aef2b7f03253",
+      "elapsed_seconds": 0.5159999999959837,
+      "axioms": [],
+      "completed": "2026-10-21T16:45:11.995957+00:00"
+    },
+    "LocalWindowUnsat.ParallelShare01.Data1": {
+      "source_sha256": "f461bd017c2e13a06a0d07f7e7d18f5ad9b526c5cf40dbfd9c3c5d1f99631126",
+      "dependency_hashes": {
+        "LocalWindowUnsat.ParallelShare01.Data0": "62f91dbfcfc6485924f2395c92772181dfca4c6328e9541cb0025110c6397b54"
+      },
+      "closure_hash": "3ed4bd898974aca9db7597df738adbabbda332035cd275f0ac92e56fe50a527c",
+      "artifact_sha256": "5d12e960b47e101b84ea1255e439179e82edc930e019cca280a37cd55ecf39f2",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowUnsat\\ParallelShare01\\Data1.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowUnsat\\ParallelShare01\\Data1.lean"
+      ],
+      "log_sha256": "01af474e4618d42c553b33556b3b7c9d96f0a5e33f63d55d5c42647d9949d13f",
+      "elapsed_seconds": 0.5160000000032596,
+      "axioms": [],
+      "completed": "2026-10-21T16:45:12.523950+00:00"
+    },
+    "LocalWindowUnsat.ParallelShare01.Check1": {
+      "source_sha256": "764d8c311d59c8a24f0de5e24f33b33c915fc9a552dd8bda3664f8d90d1d6875",
+      "dependency_hashes": {
+        "LocalWindowUnsat.ParallelShare01.Data1": "3ed4bd898974aca9db7597df738adbabbda332035cd275f0ac92e56fe50a527c"
+      },
+      "closure_hash": "f589299c1f870720fbe3eece9ee013286f9783a0d4c3378bf775080db971d0b2",
+      "artifact_sha256": "20a0baebc6a7728ec96949514778b832b8670527d3b29cbe4abb97d847e60c5d",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowUnsat\\ParallelShare01\\Check1.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowUnsat\\ParallelShare01\\Check1.lean"
+      ],
+      "log_sha256": "d043401440fe8e1114f77675e9e7e928460fc9cfd0ee785995dcea217c4197f7",
+      "elapsed_seconds": 0.5630000000019209,
+      "axioms": [],
+      "completed": "2026-10-21T16:45:13.101655+00:00"
+    },
+    "LocalWindowUnsat.ParallelShare01": {
+      "source_sha256": "16427c1c74e4a15921d0b7ad4c70511bd5143a7bf484fb1eea303f76eedb3cc9",
+      "dependency_hashes": {
+        "LocalWindowUnsat.ParallelShare01.Check1": "f589299c1f870720fbe3eece9ee013286f9783a0d4c3378bf775080db971d0b2"
+      },
+      "closure_hash": "08f99f4b2a2f99fc5e6092cc26d269596f79ec8fd2ae7b49e6813b65ac327b6f",
+      "artifact_sha256": "b59cb1ca5ccddcf24f1a5bb0f90a74d877e827612038987bd6333399d06170cd",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowUnsat\\ParallelShare01.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowUnsat\\ParallelShare01.lean"
+      ],
+      "log_sha256": "270a850a225e3a2d155d644db2cb366c64769ce86a98ae720e6213fa39b8e9aa",
+      "elapsed_seconds": 0.5469999999986612,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.ParallelShare01.original_unsat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:45:13.644495+00:00"
+    },
+    "LocalWindowSat.ParallelShare01": {
+      "source_sha256": "40d1eaa487f25b0fe9d01f2a6bb4436a31297a6729d982d03c4871283590e575",
+      "dependency_hashes": {
+        "ParallelShareCertificate": "5ed0af7495fc55f6038b342025afc3e7b550e13059bdf364c48076b8ca268b59",
+        "LocalWindowUnsat.ParallelShare01": "08f99f4b2a2f99fc5e6092cc26d269596f79ec8fd2ae7b49e6813b65ac327b6f"
+      },
+      "closure_hash": "11aa3b979b5985b9a1ae8a8be8a6aa1c7ec8eca37ee20cc40ace81c58739f534",
+      "artifact_sha256": "675269028edb2a992942b5fb2c1adeaa383a3c61ee7b937d3240492805ae12b4",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowSat\\ParallelShare01.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowSat\\ParallelShare01.lean"
+      ],
+      "log_sha256": "a3dff249dd078610035513ebac84f4b1a11f8478eb7149ac4e2001aa056aebec",
+      "elapsed_seconds": 5.953000000001339,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.ParallelShare01Certificate.checked",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.ParallelShare01Certificate.refuted",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:48:42.511404+00:00"
+    },
+    "LocalWindowDirModel": {
+      "source_sha256": "48b5a540c6d6435813c6f61b217460432969c9afcc6eb3a4f27de116be8f1b16",
+      "dependency_hashes": {
+        "LocalWindowModel": "a3ae969d2712aa5ef9dafbb342a793d1ab784d75aa0f58544cde51adf1968314"
+      },
+      "closure_hash": "6d6a366a6d57957068d0a88429027f7a60afb5388cbefd66ff69fe36d2327137",
+      "artifact_sha256": "c2b39c7a3013f42ac09d6737542567c2e6571553d687f98a7b24f457c3b067af",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowDirModel.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowDirModel.lean"
+      ],
+      "log_sha256": "83eb962eed721840bbdcf0e8a6f918dce608af4ffd1aaa6cc764e6ba45f83640",
+      "elapsed_seconds": 0.5,
+      "axioms": [],
+      "completed": "2026-10-21T16:07:42.672461+00:00"
+    },
+    "LocalWindowDirKeys": {
+      "source_sha256": "320dcca95131e8a6f17ecd877347c2bca4711be676fc4e2e5603bd6605150217",
+      "dependency_hashes": {
+        "LocalWindowDirModel": "6d6a366a6d57957068d0a88429027f7a60afb5388cbefd66ff69fe36d2327137"
+      },
+      "closure_hash": "4f9af449f633d4ea5c9f8287657ea56a29da42c0e32fb353f66516308977281e",
+      "artifact_sha256": "88a4232e044097493021c4a1a6298f20861612692163abd7bd6b190265710208",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowDirKeys.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowDirKeys.lean"
+      ],
+      "log_sha256": "24bfab41bf9b6d8d14c55d4c1563a040f7cf0efde923580f4945bff69c7608d5",
+      "elapsed_seconds": 0.8440000000045984,
+      "axioms": [],
+      "completed": "2026-10-21T16:07:43.513797+00:00"
+    },
+    "LocalWindowDirBridge": {
+      "source_sha256": "706e81e2770fd9eae74ab24f0b4e25b290901a257614959d038d22e0df8ab3e1",
+      "dependency_hashes": {
+        "LocalWindowBridge": "cc30a17483359e99a30dd00da4909bc917cc12c6c993196ce218e0a3c7a46238",
+        "LocalWindowDirKeys": "4f9af449f633d4ea5c9f8287657ea56a29da42c0e32fb353f66516308977281e"
+      },
+      "closure_hash": "55c2cacf0cfedce93d6946e97626bf39f6e8740ab6d549d751c6bbb6749953f7",
+      "artifact_sha256": "6425691e4789114b6d4d38fae3a41598fa5f49d94ffda26ff4f2d386ac5f5f06",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowDirBridge.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowDirBridge.lean"
+      ],
+      "log_sha256": "fee3c016f2b5e1d42acf2bc1c288000c2d0f0122514ee3a260b546af6d6d4b09",
+      "elapsed_seconds": 2.7180000000007567,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.refuted_dir",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:07:46.239854+00:00"
+    },
+    "LocalWindowShareBridge": {
+      "source_sha256": "8b2d06a67664f7d9ded4d0b3422e8cf73c151caed2a0cc08772ec74cf7d59ca8",
+      "dependency_hashes": {
+        "LocalWindowShareModel": "e67cd626da4f8fe2d029778ecee87698090baf8249d717e54088d702d7d455b7",
+        "LocalWindowDirBridge": "55c2cacf0cfedce93d6946e97626bf39f6e8740ab6d549d751c6bbb6749953f7"
+      },
+      "closure_hash": "ad0d01102ec9a50303e1c923586a83185b29d2e9bc98b67a1dc2a88939916771",
+      "artifact_sha256": "bc1273784bee500cbb0620c72365f0696d3d7e7d45571c971b0260eff33e4ebd",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowShareBridge.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowShareBridge.lean"
+      ],
+      "log_sha256": "c94101cee52129cb415d9bfa1a31678efe1d0558a09bd43b5c7b368c9a2803e6",
+      "elapsed_seconds": 1.187999999994645,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.refuted_share_bridge",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.refuted_share_dir",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:07:47.423731+00:00"
+    },
+    "ParallelShareBridge": {
+      "source_sha256": "0fbb7563138451fd72b52842b1a3c93293ea83a8af45995af859490ee15905cb",
+      "dependency_hashes": {
+        "ParallelShareModel": "dfa94eb30ffaa61aaa9add1d52e4cf33dc2c1b79d8e4d580f0e3bf0fd90a0248",
+        "LocalWindowShareBridge": "ad0d01102ec9a50303e1c923586a83185b29d2e9bc98b67a1dc2a88939916771"
+      },
+      "closure_hash": "c248bd0f921640108717fbe37afa8dfc989f9eeee1f3bd18ecc9585fcbb218b3",
+      "artifact_sha256": "c8b450f2afe5c1631ece58fe5c3cf09428490ae95b671859b5189392b242f22d",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareBridge.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareBridge.lean"
+      ],
+      "log_sha256": "197f6dbec9db0084c77fdf63908297e75d451df6d981f2ab7333e7fb80176313",
+      "elapsed_seconds": 0.9850000000005821,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.parallelShare_frame",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.frame_axiomsP",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.refuted_parallel_bridge",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.refuted_parallel_shape",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.parallel_window_rev",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:17:31.940717+00:00"
+    },
+    "LocalWindowSat.ParallelShare01Window": {
+      "source_sha256": "6005d901672754c32c53515d9c596046de01262a55b5e1a87502914e255d32d8",
+      "dependency_hashes": {
+        "LocalWindowSat.ParallelShare01": "11aa3b979b5985b9a1ae8a8be8a6aa1c7ec8eca37ee20cc40ace81c58739f534",
+        "ParallelShareBridge": "c248bd0f921640108717fbe37afa8dfc989f9eeee1f3bd18ecc9585fcbb218b3"
+      },
+      "closure_hash": "b686ea4b91666bea18861bd75ec9433ed9042ef5c340d4d8318ceaaaa3a519e4",
+      "artifact_sha256": "59b58e6f5978c7de69a8e75c6ebc46dda31cfcd5173eeba6131ee4ebe8361fd3",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowSat\\ParallelShare01Window.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowSat\\ParallelShare01Window.lean"
+      ],
+      "log_sha256": "48e194a7279cba494faac20604ccaddd3292b8d9ed30b0eda5d52b684b40aca3",
+      "elapsed_seconds": 0.625,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.ParallelShare01Window.canonical_refuted",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.ParallelShare01Window.share_ge_21",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T16:48:43.149717+00:00"
+    },
+    "WindowAutomatonDefs": {
+      "source_sha256": "ba1abcabf447b08c013fdd8861cd4bafc8eeaee269480ecaa185916bf39e4e35",
+      "dependency_hashes": {},
+      "closure_hash": "688a67beaf67dfdad99b58137a38282d83105b13dbc1608e0710e5914215a75e",
+      "artifact_sha256": "3c8f8d15f53989fda6eaf0717f1893a8a71087e2881361ee7299a749ed117fd7",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonDefs.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonDefs.lean"
+      ],
+      "log_sha256": "579feace4356fd7634a597128f0eae32ea234493373aca5d2be99d8a2db3553e",
+      "elapsed_seconds": 0.46899999999732245,
+      "axioms": [],
+      "completed": "2026-10-21T17:18:41.188154+00:00"
+    },
+    "WindowAutomatonData": {
+      "source_sha256": "e9dc793ecc693542615b80c9ddc2e46fe079da7235c8b4d1f5eff435d0544124",
+      "dependency_hashes": {
+        "WindowAutomatonDefs": "688a67beaf67dfdad99b58137a38282d83105b13dbc1608e0710e5914215a75e"
+      },
+      "closure_hash": "3d80b9c853f8e6c6464c8800f46f3d68c6067f2c5e6370931512af195fd64aa5",
+      "artifact_sha256": "7da52bfe064f9b2059b6cbf60333feb03cd1c0d361f41cee36c475230a3489b9",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonData.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonData.lean"
+      ],
+      "log_sha256": "61756105dc8c3c0ed960fbf6978150c89506e0a852b9024727600230ae6f3f5d",
+      "elapsed_seconds": 25.95300000000134,
+      "axioms": [],
+      "completed": "2026-10-21T17:19:07.165049+00:00"
+    },
+    "WindowAutomatonLemmas": {
+      "source_sha256": "e4d6dfb9745ba3f0b10970e59c80a2593c75b61bb9f94520baf53ee194c4fc87",
+      "dependency_hashes": {
+        "WindowAutomatonData": "3d80b9c853f8e6c6464c8800f46f3d68c6067f2c5e6370931512af195fd64aa5"
+      },
+      "closure_hash": "eb440d98eb479a51ee82628b447f0a8efee52a0099c8ef8caa1250510f5bc7b9",
+      "artifact_sha256": "7a77ec50038627db5094607c435bbc9d7af5d20398e80d5dfba2372469b40d8e",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonLemmas.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonLemmas.lean"
+      ],
+      "log_sha256": "38f37737e7db66f37f795d74fefc67b320d2dfadaa1ec48cfc09e25a8e84362f",
+      "elapsed_seconds": 0.6100000000005821,
+      "axioms": [],
+      "completed": "2026-10-21T17:19:07.764611+00:00"
+    },
+    "WindowAutomatonSequence": {
+      "source_sha256": "662b96b31c5c2d99979a73189fee8dcfe3d6a224e09aa6ed9ab1eb46b162a481",
+      "dependency_hashes": {
+        "WindowAutomatonLemmas": "eb440d98eb479a51ee82628b447f0a8efee52a0099c8ef8caa1250510f5bc7b9"
+      },
+      "closure_hash": "5e5b2e94babc0bd935cf0260a28c691895bf65f905ac05eeb4a4c37faa5f6a59",
+      "artifact_sha256": "81a53b9f93fd764456d308b53727d303472596c645be0c8c911a56185748c8ea",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonSequence.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonSequence.lean"
+      ],
+      "log_sha256": "46166a705d688c6ff0d883c33ffa013a708a248ef17341475fd04ca10bbde686",
+      "elapsed_seconds": 0.7809999999954016,
+      "axioms": [
+        {
+          "theorem": "Snake9.WindowAutomaton.total_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T17:19:08.549290+00:00"
+    },
+    "WindowAutomatonBridge": {
+      "source_sha256": "bcc98d27a5cb87615b41605b7c17b83d66bfbdd5d0ee71ca324e33be466e8f2c",
+      "dependency_hashes": {
+        "PathStructure": "1e49420afec767dc8932ba4762b89030161b936e3ead5801b1c8a160d2ffb39f",
+        "WindowAutomatonSequence": "5e5b2e94babc0bd935cf0260a28c691895bf65f905ac05eeb4a4c37faa5f6a59"
+      },
+      "closure_hash": "3434ddf84b4a68a57cda74865d7bb5a6722a0dc9162ceba997b9648d815204c3",
+      "artifact_sha256": "8af73106284586115d427a68b8e1cd0c402684db8adf951fb356c5b1490f311f",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonBridge.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\WindowAutomatonBridge.lean"
+      ],
+      "log_sha256": "d0931e79c7cbbfa66d7c748dd2dcc38c218d7cfebcf5e368141d2a51e07d0239",
+      "elapsed_seconds": 0.9530000000013388,
+      "axioms": [
+        {
+          "theorem": "Snake9.WindowAutomaton.snake_inducedPattern",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T17:19:09.505445+00:00"
+    },
+    "DirectionWindowBridge": {
+      "source_sha256": "5762fce3a8c4b9c17b481bca810c029ca90b01bd84206e01008212abf24de613",
+      "dependency_hashes": {
+        "WindowAutomatonLemmas": "eb440d98eb479a51ee82628b447f0a8efee52a0099c8ef8caa1250510f5bc7b9",
+        "WindowAutomatonBridge": "3434ddf84b4a68a57cda74865d7bb5a6722a0dc9162ceba997b9648d815204c3",
+        "LocalWindowDirBridge": "55c2cacf0cfedce93d6946e97626bf39f6e8740ab6d549d751c6bbb6749953f7"
+      },
+      "closure_hash": "5bced620dbdab224ec2e183181e51953a53311d66b0e8691fecf8f7f26b6a286",
+      "artifact_sha256": "9982d5f45b62b8857e861db8027fdc6197b0f9b4df886ec5d9bc959ebf8c7b7c",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\DirectionWindowBridge.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\DirectionWindowBridge.lean"
+      ],
+      "log_sha256": "67a83ca7580d6ca05f64c711a1f067ae6df703d84cb1e68223dc3f8bcbbdf31f",
+      "elapsed_seconds": 32.7190000000046,
+      "axioms": [
+        {
+          "theorem": "Snake9.DirectionWindow.cover_table",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.DirectionWindow.direction_windows_core",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T17:19:42.215824+00:00"
+    },
+    "ParallelShareShapeBridge": {
+      "source_sha256": "34ef7831542ca98997cd45d2051c0ba5d613f620221b8568ec342cbc7f452204",
+      "dependency_hashes": {
+        "DirectionWindowBridge": "5bced620dbdab224ec2e183181e51953a53311d66b0e8691fecf8f7f26b6a286",
+        "ParallelShareBridge": "c248bd0f921640108717fbe37afa8dfc989f9eeee1f3bd18ecc9585fcbb218b3"
+      },
+      "closure_hash": "0d852cac4741cfd22cda787f7acf2095b97b6edc2434ec1621dc811965b38f64",
+      "artifact_sha256": "a493732b3da5f7ec9b66a65e3cd6ccfb5c4386c03e3d2e91b0d60e5410339b0b",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareShapeBridge.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\ParallelShareShapeBridge.lean"
+      ],
+      "log_sha256": "77c5a0674a252fc8d0608d610d44bfbe807db83fc38ec3e6a1214c2a25bf7b56",
+      "elapsed_seconds": 5.968000000000757,
+      "axioms": [
+        {
+          "theorem": "Snake9.ParallelShareShapeBridge.coverage_checked",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareShapeBridge.window_shape_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareShapeBridge.refuted_canonical_window",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ParallelShareShapeBridge.window_share_ge_21_of_family",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T17:20:13.231460+00:00"
+    },
+    "LocalWindowSat.ParallelShare01CanonicalWindow": {
+      "source_sha256": "32b881e3d986b55c1431154b838587b59b44dff68345d9473675fd14546a0429",
+      "dependency_hashes": {
+        "LocalWindowSat.ParallelShare01Window": "b686ea4b91666bea18861bd75ec9433ed9042ef5c340d4d8318ceaaaa3a519e4",
+        "ParallelShareShapeBridge": "0d852cac4741cfd22cda787f7acf2095b97b6edc2434ec1621dc811965b38f64"
+      },
+      "closure_hash": "25b70392a506bd5e808986123191a0b00a945100cdb2907c18e18069bd0a744b",
+      "artifact_sha256": "f962a0f20095e30362efaf34105db4d6f8c5c479d7650f6ca7c755f82b6efcca",
+      "command": [
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\Snake in the Box\\work\\research_20261015\\proof\\dependencies\\lean-4.19.0-windows\\bin\\lean.exe",
+        "--root=D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src",
+        "-o",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowSat\\ParallelShare01CanonicalWindow.olean",
+        "D:\\Tommy\\WFLA IB\\OpenAIMathDiscovery\\snake-unconditional-231-230\\milestones\\28-unconditional-231-230\\runtime\\bridge-development\\src\\LocalWindowSat\\ParallelShare01CanonicalWindow.lean"
+      ],
+      "log_sha256": "f019c12ba8cc8b7f00c67420acd0328227c5109d6dd20c4a299eb963b6db2665",
+      "elapsed_seconds": 0.6100000000005821,
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.ParallelShare01CanonicalWindow.share_ge_21",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "completed": "2026-10-21T17:20:13.850046+00:00"
+    }
+  },
+  "builder_sha256": "da380b217f1fd7a65bf4a42e2013f74d416a156d41ac843b108d2d8e6bc8d031",
+  "frozen_manifest_sha256": "11bb2f11af396f5f9c50f7cc1d9e199338256f46d0d95a3c07a07a1e750a3359",
+  "shape_count": 34,
+  "shape_order_matches_frozen_cases": true,
+  "shapes": [
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      1,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      2,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      4,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      4,
+      1
+    ],
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      4,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      4,
+      5
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      0,
+      1,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      0,
+      2,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      0,
+      4,
+      1
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      0,
+      4,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      0,
+      4,
+      3
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      0,
+      4,
+      5
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      1,
+      0,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      1,
+      4,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      1,
+      4,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      1,
+      4,
+      3
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      1,
+      4,
+      5
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      0,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      0,
+      3
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      0,
+      5
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      1,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      1,
+      3
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      1,
+      5
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      2,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      2,
+      1
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      2,
+      5
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      1
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      3
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  ],
+  "model_hashes": [
+    "df59156953d72222a6e2370c2ba1c880fb60c8161a425308f6bea26e47fd7d89",
+    "aae7059a8e3346196a8b2015f46319314edb8f646151f3bc2e41210b4736eaba",
+    "1cd967c493282d518907d94f40b18397a08757ad76620cf50d00e3e71cfd6606",
+    "82c56d59bf90efd54fc77e6d65364beef9a3ba6cd6a0eb300cba6abc1de17354",
+    "40372ffbbcba498f99a8e54927fba27e12d457c0a206e58bbdd3eeda43982553",
+    "b243143425e4356ef0d95f581a86f6b5248e2243dda857a102e33153d02ec0c6",
+    "0e4c4dea5d3f231585a73e8f640ddfb363be9556b0d5b5f00bd39ca37c831300",
+    "0ec6b1654709ffe374d539f7b8232d6255482878ee20f88793fc6af364bcc40e",
+    "3f9118698f657199af60f715a9eb90833bcc697f3678d5cb39df15f8b8d54f2c",
+    "c79d14a6168c570911a33a3baf15c73688898f80f6c4b201daf97636a1256d62",
+    "c177fa7a56308f0ad24fd02b0da5ebf97dc17245dd1dfc987648c4f09c4b0880",
+    "5cc3536964b70921fc77f93c41ba29cdb4abbbedcf6b4473b683a02a77bb3a13",
+    "8b9837b2e127c35a5b94cb3b2cd2254485a14aca9ea203836a2d4fd495d4e493",
+    "6ec2b1b581defcaeb6b15b1b8d7669216617b58806efcef8132e7ec559fe4fff",
+    "488e586228a7e3f06f9c7f988f642cdb548264455c511f2fe62c1221f563b515",
+    "ba989f8aaf98e77d6fbc835ca2186b7be488393968935d11b2771f918ec68fe9",
+    "de8fbadc57f9ab84bf628a466fa2d0e0c235b80974874557b28324e381a4a357",
+    "7d0ec4794027a019c06208d3aca9dd7c66665749bda0af2d889f5f2fb9aba3a0",
+    "5c769b4a56f0864699c2ce615cefa764628a57cacf1d0b21226c5e14e74b4ea5",
+    "9eb9b8f2ee2902e9caa6da905900af6975172cb3ada1caecc0bc9adb73604e83",
+    "3d7f2b3d69157cc488499b02a64878c63ff5bd56695affb8c7a01a16605fd806",
+    "acb9fde21508bd9f62aa8848e0a68074bc592af888de13b43850acdb974d5fd5",
+    "7907561717c4065a6ad953158a389b7e03d51a21000b9332ac20fd9677d05d64",
+    "90ae8357a2fca20850f8b4a90428a1f6c1a7263119a7aae9323127ba1ffbfedf",
+    "cdaa29e260db6a8491a910334f549f6111bf9076419cbf6b91b97920a979e98d",
+    "ad18110ff0b4485ea634870fe0ad0b86b56b09b63a92fcf58a5d9d3cee656f61",
+    "42158ee994e473bc6bb9a70d62927a700687aebc57941ad0deb72c19988564f1",
+    "042fc7edd336eea27a729e6a195c30f01e1d0cad0dd174b5f228a60f98534a0f",
+    "2b40bb09cab7a2b048d1b2c33b2358a53b935dfec015e3359c36b264b89bd873",
+    "d433567f78538d8d688a3d091379f5ca15912e528c98aa9a73e71791efed0f2e",
+    "1afcea4773d5d771857c91fecbd2c111bd07a1eb4f917a3a2a47d2205a70b3a8",
+    "ff83e49a013b4459d39dc56916a7d29b3689e8f8830b5de5a85cbf2229394259",
+    "84efcc828db5b7d47ae8eafa2a80ed0a6fc039c73757e14d6805fab884105f39",
+    "d0d8bab35f4690744b91a146c242fa7311f02fd159fb511a3d5176cc7b3bea77"
+  ]
+}
