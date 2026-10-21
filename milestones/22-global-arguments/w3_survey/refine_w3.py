@@ -24,8 +24,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, '..', '..', '10-window-aggregate', 'scripts'))
 from refine import howard, prune
-import w3enc, survey
-from survey import key, FREE, alpha_arg
+import w3enc
+import w3survey as survey
+from w3survey import key, FREE, alpha_arg
 from shape_aut import bound
 
 SCR = os.environ.get('STAGE3', '/tmp/claude-0/-home-user-Snake-in-the-box-in-9/9d4b5ea1-0097-55fa-8dda-100e9a084d22/scratchpad/stage3')

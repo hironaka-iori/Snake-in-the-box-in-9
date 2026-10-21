@@ -18,8 +18,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, '..', '..', '10-window-aggregate', 'scripts'))
 from refine import howard, exact_check
-import survey
-from survey import canon, induced, key, FREE
+import w3survey as survey
+from w3survey import canon, induced, key, FREE
 
 CENSUS = 64512
 END = 168
