@@ -1,0 +1,23 @@
+import LocalWindowSat.ShareGap0
+import LocalWindowUnsat.ShareGap0
+import LocalWindowBridge
+
+namespace Snake9.LocalWindow.ShareGap0
+
+theorem refuted : Refuted window bounds := Tags.refuted_of_sat sat unsat
+
+def directions : List Nat := [0,1,2,0,3,1]
+
+/-- The exclusion applies to every actual snake window after any coordinate
+permutation carrying its six directions to 0,1,2,0,3,1. -/
+theorem excluded_in_snake {m : Nat} (p : Snake m) (P : CPerm) (r : Nat)
+    (hr : r + directions.length ≤ m)
+    (hP : ∀ j, j < directions.length → P.fwd (dir p (r+j)) = directions.getD j 0)
+    (hb : ∀ i, i < bounds.length →
+      (bounds.getD i (0,21)).1 ≤ coreAlpha p (r+i+1) ∧
+      coreAlpha p (r+i+1) ≤ (bounds.getD i (0,21)).2) : False :=
+  refuted_bridge p P r (cs := directions) refuted ⟨rfl, rfl, by decide⟩ (by decide) hr hP hb
+
+#print axioms refuted
+#print axioms excluded_in_snake
+end Snake9.LocalWindow.ShareGap0

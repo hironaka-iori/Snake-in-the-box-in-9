@@ -1490,6 +1490,38 @@ Proposition~\ref{prop:share-loss} gives $G_{12}+840v\le221136$. The first hypoth
 \end{proof}
 These conditional implications have been checked in Lean. Neither hypothesis has been proved for all snakes. A complete improvement requires verified local share bounds, coverage of every allowed sequence, and control of the initial and terminal contributions. Weighted packing preserves more of the available local information while leaving those proof obligations explicit.
 
+\subsection{Separating window exclusions from share estimates}\label{sec:direct-share}
+The usefulness of a share estimate depends on the feasibility of its underlying window. A subsequent search of the five-position table inspected at the start of this experiment found an eleven-position periodic state sequence with singleton-count mean $42/11$, while every recorded five-window share lower bound on that sequence was zero. This is a feasible numerical sequence for that table and its listed exclusions; it is not asserted to arise from a snake. Separate one- and two-position share estimates were omitted from this diagnostic. Thus the example identifies missing information in this particular table, without establishing a limitation of all local share arguments.
+
+Testing the eleven windows without a share constraint excluded nine by finite solvers. One of these exclusions has now been checked in Lean, including its interpretation for arbitrary snakes.
+\begin{proposition}[Repeated-direction window exclusion]\label{prop:share-window-exclusion}
+Let $a,b,c,d$ be four distinct coordinates. No snake in $\Q_9$ has six consecutive transition directions
+\[
+(a,b,c,a,d,b)
+\]
+whose five internal vertices have singleton-square counts $(2,4,5,3,3)$ in that order.
+\end{proposition}
+\begin{proof}
+Translate the first vertex to zero and permute coordinates so that $(a,b,c,d)$ becomes $(0,1,2,3)$. The seven vertices then have binary integer labels
+\[
+(0,1,3,7,6,14,12).
+\]
+In the union of radius-four neighborhoods of the five internal vertices, impose the selected-vertex degree constraints inherited from an induced path, the limit of two endpoints, and the stated singleton-square counts. A finite encoding of these necessary conditions contains an inconsistent subset of 1,795 clauses on 1,134 active Boolean variables. Its resolution certificate has been replayed in Lean. The soundness of the clauses and the translation and coordinate-permutation argument have also been checked. The inconsistent subset contains no empty-square-share constraint, so the exclusion follows from the ordinary path conditions alone.
+\end{proof}
+The other eight solver exclusions have not been upgraded to theorems here. Distinguishing these exclusions from numerical share bounds avoids assigning a finite share cost to a window that cannot occur at all.
+
+\paragraph{A local counterexample to a uniform share estimate.}
+For the surviving direction pattern $(0,1,2,3,0,4)$, consider the internal singleton-count tuple $(4,5,3,3,5)$. A saved configuration of 119 selected vertices in the 421-vertex union of radius-four balls satisfies the local degree and endpoint conditions and contains no cycle. Direct integer counting gives
+\[
+(\sigma_{12}(x_1),\ldots,\sigma_{12}(x_5))=(22,29,9,9,35),
+\qquad \sum_{i=1}^{5}\sigma_{12}(x_i)=104.
+\]
+Consequently, a uniform lower bound of 108 fails in this local model. Boundary endpoints are unrestricted, and no extension to a complete snake has been established. The saved vertex set and its square counts have independent finite checks; this witness check has not been transferred to Lean. A global snake inequality could still use additional compatibility conditions between adjacent neighborhoods.
+
+An independently implemented exact-quotient model also excluded share sums at most 300 for direction pattern $(0,1,2,3,0,4)$ and count ranges $(2,[6,21],2,2,[6,21])$, supporting the earlier bound 301. This remains solver evidence. The targets 163 and 245 remained unresolved in the same tests. The arithmetic equivalences used to encode quotient thresholds and to truncate summands at one above a proposed total cap were checked in Lean, without supplying the missing numerical refutations.
+
+These results support a more selective continuation: certify ordinary exclusions first, then prove share bounds for windows that remain feasible and occur in low-charge sequences. A global improvement still requires an inequality covering every permitted sequence with the appropriate endpoint corrections.
+
 \subsection{Overlapping endpoint demands}
 Local geometric arguments often produce sets that must contain an endpoint. Their overlap can be retained in the counting argument.
 \begin{proposition}[Weighted endpoint accounting]
