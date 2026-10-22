@@ -1,16 +1,12 @@
 # Collaborator handoff
 
-Checkpoint: 22 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 23 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Active empty-square route
 
-The current checkpoint is [milestone 29](milestones/29-overlapping-share-windows/README.md). Four eight-transition patterns with seven internal singleton counts all four are excluded in Lean. These are the normalized joins of the two A windows and one B window in the collaborator's period-three obstruction. All fifteen audits passed: four finite refutations, four snake interpretations, two classification results, their combined theorem, and four selective-history lemmas. No share cap or added cycle cuts are used in the four exclusions.
+The current checkpoint is [milestone 30](milestones/30-coarse-count-correction/README.md), completed on 23 October. Nineteen Lean audits passed: two interval exclusions, two exact-six exclusions, their snake interpretations, and the excess/overlap consequences. For the two surviving seven-centre shapes, the three high counts sum to at least 19. Each qualifying window therefore contributes eight additional integer charge units after accounting for overlap multiplicity three. The refined diagnostic has 44,336 states; its witness-table cycle changes from 859/180 to 287/60, while the lower-table cycle remains 119/29. No global bound improves. Independent experiments suggest stronger high-count minima: exactly 28 for case 3 in the local model, and between 29 and 31 for case 2. The lower sides of those experimental intervals remain solver-only. The next task is a reusable joint-counter soundness argument and proof certificates for those stronger sums.
 
-Only the run length of count four needs extra memory, capped at six. This adds 68 states, giving 44,132 total. With the pinned 8ad204ff oracle, the diagnostic witness-table cycle changes from 1699/360 to 859/180; the lower-table cycle remains 119/29. Exact cycle means are checked, but no complete minimum-mean potential or new global upper bound is supplied.
-
-**Next:** certify the new joint exclusions for the surviving `(3,3,6+)` pattern. All four exact-six cases are solver-UNSAT; allowing 6 through 21 leaves cases 0/1 UNSAT and cases 2/3 with independently checked local forests using actual high counts 9 through 11. This suggests charging the singleton excess lost by the coarse symbol, in addition to empty-square shares. The six new exclusions and the two shorter six-centre all-four exclusions remain solver-only. Preserve this distinction when reusing the records.
-
-Latest GitHub refresh: `research/unconditional-241` is at `d4936d72` with the 235 replay plan; `claude/relaxed-keller-60ks7i` is at `86bd4daf` with conditional 230 work and a faster checked RUP checker; Tommy Ma's `research/unconditional-231-230` is at `e931afe8`, with share/count integration and explicit unfinished coverage obligations. Its notes state that unconditional 231/230 remain incomplete. None of these newer chains has been imported or independently rebuilt here. Milestone29 retains its earlier pinned oracle and support sources for reproducibility.
+Latest GitHub refresh (23 October; no new commits): `research/unconditional-241` is at `d4936d72` with the 235 replay plan; `claude/relaxed-keller-60ks7i` is at `86bd4daf` with conditional 230 work and a faster checked RUP checker; Tommy Ma's `research/unconditional-231-230` is at `e931afe8`, with share/count integration and explicit unfinished coverage obligations. Its notes state that unconditional 231/230 remain incomplete. None of these newer chains has been imported or independently rebuilt here. Milestone29 retains its earlier pinned oracle and support sources for reproducibility.
 
 ## Previous empty-square checkpoints
 

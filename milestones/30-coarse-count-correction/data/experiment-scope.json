@@ -1,0 +1,26 @@
+{
+  "dimension": 9,
+  "radius": 4,
+  "selection": "Union of radius-four balls around the seven fixed internal centres; selected degree at most two; at most two interior endpoints; boundary endpoints unrestricted; selected cycles excluded lazily.",
+  "normalization": "The displayed window starts at zero and uses the displayed coordinate names. Translation and coordinate permutation preserve the problem.",
+  "sat": {
+    "implementation": "python-sat 1.9.dev17, Cadical153",
+    "seconds_per_case": 20,
+    "conflicts_per_observation": 10000,
+    "joint_cap_values": [19, 20, 21, 24],
+    "literal_multiplicity": "All 63 occurrences retained, including repeated opposite-corner vertices.",
+    "status_scope": "Solver-only for these additional joint-counter experiments. No Lean certificate for their joint-sum premise."
+  },
+  "independent_cp": {
+    "implementation": "OR-Tools 9.15 CP-SAT",
+    "seed": 196,
+    "workers": 2,
+    "seconds_per_case": 15,
+    "joint_cap_values": [24, 25, 26, 27, 28],
+    "extended_case": {"case": 2, "cap": 28, "seconds": 45, "record": "independent-2-28-long.json"},
+    "model": "Direct indicators for all 36 coordinate squares per centre; no SAT counters and no empty-share quotient variables.",
+    "status_scope": "Solver-only infeasibility; saved positive selections and all cycle cuts independently checked."
+  },
+  "lean_proofs": "Only the four separate-centre exclusions and the stated arithmetic/geometric consequences are certified here. Their ordinary models use no added cycle cuts.",
+  "global_conclusion": "No new construction or unconditional upper bound."
+}

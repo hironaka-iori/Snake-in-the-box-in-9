@@ -18,7 +18,7 @@ The exact optimum remains unresolved. This checkout integrates 191 <= a(9) <=238
 - [Targeted mergers and frozen-cycle accounting](15-component-mergers/README.md)
 - [Larger cycle configurations and local cell states](16-cycle-reservoirs/README.md)
 
-Active direction as of 22 October: enforce overlap consistency in the empty-square route and correct information lost by coarse singleton-count symbols. Milestone 29 checks four seven-centre exclusions and a selective-history refinement with only 68 additional states. The global bound is unchanged. See the current collaborator handoff for evidence boundaries.
+Active direction as of 23 October: retain empty-square shares and singleton excess lost by coarse count symbols. Milestone 30 proves two interval exclusions, two exact-six exclusions, and an overlap correction contributing eight integer charge units per qualifying window. Nineteen Lean audits passed. Stronger sum-cap results remain solver-only; the global bound is unchanged.
 
 The relocation manifest records moved files. Historical proof logs and source-hash manifests retain their original recorded paths as provenance.
 
@@ -36,3 +36,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 
 - [Direct share tests and checked window exclusions](28-direct-share-certificates/README.md)
 - [Overlapping share windows and selective history](29-overlapping-share-windows/README.md)
+
+- [Coarse singleton-count correction](30-coarse-count-correction/README.md)

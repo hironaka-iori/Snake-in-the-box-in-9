@@ -1569,7 +1569,62 @@ The next cycle has count symbols $(3,3,6+)$, where $6+$ represents every count f
 \[
 (11,3,3,9,3,3,11),\qquad (9,3,3,10,3,3,9).
 \]
-The positive witnesses have independent count and acyclicity checks, but no extension to a complete snake is asserted. The new exclusions remain solver results. If the exact-six exclusions are certified, a surviving coarse window must contribute at least one more singleton square than its nominal symbols record. This identifies a further correction to test alongside the empty-square share: retaining some of the excess hidden by the symbol $6+$.
+The positive witnesses have independent count and acyclicity checks, but no extension to a complete snake is asserted. The exclusions and the resulting correction are established below.
+
+\subsection{Recovering the excess hidden by a coarse count}\label{sec:coarse-excess}
+Write $D_0,D_1,D_2,D_3$ for the four direction patterns in Proposition~\ref{prop:seven-overlap}, in their displayed order. The symbol $H$ below denotes any integer in $[6,21]$; separate occurrences need not have the same value.
+
+\begin{proposition}[Coarse-count correction]\label{prop:coarse-correction}
+The seven internal singleton counts of a snake cannot have either of the following combinations:
+\[
+\begin{array}{c|c}
+\text{directions}&\text{singleton counts}\\\hline
+D_0&(3,3,H,3,3,H,3)\\
+D_1&(3,H,3,3,H,3,3).
+\end{array}
+\]
+For either $D_2$ or $D_3$, if the counts are
+\[
+(a,3,3,b,3,3,c),\qquad a,b,c\ge6,
+\]
+then $a+b+c\ge19$. In particular their seven-count total is at least $31$, and
+\[
+(a-6)+(b-6)+(c-6)\ge1.
+\]
+\end{proposition}
+\begin{proof}
+For $D_0$ and $D_1$, impose the displayed intervals in the same radius-four path model used above. Inconsistent subsets contain 1,273 and 1,223 clauses, respectively. For $D_2$ and $D_3$, impose the exact tuple $(6,3,3,6,3,3,6)$; inconsistent subsets contain 4,017 and 2,856 clauses. All four certificate replays and their interpretations for arbitrary snakes have passed Lean. These refutations use the ordinary degree, endpoint and singleton-count conditions, with no additional cycle cuts or share caps. If $a,b,c\ge6$ and their sum were at most $18$, each would equal six, contradicting the corresponding exact-tuple exclusion. The arithmetic consequences have also been checked.
+\end{proof}
+
+\begin{proposition}[Three-position excess accounting]\label{prop:three-excess}
+Index all selected vertices by $j$, and put
+\[
+b_j=\min\{6,\alpha_S(x_j)\},\qquad
+\delta_j=\alpha_S(x_j)-b_j.
+\]
+Let $J$ be any set of distinct starting indices of seven-centre windows satisfying the $D_2$ or $D_3$ hypotheses of Proposition~\ref{prop:coarse-correction}, with $r$ denoting the first internal centre. Then
+\[
+|J|\le3\sum_j\delta_j.
+\]
+Consequently the integer charge at $M=12$ satisfies
+\[
+G_{12}\ge24\sum_j b_j+8|J|+\sum_{x\in S}\sigma_{12}(x).
+\]
+\end{proposition}
+\begin{proof}
+Each qualifying window gives $\delta_r+\delta_{r+3}+\delta_{r+6}\ge1$. A fixed position $j$ occurs in these triples only for starts $j$, $j-3$ and $j-6$ that belong to $J$. Summing the window inequalities therefore gives
+\[
+|J|\le\sum_{r\in J}(\delta_r+\delta_{r+3}+\delta_{r+6})
+\le3\sum_j\delta_j.
+\]
+Use $T=\sum_j b_j+\sum_j\delta_j$ and $G_{12}=24T+\sum_x\sigma_{12}(x)$. The general finite-set overlap inequality, its multiplicity-three specialization, the decomposition of $T$, and the resulting charge inequality have been checked in Lean.
+\end{proof}
+This count correction can be combined with the empty-square term without changing its definition. It does not yet give a positive density of qualifying windows in every snake. Other low-charge sequences must also be controlled before the charge targets in Proposition~\ref{prop:charge-targets} follow.
+
+\paragraph{Diagnostic effect and stronger experimental targets.}
+Tracking only the necessary suffix of the period-three count pattern adds 204 states to the preceding diagnostic graph, for 44,336 states in total. Two interval-forbidden transitions are removed, and two surviving transitions receive the excess correction. The cycle found with recorded local-witness values changes from $859/180$ to $287/60$. The cycle found with the recorded lower-bound table remains at $119/29$. Exact arithmetic checks the saved cycles; a finite check covers 393,216 count-history updates. These checks do not supply a global minimum-mean certificate or the unproved numerical share bounds.
+
+An independent model using direct indicators for all 36 coordinate squares at each centre gives stronger experimental targets. Under the $D_3$ hypotheses, it rejects $a+b+c\le27$ and finds an acyclic local configuration with counts $(9,3,3,10,3,3,9)$, so the apparent local minimum is $28$. Under the $D_2$ hypotheses, it rejects $a+b+c\le28$; the previously checked configuration has sum $31$. Thus the experimental intervals for the local minima are $[28,28]$ and $[29,31]$, respectively. The infeasibility results are solver evidence, while the positive configurations have independent geometric checks. The stronger lower bounds have no Lean certificate here and are not used in Proposition~\ref{prop:three-excess}. Certifying them would increase the available excess from one to at least ten or eleven units per qualifying window, subject to the same overlap accounting.
 
 \subsection{Overlapping endpoint demands}
 Local geometric arguments often produce sets that must contain an endpoint. Their overlap can be retained in the counting argument.
