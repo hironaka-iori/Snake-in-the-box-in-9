@@ -18,7 +18,7 @@ The exact optimum remains unresolved. This checkout integrates 191 <= a(9) <=238
 - [Targeted mergers and frozen-cycle accounting](15-component-mergers/README.md)
 - [Larger cycle configurations and local cell states](16-cycle-reservoirs/README.md)
 
-Active direction as of 21 October: retain the empty-square charge, certify ordinary window exclusions first, and target share bounds on surviving low-charge sequences. Milestone 28 adds a checked exclusion and a local 104-share counterexample. See the current collaborator handoff for evidence boundaries.
+Active direction as of 22 October: enforce overlap consistency in the empty-square route and correct information lost by coarse singleton-count symbols. Milestone 29 checks four seven-centre exclusions and a selective-history refinement with only 68 additional states. The global bound is unchanged. See the current collaborator handoff for evidence boundaries.
 
 The relocation manifest records moved files. Historical proof logs and source-hash manifests retain their original recorded paths as provenance.
 
@@ -35,3 +35,4 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Empty-square shares and weighted window packing](27-empty-square-packing/README.md)
 
 - [Direct share tests and checked window exclusions](28-direct-share-certificates/README.md)
+- [Overlapping share windows and selective history](29-overlapping-share-windows/README.md)

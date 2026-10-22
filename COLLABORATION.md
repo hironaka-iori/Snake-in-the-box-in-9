@@ -1,8 +1,18 @@
 # Collaborator handoff
 
-Checkpoint: 21 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 22 October 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
 ## Active empty-square route
+
+The current checkpoint is [milestone 29](milestones/29-overlapping-share-windows/README.md). Four eight-transition patterns with seven internal singleton counts all four are excluded in Lean. These are the normalized joins of the two A windows and one B window in the collaborator's period-three obstruction. All fifteen audits passed: four finite refutations, four snake interpretations, two classification results, their combined theorem, and four selective-history lemmas. No share cap or added cycle cuts are used in the four exclusions.
+
+Only the run length of count four needs extra memory, capped at six. This adds 68 states, giving 44,132 total. With the pinned 8ad204ff oracle, the diagnostic witness-table cycle changes from 1699/360 to 859/180; the lower-table cycle remains 119/29. Exact cycle means are checked, but no complete minimum-mean potential or new global upper bound is supplied.
+
+**Next:** certify the new joint exclusions for the surviving `(3,3,6+)` pattern. All four exact-six cases are solver-UNSAT; allowing 6 through 21 leaves cases 0/1 UNSAT and cases 2/3 with independently checked local forests using actual high counts 9 through 11. This suggests charging the singleton excess lost by the coarse symbol, in addition to empty-square shares. The six new exclusions and the two shorter six-centre all-four exclusions remain solver-only. Preserve this distinction when reusing the records.
+
+Latest GitHub refresh: `research/unconditional-241` is at `d4936d72` with the 235 replay plan; `claude/relaxed-keller-60ks7i` is at `86bd4daf` with conditional 230 work and a faster checked RUP checker; Tommy Ma's `research/unconditional-231-230` is at `e931afe8`, with share/count integration and explicit unfinished coverage obligations. Its notes state that unconditional 231/230 remain incomplete. None of these newer chains has been imported or independently rebuilt here. Milestone29 retains its earlier pinned oracle and support sources for reproducibility.
+
+## Previous empty-square checkpoints
 
 The user's latest instruction explicitly requests the s0 route, superseding the earlier construction-only division of work. [Milestone 28](milestones/28-direct-share-certificates/README.md) pins its tested support to `41797e3863e17be730f06e3a9c5df09bbc0d404d`, with its new share-clause soundness support. [Milestone 27](milestones/27-empty-square-packing/README.md) supplies weighted window packing, exact remainder loss, a checked disjoint-window recurrence, and precise conditional targets for 230/231.
 

@@ -1522,6 +1522,55 @@ An independently implemented exact-quotient model also excluded share sums at mo
 
 These results support a more selective continuation: certify ordinary exclusions first, then prove share bounds for windows that remain feasible and occur in low-charge sequences. A global improvement still requires an inequality covering every permitted sequence with the appropriate endpoint corrections.
 
+\subsection{Overlap consistency and selective history}\label{sec:share-overlap}
+Separate local witnesses need not agree on the vertices common to their neighborhoods. This distinction matters for the period-three obstruction in the parallel share search. Its three five-centre windows have singleton count four throughout and, up to coordinate renaming and reversal, direction types
+\[
+A=(0,1,2,3,0,4),\qquad B=(0,1,2,3,0,1),
+\]
+with two occurrences of $A$ and one of $B$. The recorded witness shares are $94,94,71$. In the five-centre table these give mean charge
+\[
+4+\frac{94+94+71}{360}=\frac{1699}{360}.
+\]
+Requiring the windows to describe one common selected-vertex set gives a stronger condition.
+
+\begin{proposition}[Seven-centre overlap exclusion]\label{prop:seven-overlap}
+No snake in $\Q_9$ has seven consecutive internal vertices with singleton-square count four and one of the following eight-transition patterns, after coordinate renaming:
+\[
+\begin{aligned}
+&(0,1,2,3,0,1,4,3), &&(0,1,2,3,0,4,2,3),\\
+&(0,1,2,3,4,1,2,0), &&(0,1,2,3,4,1,2,5).
+\end{aligned}
+\]
+\end{proposition}
+\begin{proof}
+Translate the initial vertex to zero. For each direction pattern, impose the seven singleton counts and the necessary induced-path degree and endpoint conditions in the union of the radius-four neighborhoods. The four resulting systems have inconsistent subsets with, respectively, 3,282, 2,982, 4,174, and 2,508 Boolean clauses. Their refutations have independently checked proof certificates. Each clause follows from the path conditions; no empty-square-share constraint or additional cycle cut is used.
+
+For the relation with the three-window obstruction, normalize coordinate labels by first appearance. The first six directions then belong to the three patterns $(0,1,2,3,0,1)$, $(0,1,2,3,0,4)$, and $(0,1,2,3,4,1)$. Enumerating the two remaining normalized coordinate names, requiring an induced path, and requiring two windows of type $A$ and one of type $B$ leaves exactly the four patterns displayed above. The finite classification, the refutations, their geometric interpretations, and the combined statement have passed Lean, with coordinate normalization explicit in the combined statement.
+\end{proof}
+Thus this particular obstruction disappears when consistency across the seven centres is imposed. Its earlier ceiling applies to the five-centre table, which does not impose this joint condition.
+
+\paragraph{Retaining only the necessary history.}
+The existing state graph already records seven transition directions and the last four singleton-count symbols. Let $R_k$ be the length of the run of counts equal to four ending at position $k$, capped at six. Then
+\[
+R_{k+1}=\begin{cases}
+\min\{6,R_k+1\},&\alpha_{k+1}=4,\\
+0,&\alpha_{k+1}\ne4.
+\end{cases}
+\]
+There are seven consecutive counts equal to four precisely when $R_k=6$ and $\alpha_{k+1}=4$. The update and this equivalence have been checked in Lean. Every four-symbol history other than $(4,4,4,4)$ already determines its run length. That one history needs three versions, for run lengths four, five, and at least six. With the 34 direction states of the existing graph, the state count increases only from $34\cdot6^4=44064$ to
+\[
+34(6^4+2)=44132,
+\]
+an increase of 68 states. The four overlap exclusions can therefore be represented without storing every seven-symbol history.
+
+In the resulting diagnostic calculation, the cycle found using recorded local-witness values changes from mean $1699/360$ to $859/180$. The cycle found using recorded share lower bounds remains at $119/29$. These cycle means are checked exactly. The calculation does not provide a complete minimum-mean certificate or discharge the numerical share premises, and it yields no new global upper bound here.
+
+The next cycle has count symbols $(3,3,6+)$, where $6+$ represents every count from six through twenty-one. Joint tests exclude all four associated patterns when those counts are exactly six. With the full interval allowed, two patterns remain solver-excluded and two admit local forests, with count tuples
+\[
+(11,3,3,9,3,3,11),\qquad (9,3,3,10,3,3,9).
+\]
+The positive witnesses have independent count and acyclicity checks, but no extension to a complete snake is asserted. The new exclusions remain solver results. If the exact-six exclusions are certified, a surviving coarse window must contribute at least one more singleton square than its nominal symbols record. This identifies a further correction to test alongside the empty-square share: retaining some of the excess hidden by the symbol $6+$.
+
 \subsection{Overlapping endpoint demands}
 Local geometric arguments often produce sets that must contain an endpoint. Their overlap can be retained in the counting argument.
 \begin{proposition}[Weighted endpoint accounting]
