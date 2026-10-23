@@ -28,3 +28,5 @@ The recorded witness-table cycle changes from 287/60 to 1739/360 after both pair
 The build reuses the checked support from milestones 28, 31 and 32. Run `scripts/certify.py`, `scripts/build.ps1`, then `scripts/replay.ps1 -Case 0` and `-Case 1`. Archives can be restored with `scripts/archive.py --unpack`. `scripts/geometry.py`, `scripts/pair_graph.py` and `scripts/verify.py` reproduce the controls and audit.
 
 The next mathematical direction is to extend this disjoint-cycle argument to other pairs of internal vertices, or combine its frequency with the exact empty-square charge. The gap between the pair bounds and the bank observations warrants a local sharpness test. The mixed-count lower-table cycle still prevents a global conclusion. This checkpoint does not establish the optimum or improve the integrated interval 191 <= a(9) <= 238.
+
+Milestone34 subsequently found and Lean-checked complete snakes attaining both constants. See [the sharpness checkpoint](../34-distance-three-sharpness/README.md). Stronger unrestricted count-only constants are therefore impossible; the proposed next target uses the empty-square share at equality.

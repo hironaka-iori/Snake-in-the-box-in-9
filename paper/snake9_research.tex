@@ -1708,6 +1708,35 @@ Both inequalities have passed Lean, including their application to arbitrary dis
 
 In particular, both counts cannot be at most four in either pattern. This excludes the corresponding all-four windows and also excludes mixed-count windows whose two displayed counts have too small a sum. The 131-path bank contains 956 occurrences of these two patterns. Their smallest observed sums are 16 and 19, respectively; these observations do not establish stronger universal bounds.
 
+\begin{proposition}[Sharpness of the distance-three constants]\label{prop:pair-sharpness}
+The constants $10$ and $9$ in Proposition~\ref{prop:distance-three-pair} are best possible over all snakes in $\Q_9$ satisfying the respective direction-pattern hypotheses.
+\end{proposition}
+\begin{proof}
+The explicit transition sequences in Appendix~\ref{app:pair-sharpness} give the following witnesses, with vertices indexed from zero:
+\[
+\begin{array}{c|c|c|c|c}
+\text{pattern}&\text{edge length}&r&\alpha_S(x_{r+1})&\alpha_S(x_{r+6})\\\hline
+(a,b,c,d,e,b,a)&143&67&6&4\\
+(a,b,c,d,e,b,f)&138&70&5&4.
+\end{array}
+\]
+For each sequence, all vertices are distinct and two vertices are adjacent exactly when consecutive. The displayed seven-transition pattern occurs at the stated index. These properties and both singleton counts have passed Lean. The sums attain the respective lower bounds, so increasing either universal constant gives a counterexample. This last implication has also been checked.
+\end{proof}
+
+Thus the larger pair sums observed in the 191-edge bank cannot be extended to all snakes. Additional conditions on length, surrounding counts or empty-square shares are needed for a stronger statement. Tests for 192-edge snakes attaining either sharp constant were inconclusive; they establish neither existence nor exclusion.
+
+Independent square enumeration on the two witnesses gives share pairs $(48,29)$ and $(25,17)$ at $M=12$. Their two-vertex charges are therefore $317$ and $258$. These are witness values. A next test for the second direction pattern is the unproved equality-case implication
+\[
+\alpha_S(x)+\alpha_S(y)=9
+\quad\Longrightarrow\quad
+\sigma_{12}(x)+\sigma_{12}(y)\ge12.
+\]
+Together with the proved count-sum bound, this would yield
+\[
+24\bigl(\alpha_S(x)+\alpha_S(y)\bigr)+\sigma_{12}(x)+\sigma_{12}(y)\ge228.
+\]
+The target retains the empty-square contribution at precisely the case where the count-only inequality is sharp. It remains unproved and would still require frequency or overlap accounting before contributing to a global bound.
+
 The diagnostic graph needs one additional earlier count only when the last six directions have normalized pattern $(0,1,2,3,4,1)$. This increases the state count from 44,336 to 70,416. Applying the two proved inequalities changes the recorded local-witness cycle mean from $287/60$ to $1739/360$, the same value found when the six-centre conjecture is imposed. The recorded lower-table cycle mean remains $119/29$. These are exact checks of saved cycles, with no assertion that the cycles have globally minimum mean. The numerical share premises and the aggregate proof remain incomplete, so the unconditional bound is unchanged.
 
 \subsection{Overlapping endpoint demands}
@@ -1749,6 +1778,20 @@ Its last vertex is 118. For moves in coordinates $0,\ldots,8$, respectively, ear
 (19,37,13,13,27,19,189,43,91).
 \]
 For each coordinate $k$, put $w=v_{191}\mathbin{\oplus}2^k$. Direct calculation gives $w=v_i$ or $\Ham(w,v_i)=1$ for the corresponding displayed index $i<191$.
+
+\subsection{Sharpness witnesses for the distance-three inequalities}\label{app:pair-sharpness}
+The 143-edge witness starts at vertex 193 and ends at vertex 189. The specified seven-transition segment starts at index $67$.
+\begin{quote}\small\ttfamily
+1407804128 4234107687 3267816402 3426402840 1567310284\\
+0234264013 4021056012 3410215706 7810620135 1234207401\\
+2341045862 8753014506 7462302860 4201268308 640
+\end{quote}
+The 138-edge witness starts at vertex 77 and ends at vertex 20. The specified seven-transition segment starts at index $70$.
+\begin{quote}\small\ttfamily
+2432173152 1867037617 5372314658 4135146503 8476421075\\
+0142314834 2314631076 0123415865 1234126423 4107567107\\
+2037184135 1261530174 1371631260 35841381
+\end{quote}
 
 \subsection{Verified 93-edge endpoint-maximal counterexample}
 \begin{quote}\small\ttfamily

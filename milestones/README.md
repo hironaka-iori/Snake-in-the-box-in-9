@@ -43,3 +43,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Consecutive singleton counts equal to four](32-seven-count-four-screen/README.md)
 
 - [Distance-three singleton inequalities](33-distance-three-singletons/README.md)
+
+- [Sharpness of the distance-three inequalities](34-distance-three-sharpness/README.md)
