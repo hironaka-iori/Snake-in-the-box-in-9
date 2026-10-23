@@ -1725,17 +1725,64 @@ For each sequence, all vertices are distinct and two vertices are adjacent exact
 
 Thus the larger pair sums observed in the 191-edge bank cannot be extended to all snakes. Additional conditions on length, surrounding counts or empty-square shares are needed for a stronger statement. Tests for 192-edge snakes attaining either sharp constant were inconclusive; they establish neither existence nor exclusion.
 
-Independent square enumeration on the two witnesses gives share pairs $(48,29)$ and $(25,17)$ at $M=12$. Their two-vertex charges are therefore $317$ and $258$. These are witness values. A next test for the second direction pattern is the unproved equality-case implication
+Independent square enumeration on the two witnesses gives share pairs $(48,29)$ and $(25,17)$ at $M=12$. Their two-vertex charges are therefore $317$ and $258$. These witness values do not determine the least possible charge.
+
+\begin{proposition}[Three-square share bonus]\label{prop:three-square-bonus}
+Suppose a snake has seven consecutive transitions $(a,b,c,d,e,b,f)$ starting at $x_r$, where the six named coordinates are distinct. Put $x=x_{r+1}$ and $y=x_{r+6}$. Then
 \[
-\alpha_S(x)+\alpha_S(y)=9
-\quad\Longrightarrow\quad
-\sigma_{12}(x)+\sigma_{12}(y)\ge12.
+\begin{aligned}
+\sigma_{12}(x)+\sigma_{12}(y)&\ge12,\\
+24\bigl(\alpha_S(x)+\alpha_S(y)\bigr)+\sigma_{12}(x)+\sigma_{12}(y)&\ge228.
+\end{aligned}
 \]
-Together with the proved count-sum bound, this would yield
+No equality assumption on the singleton counts is required.
+\end{proposition}
+\begin{proof}
+Use addition in $\mathbb F_2^9$ and the unit vectors $e_i$. The six internal vertices of the segment are
 \[
-24\bigl(\alpha_S(x)+\alpha_S(y)\bigr)+\sigma_{12}(x)+\sigma_{12}(y)\ge228.
+\begin{gathered}
+x,\quad x+e_b,\quad x+e_b+e_c,\quad x+e_b+e_c+e_d,\\
+x+e_b+e_c+e_d+e_e,\quad y=x+e_c+e_d+e_e.
+\end{gathered}
 \]
-The target retains the empty-square contribution at precisely the case where the count-only inequality is sharp. It remains unproved and would still require frequency or overlap accounting before contributing to a global bound.
+Each already has two neighbors in the segment. Every other neighbor of these internal vertices is therefore unselected.
+
+For a base vertex $q$ and coordinates $i,j$, write
+$Q(q;i,j)=\{q,q+e_i,q+e_j,q+e_i+e_j\}$.
+The preceding observation forces all vertices of the following three squares to be unselected:
+\[
+Q(x+e_d;b,e),\qquad Q(x+e_e;b,c),\qquad Q(x+e_e;b,d).
+\]
+The four vertices in the first column below are neighbors of $x$ or $y$. The listed directions lead to three unselected neighbors of each such vertex. Thus its selected-neighbor count is at most six. The three empty squares give the displayed lower counts for $e(q)$.
+\[
+\begin{array}{c|c|c|c|c}
+q&\text{absent directions}&e(q)\ge&d(q)\le&
+\left\lfloor12e(q)/d(q)\right\rfloor\ge\\\hline
+x+e_d&b,c,e&1&6&2\\
+x+e_e&b,c,d&2&6&4\\
+y+e_c&b,d,e&2&6&4\\
+y+e_d&b,c,e&1&6&2
+\end{array}
+\]
+Each denominator is positive because the corresponding vertex is adjacent to $x$ or $y$. The four contributions are distinct summands in the two shares. Their sum is at least $2+4+4+2=12$. Proposition~\ref{prop:distance-three-pair} gives a singleton-count sum of at least nine, hence the charge is at least $24\cdot9+12=228$.
+
+The share inequality, its application to arbitrary snakes and coordinate labels, and the combined charge inequality have passed Lean. The independently checked refutation uses 115 Boolean clauses and only the selected segment and the selected-vertex degree restriction; it uses no singleton-count equality or cycle exclusion. Its resolution certificate has 281 antecedent references.
+\end{proof}
+
+The bonus retains an empty-square contribution even where the count-only inequality is sharp. Since the share proof uses only local degree restrictions, it also applies to selected sets containing cycles. It does not by itself overcome the cycle obstruction to purely local bounds. The constant 12 is not asserted to be sharp.
+
+\begin{corollary}[Occurrence share bound]\label{cor:occurrence-share}
+Let $J$ be any set of starting indices for occurrences satisfying Proposition~\ref{prop:three-square-bonus}. Then
+\[
+\sum_{x\in S}\sigma_{12}(x)\ge6|J|,
+\qquad G_{12}\ge24T+6|J|.
+\]
+\end{corollary}
+\begin{proof}
+Sum the local lower bound 12 over $r\in J$. A position $k$ can appear in the charged pair only for starts $r=k-1$ or $r=k-6$, so each share is counted at most twice. Thus $12|J|\le2\sum_{x\in S}\sigma_{12}(x)$. The definition of $G_{12}$ gives the second inequality. The multiplicity bound, its application to arbitrary snakes, and the charge deduction have passed Lean.
+\end{proof}
+
+A lower bound on the frequency of qualifying occurrences is still needed for a new uniform upper bound. Combining this result with other share bounds must respect a common per-vertex capacity; their contributions cannot simply be added when their charged positions overlap.
 
 The diagnostic graph needs one additional earlier count only when the last six directions have normalized pattern $(0,1,2,3,4,1)$. This increases the state count from 44,336 to 70,416. Applying the two proved inequalities changes the recorded local-witness cycle mean from $287/60$ to $1739/360$, the same value found when the six-centre conjecture is imposed. The recorded lower-table cycle mean remains $119/29$. These are exact checks of saved cycles, with no assertion that the cycles have globally minimum mean. The numerical share premises and the aggregate proof remain incomplete, so the unconditional bound is unchanged.
 

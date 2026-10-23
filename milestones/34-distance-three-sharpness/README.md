@@ -31,3 +31,5 @@ Two 30-second full-cube searches imposed at least 193 selected vertices together
 ## Next direction
 
 The count-only constants are now settled for these unrestricted pattern classes. Retain the empty-square term at equality: for pattern 0123415 and count sum 9, test whether the two M12 shares must sum to at least 12. If proved, the pair charge would be at least 228 (including the cases of count sum at least 10). This is an unproved target. Frequency/packing and boundary accounting would still be needed for a global improvement. Length-conditioned pair inequalities remain another possible route; the bank observations alone do not prove them.
+
+Update: [milestone35](../35-equality-share-bonus/README.md) proves this target without the equality assumption and checks the occurrence overlap bound.

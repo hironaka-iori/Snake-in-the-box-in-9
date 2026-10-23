@@ -45,3 +45,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Distance-three singleton inequalities](33-distance-three-singletons/README.md)
 
 - [Sharpness of the distance-three inequalities](34-distance-three-sharpness/README.md)
+
+- [Three-square empty-share bonus and occurrence accounting](35-equality-share-bonus/README.md)
