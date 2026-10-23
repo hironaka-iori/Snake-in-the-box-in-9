@@ -321,7 +321,14 @@ def main():
     def copy(source, target):
         source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
         manifest["source_sha256"][source.relative_to(repo).as_posix()] = source_hash
-        shutil.copy2(source, target)
+        if target.exists() and hashlib.sha256(target.read_bytes()).hexdigest() == source_hash:
+            pass                       # identical copy already present (keeps its mtime for the cache)
+        else:
+            target.unlink(missing_ok=True)
+            try:
+                os.link(source, target)    # a hard link: the large generated sources are not duplicated
+            except OSError:
+                shutil.copy2(source, target)
         assert hashlib.sha256(target.read_bytes()).hexdigest() == source_hash
 
     def imported_objects(source):
