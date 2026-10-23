@@ -1,6 +1,6 @@
 # Scope of this archived ledger
 
-Entries below are chronological development history. The current unconditional bound is 245; 244 remains conditional. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
+Entries below are chronological development history. This archived section records the development through the 245 bound. The maintained repository currently integrates 238; later checkpoints are listed in the milestone index. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
 
 # Research ledger — 15 October 2026
 
@@ -124,3 +124,12 @@ Root has compiled generic counted outer-family geometry and repeated-window reso
 ### Fresh 245 reproduction completed
 
 The source-only build in `strengthened-l_md7bys` completed successfully at 2026-10-15T10:44:35.144919+00:00. All151 steps passed: the original core, incidence theorem,148 strengthening modules, and final transitive audits. All167 recorded source hashes match the maintained files. The manifest and combined log are saved as both `outputs/strengthened-reproduction-*` and `outputs/strengthened-245-reproduction-*`. The general prefix theorem and unchanged191 witness were included in the final audit. README, handoff, spectral instructions, and manuscript now record this successful reproduction. Earlier running-status paragraphs above are historical. The exact optimum remains unresolved.
+
+
+## 23 October 2026: distance-three pair inequalities and six-count classification
+
+Milestone32 now has 18 passed Lean audits: arbitrary-snake normalization, 34-case coverage, conditional no-six-four and density implications, plus four individual numerical refutations. All 34 native proofs are generated; only cases0,1,14,22 have completed Lean replay. The six-count-four statement remains a conjecture. A conditional graph test removes96 transitions and changes the saved witness mean287/60 to1739/360; lower mean119/29 survives.
+
+Milestone33 develops the geometric reason behind small cases22 and25. For transition patterns(a,b,c,d,e,b,a) and(a,b,c,d,e,b,f), the first and sixth internal singleton counts sum to at least10 and9, respectively. All named coordinates are distinct. Six forced opposite corners and four or three disjoint induced six-cycles explain the bound. Nine Lean audits, including coordinate normalization, passed. The cores have246/194 clauses and3405/1470 hints. Independent checks verified956 pattern occurrences across all131 bank paths; observed minima16/19 do not imply stronger universal bounds.
+
+The two proved inequalities give the same recorded witness-cycle improvement as the unfinished six-centre conjecture, while the lower-table cycle remains119/29. Selective count memory increases the diagnostic graph to70,416 states. Exact saved-cycle checks and source/proof archives are retained; there is no complete minimum-mean certificate or new global bound. The next route is a broader disjoint-cycle pair inequality or sharper empty-square shares on surviving mixed-count cycles. The paper and open editor mirror are synchronized. The built-in preview again failed before TeX because of the Windows split-writable-root sandbox restriction.

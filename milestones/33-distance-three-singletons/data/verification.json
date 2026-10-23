@@ -1,0 +1,77 @@
+{
+  "status": "PASSED",
+  "audited_theorems": 9,
+  "proofs": [
+    {
+      "case": 0,
+      "lower_bound": 10,
+      "clauses": 246,
+      "variables": 185,
+      "hints": 3405
+    },
+    {
+      "case": 1,
+      "lower_bound": 9,
+      "clauses": 194,
+      "variables": 163,
+      "hints": 1470
+    }
+  ],
+  "total_lrat_hints": 4875,
+  "sources_sha256_lf": {
+    "TwoCentreCount.lean": "54e5128e569480e88434206d2a0574117d22b043131da4cbd9f6df53deb4dfa3",
+    "DistanceThreeWindow.lean": "9bd7a08f63864b6096b57225953eb4425d30d5d10a429801046a2e3333791312",
+    "DistanceThreeFresh.lean": "d87dcb00c8fd39af16a7675552818b33a6ce62787cd2b460f522bd66d786d633",
+    "LocalWindowCnf/DistanceThree0.lean": "40db330cd0e7596deeb9d3d9c5a904f248969e30334797b18e8d6831f2c89f54",
+    "LocalWindowCnf/DistanceThree1.lean": "50be9a2388a2bc00843b938fa17d2eddf82204ff33e036820953ab5bbbacaeda",
+    "LocalWindowSat/DistanceThree0.lean": "1ccb2e936f3b2ac28165ce46226d22c614308aa78a8d42971362096d9ad14b64",
+    "LocalWindowSat/DistanceThree1.lean": "f7737d04b88e33c6f9015e0f20b7432c08c3407d3a8ec8bd9f402ee4a2034da8",
+    "LocalWindowUnsat/DistanceThree0.lean": "374d89f8df47097645049f6d9c59066488470318ff9a1e023d05b54abf6022ef",
+    "LocalWindowUnsat/DistanceThree1.lean": "2c051f1643ad01b8fe82e33a7ce38976afeb019884754c619540c0af6e09d90f",
+    "LocalWindowUnsat/DistanceThree0/Data0.lean": "72a864dea42d90fb84985fba09f865567b0030852ac5fc2fb2881adc235b825e",
+    "LocalWindowUnsat/DistanceThree0/Data1.lean": "c5a6d22366ae8530d3c5ca0114d24e97f124de8e8fd648241546a4dc5c6870a5",
+    "LocalWindowUnsat/DistanceThree0/Check1.lean": "bae6a0e7a5958627ce827212f814be9e65313d99dead3c2cb294df9903ef1fc4",
+    "LocalWindowUnsat/DistanceThree1/Data0.lean": "cd995ecca916a761fad63d4e6516b83e7e972da230627af7f38db24b21617195",
+    "LocalWindowUnsat/DistanceThree1/Data1.lean": "995f29fbbf250d1c9a1fe40aa7ea6e783aed85bd524aea656193be89b2786445",
+    "LocalWindowUnsat/DistanceThree1/Check1.lean": "0ec403782e2c820c776231550c5ac30d8ace9d2d29a854a1ab5cbfbe3c54fb24"
+  },
+  "graph_cycles": [
+    {
+      "stage": "before",
+      "table": "lower",
+      "mean": "119/29",
+      "period": 29
+    },
+    {
+      "stage": "before",
+      "table": "witness",
+      "mean": "287/60",
+      "period": 2
+    },
+    {
+      "stage": "pair",
+      "table": "lower",
+      "mean": "119/29",
+      "period": 29
+    },
+    {
+      "stage": "pair",
+      "table": "witness",
+      "mean": "1739/360",
+      "period": 6
+    },
+    {
+      "stage": "pair-and-six",
+      "table": "lower",
+      "mean": "119/29",
+      "period": 29
+    },
+    {
+      "stage": "pair-and-six",
+      "table": "witness",
+      "mean": "1739/360",
+      "period": 6
+    }
+  ],
+  "scope": "Both Q9 pattern inequalities are Lean-checked for arbitrary distinct coordinates. Graph means are recorded-cycle diagnostics, not global minimum means or a new snake bound."
+}

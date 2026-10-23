@@ -1655,9 +1655,60 @@ The successive diagnostic cycles repeatedly contain counts equal to four. This s
 \begin{conjecture}[Six-centre four-count restriction]\label{conj:six-fours}
 No snake in $\Q_9$ has six consecutive internal vertices whose singleton-square counts all equal four.
 \end{conjecture}
-An initial radius-four screen excluded all 132 normalized induced eight-transition patterns with seven internal counts equal to four. A shorter screen then excluded all 34 normalized induced seven-transition patterns with six such counts. These exclusions remain solver results. Independently, a finite Lean check proves that the 34 displayed cases cover all normalized induced seven-transition patterns. A complete proof of Conjecture~\ref{conj:six-fours} still requires the numerical refutations and the passage from an arbitrary snake to this normalized classification.
+An initial radius-four screen excluded all 132 normalized induced eight-transition patterns with seven internal counts equal to four. A shorter screen then excluded all 34 normalized induced seven-transition patterns with six such counts. The normalization of arbitrary snake segments and the complete 34-case classification have now been checked in Lean. Four numerical exclusions have also passed their proof replays; the remaining numerical cases are pending. Consequently Conjecture~\ref{conj:six-fours} remains unproved. The implication from all 34 exclusions to the conjecture is checked separately.
 
 A five-centre all-four local forest was found and independently checked by explicit vertex and square counting; a separate model also accepted this fixed configuration. Hence the corresponding local-model exclusion cannot be shortened to five centres. This does not establish a complete snake with such a run. An independent scan of the 131 saved 191-edge snakes found maximum run length two. The bank is not exhaustive, so this observation supplies no universal bound. The conjectured six-centre restriction would replace several direction-specific obstructions with one condition on the count sequence.
+
+\begin{proposition}[Conditional frequency consequence]
+Assume Conjecture~\ref{conj:six-fours}. Among any $N$ consecutive internal positions, at least $\lfloor N/6\rfloor$ have singleton-square count different from four.
+\end{proposition}
+\begin{proof}
+Partition the first $6\lfloor N/6\rfloor$ positions into disjoint blocks of six. Each block contains a count different from four. The sequence argument and its conditional application to arbitrary snakes have been checked in Lean.
+\end{proof}
+
+\subsection{Distance-three six-cycle inequalities}\label{sec:distance-three-pair}
+A small refutation in the preceding classification suggests a direct geometric explanation. The resulting inequalities impose no restrictions on the four intervening singleton counts.
+
+\begin{proposition}[Distance-three six-cycle inequalities]\label{prop:distance-three-pair}
+Let $x_0,x_1,\ldots,x_m$ be a snake in $\Q_9$, and suppose $r+7\le m$.
+If its seven transitions starting at $x_r$ are
+\[
+(a,b,c,d,e,b,a),
+\]
+where $a,b,c,d,e$ are distinct coordinates, then
+\[
+\alpha_S(x_{r+1})+\alpha_S(x_{r+6})\ge10.
+\]
+If the transitions are $(a,b,c,d,e,b,f)$ with six distinct coordinates, then
+\[
+\alpha_S(x_{r+1})+\alpha_S(x_{r+6})\ge9.
+\]
+\end{proposition}
+\begin{proof}
+Put $x=x_{r+1}$ and $y=x_{r+6}$. Write $e_i$ for the unit vector in coordinate $i$, and use addition in $\mathbb F_2^9$. The five transitions from $x$ to $y$ give
+\[
+y=x+e_c+e_d+e_e.
+\]
+The path directions at $x$ are $a,b$. Those at $y$ are $b,a$ in the first case and $b,f$ in the second. Thus $c,d,e$ are free directions at both vertices.
+
+For each pair of coordinates from $\{c,d,e\}$, its opposite corner at $x$ is a neighbor of $y$ in the remaining coordinate. That neighbor is unselected, since it is outside the two path directions at $y$. The other two corners of the square at $x$ are also unselected. This gives three singleton squares at $x$ and, symmetrically, three at $y$.
+
+For any coordinate $h$ outside the union of the displayed coordinates, set
+\[
+A_i=x+e_i+e_h,\qquad B_i=y+e_i+e_h\qquad(i\in\{c,d,e\}).
+\]
+These six vertices form the induced cycle
+\[
+A_c,\ B_d,\ A_e,\ B_c,\ A_d,\ B_e,\ A_c.
+\]
+They cannot all be selected in an induced path. Each missing vertex is the opposite corner of a singleton square at $x$ or $y$, because $i,h$ are free directions there. The cycles for different $h$ are vertex-disjoint, and their opposite corners are distinct from the six already counted. There are four choices of $h$ in the first case and three in the second. The respective totals are therefore at least $6+4=10$ and $6+3=9$.
+
+Both inequalities have passed Lean, including their application to arbitrary distinct coordinate labels. The checked counting constraints retain every opposite-corner occurrence, and their geometric interpretation uses the singleton counts of the original snake.
+\end{proof}
+
+In particular, both counts cannot be at most four in either pattern. This excludes the corresponding all-four windows and also excludes mixed-count windows whose two displayed counts have too small a sum. The 131-path bank contains 956 occurrences of these two patterns. Their smallest observed sums are 16 and 19, respectively; these observations do not establish stronger universal bounds.
+
+The diagnostic graph needs one additional earlier count only when the last six directions have normalized pattern $(0,1,2,3,4,1)$. This increases the state count from 44,336 to 70,416. Applying the two proved inequalities changes the recorded local-witness cycle mean from $287/60$ to $1739/360$, the same value found when the six-centre conjecture is imposed. The recorded lower-table cycle mean remains $119/29$. These are exact checks of saved cycles, with no assertion that the cycles have globally minimum mean. The numerical share premises and the aggregate proof remain incomplete, so the unconditional bound is unchanged.
 
 \subsection{Overlapping endpoint demands}
 Local geometric arguments often produce sets that must contain an endpoint. Their overlap can be retained in the counting argument.

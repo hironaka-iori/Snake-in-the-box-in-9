@@ -39,8 +39,8 @@ def main():
     assert read('data/five-fixed-cp.json')['status']=='FEASIBLE'
     bank=read('data/bank-runs.json');assert bank['verified_snakes']==131 and bank['maximum_run_found']==2
     assert hashlib.sha256((ROOT/'work/bank9.json').read_bytes()).hexdigest()==bank['bank_sha256']
-    result=dict(status='PASSED',solver_only_exclusions={'seven_centres':132,'six_centres':34},lean_coverage_audits=3,
+    result=dict(status='PASSED',solver_screen_exclusions={'seven_centres':132,'six_centres':34},lean_coverage_audits=3,
                 cycle_cuts_checked=cuts,positive_records=positive,unknown_records=unknown,
-                bank_maximum_run=2,scope='Six-count-four universal exclusion remains a hypothesis; finite normalized coverage is Lean-checked, numerical exclusions are not.')
+                bank_maximum_run=2,scope='Experimental evidence only. Six-count-four universal exclusion remains a hypothesis; see proof-verification.json for four completed replays and the conditional universal bridges.')
     (HERE/'data/verification.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
 if __name__=='__main__':main()
