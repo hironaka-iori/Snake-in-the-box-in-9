@@ -92,3 +92,57 @@ Making the next bridge cheaper:
 - Symmetry breaking pays for G2: for `d0120_a3_3_4` a CaDiCaL proof without lex clauses trims to 607,276 steps and 31.5 M hints, with them to 52,769 steps and 2.7 M hints. G1 is still a large share (11,902 s against 18,403 s for G2 over all 135 windows). An untested idea: check each lex-leader generator once as a block (as `blocksOK` does for counters) instead of clause by clause in `check2`.
 - G2 throughput is about 3,200 hints per second; the cost is dominated by hint count, so a solver configuration or proof trimming that minimises hints (not steps) is the direct lever. The input modules (`Inputs`, 3,666 s) cost a quarter of the step modules; one module per chunk would parallelise them.
 - Run the final modules without a tight memory cgroup: their anonymous memory stays under 1 GB, but they map about 10 GB of objects, and a 4.3 GB cgroup made them page-fault bound.
+
+## Toward 235: shape-level bridge (u235/, 22-23 October 2026)
+
+`upper_235_of_direction_windowsK6R3W` (AggregateDirectionK6R3WConditional) assumes that no window of 2..6 consecutive internal vertices has a direction shape and lumped counts flagged in the K6R3W table. The table holds 2,635 certified exclusions: 34 shapes, radius 3, ranges exact `1..5` or lumped `[6, 21]`.
+
+The new bridge works per shape, not per window. It discharges the premise completely in Lean, conditional only on per-shape refutations, and it currently bridges 19 of the 34 shapes.
+
+**Design**
+- **One shape CNF per shape** (`gen235.py`). It contains:
+  - the wincert ball, endpoint and cycle-cut clauses, with no count constraint;
+  - one totalizer per centre over its 21 absent-corner literals, whose outputs mean "α ≥ j";
+  - lex-leader clauses for the adjacent transpositions of the free coordinates.
+- **One CaDiCaL 2.1.3 session per shape** (`--lidrup`, the binary shipped with the Lean 4.19.0 toolchain, deterministic):
+  - one assumption cube per window, `o_lo` and `¬o_(hi+1)`;
+  - the proof is trimmed backwards from all window targets (`mtrim.c`).
+- **G1, once per shape** (`Sh235G1.lean`):
+  - `check3` accepts the base and lex clauses (`check2`) and the four totalizer clause families. They are read through `wire`: a literal is a counting statement `j ≤ cnt L` over a node's leaf list.
+  - `sound3` proves every accepted clause true under the intended assignment `tau3`.
+- **G2** (`FastRupT.lean`): FastRup blocks export the target clauses. `fr_tgt` turns each export into `∀ τ, Inp τ → clauseSat τ C` in the original numbering, by the converse of `msat_toMaskR`.
+- **Window link** (`Sh235Win.lean`, `winRef_of`):
+  1. A snake through the canonical window is first moved to its lex-least image, which keeps the window and every count (`D239.lexmin`).
+  2. The window's totalizer roots count exactly the absent free corners (`cenOK`, `CornerOK`, `center_counts`).
+  3. The target `C = ¬core` is false under the window's counts (`litOff`, decided by the kernel), which is a contradiction.
+- **Normalisation, generic in the shape** (`Win235Norm.lean`):
+  - `norm_canon` sends the `i`-th distinct direction of any window to `i` by a cube automorphism, which is exactly `canon`.
+  - `revS` reads the snake backwards; its counts and directions are reversed.
+- **Table link** (`Win235Glue.lean`, generated `D235Data`, `D235Tab_*`, `D235Table`):
+  - `rgsOK`: every restricted growth string of length `n + 1` is listed, or it and its reversal have shape index 34, whose tables vanish (`sfwd_big`, `srev_big`).
+  - `TabOK` (51 listed direction lists, checked in pieces of 1,296 symbol tuples cut out of the table): every flagged tuple with symbols `1..6` is covered by a range tuple of the shape read forwards, or of its reversal read backwards.
+  - `no_win` combines these with the normalisation. `S235.T235.prem2..prem6` are the five premises in exactly the form of the conditional theorem, and `upper_235_of_shapes` gives 235 from `∀ e ∈ E, ShapeRefuted e.c e.L`.
+- **Cap-5 lumping and positivity:** the symbol `6` (`sym a = 6` iff `a ≥ 6`) is covered only by ranges `[≤ 6, ≥ 21]`. Internal counts are at least 1 (`localAlpha_positive`), so symbol `0` never occurs.
+- **Reversed patterns:** the reverse table `srev` is checked directly against the reversal `canon c.reverse`, read backwards on `revS`.
+
+**Status**
+- 19 shapes are bridged, 426 of the 2,635 windows (`Q<dirs>Ref`).
+- `UpperBound235Cond.lean`, `S235.T235.upper_235_of_remaining`, proves the 235 bound from the refutation of the other 15 shapes alone, with standard axioms only.
+- Session statistics for all 34 shapes are in `u235/sessions235.json`: in total 4.31e8 hints after trimming, at 61 hints per lemma.
+
+| | bridged 19 shapes | all 34 shapes |
+| --- | --- | --- |
+| hints | 30.5 M | 431 M |
+| G2 time (FastRup, about 8,300 hints/s per module) | 3,674 module-s | about 52,000 s (14.4 h) |
+| G1 time (once per shape) | 1,374 s | about 2,500 s |
+| objects (about 295 bytes per hint) | 9.0 GB | about 127 GB |
+
+**Why the remaining 15 shapes are not bridged here.** The obstacle is object size, not kernel time:
+- A FastRup hint is about six `Expr.app` nodes in the stored proof term. The 431 M hints of the full set would need about 127 GB of `.olean`, and all of them must be present when the final module is imported. This machine has 15 GB.
+- A reflective checker with packed hint data would be small, about 3 to 25 bytes per hint. But measured kernel loops cost 10 to 20 µs per iteration, recursion depth is limited to about 5,000 per evaluation, and random access into a clause store costs about 20 µs per binary tree level. That puts it at roughly 2 to 5 times the FastRup time per hint.
+- Two levers remain: a block-level clause tree of `(mask, proof)` pairs with packed hint indices (estimated 10 to 30 bytes and about 110 µs per hint), or about 10 times fewer hints.
+
+**Reproduction**
+- `u235/regen235.py WORK work/spectral/stronger` rewrites the generated sources from committed data and checks them against `u235/sources.sha256`. The committed data are `cuts235.json` (the cycle cuts of every shape) and `shapes_done.txt`.
+- Then run `verify_strengthened.py ... --bound235`. The modules are listed in `u235/build_order.txt`.
+- Peak anonymous memory per module is at most 3.0 GB: the window theorems come in groups of 60 per module, and the RGS sweep tests the shape index before list membership.
