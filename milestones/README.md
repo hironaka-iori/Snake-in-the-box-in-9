@@ -51,3 +51,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Joint consistency of critical cycles](36-critical-cycle-consistency/README.md)
 
 - [Logical manuscript rewrite and verification](37-logical-paper-rewrite/README.md)
+
+- [Asymmetric restrictions at Hamming distance four](38-four-position-obstruction/README.md)

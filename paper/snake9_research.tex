@@ -36,7 +36,7 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-The maximum number of edges in an induced path of the nine-dimensional binary hypercube is denoted by $a(9)$. The results assembled here give $191\le a(9)\le238$. The lower bound is a published construction, reproduced as an explicit transition sequence. The upper bound follows from the exact identity $T+2s_0+35v=9214$, where $v$ is the number of selected vertices, $T$ is the total number of singleton squares, and $s_0$ is the number of empty squares. A finite family of 175 forbidden windows and an integer potential imply $2T\ge7(v-1)-36$, which yields the bound 238. The proof separates the geometric interpretation of each window, the checked finite refutations, and the summation argument. We then retain the empty-square term through integer shares, prove sharp two-position singleton inequalities, and establish a three-square share bonus and further overlap exclusions. These refinements have not yet produced a stronger uniform bound. Explicit counterexamples distinguish endpoint maximality and local feasibility from global optimality. The value 196 remains a numerical conjecture. The 238 theorem has a successful Lean dependency audit against an incrementally built Linux library; an independent rebuild of that complete theorem remains pending.
+The maximum number of edges in an induced path of the nine-dimensional binary hypercube is denoted by $a(9)$. The results assembled here give $191\le a(9)\le238$. The lower bound is a published construction, reproduced as an explicit transition sequence. The upper bound follows from the exact identity $T+2s_0+35v=9214$, where $v$ is the number of selected vertices, $T$ is the total number of singleton squares, and $s_0$ is the number of empty squares. A finite family of 175 forbidden windows and an integer potential imply $2T\ge7(v-1)-36$, which yields the bound 238. The proof separates the geometric interpretation of each window, the checked finite refutations, and the summation argument. We then retain the empty-square term through integer shares, prove sharp distance-three singleton inequalities and asymmetric distance-four restrictions, and establish a three-square share bonus and further overlap exclusions. These refinements have not yet produced a stronger uniform bound. Explicit counterexamples distinguish endpoint maximality and local feasibility from global optimality. The value 196 remains a numerical conjecture. The 238 theorem has a successful Lean dependency audit against an incrementally built Linux library; an independent rebuild of that complete theorem remains pending.
 \end{abstract}
 \clearpage
 \setcounter{tocdepth}{1}
@@ -577,6 +577,52 @@ For the first row, these necessary conditions give an inconsistent subset of 1,5
 
 These two exclusions were selected from periodic sequences admitted by a weaker diagnostic model. They eliminate those particular sequences. The modified model admits a replacement sequence at the same saved lower-table mean, so this result alone yields no improvement of Theorem~\ref{thm:upper238}. The computations and their precise scope are recorded in Appendix~\ref{app:diagnostics}.
 
+\subsection{An asymmetric relation at Hamming distance four}\label{sec:distance-four}
+The second mixed-count exclusion admits a stronger statement involving only two positions. This removes all hypotheses on the five intervening counts.
+
+\begin{proposition}[Asymmetric singleton-count bounds]\label{prop:distance-four}
+Suppose a snake contains eight consecutive transitions $(a,b,c,d,e,c,a,d)$ starting at $x_r$, with the five named coordinates distinct. Put
+\[
+x=x_{r+1},\qquad y=x_{r+7},\qquad X=\alpha_S(x),\qquad Y=\alpha_S(y).
+\]
+Then $\Ham(x,y)=4$ and
+\[
+X\ge2,\qquad X\le2\Longrightarrow Y\ge4,\qquad
+Y\le1\Longrightarrow X\ge9.
+\]
+Consequently,
+\begin{equation}\label{eq:distance-four-tradeoff}
+X+Y\ge5,\qquad 2X+Y\ge8,\qquad X+6Y\ge15.
+\end{equation}
+\end{proposition}
+\begin{proof}
+The six transitions between $x$ and $y$ give $y=x+e_a+e_b+e_d+e_e$, proving the Hamming-distance statement. The path directions at $x$ are $a,b$, and those at $y$ are $a,d$.
+
+Two singleton squares at $x$ can be identified directly. Their coordinate pairs are $\{c,d\}$ and $\{d,e\}$. Their opposite corners satisfy
+\[
+x+e_c+e_d=x_{r+4}+e_b,\qquad
+x+e_d+e_e=x_{r+6}+e_b.
+\]
+Both are unselected: each is an additional neighbor of an internal segment vertex that already has its two path neighbors selected. The adjacent corners of these squares at $x$ are also unselected, since $c,d,e$ are outside its two path directions. Hence $X\ge2$. Similarly, the coordinate pair $\{c,e\}$ at $y$ has opposite corner $y+e_c+e_e=x_{r+4}+e_a$, which is unselected by the same degree restriction. Thus $Y\ge1$.
+
+For the two conditional assertions, suppose respectively that $(X,Y)$ is bounded above by $(2,3)$ or $(8,1)$. Normalize the coordinate labels and restrict the snake to the union of radius-four neighborhoods of the seven internal centres. Impose these two upper bounds and leave every other internal count in its full interval $[0,21]$. The necessary degree, endpoint, and missing-corner conditions contain inconsistent subsets of 1464 and 1152 Boolean clauses. Their clause interpretations and contradiction certificates have been checked in Lean, including their application to arbitrary distinct coordinates. The smaller exclusion $(X,Y)\le(1,21)$ also has a checked 14-clause certificate, consistent with the direct two-square argument above. These checks are archived separately~\cite{pairarchive}.
+
+It remains to deduce~\eqref{eq:distance-four-tradeoff}. If $X=2$, then $Y\ge4$. Otherwise $X\ge3$. In this second case, either $Y=1$, forcing $X\ge9$, or $Y\ge2$. Substitution in these three cases proves all three inequalities. The arithmetic deductions have also passed Lean.
+\end{proof}
+
+\begin{corollary}[Excess forced by a distant singleton]\label{cor:distance-four-excess}
+Set $b_j=\min\{6,\alpha_S(x_j)\}$ and $\delta_j=\alpha_S(x_j)-b_j$. Let $J$ be a set of distinct starting positions of occurrences satisfying Proposition~\ref{prop:distance-four}, all read in the fixed order of the snake, with $\alpha_S(x_{r+7})=1$ for every $r\in J$. Then
+\[
+3|J|\le\sum_j\delta_j,\qquad
+G_{12}\ge24\sum_j b_j+72|J|+\sum_{x\in S}\sigma_{12}(x).
+\]
+\end{corollary}
+\begin{proof}
+Each occurrence gives $\alpha_S(x_{r+1})\ge9$, hence $\delta_{r+1}\ge3$. Distinct starts have distinct charged positions $r+1$. Summing these inequalities and using nonnegativity of every other excess gives the first assertion. Substitute $T=\sum_j b_j+\sum_j\delta_j$ into $G_{12}=24T+\sum_x\sigma_{12}(x)$ to obtain the second. The local excess implication and the finite-set counting inequality have passed Lean. Combining this correction with another use of the same excess requires a common overlap budget.
+\end{proof}
+
+The radius-four local model admits the pairs $(2,4)$, $(3,2)$, and $(9,1)$. Independently checked witnesses have respectively 153, 146, and 162 selected vertices, distributed over 18, 12, and 20 path components. They attain the displayed lower-boundary values within that model. Their disconnectedness leaves sharpness for complete snakes unresolved. The saved lower-table cycle from Appendix~\ref{app:diagnostics} has one reversed occurrence of this shape with pair $(3,3)$, and the saved witness-table cycle has none. Both remain compatible with the new inequalities. A frequency estimate or further restrictions are still required for a new global bound.
+
 \section{What a stronger upper bound still requires}\label{sec:closure}
 The established local inequalities can enter a global proof only through an accounting rule that prevents repeated use of the same contribution. Lemma~\ref{lem:share-packing}, the multiplicity bounds for count excess, and Corollary~\ref{cor:occurrence-share} supply such rules. A positive density of the relevant configurations, or a finite potential covering every allowed alternative, is still required.
 
@@ -811,7 +857,7 @@ The 191-edge witness, the geometric counting lemmas, and the assembled 241-edge 
 
 The 175 refutations contain about 4.6 million derived clauses and 270 million antecedent references. Their replay was divided into 2803 kernel checks, using about 40 kernel-hours in total, with at most 4~GB per check. These figures describe the recorded verification; they do not substitute for the soundness argument. For 56 windows, alternative refutations of the same inconsistent core were used. Each was checked under the same logical rules.
 
-The sharp pair inequalities, their sharpness witnesses, the three-square bonus, the weighted accounting results, and the two mixed-count exclusions have also passed their stated Lean checks. Numerical searches elsewhere in the paper retain their narrower labels. In particular, an unresolved solver run proves neither feasibility nor impossibility; a local forest proves feasibility only in its local model; and an exact mean of one saved state cycle is not a certificate of the minimum over all cycles.
+The sharp distance-three inequalities, their sharpness witnesses, the three-square bonus, the weighted accounting results, and the two mixed-count exclusions have also passed their stated Lean checks. The asymmetric distance-four restrictions and their excess accounting have 17 further dependency audits; positive local configurations are checked separately and establish no full-snake sharpness claim. Numerical searches elsewhere in the paper retain their narrower labels. In particular, an unresolved solver run proves neither feasibility nor impossibility; a local forest proves feasibility only in its local model; and an exact mean of one saved state cycle is not a certificate of the minimum over all cycles.
 
 The exact optimum remains unresolved. No 192-edge construction has been obtained in the work reported here, and no universal exclusion of length 192 has been established. For the empty-square approach, the principal remaining obligation is a verified lower estimate for $G_{12}$ on every snake, including all alternatives to the currently charged patterns. For construction, the joining and contraction criteria identify valid search families, but the restricted failures do not exclude their complements. The conjecture $a(9)=196$ remains compatible with the proved interval and requires both a 196-edge construction and a 197-edge exclusion.
 
@@ -2289,5 +2335,6 @@ The union has 60 vertices, including zero. It is a linear forest with 14 compone
 \bibitem{huang} H.~Huang. Induced subgraphs of hypercubes and a proof of the Sensitivity Conjecture. \emph{Annals of Mathematics} 190 (2019), 949--955. \url{https://annals.math.princeton.edu/2019/190-3/p06}.
 \bibitem{lukito} A.~Lukito and A.~J. van Zanten. A New Non-Asymptotic Upper Bound for Snake-in-the-Box Codes. \emph{Journal of Combinatorial Mathematics and Combinatorial Computing} 39 (2001), 147--156. \url{https://combinatorialpress.com/article/jcmcc/Volume%20039/vol-039-paper%2012.pdf}.
 \bibitem{proofarchive} I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Snake-in-the-box in dimension nine: proof certificates and research record}. Archived repository state, 23 October 2026. \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/ffdf1b94403396a1b8ddaffdae419bb897ba5cf8}.
+\bibitem{pairarchive} I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Asymmetric singleton-count restrictions at Hamming distance four: certificates and local witnesses}. Archived research record, 24 October 2026. \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/1f2a40aae91283c43f9de759f9d2d572d30a10ac/milestones/38-four-position-obstruction}.
 \end{thebibliography}
 \end{document}
