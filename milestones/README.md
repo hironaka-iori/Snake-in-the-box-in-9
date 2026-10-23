@@ -49,3 +49,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Three-square empty-share bonus and occurrence accounting](35-equality-share-bonus/README.md)
 
 - [Joint consistency of critical cycles](36-critical-cycle-consistency/README.md)
+
+- [Logical manuscript rewrite and verification](37-logical-paper-rewrite/README.md)

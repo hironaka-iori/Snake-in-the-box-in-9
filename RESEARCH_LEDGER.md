@@ -150,3 +150,11 @@ No global frequency lower bound or integration with overlapping window shares is
 ## 23 October 2026: mixed-count overlap exclusions
 
 Milestone36 completes two geometric exclusions with six Lean audits, 1973 total core clauses and 68743 LRAT hints. The six-step witness cycle has six numerical excluded phases. The 29-step lower cycle has 28 numerical exclusions and one UNKNOWN. Two phases are theorems. Selective count history adds216 states and passes279936 update comparisons. The replacement witness mean is29/6; the lower mean remains119/29. No global bound changes. The next user-requested task is a complete logical rewrite of the existing manuscript after this research checkpoint.
+
+## 24 October 2026: complete logical manuscript revision
+
+Milestone37 rewrites the existing paper around its proof dependencies. A direct square census precedes the necessary local conditions; all175 exclusions are printed; the44064-state potential is followed by its full summation and endpoint deduction of238. Sharp pair counts, empty shares, overlap exclusions, conditional charge targets, construction criteria, and the196 conjecture have separate logical roles. Detailed classifications and experiments remain in appendices.
+
+All72 prior labels and all76 prior mathematical statements are retained, with four statements restated without changing their content; four explanatory statements make the direct proof explicit. The complete witness appendix is unchanged. Five new Lean arithmetic checks use only propext and Quot.sound. An independent finite enumeration verifies1026432 candidate transitions, including700433 permitted ones, and the full175-row catalogue. Authors, preamble, hyperlink settings and editor synchronization pass source checks. The built-in compiler failed before TeX due to the Windows split-root runner configuration; no PDF layout verification is claimed.
+
+GitHub refresh finds671d21f5 on the collaborator's Keller branch, explicitly incomplete bridge infrastructure toward235. It is recorded without importing an unproved bound. The integrated interval remains191--238 and the exact optimum is unresolved.
