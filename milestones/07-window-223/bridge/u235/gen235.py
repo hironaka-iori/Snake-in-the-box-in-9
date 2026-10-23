@@ -149,6 +149,7 @@ def main():
     ap.add_argument('--chunk', type=int, default=32)
     ap.add_argument('--g1-chunks', type=int, default=24, help='input chunks per G1 check module')
     ap.add_argument('--tgt-per-module', type=int, default=200)
+    ap.add_argument('--win-per-module', type=int, default=60)
     a = ap.parse_args()
     dirs = [int(x) for x in a.dirs.split(',')]
     tag = tag_of(dirs)
@@ -355,15 +356,27 @@ def main():
             s += f'theorem chk{k} : G{k}.all (check3 D) = true := by decide +kernel\n'
         s += f'end {P}\n'
         files.append((f'{P}G1C{j}', s))
-    # ---------------- the shape theorem
-    s = ''.join(f'import {P}G1C{j}\n' for j in range(len(cm))) + ''.join(f'import {t}\n' for t in tmods)
-    s += f'/-! Every window of shape `{dirs}` of the 235 premise set is refuted ({len(ws)} windows). -/\n'
+    # ---------------- the shape theorem: checkF, window theorems in groups, the cons chain
+    s = ''.join(f'import {P}G1C{j}\n' for j in range(len(cm))) + f'import {P}Inputs\n'
     s += f'namespace {P}\nopen WinCNF S235\nset_option maxRecDepth 100000\n'
     s += ('theorem checkF : F.all (check3 D) = true := by\n  simp only [F, List.all_append, '
           + ', '.join(f'chk{k}' for k in range(len(chunks))) + ', Bool.and_self]\n')
+    s += f'end {P}\n'
+    files.append((f'{P}Chk', s))
     k = len(dirs) - 1
-    for w, al in enumerate(ws):
-        s += (f'theorem w{w} : WinRef c (decR {k} {code_of(al)}) :=\n  winRef_of hD hok hT checkF hwin h9 hlex hcen hco (by decide) t{w} (by decide +kernel)\n')
+    wmods = []
+    for j in range(0, len(ws), a.win_per_module):
+        s = f'import {P}Chk\n' + ''.join(f'import {t}\n' for t in tmods)
+        s += f'namespace {P}\nopen WinCNF S235\nset_option maxRecDepth 100000\n'
+        for w in range(j, min(j + a.win_per_module, len(ws))):
+            s += (f'theorem w{w} : WinRef c (decR {k} {code_of(ws[w])}) :=\n'
+                  f'  winRef_of hD hok hT checkF hwin h9 hlex hcen hco (by decide) t{w} (by decide +kernel)\n')
+        s += f'end {P}\n'
+        name = f'{P}W{len(wmods)}'
+        files.append((name, s)); wmods.append(name)
+    s = ''.join(f'import {m}\n' for m in wmods)
+    s += f'/-! Every window of shape `{dirs}` of the 235 premise set is refuted ({len(ws)} windows). -/\n'
+    s += f'namespace {P}\nopen WinCNF S235\n'
     s += f'theorem refuted : ShapeRefuted c ([' + ', '.join(str(code_of(al)) for al in ws) + f'].map (decR {k})) :=\n  '
     term = 'shapeRefuted_nil c'
     for w in reversed(range(len(ws))):

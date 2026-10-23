@@ -33,7 +33,7 @@ def main():
         json.dump(cuts[key], open(os.path.join(work, f'cuts_d{key}_r3.json'), 'w'))
         P = 'Q' + key
         gj = os.path.join(work, f'd{key}_r3_sym.gen.json')
-        mine = sorted(n for n in ref if re.fullmatch(P + r'(Inputs|S\d+|Tgt\d+|G1|G1C\d+|Ref)\.lean', n))
+        mine = sorted(n for n in ref if re.fullmatch(P + r'(Inputs|S\d+|Tgt\d+|G1|G1C\d+|Chk|W\d+|Ref)\.lean', n))
         if (mine and os.path.exists(gj) and all(os.path.exists(os.path.join(out, n))
                 and sha(os.path.join(out, n)) == ref[n] for n in mine)):
             print('up to date', s, flush=True)
