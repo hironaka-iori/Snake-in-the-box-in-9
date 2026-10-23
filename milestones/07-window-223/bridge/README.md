@@ -191,7 +191,7 @@ The K6R3W chain proves `4 m ≤ Σ α + 28` from the 235 window premises. With a
 - The first one was audited: `propext`, `Classical.choice`, `Quot.sound`.
 - The objects take 4.6 GB. About 2.1 GB of that is the CRup Inputs modules (about 8 KB per used input clause: each input mask is dense over `64 + 2W` bits with `W` about 18k touched variables). The step modules take 47 B per hint.
 - Largest shapes by hints: `0123450` (14.1 M), `0123456` (10.6 M), `0123104` (9.2 M) and `0123421` (9.0 M).
-- Not yet compiled: `AggregateDirectionK6R3WShare234`, `ShareRefs234` (`SH234.shares_K6R3W`) and `UpperBound234Cond` / `UpperBound234`. They wait for the 235 build, because the assembly needs the K6R3W window premises.
+- `AggregateDirectionK6R3WShare234` and `ShareRefs234` are compiled. `SH234.shares_K6R3W` uses only `propext`, `Classical.choice`, `Quot.sound`, and the share premise of 234 is now unconditional. Only the assembly is left (`UpperBound234Cond` or `UpperBound234`), and it waits for the 235 build.
 - Idea for later: the input clauses are largely the same wincert base clauses in every shape, so sharing them, or storing them as packed masks like the CRup steps, would remove most of the Inputs cost.
 
 **Reproduction.**

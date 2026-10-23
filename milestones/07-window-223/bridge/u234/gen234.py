@@ -347,7 +347,7 @@ def main():
         prev = f'{P}S{m:02d}'
     s = f'import {prev}\n{hdr}open WinCNF\n'
     s += (f'/-! `{P}.F` is unsatisfiable: {len(steps)} RUP steps, {H} hints, {len(blocks)} kernel-checked blocks. -/\n'
-          f'namespace {P}\ncr_main unsatF B{len(blocks)} {exp_order[len(blocks)].index(steps[-1][0])}\nend {P}\n')
+          f'namespace {P}\ncr_main {P}_unsatF B{len(blocks)} {exp_order[len(blocks)].index(steps[-1][0])}\nend {P}\n')
     files.append((f'{P}Main', s))
     stats.update(used_inputs=len(used), steps=len(steps), hints=H, blocks=len(blocks), step_modules=len(mods))
     # ---------------- G1 data module
@@ -400,7 +400,7 @@ def main():
     s += f'namespace {P}\nopen WinCNF SH234\nset_option maxRecDepth 100000\n'
     s += ('theorem checkF : F.all (check4 D) = true := by\n  simp only [F, List.all_append, '
           + ', '.join(f'chk{k}' for k in range(len(chunks))) + ', Bool.and_self]\n')
-    s += f'theorem ref : ShareRef c {X + 1} :=\n  shareRef_of unsatF hD hN hok hT checkF hterms hwin (by decide)\n'
+    s += f'theorem ref : ShareRef c {X + 1} :=\n  shareRef_of {P}_unsatF hD hN hok hT checkF hterms hwin (by decide)\n'
     s += f'end {P}\n'
     files.append((f'{P}Ref', s))
     os.makedirs(a.out, exist_ok=True)
