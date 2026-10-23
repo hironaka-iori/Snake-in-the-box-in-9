@@ -189,6 +189,11 @@ def main():
                              "milestones/07-window-223/bridge/u239/build_order.txt; the generated DV*.lean "
                              "sources are not committed and must first be written into stronger/ by "
                              "milestones/07-window-223/bridge/u239/regen.py")
+    parser.add_argument("--bound235", action="store_true",
+                        help="also check the 235 bridge (milestones/07-window-223/bridge/u235): the shape "
+                             "bridges listed in its build_order.txt and the 235 bound, unconditional "
+                             "(UpperBound235) if every shape is bridged, else conditional on the others "
+                             "(UpperBound235Cond); generated sources come from u235/regen235.py")
     parser.add_argument("--seed-objects", type=Path, default=None,
                         help="directory of objects compiled outside this driver, with a file SOURCES.sha256 "
                              "(`sha256  Module.lean` lines): a module whose source is byte-identical to the "
@@ -218,6 +223,16 @@ def main():
             raise SystemExit(f"{len(absent)} sources of the 239 bound are missing (e.g. {absent[0]}.lean); "
                              "run milestones/07-window-223/bridge/u239/regen.py WORK work/spectral/stronger first")
         modules += [m for m in order239 if m not in modules]
+    order235 = []
+    if args.bound235:
+        order235 = (repo_root / "milestones/07-window-223/bridge/u235/build_order.txt").read_text().split()
+        absent = [m for m in order235 if not (project / "stronger" / f"{m}.lean").exists()]
+        if absent:
+            raise SystemExit(f"{len(absent)} sources of the 235 bridge are missing (e.g. {absent[0]}.lean); "
+                             "run milestones/07-window-223/bridge/u235/regen235.py WORK work/spectral/stronger first")
+        modules += [m for m in order235 if m not in modules]
+    full235 = "UpperBound235" in order235
+    refs235 = [m[:-3] for m in order235 if re.fullmatch(r"Q\d+Ref", m)]
     seeds = {}
     if args.seed_objects is not None:
         for line in (args.seed_objects / "SOURCES.sha256").read_text().splitlines():
@@ -272,6 +287,7 @@ def main():
         "build_directory": str(build), "k5_chain": k5, "k6_chain": k6,
         "extra_chains": args.extra_chains, "share231": args.share231,
         "share_wrappers": args.share_wrappers, "bound239": args.bound239,
+        "bound235": args.bound235,
         "seed_objects": str(args.seed_objects.resolve()) if args.seed_objects else None, "source_sha256": {},
         "steps": [], "axiom_audits": {}, "status": "running",
     }
@@ -422,6 +438,7 @@ def main():
             + ("import AggregateDirectionK6R34C7WShare231\n" if args.share231 else "")
             + "".join(f"import {w}\n" for w in args.share_wrappers)
             + ("import UpperBound239\n" if args.bound239 else "")
+            + (("import UpperBound235\n" if full235 else "import UpperBound235Cond\n") if args.bound235 else "")
             + "import UpperBound245\nimport EndpointFourWitness\nimport AdjacentOneThreeExclusion\nimport OptimalityTarget\n"
             "#print axioms Snake9.upper_244_of_no_two_two_three\n"
             "#print axioms Snake9.upper_242_of_certified_windows\n"
@@ -449,7 +466,11 @@ def main():
             + ("#print axioms D239.ref_012\n#print axioms D239.ref_0120\n#print axioms D239.ref_0123\n"
                "#print axioms D239.ref_01203\n#print axioms D239.ref_01230\n#print axioms D239.ref_01234\n"
                "#print axioms Snake9.upper_bound_239\n#print axioms Snake9.verified_interval_191_239\n"
-               if args.bound239 else ""), encoding="utf-8"
+               if args.bound239 else "")
+            + ("#print axioms S235.T235.upper_235_of_shapes\n"
+               + ("#print axioms Snake9.upper_bound_235\n#print axioms Snake9.verified_interval_191_235\n" if full235
+                  else "#print axioms S235.T235.upper_235_of_remaining\n")
+               + "".join(f"#print axioms {r}.refuted\n" for r in refs235) if args.bound235 else ""), encoding="utf-8"
         )
         with audit.open("a", encoding="utf-8") as stream:
             stream.write(
@@ -484,11 +505,20 @@ def main():
         if args.bound239:
             expected |= {"Snake9.upper_bound_239", "Snake9.verified_interval_191_239",
                          *(f"D239.ref_{s}" for s in ("012", "0120", "0123", "01203", "01230", "01234"))}
+        if args.bound235:
+            expected |= {"S235.T235.upper_235_of_shapes", *(f"{r}.refuted" for r in refs235)}
+            expected |= ({"Snake9.upper_bound_235", "Snake9.verified_interval_191_235"} if full235
+                         else {"S235.T235.upper_235_of_remaining"})
         missing = expected - manifest["axiom_audits"].keys()
         if missing:
             raise RuntimeError(f"Missing final theorem audits: {missing}")
         manifest["status"] = "success"
         manifest["completed_utc"] = datetime.now(timezone.utc).isoformat()
+        if args.bound235 and full235:
+            print("Verified: 191 <= a(9) <= 235 edges (verified_interval_191_235). Exact optimum unresolved.", flush=True)
+        elif args.bound235:
+            print(f"Verified: the 235 bound from the {34 - len(refs235)} shapes not yet bridged "
+                  f"(S235.T235.upper_235_of_remaining; {len(refs235)} of 34 shapes bridged).", flush=True)
         if args.bound239:
             print("Verified: 191 <= a(9) <= 239 edges (verified_interval_191_239). Exact optimum unresolved.", flush=True)
         else:
