@@ -19,3 +19,17 @@ Measured (CPU seconds, same machine and load):
 Cost is about 70 µs per hint, and it scales with the hint count. CaDiCaL 2.1.3's native LRAT (`--lrat`), trimmed by `lrat_trim.py`, has 7-19% fewer hints than drat-trim `-L`. Symmetry breaking cut one 239 window from 31.5 M to 2.7 M hints. A corrupted step (one hint removed) is rejected by the kernel.
 
 Tools: `gen_fast.py` (LRAT to Lean modules), `lrat_trim.py`, `run_w223dis.sh` (benchmark), `bench.py`.
+
+## CRup: compact proof terms (23 October 2026)
+
+FastRup stores about 8 application nodes per hint, which comes to 224-232 bytes per hint of `.olean`. For the 4.3e8 hints of the full 235 bridge that is about 127 GB. `CRup.lean` and `CRupCmd.lean` check a whole block in one kernel evaluation of `sl ... = true`, proved by `Eq.refl true`.
+- **Database:** a list of 32-slot segments of clause masks. Each slot lookup is cached by a `Nat.rec` case split.
+- **Per step:** the term stores one packed Nat of hint indices with a 48-bit tag.
+- **Exports:** referenced by constant, never copied.
+
+| Certificate | FastRup B/hint | CRup B/hint | FastRup kernel | CRup kernel |
+| --- | --- | --- | --- | --- |
+| W223Dis (926,950 hints) | 224 | 9.7 | 42.8 µs/hint | 51.5 µs/hint |
+| u235 session `d0120341` (993,085 hints) | 232 | 11.7 | 44.6 µs/hint | 52.2 µs/hint |
+
+The step modules use less total CPU than FastRup's (53.6 s against 58.0 s on W223Dis), with standard axioms only. A dropped hint, or a hint pointing at a slot not yet derived, is rejected by the kernel. `gen_crup.py` emits CRup modules, and `u235/gen235_crup.diff` adapts the 235 generator; the target theorems keep their type, so G1 and the window modules are unchanged.

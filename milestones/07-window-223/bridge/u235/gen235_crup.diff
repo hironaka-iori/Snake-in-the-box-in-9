@@ -1,0 +1,37 @@
+149c149
+<     ap.add_argument('--chunk', type=int, default=32)
+---
+>     ap.add_argument('--chunk', type=int, default=32, choices=[32])   # one CRup segment
+228a229
+>     S = 64 + 2 * W                      # CRup slot width
+239c240
+<     s = f'import FastRupT\n{hdr}namespace {P}\nopen WinCNF\n'
+---
+>     s = f'import CRupCmd\n{hdr}namespace {P}\nopen WinCNF\n'
+249a251
+>         s += f'cr_chunk {k} {S}\n'
+285,288c287,291
+<             for k in rch:
+<                 for i in chunks[k]:
+<                     slot[i] = n; n += 1
+<             for rb in rbl:
+---
+>             for k in rch:                       # a chunk is one segment of 32 slots
+>                 for j, i in enumerate(chunks[k]):
+>                     slot[i] = n + j
+>                 n += 32
+>             for rb in rbl:                      # a block's exports, padded to whole segments
+290a294
+>                 n += -n % 32
+294,295c298,301
+<             data = [len(exp_order[b])] + [slot[e] for e in exp_order[b]] + [len(provs)] + provs
+<             s += f'fr_block B{b} {W} {Bb} ' + ' '.join(map(str, data)) + '\n'
+---
+>             sel = [slot[e] + 1 for e in exp_order[b]]
+>             sel += [0] * (-len(sel) % 32)
+>             data = [len(provs)] + provs + [len(sel)] + sel
+>             s += f'cr_block B{b} {W} {Bb} {S} ' + ' '.join(map(str, data)) + '\n'
+309c315
+<             s += (f'fr_tgt t{w} B{b} {k} {W} {Bb} {Wo} ' + ' '.join(str(posO(l)) for l in cl) + ' 0 '
+---
+>             s += (f'cr_tgt t{w} B{b} {k} {W} {Bb} {Wo} ' + ' '.join(str(posO(l)) for l in cl) + ' 0 '
