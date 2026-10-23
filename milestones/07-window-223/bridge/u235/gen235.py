@@ -146,7 +146,7 @@ def main():
     ap.add_argument('--setfile', default='minimal_L7_k6_K5_r3_fix.json')
     ap.add_argument('--block-hints', type=int, default=25000)
     ap.add_argument('--module-hints', type=int, default=400000)
-    ap.add_argument('--chunk', type=int, default=32)
+    ap.add_argument('--chunk', type=int, default=32, choices=[32])   # one CRup segment
     ap.add_argument('--g1-chunks', type=int, default=24, help='input chunks per G1 check module')
     ap.add_argument('--tgt-per-module', type=int, default=200)
     ap.add_argument('--win-per-module', type=int, default=60)
@@ -226,6 +226,7 @@ def main():
     new = {v: i + 1 for i, v in enumerate(touched)}
     W = len(touched) + 1
     Bb = max(1, nv.bit_length())
+    S = 64 + 2 * W                      # CRup slot width
     T = 0
     for v, i in new.items():
         T |= v << (i * Bb)
@@ -236,7 +237,7 @@ def main():
     chunks = [used[i:i + a.chunk] for i in range(0, len(used), a.chunk)]
     chunk_of = {i: k for k, ch in enumerate(chunks) for i in ch}
     usha = hashlib.sha256(''.join(' '.join(map(str, clauses[i - 1])) + ' 0\n' for i in used).encode()).hexdigest()
-    s = f'import FastRupT\n{hdr}namespace {P}\nopen WinCNF\n'
+    s = f'import CRupCmd\n{hdr}namespace {P}\nopen WinCNF\n'
     s += (f'/-! The {len(used)} clauses (of {ncl}) of the shape CNF of `{tag}` (dirs {dirs}, radius 3,\n'
           f'shape CNF + cubes sha256 {stats["icnf_sha256"]}) used by the trimmed shared proof, in original order\n'
           f'(sha256 of their DIMACS lines: {usha}).  `fr_cnf` records are `index positions… 0`, stride {Wo}. -/\n')
@@ -247,6 +248,7 @@ def main():
     s += f'def RT : Nat := {hex(T)}\n'
     for k, ch in enumerate(chunks):
         s += f'fr_chunk {k} {W} {Bb} ' + ' '.join(str(new[abs(l)]) for i in ch for l in clauses[i - 1]) + '\n'
+        s += f'cr_chunk {k} {S}\n'
     s += f'end {P}\n'
     files.append((f'{P}Inputs', s))
     blocks, cur, ch = [], [], 0
@@ -282,17 +284,21 @@ def main():
             rch = sorted({chunk_of[h] for h in ext if h <= ncl})
             rbl = sorted({home[h] for h in ext if h > ncl})
             slot, n = {}, 0
-            for k in rch:
-                for i in chunks[k]:
-                    slot[i] = n; n += 1
-            for rb in rbl:
+            for k in rch:                       # a chunk is one segment of 32 slots
+                for j, i in enumerate(chunks[k]):
+                    slot[i] = n + j
+                n += 32
+            for rb in rbl:                      # a block's exports, padded to whole segments
                 for e in exp_order[rb]:
                     slot[e] = n; n += 1
+                n += -n % 32
             for sid, _, _, _ in blk:
                 slot[sid] = n; n += 1
             provs = [2 * k + 1 for k in rch] + [2 * rb for rb in rbl]
-            data = [len(exp_order[b])] + [slot[e] for e in exp_order[b]] + [len(provs)] + provs
-            s += f'fr_block B{b} {W} {Bb} ' + ' '.join(map(str, data)) + '\n'
+            sel = [slot[e] + 1 for e in exp_order[b]]
+            sel += [0] * (-len(sel) % 32)
+            data = [len(provs)] + provs + [len(sel)] + sel
+            s += f'cr_block B{b} {W} {Bb} {S} ' + ' '.join(map(str, data)) + '\n'
             for sid, c, hs, _ in blk:
                 s += f'{sid} ' + ' '.join(str(posR(l)) for l in c) + (' 0 ' if c else '0 ') + ' '.join(str(slot[h] + 1) for h in hs) + ' 0\n'
         s += f'end {P}\n'
@@ -306,7 +312,7 @@ def main():
         for w, sid, cl in targets[j:j + a.tgt_per_module]:
             b = home[sid]
             k = exp_order[b].index(sid)
-            s += (f'fr_tgt t{w} B{b} {k} {W} {Bb} {Wo} ' + ' '.join(str(posO(l)) for l in cl) + ' 0 '
+            s += (f'cr_tgt t{w} B{b} {k} {W} {Bb} {Wo} ' + ' '.join(str(posO(l)) for l in cl) + ' 0 '
                   + ' '.join(str(new[abs(l)]) for l in cl) + f' 0 {ftag(sid)}\n')
         s += f'end {P}\n'
         name = f'{P}Tgt{len(tmods)}'
@@ -376,7 +382,7 @@ def main():
         files.append((name, s)); wmods.append(name)
     s = ''.join(f'import {m}\n' for m in wmods)
     s += f'/-! Every window of shape `{dirs}` of the 235 premise set is refuted ({len(ws)} windows). -/\n'
-    s += f'namespace {P}\nopen WinCNF S235\n'
+    s += f'namespace {P}\nopen WinCNF S235\nset_option maxRecDepth 100000\n'
     s += f'theorem refuted : ShapeRefuted c ([' + ', '.join(str(code_of(al)) for al in ws) + f'].map (decR {k})) :=\n  '
     term = 'shapeRefuted_nil c'
     for w in reversed(range(len(ws))):

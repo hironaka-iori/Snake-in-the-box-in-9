@@ -3,7 +3,7 @@
 usage: python3 -I regen235.py WORK OUTDIR [--check]
 
 For each bridged shape (shapes_done.txt): writes WORK/cuts_<dirs>_r3.json from cuts235.json,
-runs gen235.py (shape CNF, CaDiCaL --lidrup session, backward trim, Lean modules), then
+runs gen235.py (shape CNF, CaDiCaL --lidrup session, backward trim, CRup Lean modules), then
 gen_table235.py --done (D235Data, D235Tab_*, D235Table, D235Refs, UpperBound235,
 UpperBound235Cond).  With --check every written file must match sources.sha256 and every
 session its recorded statistics; writes build_order.txt.  Resumable: a shape whose modules
@@ -45,9 +45,10 @@ def main():
     r = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'gen_table235.py'), out, '--done'] + done,
                        capture_output=True, text=True, check=True)
     tabs = [m for m in r.stdout.split('modules:')[1].split('\n')[0].split()]
-    hand = ['FastRup', 'FastRupCmd', 'D239Lex', 'D239LexG1', 'FastRupT', 'Sh235G1', 'Sh235Win',
-            'Win235Norm', 'Win235Glue']
-    full = hand + tabs[:-1] + [tabs[-1]] + order + ['UpperBound235Cond']
+    hand = ['FastRup', 'FastRupCmd', 'D239Lex', 'D239LexG1', 'FastRupT', 'CRup', 'CRupCmd', 'Sh235G1',
+            'Sh235Win', 'Win235Norm', 'Win235Glue']
+    tail = ['D235Refs', 'UpperBound235'] if len(done) == 34 else ['UpperBound235Cond']
+    full = hand + tabs + order + tail
     open(os.path.join(HERE, 'build_order.txt'), 'w').write('\n'.join(full) + '\n')
     gen = [m for m in full if m not in hand]
     if check:
