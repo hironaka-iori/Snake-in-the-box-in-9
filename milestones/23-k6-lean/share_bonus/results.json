@@ -1,0 +1,179 @@
+{
+ "keys_235": {
+  "transitions": 3546419,
+  "pattern_transitions": 127860,
+  "mcm": [
+   {
+    "B": 0,
+    "mean": "96",
+    "mean_float": 96.0,
+    "alpha_units": 4.0,
+    "length": 3,
+    "counts": [
+     6,
+     1,
+     5
+    ],
+    "pattern_edges": 0,
+    "shapes": [
+     "[0, 1, 2, 3, 4, 2, 1]",
+     "[0, 1, 2, 3, 1, 0, 4]",
+     "[0, 1, 2, 0, 3, 4, 0]"
+    ],
+    "bf_converged": true,
+    "range": 120,
+    "bf_rounds": 13
+   },
+   {
+    "B": 6,
+    "mean": "96",
+    "mean_float": 96.0,
+    "alpha_units": 4.0,
+    "length": 3,
+    "counts": [
+     6,
+     1,
+     5
+    ],
+    "pattern_edges": 0,
+    "shapes": [
+     "[0, 1, 2, 3, 4, 2, 1]",
+     "[0, 1, 2, 3, 1, 0, 4]",
+     "[0, 1, 2, 0, 3, 4, 0]"
+    ],
+    "bf_converged": true,
+    "range": 120,
+    "bf_rounds": 13
+   },
+   {
+    "B": 12,
+    "mean": "96",
+    "mean_float": 96.0,
+    "alpha_units": 4.0,
+    "length": 3,
+    "counts": [
+     6,
+     1,
+     5
+    ],
+    "pattern_edges": 0,
+    "shapes": [
+     "[0, 1, 2, 3, 4, 2, 1]",
+     "[0, 1, 2, 3, 1, 0, 4]",
+     "[0, 1, 2, 0, 3, 4, 0]"
+    ],
+    "bf_converged": true,
+    "range": 120,
+    "bf_rounds": 13
+   },
+   {
+    "B": 10000,
+    "mean": "96",
+    "mean_float": 96.0,
+    "alpha_units": 4.0,
+    "length": 3,
+    "counts": [
+     6,
+     1,
+     5
+    ],
+    "pattern_edges": 0,
+    "shapes": [
+     "[0, 1, 2, 3, 4, 2, 1]",
+     "[0, 1, 2, 3, 1, 0, 4]",
+     "[0, 1, 2, 0, 3, 4, 0]"
+    ],
+    "bf_converged": true,
+    "range": 120,
+    "bf_rounds": 13
+   }
+  ]
+ },
+ "all_known_keys": {
+  "keys": 28615,
+  "mcm_alpha_units": 4.0625,
+  "mean_w": "195/2",
+  "cycle_length": 16,
+  "pattern_edges": 0,
+  "note": "same cycle for B = 0, 6, 12, 10000; every 6-window on it is plain SAT (obstruction_B6.json)"
+ },
+ "sanity_negative_bonus": {
+  "B": -100,
+  "mean": "46",
+  "cycle_counts": [
+   4,
+   3,
+   4,
+   5
+  ],
+  "pattern_edges": 2,
+  "note": "pattern transitions do lie on live cycles; a 4-cycle of alpha mean exactly 4 has pattern density 1/2"
+ },
+ "prune": {
+  "b0": {
+   "tag": "b0",
+   "P": 96,
+   "B": 0,
+   "lim": 255,
+   "kept": 1383,
+   "from_keys_235": 1287,
+   "extra": 96,
+   "extra_already_certified": 96,
+   "extra_new": 0,
+   "extra_new_by_centres": {},
+   "extra_new_hints": 0.0,
+   "extra_new_max_hints": 0.0,
+   "new_certificates": 635,
+   "new_certificate_hints": 294174122.5811012,
+   "potential_range": 120,
+   "base_free": false,
+   "exact_tried": 5883,
+   "exact_dropped": 5248,
+   "seconds": 1421
+  },
+  "b6": {
+   "tag": "b6",
+   "P": 96,
+   "B": 6,
+   "lim": 255,
+   "kept": 1383,
+   "from_keys_235": 1287,
+   "extra": 96,
+   "extra_already_certified": 96,
+   "extra_new": 0,
+   "extra_new_by_centres": {},
+   "extra_new_hints": 0.0,
+   "extra_new_max_hints": 0.0,
+   "new_certificates": 635,
+   "new_certificate_hints": 294174122.5811012,
+   "potential_range": 120,
+   "base_free": false,
+   "start": null,
+   "exact_tried": 5883,
+   "exact_dropped": 5248,
+   "seconds": 1389
+  },
+  "b12": {
+   "tag": "b12",
+   "P": 96,
+   "B": 12,
+   "lim": 255,
+   "kept": 1383,
+   "from_keys_235": 1287,
+   "extra": 96,
+   "extra_already_certified": 96,
+   "extra_new": 0,
+   "extra_new_by_centres": {},
+   "extra_new_hints": 0.0,
+   "extra_new_max_hints": 0.0,
+   "new_certificates": 635,
+   "new_certificate_hints": 294174122.5811012,
+   "potential_range": 120,
+   "base_free": false,
+   "start": null,
+   "exact_tried": 5883,
+   "exact_dropped": 5248,
+   "seconds": 1417
+  }
+ }
+}
