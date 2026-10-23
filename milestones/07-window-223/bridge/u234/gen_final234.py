@@ -29,7 +29,7 @@ def main():
     ap.add_argument('out')
     ap.add_argument('--cond', help='UpperBound235Cond.lean to read the remaining-shape hypotheses from')
     ap.add_argument('--uncond', help='name of the unconditional `∀ e ∈ E, ShapeRefuted e.c e.L`')
-    ap.add_argument('--uncond-module', default='UpperBound235')
+    ap.add_argument('--uncond-module', default='D235Refs')
     a = ap.parse_args()
     sh = shapes()
     assert len(sh) == 34
@@ -83,11 +83,15 @@ def main():
         s += '#print axioms S235.T235.upper_234_of_remaining\n'
     open(os.path.join(a.out, 'UpperBound234Cond.lean'), 'w').write(s)
     if a.uncond:
-        s = f'import UpperBound234Cond\nimport {a.uncond_module}\n'
-        s += ('/-! # 191 ≤ a(9) ≤ 234\n\nThe 235 window premises (unconditional 235 bridge) and the share bridge\n'
-              '(`SH234.shares_K6R3W`) give at most 234 edges for every snake in Q9. -/\n')
-        s += ('namespace Snake9\n\ntheorem upper_bound_234 {m : Nat} (p : Snake m) : m ≤ 234 :=\n'
-              f'  S235.T235.upper_234_of_shapes {a.uncond} p\n\n')
+        s = f'import ShareRefs234\nimport D235Table\nimport {a.uncond_module}\n'
+        s += ('/-! # 191 ≤ a(9) ≤ 234\n\nThe 235 window premises (`S235.T235.prem2 .. prem6` from the unconditional\n'
+              f'235 shape refutations `{a.uncond}`) and the share premise (`SH234.shares_K6R3W`) give at most 234\n'
+              'edges for every snake in Q9 (`upper_234_of_direction_windows_and_shares_allK6R3W`). -/\n')
+        s += ('namespace Snake9\nopen S235 S235.T235\n\n'
+              '/-- **Unconditional bound**: every snake in the 9-cube has at most 234 edges. -/\n'
+              'theorem upper_bound_234 {m : Nat} (p : Snake m) : m ≤ 234 :=\n'
+              f'  upper_234_of_direction_windows_and_shares_allK6R3W p (prem2 {a.uncond} p) (prem3 {a.uncond} p)\n'
+              f'    (prem4 {a.uncond} p) (prem5 {a.uncond} p) (prem6 {a.uncond} p) (SH234.shares_K6R3W p)\n\n')
         s += ('theorem upper_bound_234\' : ∀ m, Nonempty (Snake m) → m ≤ 234 :=\n'
               '  fun _ ⟨p⟩ => upper_bound_234 p\n\n'
               '/-- The verified interval: a 191-edge snake exists, and no snake has more than 234 edges. -/\n'

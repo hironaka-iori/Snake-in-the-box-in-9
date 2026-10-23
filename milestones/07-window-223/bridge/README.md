@@ -185,6 +185,15 @@ The K6R3W chain proves `4 m ≤ Σ α + 28` from the 235 window premises. With a
 - `upper_234_of_remaining` has exactly the hypotheses of `upper_235_of_remaining`. `gen_final234.py --cond` reads them from `UpperBound235Cond.lean`.
 - When the 235 bridge exports the full `∀ e ∈ E, …`, `gen_final234.py --uncond NAME --uncond-module M` writes `UpperBound234.lean` with `Snake9.upper_bound_234` and `Snake9.verified_interval_191_234`.
 
+
+**Status (23 October, 20:00 UTC).**
+- All 34 share refutations `V<dirs>.ref : ShareRef c 21` are compiled, one Lean process at a time: 295 generated modules, 62.3 M CRup hints and 269,925 used input clauses in total (`u234/stats234.json`).
+- The first one was audited: `propext`, `Classical.choice`, `Quot.sound`.
+- The objects take 4.6 GB. About 2.1 GB of that is the CRup Inputs modules (about 8 KB per used input clause: each input mask is dense over `64 + 2W` bits with `W` about 18k touched variables). The step modules take 47 B per hint.
+- Largest shapes by hints: `0123450` (14.1 M), `0123456` (10.6 M), `0123104` (9.2 M) and `0123421` (9.0 M).
+- Not yet compiled: `AggregateDirectionK6R3WShare234`, `ShareRefs234` (`SH234.shares_K6R3W`) and `UpperBound234Cond` / `UpperBound234`. They wait for the 235 build, because the assembly needs the K6R3W window premises.
+- Idea for later: the input clauses are largely the same wincert base clauses in every shape, so sharing them, or storing them as packed masks like the CRup steps, would remove most of the Inputs cost.
+
 **Reproduction.**
 1. Run `u234/regen234.py WORK work/spectral/stronger --cond <UpperBound235Cond.lean>`, which writes the generated `V<dirs>*.lean` modules (git-ignored), `ShareRefs234.lean`, `UpperBound234Cond.lean`, `build_order.txt` and `sources.sha256`. Add `--check` to compare against the committed hashes.
 2. Run `verify_strengthened.py ... --bound235 --bound234`.
