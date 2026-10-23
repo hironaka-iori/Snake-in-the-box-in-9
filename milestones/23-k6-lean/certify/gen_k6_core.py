@@ -378,7 +378,8 @@ def final(a):
     metas = [json.load(open(os.path.join(CORE, case_name(d, s) + '.json'))) for d, s in keys]
     order = [m['module'].split('.')[-1] for m in metas]
     imports = ''.join(f'import LocalWindowUnsat.{m}\n' for m in order)
-    terms = ',\n   '.join(f'{m}.unsat' for m in order)
+    # one `refine` per window: a giant anonymous constructor overflows the stack (as in gen_lean_sat.py)
+    terms = ''.join(f'  refine ⟨{m}.unsat, ?_⟩\n' for m in order[:-1]) + f'  exact {order[-1]}.unsat'
     open(os.path.join(LEAN, 'LocalWindowDirUnsatK6.lean'), 'w').write(f'''import LocalWindowDirSatK6
 {imports}
 /-!
@@ -393,8 +394,9 @@ set_option maxRecDepth 100000
 
 namespace Snake9.LocalWindow
 
-theorem allUnsatK6 : AllUnsatK6 :=
-  ⟨{terms}⟩
+theorem allUnsatK6 : AllUnsatK6 := by
+  unfold AllUnsatK6
+{terms}
 
 theorem allRefutedK6 : AllRefutedK6 := allRefutedK6_of_unsat allUnsatK6
 
