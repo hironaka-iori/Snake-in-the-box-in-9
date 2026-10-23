@@ -243,7 +243,7 @@ def main():
     trim = os.path.join(a.work, tag + '.trim')
     if not os.path.exists(trim):
         t = time.time()
-        r = subprocess.run(['nice', '-n', '10', CAD, '-q', '--lrat', '--no-binary', cnf, lrat],
+        r = subprocess.run(['nice', '-n', '19', CAD, '-q', '--lrat', '--no-binary', cnf, lrat],
                            capture_output=True, text=True)
         assert 's UNSATISFIABLE' in r.stdout, r.stdout[-2000:]
         stats['solve_s'] = round(time.time() - t, 1)
