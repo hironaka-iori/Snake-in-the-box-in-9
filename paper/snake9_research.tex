@@ -1786,6 +1786,29 @@ A lower bound on the frequency of qualifying occurrences is still needed for a n
 
 The diagnostic graph needs one additional earlier count only when the last six directions have normalized pattern $(0,1,2,3,4,1)$. This increases the state count from 44,336 to 70,416. Applying the two proved inequalities changes the recorded local-witness cycle mean from $287/60$ to $1739/360$, the same value found when the six-centre conjecture is imposed. The recorded lower-table cycle mean remains $119/29$. These are exact checks of saved cycles, with no assertion that the cycles have globally minimum mean. The numerical share premises and the aggregate proof remain incomplete, so the unconditional bound is unchanged.
 
+\subsection{Joint consistency of mixed-count windows}\label{sec:critical-overlap}
+The two saved critical cycles in the preceding diagnostic calculation contain no occurrence of the six-distinct-coordinate pattern in Proposition~\ref{prop:three-square-bonus}. A larger bonus on that pattern alone cannot remove either cycle. The next test requires seven consecutive singleton counts to hold on one common selected-vertex set.
+
+\begin{proposition}[Mixed-count overlap exclusions]\label{prop:mixed-overlap}
+Let $a,b,c,d,e$ be five distinct coordinates. Neither row below can occur as eight consecutive transitions of a snake together with the indicated counts at its seven internal vertices:
+\[
+\begin{array}{c|c}
+\text{transitions}&\text{singleton counts}\\\hline
+(a,b,c,d,a,e,c,d)&(3,5,4,4,5,3,3)\\
+(a,b,c,d,e,c,a,d)&(2,5,4,5,3,5,2).
+\end{array}
+\]
+\end{proposition}
+\begin{proof}
+Translate the first vertex to zero and relabel the five coordinates by first occurrence. Restrict a hypothetical snake to the union of radius-four neighborhoods of the seven internal vertices. Its selected vertices satisfy the prescribed counts, degree at most two, the interior degree and endpoint conditions, and the exclusion of selected cycles. The singleton counts equal the numbers of absent eligible opposite corners.
+
+For the first row, these necessary conditions give an inconsistent subset of 1,552 Boolean clauses on 1,155 active variables; for the second, the corresponding numbers are 421 and 407. The refutations use 67,720 and 1,023 antecedent references. The interpretation of the clauses, the certificate replays, and the application to arbitrary distinct coordinates have passed Lean. A hypothetical snake would therefore produce a satisfying assignment to an inconsistent formula, a contradiction.
+\end{proof}
+
+All six phases of the earlier six-step witness-table cycle are excluded by numerical tests of the same kind. For the 29-step lower-table cycle, 28 phases are numerically excluded and one remains unresolved. Only the two displayed phase exclusions are asserted as theorems here; each suffices to rule out its corresponding saved cycle.
+
+To retain these restrictions, the diagnostic state records how much of each forbidden seven-count word has just been matched. The necessary suffix information adds 216 states, giving 70,632 in total. A comparison with all $6^7=279936$ seven-symbol histories verifies the updates. The two exclusions remove seven previously admitted edges. The new saved witness-table cycle mean is $29/6$, exceeding $1739/360$ by $1/360$. A replacement lower-table cycle still has mean $119/29$. These are exact values for saved cycles, with no assertion of global minimality or a new upper bound on snake length.
+
 \subsection{Overlapping endpoint demands}
 Local geometric arguments often produce sets that must contain an endpoint. Their overlap can be retained in the counting argument.
 \begin{proposition}[Weighted endpoint accounting]

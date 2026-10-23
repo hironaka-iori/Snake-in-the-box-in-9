@@ -47,3 +47,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Sharpness of the distance-three inequalities](34-distance-three-sharpness/README.md)
 
 - [Three-square empty-share bonus and occurrence accounting](35-equality-share-bonus/README.md)
+
+- [Joint consistency of critical cycles](36-critical-cycle-consistency/README.md)

@@ -1,0 +1,75 @@
+{
+  "status": "PASSED",
+  "audited_theorems": 6,
+  "proofs": [
+    {
+      "case": 3,
+      "clauses": 1552,
+      "variables": 1155,
+      "hints": 67720
+    },
+    {
+      "case": 100,
+      "clauses": 421,
+      "variables": 407,
+      "hints": 1023
+    }
+  ],
+  "screens": {
+    "witness": {
+      "UNSAT": 6
+    },
+    "lower-": {
+      "UNSAT": 28,
+      "UNKNOWN": 1
+    }
+  },
+  "history_transitions": 279936,
+  "cycles": [
+    {
+      "stage": "before",
+      "table": "lower",
+      "mean": "119/29",
+      "period": 29
+    },
+    {
+      "stage": "before",
+      "table": "witness",
+      "mean": "1739/360",
+      "period": 6
+    },
+    {
+      "stage": "after",
+      "table": "lower",
+      "mean": "119/29",
+      "period": 29
+    },
+    {
+      "stage": "after",
+      "table": "witness",
+      "mean": "29/6",
+      "period": 6
+    }
+  ],
+  "sources_sha256_lf": {
+    "lean/CycleExclusion3.lean": "2a40fd950718a4406124602f601b2b35aaaad8f767bc7d95233ec92a219a8b0a",
+    "lean/CriticalPattern.lean": "3c065c16c0979ea279732028f562f097b7c4d5151f28afd831a840d718e1fac8",
+    "lean/CycleExclusion100.lean": "c4ae5645244f1b09ba53faefad3fdfffcbcb4c8b41fa278f7fb8daa472e9348b",
+    "lean/CriticalLower.lean": "7a6553705e72a97149207d1a6acafe0eb4f52883cdfd8dd86937f188c851872e",
+    "lean/LocalWindowCnf/CycleWindow3.lean": "44f1e1a57179a9440e7cd4aacb28f33d05884a489c27a7ee232a60c18f1cea9e",
+    "lean/LocalWindowCnf/CycleWindow100.lean": "afac296108ff221950ab12bcec83a9de824b6d3166b4333d7a49ccda4a95912e",
+    "lean/LocalWindowSat/CycleWindow3.lean": "51b284d6a9a744ecbf76fe5d4da9cd8c425200edb6e88ed4f708631e65b87094",
+    "lean/LocalWindowSat/CycleWindow100.lean": "5682b8675f8bc6a43d41ec9e942f07284fbe3e9a96c8a334e0ca2fbe01fd3aae",
+    "lean/LocalWindowUnsat/CycleWindow3.lean": "48b3912b5984ae4dd8eaa936f9dddf14266ca6ebc3bfec3a68bd60b64961f34c",
+    "lean/LocalWindowUnsat/CycleWindow100.lean": "413086500f1349f146e02062ff53b67696f42e09df9221e71805f5cb5d0a056a",
+    "lean/LocalWindowUnsat/CycleWindow3/Data0.lean": "2288749df27df5ea1122afa8b178682fcc70957837d3173071f93e7ded607f4c",
+    "lean/LocalWindowUnsat/CycleWindow3/Data1.lean": "4f58f62ddd03160f9c6fa453f287c7cb70bf462c0d6afc3377c9fec7a7fe1776",
+    "lean/LocalWindowUnsat/CycleWindow3/Data2.lean": "309d314a6358abc44c55b042c57a9f11e9497c3d3eed0524ecbbcc191a51236a",
+    "lean/LocalWindowUnsat/CycleWindow3/Data3.lean": "b5965afee30f44ef0bf625a05561f78a2cc87a22c2e5060bcc309363969bcac0",
+    "lean/LocalWindowUnsat/CycleWindow3/Check1.lean": "3bb656df77031196f1fe288549029d5602ffc450b7f82255a288f8fe5ae147bd",
+    "lean/LocalWindowUnsat/CycleWindow100/Data0.lean": "cc44a6fddcb1613b97a29036ebb514e1dd195dd171a434f6110361a143b5e20b",
+    "lean/LocalWindowUnsat/CycleWindow100/Data1.lean": "c23a5a70000976c3db060726973c2ad140bbcd166644764e199dddb1d5a8e7b6",
+    "lean/LocalWindowUnsat/CycleWindow100/Check1.lean": "1c19a70f795974a0351ef9a9d36752298efe498a8b607ede3fe94a8429b09fea"
+  },
+  "scope": "Two local exclusions for arbitrary distinct coordinate labels. Other screens are numerical; saved means do not prove a global minimum or a new snake bound."
+}
