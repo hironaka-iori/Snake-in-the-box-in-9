@@ -18,7 +18,7 @@ The exact optimum remains unresolved. This checkout integrates 191 <= a(9) <=238
 - [Targeted mergers and frozen-cycle accounting](15-component-mergers/README.md)
 - [Larger cycle configurations and local cell states](16-cycle-reservoirs/README.md)
 
-Active direction as of 23 October: retain empty-square shares and singleton excess lost by coarse count symbols. Milestone 30 proves two interval exclusions, two exact-six exclusions, and an overlap correction contributing eight integer charge units per qualifying window. Nineteen Lean audits passed. Stronger sum-cap results remain solver-only; the global bound is unchanged.
+Active direction as of 23 October: milestone 31 proves joint singleton-count excess and its weighted contribution to the empty-square charge (20 Lean audits). Milestone 32 tests a direction-independent prohibition on six consecutive count-four centres; all 34 cases are solver-excluded and finite coverage is checked, but the complete theorem is pending. The global bound is unchanged.
 
 The relocation manifest records moved files. Historical proof logs and source-hash manifests retain their original recorded paths as provenance.
 
@@ -38,3 +38,6 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Overlapping share windows and selective history](29-overlapping-share-windows/README.md)
 
 - [Coarse singleton-count correction](30-coarse-count-correction/README.md)
+
+- [Joint singleton-count bounds](31-joint-counter-soundness/README.md)
+- [Consecutive singleton counts equal to four](32-seven-count-four-screen/README.md)

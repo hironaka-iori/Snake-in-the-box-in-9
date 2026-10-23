@@ -1624,7 +1624,40 @@ This count correction can be combined with the empty-square term without changin
 \paragraph{Diagnostic effect and stronger experimental targets.}
 Tracking only the necessary suffix of the period-three count pattern adds 204 states to the preceding diagnostic graph, for 44,336 states in total. Two interval-forbidden transitions are removed, and two surviving transitions receive the excess correction. The cycle found with recorded local-witness values changes from $859/180$ to $287/60$. The cycle found with the recorded lower-bound table remains at $119/29$. Exact arithmetic checks the saved cycles; a finite check covers 393,216 count-history updates. These checks do not supply a global minimum-mean certificate or the unproved numerical share bounds.
 
-An independent model using direct indicators for all 36 coordinate squares at each centre gives stronger experimental targets. Under the $D_3$ hypotheses, it rejects $a+b+c\le27$ and finds an acyclic local configuration with counts $(9,3,3,10,3,3,9)$, so the apparent local minimum is $28$. Under the $D_2$ hypotheses, it rejects $a+b+c\le28$; the previously checked configuration has sum $31$. Thus the experimental intervals for the local minima are $[28,28]$ and $[29,31]$, respectively. The infeasibility results are solver evidence, while the positive configurations have independent geometric checks. The stronger lower bounds have no Lean certificate here and are not used in Proposition~\ref{prop:three-excess}. Certifying them would increase the available excess from one to at least ten or eleven units per qualifying window, subject to the same overlap accounting.
+\begin{proposition}[Joint singleton excess]\label{prop:joint-singleton-excess}
+For a seven-centre snake window with counts $(a,3,3,b,3,3,c)$, where $6\le a,b,c\le21$, the following stronger bounds hold:
+\[
+\begin{array}{c|c|c}
+\text{directions}&a+b+c& (a-6)+(b-6)+(c-6)\\\hline
+D_2&\ge29&\ge11\\
+D_3&\ge28&\ge10.
+\end{array}
+\]
+\end{proposition}
+\begin{proof}
+At each of the three high-count centres, exclude its two path directions. There are 21 pairs of remaining directions. A pair contributes a singleton square precisely when its opposite corner is unselected, since the other two corners are neighbors outside the induced path. Concatenating the three lists of opposite corners therefore counts $a+b+c$. Shared opposite-corner vertices must retain their multiplicities in these lists.
+
+Impose a bound of 28 for $D_2$, or 27 for $D_3$, on this joint count. The necessary radius-four path conditions and cycle exclusions then contain inconsistent subsets of 4,376 and 4,080 Boolean clauses, respectively. The two proof certificates, the soundness of the joint counting constraint, and the equality between each normalized count and the corresponding count in an arbitrary snake have all been checked in Lean. Their refutations give the displayed lower bounds. Subtracting $18$ gives the excess inequalities.
+\end{proof}
+
+Let $J_2$ and $J_3$ be disjoint sets of qualifying starting positions for the two direction types. The same multiplicity-three accounting now gives
+\[
+11|J_2|+10|J_3|\le3\sum_j\delta_j,
+\qquad
+G_{12}\ge24\sum_j b_j+88|J_2|+80|J_3|+\sum_{x\in S}\sigma_{12}(x).
+\]
+The weighted finite-set inequality and the charge consequence have passed Lean. Both currently recorded diagnostic cycles avoid these qualifying windows, so stronger weights at these positions alone do not eliminate those cycles.
+
+The lower bound 28 for $D_3$ is attained in the radius-four local forest model by the independently checked tuple $(9,3,3,10,3,3,9)$. For $D_2$, a new local forest has counts $(11,3,3,9,3,3,10)$ and high-count sum 30. Thus its local minimum lies in the proved interval $[29,30]$, where the upper endpoint is supported by direct finite verification. A further solver test excludes sum at most 29, suggesting the local minimum is 30; that last exclusion has no Lean certificate here. No extension of either local forest to a complete snake is asserted.
+
+\subsection{A candidate restriction on consecutive counts of four}\label{sec:four-run}
+The successive diagnostic cycles repeatedly contain counts equal to four. This suggests a direction-independent restriction.
+\begin{conjecture}[Six-centre four-count restriction]\label{conj:six-fours}
+No snake in $\Q_9$ has six consecutive internal vertices whose singleton-square counts all equal four.
+\end{conjecture}
+An initial radius-four screen excluded all 132 normalized induced eight-transition patterns with seven internal counts equal to four. A shorter screen then excluded all 34 normalized induced seven-transition patterns with six such counts. These exclusions remain solver results. Independently, a finite Lean check proves that the 34 displayed cases cover all normalized induced seven-transition patterns. A complete proof of Conjecture~\ref{conj:six-fours} still requires the numerical refutations and the passage from an arbitrary snake to this normalized classification.
+
+A five-centre all-four local forest was found and independently checked by explicit vertex and square counting; a separate model also accepted this fixed configuration. Hence the corresponding local-model exclusion cannot be shortened to five centres. This does not establish a complete snake with such a run. An independent scan of the 131 saved 191-edge snakes found maximum run length two. The bank is not exhaustive, so this observation supplies no universal bound. The conjectured six-centre restriction would replace several direction-specific obstructions with one condition on the count sequence.
 
 \subsection{Overlapping endpoint demands}
 Local geometric arguments often produce sets that must contain an endpoint. Their overlap can be retained in the counting argument.
