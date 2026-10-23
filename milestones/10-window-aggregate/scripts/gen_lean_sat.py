@@ -415,7 +415,9 @@ def write_dir_unsat(order, dset='direction'):
             'r4b': 'radius-4-window'}[dset]
     unsat_mod = 'LocalWindowDirUnsat' + {'direction': '', 'direction5': '5', 'r4': 'R4', 'r4b': 'R4b'}[dset]
     imports = ''.join(f'import LocalWindowUnsat.{m}\n' for m in order)
-    terms = ',\n   '.join(f'{m}.unsat' for m in order)
+    # one `refine` per window: a single anonymous constructor with hundreds of components
+    # overflows the elaborator's stack
+    terms = ''.join(f'  refine ⟨{m}.unsat, ?_⟩\n' for m in order[:-1]) + f'  exact {order[-1]}.unsat'
     src = f'''import {agg}
 {imports}
 /-!
@@ -430,8 +432,9 @@ set_option maxRecDepth 100000
 
 namespace Snake9.LocalWindow
 
-theorem allUnsat{bound} : AllUnsat{bound} :=
-  ⟨{terms}⟩
+theorem allUnsat{bound} : AllUnsat{bound} := by
+  unfold AllUnsat{bound}
+{terms}
 
 theorem allRefuted{bound} : {premise} := allRefuted{bound}_of_unsat allUnsat{bound}
 

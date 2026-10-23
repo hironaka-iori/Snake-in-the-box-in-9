@@ -744,739 +744,740 @@ set_option maxRecDepth 100000
 
 namespace Snake9.LocalWindow
 
-theorem allUnsat236 : AllUnsat236 :=
-  ⟨Q012A11.unsat,
-   Q012A12.unsat,
-   Q012A13.unsat,
-   Q012A14.unsat,
-   Q0120A151.unsat,
-   Q0120A152.unsat,
-   Q0120A153.unsat,
-   Q0120A154.unsat,
-   Q0120A155.unsat,
-   Q0120A161.unsat,
-   Q0120A162.unsat,
-   Q0120A163.unsat,
-   Q0120A164.unsat,
-   Q0120A222.unsat,
-   Q0120A223.unsat,
-   Q0120A224.unsat,
-   Q0120A225.unsat,
-   Q0120A232.unsat,
-   Q0120A233.unsat,
-   Q0120A234.unsat,
-   Q0120A235.unsat,
-   Q0120A242.unsat,
-   Q0120A243.unsat,
-   Q0120A244.unsat,
-   Q0120A252.unsat,
-   Q0120A253.unsat,
-   Q0120A262.unsat,
-   Q0120A323.unsat,
-   Q0120A324.unsat,
-   Q0120A325.unsat,
-   Q0120A333.unsat,
-   Q0120A334.unsat,
-   Q0120A343.unsat,
-   Q0120A424.unsat,
-   Q0120A515.unsat,
-   Q0120A516.unsat,
-   Q0120A616.unsat,
-   Q0123A151.unsat,
-   Q0123A152.unsat,
-   Q0123A153.unsat,
-   Q0123A161.unsat,
-   Q0123A222.unsat,
-   Q0123A223.unsat,
-   Q0123A224.unsat,
-   Q0123A225.unsat,
-   Q0123A232.unsat,
-   Q0123A323.unsat,
-   Q01203A2261.unsat,
-   Q01203A2262.unsat,
-   Q01203A2263.unsat,
-   R01203A2264.unsat,
-   Q01203A2361.unsat,
-   Q01203A2362.unsat,
-   Q01203A2451.unsat,
-   Q01203A2452.unsat,
-   R01203A2461.unsat,
-   Q01203A2462.unsat,
-   R01203A2542.unsat,
-   Q01203A2543.unsat,
-   R01203A2544.unsat,
-   R01203A2551.unsat,
-   Q01203A2552.unsat,
-   R01203A2553.unsat,
-   Q01203A2632.unsat,
-   Q01203A2633.unsat,
-   Q01203A2634.unsat,
-   Q01203A2642.unsat,
-   Q01203A2643.unsat,
-   Q01203A3261.unsat,
-   Q01203A3262.unsat,
-   Q01203A3263.unsat,
-   Q01203A3352.unsat,
-   Q01203A3353.unsat,
-   R01203A3354.unsat,
-   Q01203A3361.unsat,
-   Q01203A3362.unsat,
-   Q01203A3442.unsat,
-   Q01203A3443.unsat,
-   Q01203A3451.unsat,
-   Q01203A3452.unsat,
-   R01203A3453.unsat,
-   R01203A3461.unsat,
-   Q01203A3532.unsat,
-   Q01203A3533.unsat,
-   R01203A3534.unsat,
-   R01203A3542.unsat,
-   R01203A3622.unsat,
-   Q01203A3623.unsat,
-   R01203A3624.unsat,
-   Q01203A4252.unsat,
-   Q01203A4253.unsat,
-   Q01203A4261.unsat,
-   Q01203A4262.unsat,
-   Q01203A4342.unsat,
-   Q01203A4343.unsat,
-   Q01203A4344.unsat,
-   R01203A4352.unsat,
-   Q01203A4432.unsat,
-   Q01203A4433.unsat,
-   R01203A4434.unsat,
-   Q01203A4442.unsat,
-   R01203A4443.unsat,
-   Q01203A4451.unsat,
-   Q01203A4523.unsat,
-   R01203A4542.unsat,
-   R01203A4623.unsat,
-   Q01203A5242.unsat,
-   R01203A5243.unsat,
-   Q01203A5252.unsat,
-   Q01203A5253.unsat,
-   R01203A5261.unsat,
-   Q01203A5332.unsat,
-   Q01203A5333.unsat,
-   Q01203A5342.unsat,
-   R01203A5352.unsat,
-   Q01203A5423.unsat,
-   R01203A5424.unsat,
-   R01203A5432.unsat,
-   R01203A6332.unsat,
-   R01230A1542.unsat,
-   Q01230A1543.unsat,
-   R01230A1544.unsat,
-   R01230A1552.unsat,
-   R01230A1553.unsat,
-   R01230A1622.unsat,
-   Q01230A1623.unsat,
-   Q01230A1624.unsat,
-   R01230A1632.unsat,
-   R01230A1633.unsat,
-   R01230A1642.unsat,
-   Q01230A2332.unsat,
-   Q01230A2333.unsat,
-   Q01230A2334.unsat,
-   R01230A2335.unsat,
-   R01230A2342.unsat,
-   R01230A2352.unsat,
-   Q01230A2423.unsat,
-   R01230A2424.unsat,
-   R01230A2425.unsat,
-   R01230A2442.unsat,
-   R01230A2523.unsat,
-   R01230A2615.unsat,
-   Q01230A3243.unsat,
-   Q01230A3324.unsat,
-   Q01230A3325.unsat,
-   R01230A3615.unsat,
-   R01230A4325.unsat,
-   R01230A5235.unsat,
-   Q01234A1542.unsat,
-   Q01234A1543.unsat,
-   Q01234A1544.unsat,
-   R01234A1545.unsat,
-   R01234A1551.unsat,
-   Q01234A1552.unsat,
-   R01234A1553.unsat,
-   Q01234A1622.unsat,
-   Q01234A1623.unsat,
-   Q01234A1624.unsat,
-   Q01234A1625.unsat,
-   Q01234A1626.unsat,
-   Q01234A1632.unsat,
-   Q01234A1633.unsat,
-   Q01234A1634.unsat,
-   Q01234A1642.unsat,
-   Q01234A2262.unsat,
-   Q01234A2263.unsat,
-   R01234A2264.unsat,
-   Q01234A2332.unsat,
-   Q01234A2333.unsat,
-   Q01234A2334.unsat,
-   Q01234A2335.unsat,
-   R01234A2336.unsat,
-   Q01234A2342.unsat,
-   Q01234A2343.unsat,
-   Q01234A2344.unsat,
-   Q01234A2345.unsat,
-   Q01234A2352.unsat,
-   Q01234A2353.unsat,
-   Q01234A2354.unsat,
-   Q01234A2355.unsat,
-   Q01234A2362.unsat,
-   Q01234A2423.unsat,
-   Q01234A2424.unsat,
-   Q01234A2425.unsat,
-   Q01234A2426.unsat,
-   Q01234A2433.unsat,
-   Q01234A2434.unsat,
-   Q01234A2435.unsat,
-   Q01234A2442.unsat,
-   Q01234A2443.unsat,
-   Q01234A2444.unsat,
-   Q01234A2452.unsat,
-   Q01234A2453.unsat,
-   Q01234A2462.unsat,
-   Q01234A2523.unsat,
-   Q01234A2524.unsat,
-   Q01234A2525.unsat,
-   Q01234A2533.unsat,
-   R01234A2534.unsat,
-   Q01234A2543.unsat,
-   Q01234A2552.unsat,
-   Q01234A2615.unsat,
-   Q01234A2616.unsat,
-   Q01234A3243.unsat,
-   Q01234A3244.unsat,
-   Q01234A3245.unsat,
-   Q01234A3253.unsat,
-   Q01234A3254.unsat,
-   Q01234A3255.unsat,
-   Q01234A3324.unsat,
-   Q01234A3325.unsat,
-   Q01234A3333.unsat,
-   Q01234A3334.unsat,
-   Q01234A3335.unsat,
-   Q01234A3343.unsat,
-   Q01234A3344.unsat,
-   R01234A3345.unsat,
-   Q01234A3353.unsat,
-   Q01234A3424.unsat,
-   Q01234A3425.unsat,
-   Q01234A3434.unsat,
-   Q01234A3524.unsat,
-   Q01234A3525.unsat,
-   Q01234A3615.unsat,
-   Q01234A3616.unsat,
-   Q01234A4234.unsat,
-   Q01234A4235.unsat,
-   Q01234A4244.unsat,
-   Q01234A4245.unsat,
-   Q01234A4325.unsat,
-   Q01234A4334.unsat,
-   Q01234A4425.unsat,
-   Q01234A4515.unsat,
-   Q01234A4516.unsat,
-   Q01234A4615.unsat,
-   Q01234A4616.unsat,
-   Q01234A5155.unsat,
-   Q01234A5235.unsat,
-   Q01234A5516.unsat,
-   Q01234A5616.unsat,
-   R012031A23632.unsat,
-   R012031A23642.unsat,
-   R012031A24642.unsat,
-   Q012031A32642.unsat,
-   R012031A33642.unsat,
-   R012031A36332.unsat,
-   Q012031A42542.unsat,
-   Q012031A42543.unsat,
-   R012031A42642.unsat,
-   R012031A43542.unsat,
-   R012031A46332.unsat,
-   R012031A52622.unsat,
-   R012031A52632.unsat,
-   R012031A52642.unsat,
-   R012031A53432.unsat,
-   R012031A53622.unsat,
-   R012031A54252.unsat,
-   Q012031A54253.unsat,
-   R012031A62622.unsat,
-   R012031A62623.unsat,
-   R012031A63244.unsat,
-   Q012031A63245.unsat,
-   R012031A63432.unsat,
-   R012031A63622.unsat,
-   R012034A23632.unsat,
-   R012034A23642.unsat,
-   R012034A24633.unsat,
-   R012034A24642.unsat,
-   Q012034A26442.unsat,
-   R012034A32643.unsat,
-   R012034A33642.unsat,
-   R012034A34542.unsat,
-   R012034A34623.unsat,
-   R012034A35442.unsat,
-   Q012034A36324.unsat,
-   Q012034A36325.unsat,
-   Q012034A36333.unsat,
-   R012034A36334.unsat,
-   R012034A36343.unsat,
-   R012034A36424.unsat,
-   R012034A43623.unsat,
-   R012034A43642.unsat,
-   Q012034A46324.unsat,
-   Q012034A46325.unsat,
-   Q012034A46333.unsat,
-   R012034A46334.unsat,
-   R012034A46343.unsat,
-   Q012034A52623.unsat,
-   R012034A56234.unsat,
-   Q012034A62623.unsat,
-   Q012301A22622.unsat,
-   Q012301A22623.unsat,
-   Q012301A22632.unsat,
-   Q012301A22633.unsat,
-   R012301A22642.unsat,
-   R012301A23362.unsat,
-   R012301A23363.unsat,
-   R012301A23432.unsat,
-   R012301A23433.unsat,
-   R012301A23434.unsat,
-   R012301A23436.unsat,
-   R012301A23442.unsat,
-   R012301A23443.unsat,
-   R012301A23444.unsat,
-   R012301A23532.unsat,
-   R012301A23533.unsat,
-   R012301A23542.unsat,
-   R012301A23623.unsat,
-   R012301A23632.unsat,
-   R012301A23642.unsat,
-   R012301A24333.unsat,
-   R012301A24334.unsat,
-   R012301A24342.unsat,
-   R012301A24343.unsat,
-   R012301A24434.unsat,
-   R012301A24523.unsat,
-   R012301A24533.unsat,
-   R012301A24534.unsat,
-   R012301A24542.unsat,
-   R012301A24623.unsat,
-   R012301A24642.unsat,
-   Q012301A26262.unsat,
-   R012301A32443.unsat,
-   R012301A32533.unsat,
-   R012301A32623.unsat,
-   R012301A33333.unsat,
-   R012301A33334.unsat,
-   R012301A33424.unsat,
-   R012301A33425.unsat,
-   R012301A33533.unsat,
-   R012301A34324.unsat,
-   Q012301A34343.unsat,
-   R012301A36234.unsat,
-   R012301A42344.unsat,
-   R012301A42346.unsat,
-   R012301A43334.unsat,
-   R012301A43425.unsat,
-   R012301A44235.unsat,
-   R012301A44244.unsat,
-   Q012304A22623.unsat,
-   Q012304A22624.unsat,
-   Q012304A22625.unsat,
-   Q012304A22633.unsat,
-   R012304A22634.unsat,
-   R012304A22635.unsat,
-   R012304A22643.unsat,
-   R012304A23362.unsat,
-   R012304A23363.unsat,
-   R012304A23364.unsat,
-   Q012304A23435.unsat,
-   Q012304A23443.unsat,
-   Q012304A23444.unsat,
-   R012304A23453.unsat,
-   R012304A23454.unsat,
-   R012304A23455.unsat,
-   R012304A23534.unsat,
-   R012304A23535.unsat,
-   R012304A23543.unsat,
-   Q012304A23623.unsat,
-   Q012304A23624.unsat,
-   R012304A23625.unsat,
-   R012304A23632.unsat,
-   R012304A23642.unsat,
-   Q012304A24262.unsat,
-   Q012304A24263.unsat,
-   R012304A24264.unsat,
-   Q012304A24335.unsat,
-   R012304A24344.unsat,
-   R012304A24345.unsat,
-   R012304A24353.unsat,
-   R012304A24354.unsat,
-   Q012304A24362.unsat,
-   Q012304A24434.unsat,
-   R012304A24435.unsat,
-   Q012304A24443.unsat,
-   R012304A24444.unsat,
-   R012304A24445.unsat,
-   R012304A24452.unsat,
-   R012304A24453.unsat,
-   R012304A24462.unsat,
-   Q012304A24524.unsat,
-   R012304A24525.unsat,
-   R012304A24533.unsat,
-   R012304A24534.unsat,
-   R012304A24535.unsat,
-   R012304A24542.unsat,
-   R012304A24543.unsat,
-   Q012304A24623.unsat,
-   Q012304A24624.unsat,
-   R012304A24625.unsat,
-   R012304A24632.unsat,
-   R012304A24633.unsat,
-   R012304A24642.unsat,
-   Q012304A25245.unsat,
-   R012304A25262.unsat,
-   Q012304A25334.unsat,
-   R012304A25335.unsat,
-   R012304A25343.unsat,
-   R012304A25344.unsat,
-   R012304A25352.unsat,
-   Q012304A25442.unsat,
-   Q012304A25443.unsat,
-   Q012304A25524.unsat,
-   R012304A25525.unsat,
-   R012304A25533.unsat,
-   R012304A25534.unsat,
-   Q012304A26233.unsat,
-   Q012304A26234.unsat,
-   Q012304A26235.unsat,
-   Q012304A26243.unsat,
-   Q012304A26244.unsat,
-   Q012304A26245.unsat,
-   Q012304A26252.unsat,
-   Q012304A26253.unsat,
-   Q012304A26254.unsat,
-   R012304A26255.unsat,
-   Q012304A26262.unsat,
-   Q012304A26263.unsat,
-   R012304A26264.unsat,
-   Q012304A26324.unsat,
-   Q012304A26325.unsat,
-   Q012304A26333.unsat,
-   Q012304A26334.unsat,
-   R012304A26335.unsat,
-   Q012304A26342.unsat,
-   Q012304A26343.unsat,
-   Q012304A26344.unsat,
-   R012304A26352.unsat,
-   R012304A26353.unsat,
-   R012304A26362.unsat,
-   Q012304A26424.unsat,
-   Q012304A26432.unsat,
-   Q012304A26433.unsat,
-   R012304A26434.unsat,
-   Q012304A26442.unsat,
-   R012304A32454.unsat,
-   Q012304A32623.unsat,
-   Q012304A32624.unsat,
-   Q012304A32625.unsat,
-   Q012304A32633.unsat,
-   R012304A32643.unsat,
-   Q012304A33354.unsat,
-   R012304A33362.unsat,
-   R012304A33363.unsat,
-   R012304A33435.unsat,
-   Q012304A33443.unsat,
-   R012304A33444.unsat,
-   R012304A33453.unsat,
-   R012304A33534.unsat,
-   R012304A33535.unsat,
-   R012304A33543.unsat,
-   Q012304A33623.unsat,
-   R012304A33642.unsat,
-   R012304A33643.unsat,
-   R012304A34254.unsat,
-   R012304A34255.unsat,
-   Q012304A34262.unsat,
-   R012304A34263.unsat,
-   R012304A34264.unsat,
-   Q012304A34335.unsat,
-   R012304A34344.unsat,
-   R012304A34345.unsat,
-   R012304A34353.unsat,
-   R012304A34354.unsat,
-   Q012304A34362.unsat,
-   Q012304A34434.unsat,
-   R012304A34452.unsat,
-   Q012304A34524.unsat,
-   Q012304A34525.unsat,
-   R012304A34623.unsat,
-   Q012304A35245.unsat,
-   R012304A35254.unsat,
-   R012304A35262.unsat,
-   R012304A35343.unsat,
-   R012304A35344.unsat,
-   R012304A35352.unsat,
-   R012304A35442.unsat,
-   R012304A35533.unsat,
-   R012304A35542.unsat,
-   Q012304A36233.unsat,
-   Q012304A36234.unsat,
-   Q012304A36235.unsat,
-   Q012304A36243.unsat,
-   Q012304A36244.unsat,
-   R012304A36252.unsat,
-   R012304A36253.unsat,
-   R012304A36254.unsat,
-   Q012304A36262.unsat,
-   Q012304A36324.unsat,
-   Q012304A36325.unsat,
-   Q012304A36333.unsat,
-   R012304A36334.unsat,
-   R012304A36343.unsat,
-   R012304A36424.unsat,
-   R012304A36433.unsat,
-   R012304A42346.unsat,
-   R012304A42363.unsat,
-   R012304A42364.unsat,
-   R012304A42436.unsat,
-   R012304A42454.unsat,
-   Q012304A42623.unsat,
-   R012304A42624.unsat,
-   R012304A42633.unsat,
-   R012304A43262.unsat,
-   R012304A43263.unsat,
-   R012304A43264.unsat,
-   R012304A43265.unsat,
-   Q012304A43354.unsat,
-   R012304A43362.unsat,
-   R012304A43363.unsat,
-   R012304A43443.unsat,
-   R012304A43444.unsat,
-   R012304A43623.unsat,
-   R012304A43642.unsat,
-   R012304A44254.unsat,
-   R012304A44262.unsat,
-   R012304A44335.unsat,
-   R012304A44344.unsat,
-   R012304A44353.unsat,
-   R012304A44362.unsat,
-   Q012304A45245.unsat,
-   R012304A45254.unsat,
-   R012304A45262.unsat,
-   R012304A45343.unsat,
-   R012304A45352.unsat,
-   Q012304A46234.unsat,
-   Q012304A46243.unsat,
-   R012304A46244.unsat,
-   R012304A46252.unsat,
-   R012304A46253.unsat,
-   R012304A46254.unsat,
-   R012304A46262.unsat,
-   Q012304A46324.unsat,
-   Q012304A46325.unsat,
-   Q012304A46333.unsat,
-   R012304A46334.unsat,
-   R012304A46343.unsat,
-   Q012304A52363.unsat,
-   Q012304A52364.unsat,
-   R012304A52436.unsat,
-   R012304A52445.unsat,
-   Q012304A52623.unsat,
-   R012304A53246.unsat,
-   R012304A53262.unsat,
-   R012304A53263.unsat,
-   R012304A54335.unsat,
-   R012304A56234.unsat,
-   R012310A23632.unsat,
-   R012310A23642.unsat,
-   R012310A24642.unsat,
-   R012310A34263.unsat,
-   Q012314A23462.unsat,
-   R012314A23463.unsat,
-   R012314A23464.unsat,
-   R012314A23632.unsat,
-   R012314A23642.unsat,
-   Q012314A24263.unsat,
-   Q012314A24264.unsat,
-   Q012314A24362.unsat,
-   R012314A24363.unsat,
-   R012314A24364.unsat,
-   Q012314A24452.unsat,
-   R012314A24453.unsat,
-   Q012314A24462.unsat,
-   R012314A24642.unsat,
-   Q012314A25262.unsat,
-   R012314A25263.unsat,
-   R012314A25443.unsat,
-   Q012314A26253.unsat,
-   Q012314A26254.unsat,
-   Q012314A26343.unsat,
-   R012314A26344.unsat,
-   Q012314A26433.unsat,
-   R012314A26434.unsat,
-   R012314A32463.unsat,
-   R012314A32464.unsat,
-   Q012314A33363.unsat,
-   Q012314A33364.unsat,
-   R012314A33454.unsat,
-   Q012314A34263.unsat,
-   R012314A34264.unsat,
-   R012314A34353.unsat,
-   R012314A34354.unsat,
-   R012314A35344.unsat,
-   R012314A35353.unsat,
-   Q012314A36244.unsat,
-   R012314A36324.unsat,
-   Q012314A36325.unsat,
-   R012314A36334.unsat,
-   R012314A36424.unsat,
-   R012314A43264.unsat,
-   R012314A43265.unsat,
-   R012314A43355.unsat,
-   R012314A44254.unsat,
-   R012314A44255.unsat,
-   Q012314A45254.unsat,
-   R012314A45255.unsat,
-   Q012314A46325.unsat,
-   R012340A23632.unsat,
-   R012340A23642.unsat,
-   Q012340A24362.unsat,
-   Q012340A24452.unsat,
-   R012340A24453.unsat,
-   Q012340A24462.unsat,
-   Q012340A24542.unsat,
-   R012340A24543.unsat,
-   R012340A24633.unsat,
-   R012340A24634.unsat,
-   R012340A24642.unsat,
-   R012340A25262.unsat,
-   R012340A25263.unsat,
-   R012340A25352.unsat,
-   Q012340A25443.unsat,
-   R012340A25533.unsat,
-   R012340A25534.unsat,
-   Q012340A26233.unsat,
-   Q012340A26234.unsat,
-   R012340A26235.unsat,
-   Q012340A26243.unsat,
-   Q012340A26244.unsat,
-   R012340A26253.unsat,
-   R012340A26254.unsat,
-   Q012340A26262.unsat,
-   Q012340A26263.unsat,
-   R012340A26264.unsat,
-   Q012340A26333.unsat,
-   Q012340A26334.unsat,
-   R012340A26335.unsat,
-   Q012340A26343.unsat,
-   Q012340A26344.unsat,
-   R012340A26362.unsat,
-   Q012340A26433.unsat,
-   Q012340A32623.unsat,
-   Q012340A32624.unsat,
-   Q012340A32625.unsat,
-   Q012340A32633.unsat,
-   R012340A32643.unsat,
-   Q012340A33263.unsat,
-   Q012340A33363.unsat,
-   Q012340A33364.unsat,
-   R012340A33463.unsat,
-   Q012340A33543.unsat,
-   R012340A33553.unsat,
-   R012340A33554.unsat,
-   Q012340A34263.unsat,
-   R012340A34264.unsat,
-   R012340A34353.unsat,
-   R012340A34363.unsat,
-   R012340A34364.unsat,
-   Q012340A34434.unsat,
-   R012340A34534.unsat,
-   R012340A35263.unsat,
-   R012340A35344.unsat,
-   Q012340A36234.unsat,
-   R012340A36235.unsat,
-   Q012340A36244.unsat,
-   Q012340A36324.unsat,
-   Q012340A36325.unsat,
-   R012340A36334.unsat,
-   Q012340A42364.unsat,
-   R012340A42624.unsat,
-   R012340A43264.unsat,
-   R012340A43265.unsat,
-   R012340A44344.unsat,
-   Q012340A46325.unsat,
-   R012345A23632.unsat,
-   R012345A23642.unsat,
-   Q012345A24362.unsat,
-   Q012345A24452.unsat,
-   R012345A24453.unsat,
-   Q012345A24462.unsat,
-   Q012345A24542.unsat,
-   R012345A24543.unsat,
-   R012345A24633.unsat,
-   R012345A24634.unsat,
-   R012345A24642.unsat,
-   R012345A25262.unsat,
-   R012345A25263.unsat,
-   R012345A25352.unsat,
-   Q012345A25443.unsat,
-   R012345A25533.unsat,
-   R012345A25534.unsat,
-   Q012345A26233.unsat,
-   Q012345A26234.unsat,
-   R012345A26235.unsat,
-   Q012345A26243.unsat,
-   Q012345A26244.unsat,
-   R012345A26253.unsat,
-   R012345A26254.unsat,
-   Q012345A26262.unsat,
-   Q012345A26263.unsat,
-   R012345A26264.unsat,
-   Q012345A26333.unsat,
-   Q012345A26334.unsat,
-   R012345A26335.unsat,
-   Q012345A26343.unsat,
-   Q012345A26344.unsat,
-   R012345A26362.unsat,
-   Q012345A26433.unsat,
-   Q012345A32623.unsat,
-   Q012345A32624.unsat,
-   Q012345A32625.unsat,
-   Q012345A32633.unsat,
-   R012345A32643.unsat,
-   Q012345A33263.unsat,
-   Q012345A33363.unsat,
-   Q012345A33364.unsat,
-   R012345A33463.unsat,
-   Q012345A33543.unsat,
-   R012345A33553.unsat,
-   R012345A33554.unsat,
-   Q012345A34263.unsat,
-   R012345A34264.unsat,
-   R012345A34353.unsat,
-   R012345A34363.unsat,
-   R012345A34364.unsat,
-   Q012345A34434.unsat,
-   R012345A34534.unsat,
-   R012345A35263.unsat,
-   R012345A35344.unsat,
-   Q012345A36234.unsat,
-   R012345A36235.unsat,
-   Q012345A36244.unsat,
-   Q012345A36324.unsat,
-   Q012345A36325.unsat,
-   R012345A36334.unsat,
-   Q012345A42364.unsat,
-   R012345A42624.unsat,
-   R012345A43264.unsat,
-   R012345A43265.unsat,
-   R012345A44344.unsat,
-   Q012345A46325.unsat⟩
+theorem allUnsat236 : AllUnsat236 := by
+  unfold AllUnsat236
+  refine ⟨Q012A11.unsat, ?_⟩
+  refine ⟨Q012A12.unsat, ?_⟩
+  refine ⟨Q012A13.unsat, ?_⟩
+  refine ⟨Q012A14.unsat, ?_⟩
+  refine ⟨Q0120A151.unsat, ?_⟩
+  refine ⟨Q0120A152.unsat, ?_⟩
+  refine ⟨Q0120A153.unsat, ?_⟩
+  refine ⟨Q0120A154.unsat, ?_⟩
+  refine ⟨Q0120A155.unsat, ?_⟩
+  refine ⟨Q0120A161.unsat, ?_⟩
+  refine ⟨Q0120A162.unsat, ?_⟩
+  refine ⟨Q0120A163.unsat, ?_⟩
+  refine ⟨Q0120A164.unsat, ?_⟩
+  refine ⟨Q0120A222.unsat, ?_⟩
+  refine ⟨Q0120A223.unsat, ?_⟩
+  refine ⟨Q0120A224.unsat, ?_⟩
+  refine ⟨Q0120A225.unsat, ?_⟩
+  refine ⟨Q0120A232.unsat, ?_⟩
+  refine ⟨Q0120A233.unsat, ?_⟩
+  refine ⟨Q0120A234.unsat, ?_⟩
+  refine ⟨Q0120A235.unsat, ?_⟩
+  refine ⟨Q0120A242.unsat, ?_⟩
+  refine ⟨Q0120A243.unsat, ?_⟩
+  refine ⟨Q0120A244.unsat, ?_⟩
+  refine ⟨Q0120A252.unsat, ?_⟩
+  refine ⟨Q0120A253.unsat, ?_⟩
+  refine ⟨Q0120A262.unsat, ?_⟩
+  refine ⟨Q0120A323.unsat, ?_⟩
+  refine ⟨Q0120A324.unsat, ?_⟩
+  refine ⟨Q0120A325.unsat, ?_⟩
+  refine ⟨Q0120A333.unsat, ?_⟩
+  refine ⟨Q0120A334.unsat, ?_⟩
+  refine ⟨Q0120A343.unsat, ?_⟩
+  refine ⟨Q0120A424.unsat, ?_⟩
+  refine ⟨Q0120A515.unsat, ?_⟩
+  refine ⟨Q0120A516.unsat, ?_⟩
+  refine ⟨Q0120A616.unsat, ?_⟩
+  refine ⟨Q0123A151.unsat, ?_⟩
+  refine ⟨Q0123A152.unsat, ?_⟩
+  refine ⟨Q0123A153.unsat, ?_⟩
+  refine ⟨Q0123A161.unsat, ?_⟩
+  refine ⟨Q0123A222.unsat, ?_⟩
+  refine ⟨Q0123A223.unsat, ?_⟩
+  refine ⟨Q0123A224.unsat, ?_⟩
+  refine ⟨Q0123A225.unsat, ?_⟩
+  refine ⟨Q0123A232.unsat, ?_⟩
+  refine ⟨Q0123A323.unsat, ?_⟩
+  refine ⟨Q01203A2261.unsat, ?_⟩
+  refine ⟨Q01203A2262.unsat, ?_⟩
+  refine ⟨Q01203A2263.unsat, ?_⟩
+  refine ⟨R01203A2264.unsat, ?_⟩
+  refine ⟨Q01203A2361.unsat, ?_⟩
+  refine ⟨Q01203A2362.unsat, ?_⟩
+  refine ⟨Q01203A2451.unsat, ?_⟩
+  refine ⟨Q01203A2452.unsat, ?_⟩
+  refine ⟨R01203A2461.unsat, ?_⟩
+  refine ⟨Q01203A2462.unsat, ?_⟩
+  refine ⟨R01203A2542.unsat, ?_⟩
+  refine ⟨Q01203A2543.unsat, ?_⟩
+  refine ⟨R01203A2544.unsat, ?_⟩
+  refine ⟨R01203A2551.unsat, ?_⟩
+  refine ⟨Q01203A2552.unsat, ?_⟩
+  refine ⟨R01203A2553.unsat, ?_⟩
+  refine ⟨Q01203A2632.unsat, ?_⟩
+  refine ⟨Q01203A2633.unsat, ?_⟩
+  refine ⟨Q01203A2634.unsat, ?_⟩
+  refine ⟨Q01203A2642.unsat, ?_⟩
+  refine ⟨Q01203A2643.unsat, ?_⟩
+  refine ⟨Q01203A3261.unsat, ?_⟩
+  refine ⟨Q01203A3262.unsat, ?_⟩
+  refine ⟨Q01203A3263.unsat, ?_⟩
+  refine ⟨Q01203A3352.unsat, ?_⟩
+  refine ⟨Q01203A3353.unsat, ?_⟩
+  refine ⟨R01203A3354.unsat, ?_⟩
+  refine ⟨Q01203A3361.unsat, ?_⟩
+  refine ⟨Q01203A3362.unsat, ?_⟩
+  refine ⟨Q01203A3442.unsat, ?_⟩
+  refine ⟨Q01203A3443.unsat, ?_⟩
+  refine ⟨Q01203A3451.unsat, ?_⟩
+  refine ⟨Q01203A3452.unsat, ?_⟩
+  refine ⟨R01203A3453.unsat, ?_⟩
+  refine ⟨R01203A3461.unsat, ?_⟩
+  refine ⟨Q01203A3532.unsat, ?_⟩
+  refine ⟨Q01203A3533.unsat, ?_⟩
+  refine ⟨R01203A3534.unsat, ?_⟩
+  refine ⟨R01203A3542.unsat, ?_⟩
+  refine ⟨R01203A3622.unsat, ?_⟩
+  refine ⟨Q01203A3623.unsat, ?_⟩
+  refine ⟨R01203A3624.unsat, ?_⟩
+  refine ⟨Q01203A4252.unsat, ?_⟩
+  refine ⟨Q01203A4253.unsat, ?_⟩
+  refine ⟨Q01203A4261.unsat, ?_⟩
+  refine ⟨Q01203A4262.unsat, ?_⟩
+  refine ⟨Q01203A4342.unsat, ?_⟩
+  refine ⟨Q01203A4343.unsat, ?_⟩
+  refine ⟨Q01203A4344.unsat, ?_⟩
+  refine ⟨R01203A4352.unsat, ?_⟩
+  refine ⟨Q01203A4432.unsat, ?_⟩
+  refine ⟨Q01203A4433.unsat, ?_⟩
+  refine ⟨R01203A4434.unsat, ?_⟩
+  refine ⟨Q01203A4442.unsat, ?_⟩
+  refine ⟨R01203A4443.unsat, ?_⟩
+  refine ⟨Q01203A4451.unsat, ?_⟩
+  refine ⟨Q01203A4523.unsat, ?_⟩
+  refine ⟨R01203A4542.unsat, ?_⟩
+  refine ⟨R01203A4623.unsat, ?_⟩
+  refine ⟨Q01203A5242.unsat, ?_⟩
+  refine ⟨R01203A5243.unsat, ?_⟩
+  refine ⟨Q01203A5252.unsat, ?_⟩
+  refine ⟨Q01203A5253.unsat, ?_⟩
+  refine ⟨R01203A5261.unsat, ?_⟩
+  refine ⟨Q01203A5332.unsat, ?_⟩
+  refine ⟨Q01203A5333.unsat, ?_⟩
+  refine ⟨Q01203A5342.unsat, ?_⟩
+  refine ⟨R01203A5352.unsat, ?_⟩
+  refine ⟨Q01203A5423.unsat, ?_⟩
+  refine ⟨R01203A5424.unsat, ?_⟩
+  refine ⟨R01203A5432.unsat, ?_⟩
+  refine ⟨R01203A6332.unsat, ?_⟩
+  refine ⟨R01230A1542.unsat, ?_⟩
+  refine ⟨Q01230A1543.unsat, ?_⟩
+  refine ⟨R01230A1544.unsat, ?_⟩
+  refine ⟨R01230A1552.unsat, ?_⟩
+  refine ⟨R01230A1553.unsat, ?_⟩
+  refine ⟨R01230A1622.unsat, ?_⟩
+  refine ⟨Q01230A1623.unsat, ?_⟩
+  refine ⟨Q01230A1624.unsat, ?_⟩
+  refine ⟨R01230A1632.unsat, ?_⟩
+  refine ⟨R01230A1633.unsat, ?_⟩
+  refine ⟨R01230A1642.unsat, ?_⟩
+  refine ⟨Q01230A2332.unsat, ?_⟩
+  refine ⟨Q01230A2333.unsat, ?_⟩
+  refine ⟨Q01230A2334.unsat, ?_⟩
+  refine ⟨R01230A2335.unsat, ?_⟩
+  refine ⟨R01230A2342.unsat, ?_⟩
+  refine ⟨R01230A2352.unsat, ?_⟩
+  refine ⟨Q01230A2423.unsat, ?_⟩
+  refine ⟨R01230A2424.unsat, ?_⟩
+  refine ⟨R01230A2425.unsat, ?_⟩
+  refine ⟨R01230A2442.unsat, ?_⟩
+  refine ⟨R01230A2523.unsat, ?_⟩
+  refine ⟨R01230A2615.unsat, ?_⟩
+  refine ⟨Q01230A3243.unsat, ?_⟩
+  refine ⟨Q01230A3324.unsat, ?_⟩
+  refine ⟨Q01230A3325.unsat, ?_⟩
+  refine ⟨R01230A3615.unsat, ?_⟩
+  refine ⟨R01230A4325.unsat, ?_⟩
+  refine ⟨R01230A5235.unsat, ?_⟩
+  refine ⟨Q01234A1542.unsat, ?_⟩
+  refine ⟨Q01234A1543.unsat, ?_⟩
+  refine ⟨Q01234A1544.unsat, ?_⟩
+  refine ⟨R01234A1545.unsat, ?_⟩
+  refine ⟨R01234A1551.unsat, ?_⟩
+  refine ⟨Q01234A1552.unsat, ?_⟩
+  refine ⟨R01234A1553.unsat, ?_⟩
+  refine ⟨Q01234A1622.unsat, ?_⟩
+  refine ⟨Q01234A1623.unsat, ?_⟩
+  refine ⟨Q01234A1624.unsat, ?_⟩
+  refine ⟨Q01234A1625.unsat, ?_⟩
+  refine ⟨Q01234A1626.unsat, ?_⟩
+  refine ⟨Q01234A1632.unsat, ?_⟩
+  refine ⟨Q01234A1633.unsat, ?_⟩
+  refine ⟨Q01234A1634.unsat, ?_⟩
+  refine ⟨Q01234A1642.unsat, ?_⟩
+  refine ⟨Q01234A2262.unsat, ?_⟩
+  refine ⟨Q01234A2263.unsat, ?_⟩
+  refine ⟨R01234A2264.unsat, ?_⟩
+  refine ⟨Q01234A2332.unsat, ?_⟩
+  refine ⟨Q01234A2333.unsat, ?_⟩
+  refine ⟨Q01234A2334.unsat, ?_⟩
+  refine ⟨Q01234A2335.unsat, ?_⟩
+  refine ⟨R01234A2336.unsat, ?_⟩
+  refine ⟨Q01234A2342.unsat, ?_⟩
+  refine ⟨Q01234A2343.unsat, ?_⟩
+  refine ⟨Q01234A2344.unsat, ?_⟩
+  refine ⟨Q01234A2345.unsat, ?_⟩
+  refine ⟨Q01234A2352.unsat, ?_⟩
+  refine ⟨Q01234A2353.unsat, ?_⟩
+  refine ⟨Q01234A2354.unsat, ?_⟩
+  refine ⟨Q01234A2355.unsat, ?_⟩
+  refine ⟨Q01234A2362.unsat, ?_⟩
+  refine ⟨Q01234A2423.unsat, ?_⟩
+  refine ⟨Q01234A2424.unsat, ?_⟩
+  refine ⟨Q01234A2425.unsat, ?_⟩
+  refine ⟨Q01234A2426.unsat, ?_⟩
+  refine ⟨Q01234A2433.unsat, ?_⟩
+  refine ⟨Q01234A2434.unsat, ?_⟩
+  refine ⟨Q01234A2435.unsat, ?_⟩
+  refine ⟨Q01234A2442.unsat, ?_⟩
+  refine ⟨Q01234A2443.unsat, ?_⟩
+  refine ⟨Q01234A2444.unsat, ?_⟩
+  refine ⟨Q01234A2452.unsat, ?_⟩
+  refine ⟨Q01234A2453.unsat, ?_⟩
+  refine ⟨Q01234A2462.unsat, ?_⟩
+  refine ⟨Q01234A2523.unsat, ?_⟩
+  refine ⟨Q01234A2524.unsat, ?_⟩
+  refine ⟨Q01234A2525.unsat, ?_⟩
+  refine ⟨Q01234A2533.unsat, ?_⟩
+  refine ⟨R01234A2534.unsat, ?_⟩
+  refine ⟨Q01234A2543.unsat, ?_⟩
+  refine ⟨Q01234A2552.unsat, ?_⟩
+  refine ⟨Q01234A2615.unsat, ?_⟩
+  refine ⟨Q01234A2616.unsat, ?_⟩
+  refine ⟨Q01234A3243.unsat, ?_⟩
+  refine ⟨Q01234A3244.unsat, ?_⟩
+  refine ⟨Q01234A3245.unsat, ?_⟩
+  refine ⟨Q01234A3253.unsat, ?_⟩
+  refine ⟨Q01234A3254.unsat, ?_⟩
+  refine ⟨Q01234A3255.unsat, ?_⟩
+  refine ⟨Q01234A3324.unsat, ?_⟩
+  refine ⟨Q01234A3325.unsat, ?_⟩
+  refine ⟨Q01234A3333.unsat, ?_⟩
+  refine ⟨Q01234A3334.unsat, ?_⟩
+  refine ⟨Q01234A3335.unsat, ?_⟩
+  refine ⟨Q01234A3343.unsat, ?_⟩
+  refine ⟨Q01234A3344.unsat, ?_⟩
+  refine ⟨R01234A3345.unsat, ?_⟩
+  refine ⟨Q01234A3353.unsat, ?_⟩
+  refine ⟨Q01234A3424.unsat, ?_⟩
+  refine ⟨Q01234A3425.unsat, ?_⟩
+  refine ⟨Q01234A3434.unsat, ?_⟩
+  refine ⟨Q01234A3524.unsat, ?_⟩
+  refine ⟨Q01234A3525.unsat, ?_⟩
+  refine ⟨Q01234A3615.unsat, ?_⟩
+  refine ⟨Q01234A3616.unsat, ?_⟩
+  refine ⟨Q01234A4234.unsat, ?_⟩
+  refine ⟨Q01234A4235.unsat, ?_⟩
+  refine ⟨Q01234A4244.unsat, ?_⟩
+  refine ⟨Q01234A4245.unsat, ?_⟩
+  refine ⟨Q01234A4325.unsat, ?_⟩
+  refine ⟨Q01234A4334.unsat, ?_⟩
+  refine ⟨Q01234A4425.unsat, ?_⟩
+  refine ⟨Q01234A4515.unsat, ?_⟩
+  refine ⟨Q01234A4516.unsat, ?_⟩
+  refine ⟨Q01234A4615.unsat, ?_⟩
+  refine ⟨Q01234A4616.unsat, ?_⟩
+  refine ⟨Q01234A5155.unsat, ?_⟩
+  refine ⟨Q01234A5235.unsat, ?_⟩
+  refine ⟨Q01234A5516.unsat, ?_⟩
+  refine ⟨Q01234A5616.unsat, ?_⟩
+  refine ⟨R012031A23632.unsat, ?_⟩
+  refine ⟨R012031A23642.unsat, ?_⟩
+  refine ⟨R012031A24642.unsat, ?_⟩
+  refine ⟨Q012031A32642.unsat, ?_⟩
+  refine ⟨R012031A33642.unsat, ?_⟩
+  refine ⟨R012031A36332.unsat, ?_⟩
+  refine ⟨Q012031A42542.unsat, ?_⟩
+  refine ⟨Q012031A42543.unsat, ?_⟩
+  refine ⟨R012031A42642.unsat, ?_⟩
+  refine ⟨R012031A43542.unsat, ?_⟩
+  refine ⟨R012031A46332.unsat, ?_⟩
+  refine ⟨R012031A52622.unsat, ?_⟩
+  refine ⟨R012031A52632.unsat, ?_⟩
+  refine ⟨R012031A52642.unsat, ?_⟩
+  refine ⟨R012031A53432.unsat, ?_⟩
+  refine ⟨R012031A53622.unsat, ?_⟩
+  refine ⟨R012031A54252.unsat, ?_⟩
+  refine ⟨Q012031A54253.unsat, ?_⟩
+  refine ⟨R012031A62622.unsat, ?_⟩
+  refine ⟨R012031A62623.unsat, ?_⟩
+  refine ⟨R012031A63244.unsat, ?_⟩
+  refine ⟨Q012031A63245.unsat, ?_⟩
+  refine ⟨R012031A63432.unsat, ?_⟩
+  refine ⟨R012031A63622.unsat, ?_⟩
+  refine ⟨R012034A23632.unsat, ?_⟩
+  refine ⟨R012034A23642.unsat, ?_⟩
+  refine ⟨R012034A24633.unsat, ?_⟩
+  refine ⟨R012034A24642.unsat, ?_⟩
+  refine ⟨Q012034A26442.unsat, ?_⟩
+  refine ⟨R012034A32643.unsat, ?_⟩
+  refine ⟨R012034A33642.unsat, ?_⟩
+  refine ⟨R012034A34542.unsat, ?_⟩
+  refine ⟨R012034A34623.unsat, ?_⟩
+  refine ⟨R012034A35442.unsat, ?_⟩
+  refine ⟨Q012034A36324.unsat, ?_⟩
+  refine ⟨Q012034A36325.unsat, ?_⟩
+  refine ⟨Q012034A36333.unsat, ?_⟩
+  refine ⟨R012034A36334.unsat, ?_⟩
+  refine ⟨R012034A36343.unsat, ?_⟩
+  refine ⟨R012034A36424.unsat, ?_⟩
+  refine ⟨R012034A43623.unsat, ?_⟩
+  refine ⟨R012034A43642.unsat, ?_⟩
+  refine ⟨Q012034A46324.unsat, ?_⟩
+  refine ⟨Q012034A46325.unsat, ?_⟩
+  refine ⟨Q012034A46333.unsat, ?_⟩
+  refine ⟨R012034A46334.unsat, ?_⟩
+  refine ⟨R012034A46343.unsat, ?_⟩
+  refine ⟨Q012034A52623.unsat, ?_⟩
+  refine ⟨R012034A56234.unsat, ?_⟩
+  refine ⟨Q012034A62623.unsat, ?_⟩
+  refine ⟨Q012301A22622.unsat, ?_⟩
+  refine ⟨Q012301A22623.unsat, ?_⟩
+  refine ⟨Q012301A22632.unsat, ?_⟩
+  refine ⟨Q012301A22633.unsat, ?_⟩
+  refine ⟨R012301A22642.unsat, ?_⟩
+  refine ⟨R012301A23362.unsat, ?_⟩
+  refine ⟨R012301A23363.unsat, ?_⟩
+  refine ⟨R012301A23432.unsat, ?_⟩
+  refine ⟨R012301A23433.unsat, ?_⟩
+  refine ⟨R012301A23434.unsat, ?_⟩
+  refine ⟨R012301A23436.unsat, ?_⟩
+  refine ⟨R012301A23442.unsat, ?_⟩
+  refine ⟨R012301A23443.unsat, ?_⟩
+  refine ⟨R012301A23444.unsat, ?_⟩
+  refine ⟨R012301A23532.unsat, ?_⟩
+  refine ⟨R012301A23533.unsat, ?_⟩
+  refine ⟨R012301A23542.unsat, ?_⟩
+  refine ⟨R012301A23623.unsat, ?_⟩
+  refine ⟨R012301A23632.unsat, ?_⟩
+  refine ⟨R012301A23642.unsat, ?_⟩
+  refine ⟨R012301A24333.unsat, ?_⟩
+  refine ⟨R012301A24334.unsat, ?_⟩
+  refine ⟨R012301A24342.unsat, ?_⟩
+  refine ⟨R012301A24343.unsat, ?_⟩
+  refine ⟨R012301A24434.unsat, ?_⟩
+  refine ⟨R012301A24523.unsat, ?_⟩
+  refine ⟨R012301A24533.unsat, ?_⟩
+  refine ⟨R012301A24534.unsat, ?_⟩
+  refine ⟨R012301A24542.unsat, ?_⟩
+  refine ⟨R012301A24623.unsat, ?_⟩
+  refine ⟨R012301A24642.unsat, ?_⟩
+  refine ⟨Q012301A26262.unsat, ?_⟩
+  refine ⟨R012301A32443.unsat, ?_⟩
+  refine ⟨R012301A32533.unsat, ?_⟩
+  refine ⟨R012301A32623.unsat, ?_⟩
+  refine ⟨R012301A33333.unsat, ?_⟩
+  refine ⟨R012301A33334.unsat, ?_⟩
+  refine ⟨R012301A33424.unsat, ?_⟩
+  refine ⟨R012301A33425.unsat, ?_⟩
+  refine ⟨R012301A33533.unsat, ?_⟩
+  refine ⟨R012301A34324.unsat, ?_⟩
+  refine ⟨Q012301A34343.unsat, ?_⟩
+  refine ⟨R012301A36234.unsat, ?_⟩
+  refine ⟨R012301A42344.unsat, ?_⟩
+  refine ⟨R012301A42346.unsat, ?_⟩
+  refine ⟨R012301A43334.unsat, ?_⟩
+  refine ⟨R012301A43425.unsat, ?_⟩
+  refine ⟨R012301A44235.unsat, ?_⟩
+  refine ⟨R012301A44244.unsat, ?_⟩
+  refine ⟨Q012304A22623.unsat, ?_⟩
+  refine ⟨Q012304A22624.unsat, ?_⟩
+  refine ⟨Q012304A22625.unsat, ?_⟩
+  refine ⟨Q012304A22633.unsat, ?_⟩
+  refine ⟨R012304A22634.unsat, ?_⟩
+  refine ⟨R012304A22635.unsat, ?_⟩
+  refine ⟨R012304A22643.unsat, ?_⟩
+  refine ⟨R012304A23362.unsat, ?_⟩
+  refine ⟨R012304A23363.unsat, ?_⟩
+  refine ⟨R012304A23364.unsat, ?_⟩
+  refine ⟨Q012304A23435.unsat, ?_⟩
+  refine ⟨Q012304A23443.unsat, ?_⟩
+  refine ⟨Q012304A23444.unsat, ?_⟩
+  refine ⟨R012304A23453.unsat, ?_⟩
+  refine ⟨R012304A23454.unsat, ?_⟩
+  refine ⟨R012304A23455.unsat, ?_⟩
+  refine ⟨R012304A23534.unsat, ?_⟩
+  refine ⟨R012304A23535.unsat, ?_⟩
+  refine ⟨R012304A23543.unsat, ?_⟩
+  refine ⟨Q012304A23623.unsat, ?_⟩
+  refine ⟨Q012304A23624.unsat, ?_⟩
+  refine ⟨R012304A23625.unsat, ?_⟩
+  refine ⟨R012304A23632.unsat, ?_⟩
+  refine ⟨R012304A23642.unsat, ?_⟩
+  refine ⟨Q012304A24262.unsat, ?_⟩
+  refine ⟨Q012304A24263.unsat, ?_⟩
+  refine ⟨R012304A24264.unsat, ?_⟩
+  refine ⟨Q012304A24335.unsat, ?_⟩
+  refine ⟨R012304A24344.unsat, ?_⟩
+  refine ⟨R012304A24345.unsat, ?_⟩
+  refine ⟨R012304A24353.unsat, ?_⟩
+  refine ⟨R012304A24354.unsat, ?_⟩
+  refine ⟨Q012304A24362.unsat, ?_⟩
+  refine ⟨Q012304A24434.unsat, ?_⟩
+  refine ⟨R012304A24435.unsat, ?_⟩
+  refine ⟨Q012304A24443.unsat, ?_⟩
+  refine ⟨R012304A24444.unsat, ?_⟩
+  refine ⟨R012304A24445.unsat, ?_⟩
+  refine ⟨R012304A24452.unsat, ?_⟩
+  refine ⟨R012304A24453.unsat, ?_⟩
+  refine ⟨R012304A24462.unsat, ?_⟩
+  refine ⟨Q012304A24524.unsat, ?_⟩
+  refine ⟨R012304A24525.unsat, ?_⟩
+  refine ⟨R012304A24533.unsat, ?_⟩
+  refine ⟨R012304A24534.unsat, ?_⟩
+  refine ⟨R012304A24535.unsat, ?_⟩
+  refine ⟨R012304A24542.unsat, ?_⟩
+  refine ⟨R012304A24543.unsat, ?_⟩
+  refine ⟨Q012304A24623.unsat, ?_⟩
+  refine ⟨Q012304A24624.unsat, ?_⟩
+  refine ⟨R012304A24625.unsat, ?_⟩
+  refine ⟨R012304A24632.unsat, ?_⟩
+  refine ⟨R012304A24633.unsat, ?_⟩
+  refine ⟨R012304A24642.unsat, ?_⟩
+  refine ⟨Q012304A25245.unsat, ?_⟩
+  refine ⟨R012304A25262.unsat, ?_⟩
+  refine ⟨Q012304A25334.unsat, ?_⟩
+  refine ⟨R012304A25335.unsat, ?_⟩
+  refine ⟨R012304A25343.unsat, ?_⟩
+  refine ⟨R012304A25344.unsat, ?_⟩
+  refine ⟨R012304A25352.unsat, ?_⟩
+  refine ⟨Q012304A25442.unsat, ?_⟩
+  refine ⟨Q012304A25443.unsat, ?_⟩
+  refine ⟨Q012304A25524.unsat, ?_⟩
+  refine ⟨R012304A25525.unsat, ?_⟩
+  refine ⟨R012304A25533.unsat, ?_⟩
+  refine ⟨R012304A25534.unsat, ?_⟩
+  refine ⟨Q012304A26233.unsat, ?_⟩
+  refine ⟨Q012304A26234.unsat, ?_⟩
+  refine ⟨Q012304A26235.unsat, ?_⟩
+  refine ⟨Q012304A26243.unsat, ?_⟩
+  refine ⟨Q012304A26244.unsat, ?_⟩
+  refine ⟨Q012304A26245.unsat, ?_⟩
+  refine ⟨Q012304A26252.unsat, ?_⟩
+  refine ⟨Q012304A26253.unsat, ?_⟩
+  refine ⟨Q012304A26254.unsat, ?_⟩
+  refine ⟨R012304A26255.unsat, ?_⟩
+  refine ⟨Q012304A26262.unsat, ?_⟩
+  refine ⟨Q012304A26263.unsat, ?_⟩
+  refine ⟨R012304A26264.unsat, ?_⟩
+  refine ⟨Q012304A26324.unsat, ?_⟩
+  refine ⟨Q012304A26325.unsat, ?_⟩
+  refine ⟨Q012304A26333.unsat, ?_⟩
+  refine ⟨Q012304A26334.unsat, ?_⟩
+  refine ⟨R012304A26335.unsat, ?_⟩
+  refine ⟨Q012304A26342.unsat, ?_⟩
+  refine ⟨Q012304A26343.unsat, ?_⟩
+  refine ⟨Q012304A26344.unsat, ?_⟩
+  refine ⟨R012304A26352.unsat, ?_⟩
+  refine ⟨R012304A26353.unsat, ?_⟩
+  refine ⟨R012304A26362.unsat, ?_⟩
+  refine ⟨Q012304A26424.unsat, ?_⟩
+  refine ⟨Q012304A26432.unsat, ?_⟩
+  refine ⟨Q012304A26433.unsat, ?_⟩
+  refine ⟨R012304A26434.unsat, ?_⟩
+  refine ⟨Q012304A26442.unsat, ?_⟩
+  refine ⟨R012304A32454.unsat, ?_⟩
+  refine ⟨Q012304A32623.unsat, ?_⟩
+  refine ⟨Q012304A32624.unsat, ?_⟩
+  refine ⟨Q012304A32625.unsat, ?_⟩
+  refine ⟨Q012304A32633.unsat, ?_⟩
+  refine ⟨R012304A32643.unsat, ?_⟩
+  refine ⟨Q012304A33354.unsat, ?_⟩
+  refine ⟨R012304A33362.unsat, ?_⟩
+  refine ⟨R012304A33363.unsat, ?_⟩
+  refine ⟨R012304A33435.unsat, ?_⟩
+  refine ⟨Q012304A33443.unsat, ?_⟩
+  refine ⟨R012304A33444.unsat, ?_⟩
+  refine ⟨R012304A33453.unsat, ?_⟩
+  refine ⟨R012304A33534.unsat, ?_⟩
+  refine ⟨R012304A33535.unsat, ?_⟩
+  refine ⟨R012304A33543.unsat, ?_⟩
+  refine ⟨Q012304A33623.unsat, ?_⟩
+  refine ⟨R012304A33642.unsat, ?_⟩
+  refine ⟨R012304A33643.unsat, ?_⟩
+  refine ⟨R012304A34254.unsat, ?_⟩
+  refine ⟨R012304A34255.unsat, ?_⟩
+  refine ⟨Q012304A34262.unsat, ?_⟩
+  refine ⟨R012304A34263.unsat, ?_⟩
+  refine ⟨R012304A34264.unsat, ?_⟩
+  refine ⟨Q012304A34335.unsat, ?_⟩
+  refine ⟨R012304A34344.unsat, ?_⟩
+  refine ⟨R012304A34345.unsat, ?_⟩
+  refine ⟨R012304A34353.unsat, ?_⟩
+  refine ⟨R012304A34354.unsat, ?_⟩
+  refine ⟨Q012304A34362.unsat, ?_⟩
+  refine ⟨Q012304A34434.unsat, ?_⟩
+  refine ⟨R012304A34452.unsat, ?_⟩
+  refine ⟨Q012304A34524.unsat, ?_⟩
+  refine ⟨Q012304A34525.unsat, ?_⟩
+  refine ⟨R012304A34623.unsat, ?_⟩
+  refine ⟨Q012304A35245.unsat, ?_⟩
+  refine ⟨R012304A35254.unsat, ?_⟩
+  refine ⟨R012304A35262.unsat, ?_⟩
+  refine ⟨R012304A35343.unsat, ?_⟩
+  refine ⟨R012304A35344.unsat, ?_⟩
+  refine ⟨R012304A35352.unsat, ?_⟩
+  refine ⟨R012304A35442.unsat, ?_⟩
+  refine ⟨R012304A35533.unsat, ?_⟩
+  refine ⟨R012304A35542.unsat, ?_⟩
+  refine ⟨Q012304A36233.unsat, ?_⟩
+  refine ⟨Q012304A36234.unsat, ?_⟩
+  refine ⟨Q012304A36235.unsat, ?_⟩
+  refine ⟨Q012304A36243.unsat, ?_⟩
+  refine ⟨Q012304A36244.unsat, ?_⟩
+  refine ⟨R012304A36252.unsat, ?_⟩
+  refine ⟨R012304A36253.unsat, ?_⟩
+  refine ⟨R012304A36254.unsat, ?_⟩
+  refine ⟨Q012304A36262.unsat, ?_⟩
+  refine ⟨Q012304A36324.unsat, ?_⟩
+  refine ⟨Q012304A36325.unsat, ?_⟩
+  refine ⟨Q012304A36333.unsat, ?_⟩
+  refine ⟨R012304A36334.unsat, ?_⟩
+  refine ⟨R012304A36343.unsat, ?_⟩
+  refine ⟨R012304A36424.unsat, ?_⟩
+  refine ⟨R012304A36433.unsat, ?_⟩
+  refine ⟨R012304A42346.unsat, ?_⟩
+  refine ⟨R012304A42363.unsat, ?_⟩
+  refine ⟨R012304A42364.unsat, ?_⟩
+  refine ⟨R012304A42436.unsat, ?_⟩
+  refine ⟨R012304A42454.unsat, ?_⟩
+  refine ⟨Q012304A42623.unsat, ?_⟩
+  refine ⟨R012304A42624.unsat, ?_⟩
+  refine ⟨R012304A42633.unsat, ?_⟩
+  refine ⟨R012304A43262.unsat, ?_⟩
+  refine ⟨R012304A43263.unsat, ?_⟩
+  refine ⟨R012304A43264.unsat, ?_⟩
+  refine ⟨R012304A43265.unsat, ?_⟩
+  refine ⟨Q012304A43354.unsat, ?_⟩
+  refine ⟨R012304A43362.unsat, ?_⟩
+  refine ⟨R012304A43363.unsat, ?_⟩
+  refine ⟨R012304A43443.unsat, ?_⟩
+  refine ⟨R012304A43444.unsat, ?_⟩
+  refine ⟨R012304A43623.unsat, ?_⟩
+  refine ⟨R012304A43642.unsat, ?_⟩
+  refine ⟨R012304A44254.unsat, ?_⟩
+  refine ⟨R012304A44262.unsat, ?_⟩
+  refine ⟨R012304A44335.unsat, ?_⟩
+  refine ⟨R012304A44344.unsat, ?_⟩
+  refine ⟨R012304A44353.unsat, ?_⟩
+  refine ⟨R012304A44362.unsat, ?_⟩
+  refine ⟨Q012304A45245.unsat, ?_⟩
+  refine ⟨R012304A45254.unsat, ?_⟩
+  refine ⟨R012304A45262.unsat, ?_⟩
+  refine ⟨R012304A45343.unsat, ?_⟩
+  refine ⟨R012304A45352.unsat, ?_⟩
+  refine ⟨Q012304A46234.unsat, ?_⟩
+  refine ⟨Q012304A46243.unsat, ?_⟩
+  refine ⟨R012304A46244.unsat, ?_⟩
+  refine ⟨R012304A46252.unsat, ?_⟩
+  refine ⟨R012304A46253.unsat, ?_⟩
+  refine ⟨R012304A46254.unsat, ?_⟩
+  refine ⟨R012304A46262.unsat, ?_⟩
+  refine ⟨Q012304A46324.unsat, ?_⟩
+  refine ⟨Q012304A46325.unsat, ?_⟩
+  refine ⟨Q012304A46333.unsat, ?_⟩
+  refine ⟨R012304A46334.unsat, ?_⟩
+  refine ⟨R012304A46343.unsat, ?_⟩
+  refine ⟨Q012304A52363.unsat, ?_⟩
+  refine ⟨Q012304A52364.unsat, ?_⟩
+  refine ⟨R012304A52436.unsat, ?_⟩
+  refine ⟨R012304A52445.unsat, ?_⟩
+  refine ⟨Q012304A52623.unsat, ?_⟩
+  refine ⟨R012304A53246.unsat, ?_⟩
+  refine ⟨R012304A53262.unsat, ?_⟩
+  refine ⟨R012304A53263.unsat, ?_⟩
+  refine ⟨R012304A54335.unsat, ?_⟩
+  refine ⟨R012304A56234.unsat, ?_⟩
+  refine ⟨R012310A23632.unsat, ?_⟩
+  refine ⟨R012310A23642.unsat, ?_⟩
+  refine ⟨R012310A24642.unsat, ?_⟩
+  refine ⟨R012310A34263.unsat, ?_⟩
+  refine ⟨Q012314A23462.unsat, ?_⟩
+  refine ⟨R012314A23463.unsat, ?_⟩
+  refine ⟨R012314A23464.unsat, ?_⟩
+  refine ⟨R012314A23632.unsat, ?_⟩
+  refine ⟨R012314A23642.unsat, ?_⟩
+  refine ⟨Q012314A24263.unsat, ?_⟩
+  refine ⟨Q012314A24264.unsat, ?_⟩
+  refine ⟨Q012314A24362.unsat, ?_⟩
+  refine ⟨R012314A24363.unsat, ?_⟩
+  refine ⟨R012314A24364.unsat, ?_⟩
+  refine ⟨Q012314A24452.unsat, ?_⟩
+  refine ⟨R012314A24453.unsat, ?_⟩
+  refine ⟨Q012314A24462.unsat, ?_⟩
+  refine ⟨R012314A24642.unsat, ?_⟩
+  refine ⟨Q012314A25262.unsat, ?_⟩
+  refine ⟨R012314A25263.unsat, ?_⟩
+  refine ⟨R012314A25443.unsat, ?_⟩
+  refine ⟨Q012314A26253.unsat, ?_⟩
+  refine ⟨Q012314A26254.unsat, ?_⟩
+  refine ⟨Q012314A26343.unsat, ?_⟩
+  refine ⟨R012314A26344.unsat, ?_⟩
+  refine ⟨Q012314A26433.unsat, ?_⟩
+  refine ⟨R012314A26434.unsat, ?_⟩
+  refine ⟨R012314A32463.unsat, ?_⟩
+  refine ⟨R012314A32464.unsat, ?_⟩
+  refine ⟨Q012314A33363.unsat, ?_⟩
+  refine ⟨Q012314A33364.unsat, ?_⟩
+  refine ⟨R012314A33454.unsat, ?_⟩
+  refine ⟨Q012314A34263.unsat, ?_⟩
+  refine ⟨R012314A34264.unsat, ?_⟩
+  refine ⟨R012314A34353.unsat, ?_⟩
+  refine ⟨R012314A34354.unsat, ?_⟩
+  refine ⟨R012314A35344.unsat, ?_⟩
+  refine ⟨R012314A35353.unsat, ?_⟩
+  refine ⟨Q012314A36244.unsat, ?_⟩
+  refine ⟨R012314A36324.unsat, ?_⟩
+  refine ⟨Q012314A36325.unsat, ?_⟩
+  refine ⟨R012314A36334.unsat, ?_⟩
+  refine ⟨R012314A36424.unsat, ?_⟩
+  refine ⟨R012314A43264.unsat, ?_⟩
+  refine ⟨R012314A43265.unsat, ?_⟩
+  refine ⟨R012314A43355.unsat, ?_⟩
+  refine ⟨R012314A44254.unsat, ?_⟩
+  refine ⟨R012314A44255.unsat, ?_⟩
+  refine ⟨Q012314A45254.unsat, ?_⟩
+  refine ⟨R012314A45255.unsat, ?_⟩
+  refine ⟨Q012314A46325.unsat, ?_⟩
+  refine ⟨R012340A23632.unsat, ?_⟩
+  refine ⟨R012340A23642.unsat, ?_⟩
+  refine ⟨Q012340A24362.unsat, ?_⟩
+  refine ⟨Q012340A24452.unsat, ?_⟩
+  refine ⟨R012340A24453.unsat, ?_⟩
+  refine ⟨Q012340A24462.unsat, ?_⟩
+  refine ⟨Q012340A24542.unsat, ?_⟩
+  refine ⟨R012340A24543.unsat, ?_⟩
+  refine ⟨R012340A24633.unsat, ?_⟩
+  refine ⟨R012340A24634.unsat, ?_⟩
+  refine ⟨R012340A24642.unsat, ?_⟩
+  refine ⟨R012340A25262.unsat, ?_⟩
+  refine ⟨R012340A25263.unsat, ?_⟩
+  refine ⟨R012340A25352.unsat, ?_⟩
+  refine ⟨Q012340A25443.unsat, ?_⟩
+  refine ⟨R012340A25533.unsat, ?_⟩
+  refine ⟨R012340A25534.unsat, ?_⟩
+  refine ⟨Q012340A26233.unsat, ?_⟩
+  refine ⟨Q012340A26234.unsat, ?_⟩
+  refine ⟨R012340A26235.unsat, ?_⟩
+  refine ⟨Q012340A26243.unsat, ?_⟩
+  refine ⟨Q012340A26244.unsat, ?_⟩
+  refine ⟨R012340A26253.unsat, ?_⟩
+  refine ⟨R012340A26254.unsat, ?_⟩
+  refine ⟨Q012340A26262.unsat, ?_⟩
+  refine ⟨Q012340A26263.unsat, ?_⟩
+  refine ⟨R012340A26264.unsat, ?_⟩
+  refine ⟨Q012340A26333.unsat, ?_⟩
+  refine ⟨Q012340A26334.unsat, ?_⟩
+  refine ⟨R012340A26335.unsat, ?_⟩
+  refine ⟨Q012340A26343.unsat, ?_⟩
+  refine ⟨Q012340A26344.unsat, ?_⟩
+  refine ⟨R012340A26362.unsat, ?_⟩
+  refine ⟨Q012340A26433.unsat, ?_⟩
+  refine ⟨Q012340A32623.unsat, ?_⟩
+  refine ⟨Q012340A32624.unsat, ?_⟩
+  refine ⟨Q012340A32625.unsat, ?_⟩
+  refine ⟨Q012340A32633.unsat, ?_⟩
+  refine ⟨R012340A32643.unsat, ?_⟩
+  refine ⟨Q012340A33263.unsat, ?_⟩
+  refine ⟨Q012340A33363.unsat, ?_⟩
+  refine ⟨Q012340A33364.unsat, ?_⟩
+  refine ⟨R012340A33463.unsat, ?_⟩
+  refine ⟨Q012340A33543.unsat, ?_⟩
+  refine ⟨R012340A33553.unsat, ?_⟩
+  refine ⟨R012340A33554.unsat, ?_⟩
+  refine ⟨Q012340A34263.unsat, ?_⟩
+  refine ⟨R012340A34264.unsat, ?_⟩
+  refine ⟨R012340A34353.unsat, ?_⟩
+  refine ⟨R012340A34363.unsat, ?_⟩
+  refine ⟨R012340A34364.unsat, ?_⟩
+  refine ⟨Q012340A34434.unsat, ?_⟩
+  refine ⟨R012340A34534.unsat, ?_⟩
+  refine ⟨R012340A35263.unsat, ?_⟩
+  refine ⟨R012340A35344.unsat, ?_⟩
+  refine ⟨Q012340A36234.unsat, ?_⟩
+  refine ⟨R012340A36235.unsat, ?_⟩
+  refine ⟨Q012340A36244.unsat, ?_⟩
+  refine ⟨Q012340A36324.unsat, ?_⟩
+  refine ⟨Q012340A36325.unsat, ?_⟩
+  refine ⟨R012340A36334.unsat, ?_⟩
+  refine ⟨Q012340A42364.unsat, ?_⟩
+  refine ⟨R012340A42624.unsat, ?_⟩
+  refine ⟨R012340A43264.unsat, ?_⟩
+  refine ⟨R012340A43265.unsat, ?_⟩
+  refine ⟨R012340A44344.unsat, ?_⟩
+  refine ⟨Q012340A46325.unsat, ?_⟩
+  refine ⟨R012345A23632.unsat, ?_⟩
+  refine ⟨R012345A23642.unsat, ?_⟩
+  refine ⟨Q012345A24362.unsat, ?_⟩
+  refine ⟨Q012345A24452.unsat, ?_⟩
+  refine ⟨R012345A24453.unsat, ?_⟩
+  refine ⟨Q012345A24462.unsat, ?_⟩
+  refine ⟨Q012345A24542.unsat, ?_⟩
+  refine ⟨R012345A24543.unsat, ?_⟩
+  refine ⟨R012345A24633.unsat, ?_⟩
+  refine ⟨R012345A24634.unsat, ?_⟩
+  refine ⟨R012345A24642.unsat, ?_⟩
+  refine ⟨R012345A25262.unsat, ?_⟩
+  refine ⟨R012345A25263.unsat, ?_⟩
+  refine ⟨R012345A25352.unsat, ?_⟩
+  refine ⟨Q012345A25443.unsat, ?_⟩
+  refine ⟨R012345A25533.unsat, ?_⟩
+  refine ⟨R012345A25534.unsat, ?_⟩
+  refine ⟨Q012345A26233.unsat, ?_⟩
+  refine ⟨Q012345A26234.unsat, ?_⟩
+  refine ⟨R012345A26235.unsat, ?_⟩
+  refine ⟨Q012345A26243.unsat, ?_⟩
+  refine ⟨Q012345A26244.unsat, ?_⟩
+  refine ⟨R012345A26253.unsat, ?_⟩
+  refine ⟨R012345A26254.unsat, ?_⟩
+  refine ⟨Q012345A26262.unsat, ?_⟩
+  refine ⟨Q012345A26263.unsat, ?_⟩
+  refine ⟨R012345A26264.unsat, ?_⟩
+  refine ⟨Q012345A26333.unsat, ?_⟩
+  refine ⟨Q012345A26334.unsat, ?_⟩
+  refine ⟨R012345A26335.unsat, ?_⟩
+  refine ⟨Q012345A26343.unsat, ?_⟩
+  refine ⟨Q012345A26344.unsat, ?_⟩
+  refine ⟨R012345A26362.unsat, ?_⟩
+  refine ⟨Q012345A26433.unsat, ?_⟩
+  refine ⟨Q012345A32623.unsat, ?_⟩
+  refine ⟨Q012345A32624.unsat, ?_⟩
+  refine ⟨Q012345A32625.unsat, ?_⟩
+  refine ⟨Q012345A32633.unsat, ?_⟩
+  refine ⟨R012345A32643.unsat, ?_⟩
+  refine ⟨Q012345A33263.unsat, ?_⟩
+  refine ⟨Q012345A33363.unsat, ?_⟩
+  refine ⟨Q012345A33364.unsat, ?_⟩
+  refine ⟨R012345A33463.unsat, ?_⟩
+  refine ⟨Q012345A33543.unsat, ?_⟩
+  refine ⟨R012345A33553.unsat, ?_⟩
+  refine ⟨R012345A33554.unsat, ?_⟩
+  refine ⟨Q012345A34263.unsat, ?_⟩
+  refine ⟨R012345A34264.unsat, ?_⟩
+  refine ⟨R012345A34353.unsat, ?_⟩
+  refine ⟨R012345A34363.unsat, ?_⟩
+  refine ⟨R012345A34364.unsat, ?_⟩
+  refine ⟨Q012345A34434.unsat, ?_⟩
+  refine ⟨R012345A34534.unsat, ?_⟩
+  refine ⟨R012345A35263.unsat, ?_⟩
+  refine ⟨R012345A35344.unsat, ?_⟩
+  refine ⟨Q012345A36234.unsat, ?_⟩
+  refine ⟨R012345A36235.unsat, ?_⟩
+  refine ⟨Q012345A36244.unsat, ?_⟩
+  refine ⟨Q012345A36324.unsat, ?_⟩
+  refine ⟨Q012345A36325.unsat, ?_⟩
+  refine ⟨R012345A36334.unsat, ?_⟩
+  refine ⟨Q012345A42364.unsat, ?_⟩
+  refine ⟨R012345A42624.unsat, ?_⟩
+  refine ⟨R012345A43264.unsat, ?_⟩
+  refine ⟨R012345A43265.unsat, ?_⟩
+  refine ⟨R012345A44344.unsat, ?_⟩
+  exact Q012345A46325.unsat
 
 theorem allRefuted236 : AllRefuted236 := allRefuted236_of_unsat allUnsat236
 
