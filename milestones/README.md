@@ -1,6 +1,9 @@
 # Research milestones
 
-The exact optimum remains unresolved. This checkout integrates 191 <= a(9) <=238 edges. Collaborator commit 2a7fe4e4 reports a completed Lean audit for 237; its source closure is not yet integrated here.
+The exact optimum remains unresolved. The integrated interval is 191 <= a(9) <= 236 edges, using the pinned complete contributor audit. The latest research is milestone 45 (sharp endpoint-demand pair refinement); the full manuscript revision is milestone 46. A fresh independent rebuild of the full 236 proof remains pending.
+
+- [Sharp pair endpoint demand](45-pair-endpoint-demand/README.md)
+- [Manuscript revision after the endpoint theorem](46-endpoint-paper-rewrite/README.md)
 
 - [Foundations, witnesses, and numerical hypotheses](01-foundations/README.md)
 - [Layer constructions](02-layer-constructions/README.md)

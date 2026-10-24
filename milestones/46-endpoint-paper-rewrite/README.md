@@ -1,0 +1,13 @@
+# Manuscript revision after the endpoint-demand theorem
+
+The full manuscript has been reviewed and reorganized around proof dependencies. Counting notation now precedes the main theorem. The direct proof of 191 <= a(9) <= 236 remains intact, including the square identity, catalogue interpretation, potential summation, and boundary constants. The numerical hypothesis now precedes the optimality criteria that use it.
+
+The new section develops the sharp outer-transition pair bound seven, its 19-corner endpoint demand, and the sharp bound eight when both endpoints are at distance at least three. It places the existing weighted endpoint principle directly after the new demand sets. Complete 140-, 146-, and 148-edge witnesses are printed, distinguishing sharpness, the shorter-context counterexample, and the endpoint-distance condition.
+
+The finite-model account now uses the replacement cycle and all 4,551,730 retained edges from milestone 44. The older cycle is retained as historical evidence with its excluded phase identified. Local feasibility and record-bank observations have been moved into a separate appendix subsection. The verification discussion distinguishes checked universal statements, finite-model arithmetic, restricted experiments, and unresolved premises.
+
+All 92 previous theorem, lemma, proposition, corollary, conjecture, and definition blocks are preserved, with one new reference label. Three statements are added. All previous labels, the 175-row historical catalogue, the eight previous printed snakes, and the linear forest remain. The verifier checks all 11 printed snakes through 97,646 unordered vertex pairs, checks the new pair counts and endpoint distances, compares the replacement cycle with its saved certificate, and resolves all 122 reference labels.
+
+The existing open source and the repository manuscript are byte-identical. The preamble, authors, and hyperlink/PDF settings are unchanged. Compilation uses the built-in editor compiler on the exact existing source; its receipt is saved in `data/compiler-diagnostic.json`. A successful compile and the source checks do not constitute an all-page visual inspection or a fresh independent rebuild of the archived 236 theorem.
+
+`scripts/rewrite.py` records the one-time transformation from the pinned milestone 45 checkout. `scripts/verify.py` verifies the final saved sources, including subsequent line-breaking adjustments. This revision was explicitly requested after the research round. The longer research goal remains unresolved, and the default five-round revision cadence resumes after this checkpoint.
