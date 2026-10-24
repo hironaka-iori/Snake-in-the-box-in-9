@@ -1,7 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The integrated interval is 191 <= a(9) <= 236 edges, using the pinned complete contributor audit. The latest research is milestone 45 (sharp endpoint-demand pair refinement); the full manuscript revision is milestone 46. A fresh independent rebuild of the full 236 proof remains pending.
+The exact optimum remains unresolved. The integrated interval is 191 <= a(9) <= 236 edges, using the pinned complete contributor audit. The latest research is milestone 47 (three count-one exclusions and a replacement-cycle obstruction); the full manuscript revision remains milestone 46. A fresh independent rebuild of the full 236 proof remains pending.
 
+- [Three transition-pattern singleton restrictions](47-critical-singleton-patterns/README.md)
 - [Sharp pair endpoint demand](45-pair-endpoint-demand/README.md)
 - [Manuscript revision after the endpoint theorem](46-endpoint-paper-rewrite/README.md)
 

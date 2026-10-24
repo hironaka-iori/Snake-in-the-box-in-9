@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "lean_audits": 12,
+  "audited_theorems": [
+    "Snake9.LocalWindow.CycleWindow471.refuted",
+    "Snake9.LocalWindow.CycleWindow471.excluded_in_snake",
+    "Snake9.LocalWindow.CycleWindow472.refuted",
+    "Snake9.LocalWindow.CycleWindow472.excluded_in_snake",
+    "Snake9.LocalWindow.CycleWindow473.refuted",
+    "Snake9.LocalWindow.CycleWindow473.excluded_in_snake",
+    "Snake9.LocalWindow.SingletonPatterns.exclusion471",
+    "Snake9.LocalWindow.SingletonPatterns.lower471",
+    "Snake9.LocalWindow.SingletonPatterns.exclusion472",
+    "Snake9.LocalWindow.SingletonPatterns.lower472",
+    "Snake9.LocalWindow.SingletonPatterns.exclusion473",
+    "Snake9.LocalWindow.SingletonPatterns.lower473"
+  ],
+  "proofs": [
+    {
+      "case": 471,
+      "clauses": 282,
+      "active_variables": 276,
+      "derived_clauses": 280,
+      "hints": 780
+    },
+    {
+      "case": 472,
+      "clauses": 456,
+      "active_variables": 455,
+      "derived_clauses": 480,
+      "hints": 1295
+    },
+    {
+      "case": 473,
+      "clauses": 829,
+      "active_variables": 807,
+      "derived_clauses": 691,
+      "hints": 3225
+    }
+  ],
+  "local_checks": 14,
+  "bank_paths": 131,
+  "bank_occurrences": 6668,
+  "newly_excluded_graph_edges": 57837,
+  "remaining_graph_edges": 4493893,
+  "normalized_minimum_mean": "42/11",
+  "new_cycle_has_no_count_one": true,
+  "sources_sha256": {
+    "CycleExclusion471.lean": "1ba59418d915521d7071121a540aa6f51987264d08ee6666d8cbad796d1bc22d",
+    "CycleExclusion472.lean": "a0c6253c8198afc106ff626dc2d0f83ec15be0ba6eeca3dccf21aea2d36a7c3c",
+    "CycleExclusion473.lean": "d24063fc5b15238f47e99901a3ceafcbd7332673d490d34df60186bf303f2f76",
+    "SingletonPatterns.lean": "d83328cb41db619da3020ccec671eee82565a96ea27760ab4e9b5a875407b865",
+    "LocalWindowCnf/CycleWindow471.lean": "ef86fc4bf4a177c36b21277361c9c682c7796db6352d73e61218ed7f34459c3b",
+    "LocalWindowCnf/CycleWindow472.lean": "7edecd1517cb893e1b79e5f8710a7e432cb78f2b0d7ce06a818dbae13513959d",
+    "LocalWindowCnf/CycleWindow473.lean": "4c288ba9220de43678d21c6289eeb52ab4b72daaf22fe24d2bf316375cf52e5a",
+    "LocalWindowSat/CycleWindow471.lean": "4703eed95fa768c3efe0e7df45253c60c287fc346b1e2cab7fab1b32eb381257",
+    "LocalWindowSat/CycleWindow472.lean": "87866ce059c30761a8fe4a9714da1ebcfae52e222e245b6485d3708e79860c2f",
+    "LocalWindowSat/CycleWindow473.lean": "bab749e12aef5f7c38295800fba2ad77435ba0bcbc659f96ab027077ef4e93a4",
+    "LocalWindowUnsat/CycleWindow471.lean": "c171dc09d87d8bc653b0629344547a3a43416dd02080b67a9f0280edf875b021",
+    "LocalWindowUnsat/CycleWindow472.lean": "413ff32f0dd7d11ac925e906e4c9ad17f92d8a4262c6a16e3df948199f323bd9",
+    "LocalWindowUnsat/CycleWindow473.lean": "e4c456ecd6d8900d6f9990645cfc88d7e99cc031f7a38d119b07badf9e55876d",
+    "LocalWindowUnsat/CycleWindow471/Data0.lean": "f9a4e3431042004dd2adb92353e6a4f373a9e563b2abd3cd3444820f12d82d48",
+    "LocalWindowUnsat/CycleWindow471/Data1.lean": "6596f6b6c171a94610d3d123ef183fd278d37c763f05976c40095feea0ce0556",
+    "LocalWindowUnsat/CycleWindow471/Check1.lean": "c69511b889f78b88de0ea6c6d2f95f38c1d0d69c2dd2df01548c7cd17d56abfe",
+    "LocalWindowUnsat/CycleWindow472/Data0.lean": "8ffd722faf37190c545388a502f397862849a5704aac74c6cbbda5bf94259533",
+    "LocalWindowUnsat/CycleWindow472/Data1.lean": "09460bcacb8ea647f7dac964b8b72380ff6096eddd015093c7b7a2b726609195",
+    "LocalWindowUnsat/CycleWindow472/Check1.lean": "4d663e5a8a44b226452b5f088716267c24750c4120042db66ea241b2fb98c4f4",
+    "LocalWindowUnsat/CycleWindow473/Data0.lean": "730afbc454c23fd67bf16c3904c62509ee3a62016abde21953b41e0a51ed2b7e",
+    "LocalWindowUnsat/CycleWindow473/Data1.lean": "bf1a7f84e969d01aeb0a8f3c544be0e0acc44b2a930a5a69bd7421d5c2cbd29f",
+    "LocalWindowUnsat/CycleWindow473/Check1.lean": "45f454d7da93c8b6f48df0268dee0e09804458f610b79a57d03f921d5a8ff6aa"
+  },
+  "scope": "Three arbitrary-coordinate singleton exclusions checked in Lean. Exact finite graph mean independently checked; no improved global bound or complete Lean graph-to-snake bridge."
+}
