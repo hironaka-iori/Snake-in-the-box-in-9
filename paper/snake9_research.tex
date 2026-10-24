@@ -36,7 +36,7 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-The maximum number of edges in an induced path of the nine-dimensional binary hypercube is denoted by $a(9)$. The results assembled here give $191\le a(9)\le238$. The lower bound is a published construction, reproduced as an explicit transition sequence. The upper bound follows from the exact identity $T+2s_0+35v=9214$, where $v$ is the number of selected vertices, $T$ is the total number of singleton squares, and $s_0$ is the number of empty squares. A finite family of 175 forbidden windows and an integer potential imply $2T\ge7(v-1)-36$, which yields the bound 238. The proof separates the geometric interpretation of each window, the checked finite refutations, and the summation argument. We then retain the empty-square term through integer shares, prove sharp distance-three singleton inequalities and asymmetric distance-four restrictions, and establish a three-square share bonus and further overlap exclusions. These refinements have not yet produced a stronger uniform bound. Explicit counterexamples distinguish endpoint maximality and local feasibility from global optimality. The value 196 remains a numerical conjecture. The 238 theorem has a successful Lean dependency audit against an incrementally built Linux library; an independent rebuild of that complete theorem remains pending.
+Let $a(9)$ be the maximum number of edges in an induced path of the nine-dimensional binary hypercube. The results assembled here establish $191\le a(9)\le236$. The lower bound is a published construction, reproduced as an explicit transition sequence. The upper bound follows from the exact identity $T+2s_0+35v=9214$, where $v$ is the number of selected vertices, $T$ is the total number of singleton squares, and $s_0$ is the number of empty squares. A finite family of 175 forbidden windows first yields the bound 238. A radius-four family of 732 forbidden windows strengthens the potential inequality to $11T\ge42(v-1)-203$, giving 236. The proof separates the geometric interpretation of each window, the checked finite refutations, the potential table, and the summation with endpoint terms. Further results retain the empty-square term through integer shares, prove sharp distance-three inequalities and asymmetric distance-four restrictions, and establish a three-square share bonus and overlap exclusions. These refinements do not yet give a smaller uniform bound. Explicit counterexamples distinguish endpoint maximality and local feasibility from global optimality. The value 196 remains a numerical conjecture. The complete 236 theorem has a successful Lean dependency audit against an incrementally built Linux library; an independent rebuild remains pending.
 \end{abstract}
 \clearpage
 \setcounter{tocdepth}{1}
@@ -64,10 +64,10 @@ Orland et al. supply 191-edge snakes in dimension nine and a public collection o
 \begin{theorem}[Main result]\label{thm:main}
 The maximum edge length of an induced path in $\Q_9$ satisfies
 \[
-\boxed{191\le a(9)\le238.}
+\boxed{191\le a(9)\le236.}
 \]
 \end{theorem}
-Theorem~\ref{thm:lower} proves the lower bound from a displayed sequence. The upper bound is deduced in Section~\ref{sec:upper-proof}. Its logical dependencies are as follows. Every selected vertex has at least one singleton square, and every endpoint has at least four. The exact square census converts a lower bound on the sum of these counts into an upper bound on length. A finite family of local exclusions supplies a potential inequality, whose sum gives the required lower bound. The computer-assisted steps are identified explicitly; the numerical search outcomes in the appendices are separate from these proof premises.
+Theorem~\ref{thm:lower} proves the lower bound from a displayed sequence. The upper bound is deduced in Theorem~\ref{thm:upper236}. Section~\ref{sec:upper-proof} first develops the argument for 238 and then proves its radius-four strengthening to 236. Its logical dependencies are as follows. Every selected vertex has at least one singleton square, and every endpoint has at least four. The exact square census converts a lower bound on the sum of these counts into an upper bound on length. A finite family of local exclusions supplies a potential inequality, whose sum gives the required lower bound. The computer-assisted steps are identified explicitly; the numerical search outcomes in the appendices are separate from these proof premises.
 
 For a snake $P=(x_0,\ldots,x_m)$, write $S=V(P)$ and $v=|S|=m+1$. Thus $m$ always counts edges and $v$ counts vertices. A coordinate square is a two-dimensional face of the cube. Let $s_k$ count the distinct coordinate squares containing exactly $k$ vertices of $S$. For $x\in S$, let $\alpha_S(x)$ count squares meeting $S$ only at $x$, and put
 \[
@@ -162,7 +162,7 @@ Let $S$ be the vertex set of a snake, and suppose $v,v+e_a,v+e_b\in S$, with $a\
 The two specified neighbors exhaust the selected neighbors of $v$, since a vertex of an induced path has degree at most two. A coordinate square using $a$ or $b$ therefore contains another selected vertex and is not a singleton square at $v$. For a pair avoiding $a$ and $b$, both adjacent corners $v+e_c$ and $v+e_d$ are absent. The square is a singleton precisely when its opposite corner is absent. There are $\binom{7}{2}=21$ such pairs, and every singleton square is counted once.
 \end{proof}
 
-\section{From local exclusions to the bound 238}\label{sec:upper-proof}
+\section{From local exclusions to the bounds 238 and 236}\label{sec:upper-proof}
 \subsection{Normalization and necessary local conditions}
 A finite transition word is normalized by replacing its distinct coordinate labels, in order of first appearance, by $0,1,2,\ldots$. This replacement extends to a permutation of all nine coordinates. Translation makes its first vertex zero. Both operations preserve adjacency, endpoints, and singleton counts. Reversal permits the same exclusion to be used in either orientation.
 
@@ -261,7 +261,58 @@ Every snake in $\Q_9$ has at most 238 edges. Consequently $191\le a(9)\le238$.
 Lemma~\ref{lem:finite-exclusions} supplies all exclusions required by Proposition~\ref{prop:direction238}, and Lemma~\ref{lem:potential-certificate} supplies the table inequality. Apply that proposition and the explicit lower bound in Theorem~\ref{thm:lower}.
 \end{proof}
 
-This proof establishes the main interval without using the conjectured value 196, the later share estimates, or any restricted construction search. The certificate audit and the remaining independent-rebuild limitation are stated in Section~\ref{sec:verification}.
+This first bound uses neither the conjectured value 196 nor the later share estimates or restricted construction searches. The next refinement uses the same counting identity and a stronger exclusion family. The certificate audit and the remaining independent-rebuild limitation are stated in Section~\ref{sec:verification}.
+
+
+\subsection{The radius-four refinement to 236}\label{sec:radius-four-236}
+Replace the radius-three neighborhood by the union of the Hamming balls of radius four around the prescribed centres. Retain the same count symbols, state representation, normalization, and necessary degree, endpoint, and acyclicity conditions. Let $\mathcal F_4$ be the family of 732 normalized direction-and-count pairs in the supplementary catalogue~\cite{radiusfourarchive}. Each pair specifies two to five consecutive internal centres, with the symbol six still representing the interval $[6,21]$. The catalogue, its geometric interpretation, and the potential table are fixed proof data.
+
+\begin{lemma}[Radius-four exclusions and potential]\label{lem:radius-four-certificate}
+No window of a snake in $\Q_9$ belongs to $\mathcal F_4$. There is a nonnegative integer potential $\Psi$ on the same 44064 states, bounded above by 63, such that every induced state transition avoiding $\mathcal F_4$, with appended count symbol $b$, satisfies
+\begin{equation}\label{eq:radius-four-step}
+42+\Psi(w)\le11b+\Psi(u).
+\end{equation}
+\end{lemma}
+\begin{proof}[Computer-assisted proof]
+For each of the 732 rows, a hypothetical occurrence is translated and its coordinates are permuted to the canonical window. Restricting the snake to the radius-four neighborhood provides a selected-vertex assignment. The missing-corner identity gives the specified count variables; actual degrees and endpoint indicators give the remaining auxiliary variables. The degree conditions follow from the induced-path definition, and Lemma~\ref{lem:subset-low-degree} justifies each retained cycle exclusion. Thus every retained input clause is satisfied by this assignment. A resolution refutation of that input, replayed through the sound proof checker described above, ends in the empty clause. The resulting contradiction excludes the row. The arbitrary-window reduction, clause implications, all 732 refutations, and their assembly have passed the recorded Lean checks~\cite{radiusfourarchive}.
+
+The potential is specified by an integer at each state. There are 34 normalized induced seven-direction shapes and 132 normalized induced eight-direction shapes. Checking each of the latter against all $6^5$ count choices covers $1\,026\,432$ candidate transitions. Discard nonpermitted transitions and verify~\eqref{eq:radius-four-step} for each remaining transition. The kernel checks this assertion in 34 parts. A separate enumeration made for this revision verifies the same inequality for all 611613 permitted transitions and finds potential values between zero and 48. The bound 63 stated here is the weaker bound used by the Lean summation, and is sufficient. The independent enumeration verifies the potential assertion only; the window exclusions are supplied by the preceding proof certificates.
+\end{proof}
+
+\begin{proposition}[Radius-four internal count sum]\label{prop:radius-four-sum}
+For every $m$-edge snake with $m\ge7$,
+\begin{equation}\label{eq:radius-four-sum}
+42m\le11\sum_{j=1}^{m-1}\alpha_j+291.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Use the states indexed by $i$ in the proof of Lemma~\ref{lem:internal-total}, and let $\Psi_i$ be their new potentials. The exclusion assertion in Lemma~\ref{lem:radius-four-certificate} makes every state transition along the snake permitted. Sum~\eqref{eq:radius-four-step} over $0\le i\le m-8$ to obtain
+\[
+42(m-7)+\Psi_{m-7}\le11\sum_{j=7}^{m-1}b_j+\Psi_0.
+\]
+For $m=7$ the sum is empty and the same assertion holds. Since $\Psi_{m-7}\ge0$, $\Psi_0\le63$, $b_j\le\alpha_j$, and the first six internal counts sum to at least six,
+\[
+42(m-7)\le11\sum_{j=1}^{m-1}\alpha_j-66+63.
+\]
+Adding 294 gives~\eqref{eq:radius-four-sum}; in particular, its boundary constant is $294-66+63=291$.
+\end{proof}
+
+\begin{theorem}[Verified upper bound 236]\label{thm:upper236}
+Every snake in $\Q_9$ has at most 236 edges. Consequently $191\le a(9)\le236$.
+\end{theorem}
+\begin{proof}
+If $m<7$, the assertion is immediate. Otherwise both endpoint counts are at least four, so Proposition~\ref{prop:radius-four-sum} gives
+\[
+42m\le11(T-8)+291=11T+203.
+\]
+The exact square identity and $s_0\ge0$ imply $11T+385(m+1)\le101354$. Combining the two inequalities yields
+\[
+427m\le101172<427\cdot237=101199.
+\]
+The integer $m$ is therefore at most 236. The lower bound follows from Theorem~\ref{thm:lower}.
+\end{proof}
+
+All 732 local premises of this theorem have been discharged in the archived development. The recorded build and the independent checks made for this revision have different scopes, detailed in Section~\ref{sec:verification}. The theorem still discards $s_0$; the subsequent share estimates retain information omitted from this bound.
 
 \section{Sharp restrictions on two singleton counts}\label{sec:distance-three-pair}
 The next inequalities follow from explicit six-cycles near two selected vertices. The resulting inequalities impose no restrictions on the four intervening singleton counts.
@@ -851,11 +902,13 @@ For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, 
 Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
 
 \section{Verification status and unresolved questions}\label{sec:verification}
-The mathematical claims have different evidential scopes. Explicit transition sequences give existence statements only after all distinctness and adjacency conditions have been checked. A local exclusion requires a geometric interpretation of its input conditions as well as a sound contradiction certificate. A global upper bound additionally requires coverage of every relevant window and an aggregation argument with endpoint terms. The proof of Theorem~\ref{thm:upper238} follows this complete dependency chain.
+The mathematical claims have different evidential scopes. Explicit transition sequences give existence statements only after all distinctness and adjacency conditions have been checked. A local exclusion requires a geometric interpretation of its input conditions as well as a sound contradiction certificate. A global upper bound additionally requires coverage of every relevant window and an aggregation argument with endpoint terms. The proofs of Theorems~\ref{thm:upper238} and~\ref{thm:upper236} follow this complete dependency chain.
 
 The 191-edge witness, the geometric counting lemmas, and the assembled 241-edge theorem have successful Lean checks. The 241 proof, including its 22 local refutations, has source-build and final dependency-audit receipts on two platforms. The stronger 238 theorem has a successful final dependency audit on Linux against an incrementally built library. Its audited dependencies are propositional extensionality, classical choice, and quotient soundness. An independent rebuild of the complete 238 proof in a fresh directory remains pending. This reproducibility limitation must be distinguished from a missing mathematical hypothesis: the assembled theorem has discharged all 175 window premises.
 
 The 175 refutations contain about 4.6 million derived clauses and 270 million antecedent references. Their replay was divided into 2803 kernel checks, using about 40 kernel-hours in total, with at most 4~GB per check. These figures describe the recorded verification; they do not substitute for the soundness argument. For 56 windows, alternative refutations of the same inconsistent core were used. Each was checked under the same logical rules.
+
+The stronger 236 theorem has a recorded successful Linux audit in the pinned contributor development~\cite{radiusfourarchive}. Its final existence-and-upper-bound theorem uses the same snake definition and lists only propositional extensionality, classical choice, and quotient soundness. The saved replay summary reports all 732 refutations completed, with 7190 kernel checks across the reused and new refutations and approximately 100 kernel-hours. These totals concern the whole 732-window family. The local copy added for this revision preserves selected proof interfaces, the complete exclusion catalogue, and the audit receipts; it does not claim a fresh local rebuild of that complete dependency chain. The independent potential enumeration and four new Lean checks verify the arithmetic of the printed summation and final bound, conditional on the stated window and table premises. They supplement the contributor's complete audit. A clean independent rebuild of the full 236 theorem remains a reproducibility task.
 
 The sharp distance-three inequalities, their sharpness witnesses, the three-square bonus, the weighted accounting results, and the two mixed-count exclusions have also passed their stated Lean checks. The asymmetric distance-four restrictions and their excess accounting have 17 further dependency audits; positive local configurations are checked separately and establish no full-snake sharpness claim. Numerical searches elsewhere in the paper retain their narrower labels. In particular, an unresolved solver run proves neither feasibility nor impossibility; a local forest proves feasibility only in its local model; and an exact mean of one saved state cycle is not a certificate of the minimum over all cycles.
 
@@ -2109,7 +2162,7 @@ At radius four, a forest exists with interior endpoint budget two. At radius fiv
 
 A Boolean encoding of the radius-five, budget-two model records the exact cycle cuts. Removing irrelevant clauses and replacing auxiliary counters by direct restrictions on triples of endpoint indicators gives a 567-clause core involving 252 Boolean variables. Its certificate consists of 398 derived clauses obtained by reverse unit propagation: assume the negation of the proposed clause, propagate the cited clauses, and obtain a contradiction. The resulting Boolean contradiction has been independently machine-checked through ordinary logical proof steps. This certifies the explicit formula; no geometric exclusion is asserted without the remaining interpretation proof.
 
-The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the current interval $191\le a(9)\le238$.
+The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the current interval $191\le a(9)\le236$.
 
 \subsection{An auxiliary conditional singleton estimate}
 \begin{proposition}[Conditional estimate from a singleton surplus]
@@ -2216,7 +2269,7 @@ A five-vertex induced window has, up to translation and permutation of coordinat
 
 For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. For the repeated-coordinate case, the explicit Boolean contradiction has now been checked in Lean, using a sequence of smaller proofs after the single-file translation exceeded available memory. The distinct-coordinate certificate remains under verification. These earlier certificate checks did not yet prove the geometric premise of Proposition~\ref{prop:conditional244}; the complete window proof in Section~\ref{sec:upper-proof} now establishes it.
 
-The missing-corner identity, the threshold-counter equivalence, and their connection for each normalized center have been checked in Lean. The finite corner lists have 21 distinct entries and agree with the eligible coordinate pairs. Generic endpoint-count and degree clauses, together with all 112 distinct cycle cuts retained by the two Boolean cores, have also been checked. Completing this particular approach would still require assembling the exact input clauses under one assignment and establishing the reduction from arbitrary five-vertex windows. This earlier route left the geometric assembly incomplete. The window proof in Section~\ref{sec:upper-proof} establishes the current interval $191\le a(9)\le238$.
+The missing-corner identity, the threshold-counter equivalence, and their connection for each normalized center have been checked in Lean. The finite corner lists have 21 distinct entries and agree with the eligible coordinate pairs. Generic endpoint-count and degree clauses, together with all 112 distinct cycle cuts retained by the two Boolean cores, have also been checked. Completing this particular approach would still require assembling the exact input clauses under one assignment and establishing the reduction from arbitrary five-vertex windows. This earlier route left the geometric assembly incomplete. The radius-four refinement in Section~\ref{sec:upper-proof} establishes the current interval $191\le a(9)\le236$.
 
 \section{Explicit transition sequences and blockers}\label{app:witness}
 All coordinates are numbered from zero. Spaces only separate groups; start at the zero vertex unless another initial vertex is stated, and apply each coordinate flip in order.
@@ -2336,5 +2389,9 @@ The union has 60 vertices, including zero. It is a linear forest with 14 compone
 \bibitem{lukito} A.~Lukito and A.~J. van Zanten. A New Non-Asymptotic Upper Bound for Snake-in-the-Box Codes. \emph{Journal of Combinatorial Mathematics and Combinatorial Computing} 39 (2001), 147--156. \url{https://combinatorialpress.com/article/jcmcc/Volume%20039/vol-039-paper%2012.pdf}.
 \bibitem{proofarchive} I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Snake-in-the-box in dimension nine: proof certificates and research record}. Archived repository state, 23 October 2026. \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/ffdf1b94403396a1b8ddaffdae419bb897ba5cf8}.
 \bibitem{pairarchive} I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Asymmetric singleton-count restrictions at Hamming distance four: certificates and local witnesses}. Archived research record, 24 October 2026. \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/1f2a40aae91283c43f9de759f9d2d572d30a10ac/milestones/38-four-position-obstruction}.
+\bibitem{radiusfourarchive}
+Snake-in-the-box project contributors, radius-four proof archive, revision \texttt{7cb52aad}, 24 October 2026. The pinned sources, final theorem, and Linux replay and dependency-audit receipts are available at
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/7cb52aad9fbb83aea8a6ced73c9a18a1ad531c9b}.
+
 \end{thebibliography}
 \end{document}

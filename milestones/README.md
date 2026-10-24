@@ -53,3 +53,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Logical manuscript rewrite and verification](37-logical-paper-rewrite/README.md)
 
 - [Asymmetric restrictions at Hamming distance four](38-four-position-obstruction/README.md)
+
+- [39: Audited radius-four bound of 236](39-audited-bound-236/README.md): pinned contributor theorem, complete exclusion catalogue, independent potential checks, four new Lean arithmetic checks, and revised manuscript proof.
