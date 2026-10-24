@@ -57,3 +57,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [39: Audited radius-four bound of 236](39-audited-bound-236/README.md): pinned contributor theorem, complete exclusion catalogue, independent potential checks, four new Lean arithmetic checks, and revised manuscript proof.
 
 - [40: Intervening-count restrictions](40-intervening-counts/README.md): two new three-position implications, eight Lean audits, 23 checked local forests, a saved cyclic relaxation, and exclusion of the identified low-mean cycle occurrence.
+
+- [41: Joint intervening-count bound and excess accounting](41-joint-intervening-sum/README.md): sum12 theorem, ten Lean audits, conditional charge contribution, and full published-bank controls.

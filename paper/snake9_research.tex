@@ -702,7 +702,43 @@ Acyclicity is essential to this particular local argument. The degree-and-endpoi
 
 Separate local forests have counts $(3,6,5,5,10,11,3)$ and $(3,6,10,9,6,5,3)$. They attain the individual lower thresholds of five. Extension of these forests to complete snakes is unresolved. Proposition~\ref{prop:intervening-counts} excludes the saved periodic diagnostic occurrence $(3,4,4,5,5,3,3)$, which the two-count inequalities admitted. Excluding this occurrence alone supplies no new uniform bound or certified minimum cycle mean.
 
-Further numerical tests suggest, under the same two hypotheses, that $\alpha_{r+3}+\alpha_{r+6}\ge12$ and $\sum_{j=2}^{6}\alpha_{r+j}\ge24$. Local forests attain the two proposed thresholds. These joint estimates require separate proof certificates and counter interpretations; they are not consequences of the two individual bounds of five and are not used in any theorem here.
+The joint sum admits a stronger conclusion than adding the two individual lower bounds.
+
+\begin{proposition}[Joint intervening-count bound]\label{prop:joint-intervening}
+Under the hypotheses of Proposition~\ref{prop:intervening-counts},
+\[
+\alpha_{r+3}+\alpha_{r+6}\ge12.
+\]
+\end{proposition}
+\begin{proof}[Computer-assisted proof]
+Normalize the same eight-transition window. At the third and sixth internal centres, list the 21 eligible opposite corners. Concatenate the two lists, retaining the multiplicity of any repeated vertex. A corner contributes one precisely when it is absent from the selected set. Therefore the number of absent entries in this 42-entry list is exactly the sum of the two singleton counts. This identity follows by counting each list separately and adding; its general version for any finite list of centres has been checked in Lean.
+
+Assume for contradiction that the joint sum is at most 11. Add the corresponding threshold counter to the ordinary local conditions, retaining only the two distant-count upper bounds of three. The counter clauses are justified by their actual input count, using the threshold-counter argument of Proposition~\ref{prop:window-counter}. The joint counter is interpreted separately from the endpoint and individual-count counters. This ensures that its assumed bound is exactly the hypothetical singleton sum.
+
+Every induced path realizing the window would satisfy these clauses and the retained cycle exclusions. The extracted input has 4097 clauses and 1401 variables. A resolution refutation with 5222602 antecedent references was replayed in 174 segments, grouped into 29 kernel checks. The exact preservation of both singleton counts under translation and coordinate permutation transfers the contradiction to arbitrary coordinate labels. The counter interpretation, refutation, and arbitrary-snake deduction have all passed their recorded Lean checks~\cite{jointinterveningarchive}. Thus the assumed upper sum of 11 is impossible.
+\end{proof}
+
+A saved local forest with counts $(3,5,6,8,10,6,3)$ attains joint sum 12. Its induced degrees, endpoint conditions, acyclicity, and singleton counts have an independent check. Extension to a complete snake remains unresolved.
+
+\begin{corollary}[Joint-count excess contribution]\label{cor:joint-intervening-excess}
+Write $b_j=\min\{6,\alpha_j\}$ and $\delta_j=\alpha_j-b_j$. Let $J$ be a set of starting positions, in a fixed orientation of the path, satisfying the hypotheses of Proposition~\ref{prop:joint-intervening} and
+\[
+b_{r+3}+b_{r+6}\le11.
+\]
+Then
+\[
+|J|\le2\sum_{j=0}^{m}\delta_j,
+\qquad
+G_{12}\ge24\sum_{j=0}^{m}b_j+12|J|+\sum_{x\in S}\sigma_{12}(x).
+\]
+\end{corollary}
+\begin{proof}
+For each $r\in J$, subtract the upper bound on the two truncated counts from the lower bound of 12 on the actual counts. This gives $\delta_{r+3}+\delta_{r+6}\ge1$. Each fixed path position can appear at most once at offset three and at most once at offset six, since both maps $r\mapsto r+3$ and $r\mapsto r+6$ are injective. Summing over $J$ gives the first inequality. Substitute $T=\sum_j b_j+\sum_j\delta_j$ into $G_{12}=24T+\sum_x\sigma_{12}(x)$ and use $24\sum_j\delta_j\ge12|J|$. The excess implication, finite-set summation, and charge arithmetic have also been checked in Lean.
+\end{proof}
+
+The excess in this corollary is the same budget used by other count-excess estimates. Adding their bonuses requires a common multiplicity argument. No positive lower bound on $|J|$ has been established. An independent check of the 131 published bank paths finds 1442 oriented occurrences of the direction pattern, but none satisfies both distant-count caps. This observation supplies no frequency theorem.
+
+The further estimate $\sum_{j=2}^{6}\alpha_{r+j}\ge24$ under the same two caps remains numerical. A local forest attains 24, but the exclusion below 24 still requires its own counter interpretation and proof replay. It is not used in the preceding propositions or the global upper bound.
 
 \section{What a stronger upper bound still requires}\label{sec:closure}
 The established local inequalities can enter a global proof only through an accounting rule that prevents repeated use of the same contribution. Lemma~\ref{lem:share-packing}, the multiplicity bounds for count excess, and Corollary~\ref{cor:occurrence-share} supply such rules. A positive density of the relevant configurations, or a finite potential covering every allowed alternative, is still required.
@@ -940,7 +976,7 @@ The 175 refutations contain about 4.6 million derived clauses and 270 million an
 
 The stronger 236 theorem has a recorded successful Linux audit in the pinned contributor development~\cite{radiusfourarchive}. Its final existence-and-upper-bound theorem uses the same snake definition and lists only propositional extensionality, classical choice, and quotient soundness. The saved replay summary reports all 732 refutations completed, with 7190 kernel checks across the reused and new refutations and approximately 100 kernel-hours. These totals concern the whole 732-window family. The local copy added for this revision preserves selected proof interfaces, the complete exclusion catalogue, and the audit receipts; it does not claim a fresh local rebuild of that complete dependency chain. The independent potential enumeration and four new Lean checks verify the arithmetic of the printed summation and final bound, conditional on the stated window and table premises. They supplement the contributor's complete audit. A clean independent rebuild of the full 236 theorem remains a reproducibility task.
 
-The sharp distance-three inequalities, their sharpness witnesses, the three-square bonus, the weighted accounting results, and the two mixed-count exclusions have also passed their stated Lean checks. The intervening-count restrictions have eight additional dependency audits, covering both refutations, their geometric interpretations, and arbitrary coordinate normalization. The asymmetric distance-four restrictions and their excess accounting have 17 further dependency audits; positive local configurations are checked separately and establish no full-snake sharpness claim. Numerical searches elsewhere in the paper retain their narrower labels. In particular, an unresolved solver run proves neither feasibility nor impossibility; a local forest proves feasibility only in its local model; and an exact mean of one saved state cycle is not a certificate of the minimum over all cycles.
+The sharp distance-three inequalities, their sharpness witnesses, the three-square bonus, the weighted accounting results, and the two mixed-count exclusions have also passed their stated Lean checks. The joint intervening-count bound and its excess accounting have ten additional dependency audits, including the general concatenated-counter identity and exact count transport. The intervening-count restrictions have eight additional dependency audits, covering both refutations, their geometric interpretations, and arbitrary coordinate normalization. The asymmetric distance-four restrictions and their excess accounting have 17 further dependency audits; positive local configurations are checked separately and establish no full-snake sharpness claim. Numerical searches elsewhere in the paper retain their narrower labels. In particular, an unresolved solver run proves neither feasibility nor impossibility; a local forest proves feasibility only in its local model; and an exact mean of one saved state cycle is not a certificate of the minimum over all cycles.
 
 The exact optimum remains unresolved. No 192-edge construction has been obtained in the work reported here, and no universal exclusion of length 192 has been established. For the empty-square approach, the principal remaining obligation is a verified lower estimate for $G_{12}$ on every snake, including all alternatives to the currently charged patterns. For construction, the joining and contraction criteria identify valid search families, but the restricted failures do not exclude their complements. The conjecture $a(9)=196$ remains compatible with the proved interval and requires both a 196-edge construction and a 197-edge exclusion.
 
@@ -2426,6 +2462,10 @@ Snake-in-the-box project contributors, radius-four proof archive, revision \text
 \bibitem{interveningarchive}
 Snake-in-the-box project contributors, intervening-count certificates and local configurations, 24 October 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/db60eaf8c341c4903cc22e1c7ea677c2338674d0/milestones/40-intervening-counts}.
+
+\bibitem{jointinterveningarchive}
+Snake-in-the-box project contributors, joint intervening-count proof and excess accounting, 24 October 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/4b5effa07f12f9995fbfed8442d216a2fb3470a0/milestones/41-joint-intervening-sum}.
 
 \end{thebibliography}
 \end{document}
