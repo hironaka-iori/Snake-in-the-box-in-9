@@ -45,3 +45,5 @@ Unconditional triple-sum estimates were also tested. The local model admits coun
 Run `scripts/probe.py` and `scripts/extend_probes.py` for the 40 numerical probes. `scripts/certify.py` reuses milestone38's ordinary-core generator and adds the explicitly saved cycle cuts. Run `scripts/replay.ps1 -Case 401`, then case402, then `scripts/check.ps1` for the normalized statements. Run `scripts/archive.py --pack` and `scripts/verify.py` for the final evidence gate.
 
 The scripts reuse the existing Lean4.19 support environment. They do not claim a clean rebuild of all imported support. The independent geometry checker verifies the saved positive configurations, all cycle cuts, core extraction, archive hashes, and the exact saved critical-cycle occurrence. Native solver exclusions outside the two replayed cores retain their numerical status.
+
+The current manuscript and existing editor source are synchronized. The desktop editor compiler succeeded on the revised source; data/compiler-diagnostic.json records its source hash. This confirms compilation, without claiming a visual audit of every page.

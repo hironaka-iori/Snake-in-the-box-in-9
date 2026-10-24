@@ -35,6 +35,8 @@ assert not statements(old)-statements(new)
 assert sum(statements(new).values())==sum(statements(old).values())+1
 a=r'\section{Explicit transition sequences and blockers}';b=r'\begin{thebibliography}'
 assert old[old.index(a):old.index(b)].strip()==new[new.index(a):new.index(b)].strip()
-out=dict(status='PASSED',baseline=BASE,paper_sha256=hashlib.sha256(p.read_bytes()).hexdigest(),editor_identical=True,preamble_preserved=True,old_statements_preserved=sum(statements(old).values()),added_statements=1,witness_appendix_unchanged=True,labels=len(labels),latex_compilation='Blocked before TeX by the Windows split-writable-root restricted-token runner; no rendered-page verification.')
+compiler=json.loads((HERE/'data/compiler-diagnostic.json').read_text())
+assert compiler['kind']=='success' and compiler['paper_sha256']==hashlib.sha256(p.read_bytes()).hexdigest()
+out=dict(status='PASSED',baseline=BASE,paper_sha256=hashlib.sha256(p.read_bytes()).hexdigest(),editor_identical=True,preamble_preserved=True,old_statements_preserved=sum(statements(old).values()),added_statements=1,witness_appendix_unchanged=True,labels=len(labels),latex_compilation='Succeeded with the desktop editor compiler on the existing editor source. Rendered pages have not been visually inspected.')
 (HERE/'data/paper-verification.json').write_text(json.dumps(out,indent=2)+'\n')
 print(json.dumps(out))

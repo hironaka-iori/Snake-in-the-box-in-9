@@ -55,3 +55,5 @@ The relocation manifest records moved files. Historical proof logs and source-ha
 - [Asymmetric restrictions at Hamming distance four](38-four-position-obstruction/README.md)
 
 - [39: Audited radius-four bound of 236](39-audited-bound-236/README.md): pinned contributor theorem, complete exclusion catalogue, independent potential checks, four new Lean arithmetic checks, and revised manuscript proof.
+
+- [40: Intervening-count restrictions](40-intervening-counts/README.md): two new three-position implications, eight Lean audits, 23 checked local forests, a saved cyclic relaxation, and exclusion of the identified low-mean cycle occurrence.
