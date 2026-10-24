@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "lean_audits": 16,
+  "audited_theorems": [
+    "Snake9.LocalWindow.EndpointUnits.sound",
+    "Snake9.LocalWindow.EndpointPair451.sat",
+    "Snake9.LocalWindow.EndpointPair451.endpoint_in_frame",
+    "Snake9.LocalWindow.EndpointPair451.endpoint_pair",
+    "Snake9.LocalWindow.EndpointPair451.pullback_two_flips",
+    "Snake9.LocalWindow.EndpointPair451.endpoint_two_flips",
+    "Snake9.LocalWindow.EndpointPair451.nearby_endpoint",
+    "Snake9.LocalWindow.EndpointPair451.two_flips_distance",
+    "Snake9.LocalWindow.EndpointPair451.endpoint_at_distance_two",
+    "Snake9.LocalWindow.EndpointPair451.away_from_endpoints_sum",
+    "Snake9.LocalWindow.EndpointPair451.radius_one_insufficient",
+    "Snake9.EndpointSharp.distinct",
+    "Snake9.EndpointSharp.induced",
+    "Snake9.EndpointSharp.window_directions",
+    "Snake9.EndpointSharp.pair_counts",
+    "Snake9.EndpointSharp.endpoint_distances"
+  ],
+  "proof_clauses": 1065,
+  "ordinary_clauses": 1046,
+  "endpoint_units": 19,
+  "proof_hints": 23414,
+  "sources_sha256": {
+    "EndpointUnits.lean": "ea8fdc2948271ebe1831e89e10ccb8e56aa31e59bf8083ea4c8f8ced79f4758b",
+    "EndpointPair.lean": "d272152c16851514a439d8f1b121f2af1a0e5567ae1bce6c1044f08af9fcac0f",
+    "EndpointDistance.lean": "8b9629dd9914238e0ece7d04441ab14e8f08e91dbbad9e7545db1b78b37eecb8",
+    "WitnessEndpointSharp.lean": "c9017a35120531db4d8fe5e501d15f62a585c49ddab970cda0223d5bec40abaa",
+    "LocalWindowCnf/EndpointPair451.lean": "e155249cd9f1bb9c1d1618d79cd616f7b7e991839c7e083e954ac867ef049923",
+    "LocalWindowSat/EndpointPair451.lean": "b8baf02042c7c1ef15683ae1283539be7cee56e9c27867bea1eb683430ace1cc",
+    "LocalWindowUnsat/EndpointPair451.lean": "a68c2467481455dedba0d3aa64cc9c7caac34180041d13e42b89a4c91c26c111",
+    "LocalWindowUnsat/EndpointPair451/Data0.lean": "c422d9b3d650c93d6fb75d0fb747f35922b13fcd296540ff68d14ba27ac1925d",
+    "LocalWindowUnsat/EndpointPair451/Data1.lean": "ca920366261319737b5f36e77decc577169225104ad532ba675dfb3a2a7ffd2f",
+    "LocalWindowUnsat/EndpointPair451/Check1.lean": "207e475f81996edb5979b4cd5d470a06bbbf6481eb8e7732c3ad84725da642b0"
+  },
+  "geometry_checks": [
+    {
+      "file": "first-radius-2-cap-8.json",
+      "sha256": "a2fff19c11ed416a7035b6ad082a7462a1a443de769f29cb6f4f4c12141ef8c1",
+      "complete_path_edges": null
+    },
+    {
+      "file": "full-first-radius-2-cap-8.json",
+      "sha256": "74bc54445980847882152bc5f0f2c61a5aa7493a5765ae305e8a23c4c5bef6b8",
+      "complete_path_edges": 148
+    },
+    {
+      "file": "full-pair-radius-1.json",
+      "sha256": "bdc61a1238c46fc3a5ed5d951aaab0154d3567762ada8674afd3b44472db6849",
+      "complete_path_edges": 140
+    },
+    {
+      "file": "pair-radius-1.json",
+      "sha256": "0b9d18bbe5c3ab88023c0def741a84b3cda24626f0971b9ccc712d06685dca63",
+      "complete_path_edges": null
+    },
+    {
+      "file": "second-radius-2.json",
+      "sha256": "a741ff1c780611fcb6f0c875358c88f1ef1c704811bd3a2ccab47f002a205034",
+      "complete_path_edges": null
+    }
+  ],
+  "sharp_witness_edges": 148,
+  "pair_counts": [
+    5,
+    3
+  ],
+  "endpoint_distances": [
+    4,
+    4
+  ],
+  "scope": "Endpoint distance-two implication and sharp endpoint-free bound eight checked in Lean; no improved global snake bound."
+}
