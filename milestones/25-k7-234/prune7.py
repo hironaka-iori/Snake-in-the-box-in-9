@@ -120,7 +120,7 @@ def critical(K, pi, P, Q):
     return crit
 
 
-def run(lam, tag, passes=4):
+def run(lam, tag, passes=4, start=None):
     P, Q, B = k7.best_pq(lam)
     L = 2 ** B - 1
     S = k7.status()
@@ -133,6 +133,10 @@ def run(lam, tag, passes=4):
     keys = [('k6', k) for k in keys6] + [('new', k) for k in newk]
     cost = np.concatenate([c6, cn])
     kept = np.ones(len(keys), bool)
+    if start:                       # start from a pruned set (+ every F8/H9 key)
+        d = json.load(gzip.open(os.path.join(HERE, 'data', f'keys_{start}.json.gz'), 'rt'))
+        s6 = {(tuple(k[1]), tuple(k[2])) for k in d['keys'] if k[0] == 'k6'}
+        kept = np.array([t == 'new' or k in s6 for t, k in keys])
     print(f'lambda {P}/{Q}, B {B}: {len(keys6)} k6 keys ({sum(c6 == 0)} free, {c6.sum() / 1e6:.0f} M), '
           f'{len(newk)} F8/H9 keys ({cn.sum() / 1e6:.0f} M hints, cost model {cf})', flush=True)
     hist = []
@@ -199,5 +203,6 @@ if __name__ == '__main__':
     ap.add_argument('lam', type=float)
     ap.add_argument('tag')
     ap.add_argument('--passes', type=int, default=4)
+    ap.add_argument('--start', default=None, help='TAG of a pruned set to start from')
     a = ap.parse_args()
-    run(a.lam, a.tag, a.passes)
+    run(a.lam, a.tag, a.passes, a.start)
