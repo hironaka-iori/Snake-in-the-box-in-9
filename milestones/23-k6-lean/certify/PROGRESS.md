@@ -32,3 +32,9 @@ PATH: export PATH=/home/user/lean-deps/toolchain/lean-4.19.0-linux/bin:$PATH
   and guarded_lake_build.uptodate() then raised FileNotFoundError. Now the driver sweeps right BEFORE each build
   (swept modules are PREBUILT in the closure) and after it; no concurrent sweeper. Driver restarted with GEN_MIN_DISK=700.
   Chain prebuild (chain_audit.py --reuse --target AggregateDirection6K235) resumed at shard 17_3 (108 shards were done).
+- 2026-10-25 20:05: step 2 done. 635/635 replay cases generated and built (223.2 M hints), every guarded build 0 failed;
+  the periodic sweeper is safe again once the driver sweeps before each build. Free disk at the end: 737 MB.
+  Chain prebuild to AggregateDirection6K235 done (all 204 shards, Sequence 39 s, bridge 68 s, aggregate 113 s / 2.62 GB;
+  upper_235_of_refuted6K235: propext, Classical.choice, Quot.sound). Staleness of LocalWindowDirUnsatK6 + Glue6K235:
+  14,482 in closure, only LocalWindowDirUnsatK6 stale. Its build started 20:08 (jobs 1, cap 14 GB,
+  log .lake/guarded_build_dirunsatk6.jsonl).
