@@ -149,3 +149,138 @@ position: an earlier start dominates, because every suffix of a realizable run i
 | `cutloop.py` → `data/cutloop_*.json` | the run-tracking product and the exact minimum-cycle-mean loop (`keys235` / `allknown`, `optimistic` mode = cut at DFS lower bounds, a ceiling only) |
 | `cut3.py` → `data/cut3_keys235.json` | the exact cut of the λ = 4 3-cycle alone |
 | `critical.py` → `data/critical_walk_*.json` | long realizable walks in the zero-reduced-cost subgraph (randomised DFS, re-checked) |
+
+## Counts along realizable walks
+
+Second run of 25 October 2026: `nice -n 19` on one core, peak RSS 0.93 GB. Solver-side only.
+No Lean module was written or built, and no new certificate was produced (only 6 sample LRATs,
+in scratch).
+
+### Question
+
+Sections 1–2 lifted the critical walks to concrete directions but ignored the counts. The
+automaton's counts are only checked by windows of at most 6 counted centres and 7 directions.
+Is a long realizable walk still realizable once its counts are imposed along the concrete path?
+
+### Model (`counts_sat.py`)
+
+- One variable per vertex of the **whole** Q9. The clauses are those of `wincert.Encoding` with
+  the ball equal to Q9: degree ≤ 2, at most 2 endpoints, no 4-cycle, the 6-cycle rule, and the
+  path selected. There are cycle cuts until no extra cycle remains.
+- The count of transition t belongs to vertex `vs[7+t]`, the centre between the last shape
+  direction and the new one (`fp.windows`). The lumped count s means α = s for s ≤ 5 and
+  α ∈ [6, 21] for s = 6.
+- SAT is a real snake of Q9 through the segment with those counts. As a sanity check, a
+  20-centre stretch of the 191-edge snake from `12-construction-196` is SAT with its own counts.
+- Three conditions are tested:
+  - **exact**: every vertex has the walk's lumped count;
+  - **mean**: every prefix has Σ min(α, 6) ≤ λ(t+1) + R, with R = potential range / Q. This holds
+    for every count lift of a walk in the critical subgraph;
+  - **minsum**: the exact minimum of Σ min(α, 6) over a window, by totalizers and a descending
+    bound.
+- `dfs` explores **every** concrete labelling of the shape walk. The first 7 directions are the
+  start shape, and unused labels are interchangeable. Each prefix is pruned by the exact or the
+  mean condition.
+
+### 1. The critical walks die within a few steps (`data/counts_report.json`)
+
+| walk (milestone 24) | steps | count mean | concrete labels, exact: longest SAT | all labels, exact | all labels, mean ≤ λ + R | min lumped mean on the concrete path, 20 / full |
+|---|---|---|---|---|---|---|
+| keys_235 λ = 4 walk (`critical.py`) | 125 | 3.984 | 1 | 1 | 6 | 5.90 / 6.00 (walk: 3.90 / 4.01) |
+| all-known 65/16 walk (`critical.py`) | 76 | 4.079 | 5 | 5 | 7 | 5.70 / 6.00 (walk: 4.00 / 4.09) |
+| all-known 16-cycle (A/B blocks), phase 0 | 160 | 4.0625 | — | 3 | 7 | — |
+| all-known 80-cycle (cutloop round 1), phase 0 | 160 | 4.0625 | — | 4 | ≥ 8 (DFS capped at 150 s) | — |
+| keys_235 4-cycle on 0123456 (2,5,5,4) | 160 | 4.0 | — | 3 | ≥ 6 (capped) | — |
+
+"Longest SAT" is the number of transitions whose counts can be imposed. The "all labels"
+columns are exhaustive DFS answers unless marked capped. The last column gives the exact
+minimum of Σ min(α, 6) per centre over the first 20 centres, and over the whole path, against
+the walk's own count mean on the same centres.
+
+So, once counts are imposed, **no walk survives more than 5 steps with its own counts, or
+about 6–8 steps under the weaker mean condition**, under any labelling. Along the
+concrete witness paths of milestone 24, the true lumped mean is about **6.0**, against the
+walk's 3.98–4.08. Those paths are loose: a vertex gets α ≤ 5 only where the path folds back
+within distance 2 of itself, so most centres have α ≥ 6.
+
+The minimal UNSAT windows along the 4.08 walk (radius 4, own directions only) have **7–8
+counted centres** (8–9 directions). There are 61 of them at 76 end positions, plus 8 with 5–6
+centres. That is just past the automaton's memory. These are "long windows" in the sense of the
+question, but short ones: 8–10 directions, not 30–40.
+
+### 2. Long-window refinement of the all-known k6 product (`ctxcut.py`, `ctxcut2.py`)
+
+**Stage 1: 8-direction windows (`ctxcut.py`, `data/ctxcut_allknown_R0.json`).** A k6
+transition already knows 8 directions d0..d7 and 6 counts (w2..w7). The window is decided at
+radius 4, and the transition is removed if UNSAT. The loop is lazy and touches only the
+critical subgraph.
+
+- λ goes from 65/16 to **57/14** after 56 removals, then stalls.
+- The stalling 14-cycle (counts 6,3,3,6,4,3,6,3,2,6,4,6,2,3) has only SAT 8-direction windows.
+
+**Stage 2: 9-direction windows with 7 counts (`ctxcut2.py`, `data/ctxcut2_allknown_R0.json`).**
+This works on the line graph: 541,091 live k6 transitions and 7,581,442 consecutive pairs. That
+is the k7 automaton restricted to live k6 states. A pair is removed only if every concrete
+version of its window is UNSAT; a fresh label may be d0 or a new coordinate.
+
+| round | λ | pot. range | bound (k6 formula) | conservative bound (+P end term) | UNSAT windows so far |
+|---|---|---|---|---|---|
+| 0 | 57/14 = 4.071 | 67 | 235 | 235 | 11 |
+| 10 | 33/8 = 4.125 | 43 | 235 | 235 | 2,618 |
+| 16 | 83/20 = 4.150 | 107 | 235 | 235 | 4,390 |
+| **20** | **79/19 = 4.158** | 106 | **234** | 235 | **5,626** |
+| 23 | 25/6 = 4.167 | 32 | 235 (one bit of range too many) | 235 | 10,583 |
+| **26** | **167/40 = 4.175** | 216 | 234 | **234** | **10,909** |
+| 35 | 67/16 = 4.1875 | 88 | 234 | 234 | 12,963 |
+| 42 (stopped at the cap) | **21/5 = 4.2** | 28 | 234 | 234 | 24,757 |
+
+- In 42 rounds, λ never stalls at 9 directions. Each round removes 20–9,425 pairs.
+- Up to round 19, the critical cycles have mean (4k+1)/k. The binding family thins out one cycle
+  length at a time.
+- At λ = 25/6 and 21/5 the critical family is large: 4,161 and 9,653 pairs. The run stopped
+  at its 1.5 h cap, with the last critical cycle being a 5-cycle with counts 4,4,6,2,5.
+- 233 would need λ ≳ 4.47, out of reach at this window length.
+
+### 3. Cost
+
+- **Keys.** 234 needs about **5.6k** (k6 arithmetic) to **11k** (conservative end term) new
+  9-direction keys with 7 counts, and 21/5 needs about 25k. These are upper estimates from a
+  lazy loop without key minimisation; wildcarding counts would merge many keys. The all-known
+  set has 28,618 keys.
+- **LRAT** (`longwin.py`, `data/longwin_allknown.json`, 6 samples): radius 4, about 75–80k
+  clauses and 4.3–4.7k variables. DRUP has 30–45k lines; LRAT is **0.44–1.8 MB** per key, mean
+  about 0.8 MB.
+  - 11k keys come to about **9 GB** of raw LRAT; 25k keys to about 20 GB.
+  - drat-trim verified all 6 samples.
+- **Automaton.** The state must remember 8 directions and 6 counts (k7).
+  - The full product is 132 × 6^6 = **6.16 M states**, 23 times the k6 product.
+  - Only 541k of them are live. Using that needs a closed-set argument in Lean, or 23 times the
+    k6 kernel enumeration.
+  - The bridge needs one more window length (8–9 directions) in `check6At`.
+- **Margin.** The k6 end terms (`(P+35Q)m + 6Q ≤ 9171Q + 7P + 2^bits − 1`) must be redone for
+  one more step of memory. The column "+P" assumes one more count in the end term.
+  - Potential range matters too: at λ = 25/6 a range of 32 instead of ≤ 31 costs the 234.
+  - A range-minimising potential (not attempted) would help.
+
+### Verdict
+
+- **The critical walks of milestone 24 are not real.** They were realizable for directions only.
+  With counts, every labelling fails within 1–5 steps (exact) or about 6–8 steps (mean
+  condition).
+- **Long windows do cut below λ = 4, and above 4.15.** The exclusions needed are only 8–9
+  directions long, and the λ climb did not stall in 42 rounds.
+- **This is a route to 234, not below it.** The cost is:
+  - a k7 automaton: 6.2 M states for the full product, or 541k live with a closed-set argument;
+  - about 6–11k new radius-4 keys: about 5–9 GB of LRAT before minimisation;
+  - a re-derived end-term inequality.
+- **Caveats.** The window decisions are uncertified CaDiCaL answers, except 6 samples. λ = 21/5
+  is the value at the cap, not a limit.
+
+### Files (this section)
+
+| file | contents |
+|---|---|
+| `counts_sat.py` | full-Q9 counts model: `run` (exact counts), `minsum`, `feasible_sum`, label DFS `dfs`; `report` → `data/counts_report.json`; `concrete` → `data/counts_concrete_*.json` |
+| `longwin.py` → `data/longwin_allknown.json` | k-walk counts in G_r = {rc ≤ r}, random G0 window samples (k = 1, 2, 3) decided at radius 4, sample LRAT sizes |
+| `ctxcut.py` → `data/ctxcut_allknown_R0.json` | stage 1: 8-direction windows on k6 transitions, lazy loop |
+| `ctxcut2.py` → `data/ctxcut2_allknown_R0.json` | stage 2: 9-direction windows on the pair graph (k7 restricted to live k6 states), lazy loop; rounds, 20 removed windows, final cycle |
