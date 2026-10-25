@@ -5,6 +5,8 @@ lambda = 1/1, potential on 6158592 states (5985958 live), range 0 (1-bit fields)
 -/
 import WindowAutomaton7Defs
 
+set_option maxHeartbeats 0
+
 namespace Snake9.WindowAutomaton
 
 /-- Canonical window shapes (3 to 8 directions) ↦ exclusion row. -/

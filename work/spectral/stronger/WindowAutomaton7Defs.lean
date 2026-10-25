@@ -123,12 +123,12 @@ def own7 (T : Tables7) (h : List Nat) (t0 t1 t2 t3 t4 t5 : Nat) : Bool :=
   wforb6 T.k6 (h.drop 3) [t2, t3, t4, t5] || wforb6 T.k6 (h.drop 2) [t1, t2, t3, t4, t5] ||
   wforb6 T.k6 (h.drop 1) [t0, t1, t2, t3, t4, t5]
 
-/-- The step test of the nine-direction window `c` from the states with counts `t0, t1`
-(and all `t2..t5`), for every new count `s`: the source state is skipped by the closed-set
+/-- The step test of the nine-direction window `c` from the states with counts `t0, t1, t2`
+(and all `t3..t5`), for every new count `s`: the source state is skipped by the closed-set
 rule, or a k6/F8/H9 window ending at the new vertex is excluded, or the potential drops by
-at least `num - den * s`.  One shard declaration checks one `(c, t0, t1)`: 6^5 transitions. -/
-def check7In (T : Tables7) (c : List Nat) (t0 t1 : Nat) : Bool :=
-  allSym (fun t2 => allSym (fun t3 => allSym (fun t4 => allSym (fun t5 =>
+at least `num - den * s`: 6^4 transitions. -/
+def check7In2 (T : Tables7) (c : List Nat) (t0 t1 t2 : Nat) : Bool :=
+  allSym (fun t3 => allSym (fun t4 => allSym (fun t5 =>
     own7 T (c.take 8) t0 t1 t2 t3 t4 t5 || allSym (fun s =>
     wforb6 T.k6 (c.drop 6) [t5, s] || wforb6 T.k6 (c.drop 5) [t4, t5, s] ||
     wforb6 T.k6 (c.drop 4) [t3, t4, t5, s] || wforb6 T.k6 (c.drop 3) [t2, t3, t4, t5, s] ||
@@ -136,7 +136,13 @@ def check7In (T : Tables7) (c : List Nat) (t0 t1 : Nat) : Bool :=
     wforb6 T.k6 (c.drop 1) [t0, t1, t2, t3, t4, t5, s] ||
     wforbH T c [t0, t1, t2, t3, t4, t5, s] ||
     decide (T.num + pot7 T (c.drop 1) [t1, t2, t3, t4, t5, s] ≤
-      T.den * s + pot7 T (c.take 8) [t0, t1, t2, t3, t4, t5]))))))
+      T.den * s + pot7 T (c.take 8) [t0, t1, t2, t3, t4, t5])))))
+
+/-- The step test from the states with counts `t0, t1`; a shard checks it either in one
+declaration (6^5 transitions) or in six, one per `t2` (`check7In_of`, 6^4 transitions each,
+for a lower kernel peak). -/
+def check7In (T : Tables7) (c : List Nat) (t0 t1 : Nat) : Bool :=
+  allSym (fun t2 => check7In2 T c t0 t1 t2)
 
 def check7At (T : Tables7) (c : List Nat) (t0 : Nat) : Bool :=
   !inducedPattern c || allSym (fun t1 => check7In T c t0 t1)
@@ -196,6 +202,22 @@ theorem check7At_of (T : Tables7) (c : List Nat) (t0 : Nat) (h1 : check7In T c t
   · exact h5
   · exact h6
 
+theorem check7In_of (T : Tables7) (c : List Nat) (t0 t1 : Nat)
+    (h1 : check7In2 T c t0 t1 1 = true) (h2 : check7In2 T c t0 t1 2 = true)
+    (h3 : check7In2 T c t0 t1 3 = true) (h4 : check7In2 T c t0 t1 4 = true)
+    (h5 : check7In2 T c t0 t1 5 = true) (h6 : check7In2 T c t0 t1 6 = true) :
+    check7In T c t0 t1 = true := by
+  unfold check7In
+  refine allSym_of_forall _ (fun t ht1 ht6 => ?_)
+  have : t = 1 ∨ t = 2 ∨ t = 3 ∨ t = 4 ∨ t = 5 ∨ t = 6 := by omega
+  rcases this with rfl | rfl | rfl | rfl | rfl | rfl
+  · exact h1
+  · exact h2
+  · exact h3
+  · exact h4
+  · exact h5
+  · exact h6
+
 theorem check7_of_shards (T : Tables7) (shapes : List (List Nat))
     (hr : ShapesCover7 shapes = true) (hs : ShardsOK7 T shapes) : StepOK7 T := by
   intro c hc hrgs t0 h1 h6
@@ -232,7 +254,7 @@ theorem stepOK7_of_trivial (T : Tables7) (hp : ∀ r t0 t1, T.pot r t0 t1 = 0) (
     | _ :: _ :: _ => simp only [potAt7, hp, Nat.zero_shiftRight, Nat.zero_and]
   unfold check7At
   refine Bool.or_eq_true_iff.2 (Or.inr (allSym_of_forall _ (fun t1 _ _ => ?_)))
-  unfold check7In
+  unfold check7In check7In2
   refine allSym_of_forall _ (fun t2 _ _ => allSym_of_forall _ (fun t3 _ _ =>
     allSym_of_forall _ (fun t4 _ _ => allSym_of_forall _ (fun t5 _ _ => ?_))))
   refine Bool.or_eq_true_iff.2 (Or.inr (allSym_of_forall _ (fun s hs _ => ?_)))
@@ -309,7 +331,7 @@ theorem step7_raw (T : Tables7) (hT : StepOK7 T) (x : List Nat) (hx : x.length =
   rw [inducedPattern_canon, hind] at hc
   simp only [Bool.not_true, Bool.false_or] at hc
   have hi := allSym_spec _ hc (sym t1) (sym_ge_one _ h1) (sym_le_six _)
-  unfold check7In at hi
+  unfold check7In check7In2 at hi
   have h := allSym_spec _ (allSym_spec _ (allSym_spec _ (allSym_spec _ hi
     (sym t2) (sym_ge_one _ h2) (sym_le_six _)) (sym t3) (sym_ge_one _ h3) (sym_le_six _))
     (sym t4) (sym_ge_one _ h4) (sym_le_six _)) (sym t5) (sym_ge_one _ h5) (sym_le_six _)
