@@ -38,3 +38,8 @@ PATH: export PATH=/home/user/lean-deps/toolchain/lean-4.19.0-linux/bin:$PATH
   upper_235_of_refuted6K235: propext, Classical.choice, Quot.sound). Staleness of LocalWindowDirUnsatK6 + Glue6K235:
   14,482 in closure, only LocalWindowDirUnsatK6 stale. Its build started 20:08 (jobs 1, cap 14 GB,
   log .lake/guarded_build_dirunsatk6.jsonl).
+- 2026-10-25 20:10: LocalWindowDirUnsatK6 ok (82 s, 3.02 GB; allRefutedK6: propext, Classical.choice, Quot.sound).
+  chain_audit.py --target UpperBound235 --reuse (build dir work/spectral/.verification/chain): 371 modules, UpperBound235
+  ok in 1,273 s at 11.91 GB, upper_bound_235 and verified_interval_191_235 depend on propext, Classical.choice, Quot.sound:
+  AXIOM AUDIT PASSED (outputs/upper-bound-235-audit-linux.log). Replay summary: outputs/upper-bound-235-replay-linux.log
+  (2,640 check modules, 19.23 kernel-hours). 734 MB free at the end. **235 is unconditional.**
