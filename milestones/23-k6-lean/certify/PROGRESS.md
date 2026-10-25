@@ -18,3 +18,7 @@ PATH: export PATH=/home/user/lean-deps/toolchain/lean-4.19.0-linux/bin:$PATH
   Resume after a restart: rerun `replay_k6.py gen/build/sweep` as in README (all steps resume; gen skips cases whose
   main module exists; NOTE the record file replay_gen.jsonl lives in S and may be lost, the main modules are the truth).
 - Step 4 (automaton without --provisional, chain, glue) started early, while step 1 runs.
+- 2026-10-25 (resume): 635/635 Cnf, 592/635 Sat oleans; 495 replay cases generated (40.4 M hints), none built;
+  2,806 MB free. Staleness simulation of LocalWindowDirSatK6 + Glue6K235: 44 stale (43 Sat K, LocalWindowDirSatK6), no base module.
+  Step 1 phase B started (heavy-jobs 1, cap 10, log guarded_build_k6sat.jsonl). In parallel: chain_audit.py --reuse
+  --target AggregateDirection6K235 (shards into work/spectral/.verification/chain; scratch log).
