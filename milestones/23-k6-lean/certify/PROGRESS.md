@@ -25,3 +25,10 @@ PATH: export PATH=/home/user/lean-deps/toolchain/lean-4.19.0-linux/bin:$PATH
 - Step 1 done: 1281/1281, 0 failed (43 Sat K at most 5.02 GB; LocalWindowDirSatK6 1,837 s, 2.10 GB).
 - Step 2: scratch driver.py restarted (PID file in S/b235); first build of the 495 generated cases (40.4 M hints)
   started 04:38. Staleness simulation of those 495 roots: 4,147 in closure, 3,640 stale, all LocalWindowUnsat.K*.
+- 2026-10-25 15:15 (resume after a container restart, down since about 06:18): 598 replay cases generated (121.7 M hints),
+  565 built (81.4 M), 1,200 check modules ok so far (4.98 kernel-hours, at most 1.89 GB); 1,828 MB free.
+  Staleness simulation of the 598 replay roots: 8,052 in closure, 1,931 stale, all LocalWindowUnsat.K* (33 unbuilt cases).
+  Lesson: a concurrent sweeper deleted a Data source of a case whose build had restarted (Data olean already built),
+  and guarded_lake_build.uptodate() then raised FileNotFoundError. Now the driver sweeps right BEFORE each build
+  (swept modules are PREBUILT in the closure) and after it; no concurrent sweeper. Driver restarted with GEN_MIN_DISK=700.
+  Chain prebuild (chain_audit.py --reuse --target AggregateDirection6K235) resumed at shard 17_3 (108 shards were done).
