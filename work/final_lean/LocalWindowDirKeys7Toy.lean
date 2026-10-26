@@ -20,8 +20,10 @@ def dirChunks7Toy : List (List (List Nat × List Nat)) :=
 
 def dirKeys7Toy : List (List Nat × List Nat) := dirChunks7Toy.flatten
 
-def hKeys7Toy : List (List Nat × List Nat) :=
-  [hKeys7Toy_0].flatten
+def hChunks7Toy : List (List (List Nat × List Nat)) :=
+  [hKeys7Toy_0]
+
+def hKeys7Toy : List (List Nat × List Nat) := hChunks7Toy.flatten
 
 /-- The certificate statements of the seven-centre automaton `Toy`. -/
 def AllRefuted7Toy : Prop := AllRefutedList dirKeys7Toy ∧ AllRefutedList hKeys7Toy

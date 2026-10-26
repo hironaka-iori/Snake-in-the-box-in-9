@@ -13,13 +13,24 @@ set_option Elab.async false
 namespace Snake9.DirectionWindow7
 open Snake9 Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow6
 
-theorem keysOK7Toy : keysOK6 dirKeys7Toy = true := by decide +kernel
+theorem keysOKc7Toy_0 : keysOK6 (dirChunks7Toy.getD 0 []) = true := by decide +kernel
 
-theorem keysOKH7Toy : keysOKH hKeys7Toy = true := by decide +kernel
+theorem keysOKHc7Toy_0 : keysOKH (hChunks7Toy.getD 0 []) = true := by decide +kernel
 
 set_option maxRecDepth 100000 in
-/-- The H9 tree of `tables7Toy` holds exactly the codes of the H9 keys. -/
-theorem coverH7Toy : CoverH tables7Toy hKeys7Toy := coverH_of (by decide +kernel)
+theorem coverHc7Toy_0 : (hPieces7Toy.getD 0 (.nil, 0)).1.toList ++ [(hPieces7Toy.getD 0 (.nil, 0)).2] =
+    (hChunks7Toy.getD 0 []).map (fun k => encB 9 (k.1 ++ k.2) 0) := by decide +kernel
+
+theorem keysOK7Toy : keysOK6 dirKeys7Toy = true :=
+  keysOK6_flatten (fun i hi => match i, hi with | 0, _ => keysOKc7Toy_0 | j + 1, h => absurd h (by rw [show dirChunks7Toy.length = 1 from rfl]; omega))
+
+theorem keysOKH7Toy : keysOKH hKeys7Toy = true :=
+  keysOKH_flatten (fun i hi => match i, hi with | 0, _ => keysOKHc7Toy_0 | j + 1, h => absurd h (by rw [show hChunks7Toy.length = 1 from rfl]; omega))
+
+/-- The H9 tree of `tables7Toy` holds exactly the codes of the H9 keys (chunk by chunk). -/
+theorem coverH7Toy : CoverH tables7Toy hKeys7Toy :=
+  coverH_spine hPieces7Toy hChunks7Toy rfl (by decide)
+    (fun i hi => match i, hi with | 0, _ => coverHc7Toy_0 | j + 1, h => absurd h (by rw [show hPieces7Toy.length = 1 from rfl]; omega))
 
 set_option maxRecDepth 100000 in
 theorem zero7Toy_3 : allRGS 3 0 (zeroOutside6 tables7Toy.k6 rows7Toy) = true := by decide +kernel

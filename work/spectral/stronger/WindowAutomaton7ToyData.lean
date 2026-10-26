@@ -242,9 +242,14 @@ def pIdx7Toy (c : Nat) : Nat :=
 /-- Potential rows: `49 * shape + 7 * t0 + t1` ↦ 1-bit fields at `cntIdx6 [t2, t3, t4, t5]`. -/
 def potMask7Toy (_r _t0 _t1 : Nat) : Nat := 0
 
-/-- The H9 keys: `encB 9 (dirs ++ syms) 0`, in order. -/
-def hTree7Toy : NTree :=
-  (.node (.node .nil 28058332269125 .nil) 28953424048793 .nil)
+def hSub7Toy_0 : NTree :=
+  (.node .nil 28058332269125 .nil)
+
+/-- The H9 keys: `encB 9 (dirs ++ syms) 0`, in order, one balanced subtree per key chunk
+(the last code of a chunk is its spine node), so that `coverH_spine` checks chunk by chunk. -/
+def hPieces7Toy : List (NTree × Nat) := [(hSub7Toy_0, 28953424048793)]
+
+def hTree7Toy : NTree := NTree.spine hPieces7Toy
 
 def tables7Toy : Tables7 where
   wIdx := wIdx7Toy

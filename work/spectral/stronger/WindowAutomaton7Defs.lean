@@ -62,6 +62,19 @@ theorem NTree.mem_toList : ∀ (t : NTree) (x : Nat), t.mem x = true → x ∈ t
       · rw [hb] at h
         exact Or.inl (NTree.mem_toList l x h)
 
+/-- A right spine of subtrees: `node t₀ v₀ (node t₁ v₁ …)`.  The generated H9 tables use one
+balanced subtree per key chunk, so that the cover is checked chunk by chunk. -/
+def NTree.spine : List (NTree × Nat) → NTree
+  | [] => .nil
+  | (t, v) :: ps => .node t v (NTree.spine ps)
+
+theorem NTree.spine_toList : ∀ ps : List (NTree × Nat),
+    (NTree.spine ps).toList = (ps.map (fun p => p.1.toList ++ [p.2])).flatten
+  | [] => rfl
+  | (t, v) :: ps => by
+    simp only [NTree.spine, NTree.toList, List.map_cons, List.flatten_cons, NTree.spine_toList ps,
+      List.append_assoc, List.singleton_append]
+
 /-- Base-`b` code of a digit list. -/
 def encB (b : Nat) : List Nat → Nat → Nat
   | [], acc => acc

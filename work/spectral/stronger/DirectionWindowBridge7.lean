@@ -174,6 +174,52 @@ theorem coverH_of {T : Tables7} {hkeys : List (List Nat × List Nat)} (h : cover
     CoverH T hkeys := by
   simpa [coverHb] using h
 
+/-- `CoverH` chunk by chunk, for a spine table (one kernel evaluation per chunk). -/
+theorem coverH_spine {T : Tables7} (ps : List (NTree × Nat))
+    (chunks : List (List (List Nat × List Nat))) (ht : T.htree = NTree.spine ps)
+    (hl : ps.length = chunks.length)
+    (hc : ∀ i, i < ps.length → (ps.getD i (.nil, 0)).1.toList ++ [(ps.getD i (.nil, 0)).2] =
+      (chunks.getD i []).map (fun k => encB 9 (k.1 ++ k.2) 0)) :
+    CoverH T chunks.flatten := by
+  unfold CoverH
+  rw [ht, NTree.spine_toList, List.map_flatten]
+  congr 1
+  apply List.ext_getElem
+  · simp [hl]
+  · intro i h1 h2
+    simp only [List.length_map] at h1
+    have := hc i h1
+    simp only [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem h1,
+      List.getElem?_eq_getElem (show i < chunks.length by omega), Option.getD_some] at this
+    simp only [List.getElem_map]
+    exact this
+
+theorem keysOK6_flatten {chunks : List (List (List Nat × List Nat))}
+    (h : ∀ i, i < chunks.length → keysOK6 (chunks.getD i []) = true) :
+    keysOK6 chunks.flatten = true := by
+  unfold keysOK6 at h ⊢
+  rw [List.all_eq_true]
+  intro k hk
+  obtain ⟨L, hL, hkL⟩ := List.mem_flatten.1 hk
+  obtain ⟨i, hi, rfl⟩ := List.getElem_of_mem hL
+  have := h i hi
+  rw [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem hi, Option.getD_some,
+    List.all_eq_true] at this
+  exact this k hkL
+
+theorem keysOKH_flatten {chunks : List (List (List Nat × List Nat))}
+    (h : ∀ i, i < chunks.length → keysOKH (chunks.getD i []) = true) :
+    keysOKH chunks.flatten = true := by
+  unfold keysOKH at h ⊢
+  rw [List.all_eq_true]
+  intro k hk
+  obtain ⟨L, hL, hkL⟩ := List.mem_flatten.1 hk
+  obtain ⟨i, hi, rfl⟩ := List.getElem_of_mem hL
+  have := h i hi
+  rw [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem hi, Option.getD_some,
+    List.all_eq_true] at this
+  exact this k hkL
+
 theorem encB_acc (b : Nat) : ∀ (l : List Nat) (acc : Nat), encB b l acc = acc * b ^ l.length + encB b l 0
   | [], acc => by simp [encB]
   | a :: l, acc => by
@@ -467,6 +513,7 @@ end Snake9.DirectionWindow7
 
 #print axioms Snake9.DirectionWindow7.cover7_rows
 #print axioms Snake9.DirectionWindow7.coverH_spec
+#print axioms Snake9.DirectionWindow7.coverH_spine
 #print axioms Snake9.DirectionWindow7.refuted_dirH
 #print axioms Snake9.DirectionWindow7.no_forb_H9
 #print axioms Snake9.DirectionWindow7.direction_windows_core7

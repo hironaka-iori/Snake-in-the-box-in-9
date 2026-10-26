@@ -393,7 +393,7 @@ def main():
     C = (2 ** B - 1) + 8 * P - 7 * Q
     N = (9171 * Q + 8 * P + 2 ** B - 1 - 7 * Q) // (P + 35 * Q)
     chunks, where = chunk_rows(k6, a.chunk)
-    hchunks = [hk[i:i + a.chunk] for i in range(0, len(hk), a.chunk)] or [[]]
+    hchunks = [hk[i:i + a.chunk] for i in range(0, len(hk), a.chunk)]
     rowlist = sorted(forb, key=lambda r: (len(wshapes[r[0]]), wshapes[r[0]], r[1]))
     summary = dict(tag=T, k6_keys=len(k6), F8=sum(len(k[0]) == 8 for k in k6), H9=len(hk), P=P, Q=Q,
                    bits=B, potential_range=rng, bound=N, toy=a.toy, provisional=a.provisional,
@@ -455,14 +455,20 @@ def dirChunks7{T} : List (List (List Nat × List Nat)) :=
 
 def dirKeys7{T} : List (List Nat × List Nat) := dirChunks7{T}.flatten
 
-def hKeys7{T} : List (List Nat × List Nat) :=
-  [{', '.join(f'hKeys7{T}_{ci}' for ci in range(len(hchunks)))}].flatten
+def hChunks7{T} : List (List (List Nat × List Nat)) :=
+  [{', '.join(f'hKeys7{T}_{ci}' for ci in range(len(hchunks)))}]
+
+def hKeys7{T} : List (List Nat × List Nat) := hChunks7{T}.flatten
 
 /-- The certificate statements of the seven-centre automaton `{T}`. -/
 def AllRefuted7{T} : Prop := AllRefutedList dirKeys7{T} ∧ AllRefutedList hKeys7{T}
 
 end Snake9.LocalWindow
 '''
+    hcc = [[enc(9, d + s) for d, s in ch] for ch in hchunks]
+    hsubs = ''.join(f'def hSub7{T}_{ci} : NTree :=\n  {ntree(hc[:-1])}\n\n' for ci, hc in enumerate(hcc))
+    summary['k_chunks'] = len(chunks)
+    summary['h_chunks'] = len(hchunks)
     witems = sorted((c, str(i)) for c, i in widx.items())
     fitems = sorted((r * 7 + s, f'0x{m:x}') for (r, s), m in forb.items() if m)
     pitems = sorted((c, str(i)) for c, i in pidx.items())
@@ -508,9 +514,11 @@ def pIdx7{T} (c : Nat) : Nat :=
 /-- Potential rows: `49 * shape + 7 * t0 + t1` ↦ {B}-bit fields at `cntIdx6 [t2, t3, t4, t5]`. -/
 {potdef}
 
-/-- The H9 keys: `encB 9 (dirs ++ syms) 0`, in order. -/
-def hTree7{T} : NTree :=
-  {ntree(hcodes)}
+{hsubs}/-- The H9 keys: `encB 9 (dirs ++ syms) 0`, in order, one balanced subtree per key chunk
+(the last code of a chunk is its spine node), so that `coverH_spine` checks chunk by chunk. -/
+def hPieces7{T} : List (NTree × Nat) := [{', '.join(f'(hSub7{T}_{ci}, {hc[-1]})' for ci, hc in enumerate(hcc))}]
+
+def hTree7{T} : NTree := NTree.spine hPieces7{T}
 
 def tables7{T} : Tables7 where
   wIdx := wIdx7{T}

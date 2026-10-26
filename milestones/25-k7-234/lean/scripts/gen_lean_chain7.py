@@ -43,8 +43,26 @@ def rgs(n):
     return out
 
 
+def match(n, name, lst_name):
+    """`match i, hi with | 0, _ => name_0 | … | j + n, h => absurd …` over i < lst.length."""
+    arms = ' '.join(f'| {i}, _ => {name}_{i}' for i in range(n))
+    return (f'match i, hi with {arms} | j + {n}, h => absurd h '
+            f'(by rw [show {lst_name}.length = {n} from rfl]; omega)')
+
+
 def bridge(T, s):
     rows = [(tuple(c), s0, ch) for c, s0, ch in s['rows']]
+    kc, hc = s['k_chunks'], s['h_chunks']
+    per_chunk = ''.join(f'''theorem keysOKc7{T}_{i} : keysOK6 (dirChunks7{T}.getD {i} []) = true := by decide +kernel
+
+''' for i in range(kc))
+    per_chunk += ''.join(f'''theorem keysOKHc7{T}_{i} : keysOKH (hChunks7{T}.getD {i} []) = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem coverHc7{T}_{i} : (hPieces7{T}.getD {i} (.nil, 0)).1.toList ++ [(hPieces7{T}.getD {i} (.nil, 0)).2] =
+    (hChunks7{T}.getD {i} []).map (fun k => encB 9 (k.1 ++ k.2) 0) := by decide +kernel
+
+''' for i in range(hc))
     pres = rgs(4)
     zero = ''.join(f'''set_option maxRecDepth 100000 in
 theorem zero7{T}_{n} : allRGS {n} 0 (zeroOutside6 tables7{T}.k6 rows7{T}) = true := by decide +kernel
@@ -99,13 +117,16 @@ set_option Elab.async false
 namespace Snake9.DirectionWindow7
 open Snake9 Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow6
 
-theorem keysOK7{T} : keysOK6 dirKeys7{T} = true := by decide +kernel
+{per_chunk}theorem keysOK7{T} : keysOK6 dirKeys7{T} = true :=
+  keysOK6_flatten (fun i hi => {match(kc, 'keysOKc7' + T, 'dirChunks7' + T)})
 
-theorem keysOKH7{T} : keysOKH hKeys7{T} = true := by decide +kernel
+theorem keysOKH7{T} : keysOKH hKeys7{T} = true :=
+  keysOKH_flatten (fun i hi => {match(hc, 'keysOKHc7' + T, 'hChunks7' + T)})
 
-set_option maxRecDepth 100000 in
-/-- The H9 tree of `tables7{T}` holds exactly the codes of the H9 keys. -/
-theorem coverH7{T} : CoverH tables7{T} hKeys7{T} := coverH_of (by decide +kernel)
+/-- The H9 tree of `tables7{T}` holds exactly the codes of the H9 keys (chunk by chunk). -/
+theorem coverH7{T} : CoverH tables7{T} hKeys7{T} :=
+  coverH_spine hPieces7{T} hChunks7{T} rfl (by decide)
+    (fun i hi => {match(hc, 'coverHc7' + T, 'hPieces7' + T)})
 
 {zero}{rowdecls}{rows_ok}
 /-- Every set exclusion bit of a canonical shape of 3 to 8 directions is one of the keys
