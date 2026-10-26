@@ -53,6 +53,8 @@ def main():
     ap.add_argument('tag'); ap.add_argument('newtag')
     ap.add_argument('--min', type=float, default=1e6); ap.add_argument('--hours', type=float, default=2)
     ap.add_argument('--ovh', type=float, default=1.0)
+    ap.add_argument('--maxit', type=int, default=4000, help='give up (keep the key) after this many BF rounds')
+    ap.add_argument('--max', type=float, default=1e18)
     a = ap.parse_args()
     t0 = time.time()
     d = json.load(gzip.open(os.path.join(P4.D, f'keys_{a.tag}.json.gz'), 'rt'))
@@ -75,7 +77,7 @@ def main():
     bysrc = [[] for _ in range(K.nE)]; bytgt = [[] for _ in range(K.nE)]
     for i, (e, e2) in enumerate(K.XE):
         bysrc[e].append(i); bytgt[e2].append(i)
-    order = [j for j in np.argsort(-cost, kind='stable') if cost[j] >= a.min]
+    order = [j for j in np.argsort(-cost, kind='stable') if a.min <= cost[j] < a.max]
     print(f'{len(order)} keys >= {a.min:.0f} ({cost[order].sum() / 1e9:.2f} G eff); start range {int(-pi.min())}', flush=True)
     dropped = saved = 0
     log = []
@@ -106,7 +108,7 @@ def main():
             dirty[e] = True
         for i in aff:
             dirty[K.XE[i][0]] = True
-        ok, its = bf_warm(K, masks, pi2, dirty, P, Q, L)
+        ok, its = bf_warm(K, masks, pi2, dirty, P, Q, L, a.maxit)
         if ok:
             pi = pi2; kept[j] = False; dropped += 1; saved += cost[j]
             if t == 'new':
