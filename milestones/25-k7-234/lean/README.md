@@ -106,14 +106,17 @@ not committed):
 
   | shard | 8-shape | induced labels | declarations | time | memory |
   |---|---|---|---|---|---|
-  | (0, 1) | `[0,1,2,0,3,1,0,4]` | 4 of 6 | 144 | 662 s | 0.93 GB |
-  | (131, 3) | `[0,1,…,7]` | 7 of 9 | 252 | 917 s | 0.88 GB |
+  | (0, 1), single H9 tree | `[0,1,2,0,3,1,0,4]` | 4 of 6 | 144 | 662 s | 0.93 GB |
+  | (131, 3), single H9 tree | `[0,1,…,7]` | 7 of 9 | 252 | 917 s | 0.88 GB |
+  | (0, 1), final data (H9 spine) | `[0,1,2,0,3,1,0,4]` | 4 of 6 | 144 | **809 s** | **1.17 GB** |
 
-  - That is 3.6–4.6 s per declaration of 1,296 transitions, about 3 ms per transition.
+  - With the single H9 tree, that is 3.6–4.6 s per declaration of 1,296 transitions, about 3 ms
+    per transition.
+  - The chunked H9 spine, needed for the bridge, costs about 22 % more.
   - With `--split t1`, one declaration of 7,776 transitions took 35 s at 2.9 GB, and shard (0, 1)
     took 634 s at **3.81 GB**, too close to the cap. That is why `t2` is the default.
-  - **Estimate for all 792 shards:** 109,080 declarations × about 4.2 s ≈ **125 CPU-hours** at
-    under 1 GB each. The plan estimated about 55. The extra cost is the H9 tree and the own-window
+  - **Estimate for all 792 shards:** 109,080 declarations × about 5 s ≈ **150 CPU-hours** at
+    about 1.2 GB each (about 125 CPU-hours with a balanced H9 skeleton). The plan estimated about 55. The extra cost is the H9 tree and the own-window
     lookups.
 - **`DirectionWindowBridge7L417d`:** 260 s, 1.14 GB. It holds:
   - `keysOK6` and `keysOKH`, per chunk;
@@ -130,7 +133,7 @@ not committed):
 1. **Certificates** for 36,841 keys: 19,553 k6 keys from the pool and 17,288 H9 keys, about
    34 G hints. The disk requirement (`../README.md`) is the blocker. `AllRefuted7L417d` is the
    only hypothesis left.
-2. **The 792 shards:** about 125 CPU-hours at under 1 GB each, then `…Sequence`.
+2. **The 792 shards:** about 150 CPU-hours at about 1.2 GB each, then `…Sequence`.
    - The Sequence module is generated but not compiled. Its pieces are the same as those of the
      toy and k6 sequences, except for the 203 prefix checks of `ShapesCover7`, which are not
      measured.
