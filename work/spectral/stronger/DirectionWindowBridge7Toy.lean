@@ -17,8 +17,8 @@ theorem keysOK7Toy : keysOK6 dirKeys7Toy = true := by decide +kernel
 
 theorem keysOKH7Toy : keysOKH hKeys7Toy = true := by decide +kernel
 
-/-- The H9 tree of `tables7Toy` holds exactly the codes of the H9 keys. -/
 set_option maxRecDepth 100000 in
+/-- The H9 tree of `tables7Toy` holds exactly the codes of the H9 keys. -/
 theorem coverH7Toy : CoverH tables7Toy hKeys7Toy := coverH_of (by decide +kernel)
 
 set_option maxRecDepth 100000 in
