@@ -166,6 +166,14 @@ def keysOKH (hkeys : List (List Nat × List Nat)) : Bool :=
 def CoverH (T : Tables7) (hkeys : List (List Nat × List Nat)) : Prop :=
   T.htree.toList = hkeys.map (fun k => encB 9 (k.1 ++ k.2) 0)
 
+/-- `CoverH` as one Boolean kernel evaluation. -/
+def coverHb (T : Tables7) (hkeys : List (List Nat × List Nat)) : Bool :=
+  T.htree.toList == hkeys.map (fun k => encB 9 (k.1 ++ k.2) 0)
+
+theorem coverH_of {T : Tables7} {hkeys : List (List Nat × List Nat)} (h : coverHb T hkeys = true) :
+    CoverH T hkeys := by
+  simpa [coverHb] using h
+
 theorem encB_acc (b : Nat) : ∀ (l : List Nat) (acc : Nat), encB b l acc = acc * b ^ l.length + encB b l 0
   | [], acc => by simp [encB]
   | a :: l, acc => by

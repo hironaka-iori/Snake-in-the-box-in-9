@@ -70,7 +70,8 @@ theorem row7{T}_{k} : rowOK6 tables7{T}.k6 (dirChunks7{T}.getD {ch} []) {lst(c)}
 
 ''' for k, (c, s0, ch) in enumerate(rows))
     if rows:
-        rows_ok = f'''theorem rows7{T}_ok : ∀ r ∈ rows7{T},
+        rows_ok = f'''set_option maxRecDepth 100000 in
+theorem rows7{T}_ok : ∀ r ∈ rows7{T},
     ∃ i, rowOK6 tables7{T}.k6 (dirChunks7{T}.getD i []) r.1 r.2 = true := by
   intro r hr
   simp only [rows7{T}, List.mem_cons, List.not_mem_nil, or_false] at hr
@@ -103,9 +104,8 @@ theorem keysOK7{T} : keysOK6 dirKeys7{T} = true := by decide +kernel
 theorem keysOKH7{T} : keysOKH hKeys7{T} = true := by decide +kernel
 
 /-- The H9 tree of `tables7{T}` holds exactly the codes of the H9 keys. -/
-theorem coverH7{T} : CoverH tables7{T} hKeys7{T} := by
-  unfold CoverH
-  decide +kernel
+set_option maxRecDepth 100000 in
+theorem coverH7{T} : CoverH tables7{T} hKeys7{T} := coverH_of (by decide +kernel)
 
 {zero}{rowdecls}{rows_ok}
 /-- Every set exclusion bit of a canonical shape of 3 to 8 directions is one of the keys

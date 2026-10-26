@@ -18,9 +18,8 @@ theorem keysOK7Toy : keysOK6 dirKeys7Toy = true := by decide +kernel
 theorem keysOKH7Toy : keysOKH hKeys7Toy = true := by decide +kernel
 
 /-- The H9 tree of `tables7Toy` holds exactly the codes of the H9 keys. -/
-theorem coverH7Toy : CoverH tables7Toy hKeys7Toy := by
-  unfold CoverH
-  decide +kernel
+set_option maxRecDepth 100000 in
+theorem coverH7Toy : CoverH tables7Toy hKeys7Toy := coverH_of (by decide +kernel)
 
 set_option maxRecDepth 100000 in
 theorem zero7Toy_3 : allRGS 3 0 (zeroOutside6 tables7Toy.k6 rows7Toy) = true := by decide +kernel
@@ -153,6 +152,7 @@ set_option maxRecDepth 100000 in
 theorem row7Toy_4 : rowOK6 tables7Toy.k6 (dirChunks7Toy.getD 0 []) [0, 1, 2, 3, 0, 1, 4, 5] 2 = true := by
   decide +kernel
 
+set_option maxRecDepth 100000 in
 theorem rows7Toy_ok : ∀ r ∈ rows7Toy,
     ∃ i, rowOK6 tables7Toy.k6 (dirChunks7Toy.getD i []) r.1 r.2 = true := by
   intro r hr
