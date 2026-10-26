@@ -37,6 +37,17 @@ def bf_warm(K, masks, pi, dirty, P, Q, L, maxit=4000):
     return False, maxit
 
 
+def apply6(Pr, k, delta):
+    w = len(k[1])
+    for e, pat in Pr.hits(k):
+        A = Pr.CNT[e].reshape((6,) * 6)
+        ix = (slice(None),) * (6 - w) + tuple(p - 1 for p in pat)
+        if delta > 0:
+            A[ix] += 1
+        else:
+            A[ix] -= 1
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('tag'); ap.add_argument('newtag')
@@ -76,7 +87,7 @@ def main():
         if t == 'k6':
             E = sorted({e for e, _ in K.Pr.hits(k)})
             old_alive = K.alive[E].copy()
-            K.Pr.apply(k, -1)
+            apply6(K.Pr, k, -1)
             K.alive[E] = K.Pr.CNT[E] == 0
             aff = sorted({i for e in E for i in bysrc[e] + bytgt[e]})
             revived = [(e, np.flatnonzero(K.alive[e] & ~oa)) for e, oa in zip(E, old_alive)]
@@ -102,7 +113,7 @@ def main():
                 K.newkeys.discard(k)
         else:
             if t == 'k6':
-                K.Pr.apply(k, 1); K.alive[E] = K.Pr.CNT[E] == 0
+                apply6(K.Pr, k, 1); K.alive[E] = K.Pr.CNT[E] == 0
             else:
                 for i, c in hs:
                     K.newcnt[i, k7.cidx(c)] += 1
