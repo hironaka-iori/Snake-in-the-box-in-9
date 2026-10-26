@@ -19,9 +19,10 @@ The plan of `../README.md` §5 is followed, with three changes:
   - H9 rows are very sparse: 17,288 keys in 2,001 rows of 7^6 bits. As masks they would be
     48.6 MB of hex.
   - So `Tables7.htree : NTree` holds the base-9 codes `encB 9 (dirs ++ syms) 0` of the H9 keys.
+    The generated tree is a spine (`NTree.spine`) of one balanced subtree per chunk of 400 keys.
   - `wforbH T ds syms` looks up `canon ds.reverse ++ syms.reverse`, the reversed key form.
-  - The cover is one kernel equality: `CoverH`, the in-order list of the tree equals the key
-    codes. Hits are decoded by `encB_inj`.
+  - The cover is `CoverH`: the in-order list of the tree equals the key codes. It is checked
+    with one kernel equality per chunk (`coverH_spine`), and hits are decoded by `encB_inj`.
 - **Potential rows** are keyed by (8-shape, t0, t1), with fields at `cntIdx6 [t2..t5]`: 4,752
   rows of 6^4 fields. One shard declaration (8-shape, label, t0, t1) reads a single source row.
 - **Lookups** (`wIdx`, `forb`, `pIdx`, `pot`) are balanced `bif Nat.blt` trees in the generated
@@ -95,9 +96,12 @@ not committed):
 - **Keys:** 10 part modules of at most 4,000 keys each, 26–37 s and 0.6–0.8 GB each.
   - A single 38,224-key module passed 4 GB and was killed. Elaboration keeps about 1 GB per
     7,000 keys.
-- **`WindowAutomaton7L417dData`:** 614 s, 0.78 GB, a 35 MB olean.
-  - A single definition with all 4,752 potential rows timed out, so the generator writes one
-    potential definition per 8-shape.
+- **`WindowAutomaton7L417dData`:** 76 s, 0.57 GB, a 35 MB olean.
+  - Two layouts failed or were slow, so the generator writes one potential definition per
+    8-shape and one H9 subtree per chunk:
+    - a single definition with all 4,752 potential rows timed out in the elaborator after 12
+      minutes;
+    - with a single 17,288-node H9 tree, the module took 614 s.
 - **Shards** (`--split t2`):
 
   | shard | 8-shape | induced labels | declarations | time | memory |
@@ -111,7 +115,15 @@ not committed):
   - **Estimate for all 792 shards:** 109,080 declarations × about 4.2 s ≈ **125 CPU-hours** at
     under 1 GB each. The plan estimated about 55. The extra cost is the H9 tree and the own-window
     lookups.
-- BRIDGE_PLACEHOLDER
+- **`DirectionWindowBridge7L417d`:** 260 s, 1.14 GB. It holds:
+  - `keysOK6` and `keysOKH`, per chunk;
+  - `CoverH`, as 44 chunk equalities;
+  - the zero-row checks;
+  - the 202 row declarations against their key chunks.
+
+  **`windows7L417d : AllRefuted7L417d → Windows7 tables7L417d …`** depends only on the standard
+  three axioms. The first attempts passed 4 GB, because they checked `keysOK`/`CoverH` in one
+  declaration and `rows_ok` hit the recursion depth; hence the per-chunk checks.
 
 ## What remains for a real k7 chain
 
@@ -122,11 +134,9 @@ not committed):
    - The Sequence module is generated but not compiled. Its pieces are the same as those of the
      toy and k6 sequences, except for the 203 prefix checks of `ShapesCover7`, which are not
      measured.
-   - Possible speed-ups:
-     - a hash split of the H9 tree;
-     - skipping dead sources before the inner `allSym s`. This is already done: `own7` sits
-       outside it.
-     - fewer lookups per transition, for example by caching the target potential row.
+   - Possible speed-ups, none tried:
+     - a balanced skeleton for the H9 spine, instead of a walk of up to 44 nodes;
+     - fewer window lookups per transition. The six k6/F8 lookups in both orientations dominate.
 3. **`AggregateDirection7L417d`** is generated (`upper_234_of_refuted7L417d`) but not compiled. It
    needs the Sequence module.
 4. **The unconditional module** (`UpperBound234`: the replays plus the glue) is not generated.
