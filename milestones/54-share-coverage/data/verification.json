@@ -1,0 +1,178 @@
+{
+  "status": "PASS",
+  "models": [
+    {
+      "model": "base235",
+      "mode": "count",
+      "mean": "4",
+      "cycle_length": 3,
+      "edges": 3546419,
+      "potential_range": 600,
+      "conditional_bound": "3066/13"
+    },
+    {
+      "model": "base235",
+      "mode": "share",
+      "mean": "4",
+      "cycle_length": 3,
+      "edges": 3546419,
+      "potential_range": 600,
+      "conditional_bound": "3066/13"
+    },
+    {
+      "model": "all-known",
+      "mode": "count",
+      "mean": "65/16",
+      "cycle_length": 16,
+      "edges": 3042898,
+      "potential_range": 1215,
+      "conditional_bound": "147176/625"
+    },
+    {
+      "model": "all-known",
+      "mode": "share",
+      "mean": "57/14",
+      "cycle_length": 14,
+      "edges": 3042898,
+      "potential_range": 4380,
+      "conditional_bound": "128782/547"
+    },
+    {
+      "model": "proposed-share",
+      "mode": "count",
+      "mean": "65/16",
+      "cycle_length": 16,
+      "edges": 3042898,
+      "potential_range": 1215,
+      "conditional_bound": "147176/625"
+    },
+    {
+      "model": "proposed-share",
+      "mode": "share",
+      "mean": "57/14",
+      "cycle_length": 14,
+      "edges": 3042898,
+      "potential_range": 4380,
+      "conditional_bound": "128782/547"
+    },
+    {
+      "model": "proposed-joint",
+      "mode": "count",
+      "mean": "65/16",
+      "cycle_length": 16,
+      "edges": 3042328,
+      "potential_range": 1215,
+      "conditional_bound": "147176/625"
+    },
+    {
+      "model": "proposed-joint",
+      "mode": "share",
+      "mean": "57/14",
+      "cycle_length": 14,
+      "edges": 3042328,
+      "potential_range": 4380,
+      "conditional_bound": "128782/547"
+    },
+    {
+      "model": "bidirectional",
+      "mode": "count",
+      "mean": "65/16",
+      "cycle_length": 16,
+      "edges": 3042898,
+      "potential_range": 1215,
+      "conditional_bound": "147176/625"
+    },
+    {
+      "model": "bidirectional",
+      "mode": "share",
+      "mean": "57/14",
+      "cycle_length": 14,
+      "edges": 3042898,
+      "potential_range": 4380,
+      "conditional_bound": "128782/547"
+    },
+    {
+      "model": "proposed-bidirectional",
+      "mode": "count",
+      "mean": "65/16",
+      "cycle_length": 16,
+      "edges": 3042328,
+      "potential_range": 1215,
+      "conditional_bound": "147176/625"
+    },
+    {
+      "model": "proposed-bidirectional",
+      "mode": "share",
+      "mean": "53/13",
+      "cycle_length": 13,
+      "edges": 3042328,
+      "potential_range": 8280,
+      "conditional_bound": "119585/508"
+    }
+  ],
+  "lean_modules": 2,
+  "lean_audits": 8,
+  "audited_theorems": [
+    "Snake9.FiveWindowBudget.window_budget",
+    "Snake9.FiveWindowBudget.aggregate_charge",
+    "Snake9.FiveWindowBudget.current_model_bound",
+    "Snake9.FiveWindowBudget.current_model_integer_bound",
+    "Snake9.FiveWindowBudget.sufficient_for_234",
+    "Snake9.LocalWindow.ReverseShareRule.share_rev",
+    "Snake9.LocalWindow.ReverseShareRule.five_sum_rev",
+    "Snake9.LocalWindow.ReverseShareRule.reverse_rule"
+  ],
+  "positive_controls": [
+    {
+      "row": 2,
+      "share": 825,
+      "sha256": "beac6008493a3d2cb7e9f146827464c97f4cd0a1a4c9a632637e38d35239ec98"
+    },
+    {
+      "row": 3,
+      "share": 360,
+      "sha256": "03e6551708216266c5cff431f8de295b612e0d4f6fa9f7a9d7906adf8d32b495"
+    },
+    {
+      "row": 4,
+      "share": 271,
+      "sha256": "a8775887dbd923c1f98eee60245c90ddfafac5b9abba14572a8bba968b209a86"
+    },
+    {
+      "row": 5,
+      "share": 821,
+      "sha256": "52f11ea5d57c0c6c02db1ef125a7c89109d6083772063a0e5dd5ad5849efc6bf"
+    },
+    {
+      "row": 8,
+      "share": 325,
+      "sha256": "59e798ad5936a58f702cb91d164bca737959e2c79ac577686d2854cf2bbe3bc5"
+    },
+    {
+      "row": 9,
+      "share": 254,
+      "sha256": "f6b3e829b2baab96a57ecf217d2e8642ac2ddcac3f2decb62539a858d564eac8"
+    },
+    {
+      "row": 11,
+      "share": 416,
+      "sha256": "bcbf5796f35b522b4247f8e139f8280f0d1b4a0e1402f1b5596fcdedeacc1fc4"
+    },
+    {
+      "row": 12,
+      "share": 430,
+      "sha256": "a6b9aa4c559d9a664cbe37ab59e76f9b45942d6d7ddcba672187315551bb1262"
+    },
+    {
+      "row": 13,
+      "share": 469,
+      "sha256": "3ff1867e7249f6f669d632981d0df5f31e495b2e1fcbf5c29570b0620202f72e"
+    }
+  ],
+  "screen_status": {
+    "SKIPPED": 5,
+    "INFEASIBLE": 8,
+    "UNKNOWN": 1
+  },
+  "scope": "Full numerical graph reconstruction, potentials and cycles checked; local controls checked independently; five-window and conditional arithmetic checked in Lean. No complete all-key replay or global bound improvement."
+}
