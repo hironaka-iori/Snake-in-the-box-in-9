@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "shapes": 505,
+  "positive": 357,
+  "improved_shapes": 231,
+  "maximum": 54,
+  "models": [
+    {
+      "name": "lifted",
+      "states": 1026432,
+      "edges": 11594078,
+      "mean": "617/150",
+      "cycle_length": 20,
+      "cycle_share": 32,
+      "potential_range": 3122,
+      "bound": "2760633/11734",
+      "integer_bound": 235,
+      "strengthened": 0
+    },
+    {
+      "name": "extended",
+      "states": 1026432,
+      "edges": 11594078,
+      "mean": "3297/800",
+      "cycle_length": 20,
+      "cycle_share": 51,
+      "potential_range": 12101,
+      "bound": "22084829/93891",
+      "integer_bound": 235,
+      "strengthened": 5308975
+    }
+  ],
+  "bank": {
+    "paths": 131,
+    "windows": 47946,
+    "positive_windows": 36368,
+    "shapes": 271,
+    "minimum_margin": 128
+  },
+  "centering_probe": {
+    "cycle_length": 20,
+    "cycle_mean": "9891/20",
+    "threshold": "112680/227",
+    "scope": "Saved cycle only; no complete centred-model minimum asserted."
+  },
+  "scope": "Separate exact computations check geometry, suffix lifts, every potential inequality and attaining cycles. Lean results are audited separately. Inherited numerical premises and full graph-to-snake assembly remain pending."
+}
