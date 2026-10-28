@@ -181,3 +181,8 @@ The preceding goal round made progress by proving both individual thresholds 5, 
 ## Milestone 62: vertex-split empty-square charge
 
 Eight arbitrary-snake geometric share bounds and three finite potential certificates passed 12 Lean modules and 88 axiom audits. The eleven-transition restricted mean is now 2483/600, up by 1/240. The global interval remains 191..235; no optimum or new global upper bound is claimed. Count-conditioned and floating LP candidates are preserved separately and excluded from checked weights. Research round 6 of 10 after manuscript revision 56; full rewrite scheduled for 66. See milestones/62-count-conditioned-share/README.md for proof, data and scope.
+
+
+## Milestone 63: longer-window vertex splits
+
+Thirty-eight arbitrary-snake share bounds and the restricted-family mean 4973/1200 passed 39 Lean modules and 348 axiom audits. Independent coverage checked 94,432 split candidates on 214 shapes. The all-vertex and neighbourhood searches have identical optima under the fixed degree-forcing rule. The integer-weight threshold gap remains 73/30, so the global interval stays 191..235. Unproved pilots favour complete neighbour choices over one extra binary split; neither pilot is part of the checked graph. Research round 7 of 10 since manuscript revision 56; next full rewrite at 66.
