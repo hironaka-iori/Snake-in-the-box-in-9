@@ -1,6 +1,22 @@
 # Research milestones
 
-The exact optimum remains unresolved. The integrated interval is 191 <= a(9) <= 236 edges, using the pinned complete contributor audit. The latest research is milestone 47 (three count-one exclusions and a replacement-cycle obstruction); the full manuscript revision remains milestone 46. A fresh independent rebuild of the full 236 proof remains pending.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. The latest completed research is milestone 62: eight Lean-checked vertex-split share improvements and stronger restricted critical-family minima. The manuscript remains at revision 56, with its next full revision scheduled after milestone 66. The global upper-bound dependency closure has not been independently rebuilt here.
+
+- [Milestone 62: empty-square share under a vertex case split](62-count-conditioned-share/README.md)
+- [Milestone 61: empty-square charge on the complete critical family](61-critical-family-share/README.md)
+- [Milestone 60: extending the recorded critical cycle](60-critical-window-extension/README.md)
+- [Milestone 59: extending the forced-empty-square window](59-extended-share-window/README.md)
+- [Milestone 58: forced-absence share bounds](58-share-pressure/README.md)
+- [Milestone 57: share candidates covering the replacement family](57-replacement-share-family/README.md)
+- [Milestone 56: zero-credit packing limitation and paper revision](56-packing-limit-and-revision/README.md)
+- [Milestone 55: share constraints across the critical family](55-critical-share-family/README.md)
+- [Milestone 54: coverage of the empty-square share inequalities](54-share-coverage/README.md)
+- [Milestone 53: empty-square shares on a satisfiable obstruction](53-shares-on-sat-obstruction/README.md)
+- [Milestone 52: empty-square shares against the 235 baseline](52-share-on-235/README.md)
+- [Milestone 51: empty-square shares on critical windows](51-exact-bucket-pressure/README.md)
+- [Milestone 50: a sharp triple inequality and targeted range optimisation](50-three-count-return/README.md)
+- [Complete survey of low two-count restrictions on six-direction segments](49-six-direction-pair-catalogue/README.md)
+- [Low-count compatibility in short snake segments](48-low-count-compatibility/README.md)
 
 - [Three transition-pattern singleton restrictions](47-critical-singleton-patterns/README.md)
 - [Sharp pair endpoint demand](45-pair-endpoint-demand/README.md)

@@ -1,6 +1,6 @@
 # Scope of this archived ledger
 
-Entries below are chronological development history. This archived section records the development through the 245 bound. The maintained repository currently integrates 238; later checkpoints are listed in the milestone index. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
+Entries below are chronological development history. This archived section records the development through the 245 bound. The maintained repository currently records 235; later checkpoints are listed in the milestone index. Paths under dated research directories refer to local material, not files required for this PR. Maintained sources and reproduction instructions are in `work/spectral/`.
 
 # Research ledger — 15 October 2026
 
@@ -176,3 +176,8 @@ The preceding round made verified progress by incorporating the audited 236 theo
 ## 24 October 2026: joint intervening sum and overlap accounting
 
 The preceding goal round made progress by proving both individual thresholds 5, compiling the revised paper, and pushing the checkpoint. Milestone 41 proves the stronger joint threshold 12 under the same two distant-count caps. A generic concatenated-counter identity preserves multiplicities; the 4097-clause core with 1401 active variables was replayed using 5222602 hints in 174 segments and 29 check modules. All 208 recorded build modules succeeded. Ten final dependency audits cover the counter, clause interpretation, arbitrary-snake theorem, and excess accounting. A qualifying truncated sum at most 11 forces one count-excess unit, giving a conditional charge contribution of 12 per occurrence after multiplicity-two accounting. This shares the existing excess budget. Independent checks of all 131 bank paths find 1442 oriented pattern occurrences and zero qualifying low-count occurrences, so there is no frequency claim. The local forest attaining 12 was independently rechecked. The five-centre sum 24 remains numerical. The paper and existing editor source were updated and compiled successfully; visual inspection of every rendered page remains undone. The global interval remains 191..236.
+
+
+## Milestone 62: vertex-split empty-square charge
+
+Eight arbitrary-snake geometric share bounds and three finite potential certificates passed 12 Lean modules and 88 axiom audits. The eleven-transition restricted mean is now 2483/600, up by 1/240. The global interval remains 191..235; no optimum or new global upper bound is claimed. Count-conditioned and floating LP candidates are preserved separately and excluded from checked weights. Research round 6 of 10 after manuscript revision 56; full rewrite scheduled for 66. See milestones/62-count-conditioned-share/README.md for proof, data and scope.
