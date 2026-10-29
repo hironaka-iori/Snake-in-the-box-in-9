@@ -191,3 +191,8 @@ Thirty-eight arbitrary-snake share bounds and the restricted-family mean 4973/12
 ## Milestone 64: complete neighbour-choice share bounds
 
 The full replay passed 36 modules and 216 theorem-dependency audits. All 34 local arbitrary-snake bounds and the exact restricted minimum 1991/480 are checked. Independent reconstruction covers 11,554 configurations and 2,044 reduced certificates. The remaining zero-range threshold gap is 119/60; the global interval remains 191..235. Count-conditioned pilots remain unproved. Research round 8 of 10 since manuscript revision 56; next full rewrite at 66.
+
+
+## Milestone 65: count saturation and empty-square shares
+
+Nine arbitrary-snake share improvements and a direct terminal count lower bound three passed 17 Lean modules and 104 audits. All 479 compact branch certificates and 217 deduction steps pass independent reconstruction. Shares alone give the restricted minimum 9961/2400. The direct exclusion of transition 24 removes every cycle of the saved family, whose longest remaining walk is 19. No global upper bound follows from this restricted graph. GitHub refresh to contributor 838303ae confirms unfinished certificates and shards in the proposed 234 chain; the recorded upper bound stays 235. Research round 9 of 10 since revision 56; integrate the restriction into the complete model and rewrite the paper at milestone 66.

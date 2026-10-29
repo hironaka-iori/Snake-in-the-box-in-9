@@ -1,0 +1,503 @@
+def Snake9.LocalWindow.instDecidableEqCentre : DecidableEq Centre :=
+Snake9.LocalWindow.decEqCentre✝
+instBEqOfDecidableEq
+[{ v := 1,
+    d₁ :=
+      Acc.rec
+        (fun x₁ h ih =>
+          Decidable.rec (fun h => 0)
+            (fun h =>
+              Nat.succ
+                (ih
+                  (Decidable.rec (fun h => 0)
+                    (fun h =>
+                      ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                              (fun n n_ih =>
+                                ⟨fun x hfuel =>
+                                  Decidable.rec (fun h => 0)
+                                    (fun h =>
+                                      (n_ih.1 (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x)) ⋯).succ)
+                                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                          ⟨fun x =>
+                                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                PUnit.unit⟩,
+                                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                            PUnit.unit⟩))),
+                                  n_ih⟩)
+                              x₁).1
+                          (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                          ⟨fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+                  ⋯))
+            (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+              (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                  ⟨fun x =>
+                    Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                      ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                    fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+        ⋯,
+    d₂ :=
+      Acc.rec
+        (fun x₁ h ih =>
+          Decidable.rec (fun h => 0)
+            (fun h =>
+              Nat.succ
+                (ih
+                  (Decidable.rec (fun h => 0)
+                    (fun h =>
+                      ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                              (fun n n_ih =>
+                                ⟨fun x hfuel =>
+                                  Decidable.rec (fun h => 0)
+                                    (fun h =>
+                                      (n_ih.1 (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x)) ⋯).succ)
+                                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                          ⟨fun x =>
+                                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                PUnit.unit⟩,
+                                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                            PUnit.unit⟩))),
+                                  n_ih⟩)
+                              x₁).1
+                          (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                          ⟨fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+                  ⋯))
+            (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+              (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                  ⟨fun x =>
+                    Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                      ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                    fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+        ⋯,
+    lo := 0, hi := 21 },
+  { v := 3,
+    d₁ :=
+      Acc.rec
+        (fun x₁ h ih =>
+          Decidable.rec (fun h => 0)
+            (fun h =>
+              Nat.succ
+                (ih
+                  (Decidable.rec (fun h => 0)
+                    (fun h =>
+                      ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                              (fun n n_ih =>
+                                ⟨fun x hfuel =>
+                                  Decidable.rec (fun h => 0)
+                                    (fun h =>
+                                      (n_ih.1 (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x)) ⋯).succ)
+                                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                          ⟨fun x =>
+                                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                PUnit.unit⟩,
+                                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                            PUnit.unit⟩))),
+                                  n_ih⟩)
+                              x₁).1
+                          (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                          ⟨fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+                  ⋯))
+            (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+              (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                  ⟨fun x =>
+                    Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                      ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                    fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+        ⋯,
+    d₂ :=
+      Acc.rec
+        (fun x₁ h ih =>
+          Decidable.rec (fun h => 0)
+            (fun h =>
+              Nat.succ
+                (ih
+                  (Decidable.rec (fun h => 0)
+                    (fun h =>
+                      ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                              (fun n n_ih =>
+                                ⟨fun x hfuel =>
+                                  Decidable.rec (fun h => 0)
+                                    (fun h =>
+                                      (n_ih.1 (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x)) ⋯).succ)
+                                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                          ⟨fun x =>
+                                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                PUnit.unit⟩,
+                                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                            PUnit.unit⟩))),
+                                  n_ih⟩)
+                              x₁).1
+                          (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                          ⟨fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+                  ⋯))
+            (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+              (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                  ⟨fun x =>
+                    Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                      ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                    fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+        ⋯,
+    lo := 0, hi := 21 },
+  { v := 7,
+    d₁ :=
+      Acc.rec
+        (fun x₁ h ih =>
+          Decidable.rec (fun h => 0)
+            (fun h =>
+              Nat.succ
+                (ih
+                  (Decidable.rec (fun h => 0)
+                    (fun h =>
+                      ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                              (fun n n_ih =>
+                                ⟨fun x hfuel =>
+                                  Decidable.rec (fun h => 0)
+                                    (fun h =>
+                                      (n_ih.1 (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x)) ⋯).succ)
+                                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                          ⟨fun x =>
+                                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                PUnit.unit⟩,
+                                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                            PUnit.unit⟩))),
+                                  n_ih⟩)
+                              x₁).1
+                          (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                          ⟨fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+                  ⋯))
+            (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+              (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                  ⟨fun x =>
+                    Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                      ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩,
+                    fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit, PUnit.unit⟩))))
+        ⋯,
+    d₂ :=
+      Acc.rec
+        (fun x₁ h ih =>
+          Decidable.rec (fun h => 0)
+            (fun h =>
+              Nat.succ
+                (ih
+                  (Decidable.rec (fun h => 0)
+                    (fun h =>
+                      ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                              (fun n n_ih =>
+                                ⟨fun x hfuel =>
+                                  Decidable.rec (fun h => 0)
+                                    (fun h =>
+                                      (n_ih.1 (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x)) ⋯).succ)
+                                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                          ⟨fun x =>
+                                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                PUnit.unit⟩,
+                                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                            PUnit.unit⟩))),
+                                  n_ih⟩)
+                              x₁).1
+                          (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                      (Bool.rec (isFalse ⋯) (isTrue ⋯) (Nat.rec (fun x => false) (fun n => ⋯) ⋯ ⋯))))
+                  ⋯))
+            ⋯)
+        ⋯,
+    lo := ⋯, hi := ⋯ },
+  ⋯]
+[{ v := 14, d₁ := 3, d₂ := 4, lo := 6, hi := 21 }, { v := 30, d₁ := 4, d₂ := 2, lo := 2, hi := 2 },
+  { v := 26, d₁ := 2, d₂ := 0, lo := 2, hi := 2 }, { v := 27, d₁ := 0, d₂ := 1, lo := 6, hi := 21 },
+  { v := 25, d₁ := 1, d₂ := 5, lo := 6, hi := 21 }, { v := 57, d₁ := 5, d₂ := 0, lo := 1, hi := 1 }]
+Bool.rec false
+  (Bool.rec false
+    (Bool.rec false
+      (Bool.rec false
+        (Bool.rec false
+          (Bool.rec false true
+            (Bool.rec false true
+              (Decidable.rec (fun h => false) (fun h => true)
+                (Decidable.rec (fun h => isFalse ⋯)
+                  (fun h =>
+                    h ▸
+                      Decidable.rec (fun h => isFalse ⋯) (fun h => h ▸ isTrue ⋯)
+                        (Bool.rec (motive := fun x =>
+                          Nat.beq 0 (dirOfStep (W.getD (9 + 1) 0) (W.getD (9 + 2) 0)) = x →
+                            (fun x => Decidable (0 = dirOfStep (W.getD (9 + 1) 0) (W.getD (9 + 2) 0))) x)
+                          (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                          (Nat.rec (fun x => true) (fun n n_ih x => false)
+                            (Acc.rec
+                              (fun x₁ h ih =>
+                                Decidable.rec (fun h => 0)
+                                  (fun h =>
+                                    Nat.succ
+                                      (ih
+                                        (Decidable.rec (fun h => 0)
+                                          (fun h =>
+                                            ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                                                    (fun n n_ih =>
+                                                      ⟨fun x hfuel =>
+                                                        Decidable.rec (fun h => 0)
+                                                          (fun h =>
+                                                            (n_ih.1
+                                                                (Nat.rec 0 (fun n n_ih => n)
+                                                                  (Nat.rec 0 (fun n n_ih => n) x))
+                                                                ⋯).succ)
+                                                          (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                                            (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                                              (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                                                ⟨fun x =>
+                                                                  Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                                                    ⟨fun x =>
+                                                                      Nat.rec (fun x => true) (fun n n_ih x => true) x
+                                                                        PUnit.unit,
+                                                                      PUnit.unit⟩,
+                                                                  fun x =>
+                                                                  Nat.rec (fun x => true) (fun n n_ih x => true) x
+                                                                    PUnit.unit,
+                                                                  PUnit.unit⟩))),
+                                                        n_ih⟩)
+                                                    x₁).1
+                                                (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                                          (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                            (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                              (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                                                ⟨fun x =>
+                                                  Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                                    ⟨fun x =>
+                                                      Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                      PUnit.unit⟩,
+                                                  fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                  PUnit.unit⟩))))
+                                        ⋯))
+                                  (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                    (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                      (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                                        ⟨fun x =>
+                                          Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                            ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                              PUnit.unit⟩,
+                                          fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                          PUnit.unit⟩))))
+                              ⋯)
+                            PUnit.unit)
+                          ⋯))
+                  (Bool.rec (motive := fun x =>
+                    Nat.beq 5 (dirOfStep (W.getD 9 0) (W.getD (9 + 1) 0)) = x →
+                      (fun x => Decidable (5 = dirOfStep (W.getD 9 0) (W.getD (9 + 1) 0))) x)
+                    (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                    (Nat.rec (fun x => false) (fun n n_ih x => x.1 n)
+                      (Acc.rec
+                        (fun x₁ h ih =>
+                          Decidable.rec (fun h => 0)
+                            (fun h =>
+                              Nat.succ
+                                (ih
+                                  (Decidable.rec (fun h => 0)
+                                    (fun h =>
+                                      ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                                              (fun n n_ih =>
+                                                ⟨fun x hfuel =>
+                                                  Decidable.rec (fun h => 0)
+                                                    (fun h =>
+                                                      (n_ih.1
+                                                          (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x))
+                                                          ⋯).succ)
+                                                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                                          ⟨fun x =>
+                                                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                                              ⟨fun x =>
+                                                                Nat.rec (fun x => true) (fun n n_ih x => true) x
+                                                                  PUnit.unit,
+                                                                PUnit.unit⟩,
+                                                            fun x =>
+                                                            Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                            PUnit.unit⟩))),
+                                                  n_ih⟩)
+                                              x₁).1
+                                          (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                                    (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                      (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                                          ⟨fun x =>
+                                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                PUnit.unit⟩,
+                                            fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                            PUnit.unit⟩))))
+                                  ⋯))
+                            (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                              (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                                  ⟨fun x =>
+                                    Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                      ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                        PUnit.unit⟩,
+                                    fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                    PUnit.unit⟩))))
+                        ⋯)
+                      ⟨fun x =>
+                        Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                          ⟨fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x =>
+                                Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                  ⟨fun x =>
+                                    Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                      ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit,
+                                        PUnit.unit⟩,
+                                    fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                                fun x =>
+                                Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                  ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                                fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                            fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x =>
+                                Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                  ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                                fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                            fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                            fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                        fun x =>
+                        Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                          ⟨fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x =>
+                                Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                  ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                                fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                            fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                            fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                        fun x =>
+                        Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                          ⟨fun x =>
+                            Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                              ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                            fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                        fun x =>
+                        Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                          ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩,
+                        fun x => Nat.rec (fun x => true) (fun n n_ih x => false) x PUnit.unit, PUnit.unit⟩)
+                    ⋯)))))
+          (Bool.rec false true
+            (Decidable.rec (fun h => false) (fun h => true)
+              (Decidable.rec (fun h => isFalse ⋯)
+                (fun h =>
+                  ⋯ ▸
+                    Decidable.rec (fun h => isFalse ⋯) (fun h => h ▸ isTrue ⋯)
+                      (Bool.rec (motive := fun x =>
+                        Nat.beq 5 (dirOfStep (W.getD (8 + 1) 0) (W.getD (8 + 2) 0)) = x →
+                          (fun x => Decidable (5 = dirOfStep (W.getD (8 + 1) 0) (W.getD (8 + 2) 0))) x)
+                        (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                        (Nat.rec (fun x => false) (fun n n_ih x => x.1 n)
+                          (Acc.rec
+                            (fun x₁ h ih =>
+                              Decidable.rec (fun h => 0)
+                                (fun h =>
+                                  Nat.succ
+                                    (ih
+                                      (Decidable.rec (fun h => 0)
+                                        (fun h =>
+                                          ((Nat.rec ⟨fun x hfuel => False.rec (fun x => ℕ) ⋯, PUnit.unit⟩
+                                                  (fun n n_ih =>
+                                                    ⟨fun x hfuel =>
+                                                      Decidable.rec (fun h => 0)
+                                                        (fun h =>
+                                                          (n_ih.1
+                                                              (Nat.rec 0 (fun n n_ih => n)
+                                                                (Nat.rec 0 (fun n n_ih => n) x))
+                                                              ⋯).succ)
+                                                        (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                                          (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                                            (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                                              ⟨fun x =>
+                                                                Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                                                  ⟨fun x =>
+                                                                    Nat.rec (fun x => true) (fun n n_ih x => true) x
+                                                                      PUnit.unit,
+                                                                    PUnit.unit⟩,
+                                                                fun x =>
+                                                                Nat.rec (fun x => true) (fun n n_ih x => true) x
+                                                                  PUnit.unit,
+                                                                PUnit.unit⟩))),
+                                                      n_ih⟩)
+                                                  x₁).1
+                                              (Nat.rec 0 (fun n n_ih => n) (Nat.rec 0 (fun n n_ih => n) x₁)) ⋯).succ)
+                                        (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                          (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                            (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                                              ⟨fun x =>
+                                                Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x
+                                                  ⟨fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                    PUnit.unit⟩,
+                                                fun x => Nat.rec (fun x => true) (fun n n_ih x => true) x PUnit.unit,
+                                                PUnit.unit⟩))))
+                                      ⋯))
+                                (Decidable.rec (fun h => isFalse ⋯) (fun h => isTrue ⋯)
+                                  (Bool.rec (isFalse ⋯) (isTrue ⋯)
+                                    (Nat.rec (fun x => false) (fun n n_ih x => x.1 n) x₁
+                                      ⟨fun x => Nat.rec (fun x => false) (fun n n_ih x => x.1 n) ⋯ ⋯, ⋯⟩))))
+                            ⋯)
+                          ⋯)
+                        ⋯))
+                ⋯))))
+        ⋯)
+      ⋯)
+    ⋯)
+  ⋯
