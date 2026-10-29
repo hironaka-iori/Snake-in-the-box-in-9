@@ -249,12 +249,23 @@ def lean_tag(t):
     return '(.' + t[0] + ' ' + ' '.join(map(str, t[1:])) + ')'
 
 
+def uncounted_centres(window, bounds):
+    """Interior vertices of `window` beyond the first `len(bounds)`: they carry no count
+    (`centresOf window bounds` has `bounds.length` centres), so their alpha is None and no
+    counter is encoded for them.  This is 1 for the H9 keys of milestones/25-k7-234 (9
+    directions, 7 bounds, the last interior vertex uncounted) and 0 for every other set."""
+    n = len(window) - 2 - len(bounds)
+    assert n in (0, 1), (len(window), len(bounds))
+    return n
+
+
 def process(name, emit, certs=CERTS, core_dir=CORE, noncomputable=False):
     meta = json.load(open(os.path.join(core_dir, name + '.json')))
     window, bounds = meta['window'], [tuple(b) for b in meta['bounds']]
     if 'dirs' in meta:  # direction certificate: the window is `winOf dirs`
         assert window == wincert.window_from_dirs(meta['dirs']), name
     alpha = [b[0] if b[0] == b[1] else b for b in bounds]
+    alpha += [None] * uncounted_centres(window, bounds)   # H9 keys only (see uncounted_centres)
     radius = meta.get('radius', 3)
     enc = TaggedEncoding(window, alpha, radius=radius)
     ref = wincert.Encoding(window, alpha, radius=radius)

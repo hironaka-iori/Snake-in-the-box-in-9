@@ -26,10 +26,18 @@ the `raw` of the existing `work/final_lean/LocalWindowCnf/<M>.lean`.
 The replay modules import `LocalWindowCnf.<M>` as before; an aggregate imports
 `LocalWindowCnf.<M>` instead of `LocalWindowSat.<M>` for `<M>.sat`.
 
-  python gen_lean_cnfsat_packed.py --certs DIR --core DIR --out ROOT [--split] [--compare] NAME ...
+  python gen_lean_cnfsat_packed.py --certs DIR --core DIR --out ROOT [--split] [--compare] [--part-lits N] NAME ...
 
 --split writes the two modules of the old layout instead (`LocalWindowCnf/<M>.lean` with the
 packed core, `LocalWindowSat/<M>.lean` with the packed soundness data), for comparison.
+
+--part-lits N (a new path for the H9 windows of milestones/25-k7-234; without it the output is
+unchanged) proves `check` in several kernel evaluations, each its own declaration with its own
+kernel caches (`work/final_lean/LocalWindowTagsSplit.lean`): `check_ctrs` checks the counters by
+`ctrOKL` (the endpoint order on adjacent entries, linear instead of quadratic), and `check_<i>`
+the core clauses in consecutive parts of at most N literals (`raw = raw_0 ++ (raw_1 ++ …)`,
+`tags` likewise); `checkAll_of_parts` and `ckAll_append` give `check`.  The names and the
+statements of `raw`, `cnf`, `tags`, `check` and `sat` are those of the default layout.
 """
 import argparse, json, os, sys
 
@@ -233,6 +241,10 @@ def core_data(name, certs, core_dir):
     if 'dirs' in meta:
         assert window == wincert.window_from_dirs(meta['dirs']), name
     alpha = [b[0] if b[0] == b[1] else b for b in bounds]
+    # H9 keys (milestones/25-k7-234): 8 interior vertices, 7 bounds; the last centre is
+    # uncounted (`centresOf` takes `bounds.length` centres), so its alpha is None.  Every
+    # other set has one bound per centre and pads nothing.
+    alpha += [None] * GS.uncounted_centres(window, bounds)
     radius = meta.get('radius', 3)
     enc = GS.TaggedEncoding(window, alpha, radius=radius)
     ref = wincert.Encoding(window, alpha, radius=radius)
@@ -252,7 +264,20 @@ def core_data(name, certs, core_dir):
     return meta, enc, core, tags
 
 
-def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False):
+def clause_parts(core, part_lits):
+    """Consecutive (start, end) ranges of the core with at most `part_lits` literals each (a
+    longer clause is a part by itself)."""
+    parts, s, acc = [], 0, 0
+    for i, c in enumerate(core):
+        if i > s and acc + len(c) > part_lits:
+            parts.append((s, i))
+            s, acc = i, 0
+        acc += len(c)
+    parts.append((s, len(core)))
+    return parts
+
+
+def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False, part_lits=0):
     meta, enc, core, tags = core_data(name, certs, core_dir)
     module = meta['module'].split('.', 1)[1]
     raw = [[GS.code(l) for l in c] for c in core]
@@ -307,9 +332,70 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False):
                 '    Axioms S E window (centresOf window bounds) → ∃ τ, cnfTrue τ cnf = true :=',
                 '  fun S E h => ⟨tau S E meaning ctrs, sound meaning ctrs window bounds tags raw check S E h⟩', '']
     opt = ['set_option maxRecDepth 100000', 'set_option maxHeartbeats 0', '']
+    imports = ['import LocalWindowDirModel', 'import LocalWindowCnfPack']
+    parts = None
+    if part_lits:   # `check` in several declarations (LocalWindowTagsSplit); one module only
+        assert not split, '--part-lits needs the one-module layout'
+        parts = clause_parts(core, part_lits)
+        np_ = len(parts)
+        raw_ps = [pack_lists(raw[s:e], 8, w, chunk) for s, e in parts]
+        tag_ps = [pack_tags(tags[s:e], cw, iw, jw, chunk) for s, e in parts]
+        assert sum((unpack_lists(c, 8, w) for c in raw_ps), []) == raw
+        assert sum((unpack_tags(c, cw, iw, jw) for c in tag_ps), []) == [tuple(t) for t in tags]
+        raw_cs = [c for cs in raw_ps for c in cs]
+        tag_cs = [c for cs in tag_ps for c in cs]
+
+        def nm(base, i):
+            return base if np_ == 1 else '%s_%d' % (base, i)
+
+        def app(base):   # base_0 ++ (base_1 ++ (… ++ base_k)), the nesting of `check`
+            t = nm(base, np_ - 1)
+            for i in reversed(range(np_ - 1)):
+                t = '%s ++ (%s)' % (nm(base, i), t) if i < np_ - 2 else '%s ++ %s' % (nm(base, i), t)
+            return t
+        cnf_defs = ['noncomputable def window : List Nat := winOf %s' % dirs,
+                    'noncomputable def bounds : List (Nat × Nat) := boundsOf %s' % syms, '',
+                    '/-- Literals coded by `decodeLit` (`CnfPack.unpackL`, %d bits each)%s. -/'
+                    % (w, '' if np_ == 1 else ', in %d parts' % np_)]
+        for i, (s, e) in enumerate(parts):
+            cnf_defs += ['noncomputable def %s : List (List Nat) := CnfPack.unpackL 8 %d %s'
+                         % (nm('raw', i), w, lits(raw_ps[i])), '']
+        if np_ > 1:
+            cnf_defs += ['noncomputable def raw : List (List Nat) := %s' % app('raw'), '']
+        cnf_defs += ['noncomputable def cnf : List (List Int) := raw.map (·.map decodeLit)', '']
+        tag_defs = ['noncomputable def %s : List Tag := CnfPack.tagsCL %d %d %d %s'
+                    % (nm('tags', i), cw, iw, jw, lits(tag_ps[i])) for i in range(np_)]
+        if np_ > 1:
+            tag_defs.append('noncomputable def tags : List Tag := %s' % app('tags'))
+        checks = ['/-- The counters, with the endpoint order checked on adjacent entries (`ctrOKL`). -/',
+                  'theorem check_ctrs : ctrs.all (ctrOKL meaning (centresK window bounds)) = true := by '
+                  'decide +kernel', '']
+        for i, (s, e) in enumerate(parts):
+            checks += ['/-- Core clauses %d to %d (%d literals). -/' % (s + 1, e, sum(map(len, core[s:e]))),
+                       'theorem check_%d : ckAll meaning ctrs window %s %s = true := by decide +kernel'
+                       % (i, nm('tags', i), nm('raw', i)), '']
+        term = 'check_%d' % (np_ - 1)
+        for i in reversed(range(np_ - 1)):
+            term = 'ckAll_append meaning ctrs window %s %s _ _ check_%d\n      (%s)' % (nm('tags', i), nm('raw', i), i, term)
+        sat_defs = sat_defs[:7] + ['\n\n'.join(tag_defs), ''] + checks + [
+            'theorem check : checkAll meaning ctrs window bounds tags raw = true :=',
+            '  checkAll_of_parts check_ctrs\n    (%s)' % term, ''] + sat_defs[-4:]
+        imports.append('import LocalWindowTagsSplit')
+        # one kernel check at a time: the parts are separate declarations so that their caches
+        # are freed in turn
+        opt = opt[:2] + ['set_option Elab.async false', '']
     ns = 'Snake9.LocalWindow.' + module
     files = {}
-    if split:
+    if parts:
+        doc = head + ('\n`sat`: every clause of the core follows from the snake axioms (`Tags.sound`).  `check` is\n'
+                      'proved in %d kernel evaluations: the counters (`check_ctrs`, by `ctrOKL`) and the clauses in\n'
+                      '%d part(s) of at most %d literals (`check_<i>`), combined by `checkAll_of_parts` and\n'
+                      '`ckAll_append` (`LocalWindowTagsSplit`).  The data are packed (`LocalWindowCnfPack`). -/'
+                      % (len(parts) + 1, len(parts), part_lits))
+        files['LocalWindowCnf'] = '\n'.join(imports + ['', doc, ''] + opt +
+                                            ['namespace ' + ns, '', 'open Snake9.LocalWindow.Tags', ''] +
+                                            cnf_defs + sat_defs + ['end ' + ns, ''])
+    elif split:
         files['LocalWindowCnf'] = '\n'.join(['import LocalWindowDirModel', 'import LocalWindowCnfPack', '',
                                              head + ' -/', ''] + opt + ['namespace ' + ns, ''] + cnf_defs +
                                             ['end ' + ns, ''])
@@ -333,7 +419,8 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False):
                 ctrs=len(enc.ctrs), ctrs_kept=len(used_c), w=w, vw=vw, cw=cw, iw=iw, jw=jw,
                 raw_bytes=sum((c.bit_length() + 7) // 8 for c in raw_cs), meaning_bytes=(mbits + 7) // 8,
                 tag_bytes=sum((c.bit_length() + 7) // 8 for c in tag_cs),
-                ctr_bytes=sum((c.bit_length() + 7) // 8 for c in ctr_cs), lean_bytes=sum(map(len, files.values())))
+                ctr_bytes=sum((c.bit_length() + 7) // 8 for c in ctr_cs), lean_bytes=sum(map(len, files.values())),
+                check_parts=len(parts) if parts else 0)
 
 
 def main():
@@ -344,11 +431,14 @@ def main():
     ap.add_argument('--chunk', type=int, default=4096, help='bytes per chunk literal (at most 16384)')
     ap.add_argument('--split', action='store_true', help='two modules (LocalWindowCnf, LocalWindowSat)')
     ap.add_argument('--compare', action='store_true', help='check the core against work/final_lean/LocalWindowCnf')
+    ap.add_argument('--part-lits', type=int, default=0,
+                    help='check the counters (by ctrOKL) and the clauses in parts of at most this many literals, '
+                         'one declaration each (LocalWindowTagsSplit); 0: one `check` (the default)')
     ap.add_argument('names', nargs='+')
     a = ap.parse_args()
     assert 0 < a.chunk <= 16384
     for name in a.names:
-        print(json.dumps(emit(name, a.certs, a.core, a.out, a.chunk, a.split, a.compare)), flush=True)
+        print(json.dumps(emit(name, a.certs, a.core, a.out, a.chunk, a.split, a.compare, a.part_lits)), flush=True)
 
 
 if __name__ == '__main__':
