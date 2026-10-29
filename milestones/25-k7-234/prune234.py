@@ -137,6 +137,12 @@ class Costs:
             if k:
                 self.est[k] = r['proof_lines']
         self.free = set(k7.free_keys())
+        self.timeouts = set()
+        if os.path.exists(DECIDE):
+            for l in open(DECIDE):
+                r = json.loads(l)
+                if r['kind'] == 'k6' and r.get('known_unsat'):
+                    self.timeouts.add((tuple(r['dirs']), tuple(r['syms'])))
 
     def cls(self, cl, fallback):
         c = self.model['classes'].get(cl)
@@ -152,6 +158,8 @@ class Costs:
         if r is not None:
             return float(r['hints']), float(r['core']), 'measured'
         n = len(k[1]); t = self.sec6.get(k)
+        if k in self.timeouts:      # over the decide limit: at least the fit at the limit
+            return max(self.est.get(k, 0.0) * self.model.get('r4_ratio', 1.0), 1.49e6 * t ** 0.843), 6000.0, 'est_r4'
         if k in self.est and t is None:
             return self.est[k] * self.model.get('r4_ratio', 1.0), 3000.0, 'est_r4'
         if t is None:
