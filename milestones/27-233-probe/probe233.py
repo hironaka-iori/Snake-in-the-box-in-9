@@ -43,7 +43,7 @@ ORACLE = os.path.join(D, 'oracle233.jsonl.gz')
 ROUNDS = os.path.join(D, 'rounds233.jsonl')
 LAM233 = Fr(974, 226)
 BUDGET = int(os.environ.get('BUDGET', 1_000_000))      # CaDiCaL conflicts per solve call
-GEN_BUDGET = 150_000                                    # for optional generalisations
+GEN_BUDGET = 60_000                                     # for optional generalisations
 
 
 def bound(P, Q, B):
@@ -437,10 +437,11 @@ def windows(K, i, c, gen):
     clause set is contained in the previous one's, so UNSAT of one implies UNSAT of those before."""
     X = K.X[i]
     out = []
-    if gen in ('k6', 'f8'):
+    if gen in ('k6', 'k6x', 'f8'):
         out.append(k7.f8_key(X, c))
-    if gen == 'k6':
+    if gen in ('k6', 'k6x'):
         out.append(('k6',) + k7.FP.lkey(X[2:], c[1:]))
+    if gen == 'k6x':
         out.append(('k6',) + k7.FP.lkey(X[3:], c[2:]))
     return out
 
@@ -460,7 +461,7 @@ def cut_edge(K, O, i, c, gen, stats):
         return False
     best = h
     for k in windows(K, i, c, gen):
-        s2 = O.get(k, budget=GEN_BUDGET, tlim=10.0)
+        s2 = O.get(k, budget=GEN_BUDGET, tlim=3.0)
         stats[(k[0], s2)] = stats.get((k[0], s2), 0) + 1
         if s2 != 'UNSAT':
             break
@@ -527,17 +528,56 @@ def loop(hours, maxtest, gen, tag, delta=0.0, R=0.0):
                    stats={f'{a}:{b}': v for (a, b), v in sorted(stats.items())},
                    new_keys=len(K.newkeys), new_k6=len(K._k6set), rss=round(k7.rss_mb()),
                    elapsed=round(time.time() - t0))
+        # ceiling test: a cycle of exactly tight (minimum-mean) edges whose H9 windows are SAT
+        Ti, Tf = H.tight(float(lam))
+        sat = []
+        for i, fl in zip(Ti.tolist(), Tf.tolist()):
+            if O.status(k7.h9_key(K.X[i], digits(fl, 7))) == 'SAT':
+                sat.append((i, fl))
+        scyc = sat_cycle(K, sat)
+        rec.update(tight0=int(len(Ti)), tight0_sat=len(sat))
         print(json.dumps(rec), flush=True)
         log_round(rec)
-        if cut == 0:
-            rec2 = dict(tag=tag, ceiling=True, lam=str(lam), cycle=[[list(K.X[i]), list(c)] for i, c in cyc])
+        if scyc or cut == 0:
+            cc = scyc if scyc else cyc
+            mean = Fr(sum(c[-1] for _, c in cc), len(cc))
+            rec2 = dict(tag=tag, ceiling=True, lam=str(lam), mean=str(mean),
+                        cycle=[[list(K.X[i]), list(c)] for i, c in cc])
             log_round(rec2)
             print('CEILING', json.dumps(rec2), flush=True)
-            return K, H, O, lam, cyc
+            return K, H, O, lam, cc
         if time.time() - t0 > hours * 3600:
+            log_round(dict(tag=tag, final=True, lam=str(lam), cycle=[[list(K.X[i]), list(c)] for i, c in cyc]))
             return K, H, O, lam, None
         H.refresh()
         rnd += 1
+
+
+def sat_cycle(K, edges):
+    """A cycle (list of (X, c), forward) in the subgraph of the given (X index, flat count)
+    edges, or None."""
+    if not edges:
+        return None
+    U = np.array([K.XE[i][0] * NT + fl // 6 for i, fl in edges], np.int64)
+    V = np.array([K.XE[i][1] * NT + fl % NT for i, fl in edges], np.int64)
+    keep = np.ones(len(edges), bool)
+    while True:
+        hin = set(V[keep].tolist()); hout = set(U[keep].tolist())
+        k2 = keep & np.array([u in hin for u in U.tolist()]) & np.array([v in hout for v in V.tolist()])
+        if k2.sum() == keep.sum():
+            break
+        keep = k2
+    if not keep.any():
+        return None
+    out = {}
+    for j in np.flatnonzero(keep):
+        out.setdefault(int(U[j]), []).append(j)
+    v = int(U[np.flatnonzero(keep)[0]]); path = []; pos = {}
+    while v not in pos:
+        pos[v] = len(path)
+        j = out[v][0]; path.append(j); v = int(V[j])
+    cyc = path[pos[v]:]
+    return [(edges[j][0], digits(edges[j][1], 7)) for j in cyc]
 
 
 def options10(X, c, X2, c2):
@@ -623,6 +663,116 @@ def rigor(lams, maxit=3000):
     return out
 
 
+def core_edges(K, edges):
+    """Cyclic core of a list of (X index, flat count) edges: (kept list, U, V)."""
+    U = np.array([K.XE[i][0] * NT + fl // 6 for i, fl in edges], np.int64)
+    V = np.array([K.XE[i][1] * NT + fl % NT for i, fl in edges], np.int64)
+    keep = np.ones(len(edges), bool)
+    while len(edges):
+        hin = set(V[keep].tolist()); hout = set(U[keep].tolist())
+        k2 = keep & np.array([u in hin for u in U.tolist()]) & np.array([v in hout for v in V.tolist()])
+        if k2.sum() == keep.sum():
+            break
+        keep = k2
+    idx = np.flatnonzero(keep)
+    return [edges[j] for j in idx], U[idx], V[idx]
+
+
+def satcore(maxpairs=20000):
+    """At the current minimum mean: the subgraph of tight edges whose H9 (radius 4) is SAT, its
+    cyclic core, then (a) H9 at radius 5 on its edges, (b) H10 (radius 4) on its consecutive
+    pairs; does a cycle survive each test?  (b) is the k8 automaton restricted to this core."""
+    S, O, K = build()
+    K._k6set = set()
+    H = Howard(K); H.run(verbose=False)
+    lam, cyc = H.min_cycle()
+    Ti, Tf = H.tight(float(lam))
+    sat, und = [], 0
+    for i, fl in zip(Ti.tolist(), Tf.tolist()):
+        st = O.status(k7.h9_key(K.X[i], digits(fl, 7)))
+        if st == 'SAT':
+            sat.append((i, fl))
+        elif st is None:
+            und += 1
+    E, U, V = core_edges(K, sat)
+    out = dict(lam=str(lam), tight0=len(Ti), tight0_sat=len(sat), tight0_undecided=und, sat_core_edges=len(E),
+               sat_core_states=len(set(U.tolist()) | set(V.tolist())))
+    print(json.dumps(out), flush=True)
+    # (a) radius 5
+    r5 = []
+    for i, fl in E:
+        st = O.get(k7.h9_key(K.X[i], digits(fl, 7)), radius=5, tlim=120.0)
+        r5.append(st)
+    O.flush()
+    keep5 = [e for e, st in zip(E, r5) if st != 'UNSAT']
+    E5, _, _ = core_edges(K, keep5)
+    out.update(r5_unsat=sum(st == 'UNSAT' for st in r5), r5_sat=sum(st == 'SAT' for st in r5),
+               r5_timeout=sum(st == 'TIMEOUT' for st in r5), r5_core_edges=len(E5))
+    print(json.dumps(out), flush=True)
+    # (b) H10 on consecutive pairs of core edges (line graph)
+    byU = {}
+    for j, u in enumerate(U.tolist()):
+        byU.setdefault(u, []).append(j)
+    pairs = [(a, b) for a in range(len(E)) for b in byU.get(int(V[a]), [])]
+    out['pairs'] = len(pairs)
+    alive, npair, dead = [], 0, 0
+    for a, b in pairs[:maxpairs]:
+        (i, fl), (i2, fl2) = E[a], E[b]
+        opts = options10(K.X[i], digits(fl, 7), K.X[i2], digits(fl2, 7))
+        sts = [O.get(k, tlim=120.0) for k in opts]
+        ok = any(st != 'UNSAT' for st in sts)
+        dead += not ok
+        if ok:
+            alive.append((a, b))
+        npair += 1
+        if npair % 200 == 0:
+            O.flush(); print(f'  pairs {npair}/{len(pairs)}, dead {dead}', flush=True)
+    O.flush()
+    # cyclic core of the line graph
+    A = set(alive)
+    while True:
+        hin = {b for a, b in A}; hout = {a for a, b in A}
+        A2 = {(a, b) for a, b in A if a in hin and b in hout}
+        if len(A2) == len(A):
+            break
+        A = A2
+    out.update(pairs_tested=npair, pairs_dead=dead, h10_core_pairs=len(A), h10_complete=npair == len(pairs))
+    print('SATCORE', json.dumps(out), flush=True)
+    with open(os.path.join(D, 'satcore233.jsonl'), 'a') as f:
+        f.write(json.dumps(out) + '\n')
+    return out
+
+
+def sizes():
+    """k7 product statistics and the k8 sizes they imply (a k8 state = an allowed k7 transition)."""
+    S, O, K = build()
+    nX = K.nX
+    ext10 = []
+    for X in K.X:
+        n = 0
+        for d in range(min(max(X) + 2, 9)):
+            if k7.GA.induced(tuple(X) + (d,)):
+                n += 1
+        ext10.append(n)
+    live7 = int(K.alive.sum())
+    ext9 = [0] * K.nE
+    for i, (e, e2) in enumerate(K.XE):
+        ext9[e] += 1
+    eval7 = sum(int(K.alive[e].sum()) * ext9[e] * 6 for e in range(K.nE))
+    allowed = []
+    for i in range(nX):
+        allowed.append(int(K.mask(i).sum()))
+    live8 = sum(allowed)
+    eval8 = sum(a * n * 6 for a, n in zip(allowed, ext10))
+    out = dict(shapes8=K.nE, shapes9=nX, shapes10=sum(ext10), k7_full=K.nE * NT, k7_live=live7,
+               k7_evaluations=eval7, k7_allowed_transitions=live8,
+               k8_full=nX * N7, k8_live=live8, k8_full_transitions=sum(ext10) * 6 ** 8, k8_evaluations=eval8,
+               k8_pot_rows=nX * 6, k8_pot_fields_per_row=6 ** 6)
+    print(json.dumps(out), flush=True)
+    json.dump(out, open(os.path.join(D, 'sizes233.json'), 'w'), indent=1)
+    return out
+
+
 def main():
     import argparse
     ap = argparse.ArgumentParser()
@@ -648,6 +798,10 @@ def main():
         for de, R in ((0.01, 0.5), (0.02, 1.0), (0.05, 2.0)):
             I, Fl = H.tight(float(lam), de, R)
             print('near-critical', de, R, len(I))
+    elif a.cmd == 'satcore':
+        satcore()
+    elif a.cmd == 'sizes':
+        sizes()
     elif a.cmd == 'loop':
         loop(a.hours, a.maxtest, a.gen, a.tag, a.delta, a.R)
     elif a.cmd == 'rigor':
