@@ -38,6 +38,8 @@ Outputs (identifiers carry the tag T):
 
   python gen_lean_automaton7.py --keys data/keys_l417d.json.gz --tag L417d --lam 4516/1083 \
       --out-stronger DIR --out-core DIR
+  python gen_lean_automaton7.py --keys data/keys_best234.json.gz --tag B234 --lam 6423/1544 \
+      --noncomputable --shards none
   python gen_lean_automaton7.py --keys lean/data/toy_keys7.json --tag Toy --toy
 
 Key files: {"keys": [[kind, dirs, syms], ...]} with kind "k6" (3..7 directions, one count fewer),
@@ -326,6 +328,10 @@ def main():
     ap.add_argument('--summary', default=None)
     ap.add_argument('--shards', default='all', help="'all', 'none' or a list i_t0,i_t0,...")
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--noncomputable', action='store_true',
+                    help='write the key lists of LocalWindowDirKeys7<T> as `noncomputable def` (same '
+                         'values; the kernel checks only unfold them, and the .olean is about 15 times '
+                         'smaller)')
     a = ap.parse_args()
     T = a.tag
     t_start = time.time()
@@ -408,8 +414,10 @@ def main():
     src = ', '.join(summary['sources']) + (' (PROVISIONAL: solver answers, not certificates)'
                                            if a.provisional else '')
 
+    nc = 'noncomputable ' if a.noncomputable else ''
+
     def chunk_defs(name, chs, start=0):
-        return ''.join(f'def {name}_{start + ci} : List (List Nat × List Nat) := [\n'
+        return ''.join(f'{nc}def {name}_{start + ci} : List (List Nat × List Nat) := [\n'
                        + ',\n'.join(f'  ({lst(d)}, {lst(s)})' for d, s in ch) + ']\n\n'
                        for ci, ch in enumerate(chs))
     # The chunk definitions go into part modules of at most --keys-per-module keys: the
@@ -450,15 +458,15 @@ the part modules `LocalWindowDirKeys7{T}_P<i>`.
 
 namespace Snake9.LocalWindow
 
-def dirChunks7{T} : List (List (List Nat × List Nat)) :=
+{nc}def dirChunks7{T} : List (List (List Nat × List Nat)) :=
   [{', '.join(f'dirKeys7{T}_{ci}' for ci in range(len(chunks)))}]
 
-def dirKeys7{T} : List (List Nat × List Nat) := dirChunks7{T}.flatten
+{nc}def dirKeys7{T} : List (List Nat × List Nat) := dirChunks7{T}.flatten
 
-def hChunks7{T} : List (List (List Nat × List Nat)) :=
+{nc}def hChunks7{T} : List (List (List Nat × List Nat)) :=
   [{', '.join(f'hKeys7{T}_{ci}' for ci in range(len(hchunks)))}]
 
-def hKeys7{T} : List (List Nat × List Nat) := hChunks7{T}.flatten
+{nc}def hKeys7{T} : List (List Nat × List Nat) := hChunks7{T}.flatten
 
 /-- The certificate statements of the seven-centre automaton `{T}`. -/
 def AllRefuted7{T} : Prop := AllRefutedList dirKeys7{T} ∧ AllRefutedList hKeys7{T}
