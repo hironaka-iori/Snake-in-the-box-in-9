@@ -1,0 +1,36 @@
+{
+ "olean_micro_benchmark": {"note": "Lean 4.19, one noncomputable def per module",
+   "blank_module_bytes": 17136, "empty_list_module_bytes": 18064,
+   "list_of_2000_small_nat_lits_bytes_per_element": 110, "list_of_2000_1000bit_lits_bytes_per_element": 277,
+   "one_2000000bit_literal_bytes": 268328, "conclusion": "a list element costs ~110 B plus 8-byte limbs (~150 B overhead for a multi-limb literal); one big literal costs exactly its bits"},
+ "composition_base_K012304A43633": {"hints": 495204, "olean_total": 4343928,
+   "proof_literal_limbs": 1153376, "proof_list_elements": 10476, "proof_list_overhead_est": 1571400,
+   "checkpoint_limbs": 617632, "checkpoint_chunks": 384, "input_slots": 3290, "data0_olean": 408640,
+   "data_modules": 21, "check_modules_olean": 135592, "main_olean": 41912},
+ "composition_base_K012340A26336": {"hints": 99805, "olean_total": 829208, "proof_literal_limbs": 194000, "proof_list_elements": 1332,
+   "checkpoint_limbs": 36232, "input_slots": 1968, "data0_olean": 264112, "data_modules": 5, "check_olean": 27416, "main_olean": 27128},
+ "existing_K_build": {"hints": 223208300, "replay_olean_MB": 2259.6, "files": 13186, "data0_MB": 165.1, "check_MB": 69.2, "main_MB": 23.4,
+   "LocalWindowCnf_MB": 441.2, "LocalWindowSat_MB": 104.1, "windows": 635},
+ "hint_usefulness": [
+   {"name": "d012340_a2_6-21_3_3_6-21", "hints": 99805, "useless_hints": 0, "lits_per_lemma": 10.1, "hints_per_lemma": 74.9, "bits_per_hint_now": 15.28, "xz_bits_per_hint": 5.36},
+   {"name": "d012345_a3_6-21_3_4_4", "hints": 200427, "useless_hints": 0, "lits_per_lemma": 10.9, "hints_per_lemma": 47.3, "bits_per_hint_now": 16.84, "xz_bits_per_hint": 6.66},
+   {"name": "d012314_a3_4_3_5_5", "hints": 300463, "useless_hints": 0, "lits_per_lemma": 16.6, "hints_per_lemma": 34.5, "bits_per_hint_now": 20.37, "xz_bits_per_hint": 10.06},
+   {"name": "d012304_a4_3_6-21_3_3", "hints": 495204, "useless_hints": 0, "lits_per_lemma": 15.9, "hints_per_lemma": 47.3, "bits_per_hint_now": 18.2, "xz_bits_per_hint": 8.1}],
+ "hint_codes_bits_per_hint": [
+   {"name": "d012340_a2_6-21_3_3_6-21", "h": 11, "fixed13": 13, "per_lemma_width": 12.04, "gamma_slot": 16.55, "nibble_slot": 13.32, "mtf15": 12.91, "order0_entropy": 9.82},
+   {"name": "d012345_a3_6-21_3_4_4", "h": 11, "fixed13": 13, "per_lemma_width": 12.04, "gamma_slot": 16.26, "nibble_slot": 13.06, "mtf15": 12.91, "order0_entropy": 9.64},
+   {"name": "d012314_a3_4_3_5_5", "h": 12, "fixed13": 13, "per_lemma_width": 13.05, "gamma_slot": 17.82, "nibble_slot": 14.19, "mtf15": 13.8, "order0_entropy": 10.16},
+   {"name": "d012304_a4_3_6-21_3_3", "h": 12, "fixed13": 13, "per_lemma_width": 13.04, "gamma_slot": 17.64, "nibble_slot": 14.04, "mtf15": 13.88, "order0_entropy": 10.11}],
+ "checkpoints_seg25k_cp3": [
+   {"name": "d012304_a4_3_6-21_3_3", "live_per_cp": 2601, "slots": 4095, "frac_input_unchanged": 0.446, "frac_unchanged_since_prev_cp": 0.794, "cp_literal_KB": 29.4, "cp_delta_KB": 9.7, "natpack_olean_KB_per_cp": 107},
+   {"name": "d012314_a3_4_3_5_5", "live_per_cp": 2736, "slots": 4095, "frac_input_unchanged": 0.457, "frac_unchanged_since_prev_cp": 0.686, "cp_literal_KB": 29.6, "cp_delta_KB": 13.1},
+   {"name": "d012345_a3_6-21_3_4_4", "live_per_cp": 1250, "slots": 2047, "frac_input_unchanged": 0.57, "frac_unchanged_since_prev_cp": 0.626, "cp_literal_KB": 10.6, "cp_delta_KB": 5.5}],
+ "proof_shortening": [
+   {"name": "d012340_a2_6-21_3_3_6-21", "replay_k6_default_hints": 99805, "rounds3_seeds2": 99805},
+   {"name": "d012345_a3_6-21_3_4_4", "replay_k6_default_hints": 200427, "rounds3_seeds2": 174341, "rounds5_seeds8": 167252, "rounds5_seeds8_solver_s": 15.5, "drat_trim_lrat_hints": 269384},
+   {"name": "d012314_a3_4_3_5_5", "replay_k6_default_hints": 300463, "rounds3_seeds2": 298747},
+   {"name": "d012304_a4_3_6-21_3_3", "replay_k6_default_hints": 495204, "rounds3_seeds2": 484539, "rounds5_seeds8": 422563, "rounds5_seeds8_solver_s": 42.8, "drat_trim_lrat_hints": 715894},
+   {"name": "d012340_a2_5_3_5_4", "replay_k6_default_hints": 19953, "rounds3_seeds2": 17525, "drat_trim_lrat_hints": 22891}],
+ "kernel_time_split_K012304A43633_seg25k": {"note": "single decide +kernel theorems, cpu seconds incl. 0.4-0.5 s start-up",
+   "empty": 0.5, "start1_loadRaw_from_Cnf": 2.95, "checkpoint_build": "1.2-2.5", "replay_25k_hints_after_start1": 4.18, "check_segment1_25k_hints": 7.39}
+}
