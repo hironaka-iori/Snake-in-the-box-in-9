@@ -86,6 +86,14 @@ def main():
                seconds=round(time.time() - t0))
     print(json.dumps(res), flush=True)
     json.dump(dict(result=res, tried=log), open(os.path.join(P4.D, f'replace234_{a.tag}.json'), 'w'))
+    # the replaced set: k6 keys not replaced + every F8/H9 key (old and added)
+    gone = {(tuple(x['key'][0]), tuple(x['key'][1])) for x in log if x['replaced']}
+    d['keys'] = ([['k6', list(k[0]), list(k[1])] for k in k6 if k not in gone]
+                 + [[k[0], list(k[1]), list(k[2])] for k in sorted(K.newkeys)])
+    d['summary'] = dict(s, tag=a.tag + 'r')
+    for x in ('hints', 'core', 'basis'):
+        d.pop(x, None)
+    json.dump(d, gzip.open(os.path.join(P4.D, f'keys_{a.tag}r.json.gz'), 'wt'))
 
 
 if __name__ == '__main__':

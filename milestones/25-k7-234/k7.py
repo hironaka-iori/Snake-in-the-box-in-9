@@ -56,7 +56,7 @@ def guard():
         av = int(open('/proc/meminfo').read().split('MemAvailable:')[1].split()[0]) / 2 ** 20
         st = os.statvfs('/')
         free_mb = st.f_bavail * st.f_frsize / 2 ** 20
-        if av >= 3 and free_mb >= 500:
+        if av >= 3 and free_mb >= 400:
             return
         print(f'guard: avail {av:.1f} GB, disk {free_mb:.0f} MB: pausing', flush=True)
         time.sleep(60)
