@@ -15,6 +15,7 @@ or built. The 56 LRAT samples were written to scratch and deleted at once.
 | key set `data/keys_l417d.json.gz` | **38,224 keys**: 1,383 k6 keys with certificates already replayed or being replayed (r4b, r4c, keys_235, cost 0), **19,553 more k6 keys** from the all-known pool, and **17,288 new H9 keys** |
 | estimated LRAT hints | **34.3 G** = 28.8 G (k6 pool keys) + 5.5 G (H9) |
 | estimated kernel time | **≈ 4,000 kernel-hours** of LRAT replay at 0.42 ms/hint (the 235 build is running at about 0.22 ms/hint, which would give ≈ 2,100 h), plus **≈ 55 CPU-hours** of shards |
+| **after cost reduction (29 Oct)** | **`data/keys_best234.json.gz`: 11,167 keys at λ = 6423/1544, about 1.73 G hints, ≈ 202 kernel-hours at 0.42 ms/hint (106 at 0.22), ≈ 17 GB of `.olean`**. See "Cost reduction" below |
 | verdict | A k7 chain to 234 is **well defined and sound**, and the target holds on the full product. As pruned in 5.5 h it costs about **100×** the 235 chain. The cost is concentrated: 10 radius-4 giants hold 10.9 G, and 10,852 keys are costed at a class median (12.3 G, probably far too high). §4 lists the next cuts. **Disk is the hard blocker**: about 10 B of `.olean` per hint means about 340 GB at 34 G hints. |
 
 
@@ -171,6 +172,94 @@ UNSAT and cost less than the key, the key goes:
 A plausible target after steps 1–2 is 10–15 G hints, that is 1,200–1,800 kernel-hours at
 0.42 ms, or 600–900 at the observed 0.22 ms.
 
+All four cuts were then done, and the result is far below this target: see the next section.
+
+## Cost reduction (runs of 25–26 and 29 October 2026)
+
+Solver and Python only, at `nice -n 10` on up to 3 cores. No Lean was run. No proof was kept:
+every replay streams CaDiCaL's LRAT through a FIFO into `lrattrim`, and only the CNF of the key
+being measured touches the disk.
+
+**Result: `data/keys_best234.json.gz` (= `keys_l416v`), 1.73 G hints.**
+
+| | value |
+|---|---|
+| λ | **6423/1544 = 4.15997**, B = 13 (range allowed 8,191). Measured range on the full live product: **8,152**. Bound: 235·(P + 35Q) + 7Q exceeds 9171Q + 8P + 2^13 − 1 by 14, so **m ≤ 234** |
+| keys | **11,167**: 7,070 k6 (1,383 already certified, free), 3,905 H9, **192 F8** |
+| replay hints | **1.733 G**, of which 0.40 G measured and the rest from the solve-time model |
+| kernel time | **≈ 202 h at 0.42 ms/hint**, **≈ 106 h at 0.22 ms/hint** |
+| `.olean` disk | **≈ 17 GB** at about 10 B per hint |
+| core clauses | 10.6 M (the Cnf modules; the pruning objective also charges 40 hint-equivalents per core clause and 5,000 per key) |
+| summary | `data/cost234_best.json` (with the whole chain below) |
+
+**Cost model.** A key's cost is its measured replay (`cost234.replay_cost`, the 235 certify
+pipeline: core of the full CNF, then a CaDiCaL portfolio on the core, fewest hints wins) when
+there is one: 6,989 replays in `data/replay234.jsonl`. Otherwise it is the mean of the measured keys
+in the same (kind, own solve-time) bin (`prune234.py fit`, `data/model234.json`). The solve time
+predicts the hints well: within a bin, the 90th percentile is about 1.4× the median. As a check, 3,059 kept
+keys were drawn at random and replayed. Measured over modelled was **1.019** (k6 1.02, H9 0.98,
+F8 1.04). One k6 key went over 300 s.
+
+**What each step saved** (all on the final cost basis, so the numbers differ from those of §3):
+
+| set | step | λ | keys | hints |
+|---|---|---|---|---|
+| `l417d` | the plan of §3 (34.3 G on its own estimates) | 4.170 | 38,224 | 19.61 G |
+| `a1` | re-pruned with measured costs | 4.170 | 37,316 | 17.93 G |
+| `a2` | **giants**: the 10 radius-4 giants replaced by H9 cuts (`replace234.py`, 7.2 G net), and 349 one-step k6 extensions decided (`decide234.jsonl`), then a pool re-prune | 4.170 | 50,746 | 10.13 G |
+| `a3` | exact drops of 166 keys (`exact234.py`) | 4.170 | 50,636 | 9.45 G |
+| `l417p` | **median-costed keys**: all 12,647 k6 pool keys without their own solve time decided (11,836 median-costed + 811 r4-estimated; 9 giants time out at 60 s and keep their r4 estimate), then a pool prune | 4.170 | 39,529 | 9.40 G |
+| `l4165` / `l416` | **λ**: pool prunes | 4.165 / 4.160 | 35,703 / 34,891 | 8.72 / 8.60 G |
+| `l4165x` → `l4165y` → `l4165yp` | exact drops ≥ 0.3 M; F8 substitution + dual re-prune; k6 → H9 replacement (374 keys) | 4.165 | 29,872 | 4.87 → 4.16 → 3.92 G |
+| `l416x` | exact drops of keys ≥ 0.3 M (8,041 tried, 6,465 dropped) | 4.160 | 28,426 | 2.45 G |
+| `l416y` | **F8**: 518 F8 keys replace 2,175 H9 keys, then the dual re-prune drops 3,730 more | 4.160 | 23,039 | 2.20 G |
+| `l416z` | exact drops of keys 20 k–0.3 M (12,687 tried, 9,688 dropped) | 4.160 | 13,351 | 1.79 G |
+| `l416w` | F8 substitution + dual re-prune (2,087 cheap keys dropped) | 4.160 | 11,264 | 1.77 G |
+| **`l416v`** | exact retry of keys ≥ 50 k | 4.160 | **11,167** | **1.73 G** |
+
+- **λ.** Pool prunes, before exact drops: 4.18 (6968/1667, B = 14) costs 19.4 G, because the
+  fringe there needs the giants. 4.17 costs 9.40 G, 4.165 8.72 G, 4.162 8.48 G and 4.16 8.60 G
+  (8.36 G with the grown pool, `l416n`). At 4.158 and 4.155 the pool does not meet the target.
+  The surprise is that **4.16 takes the exact drops best**: 8.60 → 2.45 G against 8.72 → 4.87 G at
+  4.165, although its range (8,152 of 8,191) leaves almost no slack. A second line from `l416n`
+  ends at 1.80 G (`l416nz`), which confirms the level.
+- **F8.** Of 2,399 F8 generalisations of kept H9 groups, 2,393 are UNSAT. An F8 costs about as
+  much as the hardest H9 key of its group, so the direct saving is small: 0.2–0.5 G of objective
+  at 4.165. The gain is in the re-prune: an F8 key excludes the 8-window in both orientations
+  after every first direction, and that coverage frees thousands of keys.
+- **k6 → H9 replacement** (`replace234.py --min 2e5`, 1 h at 4.165): 374 of 2,529 keys replaced,
+  only 0.18 G net. Once the giants are gone, the k6 keys are needed for many transitions each.
+- **Exact drops** (`exact234.py`, warm-started BF, `--maxit 40`): the dual-cover pruning of
+  `prune7` cannot see that the potential may move, so most of the reduction comes from here.
+  A removal succeeds in ≤ 27 BF rounds or not at all, so the cap of 40 loses nothing measurable
+  and makes failures cheap.
+
+**Composition of the best set.** The 5,687 paid k6 keys carry 1.57 G (90 %), the 3,905 H9 keys
+0.08 G and the 192 F8 keys 0.09 G. The largest k6 keys cost 8–12 M hints each, and the
+retry pass dropped only 97 of 1,806 keys.
+
+**Realistic floor.** With this automaton, this pool and λ = 4.16, **about 1.5 G hints**. Each
+further exact pass returns less: 7.2, 0.94, 0.05 G of objective. The range is 8,152 of 8,191,
+so the potential has almost no room left. Going lower needs more than greedy drops:
+more H9/F8 decisions on the critical transitions of the expensive k6 keys, or a λ between 4.158
+and 4.16 with a grown pool. Neither looks worth more than 0.2–0.4 G. **The 3 G target is met:
+1.73 G ≈ 202 kernel-hours at 0.42 ms, 106 at 0.22 ms, and ≈ 17 GB of `.olean`.** The disk is
+still more than this machine has, but it is now a matter of 20 GB, not 340.
+
+**Lean-side note.** The best set uses λ = 6423/1544 (`--lam 6423/1544`, 13 bits) and contains F8
+keys (`["F", dirs, syms]`, 8 directions, 7 counts, both orientations), which
+`gen_lean_automaton7.py` accepts (`k6`/`F`/`H`). The 1,383 free keys are as before. F8
+certificates take the same `Refuted (winOf ds) (boundsOf syms)` statement as the k6 keys, with 8
+directions and 7 bounds.
+
+Reproduce, after `prune234.py fit`:
+`prune234.py prune 4.16 l416`; `exact234.py l416 l416x --min 3e5 --maxit 40`;
+`f8sub234.py l416x l416xf`; `prune234.py prune 4.16 l416y --start l416xf --start-strict --pq 6423/1544/13`;
+`exact234.py l416y l416z --min 2e4 --max 3e5`; `f8sub234.py l416z l416zf`;
+`prune234.py prune 4.16 l416w --start l416zf --start-strict --pq 6423/1544/13`;
+`exact234.py l416w l416v --min 5e4 --maxit 30`; `summary234.py l416v`. The greedy steps depend on the
+order of the measured costs, so a rerun with more measurements gives a slightly different set.
+
 ## 5. Lean plan
 
 **Core module `WindowAutomaton7Defs.lean`** (a copy of `WindowAutomaton6Defs` with one more
@@ -264,6 +353,10 @@ results). Do not start it on this machine.
 | `data/keys_l417d.json.gz` | **the key set**: `keys` = `["k6", dirs, syms]` / `["H", dirs, syms]` (H9 in reversed, uncounted-last form), `cost`, `summary` |
 | `data/l417d_breakdown.json` | cost by basis, live states, live (X, source) pairs |
 | `data/loop_rounds.jsonl` | the rounds of the λ = 4.16990 loop |
+| `prune234.py`, `cost234.py`, `measure234.py`, `solve234.py`, `decide234.py` | pruning with measured costs and the solve-time model; replay measurement through a FIFO; parallel decide/replay with a time limit per key |
+| `exact234.py`, `replace234.py`, `f8sub234.py`, `summary234.py` | exact drops (warm BF); k6 → H9 replacement; H9 → F8 substitution; cost summary |
+| `data/keys_best234.json.gz`, `data/cost234_best.json` | **the best key set (1.73 G hints)** and its cost summary with the chain of steps |
+| `data/replay234.jsonl`, `data/decide234.jsonl`, `data/oracle234.jsonl.gz`, `data/model234.json` | measured replays, k6/F8 decisions, H9 decisions, cost model |
 
 Reproduce: `nice -n 19 python prune7.py 4.17 T --start l417c` (or without `--start`, from the full
 pool), then `python replace7.py 4.17 T 1.0 [--giants]`.

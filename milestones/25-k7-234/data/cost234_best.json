@@ -1,0 +1,203 @@
+{
+ "tag": "l416v",
+ "P": 6423,
+ "Q": 1544,
+ "B": 13,
+ "lam": 4.159974093264249,
+ "range": 8152,
+ "bound": 234,
+ "keys": 11167,
+ "paid_keys": 9784,
+ "counts": {
+  "k6": 7070,
+  "H9": 3905,
+  "F": 192
+ },
+ "hints": 1732805084,
+ "hints_measured": 398737303,
+ "core_clauses": 10611610,
+ "kernel_hours_042ms": 202,
+ "kernel_hours_022ms": 106,
+ "olean_GB_10B_per_hint": 17.3,
+ "by_basis": {
+  "F8:measured": {
+   "keys": 35,
+   "hints": 12727839
+  },
+  "F8:model": {
+   "keys": 157,
+   "hints": 76090290
+  },
+  "H9:measured": {
+   "keys": 667,
+   "hints": 9920513
+  },
+  "H9:model": {
+   "keys": 3238,
+   "hints": 67002173
+  },
+  "k6:measured": {
+   "keys": 1649,
+   "hints": 376088951
+  },
+  "k6:model": {
+   "keys": 4038,
+   "hints": 1190975318
+  },
+  "k6:reuse": {
+   "keys": 1383,
+   "hints": 0
+  }
+ },
+ "file": "data/keys_best234.json.gz (= keys_l416v.json.gz)",
+ "margin_m235": 14,
+ "range_allowed": 8191,
+ "calibration": {
+  "random_kept_keys_replayed": 3059,
+  "measured_over_model": 1.019,
+  "timeouts_300s": 1
+ },
+ "chain": [
+  {
+   "tag": "l417d",
+   "step": "plan of 25 Oct (34.3 G on its own estimates)",
+   "lam": 4.1699,
+   "keys": 38224,
+   "paid_keys": 36841,
+   "hints": 19611943950,
+   "range": 6377
+  },
+  {
+   "tag": "a1",
+   "step": "measured-cost re-prune, 4.17 (earlier run)",
+   "lam": 4.1699,
+   "keys": 37316,
+   "paid_keys": 35933,
+   "hints": 17931402516,
+   "range": 6377
+  },
+  {
+   "tag": "a2",
+   "step": "giants replaced by H9 + one-step extensions (earlier run)",
+   "lam": 4.1699,
+   "keys": 50746,
+   "paid_keys": 49363,
+   "hints": 10131077743,
+   "range": 6377
+  },
+  {
+   "tag": "a3",
+   "step": "exact drops, 166 keys (earlier run)",
+   "lam": 4.1699,
+   "keys": 50636,
+   "paid_keys": 49253,
+   "hints": 9450474272,
+   "range": 6645
+  },
+  {
+   "tag": "l417p",
+   "step": "pool prune 4.17 with the 12,647 new k6 decisions",
+   "lam": 4.1699,
+   "keys": 39529,
+   "paid_keys": 38146,
+   "hints": 9397692069,
+   "range": 6377
+  },
+  {
+   "tag": "l4165",
+   "step": "pool prune 4.165",
+   "lam": 4.16496,
+   "keys": 35703,
+   "paid_keys": 34320,
+   "hints": 8719362538,
+   "range": 7402
+  },
+  {
+   "tag": "l416",
+   "step": "pool prune 4.16",
+   "lam": 4.15997,
+   "keys": 34891,
+   "paid_keys": 33508,
+   "hints": 8600613946,
+   "range": 8151
+  },
+  {
+   "tag": "l4165x",
+   "step": "4.165: exact drops >= 3e5",
+   "lam": 4.16496,
+   "keys": 33101,
+   "paid_keys": 31718,
+   "hints": 4866597928,
+   "range": 7980
+  },
+  {
+   "tag": "l4165y",
+   "step": "4.165: F8 substitution + dual re-prune",
+   "lam": 4.16496,
+   "keys": 27391,
+   "paid_keys": 26008,
+   "hints": 4154965321,
+   "range": 7796
+  },
+  {
+   "tag": "l4165yp",
+   "step": "4.165: k6 -> H9 replacement",
+   "lam": 4.16496,
+   "keys": 29872,
+   "paid_keys": 28489,
+   "hints": 3920173986,
+   "range": 7796
+  },
+  {
+   "tag": "l416x",
+   "step": "4.16: exact drops >= 3e5",
+   "lam": 4.15997,
+   "keys": 28426,
+   "paid_keys": 27043,
+   "hints": 2449209051,
+   "range": 8152
+  },
+  {
+   "tag": "l416y",
+   "step": "4.16: F8 substitution + dual re-prune",
+   "lam": 4.15997,
+   "keys": 23039,
+   "paid_keys": 21656,
+   "hints": 2202707036,
+   "range": 8152
+  },
+  {
+   "tag": "l416z",
+   "step": "4.16: exact drops 2e4..3e5",
+   "lam": 4.15997,
+   "keys": 13351,
+   "paid_keys": 11968,
+   "hints": 1784727584,
+   "range": 8152
+  },
+  {
+   "tag": "l416w",
+   "step": "4.16: F8 substitution + dual re-prune",
+   "lam": 4.15997,
+   "keys": 11264,
+   "paid_keys": 9881,
+   "hints": 1774285485,
+   "range": 8152
+  },
+  {
+   "tag": "l416v",
+   "step": "4.16: exact retry >= 5e4 (best)",
+   "lam": 4.15997,
+   "keys": 11167,
+   "paid_keys": 9784,
+   "hints": 1732805084,
+   "range": 8152
+  }
+ ],
+ "pool_prunes_other_lambda": {
+  "4.18 (6968/1667, B 14)": "19.4 G before exact drops (needs giants)",
+  "4.162": "8.48 G",
+  "4.158": "pool infeasible",
+  "4.155": "pool infeasible"
+ }
+}
