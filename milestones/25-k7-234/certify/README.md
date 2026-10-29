@@ -262,6 +262,63 @@ must live elsewhere. Here it is in `data/`.
   batch, so about 12 GB free. This machine had 0.47 GB free, so the full run cannot start here.
 - **Wall time.** With 3 heavy jobs, about 3-4 days.
 
+## Disk on this machine (29 October, second run)
+
+**Which window oleans the 234 chain needs.**
+
+- Method: the import closure of `UpperBound234` (`gen_lean_glue7.py final --reuse`,
+  `../lean/README.md`). The import lists were read from every `.olean` of
+  `work/final_lean/.lake/build/lib/lean` (54,085 files), of the 235 chain and of the k7 scratch
+  oleans, by `readModuleData`. Modules that are not compiled yet were added from their generated
+  sources.
+- Result: the chain needs **every** `Q` (237), `R` (236) and `K` (235) window, because all 1,383
+  keys of those sets are keys of every key set in `../data`.
+
+| | window oleans | windows | du |
+|---|---|---|---|
+| needed: `LocalWindowUnsat` `Q` / `R` / `K` | 16,386 / 21,450 / 13,186 | 387 / 361 / 635 | 8.27 / 10.24 / 2.19 GiB |
+| needed: `LocalWindowCnf` + `LocalWindowSat`, Q+R+K | 2,766 | 1,383 | 1.10 GiB |
+| **not needed**: `LocalWindowCnf` `C*`, `LocalWindowSat` `C*` | 22 + 22 | 22 | 128 + 114 MiB |
+| **not needed**: `LocalWindowUnsat` `D*` | 175 | 175 | 21 MiB |
+| **not needed, total** (`unneeded_oleans.txt`, not deleted) | 219 | | **263 MiB (0.28 GB)** |
+
+So the not-needed oleans break down as 0 for Q-only (237), 0 for R (236) and 0 for K (235).
+
+**What the full 234 build needs** (`keys_l416y` projection above, chain L417d sizes):
+
+| item | basis | disk |
+|---|---|---|
+| new certificates: packed replays and packed Cnf+Sat | projection above (7.3-8.7 + 1.2 GB) | 8.5-9.9 GB |
+| their `.ilean` | 0.8 % of the `.olean` in the existing build | 0.07-0.08 GB |
+| chunk modules `LocalWindowDirUnsatK7_<c>` and aggregate | about 2 KB per key (estimate) | 0.04 GB |
+| `LocalWindowDirKeysK7` and the chain's `LocalWindowDirKeys7<T>` | 0.15 KB per key `noncomputable`, 2.25 KB as `def` (the chain keys are written as `def`) | 0.05-0.10 GB |
+| data, bridge, Defs/Bridge7/Aggregate7Conditional | 32 + 3 + 3 MB measured | 0.04 GB |
+| 792 shards | 23.7 KB + 1.33 KB per `decide` (fit to the 5 compiled shards, within 0.1 %), 111,366 `decide`s | 0.17 GB |
+| Sequence, Aggregate, reuse modules, glue, `UpperBound234` | measured (`../lean/README.md`) | 0.01 GB |
+| core JSONs, if kept on this disk | above | 0.17 GB |
+| transient: the sources and proofs of one batch before sweeping, and 46 MB of chain sources | above | 1-2 GB |
+| **total** | | **10.0-12.5 GB** |
+
+**It does not fit.** About 0.43-0.47 GB was free during this run. Deleting the unneeded oleans
+adds 0.28 GB, so about 0.7-0.75 GB would be free. With the 400 MB floor of the resource rules,
+the build needs 10.4-12.9 GB, so about 9.7-12.2 GB are missing.
+
+**Where the space is.** The old replays use far more bytes per hint than the packed encoding.
+Hints are counted from the replay headers.
+
+| set | hints | du | B/hint | packed, about 2.9 B/hint + 37 KB a window (milestone 26) |
+|---|---|---|---|---|
+| `Q` (237) | 0.303 G | 8.27 GiB | 29.3 | about 0.89 GB |
+| `R` (236) | 0.373 G | 10.24 GiB | 29.5 | about 1.09 GB |
+| `K` (235) | 0.223 G | 2.19 GiB | 10.6 | about 0.67 GB |
+
+- Re-replaying `Q` and `R` with the packed generator would free about 17.9 GB. The cost is
+  about 40 CPU-hours of replay at about 0.21 ms per hint, plus the regeneration of the proofs.
+- That would leave about 18.6 GB free, which is enough for the build.
+- This was not tried on `Q`/`R` cores, which use the older encodings.
+- It means replacing existing oleans window by window, which is a decision for the owner of
+  the build.
+
 ## Files
 
 | file | contents |
@@ -269,6 +326,7 @@ must live elsewhere. Here it is in `data/`.
 | `gen_k7_core.py` | `run` (CNF, cuts, core, core JSON, packed Cnf+Sat module), `cnfsat` (rewrite Cnf modules from core JSONs), `final` (chunk modules `LocalWindowDirUnsatK7_<c>`, aggregate `LocalWindowDirUnsatK7`), `regen` (CNFs from core JSONs) |
 | `replay_k7.py` | `gen` (packed O5k replays, batches), `measure` (hints only), `build` (guarded, `--direct`) |
 | `data/keys_h9five.json.gz` | the five validation keys, in the key-file format |
+| `unneeded_oleans.txt` | the 219 window oleans (with their `.ilean`, `.hash`, `.trace` files) that the 234 chain does not import; nothing was deleted |
 | `data/h9five_runs.jsonl` | per key: oracle time, key-set estimates, variables, clauses, cuts, core, literals, hints (seeds 2 / 1 round and 8 / 5), Cnf+Sat and replay bytes, CPU, RSS, axioms |
 | `milestones/10-window-aggregate/data/lean_core_direction_k7/*.json` | the five core JSONs (CNF regenerated from them by SHA256) |
 | `work/final_lean/LocalWindowTagsSplit.lean` | `pwL`, `ctrOKL`, `ctrOK_of_ctrOKL`, `ckAll_append`, `checkAll_of_parts` |

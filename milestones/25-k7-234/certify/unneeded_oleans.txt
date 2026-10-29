@@ -3,9 +3,13 @@
 # over the import lists read from every .olean of the build, the 235 chain and the k7
 # scratch oleans, plus the generated sources of the modules not compiled yet.
 # 219 of 54007 window oleans; with their .ilean, .hash and .trace files
-# 260.1 MiB (du of these files).  Not deleted.
+# 260.1 MiB apparent size, 263.4 MiB (269,696 KiB) by du: 128 MiB of C Cnf, 114 MiB of C Sat,
+# 21 MiB of D replays.  Not deleted.
 # Every Q (237), R (236) and K (235) window is needed: the 1,383 keys of those sets are all
-# keys of the 234 chain.  Per line: module, then its files relative to the build root.
+# keys of the 234 chain.  The D replays belong to the older chains of LocalWindowDirUnsat and
+# LocalWindowDirUnsat5, the C modules to LocalWindowSat/LocalWindowRefuted: deleting them breaks
+# a rebuild of those chains, not of 234.  Per line: module, then its files relative to the
+# build root.
 LocalWindowCnf.C223FwdDistinct	LocalWindowCnf/C223FwdDistinct.olean LocalWindowCnf/C223FwdDistinct.ilean LocalWindowCnf/C223FwdDistinct.olean.hash LocalWindowCnf/C223FwdDistinct.ilean.hash LocalWindowCnf/C223FwdDistinct.trace
 LocalWindowCnf.C223FwdRepeated	LocalWindowCnf/C223FwdRepeated.olean LocalWindowCnf/C223FwdRepeated.ilean LocalWindowCnf/C223FwdRepeated.olean.hash LocalWindowCnf/C223FwdRepeated.ilean.hash LocalWindowCnf/C223FwdRepeated.trace
 LocalWindowCnf.C223RevDistinct	LocalWindowCnf/C223RevDistinct.olean LocalWindowCnf/C223RevDistinct.ilean LocalWindowCnf/C223RevDistinct.olean.hash LocalWindowCnf/C223RevDistinct.ilean.hash LocalWindowCnf/C223RevDistinct.trace

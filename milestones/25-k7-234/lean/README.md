@@ -227,6 +227,70 @@ and needs `Elab.async false` (without it the module passed 4 GB in 2 minutes).
   declaration. Pairs (1.5 GB) or triples (2.05 GB, below 2.5 GB) would bring the build to about
   147 or 142 CPU-hours. Quadruples pass 2.5 GB. The generator still writes singles.
 
+## Glue from the window modules (29 October, second run)
+
+Same rules as above (one `lean` at a time, `nice -n 15`, 4 GB cap on anonymous RSS, oleans in a
+scratch directory listed first in `LEAN_PATH`, at most 80 MB of new disk). No existing `.olean`
+was touched.
+
+**Why.** `UpperBound234` imported the aggregates `LocalWindowDirUnsatR4b`, `…R4` and `…K6`, and
+with them every window of the sets of 237, 236 and 235. `gen_lean_glue7.py reuse` writes a glue
+that depends only on the windows of the keys the chain takes from those sets.
+
+**Finding: the 234 chain needs every old window.**
+
+- The three sets have 387 + 732 + 635 keys, but `dirKeysR4` shares 371 keys with `dirKeysR4b`,
+  so there are 1,383 distinct keys.
+- Every one of the 28 key files in `../data` (`keys_l417d`, `keys_l416y`, `keys_l416w`, …)
+  contains all 1,383 of them.
+- The window oleans on disk are exactly these 1,383 windows: 387 `Q`, 361 `R` and 635 `K`.
+- So the new glue imports the same 2,766 window modules as the old aggregates (53,788 oleans in
+  all, 21.6 GiB). It frees no disk.
+- Only 219 window oleans (0.26 GiB) are not needed: 22 `C` Cnf and 22 `C` Sat modules, and 175
+  `D` replays. They are listed in `../certify/unneeded_oleans.txt`, which also gives the disk
+  estimate for the full build.
+
+**Design** (`reuse --tag T`; `final --reuse`):
+
+- **`LocalWindowDirKeysReuse7<T>`**: the reused keys, sorted, in chunks of 400
+  (`dirChunksReuse7<T>`), and `AllRefutedReuse7<T> = AllRefutedSrcs dirChunksReuse7<T>`.
+- **`LocalWindowDirUnsatReuse7<T>`**:
+  - it imports exactly `LocalWindowSat.W` and `LocalWindowUnsat.W` for the window W of each
+    reused key, read from the `AllUnsat…` conjunctions of the Sat aggregates;
+  - one theorem per chunk, with one `refine ⟨Tags.refuted_of_sat W.sat W.unsat, ?_⟩` per key;
+  - then `allRefutedReuse7<T>`, by four `AllRefutedSrcs.cons'`.
+- **`LocalWindowDirGlue7<T>Reuse`**: the merges of `glue` against the sources `dirKeysReuse7<T>
+  :: dirChunksK7`, with tag 0 or 1 + c. It gives `allRefuted7<T>_of_reuse : AllRefutedReuse7<T> →
+  AllRefutedK7 → AllRefuted7<T>`.
+- All lists in these modules are `noncomputable def`. Measured on part 9 of the K7 keys, the
+  compiled code of a key list takes 15 times the space of its definition (2.74 MB against
+  0.18 MB). `keys --noncomputable` does the same for `LocalWindowDirKeysK7`.
+- The existing glue, the keys output without the flag and the 235–237 chains are unchanged. The
+  regenerated `keys`, `glue` and `final` outputs are byte-identical to the earlier ones.
+
+**Compiled** (L417d, peak anonymous RSS; total RSS in brackets when it is mostly mapped oleans):
+
+| module | time | memory | `.olean` | axioms |
+|---|---|---|---|---|
+| `LocalWindowDirKeysReuse7L417d` | 8 s | 0.20 GB | 0.22 MB | — |
+| `LocalWindowDirUnsatReuse7L417d` (2,766 window imports) | 153 s | 0.21 GB (8.50 GB) | 1.52 MB | **`allRefutedReuse7L417d`: `propext`, `Classical.choice`, `Quot.sound`** |
+| `LocalWindowDirKeysK7_P0…P9` with `--noncomputable` | 7–34 s each, 291 s in all | 0.20–0.73 GB | **5.6 MB** (83 MB as `def`) | — |
+| `LocalWindowDirGlue7L417dReuse` (111 kernel merges) | 369 s | 1.43 GB (1.83 GB) | 0.91 MB (old glue: 24 MB) | **`allRefuted7L417d_of_reuse`: `propext`, `Quot.sound`** |
+
+**Composition test.** The 792 shards and `LocalWindowDirUnsatK7` were scratch `sorry` stubs, as
+on the first run (406 s for the 792 stubs).
+
+| module | time | memory | `.olean` | result |
+|---|---|---|---|---|
+| `WindowAutomaton7L417dSequence` | 234 s | 1.70 GB | 3.8 MB | `stepOK7L417d`: `sorryAx` only through the stubs |
+| `AggregateDirection7L417d` | 3 s | 0.22 GB (2.71 GB) | 0.07 MB | `upper_234_of_refuted7L417d`: the same |
+| `UpperBound234` (`final --reuse`) | 236 s | 0.37 GB (9.63 GB) | 0.04 MB | **`upper_bound_234`, `verified_interval_191_234`**: `sorryAx` only through the stubs |
+
+So the chain composes as before. The old form took 1,906 s under heavier load. The new form maps
+the same replay oleans, so the time difference is not a gain from the design. The committed
+`UpperBound234.lean` is now the `--reuse` form, and the three `reuse` modules are committed next
+to the old glue. The scratch oleans (45 MB) were deleted.
+
 ## What remains for a real k7 chain
 
 1. **Certificates** for the 36,841 new keys (`AllRefutedK7`): 19,553 k6/F8 keys and 17,288 H9 keys,
@@ -237,13 +301,16 @@ and needs `Elab.async false` (without it the module passed 4 GB in 2 minutes).
      - a balanced skeleton for the H9 spine, instead of a walk of up to 44 nodes;
      - fewer window lookups per transition. The six k6/F8 lookups in both orientations dominate.
 3. **Then, in order:** `WindowAutomaton7L417dSequence` (220 s), `AggregateDirection7L417d` (69 s),
-   `LocalWindowDirKeysK7` (`gen_lean_glue7.py keys`, 8 minutes), `LocalWindowDirGlue7L417d`
-   (6 minutes) and `UpperBound234` (32 minutes, mostly reading 9.9 GB of oleans).
+   `LocalWindowDirKeysK7` (`gen_lean_glue7.py keys --noncomputable`, 5 minutes),
+   `LocalWindowDirKeysReuse7L417d` and `LocalWindowDirUnsatReuse7L417d` (3 minutes),
+   `LocalWindowDirGlue7L417dReuse` (6 minutes) and `UpperBound234` (4 to 32 minutes, mostly
+   reading 9.6 GB of oleans).
 
 **Imports of the committed modules that are not in the repository yet:**
 
 - `LocalWindowDirGlue7L417d` imports `LocalWindowDirKeys7L417d` (`gen_lean_automaton7.py`) and
   `LocalWindowDirKeysK7` (`gen_lean_glue7.py keys`). Both are generated from the provisional key
   set and are not committed (with the parts, 1.9 MB of source each).
+- `LocalWindowDirGlue7L417dReuse` imports the same two modules.
 - `UpperBound234` imports `AggregateDirection7L417d` (and, through it, the data, the 792 shards,
   the Sequence and the bridge, all generated) and `LocalWindowDirUnsatK7`, which is not written.
