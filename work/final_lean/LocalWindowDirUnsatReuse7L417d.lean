@@ -1,0 +1,4192 @@
+import LocalWindowTags
+import LocalWindowDirKeysReuse7L417d
+import LocalWindowSat.Q012A11
+import LocalWindowUnsat.Q012A11
+import LocalWindowSat.Q012A12
+import LocalWindowUnsat.Q012A12
+import LocalWindowSat.Q012A13
+import LocalWindowUnsat.Q012A13
+import LocalWindowSat.Q012A14
+import LocalWindowUnsat.Q012A14
+import LocalWindowSat.Q0120A151
+import LocalWindowUnsat.Q0120A151
+import LocalWindowSat.Q0120A152
+import LocalWindowUnsat.Q0120A152
+import LocalWindowSat.Q0120A153
+import LocalWindowUnsat.Q0120A153
+import LocalWindowSat.Q0120A154
+import LocalWindowUnsat.Q0120A154
+import LocalWindowSat.Q0120A155
+import LocalWindowUnsat.Q0120A155
+import LocalWindowSat.Q0120A161
+import LocalWindowUnsat.Q0120A161
+import LocalWindowSat.Q0120A162
+import LocalWindowUnsat.Q0120A162
+import LocalWindowSat.Q0120A163
+import LocalWindowUnsat.Q0120A163
+import LocalWindowSat.Q0120A164
+import LocalWindowUnsat.Q0120A164
+import LocalWindowSat.Q0120A222
+import LocalWindowUnsat.Q0120A222
+import LocalWindowSat.Q0120A223
+import LocalWindowUnsat.Q0120A223
+import LocalWindowSat.Q0120A224
+import LocalWindowUnsat.Q0120A224
+import LocalWindowSat.Q0120A225
+import LocalWindowUnsat.Q0120A225
+import LocalWindowSat.Q0120A232
+import LocalWindowUnsat.Q0120A232
+import LocalWindowSat.Q0120A233
+import LocalWindowUnsat.Q0120A233
+import LocalWindowSat.Q0120A234
+import LocalWindowUnsat.Q0120A234
+import LocalWindowSat.Q0120A235
+import LocalWindowUnsat.Q0120A235
+import LocalWindowSat.Q0120A242
+import LocalWindowUnsat.Q0120A242
+import LocalWindowSat.Q0120A243
+import LocalWindowUnsat.Q0120A243
+import LocalWindowSat.Q0120A244
+import LocalWindowUnsat.Q0120A244
+import LocalWindowSat.Q0120A252
+import LocalWindowUnsat.Q0120A252
+import LocalWindowSat.Q0120A253
+import LocalWindowUnsat.Q0120A253
+import LocalWindowSat.Q0120A262
+import LocalWindowUnsat.Q0120A262
+import LocalWindowSat.Q0120A323
+import LocalWindowUnsat.Q0120A323
+import LocalWindowSat.Q0120A324
+import LocalWindowUnsat.Q0120A324
+import LocalWindowSat.Q0120A325
+import LocalWindowUnsat.Q0120A325
+import LocalWindowSat.Q0120A333
+import LocalWindowUnsat.Q0120A333
+import LocalWindowSat.Q0120A334
+import LocalWindowUnsat.Q0120A334
+import LocalWindowSat.Q0120A343
+import LocalWindowUnsat.Q0120A343
+import LocalWindowSat.Q0120A424
+import LocalWindowUnsat.Q0120A424
+import LocalWindowSat.Q0120A515
+import LocalWindowUnsat.Q0120A515
+import LocalWindowSat.Q0120A516
+import LocalWindowUnsat.Q0120A516
+import LocalWindowSat.Q0120A616
+import LocalWindowUnsat.Q0120A616
+import LocalWindowSat.Q0123A151
+import LocalWindowUnsat.Q0123A151
+import LocalWindowSat.Q0123A152
+import LocalWindowUnsat.Q0123A152
+import LocalWindowSat.Q0123A153
+import LocalWindowUnsat.Q0123A153
+import LocalWindowSat.Q0123A161
+import LocalWindowUnsat.Q0123A161
+import LocalWindowSat.Q0123A222
+import LocalWindowUnsat.Q0123A222
+import LocalWindowSat.Q0123A223
+import LocalWindowUnsat.Q0123A223
+import LocalWindowSat.Q0123A224
+import LocalWindowUnsat.Q0123A224
+import LocalWindowSat.Q0123A225
+import LocalWindowUnsat.Q0123A225
+import LocalWindowSat.Q0123A232
+import LocalWindowUnsat.Q0123A232
+import LocalWindowSat.Q0123A323
+import LocalWindowUnsat.Q0123A323
+import LocalWindowSat.K01203A1562
+import LocalWindowUnsat.K01203A1562
+import LocalWindowSat.K01203A1563
+import LocalWindowUnsat.K01203A1563
+import LocalWindowSat.Q01203A2261
+import LocalWindowUnsat.Q01203A2261
+import LocalWindowSat.Q01203A2262
+import LocalWindowUnsat.Q01203A2262
+import LocalWindowSat.Q01203A2263
+import LocalWindowUnsat.Q01203A2263
+import LocalWindowSat.R01203A2264
+import LocalWindowUnsat.R01203A2264
+import LocalWindowSat.Q01203A2361
+import LocalWindowUnsat.Q01203A2361
+import LocalWindowSat.Q01203A2362
+import LocalWindowUnsat.Q01203A2362
+import LocalWindowSat.Q01203A2451
+import LocalWindowUnsat.Q01203A2451
+import LocalWindowSat.Q01203A2452
+import LocalWindowUnsat.Q01203A2452
+import LocalWindowSat.K01203A2453
+import LocalWindowUnsat.K01203A2453
+import LocalWindowSat.R01203A2461
+import LocalWindowUnsat.R01203A2461
+import LocalWindowSat.Q01203A2462
+import LocalWindowUnsat.Q01203A2462
+import LocalWindowSat.R01203A2542
+import LocalWindowUnsat.R01203A2542
+import LocalWindowSat.Q01203A2543
+import LocalWindowUnsat.Q01203A2543
+import LocalWindowSat.R01203A2544
+import LocalWindowUnsat.R01203A2544
+import LocalWindowSat.K01203A2545
+import LocalWindowUnsat.K01203A2545
+import LocalWindowSat.R01203A2551
+import LocalWindowUnsat.R01203A2551
+import LocalWindowSat.Q01203A2552
+import LocalWindowUnsat.Q01203A2552
+import LocalWindowSat.R01203A2553
+import LocalWindowUnsat.R01203A2553
+import LocalWindowSat.Q01203A2632
+import LocalWindowUnsat.Q01203A2632
+import LocalWindowSat.Q01203A2633
+import LocalWindowUnsat.Q01203A2633
+import LocalWindowSat.Q01203A2634
+import LocalWindowUnsat.Q01203A2634
+import LocalWindowSat.Q01203A2642
+import LocalWindowUnsat.Q01203A2642
+import LocalWindowSat.Q01203A2643
+import LocalWindowUnsat.Q01203A2643
+import LocalWindowSat.Q01203A2651
+import LocalWindowUnsat.Q01203A2651
+import LocalWindowSat.K01203A2652
+import LocalWindowUnsat.K01203A2652
+import LocalWindowSat.Q01203A3261
+import LocalWindowUnsat.Q01203A3261
+import LocalWindowSat.Q01203A3262
+import LocalWindowUnsat.Q01203A3262
+import LocalWindowSat.Q01203A3263
+import LocalWindowUnsat.Q01203A3263
+import LocalWindowSat.Q01203A3352
+import LocalWindowUnsat.Q01203A3352
+import LocalWindowSat.Q01203A3353
+import LocalWindowUnsat.Q01203A3353
+import LocalWindowSat.R01203A3354
+import LocalWindowUnsat.R01203A3354
+import LocalWindowSat.Q01203A3361
+import LocalWindowUnsat.Q01203A3361
+import LocalWindowSat.Q01203A3362
+import LocalWindowUnsat.Q01203A3362
+import LocalWindowSat.Q01203A3442
+import LocalWindowUnsat.Q01203A3442
+import LocalWindowSat.Q01203A3443
+import LocalWindowUnsat.Q01203A3443
+import LocalWindowSat.Q01203A3451
+import LocalWindowUnsat.Q01203A3451
+import LocalWindowSat.Q01203A3452
+import LocalWindowUnsat.Q01203A3452
+import LocalWindowSat.R01203A3453
+import LocalWindowUnsat.R01203A3453
+import LocalWindowSat.R01203A3461
+import LocalWindowUnsat.R01203A3461
+import LocalWindowSat.Q01203A3532
+import LocalWindowUnsat.Q01203A3532
+import LocalWindowSat.Q01203A3533
+import LocalWindowUnsat.Q01203A3533
+import LocalWindowSat.R01203A3534
+import LocalWindowUnsat.R01203A3534
+import LocalWindowSat.R01203A3542
+import LocalWindowUnsat.R01203A3542
+import LocalWindowSat.K01203A3551
+import LocalWindowUnsat.K01203A3551
+import LocalWindowSat.K01203A3552
+import LocalWindowUnsat.K01203A3552
+import LocalWindowSat.R01203A3622
+import LocalWindowUnsat.R01203A3622
+import LocalWindowSat.Q01203A3623
+import LocalWindowUnsat.Q01203A3623
+import LocalWindowSat.R01203A3624
+import LocalWindowUnsat.R01203A3624
+import LocalWindowSat.K01203A3651
+import LocalWindowUnsat.K01203A3651
+import LocalWindowSat.Q01203A4252
+import LocalWindowUnsat.Q01203A4252
+import LocalWindowSat.Q01203A4253
+import LocalWindowUnsat.Q01203A4253
+import LocalWindowSat.Q01203A4261
+import LocalWindowUnsat.Q01203A4261
+import LocalWindowSat.Q01203A4262
+import LocalWindowUnsat.Q01203A4262
+import LocalWindowSat.Q01203A4342
+import LocalWindowUnsat.Q01203A4342
+import LocalWindowSat.Q01203A4343
+import LocalWindowUnsat.Q01203A4343
+import LocalWindowSat.Q01203A4344
+import LocalWindowUnsat.Q01203A4344
+import LocalWindowSat.R01203A4352
+import LocalWindowUnsat.R01203A4352
+import LocalWindowSat.Q01203A4432
+import LocalWindowUnsat.Q01203A4432
+import LocalWindowSat.Q01203A4433
+import LocalWindowUnsat.Q01203A4433
+import LocalWindowSat.R01203A4434
+import LocalWindowUnsat.R01203A4434
+import LocalWindowSat.Q01203A4442
+import LocalWindowUnsat.Q01203A4442
+import LocalWindowSat.R01203A4443
+import LocalWindowUnsat.R01203A4443
+import LocalWindowSat.Q01203A4451
+import LocalWindowUnsat.Q01203A4451
+import LocalWindowSat.Q01203A4523
+import LocalWindowUnsat.Q01203A4523
+import LocalWindowSat.R01203A4542
+import LocalWindowUnsat.R01203A4542
+import LocalWindowSat.K01203A4622
+import LocalWindowUnsat.K01203A4622
+import LocalWindowSat.R01203A4623
+import LocalWindowUnsat.R01203A4623
+import LocalWindowSat.Q01203A5242
+import LocalWindowUnsat.Q01203A5242
+import LocalWindowSat.R01203A5243
+import LocalWindowUnsat.R01203A5243
+import LocalWindowSat.Q01203A5252
+import LocalWindowUnsat.Q01203A5252
+import LocalWindowSat.Q01203A5253
+import LocalWindowUnsat.Q01203A5253
+import LocalWindowSat.R01203A5261
+import LocalWindowUnsat.R01203A5261
+import LocalWindowSat.Q01203A5332
+import LocalWindowUnsat.Q01203A5332
+import LocalWindowSat.Q01203A5333
+import LocalWindowUnsat.Q01203A5333
+import LocalWindowSat.Q01203A5342
+import LocalWindowUnsat.Q01203A5342
+import LocalWindowSat.R01203A5352
+import LocalWindowUnsat.R01203A5352
+import LocalWindowSat.Q01203A5423
+import LocalWindowUnsat.Q01203A5423
+import LocalWindowSat.R01203A5424
+import LocalWindowUnsat.R01203A5424
+import LocalWindowSat.R01203A5432
+import LocalWindowUnsat.R01203A5432
+import LocalWindowSat.K01203A5451
+import LocalWindowUnsat.K01203A5451
+import LocalWindowSat.K01203A6233
+import LocalWindowUnsat.K01203A6233
+import LocalWindowSat.R01203A6332
+import LocalWindowUnsat.R01203A6332
+import LocalWindowSat.K01203A6516
+import LocalWindowUnsat.K01203A6516
+import LocalWindowSat.R01230A1542
+import LocalWindowUnsat.R01230A1542
+import LocalWindowSat.Q01230A1543
+import LocalWindowUnsat.Q01230A1543
+import LocalWindowSat.R01230A1544
+import LocalWindowUnsat.R01230A1544
+import LocalWindowSat.R01230A1552
+import LocalWindowUnsat.R01230A1552
+import LocalWindowSat.R01230A1553
+import LocalWindowUnsat.R01230A1553
+import LocalWindowSat.K01230A1561
+import LocalWindowUnsat.K01230A1561
+import LocalWindowSat.Q01230A1562
+import LocalWindowUnsat.Q01230A1562
+import LocalWindowSat.R01230A1622
+import LocalWindowUnsat.R01230A1622
+import LocalWindowSat.Q01230A1623
+import LocalWindowUnsat.Q01230A1623
+import LocalWindowSat.Q01230A1624
+import LocalWindowUnsat.Q01230A1624
+import LocalWindowSat.R01230A1632
+import LocalWindowUnsat.R01230A1632
+import LocalWindowSat.R01230A1633
+import LocalWindowUnsat.R01230A1633
+import LocalWindowSat.R01230A1642
+import LocalWindowUnsat.R01230A1642
+import LocalWindowSat.Q01230A2332
+import LocalWindowUnsat.Q01230A2332
+import LocalWindowSat.Q01230A2333
+import LocalWindowUnsat.Q01230A2333
+import LocalWindowSat.Q01230A2334
+import LocalWindowUnsat.Q01230A2334
+import LocalWindowSat.R01230A2335
+import LocalWindowUnsat.R01230A2335
+import LocalWindowSat.R01230A2342
+import LocalWindowUnsat.R01230A2342
+import LocalWindowSat.R01230A2352
+import LocalWindowUnsat.R01230A2352
+import LocalWindowSat.Q01230A2423
+import LocalWindowUnsat.Q01230A2423
+import LocalWindowSat.R01230A2424
+import LocalWindowUnsat.R01230A2424
+import LocalWindowSat.R01230A2425
+import LocalWindowUnsat.R01230A2425
+import LocalWindowSat.R01230A2442
+import LocalWindowUnsat.R01230A2442
+import LocalWindowSat.R01230A2523
+import LocalWindowUnsat.R01230A2523
+import LocalWindowSat.R01230A2615
+import LocalWindowUnsat.R01230A2615
+import LocalWindowSat.Q01230A3243
+import LocalWindowUnsat.Q01230A3243
+import LocalWindowSat.Q01230A3324
+import LocalWindowUnsat.Q01230A3324
+import LocalWindowSat.Q01230A3325
+import LocalWindowUnsat.Q01230A3325
+import LocalWindowSat.K01230A3326
+import LocalWindowUnsat.K01230A3326
+import LocalWindowSat.R01230A3615
+import LocalWindowUnsat.R01230A3615
+import LocalWindowSat.R01230A4325
+import LocalWindowUnsat.R01230A4325
+import LocalWindowSat.K01230A4515
+import LocalWindowUnsat.K01230A4515
+import LocalWindowSat.R01230A5235
+import LocalWindowUnsat.R01230A5235
+import LocalWindowSat.Q01234A1542
+import LocalWindowUnsat.Q01234A1542
+import LocalWindowSat.Q01234A1543
+import LocalWindowUnsat.Q01234A1543
+import LocalWindowSat.Q01234A1544
+import LocalWindowUnsat.Q01234A1544
+import LocalWindowSat.R01234A1545
+import LocalWindowUnsat.R01234A1545
+import LocalWindowSat.R01234A1551
+import LocalWindowUnsat.R01234A1551
+import LocalWindowSat.Q01234A1552
+import LocalWindowUnsat.Q01234A1552
+import LocalWindowSat.R01234A1553
+import LocalWindowUnsat.R01234A1553
+import LocalWindowSat.K01234A1554
+import LocalWindowUnsat.K01234A1554
+import LocalWindowSat.Q01234A1562
+import LocalWindowUnsat.Q01234A1562
+import LocalWindowSat.Q01234A1622
+import LocalWindowUnsat.Q01234A1622
+import LocalWindowSat.Q01234A1623
+import LocalWindowUnsat.Q01234A1623
+import LocalWindowSat.Q01234A1624
+import LocalWindowUnsat.Q01234A1624
+import LocalWindowSat.Q01234A1625
+import LocalWindowUnsat.Q01234A1625
+import LocalWindowSat.Q01234A1626
+import LocalWindowUnsat.Q01234A1626
+import LocalWindowSat.Q01234A1632
+import LocalWindowUnsat.Q01234A1632
+import LocalWindowSat.Q01234A1633
+import LocalWindowUnsat.Q01234A1633
+import LocalWindowSat.Q01234A1634
+import LocalWindowUnsat.Q01234A1634
+import LocalWindowSat.Q01234A1642
+import LocalWindowUnsat.Q01234A1642
+import LocalWindowSat.Q01234A1643
+import LocalWindowUnsat.Q01234A1643
+import LocalWindowSat.Q01234A2262
+import LocalWindowUnsat.Q01234A2262
+import LocalWindowSat.Q01234A2263
+import LocalWindowUnsat.Q01234A2263
+import LocalWindowSat.R01234A2264
+import LocalWindowUnsat.R01234A2264
+import LocalWindowSat.Q01234A2332
+import LocalWindowUnsat.Q01234A2332
+import LocalWindowSat.Q01234A2333
+import LocalWindowUnsat.Q01234A2333
+import LocalWindowSat.Q01234A2334
+import LocalWindowUnsat.Q01234A2334
+import LocalWindowSat.Q01234A2335
+import LocalWindowUnsat.Q01234A2335
+import LocalWindowSat.R01234A2336
+import LocalWindowUnsat.R01234A2336
+import LocalWindowSat.Q01234A2342
+import LocalWindowUnsat.Q01234A2342
+import LocalWindowSat.Q01234A2343
+import LocalWindowUnsat.Q01234A2343
+import LocalWindowSat.Q01234A2344
+import LocalWindowUnsat.Q01234A2344
+import LocalWindowSat.Q01234A2345
+import LocalWindowUnsat.Q01234A2345
+import LocalWindowSat.Q01234A2352
+import LocalWindowUnsat.Q01234A2352
+import LocalWindowSat.Q01234A2353
+import LocalWindowUnsat.Q01234A2353
+import LocalWindowSat.Q01234A2354
+import LocalWindowUnsat.Q01234A2354
+import LocalWindowSat.Q01234A2355
+import LocalWindowUnsat.Q01234A2355
+import LocalWindowSat.Q01234A2362
+import LocalWindowUnsat.Q01234A2362
+import LocalWindowSat.Q01234A2423
+import LocalWindowUnsat.Q01234A2423
+import LocalWindowSat.Q01234A2424
+import LocalWindowUnsat.Q01234A2424
+import LocalWindowSat.Q01234A2425
+import LocalWindowUnsat.Q01234A2425
+import LocalWindowSat.Q01234A2426
+import LocalWindowUnsat.Q01234A2426
+import LocalWindowSat.Q01234A2433
+import LocalWindowUnsat.Q01234A2433
+import LocalWindowSat.Q01234A2434
+import LocalWindowUnsat.Q01234A2434
+import LocalWindowSat.Q01234A2435
+import LocalWindowUnsat.Q01234A2435
+import LocalWindowSat.Q01234A2442
+import LocalWindowUnsat.Q01234A2442
+import LocalWindowSat.Q01234A2443
+import LocalWindowUnsat.Q01234A2443
+import LocalWindowSat.Q01234A2444
+import LocalWindowUnsat.Q01234A2444
+import LocalWindowSat.Q01234A2452
+import LocalWindowUnsat.Q01234A2452
+import LocalWindowSat.Q01234A2453
+import LocalWindowUnsat.Q01234A2453
+import LocalWindowSat.Q01234A2462
+import LocalWindowUnsat.Q01234A2462
+import LocalWindowSat.Q01234A2523
+import LocalWindowUnsat.Q01234A2523
+import LocalWindowSat.Q01234A2524
+import LocalWindowUnsat.Q01234A2524
+import LocalWindowSat.Q01234A2525
+import LocalWindowUnsat.Q01234A2525
+import LocalWindowSat.Q01234A2533
+import LocalWindowUnsat.Q01234A2533
+import LocalWindowSat.R01234A2534
+import LocalWindowUnsat.R01234A2534
+import LocalWindowSat.Q01234A2543
+import LocalWindowUnsat.Q01234A2543
+import LocalWindowSat.Q01234A2552
+import LocalWindowUnsat.Q01234A2552
+import LocalWindowSat.Q01234A2615
+import LocalWindowUnsat.Q01234A2615
+import LocalWindowSat.Q01234A2616
+import LocalWindowUnsat.Q01234A2616
+import LocalWindowSat.Q01234A3243
+import LocalWindowUnsat.Q01234A3243
+import LocalWindowSat.Q01234A3244
+import LocalWindowUnsat.Q01234A3244
+import LocalWindowSat.Q01234A3245
+import LocalWindowUnsat.Q01234A3245
+import LocalWindowSat.Q01234A3253
+import LocalWindowUnsat.Q01234A3253
+import LocalWindowSat.Q01234A3254
+import LocalWindowUnsat.Q01234A3254
+import LocalWindowSat.Q01234A3255
+import LocalWindowUnsat.Q01234A3255
+import LocalWindowSat.Q01234A3324
+import LocalWindowUnsat.Q01234A3324
+import LocalWindowSat.Q01234A3325
+import LocalWindowUnsat.Q01234A3325
+import LocalWindowSat.Q01234A3333
+import LocalWindowUnsat.Q01234A3333
+import LocalWindowSat.Q01234A3334
+import LocalWindowUnsat.Q01234A3334
+import LocalWindowSat.Q01234A3335
+import LocalWindowUnsat.Q01234A3335
+import LocalWindowSat.Q01234A3343
+import LocalWindowUnsat.Q01234A3343
+import LocalWindowSat.Q01234A3344
+import LocalWindowUnsat.Q01234A3344
+import LocalWindowSat.R01234A3345
+import LocalWindowUnsat.R01234A3345
+import LocalWindowSat.Q01234A3353
+import LocalWindowUnsat.Q01234A3353
+import LocalWindowSat.Q01234A3424
+import LocalWindowUnsat.Q01234A3424
+import LocalWindowSat.Q01234A3425
+import LocalWindowUnsat.Q01234A3425
+import LocalWindowSat.Q01234A3434
+import LocalWindowUnsat.Q01234A3434
+import LocalWindowSat.Q01234A3524
+import LocalWindowUnsat.Q01234A3524
+import LocalWindowSat.Q01234A3525
+import LocalWindowUnsat.Q01234A3525
+import LocalWindowSat.Q01234A3615
+import LocalWindowUnsat.Q01234A3615
+import LocalWindowSat.Q01234A3616
+import LocalWindowUnsat.Q01234A3616
+import LocalWindowSat.Q01234A4234
+import LocalWindowUnsat.Q01234A4234
+import LocalWindowSat.Q01234A4235
+import LocalWindowUnsat.Q01234A4235
+import LocalWindowSat.Q01234A4244
+import LocalWindowUnsat.Q01234A4244
+import LocalWindowSat.Q01234A4245
+import LocalWindowUnsat.Q01234A4245
+import LocalWindowSat.Q01234A4325
+import LocalWindowUnsat.Q01234A4325
+import LocalWindowSat.Q01234A4334
+import LocalWindowUnsat.Q01234A4334
+import LocalWindowSat.Q01234A4425
+import LocalWindowUnsat.Q01234A4425
+import LocalWindowSat.Q01234A4515
+import LocalWindowUnsat.Q01234A4515
+import LocalWindowSat.Q01234A4516
+import LocalWindowUnsat.Q01234A4516
+import LocalWindowSat.Q01234A4615
+import LocalWindowUnsat.Q01234A4615
+import LocalWindowSat.Q01234A4616
+import LocalWindowUnsat.Q01234A4616
+import LocalWindowSat.Q01234A5155
+import LocalWindowUnsat.Q01234A5155
+import LocalWindowSat.Q01234A5235
+import LocalWindowUnsat.Q01234A5235
+import LocalWindowSat.Q01234A5516
+import LocalWindowUnsat.Q01234A5516
+import LocalWindowSat.Q01234A5616
+import LocalWindowUnsat.Q01234A5616
+import LocalWindowSat.K012031A22652
+import LocalWindowUnsat.K012031A22652
+import LocalWindowSat.K012031A22653
+import LocalWindowUnsat.K012031A22653
+import LocalWindowSat.K012031A22654
+import LocalWindowUnsat.K012031A22654
+import LocalWindowSat.K012031A22662
+import LocalWindowUnsat.K012031A22662
+import LocalWindowSat.R012031A23632
+import LocalWindowUnsat.R012031A23632
+import LocalWindowSat.K012031A23633
+import LocalWindowUnsat.K012031A23633
+import LocalWindowSat.K012031A23634
+import LocalWindowUnsat.K012031A23634
+import LocalWindowSat.R012031A23642
+import LocalWindowUnsat.R012031A23642
+import LocalWindowSat.R012031A24642
+import LocalWindowUnsat.R012031A24642
+import LocalWindowSat.K012031A24662
+import LocalWindowUnsat.K012031A24662
+import LocalWindowSat.K012031A26632
+import LocalWindowUnsat.K012031A26632
+import LocalWindowSat.K012031A26633
+import LocalWindowUnsat.K012031A26633
+import LocalWindowSat.Q012031A32642
+import LocalWindowUnsat.Q012031A32642
+import LocalWindowSat.K012031A32652
+import LocalWindowUnsat.K012031A32652
+import LocalWindowSat.K012031A32662
+import LocalWindowUnsat.K012031A32662
+import LocalWindowSat.K012031A33562
+import LocalWindowUnsat.K012031A33562
+import LocalWindowSat.K012031A33632
+import LocalWindowUnsat.K012031A33632
+import LocalWindowSat.R012031A33642
+import LocalWindowUnsat.R012031A33642
+import LocalWindowSat.K012031A33652
+import LocalWindowUnsat.K012031A33652
+import LocalWindowSat.K012031A33653
+import LocalWindowUnsat.K012031A33653
+import LocalWindowSat.K012031A33662
+import LocalWindowUnsat.K012031A33662
+import LocalWindowSat.K012031A34622
+import LocalWindowUnsat.K012031A34622
+import LocalWindowSat.K012031A35432
+import LocalWindowUnsat.K012031A35432
+import LocalWindowSat.K012031A35433
+import LocalWindowUnsat.K012031A35433
+import LocalWindowSat.K012031A35434
+import LocalWindowUnsat.K012031A35434
+import LocalWindowSat.K012031A35442
+import LocalWindowUnsat.K012031A35442
+import LocalWindowSat.K012031A35443
+import LocalWindowUnsat.K012031A35443
+import LocalWindowSat.R012031A36332
+import LocalWindowUnsat.R012031A36332
+import LocalWindowSat.K012031A36433
+import LocalWindowUnsat.K012031A36433
+import LocalWindowSat.Q012031A42542
+import LocalWindowUnsat.Q012031A42542
+import LocalWindowSat.Q012031A42543
+import LocalWindowUnsat.Q012031A42543
+import LocalWindowSat.Q012031A42552
+import LocalWindowUnsat.Q012031A42552
+import LocalWindowSat.K012031A42632
+import LocalWindowUnsat.K012031A42632
+import LocalWindowSat.K012031A42633
+import LocalWindowUnsat.K012031A42633
+import LocalWindowSat.R012031A42642
+import LocalWindowUnsat.R012031A42642
+import LocalWindowSat.K012031A42652
+import LocalWindowUnsat.K012031A42652
+import LocalWindowSat.K012031A43453
+import LocalWindowUnsat.K012031A43453
+import LocalWindowSat.K012031A43532
+import LocalWindowUnsat.K012031A43532
+import LocalWindowSat.R012031A43542
+import LocalWindowUnsat.R012031A43542
+import LocalWindowSat.K012031A43562
+import LocalWindowUnsat.K012031A43562
+import LocalWindowSat.K012031A43616
+import LocalWindowUnsat.K012031A43616
+import LocalWindowSat.K012031A43622
+import LocalWindowUnsat.K012031A43622
+import LocalWindowSat.K012031A43632
+import LocalWindowUnsat.K012031A43632
+import LocalWindowSat.K012031A43642
+import LocalWindowUnsat.K012031A43642
+import LocalWindowSat.K012031A44352
+import LocalWindowUnsat.K012031A44352
+import LocalWindowSat.K012031A44353
+import LocalWindowUnsat.K012031A44353
+import LocalWindowSat.K012031A44362
+import LocalWindowUnsat.K012031A44362
+import LocalWindowSat.K012031A44523
+import LocalWindowUnsat.K012031A44523
+import LocalWindowSat.K012031A46242
+import LocalWindowUnsat.K012031A46242
+import LocalWindowSat.R012031A46332
+import LocalWindowUnsat.R012031A46332
+import LocalWindowSat.K012031A52444
+import LocalWindowUnsat.K012031A52444
+import LocalWindowSat.R012031A52622
+import LocalWindowUnsat.R012031A52622
+import LocalWindowSat.R012031A52632
+import LocalWindowUnsat.R012031A52632
+import LocalWindowSat.R012031A52642
+import LocalWindowUnsat.R012031A52642
+import LocalWindowSat.Q012031A53342
+import LocalWindowUnsat.Q012031A53342
+import LocalWindowSat.Q012031A53343
+import LocalWindowUnsat.Q012031A53343
+import LocalWindowSat.K012031A53352
+import LocalWindowUnsat.K012031A53352
+import LocalWindowSat.K012031A53353
+import LocalWindowUnsat.K012031A53353
+import LocalWindowSat.R012031A53432
+import LocalWindowUnsat.R012031A53432
+import LocalWindowSat.K012031A53442
+import LocalWindowUnsat.K012031A53442
+import LocalWindowSat.R012031A53622
+import LocalWindowUnsat.R012031A53622
+import LocalWindowSat.R012031A54252
+import LocalWindowUnsat.R012031A54252
+import LocalWindowSat.Q012031A54253
+import LocalWindowUnsat.Q012031A54253
+import LocalWindowSat.K012031A54254
+import LocalWindowUnsat.K012031A54254
+import LocalWindowSat.K012031A54342
+import LocalWindowUnsat.K012031A54342
+import LocalWindowSat.K012031A54423
+import LocalWindowUnsat.K012031A54423
+import LocalWindowSat.K012031A56242
+import LocalWindowUnsat.K012031A56242
+import LocalWindowSat.K012031A62433
+import LocalWindowUnsat.K012031A62433
+import LocalWindowSat.K012031A62616
+import LocalWindowUnsat.K012031A62616
+import LocalWindowSat.R012031A62622
+import LocalWindowUnsat.R012031A62622
+import LocalWindowSat.R012031A62623
+import LocalWindowUnsat.R012031A62623
+import LocalWindowSat.K012031A62632
+import LocalWindowUnsat.K012031A62632
+import LocalWindowSat.R012031A63244
+import LocalWindowUnsat.R012031A63244
+import LocalWindowSat.Q012031A63245
+import LocalWindowUnsat.Q012031A63245
+import LocalWindowSat.K012031A63246
+import LocalWindowUnsat.K012031A63246
+import LocalWindowSat.R012031A63432
+import LocalWindowUnsat.R012031A63432
+import LocalWindowSat.R012031A63622
+import LocalWindowUnsat.R012031A63622
+import LocalWindowSat.K012032A22652
+import LocalWindowUnsat.K012032A22652
+import LocalWindowSat.K012032A22653
+import LocalWindowUnsat.K012032A22653
+import LocalWindowSat.K012032A23632
+import LocalWindowUnsat.K012032A23632
+import LocalWindowSat.K012032A23633
+import LocalWindowUnsat.K012032A23633
+import LocalWindowSat.K012032A23634
+import LocalWindowUnsat.K012032A23634
+import LocalWindowSat.K012032A24662
+import LocalWindowUnsat.K012032A24662
+import LocalWindowSat.K012032A25633
+import LocalWindowUnsat.K012032A25633
+import LocalWindowSat.K012032A26633
+import LocalWindowUnsat.K012032A26633
+import LocalWindowSat.K012032A33653
+import LocalWindowUnsat.K012032A33653
+import LocalWindowSat.K012032A35434
+import LocalWindowUnsat.K012032A35434
+import LocalWindowSat.K012034A22652
+import LocalWindowUnsat.K012034A22652
+import LocalWindowSat.K012034A22653
+import LocalWindowUnsat.K012034A22653
+import LocalWindowSat.K012034A22654
+import LocalWindowUnsat.K012034A22654
+import LocalWindowSat.K012034A22662
+import LocalWindowUnsat.K012034A22662
+import LocalWindowSat.R012034A23632
+import LocalWindowUnsat.R012034A23632
+import LocalWindowSat.K012034A23633
+import LocalWindowUnsat.K012034A23633
+import LocalWindowSat.K012034A23634
+import LocalWindowUnsat.K012034A23634
+import LocalWindowSat.R012034A23642
+import LocalWindowUnsat.R012034A23642
+import LocalWindowSat.K012034A24632
+import LocalWindowUnsat.K012034A24632
+import LocalWindowSat.R012034A24633
+import LocalWindowUnsat.R012034A24633
+import LocalWindowSat.K012034A24634
+import LocalWindowUnsat.K012034A24634
+import LocalWindowSat.R012034A24642
+import LocalWindowUnsat.R012034A24642
+import LocalWindowSat.K012034A24662
+import LocalWindowUnsat.K012034A24662
+import LocalWindowSat.K012034A25623
+import LocalWindowUnsat.K012034A25623
+import LocalWindowSat.K012034A26352
+import LocalWindowUnsat.K012034A26352
+import LocalWindowSat.K012034A26353
+import LocalWindowUnsat.K012034A26353
+import LocalWindowSat.K012034A26362
+import LocalWindowUnsat.K012034A26362
+import LocalWindowSat.Q012034A26442
+import LocalWindowUnsat.Q012034A26442
+import LocalWindowSat.K012034A26616
+import LocalWindowUnsat.K012034A26616
+import LocalWindowSat.K012034A26623
+import LocalWindowUnsat.K012034A26623
+import LocalWindowSat.K012034A26624
+import LocalWindowUnsat.K012034A26624
+import LocalWindowSat.K012034A26632
+import LocalWindowUnsat.K012034A26632
+import LocalWindowSat.K012034A26633
+import LocalWindowUnsat.K012034A26633
+import LocalWindowSat.R012034A32643
+import LocalWindowUnsat.R012034A32643
+import LocalWindowSat.K012034A32652
+import LocalWindowUnsat.K012034A32652
+import LocalWindowSat.K012034A32662
+import LocalWindowUnsat.K012034A32662
+import LocalWindowSat.K012034A33562
+import LocalWindowUnsat.K012034A33562
+import LocalWindowSat.K012034A33632
+import LocalWindowUnsat.K012034A33632
+import LocalWindowSat.K012034A33633
+import LocalWindowUnsat.K012034A33633
+import LocalWindowSat.R012034A33642
+import LocalWindowUnsat.R012034A33642
+import LocalWindowSat.K012034A33652
+import LocalWindowUnsat.K012034A33652
+import LocalWindowSat.K012034A33653
+import LocalWindowUnsat.K012034A33653
+import LocalWindowSat.K012034A33662
+import LocalWindowUnsat.K012034A33662
+import LocalWindowSat.R012034A34542
+import LocalWindowUnsat.R012034A34542
+import LocalWindowSat.K012034A34543
+import LocalWindowUnsat.K012034A34543
+import LocalWindowSat.K012034A34544
+import LocalWindowUnsat.K012034A34544
+import LocalWindowSat.K012034A34552
+import LocalWindowUnsat.K012034A34552
+import LocalWindowSat.R012034A34623
+import LocalWindowUnsat.R012034A34623
+import LocalWindowSat.K012034A34624
+import LocalWindowUnsat.K012034A34624
+import LocalWindowSat.K012034A34632
+import LocalWindowUnsat.K012034A34632
+import LocalWindowSat.K012034A34633
+import LocalWindowUnsat.K012034A34633
+import LocalWindowSat.K012034A34634
+import LocalWindowUnsat.K012034A34634
+import LocalWindowSat.K012034A34642
+import LocalWindowUnsat.K012034A34642
+import LocalWindowSat.K012034A35352
+import LocalWindowUnsat.K012034A35352
+import LocalWindowSat.K012034A35353
+import LocalWindowUnsat.K012034A35353
+import LocalWindowSat.K012034A35434
+import LocalWindowUnsat.K012034A35434
+import LocalWindowSat.K012034A35435
+import LocalWindowUnsat.K012034A35435
+import LocalWindowSat.R012034A35442
+import LocalWindowUnsat.R012034A35442
+import LocalWindowSat.K012034A35443
+import LocalWindowUnsat.K012034A35443
+import LocalWindowSat.K012034A35444
+import LocalWindowUnsat.K012034A35444
+import LocalWindowSat.K012034A35533
+import LocalWindowUnsat.K012034A35533
+import LocalWindowSat.K012034A35623
+import LocalWindowUnsat.K012034A35623
+import LocalWindowSat.K012034A36252
+import LocalWindowUnsat.K012034A36252
+import LocalWindowSat.K012034A36253
+import LocalWindowUnsat.K012034A36253
+import LocalWindowSat.Q012034A36324
+import LocalWindowUnsat.Q012034A36324
+import LocalWindowSat.Q012034A36325
+import LocalWindowUnsat.Q012034A36325
+import LocalWindowSat.Q012034A36333
+import LocalWindowUnsat.Q012034A36333
+import LocalWindowSat.R012034A36334
+import LocalWindowUnsat.R012034A36334
+import LocalWindowSat.K012034A36335
+import LocalWindowUnsat.K012034A36335
+import LocalWindowSat.K012034A36342
+import LocalWindowUnsat.K012034A36342
+import LocalWindowSat.R012034A36343
+import LocalWindowUnsat.R012034A36343
+import LocalWindowSat.K012034A36344
+import LocalWindowUnsat.K012034A36344
+import LocalWindowSat.K012034A36352
+import LocalWindowUnsat.K012034A36352
+import LocalWindowSat.K012034A36353
+import LocalWindowUnsat.K012034A36353
+import LocalWindowSat.K012034A36362
+import LocalWindowUnsat.K012034A36362
+import LocalWindowSat.R012034A36424
+import LocalWindowUnsat.R012034A36424
+import LocalWindowSat.K012034A36432
+import LocalWindowUnsat.K012034A36432
+import LocalWindowSat.K012034A36433
+import LocalWindowUnsat.K012034A36433
+import LocalWindowSat.K012034A36434
+import LocalWindowUnsat.K012034A36434
+import LocalWindowSat.K012034A36442
+import LocalWindowUnsat.K012034A36442
+import LocalWindowSat.K012034A42544
+import LocalWindowUnsat.K012034A42544
+import LocalWindowSat.K012034A42545
+import LocalWindowUnsat.K012034A42545
+import LocalWindowSat.K012034A42553
+import LocalWindowUnsat.K012034A42553
+import LocalWindowSat.K012034A42633
+import LocalWindowUnsat.K012034A42633
+import LocalWindowSat.K012034A42652
+import LocalWindowUnsat.K012034A42652
+import LocalWindowSat.K012034A43453
+import LocalWindowUnsat.K012034A43453
+import LocalWindowSat.K012034A43534
+import LocalWindowUnsat.K012034A43534
+import LocalWindowSat.K012034A43562
+import LocalWindowUnsat.K012034A43562
+import LocalWindowSat.R012034A43623
+import LocalWindowUnsat.R012034A43623
+import LocalWindowSat.K012034A43624
+import LocalWindowUnsat.K012034A43624
+import LocalWindowSat.K012034A43632
+import LocalWindowUnsat.K012034A43632
+import LocalWindowSat.K012034A43633
+import LocalWindowUnsat.K012034A43633
+import LocalWindowSat.R012034A43642
+import LocalWindowUnsat.R012034A43642
+import LocalWindowSat.K012034A44353
+import LocalWindowUnsat.K012034A44353
+import LocalWindowSat.K012034A44362
+import LocalWindowUnsat.K012034A44362
+import LocalWindowSat.K012034A44524
+import LocalWindowUnsat.K012034A44524
+import LocalWindowSat.K012034A44525
+import LocalWindowUnsat.K012034A44525
+import LocalWindowSat.K012034A44533
+import LocalWindowUnsat.K012034A44533
+import LocalWindowSat.K012034A44534
+import LocalWindowUnsat.K012034A44534
+import LocalWindowSat.K012034A45343
+import LocalWindowUnsat.K012034A45343
+import LocalWindowSat.K012034A46243
+import LocalWindowUnsat.K012034A46243
+import LocalWindowSat.K012034A46244
+import LocalWindowUnsat.K012034A46244
+import LocalWindowSat.K012034A46252
+import LocalWindowUnsat.K012034A46252
+import LocalWindowSat.K012034A46253
+import LocalWindowUnsat.K012034A46253
+import LocalWindowSat.Q012034A46324
+import LocalWindowUnsat.Q012034A46324
+import LocalWindowSat.Q012034A46325
+import LocalWindowUnsat.Q012034A46325
+import LocalWindowSat.Q012034A46333
+import LocalWindowUnsat.Q012034A46333
+import LocalWindowSat.R012034A46334
+import LocalWindowUnsat.R012034A46334
+import LocalWindowSat.R012034A46343
+import LocalWindowUnsat.R012034A46343
+import LocalWindowSat.K012034A46352
+import LocalWindowUnsat.K012034A46352
+import LocalWindowSat.K012034A46353
+import LocalWindowUnsat.K012034A46353
+import LocalWindowSat.K012034A46362
+import LocalWindowUnsat.K012034A46362
+import LocalWindowSat.K012034A46423
+import LocalWindowUnsat.K012034A46423
+import LocalWindowSat.K012034A46424
+import LocalWindowUnsat.K012034A46424
+import LocalWindowSat.K012034A46432
+import LocalWindowUnsat.K012034A46432
+import LocalWindowSat.K012034A46433
+import LocalWindowUnsat.K012034A46433
+import LocalWindowSat.K012034A46442
+import LocalWindowUnsat.K012034A46442
+import LocalWindowSat.K012034A46516
+import LocalWindowUnsat.K012034A46516
+import LocalWindowSat.Q012034A52623
+import LocalWindowUnsat.Q012034A52623
+import LocalWindowSat.K012034A52624
+import LocalWindowUnsat.K012034A52624
+import LocalWindowSat.K012034A53642
+import LocalWindowUnsat.K012034A53642
+import LocalWindowSat.K012034A54254
+import LocalWindowUnsat.K012034A54254
+import LocalWindowSat.K012034A55343
+import LocalWindowUnsat.K012034A55343
+import LocalWindowSat.K012034A56226
+import LocalWindowUnsat.K012034A56226
+import LocalWindowSat.K012034A56233
+import LocalWindowUnsat.K012034A56233
+import LocalWindowSat.R012034A56234
+import LocalWindowUnsat.R012034A56234
+import LocalWindowSat.K012034A56235
+import LocalWindowUnsat.K012034A56235
+import LocalWindowSat.K012034A56243
+import LocalWindowUnsat.K012034A56243
+import LocalWindowSat.K012034A56244
+import LocalWindowUnsat.K012034A56244
+import LocalWindowSat.K012034A56324
+import LocalWindowUnsat.K012034A56324
+import LocalWindowSat.K012034A56333
+import LocalWindowUnsat.K012034A56333
+import LocalWindowSat.Q012034A62623
+import LocalWindowUnsat.Q012034A62623
+import LocalWindowSat.Q012301A22622
+import LocalWindowUnsat.Q012301A22622
+import LocalWindowSat.Q012301A22623
+import LocalWindowUnsat.Q012301A22623
+import LocalWindowSat.Q012301A22632
+import LocalWindowUnsat.Q012301A22632
+import LocalWindowSat.Q012301A22633
+import LocalWindowUnsat.Q012301A22633
+import LocalWindowSat.R012301A22642
+import LocalWindowUnsat.R012301A22642
+import LocalWindowSat.K012301A22652
+import LocalWindowUnsat.K012301A22652
+import LocalWindowSat.R012301A23362
+import LocalWindowUnsat.R012301A23362
+import LocalWindowSat.R012301A23363
+import LocalWindowUnsat.R012301A23363
+import LocalWindowSat.R012301A23432
+import LocalWindowUnsat.R012301A23432
+import LocalWindowSat.R012301A23433
+import LocalWindowUnsat.R012301A23433
+import LocalWindowSat.R012301A23434
+import LocalWindowUnsat.R012301A23434
+import LocalWindowSat.R012301A23436
+import LocalWindowUnsat.R012301A23436
+import LocalWindowSat.R012301A23442
+import LocalWindowUnsat.R012301A23442
+import LocalWindowSat.R012301A23443
+import LocalWindowUnsat.R012301A23443
+import LocalWindowSat.R012301A23444
+import LocalWindowUnsat.R012301A23444
+import LocalWindowSat.R012301A23532
+import LocalWindowUnsat.R012301A23532
+import LocalWindowSat.R012301A23533
+import LocalWindowUnsat.R012301A23533
+import LocalWindowSat.K012301A23534
+import LocalWindowUnsat.K012301A23534
+import LocalWindowSat.R012301A23542
+import LocalWindowUnsat.R012301A23542
+import LocalWindowSat.R012301A23623
+import LocalWindowUnsat.R012301A23623
+import LocalWindowSat.K012301A23624
+import LocalWindowUnsat.K012301A23624
+import LocalWindowSat.R012301A23632
+import LocalWindowUnsat.R012301A23632
+import LocalWindowSat.R012301A23642
+import LocalWindowUnsat.R012301A23642
+import LocalWindowSat.R012301A24333
+import LocalWindowUnsat.R012301A24333
+import LocalWindowSat.R012301A24334
+import LocalWindowUnsat.R012301A24334
+import LocalWindowSat.R012301A24342
+import LocalWindowUnsat.R012301A24342
+import LocalWindowSat.R012301A24343
+import LocalWindowUnsat.R012301A24343
+import LocalWindowSat.R012301A24434
+import LocalWindowUnsat.R012301A24434
+import LocalWindowSat.R012301A24523
+import LocalWindowUnsat.R012301A24523
+import LocalWindowSat.K012301A24524
+import LocalWindowUnsat.K012301A24524
+import LocalWindowSat.R012301A24533
+import LocalWindowUnsat.R012301A24533
+import LocalWindowSat.R012301A24534
+import LocalWindowUnsat.R012301A24534
+import LocalWindowSat.R012301A24542
+import LocalWindowUnsat.R012301A24542
+import LocalWindowSat.R012301A24623
+import LocalWindowUnsat.R012301A24623
+import LocalWindowSat.R012301A24642
+import LocalWindowUnsat.R012301A24642
+import LocalWindowSat.K012301A25245
+import LocalWindowUnsat.K012301A25245
+import LocalWindowSat.K012301A25423
+import LocalWindowUnsat.K012301A25423
+import LocalWindowSat.K012301A25443
+import LocalWindowUnsat.K012301A25443
+import LocalWindowSat.K012301A25523
+import LocalWindowUnsat.K012301A25523
+import LocalWindowSat.K012301A25524
+import LocalWindowUnsat.K012301A25524
+import LocalWindowSat.K012301A25623
+import LocalWindowUnsat.K012301A25623
+import LocalWindowSat.Q012301A26262
+import LocalWindowUnsat.Q012301A26262
+import LocalWindowSat.K012301A26263
+import LocalWindowUnsat.K012301A26263
+import LocalWindowSat.K012301A26344
+import LocalWindowUnsat.K012301A26344
+import LocalWindowSat.R012301A32443
+import LocalWindowUnsat.R012301A32443
+import LocalWindowSat.K012301A32444
+import LocalWindowUnsat.K012301A32444
+import LocalWindowSat.K012301A32453
+import LocalWindowUnsat.K012301A32453
+import LocalWindowSat.R012301A32533
+import LocalWindowUnsat.R012301A32533
+import LocalWindowSat.K012301A32534
+import LocalWindowUnsat.K012301A32534
+import LocalWindowSat.K012301A32543
+import LocalWindowUnsat.K012301A32543
+import LocalWindowSat.R012301A32623
+import LocalWindowUnsat.R012301A32623
+import LocalWindowSat.R012301A33333
+import LocalWindowUnsat.R012301A33333
+import LocalWindowSat.R012301A33334
+import LocalWindowUnsat.R012301A33334
+import LocalWindowSat.K012301A33335
+import LocalWindowUnsat.K012301A33335
+import LocalWindowSat.R012301A33424
+import LocalWindowUnsat.R012301A33424
+import LocalWindowSat.R012301A33425
+import LocalWindowUnsat.R012301A33425
+import LocalWindowSat.R012301A33533
+import LocalWindowUnsat.R012301A33533
+import LocalWindowSat.R012301A34324
+import LocalWindowUnsat.R012301A34324
+import LocalWindowSat.Q012301A34343
+import LocalWindowUnsat.Q012301A34343
+import LocalWindowSat.K012301A34615
+import LocalWindowUnsat.K012301A34615
+import LocalWindowSat.K012301A34616
+import LocalWindowUnsat.K012301A34616
+import LocalWindowSat.Q012301A35253
+import LocalWindowUnsat.Q012301A35253
+import LocalWindowSat.R012301A36234
+import LocalWindowUnsat.R012301A36234
+import LocalWindowSat.R012301A42344
+import LocalWindowUnsat.R012301A42344
+import LocalWindowSat.K012301A42345
+import LocalWindowUnsat.K012301A42345
+import LocalWindowSat.R012301A42346
+import LocalWindowUnsat.R012301A42346
+import LocalWindowSat.R012301A43334
+import LocalWindowUnsat.R012301A43334
+import LocalWindowSat.R012301A43425
+import LocalWindowUnsat.R012301A43425
+import LocalWindowSat.R012301A44235
+import LocalWindowUnsat.R012301A44235
+import LocalWindowSat.R012301A44244
+import LocalWindowUnsat.R012301A44244
+import LocalWindowSat.K012301A44245
+import LocalWindowUnsat.K012301A44245
+import LocalWindowSat.K012301A45245
+import LocalWindowUnsat.K012301A45245
+import LocalWindowSat.K012301A52616
+import LocalWindowUnsat.K012301A52616
+import LocalWindowSat.K012301A53245
+import LocalWindowUnsat.K012301A53245
+import LocalWindowSat.K012301A54236
+import LocalWindowUnsat.K012301A54236
+import LocalWindowSat.K012304A15452
+import LocalWindowUnsat.K012304A15452
+import LocalWindowSat.K012304A15453
+import LocalWindowUnsat.K012304A15453
+import LocalWindowSat.K012304A15454
+import LocalWindowUnsat.K012304A15454
+import LocalWindowSat.K012304A16262
+import LocalWindowUnsat.K012304A16262
+import LocalWindowSat.K012304A16263
+import LocalWindowUnsat.K012304A16263
+import LocalWindowSat.K012304A16342
+import LocalWindowUnsat.K012304A16342
+import LocalWindowSat.K012304A16343
+import LocalWindowUnsat.K012304A16343
+import LocalWindowSat.K012304A16344
+import LocalWindowUnsat.K012304A16344
+import LocalWindowSat.K012304A16352
+import LocalWindowUnsat.K012304A16352
+import LocalWindowSat.Q012304A22623
+import LocalWindowUnsat.Q012304A22623
+import LocalWindowSat.Q012304A22624
+import LocalWindowUnsat.Q012304A22624
+import LocalWindowSat.Q012304A22625
+import LocalWindowUnsat.Q012304A22625
+import LocalWindowSat.K012304A22626
+import LocalWindowUnsat.K012304A22626
+import LocalWindowSat.Q012304A22633
+import LocalWindowUnsat.Q012304A22633
+import LocalWindowSat.R012304A22634
+import LocalWindowUnsat.R012304A22634
+import LocalWindowSat.R012304A22635
+import LocalWindowUnsat.R012304A22635
+import LocalWindowSat.R012304A22643
+import LocalWindowUnsat.R012304A22643
+import LocalWindowSat.K012304A22644
+import LocalWindowUnsat.K012304A22644
+import LocalWindowSat.K012304A22645
+import LocalWindowUnsat.K012304A22645
+import LocalWindowSat.K012304A22652
+import LocalWindowUnsat.K012304A22652
+import LocalWindowSat.R012304A23362
+import LocalWindowUnsat.R012304A23362
+import LocalWindowSat.R012304A23363
+import LocalWindowUnsat.R012304A23363
+import LocalWindowSat.R012304A23364
+import LocalWindowUnsat.R012304A23364
+import LocalWindowSat.Q012304A23435
+import LocalWindowUnsat.Q012304A23435
+import LocalWindowSat.Q012304A23443
+import LocalWindowUnsat.Q012304A23443
+import LocalWindowSat.Q012304A23444
+import LocalWindowUnsat.Q012304A23444
+import LocalWindowSat.R012304A23453
+import LocalWindowUnsat.R012304A23453
+import LocalWindowSat.R012304A23454
+import LocalWindowUnsat.R012304A23454
+import LocalWindowSat.R012304A23455
+import LocalWindowUnsat.R012304A23455
+import LocalWindowSat.Q012304A23462
+import LocalWindowUnsat.Q012304A23462
+import LocalWindowSat.R012304A23534
+import LocalWindowUnsat.R012304A23534
+import LocalWindowSat.R012304A23535
+import LocalWindowUnsat.R012304A23535
+import LocalWindowSat.R012304A23543
+import LocalWindowUnsat.R012304A23543
+import LocalWindowSat.Q012304A23623
+import LocalWindowUnsat.Q012304A23623
+import LocalWindowSat.Q012304A23624
+import LocalWindowUnsat.Q012304A23624
+import LocalWindowSat.R012304A23625
+import LocalWindowUnsat.R012304A23625
+import LocalWindowSat.R012304A23632
+import LocalWindowUnsat.R012304A23632
+import LocalWindowSat.K012304A23633
+import LocalWindowUnsat.K012304A23633
+import LocalWindowSat.K012304A23634
+import LocalWindowUnsat.K012304A23634
+import LocalWindowSat.R012304A23642
+import LocalWindowUnsat.R012304A23642
+import LocalWindowSat.K012304A23662
+import LocalWindowUnsat.K012304A23662
+import LocalWindowSat.Q012304A24262
+import LocalWindowUnsat.Q012304A24262
+import LocalWindowSat.Q012304A24263
+import LocalWindowUnsat.Q012304A24263
+import LocalWindowSat.R012304A24264
+import LocalWindowUnsat.R012304A24264
+import LocalWindowSat.K012304A24265
+import LocalWindowUnsat.K012304A24265
+import LocalWindowSat.Q012304A24335
+import LocalWindowUnsat.Q012304A24335
+import LocalWindowSat.R012304A24344
+import LocalWindowUnsat.R012304A24344
+import LocalWindowSat.R012304A24345
+import LocalWindowUnsat.R012304A24345
+import LocalWindowSat.R012304A24353
+import LocalWindowUnsat.R012304A24353
+import LocalWindowSat.R012304A24354
+import LocalWindowUnsat.R012304A24354
+import LocalWindowSat.K012304A24355
+import LocalWindowUnsat.K012304A24355
+import LocalWindowSat.Q012304A24362
+import LocalWindowUnsat.Q012304A24362
+import LocalWindowSat.K012304A24363
+import LocalWindowUnsat.K012304A24363
+import LocalWindowSat.Q012304A24434
+import LocalWindowUnsat.Q012304A24434
+import LocalWindowSat.R012304A24435
+import LocalWindowUnsat.R012304A24435
+import LocalWindowSat.Q012304A24443
+import LocalWindowUnsat.Q012304A24443
+import LocalWindowSat.R012304A24444
+import LocalWindowUnsat.R012304A24444
+import LocalWindowSat.R012304A24445
+import LocalWindowUnsat.R012304A24445
+import LocalWindowSat.R012304A24452
+import LocalWindowUnsat.R012304A24452
+import LocalWindowSat.R012304A24453
+import LocalWindowUnsat.R012304A24453
+import LocalWindowSat.K012304A24454
+import LocalWindowUnsat.K012304A24454
+import LocalWindowSat.K012304A24455
+import LocalWindowUnsat.K012304A24455
+import LocalWindowSat.R012304A24462
+import LocalWindowUnsat.R012304A24462
+import LocalWindowSat.K012304A24463
+import LocalWindowUnsat.K012304A24463
+import LocalWindowSat.Q012304A24524
+import LocalWindowUnsat.Q012304A24524
+import LocalWindowSat.R012304A24525
+import LocalWindowUnsat.R012304A24525
+import LocalWindowSat.R012304A24533
+import LocalWindowUnsat.R012304A24533
+import LocalWindowSat.R012304A24534
+import LocalWindowUnsat.R012304A24534
+import LocalWindowSat.R012304A24535
+import LocalWindowUnsat.R012304A24535
+import LocalWindowSat.R012304A24542
+import LocalWindowUnsat.R012304A24542
+import LocalWindowSat.R012304A24543
+import LocalWindowUnsat.R012304A24543
+import LocalWindowSat.K012304A24544
+import LocalWindowUnsat.K012304A24544
+import LocalWindowSat.K012304A24552
+import LocalWindowUnsat.K012304A24552
+import LocalWindowSat.Q012304A24623
+import LocalWindowUnsat.Q012304A24623
+import LocalWindowSat.Q012304A24624
+import LocalWindowUnsat.Q012304A24624
+import LocalWindowSat.R012304A24625
+import LocalWindowUnsat.R012304A24625
+import LocalWindowSat.R012304A24632
+import LocalWindowUnsat.R012304A24632
+import LocalWindowSat.R012304A24633
+import LocalWindowUnsat.R012304A24633
+import LocalWindowSat.K012304A24634
+import LocalWindowUnsat.K012304A24634
+import LocalWindowSat.R012304A24642
+import LocalWindowUnsat.R012304A24642
+import LocalWindowSat.Q012304A25245
+import LocalWindowUnsat.Q012304A25245
+import LocalWindowSat.K012304A25254
+import LocalWindowUnsat.K012304A25254
+import LocalWindowSat.R012304A25262
+import LocalWindowUnsat.R012304A25262
+import LocalWindowSat.K012304A25263
+import LocalWindowUnsat.K012304A25263
+import LocalWindowSat.K012304A25264
+import LocalWindowUnsat.K012304A25264
+import LocalWindowSat.Q012304A25334
+import LocalWindowUnsat.Q012304A25334
+import LocalWindowSat.R012304A25335
+import LocalWindowUnsat.R012304A25335
+import LocalWindowSat.R012304A25343
+import LocalWindowUnsat.R012304A25343
+import LocalWindowSat.R012304A25344
+import LocalWindowUnsat.R012304A25344
+import LocalWindowSat.R012304A25352
+import LocalWindowUnsat.R012304A25352
+import LocalWindowSat.K012304A25353
+import LocalWindowUnsat.K012304A25353
+import LocalWindowSat.K012304A25354
+import LocalWindowUnsat.K012304A25354
+import LocalWindowSat.K012304A25355
+import LocalWindowUnsat.K012304A25355
+import LocalWindowSat.K012304A25362
+import LocalWindowUnsat.K012304A25362
+import LocalWindowSat.K012304A25363
+import LocalWindowUnsat.K012304A25363
+import LocalWindowSat.K012304A25364
+import LocalWindowUnsat.K012304A25364
+import LocalWindowSat.K012304A25434
+import LocalWindowUnsat.K012304A25434
+import LocalWindowSat.K012304A25435
+import LocalWindowUnsat.K012304A25435
+import LocalWindowSat.Q012304A25442
+import LocalWindowUnsat.Q012304A25442
+import LocalWindowSat.Q012304A25443
+import LocalWindowUnsat.Q012304A25443
+import LocalWindowSat.K012304A25444
+import LocalWindowUnsat.K012304A25444
+import LocalWindowSat.K012304A25445
+import LocalWindowUnsat.K012304A25445
+import LocalWindowSat.K012304A25452
+import LocalWindowUnsat.K012304A25452
+import LocalWindowSat.K012304A25453
+import LocalWindowUnsat.K012304A25453
+import LocalWindowSat.K012304A25454
+import LocalWindowUnsat.K012304A25454
+import LocalWindowSat.Q012304A25524
+import LocalWindowUnsat.Q012304A25524
+import LocalWindowSat.R012304A25525
+import LocalWindowUnsat.R012304A25525
+import LocalWindowSat.R012304A25533
+import LocalWindowUnsat.R012304A25533
+import LocalWindowSat.R012304A25534
+import LocalWindowUnsat.R012304A25534
+import LocalWindowSat.K012304A25535
+import LocalWindowUnsat.K012304A25535
+import LocalWindowSat.K012304A25623
+import LocalWindowUnsat.K012304A25623
+import LocalWindowSat.Q012304A26233
+import LocalWindowUnsat.Q012304A26233
+import LocalWindowSat.Q012304A26234
+import LocalWindowUnsat.Q012304A26234
+import LocalWindowSat.Q012304A26235
+import LocalWindowUnsat.Q012304A26235
+import LocalWindowSat.Q012304A26243
+import LocalWindowUnsat.Q012304A26243
+import LocalWindowSat.Q012304A26244
+import LocalWindowUnsat.Q012304A26244
+import LocalWindowSat.Q012304A26245
+import LocalWindowUnsat.Q012304A26245
+import LocalWindowSat.Q012304A26252
+import LocalWindowUnsat.Q012304A26252
+import LocalWindowSat.Q012304A26253
+import LocalWindowUnsat.Q012304A26253
+import LocalWindowSat.Q012304A26254
+import LocalWindowUnsat.Q012304A26254
+import LocalWindowSat.R012304A26255
+import LocalWindowUnsat.R012304A26255
+import LocalWindowSat.Q012304A26262
+import LocalWindowUnsat.Q012304A26262
+import LocalWindowSat.Q012304A26263
+import LocalWindowUnsat.Q012304A26263
+import LocalWindowSat.R012304A26264
+import LocalWindowUnsat.R012304A26264
+import LocalWindowSat.Q012304A26324
+import LocalWindowUnsat.Q012304A26324
+import LocalWindowSat.Q012304A26325
+import LocalWindowUnsat.Q012304A26325
+import LocalWindowSat.Q012304A26333
+import LocalWindowUnsat.Q012304A26333
+import LocalWindowSat.Q012304A26334
+import LocalWindowUnsat.Q012304A26334
+import LocalWindowSat.R012304A26335
+import LocalWindowUnsat.R012304A26335
+import LocalWindowSat.Q012304A26342
+import LocalWindowUnsat.Q012304A26342
+import LocalWindowSat.Q012304A26343
+import LocalWindowUnsat.Q012304A26343
+import LocalWindowSat.Q012304A26344
+import LocalWindowUnsat.Q012304A26344
+import LocalWindowSat.K012304A26345
+import LocalWindowUnsat.K012304A26345
+import LocalWindowSat.R012304A26352
+import LocalWindowUnsat.R012304A26352
+import LocalWindowSat.R012304A26353
+import LocalWindowUnsat.R012304A26353
+import LocalWindowSat.K012304A26354
+import LocalWindowUnsat.K012304A26354
+import LocalWindowSat.K012304A26355
+import LocalWindowUnsat.K012304A26355
+import LocalWindowSat.R012304A26362
+import LocalWindowUnsat.R012304A26362
+import LocalWindowSat.K012304A26363
+import LocalWindowUnsat.K012304A26363
+import LocalWindowSat.K012304A26364
+import LocalWindowUnsat.K012304A26364
+import LocalWindowSat.Q012304A26423
+import LocalWindowUnsat.Q012304A26423
+import LocalWindowSat.Q012304A26424
+import LocalWindowUnsat.Q012304A26424
+import LocalWindowSat.K012304A26425
+import LocalWindowUnsat.K012304A26425
+import LocalWindowSat.Q012304A26432
+import LocalWindowUnsat.Q012304A26432
+import LocalWindowSat.Q012304A26433
+import LocalWindowUnsat.Q012304A26433
+import LocalWindowSat.R012304A26434
+import LocalWindowUnsat.R012304A26434
+import LocalWindowSat.K012304A26435
+import LocalWindowUnsat.K012304A26435
+import LocalWindowSat.Q012304A26442
+import LocalWindowUnsat.Q012304A26442
+import LocalWindowSat.K012304A26443
+import LocalWindowUnsat.K012304A26443
+import LocalWindowSat.K012304A26444
+import LocalWindowUnsat.K012304A26444
+import LocalWindowSat.K012304A26445
+import LocalWindowUnsat.K012304A26445
+import LocalWindowSat.K012304A26452
+import LocalWindowUnsat.K012304A26452
+import LocalWindowSat.K012304A26532
+import LocalWindowUnsat.K012304A26532
+import LocalWindowSat.K012304A26533
+import LocalWindowUnsat.K012304A26533
+import LocalWindowSat.K012304A26534
+import LocalWindowUnsat.K012304A26534
+import LocalWindowSat.K012304A26535
+import LocalWindowUnsat.K012304A26535
+import LocalWindowSat.K012304A26616
+import LocalWindowUnsat.K012304A26616
+import LocalWindowSat.K012304A26622
+import LocalWindowUnsat.K012304A26622
+import LocalWindowSat.K012304A26623
+import LocalWindowUnsat.K012304A26623
+import LocalWindowSat.K012304A26624
+import LocalWindowUnsat.K012304A26624
+import LocalWindowSat.K012304A26625
+import LocalWindowUnsat.K012304A26625
+import LocalWindowSat.K012304A26632
+import LocalWindowUnsat.K012304A26632
+import LocalWindowSat.K012304A26633
+import LocalWindowUnsat.K012304A26633
+import LocalWindowSat.K012304A32445
+import LocalWindowUnsat.K012304A32445
+import LocalWindowSat.K012304A32446
+import LocalWindowUnsat.K012304A32446
+import LocalWindowSat.R012304A32454
+import LocalWindowUnsat.R012304A32454
+import LocalWindowSat.K012304A32455
+import LocalWindowUnsat.K012304A32455
+import LocalWindowSat.K012304A32535
+import LocalWindowUnsat.K012304A32535
+import LocalWindowSat.K012304A32544
+import LocalWindowUnsat.K012304A32544
+import LocalWindowSat.K012304A32545
+import LocalWindowUnsat.K012304A32545
+import LocalWindowSat.K012304A32553
+import LocalWindowUnsat.K012304A32553
+import LocalWindowSat.Q012304A32623
+import LocalWindowUnsat.Q012304A32623
+import LocalWindowSat.Q012304A32624
+import LocalWindowUnsat.Q012304A32624
+import LocalWindowSat.Q012304A32625
+import LocalWindowUnsat.Q012304A32625
+import LocalWindowSat.Q012304A32633
+import LocalWindowUnsat.Q012304A32633
+import LocalWindowSat.R012304A32643
+import LocalWindowUnsat.R012304A32643
+import LocalWindowSat.K012304A32652
+import LocalWindowUnsat.K012304A32652
+import LocalWindowSat.K012304A32662
+import LocalWindowUnsat.K012304A32662
+import LocalWindowSat.Q012304A33354
+import LocalWindowUnsat.Q012304A33354
+import LocalWindowSat.R012304A33362
+import LocalWindowUnsat.R012304A33362
+import LocalWindowSat.R012304A33363
+import LocalWindowUnsat.R012304A33363
+import LocalWindowSat.K012304A33364
+import LocalWindowUnsat.K012304A33364
+import LocalWindowSat.K012304A33365
+import LocalWindowUnsat.K012304A33365
+import LocalWindowSat.R012304A33435
+import LocalWindowUnsat.R012304A33435
+import LocalWindowSat.Q012304A33443
+import LocalWindowUnsat.Q012304A33443
+import LocalWindowSat.R012304A33444
+import LocalWindowUnsat.R012304A33444
+import LocalWindowSat.R012304A33453
+import LocalWindowUnsat.R012304A33453
+import LocalWindowSat.K012304A33454
+import LocalWindowUnsat.K012304A33454
+import LocalWindowSat.K012304A33455
+import LocalWindowUnsat.K012304A33455
+import LocalWindowSat.K012304A33462
+import LocalWindowUnsat.K012304A33462
+import LocalWindowSat.K012304A33463
+import LocalWindowUnsat.K012304A33463
+import LocalWindowSat.R012304A33534
+import LocalWindowUnsat.R012304A33534
+import LocalWindowSat.R012304A33535
+import LocalWindowUnsat.R012304A33535
+import LocalWindowSat.R012304A33543
+import LocalWindowUnsat.R012304A33543
+import LocalWindowSat.Q012304A33623
+import LocalWindowUnsat.Q012304A33623
+import LocalWindowSat.K012304A33624
+import LocalWindowUnsat.K012304A33624
+import LocalWindowSat.K012304A33632
+import LocalWindowUnsat.K012304A33632
+import LocalWindowSat.K012304A33633
+import LocalWindowUnsat.K012304A33633
+import LocalWindowSat.R012304A33642
+import LocalWindowUnsat.R012304A33642
+import LocalWindowSat.R012304A33643
+import LocalWindowUnsat.R012304A33643
+import LocalWindowSat.K012304A33662
+import LocalWindowUnsat.K012304A33662
+import LocalWindowSat.R012304A34254
+import LocalWindowUnsat.R012304A34254
+import LocalWindowSat.R012304A34255
+import LocalWindowUnsat.R012304A34255
+import LocalWindowSat.Q012304A34262
+import LocalWindowUnsat.Q012304A34262
+import LocalWindowSat.R012304A34263
+import LocalWindowUnsat.R012304A34263
+import LocalWindowSat.R012304A34264
+import LocalWindowUnsat.R012304A34264
+import LocalWindowSat.K012304A34265
+import LocalWindowUnsat.K012304A34265
+import LocalWindowSat.Q012304A34335
+import LocalWindowUnsat.Q012304A34335
+import LocalWindowSat.R012304A34344
+import LocalWindowUnsat.R012304A34344
+import LocalWindowSat.R012304A34345
+import LocalWindowUnsat.R012304A34345
+import LocalWindowSat.R012304A34353
+import LocalWindowUnsat.R012304A34353
+import LocalWindowSat.R012304A34354
+import LocalWindowUnsat.R012304A34354
+import LocalWindowSat.K012304A34355
+import LocalWindowUnsat.K012304A34355
+import LocalWindowSat.Q012304A34362
+import LocalWindowUnsat.Q012304A34362
+import LocalWindowSat.K012304A34363
+import LocalWindowUnsat.K012304A34363
+import LocalWindowSat.Q012304A34434
+import LocalWindowUnsat.Q012304A34434
+import LocalWindowSat.K012304A34435
+import LocalWindowUnsat.K012304A34435
+import LocalWindowSat.K012304A34443
+import LocalWindowUnsat.K012304A34443
+import LocalWindowSat.K012304A34444
+import LocalWindowUnsat.K012304A34444
+import LocalWindowSat.R012304A34452
+import LocalWindowUnsat.R012304A34452
+import LocalWindowSat.K012304A34453
+import LocalWindowUnsat.K012304A34453
+import LocalWindowSat.Q012304A34524
+import LocalWindowUnsat.Q012304A34524
+import LocalWindowSat.Q012304A34525
+import LocalWindowUnsat.Q012304A34525
+import LocalWindowSat.Q012304A34533
+import LocalWindowUnsat.Q012304A34533
+import LocalWindowSat.K012304A34534
+import LocalWindowUnsat.K012304A34534
+import LocalWindowSat.R012304A34623
+import LocalWindowUnsat.R012304A34623
+import LocalWindowSat.K012304A34624
+import LocalWindowUnsat.K012304A34624
+import LocalWindowSat.K012304A34632
+import LocalWindowUnsat.K012304A34632
+import LocalWindowSat.K012304A34633
+import LocalWindowUnsat.K012304A34633
+import LocalWindowSat.K012304A34634
+import LocalWindowUnsat.K012304A34634
+import LocalWindowSat.K012304A34642
+import LocalWindowUnsat.K012304A34642
+import LocalWindowSat.Q012304A35245
+import LocalWindowUnsat.Q012304A35245
+import LocalWindowSat.R012304A35254
+import LocalWindowUnsat.R012304A35254
+import LocalWindowSat.R012304A35262
+import LocalWindowUnsat.R012304A35262
+import LocalWindowSat.K012304A35263
+import LocalWindowUnsat.K012304A35263
+import LocalWindowSat.K012304A35264
+import LocalWindowUnsat.K012304A35264
+import LocalWindowSat.Q012304A35334
+import LocalWindowUnsat.Q012304A35334
+import LocalWindowSat.K012304A35335
+import LocalWindowUnsat.K012304A35335
+import LocalWindowSat.R012304A35343
+import LocalWindowUnsat.R012304A35343
+import LocalWindowSat.R012304A35344
+import LocalWindowUnsat.R012304A35344
+import LocalWindowSat.R012304A35352
+import LocalWindowUnsat.R012304A35352
+import LocalWindowSat.K012304A35353
+import LocalWindowUnsat.K012304A35353
+import LocalWindowSat.K012304A35354
+import LocalWindowUnsat.K012304A35354
+import LocalWindowSat.K012304A35362
+import LocalWindowUnsat.K012304A35362
+import LocalWindowSat.K012304A35363
+import LocalWindowUnsat.K012304A35363
+import LocalWindowSat.K012304A35434
+import LocalWindowUnsat.K012304A35434
+import LocalWindowSat.K012304A35435
+import LocalWindowUnsat.K012304A35435
+import LocalWindowSat.R012304A35442
+import LocalWindowUnsat.R012304A35442
+import LocalWindowSat.K012304A35443
+import LocalWindowUnsat.K012304A35443
+import LocalWindowSat.K012304A35444
+import LocalWindowUnsat.K012304A35444
+import LocalWindowSat.K012304A35524
+import LocalWindowUnsat.K012304A35524
+import LocalWindowSat.K012304A35525
+import LocalWindowUnsat.K012304A35525
+import LocalWindowSat.R012304A35533
+import LocalWindowUnsat.R012304A35533
+import LocalWindowSat.R012304A35542
+import LocalWindowUnsat.R012304A35542
+import LocalWindowSat.K012304A35623
+import LocalWindowUnsat.K012304A35623
+import LocalWindowSat.Q012304A36233
+import LocalWindowUnsat.Q012304A36233
+import LocalWindowSat.Q012304A36234
+import LocalWindowUnsat.Q012304A36234
+import LocalWindowSat.Q012304A36235
+import LocalWindowUnsat.Q012304A36235
+import LocalWindowSat.Q012304A36243
+import LocalWindowUnsat.Q012304A36243
+import LocalWindowSat.Q012304A36244
+import LocalWindowUnsat.Q012304A36244
+import LocalWindowSat.K012304A36245
+import LocalWindowUnsat.K012304A36245
+import LocalWindowSat.R012304A36252
+import LocalWindowUnsat.R012304A36252
+import LocalWindowSat.R012304A36253
+import LocalWindowUnsat.R012304A36253
+import LocalWindowSat.R012304A36254
+import LocalWindowUnsat.R012304A36254
+import LocalWindowSat.Q012304A36262
+import LocalWindowUnsat.Q012304A36262
+import LocalWindowSat.K012304A36263
+import LocalWindowUnsat.K012304A36263
+import LocalWindowSat.K012304A36264
+import LocalWindowUnsat.K012304A36264
+import LocalWindowSat.Q012304A36324
+import LocalWindowUnsat.Q012304A36324
+import LocalWindowSat.Q012304A36325
+import LocalWindowUnsat.Q012304A36325
+import LocalWindowSat.Q012304A36333
+import LocalWindowUnsat.Q012304A36333
+import LocalWindowSat.R012304A36334
+import LocalWindowUnsat.R012304A36334
+import LocalWindowSat.K012304A36335
+import LocalWindowUnsat.K012304A36335
+import LocalWindowSat.K012304A36342
+import LocalWindowUnsat.K012304A36342
+import LocalWindowSat.R012304A36343
+import LocalWindowUnsat.R012304A36343
+import LocalWindowSat.K012304A36344
+import LocalWindowUnsat.K012304A36344
+import LocalWindowSat.K012304A36352
+import LocalWindowUnsat.K012304A36352
+import LocalWindowSat.K012304A36353
+import LocalWindowUnsat.K012304A36353
+import LocalWindowSat.K012304A36362
+import LocalWindowUnsat.K012304A36362
+import LocalWindowSat.K012304A36423
+import LocalWindowUnsat.K012304A36423
+import LocalWindowSat.R012304A36424
+import LocalWindowUnsat.R012304A36424
+import LocalWindowSat.K012304A36425
+import LocalWindowUnsat.K012304A36425
+import LocalWindowSat.K012304A36432
+import LocalWindowUnsat.K012304A36432
+import LocalWindowSat.R012304A36433
+import LocalWindowUnsat.R012304A36433
+import LocalWindowSat.K012304A36434
+import LocalWindowUnsat.K012304A36434
+import LocalWindowSat.K012304A36442
+import LocalWindowUnsat.K012304A36442
+import LocalWindowSat.K012304A36515
+import LocalWindowUnsat.K012304A36515
+import LocalWindowSat.K012304A36516
+import LocalWindowUnsat.K012304A36516
+import LocalWindowSat.K012304A36623
+import LocalWindowUnsat.K012304A36623
+import LocalWindowSat.K012304A36624
+import LocalWindowUnsat.K012304A36624
+import LocalWindowSat.R012304A42346
+import LocalWindowUnsat.R012304A42346
+import LocalWindowSat.R012304A42363
+import LocalWindowUnsat.R012304A42363
+import LocalWindowSat.R012304A42364
+import LocalWindowUnsat.R012304A42364
+import LocalWindowSat.R012304A42436
+import LocalWindowUnsat.R012304A42436
+import LocalWindowSat.R012304A42454
+import LocalWindowUnsat.R012304A42454
+import LocalWindowSat.K012304A42455
+import LocalWindowUnsat.K012304A42455
+import LocalWindowSat.K012304A42535
+import LocalWindowUnsat.K012304A42535
+import LocalWindowSat.K012304A42553
+import LocalWindowUnsat.K012304A42553
+import LocalWindowSat.Q012304A42623
+import LocalWindowUnsat.Q012304A42623
+import LocalWindowSat.R012304A42624
+import LocalWindowUnsat.R012304A42624
+import LocalWindowSat.R012304A42633
+import LocalWindowUnsat.R012304A42633
+import LocalWindowSat.K012304A42662
+import LocalWindowUnsat.K012304A42662
+import LocalWindowSat.R012304A43262
+import LocalWindowUnsat.R012304A43262
+import LocalWindowSat.R012304A43263
+import LocalWindowUnsat.R012304A43263
+import LocalWindowSat.R012304A43264
+import LocalWindowUnsat.R012304A43264
+import LocalWindowSat.R012304A43265
+import LocalWindowUnsat.R012304A43265
+import LocalWindowSat.Q012304A43354
+import LocalWindowUnsat.Q012304A43354
+import LocalWindowSat.R012304A43362
+import LocalWindowUnsat.R012304A43362
+import LocalWindowSat.R012304A43363
+import LocalWindowUnsat.R012304A43363
+import LocalWindowSat.R012304A43443
+import LocalWindowUnsat.R012304A43443
+import LocalWindowSat.R012304A43444
+import LocalWindowUnsat.R012304A43444
+import LocalWindowSat.K012304A43453
+import LocalWindowUnsat.K012304A43453
+import LocalWindowSat.K012304A43534
+import LocalWindowUnsat.K012304A43534
+import LocalWindowSat.K012304A43562
+import LocalWindowUnsat.K012304A43562
+import LocalWindowSat.R012304A43623
+import LocalWindowUnsat.R012304A43623
+import LocalWindowSat.K012304A43632
+import LocalWindowUnsat.K012304A43632
+import LocalWindowSat.K012304A43633
+import LocalWindowUnsat.K012304A43633
+import LocalWindowSat.R012304A43642
+import LocalWindowUnsat.R012304A43642
+import LocalWindowSat.R012304A44254
+import LocalWindowUnsat.R012304A44254
+import LocalWindowSat.R012304A44262
+import LocalWindowUnsat.R012304A44262
+import LocalWindowSat.R012304A44335
+import LocalWindowUnsat.R012304A44335
+import LocalWindowSat.R012304A44344
+import LocalWindowUnsat.R012304A44344
+import LocalWindowSat.R012304A44353
+import LocalWindowUnsat.R012304A44353
+import LocalWindowSat.R012304A44362
+import LocalWindowUnsat.R012304A44362
+import LocalWindowSat.K012304A44434
+import LocalWindowUnsat.K012304A44434
+import LocalWindowSat.K012304A44533
+import LocalWindowUnsat.K012304A44533
+import LocalWindowSat.K012304A44534
+import LocalWindowUnsat.K012304A44534
+import LocalWindowSat.K012304A44642
+import LocalWindowUnsat.K012304A44642
+import LocalWindowSat.Q012304A45245
+import LocalWindowUnsat.Q012304A45245
+import LocalWindowSat.R012304A45254
+import LocalWindowUnsat.R012304A45254
+import LocalWindowSat.R012304A45262
+import LocalWindowUnsat.R012304A45262
+import LocalWindowSat.K012304A45263
+import LocalWindowUnsat.K012304A45263
+import LocalWindowSat.R012304A45343
+import LocalWindowUnsat.R012304A45343
+import LocalWindowSat.R012304A45352
+import LocalWindowUnsat.R012304A45352
+import LocalWindowSat.K012304A45353
+import LocalWindowUnsat.K012304A45353
+import LocalWindowSat.Q012304A46233
+import LocalWindowUnsat.Q012304A46233
+import LocalWindowSat.Q012304A46234
+import LocalWindowUnsat.Q012304A46234
+import LocalWindowSat.K012304A46235
+import LocalWindowUnsat.K012304A46235
+import LocalWindowSat.Q012304A46243
+import LocalWindowUnsat.Q012304A46243
+import LocalWindowSat.R012304A46244
+import LocalWindowUnsat.R012304A46244
+import LocalWindowSat.R012304A46252
+import LocalWindowUnsat.R012304A46252
+import LocalWindowSat.R012304A46253
+import LocalWindowUnsat.R012304A46253
+import LocalWindowSat.R012304A46254
+import LocalWindowUnsat.R012304A46254
+import LocalWindowSat.R012304A46262
+import LocalWindowUnsat.R012304A46262
+import LocalWindowSat.Q012304A46324
+import LocalWindowUnsat.Q012304A46324
+import LocalWindowSat.Q012304A46325
+import LocalWindowUnsat.Q012304A46325
+import LocalWindowSat.Q012304A46333
+import LocalWindowUnsat.Q012304A46333
+import LocalWindowSat.R012304A46334
+import LocalWindowUnsat.R012304A46334
+import LocalWindowSat.R012304A46343
+import LocalWindowUnsat.R012304A46343
+import LocalWindowSat.K012304A46362
+import LocalWindowUnsat.K012304A46362
+import LocalWindowSat.K012304A46423
+import LocalWindowUnsat.K012304A46423
+import LocalWindowSat.K012304A46424
+import LocalWindowUnsat.K012304A46424
+import LocalWindowSat.K012304A46425
+import LocalWindowUnsat.K012304A46425
+import LocalWindowSat.K012304A46432
+import LocalWindowUnsat.K012304A46432
+import LocalWindowSat.K012304A46433
+import LocalWindowUnsat.K012304A46433
+import LocalWindowSat.K012304A46516
+import LocalWindowUnsat.K012304A46516
+import LocalWindowSat.K012304A51563
+import LocalWindowUnsat.K012304A51563
+import LocalWindowSat.K012304A51644
+import LocalWindowUnsat.K012304A51644
+import LocalWindowSat.K012304A51651
+import LocalWindowUnsat.K012304A51651
+import LocalWindowSat.Q012304A52363
+import LocalWindowUnsat.Q012304A52363
+import LocalWindowSat.Q012304A52364
+import LocalWindowUnsat.Q012304A52364
+import LocalWindowSat.R012304A52436
+import LocalWindowUnsat.R012304A52436
+import LocalWindowSat.R012304A52445
+import LocalWindowUnsat.R012304A52445
+import LocalWindowSat.Q012304A52623
+import LocalWindowUnsat.Q012304A52623
+import LocalWindowSat.K012304A52624
+import LocalWindowUnsat.K012304A52624
+import LocalWindowSat.K012304A52652
+import LocalWindowUnsat.K012304A52652
+import LocalWindowSat.R012304A53246
+import LocalWindowUnsat.R012304A53246
+import LocalWindowSat.R012304A53262
+import LocalWindowUnsat.R012304A53262
+import LocalWindowSat.R012304A53263
+import LocalWindowUnsat.R012304A53263
+import LocalWindowSat.K012304A53264
+import LocalWindowUnsat.K012304A53264
+import LocalWindowSat.K012304A53642
+import LocalWindowUnsat.K012304A53642
+import LocalWindowSat.K012304A54254
+import LocalWindowUnsat.K012304A54254
+import LocalWindowSat.R012304A54335
+import LocalWindowUnsat.R012304A54335
+import LocalWindowSat.K012304A54353
+import LocalWindowUnsat.K012304A54353
+import LocalWindowSat.K012304A54362
+import LocalWindowUnsat.K012304A54362
+import LocalWindowSat.K012304A55262
+import LocalWindowUnsat.K012304A55262
+import LocalWindowSat.K012304A55343
+import LocalWindowUnsat.K012304A55343
+import LocalWindowSat.K012304A56233
+import LocalWindowUnsat.K012304A56233
+import LocalWindowSat.R012304A56234
+import LocalWindowUnsat.R012304A56234
+import LocalWindowSat.K012304A56243
+import LocalWindowUnsat.K012304A56243
+import LocalWindowSat.K012304A56244
+import LocalWindowUnsat.K012304A56244
+import LocalWindowSat.K012304A56252
+import LocalWindowUnsat.K012304A56252
+import LocalWindowSat.K012304A56324
+import LocalWindowUnsat.K012304A56324
+import LocalWindowSat.K012304A56333
+import LocalWindowUnsat.K012304A56333
+import LocalWindowSat.K012304A61546
+import LocalWindowUnsat.K012304A61546
+import LocalWindowSat.K012304A61563
+import LocalWindowUnsat.K012304A61563
+import LocalWindowSat.K012304A61635
+import LocalWindowUnsat.K012304A61635
+import LocalWindowSat.K012304A61636
+import LocalWindowUnsat.K012304A61636
+import LocalWindowSat.K012304A61644
+import LocalWindowUnsat.K012304A61644
+import LocalWindowSat.K012304A61651
+import LocalWindowUnsat.K012304A61651
+import LocalWindowSat.K012304A62265
+import LocalWindowUnsat.K012304A62265
+import LocalWindowSat.R012310A23632
+import LocalWindowUnsat.R012310A23632
+import LocalWindowSat.K012310A23633
+import LocalWindowUnsat.K012310A23633
+import LocalWindowSat.K012310A23634
+import LocalWindowUnsat.K012310A23634
+import LocalWindowSat.R012310A23642
+import LocalWindowUnsat.R012310A23642
+import LocalWindowSat.K012310A23662
+import LocalWindowUnsat.K012310A23662
+import LocalWindowSat.K012310A24633
+import LocalWindowUnsat.K012310A24633
+import LocalWindowSat.K012310A24634
+import LocalWindowUnsat.K012310A24634
+import LocalWindowSat.R012310A24642
+import LocalWindowUnsat.R012310A24642
+import LocalWindowSat.K012310A24643
+import LocalWindowUnsat.K012310A24643
+import LocalWindowSat.K012310A26262
+import LocalWindowUnsat.K012310A26262
+import LocalWindowSat.K012310A26263
+import LocalWindowUnsat.K012310A26263
+import LocalWindowSat.K012310A26623
+import LocalWindowUnsat.K012310A26623
+import LocalWindowSat.K012310A26624
+import LocalWindowUnsat.K012310A26624
+import LocalWindowSat.K012310A26633
+import LocalWindowUnsat.K012310A26633
+import LocalWindowSat.K012310A33633
+import LocalWindowUnsat.K012310A33633
+import LocalWindowSat.K012310A33634
+import LocalWindowUnsat.K012310A33634
+import LocalWindowSat.R012310A34263
+import LocalWindowUnsat.R012310A34263
+import LocalWindowSat.K012310A43264
+import LocalWindowUnsat.K012310A43264
+import LocalWindowSat.K012314A15462
+import LocalWindowUnsat.K012314A15462
+import LocalWindowSat.K012314A15542
+import LocalWindowUnsat.K012314A15542
+import LocalWindowSat.K012314A15615
+import LocalWindowUnsat.K012314A15615
+import LocalWindowSat.K012314A15616
+import LocalWindowUnsat.K012314A15616
+import LocalWindowSat.K012314A16352
+import LocalWindowUnsat.K012314A16352
+import LocalWindowSat.K012314A22653
+import LocalWindowUnsat.K012314A22653
+import LocalWindowSat.K012314A22662
+import LocalWindowUnsat.K012314A22662
+import LocalWindowSat.Q012314A23462
+import LocalWindowUnsat.Q012314A23462
+import LocalWindowSat.R012314A23463
+import LocalWindowUnsat.R012314A23463
+import LocalWindowSat.R012314A23464
+import LocalWindowUnsat.R012314A23464
+import LocalWindowSat.R012314A23632
+import LocalWindowUnsat.R012314A23632
+import LocalWindowSat.K012314A23633
+import LocalWindowUnsat.K012314A23633
+import LocalWindowSat.K012314A23634
+import LocalWindowUnsat.K012314A23634
+import LocalWindowSat.R012314A23642
+import LocalWindowUnsat.R012314A23642
+import LocalWindowSat.K012314A23662
+import LocalWindowUnsat.K012314A23662
+import LocalWindowSat.Q012314A24263
+import LocalWindowUnsat.Q012314A24263
+import LocalWindowSat.Q012314A24264
+import LocalWindowUnsat.Q012314A24264
+import LocalWindowSat.Q012314A24362
+import LocalWindowUnsat.Q012314A24362
+import LocalWindowSat.R012314A24363
+import LocalWindowUnsat.R012314A24363
+import LocalWindowSat.R012314A24364
+import LocalWindowUnsat.R012314A24364
+import LocalWindowSat.Q012314A24452
+import LocalWindowUnsat.Q012314A24452
+import LocalWindowSat.R012314A24453
+import LocalWindowUnsat.R012314A24453
+import LocalWindowSat.Q012314A24462
+import LocalWindowUnsat.Q012314A24462
+import LocalWindowSat.K012314A24463
+import LocalWindowUnsat.K012314A24463
+import LocalWindowSat.K012314A24464
+import LocalWindowUnsat.K012314A24464
+import LocalWindowSat.K012314A24552
+import LocalWindowUnsat.K012314A24552
+import LocalWindowSat.K012314A24553
+import LocalWindowUnsat.K012314A24553
+import LocalWindowSat.K012314A24562
+import LocalWindowUnsat.K012314A24562
+import LocalWindowSat.K012314A24633
+import LocalWindowUnsat.K012314A24633
+import LocalWindowSat.K012314A24634
+import LocalWindowUnsat.K012314A24634
+import LocalWindowSat.R012314A24642
+import LocalWindowUnsat.R012314A24642
+import LocalWindowSat.Q012314A25262
+import LocalWindowUnsat.Q012314A25262
+import LocalWindowSat.R012314A25263
+import LocalWindowUnsat.R012314A25263
+import LocalWindowSat.K012314A25264
+import LocalWindowUnsat.K012314A25264
+import LocalWindowSat.K012314A25265
+import LocalWindowUnsat.K012314A25265
+import LocalWindowSat.K012314A25362
+import LocalWindowUnsat.K012314A25362
+import LocalWindowSat.K012314A25363
+import LocalWindowUnsat.K012314A25363
+import LocalWindowSat.K012314A25364
+import LocalWindowUnsat.K012314A25364
+import LocalWindowSat.R012314A25443
+import LocalWindowUnsat.R012314A25443
+import LocalWindowSat.K012314A25452
+import LocalWindowUnsat.K012314A25452
+import LocalWindowSat.K012314A25453
+import LocalWindowUnsat.K012314A25453
+import LocalWindowSat.K012314A25462
+import LocalWindowUnsat.K012314A25462
+import LocalWindowSat.K012314A25616
+import LocalWindowUnsat.K012314A25616
+import LocalWindowSat.Q012314A26253
+import LocalWindowUnsat.Q012314A26253
+import LocalWindowSat.Q012314A26254
+import LocalWindowUnsat.Q012314A26254
+import LocalWindowSat.K012314A26255
+import LocalWindowUnsat.K012314A26255
+import LocalWindowSat.Q012314A26262
+import LocalWindowUnsat.Q012314A26262
+import LocalWindowSat.K012314A26263
+import LocalWindowUnsat.K012314A26263
+import LocalWindowSat.K012314A26264
+import LocalWindowUnsat.K012314A26264
+import LocalWindowSat.Q012314A26343
+import LocalWindowUnsat.Q012314A26343
+import LocalWindowSat.R012314A26344
+import LocalWindowUnsat.R012314A26344
+import LocalWindowSat.K012314A26345
+import LocalWindowUnsat.K012314A26345
+import LocalWindowSat.K012314A26353
+import LocalWindowUnsat.K012314A26353
+import LocalWindowSat.Q012314A26433
+import LocalWindowUnsat.Q012314A26433
+import LocalWindowSat.R012314A26434
+import LocalWindowUnsat.R012314A26434
+import LocalWindowSat.K012314A26443
+import LocalWindowUnsat.K012314A26443
+import LocalWindowSat.K012314A26523
+import LocalWindowUnsat.K012314A26523
+import LocalWindowSat.K012314A26524
+import LocalWindowUnsat.K012314A26524
+import LocalWindowSat.K012314A26526
+import LocalWindowUnsat.K012314A26526
+import LocalWindowSat.K012314A26534
+import LocalWindowUnsat.K012314A26534
+import LocalWindowSat.K012314A26616
+import LocalWindowUnsat.K012314A26616
+import LocalWindowSat.K012314A26623
+import LocalWindowUnsat.K012314A26623
+import LocalWindowSat.K012314A26624
+import LocalWindowUnsat.K012314A26624
+import LocalWindowSat.K012314A26625
+import LocalWindowUnsat.K012314A26625
+import LocalWindowSat.K012314A26633
+import LocalWindowUnsat.K012314A26633
+import LocalWindowSat.R012314A32463
+import LocalWindowUnsat.R012314A32463
+import LocalWindowSat.R012314A32464
+import LocalWindowUnsat.R012314A32464
+import LocalWindowSat.K012314A32465
+import LocalWindowUnsat.K012314A32465
+import LocalWindowSat.K012314A32653
+import LocalWindowUnsat.K012314A32653
+import LocalWindowSat.Q012314A33363
+import LocalWindowUnsat.Q012314A33363
+import LocalWindowSat.Q012314A33364
+import LocalWindowUnsat.Q012314A33364
+import LocalWindowSat.R012314A33454
+import LocalWindowUnsat.R012314A33454
+import LocalWindowSat.K012314A33455
+import LocalWindowUnsat.K012314A33455
+import LocalWindowSat.K012314A33463
+import LocalWindowUnsat.K012314A33463
+import LocalWindowSat.K012314A33633
+import LocalWindowUnsat.K012314A33633
+import LocalWindowSat.Q012314A34263
+import LocalWindowUnsat.Q012314A34263
+import LocalWindowSat.R012314A34264
+import LocalWindowUnsat.R012314A34264
+import LocalWindowSat.R012314A34353
+import LocalWindowUnsat.R012314A34353
+import LocalWindowSat.R012314A34354
+import LocalWindowUnsat.R012314A34354
+import LocalWindowSat.K012314A34355
+import LocalWindowUnsat.K012314A34355
+import LocalWindowSat.K012314A34363
+import LocalWindowUnsat.K012314A34363
+import LocalWindowSat.K012314A34453
+import LocalWindowUnsat.K012314A34453
+import LocalWindowSat.K012314A35263
+import LocalWindowUnsat.K012314A35263
+import LocalWindowSat.R012314A35344
+import LocalWindowUnsat.R012314A35344
+import LocalWindowSat.K012314A35345
+import LocalWindowUnsat.K012314A35345
+import LocalWindowSat.R012314A35353
+import LocalWindowUnsat.R012314A35353
+import LocalWindowSat.K012314A35354
+import LocalWindowUnsat.K012314A35354
+import LocalWindowSat.K012314A35363
+import LocalWindowUnsat.K012314A35363
+import LocalWindowSat.K012314A35616
+import LocalWindowUnsat.K012314A35616
+import LocalWindowSat.Q012314A36244
+import LocalWindowUnsat.Q012314A36244
+import LocalWindowSat.K012314A36254
+import LocalWindowUnsat.K012314A36254
+import LocalWindowSat.R012314A36324
+import LocalWindowUnsat.R012314A36324
+import LocalWindowSat.Q012314A36325
+import LocalWindowUnsat.Q012314A36325
+import LocalWindowSat.R012314A36334
+import LocalWindowUnsat.R012314A36334
+import LocalWindowSat.K012314A36335
+import LocalWindowUnsat.K012314A36335
+import LocalWindowSat.K012314A36344
+import LocalWindowUnsat.K012314A36344
+import LocalWindowSat.R012314A36424
+import LocalWindowUnsat.R012314A36424
+import LocalWindowSat.K012314A36425
+import LocalWindowUnsat.K012314A36425
+import LocalWindowSat.K012314A36434
+import LocalWindowUnsat.K012314A36434
+import LocalWindowSat.K012314A42464
+import LocalWindowUnsat.K012314A42464
+import LocalWindowSat.R012314A43264
+import LocalWindowUnsat.R012314A43264
+import LocalWindowSat.R012314A43265
+import LocalWindowUnsat.R012314A43265
+import LocalWindowSat.R012314A43355
+import LocalWindowUnsat.R012314A43355
+import LocalWindowSat.R012314A44254
+import LocalWindowUnsat.R012314A44254
+import LocalWindowSat.R012314A44255
+import LocalWindowUnsat.R012314A44255
+import LocalWindowSat.K012314A44264
+import LocalWindowUnsat.K012314A44264
+import LocalWindowSat.K012314A45245
+import LocalWindowUnsat.K012314A45245
+import LocalWindowSat.Q012314A45254
+import LocalWindowUnsat.Q012314A45254
+import LocalWindowSat.R012314A45255
+import LocalWindowUnsat.R012314A45255
+import LocalWindowSat.K012314A46235
+import LocalWindowUnsat.K012314A46235
+import LocalWindowSat.Q012314A46325
+import LocalWindowUnsat.Q012314A46325
+import LocalWindowSat.K012314A54255
+import LocalWindowUnsat.K012314A54255
+import LocalWindowSat.K012340A15615
+import LocalWindowUnsat.K012340A15615
+import LocalWindowSat.Q012340A23462
+import LocalWindowUnsat.Q012340A23462
+import LocalWindowSat.K012340A23463
+import LocalWindowUnsat.K012340A23463
+import LocalWindowSat.K012340A23562
+import LocalWindowUnsat.K012340A23562
+import LocalWindowSat.R012340A23632
+import LocalWindowUnsat.R012340A23632
+import LocalWindowSat.K012340A23633
+import LocalWindowUnsat.K012340A23633
+import LocalWindowSat.K012340A23634
+import LocalWindowUnsat.K012340A23634
+import LocalWindowSat.R012340A23642
+import LocalWindowUnsat.R012340A23642
+import LocalWindowSat.K012340A23662
+import LocalWindowUnsat.K012340A23662
+import LocalWindowSat.Q012340A24362
+import LocalWindowUnsat.Q012340A24362
+import LocalWindowSat.K012340A24363
+import LocalWindowUnsat.K012340A24363
+import LocalWindowSat.Q012340A24452
+import LocalWindowUnsat.Q012340A24452
+import LocalWindowSat.R012340A24453
+import LocalWindowUnsat.R012340A24453
+import LocalWindowSat.Q012340A24462
+import LocalWindowUnsat.Q012340A24462
+import LocalWindowSat.K012340A24463
+import LocalWindowUnsat.K012340A24463
+import LocalWindowSat.Q012340A24542
+import LocalWindowUnsat.Q012340A24542
+import LocalWindowSat.R012340A24543
+import LocalWindowUnsat.R012340A24543
+import LocalWindowSat.R012340A24633
+import LocalWindowUnsat.R012340A24633
+import LocalWindowSat.R012340A24634
+import LocalWindowUnsat.R012340A24634
+import LocalWindowSat.K012340A24635
+import LocalWindowUnsat.K012340A24635
+import LocalWindowSat.R012340A24642
+import LocalWindowUnsat.R012340A24642
+import LocalWindowSat.K012340A24643
+import LocalWindowUnsat.K012340A24643
+import LocalWindowSat.K012340A24644
+import LocalWindowUnsat.K012340A24644
+import LocalWindowSat.R012340A25262
+import LocalWindowUnsat.R012340A25262
+import LocalWindowSat.R012340A25263
+import LocalWindowUnsat.R012340A25263
+import LocalWindowSat.K012340A25264
+import LocalWindowUnsat.K012340A25264
+import LocalWindowSat.K012340A25265
+import LocalWindowUnsat.K012340A25265
+import LocalWindowSat.R012340A25352
+import LocalWindowUnsat.R012340A25352
+import LocalWindowSat.K012340A25353
+import LocalWindowUnsat.K012340A25353
+import LocalWindowSat.K012340A25354
+import LocalWindowUnsat.K012340A25354
+import LocalWindowSat.K012340A25362
+import LocalWindowUnsat.K012340A25362
+import LocalWindowSat.K012340A25363
+import LocalWindowUnsat.K012340A25363
+import LocalWindowSat.K012340A25364
+import LocalWindowUnsat.K012340A25364
+import LocalWindowSat.Q012340A25443
+import LocalWindowUnsat.Q012340A25443
+import LocalWindowSat.K012340A25444
+import LocalWindowUnsat.K012340A25444
+import LocalWindowSat.R012340A25533
+import LocalWindowUnsat.R012340A25533
+import LocalWindowSat.R012340A25534
+import LocalWindowUnsat.R012340A25534
+import LocalWindowSat.K012340A25623
+import LocalWindowUnsat.K012340A25623
+import LocalWindowSat.Q012340A26233
+import LocalWindowUnsat.Q012340A26233
+import LocalWindowSat.Q012340A26234
+import LocalWindowUnsat.Q012340A26234
+import LocalWindowSat.R012340A26235
+import LocalWindowUnsat.R012340A26235
+import LocalWindowSat.Q012340A26243
+import LocalWindowUnsat.Q012340A26243
+import LocalWindowSat.Q012340A26244
+import LocalWindowUnsat.Q012340A26244
+import LocalWindowSat.R012340A26253
+import LocalWindowUnsat.R012340A26253
+import LocalWindowSat.R012340A26254
+import LocalWindowUnsat.R012340A26254
+import LocalWindowSat.K012340A26255
+import LocalWindowUnsat.K012340A26255
+import LocalWindowSat.Q012340A26262
+import LocalWindowUnsat.Q012340A26262
+import LocalWindowSat.Q012340A26263
+import LocalWindowUnsat.Q012340A26263
+import LocalWindowSat.R012340A26264
+import LocalWindowUnsat.R012340A26264
+import LocalWindowSat.Q012340A26333
+import LocalWindowUnsat.Q012340A26333
+import LocalWindowSat.Q012340A26334
+import LocalWindowUnsat.Q012340A26334
+import LocalWindowSat.R012340A26335
+import LocalWindowUnsat.R012340A26335
+import LocalWindowSat.K012340A26336
+import LocalWindowUnsat.K012340A26336
+import LocalWindowSat.Q012340A26343
+import LocalWindowUnsat.Q012340A26343
+import LocalWindowSat.Q012340A26344
+import LocalWindowUnsat.Q012340A26344
+import LocalWindowSat.K012340A26345
+import LocalWindowUnsat.K012340A26345
+import LocalWindowSat.K012340A26353
+import LocalWindowUnsat.K012340A26353
+import LocalWindowSat.R012340A26362
+import LocalWindowUnsat.R012340A26362
+import LocalWindowSat.K012340A26363
+import LocalWindowUnsat.K012340A26363
+import LocalWindowSat.K012340A26364
+import LocalWindowUnsat.K012340A26364
+import LocalWindowSat.Q012340A26433
+import LocalWindowUnsat.Q012340A26433
+import LocalWindowSat.K012340A26434
+import LocalWindowUnsat.K012340A26434
+import LocalWindowSat.K012340A26533
+import LocalWindowUnsat.K012340A26533
+import LocalWindowSat.K012340A26534
+import LocalWindowUnsat.K012340A26534
+import LocalWindowSat.K012340A26535
+import LocalWindowUnsat.K012340A26535
+import LocalWindowSat.K012340A26616
+import LocalWindowUnsat.K012340A26616
+import LocalWindowSat.K012340A26623
+import LocalWindowUnsat.K012340A26623
+import LocalWindowSat.K012340A26624
+import LocalWindowUnsat.K012340A26624
+import LocalWindowSat.K012340A26633
+import LocalWindowUnsat.K012340A26633
+import LocalWindowSat.Q012340A32623
+import LocalWindowUnsat.Q012340A32623
+import LocalWindowSat.Q012340A32624
+import LocalWindowUnsat.Q012340A32624
+import LocalWindowSat.Q012340A32625
+import LocalWindowUnsat.Q012340A32625
+import LocalWindowSat.Q012340A32633
+import LocalWindowUnsat.Q012340A32633
+import LocalWindowSat.R012340A32643
+import LocalWindowUnsat.R012340A32643
+import LocalWindowSat.Q012340A33263
+import LocalWindowUnsat.Q012340A33263
+import LocalWindowSat.K012340A33264
+import LocalWindowUnsat.K012340A33264
+import LocalWindowSat.K012340A33265
+import LocalWindowUnsat.K012340A33265
+import LocalWindowSat.Q012340A33363
+import LocalWindowUnsat.Q012340A33363
+import LocalWindowSat.Q012340A33364
+import LocalWindowUnsat.Q012340A33364
+import LocalWindowSat.K012340A33365
+import LocalWindowUnsat.K012340A33365
+import LocalWindowSat.R012340A33463
+import LocalWindowUnsat.R012340A33463
+import LocalWindowSat.K012340A33464
+import LocalWindowUnsat.K012340A33464
+import LocalWindowSat.Q012340A33543
+import LocalWindowUnsat.Q012340A33543
+import LocalWindowSat.R012340A33553
+import LocalWindowUnsat.R012340A33553
+import LocalWindowSat.R012340A33554
+import LocalWindowUnsat.R012340A33554
+import LocalWindowSat.K012340A33624
+import LocalWindowUnsat.K012340A33624
+import LocalWindowSat.K012340A33633
+import LocalWindowUnsat.K012340A33633
+import LocalWindowSat.K012340A33634
+import LocalWindowUnsat.K012340A33634
+import LocalWindowSat.Q012340A34263
+import LocalWindowUnsat.Q012340A34263
+import LocalWindowSat.R012340A34264
+import LocalWindowUnsat.R012340A34264
+import LocalWindowSat.K012340A34265
+import LocalWindowUnsat.K012340A34265
+import LocalWindowSat.R012340A34353
+import LocalWindowUnsat.R012340A34353
+import LocalWindowSat.K012340A34354
+import LocalWindowUnsat.K012340A34354
+import LocalWindowSat.K012340A34355
+import LocalWindowUnsat.K012340A34355
+import LocalWindowSat.R012340A34363
+import LocalWindowUnsat.R012340A34363
+import LocalWindowSat.R012340A34364
+import LocalWindowUnsat.R012340A34364
+import LocalWindowSat.Q012340A34434
+import LocalWindowUnsat.Q012340A34434
+import LocalWindowSat.K012340A34453
+import LocalWindowUnsat.K012340A34453
+import LocalWindowSat.R012340A34534
+import LocalWindowUnsat.R012340A34534
+import LocalWindowSat.R012340A35263
+import LocalWindowUnsat.R012340A35263
+import LocalWindowSat.K012340A35264
+import LocalWindowUnsat.K012340A35264
+import LocalWindowSat.K012340A35265
+import LocalWindowUnsat.K012340A35265
+import LocalWindowSat.R012340A35344
+import LocalWindowUnsat.R012340A35344
+import LocalWindowSat.K012340A35353
+import LocalWindowUnsat.K012340A35353
+import LocalWindowSat.K012340A35354
+import LocalWindowUnsat.K012340A35354
+import LocalWindowSat.K012340A35363
+import LocalWindowUnsat.K012340A35363
+import LocalWindowSat.K012340A35434
+import LocalWindowUnsat.K012340A35434
+import LocalWindowSat.K012340A35435
+import LocalWindowUnsat.K012340A35435
+import LocalWindowSat.K012340A35444
+import LocalWindowUnsat.K012340A35444
+import LocalWindowSat.K012340A35524
+import LocalWindowUnsat.K012340A35524
+import LocalWindowSat.K012340A35525
+import LocalWindowUnsat.K012340A35525
+import LocalWindowSat.Q012340A36234
+import LocalWindowUnsat.Q012340A36234
+import LocalWindowSat.R012340A36235
+import LocalWindowUnsat.R012340A36235
+import LocalWindowSat.Q012340A36244
+import LocalWindowUnsat.Q012340A36244
+import LocalWindowSat.K012340A36254
+import LocalWindowUnsat.K012340A36254
+import LocalWindowSat.K012340A36263
+import LocalWindowUnsat.K012340A36263
+import LocalWindowSat.K012340A36264
+import LocalWindowUnsat.K012340A36264
+import LocalWindowSat.Q012340A36324
+import LocalWindowUnsat.Q012340A36324
+import LocalWindowSat.Q012340A36325
+import LocalWindowUnsat.Q012340A36325
+import LocalWindowSat.R012340A36334
+import LocalWindowUnsat.R012340A36334
+import LocalWindowSat.K012340A36344
+import LocalWindowUnsat.K012340A36344
+import LocalWindowSat.K012340A36434
+import LocalWindowUnsat.K012340A36434
+import LocalWindowSat.K012340A36515
+import LocalWindowUnsat.K012340A36515
+import LocalWindowSat.K012340A36516
+import LocalWindowUnsat.K012340A36516
+import LocalWindowSat.Q012340A42364
+import LocalWindowUnsat.Q012340A42364
+import LocalWindowSat.K012340A42365
+import LocalWindowUnsat.K012340A42365
+import LocalWindowSat.R012340A42624
+import LocalWindowUnsat.R012340A42624
+import LocalWindowSat.R012340A43264
+import LocalWindowUnsat.R012340A43264
+import LocalWindowSat.R012340A43265
+import LocalWindowUnsat.R012340A43265
+import LocalWindowSat.K012340A43444
+import LocalWindowUnsat.K012340A43444
+import LocalWindowSat.K012340A44264
+import LocalWindowUnsat.K012340A44264
+import LocalWindowSat.K012340A44265
+import LocalWindowUnsat.K012340A44265
+import LocalWindowSat.R012340A44344
+import LocalWindowUnsat.R012340A44344
+import LocalWindowSat.K012340A45245
+import LocalWindowUnsat.K012340A45245
+import LocalWindowSat.K012340A45264
+import LocalWindowUnsat.K012340A45264
+import LocalWindowSat.K012340A46235
+import LocalWindowUnsat.K012340A46235
+import LocalWindowSat.Q012340A46325
+import LocalWindowUnsat.Q012340A46325
+import LocalWindowSat.K012340A46516
+import LocalWindowUnsat.K012340A46516
+import LocalWindowSat.K012340A56226
+import LocalWindowUnsat.K012340A56226
+import LocalWindowSat.K012345A15615
+import LocalWindowUnsat.K012345A15615
+import LocalWindowSat.Q012345A23462
+import LocalWindowUnsat.Q012345A23462
+import LocalWindowSat.K012345A23463
+import LocalWindowUnsat.K012345A23463
+import LocalWindowSat.K012345A23562
+import LocalWindowUnsat.K012345A23562
+import LocalWindowSat.R012345A23632
+import LocalWindowUnsat.R012345A23632
+import LocalWindowSat.K012345A23633
+import LocalWindowUnsat.K012345A23633
+import LocalWindowSat.K012345A23634
+import LocalWindowUnsat.K012345A23634
+import LocalWindowSat.R012345A23642
+import LocalWindowUnsat.R012345A23642
+import LocalWindowSat.K012345A23662
+import LocalWindowUnsat.K012345A23662
+import LocalWindowSat.Q012345A24362
+import LocalWindowUnsat.Q012345A24362
+import LocalWindowSat.K012345A24363
+import LocalWindowUnsat.K012345A24363
+import LocalWindowSat.Q012345A24452
+import LocalWindowUnsat.Q012345A24452
+import LocalWindowSat.R012345A24453
+import LocalWindowUnsat.R012345A24453
+import LocalWindowSat.Q012345A24462
+import LocalWindowUnsat.Q012345A24462
+import LocalWindowSat.K012345A24463
+import LocalWindowUnsat.K012345A24463
+import LocalWindowSat.Q012345A24542
+import LocalWindowUnsat.Q012345A24542
+import LocalWindowSat.R012345A24543
+import LocalWindowUnsat.R012345A24543
+import LocalWindowSat.R012345A24633
+import LocalWindowUnsat.R012345A24633
+import LocalWindowSat.R012345A24634
+import LocalWindowUnsat.R012345A24634
+import LocalWindowSat.K012345A24635
+import LocalWindowUnsat.K012345A24635
+import LocalWindowSat.R012345A24642
+import LocalWindowUnsat.R012345A24642
+import LocalWindowSat.K012345A24643
+import LocalWindowUnsat.K012345A24643
+import LocalWindowSat.K012345A24644
+import LocalWindowUnsat.K012345A24644
+import LocalWindowSat.R012345A25262
+import LocalWindowUnsat.R012345A25262
+import LocalWindowSat.R012345A25263
+import LocalWindowUnsat.R012345A25263
+import LocalWindowSat.K012345A25264
+import LocalWindowUnsat.K012345A25264
+import LocalWindowSat.K012345A25265
+import LocalWindowUnsat.K012345A25265
+import LocalWindowSat.R012345A25352
+import LocalWindowUnsat.R012345A25352
+import LocalWindowSat.K012345A25353
+import LocalWindowUnsat.K012345A25353
+import LocalWindowSat.K012345A25354
+import LocalWindowUnsat.K012345A25354
+import LocalWindowSat.K012345A25362
+import LocalWindowUnsat.K012345A25362
+import LocalWindowSat.K012345A25363
+import LocalWindowUnsat.K012345A25363
+import LocalWindowSat.K012345A25364
+import LocalWindowUnsat.K012345A25364
+import LocalWindowSat.Q012345A25443
+import LocalWindowUnsat.Q012345A25443
+import LocalWindowSat.K012345A25444
+import LocalWindowUnsat.K012345A25444
+import LocalWindowSat.R012345A25533
+import LocalWindowUnsat.R012345A25533
+import LocalWindowSat.R012345A25534
+import LocalWindowUnsat.R012345A25534
+import LocalWindowSat.K012345A25623
+import LocalWindowUnsat.K012345A25623
+import LocalWindowSat.Q012345A26233
+import LocalWindowUnsat.Q012345A26233
+import LocalWindowSat.Q012345A26234
+import LocalWindowUnsat.Q012345A26234
+import LocalWindowSat.R012345A26235
+import LocalWindowUnsat.R012345A26235
+import LocalWindowSat.Q012345A26243
+import LocalWindowUnsat.Q012345A26243
+import LocalWindowSat.Q012345A26244
+import LocalWindowUnsat.Q012345A26244
+import LocalWindowSat.R012345A26253
+import LocalWindowUnsat.R012345A26253
+import LocalWindowSat.R012345A26254
+import LocalWindowUnsat.R012345A26254
+import LocalWindowSat.K012345A26255
+import LocalWindowUnsat.K012345A26255
+import LocalWindowSat.Q012345A26262
+import LocalWindowUnsat.Q012345A26262
+import LocalWindowSat.Q012345A26263
+import LocalWindowUnsat.Q012345A26263
+import LocalWindowSat.R012345A26264
+import LocalWindowUnsat.R012345A26264
+import LocalWindowSat.Q012345A26333
+import LocalWindowUnsat.Q012345A26333
+import LocalWindowSat.Q012345A26334
+import LocalWindowUnsat.Q012345A26334
+import LocalWindowSat.R012345A26335
+import LocalWindowUnsat.R012345A26335
+import LocalWindowSat.Q012345A26343
+import LocalWindowUnsat.Q012345A26343
+import LocalWindowSat.Q012345A26344
+import LocalWindowUnsat.Q012345A26344
+import LocalWindowSat.K012345A26345
+import LocalWindowUnsat.K012345A26345
+import LocalWindowSat.K012345A26353
+import LocalWindowUnsat.K012345A26353
+import LocalWindowSat.R012345A26362
+import LocalWindowUnsat.R012345A26362
+import LocalWindowSat.K012345A26363
+import LocalWindowUnsat.K012345A26363
+import LocalWindowSat.K012345A26364
+import LocalWindowUnsat.K012345A26364
+import LocalWindowSat.Q012345A26433
+import LocalWindowUnsat.Q012345A26433
+import LocalWindowSat.K012345A26434
+import LocalWindowUnsat.K012345A26434
+import LocalWindowSat.K012345A26533
+import LocalWindowUnsat.K012345A26533
+import LocalWindowSat.K012345A26534
+import LocalWindowUnsat.K012345A26534
+import LocalWindowSat.K012345A26535
+import LocalWindowUnsat.K012345A26535
+import LocalWindowSat.K012345A26616
+import LocalWindowUnsat.K012345A26616
+import LocalWindowSat.K012345A26623
+import LocalWindowUnsat.K012345A26623
+import LocalWindowSat.K012345A26624
+import LocalWindowUnsat.K012345A26624
+import LocalWindowSat.K012345A26633
+import LocalWindowUnsat.K012345A26633
+import LocalWindowSat.Q012345A32623
+import LocalWindowUnsat.Q012345A32623
+import LocalWindowSat.Q012345A32624
+import LocalWindowUnsat.Q012345A32624
+import LocalWindowSat.Q012345A32625
+import LocalWindowUnsat.Q012345A32625
+import LocalWindowSat.Q012345A32633
+import LocalWindowUnsat.Q012345A32633
+import LocalWindowSat.R012345A32643
+import LocalWindowUnsat.R012345A32643
+import LocalWindowSat.Q012345A33263
+import LocalWindowUnsat.Q012345A33263
+import LocalWindowSat.K012345A33264
+import LocalWindowUnsat.K012345A33264
+import LocalWindowSat.K012345A33265
+import LocalWindowUnsat.K012345A33265
+import LocalWindowSat.Q012345A33363
+import LocalWindowUnsat.Q012345A33363
+import LocalWindowSat.Q012345A33364
+import LocalWindowUnsat.Q012345A33364
+import LocalWindowSat.K012345A33365
+import LocalWindowUnsat.K012345A33365
+import LocalWindowSat.R012345A33463
+import LocalWindowUnsat.R012345A33463
+import LocalWindowSat.K012345A33464
+import LocalWindowUnsat.K012345A33464
+import LocalWindowSat.Q012345A33543
+import LocalWindowUnsat.Q012345A33543
+import LocalWindowSat.R012345A33553
+import LocalWindowUnsat.R012345A33553
+import LocalWindowSat.R012345A33554
+import LocalWindowUnsat.R012345A33554
+import LocalWindowSat.K012345A33624
+import LocalWindowUnsat.K012345A33624
+import LocalWindowSat.K012345A33633
+import LocalWindowUnsat.K012345A33633
+import LocalWindowSat.K012345A33634
+import LocalWindowUnsat.K012345A33634
+import LocalWindowSat.Q012345A34263
+import LocalWindowUnsat.Q012345A34263
+import LocalWindowSat.R012345A34264
+import LocalWindowUnsat.R012345A34264
+import LocalWindowSat.K012345A34265
+import LocalWindowUnsat.K012345A34265
+import LocalWindowSat.R012345A34353
+import LocalWindowUnsat.R012345A34353
+import LocalWindowSat.K012345A34354
+import LocalWindowUnsat.K012345A34354
+import LocalWindowSat.K012345A34355
+import LocalWindowUnsat.K012345A34355
+import LocalWindowSat.R012345A34363
+import LocalWindowUnsat.R012345A34363
+import LocalWindowSat.R012345A34364
+import LocalWindowUnsat.R012345A34364
+import LocalWindowSat.Q012345A34434
+import LocalWindowUnsat.Q012345A34434
+import LocalWindowSat.K012345A34453
+import LocalWindowUnsat.K012345A34453
+import LocalWindowSat.R012345A34534
+import LocalWindowUnsat.R012345A34534
+import LocalWindowSat.R012345A35263
+import LocalWindowUnsat.R012345A35263
+import LocalWindowSat.K012345A35264
+import LocalWindowUnsat.K012345A35264
+import LocalWindowSat.K012345A35265
+import LocalWindowUnsat.K012345A35265
+import LocalWindowSat.R012345A35344
+import LocalWindowUnsat.R012345A35344
+import LocalWindowSat.K012345A35353
+import LocalWindowUnsat.K012345A35353
+import LocalWindowSat.K012345A35354
+import LocalWindowUnsat.K012345A35354
+import LocalWindowSat.K012345A35363
+import LocalWindowUnsat.K012345A35363
+import LocalWindowSat.K012345A35434
+import LocalWindowUnsat.K012345A35434
+import LocalWindowSat.K012345A35435
+import LocalWindowUnsat.K012345A35435
+import LocalWindowSat.K012345A35444
+import LocalWindowUnsat.K012345A35444
+import LocalWindowSat.K012345A35524
+import LocalWindowUnsat.K012345A35524
+import LocalWindowSat.K012345A35525
+import LocalWindowUnsat.K012345A35525
+import LocalWindowSat.Q012345A36234
+import LocalWindowUnsat.Q012345A36234
+import LocalWindowSat.R012345A36235
+import LocalWindowUnsat.R012345A36235
+import LocalWindowSat.Q012345A36244
+import LocalWindowUnsat.Q012345A36244
+import LocalWindowSat.K012345A36254
+import LocalWindowUnsat.K012345A36254
+import LocalWindowSat.K012345A36263
+import LocalWindowUnsat.K012345A36263
+import LocalWindowSat.K012345A36264
+import LocalWindowUnsat.K012345A36264
+import LocalWindowSat.Q012345A36324
+import LocalWindowUnsat.Q012345A36324
+import LocalWindowSat.Q012345A36325
+import LocalWindowUnsat.Q012345A36325
+import LocalWindowSat.R012345A36334
+import LocalWindowUnsat.R012345A36334
+import LocalWindowSat.K012345A36344
+import LocalWindowUnsat.K012345A36344
+import LocalWindowSat.K012345A36434
+import LocalWindowUnsat.K012345A36434
+import LocalWindowSat.K012345A36515
+import LocalWindowUnsat.K012345A36515
+import LocalWindowSat.K012345A36516
+import LocalWindowUnsat.K012345A36516
+import LocalWindowSat.Q012345A42364
+import LocalWindowUnsat.Q012345A42364
+import LocalWindowSat.K012345A42365
+import LocalWindowUnsat.K012345A42365
+import LocalWindowSat.R012345A42624
+import LocalWindowUnsat.R012345A42624
+import LocalWindowSat.R012345A43264
+import LocalWindowUnsat.R012345A43264
+import LocalWindowSat.R012345A43265
+import LocalWindowUnsat.R012345A43265
+import LocalWindowSat.K012345A43444
+import LocalWindowUnsat.K012345A43444
+import LocalWindowSat.K012345A44264
+import LocalWindowUnsat.K012345A44264
+import LocalWindowSat.K012345A44265
+import LocalWindowUnsat.K012345A44265
+import LocalWindowSat.R012345A44344
+import LocalWindowUnsat.R012345A44344
+import LocalWindowSat.K012345A45245
+import LocalWindowUnsat.K012345A45245
+import LocalWindowSat.K012345A45264
+import LocalWindowUnsat.K012345A45264
+import LocalWindowSat.K012345A46235
+import LocalWindowUnsat.K012345A46235
+import LocalWindowSat.Q012345A46325
+import LocalWindowUnsat.Q012345A46325
+import LocalWindowSat.K012345A46516
+import LocalWindowUnsat.K012345A46516
+import LocalWindowSat.K012345A56226
+import LocalWindowUnsat.K012345A56226
+import LocalWindowSat.K0120342A464252
+import LocalWindowUnsat.K0120342A464252
+import LocalWindowSat.K0123014A236345
+import LocalWindowUnsat.K0123014A236345
+import LocalWindowSat.K0123014A245264
+import LocalWindowUnsat.K0123014A245264
+import LocalWindowSat.K0123014A256253
+import LocalWindowUnsat.K0123014A256253
+import LocalWindowSat.K0123014A334336
+import LocalWindowUnsat.K0123014A334336
+import LocalWindowSat.K0123014A335246
+import LocalWindowUnsat.K0123014A335246
+import LocalWindowSat.K0123014A336236
+import LocalWindowUnsat.K0123014A336236
+import LocalWindowSat.K0123014A343336
+import LocalWindowUnsat.K0123014A343336
+import LocalWindowSat.K0123014A426226
+import LocalWindowUnsat.K0123014A426226
+import LocalWindowSat.K0123014A434246
+import LocalWindowUnsat.K0123014A434246
+import LocalWindowSat.K0123014A434336
+import LocalWindowUnsat.K0123014A434336
+import LocalWindowSat.K0123014A435246
+import LocalWindowUnsat.K0123014A435246
+import LocalWindowSat.K0123014A436226
+import LocalWindowUnsat.K0123014A436226
+import LocalWindowSat.K0123014A443336
+import LocalWindowUnsat.K0123014A443336
+import LocalWindowSat.K0123014A526226
+import LocalWindowUnsat.K0123014A526226
+import LocalWindowSat.K0123014A526326
+import LocalWindowUnsat.K0123014A526326
+import LocalWindowSat.K0123014A543624
+import LocalWindowUnsat.K0123014A543624
+import LocalWindowSat.K0123014A626226
+import LocalWindowUnsat.K0123014A626226
+import LocalWindowSat.K0123041A264362
+import LocalWindowUnsat.K0123041A264362
+import LocalWindowSat.K0123041A623464
+import LocalWindowUnsat.K0123041A623464
+import LocalWindowSat.K0123042A262462
+import LocalWindowUnsat.K0123042A262462
+import LocalWindowSat.K0123042A262463
+import LocalWindowUnsat.K0123042A262463
+import LocalWindowSat.K0123042A262464
+import LocalWindowUnsat.K0123042A262464
+import LocalWindowSat.K0123042A263363
+import LocalWindowUnsat.K0123042A263363
+import LocalWindowSat.K0123042A263462
+import LocalWindowUnsat.K0123042A263462
+import LocalWindowSat.K0123042A264263
+import LocalWindowUnsat.K0123042A264263
+import LocalWindowSat.K0123042A264363
+import LocalWindowUnsat.K0123042A264363
+import LocalWindowSat.K0123042A362463
+import LocalWindowUnsat.K0123042A362463
+import LocalWindowSat.K0123042A363363
+import LocalWindowUnsat.K0123042A363363
+import LocalWindowSat.K0123045A264362
+import LocalWindowUnsat.K0123045A264362
+import LocalWindowSat.K0123045A363362
+import LocalWindowUnsat.K0123045A363362
+import LocalWindowSat.K0123045A623464
+import LocalWindowUnsat.K0123045A623464
+import LocalWindowSat.K0123104A356252
+import LocalWindowUnsat.K0123104A356252
+import LocalWindowSat.K0123104A356253
+import LocalWindowUnsat.K0123104A356253
+import LocalWindowSat.K0123140A346426
+import LocalWindowUnsat.K0123140A346426
+import LocalWindowSat.K0123140A356252
+import LocalWindowUnsat.K0123140A356252
+import LocalWindowSat.K0123140A356253
+import LocalWindowUnsat.K0123140A356253
+import LocalWindowSat.K0123140A436336
+import LocalWindowUnsat.K0123140A436336
+import LocalWindowSat.K0123145A346426
+import LocalWindowUnsat.K0123145A346426
+import LocalWindowSat.K0123145A356252
+import LocalWindowUnsat.K0123145A356252
+import LocalWindowSat.K0123145A356253
+import LocalWindowUnsat.K0123145A356253
+import LocalWindowSat.K0123145A436336
+import LocalWindowUnsat.K0123145A436336
+
+/-!
+# The 1383 reused keys of the seven-centre chain `L417d` from their window modules
+
+Generated by `milestones/25-k7-234/lean/scripts/gen_lean_glue7.py reuse --tag L417d`.  Every key `(ds, syms)` of
+`dirKeysReuse7L417d` was certified for an earlier bound by a window module `W`: the
+clause-soundness theorem `W.sat` (`LocalWindowSat.W`) and the LRAT replay `W.unsat`
+(`LocalWindowUnsat.W`) give `Refuted (winOf ds) (boundsOf syms)` (`Tags.refuted_of_sat`).  Here
+387 keys come from `Q…` modules (the bound 237), 361 from `R…` modules (236) and
+635 from `K…` modules (235); a key of several sets uses the module of the first.  Only
+these 2766 window modules are imported, not the aggregates `LocalWindowDirUnsatR4b`,
+`LocalWindowDirUnsatR4` and `LocalWindowDirUnsatK6`.  One `refine` per key, one theorem per
+chunk of `dirChunksReuse7L417d`.
+-/
+
+set_option maxRecDepth 100000
+
+namespace Snake9.LocalWindow
+
+theorem allRefutedReuse7L417d_0 : AllRefutedList dirKeysReuse7L417d_0 := by
+  refine ⟨Tags.refuted_of_sat Q012A11.sat Q012A11.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012A12.sat Q012A12.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012A13.sat Q012A13.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012A14.sat Q012A14.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A151.sat Q0120A151.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A152.sat Q0120A152.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A153.sat Q0120A153.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A154.sat Q0120A154.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A155.sat Q0120A155.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A161.sat Q0120A161.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A162.sat Q0120A162.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A163.sat Q0120A163.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A164.sat Q0120A164.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A222.sat Q0120A222.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A223.sat Q0120A223.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A224.sat Q0120A224.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A225.sat Q0120A225.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A232.sat Q0120A232.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A233.sat Q0120A233.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A234.sat Q0120A234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A235.sat Q0120A235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A242.sat Q0120A242.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A243.sat Q0120A243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A244.sat Q0120A244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A252.sat Q0120A252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A253.sat Q0120A253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A262.sat Q0120A262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A323.sat Q0120A323.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A324.sat Q0120A324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A325.sat Q0120A325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A333.sat Q0120A333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A334.sat Q0120A334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A343.sat Q0120A343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A424.sat Q0120A424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A515.sat Q0120A515.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A516.sat Q0120A516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0120A616.sat Q0120A616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A151.sat Q0123A151.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A152.sat Q0123A152.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A153.sat Q0123A153.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A161.sat Q0123A161.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A222.sat Q0123A222.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A223.sat Q0123A223.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A224.sat Q0123A224.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A225.sat Q0123A225.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A232.sat Q0123A232.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q0123A323.sat Q0123A323.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A1562.sat K01203A1562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A1563.sat K01203A1563.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2261.sat Q01203A2261.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2262.sat Q01203A2262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2263.sat Q01203A2263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A2264.sat R01203A2264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2361.sat Q01203A2361.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2362.sat Q01203A2362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2451.sat Q01203A2451.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2452.sat Q01203A2452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A2453.sat K01203A2453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A2461.sat R01203A2461.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2462.sat Q01203A2462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A2542.sat R01203A2542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2543.sat Q01203A2543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A2544.sat R01203A2544.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A2545.sat K01203A2545.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A2551.sat R01203A2551.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2552.sat Q01203A2552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A2553.sat R01203A2553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2632.sat Q01203A2632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2633.sat Q01203A2633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2634.sat Q01203A2634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2642.sat Q01203A2642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2643.sat Q01203A2643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A2651.sat Q01203A2651.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A2652.sat K01203A2652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3261.sat Q01203A3261.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3262.sat Q01203A3262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3263.sat Q01203A3263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3352.sat Q01203A3352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3353.sat Q01203A3353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A3354.sat R01203A3354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3361.sat Q01203A3361.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3362.sat Q01203A3362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3442.sat Q01203A3442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3443.sat Q01203A3443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3451.sat Q01203A3451.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3452.sat Q01203A3452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A3453.sat R01203A3453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A3461.sat R01203A3461.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3532.sat Q01203A3532.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3533.sat Q01203A3533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A3534.sat R01203A3534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A3542.sat R01203A3542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A3551.sat K01203A3551.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A3552.sat K01203A3552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A3622.sat R01203A3622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A3623.sat Q01203A3623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A3624.sat R01203A3624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A3651.sat K01203A3651.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4252.sat Q01203A4252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4253.sat Q01203A4253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4261.sat Q01203A4261.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4262.sat Q01203A4262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4342.sat Q01203A4342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4343.sat Q01203A4343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4344.sat Q01203A4344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A4352.sat R01203A4352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4432.sat Q01203A4432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4433.sat Q01203A4433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A4434.sat R01203A4434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4442.sat Q01203A4442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A4443.sat R01203A4443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4451.sat Q01203A4451.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A4523.sat Q01203A4523.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A4542.sat R01203A4542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A4622.sat K01203A4622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A4623.sat R01203A4623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A5242.sat Q01203A5242.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A5243.sat R01203A5243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A5252.sat Q01203A5252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A5253.sat Q01203A5253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A5261.sat R01203A5261.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A5332.sat Q01203A5332.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A5333.sat Q01203A5333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A5342.sat Q01203A5342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A5352.sat R01203A5352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01203A5423.sat Q01203A5423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A5424.sat R01203A5424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A5432.sat R01203A5432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A5451.sat K01203A5451.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A6233.sat K01203A6233.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01203A6332.sat R01203A6332.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01203A6516.sat K01203A6516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A1542.sat R01230A1542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A1543.sat Q01230A1543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A1544.sat R01230A1544.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A1552.sat R01230A1552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A1553.sat R01230A1553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01230A1561.sat K01230A1561.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A1562.sat Q01230A1562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A1622.sat R01230A1622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A1623.sat Q01230A1623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A1624.sat Q01230A1624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A1632.sat R01230A1632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A1633.sat R01230A1633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A1642.sat R01230A1642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A2332.sat Q01230A2332.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A2333.sat Q01230A2333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A2334.sat Q01230A2334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A2335.sat R01230A2335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A2342.sat R01230A2342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A2352.sat R01230A2352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A2423.sat Q01230A2423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A2424.sat R01230A2424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A2425.sat R01230A2425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A2442.sat R01230A2442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A2523.sat R01230A2523.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A2615.sat R01230A2615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A3243.sat Q01230A3243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A3324.sat Q01230A3324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01230A3325.sat Q01230A3325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01230A3326.sat K01230A3326.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A3615.sat R01230A3615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A4325.sat R01230A4325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01230A4515.sat K01230A4515.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01230A5235.sat R01230A5235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1542.sat Q01234A1542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1543.sat Q01234A1543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1544.sat Q01234A1544.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01234A1545.sat R01234A1545.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01234A1551.sat R01234A1551.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1552.sat Q01234A1552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01234A1553.sat R01234A1553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K01234A1554.sat K01234A1554.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1562.sat Q01234A1562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1622.sat Q01234A1622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1623.sat Q01234A1623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1624.sat Q01234A1624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1625.sat Q01234A1625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1626.sat Q01234A1626.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1632.sat Q01234A1632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1633.sat Q01234A1633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1634.sat Q01234A1634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1642.sat Q01234A1642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A1643.sat Q01234A1643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2262.sat Q01234A2262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2263.sat Q01234A2263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01234A2264.sat R01234A2264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2332.sat Q01234A2332.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2333.sat Q01234A2333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2334.sat Q01234A2334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2335.sat Q01234A2335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01234A2336.sat R01234A2336.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2342.sat Q01234A2342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2343.sat Q01234A2343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2344.sat Q01234A2344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2345.sat Q01234A2345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2352.sat Q01234A2352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2353.sat Q01234A2353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2354.sat Q01234A2354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2355.sat Q01234A2355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2362.sat Q01234A2362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2423.sat Q01234A2423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2424.sat Q01234A2424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2425.sat Q01234A2425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2426.sat Q01234A2426.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2433.sat Q01234A2433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2434.sat Q01234A2434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2435.sat Q01234A2435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2442.sat Q01234A2442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2443.sat Q01234A2443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2444.sat Q01234A2444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2452.sat Q01234A2452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2453.sat Q01234A2453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2462.sat Q01234A2462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2523.sat Q01234A2523.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2524.sat Q01234A2524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2525.sat Q01234A2525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2533.sat Q01234A2533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01234A2534.sat R01234A2534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2543.sat Q01234A2543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2552.sat Q01234A2552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2615.sat Q01234A2615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A2616.sat Q01234A2616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3243.sat Q01234A3243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3244.sat Q01234A3244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3245.sat Q01234A3245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3253.sat Q01234A3253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3254.sat Q01234A3254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3255.sat Q01234A3255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3324.sat Q01234A3324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3325.sat Q01234A3325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3333.sat Q01234A3333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3334.sat Q01234A3334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3335.sat Q01234A3335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3343.sat Q01234A3343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3344.sat Q01234A3344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R01234A3345.sat R01234A3345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3353.sat Q01234A3353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3424.sat Q01234A3424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3425.sat Q01234A3425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3434.sat Q01234A3434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3524.sat Q01234A3524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3525.sat Q01234A3525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3615.sat Q01234A3615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A3616.sat Q01234A3616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4234.sat Q01234A4234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4235.sat Q01234A4235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4244.sat Q01234A4244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4245.sat Q01234A4245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4325.sat Q01234A4325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4334.sat Q01234A4334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4425.sat Q01234A4425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4515.sat Q01234A4515.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4516.sat Q01234A4516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4615.sat Q01234A4615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A4616.sat Q01234A4616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A5155.sat Q01234A5155.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A5235.sat Q01234A5235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A5516.sat Q01234A5516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q01234A5616.sat Q01234A5616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A22652.sat K012031A22652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A22653.sat K012031A22653.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A22654.sat K012031A22654.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A22662.sat K012031A22662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A23632.sat R012031A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A23633.sat K012031A23633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A23634.sat K012031A23634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A23642.sat R012031A23642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A24642.sat R012031A24642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A24662.sat K012031A24662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A26632.sat K012031A26632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A26633.sat K012031A26633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012031A32642.sat Q012031A32642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A32652.sat K012031A32652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A32662.sat K012031A32662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A33562.sat K012031A33562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A33632.sat K012031A33632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A33642.sat R012031A33642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A33652.sat K012031A33652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A33653.sat K012031A33653.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A33662.sat K012031A33662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A34622.sat K012031A34622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A35432.sat K012031A35432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A35433.sat K012031A35433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A35434.sat K012031A35434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A35442.sat K012031A35442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A35443.sat K012031A35443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A36332.sat R012031A36332.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A36433.sat K012031A36433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012031A42542.sat Q012031A42542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012031A42543.sat Q012031A42543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012031A42552.sat Q012031A42552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A42632.sat K012031A42632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A42633.sat K012031A42633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A42642.sat R012031A42642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A42652.sat K012031A42652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A43453.sat K012031A43453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A43532.sat K012031A43532.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A43542.sat R012031A43542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A43562.sat K012031A43562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A43616.sat K012031A43616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A43622.sat K012031A43622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A43632.sat K012031A43632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A43642.sat K012031A43642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A44352.sat K012031A44352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A44353.sat K012031A44353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A44362.sat K012031A44362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A44523.sat K012031A44523.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A46242.sat K012031A46242.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A46332.sat R012031A46332.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A52444.sat K012031A52444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A52622.sat R012031A52622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A52632.sat R012031A52632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A52642.sat R012031A52642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012031A53342.sat Q012031A53342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012031A53343.sat Q012031A53343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A53352.sat K012031A53352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A53353.sat K012031A53353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A53432.sat R012031A53432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A53442.sat K012031A53442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A53622.sat R012031A53622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A54252.sat R012031A54252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012031A54253.sat Q012031A54253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A54254.sat K012031A54254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A54342.sat K012031A54342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A54423.sat K012031A54423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A56242.sat K012031A56242.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A62433.sat K012031A62433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A62616.sat K012031A62616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A62622.sat R012031A62622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A62623.sat R012031A62623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A62632.sat K012031A62632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A63244.sat R012031A63244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012031A63245.sat Q012031A63245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012031A63246.sat K012031A63246.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A63432.sat R012031A63432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012031A63622.sat R012031A63622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A22652.sat K012032A22652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A22653.sat K012032A22653.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A23632.sat K012032A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A23633.sat K012032A23633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A23634.sat K012032A23634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A24662.sat K012032A24662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A25633.sat K012032A25633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A26633.sat K012032A26633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A33653.sat K012032A33653.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012032A35434.sat K012032A35434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A22652.sat K012034A22652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A22653.sat K012034A22653.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A22654.sat K012034A22654.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A22662.sat K012034A22662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A23632.sat R012034A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A23633.sat K012034A23633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A23634.sat K012034A23634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A23642.sat R012034A23642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A24632.sat K012034A24632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A24633.sat R012034A24633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A24634.sat K012034A24634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A24642.sat R012034A24642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A24662.sat K012034A24662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A25623.sat K012034A25623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A26352.sat K012034A26352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A26353.sat K012034A26353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A26362.sat K012034A26362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A26442.sat Q012034A26442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A26616.sat K012034A26616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A26623.sat K012034A26623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A26624.sat K012034A26624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A26632.sat K012034A26632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A26633.sat K012034A26633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A32643.sat R012034A32643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A32652.sat K012034A32652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A32662.sat K012034A32662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A33562.sat K012034A33562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A33632.sat K012034A33632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A33633.sat K012034A33633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A33642.sat R012034A33642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A33652.sat K012034A33652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A33653.sat K012034A33653.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A33662.sat K012034A33662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A34542.sat R012034A34542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A34543.sat K012034A34543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A34544.sat K012034A34544.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A34552.sat K012034A34552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A34623.sat R012034A34623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A34624.sat K012034A34624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A34632.sat K012034A34632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A34633.sat K012034A34633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A34634.sat K012034A34634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A34642.sat K012034A34642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A35352.sat K012034A35352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A35353.sat K012034A35353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A35434.sat K012034A35434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A35435.sat K012034A35435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A35442.sat R012034A35442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A35443.sat K012034A35443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A35444.sat K012034A35444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A35533.sat K012034A35533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A35623.sat K012034A35623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36252.sat K012034A36252.unsat, ?_⟩
+  exact trivial
+
+theorem allRefutedReuse7L417d_1 : AllRefutedList dirKeysReuse7L417d_1 := by
+  refine ⟨Tags.refuted_of_sat K012034A36253.sat K012034A36253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A36324.sat Q012034A36324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A36325.sat Q012034A36325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A36333.sat Q012034A36333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A36334.sat R012034A36334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36335.sat K012034A36335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36342.sat K012034A36342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A36343.sat R012034A36343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36344.sat K012034A36344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36352.sat K012034A36352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36353.sat K012034A36353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36362.sat K012034A36362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A36424.sat R012034A36424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36432.sat K012034A36432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36433.sat K012034A36433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36434.sat K012034A36434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A36442.sat K012034A36442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A42544.sat K012034A42544.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A42545.sat K012034A42545.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A42553.sat K012034A42553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A42633.sat K012034A42633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A42652.sat K012034A42652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A43453.sat K012034A43453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A43534.sat K012034A43534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A43562.sat K012034A43562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A43623.sat R012034A43623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A43624.sat K012034A43624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A43632.sat K012034A43632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A43633.sat K012034A43633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A43642.sat R012034A43642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A44353.sat K012034A44353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A44362.sat K012034A44362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A44524.sat K012034A44524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A44525.sat K012034A44525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A44533.sat K012034A44533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A44534.sat K012034A44534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A45343.sat K012034A45343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46243.sat K012034A46243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46244.sat K012034A46244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46252.sat K012034A46252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46253.sat K012034A46253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A46324.sat Q012034A46324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A46325.sat Q012034A46325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A46333.sat Q012034A46333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A46334.sat R012034A46334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A46343.sat R012034A46343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46352.sat K012034A46352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46353.sat K012034A46353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46362.sat K012034A46362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46423.sat K012034A46423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46424.sat K012034A46424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46432.sat K012034A46432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46433.sat K012034A46433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46442.sat K012034A46442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A46516.sat K012034A46516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A52623.sat Q012034A52623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A52624.sat K012034A52624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A53642.sat K012034A53642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A54254.sat K012034A54254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A55343.sat K012034A55343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A56226.sat K012034A56226.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A56233.sat K012034A56233.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012034A56234.sat R012034A56234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A56235.sat K012034A56235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A56243.sat K012034A56243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A56244.sat K012034A56244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A56324.sat K012034A56324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012034A56333.sat K012034A56333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012034A62623.sat Q012034A62623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012301A22622.sat Q012301A22622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012301A22623.sat Q012301A22623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012301A22632.sat Q012301A22632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012301A22633.sat Q012301A22633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A22642.sat R012301A22642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A22652.sat K012301A22652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23362.sat R012301A23362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23363.sat R012301A23363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23432.sat R012301A23432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23433.sat R012301A23433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23434.sat R012301A23434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23436.sat R012301A23436.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23442.sat R012301A23442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23443.sat R012301A23443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23444.sat R012301A23444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23532.sat R012301A23532.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23533.sat R012301A23533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A23534.sat K012301A23534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23542.sat R012301A23542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23623.sat R012301A23623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A23624.sat K012301A23624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23632.sat R012301A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A23642.sat R012301A23642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24333.sat R012301A24333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24334.sat R012301A24334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24342.sat R012301A24342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24343.sat R012301A24343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24434.sat R012301A24434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24523.sat R012301A24523.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A24524.sat K012301A24524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24533.sat R012301A24533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24534.sat R012301A24534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24542.sat R012301A24542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24623.sat R012301A24623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A24642.sat R012301A24642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A25245.sat K012301A25245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A25423.sat K012301A25423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A25443.sat K012301A25443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A25523.sat K012301A25523.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A25524.sat K012301A25524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A25623.sat K012301A25623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012301A26262.sat Q012301A26262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A26263.sat K012301A26263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A26344.sat K012301A26344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A32443.sat R012301A32443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A32444.sat K012301A32444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A32453.sat K012301A32453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A32533.sat R012301A32533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A32534.sat K012301A32534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A32543.sat K012301A32543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A32623.sat R012301A32623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A33333.sat R012301A33333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A33334.sat R012301A33334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A33335.sat K012301A33335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A33424.sat R012301A33424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A33425.sat R012301A33425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A33533.sat R012301A33533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A34324.sat R012301A34324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012301A34343.sat Q012301A34343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A34615.sat K012301A34615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A34616.sat K012301A34616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012301A35253.sat Q012301A35253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A36234.sat R012301A36234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A42344.sat R012301A42344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A42345.sat K012301A42345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A42346.sat R012301A42346.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A43334.sat R012301A43334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A43425.sat R012301A43425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A44235.sat R012301A44235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012301A44244.sat R012301A44244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A44245.sat K012301A44245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A45245.sat K012301A45245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A52616.sat K012301A52616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A53245.sat K012301A53245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012301A54236.sat K012301A54236.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A15452.sat K012304A15452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A15453.sat K012304A15453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A15454.sat K012304A15454.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A16262.sat K012304A16262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A16263.sat K012304A16263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A16342.sat K012304A16342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A16343.sat K012304A16343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A16344.sat K012304A16344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A16352.sat K012304A16352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A22623.sat Q012304A22623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A22624.sat Q012304A22624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A22625.sat Q012304A22625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A22626.sat K012304A22626.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A22633.sat Q012304A22633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A22634.sat R012304A22634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A22635.sat R012304A22635.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A22643.sat R012304A22643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A22644.sat K012304A22644.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A22645.sat K012304A22645.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A22652.sat K012304A22652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23362.sat R012304A23362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23363.sat R012304A23363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23364.sat R012304A23364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A23435.sat Q012304A23435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A23443.sat Q012304A23443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A23444.sat Q012304A23444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23453.sat R012304A23453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23454.sat R012304A23454.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23455.sat R012304A23455.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A23462.sat Q012304A23462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23534.sat R012304A23534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23535.sat R012304A23535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23543.sat R012304A23543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A23623.sat Q012304A23623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A23624.sat Q012304A23624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23625.sat R012304A23625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23632.sat R012304A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A23633.sat K012304A23633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A23634.sat K012304A23634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A23642.sat R012304A23642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A23662.sat K012304A23662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24262.sat Q012304A24262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24263.sat Q012304A24263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24264.sat R012304A24264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24265.sat K012304A24265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24335.sat Q012304A24335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24344.sat R012304A24344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24345.sat R012304A24345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24353.sat R012304A24353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24354.sat R012304A24354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24355.sat K012304A24355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24362.sat Q012304A24362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24363.sat K012304A24363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24434.sat Q012304A24434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24435.sat R012304A24435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24443.sat Q012304A24443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24444.sat R012304A24444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24445.sat R012304A24445.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24452.sat R012304A24452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24453.sat R012304A24453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24454.sat K012304A24454.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24455.sat K012304A24455.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24462.sat R012304A24462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24463.sat K012304A24463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24524.sat Q012304A24524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24525.sat R012304A24525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24533.sat R012304A24533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24534.sat R012304A24534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24535.sat R012304A24535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24542.sat R012304A24542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24543.sat R012304A24543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24544.sat K012304A24544.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24552.sat K012304A24552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24623.sat Q012304A24623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A24624.sat Q012304A24624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24625.sat R012304A24625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24632.sat R012304A24632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24633.sat R012304A24633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A24634.sat K012304A24634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A24642.sat R012304A24642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A25245.sat Q012304A25245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25254.sat K012304A25254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A25262.sat R012304A25262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25263.sat K012304A25263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25264.sat K012304A25264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A25334.sat Q012304A25334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A25335.sat R012304A25335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A25343.sat R012304A25343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A25344.sat R012304A25344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A25352.sat R012304A25352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25353.sat K012304A25353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25354.sat K012304A25354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25355.sat K012304A25355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25362.sat K012304A25362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25363.sat K012304A25363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25364.sat K012304A25364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25434.sat K012304A25434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25435.sat K012304A25435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A25442.sat Q012304A25442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A25443.sat Q012304A25443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25444.sat K012304A25444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25445.sat K012304A25445.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25452.sat K012304A25452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25453.sat K012304A25453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25454.sat K012304A25454.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A25524.sat Q012304A25524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A25525.sat R012304A25525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A25533.sat R012304A25533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A25534.sat R012304A25534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25535.sat K012304A25535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A25623.sat K012304A25623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26233.sat Q012304A26233.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26234.sat Q012304A26234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26235.sat Q012304A26235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26243.sat Q012304A26243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26244.sat Q012304A26244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26245.sat Q012304A26245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26252.sat Q012304A26252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26253.sat Q012304A26253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26254.sat Q012304A26254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A26255.sat R012304A26255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26262.sat Q012304A26262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26263.sat Q012304A26263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A26264.sat R012304A26264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26324.sat Q012304A26324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26325.sat Q012304A26325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26333.sat Q012304A26333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26334.sat Q012304A26334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A26335.sat R012304A26335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26342.sat Q012304A26342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26343.sat Q012304A26343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26344.sat Q012304A26344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26345.sat K012304A26345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A26352.sat R012304A26352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A26353.sat R012304A26353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26354.sat K012304A26354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26355.sat K012304A26355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A26362.sat R012304A26362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26363.sat K012304A26363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26364.sat K012304A26364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26423.sat Q012304A26423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26424.sat Q012304A26424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26425.sat K012304A26425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26432.sat Q012304A26432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26433.sat Q012304A26433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A26434.sat R012304A26434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26435.sat K012304A26435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A26442.sat Q012304A26442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26443.sat K012304A26443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26444.sat K012304A26444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26445.sat K012304A26445.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26452.sat K012304A26452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26532.sat K012304A26532.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26533.sat K012304A26533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26534.sat K012304A26534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26535.sat K012304A26535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26616.sat K012304A26616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26622.sat K012304A26622.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26623.sat K012304A26623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26624.sat K012304A26624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26625.sat K012304A26625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26632.sat K012304A26632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A26633.sat K012304A26633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32445.sat K012304A32445.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32446.sat K012304A32446.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A32454.sat R012304A32454.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32455.sat K012304A32455.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32535.sat K012304A32535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32544.sat K012304A32544.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32545.sat K012304A32545.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32553.sat K012304A32553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A32623.sat Q012304A32623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A32624.sat Q012304A32624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A32625.sat Q012304A32625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A32633.sat Q012304A32633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A32643.sat R012304A32643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32652.sat K012304A32652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A32662.sat K012304A32662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A33354.sat Q012304A33354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33362.sat R012304A33362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33363.sat R012304A33363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33364.sat K012304A33364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33365.sat K012304A33365.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33435.sat R012304A33435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A33443.sat Q012304A33443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33444.sat R012304A33444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33453.sat R012304A33453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33454.sat K012304A33454.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33455.sat K012304A33455.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33462.sat K012304A33462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33463.sat K012304A33463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33534.sat R012304A33534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33535.sat R012304A33535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33543.sat R012304A33543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A33623.sat Q012304A33623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33624.sat K012304A33624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33632.sat K012304A33632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33633.sat K012304A33633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33642.sat R012304A33642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A33643.sat R012304A33643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A33662.sat K012304A33662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34254.sat R012304A34254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34255.sat R012304A34255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A34262.sat Q012304A34262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34263.sat R012304A34263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34264.sat R012304A34264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34265.sat K012304A34265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A34335.sat Q012304A34335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34344.sat R012304A34344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34345.sat R012304A34345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34353.sat R012304A34353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34354.sat R012304A34354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34355.sat K012304A34355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A34362.sat Q012304A34362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34363.sat K012304A34363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A34434.sat Q012304A34434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34435.sat K012304A34435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34443.sat K012304A34443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34444.sat K012304A34444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34452.sat R012304A34452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34453.sat K012304A34453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A34524.sat Q012304A34524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A34525.sat Q012304A34525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A34533.sat Q012304A34533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34534.sat K012304A34534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A34623.sat R012304A34623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34624.sat K012304A34624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34632.sat K012304A34632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34633.sat K012304A34633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34634.sat K012304A34634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A34642.sat K012304A34642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A35245.sat Q012304A35245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A35254.sat R012304A35254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A35262.sat R012304A35262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35263.sat K012304A35263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35264.sat K012304A35264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A35334.sat Q012304A35334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35335.sat K012304A35335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A35343.sat R012304A35343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A35344.sat R012304A35344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A35352.sat R012304A35352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35353.sat K012304A35353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35354.sat K012304A35354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35362.sat K012304A35362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35363.sat K012304A35363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35434.sat K012304A35434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35435.sat K012304A35435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A35442.sat R012304A35442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35443.sat K012304A35443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35444.sat K012304A35444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35524.sat K012304A35524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35525.sat K012304A35525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A35533.sat R012304A35533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A35542.sat R012304A35542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A35623.sat K012304A35623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A36233.sat Q012304A36233.unsat, ?_⟩
+  exact trivial
+
+theorem allRefutedReuse7L417d_2 : AllRefutedList dirKeysReuse7L417d_2 := by
+  refine ⟨Tags.refuted_of_sat Q012304A36234.sat Q012304A36234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A36235.sat Q012304A36235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A36243.sat Q012304A36243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A36244.sat Q012304A36244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36245.sat K012304A36245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A36252.sat R012304A36252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A36253.sat R012304A36253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A36254.sat R012304A36254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A36262.sat Q012304A36262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36263.sat K012304A36263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36264.sat K012304A36264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A36324.sat Q012304A36324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A36325.sat Q012304A36325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A36333.sat Q012304A36333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A36334.sat R012304A36334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36335.sat K012304A36335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36342.sat K012304A36342.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A36343.sat R012304A36343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36344.sat K012304A36344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36352.sat K012304A36352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36353.sat K012304A36353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36362.sat K012304A36362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36423.sat K012304A36423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A36424.sat R012304A36424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36425.sat K012304A36425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36432.sat K012304A36432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A36433.sat R012304A36433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36434.sat K012304A36434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36442.sat K012304A36442.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36515.sat K012304A36515.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36516.sat K012304A36516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36623.sat K012304A36623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A36624.sat K012304A36624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A42346.sat R012304A42346.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A42363.sat R012304A42363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A42364.sat R012304A42364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A42436.sat R012304A42436.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A42454.sat R012304A42454.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A42455.sat K012304A42455.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A42535.sat K012304A42535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A42553.sat K012304A42553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A42623.sat Q012304A42623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A42624.sat R012304A42624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A42633.sat R012304A42633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A42662.sat K012304A42662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43262.sat R012304A43262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43263.sat R012304A43263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43264.sat R012304A43264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43265.sat R012304A43265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A43354.sat Q012304A43354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43362.sat R012304A43362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43363.sat R012304A43363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43443.sat R012304A43443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43444.sat R012304A43444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A43453.sat K012304A43453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A43534.sat K012304A43534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A43562.sat K012304A43562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43623.sat R012304A43623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A43632.sat K012304A43632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A43633.sat K012304A43633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A43642.sat R012304A43642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A44254.sat R012304A44254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A44262.sat R012304A44262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A44335.sat R012304A44335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A44344.sat R012304A44344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A44353.sat R012304A44353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A44362.sat R012304A44362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A44434.sat K012304A44434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A44533.sat K012304A44533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A44534.sat K012304A44534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A44642.sat K012304A44642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A45245.sat Q012304A45245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A45254.sat R012304A45254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A45262.sat R012304A45262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A45263.sat K012304A45263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A45343.sat R012304A45343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A45352.sat R012304A45352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A45353.sat K012304A45353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A46233.sat Q012304A46233.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A46234.sat Q012304A46234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A46235.sat K012304A46235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A46243.sat Q012304A46243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A46244.sat R012304A46244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A46252.sat R012304A46252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A46253.sat R012304A46253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A46254.sat R012304A46254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A46262.sat R012304A46262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A46324.sat Q012304A46324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A46325.sat Q012304A46325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A46333.sat Q012304A46333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A46334.sat R012304A46334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A46343.sat R012304A46343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A46362.sat K012304A46362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A46423.sat K012304A46423.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A46424.sat K012304A46424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A46425.sat K012304A46425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A46432.sat K012304A46432.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A46433.sat K012304A46433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A46516.sat K012304A46516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A51563.sat K012304A51563.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A51644.sat K012304A51644.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A51651.sat K012304A51651.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A52363.sat Q012304A52363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A52364.sat Q012304A52364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A52436.sat R012304A52436.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A52445.sat R012304A52445.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012304A52623.sat Q012304A52623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A52624.sat K012304A52624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A52652.sat K012304A52652.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A53246.sat R012304A53246.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A53262.sat R012304A53262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A53263.sat R012304A53263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A53264.sat K012304A53264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A53642.sat K012304A53642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A54254.sat K012304A54254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A54335.sat R012304A54335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A54353.sat K012304A54353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A54362.sat K012304A54362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A55262.sat K012304A55262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A55343.sat K012304A55343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A56233.sat K012304A56233.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012304A56234.sat R012304A56234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A56243.sat K012304A56243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A56244.sat K012304A56244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A56252.sat K012304A56252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A56324.sat K012304A56324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A56333.sat K012304A56333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A61546.sat K012304A61546.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A61563.sat K012304A61563.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A61635.sat K012304A61635.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A61636.sat K012304A61636.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A61644.sat K012304A61644.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A61651.sat K012304A61651.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012304A62265.sat K012304A62265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012310A23632.sat R012310A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A23633.sat K012310A23633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A23634.sat K012310A23634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012310A23642.sat R012310A23642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A23662.sat K012310A23662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A24633.sat K012310A24633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A24634.sat K012310A24634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012310A24642.sat R012310A24642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A24643.sat K012310A24643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A26262.sat K012310A26262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A26263.sat K012310A26263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A26623.sat K012310A26623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A26624.sat K012310A26624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A26633.sat K012310A26633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A33633.sat K012310A33633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A33634.sat K012310A33634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012310A34263.sat R012310A34263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012310A43264.sat K012310A43264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A15462.sat K012314A15462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A15542.sat K012314A15542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A15615.sat K012314A15615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A15616.sat K012314A15616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A16352.sat K012314A16352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A22653.sat K012314A22653.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A22662.sat K012314A22662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A23462.sat Q012314A23462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A23463.sat R012314A23463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A23464.sat R012314A23464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A23632.sat R012314A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A23633.sat K012314A23633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A23634.sat K012314A23634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A23642.sat R012314A23642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A23662.sat K012314A23662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A24263.sat Q012314A24263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A24264.sat Q012314A24264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A24362.sat Q012314A24362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A24363.sat R012314A24363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A24364.sat R012314A24364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A24452.sat Q012314A24452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A24453.sat R012314A24453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A24462.sat Q012314A24462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A24463.sat K012314A24463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A24464.sat K012314A24464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A24552.sat K012314A24552.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A24553.sat K012314A24553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A24562.sat K012314A24562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A24633.sat K012314A24633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A24634.sat K012314A24634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A24642.sat R012314A24642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A25262.sat Q012314A25262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A25263.sat R012314A25263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25264.sat K012314A25264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25265.sat K012314A25265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25362.sat K012314A25362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25363.sat K012314A25363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25364.sat K012314A25364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A25443.sat R012314A25443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25452.sat K012314A25452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25453.sat K012314A25453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25462.sat K012314A25462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A25616.sat K012314A25616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A26253.sat Q012314A26253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A26254.sat Q012314A26254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26255.sat K012314A26255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A26262.sat Q012314A26262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26263.sat K012314A26263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26264.sat K012314A26264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A26343.sat Q012314A26343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A26344.sat R012314A26344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26345.sat K012314A26345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26353.sat K012314A26353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A26433.sat Q012314A26433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A26434.sat R012314A26434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26443.sat K012314A26443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26523.sat K012314A26523.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26524.sat K012314A26524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26526.sat K012314A26526.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26534.sat K012314A26534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26616.sat K012314A26616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26623.sat K012314A26623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26624.sat K012314A26624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26625.sat K012314A26625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A26633.sat K012314A26633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A32463.sat R012314A32463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A32464.sat R012314A32464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A32465.sat K012314A32465.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A32653.sat K012314A32653.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A33363.sat Q012314A33363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A33364.sat Q012314A33364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A33454.sat R012314A33454.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A33455.sat K012314A33455.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A33463.sat K012314A33463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A33633.sat K012314A33633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A34263.sat Q012314A34263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A34264.sat R012314A34264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A34353.sat R012314A34353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A34354.sat R012314A34354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A34355.sat K012314A34355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A34363.sat K012314A34363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A34453.sat K012314A34453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A35263.sat K012314A35263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A35344.sat R012314A35344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A35345.sat K012314A35345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A35353.sat R012314A35353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A35354.sat K012314A35354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A35363.sat K012314A35363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A35616.sat K012314A35616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A36244.sat Q012314A36244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A36254.sat K012314A36254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A36324.sat R012314A36324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A36325.sat Q012314A36325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A36334.sat R012314A36334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A36335.sat K012314A36335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A36344.sat K012314A36344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A36424.sat R012314A36424.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A36425.sat K012314A36425.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A36434.sat K012314A36434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A42464.sat K012314A42464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A43264.sat R012314A43264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A43265.sat R012314A43265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A43355.sat R012314A43355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A44254.sat R012314A44254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A44255.sat R012314A44255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A44264.sat K012314A44264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A45245.sat K012314A45245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A45254.sat Q012314A45254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012314A45255.sat R012314A45255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A46235.sat K012314A46235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012314A46325.sat Q012314A46325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012314A54255.sat K012314A54255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A15615.sat K012340A15615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A23462.sat Q012340A23462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A23463.sat K012340A23463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A23562.sat K012340A23562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A23632.sat R012340A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A23633.sat K012340A23633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A23634.sat K012340A23634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A23642.sat R012340A23642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A23662.sat K012340A23662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A24362.sat Q012340A24362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A24363.sat K012340A24363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A24452.sat Q012340A24452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A24453.sat R012340A24453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A24462.sat Q012340A24462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A24463.sat K012340A24463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A24542.sat Q012340A24542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A24543.sat R012340A24543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A24633.sat R012340A24633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A24634.sat R012340A24634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A24635.sat K012340A24635.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A24642.sat R012340A24642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A24643.sat K012340A24643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A24644.sat K012340A24644.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A25262.sat R012340A25262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A25263.sat R012340A25263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25264.sat K012340A25264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25265.sat K012340A25265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A25352.sat R012340A25352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25353.sat K012340A25353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25354.sat K012340A25354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25362.sat K012340A25362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25363.sat K012340A25363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25364.sat K012340A25364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A25443.sat Q012340A25443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25444.sat K012340A25444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A25533.sat R012340A25533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A25534.sat R012340A25534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A25623.sat K012340A25623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26233.sat Q012340A26233.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26234.sat Q012340A26234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A26235.sat R012340A26235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26243.sat Q012340A26243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26244.sat Q012340A26244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A26253.sat R012340A26253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A26254.sat R012340A26254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26255.sat K012340A26255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26262.sat Q012340A26262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26263.sat Q012340A26263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A26264.sat R012340A26264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26333.sat Q012340A26333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26334.sat Q012340A26334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A26335.sat R012340A26335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26336.sat K012340A26336.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26343.sat Q012340A26343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26344.sat Q012340A26344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26345.sat K012340A26345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26353.sat K012340A26353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A26362.sat R012340A26362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26363.sat K012340A26363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26364.sat K012340A26364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A26433.sat Q012340A26433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26434.sat K012340A26434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26533.sat K012340A26533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26534.sat K012340A26534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26535.sat K012340A26535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26616.sat K012340A26616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26623.sat K012340A26623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26624.sat K012340A26624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A26633.sat K012340A26633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A32623.sat Q012340A32623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A32624.sat Q012340A32624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A32625.sat Q012340A32625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A32633.sat Q012340A32633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A32643.sat R012340A32643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A33263.sat Q012340A33263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A33264.sat K012340A33264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A33265.sat K012340A33265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A33363.sat Q012340A33363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A33364.sat Q012340A33364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A33365.sat K012340A33365.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A33463.sat R012340A33463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A33464.sat K012340A33464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A33543.sat Q012340A33543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A33553.sat R012340A33553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A33554.sat R012340A33554.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A33624.sat K012340A33624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A33633.sat K012340A33633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A33634.sat K012340A33634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A34263.sat Q012340A34263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A34264.sat R012340A34264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A34265.sat K012340A34265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A34353.sat R012340A34353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A34354.sat K012340A34354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A34355.sat K012340A34355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A34363.sat R012340A34363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A34364.sat R012340A34364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A34434.sat Q012340A34434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A34453.sat K012340A34453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A34534.sat R012340A34534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A35263.sat R012340A35263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35264.sat K012340A35264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35265.sat K012340A35265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A35344.sat R012340A35344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35353.sat K012340A35353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35354.sat K012340A35354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35363.sat K012340A35363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35434.sat K012340A35434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35435.sat K012340A35435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35444.sat K012340A35444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35524.sat K012340A35524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A35525.sat K012340A35525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A36234.sat Q012340A36234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A36235.sat R012340A36235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A36244.sat Q012340A36244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A36254.sat K012340A36254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A36263.sat K012340A36263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A36264.sat K012340A36264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A36324.sat Q012340A36324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A36325.sat Q012340A36325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A36334.sat R012340A36334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A36344.sat K012340A36344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A36434.sat K012340A36434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A36515.sat K012340A36515.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A36516.sat K012340A36516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012340A42364.sat Q012340A42364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A42365.sat K012340A42365.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A42624.sat R012340A42624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A43264.sat R012340A43264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A43265.sat R012340A43265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A43444.sat K012340A43444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A44264.sat K012340A44264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A44265.sat K012340A44265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012340A44344.sat R012340A44344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A45245.sat K012340A45245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A45264.sat K012340A45264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A46235.sat K012340A46235.unsat, ?_⟩
+  exact trivial
+
+theorem allRefutedReuse7L417d_3 : AllRefutedList dirKeysReuse7L417d_3 := by
+  refine ⟨Tags.refuted_of_sat Q012340A46325.sat Q012340A46325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A46516.sat K012340A46516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012340A56226.sat K012340A56226.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A15615.sat K012345A15615.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A23462.sat Q012345A23462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A23463.sat K012345A23463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A23562.sat K012345A23562.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A23632.sat R012345A23632.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A23633.sat K012345A23633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A23634.sat K012345A23634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A23642.sat R012345A23642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A23662.sat K012345A23662.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A24362.sat Q012345A24362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A24363.sat K012345A24363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A24452.sat Q012345A24452.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A24453.sat R012345A24453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A24462.sat Q012345A24462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A24463.sat K012345A24463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A24542.sat Q012345A24542.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A24543.sat R012345A24543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A24633.sat R012345A24633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A24634.sat R012345A24634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A24635.sat K012345A24635.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A24642.sat R012345A24642.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A24643.sat K012345A24643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A24644.sat K012345A24644.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A25262.sat R012345A25262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A25263.sat R012345A25263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25264.sat K012345A25264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25265.sat K012345A25265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A25352.sat R012345A25352.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25353.sat K012345A25353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25354.sat K012345A25354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25362.sat K012345A25362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25363.sat K012345A25363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25364.sat K012345A25364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A25443.sat Q012345A25443.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25444.sat K012345A25444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A25533.sat R012345A25533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A25534.sat R012345A25534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A25623.sat K012345A25623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26233.sat Q012345A26233.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26234.sat Q012345A26234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A26235.sat R012345A26235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26243.sat Q012345A26243.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26244.sat Q012345A26244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A26253.sat R012345A26253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A26254.sat R012345A26254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26255.sat K012345A26255.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26262.sat Q012345A26262.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26263.sat Q012345A26263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A26264.sat R012345A26264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26333.sat Q012345A26333.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26334.sat Q012345A26334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A26335.sat R012345A26335.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26343.sat Q012345A26343.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26344.sat Q012345A26344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26345.sat K012345A26345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26353.sat K012345A26353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A26362.sat R012345A26362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26363.sat K012345A26363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26364.sat K012345A26364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A26433.sat Q012345A26433.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26434.sat K012345A26434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26533.sat K012345A26533.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26534.sat K012345A26534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26535.sat K012345A26535.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26616.sat K012345A26616.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26623.sat K012345A26623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26624.sat K012345A26624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A26633.sat K012345A26633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A32623.sat Q012345A32623.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A32624.sat Q012345A32624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A32625.sat Q012345A32625.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A32633.sat Q012345A32633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A32643.sat R012345A32643.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A33263.sat Q012345A33263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A33264.sat K012345A33264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A33265.sat K012345A33265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A33363.sat Q012345A33363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A33364.sat Q012345A33364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A33365.sat K012345A33365.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A33463.sat R012345A33463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A33464.sat K012345A33464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A33543.sat Q012345A33543.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A33553.sat R012345A33553.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A33554.sat R012345A33554.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A33624.sat K012345A33624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A33633.sat K012345A33633.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A33634.sat K012345A33634.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A34263.sat Q012345A34263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A34264.sat R012345A34264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A34265.sat K012345A34265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A34353.sat R012345A34353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A34354.sat K012345A34354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A34355.sat K012345A34355.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A34363.sat R012345A34363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A34364.sat R012345A34364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A34434.sat Q012345A34434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A34453.sat K012345A34453.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A34534.sat R012345A34534.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A35263.sat R012345A35263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35264.sat K012345A35264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35265.sat K012345A35265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A35344.sat R012345A35344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35353.sat K012345A35353.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35354.sat K012345A35354.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35363.sat K012345A35363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35434.sat K012345A35434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35435.sat K012345A35435.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35444.sat K012345A35444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35524.sat K012345A35524.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A35525.sat K012345A35525.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A36234.sat Q012345A36234.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A36235.sat R012345A36235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A36244.sat Q012345A36244.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A36254.sat K012345A36254.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A36263.sat K012345A36263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A36264.sat K012345A36264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A36324.sat Q012345A36324.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A36325.sat Q012345A36325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A36334.sat R012345A36334.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A36344.sat K012345A36344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A36434.sat K012345A36434.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A36515.sat K012345A36515.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A36516.sat K012345A36516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A42364.sat Q012345A42364.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A42365.sat K012345A42365.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A42624.sat R012345A42624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A43264.sat R012345A43264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A43265.sat R012345A43265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A43444.sat K012345A43444.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A44264.sat K012345A44264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A44265.sat K012345A44265.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat R012345A44344.sat R012345A44344.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A45245.sat K012345A45245.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A45264.sat K012345A45264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A46235.sat K012345A46235.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat Q012345A46325.sat Q012345A46325.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A46516.sat K012345A46516.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K012345A56226.sat K012345A56226.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0120342A464252.sat K0120342A464252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A236345.sat K0123014A236345.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A245264.sat K0123014A245264.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A256253.sat K0123014A256253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A334336.sat K0123014A334336.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A335246.sat K0123014A335246.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A336236.sat K0123014A336236.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A343336.sat K0123014A343336.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A426226.sat K0123014A426226.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A434246.sat K0123014A434246.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A434336.sat K0123014A434336.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A435246.sat K0123014A435246.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A436226.sat K0123014A436226.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A443336.sat K0123014A443336.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A526226.sat K0123014A526226.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A526326.sat K0123014A526326.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A543624.sat K0123014A543624.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123014A626226.sat K0123014A626226.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123041A264362.sat K0123041A264362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123041A623464.sat K0123041A623464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A262462.sat K0123042A262462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A262463.sat K0123042A262463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A262464.sat K0123042A262464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A263363.sat K0123042A263363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A263462.sat K0123042A263462.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A264263.sat K0123042A264263.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A264363.sat K0123042A264363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A362463.sat K0123042A362463.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123042A363363.sat K0123042A363363.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123045A264362.sat K0123045A264362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123045A363362.sat K0123045A363362.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123045A623464.sat K0123045A623464.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123104A356252.sat K0123104A356252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123104A356253.sat K0123104A356253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123140A346426.sat K0123140A346426.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123140A356252.sat K0123140A356252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123140A356253.sat K0123140A356253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123140A436336.sat K0123140A436336.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123145A346426.sat K0123145A346426.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123145A356252.sat K0123145A356252.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123145A356253.sat K0123145A356253.unsat, ?_⟩
+  refine ⟨Tags.refuted_of_sat K0123145A436336.sat K0123145A436336.unsat, ?_⟩
+  exact trivial
+
+theorem allRefutedReuse7L417d : AllRefutedReuse7L417d :=
+  AllRefutedSrcs.cons' allRefutedReuse7L417d_0
+    (AllRefutedSrcs.cons' allRefutedReuse7L417d_1
+    (AllRefutedSrcs.cons' allRefutedReuse7L417d_2
+    (AllRefutedSrcs.cons' allRefutedReuse7L417d_3
+    (AllRefutedSrcs.nil'))))
+
+end Snake9.LocalWindow
+
+#print axioms Snake9.LocalWindow.allRefutedReuse7L417d
