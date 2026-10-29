@@ -1,6 +1,10 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. The latest completed research is milestone 64: 34 Lean-checked neighbour-choice share improvements and restricted critical-family minimum 1991/480. The manuscript remains at revision 56, with its next full revision scheduled after milestone 66. The global upper-bound dependency closure has not been independently rebuilt here.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 67 establishes the conditional empty-square estimate 234, with the full model-to-snake proof still pending. The manuscript is at revision 66; the next full revision is scheduled for milestone 76. The global upper-bound dependency closure has not been independently rebuilt here.
+
+- [Milestone 67: critical-family charge and improved boundary accounting](67-critical-family-charge/README.md)
+- [Milestone 66: complete-model integration and manuscript revision](66-full-model-and-revision/README.md)
+- [Milestone 65: count saturation and forced share](65-count-saturation-share/README.md)
 
 - [Milestone 64: complete neighbour-choice share bounds](64-neighbour-choice-share/README.md)
 
