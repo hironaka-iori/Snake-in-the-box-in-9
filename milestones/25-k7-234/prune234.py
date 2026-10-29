@@ -56,7 +56,7 @@ class Oracle(k7.Oracle):
         if os.path.exists(DECIDE):
             for l in open(DECIDE):
                 r = json.loads(l)
-                if r['kind'] == 'H':
+                if r['kind'] != 'k6':
                     k = kk(r); self.st[k] = r['result']; self.sec[k] = r['seconds']
 
     def flush(self):
@@ -68,12 +68,13 @@ class Oracle(k7.Oracle):
 
 
 def extra_k6():
-    """UNSAT k6 keys decided here, with their own solve times."""
+    """UNSAT k6 keys decided here, with their own solve times (a TIMEOUT of a pool key, marked
+    known_unsat, counts with its time limit as a lower bound)."""
     out = {}
     if os.path.exists(DECIDE):
         for l in open(DECIDE):
             r = json.loads(l)
-            if r['kind'] == 'k6' and r['result'] == 'UNSAT':
+            if r['kind'] == 'k6' and (r['result'] == 'UNSAT' or r.get('known_unsat')):
                 out[(tuple(r['dirs']), tuple(r['syms']))] = r['seconds']
     return out
 
