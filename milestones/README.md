@@ -1,6 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. The latest completed research is milestone 63: 38 Lean-checked long-window share improvements and restricted critical-family minimum 4973/1200. The manuscript remains at revision 56, with its next full revision scheduled after milestone 66. The global upper-bound dependency closure has not been independently rebuilt here.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. The latest completed research is milestone 64: 34 Lean-checked neighbour-choice share improvements and restricted critical-family minimum 1991/480. The manuscript remains at revision 56, with its next full revision scheduled after milestone 66. The global upper-bound dependency closure has not been independently rebuilt here.
+
+- [Milestone 64: complete neighbour-choice share bounds](64-neighbour-choice-share/README.md)
 
 - [Milestone 63: vertex splits on eleven-transition windows](63-long-window-splits/README.md)
 

@@ -186,3 +186,8 @@ Eight arbitrary-snake geometric share bounds and three finite potential certific
 ## Milestone 63: longer-window vertex splits
 
 Thirty-eight arbitrary-snake share bounds and the restricted-family mean 4973/1200 passed 39 Lean modules and 348 axiom audits. Independent coverage checked 94,432 split candidates on 214 shapes. The all-vertex and neighbourhood searches have identical optima under the fixed degree-forcing rule. The integer-weight threshold gap remains 73/30, so the global interval stays 191..235. Unproved pilots favour complete neighbour choices over one extra binary split; neither pilot is part of the checked graph. Research round 7 of 10 since manuscript revision 56; next full rewrite at 66.
+
+
+## Milestone 64: complete neighbour-choice share bounds
+
+The full replay passed 36 modules and 216 theorem-dependency audits. All 34 local arbitrary-snake bounds and the exact restricted minimum 1991/480 are checked. Independent reconstruction covers 11,554 configurations and 2,044 reduced certificates. The remaining zero-range threshold gap is 119/60; the global interval remains 191..235. Count-conditioned pilots remain unproved. Research round 8 of 10 since manuscript revision 56; next full rewrite at 66.
