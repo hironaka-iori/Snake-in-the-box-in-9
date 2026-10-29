@@ -214,3 +214,12 @@ Current mathematical checkpoint: [milestone 67](milestones/67-critical-family-ch
 The crucial boundary improvement pairs the first six omitted internal counts and uses positivity at the seventh. Together with both endpoints this gives 21, saving 720 in the window budget. The new complete-model potential has numerator 2482, denominator 5 and range 3238. Eliminating the total window weight yields 23482m <= 5517894; at m=235 the deficit is 376. This is a conditional deduction, not an arbitrary-snake upper bound.
 
 Next research priority: close the proof obligations for the conditional 234 estimate, beginning with an explicit inventory of inherited numerical rules and the graph-to-snake history interpretation. The current mean and improved boundary accounting already suffice numerically. This is round 1 of 10 after manuscript revision 66; the next full paper rewrite is scheduled for milestone 76.
+
+
+## Milestone 68: eliminate numerical share premises, 29 October 2026
+
+Current mathematical checkpoint: [milestone 68](milestones/68-proof-dependency-pressure/README.md). All **24 numerical-only oriented share rules have been removed** while preserving the conditional bound **234**. The complete recorded model now has exact integer minimum **14392/29**, normalized **1799/435**, and potential range **18984**. Independent reconstruction checks all **18,194,151 transitions**; seven new Lean audits check the conditional arithmetic. The count catalogue still contains numerical exclusions: beyond the 1,287-key contributor reference, contiguous-subwindow reduction leaves 25,279 additional keys to assess. Complete graph-to-snake interpretation and Lean potential replay remain pending. The contributor-checked global interval remains **191 <= a(9) <= 235**. GitHub was refreshed; contributor revision remains `97851813`.
+
+The cleaned weights invalidate 2,605 inequalities of the old potential. A new exact potential and attaining 29-edge cycle give 136192m <= 32003960, hence the conditional bound m <= 4000495/17024 < 235. The numerical share premise list is empty; remaining count premises are explicitly inventoried.
+
+Next research priority: restore transitions excluded only by additional numerical count keys and identify which restorations violate a sufficient potential bound. This will target the count proofs needed for 234. All numerical-only share premises are now unnecessary. This is round 2 of 10 after manuscript revision 66; the next full paper rewrite is scheduled for milestone 76.

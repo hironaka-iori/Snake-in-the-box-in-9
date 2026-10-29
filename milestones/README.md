@@ -1,6 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 67 establishes the conditional empty-square estimate 234, with the full model-to-snake proof still pending. The manuscript is at revision 66; the next full revision is scheduled for milestone 76. The global upper-bound dependency closure has not been independently rebuilt here.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 68 removes all numerical-only share rules while preserving the conditional estimate 234. Numerical count exclusions and the full model-to-snake proof remain pending. The manuscript is at revision 66; its next full revision is scheduled for milestone 76.
+
+- [Milestone 68: remove numerical-only share premises](68-proof-dependency-pressure/README.md)
 
 - [Milestone 67: critical-family charge and improved boundary accounting](67-critical-family-charge/README.md)
 - [Milestone 66: complete-model integration and manuscript revision](66-full-model-and-revision/README.md)
