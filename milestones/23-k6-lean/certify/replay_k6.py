@@ -12,9 +12,14 @@ Differences:
   4000 or more variables, i.e. most six-centre windows) uses the O5k checkers through
   `milestones/23-k6-lean/scripts/gen_lean_lrat_o5k.py` (14- to 17-bit words);
 * the checkpoints of the data modules are packed at once (`pack_checkpoints.rewrite`,
-  `NatPack.unpackL`), before anything is built.
+  `NatPack.unpackL`), before anything is built;
+* with `gen --packed` the generator writes one module per window instead
+  (`gen_lean_lrat.py --packed`: proofs and checkpoints as `ProofPack` chunks of
+  `--pack-chunk` bytes, input slots as `NatPack` chunks, no Data/Check sub-modules), the
+  recommended configuration of `milestones/26-replay-efficiency` (about 3 B of `.olean` per
+  hint instead of about 10); `build` and the theorem names are the same.
 
-  python3 replay_k6.py gen --work DIR [--out work/final_lean] [--shard i/n] [--limit N] [NAME ...]
+  python3 replay_k6.py gen --work DIR [--out work/final_lean] [--shard i/n] [--limit N] [--packed] [NAME ...]
   python3 replay_k6.py measure --work DIR     # hints of the core proofs only (no Lean files)
   python3 replay_k6.py build [--limit N]      # guarded, one module per `lean` call (generated cases only)
   python3 replay_k6.py sweep [--dry-run]      # delete built data sources (K*/Data*.lean)
@@ -86,10 +91,10 @@ def gen(a):
             cmd = [sys.executable, O5K if off == 5000 else os.path.join(S10, 'gen_lean_lrat.py'),
                    '--work', a.work, '--data', K.CORE, '--out', a.out, '--seg', str(a.seg), '--cp', str(a.cp),
                    '--group', str(a.group), '--wbits', str(bits), '--off', str(off), '--noncomputable-data',
-                   '--fast', '--split', name]
+                   '--fast', '--split', *(['--packed', '--pack-chunk', str(a.pack_chunk)] if a.packed else []), name]
             r = subprocess.run(['nice', '-n', '19', *cmd], capture_output=True, text=True)
             if r.returncode == 0:
-                npk = pack_dir(os.path.join(a.out, 'LocalWindowUnsat', mod))
+                npk = 0 if a.packed else pack_dir(os.path.join(a.out, 'LocalWindowUnsat', mod))
                 rec = {'case': name, 'module': mod, 'wbits': bits, 'off': off, 'core_lrat_hints': info2['hints'],
                        'core_lrat_lemmas': info2['lemmas'], 'est_hints': info['hints'], 'packed_data': npk,
                        **json.loads(r.stdout.strip().splitlines()[-1])}
@@ -195,6 +200,9 @@ def main():
     g.add_argument('--budget-hints', type=float, default=0,
                    help='stop after the cases generated in this call reach this many hints (a batch)')
     g.add_argument('--min-disk-mb', type=int, default=1500)
+    g.add_argument('--packed', action='store_true',
+                   help='one module per window with ProofPack/NatPack data (gen_lean_lrat.py --packed)')
+    g.add_argument('--pack-chunk', type=int, default=16384, help='with --packed: bytes per ProofPack chunk')
     g.add_argument('names', nargs='*')
     m = sub.add_parser('measure')
     m.add_argument('--work', required=True)

@@ -40,7 +40,8 @@ The `LocalWindowCnf`/`Sat` modules are not replay modules, but they are now the 
 They cost 0.86 MB per K-sized core (545 MB for 635 windows), so about 17 GB for the 19.5 k k6
 pool keys. They store the core as a `List (List Nat)` of small literals, at about 110 B per list
 cell. The same packing would bring them to about 30 KB each. This is not measured; see the end of
-this README.
+this README. *(Since measured: about 58 KB per K core in one packed module, see
+[Production](#production).)*
 
 ## Setup
 
@@ -246,9 +247,156 @@ and peak RSS 0.5–1.5 GB.
 - **Variable cost:** 2.0–3.1 B/hint, hint-weighted 2.8 B/hint. O5k windows use 14-bit words, so
   add about 7 % for them.
 
+## Production
+
+Run of 29 October 2026 (one `lean` at a time, `nice -n 15`, 2.9 GB RSS guard, three other
+jobs on the other cores). Everything was compiled with `lean -o` into a scratch directory listed
+first in `LEAN_PATH` (`scripts/measure.py`) and deleted afterwards; no production `.olean` and
+no `LocalWindowUnsat/` file was touched. Windows: K012031A42652 (1,580 hints), K012340A26336
+(99,805) and K012304A43633 (495,204), LRAT regenerated with `core_lrat` (seeds 1–2, 1 round:
+the hint counts of the 235 build). All rows are in `data/production_runs.jsonl`.
+
+### A. Packed replays: `gen_lean_lrat.py --packed`
+
+- **Generator.** `gen_lean_lrat.py --fast --split --noncomputable-data --packed [--pack-chunk
+  16384]` writes one module `LocalWindowUnsat/<M>.lean` per window: the declarations of `Data0…n`,
+  `Check1…g` and the main module, in that order, with one header. Proofs and checkpoints are
+  `Snake9.ProofPack.unpackL W [...]` (§3a, §3b), input slots `Snake9.NatPack.unpackL [...]`. The
+  generator checks that every packed list decodes to the list of the split layout. The O5k
+  wrapper `gen_lean_lrat_o5k.py` passes the flags through. `replay_k6.py gen --packed` uses it
+  and skips the `NatPack` checkpoint pass; `build` and the theorem names are unchanged.
+- **Library.** `work/final_lean/ProofPack.lean` (the decoder of §3a, unchanged, no theorems) with
+  a `lakefile.toml` entry.
+- **Unpacked path unchanged.** Without `--packed` the 38 files written for the three windows are
+  byte-identical (SHA256) to those of the previous generator, so the 235/236/237 modules are not
+  affected.
+- **Checks.** Each packed module compiles, and `#print axioms …unsat` gives `propext`,
+  `Classical.choice`, `Quot.sound`. Also compiled: forced segments with a checkpoint
+  (`--seg 400 --cp 2 --force-lemmas 20`), and the O5k self-test with `--packed`.
+
+| window | hints | production encoding (split) | **packed (one module)** | CPU, all modules: production → packed | peak RSS |
+|---|---|---|---|---|---|
+| K012031A42652 | 1,580 | 232,872 B (4 modules) | **37,024 B** | 1.85 → 1.41 s | 0.51 → 0.53 GB |
+| K012340A26336 | 99,805 | 828,296 B (7), 8.30 B/hint | **250,752 B, 2.51 B/hint** | 17.25 → 20.68 s (19.69 s on the packed Cnf of B) | 0.97 → 1.04 GB |
+| K012304A43633 | 495,204 | 4,339,560 B (27), 8.76 B/hint | **1,449,784 B, 2.93 B/hint** | 108.87 → 108.11 s | 1.24 → 1.38 GB |
+| **total** | 596,589 | 5,400,728 B, **9.05 B/hint** | 1,737,560 B, **2.91 B/hint** | **0.215 → 0.218 ms/hint** | |
+
+The production check modules alone took 118.1 s (0.198 ms/hint). So the packed module costs
+0–20 % more kernel time per window (+2 % over the three), within the noise of §Setup.
+
+### B. Packed core and clause soundness: `gen_lean_cnfsat_packed.py`
+
+**Where the 0.86 MB go** (K012340A26336, ablations recompiled from the production sources):
+
+| part | `.olean` bytes |
+|---|---|
+| `LocalWindowCnf`: `raw`, 9,526 list cells (1,968 clauses, 7,558 literals) | **707 KB** (74 B per cell) |
+| `LocalWindowCnf`: header, `window`, `bounds`, `cnf` | 24 KB |
+| `LocalWindowSat`: `ctrs`, about 500 literals as list terms | **96 KB** (about 190 B per literal) |
+| `LocalWindowSat`: `meaning` (`mtB`, one 19 KB literal) | 21 KB |
+| `LocalWindowSat`: `tags` (`tagsOf`, one 12 KB literal) | 12 KB |
+| `LocalWindowSat`: header | 21 KB |
+| `LocalWindowSat`: `check`, `sat` | 6 KB |
+
+**New decoders** (`work/final_lean/LocalWindowCnfPack.lean`, lakefile entry, no theorems;
+`Tags.checkAll`, `Tags.sound`, `mtB` and `tagsOf` are untouched):
+
+- `CnfPack.unpackL lw w`: lists of `w`-bit fields with an `lw`-bit length, in chunks
+  `n + 2^16 st`. It is used for `raw` (`lw = 8`) and for the counters
+  (`ctrsOf (unpackL 16 w …)`, one list `[kind, k, lits…]` each). A counter that no core clause
+  uses becomes `⟨[], 2, .ends⟩`, which `ctrOK` accepts and no clause refers to.
+- `CnfPack.mtS`: a sparse meaning tree in the shape of `mtB`, with one presence bit per node and
+  variable-width leaves. Only the variables of the core clauses and of the kept counters get a
+  meaning (K012340A26336: 1,253 of 3,232).
+- `CnfPack.tagsCL`: 4 bits per tag plus its arguments, at the widths of the window.
+- **Numerals.** Every decoded number is reduced to a numeral (`litCons`, `withLit`). Without
+  this, each decoded literal is a new kernel term, so the kernel's per-term caches stop sharing
+  work between equal entries. On K012031A42652 the check then took 22 s and 2.4 GB instead of
+  18 s and 2.0 GB, and K012340A26336 went over the 2.9 GB guard.
+- **Soundness by construction.** `sat` and the replay's `unsat` are both about
+  `cnf = raw.map (·.map decodeLit)`, whatever `raw` decodes to, and `Tags.sound` holds for every
+  meaning tree, counter list and tag list that `checkAll` accepts.
+
+**Generator.** `gen_lean_cnfsat_packed.py --certs DIR --core DIR --out ROOT [--compare] NAME…`
+writes one module `LocalWindowCnf/<M>.lean` with the usual names (`window`, `bounds`, `raw`,
+`cnf`, `meaning`, `ctrs`, `tags`, `check`, `sat`).
+
+- It repeats the checks of `gen_lean_sat.process` (encoding, CNF prefix, cycle cuts) and checks
+  every encoding against a Python mirror of its decoder.
+- With `--compare` it also checks that the core equals the production `raw`; this held for the
+  three windows.
+- Replays import `LocalWindowCnf.<M>` as before. An aggregate takes `<M>.sat` from
+  `LocalWindowCnf.<M>`.
+- `--split` writes the old two-module layout instead.
+
+| core | clauses / literals | production Cnf + Sat | **packed, one module** | compile (CPU), production Cnf + Sat → packed | peak RSS |
+|---|---|---|---|---|---|
+| K012031A42652 | 1,009 / 3,132 | 463,720 + 155,648 = 619,368 B | **47,016 B** (13×) | 2.0 + 18.0 → 17.7 s | 2.02 → 1.99 GB |
+| K012340A26336 | 1,968 / 7,558 | 731,416 + 156,392 = 887,808 B | **56,872 B** (16×) | 5.1 + 24.8 → 24.2 s | 2.54 → 2.60 GB |
+| K012304A43633 | 3,290 / 13,233 | 1,006,048 + 176,552 = 1,182,600 B | **≈ 70,100 B** (17×) | Sat 29.9 s at 3.06 GB in the production log → killed at the 2.9 GB guard after 24.5 s | > 2.9 GB both |
+| 51-clause stand-in (every 20th clause of K012031A42652, H9-sized) | 51 / 162 | 57,816 + 149,864 = 207,680 B | **37,496 B** (5.5×) | 0.3 + 11.2 → 10.0 s | 1.46 → 1.39 GB |
+
+- **Large window.** K012304A43633's size is that of the module without `check`/`sat`
+  (64,000 B), plus the 6,072 B those two theorems add on K012340A26336.
+- **End to end.** On K012031A42652 and K012340A26336, the packed replay compiled against the
+  packed Cnf module (1.28 s, 19.69 s). So did `Tags.refuted_of_sat <M>.sat <M>.unsat :
+  Refuted window bounds`, and `#print axioms` gives `propext`, `Classical.choice`,
+  `Quot.sound`.
+- **Merging pays.** The split layout of K012031A42652 is 31,272 + 35,968 = 67,240 B, 20 KB
+  more than one module.
+- **Composition of the packed module** (K012340A26336, 56.9 KB):
+  - literals 21 KB: `raw` 14.3, `meaning` 3.2, `tags` 3.1, `ctrs` 0.7;
+  - `check` and `sat` 6 KB;
+  - header and definitions about 30 KB.
+- **The Sat check is the time and memory cost, and packing does not change it.**
+  - Over the 635 production K modules (`guarded_build_k6.jsonl`): median 17.8 s and 2.24 GB.
+    161 of them are above 2.9 GB, up to 9.1 GB.
+  - Probes on K012031A42652: the 3,359 lookups `vOf meaning x` alone take 8 s and 1.2 GB. The
+    same lookups on an explicit tree term take 7 s. `ctrOK` alone takes 8 s and 1.3 GB.
+    Decoding `raw` takes 0.3 s.
+  - So the cost is `MT.get` (structural recursion) inside `checkAll`, not the encoding.
+  - Cutting it needs a checker variant with its own soundness proof: a lookup by `MT.rec`, or a
+    `check` split over parts of the clause list. Both are outside this task.
+
+### Projection for the 234 plan
+
+Assumptions: about 37 k windows (19.5 k K-sized k6-pool cores and 17.3 k H9 cores) and 10 G
+hints.
+
+| | now | packed (A + B) |
+|---|---|---|
+| replays | about 100 GB (9–10 B/hint) | 10 G × 2.8 B + 37 k × 33 KB ≈ **29 GB** (≈ 25 GB with the 5-round shortening of §5) |
+| Cnf + Sat | 19.5 k × 0.86 MB + 17.3 k × ≈ 0.21 MB ≈ 16.8 + 3.6 ≈ **20 GB** | 19.5 k × ≈ 58 KB + 17.3 k × ≈ 37 KB ≈ 1.1 + 0.6 ≈ **1.8 GB** |
+| **total** | **≈ 120 GB** | **≈ 31 GB** |
+| kernel time | replays ≈ 0.21 ms/hint ≈ 600 h; Sat ≈ 19.5 k × 21 s + 17.3 k × 10 s ≈ 160 h | the same |
+
+- **Assumptions behind the estimates.**
+  - The H9 rows use the 51-clause stand-in. Its variables (3,358) are close to the H9 CNFs (up
+    to 4,513).
+  - H9 cores need `alpha` padded with `None` for the uncounted last centre, in
+    `gen_lean_sat.process` as well as here. That case was not run.
+- **A further option, not built:** one module per window for the core, the soundness and the
+  replay together. It would save about another 20 KB × 37 k ≈ 0.7 GB.
+
+**Reproduce** (scratch root `S`, `LEAN_PATH` order as in `scripts/measure.py`):
+
+```sh
+python3 milestones/26-replay-efficiency/scripts/measure.py --src work/final_lean --out $S/olean ProofPack LocalWindowCnfPack
+python3 milestones/23-k6-lean/certify/replay_k6.py gen --work $S/work --out $S/src --packed --min-disk-mb 400 d012340_a2_6-21_3_3_6-21
+python3 milestones/10-window-aggregate/scripts/gen_lean_cnfsat_packed.py --certs $S/certs \
+  --core milestones/10-window-aggregate/data/lean_core_direction_k6 --out $S/src --compare d012340_a2_6-21_3_3_6-21
+python3 milestones/26-replay-efficiency/scripts/measure.py --src $S/src --out $S/olean --axioms \
+  LocalWindowCnf.K012340A26336:Snake9.LocalWindow.K012340A26336.sat \
+  LocalWindowUnsat.K012340A26336:Snake9.LocalWindow.K012340A26336.unsat
+```
+
+`gen_lean_cnfsat_packed.py` needs the CNF as `$S/certs/NAME.cnf.gz`
+(`gen_k6_core.regen_cnf`). `replay_k6.py gen` writes it into `$S/work/certs` and deletes it when
+it is done.
+
 ## What this does not cover
 
-- **Cnf/Sat modules.** These are not studied here. `raw` is a literal `List (List Nat)`: the
+- **Cnf/Sat modules.** *(Done since, see [Production](#production).)* These are not studied here. `raw` is a literal `List (List Nat)`: the
   1,968 clauses and 7,558 literals of K012340A26336 cost 731 KB. A packed `raw` (about 12 KB of
   bits) is plausible, but the Sat proofs and `loadRaw` consume `raw`, and whether they still
   elaborate and how fast has not been tested. H9 cores are tiny (9–57 clauses in the samples of
@@ -270,6 +418,11 @@ and peak RSS 0.5–1.5 GB.
 | `scripts/analyze.py`, `lratstats.py`, `codes.py`, `cpstats.py`, `trim.py`, `dtrim.py`, `micro.py` | `.olean` composition, hint usefulness and entropy, alternative codings, checkpoint redundancy, proof shortening, drat-trim, single-theorem kernel timings |
 | `data/runs.jsonl` | every kept build (tag, window, configuration, bytes, CPU, RSS) |
 | `data/offline.json` | micro-benchmark, compositions, coding, checkpoint and trimming numbers |
+| `scripts/measure.py` | (Production) `lean -o` of named modules into a scratch directory: bytes, CPU, RSS (2.9 GB guard), `#print axioms` |
+| `data/production_runs.jsonl` | (Production) every build of the production section, with a `_notes` line explaining the tags |
+| `work/final_lean/ProofPack.lean`, `work/final_lean/LocalWindowCnfPack.lean` | (Production) the replay-data decoder (as `lean/ProofPack.lean`) and the core/soundness-data decoders, with lakefile entries |
+| `milestones/10-window-aggregate/scripts/gen_lean_lrat.py --packed`, `milestones/23-k6-lean/certify/replay_k6.py gen --packed` | (Production) one packed replay module per window |
+| `milestones/10-window-aggregate/scripts/gen_lean_cnfsat_packed.py` | (Production) one packed core + clause-soundness module per window |
 
 **Reproduce.**
 

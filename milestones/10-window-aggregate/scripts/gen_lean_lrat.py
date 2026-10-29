@@ -40,9 +40,19 @@ start database through a term the kernel caches (about 94% of the hints, on few 
 keys), so slots must stay below 2^(W-1); a checkpoint is verified by `cpZ`, which walks
 it together with the replayed database instead of looking every clause up.
 
+With --packed (needs --fast --split --noncomputable-data) the replay of a window is a single
+module work/final_lean/LocalWindowUnsat/<Module>.lean: the declarations of the Data, Check
+and main modules above, in that order, without the module boundaries.  The proofs and
+checkpoints are `Snake9.ProofPack.unpackL W [c0, c1, ...]` (work/final_lean/ProofPack.lean,
+chunks of at most --pack-chunk bytes) and the input slots `Snake9.NatPack.unpackL [...]`.
+The decoders need no proofs: the decoded lists are data for the kernel checks, and the
+generator checks here that they decode to the lists of the split layout.  This is the
+recommended configuration of milestones/26-replay-efficiency (about 3 bytes of .olean per
+hint against 9-10, 0-20 % more kernel time).  Without --packed the output is unchanged.
+
   python gen_lean_lrat.py --work DIR [--seg N] [--cp M] [--group G] [--check] [--data DIR] NAME ...
 """
-import argparse, collections, heapq, json, os, sys
+import argparse, collections, heapq, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
@@ -93,6 +103,9 @@ def set_width(bits, fast=False, off=2400, split=False):
 # --noncomputable-data they are declared `noncomputable def`: no compiled code is
 # generated, which makes the .olean files several times smaller and the .c files empty.
 DATA_DEF = 'def'
+
+# --packed: bytes per ProofPack chunk literal; 0 writes the split layout (Data/Check modules).
+PACKED = 0
 
 
 def module_name(name):
@@ -333,6 +346,87 @@ def declist(xs, per_line=32):
     return '[\n  ' + ',\n  '.join(lines) + ']'
 
 
+def ppack_words(xs, cbytes):
+    """ProofPack chunks (ProofPack.lean) of the words `xs`: each chunk `n + 2^16 st` holds
+    `n` words, `st` their codes `len + 2^16 x` (`len` W-bit digits, `x < 2^(W len)`), lowest
+    first; a chunk takes at most `cbytes` bytes unless a single word is longer."""
+    groups, cur, bits = [], [], 0
+    for x in xs:
+        b = 16 + W * -(-x.bit_length() // W)
+        if cur and (bits + b > 8 * cbytes or len(cur) >= 65535):
+            groups.append(cur)
+            cur, bits = [], 0
+        cur.append(x)
+        bits += b
+    if cur:
+        groups.append(cur)
+    out = []
+    for g in groups:
+        st, pos = 0, 0
+        for x in g:
+            n = -(-x.bit_length() // W)
+            assert n < 65536
+            st |= (n | (x << 16)) << pos
+            pos += 16 + W * n
+        out.append(len(g) | (st << 16))
+    return out
+
+
+def punpack_words(cs):
+    """Python mirror of `Snake9.ProofPack.unpackL W`."""
+    out = []
+    for c in cs:
+        n, st = c & 65535, c >> 16
+        for _ in range(n):
+            b = W * (st & 65535)
+            out.append((st >> 16) & ((1 << b) - 1))
+            st >>= 16 + b
+    return out
+
+
+def proof_term(xs):
+    """A proof or checkpoint list: a literal list, or with --packed ProofPack chunks."""
+    if not PACKED:
+        return hexlist(xs)
+    cs = ppack_words(xs, PACKED)
+    assert punpack_words(cs) == list(xs)
+    return 'Snake9.ProofPack.unpackL %d [\n%s]' % (W, ',\n'.join('  nat_lit 0x%x' % c for c in cs))
+
+
+def slots_term(xs):
+    """The input slots: a literal list, or with --packed NatPack chunks of 64 entries."""
+    if not PACKED:
+        return declist(xs)
+    sys.path.insert(0, HERE)
+    import pack_checkpoints as PK
+    cs = [PK.encode(xs[i:i + PK.CHUNK]) for i in range(0, len(xs), PK.CHUNK)]
+    assert [y for c in cs for y in PK.decode(c)] == list(xs)
+    return 'Snake9.NatPack.unpackL [\n%s]' % ',\n'.join('  nat_lit 0x%x' % c for c in cs)
+
+
+def merge_modules(files, main_path, ns, doc):
+    """The text of one module holding the declarations of the split layout (`files`: the
+    Data and Check modules of the window and its main module `main_path`), in the order
+    Data0..n, Check1..g, main, with one header; imports between them are dropped."""
+    def order(p):
+        m = re.match(r'(Data|Check)(\d+)\.lean$', os.path.basename(p))
+        return ({'Data': 0, 'Check': 1}[m.group(1)], int(m.group(2)))
+    imports, opens, body = [], [], []
+    for p in sorted((p for p in files if p != main_path), key=order) + [main_path]:
+        for line in re.sub(r'/-!.*?-/\n', '', files[p], flags=re.S).split('\n'):
+            if line.startswith('import '):
+                if not line.startswith('import LocalWindowUnsat.') and line not in imports:
+                    imports.append(line)
+            elif line.startswith('open '):
+                if line not in opens:
+                    opens.append(line)
+            elif not line.startswith(('namespace ', 'end ' + ns, 'set_option')):
+                body.append(line)
+    out = imports + ['', doc, '', HEADER + 'set_option Elab.async false', '', 'namespace ' + ns] + opens + body + \
+        ['end ' + ns, '']
+    return re.sub(r'\n{3,}', '\n\n', '\n'.join(out))
+
+
 HEADER = 'set_option maxRecDepth 100000\nset_option maxHeartbeats 0\n'
 
 
@@ -425,11 +519,11 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
     # ---- write Lean
     outdir = os.path.join(outroot, 'LocalWindowUnsat')
     sub = os.path.join(outdir, mod)
-    os.makedirs(sub, exist_ok=True)
+    os.makedirs(outdir if PACKED else sub, exist_ok=True)
     ns = 'Snake9.LocalWindow.' + mod
     files = {}
     files[os.path.join(sub, 'Data0.lean')] = '\n'.join([
-        CHECKER_IMPORT, 'import LocalWindowCnf.' + mod, '',
+        CHECKER_IMPORT, 'import LocalWindowCnf.' + mod, *(['import ProofPack', 'import NatPack'] if PACKED else []), '',
         '/-! LRAT refutation of the core of `%s`: database shape and input slots' % name,
         '(generated by `milestones/10-window-aggregate/scripts/gen_lean_lrat.py`). -/', '',
         HEADER, 'namespace ' + ns, CHECKER_OPEN, '',
@@ -438,7 +532,7 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
             DATA_DEF + ' shapeKeys : List Nat := ' + declist([key[s] for s in range(1, nslots + 1)]),
             '']),
         '/-- Key of each core clause. -/',
-        DATA_DEF + ' inputSlots : List Nat := ' + declist([key[s] for s in input_slots]), '',
+        DATA_DEF + ' inputSlots : List Nat := ' + slots_term([key[s] for s in input_slots]), '',
         ('noncomputable def start1 : Tree := loadRaw (perf %d 0) raw inputSlots' % height if FAST
          else 'noncomputable def start1 : Tree := loadRaw (shape .nil shapeKeys) raw inputSlots'), '',
         'end ' + ns, ''])
@@ -453,11 +547,11 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
             if k == ks[0] and k > 1:
                 assert is_cp[k]
                 body += ['/-- Checkpoint: the live clauses before segment %d. -/' % k,
-                         DATA_DEF + ' cp%d : List Nat := %s' % (k, hexlist(cps[k])), '',
+                         DATA_DEF + ' cp%d : List Nat := %s' % (k, proof_term(cps[k])), '',
                          'noncomputable def start%d : Tree := build %d cp%d' % (k, height, k), '']
             elif k > ks[0]:
                 body += ['noncomputable def start%d : Tree := replay start%d proof%d' % (k, k - 1, k - 1), '']
-            body += [DATA_DEF + ' proof%d : List Nat := %s' % (k, hexlist(nums[cuts[k - 1]:cuts[k]])), '']
+            body += [DATA_DEF + ' proof%d : List Nat := %s' % (k, proof_term(nums[cuts[k - 1]:cuts[k]])), '']
         body += ['end ' + ns, '']
         files[os.path.join(sub, 'Data%d.lean' % g)] = '\n'.join(body)
     for k in (range(1, nseg + 1) if not GROUPED else []):
@@ -468,11 +562,11 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         body = ['import LocalWindowUnsat.%s.Data%d' % (mod, k - 1 if needs_prev else 0), '',
                 '/-! LRAT refutation of the core of `%s`: segment %d of %d (generated). -/' % (name, k, nseg), '',
                 HEADER, 'namespace ' + ns, CHECKER_OPEN, '',
-                DATA_DEF + ' proof%d : List Nat := %s' % (k, hexlist(nums[cuts[k - 1]:cuts[k]])), '']
+                DATA_DEF + ' proof%d : List Nat := %s' % (k, proof_term(nums[cuts[k - 1]:cuts[k]])), '']
         if k < nseg:
             if is_cp[k + 1]:
                 body += ['/-- Checkpoint: the live clauses before segment %d. -/' % (k + 1),
-                         DATA_DEF + ' cp%d : List Nat := %s' % (k + 1, hexlist(cps[k + 1])), '',
+                         DATA_DEF + ' cp%d : List Nat := %s' % (k + 1, proof_term(cps[k + 1])), '',
                          ('noncomputable def start%d : Tree := build %d cp%d' % (k + 1, height, k + 1) if FAST
                           else 'noncomputable def start%d : Tree := build (shape .nil shapeKeys) cp%d'
                           % (k + 1, k + 1)), '']
@@ -574,6 +668,14 @@ def export(name, work, seg_hints, cp_every, group, check, outroot, data=DATA):
         main = main[:thm] + lemmas + main[thm:] + chain + [final]
     main += ['', 'end ' + ns, '']
     files[os.path.join(outdir, mod + '.lean')] = '\n'.join(main)
+    if PACKED:   # one module: the same declarations without the module boundaries
+        mp = os.path.join(outdir, mod + '.lean')
+        doc = ('/-! Kernel-checked LRAT refutation of the core of `%s`: %d lemmas, %d hints, %d segments, '
+               'data,\nkernel checks and main theorem in one module (generated by\n'
+               '`milestones/10-window-aggregate/scripts/gen_lean_lrat.py --packed`). -/'
+               % (name, stats['lemmas'], stats['hints'], nseg))
+        files = {mp: merge_modules(files, mp, ns, doc)}
+        stats['packed_chunk'] = PACKED
     total = 0
     for p, txt in files.items():
         if not (os.path.exists(p) and open(p).read() == txt):   # keep the mtime of unchanged modules
@@ -609,11 +711,23 @@ def main():
                     help='one data module per --group segments (needs --cp equal to --group, --fast)')
     ap.add_argument('--split', action='store_true',
                     help='with --fast: emit proofs for LratFast2 (cached start database, flagged hints)')
+    ap.add_argument('--packed', action='store_true',
+                    help='one module per window, proofs and checkpoints as ProofPack chunks, input slots as '
+                         'NatPack chunks (needs --fast --split --noncomputable-data; see above)')
+    ap.add_argument('--pack-chunk', type=int, default=16384,
+                    help='with --packed: bytes per ProofPack chunk literal (at most 16384: the parser is '
+                         'quadratic in the length of a literal)')
     ap.add_argument('names', nargs='+')
     a = ap.parse_args()
     set_width(a.wbits, a.fast, a.off, a.split)
     global FORCE_LEMMAS
     FORCE_LEMMAS = a.force_lemmas
+    if a.packed:
+        assert a.fast and a.split and a.noncomputable_data and not a.data_group, \
+            '--packed needs --fast --split --noncomputable-data and no --data-group'
+        assert 0 < a.pack_chunk <= 16384, '--pack-chunk must be in 1..16384'
+        global PACKED
+        PACKED = a.pack_chunk
     if a.data_group:
         assert a.fast and a.cp == a.group, 'grouped data modules need --fast and --cp equal to --group'
         global GROUPED
