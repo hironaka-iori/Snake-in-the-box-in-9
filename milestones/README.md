@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 71 reduces the selected additional count premises for conditional 234 by 24.66%, to 14,155. Conditional optimisation alternates with unconditional proof work. The manuscript is at revision 66, with its next full rewrite scheduled for milestone 76.
 
+- [Milestone 72: short-count proof closure (in progress)](72-four-count-proof-closure/README.md)
+
 - [Milestone 71: reduce conditional proof obligations using proved rules](71-proved-rule-conditional-pressure/README.md)
 
 - [Milestone 70: proof-supported comparison and recovered restrictions](70-proof-supported-share-model/README.md)
