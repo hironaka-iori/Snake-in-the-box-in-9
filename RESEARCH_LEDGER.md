@@ -223,3 +223,12 @@ Current mathematical checkpoint: [milestone 68](milestones/68-proof-dependency-p
 The cleaned weights invalidate 2,605 inequalities of the old potential. A new exact potential and attaining 29-edge cycle give 136192m <= 32003960, hence the conditional bound m <= 4000495/17024 < 235. The numerical share premise list is empty; remaining count premises are explicitly inventoried.
 
 Next research priority: restore transitions excluded only by additional numerical count keys and identify which restorations violate a sufficient potential bound. This will target the count proofs needed for 234. All numerical-only share premises are now unnecessary. This is round 2 of 10 after manuscript revision 66; the next full paper rewrite is scheduled for milestone 76.
+
+
+## Milestone 69: select exclusions for the conditional target, 30 October 2026
+
+Current mathematical checkpoint: [milestone 69](milestones/69-count-certificate-selection/README.md). The conditional target **234** now requires **18,788 additional count keys**, using 1,378 reference keys from completed contributor proofs and no numerical-only share rules. The sufficient potential numerator is 14387 at denominator 29, with range 18984. Independent verification covers all **4,028,578 retained transitions** and every mandatory-key witness. Eight Lean audits cover the general selection argument and conditional arithmetic. Minimality holds only for the fixed potential and candidate basis. The selected count keys and complete graph-to-snake proof remain outstanding; the contributor-checked global interval remains **191 <= a(9) <= 235**.
+
+The target numerator 14387 gives 136187m <= 32003920, excluding 235 by a margin of 25. A smaller integer numerator with the same denominator, potential range and boundary budget is insufficient. Reusing the earlier 236 catalogue adds 91 reference keys; relaxing the target removes 37 further six-count keys.
+
+Next research priority: alternate conditional optimisation with proof-supported improvement of the unconditional route. The next round will build and test a model using only proof-supported count exclusions and share rules, then identify a useful missing theorem from the comparison. Conditional estimates and unconditional bounds must be reported separately. This is round 3 of 10 after manuscript revision 66; the next full paper rewrite is scheduled for milestone 76.

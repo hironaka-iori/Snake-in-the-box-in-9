@@ -1,6 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 68 removes all numerical-only share rules while preserving the conditional estimate 234. Numerical count exclusions and the full model-to-snake proof remain pending. The manuscript is at revision 66; its next full revision is scheduled for milestone 76.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 69 reduces the conditional 234 proof target to 18,788 additional count keys, with fixed-potential minimality checked. Conditional optimisation alternates with work toward an unconditional improvement. The manuscript is at revision 66; the next full revision is scheduled for milestone 76.
+
+- [Milestone 69: select count exclusions for the target bound](69-count-certificate-selection/README.md)
 
 - [Milestone 68: remove numerical-only share premises](68-proof-dependency-pressure/README.md)
 
