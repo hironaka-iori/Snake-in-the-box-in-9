@@ -1,6 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 69 reduces the conditional 234 proof target to 18,788 additional count keys, with fixed-potential minimality checked. Conditional optimisation alternates with work toward an unconditional improvement. The manuscript is at revision 66; the next full revision is scheduled for milestone 76.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 70 integrates forty proved restrictions into the proof-supported model; a replacement cycle retains mean four. The conditional target remains 234 as recorded in milestone 69. Conditional optimisation alternates with unconditional proof work. The manuscript is at revision 66, with its next full rewrite scheduled for milestone 76.
+
+- [Milestone 70: proof-supported comparison and recovered restrictions](70-proof-supported-share-model/README.md)
 
 - [Milestone 69: select count exclusions for the target bound](69-count-certificate-selection/README.md)
 
