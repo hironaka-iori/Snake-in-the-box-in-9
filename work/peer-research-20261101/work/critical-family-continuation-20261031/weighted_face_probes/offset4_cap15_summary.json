@@ -1,0 +1,89 @@
+{
+  "cap": 15,
+  "source_edge": 1816745,
+  "offset": 4,
+  "meta": {
+    "directions": [
+      0,
+      1,
+      2,
+      3,
+      1,
+      0,
+      4,
+      5,
+      0
+    ],
+    "counts": [
+      5,
+      3,
+      4,
+      4,
+      3,
+      5
+    ],
+    "count_bounds": [
+      5,
+      3,
+      4,
+      4,
+      3,
+      5
+    ],
+    "window": [
+      0,
+      1,
+      3,
+      7,
+      15,
+      13,
+      12,
+      28,
+      60,
+      61
+    ],
+    "charged_centres": [
+      15,
+      13,
+      12,
+      28,
+      60
+    ],
+    "base_clauses": 77481,
+    "zero_share_positive_face_clauses": 884,
+    "variables": 4200,
+    "source_wincert_sha256": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "scope": "necessary local conditions plus five-center total share ZERO; not a full snake model"
+  },
+  "variables": 8045,
+  "clauses": 95690,
+  "solver": {
+    "status": "UNSAT",
+    "seconds": 2.4577440000139177,
+    "decisions": 2276,
+    "conflicts": 1435,
+    "propagated": 1064588,
+    "watch_inspections": 2165035,
+    "restarts": 6,
+    "learned_clauses": 1435,
+    "root_satisfied_clauses": 30914,
+    "root_active_clauses": 64776,
+    "binary_visits": 1009447,
+    "long_literal_scans": 1807280,
+    "minimized_literals": 0,
+    "restart_strategy": "lbd",
+    "binary_enabled": true,
+    "circular": false,
+    "minimize": false,
+    "seed": 0
+  },
+  "proof": {
+    "RUP_steps_checked": 1435,
+    "unit_hints_checked": 125861,
+    "empty_clause_checked": true
+  },
+  "claim_if_UNSAT": "five-center share12 at least cap+1, ordinary necessary-CNF proof; not Lean/global bound",
+  "new_global_bound": null,
+  "dependency_audit": "PURE_BASE_COUNTS_UNSAT_NO_OBJECTIVE_USED",
+  "interpretation_correction": "Ordinary count-window exclusion. The share lower under the exact original antecedent is vacuous, not an independent nonvacuous improvement."
+}
