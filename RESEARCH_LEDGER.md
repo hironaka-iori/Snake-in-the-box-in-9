@@ -254,6 +254,6 @@ Next research priority: return to the unconditional proof track and inspect the 
 
 ## Milestone 72: proof closure checkpoint, 31 October 2026
 
-Active research: [milestone 72](milestones/72-four-count-proof-closure/README.md) is in progress. Six certificate cases and twenty theorem audits are complete, including a returning-direction restriction with no middle-count assumptions. The checked additions remove 28,472 transitions and reduce the additional premises for conditional 234 to 14,147. The exact model mean remains 480 and the global upper bound remains 235. Ten candidate certificate cases are still pending. This checkpoint does not complete the research round.
+Active research: [milestone 72](milestones/72-four-count-proof-closure/README.md) is in progress. Eight certificate cases and twenty-six theorem audits are complete, including a returning-direction restriction with no middle-count assumptions. The checked additions remove 39,905 transitions and reduce the additional premises for conditional 234 to 14,145. The exact model mean remains 480 and the global upper bound remains 235. Eight candidate certificate cases are still pending. This checkpoint does not complete the research round.
 
 The exact-count case (3,4,4,4) remains unresolved after two different bounded solver attempts. Completed source checks and graph receipts are preserved separately from pending certificates. The paper remains unchanged while the sixth round after revision 66 continues.
