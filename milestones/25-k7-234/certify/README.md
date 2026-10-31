@@ -22,6 +22,94 @@ gone through the Lean certificate path before.
 | driver | `gen_k7_core.py` (cores, packed Cnf+Sat modules, chunk and aggregate modules) and `replay_k7.py` (packed replays, guarded build), validated on the five keys |
 | full run (projection, `keys_l416y`) | about 2.2 G hints. **About 220-260 CPU-hours** (replays about 160, or about 130 with the 8-seed, 5-round proofs, plus 60-100 for the Cnf+Sat modules) and **about 8.5-10 GB** of `.olean`. Commands below |
 
+## Final key set (`keys_best234`, tag B234; 31 October)
+
+This is the set the 234 build uses: `../data/keys_best234.json.gz`, 11,167 keys at λ = 6423/1544,
+range 8,152 of 8,191, bound 234. The chain is retargeted to it (`../lean/README.md`, "Retarget to the
+final key set"). Its shards are being built (`PROGRESS-B234.md`).
+
+**What still has to be certified.** These are the keys of `LocalWindowDirKeysK7` (committed,
+`gen_lean_glue7.py keys --keys ../data/keys_best234.json.gz --noncomputable`): 25 chunks of 400 in 3
+part modules. The other 1,383 keys are the old Q/R/K windows, proved by
+`LocalWindowDirUnsatReuse7B234`.
+
+| kind | new keys | hints (key-set estimate) | of which measured | core clauses |
+|---|---|---|---|---|
+| k6 pool | 5,687 | 1.567 G | 0.376 G | 8.26 M |
+| F8 | 192 | 0.089 G | 0.013 G | 0.56 M |
+| H9 | 3,905 | 0.077 G | 0.010 G | 1.78 M |
+| **total** | **9,784** | **1.733 G** | 0.399 G | **10.61 M** |
+
+67 keys have more than 5 M hints (the largest has 12.0 M). The k6-pool keys carry 90 % of the hints.
+
+**F8 validated** (first F8 keys through Lean). The three keys of `data/keys_f8three.json.gz` are
+about the 10th, 38th and 84th percentile of the 192 F8 keys. They went through `gen_k7_core.py run`,
+`replay_k7.py gen` (packed O5k, 14-bit words, seeds 2, 1 round), `gen_lean_glue7.py keys` and
+`gen_k7_core.py final`. Every module was compiled with `measure.py` into scratch.
+
+- **Result.** Each `K7….refuted : Refuted (winOf ds) (boundsOf syms)` (8 directions, 7 counts),
+  `allRefutedK7_0` and `allRefutedK7 : AllRefutedK7` depend on **`propext`, `Classical.choice`,
+  `Quot.sound`** only. So do the three `sat` and the three `unsat`.
+- **Keys.** The three `(ds, syms)` pairs are verbatim entries of `dirKeys7B234` and of the B234
+  `dirKeysK7`, so the statements are exactly the ones the glue `allRefuted7B234_of_reuse` merges.
+- **Cuts.** One key needed 5 lazy cycle cuts. These are the first cuts on the k7 path, and they
+  pass through unchanged.
+- **Driver.** No change was needed.
+- **Data.** `data/f8three_runs.jsonl`; core JSONs in
+  `milestones/10-window-aggregate/data/lean_core_direction_k7/`.
+
+| module | core / literals | hints (8 × 5 seeds/rounds) | Cnf+Sat CPU, RSS, `.olean` | replay CPU, RSS, `.olean` |
+|---|---|---|---|---|
+| `K701231450A5263633` | 1,161 / 3,307 | 5,455 (2,719) | 10.3 s, 1.24 GB, 52 kB | 1.9 s, 0.65 GB, 48 kB |
+| `K701203104A6325635` | 2,805 / 10,677 | 227,042 (216,171) | 17.1 s, 1.41 GB, 77 kB | 42.5 s, 1.38 GB, 663 kB |
+| `K701234125A6334266` | 3,283 / 13,012 | 576,056 (457,879) | 19.4 s, 1.34 GB, 84 kB | 95.3 s, 1.42 GB, 1,599 kB |
+
+So F8 replays cost about 0.17–0.19 ms and 2.8–2.9 B per hint, like the packed k6 windows of
+milestone 26.
+
+**Budget of the certificates.** The unit costs are measured:
+
+| item | unit cost |
+|---|---|
+| replay `.olean` | 37 kB per window, plus 2.8 B/hint (k6), 2.9 (F8) or 3.6 (H9) |
+| replay CPU | 1 s per window, plus 0.22 ms/hint |
+| Cnf+Sat `.olean` | 41 kB per window, plus 3.5 B per core literal (about 3.6 literals per core clause) |
+| Cnf+Sat CPU | 6 s per window, plus 1.2 ms per core literal |
+
+| | CPU | `.olean` |
+|---|---|---|
+| replays (k6 / F8 / H9) | 97 / 5 / 6 h = **109 h** | 4.60 / 0.26 / 0.42 GB = **5.28 GB** |
+| Cnf+Sat modules (k6 / F8 / H9) | 19 / 1 / 9 h = **29 h** | 0.34 / 0.02 / 0.18 GB = **0.53 GB** |
+| chunk modules `LocalWindowDirUnsatK7_<c>` (25) and `LocalWindowDirUnsatK7` | minutes | about 0.02 GB |
+| `.ilean` | — | 0.05 GB (none with `guarded_lake_build.py --no-ilean`) |
+| **total for the certificates** | **about 140 CPU-hours** (plus the solver time of the cores and proofs) | **about 5.9 GB** |
+
+- **Proof sizes.** With `--seeds 8 --rounds 5`, hints fall by about 18 % (−5 % to −50 % on the
+  three F8 keys), so the replays take about 4.4 GB and 90 h.
+- **Core JSONs.** About 0.07 GB, if kept on this disk.
+- **Transient.** One batch of `replay_k7.py gen --budget-hints 50e6`: replay sources at about
+  5 B/hint (0.25 GB), plus a raw CaDiCaL proof of at most `--fsize-mb` (0.7 GB). So **at least
+  1 GB** must be free besides the `.olean` files.
+
+**Rest of the chain (B234).** These figures are measured on the scratch compile. The 792 shards
+take 0.167 GB without `.ilean`; this machine is building them now. The non-shard modules take
+about 0.04 GB: Sequence 3.8 MB, bridge 4.5 MB, key, reuse and glue modules 4.5 MB, aggregate,
+`UpperBound234`, and `LocalWindowDirKeysK7` 1.6 MB. The data module (20.9 MB) is already built.
+`UpperBound234` maps 11.4 GB of oleans when it runs.
+
+**Disk still missing on this machine.**
+
+- **Free space.** About 0.43 GB on 31 October, after the scratch of this run was deleted. The
+  shards use about 0.17 GB of it. The rule of this run keeps 0.25 GB free.
+- **What is missing.** Once the shards are built, nothing is left for certificates. They need
+  about **5.9 GB** of `.olean`, **≥ 1 GB** of transient space, 0.07 GB of core JSONs and 0.04 GB
+  for the remaining chain modules. So **about 7.0 GB of free disk is still missing** (6.0 GB with
+  the 8 × 5 proofs).
+- **Where it could come from.** Deleting the 219 window oleans that the chain does not need
+  (`unneeded_oleans.txt`, 0.28 GB) does not change the conclusion. Re-replaying the old Q/R
+  windows with the packed encoding would free about 17.9 GB (see "Disk on this machine" below).
+  That replaces existing oleans, so it is the owner's decision.
+
 ## Per-key measurements
 
 The five keys, smallest first. All modules were compiled by `../../26-replay-efficiency/scripts/measure.py`.
@@ -328,6 +416,8 @@ Hints are counted from the replay headers.
 | `data/keys_h9five.json.gz` | the five validation keys, in the key-file format |
 | `unneeded_oleans.txt` | the 219 window oleans (with their `.ilean`, `.hash`, `.trace` files) that the 234 chain does not import; nothing was deleted |
 | `data/h9five_runs.jsonl` | per key: oracle time, key-set estimates, variables, clauses, cuts, core, literals, hints (seeds 2 / 1 round and 8 / 5), Cnf+Sat and replay bytes, CPU, RSS, axioms |
-| `milestones/10-window-aggregate/data/lean_core_direction_k7/*.json` | the five core JSONs (CNF regenerated from them by SHA256) |
+| `milestones/10-window-aggregate/data/lean_core_direction_k7/*.json` | the core JSONs of the five H9 and three F8 validation keys (CNF regenerated from them by SHA256) |
+| `data/keys_f8three.json.gz`, `data/f8three_runs.jsonl` | the three F8 validation keys of the final set and their measurements (31 October) |
+| `PROGRESS-B234.md` | the production shard build of the B234 chain on this machine |
 | `work/final_lean/LocalWindowTagsSplit.lean` | `pwL`, `ctrOKL`, `ctrOK_of_ctrOKL`, `ckAll_append`, `checkAll_of_parts` |
 | `milestones/10-window-aggregate/scripts/gen_lean_sat.py`, `gen_lean_cnfsat_packed.py` | `uncounted_centres` (H9 alpha padding); `--part-lits` |

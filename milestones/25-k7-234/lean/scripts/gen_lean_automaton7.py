@@ -328,6 +328,9 @@ def main():
     ap.add_argument('--summary', default=None)
     ap.add_argument('--shards', default='all', help="'all', 'none' or a list i_t0,i_t0,...")
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--write', choices=['all', 'shards'], default='all',
+                    help="'shards': write only the shard modules selected by --shards (the summary "
+                         "is still written)")
     ap.add_argument('--noncomputable', action='store_true',
                     help='write the key lists of LocalWindowDirKeys7<T> as `noncomputable def` (same '
                          'values; the kernel checks only unfold them, and the .olean is about 15 times '
@@ -692,6 +695,8 @@ end Snake9.WindowAutomaton
 #print axioms Snake9.WindowAutomaton.stepOK7{T}
 '''
     out[os.path.join(a.out_stronger, f'WindowAutomaton7{T}Sequence.lean')] = seq
+    if a.write == 'shards':
+        out = {p: t for p, t in out.items() if os.path.basename(p).startswith(f'WindowAutomaton7{T}Shard')}
     for p, t in out.items():
         os.makedirs(os.path.dirname(p), exist_ok=True)
         if not (os.path.exists(p) and open(p).read() == t):

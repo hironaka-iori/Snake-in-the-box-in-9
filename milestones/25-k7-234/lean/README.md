@@ -63,6 +63,8 @@ Everything else is the plan:
 | `work/final_lean/LocalWindowDirUnsatReuse7L417d.lean` (generated, `reuse`) | imports exactly `LocalWindowSat.W` and `LocalWindowUnsat.W` of those 1,383 windows (387 `Q`, 361 `R`, 635 `K`); **`allRefutedReuse7L417d`**, one `refine ⟨Tags.refuted_of_sat W.sat W.unsat, ?_⟩` per key and one theorem per chunk |
 | `work/final_lean/LocalWindowDirGlue7L417dReuse.lean` (generated, `reuse`) | **`allRefuted7L417d_of_reuse : AllRefutedReuse7L417d → AllRefutedK7 → AllRefuted7L417d`**: 111 kernel merges against the sources `dirKeysReuse7L417d :: dirChunksK7`; imports key lists only |
 | `work/spectral/stronger/UpperBound234.lean` (generated, `final --reuse`) | **`upper_bound_234`**, **`verified_interval_191_234`** from `upper_234_of_refuted7L417d` and `allRefuted7L417d_of_reuse allRefutedReuse7L417d allRefutedK7` (before 29 October, second run: the old glue applied to `allRefuted237`, `allRefuted236`, `allRefutedK6`, `allRefutedK7`; `final` without `--reuse` still writes that form) |
+| B234 (final key set, generated, committed): `LocalWindowDirKeys7B234{,_P0..P2}`, `LocalWindowDirKeysK7{,_P0..P2}`, `LocalWindowDirKeysReuse7B234`, `LocalWindowDirUnsatReuse7B234`, `LocalWindowDirGlue7B234Reuse` (work/final_lean); `WindowAutomaton7B234Sequence`, `DirectionWindowBridge7B234`, `AggregateDirection7B234` (work/spectral/stronger); `data/auto7_B234.json` | the chain of `../data/keys_best234.json.gz`; the data module and the shards are regenerated (`data/shards7_B234.sha256`) |
+| `scripts/shard_build7.py`, `scripts/build_shards7.sh` | the production build of the data module and the shards in work/final_lean on a small disk: `prepare` (generate, check against the manifest, place with a fixed old mtime; `--restore` places all sources, e.g. before `chain_audit.py`), `stale` (staleness simulation with `guarded_lake_build.py`), `sweep` (deletes built sources, pauses below 250 MB free), `status`; the driver runs batches of `guarded_lake_build.py --direct --no-ilean --trust-mtime` |
 | toy: `data/toy_keys7.json`, `data/auto7_Toy.json`, `LocalWindowDirKeys7Toy`, `WindowAutomaton7Toy{Data,Sequence}`, `DirectionWindowBridge7Toy`, `AggregateDirection7Toy` | 5 k6 keys, 1 artificial F8 key and 2 H9 keys. `upper_254_of_refuted7Toy : AllRefuted7Toy → m ≤ 254` (zero potential, λ = 1) |
 
 ## How to compile
@@ -291,7 +293,89 @@ the same replay oleans, so the time difference is not a gain from the design. Th
 `UpperBound234.lean` is now the `--reuse` form, and the three `reuse` modules are committed next
 to the old glue. The scratch oleans (45 MB) were deleted.
 
+## Retarget to the final key set (B234, 31 October)
+
+The chain was regenerated for the final key set `../data/keys_best234.json.gz` under the tag `B234`
+and composed down to `upper_bound_234` with scratch stubs, as on 29 October. Rules of this run: at
+most 3 `lean` processes at a time, `nice -n 10`, at most 2.5 GB RSS for the production shards and
+4 GB anonymous RSS for one scratch test at a time, scratch oleans in a directory listed first in
+`LEAN_PATH`. No existing `.olean` was touched.
+
+**Generator dry run** (`gen_lean_automaton7.py --keys ../data/keys_best234.json.gz --tag B234 --lam
+6423/1544 --noncomputable`, 17 s):
+
+- 7,262 k6/F8 keys (192 F8) and 3,905 H9 keys; 73 window shapes and 268 exclusion rows.
+- 3,298,682 of the 6,158,592 states are live. Bellman-Ford took 22 rounds and found a potential of
+  **range 8,152 (13 bits)**, so the bound is **234**.
+- The Python re-check passed on all **44,649,358** allowed transitions.
+- The output matches the partial run of 29 October byte for byte (data module sha256 `6744fe49…`,
+  keys, Sequence; `data/auto7_B234.json` differs only in its `seconds` field).
+- The L417d outputs regenerate byte for byte after the generator changes of this run
+  (`LocalWindowDirGlue7L417d`, `…L417dReuse`, `LocalWindowDirKeysReuse7L417d`,
+  `LocalWindowDirUnsatReuse7L417d`, `UpperBound234`). The 235–237 chains were not touched.
+
+**Generator changes** (all optional, defaults unchanged):
+
+- `gen_lean_automaton7.py --noncomputable`: the chain's key lists as `noncomputable def`.
+- `gen_lean_automaton7.py --write shards`: write only the selected shards (no 22 MB data module).
+- `shard_build7.py` and `build_shards7.sh`: the production shard build on a small disk. See
+  `../certify/PROGRESS-B234.md`.
+- `work/guarded_lake_build.py --min-disk-mb` (start nothing below that much free disk) and
+  `--no-ilean` (with `--direct`: no `.ilean`; on a shard it is 93 kB against 217 kB of `.olean`).
+
+**Compiled.** Every module was compiled for real except the 792 shards and
+`LocalWindowDirUnsatK7`, which were `sorry` stubs (scratch only, deleted). Peak RSS is anonymous,
+with the total in brackets where mapped oleans dominate. Bridge, reuse and final module ran next to
+two production shards, so their times are upper bounds.
+
+| module | time | memory | `.olean` | axioms |
+|---|---|---|---|---|
+| `LocalWindowDirKeys7B234_P0…P2` (11,167 keys, `noncomputable`) | 21–27 s each | 0.51–0.65 GB | 0.53–0.60 MB | — |
+| `WindowAutomaton7B234Data` | 74 s | 0.40 GB | 20.9 MB | — |
+| `WindowAutomaton7B234Sequence` | 203 s | 1.70 GB | 3.83 MB | `stepOK7B234`: `sorryAx` only through the stubs |
+| `DirectionWindowBridge7B234` | 496 s | 1.18 GB | 4.52 MB | **`windows7B234`**, `cover7B234`: the standard three; `coverH7B234`: `propext`, `Quot.sound` |
+| `AggregateDirection7B234` | 2 s | 0.21 GB (2.65 GB) | 68 kB | `upper_234_of_refuted7B234`: `sorryAx` only through the stubs |
+| `LocalWindowDirKeysK7_P0…P2` (`keys --noncomputable`: 5,879 + 3,905 = 9,784 new keys, 25 chunks) | 14–27 s each | 0.38–0.67 GB | 0.36–0.63 MB | — |
+| `LocalWindowDirKeysReuse7B234` (1,383 reused keys: 387 `Q`, 361 `R`, 635 `K`) | 7 s | 0.22 GB | 0.22 MB | — |
+| `LocalWindowDirUnsatReuse7B234` (2,766 window imports) | 1,238 s (I/O bound) | 0.21 GB (8.79 GB) | 1.52 MB | **`allRefutedReuse7B234`: the standard three** |
+| `LocalWindowDirGlue7B234Reuse` (21 + 10 kernel merges) | 45 s | 0.47 GB | 0.29 MB | **`allRefuted7B234_of_reuse`: `propext`, `Quot.sound`** |
+| `UpperBound234` (`final --reuse --tag B234 --bound 234`) | 212 s | 0.35 GB (11.43 GB) | 41 kB | **`upper_bound_234`, `verified_interval_191_234`: `sorryAx` only through the stubs** |
+
+No real module printed `declaration uses 'sorry'`, and no generated source contains `sorry`,
+`native_decide` or `axiom`. So once the shards and `LocalWindowDirUnsatK7` exist, the B234 chain
+needs no other change.
+
+**Committed:** the keys (`LocalWindowDirKeys7B234*`, `LocalWindowDirKeysK7*`), the reuse modules,
+`LocalWindowDirGlue7B234Reuse`, `WindowAutomaton7B234Sequence`, `DirectionWindowBridge7B234`,
+`AggregateDirection7B234`, and the manifest `data/shards7_B234.sha256` (sha256 of the data module
+and the 792 shards, which are regenerated by `shard_build7.py prepare`).
+
+**Not committed:**
+
+- The data module (22.6 MB of source) and the shards. They are regenerated byte for byte.
+- The B234 form of `UpperBound234.lean` (sha256 `12913755…`). The committed file is still the
+  L417d form, as asked. `gen_lean_glue7.py final --reuse --keys ../data/keys_best234.json.gz --tag
+  B234 --bound 234` replaces it. The L417d form no longer composes with the committed
+  `LocalWindowDirKeysK7`, which now holds the new keys of B234.
+
+**Production shard build.** The build has started: `../certify/PROGRESS-B234.md`. The framework
+modules `WindowAutomaton7Defs` (13 s), `DirectionWindowBridge7` (46 s) and
+`AggregateDirection7Conditional` are now compiled into `work/spectral/.verification/chain`, by the
+invocation of `chain_audit.py`, with the same axioms as on 25 October. The data module and the
+shards are compiled into `work/final_lean/.lake/build/lib/lean`.
+
+| shard | `decide`s | time | memory | `.olean` |
+|---|---|---|---|---|
+| (0, 1) … (0, 6) | 146 | 611–656 s | 1.17–1.25 GB | 217,176 B (+ 92,895 B `.ilean`, now omitted) |
+
+The disk model of `../certify/README.md` (23.7 kB + 1.33 kB per `decide`) predicts 218 kB for these
+shards and **167 MB** for all 792 (111,366 `decide`s), without `.ilean`.
+
 ## What remains for a real k7 chain
+
+This list was written for L417d. For the final set B234 the figures are 9,784 new keys and
+1.733 G hints (`../certify/README.md`, "Final key set"), and the shard build has started
+(`../certify/PROGRESS-B234.md`).
 
 1. **Certificates** for the 36,841 new keys (`AllRefutedK7`): 19,553 k6/F8 keys and 17,288 H9 keys,
    about 34 G hints. The disk requirement (`../README.md`) is the blocker. They must end in a

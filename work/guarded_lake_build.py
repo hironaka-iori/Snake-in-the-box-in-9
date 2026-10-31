@@ -10,7 +10,9 @@ so lake starts a single Lean process).  It
   builds at a time;
 * starts a build only when at least --min-free-gb of memory is available;
 * kills a build whose process group exceeds --rss-cap-gb, and stops launching
-  new builds (and kills the newest one) while available memory is below --floor-gb.
+  new builds (and kills the newest one) while available memory is below --floor-gb;
+* with --min-disk-mb, starts no build while the file system of the root has less free
+  space than that (it waits; builds already running finish).
 
 Every finished module is logged to --log as one JSON line (module, status, seconds,
 peak RSS).  Rerunning skips nothing explicitly: lake itself makes up-to-date modules
@@ -27,7 +29,7 @@ project built this way, and audit it with `lean` (e.g. work/spectral/chain_audit
 
   python3 work/guarded_lake_build.py UpperBound241Core LocalWindowRefuted --jobs 3
 """
-import argparse, json, os, re, signal, subprocess, sys, threading, time
+import argparse, json, os, re, shutil, signal, subprocess, sys, threading, time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent / 'final_lean'   # overridden by --root
@@ -120,12 +122,18 @@ def main():
     ap.add_argument('--min-free-gb', type=float, default=5.0)
     ap.add_argument('--rss-cap-gb', type=float, default=6.0)
     ap.add_argument('--floor-gb', type=float, default=1.5)
+    ap.add_argument('--min-disk-mb', type=float, default=0,
+                    help='start a build only while the file system of --root has at least this '
+                         'much free space (default 0: no check); the driver waits otherwise')
     ap.add_argument('--root', default=str(ROOT), help='Lean project directory')
     ap.add_argument('--log', default=None, help='default: ROOT/.lake/guarded_build.jsonl')
     ap.add_argument('--lake', default=os.environ.get('LAKE', 'lake'))
     ap.add_argument('--direct', action='store_true',
                     help='compile each module with `lean -o` instead of `lake build` (see above)')
     ap.add_argument('--lean', default=os.environ.get('LEAN', 'lean'))
+    ap.add_argument('--no-ilean', action='store_true',
+                    help='with --direct: write no .ilean (only the editor uses it; it is about 40 %% '
+                         'of the .olean size for small generated modules)')
     ap.add_argument('--trust-mtime', action='store_true',
                     help='skip modules whose .olean is newer than their source and imports')
     a = ap.parse_args()
@@ -139,6 +147,7 @@ def main():
     heavy = re.compile(a.heavy)
     deps = closure(a.targets, a.trust_mtime)
     done, failed, running = set(), {}, {}   # running: module -> (Popen, start, peak)
+    disk_wait = False
     lock = threading.Lock()
     log = open(a.log, 'a')
     logdir = Path(a.log).parent / 'guarded_logs'
@@ -198,13 +207,21 @@ def main():
         n_heavy = sum(1 for m in running if heavy.search(m))
         n_light = len(running) - n_heavy
         ready = [m for m in ready if (n_heavy < a.heavy_jobs if heavy.search(m) else n_light < a.jobs)]
+        if ready and a.min_disk_mb and shutil.disk_usage(ROOT).free / 2**20 < a.min_disk_mb:
+            if not disk_wait:
+                print(f'free disk below {a.min_disk_mb:.0f} MB: no new builds until it rises',
+                      flush=True)
+            disk_wait = True
+            time.sleep(5)
+            continue
+        disk_wait = False
         if ready and available_gb() >= a.min_free_gb:
             # prefer heavy modules so the slow kernel checks start as early as possible
             m = next((x for x in ready if heavy.search(x)), ready[0])
             if a.direct:
                 olean_path(m).parent.mkdir(parents=True, exist_ok=True)
-                cmd = [a.lean, f'--root={ROOT}', '-o', str(olean_path(m)), '-i', str(ilean_path(m)),
-                       str(module_path(m))]
+                cmd = [a.lean, f'--root={ROOT}', '-o', str(olean_path(m))] + (
+                    [] if a.no_ilean else ['-i', str(ilean_path(m))]) + [str(module_path(m))]
                 lp = [str(ROOT / '.lake' / 'build' / 'lib' / 'lean')] + (
                     [os.environ['LEAN_PATH']] if os.environ.get('LEAN_PATH') else [])
                 env = dict(os.environ, LEAN_PATH=os.pathsep.join(lp))
