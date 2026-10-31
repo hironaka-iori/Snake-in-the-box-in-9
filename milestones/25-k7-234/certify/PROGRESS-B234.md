@@ -63,3 +63,10 @@ gives 159 CPU-hours for all 792, mean 12 min). With 3 jobs, about 53 hours of wa
 is around 2 November 13:00 UTC if the disk lasts. Disk: about 167 MB of shard `.olean` in all
 (211 kB on average), against about 175 MB above the 254 MB start threshold. It should just fit;
 otherwise the driver waits at the last batches (`status.json` says `paused`/how many are built).
+
+| time (UTC) | event | shards built | free disk |
+|---|---|---|---|
+| 31 Oct 08:02 | 33 minutes stable at 3 jobs, no failure: (100, 1…6) 274–289 s, (101, 1…6) 705–723 s, at most 1.25 GB; 18 shard `.olean` files, 3.64 MB (202 kB each); sources of built shards deleted by the sweeper | 18 | 426 MB |
+
+Remaining disk check at 08:02: 774 shards × about 211 kB ≈ 163 MB, against 426 − 254 = 172 MB. The
+build should end at about 263 MB free, with about 9 MB to spare above the start threshold.
