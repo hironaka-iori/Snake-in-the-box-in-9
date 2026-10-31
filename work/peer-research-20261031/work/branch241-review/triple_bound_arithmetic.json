@@ -1,0 +1,53 @@
+{
+  "status": "CONDITIONAL arithmetic only; triple inequalities are unproved until both shape queries are certified",
+  "canonical_three_centre_shapes": {
+    "0120": 504,
+    "0123": 3024
+  },
+  "conditional_implications": [
+    {
+      "assumed_triple_threshold": 255,
+      "excluded_vertices_from": 236,
+      "conditional_max_edges": 234,
+      "critical_gap": "8/7",
+      "minimum_sufficient_integer_T_at_critical_v": 255,
+      "all_v_through_512_checked": true,
+      "scaled_gap_increments_by_remainder": [
+        757,
+        946
+      ]
+    },
+    {
+      "assumed_triple_threshold": 267,
+      "excluded_vertices_from": 235,
+      "conditional_max_edges": 233,
+      "critical_gap": "2/21",
+      "minimum_sufficient_integer_T_at_critical_v": 267,
+      "all_v_through_512_checked": true,
+      "scaled_gap_increments_by_remainder": [
+        757,
+        958
+      ]
+    },
+    {
+      "assumed_triple_threshold": 268,
+      "excluded_vertices_from": 235,
+      "conditional_max_edges": 233,
+      "critical_gap": "79/21",
+      "minimum_sufficient_integer_T_at_critical_v": 267,
+      "all_v_through_512_checked": true,
+      "scaled_gap_increments_by_remainder": [
+        757,
+        959
+      ]
+    }
+  ],
+  "endpoint_sharpness_witness": {
+    "source": "C:\\Users\\morga\\Documents\\Codex\\2026-10-20\\referenced-chatgpt-conversation-this-is-an\\work\\branch241-audit\\repo\\work\\spectral\\stronger\\EndpointFourWitness.lean",
+    "vertices": 121,
+    "all_pair_induced_path_check": true,
+    "initial_endpoint_alpha": 4
+  },
+  "endpoint_theorem_source": "work/spectral/stronger/UpperBound247.lean: endpoint_alpha_ge_four; premise 1<=m and endpoint index",
+  "important_correction": "267, rather than 268, suffices for max_edges233 when the existing single-centre22 bound is included."
+}

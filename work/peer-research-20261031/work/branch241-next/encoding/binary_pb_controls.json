@@ -1,0 +1,47 @@
+{
+  "scalar_tests": {
+    "complete_assignments_checked": 820,
+    "exact_agreement": true
+  },
+  "bank_controls": [
+    {
+      "bonus": false,
+      "score_scale21": 2412,
+      "objective_variables": 3026,
+      "objective_clauses": 15794,
+      "full_variables": 12658,
+      "full_clauses_with_exact_cap": 60708,
+      "PB_build_seconds": 0.017261700006201863,
+      "exact_cap_control": {
+        "contradiction": false,
+        "passes": 3,
+        "assigned_variables": 12658
+      },
+      "exact_minus_one_control": {
+        "contradiction": true,
+        "passes": 2,
+        "assigned_variables": 12659
+      }
+    },
+    {
+      "bonus": true,
+      "score_scale21": 2675,
+      "objective_variables": 4084,
+      "objective_clauses": 20992,
+      "full_variables": 18215,
+      "full_clauses_with_exact_cap": 86895,
+      "PB_build_seconds": 0.037042299984022975,
+      "exact_cap_control": {
+        "contradiction": false,
+        "passes": 3,
+        "assigned_variables": 18215
+      },
+      "exact_minus_one_control": {
+        "contradiction": true,
+        "passes": 2,
+        "assigned_variables": 18211
+      }
+    }
+  ],
+  "status": "Exact-cap controls pass; minus-one controls contradict by unit propagation with all bank base variables fixed. No free-window UNSAT or Lean/LRAT claim."
+}

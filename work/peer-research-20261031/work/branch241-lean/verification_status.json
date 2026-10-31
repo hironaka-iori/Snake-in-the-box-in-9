@@ -1,0 +1,145 @@
+{
+  "execution": "Remote official Lean4web, exact lean-v4.19.0; not local binary compilation",
+  "local_block": "Windows application control blocked official lean.exe; no bypass attempted",
+  "results": [
+    {
+      "source": "checked/ScoreAlgebra.lean",
+      "source_sha256": "24a2a60b2ffe0b55a65a5c69dac689cf5d55652f895ae574e0d1e4771661c3f3",
+      "log": "algebra_remote.json",
+      "status": "PASS on official remote Lean 4.19.0",
+      "audits": [
+        "'Q9Score.scalar_share' does not depend on any axioms",
+        "'Q9Score.support_r6' does not depend on any axioms",
+        "'Q9Score.scoreGap23' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.incidenceIdentity' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.conditional234' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.conditional233' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.conditional233_remainder23' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.margin234' does not depend on any axioms",
+        "'Q9Score.margin233' does not depend on any axioms"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "seconds": 3.375
+    },
+    {
+      "source": "checked/ScoreCharges.lean",
+      "source_sha256": "88d36c68dbe7750fc65b072abc786a38c6ecf1dda354da6fe09984d73261f951",
+      "log": "charges_remote.json",
+      "status": "PASS on official remote Lean 4.19.0",
+      "audits": [
+        "'Q9Charge.share_exact' does not depend on any axioms",
+        "'Q9Charge.share_lower_table' does not depend on any axioms",
+        "'Q9Charge.share_lower' does not depend on any axioms",
+        "'Q9Charge.support_identity' depends on axioms: [propext, Quot.sound]",
+        "'Q9Charge.total_lower' depends on axioms: [propext, Quot.sound]",
+        "'Q9Charge.scaled_score_lower' depends on axioms: [propext, Quot.sound]",
+        "'Q9Charge.global_fibre_budget' does not depend on any axioms"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "seconds": 3.446
+    },
+    {
+      "source": "checked/NegativeControlsStandalone.lean",
+      "source_sha256": "15bcd0ef398ee0e908c98a422baf87d09f4f1a382ab773e2d869e6e3d4e122e3",
+      "log": "negative_controls_remote.json",
+      "status": "PASS on official remote Lean 4.19.0",
+      "audits": [
+        "'Q9Score.scalar_share' does not depend on any axioms",
+        "'Q9Score.support_r6' does not depend on any axioms",
+        "'Q9Score.scoreGap23' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.incidenceIdentity' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.conditional234' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.conditional233' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.conditional233_remainder23' depends on axioms: [propext, Quot.sound]",
+        "'Q9Score.margin234' does not depend on any axioms",
+        "'Q9Score.margin233' does not depend on any axioms",
+        "'Q9ScoreNegativeControls.missingSATPremiseFalse' depends on axioms: [propext, Quot.sound]",
+        "'Q9ScoreNegativeControls.missingSingletonFalse' depends on axioms: [propext, Quot.sound]"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "seconds": 6.807
+    },
+    {
+      "source": "PeerLratSmokeStandalone.lean",
+      "source_sha256": "35c5d39044b528e9f5d569881b1e38214209a04a09864b84079999ed1c438845",
+      "log": "lrat_smoke_remote_v1.json",
+      "status": "PASS on official remote Lean 4.19.0",
+      "audits": [
+        "'PeerLratSmoke.checked' depends on axioms: [propext]",
+        "'PeerLratSmoke.unsat' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "seconds": 4.843
+    },
+    {
+      "source": "checked/FiniteGeometry.lean",
+      "source_sha256": "2343ab32461e66a38e7d97ae88f2c59728c803e62ad7164f9f7ca71b7ef2a2cd",
+      "log": "finite_geometry_remote.json",
+      "status": "PASS on official remote Lean 4.19.0",
+      "audits": [
+        "'Q9FiniteGeometry.threeCentreDirections' depends on axioms: [propext]",
+        "'Q9FiniteGeometry.lastDirectionTable' depends on axioms: [propext]",
+        "'Q9FiniteGeometry.cycleInjective' does not depend on any axioms",
+        "'Q9FiniteGeometry.cycleInQ9' does not depend on any axioms",
+        "'Q9FiniteGeometry.cycleAdjacency' depends on axioms: [propext]"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "seconds": 4.625
+    },
+    {
+      "source": "PeerLratFormatControlsStandalone.lean",
+      "source_sha256": "e6c134465c1efec28c0c4ab9d0caaa86f70276e8b5a27e37ad8cb22c24e64f05",
+      "log": "lrat_controls_remote.json",
+      "status": "PASS on official remote Lean 4.19.0",
+      "audits": [
+        "'PeerLratSmoke.checked' depends on axioms: [propext]",
+        "'PeerLratSmoke.unsat' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PeerLratFormatControls.Variable4007.checked' depends on axioms: [propext]",
+        "'PeerLratFormatControls.Variable4007.unsat' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PeerLratFormatControls.ClauseID70000.checked' depends on axioms: [propext]",
+        "'PeerLratFormatControls.ClauseID70000.unsat' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PeerLratFormatControls.LearnedClause300.checked' depends on axioms: [propext]",
+        "'PeerLratFormatControls.LearnedClause300.unsat' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PeerLratFormatControls.RejectControls.false_unsat_rejected' depends on axioms: [propext]",
+        "'PeerLratFormatControls.RejectControls.missing_hint_rejected' depends on axioms: [propext]",
+        "'PeerLratFormatControls.RejectControls.actual_sat_assignment' does not depend on any axioms",
+        "'PeerLratFormatControls.RejectControls.not_unsat' does not depend on any axioms"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "seconds": 5.524
+    },
+    {
+      "source": "PeerLratInfrastructureStandalone.lean",
+      "source_sha256": "4ff34bad8b03494ff836508588fccf9a8511bc2b6340f4361aa89744e54ce742",
+      "log": "lrat_infrastructure_remote.json",
+      "status": "PASS on official remote Lean 4.19.0",
+      "audits": [
+        "'PeerLratSmoke.checked' depends on axioms: [propext]",
+        "'PeerLratSmoke.unsat' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'Snake9.PeerLratFast2F_5000W18.check2f_eq' depends on axioms: [propext]",
+        "'Snake9.PeerLratFast2F_5000W18.replay_true2f' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'Snake9.PeerLratFast2F_5000W18.cpz_true2f' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'Snake9.PeerLratFast2F_5000W18.final_false2f' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PeerLratInfrastructure.packedProofExact' depends on axioms: [propext]",
+        "'PeerLratInfrastructure.packedCheckpointExact' depends on axioms: [propext]",
+        "'PeerLratInfrastructure.checkedForced' depends on axioms: [propext]",
+        "'PeerLratInfrastructure.unsatForced' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "seconds": 5.081
+    }
+  ],
+  "false_theorem_negative_control": "correctly rejected with error and sorryAx, never accepted as verified",
+  "unique_math_theorems": 23,
+  "unique_LRAT_soundness_and_control_theorems": 20,
+  "full_certificate_Lean_replay": "NOT DONE",
+  "snake_geometry_bridge": "NOT DONE in Lean for new score",
+  "new_numeric_bound": "NONE"
+}

@@ -1,0 +1,1680 @@
+{
+  "endpoint": "wss://live.lean-lang.org/websocket/lean-v4.19.0",
+  "source_file": "work/branch241-lean/checked/Smoke.lean",
+  "source_sha256": "6d1f33be859989eb955d1e0934bd0c56bcf427f5f7d7fe2b2314396744b9f63b",
+  "source_bytes": 65,
+  "reason": "end-sentinel-diagnostic-received",
+  "seconds": 3.992,
+  "messages": [
+    {
+      "result": {
+        "serverInfo": {
+          "version": "0.3.0",
+          "name": "Lean 4 Server"
+        },
+        "capabilities": {
+          "workspaceSymbolProvider": true,
+          "typeDefinitionProvider": true,
+          "textDocumentSync": {
+            "willSaveWaitUntil": false,
+            "willSave": false,
+            "save": {
+              "includeText": true
+            },
+            "openClose": true,
+            "change": 2
+          },
+          "semanticTokensProvider": {
+            "range": true,
+            "legend": {
+              "tokenTypes": [
+                "keyword",
+                "variable",
+                "property",
+                "function",
+                "namespace",
+                "type",
+                "class",
+                "enum",
+                "interface",
+                "struct",
+                "typeParameter",
+                "parameter",
+                "enumMember",
+                "event",
+                "method",
+                "macro",
+                "modifier",
+                "comment",
+                "string",
+                "number",
+                "regexp",
+                "operator",
+                "decorator",
+                "leanSorryLike"
+              ],
+              "tokenModifiers": [
+                "declaration",
+                "definition",
+                "readonly",
+                "static",
+                "deprecated",
+                "abstract",
+                "async",
+                "modification",
+                "documentation",
+                "defaultLibrary"
+              ]
+            },
+            "full": true
+          },
+          "renameProvider": {
+            "prepareProvider": true
+          },
+          "referencesProvider": true,
+          "inlayHintProvider": {
+            "workDoneProgress": false,
+            "resolveProvider": false
+          },
+          "hoverProvider": true,
+          "foldingRangeProvider": true,
+          "documentSymbolProvider": true,
+          "documentHighlightProvider": true,
+          "definitionProvider": true,
+          "declarationProvider": true,
+          "completionProvider": {
+            "triggerCharacters": [
+              "."
+            ],
+            "resolveProvider": true
+          },
+          "codeActionProvider": {
+            "workDoneProgress": false,
+            "resolveProvider": true,
+            "codeActionKinds": [
+              "quickfix",
+              "refactor"
+            ]
+          },
+          "callHierarchyProvider": true
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 1
+    },
+    {
+      "params": {
+        "registrations": [
+          {
+            "registerOptions": {
+              "watchers": [
+                {
+                  "kind": null,
+                  "globPattern": "**/*.lean"
+                },
+                {
+                  "kind": null,
+                  "globPattern": "**/*.ilean"
+                }
+              ]
+            },
+            "method": "workspace/didChangeWatchedFiles",
+            "id": "lean_watcher"
+          }
+        ]
+      },
+      "method": "client/registerCapability",
+      "jsonrpc": "2.0",
+      "id": "register_lean_watcher"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 0,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": []
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 0,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": []
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "method": "workspace/inlayHint/refresh",
+      "jsonrpc": "2.0",
+      "id": 0
+    },
+    {
+      "method": "workspace/inlayHint/refresh",
+      "jsonrpc": "2.0",
+      "id": 1
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 0,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": []
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 0,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 26
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 26
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 7
+              },
+              "end": {
+                "line": 2,
+                "character": 7
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 7
+              },
+              "end": {
+                "line": 2,
+                "character": 7
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 24
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": []
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 24
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 24
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 0,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": []
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": [
+          {
+            "source": "Lean 4",
+            "severity": 3,
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 5
+              }
+            },
+            "message": "\"4.19.0\"",
+            "fullRange": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 5
+              }
+            }
+          }
+        ]
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 5,
+                "character": 10
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 6,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 5,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 6,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": [
+          {
+            "source": "Lean 4",
+            "severity": 3,
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 5
+              }
+            },
+            "message": "\"4.19.0\"",
+            "fullRange": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 5
+              }
+            }
+          },
+          {
+            "source": "Lean 4",
+            "severity": 3,
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 5,
+                "character": 6
+              }
+            },
+            "message": "Nat : Type",
+            "fullRange": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 5,
+                "character": 6
+              }
+            }
+          }
+        ]
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": []
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": []
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "method": "workspace/inlayHint/refresh",
+      "jsonrpc": "2.0",
+      "id": 2
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 26
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 26
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 26
+              },
+              "end": {
+                "line": 2,
+                "character": 40
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 7
+              },
+              "end": {
+                "line": 2,
+                "character": 7
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 7
+              },
+              "end": {
+                "line": 2,
+                "character": 7
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": []
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 2,
+                "character": 0
+              },
+              "end": {
+                "line": 2,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 24
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 24
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": [
+          {
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 0
+              }
+            },
+            "kind": 1
+          },
+          {
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 6,
+                "character": 0
+              }
+            },
+            "kind": 1
+          }
+        ]
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": [
+          {
+            "source": "Lean 4",
+            "severity": 3,
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 5
+              }
+            },
+            "message": "\"4.19.0\"",
+            "fullRange": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 5
+              }
+            }
+          }
+        ]
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "version": 1,
+        "uri": "file:///lean-v4.19.0/Main.lean",
+        "diagnostics": [
+          {
+            "source": "Lean 4",
+            "severity": 3,
+            "range": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 5
+              }
+            },
+            "message": "\"4.19.0\"",
+            "fullRange": {
+              "start": {
+                "line": 4,
+                "character": 0
+              },
+              "end": {
+                "line": 4,
+                "character": 5
+              }
+            }
+          },
+          {
+            "source": "Lean 4",
+            "severity": 3,
+            "range": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 5,
+                "character": 6
+              }
+            },
+            "message": "Nat : Type",
+            "fullRange": {
+              "start": {
+                "line": 5,
+                "character": 0
+              },
+              "end": {
+                "line": 5,
+                "character": 6
+              }
+            }
+          }
+        ]
+      },
+      "method": "textDocument/publishDiagnostics",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": []
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "params": {
+        "textDocument": {
+          "version": 1,
+          "uri": "file:///lean-v4.19.0/Main.lean"
+        },
+        "processing": []
+      },
+      "method": "$/lean/fileProgress",
+      "jsonrpc": "2.0"
+    },
+    {
+      "method": "workspace/inlayHint/refresh",
+      "jsonrpc": "2.0",
+      "id": 3
+    },
+    {
+      "method": "workspace/semanticTokens/refresh",
+      "jsonrpc": "2.0",
+      "id": 4
+    },
+    {
+      "method": "workspace/inlayHint/refresh",
+      "jsonrpc": "2.0",
+      "id": 5
+    }
+  ]
+}
