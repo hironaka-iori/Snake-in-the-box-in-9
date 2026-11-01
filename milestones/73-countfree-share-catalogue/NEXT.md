@@ -31,6 +31,8 @@ needed for the saved Lean replay. Inspect script paths before using another host
 
 ## Next local certificate
 
+Update at milestone74: case7305 has completed all86 semantic shards, CNF/data/structure, and semantic composition, for92 checked modules. Its smaller selected proof has154,489 derived clauses and9,394,822 hints; simulation passed, while Lean refutation replay and final geometry/reversal remain pending. Read `cases/case7305/data/pending-checkpoint.json` and the case README. Resume the existing completion driver; do not bootstrap or regenerate this preserved case. The pipeline below records the procedure for a fresh case.
+
 After completing any active case, prioritize **case 7305**, shape **012310**,
 with share lower bound **12**. Its selected native certificate is
 `general5-cap11-certificate.json` in milestone72/critical-current. Do not substitute

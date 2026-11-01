@@ -2,6 +2,8 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
+Start with the [updated research handover](handoff/2026-11-02/START_HERE.md). It supersedes the 1 November continuation record and separates current evidence from the historical entries below. Milestone74 gives the exact five-count-state/six-count-edge graph interface, five new Lean audits, and six exact short-walk obstructions to dropping pending share rules while retaining the present boundary budget. The project interval is unchanged. Case7305 has 92 checked semantic/composition modules, with its smaller simulated refutation preserved for later Lean replay; its final local theorem remains pending.
+
 ## Active empty-square route
 
 Active research: [milestone 73](milestones/73-countfree-share-catalogue/README.md) checks three of the nine stronger count-free share cases: 012031, 012304 and 012314, each with share at least 16. The actual-snake shape coverage, canonical coordinate and reversal adapter, global share identity, and five-centre overlap are Lean-checked. The combined catalogue theorem now retains six explicit local certificate premises. The full target remains conditional 234; the contributor-checked interval remains **191 <= a(9) <= 235**. Complete graph interpretation and potential replay remain pending. Milestone 72 separately retains six unresolved count-certificate cases.

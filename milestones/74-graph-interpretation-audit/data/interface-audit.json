@@ -1,0 +1,1769 @@
+{
+  "status": "SOURCE_AND_INTERFACE_AUDIT_ONLY",
+  "contributor_commit": "cd0c90fddf12170d735ee34fcc501e99c60632a6",
+  "graph": {
+    "states": 1601856,
+    "edges": 4947008,
+    "base_shapes": 132,
+    "edge_shapes": 505,
+    "nonempty_history_prefixes": 74,
+    "state_count_symbols": 5,
+    "edge_count_symbols": 6,
+    "block_size": 7776,
+    "history_prefix_lengths": {
+      "0": 1,
+      "1": 31,
+      "2": 43
+    },
+    "history_pattern_modes": {
+      "share": 55,
+      "exclusion": 3
+    },
+    "history_count_caps": [
+      1,
+      2,
+      5
+    ],
+    "state_formula": "(132 + 74)*6^5",
+    "edge_start": "r < m-8",
+    "source_shape": "canon(d[r..r+7])",
+    "target_shape": "canon(d[r+1..r+8])",
+    "source_counts": "min(6,alpha[r+3..r+7])",
+    "target_counts": "min(6,alpha[r+4..r+8])",
+    "edge_counts": "min(6,alpha[r+3..r+8])",
+    "share_centres": "r+4 through r+8",
+    "history_initial": 0,
+    "history_update": "longest listed prefix that is a suffix of prefix[q_r] ++ [directionId_r]",
+    "source_metadata_sha256": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "source_arrays_sha256": {
+      "U": "e910280dc3ad25c32010127c7af2f7d837a162e1095a4aa85fdd0f996b08f46d",
+      "V": "21956ceeb6414238baae68543ac9677c791c07575deeb2664facdf6490374f94",
+      "weight": "acd19583f5de41d789206d369e37493228e8b8b85708db2427781f0d6766b5d4",
+      "direction": "e0e598fa564c6474be6ef98215886248bfca188f3eb47c59b2d9e96ea20b8705",
+      "count_code": "1917e3700ccdee418c22f29829b309775f9212f026e55e394038c1ddfa25210e",
+      "history": "23eb7524f277153fc0ca23ce4cdf005e28c8091f7993b44bfa34812a5adb57d7"
+    },
+    "shape_metadata_sha256": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "history_metadata_sha256": "59a9d5e5f4954b86a69a72c090a9a45030f4756da577457fd94439ace46e102c",
+    "comparison_tag": "countfree16-all-except012034x20-except012310x12",
+    "comparison_metadata_sha256": "c6cbabfc5e994f66e95362432a76bbde820e490ca04dfd4b0c17561737cf4950",
+    "comparison_arrays_sha256": {
+      "U": "e910280dc3ad25c32010127c7af2f7d837a162e1095a4aa85fdd0f996b08f46d",
+      "V": "21956ceeb6414238baae68543ac9677c791c07575deeb2664facdf6490374f94",
+      "weight": "669a8bd6f990bed9e14cd68c5915858b3cd2ec241c95869fd4775a5e98093e17",
+      "direction": "e0e598fa564c6474be6ef98215886248bfca188f3eb47c59b2d9e96ea20b8705",
+      "count_code": "1917e3700ccdee418c22f29829b309775f9212f026e55e394038c1ddfa25210e",
+      "history": "23eb7524f277153fc0ca23ce4cdf005e28c8091f7993b44bfa34812a5adb57d7"
+    },
+    "comparison_verification_sha256": "d53a27db330b662246270067724b53423fb109dc68f50826d93f3f692f26981c",
+    "conditional_mean": 496,
+    "conditional_potential_range": 600,
+    "caveat": "Metadata and historical Python receipts inspected; no array reconstruction, graph rebuild or full potential Lean replay performed in this audit."
+  },
+  "current_sources": [
+    {
+      "path": "milestones/70-proof-supported-share-model/scripts/build.py",
+      "sha256": "bffe9f3d541a807841d564a85bc3f5d2523ae73ee7b8218b79facdac9a4987db",
+      "declarations": [
+        {
+          "line": 16,
+          "name": "canon",
+          "kind": "def"
+        },
+        {
+          "line": 18,
+          "name": "encode",
+          "kind": "def"
+        }
+      ]
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/scripts/graph.py",
+      "sha256": "7818a248e26135990ba4ffee2a57e7619376ee35517ef8c856aec3853ea5912c",
+      "declarations": [
+        {
+          "line": 15,
+          "name": "canon",
+          "kind": "def"
+        }
+      ]
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/scripts/verify_graph.py",
+      "sha256": "7493aa37d3392601716e342e7c8a090723e4a895fab78069cde935a497fb98aa",
+      "declarations": [
+        {
+          "line": 16,
+          "name": "canon",
+          "kind": "def"
+        }
+      ]
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/critical-current/scripts/prepare.py",
+      "sha256": "3dcaa916b1c3f9920acbe5876464fa63e665ba1a93c5ce4c6f949a4a204b2709",
+      "declarations": []
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/critical-current/scripts/countfree_effect.py",
+      "sha256": "9412927b70c9e4e2939823727009171356a5c454091968bd6fd302f6ef18ae75",
+      "declarations": [
+        {
+          "line": 15,
+          "name": "canon",
+          "kind": "def"
+        },
+        {
+          "line": 34,
+          "name": "encode",
+          "kind": "def"
+        }
+      ]
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/critical-current/scripts/verify_countfree_model.py",
+      "sha256": "0e175b46ddd120034e1589bc681025857e30a8df2b5fdc6e632c8999871d23cd",
+      "declarations": [
+        {
+          "line": 17,
+          "name": "canon",
+          "kind": "def"
+        }
+      ]
+    },
+    {
+      "path": "milestones/59-extended-share-window/scripts/extend.py",
+      "sha256": "69d2081d2dc4b43f3867389e82aab6c91c78aebb906459019b4171d85ee807aa",
+      "declarations": []
+    },
+    {
+      "path": "milestones/67-critical-family-charge/scripts/build_full.py",
+      "sha256": "4c2fc3ad48097ebca229a55589a80afe79f080ab50fde96ecdbcf829741fda9d",
+      "declarations": []
+    },
+    {
+      "path": "work/spectral/stronger/WindowAutomatonDefs.lean",
+      "sha256": "ba1abcabf447b08c013fdd8861cd4bafc8eeaee269480ecaa185916bf39e4e35",
+      "declarations": [
+        {
+          "line": 20,
+          "name": "idx",
+          "kind": "def"
+        },
+        {
+          "line": 25,
+          "name": "canonGo",
+          "kind": "def"
+        },
+        {
+          "line": 29,
+          "name": "canon",
+          "kind": "def"
+        },
+        {
+          "line": 32,
+          "name": "seenAfter",
+          "kind": "def"
+        },
+        {
+          "line": 37,
+          "name": "isRGS",
+          "kind": "def"
+        },
+        {
+          "line": 42,
+          "name": "codeFrom",
+          "kind": "def"
+        },
+        {
+          "line": 46,
+          "name": "shapeCode",
+          "kind": "def"
+        },
+        {
+          "line": 49,
+          "name": "sym",
+          "kind": "def"
+        },
+        {
+          "line": 52,
+          "name": "symIdx",
+          "kind": "def"
+        },
+        {
+          "line": 59,
+          "name": "firsts",
+          "kind": "def"
+        },
+        {
+          "line": 64,
+          "name": "oddCount",
+          "kind": "def"
+        },
+        {
+          "line": 69,
+          "name": "blockOK",
+          "kind": "def"
+        },
+        {
+          "line": 73,
+          "name": "prefixes",
+          "kind": "def"
+        },
+        {
+          "line": 78,
+          "name": "blocks",
+          "kind": "def"
+        },
+        {
+          "line": 82,
+          "name": "inducedPattern",
+          "kind": "def"
+        },
+        {
+          "line": 86,
+          "name": "allBelow",
+          "kind": "def"
+        },
+        {
+          "line": 91,
+          "name": "allRGS",
+          "kind": "def"
+        },
+        {
+          "line": 96,
+          "name": "allSym",
+          "kind": "def"
+        },
+        {
+          "line": 98,
+          "name": "allBelow_spec",
+          "kind": "theorem"
+        },
+        {
+          "line": 106,
+          "name": "allSym_spec",
+          "kind": "theorem"
+        },
+        {
+          "line": 111,
+          "name": "allRGS_spec",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "work/spectral/stronger/WindowAutomatonLemmas.lean",
+      "sha256": "e4d6dfb9745ba3f0b10970e59c80a2593c75b61bb9f94520baf53ee194c4fc87",
+      "declarations": [
+        {
+          "line": 15,
+          "name": "idx_le_length",
+          "kind": "theorem"
+        },
+        {
+          "line": 20,
+          "name": "idx_of_not_mem",
+          "kind": "theorem"
+        },
+        {
+          "line": 29,
+          "name": "idx_lt_of_mem",
+          "kind": "theorem"
+        },
+        {
+          "line": 44,
+          "name": "idx_append_of_mem",
+          "kind": "theorem"
+        },
+        {
+          "line": 59,
+          "name": "idx_append_of_not_mem",
+          "kind": "theorem"
+        },
+        {
+          "line": 71,
+          "name": "idx_inj",
+          "kind": "theorem"
+        },
+        {
+          "line": 92,
+          "name": "idx_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 104,
+          "name": "mem_map_inj",
+          "kind": "theorem"
+        },
+        {
+          "line": 115,
+          "name": "seenAfter_append",
+          "kind": "theorem"
+        },
+        {
+          "line": 124,
+          "name": "mem_seenAfter_of_mem_seen",
+          "kind": "theorem"
+        },
+        {
+          "line": 132,
+          "name": "mem_seenAfter",
+          "kind": "theorem"
+        },
+        {
+          "line": 145,
+          "name": "canonGo_eq_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 161,
+          "name": "length_canonGo",
+          "kind": "theorem"
+        },
+        {
+          "line": 165,
+          "name": "length_canon",
+          "kind": "theorem"
+        },
+        {
+          "line": 168,
+          "name": "label",
+          "kind": "def"
+        },
+        {
+          "line": 170,
+          "name": "canon_eq_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 172,
+          "name": "label_inj",
+          "kind": "theorem"
+        },
+        {
+          "line": 177,
+          "name": "canonGo_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 213,
+          "name": "canon_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 218,
+          "name": "label_inj_sub",
+          "kind": "theorem"
+        },
+        {
+          "line": 222,
+          "name": "canon_canon_drop",
+          "kind": "theorem"
+        },
+        {
+          "line": 226,
+          "name": "canon_canon_take",
+          "kind": "theorem"
+        },
+        {
+          "line": 230,
+          "name": "canon_canon_drop_reverse",
+          "kind": "theorem"
+        },
+        {
+          "line": 237,
+          "name": "canonGo_isRGS",
+          "kind": "theorem"
+        },
+        {
+          "line": 252,
+          "name": "canon_isRGS",
+          "kind": "theorem"
+        },
+        {
+          "line": 256,
+          "name": "count_map_inj",
+          "kind": "theorem"
+        },
+        {
+          "line": 269,
+          "name": "firsts_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 303,
+          "name": "mem_firsts",
+          "kind": "theorem"
+        },
+        {
+          "line": 315,
+          "name": "oddCount_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 331,
+          "name": "blockOK_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 336,
+          "name": "prefixes_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 343,
+          "name": "blocks_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 350,
+          "name": "mem_prefixes_sub",
+          "kind": "theorem"
+        },
+        {
+          "line": 364,
+          "name": "mem_blocks_sub",
+          "kind": "theorem"
+        },
+        {
+          "line": 372,
+          "name": "inducedPattern_map",
+          "kind": "theorem"
+        },
+        {
+          "line": 389,
+          "name": "inducedPattern_canon",
+          "kind": "theorem"
+        },
+        {
+          "line": 395,
+          "name": "wforb_canon_drop",
+          "kind": "theorem"
+        },
+        {
+          "line": 400,
+          "name": "pot_canon_drop",
+          "kind": "theorem"
+        },
+        {
+          "line": 404,
+          "name": "pot_canon_take",
+          "kind": "theorem"
+        },
+        {
+          "line": 408,
+          "name": "sym_ge_one",
+          "kind": "theorem"
+        },
+        {
+          "line": 409,
+          "name": "sym_le_six",
+          "kind": "theorem"
+        },
+        {
+          "line": 410,
+          "name": "sym_le",
+          "kind": "theorem"
+        },
+        {
+          "line": 413,
+          "name": "step_raw",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "work/spectral/stronger/WindowAutomatonBridge.lean",
+      "sha256": "bcc98d27a5cb87615b41605b7c17b83d66bfbdd5d0ee71ca324e33be466e8f2c",
+      "declarations": [
+        {
+          "line": 21,
+          "name": "dirSearch",
+          "kind": "def"
+        },
+        {
+          "line": 25,
+          "name": "dirSearch_lt",
+          "kind": "theorem"
+        },
+        {
+          "line": 36,
+          "name": "dirSearch_spec",
+          "kind": "theorem"
+        },
+        {
+          "line": 50,
+          "name": "dirOf",
+          "kind": "def"
+        },
+        {
+          "line": 52,
+          "name": "dirOf_lt",
+          "kind": "theorem"
+        },
+        {
+          "line": 54,
+          "name": "adj_dirOf",
+          "kind": "theorem"
+        },
+        {
+          "line": 62,
+          "name": "xv",
+          "kind": "def"
+        },
+        {
+          "line": 65,
+          "name": "pathDir",
+          "kind": "def"
+        },
+        {
+          "line": 68,
+          "name": "pathDir_lt",
+          "kind": "theorem"
+        },
+        {
+          "line": 74,
+          "name": "xv_succ",
+          "kind": "theorem"
+        },
+        {
+          "line": 84,
+          "name": "xv_ne",
+          "kind": "theorem"
+        },
+        {
+          "line": 92,
+          "name": "xv_not_adj",
+          "kind": "theorem"
+        },
+        {
+          "line": 105,
+          "name": "vxor",
+          "kind": "def"
+        },
+        {
+          "line": 107,
+          "name": "parity_succ",
+          "kind": "theorem"
+        },
+        {
+          "line": 110,
+          "name": "testBit_foldl",
+          "kind": "theorem"
+        },
+        {
+          "line": 126,
+          "name": "testBit_vxor",
+          "kind": "theorem"
+        },
+        {
+          "line": 131,
+          "name": "vxor_eq_zero",
+          "kind": "theorem"
+        },
+        {
+          "line": 137,
+          "name": "vxor_eq_pow",
+          "kind": "theorem"
+        },
+        {
+          "line": 150,
+          "name": "vxor_append",
+          "kind": "theorem"
+        },
+        {
+          "line": 157,
+          "name": "mem_firsts_of_mem_seen",
+          "kind": "theorem"
+        },
+        {
+          "line": 165,
+          "name": "mem_firsts_of_mem",
+          "kind": "theorem"
+        },
+        {
+          "line": 176,
+          "name": "filter_length_one",
+          "kind": "theorem"
+        },
+        {
+          "line": 198,
+          "name": "oddCount_zero",
+          "kind": "theorem"
+        },
+        {
+          "line": 209,
+          "name": "oddCount_one",
+          "kind": "theorem"
+        },
+        {
+          "line": 220,
+          "name": "blockOK_of_path",
+          "kind": "theorem"
+        },
+        {
+          "line": 239,
+          "name": "blockList",
+          "kind": "def"
+        },
+        {
+          "line": 241,
+          "name": "blockList_succ",
+          "kind": "theorem"
+        },
+        {
+          "line": 247,
+          "name": "chain",
+          "kind": "theorem"
+        },
+        {
+          "line": 255,
+          "name": "drop_range'",
+          "kind": "theorem"
+        },
+        {
+          "line": 264,
+          "name": "take_range'",
+          "kind": "theorem"
+        },
+        {
+          "line": 271,
+          "name": "drop_take_blockList",
+          "kind": "theorem"
+        },
+        {
+          "line": 276,
+          "name": "win7_eq",
+          "kind": "theorem"
+        },
+        {
+          "line": 278,
+          "name": "mem_prefixes_eq",
+          "kind": "theorem"
+        },
+        {
+          "line": 288,
+          "name": "mem_blocks_eq",
+          "kind": "theorem"
+        },
+        {
+          "line": 300,
+          "name": "snake_inducedPattern_block",
+          "kind": "theorem"
+        },
+        {
+          "line": 321,
+          "name": "snake_inducedPattern",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "work/spectral/stronger/DirectionWindowBridge.lean",
+      "sha256": "5762fce3a8c4b9c17b481bca810c029ca90b01bd84206e01008212abf24de613",
+      "declarations": [
+        {
+          "line": 31,
+          "name": "allSyms0",
+          "kind": "def"
+        },
+        {
+          "line": 35,
+          "name": "allSyms0_spec",
+          "kind": "theorem"
+        },
+        {
+          "line": 45,
+          "name": "forbBit",
+          "kind": "def"
+        },
+        {
+          "line": 48,
+          "name": "wforb1_eq",
+          "kind": "theorem"
+        },
+        {
+          "line": 50,
+          "name": "coverOK",
+          "kind": "def"
+        },
+        {
+          "line": 56,
+          "name": "cover_table",
+          "kind": "theorem"
+        },
+        {
+          "line": 62,
+          "name": "keys_in_table",
+          "kind": "theorem"
+        },
+        {
+          "line": 65,
+          "name": "cover",
+          "kind": "theorem"
+        },
+        {
+          "line": 81,
+          "name": "getD_idx",
+          "kind": "theorem"
+        },
+        {
+          "line": 95,
+          "name": "seenAfter_nodup",
+          "kind": "theorem"
+        },
+        {
+          "line": 113,
+          "name": "mem_seenAfter_cases",
+          "kind": "theorem"
+        },
+        {
+          "line": 134,
+          "name": "dsOf",
+          "kind": "def"
+        },
+        {
+          "line": 137,
+          "name": "symsOf",
+          "kind": "def"
+        },
+        {
+          "line": 140,
+          "name": "length_dsOf",
+          "kind": "theorem"
+        },
+        {
+          "line": 142,
+          "name": "length_symsOf",
+          "kind": "theorem"
+        },
+        {
+          "line": 144,
+          "name": "getD_dsOf",
+          "kind": "theorem"
+        },
+        {
+          "line": 147,
+          "name": "getD_symsOf",
+          "kind": "theorem"
+        },
+        {
+          "line": 153,
+          "name": "window_refute",
+          "kind": "theorem"
+        },
+        {
+          "line": 191,
+          "name": "dsOf_rev",
+          "kind": "theorem"
+        },
+        {
+          "line": 203,
+          "name": "symsOf_rev",
+          "kind": "theorem"
+        },
+        {
+          "line": 217,
+          "name": "no_forb_window",
+          "kind": "theorem"
+        },
+        {
+          "line": 232,
+          "name": "pathDir_eq_dir",
+          "kind": "theorem"
+        },
+        {
+          "line": 244,
+          "name": "direction_windows_core",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "work/final_lean/LocalWindowDirBridge.lean",
+      "sha256": "706e81e2770fd9eae74ab24f0b4e25b290901a257614959d038d22e0df8ab3e1",
+      "declarations": [
+        {
+          "line": 25,
+          "name": "winGo_length",
+          "kind": "theorem"
+        },
+        {
+          "line": 29,
+          "name": "winGo_getD_zero",
+          "kind": "theorem"
+        },
+        {
+          "line": 33,
+          "name": "winGo_step",
+          "kind": "theorem"
+        },
+        {
+          "line": 43,
+          "name": "canon_winOf",
+          "kind": "theorem"
+        },
+        {
+          "line": 49,
+          "name": "symC",
+          "kind": "def"
+        },
+        {
+          "line": 51,
+          "name": "symC_le_six",
+          "kind": "theorem"
+        },
+        {
+          "line": 55,
+          "name": "boundOf_symC",
+          "kind": "theorem"
+        },
+        {
+          "line": 66,
+          "name": "freePairs_length",
+          "kind": "theorem"
+        },
+        {
+          "line": 70,
+          "name": "coreAlpha_le_21",
+          "kind": "theorem"
+        },
+        {
+          "line": 82,
+          "name": "getD_boundsOf",
+          "kind": "theorem"
+        },
+        {
+          "line": 90,
+          "name": "refuted_dir",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "work/spectral/stronger/AggregateWindowUnconditional.lean",
+      "sha256": "3fc61a50788476c9a144e43a7fd58f124719b31c112f9b45e145c1fdf01a9673",
+      "declarations": [
+        {
+          "line": 19,
+          "name": "inPath_iff_sel",
+          "kind": "theorem"
+        },
+        {
+          "line": 32,
+          "name": "flip_val",
+          "kind": "theorem"
+        },
+        {
+          "line": 35,
+          "name": "localAlpha_eq_coreAlpha",
+          "kind": "theorem"
+        },
+        {
+          "line": 72,
+          "name": "localAlpha_eq_absentCorners",
+          "kind": "theorem"
+        },
+        {
+          "line": 77,
+          "name": "certified_windows_of_refuted",
+          "kind": "theorem"
+        },
+        {
+          "line": 85,
+          "name": "quad_windows_of_refuted",
+          "kind": "theorem"
+        },
+        {
+          "line": 95,
+          "name": "upper_242_of_refuted",
+          "kind": "theorem"
+        },
+        {
+          "line": 99,
+          "name": "upper_241_of_refuted",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "milestones/59-extended-share-window/lean/ExtendedShareBridge.lean",
+      "sha256": "c125c8ca8f64b46712e520f5fcb0f8ccd10e8f23f8cfee55e38ccaf7322b0fe0",
+      "declarations": [
+        {
+          "line": 8,
+          "name": "credit_in_snake",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "milestones/59-extended-share-window/lean/ExtendedBudget.lean",
+      "sha256": "002d6762831b031181307f7e33f85d315dd4eaab7e41618939d916a30c17e206",
+      "declarations": [
+        {
+          "line": 4,
+          "name": "window_budget",
+          "kind": "theorem"
+        },
+        {
+          "line": 20,
+          "name": "aggregate_charge",
+          "kind": "theorem"
+        },
+        {
+          "line": 24,
+          "name": "global_charge",
+          "kind": "theorem"
+        },
+        {
+          "line": 28,
+          "name": "potential_bound",
+          "kind": "theorem"
+        },
+        {
+          "line": 34,
+          "name": "extended_model_bound",
+          "kind": "theorem"
+        },
+        {
+          "line": 38,
+          "name": "mean_insufficient_for_234",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "milestones/61-critical-family-share/lean/FinitePotential.lean",
+      "sha256": "7dfbe61e69208dce373f4a18faeedadeb904c85a39027c9df8ae7a0a86fd716a",
+      "declarations": [
+        {
+          "line": 4,
+          "name": "path_bound",
+          "kind": "theorem"
+        },
+        {
+          "line": 17,
+          "name": "closed_bound",
+          "kind": "theorem"
+        },
+        {
+          "line": 24,
+          "name": "checkEdges",
+          "kind": "def"
+        },
+        {
+          "line": 27,
+          "name": "edge_of_check",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "milestones/67-critical-family-charge/lean/BoundaryCharge.lean",
+      "sha256": "52d8e21be70a6ea34d98f140eef9e123b41b532f34dbe838cdea82f94991e52e",
+      "declarations": [
+        {
+          "line": 8,
+          "name": "seven_internal_counts",
+          "kind": "theorem"
+        },
+        {
+          "line": 22,
+          "name": "discarded_counts",
+          "kind": "theorem"
+        },
+        {
+          "line": 45,
+          "name": "aggregate_charge",
+          "kind": "theorem"
+        },
+        {
+          "line": 49,
+          "name": "global_charge",
+          "kind": "theorem"
+        },
+        {
+          "line": 54,
+          "name": "conditional_bound",
+          "kind": "theorem"
+        },
+        {
+          "line": 58,
+          "name": "conditional_integer_bound",
+          "kind": "theorem"
+        },
+        {
+          "line": 60,
+          "name": "old_boundary_allows_235",
+          "kind": "theorem"
+        },
+        {
+          "line": 61,
+          "name": "improved_boundary_excludes_235",
+          "kind": "theorem"
+        },
+        {
+          "line": 62,
+          "name": "mean_improvement",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "milestones/67-critical-family-charge/lean/ChargeBatch00.lean",
+      "sha256": "20460c4d6ca3fade1a8302530c3750f971685d686deddbcd1091331da8f5b3fa",
+      "declarations": [
+        {
+          "line": 7,
+          "name": "W",
+          "kind": "def"
+        },
+        {
+          "line": 8,
+          "name": "ds",
+          "kind": "def"
+        },
+        {
+          "line": 9,
+          "name": "D",
+          "kind": "def"
+        },
+        {
+          "line": 10,
+          "name": "C",
+          "kind": "def"
+        },
+        {
+          "line": 11,
+          "name": "mask",
+          "kind": "def"
+        },
+        {
+          "line": 12,
+          "name": "canonical",
+          "kind": "theorem"
+        },
+        {
+          "line": 13,
+          "name": "forced",
+          "kind": "theorem"
+        },
+        {
+          "line": 14,
+          "name": "supported",
+          "kind": "theorem"
+        },
+        {
+          "line": 15,
+          "name": "checked_mask",
+          "kind": "theorem"
+        },
+        {
+          "line": 16,
+          "name": "credit",
+          "kind": "theorem"
+        },
+        {
+          "line": 17,
+          "name": "in_snake",
+          "kind": "theorem"
+        },
+        {
+          "line": 29,
+          "name": "W",
+          "kind": "def"
+        },
+        {
+          "line": 30,
+          "name": "ds",
+          "kind": "def"
+        },
+        {
+          "line": 31,
+          "name": "D",
+          "kind": "def"
+        },
+        {
+          "line": 32,
+          "name": "C",
+          "kind": "def"
+        },
+        {
+          "line": 33,
+          "name": "mask",
+          "kind": "def"
+        },
+        {
+          "line": 34,
+          "name": "canonical",
+          "kind": "theorem"
+        },
+        {
+          "line": 35,
+          "name": "forced",
+          "kind": "theorem"
+        },
+        {
+          "line": 36,
+          "name": "supported",
+          "kind": "theorem"
+        },
+        {
+          "line": 37,
+          "name": "checked_mask",
+          "kind": "theorem"
+        },
+        {
+          "line": 38,
+          "name": "credit",
+          "kind": "theorem"
+        },
+        {
+          "line": 39,
+          "name": "in_snake",
+          "kind": "theorem"
+        },
+        {
+          "line": 51,
+          "name": "W",
+          "kind": "def"
+        },
+        {
+          "line": 52,
+          "name": "ds",
+          "kind": "def"
+        },
+        {
+          "line": 53,
+          "name": "D",
+          "kind": "def"
+        },
+        {
+          "line": 54,
+          "name": "C",
+          "kind": "def"
+        },
+        {
+          "line": 55,
+          "name": "mask",
+          "kind": "def"
+        },
+        {
+          "line": 56,
+          "name": "canonical",
+          "kind": "theorem"
+        },
+        {
+          "line": 57,
+          "name": "forced",
+          "kind": "theorem"
+        },
+        {
+          "line": 58,
+          "name": "supported",
+          "kind": "theorem"
+        },
+        {
+          "line": 59,
+          "name": "checked_mask",
+          "kind": "theorem"
+        },
+        {
+          "line": 60,
+          "name": "credit",
+          "kind": "theorem"
+        },
+        {
+          "line": 61,
+          "name": "in_snake",
+          "kind": "theorem"
+        },
+        {
+          "line": 73,
+          "name": "W",
+          "kind": "def"
+        },
+        {
+          "line": 74,
+          "name": "ds",
+          "kind": "def"
+        },
+        {
+          "line": 75,
+          "name": "D",
+          "kind": "def"
+        },
+        {
+          "line": 76,
+          "name": "C",
+          "kind": "def"
+        },
+        {
+          "line": 77,
+          "name": "mask",
+          "kind": "def"
+        },
+        {
+          "line": 78,
+          "name": "canonical",
+          "kind": "theorem"
+        },
+        {
+          "line": 79,
+          "name": "forced",
+          "kind": "theorem"
+        },
+        {
+          "line": 80,
+          "name": "supported",
+          "kind": "theorem"
+        },
+        {
+          "line": 81,
+          "name": "checked_mask",
+          "kind": "theorem"
+        },
+        {
+          "line": 82,
+          "name": "credit",
+          "kind": "theorem"
+        },
+        {
+          "line": 83,
+          "name": "in_snake",
+          "kind": "theorem"
+        },
+        {
+          "line": 95,
+          "name": "W",
+          "kind": "def"
+        },
+        {
+          "line": 96,
+          "name": "ds",
+          "kind": "def"
+        },
+        {
+          "line": 97,
+          "name": "D",
+          "kind": "def"
+        },
+        {
+          "line": 98,
+          "name": "C",
+          "kind": "def"
+        },
+        {
+          "line": 99,
+          "name": "mask",
+          "kind": "def"
+        },
+        {
+          "line": 100,
+          "name": "canonical",
+          "kind": "theorem"
+        },
+        {
+          "line": 101,
+          "name": "forced",
+          "kind": "theorem"
+        },
+        {
+          "line": 102,
+          "name": "supported",
+          "kind": "theorem"
+        },
+        {
+          "line": 103,
+          "name": "checked_mask",
+          "kind": "theorem"
+        },
+        {
+          "line": 104,
+          "name": "credit",
+          "kind": "theorem"
+        },
+        {
+          "line": 105,
+          "name": "in_snake",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "milestones/73-countfree-share-catalogue/bridge/lean/CoreShareBudget.lean",
+      "sha256": "81ccb6a86bb022c4acc6e5a15f09e5960caa5e0256ea4c6771830f9920344f0a",
+      "declarations": [
+        {
+          "line": 14,
+          "name": "inPath_iff_sel",
+          "kind": "theorem"
+        },
+        {
+          "line": 27,
+          "name": "flip_val",
+          "kind": "theorem"
+        },
+        {
+          "line": 31,
+          "name": "sum_range_eq_list_sum",
+          "kind": "theorem"
+        },
+        {
+          "line": 36,
+          "name": "sum_fin_eq_list_sum",
+          "kind": "theorem"
+        },
+        {
+          "line": 41,
+          "name": "sum_selected_mul",
+          "kind": "theorem"
+        },
+        {
+          "line": 58,
+          "name": "emptyAt_eq_emptyCount",
+          "kind": "theorem"
+        },
+        {
+          "line": 91,
+          "name": "selDeg_eq_cnt",
+          "kind": "theorem"
+        },
+        {
+          "line": 111,
+          "name": "shareN_eq_coreShare",
+          "kind": "theorem"
+        },
+        {
+          "line": 122,
+          "name": "core_share_path_sum",
+          "kind": "theorem"
+        },
+        {
+          "line": 136,
+          "name": "core_share_total_le",
+          "kind": "theorem"
+        },
+        {
+          "line": 142,
+          "name": "core_share_charge_le",
+          "kind": "theorem"
+        },
+        {
+          "line": 153,
+          "name": "core_share12_charge_le",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "milestones/73-countfree-share-catalogue/adapter/lean/ConditionalCatalogueDispatch.lean",
+      "sha256": "fd4b3833567fb42c7fb31e6987d51324cda6492193b9fbf702d2efa4666839ff",
+      "declarations": [
+        {
+          "line": 10,
+          "name": "selectedCap",
+          "kind": "def"
+        },
+        {
+          "line": 15,
+          "name": "selectedShape",
+          "kind": "def"
+        },
+        {
+          "line": 18,
+          "name": "windowLower",
+          "kind": "def"
+        },
+        {
+          "line": 21,
+          "name": "selectedCap_ge11",
+          "kind": "theorem"
+        },
+        {
+          "line": 25,
+          "name": "windowLower_ge12",
+          "kind": "theorem"
+        },
+        {
+          "line": 31,
+          "name": "selectedShape_mem_and_match",
+          "kind": "theorem"
+        },
+        {
+          "line": 56,
+          "name": "representative_refutation",
+          "kind": "theorem"
+        },
+        {
+          "line": 72,
+          "name": "catalogue_share_bound",
+          "kind": "theorem"
+        },
+        {
+          "line": 79,
+          "name": "catalogue_share_ge12",
+          "kind": "theorem"
+        }
+      ]
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/critical-current/lean/CountFreeTarget.lean",
+      "sha256": "51e9a217f5fe8e09b029905a0cad5aea90442dd918376409ea2a8a37b8f5294b",
+      "declarations": [
+        {
+          "line": 6,
+          "name": "upper234_of_weight_bounds",
+          "kind": "theorem"
+        },
+        {
+          "line": 12,
+          "name": "strict_margin",
+          "kind": "theorem"
+        }
+      ]
+    }
+  ],
+  "inherited_receipts": [
+    {
+      "path": "milestones\\59-extended-share-window\\data\\lean-audit.json",
+      "sha256": "0a917d4359da077430a5c2cbed4d2f2e8e31116b9332cf5b3e342d297161f1ce",
+      "source_hash_matches": [
+        {
+          "module": "ExtendedShareBridge",
+          "source_sha256": "c125c8ca8f64b46712e520f5fcb0f8ccd10e8f23f8cfee55e38ccaf7322b0fe0"
+        },
+        {
+          "module": "GeometryBatch02",
+          "source_sha256": "8925156a878de6676852806d4606418d10af19fd26f3b9af18a0630670f12355"
+        },
+        {
+          "module": "GeometryBatch01",
+          "source_sha256": "a64963dbdc7f82eafac03b779357e34c3048309d546cd90d047f2f08ee04f88a"
+        },
+        {
+          "module": "GeometryBatch00",
+          "source_sha256": "4c4d0622157e7879de6f33dd65713246d512e89c8a12c043b4b6e700c7c14c17"
+        },
+        {
+          "module": "GeometryBatch04",
+          "source_sha256": "a21aaf3b305390d893fa56ffd162d7399bfbeb30daa316b0fb6f54463529cd56"
+        },
+        {
+          "module": "GeometryBatch03",
+          "source_sha256": "f3ac0d680d869868780f7b8a6163ef6ef89c2e7e0eda03fffd7a4268b65d3582"
+        },
+        {
+          "module": "GeometryBatch05",
+          "source_sha256": "68f6285df06b44afb85de5a77f9b05250c4455512daf2732523502d6ef7dfab5"
+        },
+        {
+          "module": "MaskShareBridge",
+          "source_sha256": "43c18e733708947700d437305482e47b279c9221136ab9ae71ba16aec4cc44f7"
+        },
+        {
+          "module": "ExtendedBudget",
+          "source_sha256": "002d6762831b031181307f7e33f85d315dd4eaab7e41618939d916a30c17e206"
+        },
+        {
+          "module": "GeometryBatch06",
+          "source_sha256": "f55fcc2dee6dcd6151d6421caa212ea63dbf4c0f4702c0aba1a2a2fd21b19386"
+        },
+        {
+          "module": "GeometryBatch07",
+          "source_sha256": "d8cc45b7c7c5cbc1cc94c45c9cbf2e6dedb2c693dc96865d15a9597214864791"
+        },
+        {
+          "module": "GeometryBatch08",
+          "source_sha256": "f095d3c12798df08ef2c8aab7c2891bd37e1d03ee2bc4d0e73de3eb38156ae24"
+        },
+        {
+          "module": "GeometryBatch09",
+          "source_sha256": "96eda568a4081ad5bb32effd0cfe3ea083b65a26f69b9bcc9b2e0a1b22610f56"
+        },
+        {
+          "module": "GeometryBatch10",
+          "source_sha256": "c8be47f20ce6447fc3497d276e416da7d68bc442e7f33c5ba84b7309b7d9c2bd"
+        },
+        {
+          "module": "GeometryBatch11",
+          "source_sha256": "89fe0a7c079af3197c102761b3a0ad43cdf1757a4c8b349e7d3c75aeffbca946"
+        },
+        {
+          "module": "GeometryBatch12",
+          "source_sha256": "67d7cedeaacb1759e9eedc69bcf8e1ddb1365618fdeeb3411655f3d60986c9fa"
+        },
+        {
+          "module": "GeometryBatch13",
+          "source_sha256": "2f242d7abf6650d089b0624038b6851eb39c1cf52c51bb6c26f7e96b31a76b7d"
+        },
+        {
+          "module": "GeometryBatch14",
+          "source_sha256": "6b6806bf24afaedbdf753bdbeab983521933ddb46e5e18c1d9419b916e7c72a8"
+        },
+        {
+          "module": "GeometryBatch15",
+          "source_sha256": "7e2cf95349d1748c317dd8b23db40214e867c06bfb21c0951d9da21cf24973a6"
+        },
+        {
+          "module": "GeometryBatch16",
+          "source_sha256": "d2fb0fd19109ac563fa399c48a6111cd78e3237715c8e78890ccc759e18bbfca"
+        },
+        {
+          "module": "GeometryBatch17",
+          "source_sha256": "06f77c49361799f110dedcb17f8847ef15763dc450f56a64da248c910fa1c9f0"
+        },
+        {
+          "module": "GeometryBatch18",
+          "source_sha256": "623f046cfe544f7e61cac15687ef79f5706f84b6b31c62547744a8d785ca1b60"
+        },
+        {
+          "module": "GeometryBatch19",
+          "source_sha256": "3e097ceb432374bcc19123adc41a0fda160dbb5053f622aaa47153d9dfadfbba"
+        },
+        {
+          "module": "GeometryBatch20",
+          "source_sha256": "fa1ea425d39d6888630ef970ce4711cc05ab6fa41b3f05595b3b6c2937c9f357"
+        },
+        {
+          "module": "GeometryBatch21",
+          "source_sha256": "820c3786058c990a56d218ec60b3faa373286211a2996209642c573a9708baec"
+        },
+        {
+          "module": "GeometryBatch22",
+          "source_sha256": "2bf48a0f62929d2a08e13a77a90df8b76b9c67338eb4bef8221f16cb1b1f1ac1"
+        },
+        {
+          "module": "GeometryBatch23",
+          "source_sha256": "a5ad87904cc4c5e4c950795e45682f13a99650dc6dbb0babec313bd1404ca953"
+        },
+        {
+          "module": "GeometryBatch24",
+          "source_sha256": "0ecc85d0ab81c1b38157bc03f20df7bda612c4ea919c942020614bef7d714699"
+        },
+        {
+          "module": "GeometryBatch25",
+          "source_sha256": "7d91e548b1fb2452d763b8feb88b7270dd9369d6aa28439e59e56342432a52a2"
+        },
+        {
+          "module": "GeometryBatch26",
+          "source_sha256": "1b4bd4d3b0c0faa4dbdc8e2ceda29de22e42ee87f5f0b27b5999617827f10aec"
+        },
+        {
+          "module": "GeometryBatch27",
+          "source_sha256": "af32bf254cea028ab3a77672e9d6c402b528e9931121f5be3b78a249de1391e9"
+        },
+        {
+          "module": "GeometryBatch29",
+          "source_sha256": "0c82c72a44190dca15f5676c881325801fc2391404d6bc14060842aaecc92bb3"
+        },
+        {
+          "module": "GeometryBatch28",
+          "source_sha256": "7dcd1c570d343cdf4c89ab9bf40b5d9ddca00be19646d0ea29e8614e26bcdefe"
+        },
+        {
+          "module": "GeometryCatalogue",
+          "source_sha256": "ce458bc882b69f9eea33437c34dfb370dbfafac362455597323060e0b3c62aef"
+        },
+        {
+          "module": "MaskPilot",
+          "source_sha256": "eec8ebf9fb3a0791164dd4fc809139f60d79813bb3310937ac44b6aee2c538ca"
+        },
+        {
+          "module": "DiscardedCounts",
+          "source_sha256": "d3ed652532e78dafea8c1fa474ce68ea17585a1708c80cf4cf730e461d749e67"
+        }
+      ],
+      "scope": "Historical successful receipt, current source hashes checked; no fresh compilation of these modules."
+    },
+    {
+      "path": "milestones\\61-critical-family-share\\data\\lean-audit.json",
+      "sha256": "eceb6b4375edc814e160209d712a20ba76a5d67e5afb3e87cc97e826c695ed29",
+      "source_hash_matches": [
+        {
+          "module": "FinitePotential",
+          "source_sha256": "7dfbe61e69208dce373f4a18faeedadeb904c85a39027c9df8ae7a0a86fd716a"
+        },
+        {
+          "module": "GeometryBatch00",
+          "source_sha256": "eb0e26c43fdb26270668f2cbd6837307b11f6f9b61f0a273b68f146ce73fd61f"
+        },
+        {
+          "module": "GeometryBatch01",
+          "source_sha256": "9d8a4256127c89463a6642b50f445911838f20a1d7e3606a90c1e79e222e33a5"
+        },
+        {
+          "module": "GeometryBatch02",
+          "source_sha256": "d54cbc2e450f1ac92e57991a5a308058a75887d64044c6aa8380d78e7d4ceb60"
+        },
+        {
+          "module": "GeometryBatch04",
+          "source_sha256": "461fd1b4a08ec69927e221ec8899e093906b0a7440a8a7c819dfb446467898ca"
+        },
+        {
+          "module": "GeometryBatch03",
+          "source_sha256": "3d66cc3b5a63dfa641396aa931d54ec0f28468f9c12d0e7fc39e03704b478639"
+        },
+        {
+          "module": "GeometryBatch05",
+          "source_sha256": "86496191b84bdf1253f3820abd0f2f7098f88801e4129072fc8d0a49965a9754"
+        },
+        {
+          "module": "GeometryBatch07",
+          "source_sha256": "33bd321f675466d497c507a185625ce16c0a43b97d73afc98b63ce141e182f53"
+        },
+        {
+          "module": "GeometryBatch06",
+          "source_sha256": "5af1837955b88b1515db13008dfca33e3fc09dd088ab407e2edb6dc37be0b265"
+        },
+        {
+          "module": "GeometryBatch08",
+          "source_sha256": "2d540674053325c399e768dc23f12f65d9210ad494fef592a4b0b4dd6bb838e1"
+        },
+        {
+          "module": "GeometryBatch09",
+          "source_sha256": "fd1805bdd7aab6bb1ab1a2f3e989ac39a76640b7a71e23bd3532de428da2357c"
+        },
+        {
+          "module": "GeometryBatch10",
+          "source_sha256": "a1f8ab0ae145851eb45c5977fe02dc3d2bd7b0bd2f8f01e88e4ab81edbbca5ac"
+        },
+        {
+          "module": "GeometryBatch11",
+          "source_sha256": "f498e95fac2373f5772f1a914353630c879d7924acb67f8cce83526d6f3eb733"
+        },
+        {
+          "module": "Potential10Base",
+          "source_sha256": "5a906b7ddf9f3d48061c56126ed3b76f2012e7e1d1eda663e8fa447007a842fd"
+        },
+        {
+          "module": "Potential10Share",
+          "source_sha256": "606a17404dc7639ba27f52fbaca20be3c3d74737f90febe02175025de6e9a1ab"
+        },
+        {
+          "module": "Potential11Base",
+          "source_sha256": "3bd65119aaad05651403b13dc9338059d3ab4004bf33c570c383f82eeb831f7f"
+        },
+        {
+          "module": "Potential11Share",
+          "source_sha256": "fcf83c6cdf749e3dd9f91de9d4a4fdee835e27638ea29b0dd6509f99139d90c5"
+        },
+        {
+          "module": "ValidityBatch0",
+          "source_sha256": "413b1e4fe51930bcd49829fa914ec97765f42de5a5385e0263efc26bd324259d"
+        },
+        {
+          "module": "ValidityBatch1",
+          "source_sha256": "3b73e3f727f6ca914637a9e379c75e9300fd26b3e24755667504d62748d7f00a"
+        },
+        {
+          "module": "ValidityBatch2",
+          "source_sha256": "024632d51a3d56a54f2400e5ff24bf49cf5163811b2d32c4fd503090b955ccdb"
+        },
+        {
+          "module": "RangeArithmetic",
+          "source_sha256": "c61b143dbce12c8f7f31b164a7bef1d5190a00bc312fb9509f3bfe1e6008d6f2"
+        }
+      ],
+      "scope": "Historical successful receipt, current source hashes checked; no fresh compilation of these modules."
+    },
+    {
+      "path": "milestones\\67-critical-family-charge\\data\\lean-audit.json",
+      "sha256": "53ae078d98a9812e4ebfa87b11b5611363d30e406281ff856cfaea0958a87f4a",
+      "source_hash_matches": [
+        {
+          "module": "ChargeBatch01",
+          "source_sha256": "6e852b425e50a666883e237ea17e521ba32a20d6d8ef8aaf27ddb4337ed4eaef"
+        },
+        {
+          "module": "ChargeBatch00",
+          "source_sha256": "20460c4d6ca3fade1a8302530c3750f971685d686deddbcd1091331da8f5b3fa"
+        },
+        {
+          "module": "ChargeBatch02",
+          "source_sha256": "56a22623e15cf14ff22acbea11422d15743c005c4a29ce6baee8d388fb6a3cd2"
+        },
+        {
+          "module": "ChargeBatch03",
+          "source_sha256": "51576d93490b4797fdc6cc90e0a870fe9363b43f2fe393f742938863b04c6e99"
+        },
+        {
+          "module": "ChargeBatch05",
+          "source_sha256": "85f0bd8e086e0a808df8ef48b87fc5c019a15e7868321d273f798f38ab654f00"
+        },
+        {
+          "module": "ChargeBatch06",
+          "source_sha256": "284976aaa4dd5a7010c397ac34fca20c6e86bd184b715cd5783a4cd178e2e7c1"
+        },
+        {
+          "module": "ChargeBatch04",
+          "source_sha256": "70324f3671800b94f57625555d19bf2d5947fee15e2f8c19f186e9be422f06b7"
+        },
+        {
+          "module": "ChargeBatch08",
+          "source_sha256": "8975e04f7dd284e5bf006fde194ab17e98f4904f72d7053eda7992e67b7b3a42"
+        },
+        {
+          "module": "ChargeBatch07",
+          "source_sha256": "1325946f02bb5be6a96a37d9deb67887bc8a5465503a97d003657d5ca0227f7d"
+        },
+        {
+          "module": "ChargeBatch09",
+          "source_sha256": "c96a126d582c2638dccdfbb56d01bbb6ee211189147b6d5fa4381bf054281600"
+        },
+        {
+          "module": "ChargeBatch10",
+          "source_sha256": "f281ff88bf3d912b1a61caa5ba08e81769b6a13a43e92adfc527c36738bf4f25"
+        },
+        {
+          "module": "ChargeBatch12",
+          "source_sha256": "9b27b5381563cb7a516b1c69d9a3daaf1cdb285529bae1e6a1b402aa3c0bfed5"
+        },
+        {
+          "module": "ChargeBatch11",
+          "source_sha256": "33e11489efc961f7131b0a94755ea4db8d5542ae4b6e07ef16597e00532a099f"
+        },
+        {
+          "module": "ChargePotential",
+          "source_sha256": "372ca9b048d9b952f0170e0eb613aaefda7f3684b36f0a403f240a460e687fe4"
+        },
+        {
+          "module": "OriginalPotential",
+          "source_sha256": "9d970efc338c99538b157dfe0c108a758f31514de65704a6b9a303da03694920"
+        },
+        {
+          "module": "BoundaryCharge",
+          "source_sha256": "52d8e21be70a6ea34d98f140eef9e123b41b532f34dbe838cdea82f94991e52e"
+        },
+        {
+          "module": "ValidityBatch00",
+          "source_sha256": "81eed495eaeabe8304dae0865f27dab7c4a10bd8869bfcaceeb55e9b5f3a37b6"
+        },
+        {
+          "module": "ValidityBatch01",
+          "source_sha256": "b24e4038a8ae75195ffd32a128f2e3d47fe4740d544d86cba3f8d711d484c943"
+        },
+        {
+          "module": "ValidityBatch02",
+          "source_sha256": "260a8d6f3cebd3a48a85c9adb120fff1de3bc6668d167c4cb68d9413b7715358"
+        },
+        {
+          "module": "ValidityBatch03",
+          "source_sha256": "0fd03961ac05c540b49f23176dbc5479e1eeadb1ca319841c0b89b3125789f37"
+        }
+      ],
+      "scope": "Historical successful receipt, current source hashes checked; no fresh compilation of these modules."
+    }
+  ],
+  "remaining_obligations": [
+    "Actual-snake numeric state coding and exact history recognition invariant.",
+    "Every exclusion guard in the exact builder is covered by a proved local premise with correct count saturation.",
+    "Every history-signature credit is valid for every compatible actual eleven-transition word; initialise history at zero.",
+    "Every recorded edge credit is at most the five actual coreShare terms, with overlapping rules combined by maximum.",
+    "Bind exact finite data to Lean definitions and kernel-check the full potential inequalities and range.",
+    "Instantiate the already proved overlap, boundary and global square budget with the resulting walk."
+  ],
+  "result": "The direction slicing/source/target/share-suffix identities are newly checked in WindowStateShift.lean. The contributor seven-centre automaton differs in count memory and has no prefix-history/share state. No new global numerical bound is established."
+}
