@@ -1,1 +1,5 @@
 Research resumed after the owner reactivated the goal. The earlier handoff archive remains a dated snapshot. Current milestone 72 has ten audited count cases (32 audits) and the completed share-120 theorem (99 modules, 72 audits). Conditional count premises are 14,143 before the new share and 14,142 with it. No new global numerical bound is established. Consult milestones/72-four-count-proof-closure/critical-charge/share-proof/README.md for current proof status.
+
+The 2 November continuation is documented in milestones/72-four-count-proof-closure/critical-current/README.md. A mixed nine-shape share criterion now has complete native Boolean certificates and an exact conditional 234 model (mean 496, range 600). Geometric Lean proofs and global assembly remain outstanding. This newer work is outside the original handoff archive; the goal remains active.
+
+The count-free distinct-direction share-12 theorem subsequently completed 221 Lean modules and 86 theorem audits. Both the uniform and mixed nine-shape targets have complete native certificates. The unconditional interval remains 191 <= a(9) <= 235; 234 remains conditional.

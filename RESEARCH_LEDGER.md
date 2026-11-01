@@ -257,3 +257,14 @@ Next research priority: return to the unconditional proof track and inspect the 
 Active research: [milestone 72](milestones/72-four-count-proof-closure/README.md) is in progress. Ten certificate cases and thirty-two theorem audits are complete, including a returning-direction restriction with no middle-count assumptions. The checked additions remove 50,510 transitions and reduce the additional premises for conditional 234 to 14,143. The exact model mean remains 480 and the global upper bound remains 235. Six candidate certificate cases are still pending. The share-120 local theorem now passes 72 theorem audits across 99 modules; incorporating it reduces the fixed-potential count basis by one more premise, to 14,142, with the global assembly still pending. This checkpoint does not complete the research round.
 
 The exact-count case (3,4,4,4) remains unresolved after two different bounded solver attempts. Completed source checks and graph receipts are preserved separately from pending certificates. The paper remains unchanged while the sixth round after revision 66 continues.
+
+
+### Milestone 72 continuation: count-free share criterion, 2 November 2026
+
+The [count-free investigation](milestones/72-four-count-proof-closure/critical-current/README.md) identifies four minimal shape covers of all 17,506 tight critical edges. Three share-12 premises raise the exact finite mean from 480 to 485, without changing the integer bound 235. The fixed-potential count list falls from 14,142 to 14,001 under these premises.
+
+The stronger mixed target assigns share 20 to 012034, share 12 to 012310, and share 16 to the other seven canonical six-transition shapes. All nine Boolean refutations are independently checked and reconstructed from their encoders. An independent all-edge potential audit gives mean 496, range 600, and conditional bound 137941/587 < 235. Lean checks the conditional arithmetic with strict margin 32. The local share theorems, reversal normalization, global share representation bridge and complete snake-to-graph interpretation remain required. The unconditional interval remains 191 <= a(9) <= 235.
+
+The initial forced-neighbour argument gives zero for all nine shapes. A relaxed zero-share example contains sixteen eight-cycles; valid cycle exclusions are essential for its case. All 24,366 windows in the 131 checked bank snakes have share at least 142, an observation on those examples only. Proof sources, exact comparison potentials, native certificates and reproduction scripts are retained under critical-current. The manuscript and editor mirror remain unchanged at revision 66.
+
+The count-free distinct-direction share-12 theorem subsequently completed 221 Lean modules and 86 theorem audits. Both the uniform and mixed nine-shape targets have complete native certificates. The unconditional interval remains 191 <= a(9) <= 235; 234 remains conditional.

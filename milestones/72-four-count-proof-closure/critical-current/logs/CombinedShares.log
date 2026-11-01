@@ -1,0 +1,14 @@
+Snake9.LocalWindow.ShareWindow120.share_bound {m : ℕ} (p : Snake9.Snake m) (r a b c d e f : ℕ)
+  (hn : [a, b, c, d, e, f].Nodup) (h9 : ∀ x ∈ [a, b, c, d, e, f], x < 9) (hr : r + 6 ≤ m)
+  (hd : ∀ j < 6, Snake9.LocalWindow.dir p (r + j) = [a, b, c, d, e, f].getD j 0)
+  (hb :
+    ∀ i < 5,
+      (Snake9.LocalWindow.ShareWindow120.bounds.getD i (0, 21)).1 ≤ Snake9.LocalWindow.coreAlpha p (r + i + 1) ∧
+        Snake9.LocalWindow.coreAlpha p (r + i + 1) ≤ (Snake9.LocalWindow.ShareWindow120.bounds.getD i (0, 21)).2) :
+  120 ≤ (List.map (fun i => Snake9.LocalWindow.coreShare 12 p (r + i + 1)) (List.range 5)).sum
+Snake9.LocalWindow.ShareWindow12.share_bound {m : ℕ} (p : Snake9.Snake m) (r a b c d e f : ℕ)
+  (hn : [a, b, c, d, e, f].Nodup) (h9 : ∀ x ∈ [a, b, c, d, e, f], x < 9) (hr : r + 6 ≤ m)
+  (hd : ∀ j < 6, Snake9.LocalWindow.dir p (r + j) = [a, b, c, d, e, f].getD j 0) :
+  12 ≤ (List.map (fun i => Snake9.LocalWindow.coreShare 12 p (r + i + 1)) (List.range 5)).sum
+'Snake9.LocalWindow.ShareWindow12.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeTarget.upper234_of_weight_bounds' depends on axioms: [propext, Quot.sound]

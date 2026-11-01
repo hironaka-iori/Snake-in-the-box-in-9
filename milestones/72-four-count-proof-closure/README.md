@@ -55,6 +55,10 @@ A local witness survives for (a,b,c,d,a) with the first count at most one and fo
 
 The separate [critical-charge investigation](critical-charge/README.md) freezes the preceding six-case model and independently identifies all 18,865 minimum-charge cyclic transitions in six components. The share lower bound of 120 on a locally feasible five-centre window has now completed its Lean interpretation, refutation replay and arbitrary-snake normalization: 99 modules and 72 theorem audits. Admitting this candidate raises 1,280 weights in the current eight-case model but leaves the exact mean at 480. A separate comparison on the ten-case graph reduces the fixed-potential count basis from 14,143 to 14,142 when this share theorem is included. The global interpretation remains pending.
 
+## Count-free share continuation
+
+The [current share investigation](critical-current/README.md) refreshes the critical graph after all ten count cases and the share-120 theorem. It has found a conditional 234 criterion using nine direction-shape inequalities, with all nine Boolean refutations independently checked. The exact model has mean 496 and range 600. Lean arithmetic verifies the strict margin 32, while the geometric share proofs and global assembly remain pending. The count-free distinct-direction share-12 theorem has passed Lean and the source audit, including arbitrary coordinate normalization and removal of all count hypotheses. This is now the priority within the empty-square route.
+
 ## Pending work
 
 The exact tuple (3,4,4,4) for (a,b,c,a,d) remains unresolved here. The native certificate-producing solver timed out after 300 seconds. A separate sixty-second PySAT Cadical153 proof-output pilot also returned UNKNOWN after 990,115 conflicts. Neither result establishes an exclusion. The original numerical catalogue is retained as a separate source of conditional premises.
