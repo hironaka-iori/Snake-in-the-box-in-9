@@ -1,0 +1,121 @@
+{
+  "status": "PASS_CONDITIONAL_CATALOGUE_DISPATCH",
+  "generic_adapter_status": "PASS_GENERIC_CANONICAL_SHARE_ADAPTER",
+  "modules": [
+    {
+      "module": "CanonicalShareAdapter",
+      "source_sha256": "a7b072d320c0466f584394a2c2196c4528416ff0788b899fd12c1a35612f965b",
+      "olean_sha256": "92132b94aa2c959b284b287abbe8c78296ae27faa30f642adfbe88c382629d5c",
+      "log_sha256": "64ce8f801d4e22dbe9bcb50068c0026ea387b268f552f3b87a9320cf75faa1a0",
+      "theorem_count": 4
+    },
+    {
+      "module": "ConditionalCatalogueDispatch",
+      "source_sha256": "fd4b3833567fb42c7fb31e6987d51324cda6492193b9fbf702d2efa4666839ff",
+      "olean_sha256": "f5df3bf12240f4241d95aef61af743151534fcd99d70f6331b8baf2b70fdcdfd",
+      "log_sha256": "ac1cc80aafeda1c4d4d518af3085a043776cdfe71b08394a5eb1fec723cbc9c2",
+      "theorem_count": 6
+    }
+  ],
+  "support_record_sha256": "cfc29d10cf26a2d8d5d99a0eb89c469e6e9556ea2afba2ed9e5908eb8c6f74e4",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.CountFreeAdapter73.blockList_eq_dsOf",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.canonical_share_bound",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.reversed_canonical_share_bound",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.share_bound_of_either_canonical_match",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.selectedCap_ge11",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.windowLower_ge12",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.selectedShape_mem_and_match",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.representative_refutation",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.catalogue_share_bound",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeAdapter73.catalogue_share_ge12",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "generic_theorem_hypotheses": [
+    "p : Snake m",
+    "r+6 <= m",
+    "canon(dsOf p r 6) = cs or canon(reverse(dsOf p r 6)) = cs",
+    "RefutedShare (winOf cs) (replicate 5 (0,21)) 12 K"
+  ],
+  "generic_conclusion": "K+1 <= sum_{i=0}^4 coreShare 12 p (r+i+1)",
+  "selected_caps": {
+    "012031": 15,
+    "012032": 15,
+    "012034": 19,
+    "012301": 15,
+    "012304": 15,
+    "012310": 11,
+    "012314": 15,
+    "012340": 15,
+    "012345": 15
+  },
+  "lookup": "Use canon(dsOf p r 6) when it belongs to representatives; otherwise use canon(reverse(dsOf p r 6)); return selectedCap+1.",
+  "catalogue_hypotheses": "All nine explicitly printed RefutedShare premises with the selected caps, plus p : Snake m and r+6 <= m.",
+  "catalogue_conclusion": "windowLower p r <= sum_{i=0}^4 coreShare 12 p (r+i+1); windowLower p r >= 12; hence the share sum is at least 12 conditional on all nine certificates.",
+  "scope": "Fresh Lean 4.19.0 checks of the generic actual-window adapter and conditional catalogue dispatch. The nine certificate premises remain explicit; no individual certificate is imported or assumed established. Existing normalization, coverage and local-share support was reused after source, receipt, artifact and log hash checks; no fresh full inherited rebuild. This does not construct a history-graph walk or establish a numerical upper bound."
+}

@@ -1,0 +1,303 @@
+{
+  "build": "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7300\\build\\semantic",
+  "records": [
+    {
+      "module": "LratCheckOffset4096",
+      "exit_code": 0,
+      "source_sha256": "e3067068ddb9907c408b9fc8da38ea3b4a77067763a24e2ef30c254488f5ce6c",
+      "dependencies": {},
+      "seconds": 3.235000000000582
+    },
+    {
+      "module": "LratFastOffset4096W13",
+      "exit_code": 0,
+      "source_sha256": "fe9e540d43a3356a1e3b78fa8f9727021e0787fe3c2ec6b6f4a7dc7172875844",
+      "dependencies": {
+        "LratCheckOffset4096": "e3067068ddb9907c408b9fc8da38ea3b4a77067763a24e2ef30c254488f5ce6c"
+      },
+      "seconds": 2.422000000005937
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data0",
+      "exit_code": 0,
+      "source_sha256": "e386d569be54cbbab88265db8115a78d863154d99005eda919fc8841904c6648",
+      "dependencies": {
+        "LratFastOffset4096W13": "fe9e540d43a3356a1e3b78fa8f9727021e0787fe3c2ec6b6f4a7dc7172875844",
+        "LocalWindowCnf/ShareWindow7300": "1794f36fece34ce27cbc0444d153432d73e21dce440a95d392faa608b2dafad7"
+      },
+      "seconds": 3.312000000005355
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data1",
+      "exit_code": 0,
+      "source_sha256": "f329c27336dc50bbd2816c98857713420aa144d41e8796c06b1211c45b71c5d1",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data0": "e386d569be54cbbab88265db8115a78d863154d99005eda919fc8841904c6648"
+      },
+      "seconds": 2.4839999999967404
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data12",
+      "exit_code": 0,
+      "source_sha256": "1012ea1546774c2ca87d4d55f5e11fe79b0a1b01f6e4c1d99532fc8bc27a02f6",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data0": "e386d569be54cbbab88265db8115a78d863154d99005eda919fc8841904c6648"
+      },
+      "seconds": 4.187999999994645
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data13",
+      "exit_code": 0,
+      "source_sha256": "ed7304f394669936ef70e2922d83254cf21cdbe1a8166762058fe6153d692fc9",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data12": "1012ea1546774c2ca87d4d55f5e11fe79b0a1b01f6e4c1d99532fc8bc27a02f6"
+      },
+      "seconds": 3.7180000000080327
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data14",
+      "exit_code": 0,
+      "source_sha256": "c0f78c20a710fb62fda0d69f1204aed7e441ba106eb9a722b0d39ccb47fd2d28",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data0": "e386d569be54cbbab88265db8115a78d863154d99005eda919fc8841904c6648"
+      },
+      "seconds": 1.875
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Check3",
+      "exit_code": 0,
+      "source_sha256": "f40537a16c04df86313c25b8135dd426afeb8dad2cfc19f99c1b4653927b9bc2",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data12": "1012ea1546774c2ca87d4d55f5e11fe79b0a1b01f6e4c1d99532fc8bc27a02f6",
+        "LocalWindowUnsat/ShareWindow7300/Data13": "ed7304f394669936ef70e2922d83254cf21cdbe1a8166762058fe6153d692fc9",
+        "LocalWindowUnsat/ShareWindow7300/Data14": "c0f78c20a710fb62fda0d69f1204aed7e441ba106eb9a722b0d39ccb47fd2d28"
+      },
+      "seconds": 14.15700000000652
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data2",
+      "exit_code": 0,
+      "source_sha256": "c0c9ee56a71e6b246f33f85a0a8bc324dc75e822a918aad2f3c37d2537eb2d53",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data1": "f329c27336dc50bbd2816c98857713420aa144d41e8796c06b1211c45b71c5d1"
+      },
+      "seconds": 1.7029999999940628
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data3",
+      "exit_code": 0,
+      "source_sha256": "f512db94f4c74a9c1bd8629a0e56ff7eab8098eee4233193781cc4ae14d4cf03",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data2": "c0c9ee56a71e6b246f33f85a0a8bc324dc75e822a918aad2f3c37d2537eb2d53"
+      },
+      "seconds": 1.7030000000086147
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data4",
+      "exit_code": 0,
+      "source_sha256": "d5d01355ed79f86d99635d44d311c28eae98a9317f3083442b6b884b30864692",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data0": "e386d569be54cbbab88265db8115a78d863154d99005eda919fc8841904c6648"
+      },
+      "seconds": 3.8430000000080327
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data5",
+      "exit_code": 0,
+      "source_sha256": "a32616dc7401200ffe98e8ccefcc18f6f2d5234eaee3b31f5927de74e855241f",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data4": "d5d01355ed79f86d99635d44d311c28eae98a9317f3083442b6b884b30864692"
+      },
+      "seconds": 1.75
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data6",
+      "exit_code": 0,
+      "source_sha256": "539932a2f8355a413f21135e2d3e7838fab3887f1593dc48734c8dbf42ad165c",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data5": "a32616dc7401200ffe98e8ccefcc18f6f2d5234eaee3b31f5927de74e855241f"
+      },
+      "seconds": 1.7189999999973224
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Check1",
+      "exit_code": 0,
+      "source_sha256": "3fd63d69dfd7551ac839a88cce2665a79120f1d4d0b8142524c56e66ab82d4d8",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data1": "f329c27336dc50bbd2816c98857713420aa144d41e8796c06b1211c45b71c5d1",
+        "LocalWindowUnsat/ShareWindow7300/Data6": "539932a2f8355a413f21135e2d3e7838fab3887f1593dc48734c8dbf42ad165c",
+        "LocalWindowUnsat/ShareWindow7300/Data3": "f512db94f4c74a9c1bd8629a0e56ff7eab8098eee4233193781cc4ae14d4cf03",
+        "LocalWindowUnsat/ShareWindow7300/Data4": "d5d01355ed79f86d99635d44d311c28eae98a9317f3083442b6b884b30864692",
+        "LocalWindowUnsat/ShareWindow7300/Data2": "c0c9ee56a71e6b246f33f85a0a8bc324dc75e822a918aad2f3c37d2537eb2d53",
+        "LocalWindowUnsat/ShareWindow7300/Data5": "a32616dc7401200ffe98e8ccefcc18f6f2d5234eaee3b31f5927de74e855241f",
+        "LocalWindowUnsat/ShareWindow7300/Data0": "e386d569be54cbbab88265db8115a78d863154d99005eda919fc8841904c6648"
+      },
+      "seconds": 89.70300000000861
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data7",
+      "exit_code": 0,
+      "source_sha256": "3a5e7774736c4f7321b817adbbcf30c01d4ef76ee852b60ca850b28ee95fbef6",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data6": "539932a2f8355a413f21135e2d3e7838fab3887f1593dc48734c8dbf42ad165c"
+      },
+      "seconds": 2.1410000000032596
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data8",
+      "exit_code": 0,
+      "source_sha256": "86f39b287b0639458b10994b522c896ff84b7895f04d8e0d33620e7b4faf2781",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data0": "e386d569be54cbbab88265db8115a78d863154d99005eda919fc8841904c6648"
+      },
+      "seconds": 5.031999999991967
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data9",
+      "exit_code": 0,
+      "source_sha256": "221b617d39c4d339036da5d25f9946ce9c8ae36047dc4d54eed95282646770ec",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data8": "86f39b287b0639458b10994b522c896ff84b7895f04d8e0d33620e7b4faf2781"
+      },
+      "seconds": 1.75
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data10",
+      "exit_code": 0,
+      "source_sha256": "0ec40985f45f0ae159dce0a4fa2f34aff8f978ca43e0d55777efe3bf1b64949f",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data9": "221b617d39c4d339036da5d25f9946ce9c8ae36047dc4d54eed95282646770ec"
+      },
+      "seconds": 1.9689999999973224
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Data11",
+      "exit_code": 0,
+      "source_sha256": "ec115c402293d30e5e80f60dc94707f8d3cc993ad7c12aa4ad51daf0a034b134",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data10": "0ec40985f45f0ae159dce0a4fa2f34aff8f978ca43e0d55777efe3bf1b64949f"
+      },
+      "seconds": 2.3440000000118744
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300/Check2",
+      "exit_code": 0,
+      "source_sha256": "08ebf3942bba1ed65b43e5b2a2e1d9d1bda2555fde1e94204c0a64b6f1bb64d7",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Data9": "221b617d39c4d339036da5d25f9946ce9c8ae36047dc4d54eed95282646770ec",
+        "LocalWindowUnsat/ShareWindow7300/Data11": "ec115c402293d30e5e80f60dc94707f8d3cc993ad7c12aa4ad51daf0a034b134",
+        "LocalWindowUnsat/ShareWindow7300/Data6": "539932a2f8355a413f21135e2d3e7838fab3887f1593dc48734c8dbf42ad165c",
+        "LocalWindowUnsat/ShareWindow7300/Data7": "3a5e7774736c4f7321b817adbbcf30c01d4ef76ee852b60ca850b28ee95fbef6",
+        "LocalWindowUnsat/ShareWindow7300/Data8": "86f39b287b0639458b10994b522c896ff84b7895f04d8e0d33620e7b4faf2781",
+        "LocalWindowUnsat/ShareWindow7300/Data10": "0ec40985f45f0ae159dce0a4fa2f34aff8f978ca43e0d55777efe3bf1b64949f",
+        "LocalWindowUnsat/ShareWindow7300/Data12": "1012ea1546774c2ca87d4d55f5e11fe79b0a1b01f6e4c1d99532fc8bc27a02f6"
+      },
+      "seconds": 56.51499999999942
+    },
+    {
+      "module": "LocalWindowUnsat/ShareWindow7300",
+      "exit_code": 0,
+      "source_sha256": "43651a71fc49300f295326e2d7bd76b0322ed6a2f33cec6d0fc94967da40b057",
+      "dependencies": {
+        "LocalWindowUnsat/ShareWindow7300/Check1": "3fd63d69dfd7551ac839a88cce2665a79120f1d4d0b8142524c56e66ab82d4d8",
+        "LocalWindowUnsat/ShareWindow7300/Check2": "08ebf3942bba1ed65b43e5b2a2e1d9d1bda2555fde1e94204c0a64b6f1bb64d7",
+        "LocalWindowUnsat/ShareWindow7300/Check3": "f40537a16c04df86313c25b8135dd426afeb8dad2cfc19f99c1b4653927b9bc2"
+      },
+      "seconds": 1.937000000005355
+    },
+    {
+      "module": "LocalWindowShareBridge",
+      "exit_code": 0,
+      "source_sha256": "8b2d06a67664f7d9ded4d0b3422e8cf73c151caed2a0cc08772ec74cf7d59ca8",
+      "dependencies": {},
+      "seconds": 2.8910000000032596
+    },
+    {
+      "module": "Share7300/Compose",
+      "exit_code": 0,
+      "source_sha256": "d99addd2aeb1a161e4065c19a62d4a69649f993299f96dc4e34ad8f522bad417",
+      "dependencies": {},
+      "seconds": 19.437000000005355
+    },
+    {
+      "module": "Share7300/Sat",
+      "exit_code": 0,
+      "source_sha256": "7b37112fa84d686d077add7dfd88de8dc3e78ec552b1ffae295d8b2c1791030e",
+      "dependencies": {
+        "Share7300/Shard23": "b58e8bf6dd07ace7207aa7cd39643a302976ddcaece19d5e6da99f04a8374938",
+        "Share7300/Shard26": "6950176842855e30b5b6b7630cb1873b3bd3076027fad05360ed657f1b1d6df2",
+        "Share7300/Shard03": "39eb2c811f953f6c7a1d43ebbe9d6878cd2c031e88d2e044e5f03a54e0310015",
+        "Share7300/Shard18": "1ce53411c6afd1b7eea459469189cfc6bd97a6b4cc95a187639318537c161a3c",
+        "Share7300/Shard40": "6a7fa8966e65ff2098136804ddc37ba51823f4c4fccd71241494a138ccc28773",
+        "Share7300/Shard31": "72d7f634ebc30c32513fa7b81a0374ac2d76f469d8b782147be4071062d89983",
+        "Share7300/Shard04": "6d015fedea2d1af93903a51be8dabd3081f6a74359c1a804cd967229ce7e1e18",
+        "Share7300/Shard39": "280f01e2761cbc66ac3e0913d1b9b63ab485ad6e8df87f2c9a13e608e5150af9",
+        "Share7300/Shard02": "0610fdd0ca10855d935c904d134bd4f2ffc49b1c867a02f22544bfceb1f0728d",
+        "Share7300/Shard08": "b34885ceedc622d2abaaafab0e00a5a62a1fdd2e3277d57102a097cc18cdf7e8",
+        "Share7300/Shard20": "e762bc9c9199c41e3e2acd3e427d2ef3746a892dbf63d5007b7290dfefa8fc2e",
+        "Share7300/Shard10": "b9d36c62127963d765ab50a6de291a5e31c502c64ed0bed064a0bf89c624e7c7",
+        "Share7300/Shard00": "497f71d8d48549b69a9830f33d959be7fa42a825f9b3464cb9c759af894dab9d",
+        "Share7300/Shard05": "454134fe064f25d18d4be0f01e2ec38e28ae60feaa3c056479855987b5bf2714",
+        "Share7300/Shard33": "32d279404ed417ad4b0105bcf10781fe7929c8a21a61247bf407cd58c9932fcc",
+        "Share7300/Shard21": "6bcd0bf8ffd39ce8c807d86b864b3fd66573c9b55d2c4f86e1b9fe324d25299a",
+        "Share7300/Shard09": "48bf9abbfae90891ea47f8cd764378864236a8ec2a0d1e32bcdb1702d31d8327",
+        "Share7300/Shard32": "ce0a858655e80dfdbc272012bd181bc00fbe62109bfe94e41867d7cc992a7d7b",
+        "Share7300/Shard36": "6965c350aa2c559f31a5536d54cafc15acbf32137d6f147a5630e2feb7011371",
+        "Share7300/Shard16": "9a919cfd35cae0b6bc74bc8608834e33922513cb2fbbda961f81f8b1f654afa6",
+        "Share7300/Shard29": "7f35fec1f3ec6c5f20f2275eaa04da9ff67c4e4bbf890c7c040ed6ae850f4456",
+        "Share7300/Shard34": "49397bd8f297777d4cd70cd0802fd15e0f1668aee1639df452d1c34d0d074407",
+        "Share7300/Shard28": "586887b746104054fd20fe52ef2d9301e33b70a2de2f6d579a0d7b7fdc4b233f",
+        "Share7300/Shard35": "8df6a6ca47e268bf9293600b984356a6310e3968020ae0a182a1d9ddc3ac89a4",
+        "Share7300/Shard37": "b276b1f8b89084668fbf8acd9b7e0fccc5ebf149c7980456aece3a6d5b06cc3d",
+        "Share7300/Shard24": "d30382d798fa5e17c7848f696d1fffa67fc6b211e5256d6a49fd8c8fc7e0316c",
+        "Share7300/Shard06": "48614dbe61ced0c0b115a5009c77383909d33538846ea71808b205c1f03f1643",
+        "Share7300/Shard11": "eae1e4cc6595773f46086f190865362615d22153c82c55a16305a4aef5991c93",
+        "Share7300/Shard01": "2c5a93098f849eda8f8de8267c099a56ee73b2ebd20291e1f6065e4f8da22f89",
+        "Share7300/Shard14": "7086841d17fb551d4b558a603be248097f80b2c2d3d7fc1d05db5e24640c2033",
+        "Share7300/Shard13": "6aac0af7ed036c3e67ed614f0cbfd893ec6cab9620b6cca60642a756687316bc",
+        "Share7300/Shard15": "bdf2fd27e748ad3b1cf541d44a7b57f474474caf896ab366b77b79dc9db0ae2e",
+        "Share7300/Shard19": "d660228f5a1be177ea80142c2f5f8e118bd2ececdd460e67d583ed37674dca93",
+        "Share7300/Shard22": "2ba71753c348a115339933fc85a19c9de52d266e56353c6e68b973be517850fa",
+        "Share7300/Shard30": "bbb82bc7bb4bcd319a16757bae8b6b2c85e1f90f92094d2d8b2be6e7d8f2fd1c",
+        "Share7300/Shard38": "c045e233ce3550a40d404a2cfb9e7b4b500f7b359b8d97e131668beae82e6fe4",
+        "Share7300/Shard07": "6601248492f555d0452c96327fbabe4bf644b7df76856f6dfd4497d73ac21243",
+        "Share7300/Compose": "d99addd2aeb1a161e4065c19a62d4a69649f993299f96dc4e34ad8f522bad417",
+        "Share7300/Shard12": "d1c51d1856f637aafd6036861dbc2f2e3cfe68a9ac2b7fe2d20138695e3055ad",
+        "Share7300/Shard17": "fc7aa04b0cba18e9ad23c0e6f072f63aa3e64e328455eaf097b381d7b93d68f0",
+        "Share7300/Shard25": "52446085a775d94687ef9cca10e8bb20dd60ff4b3668b0109253808b9c841490",
+        "Share7300/Shard27": "abc1743298757aa8b6ecfa1d546dca396df41975fd3d88c820e808ded6cde975",
+        "Share7300/Structure": "bd632410f97a156a9b6486b471174bf231e94a27961bee981f1c33101536007d"
+      },
+      "seconds": 9.764999999999418
+    },
+    {
+      "module": "Share7300/Refuted",
+      "exit_code": 0,
+      "source_sha256": "91ff45a7b4e5d8a55ebc720c228092b0f0563d6514ecd42f3d02a325bbd14aa3",
+      "dependencies": {
+        "Share7300/Sat": "7b37112fa84d686d077add7dfd88de8dc3e78ec552b1ffae295d8b2c1791030e",
+        "LocalWindowUnsat/ShareWindow7300": "43651a71fc49300f295326e2d7bd76b0322ed6a2f33cec6d0fc94967da40b057"
+      },
+      "seconds": 16.405999999988126
+    },
+    {
+      "module": "Share7300/Geometry",
+      "exit_code": 0,
+      "source_sha256": "999c86d295d748a97d8a72830988f47a655c30bec955f9b048201020fb635013",
+      "dependencies": {
+        "LocalWindowShareBridge": "8b2d06a67664f7d9ded4d0b3422e8cf73c151caed2a0cc08772ec74cf7d59ca8",
+        "Share7300/Refuted": "91ff45a7b4e5d8a55ebc720c228092b0f0563d6514ecd42f3d02a325bbd14aa3"
+      },
+      "seconds": 9.796999999991385
+    },
+    {
+      "module": "Share7300/Reversal",
+      "exit_code": 0,
+      "source_sha256": "4d0fac46172d4ef6e817c1e368fe3a78892ff40aa192f40152be8e331133625a",
+      "dependencies": {
+        "Share7300/Geometry": "999c86d295d748a97d8a72830988f47a655c30bec955f9b048201020fb635013"
+      },
+      "seconds": 8.89100000000326
+    }
+  ]
+}

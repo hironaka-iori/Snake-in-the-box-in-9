@@ -1,0 +1,209 @@
+{
+  "status": "VERIFIED_PARTIAL_CATALOGUE_GLOBAL_PROBLEM_OPEN",
+  "cases": [
+    {
+      "case_number": 7300,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1
+      ],
+      "required_share": 16,
+      "status": "LEAN_CHECKED_WITH_REVERSAL",
+      "modules": 71,
+      "theorem_audits": 55,
+      "proof_audit_sha256": "73d67c026aecf98818b7b95cdcf7888b5a5814bad8a910dc7c499258989b9c33"
+    },
+    {
+      "case_number": 7301,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        2
+      ],
+      "required_share": 16,
+      "status": "NATIVE_CERTIFICATE_ONLY"
+    },
+    {
+      "case_number": 7302,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4
+      ],
+      "required_share": 20,
+      "status": "NATIVE_CERTIFICATE_ONLY"
+    },
+    {
+      "case_number": 7303,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1
+      ],
+      "required_share": 16,
+      "status": "NATIVE_CERTIFICATE_ONLY"
+    },
+    {
+      "case_number": 7304,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4
+      ],
+      "required_share": 16,
+      "status": "LEAN_CHECKED_WITH_REVERSAL",
+      "modules": 108,
+      "theorem_audits": 67,
+      "proof_audit_sha256": "e5b727daa6bbe40ea38de3d7003ddd825645d0dac982fe82f637bad31e26306d"
+    },
+    {
+      "case_number": 7305,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        0
+      ],
+      "required_share": 12,
+      "status": "NATIVE_CERTIFICATE_ONLY"
+    },
+    {
+      "case_number": 7306,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        4
+      ],
+      "required_share": 16,
+      "status": "LEAN_CHECKED_WITH_REVERSAL",
+      "modules": 182,
+      "theorem_audits": 88,
+      "proof_audit_sha256": "9609b284352efbde25d733255c6978fd1c99e0110850f8dcb5dc99797acb4a33"
+    },
+    {
+      "case_number": 7307,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        0
+      ],
+      "required_share": 16,
+      "status": "NATIVE_CERTIFICATE_ONLY"
+    },
+    {
+      "case_number": 7308,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "required_share": 16,
+      "status": "NATIVE_CERTIFICATE_ONLY"
+    }
+  ],
+  "completed_cases": [
+    7300,
+    7304,
+    7306
+  ],
+  "bridge_audit_sha256": "a648a4f8148bd436eba00286def2a8d6722462aa372a951d52ab305e6a14a1f8",
+  "bridge_modules": 3,
+  "bridge_theorem_audits": 16,
+  "unconditional_edge_interval": [
+    191,
+    235
+  ],
+  "conditional_target": 234,
+  "finite_model": {
+    "mean": 496,
+    "potential_range": 600,
+    "upper_fraction": "137941/587",
+    "source_checkpoint": "c3bfc952a1a67191391ebc90c681f8fb6e897bb2"
+  },
+  "remaining": [
+    "Complete remaining local share certificates and discharge the partial catalogue premises",
+    "Construct arbitrary-snake graph walk with count and history interpretation",
+    "Apply each local credit at the exact indices and match boundary accounting",
+    "Apply audited finite potential and finish global Lean theorem"
+  ],
+  "scope": "Partial Lean catalogue and global share accounting. No new global numerical bound; no fresh rebuild of all inherited dependencies.",
+  "coverage": {
+    "status": "PASS_SIX_TRANSITION_COVERAGE",
+    "audit_sha256": "a38e3ffa4da45b5e2b672f9fb6061be28fd31120971e3733de9a135962f1f6a5",
+    "theorem_audits": 4
+  },
+  "adapter": {
+    "status": "PASS_CONDITIONAL_CATALOGUE_DISPATCH",
+    "audit_sha256": "b01b8789503f4c59198836de0378e4ae00311bb822197396be4dd7db59c995d5",
+    "theorem_audits": 10
+  },
+  "integration": {
+    "status": "PASS_COMBINED_LOCAL_CATALOGUE_AND_BUDGET",
+    "audit_sha256": "28d09c3c17e027dc3fb4800cbc80331378e21705c907bb23d105f5cd5ace88d8",
+    "remaining_local_certificate_cases": [
+      7301,
+      7302,
+      7303,
+      7305,
+      7307,
+      7308
+    ]
+  },
+  "comparisons": [
+    {
+      "path": "proved-model.json",
+      "status": "EXACT_PROOF_SUPPORTED_LOCAL_MODEL",
+      "sha256": "0be79991acd65fef4228c3de294d5ee9528e7ff8934f930e728601b073457026",
+      "mean": "480",
+      "potential_range": 536,
+      "additional_share_assumptions": []
+    },
+    {
+      "path": "assumed-012310x12-model.json",
+      "status": "EXACT_CONDITIONAL_LOCAL_MODEL",
+      "sha256": "403ca1a4d94d344ab65746f752eea321f2f4a86bf159ee111cf4ac37c0219730",
+      "mean": "483",
+      "potential_range": 551,
+      "additional_share_assumptions": [
+        {
+          "shape": [
+            0,
+            1,
+            2,
+            3,
+            1,
+            0
+          ],
+          "share": 12
+        }
+      ]
+    }
+  ]
+}

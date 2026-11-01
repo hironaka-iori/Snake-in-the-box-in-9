@@ -1,0 +1,117 @@
+{
+  "status": "PASS_SIX_TRANSITION_COVERAGE",
+  "source_sha256": "ae1e3f9540421a9e7c86f13291bc3e19b9cbef3581660e5069755638f84008b8",
+  "olean_sha256": "ec0731b349825898a24783302242ada6aea1b2fc37a3bf24204566c558c22e02",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.CountFreeCoverage73.restricted_growth_table",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeCoverage73.canonical_coverage",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeCoverage73.snake_window_coverage",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeCoverage73.catalogue_size",
+      "axioms": []
+    }
+  ],
+  "representatives": [
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      1
+    ],
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      0,
+      3,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      0,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      1,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      0
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  ],
+  "representatives_match_catalogue": true,
+  "catalogue_sha256": "bc8b1b2f4e0339a4bd757a9d70db81180292257b922f8cc3edde64818059d539",
+  "enumeration_crosscheck": {
+    "restricted_growth_words": 203,
+    "induced_orientations": 12,
+    "scope": "Independent Python cross-check of enumeration sizes; universal coverage itself is checked by the Lean theorem."
+  },
+  "normalization_support_record_sha256": "bdcc9faed67d1c3a9cd13d8432106ab5aa725a2b3840a9830ecba86362dbf532",
+  "scope": "Lean-checked finite canonical coverage and actual-snake canonical six-transition window coverage, including canonical reversal. Coordinate adapters to the nine local share statements and the larger history graph remain separate. Existing normalization and cube support was reused after source and artifact hash checks; no full inherited rebuild is claimed."
+}

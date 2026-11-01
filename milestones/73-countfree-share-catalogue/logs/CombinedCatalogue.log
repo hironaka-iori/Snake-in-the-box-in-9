@@ -1,0 +1,42 @@
+partial_catalogue_share : RefutedShare (winOf [0, 1, 2, 0, 3, 2]) broadBounds 12 15 →
+  RefutedShare (winOf [0, 1, 2, 0, 3, 4]) broadBounds 12 19 →
+    RefutedShare (winOf [0, 1, 2, 3, 0, 1]) broadBounds 12 15 →
+      RefutedShare (winOf [0, 1, 2, 3, 1, 0]) broadBounds 12 11 →
+        RefutedShare (winOf [0, 1, 2, 3, 4, 0]) broadBounds 12 15 →
+          RefutedShare (winOf [0, 1, 2, 3, 4, 5]) broadBounds 12 15 →
+            ∀ {m : ℕ} (p : Snake m) (r : ℕ),
+              r + 6 ≤ m → windowLower p r ≤ (List.map (fun i => coreShare 12 p (r + i + 1)) (List.range 5)).sum
+'Snake9.LocalWindow.ShareWindow120.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow12.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeBridge.shareN_eq_coreShare' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeBridge.core_share12_charge_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeBridge.core_share_five_centre_overlap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeBridge.core_share12_five_centre_charge_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeTarget.upper234_of_weight_bounds' depends on axioms: [propext, Quot.sound]
+'Snake9.CountFreeTarget.strict_margin' depends on axioms: [propext]
+'Snake9.CountFreeCoverage73.restricted_growth_table' depends on axioms: [propext, Quot.sound]
+'Snake9.CountFreeCoverage73.canonical_coverage' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeCoverage73.snake_window_coverage' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeCoverage73.catalogue_size' does not depend on any axioms
+'Snake9.CountFreeAdapter73.blockList_eq_dsOf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeAdapter73.canonical_share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeAdapter73.reversed_canonical_share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeAdapter73.share_bound_of_either_canonical_match' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Snake9.CountFreeAdapter73.selectedCap_ge11' depends on axioms: [propext, Quot.sound]
+'Snake9.CountFreeAdapter73.windowLower_ge12' depends on axioms: [propext, Quot.sound]
+'Snake9.CountFreeAdapter73.selectedShape_mem_and_match' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeAdapter73.representative_refutation' depends on axioms: [propext]
+'Snake9.CountFreeAdapter73.catalogue_share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeAdapter73.catalogue_share_ge12' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow7300.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow7300.share_bound_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CatalogueIntegration73.canonical7300' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow7304.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow7304.share_bound_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CatalogueIntegration73.canonical7304' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow7306.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow7306.share_bound_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CatalogueIntegration73.canonical7306' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CatalogueIntegration73.partial_catalogue_share' depends on axioms: [propext, Classical.choice, Quot.sound]

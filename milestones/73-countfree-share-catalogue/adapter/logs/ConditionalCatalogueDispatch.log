@@ -1,0 +1,28 @@
+catalogue_share_bound : RefutedShare (winOf [0, 1, 2, 0, 3, 1]) broadBounds 12 15 →
+  RefutedShare (winOf [0, 1, 2, 0, 3, 2]) broadBounds 12 15 →
+    RefutedShare (winOf [0, 1, 2, 0, 3, 4]) broadBounds 12 19 →
+      RefutedShare (winOf [0, 1, 2, 3, 0, 1]) broadBounds 12 15 →
+        RefutedShare (winOf [0, 1, 2, 3, 0, 4]) broadBounds 12 15 →
+          RefutedShare (winOf [0, 1, 2, 3, 1, 0]) broadBounds 12 11 →
+            RefutedShare (winOf [0, 1, 2, 3, 1, 4]) broadBounds 12 15 →
+              RefutedShare (winOf [0, 1, 2, 3, 4, 0]) broadBounds 12 15 →
+                RefutedShare (winOf [0, 1, 2, 3, 4, 5]) broadBounds 12 15 →
+                  ∀ {m : ℕ} (p : Snake m) (r : ℕ),
+                    r + 6 ≤ m → windowLower p r ≤ (List.map (fun i => coreShare 12 p (r + i + 1)) (List.range 5)).sum
+catalogue_share_ge12 : RefutedShare (winOf [0, 1, 2, 0, 3, 1]) broadBounds 12 15 →
+  RefutedShare (winOf [0, 1, 2, 0, 3, 2]) broadBounds 12 15 →
+    RefutedShare (winOf [0, 1, 2, 0, 3, 4]) broadBounds 12 19 →
+      RefutedShare (winOf [0, 1, 2, 3, 0, 1]) broadBounds 12 15 →
+        RefutedShare (winOf [0, 1, 2, 3, 0, 4]) broadBounds 12 15 →
+          RefutedShare (winOf [0, 1, 2, 3, 1, 0]) broadBounds 12 11 →
+            RefutedShare (winOf [0, 1, 2, 3, 1, 4]) broadBounds 12 15 →
+              RefutedShare (winOf [0, 1, 2, 3, 4, 0]) broadBounds 12 15 →
+                RefutedShare (winOf [0, 1, 2, 3, 4, 5]) broadBounds 12 15 →
+                  ∀ {m : ℕ} (p : Snake m) (r : ℕ),
+                    r + 6 ≤ m → 12 ≤ (List.map (fun i => coreShare 12 p (r + i + 1)) (List.range 5)).sum
+'Snake9.CountFreeAdapter73.selectedCap_ge11' depends on axioms: [propext, Quot.sound]
+'Snake9.CountFreeAdapter73.windowLower_ge12' depends on axioms: [propext, Quot.sound]
+'Snake9.CountFreeAdapter73.selectedShape_mem_and_match' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeAdapter73.representative_refutation' depends on axioms: [propext]
+'Snake9.CountFreeAdapter73.catalogue_share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CountFreeAdapter73.catalogue_share_ge12' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,165 @@
+{
+  "status": "PASS_CORE_SHARE_BUDGET",
+  "newly_checked_modules": [
+    {
+      "module": "ShareCharge",
+      "source_sha256": "0cce56ffd22c51a684952427885d98c218e19b48f5f5ffe56399f851407ca26d",
+      "olean_sha256": "a113dad5870950bed206639fc7e102aade71857e4bf8505d70fb6e9ba43f1af1"
+    },
+    {
+      "module": "CoreShareBudget",
+      "source_sha256": "81ccb6a86bb022c4acc6e5a15f09e5960caa5e0256ea4c6771830f9920344f0a",
+      "olean_sha256": "d4bd1c35d3a823123384f0b53a74abafc91e3b2500b8ed2fa328d49970290728"
+    },
+    {
+      "module": "FiveCentreOverlap",
+      "source_sha256": "c52008307937d17905342de3d7a7f7f6515243f7ec225d0ca2cb1fc1810e54a8",
+      "olean_sha256": "ffb3de30c1514a07cdbc26b0ce6d41fd51d12f9e6c025ffdf686ab1572d6322a"
+    }
+  ],
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.SquareIncidence.share_double_count",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.SquareIncidence.share_total_le",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.SquareIncidence.incidence_bound_with_empty",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.SquareIncidence.charge_total_le",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.emptyAt_eq_emptyCount",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.selDeg_eq_cnt",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.shareN_eq_coreShare",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.core_share_path_sum",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.core_share_total_le",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.core_share_charge_le",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.core_share12_charge_le",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.shifted_prefix_sum_le",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.five_centre_overlap",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.five_centre_overlap_list",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.core_share_five_centre_overlap",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CountFreeBridge.core_share12_five_centre_charge_le",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "five_centre_overlap_checked": true,
+  "inherited_direct_support": [
+    {
+      "module": "LocalWindowShareBridge",
+      "olean_path": "E:\\Snake-in-a-box\\milestones\\72-four-count-proof-closure\\critical-current\\share-proof\\build\\semantic\\LocalWindowShareBridge.olean",
+      "olean_sha256": "bc1273784bee500cbb0620c72365f0696d3d7e7d45571c971b0260eff33e4ebd"
+    },
+    {
+      "module": "SquareIncidence",
+      "olean_path": "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\SquareIncidence.olean",
+      "olean_sha256": "81d129287e007f9ca69780be51bf178856ed116e3157e54fae7aef9eda621e53"
+    }
+  ],
+  "contributor_commit": "cd0c90fddf12170d735ee34fcc501e99c60632a6",
+  "scope": "Contributor share identities recovered and independently replayed with a minimal import chain. The complete coreShare path budget, generic five-centre overlap and combined whole-path charge budget are Lean-checked. Cached cube and local-window support is reused; no fresh rebuild of all inherited dependencies and no new global numerical bound are claimed."
+}

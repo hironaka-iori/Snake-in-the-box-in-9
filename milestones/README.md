@@ -1,6 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 71 reduces the selected additional count premises for conditional 234 by 24.66%, to 14,155. Conditional optimisation alternates with unconditional proof work. The manuscript is at revision 66, with its next full rewrite scheduled for milestone 76.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 73 checks three of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains six local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 66, with its next full rewrite scheduled for milestone 76.
+
+- [Milestone 73: count-free catalogue and global accounting](73-countfree-share-catalogue/README.md)
 
 - [Milestone 72: short-count proof closure (in progress)](72-four-count-proof-closure/README.md)
 

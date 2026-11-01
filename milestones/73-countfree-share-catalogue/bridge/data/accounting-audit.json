@@ -1,0 +1,76 @@
+{
+  "status": "ACCOUNTING_CONSTANT_AND_INDICES_SUPPORTED",
+  "sources_sha256": {
+    "milestones/67-critical-family-charge/lean/BoundaryCharge.lean": "52d8e21be70a6ea34d98f140eef9e123b41b532f34dbe838cdea82f94991e52e",
+    "milestones/59-extended-share-window/lean/ExtendedBudget.lean": "002d6762831b031181307f7e33f85d315dd4eaab7e41618939d916a30c17e206",
+    "work/spectral/stronger/Aggregate247.lean": "c33e90119aadb9f4c029841fe1c92b378b6048e0c4ea44d2fcb0ba167503d368",
+    "work/spectral/stronger/UpperBound247.lean": "10de776e354f113dab257cadb7dd43e7e55d54e950e386a44d5224403070258f",
+    "work/spectral/stronger/AggregateSingletonBound.lean": "b22b36a8575f842ed633b5a218a7b7a0d3f22909b8dde68b9e51f3f9aea593aa",
+    "work/spectral/stronger/AggregateWindowUnconditional.lean": "3fc61a50788476c9a144e43a7fd58f124719b31c112f9b45e145c1fdf01a9673",
+    "milestones/59-extended-share-window/scripts/extend.py": "69d2081d2dc4b43f3867389e82aab6c91c78aebb906459019b4171d85ee807aa",
+    "milestones/67-critical-family-charge/scripts/build_full.py": "4c2fc3ad48097ebca229a55589a80afe79f080ab50fde96ecdbcf829741fda9d",
+    "milestones/72-four-count-proof-closure/critical-current/scripts/countfree_effect.py": "9412927b70c9e4e2939823727009171356a5c454091968bd6fd302f6ef18ae75"
+  },
+  "existing_receipts": [
+    {
+      "folder": "67-critical-family-charge",
+      "module": "BoundaryCharge",
+      "source_matches_receipt": true,
+      "scope": "Existing successful Lean receipt and logs inspected; no new build.",
+      "proof_receipt_path": "milestones/67-critical-family-charge/data/lean-audit.json",
+      "proof_receipt_sha256": "53ae078d98a9812e4ebfa87b11b5611363d30e406281ff856cfaea0958a87f4a",
+      "log_sha256": "224dacc7dabb744dd9fb7f696a5515ef66fbbb5ac6891a34684fc9cdc82e7f4c",
+      "source_sha256": "52d8e21be70a6ea34d98f140eef9e123b41b532f34dbe838cdea82f94991e52e"
+    },
+    {
+      "folder": "59-extended-share-window",
+      "module": "ExtendedBudget",
+      "source_matches_receipt": true,
+      "scope": "Existing successful Lean receipt and logs inspected; no new build.",
+      "proof_receipt_path": "milestones/59-extended-share-window/data/lean-audit.json",
+      "proof_receipt_sha256": "0a917d4359da077430a5c2cbed4d2f2e8e31116b9332cf5b3e342d297161f1ce",
+      "log_sha256": "1e5c57bc93ac589eeaa8ca766857c08effdfc704d46dcaec9a41a767b6063840",
+      "source_sha256": "002d6762831b031181307f7e33f85d315dd4eaab7e41618939d916a30c17e206"
+    }
+  ],
+  "graph_indices": {
+    "edge_start": "r in range(m-8)",
+    "nine_transition_vertices": "p[r] through p[r+9]",
+    "stored_counts": "alpha[r+3] through alpha[r+8]",
+    "entering_count": "min(6,alpha[r+8])",
+    "share_centres": "p[r+4] through p[r+8]",
+    "countfree_suffix": "directions 3 through 8; six transitions with those five interior centres",
+    "history_credit": "Eleven-transition window beginning at r-2 has charged centres at its offsets 6 through 10, identical to r+4 through r+8. Requires valid history recognition."
+  },
+  "boundary": {
+    "hypothesis": "m >= 8",
+    "omitted_indices": "0 through 7, and m",
+    "omitted_lower": 21,
+    "derivation": "4 + (4+4+4+1) + 4 = 21",
+    "checked_lemma": "Snake9.BoundaryCharge67.discarded_counts",
+    "required_instantiations": [
+      "endpoint_alpha_ge_four",
+      "adjacent_internal_alpha_sum_ge_four",
+      "localAlpha_positive",
+      "totalSingleton_eq_path_sum",
+      "localAlpha_eq_coreAlpha if graph counts use coreAlpha",
+      "actual entering symbol is min(6,alpha[r+8])"
+    ]
+  },
+  "overlap": {
+    "existing_lemma": "Snake9.ExtendedBudget59.window_budget",
+    "J": "Finset.range (m-8)",
+    "N": "m+1",
+    "offset": 4,
+    "local_hypothesis": "Each edge share credit is <= sum(i=0..4) coreShare(12,p,r+i+4)",
+    "offset_one_bridge": "New FiveCentreOverlap uses all six-transition starts t in range(m-5). The graph corresponds to t=r+3, a subset; use an index injection or the existing offset-independent theorem."
+  },
+  "arithmetic": {
+    "initial": 1105680,
+    "removed_m_plus_one_constant": 4200,
+    "omitted_singleton_credit": 2520,
+    "result": 1098960,
+    "checked_lemma": "Snake9.BoundaryCharge67.global_charge"
+  },
+  "conclusion": "No off-by-one or arithmetic defect found. The constant is backed by checked generic and actual-snake boundary lemmas. Instantiating them with the exact arbitrary-snake graph walk, history, share lookups and truncation remains an assembly obligation. The conditional target does not discharge these premises."
+}
