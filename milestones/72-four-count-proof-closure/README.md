@@ -1,6 +1,6 @@
 # Milestone 72: short-count proof closure and returning-direction restrictions
 
-**Research round in progress, checkpoint 31 October 2026.** Eight certificate cases have completed their Lean chains and source/provenance audits. They remove 39,905 transitions from the proof-supported model and reduce the remaining additional premises for conditional 234 from 14,155 to 14,145. The global interval remains 191 <= a(9) <= 235. Eight proposed certificate cases remain pending; the round is not complete.
+**Research round in progress, checkpoint 31 October 2026.** Ten certificate cases have completed their Lean chains and source/provenance audits. They remove 50,510 transitions from the proof-supported model and reduce the remaining additional premises for conditional 234 from 14,155 to 14,143. The global interval remains 191 <= a(9) <= 235. Six proposed certificate cases remain pending; the round is not complete.
 
 ## Completed mathematical results
 
@@ -18,7 +18,7 @@ and
 (\alpha_1,\alpha_2,\alpha_3,\alpha_4)\le(4,5,5,1).
 \]
 
-The additional componentwise bound $(\alpha_1,\alpha_2,\alpha_3,\alpha_4)\le(4,5,2,5)$ is also excluded. The componentwise bounds (2,5,5,4) and (5,5,2,3) are also excluded by the two newly completed proof chains. The inequalities are componentwise. These are upper-count exclusions, so they cover multiple exact-count premises. The first certificate required 13,918,327 LRAT hints and has now completed Lean replay.
+The additional componentwise bound $(\alpha_1,\alpha_2,\alpha_3,\alpha_4)\le(4,5,2,5)$ is also excluded. The componentwise bounds (2,5,5,4) and (5,5,2,3) are also excluded by the two newly completed proof chains. The bounds (3,5,3,5) and (4,5,3,2) have now also completed their audits. The inequalities are componentwise. These are upper-count exclusions, so they cover multiple exact-count premises. The first certificate required 13,918,327 LRAT hints and has now completed Lean replay.
 
 For the word (a,b,c,d,a), the stronger returning-direction restriction is
 
@@ -28,11 +28,11 @@ For the word (a,b,c,d,a), the stronger returning-direction restriction is
 
 There is no hypothesis on the two intervening counts. Earlier completed certificates exclude the weaker upper-count tuples (1,5,5,1) and (1,21,21,1). They remain in the proof inventory as independently checked intermediate results; the final restriction subsumes them. No priority or novelty claim is made for these statements.
 
-The completed cases are 7202, 7203, 7211, 7215, 7216, 7217, 7218 and 7219. `data/proof-audit.json` checks the current source hashes, successful compiled chains, original-to-core clause mapping, exported formula, and final theorem axioms. Twenty-six exclusion and corollary audits use only propext, Classical.choice and Quot.sound. The arbitrary-snake statements include coordinate normalization and the necessary geometric interpretation.
+The completed cases are 7202, 7203, 7206, 7211, 7212, 7215, 7216, 7217, 7218 and 7219. `data/proof-audit.json` checks the current source hashes, successful compiled chains, original-to-core clause mapping, exported formula, and final theorem axioms. Thirty-two exclusion and corollary audits use only propext, Classical.choice and Quot.sound. The arbitrary-snake statements include coordinate normalization and the necessary geometric interpretation.
 
 ## Effect on both upper-bound tracks
 
-The completed rules leave 4,957,613 transitions in the comparison model. Independent reconstruction checks each interval application, including the interpretation of symbol six as any count from six to 21. An all-edge integer potential and an attaining four-transition cycle establish exact minimum mean 480, with potential range 578. Thus these rules do not improve the current unconditional upper-bound estimate.
+The completed rules leave 4,947,008 transitions in the comparison model. Independent reconstruction checks each interval application, including the interpretation of symbol six as any count from six to 21. An all-edge integer potential and an attaining four-transition cycle establish exact minimum mean 480, with potential range 578. Thus these rules do not improve the current unconditional upper-bound estimate.
 
 On the conditional track, the retained sufficient potential still gives
 
@@ -41,7 +41,7 @@ On the conditional track, the retained sufficient potential still gives
 \qquad m\le234.
 \]
 
-The updated fixed-potential selection contains 14,145 additional keys. Every selected key has a mandatory witness within the fixed candidate basis, and all 3,530,713 retained transition inequalities were checked independently. This least-cover claim fixes the graph, potential and candidate basis. The remaining count premises, complete arbitrary-snake history interpretation and complete Lean graph-potential replay are still outstanding. The completed local theorems do not by themselves establish a new global bound.
+The updated fixed-potential selection contains 14,143 additional keys. Every selected key has a mandatory witness within the fixed candidate basis, and all 3,530,713 retained transition inequalities were checked independently. This least-cover claim fixes the graph, potential and candidate basis. The remaining count premises, complete arbitrary-snake history interpretation and complete Lean graph-potential replay are still outstanding. The completed local theorems do not by themselves establish a new global bound.
 
 `data/proved-graph-verification.json`, `data/proved-old-verification.json` and `data/proved-selection-comparison.json` record these checks. Files without the `proved-` prefix also contain exploratory comparisons using pending exclusions; they must not be read as proof-supported models. Each model records exactly which cases it applies.
 
@@ -53,7 +53,7 @@ A local witness survives for (a,b,c,d,a) with the first count at most one and fo
 
 ## Critical-family share investigation
 
-The separate [critical-charge investigation](critical-charge/README.md) freezes the preceding six-case model and independently identifies all 18,865 minimum-charge cyclic transitions in six components. Two native refutations support a share lower bound of 120 on a locally feasible five-centre window; the Lean share interpretation and replay remain pending. Admitting this candidate raises 1,280 weights in the current eight-case model but leaves the exact mean at 480. These are separate evidence levels.
+The separate [critical-charge investigation](critical-charge/README.md) freezes the preceding six-case model and independently identifies all 18,865 minimum-charge cyclic transitions in six components. The share lower bound of 120 on a locally feasible five-centre window has now completed its Lean interpretation, refutation replay and arbitrary-snake normalization: 99 modules and 72 theorem audits. Admitting this candidate raises 1,280 weights in the current eight-case model but leaves the exact mean at 480. A separate comparison on the ten-case graph reduces the fixed-potential count basis from 14,143 to 14,142 when this share theorem is included. The global interpretation remains pending.
 
 ## Pending work
 
