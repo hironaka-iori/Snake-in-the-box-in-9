@@ -14,13 +14,13 @@ that entire proof independently. The exact optimum remains unresolved.
 The conjecture 196 has neither a matching construction nor an optimality proof
 in this work. The proposed improvement to 234 remains conditional.
 
-The current paper is revision76, with authors Iori Hironaka, Tommy Ma and
+The current paper is revision 76, with authors Iori Hironaka, Tommy Ma and
 Steven Zhan. Its repository and editor copies have SHA256
 `3c67d4c168ee7fe463f2ea49da3459f2178ee2a655fd45f9ed374f88126f43dd`.
 Source checks preserve all 116 previous statements and add seven, giving 123;
 all 13 printed paths and 118,673 vertex pairs were checked. The built-in
 compiler failed before source compilation. No new PDF or layout check is
-claimed. Milestones 77 through 79 add separate proof interfaces without revising the paper.
+claimed. Milestones 77 through 80 add proof interfaces and a completed local share theorem without revising the paper.
 
 ## Chosen route: charge empty squares
 
@@ -52,10 +52,13 @@ so \(4696m\le1103528\). At \(m=235\), the left side exceeds the right side
 by 32. This yields 234 only after every local premise, actual-snake graph
 interpretation and complete potential check has been supplied.
 
-Using completed local shares alone gives mean 480 and potential range 536;
-its integer comparison still gives 235. Adding the pending 012310 share-12
-premise gives mean 483 and range 551, also giving 235. These finite-model
-comparisons do not independently replace the contributor's global theorem.
+Completed local shares, now including the checked 012310 share-12 theorem,
+give mean 483 and potential range 551. The exact comparison is 157625/669,
+with integer bound 235. Its weight and potential hashes match the earlier
+comparison that assumed this lemma. The previous completed subset had mean 480
+and range 536. These finite-model calculations do not independently replace
+the contributor's global theorem; graph interpretation and Lean potential
+replay remain required.
 
 ## Local share catalogue
 
@@ -69,15 +72,16 @@ of the five internal scale-12 shares, independently of their singleton counts.
 | 012034 | 20 | Pending, case7302 |
 | 012301 | 16 | Pending, case7303 |
 | 012304 | 16 | Checked, case7304 |
-| 012310 | 12 | Replay in progress at recent checkpoints, case7305 |
+| 012310 | 12 | Checked, including reversal, case7305 |
 | 012314 | 16 | Checked, case7306 |
 | 012340 | 16 | Pending, case7307 |
 | 012345 | 16 | Pending stronger target, case7308; the weaker floor 12 is checked |
 
-Read the current checkpoint and inspect processes before continuing case7305.
-Its 92 semantic/composition checks and partial refutation checks do not establish
-its final share theorem. After refutation success, geometry, reversal and the
-full source/axiom audit remain necessary.
+Case 7305 completed all 465 source modules and 100 printed theorem audits,
+including geometry and reversal. Its selected sources and compact proof were
+archived and restored byte-for-byte. No case7305 proof process remains active.
+The combined catalogue passes 35 audits and retains exactly five local targets:
+7301, 7302, 7303, 7307 and 7308. Earlier pending checkpoints remain historical evidence.
 
 ## Proof interfaces and remaining work
 
@@ -96,9 +100,9 @@ five. The entering count is at \(r+8\), and credited shares lie at centres
 including the terminal state. Shorter paths already satisfy the intended upper
 bound. Count symbol six means the interval \([6,21]\).
 
-Milestone79 adds 31 theorem audits. Its count-slice, digit, encoding-injectivity,
+Milestone 79 adds 31 theorem audits. Its count-slice, digit, encoding-injectivity,
 reversal and saturation results connect encoded graph tests to actual counts.
-Every actual snake survives the ten completed milestone72 interval filters,
+Every actual snake survives the ten completed milestone 72 interval filters,
 at all three offsets and in both orientations. The closed local certificates
 are imported from pinned existing objects, without a clean dependency rebuild.
 
@@ -109,7 +113,7 @@ complete union is still uninstantiated in the current environment.
 Every three-ID credit needs every compatible eleven-direction interpretation;
 forgotten coordinate returns can produce several variants. Alternative lower
 bounds on the same five shares combine by maximum. Complete the finite
-potential replay and the six target share theorems before removing the 234
+potential replay and the five remaining target share theorems before removing the 234
 qualification.
 
 An executable audit checks the exact Python selector assignments on all 37,875
@@ -119,8 +123,8 @@ Neither check proves retained-edge membership or credit validity.
 
 ## Results that constrain further optimisation
 
-Milestone74 gives exact short-walk obstructions for six specified weakenings
-of the pending share rules. Under the current boundary budget, a different
+Milestone 74 gives exact short-walk obstructions for six specified weakenings
+of the target share rules. Under the current boundary budget, a different
 constant slope or potential on each entire weakened graph cannot exclude 235.
 These are graph obstructions; actual snake realizability was not established.
 
@@ -134,7 +138,7 @@ These remain research directions, with no promised numerical improvement.
 Use the repository sources and milestone receipts as the reproducible record.
 The dated handover contains detailed environment paths and earlier evidence.
 Milestone 77 saves its coverage checks, superseded memory-intensive attempts
-and replay snapshot. Milestone 78 saves the selector/state checks. Milestone79 saves the encoded
+and replay snapshot. Milestone 78 saves the selector/state checks. Milestone 79 saves the encoded
 guards, interval-filter assembly, catalogue audit and a later replay observation. Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
@@ -143,5 +147,5 @@ The smaller coverage implementation splits at six directions, then splits the
 largest branch once more. All twelve branches, its seven subcases, rejected
 prefixes and their assembly require Lean proofs. The
 generation script itself is outside the trusted proof argument. Preserve the
-single active case7305 completion driver and revalidate its existence before
-any restart. Tool session numbers are local to the original execution context.
+completed case7305 receipts; inspect actual processes before starting any
+new case. Do not repeat its successful unchanged replay. Tool session numbers are local to the original execution context.

@@ -29,7 +29,7 @@ transition sequence is reversed. No singleton-count hypotheses are imposed.
 | 012034 | 20 | 7302 | Pending |
 | 012301 | 16 | 7303 | Pending |
 | 012304 | 16 | 7304 | Checked, including reversal |
-| 012310 | 12 | 7305 | Pending |
+| 012310 | 12 | 7305 | Checked, including reversal |
 | 012314 | 16 | 7306 | Checked, including reversal |
 | 012340 | 16 | 7307 | Pending |
 | 012345 | 16 | 7308 | Pending |
@@ -42,9 +42,9 @@ The previous distinct-direction theorem proves only share 12, so it does not
 discharge case 7308's stronger target.
 
 Cases 7300, 7304 and 7306 pass 71, 108 and 182 modules, with 55, 67 and 88 printed
-theorem audits, respectively. The final combined check passes 32 theorem audits
-and confirms that the partial catalogue theorem retains exactly the six pending
-certificate premises. All audited axioms are confined to `propext`,
+theorem audits, respectively. Case 7305 adds 465 modules and 100 audits.
+The combined check now passes 35 theorem audits and retains exactly five pending
+certificate premises: 7301, 7302, 7303, 7307 and 7308. All audited axioms are confined to `propext`,
 `Classical.choice` and `Quot.sound`. The individual cases reuse shared support;
 their module counts are not counts of distinct modules across the whole project.
 
@@ -89,17 +89,16 @@ cycle. Their means use the graph's integer charge units.
 
 | Added local share evidence | Exact mean | Potential range | Comparison bound | Integer bound |
 | --- | ---: | ---: | --- | ---: |
-| Completed cases 7300, 7304, 7306 and the earlier distinct-direction share 12 | 480 | 536 | 10609/45 | 235 |
-| The same rules, additionally assuming share 12 for 012310 | 483 | 551 | 157625/669 | 235 |
+| Earlier completed subset 7300, 7304, 7306 (historical) | 480 | 536 | 10609/45 | 235 |
+| Completed cases 7300, 7304, 7305, 7306 and earlier distinct-direction share 12 | 483 | 551 | 157625/669 | 235 |
 | The full mixed nine-shape target | 496 | 600 | 137941/587 | 234 |
 
-The completed additions raise 2,351,884 edge weights and reduce the earlier
-potential range from 578 to 536, while a mean-480 cycle remains. The single
-additional 012310 premise removes that mean-480 obstruction, but the replacement
-mean 483 still gives integer bound 235. It is the next local proof priority.
-Receipts are `data/proved-model.json` and `data/assumed-012310x12-model.json`.
-Every row still requires the complete graph-to-snake assembly; the existing
-unconditional bound 235 comes from the earlier contributor proof.
+The completed additions raise 2,536,591 edge weights relative to the source
+graph. The newly checked 012310 lemma removes the former mean 480 obstruction;
+the exact minimum is now 483 with range 551. Its weights and potential equal
+the earlier comparison that assumed this lemma. The integer comparison remains
+235. Current receipt: `data/proved-model.json`; the previous assumed receipt
+is retained as historical evidence in `data/assumed-012310x12-model.json`.
 
 ## Checked global accounting
 
@@ -179,6 +178,6 @@ and does not claim a fresh rebuild of the complete inherited proof chain.
 
 Milestone 72 also retains six pending count-certificate cases. The nine-shape
 route avoids the large additional count-premise list; it does not retrospectively
-complete those six cases. The manuscript remains at revision 66, with the next
-full rewrite scheduled for milestone 76. Research sources and all three author
+complete those six cases. The manuscript remains at revision 76, with the next
+full rewrite scheduled for milestone 86. Research sources and all three author
 names are preserved.

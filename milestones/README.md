@@ -1,6 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 73 checks three of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains six local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 76. Source and witness checks pass; the app compiler cannot start.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 76. Source and witness checks pass; the app compiler cannot start.
+
+- [Milestone 80: 012310 share closure and comparison](80-012310-share-closure/README.md). Case 7305 checked; five local targets remain; proof-supported mean 483 and range 551 still give integer comparison 235.
 
 - [Milestone 79: encoded guards and ten interval exclusions](79-retained-edge-guards/README.md). 31 Lean audits; actual snakes survive the ten completed interval filters. Full graph membership remains.
 

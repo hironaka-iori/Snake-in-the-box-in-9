@@ -1,13 +1,16 @@
-# Case7305: count-free share12 for012310
+# Case 7305: count-free share 12 for 012310
 
-This is a preserved partial proof. The completed catalogue does not yet use it.
-The semantic CNF, data, structural checks, all86 clause batches, semantic
-composition and satisfiability implication have passed Lean. The selected
-refutation and final geometric/reversal wrappers remain to be checked.
+The local theorem is complete as of milestone 80. All 465 modules and 100 printed
+theorem audits passed, including the selected refutation, arbitrary-snake
+geometry and reversal. `data/proof-audit.json` is the completed audit;
+`data/archive.json` pins the exact checked-source and compact-proof archives.
+Their restoration verified all 465 sources and both proof files. The combined
+catalogue now uses this theorem. No case7305 proof process remains active.
 
+The following partial-checkpoint files are retained as historical provenance.
 `data/pending-checkpoint.json` hashes the compiled partial evidence, all generated
 sources and three verified archives. `data/lrat-slice-selection.json` records the
-reduction of the original proof to154,489 derived clauses and9,394,822 hints.
+reduction of the original proof to154,489 derived clauses and 9,394,822 hints.
 Both the candidate and selected export passed independent Python simulation.
 Every input clause and semantic source was preserved. The required checker
 width remains15bits; no Lean replay speed improvement has been measured.
@@ -21,17 +24,11 @@ The archives are:
   receipts and the original generated-source manifest. The original generated
   source tree is also preserved locally under `build/lrat-slice-ba39547a5d5e/`.
 
-From the repository root, resume the existing case's
-`scripts/complete_share.py --lrat-only`; after it succeeds, run the same script
-without flags, then `scripts/audit_share.py`. Use one completion process at a
-time. Never call a simulated proof or a successful partial build a finished
-share theorem. A long checkpoint may require substantial memory; record a
-timeout or failure precisely and retain the existing successful module records.
-
-After the full audit passes, use the parent milestone's `scripts/archive.py 7305`
-and `scripts/restore.py 7305`, then refresh integration, checkpoint and model.
-The partial archives remain provenance. Before a new run, inspect processes
-and current logs; no long case7305 replay is left running at this checkpoint.
+For reconstruction on a new host, restore the checked archive with the parent
+`scripts/restore.py 7305`, then adapt toolchain/support paths and run the case's
+`scripts/complete_share.py` followed by `scripts/audit_share.py`. On the current
+host, successful unchanged source-matched receipts are reusable. Use one
+completion driver per case. The old partial archives remain provenance.
 
 Verify the partial archive against the present local files with the parent
 `scripts/checkpoint_pending.py 7305 --verify`. On another host, inspect and

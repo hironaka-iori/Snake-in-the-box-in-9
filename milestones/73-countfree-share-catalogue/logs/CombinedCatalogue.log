@@ -1,11 +1,10 @@
 partial_catalogue_share : RefutedShare (winOf [0, 1, 2, 0, 3, 2]) broadBounds 12 15 →
   RefutedShare (winOf [0, 1, 2, 0, 3, 4]) broadBounds 12 19 →
     RefutedShare (winOf [0, 1, 2, 3, 0, 1]) broadBounds 12 15 →
-      RefutedShare (winOf [0, 1, 2, 3, 1, 0]) broadBounds 12 11 →
-        RefutedShare (winOf [0, 1, 2, 3, 4, 0]) broadBounds 12 15 →
-          RefutedShare (winOf [0, 1, 2, 3, 4, 5]) broadBounds 12 15 →
-            ∀ {m : ℕ} (p : Snake m) (r : ℕ),
-              r + 6 ≤ m → windowLower p r ≤ (List.map (fun i => coreShare 12 p (r + i + 1)) (List.range 5)).sum
+      RefutedShare (winOf [0, 1, 2, 3, 4, 0]) broadBounds 12 15 →
+        RefutedShare (winOf [0, 1, 2, 3, 4, 5]) broadBounds 12 15 →
+          ∀ {m : ℕ} (p : Snake m) (r : ℕ),
+            r + 6 ≤ m → windowLower p r ≤ (List.map (fun i => coreShare 12 p (r + i + 1)) (List.range 5)).sum
 'Snake9.LocalWindow.ShareWindow120.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Snake9.LocalWindow.ShareWindow12.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Snake9.CountFreeBridge.shareN_eq_coreShare' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -36,6 +35,9 @@ partial_catalogue_share : RefutedShare (winOf [0, 1, 2, 0, 3, 2]) broadBounds 12
 'Snake9.LocalWindow.ShareWindow7304.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Snake9.LocalWindow.ShareWindow7304.share_bound_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Snake9.CatalogueIntegration73.canonical7304' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow7305.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.ShareWindow7305.share_bound_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CatalogueIntegration73.canonical7305' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Snake9.LocalWindow.ShareWindow7306.share_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Snake9.LocalWindow.ShareWindow7306.share_bound_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Snake9.CatalogueIntegration73.canonical7306' depends on axioms: [propext, Classical.choice, Quot.sound]

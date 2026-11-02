@@ -7,6 +7,7 @@ import CanonicalShareAdapter
 import ConditionalCatalogueDispatch
 import Share7300.Reversal
 import Share7304.Reversal
+import Share7305.Reversal
 import Share7306.Reversal
 
 namespace Snake9.CatalogueIntegration73
@@ -29,6 +30,15 @@ end Snake9.CatalogueIntegration73
 
 namespace Snake9.CatalogueIntegration73
 open LocalWindow WindowAutomaton DirectionWindow CountFreeAdapter73
+theorem canonical7305 {m : Nat} (p : Snake m) (r : Nat) (hr : r+6 ≤ m)
+    (hshape : canon (dsOf p r 6) = [0, 1, 2, 3, 1, 0] ∨ canon (dsOf p r 6).reverse = [0, 1, 2, 3, 1, 0]) :
+    12 ≤ ((List.range 5).map fun i => coreShare 12 p (r+i+1)).sum := by
+  apply share_bound_of_either_canonical_match (K := 11) p r [0, 1, 2, 3, 1, 0] hr hshape
+  exact LocalWindow.ShareWindow7305.refuted
+end Snake9.CatalogueIntegration73
+
+namespace Snake9.CatalogueIntegration73
+open LocalWindow WindowAutomaton DirectionWindow CountFreeAdapter73
 theorem canonical7306 {m : Nat} (p : Snake m) (r : Nat) (hr : r+6 ≤ m)
     (hshape : canon (dsOf p r 6) = [0, 1, 2, 3, 1, 4] ∨ canon (dsOf p r 6).reverse = [0, 1, 2, 3, 1, 4]) :
     16 ≤ ((List.range 5).map fun i => coreShare 12 p (r+i+1)).sum := by
@@ -42,12 +52,11 @@ theorem partial_catalogue_share
     (h7301 : RefutedShare (winOf [0, 1, 2, 0, 3, 2]) broadBounds 12 15)
     (h7302 : RefutedShare (winOf [0, 1, 2, 0, 3, 4]) broadBounds 12 19)
     (h7303 : RefutedShare (winOf [0, 1, 2, 3, 0, 1]) broadBounds 12 15)
-    (h7305 : RefutedShare (winOf [0, 1, 2, 3, 1, 0]) broadBounds 12 11)
     (h7307 : RefutedShare (winOf [0, 1, 2, 3, 4, 0]) broadBounds 12 15)
     (h7308 : RefutedShare (winOf [0, 1, 2, 3, 4, 5]) broadBounds 12 15)
     {m : Nat} (p : Snake m) (r : Nat) (hr : r+6 ≤ m) :
     windowLower p r ≤ ((List.range 5).map fun i => coreShare 12 p (r+i+1)).sum := by
-  exact catalogue_share_bound LocalWindow.ShareWindow7300.refuted h7301 h7302 h7303 LocalWindow.ShareWindow7304.refuted h7305 LocalWindow.ShareWindow7306.refuted h7307 h7308 p r hr
+  exact catalogue_share_bound LocalWindow.ShareWindow7300.refuted h7301 h7302 h7303 LocalWindow.ShareWindow7304.refuted LocalWindow.ShareWindow7305.refuted LocalWindow.ShareWindow7306.refuted h7307 h7308 p r hr
 #check @partial_catalogue_share
 end Snake9.CatalogueIntegration73
 
@@ -79,6 +88,9 @@ end Snake9.CatalogueIntegration73
 #print axioms Snake9.LocalWindow.ShareWindow7304.share_bound
 #print axioms Snake9.LocalWindow.ShareWindow7304.share_bound_rev
 #print axioms Snake9.CatalogueIntegration73.canonical7304
+#print axioms Snake9.LocalWindow.ShareWindow7305.share_bound
+#print axioms Snake9.LocalWindow.ShareWindow7305.share_bound_rev
+#print axioms Snake9.CatalogueIntegration73.canonical7305
 #print axioms Snake9.LocalWindow.ShareWindow7306.share_bound
 #print axioms Snake9.LocalWindow.ShareWindow7306.share_bound_rev
 #print axioms Snake9.CatalogueIntegration73.canonical7306

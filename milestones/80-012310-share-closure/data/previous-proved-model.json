@@ -1,0 +1,103 @@
+{
+  "status": "EXACT_PROOF_SUPPORTED_LOCAL_MODEL",
+  "states": 1601856,
+  "edges": 4947008,
+  "mean": "480",
+  "potential_range": 536,
+  "improved_edges": 2351884,
+  "weight_sha256": "cac98cc946dc177ee42849b73058f2588324ca6844e0e2930fcb45805082d2db",
+  "potential_sha256": "9a28e96d0ce2a90ffa26d21f002834c8576c62f3faae660c2b14985063cadb61",
+  "countfree_floors": [
+    {
+      "shape": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1
+      ],
+      "share": 16
+    },
+    {
+      "shape": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4
+      ],
+      "share": 16
+    },
+    {
+      "shape": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        4
+      ],
+      "share": 16
+    },
+    {
+      "shape": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "share": 12
+    }
+  ],
+  "audited_local_sources": {
+    "milestones/72-four-count-proof-closure/critical-current/share-proof/data/proof-audit.json": "a7e4339fe3152c30e11f009740a7fd38c63cdef204b7f0102f66acdedda836f8",
+    "milestones/73-countfree-share-catalogue/cases/case7300/data/proof-audit.json": "73d67c026aecf98818b7b95cdcf7888b5a5814bad8a910dc7c499258989b9c33",
+    "milestones/73-countfree-share-catalogue/cases/case7304/data/proof-audit.json": "e5b727daa6bbe40ea38de3d7003ddd825645d0dac982fe82f637bad31e26306d",
+    "milestones/73-countfree-share-catalogue/cases/case7306/data/proof-audit.json": "9609b284352efbde25d733255c6978fd1c99e0110850f8dcb5dc99797acb4a33"
+  },
+  "source_arrays_sha256": {
+    "U": "e910280dc3ad25c32010127c7af2f7d837a162e1095a4aa85fdd0f996b08f46d",
+    "V": "21956ceeb6414238baae68543ac9677c791c07575deeb2664facdf6490374f94",
+    "weight": "acd19583f5de41d789206d369e37493228e8b8b85708db2427781f0d6766b5d4",
+    "direction": "e0e598fa564c6474be6ef98215886248bfca188f3eb47c59b2d9e96ea20b8705",
+    "count_code": "1917e3700ccdee418c22f29829b309775f9212f026e55e394038c1ddfa25210e",
+    "history": "23eb7524f277153fc0ca23ce4cdf005e28c8091f7993b44bfa34812a5adb57d7"
+  },
+  "additional_share_assumptions": [],
+  "cycle": [
+    {
+      "edge": 372796,
+      "u": 114400,
+      "v": 593089,
+      "weight": 240
+    },
+    {
+      "edge": 2610423,
+      "u": 593089,
+      "v": 1147977,
+      "weight": 480
+    },
+    {
+      "edge": 3534483,
+      "u": 1147977,
+      "v": 394906,
+      "weight": 600
+    },
+    {
+      "edge": 1650991,
+      "u": 394906,
+      "v": 114400,
+      "weight": 600
+    }
+  ],
+  "all_edge_potential_verified": true,
+  "conditional_bound": "10609/45",
+  "conditional_integer_bound": 235,
+  "algorithm_sha256": "5ff7a4087ed2df59c67c32d48be305eead051c4f788b870ac4210a1d754c0b1a",
+  "seconds": 24.5,
+  "scope": "Exact finite-model result. Any additional_share_assumptions are unproved premises; all other added floors have local Lean audits. Arbitrary-snake graph interpretation and potential replay remain pending. No new global upper bound."
+}

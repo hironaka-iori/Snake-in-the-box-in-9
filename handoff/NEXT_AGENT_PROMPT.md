@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, and milestone79's README and exact checkpoint.
+`handoff/CURRENT_STATUS.md`, and milestone 80's README and exact checkpoint.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -15,23 +15,24 @@ conditional bound with completion of its unconditional proof obligations.
 Keep a local forest, solver result, native refutation, Lean local theorem,
 finite graph calculation and universal bound distinct.
 
-First inspect case7305's live process and saved checkpoint. Use one completion
-driver per case. If its LRAT-only run has actually succeeded, revalidate and
-reuse the unchanged semantic receipts, then finish refutation composition,
-geometry, reversal and the full source/axiom audit. Partial large
-checkpoints do not complete the 012310 share-12 theorem. Preserve the selected
-proof, original proof provenance, audited bytes and successful source hashes.
+Case 7305 is complete and integrated: 465 modules, 100 local audits, 35 combined
+audits. Its theorem gives five-centre scale-12 share at least 12 for 012310 and
+the reversed window. Archives and restoration passed. Reuse those results;
+do not restart its completed replay. The five remaining local targets are
+7301, 7302, 7303, 7307 and 7308. The proof-supported finite mean is 483 with range 551,
+giving integer comparison 235. Graph interpretation and Lean potential replay
+remain necessary before deriving a global bound from this comparison.
 
 Milestones 77 and 78 now check coverage, lookup maps, numeric history updates
 and the actual combined state sequence. Reuse their successful receipts.
-Milestone79 checks encoded count slices/digits, injectivity, reversal and
-saturation, and proves retention under all ten completed milestone72 interval
+Milestone 79 checks encoded count slices/digits, injectivity, reversal and
+saturation, and proves retention under all ten completed milestone 72 interval
 filters. Reuse these checked interfaces. The next task is to instantiate the
 1,378-key reference union, the forty recovered short rules and three history
 exclusions, then supply the exact retained-array index. The current reference
 interfaces still have explicit Refuted premises. The closed reference proofs
 are in pinned contributor revisions and saved audits, with the current local
-snapshot under milestone51. Their full union is not yet imported here. After retained-edge membership, interpret
+snapshot under milestone 51. Their full union is not yet imported here. After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.
 Symbol six represents the interval [6,21]. Alternative
 credits on the same five centres combine by maximum. Verify the entire
@@ -40,12 +41,12 @@ potential, its range and the boundary calculation before claiming 234.
 Avoid repeating the failed monolithic coverage check; its twelve-part
 decomposition is saved. Avoid trying to compensate for the six specified
 weakenings solely by changing a constant slope or potential under the same
-boundary budget: milestone74 supplies exact short-walk obstructions. A new
+boundary budget: milestone 74 supplies exact short-walk obstructions. A new
 restriction on realizable walks or stronger boundary information could change
 that conclusion and would need its own proof.
 
 Preserve the manuscript authors Iori Hironaka, Tommy Ma and Steven Zhan and all
-hyperlink settings. Revision76 is the latest paper; milestones77 through79 have separate
+hyperlink settings. Revision 76 is the latest paper; milestones77 through80 have separate
 proof notes. The existing editor file is
 `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`, with a repository
 mirror at `paper/snake9_research.tex`. Edit the existing editor file in place
