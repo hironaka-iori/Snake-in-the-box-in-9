@@ -1,0 +1,85 @@
+{
+  "status": "CONDITIONAL_WITNESS_SENSITIVITY_ONLY",
+  "rows": [
+    {
+      "edge": 372796,
+      "shape": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        0
+      ],
+      "case": 7305,
+      "current_credit": 12,
+      "target_floor": 12,
+      "old_weight": 252,
+      "hypothetical_weight": 252,
+      "increase": 0
+    },
+    {
+      "edge": 2610423,
+      "shape": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4
+      ],
+      "case": 7302,
+      "current_credit": 0,
+      "target_floor": 20,
+      "old_weight": 480,
+      "hypothetical_weight": 500,
+      "increase": 20
+    },
+    {
+      "edge": 3534483,
+      "shape": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        0
+      ],
+      "case": 7307,
+      "current_credit": 0,
+      "target_floor": 16,
+      "old_weight": 600,
+      "hypothetical_weight": 616,
+      "increase": 16
+    },
+    {
+      "edge": 1650991,
+      "shape": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4
+      ],
+      "case": 7302,
+      "current_credit": 0,
+      "target_floor": 20,
+      "old_weight": 600,
+      "hypothetical_weight": 620,
+      "increase": 20
+    }
+  ],
+  "affected_pending_cases": [
+    7302,
+    7307
+  ],
+  "current_cycle_mean": "483",
+  "hypothetical_cycle_mean": "497",
+  "input_sha256": {
+    "milestones/82-unsaturated-cycle-obstruction/scripts/target_cycle.py": "a6a3ffaf1535bf0182f32c37571567ddb893cf34bcc9234909af9021d18ef590",
+    "milestones/82-unsaturated-cycle-obstruction/data/graph-audit.json": "d3f9fe247eabddfe7b6950ee4ebc7f897560fb411a5a3fdae811b6aa54faac1d",
+    "milestones/73-countfree-share-catalogue/data/required-shares.json": "1f4c5c505056bea5d1dfde04a93801b9663eccb1af209004322e19407959c607"
+  },
+  "scope": "Applying the two unproved target floors raises this saved cycle to 497. No new complete-graph mean or global bound is inferred; other critical cycles may remain."
+}

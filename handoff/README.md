@@ -4,13 +4,22 @@ Start with [current mathematical status](CURRENT_STATUS.md), then use the
 [continuation assignment](NEXT_AGENT_PROMPT.md). Both are intended for another
 researcher or AI agent to continue from the saved evidence.
 
+The latest optimisation checkpoint is [milestone 82](../milestones/82-unsaturated-cycle-obstruction/README.md).
+Its exact cycle obstruction rules out bonuses confined to stored counts of six on
+the current graph. The source, six Lean audits, all-edge verification and
+conditional witness sensitivity are saved with an exact manifest. Cases 7302
+and 7307 are the next targeted local-share tests; they remain unproved.
+Use its [current saved-file manifest](../milestones/82-unsaturated-cycle-obstruction/data/file-manifest.json)
+to verify the present checkpoint and shared handover files.
+
 The latest proof checkpoint is
 [milestone 81](../milestones/81-recovered-short-rule-retention/README.md).
 Its [checkpoint](../milestones/81-recovered-short-rule-retention/data/checkpoint.json)
 records the forty-rule retention theorem, 66 audits, exact-loop comparison,
 receipt hashes, repository refs and unchanged paper hash.
 Its [saved-file manifest](../milestones/81-recovered-short-rule-retention/data/file-manifest.json)
-supports exact local and staged verification.
+records the versions saved with that milestone. Shared handover files have since
+been updated; use milestone 82's manifest for their current versions.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
 inspected contributor theorem and saved audit, without a fresh complete local

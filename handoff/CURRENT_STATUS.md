@@ -140,6 +140,18 @@ walk through a new geometric fact, restrict to reachable or realizable states,
 or improve the boundary contribution with state-dependent endpoint information.
 These remain research directions, with no promised numerical improvement.
 
+Milestone 82 supplies another exact obstruction on the completed-share graph.
+A four-edge cycle of mean 483 has every count symbol below six. Nonnegative
+bonuses that vanish on such edges preserve this mean. Even range zero cannot
+meet the current 234 criterion: 227*483 falls short of 111960 by 2319. Six
+Lean audits check the arithmetic, separately from the exact array checks.
+This does not establish that the graph cycle occurs in an actual snake.
+
+On this witness, the pending 012034 floor 20 occurs twice and 012340 floor 16
+once. Assuming both increases its mean to 497. This concerns one cycle only;
+the full graph mean and the other pending targets remain unresolved. These
+two targets are useful next tests within empty-square charging.
+
 ## Preservation and environment
 
 Use the repository sources and milestone receipts as the reproducible record.

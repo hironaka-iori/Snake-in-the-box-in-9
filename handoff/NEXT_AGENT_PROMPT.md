@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, and milestone 81's README and exact checkpoint.
+`handoff/CURRENT_STATUS.md`, and the milestone 81 and 82 READMEs and exact checkpoints.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -39,6 +39,14 @@ Symbol six represents the interval [6,21]. Alternative
 credits on the same five centres combine by maximum. Verify the entire
 potential, its range and the boundary calculation before claiming 234.
 
+For the next optimisation check, prioritize case 7302 (012034, share 20)
+or case 7307 (012340, share 16), one bounded task at a time. Milestone 82
+shows why these act on the current four-edge mean-483 cycle. Their proposed
+floors would raise that witness alone to 497; no full-graph improvement is
+inferred. Do not spend another round on bonuses that are zero whenever all
+six stored symbols are below six on the unchanged graph: that entire class
+leaves its mean at 483 and cannot reach 234 with the current budget.
+
 Avoid repeating the failed monolithic coverage check; its twelve-part
 decomposition is saved. Avoid trying to compensate for the six specified
 weakenings solely by changing a constant slope or potential under the same
@@ -47,7 +55,7 @@ restriction on realizable walks or stronger boundary information could change
 that conclusion and would need its own proof.
 
 Preserve the manuscript authors Iori Hironaka, Tommy Ma and Steven Zhan and all
-hyperlink settings. Revision 76 is the latest paper; milestones 77 through 81 have separate
+hyperlink settings. Revision 76 is the latest paper; milestones 77 through 82 have separate
 proof notes. The next full revision is scheduled for 86. The existing editor file is
 `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`, with a repository
 mirror at `paper/snake9_research.tex`. Edit the existing editor file in place
