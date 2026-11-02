@@ -732,3 +732,24 @@ Next research priority: Prepare one resumable sequential batch for all remaining
 Latest continuation: [milestone 104](milestones/104-complete-potential-batch/README.md) runs the complete sequential potential-certificate batch. The graph-assembly theorem is checked. The launch snapshot has 7 completed-profile and 7 conditional-profile contexts checked; read the live batch record for current progress. The interval remains 191 through 235, with 234 conditional.
 
 Next research priority: Let the existing milestone104 batch continue; inspect its live record before any restart. Finish all context certificates, check both graph assemblies, and audit their complete dependency closure. Preserve the pending reference and local-share premises. Paper revision 96 is unchanged; the next full revision is 106.
+
+
+## Milestone 105: exact reference-proof obligation
+
+Five general theorems passed Lean with only propext, Classical.choice and
+Quot.sound. No definitions were added. The new route assumes refutations for
+the exact 1,378-pattern reference union, together with the unchanged complete
+graph check and, for 234, the five local share premises. It does not prove
+those remaining assumptions.
+
+The source selection uses 1,378 of the 1,383 distinct roots in the full source
+catalogues. All selected semantic sources are present in the pinned Git trees;
+the generated refutation sources are absent there. This source audit supplies
+no closed refutation.
+
+Milestone 104 remains active. The saved process-verified observation records
+14 completed-profile and 14 conditional-profile
+contexts checked. Read its local data/batch-progress.json for current progress.
+The interval remains 191 through 235 edges, with 234 conditional.
+
+Next research priority: Preserve the running milestone 104 batch and complete its audit. Recover or regenerate the exact reference refutation roots selected in milestone 105. The five conditional share premises remain. Revise the manuscript at scheduled milestone 106 using ordinary notation and explicit proof obligations.

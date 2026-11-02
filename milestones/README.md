@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 105: exact reference-proof obligation](105-reference-proof-closure/README.md). Five checked implications using the exact union; closed refutations remain pending.
+
 - [Milestone 104: complete potential batch](104-complete-potential-batch/README.md). Active sequential certification; general graph assembly checked, full graph results pending.
 
 - [Milestone 103: joint potential traversal](103-joint-potential-traversal/README.md). General soundness and four matched comparisons; complete graph certification is next.
