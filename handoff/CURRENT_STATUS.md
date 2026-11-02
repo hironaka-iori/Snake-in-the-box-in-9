@@ -1,5 +1,52 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 112 checkpoint
+
+A new actual-snake theorem proves that on canonical direction pattern
+012314, middle count at most 2 forces the four outer counts to sum to at
+least 19. The concrete counter semantics, complete contradiction and
+geometric transfer pass Lean without a collective catalogue premise.
+The proof uses 3,306 clauses, 7,020 deductions and 367,588 hints after
+a verified permutation of 1,718 active variables. Independent replay
+and reconstruction pass. This round has 40 successful modules and 20
+printed standard axiom reports, with no new mathematical definitions.
+
+Lean also checks a shared budget for outer-four and total-five deficits.
+Fixed coefficients satisfy 4*a+b<=120; take the maximum of the weighted
+alternative deficits. The clipped-count boundary contribution remains
+21, or 2,520 after scaling. Actual local lower bounds remain explicit
+hypotheses in the generic budget theorem.
+
+The final seven-rule conditional experiment leaves 4,909,227 graph keys.
+Balanced coefficients (24,24) give completed mean 484/range 557 and
+comparison 1103389/4684, with integer floor 235. The conditional profile
+retains mean 496/range 602 and floor 234. Surviving zero-deficit cycles
+show these means are ceilings for every nonnegative coefficient choice
+within the fixed family. Balanced coefficients attain both ceilings.
+Lean-checked arithmetic shows that smaller nonnegative potential ranges
+alone cannot exclude 235 or 234 at these slopes.
+
+Six local witnesses independently rule out other strengthenings within
+the relaxed radius-four model; they are not complete snakes. The next
+useful target is the all-4 configuration on 012034, followed by a broader
+count-sum inequality if it is impossible. The relevant stronger sum
+probes are UNKNOWN. The separate 30-second proof-generation timeout is
+preserved; its partial LRAT is not a checked certificate.
+
+At the saved process-verified observation, milestone 104 was RUNNING with
+83/791 completed and 82/791 conditional contexts
+checked. Its active module was `ConditionalBatch104G072`. Preserve
+that batch. The reference union still has 1,366 unresolved entries.
+
+The maintained range remains 191 through 235 edges, based on the
+contributor proof and archived audit with full independent rebuilding
+pending. Other sum hypotheses, graph-oriented guards and complete global
+integration remain pending. No improved numerical snake bound is claimed.
+Conditional 234, the exact optimum and 196 remain unresolved. Paper
+revision 106 is unchanged; the next full revision is 116.
+
+Earlier checkpoint sections below are historical snapshots.
+
 ## Milestone 111 checkpoint
 
 For canonical directions 012340, a new checked theorem requires the

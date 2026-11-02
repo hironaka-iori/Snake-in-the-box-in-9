@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 112: actual sum theorem and shared budget](112-critical-sum-refinement/README.md). Checked geometry and counter semantics; completed finite mean 484 with an exact coefficient ceiling. Integer comparisons remain 235 and 234.
+
 - [Milestone 111: three-count restriction and sum family](111-critical-count-intervals/README.md). A checked local theorem and a conditional fractional graph improvement; integer comparisons remain 235 and 234.
 
 - [Milestone 110: critical-cycle count exclusion](110-critical-cycle-core-screen/README.md). One new actual-snake theorem removes 865 additional keys. Even all seven candidate exclusions preserve both numerical comparisons.

@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 111](milestones/111-critical-count-intervals/README.md) proves a three-count restriction for actual snakes. Three proposed sum bounds improve the completed graph mean to 3384/7, while integer comparisons remain 235 and conditional 234. Sum proofs and the complete potential batch remain pending.
+Latest continuation: [milestone 112](milestones/112-critical-sum-refinement/README.md) proves an actual count-sum theorem and a shared charging budget. The expanded conditional graph reaches completed mean 484; integer comparisons remain 235 and conditional 234. Zero-deficit cycles rule out further coefficient improvement within this fixed family.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
@@ -18,7 +18,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
 
-Next research priority: Inspect the new fourteen-edge obstruction and test a stronger count-sum family on both full profiles before expensive certificate export. The sum-22 native contradiction is ready for concrete semantics and Lean proof reduction; preserve its repeated literals and the running milestone 104 batch.
+Next research priority: Test the exact all-4 configuration on 012034, then seek a stronger family sum inequality if it is impossible. Compare every viable candidate on both full profiles. Do not repeat coefficient sweeps for the current seven rules; preserve the running milestone 104 batch and all pending proof evidence.
 
 ## Historical checkpoints
 

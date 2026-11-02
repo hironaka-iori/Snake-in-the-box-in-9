@@ -1,0 +1,26 @@
+E:\Snake-in-a-box\milestones\112-critical-sum-refinement\lean\SumCountSemantics112.lean:24:6: error: type mismatch
+  base_negP (List.all_eq_true.mp hneg l hl)
+has type
+  lv (base ?m.404 ?m.405 M) l = !?m.404 (vl M l) : Prop
+but is expected to have type
+  lv (base S E M) l = true ↔ ((fun v => !S v) ∘ vl M) l = true : Prop
+E:\Snake-in-a-box\milestones\112-critical-sum-refinement\lean\SumCountSemantics112.lean:30:21: error: unsolved goals
+case cons
+S E : Nat → Bool
+M : MT
+lits : List Nat
+hneg : lits.all (negP M) = true
+c : Centre
+cs : List Centre
+ih :
+  (List.map (vl M) lits).Perm (List.flatMap corners cs) →
+    List.countP (fun v => !S v) (List.flatMap corners cs) = (List.map (fun c => absentCorners S c.v c.d₁ c.d₂) cs).sum
+hperm : (List.map (vl M) lits).Perm (List.flatMap corners (c :: cs))
+⊢ (List.map (vl M) lits).Perm (List.flatMap corners cs)
+E:\Snake-in-a-box\milestones\112-critical-sum-refinement\lean\SumCountSemantics112.lean:48:10: error: unknown constant 'List.getD_append'
+E:\Snake-in-a-box\milestones\112-critical-sum-refinement\lean\SumCountSemantics112.lean:51:10: error: unknown constant 'List.getD_append_right'
+E:\Snake-in-a-box\milestones\112-critical-sum-refinement\lean\SumCountSemantics112.lean:60:10: error: unknown constant 'List.getD_append'
+E:\Snake-in-a-box\milestones\112-critical-sum-refinement\lean\SumCountSemantics112.lean:63:10: error: unknown constant 'List.getD_append_right'
+'Snake9.SumCountSemantics112.countP_permuted_corners' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.SumCountSemantics112.sound_append' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.SumCountSemantics112.sound_append_sum' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

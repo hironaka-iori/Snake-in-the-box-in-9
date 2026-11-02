@@ -1,128 +1,126 @@
 # Continuation assignment
 
-Continue the empty-square route in `E:/Snake-in-a-box`. Read milestone
-111's mathematical note, proof summary, checkpoint and independent final
-review. Check the current process before interpreting milestone 104's
-saved status. Keep the research goal active and preserve that running batch.
+Continue the empty-square/count-sum route in `E:/Snake-in-a-box`. Read
+milestone 112's mathematical note, proof summary, checkpoint and final
+review. Verify milestone 104's current process before interpreting its
+saved state. Keep the goal active and preserve that batch.
 
-## Checked result
+## Latest checked theorem
 
-For canonical directions `[0,1,2,3,4,0]`, the count intervals
-`[(0,21),(0,3),(0,2),(0,5),(0,21)]` are impossible in an actual snake.
-`MiddleCount111.lean` proves the actual-window statement and both graph
-orientations at offsets 0 and 1. This theorem is independent of the
-collective reference-catalogue premise. It is a separate restriction from
-milestone 110's exact tuple; neither contains the other.
+`ActualSum112.actual_outer_sum` proves, for a fitting canonical six-step
+window `012314`, that middle count at most 2 implies outer sum at least
+19. This is an actual-snake theorem without the collective catalogue
+premise. Graph-orientation guards and the complete revised graph-to-snake
+integration remain separate. The original reference union still has
+1,366 unresolved entries; this theorem closes none of its original entries.
 
-The final contradiction has 2,040 input clauses, 11,711 deductions and
-611,907 hints. Its 56 modules under `lean/Refined111/`, the actual-snake
-module, and `CounterSound111` give 58 successful module records and 13
-standard axiom reports. Independent RUP replay also passed. The earlier
-`generated-middle/` and `lean/Recovered111/` exports are preserved
-intermediates without final compiler receipts. Use `data/refined-plan.json`
-to identify the final proof. Reuse unique import prefixes and the audited
-environment; do not shadow historical `LocalWindow*` modules.
+The native formula has 55,177 clauses and 2,793 variables. The original
+certificate uses 3,577 input clauses, 5,061 deductions and 610,721 hints.
+Native core refinement selects a 3,306-clause proof with 7,020 deductions
+and 367,588 hints. A full variable bijection maps its 1,718 used variables
+into `1..1718`, enabling the existing literal-offset checker. Independent
+reconstruction and RUP replay verify both representations.
 
-This theorem removes 1,462 additional graph keys beyond milestone 110,
-leaving 4,942,589. It preserves the completed mean/range 483/551 and the
-conditional mean/range 496/602. The corresponding comparisons are 235
-and 234. The theorem does not remove an entry from the original reference
-union, which still has 1,366 unresolved entries.
+The final plan is `data/sum-plan.json`; the final generated sources are
+under `generated-sum-remapped/` and isolated checked modules under
+`lean/Refined112/`. The earlier `generated-sum/` output is an uncompiled
+failed export. Preserve it and its recorded failure. Do not rerun
+`prepare_sum.py` against existing native outputs. The later
+`export_sum.py` reuses those immutable native reductions.
 
-## Family of sum inequalities
+There are 36 generated proof modules plus `ActualSum112` and three checked
+helpers, giving 40 successful records and 20 printed axiom reports.
+The helpers are `SumCountSemantics112`, `SumGeometry112` and `SumBudget112`.
+All source, object, log and receipt hashes are audited by `scripts/audit.py`.
+A complete rebuild of historical dependencies remains separate.
 
-For the same direction window, the proposed outer-count sum is at least
-22 if the middle count is at most 2, at least 19 if the middle count is
-at most 3, and at least 17 without a middle restriction. All three remain
-unproved for actual snakes in Lean.
+## Generic interfaces now available
 
-The sum-22 contradiction is in `work/sum21-sorted/` and
-`data/sum21-sorted-core.json`. The full CNF has 58,438 clauses and 3,085
-variables. Its core has 4,774 clauses. Independent replay validated 71,388
-deductions and 6,105,267 hints. The four corner lists contain 84 literal
-occurrences, including seven repeated twice. Preserve multiplicity;
-sorting is permitted, deduplication changes the sum. The exact sorted
-CNF was independently reconstructed byte for byte.
+`SumCountSemantics112.countP_permuted_corners` proves that a sorted list
+of negative primary literals represents a sum of absent-corner counts,
+given its mapped-vertex permutation. Repeated occurrences must remain.
+The new `012314` sum has 84 occurrences and 70 distinct literals; the
+older milestone 111 `012340` sum has 84 occurrences and 77 distinct literals.
+Do not mix these multiplicities. `sound_append_sum` supports one extra
+sum counter after the ordinary validated counters.
 
-`CounterSound111.sound` is checked under explicit base-literal validity
-and counter-bound hypotheses. It still needs a concrete instantiation
-for this sum. Remaining steps are to prove the literal-count identity
-with multiplicity, validate the metadata and bounds, export and check
-the contradiction in Lean, and transfer it to actual snake windows.
-Try native core reduction before producing many Lean modules. Use the
-successful middle-count refinement as a starting point. The sum-19 and
-sum-17 cases have native UNSAT results only; obtain certificates before
-claiming those theorems.
+`SumBudget112` combines an outer-four deficit with a total-five deficit.
+Use fixed nonnegative integer coefficients `a,b` with `4*a+b<=120`.
+The outer deficit receives coefficient `a`; the five-count deficit receives
+`min(a,b)`. Take the maximum applicable credit. The shared shifted sum
+is bounded by 120 times total excess above clipped count 6. The clipped
+boundary contributes 21, hence 2,520 after scaling. Existing share credit
+remains separate. Local sum lower bounds are explicit hypotheses.
 
-The unsorted sum attempts retain their timeouts: 60 seconds for LRAT
-generation and 60/180 seconds for DRAT verification. They are not checked
-proofs and should not be restarted automatically. Large raw artifacts
-remain locally; verified gzip versions are recorded in
-`data/large-artifact-archives.json`. Restore missing originals with
-`scripts/verify_saved.py --restore-archives` before replay elsewhere.
+## Conditional graph results and next test
 
-## Numerical effect and next bounded test
+`data/expanded-rules.json` contains seven rules. Only the new `012314`
+rule is proved in this round; the other sum rules remain hypotheses.
+The final `data/expanded24/results.json` removes 33,362 additional keys
+beyond the checked three-count graph, leaving 4,909,227. Both edge-wise
+integer potentials and attaining cycles are saved.
 
-`data/family-profiles/results.json` combines all three hypotheses with
-the checked middle restriction. It removes 7,999 more keys, leaving
-4,934,590. The implementation chooses the strongest applicable threshold
-once. It permits deletion at either placement, while proposed excess
-credit is awarded only at the suffix. Coefficient 30 uses four fixed
-positions at coefficient 120. Preserve the existing share credit and
-prove the boundary estimate using counts clipped at 6.
+Balanced coefficients `(24,24)` give completed mean/range `484/557` and
+comparison `1103389/4684`, whose floor is 235. The conditional mean/range
+remains `496/602`, with comparison `551765/2348` and floor 234.
 
-The completed mean is 3384/7, with potential range 3860/7 and comparison
-1930913/8196. Its floor is still 235. A saved fourteen-edge cycle attains
-this mean. The conditional mean/range remains 496/602, with floor 234
-and a three-edge attaining cycle. The graph calculations check every
-edge inequality using integer arithmetic. They are native finite results,
-not complete Lean graph certificates or new global bounds.
+The completed six-cycle has all count symbols 4 and weights
+`480,480,492,480,480,492`. The final conditional four-cycle has weights
+`498,612,498,376`. All applicable deficits vanish on both cycles. They
+therefore bound the means by 484 and 496 for every nonnegative coefficient
+choice within this fixed rule family. Balanced coefficients attain both.
+Do not repeat coefficient sweeps. The saved coefficient-screen JSON is
+an earlier integer-only screen for the initial six-rule family; the final
+zero-deficit cycle argument is stronger and applies to the expanded family.
 
-The next bounded test is to inspect the fourteen-edge cycle and seek
-one stronger family restriction affecting it. Test any proposed rule on
-both full profiles before expensive certificate export. Preserve the
-sum-22 proof as the most developed proof candidate. Restrict new work to
-this count-sum route; avoid unrelated searches or another set of isolated
-exclusions without a demonstrated effect on the limiting cycles.
+Lean also checks the scaled arithmetic: when `p<=484*d`, the standard
+comparison still permits length 235 for any nonnegative potential range;
+when `p<=496*d`, it still permits 234. Improving potential ranges alone
+cannot change these integer comparisons.
 
-Four independently verified local witnesses are saved. Counts
-`(9,3,8,2,3)` have outer sum 17, so unconditional outer sum at least 18
-fails in this local model. Other witnesses block middle caps `(4,2,4)`,
-`(3,2,6)` and `(4,2,5)`. The witnesses have relaxed boundaries and multiple
-components; they do not construct complete long snakes. A numerical
-continuous relaxation gives about 12.806 in the middle-at-most-2 case
-and is insufficient by itself to prove the integer sum bound 22.
+The next bounded research test is the all-4 tuple on direction shape
+`012034`, followed by a broader count-sum restriction if it is impossible.
+The proposed outer lower bound 17 under middle count at most 4 would
+affect this obstruction, but its native cap-16 probe is UNKNOWN after
+15 seconds. The unrestricted total-at-most-20 probe on the same shape
+is also UNKNOWN. Do not turn either timeout into impossibility. Test any
+stronger candidate on both full profiles before expensive proof export.
 
-## Preservation and outstanding obligations
+Six local witnesses independently falsify other attempted strengthenings
+within the radius-four model. Their counts and components are recorded
+in `data/witness-audit.json`. They have relaxed boundaries and multiple
+components and do not construct complete long snakes. The 30-second
+`012340-middle5-outer17` native proof-generation timeout remains preserved;
+its partial LRAT is not checked and should not be restarted automatically.
 
-The twelve proved reference indices are
-`0,472,495,535,572,602,619,620,1006,1010,1011,1014`.
-Use the current `ReferenceCoverage109` equivalence; 1,366 remain.
-Conditional 234 also needs complete potential assembly and five local
-floors `(16,18,16,16,16)`. The old 7302 target-20 batch remains stopped.
+## Preservation and outstanding work
 
-Milestone 104 is checking the complete original graph potentials. Do not
-modify its active generator, checker or sources. Audit final coverage,
-dependencies and axioms when it finishes. At most one extra Lean compiler
-is permitted under the existing memory gate. Do not use `-M4096` or copy
-the 3.3 GB shared support overlay. A stale observation or timeout does
-not justify restarting a live process.
+The remaining reference union has 1,366 entries. The twelve checked
+indices are `0,472,495,535,572,602,619,620,1006,1010,1011,1014`.
+Conditional 234 still needs the remaining union, complete potential
+assembly, five local floors `(16,18,16,16,16)`, and compatible concrete
+integration. Preserve the stopped old 7302 target-20 batch.
 
-The maintained interval is 191 through 235 edges, based on the contributor
-proof and archived audit with the complete independent rebuild pending.
-Neither 196 nor any other exact optimum is proved. Full historical
-dependency rebuilding is distinct from the successful new-module checks.
+Milestone 104 continues checking the original graph potentials. Do not
+change its active generator, checker or sources, or restart based on a
+stale observation. Audit final coverage and axioms after it finishes.
+Allow at most one additional Lean compiler under the saved memory gate.
+Do not use `-M4096` or copy the 3.3 GB shared support overlay.
+
+The maintained range is 191 through 235 edges, based on the contributor
+proof and archived audit with a full independent rebuild pending.
+Conditional 234 and any exact optimum, including 196, remain unresolved.
 
 The open paper is `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`;
-the repository mirror is `paper/snake9_research.tex`. Revision 106 remains
-unchanged; the next full revision is 116. Preserve authors Iori Hironaka,
-Tommy Ma and Steven Zhan, and the local hypersetup settings. The last
-built-in compilation failed before TeX execution; no new PDF was verified.
-Use ordinary notation and define only essential, repeatedly used concepts.
-Keep implementation filenames out of the mathematical manuscript.
+its repository mirror is `paper/snake9_research.tex`. Revision 106 is
+unchanged; the next full revision is 116. Preserve Iori Hironaka, Tommy Ma
+and Steven Zhan as authors and preserve hypersetup. The previous built-in
+compiler failed before TeX execution, so no new PDF is verified. Use
+ordinary notation and only essential, repeatedly used definitions. Keep
+implementation filenames out of the mathematical manuscript.
 
 Python is `C:/Users/hironakaiori/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`
 with `-B -X utf8`. Lean 4.19 and mathlib are under
 `D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research`.
-Check incoming GitHub changes and push each completed round. Leave the
-unrelated `.gitignore` and milestone 50 critical-family edits untouched.
+Push each completed round after checking incoming GitHub changes.
+Leave unrelated `.gitignore` and milestone 50 critical-family edits untouched.

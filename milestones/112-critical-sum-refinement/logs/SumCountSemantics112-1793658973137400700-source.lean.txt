@@ -1,0 +1,94 @@
+import CounterSound111
+
+/-!
+Permutation-preserving semantics for a counter of concatenated corner lists.
+All concrete metadata, permutation, and count bounds remain explicit premises.
+The ordinary counters retain the existing ctrOK semantics; the appended counter
+uses CounterSound111 with its base-literal validity and numerical bound supplied.
+-/
+namespace Snake9.SumCountSemantics112
+open Snake9.LocalWindow Snake9.LocalWindow.Tags
+set_option maxHeartbeats 2000000
+
+theorem countP_permuted_corners (S E : Nat → Bool) (M : MT)
+    (lits : List Nat) (selected : List Centre)
+    (hneg : lits.all (negP M) = true)
+    (hperm : (lits.map (vl M)).Perm (selected.flatMap corners)) :
+    lits.countP (lv (base S E M)) =
+      (selected.map fun c => absentCorners S c.v c.d₁ c.d₂).sum := by
+  calc
+    _ = (lits.map (vl M)).countP (fun v => !S v) := by
+      rw [List.countP_map]
+      apply List.countP_congr
+      intro l hl
+      exact base_negP ((List.all_eq_true.mp hneg) l hl)
+    _ = (selected.flatMap corners).countP (fun v => !S v) :=
+      hperm.countP_eq _
+    _ = _ := by
+      induction selected with
+      | nil => simp
+      | cons c cs ih =>
+        simp only [List.flatMap_cons, List.countP_append, List.map_cons, List.sum_cons]
+        rw [countP_corners_abs, ih]
+
+theorem sound_append (M : MT) (cs : List Ctr) (extra : Ctr)
+    (w : List Nat) (bounds : List (Nat × Nat))
+    (tags : List Tag) (raw : List (List Nat))
+    (h : ckAll M (cs++[extra]) w tags raw = true)
+    (hcs : cs.all (ctrOK M (centresOf w bounds)) = true)
+    (S E : Nat → Bool)
+    (hbase : ∀ i, i < extra.lits.length →
+      baseOK M (extra.lits.getD i 0) = true)
+    (hbound : extra.lits.countP (lv (base S E M)) ≤ extra.k)
+    (ax : Axioms S E w (centresOf w bounds)) :
+    cnfTrue (tau S E M (cs++[extra])) (raw.map (·.map decodeLit)) = true := by
+  apply CounterSound111.sound M (cs++[extra]) w bounds tags raw h S E
+  · intro c i hi
+    by_cases hc : c < cs.length
+    · rw [List.getD_append cs [extra] dfltCtr c hc] at hi ⊢
+      exact ctr_lit_ok (ctrOK_getD hcs c) hi
+    · have hle : cs.length ≤ c := by omega
+      rw [List.getD_append_right cs [extra] dfltCtr c hle] at hi ⊢
+      by_cases he : c = cs.length
+      · subst c
+        simpa using hbase i (by simpa using hi)
+      · have hout : [extra].length ≤ c-cs.length := by simp; omega
+        rw [List.getD_eq_default [extra] dfltCtr hout] at hi
+        simp [dfltCtr] at hi
+  · intro c
+    by_cases hc : c < cs.length
+    · rw [List.getD_append cs [extra] dfltCtr c hc]
+      exact ctr_bound (ctrOK_getD hcs c) ax
+    · have hle : cs.length ≤ c := by omega
+      rw [List.getD_append_right cs [extra] dfltCtr c hle]
+      by_cases he : c = cs.length
+      · subst c
+        simpa using hbound
+      · have hout : [extra].length ≤ c-cs.length := by simp; omega
+        rw [List.getD_eq_default [extra] dfltCtr hout]
+        simp [dfltCtr]
+  · exact ax
+
+theorem sound_append_sum (M : MT) (cs : List Ctr) (extra : Ctr)
+    (w : List Nat) (bounds : List (Nat × Nat))
+    (tags : List Tag) (raw : List (List Nat))
+    (h : ckAll M (cs++[extra]) w tags raw = true)
+    (hcs : cs.all (ctrOK M (centresOf w bounds)) = true)
+    (selected : List Centre)
+    (hneg : extra.lits.all (negP M) = true)
+    (hperm : (extra.lits.map (vl M)).Perm (selected.flatMap corners))
+    (S E : Nat → Bool)
+    (hbase : ∀ i, i < extra.lits.length →
+      baseOK M (extra.lits.getD i 0) = true)
+    (hsum : (selected.map fun c => absentCorners S c.v c.d₁ c.d₂).sum ≤ extra.k)
+    (ax : Axioms S E w (centresOf w bounds)) :
+    cnfTrue (tau S E M (cs++[extra])) (raw.map (·.map decodeLit)) = true := by
+  apply sound_append M cs extra w bounds tags raw h hcs S E hbase
+  · rw [countP_permuted_corners S E M extra.lits selected hneg hperm]
+    exact hsum
+  · exact ax
+
+#print axioms countP_permuted_corners
+#print axioms sound_append
+#print axioms sound_append_sum
+end Snake9.SumCountSemantics112
