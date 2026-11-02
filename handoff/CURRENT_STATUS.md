@@ -1,5 +1,54 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 111 checkpoint
+
+For canonical directions 012340, a new checked theorem requires the
+second internal count to be at least 4, the third at least 3, or the
+fourth at least 6. The outer two counts are unrestricted. The local
+contradiction, actual-snake transfer and both graph orientations pass
+Lean. There are 58 successful module records and 13 standard axiom
+reports. The main contradiction has 2,040 clauses, 11,711 deductions
+and 611,907 hints; independent replay passes. No mathematical definition
+was introduced.
+
+This restriction removes 1,462 additional graph keys beyond milestone
+110, leaving 4,942,589. Its integer comparisons remain 235 and conditional
+234. Four independently checked local witnesses rule out several stronger
+local claims; their relaxed boundaries and multiple components prevent
+interpreting them as complete snakes.
+
+The proposed outer-sum lower bounds are 22 when the middle count is at
+most 2, 19 when it is at most 3, and 17 without a middle restriction.
+The sum-22 case has a complete native sorted-input contradiction with
+71,388 deductions and 6,105,267 hints, independently reconstructed and
+replayed. Concrete sum semantics, Lean replay and actual-snake transfer
+remain pending. The generic counter-soundness helper is checked. The
+two other sum cases have native UNSAT records without checked certificates.
+Sorting retains all 84 literal occurrences, including seven duplicates.
+
+Assuming all three sum bounds and their common coefficient-30 excess
+argument removes 7,999 more graph keys, leaving 4,934,590. The completed
+mean improves from 483 to 3384/7, with potential range 3860/7 and exact
+comparison 1930913/8196. Its integer floor remains 235. A fourteen-edge
+cycle attains the new mean. The conditional profile retains mean 496,
+range 602 and floor 234. Every edge inequality was checked by the native
+calculation; complete Lean graph certificates and the excess-budget
+integration remain outstanding.
+
+At the saved process-verified observation, milestone 104 was RUNNING with
+71/791 completed and 70/791 conditional contexts
+checked. Its active module was `ConditionalBatch104G061`. Preserve
+that running batch. The reference union still has 1,366 unresolved entries.
+
+The maintained range remains 191 through 235 edges, based on the
+contributor proof and archived audit with a complete independent rebuild
+pending. Conditional 234, the exact optimum and 196 remain unresolved.
+Paper revision 106 is unchanged; the next full revision is 116. Large
+proof artifacts have verified gzip archives, with raw originals retained
+locally. Failed proof attempts preserve their original timeout status.
+
+Earlier checkpoint sections below are historical snapshots.
+
 ## Milestone 110 checkpoint
 
 A new checked restriction excludes counts (5,5,2,4,5) on canonical

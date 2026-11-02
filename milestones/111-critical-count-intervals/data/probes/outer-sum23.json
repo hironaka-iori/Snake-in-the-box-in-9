@@ -1,0 +1,282 @@
+{
+  "name": "outer-sum23",
+  "directions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    0
+  ],
+  "bounds": [
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ]
+  ],
+  "outer_sum_cap": 23,
+  "purpose": "Test sum of the four outer counts around a centre count at most2.",
+  "status": "UNKNOWN",
+  "selected": null,
+  "census": {
+    "alpha": [
+      10,
+      5,
+      2,
+      4,
+      4
+    ],
+    "share": [
+      149,
+      35,
+      11,
+      14,
+      27
+    ],
+    "total_share": 236,
+    "cycles": [
+      [
+        258,
+        262,
+        266,
+        267,
+        275,
+        278,
+        279,
+        283
+      ],
+      [
+        70,
+        74,
+        75,
+        78,
+        83,
+        86,
+        87,
+        91
+      ],
+      [
+        133,
+        137,
+        139,
+        141,
+        147,
+        149,
+        151,
+        155
+      ]
+    ]
+  },
+  "cycle_cuts": [
+    [
+      258,
+      260,
+      261,
+      262,
+      265,
+      266,
+      267,
+      269
+    ],
+    [
+      37,
+      41,
+      43,
+      45,
+      51,
+      53,
+      55,
+      59
+    ],
+    [
+      68,
+      69,
+      70,
+      73,
+      74,
+      75,
+      77,
+      78
+    ],
+    [
+      132,
+      133,
+      134,
+      137,
+      139,
+      141,
+      147,
+      150,
+      151,
+      155
+    ],
+    [
+      289,
+      291,
+      295,
+      303,
+      305,
+      313,
+      317,
+      319
+    ],
+    [
+      36,
+      37,
+      38,
+      41,
+      43,
+      45,
+      51,
+      54,
+      55,
+      59
+    ],
+    [
+      321,
+      323,
+      327,
+      335,
+      337,
+      345,
+      349,
+      351
+    ],
+    [
+      68,
+      69,
+      70,
+      73,
+      75,
+      77,
+      83,
+      86,
+      87,
+      91
+    ],
+    [
+      260,
+      261,
+      262,
+      265,
+      267,
+      269,
+      275,
+      278,
+      279,
+      283
+    ],
+    [
+      261,
+      265,
+      267,
+      269,
+      275,
+      277,
+      279,
+      283
+    ],
+    [
+      66,
+      68,
+      69,
+      70,
+      73,
+      74,
+      75,
+      77
+    ],
+    [
+      130,
+      132,
+      133,
+      134,
+      137,
+      138,
+      139,
+      141
+    ],
+    [
+      36,
+      37,
+      38,
+      41,
+      42,
+      43,
+      45,
+      46
+    ],
+    [
+      69,
+      73,
+      75,
+      77,
+      83,
+      85,
+      87,
+      91
+    ],
+    [
+      258,
+      262,
+      266,
+      267,
+      275,
+      278,
+      279,
+      283
+    ],
+    [
+      70,
+      74,
+      75,
+      78,
+      83,
+      86,
+      87,
+      91
+    ],
+    [
+      133,
+      137,
+      139,
+      141,
+      147,
+      149,
+      151,
+      155
+    ]
+  ],
+  "variables": 3253,
+  "clauses": 58772,
+  "build_seconds": 0.06199999999807915,
+  "solver_seconds": 15.0,
+  "nominal_seconds": 15.0,
+  "conflict_budget_per_call": 1000,
+  "calls": 436,
+  "source_files_sha256": {
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "milestones/28-direct-share-certificates/scripts/direct.py": "a2dc4151244a28b5f95c6de26c36146f7297c9c32d9d422f9498b42f286cb126",
+    "milestones/110-critical-cycle-core-screen/data/count-profiles-all/results.json": "93e38e0497e8a693f5ba5ada388c9dbb807d1236b266776391b1f74c93cd0963",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf"
+  },
+  "script_sha256": "4cb2a9a0bbaf4736679eecea7613a9afb4aa6cf1254fd212497f30757c3ceef7",
+  "scope": "Bounded native local-model evidence. Exact6 is stricter than graph symbol6. No theorem, whole-snake witness or global bound follows from this probe alone."
+}

@@ -1,0 +1,54 @@
+{
+  "status": "PASS_COMBINED_CONDITIONAL_GRAPH_EXPERIMENT",
+  "previous_exclusions": 2957,
+  "new_middle_exclusions": 1462,
+  "new_sum_exclusions": 1622,
+  "new_exclusion_sets_disjoint": true,
+  "total_exclusions": 6041,
+  "remaining_edges": 4940967,
+  "profiles": [
+    {
+      "profile": "completed",
+      "mean": "483",
+      "range": "551",
+      "comparison": 235,
+      "all_edge_inequalities_checked": true,
+      "attaining_cycle": [
+        3534439,
+        1650795,
+        371478,
+        2611491
+      ],
+      "all_cycle_symbols_below6": true
+    },
+    {
+      "profile": "conditional_floor18",
+      "mean": "496",
+      "range": "602",
+      "comparison": 234,
+      "all_edge_inequalities_checked": true,
+      "attaining_cycle": [
+        3409474,
+        1818803,
+        732711,
+        4453367
+      ],
+      "all_cycle_symbols_below6": true
+    }
+  ],
+  "source_files_sha256": {
+    "milestones/111-critical-count-intervals/data/middle325-profiles/results.json": "299657bc139785919b8a0114e6ef60bd42a9572f641c11a10990aa094043421a",
+    "milestones/111-critical-count-intervals/data/sum22-profiles/results.json": "439c4460c08522cc40e144572f046e6b64238fe7fba22589d8b7be480af08bf5",
+    "milestones/110-critical-cycle-core-screen/data/count-profiles-one/removed-indices.json": "4fb36f8f434cb148472779166c6e455008f34a2caf571e4f1fba90ba53cab8b6",
+    "milestones/111-critical-count-intervals/data/middle325-profiles/removed-indices.json": "ffaae82933775c8d76c5410c216910e3e3cab8873ea5a996b7336e511aa6ad84",
+    "milestones/111-critical-count-intervals/data/sum22-profiles/removed-indices.json": "7448dd7b18824c716692c25d6da2fc7fd6abd266736f76f4d8900f4d98970079",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/73-countfree-share-catalogue/data/proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18.json": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+    "milestones/111-critical-count-intervals/data/sum22-profiles/completed-potential.i64.gz": "9614d7b4dbe2e9c98023033df4bb2fc50f6bd11029560df67592485b7feacd76",
+    "milestones/111-critical-count-intervals/data/sum22-profiles/conditional_floor18-potential.i64.gz": "05239410059be5972c0856628ced2fa13f1e7f310a5a6df6adf90f2949d69c34"
+  },
+  "script_sha256": "12021c0784d16a10a40c9be0f5fbb750f609ac0c022bf46a10c730f08593f41a",
+  "scope": "Combination remains conditional on the unproved sum inequality and excess budget. Exact old potentials and surviving cycles establish unchanged means and comparisons on the intersection. No new global bound."
+}

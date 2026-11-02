@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 110](milestones/110-critical-cycle-core-screen/README.md) proves a new local count exclusion for actual snakes and removes 865 additional graph keys. Both numerical comparisons remain unchanged, even assuming all seven proposed exclusions. The complete potential batch continues.
+Latest continuation: [milestone 111](milestones/111-critical-count-intervals/README.md) proves a three-count restriction for actual snakes. Three proposed sum bounds improve the completed graph mean to 3384/7, while integer comparisons remain 235 and conditional 234. Sum proofs and the complete potential batch remain pending.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
@@ -18,7 +18,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
 
-Next research priority: Seek one count inequality or interval exclusion covering a family of the surviving limiting-cycle patterns, and test its effect on both full profiles before certifying isolated cases. All 143 older cores miss the original limiting cycles; all seven new exclusions together preserve the numerical comparisons. Preserve the running milestone 104 batch.
+Next research priority: Inspect the new fourteen-edge obstruction and test a stronger count-sum family on both full profiles before expensive certificate export. The sum-22 native contradiction is ready for concrete semantics and Lean proof reduction; preserve its repeated literals and the running milestone 104 batch.
 
 ## Historical checkpoints
 

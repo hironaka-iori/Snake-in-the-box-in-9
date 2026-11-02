@@ -1,0 +1,149 @@
+{
+  "status": "EXACT_FINITE_PROFILES_WITH_UNPROVED_OUTER_SUM_INEQUALITY",
+  "outer_sum_lower": 22,
+  "centre_upper": 2,
+  "directions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    0
+  ],
+  "profiles": [
+    {
+      "profile": "completed",
+      "mean": "483",
+      "p": 483,
+      "d": 1,
+      "range_scaled": 551,
+      "range": "551",
+      "cycle": [
+        {
+          "edge": 3534439,
+          "direction": 352,
+          "history": 16,
+          "count_code": 29254,
+          "u": 1147947,
+          "v": 394726,
+          "weight": 600,
+          "bonus": 0
+        },
+        {
+          "edge": 1650795,
+          "direction": 173,
+          "history": 0,
+          "count_code": 35559,
+          "u": 394726,
+          "v": 113319,
+          "weight": 480,
+          "bonus": 0
+        },
+        {
+          "edge": 371478,
+          "direction": 47,
+          "history": 0,
+          "count_code": 26732,
+          "u": 113319,
+          "v": 594380,
+          "weight": 372,
+          "bonus": 0
+        },
+        {
+          "edge": 2611491,
+          "direction": 258,
+          "history": 0,
+          "count_code": 20427,
+          "u": 594380,
+          "v": 1147947,
+          "weight": 480,
+          "bonus": 0
+        }
+      ],
+      "weight_sha256": "2a4e4af538754c1ffea5ffbe94f9286ccd04296162a9b5d98a6bad07708e251b",
+      "potential_file": "completed-potential.i64.gz",
+      "potential_sha256": "2e2727a0b087960a47fa62c8feb06731ecff67dc71aa87893350900e1f401dd0",
+      "all_edge_inequalities_checked": true,
+      "iterations": 24,
+      "comparison_bound": "157625/669",
+      "comparison_integer_bound": 235,
+      "seconds": 24.218999999997322
+    },
+    {
+      "profile": "conditional_floor18",
+      "mean": "496",
+      "p": 496,
+      "d": 1,
+      "range_scaled": 602,
+      "range": "602",
+      "cycle": [
+        {
+          "edge": 3409474,
+          "direction": 350,
+          "history": 28,
+          "count_code": 27813,
+          "u": 1241019,
+          "v": 1551909,
+          "weight": 496,
+          "bonus": 0
+        },
+        {
+          "edge": 1818803,
+          "direction": 179,
+          "history": 68,
+          "count_code": 26912,
+          "u": 1551909,
+          "v": 182432,
+          "weight": 378,
+          "bonus": 0
+        },
+        {
+          "edge": 732711,
+          "direction": 79,
+          "history": 0,
+          "count_code": 21508,
+          "u": 182432,
+          "v": 970180,
+          "weight": 612,
+          "bonus": 0
+        },
+        {
+          "edge": 4453367,
+          "direction": 460,
+          "history": 0,
+          "count_code": 35739,
+          "u": 970180,
+          "v": 1241019,
+          "weight": 498,
+          "bonus": 0
+        }
+      ],
+      "weight_sha256": "7fb21f00ceab8f6cc4fdd37b0a07dfff91cb73d3977e4ce8762ff961605daa32",
+      "potential_file": "conditional_floor18-potential.i64.gz",
+      "potential_sha256": "46f38938e4974feacb3148b777e5d98d9583b30f0121bceba81830b23fb6d4e5",
+      "all_edge_inequalities_checked": true,
+      "iterations": 21,
+      "comparison_bound": "551765/2348",
+      "comparison_integer_bound": 234,
+      "seconds": 15.93800000000192
+    }
+  ],
+  "states": 1601856,
+  "edges": 4942429,
+  "additional_removed": 1622,
+  "bonus_edges": 24388,
+  "bonus_coefficient": 30,
+  "source_files_sha256": {
+    "milestones/111-critical-count-intervals/data/probes/outer-sum21.json": "c10df09f051ad17d2e66df0ede89dbe3c6d884a1f8c4ba75e01db9695a597f89",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/73-countfree-share-catalogue/data/proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18.json": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+    "milestones/110-critical-cycle-core-screen/data/count-profiles-one/removed-indices.json": "4fb36f8f434cb148472779166c6e455008f34a2caf571e4f1fba90ba53cab8b6"
+  },
+  "algorithm_sha256": "5ff7a4087ed2df59c67c32d48be305eead051c4f788b870ac4210a1d754c0b1a",
+  "script_sha256": "d04855dd99867880a18ba707cd789811b82d5d1606f20e5c26cb89c1ea87e673",
+  "seconds": 48.26499999999942,
+  "scope": "Conditional native experiment only. Local sum inequality and its count-excess budget are not yet checked. The bonus uses only the suffix and four fixed positions, overlap at most4. Counts with no saturated symbol give exclusions at both offsets. Existing graph prerequisites remain; no new global bound."
+}
