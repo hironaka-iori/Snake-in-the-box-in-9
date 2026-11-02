@@ -20,8 +20,9 @@ Steven Zhan. Its repository and editor copies have SHA256
 Source checks preserve all 116 previous statements and add seven, giving 123;
 all 13 printed paths and 118,673 vertex pairs were checked. The built-in
 compiler failed before source compilation. No new PDF or layout check is
-claimed. Milestones 77 through 81 add proof interfaces, a completed local share theorem and
-forty-rule retention without revising the paper. The next full revision is 86.
+claimed. Milestones 77 through 83 add proof interfaces, a completed local share theorem,
+forty-rule retention, a cycle obstruction and the pending next share certificate
+without revising the paper. The next full revision is 86.
 
 ## Chosen route: charge empty squares
 
@@ -83,6 +84,19 @@ including geometry and reversal. Its selected sources and compact proof were
 archived and restored byte-for-byte. No case7305 proof process remains active.
 The combined catalogue passes 35 audits and retains exactly five local targets:
 7301, 7302, 7303, 7307 and 7308. Earlier pending checkpoints remain historical evidence.
+
+Milestone 83 is actively checking case 7302. All 121 semantic shards and
+their combined interpretation passed, giving 127 modules before refutation
+replay. The generated compact refutation, original export simulation and
+reduced export simulations passed. Selected Lean replay and final geometry
+remain pending. Inspect its saved checkpoint and actual
+process before restarting anything.
+
+Adding only this unproved floor gives exact finite mean 9259/19 and scaled
+potential range 11301 at denominator 19. Its bound 20965613/89059 still
+rounds down to 235. It raises 1,043,097 weights over the completed-share
+model. All-edge checking and three Lean arithmetic audits do not discharge
+the added local premise or the full graph interpretation.
 
 ## Proof interfaces and remaining work
 

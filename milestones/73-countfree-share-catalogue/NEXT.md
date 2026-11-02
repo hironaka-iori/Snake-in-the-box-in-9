@@ -29,39 +29,48 @@ The current Windows runtime paths are:
 Use `E:/Snake-in-a-box` as the working repository. No package installation is
 needed for the saved Lean replay. Inspect script paths before using another host.
 
-## Next local certificate
+## Current local certificate: case 7302
 
-Update at milestone74: case7305 has completed all86 semantic shards, CNF/data/structure, and semantic composition, for92 checked modules. Its smaller selected proof has154,489 derived clauses and9,394,822 hints; simulation passed, while Lean refutation replay and final geometry/reversal remain pending. Read `cases/case7305/data/pending-checkpoint.json` and the case README. Resume the existing completion driver; do not bootstrap or regenerate this preserved case. The pipeline below records the procedure for a fresh case.
+Milestone 80 completed case7305, including all465 modules, geometry, reversal,
+100 theorem audits and archive restoration. Do not restart that completed
+case. The remaining target cases are7301,7302,7303,7307,7308.
 
-After completing any active case, prioritize **case 7305**, shape **012310**,
-with share lower bound **12**. Its selected native certificate is
-`general5-cap11-certificate.json` in milestone72/critical-current. Do not substitute
-the much larger uniform-share-16 experiment for this mixed-catalogue requirement.
+Milestone 83 is now checking **case7302**, direction shape **012034**, with
+share lower bound **20**. Its selected native input is
+`pysat2-cap19-certificate.json`; it has universal bounds[0,21] on all five
+internal counts and no cycle cuts. The semantic and compact-proof work is
+under `cases/case7302/`; current process observations and the conditional
+comparison are saved in `../83-012034-share-certificate/`.
 
-The reason for this priority is structural. The already checked distinct-direction
-share-12 theorem covers 012345. Case7306 targets 012314. Adding a positive share
-for 012310 completes one of the four minimal covers of the original mean-480
-critical family, recorded in milestone72's `critical-current/data/shape-cover.json`.
-Recompute the finite model after discharging the premise; a removed old critical
-cycle alone is not a global improvement.
+The choice follows milestone82: the current mean483 cycle contains the
+012034 target twice and the012340 target once. Applying only the unproved
+012034 floor20 gives exact conditional finite mean9259/19 and integer
+comparison235. A local theorem still requires all replay and geometric gates.
 
-The case pipeline is:
+For a new case the pipeline is:
 
-1. `scripts/bootstrap_case.py 5`.
-2. The new case's `scripts/prepare_lean.py`, then `scripts/assemble.py`.
-3. `scripts/add_reversal.py 7305`, `scripts/generate_lrat.py 7305`, then
-   `scripts/export_lrat.py 7305`.
+1. `scripts/bootstrap_case.py INDEX`, once, before any source checks.
+2. The case's `scripts/prepare_lean.py`, then `scripts/assemble.py`.
+3. `scripts/add_reversal.py NUMBER`, `scripts/generate_lrat.py NUMBER`, then
+   `scripts/export_lrat.py NUMBER`.
 4. The case's `scripts/replay_share.py`, then `scripts/complete_share.py`.
-   A separate `--lrat-only` pass may run alongside semantics, followed by one full
-   completion pass after both finish. Keep memory use bounded.
-5. The case's `scripts/audit_share.py`, followed by `scripts/archive.py 7305` and
-   `scripts/restore.py 7305`.
+   The semantic and LRAT stages may be run separately with the documented
+   options, followed by one complete assembly pass. Inspect current processes
+   first and never duplicate a running driver.
+5. The case's `scripts/audit_share.py`, then `scripts/archive.py NUMBER` and
+   `scripts/restore.py NUMBER` after the final local theorem passes.
 6. `scripts/check_integration.py`, `scripts/checkpoint.py`, and
-   `scripts/evaluate_checked.py`.
+   `scripts/evaluate_checked.py` after admitting the completed case.
 
-The proof audit must cover the arbitrary-snake geometry and reversal, in addition
-to all Boolean proof modules. `check_integration.py` inserts completed refutations
-into the generic canonical adapter and the partial catalogue theorem.
+Case7302 has already been bootstrapped. Reuse its generated source and
+source-matched successful checks. The case-specific slicing adaptation in
+milestone83 preserves the original compact proof and requires independent
+simulation before selecting a smaller proof. It does not change the input
+clauses. Selection must follow its process and source-integrity guards.
+
+The final audit must cover arbitrary-snake geometry and reversal, in addition
+to every Boolean proof module. A generated source, native refutation or
+partial replay must not be added to the completed catalogue.
 
 ## Conditional and proof-supported comparisons
 
@@ -107,7 +116,7 @@ Keep exact proof bytes through the task's `.gitattributes` and run
 `scripts/check_staged.py` after staging. Stage only this task and deliberate
 documentation changes; unrelated working changes are present in the repository.
 
-The paper is still revision66; the next full rewrite is scheduled for milestone76.
+The paper is revision76; the next full rewrite is scheduled for milestone86.
 Its repository source and the existing D: editor source have matching hashes.
 Preserve Iori Hironaka, Tommy Ma and Steven Zhan as authors and preserve the local
 hyperlink settings. Write the eventual paper in mathematical notation and arguments;

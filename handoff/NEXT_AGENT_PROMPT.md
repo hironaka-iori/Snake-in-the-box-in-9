@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, and the milestone 81 and 82 READMEs and exact checkpoints.
+`handoff/CURRENT_STATUS.md`, and milestone 83's README and exact checkpoint. Milestones 81 and 82 record the preceding results.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -39,13 +39,19 @@ Symbol six represents the interval [6,21]. Alternative
 credits on the same five centres combine by maximum. Verify the entire
 potential, its range and the boundary calculation before claiming 234.
 
-For the next optimisation check, prioritize case 7302 (012034, share 20)
-or case 7307 (012340, share 16), one bounded task at a time. Milestone 82
-shows why these act on the current four-edge mean-483 cycle. Their proposed
-floors would raise that witness alone to 497; no full-graph improvement is
-inferred. Do not spend another round on bonuses that are zero whenever all
-six stored symbols are below six on the unchanged graph: that entire class
-leaves its mean at 483 and cannot reach 234 with the current budget.
+The active task is case 7302 (012034, share 20). Its 127 semantic modules
+have passed; preserve the current case and inspect its actual process before
+resuming the selected refutation replay. Do not bootstrap or regenerate
+checked sources. Complete geometry, reversal and the source/axiom audit,
+then archive, restore, integrate and recompute using the completed premise.
+Until that gate passes, the new mean 9259/19 is conditional on this one
+unproved local floor. It still gives integer comparison 235.
+
+Case 7307 (012340, share 16) is the following local target. Milestone 82
+shows that these two proposed floors raise one saved witness to 497; that
+does not determine the full graph mean. Bonuses vanishing whenever all six
+stored symbols are below six cannot improve the old graph mean 483 under
+the same budget. Keep all five pending target cases explicit until checked.
 
 Avoid repeating the failed monolithic coverage check; its twelve-part
 decomposition is saved. Avoid trying to compensate for the six specified
@@ -55,7 +61,7 @@ restriction on realizable walks or stronger boundary information could change
 that conclusion and would need its own proof.
 
 Preserve the manuscript authors Iori Hironaka, Tommy Ma and Steven Zhan and all
-hyperlink settings. Revision 76 is the latest paper; milestones 77 through 82 have separate
+hyperlink settings. Revision 76 is the latest paper; milestones 77 through 83 have separate
 proof notes. The next full revision is scheduled for 86. The existing editor file is
 `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`, with a repository
 mirror at `paper/snake9_research.tex`. Edit the existing editor file in place

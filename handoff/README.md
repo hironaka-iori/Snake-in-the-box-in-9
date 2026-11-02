@@ -4,13 +4,22 @@ Start with [current mathematical status](CURRENT_STATUS.md), then use the
 [continuation assignment](NEXT_AGENT_PROMPT.md). Both are intended for another
 researcher or AI agent to continue from the saved evidence.
 
+The active local-certificate task is [milestone 83](../milestones/83-012034-share-certificate/README.md):
+case 7302, the 012034 share-20 target. Its clause interpretation and assembly
+have passed; the refutation replay and final local theorem remain pending.
+The current [checkpoint](../milestones/83-012034-share-certificate/data/checkpoint.json)
+and [manifest](../milestones/83-012034-share-certificate/data/file-manifest.json)
+record the exact saved evidence and process observation. Inspect the actual
+process before resuming; do not restart a live driver. Earlier manifests
+identify their historical versions of shared handover files.
+
 The latest optimisation checkpoint is [milestone 82](../milestones/82-unsaturated-cycle-obstruction/README.md).
 Its exact cycle obstruction rules out bonuses confined to stored counts of six on
 the current graph. The source, six Lean audits, all-edge verification and
 conditional witness sensitivity are saved with an exact manifest. Cases 7302
 and 7307 are the next targeted local-share tests; they remain unproved.
-Use its [current saved-file manifest](../milestones/82-unsaturated-cycle-obstruction/data/file-manifest.json)
-to verify the present checkpoint and shared handover files.
+Its [saved-file manifest](../milestones/82-unsaturated-cycle-obstruction/data/file-manifest.json)
+records that completed round and its then-current handover files.
 
 The latest proof checkpoint is
 [milestone 81](../milestones/81-recovered-short-rule-retention/README.md).
@@ -19,7 +28,7 @@ records the forty-rule retention theorem, 66 audits, exact-loop comparison,
 receipt hashes, repository refs and unchanged paper hash.
 Its [saved-file manifest](../milestones/81-recovered-short-rule-retention/data/file-manifest.json)
 records the versions saved with that milestone. Shared handover files have since
-been updated; use milestone 82's manifest for their current versions.
+been updated; use milestone 83's manifest for their current versions.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
 inspected contributor theorem and saved audit, without a fresh complete local

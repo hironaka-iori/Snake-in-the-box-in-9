@@ -1,0 +1,33 @@
+{
+  "status": "PASS_SINGLE_TARGET_CONDITIONAL_ARITHMETIC",
+  "exit_code": 0,
+  "seconds": 14.983999999999924,
+  "source_sha256": "b1fdfd6d9ce3fc99e234770322cefb8fac1fddb041fc232ceb11016ba8795a4f",
+  "object_sha256": "9ddc72081f51ea9417560c47fa48458538135dc1647a8bbfd17e4d2d04362926",
+  "log_sha256": "0ad9d5a5978544764a75ab38cd7814bf7a8619acd4eaac1c872e0e2fca60e959",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.Target7302Pressure.conditional_integer_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Target7302Pressure.mean_alone_insufficient",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Target7302Pressure.threshold_deficit",
+      "axioms": []
+    }
+  ],
+  "comparison_audit_sha256": "8d3cedcb25436fab7257d5cf36f2eb2e07d7f3baf52fab3aaaba803dcf4b385b",
+  "mathlib_manifest_sha256": "134206d98c64064cea35395c7ab469d7f0782b1383deaecf63322abc1fd5b1d1",
+  "lean_binary_sha256": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+  "scope": "Conditional budget arithmetic only. Single local target and full graph interpretation remain premises; existing mathlib reused."
+}

@@ -1,0 +1,74 @@
+{
+  "status": "PARTIAL_SHARE20_SEMANTICS_AND_EXACT_CONDITIONAL_COMPARISON",
+  "recorded_at": "2026-11-02T11:14:43.487867+00:00",
+  "git_refs_before_commit": {
+    "HEAD": "444e7190bc6c542465940c38b6cc763baa4bc85d",
+    "origin/main": "444e7190bc6c542465940c38b6cc763baa4bc85d",
+    "origin/research/unconditional-241": "1e0ebb95954cc70f9edf59268b5a36df3f616422"
+  },
+  "unconditional_edge_interval": [
+    191,
+    235
+  ],
+  "upper_bound_evidence": "Inspected contributor theorem and saved audit; no fresh full independent rebuild.",
+  "conditional_target": 234,
+  "case7302_complete": false,
+  "remaining_local_share_cases": [
+    7301,
+    7302,
+    7303,
+    7307,
+    7308
+  ],
+  "conditional_mean": "9259/19",
+  "conditional_scaled_range": 11301,
+  "conditional_scale": 19,
+  "conditional_integer_comparison": 235,
+  "arithmetic_audits": 3,
+  "semantic_modules": 127,
+  "replay_successful_modules": 164,
+  "replay_source_modules": 1135,
+  "selected_refutation": {
+    "lemmas": 389216,
+    "hints": 25783817,
+    "slots": 27815,
+    "segments": 858,
+    "word_bits": 15
+  },
+  "observed_processes": [
+    {
+      "ProcessId": 48736,
+      "ParentProcessId": 46488,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -X utf8 milestones\\73-countfree-share-catalogue\\cases\\case7302\\scripts\\complete_share.py"
+    },
+    {
+      "ProcessId": 43168,
+      "ParentProcessId": 48736,
+      "Name": "lake.exe",
+      "CommandLine": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe env lean -s 65536 -R E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean -o E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\build\\semantic\\LocalWindowUnsat\\ShareWindow7302\\Data128.fresh.olean E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\\LocalWindowUnsat\\ShareWindow7302\\Data128.lean"
+    },
+    {
+      "ProcessId": 50588,
+      "ParentProcessId": 43168,
+      "Name": "lean.exe",
+      "CommandLine": "\"lean\" \"-s\" \"65536\" \"-R\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\" \"-o\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\build\\semantic\\LocalWindowUnsat\\ShareWindow7302\\Data128.fresh.olean\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\\LocalWindowUnsat\\ShareWindow7302\\Data128.lean\""
+    }
+  ],
+  "proof_replay_tool_session": 75639,
+  "process_scope": "Historical process observation. Session IDs belong to this execution context. Inspect the actual handle or process before resuming; do not duplicate a running driver.",
+  "stronger_floor32_probe": "UNKNOWN; no candidate returned; no proof or counterexample.",
+  "paper_revision": 76,
+  "next_scheduled_paper_revision": 86,
+  "paper_sha256": "3c67d4c168ee7fe463f2ea49da3459f2178ee2a655fd45f9ed374f88126f43dd",
+  "evidence_sha256": {
+    "milestones\\83-012034-share-certificate\\data\\comparison-audit.json": "8d3cedcb25436fab7257d5cf36f2eb2e07d7f3baf52fab3aaaba803dcf4b385b",
+    "milestones\\83-012034-share-certificate\\data\\lean-audit.json": "f29a33df320f10947f7073f0b6c62a2adcbc6b4cf99b63ac5b61cfba1d28162d",
+    "milestones\\83-012034-share-certificate\\data\\replay-observation.json": "9f7f123b95759a88905dd4db9752a8de8485a7229df257f3acacb9ee6386dedf",
+    "milestones\\73-countfree-share-catalogue\\cases\\case7302\\data\\pending-checkpoint.json": "02fa9ae44ba28bcceca1642f3dce29c41fb5031e7355ed1e7c4b94cdbfbb4d65",
+    "milestones\\83-012034-share-certificate\\audit\\preparation-review.md": "c359aa2aafaa6ab9d631342967bdce7560b79e3d36fb20faa1b8284e1446c522",
+    "milestones\\83-012034-share-certificate\\audit\\comparison-review.md": "e8ccad28b5d9179f1b0e823e997fb1bb6a2683099903bf9238d944ae5a22de2e",
+    "milestones\\83-012034-share-certificate\\audit\\preservation-review.md": "215fcc5f6d212c628393cdab7d7f3b19083715a8d08796a4a36db3cc7faf19f5",
+    "milestones\\83-012034-share-certificate\\stronger-probe\\result.json": "79597cabf12d07abbb80fd478da19c9cf2fe982fc6d87b6c0eb2c2fc965225fc"
+  }
+}
