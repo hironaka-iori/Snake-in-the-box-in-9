@@ -1,0 +1,79 @@
+{
+  "status": "PASS_PREFIX_SOUNDNESS_AND_TWO_COMPLETE_CONTEXTS",
+  "previous_goal_turn": "progress",
+  "recorded_at": "2026-11-02T18:28:51.427688+00:00",
+  "proof_summary_sha256": "d451476d50a6b75eeeb4eed6e0df038add1b1638b357cf08d0cbe6555709b568",
+  "modules": 5,
+  "theorem_audits": 25,
+  "complete_contexts": [
+    {
+      "profile": "Completed",
+      "direction": 35,
+      "history": 0,
+      "slope": 483,
+      "accepted_edges": 7151,
+      "all_codes_covered": 46656,
+      "root": 2620,
+      "prefix_transitions": 13548,
+      "seconds": 121.70300000000134,
+      "module": "ReducedCompleted100",
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "Conditional",
+      "direction": 177,
+      "history": 43,
+      "slope": 496,
+      "accepted_edges": 6598,
+      "all_codes_covered": 46656,
+      "root": 3690,
+      "prefix_transitions": 14202,
+      "seconds": 165.71899999999732,
+      "module": "ReducedConditional100",
+      "original_contextCheck_proved": true
+    }
+  ],
+  "accepted_edges_checked": 13749,
+  "complete_graph_potential_certificates_checked": false,
+  "exact_context_weight_and_endpoint_equalities_checked": true,
+  "generic_history_filter_equality_checked": true,
+  "prefix_soundness_checked": true,
+  "numerical_prefix_classes": 127,
+  "unconditional_edge_interval": [
+    191,
+    235
+  ],
+  "conditional_target": 234,
+  "upper_bound_evidence": "Inspected contributor theorem and saved audit; full independent rebuild pending.",
+  "pending_reference_catalogues": [
+    "AllRefuted6K235",
+    "AllRefuted236"
+  ],
+  "pending_conditional_local_cases": [
+    7301,
+    7302,
+    7303,
+    7307,
+    7308
+  ],
+  "pending_share_floors": [
+    16,
+    18,
+    16,
+    16,
+    16
+  ],
+  "case7302_state": "STOPPED_AFTER_CHECK1_TIMEOUT_900_SECONDS",
+  "case7302_source_record_unchanged": true,
+  "paper_revision": 96,
+  "next_scheduled_paper_revision": 106,
+  "paper_sha256": "7d4d974bc353ca723e4a5362b0960610d959dfe622b115b629968818c178875c",
+  "prior_checkpoint": "milestones/99-defined-potential-certificates/data/checkpoint.json",
+  "prior_checkpoint_sha256": "adce0ff9294b038fce9aa430d1a6aceed56552162db41c454ef0e5cabdd1ffd9",
+  "git_refs_before_commit": {
+    "HEAD": "d395cdd03ae19bd37efecba27507288be0f69df8",
+    "origin/main": "d395cdd03ae19bd37efecba27507288be0f69df8"
+  },
+  "next_task": "Generate exact context constants and filtered history-rule lists, prove their pointwise equalities, and certify further complete contexts using prefix traversal. Reuse the two successful contexts and preserve remaining premises.",
+  "scope": "Two complete finite contexts, all-code evaluator equalities and generic traversal soundness. The complete graph certificates and global numerical improvement remain unresolved."
+}

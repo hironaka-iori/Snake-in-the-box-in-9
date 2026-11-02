@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 99](milestones/99-defined-potential-certificates/README.md) verifies both potentials numerically on all 4,947,008 defined-graph edges, with zero extra or missing rows. Lean checks concrete ranges, interval/context soundness, the explicit-potential bound assembly and saved finite tests. The complete finite edge certificates remain pending. The global interval remains 191 through 235; 234 remains conditional.
+Latest continuation: [milestone 100](milestones/100-prefix-potential-checker/README.md) proves shared-prefix traversal soundness and exact context weight/endpoint simplifications. Two complete contexts pass Lean, covering 13,749 accepted edges. The complete graph certificates remain pending. The maintained interval remains 191 through 235; 234 remains conditional.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -16,7 +16,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
 
-Next research priority: finish the potential edge certificates using bounded context checks, specializing repeated computations before a larger batch. Numerical context comparison gives 582 joint groups from 791 contexts; Lean reuse equalities remain necessary. Two reference-catalogue closures and five conditional local shares remain. Paper revision 96 is unchanged; the next full revision is 106.
+Next research priority: generate and prove constant context data and filtered history-rule lists, then certify further complete contexts with the checked prefix traversal. Reuse the two successful contexts; retain both reference-catalogue closures and the five conditional share assumptions. Paper revision 96 is unchanged; the next full revision is 106.
 
 ## Historical checkpoints
 

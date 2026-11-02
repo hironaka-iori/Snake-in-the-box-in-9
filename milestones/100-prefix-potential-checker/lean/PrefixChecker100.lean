@@ -1,0 +1,125 @@
+import FastDiagram99
+import PotentialChecker99
+
+/-! Prefix traversal of the retained count diagram. Only rejected branches
+are skipped; every accepted leaf retains its original base-six code. -/
+set_option autoImplicit false
+set_option maxHeartbeats 2000000
+
+namespace Snake9.PrefixChecker100
+open Snake9.Potential99 Snake9.Shared89 Snake9.Boxes88
+open Snake9.GraphInterpretation75 Snake9.DefinedGraph92 Snake9.Batch92
+open Snake9.Certificate88 Snake9.PotentialChecker99 Snake9.GraphWalk78
+
+/-- The prefix stores zero-based base-six digits, whereas diagram symbols
+are one-based. Node zero is absorbing rejection at every remaining depth. -/
+def checkPrefix (test : Nat → Bool) : Nat → Nat → Nat → Bool
+  | 0, pref, node =>
+      if node = 0 then true else if node = 1 then test pref else true
+  | depth+1, pref, node =>
+      if node = 0 then true
+      else (List.range 6).all fun j =>
+        checkPrefix test depth (6*pref+j) (advanceBalanced node (j+1))
+
+theorem evalBalanced_zero (symbols : List Nat) :
+    evalBalanced 0 symbols = false := by
+  induction symbols with
+  | nil => rfl
+  | cons symbol rest ih =>
+      simp [evalBalanced, advanceBalanced, ih]
+
+theorem checkPrefix_sound (test : Nat → Bool) (depth pref node : Nat)
+    (symbols : List Nat) (hlen : symbols.length = depth)
+    (hvalid : ∀ a ∈ symbols, 1 ≤ a ∧ a ≤ 6)
+    (hcheck : checkPrefix test depth pref node = true)
+    (heval : evalBalanced node symbols = true) :
+    test (encodeCounts symbols pref) = true := by
+  induction symbols generalizing depth pref node with
+  | nil =>
+      have hd : depth = 0 := by simpa using hlen.symm
+      subst depth
+      have hn : node = 1 := by simpa [evalBalanced] using heval
+      subst node
+      simpa [checkPrefix, encodeCounts] using hcheck
+  | cons a rest ih =>
+      cases depth with
+      | zero => simp at hlen
+      | succ depth =>
+          have hrest : rest.length = depth := by
+            simp only [List.length_cons] at hlen
+            omega
+          have ha : 1 ≤ a ∧ a ≤ 6 := hvalid a (by simp)
+          have htail : ∀ b ∈ rest, 1 ≤ b ∧ b ≤ 6 := by
+            intro b hb
+            exact hvalid b (by simp only [List.mem_cons]; exact Or.inr hb)
+          have hn : node ≠ 0 := by
+            intro hn
+            subst node
+            rw [evalBalanced_zero] at heval
+            contradiction
+          have hall : (List.range 6).all (fun j =>
+              checkPrefix test depth (6*pref+j)
+                (advanceBalanced node (j+1))) = true := by
+            simpa only [checkPrefix, if_neg hn] using hcheck
+          have hj : a-1 < 6 := by omega
+          have hsymbol : a-1+1 = a := by omega
+          have hbranch := List.all_eq_true.mp hall (a-1)
+            (List.mem_range.mpr hj)
+          have hbranch' : checkPrefix test depth (6*pref+(a-1))
+              (advanceBalanced node a) = true := by
+            simpa only [hsymbol] using hbranch
+          have hev : evalBalanced (advanceBalanced node a) rest = true := heval
+          have hresult := ih depth (6*pref+(a-1)) (advanceBalanced node a)
+            hrest htail hbranch' hev
+          change test (encodeCounts rest (pref*6+(a-1))) = true
+          rw [Nat.mul_comm pref 6]
+          exact hresult
+
+/-- Transfer a checked root traversal to each accepted bounded code. The
+saved context assignment remains an explicit equality premise. -/
+theorem accepted_code_of_prefix_check (test : Nat → Bool) (di q cls : Nat)
+    (hblock : savedBlockClass (75*di+q) = some cls)
+    (hcheck : checkPrefix test 6 0 (recordedClassRoot cls) = true)
+    (code : Nat) (hc : code < 46656)
+    (hkeep : diagramKeep retainedDiagram di q code = true) :
+    test code = true := by
+  have heval : evalBalanced (recordedClassRoot cls) (digits code) = true := by
+    rw [evalBalanced_eq]
+    simpa only [diagramKeep, hblock] using hkeep
+  have hlen : (digits code).length = 6 := by simp [digits]
+  have hvalid : ∀ a ∈ digits code, 1 ≤ a ∧ a ≤ 6 := by
+    intro a ha
+    change a ∈ (List.range 6).map (Snake9.Guards79.digit code) at ha
+    obtain ⟨j, _, rfl⟩ := List.mem_map.mp ha
+    exact digit_range code j
+  have htest := checkPrefix_sound test 6 0 (recordedClassRoot cls)
+    (digits code) hlen hvalid hcheck heval
+  simpa only [digit_reconstruction code hc] using htest
+
+/-- The arbitrary weight function may be instantiated by Weights98.weight
+floor. Its arguments are (history,direction,code), as in contextCheck. -/
+theorem contextCheck_of_prefix (w : Nat → Nat → Nat → Nat)
+    (P : Nat) (π : Nat → Nat) (di q cls : Nat)
+    (hblock : savedBlockClass (75*di+q) = some cls)
+    (hcheck : checkPrefix (fun code =>
+      decide (P+π (edgeTarget q di code) ≤
+        w q di code+π (edgeSource q di code)))
+      6 0 (recordedClassRoot cls) = true) :
+    contextCheck w P π di q = true := by
+  unfold contextCheck
+  apply (checkInterval_iff (edgeCheck w P π di q) 0 46656).mpr
+  intro code _ hc
+  cases hkeep : diagramKeep retainedDiagram di q code with
+  | false => simp [edgeCheck, hkeep]
+  | true =>
+      have htest := accepted_code_of_prefix_check (fun c =>
+        decide (P+π (edgeTarget q di c) ≤
+          w q di c+π (edgeSource q di c)))
+        di q cls hblock hcheck code (by omega) hkeep
+      simpa [edgeCheck, hkeep] using htest
+
+#print axioms evalBalanced_zero
+#print axioms checkPrefix_sound
+#print axioms accepted_code_of_prefix_check
+#print axioms contextCheck_of_prefix
+end Snake9.PrefixChecker100

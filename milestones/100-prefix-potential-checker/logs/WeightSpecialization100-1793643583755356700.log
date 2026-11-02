@@ -1,0 +1,115 @@
+E:\Snake-in-a-box\milestones\100-prefix-potential-checker\lean\WeightSpecialization100.lean:27:6: error: unsolved goals
+case pos
+q di code : ℕ
+rule : Rule
+rest : List Rule
+ih :
+  historyCredit rest q di code =
+    historyCredit (List.filter (fun rule => decide (rule.sig <:+ History75.prefixes.getD q [] ++ [di])) rest) q di code
+hemit : rule.sig <:+ History75.prefixes.getD q [] ++ [di]
+⊢ max
+      (if rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di] then
+        max rule.geometric (if HistoryShare94.numericCapsTest code rule.caps = true then rule.strong else 0)
+      else 0)
+      (historyCredit (List.filter (fun rule => decide (rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di])) rest) q di
+        code) =
+    historyCredit
+      (match decide (rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di]) with
+      | true => rule :: List.filter (fun rule => decide (rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di])) rest
+      | false => List.filter (fun rule => decide (rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di])) rest)
+      q di code
+E:\Snake-in-a-box\milestones\100-prefix-potential-checker\lean\WeightSpecialization100.lean:28:6: error: unsolved goals
+case neg
+q di code : ℕ
+rule : Rule
+rest : List Rule
+ih :
+  historyCredit rest q di code =
+    historyCredit (List.filter (fun rule => decide (rule.sig <:+ History75.prefixes.getD q [] ++ [di])) rest) q di code
+hemit : ¬rule.sig <:+ History75.prefixes.getD q [] ++ [di]
+⊢ max
+      (if rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di] then
+        max rule.geometric (if HistoryShare94.numericCapsTest code rule.caps = true then rule.strong else 0)
+      else 0)
+      (historyCredit (List.filter (fun rule => decide (rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di])) rest) q di
+        code) =
+    historyCredit
+      (match decide (rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di]) with
+      | true => rule :: List.filter (fun rule => decide (rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di])) rest
+      | false => List.filter (fun rule => decide (rule.sig <:+ History75.prefixes[q]?.getD [] ++ [di])) rest)
+      q di code
+E:\Snake-in-a-box\milestones\100-prefix-potential-checker\lean\WeightSpecialization100.lean:81:44: error: unsolved goals
+code : ℕ
+hf : canon (List.drop 3 (extensions.getD 35 [])) = [0, 1, 2, 0, 3, 4]
+hb : canon (List.drop 3 (extensions.getD 35 [])).reverse = [0, 1, 2, 3, 4, 2]
+⊢ max
+      (if
+          canon (List.drop 3 (extensions[35]?.getD [])) = [0, 1, 2, 3, 1, 4] ∧ code % 7776 = 3130 ∨
+            canon (List.drop 3 (extensions[35]?.getD [])).reverse = [0, 1, 2, 3, 1, 4] ∧ code % 7776 = 6350 then
+        48
+      else 0)
+      (max
+        (if
+            canon (List.drop 3 (extensions[35]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 3725 ∨
+              canon (List.drop 3 (extensions[35]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 6980 then
+          96
+        else 0)
+        (max
+          (if
+              canon (List.drop 3 (extensions[35]?.getD [])) = [0, 1, 2, 0, 3, 4] ∧ code % 7776 = 7106 ∨
+                canon (List.drop 3 (extensions[35]?.getD [])).reverse = [0, 1, 2, 0, 3, 4] ∧ code % 7776 = 3221 then
+            96
+          else 0)
+          (max
+            (if
+                canon (List.drop 3 (extensions[35]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 5021 ∨
+                  canon (List.drop 3 (extensions[35]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 6981 then
+              96
+            else 0)
+            (if
+                canon (List.drop 3 (extensions[35]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 4871 ∨
+                  canon (List.drop 3 (extensions[35]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 6831 then
+              120
+            else 0)))) =
+    if code % 7776 = 7106 then 96 else 0
+E:\Snake-in-a-box\milestones\100-prefix-potential-checker\lean\WeightSpecialization100.lean:119:38: error: unsolved goals
+code : ℕ
+hf : canon (List.drop 3 (extensions.getD 177 [])) = [0, 1, 2, 3, 0, 1]
+hb : canon (List.drop 3 (extensions.getD 177 [])).reverse = [0, 1, 2, 3, 0, 1]
+⊢ ((canon (List.drop 3 (extensions[177]?.getD [])) = [0, 1, 2, 3, 1, 4] → ¬code % 7776 = 3130) ∧
+      (canon (List.drop 3 (extensions[177]?.getD [])).reverse = [0, 1, 2, 3, 1, 4] → ¬code % 7776 = 6350)) ∧
+    ((canon (List.drop 3 (extensions[177]?.getD [])) = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 3725) ∧
+        (canon (List.drop 3 (extensions[177]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 6980)) ∧
+      ((canon (List.drop 3 (extensions[177]?.getD [])) = [0, 1, 2, 0, 3, 4] → ¬code % 7776 = 7106) ∧
+          (canon (List.drop 3 (extensions[177]?.getD [])).reverse = [0, 1, 2, 0, 3, 4] → ¬code % 7776 = 3221)) ∧
+        ((canon (List.drop 3 (extensions[177]?.getD [])) = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 5021) ∧
+            (canon (List.drop 3 (extensions[177]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 6981)) ∧
+          (canon (List.drop 3 (extensions[177]?.getD [])) = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 4871) ∧
+            (canon (List.drop 3 (extensions[177]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 6831)
+'Snake9.WeightSpecialization100.historyCredit_filter_emitting' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.WeightSpecialization100.contribution_zero_of_short_history' depends on axioms: [propext, Quot.sound]
+'Snake9.WeightSpecialization100.historyCredit_zero_of_short_history' depends on axioms: [propext, Quot.sound]
+'Snake9.WeightSpecialization100.concrete_historyCredit_zero_of_short_history' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Snake9.WeightSpecialization100.weight_of_short_history' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.WeightSpecialization100.weight_history_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.WeightSpecialization100.conditionedCredit_direction35' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.WeightSpecialization100.weight_direction35' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.WeightSpecialization100.completed_weight_direction35' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'Snake9.WeightSpecialization100.conditional_weight_direction35' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'Snake9.WeightSpecialization100.historyCredit_context177_43' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.WeightSpecialization100.conditionedCredit_direction177' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'Snake9.WeightSpecialization100.conditional_weight_context177_43' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

@@ -1,38 +1,38 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 99 checkpoint
+## Milestone 100 checkpoint
 
-Both saved potentials pass every edge of the actual defined graph in an
-independent exact-integer enumeration. The graph has precisely 4,947,008
-accepted full keys across 791 contexts and 127 acceptance classes; there are
-zero extra or missing rows relative to the saved array. This full enumeration
-is numerical evidence, not a Lean theorem.
+The prefix traversal is sound: rejecting branches can be skipped and every
+accepted code retains its original encoding and leaf inequality. Exact
+history filtering, weight simplifications and endpoint formulas are checked.
+The completed context 35/0 and conditional context 177/43 now pass Lean in
+full, covering 7,151 and 6,598 accepted edges respectively. The earlier 207
+pilot edges are included in this coverage. Five modules and 25 theorem audits
+passed. See milestone 100's proof summary for exact timings and receipts.
 
-Lean accepts both compressed potential candidates and proves their ranges:
-551 for the completed profile and 602 for the conditional floor-18 profile.
-Independent parsing of the generated Lean literals reproduces all 3,203,712
-saved values. Lean also checks the accelerated diagram lookup, interval and
-context soundness, and the upper-bound assembly using these concrete candidates.
-The two larger pilot intervals contain 143 and 64 accepted edges respectively.
+The older pointwise and unreduced-prefix completed-context attempts timed out
+at 300 seconds. The exact statements are now proved by ReducedCompleted100
+and ReducedConditional100. The superseded implementations should be preserved,
+not restarted. No compiler job remains active at this checkpoint.
 
-Complete-context Lean checks remain pending. Unfinished modules and their preserved attempts are listed in the proof summary; no failed or timed-out attempt proves its statement. The CompletedContext99 attempt reached the 300-second limit. ConditionalContext99 was not started.
+Both potentials still pass all 4,947,008 defined graph edges numerically, with
+zero extra or missing keys. Their concrete ranges 551 and 602 remain checked.
+The complete Lean edge certificate remains pending for both profiles: one of
+791 assigned contexts is now proved for each. The 582 joint numerical context
+groups require equality/transport proofs before reuse.
 
-The complete edge certificate still remains in each final Lean bound statement.
-Two reference-catalogue closures remain for both profiles; the conditional
-profile also retains five local refutations with caps (15,17,15,15,15), giving
-floors (16,18,16,16,16). The actual weight and total charge proofs from milestone
-98 are complete and unchanged. All 127 coverage classes remain checked.
+The next step is to generate fixed context data and filtered history-rule
+lists, prove pointwise equalities, and apply the checked traversal. The actual
+weight, charge budget and full-key walk from milestone 98 remain available.
+Both global chains retain two reference-catalogue closures. Conditional 234
+also retains five local refutations with caps (15,17,15,15,15), giving floors
+(16,18,16,16,16).
 
-Numerical context reuse gives 582 joint groups from 791 contexts. Prove the
-corresponding equalities before reusing certificates. First specialize repeated
-context calculations and benchmark a bounded check; preserve full keys.
-
-The maintained interval is $191\le a(9)\le235$, with 234 conditional. The
-contributor upper-bound proof still needs a complete independent rebuild.
-The original case7302 target-20 attempt remains stopped and unchanged; any
-new target-18 proof must use separate files. Paper revision 96 and its metadata
-are unchanged; the next full revision is 106. Use standard notation and define
-only necessary concepts that are substantially reused.
+The maintained interval remains $191\le a(9)\le235$, with 234 conditional.
+The contributor upper bound retains its archived evidence and pending complete
+independent rebuild. Original case7302 target 20 evidence remains stopped and
+unchanged; any target 18 proof needs separate files. Paper revision 96, authors
+and hyperlink settings are unchanged; the next full revision is 106.
 
 ## Result and evidence boundary
 
@@ -140,7 +140,7 @@ the added local premise or the full graph interpretation.
 ## Earlier proof interfaces and development record
 
 The following paragraphs preserve earlier milestone observations. Their
-pending-job statements describe those snapshots. The milestone 99 checkpoint
+pending-job statements describe those snapshots. The milestone 100 checkpoint
 above supersedes them: both 127-class batches and their assembly are complete;
 case7302 is stopped. The remaining tasks are listed in NEXT_AGENT_PROMPT.md.
 

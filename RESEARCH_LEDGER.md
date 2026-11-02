@@ -578,3 +578,15 @@ Latest continuation: [milestone 99](milestones/99-defined-potential-certificates
 Complete-context Lean checks remain pending. Unfinished modules and their preserved attempts are listed in the proof summary; no failed or timed-out attempt proves its statement. The CompletedContext99 attempt reached the 300-second limit. ConditionalContext99 was not started.
 
 Next research priority: finish the potential edge certificates using bounded context checks, specializing repeated computations before a larger batch. Numerical context comparison gives 582 joint groups from 791 contexts; Lean reuse equalities remain necessary. Two reference-catalogue closures and five conditional local shares remain. Paper revision 96 is unchanged; the next full revision is 106.
+
+
+## Milestone 100: prefix traversal and exact context reductions
+
+Latest continuation: [milestone 100](milestones/100-prefix-potential-checker/README.md) proves shared-prefix traversal soundness and exact context weight/endpoint simplifications. Two complete contexts pass Lean, covering 13,749 accepted edges. The complete graph certificates remain pending. The maintained interval remains 191 through 235; 234 remains conditional.
+
+| Profile | Direction/history | Accepted edges | Compiler seconds |
+| --- | --- | ---: | ---: |
+| Completed | 35/0 | 7,151 | 121.703 |
+| Conditional | 177/43 | 6,598 | 165.719 |
+
+Next research priority: generate and prove constant context data and filtered history-rule lists, then certify further complete contexts with the checked prefix traversal. Reuse the two successful contexts; retain both reference-catalogue closures and the five conditional share assumptions. Paper revision 96 is unchanged; the next full revision is 106.

@@ -1,0 +1,151 @@
+import CombinedWeights98
+
+/-! Exact evaluator simplifications. These equalities change no credit,
+weight, endpoint or potential definition. -/
+set_option autoImplicit false
+set_option maxHeartbeats 2000000
+set_option maxRecDepth 100000
+
+namespace Snake9.WeightSpecialization100
+open Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow
+open Snake9.HistoryCredit95 Snake9.ConcreteCatalogue95 Snake9.Weights98
+open Snake9.GeometricCredit97 Snake9.Conditioned98 Snake9.CountFree98
+open Snake9.Direction77 Snake9.GraphInterpretation75
+
+/-- Fixing the context permits removal of every non-emitting rule before
+the count code is evaluated. Rule order and all emitting rules are kept. -/
+theorem historyCredit_filter_emitting (rules : List Rule) (q di code : Nat) :
+    historyCredit rules q di code =
+      historyCredit (rules.filter (fun rule =>
+        decide (rule.sig <:+ Snake9.History75.prefixes.getD q [] ++ [di])))
+        q di code := by
+  induction rules with
+  | nil => rfl
+  | cons rule rest ih =>
+      by_cases hemit :
+        rule.sig <:+ Snake9.History75.prefixes.getD q [] ++ [di]
+      · simp only [List.filter, historyCredit, contribution, hemit, decide_true,
+          decide_false, ↓reduceIte, Nat.zero_max, ih]
+      · simp only [List.filter, historyCredit, contribution, hemit, decide_true,
+          decide_false, ↓reduceIte, Nat.zero_max, ih]
+
+theorem contribution_zero_of_short_history (rule : Rule) (q di code : Nat)
+    (hlen : rule.sig.length = 3)
+    (hshort : (Snake9.History75.prefixes.getD q []).length < 2) :
+    contribution rule q di code = 0 := by
+  have hno : ¬ rule.sig <:+ Snake9.History75.prefixes.getD q [] ++ [di] := by
+    intro hemit
+    have hlength : 3 ≤ (Snake9.History75.prefixes.getD q []).length+1 := by
+      simpa only [List.length_append, List.length_singleton, hlen]
+        using hemit.length_le
+    omega
+  simp only [contribution, if_neg hno]
+
+/-- Only the signature lengths are needed for this evaluator equality. -/
+theorem historyCredit_zero_of_short_history (rules : List Rule)
+    (q di code : Nat) (hlen : ∀ rule ∈ rules, rule.sig.length = 3)
+    (hshort : (Snake9.History75.prefixes.getD q []).length < 2) :
+    historyCredit rules q di code = 0 := by
+  apply Nat.le_antisymm
+  · apply history_credit_le_of_each
+    intro rule hrule
+    rw [contribution_zero_of_short_history rule q di code (hlen rule hrule) hshort]
+  · exact Nat.zero_le _
+
+theorem concrete_historyCredit_zero_of_short_history (q di code : Nat)
+    (hshort : (Snake9.History75.prefixes.getD q []).length < 2) :
+    historyCredit concreteRules q di code = 0 := by
+  apply historyCredit_zero_of_short_history concreteRules q di code
+  · intro rule hrule
+    exact (concrete_rules_valid rule hrule).1
+  · exact hshort
+
+theorem weight_of_short_history (floor : Nat → Nat) (q di code : Nat)
+    (hshort : (Snake9.History75.prefixes.getD q []).length < 2) :
+    weight floor q di code =
+      120*(code%6+1) +
+        max (geometricCredits.getD di 0)
+          (max (conditionedCredit di code) (floor di)) := by
+  simp only [weight,
+    concrete_historyCredit_zero_of_short_history q di code hshort, Nat.max_zero]
+
+theorem weight_history_zero (floor : Nat → Nat) (di code : Nat) :
+    weight floor 0 di code =
+      120*(code%6+1) +
+        max (geometricCredits.getD di 0)
+          (max (conditionedCredit di code) (floor di)) :=
+  weight_of_short_history floor 0 di code (by decide +kernel)
+
+/-- Direction35 has only the012034 conditioned alternative, in the forward
+orientation. Its five encoded symbols are [6,3,6,3,3]. -/
+theorem conditionedCredit_direction35 (code : Nat) :
+    conditionedCredit 35 code =
+      if code%7776 = 7106 then 96 else 0 := by
+  have hf : canon ((extensions.getD 35 []).drop 3) = [0,1,2,0,3,4] := by
+    decide +kernel
+  have hb : canon (((extensions.getD 35 []).drop 3).reverse) =
+      [0,1,2,3,4,2] := by
+    decide +kernel
+  simp only [conditionedCredit, ruleCredit, hf, hb]
+  norm_num [encodeCounts]
+
+theorem weight_direction35 (floor : Nat → Nat) (code : Nat) :
+    weight floor 0 35 code =
+      120*(code%6+1) +
+        max (if code%7776 = 7106 then 96 else 0) (floor 35) := by
+  have hg : geometricCredits.getD 35 0 = 0 := by decide +kernel
+  rw [weight_history_zero, hg, conditionedCredit_direction35]
+  simp only [Nat.zero_max]
+
+theorem completed_weight_direction35 (code : Nat) :
+    weight completedCredit 0 35 code =
+      120*(code%6+1) + (if code%7776 = 7106 then 96 else 0) := by
+  have hf : completedCredit 35 = 0 := by decide +kernel
+  rw [weight_direction35, hf, Nat.max_zero]
+
+theorem conditional_weight_direction35 (code : Nat) :
+    weight conditionalCredit 0 35 code =
+      120*(code%6+1) +
+        max (if code%7776 = 7106 then 96 else 0) 18 := by
+  have hf : conditionalCredit 35 = 18 := by decide +kernel
+  rw [weight_direction35, hf]
+
+theorem historyCredit_context177_43 (code : Nat) :
+    historyCredit concreteRules 43 177 code = 0 := by
+  have hfiltered : concreteRules.filter (fun rule =>
+      decide (rule.sig <:+ Snake9.History75.prefixes.getD 43 [] ++ [177])) = [] := by
+    rfl
+  rw [historyCredit_filter_emitting concreteRules 43 177 code, hfiltered]
+  rfl
+
+theorem conditionedCredit_direction177 (code : Nat) :
+    conditionedCredit 177 code = 0 := by
+  have hf : canon ((extensions.getD 177 []).drop 3) = [0,1,2,3,0,1] := by
+    decide +kernel
+  have hb : canon (((extensions.getD 177 []).drop 3).reverse) =
+      [0,1,2,3,0,1] := by
+    decide +kernel
+  simp only [conditionedCredit, ruleCredit, hf, hb]
+  norm_num [encodeCounts]
+
+theorem conditional_weight_context177_43 (code : Nat) :
+    weight conditionalCredit 43 177 code = 120*(code%6+1)+16 := by
+  have hg : geometricCredits.getD 177 0 = 8 := by decide +kernel
+  have hf : conditionalCredit 177 = 16 := by decide +kernel
+  rw [weight, historyCredit_context177_43, conditionedCredit_direction177, hg, hf]
+  norm_num
+
+#print axioms historyCredit_filter_emitting
+#print axioms contribution_zero_of_short_history
+#print axioms historyCredit_zero_of_short_history
+#print axioms concrete_historyCredit_zero_of_short_history
+#print axioms weight_of_short_history
+#print axioms weight_history_zero
+#print axioms conditionedCredit_direction35
+#print axioms weight_direction35
+#print axioms completed_weight_direction35
+#print axioms conditional_weight_direction35
+#print axioms historyCredit_context177_43
+#print axioms conditionedCredit_direction177
+#print axioms conditional_weight_context177_43
+end Snake9.WeightSpecialization100
