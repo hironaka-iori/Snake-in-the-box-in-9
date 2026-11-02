@@ -629,3 +629,60 @@ overlapped the independent finite-check queue, and memory limits temporarily
 delayed new batches. These times are not a controlled performance comparison.
 
 Next research priority: Use the checked equations for all 791 contexts to extend the finite potential certificates. First test exact reduction of each fixed source/target potential lookup to its recorded subtree, retaining the original cap and proving the needed count-code bounds. Benchmark one context per profile before expanding. Reuse the four complete context certificates and preserve the reference/local premises. Paper revision 96 is unchanged; the next full revision is 106.
+
+
+## Milestone 102: bounded potential-block reduction
+
+Latest continuation: [milestone 102](milestones/102-potential-block-reduction/README.md) proves bounded potential-block reduction and all 412 fixed root selections. Eight new complete profile/context checks pass, for six contexts per profile. The complete graph certificates remain pending; the interval remains 191 through 235, with 234 conditional.
+
+All 412 fixed-block equations passed Lean, together with the generic
+bounded transfer to the original context checker. No definition was added.
+The milestone contains 20 checked modules and 441
+distinct theorem axiom audits. Successful sources contain no incomplete proof
+or unchecked native evaluation; the permitted logical axioms are propext,
+Classical.choice and Quot.sound.
+
+Eight new complete profile/context checks passed:
+
+| Profile | Direction/history | Accepted edges | Compiler seconds |
+| --- | --- | ---: | ---: |
+| completed | 0/0 | 6,123 | 90.516 |
+| conditional | 0/0 | 6,123 | 94.672 |
+| completed | 1/0 | 6,997 | 85.984 |
+| conditional | 1/0 | 6,997 | 119.219 |
+| completed | 9/0 | 3,913 | 88.953 |
+| conditional | 9/0 | 3,913 | 39.375 |
+| completed | 10/0 | 4,474 | 45.250 |
+| conditional | 10/0 | 4,474 | 43.531 |
+
+Including the earlier certificates, coverage is:
+
+| Profile | Complete contexts | Accepted edges | Remaining contexts |
+| --- | ---: | ---: | ---: |
+| completed | 6 | 34,701 | 785 |
+| conditional | 6 | 34,148 | 785 |
+
+Each context certificate covers all 46,656 candidate codes through the
+checked acceptance test. Counts for different profiles are kept separate.
+The repeated comparison context 99/37 adds no coverage.
+
+For that same context, the recorded timings are:
+
+| Profile | Archived implementation, seconds | Fixed-block implementation, seconds |
+| --- | ---: | ---: |
+| completed | 111.750 | 56.860 |
+| conditional | 194.312 | 110.016 |
+
+The archived and current runs had different workloads. These are observed
+timings, without a controlled speedup claim or an extrapolation to all contexts.
+
+A separate matched pair changed only the leaf comparison in completed 99/37.
+The decidable comparison took 61.672 seconds and direct
+Boolean comparison took 92.234 seconds. The runs were sequential,
+with no other Lean process at launch. Both prove the same original context
+statement. This is one pair; it does not establish performance on other contexts
+or isolate unrelated system activity. The semantic equality is checked in Lean.
+The direct Boolean variant was slower in this pair and is not adopted as an
+optimization. This observation does not prove it is slower in every context.
+
+Next research priority: Retain the original decidable leaf comparison. Reduce repeated potential-tree evaluation inside the prefix check, following the feasibility note. Prove the traversal invariant and needed tree-shape facts before running a bounded comparison. Use the checked block equations and bounded transfer, preserve the original min caps and every accepted code, and extend the remaining finite certificates once the method is verified. Paper revision 96 is unchanged; the next full revision is 106.

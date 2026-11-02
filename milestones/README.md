@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 102: bounded potential-block reduction](102-potential-block-reduction/README.md). All 412 fixed block equations and eight new finite profile/context checks; six complete contexts per profile.
+
 - [Milestone 101: exact equations for all contexts](101-context-specialization/README.md). All 791 evaluator equations and two finite contexts per profile checked; complete graph certificates remain pending.
 
 - [Milestone 100: prefix traversal and complete context certificates](100-prefix-potential-checker/README.md). Exact evaluator reductions and two full Lean context checks; all-context certification remains pending.
