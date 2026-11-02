@@ -1,0 +1,19 @@
+{
+  "status": "PASS_EXACT_BUILDER_SELECTOR_COMPARISON",
+  "input_pairs": 37875,
+  "nonempty_updates": 2363,
+  "fallback_updates": 35512,
+  "source_compatible_pairs": 791,
+  "unique_maximum": true,
+  "output_layout": "row major q=0..74, directionID=0..504; one unsigned byte per next-history index",
+  "output_sha256": "26880f13168b8b0022639ccd8a39df0b9d64c6e0bf5ecdeeed288500dd40fb77",
+  "builder_sha256": "bffe9f3d541a807841d564a85bc3f5d2523ae73ee7b8218b79facdac9a4987db",
+  "metadata_sha256": "08fc18347eff9065d873cb8be01b4b72129e1ee939b4bf1474d04640cc8bc274",
+  "ordered_direction_tables_sha256": "cfce18aeca93b8994eaba6746ad7537b1a6e4e8a1f187488d59188f69999a0c6",
+  "extracted_assignments": [
+    "hist = prefix + (di,)",
+    "choices = [j for j, p in enumerate(prefixes) if p and len(p) <= len(hist) and (hist[-len(p):] == p)]",
+    "nq = max(choices, key=lambda j: len(prefixes[j])) if choices else 0"
+  ],
+  "limits": "Executable comparison of exact Python assignments and the strict scan; Lean checks the scan theorem separately. No retained-edge or weight audit."
+}

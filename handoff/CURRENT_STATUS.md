@@ -20,7 +20,7 @@ Steven Zhan. Its repository and editor copies have SHA256
 Source checks preserve all 116 previous statements and add seven, giving 123;
 all 13 printed paths and 118,673 vertex pairs were checked. The built-in
 compiler failed before source compilation. No new PDF or layout check is
-claimed. Milestone77 adds separate proof interfaces without revising the paper.
+claimed. Milestones 77 and 78 add separate proof interfaces without revising the paper.
 
 ## Chosen route: charge empty squares
 
@@ -81,10 +81,11 @@ full source/axiom audit remain necessary.
 
 ## Proof interfaces and remaining work
 
-Milestone75 supplies longest-suffix history recognition, credit lookup and
-count coding. Milestone77 supplies direction-table coverage and the numeric
-history interface; its successful receipts and proof summary specify the exact
-checked scope. A direction window must use the oriented table ordering:
+Milestone 75 supplies longest-suffix history recognition, credit lookup and
+count coding. Milestone 77 supplies direction-table coverage and the numeric
+history interface. Milestone 78 proves the actual numeric history update and
+assembles the direction, history and counts into one consistently numbered
+state sequence, with 29 theorem audits. A direction window uses the oriented table ordering:
 132 eight-direction states and 505 nine-direction edges. Reversal classes are
 different objects and cannot be used as these IDs.
 
@@ -95,19 +96,20 @@ five. The entering count is at \(r+8\), and credited shares lie at centres
 including the terminal state. Shorter paths already satisfy the intended upper
 bound. Count symbol six means the interval \([6,21]\).
 
-The next bounded task is to identify the builder's concrete numeric history
-update with the index of the longest suffix after reading the actual new
-direction ID. Then assemble the direction, history and count state and prove
-every actual step is retained. Each exclusion needs its geometric theorem.
+The next bounded task is retained-edge membership: prove that every actual
+direction/history/six-count triple survives the current model's reference,
+recovered-rule, interval and history exclusions, then identify its retained
+array index. Each exclusion needs its geometric theorem.
 Every three-ID credit needs every compatible eleven-direction interpretation;
 forgotten coordinate returns can produce several variants. Alternative lower
 bounds on the same five shares combine by maximum. Complete the finite
 potential replay and the six target share theorems before removing the 234
 qualification.
 
-The independent audit checks all 37,875 history/direction pairs. This executable
-table audit is distinct from the remaining Lean statement about the concrete
-builder's update and retained edges.
+An executable audit checks the exact Python selector assignments on all 37,875
+history/direction pairs and agrees with the strict scan proved in Lean. It is
+separate from the Lean theorem; the Python interpreter is not encoded there.
+Neither check proves retained-edge membership or credit validity.
 
 ## Results that constrain further optimisation
 
@@ -125,9 +127,9 @@ These remain research directions, with no promised numerical improvement.
 
 Use the repository sources and milestone receipts as the reproducible record.
 The dated handover contains detailed environment paths and earlier evidence.
-Milestone77 saves the successful current checks, superseded memory-intensive
-attempts, exact source hashes and a read-only snapshot of case7305's successful
-modules. Build objects remain local and are excluded from Git. Reproduction
+Milestone 77 saves its coverage checks, superseded memory-intensive attempts
+and replay snapshot. Milestone 78 saves the current selector/state checks and
+a later read-only replay observation. Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
 

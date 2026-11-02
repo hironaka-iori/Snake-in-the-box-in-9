@@ -1,0 +1,37 @@
+{
+  "status": "PASS_NUMERIC_HISTORY_AND_ENCODED_STATE_SEQUENCE",
+  "receipts": [
+    {
+      "module": "IndexSelector",
+      "receipt": "data/IndexSelector-audit.json",
+      "sha256": "84b828ece53801010a3e7d2aa55c5a2b98c257b273d8d5fc85c1369d891de916",
+      "audits": 8
+    },
+    {
+      "module": "NumericTransition",
+      "receipt": "data/NumericTransition-audit.json",
+      "sha256": "3e998e01df7419623bad9ae69f8d9c738e9040ad19b89f9f34e6a88ba10653da",
+      "audits": 8
+    },
+    {
+      "module": "CountGeometry",
+      "receipt": "data/CountGeometry-audit.json",
+      "sha256": "cdae83f461e1e61d22c5f8efad45086ab8d55c38058a437cd589ead861f64991",
+      "audits": 5
+    },
+    {
+      "module": "StateWalk",
+      "receipt": "data/StateWalk-audit.json",
+      "sha256": "48bd2a78950b5d3e2a3fd2bff026e8b487f0fdff0744368e91fdf3d2cd870363",
+      "audits": 8
+    }
+  ],
+  "printed_theorem_audits": 29,
+  "builder_comparison_sha256": "e3b00e5aae0f6d9067c05b6b4f88c273529b386b1a0f2d996d36bb587cb668ab",
+  "paper_sha256": "3c67d4c168ee7fe463f2ea49da3459f2178ee2a655fd45f9ed374f88126f43dd",
+  "limitations": [
+    "Existing hash-matched support reused; full dependency closure not rebuilt.",
+    "Retained-edge membership, exclusion/credit interpretation and complete potential proof remain.",
+    "No new numerical bound or local share theorem is claimed by this interface."
+  ]
+}

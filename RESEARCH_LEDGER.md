@@ -306,3 +306,8 @@ The built-in compiler diagnostic and a frozen snapshot of successful case 7305 r
 ## Milestone77: direction and history-shape interfaces
 
 2 November2026. 106 printed theorem audits passed Lean4.19.0. Every actual eight/nine-direction window has a valid recorded ID, with consecutive source/target states; numeric history decoding, signature equivalence and nonempty-history shape compatibility are checked. Finite coverage and lookup are split into kernel-checked blocks to control memory. The concrete history update, combined count state, exclusions, credits, retained edges and full potential interpretation remain. No numerical bound changed. Case7305 final share theorem remains pending; successful replay rows and actual process observation are frozen in milestone77. Paper revision76 is unchanged and hash-matched; the compiler retry failed before source compilation. The current handover and continuation prompt are in handoff/.
+
+
+## Milestone 78: numeric history transitions and actual state sequence
+
+2 November 2026. Four modules passed 29 Lean theorem audits. The strict maximum-suffix scan agrees with actual history updates; ties and empty fallback are covered. A rechecked count identity supplies positivity for the actual core counts. The combined direction, history and five-count states have correct numeric endpoints and both history compatibility filters. An executable comparison of the exact builder selector covers all 37,875 pairs. The retained-edge and charge interpretation remains, as do six local share targets and complete potential replay. No numerical bound changes; the case7305 refutation continues under its existing driver. Paper revision76 remains unchanged. Evidence and the precise next task are saved in milestone78 and handoff/.

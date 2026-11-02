@@ -5,12 +5,12 @@ Start with [current mathematical status](CURRENT_STATUS.md), then use the
 researcher or AI agent to continue from the saved evidence.
 
 The latest proof checkpoint is
-[milestone77](../milestones/77-direction-state-coverage/README.md).
-Its [proof summary](../milestones/77-direction-state-coverage/data/proof-summary.json)
+[milestone 78](../milestones/78-numeric-history-transition/README.md).
+Its [proof summary](../milestones/78-numeric-history-transition/data/proof-summary.json)
 records current Lean checks and exact receipt hashes. Its
-[checkpoint](../milestones/77-direction-state-coverage/data/checkpoint.json)
+[checkpoint](../milestones/78-numeric-history-transition/data/checkpoint.json)
 records repository refs, paper hash and case7305's observed process state.
-Its [saved-file manifest](../milestones/77-direction-state-coverage/data/file-manifest.json)
+Its [saved-file manifest](../milestones/78-numeric-history-transition/data/file-manifest.json)
 supports exact local and staged verification.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
@@ -20,7 +20,7 @@ graph interpretation and full potential replay. The conjecture 196 remains
 unresolved; no construction above 191 was obtained here.
 
 Case 7305 replay was active at the checkpoint. Inspect
-`milestones/77-direction-state-coverage/data/checkpoint.json`, its frozen successful-module
+`milestones/78-numeric-history-transition/data/checkpoint.json`, its saved successful-module
 snapshot, and the actual process before acting. The saved tool session is 41012.
 The session number is local to the original execution context. Do not start a
 duplicate completion driver. After refutation success, validate and reuse the
@@ -32,12 +32,13 @@ earlier certificates and a continuation prompt. Its process and revision 66
 status are historical; the current files above supersede them. Historical manifests
 identify their saved file versions.
 
-Milestone77 connects actual snake windows to numeric direction states and
-history shapes. The next graph step is the concrete numeric history update,
-then the count-state, exclusion and credit interpretation. Complete the local
-shares and potential replay before claiming 234.
+Milestones 77 and 78 connect actual snake windows to one consistent numeric
+state sequence, including histories and counts. The next graph step is
+retained-edge membership, followed by credit interpretation. Complete the local
+shares and potential replay before claiming 234. Historical manifests retain
+their earlier versions of the shared handover documents.
 
-The latest paper is revision76, unchanged and hash-matched during milestone77.
+The latest paper is revision76, unchanged and hash-matched during milestone78.
 Authors and hyperlink settings are preserved. A fresh compiler retry failed
 before source compilation; its diagnostic is saved in milestone77. No new PDF
 is claimed. Recompile the same editor source when the app compiler can start.

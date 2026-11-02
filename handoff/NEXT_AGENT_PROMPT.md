@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, and milestone77's README and exact checkpoint.
+`handoff/CURRENT_STATUS.md`, and milestone78's README and exact checkpoint.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -22,22 +22,14 @@ geometry, reversal and the full source/axiom audit. Partial large
 checkpoints do not complete the 012310 share-12 theorem. Preserve the selected
 proof, original proof provenance, audited bytes and successful source hashes.
 
-For graph assembly, use milestone77's successful receipts to determine which
-interfaces are checked, including coverage, lookup maps and actual-history
-shape assembly. Complete the equality between the builder's numeric
-history update and the index of the longest suffix after an actual direction
-ID. The required statement is
-
-```lean
-builderNext (actualHistory p r) (directionId p r) = actualHistory p (r+1)
-```
-
-under the hypothesis `r+9 <= m`, with `builderNext` defined from the recorded
-selector. This is the next proof obligation, not a checked declaration.
-Combine this with the five count symbols, base-six code and state-block
-encoding. Show that every actual step is retained in the exact graph, including
-all exclusion guards and every compatible eleven-direction interpretation of
-a three-ID signature. Symbol six represents the interval [6,21]. Alternative
+Milestones 77 and 78 now check coverage, lookup maps, numeric history updates
+and the actual combined state sequence. Reuse their successful receipts.
+The next task is to prove that each actual direction/history/six-count triple
+survives the exact graph's exclusions, then supply its retained array index.
+Check the reference, recovered-rule, history and any later interval guards
+against their geometric theorems. After retained-edge membership, interpret
+every compatible eleven-direction realization of a three-ID credit signature.
+Symbol six represents the interval [6,21]. Alternative
 credits on the same five centres combine by maximum. Verify the entire
 potential, its range and the boundary calculation before claiming 234.
 
@@ -49,7 +41,7 @@ restriction on realizable walks or stronger boundary information could change
 that conclusion and would need its own proof.
 
 Preserve the manuscript authors Iori Hironaka, Tommy Ma and Steven Zhan and all
-hyperlink settings. Revision76 is the latest paper; milestone77 has separate
+hyperlink settings. Revision76 is the latest paper; milestones77 and78 have separate
 proof notes. The existing editor file is
 `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`, with a repository
 mirror at `paper/snake9_research.tex`. Edit the existing editor file in place

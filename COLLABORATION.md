@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 77](milestones/77-direction-state-coverage/README.md) adds 106 successful Lean theorem audits for direction coverage, numeric lookup, actual direction states and history-shape compatibility. The full graph interpretation and conditional target 234 remain incomplete. The paper remains revision76. Use [the current handover](handoff/README.md) for mathematical status, saved evidence, live-process precautions and the next research assignment.
+Latest continuation: [milestone 78](milestones/78-numeric-history-transition/README.md) checks the numeric history update and the actual combined state sequence, with 29 Lean theorem audits. The exact Python selector also agrees on all 37,875 input pairs. Retained-edge membership, credit interpretation, six local share targets and full potential replay remain before claiming 234. The paper remains revision 76. Use [the current handover](handoff/README.md) for evidence and continuation.
 
 Start with the [updated research handover](handoff/2026-11-02/START_HERE.md). It supersedes the 1 November continuation record and separates current evidence from the historical entries below. Milestone74 gives the exact five-count-state/six-count-edge graph interface, five new Lean audits, and six exact short-walk obstructions to dropping pending share rules while retaining the present boundary budget. The project interval is unchanged. Case7305 has 92 checked semantic/composition modules, with its smaller simulated refutation preserved for later Lean replay; its final local theorem remains pending.
 
