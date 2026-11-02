@@ -20,7 +20,7 @@ Steven Zhan. Its repository and editor copies have SHA256
 Source checks preserve all 116 previous statements and add seven, giving 123;
 all 13 printed paths and 118,673 vertex pairs were checked. The built-in
 compiler failed before source compilation. No new PDF or layout check is
-claimed. Milestones 77 and 78 add separate proof interfaces without revising the paper.
+claimed. Milestones 77 through 79 add separate proof interfaces without revising the paper.
 
 ## Chosen route: charge empty squares
 
@@ -96,10 +96,16 @@ five. The entering count is at \(r+8\), and credited shares lie at centres
 including the terminal state. Shorter paths already satisfy the intended upper
 bound. Count symbol six means the interval \([6,21]\).
 
-The next bounded task is retained-edge membership: prove that every actual
-direction/history/six-count triple survives the current model's reference,
-recovered-rule, interval and history exclusions, then identify its retained
-array index. Each exclusion needs its geometric theorem.
+Milestone79 adds 31 theorem audits. Its count-slice, digit, encoding-injectivity,
+reversal and saturation results connect encoded graph tests to actual counts.
+Every actual snake survives the ten completed milestone72 interval filters,
+at all three offsets and in both orientations. The closed local certificates
+are imported from pinned existing objects, without a clean dependency rebuild.
+
+The remaining retained-edge work is the 1,378-key reference union, forty
+recovered short rules, three history exclusions and the exact retained-array
+index. The reference theorem sources and contributor logs were audited; their
+complete union is still uninstantiated in the current environment.
 Every three-ID credit needs every compatible eleven-direction interpretation;
 forgotten coordinate returns can produce several variants. Alternative lower
 bounds on the same five shares combine by maximum. Complete the finite
@@ -128,8 +134,8 @@ These remain research directions, with no promised numerical improvement.
 Use the repository sources and milestone receipts as the reproducible record.
 The dated handover contains detailed environment paths and earlier evidence.
 Milestone 77 saves its coverage checks, superseded memory-intensive attempts
-and replay snapshot. Milestone 78 saves the current selector/state checks and
-a later read-only replay observation. Build objects remain local and are excluded from Git. Reproduction
+and replay snapshot. Milestone 78 saves the selector/state checks. Milestone79 saves the encoded
+guards, interval-filter assembly, catalogue audit and a later replay observation. Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
 

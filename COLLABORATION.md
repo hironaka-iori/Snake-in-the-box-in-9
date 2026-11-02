@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 78](milestones/78-numeric-history-transition/README.md) checks the numeric history update and the actual combined state sequence, with 29 Lean theorem audits. The exact Python selector also agrees on all 37,875 input pairs. Retained-edge membership, credit interpretation, six local share targets and full potential replay remain before claiming 234. The paper remains revision 76. Use [the current handover](handoff/README.md) for evidence and continuation.
+Latest continuation: [milestone 79](milestones/79-retained-edge-guards/README.md) checks encoded count slices, reversal and saturation, and proves that every actual snake survives the ten completed interval filters, with 31 Lean theorem audits. The full reference catalogue, recovered short rules, history exclusions, credit interpretation, six local share targets and potential replay remain before claiming 234. Paper revision 76 is unchanged. Use [the current handover](handoff/README.md) for evidence and continuation.
 
 Start with the [updated research handover](handoff/2026-11-02/START_HERE.md). It supersedes the 1 November continuation record and separates current evidence from the historical entries below. Milestone74 gives the exact five-count-state/six-count-edge graph interface, five new Lean audits, and six exact short-walk obstructions to dropping pending share rules while retaining the present boundary budget. The project interval is unchanged. Case7305 has 92 checked semantic/composition modules, with its smaller simulated refutation preserved for later Lean replay; its final local theorem remains pending.
 

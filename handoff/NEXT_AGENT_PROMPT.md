@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, and milestone78's README and exact checkpoint.
+`handoff/CURRENT_STATUS.md`, and milestone79's README and exact checkpoint.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -24,10 +24,14 @@ proof, original proof provenance, audited bytes and successful source hashes.
 
 Milestones 77 and 78 now check coverage, lookup maps, numeric history updates
 and the actual combined state sequence. Reuse their successful receipts.
-The next task is to prove that each actual direction/history/six-count triple
-survives the exact graph's exclusions, then supply its retained array index.
-Check the reference, recovered-rule, history and any later interval guards
-against their geometric theorems. After retained-edge membership, interpret
+Milestone79 checks encoded count slices/digits, injectivity, reversal and
+saturation, and proves retention under all ten completed milestone72 interval
+filters. Reuse these checked interfaces. The next task is to instantiate the
+1,378-key reference union, the forty recovered short rules and three history
+exclusions, then supply the exact retained-array index. The current reference
+interfaces still have explicit Refuted premises. The closed reference proofs
+are in pinned contributor revisions and saved audits, with the current local
+snapshot under milestone51. Their full union is not yet imported here. After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.
 Symbol six represents the interval [6,21]. Alternative
 credits on the same five centres combine by maximum. Verify the entire
@@ -41,7 +45,7 @@ restriction on realizable walks or stronger boundary information could change
 that conclusion and would need its own proof.
 
 Preserve the manuscript authors Iori Hironaka, Tommy Ma and Steven Zhan and all
-hyperlink settings. Revision76 is the latest paper; milestones77 and78 have separate
+hyperlink settings. Revision76 is the latest paper; milestones77 through79 have separate
 proof notes. The existing editor file is
 `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`, with a repository
 mirror at `paper/snake9_research.tex`. Edit the existing editor file in place

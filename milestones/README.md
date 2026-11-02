@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 73 checks three of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains six local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 76. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 79: encoded guards and ten interval exclusions](79-retained-edge-guards/README.md). 31 Lean audits; actual snakes survive the ten completed interval filters. Full graph membership remains.
+
 - [Milestone 78: numeric history transitions and actual state sequence](78-numeric-history-transition/README.md). 29 Lean audits; retained-edge membership and charge interpretation remain.
 
 - [Milestone 77: actual direction states and history compatibility](77-direction-state-coverage/README.md). 106 Lean theorem audits; complete retained-edge interpretation and the target234 remain pending.

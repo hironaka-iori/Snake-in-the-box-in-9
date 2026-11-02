@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 78](milestones/78-numeric-history-transition/README.md) checks the numeric history update and the actual combined state sequence, with 29 Lean theorem audits. The exact Python selector also agrees on all 37,875 input pairs. Retained-edge membership, credit interpretation, six local share targets and full potential replay remain before claiming 234. The paper remains revision 76. Use [the current handover](handoff/README.md) for evidence and continuation.
+Latest continuation: [milestone 79](milestones/79-retained-edge-guards/README.md) checks encoded count slices, reversal and saturation, and proves that every actual snake survives the ten completed interval filters, with 31 Lean theorem audits. The full reference catalogue, recovered short rules, history exclusions, credit interpretation, six local share targets and potential replay remain before claiming 234. Paper revision 76 is unchanged. Use [the current handover](handoff/README.md) for evidence and continuation.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
