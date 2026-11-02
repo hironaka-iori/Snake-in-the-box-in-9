@@ -1,67 +1,88 @@
 # Continuation assignment
 
-Continue the empty-square route in E:/Snake-in-a-box. Read milestone 106's checkpoint and revision audit, milestone 105's
-mathematical note, then the live record and NEXT.md in
-milestone 104. The complete certification batch is still active. Verify its
-recorded processes; do not start a duplicate or edit a live proof/checker.
+Continue the empty-square route in E:/Snake-in-a-box. Read milestone 107's
+mathematical note, proof summary, checkpoint and recovery guidance. Then read
+milestone 104's live record and NEXT.md and verify its recorded process.
+The complete potential batch is still running; do not duplicate or modify it.
 
-## Checked step and next obligations
+## Checked reference recovery
 
-Snake9.ReferenceAssembly105.completed235 and conditional234 take the existing
-complete graphCheck, potential range and exact hypothesis
-AllRefutedList Snake9.Reference85.referenceKeys. The latter theorem retains
-all five local share refutations. All five supporting implications passed
-Lean and standard-axiom audits. No definitions were added. The new theorem
-chain does not require reconstructing AllRefuted6K235 or AllRefuted236.
+Snake9.RecoveredReference107.adjacent_ones_refuted is the closed refutation
+for winOf [0,1,2] and boundsOf [1,1]. The first exact reference key is checked
+to be this entry. reference_union_iff_remaining proves equivalence between
+AllRefutedList referenceKeys and AllRefutedList referenceKeys.tail; the tail
+has 1,377 entries. The full union remains unproved. Use the existing milestone
+105 bound implications after reconstructing the full union from its tail.
 
-The exact 1,378-key source map is in milestones/105-reference-proof-closure/data/source-selection.json.
-It selects 732 R4 entries, 635 K6 entries and 11 R4b entries. The full source
-catalogues share roots; the new selection omits only five distinct roots.
-All selected semantic sources exist in the pinned Git trees, but their
-generated Unsat root sources do not. Recover or regenerate those roots from
-the saved proof artifacts and compatible generators; historical logs and
-wrapper names do not supply a new local check. Do not claim all proof data
-are absent: the audit checked the stated Git source paths.
+The exact Q012A11 CNF and semantic sources were recovered from pin 7cb52aad.
+The original full-CNF indices, the decoded Lean raw clauses and the 1,172
+core clauses agree. A fresh core-only CaDiCaL LRAT proof is trimmed, remapped
+to original clause IDs and exported by the pinned contributor generator.
+The separate plain-clause RUP audit and all 19 final Lean modules pass.
+Four new wrapper conclusions and ten reused certificate statements have
+standard-axiom audits. This recovers an established exclusion; it gives no
+new upper bound or claim of a clean rebuild of shared dependencies.
 
-Milestone 104 will generate and check AllCompleted104 and AllConditional104
-after all groups pass. Its successful sources and receipts are immutable.
-Complete its full dependency/axiom/coverage audit before publishing the graph
-certificates as finished. The current batch and exact-union obligation serve
-both upper-bound profiles.
+The successful environment is data/environment-isolated.json and the output
+directory is build-isolated. Recovered sources use import prefix Recovered107.
+Do not put new files under bare LocalWindowSat/Cnf/Unsat in a leading search
+directory: that shadows entire shared module directories. The failed first
+attempt, successful imports-only ports, logs and receipts are preserved.
+Do not alter this frozen evidence; make the next batch in a new milestone.
 
-Conditional 234 additionally needs cases 7301, 7302, 7303, 7307, 7308 with caps
-15, 17, 15, 15, 15, giving floors 16, 18, 16, 16, 16. The original case 7302 target 20
+## Next work
+
+Extend the recovery procedure to the remaining exact keys. Inspect the
+recovery guidance for older D certificates proving identical key statements;
+their smaller cores may save work. A chosen root must end in the exact
+Refuted(winOf directions)(boundsOf symbols) type. Root-name similarity or
+a historical solver report is insufficient. Verify raw clauses against their
+own compatible metadata and CNF; never pair another radius's proof with them.
+
+The older direction and direction5 catalogues contain 143 distinct exact
+alternative D roots for union keys, including the recovered first key.
+There are 142 additional candidates. These source correspondences are not
+replayed refutations. The next small representative is union index 472,
+D012304A22623: its recorded core has 120 clauses and its recorded proof has
+75 lemmas and 426 hints. The count symbol six also exercises the interval
+[6,21] semantics. Recover its own inputs and verify every correspondence.
+
+Use a resumable single-compiler batch with source/object/log hashes and explicit
+entry coverage. Test this additional representative before a broad launch.
+Keep heavy work out of the active potential batch's memory budget. Existing
+success receipts must be verified before reuse; preserve failures and timeouts.
+
+Milestone 104 generates AllCompleted104 and AllConditional104 only after all
+groups pass. Audit complete context coverage, dependencies and axioms before
+publishing those graph certificates as complete. Do not infer completion
+from an observation timeout or a stale lock; inspect the recorded process.
+
+Conditional 234 additionally needs cases 7301,7302,7303,7307,7308 with share
+caps 15,17,15,15,15, giving floors 16,18,16,16,16. The original case 7302 target 20
 replay remains stopped after its preserved 900-second timeout and 649 successful
 modules. A target 18 proof needs separate files. Do not restart the old replay.
 
-The maintained interval is 191 through 235 edges. The 235 result retains
-inspected contributor evidence, with complete independent rebuilding pending.
-The optimum and 196 remain unresolved. Keep the full research goal active.
+The maintained interval is 191 through 235 edges, using the inspected contributor
+proof and archived audit for 235; its full independent rebuild is pending.
+The optimum and 196 remain unresolved. Keep the full goal active.
 
 ## Manuscript and runtime
 
-Revision 106 is complete at source level. Its verification preserves all
-appendices, authors and hypersetup settings and checks all 13 printed snakes.
-The built-in compiler failed before TeX processing because of the Windows
-helper's writable-root restriction; no successful PDF or visual review is
-claimed. The exact sources are synchronized between
-D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and
-E:/Snake-in-a-box/paper/snake9_research.tex. Continue editing the open source
-in place. The next full paper revision is scheduled for 116.
+The current paper is revision 106; the next full revision is 116. Preserve the
+exact D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex source and its
+E:/Snake-in-a-box/paper/snake9_research.tex mirror. The built-in compiler failed
+before TeX processing because of a Windows helper restriction; no current PDF
+is verified. Preserve the three authors and local hypersetup settings.
+Use ordinary notation and define only necessary, repeatedly used terms.
+Keep Lean filenames and implementation definitions out of the paper.
 
-Use ordinary mathematical notation. Introduce a definition only if necessary
-and repeatedly used. Keep Lean filenames and implementation definitions out
-of the manuscript. The current argument distinguishes old floor20/range600
-optimality from the sufficient floor18/range602 profile.
-
-Python is C:/Users/hironakaiori/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe;
-use -B -X utf8. Lean 4.19 and mathlib are under
+Python: C:/Users/hironakaiori/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe,
+with -B -X utf8. Lean 4.19 and mathlib are under
 D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research.
-Reuse the existing support overlay. Prefer sequential compilation; do not
-start another heavy job alongside the complete batch. Do not add -M4096.
+Reuse existing support objects; do not copy the full overlay. Do not add -M4096.
 
-Preserve exact bytes, receipts and unsuccessful attempts. Leave unrelated
-.gitignore and milestones/50-three-count-return/excess-screen/data/critical-family.json
-edits untouched. Fetch before publication, stage exact reviewed paths, verify
-the staged bytes and push each completed round. Do not update old manifests
-merely because newer handovers supersede their shared-file entries.
+Leave unrelated .gitignore and
+milestones/50-three-count-return/excess-screen/data/critical-family.json edits
+untouched. Fetch before publication, stage exact reviewed files, verify their
+staged bytes and push each completed round. Old handover manifests remain
+historical; do not rewrite them to match newer shared documents.

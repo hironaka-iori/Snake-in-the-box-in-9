@@ -786,3 +786,37 @@ conditional share bounds remain separate obligations. The exact optimum and
 conjecture 196 remain unresolved.
 
 Next research priority: Preserve and complete the active milestone 104 graph certificate batch, then audit both final assemblies. Recover the exact reference refutation roots selected in milestone 105. Conditional 234 still needs the five local shares, with a separate target-18 proof for 012034. The next scheduled full paper revision is 116.
+
+
+## Milestone 107: reference refutation recovery
+
+The first exact reference key, directions 012 and singleton symbols (1,1),
+has a recovered closed Lean refutation. The original 1,172-clause semantic
+input matches the archived source. A fresh LRAT certificate has 968 lemmas
+and 41,184 hints, independently checked as plain-clause RUP and through seven
+Lean segments. The final isolated replay has 19 checked modules and 14
+standard-axiom reports. No new mathematical definitions were added.
+
+Lean proves that the full reference-union assertion is equivalent to the
+assertion for its remaining 1,377 entries. The first failed combined import
+attempt is preserved; the successful attempt changes only recovered import
+paths to avoid shadowing shared modules. Existing support objects are reused.
+This is recovery of an established restriction, with no new numerical bound.
+
+An independent source audit identifies 143 exact older D alternatives,
+including the recovered first entry. The next representative is union index
+472, with a recorded 120-clause core; its decoded clauses match the archive.
+The alternative-root correspondence supplies no unperformed proof replay.
+
+At the immutable process-verified observation, milestone 104 was RUNNING with
+27/791 completed-profile contexts and 27/791
+conditional-profile contexts checked. Its active module was
+CompletedBatch104G024. Consult the live record for later progress.
+
+The maintained interval is 191 through 235 edges. The contributor upper bound
+retains its archived audit and pending independent rebuild. The remaining
+reference entries, complete graph certificates and five conditional shares
+remain distinct requirements. Paper revision 106 is unchanged; the next full
+revision is scheduled for 116. The exact optimum and conjecture 196 remain open.
+
+Next research priority: Extend the recovered reference procedure using exact source/core correspondence and isolated import prefixes; use smaller older proofs when their theorem types match the same key. Preserve the running milestone 104 batch and audit both final assemblies when complete. The five conditional local floors remain (16,18,16,16,16).

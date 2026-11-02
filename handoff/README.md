@@ -1,25 +1,22 @@
 # Research handover
 
-Start with [current status](CURRENT_STATUS.md) and the
-[continuation assignment](NEXT_AGENT_PROMPT.md). The latest saved round is
-[milestone 106](../milestones/106-paper-revision/README.md), a manuscript revision.
-The checked mathematical chain is in milestones 97, 98, 99 and 105.
+Start with [current status](CURRENT_STATUS.md), the
+[continuation assignment](NEXT_AGENT_PROMPT.md), and
+[milestone 107](../milestones/107-reference-refutation-recovery/README.md).
+The first exact reference entry is now checked; 1,377 remain. The new
+remaining-list equivalence plugs into the existing milestone 105 implications.
 
-Milestone 104's complete potential batch remains active. Read its live record
-and verify the recorded process before any action. Do not start another copy
-or edit its live sources, checker or generator.
+Milestone 104's complete potential batch remains active. Verify its process
+and live record before any action. Do not start another copy or modify its
+active sources, checker or generator. Only complete context coverage and the
+final assemblies discharge the complete graph premises.
 
-The current bound chain needs refutations for the exact 1,378-key union and
-the complete graph certificates. Conditional 234 additionally needs the five
-local floors (16,18,16,16,16). Coverage, weight interpretation, the total
-charge budget, potential ranges and conditional telescoping are checked.
+The maintained interval is 191 through 235 edges. Conditional 234 also needs
+the five pending local floors (16,18,16,16,16). The original case 7302 target-20
+replay remains stopped. A target-18 proof must use separate sources.
 
-The maintained interval is 191 through 235 edges; the contributor's upper
-bound retains its archived audit and pending independent rebuild. The exact
-optimum is unresolved. The original case 7302 target-20 replay remains stopped.
-
-Paper revision 106 preserves Iori Hironaka, Tommy Ma and Steven Zhan as authors
-and the existing hyperlink settings. The open D: source and E: repository
-mirror are identical. The built-in compiler failed before TeX processing;
-no new PDF is verified. Only necessary, repeatedly used definitions should
-be introduced. The next full manuscript revision is scheduled for 116.
+The paper remains revision 106, with all three authors and local hyperlink
+settings preserved. The open source and repository mirror are identical.
+The built-in compiler was unavailable before TeX processing, so no updated
+PDF is verified. Introduce only necessary, repeatedly used definitions.
+The next full manuscript revision is scheduled for 116.
