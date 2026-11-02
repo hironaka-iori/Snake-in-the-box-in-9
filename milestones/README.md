@@ -1,6 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 73 checks three of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains six local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 66, with its next full rewrite scheduled for milestone 76.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestone 73 checks three of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains six local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 76. Source and witness checks pass; the app compiler cannot start.
+
+- [Milestone 76: paper revision and conditional arithmetic](76-paper-revision/README.md). Seven statements added, six fresh Lean checks; no new unconditional bound.
 
 - [Milestone 75: exact history, share lookup and count-state coding](75-exact-history-bridge/README.md). 39 Lean audits; selected case7305 replay in progress; full graph interpretation and234 remain pending.
 

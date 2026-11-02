@@ -1,0 +1,157 @@
+\subsection{The strengthened boundary estimate}\label{sec:boundary21}
+The general bound in Proposition~\ref{prop:general-window-budget} uses positivity at each omitted internal position. For nine-transition windows, the adjacent-pair restriction gives a stronger estimate.
+
+\begin{proposition}[Twenty-one omitted singleton counts]\label{prop:boundary21}
+Let $m\ge8$. For $0\le r<m-8$, let $L_r$ be a nonnegative lower bound for
+$\sum_{i=4}^{8}\sigma_{12}(x_{r+i})$, and put
+\[
+W=\sum_{r=0}^{m-9}\bigl(120b_{r+8}+L_r\bigr).
+\]
+The sum is empty when $m=8$. Then
+\begin{equation}\label{eq:boundary21}
+W+2520\le5G_{12},\qquad W+4200m\le1098960.
+\end{equation}
+\end{proposition}
+\begin{proof}
+The uncharged singleton positions are $0,1,\ldots,7,m$. Both endpoints contribute at least four. Theorems~\ref{thm:no-adjacent-singletons} and~\ref{thm:no-adjacent-one-two}, together with positivity, give
+\[
+\alpha_1+\alpha_2\ge4,\quad
+\alpha_3+\alpha_4\ge4,\quad
+\alpha_5+\alpha_6\ge4,\quad\alpha_7\ge1.
+\]
+Consequently
+\[
+\sum_{r=0}^{m-9}b_{r+8}+21\le T.
+\]
+Each path position occurs in at most five of the charged share windows. Hence $\sum_rL_r\le5\Sigma$, where $\Sigma=\sum_{x\in S}\sigma_{12}(x)$. Multiplying the count inequality by 120 gives $W+2520\le120T+5\Sigma=5G_{12}$. Finally,
+\[
+5G_{12}+4200(m+1)\le1105680
+\]
+implies the second inequality in~\eqref{eq:boundary21}. The actual-snake prefix estimate, indexed summation, and global arithmetic have passed Lean checks~\cite{boundaryarchive}.
+\end{proof}
+
+\begin{corollary}[Potential criterion for excluding 235]\label{cor:potential234}
+Suppose every snake of length $m\ge9$ traces a walk of $m-8$ transitions with weights $120b_{r+8}+L_r$ as in Proposition~\ref{prop:boundary21}. Suppose also that a potential of range at most $R$ satisfies
+\[
+p+\pi(v)\le d\,w(u,v)+\pi(u)
+\]
+on every traced transition, where $p,d>0$. Then
+\begin{equation}\label{eq:improved-potential}
+(p+4200d)m\le1098960d+8p+R.
+\end{equation}
+In particular, these premises imply $a(9)\le234$ whenever
+\begin{equation}\label{eq:strict234}
+227p>111960d+R.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Telescoping along the open walk gives $p(m-8)\le dW+R$. Substitute Proposition~\ref{prop:boundary21} to obtain~\eqref{eq:improved-potential}. At $m=235$, the difference between the left and right sides is $227p-111960d-R$, which is positive under~\eqref{eq:strict234}. Larger $m$ is also excluded because $p+4200d>0$. Paths with fewer than nine edges already satisfy the conclusion. This is a conditional implication: existence of the required walk and the validity of every edge weight remain premises.
+\end{proof}
+
+\section{The current complete charge model}\label{sec:current-model}
+The earlier complete models and their replacement cycles are retained in Appendix~\ref{app:earlier-long-models}. The present model uses recorded proofs for its local rules, with stronger share targets kept separate. This distinction permits the conditional and completed-proof tracks to be compared on the same state space.
+
+\subsection{State meaning and local proof support}
+A state records eight canonically relabelled directions, five truncated singleton counts, and the relevant history of earlier nine-direction windows. There are 132 induced eight-direction shapes and 505 induced nine-direction extensions. For a transition starting at $r$, the source counts are
+\[
+(b_{r+3},\ldots,b_{r+7}),
+\]
+and the target counts are $(b_{r+4},\ldots,b_{r+8})$. The entering count is $b_{r+8}$, and every credited share rule concerns the same centres $x_{r+4},\ldots,x_{r+8}$. A six-transition rule uses the directions beginning at $r+3$. An eleven-transition rule recognized from three consecutive window labels begins at $r-2$.
+
+The reference exclusions contain 1378 distinct keys from the completed contributor count catalogues. Further recorded proofs supply forty recovered short-count restrictions, ten completed interval-count exclusions, the geometric share rules, and count-conditioned shares including Theorem~\ref{thm:share120}. No unresolved additional count exclusion is required by this reference model. The complete interpretation of their table lookups for an arbitrary snake remains a separate obligation~\cite{currentarchive}.
+
+A symbol $b=6$ always means $6\le\alpha\le21$ at an internal vertex. For $k<6$,
+\[
+\min\{6,\alpha\}\le k\quad\Longleftrightarrow\quad\alpha\le k.
+\]
+Thus a small-cap test supplies its intended actual-count hypothesis. A sum restriction used to contradict an upper bound requires all participating symbols to be unsaturated, unless an interval argument is provided. These guard implications and the five-count shift identities have passed Lean checks. They do not by themselves certify all exclusion lookups.
+
+The history dictionary contains the empty word, 31 one-symbol words and 43 two-symbol words. There are 58 three-symbol signatures, comprising 55 share rules and three count exclusions. At empty history, the direction shape is retained explicitly; each nonempty history specifies the compatible shape. The resulting state space has
+\[
+(132+74)6^5=1601856
+\]
+states. Its saved graph has 4947008 transitions. Adding a count-independent share floor changes weights while preserving these states and transitions.
+
+\subsection{Exact recognition of a remembered window}\label{sec:exact-history}
+Here a symbol is the identifier of a canonical nine-direction window. It is distinct from a cube-coordinate direction.
+
+\begin{lemma}[Longest listed suffix]\label{lem:longest-suffix}
+Let $D$ be a finite dictionary containing the empty word and closed under deletion of the last symbol. Suppose $s$ is the longest suffix of a word $w$ that belongs to $D$. For every new symbol $a$ and every $t\in D$,
+\[
+t\text{ is a suffix of }wa
+\quad\Longleftrightarrow\quad
+t\text{ is a suffix of }sa.
+\]
+Consequently the longest listed suffix can be updated from $s$ alone.
+\end{lemma}
+\begin{proof}
+The empty candidate satisfies both conditions. A nonempty suffix $t$ of $wa$ ends in $a$, so write $t=ua$. Closure gives $u\in D$, and $u$ is a suffix of $w$. Maximality of $s$ implies $|u|\le|s|$. Since $u$ and $s$ are suffixes of the same word, $u$ is a suffix of $s$. Hence $t=ua$ is a suffix of $sa$. Conversely, $s$ is a suffix of $w$, so every suffix of $sa$ is a suffix of $wa$. The candidate sets therefore agree. Suffixes of a fixed length are unique, which also proves uniqueness of the longest candidate.
+\end{proof}
+
+Starting with the empty word and repeatedly applying the lemma proves that the stored history is always the longest listed suffix of the identifiers already read. A listed three-symbol signature is emitted when it is a suffix of the stored history followed by the new identifier. Each signature's two-symbol prefix belongs to the dictionary. If a signature is emitted, the stored history is a suffix of the actual past, so that signature is the last three actual identifiers. Conversely, if a listed signature is the actual last three identifiers, its two-symbol prefix is a listed suffix of the past and lies inside the stored longest suffix; the signature is therefore emitted. No emission is possible before three identifiers have been read. The history invariant, soundness of emission, absence of early emission, and the exact 75-entry dictionary checks have passed Lean checks~\cite{historyarchive}. The converse just given is a written consequence of maximality and prefix membership; no separate Lean check of that converse is claimed.
+
+Three canonical identifiers may correspond to several eleven-direction words, because a coordinate forgotten by the retained suffix can later return. The explicit ambiguity in Appendix~\ref{app:earlier-long-models} demonstrates this. For each recognized signature, the share assigned is the minimum of the certified bounds over all compatible words. Every compatible word must be covered. The longest-suffix lemma resolves recognition of the identifier history; it does not replace that geometric coverage argument.
+
+\subsection{Completed local bounds and conditional comparisons}
+For each saved graph, an integer potential is checked on every transition, and an explicit cycle attains its minimum mean. The following means use the integer weight $120b_{\mathrm{new}}+L$, without division by 120. The range is measured in the same units; all three rows have denominator one.
+\begin{center}\small
+\begin{tabular}{p{0.44\textwidth}r r c}
+\toprule
+Count-independent shares used & Mean & Range & Conditional bound on $m$\\\midrule
+Theorem~\ref{thm:countfree-completed} & 480 & 536 & $10609/45$\\
+Above, with $H\ge12$ for $012310$ & 483 & 551 & $157625/669$\\
+All nine targets in Section~\ref{sec:countfree-catalogue} & 496 & 600 & $137941/587$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The first row uses only completed local share theorems. Its full graph interpretation and Lean potential replay are still unfinished. The second row adds one unproved local premise and still has integer consequence 235. The third row has integer consequence 234 and retains six local premises. Every finite potential inequality and every attaining cycle in this table has been checked by independent integer computation~\cite{countfreearchive}.
+
+For the third row, Corollary~\ref{cor:potential234} gives
+\[
+4696m\le1098960+8\cdot496+600=1103528,
+\qquad m\le\frac{137941}{587}<235.
+\]
+The strict margin at 235 is only 32. Thus the displayed numerical certificate has little room for a weaker share or a larger boundary loss. A three-transition cycle with weights $616,496,376$ attains mean 496. The cycle belongs to the finite graph; it supplies no snake construction.
+
+\subsection{A short-walk obstruction to weakening the catalogue}\label{sec:short-walk}
+The need for the pending local shares can be tested beyond a single fixed potential. The following argument applies to any constant slope and any potential with a global range bound.
+
+\begin{proposition}[Cycle and short-walk obstruction]\label{prop:short-walk-obstruction}
+Suppose a weighted directed graph contains a cycle of mean 496 and a walk of length $\ell\le227$ and total weight $A$ with
+\[
+496\ell-A\ge632.
+\]
+If $p+\pi(v)\le w(u,v)+\pi(u)$ on every edge and the range of $\pi$ is at most $R$, then
+\[
+227p-R\le111960.
+\]
+Consequently such a potential cannot satisfy~\eqref{eq:strict234} with $d=1$.
+\end{proposition}
+\begin{proof}
+Summing on the cycle gives $p\le496$. Summing on the open walk gives $p\ell-A\le R$. Since $227-\ell\ge0$,
+\[
+227p-R\le(227-\ell)p+A
+\le(227-\ell)496+A
+=112592-(496\ell-A)\le111960.
+\]
+The argument holds for real quantities. Its rational specialization, which covers the scaled integer certificates here, has passed Lean~\cite{obstructionarchive}.
+\end{proof}
+
+Each row below weakens one floor from the full mixed catalogue, retaining the other eight floors and all earlier graph rules. Floor zero removes the extra count-independent credit while keeping any older applicable credit. Every resulting graph retains the mean-496 cycle and has the indicated short walk.
+\begin{center}\small
+\begin{tabular}{c r r r}
+\toprule
+Changed shape & Weakened floor & Walk length $\ell$ & Deficit $496\ell-A$\\\midrule
+$012301$ & 0 & 12 & 635\\
+$012032$ & 0 & 11 & 641\\
+$012034$ & 0 & 7 & 636\\
+$012310$ & 0 & 17 & 636\\
+$012340$ & 0 & 7 & 632\\
+$012345$ & 12 & 12 & 632\\
+\bottomrule
+\end{tabular}
+\end{center}
+Direct array checks, separate from the discovery calculation, verify each walk's edges, endpoints and weights, and the retained cycle~\cite{obstructionarchive}. These finite witness checks have not been replayed in Lean. Proposition~\ref{prop:short-walk-obstruction} rules out repairing these six entire relaxed graphs merely by choosing another constant slope and potential under the present boundary budget.
+
+This conclusion does not establish that each numerical floor is least possible: reductions by one were not tested. Nor is a graph walk known to arise from a complete snake or a permitted initial history. Additional geometric restrictions, reachability restrictions, or boundary estimates depending on the initial and final states may remove the obstruction. These are substantive changes to the mathematical model and remain possible routes.
+

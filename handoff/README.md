@@ -1,27 +1,29 @@
 # Current continuation index
 
-Latest research checkpoint: [milestone75](../milestones/75-exact-history-bridge/README.md).
-The goal was resumed after the earlier saved handover. The exact optimum remains
-unresolved; the project interval is191 through235, and234 remains conditional.
+Latest checkpoint: [milestone 76](../milestones/76-paper-revision/README.md).
+Both existing manuscript sources match, with authors and hyperlink settings
+preserved. Checks pass for 123 statements, 180 labels and 13 snakes. Six new
+Lean checks verify conditional arithmetic. The built-in compiler failed before
+source compilation; its exact diagnostic is saved.
 
-Milestone75 adds39 Lean-checked declarations for history recognition, exact
-share lookup and count-state arithmetic. The larger case7305 refutation is
-being replayed. Inspect `milestones/75-exact-history-bridge/data/checkpoint.json`
-for the last observed process and frozen successful-module snapshot, then
-check the actual live process and case log before taking action. A saved
-process ID or session handle alone does not establish that it is still running.
+The project interval remains 191 through 235 edges. The target 234 depends on
+six local shares, exact arbitrary-snake graph interpretation and full potential
+replay. The conjecture 196 remains unresolved; no construction above 191 was
+obtained here.
 
-The [2 November detailed handover](2026-11-02/START_HERE.md) remains useful for
-definitions, earlier results, environment and preserved proof archives. Its
-statement that no replay was running describes that earlier checkpoint.
-The newer milestone75 status supersedes it. Historical manifests describe
-their saved file versions; later research documentation may have changed.
+Case 7305 replay was active at the checkpoint. Inspect
+`milestones/76-paper-revision/data/checkpoint.json`, its frozen successful-module
+snapshot, and the actual process before acting. The saved tool session is 41012.
+Do not start a duplicate completion driver. After refutation success, finish
+full completion, geometry/reversal, axiom audit and case archival.
 
-Next priorities are to finish the active case7305 replay and its complete audit,
-then connect the checked history, lookup and count-code components to actual
-direction IDs, compatible history shapes, every exclusion and every applicable
-share rule. Full finite-potential replay remains another global obligation.
-No new unconditional upper bound follows from the current components alone.
+The [detailed handover](2026-11-02/START_HERE.md) retains definitions, environment,
+earlier certificates and a continuation prompt. Its process and revision 66
+status are historical; milestone 76 supersedes them. Historical manifests
+identify their saved file versions.
 
-The manuscript and existing editor source remain revision66. The next planned
-full rewrite is76, preserving the author order and existing hyperlink settings.
+Next work is to finish the active 012310 share-12 proof and assemble the exact
+graph walk using the checked history, direction shifts, lookup and count-code
+components. Complete the other five share targets and potential replay before
+claiming 234. Recompile the same editor source when the app compiler can start.
+The exact optimum remains the active goal.

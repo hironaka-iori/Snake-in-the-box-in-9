@@ -1,0 +1,61 @@
+\section{A catalogue of shares without count hypotheses}\label{sec:countfree-catalogue}
+The earlier share inequalities often require a prescribed singleton-count pattern. A second approach assigns a lower share to every six-transition shape, independently of these counts. This reduces the number of local premises needed by a complete charge model.
+
+\begin{lemma}[Six-transition shape classification]\label{lem:six-shape-classification}
+Every six-transition segment of a snake is equivalent, under coordinate relabelling and reversal, to one of
+\[
+012031,\ 012032,\ 012034,\ 012301,\ 012304,\
+012310,\ 012314,\ 012340,\ 012345.
+\]
+\end{lemma}
+\begin{proof}
+Relabel the first appearing direction by zero, the next new direction by one, and continue in order. The resulting word is a restricted growth string of length six. There are 203 such strings. Apply the parity criterion from Section~\ref{sec:upper-proof} to every consecutive block: its parity vector must be nonzero, and must have weight greater than one if the block has length greater than one. Exactly twelve strings survive. Pairing these strings with their canonically relabelled reversals gives the nine displayed representatives. The finite classification, its coverage of arbitrary snake segments, and reversal transfer have passed Lean checks~\cite{countfreearchive}.
+\end{proof}
+
+For a segment with internal vertices $y_1,\ldots,y_5$, write
+\[
+H=\sum_{i=1}^{5}\sigma_{12}(y_i).
+\]
+Letters represented by different digits always denote different coordinate directions.
+
+\begin{theorem}[Completed count-independent share bounds]\label{thm:countfree-completed}
+For a six-transition segment with shape $012031$, $012304$, or $012314$, one has $H\ge16$. For six distinct directions, with shape $012345$, one has $H\ge12$. Each statement also holds for the reversed segment, with no singleton-count hypotheses.
+\end{theorem}
+\begin{proof}
+Translate the first vertex to zero and apply a coordinate permutation to obtain the displayed shape. Select the segment in the union of the radius-four neighbourhoods of its five internal centres. Every actual snake satisfies the selected-degree restrictions, the bound of two on fully represented endpoints, and the exclusions of selected cycles. Its singleton counts lie between one and twenty-one. The empty-square indicators and integer quotient counters compute the five shares on these centres.
+
+For each of the first three shapes, adjoining $H\le15$ to these necessary conditions gives an inconsistent Boolean formula. For the last shape, adjoining $H\le11$ gives an inconsistent formula. The clause interpretations, contradiction certificates, coordinate transport and reversal have all passed Lean checks. Since $H$ is an integer, the exclusions give the stated bounds~\cite{countfreearchive}.
+\end{proof}
+
+\begin{theorem}[A count-conditioned share of 120]\label{thm:share120}
+Suppose the six transitions use distinct directions and the five internal singleton counts satisfy
+\[
+(\alpha_1,\alpha_2,\alpha_3,\alpha_4)=(4,5,4,2),
+\qquad 6\le\alpha_5\le21.
+\]
+Then $H\ge120$.
+\end{theorem}
+\begin{proof}
+Use the same necessary radius-four conditions with the stated count intervals. The additional inequality $H\le119$ has a contradiction certificate. Its complete clause interpretation, contradiction replay and application to arbitrary coordinate labels have passed Lean checks. Thus $H\le119$ is impossible for an actual matching snake~\cite{countfreearchive}. A feasible local forest with counts $(4,5,4,2,11)$ has total share 214; this supports local feasibility and supplies neither a complete snake nor sharpness of 120.
+\end{proof}
+
+The stronger nine-shape target is displayed below. Its status column refers to the stated target, so the completed share of twelve for $012345$ does not certify its proposed value sixteen.
+\begin{center}\small
+\begin{tabular}{c r l}
+\toprule
+Shape & Target for $H$ & Status of the local snake theorem\\\midrule
+$012031$ & 16 & Checked\\
+$012032$ & 16 & Pending\\
+$012034$ & 20 & Pending\\
+$012301$ & 16 & Pending\\
+$012304$ & 16 & Checked\\
+$012310$ & 12 & Pending\\
+$012314$ & 16 & Checked\\
+$012340$ & 16 & Pending\\
+$012345$ & 16 & Pending; the weaker bound 12 is checked\\
+\bottomrule
+\end{tabular}
+\end{center}
+All nine target formulas have independently checked native Boolean refutations. Six still lack a completed Lean chain through the contradiction and geometric interpretation. Partial replay of the $012310$ case supplies no completed local theorem. The conditional catalogue dispatcher retains precisely these six premises. The classification and dispatcher are checked separately from those premises.
+
+Theorem~\ref{thm:share120} and the count-independent bounds may apply to the same five centres. Their maximum is a valid lower bound for $H$. Adding such alternative bounds would count the same share more than once. The complete models below use the maximum rule throughout.
