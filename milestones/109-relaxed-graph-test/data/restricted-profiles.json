@@ -1,0 +1,66 @@
+{
+  "status": "EXACT_RESTRICTED_GRAPH_PROFILES",
+  "removed_edges": 2092,
+  "remaining_edges": 4944916,
+  "profiles": [
+    {
+      "profile": "completed",
+      "mean": 483,
+      "range": 551,
+      "previous_range": 551,
+      "edges": 4944916,
+      "removed_edges": 2092,
+      "iterations": 27,
+      "all_remaining_inequalities_checked": true,
+      "sharp_cycle_original_indices": [
+        372796,
+        2610423,
+        3534483,
+        1650991
+      ],
+      "sharp_cycle_survives": true,
+      "potential_file": "completed-restricted-potential.i64.gz",
+      "potential_sha256": "c1f19f1c83debd2b98d5a14d8a9af1f400484d92db766d0d499fa723399e6539",
+      "remaining_weight_sha256": "f24b355114529aea22dbb845ead369763f60ed83afab4dd82a609c3e302097f7",
+      "comparison_bound": "157625/669",
+      "comparison_integer_bound": 235,
+      "seconds": 3.375
+    },
+    {
+      "profile": "conditional_floor18",
+      "mean": 496,
+      "range": 602,
+      "previous_range": 602,
+      "edges": 4944916,
+      "removed_edges": 2092,
+      "iterations": 21,
+      "all_remaining_inequalities_checked": true,
+      "sharp_cycle_original_indices": [
+        1131395,
+        2139224,
+        17417
+      ],
+      "sharp_cycle_survives": true,
+      "potential_file": "conditional_floor18-restricted-potential.i64.gz",
+      "potential_sha256": "2ce419949063b34d69d578769a8029bcb1fe3e68bb325069a997057ec1f43d60",
+      "remaining_weight_sha256": "80b7822384b801bec06011fc1364a8cff1ae920be96ad78b1b56ff16bda57534",
+      "comparison_bound": "551765/2348",
+      "comparison_integer_bound": 234,
+      "seconds": 1.75
+    }
+  ],
+  "source_files_sha256": {
+    "milestones/109-relaxed-graph-test/data/NewRelaxed109-audit.json": "002c9249e064b0250dd002c9fcc7a3197ad8f269d17789140cba0ae229f2c427",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/73-countfree-share-catalogue/data/proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18.json": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+    "milestones/99-defined-potential-certificates/data/defined-potential-audit.json": "f3e8331d4eddbc78a882db705b14b055ac50724f58791cca09e7080d2d42f643",
+    "milestones/109-relaxed-graph-test/data/candidate-graph-screen.json": "a83d142547051b647e34bde1c9b1243d578db81f073224e311cf400addb449fa"
+  },
+  "removed_full_keys_sha256": "0e37ee150d3cb7d62e17146491aa2461b1e4d83944f25ac242ab6c53a6a15fab",
+  "script_sha256": "2d26836e40a02776a5f2c195ff24930485053f972e45c29bc797fb6b7680059c",
+  "seconds": 11.406000000002678,
+  "scope": "The new exclusion has a checked actual-snake theorem. Both restricted finite profiles have exact potentials and surviving sharp cycles. A new complete restricted-graph certificate and assembly are not provided; no new numerical snake bound is claimed."
+}

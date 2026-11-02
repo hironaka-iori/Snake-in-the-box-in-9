@@ -2,23 +2,23 @@
 
 Start with [current status](CURRENT_STATUS.md), the
 [continuation assignment](NEXT_AGENT_PROMPT.md), and
-[milestone 108](../milestones/108-smaller-reference-recovery/README.md).
-A relaxed three-count exclusion covers seven exact reference entries.
-Together with milestone 107, eight entries are checked and 1,370 remain.
-The checked remaining-list equivalence supplies the full union premise once
-that residual list is proved.
+[milestone 109](../milestones/109-relaxed-graph-test/README.md).
+The new restriction for five distinct transition directions applies to actual
+snakes and excludes 2,092 accepted graph keys. A separate restricted experiment
+retains both sharp cycles and the same numerical profile comparisons.
 
-Milestone 104's complete potential batch remains active. Verify its process
-and live record before acting. Do not start another copy or modify its active
-sources, checker or generator. Complete context coverage and final assemblies
-are still required. Both bound profiles use the reference restrictions.
+Twelve exact reference entries are checked and 1,366 remain. Ten final Lean
+modules and sixteen axiom reports pass, including the arithmetic showing that
+range reduction alone cannot improve either integer comparison at the surviving
+means. The five pending share floors remain (16,18,16,16,16).
 
-The maintained interval is 191 through 235 edges. Conditional 234 also needs
-five local floors (16,18,16,16,16). The original case 7302 target-20 replay
-remains stopped; a target-18 proof must use separate files.
+Milestone 104's original complete potential batch remains active. Verify its
+recorded process before acting. Do not duplicate it or alter its active graph,
+sources, checker or generator. The new restricted graph experiment is separate
+and does not have a complete Lean graph certificate.
 
-The manuscript remains revision 106, preserving all authors and local hyperlink
-settings. Its open source and repository mirror are identical. The built-in
-compiler was unavailable before TeX processing; no updated PDF is verified.
-Only necessary, repeatedly used mathematical concepts should be defined.
-The next full manuscript revision is scheduled for 116.
+The maintained interval is 191 through 235 edges. Conditional 234 and the exact
+optimum remain unresolved. The manuscript remains revision 106, preserving the
+three authors and local hyperlink settings. Its next full revision is 116.
+The built-in compiler failed before TeX processing; no current PDF is verified.
+Define only necessary concepts that are used repeatedly.

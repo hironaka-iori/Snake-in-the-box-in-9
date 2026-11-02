@@ -1,0 +1,277 @@
+{
+  "status": "PASS_ACTUAL_SNAKE_EXCLUSION_AND_RESTRICTED_GRAPH_AUDIT",
+  "modules": [
+    {
+      "module": "ActualRelaxed109",
+      "receipt": "milestones/109-relaxed-graph-test/data/ActualRelaxed109-audit.json",
+      "receipt_sha256": "8489073d2e62b133ae9cc53c24fbd8cb7ff458217893df8d885cbbf7d8d4f332",
+      "seconds": 10.046000000002095
+    },
+    {
+      "module": "Recovered109.LocalWindowCnf.D01234A1542",
+      "receipt": "milestones/109-relaxed-graph-test/data/Recovered109.LocalWindowCnf.D01234A1542-audit.json",
+      "receipt_sha256": "3babd3a8e73f5f6f9f5047f1d993fdd1808175030dd4ed3054d0cdefcd430b7e",
+      "seconds": 4.186999999998079
+    },
+    {
+      "module": "Recovered109.LocalWindowSat.D01234A1542",
+      "receipt": "milestones/109-relaxed-graph-test/data/Recovered109.LocalWindowSat.D01234A1542-audit.json",
+      "receipt_sha256": "e1eb22915fd5d4d4f3d1f06bb4d5fc3ec92b614ca2c51e8e846d7b1c852e21c0",
+      "seconds": 25.18699999999808
+    },
+    {
+      "module": "Recovered109.LocalWindowUnsat.D01234A1542.Data0",
+      "receipt": "milestones/109-relaxed-graph-test/data/Recovered109.LocalWindowUnsat.D01234A1542.Data0-audit.json",
+      "receipt_sha256": "5d563df5163c56a024a03fec08201125e2e0247ee8bb0d47462f6f82d030e3a2",
+      "seconds": 1.264999999999418
+    },
+    {
+      "module": "Recovered109.LocalWindowUnsat.D01234A1542.Data1",
+      "receipt": "milestones/109-relaxed-graph-test/data/Recovered109.LocalWindowUnsat.D01234A1542.Data1-audit.json",
+      "receipt_sha256": "ca595f7001634f24d525c816325970e5021b3dbc59f77e1355810685f02232df",
+      "seconds": 1.235000000000582
+    },
+    {
+      "module": "Recovered109.LocalWindowUnsat.D01234A1542.Check1",
+      "receipt": "milestones/109-relaxed-graph-test/data/Recovered109.LocalWindowUnsat.D01234A1542.Check1-audit.json",
+      "receipt_sha256": "c177404876576cabdc6d464fb71462c5504ce3df08d410793771bf05ab1d6ea9",
+      "seconds": 1.7339999999967404
+    },
+    {
+      "module": "Recovered109.LocalWindowUnsat.D01234A1542",
+      "receipt": "milestones/109-relaxed-graph-test/data/Recovered109.LocalWindowUnsat.D01234A1542-audit.json",
+      "receipt_sha256": "8791af40aa2f858f03dbb36d7e54692ad996c00fae19acb8fd41ffac0b628fdb",
+      "seconds": 1.2190000000045984
+    },
+    {
+      "module": "NewRelaxed109",
+      "receipt": "milestones/109-relaxed-graph-test/data/NewRelaxed109-audit.json",
+      "receipt_sha256": "002c9249e064b0250dd002c9fcc7a3197ad8f269d17789140cba0ae229f2c427",
+      "seconds": 46.38999999999942
+    },
+    {
+      "module": "ReferenceCoverage109",
+      "receipt": "milestones/109-relaxed-graph-test/data/ReferenceCoverage109-audit.json",
+      "receipt_sha256": "fd547077fac6f4b47cbf308d50dd092a3e63436d637ad913d70d203c63ee2bc8",
+      "seconds": 15.23399999999674
+    },
+    {
+      "module": "RangeBarrier109",
+      "receipt": "milestones/109-relaxed-graph-test/data/RangeBarrier109-audit.json",
+      "receipt_sha256": "1f9541eb23f2ea93512429232a20b63ae4e84fac2b0bb454f8801bfaffcc3b04",
+      "seconds": 6.48399999999674
+    }
+  ],
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.RelaxedGraph109.actual_three_counts",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.actual_forward_retention",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.actual_reverse_retention",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.relaxed_01234_refuted",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.actual_01234_counts",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.actual_01234_forward",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.actual_01234_reverse",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.LocalWindow.D01234A1542.check",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.LocalWindow.D01234A1542.sat",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.LocalWindow.D01234A1542.unsat",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.LocalWindow.D01234A1542.ok1",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.twelve_reference_entries_refuted",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.reference_union_iff_remaining_twelve",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.remaining_twelve_key_count",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.completed_comparison_barrier",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.RelaxedGraph109.conditional_comparison_barrier",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "reference_index": 1006,
+  "root": "D01234A1542",
+  "directions": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "symbols": [
+    1,
+    5,
+    4,
+    2
+  ],
+  "relaxed_bounds": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      2
+    ]
+  ],
+  "recovered_reference_indices": [
+    0,
+    472,
+    495,
+    535,
+    572,
+    602,
+    619,
+    620,
+    1006,
+    1010,
+    1011,
+    1014
+  ],
+  "independent_clause_identity": true,
+  "independent_rup_lemmas": 270,
+  "independent_rup_hints": 1343,
+  "locally_recovered_reference_entries": 12,
+  "remaining_reference_entries": 1366,
+  "full_reference_union_checked": false,
+  "new_mathematical_definitions": 0,
+  "actual_snake_restriction_checked": true,
+  "comparison_range_barriers_checked": true,
+  "numerical_graph_audits": [
+    {
+      "path": "graph-test.json",
+      "status": "NO_ADDITIONAL_ACCEPTED_KEYS_EXCLUDED",
+      "sha256": "24a1916619a1e547b6b1b2ca99854fc0f482801541f37a35401eb363760148d3"
+    },
+    {
+      "path": "small-core-screen.json",
+      "status": "UNTESTED_RELAXATION_CANDIDATES",
+      "sha256": "8801400798c1d6dca2437d032aa8af4844f5c4bc9b2dbb9b77731fed34b29bc1"
+    },
+    {
+      "path": "candidate-graph-screen.json",
+      "status": "HYPOTHETICAL_RELAXATION_GRAPH_SCREEN",
+      "sha256": "a83d142547051b647e34bde1c9b1243d578db81f073224e311cf400addb449fa"
+    },
+    {
+      "path": "restricted-profiles.json",
+      "status": "EXACT_RESTRICTED_GRAPH_PROFILES",
+      "sha256": "b38036cb72850309d8310dd173b79b040164461e2238ad0da73693270a7ad7eb"
+    },
+    {
+      "path": "obstruction-survival.json",
+      "status": "FIVE_FLOOR_OBSTRUCTIONS_SURVIVE_PROVED_RESTRICTION",
+      "sha256": "e86fdd9922b9e0b3f9cbcaf41706e9042b4f0cd1969454d52f4cff7364a56ddb"
+    }
+  ],
+  "excluded_full_keys": 2092,
+  "restricted_graph_edges": 4944916,
+  "complete_restricted_graph_lean_certificate": false,
+  "input_pins_sha256": "815d71b344fec20027c516a33ca0ce12070cfbc2c18744e02d3c99c747d08a59",
+  "generation_sha256": "362a90a170d72b580984d63f0ab1b63e84f8770e86d8c6daa15a03c33e24a2d0",
+  "scope": "Lean checks the relaxed 01234 exclusion for actual snakes, both graph orientations, and 12 exact reference entries with 1366 remaining. Independent integer graph calculations remove 2092 keys but retain means 483/496, ranges 551/602, and all five floor obstructions. No new numerical bound or clean dependency rebuild."
+}

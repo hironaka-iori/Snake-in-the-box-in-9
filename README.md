@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 108](milestones/108-smaller-reference-recovery/README.md) checks a relaxed three-count exclusion covering seven reference entries; eight entries are now discharged and 1,370 remain. The complete potential batch continues. The numerical interval and paper revision 106 are unchanged.
+Latest continuation: [milestone 109](milestones/109-relaxed-graph-test/README.md) proves a restriction for actual snakes and excludes 2,092 graph keys in a separate experiment. Both numerical profile bounds remain unchanged. Twelve reference entries are checked and 1,366 remain; the complete potential batch continues.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
@@ -18,7 +18,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
 
-Next research priority: Test whether the relaxed 012304 exclusion removes any currently accepted full graph keys in either orientation, for both potential profiles. If it adds no graph restriction, inspect other small archived cores for unnecessary count assumptions and broader catalogue coverage. Preserve the running milestone 104 batch.
+Next research priority: Screen the remaining archived cores for relaxed count bounds that exclude a current sharp-cycle key. All sixteen small candidates screened in milestone 109 miss both sharp cycles. Rank cycle hits before removed-edge counts and verify candidate restrictions in Lean. Preserve the running milestone 104 batch.
 
 ## Historical checkpoints
 

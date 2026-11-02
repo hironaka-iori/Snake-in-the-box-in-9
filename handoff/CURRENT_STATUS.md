@@ -1,5 +1,38 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 109 checkpoint
+
+For five consecutive distinct transition directions, a new checked
+restriction requires the first singleton-square count to be at least 2,
+the second to be at least 6, or the fourth to be at least 3. The third is
+unrestricted. The 441-clause core has 270 regenerated deductions and 1,343
+hints. Lean checks the relaxed semantics and its actual-snake application.
+
+Exact enumeration excludes 2,092 of 4,947,008 accepted full graph keys.
+The separate restricted experiment has 4,944,916 keys. Both sharp cycles
+survive: the profiles remain at mean 483/range 551 and mean 496/range 602.
+All five one-unit floor obstructions survive. All sixteen screened relaxed
+boxes miss both sharp cycles. Lean also checks that even range zero cannot
+improve either integer comparison while the respective mean survives.
+
+Twelve exact reference entries are now checked. Lean proves the full union
+equivalent to the filtered assertion for 1,366 remaining entries. Ten final
+modules and sixteen printed axiom reports pass. No mathematical definition
+was added. The native graph computations remain separately labelled evidence.
+
+At the immutable process-verified observation, milestone 104 was RUNNING with
+42/791 completed-profile contexts and 41/791
+conditional-profile contexts checked. Its active module was CompletedBatch104G038.
+The active original graph, checker and generator remain unchanged.
+
+The maintained interval remains 191 through 235 edges. The contributor proof
+and archived audit support 235, with a complete independent rebuild pending.
+Conditional 234 still needs the remaining reference union, complete graph
+certificates and five local floors (16,18,16,16,16). The exact optimum and
+conjecture 196 remain open. Paper revision 106 is unchanged; next revision 116.
+
+Earlier checkpoint sections below are historical snapshots.
+
 ## Milestone 108 checkpoint
 
 Lean now excludes the simultaneous singleton-count bounds 2,2,3 at

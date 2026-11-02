@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 109: actual-snake restriction and graph test](109-relaxed-graph-test/README.md). A checked restriction excludes 2,092 keys; both profile bounds and five floor obstructions survive. Twelve reference entries checked, 1,366 remaining.
+
 - [Milestone 108: relaxed exclusion and eight recovered entries](108-smaller-reference-recovery/README.md). One smaller contradiction covers seven exact keys; Lean checks the 1,370-entry remaining obligation.
 
 - [Milestone 107: first recovered reference refutation](107-reference-refutation-recovery/README.md). Exact input, regenerated LRAT, closed Lean entry and remaining-list equivalence; 1,377 entries remain.
