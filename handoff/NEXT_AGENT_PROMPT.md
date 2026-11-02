@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, milestone 90's witness checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
+`handoff/CURRENT_STATUS.md`, milestone 91's completed cache experiment and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -86,17 +86,32 @@ shape expressions. Full compatibility still retains catalogue guards, so
 caching it by key index alone misses this reduction. Use WitnessFactors'
 normalized shape definitions and prove descriptor/source correspondences.
 
-The next bounded task is a same-class reference-shape reuse pilot. Include
-all correspondence and assembly checks in the comparison; no speedup is yet
-measured. Then expand concrete witness certification, certify context-to-class
-assignment, and connect diagram membership to full-key rows and endpoints.
+Milestone 91 has completed that same-class experiment. It checks a certified
+shape-table substitution and all concrete descriptor matches for 156 patterns
+serving the 3,732 reference entries. The 108 nonreference entries use unchanged
+compatibility. Two count lists serve the six jobs. Eight new audits pass;
+the direct source is byte-identical to milestone 90 and its two prior theorems
+are rechecked. The final membership hypotheses and conclusion match exactly.
+
+Direct trials took 18.812/37.875 seconds; cached trials 24.203/28.016 seconds.
+Cached proof time includes every descriptor and assembly check, with extra
+generic/data setup of 46.125/45.219 seconds. Two other proof processes were
+active, so no consistent performance advantage is established. Select the
+direct balanced-lookup method for the full witness batch. Preserve the sound
+cache theorem, but do not repeat this benchmark without a changed representation.
+
+The next task is to expand the direct checker to the saved 507 base jobs and
+three separate history heads, using original list orders and same-length
+checks. The 788 head-free contexts use history transport. Class 85's two heads
+share one tail; class 89 has the remaining head. Keep heads at position zero.
+Combine validity with the completed geometric class certificates, then certify
+the complete context assignment and saved full-key rows and endpoints.
 Keep both reference-catalogue premises explicit until discharged.
 
-The newer geometric observation in milestone90 covers classes 0 through 12;
-the two continuing process handles remain 23168 and 14427. The case7302
-snapshot contains 449 distinct successful modules and no final
-share audit. Use current actual process state, not an older session count,
-before deciding whether to resume. The saved snapshots are historical.
+Milestone 91 observes geometric classes 0 through 19 and 493 distinct successful
+case7302 modules, with no final share audit. The process handles remain 23168
+and 14427. Inspect their actual current state before resuming anything; the
+cached-pilot handle 70247 is terminal and successful. Do not restart a live job.
 
 After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.

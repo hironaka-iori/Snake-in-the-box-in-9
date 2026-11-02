@@ -1,0 +1,84 @@
+{
+  "status": "PASS_CERTIFIED_SHAPE_REUSE_WITH_INCONCLUSIVE_TIMING",
+  "theorem_audits": 8,
+  "distinct_checked_theorems_including_baseline": 10,
+  "rechecked_baseline_theorems": 2,
+  "modules": [
+    {
+      "module": "ShapeCache",
+      "receipt": "milestones/91-reference-shape-reuse/data/ShapeCache-audit.json",
+      "receipt_sha256": "9d8bc84127a7bd5031cd294d1528e773380e167f21d74f684ea133211a7788c6",
+      "theorem_audits": 3,
+      "seconds": 46.125
+    },
+    {
+      "module": "CachePilotData",
+      "receipt": "milestones/91-reference-shape-reuse/data/CachePilotData-audit.json",
+      "receipt_sha256": "a61aeb42f1c35b413b13be5fe809f96b209e0bbadafd92cd6f217f437c846287",
+      "theorem_audits": 0,
+      "seconds": 45.21900000000096
+    },
+    {
+      "module": "CachePilotChecks",
+      "receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-audit.json",
+      "receipt_sha256": "1945c42d4fa6dee030aee05287045fd412fdea649817300f155c3cf67ee677a4",
+      "theorem_audits": 5,
+      "seconds": 28.01599999999962
+    },
+    {
+      "module": "DirectPilotChecks",
+      "receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-audit.json",
+      "receipt_sha256": "3b210597b60c5a775913d05cc9c3fcfbda948f38e49e926cdbbd11387a79ca79",
+      "theorem_audits": 2,
+      "seconds": 37.875
+    }
+  ],
+  "generic_new_audits": 3,
+  "concrete_new_audits": 5,
+  "concrete_class": 1,
+  "directions": [
+    1,
+    3,
+    307,
+    308,
+    310,
+    312
+  ],
+  "entries": 3840,
+  "reference_entries": 3732,
+  "certified_shapes": 156,
+  "nonreference_fallbacks": 108,
+  "count_lists": 2,
+  "all_contexts_checked": false,
+  "new_numerical_bound": false,
+  "benchmark_summary_sha256": "7663de6462d2fd47e218406856f7f35d56774f0b8f3a12aa24ffa6c8498df883",
+  "observed_geometry_classes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "new_geometry_audits": 28,
+  "next_method": "Direct balanced-lookup witness certification",
+  "reference_premises": [
+    "AllRefuted6K235",
+    "AllRefuted236"
+  ],
+  "scope": "Generic certified shape substitution and complete six-direction cache pilot checked. Direct comparison repeats prior theorems. No full finite coverage, graph interpretation or improved bound."
+}

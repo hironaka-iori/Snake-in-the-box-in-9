@@ -1,0 +1,80 @@
+{
+  "module": "DirectPilotChecks",
+  "trial": 1,
+  "exit_code": 0,
+  "seconds": 18.811999999999898,
+  "source_sha256": "e377af490b0bd03f0666b480df3a6dd71417ac9529bb479d776ec1d070bb2cab",
+  "log_sha256": "86f34e4ad2e2f65fe4ccd411c79dcc2593b11c82fb14f56d10ff03baae617f21",
+  "dependencies": {
+    "milestones\\90-context-witness-certificates\\data\\Class001WitnessData-audit.json": "d0892a908504a2eaf3bcd190ba1cadb297636c633373852819cf218994b83db1",
+    "milestones\\90-context-witness-certificates\\data\\WitnessTablesChecks-audit.json": "1ef0a67b7a0fde9a34deb0eecf17b90783b1fc519d60b5cb9cc78b277370ac93",
+    "milestones\\89-shared-cover-certification\\data\\Balanced001Checks-audit.json": "62e8c697f01d6bf9dc786872f1edefa2df432a9da6d094489cb3cacb0ad6ccbd",
+    "milestones\\89-shared-cover-certification\\data\\SharedAssembly-audit.json": "b3dad14aa0ba805c1f10b0cde11e24d55c210a7efb0b9a2998116129a6a00725"
+  },
+  "checker_sha256": "082c233dd734f2b3c9b7650974d9c7ac1cdcb5358190cfa4cfc0b6c2ceaaa694",
+  "processes_before": [
+    {
+      "ProcessId": 51148,
+      "ParentProcessId": 49744,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -X utf8 milestones/89-shared-cover-certification/scripts/resume7302_unique.py"
+    },
+    {
+      "ProcessId": 28348,
+      "ParentProcessId": 45232,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -X utf8 milestones/89-shared-cover-certification/scripts/check_balanced_covers.py --classes all"
+    },
+    {
+      "ProcessId": 46928,
+      "ParentProcessId": 51148,
+      "Name": "lake.exe",
+      "CommandLine": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe env lean -s 65536 -R E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean -o E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\build\\semantic\\LocalWindowUnsat\\ShareWindow7302\\Check77.fresh-89-1793625531541364100.olean E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\\LocalWindowUnsat\\ShareWindow7302\\Check77.lean"
+    },
+    {
+      "ProcessId": 21060,
+      "ParentProcessId": 46928,
+      "Name": "lean.exe",
+      "CommandLine": "\"lean\" \"-s\" \"65536\" \"-R\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\" \"-o\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\build\\semantic\\LocalWindowUnsat\\ShareWindow7302\\Check77.fresh-89-1793625531541364100.olean\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\\LocalWindowUnsat\\ShareWindow7302\\Check77.lean\""
+    },
+    {
+      "ProcessId": 29360,
+      "ParentProcessId": 40484,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -X utf8 milestones/91-reference-shape-reuse/scripts/check_pilot.py"
+    },
+    {
+      "ProcessId": 28496,
+      "ParentProcessId": 28348,
+      "Name": "lake.exe",
+      "CommandLine": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe env lean -s 65536 -R E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\lean -o E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\build\\Balanced017Data.fresh.olean E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\lean\\Balanced017Data.lean"
+    },
+    {
+      "ProcessId": 47648,
+      "ParentProcessId": 28496,
+      "Name": "lean.exe",
+      "CommandLine": "\"lean\" \"-s\" \"65536\" \"-R\" \"E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\lean\" \"-o\" \"E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\build\\Balanced017Data.fresh.olean\" \"E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\lean\\Balanced017Data.lean\""
+    }
+  ],
+  "status": "PASS_REFERENCE_SHAPE_PILOT",
+  "olean_sha256": "5e20d8a149788a26b7c77457eaa7fb74d1c188d57367658c7dad98e6e08aedd1",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.Witness90.class001_jobs_valid",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Witness90.class001_numeric_membership",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "immutable_trial_log": "milestones/91-reference-shape-reuse/logs/DirectPilotChecks-trial-1793627285232778200-1.log",
+  "scope": "Named concrete module only; a repeated theorem check adds no new distinct result."
+}

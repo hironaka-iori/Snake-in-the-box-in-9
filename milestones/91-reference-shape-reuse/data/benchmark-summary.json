@@ -1,0 +1,70 @@
+{
+  "status": "PASS_SAME_CONCLUSION_COMPARISON_NO_ESTABLISHED_SPEEDUP",
+  "trials": [
+    {
+      "module": "CachePilotData",
+      "receipt": "milestones/91-reference-shape-reuse/data/CachePilotData-trial-1793627285232778200-0-audit.json",
+      "receipt_sha256": "a61aeb42f1c35b413b13be5fe809f96b209e0bbadafd92cd6f217f437c846287",
+      "theorem_audits": 0,
+      "seconds": 45.21900000000096,
+      "trial": 0,
+      "other_lean_processes_before": 2,
+      "new_theorems": 0
+    },
+    {
+      "module": "DirectPilotChecks",
+      "receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-trial-1793627285232778200-1-audit.json",
+      "receipt_sha256": "b061faaeb42733ef6e67b211dbc6638be8e997dc2e4aae67eccbc208f33ab37c",
+      "theorem_audits": 2,
+      "seconds": 18.811999999999898,
+      "trial": 1,
+      "other_lean_processes_before": 2,
+      "new_theorems": 0
+    },
+    {
+      "module": "CachePilotChecks",
+      "receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-trial-1793627285232778200-2-audit.json",
+      "receipt_sha256": "0f6d33c0ebc4b6a39bbf2502c89db4cf1ead21d489a28a0889a82c51af3b3cd6",
+      "theorem_audits": 5,
+      "seconds": 24.20299999999952,
+      "trial": 2,
+      "other_lean_processes_before": 2,
+      "new_theorems": 0
+    },
+    {
+      "module": "CachePilotChecks",
+      "receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-trial-1793627285232778200-3-audit.json",
+      "receipt_sha256": "1945c42d4fa6dee030aee05287045fd412fdea649817300f155c3cf67ee677a4",
+      "theorem_audits": 5,
+      "seconds": 28.01599999999962,
+      "trial": 3,
+      "other_lean_processes_before": 2,
+      "new_theorems": 0
+    },
+    {
+      "module": "DirectPilotChecks",
+      "receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-trial-1793627285232778200-4-audit.json",
+      "receipt_sha256": "3b210597b60c5a775913d05cc9c3fcfbda948f38e49e926cdbbd11387a79ca79",
+      "theorem_audits": 2,
+      "seconds": 37.875,
+      "trial": 4,
+      "other_lean_processes_before": 2,
+      "new_theorems": 0
+    }
+  ],
+  "direct_seconds": [
+    18.811999999999898,
+    37.875
+  ],
+  "cached_seconds": [
+    24.20299999999952,
+    28.01599999999962
+  ],
+  "generic_setup_seconds": 46.125,
+  "cache_data_seconds": 45.21900000000096,
+  "direct_source_byte_identical": true,
+  "repeated_objects_byte_identical": true,
+  "proof_scope": "Cached proof includes all finite shape, count, descriptor, guard, length and assembly checks.",
+  "limits": "Two trials per method, two other active Lean workloads, no isolation or controlled load. Generation and shared old dependencies excluded.",
+  "decision": "Use direct balanced-lookup checker for the full witness batch. Cache is sound; no consistent performance advantage established."
+}

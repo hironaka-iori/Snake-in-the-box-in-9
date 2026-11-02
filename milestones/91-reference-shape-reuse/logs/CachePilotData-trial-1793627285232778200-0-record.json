@@ -1,0 +1,58 @@
+{
+  "module": "CachePilotData",
+  "trial": 0,
+  "exit_code": 0,
+  "seconds": 45.21900000000096,
+  "source_sha256": "9e10c9e8ed38b5d56526a2a8d2edaa8d33cbfb17363a2336b18323a9af5a25e9",
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "dependencies": {
+    "milestones\\91-reference-shape-reuse\\data\\ShapeCache-audit.json": "9d8bc84127a7bd5031cd294d1528e773380e167f21d74f684ea133211a7788c6",
+    "milestones\\89-shared-cover-certification\\data\\BalancedLookup-audit.json": "14c9cfabd213629b7ea03aa57f49400211f14c51299e6d9ecf509853c9f5e4ff",
+    "milestones\\90-context-witness-certificates\\data\\Class001WitnessData-audit.json": "d0892a908504a2eaf3bcd190ba1cadb297636c633373852819cf218994b83db1"
+  },
+  "checker_sha256": "082c233dd734f2b3c9b7650974d9c7ac1cdcb5358190cfa4cfc0b6c2ceaaa694",
+  "processes_before": [
+    {
+      "ProcessId": 51148,
+      "ParentProcessId": 49744,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -X utf8 milestones/89-shared-cover-certification/scripts/resume7302_unique.py"
+    },
+    {
+      "ProcessId": 28348,
+      "ParentProcessId": 45232,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -X utf8 milestones/89-shared-cover-certification/scripts/check_balanced_covers.py --classes all"
+    },
+    {
+      "ProcessId": 51292,
+      "ParentProcessId": 28348,
+      "Name": "lake.exe",
+      "CommandLine": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe env lean -s 65536 -R E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\lean -o E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\build\\Balanced016Checks.fresh.olean E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\lean\\Balanced016Checks.lean"
+    },
+    {
+      "ProcessId": 2552,
+      "ParentProcessId": 51292,
+      "Name": "lean.exe",
+      "CommandLine": "\"lean\" \"-s\" \"65536\" \"-R\" \"E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\lean\" \"-o\" \"E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\build\\Balanced016Checks.fresh.olean\" \"E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\lean\\Balanced016Checks.lean\""
+    },
+    {
+      "ProcessId": 46928,
+      "ParentProcessId": 51148,
+      "Name": "lake.exe",
+      "CommandLine": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe env lean -s 65536 -R E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean -o E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\build\\semantic\\LocalWindowUnsat\\ShareWindow7302\\Check77.fresh-89-1793625531541364100.olean E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\\LocalWindowUnsat\\ShareWindow7302\\Check77.lean"
+    },
+    {
+      "ProcessId": 21060,
+      "ParentProcessId": 46928,
+      "Name": "lean.exe",
+      "CommandLine": "\"lean\" \"-s\" \"65536\" \"-R\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\" \"-o\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\build\\semantic\\LocalWindowUnsat\\ShareWindow7302\\Check77.fresh-89-1793625531541364100.olean\" \"E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\\LocalWindowUnsat\\ShareWindow7302\\Check77.lean\""
+    },
+    {
+      "ProcessId": 29360,
+      "ParentProcessId": 40484,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -X utf8 milestones/91-reference-shape-reuse/scripts/check_pilot.py"
+    }
+  ]
+}

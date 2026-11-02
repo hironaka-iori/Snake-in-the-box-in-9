@@ -12,14 +12,18 @@ Use its [checkpoint](../milestones/86-paper-revision/data/checkpoint.json) and
 [manifest](../milestones/86-paper-revision/data/file-manifest.json) for the
 paper revision and its historical handover and replay observation.
 
-The current structural proof checkpoint is
-[milestone 90](../milestones/90-context-witness-certificates/README.md), with
-17 Lean theorem audits, a six-direction retained-code membership pilot,
-exact balanced witness lookups and general witness factorization. The saved
-791-context plan and factor profile remain computational beyond this pilot.
-Use its [checkpoint](../milestones/90-context-witness-certificates/data/checkpoint.json)
-and [manifest](../milestones/90-context-witness-certificates/data/file-manifest.json)
-for current shared-file versions and frozen observations of both live jobs.
+The current checkpoint is
+[milestone 91](../milestones/91-reference-shape-reuse/README.md), with eight
+new Lean audits for certified reference-pattern reuse and its concrete pilot.
+The completed timing comparison gives no consistent speed advantage; continue
+with the direct balanced-lookup witness method. Its
+[checkpoint](../milestones/91-reference-shape-reuse/data/checkpoint.json) and
+[manifest](../milestones/91-reference-shape-reuse/data/file-manifest.json)
+record current shared-file versions and both continuing proof runs.
+
+[Milestone 90](../milestones/90-context-witness-certificates/README.md) supplies
+the checked direct pilot, exact lookup tables, witness factorization, the
+507-job plan and complete computational factor profile. Reuse that data.
 
 [Milestone 89](../milestones/89-shared-cover-certification/README.md) supplies
 shared cover geometry and materialized context witnesses. Its sequential
@@ -67,7 +71,7 @@ records the forty-rule retention theorem, 66 audits, exact-loop comparison,
 receipt hashes, repository refs and unchanged paper hash.
 Its [saved-file manifest](../milestones/81-recovered-short-rule-retention/data/file-manifest.json)
 records the versions saved with that milestone. Shared handover files have since
-been updated; use milestone 90's manifest for their current versions.
+been updated; use milestone 91's manifest for their current versions.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
 inspected contributor theorem and saved audit, without a fresh complete local

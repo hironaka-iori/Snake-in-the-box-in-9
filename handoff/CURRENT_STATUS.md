@@ -239,6 +239,27 @@ final audit remain pending. Both live processes must be inspected before
 any restart. The checkpoint contains immutable observations and a delta log
 archive. The upper-bound and reference-premise limitations remain unchanged.
 
+Milestone 91 completes the reference-pattern reuse experiment. Three generic
+Lean audits certify bounded cache lookup with complete descriptor equality;
+five concrete audits check 156 patterns, two count lists, all six assignments
+and the same membership conclusion as the direct pilot. The original 3,732
+reference entries and 108 nonreference entries remain covered. The two direct
+theorems are rechecked for timing and are not new results.
+
+Direct proof trials took 18.812 and 37.875 seconds; cached trials took 24.203
+and 28.016 seconds. Cached timings include descriptor correspondence and
+assembly. Additional generic and data setup took 46.125 and 45.219 seconds.
+Two other Lean processes were active throughout; the small concurrent sample
+does not establish a speed advantage. The selected method for the full witness
+batch is the direct balanced-lookup checker. Do not repeat the cache benchmark
+without a materially changed representation or a new reason.
+
+The milestone91 snapshot records geometric classes 0 through 19 and 493
+distinct successful case7302 modules. Both existing processes continue; the
+full geometry batch and local-share theorem remain pending. Use the newer
+snapshot and actual process state when continuing. The complete context
+assignment, full-key membership and endpoint identities remain open.
+
 The remaining structural work is to supply the two closed reference
 catalogue proofs and a concrete Lean retention cover with endpoint-column
 identities. The universal conditional indexing argument is now supplied.
@@ -287,7 +308,7 @@ guards, interval-filter assembly, catalogue audit and a later replay observation
 Milestone 81 saves the forty-rule theorem, independent review and exact comparison.
 Milestone 84 saves the three-history theorem. Milestone 85 saves the exact reference
 table, conditional theorem, provenance review, exhaustive comparison and a later
-case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 90 contains the current shared handover versions and later proof-process observations.
+case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 91 contains the current shared handover versions and later proof-process observations.
 Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.

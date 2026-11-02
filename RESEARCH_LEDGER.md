@@ -474,3 +474,23 @@ The checkpoint observes classes 0 through 12 completed in the continuing
 case7302. Exact logs, dependency pins and live-state snapshots are saved.
 Neither process is restarted. Bounds remain 191 through 235, with 234
 conditional. Paper revision 86 is unchanged; the next rewrite is due at 96.
+
+
+## Milestone 91: certified reference-pattern reuse
+
+2 November 2026. Eight new Lean audits check generic bounded shape substitution
+and the same six-case membership result using 156 cached patterns for 3,732
+reference occurrences. Catalogue, placement and index guards, complete descriptor
+equality and zip lengths are checked. The 108 nonreference occurrences retain
+their original compatibility tests. The direct source is byte-identical to 90;
+its two theorem audits are repeated for timing and add no new results.
+
+Direct trials took 18.812/37.875 seconds; cached trials 24.203/28.016 seconds,
+including descriptor and assembly checks. Generic/data setup adds 46.125/45.219
+seconds. Concurrent load was not controlled. No speed advantage is established,
+so the next full batch will use the direct balanced-lookup checker and the
+saved 507-job/three-head plan. Exact trial logs and hashes are preserved.
+
+The checkpoint observes geometric classes 0 through 19 and 493 distinct successful
+case7302 modules. Both jobs continue. Bounds remain 191 through 235, with 234
+conditional; paper revision 86 is unchanged. The full research goal remains open.

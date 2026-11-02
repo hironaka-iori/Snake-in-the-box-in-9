@@ -1,0 +1,747 @@
+{
+  "status": "PASS_BOUNDED_REFERENCE_SHAPE_CACHE_PILOT_REVIEW",
+  "reviewed_at_utc": "2026-11-02T13:51:08.933741+00:00",
+  "method": "Independent constructor/literal parsing and exact request/list/shape comparisons; no Lean, solver, generator or timing run. Immutable trial receipts and logs checked separately from mutable run snapshots.",
+  "initial_audit_attempt": "A read-only audit first indexed the outer list of640boxes as if it were a single box in an extra singleton check. Corrected to select the current entry box first. No project source defect or artifact write resulted from that audit-script error.",
+  "cache": {
+    "shapes": 156,
+    "leaves": 156,
+    "maximum_depth": 8,
+    "reference_requests": 3732,
+    "nonreference_entries": 108,
+    "all_shapes_used": true,
+    "all_cached_requests_match_exact_descriptor": true,
+    "all_shapes_computationally_valid": true,
+    "shape_usage_counts": [
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      3,
+      24,
+      12,
+      5,
+      3,
+      10,
+      8,
+      4,
+      42,
+      54,
+      4,
+      60,
+      85,
+      4,
+      3,
+      95,
+      98,
+      79,
+      4,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      3,
+      24,
+      12,
+      5,
+      3,
+      10,
+      8,
+      4,
+      42,
+      54,
+      4,
+      60,
+      85,
+      4,
+      3,
+      95,
+      98,
+      79,
+      4,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      3,
+      24,
+      12,
+      5,
+      3,
+      10,
+      8,
+      4,
+      42,
+      54,
+      4,
+      60,
+      85,
+      4,
+      3,
+      95,
+      98,
+      79,
+      4,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      3,
+      24,
+      12,
+      5,
+      3,
+      10,
+      8,
+      4,
+      42,
+      54,
+      4,
+      60,
+      85,
+      4,
+      3,
+      95,
+      98,
+      79,
+      4,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      3,
+      24,
+      12,
+      5,
+      3,
+      10,
+      8,
+      4,
+      42,
+      54,
+      4,
+      60,
+      85,
+      4,
+      3,
+      95,
+      98,
+      79,
+      4,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      3,
+      24,
+      12,
+      5,
+      3,
+      10,
+      8,
+      4,
+      42,
+      54,
+      4,
+      60,
+      85,
+      4,
+      3,
+      95,
+      98,
+      79,
+      4
+    ]
+  },
+  "jobs": [
+    {
+      "direction": 1,
+      "list_id": 1,
+      "entries": 640,
+      "references": 622,
+      "nonreference": 18,
+      "unique_requested_shapes": 26
+    },
+    {
+      "direction": 3,
+      "list_id": 3,
+      "entries": 640,
+      "references": 622,
+      "nonreference": 18,
+      "unique_requested_shapes": 26
+    },
+    {
+      "direction": 307,
+      "list_id": 3,
+      "entries": 640,
+      "references": 622,
+      "nonreference": 18,
+      "unique_requested_shapes": 26
+    },
+    {
+      "direction": 308,
+      "list_id": 3,
+      "entries": 640,
+      "references": 622,
+      "nonreference": 18,
+      "unique_requested_shapes": 26
+    },
+    {
+      "direction": 310,
+      "list_id": 1,
+      "entries": 640,
+      "references": 622,
+      "nonreference": 18,
+      "unique_requested_shapes": 26
+    },
+    {
+      "direction": 312,
+      "list_id": 3,
+      "entries": 640,
+      "references": 622,
+      "nonreference": 18,
+      "unique_requested_shapes": 26
+    }
+  ],
+  "direct_baseline_byte_identical_to_90": true,
+  "cached_membership_header_exactly_matches_90": true,
+  "both_count_lists_match_payload": true,
+  "all_zip_lengths_640": true,
+  "stable_receipts": {
+    "ShapeCache": {
+      "status": "PASS_GENERIC_SHAPE_CACHE",
+      "seconds": 46.125,
+      "receipt_sha256": "9d8bc84127a7bd5031cd294d1528e773380e167f21d74f684ea133211a7788c6",
+      "audits": [
+        {
+          "theorem": "Snake9.Shape91.cachedCompatibility_sound",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.entriesCachedCompatibility_sound",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.entries_valid_of_cache",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    "WitnessFactors": {
+      "status": "PASS_GENERIC_WITNESS_FACTORIZATION",
+      "seconds": 52.875,
+      "receipt_sha256": "cb4e7ad98703f669a7b84339e4f2fd226593f5db8b3555d2560fc9cce63db727",
+      "audits": [
+        {
+          "theorem": "Snake9.Witness90.factors_eq_validator",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Witness90.entry_factors_eq_validator",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Witness90.entries_valid_of_factors",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    "WitnessTablesChecks": {
+      "status": "PASS_CONCRETE_WITNESS_PROOFS",
+      "seconds": 17.78100000000086,
+      "receipt_sha256": "1ef0a67b7a0fde9a34deb0eecf17b90783b1fc519d60b5cb9cc78b277370ac93",
+      "audits": [
+        {
+          "theorem": "Snake9.Witness90.directionsAt_eq",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.Witness90.referencesAt_eq",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.Witness90.balanced_entries_eq",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Witness90.directionTable_valid",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.Witness90.directionTable_flat",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.Witness90.referenceTable_valid",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.Witness90.referenceTable_flat",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.Witness90.referenceCount_eq",
+          "axioms": []
+        }
+      ]
+    },
+    "Class001WitnessChecks": {
+      "status": "PASS_CONCRETE_WITNESS_PROOFS",
+      "seconds": 21.125,
+      "receipt_sha256": "5cfa808f198ee8f6b39df644e36c14010dcebeec34441bed4f5d34ca25e1a850",
+      "audits": [
+        {
+          "theorem": "Snake9.Witness90.class001_jobs_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Witness90.class001_numeric_membership",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    "Balanced001Checks": {
+      "status": "PASS_BALANCED_COVER_KERNEL",
+      "seconds": 51.82800000000134,
+      "receipt_sha256": "62e8c697f01d6bf9dc786872f1edefa2df432a9da6d094489cb3cacb0ad6ccbd",
+      "audits": [
+        {
+          "theorem": "Snake9.Shared89.originalCover001",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shared89.boxTable001_valid",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.Shared89.boxTable001_flat",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.Shared89.balancedCover001",
+          "axioms": []
+        }
+      ]
+    },
+    "BalancedLookup": {
+      "status": "PASS_GENERIC_BALANCED_LOOKUP",
+      "seconds": 118.46899999999914,
+      "receipt_sha256": "14c9cfabd213629b7ea03aa57f49400211f14c51299e6d9ecf509853c9f5e4ff",
+      "audits": [
+        {
+          "theorem": "Snake9.Balanced89.size_eq_length_flatten",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.Balanced89.check_iff_valid",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.Balanced89.getD_append_eq",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.Balanced89.lookup_eq_getD",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.Balanced89.lookup_eq_list",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ]
+    }
+  },
+  "immutable_trials": [
+    {
+      "module": "CachePilotChecks",
+      "trial": 2,
+      "seconds": 24.20299999999952,
+      "receipt_sha256": "0f6d33c0ebc4b6a39bbf2502c89db4cf1ead21d489a28a0889a82c51af3b3cd6",
+      "receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-trial-1793627285232778200-2-audit.json",
+      "source_sha256": "a3ba79db8d0cfb4bed4a025cbd6d4c0d49d49d1b9455d763543bd472f3252ca6",
+      "object_sha256_recorded": "b948dd8e8d2c72a4cb9c49d495888afee52e74af0c9b5ad99d8590d7ab278ee5",
+      "immutable_log": "milestones/91-reference-shape-reuse/logs/CachePilotChecks-trial-1793627285232778200-2.log",
+      "audits": [
+        {
+          "theorem": "Snake9.Shape91.pilot_shapes_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.pilot_shape_at_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.pilot_count_lists_valid",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.pilot_cached_jobs_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.class001_cached_numeric_membership",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "process_name_counts_before": {
+        "python.exe": 3,
+        "lake.exe": 2,
+        "lean.exe": 2
+      },
+      "scope": "Immutable trial source/log matched; object hash is recorded from the completed object, which a later deliberate trial may replace."
+    },
+    {
+      "module": "CachePilotChecks",
+      "trial": 3,
+      "seconds": 28.01599999999962,
+      "receipt_sha256": "1945c42d4fa6dee030aee05287045fd412fdea649817300f155c3cf67ee677a4",
+      "receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-trial-1793627285232778200-3-audit.json",
+      "source_sha256": "a3ba79db8d0cfb4bed4a025cbd6d4c0d49d49d1b9455d763543bd472f3252ca6",
+      "object_sha256_recorded": "b948dd8e8d2c72a4cb9c49d495888afee52e74af0c9b5ad99d8590d7ab278ee5",
+      "immutable_log": "milestones/91-reference-shape-reuse/logs/CachePilotChecks-trial-1793627285232778200-3.log",
+      "audits": [
+        {
+          "theorem": "Snake9.Shape91.pilot_shapes_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.pilot_shape_at_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.pilot_count_lists_valid",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.pilot_cached_jobs_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Shape91.class001_cached_numeric_membership",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "process_name_counts_before": {
+        "python.exe": 3,
+        "lake.exe": 2,
+        "lean.exe": 2
+      },
+      "scope": "Immutable trial source/log matched; object hash is recorded from the completed object, which a later deliberate trial may replace."
+    },
+    {
+      "module": "CachePilotData",
+      "trial": 0,
+      "seconds": 45.21900000000096,
+      "receipt_sha256": "a61aeb42f1c35b413b13be5fe809f96b209e0bbadafd92cd6f217f437c846287",
+      "receipt": "milestones/91-reference-shape-reuse/data/CachePilotData-trial-1793627285232778200-0-audit.json",
+      "source_sha256": "9e10c9e8ed38b5d56526a2a8d2edaa8d33cbfb17363a2336b18323a9af5a25e9",
+      "object_sha256_recorded": "16ed39723def39247ec9c17ae778cc03ff42d51b58b457c7445de44d1e0ba7ca",
+      "immutable_log": "milestones/91-reference-shape-reuse/logs/CachePilotData-trial-1793627285232778200-0.log",
+      "audits": [],
+      "process_name_counts_before": {
+        "python.exe": 3,
+        "lake.exe": 2,
+        "lean.exe": 2
+      },
+      "scope": "Immutable trial source/log matched; object hash is recorded from the completed object, which a later deliberate trial may replace."
+    },
+    {
+      "module": "DirectPilotChecks",
+      "trial": 1,
+      "seconds": 18.811999999999898,
+      "receipt_sha256": "b061faaeb42733ef6e67b211dbc6638be8e997dc2e4aae67eccbc208f33ab37c",
+      "receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-trial-1793627285232778200-1-audit.json",
+      "source_sha256": "e377af490b0bd03f0666b480df3a6dd71417ac9529bb479d776ec1d070bb2cab",
+      "object_sha256_recorded": "5e20d8a149788a26b7c77457eaa7fb74d1c188d57367658c7dad98e6e08aedd1",
+      "immutable_log": "milestones/91-reference-shape-reuse/logs/DirectPilotChecks-trial-1793627285232778200-1.log",
+      "audits": [
+        {
+          "theorem": "Snake9.Witness90.class001_jobs_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Witness90.class001_numeric_membership",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "process_name_counts_before": {
+        "python.exe": 3,
+        "lake.exe": 2,
+        "lean.exe": 2
+      },
+      "scope": "Immutable trial source/log matched; object hash is recorded from the completed object, which a later deliberate trial may replace."
+    },
+    {
+      "module": "DirectPilotChecks",
+      "trial": 4,
+      "seconds": 37.875,
+      "receipt_sha256": "3b210597b60c5a775913d05cc9c3fcfbda948f38e49e926cdbbd11387a79ca79",
+      "receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-trial-1793627285232778200-4-audit.json",
+      "source_sha256": "e377af490b0bd03f0666b480df3a6dd71417ac9529bb479d776ec1d070bb2cab",
+      "object_sha256_recorded": "5e20d8a149788a26b7c77457eaa7fb74d1c188d57367658c7dad98e6e08aedd1",
+      "immutable_log": "milestones/91-reference-shape-reuse/logs/DirectPilotChecks-trial-1793627285232778200-4.log",
+      "audits": [
+        {
+          "theorem": "Snake9.Witness90.class001_jobs_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Witness90.class001_numeric_membership",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "process_name_counts_before": {
+        "python.exe": 3,
+        "lake.exe": 2,
+        "lean.exe": 2
+      },
+      "scope": "Immutable trial source/log matched; object hash is recorded from the completed object, which a later deliberate trial may replace."
+    }
+  ],
+  "run_status_snapshots": [
+    {
+      "path": "milestones/91-reference-shape-reuse/logs/pilot-run-1793627285232778200.json",
+      "snapshot_sha256": "8bffbf4e8fd137d04f35a97bbd40fb4c2689ee96a53eac2e06711b8122215144",
+      "status": "PASS_SELECTED_SHAPE_PILOT_TRIALS",
+      "modules": [
+        "CachePilotData",
+        "DirectPilotChecks",
+        "CachePilotChecks",
+        "CachePilotChecks",
+        "DirectPilotChecks"
+      ],
+      "active_module": null,
+      "active_trial": null,
+      "completed_records": [
+        {
+          "module": "CachePilotData",
+          "trial": 0,
+          "status": "PASS_REFERENCE_SHAPE_DATA",
+          "seconds": 45.21900000000096,
+          "receipt_sha256": "a61aeb42f1c35b413b13be5fe809f96b209e0bbadafd92cd6f217f437c846287",
+          "receipt": "milestones/91-reference-shape-reuse/data/CachePilotData-audit.json",
+          "immutable_receipt": "milestones/91-reference-shape-reuse/data/CachePilotData-trial-1793627285232778200-0-audit.json"
+        },
+        {
+          "module": "DirectPilotChecks",
+          "trial": 1,
+          "status": "PASS_REFERENCE_SHAPE_PILOT",
+          "seconds": 18.811999999999898,
+          "receipt_sha256": "b061faaeb42733ef6e67b211dbc6638be8e997dc2e4aae67eccbc208f33ab37c",
+          "receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-audit.json",
+          "immutable_receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-trial-1793627285232778200-1-audit.json"
+        },
+        {
+          "module": "CachePilotChecks",
+          "trial": 2,
+          "status": "PASS_REFERENCE_SHAPE_PILOT",
+          "seconds": 24.20299999999952,
+          "receipt_sha256": "0f6d33c0ebc4b6a39bbf2502c89db4cf1ead21d489a28a0889a82c51af3b3cd6",
+          "receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-audit.json",
+          "immutable_receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-trial-1793627285232778200-2-audit.json"
+        },
+        {
+          "module": "CachePilotChecks",
+          "trial": 3,
+          "status": "PASS_REFERENCE_SHAPE_PILOT",
+          "seconds": 28.01599999999962,
+          "receipt_sha256": "1945c42d4fa6dee030aee05287045fd412fdea649817300f155c3cf67ee677a4",
+          "receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-audit.json",
+          "immutable_receipt": "milestones/91-reference-shape-reuse/data/CachePilotChecks-trial-1793627285232778200-3-audit.json"
+        },
+        {
+          "module": "DirectPilotChecks",
+          "trial": 4,
+          "status": "PASS_REFERENCE_SHAPE_PILOT",
+          "seconds": 37.875,
+          "receipt_sha256": "3b210597b60c5a775913d05cc9c3fcfbda948f38e49e926cdbbd11387a79ca79",
+          "receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-audit.json",
+          "immutable_receipt": "milestones/91-reference-shape-reuse/data/DirectPilotChecks-trial-1793627285232778200-4-audit.json"
+        }
+      ]
+    }
+  ],
+  "source_and_input_sha256": {
+    "milestones/91-reference-shape-reuse/lean/ShapeCache.lean": "dbd327af548176318b2e726884a08d8ce7ef2738e6b494f03de8b2a8d44b2592",
+    "milestones/91-reference-shape-reuse/lean/CachePilotData.lean": "9e10c9e8ed38b5d56526a2a8d2edaa8d33cbfb17363a2336b18323a9af5a25e9",
+    "milestones/91-reference-shape-reuse/lean/CachePilotChecks.lean": "a3ba79db8d0cfb4bed4a025cbd6d4c0d49d49d1b9455d763543bd472f3252ca6",
+    "milestones/91-reference-shape-reuse/lean/DirectPilotChecks.lean": "e377af490b0bd03f0666b480df3a6dd71417ac9529bb479d776ec1d070bb2cab",
+    "milestones/91-reference-shape-reuse/scripts/build_pilot.py": "ce0dc21ce9441f7fd0482125c8082b6fc32d262ffbd0f6d0c4978c4430b7bb72",
+    "milestones/91-reference-shape-reuse/scripts/check_pilot.py": "082c233dd734f2b3c9b7650974d9c7ac1cdcb5358190cfa4cfc0b6c2ceaaa694",
+    "milestones/91-reference-shape-reuse/data/pilot-generation.json": "4681516989be64344df612a0e32aafeffd896810627f22948079edb1a73629e6",
+    "milestones/91-reference-shape-reuse/data/cache-pilot.json.gz": "a2cc1c992cf8c1d489e634491350769d3bf45b887953e19f140ffe03830cafcc",
+    "milestones/89-shared-cover-certification/data/context-witnesses.json.gz": "5dd985dc9e31441f481881895a827b7d88d68864b5104f07483adaaf86932d51",
+    "milestones/90-context-witness-certificates/data/witness-tables.json.gz": "f63ceae86c651eaaf52491b8b7d98cc3458e22cc45e593a832140c480eab5dfd",
+    "milestones/90-context-witness-certificates/data/class001-generation.json": "fb8538d636861efb1ce5fb0f4ce408bd6439132f3396a878ee7d48d783ff3e0e",
+    "milestones/90-context-witness-certificates/lean/Class001WitnessData.lean": "c41e402284c4846cfef43cd5608e47326e79f93c597beb67a471eecac67d542d",
+    "milestones/90-context-witness-certificates/data/Class001WitnessChecks-audit.json": "5cfa808f198ee8f6b39df644e36c14010dcebeec34441bed4f5d34ca25e1a850",
+    "milestones/90-context-witness-certificates/data/WitnessTablesChecks-audit.json": "1ef0a67b7a0fde9a34deb0eecf17b90783b1fc519d60b5cb9cc78b277370ac93",
+    "milestones/90-context-witness-certificates/data/WitnessFactors-audit.json": "cb4e7ad98703f669a7b84339e4f2fd226593f5db8b3555d2560fc9cce63db727",
+    "milestones/90-context-witness-certificates/lean/Class001WitnessChecks.lean": "e377af490b0bd03f0666b480df3a6dd71417ac9529bb479d776ec1d070bb2cab",
+    "milestones/90-context-witness-certificates/data/witness-batch-plan.json": "68ae7c1c81d6c714a63964c5859d0e8b3cfaa93bf7a30569252dcb22bd9f376c",
+    "milestones/90-context-witness-certificates/data/witness-pilot-review.json": "21c028fe41408da00f23ac8a3a55665a57578bc80681a3699c03034f0211b341",
+    "milestones/89-shared-cover-certification/lean/Cover001Data.lean": "9e53c208525a93bc2e09737deb58d001ce4cfe00c97b07a0c8aa2b4ee0c5a373",
+    "milestones/90-context-witness-certificates/lean/WitnessFactors.lean": "4b7c052ad6da3c0119349d72c5c9edd57c845303df2d29aa1b5a0615b04e5653",
+    "milestones/90-context-witness-certificates/lean/WitnessLookup.lean": "f04f07ffd5b21fb03d307faf447df93068646a0dee786e6df1bc604952806076",
+    "milestones/90-context-witness-certificates/lean/WitnessTablesChecks.lean": "cdd98f0f0b8b2e07d61cb34527b46f0b3b0d13c4661774db5945973865f92d6b",
+    "milestones/91-reference-shape-reuse/data/ShapeCache-audit.json": "9d8bc84127a7bd5031cd294d1528e773380e167f21d74f684ea133211a7788c6",
+    "milestones/91-reference-shape-reuse/build/ShapeCache.olean": "68fab669c83fb623809b664ca15cc3f8091bdb352025647420ad34461113f729",
+    "milestones/91-reference-shape-reuse/logs/ShapeCache.log": "bdead545422cd9ef987d64d742c57925be4880cd7066b43cb69d5f0f53f380a2",
+    "milestones/90-context-witness-certificates/build/WitnessFactors.olean": "6188e89a20233d4cf7af44ad9776ece40a95eefe3adf012eab4622499c448ab5",
+    "milestones/90-context-witness-certificates/logs/WitnessFactors.log": "3735a665fba79fd21bedf3c888525d31a26645fe782ce0b7e45be60be26f4627",
+    "milestones/90-context-witness-certificates/build/WitnessTablesChecks.olean": "40604390f1978ec97b9bb491137562142330f7d8cfa0b068dd58594789ee6570",
+    "milestones/90-context-witness-certificates/logs/WitnessTablesChecks.log": "5db9d566927d113ebf16b176ccacfb08ff3867bbdf3165ad406fb5b8bd80ad14",
+    "milestones/90-context-witness-certificates/build/Class001WitnessChecks.olean": "f4e5ed49a6b10a294a5e56234b22fe9201f46f25706b5837b7ef886dccb7a97d",
+    "milestones/90-context-witness-certificates/logs/Class001WitnessChecks.log": "86f34e4ad2e2f65fe4ccd411c79dcc2593b11c82fb14f56d10ff03baae617f21",
+    "milestones/89-shared-cover-certification/data/Balanced001Checks-audit.json": "62e8c697f01d6bf9dc786872f1edefa2df432a9da6d094489cb3cacb0ad6ccbd",
+    "milestones/89-shared-cover-certification/lean/Balanced001Checks.lean": "5d91db361846aaa642b43b1decb1fc74d62c5d868a04091a9bdef40cb726d60e",
+    "milestones/89-shared-cover-certification/build/Balanced001Checks.olean": "8434ecf92207b77a6cf3d4d559364ebc4d9a51f0c49027f591a9d9ff7055686a",
+    "milestones/89-shared-cover-certification/logs/Balanced001Checks.log": "a757679e9d31bc1b2a789a098f358a54c8480051f8fd600ad95ae888d7feaaf8",
+    "milestones/89-shared-cover-certification/data/BalancedLookup-audit.json": "14c9cfabd213629b7ea03aa57f49400211f14c51299e6d9ecf509853c9f5e4ff",
+    "milestones/89-shared-cover-certification/lean/BalancedLookup.lean": "b956f192953c15554de5c74dbcd946bcabda4c2d392f85b5b65d965f07fe5f2e",
+    "milestones/89-shared-cover-certification/build/BalancedLookup.olean": "46ce42454c00a0c10a7acc53aa893778602a27606a1c4cc05a10741f4382b8be",
+    "milestones/89-shared-cover-certification/logs/BalancedLookup.log": "3a30f0c110dad2f0e83aaf1881e85407d9413acfece250a1d348c1e64773c860",
+    "milestones/91-reference-shape-reuse/data/CachePilotChecks-trial-1793627285232778200-2-audit.json": "0f6d33c0ebc4b6a39bbf2502c89db4cf1ead21d489a28a0889a82c51af3b3cd6",
+    "milestones/91-reference-shape-reuse/logs/CachePilotChecks-trial-1793627285232778200-2.log": "d4d26151c2f454c68b061205ff6a0a5603cabe5ad010369319f3696a886a5cef",
+    "milestones/91-reference-shape-reuse/data/CachePilotChecks-trial-1793627285232778200-3-audit.json": "1945c42d4fa6dee030aee05287045fd412fdea649817300f155c3cf67ee677a4",
+    "milestones/91-reference-shape-reuse/logs/CachePilotChecks-trial-1793627285232778200-3.log": "d4d26151c2f454c68b061205ff6a0a5603cabe5ad010369319f3696a886a5cef",
+    "milestones/91-reference-shape-reuse/data/CachePilotData-trial-1793627285232778200-0-audit.json": "a61aeb42f1c35b413b13be5fe809f96b209e0bbadafd92cd6f217f437c846287",
+    "milestones/91-reference-shape-reuse/logs/CachePilotData-trial-1793627285232778200-0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "milestones/91-reference-shape-reuse/data/DirectPilotChecks-trial-1793627285232778200-1-audit.json": "b061faaeb42733ef6e67b211dbc6638be8e997dc2e4aae67eccbc208f33ab37c",
+    "milestones/91-reference-shape-reuse/logs/DirectPilotChecks-trial-1793627285232778200-1.log": "86f34e4ad2e2f65fe4ccd411c79dcc2593b11c82fb14f56d10ff03baae617f21",
+    "milestones/91-reference-shape-reuse/data/DirectPilotChecks-trial-1793627285232778200-4-audit.json": "3b210597b60c5a775913d05cc9c3fcfbda948f38e49e926cdbbd11387a79ca79",
+    "milestones/91-reference-shape-reuse/logs/DirectPilotChecks-trial-1793627285232778200-4.log": "86f34e4ad2e2f65fe4ccd411c79dcc2593b11c82fb14f56d10ff03baae617f21"
+  },
+  "timing_scope": {
+    "included": [
+      "Lean/lake launch and imports",
+      "all156 shape-validity tests",
+      "both count-list checks",
+      "all cache-index range and descriptor correspondence checks",
+      "list length, history-free and count-list membership checks",
+      "final original-validator and numeric-membership assembly",
+      "named module elaboration, kernel checking and object emission"
+    ],
+    "excluded": [
+      "Python generation of cache descriptors and indices",
+      "generic WitnessFactors/ShapeCache compilation",
+      "CachePilotData compilation, separately recorded",
+      "shared existing table/geometric dependency compilation"
+    ],
+    "limitations": [
+      "Run order is direct,cached,cached,direct after data setup; repeated files add no new distinct theorem.",
+      "Process inventories are sampled before each trial only; concurrent CPU/memory/IO load is neither isolated nor quantitatively controlled.",
+      "A completed direct trial alone cannot establish cache speedup.",
+      "Generic and data setup costs must be distinguished from steady-state proof-trial timing."
+    ]
+  },
+  "scope": "No concrete correctness defect found. Generic soundness keeps catalogue/placement/cache bounds and requires descriptor equality plus validity of every queried item. Final theorem is the same conditional numeric acceptance claim as90, not a whole-graph or global snake bound.",
+  "axiom_observation": "Concrete decide+kernel pilot checks inherit standard axioms: shapes and cached/direct jobs use propext and Quot.sound; count-list check uses propext; final membership also uses Classical.choice. No zero-axiom claim is justified. All recorded audits are within the permitted standard set."
+}
