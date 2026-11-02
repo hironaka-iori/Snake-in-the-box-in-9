@@ -13,14 +13,18 @@ Use its [checkpoint](../milestones/86-paper-revision/data/checkpoint.json) and
 paper revision and its historical handover and replay observation.
 
 The current structural proof checkpoint is
-[milestone 88](../milestones/88-retention-diagram-certificate/README.md), with
-26 Lean theorem audits for rejection boxes, coverage trees and one concrete
-direction-0/history-0 certificate. Its 375 witnesses and coverage equation
-are checked. All-context coverage remains open; a computational common-cover
-construction reduces the geometric work to 127 membership classes.
-Use its [checkpoint](../milestones/88-retention-diagram-certificate/data/checkpoint.json)
-and [manifest](../milestones/88-retention-diagram-certificate/data/file-manifest.json)
-for current handover versions and the latest preserved replay observation.
+[milestone 89](../milestones/89-shared-cover-certification/README.md), with
+28 Lean theorem audits, checked balanced geometric covers for classes 0 and 1,
+and complete computational witness lists for all 791 contexts. The sequential
+127-class proof batch continues. Concrete witness validity, context assignment
+and graph-row identities remain open. Use its
+[checkpoint](../milestones/89-shared-cover-certification/data/checkpoint.json)
+and [manifest](../milestones/89-shared-cover-certification/data/file-manifest.json)
+for current handover versions and frozen observations of both proof processes.
+
+[Milestone 88](../milestones/88-retention-diagram-certificate/README.md) supplies
+the generic rejection-box argument and the complete direction-0/history-0
+numeric-retention pilot. Its common-cover geometry is reused unchanged.
 
 [Milestone 87](../milestones/87-retained-array-membership/README.md) supplies
 executable numeric retention and conditional saved-walk indexing, with 27
@@ -39,8 +43,9 @@ case 7302, the 012034 share-20 target. Its clause interpretation and assembly
 have passed; the refutation replay and final local theorem remain pending.
 The case-preparation [checkpoint](../milestones/83-012034-share-certificate/data/checkpoint.json)
 and [manifest](../milestones/83-012034-share-certificate/data/file-manifest.json)
-record the exact saved evidence and process observation. Inspect the actual
-process before resuming; do not restart a live driver. Earlier manifests
+record the exact saved evidence and process observation. Milestone 89 records the later timeout, output-path repair and unique-output
+resume past Check66. Inspect the actual process before resuming; do not restart
+a live driver. Earlier manifests
 identify their historical versions of shared handover files.
 
 The preceding cycle-obstruction checkpoint is [milestone 82](../milestones/82-unsaturated-cycle-obstruction/README.md).
@@ -58,7 +63,7 @@ records the forty-rule retention theorem, 66 audits, exact-loop comparison,
 receipt hashes, repository refs and unchanged paper hash.
 Its [saved-file manifest](../milestones/81-recovered-short-rule-retention/data/file-manifest.json)
 records the versions saved with that milestone. Shared handover files have since
-been updated; use milestone 88's manifest for their current versions.
+been updated; use milestone 89's manifest for their current versions.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
 inspected contributor theorem and saved audit, without a fresh complete local

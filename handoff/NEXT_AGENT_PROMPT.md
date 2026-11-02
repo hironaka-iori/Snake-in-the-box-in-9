@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, milestone 88's coverage-pilot checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
+`handoff/CURRENT_STATUS.md`, milestone 89's shared-cover checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -53,16 +53,28 @@ membership, with 26 theorem audits including a concrete pilot. Reuse these
 checks; direction 0/history 0 already passes all 375 witness checks and its
 coverage equation. Do not treat this pilot as all-context coverage.
 
-The next finite task is to materialize context-specific witnesses for the
-127 common covers in milestone88's max-gain payload. Their geometry covers
-all rejected codes in every class computationally; the selected covers have
-82,659 class-box occurrences. Generate and check one coverage tree per class,
-then each context's witness list. The current class data contains example
-witnesses only. Run measured sequential batches; the pilot's proof check took
-about 93 seconds, excluding data compilation. Retain failures and exact source,
-object and log hashes. Then certify the link from each diagram root to the
-recorded full-key rows and the two endpoint columns. Do not identify weighted
-edges solely by endpoints.
+Milestone 89 now supplies all context-specific witness data: 543,827
+occurrences, 791 contexts, 211 aligned lists and 4,387 constructors. Do not
+repeat materialization. The generic history transport, separate-list assembly
+and leading-history helper are checked. Only three contexts use a history
+witness, always at position zero. Reuse those exact orders and source indices.
+
+Continue the EXISTING sequential balanced-cover process (tool session 23168,
+script check_balanced_covers.py --classes all). At the frozen checkpoint,
+classes 0 and 1 have successful original coverage equations and the round has
+28 theorem audits. Its generic balanced lookup agrees with list lookup at all
+indices/defaults; the concrete graph table is checked. The class-1 module
+passed in about 52 seconds, excluding data compilation. The direct and array
+lookup experiments were deliberately stopped without successful cover checks;
+do not relaunch them. Inspect the actual process and active record before
+resuming anything. Mutable run records are excluded from the saved manifest;
+frozen observations and completed receipts specify its historical scope.
+
+After the geometric batch, check concrete witness validity and context-class
+assignment, using history transport for nonhistory witnesses. Equal witness
+lists across different directions still need direction validity checks.
+Then prove diagram membership implies the saved full-key rows and endpoint
+columns. Keep both reference-catalogue premises explicit until discharged.
 After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.
 Symbol six represents the interval [6,21]. Alternative
@@ -70,8 +82,10 @@ credits on the same five centres combine by maximum. Verify the entire
 potential, its range and the boundary calculation before claiming 234.
 
 The active task is case 7302 (012034, share 20). Its 127 semantic modules
-have passed; preserve the current case and inspect its actual process before
-resuming the selected refutation replay. Do not bootstrap or regenerate
+have passed. The original replay timed out at Check66, and its first resume
+hit a temporary-output error. The unique-output resume is active in tool
+session 14427 through milestones/89-shared-cover-certification/scripts/resume7302_unique.py; Check66 has
+passed. Preserve this process and inspect its actual state before any restart. Do not bootstrap or regenerate
 checked sources. Complete geometry, reversal and the source/axiom audit,
 then archive, restore, integrate and recompute using the completed premise.
 Until that gate passes, the new mean 9259/19 is conditional on this one

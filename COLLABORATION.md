@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 88](milestones/88-retention-diagram-certificate/README.md) adds 26 Lean theorem audits for rejection boxes, six-way coverage and a concrete direction-0/history-0 pilot. Lean checks its 375 witnesses and coverage tree. Computationally, all 791 contexts admit covers grouped into 127 membership classes, with 82,659 shared box occurrences; all-context Lean certification remains open. The two reference premises, saved-row and endpoint identification, weights and potential remain separate obligations. The paper stays at revision 86; the interval remains 191 through 235, with 234 conditional.
+Latest continuation: [milestone 89 checkpoint](milestones/89-shared-cover-certification/README.md) saves 28 Lean theorem audits, balanced geometric certificates for classes 0 and 1, and complete computational witness data for all 791 contexts. The sequential 127-class batch continues; concrete context-witness equations remain open. History transport permits reuse of nonhistory witnesses. Case7302 has resumed past Check66 with a unique temporary output path. The paper stays at revision 86; the interval remains 191 through 235, with 234 conditional.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 

@@ -1,0 +1,50 @@
+{
+  "module": "BalancedLookup",
+  "exit_code": 0,
+  "seconds": 118.46899999999914,
+  "source_sha256": "b956f192953c15554de5c74dbcd946bcabda4c2d392f85b5b65d965f07fe5f2e",
+  "log_sha256": "3a30f0c110dad2f0e83aaf1881e85407d9413acfece250a1d348c1e64773c860",
+  "paths": [
+    "E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\build",
+    "E:\\Snake-in-a-box\\milestones\\88-retention-diagram-certificate\\build"
+  ],
+  "dependency_receipts": {
+    "Boxes": "61e72ef3d45bc74f07207dd93b7752ccbcc5f9866b7358b3ca474dcaf46a33e1",
+    "CoverTree": "b8c30fefe66257a6396615c93b47953af4f3d7daf4f3bb60e92ba17bf6b3c0c9"
+  },
+  "status": "PASS_GENERIC_BALANCED_LOOKUP",
+  "olean_sha256": "46ce42454c00a0c10a7acc53aa893778602a27606a1c4cc05a10741f4382b8be",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.Balanced89.size_eq_length_flatten",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.Balanced89.check_iff_valid",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.Balanced89.getD_append_eq",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.Balanced89.lookup_eq_getD",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.Balanced89.lookup_eq_list",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "scope": "Generic checked split-size tree lookup equals flattened-list getD for every index and supplied default. A checked flatten equality transfers lookup to an original list. Tree balance, concrete table certificates and performance improvements are not established by this module."
+}

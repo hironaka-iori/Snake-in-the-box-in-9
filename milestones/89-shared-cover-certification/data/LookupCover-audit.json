@@ -1,0 +1,30 @@
+{
+  "module": "LookupCover",
+  "exit_code": 0,
+  "seconds": 19.813000000000102,
+  "source_sha256": "f3f82a8c19560592c7c37843c02e643f97d7375420f10aa637f2b75d70cc8097",
+  "log_sha256": "8d27c5cbc23693c6d2dc5a49af74058670712614654cd806ab0a0eb8724666df",
+  "dependencies": {
+    "milestones\\88-retention-diagram-certificate\\data\\Boxes-audit.json": "61e72ef3d45bc74f07207dd93b7752ccbcc5f9866b7358b3ca474dcaf46a33e1",
+    "milestones\\88-retention-diagram-certificate\\data\\CoverTree-audit.json": "b8c30fefe66257a6396615c93b47953af4f3d7daf4f3bb60e92ba17bf6b3c0c9"
+  },
+  "status": "PASS_GENERIC_LOOKUP_COVER",
+  "olean_sha256": "a43aeea4854815bcc0eaed2f21802e91c6c9d5cb4d2d400380ded8ea0b94d84f",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.Shared89.lookup_check_eq",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Shared89.lookup_cover_to_original",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "scope": "Array/list coverage checker equality or measured class1 geometric check; complete context witness validity and graph identification remain separate."
+}

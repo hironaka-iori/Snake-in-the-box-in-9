@@ -305,7 +305,7 @@ The built-in compiler diagnostic and a frozen snapshot of successful case 7305 r
 
 ## Milestone77: direction and history-shape interfaces
 
-2 November2026. 106 printed theorem audits passed Lean4.19.0. Every actual eight/nine-direction window has a valid recorded ID, with consecutive source/target states; numeric history decoding, signature equivalence and nonempty-history shape compatibility are checked. Finite coverage and lookup are split into kernel-checked blocks to control memory. The concrete history update, combined count state, exclusions, credits, retained edges and full potential interpretation remain. No numerical bound changed. Case7305 final share theorem remains pending; successful replay rows and actual process observation are frozen in milestone77. Paper revision76 is unchanged and hash-matched; the compiler retry failed before source compilation. The current handover and continuation prompt are in handoff/.
+2 November 2026. 106 printed theorem audits passed Lean4.19.0. Every actual eight/nine-direction window has a valid recorded ID, with consecutive source/target states; numeric history decoding, signature equivalence and nonempty-history shape compatibility are checked. Finite coverage and lookup are split into kernel-checked blocks to control memory. The concrete history update, combined count state, exclusions, credits, retained edges and full potential interpretation remain. No numerical bound changed. Case7305 final share theorem remains pending; successful replay rows and actual process observation are frozen in milestone77. Paper revision76 is unchanged and hash-matched; the compiler retry failed before source compilation. The current handover and continuation prompt are in handoff/.
 
 
 ## Milestone 78: numeric history transitions and actual state sequence
@@ -350,7 +350,7 @@ Independent complete enumeration covers all 11,162 canonical induced eleven-word
 
 2 November 2026. The pinned 235 and 236 catalogues contain 1,287 and 732 keys, with intersection 641 and union 1,378. Every canonical representative occurs directly in a source list; the selection uses the 1,287 first-catalogue entries and 91 additional second-catalogue entries. Twenty-seven modules passed Lean with 103 printed theorem audits. The exact finite table, source membership, valid widths and symbols, and forward/reverse retention for every fitting actual-snake window are checked. The final retention theorem retains AllRefuted6K235 and AllRefuted236 as explicit premises. The bounded provenance audit found the historical source theorems and successful Linux logs, while matching locally importable closed proof objects remain absent.
 
-The isolated reference-filter comparison covers all 505 direction extensions and 46,656 count codes, giving 23,561,280 pairs. It accepts 3,899,352 and rejects 19,661,928; these are not newly removed full-graph edges. Direct digit folding independently checks the builder's quotient/remainder slices. The direction conventions are shared between implementations and were checked against the Lean window lemmas in source review. The exact retained-array index, closed catalogue imports, credit interpretation, complete potential replay and five local share targets remain. Case7302 continues under its existing driver, with a frozen observation in this checkpoint. No global bound changes; paper revision76 remains current, with full revision86 next.
+The isolated reference-filter comparison covers all 505 direction extensions and 46,656 count codes, giving 23,561,280 pairs. It accepts 3,899,352 and rejects 19,661,928; these are not newly removed full-graph edges. Direct digit folding independently checks the builder's quotient/remainder slices. The direction conventions are shared between implementations and were checked against the Lean window lemmas in source review. The exact retained-array index, closed catalogue imports, credit interpretation, complete potential replay and five local share targets remain. Case7302 continues under its existing driver, with a frozen observation in this checkpoint. No global bound changes; paper revision76 remains current, with full revision 86 next.
 
 
 ## Milestone 86: paper revision and proof scope
@@ -421,3 +421,32 @@ replay remain open. The bounds remain 191 through 235, with 234 conditional.
 The paper stays at revision 86, next scheduled revision 96. The existing
 case7302 replay continues; its partial logs are preserved in a delta snapshot
 with reused and freshly hashed objects distinguished.
+
+
+## Milestone 89: shared-cover checkpoint and balanced lookup
+
+2 November 2026. This checkpoint records 28 Lean audits: four history-transport,
+four separate-list assembly, two array-checker equality, five balanced lookup,
+two general lookup-checker equality, three concrete graph-table and eight
+concrete class 0/class 1 results. The full 127-class run remains active. All 127
+trees are generated and pointwise replayed over 5,925,312 class/code pairs.
+
+All 543,827 context-witness occurrences are materialized with original rule
+indices, covering 791 contexts. Deduplication gives 211 aligned lists and 4,387
+constructors. Only three occurrences use history, always at position zero.
+The remaining witness equations, context assignment and graph interpretation
+remain explicit. The source/data reviews preserve their own earlier snapshots.
+
+Two lookup experiments were stopped without a cover proof after 685.187 and
+475.312 seconds. Balanced class 1 succeeds in 51.828 seconds; class 0 in 66.453 seconds.
+The experiment was concurrent, so no controlled speed ratio is claimed. The
+graph compiler succeeded; an overly strict zero-axiom audit expectation was
+corrected while preserving its successful output and original checker bytes.
+
+Case7302 timed out at Check66, then a resume encountered a stale temporary
+output error. The unique-output resume passes Check66 in 130.02 seconds and
+continues through unchanged proof sources. Failed attempts are preserved.
+Distinct successful modules are counted separately from repeated composition
+rows. Bounds remain 191 through 235, with 234 conditional. The paper stays at
+revision 86, next full revision 96. This checkpoint does not mark the full
+geometric batch, the local share theorem or the overall goal complete.

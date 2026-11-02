@@ -1,0 +1,12 @@
+E:\Snake-in-a-box\milestones\89-shared-cover-certification\lean\ContextTransport.lean:46:2: error: type mismatch, term
+  Bool.true_and true
+after simplification has type
+  (true && true) = true : Prop
+but is expected to have type
+  ((base.all fun item => boxWitnessValid q di item.1 item.2) &&
+      extra.all fun item => boxWitnessValid q di item.1 item.2) =
+    true : Prop
+'Snake9.Shared89.witness_valid_transport' depends on axioms: [propext, Quot.sound]
+'Snake9.Shared89.entries_valid_transport' depends on axioms: [propext, Quot.sound]
+'Snake9.Shared89.entries_valid_append' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.Shared89.base_plus_history_valid' depends on axioms: [propext, sorryAx, Quot.sound]

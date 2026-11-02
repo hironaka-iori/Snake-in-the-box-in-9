@@ -183,10 +183,34 @@ The computational reconstruction still matches every saved block. Moreover,
 all 127 membership classes have a common box cover available across every
 context of that class. Pruning yields 82,659 class-box occurrences, compared
 with 356,548 direct direction-box occurrences. This suggests 127 shared
-geometric checks. Each context still needs its own rule witnesses; only example
-witnesses are stored with the common covers. The full all-context Lean
+geometric checks. Each context still needs its own rule witnesses; milestone 88 stored example
+witnesses, and milestone 89 supplies every context-specific list. The full all-context Lean
 certificate and identification with the saved full-key rows remain open.
 These generic and pilot results do not give a new global bound.
+
+Milestone 89 records 28 additional Lean theorem audits. History-free
+witnesses transfer across bounded history IDs of the same direction. Shared
+assembly pairs an equally long witness list with the fixed geometric box list,
+including the three contexts whose history witness occupies position zero.
+All 543,827 witness occurrences in 791 contexts have been materialized and
+checked computationally, compressing to 211 aligned lists and 4,387 witness
+constructors. Their complete concrete Lean validity equations remain open.
+
+All 127 shared cover trees are generated and pointwise replayed on 5,925,312
+class/code pairs. A balanced table lookup is proved equivalent to the original
+list at every index and default. Its concrete graph table and the geometric
+coverage equations for classes 0 and 1 pass Lean. The class-1 proof module took
+51.828 seconds; earlier direct and array-box experiments were stopped without
+completion after 685.187 and 475.312 seconds. These concurrent timings do not
+give a controlled speed ratio. The sequential full-class batch is active in
+tool session 23168; its frozen checkpoint covers only classes 0 and 1.
+
+Case7302's original replay stopped at Check66 after its 300-second limit. A
+first resume failed while replacing a stale temporary output. Both attempts
+are preserved. The unique-output resume, tool session 14427, uses a 900-second
+limit and has passed Check66 in 130.02 seconds. It reuses unchanged proof
+sources and completed modules. Inspect actual processes before any restart.
+Final geometry, reversal and the local-share audit remain pending.
 
 The remaining structural work is to supply the two closed reference
 catalogue proofs and a concrete Lean retention cover with endpoint-column
@@ -236,7 +260,7 @@ guards, interval-filter assembly, catalogue audit and a later replay observation
 Milestone 81 saves the forty-rule theorem, independent review and exact comparison.
 Milestone 84 saves the three-history theorem. Milestone 85 saves the exact reference
 table, conditional theorem, provenance review, exhaustive comparison and a later
-case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 88 contains the current shared handover versions and a later replay observation.
+case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 89 contains the current shared handover versions and later proof-process observations.
 Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
@@ -249,3 +273,5 @@ completed case7305 receipts; inspect actual processes before starting any
 new case. Do not repeat its successful unchanged replay. Tool session numbers are local to the original execution context.
 
 Milestone 88 freezes 348 successful case7302 replay rows, including 84 newly observed since milestone 87. The log archive and hash scopes are explicit. This is a partial snapshot; the final local-share theorem remains pending.
+
+Milestone 89 freezes 389 distinct successful replay modules, including 41 newly observed since milestone 88. The raw record contains 395 successful rows because the inherited driver repeats composition rows when resumed. Duplicate rows are not counted as new modules.
