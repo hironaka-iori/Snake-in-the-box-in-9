@@ -1,5 +1,7 @@
 # Prompt: build and audit the bound 234 on a large machine
 
+> Superseded by `handoff/PROMPT.md` (2 November 2026), which reflects the committed B234 modules and the F8 validation.
+
 Paste everything below the line into a Claude Code session on the large machine.
 
 ---
