@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 93: joint slope and range comparison](93-defined-graph-potential/README.md). Seven new Lean audits; exact independent certificates show that all three fixed weighted graphs already attain their best constant-slope/global-range comparisons. No new snake bound. Case7302 stopped after a timeout; witness and geometry batches continue.
+
 - [Milestone 92: context assignment and full witness batch](92-full-witness-batch/README.md). All 37,875 context positions checked; 3/127 witness classes at snapshot; complete sequential run active.
 
 - [Milestone 91: certified reference-pattern reuse](91-reference-shape-reuse/README.md). Eight new Lean audits; complete same-case cache pilot; no consistent timing advantage. Use direct checks for the full witness batch.

@@ -521,3 +521,12 @@ The interval remains 191 through 235 edges, with 234 conditional. The contributo
 upper-bound proof still needs a complete independent rebuild. Paper revision 86
 and its three authors and hyperlink settings are unchanged; the next full
 revision is scheduled for milestone 96.
+
+
+## Milestone 93: joint slope and range comparison
+
+3 November 2026, Japan time. Latest continuation: [milestone 93 checkpoint](milestones/93-defined-graph-potential/README.md) adds seven Lean comparison audits. Independently checked cycle and path certificates prove joint optimality of the slope and global potential range on each of the three fixed weighted array graphs. Their integer comparisons remain 235, 235 and conditionally 234. The snapshot records 7/127 witness classes, 55/127 geometric classes and 649 successful case7302 modules. The witness and geometry batches continue; case7302 stopped after a 900-second Check1 timeout. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
+
+Next research priority: prove the exact key-dependent five-centre credit bound, especially complete coverage of compatible eleven-transition words for all 55 history share rules. Continue the existing witness and geometry batches. The recorded fixed-model comparisons cannot be improved by changing only the constant slope and global potential range. The defined graph still needs its complete weight and potential checks. For case7302, test one isolated replay segment before changing or restarting the timed-out six-segment check. Keep the two reference-catalogue premises and all five pending local shares explicit.
+
+The new comparison is checked in Lean under explicit graph-witness hypotheses. Concrete embedding and every array potential inequality were checked numerically by two implementations. This does not discharge the actual-snake credit theorem or the complete potential check on possible extra diagram rows. All original paper bytes are preserved. The exact optimum remains unresolved.

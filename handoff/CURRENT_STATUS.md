@@ -1,33 +1,35 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 92 checkpoint
+## Milestone 93 checkpoint
 
-Milestone 92 checks the complete source-compatible context assignment over
-37,875 direction/history pairs, including the three history-dependent class
-overrides and exact agreement with the saved block classes and roots. This
-check enumerates no count codes. The frozen checkpoint has 65
-Lean theorem audits, 3 of 127 concrete witness classes, 43 geometric classes
-and 649 distinct successful case7302 modules. These are snapshot counts.
+Seven new Lean audits prove rational path telescoping, the path-deficit inequality,
+the cycle slope ceiling and joint slope/range comparison, including three conditional
+numerical applications. Exact independent checks verify all 4,947,008 edge inequalities
+for each profile and 73 witness occurrences. The best fixed-model comparison fractions
+are $157625/669$, $20965613/89059$ and $137941/587$, giving integer comparisons
+235, 235 and conditionally 234. Concrete graph embedding remains computational evidence.
 
-The all-class witness process is active in tool session 97444, alongside
-geometry session 23168 and replay session 14427. Inspect actual process state
-before any resume; do not duplicate live jobs. All 507 base jobs and three
-leading history witnesses are generated and independently reviewed. The final
-family assembly requires every class receipt and is queued after the batch.
-The exact checkpoint states whether that final theorem has passed.
+The new [mathematical note](../milestones/93-defined-graph-potential/mathematical-note.md)
+shows that changing only the constant slope and global potential range cannot improve
+these fractions on the unchanged weighted graphs with the same boundary budget.
+The selected continuation is the exact five-centre credit theorem, especially complete
+compatible variants for the 55 history share rules. The defined graph must have its
+own full weight and potential check; external-array certificates do not transfer by name.
 
-The chosen next proof object is the graph defined directly from diagram-accepted
-full keys, with endpoints computed from each key. This avoids a separate identity
-with external row and endpoint arrays if all weight and potential certificates
-are checked on the defined graph. Keep the two reference-catalogue premises,
-pending local shares, credit interpretation and complete potential explicit.
-The interval remains 191 through 235 edges, with 234 conditional. The contributor
-upper-bound proof still needs a complete independent rebuild. Paper revision 86
-and its three authors and hyperlink settings are unchanged; the next full
-revision is scheduled for milestone 96.
+The frozen snapshot has 7/127 checked witness classes, 55/127 checked geometry
+classes and 649 successful case7302 modules. Witness session 13482 and geometry
+session 23168 continue. The replay in session 14427 ended at a 900-second Check1
+timeout. Its confirmed orphan compiler was stopped, with evidence preserved.
+The next replay experiment is one isolated segment, without changing the original
+source or data. Inspect actual processes before any restart.
 
-Earlier milestone entries below describe their recorded scopes. Use the milestone92
-checkpoint for current proof status and process observations.
+The interval remains $191\le a(9)\le235$ edges, with 234 conditional. The upper
+bound uses the inspected contributor theorem and saved audit; its complete independent
+rebuild remains pending. Paper revision 86, all three authors and hyperlink settings
+are unchanged. The next scheduled paper revision is milestone 96.
+
+Earlier entries below retain their historical scope. Use the milestone 93 checkpoint
+for the current frozen evidence and process observations.
 
 ## Result and evidence boundary
 
@@ -234,7 +236,7 @@ completion after 685.187 and 475.312 seconds. These concurrent timings do not
 give a controlled speed ratio. The sequential full-class batch is active in
 tool session 23168; its frozen checkpoint covers only classes 0 and 1.
 
-Case7302's original replay stopped at Check66 after its 300-second limit. A
+Case 7302's original replay stopped at Check66 after its 300-second limit. A
 first resume failed while replacing a stale temporary output. Both attempts
 are preserved. The unique-output resume, tool session 14427, uses a 900-second
 limit and has passed Check66 in 130.02 seconds. It reuses unchanged proof
@@ -339,7 +341,7 @@ Milestone 84 saves the three-history theorem. Milestone 85 saves the exact refer
 table, conditional theorem, provenance review, exhaustive comparison and a later
 case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 92 contains the current shared handover versions and later proof-process observations.
 Build objects remain local and are excluded from Git. Reproduction
-uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
+uses Lean 4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
 
 The smaller coverage implementation splits at six directions, then splits the

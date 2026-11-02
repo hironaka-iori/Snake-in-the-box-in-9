@@ -1,8 +1,8 @@
 # Collaborator handoff
 
-Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
+Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 92 checkpoint](milestones/92-full-witness-batch/README.md) checks all 37,875 context positions and exact saved class/root selection. The snapshot records 3/127 witness classes, 43/127 geometric classes and 649 successful case7302 modules. The complete witness batch is running. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
+Latest continuation: [milestone 93 checkpoint](milestones/93-defined-graph-potential/README.md) adds seven Lean comparison audits. Independently checked cycle and path certificates prove joint optimality of the slope and global potential range on each of the three fixed weighted array graphs. Their integer comparisons remain 235, 235 and conditionally 234. The snapshot records 7/127 witness classes, 55/127 geometric classes and 649 successful case7302 modules. The witness and geometry batches continue; case7302 stopped after a 900-second Check1 timeout. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 

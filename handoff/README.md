@@ -13,11 +13,16 @@ Use its [checkpoint](../milestones/86-paper-revision/data/checkpoint.json) and
 paper revision and its historical handover and replay observation.
 
 The current checkpoint is
-[milestone 92](../milestones/92-full-witness-batch/README.md), with checked
-source-compatible context assignment and a continuing all-class witness batch.
-Its [checkpoint](../milestones/92-full-witness-batch/data/checkpoint.json) and
-[manifest](../milestones/92-full-witness-batch/data/file-manifest.json) preserve
-exact current evidence and three continuing proof-process observations.
+[milestone 93](../milestones/93-defined-graph-potential/README.md), with seven
+Lean comparison audits and independent numerical cycle/path certificates for three
+fixed weighted graphs. Its [checkpoint](../milestones/93-defined-graph-potential/data/checkpoint.json)
+and [manifest](../milestones/93-defined-graph-potential/data/file-manifest.json)
+preserve exact evidence, continuing witness/geometry observations and the stopped
+case7302 timeout. The selected next task is the key-dependent credit-to-share proof.
+
+[Milestone 92](../milestones/92-full-witness-batch/README.md) supplies the checked
+source-compatible context assignment, defined graph and generated witness batch.
+Reuse those sources and matching successful receipts.
 
 Milestone 91 completed the reference-pattern experiment. No consistent speed
 advantage was established; the current batch uses direct balanced lookup.
