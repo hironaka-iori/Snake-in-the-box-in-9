@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 76](milestones/76-paper-revision/README.md) completes the scheduled paper revision and six conditional arithmetic checks. The bound 234 retains six local share premises and the incomplete global graph proof. Case 7305 replay was active at the saved checkpoint; inspect its live process before restarting. Use [handoff/README.md](handoff/README.md) for current instructions.
+Latest continuation: [milestone 77](milestones/77-direction-state-coverage/README.md) adds 106 successful Lean theorem audits for direction coverage, numeric lookup, actual direction states and history-shape compatibility. The full graph interpretation and conditional target 234 remain incomplete. The paper remains revision76. Use [the current handover](handoff/README.md) for mathematical status, saved evidence, live-process precautions and the next research assignment.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 

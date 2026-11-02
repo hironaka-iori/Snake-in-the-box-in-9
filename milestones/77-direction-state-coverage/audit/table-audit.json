@@ -1,0 +1,189 @@
+{
+  "status": "PASS_ORDERED_DIRECTION_AND_HISTORY_TABLE_AUDIT",
+  "recorded_utc": "2026-11-02T06:52:15.442553+00:00",
+  "coverage": {
+    "8": {
+      "candidates": 4140,
+      "induced": 132,
+      "exact_order_match": true,
+      "ordered_semantic_sha256": "a63af91ada99afd1f436406745cfbb9c1e8d9f28c2af630c11cf69cf2bb9cd58",
+      "first": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1,
+        0,
+        4
+      ],
+      "last": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "reversal_classes": 77
+    },
+    "9": {
+      "candidates": 21147,
+      "induced": 505,
+      "exact_order_match": true,
+      "ordered_semantic_sha256": "35e524ef5bd6640a29ead78570e2a87dc43d35c41ae418a3302401653fd67268",
+      "first": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1,
+        0,
+        4,
+        1
+      ],
+      "last": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "reversal_classes": 270
+    }
+  },
+  "source_map_semantic_sha256": "952c4621a329a1055248b69e0c1b85066eea6ae754836e29c534c39c5f086b82",
+  "target_map_semantic_sha256": "1ed40febcec8794d1230c60fe1200f512961a978af9850dfd9de76345fe238fa",
+  "history": {
+    "prefixes": 75,
+    "length_counts": {
+      "0": 1,
+      "1": 31,
+      "2": 43
+    },
+    "compatible_rule": "None at 0; target_shape_ids[prefixes[q][-1]] for q>0",
+    "exact75_lean_prefix_and_signature_lists_match": true,
+    "checked_update_pairs": 37875,
+    "source_compatible_pairs": 791,
+    "nonempty_updates": 2363,
+    "maximum_length_ties": 0,
+    "every_nonempty_update_target_compatible": true,
+    "next_history_semantic_sha256": "9d78d267588824b35786d17a059db9acaabcf2861496853304ce6a79bf258f2a"
+  },
+  "ordered_tables_file_sha256": "ca96ecafa0045d46db8c09dff1b8c504bba618de17e146547479af13b26c2611",
+  "script_sha256": "83d7b2e30d248b554711c4cb94b177707486918b2e4e3fc7a234af58458806a1",
+  "history_metadata_comparison": {
+    "previous74_source": "milestones/70-proof-supported-share-model/data/enriched-model.json",
+    "previous74_hash": "59a9d5e5f4954b86a69a72c090a9a45030f4756da577457fd94439ace46e102c",
+    "current_same_source_hash": "59a9d5e5f4954b86a69a72c090a9a45030f4756da577457fd94439ace46e102c",
+    "source67_path": "milestones/67-critical-family-charge/data/full-model.json",
+    "source67_hash": "08fc18347eff9065d873cb8be01b4b72129e1ee939b4bf1474d04640cc8bc274",
+    "scope": "The previous74 audit hashes milestone70, not milestone67. Same-file hashes agree; the different whole-file hashes of67 and70 do not establish drift. Relevant history values agree."
+  },
+  "evidence": [
+    {
+      "path": "milestones/42-six-count-state-model/scripts/model.py",
+      "sha256": "448dbcea5e49c331e5138da9c78805112af6939ff6bb0528da2751d3726f119c"
+    },
+    {
+      "path": "milestones/42-six-count-state-model/data/model.json",
+      "sha256": "e78f8d7fe27aa6947ed9714f0e1742426b9a6f043dcae044e78440e22bb63e23"
+    },
+    {
+      "path": "milestones/58-share-pressure/scripts/apply_geometry.py",
+      "sha256": "17ade653a182d3e049692751a05cffc821d347a2c69268295029d9c495f712b6"
+    },
+    {
+      "path": "milestones/58-share-pressure/geometry/data/model.json",
+      "sha256": "2375d4dea5b0a233df9ebc1f7a21093feac78e22514d1b66b20029e4dc8900a2"
+    },
+    {
+      "path": "milestones/59-extended-share-window/scripts/extend.py",
+      "sha256": "69d2081d2dc4b43f3867389e82aab6c91c78aebb906459019b4171d85ee807aa"
+    },
+    {
+      "path": "milestones/59-extended-share-window/scripts/verify.py",
+      "sha256": "34bdf4eb25ef34038ca3e742a3e041f34fdb23c0183b313a950ccbbac028ce2d"
+    },
+    {
+      "path": "milestones/59-extended-share-window/extended/data/model.json",
+      "sha256": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf"
+    },
+    {
+      "path": "milestones/59-extended-share-window/data/geometry.json",
+      "sha256": "ce57ae1a7f59e1f24d47dbf2116a0ad89cc1bbfc5aa35ed59d4fcfc3fec05dcd"
+    },
+    {
+      "path": "milestones/67-critical-family-charge/scripts/build_full.py",
+      "sha256": "4c2fc3ad48097ebca229a55589a80afe79f080ab50fde96ecdbcf829741fda9d"
+    },
+    {
+      "path": "milestones/67-critical-family-charge/scripts/verify_full.py",
+      "sha256": "97eaf14129554a2e34303c9b450b7d2bf91ddd949974691adab490a2e782ccad"
+    },
+    {
+      "path": "milestones/67-critical-family-charge/data/full-model.json",
+      "sha256": "08fc18347eff9065d873cb8be01b4b72129e1ee939b4bf1474d04640cc8bc274"
+    },
+    {
+      "path": "milestones/70-proof-supported-share-model/scripts/build.py",
+      "sha256": "bffe9f3d541a807841d564a85bc3f5d2523ae73ee7b8218b79facdac9a4987db"
+    },
+    {
+      "path": "milestones/70-proof-supported-share-model/data/model.json",
+      "sha256": "3f5337e06a292c597bb8b58f319e61d3f75442b0c2f924bffa628a9ae1c1d8ec"
+    },
+    {
+      "path": "milestones/70-proof-supported-share-model/data/enriched-model.json",
+      "sha256": "59a9d5e5f4954b86a69a72c090a9a45030f4756da577457fd94439ace46e102c"
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/scripts/graph.py",
+      "sha256": "7818a248e26135990ba4ffee2a57e7619376ee35517ef8c856aec3853ea5912c"
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/critical-current/scripts/prepare.py",
+      "sha256": "3dcaa916b1c3f9920acbe5876464fa63e665ba1a93c5ce4c6f949a4a204b2709"
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json",
+      "sha256": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821"
+    },
+    {
+      "path": "milestones/72-four-count-proof-closure/critical-current/data/countfree16-all-except012034x20-except012310x12-model.json",
+      "sha256": "c6cbabfc5e994f66e95362432a76bbde820e490ca04dfd4b0c17561737cf4950"
+    },
+    {
+      "path": "milestones/74-graph-interpretation-audit/lean/WindowStateShift.lean",
+      "sha256": "bf6de6ea95ad0a13f9580abf18cfd7bd5771405d39c5b63b02e545b793f2d39c"
+    },
+    {
+      "path": "milestones/74-graph-interpretation-audit/scripts/source_audit.py",
+      "sha256": "bfb46a280f308ae729161b3734aa59b6ddd5423e62e5054ce7156b37b0ccfd9b"
+    },
+    {
+      "path": "milestones/74-graph-interpretation-audit/data/proof-audit.json",
+      "sha256": "aba2cb78f59bd3f9fad77d95e89e31b029627aaed87a47e1feabce0b611bca28"
+    },
+    {
+      "path": "milestones/75-exact-history-bridge/history/lean/HistoryPrefix.lean",
+      "sha256": "989b08a3f9ee7b751a7ae68e232855d6d3590e2d815e12893f594f496a89facb"
+    },
+    {
+      "path": "milestones/75-exact-history-bridge/history/lean/ExactHistory.lean",
+      "sha256": "0cbb26994f0b6372ee107529c1406fd0c64028137ac94a0e6c4f63671185016c"
+    },
+    {
+      "path": "milestones/75-exact-history-bridge/history/data/proof-audit.json",
+      "sha256": "bc232a3d67f42b5ac98a6a2e3f30c9efa137925436597bf68bfe29aef6bc12a2"
+    }
+  ],
+  "limits": "Small independent Python table audit and source inspection only. No Lean run, graph-array reconstruction, full graph interpretation, exclusion/share dispatch, potential replay or new upper bound. Metadata array hashes were compared; NPZ bytes were not reloaded or rehashed."
+}

@@ -1,0 +1,112 @@
+{
+  "exit_code": 0,
+  "seconds": 3.5309999999990396,
+  "source_sha256": "6ce3a0d435def01ac8118296764571ddec51c6d5960c3469327c709b201e4e8d",
+  "log_sha256": "5f7ab2aad6b1747bf6f64dfd5512d7e8529241773df44e7327c8b5d0617e9fc9",
+  "memory_limit_mib": null,
+  "available_bytes_before": 7921029120,
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe",
+    "env",
+    "lean",
+    "-s",
+    "65536",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\77-direction-state-coverage\\history\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\77-direction-state-coverage\\history\\build\\NumericHistory.fresh.olean",
+    "E:\\Snake-in-a-box\\milestones\\77-direction-state-coverage\\history\\lean\\NumericHistory.lean"
+  ],
+  "support_receipt_sha256": "bc232a3d67f42b5ac98a6a2e3f30c9efa137925436597bf68bfe29aef6bc12a2",
+  "support": [
+    {
+      "module": "HistoryPrefix",
+      "source": "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\history\\lean\\HistoryPrefix.lean",
+      "source_sha256": "989b08a3f9ee7b751a7ae68e232855d6d3590e2d815e12893f594f496a89facb",
+      "olean": "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\history\\build\\HistoryPrefix.olean",
+      "olean_sha256": "cfcd6d4676e1d1bdd7e63bc5fc737b4a280e3fe267c88b2a0c2f767fd4452957"
+    },
+    {
+      "module": "ExactHistory",
+      "source": "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\history\\lean\\ExactHistory.lean",
+      "source_sha256": "0cbb26994f0b6372ee107529c1406fd0c64028137ac94a0e6c4f63671185016c",
+      "olean": "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\history\\build\\ExactHistory.olean",
+      "olean_sha256": "964e1575a04e77895a0672a9dc397afd38787b43d238b2bf106c481c0c33bf1e"
+    }
+  ],
+  "status": "PASS_NUMERIC_HISTORY_AND_SIGNATURE_EQUIVALENCE",
+  "olean_sha256": "2f05f70482fd4964216a88db63ac6235866a41beb482b7f39daaa9290ca673ff",
+  "theorems": [
+    {
+      "theorem": "Snake9.History77.signature_suffix_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.History77.dictionary_index_decode",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.History77.history_index_lt",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.History77.history_decode",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.History77.history_index_empty",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.History77.stored_append_last",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.History77.decoded_append_last",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.History77.exact_signature_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.History77.indexed_signature_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "lean_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "script_sha256": "bcef3caf99a6bc625f3200d8f682d29c52a170bec6a39818a54ee7c35e184995",
+  "limits": "Uses hash-matched existing75 objects and installed mathlib; does not rebuild their complete dependency closure. No direction-table interpretation, finite graph, credit dispatch or global bound."
+}

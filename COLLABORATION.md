@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 76](milestones/76-paper-revision/README.md) completes the scheduled paper revision and six conditional arithmetic checks. The bound 234 retains six local share premises and the incomplete global graph proof. Case 7305 replay was active at the saved checkpoint; inspect its live process before restarting. Use [handoff/README.md](handoff/README.md) for current instructions.
+Latest continuation: [milestone 77](milestones/77-direction-state-coverage/README.md) adds 106 successful Lean theorem audits for direction coverage, numeric lookup, actual direction states and history-shape compatibility. The full graph interpretation and conditional target 234 remain incomplete. The paper remains revision76. Use [the current handover](handoff/README.md) for mathematical status, saved evidence, live-process precautions and the next research assignment.
 
 Start with the [updated research handover](handoff/2026-11-02/START_HERE.md). It supersedes the 1 November continuation record and separates current evidence from the historical entries below. Milestone74 gives the exact five-count-state/six-count-edge graph interface, five new Lean audits, and six exact short-walk obstructions to dropping pending share rules while retaining the present boundary budget. The project interval is unchanged. Case7305 has 92 checked semantic/composition modules, with its smaller simulated refutation preserved for later Lean replay; its final local theorem remains pending.
 
