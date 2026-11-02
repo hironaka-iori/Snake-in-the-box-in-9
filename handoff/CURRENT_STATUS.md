@@ -20,8 +20,8 @@ Steven Zhan. Its repository and editor copies have SHA256
 Source checks preserve all 116 previous statements and add seven, giving 123;
 all 13 printed paths and 118,673 vertex pairs were checked. The built-in
 compiler failed before source compilation. No new PDF or layout check is
-claimed. Milestones 77 through 83 add proof interfaces, a completed local share theorem,
-forty-rule retention, a cycle obstruction and the pending next share certificate
+claimed. Milestones 77 through 84 add proof interfaces, a completed local share theorem,
+forty-rule retention, three-history retention, a cycle obstruction and the pending next share certificate
 without revising the paper. The next full revision is 86.
 
 ## Chosen route: charge empty squares
@@ -128,8 +128,15 @@ direction/count pairs, with source reconstruction and complete input hashes.
 It reuses 970 pinned certificate objects and freshly checks three small support
 sources. It does not rebuild the entire inherited closure.
 
-The remaining retained-edge work is the 1,378-key reference union, three
-history exclusions and the exact retained-array index. The reference theorem sources and contributor logs were audited; their
+Milestone 84 closes all three history-exclusion guards, with 38 audits across
+eight modules. The actual emitted IDs recover each unique eleven-direction
+word, and its count lower bound three excludes the digit cap two. All three
+count proofs and five small helper lemmas were checked afresh against the
+current window bridge. An exact isolated-loop comparison covers all 37,875
+history/direction pairs and all count codes for the three active guards.
+
+The remaining retained-edge work is the 1,378-key reference union and
+the exact retained-array index. The reference theorem sources and contributor logs were audited; their
 complete union is still uninstantiated in the current environment.
 Every three-ID credit needs every compatible eleven-direction interpretation;
 forgotten coordinate returns can produce several variants. Alternative lower

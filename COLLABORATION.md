@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 83](milestones/83-012034-share-certificate/README.md) pursues the count-free 012034 share-20 theorem. Its 121 clause shards and semantic assembly have passed, giving 127 checked modules before refutation replay. The local theorem remains pending. Adding only this proposed floor gives exact conditional finite mean 9259/19, scaled potential range 11301 at denominator 19, and integer comparison 235. A separate verifier checks all 4,947,008 edges; three Lean audits check the arithmetic. The maintained interval remains 191 through 235. See [the current handover](handoff/README.md).
+Latest continuation: [milestone 84](milestones/84-history-exclusion-retention/README.md) proves that every actual snake passes all three history-exclusion guards. Eight modules passed 38 Lean audits, including complete three-signature realization and a fresh replay of the adapted count proofs. An independent comparison checks the exact isolated builder loop. Case 7302 continues under its existing proof driver and remains pending. The maintained interval remains 191 through 235; see [the current handover](handoff/README.md).
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -16,7 +16,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 76](milestones/76-paper-revision/README.md). The revised argument includes boundary contribution 21, completed and pending shares, exact history recognition, conditional 234 and the short-walk obstruction. All 116 old statements and 13 snakes are preserved; seven additions give 123 statements. All 180 labels and 118,673 vertex-pair checks pass, as do six new Lean arithmetic checks. The editor and repository sources match, with authors and hyperlink settings preserved. The app compiler failed before source compilation; no updated PDF is verified.
 
-Next research priority: finish the existing case 7302 replay and its geometry, reversal and source/axiom audit, then integrate it only after the final local theorem passes. Inspect the live process before resuming; do not duplicate it. Case 7307 is the following local target. All five pending local share targets remain obligations of the full 234 certificate.
+Next research priority: continue the existing case 7302 replay and complete its geometry, reversal and final audit before integration. During the replay, close the 1,378-key reference union and exact retained-array membership. The three history exclusions are complete. Credit interpretation, full potential replay and all five pending local share targets remain obligations of the proposed 234 certificate.
 
 The preceding paper revision is [milestone 43](milestones/43-full-paper-rewrite/README.md). It presents the complete argument for 236 directly, moves the earlier 238 proof to an appendix, and integrates the latest common-budget result with explicit verification limits. All 90 previous statement blocks and all printed witnesses are retained, with two accounting statements added. The existing editor source and repository paper are synchronized; authors and PDF settings are unchanged. The exact editor source compiles successfully.
 

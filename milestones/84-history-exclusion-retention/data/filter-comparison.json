@@ -1,0 +1,41 @@
+{
+  "status": "PASS_EXACT_THREE_HISTORY_FILTER_COMPARISON",
+  "history_direction_pairs": 37875,
+  "uniform_count_tests": 227250,
+  "active_count_code_tests": 139968,
+  "active_rules": [
+    {
+      "history": 43,
+      "direction": 177,
+      "accepted": 31104,
+      "rejected": 15552,
+      "mask_sha256": "17d905e95146d917b7183d3813082bce6dacf1075c4c53f39bbd2648b975a2f9"
+    },
+    {
+      "history": 68,
+      "direction": 180,
+      "accepted": 31104,
+      "rejected": 15552,
+      "mask_sha256": "cfa3af95d1f9c301192be4255676632b118a57279598df54544e4ad4f16465e7"
+    },
+    {
+      "history": 70,
+      "direction": 177,
+      "accepted": 31104,
+      "rejected": 15552,
+      "mask_sha256": "17d905e95146d917b7183d3813082bce6dacf1075c4c53f39bbd2648b975a2f9"
+    }
+  ],
+  "inputs": {
+    "milestones/84-history-exclusion-retention/audit/check_builder.py": "5863527d0b4aca5a907bb4190ba01688ac8bfd68f0fe8b6becfc467678f02853",
+    "milestones/70-proof-supported-share-model/scripts/build.py": "bffe9f3d541a807841d564a85bc3f5d2523ae73ee7b8218b79facdac9a4987db",
+    "milestones/70-proof-supported-share-model/data/enriched-model.json": "59a9d5e5f4954b86a69a72c090a9a45030f4756da577457fd94439ace46e102c",
+    "milestones/84-history-exclusion-retention/data/realizations.json": "4a5ac12436bd68f08094c5cf7c6442ea2ac41a772cd8c260267ec9ad410803ac",
+    "milestones/84-history-exclusion-retention/lean/HistoryRealizations.lean": "07dedd43d6bada6cf054f3de913ea2e412c09142a20caeb36f2026d52a07e486",
+    "milestones/84-history-exclusion-retention/lean/HistoryExclusions.lean": "dd582ec86bd3f9c78b6377039f933548f00c2373dcbe200e4072bcc3f5b331b1",
+    "milestones/75-exact-history-bridge/history/lean/ExactHistory.lean": "0cbb26994f0b6372ee107529c1406fd0c64028137ac94a0e6c4f63671185016c",
+    "milestones/77-direction-state-coverage/lean/DirectionTables.lean": "11d3bc9766036ae57fd7eff847143c7b78ddf3fbc9f792a3086003d2c97ea1d8",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf"
+  },
+  "scope": "Exact isolated builder loop, before source-compatibility and other graph filters. Counts are not numbers of newly removed edges from the full retained graph. Python comparison is separate from the Lean theorem."
+}

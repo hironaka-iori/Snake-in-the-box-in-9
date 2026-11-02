@@ -1,0 +1,64 @@
+{
+  "status": "PASS_THREE_HISTORY_EXCLUSION_RETENTION",
+  "receipts": [
+    {
+      "module": "HistoryWindow",
+      "receipt": "data/HistoryWindow-audit.json",
+      "sha256": "0078c844ad8ad57517b3f800e33ac3c776848e7d2c9325b4adb9ab3f348e99ab",
+      "audits": 7
+    },
+    {
+      "module": "HistoryRealizations",
+      "receipt": "data/HistoryRealizations-audit.json",
+      "sha256": "d14d0ecf39116e521d67e386efd832a7f67d34d04d87157b08d03b40995a666c",
+      "audits": 3
+    },
+    {
+      "module": "HistoryUnique",
+      "receipt": "data/HistoryUnique-audit.json",
+      "sha256": "231d5a585425bb6ac3de1cdd1525f14370d53faa784ee49647ed8c024b9978f0",
+      "audits": 3
+    },
+    {
+      "module": "HistoryCountSupport",
+      "receipt": "data/HistoryCountSupport-audit.json",
+      "sha256": "21771f7203724afbdfa682e50f4bbbc3a51df6516c9cc62a1229a86d7f9b2128",
+      "audits": 5
+    },
+    {
+      "module": "TerminalCount",
+      "receipt": "data/TerminalCount-audit.json",
+      "sha256": "2ab06e32ab0c9b0c675f0c25e62e0ca8677dc7f240ba78888115990cb1aa9b1e",
+      "audits": 5
+    },
+    {
+      "module": "CountPhase04",
+      "receipt": "data/CountPhase04-audit.json",
+      "sha256": "34998a80adab1a5c4fe85000a98e57b9384b638eb4959d3a329d3c9d5870d1f7",
+      "audits": 5
+    },
+    {
+      "module": "CountPhase29",
+      "receipt": "data/CountPhase29-audit.json",
+      "sha256": "750f2b3e9917406bc8ae8df4763a00e5ec8e47a590453c5ff0fea6769e4c00fc",
+      "audits": 5
+    },
+    {
+      "module": "HistoryExclusions",
+      "receipt": "data/HistoryExclusions-audit.json",
+      "sha256": "0feca227e9fd7a9976dad7a3da0e0a68324aed3fd90488d519e3d436a43aa7bf",
+      "audits": 5
+    }
+  ],
+  "printed_theorem_audits": 38,
+  "inherited_summary_sha256": "8df8ee4ec5e62aabe9a255f1d290094a2a04e778993af57470c0fcf40b53d148",
+  "compatible_count_sources_sha256": "353ca8fb44e43d196deac1b50c224a158de4c81aa80d3825521e4d136b7b4f0e",
+  "filter_comparison_sha256": "fc220000f11931edfb32ca3420a8c7144a787d160118d702aa91913993376ec3",
+  "realizations_sha256": "4a5ac12436bd68f08094c5cf7c6442ea2ac41a772cd8c260267ec9ad410803ac",
+  "limitations": [
+    "Inherited window/direction environment reused; no clean full dependency rebuild.",
+    "Reference union and retained-array membership remain.",
+    "Credit interpretation and complete potential replay remain.",
+    "Five target local share theorems remain; no new global numerical bound."
+  ]
+}

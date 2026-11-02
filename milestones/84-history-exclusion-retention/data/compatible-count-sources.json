@@ -1,0 +1,32 @@
+{
+  "status": "PREPARED_COMPATIBLE_COUNT_REPLAY",
+  "source_sha256": {
+    "milestones/58-share-pressure/lean/ForcedShare.lean": "bd6f61ac261cb1604875e97d2ef9d822857298588dbe7f6f926d6fbafff77c8f",
+    "milestones/62-count-conditioned-share/lean/SplitShare.lean": "b16bc17641efcc3f27820059affc16cbaccbaf45dcef3d68fc60758892d0abaa",
+    "milestones/65-count-saturation-share/lean/CountPropagation.lean": "311587adc38f87de8f63aeb3203ef908242d46a16c3759d2390d88fe4fbab885",
+    "milestones/65-count-saturation-share/lean/CountChoice.lean": "0d7f4dad27d55092b11b80a726d320da466b8b5714d73b2f8540e5b75ef49681"
+  },
+  "roots": {
+    "TerminalCount": {
+      "source": "milestones/65-count-saturation-share/lean/TerminalCount.lean",
+      "source_sha256": "02aff0cdde0282f4c550c575c67ee603a969ba0c2b16781d9970dfa2e1e7ecec",
+      "adapted_source_sha256": "f5a44ed4706e4afd57ef5446aa29df6ce83bd849918a70e95e11c40c4bc54fba",
+      "change": "Import replaced and unused open command removed. All definitions and proof bodies unchanged; required helper definitions/proofs copied verbatim into the common parent namespace."
+    },
+    "CountPhase04": {
+      "source": "milestones/66-full-model-and-revision/lean/CountPhase04.lean",
+      "source_sha256": "332282b4bd2efd7737d22b69dc3480e08b13bbe45301d324581792751582b389",
+      "adapted_source_sha256": "a0e0e7e30bf53e6fc397163481452af9c58b0523420012055bb7e708d6ac3706",
+      "change": "Import replaced and unused open command removed. All definitions and proof bodies unchanged; required helper definitions/proofs copied verbatim into the common parent namespace."
+    },
+    "CountPhase29": {
+      "source": "milestones/66-full-model-and-revision/lean/CountPhase29.lean",
+      "source_sha256": "2c6a1f6bc7eb270cca1edf2566cf6941019ab8da973da6c1a64c61f028328e01",
+      "adapted_source_sha256": "5dd71d51f0da76129580f916f2dae05bf6b3902af278332fd75dde0d545947ae",
+      "change": "Import replaced and unused open command removed. All definitions and proof bodies unchanged; required helper definitions/proofs copied verbatim into the common parent namespace."
+    }
+  },
+  "support_source_sha256": "ef0900349d35cc4be67696af7ac85a7fa799371f8842967d01888cefbeff989d",
+  "reason": "The original CountChoice closure imports ShareFrame, whose declarations collide with the current LocalWindowShareBridge. The required helper declarations and three count proofs are replayed in the current environment.",
+  "scope": "Compatibility extraction only. Fresh successful Lean receipts are required before use; the original object-overlay import attempt is rejected."
+}
