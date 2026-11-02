@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 96](milestones/96-paper-revision/README.md) integrates the completed history-share bounds, conditional accepted-key graph coverage and joint slope/range comparison into the existing paper. It adds four statements and a complete 55-rule table, with zero new named definitions. The frozen checkpoint records 99/127 witness classes and 99/127 geometry classes. The interval remains 191 through 235, with 234 conditional.
+Latest continuation: [milestone 97](milestones/97-geometric-credit-integration/README.md) integrates all 505 geometric credits and their maximum with the 55-rule history credit for actual snake windows. The finite-graph sensitivity certificates show that the least pending floor vector in the original integer target box is (16,18,16,16,16): the 012034 requirement drops from 20 to 18. The revised potential has slope 496, range 602 and strict margin 30 for conditional 234. All 127 numeric coverage classes and their final graph-walk assembly are checked under the two reference-catalogue premises. The global interval remains 191 through 235.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
@@ -18,7 +18,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
 
-Next research priority: combine the remaining graph-weight components with the checked history credit, retaining the actual full edge key, and verify the complete potential on the defined graph, including conservative extra rows. Continue the existing witness and geometry batches. Keep the five unfinished target floors and two reference-catalogue premises explicit. Preserve case7302's stopped Check1 replay until a controlled isolated test. The next scheduled full paper revision is milestone 106.
+Next research priority: instantiate the four count-conditioned rules and share-120 in the checked symbol-transfer interface; assemble the completed and conditional count-free profiles, using the weaker 012034 target 18. Then check the potential on the same defined graph. Preserve the original case7302 target-20 replay; any new target-18 refutation must use separate files. Keep the two reference-catalogue premises explicit. Paper revision 96 is unchanged; the next scheduled full revision is 106.
 
 ## Historical checkpoints
 

@@ -1,0 +1,94 @@
+{
+  "status": "CHECKED_FINITE_GRAPH_INTEGER_FLOOR_BOX_CONSEQUENCE",
+  "coordinate_order": [
+    7301,
+    7302,
+    7303,
+    7307,
+    7308
+  ],
+  "integer_box_upper": [
+    16,
+    20,
+    16,
+    16,
+    16
+  ],
+  "integer_box_lower": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "fixed_other_target_floors": {
+    "012031": 16,
+    "012304": 16,
+    "012310": 12,
+    "012314": 16
+  },
+  "feasible_vectors": [
+    [
+      16,
+      18,
+      16,
+      16,
+      16
+    ],
+    [
+      16,
+      19,
+      16,
+      16,
+      16
+    ],
+    [
+      16,
+      20,
+      16,
+      16,
+      16
+    ]
+  ],
+  "obstruction_inputs": [
+    {
+      "case": 7301,
+      "obstructed_floor": 15,
+      "certificate": "E:\\Snake-in-a-box\\milestones\\97-geometric-credit-integration\\floor-sensitivity\\case7301.json",
+      "sha256": "992a6e79d8b584c8a0260cb7faa9d7e85389025b9de549cb8acc77ebe6b37cd6"
+    },
+    {
+      "case": 7303,
+      "obstructed_floor": 15,
+      "certificate": "E:\\Snake-in-a-box\\milestones\\97-geometric-credit-integration\\floor-sensitivity\\case7303.json",
+      "sha256": "6428d1bb67385fc37884e5a879192173c64318033c9f6a395fd0a718d9fd3b1b"
+    },
+    {
+      "case": 7307,
+      "obstructed_floor": 15,
+      "certificate": "E:\\Snake-in-a-box\\milestones\\97-geometric-credit-integration\\floor-sensitivity\\case7307.json",
+      "sha256": "ed4945c388e51afb79a6c989c59e47eb37231241002537b25c1861961bc23739"
+    },
+    {
+      "case": 7308,
+      "obstructed_floor": 15,
+      "certificate": "E:\\Snake-in-a-box\\milestones\\97-geometric-credit-integration\\floor-sensitivity\\case7308.json",
+      "sha256": "0a7b70916eaffdf1ea92c3d4fdc75b2171bea4523e993176f1552f3ded742391"
+    }
+  ],
+  "adjacent_obstruction_sha256": "ab46cfe7e456f3bc8e0b70b1be1b67f2ed257c0d8b5fd42a22974da2707a75d9",
+  "feasible_certificate_sha256": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+  "verification_sha256": "651f00f177625975d9c35d322d8d21ba7a5153e9cdf49afb443c2b9f27a36435",
+  "prior_verification_sha256": "f8750d8db2643d2a05fcdb8dd9913ea8ddf55fa5bd79849e0bef093361e5909a",
+  "necessity": "Any integer vector violating one of the four16 lower bounds is componentwise below its one-unit obstruction profile. A vector with012034 at most17 is below the17 obstruction profile. Pointwise smaller weights cannot admit a certificate forbidden for the larger weights.",
+  "sufficiency": "Every listed vector has weights at least those of(16,18,16,16,16), so the checked496-slope602-range potential remains valid.",
+  "conditions": [
+    "The same saved full-key edge set and endpoints are fixed.",
+    "Each edge weight is max(fixed_base_weight,120*entering_count+floor_of_its_shape), hence pointwise nondecreasing in every floor.",
+    "The boundary inequality and constant-slope/global-range criterion are unchanged.",
+    "All floor coordinates are nonnegative integers."
+  ],
+  "scope": "Exact feasible integer vectors for the fixed finite graph potential argument only. No claim for real-valued intermediate floors, universal local share minima, graph reachability restrictions, different budgets, or the global snake optimum.",
+  "verification_refresh_previous_sha256": "3751b664c2c9cf4f45dcd996e9b028acc714ae8caa9158ecbcd354853ccdb2b3",
+  "verification_refresh_reason": "Root reran the independent verifier on the same pinned arrays and certificates; only timing-dependent receipt bytes changed."
+}

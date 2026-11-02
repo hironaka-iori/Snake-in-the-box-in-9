@@ -1,0 +1,79 @@
+{
+  "status": "PASS_SHARP_FIXED_GRAPH_INTEGER_FLOOR_THRESHOLD",
+  "least_feasible_integer_floor": 18,
+  "adjacent_obstructed_floor": 17,
+  "verified_baseline_floors": {
+    "012031": 16,
+    "012032": 16,
+    "012034": 20,
+    "012301": 16,
+    "012304": 16,
+    "012310": 12,
+    "012314": 16,
+    "012340": 16,
+    "012345": 16
+  },
+  "results": [
+    {
+      "floor": 9,
+      "cycle_length": 3,
+      "cycle_weight": 1488,
+      "status": "ALL_SLOPE_RANGE_OBSTRUCTION",
+      "walk_length": 10,
+      "walk_weight": 4324,
+      "deficit": 636,
+      "criterion_ceiling": 111956
+    },
+    {
+      "floor": 14,
+      "cycle_length": 3,
+      "cycle_weight": 1488,
+      "status": "ALL_SLOPE_RANGE_OBSTRUCTION",
+      "walk_length": 16,
+      "walk_weight": 7304,
+      "deficit": 632,
+      "criterion_ceiling": 111960
+    },
+    {
+      "floor": 16,
+      "cycle_length": 3,
+      "cycle_weight": 1488,
+      "status": "ALL_SLOPE_RANGE_OBSTRUCTION",
+      "walk_length": 27,
+      "walk_weight": 12760,
+      "deficit": 632,
+      "criterion_ceiling": 111960
+    },
+    {
+      "floor": 17,
+      "cycle_length": 3,
+      "cycle_weight": 1488,
+      "status": "ALL_SLOPE_RANGE_OBSTRUCTION",
+      "walk_length": 51,
+      "walk_weight": 24663,
+      "deficit": 633,
+      "criterion_ceiling": 111959
+    },
+    {
+      "floor": 18,
+      "cycle_length": 3,
+      "cycle_weight": 1488,
+      "status": "CONDITIONAL_234_POTENTIAL",
+      "all_edges_checked": 4947008,
+      "potential_range": 602,
+      "strict_margin": 30,
+      "comparison_bound": "551765/2348"
+    }
+  ],
+  "all_parent_files_unchanged": true,
+  "monotonic_weights_checked_at_adjacent_pair": true,
+  "monotonicity_argument": "For fixed base weights and all other floors, max(base,entering+floor) is nondecreasing in floor. The18 potential remains feasible above18; the17 cycle/path obstruction remains valid below17.",
+  "saved_path_check_sha256": "347abd6bf463513db06bee650ff151a9e554d99700b5256c25401d7cf5a079f0",
+  "saved_path_certifies_range602": false,
+  "verification_seconds": 1.2030000000013388,
+  "total_additional_numerical_seconds": 22.07800000000134,
+  "source_result_sha256": "452ed8585473aa7475e473cec031d6607149812392f0ba0d588dd2081e0f6b34",
+  "input_pins_sha256": "7fcd752bcef08024f1743a9ff55a92c40e9770174d9ceaa21df165a4ffd2342a",
+  "verifier_sha256": "761eac192c9a2edf02bb0897ef150e44af16abea0cb8747ff6103b10808540ec",
+  "scope": "Sharp nonnegative integer threshold for012034 alone in the fixed saved graph, constant slope/global potential range and current boundary budget. Saved seven-edge path re-evaluated separately; no universal share bound, complete Lean graph certificate or global snake optimum."
+}

@@ -1,35 +1,42 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 96 checkpoint
+## Milestone 97 checkpoint
 
-The existing paper now integrates milestones 87–95 in dependency order:
-complete history-word classification, all applicable history credits,
-conditional accepted-key graph coverage, and joint optimisation of slope
-and potential range on the fixed saved weighted graphs. The new appendix
-lists all 55 share rules, their 69 compatible words and eight stronger caps.
-No new named definition was introduced.
+All 505 nine-direction geometric table entries are connected to the actual
+direction index, including 357 positive local bounds and 148 zero entries.
+Their maximum with the completed 55-rule history credit bounds the same
+five-centre share sum. The entire geometry catalogue, transfers and assembly
+passed Lean in the current graph/history environment. Existing geometric
+proof text changes only in import lines. The new symbol-share interface
+preserves count saturation and reverses both directions and counts.
 
-The revision preserves all 130 previous statements, the original appendices,
-authors and hyperlink metadata. Four statements bring the total to 134.
-All 13 printed paths and 118,673 vertex pairs pass the saved source checks.
-The existing successful Lean receipts supporting the additions were rechecked
-against their exact source, object and log bytes. No new theorem or complete
-dependency rebuild is claimed for this manuscript revision.
+The fixed-graph optimisation now has a less demanding conditional target.
+In case order 7301,7302,7303,7307,7308, the feasible integer floor vectors
+inside the original target box are exactly (16,h,16,16,16), with h=18,19,20.
+The h=18 potential passes all 4,947,008 edges at slope 496 and range 602,
+giving strict margin 30 for the comparison below 235. At h=17, a 51-edge
+walk and the mean-496 cycle obstruct every constant slope and global range.
+The other four one-unit reductions have their own exact obstructions.
+Monotonicity combines these into the complete integer-box classification.
 
-The frozen checkpoint records 99/127 witness classes and 99/127 geometry
-classes. Sessions 13482 and 23168 were confirmed running during this turn.
-Inspect their current process and receipt state before any restart. Case7302
-remains stopped after its Check1 timeout, with 649 successful modules.
+The general arithmetic and monotonicity arguments are Lean-checked. Concrete
+finite-graph witnesses and the potential table retain independently checked
+integer evidence; their complete Lean replay remains pending. No universal
+012034 share-18 theorem is claimed. Range 602 is sufficient, with no assertion
+that it is the least potential range for that modified profile.
 
-The maintained interval is $191\le a(9)\le235$ edges, with 234 conditional.
-The upper bound retains the inspected contributor theorem and saved audit;
-a complete independent rebuild remains pending. The completed history-credit
-theorem removes its local geometric premises, while the other weight components,
-reference catalogues, complete coverage and global potential remain separate.
+All 127 numeric coverage classes and their final graph-walk assembly are checked under the two reference-catalogue premises.
 
-The built-in compiler failed before source compilation because its helper
-could not start. No updated PDF or page-layout check is verified. The exact
-diagnostic is saved in milestone 96. The next full revision is scheduled for106.
+The checkpoint contains 2115 theorem audits, including preserved local geometry
+and auxiliary declarations. Paper revision 96 and both source copies are
+unchanged. The interval remains $191\le a(9)\le235$, with 234 conditional.
+The contributor upper-bound proof still lacks a complete independent rebuild.
+
+The original case7302 replay remains stopped after Check1's 900-second timeout,
+with 649 successful modules and unchanged original evidence. A new proof of
+share at least 18 would refute share at most 17 and must be developed separately.
+The next implementation task is the remaining concrete credit families and
+their common weight, followed by the potential on the defined graph.
 
 ## Result and evidence boundary
 
@@ -72,6 +79,13 @@ five-centre window charges and the boundary contribution 21, for \(m\ge9\), give
 W+4200m\le1098960.
 \]
 
+Milestone 97 also verifies the weaker profile with 012034 floor 18, keeping
+the other eight original target floors fixed. Its potential has slope 496 and
+range 602, giving $4696m\le1103530$ and conditional integer bound 234.
+The least pending floor vector inside the original integer box is
+$(16,18,16,16,16)$. The original stronger profile below remains valid as a
+separate sufficient comparison with range 600.
+
 The full proposed finite graph has 1,601,856 states and 4,947,008 edges. Its
 recorded potential gives the conditional inequality
 
@@ -100,7 +114,7 @@ of the five internal scale-12 shares, independently of their singleton counts.
 | --- | ---: | --- |
 | 012031 | 16 | Checked, case7300 |
 | 012032 | 16 | Pending, case7301 |
-| 012034 | 20 | Pending, case7302 |
+| 012034 | 18 suffices; original target 20 | Pending; case7302 retains the stopped target-20 replay |
 | 012301 | 16 | Pending, case7303 |
 | 012304 | 16 | Checked, case7304 |
 | 012310 | 12 | Checked, including reversal, case7305 |
@@ -114,7 +128,7 @@ archived and restored byte-for-byte. No case7305 proof process remains active.
 The combined catalogue passes 35 audits and retains exactly five local targets:
 7301, 7302, 7303, 7307 and 7308. Earlier pending checkpoints remain historical evidence.
 
-Milestone 83 is actively checking case 7302. All 121 semantic shards and
+Milestone 83 prepared the case7302 target-20 proof. Its replay is currently stopped. All 121 semantic shards and
 their combined interpretation passed, giving 127 modules before refutation
 replay. The generated compact refutation, original export simulation and
 reduced export simulations passed. Selected Lean replay and final geometry
@@ -127,7 +141,12 @@ rounds down to 235. It raises 1,043,097 weights over the completed-share
 model. All-edge checking and three Lean arithmetic audits do not discharge
 the added local premise or the full graph interpretation.
 
-## Proof interfaces and remaining work
+## Earlier proof interfaces and development record
+
+The following paragraphs preserve earlier milestone observations. Their
+pending-job statements describe those snapshots. The milestone 97 checkpoint
+above supersedes them: both 127-class batches and their assembly are complete;
+case7302 is stopped. The remaining tasks are listed in NEXT_AGENT_PROMPT.md.
 
 Milestone 75 supplies longest-suffix history recognition, credit lookup and
 count coding. Milestone 77 supplies direction-table coverage and the numeric

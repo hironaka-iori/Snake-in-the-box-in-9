@@ -1,10 +1,9 @@
 # Assignment for the next researcher
 
-Continue in `E:/Snake-in-a-box`. Read the current handover, milestone 95's
-mathematical note, checkpoint and source/literal audits, then milestone 94's
-compatible-word classification and milestone 93's
-fixed-model comparison and milestone 92's
-context-assignment and defined-graph interfaces. Paper revision 96 is current; read its checkpoint and verification report.
+Continue in `E:/Snake-in-a-box`. Read the current handover and milestone 97's
+mathematical note, checkpoint, proof summary and remaining-credit-families audit.
+Its floor-sensitivity/012034-minimum folder contains the sharp 18/17 threshold
+and the complete integer-box consequence. Paper revision 96 remains current.
 
 ## Mathematical target and evidence boundary
 
@@ -42,31 +41,44 @@ has not been established.
 
 ## Selected next mathematical task
 
-Milestone 95 closes the concrete history-share obligations: 69 geometric and
-eight capped adapters, all 55 RuleValid statements, and the maximum evaluator
-bound for every actual snake with a fitting window. Reuse these receipts.
-The final ConcreteRules95 module imports DefinedProofGraph and has no remaining
-per-word geometric premise. The root literal audit independently checks all
-saved credit values, caps, signature indices and variant indices.
+Reuse the completed geometric/history assembly in GeometricAssembly97. It
+bounds all 505 geometric entries and their maximum with the 55 history rules
+on the actual full key. The final theorem has only the snake and fitting-window
+hypotheses. The entering-count term also has its checked actual-count bound.
 
-The source ports use distinct module names and reuse the current share
-declaration. CountPropagation65 is consistently renamed CountPropagationPort95
-in eleven port files to avoid five declarations owned by HistoryCountSupport.
-Every other non-import byte is preserved. Existing historical files are intact.
-Do not mix legacy build paths back into this environment.
+SymbolCredit97 supplies the checked canonical and reversed count-symbol
+transfers and the exact six-direction suffix/count-code adapters. Instantiate
+the four historical count-conditioned refutations and share 120, preserving
+their full intervals at saturated symbols. The remaining-credit-families
+audit gives exact sources, receipts and safe import strategy. Avoid importing
+the legacy ShareFrame or ambiguous SharePressure module names.
 
-The paper was revised at milestone 96. Its four additions state the exact
-compatible-word classification, completed history bound, conditional graph
-coverage and fixed-model joint optimisation. It adds no named definitions.
-Use ordinary notation and define a concept only when essential and repeatedly
-used. The next scheduled full revision is milestone 106.
+Assemble the completed count-free profile and a conditional profile using
+012034 floor 18 rather than 20. The other pending floors remain 16. The original
+partial catalogue expects the stronger 20 premise, so it cannot simply accept
+a weaker certificate; give the new lookup its own exact interpretation.
+Keep all unfinished local premises explicit. Combine candidates by maximum,
+retaining their common centres r+4 through r+8 and the actual full edge key.
 
-Now assemble the remaining weight components and check the entire
-potential on every row of the defined graph, including conservative extra rows.
-An external-array certificate does not automatically transfer to this graph.
-Retain all reference-catalogue and pending local-floor premises explicitly.
-Continue witness and geometry batches; case7302 needs a controlled isolated
-Check1 test before any fresh completion run.
+Then check the complete potential on the defined graph. The revised floor 18
+potential has mean 496 and range 602 on the saved array, with margin 30 for 234.
+Its complete Lean graph certificate is still pending. The saved old seven-edge
+path retains deficit 600 and does not prove 602 is the optimal range.
+
+The feasible integer vectors within the original pending-floor box are exactly
+(16,h,16,16,16), h=18,19,20. The lower endpoint is supported by a full-edge
+potential; the five failed adjacent profiles have cycle/path obstructions.
+General monotonicity and comparison arithmetic are checked in PressureArithmetic97.
+Concrete graph-witness membership and the complete potential retain their
+computational scope until replayed in Lean.
+
+For a new local proof attempt, share 18 requires refuting share at most 17.
+Keep this fresh problem separate from case7302's old target 20 CNF, sources,
+proof trace and timeout evidence. Do not restart the stopped old completion
+helper merely because the next round begins. No speed improvement is assumed.
+
+Use standard notation and define only essential, substantially reused concepts.
+The next scheduled full paper revision is milestone 106.
 
 ## Reuse completed proof interfaces
 
@@ -86,21 +98,23 @@ history witnesses: class 85 has two and class 89 has one, each at position 0.
 
 ## Active jobs and local-share replay
 
-The frozen milestone 96 checkpoint has 99/127 witness classes, 99/127 geometry
-classes and 649 successful case7302 modules. Counts may have advanced.
-Witness session 13482 uses the unchanged milestone 92 checker with
-`--classes all --wait-for-geometry`. Geometry session 23168 continues separately.
-Inspect live processes and active records before any restart. The witness
-runner has a memory gate and preserves an interrupted active job's lock.
+The frozen milestone 97 checkpoint has 127/127 witness classes, 127/127 geometry
+classes and 649 successful case7302 modules. All 127 classes and their final assembly are complete. The actual-walk result retains the two reference-catalogue premises.
+Witness session 13482 and geometry session 23168 have completed their
+127-class batches. No project Lean or Python research process remained active
+at the final process check. The saved active-marker file and older waiting
+records are historical and do not demonstrate a live job. CloseBatch assembles the full numeric coverage and actual
+walk under the two reference-catalogue premises. Their final receipts are
+preserved in milestone 97. No restart of these completed batches is needed.
 
 Case 7302 stopped at `LocalWindowUnsat/ShareWindow7302/Check1` after 900 seconds.
 Its confirmed orphan compiler was stopped and failure evidence preserved.
 Do not rerun the old unique-resume helper unchanged: it assumes a prior
 Check66 failure. Do not regenerate data or invalidate existing successful proofs.
-The smallest proposed experiment is an isolated proof of the original segment 1
-statement importing only Data1, with a fresh helper name. Preserve Check1 and
-its six statements until that pilot is measured. In particular, segment 4
-includes both its check and checkpoint equality. See the replay audit.
+The original target-20 experiment is retained as a historical option. The
+current argument needs only target 18. A fresh local refutation would exclude
+share at most 17 and must preserve all original case7302 data and receipts.
+See the milestone 97 sensitivity evidence before choosing a new proof run.
 
 Case 7305 is complete and integrated: 465 source modules and 100 local audits;
 the combined catalogue has 35 audits. Completed target cases are 7300, 7304, 7305,

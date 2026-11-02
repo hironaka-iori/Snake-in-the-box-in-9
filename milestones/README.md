@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 97: geometric credit integration and least pending floors](97-geometric-credit-integration/README.md). Complete 505-shape geometric/history credit; checked symbol transfers; sharp conditional floor vector (16,18,16,16,16) in the original integer target box. No new global bound.
+
 - [Milestone 96: paper revision](96-paper-revision/README.md). Four statements, complete 55-rule history catalogue, all prior statements and metadata preserved, zero new named definitions. Source checks pass; preview unavailable before compilation.
 
 - [Milestone 95: concrete history-credit integration](95-history-credit-integration/README.md). All 69 geometric and eight capped word bounds, 55 concrete rules and their maximum for actual snakes; 923 theorem audits including the ported source closure. No new numerical bound.

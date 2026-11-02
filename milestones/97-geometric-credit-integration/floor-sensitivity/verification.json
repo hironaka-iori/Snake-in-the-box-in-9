@@ -1,0 +1,88 @@
+{
+  "status": "PASS_INDEPENDENT_FINITE_GRAPH_CERTIFICATES",
+  "verified_baseline_floors": {
+    "012031": 16,
+    "012032": 16,
+    "012034": 20,
+    "012301": 16,
+    "012304": 16,
+    "012310": 12,
+    "012314": 16,
+    "012340": 16,
+    "012345": 16
+  },
+  "results": [
+    {
+      "case": 7301,
+      "shape": "012032",
+      "tested_floor": 15,
+      "status": "ALL_SLOPE_RANGE_OBSTRUCTION",
+      "cycle_mean": "496",
+      "cycle_edges": 3,
+      "cycle_weight": 1488,
+      "walk_length": 69,
+      "walk_weight": 33592,
+      "deficit": "632",
+      "criterion_ceiling": "111960"
+    },
+    {
+      "case": 7302,
+      "shape": "012034",
+      "tested_floor": 19,
+      "status": "CONDITIONAL_234_POTENTIAL",
+      "cycle_mean": "496",
+      "cycle_edges": 3,
+      "cycle_weight": 1488,
+      "all_edges_checked": 4947008,
+      "minimum_scaled_slack": 0,
+      "potential_range": "601",
+      "comparison_bound": "1103529/4696",
+      "strict_margin_scaled": 31
+    },
+    {
+      "case": 7303,
+      "shape": "012301",
+      "tested_floor": 15,
+      "status": "ALL_SLOPE_RANGE_OBSTRUCTION",
+      "cycle_mean": "496",
+      "cycle_edges": 3,
+      "cycle_weight": 1488,
+      "walk_length": 94,
+      "walk_weight": 45992,
+      "deficit": "632",
+      "criterion_ceiling": "111960"
+    },
+    {
+      "case": 7307,
+      "shape": "012340",
+      "tested_floor": 15,
+      "status": "ALL_SLOPE_RANGE_OBSTRUCTION",
+      "cycle_mean": "496",
+      "cycle_edges": 3,
+      "cycle_weight": 1488,
+      "walk_length": 77,
+      "walk_weight": 37560,
+      "deficit": "632",
+      "criterion_ceiling": "111960"
+    },
+    {
+      "case": 7308,
+      "shape": "012345",
+      "tested_floor": 15,
+      "status": "ALL_SLOPE_RANGE_OBSTRUCTION",
+      "cycle_mean": "496",
+      "cycle_edges": 3,
+      "cycle_weight": 1488,
+      "walk_length": 36,
+      "walk_weight": 17224,
+      "deficit": "632",
+      "criterion_ceiling": "111960"
+    }
+  ],
+  "verification_seconds": 1.2340000000003783,
+  "total_recorded_numerical_seconds": 53.374000000003434,
+  "source_result_sha256": "207322ea681876e6c6a812d3c4ed35f37f6a909e4a8960ec2e36f1f367984f34",
+  "input_pins_sha256": "10b6d36daa159b3422889aff63c62e65a10f69fbcda85e3dfd019c2aa2afce27",
+  "verifier_sha256": "0d1e5d4e801543650dfe40d747b9cfa50ffd9c8c32d608a63d64a698a02de2e5",
+  "scope": "Independent integer reconstruction and full-edge potential/path checks on the pinned graph. All other conditional floors remain fixed. No Lean replay or new global snake theorem."
+}
