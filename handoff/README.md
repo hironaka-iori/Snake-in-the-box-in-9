@@ -4,13 +4,21 @@ Start with [current mathematical status](CURRENT_STATUS.md), then use the
 [continuation assignment](NEXT_AGENT_PROMPT.md). Both are intended for another
 researcher or AI agent to continue from the saved evidence.
 
+The latest manuscript and handover checkpoint is
+[milestone 86](../milestones/86-paper-revision/README.md), with 130 statements,
+fourteen new Lean checks and all printed witnesses preserved and rechecked.
+The editor compiler failed before source compilation; no new PDF is verified.
+Use its [checkpoint](../milestones/86-paper-revision/data/checkpoint.json) and
+[manifest](../milestones/86-paper-revision/data/file-manifest.json) for the
+current paper, shared handover versions and replay observation.
+
 The current proof checkpoint is [milestone 85](../milestones/85-reference-catalogue-union/README.md).
 Its 103 Lean audits check the complete 1,378-key reference table and retention
 under two explicit closed catalogue premises. The isolated filter comparison
 covers all 23,561,280 direction/count pairs. Use its
 [checkpoint](../milestones/85-reference-catalogue-union/data/checkpoint.json)
 and [manifest](../milestones/85-reference-catalogue-union/data/file-manifest.json)
-for current evidence, handover versions and a later observation of the active replay.
+for that proof round and its historical handover and replay observation.
 
 [Milestone 84](../milestones/84-history-exclusion-retention/README.md) closes
 all three history-exclusion guards for actual snakes, with 38 Lean audits.
@@ -39,7 +47,7 @@ records the forty-rule retention theorem, 66 audits, exact-loop comparison,
 receipt hashes, repository refs and unchanged paper hash.
 Its [saved-file manifest](../milestones/81-recovered-short-rule-retention/data/file-manifest.json)
 records the versions saved with that milestone. Shared handover files have since
-been updated; use milestone 85's manifest for their current versions.
+been updated; use milestone 86's manifest for their current versions.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
 inspected contributor theorem and saved audit, without a fresh complete local
@@ -68,8 +76,8 @@ the exact array index; credit interpretation follows. Complete the local
 shares and potential replay before claiming 234. Historical manifests retain
 their earlier versions of the shared handover documents.
 
-The latest paper is revision 76, unchanged and hash-matched during milestone 85.
-Authors and hyperlink settings are preserved. The compiler retry at milestone 77 failed
+The latest paper is revision 86, updated in place with a hash-matched repository mirror.
+Authors and hyperlink settings are preserved. The compiler attempt at milestone 86 failed
 before source compilation; its diagnostic is saved there. No new PDF
 is claimed. Recompile the same editor source when the app compiler can start.
 The exact optimum remains unresolved.

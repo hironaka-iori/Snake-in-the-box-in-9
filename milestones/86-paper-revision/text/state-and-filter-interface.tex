@@ -1,0 +1,197 @@
+\subsection{Actual state sequences and exclusion filters}\label{sec:state-filter-bridge}
+The finite comparison requires a consistent sequence of states for every
+snake, followed by a justification of each rejection test. These are separate
+from checking the numerical potential. Write $d_i$ for the direction from
+$x_i$ to $x_{i+1}$, and let $\operatorname{can}$ relabel coordinates in order of
+first appearance. Thus equal canonical words specify the same equality
+relations among directions. For a word $w$, write $w[a,b)$ for its entries
+from $a$ through $b-1$.
+
+Let $P=(x_0,\ldots,x_m)$ with $m\ge9$. Define
+\[
+u_r=\operatorname{can}(d_r\cdots d_{r+7}),\qquad
+a_r=\operatorname{can}(d_r\cdots d_{r+8}).
+\]
+Here $u_r$ is defined for $0\le r\le m-8$, and $a_r$ for $0\le r<m-8$.
+The symbol $a_r$ is a canonical nine-direction word, rather than a cube
+coordinate. Relabel each identifier in the dictionary of
+Section~\ref{sec:exact-history} by its unique canonical word in the ordered
+505-entry table. This bijection preserves suffixes and their lengths.
+Let $h_r$ be the longest listed suffix of $a_0\cdots a_{r-1}$ in this
+relabelled dictionary, and define
+\[
+c_r=\sum_{j=0}^{4}(b_{r+3+j}-1)6^{4-j},\qquad
+\widehat c_r=\sum_{j=0}^{5}(b_{r+3+j}-1)6^{5-j}.
+\]
+The second expression is used only at a fitting nine-direction window.
+Subtraction by one makes the symbols $1,\ldots,6$ into base-six digits.
+
+\begin{proposition}[Consistent actual states]\label{prop:actual-state-sequence}
+Every snake with $m\ge9$ determines $m-7$ states, indexed by
+$0\le r\le m-8$, and $m-8$ consecutive candidate transitions. Its state at
+$r$ records $(u_r,h_r,c_r)$. At transition $r<m-8$, the source and target
+count codes are respectively
+\[
+\left\lfloor\frac{\widehat c_r}{6}\right\rfloor=c_r,
+\qquad \widehat c_r\bmod6^5=c_{r+1},
+\]
+and the entering count is $\widehat c_r\bmod6+1=b_{r+8}$.
+The history update gives $h_{r+1}$ and satisfies both direction-shape
+compatibility tests of the model. These assertions do not yet assert that
+the transition occurs in the saved retained-edge array.
+\end{proposition}
+\begin{proof}
+Every consecutive segment of an induced path is induced. Canonicalization
+therefore places each eight-direction window among the 132 recorded shapes
+and each nine-direction window among the 505 recorded extensions. The finite
+coverage checks enumerate every canonical induced word of the relevant
+length; they do not assume that a selected sample exhausts actual windows.
+Canonicalizing the first or last eight entries of $a_r$ gives $u_r$ or
+$u_{r+1}$, respectively, because equality of coordinates is preserved under
+restriction and relabelling.
+
+All represented counts are internal, so $1\le b_i\le6$. The displayed
+quotient and remainder identities follow by separating the first and last
+base-six digits. Lemma~\ref{lem:longest-suffix} gives the exact history
+update. A nonempty history ends in the preceding nine-direction symbol;
+its compatible shape is consequently the target shape of that symbol.
+The empty history leaves the shape explicit. Thus the dictionary gives
+$132+74$ shape/history possibilities, each with $6^5$ count codes, and all
+actual states lie in the stated set of $1601856$ states. Consecutive
+transitions have the same intermediate state, including the terminal state
+at $r=m-8$.
+\end{proof}
+
+\begin{proposition}[Interval and short-rule retention]\label{prop:local-filter-retention}
+Every actual candidate transition passes the ten completed four-centre
+interval exclusions and the forty completed short-count exclusions of the
+current model, in both orientations and at every applicable offset.
+An offset is applicable only when the whole direction window fits and all
+tested counts occur among $b_{r+3},\ldots,b_{r+8}$. The sum tests require
+each participating symbol to be less than six.
+\end{proposition}
+\begin{proof}
+An interval entry specifies four consecutive internal counts and the five
+directions through them. Its three possible offsets are $s=0,1,2$, with
+directions beginning at $r+s+2$ and counts beginning at $r+s+3$. The decoded
+digits are exactly the corresponding truncated singleton counts. Each
+interval $[\ell,h]$ in these entries has $\ell\le6$ and either $h<6$ or
+$h=21$. For an internal count $\alpha\le21$,
+\[
+\ell\le\min\{6,\alpha\}\le h
+\quad\Longleftrightarrow\quad
+\ell\le\alpha\le h.
+\]
+Thus a matching encoded interval would satisfy the actual-count hypotheses
+of its completed local refutation, a contradiction.
+
+The forty short rules comprise 37 cap tests and three sum tests. Every cap
+is strictly below six, so a passing cap on $b_i$ is the same cap on
+$\alpha_i$. In a sum test, the explicit conditions $b_i<6$ give
+$b_i=\alpha_i$ at every tested position. The encoded forbidden sum would
+therefore contradict its established actual-count inequality. Reversing a
+window of $L$ directions replaces its internal position $j$ by $L-j$;
+reversing the snake preserves the singleton counts and all induced-path
+conditions. This proves the same conclusions for the jointly reversed
+direction and count tests. The ten refutations and forty local inequalities
+are individually checked inputs to this argument; completeness of their
+placement and decoding is a separate checked assertion.
+\end{proof}
+
+Three of the remembered signatures have a stronger property than general
+history recognition. For an eleven-direction word $w$, define its overlap
+signature by
+\[
+\mathcal S(w)=\bigl(\operatorname{can}(w[0,9)),
+\operatorname{can}(w[1,10)),\operatorname{can}(w[2,11))\bigr).
+\]
+
+\begin{proposition}[Three unambiguous exclusions]\label{prop:history-exclusion-retention}
+Suppose transition $r$ emits $\mathcal S(w)$ for one of the following
+canonical words. Then $r\ge2$, the canonical eleven-direction window
+beginning at $s=r-2$ is exactly $w$, and the indicated count bound holds:
+\[
+\begin{array}{c|c}
+w&\text{count bound}\\\hline
+01230432543&\alpha_{s+10}\ge3\\
+01234532013&\alpha_{s+8}\ge3\\
+01234532053&\alpha_{s+10}\ge3
+\end{array}
+\]
+Consequently none of the three history exclusions, which require the
+corresponding stored symbol to be at most two, rejects an actual snake.
+\end{proposition}
+\begin{proof}
+The history invariant identifies an emitted triple with
+$(a_{r-2},a_{r-1},a_r)$ and prohibits emission at $r=0,1$. These are precisely
+the overlapping nine-direction slices of the actual eleven-direction
+window beginning at $s$. Its first nine canonical labels are fixed by the
+first signature entry. Every canonical label is below nine, so there are
+only $9^2=81$ possibilities for the remaining pair. For each displayed
+signature, exact finite checking retains only the displayed word after
+requiring canonical order of first appearance, induced-path validity,
+and equality of the other two canonical slices. This check covers every
+compatible word in nine coordinates.
+
+Theorem~\ref{thm:three-forced-corners} now supplies the stated count bounds.
+Since $s=r-2$, their positions are $r+8$, $r+6$, and $r+8$. These are the
+sixth, fourth, and sixth stored counts, respectively. Truncating a count
+at six preserves the lower bound three, which contradicts every tested
+upper bound two.
+\end{proof}
+
+For the reference family, let $\mathcal F_{235}$ contain the 1287 keys of
+the six-centre catalogue, and let $\mathcal F_{236}$ contain the 732 keys
+of the earlier radius-four catalogue. A key is a canonical direction word
+together with its internal count symbols. Let $\mathsf C_{235}$ and
+$\mathsf C_{236}$ denote, separately, the assertions that every local
+necessary-condition system prescribed by the respective catalogue is
+refuted. These are the two catalogue premises used below.
+
+\begin{proposition}[Conditional reference retention]\label{prop:reference-union-retention}
+Assume $\mathsf C_{235}$ and $\mathsf C_{236}$. Every actual candidate
+transition avoids the reference family in both orientations. After joint
+reversal and canonical relabelling, this family has
+\[
+1287+732-641=1378
+\]
+keys and 2678 distinct oriented direction-and-count pairs. For a key with
+$w$ count symbols, where $2\le w\le6$, every offset $s$ with $s+w\le6$
+is covered.
+\end{proposition}
+\begin{proof}
+The exact union takes all keys of $\mathcal F_{235}$ and 91 additional
+keys of $\mathcal F_{236}$. Checked source indices identify every chosen
+representative with a key of one original catalogue. Each has $w+1$
+directions and $w$ symbols in $\{1,\ldots,6\}$.
+
+At offset $s$, the extracted count code is
+\[
+\left\lfloor\frac{\widehat c_r}{6^{6-s-w}}\right\rfloor\bmod6^w.
+\]
+Uniqueness of a fixed-length base-six expansion identifies these digits
+with $b_{r+s+3},\ldots,b_{r+s+w+2}$. The matching directions start at
+$r+s+2$. A symbol below six gives equality to the actual count; symbol
+six gives its full interval $[6,21]$. Translation and coordinate
+normalization therefore turn a hypothetical match into a realization
+of a refuted local system, contradicting the relevant catalogue premise.
+Reversal reverses both lists and preserves this argument. Checking the
+union's entries and indices establishes their coverage; it does not
+discharge either catalogue-refutation premise.
+\end{proof}
+
+These results connect the stated filters to arbitrary snakes. Completing
+the charge-model proof still requires identification of each actual step
+with its exact retained-array entry and justification of every assigned
+credit. A general three-window signature may admit several compatible
+eleven-direction words; all must support the assigned bound on
+$\sum_{i=4}^{8}\sigma_{12}(x_{r+i})$. Bounds on those same five centres
+combine by maximum. The complete potential and its range must then be
+checked and summed along this actual walk. The present interface results
+alone yield no improvement to the upper bound 235. The source catalogues,
+finite comparisons and checked state and filter proofs are preserved in the
+interface archive~\cite{interfacearchive}. The union cardinalities are checked
+by exact source-table comparison; membership of every chosen key and the
+conditional retention argument have Lean proofs. Historical closed catalogue
+proofs and their saved audits are available, while their complete compatible
+dependencies have not been imported into the current checking environment.

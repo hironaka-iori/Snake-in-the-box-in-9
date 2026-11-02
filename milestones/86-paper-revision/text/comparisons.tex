@@ -1,0 +1,47 @@
+\subsection{Completed local bounds and conditional comparisons}
+For each saved weighted graph, a potential is checked on every transition and
+an explicit cycle attains the minimum mean. The means below use the weight
+$120b_{\mathrm{new}}+L$, without division by 120. Potential ranges use the same
+units. In the rational row the stored potential and weights are scaled by 19.
+\begin{center}\small
+\begin{tabular}{p{0.40\textwidth}r r c}
+\toprule
+Count-independent shares used & Mean & Range & Bound from~\eqref{eq:improved-potential}\\\midrule
+Earlier catalogue, without the $012310$ floor & $480$ & $536$ & $10609/45$\\
+All completed bounds in Theorem~\ref{thm:countfree-completed} & $483$ & $551$ & $157625/669$\\
+Completed bounds and the proposed $012034$ floor 20 & $9259/19$ & $11301/19$ & $20965613/89059$\\
+All nine target floors & $496$ & $600$ & $137941/587$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The first row is retained as an earlier comparison. The second uses completed
+local share theorems and gives integer bound 235, conditional on the remaining
+graph interpretation and potential replay. The third adds one unproved local
+share premise and still gives 235. The fourth gives 234 and retains five local
+share premises. Separate integer computations verify every saved potential
+inequality and every attaining cycle; these computations do not discharge the
+remaining arbitrary-snake proof obligations~\cite{countfreearchive,shareclosurearchive,targetsharearchive}.
+
+For the full target catalogue, Corollary~\ref{cor:potential234} gives
+\[
+4696m\le1098960+8\cdot496+600=1103528,
+\qquad m\le\frac{137941}{587}<235.
+\]
+The strict margin at 235 is 32. A three-transition cycle with weights
+$616,496,376$ attains mean 496 in this graph. Its existence does not supply
+a snake construction.
+
+The proposed $012034$ floor alone raises 1,043,097 edge weights. Its attaining
+cycle has nineteen edges, and the corresponding conditional estimate is
+\[
+89059m\le20965613.
+\]
+Even an ideal potential of range zero cannot make this mean satisfy
+\eqref{eq:strict234}, since
+\[
+111960\cdot19-227\cdot9259=25447>0.
+\]
+Thus completing that local theorem is useful proof progress, while additional
+charge or a change to the graph or boundary argument is required to reach
+234. The rational arithmetic is checked separately from the finite graph and
+the pending local theorem~\cite{targetsharearchive}.

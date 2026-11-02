@@ -14,16 +14,17 @@ that entire proof independently. The exact optimum remains unresolved.
 The conjecture 196 has neither a matching construction nor an optimality proof
 in this work. The proposed improvement to 234 remains conditional.
 
-The current paper is revision 76, with authors Iori Hironaka, Tommy Ma and
-Steven Zhan. Its repository and editor copies have SHA256
-`3c67d4c168ee7fe463f2ea49da3459f2178ee2a655fd45f9ed374f88126f43dd`.
-Source checks preserve all 116 previous statements and add seven, giving 123;
-all 13 printed paths and 118,673 vertex pairs were checked. The built-in
-compiler failed before source compilation. No new PDF or layout check is
-claimed. Milestones 77 through 85 add proof interfaces, a completed local share theorem,
-forty-rule retention, three-history retention, conditional reference retention,
-a cycle obstruction and the pending next share certificate
-without revising the paper. The next full revision is 86.
+The current paper is revision 86, with authors Iori Hironaka, Tommy Ma and
+Steven Zhan. Its repository and existing editor copies have SHA256
+`eb9d5581336060b799e93b7532f59cdb485ce7f5ee39b28bd2f0fdfba4a09ec3`.
+It incorporates milestones 77–85 and has 130 statement blocks: 122 retained
+unchanged, one strengthened local-share theorem and six new propositions and one definition.
+All 13 printed paths, 118,673 vertex pairs and 190 labels pass source checks.
+Fourteen new Lean checks cover the abstract bonus argument and conditional
+comparison arithmetic. The zero-bonus subgraph supplies an exact
+criterion for strict improvement of a finite minimum cycle mean. The original appendix body and all metadata are preserved.
+The built-in compiler failed before reading the source; no new PDF or layout
+check is claimed. The next full revision is scheduled for milestone 96.
 
 ## Chosen route: charge empty squares
 
@@ -194,7 +195,7 @@ guards, interval-filter assembly, catalogue audit and a later replay observation
 Milestone 81 saves the forty-rule theorem, independent review and exact comparison.
 Milestone 84 saves the three-history theorem. Milestone 85 saves the exact reference
 table, conditional theorem, provenance review, exhaustive comparison and a later
-case7302 observation. Its manifest identifies the current shared handover versions.
+case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies the current shared handover versions.
 Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.

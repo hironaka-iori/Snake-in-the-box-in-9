@@ -1,0 +1,61 @@
+\subsection{When an added charge can improve the cycle mean}\label{sec:bonus-criterion}
+The next definition separates the size of a proposed charge from the cycles
+on which it contributes. All graphs in this subsection are finite and have
+at least one directed cycle; all weights are rational.
+
+\begin{definition}[Critical cycles and the zero-bonus subgraph]\label{def:zero-bonus}
+For a weighted directed graph $(G,w)$, let $\mathcal C(G)$ be its finite set
+of simple directed cycles and define
+\[
+\overline w(C)=\frac{1}{|C|}\sum_{e\in C}w(e),\qquad
+\mu(G,w)=\min_{C\in\mathcal C(G)}\overline w(C).
+\]
+A cycle $C$ is critical if $\overline w(C)=\mu(G,w)$. For a nonnegative
+edge bonus $B$, define the zero-bonus subgraph
+\[
+G_B^0=\bigl(V(G),\{e\in E(G):B(e)=0\}\bigr).
+\]
+\end{definition}
+
+\begin{proposition}[Exact criterion for improving the cycle mean]\label{prop:bonus-criterion}
+Keep $G$ fixed and let $B(e)\ge0$ for every edge. Then
+\[
+\mu(G,w+B)\ge\mu(G,w),
+\]
+with equality if and only if $G_B^0$ contains a critical cycle of $(G,w)$.
+Equivalently, the minimum mean increases strictly if and only if every
+previously critical cycle has positive total bonus.
+\end{proposition}
+\begin{proof}
+For every simple cycle,
+\[
+\overline{w+B}(C)=\overline w(C)+\frac{1}{|C|}\sum_{e\in C}B(e)
+\ge\overline w(C)\ge\mu(G,w).
+\]
+Taking the minimum proves monotonicity. If a critical cycle lies in $G_B^0$,
+its weight is unchanged and still attains the original minimum, proving
+equality.
+
+Conversely, suppose the minima are equal. The nonempty finite set of simple
+cycles contains a cycle attaining the new minimum. Both inequalities above
+must then be equalities for that cycle. It was critical before the bonus,
+and its total bonus is zero. Every summand is nonnegative, so every edge of
+the cycle has bonus zero, placing the cycle in $G_B^0$. This proves the
+equivalence. Since the new minimum cannot decrease, strict increase is
+equivalent to the absence of such a cycle, or to positive total bonus on
+every old critical cycle. Finiteness guarantees the attainment used here.
+The minimum-attainment, equality, strictness and nonnegative-sum implications
+have been checked in Lean for rational cycle means.
+\end{proof}
+
+This criterion gives an exact test for a proposed family of additional
+shares on a fixed finite graph: their combined positive increments must
+meet every critical cycle. Increasing a single witnessed cycle is insufficient
+when another critical cycle receives no bonus. The condition determines
+whether the finite mean increases; it does not by itself guarantee the
+strict numerical margin in~\eqref{eq:strict234}, bound the potential range,
+or prove that the additional shares are valid for actual snakes. When several
+share bounds concern the same five centres, first combine them by their
+maximum and define $B$ as the resulting change in edge weight. This preserves
+the accounting rule for overlapping alternatives.
+

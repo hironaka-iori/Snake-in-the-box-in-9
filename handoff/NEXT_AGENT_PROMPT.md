@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, and milestone 85's README and exact checkpoint. Milestone 83 preserves the active case 7302 proof sources.
+`handoff/CURRENT_STATUS.md`, milestone 86's paper checkpoint and milestone 85's proof README. Milestone 83 preserves the active case 7302 proof sources.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -66,8 +66,10 @@ restriction on realizable walks or stronger boundary information could change
 that conclusion and would need its own proof.
 
 Preserve the manuscript authors Iori Hironaka, Tommy Ma and Steven Zhan and all
-hyperlink settings. Revision 76 is the latest paper; milestones 77 through 85 have separate
-proof notes. The next full revision is scheduled for 86. The existing editor file is
+hyperlink settings. Revision 86 is the latest paper and incorporates milestones
+77 through 85. It has 130 statements and fourteen new logic audits; source checks
+pass, while the editor compiler failed before source compilation. The next
+full revision is scheduled for 96. The existing editor file is
 `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`, with a repository
 mirror at `paper/snake9_research.tex`. Edit the existing editor file in place
 when a paper revision is due, synchronize the mirror and use the built-in

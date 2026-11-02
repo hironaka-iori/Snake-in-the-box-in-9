@@ -1,0 +1,63 @@
+\subsection{An obstruction to bonuses confined to saturated counts}\label{sec:unsaturated-obstruction}
+Recovering the excess hidden by $b_i=6$ is one possible source of additional
+charge. The completed-share graph has a minimum-mean cycle on which every
+stored count is smaller than six. This prevents such bonuses alone from
+improving its minimum mean. It is a direct instance of
+Proposition~\ref{prop:bonus-criterion}: the old critical cycle remains in
+the zero-bonus subgraph.
+
+\begin{proposition}[An unchanged cycle under nonnegative bonuses]\label{prop:unsaturated-cycle}
+Let a finite directed graph have edge weights $w$, minimum cycle mean 483,
+and the following four-edge cycle. The count column records six consecutive
+truncated counts on each edge.
+\begin{center}
+\begin{tabular}{c c r}
+\toprule
+Edge in cyclic order & Counts & Weight\\\midrule
+1 & $(5,2,4,5,5,2)$ & 252\\
+2 & $(2,4,5,5,2,4)$ & 480\\
+3 & $(4,5,5,2,4,5)$ & 600\\
+4 & $(5,5,2,4,5,5)$ & 600\\
+\bottomrule
+\end{tabular}
+\end{center}
+Replace $w(e)$ by $w(e)+B(e)$, where $B(e)\ge0$ on every edge and $B(e)=0$
+whenever all six stored counts on that edge are smaller than six. Keep the
+same graph. Its minimum cycle mean remains 483. No potential for these new
+weights can satisfy~\eqref{eq:strict234} with positive scale and nonnegative
+range.
+\end{proposition}
+\begin{proof}
+Every cycle has nondecreasing total weight, so its mean remains at least 483.
+The displayed cycle has unchanged total
+\[
+252+480+600+600=1932=4\cdot483.
+\]
+It still attains 483, proving equality of the minimum cycle means.
+
+Suppose a potential satisfies $p+\pi(v)\le d(w(e)+B(e))+\pi(u)$ on every
+edge $e=(u,v)$, with $d>0$ and range at most $R\ge0$. Summing over the displayed
+cycle cancels its four potential differences and gives $p\le483d$. Therefore
+\[
+227p-R\le227\cdot483d=109641d<111960d,
+\]
+contradicting the strict criterion. The deficit at scale one and range zero
+is already $111960-227\cdot483=2319$. The cycle arithmetic and monotonicity
+of potential inequalities under nonnegative bonuses have passed Lean checks.
+The cycle's membership in the saved graph and the original minimum mean were
+verified separately against all graph edges~\cite{unsaturatedarchive}.
+\end{proof}
+
+The hypothesis concerns the current graph and the current global budget.
+It does not assert that this cycle is realizable by an actual snake. Proving
+additional geometric exclusions, restricting to realizable walks, or changing
+the boundary estimate can invalidate its use as an obstruction. Bonuses on
+edges whose counts are all below six also lie outside the stated restriction.
+
+The same witness identifies two relevant local targets. The proposed floor
+20 for $012034$ applies twice, and the proposed floor 16 for $012340$ applies
+once. With both floors, its total would rise by 56 to 1988, giving mean 497.
+This calculation concerns only the displayed cycle; another cycle may have
+a lower mean in the modified graph. Both local targets remain unproved.
+Together with the single-target comparison above, this explains why completing
+the $012034$ proof alone cannot settle the stronger bound.
