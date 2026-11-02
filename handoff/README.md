@@ -5,11 +5,11 @@ Start with [current mathematical status](CURRENT_STATUS.md), then use the
 researcher or AI agent to continue from the saved evidence.
 
 The latest proof checkpoint is
-[milestone 80](../milestones/80-012310-share-closure/README.md).
-Its [checkpoint](../milestones/80-012310-share-closure/data/checkpoint.json)
-records the completed local and combined audits, model comparison, exact
+[milestone 81](../milestones/81-recovered-short-rule-retention/README.md).
+Its [checkpoint](../milestones/81-recovered-short-rule-retention/data/checkpoint.json)
+records the forty-rule retention theorem, 66 audits, exact-loop comparison,
 receipt hashes, repository refs and unchanged paper hash.
-Its [saved-file manifest](../milestones/80-012310-share-closure/data/file-manifest.json)
+Its [saved-file manifest](../milestones/81-recovered-short-rule-retention/data/file-manifest.json)
 supports exact local and staged verification.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
@@ -31,13 +31,14 @@ identify their saved file versions.
 
 Milestones 77 and 78 connect actual snake windows to one consistent numeric
 state sequence. Milestone 79 connects encoded counts to exclusion predicates
-and instantiates the ten completed interval filters. The remaining retained-edge
-work covers the reference union, recovered short rules, history exclusions and
+and instantiates the ten completed interval filters. Milestone 81 closes the forty
+recovered short filters. The remaining retained-edge work covers the reference
+union, three history exclusions and
 the exact array index; credit interpretation follows. Complete the local
 shares and potential replay before claiming 234. Historical manifests retain
 their earlier versions of the shared handover documents.
 
-The latest paper is revision 76, unchanged and hash-matched during milestone 80.
+The latest paper is revision 76, unchanged and hash-matched during milestone 81.
 Authors and hyperlink settings are preserved. The compiler retry at milestone 77 failed
 before source compilation; its diagnostic is saved there. No new PDF
 is claimed. Recompile the same editor source when the app compiler can start.

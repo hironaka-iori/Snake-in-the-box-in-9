@@ -20,7 +20,8 @@ Steven Zhan. Its repository and editor copies have SHA256
 Source checks preserve all 116 previous statements and add seven, giving 123;
 all 13 printed paths and 118,673 vertex pairs were checked. The built-in
 compiler failed before source compilation. No new PDF or layout check is
-claimed. Milestones 77 through 80 add proof interfaces and a completed local share theorem without revising the paper.
+claimed. Milestones 77 through 81 add proof interfaces, a completed local share theorem and
+forty-rule retention without revising the paper. The next full revision is 86.
 
 ## Chosen route: charge empty squares
 
@@ -106,9 +107,15 @@ Every actual snake survives the ten completed milestone 72 interval filters,
 at all three offsets and in both orientations. The closed local certificates
 are imported from pinned existing objects, without a clean dependency rebuild.
 
-The remaining retained-edge work is the 1,378-key reference union, forty
-recovered short rules, three history exclusions and the exact retained-array
-index. The reference theorem sources and contributor logs were audited; their
+Milestone 81 closes the forty recovered short-rule filters: 66 theorem audits
+across eight modules, covering both orientations and every fitting represented
+placement. A separate exact builder-loop comparison checks 23,561,280
+direction/count pairs, with source reconstruction and complete input hashes.
+It reuses 970 pinned certificate objects and freshly checks three small support
+sources. It does not rebuild the entire inherited closure.
+
+The remaining retained-edge work is the 1,378-key reference union, three
+history exclusions and the exact retained-array index. The reference theorem sources and contributor logs were audited; their
 complete union is still uninstantiated in the current environment.
 Every three-ID credit needs every compatible eleven-direction interpretation;
 forgotten coordinate returns can produce several variants. Alternative lower
@@ -139,7 +146,8 @@ Use the repository sources and milestone receipts as the reproducible record.
 The dated handover contains detailed environment paths and earlier evidence.
 Milestone 77 saves its coverage checks, superseded memory-intensive attempts
 and replay snapshot. Milestone 78 saves the selector/state checks. Milestone 79 saves the encoded
-guards, interval-filter assembly, catalogue audit and a later replay observation. Build objects remain local and are excluded from Git. Reproduction
+guards, interval-filter assembly, catalogue audit and a later replay observation.
+Milestone 81 saves the forty-rule theorem, independent review and exact comparison. Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
 

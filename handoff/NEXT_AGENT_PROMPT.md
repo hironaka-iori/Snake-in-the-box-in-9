@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, and milestone 80's README and exact checkpoint.
+`handoff/CURRENT_STATUS.md`, and milestone 81's README and exact checkpoint.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -27,9 +27,10 @@ Milestones 77 and 78 now check coverage, lookup maps, numeric history updates
 and the actual combined state sequence. Reuse their successful receipts.
 Milestone 79 checks encoded count slices/digits, injectivity, reversal and
 saturation, and proves retention under all ten completed milestone 72 interval
-filters. Reuse these checked interfaces. The next task is to instantiate the
-1,378-key reference union, the forty recovered short rules and three history
-exclusions, then supply the exact retained-array index. The current reference
+filters. Milestone 81 proves retention under all forty recovered short filters,
+with 66 audits and an exhaustive isolated-loop comparison. Reuse these checked
+interfaces. The next assembly task is to instantiate the 1,378-key reference
+union and three history exclusions, then supply the exact retained-array index. The current reference
 interfaces still have explicit Refuted premises. The closed reference proofs
 are in pinned contributor revisions and saved audits, with the current local
 snapshot under milestone 51. Their full union is not yet imported here. After retained-edge membership, interpret
@@ -46,8 +47,8 @@ restriction on realizable walks or stronger boundary information could change
 that conclusion and would need its own proof.
 
 Preserve the manuscript authors Iori Hironaka, Tommy Ma and Steven Zhan and all
-hyperlink settings. Revision 76 is the latest paper; milestones77 through80 have separate
-proof notes. The existing editor file is
+hyperlink settings. Revision 76 is the latest paper; milestones 77 through 81 have separate
+proof notes. The next full revision is scheduled for 86. The existing editor file is
 `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`, with a repository
 mirror at `paper/snake9_research.tex`. Edit the existing editor file in place
 when a paper revision is due, synchronize the mirror and use the built-in
