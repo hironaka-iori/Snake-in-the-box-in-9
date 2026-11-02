@@ -1,0 +1,35 @@
+{
+  "status": "STOPPED",
+  "pid": 21000,
+  "started_at": "2026-11-02T17:34:37.011993+00:00",
+  "modules": [
+    "CountConditionedCredits98",
+    "ActualGraphKeys98",
+    "CombinedWeights98",
+    "GlobalCharge98",
+    "PotentialAssembly98"
+  ],
+  "records": [
+    {
+      "module": "CountConditionedCredits98",
+      "status": "PASS_CONCRETE_WEIGHT_MODULE",
+      "receipt_sha256": "54985bac89abed5a60c85a06f9e472dc2e5c25ac00dc9eb3282d15d54d94146c",
+      "theorem_audits": 7
+    },
+    {
+      "module": "ActualGraphKeys98",
+      "status": "PASS_CONCRETE_WEIGHT_MODULE",
+      "receipt_sha256": "90c36682ef6244d50a4536a5219dc8232a08165afcf70662e110b912d06f3028",
+      "theorem_audits": 3
+    },
+    {
+      "module": "CombinedWeights98",
+      "status": "PASS_CONCRETE_WEIGHT_MODULE",
+      "receipt_sha256": "b2eab901e1abcc87b922b1a328994162b2b98a2437952c826638b710ce30e149",
+      "theorem_audits": 3
+    }
+  ],
+  "active": null,
+  "exception": "AssertionError(\"E:\\\\Snake-in-a-box\\\\milestones\\\\98-concrete-weight-integration\\\\lean\\\\GlobalCharge98.lean:130:2: error: omega could not prove the goal:\\na possible counterexample may satisfy the constraints\\n  g \u2265 0\\n  f \u2265 0\\n  e \u2265 0\\n  d \u2265 0\\n  c \u2265 0\\n  c - 5*f \u2264 0\\n  b \u2265 0\\n  b - e \u2264 -21\\n  120*b + c - d \u2265 0\\n  a \u2265 9\\n  840*a + 24*e + g \u2264 220296\\n  4200*a + d \u2265 1098961\\nwhere\\n a := \u2191m\\n b := \u2191(\u2211 r \u2208 range (m - 8), coreAlpha p (r + 8))\\n c := \u2191(\u2211 r \u2208 range (m - 8), (List.map (fun i => coreShare 12 p (r + (i + 4))) (List.range 5)).sum)\\n d := \u2191(\u2211 r \u2208 range (m - 8), weight floor (actualHistory p r) (directionId p r) (sixCode p r))\\n e := \u2191(totalSingleton p)\\n f := \u2191(List.map (coreShare 12 p) (List.range (m + 1))).sum\\n g := \u2191(List.map (fun k => coreShare 12 p k) (List.range (m + 1))).sum\\n'Snake9.GlobalCharge98.discarded_counts' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.GlobalCharge98.core_count_total' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.GlobalCharge98.actual_entering_count_budget' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.GlobalCharge98.actual_share_overlap' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.GlobalCharge98.actual_total_weight_budget' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\\n'Snake9.GlobalCharge98.completed_total_weight_budget' depends on axioms: [propext,\\n sorryAx,\\n Classical.choice,\\n Quot.sound]\\n\")",
+  "stopped_at": "2026-11-02T17:36:43.883095+00:00"
+}

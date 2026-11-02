@@ -1,0 +1,147 @@
+import CombinedWeights98
+import UpperBound247
+
+/-!
+The actual total-weight charge budget. The generic discarded-count argument
+below is copied from milestone67 BoundaryCharge.discarded_counts into a fresh
+namespace, avoiding the legacy ExtendedBudget import closure. The overlap
+argument uses the already checked shifted_prefix_sum_le from milestone73.
+-/
+namespace Snake9.GlobalCharge98
+open Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow
+open Snake9.Direction77 Snake9.GraphWalk78 Snake9.Weights98
+open Snake9.CountGeometry78 Snake9.CountFreeBridge Snake9.SquareIncidence
+open Finset
+open scoped BigOperators
+
+set_option maxHeartbeats 2000000
+
+/-- The discarded indices0 through7 and the final endpoint contribute21.
+This is the generic arithmetic proof from BoundaryCharge67.discarded_counts. -/
+theorem discarded_counts (alpha b : Nat → Nat) (m : Nat) (hm : 8 ≤ m)
+    (h0 : 4 ≤ alpha 0) (hend : 4 ≤ alpha m)
+    (hpos : ∀ i, 0 < i → i < m → 1 ≤ alpha i)
+    (hpair : ∀ i, 0 < i → i+1 < m → 4 ≤ alpha i+alpha (i+1))
+    (htrunc : ∀ i < m-8, b i ≤ alpha (8+i)) :
+    (∑ i ∈ Finset.range (m-8), b i)+21 ≤
+      ∑ i ∈ Finset.range (m+1), alpha i := by
+  have hpref : 17 ≤ ∑ i ∈ Finset.range 8, alpha i := by
+    have h12 := hpair 1 (by omega) (by omega)
+    have h34 := hpair 3 (by omega) (by omega)
+    have h56 := hpair 5 (by omega) (by omega)
+    have h7 := hpos 7 (by omega) (by omega)
+    norm_num at h12 h34 h56
+    norm_num [Finset.sum_range_succ]
+    omega
+  have htail : (∑ i ∈ Finset.range (m-8), b i) ≤
+      ∑ i ∈ Finset.range (m-8), alpha (8+i) :=
+    Finset.sum_le_sum (by intro i hi; exact htrunc i (Finset.mem_range.mp hi))
+  have hsplit := Finset.sum_range_add alpha 8 (m-8)
+  have he : 8+(m-8)=m := by omega
+  rw [he] at hsplit
+  rw [Finset.sum_range_succ, hsplit]
+  omega
+
+/-- The core counts on the whole path are the global singleton total. -/
+theorem core_count_total {m : Nat} (p : Snake m) :
+    (∑ k ∈ Finset.range (m+1), coreAlpha p k) = totalSingleton p := by
+  rw [totalSingleton_eq_path_sum, Finset.sum_range]
+  apply Finset.sum_congr rfl
+  intro i _
+  exact (localAlpha_eq_coreAlpha p i.val i.isLt).symm
+
+/-- The entering counts omit at least21 actual singleton counts. Both
+endpoint bounds and the internal-pair bounds are discharged here. -/
+theorem actual_entering_count_budget {m : Nat} (p : Snake m) (hm : 9 ≤ m) :
+    (∑ r ∈ Finset.range (m-8), coreAlpha p (r+8))+21 ≤ totalSingleton p := by
+  have h0 : 4 ≤ coreAlpha p 0 := by
+    rw [← localAlpha_eq_coreAlpha p 0 (by omega)]
+    exact Snake9.endpoint_alpha_ge_four p ⟨0, by omega⟩
+      (by omega) (Or.inl rfl)
+  have hend : 4 ≤ coreAlpha p m := by
+    rw [← localAlpha_eq_coreAlpha p m (by omega)]
+    exact Snake9.endpoint_alpha_ge_four p ⟨m, by omega⟩
+      (by omega) (Or.inr rfl)
+  have hpos : ∀ i, 0 < i → i < m → 1 ≤ coreAlpha p i := by
+    intro i _ hi
+    exact core_count_positive p i (by omega)
+  have hpair : ∀ i, 0 < i → i+1 < m →
+      4 ≤ coreAlpha p i + coreAlpha p (i+1) := by
+    intro i hi him
+    have hp := adjacent_internal_alpha_sum_ge_four p ⟨i, by omega⟩
+      (by dsimp; omega) (by dsimp; omega)
+    change 4 ≤ localAlpha p ⟨i, by omega⟩ +
+      localAlpha p ⟨i+1, by omega⟩ at hp
+    rw [localAlpha_eq_coreAlpha p i (by omega),
+      localAlpha_eq_coreAlpha p (i+1) (by omega)] at hp
+    exact hp
+  have h := discarded_counts (coreAlpha p) (fun r => coreAlpha p (r+8)) m
+    (by omega) h0 hend hpos hpair
+    (by
+      intro i _
+      simpa only [Nat.add_comm] using Nat.le_refl (coreAlpha p (i+8)))
+  rwa [core_count_total p] at h
+
+/-- The actual graph windows charge each path share at most five times. -/
+theorem actual_share_overlap (f : Nat → Nat) (m : Nat) (hm : 9 ≤ m) :
+    (∑ r ∈ Finset.range (m-8),
+      ((List.range 5).map fun i => f (r+(i+4))).sum) ≤
+      5 * ((List.range (m+1)).map f).sum := by
+  simp only [← sum_range_eq_list_sum]
+  rw [Finset.sum_comm]
+  calc
+    _ ≤ ∑ i ∈ Finset.range 5, ∑ k ∈ Finset.range (m+1), f k := by
+      apply Finset.sum_le_sum
+      intro i hi
+      have hi5 : i < 5 := Finset.mem_range.mp hi
+      exact shifted_prefix_sum_le f (i+4) (m-8) (m+1) (by omega)
+    _ = _ := by simp [Nat.mul_comm]
+
+/-- The actual total-weight budget has only the stated per-window floor
+premise. The singleton boundary and empty-square charge are actual-snake
+theorems, with no extra graph or reference-catalogue assumption. -/
+theorem actual_total_weight_budget (floor : Nat → Nat)
+    {m : Nat} (p : Snake m) (hm : 9 ≤ m)
+    (hfloor : ∀ r, r+9 ≤ m →
+      floor (directionId p r) ≤
+        ((List.range 5).map fun i => coreShare 12 p (r+(i+4))).sum) :
+    (∑ r ∈ Finset.range (m-8),
+      weight floor (actualHistory p r) (directionId p r) (sixCode p r)) +
+      4200*m ≤ 1098960 := by
+  have hweight :
+      (∑ r ∈ Finset.range (m-8),
+        weight floor (actualHistory p r) (directionId p r) (sixCode p r)) ≤
+      120 * (∑ r ∈ Finset.range (m-8), coreAlpha p (r+8)) +
+        ∑ r ∈ Finset.range (m-8),
+          ((List.range 5).map fun i => coreShare 12 p (r+(i+4))).sum := by
+    calc
+      _ ≤ ∑ r ∈ Finset.range (m-8),
+          (120*coreAlpha p (r+8) +
+            ((List.range 5).map fun i => coreShare 12 p (r+(i+4))).sum) := by
+        apply Finset.sum_le_sum
+        intro r hr
+        have hrange := Finset.mem_range.mp hr
+        have hfit : r+9 ≤ m := by omega
+        exact actual_weight_bound floor p r hfit (hfloor r hfit)
+      _ = _ := by rw [Finset.sum_add_distrib, Finset.mul_sum]
+  have hcounts := actual_entering_count_budget p hm
+  have hshares := actual_share_overlap (coreShare 12 p) m hm
+  have hcharge := core_share12_charge_le p (by omega)
+  omega
+
+/-- The completed count-free profile discharges the floor premise. -/
+theorem completed_total_weight_budget {m : Nat} (p : Snake m) (hm : 9 ≤ m) :
+    (∑ r ∈ Finset.range (m-8),
+      weight Snake9.CountFree98.completedCredit
+        (actualHistory p r) (directionId p r) (sixCode p r)) +
+      4200*m ≤ 1098960 :=
+  actual_total_weight_budget Snake9.CountFree98.completedCredit p hm
+    (fun r hr => Snake9.CountFree98.actual_completed_credit p r hr)
+
+#print axioms discarded_counts
+#print axioms core_count_total
+#print axioms actual_entering_count_budget
+#print axioms actual_share_overlap
+#print axioms actual_total_weight_budget
+#print axioms completed_total_weight_budget
+end Snake9.GlobalCharge98

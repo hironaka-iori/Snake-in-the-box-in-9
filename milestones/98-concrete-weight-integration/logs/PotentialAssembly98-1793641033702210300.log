@@ -1,0 +1,46 @@
+E:\Snake-in-a-box\milestones\98-concrete-weight-integration\lean\PotentialAssembly98.lean:39:17: error: unknown constant 'List.mem_of_getElem?_eq_some'
+E:\Snake-in-a-box\milestones\98-concrete-weight-integration\lean\PotentialAssembly98.lean:50:2: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  h ≥ 0
+  g ≥ 0
+  f ≥ 0
+  f - g ≥ 0
+  e ≥ 0
+  d ≥ 0
+  d - f - h ≥ 1
+  c ≥ 0
+  b ≥ 0
+  b + c - d - e ≥ 0
+  a ≥ 9
+where
+ a := ↑m
+ b := ↑(∑ r ∈ Finset.range (m - 8), (fun r => weight floor (actualHistory p r) (directionId p r) (sixCode p r)) r)
+ c := ↑((fun r => π (actualState p r)) 0)
+ d := ↑P * ↑(m - 8)
+ e := ↑((fun r => π (actualState p r)) (m - 8))
+ f := ↑R
+ g := ↑(π (actualState p 0))
+ h := ↑(∑ r ∈ Finset.range (m - 8), weight floor (actualHistory p r) (directionId p r) (sixCode p r))
+'Snake9.PotentialAssembly98.telescope' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.PotentialAssembly98.actual_potential_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.PotentialAssembly98.completed_upper235' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.PotentialAssembly98.conditional_upper234' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+completed_upper235 : AllRefuted6K235 →
+  AllRefuted236 →
+    ∀ (π : ℕ → ℕ),
+      (∀ s < 1601856, π s ≤ 551) →
+        (∀ row ∈ (rows retainedDiagram).toList,
+            483 + π (rowTarget row) ≤ weight completedCredit row.2.1 row.1 row.2.2 + π (rowSource row)) →
+          ∀ {m : ℕ}, Snake m → m ≤ 235
+conditional_upper234 : RefutedShare (winOf [0, 1, 2, 0, 3, 2]) broadBounds 12 15 →
+  RefutedShare (winOf [0, 1, 2, 0, 3, 4]) broadBounds 12 17 →
+    RefutedShare (winOf [0, 1, 2, 3, 0, 1]) broadBounds 12 15 →
+      RefutedShare (winOf [0, 1, 2, 3, 4, 0]) broadBounds 12 15 →
+        RefutedShare (winOf [0, 1, 2, 3, 4, 5]) broadBounds 12 15 →
+          AllRefuted6K235 →
+            AllRefuted236 →
+              ∀ (π : ℕ → ℕ),
+                (∀ s < 1601856, π s ≤ 602) →
+                  (∀ row ∈ (rows retainedDiagram).toList,
+                      496 + π (rowTarget row) ≤ weight conditionalCredit row.2.1 row.1 row.2.2 + π (rowSource row)) →
+                    ∀ {m : ℕ}, Snake m → m ≤ 234

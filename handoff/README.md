@@ -2,12 +2,12 @@
 
 Start with [current mathematical status](CURRENT_STATUS.md) and the
 [continuation assignment](NEXT_AGENT_PROMPT.md). The current mathematical
-checkpoint is [milestone 97](../milestones/97-geometric-credit-integration/README.md).
-Its [mathematical note](../milestones/97-geometric-credit-integration/mathematical-note.md)
-gives the deductions and their assumptions; its
-[checkpoint](../milestones/97-geometric-credit-integration/data/checkpoint.json)
-and [manifest](../milestones/97-geometric-credit-integration/data/file-manifest.json)
-identify the saved evidence.
+checkpoint is [milestone 98](../milestones/98-concrete-weight-integration/README.md).
+Its [mathematical note](../milestones/98-concrete-weight-integration/mathematical-note.md),
+[checkpoint](../milestones/98-concrete-weight-integration/data/checkpoint.json)
+and [manifest](../milestones/98-concrete-weight-integration/data/file-manifest.json)
+record the complete actual-weight and charge integration and the exact
+remaining upper-bound hypotheses.
 
 The maintained interval is $191\le a(9)\le235$ edges. The upper bound uses the
 inspected contributor theorem and saved audit; a complete independent rebuild
@@ -29,12 +29,11 @@ Milestone 97 establishes two useful advances:
   The general arithmetic is Lean-checked; the concrete graph certificates
   have independent integer verification and still need their Lean replay.
 
-The next task is to instantiate the remaining count-conditioned refutations
-and count-free profiles in the common proof environment. Then check their
-combined weights and the potential on the same defined graph. Preserve the
-two reference-catalogue assumptions and the five unfinished share targets.
-The [source audit](../milestones/97-geometric-credit-integration/audit/remaining-credit-families.md)
-identifies reusable proofs and import constraints.
+Milestone 98 has completed the concrete count-dependent and count-free
+weight interpretation, full-key walk, 21-count boundary saving, total charge,
+and final numerical assembly. The next task is the potential and range
+certificate on every row of the same defined graph. The two reference-catalogue
+closures and five conditional local share proofs remain explicit.
 
 The original case7302 target-20 replay is stopped after a 900-second Check1
 timeout, with 649 successful modules preserved. A new target-18 proof would
@@ -75,6 +74,6 @@ Earlier evidence remains available:
   and certificate details. Its process and paper-revision status are superseded.
 
 Historical manifests identify their own saved versions of shared handover
-files. Use milestone 97's manifest for this version. Keep exact proof bytes,
+files. Use milestone 98's manifest for this version. Keep exact proof bytes,
 source/object hashes and successful receipts; a reused proof environment does
 not constitute a complete clean rebuild.

@@ -562,3 +562,10 @@ Next research priority: combine the remaining graph-weight components with the c
 3 November 2026, Japan time. Latest continuation: [milestone 97](milestones/97-geometric-credit-integration/README.md) integrates all 505 geometric credits and their maximum with the 55-rule history credit for actual snake windows. The finite-graph sensitivity certificates show that the least pending floor vector in the original integer target box is (16,18,16,16,16): the 012034 requirement drops from 20 to 18. The revised potential has slope 496, range 602 and strict margin 30 for conditional 234. All 127 numeric coverage classes and their final graph-walk assembly are checked under the two reference-catalogue premises. The global interval remains 191 through 235.
 
 Next research priority: instantiate the four count-conditioned rules and share-120 in the checked symbol-transfer interface; assemble the completed and conditional count-free profiles, using the weaker 012034 target 18. Then check the potential on the same defined graph. Preserve the original case7302 target-20 replay; any new target-18 refutation must use separate files. Keep the two reference-catalogue premises explicit. Paper revision 96 is unchanged; the next scheduled full revision is 106.
+
+
+## Milestone 98: actual weights and the remaining upper-bound hypotheses
+
+Latest continuation: [milestone 98](milestones/98-concrete-weight-integration/README.md) checks the remaining concrete share rules, both count-free profiles, the complete actual edge weight, the 21-count boundary saving and total charge. The full-key walk and numerical bound assembly are checked with their remaining hypotheses explicit. The global interval remains 191 through 235; 234 remains conditional.
+
+Next research priority: certify both potentials on every row of the defined graph, using the exact checked weights. The completed profile uses slope 483 and range 551; the conditional floor-18 profile uses slope 496 and range 602. Two reference-catalogue closures and five conditional local shares remain. Paper revision 96 is unchanged; the next scheduled full revision is 106.

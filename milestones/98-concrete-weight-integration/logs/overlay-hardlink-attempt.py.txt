@@ -1,0 +1,26 @@
+"""Merge pinned first-resolved objects so nested Lean namespaces stay complete."""
+from pathlib import Path
+import hashlib,json,os
+HERE=Path(__file__).resolve().parents[1];ROOT=HERE.parents[1]
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+ep=HERE/'data/environment.json';env=json.loads(ep.read_text())
+assert not (HERE/'data/check.lock').exists()
+original=HERE/'data/environment-before-overlay.json'
+if not original.exists():original.write_bytes(ep.read_bytes())
+else:env=json.loads(original.read_text())
+overlay=HERE/'build/support';overlay.mkdir(exist_ok=True)
+seen={};rows=[];duplicates=0
+for directory in env['paths'][1:]:
+    base=Path(directory)
+    for p in sorted(base.rglob('*.olean')):
+        relative=p.relative_to(base)
+        if relative in seen:duplicates+=1;continue
+        seen[relative]=p
+        target=overlay/relative;target.parent.mkdir(parents=True,exist_ok=True)
+        if not target.exists():os.link(p,target)
+        digest=sha(p);assert sha(target)==digest
+        rows.append(dict(module=relative.as_posix(),original=p.relative_to(ROOT).as_posix(),sha256=digest,bytes=p.stat().st_size))
+env['paths']=[str(HERE/'build'),str(overlay)]
+env['overlay']=dict(method='hard links to exact first-resolved objects; imports only',objects=rows,duplicate_paths_skipped=duplicates,initial_environment_sha256=sha(original))
+ep.write_text(json.dumps(env,indent=2)+'\n')
+print('COMPLETE_NAMESPACE_OVERLAY',len(rows),'objects;',sum(r['bytes'] for r in rows),'bytes')

@@ -1,42 +1,42 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 97 checkpoint
+## Milestone 98 checkpoint
 
-All 505 nine-direction geometric table entries are connected to the actual
-direction index, including 357 positive local bounds and 148 zero entries.
-Their maximum with the completed 55-rule history credit bounds the same
-five-centre share sum. The entire geometry catalogue, transfers and assembly
-passed Lean in the current graph/history environment. Existing geometric
-proof text changes only in import lines. The new symbol-share interface
-preserves count saturation and reverses both directions and counts.
+The complete actual edge-weight interpretation is checked for both profiles.
+It includes all 505 geometric entries, 55 history-share rules, four
+count-conditioned rules and their reversals, share 120, and the chosen
+count-free floor. Every candidate bounds the same five-centre sum; they
+combine by maximum. Saturation and the full direction/history/count key are
+preserved. The five old credit-root ports are byte-identical to their sources.
 
-The fixed-graph optimisation now has a less demanding conditional target.
-In case order 7301,7302,7303,7307,7308, the feasible integer floor vectors
-inside the original target box are exactly (16,h,16,16,16), with h=18,19,20.
-The h=18 potential passes all 4,947,008 edges at slope 496 and range 602,
-giving strict margin 30 for the comparison below 235. At h=17, a 51-edge
-walk and the mean-496 cycle obstruct every constant slope and global range.
-The other four one-unit reductions have their own exact obstructions.
-Monotonicity combines these into the complete integer-box classification.
+The actual total charge is checked: the omitted endpoint/internal counts
+save at least 21, and every share occurs at most five times. This proves
+$W+4200m\le1098960$ for $m\ge9$. The completed profile has no unfinished
+local-share premise. The conditional profile retains the five refutations
+with floors (16,18,16,16,16).
 
-The general arithmetic and monotonicity arguments are Lean-checked. Concrete
-finite-graph witnesses and the potential table retain independently checked
-integer evidence; their complete Lean replay remains pending. No universal
-012034 share-18 theorem is claimed. Range 602 is sufficient, with no assertion
-that it is the least potential range for that modified profile.
+The full-key walk and potential summation are checked in the same environment.
+The completed upper235 assembly retains two reference-catalogue assumptions
+and a slope-483, range-551 potential certificate on every defined graph row.
+The conditional upper234 assembly retains the same two catalogue assumptions,
+the five local refutations, and a slope-496, range-602 potential certificate.
+These concrete potential/range certificates remain pending. No additional
+weight-validity, boundary-saving or charge-budget premise remains.
 
-All 127 numeric coverage classes and their final graph-walk assembly are checked under the two reference-catalogue premises.
+Independent reconstruction matches all 4,947,008 saved full keys in 791 contexts,
+both endpoint columns and both profile weights. This finite-array agreement
+does not certify the potential on every row of the defined graph.
 
-The checkpoint contains 2115 theorem audits, including preserved local geometry
-and auxiliary declarations. Paper revision 96 and both source copies are
-unchanged. The interval remains $191\le a(9)\le235$, with 234 conditional.
-The contributor upper-bound proof still lacks a complete independent rebuild.
+All 127 coverage classes and their actual-walk assembly remain checked from
+milestone 97. The original case7302 target-20 replay remains stopped after its
+900-second Check1 timeout, with 649 successful modules and unchanged evidence.
+Any fresh target-18 proof must use separate files.
 
-The original case7302 replay remains stopped after Check1's 900-second timeout,
-with 649 successful modules and unchanged original evidence. A new proof of
-share at least 18 would refute share at most 17 and must be developed separately.
-The next implementation task is the remaining concrete credit families and
-their common weight, followed by the potential on the defined graph.
+The maintained interval is $191\le a(9)\le235$, with 234 conditional. The
+contributor upper-bound proof still lacks a complete independent rebuild.
+Paper revision 96, its authors and hyperlink settings are unchanged; the next
+scheduled full revision is 106. Use ordinary notation and define only
+essential, substantially reused concepts.
 
 ## Result and evidence boundary
 
@@ -144,7 +144,7 @@ the added local premise or the full graph interpretation.
 ## Earlier proof interfaces and development record
 
 The following paragraphs preserve earlier milestone observations. Their
-pending-job statements describe those snapshots. The milestone 97 checkpoint
+pending-job statements describe those snapshots. The milestone 98 checkpoint
 above supersedes them: both 127-class batches and their assembly are complete;
 case7302 is stopped. The remaining tasks are listed in NEXT_AGENT_PROMPT.md.
 

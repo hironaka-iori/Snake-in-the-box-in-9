@@ -1,0 +1,18 @@
+import GeometricAssembly97
+import SymbolCredit97
+import Port98M51SharePressure
+import Port98M52SharePressure
+import Port98M53ShareBound0
+import Port98M53ShareBound5
+import Port98CombinedCatalogue
+import CloseBatch
+
+#print axioms Snake9.GeometricCredit97.actual_geometric_history_weight
+#print axioms Snake9.SymbolCredit97.encoded_forward_suffix_share
+#print axioms Snake9.LocalWindow.SharePressure513.refuted_share
+#print axioms Snake9.LocalWindow.SharePressure520.refuted_share
+#print axioms Snake9.LocalWindow.ShareObstruction530.refuted_share
+#print axioms Snake9.LocalWindow.ShareObstruction535.refuted_share
+#print axioms Snake9.LocalWindow.ShareWindow120.refuted
+#print axioms Snake9.CatalogueIntegration73.canonical7305
+#print axioms Snake9.Batch92.retained_defined_walk

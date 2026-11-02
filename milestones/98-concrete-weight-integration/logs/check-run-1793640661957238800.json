@@ -1,0 +1,38 @@
+{
+  "status": "STOPPED",
+  "pid": 7640,
+  "started_at": "2026-11-02T17:31:01.957238+00:00",
+  "modules": [
+    "Port98CombinedCatalogue",
+    "CombinedEnvironment98",
+    "CountFreeCredits98",
+    "CountConditionedCredits98",
+    "ActualGraphKeys98",
+    "CombinedWeights98",
+    "GlobalCharge98",
+    "PotentialAssembly98"
+  ],
+  "records": [
+    {
+      "module": "Port98CombinedCatalogue",
+      "status": "PASS_CONCRETE_WEIGHT_MODULE",
+      "receipt_sha256": "495c03b57b7b7af8ac4d911faf4378d085c64dcdd738af547bb20ff3088dea3e",
+      "theorem_audits": 35
+    },
+    {
+      "module": "CombinedEnvironment98",
+      "status": "PASS_CONCRETE_WEIGHT_MODULE",
+      "receipt_sha256": "d015139890715b34fd45712c9b9940c54c797d97a44aaf3396dd8cdf49115720",
+      "theorem_audits": 9
+    },
+    {
+      "module": "CountFreeCredits98",
+      "status": "PASS_CONCRETE_WEIGHT_MODULE",
+      "receipt_sha256": "aac33bd386d036aa26f476d24d5b2b519c365351b29278eadb98f6f3f79e6c4d",
+      "theorem_audits": 5
+    }
+  ],
+  "active": null,
+  "exception": "AssertionError(\"E:\\\\Snake-in-a-box\\\\milestones\\\\98-concrete-weight-integration\\\\lean\\\\CountConditionedCredits98.lean:12:66: error: unknown identifier 'encodeCounts'\\nE:\\\\Snake-in-a-box\\\\milestones\\\\98-concrete-weight-integration\\\\lean\\\\CountConditionedCredits98.lean:14:21: error: unknown identifier 'encodeCounts'\\nE:\\\\Snake-in-a-box\\\\milestones\\\\98-concrete-weight-integration\\\\lean\\\\CountConditionedCredits98.lean:16:8: warning: declaration uses 'sorry'\\n'Snake9.Conditioned98.rule_credit_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\\n'Snake9.Conditioned98.refuted513' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.Conditioned98.refuted520' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.Conditioned98.refuted530' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.Conditioned98.refuted535' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.Conditioned98.refuted120' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.Conditioned98.actual_conditioned_credit' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\\n\")",
+  "stopped_at": "2026-11-02T17:33:50.508263+00:00"
+}

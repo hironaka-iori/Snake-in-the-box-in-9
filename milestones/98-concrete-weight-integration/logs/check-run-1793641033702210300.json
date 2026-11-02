@@ -1,0 +1,20 @@
+{
+  "status": "STOPPED",
+  "pid": 23832,
+  "started_at": "2026-11-02T17:37:13.702210+00:00",
+  "modules": [
+    "GlobalCharge98",
+    "PotentialAssembly98"
+  ],
+  "records": [
+    {
+      "module": "GlobalCharge98",
+      "status": "PASS_CONCRETE_WEIGHT_MODULE",
+      "receipt_sha256": "c6c9ea3a00493284d7dbd85d4638bbcd9419f64df7c0a3cd2f500508703c3f99",
+      "theorem_audits": 6
+    }
+  ],
+  "active": null,
+  "exception": "AssertionError(\"E:\\\\Snake-in-a-box\\\\milestones\\\\98-concrete-weight-integration\\\\lean\\\\PotentialAssembly98.lean:39:17: error: unknown constant 'List.mem_of_getElem?_eq_some'\\nE:\\\\Snake-in-a-box\\\\milestones\\\\98-concrete-weight-integration\\\\lean\\\\PotentialAssembly98.lean:50:2: error: omega could not prove the goal:\\na possible counterexample may satisfy the constraints\\n  h \u2265 0\\n  g \u2265 0\\n  f \u2265 0\\n  f - g \u2265 0\\n  e \u2265 0\\n  d \u2265 0\\n  d - f - h \u2265 1\\n  c \u2265 0\\n  b \u2265 0\\n  b + c - d - e \u2265 0\\n  a \u2265 9\\nwhere\\n a := \u2191m\\n b := \u2191(\u2211 r \u2208 Finset.range (m - 8), (fun r => weight floor (actualHistory p r) (directionId p r) (sixCode p r)) r)\\n c := \u2191((fun r => \u03c0 (actualState p r)) 0)\\n d := \u2191P * \u2191(m - 8)\\n e := \u2191((fun r => \u03c0 (actualState p r)) (m - 8))\\n f := \u2191R\\n g := \u2191(\u03c0 (actualState p 0))\\n h := \u2191(\u2211 r \u2208 Finset.range (m - 8), weight floor (actualHistory p r) (directionId p r) (sixCode p r))\\n'Snake9.PotentialAssembly98.telescope' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.PotentialAssembly98.actual_potential_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\\n'Snake9.PotentialAssembly98.completed_upper235' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\\n'Snake9.PotentialAssembly98.conditional_upper234' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\\ncompleted_upper235 : AllRefuted6K235 \u2192\\n  AllRefuted236 \u2192\\n    \u2200 (\u03c0 : \u2115 \u2192 \u2115),\\n      (\u2200 s < 1601856, \u03c0 s \u2264 551) \u2192\\n        (\u2200 row \u2208 (rows retainedDiagram).toList,\\n            483 + \u03c0 (rowTarget row) \u2264 weight completedCredit row.2.1 row.1 row.2.2 + \u03c0 (rowSource row)) \u2192\\n          \u2200 {m : \u2115}, Snake m \u2192 m \u2264 235\\nconditional_upper234 : RefutedShare (winOf [0, 1, 2, 0, 3, 2]) broadBounds 12 15 \u2192\\n  RefutedShare (winOf [0, 1, 2, 0, 3, 4]) broadBounds 12 17 \u2192\\n    RefutedShare (winOf [0, 1, 2, 3, 0, 1]) broadBounds 12 15 \u2192\\n      RefutedShare (winOf [0, 1, 2, 3, 4, 0]) broadBounds 12 15 \u2192\\n        RefutedShare (winOf [0, 1, 2, 3, 4, 5]) broadBounds 12 15 \u2192\\n          AllRefuted6K235 \u2192\\n            AllRefuted236 \u2192\\n              \u2200 (\u03c0 : \u2115 \u2192 \u2115),\\n                (\u2200 s < 1601856, \u03c0 s \u2264 602) \u2192\\n                  (\u2200 row \u2208 (rows retainedDiagram).toList,\\n                      496 + \u03c0 (rowTarget row) \u2264 weight conditionalCredit row.2.1 row.1 row.2.2 + \u03c0 (rowSource row)) \u2192\\n                    \u2200 {m : \u2115}, Snake m \u2192 m \u2264 234\\n\")",
+  "stopped_at": "2026-11-02T17:38:14.922328+00:00"
+}

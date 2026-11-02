@@ -1,0 +1,85 @@
+import CombinedEnvironment98
+
+namespace Snake9.Conditioned98
+open Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow
+open Snake9.GraphWalk78 Snake9.Direction77 Snake9.SymbolCredit97
+open Snake9.GraphInterpretation75
+
+set_option maxHeartbeats 2000000
+set_option maxRecDepth 100000
+
+/-- A stored suffix matches a rule in either orientation; both lists reverse. -/
+def ruleCredit (cs syms : List Nat) (cap di code : Nat) : Nat :=
+  if (canon ((extensions.getD di []).drop 3) = cs ∧ code % 7776 = encodeCounts syms 0) ∨
+     (canon (((extensions.getD di []).drop 3).reverse) = cs ∧
+       code % 7776 = encodeCounts syms.reverse 0) then cap+1 else 0
+
+theorem rule_credit_bound (cs syms : List Nat) (cap : Nat)
+    (hlen : syms.length = 5) (hvalid : ∀ x ∈ syms, 1 ≤ x ∧ x ≤ 6)
+    (href : RefutedShare (winOf cs) (boundsOf syms) 12 cap)
+    {m : Nat} (p : Snake m) (r : Nat) (hr : r+9 ≤ m) :
+    ruleCredit cs syms cap (directionId p r) (sixCode p r) ≤
+      ((List.range 5).map fun i => coreShare 12 p (r+(i+4))).sum := by
+  unfold ruleCredit
+  split_ifs with h
+  · rw [direction_decode p r hr] at h
+    rcases h with ⟨hs,hc⟩ | ⟨hs,hc⟩
+    · exact encoded_forward_suffix_share p r cs syms hr hlen hvalid href hs hc
+    · exact encoded_reversed_suffix_share p r cs syms hr hlen hvalid href hs hc
+  · exact Nat.zero_le _
+
+theorem refuted513 : RefutedShare (winOf [0, 1, 2, 3, 1, 4]) (boundsOf [3, 3, 3, 6, 5]) 12 47 := by
+  have hw : winOf [0, 1, 2, 3, 1, 4] = SharePressure513.window := by decide +kernel
+  have hb : boundsOf [3, 3, 3, 6, 5] = SharePressure513.bounds := by decide +kernel
+  simpa only [hw, hb, SharePressure513.resolution, SharePressure513.cap] using SharePressure513.refuted_share
+
+theorem refuted520 : RefutedShare (winOf [0, 1, 2, 3, 4, 5]) (boundsOf [3, 6, 2, 3, 6]) 12 95 := by
+  have hw : winOf [0, 1, 2, 3, 4, 5] = SharePressure520.window := by decide +kernel
+  have hb : boundsOf [3, 6, 2, 3, 6] = SharePressure520.bounds := by decide +kernel
+  simpa only [hw, hb, SharePressure520.resolution, SharePressure520.cap] using SharePressure520.refuted_share
+
+theorem refuted530 : RefutedShare (winOf [0, 1, 2, 0, 3, 4]) (boundsOf [6, 3, 6, 3, 3]) 12 95 := by
+  have hw : winOf [0, 1, 2, 0, 3, 4] = ShareObstruction530.window := by decide +kernel
+  have hb : boundsOf [6, 3, 6, 3, 3] = ShareObstruction530.bounds := by decide +kernel
+  simpa only [hw, hb, ShareObstruction530.resolution, ShareObstruction530.cap] using ShareObstruction530.refuted_share
+
+theorem refuted535 : RefutedShare (winOf [0, 1, 2, 3, 4, 5]) (boundsOf [4, 6, 2, 3, 6]) 12 95 := by
+  have hw : winOf [0, 1, 2, 3, 4, 5] = ShareObstruction535.window := by decide +kernel
+  have hb : boundsOf [4, 6, 2, 3, 6] = ShareObstruction535.bounds := by decide +kernel
+  simpa only [hw, hb, ShareObstruction535.resolution, ShareObstruction535.cap] using ShareObstruction535.refuted_share
+
+theorem refuted120 : RefutedShare (winOf [0, 1, 2, 3, 4, 5]) (boundsOf [4, 5, 4, 2, 6]) 12 119 := by
+  have hw : winOf [0, 1, 2, 3, 4, 5] = ShareWindow120.window := by decide +kernel
+  have hb : boundsOf [4, 5, 4, 2, 6] = ShareWindow120.bounds := by decide +kernel
+  simpa only [hw, hb, ShareWindow120.resolution, ShareWindow120.cap] using ShareWindow120.refuted
+
+def conditionedCredit (di code : Nat) : Nat :=
+  max (ruleCredit [0, 1, 2, 3, 1, 4] [3, 3, 3, 6, 5] 47 di code) (max (ruleCredit [0, 1, 2, 3, 4, 5] [3, 6, 2, 3, 6] 95 di code) (max (ruleCredit [0, 1, 2, 0, 3, 4] [6, 3, 6, 3, 3] 95 di code) (max (ruleCredit [0, 1, 2, 3, 4, 5] [4, 6, 2, 3, 6] 95 di code) (ruleCredit [0, 1, 2, 3, 4, 5] [4, 5, 4, 2, 6] 119 di code))))
+
+theorem actual_conditioned_credit {m : Nat} (p : Snake m) (r : Nat)
+    (hr : r+9 ≤ m) : conditionedCredit (directionId p r) (sixCode p r) ≤
+      ((List.range 5).map fun i => coreShare 12 p (r+(i+4))).sum := by
+  unfold conditionedCredit
+  apply max_le
+  · exact rule_credit_bound [0, 1, 2, 3, 1, 4] [3, 3, 3, 6, 5] 47
+      (by decide +kernel) (by decide +kernel) refuted513 p r hr
+  apply max_le
+  · exact rule_credit_bound [0, 1, 2, 3, 4, 5] [3, 6, 2, 3, 6] 95
+      (by decide +kernel) (by decide +kernel) refuted520 p r hr
+  apply max_le
+  · exact rule_credit_bound [0, 1, 2, 0, 3, 4] [6, 3, 6, 3, 3] 95
+      (by decide +kernel) (by decide +kernel) refuted530 p r hr
+  apply max_le
+  · exact rule_credit_bound [0, 1, 2, 3, 4, 5] [4, 6, 2, 3, 6] 95
+      (by decide +kernel) (by decide +kernel) refuted535 p r hr
+  exact rule_credit_bound [0, 1, 2, 3, 4, 5] [4, 5, 4, 2, 6] 119
+    (by decide +kernel) (by decide +kernel) refuted120 p r hr
+
+#print axioms rule_credit_bound
+#print axioms refuted513
+#print axioms refuted520
+#print axioms refuted530
+#print axioms refuted535
+#print axioms refuted120
+#print axioms actual_conditioned_credit
+end Snake9.Conditioned98

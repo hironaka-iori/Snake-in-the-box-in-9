@@ -1,0 +1,31 @@
+E:\Snake-in-a-box\milestones\98-concrete-weight-integration\lean\GlobalCharge98.lean:130:2: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  g ≥ 0
+  f ≥ 0
+  e ≥ 0
+  d ≥ 0
+  c ≥ 0
+  c - 5*f ≤ 0
+  b ≥ 0
+  b - e ≤ -21
+  120*b + c - d ≥ 0
+  a ≥ 9
+  840*a + 24*e + g ≤ 220296
+  4200*a + d ≥ 1098961
+where
+ a := ↑m
+ b := ↑(∑ r ∈ range (m - 8), coreAlpha p (r + 8))
+ c := ↑(∑ r ∈ range (m - 8), (List.map (fun i => coreShare 12 p (r + (i + 4))) (List.range 5)).sum)
+ d := ↑(∑ r ∈ range (m - 8), weight floor (actualHistory p r) (directionId p r) (sixCode p r))
+ e := ↑(totalSingleton p)
+ f := ↑(List.map (coreShare 12 p) (List.range (m + 1))).sum
+ g := ↑(List.map (fun k => coreShare 12 p k) (List.range (m + 1))).sum
+'Snake9.GlobalCharge98.discarded_counts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.GlobalCharge98.core_count_total' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.GlobalCharge98.actual_entering_count_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.GlobalCharge98.actual_share_overlap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.GlobalCharge98.actual_total_weight_budget' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.GlobalCharge98.completed_total_weight_budget' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
