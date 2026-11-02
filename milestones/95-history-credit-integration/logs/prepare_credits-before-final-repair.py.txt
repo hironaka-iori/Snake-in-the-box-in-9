@@ -1,0 +1,209 @@
+"""Generate the exact 55-rule credit catalogue and its proof adapters.
+
+No Lean or solver is invoked. Only ConcreteWords95*.lean and
+ConcreteRules95*.lean are written. All generated proofs await compilation.
+"""
+from __future__ import annotations
+import hashlib
+import json
+import re
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parents[1]
+ROOT = HERE.parents[1]
+LEAN = HERE / 'lean'
+VARIANTS = ROOT / 'milestones/94-history-share-dispatch/data/variants.json'
+PROVENANCE = ROOT / 'milestones/94-history-share-dispatch/data/credit-provenance.json'
+PORT_PLAN = HERE / 'data/port-plan.json'
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def nats(values):
+    return '[' + ', '.join(map(str, values)) + ']'
+
+
+def pairs(values):
+    return '[' + ', '.join(f'({k}, {c})' for k, c in values) + ']'
+
+
+OPEN = '''namespace Snake9.ConcreteCatalogue95
+open Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow
+open Snake9.Direction77 Snake9.Guards79 Snake9.GraphWalk78
+open Snake9.HistoryShare94 Snake9.CreditTransport95 Snake9.HistoryCredit95
+
+set_option maxHeartbeats 2000000
+
+'''
+END = '\nend Snake9.ConcreteCatalogue95\n'
+
+
+def main():
+    variants = json.loads(VARIANTS.read_text(encoding='utf-8'))
+    provenance = json.loads(PROVENANCE.read_text(encoding='utf-8'))
+    plan = json.loads(PORT_PLAN.read_text(encoding='utf-8'))
+    assert sha(PROVENANCE) == plan['provenance_sha256']
+    rows, proof_rows = variants['rows'], provenance['rows']
+    assert len(rows) == len(proof_rows) == 55
+    assert [r['share_index'] for r in rows] == list(range(55))
+    assert sum(len(r['variants']) for r in rows) == 69
+    assert len({tuple(w) for r in rows for w in r['variants']}) == 69
+    ports = {}
+    for name, data in plan['modules'].items():
+        key = (data['original_milestone'], data['original_module'])
+        assert key not in ports
+        ports[key] = (name, data)
+    inputs = {str(p.relative_to(ROOT)): sha(p) for p in
+              (VARIANTS, PROVENANCE, PORT_PLAN, Path(__file__).resolve(),
+               LEAN/'SuffixCredit95.lean', LEAN/'CreditTransport95.lean',
+               LEAN/'HistoryCreditEvaluator95.lean')}
+
+    def theorem_info(original_name):
+        info = provenance['theorems'][original_name]
+        module, data = ports[(info['milestone'], info['module'])]
+        source, original = ROOT/data['port_source'], ROOT/info['source']
+        assert sha(source) == data['port_source_sha256'], source
+        assert sha(original) == data['original_source_sha256'], original
+        inputs[str(source.relative_to(ROOT))] = sha(source)
+        inputs[str(original.relative_to(ROOT))] = sha(original)
+        name = data['declaration_name_map'][original_name]
+        symbols = re.findall(r'r\+(\w+)\.length', info['statement'])
+        assert len(symbols) == 1
+        return info, module, name, name.rsplit('.', 1)[0]+'.'+symbols[0]
+
+    generated, audits, word_batches, rule_batches = {}, {}, [], []
+    geometric_count = capped_count = 0
+
+    def save(module, source):
+        assert module.startswith(('ConcreteWords95', 'ConcreteRules95'))
+        path = LEAN/(module+'.lean')
+        path.write_text(source, encoding='utf-8', newline='\n')
+        generated[module] = sha(path)
+        audits[module] = source.count('#print axioms ')
+
+    for batch in range(11):
+        imports = {'CreditTransport95', 'HistoryCreditEvaluator95', 'SuffixCredit95'}
+        words, rules = [], []
+        for i in range(batch*5, min((batch+1)*5, 55)):
+            row, proof_row = rows[i], proof_rows[i]
+            for field in ('share_index', 'model_index', 'edge', 'signature', 'caps',
+                          'geometric_lower', 'lower'):
+                assert row[field] == proof_row[field], (i, field)
+            proofs = proof_row['word_proofs']
+            assert row['variants'] == [p['word'] for p in proofs]
+            caps = sorted((int(k), int(c)) for k, c in row['caps'].items())
+            assert all(0 <= k < 6 and 0 <= c < 6 for k, c in caps)
+            cap_literal = pairs(caps)
+            for j, proof in enumerate(proofs):
+                cs = nats(proof['word'])
+                assert len(proof['word']) == 11
+                info, port, theorem, dirs = theorem_info(proof['geometry_theorem'])
+                imports.add(port)
+                assert info['lower'] == proof['geometry_proved_lower'] == row['geometric_lower']
+                assert not info['count_conditioned']
+                words.append(f"theorem word_{i:03d}_{j} : WordShareBound {cs} {row['geometric_lower']} := by\n")
+                if proof['geometry_dispatch'] == 'canonical_eleven':
+                    assert info['directions'] == proof['word']
+                    assert info['local_centre_offset'] == 6
+                    words.append('  apply word_share_of_local _ _ rfl\n'
+                                 '  intro m p P s hr hP\n'
+                                 f'  exact {theorem} p P s hr hP\n')
+                else:
+                    assert i == 6 and j == 0
+                    assert proof['geometry_dispatch'] == 'canonical_final_nine'
+                    assert info['local_centre_offset'] == 4
+                    symbols, canon = [], []
+                    for d in proof['word'][2:11]:
+                        if d not in symbols:
+                            symbols.append(d)
+                        canon.append(symbols.index(d))
+                    assert canon == info['directions']
+                    words.append(f'  apply word_share_of_final_nine _ {dirs} _ rfl\n'
+                                 '  · decide +kernel\n'
+                                 '  · intro m p P s hr hP\n'
+                                 f'    exact {theorem} p P s hr hP\n')
+                words.append(f'\n#print axioms word_{i:03d}_{j}\n\n')
+                geometric_count += 1
+                if caps:
+                    ic, pc, tc, dc = theorem_info(proof['capped_theorem'])
+                    imports.add(pc)
+                    assert 'CountPropagationPort95' in tc
+                    assert ic['directions'] == proof['word']
+                    assert ic['count_conditioned'] and ic['local_centre_offset'] == 6
+                    assert ic['lower'] == proof['capped_proved_lower'] == row['lower']
+                    assert len(ic['bounds']) == 10
+                    for k, (lo, hi) in enumerate(ic['bounds']):
+                        assert lo == 0 and (hi == 21 or (k-4, hi) in caps)
+                    bounds_name = tc.rsplit('.', 1)[0]+'.bounds'
+                    words.append(f"theorem capped_{i:03d}_{j} : WordCappedShareBound {cs} {cap_literal} {row['lower']} := by\n"
+                                 f'  apply word_capped_share_of_local _ _ {bounds_name} _ rfl\n'
+                                 '  · refine ⟨rfl, ?_, ?_⟩\n'
+                                 '    · simp\n'
+                                 '    · intro k hk\n'
+                                 f'      interval_cases k <;> norm_num [{bounds_name}]\n'
+                                 '  · intro m p P s hr hP hb\n'
+                                 f'    exact {tc} p P s hr hP hb\n'
+                                 f'\n#print axioms capped_{i:03d}_{j}\n\n')
+                    capped_count += 1
+                else:
+                    assert row['lower'] == row['geometric_lower']
+            rules.append(f'def rule{i:03d} : Rule :=\n'
+                         f"  ⟨signature{i:03d}, variants{i:03d}, {cap_literal}, {row['geometric_lower']}, {row['lower']}⟩\n\n"
+                         f'theorem rule_valid_{i:03d} : RuleValid rule{i:03d} := by\n'
+                         f'  refine ⟨rfl, share_cover_{i:03d}, ?_, ?_, ?_⟩\n'
+                         f'  · simp [rule{i:03d}]\n')
+            eqs = ' ∨ '.join('cs = '+nats(p['word']) for p in proofs)
+            assert len(proofs) in (1, 2)
+            for capped in (False, True):
+                args = ' hcaps' if capped else ''
+                rules.append(f'  · intro cs hcs m p s hr hcanon{args}\n'
+                             f'    have heq : {eqs} := by\n'
+                             f'      simpa [rule{i:03d}, variants{i:03d}] using hcs\n')
+                if len(proofs) == 2:
+                    rules.append('    rcases heq with heq | heq\n')
+                for j in range(len(proofs)):
+                    indent = '    · ' if len(proofs) == 2 else '    '
+                    tail = '      ' if len(proofs) == 2 else '    '
+                    name = f'capped_{i:03d}_{j}' if capped and caps else f'word_{i:03d}_{j}'
+                    extra = ' hcaps' if capped and caps else ''
+                    rules.append(indent+'rw [heq] at hcanon\n'+tail+
+                                 f'exact {name} p s hr hcanon{extra}\n')
+            rules.append(f'\n#print axioms rule_valid_{i:03d}\n\n')
+        wm, rm = f'ConcreteWords95Batch{batch:02d}', f'ConcreteRules95Batch{batch:02d}'
+        word_batches.append(wm)
+        rule_batches.append(rm)
+        save(wm, '\n'.join('import '+x for x in sorted(imports))+'\n\n'+OPEN+''.join(words)+END)
+        save(rm, f'import {wm}\nimport ShareCover{batch:02d}\n\n'+OPEN+''.join(rules)+END)
+
+    assert geometric_count == 69 and capped_count == 8
+    final = '\n'.join('import '+m for m in rule_batches)
+    final += '\nimport HistoryShareAssembly\nimport DefinedProofGraph\n\n'+OPEN
+    final += 'def concreteRules : List Rule :=\n  ['+', '.join(f'rule{i:03d}' for i in range(55))+']\n\n'
+    final += 'def concreteModelIndices : List Nat :=\n  '+nats(r['model_index'] for r in rows)+'\n\n'
+    final += 'def concreteEdgeNumbers : List Nat :=\n  '+nats(r['edge'] for r in rows)+'\n\n'
+    final += 'theorem concrete_rules_length : concreteRules.length = 55 := rfl\n\n'
+    final += 'theorem concrete_rule_shapes :\n    concreteRules.map (fun r => (r.sig, r.words)) = savedShareRules := rfl\n\n'
+    final += 'theorem concrete_rules_valid : ∀ rule ∈ concreteRules, RuleValid rule := by\n  intro rule h\n'
+    final += '  simp only [concreteRules, List.mem_cons, List.mem_singleton] at h\n  rcases h with '+' | '.join('rfl' for _ in rows)+'\n'
+    final += ''.join(f'  · exact rule_valid_{i:03d}\n' for i in range(55))
+    final += '\ntheorem concrete_actual_history_credit {m : Nat} (p : Snake m) (r : Nat)\n'
+    final += '    (hr : r+9 ≤ m) :\n'
+    final += '    historyCredit concreteRules (actualHistory p r) (directionId p r) (sixCode p r) ≤\n'
+    final += '      ((List.range 5).map fun i => coreShare 12 p (r+(i+4))).sum :=\n'
+    final += '  actual_history_credit_le p r concreteRules hr concrete_rules_valid\n\n'
+    final += '\n'.join('#print axioms '+n for n in
+                       ('concrete_rules_length', 'concrete_rule_shapes', 'concrete_rules_valid', 'concrete_actual_history_credit'))
+    save('ConcreteRules95', final+'\n'+END)
+    receipt = {'status':'GENERATED_PENDING_LEAN_COMPILATION', 'rule_count':55,
+                      'word_count':geometric_count, 'capped_count':capped_count,
+                      'inputs':inputs, 'generated_sources':generated, 'printed_audits':audits,
+                      'compile_order_after_ports':['SuffixCredit95']+word_batches+
+                      rule_batches+['ConcreteRules95']}
+    (HERE/'data/credit-generation.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
+    print('GENERATED_PENDING_LEAN_COMPILATION:55 rules;69 geometric adapters;8 capped adapters')
+
+
+if __name__ == '__main__':
+    main()

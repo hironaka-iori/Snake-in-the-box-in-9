@@ -1,0 +1,47 @@
+import CreditTransport95
+import HistoryCreditEvaluator95
+import Port95M67ChargeBatch00
+import HistoryShareAssembly
+import DefinedProofGraph
+
+/-! Concrete history credit in the same environment as the defined graph. -/
+
+namespace Snake9.ConcreteCredits95
+open Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow
+open Snake9.Direction77 Snake9.Guards79 Snake9.GraphWalk78
+open Snake9.HistoryShare94 Snake9.CreditTransport95 Snake9.HistoryCredit95
+
+theorem word_G000 : WordShareBound FamilyCharge67.G000.ds 2 := by
+  apply word_share_of_local _ _ rfl
+  intro m p P s hr hP
+  exact FamilyCharge67.G000.in_snake p P s hr hP
+
+def pilotRule : Rule :=
+  ⟨signature008, variants008, [], 2, 2⟩
+
+theorem pilot_valid : RuleValid pilotRule := by
+  refine ⟨rfl, share_cover_008, ?_, ?_, ?_⟩
+  · simp [pilotRule]
+  · intro cs hcs
+    have heq : cs = FamilyCharge67.G000.ds := by
+      simpa [pilotRule, variants008, FamilyCharge67.G000.ds] using hcs
+    intro m p s hr hcanon
+    rw [heq] at hcanon
+    exact word_G000 p s hr hcanon
+  · intro cs hcs m p s hr hcanon _
+    have heq : cs = FamilyCharge67.G000.ds := by
+      simpa [pilotRule, variants008, FamilyCharge67.G000.ds] using hcs
+    rw [heq] at hcanon
+    exact word_G000 p s hr hcanon
+
+theorem pilot_actual_credit {m : Nat} (p : Snake m) (r : Nat)
+    (hr : r+9 ≤ m) :
+    contribution pilotRule (actualHistory p r) (directionId p r) (sixCode p r) ≤
+      ((List.range 5).map fun i => coreShare 12 p (r+(i+4))).sum :=
+  actual_contribution_le p r pilotRule hr pilot_valid
+
+#print axioms word_G000
+#print axioms pilot_valid
+#print axioms pilot_actual_credit
+
+end Snake9.ConcreteCredits95

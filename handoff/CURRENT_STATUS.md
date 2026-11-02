@@ -1,41 +1,42 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 94 checkpoint
+## Milestone 95 checkpoint
 
-All 55 history-share signatures now have checked exact compatible sets. Their
-69 canonical eleven-direction words form 41 singleton sets and 14 two-word sets.
-The 73 Lean audits cover every finite table, reverse inclusion, distinct signatures,
-actual emitted-window membership, centre offsets and numeric count-cap transport.
-The eight older representative-only rules are all unique. Counts below six retain
-their exact cap meaning; the saturated symbol is not treated as an exact count.
+All 55 saved history-share rules now have their concrete local bounds supplied.
+The 69 geometric word bounds and eight stronger capped bounds pass Lean in a
+compatible environment. The maximum of applicable bounds is checked against
+the actual share sum at centres $r+4,\ldots,r+8$, assuming $r+9\le m$.
+The final assembly imports the defined graph and has no remaining per-word
+geometric premise. The exact 55-rule order, signatures, variants, caps and
+credit values agree with the pinned model rows.
 
-The [mathematical note](../milestones/94-history-share-dispatch/mathematical-note.md)
-defines compatible configurations. The [provenance map](../milestones/94-history-share-dispatch/audit/credit-provenance.md)
-finds all 69 geometric word bounds and eight stronger capped bounds in existing
-local proofs. Concrete instantiation remains. Legacy and current share modules
-declare the same core share name, and five instance-module names collide. The
-inspected core share definition text is identical; the import ownership must be
-resolved and the chosen source closure rechecked in one environment.
+The selected source closure contains 46 ported modules. All proof text is
+preserved except recorded import replacements and a consistent namespace
+substitution. Five declaration conflicts with existing history support are
+resolved without dropping a theorem or weakening its assumptions. The
+source closure, transport, adapters and assembly passed 923 theorem audits.
+This count includes auxiliary and extra instances retained in whole modules.
 
-The selected next task is a compatible credit-2 instance for FamilyCharge67.G000,
-followed by all geometric/capped instances and the maximum-credit evaluator.
-Edge 58's uncapped credit 6 comes from a nine-direction suffix; its capped credit 12 uses
-an eleven-direction theorem. Preserve these different transfers.
+The [mathematical note](../milestones/95-history-credit-integration/mathematical-note.md)
+explains the coordinate, centre and cap transfers without extra terminology.
+Edge 58's nine-direction geometric bound and eleven-direction capped bound
+are transferred separately. Alternative credits use maximum throughout.
 
-The frozen snapshot has 31/127 witness classes and 64/127 geometry classes.
-Their existing sessions 13482 and 23168 continue. Case7302 remains stopped after
-its Check1 timeout, with 649 successful modules and unchanged replay sources.
-Inspect actual processes before restarting any job.
+The frozen snapshot records 86/127 witness classes and 89/127 geometry
+classes. Sessions 13482 and 23168 continue unless their live records say
+otherwise. Inspect actual processes before restarting. Case7302 remains
+stopped after its Check1 timeout, with 649 successful modules and unchanged
+replay sources.
 
 The maintained interval remains $191\le a(9)\le235$ edges, with 234 conditional.
 The upper bound retains contributor-proof and saved-audit evidence; a complete
-independent rebuild remains pending. Paper revision 86 and both source copies
-are unchanged. The next full paper revision is scheduled for milestone 96.
+independent rebuild remains pending. The current result supplies the history
+part of the weight. Remaining weight components, retention premises, local
+exclusions and the complete defined-graph potential remain separate.
 
-Milestone 93's optimality of the three fixed-model slope/range comparisons still
-applies. Stronger graph restrictions, credits, boundary accounting or endpoint
-information are needed to improve those comparisons. Earlier entries below
-retain their historical scopes; the current frozen checkpoint is milestone 94.
+Paper revision 86 and both source copies are unchanged. The next full revision
+is due at milestone 96. Preserve authors and hyperlink settings, use standard
+notation, and define only essential concepts that recur substantially.
 
 ## Result and evidence boundary
 

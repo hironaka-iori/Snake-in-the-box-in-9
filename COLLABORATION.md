@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 94 checkpoint](milestones/94-history-share-dispatch/README.md) checks all 55 history-share signatures with 73 Lean theorem audits. Their exact compatible sets contain 69 words: 41 signatures are unique and 14 have two variants. Actual-window recognition and generic count-cap transport are checked. Every needed local credit has an identified historical theorem; concrete instantiation in a compatible import environment and maximum-credit dispatch remain. The frozen snapshot records 31/127 witness classes and 64/127 geometry classes. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
+Latest continuation: [milestone 95 checkpoint](milestones/95-history-credit-integration/README.md) supplies all 69 geometric and eight capped word bounds for the 55 history-share rules. Their maximum is Lean-checked against the actual five-centre share sum, in the same environment as the defined graph. The source closure and adapters passed 923 theorem audits. The frozen snapshot records 86/127 witness classes and 89/127 geometry classes. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 

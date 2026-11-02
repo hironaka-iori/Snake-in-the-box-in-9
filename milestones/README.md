@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 95: concrete history-credit integration](95-history-credit-integration/README.md). All 69 geometric and eight capped word bounds, 55 concrete rules and their maximum for actual snakes; 923 theorem audits including the ported source closure. No new numerical bound.
+
 - [Milestone 94: complete history-share configurations](94-history-share-dispatch/README.md). 73 Lean audits; all 55 signatures, 69 exact compatible words, actual-window and capped dispatch. Existing local credits are mapped; compatible concrete instantiation and maximum dispatch remain. No new numerical bound.
 
 - [Milestone 93: joint slope and range comparison](93-defined-graph-potential/README.md). Seven new Lean audits; exact independent certificates show that all three fixed weighted graphs already attain their best constant-slope/global-range comparisons. No new snake bound. Case7302 stopped after a timeout; witness and geometry batches continue.

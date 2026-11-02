@@ -13,12 +13,15 @@ Use its [checkpoint](../milestones/86-paper-revision/data/checkpoint.json) and
 paper revision and its historical handover and replay observation.
 
 The current checkpoint is
-[milestone 94](../milestones/94-history-share-dispatch/README.md), with 73 Lean
-audits classifying all 55 history-share signatures and checking actual-window
-and count-cap dispatch. Its [checkpoint](../milestones/94-history-share-dispatch/data/checkpoint.json)
-and [manifest](../milestones/94-history-share-dispatch/data/file-manifest.json)
-preserve the exact results, local-credit provenance and continuing batch observations.
-The next task is compatible concrete credit instantiation and maximum dispatch.
+[milestone 95](../milestones/95-history-credit-integration/README.md), which
+supplies all concrete history-share bounds and their maximum for actual snakes.
+Its [checkpoint](../milestones/95-history-credit-integration/data/checkpoint.json)
+and [manifest](../milestones/95-history-credit-integration/data/file-manifest.json)
+preserve the checked sources, exact transformations and continuing batch state.
+The complete global weight and potential assembly remains pending.
+
+[Milestone 94](../milestones/94-history-share-dispatch/README.md) classifies
+the exact compatible words and proves history/cap recognition.
 
 [Milestone 93](../milestones/93-defined-graph-potential/README.md) proves the
 joint slope/range comparison and preserves the case7302 timeout evidence.

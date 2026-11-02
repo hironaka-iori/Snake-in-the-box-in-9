@@ -1,7 +1,8 @@
 # Assignment for the next researcher
 
-Continue in `E:/Snake-in-a-box`. Read the current handover, milestone 94's
-mathematical note, checkpoint and credit-provenance audit, then milestone 93's
+Continue in `E:/Snake-in-a-box`. Read the current handover, milestone 95's
+mathematical note, checkpoint and source/literal audits, then milestone 94's
+compatible-word classification and milestone 93's
 fixed-model comparison and milestone 92's
 context-assignment and defined-graph interfaces. Paper revision 86 is current.
 
@@ -41,47 +42,33 @@ has not been established.
 
 ## Selected next mathematical task
 
-Milestone 94 completes the compatible-word classification for all 55 history
-share signatures. All 69 variants are checked, with 41 singleton and 14 two-word
-sets. Actual emitted-window membership and generic numeric cap transport pass
-Lean. Reuse these 73 audits; do not repeat the finite cover calculations.
+Milestone 95 closes the concrete history-share obligations: 69 geometric and
+eight capped adapters, all 55 RuleValid statements, and the maximum evaluator
+bound for every actual snake with a fitting window. Reuse these receipts.
+The final ConcreteRules95 module imports DefinedProofGraph and has no remaining
+per-word geometric premise. The root literal audit independently checks all
+saved credit values, caps, signature indices and variant indices.
 
-Instantiate the per-word geometric and capped premises in the current proof
-environment. The provenance map identifies all 69 geometric word theorems and
-eight stronger capped theorems. No extra local geometric lower-bound claim is
-missing from this model, but their combined interpretation is still pending.
+The source ports use distinct module names and reuse the current share
+declaration. CountPropagation65 is consistently renamed CountPropagationPort95
+in eleven port files to avoid five declarations owned by HistoryCountSupport.
+Every other non-import byte is preserved. Existing historical files are intact.
+Do not mix legacy build paths back into this environment.
 
-The first concrete target is FamilyCharge67.G000.in_snake, credit 2 for the
-single-word rule with edge label 2000. Port only the needed generic support to
-the current LocalWindowShareBridge, under distinct module names, preserving
-definitions and theorem statements. Then check coordinate transfer, emitted
-word membership and the five centres. Expand only after this instance passes.
+The paper revision is now due at milestone 96. Edit the existing editor source
+in place, preserve authors and hypersetup, and synchronize its repository copy.
+Explain the completed classification, fixed-model slope/range obstruction,
+defined graph and concrete history credits in their logical order. Use ordinary
+notation; introduce a definition only when essential and substantially reused.
+Keep arbitrary-snake results separate from conditional graph conclusions.
+Use the built-in compiler; preserve the source if the compiler cannot start.
 
-Legacy ShareFrame and current LocalWindowShareBridge independently declare
-coreShare and related names. The coreShare definition text agrees; importing
-both owners is the issue. Selected Edge007/010/011/045/057 module names also
-collide across old milestones. Preserve the old files and receipts; use uniquely
-named compatible sources and audit their full selected dependency closure.
-Reordering old paths or renaming compiled objects does not validate this port.
-
-The eleven-word start is $s=r-2$. Its credited offsets 6 through 10 become
-$r+4,\ldots,r+8$. A six-count cap at position $k$ concerns $r+k+3$, hence
-the local ten-entry bounds-list index $4+k$. All current caps are below six;
-the saturated symbol still means $[6,21]$. Rule edge 58 has an uncapped credit 6 from
-SplitShare62.E27 on the canonical final nine directions, while its capped credit 12
-uses CountPropagation65.E058 on the eleven-word. Keep those transfers separate.
-
-After the individual bounds, define the exact contribution of each rule: zero
-without an emitted signature, geometric credit on a match, and the maximum
-with capped credit when every cap holds. Prove the maximum over all 55 rules
-is bounded by the same five-centre share sum. Keep the full history/direction/
-count key and match the pinned model's literal signatures, caps and credits.
-
-Finally combine the remaining weight components and check the entire potential
-on the graph defined from accepted keys, including any conservative extra rows.
-An external-array certificate does not transfer merely because its graph was
-used to construct the diagram. Reference-catalogue and pending local-floor
-premises remain explicit until separately discharged.
+After revision, assemble the remaining weight components and check the entire
+potential on every row of the defined graph, including conservative extra rows.
+An external-array certificate does not automatically transfer to this graph.
+Retain all reference-catalogue and pending local-floor premises explicitly.
+Continue witness and geometry batches; case7302 needs a controlled isolated
+Check1 test before any fresh completion run.
 
 ## Reuse completed proof interfaces
 
@@ -101,7 +88,7 @@ history witnesses: class 85 has two and class 89 has one, each at position 0.
 
 ## Active jobs and local-share replay
 
-The frozen milestone 94 checkpoint has 31/127 witness classes, 64/127 geometry
+The frozen milestone 95 checkpoint has 86/127 witness classes, 89/127 geometry
 classes and 649 successful case7302 modules. Counts may have advanced.
 Witness session 13482 uses the unchanged milestone 92 checker with
 `--classes all --wait-for-geometry`. Geometry session 23168 continues separately.
