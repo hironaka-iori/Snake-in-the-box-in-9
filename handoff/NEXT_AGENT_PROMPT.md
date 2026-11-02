@@ -1,7 +1,7 @@
 # Continuation assignment
 
-Continue the empty-square route in E:/Snake-in-a-box. Read milestone 105's
-mathematical note and checkpoint, then the live record and NEXT.md in
+Continue the empty-square route in E:/Snake-in-a-box. Read milestone 106's checkpoint and revision audit, milestone 105's
+mathematical note, then the live record and NEXT.md in
 milestone 104. The complete certification batch is still active. Verify its
 recorded processes; do not start a duplicate or edit a live proof/checker.
 
@@ -38,15 +38,21 @@ The maintained interval is 191 through 235 edges. The 235 result retains
 inspected contributor evidence, with complete independent rebuilding pending.
 The optimum and 196 remain unresolved. Keep the full research goal active.
 
-## Scheduled manuscript revision and runtime
+## Manuscript and runtime
 
-Revision 106 is due next. Read the complete current paper before revising its
-argument. Use ordinary notation, omit unnecessary definitions, and keep Lean
-file names and implementation definitions out of the paper. Preserve authors
-Iori Hironaka, Tommy Ma and Steven Zhan and the existing hypersetup settings.
-Edit D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex in place, maintain
-the exact E:/Snake-in-a-box/paper/snake9_research.tex mirror, and compile the
-open source through the built-in compiler. The current revision is 96.
+Revision 106 is complete at source level. Its verification preserves all
+appendices, authors and hypersetup settings and checks all 13 printed snakes.
+The built-in compiler failed before TeX processing because of the Windows
+helper's writable-root restriction; no successful PDF or visual review is
+claimed. The exact sources are synchronized between
+D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and
+E:/Snake-in-a-box/paper/snake9_research.tex. Continue editing the open source
+in place. The next full paper revision is scheduled for 116.
+
+Use ordinary mathematical notation. Introduce a definition only if necessary
+and repeatedly used. Keep Lean filenames and implementation definitions out
+of the manuscript. The current argument distinguishes old floor20/range600
+optimality from the sufficient floor18/range602 profile.
 
 Python is C:/Users/hironakaiori/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe;
 use -B -X utf8. Lean 4.19 and mathlib are under

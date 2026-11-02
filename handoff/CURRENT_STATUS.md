@@ -1,5 +1,38 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 106 checkpoint
+
+The manuscript now presents the checked graph coverage, complete actual
+weight interpretation and exact 1,378-key reference-union implication. Its
+conditional 234 route uses pending floors (16,18,16,16,16), slope 496 and range 602.
+The earlier floor 20/range 600 optimality result is kept separate. No smaller
+unconditional numerical bound is claimed.
+
+Named definitions were reduced from three to one, with no new definitions.
+The source preserves all authors, hyperlink settings, appendices and printed
+witnesses. All 13 snakes pass 118,673 pair checks. There are 135 statement blocks:
+130 prior blocks are unchanged, two propositions are strengthened using checked
+results, two definition environments become prose, and three deductions are
+added from existing evidence. This milestone ran no new Lean compiler.
+
+The built-in compiler failed before processing TeX because its Windows helper
+could not enforce the required writable roots. No current PDF or visual layout
+is verified. The exact diagnostic is saved.
+
+At the saved process-verified observation, milestone 104 was RUNNING with
+21/791 completed-profile contexts and 20/791
+conditional-profile contexts checked. The recorded active module was
+ConditionalBatch 104 G 017. This is a dated snapshot, not a live total.
+
+The maintained interval remains 191 through 235 edges. The contributor 235 proof
+retains its inspected source and archived audit; a complete independent rebuild
+is pending. The reference refutations, full potential certificates and five
+conditional share bounds remain separate obligations. The exact optimum and
+conjecture 196 remain unresolved.
+
+Earlier sections below retain their historical snapshots. The exact union is
+the current reference premise, and paper revision 106 supersedes revision 96.
+
 ## Milestone 105 checkpoint
 
 Five general theorems passed Lean with only propext, Classical.choice and

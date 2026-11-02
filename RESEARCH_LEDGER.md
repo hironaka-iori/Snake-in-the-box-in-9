@@ -753,3 +753,36 @@ contexts checked. Read its local data/batch-progress.json for current progress.
 The interval remains 191 through 235 edges, with 234 conditional.
 
 Next research priority: Preserve the running milestone 104 batch and complete its audit. Recover or regenerate the exact reference refutation roots selected in milestone 105. The five conditional share premises remain. Revise the manuscript at scheduled milestone 106 using ordinary notation and explicit proof obligations.
+
+
+## Milestone 106: manuscript revision
+
+The manuscript now presents the checked graph coverage, complete actual
+weight interpretation and exact 1,378-key reference-union implication. Its
+conditional 234 route uses pending floors (16,18,16,16,16), slope 496 and range 602.
+The earlier floor 20/range 600 optimality result is kept separate. No smaller
+unconditional numerical bound is claimed.
+
+Named definitions were reduced from three to one, with no new definitions.
+The source preserves all authors, hyperlink settings, appendices and printed
+witnesses. All 13 snakes pass 118,673 pair checks. There are 135 statement blocks:
+130 prior blocks are unchanged, two propositions are strengthened using checked
+results, two definition environments become prose, and three deductions are
+added from existing evidence. This milestone ran no new Lean compiler.
+
+The built-in compiler failed before processing TeX because its Windows helper
+could not enforce the required writable roots. No current PDF or visual layout
+is verified. The exact diagnostic is saved.
+
+At the saved process-verified observation, milestone 104 was RUNNING with
+21/791 completed-profile contexts and 20/791
+conditional-profile contexts checked. The recorded active module was
+ConditionalBatch 104 G 017. This is a dated snapshot, not a live total.
+
+The maintained interval remains 191 through 235 edges. The contributor 235 proof
+retains its inspected source and archived audit; a complete independent rebuild
+is pending. The reference refutations, full potential certificates and five
+conditional share bounds remain separate obligations. The exact optimum and
+conjecture 196 remain unresolved.
+
+Next research priority: Preserve and complete the active milestone 104 graph certificate batch, then audit both final assemblies. Recover the exact reference refutation roots selected in milestone 105. Conditional 234 still needs the five local shares, with a separate target-18 proof for 012034. The next scheduled full paper revision is 116.

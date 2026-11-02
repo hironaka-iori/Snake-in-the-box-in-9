@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 105](milestones/105-reference-proof-closure/README.md) proves that the exact 1,378-pattern reference union suffices for both existing upper-bound arguments. Five theorems pass Lean; no definitions are added. The union refutations and complete graph checks remain pending. Milestone104 continues its active batch; the numerical interval is unchanged.
+Latest continuation: [milestone 106](milestones/106-paper-revision/README.md) revises the manuscript through milestone 105, reduces named definitions from three to one, and states the exact remaining assumptions. Source and witness checks pass; built-in PDF compilation is unavailable. The complete potential batch remains active and the numerical interval is unchanged.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -16,7 +16,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
 
-Next research priority: Preserve the running milestone 104 batch and complete its audit. Recover or regenerate the exact reference refutation roots selected in milestone 105. The five conditional share premises remain. Revise the manuscript at scheduled milestone 106 using ordinary notation and explicit proof obligations.
+Next research priority: Preserve and complete the active milestone 104 graph certificate batch, then audit both final assemblies. Recover the exact reference refutation roots selected in milestone 105. Conditional 234 still needs the five local shares, with a separate target-18 proof for 012034. The next scheduled full paper revision is 116.
 
 ## Historical checkpoints
 
