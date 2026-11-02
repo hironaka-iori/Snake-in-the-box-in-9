@@ -450,3 +450,27 @@ Distinct successful modules are counted separately from repeated composition
 rows. Bounds remain 191 through 235, with 234 conditional. The paper stays at
 revision 86, next full revision 96. This checkpoint does not mark the full
 geometric batch, the local share theorem or the overall goal complete.
+
+
+## Milestone 90: witness compatibility and count conditions
+
+2 November 2026. 17 Lean audits check generic lookup substitutions, exact
+balanced direction/reference tables, six class-1 witness assignments and
+their numeric-retention implication, and general witness factorization.
+The concrete pilot covers 3,840 validity entries across six directions and
+extends to every bounded history under the original predicate. Its proof
+module took 21.125 seconds. Full context assignment remains open.
+
+The all-context plan contains 507 base validity jobs and three separate
+history heads. Its 357,823 entries share 15,353 normalized shape tests and
+2,651 count tests, with 508 outer and 2,329 catalogue guards. Every saved
+entry comparison agrees. Reference keys account for 338,697 entries and
+only 12,560 normalized shape tests. This is computational evidence for a
+same-class sharing experiment; concrete descriptor equality and assembly
+are still required, and no timing improvement is claimed.
+
+The checkpoint observes classes 0 through 12 completed in the continuing
+127-class geometry run and 449 distinct successful modules in
+case7302. Exact logs, dependency pins and live-state snapshots are saved.
+Neither process is restarted. Bounds remain 191 through 235, with 234
+conditional. Paper revision 86 is unchanged; the next rewrite is due at 96.

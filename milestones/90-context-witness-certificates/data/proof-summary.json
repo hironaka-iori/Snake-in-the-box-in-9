@@ -1,0 +1,143 @@
+{
+  "status": "PASS_WITNESS_PILOT_AND_GENERIC_FACTORIZATION",
+  "theorem_audits": 17,
+  "modules": [
+    {
+      "module": "Class001WitnessChecks",
+      "receipt": "milestones/90-context-witness-certificates/data/Class001WitnessChecks-audit.json",
+      "receipt_sha256": "5cfa808f198ee8f6b39df644e36c14010dcebeec34441bed4f5d34ca25e1a850",
+      "theorem_audits": 2,
+      "seconds": 21.125
+    },
+    {
+      "module": "Class001WitnessData",
+      "receipt": "milestones/90-context-witness-certificates/data/Class001WitnessData-audit.json",
+      "receipt_sha256": "d0892a908504a2eaf3bcd190ba1cadb297636c633373852819cf218994b83db1",
+      "theorem_audits": 0,
+      "seconds": 12.484000000000378
+    },
+    {
+      "module": "WitnessFactors",
+      "receipt": "milestones/90-context-witness-certificates/data/WitnessFactors-audit.json",
+      "receipt_sha256": "cb4e7ad98703f669a7b84339e4f2fd226593f5db8b3555d2560fc9cce63db727",
+      "theorem_audits": 3,
+      "seconds": 52.875
+    },
+    {
+      "module": "WitnessLookup",
+      "receipt": "milestones/90-context-witness-certificates/data/WitnessLookup-audit.json",
+      "receipt_sha256": "b6e78a765bcfafb3f86b8bf0c45ee87a72efa8c706c2e595728449d8881bd8bb",
+      "theorem_audits": 4,
+      "seconds": 44.90699999999924
+    },
+    {
+      "module": "WitnessTablesChecks",
+      "receipt": "milestones/90-context-witness-certificates/data/WitnessTablesChecks-audit.json",
+      "receipt_sha256": "1ef0a67b7a0fde9a34deb0eecf17b90783b1fc519d60b5cb9cc78b277370ac93",
+      "theorem_audits": 8,
+      "seconds": 17.78100000000086
+    },
+    {
+      "module": "WitnessTablesData",
+      "receipt": "milestones/90-context-witness-certificates/data/WitnessTablesData-audit.json",
+      "receipt_sha256": "4b1fadf7fbe5390f1decfa7c865c17afac63556190418d5e6804bc92f56d3d78",
+      "theorem_audits": 0,
+      "seconds": 85.1880000000001
+    }
+  ],
+  "concrete_numeric_membership_directions": [
+    1,
+    3,
+    307,
+    308,
+    310,
+    312
+  ],
+  "concrete_class": 1,
+  "witness_lists": 2,
+  "boxes": 640,
+  "concrete_validity_entries": 3840,
+  "bounded_histories": "All q < 75 under the original numericKeep predicate",
+  "total_contexts": 791,
+  "base_validity_jobs": 507,
+  "separate_history_heads": 3,
+  "full_context_assignment_checked": false,
+  "full_witness_validity_checked": false,
+  "factor_profile_summary": {
+    "all_factored_values_equal": true,
+    "all_original_values_true": true,
+    "box_factor_evaluations_saved_vs_occurrences": 355172,
+    "by_family": [
+      {
+        "family": 0,
+        "name": "reference",
+        "occurrences": 338697,
+        "unique_box_condition_tests": 2319,
+        "unique_catalogue_indexed_shape_calls": 337485,
+        "unique_normalized_shape_tests": 12560
+      },
+      {
+        "family": 1,
+        "name": "short",
+        "occurrences": 16341,
+        "unique_box_condition_tests": 282,
+        "unique_catalogue_indexed_shape_calls": 4624,
+        "unique_normalized_shape_tests": 2260
+      },
+      {
+        "family": 2,
+        "name": "interval",
+        "occurrences": 2782,
+        "unique_box_condition_tests": 48,
+        "unique_catalogue_indexed_shape_calls": 2780,
+        "unique_normalized_shape_tests": 530
+      },
+      {
+        "family": 3,
+        "name": "history",
+        "occurrences": 3,
+        "unique_box_condition_tests": 2,
+        "unique_catalogue_indexed_shape_calls": 3,
+        "unique_normalized_shape_tests": 3
+      }
+    ],
+    "factor_counts": {
+      "box_factors": 2651,
+      "catalogue_guards": 2329,
+      "outer_guards": 508,
+      "shape_factors": 15353
+    },
+    "factored_boolean_stream_sha256": "b2d59493b9277767ca3fbb8de61416bdbf08540942cc771765e82afb5c43184d",
+    "history_heads": 3,
+    "original_boolean_stream_sha256": "b2d59493b9277767ca3fbb8de61416bdbf08540942cc771765e82afb5c43184d",
+    "planned_base_jobs": 507,
+    "planned_entries_compared": 357823,
+    "shape_factor_evaluations_saved_vs_occurrences": 342470,
+    "unique_box_witness_pairs": 4609,
+    "unique_direction_history_box_witness_calls": 356595
+  },
+  "concrete_factor_assembly_checked": false,
+  "profile_sha256": "885f4f4ed241c52979cd5daac7a9c9d72e7d255440652bfaa9c85e933bd8ac44",
+  "plan_sha256": "68ae7c1c81d6c714a63964c5859d0e8b3cfaa93bf7a30569252dcb22bd9f376c",
+  "observed_geometry_classes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "newly_observed_geometry_audits": 44,
+  "reference_premises": [
+    "AllRefuted6K235",
+    "AllRefuted236"
+  ],
+  "scope": "Checked generic lookup/factor identities, exact lookup tables, and six-direction membership pilot. The all-entry factor profile and job plan are computational. No new bound or full graph interpretation."
+}

@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, milestone 89's shared-cover checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
+`handoff/CURRENT_STATUS.md`, milestone 90's witness checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -70,11 +70,34 @@ do not relaunch them. Inspect the actual process and active record before
 resuming anything. Mutable run records are excluded from the saved manifest;
 frozen observations and completed receipts specify its historical scope.
 
-After the geometric batch, check concrete witness validity and context-class
-assignment, using history transport for nonhistory witnesses. Equal witness
-lists across different directions still need direction validity checks.
-Then prove diagram membership implies the saved full-key rows and endpoint
-columns. Keep both reference-catalogue premises explicit until discharged.
+Milestone 90 checks exact balanced direction/reference lookups and six class-1
+direction assignments, at indices 1, 3, 307, 308, 310 and 312. The resulting
+membership theorem holds for every q < 75 under the original numericKeep
+predicate; it does not certify all context assignments. The proof module
+took 21.125 seconds. Reuse the source/object/log receipts and two witness lists.
+The round adds 17 audits, including general compatibility/count factorization.
+
+The saved job plan reconstructs all 791 contexts as 507 base validity jobs
+and three separate history heads. Do not regenerate the materialization or
+discard the head positions. The exact computational factor profile identifies
+15,353 shape tests and 2,651 count tests in 357,823 entries. Reference keys
+dominate; their 337,485 catalogue-indexed shape calls reduce to 12,560 normalized
+shape expressions. Full compatibility still retains catalogue guards, so
+caching it by key index alone misses this reduction. Use WitnessFactors'
+normalized shape definitions and prove descriptor/source correspondences.
+
+The next bounded task is a same-class reference-shape reuse pilot. Include
+all correspondence and assembly checks in the comparison; no speedup is yet
+measured. Then expand concrete witness certification, certify context-to-class
+assignment, and connect diagram membership to full-key rows and endpoints.
+Keep both reference-catalogue premises explicit until discharged.
+
+The newer geometric observation in milestone90 covers classes 0 through 12;
+the two continuing process handles remain 23168 and 14427. The case7302
+snapshot contains 449 distinct successful modules and no final
+share audit. Use current actual process state, not an older session count,
+before deciding whether to resume. The saved snapshots are historical.
+
 After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.
 Symbol six represents the interval [6,21]. Alternative

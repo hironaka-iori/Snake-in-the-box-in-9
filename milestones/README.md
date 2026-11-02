@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 90: witness compatibility and counts](90-context-witness-certificates/README.md). 17 Lean audits; six-direction membership pilot, exact lookup tables and generic factorization; 507 base jobs plus three history heads planned. No new bound.
+
 - [Milestone 89: shared-cover checkpoint](89-shared-cover-certification/README.md). 28 Lean audits; balanced geometric classes 0/1 checked, full batch active; all 791 context witnesses materialized computationally. History transport and lookup equivalences checked; no new numerical bound.
 
 - [Milestone 88: rejection boxes and a checked coverage pilot](88-retention-diagram-certificate/README.md). 26 Lean theorem audits; generic rejection/coverage chain and direction-0/history-0 certificate. All 127 common covers are computationally exact; all-context certification and saved-row identification remain open. Bounds unchanged.

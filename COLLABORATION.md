@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 89 checkpoint](milestones/89-shared-cover-certification/README.md) saves 28 Lean theorem audits, balanced geometric certificates for classes 0 and 1, and complete computational witness data for all 791 contexts. The sequential 127-class batch continues; concrete context-witness equations remain open. History transport permits reuse of nonhistory witnesses. Case7302 has resumed past Check66 with a unique temporary output path. The paper stays at revision 86; the interval remains 191 through 235, with 234 conditional.
+Latest continuation: [milestone 90 checkpoint](milestones/90-context-witness-certificates/README.md) records 17 Lean theorem audits, exact balanced witness tables and a six-direction retained-code membership result. Generic witness factorization is checked. The full 791-context assignment remains open. A saved plan reduces it to 507 base witness jobs and three history heads; a computational profile identifies reusable shape and count tests. The continuing geometric batch has checked classes 0 through 12 at this snapshot. Case7302 continues. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 

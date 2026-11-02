@@ -212,6 +212,33 @@ limit and has passed Check66 in 130.02 seconds. It reuses unchanged proof
 sources and completed modules. Inspect actual processes before any restart.
 Final geometry, reversal and the local-share audit remain pending.
 
+Milestone 90 adds 17 Lean theorem audits. Balanced lookups preserve the exact
+505-direction and 1,378-reference tables, including out-of-range defaults.
+The class-1 certificate now gives retained-code membership for directions
+1, 3, 307, 308, 310 and 312, for every bounded history under the original
+predicate. Its six assignments contain 3,840 witness checks, and the proof
+module passed in 21.125 seconds, excluding data and shared table checks.
+
+Compatibility and count conditions are separated by a checked general
+identity. A normalized direction-pattern expression permits reference keys
+with the same shape and count-list length to share the shape calculation.
+Concrete compressed descriptors and their full assembly remain unchecked.
+The computational plan has 507 base validity jobs and three history heads,
+covering all 791 contexts. Its 357,823 entries contain 15,353 distinct shape
+tests and 2,651 count tests, together with 508 outer and 2,329 catalogue
+guards. Every saved direct/factored Boolean comparison passes. These are
+valid saved entries; the experiment alone proves no general equivalence or
+speed improvement. Test reference-shape reuse on the same six-job pilot
+before expanding it throughout the finite batch.
+
+At the milestone90 snapshot, the existing geometric process has successful
+receipts for classes 0 through 12; its full 127-class batch remains active.
+The case7302 replay has 449 distinct successful modules
+(455 raw successful rows). Its local-share theorem and
+final audit remain pending. Both live processes must be inspected before
+any restart. The checkpoint contains immutable observations and a delta log
+archive. The upper-bound and reference-premise limitations remain unchanged.
+
 The remaining structural work is to supply the two closed reference
 catalogue proofs and a concrete Lean retention cover with endpoint-column
 identities. The universal conditional indexing argument is now supplied.
@@ -260,7 +287,7 @@ guards, interval-filter assembly, catalogue audit and a later replay observation
 Milestone 81 saves the forty-rule theorem, independent review and exact comparison.
 Milestone 84 saves the three-history theorem. Milestone 85 saves the exact reference
 table, conditional theorem, provenance review, exhaustive comparison and a later
-case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 89 contains the current shared handover versions and later proof-process observations.
+case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 90 contains the current shared handover versions and later proof-process observations.
 Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
