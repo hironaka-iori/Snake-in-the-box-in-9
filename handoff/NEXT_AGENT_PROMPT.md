@@ -1,56 +1,46 @@
 # Continuation assignment
 
 Continue the empty-square charging route in `E:/Snake-in-a-box`. Read milestone
-102's mathematical note, proof summary and audit/next-optimization.md. The
-previous round made progress: all 412 fixed potential-block equations and
-eight new complete profile/context checks passed. The active goal is unresolved.
+103's mathematical note, proof summary and checkpoint. The general joint
+traversal proof and all four matched comparisons passed. The active goal is
+unresolved. No compiler is active at this checkpoint.
 
 ## Next task
 
-Retain the original decidable leaf comparison. Reduce repeated potential-tree evaluation inside the prefix check, following the feasibility note. Prove the traversal invariant and needed tree-shape facts before running a bounded comparison. Use the checked block equations and bounded transfer, preserve the original min caps and every accepted code, and extend the remaining finite certificates once the method is verified.
+Prepare one resumable sequential batch for all remaining contexts, reusing the six existing certificates per profile. Reuse one verified reduced check per identical acceptance root, weight expression and potential-root pair, then prove each original context by the bounded transfer. Select the baseline or joint method from the measured evidence, with a fallback for timed-out contexts. Assemble the original complete-graph theorem only after every context and every missing block are covered. Do not start another series of isolated timing pilots.
 
-The existing block equalities are Snake9.PotentialBlocks102.completed_at_i
-and conditional_at_i for i from 0 through 205. Each takes offset and a proof
-offset<7776, and returns the exact original capped potential value at its
-recorded subtree. The source offset code/6 requires code<46656; the target
-offset code%7776 is always bounded. No equality for arbitrary source codes
-was introduced. Root selections are checked by Lean against the original table.
+The provisional methods from the two-context totals are completed:
+baseline; conditional: joint. These are limited timing
+observations, not a general performance theorem. The exact measurements and
+source grouping are in milestone 103. The 591 completed and 578 conditional
+source groups are proposed reuse groups; Lean must check each application.
 
-The generic transfer is
-Snake9.BoundedPrefixTransfer102.contextCheck_of_bounded_prefix, with arguments
-test, w, P, pi, direction, history, class, block equality, successful prefix
-test, and pointwise test equality on accepted codes below 46656. It proves
-the original contextCheck. It introduces no new actual-snake premise.
+The reusable traversal theorem is Snake9.Joint103.joint_root_prefix. It takes
+weight, P, R, acceptance root, source and target potential trees, and a
+successful checkJoint equation. It returns the exact original prefix-check
+equation with clipped values at code/6 and code%7776. No graph premise is added.
+The definitions step and checkJoint are the only new reusable helpers.
 
-Reuse every complete context listed in milestone 102's proof summary:
-the completed profile at 35/0 and conditional profile at 177/43 from milestone 100;
-both profiles at 99/37 from milestone 101; and both profiles at 0/0, 1/0, 9/0
-and 10/0 from milestone 102. There are six per profile.
-The new versions of 99/37 are comparison checks and add no coverage.
-The context-specific formulas in milestone 101 remain available for all 791
-contexts; no replacement graph or weight model is required.
+Use the existing bounded transfer
+Snake9.BoundedPrefixTransfer102.contextCheck_of_bounded_prefix and block
+equalities Snake9.PotentialBlocks102.completed_at_i / conditional_at_i.
+The source offset code/6 requires code<46656; target code%7776 is bounded.
+All 791 context formulas remain available in Context101Group00 through 12.
 
-The observed fixed-block timings at 99/37 are 56.860 s and 110.016 s, compared
-with archived times of 111.750 s and 194.312 s. Workloads differed; do not state
-a controlled speedup factor. The proof summary also records a fresh sequential
-pair for direct Boolean versus decidable comparison. Both variants are checked;
-their timings are one-context observations. The full graph still has 785
-unproved contexts per profile.
-Avoid simply launching all remaining expensive checks before testing the next
-credible reduction. Preserve all successful certificates.
+Reuse the completed contexts listed in milestone 102's proof summary:
+completed 35/0 and conditional 177/43 from 100; both profiles 99/37 from 101;
+both profiles 0/0, 1/0, 9/0 and 10/0 from 102. The repeated checks in 103 add
+no coverage. Keep full direction/history keys and both potential caps.
 
-The matched Boolean experiment observed 61.672 s for the decidable comparison
-and 92.234 s for direct Boolean comparison. Retain the decidable comparison;
-this one pair supplies no performance improvement to pursue. It does not
-establish a universal ordering of the two variants.
+The generator in 103 supports --method joint or baseline and selected
+--contexts. For a complete batch, extend it with verified theorem reuse,
+dependency order and a resumable queue; avoid regenerating audited sources.
+Do not modify this frozen milestone to run the complete batch.
 
-The proposed next traversal is unimplemented and unverified. Its source
-potential uses the first five of six symbols and its target the last five.
-The feasibility note identifies the shape and offset obligations. Confirm
-those obligations and a bounded benchmark before claiming it is useful.
-
-No compiler is active at this checkpoint. The unavailable redundant Omega
-import failure is preserved and superseded by the corrected successful source.
+No unsupported native evaluation, incomplete proof or arbitrary-snake claim
+was introduced. The successful theorem audits contain only propext,
+Classical.choice and Quot.sound. One unsuccessful traversal proof attempt
+is preserved with exact source and log.
 
 ## Global evidence and remaining assumptions
 
@@ -74,9 +64,9 @@ sources and evidence. Its old Check1 timeout was 900 seconds.
 
 ## Runtime, artifacts and publication
 
-Use `milestones/102-potential-block-reduction/scripts/check.py`, which snapshots
+Use `milestones/103-joint-potential-traversal/scripts/check.py`, which snapshots
 sources and checks dependencies, axioms and exact object/log bytes. Its
-environment reuses milestone 101 and the milestone 98 support overlay. Do not
+environment reuses milestone 102 and the milestone 98 support overlay. Do not
 recopy the 3.3 GB overlay. Compile sequentially; keep at most three Lean jobs.
 Do not add `-M4096`. Inspect live processes and records before any restart;
 old active markers may be historical. Never edit a live checker or source.

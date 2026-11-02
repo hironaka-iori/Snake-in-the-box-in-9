@@ -1,0 +1,264 @@
+{
+  "status": "PASS_JOINT_TRAVERSAL_AND_MATCHED_CONTEXT_COMPARISONS",
+  "previous_goal_turn": "progress",
+  "recorded_at": "2026-11-02T19:53:45.950619+00:00",
+  "proof_summary_sha256": "3d42fc8475d9a2c9d8bcd719b7abf45101247b474e6e472b452d1759b6db09a4",
+  "modules": 11,
+  "theorem_audits": 26,
+  "new_definitions": [
+    "step",
+    "checkJoint"
+  ],
+  "complete_contexts": [
+    {
+      "profile": "completed",
+      "direction": 35,
+      "history": 0,
+      "slope": 483,
+      "accepted_edges": 7151,
+      "all_codes_covered": 46656,
+      "root": 2620,
+      "prefix_transitions": 13548,
+      "seconds": 121.70300000000134,
+      "module": "ReducedCompleted100",
+      "original_contextCheck_proved": true,
+      "origin_milestone": 100
+    },
+    {
+      "profile": "conditional",
+      "direction": 177,
+      "history": 43,
+      "slope": 496,
+      "accepted_edges": 6598,
+      "all_codes_covered": 46656,
+      "root": 3690,
+      "prefix_transitions": 14202,
+      "seconds": 165.71899999999732,
+      "module": "ReducedConditional100",
+      "original_contextCheck_proved": true,
+      "origin_milestone": 100
+    },
+    {
+      "profile": "completed",
+      "direction": 99,
+      "history": 37,
+      "accepted_edges": 6043,
+      "all_codes_covered": 46656,
+      "slope": 483,
+      "module": "CompletedEmitting101",
+      "seconds": 111.75000000000364,
+      "origin_milestone": 101,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "conditional",
+      "direction": 99,
+      "history": 37,
+      "accepted_edges": 6043,
+      "all_codes_covered": 46656,
+      "slope": 496,
+      "module": "ConditionalEmitting101",
+      "seconds": 194.31199999999808,
+      "origin_milestone": 101,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "completed",
+      "direction": 0,
+      "history": 0,
+      "slope": 483,
+      "accepted_edges": 6123,
+      "all_codes_covered": 46656,
+      "module": "CompletedBlock102D0Q0",
+      "seconds": 90.51599999999598,
+      "origin_milestone": 102,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "conditional",
+      "direction": 0,
+      "history": 0,
+      "slope": 496,
+      "accepted_edges": 6123,
+      "all_codes_covered": 46656,
+      "module": "ConditionalBlock102D0Q0",
+      "seconds": 94.67199999999866,
+      "origin_milestone": 102,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "completed",
+      "direction": 1,
+      "history": 0,
+      "slope": 483,
+      "accepted_edges": 6997,
+      "all_codes_covered": 46656,
+      "module": "CompletedBlock102D1Q0",
+      "seconds": 85.98399999999674,
+      "origin_milestone": 102,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "conditional",
+      "direction": 1,
+      "history": 0,
+      "slope": 496,
+      "accepted_edges": 6997,
+      "all_codes_covered": 46656,
+      "module": "ConditionalBlock102D1Q0",
+      "seconds": 119.21899999999732,
+      "origin_milestone": 102,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "completed",
+      "direction": 9,
+      "history": 0,
+      "slope": 483,
+      "accepted_edges": 3913,
+      "all_codes_covered": 46656,
+      "module": "CompletedBlock102D9Q0",
+      "seconds": 88.95300000000134,
+      "origin_milestone": 102,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "conditional",
+      "direction": 9,
+      "history": 0,
+      "slope": 496,
+      "accepted_edges": 3913,
+      "all_codes_covered": 46656,
+      "module": "ConditionalBlock102D9Q0",
+      "seconds": 39.375,
+      "origin_milestone": 102,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "completed",
+      "direction": 10,
+      "history": 0,
+      "slope": 483,
+      "accepted_edges": 4474,
+      "all_codes_covered": 46656,
+      "module": "CompletedBlock102D10Q0",
+      "seconds": 45.25,
+      "origin_milestone": 102,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "conditional",
+      "direction": 10,
+      "history": 0,
+      "slope": 496,
+      "accepted_edges": 4474,
+      "all_codes_covered": 46656,
+      "module": "ConditionalBlock102D10Q0",
+      "seconds": 43.5309999999954,
+      "origin_milestone": 102,
+      "original_contextCheck_proved": true
+    }
+  ],
+  "finite_coverage_by_profile": {
+    "completed": {
+      "contexts": 6,
+      "accepted_edges": 34701
+    },
+    "conditional": {
+      "contexts": 6,
+      "accepted_edges": 34148
+    }
+  },
+  "comparisons": [
+    {
+      "profile": "completed",
+      "direction": 99,
+      "history": 37,
+      "baseline_seconds": 58.70300000000134,
+      "joint_seconds": 83.42199999999866,
+      "joint_over_baseline": 1.4210858048140087,
+      "modules": {
+        "joint": "CompletedJoint103D99Q37",
+        "baseline": "CompletedBaseline103D99Q37"
+      }
+    },
+    {
+      "profile": "completed",
+      "direction": 0,
+      "history": 0,
+      "baseline_seconds": 59.734000000004016,
+      "joint_seconds": 85.60899999999674,
+      "joint_over_baseline": 1.4331703887231892,
+      "modules": {
+        "joint": "CompletedJoint103D0Q0",
+        "baseline": "CompletedBaseline103D0Q0"
+      }
+    },
+    {
+      "profile": "conditional",
+      "direction": 99,
+      "history": 37,
+      "baseline_seconds": 61.734000000004016,
+      "joint_seconds": 29.968999999997322,
+      "joint_over_baseline": 0.4854537208020762,
+      "modules": {
+        "joint": "ConditionalJoint103D99Q37",
+        "baseline": "ConditionalBaseline103D99Q37"
+      }
+    },
+    {
+      "profile": "conditional",
+      "direction": 0,
+      "history": 0,
+      "baseline_seconds": 122.25,
+      "joint_seconds": 71.76600000000326,
+      "joint_over_baseline": 0.5870429447853027,
+      "modules": {
+        "joint": "ConditionalJoint103D0Q0",
+        "baseline": "ConditionalBaseline103D0Q0"
+      }
+    }
+  ],
+  "provisional_batch_method_by_profile": {
+    "completed": "baseline",
+    "conditional": "joint"
+  },
+  "complete_graph_potential_certificates_checked": false,
+  "unconditional_edge_interval": [
+    191,
+    235
+  ],
+  "conditional_target": 234,
+  "upper_bound_evidence": "Inspected contributor theorem and saved audit; full independent rebuild pending.",
+  "pending_reference_catalogues": [
+    "AllRefuted6K235",
+    "AllRefuted236"
+  ],
+  "pending_conditional_local_cases": [
+    7301,
+    7302,
+    7303,
+    7307,
+    7308
+  ],
+  "pending_share_floors": [
+    16,
+    18,
+    16,
+    16,
+    16
+  ],
+  "case7302_state": "STOPPED_AFTER_CHECK1_TIMEOUT_900_SECONDS",
+  "case7302_source_record_unchanged": true,
+  "paper_revision": 96,
+  "next_scheduled_paper_revision": 106,
+  "paper_sha256": "7d4d974bc353ca723e4a5362b0960610d959dfe622b115b629968818c178875c",
+  "prior_checkpoint": "milestones/102-potential-block-reduction/data/checkpoint.json",
+  "prior_checkpoint_sha256": "aea577f28c3058e3b541ec85a97b140b861e3560fe3afb1272630fff01b68ec5",
+  "git_refs_before_commit": {
+    "HEAD": "c11233e8b9eb20ed876b940ab02dfa5e7739b82f",
+    "origin/main": "c11233e8b9eb20ed876b940ab02dfa5e7739b82f"
+  },
+  "next_task": "Prepare one resumable sequential batch for all remaining contexts, reusing the six existing certificates per profile. Reuse one verified reduced check per identical acceptance root, weight expression and potential-root pair, then prove each original context by the bounded transfer. Select the baseline or joint method from the measured evidence, with a fallback for timed-out contexts. Assemble the original complete-graph theorem only after every context and every missing block are covered. Do not start another series of isolated timing pilots.",
+  "scope": "Traversal soundness and four matched profile/context comparisons. Coverage remains six contexts per profile; the optimum and a smaller global bound remain unresolved."
+}

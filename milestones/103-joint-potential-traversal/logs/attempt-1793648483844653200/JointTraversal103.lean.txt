@@ -1,0 +1,119 @@
+import TreeStep103
+import JointArithmetic103
+
+set_option autoImplicit false
+set_option maxHeartbeats 3000000
+
+namespace Snake9.Joint103
+open Snake9.Potential99 Snake9.Shared89 Snake9.PrefixChecker100
+
+/-- Traverse accepted count prefixes together with the two existing potential
+trees. Source digits are positions 0 through 4; target digits are 1 through 5. -/
+def checkJoint (weight : Nat → Nat) (P R : Nat) :
+    Nat → Nat → Nat → Tree → Tree → Bool
+  | 0, pref, node, source, target =>
+      if node = 0 then true else if node = 1 then
+        decide (P+min R (value target 0) ≤ weight pref+min R (value source 0))
+      else true
+  | depth+1, pref, node, source, target =>
+      if node = 0 then true else
+        (List.range 6).all fun digit =>
+          let next := advanceBalanced node (digit+1)
+          if next = 0 then true else
+            match (if depth = 0 then some source else step (6^(depth-1)) digit source) with
+            | none => false
+            | some left =>
+              match (if depth = 5 then some target else step (6^depth) digit target) with
+              | none => false
+              | some right => checkJoint weight P R depth (6*pref+digit) next left right
+
+theorem joint_to_prefix (test : Nat → Bool) (weight : Nat → Nat)
+    (P R depth pref node : Nat) (source target : Tree)
+    (hd : depth ≤ 6)
+    (hspec : ∀ code, pref*6^depth ≤ code → code < (pref+1)*6^depth →
+      test code = decide
+        (P+min R (value target
+          (if depth = 6 then (code%6^depth)%7776 else code%6^depth)) ≤
+          weight code+min R (value source ((code%6^depth)/6))))
+    (hjoint : checkJoint weight P R depth pref node source target = true) :
+    checkPrefix test depth pref node = true := by
+  induction depth generalizing pref node source target with
+  | zero =>
+      have hleaf : test pref = decide
+          (P+min R (value target 0) ≤ weight pref+min R (value source 0)) := by
+        have h := hspec pref (by simp) (by simp)
+        simpa using h
+      simpa only [checkJoint, checkPrefix, hleaf] using hjoint
+  | succ depth ih =>
+      by_cases hn : node = 0
+      · simp only [checkPrefix, hn, if_pos rfl]
+      · have hall := hjoint
+        simp only [checkJoint, if_neg hn] at hall
+        rw [checkPrefix, if_neg hn]
+        apply List.all_eq_true.mpr
+        intro digit hmem
+        have hj : digit < 6 := List.mem_range.mp hmem
+        have hbranch := List.all_eq_true.mp hall digit hmem
+        dsimp only at hbranch
+        by_cases hz : advanceBalanced node (digit+1) = 0
+        · rw [hz]
+          cases depth <;> rfl
+        · simp only [if_neg hz] at hbranch
+          cases hs : (if depth = 0 then some source else step (6^(depth-1)) digit source) with
+          | none => simp [hs] at hbranch
+          | some left =>
+            cases ht : (if depth = 5 then some target else step (6^depth) digit target) with
+            | none => simp [hs, ht] at hbranch
+            | some right =>
+              simp only [hs, ht] at hbranch
+              apply ih (6*pref+digit) (advanceBalanced node (digit+1)) left right (by omega)
+              · intro code hlo hhi
+                have hp := prefix_interval depth pref digit code (by omega) hj hlo hhi
+                have hsource : value source ((code%6^(depth+1))/6) =
+                    value left ((code%6^depth)/6) := by
+                  by_cases hzero : depth = 0
+                  · subst depth
+                    have he : source = left := by simpa using hs
+                    subst left
+                    congr 1
+                    norm_num
+                    omega
+                  · have hs' : step (6^(depth-1)) digit source = some left := by
+                      simpa only [if_neg hzero] using hs
+                    have hr := source_residue depth digit code (by omega) (by omega) hp.2
+                    rw [hr.1]
+                    exact step_value source left (6^(depth-1)) digit ((code%6^depth)/6) hj hr.2 hs'
+                have htarget : value target
+                      (if depth+1 = 6 then (code%6^(depth+1))%7776 else code%6^(depth+1)) =
+                    value right (if depth = 6 then (code%6^depth)%7776 else code%6^depth) := by
+                  by_cases hfive : depth = 5
+                  · subst depth
+                    have he : target = right := by simpa using ht
+                    subst right
+                    change value target ((code%46656)%7776) = value target (code%7776)
+                    rw [target_delay]
+                  · have hparent : depth+1 ≠ 6 := by omega
+                    have hchild : depth ≠ 6 := by omega
+                    have ht' : step (6^depth) digit target = some right := by
+                      simpa only [if_neg hfive] using ht
+                    rw [if_neg hparent, if_neg hchild, hp.2]
+                    exact step_value target right (6^depth) digit (code%6^depth) hj
+                      (Nat.mod_lt _ (by positivity)) ht'
+                simpa only [hsource, htarget] using hspec code hp.1.1 hp.1.2
+              · exact hbranch
+
+theorem joint_root_prefix (weight : Nat → Nat) (P R node : Nat)
+    (source target : Tree)
+    (hjoint : checkJoint weight P R 6 0 node source target = true) :
+    checkPrefix (fun code => decide
+      (P+min R (value target (code%7776)) ≤
+        weight code+min R (value source (code/6)))) 6 0 node = true := by
+  apply joint_to_prefix _ weight P R 6 0 node source target (by decide)
+  · intro code _ hc
+    have hc' : code < 46656 := by simpa using hc
+    simp [Nat.mod_eq_of_lt hc']
+  · exact hjoint
+
+#print axioms joint_to_prefix
+#print axioms joint_root_prefix
+end Snake9.Joint103

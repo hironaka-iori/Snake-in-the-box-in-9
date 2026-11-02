@@ -1,0 +1,12 @@
+{
+  "status": "STOPPED",
+  "pid": 47656,
+  "started_at": "2026-11-02T19:41:23.844653+00:00",
+  "modules": [
+    "JointTraversal103"
+  ],
+  "records": [],
+  "active": null,
+  "exception": "AssertionError(\"E:\\\\Snake-in-a-box\\\\milestones\\\\103-joint-potential-traversal\\\\lean\\\\JointTraversal103.lean:45:8: error: type mismatch, term\\n  h\\nafter simplification has type\\n  test pref = decide (P + min R (value target (pref % 1)) \u2264 weight pref + min R (value source (pref % 1 / 6))) : Prop\\nbut is expected to have type\\n  test pref = decide (P + min R (value target 0) \u2264 weight pref + min R (value source 0)) : Prop\\nE:\\\\Snake-in-a-box\\\\milestones\\\\103-joint-potential-traversal\\\\lean\\\\JointTraversal103.lean:49:6: error: unsolved goals\\ncase pos\\ntest : \u2115 \u2192 Bool\\nweight : \u2115 \u2192 \u2115\\nP R depth : \u2115\\nih :\\n  \u2200 (pref node : \u2115) (source target : Potential99.Tree),\\n    depth \u2264 6 \u2192\\n      (\u2200 (code : \u2115),\\n          pref * 6 ^ depth \u2264 code \u2192\\n            code < (pref + 1) * 6 ^ depth \u2192\\n              test code =\\n                decide\\n                  (P + min R (value target (if depth = 6 then code % 6 ^ depth % 7776 else code % 6 ^ depth)) \u2264\\n                    weight code + min R (value source (code % 6 ^ depth / 6)))) \u2192\\n        checkJoint weight P R depth pref node source target = true \u2192 checkPrefix test depth pref node = true\\npref node : \u2115\\nsource target : Potential99.Tree\\nhd : depth + 1 \u2264 6\\nhspec :\\n  \u2200 (code : \u2115),\\n    pref * 6 ^ (depth + 1) \u2264 code \u2192\\n      code < (pref + 1) * 6 ^ (depth + 1) \u2192\\n        test code =\\n          decide\\n            (P +\\n                min R (value target (if depth + 1 = 6 then code % 6 ^ (depth + 1) % 7776 else code % 6 ^ (depth + 1))) \u2264\\n              weight code + min R (value source (code % 6 ^ (depth + 1) / 6)))\\nhjoint : checkJoint weight P R (depth + 1) pref node source target = true\\nhn : node = 0\\n\u22a2 (if True then true\\n    else (List.range 6).all fun j => checkPrefix test depth (6 * pref + j) (advanceBalanced 0 (j + 1))) =\\n    true\\nE:\\\\Snake-in-a-box\\\\milestones\\\\103-joint-potential-traversal\\\\lean\\\\JointTraversal103.lean:57:8: error: dsimp made no progress\\n'Snake9.Joint103.joint_to_prefix' depends on axioms: [propext, sorryAx]\\n'Snake9.Joint103.joint_root_prefix' depends on axioms: [propext, sorryAx]\\n\")",
+  "stopped_at": "2026-11-02T19:41:36.497244+00:00"
+}

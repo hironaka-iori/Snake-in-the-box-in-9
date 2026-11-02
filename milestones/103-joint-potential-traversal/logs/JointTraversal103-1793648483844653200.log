@@ -1,0 +1,42 @@
+E:\Snake-in-a-box\milestones\103-joint-potential-traversal\lean\JointTraversal103.lean:45:8: error: type mismatch, term
+  h
+after simplification has type
+  test pref = decide (P + min R (value target (pref % 1)) ≤ weight pref + min R (value source (pref % 1 / 6))) : Prop
+but is expected to have type
+  test pref = decide (P + min R (value target 0) ≤ weight pref + min R (value source 0)) : Prop
+E:\Snake-in-a-box\milestones\103-joint-potential-traversal\lean\JointTraversal103.lean:49:6: error: unsolved goals
+case pos
+test : ℕ → Bool
+weight : ℕ → ℕ
+P R depth : ℕ
+ih :
+  ∀ (pref node : ℕ) (source target : Potential99.Tree),
+    depth ≤ 6 →
+      (∀ (code : ℕ),
+          pref * 6 ^ depth ≤ code →
+            code < (pref + 1) * 6 ^ depth →
+              test code =
+                decide
+                  (P + min R (value target (if depth = 6 then code % 6 ^ depth % 7776 else code % 6 ^ depth)) ≤
+                    weight code + min R (value source (code % 6 ^ depth / 6)))) →
+        checkJoint weight P R depth pref node source target = true → checkPrefix test depth pref node = true
+pref node : ℕ
+source target : Potential99.Tree
+hd : depth + 1 ≤ 6
+hspec :
+  ∀ (code : ℕ),
+    pref * 6 ^ (depth + 1) ≤ code →
+      code < (pref + 1) * 6 ^ (depth + 1) →
+        test code =
+          decide
+            (P +
+                min R (value target (if depth + 1 = 6 then code % 6 ^ (depth + 1) % 7776 else code % 6 ^ (depth + 1))) ≤
+              weight code + min R (value source (code % 6 ^ (depth + 1) / 6)))
+hjoint : checkJoint weight P R (depth + 1) pref node source target = true
+hn : node = 0
+⊢ (if True then true
+    else (List.range 6).all fun j => checkPrefix test depth (6 * pref + j) (advanceBalanced 0 (j + 1))) =
+    true
+E:\Snake-in-a-box\milestones\103-joint-potential-traversal\lean\JointTraversal103.lean:57:8: error: dsimp made no progress
+'Snake9.Joint103.joint_to_prefix' depends on axioms: [propext, sorryAx]
+'Snake9.Joint103.joint_root_prefix' depends on axioms: [propext, sorryAx]

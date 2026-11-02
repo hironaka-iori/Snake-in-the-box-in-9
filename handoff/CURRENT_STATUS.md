@@ -1,58 +1,40 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 102 checkpoint
+## Milestone 103 checkpoint
 
-All 412 fixed-block equations passed Lean, together with the generic
-bounded transfer to the original context checker. No definition was added.
-The milestone contains 20 checked modules and 441
-distinct theorem axiom audits. Successful sources contain no incomplete proof
-or unchecked native evaluation; the permitted logical axioms are propext,
-Classical.choice and Quot.sound.
+Lean checked the general implication from successful joint traversal to
+the existing prefix checker. Both source and target digit schedules, the
+rejected-branch rule and the potential-width checks are covered. There are
+11 checked modules and 26 distinct theorem axiom audits.
+Only two reusable implementation definitions were added: branch selection
+and joint traversal. No mathematical terminology or manuscript definition was added.
 
-Eight new complete profile/context checks passed:
+Four matched sequential comparisons passed, including transfer to the
+original full context checker:
 
-| Profile | Direction/history | Accepted edges | Compiler seconds |
+| Profile | Direction/history | Baseline seconds | Joint seconds |
 | --- | --- | ---: | ---: |
-| completed | 0/0 | 6,123 | 90.516 |
-| conditional | 0/0 | 6,123 | 94.672 |
-| completed | 1/0 | 6,997 | 85.984 |
-| conditional | 1/0 | 6,997 | 119.219 |
-| completed | 9/0 | 3,913 | 88.953 |
-| conditional | 9/0 | 3,913 | 39.375 |
-| completed | 10/0 | 4,474 | 45.250 |
-| conditional | 10/0 | 4,474 | 43.531 |
+| completed | 99/37 | 58.703 | 83.422 |
+| completed | 0/0 | 59.734 | 85.609 |
+| conditional | 99/37 | 61.734 | 29.969 |
+| conditional | 0/0 | 122.250 | 71.766 |
 
-Including the earlier certificates, coverage is:
+Each pair uses the same imports, weights, potential roots, clipping bound,
+acceptance root and candidate codes. No other Lean compiler was active at
+launch. These are end-to-end module times from one pair per profile and
+context; unrelated system activity was not isolated. They do not establish
+a universal performance ordering.
 
-| Profile | Complete contexts | Accepted edges | Remaining contexts |
-| --- | ---: | ---: | ---: |
-| completed | 6 | 34,701 | 785 |
-| conditional | 6 | 34,148 | 785 |
+The provisional batch choices, based on total time for the two contexts in
+each profile, are completed: baseline; conditional: joint.
+The batch should preserve a fallback for a context that exceeds its limit.
 
-Each context certificate covers all 46,656 candidate codes through the
-checked acceptance test. Counts for different profiles are kept separate.
-The repeated comparison context 99/37 adds no coverage.
+These contexts were already certified. Coverage therefore remains six of
+791 contexts per profile: 34,701 accepted edges for the completed profile
+and 34,148 for the conditional profile. There are 785 contexts per profile
+still pending. Comparisons do not add distinct graph coverage.
 
-For that same context, the recorded timings are:
-
-| Profile | Archived implementation, seconds | Fixed-block implementation, seconds |
-| --- | ---: | ---: |
-| completed | 111.750 | 56.860 |
-| conditional | 194.312 | 110.016 |
-
-The archived and current runs had different workloads. These are observed
-timings, without a controlled speedup claim or an extrapolation to all contexts.
-
-A separate matched pair changed only the leaf comparison in completed 99/37.
-The decidable comparison took 61.672 seconds and direct
-Boolean comparison took 92.234 seconds. The runs were sequential,
-with no other Lean process at launch. Both prove the same original context
-statement. This is one pair; it does not establish performance on other contexts
-or isolate unrelated system activity. The semantic equality is checked in Lean.
-The direct Boolean variant was slower in this pair and is not adopted as an
-optimization. This observation does not prove it is slower in every context.
-
-Retain the original decidable leaf comparison. Reduce repeated potential-tree evaluation inside the prefix check, following the feasibility note. Prove the traversal invariant and needed tree-shape facts before running a bounded comparison. Use the checked block equations and bounded transfer, preserve the original min caps and every accepted code, and extend the remaining finite certificates once the method is verified.
+Prepare one resumable sequential batch for all remaining contexts, reusing the six existing certificates per profile. Reuse one verified reduced check per identical acceptance root, weight expression and potential-root pair, then prove each original context by the bounded transfer. Select the baseline or joint method from the measured evidence, with a fallback for timed-out contexts. Assemble the original complete-graph theorem only after every context and every missing block are covered. Do not start another series of isolated timing pilots.
 
 ## Result and evidence boundary
 
@@ -160,7 +142,7 @@ the added local premise or the full graph interpretation.
 ## Earlier proof interfaces and development record
 
 The following paragraphs preserve earlier milestone observations. Their
-pending-job statements describe those snapshots. The milestone 102 checkpoint
+pending-job statements describe those snapshots. The milestone 103 checkpoint
 above supersedes them: both 127-class batches and their assembly are complete;
 case7302 is stopped. The remaining tasks are listed in NEXT_AGENT_PROMPT.md.
 
