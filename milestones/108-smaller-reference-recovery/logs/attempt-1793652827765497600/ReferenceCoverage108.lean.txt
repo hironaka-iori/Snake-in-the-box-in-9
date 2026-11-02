@@ -1,0 +1,96 @@
+import RelaxedReference108
+
+namespace Snake9.RecoveredReference108
+open Snake9.LocalWindow Snake9.Reference85
+set_option maxHeartbeats 2000000
+set_option maxRecDepth 100000
+
+theorem refuted_of_tighter_centres {w : List Nat} {b c : List (Nat × Nat)}
+    (h : Refuted w c)
+    (hc : ∀ d ∈ centresOf w c, ∃ e ∈ centresOf w b,
+      d.v = e.v ∧ d.d₁ = e.d₁ ∧ d.d₂ = e.d₂ ∧ d.lo ≤ e.lo ∧ e.hi ≤ d.hi) :
+    Refuted w b := by
+  intro S E ax
+  apply h S E
+  refine { ax with alpha := ?_ }
+  intro d hd
+  obtain ⟨e, he, hv, h₁, h₂, hlo, hhi⟩ := hc d hd
+  obtain ⟨hl, hh⟩ := ax.alpha e he
+  rw [hv, h₁, h₂]
+  exact ⟨hlo.trans hl, hh.trans hhi⟩
+
+theorem allRefutedList_filter_iff (ks l : List (List Nat × List Nat))
+    (h : AllRefutedList ks) :
+    AllRefutedList l ↔ AllRefutedList (l.filter fun k => decide (k ∉ ks)) := by
+  induction l with
+  | nil => simp [AllRefutedList]
+  | cons k l ih =>
+      by_cases hk : k ∈ ks
+      · have hr := AllRefutedList.mem h k hk
+        simpa [List.filter_cons, hk, AllRefutedList, hr] using ih
+      · simpa [List.filter_cons, hk, AllRefutedList] using
+          (and_congr (Iff.rfl : Refuted (winOf k.1) (boundsOf k.2) ↔
+            Refuted (winOf k.1) (boundsOf k.2)) ih)
+
+theorem eight_reference_entries_refuted :
+    AllRefutedList [([0, 1, 2], [1, 1]),
+      ([0, 1, 2, 3, 0, 4], [2, 2, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 3, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 4, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 5, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 4, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 6, 2, 2]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 6, 2, 3])] := by
+  refine ⟨Snake9.RecoveredReference107.adjacent_ones_refuted, ?_⟩
+  refine ⟨refuted_of_tighter_centres relaxed_reference_refuted (by
+    simp only [Tags.centresK_eq]
+    decide +kernel), ?_⟩
+  refine ⟨refuted_of_tighter_centres relaxed_reference_refuted (by
+    simp only [Tags.centresK_eq]
+    decide +kernel), ?_⟩
+  refine ⟨refuted_of_tighter_centres relaxed_reference_refuted (by
+    simp only [Tags.centresK_eq]
+    decide +kernel), ?_⟩
+  refine ⟨refuted_of_tighter_centres relaxed_reference_refuted (by
+    simp only [Tags.centresK_eq]
+    decide +kernel), ?_⟩
+  refine ⟨refuted_of_tighter_centres relaxed_reference_refuted (by
+    simp only [Tags.centresK_eq]
+    decide +kernel), ?_⟩
+  refine ⟨refuted_of_tighter_centres relaxed_reference_refuted (by
+    simp only [Tags.centresK_eq]
+    decide +kernel), ?_⟩
+  refine ⟨refuted_of_tighter_centres relaxed_reference_refuted (by
+    simp only [Tags.centresK_eq]
+    decide +kernel), ?_⟩
+  trivial
+
+theorem reference_union_iff_remaining_eight :
+    AllRefutedList referenceKeys ↔
+      AllRefutedList (referenceKeys.filter fun k => decide (k ∉ [([0, 1, 2], [1, 1]),
+      ([0, 1, 2, 3, 0, 4], [2, 2, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 3, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 4, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 5, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 4, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 6, 2, 2]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 6, 2, 3])])) :=
+  allRefutedList_filter_iff _ _ eight_reference_entries_refuted
+
+theorem remaining_eight_key_count :
+    (referenceKeys.filter fun k => decide (k ∉ [([0, 1, 2], [1, 1]),
+      ([0, 1, 2, 3, 0, 4], [2, 2, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 3, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 4, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 5, 6, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 4, 2, 3]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 6, 2, 2]),
+      ([0, 1, 2, 3, 0, 4], [2, 6, 6, 2, 3])])).length = 1370 := by
+  decide +kernel
+
+#print axioms refuted_of_tighter_centres
+#print axioms allRefutedList_filter_iff
+#print axioms eight_reference_entries_refuted
+#print axioms reference_union_iff_remaining_eight
+#print axioms remaining_eight_key_count
+end Snake9.RecoveredReference108

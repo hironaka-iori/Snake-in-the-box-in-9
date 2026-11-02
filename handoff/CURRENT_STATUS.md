@@ -1,5 +1,39 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 108 checkpoint
+
+Lean now excludes the simultaneous singleton-count bounds 2,2,3 at
+the first, fourth and fifth internal centres of direction word 012304.
+The second and third counts may range from 0 through 21. Six unused counter
+limits were relaxed while preserving the 120 raw clauses and their variable
+meanings. A regenerated contradiction has 75 deductions and 426 antecedent
+references, independently checked as plain-clause RUP and through Lean.
+
+A checked bounds-containment argument supplies seven exact catalogue entries.
+Together with milestone 107's first entry, indices 0,472,495,535,572,602,619,620
+are discharged. Lean proves equivalence between the full catalogue assertion
+and the filtered assertion for 1,370 remaining entries. Nine final modules
+and fifteen axiom reports pass. No new mathematical definitions were added.
+
+The failed first coverage attempt and successful repair are preserved. The
+repair uses the existing computable centre-list equality before finite checks.
+Shared dependencies were reused; a clean independent rebuild is not asserted.
+The three source reviews and final proof audit agree on the scope.
+
+At the immutable process-verified observation, milestone 104 was RUNNING with
+34/791 completed-profile contexts and 33/791
+conditional-profile contexts checked. Its active module was ConditionalBatch104G029.
+Consult its live record for later progress. Its active files were unchanged.
+
+The maintained interval remains 191 through 235 edges, with the contributor
+proof and archived audit supporting 235 and its complete independent rebuild
+pending. Conditional 234 still requires the remaining reference entries,
+complete graph certificates and five local floors (16,18,16,16,16). The exact
+optimum and conjecture 196 remain open. Paper revision 106 is unchanged;
+the next full revision is scheduled for 116.
+
+Earlier checkpoint sections below are historical snapshots.
+
 ## Milestone 107 checkpoint
 
 The first exact reference key, directions 012 and singleton symbols (1,1),

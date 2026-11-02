@@ -1,88 +1,89 @@
 # Continuation assignment
 
-Continue the empty-square route in E:/Snake-in-a-box. Read milestone 107's
-mathematical note, proof summary, checkpoint and recovery guidance. Then read
-milestone 104's live record and NEXT.md and verify its recorded process.
-The complete potential batch is still running; do not duplicate or modify it.
+Continue the empty-square route in E:/Snake-in-a-box. Start with milestone 108's
+mathematical note, proof summary, checkpoint and final independent review.
+Verify milestone 104's live record and recorded process. Do not duplicate or
+modify its complete potential batch.
 
-## Checked reference recovery
+## Current checked result
 
-Snake9.RecoveredReference107.adjacent_ones_refuted is the closed refutation
-for winOf [0,1,2] and boundsOf [1,1]. The first exact reference key is checked
-to be this entry. reference_union_iff_remaining proves equivalence between
-AllRefutedList referenceKeys and AllRefutedList referenceKeys.tail; the tail
-has 1,377 entries. The full union remains unproved. Use the existing milestone
-105 bound implications after reconstructing the full union from its tail.
+Snake9.RecoveredReference108.relaxed_reference_refuted proves
+Refuted (winOf [0,1,2,3,0,4]) [(0,2),(0,21),(0,21),(0,2),(0,3)].
+The original 120-clause D012304A22623 core and its semantic source are recovered
+from pin 7cb52aad. A fresh contradiction has 75 deductions and 426 hints.
+The independent plain-clause check and all nine final Lean modules pass.
+Fifteen axiom reports contain standard axioms only.
 
-The exact Q012A11 CNF and semantic sources were recovered from pin 7cb52aad.
-The original full-CNF indices, the decoded Lean raw clauses and the 1,172
-core clauses agree. A fresh core-only CaDiCaL LRAT proof is trimmed, remapped
-to original clause IDs and exported by the pinned contributor generator.
-The separate plain-clause RUP audit and all 19 final Lean modules pass.
-Four new wrapper conclusions and ten reused certificate statements have
-standard-axiom audits. This recovers an established exclusion; it gives no
-new upper bound or claim of a clean rebuild of shared dependencies.
+The relaxed proof adjusts only six unused counter limits in a local expression.
+All raw clauses, tags, variable meanings and counter positions stay fixed.
+The semantic checker validates every counter, including unused ones.
+refuted_of_tighter_centres transfers the result to seven exact reference keys.
+Together with milestone 107's first key, recovered indices are
+0,472,495,535,572,602,619,620. reference_union_iff_remaining_eight proves the
+full union assertion equivalent to the filtered list printed explicitly in
+ReferenceCoverage108.lean. remaining_eight_key_count proves its length 1370.
+The intermediate two-key erasure theorem remains saved but is superseded.
+Use the eight-key filter statement for continuation.
 
-The successful environment is data/environment-isolated.json and the output
-directory is build-isolated. Recovered sources use import prefix Recovered107.
-Do not put new files under bare LocalWindowSat/Cnf/Unsat in a leading search
-directory: that shadows entire shared module directories. The failed first
-attempt, successful imports-only ports, logs and receipts are preserved.
-Do not alter this frozen evidence; make the next batch in a new milestone.
+The first coverage attempt failed on kernel evaluation of Nat.log2.
+The successful proof rewrites centresOf through Tags.centresK_eq before
+decide +kernel. Both attempts are saved. Recovered modules use the unique
+Recovered108 import prefix; use build-isolated and environment-isolated.json.
+Do not shadow shared top-level LocalWindowSat/Cnf/Unsat module directories.
+Existing shared support objects are reused; no clean rebuild is asserted.
 
-## Next work
+## Most useful next check
 
-Extend the recovery procedure to the remaining exact keys. Inspect the
-recovery guidance for older D certificates proving identical key statements;
-their smaller cores may save work. A chosen root must end in the exact
-Refuted(winOf directions)(boundsOf symbols) type. Root-name similarity or
-a historical solver report is insufficient. Verify raw clauses against their
-own compatible metadata and CNF; never pair another radius's proof with them.
+Test the relaxed 012304 exclusion against the exact currently accepted full
+graph keys, at every eligible window position and in both orientations.
+Use the correct coordinate-shape normalization and singleton-count alignment.
+Audit full keys rather than only source/target state pairs. If additional
+keys are excluded, measure the effect on both completed and conditional
+potential profiles in new files, preserving the active batch's graph.
+An observed numerical improvement requires exact coverage and a checked
+snake-to-filter argument before it becomes a new bound.
 
-The older direction and direction5 catalogues contain 143 distinct exact
-alternative D roots for union keys, including the recovered first key.
-There are 142 additional candidates. These source correspondences are not
-replayed refutations. The next small representative is union index 472,
-D012304A22623: its recorded core has 120 clauses and its recorded proof has
-75 lemmas and 426 hints. The count symbol six also exercises the interval
-[6,21] semantics. Recover its own inputs and verify every correspondence.
+If this relaxed exclusion is already implied by the existing graph filters,
+inspect other small archived cores before replaying one proof per catalogue
+entry. Rank by the number of remaining keys a relaxed interval box covers.
+Counter tags with .over inspect k; first/mono/step do not. Consequently even
+some referenced counters may permit relaxed limits. This broader optimization
+is untested. Always recheck all counter metadata and the full semantic theorem.
+Do not infer admissible relaxations solely from an unused-variable scan.
 
-Use a resumable single-compiler batch with source/object/log hashes and explicit
-entry coverage. Test this additional representative before a broad launch.
-Keep heavy work out of the active potential batch's memory budget. Existing
-success receipts must be verified before reuse; preserve failures and timeouts.
+Milestone 107 records 143 exact older D alternatives, before the new coverage.
+Their source correspondence alone is not proof. Recover each chosen core
+with its own metadata and full CNF; do not mix radii or change theorem types.
 
-Milestone 104 generates AllCompleted104 and AllConditional104 only after all
-groups pass. Audit complete context coverage, dependencies and axioms before
-publishing those graph certificates as complete. Do not infer completion
-from an observation timeout or a stale lock; inspect the recorded process.
+## Other obligations and preservation
 
-Conditional 234 additionally needs cases 7301,7302,7303,7307,7308 with share
-caps 15,17,15,15,15, giving floors 16,18,16,16,16. The original case 7302 target 20
-replay remains stopped after its preserved 900-second timeout and 649 successful
-modules. A target 18 proof needs separate files. Do not restart the old replay.
+Milestone 104 produces AllCompleted104 and AllConditional104 only after all
+groups pass. Audit complete coverage, dependencies and axioms before claiming
+the complete graph premises. Its status is determined by actual process and
+receipts, not observation timeouts. Leave its pinned checker/generator unchanged.
+Use at most one additional compiler, with the existing memory gate.
 
-The maintained interval is 191 through 235 edges, using the inspected contributor
-proof and archived audit for 235; its full independent rebuild is pending.
-The optimum and 196 remain unresolved. Keep the full goal active.
+Conditional 234 still needs cases 7301,7302,7303,7307,7308 with caps
+15,17,15,15,15, hence floors 16,18,16,16,16. Case 7302's old target-20 replay
+remains stopped after a preserved 900-second timeout and 649 successes.
+A target-18 proof needs new sources. The reference catalogue remains incomplete.
 
-## Manuscript and runtime
+The maintained interval is 191 through 235 edges. The contributor's 235 proof
+has its archived audit and pending independent rebuild. The optimum and 196
+remain unresolved; keep the goal active.
 
-The current paper is revision 106; the next full revision is 116. Preserve the
-exact D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex source and its
-E:/Snake-in-a-box/paper/snake9_research.tex mirror. The built-in compiler failed
-before TeX processing because of a Windows helper restriction; no current PDF
-is verified. Preserve the three authors and local hypersetup settings.
-Use ordinary notation and define only necessary, repeatedly used terms.
-Keep Lean filenames and implementation definitions out of the paper.
+Paper revision 106 remains unchanged; the next full revision is 116. Preserve
+D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and its repository mirror,
+all three authors and exact hypersetup. No current PDF is verified because the
+built-in compiler failed before TeX processing. Define only necessary concepts
+that recur; keep Lean implementation details out of the manuscript.
 
 Python: C:/Users/hironakaiori/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe,
 with -B -X utf8. Lean 4.19 and mathlib are under
 D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research.
-Reuse existing support objects; do not copy the full overlay. Do not add -M4096.
+Reuse existing support objects; do not copy the complete overlay or add -M4096.
 
-Leave unrelated .gitignore and
-milestones/50-three-count-return/excess-screen/data/critical-family.json edits
-untouched. Fetch before publication, stage exact reviewed files, verify their
-staged bytes and push each completed round. Old handover manifests remain
-historical; do not rewrite them to match newer shared documents.
+Leave unrelated .gitignore and milestones/50-three-count-return/excess-screen/
+data/critical-family.json edits untouched. Fetch before publishing, stage exact
+reviewed files, verify staged bytes, then push the completed round. Historical
+handover manifests remain historical and must not be rewritten.
