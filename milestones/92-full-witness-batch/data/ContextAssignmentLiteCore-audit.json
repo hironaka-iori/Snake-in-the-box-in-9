@@ -1,0 +1,57 @@
+{
+  "module": "ContextAssignmentLiteCore",
+  "exit_code": 0,
+  "seconds": 12.609000000000378,
+  "source_sha256": "44b780411109f4960a956c553c0ab26ec3c81d46508f1a3c6895821d66c142dd",
+  "log_sha256": "45cf3f0882bba4fa9e697e04349cce48625fbfbd5ef3daee874df44a73eead81",
+  "paths": [
+    "E:\\Snake-in-a-box\\milestones\\92-full-witness-batch\\build"
+  ],
+  "dependency_receipts": {
+    "milestones\\92-full-witness-batch\\data\\ContextAssignmentLiteData-audit.json": "bd6bebc25aae489268b33c66991ed2f2075e6c94e7a861addb39d65c31b641c0"
+  },
+  "combined_support_sha256": null,
+  "build_receipt_sha256": "f12709a768be75afd090845a5210a94fd2366218ff7b770144b1b275e42e3f60",
+  "checker_sha256": "50883098bbbe89f9dd9a0582504b0708b54d19aba1d41eb21cf5bf4316559dbc",
+  "resource_scope": "literal-only local+Mathlib imports",
+  "timeout_seconds": 300,
+  "memory_limit_mb": null,
+  "memory_limit_note": "The advertised Lean memory flag fails on this runtime; use bounded separate direction chunks and the wall-clock timeout.",
+  "status": "PASS_CONTEXT_ASSIGNMENT_MODULE",
+  "olean_sha256": "a4b29795e3e4a8d59327db195ef76164a61452cf0143ceca2586fdb6fcd652b8",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.ContextLite92.indexed_mem",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.ContextLite92.prefix_add",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.ContextLite92.prefix_full",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.ContextLite92.assignmentAt_of_fast",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.ContextLite92.source_sizes",
+      "axioms": []
+    }
+  ],
+  "scope": "Only the named assignment module. Source projection preserves di<505. The finite checker identifies chosen classes and roots with the pinned saved block/class/root literals for all bounded source-compatible pairs. All-class diagram acceptance retains an explicit ClassMembershipFamily premise; saved row-array coverage remains separate."
+}

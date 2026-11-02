@@ -1,0 +1,48 @@
+{
+  "module": "Witness000Checks",
+  "exit_code": 0,
+  "seconds": 13.890999999999622,
+  "source_sha256": "92dcc5141740db9bbf9eee94efa7943c7163dd40b0346f297a4a7b065ed52d8d",
+  "log_sha256": "6ec147068e0cf72c1530e267b0d52e17ff5212d2654b6840a9f0b1d8dbba3277",
+  "dependencies": {
+    "milestones\\92-full-witness-batch\\data\\Witness000Data-audit.json": "2ef72c4ca38ea316c0eed1b954bab5ee5b1942503cfed6101254280ab93455ed",
+    "milestones\\92-full-witness-batch\\data\\BatchAssembly-audit.json": "8f333dafa31814234e9341e98fa5bb512a826430e45ed45da2e281b94d2793f7",
+    "milestones\\89-shared-cover-certification\\data\\Balanced000Checks-audit.json": "c38dcc240d5d7583faccf28ff06d9f3d643b68a0ee4572f695008b5eed1065e0"
+  },
+  "checker_sha256": "95d7a4223a423cc7445c4c60739ab8662e1b51d478d072b5dd0bafa85393f54e",
+  "status": "PASS_DIRECT_WITNESS_CLASS",
+  "olean_sha256": "c0774c18bf7a1927c871d932d07ade1c4f698d8a665ed9726adaf9c68102e572",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.Batch92.jobs000_valid",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Batch92.contexts000_valid",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Batch92.class000_context_membership",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Batch92.contextKeys000_exact",
+      "axioms": []
+    },
+    {
+      "theorem": "Snake9.Batch92.root000_exact",
+      "axioms": []
+    }
+  ],
+  "scope": "Only the named class/context proof or data module. Global context assignment and graph-row interpretation remain separate."
+}

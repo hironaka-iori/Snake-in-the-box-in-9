@@ -1,0 +1,139 @@
+"""Sequential, resumable direct witness checks; share one additional compiler slot."""
+from pathlib import Path
+import argparse, datetime, hashlib, json, os, re, subprocess, time
+HERE=Path(__file__).resolve().parents[1]; ROOT=HERE.parents[1]
+PREV=HERE.parent/'90-context-witness-certificates'; GEO=HERE.parent/'89-shared-cover-certification'
+BIN=Path('D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research/lean-4.19.0-windows/bin')
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+read=lambda p:json.loads(p.read_text())
+parser=argparse.ArgumentParser();parser.add_argument('--classes',default='0,1,2');parser.add_argument('--wait-for-geometry',action='store_true')
+parser.add_argument('--max-other-lean-mib',type=int,default=8192)
+args=parser.parse_args(); classes=list(range(127)) if args.classes=='all' else [int(s) for s in args.classes.split(',')]
+assert len(classes)==len(set(classes)) and all(0<=c<127 for c in classes)
+assert args.max_other_lean_mib>0
+generation=read(HERE/'data/batch-generation.json')
+assert sha(HERE/'scripts/build_batch.py')==generation['script_sha256']
+for path,digest in generation['input_sha256'].items(): assert sha(ROOT/path)==digest,path
+for name,digest in generation['source_sha256'].items(): assert sha(HERE/'lean'/name)==digest,name
+closure=read(HERE/'data/closure-generation.json')
+assert sha(HERE/'scripts/build_closure.py')==closure['script_sha256']
+for path,digest in closure['input_sha256'].items(): assert sha(ROOT/path)==digest,path
+expected_sources=dict(generation['source_sha256'],**{'CloseBatch.lean':closure['source_sha256']})
+paths=read(HERE/'data/BatchAssembly-audit.json')['paths']
+env=os.environ.copy();env['PATH']=str(BIN)+';'+env['PATH'];env['LEAN_PATH']=';'.join(paths)
+run_id=str(time.time_ns()); run_path=HERE/'logs'/('witness-batch-run-'+run_id+'.json')
+lock_path=HERE/'data/witness-batch.lock'
+lock=dict(pid=os.getpid(),run_id=run_id,run_record=str(run_path))
+try:
+    with lock_path.open('x') as stream:json.dump(lock,stream)
+except FileExistsError:
+    raise RuntimeError('An existing witness-batch lock must be checked against actual processes before any restart: '+str(lock_path))
+record=dict(status='RUNNING',pid=os.getpid(),run_id=run_id,classes=classes,records=[],
+            started_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),checker_sha256=sha(Path(__file__)),
+            generation_sha256=sha(HERE/'data/batch-generation.json'),
+            scope='Listed class witness validity, context keys and membership. Full source-compatible context coverage and saved-row interpretation remain separate.')
+def save():
+    temp=run_path.with_suffix('.tmp');temp.write_text(json.dumps(record,indent=2)+'\n');os.replace(temp,run_path)
+def verify(base,name):
+    rp=base/'data'/(name+'-audit.json');r=read(rp)
+    assert r['exit_code']==0 and r['status'].startswith('PASS_'),name
+    for folder,ext,key in [('lean','.lean','source_sha256'),('build','.olean','olean_sha256'),('logs','.log','log_sha256')]:
+        assert sha(base/folder/(name+ext))==r[key],(name,key)
+    return str(rp.relative_to(ROOT)),sha(rp)
+
+def wait_for_memory(name):
+    """A pre-launch resource guard; it does not bound later concurrent peaks."""
+    announced=False
+    command="@(Get-CimInstance Win32_Process -Filter \"Name = 'lean.exe'\" | Select-Object ProcessId,PrivatePageCount) | ConvertTo-Json -Compress"
+    while True:
+        raw=subprocess.check_output(['powershell','-NoProfile','-Command',command],text=True).strip()
+        procs=json.loads(raw) if raw else []
+        if isinstance(procs,dict):procs=[procs]
+        total=sum(int(p['PrivatePageCount']) for p in procs)
+        if total<=args.max_other_lean_mib*1024*1024:
+            record.pop('memory_wait',None);record['status']='RUNNING';save();return
+        record['status']='WAITING_FOR_MEMORY'
+        record['memory_wait']=dict(module=name,other_lean_processes=procs,total_private_bytes=total,
+                                   limit_mib=args.max_other_lean_mib,observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat())
+        save()
+        if not announced:print('WAITING_FOR_MEMORY',name,round(total/1024/1024),'MiB',flush=True);announced=True
+        time.sleep(15)
+def run(name,dependencies,expected):
+    pins=dict(verify(base,dep) for base,dep in dependencies)
+    src=HERE/'lean'/(name+'.lean');rp=HERE/'data'/(name+'-audit.json')
+    assert sha(src)==expected_sources[name+'.lean'], (name,'Generated source changed before dispatch')
+    if rp.exists():
+        verify(HERE,name);r=read(rp);assert r['dependencies']==pins
+        record['records'].append(dict(module=name,status='REUSED_CHECKED_MODULE',receipt_sha256=sha(rp)));save()
+        print(name,'REUSED',flush=True);return
+    wait_for_memory(name)
+    assert sha(src)==expected_sources[name+'.lean'],(name,'Generated source changed while waiting')
+    assert dict(verify(base,dep) for base,dep in dependencies)==pins,(name,'Dependency changed while waiting')
+    log=HERE/'logs'/(name+'.log');obj=HERE/'build'/(name+'.olean')
+    if log.exists():(HERE/'logs'/(name+'-previous-'+sha(log)[:12]+'.log')).write_bytes(log.read_bytes())
+    fresh=obj.with_name(name+'.check-'+run_id+'.olean');assert not fresh.exists()
+    before=sha(src);start=time.monotonic()
+    record['status']='RUNNING';record['active']=dict(module=name,phase='PREPARING_LAUNCH',source_sha256=before,temporary_output=str(fresh));save()
+    with log.open('w',encoding='utf-8') as out:
+        proc=subprocess.Popen([str(BIN/'lake.exe'),'env','lean','-s','65536','-R',str(HERE/'lean'),'-o',str(fresh),str(src)],
+            cwd=BIN.parent.parent/'mathlib',env=env,stdout=out,stderr=subprocess.STDOUT)
+        record['status']='RUNNING';record['active']=dict(module=name,launcher_pid=proc.pid,source_sha256=before,temporary_output=str(fresh));save()
+        code=proc.wait()
+    assert dict(verify(base,dep) for base,dep in dependencies)==pins,(name,'Dependency changed during compilation')
+    result=dict(module=name,exit_code=code,seconds=time.monotonic()-start,source_sha256=before,
+                log_sha256=sha(log),dependencies=pins,checker_sha256=sha(Path(__file__)))
+    (HERE/'logs'/(name+'-record.json')).write_text(json.dumps(result,indent=2)+'\n')
+    assert sha(src)==before,'Source changed during compilation'
+    if code:
+        print(log.read_text()[-16000:],flush=True);raise RuntimeError(f'{name}: compiler exit {code}')
+    output=log.read_text();assert 'error:' not in output and 'sorryAx' not in output
+    assert not re.search(r'\b(sorry|admit|native_decide)\b',src.read_text())
+    matches=re.findall(r"'([^']+)' depends on axioms:\s*\[([^]]*)\]",output,re.S)
+    matches += [(n,'') for n in re.findall(r"'([^']+)' does not depend on any axioms",output)]
+    assert len(matches)==expected==src.read_text().count('#print axioms'),(name,len(matches),expected)
+    audits=[]
+    for theorem,values in matches:
+        axioms=re.findall(r'[A-Za-z][\w.]*',values);assert set(axioms)<={'propext','Classical.choice','Quot.sound'}
+        audits.append(dict(theorem=theorem,axioms=axioms))
+    os.replace(fresh,obj)
+    result.update(status='PASS_NUMERIC_DIAGRAM_FAMILY' if name=='CloseBatch' else ('PASS_DIRECT_WITNESS_CLASS' if expected else 'PASS_DIRECT_WITNESS_DATA'),
+        olean_sha256=sha(obj),theorem_audits=audits,
+        scope=('Combines all127 concrete class memberships with the checked context assignment. Saved-row and endpoint interpretation remain separate.' if name=='CloseBatch' else
+               'Only the named class/context proof or data module. Global context assignment and graph-row interpretation remain separate.'))
+    temp=rp.with_suffix('.tmp');temp.write_text(json.dumps(result,indent=2)+'\n');os.replace(temp,rp)
+    record['records'].append(dict(module=name,status=result['status'],receipt_sha256=sha(rp),seconds=result['seconds']))
+    record.pop('active',None);save();print(name,result['status'],round(result['seconds'],3),'seconds',flush=True)
+save()
+(HERE/'data/witness-batch-active.json').write_text(json.dumps(lock,indent=2)+'\n')
+try:
+    run('BatchContextData',[(HERE,'BatchAssembly')],0)
+    for cls in classes:
+        label=f'{cls:03d}';needed=[GEO/'data'/(f'Cover{label}Data-audit.json'),GEO/'data'/(f'Balanced{label}Checks-audit.json')]
+        announced=False
+        while not all(p.exists() for p in needed):
+            if not args.wait_for_geometry:raise RuntimeError(f'Geometry class {cls} has no complete receipts yet')
+            record['status']='WAITING_FOR_GEOMETRY';record['waiting_class']=cls;save()
+            if not announced:print('WAITING_FOR_GEOMETRY',cls,flush=True);announced=True
+            time.sleep(15)
+        record.pop('waiting_class',None);record['status']='RUNNING';save()
+        dependencies=[(HERE,'BatchContextData'),(GEO,f'Cover{label}Data')]
+        if cls==1:dependencies.append((PREV,'Class001WitnessData'))
+        run(f'Witness{label}Data',dependencies,0)
+        dependencies=[(HERE,f'Witness{label}Data'),(HERE,'BatchAssembly'),(GEO,f'Balanced{label}Checks')]
+        if cls==1:dependencies.append((PREV,'Class001WitnessChecks'))
+        run(f'Witness{label}Checks',dependencies,generation['classes'][cls]['expected_audits'])
+    if classes==list(range(127)):
+        dependencies=[(HERE,'ContextAssignmentChecks')]+[(HERE,f'Witness{i:03d}Checks') for i in range(127)]
+        run('CloseBatch',dependencies,2)
+        record['status']='PASS_ALL_CLASSES_AND_NUMERIC_DIAGRAM'
+    else:
+        record['status']='PASS_SELECTED_DIRECT_WITNESS_CLASSES'
+    record['finished_at']=datetime.datetime.now(datetime.timezone.utc).isoformat();save()
+except BaseException as exc:
+    record['status']='STOPPED_WITH_EXCEPTION';record['exception']=repr(exc);save();raise
+finally:
+    if lock_path.exists() and read(lock_path)==lock:
+        if record.get('active'):
+            record['lock_retained_for_process_inspection']=True;save()
+        else:
+            lock_path.unlink()

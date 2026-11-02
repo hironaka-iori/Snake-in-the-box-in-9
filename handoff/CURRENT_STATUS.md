@@ -1,5 +1,34 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 92 checkpoint
+
+Milestone 92 checks the complete source-compatible context assignment over
+37,875 direction/history pairs, including the three history-dependent class
+overrides and exact agreement with the saved block classes and roots. This
+check enumerates no count codes. The frozen checkpoint has 65
+Lean theorem audits, 3 of 127 concrete witness classes, 43 geometric classes
+and 649 distinct successful case7302 modules. These are snapshot counts.
+
+The all-class witness process is active in tool session 97444, alongside
+geometry session 23168 and replay session 14427. Inspect actual process state
+before any resume; do not duplicate live jobs. All 507 base jobs and three
+leading history witnesses are generated and independently reviewed. The final
+family assembly requires every class receipt and is queued after the batch.
+The exact checkpoint states whether that final theorem has passed.
+
+The chosen next proof object is the graph defined directly from diagram-accepted
+full keys, with endpoints computed from each key. This avoids a separate identity
+with external row and endpoint arrays if all weight and potential certificates
+are checked on the defined graph. Keep the two reference-catalogue premises,
+pending local shares, credit interpretation and complete potential explicit.
+The interval remains 191 through 235 edges, with 234 conditional. The contributor
+upper-bound proof still needs a complete independent rebuild. Paper revision 86
+and its three authors and hyperlink settings are unchanged; the next full
+revision is scheduled for milestone 96.
+
+Earlier milestone entries below describe their recorded scopes. Use the milestone92
+checkpoint for current proof status and process observations.
+
 ## Result and evidence boundary
 
 Length means edges. The maintained project interval is
@@ -308,7 +337,7 @@ guards, interval-filter assembly, catalogue audit and a later replay observation
 Milestone 81 saves the forty-rule theorem, independent review and exact comparison.
 Milestone 84 saves the three-history theorem. Milestone 85 saves the exact reference
 table, conditional theorem, provenance review, exhaustive comparison and a later
-case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 91 contains the current shared handover versions and later proof-process observations.
+case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 92 contains the current shared handover versions and later proof-process observations.
 Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.

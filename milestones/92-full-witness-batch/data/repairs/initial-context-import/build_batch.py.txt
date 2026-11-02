@@ -1,0 +1,154 @@
+"""Materialize the complete direct witness batch and exact per-class context keys."""
+from pathlib import Path
+import ast, gzip, hashlib, json
+HERE=Path(__file__).resolve().parents[1]; ROOT=HERE.parents[1]
+GEO=HERE.parent/'89-shared-cover-certification'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+pins={}
+def load(rel,compressed=False):
+    p=ROOT/rel; pins[rel]=sha(p); raw=p.read_bytes()
+    return json.loads(gzip.decompress(raw) if compressed else raw)
+plan=load('milestones/90-context-witness-certificates/data/witness-batch-plan.json')
+data=load('milestones/89-shared-cover-certification/data/context-witnesses.json.gz',True)
+geometry=load('milestones/89-shared-cover-certification/data/shared-cover-generation.json')
+assert plan['status']=='PASS_DETERMINISTIC_WITNESS_JOB_PLAN'
+assert len(plan['base_jobs'])==507 and len(plan['history_jobs'])==3
+assert len(plan['contexts'])==791 and len(plan['base_lists'])==210
+assert pins['milestones/89-shared-cover-certification/data/context-witnesses.json.gz']==plan['input_sha256']['milestones/89-shared-cover-certification/data/context-witnesses.json.gz']
+for name in ['Class001WitnessData','Class001WitnessChecks','WitnessTablesChecks']:
+    p=ROOT/'milestones/90-context-witness-certificates/data'/(name+'-audit.json')
+    r=load(p.relative_to(ROOT).as_posix()); assert r['exit_code']==0
+    assert sha(p.parents[1]/'lean'/(name+'.lean'))==r['source_sha256']
+classes=dict(data['classes']); base_lists={r['base_list_id']:r for r in plan['base_lists']}
+jobs={r['base_job_id']:r for r in plan['base_jobs']}; heads={r['history_job_id']:r for r in plan['history_jobs']}
+for folder in ['lean','data','logs','build','audit']:(HERE/folder).mkdir(parents=True,exist_ok=True)
+sources={}
+def save(name,text):
+    p=HERE/'lean'/name; raw=text.encode()
+    assert not p.exists() or p.read_bytes()==raw, ('Existing generated source differs',name)
+    p.write_bytes(raw); sources[name]=sha(p)
+def witness(wid):
+    family,ki,offset,reverse=data['witnesses'][wid]
+    if family==3:return f'Witness.history {ki}'
+    return f'Witness.{["reference","short","interval"][family]} {ki} {offset} '+('true' if reverse else 'false')
+prefix='set_option maxHeartbeats 0\nset_option maxRecDepth 100000\n\nnamespace Snake9.Batch92\nopen Snake9.Boxes88 Snake9.Shared89 Snake9.Certificate88 Snake9.Witness90 Snake9.Retained87\n\n'
+all_class_keys=[]; roots=[]; reports=[]
+for cls in range(127):
+    rows=[r for r in plan['contexts'] if r['class_id']==cls]
+    all_class_keys.append([(r['direction'],r['history']) for r in rows])
+    roots.append(geometry['classes'][cls]['root'])
+    assert geometry['classes'][cls]['dag_set']==cls
+global_source='import BatchAssembly\n\n'+prefix
+global_source+='def recordedClassKeyLists : List (List (Nat × Nat)) := [\n'
+global_source+=',\n'.join('['+','.join(f'({di},{q})' for di,q in row)+']' for row in all_class_keys)+'\n]\n\n'
+global_source+='def recordedClassKeys (cls : Nat) : List (Nat × Nat) := recordedClassKeyLists.getD cls []\n\n'
+global_source+='def recordedClassRoots : List Nat := ['+','.join(map(str,roots))+']\n\n'
+global_source+='def recordedClassRoot (cls : Nat) : Nat := recordedClassRoots.getD cls 0\n\nend Snake9.Batch92\n'
+save('BatchContextData.lean',global_source)
+for cls in range(127):
+    label=f'{cls:03d}'; g=geometry['classes'][cls]
+    cover=GEO/'lean'/f'Cover{label}Data.lean'
+    assert sha(cover)==g['source_sha256'][cover.name]
+    pins[cover.relative_to(ROOT).as_posix()]=sha(cover)
+    text=cover.read_text(); literal=text.split(f'def boxes{label} : List Box :=',1)[1].split('\ndef ',1)[0].strip()
+    literal_boxes=ast.literal_eval(literal)
+    expected=[data['box_catalogue'][i] for i in classes[cls]]
+    assert [[list(pair) for pair in box] for box in literal_boxes]==expected
+    base=[r for r in plan['base_lists'] if r['class_id']==cls]
+    class_jobs=[r for r in plan['base_jobs'] if r['class_id']==cls]
+    contexts=[r for r in plan['contexts'] if r['class_id']==cls]
+    starts={r['original_box_positions']['start'] for r in base}; assert len(starts)==1
+    start=next(iter(starts)); assert start==int(cls in [85,89])
+    for r in base:
+        pos=r['original_box_positions']; assert pos==dict(start=start,stop=len(expected),step=1)
+        assert len(r['witness_ids'])==len(expected)-start
+        assert all(data['witnesses'][wid][0]!=3 for wid in r['witness_ids'])
+    for c in contexts:
+        assert c['block_id']==75*c['direction']+c['history']
+        assert [c['block_id'],cls,c['original_list_id']] in data['contexts']
+        b=base_lists[c['base_list_id']]; job=jobs[c['base_job_id']]
+        assert job['direction']==c['direction'] and job['base_list_id']==b['base_list_id']
+        full=b['witness_ids'][:]
+        if c['history_job_id'] is not None:
+            head=heads[c['history_job_id']]
+            assert head['original_box_position']==0 and head['geometry_id']==classes[cls][0]
+            assert (head['direction'],head['history'])==(c['direction'],c['history'])
+            full=[head['witness_id']]+full
+        assert full==data['witness_lists'][c['original_list_id']]
+    source=f'import BatchContextData\nimport Cover{label}Data\n'
+    if cls==1:source+='import Class001WitnessData\n'
+    source+='\n'+prefix
+    source+=f'def baseBoxes{label} : List Box := boxes{label}'+('.drop 1' if start else '')+'\n\n'
+    if start:source+=f'def headBox{label} : Box := boxes{label}.getD 0 []\n\n'
+    for b in base:
+        bl=b['base_list_id']; name=f'baseList{bl:03d}'
+        if cls==1:
+            assert bl in [1,2]
+            source+=f'def {name} : List Witness := Snake9.Witness90.witnessList{1 if bl==1 else 3:03d}\n\n'
+        else:
+            source+=f'def {name} : List Witness := [\n'+',\n'.join(witness(wid) for wid in b['witness_ids'])+'\n]\n\n'
+    source+=f'def jobs{label} : List (Nat × List Witness) := [\n'
+    source+=',\n'.join(f"({j['direction']},baseList{j['base_list_id']:03d})" for j in class_jobs)+'\n]\n\n'
+    source+=f'def contexts{label} : List (Nat × Nat × Nat × List Witness) := [\n'
+    context_rows=[]
+    for c in contexts:
+        ki=heads[c['history_job_id']]['witness_constructor'][1] if c['history_job_id'] is not None else 0
+        context_rows.append(f"({c['direction']},{c['history']},{ki},baseList{c['base_list_id']:03d})")
+    source+=',\n'.join(context_rows)+'\n]\n\n'
+    source+=f'def contextKeys{label} : List (Nat × Nat) := contexts{label}.map (fun c => (c.1,c.2.1))\n\nend Snake9.Batch92\n'
+    save(f'Witness{label}Data.lean',source)
+    check=f'import Witness{label}Data\nimport Balanced{label}Checks\n'
+    if cls==1:check+='import Class001WitnessChecks\n'
+    check+='\n'+prefix
+    check+=f'theorem jobs{label}_valid : jobs{label}.all (baseJobValid baseBoxes{label}) = true := by\n'
+    if cls==1:
+        check+='  change Snake9.Witness90.class001Jobs.all Snake9.Witness90.class001JobValid = true\n  exact Snake9.Witness90.class001_jobs_valid\n\n'
+    else:check+='  decide +kernel\n\n'
+    check+=f'def contextValid{label} (c : Nat × Nat × Nat × List Witness) : Bool :=\n'
+    check+=f'  decide (c.2.1 < 75 ∧ (c.1,c.2.2.2) ∈ jobs{label})'
+    if start:
+        check+=f' &&\n    entriesValidAt directionsAt referencesAt 1378 c.2.1 c.1 [(headBox{label},.history c.2.2.1)]'
+    check+='\n\n'
+    check+=f'theorem contexts{label}_valid : contexts{label}.all contextValid{label} = true := by\n  decide +kernel\n\n'
+    check+=f'theorem contextKeys{label}_exact : contextKeys{label} = recordedClassKeys {cls} := by\n  decide +kernel\n\n'
+    check+=f'theorem root{label}_exact : root{label} = recordedClassRoot {cls} := by\n  decide +kernel\n\n'
+    if start:
+        check+=f'theorem boxes{label}_head_tail : boxes{label} = headBox{label} :: baseBoxes{label} := by\n  decide +kernel\n\n'
+    check+=f'theorem class{label}_context_membership (di q code : Nat)\n    (hm : (di,q) ∈ recordedClassKeys {cls}) (hc : code < 46656)\n    (hk : numericKeep q di code = true) :\n    diagramEval retainedDiagram (recordedClassRoot {cls}) (digits code) = true := by\n'
+    check+=f'  rw [← contextKeys{label}_exact] at hm\n  obtain ⟨c,hcxt,heq⟩ := List.mem_map.mp hm\n'
+    check+='  have hd : c.1 = di := congrArg Prod.fst heq\n  have hq : c.2.1 = q := congrArg Prod.snd heq\n'
+    check+=f'  have ht := List.all_eq_true.mp contexts{label}_valid c hcxt\n'
+    if start:
+        check+=f'  change (decide (c.2.1 < 75 ∧ (c.1,c.2.2.2) ∈ jobs{label}) &&\n    entriesValidAt directionsAt referencesAt 1378 c.2.1 c.1 [(headBox{label},.history c.2.2.1)]) = true at ht\n'
+        check+='  have hparts := Bool.and_eq_true_iff.mp ht\n  have hp := of_decide_eq_true hparts.1\n'
+        check+=f'  have hh : boxWitnessValid c.2.1 c.1 headBox{label} (.history c.2.2.1) = true := by\n'
+        check+='    simpa only [balanced_entries_eq,entriesValid,List.all_cons,List.all_nil,Bool.and_true] using hparts.2\n'
+        check+=f'  have hcover : checkCover retainedDiagram (headBox{label} :: baseBoxes{label}) 6 [] root{label} tree{label} = true := by\n'
+        check+=f'    rw [← boxes{label}_head_tail]\n    exact originalCover{label}\n'
+    else:
+        check+=f'  change decide (c.2.1 < 75 ∧ (c.1,c.2.2.2) ∈ jobs{label}) = true at ht\n  have hp := of_decide_eq_true ht\n'
+    check+=f'  have hj := List.all_eq_true.mp jobs{label}_valid (c.1,c.2.2.2) hp.2\n'
+    check+='  have hk\' : numericKeep c.2.1 c.1 code = true := by simpa only [hd,hq] using hk\n'
+    check+=f'  rw [← root{label}_exact]\n'
+    if start:
+        check+=f'  exact head_restored_numeric_membership headBox{label} baseBoxes{label} c.1 c.2.2.2 c.2.2.1 hj\n    retainedDiagram root{label} tree{label} hcover c.2.1 code hp.1 hh hc hk\'\n\n'
+    else:
+        check+=f'  exact base_job_numeric_membership baseBoxes{label} c.1 c.2.2.2 hj\n    retainedDiagram root{label} tree{label} originalCover{label} c.2.1 code hp.1 hc hk\'\n\n'
+    names=[f'jobs{label}_valid',f'contexts{label}_valid',f'contextKeys{label}_exact',f'root{label}_exact']
+    if start:names.append(f'boxes{label}_head_tail')
+    names.append(f'class{label}_context_membership')
+    check+='\n'.join('#print axioms '+n for n in names)+'\nend Snake9.Batch92\n'
+    save(f'Witness{label}Checks.lean',check)
+    reports.append(dict(class_id=cls,base_jobs=len(class_jobs),base_lists=len(base),contexts=len(contexts),
+        history_heads=sum(c['history_job_id'] is not None for c in contexts),start=start,
+        base_entries=sum(j['entry_count'] for j in class_jobs),expected_audits=len(names),
+        reused_previous_validity=(cls==1),source_names=[f'Witness{label}Data.lean',f'Witness{label}Checks.lean']))
+assert sum(r['base_jobs'] for r in reports)==507 and sum(r['contexts'] for r in reports)==791
+assert sum(r['history_heads'] for r in reports)==3
+assert sum(r['base_entries'] for r in reports)==357820
+report=dict(status='GENERATED_FULL_DIRECT_WITNESS_BATCH',classes=reports,base_jobs=507,contexts=791,history_heads=3,
+    base_lists=210,base_entries=357820,reused_jobs=6,source_sha256=sources,input_sha256=pins,
+    script_sha256=sha(Path(__file__)),
+    scope='All source mappings and original orders verified computationally. Each generated class still needs its Lean receipt. Compatible-predicate coverage of the791 context keys remains a separate bridge.')
+(HERE/'data/batch-generation.json').write_text(json.dumps(report,indent=2)+'\n')
+print(report['status'],len(sources),'sources; 507 base jobs, 3 heads, 791 contexts')

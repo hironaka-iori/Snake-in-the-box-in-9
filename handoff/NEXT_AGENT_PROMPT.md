@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, milestone 91's completed cache experiment and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
+`handoff/CURRENT_STATUS.md`, milestone 92's context assignment and active witness checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -33,15 +33,17 @@ interfaces. Milestone 84 closes all three history exclusions with 38 Lean audits
 its complete signature recognition and count transport. Milestone 85 checks
 the exact 1,378-key reference table and its conditional retention theorem,
 with 103 audits and a complete isolated-filter comparison. Do not repeat this
-table work. The remaining two premises are AllRefuted6K235 and AllRefuted236;
+table work. The two remaining reference-catalogue premises are AllRefuted6K235 and AllRefuted236;
 matching closed proof objects were absent from the searched local locations.
 The pinned source theorems and historical audit logs are identified in its
 provenance report. Restore or rebuild compatible closed dependencies to
 discharge those premises. Milestone 87 now supplies the executable numeric predicate, actual-step
 acceptance and conditional saved-edge/walk assembly. Reuse those checks. Its
 RetentionCover requires only that every accepted key is stored; exact equality
-is sufficient but stronger. Certify this concrete finite coverage and the
-endpoint-column identities in Lean. The independent Python equality has already
+is sufficient but stronger. Milestone 92 now supplies a checked conditional graph definition whose
+coverage and endpoints follow from its construction. Use that defined graph
+for subsequent weight and potential checks; an exact external-array comparison
+is optional if no external-only certificate is transferred. The independent Python equality has already
 passed on all 36,904,896 compatible candidate keys, but it does not certify the
 Lean predicate's finite table. Preserve full keys because 206,589 endpoint
 pairs have two edges. Use the saved membership decision diagram: 127 distinct
@@ -100,18 +102,39 @@ active, so no consistent performance advantage is established. Select the
 direct balanced-lookup method for the full witness batch. Preserve the sound
 cache theorem, but do not repeat this benchmark without a changed representation.
 
-The next task is to expand the direct checker to the saved 507 base jobs and
-three separate history heads, using original list orders and same-length
-checks. The 788 head-free contexts use history transport. Class 85's two heads
-share one tail; class 89 has the remaining head. Keep heads at position zero.
-Combine validity with the completed geometric class certificates, then certify
-the complete context assignment and saved full-key rows and endpoints.
-Keep both reference-catalogue premises explicit until discharged.
+Milestone 92 checks the complete source-compatible context assignment over
+37,875 direction/history pairs, including the three history-dependent class
+overrides and exact agreement with the saved block classes and roots. This
+check enumerates no count codes. The frozen checkpoint has 65
+Lean theorem audits, 3 of 127 concrete witness classes, 43 geometric classes
+and 649 distinct successful case7302 modules. These are snapshot counts.
 
-Milestone 91 observes geometric classes 0 through 19 and 493 distinct successful
-case7302 modules, with no final share audit. The process handles remain 23168
-and 14427. Inspect their actual current state before resuming anything; the
-cached-pilot handle 70247 is terminal and successful. Do not restart a live job.
+The all-class witness process is active in tool session 97444, alongside
+geometry session 23168 and replay session 14427. Inspect actual process state
+before any resume; do not duplicate live jobs. All 507 base jobs and three
+leading history witnesses are generated and independently reviewed. The final
+family assembly requires every class receipt and is queued after the batch.
+The exact checkpoint states whether that final theorem has passed.
+
+The chosen next proof object is the graph defined directly from diagram-accepted
+full keys, with endpoints computed from each key. This avoids a separate identity
+with external row and endpoint arrays if all weight and potential certificates
+are checked on the defined graph. Keep the two reference-catalogue premises,
+pending local shares, credit interpretation and complete potential explicit.
+The interval remains 191 through 235 edges, with 234 conditional. The contributor
+upper-bound proof still needs a complete independent rebuild. Paper revision 86
+and its three authors and hyperlink settings are unchanged; the next full
+revision is scheduled for milestone 96.
+
+Use the existing sequential checker with --classes all --wait-for-geometry;
+the final CloseBatch module is scheduled after all 127 classes. Reuse valid
+receipts with matching source and dependency hashes. A saved source without
+a successful receipt is pending. Class 85 has two leading history witnesses;
+class 89 has one. Preserve their positions and the original base lists.
+The witness runner checks other Lean processes' private memory before launch
+and waits above its configured threshold. This is a scheduling guard, not a
+bound on later concurrent peaks. Interrupted active jobs retain their lock
+until their actual child-process state has been inspected.
 
 After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.

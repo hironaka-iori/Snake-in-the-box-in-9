@@ -1,0 +1,41 @@
+{
+  "module": "Balanced027Checks",
+  "exit_code": 0,
+  "seconds": 40.95299999999952,
+  "source_sha256": "c26299d40ce042deb3d1bbcad3409e7745a0b9032077bbd86e5be896f2b5df0a",
+  "log_sha256": "c89137af55e600ff1f0256af6ee1fca2f85d26cef7d993f324274666805c489e",
+  "dependencies": {
+    "milestones\\88-retention-diagram-certificate\\data\\Boxes-audit.json": "61e72ef3d45bc74f07207dd93b7752ccbcc5f9866b7358b3ca474dcaf46a33e1",
+    "milestones\\88-retention-diagram-certificate\\data\\CoverTree-audit.json": "b8c30fefe66257a6396615c93b47953af4f3d7daf4f3bb60e92ba17bf6b3c0c9",
+    "milestones\\88-retention-diagram-certificate\\data\\GraphData-audit.json": "1e2461f0368f58f6a552797af053ce199a84df14fc6f7ac4799e5dccc18d9545",
+    "milestones\\89-shared-cover-certification\\data\\BalancedLookup-audit.json": "14c9cfabd213629b7ea03aa57f49400211f14c51299e6d9ecf509853c9f5e4ff",
+    "milestones\\89-shared-cover-certification\\data\\LookupCover-audit.json": "3fc35bf459bb3331b627b232a189ded2ec404ad78b78027e5c7d1db597cee3b9",
+    "milestones\\89-shared-cover-certification\\data\\Balanced027Data-audit.json": "c0eb3cebc75411193160c9848f28141a781182e3045388149a4967a7ad71453f",
+    "milestones\\89-shared-cover-certification\\data\\BalancedGraphChecks-audit.json": "5e5c1bf05b863596c159a0b2a304349ca597f2514af79c3c99c1eefd882ea3ca"
+  },
+  "checker_sha256": "97fa5ea6906eac8cadd6b01ac067f0426faf2b81144ca32ef48599fbe0fe906a",
+  "status": "PASS_BALANCED_COVER_KERNEL",
+  "olean_sha256": "c25a57b84ad0c9a4fb41f91b465cb0f6c6d5217a96a3c9b67cba3a18e68acd9f",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.Shared89.originalCover027",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Shared89.boxTable027_valid",
+      "axioms": []
+    },
+    {
+      "theorem": "Snake9.Shared89.boxTable027_flat",
+      "axioms": []
+    },
+    {
+      "theorem": "Snake9.Shared89.balancedCover027",
+      "axioms": []
+    }
+  ],
+  "scope": "Balanced lookup data, table identities or one geometric cover; no complete context witness or graph-row theorem."
+}

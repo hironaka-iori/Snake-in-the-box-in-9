@@ -1,0 +1,47 @@
+{
+  "status": "PRESERVED_CHECKER_VERSIONS",
+  "revisions": [
+    {
+      "path": "data/repairs/check-batch-before-dispatch-pin.py.txt",
+      "sha256": "95d7a4223a423cc7445c4c60739ab8662e1b51d478d072b5dd0bafa85393f54e"
+    },
+    {
+      "path": "data/repairs/check-batch-reviewed-before-closure.py.txt",
+      "sha256": "09490a4ded5026ca1bf64b105a48eaf22ab81d42c4a4402ee141313998c408b6"
+    },
+    {
+      "path": "data/repairs/check-batch-before-memory-gate.py.txt",
+      "sha256": "cddb288037918944ee4ffbe95c7f859ff40e88fd9e6666ffffff36239db3958a"
+    },
+    {
+      "path": "data/repairs/check-batch-before-dependency-recheck.py.txt",
+      "sha256": "d1947ff790c597f71452c7f9c1818264eff27c0b91b43a33a819ee39d2ca14d9"
+    },
+    {
+      "path": "data/repairs/check-batch-before-lock-retention.py.txt",
+      "sha256": "2fd6e388bd6f61dd01bb836884a6cdbe12a3a9bf4fbe014c3a6bfa33a5b68fac"
+    },
+    {
+      "path": "data/repairs/check-batch-before-final-scope.py.txt",
+      "sha256": "9db2b6acc18aa19bf33ef8be575f8235082848edf1de586b2ec249dca689dce9"
+    },
+    {
+      "path": "data/repairs/check-batch-before-defined-walk.py.txt",
+      "sha256": "f4c2c33cf036db06cbdef868bd47350d514092ffeb66664889148daaaed78f24"
+    },
+    {
+      "path": "scripts/check_batch.py",
+      "sha256": "ddbd82c78fa7599f9db569b1a73b9dc73f88505546f7204ca633e30dbb9cd1ee"
+    }
+  ],
+  "roles": [
+    "Initial failed global import and successful classes0,1,2 pilot",
+    "Reviewed pre-dispatch pin, preserved before adding closure scheduling; not run",
+    "Full-family scheduling before memory gate; not run",
+    "Pre-launch memory gate before dependency recheck repair; not run",
+    "Dependency rechecks before conservative interrupted-child lock retention; not run",
+    "Reviewed full runner before final run-record scope correction; not run",
+    "Reviewed numeric-only closure runner before adding defined-walk composition; not run",
+    "Final runner includes checked defined-graph dependency and three-audit conditional-walk closure"
+  ]
+}

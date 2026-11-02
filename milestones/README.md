@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 92: context assignment and full witness batch](92-full-witness-batch/README.md). All 37,875 context positions checked; 3/127 witness classes at snapshot; complete sequential run active.
+
 - [Milestone 91: certified reference-pattern reuse](91-reference-shape-reuse/README.md). Eight new Lean audits; complete same-case cache pilot; no consistent timing advantage. Use direct checks for the full witness batch.
 
 - [Milestone 90: witness compatibility and counts](90-context-witness-certificates/README.md). 17 Lean audits; six-direction membership pilot, exact lookup tables and generic factorization; 507 base jobs plus three history heads planned. No new bound.

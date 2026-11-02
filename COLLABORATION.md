@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 91 checkpoint](milestones/91-reference-shape-reuse/README.md) checks certified reference-pattern reuse and the same six-direction membership result, with eight new Lean audits. The completed direct/cache comparison establishes no consistent speed advantage. Use the direct balanced-lookup checker for the 507 base witness jobs and three history heads. The snapshot records geometric classes 0 through 19 and 493 distinct successful case7302 modules; both runs continue. Bounds remain 191 through 235, with 234 conditional. Paper revision 86 is unchanged.
+Latest continuation: [milestone 92 checkpoint](milestones/92-full-witness-batch/README.md) checks all 37,875 context positions and exact saved class/root selection. The snapshot records 3/127 witness classes, 43/127 geometric classes and 649 successful case7302 modules. The complete witness batch is running. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 

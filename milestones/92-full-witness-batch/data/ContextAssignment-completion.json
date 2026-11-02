@@ -1,0 +1,695 @@
+{
+  "status": "PASS_CONTEXT_ASSIGNMENT_CERTIFICATION",
+  "module_count": 33,
+  "printed_theorem_audits": 43,
+  "direction_ranges": 26,
+  "bounded_positions": 37875,
+  "compatible_contexts": 791,
+  "classes": 127,
+  "overrides": [
+    [
+      177,
+      43,
+      85
+    ],
+    [
+      177,
+      70,
+      85
+    ],
+    [
+      180,
+      68,
+      89
+    ]
+  ],
+  "modules": [
+    {
+      "module": "ContextAssignmentData",
+      "receipt_sha256": "786851f97aaeab53b5a9b58aaa6fe11b5a221305fb29ddd1de1bb5dd7bb2c9b1",
+      "source_sha256": "8fc0a4979dd8d8a1e819d93ba88778b0ff8a8724862afb642a4ef0728c6e7019",
+      "olean_sha256": "b3f8cdab3c8b41c9c4108f8f69d3836f0b1ae46f8c3fc097afa04d083f89ae16",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "seconds": 48.34399999999914,
+      "theorem_audits": []
+    },
+    {
+      "module": "ContextAssignment",
+      "receipt_sha256": "384c0c6a95a39825ef683a908e241a53e88769ce1691acf4fb206d6e558d36ba",
+      "source_sha256": "059e6cf2bc2167920ec59157c2d7fb261fb30a5134cfae224f9e4993c05ca157",
+      "olean_sha256": "1bd1d25c0d8ff38ce6571883d8bb6bca1678e3c64f525b618ee18fd278d3b975",
+      "log_sha256": "365b8a8ef88928fc9ce7e4913a635574d82644ae1ced02eabe07195b80ba66e6",
+      "seconds": 11.563000000000102,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.Batch92.numeric_keep_source",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Batch92.assigned_of_check",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Batch92.numeric_membership_of_assignment",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteData",
+      "receipt_sha256": "bd6bebc25aae489268b33c66991ed2f2075e6c94e7a861addb39d65c31b641c0",
+      "source_sha256": "2edb642aef7fab87e321a6f8b5978b5070f0006e7bbc50535ae6786af13cafda",
+      "olean_sha256": "1d7d4c8e2120fcd9400b9aaf1511521a353e5bbbe7d67a170862034a77762139",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "seconds": 12.96900000000096,
+      "theorem_audits": []
+    },
+    {
+      "module": "ContextAssignmentLiteCore",
+      "receipt_sha256": "913b9a593c1f1341a5f93a1d1d5da23790f169e3e9f31da2f7623c2d42d830c5",
+      "source_sha256": "44b780411109f4960a956c553c0ab26ec3c81d46508f1a3c6895821d66c142dd",
+      "olean_sha256": "a4b29795e3e4a8d59327db195ef76164a61452cf0143ceca2586fdb6fcd652b8",
+      "log_sha256": "45cf3f0882bba4fa9e697e04349cce48625fbfbd5ef3daee874df44a73eead81",
+      "seconds": 12.609000000000378,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.indexed_mem",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ContextLite92.prefix_add",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ContextLite92.prefix_full",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ContextLite92.assignmentAt_of_fast",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ContextLite92.source_sizes",
+          "axioms": []
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk00",
+      "receipt_sha256": "7d1d0f52758918e5c431020ff980dc9f9993650bd78232200f67d33e511d38c9",
+      "source_sha256": "3a5fe50bd11e0285f720a8ea15c4bc0f40af3577ec6fea2629faff401aab8e45",
+      "olean_sha256": "f4720ba53e174d9dfc356c8920d18b3f55ea7dc83278874f75b5c13f2929dada",
+      "log_sha256": "92bfc43e0f1700fad52e4f2f63f57367b7dcc29de281d89b3618905fce9f4142",
+      "seconds": 8.139999999999418,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_00",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk01",
+      "receipt_sha256": "08728762b9fc487052715b8fa882da7267355f27354d789528e99c99afaa23af",
+      "source_sha256": "773d175de9d3eb416caabb7d6ce098cd561b8d72d5515c489308ee1a04659daa",
+      "olean_sha256": "63de965ad77abb1698e4005ff76f53175564f1ac054ce068823b44aa2d759885",
+      "log_sha256": "c298dfdbd130bd0693526bf96a5aee41ed2a94ade2884ed8581389efb952a8f3",
+      "seconds": 8.203000000001339,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_01",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk02",
+      "receipt_sha256": "7c828f23e92c39bd884a42d32ce1b631bf2bfd33b44373a56db65a46d760416a",
+      "source_sha256": "7026770b13cb2136fec7c47cefa04e4ce8a9b350ebeccda878bf435a4da257a8",
+      "olean_sha256": "2d679496f57316f6e11f93a55da8d6ed5d8c176a8ec7e31e9962230a43cd8384",
+      "log_sha256": "66bdab8b30fbd26e2728f06922e7dcce6148ec0c65d24708de9ca5975e042bc1",
+      "seconds": 8.484000000000378,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_02",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk03",
+      "receipt_sha256": "a09eccf80240a81adba7d0a076abda52f2e6edfbfb2cf4546ef4a2066de98ae3",
+      "source_sha256": "936d7a6267a317fcd504e1063cf7dfb5ce6bd64f3a2f3aba07d3180169eedf92",
+      "olean_sha256": "f63a58d7e2b8c213a0f9c140ec66314278e53990bbe96c7105ca4159f62cf542",
+      "log_sha256": "5cf92a15d07b014bd629756d24f075f202cd96d94f5eaf2a74178893f1720bf8",
+      "seconds": 9.43800000000192,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_03",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk04",
+      "receipt_sha256": "1e95a0350d92053aa6f0c54e9b7bbb52473f86cb5e7ca80c755287aae21ae254",
+      "source_sha256": "d4eb4b7c00978b9122e0ab07e80f75266c4ba0c005cf6e4de6b2bf80dacff26f",
+      "olean_sha256": "b8d90a5113cdcb50d06c54f895b44bb57dc38e7ed113b64b91352cc5f519579f",
+      "log_sha256": "4adc630d184c78595a36c1343e5a47fd78ea2c57796ef701b5aa6e7c21c2ed82",
+      "seconds": 10.110000000000582,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_04",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk05",
+      "receipt_sha256": "368af3f140b3d822e828727cf12ece7597f6637c1ec382af1aa73d7f7d32b100",
+      "source_sha256": "c8038d8a7c8df030143d6838a62c0f9d43465f5bbaa6ad459cffd8447cdfcdb3",
+      "olean_sha256": "e840fa382b253e72f44e7f43a103dca18f8b1191730a1efdfeac680777d6c596",
+      "log_sha256": "455162ab64e153faddc7dd1ce82a1a1ec3c83e61ebdccc77ea003109e4dd8563",
+      "seconds": 8.828000000001339,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_05",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk06",
+      "receipt_sha256": "d3884930d53206d12730ff57aa83a3f79efbf03226ee77c4ddc23b5cca95474b",
+      "source_sha256": "b80011aa622e3b109a051dc855c1f702bf884642d25d16b50e6044ec3d97787a",
+      "olean_sha256": "74523f06db3e1edf0a536b249de85559be48807a439f5b8827e633a497d769b3",
+      "log_sha256": "f128ee2cbec26c5f291e7fdfe08bf18ac0930f8ec301d165c7fdcc1b482e84c0",
+      "seconds": 8.625,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_06",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk07",
+      "receipt_sha256": "adb7bf8b91e982be0f971a968febad8f9f3aa6fb44da36ee15be5b19e54b0aa6",
+      "source_sha256": "bc4d8e3869a7a1c245fb9fb1033d5c1a1f8399ac3d86c32102cb32c89038c3b2",
+      "olean_sha256": "77e0d8000c1b38572f32c43a74d784019032e60cda32fb8d2f6e68c031c13c5c",
+      "log_sha256": "2806b7ed72efa3fb10e88f927cd8c76e982d950de9949235352c31bfde427fe7",
+      "seconds": 9.453000000001339,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_07",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk08",
+      "receipt_sha256": "e59322182d25330edd38a8d38b1e5199fe66186700aa427c8a04eca628d74390",
+      "source_sha256": "2cb28834cd8fcc2ca91a6a7c0dfd293a1131bc5cb1a63ed5d8236cd8e3f49f52",
+      "olean_sha256": "09c9d1acc847c3cbba6fe752010b0193152f54ff257496042a02b05a446ff6ef",
+      "log_sha256": "e194580a819744e01b69918d64da6eda5ae424c4e2f232983a1dc043517e5fb2",
+      "seconds": 9.937000000001717,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_08",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk09",
+      "receipt_sha256": "ab0d44f5a0dc455ed5e297e5ef30dc73e9a120402c296392612b493fb3d65658",
+      "source_sha256": "03512c095d0f2316adde37d4724e1ee2a8719db329d76daecac9dd0d81eb5305",
+      "olean_sha256": "e3e0ae9a4f705c6be038adc0006c9545a90274bf1c2988b6674a084543a908e3",
+      "log_sha256": "4b72e3624196442a99f61feea35dfb39078cb17db9d968c3b51aebb354e7ed94",
+      "seconds": 10.328000000001339,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_09",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk10",
+      "receipt_sha256": "4d6232c325d1e1f1207e6961b7f6aa04a6522b9f272e244c19729d38ae3c4b82",
+      "source_sha256": "804e7512f734dd4603ab42751864fa55c31b53511c58c806b521a896b00bd66a",
+      "olean_sha256": "2acd5754234cf9df61c203162cd8226779b41b9d2cc500635c812069f55feea1",
+      "log_sha256": "814456faf26ffc487a1ea3b43100ab236e0e55a703ff357d326fa899284eb5cf",
+      "seconds": 10.03099999999904,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_10",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk11",
+      "receipt_sha256": "9d2a039ed3ab0ba724b1f52f9e6a56f9854242ce56593828209e590ede88353d",
+      "source_sha256": "981e34de6b60212cd80404559ca78267970b033a950524dc10030bb37b687562",
+      "olean_sha256": "d75ecf5350d01feb0d604fb2793865451d2df9e90658006f31a319531d97fb8b",
+      "log_sha256": "a945657e19f3c6bab41c62d313d61dbf423c18897cdbf74a3fe7f6a15cc3a37c",
+      "seconds": 9.593000000000757,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_11",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk12",
+      "receipt_sha256": "d4ed3bfc8c38f3d6f14945cd0afee0934013a435719a08ffb8cc2485c1fd2319",
+      "source_sha256": "1eaf7e9a21448718faf2dfd2bb77fab7e172a58e60c8766770c1cf7cc74c921a",
+      "olean_sha256": "b768d98cca39cfc9e0e9590cb6f34ab364498e81fbe0368482355dded58798c2",
+      "log_sha256": "221cd9dfbdf1ffc9744bd56056215593c259387ba4f77f20e18f507d5541c7c8",
+      "seconds": 9.295999999998457,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_12",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk13",
+      "receipt_sha256": "282aaa1afad1d8c35382d40ff423f9f887ef3736e253a3c2e506a1f3b08ba887",
+      "source_sha256": "d45d23faa1c0b3112b3f8fee97d50582ee3a8109bcfac79abd8294ee31b36fe5",
+      "olean_sha256": "528bd1d3d13617503ffc511eb2a8699f3a821dcbb7a123645ef7ce96875bd647",
+      "log_sha256": "617b70ddaf4d446273a860378338c757a5a1bee5b65e2504cf700b935ddd4061",
+      "seconds": 9.90599999999904,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_13",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk14",
+      "receipt_sha256": "23a0b6cb7326f01117639c373cdb7f3ffd89144168b6a947a986129cde34e210",
+      "source_sha256": "f1fdf05a6076bc234d7fafa51d03ac20525212ce8411e7086fe9f3a229bbb283",
+      "olean_sha256": "605ab12c186f155607a7126edca65fec4fcb7e499e1254521c112ddbe2d7bdc1",
+      "log_sha256": "320dfcd1185e39c933e766d8fd8e4bd9d436e2828da3a0af4690bc370665061f",
+      "seconds": 9.953000000001339,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_14",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk15",
+      "receipt_sha256": "519fd14f04d50d019afa6fb597bfd3a4de03cf482573d9aa56fc44ffab7cf8d5",
+      "source_sha256": "52957ff67bbb9eda9cac891ee0f63a8dc9111267cb2630351725697a43144292",
+      "olean_sha256": "13e1c4f8c71987c394324d619e4618fdb17a427cffd6a3b14809b7dd794348b3",
+      "log_sha256": "5de50f8e33af0f7f99bd9d6a00daecbe91c9e031ca0e9b821d570051b1f050e2",
+      "seconds": 11.81300000000192,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_15",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk16",
+      "receipt_sha256": "fa211b647c082c960a36f4945498f6175415c17e4e4f4a57f7460b98a6b4267e",
+      "source_sha256": "e43fbbf7928d34fca8cba4cb6fbb388451a403f416ac12e016bdf593f0282fec",
+      "olean_sha256": "0b9ea2ac2586fe665d0bee502570e9fdcdef2eef7a11f306aa91a2bef2e77678",
+      "log_sha256": "69fe643edf5d980d95901ebe00c705958b9436859ea757920c439c537393eb14",
+      "seconds": 10.64100000000326,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_16",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk17",
+      "receipt_sha256": "2c59d7cc8597899acdc016b82cf04ff29ae972e49822899fc7c8ddefacee5e86",
+      "source_sha256": "098c4bc0ad7e5f328833ad3341023032270eecf75c0b96f0fe9d43e864cd7c33",
+      "olean_sha256": "a899f0af64e1563a310003e8af423603315f312c85103015ce0a8caa2cce8011",
+      "log_sha256": "fe7995abb777485051c263118e899c8a4a06bc75426e5c56269b5f390a628df4",
+      "seconds": 14.889999999999418,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_17",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk18",
+      "receipt_sha256": "ed707d270b1a3e7e91e83c71e11c7321d2911ad6795a4c4f874b739f503ac0d4",
+      "source_sha256": "e3bebcc946f524154672a6cf94a2ac0206c4ae92191360f2bbd4912af92d0323",
+      "olean_sha256": "c4e5b06461bff084a79dfe6c7871d3313e21cb79761ac9de733d2d102b8547ab",
+      "log_sha256": "13aeb96e84bdf8c90fbf6017a3267295dc968140d53a7e58affc943e278cefbf",
+      "seconds": 9.860000000000582,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_18",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk19",
+      "receipt_sha256": "f3e2d9f3a51ee381017aba6f9f46a154dc99a1a633f90ddd43fdc28517161ce5",
+      "source_sha256": "caaa8d973ac4ca6504f9adaa7f3ed4069d6098020a165a418a88340c46899bc1",
+      "olean_sha256": "48def0a895c7e926c0c559dbd1a2cfd6e3aee7ad3ac61109b0f56d72715fe2c9",
+      "log_sha256": "022660c059dcb0f0a7fba30788d7fd0b5797fbeec95fa6a49a82d4e9b6874db2",
+      "seconds": 10.875,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_19",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk20",
+      "receipt_sha256": "7e053ec856f29b05b0f34c8ff0fa68af207f8951c54ca9a4ae56c92acfa471a8",
+      "source_sha256": "872027aef7d358932466786fa37b9a53f5168d2d63ca9dc6effc3e142fbcc3e9",
+      "olean_sha256": "60b2566ba0819f8bbc6a400324ee88b9dc3ca69b46dd19b46ee8b5c552b1405f",
+      "log_sha256": "6110ec2c594e7694f0c4817645d64454a8d0678d97b0c32cc9537e3458fcb830",
+      "seconds": 10.062999999998283,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_20",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk21",
+      "receipt_sha256": "14957a5b02a67b720bff4ce2580d01ae3305d9eb2d32d449f32c521493265b72",
+      "source_sha256": "5370310794e2b0213d74fb714252e8679f7399d85d662f7ed974be743b570075",
+      "olean_sha256": "34093ae508ba352d1bb5ae8ef1a767f7aa4023f1aafa8227aae30e561f9c47bc",
+      "log_sha256": "f6639fc6ae103c62686c8319fe98b11a761519115268b5ead9287296708885d4",
+      "seconds": 10.484000000000378,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_21",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk22",
+      "receipt_sha256": "538a39e3bd1547a4de4b7a4401dd0124482da09cc9f31e5de62ba8ebb0b10ab9",
+      "source_sha256": "af4f0bd099a27d5d4a8fc514a7e6d4d57006c1cfb46f93ac445ca768e41b4f25",
+      "olean_sha256": "617c13a83c65a6fd058d04a98f1de8f119fc9e40c0f3cf60f8f4a2544fb2f1f5",
+      "log_sha256": "116d055729e41d5df66338ccda2a082241877943157da0020a94d5123700d515",
+      "seconds": 10.203000000001339,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_22",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk23",
+      "receipt_sha256": "340e87c38621a4ab55d5202bc332fdd915571128ef199b36b27fa052374c8aa8",
+      "source_sha256": "f03efffc883a5be69ac3d02abbd9cf24bcb81572fbfa919d77c296903ea13ec8",
+      "olean_sha256": "c3e4a686b41e9c6404f97152a4cf22fc8990fcd775cc3f9cfea937d14e8c6dfb",
+      "log_sha256": "5e14a8abf168b4dcec16cb5341ed2db97bb9e566f31f744ac4ba7ca050bc2ae1",
+      "seconds": 14.0,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_23",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk24",
+      "receipt_sha256": "6dcbc82e752fdd62cb034be5675ce3f6f0f70202e5a64e3d9b4dff72700eabef",
+      "source_sha256": "43b57a1f7a002f69cb5b5eafb2d423645e09e32d161638da91afabad5553d21a",
+      "olean_sha256": "8cc3cbfea905b135a896588a8355fbb9ce8cc5d33f83cf639cec820f5f70dc6b",
+      "log_sha256": "e1ef046b918ce91b0f2ba2aa54e98cece1aaae743396a1336925916b03ab561a",
+      "seconds": 11.7029999999977,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_24",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChunk25",
+      "receipt_sha256": "5c7fc03fe579975849a8b545fa90796fb2f5d758e05cbfd4d212186f7de89c5f",
+      "source_sha256": "733bfe86864198663332ddc956451ba624da503f1edc69b69439a485cb0c50b1",
+      "olean_sha256": "c4c2f25c419c30b29809a49d72c89053eeeef81f5f344232c290b9b2b706211f",
+      "log_sha256": "f9014729118d51db197de0b012662b5b3d6a0e1abb56fc054e1b78b6b434a650",
+      "seconds": 12.014999999999418,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.chunk_25",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteChecks",
+      "receipt_sha256": "cd0cd4df3d0aaadcc941cd8a62e593b727b4c370ec1e1887c751278524765146",
+      "source_sha256": "c113af5334e0dcf7074c2d873b4a274febaf95121bb04e605aca3bc8f4551d41",
+      "olean_sha256": "456fc1a3eedc885531bc417dad3932c8e2790fd7112fe7470d608f25b6071e1d",
+      "log_sha256": "afc73ceb0eff50e95e0301fbe3aa478a4f54720870905ef7bcd5cea1e1a24910",
+      "seconds": 9.264999999999418,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.ContextLite92.fast_checked",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ContextLite92.assignmentAt_true",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentLiteBridge",
+      "receipt_sha256": "f99f980adfdab60c7fed75edc0a68373467ac315c39dd0b0268856fce4b43d0e",
+      "source_sha256": "4be0f9434fe8f6376c9af516107612a210655f2d8011c62e3c56c29c0ce97b8e",
+      "olean_sha256": "005242c1a567b6d7ea5a8a242daf4e944cd64b562c84a320b48fe028b5cab936",
+      "log_sha256": "c15603ed63b9e58158c05953000cadbf72c237ece6548c5f5b388bb5febfcd01",
+      "seconds": 45.46900000000096,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.Batch92.lite_assignmentAt_eq",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ContextAssignmentChecks",
+      "receipt_sha256": "3ee3c7a4f673d141896085c7d0e13599650e2b12632a3b5e88d792a865051bc2",
+      "source_sha256": "41083d2703781899c67d156050a30d4a58b61b8baa7631ce147e49cd0ba178ab",
+      "olean_sha256": "33e90a6a4927f45bc08180f301769dadaac208b9a48abe13da9ca0ebc72035e5",
+      "log_sha256": "5d72b1e8a781fd13d1502c4a972b37e0705992b8487d68d655708f71b2f63534",
+      "seconds": 11.312000000001717,
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.Batch92.assignment_checked",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Batch92.source_context_assigned",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Batch92.numeric_context_assigned",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Batch92.numeric_context_membership",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Batch92.assignment_data_sizes",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.Batch92.assignment_overrides",
+          "axioms": []
+        }
+      ]
+    }
+  ],
+  "plan_sha256": "832d2c1761c16281425b3a6a86842de5e2b41d3f1626751eea6460b99f27aab7",
+  "chunk_manifest_sha256": "6576d00815a134e5e832e2dac408f169c2ec45e78d67763b2dad46e3c32199c7",
+  "checker_sha256": "50883098bbbe89f9dd9a0582504b0708b54d19aba1d41eb21cf5bf4316559dbc",
+  "generator_sha256": "b9b152c55e9cd28b37791a427803663d826c8448ac2e8db280dbfc592b682c8b",
+  "scope": "For every di<505 and q<75 passing source compatibility, the chosen class is below127, contains (di,q), equals the saved block class, and has exactly the saved root. numericKeep plus di<505 supplies bounded source compatibility. Diagram membership still requires the explicit ClassMembershipFamily premise for all127 classes. This certificate proves no new snake length bound.",
+  "evaluation": "All26 ranges checked in distinct sequential Lean processes with decide +kernel; generic prefix concatenation reassembles fast_checked. The equality bridge proves definitional equality to the original assignment predicate. The original assignment_checked statement and six exported final audit targets are preserved.",
+  "memory": "The installed Lean executable advertises a memory option that fails at runtime. No compiler memory cap was used. Each new module had a300-second timeout and an owned-process-tree cleanup; the dense pilot passed in14.890s with one saved process snapshot showing1.752GB private memory. The snapshot is not an exact peak allocation.",
+  "failure_evidence": [
+    {
+      "path": "data\\repairs\\ContextAssignmentLiteChecks-1793630233860710200-checker.py",
+      "sha256": "d0a30930345f3f7918dd4fb4c538f6ee6e67f908d5468406e12110353e629ca7"
+    },
+    {
+      "path": "data\\repairs\\ContextAssignmentLiteChecks-1793630233860710200-record.json",
+      "sha256": "febfb4e2f0b5eb7fbba663b28b0847eb7a57bbcf609cdd1a460d4d672f9183c8"
+    },
+    {
+      "path": "data\\repairs\\ContextAssignmentLiteChecks-1793630233860710200.lean",
+      "sha256": "eb8812d3a35e3bf7568edeaee0ae3dbd5291fb8eb1d20139477e68c67f6129c3"
+    },
+    {
+      "path": "data\\repairs\\ContextAssignmentLiteChecks-1793630233860710200.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data\\repairs\\ContextAssignmentLiteChecks-resource-20261102T143713Z-checker.py",
+      "sha256": "d0a30930345f3f7918dd4fb4c538f6ee6e67f908d5468406e12110353e629ca7"
+    },
+    {
+      "path": "data\\repairs\\ContextAssignmentLiteChecks-resource-20261102T143713Z-record.json",
+      "sha256": "de27fef2604e2413456cb363cb501f681b6c9a778d58addfd19c46d35e1e71a2"
+    },
+    {
+      "path": "data\\repairs\\ContextAssignmentLiteChecks-resource-20261102T143713Z.lean",
+      "sha256": "eb8812d3a35e3bf7568edeaee0ae3dbd5291fb8eb1d20139477e68c67f6129c3"
+    },
+    {
+      "path": "data\\repairs\\ContextAssignmentLiteChecks-resource-20261102T143713Z.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
