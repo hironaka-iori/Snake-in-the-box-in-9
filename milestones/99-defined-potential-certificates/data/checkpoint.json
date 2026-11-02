@@ -1,0 +1,83 @@
+{
+  "status": "PASS_NUMERIC_DEFINED_GRAPH_AND_CHECKED_POTENTIAL_RANGES",
+  "previous_goal_turn": "progress",
+  "recorded_at": "2026-11-02T18:04:18.621549+00:00",
+  "proof_summary_sha256": "4068c2429b9bccc51ff23e76523ba34112abf44e942c9296202c071fd67415d0",
+  "modules": 18,
+  "theorem_audits": 25,
+  "complete_context_modules": [],
+  "pending_modules": [
+    {
+      "module": "CompletedContext99",
+      "source_sha256": "8b2c08dcc60c5e02be0f7c3f05f012caedf13d2d6209c8941a18b76c7c094c4d",
+      "status": "TIMED_OUT",
+      "last_attempt": "logs/CompletedContext99-1793642334277275300-record.json",
+      "last_attempt_sha256": "97c8451dde7841e254be9f894a39225a35518c1fc9afac34ef195987d2741b06",
+      "seconds": 301.5,
+      "exit_code": 1
+    },
+    {
+      "module": "ConditionalContext99",
+      "source_sha256": "73ccd9c11917cf64ae9f824675318930a08d7c21490d0655b4dd91719d09ef61",
+      "status": "NOT_ATTEMPTED"
+    }
+  ],
+  "numerical_defined_graph_edges": 4947008,
+  "numerical_extra_rows": 0,
+  "numerical_missing_rows": 0,
+  "potential_values_independently_reconstructed": 3203712,
+  "concrete_ranges_checked": [
+    551,
+    602
+  ],
+  "generic_interval_and_context_soundness_checked": true,
+  "concrete_upper_bound_assembly_checked": true,
+  "complete_graph_inequality_checked_in_lean": false,
+  "pilot_interval": [
+    9720,
+    11880
+  ],
+  "pilot_accepted_edges": {
+    "completed": 143,
+    "conditional": 64
+  },
+  "joint_context_groups": 582,
+  "joint_context_reuse_checked_in_lean": false,
+  "pending_reference_catalogues": [
+    "AllRefuted6K235",
+    "AllRefuted236"
+  ],
+  "pending_conditional_local_cases": [
+    7301,
+    7302,
+    7303,
+    7307,
+    7308
+  ],
+  "pending_share_floors": [
+    16,
+    18,
+    16,
+    16,
+    16
+  ],
+  "unconditional_edge_interval": [
+    191,
+    235
+  ],
+  "conditional_target": 234,
+  "upper_bound_evidence": "Inspected contributor theorem and saved audit; full independent rebuild pending.",
+  "case7302_state": "STOPPED_AFTER_CHECK1_TIMEOUT_900_SECONDS",
+  "case7302_source_record_unchanged": true,
+  "paper_revision": 96,
+  "next_scheduled_paper_revision": 106,
+  "paper_sha256": "7d4d974bc353ca723e4a5362b0960610d959dfe622b115b629968818c178875c",
+  "prior_checkpoint": "milestones/98-concrete-weight-integration/data/checkpoint.json",
+  "prior_checkpoint_sha256": "d552c61f812bfa925d3f4b23cc3c47e8810f64d2ef5ab4195233c28b1ad7cb81",
+  "git_refs_before_commit": {
+    "HEAD": "f92650202710aeab91d64912b64b43ec8c507bfb",
+    "origin/main": "f92650202710aeab91d64912b64b43ec8c507bfb"
+  },
+  "next_task": "Complete the finite potential certificates using checked intervals and context reuse; first specialize repeated context calculations and measure a bounded context. Preserve reference and five local assumptions.",
+  "scope": "Both full defined-graph inequalities checked numerically; compact potential ranges, generic soundness and listed finite Lean checks certified. No new numerical global bound."
+}

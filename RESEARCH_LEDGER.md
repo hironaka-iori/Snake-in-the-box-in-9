@@ -569,3 +569,12 @@ Next research priority: instantiate the four count-conditioned rules and share-1
 Latest continuation: [milestone 98](milestones/98-concrete-weight-integration/README.md) checks the remaining concrete share rules, both count-free profiles, the complete actual edge weight, the 21-count boundary saving and total charge. The full-key walk and numerical bound assembly are checked with their remaining hypotheses explicit. The global interval remains 191 through 235; 234 remains conditional.
 
 Next research priority: certify both potentials on every row of the defined graph, using the exact checked weights. The completed profile uses slope 483 and range 551; the conditional floor-18 profile uses slope 496 and range 602. Two reference-catalogue closures and five conditional local shares remain. Paper revision 96 is unchanged; the next scheduled full revision is 106.
+
+
+## Milestone 99: concrete potentials on the defined graph
+
+Latest continuation: [milestone 99](milestones/99-defined-potential-certificates/README.md) verifies both potentials numerically on all 4,947,008 defined-graph edges, with zero extra or missing rows. Lean checks concrete ranges, interval/context soundness, the explicit-potential bound assembly and saved finite tests. The complete finite edge certificates remain pending. The global interval remains 191 through 235; 234 remains conditional.
+
+Complete-context Lean checks remain pending. Unfinished modules and their preserved attempts are listed in the proof summary; no failed or timed-out attempt proves its statement. The CompletedContext99 attempt reached the 300-second limit. ConditionalContext99 was not started.
+
+Next research priority: finish the potential edge certificates using bounded context checks, specializing repeated computations before a larger batch. Numerical context comparison gives 582 joint groups from 791 contexts; Lean reuse equalities remain necessary. Two reference-catalogue closures and five conditional local shares remain. Paper revision 96 is unchanged; the next full revision is 106.

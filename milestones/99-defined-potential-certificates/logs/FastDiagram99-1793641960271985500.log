@@ -1,0 +1,30 @@
+E:\Snake-in-a-box\milestones\99-defined-potential-certificates\lean\FastDiagram99.lean:15:24: error: unsolved goals
+case cons
+retainedDiagram : Diagram
+symbol : ℕ
+rest : List ℕ
+ih : ∀ (node : ℕ), evalBalanced node rest = diagramEval retainedDiagram node rest
+node : ℕ
+⊢ diagramEval retainedDiagram (nextNode Certificate88.retainedDiagram node symbol) rest =
+    diagramEval retainedDiagram (nextNode retainedDiagram node symbol) rest
+E:\Snake-in-a-box\milestones\99-defined-potential-certificates\lean\FastDiagram99.lean:27:4: error: tactic 'rfl' failed, the left-hand side
+  false
+is not definitionally equal to the right-hand side
+  match savedBlockClass (75 * di + q) with
+  | none => false
+  | some cls => diagramEval retainedDiagram (recordedClassRoot cls) (digits code)
+case h_1
+retainedDiagram : Diagram
+di q code : ℕ
+x✝ : Option ℕ
+heq✝ : savedBlockClass (75 * di + q) = none
+⊢ false =
+    match savedBlockClass (75 * di + q) with
+    | none => false
+    | some cls => diagramEval retainedDiagram (recordedClassRoot cls) (digits code)
+E:\Snake-in-a-box\milestones\99-defined-potential-certificates\lean\FastDiagram99.lean:28:4: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.
+
+Additional diagnostic information may be available using the `set_option diagnostics true` command.
+'Snake9.Potential99.evalBalanced_eq' depends on axioms: [sorryAx]
+'Snake9.Potential99.fastKeep_eq' depends on axioms: [propext, sorryAx]

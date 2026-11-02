@@ -1,42 +1,38 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 98 checkpoint
+## Milestone 99 checkpoint
 
-The complete actual edge-weight interpretation is checked for both profiles.
-It includes all 505 geometric entries, 55 history-share rules, four
-count-conditioned rules and their reversals, share 120, and the chosen
-count-free floor. Every candidate bounds the same five-centre sum; they
-combine by maximum. Saturation and the full direction/history/count key are
-preserved. The five old credit-root ports are byte-identical to their sources.
+Both saved potentials pass every edge of the actual defined graph in an
+independent exact-integer enumeration. The graph has precisely 4,947,008
+accepted full keys across 791 contexts and 127 acceptance classes; there are
+zero extra or missing rows relative to the saved array. This full enumeration
+is numerical evidence, not a Lean theorem.
 
-The actual total charge is checked: the omitted endpoint/internal counts
-save at least 21, and every share occurs at most five times. This proves
-$W+4200m\le1098960$ for $m\ge9$. The completed profile has no unfinished
-local-share premise. The conditional profile retains the five refutations
-with floors (16,18,16,16,16).
+Lean accepts both compressed potential candidates and proves their ranges:
+551 for the completed profile and 602 for the conditional floor-18 profile.
+Independent parsing of the generated Lean literals reproduces all 3,203,712
+saved values. Lean also checks the accelerated diagram lookup, interval and
+context soundness, and the upper-bound assembly using these concrete candidates.
+The two larger pilot intervals contain 143 and 64 accepted edges respectively.
 
-The full-key walk and potential summation are checked in the same environment.
-The completed upper235 assembly retains two reference-catalogue assumptions
-and a slope-483, range-551 potential certificate on every defined graph row.
-The conditional upper234 assembly retains the same two catalogue assumptions,
-the five local refutations, and a slope-496, range-602 potential certificate.
-These concrete potential/range certificates remain pending. No additional
-weight-validity, boundary-saving or charge-budget premise remains.
+Complete-context Lean checks remain pending. Unfinished modules and their preserved attempts are listed in the proof summary; no failed or timed-out attempt proves its statement. The CompletedContext99 attempt reached the 300-second limit. ConditionalContext99 was not started.
 
-Independent reconstruction matches all 4,947,008 saved full keys in 791 contexts,
-both endpoint columns and both profile weights. This finite-array agreement
-does not certify the potential on every row of the defined graph.
+The complete edge certificate still remains in each final Lean bound statement.
+Two reference-catalogue closures remain for both profiles; the conditional
+profile also retains five local refutations with caps (15,17,15,15,15), giving
+floors (16,18,16,16,16). The actual weight and total charge proofs from milestone
+98 are complete and unchanged. All 127 coverage classes remain checked.
 
-All 127 coverage classes and their actual-walk assembly remain checked from
-milestone 97. The original case7302 target-20 replay remains stopped after its
-900-second Check1 timeout, with 649 successful modules and unchanged evidence.
-Any fresh target-18 proof must use separate files.
+Numerical context reuse gives 582 joint groups from 791 contexts. Prove the
+corresponding equalities before reusing certificates. First specialize repeated
+context calculations and benchmark a bounded check; preserve full keys.
 
 The maintained interval is $191\le a(9)\le235$, with 234 conditional. The
-contributor upper-bound proof still lacks a complete independent rebuild.
-Paper revision 96, its authors and hyperlink settings are unchanged; the next
-scheduled full revision is 106. Use ordinary notation and define only
-essential, substantially reused concepts.
+contributor upper-bound proof still needs a complete independent rebuild.
+The original case7302 target-20 attempt remains stopped and unchanged; any
+new target-18 proof must use separate files. Paper revision 96 and its metadata
+are unchanged; the next full revision is 106. Use standard notation and define
+only necessary concepts that are substantially reused.
 
 ## Result and evidence boundary
 
@@ -144,7 +140,7 @@ the added local premise or the full graph interpretation.
 ## Earlier proof interfaces and development record
 
 The following paragraphs preserve earlier milestone observations. Their
-pending-job statements describe those snapshots. The milestone 98 checkpoint
+pending-job statements describe those snapshots. The milestone 99 checkpoint
 above supersedes them: both 127-class batches and their assembly are complete;
 case7302 is stopped. The remaining tasks are listed in NEXT_AGENT_PROMPT.md.
 

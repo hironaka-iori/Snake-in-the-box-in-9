@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 99: defined-graph potential checks and concrete ranges](99-defined-potential-certificates/README.md). Full numerical edge audit, checked potential candidates and finite Lean certificates; complete graph certificates remain pending.
+
 - [Milestone 98: actual weights, total charge and conditional bound assembly](98-concrete-weight-integration/README.md). Both floor profiles are integrated with the full edge key; potential certificates, reference closures and five conditional shares remain.
 
 - [Milestone 97: geometric credit integration and least pending floors](97-geometric-credit-integration/README.md). Complete 505-shape geometric/history credit; checked symbol transfers; sharp conditional floor vector (16,18,16,16,16) in the original integer target box. No new global bound.

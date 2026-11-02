@@ -1,90 +1,84 @@
-# Assignment for the next researcher
+# Continuation assignment
 
-Continue in `E:/Snake-in-a-box`. Read milestone 98's mathematical note,
-checkpoint, proof summary and independent weight audit. The previous goal turn
-made progress: the actual weights, total charge and final bound assembly are
-checked. The exact optimum remains unresolved.
+Continue the empty-square charging route in `E:/Snake-in-a-box`. Read milestone
+99's mathematical note, checkpoint, proof summary and independent audits. Use
+standard notation and introduce definitions only when necessary and repeatedly
+used. The exact optimum remains unresolved; keep the active goal unfinished.
 
-## Numerical status
+## Result and remaining assumptions
 
-The maintained interval is $191\le a(9)\le235$ edges. The upper bound uses
-the inspected contributor theorem and archived audit; its complete independent
-rebuild remains pending. The improvement to 234 is conditional. No 196 witness
-or optimality proof was obtained here.
+The maintained interval is $191\le a(9)\le235$ edges; 234 remains conditional.
+The contributor upper bound retains its archived evidence and pending complete
+independent rebuild. There is no 196 witness or optimality proof here.
 
-The completed profile has slope 483 and range 551 on the saved array. The
-conditional profile with 012034 floor 18 has slope 496 and range 602. The latter
-gives $4696m\le1103530<4696\cdot235$ after its hypotheses are supplied.
-Milestone 97 proves that (16,18,16,16,16) is the least pending integer floor
-vector inside the original target box for this fixed graph and boundary
-argument. The range 602 is sufficient; its optimality is not asserted.
+The explicit completed potential has slope 483 and range 551. The conditional
+floor-18 potential has slope 496 and range 602. Both pass all 4,947,008 defined
+graph edges in independent Python enumeration, with zero extra or missing
+keys. Independent parsing of the generated Lean literals reproduces every
+saved potential entry. Their range bounds are checked in Lean for all states.
 
-## Selected next task
+ConcreteAssembly99 states the final bounds with no free potential or range
+premise. Each still assumes its graphCheck=true certificate. Both retain
+AllRefuted6K235 and AllRefuted236; conditional234 also retains cases
+7301,7302,7303,7307,7308 at caps15,17,15,15,15. These correspond to pending
+share floors (16,18,16,16,16). Do not conflate numerical checking, a selected
+context theorem and the complete finite graph certificate.
 
-Certify the potential inequalities and range bounds on the same defined graph
-and exact weight functions used by PotentialAssembly98. Its final two theorems
-state the necessary finite hypotheses precisely. Start with one representative
-context and a verified efficient potential lookup before launching a large
-batch. Existing balanced lookup arguments may avoid repeated long-list scans.
+## Next task
 
-The conditional potential table is
+Finish the graph-potential certificate, using the same defined graph and exact
+Weights98 weight. PotentialChecker99 gives interval joining, test transfer,
+context assembly, missing-block handling, and graph soundness. FastDiagram99
+provides a proved-equal balanced diagram lookup. PotentialPilotLarge99 proves
+both test intervals [9720,11880) and transfers them to the original checker.
+They contain 143 completed-profile and 64 conditional-profile accepted edges.
+
+Complete-context Lean checks remain pending. Unfinished modules and their preserved attempts are listed in the proof summary; no failed or timed-out attempt proves its statement. The CompletedContext99 attempt reached the 300-second limit. ConditionalContext99 was not started.
+
+Check the proof-summary receipts before treating any full-context source as
+proved. Do not blindly restart a timeout. Specialize repeated constant
+direction/history calculations and benchmark before launching a large batch.
+Prefer a traversal of shared count prefixes that skips rejecting diagram
+branches. Prove that it covers the original accepted codes with their exact
+encoding; the current pointwise lookup restarts for all 46,656 codes.
+A lighter computational evaluator may avoid repeatedly importing and reducing
+the full semantic environment; prove its equality or a sufficient one-sided
+weight bound before reuse.
+
+Numerical context classification has 582 completed groups and 564 conditional
+groups, or 582 joint groups. Its tuples contain the acceptance root, ordered
+source/target potential blocks and all 46,656 weight values. Reuse requires
+Lean equality/transport statements. Acceptance classes and endpoint pairs
+alone cannot replace the full direction/history/count key.
+
+## Exact files and runtime
+
+Candidate sources: `milestones/99-defined-potential-certificates/lean`.
+Saved potentials:
+`milestones/73-countfree-share-catalogue/data/proved-potential.i64.gz` and
 `milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18-potential.i64.gz`.
-Use the completed-profile evidence in milestone 93 for the other table. Preserve
-raw state numbering and normalized ranges. Do not reuse the floor 20 range 600
-potential as if it were the floor 18 certificate.
+Do not substitute the old floor20/range600 potential for floor18/range602.
 
-Check every code accepted by DefinedGraph92.diagramKeep, including conservative
-extra rows. There are 791 recorded contexts and 127 shared acceptance classes,
-but weights and endpoints depend on the full direction/history/count key.
-An acceptance class or endpoint pair cannot replace that key. The independent
-saved-array reconstruction in milestone 98 does not discharge these Lean
-potential hypotheses.
+Use `milestones/99-defined-potential-certificates/scripts/check.py` for bounded
+sequential compilation and exact receipts. Reuse its environment and the
+existing milestone 98 support overlay; do not recopy the 3.3 GB overlay.
+The checker has a 300-second per-module limit and stores failed attempts.
+Do not edit a source or checker while its process is running. Inspect both
+the lock/record and actual process before resuming; old markers can be stale.
 
-Two reference-catalogue closures remain: AllRefuted6K235 and AllRefuted236.
-The conditional profile also retains cases 7301,7302,7303,7307,7308 with
-refutation caps 15,17,15,15,15. The completed profile has no unfinished local-share
-premise. Keep these different scopes explicit.
+Python:
+`C:/Users/hironakaiori/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`.
+Use `-B -X utf8`; numerical packages are in `work/solver_packages`.
+Lean 4.19 and mathlib are under
+`D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research`.
+Do not add `-M4096`; keep at most three compiler processes, preferably one.
 
-## Completed interfaces
+The original case7302 target20 replay is stopped after a 900-second Check1
+timeout, with 649 successful modules. Preserve it. A new share18 proof needs
+separate sources and receipts. Keep all milestone bytes, hashes and logs.
+Preserve unrelated `.gitignore` and milestone50 critical-family changes.
 
-- CountConditionedCredits98 closes all four conditioned rules and share 120,
-  with both direction and count reversal and the exact saturated intervals.
-- CountFreeCredits98 supplies completedCredit and conditionalCredit with
-  actual-key bounds. The 012034 conditional floor is 18, not the older 20.
-- CombinedWeights98 defines weight floor q di code and bounds the actual
-  weight by 120 times the entering singleton count plus the five-centre share.
-- ActualGraphKeys98 preserves the full row key and both endpoints at the
-  same index for every actual step. Coverage is already checked for all 127
-  classes; the actual walk retains the two reference catalogues.
-- GlobalCharge98 supplies the 21-count boundary saving, fivefold overlap and
-  actual total-weight budget. It needs no extra graph or endpoint hypothesis.
-- PotentialAssembly98 combines the charge with a potential on every defined
-  row. completed_upper235 and conditional_upper234 retain exactly their stated
-  local, reference and potential assumptions.
-
-The namespace overlay in 98/build/support contains pinned copies of existing
-proof objects. It resolves Lean's first-directory choice for nested module
-namespaces. It is an ignored build cache, not new mathematical evidence.
-Environment, provenance, exact source ports, compiler attempts and axiom audits
-are saved. No complete clean dependency rebuild is claimed.
-
-## Process and preservation
-
-No restart of the completed 127-class batches is needed. Their old active
-marker and waiting records are historical. Check real processes before any
-restart. The original case7302 target-20 replay remains stopped after a
-900-second Check1 timeout. Preserve its 649 successful modules, CNF, proof trace,
-sources and completion record. A fresh target 18 attempt refutes share at most 17
-and must have separate files. No speed improvement has been established.
-
-Preserve unrelated changes to .gitignore and milestone 50's critical-family.json.
-Fetch contributor changes before integration, stage only reviewed task files,
-and verify the exact saved-file manifest after staging and pushing.
-
-The paper remains revision 96, by Iori Hironaka, Tommy Ma and Steven Zhan.
-Preserve all authors and hyperlink settings. The editor source is
-`D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`; the mirror is
-`E:/Snake-in-a-box/paper/snake9_research.tex`. Edit and compile the existing
-editor source when the next full revision is due at milestone 106. The earlier
-compiler failure preceded source processing; no new PDF was verified.
-Use ordinary notation and only essential, repeatedly used definitions.
+Paper revision 96, authors and hyperlink settings remain unchanged. The next
+full revision is 106. Keep the existing D: editor source and E: mirror aligned;
+compile the original open document if a revision becomes necessary.
+Fetch before committing and push only the reviewed milestone/handover files.
