@@ -1,0 +1,81 @@
+{
+  "module": "HistoryShareAssembly",
+  "exit_code": 0,
+  "timeout": false,
+  "seconds": 9.15599999999904,
+  "source_sha256": "e171db15322c24a5e9cf95e8fb873aba57542723e66622c05e4eb2b093887308",
+  "log": "logs/HistoryShareAssembly-1793633459495525000.log",
+  "log_sha256": "07fd512475e8aab6d8c98aff1032c07912f8509d521ba1919243628e9816efb4",
+  "dependencies": {
+    "milestones/84-history-exclusion-retention/data/HistoryUnique-audit.json": "231d5a585425bb6ac3de1cdd1525f14370d53faa784ee49647ed8c024b9978f0",
+    "milestones/84-history-exclusion-retention/data/HistoryWindow-audit.json": "0078c844ad8ad57517b3f800e33ac3c776848e7d2c9325b4adb9ab3f348e99ab",
+    "milestones/84-history-exclusion-retention/data/HistoryRealizations-audit.json": "d14d0ecf39116e521d67e386efd832a7f67d34d04d87157b08d03b40995a666c",
+    "milestones/94-history-share-dispatch/data/ShareCover00-audit.json": "308e05fad4e131952da83bb532a9803107c346db703b116cac7a1023f7970fbb",
+    "milestones/94-history-share-dispatch/data/ShareCover01-audit.json": "ab322454afc83af3e0c54a1bc41e8aa6821bb9a2535f38aaf43a66b6f9ed01f9",
+    "milestones/94-history-share-dispatch/data/ShareCover02-audit.json": "83314c40b2bf3e66ef5c408d33d5bec7e01db57d7685a14a4a66fb4eadf9d052",
+    "milestones/94-history-share-dispatch/data/ShareCover03-audit.json": "c2cb11c112fea3849505edf6190dacfb2ce388655ec1328d96e7ec128762e9f8",
+    "milestones/94-history-share-dispatch/data/ShareCover04-audit.json": "144e03b4344131518fb443c0520f223d4f5efb16e37f2a6c861f6d7fbca00707",
+    "milestones/94-history-share-dispatch/data/ShareCover05-audit.json": "1fe326401102e38107ded9436cf8886669e5123b2524e7118582335b90ee33d0",
+    "milestones/94-history-share-dispatch/data/ShareCover06-audit.json": "33d3359588a0b752d96953994eed09b9c11e4986957ef2a6d74fc3e267f0a156",
+    "milestones/94-history-share-dispatch/data/ShareCover07-audit.json": "c10fff99f3a848bac0325108236f4e377a46d55c0b6a289cc46a1dfb7dad138b",
+    "milestones/94-history-share-dispatch/data/ShareCover08-audit.json": "f213a5e6f8b5c25060c40d90bdd60c1dc9ff5ba4754f39ba17a3869844bc9d0b",
+    "milestones/94-history-share-dispatch/data/ShareCover09-audit.json": "86e6a5856c83f19fe497efac7442d72e01c93ea94a69bdc7da8c7f4075970f4e",
+    "milestones/94-history-share-dispatch/data/ShareCover10-audit.json": "7fd5811e79fa18c187c906c749552c4a066b12f5a791d495869417381f72df01"
+  },
+  "paths": [
+    "E:\\Snake-in-a-box\\milestones\\94-history-share-dispatch\\build",
+    "E:\\Snake-in-a-box\\milestones\\84-history-exclusion-retention\\build",
+    "E:\\Snake-in-a-box\\milestones\\79-retained-edge-guards\\build",
+    "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\numeric\\build",
+    "E:\\Snake-in-a-box\\milestones\\78-numeric-history-transition\\build",
+    "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\numeric\\build",
+    "E:\\Snake-in-a-box\\milestones\\77-direction-state-coverage\\build",
+    "E:\\Snake-in-a-box\\milestones\\77-direction-state-coverage\\history\\build",
+    "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\history\\build",
+    "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\lookup\\build",
+    "E:\\Snake-in-a-box\\milestones\\74-graph-interpretation-audit\\build",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\adapter\\build",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\coverage\\build",
+    "E:\\Snake-in-a-box\\milestones\\72-four-count-proof-closure\\critical-current\\share-proof\\build\\semantic",
+    "E:\\Snake-in-a-box\\milestones\\32-seven-count-four-screen\\build\\cc4a6ed007924637afe87021c13a85ca",
+    "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\build\\758bddcc97f84b6fbaa2c693d4931cea",
+    "E:\\Snake-in-a-box\\milestones\\20-middle-path-release\\build",
+    "E:\\Snake-in-a-box\\milestones\\14-component-construction\\build",
+    "E:\\Snake-in-a-box\\milestones\\07-window-223\\lean\\generated\\geometry\\support-ci2y7deg",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\.lake\\build\\lib\\lean",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy"
+  ],
+  "checker_sha256": "776415d5f6bf9494a64e862eacb6fb542bbaca8e3249bdfa01235ef5c3425a41",
+  "status": "PASS_HISTORY_SHARE_MODULE",
+  "olean_sha256": "1631873d5ba33185b19095c0a61f812ff84a07aeeb3c2163fce8080af9850599",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.HistoryShare94.saved_share_rule_spec",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.HistoryShare94.saved_rule_emitted_word_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.HistoryShare94.saved_rule_five_centre_share",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.HistoryShare94.saved_share_rules_length",
+      "axioms": []
+    }
+  ],
+  "scope": "Complete signature realization covers and stated dispatch only. Concrete credit premises and full global charge remain separate."
+}

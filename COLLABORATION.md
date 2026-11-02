@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 93 checkpoint](milestones/93-defined-graph-potential/README.md) adds seven Lean comparison audits. Independently checked cycle and path certificates prove joint optimality of the slope and global potential range on each of the three fixed weighted array graphs. Their integer comparisons remain 235, 235 and conditionally 234. The snapshot records 7/127 witness classes, 55/127 geometric classes and 649 successful case7302 modules. The witness and geometry batches continue; case7302 stopped after a 900-second Check1 timeout. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
+Latest continuation: [milestone 94 checkpoint](milestones/94-history-share-dispatch/README.md) checks all 55 history-share signatures with 73 Lean theorem audits. Their exact compatible sets contain 69 words: 41 signatures are unique and 14 have two variants. Actual-window recognition and generic count-cap transport are checked. Every needed local credit has an identified historical theorem; concrete instantiation in a compatible import environment and maximum-credit dispatch remain. The frozen snapshot records 31/127 witness classes and 64/127 geometry classes. Bounds remain 191 through 235, with 234 conditional; paper revision 86 is unchanged.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 

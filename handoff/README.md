@@ -13,12 +13,15 @@ Use its [checkpoint](../milestones/86-paper-revision/data/checkpoint.json) and
 paper revision and its historical handover and replay observation.
 
 The current checkpoint is
-[milestone 93](../milestones/93-defined-graph-potential/README.md), with seven
-Lean comparison audits and independent numerical cycle/path certificates for three
-fixed weighted graphs. Its [checkpoint](../milestones/93-defined-graph-potential/data/checkpoint.json)
-and [manifest](../milestones/93-defined-graph-potential/data/file-manifest.json)
-preserve exact evidence, continuing witness/geometry observations and the stopped
-case7302 timeout. The selected next task is the key-dependent credit-to-share proof.
+[milestone 94](../milestones/94-history-share-dispatch/README.md), with 73 Lean
+audits classifying all 55 history-share signatures and checking actual-window
+and count-cap dispatch. Its [checkpoint](../milestones/94-history-share-dispatch/data/checkpoint.json)
+and [manifest](../milestones/94-history-share-dispatch/data/file-manifest.json)
+preserve the exact results, local-credit provenance and continuing batch observations.
+The next task is compatible concrete credit instantiation and maximum dispatch.
+
+[Milestone 93](../milestones/93-defined-graph-potential/README.md) proves the
+joint slope/range comparison and preserves the case7302 timeout evidence.
 
 [Milestone 92](../milestones/92-full-witness-batch/README.md) supplies the checked
 source-compatible context assignment, defined graph and generated witness batch.

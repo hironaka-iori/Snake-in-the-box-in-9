@@ -1,7 +1,8 @@
 # Assignment for the next researcher
 
-Continue in `E:/Snake-in-a-box`. Read the current handover, milestone 93's
-mathematical note, checkpoint and two independent audits, then milestone 92's
+Continue in `E:/Snake-in-a-box`. Read the current handover, milestone 94's
+mathematical note, checkpoint and credit-provenance audit, then milestone 93's
+fixed-model comparison and milestone 92's
 context-assignment and defined-graph interfaces. Paper revision 86 is current.
 
 ## Mathematical target and evidence boundary
@@ -40,31 +41,47 @@ has not been established.
 
 ## Selected next mathematical task
 
-Prove the exact actual-key credit inequality
+Milestone 94 completes the compatible-word classification for all 55 history
+share signatures. All 69 variants are checked, with 41 singleton and 14 two-word
+sets. Actual emitted-window membership and generic numeric cap transport pass
+Lean. Reuse these 73 audits; do not repeat the finite cover calculations.
 
-$$
-L(d_r,q_r,c_r)\le\sum_{i=0}^4\operatorname{coreShare}(12,p,r+i+4).
-$$
+Instantiate the per-word geometric and capped premises in the current proof
+environment. The provenance map identifies all 69 geometric word theorems and
+eight stronger capped theorems. No extra local geometric lower-bound claim is
+missing from this model, but their combined interpretation is still pending.
 
-Start with complete compatible eleven-transition variants for the 55 history
-share rules. The three history exclusions are already checked; that is a
-different statement. Forty-seven of the 58 total history rules carry a
-`variants` field; a missing field does not prove uniqueness. All variants of
-each share signature need coverage and the applicable five-centre bound.
+The first concrete target is FamilyCharge67.G000.in_snake, credit 2 for the
+single-word rule with edge label 2000. Port only the needed generic support to
+the current LocalWindowShareBridge, under distinct module names, preserving
+definitions and theorem statements. Then check coordinate transfer, emitted
+word membership and the five centres. Expand only after this instance passes.
 
-Use the precise offsets in `93-defined-graph-potential/audit/weight-bridge-plan.md`.
-The actual eleven-word begins at $r-2$, share centres have offsets 6 through 10,
-and six-count position $k$ corresponds to offset $5+k$. Symbol 6 represents
-the interval $[6,21]$. Alternative credits bound the same share total and
-combine by maximum. Keep the full key $(d,q,c)$: equal endpoints or acceptance
-classes do not imply equal credits. The exact edge weight is
-$120(c\bmod6+1)+L(d,q,c)$.
+Legacy ShareFrame and current LocalWindowShareBridge independently declare
+coreShare and related names. The coreShare definition text agrees; importing
+both owners is the issue. Selected Edge007/010/011/045/057 module names also
+collide across old milestones. Preserve the old files and receipts; use uniquely
+named compatible sources and audit their full selected dependency closure.
+Reordering old paths or renaming compiled objects does not validate this port.
 
-Then check every accepted-code block of the defined graph with its own exact
-weights and potential. Raw state numbers range below 1,601,856. Missing block
-lookups reject. There are 791 compatible contexts and 127 acceptance classes.
-Use the key equality in `Assembly87.actual_saved_edge` when selecting credits;
-the endpoint-only conclusion of `defined_actual_walk` is insufficient alone.
+The eleven-word start is $s=r-2$. Its credited offsets 6 through 10 become
+$r+4,\ldots,r+8$. A six-count cap at position $k$ concerns $r+k+3$, hence
+the local ten-entry bounds-list index $4+k$. All current caps are below six;
+the saturated symbol still means $[6,21]$. Rule edge 58 has an uncapped credit 6 from
+SplitShare62.E27 on the canonical final nine directions, while its capped credit 12
+uses CountPropagation65.E058 on the eleven-word. Keep those transfers separate.
+
+After the individual bounds, define the exact contribution of each rule: zero
+without an emitted signature, geometric credit on a match, and the maximum
+with capped credit when every cap holds. Prove the maximum over all 55 rules
+is bounded by the same five-centre share sum. Keep the full history/direction/
+count key and match the pinned model's literal signatures, caps and credits.
+
+Finally combine the remaining weight components and check the entire potential
+on the graph defined from accepted keys, including any conservative extra rows.
+An external-array certificate does not transfer merely because its graph was
+used to construct the diagram. Reference-catalogue and pending local-floor
+premises remain explicit until separately discharged.
 
 ## Reuse completed proof interfaces
 
@@ -84,7 +101,7 @@ history witnesses: class 85 has two and class 89 has one, each at position 0.
 
 ## Active jobs and local-share replay
 
-The frozen milestone 93 checkpoint has 7/127 witness classes, 55/127 geometry
+The frozen milestone 94 checkpoint has 31/127 witness classes, 64/127 geometry
 classes and 649 successful case7302 modules. Counts may have advanced.
 Witness session 13482 uses the unchanged milestone 92 checker with
 `--classes all --wait-for-geometry`. Geometry session 23168 continues separately.

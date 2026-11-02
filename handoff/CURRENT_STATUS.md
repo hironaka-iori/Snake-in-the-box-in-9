@@ -1,35 +1,41 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 93 checkpoint
+## Milestone 94 checkpoint
 
-Seven new Lean audits prove rational path telescoping, the path-deficit inequality,
-the cycle slope ceiling and joint slope/range comparison, including three conditional
-numerical applications. Exact independent checks verify all 4,947,008 edge inequalities
-for each profile and 73 witness occurrences. The best fixed-model comparison fractions
-are $157625/669$, $20965613/89059$ and $137941/587$, giving integer comparisons
-235, 235 and conditionally 234. Concrete graph embedding remains computational evidence.
+All 55 history-share signatures now have checked exact compatible sets. Their
+69 canonical eleven-direction words form 41 singleton sets and 14 two-word sets.
+The 73 Lean audits cover every finite table, reverse inclusion, distinct signatures,
+actual emitted-window membership, centre offsets and numeric count-cap transport.
+The eight older representative-only rules are all unique. Counts below six retain
+their exact cap meaning; the saturated symbol is not treated as an exact count.
 
-The new [mathematical note](../milestones/93-defined-graph-potential/mathematical-note.md)
-shows that changing only the constant slope and global potential range cannot improve
-these fractions on the unchanged weighted graphs with the same boundary budget.
-The selected continuation is the exact five-centre credit theorem, especially complete
-compatible variants for the 55 history share rules. The defined graph must have its
-own full weight and potential check; external-array certificates do not transfer by name.
+The [mathematical note](../milestones/94-history-share-dispatch/mathematical-note.md)
+defines compatible configurations. The [provenance map](../milestones/94-history-share-dispatch/audit/credit-provenance.md)
+finds all 69 geometric word bounds and eight stronger capped bounds in existing
+local proofs. Concrete instantiation remains. Legacy and current share modules
+declare the same core share name, and five instance-module names collide. The
+inspected core share definition text is identical; the import ownership must be
+resolved and the chosen source closure rechecked in one environment.
 
-The frozen snapshot has 7/127 checked witness classes, 55/127 checked geometry
-classes and 649 successful case7302 modules. Witness session 13482 and geometry
-session 23168 continue. The replay in session 14427 ended at a 900-second Check1
-timeout. Its confirmed orphan compiler was stopped, with evidence preserved.
-The next replay experiment is one isolated segment, without changing the original
-source or data. Inspect actual processes before any restart.
+The selected next task is a compatible credit-2 instance for FamilyCharge67.G000,
+followed by all geometric/capped instances and the maximum-credit evaluator.
+Edge 58's uncapped credit 6 comes from a nine-direction suffix; its capped credit 12 uses
+an eleven-direction theorem. Preserve these different transfers.
 
-The interval remains $191\le a(9)\le235$ edges, with 234 conditional. The upper
-bound uses the inspected contributor theorem and saved audit; its complete independent
-rebuild remains pending. Paper revision 86, all three authors and hyperlink settings
-are unchanged. The next scheduled paper revision is milestone 96.
+The frozen snapshot has 31/127 witness classes and 64/127 geometry classes.
+Their existing sessions 13482 and 23168 continue. Case7302 remains stopped after
+its Check1 timeout, with 649 successful modules and unchanged replay sources.
+Inspect actual processes before restarting any job.
 
-Earlier entries below retain their historical scope. Use the milestone 93 checkpoint
-for the current frozen evidence and process observations.
+The maintained interval remains $191\le a(9)\le235$ edges, with 234 conditional.
+The upper bound retains contributor-proof and saved-audit evidence; a complete
+independent rebuild remains pending. Paper revision 86 and both source copies
+are unchanged. The next full paper revision is scheduled for milestone 96.
+
+Milestone 93's optimality of the three fixed-model slope/range comparisons still
+applies. Stronger graph restrictions, credits, boundary accounting or endpoint
+information are needed to improve those comparisons. Earlier entries below
+retain their historical scopes; the current frozen checkpoint is milestone 94.
 
 ## Result and evidence boundary
 
