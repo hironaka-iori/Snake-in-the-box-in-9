@@ -147,9 +147,31 @@ into the current local environment. A bounded provenance search and exact
 source pins document this distinction. The isolated builder-filter comparison
 agrees on all 23,561,280 direction/count pairs.
 
-The remaining retained-edge work is to supply those two closed catalogue
-proofs and the exact retained-array index. The conditional interface can be
-used for the latter assembly while keeping its premises explicit.
+Milestone 87 adds 27 Lean theorem audits across four modules. It combines
+all retention families, defines an executable bounded numeric predicate and
+proves that every fitting actual snake step passes it under the same two
+reference-catalogue premises. A retention cover contains every accepted key;
+exact table equality is a stronger sufficient condition. Given finite coverage
+and the two endpoint-column identities, the checked assembly assigns an
+in-bounds saved edge to every step of the complete actual state walk.
+
+Two independent executable audits verify exact accepted-code equality on all
+36,904,896 compatible candidate keys, the 4,947,008 saved rows, their ordering
+and every endpoint. All 791 compatible blocks match; all 37,084 incompatible
+blocks are empty. Full candidate keys are unique, while 206,589 endpoint pairs
+have multiplicity two. Keep edge identity as (direction, history, count code).
+The Python checks do not discharge the concrete Lean coverage or endpoint
+premises, and do not certify equality with the executable Lean predicate.
+The 791 blocks share only 127 distinct count-code sets. A shared six-way
+decision diagram with 3,981 nonterminal nodes reconstructs every set and
+block exactly, occupying 29,924 compressed bytes. Its coverage implication
+still needs a Lean proof; this is the next finite certificate target.
+The combined imports reuse hash-checked existing proof objects; no complete
+dependency rebuild is claimed.
+
+The remaining structural work is to supply the two closed reference
+catalogue proofs and a concrete Lean retention cover with endpoint-column
+identities. The universal conditional indexing argument is now supplied.
 Every three-ID credit needs every compatible eleven-direction interpretation;
 forgotten coordinate returns can produce several variants. Alternative lower
 bounds on the same five shares combine by maximum. Complete the finite
@@ -195,7 +217,7 @@ guards, interval-filter assembly, catalogue audit and a later replay observation
 Milestone 81 saves the forty-rule theorem, independent review and exact comparison.
 Milestone 84 saves the three-history theorem. Milestone 85 saves the exact reference
 table, conditional theorem, provenance review, exhaustive comparison and a later
-case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies the current shared handover versions.
+case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 87 contains the current shared handover versions and a later replay observation.
 Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.

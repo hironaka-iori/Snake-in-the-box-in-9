@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 86](milestones/86-paper-revision/README.md) revises the existing paper to include milestones 77–85. It adds six propositions and one definition, incorporates the completed 012310 share theorem and the exact graph interfaces, and explains the unsaturated-cycle obstruction. Fourteen new Lean logic checks pass; all 13 printed paths and 118,673 vertex pairs pass. The built-in compiler failed before source compilation, so no new PDF is verified. Case7302 remains active and pending. The interval remains 191 through 235, with 234 conditional; see [the current handover](handoff/README.md).
+Latest continuation: [milestone 87](milestones/87-retained-array-membership/README.md) proves executable numeric retention and conditional saved-edge indexing, with 27 new Lean theorem audits. An independent comparison matches all 36,904,896 compatible candidate keys and all 4,947,008 stored edges. The retention-cover definition isolates the remaining finite coverage certificate. Full keys must be preserved: 206,589 endpoint pairs have two edges. The two reference-catalogue premises, concrete Lean coverage, weights and potential remain separate obligations. The paper stays at revision 86; the interval remains 191 through 235, with 234 conditional.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 

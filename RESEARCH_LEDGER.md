@@ -360,3 +360,33 @@ The isolated reference-filter comparison covers all 505 direction extensions and
 The completed-local model is now clearly identified as mean483, range551; mean480 is historical. The pending012034 floor gives9259/19 with scaled range11301 and still integer235. The full496/600 comparison remains conditional234 with five local shares, closed reference imports, retained-array membership, credit interpretation and complete potential replay pending. The built-in compiler again failed before reading the TeX source because of its Windows execution environment; no updated PDF is verified. The complete original was independently read, all additions reviewed, and history-notation and converse-status issues corrected. Case7302 continues under its existing driver. The next scheduled paper revision is96; the next proof task is exact retained-array membership under the current explicit premises.
 
 The user's subsequent request encouraged explicit definitions. The revision adds the zero-bonus subgraph and the exact critical-cycle criterion: for a fixed finite graph and nonnegative edge bonuses, the minimum mean increases precisely when every old critical cycle receives positive total bonus. Seven additional Lean checks establish finite attainment, monotonicity, equality/strictness equivalences and the required nonnegative-sum facts, bringing the total to14. This criterion explains the saturation obstruction and does not itself establish234 or the validity of new local shares.
+
+
+## Milestone 87: retention covers and saved-edge indexing
+
+2 November 2026. 27 fresh Lean theorem audits combine all retention families,
+prove an executable bounded predicate true for each actual snake step and
+assemble a complete saved state walk under explicit finite coverage and
+endpoint-column premises. The two reference-catalogue premises remain.
+The retention-cover definition isolates the weaker inclusion sufficient for
+membership; exact generator equality and duplicate-free key indexing have
+generic checked interfaces. No proof identifies an edge only by its endpoints.
+
+Independent executable reconstruction agrees on 36,904,896 compatible candidate
+keys, 791 compatible blocks and every one of the 4,947,008 saved rows. All
+37,084 incompatible blocks are empty. Ordered full keys are unique, but
+206,589 endpoint pairs have multiplicity two. Every stored endpoint agrees
+with the source formula. The arrays remain computationally audited rather
+than supplied as a closed Lean finite coverage certificate. Weight validity
+and full potential replay are still separate. Source/object hashes for the
+combined inherited support are checked; that closure is reused, not rebuilt.
+
+The 791 blocks share 127 distinct count-code sets. A 3,981-node membership
+diagram reproduces every set; a second integer-digit decoder agrees on
+5,925,312 inputs. The complete compressed data is 29,924 bytes. Its Lean
+coverage implication remains the next finite proof obligation.
+
+The paper remains revision 86, with the next scheduled full revision at 96.
+The maintained interval is 191 through 235; 234 remains conditional. Case7302
+continues through its existing driver without duplicate replay. The new
+checkpoint preserves its current successful rows, logs and process observation.

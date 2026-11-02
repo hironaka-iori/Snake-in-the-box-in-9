@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, milestone 86's paper checkpoint and milestone 85's proof README. Milestone 83 preserves the active case 7302 proof sources.
+`handoff/CURRENT_STATUS.md`, milestone 87's structural proof checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -37,8 +37,20 @@ table work. The remaining two premises are AllRefuted6K235 and AllRefuted236;
 matching closed proof objects were absent from the searched local locations.
 The pinned source theorems and historical audit logs are identified in its
 provenance report. Restore or rebuild compatible closed dependencies to
-discharge those premises. In the meantime, use the checked conditional
-interface to supply the exact retained-array index. After retained-edge membership, interpret
+discharge those premises. Milestone 87 now supplies the executable numeric predicate, actual-step
+acceptance and conditional saved-edge/walk assembly. Reuse those checks. Its
+RetentionCover requires only that every accepted key is stored; exact equality
+is sufficient but stronger. Certify this concrete finite coverage and the
+endpoint-column identities in Lean. The independent Python equality has already
+passed on all 36,904,896 compatible candidate keys, but it does not certify the
+Lean predicate's finite table. Preserve full keys because 206,589 endpoint
+pairs have two edges. Use the saved membership decision diagram: 127 distinct
+count-code sets, 3,981 nonterminal nodes, all blocks independently reconstructed.
+Its complete compressed data and generator are in milestone87. Prove numeric
+acceptance implies acceptance by the assigned diagram root, then certify its
+row indexing and endpoint columns. A complementary certificate could cover
+omitted codes by proved forbidden regions. These proof designs remain open.
+After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.
 Symbol six represents the interval [6,21]. Alternative
 credits on the same five centres combine by maximum. Verify the entire

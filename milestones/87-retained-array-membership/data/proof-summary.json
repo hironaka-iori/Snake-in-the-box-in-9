@@ -1,0 +1,44 @@
+{
+  "status": "PASS_RETENTION_INTERFACES_AND_COMPUTATIONAL_COVERAGE",
+  "theorem_audits": 27,
+  "modules": [
+    {
+      "module": "RetainedEnumeration",
+      "receipt": "enumeration-audit.json",
+      "sha256": "86c891de2c15b0049dd136b06543707249749b28354a1873dea7f6acadedfd00",
+      "audits": 11
+    },
+    {
+      "module": "RetainedPredicates",
+      "receipt": "RetainedPredicates-audit.json",
+      "sha256": "f88839e990be7fb6d19846bf947cb36caa9b8d2e51793b7b5910ee5677c1c15a",
+      "audits": 4
+    },
+    {
+      "module": "NumericRetention",
+      "receipt": "NumericRetention-audit.json",
+      "sha256": "364985551bcfdec435cd08bb258c7bfb705074b996d5384a597da7e6d468e4df",
+      "audits": 10
+    },
+    {
+      "module": "ArrayAssembly",
+      "receipt": "ArrayAssembly-audit.json",
+      "sha256": "3709b4557d0b49683bb59af9f755a72be294957ba148b391e996db4236dc87cc",
+      "audits": 2
+    }
+  ],
+  "array_order_receipt_sha256": "e3096ad1e30227d992ab5c4fd926a114208455a1eb71b1c353c1ea05bb8c4cdf",
+  "retention_equality_receipt_sha256": "9605355e849a501cf77997bc005e9a974dd9b66f3ae54bdd4aecbdfe01f4026f",
+  "paper_unchanged_sha256": "eb9d5581336060b799e93b7532f59cdb485ce7f5ee39b28bd2f0fdfba4a09ec3",
+  "coverage_profile_sha256": "fce631ddf8176d293f3eadeafa56ef1eb966d12cd4b0c4aab343b3b6117d3566",
+  "reference_premises": [
+    "AllRefuted6K235",
+    "AllRefuted236"
+  ],
+  "remaining_structural_premises": [
+    "Concrete Lean RetentionCover for numericKeep and recorded full keys",
+    "Concrete source-column identity",
+    "Concrete target-column identity"
+  ],
+  "scope": "Actual numeric acceptance and conditional saved walk checked. Exact array comparison is computational; no closed Lean finite-table proof, weight interpretation, full potential replay or new global bound."
+}

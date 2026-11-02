@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 86. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 87: retention covers and saved-edge indexing](87-retained-array-membership/README.md). 27 Lean theorem audits; actual numeric acceptance and conditional whole-walk indexing; exact computational coverage of 36,904,896 compatible keys. Concrete Lean finite certificates remain open; bounds unchanged.
+
 - [Milestone 86: revised paper and precise proof scope](86-paper-revision/README.md). 130 statements, fourteen new Lean checks, all 13 printed paths rechecked; five target shares and global assembly remain pending. Editor compilation failed before source processing.
 
 - [Milestone 85: exact reference catalogue union](85-reference-catalogue-union/README.md). 103 Lean audits connect all 1,378 reference keys to the source catalogues and prove retention under their two explicit refutation premises. The exact isolated filter agrees on 23,561,280 pairs. No numerical bound changes.
