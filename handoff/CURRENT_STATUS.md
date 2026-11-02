@@ -1,42 +1,35 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 95 checkpoint
+## Milestone 96 checkpoint
 
-All 55 saved history-share rules now have their concrete local bounds supplied.
-The 69 geometric word bounds and eight stronger capped bounds pass Lean in a
-compatible environment. The maximum of applicable bounds is checked against
-the actual share sum at centres $r+4,\ldots,r+8$, assuming $r+9\le m$.
-The final assembly imports the defined graph and has no remaining per-word
-geometric premise. The exact 55-rule order, signatures, variants, caps and
-credit values agree with the pinned model rows.
+The existing paper now integrates milestones 87–95 in dependency order:
+complete history-word classification, all applicable history credits,
+conditional accepted-key graph coverage, and joint optimisation of slope
+and potential range on the fixed saved weighted graphs. The new appendix
+lists all 55 share rules, their 69 compatible words and eight stronger caps.
+No new named definition was introduced.
 
-The selected source closure contains 46 ported modules. All proof text is
-preserved except recorded import replacements and a consistent namespace
-substitution. Five declaration conflicts with existing history support are
-resolved without dropping a theorem or weakening its assumptions. The
-source closure, transport, adapters and assembly passed 923 theorem audits.
-This count includes auxiliary and extra instances retained in whole modules.
+The revision preserves all 130 previous statements, the original appendices,
+authors and hyperlink metadata. Four statements bring the total to 134.
+All 13 printed paths and 118,673 vertex pairs pass the saved source checks.
+The existing successful Lean receipts supporting the additions were rechecked
+against their exact source, object and log bytes. No new theorem or complete
+dependency rebuild is claimed for this manuscript revision.
 
-The [mathematical note](../milestones/95-history-credit-integration/mathematical-note.md)
-explains the coordinate, centre and cap transfers without extra terminology.
-Edge 58's nine-direction geometric bound and eleven-direction capped bound
-are transferred separately. Alternative credits use maximum throughout.
+The frozen checkpoint records 99/127 witness classes and 99/127 geometry
+classes. Sessions 13482 and 23168 were confirmed running during this turn.
+Inspect their current process and receipt state before any restart. Case7302
+remains stopped after its Check1 timeout, with 649 successful modules.
 
-The frozen snapshot records 86/127 witness classes and 89/127 geometry
-classes. Sessions 13482 and 23168 continue unless their live records say
-otherwise. Inspect actual processes before restarting. Case7302 remains
-stopped after its Check1 timeout, with 649 successful modules and unchanged
-replay sources.
+The maintained interval is $191\le a(9)\le235$ edges, with 234 conditional.
+The upper bound retains the inspected contributor theorem and saved audit;
+a complete independent rebuild remains pending. The completed history-credit
+theorem removes its local geometric premises, while the other weight components,
+reference catalogues, complete coverage and global potential remain separate.
 
-The maintained interval remains $191\le a(9)\le235$ edges, with 234 conditional.
-The upper bound retains contributor-proof and saved-audit evidence; a complete
-independent rebuild remains pending. The current result supplies the history
-part of the weight. Remaining weight components, retention premises, local
-exclusions and the complete defined-graph potential remain separate.
-
-Paper revision 86 and both source copies are unchanged. The next full revision
-is due at milestone 96. Preserve authors and hyperlink settings, use standard
-notation, and define only essential concepts that recur substantially.
+The built-in compiler failed before source compilation because its helper
+could not start. No updated PDF or page-layout check is verified. The exact
+diagnostic is saved in milestone 96. The next full revision is scheduled for106.
 
 ## Result and evidence boundary
 
@@ -52,17 +45,13 @@ that entire proof independently. The exact optimum remains unresolved.
 The conjecture 196 has neither a matching construction nor an optimality proof
 in this work. The proposed improvement to 234 remains conditional.
 
-The current paper is revision 86, with authors Iori Hironaka, Tommy Ma and
-Steven Zhan. Its repository and existing editor copies have SHA256
-`eb9d5581336060b799e93b7532f59cdb485ce7f5ee39b28bd2f0fdfba4a09ec3`.
-It incorporates milestones 77–85 and has 130 statement blocks: 122 retained
-unchanged, one strengthened local-share theorem and six new propositions and one definition.
-All 13 printed paths, 118,673 vertex pairs and 190 labels pass source checks.
-Fourteen new Lean checks cover the abstract bonus argument and conditional
-comparison arithmetic. The zero-bonus subgraph supplies an exact
-criterion for strict improvement of a finite minimum cycle mean. The original appendix body and all metadata are preserved.
-The built-in compiler failed before reading the source; no new PDF or layout
-check is claimed. The next full revision is scheduled for milestone 96.
+The current paper is revision 96, by Iori Hironaka, Tommy Ma and Steven Zhan.
+Its existing editor and repository sources both have SHA-256
+`7d4d974bc353ca723e4a5362b0960610d959dfe622b115b629968818c178875c`.
+The 134 statement blocks, 199 resolved labels, 55-row history table and all
+printed witnesses pass source checks. The original appendix body and all
+metadata are preserved. The compiler could not start before processing the
+source. The next scheduled full paper revision is milestone 106.
 
 ## Chosen route: charge empty squares
 

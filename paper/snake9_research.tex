@@ -36,8 +36,9 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ be the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$. We present the square census and local-count argument yielding $39m+2s_0\le9200$, where $s_0$ counts empty coordinate squares. Integer shares retain this empty-square term in local estimates. Count-independent share bounds are proved for five of the nine six-transition shapes, with four meeting the stronger target catalogue. Five-centre overlap and a boundary contribution of at least 21 singleton counts give an explicit potential criterion for the upper bound 234. The completed-local-share graph has minimum mean 483; the full target graph has mean 496 and range 600, but five local share bounds and parts of its arbitrary-snake interpretation remain pending. We construct the direction, history and count sequence, prove its retention under the completed short and history filters, and connect the reference table under two explicit catalogue premises. A cycle with all counts below six shows that bonuses confined to saturated counts cannot improve the completed graph's minimum mean. A separate one-premise comparison also falls short of 234. These obstructions identify specific limits of the current charge argument. The exact optimum and the numerical conjecture 196 remain unresolved.
+Let $a(9)$ be the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$. We present the square census and local-count argument yielding $39m+2s_0\le9200$, where $s_0$ counts empty coordinate squares. Integer shares retain this term in local estimates. We classify all compatible eleven-direction words for 55 remembered-window share rules: 41 rules have one word and 14 have two. All 69 geometric bounds and eight stronger count-conditioned bounds are supplied, and their maximum bounds the same five-centre share sum for every fitting snake window. The actual direction, history and count sequence gives a walk in a graph defined from accepted keys, subject to explicit finite-coverage and reference-catalogue premises. The completed-local-share comparison has mean 483 and range 551; the full target comparison has mean 496 and range 600 and would imply 234. A cycle and a tight open path prove that three current comparisons are optimal jointly in constant slope and global potential range on their fixed weighted graphs. Further improvement therefore requires stronger local information, a changed graph, or stronger boundary accounting. Five target share bounds and the remaining global proof obligations are unresolved. No construction above 191 or proof of the numerical conjecture 196 is obtained.
 \end{abstract}
+
 \clearpage
 \setcounter{tocdepth}{1}
 \tableofcontents
@@ -82,7 +83,7 @@ The maximum edge length of an induced path in $\Q_9$ satisfies
 \end{theorem}
 The lower bound is verified from the explicit transition sequence in Theorem~\ref{thm:lower}. The proof of the upper bound has three steps. First, count coordinate squares exactly and establish positive singleton counts, with a stronger contribution at each endpoint. Second, exclude a finite family of local configurations and verify an integer potential on every remaining transition. Third, sum the potential inequalities and substitute the resulting count estimate into the square identity. Section~\ref{sec:upper-proof} gives this argument directly for 235.
 
-The argument proceeds from local geometry to global accounting. Sections~\ref{sec:empty-packing}--\ref{sec:countfree-catalogue} develop integer shares, forced-absence estimates and local count restrictions. Section~\ref{sec:common-budget} states the overlap capacities. Section~\ref{sec:long-models} derives the strengthened boundary estimate and a precise sufficient condition for 234. Section~\ref{sec:current-model} defines the current finite model, compares completed and pending local evidence, constructs the actual state sequence, proves the stated filter implications, and explains the short-walk and unsaturated-cycle obstructions. Section~\ref{sec:closure} lists the remaining mathematical implications. The conjecture 196 and construction criteria follow. Historical finite models and all explicit witness sequences are retained in the appendices.
+The argument proceeds from local geometry to global accounting. Sections~\ref{sec:empty-packing}--\ref{sec:countfree-catalogue} develop integer shares, forced-absence estimates and local count restrictions. Section~\ref{sec:common-budget} states the overlap capacities. Section~\ref{sec:long-models} derives the strengthened boundary estimate and a precise sufficient condition for 234. Section~\ref{sec:current-model} constructs the actual state sequence, proves the completed filter and history-credit implications, and states the remaining graph-coverage premises. It then compares the finite weighted graphs and proves the limits of changing their slope and potential range. Section~\ref{sec:closure} lists the remaining mathematical implications. The conjecture 196 and construction criteria follow. Historical finite models and all explicit witness sequences are retained in the appendices.
 
 \begin{center}
 \begin{tabular}{p{0.27\textwidth}p{0.62\textwidth}}
@@ -93,7 +94,7 @@ $a(9)\le235$ & Archived contributor proof using 1287 local keys and a potential;
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
 Conditional bound 234 & Mean 496, range 600 and boundary contribution 21; five local shares and the remaining graph proof are pending.\\
-Graph interfaces and obstructions & Checked state sequence and filter implications; exact finite cycles constrain further bonuses.\\
+History credits and graph interfaces & All 55 history-share rules are justified; finite graph coverage and the global potential retain explicit obligations.\\
 $a(9)=196$ & A numerical extrapolation requiring both a construction and a next-length exclusion.\\
 \bottomrule
 \end{tabular}
@@ -1067,7 +1068,7 @@ $012345$ & 16 & Pending; the weaker bound 12 is checked\\
 \bottomrule
 \end{tabular}
 \end{center}
-All nine target formulas have independently checked native Boolean refutations. Five still lack a completed Lean chain through the contradiction and geometric interpretation. The $012310$ target now has a completed contradiction replay, arbitrary-coordinate interpretation and reversal. The conditional catalogue therefore retains precisely the five pending targets shown above. The classification and conditional combination are checked separately from those premises. For $012034$, clause interpretation has passed and contradiction replay is in progress; its target remains unproved~\cite{shareclosurearchive,targetsharearchive}.
+All nine target formulas have independently checked native Boolean refutations. Five still lack a completed Lean chain through the contradiction and geometric interpretation. The $012310$ target now has a completed contradiction replay, arbitrary-coordinate interpretation and reversal. The conditional catalogue therefore retains precisely the five pending targets shown above. The classification and conditional combination are checked separately from those premises. For $012034$, clause interpretation has passed, while the contradiction replay and target share theorem remain incomplete~\cite{shareclosurearchive,targetsharearchive}.
 
 Theorem~\ref{thm:share120} and the count-independent bounds may apply to the same five centres. Their maximum is a valid lower bound for $H$. Adding such alternative bounds would count the same share more than once. The complete models below use the maximum rule throughout.
 
@@ -1260,7 +1261,7 @@ A state records eight canonically relabelled directions, five truncated singleto
 \]
 and the target counts are $(b_{r+4},\ldots,b_{r+8})$. The entering count is $b_{r+8}$, and every credited share rule concerns the same centres $x_{r+4},\ldots,x_{r+8}$. A six-transition rule uses the directions beginning at $r+3$. An eleven-transition rule recognized from three consecutive window labels begins at $r-2$.
 
-The reference exclusions contain 1378 distinct keys from the contributor count catalogues. Further recorded proofs supply forty short-count restrictions, ten interval-count exclusions, three history exclusions, the geometric share rules and count-conditioned shares including Theorem~\ref{thm:share120}. The count-filter implications are now connected to actual windows; the reference family retains two explicit closed catalogue premises in the current checking environment. Exact retained-transition membership and the interpretation of every credited share remain separate obligations~\cite{currentarchive,interfacearchive}.
+The reference exclusions contain 1378 distinct keys from the contributor count catalogues. Further recorded proofs supply forty short-count restrictions, ten interval-count exclusions, three history exclusions, the geometric share rules and count-conditioned shares including Theorem~\ref{thm:share120}. The count-filter implications are now connected to actual windows; the reference family retains two explicit closed catalogue premises in the current checking environment. The 55 remembered-window share rules now have complete geometric interpretation. Finite coverage of the accepted-key graph and the remaining weight components are addressed separately below~\cite{currentarchive,interfacearchive,historycreditarchive}.
 
 A symbol $b=6$ always means $6\le\alpha\le21$ at an internal vertex. For $k<6$,
 \[
@@ -1292,7 +1293,7 @@ The empty candidate satisfies both conditions. A nonempty suffix $t$ of $wa$ end
 
 Starting with the empty word and repeatedly applying the lemma proves that the stored history is always the longest listed suffix of the identifiers already read. A listed three-symbol signature is emitted when it is a suffix of the stored history followed by the new identifier. Each signature's two-symbol prefix belongs to the dictionary. If a signature is emitted, the stored history is a suffix of the actual past, so that signature is the last three actual identifiers. Conversely, if a listed signature is the actual last three identifiers, its two-symbol prefix is a listed suffix of the past and lies inside the stored longest suffix; the signature is therefore emitted. No emission is possible before three identifiers have been read. The history invariant, soundness of emission, absence of early emission, and the exact 75-entry dictionary checks have passed Lean checks~\cite{historyarchive}. The converse follows from maximality and prefix membership. The resulting exact equivalence and its numeric-history interpretation have also passed Lean checks~\cite{interfacearchive}.
 
-Three canonical identifiers may correspond to several eleven-direction words, because a coordinate forgotten by the retained suffix can later return. The explicit ambiguity in Appendix~\ref{app:earlier-long-models} demonstrates this. For each recognized signature, the share assigned is the minimum of the certified bounds over all compatible words. Every compatible word must be covered. The longest-suffix lemma resolves recognition of the identifier history; it does not replace that geometric coverage argument.
+Three canonical identifiers may correspond to several eleven-direction words, because a coordinate forgotten by the retained suffix can later return. The explicit ambiguity in Appendix~\ref{app:earlier-long-models} demonstrates this. A bound assigned to a recognized signature must hold for every compatible word. Proposition~\ref{prop:history-share-classification} gives the complete lists, and Theorem~\ref{thm:history-share-complete} supplies every bound used by the 55 share rules. The longest-suffix lemma resolves recognition of the identifier history; it does not replace that geometric coverage argument.
 
 \subsection{Actual state sequences and exclusion filters}\label{sec:state-filter-bridge}
 The finite comparison requires a consistent sequence of states for every
@@ -1476,21 +1477,147 @@ union's entries and indices establishes their coverage; it does not
 discharge either catalogue-refutation premise.
 \end{proof}
 
-These results connect the stated filters to arbitrary snakes. Completing
-the charge-model proof still requires identification of each actual step
-with its exact retained-array entry and justification of every assigned
-credit. A general three-window signature may admit several compatible
-eleven-direction words; all must support the assigned bound on
-$\sum_{i=4}^{8}\sigma_{12}(x_{r+i})$. Bounds on those same five centres
-combine by maximum. The complete potential and its range must then be
-checked and summed along this actual walk. The present interface results
-alone yield no improvement to the upper bound 235. The source catalogues,
-finite comparisons and checked state and filter proofs are preserved in the
-interface archive~\cite{interfacearchive}. The union cardinalities are checked
-by exact source-table comparison; membership of every chosen key and the
-conditional retention argument have Lean proofs. Historical closed catalogue
-proofs and their saved audits are available, while their complete compatible
-dependencies have not been imported into the current checking environment.
+\subsection{Complete interpretation of the remembered share rules}\label{sec:history-share-complete}
+The overlap signature $\mathcal S(w)$ records the three canonical nine-direction
+slices of an eleven-direction word $w$. Appendix~\ref{app:history-share-table}
+lists the compatible words and bounds for every one of the 55 share signatures.
+Each row is one signature; when two words occur in a row, their three canonical
+slices agree. Their actual coordinate labels need not agree before normalization.
+
+\begin{proposition}[Complete compatible-word classification]\label{prop:history-share-classification}
+The 55 distinct share signatures have exactly the compatible canonical words
+listed in Appendix~\ref{app:history-share-table}. There are 69 words in total:
+41 signatures have one word and 14 have two. If transition $r$ emits a listed
+signature and $r+9\le m$, then $r\ge2$ and the canonical eleven-direction word
+beginning at $r-2$ belongs to its listed row.
+\end{proposition}
+\begin{proof}
+Fix one signature. Its first entry fixes the first nine letters of a compatible
+canonical eleven-direction word: first-occurrence relabelling does not change
+when restricted to a prefix. The remaining two letters lie in
+$\{0,\ldots,8\}$, giving 81 possibilities. Retain precisely those possibilities
+that are canonical, describe an induced path, and have the prescribed second
+and third canonical slices. The parity tests in Section~\ref{sec:upper-proof}
+decide the induced-path condition. The resulting lists are the displayed rows.
+
+Finite certificates check both inclusions: every possible compatible word is
+listed, and every listed word meets all the conditions. They also check that
+the 55 signatures are distinct and that the singleton and two-word counts
+are 41 and 14. These finite statements have passed Lean. An independent
+enumeration of all 11162 canonical induced eleven-direction words gives the
+same lists~\cite{historycreditarchive}.
+
+The history invariant identifies an emitted signature with the last three
+actual nine-direction identifiers and excludes emission before $r=2$.
+Their overlapping slices are those of the actual eleven-direction word
+beginning at $r-2$. The finite classification therefore applies to that word.
+\end{proof}
+
+\begin{theorem}[Complete history-share bound]\label{thm:history-share-complete}
+Suppose $r+9\le m$. Every applicable entry in
+Appendix~\ref{app:history-share-table}, recognized by its overlap signature,
+is a lower bound for
+\[
+\sum_{j=4}^{8}\sigma_{12}(x_{r+j}).
+\]
+The stronger entry in a row applies only when all its listed count caps hold.
+The maximum of all applicable entries and zero is bounded by the same sum.
+These conclusions require no additional geometric hypothesis on the snake.
+\end{theorem}
+\begin{proof}
+For an emitted signature, put $s=r-2$. The preceding proposition places the
+actual canonical eleven-direction word in its displayed row. The local
+inequalities for every word in that row have been checked using the
+forced-absence, neighbour-choice and count-saturation arguments of
+Section~\ref{sec:forced-charge}. This supplies 69 geometric bounds and eight
+stronger bounds with count caps. The first eight rows each have a unique
+compatible word. Every row with two words has a separate geometric proof
+for each word; a representative alone is never used to cover both.
+
+Translation and coordinate permutation preserve inducedness, singleton
+counts and integer shares. A local theorem charging offsets $6,\ldots,10$
+from $s$ therefore charges exactly offsets $4,\ldots,8$ from $r$.
+For the word $01234032563$, its geometric bound 6 comes from the canonical
+final nine directions, $012310451$, beginning at $s+2$. That theorem charges
+offsets $4,\ldots,8$ from $s+2$, hence the same five centres. Its stronger
+bound 12 uses the full eleven-direction word and the displayed cap.
+
+A cap on six-count position $k$ concerns $\alpha_{r+k+3}=
+\alpha_{s+k+5}$. Every displayed cap is strictly below six. Therefore its
+test on the truncated symbol implies the identical cap on the actual count.
+The other internal positions retain the universal upper bound 21. The
+coordinate transfers, cap transfers, all individual bounds and their full
+combination have passed Lean in one compatible proof environment
+~\cite{historycreditarchive}.
+
+Every applicable bound concerns the same nonnegative sum, so their maximum
+with zero is also bounded by that sum. When no signature is emitted, the
+contribution is zero. This also covers $r=0,1$. No addition of overlapping
+alternative credits is used.
+\end{proof}
+
+This theorem supplies the remembered-window component of the edge credit.
+It does not identify all other credit components or verify the full graph
+potential. Those are separate requirements of the global argument.
+
+\subsection{A graph defined from accepted keys}\label{sec:defined-graph}
+An edge must retain its full key: a nine-direction identifier, the preceding
+history, and the six-count code. Different keys can have equal source and
+target states and different weights. Independent reconstruction of the saved
+graph found 4740419 distinct endpoint pairs among 4947008 rows; 206589 pairs
+each have two rows. Endpoint agreement alone is therefore insufficient to
+identify an edge weight~\cite{graphcoveragearchive}.
+
+The accepted count codes are represented by a finite decision diagram that
+reads six digits in $\{1,\ldots,6\}$. The 791 compatible direction/history
+pairs use 127 distinct accepted-code sets. The graph considered here contains
+every bounded full key accepted by its assigned diagram root, with both
+endpoints computed from that key. This specifies the graph directly, without
+assuming equality to an external edge array.
+
+\begin{proposition}[Conditional coverage of actual state walks]\label{prop:defined-graph-walk}
+Assume $\mathsf C_{235}$ and $\mathsf C_{236}$. Suppose that, for every
+compatible direction/history pair, each six-count code passing the stated
+numeric exclusion tests is accepted by its assigned diagram root. Then every
+$m$-edge snake with $m\ge9$ gives a walk of $m-8$ edges in the graph just
+described. Its successive vertices are the actual states of
+Proposition~\ref{prop:actual-state-sequence}.
+\end{proposition}
+\begin{proof}
+The actual candidate key at each fitting window has bounded direction,
+history and count indices. Propositions~\ref{prop:local-filter-retention},
+\ref{prop:history-exclusion-retention} and
+\ref{prop:reference-union-retention} show that it passes the numeric tests.
+The finite-coverage premise therefore places the full key among the
+diagram-accepted keys. Exhaustive enumeration of those keys includes its
+row. The row's endpoints are computed from the same direction slices,
+history update and count shift used in the actual state sequence, so they
+are the actual source and target states. Consecutive rows share their
+intermediate state. There are $m-8$ fitting windows.
+\end{proof}
+
+The finite-coverage premise can be established by partitioning the six-count
+domain. Each part is either accepted by the diagram or contained in a product
+of six integer intervals whose vectors all trigger a proved exclusion.
+The latter alternative cannot contain a code passing the numeric tests.
+Shared interval products permit one geometric partition to serve several
+contexts, while each context still needs its own justified exclusions.
+The general partition argument and context transfer have passed Lean.
+The assignment of all $505\cdot75=37875$ bounded direction/history pairs,
+including the three history-dependent overrides, is also checked. The
+complete family of concrete partition and exclusion certificates remains
+an explicit premise until its final assembly is checked
+~\cite{graphcoveragearchive}.
+
+The walk and endpoint statements are checked under the displayed premises.
+Their endpoint formulation alone does not identify the chosen row's
+key-dependent credit. A complete weight argument must retain that full key
+and apply Theorem~\ref{thm:history-share-complete} together with the other
+credit components. The potential must be checked on every edge of this
+defined graph, including any additional edges admitted by a conservative
+coverage certificate. A potential verified on the saved array does not
+transfer merely because the diagram was constructed from that array.
+
 
 \subsection{Completed local bounds and conditional comparisons}
 For each saved weighted graph, a potential is checked on every transition and
@@ -1539,6 +1666,84 @@ Thus completing that local theorem is useful proof progress, while additional
 charge or a change to the graph or boundary argument is required to reach
 234. The rational arithmetic is checked separately from the finite graph and
 the pending local theorem~\cite{targetsharearchive}.
+
+\subsection{Joint limits of changing the slope and potential range}\label{sec:joint-optimality}
+The comparison in~\eqref{eq:improved-potential} depends on both the constant
+slope and the global range of the potential. A smaller slope might permit
+a smaller range. The following proposition rules out an improvement from
+that tradeoff for each of the three current weighted graphs.
+
+\begin{proposition}[Joint optimality for a fixed weighted graph]\label{prop:joint-potential-optimality}
+Let a finite directed graph have rational edge weights. Suppose a potential
+satisfies
+\[
+M+\pi(v)\le w(u,v)+\pi(u)
+\]
+on every edge and has range at most $R$, where $4200+M>0$. Suppose the graph
+contains a nonempty cycle of mean $M$ and an open walk of $k$ edges and total
+weight $C$, with
+\[
+R=kM-C,\qquad
+k+8\le\frac{1098960+8M+R}{4200+M}.
+\]
+For any other rational slope $\mu$ and potential with range at most $\rho$
+satisfying the same edge inequalities, with $4200+\mu>0$,
+\[
+\frac{1098960+8\mu+\rho}{4200+\mu}
+\ge\frac{1098960+8M+R}{4200+M}.
+\]
+Thus changing only the slope and global range cannot sharpen this comparison.
+\end{proposition}
+\begin{proof}
+Summing the competing inequalities around the cycle gives $\mu\le M$.
+Summing along the open walk gives $k\mu-C\le\rho$. Write $B_*$ for the
+right-hand comparison fraction in the conclusion. Since $R=kM-C$,
+\[
+\begin{aligned}
+1098960+8\mu+\rho-B_*(4200+\mu)
+&\ge1098960-C+(k+8)\mu-B_*(4200+\mu)\\
+&=(k+8-B_*)(\mu-M)\ge0.
+\end{aligned}
+\]
+Both factors in the last product are nonpositive. Division by
+$4200+\mu>0$ proves the assertion. The baseline potential attains the
+displayed comparison. Path telescoping, the cycle slope bound and this
+rational comparison have passed Lean~\cite{potentialcomparisonarchive}.
+\end{proof}
+
+The three current certificates have the following open-walk data. The means
+and ranges use the unscaled weight units of the preceding comparison table.
+\begin{center}\small
+\begin{tabular}{l r r r r}
+\toprule
+Profile & $M$ & $k$ & $C$ & $R=kM-C$\\\midrule
+Completed local floors & $483$ & 9 & 3796 & $551$\\
+Additional proposed $012034$ floor & $9259/19$ & 31 & 14512 & $11301/19$\\
+Full target floors & $496$ & 7 & 2872 & $600$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Their cycles have lengths 4, 19 and 3 and total weights 1932, 9259 and 1488.
+The short-walk hypothesis is equivalent to
+$1098960-C-4200(k+8)\ge0$; its values are respectively 1023764, 920648 and
+1033088. All three comparisons are therefore optimal under the proposition's
+fixed-graph, fixed-weight and fixed-boundary hypotheses. Their best integer
+comparisons remain 235, 235 and 234.
+
+Exact integer calculations verify all 4947008 potential inequalities for
+each pinned array graph. Independent checks verify the cycle and open-walk
+keys, endpoints, weights and potential differences. The paths run from a
+maximum potential value to a minimum along tight edges. The witness keys
+are also accepted by the saved decision diagram. The concrete witness and
+potential tables have not been fully embedded in Lean; the checked numerical
+applications retain their cycle and path premises. In particular, acceptance
+of these witnesses does not establish potential feasibility on every row of
+the graph in Section~\ref{sec:defined-graph}.
+
+This result directs further optimisation toward stronger local inequalities,
+additional restrictions valid for actual snakes, a stronger boundary sum,
+or a potential estimate depending on the actual initial and final states.
+It places no restriction on such changes to the argument.
 
 \subsection{A short-walk obstruction to weakening the catalogue}\label{sec:short-walk}
 The need for the pending local shares can be tested beyond a single fixed potential. The following argument applies to any constant slope and any potential with a global range bound.
@@ -1712,41 +1917,41 @@ the $012034$ proof alone cannot settle the stronger bound.
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 The maintained interval is $191\le a(9)\le235$. Corollary~\ref{cor:eighteen-empty}
 shows that eighteen empty squares would exclude a hypothetical 235-edge snake.
-The complete target charge graph meets a sufficient numerical criterion for
-that exclusion, subject to the following remaining proof obligations.
+The target charge graph meets a sufficient numerical criterion for that
+exclusion. Its remaining proof obligations are now more specific.
 \begin{enumerate}
 \item Complete the five count-independent targets for $012032$, $012034$,
-$012301$, $012340$ and $012345$, including their geometric interpretation and
+$012301$, $012340$ and $012345$, including geometric interpretation and
 reversal. The four completed target floors and the weaker distinct-direction
 floor 12 remain available independently.
 \item Supply the two closed reference-catalogue proofs in the current checking
-environment and connect the already constructed direction, history and count
-sequence to the exact retained transitions of the saved graph. Direction
-coverage, numeric state updates, all ten interval filters, all forty short
-filters and all three history exclusions are checked. The exact reference
-union has a checked retention theorem with the two catalogue premises explicit.
-\item Interpret every credited inequality for the actual snake. A three-window
-signature can have several compatible eleven-direction realizations; every
-one must be covered. All alternative lower bounds concern the same five
-centres and must be combined by taking their maximum.
-\item Check the entire finite potential and its range in Lean, telescope along
-the retained walk, and apply Proposition~\ref{prop:boundary21}. The independent
-integer check of all 4,947,008 saved edges supplies finite-model evidence;
-it does not complete this arbitrary-snake dependency chain.
+environment and complete the finite diagram-coverage certificates. The actual
+state sequence, ten interval filters, forty short filters, three history
+exclusions and complete context assignment are checked. Under the remaining
+premises, Proposition~\ref{prop:defined-graph-walk} supplies an actual state walk.
+\item Preserve each selected edge's full key and justify the maximum of all
+credit components for that key. The 55 history-share rules, all their
+compatible words and their maximum are completed in
+Theorem~\ref{thm:history-share-complete}. The other share components and their
+combination still need to be connected to the same five actual centres.
+\item Check the entire potential and its range on the defined graph in Lean,
+telescope along the actual walk, and apply Proposition~\ref{prop:boundary21}.
+The integer check of all 4947008 saved array edges supplies finite-model
+evidence; it does not complete this arbitrary-snake dependency chain.
 \end{enumerate}
 
-The short-walk obstruction applies to the six specified catalogue weakenings,
-including removal of the now-proved $012310$ floor. The five other tested
-weakenings remain relevant to the pending targets. The unsaturated-cycle
-obstruction further shows that bonuses confined to counts of six cannot
-improve the completed-share mean. These results restrict changes to the
-present graph and budget. Additional geometric information or stronger
-boundary estimates remain possible ways to improve the argument.
+Proposition~\ref{prop:joint-potential-optimality} shows that reoptimising only
+the slope and global potential range cannot improve the three fixed
+comparisons. The short-walk obstruction covers six specified weakenings of
+the target catalogue. The unsaturated-cycle obstruction excludes improvements
+based solely on additional charge at count symbol six. Stronger geometric
+restrictions, improved boundary accounting or information about actual initial
+and final states can change these hypotheses and remain possible routes.
 
 The contributor's separate seven-centre count-only proposal also targets 234.
-Its latest inspected production record retains unfinished local certificates
-and transition checks~\cite{conditional234archive}. It is distinct from the
-present five-centre share model and is not used to strengthen the main theorem.
+Its inspected production record retains unfinished local certificates and
+transition checks~\cite{conditional234archive}. It is distinct from the present
+five-centre share model and is not used to strengthen the main theorem.
 
 
 \subsection{Sufficient charge inequalities}
@@ -1955,44 +2160,48 @@ The explicit compatible paths of lengths 96 and 94 in Appendix~\ref{app:joint-se
 \section{Verification scope and remaining problem}\label{sec:verification}
 The global conclusion remains $191\le a(9)\le235$. The lower bound follows
 from the explicit witness. The upper bound uses the square identity, endpoint
-estimates, 1,287 catalogue keys, a potential checked on every permitted
-transition, and the path summation. The completed contributor theorem has a
-successful archived dependency audit~\cite{bound235archive}. Its assumptions
-were discharged in that development. The final theorem source and saved audit
-were reviewed, and its potential was independently reconstructed. A fresh
-independent rebuild of the entire 235 dependency closure remains pending.
+estimates, 1287 catalogue keys, a finite potential and the path summation.
+The completed contributor theorem has a successful archived dependency audit
+~\cite{bound235archive}; its assumptions were discharged in that development.
+The final source and saved audit were reviewed and the potential independently
+reconstructed. A complete independent rebuild remains pending.
 
-The count-independent share theorem now covers five shapes, of which four
-meet the stronger nine-shape target. Its geometric interpretation and reversal
-are part of the completed local checks. Five target floors remain pending.
-The ongoing $012034$ replay is excluded from the completed catalogue until
-its contradiction, geometric application and final audit are all checked.
-The existing weaker bound for six distinct directions does not prove the
-stronger target for that shape.
+The count-independent share theorem covers five shapes, four meeting the
+stronger nine-shape target. Five target floors remain incomplete. The
+$012034$ contradiction replay has no completed final audit and contributes
+no new unconditional share theorem. The weaker bound for six distinct
+directions does not prove its stronger target.
 
-The direction, history and truncated-count state sequence is checked for every
-actual snake window. The ten interval filters, forty short filters and three
-history exclusions preserve that sequence. The 1,378-key reference table and
-its conditional retention theorem are also checked; its two closed catalogue
-premises remain explicit in this environment. Exact retained-array membership,
-the interpretation of every credit over all compatible eleven-direction
-realizations, and the complete potential replay remain unfinished. These are
-distinct requirements of the proposed global charge argument.
+The 55 history-share signatures now have exact compatible sets and complete
+local bounds. All 69 geometric inequalities and eight stronger capped
+inequalities are connected to actual windows; their maximum bounds the same
+five-centre share sum. The coordinate, cap and suffix transfers and the full
+combination have passed Lean. These results coexist with the checked graph
+interfaces. They do not discharge the other weight components or the global
+potential.
 
-Finite graph minima use an attaining cycle and a potential checked on every
-saved edge. The completed-local-share comparison has mean 483 and range 551;
-the full proposed comparison has mean 496 and range 600. The latter meets the
-234 criterion with margin 32 at length 235. The six short-walk witnesses and
-the unsaturated cycle were checked directly against the saved arrays, while
-their obstruction arguments have separate Lean checks. Neither type of cycle
-is claimed to arise in a complete snake. Complete paths establish the stated
-sharpness claims; local forests establish only feasible local assignments.
+The actual direction, history and count sequence passes the completed filters.
+The reference retention theorem retains two catalogue premises. The complete
+finite context assignment is checked, and the diagram-defined graph contains
+the actual state walk under the remaining coverage premise. Individual
+coverage certificates do not establish that entire premise until all required
+classes are assembled. Endpoint equality alone also does not identify a
+key-dependent weight when parallel rows have the same endpoints.
 
-No construction above 191 or matching optimality theorem has been obtained in
-this work. The conjecture 196 is independent of the proved bounds and does
-not enter their arguments. The explicit local and global requirements in
-Section~\ref{sec:closure} determine whether the conditional improvement to
-234 can be completed.
+For the pinned finite array graphs, exact potential checks and attaining
+cycles give the stated means. Tight open paths additionally prove that the
+three current slope/range comparisons are jointly optimal. The general
+rational arguments are Lean-checked; concrete graph witnesses and full
+potential tables retain their separate computational evidence. The full
+target comparison meets the 234 criterion with margin 32 at length 235,
+subject to the remaining local and global assumptions.
+
+No construction above 191 or matching optimality theorem has been obtained.
+The conjecture 196 is an extrapolation and enters none of the proved bounds.
+Section~\ref{sec:closure} states the remaining conditions for 234 and the
+changes that could strengthen the argument further. Complete snakes establish
+the stated sharpness examples; local forests and abstract graph cycles do
+not supply additional snake constructions.
 
 
 \appendix
@@ -3894,6 +4103,88 @@ For a displayed endpoint blocker $i$ in coordinate $k$, compute $w=v_L\oplus2^k$
 
 This procedure requires $\binom{L+1}{2}$ pair tests for a single witness. It verifies the explicit constructions and counterexamples; it does not test all possible snakes and therefore supplies no global upper bound.
 
+\section{Complete history-share catalogue}\label{app:history-share-table}
+Each row below represents one overlap signature $\mathcal S(w)$. The listed
+words are all its compatible canonical eleven-direction words. A word begins
+at $x_s$ and the bounds concern $\sum_{j=6}^{10}\sigma_{12}(x_{s+j})$.
+The geometric bound has no count hypothesis. A stronger bound applies under
+all listed caps; a dash means that no additional capped bound is needed.
+For a signature emitted at transition $r$, one has $s=r-2$. All caps are below
+six, so testing them on truncated counts gives the same actual-count caps.
+
+\begingroup\small
+\begin{longtable}{r p{0.28\textwidth} p{0.33\textwidth} r r}
+\caption{All compatible words and credits for the 55 history-share rules.}\label{tab:history-share-catalogue}\\
+\toprule
+Row & Canonical words & Additional caps & Geometric & Stronger\\\midrule
+\endfirsthead
+\toprule
+Row & Canonical words & Additional caps & Geometric & Stronger\\\midrule
+\endhead
+\bottomrule\endfoot
+1 & \(\mathtt{01203420150}\) & \(\alpha_{s+6}\le2\)\newline \(\alpha_{s+7}\le2\) & 18 & 19\\
+2 & \(\mathtt{01203450310}\) & \(\alpha_{s+5}\le2\) & 32 & 36\\
+3 & \(\mathtt{01203450320}\) & \(\alpha_{s+5}\le2\) & 11 & 15\\
+4 & \(\mathtt{01231043125}\) & \(\alpha_{s+7}\le2\)\newline \(\alpha_{s+8}\le2\) & 10 & 13\\
+5 & \(\mathtt{01231043152}\) & \(\alpha_{s+7}\le2\)\newline \(\alpha_{s+8}\le2\) & 19 & 26\\
+6 & \(\mathtt{01234032513}\) & \(\alpha_{s+8}\le2\) & 22 & 26\\
+7 & \(\mathtt{01234032563}\) & \(\alpha_{s+8}\le2\) & 6 & 12\\
+8 & \(\mathtt{01234215036}\) & \(\alpha_{s+5}\le1\)\newline \(\alpha_{s+8}\le5\)\newline \(\alpha_{s+9}\le1\) & 4 & 5\\
+9 & \(\mathtt{01203245142}\) & None & 2 & --\\
+10 & \(\mathtt{01203245230}\) & None & 4 & --\\
+11 & \(\mathtt{01203245231}\)\newline \(\mathtt{01203245236}\) & None & 4 & --\\
+12 & \(\mathtt{01203245642}\) & None & 2 & --\\
+13 & \(\mathtt{01203402510}\) & None & 20 & --\\
+14 & \(\mathtt{01203402501}\)\newline \(\mathtt{01203402506}\) & None & 6 & --\\
+15 & \(\mathtt{01230140352}\) & None & 9 & --\\
+16 & \(\mathtt{01230140356}\) & None & 9 & --\\
+17 & \(\mathtt{01230145102}\) & None & 2 & --\\
+18 & \(\mathtt{01230145103}\) & None & 2 & --\\
+19 & \(\mathtt{01230145106}\) & None & 2 & --\\
+20 & \(\mathtt{01230432512}\) & None & 13 & --\\
+21 & \(\mathtt{01230450312}\) & None & 8 & --\\
+22 & \(\mathtt{01230450310}\) & None & 16 & --\\
+23 & \(\mathtt{01230450314}\) & None & 12 & --\\
+24 & \(\mathtt{01230450316}\) & None & 16 & --\\
+25 & \(\mathtt{01231042532}\) & None & 5 & --\\
+26 & \(\mathtt{01231043156}\) & None & 13 & --\\
+27 & \(\mathtt{01231450416}\) & None & 2 & --\\
+28 & \(\mathtt{01231451321}\) & None & 5 & --\\
+29 & \(\mathtt{01231451301}\)\newline \(\mathtt{01231451361}\) & None & 4 & --\\
+30 & \(\mathtt{01231456410}\)\newline \(\mathtt{01231456417}\) & None & 2 & --\\
+31 & \(\mathtt{01234051042}\) & None & 2 & --\\
+32 & \(\mathtt{01234051046}\) & None & 2 & --\\
+33 & \(\mathtt{01234054316}\) & None & 7 & --\\
+34 & \(\mathtt{01234125140}\)\newline \(\mathtt{01234125146}\) & None & 16 & --\\
+35 & \(\mathtt{01234125621}\) & None & 4 & --\\
+36 & \(\mathtt{01234215046}\) & None & 4 & --\\
+37 & \(\mathtt{01234215240}\)\newline \(\mathtt{01234215246}\) & None & 7 & --\\
+38 & \(\mathtt{01234215205}\)\newline \(\mathtt{01234215265}\) & None & 6 & --\\
+39 & \(\mathtt{01234215420}\)\newline \(\mathtt{01234215426}\) & None & 14 & --\\
+40 & \(\mathtt{01234215630}\)\newline \(\mathtt{01234215637}\) & None & 5 & --\\
+41 & \(\mathtt{01234215640}\)\newline \(\mathtt{01234215647}\) & None & 5 & --\\
+42 & \(\mathtt{01234504316}\) & None & 7 & --\\
+43 & \(\mathtt{01234516542}\) & None & 2 & --\\
+44 & \(\mathtt{01234516540}\)\newline \(\mathtt{01234516547}\) & None & 2 & --\\
+45 & \(\mathtt{01234523625}\) & None & 15 & --\\
+46 & \(\mathtt{01234532016}\) & None & 10 & --\\
+47 & \(\mathtt{01234532046}\) & None & 4 & --\\
+48 & \(\mathtt{01234532613}\) & None & 20 & --\\
+49 & \(\mathtt{01234532614}\) & None & 10 & --\\
+50 & \(\mathtt{01234532615}\) & None & 10 & --\\
+51 & \(\mathtt{01234532610}\)\newline \(\mathtt{01234532617}\) & None & 20 & --\\
+52 & \(\mathtt{01234532653}\) & None & 13 & --\\
+53 & \(\mathtt{01234561542}\) & None & 2 & --\\
+54 & \(\mathtt{01234561540}\)\newline \(\mathtt{01234561547}\) & None & 2 & --\\
+55 & \(\mathtt{01234564310}\)\newline \(\mathtt{01234564317}\) & None & 16 & --\\
+\end{longtable}
+\endgroup
+The finite classification and every displayed local bound are checked in
+the archived proof collection~\cite{historycreditarchive}. In particular,
+both words in every two-word row support its geometric bound. This table
+supplies local inequalities, not a claim that its rows can be concatenated
+into a globally realizable snake.
+
 \clearpage
 \addcontentsline{toc}{section}{References}
 \begin{thebibliography}{99}\raggedright
@@ -3994,6 +4285,18 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{The pending 012034 share certificate and 
 \bibitem{conditional234archive}
 Snake-in-the-box project contributors. \emph{Seven-centre refinement toward 234: production proof and continuation record}. Latest inspected revision \texttt{1e0ebb95}, 2 November 2026. The production proof obligations remain incomplete.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/1e0ebb95954cc70f9edf59268b5a36df3f616422}.
+
+\bibitem{graphcoveragearchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Accepted-key graphs, finite coverage and context assignment}. Research milestones 87--92, included in pinned revision \texttt{32445d35}, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/32445d353f0a8527a2732eff404f1c86d00092ff/milestones}.
+
+\bibitem{potentialcomparisonarchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Joint slope and potential-range comparisons on fixed graphs}. Research milestone 93, pinned revision \texttt{f4b28638}, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/f4b2863825689bb9d7c2c056d845395ca2837481/milestones/93-defined-graph-potential}.
+
+\bibitem{historycreditarchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Complete compatible-word classification and concrete history-share bounds}. Research milestones 94--95, pinned revision \texttt{32445d35}, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/32445d353f0a8527a2732eff404f1c86d00092ff/milestones}.
 
 \end{thebibliography}
 \end{document}

@@ -4,21 +4,18 @@ Start with [current mathematical status](CURRENT_STATUS.md), then use the
 [continuation assignment](NEXT_AGENT_PROMPT.md). Both are intended for another
 researcher or AI agent to continue from the saved evidence.
 
-The latest manuscript checkpoint is
-[milestone 86](../milestones/86-paper-revision/README.md), with 130 statements,
-fourteen new Lean checks and all printed witnesses preserved and rechecked.
-The editor compiler failed before source compilation; no new PDF is verified.
-Use its [checkpoint](../milestones/86-paper-revision/data/checkpoint.json) and
-[manifest](../milestones/86-paper-revision/data/file-manifest.json) for the
-paper revision and its historical handover and replay observation.
+The latest manuscript and continuation checkpoint is
+[milestone 96](../milestones/96-paper-revision/README.md). It preserves all
+130 prior statements and adds four statements, a complete history-share table,
+and no new named definitions. Its [checkpoint](../milestones/96-paper-revision/data/checkpoint.json)
+and [manifest](../milestones/96-paper-revision/data/file-manifest.json) preserve
+the source checks, compiler failure and continuing batch observation.
 
-The current checkpoint is
-[milestone 95](../milestones/95-history-credit-integration/README.md), which
-supplies all concrete history-share bounds and their maximum for actual snakes.
-Its [checkpoint](../milestones/95-history-credit-integration/data/checkpoint.json)
-and [manifest](../milestones/95-history-credit-integration/data/file-manifest.json)
-preserve the checked sources, exact transformations and continuing batch state.
-The complete global weight and potential assembly remains pending.
+[Milestone 95](../milestones/95-history-credit-integration/README.md) supplies
+all concrete history-share bounds and their maximum for actual snakes.
+Its exact source transformations, proof receipts and literal-credit audit remain
+the evidence for that completed mathematical component. The remaining global
+weight and potential assembly is unfinished.
 
 [Milestone 94](../milestones/94-history-share-dispatch/README.md) classifies
 the exact compatible words and proves history/cap recognition.
@@ -109,13 +106,13 @@ recovered short filters. Milestone 84 closes all three history exclusions.
 Milestone 85 checks the reference union under two explicit closed catalogue
 premises. Milestone 87 supplies conditional indexing, and milestone 88 supplies the
 generic coverage argument and one checked context. The remaining structural work
-is the closed reference proofs and concrete finite coverage/endpoint certificates;
-credit interpretation follows. Complete the local
+is the closed reference proofs and complete concrete finite coverage. The history
+credit is complete; other weight components and full-key preservation remain. Complete the local
 shares and potential replay before claiming 234. Historical manifests retain
 their earlier versions of the shared handover documents.
 
-The latest paper is revision 86, updated in place with a hash-matched repository mirror.
-Authors and hyperlink settings are preserved. The compiler attempt at milestone 86 failed
+The latest paper is revision 96, updated in place with a hash-matched repository mirror.
+Authors and hyperlink settings are preserved. The compiler attempt at milestone 96 failed
 before source compilation; its diagnostic is saved there. No new PDF
 is claimed. Recompile the same editor source when the app compiler can start.
 The exact optimum remains unresolved.

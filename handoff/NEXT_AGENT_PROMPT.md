@@ -4,7 +4,7 @@ Continue in `E:/Snake-in-a-box`. Read the current handover, milestone 95's
 mathematical note, checkpoint and source/literal audits, then milestone 94's
 compatible-word classification and milestone 93's
 fixed-model comparison and milestone 92's
-context-assignment and defined-graph interfaces. Paper revision 86 is current.
+context-assignment and defined-graph interfaces. Paper revision 96 is current; read its checkpoint and verification report.
 
 ## Mathematical target and evidence boundary
 
@@ -55,15 +55,13 @@ in eleven port files to avoid five declarations owned by HistoryCountSupport.
 Every other non-import byte is preserved. Existing historical files are intact.
 Do not mix legacy build paths back into this environment.
 
-The paper revision is now due at milestone 96. Edit the existing editor source
-in place, preserve authors and hypersetup, and synchronize its repository copy.
-Explain the completed classification, fixed-model slope/range obstruction,
-defined graph and concrete history credits in their logical order. Use ordinary
-notation; introduce a definition only when essential and substantially reused.
-Keep arbitrary-snake results separate from conditional graph conclusions.
-Use the built-in compiler; preserve the source if the compiler cannot start.
+The paper was revised at milestone 96. Its four additions state the exact
+compatible-word classification, completed history bound, conditional graph
+coverage and fixed-model joint optimisation. It adds no named definitions.
+Use ordinary notation and define a concept only when essential and repeatedly
+used. The next scheduled full revision is milestone 106.
 
-After revision, assemble the remaining weight components and check the entire
+Now assemble the remaining weight components and check the entire
 potential on every row of the defined graph, including conservative extra rows.
 An external-array certificate does not automatically transfer to this graph.
 Retain all reference-catalogue and pending local-floor premises explicitly.
@@ -88,7 +86,7 @@ history witnesses: class 85 has two and class 89 has one, each at position 0.
 
 ## Active jobs and local-share replay
 
-The frozen milestone 95 checkpoint has 86/127 witness classes, 89/127 geometry
+The frozen milestone 96 checkpoint has 99/127 witness classes, 99/127 geometry
 classes and 649 successful case7302 modules. Counts may have advanced.
 Witness session 13482 uses the unchanged milestone 92 checker with
 `--classes all --wait-for-geometry`. Geometry session 23168 continues separately.
@@ -114,7 +112,8 @@ restoration, integration and recomputation. Partial replay does not suffice.
 ## Documents and reproducibility
 
 Preserve authors Iori Hironaka, Tommy Ma and Steven Zhan and all hyperlink settings.
-Paper revision 86 has130 statements. The next full rewrite is scheduled for 96.
+Paper revision 96 has 134 statements and no new named definitions.
+The next full rewrite is scheduled for milestone 106.
 The editor source is `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`;
 its repository mirror is `paper/snake9_research.tex`. Edit the existing editor
 source in place when due, synchronize its mirror and use the built-in compiler.
