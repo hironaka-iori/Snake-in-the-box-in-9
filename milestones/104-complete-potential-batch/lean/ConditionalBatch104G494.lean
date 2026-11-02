@@ -1,0 +1,98 @@
+import BoundedPrefixTransfer102
+import Context101Group09
+import Context101Group10
+import Context101Group11
+import Context101Group12
+import JointTraversal103
+import PotentialRoots102Group02
+
+set_option autoImplicit false
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+namespace Snake9.ConditionalBatch104G494
+open Snake9.Joint103 Snake9.PrefixChecker100 Snake9.BoundedPrefixTransfer102 Snake9.PotentialChecker99
+open Snake9.Potential99 Snake9.PotentialBlocks102 Snake9.Context101
+open Snake9.Weights98 Snake9.CountFree98 Snake9.GraphWalk78 Snake9.Batch92
+open Snake9.ContextWeights101 Snake9.ConcreteCatalogue95 Snake9.Guards79
+
+theorem joint_checked : checkJoint (fun code => 120*(code%6+1)+max (max 0 (emittedCredit [] code)) (max (0) 16)) 496 602 6 0 2711
+    Conditional.n5_64 Conditional.n5_105 = true := by decide +kernel
+
+theorem prefix_checked : checkPrefix (fun code => decide
+      (496+min 602 (value Conditional.n5_105 (code%7776)) ≤
+        120*(code%6+1)+max (max 0 (emittedCredit [] code)) (max (0) 16)+min 602 (value Conditional.n5_64 (code/6)))) 6 0 2711 = true := by
+  exact joint_root_prefix _ 496 602 2711 Conditional.n5_64 Conditional.n5_105 joint_checked
+
+theorem conditional_context_379_0 :
+    contextCheck (weight conditionalCredit) 496 Conditional.potential 379 0 = true := by
+  apply contextCheck_of_bounded_prefix (fun code => decide
+      (496+min 602 (value Conditional.n5_105 (code%7776)) ≤
+        120*(code%6+1)+max (max 0 (emittedCredit [] code)) (max (0) 16)+min 602 (value Conditional.n5_64 (code/6))))
+    (weight conditionalCredit) 496 Conditional.potential 379 0 33 block_379_0.1
+  · simpa only [block_379_0.2] using prefix_checked
+  · intro code hc _
+    have hs := conditional_at_107 (code/6) (by omega)
+    have ht := conditional_at_108 (code%7776) (by omega)
+    simp only [conditional_379_0, source_379_0, target_379_0, hs, ht]
+
+#print axioms conditional_context_379_0
+
+theorem conditional_context_399_0 :
+    contextCheck (weight conditionalCredit) 496 Conditional.potential 399 0 = true := by
+  apply contextCheck_of_bounded_prefix (fun code => decide
+      (496+min 602 (value Conditional.n5_105 (code%7776)) ≤
+        120*(code%6+1)+max (max 0 (emittedCredit [] code)) (max (0) 16)+min 602 (value Conditional.n5_64 (code/6))))
+    (weight conditionalCredit) 496 Conditional.potential 399 0 33 block_399_0.1
+  · simpa only [block_399_0.2] using prefix_checked
+  · intro code hc _
+    have hs := conditional_at_111 (code/6) (by omega)
+    have ht := conditional_at_128 (code%7776) (by omega)
+    simp only [conditional_399_0, source_399_0, target_399_0, hs, ht]
+
+#print axioms conditional_context_399_0
+
+theorem conditional_context_471_0 :
+    contextCheck (weight conditionalCredit) 496 Conditional.potential 471 0 = true := by
+  apply contextCheck_of_bounded_prefix (fun code => decide
+      (496+min 602 (value Conditional.n5_105 (code%7776)) ≤
+        120*(code%6+1)+max (max 0 (emittedCredit [] code)) (max (0) 16)+min 602 (value Conditional.n5_64 (code/6))))
+    (weight conditionalCredit) 496 Conditional.potential 471 0 33 block_471_0.1
+  · simpa only [block_471_0.2] using prefix_checked
+  · intro code hc _
+    have hs := conditional_at_126 (code/6) (by omega)
+    have ht := conditional_at_128 (code%7776) (by omega)
+    simp only [conditional_471_0, source_471_0, target_471_0, hs, ht]
+
+#print axioms conditional_context_471_0
+
+theorem conditional_context_477_0 :
+    contextCheck (weight conditionalCredit) 496 Conditional.potential 477 0 = true := by
+  apply contextCheck_of_bounded_prefix (fun code => decide
+      (496+min 602 (value Conditional.n5_105 (code%7776)) ≤
+        120*(code%6+1)+max (max 0 (emittedCredit [] code)) (max (0) 16)+min 602 (value Conditional.n5_64 (code/6))))
+    (weight conditionalCredit) 496 Conditional.potential 477 0 33 block_477_0.1
+  · simpa only [block_477_0.2] using prefix_checked
+  · intro code hc _
+    have hs := conditional_at_127 (code/6) (by omega)
+    have ht := conditional_at_108 (code%7776) (by omega)
+    simp only [conditional_477_0, source_477_0, target_477_0, hs, ht]
+
+#print axioms conditional_context_477_0
+
+theorem conditional_context_501_0 :
+    contextCheck (weight conditionalCredit) 496 Conditional.potential 501 0 = true := by
+  apply contextCheck_of_bounded_prefix (fun code => decide
+      (496+min 602 (value Conditional.n5_105 (code%7776)) ≤
+        120*(code%6+1)+max (max 0 (emittedCredit [] code)) (max (0) 16)+min 602 (value Conditional.n5_64 (code/6))))
+    (weight conditionalCredit) 496 Conditional.potential 501 0 33 block_501_0.1
+  · simpa only [block_501_0.2] using prefix_checked
+  · intro code hc _
+    have hs := conditional_at_131 (code/6) (by omega)
+    have ht := conditional_at_128 (code%7776) (by omega)
+    simp only [conditional_501_0, source_501_0, target_501_0, hs, ht]
+
+#print axioms conditional_context_501_0
+
+#print axioms prefix_checked
+#print axioms joint_checked
+end Snake9.ConditionalBatch104G494

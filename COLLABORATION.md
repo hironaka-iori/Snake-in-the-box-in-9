@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 103](milestones/103-joint-potential-traversal/README.md) proves joint traversal soundness and checks four matched profile/context comparisons. Coverage remains six contexts per profile. Complete graph certificates are pending; the interval remains 191 through 235, with 234 conditional.
+Latest continuation: [milestone 104](milestones/104-complete-potential-batch/README.md) runs the complete sequential potential-certificate batch. The graph-assembly theorem is checked. The launch snapshot has 7 completed-profile and 7 conditional-profile contexts checked; read the live batch record for current progress. The interval remains 191 through 235, with 234 conditional.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -16,7 +16,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
 
-Next research priority: Prepare one resumable sequential batch for all remaining contexts, reusing the six existing certificates per profile. Reuse one verified reduced check per identical acceptance root, weight expression and potential-root pair, then prove each original context by the bounded transfer. Select the baseline or joint method from the measured evidence, with a fallback for timed-out contexts. Assemble the original complete-graph theorem only after every context and every missing block are covered. Do not start another series of isolated timing pilots. Paper revision 96 is unchanged; the next full revision is 106.
+Next research priority: Let the existing milestone104 batch continue; inspect its live record before any restart. Finish all context certificates, check both graph assemblies, and audit their complete dependency closure. Preserve the pending reference and local-share premises. Paper revision 96 is unchanged; the next full revision is 106.
 
 ## Historical checkpoints
 

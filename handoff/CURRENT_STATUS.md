@@ -1,5 +1,23 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 104 active batch
+
+The complete sequential batch is active. At the saved snapshot, it has
+7 completed-profile and 7 conditional-profile
+contexts checked. These are snapshot counts, not a claim that the batch is
+finished. Read `milestones/104-complete-potential-batch/data/batch-progress.json`
+on the running machine, the [saved launch snapshot](../milestones/104-complete-potential-batch/data/start-checkpoint.json),
+and [resumption notes](../milestones/104-complete-potential-batch/NEXT.md) before
+starting any process. There are 1,157 proposed groups covering all 1,570
+previously pending profile/context pairs. Both graph assemblies remain pending.
+
+The general graph-assembly theorem has passed Lean and adds no definitions.
+Milestone 103's joint traversal and four matched comparisons are saved and
+pushed in commit 04f5fad09c3e6f36568b846050592662174327dc. The preferred methods
+are baseline for the completed profile and joint traversal for the conditional
+profile, with a separate alternative for timed-out groups. No new global
+snake bound is claimed.
+
 ## Milestone 103 checkpoint
 
 Lean checked the general implication from successful joint traversal to

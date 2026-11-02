@@ -1,13 +1,13 @@
 # Research handover
 
 Start with [current status](CURRENT_STATUS.md) and the
-[continuation assignment](NEXT_AGENT_PROMPT.md). The latest checkpoint is
-[milestone 103](../milestones/103-joint-potential-traversal/README.md).
+[continuation assignment](NEXT_AGENT_PROMPT.md). The current work is the active [milestone 104 batch](../milestones/104-complete-potential-batch/README.md).
+The last completed checkpoint is [milestone 103](../milestones/103-joint-potential-traversal/README.md).
 
 All 791 context equations and all 412 potential-block equations are checked.
 Joint traversal now has a checked success implication to the original prefix
-checker. Four matched comparisons passed. Six contexts per profile remain
-certified, with 785 per profile pending. No coverage is added by benchmarks.
+checker. Four matched comparisons passed. Milestone 103 certified six contexts per profile. Milestone 104 adds actual
+context certificates; consult its live record for current coverage.
 
 The maintained interval is 191 through 235 edges; 234 remains conditional.
 The contributor upper bound retains its archived audit and pending independent

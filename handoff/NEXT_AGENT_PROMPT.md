@@ -1,46 +1,40 @@
 # Continuation assignment
 
-Continue the empty-square charging route in `E:/Snake-in-a-box`. Read milestone
-103's mathematical note, proof summary and checkpoint. The general joint
-traversal proof and all four matched comparisons passed. The active goal is
-unresolved. No compiler is active at this checkpoint.
+Continue the existing milestone104 complete batch in `E:/Snake-in-a-box`.
+First read its README.md, NEXT.md, data/batch-progress.json and the latest
+batch log. Inspect the recorded processes and lock files. The batch may still
+be running; do not start another or edit any active proof source or checker.
 
-## Next task
+The complete sequential batch is active. At the saved snapshot, it has
+7 completed-profile and 7 conditional-profile
+contexts checked. These are snapshot counts, not a claim that the batch is
+finished. Read `milestones/104-complete-potential-batch/data/batch-progress.json`
+on the running machine, the [saved launch snapshot](../milestones/104-complete-potential-batch/data/start-checkpoint.json),
+and [resumption notes](../milestones/104-complete-potential-batch/NEXT.md) before
+starting any process. There are 1,157 proposed groups covering all 1,570
+previously pending profile/context pairs. Both graph assemblies remain pending.
 
-Prepare one resumable sequential batch for all remaining contexts, reusing the six existing certificates per profile. Reuse one verified reduced check per identical acceptance root, weight expression and potential-root pair, then prove each original context by the bounded transfer. Select the baseline or joint method from the measured evidence, with a fallback for timed-out contexts. Assemble the original complete-graph theorem only after every context and every missing block are covered. Do not start another series of isolated timing pilots.
+The general graph-assembly theorem has passed Lean and adds no definitions.
+Milestone 103's joint traversal and four matched comparisons are saved and
+pushed in commit 04f5fad09c3e6f36568b846050592662174327dc. The preferred methods
+are baseline for the completed profile and joint traversal for the conditional
+profile, with a separate alternative for timed-out groups. No new global
+snake bound is claimed.
 
-The provisional methods from the two-context totals are completed:
-baseline; conditional: joint. These are limited timing
-observations, not a general performance theorem. The exact measurements and
-source grouping are in milestone 103. The 591 completed and 578 conditional
-source groups are proposed reuse groups; Lean must check each application.
+The complete proposed queue and all source hashes are in data/plan.json.
+Successful Lean receipts supply the checked status. After every group passes,
+the driver generates and checks AllCompleted104 and AllConditional104. An
+ordinary proof error stops the driver; a timeout tries the separate alternative.
+Follow NEXT.md to resume. Do not rerun prepare.py over the active environment.
 
-The reusable traversal theorem is Snake9.Joint103.joint_root_prefix. It takes
-weight, P, R, acceptance root, source and target potential trees, and a
-successful checkJoint equation. It returns the exact original prefix-check
-equation with clipped values at code/6 and code%7776. No graph premise is added.
-The definitions step and checkJoint are the only new reusable helpers.
+The graph-assembly theorem is
+Snake9.GraphAssembly104.graphCheck_of_saved_blocks. It uses context certificates
+for entries of the original savedBlockClasses, and proves the original
+graphCheck. Missing contexts use the existing semantic theorem. No new
+definition or additional arbitrary-snake premise was introduced.
 
-Use the existing bounded transfer
-Snake9.BoundedPrefixTransfer102.contextCheck_of_bounded_prefix and block
-equalities Snake9.PotentialBlocks102.completed_at_i / conditional_at_i.
-The source offset code/6 requires code<46656; target code%7776 is bounded.
-All 791 context formulas remain available in Context101Group00 through 12.
-
-Reuse the completed contexts listed in milestone 102's proof summary:
-completed 35/0 and conditional 177/43 from 100; both profiles 99/37 from 101;
-both profiles 0/0, 1/0, 9/0 and 10/0 from 102. The repeated checks in 103 add
-no coverage. Keep full direction/history keys and both potential caps.
-
-The generator in 103 supports --method joint or baseline and selected
---contexts. For a complete batch, extend it with verified theorem reuse,
-dependency order and a resumable queue; avoid regenerating audited sources.
-Do not modify this frozen milestone to run the complete batch.
-
-No unsupported native evaluation, incomplete proof or arbitrary-snake claim
-was introduced. The successful theorem audits contain only propext,
-Classical.choice and Quot.sound. One unsuccessful traversal proof attempt
-is preserved with exact source and log.
+Finish the complete graph audit before publishing completion of this batch.
+The research goal and the conditional local refutations remain unresolved.
 
 ## Global evidence and remaining assumptions
 
@@ -64,9 +58,9 @@ sources and evidence. Its old Check1 timeout was 900 seconds.
 
 ## Runtime, artifacts and publication
 
-Use `milestones/103-joint-potential-traversal/scripts/check.py`, which snapshots
+Use `milestones/104-complete-potential-batch/scripts/check.py`, which snapshots
 sources and checks dependencies, axioms and exact object/log bytes. Its
-environment reuses milestone 102 and the milestone 98 support overlay. Do not
+environment reuses milestone 103 and the milestone 98 support overlay. Do not
 recopy the 3.3 GB overlay. Compile sequentially; keep at most three Lean jobs.
 Do not add `-M4096`. Inspect live processes and records before any restart;
 old active markers may be historical. Never edit a live checker or source.

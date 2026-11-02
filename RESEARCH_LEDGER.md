@@ -725,3 +725,10 @@ and 34,148 for the conditional profile. There are 785 contexts per profile
 still pending. Comparisons do not add distinct graph coverage.
 
 Next research priority: Prepare one resumable sequential batch for all remaining contexts, reusing the six existing certificates per profile. Reuse one verified reduced check per identical acceptance root, weight expression and potential-root pair, then prove each original context by the bounded transfer. Select the baseline or joint method from the measured evidence, with a fallback for timed-out contexts. Assemble the original complete-graph theorem only after every context and every missing block are covered. Do not start another series of isolated timing pilots. Paper revision 96 is unchanged; the next full revision is 106.
+
+
+## Milestone 104: complete batch started
+
+Latest continuation: [milestone 104](milestones/104-complete-potential-batch/README.md) runs the complete sequential potential-certificate batch. The graph-assembly theorem is checked. The launch snapshot has 7 completed-profile and 7 conditional-profile contexts checked; read the live batch record for current progress. The interval remains 191 through 235, with 234 conditional.
+
+Next research priority: Let the existing milestone104 batch continue; inspect its live record before any restart. Finish all context certificates, check both graph assemblies, and audit their complete dependency closure. Preserve the pending reference and local-share premises. Paper revision 96 is unchanged; the next full revision is 106.
