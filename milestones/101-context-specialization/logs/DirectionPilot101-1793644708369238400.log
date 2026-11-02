@@ -1,0 +1,201 @@
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:22:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:23:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:21:36: error: unsolved goals
+code : ℕ
+hf : sorry = [0, 1, 2, 0, 3, 2]
+hb : sorry = [0, 1, 2, 0, 3, 2]
+⊢ ((WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])) = [0, 1, 2, 3, 1, 4] → ¬code % 7776 = 3130) ∧
+      (WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])).reverse = [0, 1, 2, 3, 1, 4] →
+        ¬code % 7776 = 6350)) ∧
+    ((WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])) = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 3725) ∧
+        (WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] →
+          ¬code % 7776 = 6980)) ∧
+      ((WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])) = [0, 1, 2, 0, 3, 4] → ¬code % 7776 = 7106) ∧
+          (WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])).reverse = [0, 1, 2, 0, 3, 4] →
+            ¬code % 7776 = 3221)) ∧
+        ((WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])) = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 5021) ∧
+            (WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] →
+              ¬code % 7776 = 6981)) ∧
+          (WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])) = [0, 1, 2, 3, 4, 5] → ¬code % 7776 = 4871) ∧
+            (WindowAutomaton.canon (List.drop 3 (extensions[0]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] →
+              ¬code % 7776 = 6831)
+'Snake9.Context101.direction_0' depends on axioms: [propext, Quot.sound]
+'Snake9.Context101.conditioned_0' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:37:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:38:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:36:71: error: unsolved goals
+code : ℕ
+hf : sorry = [0, 1, 2, 0, 3, 4]
+hb : sorry = [0, 1, 2, 3, 4, 2]
+⊢ max
+      (if
+          WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])) = [0, 1, 2, 3, 1, 4] ∧ code % 7776 = 3130 ∨
+            WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])).reverse = [0, 1, 2, 3, 1, 4] ∧
+              code % 7776 = 6350 then
+        48
+      else 0)
+      (max
+        (if
+            WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 3725 ∨
+              WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                code % 7776 = 6980 then
+          96
+        else 0)
+        (max
+          (if
+              WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])) = [0, 1, 2, 0, 3, 4] ∧ code % 7776 = 7106 ∨
+                WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])).reverse = [0, 1, 2, 0, 3, 4] ∧
+                  code % 7776 = 3221 then
+            96
+          else 0)
+          (max
+            (if
+                WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 5021 ∨
+                  WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 6981 then
+              96
+            else 0)
+            (if
+                WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 4871 ∨
+                  WindowAutomaton.canon (List.drop 3 (extensions[1]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 6831 then
+              120
+            else 0)))) =
+    if code % 7776 = 7106 then 96 else 0
+'Snake9.Context101.direction_1' depends on axioms: [propext, Quot.sound]
+'Snake9.Context101.conditioned_1' depends on axioms: [propext, sorryAx, Quot.sound]
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:52:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:53:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:51:71: error: unsolved goals
+code : ℕ
+hf : sorry = [0, 1, 2, 3, 4, 2]
+hb : sorry = [0, 1, 2, 0, 3, 4]
+⊢ max
+      (if
+          WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])) = [0, 1, 2, 3, 1, 4] ∧ code % 7776 = 3130 ∨
+            WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])).reverse = [0, 1, 2, 3, 1, 4] ∧
+              code % 7776 = 6350 then
+        48
+      else 0)
+      (max
+        (if
+            WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 3725 ∨
+              WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                code % 7776 = 6980 then
+          96
+        else 0)
+        (max
+          (if
+              WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])) = [0, 1, 2, 0, 3, 4] ∧ code % 7776 = 7106 ∨
+                WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])).reverse = [0, 1, 2, 0, 3, 4] ∧
+                  code % 7776 = 3221 then
+            96
+          else 0)
+          (max
+            (if
+                WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 5021 ∨
+                  WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 6981 then
+              96
+            else 0)
+            (if
+                WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 4871 ∨
+                  WindowAutomaton.canon (List.drop 3 (extensions[9]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 6831 then
+              120
+            else 0)))) =
+    if code % 7776 = 3221 then 96 else 0
+'Snake9.Context101.direction_9' depends on axioms: [propext, Quot.sound]
+'Snake9.Context101.conditioned_9' depends on axioms: [propext, sorryAx, Quot.sound]
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:67:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:68:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:66:216: error: unsolved goals
+code : ℕ
+hf : sorry = [0, 1, 2, 3, 4, 5]
+hb : sorry = [0, 1, 2, 3, 4, 5]
+⊢ max
+      (if
+          WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])) = [0, 1, 2, 3, 1, 4] ∧ code % 7776 = 3130 ∨
+            WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])).reverse = [0, 1, 2, 3, 1, 4] ∧
+              code % 7776 = 6350 then
+        48
+      else 0)
+      (max
+        (if
+            WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 3725 ∨
+              WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                code % 7776 = 6980 then
+          96
+        else 0)
+        (max
+          (if
+              WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])) = [0, 1, 2, 0, 3, 4] ∧ code % 7776 = 7106 ∨
+                WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])).reverse = [0, 1, 2, 0, 3, 4] ∧
+                  code % 7776 = 3221 then
+            96
+          else 0)
+          (max
+            (if
+                WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 5021 ∨
+                  WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 6981 then
+              96
+            else 0)
+            (if
+                WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 4871 ∨
+                  WindowAutomaton.canon (List.drop 3 (extensions[10]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 6831 then
+              120
+            else 0)))) =
+    max (if code % 7776 = 3725 ∨ code % 7776 = 6980 then 96 else 0)
+      (max (if code % 7776 = 5021 ∨ code % 7776 = 6981 then 96 else 0)
+        (if code % 7776 = 4871 ∨ code % 7776 = 6831 then 120 else 0))
+'Snake9.Context101.direction_10' depends on axioms: [propext, Quot.sound]
+'Snake9.Context101.conditioned_10' depends on axioms: [propext, sorryAx, Quot.sound]
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:82:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:83:12: error: unknown identifier 'canon'
+E:\Snake-in-a-box\milestones\101-context-specialization\lean\DirectionPilot101.lean:81:91: error: unsolved goals
+code : ℕ
+hf : sorry = [0, 1, 2, 3, 1, 4]
+hb : sorry = [0, 1, 2, 3, 1, 4]
+⊢ max
+      (if
+          WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])) = [0, 1, 2, 3, 1, 4] ∧ code % 7776 = 3130 ∨
+            WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])).reverse = [0, 1, 2, 3, 1, 4] ∧
+              code % 7776 = 6350 then
+        48
+      else 0)
+      (max
+        (if
+            WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧ code % 7776 = 3725 ∨
+              WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                code % 7776 = 6980 then
+          96
+        else 0)
+        (max
+          (if
+              WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])) = [0, 1, 2, 0, 3, 4] ∧ code % 7776 = 7106 ∨
+                WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])).reverse = [0, 1, 2, 0, 3, 4] ∧
+                  code % 7776 = 3221 then
+            96
+          else 0)
+          (max
+            (if
+                WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 5021 ∨
+                  WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 6981 then
+              96
+            else 0)
+            (if
+                WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])) = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 4871 ∨
+                  WindowAutomaton.canon (List.drop 3 (extensions[12]?.getD [])).reverse = [0, 1, 2, 3, 4, 5] ∧
+                    code % 7776 = 6831 then
+              120
+            else 0)))) =
+    if code % 7776 = 3130 ∨ code % 7776 = 6350 then 48 else 0
+'Snake9.Context101.direction_12' depends on axioms: [propext, Quot.sound]
+'Snake9.Context101.conditioned_12' depends on axioms: [propext, sorryAx, Quot.sound]

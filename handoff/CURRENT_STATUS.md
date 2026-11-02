@@ -1,38 +1,45 @@
 # Current mathematical status and continuation priorities
 
-## Milestone 100 checkpoint
+## Milestone 101 checkpoint
 
-The prefix traversal is sound: rejecting branches can be skipped and every
-accepted code retains its original encoding and leaf inequality. Exact
-history filtering, weight simplifications and endpoint formulas are checked.
-The completed context 35/0 and conditional context 177/43 now pass Lean in
-full, covering 7,151 and 6,598 accepted edges respectively. The earlier 207
-pilot edges are included in this coverage. Five modules and 25 theorem audits
-passed. See milestone 100's proof summary for exact timings and receipts.
+All 505 direction lookups and all 791 context equations passed Lean. The
+context equations preserve the exact selected rule list, source and target,
+acceptance class, and both weight profiles. They hold for every natural count
+code. The combined import check found no declaration conflict.
 
-The older pointwise and unreduced-prefix completed-context attempts timed out
-at 300 seconds. The exact statements are now proved by ReducedCompleted100
-and ReducedConditional100. The superseded implementations should be preserved,
-not restarted. No compiler job remains active at this checkpoint.
+The milestone has 30 checked modules and 5,767
+distinct theorem axiom audits. The only permitted logical axioms are
+`propext`, `Classical.choice` and `Quot.sound`; no incomplete proof or unchecked
+native evaluation is used. Exact sources, snapshots, logs and dependencies
+are recorded in the proof summary and individual receipts.
 
-Both potentials still pass all 4,947,008 defined graph edges numerically, with
-zero extra or missing keys. Their concrete ranges 551 and 602 remain checked.
-The complete Lean edge certificate remains pending for both profiles: one of
-791 assigned contexts is now proved for each. The 582 joint numerical context
-groups require equality/transport proofs before reuse.
+The complete finite checks now comprise two contexts per profile:
 
-The next step is to generate fixed context data and filtered history-rule
-lists, prove pointwise equalities, and apply the checked traversal. The actual
-weight, charge budget and full-key walk from milestone 98 remain available.
-Both global chains retain two reference-catalogue closures. Conditional 234
-also retains five local refutations with caps (15,17,15,15,15), giving floors
-(16,18,16,16,16).
+| Profile | Direction/history | Accepted edges | Compiler seconds | Milestone |
+| --- | --- | ---: | ---: | ---: |
+| completed | 35/0 | 7,151 | 121.703 | 100 |
+| conditional | 177/43 | 6,598 | 165.719 | 100 |
+| completed | 99/37 | 6,043 | 111.750 | 101 |
+| conditional | 99/37 | 6,043 | 194.312 | 101 |
 
-The maintained interval remains $191\le a(9)\le235$, with 234 conditional.
-The contributor upper bound retains its archived evidence and pending complete
-independent rebuild. Original case7302 target 20 evidence remains stopped and
-unchanged; any target 18 proof needs separate files. Paper revision 96, authors
-and hyperlink settings are unchanged; the next full revision is 106.
+Direction 99/history 37 is checked under both profiles, so its 6,043 accepted
+keys must not be counted twice as distinct graph edges. Coverage is 13,194
+accepted edges for the completed profile and 12,641 for the conditional
+profile. Each context theorem covers all 46,656 candidate codes through the
+checked acceptance traversal. The earlier 207 pilot edges are already included.
+
+The complete graph inequalities still need 789 contexts per profile. The
+all-context evaluator equations do not discharge those finite inequalities.
+Compiler times are observations from the recorded runs. Some equation batches
+overlapped the independent finite-check queue, and memory limits temporarily
+delayed new batches. These times are not a controlled performance comparison.
+
+Use the checked equations for all 791 contexts to extend the finite potential certificates. First test exact reduction of each fixed source/target potential lookup to its recorded subtree, retaining the original cap and proving the needed count-code bounds. Benchmark one context per profile before expanding. Reuse the four complete context certificates and preserve the reference/local premises.
+
+The initial pilot with an unqualified identifier failed and is preserved with
+its exact source snapshot. The corrected source passed. No compiler remains
+active at this checkpoint. Both manuscript copies and the original case7302
+evidence are unchanged. The existing global premises described below remain.
 
 ## Result and evidence boundary
 
@@ -140,7 +147,7 @@ the added local premise or the full graph interpretation.
 ## Earlier proof interfaces and development record
 
 The following paragraphs preserve earlier milestone observations. Their
-pending-job statements describe those snapshots. The milestone 100 checkpoint
+pending-job statements describe those snapshots. The milestone 101 checkpoint
 above supersedes them: both 127-class batches and their assembly are complete;
 case7302 is stopped. The remaining tasks are listed in NEXT_AGENT_PROMPT.md.
 

@@ -1,0 +1,12 @@
+Snake9.Context101.completed_0_0 (code : ℕ) :
+  Snake9.Weights98.weight Snake9.CountFree98.completedCredit 0 0 code =
+    120 * (code % 6 + 1) + max (max 7 (Snake9.ContextWeights101.emittedCredit [] code)) (max 0 0)
+Snake9.Context101.conditional_504_0 (code : ℕ) :
+  Snake9.Weights98.weight Snake9.CountFree98.conditionalCredit 0 504 code =
+    120 * (code % 6 + 1) +
+      max (max 0 (Snake9.ContextWeights101.emittedCredit [] code))
+        (max
+          (max (if code % 7776 = 3725 ∨ code % 7776 = 6980 then 96 else 0)
+            (max (if code % 7776 = 5021 ∨ code % 7776 = 6981 then 96 else 0)
+              (if code % 7776 = 4871 ∨ code % 7776 = 6831 then 120 else 0)))
+          16)

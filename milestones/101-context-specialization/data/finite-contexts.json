@@ -1,0 +1,164 @@
+{
+  "status": "GENERATED_NOT_YET_CHECKED",
+  "inputs_sha256": {
+    "generated-contexts.json": "41013d70944f5bff9d088afcedef36d944ff2a4bfe820e66b2d8ff44de77719e",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch00.lean": "a33089ac3749e73ed3843faa6773bbce8abad85136e799439dbfba18fad8e794",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch01.lean": "212bde3aaaa67d7e889bfbbe1ea606670bd953b4996d851d8092194f331339fd",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch02.lean": "ae05a1cfb16d143e9eb717910097182d58b29adff3fa6d3065f9ca5e79488758",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch03.lean": "90dee685ccfbf781f289445d8012b7b0ed677682ac3509a3c9986c0f2a42ec3b",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch04.lean": "ed78ab2e2467f35f5fe9848dec353e4b1371ff9b791f972690cf147c04efb8bc",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch05.lean": "fcea69a8ca3371266edb3381b631f5a86ad96750caf61413a92d596428cc720a",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch06.lean": "cc3777a9245460e678db751f35f2381d99f9bcf5f0e5f1cccabfc0816376df49",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch07.lean": "4d7910a5dcfa6afea92518e3ee22b4a442cb26ad3de52805f020b59e706ab2a4",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch08.lean": "690d70414e7d3735af55b229538a9ffbb935e40d2ab0067f71e496869261bc44",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch09.lean": "3ab20b191918ab94c84405518509e8dd0407631dfa31e887542b5f3c382798fa",
+    "milestones/95-history-credit-integration/lean/ConcreteRules95Batch10.lean": "dd021b09c2f1144d1de93b02dbf8854631182f6e7162f6df817d77a1311801e1",
+    "milestones/87-retained-array-membership/data/coverage-membership-dag.json.gz": "5ded4dbe27d3ba795e57e241289facce6444789e30edb9531a312fab58818823",
+    "milestones/100-prefix-potential-checker/data/prefix-enumeration-audit.json": "ec94f01c66a715a42586ac51ac1ef854caa3eb7dbb05d1ac123c951207ef1174",
+    "milestones/98-concrete-weight-integration/lean/CountConditionedCredits98.lean": "1347a8f3d45068d0a0bc0c67b425cef721262b0eceb82f72574776d7f201c4ed"
+  },
+  "selection": {
+    "accepted_edges": 6043,
+    "codes_i64_sha256": "0e7f0b9a7fece5400bb1699afb98d99a76d00274f4a3173d58f352760c63da76",
+    "accepted_codes_raised_in_both_profiles": 4,
+    "raised_example": {
+      "code": 40604,
+      "digits": [
+        6,
+        2,
+        2,
+        6,
+        6,
+        3
+      ],
+      "credit_without_strong": 18,
+      "credit_with_strong": 19
+    },
+    "caps_false_example": {
+      "code": 6031,
+      "digits": [
+        1,
+        5,
+        4,
+        6,
+        4,
+        2
+      ]
+    },
+    "rule": {
+      "caps": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "geometric": 18,
+      "strong": 19
+    },
+    "scope": "Numerical selection check; the generated potential statements still require Lean."
+  },
+  "specs": [
+    {
+      "module": "CompletedEmitting101",
+      "profile": "completed",
+      "slope": 483,
+      "direction": 99,
+      "history": 37,
+      "block": 7462,
+      "cls": 12,
+      "root": 1807,
+      "source_base": 1306368,
+      "target_base": 1080864,
+      "selected": [
+        "rule000"
+      ],
+      "forward": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2
+      ],
+      "backward": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4
+      ],
+      "geometric": 5,
+      "completed": 0,
+      "conditional": 18,
+      "conditioned": "(if code%7776 = 3221 then 96 else 0)",
+      "rule": {
+        "caps": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "geometric": 18,
+        "strong": 19
+      }
+    },
+    {
+      "module": "ConditionalEmitting101",
+      "profile": "conditional",
+      "slope": 496,
+      "direction": 99,
+      "history": 37,
+      "block": 7462,
+      "cls": 12,
+      "root": 1807,
+      "source_base": 1306368,
+      "target_base": 1080864,
+      "selected": [
+        "rule000"
+      ],
+      "forward": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2
+      ],
+      "backward": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4
+      ],
+      "geometric": 5,
+      "completed": 0,
+      "conditional": 18,
+      "conditioned": "(if code%7776 = 3221 then 96 else 0)",
+      "rule": {
+        "caps": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "geometric": 18,
+        "strong": 19
+      }
+    }
+  ]
+}

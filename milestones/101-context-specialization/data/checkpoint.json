@@ -1,0 +1,113 @@
+{
+  "status": "PASS_ALL_CONTEXT_SPECIALIZATIONS_AND_EMITTING_CERTIFICATES",
+  "previous_goal_turn": "progress",
+  "recorded_at": "2026-11-02T19:02:09.747389+00:00",
+  "proof_summary_sha256": "0f1dec054071312a57d179bbe6747ccc1a7212754b21a9c3e112dc62b290c7a6",
+  "modules": 30,
+  "theorem_audits": 5767,
+  "direction_equations": 505,
+  "context_equations": 791,
+  "complete_contexts": [
+    {
+      "profile": "completed",
+      "direction": 35,
+      "history": 0,
+      "slope": 483,
+      "accepted_edges": 7151,
+      "all_codes_covered": 46656,
+      "root": 2620,
+      "prefix_transitions": 13548,
+      "seconds": 121.70300000000134,
+      "module": "ReducedCompleted100",
+      "original_contextCheck_proved": true,
+      "origin_milestone": 100
+    },
+    {
+      "profile": "conditional",
+      "direction": 177,
+      "history": 43,
+      "slope": 496,
+      "accepted_edges": 6598,
+      "all_codes_covered": 46656,
+      "root": 3690,
+      "prefix_transitions": 14202,
+      "seconds": 165.71899999999732,
+      "module": "ReducedConditional100",
+      "original_contextCheck_proved": true,
+      "origin_milestone": 100
+    },
+    {
+      "profile": "completed",
+      "direction": 99,
+      "history": 37,
+      "accepted_edges": 6043,
+      "all_codes_covered": 46656,
+      "slope": 483,
+      "module": "CompletedEmitting101",
+      "seconds": 111.75000000000364,
+      "origin_milestone": 101,
+      "original_contextCheck_proved": true
+    },
+    {
+      "profile": "conditional",
+      "direction": 99,
+      "history": 37,
+      "accepted_edges": 6043,
+      "all_codes_covered": 46656,
+      "slope": 496,
+      "module": "ConditionalEmitting101",
+      "seconds": 194.31199999999808,
+      "origin_milestone": 101,
+      "original_contextCheck_proved": true
+    }
+  ],
+  "finite_coverage_by_profile": {
+    "completed": {
+      "contexts": 2,
+      "accepted_edges": 13194
+    },
+    "conditional": {
+      "contexts": 2,
+      "accepted_edges": 12641
+    }
+  },
+  "all_context_weights_and_endpoints_checked": true,
+  "complete_graph_potential_certificates_checked": false,
+  "unconditional_edge_interval": [
+    191,
+    235
+  ],
+  "conditional_target": 234,
+  "upper_bound_evidence": "Inspected contributor theorem and saved audit; full independent rebuild pending.",
+  "pending_reference_catalogues": [
+    "AllRefuted6K235",
+    "AllRefuted236"
+  ],
+  "pending_conditional_local_cases": [
+    7301,
+    7302,
+    7303,
+    7307,
+    7308
+  ],
+  "pending_share_floors": [
+    16,
+    18,
+    16,
+    16,
+    16
+  ],
+  "case7302_state": "STOPPED_AFTER_CHECK1_TIMEOUT_900_SECONDS",
+  "case7302_source_record_unchanged": true,
+  "paper_revision": 96,
+  "next_scheduled_paper_revision": 106,
+  "paper_sha256": "7d4d974bc353ca723e4a5362b0960610d959dfe622b115b629968818c178875c",
+  "prior_checkpoint": "milestones/100-prefix-potential-checker/data/checkpoint.json",
+  "prior_checkpoint_sha256": "ea1c7436c43a0d32236c8aad21c8036622962db3e5667cbb07b1331b835caeea",
+  "git_refs_before_commit": {
+    "HEAD": "4a83039832d43a291c9e60cdc04de350f62553f7",
+    "origin/main": "4a83039832d43a291c9e60cdc04de350f62553f7"
+  },
+  "next_task": "Use the checked equations for all 791 contexts to extend the finite potential certificates. First test exact reduction of each fixed source/target potential lookup to its recorded subtree, retaining the original cap and proving the needed count-code bounds. Benchmark one context per profile before expanding. Reuse the four complete context certificates and preserve the reference/local premises.",
+  "scope": "Exact evaluator equations for all contexts and two complete finite contexts per profile. Complete graph certificates and improved global bounds remain unresolved."
+}

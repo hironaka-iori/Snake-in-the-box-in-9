@@ -1,44 +1,63 @@
 # Continuation assignment
 
 Continue the empty-square charging route in `E:/Snake-in-a-box`. Read milestone
-100's mathematical note, checkpoint and proof summary. The previous turn made
-progress: two complete graph contexts now pass Lean, through a checked prefix
-traversal and exact context specialization. The active goal remains unresolved.
+101's mathematical note, checkpoint and proof summary. All 505 direction
+equations and all 791 context equations passed Lean. The active goal remains
+unresolved. Preserve standard notation and define only necessary, reused terms.
 
 ## Next task
 
-Generate constant data and emitted history-rule lists for the remaining
-contexts. Prove each specialization once, then use PrefixChecker100 with the
-simplified leaf inequality and transfer it to the original contextCheck.
-The generic historyCredit_filter_emitting theorem preserves all active rules
-and their order. The short-history theorem removes the history contribution
-when the stored prefix has fewer than two symbols. Fixed longer histories
-can also emit no rule, as shown by the checked context 177/43 example.
+Use the checked equations for all 791 contexts to extend the finite potential certificates. First test exact reduction of each fixed source/target potential lookup to its recorded subtree, retaining the original cap and proving the needed count-code bounds. Benchmark one context per profile before expanding. Reuse the four complete context certificates and preserve the reference/local premises.
 
-Reuse these completed context theorems:
+The checked context families in namespace Snake9.Context101 are
+selected_d_q, source_d_q, target_d_q, block_d_q, completed_d_q and conditional_d_q.
+Direction lookups and conditioned-credit equations cover all 505 directions.
+AllContextSpecializations101 imports every context without declaration
+conflicts. The single emittedCredit helper keeps all original cap tests.
 
-- ReducedCompleted100.completed_context_reduced: completed profile, slope 483,
-  direction 35/history 0, all 7,151 accepted edges.
-- ReducedConditional100.conditional_context_reduced: conditional profile,
-  slope 496, direction 177/history 43, all 6,598 accepted edges.
+The explicit potential uses a balanced lookup over 206 blocks, each of size
+7776. A fixed-block equality can reduce this repeated lookup to its recorded
+subtree, while preserving the min551/min602 cap. Establish code/6<7776 from
+code<46656 for the source; the target offset code%7776 is always bounded.
+No performance gain from this proposed reduction is yet measured.
+The source-block equation is not valid for arbitrary natural codes. Transfer
+the bounded equality code by code with accepted_code_of_prefix_check and the
+interval checker, or prove a bounded prefix congruence; do not use an
+unrestricted rewrite under the count-code function.
+PotentialChecker99.checkInterval_iff already introduces exactly the bounded
+code obligation. Split on diagramKeep; a rejected code is immediate, and
+accepted_code_of_prefix_check supplies the reduced inequality for an accepted
+code. Rewrite the bounded potential equations at that point. This avoids
+introducing a replacement context checker.
 
-Both are in namespace Snake9.PrefixCertificates100. PrefixChecker100 proves
-contextCheck_of_prefix for arbitrary weights and potentials. ContextEndpoints100
-and WeightSpecialization100 show how exact all-code equations transport a
-small arithmetic check back to the original graph. Preserve source/history/
-count keys, source/target order and raw state numbering.
+Reuse the complete finite theorems:
 
-The older CompletedContext100 and ConditionalContext100 sources are superseded
-benchmark implementations. The former reached 300 seconds; the latter was not
-started. Do not blindly restart them. If a new whole-context check is too
-large, prove its six first-symbol branches separately and assemble them using
-the same prefix recursion. Bound each trial and retain exact failed attempts.
+- Snake9.PrefixCertificates100.completed_context_reduced: completed35/0.
+- Snake9.PrefixCertificates100.conditional_context_reduced: conditional177/43.
+- Snake9.PrefixCertificates101.completed_context_99_37: completed99/37.
+- Snake9.PrefixCertificates101.conditional_context_99_37: conditional99/37.
 
-Numerical classification gives 582 joint groups among 791 contexts, but these
-groups need Lean equality and transport statements before certificate reuse.
-Acceptance classes or endpoint pairs alone do not identify the weight.
-One complete context per profile is proved so far; all-context certification
-remains pending. The older 207 pilot edges lie inside the completed contexts.
+The first pair covers 7151 and 6598 accepted edges. The second pair each covers
+6043 accepted edges. The latter share the same keys, so keep profile coverage
+separate: 13194 completed and 12641 conditional accepted edges. Both profiles
+still have 789 unproved complete contexts. Each context theorem covers all
+46656 candidate codes with acceptance filtering.
+
+EmittingReduction101 proves both weights agree at99/37. Rule000 contributes
+19 if count symbols1 and2 (indexed from0) are at most2, and18 otherwise; the geometric and
+floor credits do not change this history minimum. Four accepted codes activate
+the stronger credit in both profiles. Their potentials and slopes differ,
+so equal weights alone do not identify their finite inequalities.
+
+The independent read-only review checked context data and import coverage.
+The initial unqualified-canon pilot failure is preserved and superseded by
+the corrected successful source. Do not repeat the old 300-second unreduced
+context attempts. If needed, split a new check at the first count symbol and
+assemble the six checked branches with PrefixChecker100 soundness.
+
+The numerical582 joint context groups require exact Lean equality and
+transport before reuse. Matching class roots or endpoint pairs alone is
+insufficient. No compiler is active at the saved checkpoint.
 
 ## Global evidence and remaining assumptions
 
@@ -62,9 +81,9 @@ sources and evidence. Its old Check1 timeout was 900 seconds.
 
 ## Runtime, artifacts and publication
 
-Use `milestones/100-prefix-potential-checker/scripts/check.py`, which snapshots
+Use `milestones/101-context-specialization/scripts/check.py`, which snapshots
 sources and checks dependencies, axioms and exact object/log bytes. Its
-environment reuses milestone 99 and the milestone 98 support overlay. Do not
+environment reuses milestone 100 and the milestone 98 support overlay. Do not
 recopy the 3.3 GB overlay. Compile sequentially; keep at most three Lean jobs.
 Do not add `-M4096`. Inspect live processes and records before any restart;
 old active markers may be historical. Never edit a live checker or source.

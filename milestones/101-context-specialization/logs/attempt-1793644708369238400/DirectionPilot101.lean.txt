@@ -1,0 +1,90 @@
+import ContextWeights101
+import StateWalk
+import DefinedProofGraph
+
+set_option autoImplicit false
+set_option maxHeartbeats 2000000
+set_option maxRecDepth 100000
+
+namespace Snake9.Context101
+open Snake9.Direction77 Snake9.DirectionWindow Snake9.GraphInterpretation75
+open Snake9.GeometricCredit97 Snake9.Conditioned98 Snake9.CountFree98
+open Snake9.ContextWeights101 Snake9.HistoryCredit95 Snake9.ConcreteCatalogue95
+open Snake9.GraphWalk78 Snake9.Batch92 Snake9.Weights98
+
+theorem direction_0 :
+    7 = geometricCredits.getD 0 0 ∧
+    0 = completedCredit 0 ∧
+    16 = conditionalCredit 0 := by decide +kernel
+
+theorem conditioned_0 (code : Nat) :
+    conditionedCredit 0 code = 0 := by
+  have hf : canon ((extensions.getD 0 []).drop 3) = [0,1,2,0,3,2] := by decide +kernel
+  have hb : canon (((extensions.getD 0 []).drop 3).reverse) = [0,1,2,0,3,2] := by decide +kernel
+  simp only [conditionedCredit, ruleCredit, hf, hb]
+  norm_num [encodeCounts]
+
+#print axioms direction_0
+#print axioms conditioned_0
+
+theorem direction_1 :
+    11 = geometricCredits.getD 1 0 ∧
+    0 = completedCredit 1 ∧
+    18 = conditionalCredit 1 := by decide +kernel
+
+theorem conditioned_1 (code : Nat) :
+    conditionedCredit 1 code = (if code%7776 = 7106 then 96 else 0) := by
+  have hf : canon ((extensions.getD 1 []).drop 3) = [0,1,2,0,3,4] := by decide +kernel
+  have hb : canon (((extensions.getD 1 []).drop 3).reverse) = [0,1,2,3,4,2] := by decide +kernel
+  simp only [conditionedCredit, ruleCredit, hf, hb]
+  norm_num [encodeCounts]
+
+#print axioms direction_1
+#print axioms conditioned_1
+
+theorem direction_9 :
+    12 = geometricCredits.getD 9 0 ∧
+    0 = completedCredit 9 ∧
+    18 = conditionalCredit 9 := by decide +kernel
+
+theorem conditioned_9 (code : Nat) :
+    conditionedCredit 9 code = (if code%7776 = 3221 then 96 else 0) := by
+  have hf : canon ((extensions.getD 9 []).drop 3) = [0,1,2,3,4,2] := by decide +kernel
+  have hb : canon (((extensions.getD 9 []).drop 3).reverse) = [0,1,2,0,3,4] := by decide +kernel
+  simp only [conditionedCredit, ruleCredit, hf, hb]
+  norm_num [encodeCounts]
+
+#print axioms direction_9
+#print axioms conditioned_9
+
+theorem direction_10 :
+    12 = geometricCredits.getD 10 0 ∧
+    12 = completedCredit 10 ∧
+    16 = conditionalCredit 10 := by decide +kernel
+
+theorem conditioned_10 (code : Nat) :
+    conditionedCredit 10 code = max (if code%7776 = 3725 ∨ code%7776 = 6980 then 96 else 0) (max (if code%7776 = 5021 ∨ code%7776 = 6981 then 96 else 0) ((if code%7776 = 4871 ∨ code%7776 = 6831 then 120 else 0))) := by
+  have hf : canon ((extensions.getD 10 []).drop 3) = [0,1,2,3,4,5] := by decide +kernel
+  have hb : canon (((extensions.getD 10 []).drop 3).reverse) = [0,1,2,3,4,5] := by decide +kernel
+  simp only [conditionedCredit, ruleCredit, hf, hb]
+  norm_num [encodeCounts]
+
+#print axioms direction_10
+#print axioms conditioned_10
+
+theorem direction_12 :
+    14 = geometricCredits.getD 12 0 ∧
+    16 = completedCredit 12 ∧
+    16 = conditionalCredit 12 := by decide +kernel
+
+theorem conditioned_12 (code : Nat) :
+    conditionedCredit 12 code = (if code%7776 = 3130 ∨ code%7776 = 6350 then 48 else 0) := by
+  have hf : canon ((extensions.getD 12 []).drop 3) = [0,1,2,3,1,4] := by decide +kernel
+  have hb : canon (((extensions.getD 12 []).drop 3).reverse) = [0,1,2,3,1,4] := by decide +kernel
+  simp only [conditionedCredit, ruleCredit, hf, hb]
+  norm_num [encodeCounts]
+
+#print axioms direction_12
+#print axioms conditioned_12
+
+end Snake9.Context101

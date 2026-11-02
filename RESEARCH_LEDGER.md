@@ -590,3 +590,42 @@ Latest continuation: [milestone 100](milestones/100-prefix-potential-checker/REA
 | Conditional | 177/43 | 6,598 | 165.719 |
 
 Next research priority: generate and prove constant context data and filtered history-rule lists, then certify further complete contexts with the checked prefix traversal. Reuse the two successful contexts; retain both reference-catalogue closures and the five conditional share assumptions. Paper revision 96 is unchanged; the next full revision is 106.
+
+
+## Milestone 101: all context equations and an active capped history
+
+Latest continuation: [milestone 101](milestones/101-context-specialization/README.md) checks exact weights, endpoints and acceptance data for all 791 contexts. A count-dependent emitting context passes both potential checks, bringing complete coverage to two contexts per profile. All-context finite certificates remain pending; the interval remains 191 through 235, with 234 conditional.
+
+All 505 direction lookups and all 791 context equations passed Lean. The
+context equations preserve the exact selected rule list, source and target,
+acceptance class, and both weight profiles. They hold for every natural count
+code. The combined import check found no declaration conflict.
+
+The milestone has 30 checked modules and 5,767
+distinct theorem axiom audits. The only permitted logical axioms are
+`propext`, `Classical.choice` and `Quot.sound`; no incomplete proof or unchecked
+native evaluation is used. Exact sources, snapshots, logs and dependencies
+are recorded in the proof summary and individual receipts.
+
+The complete finite checks now comprise two contexts per profile:
+
+| Profile | Direction/history | Accepted edges | Compiler seconds | Milestone |
+| --- | --- | ---: | ---: | ---: |
+| completed | 35/0 | 7,151 | 121.703 | 100 |
+| conditional | 177/43 | 6,598 | 165.719 | 100 |
+| completed | 99/37 | 6,043 | 111.750 | 101 |
+| conditional | 99/37 | 6,043 | 194.312 | 101 |
+
+Direction 99/history 37 is checked under both profiles, so its 6,043 accepted
+keys must not be counted twice as distinct graph edges. Coverage is 13,194
+accepted edges for the completed profile and 12,641 for the conditional
+profile. Each context theorem covers all 46,656 candidate codes through the
+checked acceptance traversal. The earlier 207 pilot edges are already included.
+
+The complete graph inequalities still need 789 contexts per profile. The
+all-context evaluator equations do not discharge those finite inequalities.
+Compiler times are observations from the recorded runs. Some equation batches
+overlapped the independent finite-check queue, and memory limits temporarily
+delayed new batches. These times are not a controlled performance comparison.
+
+Next research priority: Use the checked equations for all 791 contexts to extend the finite potential certificates. First test exact reduction of each fixed source/target potential lookup to its recorded subtree, retaining the original cap and proving the needed count-code bounds. Benchmark one context per profile before expanding. Reuse the four complete context certificates and preserve the reference/local premises. Paper revision 96 is unchanged; the next full revision is 106.
