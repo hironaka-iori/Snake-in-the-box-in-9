@@ -390,3 +390,34 @@ The paper remains revision 86, with the next scheduled full revision at 96.
 The maintained interval is 191 through 235; 234 remains conditional. Case7302
 continues through its existing driver without duplicate replay. The new
 checkpoint preserves its current successful rows, logs and process observation.
+
+
+## Milestone 88: rejection boxes and a checked coverage pilot
+
+2 November 2026. The round adds 26 Lean theorem audits: box-prefix containment,
+digit reconstruction, four rejection-witness families, six-way coverage,
+numeric-retention assembly and three concrete pilot checks. Two additional
+data modules compile with no theorem audits. Every printed theorem uses only
+standard axioms; the pilot coverage equation uses none. Inherited objects
+are reused without a complete dependency rebuild.
+
+For direction 0 and history 0, all 375 witnesses and the coverage tree pass
+kernel checks. The retained-code membership theorem follows. There are 723
+distinct tree nodes, 11,869 expanded visits and 6,123 accepted codes. The
+concrete proof module takes 92.594 seconds; graph and pilot data compilation
+take 96.219 and 46.203 seconds respectively.
+
+Computational box reconstruction agrees on all 791 compatible blocks and
+4,947,008 rows. Maximum-uncovered selection retains 356,548 direct occurrences,
+1,369 fewer than the preserved baseline. Every selected direct box has a
+private code; no minimum-size cover is claimed. The more useful reduction
+finds a common geometric cover in all 127 membership classes, with 82,659
+class-box occurrences. Context-specific witness lists for those common
+covers still need materialization and Lean checks.
+
+All-context finite coverage, diagram-to-row identification, endpoint columns,
+the two reference-catalogue premises, credit interpretation and full potential
+replay remain open. The bounds remain 191 through 235, with 234 conditional.
+The paper stays at revision 86, next scheduled revision 96. The existing
+case7302 replay continues; its partial logs are preserved in a delta snapshot
+with reused and freshly hashed objects distinguished.

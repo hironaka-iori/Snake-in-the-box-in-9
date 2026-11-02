@@ -1,0 +1,82 @@
+{
+  "status": "PASS_GENERIC_BOX_COVER_AND_ONE_KERNEL_PILOT",
+  "theorem_audits": 26,
+  "modules": [
+    {
+      "module": "Boxes",
+      "receipt": "Boxes-audit.json",
+      "sha256": "61e72ef3d45bc74f07207dd93b7752ccbcc5f9866b7358b3ca474dcaf46a33e1",
+      "audits": 2
+    },
+    {
+      "module": "DigitReconstruction",
+      "receipt": "DigitReconstruction-audit.json",
+      "sha256": "b7aba19b62a33357edf4a41572c5263f2bf4503cd05467cfd42343650fdd0b83",
+      "audits": 5
+    },
+    {
+      "module": "BoxWitness",
+      "receipt": "BoxWitness-audit.json",
+      "sha256": "ff5b4d7546edd5a22dacea3ca180e0e906710c0122f6a470a35b278c546f3001",
+      "audits": 8
+    },
+    {
+      "module": "CoverTree",
+      "receipt": "CoverTree-audit.json",
+      "sha256": "b8c30fefe66257a6396615c93b47953af4f3d7daf4f3bb60e92ba17bf6b3c0c9",
+      "audits": 4
+    },
+    {
+      "module": "CoverageAssembly",
+      "receipt": "CoverageAssembly-audit.json",
+      "sha256": "ab6f88431d8abb606e738dcb71374772c2b84e6877b300883af52df3de15e3d2",
+      "audits": 4
+    },
+    {
+      "module": "GraphData",
+      "receipt": "GraphData-audit.json",
+      "sha256": "1e2461f0368f58f6a552797af053ce199a84df14fc6f7ac4799e5dccc18d9545",
+      "audits": 0
+    },
+    {
+      "module": "Case000Data",
+      "receipt": "Case000Data-audit.json",
+      "sha256": "0ebd5fce0c98f0c256f1d146dad285b7489229b9dc1780c491bd5cc236f938df",
+      "audits": 0
+    },
+    {
+      "module": "Case000Checks",
+      "receipt": "Case000Checks-audit.json",
+      "sha256": "d49730901052ad84f60d49874f613997057ff043503a6079299fb2e8a79072ea",
+      "audits": 3
+    }
+  ],
+  "paper_unchanged_sha256": "eb9d5581336060b799e93b7532f59cdb485ce7f5ee39b28bd2f0fdfba4a09ec3",
+  "pilot": {
+    "direction": 0,
+    "history": 0,
+    "boxes": 375,
+    "accepted_codes": 6123,
+    "unique_tree_nodes": 723,
+    "expanded_node_visits": 11869,
+    "receipt_sha256": "d49730901052ad84f60d49874f613997057ff043503a6079299fb2e8a79072ea",
+    "status": "PASS_PILOT_KERNEL_CERTIFICATE"
+  },
+  "computational": {
+    "compatible_contexts": 791,
+    "membership_classes": 127,
+    "shared_cover_box_occurrences": 82659,
+    "context_witness_lists_materialized": false,
+    "receipt_sha256": "e4d9023ee24c8d706cc83886ca7865c45c4b4dd6a98c1d0b1b5bbd0f59c5cd39"
+  },
+  "reference_premises": [
+    "AllRefuted6K235",
+    "AllRefuted236"
+  ],
+  "remaining_structural_premises": [
+    "Concrete witnesses and covers for all compatible contexts",
+    "Diagram membership implies saved full-key row membership",
+    "Concrete source-column and target-column identities"
+  ],
+  "scope": "Generic rejection and coverage chain plus one concrete context checked in Lean. All-context box sharing is computational. No closed full finite coverage, weight interpretation, complete potential replay or new global bound. Inherited support objects reused without a full rebuild."
+}

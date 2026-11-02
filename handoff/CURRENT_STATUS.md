@@ -164,10 +164,29 @@ The Python checks do not discharge the concrete Lean coverage or endpoint
 premises, and do not certify equality with the executable Lean predicate.
 The 791 blocks share only 127 distinct count-code sets. A shared six-way
 decision diagram with 3,981 nonterminal nodes reconstructs every set and
-block exactly, occupying 29,924 compressed bytes. Its coverage implication
-still needs a Lean proof; this is the next finite certificate target.
+block exactly, occupying 29,924 compressed bytes. Milestone 88 supplies the generic coverage implication and one concrete
+checked context; the complete finite certificate remains open.
 The combined imports reuse hash-checked existing proof objects; no complete
 dependency rebuild is claimed.
+
+Milestone 88 adds 26 Lean theorem audits. A rejection box is a product of
+six count intervals with a checked original-rule witness. A six-way coverage
+tree proves that every vector is either accepted by a membership diagram or
+contained in one of these boxes. The generic theorem proves numeric retention
+implies diagram acceptance; its actual-snake specialization retains the two
+reference-catalogue premises. The direction-0/history-0 pilot supplies the
+finite premises: Lean checks all 375 witnesses, the coverage equation and the
+resulting retained-code theorem. It has 723 distinct tree nodes and 6,123
+accepted codes; the three concrete proof checks took 92.594 seconds.
+
+The computational reconstruction still matches every saved block. Moreover,
+all 127 membership classes have a common box cover available across every
+context of that class. Pruning yields 82,659 class-box occurrences, compared
+with 356,548 direct direction-box occurrences. This suggests 127 shared
+geometric checks. Each context still needs its own rule witnesses; only example
+witnesses are stored with the common covers. The full all-context Lean
+certificate and identification with the saved full-key rows remain open.
+These generic and pilot results do not give a new global bound.
 
 The remaining structural work is to supply the two closed reference
 catalogue proofs and a concrete Lean retention cover with endpoint-column
@@ -217,7 +236,7 @@ guards, interval-filter assembly, catalogue audit and a later replay observation
 Milestone 81 saves the forty-rule theorem, independent review and exact comparison.
 Milestone 84 saves the three-history theorem. Milestone 85 saves the exact reference
 table, conditional theorem, provenance review, exhaustive comparison and a later
-case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 87 contains the current shared handover versions and a later replay observation.
+case7302 observation. Milestone 86 incorporates these results into the paper; its manifest identifies that revision. Milestone 88 contains the current shared handover versions and a later replay observation.
 Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
@@ -228,3 +247,5 @@ prefixes and their assembly require Lean proofs. The
 generation script itself is outside the trusted proof argument. Preserve the
 completed case7305 receipts; inspect actual processes before starting any
 new case. Do not repeat its successful unchanged replay. Tool session numbers are local to the original execution context.
+
+Milestone 88 freezes 348 successful case7302 replay rows, including 84 newly observed since milestone 87. The log archive and hash scopes are explicit. This is a partial snapshot; the final local-share theorem remains pending.

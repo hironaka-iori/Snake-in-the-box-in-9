@@ -2,7 +2,7 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 87](milestones/87-retained-array-membership/README.md) proves executable numeric retention and conditional saved-edge indexing, with 27 new Lean theorem audits. An independent comparison matches all 36,904,896 compatible candidate keys and all 4,947,008 stored edges. The retention-cover definition isolates the remaining finite coverage certificate. Full keys must be preserved: 206,589 endpoint pairs have two edges. The two reference-catalogue premises, concrete Lean coverage, weights and potential remain separate obligations. The paper stays at revision 86; the interval remains 191 through 235, with 234 conditional.
+Latest continuation: [milestone 88](milestones/88-retention-diagram-certificate/README.md) adds 26 Lean theorem audits for rejection boxes, six-way coverage and a concrete direction-0/history-0 pilot. Lean checks its 375 witnesses and coverage tree. Computationally, all 791 contexts admit covers grouped into 127 membership classes, with 82,659 shared box occurrences; all-context Lean certification remains open. The two reference premises, saved-row and endpoint identification, weights and potential remain separate obligations. The paper stays at revision 86; the interval remains 191 through 235, with 234 conditional.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 

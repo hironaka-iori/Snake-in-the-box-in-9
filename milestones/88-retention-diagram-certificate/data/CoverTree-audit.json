@@ -1,0 +1,47 @@
+{
+  "module": "CoverTree",
+  "exit_code": 0,
+  "seconds": 10.20299999999952,
+  "source_sha256": "a965f33fb9cbfa4cde96f4dd4f121ecf356f3e055fbd3cb6d314fd732b18c779",
+  "log_sha256": "f4740eb493dfc6cf433f781e013f42947885fa828fd7298ecd00eacd11defc75",
+  "dependencies": {
+    "Boxes": "61e72ef3d45bc74f07207dd93b7752ccbcc5f9866b7358b3ca474dcaf46a33e1"
+  },
+  "status": "PASS_GENERIC_COVER_MODULE",
+  "olean_sha256": "ddf153da22cf5eab1126c1b4ed69edcaeafdfacbc5d382bf23bb39cc91b7f03b",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.Boxes88.diagram_one",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Boxes88.reject_prefix_sound",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Boxes88.checkCover_sound",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Boxes88.cover_implies_membership",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "scope": "Generic box-prefix and diagram-cover checker correctness only; concrete diagram data and rejection witnesses need separate checked certificates."
+}

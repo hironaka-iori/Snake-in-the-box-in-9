@@ -1,0 +1,11 @@
+E:\Snake-in-a-box\milestones\88-retention-diagram-certificate\lean\Boxes.lean:29:13: error: unknown constant 'Bool.and_eq_true.mp'
+E:\Snake-in-a-box\milestones\88-retention-diagram-certificate\lean\Boxes.lean:28:62: error: unsolved goals
+b : Box
+pref : List ℕ
+f : ℕ → ℕ
+hc : coversPrefix b pref = true
+hprefix : ∀ j < pref.length, f j = pref.getD j 0
+hvalid : ∀ j < 6, 1 ≤ f j ∧ f j ≤ 6
+⊢ inside b f
+'Snake9.Boxes88.insideB_iff' depends on axioms: [propext, Quot.sound]
+'Snake9.Boxes88.coversPrefix_sound' depends on axioms: [sorryAx]

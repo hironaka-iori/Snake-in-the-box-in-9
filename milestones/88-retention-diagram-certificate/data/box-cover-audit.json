@@ -1,0 +1,108 @@
+{
+  "status": "PASS_EXACT_REJECTION_BOX_COVER",
+  "scope": "Exact computational rejection-box cover. No closed Lean coverage certificate or new global bound.",
+  "base_directions": 505,
+  "history_modifications": 3,
+  "compatible_blocks": 791,
+  "incompatible_blocks": 37084,
+  "matched_edges": 4947008,
+  "raw_boxes": 573640,
+  "unique_per_direction_boxes": 543829,
+  "duplicates_removed": 29811,
+  "after_forward_union_pruning": 365523,
+  "selected_box_occurrences": 357917,
+  "global_distinct_selected_boxes": 2635,
+  "selected_by_family": {
+    "reference": 338806,
+    "interval": 2780,
+    "short": 16331
+  },
+  "selected_min": 302,
+  "selected_max": 965,
+  "all_selected_boxes_have_original_witness": true,
+  "all_selected_boxes_have_private_code": true,
+  "all_complements_equal_saved_and_dag": true,
+  "history_details": [
+    {
+      "direction": 177,
+      "history": 43,
+      "box": 2628,
+      "witness": {
+        "family": "history",
+        "index": 0,
+        "history": 43,
+        "signature": [
+          139,
+          353,
+          177
+        ]
+      },
+      "newly_rejected": 1625
+    },
+    {
+      "direction": 177,
+      "history": 70,
+      "box": 2628,
+      "witness": {
+        "family": "history",
+        "index": 2,
+        "history": 70,
+        "signature": [
+          460,
+          353,
+          177
+        ]
+      },
+      "newly_rejected": 1625
+    },
+    {
+      "direction": 180,
+      "history": 68,
+      "box": 2629,
+      "witness": {
+        "family": "history",
+        "index": 1,
+        "history": 68,
+        "signature": [
+          460,
+          350,
+          180
+        ]
+      },
+      "newly_rejected": 629
+    }
+  ],
+  "sum_assignment_counts": {
+    "481": 6,
+    "482": 10,
+    "501": 115
+  },
+  "compressed_payload_bytes": 4208880,
+  "uncompressed_payload_bytes": 53148320,
+  "payload_sha256": "4063dc58ec6ccdcd1236318f5d0a88e808e110c6163cfbb974caf9609f451d35",
+  "payload_raw_sha256": "8bd021f17aa9f78e43d109a1706452f7445ed124039247f38b8d4a0d9b89acf2",
+  "pruning": "Exact duplicates removed; descending-volume union pruning removes every subsumed box; reverse deletion gives an inclusion-minimal cover with private-code witnesses. No minimum-cardinality claim.",
+  "input_sha256": {
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/67-critical-family-charge/data/full-model.json": "08fc18347eff9065d873cb8be01b4b72129e1ee939b4bf1474d04640cc8bc274",
+    "milestones/85-reference-catalogue-union/data/reference-union.json": "dea948631bbccd4c81a1b590dfeeb7f606bd44fc664861f7667b6d041e267289",
+    "milestones/81-recovered-short-rule-retention/data/normalized-rules.json": "212484a78ab48ba3760a8631048fe17e01e5608080e1448d353490fbe5db6c7e",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/72-four-count-proof-closure/data/cases.json": "8b239e85cdc5f8fcffb7e5b06f8aa73a3428625cc354ee74c71328f445042e0e",
+    "milestones/81-recovered-short-rule-retention/lean/CapCatalogue.lean": "726d4a6c10247ab4a947a4d987f3ee2c8d17172ede922957e1b80373d2ce95a6",
+    "milestones/81-recovered-short-rule-retention/lean/SumCatalogue.lean": "7e8d5c9689cf85ee71db00e5d5f309950979b12d5683240fa57a9bb47cc19238",
+    "milestones/79-retained-edge-guards/lean/IntervalCatalogue.lean": "f0f3a137cb49c74b66a098ab051a9f0c1974acf486b772aa6f7098bff15e2f3f",
+    "milestones/87-retained-array-membership/lean/NumericRetention.lean": "85c8537aedce983be597c7758eb2a2577d126c3328f434f4edc1cb4cb9faa84b",
+    "milestones/87-retained-array-membership/lean/RetainedPredicates.lean": "38eff8f2cab241f83bee41be55b5697eb0f24af4b5492459d7719a01092bcc12",
+    "milestones/84-history-exclusion-retention/lean/HistoryExclusions.lean": "dd582ec86bd3f9c78b6377039f933548f00c2373dcbe200e4072bcc3f5b331b1",
+    "milestones/85-reference-catalogue-union/lean/ReferencePicks.lean": "679eb5065aefc66a5caf0bfc3507481e7919f727fca03d697fc306b9849f4948",
+    "milestones/85-reference-catalogue-union/lean/ReferenceUnion.lean": "ed210b12a54cf11ec5e3f50f2d8ecbe836847202e113230eaaeb9a18b296520d",
+    "milestones/87-retained-array-membership/data/NumericRetention-audit.json": "364985551bcfdec435cd08bb258c7bfb705074b996d5384a597da7e6d468e4df",
+    "milestones/54-share-coverage/data/keys_235.json": "7f242c8a9218279ce5d1d2d34f9d34a15378efd687b291206e6d52f4dff86411",
+    "milestones/39-audited-bound-236/data/exclusion-catalogue.json": "902ba82c389cd5dcb0748c4d3fd8bbb59b38fd7e31bef6b32bd50787beb215db",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/87-retained-array-membership/data/coverage-membership-dag.json.gz": "5ded4dbe27d3ba795e57e241289facce6444789e30edb9531a312fab58818823"
+  },
+  "script_sha256": "a8f2be4d7c23a92f4b7a893132f4a86d6e0b3316da7f76bd4e7d5d1c009f141c",
+  "seconds": 15.734000000000378
+}

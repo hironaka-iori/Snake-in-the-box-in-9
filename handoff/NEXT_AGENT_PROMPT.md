@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, milestone 87's structural proof checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
+`handoff/CURRENT_STATUS.md`, milestone 88's coverage-pilot checkpoint and milestone 86's paper checkpoint. Milestone 83 preserves the active case 7302 proof sources.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -46,10 +46,23 @@ passed on all 36,904,896 compatible candidate keys, but it does not certify the
 Lean predicate's finite table. Preserve full keys because 206,589 endpoint
 pairs have two edges. Use the saved membership decision diagram: 127 distinct
 count-code sets, 3,981 nonterminal nodes, all blocks independently reconstructed.
-Its complete compressed data and generator are in milestone87. Prove numeric
-acceptance implies acceptance by the assigned diagram root, then certify its
-row indexing and endpoint columns. A complementary certificate could cover
-omitted codes by proved forbidden regions. These proof designs remain open.
+Its complete compressed data and generator are in milestone87.
+Milestone 88 supplies generic rejection boxes, witnessed exclusions, a
+six-way coverage checker and the theorem from numeric retention to diagram
+membership, with 26 theorem audits including a concrete pilot. Reuse these
+checks; direction 0/history 0 already passes all 375 witness checks and its
+coverage equation. Do not treat this pilot as all-context coverage.
+
+The next finite task is to materialize context-specific witnesses for the
+127 common covers in milestone88's max-gain payload. Their geometry covers
+all rejected codes in every class computationally; the selected covers have
+82,659 class-box occurrences. Generate and check one coverage tree per class,
+then each context's witness list. The current class data contains example
+witnesses only. Run measured sequential batches; the pilot's proof check took
+about 93 seconds, excluding data compilation. Retain failures and exact source,
+object and log hashes. Then certify the link from each diagram root to the
+recorded full-key rows and the two endpoint columns. Do not identify weighted
+edges solely by endpoints.
 After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.
 Symbol six represents the interval [6,21]. Alternative

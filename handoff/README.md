@@ -13,13 +13,19 @@ Use its [checkpoint](../milestones/86-paper-revision/data/checkpoint.json) and
 paper revision and its historical handover and replay observation.
 
 The current structural proof checkpoint is
-[milestone 87](../milestones/87-retained-array-membership/README.md), with 27
-Lean theorem audits, executable numeric retention and conditional saved-walk
-indexing. Exact computational coverage passes on all 36,904,896 compatible
-candidate keys. Concrete Lean coverage and endpoint-column certificates remain
-open. Use its [checkpoint](../milestones/87-retained-array-membership/data/checkpoint.json)
-and [manifest](../milestones/87-retained-array-membership/data/file-manifest.json)
-for the current shared handover versions and replay observation.
+[milestone 88](../milestones/88-retention-diagram-certificate/README.md), with
+26 Lean theorem audits for rejection boxes, coverage trees and one concrete
+direction-0/history-0 certificate. Its 375 witnesses and coverage equation
+are checked. All-context coverage remains open; a computational common-cover
+construction reduces the geometric work to 127 membership classes.
+Use its [checkpoint](../milestones/88-retention-diagram-certificate/data/checkpoint.json)
+and [manifest](../milestones/88-retention-diagram-certificate/data/file-manifest.json)
+for current handover versions and the latest preserved replay observation.
+
+[Milestone 87](../milestones/87-retained-array-membership/README.md) supplies
+executable numeric retention and conditional saved-walk indexing, with 27
+audits and exact computational coverage of 36,904,896 compatible candidate
+keys. Saved-row and endpoint-column certificates remain necessary.
 
 The preceding reference checkpoint is
 [milestone 85](../milestones/85-reference-catalogue-union/README.md): 103 audits,
@@ -52,7 +58,7 @@ records the forty-rule retention theorem, 66 audits, exact-loop comparison,
 receipt hashes, repository refs and unchanged paper hash.
 Its [saved-file manifest](../milestones/81-recovered-short-rule-retention/data/file-manifest.json)
 records the versions saved with that milestone. Shared handover files have since
-been updated; use milestone 87's manifest for their current versions.
+been updated; use milestone 88's manifest for their current versions.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
 inspected contributor theorem and saved audit, without a fresh complete local
@@ -76,7 +82,8 @@ state sequence. Milestone 79 connects encoded counts to exclusion predicates
 and instantiates the ten completed interval filters. Milestone 81 closes the forty
 recovered short filters. Milestone 84 closes all three history exclusions.
 Milestone 85 checks the reference union under two explicit closed catalogue
-premises. Milestone 87 supplies conditional indexing. The remaining structural work
+premises. Milestone 87 supplies conditional indexing, and milestone 88 supplies the
+generic coverage argument and one checked context. The remaining structural work
 is the closed reference proofs and concrete finite coverage/endpoint certificates;
 credit interpretation follows. Complete the local
 shares and potential replay before claiming 234. Historical manifests retain
