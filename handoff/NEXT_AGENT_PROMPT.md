@@ -1,107 +1,106 @@
 # Continuation assignment
 
-Continue the empty-square route in E:/Snake-in-a-box. Read milestone 109's
-mathematical note, proof summary, checkpoint and final independent review.
-Verify milestone 104's live record and actual process. Do not duplicate or
-change the running complete potential batch.
+Continue the empty-square route in `E:/Snake-in-a-box`. Read milestone
+110's mathematical note, proof summary, checkpoint and final review.
+Verify milestone 104's saved progress against its actual process. Keep
+the full research goal active and leave the running batch intact.
 
-## Checked restrictions
+## Latest checked result
 
-Snake9.RelaxedGraph109.relaxed_01234_refuted proves
-Refuted (winOf [0,1,2,3,4]) [(0,1),(0,5),(0,21),(0,2)].
-actual_01234_counts transports this to every actual snake window: for five
-distinct transition directions, alpha at centres 1,2,4 must reach 2,6,3
-respectively in at least one position. Centre 3 is unrestricted. Both encoded
-graph orientations are checked separately. ActualRelaxed109 also transports
-the prior 012304 exclusion to actual snakes.
+`PlainCount110.lean` proves that counts `[5,5,2,4,5]` cannot occur on an
+actual six-transition window with canonical directions `[0,1,2,3,4,0]`.
+It also proves the two graph-orientation guards at count offsets 0 and 1.
+The final theorem has no collective reference-catalogue premise.
 
-The D01234A1542 inputs come from pin 7cb52aad. Its 441 core clauses match the
-archived 24,359-clause formula. Fresh LRAT has 270 steps and 1,343 hints;
-independent plain-clause RUP and Lean both pass. The relaxed semantics changes
-only unused counter limits 2,4,5,6,8 to 21. All metadata is rechecked.
+The local formula has 59,251 clauses and 3,484 variables. The checked core
+has 1,664 clauses; a regenerated contradiction uses 2,007 deductions and
+177,364 hints. The final proof renumbers 1,069 active variables first and
+updates all meanings/counter literals. Sixty-four modules under
+`lean/Recovered110/` plus `PlainCount110` pass. Six axiom reports are audited.
+`scripts/audit.py` independently replays the exact renumbered proof and
+checks source/object/log/receipt hashes. Imported dependency objects are
+reused from the previously audited environment; a clean complete rebuild
+remains separate.
 
-ReferenceCoverage109 proves twelve entries and the full-union equivalence
-after filtering their explicit keys. The remaining list has 1,366 entries.
-Recovered indices are 0,472,495,535,572,602,619,620,1006,1010,1011,1014.
-Use reference_union_iff_remaining_twelve rather than earlier residual lists.
-Ten final modules and sixteen printed axiom reports pass. No new mathematical
-definitions were introduced. Shared support objects were reused.
+The original export files under `lean/LocalWindow*` are preserved but
+are not the final checked modules. `generated-remapped/` holds the
+pre-isolation export. `data/isolated-plan.json` pins the import-only
+transformation. Use unique import prefixes for new work; avoid shadowing
+old `LocalWindowCnf`, `LocalWindowSat` or `LocalWindowUnsat` directories.
 
-## Exact graph results and next priority
+## Numerical result and next test
 
-The proved 012304 box adds no exclusion to the 4,947,008 accepted full keys.
-The new 01234 box excludes 2,092 keys, leaving 4,944,916. Both mean-attaining
-cycles survive. Recomputed completed and conditional profiles remain
-483/range 551 and 496/range 602. Exact potentials check every remaining edge.
-The five existing obstruction walks also survive when the corresponding
-pending floor is lowered by one. These are native integer calculations;
-no complete new Lean certificate for the restricted graph is supplied.
-The original active graph is unchanged.
+The new theorem excludes 865 extra accepted keys beyond the 2,092 from
+milestone 109, leaving 4,944,051. The previous displayed mean-483 cycle
+is broken, but another cycle preserves mean 483/range 551. Conditional
+mean 496/range 602 also survives.
 
-RangeBarrier109 proves the arithmetic reason to target cycles: if P<=483 and
-R>=0, the charge comparison cannot exclude length 235; if P<=496 and R>=0,
-it cannot exclude length 234. Even zero potential range cannot improve the
-integer bounds while these cycle means persist under the same charge method.
+All seven targeted count probes returned native UNSAT. Six used no extra
+cycle cuts; edge 2139224 used three. Only edge 3534483 has a checked theorem.
+Even assuming all seven exclusions removes just 4,773 additional keys
+and preserves both numerical comparisons. Hypothetical share floors 76
+on the same seven patterns also preserve them. The full 143-root archived
+core scan found no relaxed box that hits either original limiting cycle.
+Do not repeat these screens without changed assumptions.
 
-The small-core screen examined sixteen distinct older roots with recorded
-proof hint counts at most 5,000. It derived candidate interval boxes from
-the counter limits used by .over tags, preserving all other source data.
-Only the D01234A1542 candidate was newly proved. All sixteen candidates miss
-both current sharp cycles. Other proposed exclusions and their reported
-coverage remain hypotheses, even when native tests show graph hits.
+Next seek a single count inequality or interval restriction that excludes
+a family of surviving configurations. Examine the exact cycles saved in
+`data/count-profiles-all/results.json` first. The completed-profile cycle
+has cyclic count pattern `[2,5,6,3]`; the conditional cycle has `[4,3,5,4]`.
+Symbol 6 means actual count between 6 and 21. The data include complete
+directions, history, state endpoints and count codes; these are finite-model
+cycles, with no actual-snake realization asserted.
 
-Next broaden this source screen beyond the sixteen small roots. Milestone 107
-records 143 exact older alternatives with pinned source and metadata paths.
-Test a proposed relaxed box on the saved sharp cycles first, then on all full
-keys if it hits a cycle. Rank critical-cycle hits before raw edge counts or
-catalogue coverage. Avoid replaying many proofs whose numerical obstruction
-has already been shown to survive. If no older core hits either cycle, record
-that bounded negative result and choose a stronger window condition aimed at
-the actual cycle patterns, preserving the empty-square route.
+Test a candidate family restriction on both full graph profiles before
+investing in large proof generation. Broadening the proved case by using
+which counter limits its contradiction actually needs is one possible
+test, but no relaxed version has been established. Preserve the count
+semantics, endpoint constraints and coordinate alignment in every attempt.
+The six other isolated certificates are lower priority because their
+combined numerical effect is already known.
 
-The screen must select metadata matching the Cnf source's generator family.
-Overlapping catalogues may carry the same root with different historical
-metadata. Recheck decoded raw clauses against the chosen full CNF before
-proof generation. Every counter is validated, including unused counters.
-Tags without .over may reference a counter without constraining its limit;
-this permits a screening candidate, not an automatic theorem.
+All graph results in this milestone are native integer computations, with
+matching minimum cycles and an inequality checked on every edge. They
+are not complete Lean graph certificates or new global snake bounds.
+Within the all-seven result, each rule's `additional_to_prior` field is
+its marginal addition after both milestone109 and earlier listed rules;
+use the aggregate 4,773 for the combined effect. The one-case result gives
+the independent 865 count for the checked theorem.
 
-Graph keys consist of direction, history and six count symbols. A width-w
-local count window at offset s uses directions drop(s+2).take(w+1).
-Reverse both directions and count positions. Width 5 has s=0,1; width 4 has
-s=0,1,2. Parse actual Lean graph tables and check all accepted keys. Do not
-collapse parallel edges or substitute numeric acceptance for diagram acceptance.
+## Preservation and outstanding proof obligations
 
-## Other obligations and preservation
+The reference union still has 1,366 unresolved entries. The twelve proved
+indices are 0,472,495,535,572,602,619,620,1006,1010,1011,1014. Use the latest
+equivalence in `ReferenceCoverage109`; this new theorem is outside that
+original union and does not reduce its residual count.
 
-Milestone 104 generates AllCompleted104 and AllConditional104 only after all
-groups pass. Audit final coverage, dependencies and axioms before declaring
-complete graph certificates. A stale lock or observation timeout is not terminal.
-Keep at most one additional compiler with the existing memory gate.
+Milestone 104 continues checking complete original-graph potentials.
+Do not modify its active generator/checker/source files, restart it from
+a timeout or stale observation, or infer completion from its live status.
+Audit final group coverage, dependencies and axioms when it finishes.
+At most one extra Lean compiler is allowed, subject to the saved memory
+gate. Do not use `-M4096` or copy the 3.3 GB shared support overlay.
 
-Conditional 234 still needs cases 7301,7302,7303,7307,7308 with caps 15,17,15,15,15,
-hence floors 16,18,16,16,16. The old case 7302 target 20 replay remains stopped
-after its preserved 900-second timeout and 649 successful modules. A target 18
-proof needs new sources. The complete reference union remains unresolved.
+Conditional 234 still requires the remaining reference union, complete
+potential assembly, and the five local floors `(16,18,16,16,16)`. The old
+7302 target20 proof remains stopped after its preserved timeout; a
+target18 proof requires new files. Do not restart the old batch.
 
-The maintained interval is 191 through 235 edges using the contributor proof
-and archived audit for 235, with a full independent rebuild pending. The exact
-optimum and 196 remain unresolved. Keep the full goal active.
+The maintained interval is 191 through 235 edges, based on the contributor
+proof and archived audit with a full independent rebuild pending. Neither
+196 nor another exact optimum is proved.
 
-The paper remains revision 106; the next full revision is 116. Preserve
-D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and its repository mirror,
-all three authors and exact hypersetup. The built-in compiler failed before
-TeX processing; no current PDF is verified. Define only essential recurring
-concepts and keep Lean implementation details out of the manuscript.
+The open paper is `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`;
+the repository mirror is `paper/snake9_research.tex`. Revision106 is
+unchanged and the next scheduled full revision is116. Preserve Iori
+Hironaka, Tommy Ma and Steven Zhan as authors and preserve hypersetup.
+The built-in compiler previously failed before TeX execution; no new PDF
+is verified. Introduce a definition only if essential and repeatedly used.
+Keep implementation filenames out of the mathematical manuscript.
 
-Python: C:/Users/hironakaiori/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
-with -B -X utf8. Lean 4.19 and mathlib are under
-D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research.
-Use build-isolated, environment-isolated.json and unique import prefixes.
-Do not shadow shared LocalWindowSat/Cnf/Unsat directories, copy the full
-support overlay, or add -M4096.
-
-Leave unrelated .gitignore and milestones/50-three-count-return/excess-screen/
-data/critical-family.json changes untouched. Fetch before publishing, stage
-exact reviewed files, verify staged bytes, and push each completed round.
-Do not rewrite historical handover manifests to match newer shared documents.
+Python is `C:/Users/hironakaiori/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`
+with `-B -X utf8`. Lean4.19 and mathlib are under
+`D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research`.
+Use explicit working directories, exact saved hashes and bounded attempts.
+Push each completed round after checking incoming GitHub changes; leave
+unrelated edits to `.gitignore` and the milestone50 critical-family file.

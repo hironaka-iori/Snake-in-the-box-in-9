@@ -1,0 +1,158 @@
+{
+  "status": "EXACT_FINITE_PROFILES_UNDER_PROPOSED_COUNT_EXCLUSIONS",
+  "rules": [
+    {
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        0
+      ],
+      "counts": [
+        5,
+        5,
+        2,
+        4,
+        5
+      ],
+      "source": "milestones/110-critical-cycle-core-screen/data/plain-probes/edge3534483-plain.json",
+      "matches_full_graph": 865,
+      "additional_to_prior": 865
+    }
+  ],
+  "profiles": [
+    {
+      "profile": "completed",
+      "mean": "483",
+      "p": 483,
+      "d": 1,
+      "range_scaled": 551,
+      "range": "551",
+      "cycle": [
+        {
+          "edge": 1652336,
+          "u": 396197,
+          "v": 114370,
+          "direction": 173,
+          "history": 0,
+          "count_code": 44386,
+          "weight": 600
+        },
+        {
+          "edge": 372786,
+          "u": 114370,
+          "v": 592909,
+          "direction": 47,
+          "history": 0,
+          "count_code": 33037,
+          "weight": 252
+        },
+        {
+          "edge": 2610307,
+          "u": 592909,
+          "v": 1146896,
+          "direction": 258,
+          "history": 0,
+          "count_code": 11600,
+          "weight": 360
+        },
+        {
+          "edge": 3533951,
+          "u": 1146896,
+          "v": 396197,
+          "direction": 352,
+          "history": 16,
+          "count_code": 22949,
+          "weight": 720
+        }
+      ],
+      "weight_sha256": "541934d6004e70c191025af215dd1ee68e35a18f710d06d6cd81d0283cc109d5",
+      "potential_file": "completed-potential.i64.gz",
+      "potential_sha256": "99f6b5ad1c2998cf729eba55a1c6ddc04d470757d05ac58bda36f3271c5f65ee",
+      "all_edge_inequalities_checked": true,
+      "iterations": 27,
+      "comparison_bound": "157625/669",
+      "comparison_integer_bound": 235,
+      "seconds": 21.312000000005355
+    },
+    {
+      "profile": "conditional_floor18",
+      "mean": "496",
+      "p": 496,
+      "d": 1,
+      "range_scaled": 602,
+      "range": "602",
+      "cycle": [
+        {
+          "edge": 3409474,
+          "u": 1241019,
+          "v": 1551909,
+          "direction": 350,
+          "history": 28,
+          "count_code": 27813,
+          "weight": 496
+        },
+        {
+          "edge": 1818803,
+          "u": 1551909,
+          "v": 182432,
+          "direction": 179,
+          "history": 68,
+          "count_code": 26912,
+          "weight": 378
+        },
+        {
+          "edge": 732711,
+          "u": 182432,
+          "v": 970180,
+          "direction": 79,
+          "history": 0,
+          "count_code": 21508,
+          "weight": 612
+        },
+        {
+          "edge": 4453367,
+          "u": 970180,
+          "v": 1241019,
+          "direction": 460,
+          "history": 0,
+          "count_code": 35739,
+          "weight": 498
+        }
+      ],
+      "weight_sha256": "787b2b5ad8fd162d59b0d31ed403a953f50bf9e8423eb9df9e69ff93d6a41af5",
+      "potential_file": "conditional_floor18-potential.i64.gz",
+      "potential_sha256": "95a984e2f1923ee58cf5804c21d54726f6b686bb369c6298243c5e3bc21dbb87",
+      "all_edge_inequalities_checked": true,
+      "iterations": 21,
+      "comparison_bound": "551765/2348",
+      "comparison_integer_bound": 234,
+      "seconds": 16.718999999997322
+    }
+  ],
+  "states": 1601856,
+  "edges": 4944051,
+  "removed": 2957,
+  "additional_removed": 865,
+  "source_files_sha256": {
+    "milestones/110-critical-cycle-core-screen/data/plain-probes/edge1131395-plain.json": "afcad38aef4bbd24ccf15bb80929f757018f0916d31ca6b4f518aea2840887e8",
+    "milestones/110-critical-cycle-core-screen/data/plain-probes/edge1650991-plain.json": "5a54268389cbd272eca203d15ae52801a2008052a6710094b9c275d06bd94c77",
+    "milestones/110-critical-cycle-core-screen/data/plain-probes/edge17417-plain.json": "bb58ed0c4dd3434aa7e1b1829e5f6595330c773fc514ae82472dd5429d267755",
+    "milestones/110-critical-cycle-core-screen/data/plain-probes/edge2139224-plain.json": "46c6c652795d7b76ac1d50b939baa588b4b452a67919530fc069cdeadbc60a08",
+    "milestones/110-critical-cycle-core-screen/data/plain-probes/edge2610423-plain.json": "1fdaace4452df25754257f91a9e0fe13b32aa2ac49231566d912c79ec6a0a415",
+    "milestones/110-critical-cycle-core-screen/data/plain-probes/edge3534483-plain.json": "6df98fb4c17e69cc7a2197e17891209236acd4a7916924f07765d3809bf1fc15",
+    "milestones/110-critical-cycle-core-screen/data/plain-probes/edge372796-plain.json": "eb13ce303cd74cefd580b71a132c1433be0f747b53262df17d8cb5072498e6f8",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/73-countfree-share-catalogue/data/proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18.json": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+    "milestones/109-relaxed-graph-test/data/removed-edge-indices.json": "3a02da92754d33ff2935639180882fd392a02bf588ba7d5525d3365e34513d7c"
+  },
+  "algorithm_sha256": "5ff7a4087ed2df59c67c32d48be305eead051c4f788b870ac4210a1d754c0b1a",
+  "script_sha256": "a24c41989606f7e8fd3e03ee49bc1cf369ba972b66bcb99c1b081e5ff1d20ceb",
+  "seconds": 46.68800000000192,
+  "scope": "Exact finite graph experiment. Proof status of each count exclusion is separate; native UNSAT alone does not establish it. Full graph prerequisites and Lean potential assembly remain pending. No new numerical bound."
+}

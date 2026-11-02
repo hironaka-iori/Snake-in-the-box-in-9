@@ -1,5 +1,41 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 110 checkpoint
+
+A new checked restriction excludes counts (5,5,2,4,5) on canonical
+six-transition direction window 012340. Lean checks the local clause
+semantics, contradiction, actual-snake statement, and both graph orientations.
+Sixty-five modules pass, with six printed axiom reports. The proof has
+1,664 input clauses, 2,007 deductions and 177,364 hints; independent RUP
+replay also passes. No new mathematical definition was introduced.
+
+The theorem removes 865 additional keys beyond milestone 109's 2,092,
+leaving 4,944,051. It breaks the previously displayed completed-profile
+cycle, but a different cycle keeps the mean 483 and range 551. The
+conditional profile remains mean 496 and range 602. Assuming all seven
+proposed exclusions removes 4,773 additional keys, with the same comparisons.
+All seven native count probes reported UNSAT; edge 2139224 needed three
+cycle cuts. Only edge 3534483 has a checked theorem in this round.
+
+The scan of all 143 older proof roots found no relaxed candidate hitting
+the original limiting cycles. Hypothetical share floors 76 on the seven
+patterns also leave both comparisons unchanged. The next priority is a
+restriction covering a family of surviving count patterns; test both full
+profiles before investing in further isolated certificates.
+
+At the saved process-verified observation, milestone 104 was RUNNING with
+55/791 completed and 55/791 conditional contexts
+checked; its active module was ConditionalBatch104G046. The running
+batch and original graph were left intact. The reference union still has
+1,366 unresolved entries, after the twelve checked in earlier milestones.
+
+The maintained interval remains 191 through 235 edges, based on the
+contributor proof and archived audit with its full independent rebuild
+pending. Conditional 234 remains unresolved. The exact optimum and 196
+remain open. Paper revision 106 is unchanged; the next full revision is 116.
+
+Earlier checkpoint sections below are historical snapshots.
+
 ## Milestone 109 checkpoint
 
 For five consecutive distinct transition directions, a new checked

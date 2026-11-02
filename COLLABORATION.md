@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 109](milestones/109-relaxed-graph-test/README.md) proves a restriction for actual snakes and excludes 2,092 graph keys in a separate experiment. Both numerical profile bounds remain unchanged. Twelve reference entries are checked and 1,366 remain; the complete potential batch continues.
+Latest continuation: [milestone 110](milestones/110-critical-cycle-core-screen/README.md) proves a new local count exclusion for actual snakes and removes 865 additional graph keys. Both numerical comparisons remain unchanged, even assuming all seven proposed exclusions. The complete potential batch continues.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -16,7 +16,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
 
-Next research priority: Screen the remaining archived cores for relaxed count bounds that exclude a current sharp-cycle key. All sixteen small candidates screened in milestone 109 miss both sharp cycles. Rank cycle hits before removed-edge counts and verify candidate restrictions in Lean. Preserve the running milestone 104 batch.
+Next research priority: Seek one count inequality or interval exclusion covering a family of the surviving limiting-cycle patterns, and test its effect on both full profiles before certifying isolated cases. All 143 older cores miss the original limiting cycles; all seven new exclusions together preserve the numerical comparisons. Preserve the running milestone 104 batch.
 
 ## Historical checkpoints
 
