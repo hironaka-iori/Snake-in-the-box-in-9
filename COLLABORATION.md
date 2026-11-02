@@ -2,6 +2,8 @@
 
 Checkpoint: 2 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
+Latest continuation: [milestone75](milestones/75-exact-history-bridge/README.md) checks the exact history-word invariant, agreement of graph and catalogue share selection, and numeric count-state identities, for39 new Lean audits. Case7305's selected refutation replay is running; inspect its live process and records before any restart. The current numerical bounds are unchanged. Use [handoff/README.md](handoff/README.md) as the current entry point; the dated handover below is the earlier saved checkpoint.
+
 Start with the [updated research handover](handoff/2026-11-02/START_HERE.md). It supersedes the 1 November continuation record and separates current evidence from the historical entries below. Milestone74 gives the exact five-count-state/six-count-edge graph interface, five new Lean audits, and six exact short-walk obstructions to dropping pending share rules while retaining the present boundary budget. The project interval is unchanged. Case7305 has 92 checked semantic/composition modules, with its smaller simulated refutation preserved for later Lean replay; its final local theorem remains pending.
 
 ## Active empty-square route

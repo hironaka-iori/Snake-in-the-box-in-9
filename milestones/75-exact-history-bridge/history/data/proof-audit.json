@@ -1,0 +1,201 @@
+{
+  "status": "PASS_EXACT_HISTORY",
+  "lean_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "records": [
+    {
+      "module": "HistoryPrefix",
+      "exit_code": 0,
+      "seconds": 4.5,
+      "source_sha256": "989b08a3f9ee7b751a7ae68e232855d6d3590e2d815e12893f594f496a89facb",
+      "log_sha256": "0cf8e2bf98281edefd7182b02f4215fbac4552e60d476d7bc5655b8f424bf724",
+      "olean_sha256": "cfcd6d4676e1d1bdd7e63bc5fc737b4a280e3fe267c88b2a0c2f767fd4452957",
+      "theorems": [
+        {
+          "theorem": "Snake9.History75.longest_spec",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.longest_unique",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.suffix_append_one",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.candidates_append_iff",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.update_longest",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.longest_update_eq",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.maximizing_update_eq",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.run_is_longest",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.run_eq_longest",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.emitted_three_is_last_three",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.no_emission_first_two",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ExactHistory",
+      "exit_code": 0,
+      "seconds": 6.796999999998661,
+      "source_sha256": "0cbb26994f0b6372ee107529c1406fd0c64028137ac94a0e6c4f63671185016c",
+      "log_sha256": "4d3d8980a0312790c6f8760c4ddfdfda73e8d2cd242b2c0c4679b367dc7eaeb1",
+      "olean_sha256": "964e1575a04e77895a0672a9dc397afd38787b43d238b2bf106c481c0c33bf1e",
+      "theorems": [
+        {
+          "theorem": "Snake9.History75.prefixes_length",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.History75.prefixes_nodup",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.History75.prefixes_le_two",
+          "axioms": []
+        },
+        {
+          "theorem": "Snake9.History75.prefixes_empty",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.prefixes_closed",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.signatures_valid",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.prefix_index_unique",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.exact_history_invariant",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.exact_history_update",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.exact_signature_sound",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.History75.exact_no_early_emission",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    }
+  ],
+  "direct_mathlib_imports": [
+    {
+      "module": "Mathlib.Data.List.Infix",
+      "source_sha256": "a266f78563f8c1470d4423a3ad7482d77219dddf7f0d3e3738c6e7480096b274",
+      "olean_sha256": "3da7836923a5a2c1e944239efb99bf273c7a2f083e9c411511015b107863d641"
+    },
+    {
+      "module": "Mathlib.Data.List.Induction",
+      "source_sha256": "dd01a7d3a0f92832a9f7ecf0b022cde319a5666d88fc4d2e9cdbe776572504e8",
+      "olean_sha256": "6917f95f5a765de99986beda783458b4d08a42fc4596b218753c7dd794bfcbb8"
+    },
+    {
+      "module": "Mathlib.Data.List.Nodup",
+      "source_sha256": "c707e2dbadf0726c946ca668a9cb81f66f7e9b0fa3851a9affb4d9b03db060cc",
+      "olean_sha256": "fcf63633dc5029b204df802a25c218325e2e2e9b5d58ba44601fc07fa4ced36c"
+    }
+  ],
+  "provenance_sha256": "de68901c7476dcc22f837ae5a0c01f344bd68b2f14261a0baa649c6dded4a481",
+  "scope": "Small list and dictionary proofs. No graph-edge membership, direction-ID coverage, coordinate realization, local credit dispatch, finite potential replay or numerical bound."
+}
