@@ -20,8 +20,9 @@ Steven Zhan. Its repository and editor copies have SHA256
 Source checks preserve all 116 previous statements and add seven, giving 123;
 all 13 printed paths and 118,673 vertex pairs were checked. The built-in
 compiler failed before source compilation. No new PDF or layout check is
-claimed. Milestones 77 through 84 add proof interfaces, a completed local share theorem,
-forty-rule retention, three-history retention, a cycle obstruction and the pending next share certificate
+claimed. Milestones 77 through 85 add proof interfaces, a completed local share theorem,
+forty-rule retention, three-history retention, conditional reference retention,
+a cycle obstruction and the pending next share certificate
 without revising the paper. The next full revision is 86.
 
 ## Chosen route: charge empty squares
@@ -135,9 +136,19 @@ count proofs and five small helper lemmas were checked afresh against the
 current window bridge. An exact isolated-loop comparison covers all 37,875
 history/direction pairs and all count codes for the three active guards.
 
-The remaining retained-edge work is the 1,378-key reference union and
-the exact retained-array index. The reference theorem sources and contributor logs were audited; their
-complete union is still uninstantiated in the current environment.
+Milestone 85 supplies the exact 1,378-key reference table: 1,287 keys from the
+235 catalogue and 91 additional keys from the 236 catalogue. Twenty-seven
+modules passed 103 Lean audits, including the full table and retention in
+both orientations at every fitting offset. The final theorem retains the
+two closed catalogue-refutation premises. The key data and their membership
+proofs are checked; their closed refutation dependencies have not been imported
+into the current local environment. A bounded provenance search and exact
+source pins document this distinction. The isolated builder-filter comparison
+agrees on all 23,561,280 direction/count pairs.
+
+The remaining retained-edge work is to supply those two closed catalogue
+proofs and the exact retained-array index. The conditional interface can be
+used for the latter assembly while keeping its premises explicit.
 Every three-ID credit needs every compatible eleven-direction interpretation;
 forgotten coordinate returns can produce several variants. Alternative lower
 bounds on the same five shares combine by maximum. Complete the finite
@@ -180,7 +191,11 @@ The dated handover contains detailed environment paths and earlier evidence.
 Milestone 77 saves its coverage checks, superseded memory-intensive attempts
 and replay snapshot. Milestone 78 saves the selector/state checks. Milestone 79 saves the encoded
 guards, interval-filter assembly, catalogue audit and a later replay observation.
-Milestone 81 saves the forty-rule theorem, independent review and exact comparison. Build objects remain local and are excluded from Git. Reproduction
+Milestone 81 saves the forty-rule theorem, independent review and exact comparison.
+Milestone 84 saves the three-history theorem. Milestone 85 saves the exact reference
+table, conditional theorem, provenance review, exhaustive comparison and a later
+case7302 observation. Its manifest identifies the current shared handover versions.
+Build objects remain local and are excluded from Git. Reproduction
 uses Lean4.19.0 with hash-checked inherited support; it does not rebuild the
 whole inherited dependency closure.
 

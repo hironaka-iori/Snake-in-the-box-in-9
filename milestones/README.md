@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 76. Source and witness checks pass; the app compiler cannot start.
 
+- [Milestone 85: exact reference catalogue union](85-reference-catalogue-union/README.md). 103 Lean audits connect all 1,378 reference keys to the source catalogues and prove retention under their two explicit refutation premises. The exact isolated filter agrees on 23,561,280 pairs. No numerical bound changes.
+
 - [Milestone 84: three-history retention](84-history-exclusion-retention/README.md). 38 Lean audits prove that every actual snake survives all three history guards; complete signature realization and encoded count transport are checked. No numerical bound changes.
 
 - [Milestone 83: 012034 share-20 certificate in progress](83-012034-share-certificate/README.md). 127 semantic modules checked; local refutation replay and final theorem pending. Exact single-target conditional mean 9259/19 still gives integer comparison 235.

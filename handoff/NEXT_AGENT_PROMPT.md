@@ -1,7 +1,7 @@
 # Assignment for the next researcher
 
 Continue in `E:/Snake-in-a-box`. Read `handoff/README.md`,
-`handoff/CURRENT_STATUS.md`, and milestone 84's README and exact checkpoint. Milestone 83 preserves the active case 7302 proof sources.
+`handoff/CURRENT_STATUS.md`, and milestone 85's README and exact checkpoint. Milestone 83 preserves the active case 7302 proof sources.
 Use the older dated handover for detailed definitions and environment paths;
 its revision and process status are historical.
 
@@ -30,12 +30,15 @@ saturation, and proves retention under all ten completed milestone 72 interval
 filters. Milestone 81 proves retention under all forty recovered short filters,
 with 66 audits and an exhaustive isolated-loop comparison. Reuse these checked
 interfaces. Milestone 84 closes all three history exclusions with 38 Lean audits; reuse
-its complete signature recognition and count transport. The next assembly
-task is to instantiate the 1,378-key reference union, then supply the exact
-retained-array index. The current reference
-interfaces still have explicit Refuted premises. The closed reference proofs
-are in pinned contributor revisions and saved audits, with the current local
-snapshot under milestone 51. Their full union is not yet imported here. After retained-edge membership, interpret
+its complete signature recognition and count transport. Milestone 85 checks
+the exact 1,378-key reference table and its conditional retention theorem,
+with 103 audits and a complete isolated-filter comparison. Do not repeat this
+table work. The remaining two premises are AllRefuted6K235 and AllRefuted236;
+matching closed proof objects were absent from the searched local locations.
+The pinned source theorems and historical audit logs are identified in its
+provenance report. Restore or rebuild compatible closed dependencies to
+discharge those premises. In the meantime, use the checked conditional
+interface to supply the exact retained-array index. After retained-edge membership, interpret
 every compatible eleven-direction realization of a three-ID credit signature.
 Symbol six represents the interval [6,21]. Alternative
 credits on the same five centres combine by maximum. Verify the entire
@@ -63,7 +66,7 @@ restriction on realizable walks or stronger boundary information could change
 that conclusion and would need its own proof.
 
 Preserve the manuscript authors Iori Hironaka, Tommy Ma and Steven Zhan and all
-hyperlink settings. Revision 76 is the latest paper; milestones 77 through 84 have separate
+hyperlink settings. Revision 76 is the latest paper; milestones 77 through 85 have separate
 proof notes. The next full revision is scheduled for 86. The existing editor file is
 `D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex`, with a repository
 mirror at `paper/snake9_research.tex`. Edit the existing editor file in place

@@ -4,11 +4,16 @@ Start with [current mathematical status](CURRENT_STATUS.md), then use the
 [continuation assignment](NEXT_AGENT_PROMPT.md). Both are intended for another
 researcher or AI agent to continue from the saved evidence.
 
-The current proof checkpoint is [milestone 84](../milestones/84-history-exclusion-retention/README.md).
-Its 38 Lean audits close all three history-exclusion guards for actual snakes.
-Use its [checkpoint](../milestones/84-history-exclusion-retention/data/checkpoint.json)
-and [manifest](../milestones/84-history-exclusion-retention/data/file-manifest.json)
+The current proof checkpoint is [milestone 85](../milestones/85-reference-catalogue-union/README.md).
+Its 103 Lean audits check the complete 1,378-key reference table and retention
+under two explicit closed catalogue premises. The isolated filter comparison
+covers all 23,561,280 direction/count pairs. Use its
+[checkpoint](../milestones/85-reference-catalogue-union/data/checkpoint.json)
+and [manifest](../milestones/85-reference-catalogue-union/data/file-manifest.json)
 for current evidence, handover versions and a later observation of the active replay.
+
+[Milestone 84](../milestones/84-history-exclusion-retention/README.md) closes
+all three history-exclusion guards for actual snakes, with 38 Lean audits.
 
 The active local-certificate task is [milestone 83](../milestones/83-012034-share-certificate/README.md):
 case 7302, the 012034 share-20 target. Its clause interpretation and assembly
@@ -34,7 +39,7 @@ records the forty-rule retention theorem, 66 audits, exact-loop comparison,
 receipt hashes, repository refs and unchanged paper hash.
 Its [saved-file manifest](../milestones/81-recovered-short-rule-retention/data/file-manifest.json)
 records the versions saved with that milestone. Shared handover files have since
-been updated; use milestone 84's manifest for their current versions.
+been updated; use milestone 85's manifest for their current versions.
 
 The project interval remains 191 through 235 edges. The upper bound uses the
 inspected contributor theorem and saved audit, without a fresh complete local
@@ -57,12 +62,13 @@ Milestones 77 and 78 connect actual snake windows to one consistent numeric
 state sequence. Milestone 79 connects encoded counts to exclusion predicates
 and instantiates the ten completed interval filters. Milestone 81 closes the forty
 recovered short filters. Milestone 84 closes all three history exclusions.
-The remaining retained-edge work covers the reference union and
+Milestone 85 checks the reference union under two explicit closed catalogue
+premises. The remaining retained-edge work covers those closed proofs and
 the exact array index; credit interpretation follows. Complete the local
 shares and potential replay before claiming 234. Historical manifests retain
 their earlier versions of the shared handover documents.
 
-The latest paper is revision 76, unchanged and hash-matched during milestone 84.
+The latest paper is revision 76, unchanged and hash-matched during milestone 85.
 Authors and hyperlink settings are preserved. The compiler retry at milestone 77 failed
 before source compilation; its diagnostic is saved there. No new PDF
 is claimed. Recompile the same editor source when the app compiler can start.
