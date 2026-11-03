@@ -1,0 +1,26 @@
+E:\Snake-in-a-box\milestones\137-actual-block-assembly\lean\ActualBlocks137.lean:94:4: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  0 ≤ k ≤ 2
+  j ≥ 0
+  i ≥ 0
+  g ≥ 0
+  g - j ≤ 0
+  e ≥ 0
+  3*e + i - j ≤ 0
+  3*e + g + i - j ≥ 3
+  d ≥ 0
+  c ≥ 0
+  c - d - 3*e ≥ 0
+  b ≥ 0
+  a ≥ 1
+where
+ a := ↑m
+ b := ↑2 ^ ↑q
+ c := ↑(List.map (fun b => (Finset.Icc ((fun b => b.headD 0) b) ((fun b => b.getLastD 0) b + 3)).card) B).sum
+ d := ↑B.flatten.length
+ e := ↑B.length
+ g := ↑(List.map (fun b => (Finset.Icc (b.headD 0) (b.getLastD 0 + 3) ∩ {0, 1}).card) B).sum
+ i := ↑I.card
+ j := ↑(List.map (fun b => (Finset.Icc (b.headD 0) (b.getLastD 0 + 3)).card) B).sum
+ k := ↑(List.map (fun b => (Finset.Icc ((fun b => b.headD 0) b) ((fun b => b.getLastD 0) b + 3) ∩ {0, 1}).card) B).sum
+'Snake9.ActualBlocks137.exists_actual_blocks' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

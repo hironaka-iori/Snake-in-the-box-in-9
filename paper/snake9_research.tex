@@ -36,7 +36,7 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $m$ for the edge length, $T$ for the total singleton-square count and $s_0$ for the empty-square count, the identity is $T+2s_0+35(m+1)=9214$. For a canonical $012032$ window, the second and fourth internal counts have sum at least eight. Equality forces both endpoints into the common distance-two sphere and can occur at most thirteen times; it also requires an even path length and an even window start. A sum at most nine forces an endpoint to share an unselected neighbour with the four alternate window vertices. We prove that at most thirty-two such windows occur in any snake, allowing overlap and either length parity. Explicit odd-length snakes show that a uniform pair floor ten is false. Six-count and empty-square criteria give conditional improvements to 234 and 233, while surviving cycles limit the tested finite comparisons. A stronger twenty-four-window estimate remains under verification. The optimum and the numerical conjecture 196 remain unresolved.
+Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $m$ for the edge length, $T$ for the total singleton-square count and $s_0$ for the empty-square count, the identity is $T+2s_0+35(m+1)=9214$. For a canonical $012032$ window, the second and fourth internal counts have sum at least eight. Equality forces both endpoints into the common distance-two sphere and can occur at most thirteen times; it also requires an even path length and an even window start. A sum at most nine forces an endpoint to share an unselected neighbour with the four alternate window vertices. We prove that at most twenty-four such windows occur in any snake, allowing overlap and either length parity. Explicit odd-length snakes show that a uniform pair floor ten is false. Six-count and empty-square criteria give conditional improvements to 234 and 233, while surviving cycles limit the tested finite comparisons. The optimum and the numerical conjecture 196 remain unresolved.
 \end{abstract}
 
 \clearpage
@@ -98,7 +98,7 @@ Graph interpretation and total charge & Complete coverage and all baseline weigh
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
 New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
 Endpoint and parity restrictions & Pair sum eight on $012032$ forces both endpoints into the common sphere, at most thirteen occurrences, and even path length and start.\\
-Low-pair occurrence bound & At most thirty-two $012032$ windows have pair sum at most nine. The proposed total twenty-four remains under verification.\\
+Low-pair occurrence bound & At most twenty-four $012032$ windows have pair sum at most nine, with at most twelve assigned to either endpoint.\\
 $a(9)=196$ & A numerical extrapolation requiring both a construction and a next-length exclusion.\\
 \bottomrule
 \end{tabular}
@@ -1029,7 +1029,7 @@ two distance equalities alone are a broader assignment condition. The
 thirteen-window theorem uses both endpoints and specifically pair sum eight;
 it cannot be applied separately to the groups above.
 
-\subsection{Missing pairs and the proposed stronger count}\label{sec:missing-pair-occurrences}
+\subsection{Missing pairs and the stronger occurrence bound}\label{sec:missing-pair-occurrences}
 \begin{lemma}[Missing opposite pair]\label{lem:missing-opposite-pair}
 Normalize an endpoint to zero. If $j\ge2$ and consecutive sampled vertices
 are $x_j=\{a,b\}$ and $x_{j+2}=\{a,c\}$ for distinct coordinates, then
@@ -1064,21 +1064,98 @@ one degree and one crossing degree. If $t=3$, at most one coordinate has
 $s_u=3$, since each crossing pair has only one member in $A$. These
 finite-set statements have passed Lean~\cite{occurrencearchive}.
 
-A consecutive-block construction is also checked: sort the sampled starts
-and group consecutive gaps of at most two. Each block has one common coordinate,
-the blocks partition the starts, and their expanded intervals overlap in at
-most one position. The missing-pair finite set can now be taken directly
-from the actual snake; its run bound uses the actual degree and at most
-$8-|A|$ outside coordinates. Summing all these statements with the unique
-exceptional prefix remains unfinished~\cite{intervalassemblyarchive}.
+A consecutive-block construction gives the stronger estimate. Sort the
+sampled starts and group consecutive gaps of at most two. Each block has
+one common coordinate. Its expanded interval runs from its first start to
+three positions after its last start. These intervals cover the original
+windows and, in their order, overlap in at most one position.
 
-A written interval argument proposes twelve assigned windows per endpoint,
-or eleven when no counted window has that endpoint as a boundary. Its complete
-assembly is still under verification. Twenty-four remains a proposed total;
-Theorem~\ref{thm:thirty-two-windows} is the completed count used here.
-Neither count alone improves the upper bound on snake length.
-Section~\ref{sec:occurrence-credit-limit} gives a separate obstruction to the
-current uniform-credit comparison.
+\begin{lemma}[Improved count for one endpoint]\label{lem:twelve-endpoint-windows}
+Under the hypotheses of Lemma~\ref{lem:sixteen-endpoint-windows}, there are
+at most twelve starts.
+\end{lemma}
+\begin{proof}
+Use the same normalization and sampled starts. Let $W$ be their number,
+$k$ the number of blocks, and $A$ the common coordinates used. Put $a=|A|$.
+For $W>0$, we have $1\le a\le k$ and $a\le8$. Let $F$ be the absent
+coordinate pairs among the eight available coordinates that meet $A$, with
+$t=|F|$. Retain the incident and crossing degrees $d_u,s_u$ above.
+
+An interval containing $w$ starts has at least $w+3$ positions. Summing
+over the blocks and accounting for at most $k-1$ overlaps gives a covered
+union of at least $W+2k+1$ positions. Except at sampled positions zero and
+one, these are distinct selected coordinate pairs meeting $A$. The $t$
+absent pairs cannot occur among them. Consequently,
+\begin{equation}\label{eq:missing-capacity-twelve}
+W+2k+t\le7a-\binom a2+1.
+\end{equation}
+
+For each block, remove sampled positions zero and one when present, and
+let $\ell$ be the remaining length. These exceptional positions belong
+only to the first block, so their total contribution is at most two.
+Every block originally contains at least four positions, hence $\ell\ge2$,
+and
+\begin{equation}\label{eq:regular-sum-twelve}
+W+3k\le\sum_{\text{blocks}}\ell+2.
+\end{equation}
+If its common coordinate is $u$, its consecutive regular vertices are
+$\{u,b_1\},\ldots,\{u,b_\ell\}$. The $b_i$ are distinct, and each
+successive pair of them is absent by Lemma~\ref{lem:missing-opposite-pair}.
+Exactly $8-a-s_u$ coordinates outside $A$ can occur in this list: each
+outside coordinate gives either a selected pair through $u$ or one of
+the $s_u$ absent crossing pairs. The list bound above therefore gives
+\begin{equation}\label{eq:regular-degree-twelve}
+\ell+d_u\le\max\{1,8-a-s_u\}+t.
+\end{equation}
+
+For $a\le7$, the maximum is at most $8-a$. Every common coordinate occurs
+in at least one block. Repeated common coordinates can only increase the
+sum of their nonnegative degrees, so $\sum_{\text{blocks}}d_u\ge t$.
+Summing \eqref{eq:regular-degree-twelve} and using
+\eqref{eq:regular-sum-twelve} yields
+\begin{equation}\label{eq:degree-sum-twelve}
+W+3k+t\le k(8-a+t)+2.
+\end{equation}
+Suppose $W\ge13$. Inequality~\eqref{eq:missing-capacity-twelve} first gives
+$k\le8$. Checking the integer ranges $1\le a\le7$, $a\le k\le8$ and
+$0\le t\le7a-\binom a2-2k-12$ in
+\eqref{eq:degree-sum-twelve} leaves only $(a,k,t)=(5,5,3)$.
+This finite implication is checked in Lean.
+
+In that remaining case, each common coordinate occurs in exactly one block.
+Since $0\le s_u\le3$, inequality~\eqref{eq:regular-degree-twelve} implies
+\[
+\ell+d_u+s_u\le
+\begin{cases}7,&s_u=3,\\6,&s_u<3.\end{cases}
+\]
+At most one coordinate has $s_u=3$, and $\sum_{u\in A}(d_u+s_u)=6$.
+Thus the sum of the five regular lengths is at most $5\cdot6+1-6=25$.
+Equation~\eqref{eq:regular-sum-twelve} gives $W+15\le27$, a contradiction.
+
+If $a=8$, inequality~\eqref{eq:missing-capacity-twelve}, together with
+$k\ge8$ and $W\ge13$, forces $k=8$ and $t=0$. Equation
+\eqref{eq:regular-degree-twelve} then gives $\ell\le1$ for every block,
+contrary to $\ell\ge2$. The case $W=0$ is immediate. The construction,
+all counts and their application to actual snakes have passed Lean~\cite{count24archive}.
+\end{proof}
+
+\begin{theorem}[Improved number of low-pair windows]\label{thm:twenty-four-windows}
+Every snake in $\Q_9$ has at most twenty-four fitting canonical $012032$
+windows with $\alpha_{r+2}+\alpha_{r+4}\le9$. Windows may overlap, and
+each starting position is counted once. No parity assumption is required.
+\end{theorem}
+\begin{proof}
+Use the disjoint endpoint assignment from Theorem~\ref{thm:thirty-two-windows}
+and apply Lemma~\ref{lem:twelve-endpoint-windows} to each group.
+The full endpoint transfer and partition have passed Lean~\cite{count24archive}.
+\end{proof}
+
+The sharper proposed count of eleven at an endpoint with no counted boundary
+window remains under verification. The common unselected neighbour is still
+part of the per-endpoint assignment hypothesis. No sharpness assertion is made.
+The occurrence count alone gives no new upper bound on snake length;
+Section~\ref{sec:occurrence-credit-limit} identifies an obstruction to its
+use in the current uniform-credit comparison.
 
 
 \subsection{Necessary counts in an unresolved seven-transition window}\label{sec:critical-six}
@@ -3220,13 +3297,13 @@ the stated limitations of the fixed comparison graphs, without asserting
 their realizability by complete snakes.
 
 The $012032$ pair bound, its equality geometry and parity restriction,
-the parity-free endpoint consequence and the thirty-two-window bound are
+the parity-free endpoint consequence and the twenty-four-window bound are
 checked for actual snakes. The $0123041$ six-count bound, necessary intervals
 for low-total $0120324$ windows and fourth-count-three case are also checked. The direct shortfall theorem retains empty squares and requires no
 reference union or graph potential. Its sufficient upper bound on shortfall
 is unresolved. The broader sum family has mixed verification status, as
 detailed in Section~\ref{sec:sum-refinements}; neither its finite comparison
-nor the completed endpoint-equality and thirty-two-window theorems lower the maintained interval by themselves.
+nor the completed endpoint-equality and twenty-four-window theorems lower the maintained interval by themselves.
 
 No construction above 191 or matching optimality theorem has been obtained.
 The conjecture 196 remains a numerical extrapolation and is used in none
@@ -5467,6 +5544,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Endpoint geometry, missing pairs and a ch
 \bibitem{intervalassemblyarchive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Interval construction, actual missing-pair sets and manuscript revision}. Research record 136, 3 November 2026. The final stronger occurrence assembly remains incomplete.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/136-intervals-and-paper}.
+
+\bibitem{count24archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Actual interval counts and a checked bound of twenty-four low-pair windows}. Research record 137, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/137-actual-block-assembly}.
 
 \end{thebibliography}
 \end{document}

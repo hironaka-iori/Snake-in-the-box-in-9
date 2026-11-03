@@ -1,0 +1,136 @@
+import ActualInterval137
+import BlockIntervals137
+import PrefixCount137
+import WindowSeparation135
+
+namespace Snake9.ActualBlocks137
+open Snake9.LocalWindow
+
+set_option maxHeartbeats 3000000
+
+/-- The blocks and all numerical premises are obtained from the sampled actual
+windows. Positions zero and one contribute at most two in total. -/
+theorem exists_actual_blocks {m : Nat} (p : Snake m) (hm : 1 ≤ m)
+    (q : Fin 9) (I : Finset Nat) (f : Nat → Fin 9)
+    (hzero : vx p 0 = 0) (hfirst : vx p 1 = 2^q.val)
+    (hlabels : ∀ r, r ∈ I → f r ≠ q)
+    (hfit : ∀ r, r ∈ I → 2*r+6 ≤ m)
+    (hfour : ∀ r, r ∈ I → ∀ j, j < 4 →
+      vx p (2*r+2*j) ∈ nbrs (2^(f r).val)) :
+    let A := I.image (fun r => (f r).val)
+    let C := (Finset.range 9).erase q.val
+    let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+      ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+    ∃ B : List (List Nat),
+      (B.map (fun b => (f (b.headD 0)).val)).toFinset = A ∧
+      I.card + 3*B.length ≤
+        (B.map (fun b => b.getLastD 0+4-max (b.headD 0) 2)).sum + 2 ∧
+      (∀ b ∈ B, 2 ≤ b.getLastD 0+4-max (b.headD 0) 2) ∧
+      (∀ b ∈ B, b.getLastD 0+4-max (b.headD 0) 2 +
+        (F.filter (fun e => (f (b.headD 0)).val ∈ e)).card ≤
+          max 1 (8-A.card-
+            (F.filter (fun e => (f (b.headD 0)).val ∈ e ∧ ¬ e ⊆ A)).card) + F.card) ∧
+      (I.Nonempty → I.card + 2*B.length + 1 ≤
+        (I.biUnion (fun r => Finset.Icc r (r+3))).card) := by
+  classical
+  dsimp only
+  let A := I.image (fun r => (f r).val)
+  let C := (Finset.range 9).erase q.val
+  let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+    ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+  have hsep := WindowSeparation135.sampled_window_separation p I
+    (fun r => (f r).val) hzero hfit (fun r _ => (f r).isLt) hfour
+  obtain ⟨B,hflat,hne,hsorted,hlabel,hends,hbounds,hintervalSep,hcoverage,hunion⟩ :=
+    BlockIntervals137.exists_blocks_with_intervals (fun r => (f r).val) I hsep
+  have hmem : ∀ b ∈ B, ∀ r ∈ b, r ∈ I := by
+    intro b hb r hr
+    have hrflat : r ∈ B.flatten := List.mem_flatten.mpr ⟨b,hb,hr⟩
+    rw [hflat] at hrflat
+    simpa using hrflat
+  have hA : A ⊆ (Finset.range 9).erase q.val := by
+    intro a ha
+    obtain ⟨r,hr,he⟩ := Finset.mem_image.mp ha
+    rw [← he]
+    apply Finset.mem_erase.mpr
+    constructor
+    · intro heq
+      exact hlabels r hr (Fin.ext heq)
+    · exact Finset.mem_range.mpr (f r).isLt
+  have hlabelSet : (B.map (fun b => (f (b.headD 0)).val)).toFinset = A := by
+    ext a
+    constructor
+    · intro ha
+      obtain ⟨b,hb,he⟩ := List.mem_map.mp (List.mem_toFinset.mp ha)
+      exact Finset.mem_image.mpr ⟨b.headD 0,hmem b hb _ (hends b hb).1,he⟩
+    · intro ha
+      obtain ⟨r,hr,he⟩ := Finset.mem_image.mp ha
+      have hrflat : r ∈ B.flatten := by
+        rw [hflat]
+        simpa using hr
+      obtain ⟨b,hb,hrb⟩ := List.mem_flatten.mp hrflat
+      apply List.mem_toFinset.mpr
+      apply List.mem_map.mpr
+      exact ⟨b,hb,(hlabel b hb _ (hends b hb).1 r hrb).trans he⟩
+  have hnodup : ∀ b ∈ B, b.Nodup := by
+    intro b hb
+    change b.Pairwise (fun u v => u ≠ v)
+    exact (hsorted b hb).imp (fun h => Nat.ne_of_lt h)
+  have hcount : I.card + 3*B.length ≤
+      (B.map (fun b => b.getLastD 0+4-max (b.headD 0) 2)).sum + 2 := by
+    have h := IntervalCount136.starts_add_three_blocks_le_interval_card_sum B
+      (fun b => b.headD 0) (fun b => b.getLastD 0) hnodup hne hbounds
+    have h' : I.card + 3*B.length ≤
+        (B.map (fun b => (Finset.Icc (b.headD 0) (b.getLastD 0+3)).card)).sum := by
+      simpa only [hflat,Finset.length_sort] using h
+    have hsplit :
+        (B.map (fun b => (Finset.Icc (b.headD 0) (b.getLastD 0+3)).card)).sum =
+          (B.map (fun b => b.getLastD 0+4-max (b.headD 0) 2)).sum +
+          (B.map (fun b =>
+            ((Finset.Icc (b.headD 0) (b.getLastD 0+3)) ∩ ({0,1} : Finset Nat)).card)).sum := by
+      simp only [PrefixCount137.interval_card_split,List.sum_map_add]
+    have hprefix := PrefixCount137.prefix_card_sum_le_two B
+      (fun b => b.headD 0) (fun b => b.getLastD 0) hintervalSep
+    rw [hsplit] at h'
+    omega
+  refine ⟨B,hlabelSet,hcount,?_,?_,?_⟩
+  · intro b hb
+    have hlohi := (hbounds b hb _ (hends b hb).1).2
+    omega
+  · intro b hb
+    have hheadI := hmem b hb _ (hends b hb).1
+    have hlastI := hmem b hb _ (hends b hb).2
+    have hlohi := (hbounds b hb _ (hends b hb).1).2
+    have hfitLast : 2*(b.getLastD 0+3) ≤ m := by
+      have h := hfit _ hlastI
+      omega
+    have hheadA : (f (b.headD 0)).val ∈ A :=
+      Finset.mem_image.mpr ⟨b.headD 0,hheadI,rfl⟩
+    have hcover : ∀ z, b.headD 0 ≤ z → z ≤ b.getLastD 0+3 →
+        vx p (2*z) ∈ nbrs (2^(f (b.headD 0)).val) := by
+      intro z hlo hhi
+      obtain ⟨w,hw,hwz,hzw⟩ := hcoverage b hb z (Finset.mem_Icc.mpr ⟨hlo,hhi⟩)
+      have hwI := hmem b hb w hw
+      have hwindow := hfour w hwI (z-w) (by omega)
+      have hindex : 2*w+2*(z-w) = 2*z := by omega
+      have hsame := hlabel b hb w hw _ (hends b hb).1
+      change (f w).val = (f (b.headD 0)).val at hsame
+      simpa only [hindex,hsame] using hwindow
+    have h := ActualInterval137.regular_interval_bound p hm q.val
+      (f (b.headD 0)).val (b.headD 0) (b.getLastD 0) A
+      q.isLt hheadA hA hzero hfirst hlohi hfitLast hcover
+    exact h.2
+  · intro hI
+    have hsub :
+        ((B.map (fun b => Finset.Icc (b.headD 0) (b.getLastD 0+3))).toFinset.biUnion id) ⊆
+          I.biUnion (fun r => Finset.Icc r (r+3)) := by
+      intro z hz
+      obtain ⟨s,hs,hzs⟩ := Finset.mem_biUnion.mp hz
+      obtain ⟨b,hb,rfl⟩ := List.mem_map.mp (List.mem_toFinset.mp hs)
+      change z ∈ Finset.Icc (b.headD 0) (b.getLastD 0+3) at hzs
+      obtain ⟨w,hw,hwz,hzw⟩ := hcoverage b hb z hzs
+      exact Finset.mem_biUnion.mpr
+        ⟨w,hmem b hb w hw,Finset.mem_Icc.mpr ⟨hwz,hzw⟩⟩
+    exact (hunion hI).trans (Finset.card_le_card hsub)
+
+#print axioms exists_actual_blocks
+end Snake9.ActualBlocks137

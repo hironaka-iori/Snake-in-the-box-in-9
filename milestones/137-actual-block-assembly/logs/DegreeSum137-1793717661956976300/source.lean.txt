@@ -1,0 +1,101 @@
+import MissingDegree135
+import Mathlib.Algebra.Order.BigOperators.Group.List
+
+namespace Snake9.DegreeSum137
+
+open scoped BigOperators
+
+theorem sum_toFinset_le_map_sum (l : List Nat) (g : Nat → Nat) :
+    (∑ u ∈ l.toFinset, g u) ≤ (l.map g).sum := by
+  induction l with
+  | nil => simp
+  | cons a l ih =>
+      by_cases ha : a ∈ l.toFinset
+      · simp only [List.toFinset_cons, Finset.insert_eq_of_mem ha,
+          List.map_cons, List.sum_cons]
+        omega
+      · rw [List.toFinset_cons, Finset.sum_insert ha, List.map_cons, List.sum_cons]
+        omega
+
+theorem sum_lengths_add_missing_card_le {α : Type*}
+    (B : List α) (label len : α → Nat) (A : Finset Nat)
+    (F : Finset (Finset Nat))
+    (hA : A = (B.map label).toFinset)
+    (hmeet : ∀ e ∈ F, (e ∩ A).Nonempty)
+    (hbound : ∀ b ∈ B,
+      len b + (F.filter (fun e => label b ∈ e)).card ≤ 8 - A.card + F.card) :
+    (B.map len).sum + F.card ≤ B.length * (8 - A.card + F.card) := by
+  have hdegree := MissingDegree135.card_le_sum_degrees A F hmeet
+  have hrepeat := sum_toFinset_le_map_sum (B.map label)
+    (fun u => (F.filter (fun e => u ∈ e)).card)
+  have hrepeat' :
+      (∑ u ∈ A, (F.filter (fun e => u ∈ e)).card) ≤
+        (B.map (fun b => (F.filter (fun e => label b ∈ e)).card)).sum := by
+    simpa only [hA, List.map_map, Function.comp_def] using hrepeat
+  have htotal : (B.map len).sum +
+      (B.map (fun b => (F.filter (fun e => label b ∈ e)).card)).sum ≤
+        B.length * (8 - A.card + F.card) := by
+    have h := List.sum_le_sum hbound
+    simpa only [List.sum_map_add, List.map_const', List.sum_replicate_nat] using h
+  omega
+
+theorem exceptional_sum_lengths_le_twenty_five {α : Type*}
+    (B : List α) (label len : α → Nat) (A : Finset Nat)
+    (F : Finset (Finset Nat))
+    (hA : A = (B.map label).toFinset)
+    (hBcard : B.length = 5) (hAcard : A.card = 5) (hFcard : F.card = 3)
+    (hsize : ∀ e ∈ F, e.card = 2)
+    (hmeet : ∀ e ∈ F, (e ∩ A).Nonempty)
+    (hbound : ∀ b ∈ B,
+      len b + (F.filter (fun e => label b ∈ e)).card +
+        (F.filter (fun e => label b ∈ e ∧ ¬ e ⊆ A)).card ≤
+      6 + (if (F.filter (fun e => label b ∈ e ∧ ¬ e ⊆ A)).card = 3
+        then 1 else 0)) :
+    (B.map len).sum ≤ 25 := by
+  let d := fun u => (F.filter (fun e => u ∈ e)).card
+  let s := fun u => (F.filter (fun e => u ∈ e ∧ ¬ e ⊆ A)).card
+  have hnodup : (B.map label).Nodup := by
+    apply (Multiset.toFinset_card_eq_card_iff_nodup
+      (m := (↑(B.map label) : Multiset Nat))).mp
+    change (B.map label).toFinset.card = (B.map label).length
+    rw [← hA, hAcard, List.length_map, hBcard]
+  have hdegreeEq :
+      (∑ u ∈ A, (d u + s u)) =
+        (B.map (fun b => d (label b) + s (label b))).sum := by
+    have h := List.sum_toFinset (fun u => d u + s u) hnodup
+    simpa only [hA, List.map_map, Function.comp_def] using h
+  have hdegreeFin : (∑ u ∈ A, (d u + s u)) = 6 := by
+    simpa only [d, s, hFcard] using
+      MissingDegree135.sum_degree_add_crossing_degree A F hsize hmeet
+  have hdegreeSum :
+      (B.map (fun b => d (label b) + s (label b))).sum = 6 :=
+    hdegreeEq.symm.trans hdegreeFin
+  have hepsEq :
+      (∑ u ∈ A, if s u = 3 then 1 else 0) =
+        (B.map (fun b => if s (label b) = 3 then 1 else 0)).sum := by
+    have h := List.sum_toFinset (fun u => if s u = 3 then 1 else 0) hnodup
+    simpa only [hA, List.map_map, Function.comp_def] using h
+  have hepsFin : (∑ u ∈ A, if s u = 3 then 1 else 0 : Nat) ≤ 1 := by
+    rw [Finset.sum_boole]
+    simpa only [s] using
+      MissingDegree135.at_most_one_vertex_with_three_crossings A F hsize hFcard
+  have hepsSum : (B.map (fun b => if s (label b) = 3 then 1 else 0)).sum ≤ 1 := by
+    rw [← hepsEq]
+    exact hepsFin
+  have hpoint : ∀ b ∈ B,
+      len b + (d (label b) + s (label b)) ≤
+        6 + (if s (label b) = 3 then 1 else 0) := by
+    intro b hb
+    simpa only [d, s, Nat.add_assoc] using hbound b hb
+  have htotal : (B.map len).sum +
+      (B.map (fun b => d (label b) + s (label b))).sum ≤
+        6 * B.length + (B.map (fun b => if s (label b) = 3 then 1 else 0)).sum := by
+    have h := List.sum_le_sum hpoint
+    simpa [List.sum_map_add, List.map_const', Nat.mul_comm] using h
+  omega
+
+#print axioms sum_toFinset_le_map_sum
+#print axioms sum_lengths_add_missing_card_le
+#print axioms exceptional_sum_lengths_le_twenty_five
+
+end Snake9.DegreeSum137

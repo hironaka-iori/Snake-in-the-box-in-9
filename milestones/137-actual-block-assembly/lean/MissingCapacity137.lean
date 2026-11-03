@@ -1,0 +1,203 @@
+import WindowCapacity135
+import ActualMissingSets136
+
+namespace Snake9.MissingCapacity137
+open Snake9.LocalWindow
+
+set_option maxHeartbeats 2000000
+
+/-- Actual missing coordinate pairs occupy capacity disjoint from the selected
+vertices at the covered positions, except for the two boundary positions. -/
+theorem covered_positions_add_missing_card_le {m : Nat} (p : Snake m) (hm : 1 ≤ m)
+    (q : Fin 9) (I : Finset Nat) (f : Nat → Fin 9)
+    (hzero : vx p 0 = 0) (hfirst : vx p 1 = 2^q.val)
+    (hlabels : ∀ r, r ∈ I → f r ≠ q)
+    (hfit : ∀ r, r ∈ I → 2*r+6 ≤ m)
+    (hfour : ∀ r, r ∈ I → ∀ j, j < 4 →
+      vx p (2*r+2*j) ∈ nbrs (2^(f r).val)) :
+    let A := I.image (fun r => (f r).val)
+    let C := (Finset.range 9).erase q.val
+    let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+      ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+    (I.biUnion (fun r => Finset.Icc r (r+3))).card + F.card ≤
+      7*A.card - A.card*(A.card-1)/2 + 2 := by
+  classical
+  dsimp only
+  let A := I.image (fun r => (f r).val)
+  let C := (Finset.range 9).erase q.val
+  let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+    ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+  let D := I.image f
+  let W := I.biUnion (fun r => Finset.Icc r (r+3))
+  let T := W \ ({0,1} : Finset Nat)
+  let B := (Finset.univ : Finset (Fin 9 × Fin 9)).filter (fun ab =>
+    ab.1 < ab.2 ∧ ab.1 ≠ q ∧ ab.2 ≠ q ∧ (ab.1 ∈ D ∨ ab.2 ∈ D))
+  let S := B.filter (fun ab => sel p (fun v => v) (2^ab.1.val ^^^ 2^ab.2.val) = true)
+  let N := B.filter (fun ab => sel p (fun v => v) (2^ab.1.val ^^^ 2^ab.2.val) = false)
+  change W.card + F.card ≤ 7*A.card - A.card*(A.card-1)/2 + 2
+  have hqD : q ∉ D := by
+    intro hq
+    obtain ⟨r,hr,he⟩ := Finset.mem_image.mp hq
+    exact hlabels r hr he
+  have hAD (b : Fin 9) : b.val ∈ A ↔ b ∈ D := by
+    constructor
+    · intro hb
+      obtain ⟨r,hr,he⟩ := Finset.mem_image.mp hb
+      exact Finset.mem_image.mpr ⟨r,hr,Fin.ext he⟩
+    · intro hb
+      obtain ⟨r,hr,he⟩ := Finset.mem_image.mp hb
+      exact Finset.mem_image.mpr ⟨r,hr,congrArg Fin.val he⟩
+  have hAcard : A.card = D.card := by
+    have himage : D.image (fun b => b.val) = A := by
+      dsimp only [D,A]
+      rw [Finset.image_image]
+      rfl
+    rw [← himage]
+    apply Finset.card_image_of_injOn
+    intro b hb c hc he
+    exact Fin.ext he
+  have hcover (t : Nat) (ht : t ∈ W) :
+      ∃ r, r ∈ I ∧ r ≤ t ∧ t ≤ r+3 := by
+    obtain ⟨r,hr,htr⟩ := Finset.mem_biUnion.mp ht
+    exact ⟨r,hr,(Finset.mem_Icc.mp htr).1,(Finset.mem_Icc.mp htr).2⟩
+  have hbound (t : Nat) (ht : t ∈ W) : 2*t ≤ m := by
+    obtain ⟨r,hr,hrt,htr⟩ := hcover t ht
+    have hf := hfit r hr
+    omega
+  have hsub : T.image (fun t => vx p (2*t)) ⊆
+      S.image (fun ab => 2^ab.1.val ^^^ 2^ab.2.val) := by
+    intro v hv
+    obtain ⟨t,ht,rfl⟩ := Finset.mem_image.mp hv
+    obtain ⟨htW,htnot⟩ := Finset.mem_sdiff.mp ht
+    have ht0 : t ≠ 0 := by
+      intro he
+      exact htnot (by simp [he])
+    have ht1 : t ≠ 1 := by
+      intro he
+      exact htnot (by simp [he])
+    obtain ⟨r,hr,hrt,htr⟩ := hcover t htW
+    have hadj : vx p (2*t) ∈ nbrs (2^(f r).val) := by
+      have hf := hfour r hr (t-r) (by omega)
+      have he : 2*r+2*(t-r) = 2*t := by omega
+      simpa only [he] using hf
+    have hfrq : (f r).val ≠ q.val := by
+      intro he
+      exact hlabels r hr (Fin.ext he)
+    have hsel : sel p (fun v => v) (vx p (2*t)) = true :=
+      (sel_iff p (fun v => v) _).mpr ⟨2*t,hbound t htW,rfl⟩
+    have hp := PairRepresentation134.selected_neighbour_pairs p hm
+      q.val (f r).val (2*t) (f r).isLt hfrq hzero hfirst (hbound t htW) hadj
+    rcases hp with hz | ht | ⟨b,hb,hba,hbq,hv⟩
+    · exact False.elim (ht0 (by omega))
+    · exact False.elim (ht1 (by omega))
+    · let b' : Fin 9 := ⟨b,hb⟩
+      have hb'q : b' ≠ q := by
+        intro he
+        exact hbq (congrArg Fin.val he)
+      have hfrD : f r ∈ D := Finset.mem_image.mpr ⟨r,hr,rfl⟩
+      apply Finset.mem_image.mpr
+      by_cases hab : (f r).val < b
+      · refine ⟨(f r,b'),?_,hv.symm⟩
+        apply Finset.mem_filter.mpr
+        constructor
+        · exact Finset.mem_filter.mpr
+            ⟨Finset.mem_univ _,hab,hlabels r hr,hb'q,Or.inl hfrD⟩
+        · change sel p (fun v => v) (2^(f r).val ^^^ 2^b) = true
+          rw [← hv]
+          exact hsel
+      · have hba' : b < (f r).val := by omega
+        refine ⟨(b',f r),?_,?_⟩
+        · apply Finset.mem_filter.mpr
+          constructor
+          · exact Finset.mem_filter.mpr
+              ⟨Finset.mem_univ _,hba',hb'q,hlabels r hr,Or.inr hfrD⟩
+          · change sel p (fun v => v) (2^b ^^^ 2^(f r).val) = true
+            rw [Nat.xor_comm,← hv]
+            exact hsel
+        · change 2^b ^^^ 2^(f r).val = vx p (2*t)
+          rw [Nat.xor_comm]
+          exact hv.symm
+  have hinj : Set.InjOn (fun t => vx p (2*t)) T := by
+    intro t ht s hs he
+    have hi := vx_inj p
+      (hbound t (Finset.mem_sdiff.mp ht).1)
+      (hbound s (Finset.mem_sdiff.mp hs).1) he
+    omega
+  have hT : T.card ≤ S.card := by
+    calc
+      T.card = (T.image (fun t => vx p (2*t))).card :=
+        (Finset.card_image_of_injOn hinj).symm
+      _ ≤ (S.image (fun ab => 2^ab.1.val ^^^ 2^ab.2.val)).card :=
+        Finset.card_le_card hsub
+      _ ≤ S.card := Finset.card_image_le
+  have hrepresent : ∀ e ∈ F, ∃ ab : Fin 9 × Fin 9,
+      ab ∈ N ∧ e = ({ab.1.val,ab.2.val} : Finset Nat) := by
+    intro e he
+    obtain ⟨heC,hmeet,habsent⟩ := Finset.mem_filter.mp he
+    obtain ⟨hsubC,hcard⟩ := Finset.mem_powersetCard.mp heC
+    obtain ⟨b,c,hbc,heq⟩ := Finset.card_eq_two.mp hcard
+    subst e
+    have hbC : b ∈ C := hsubC (by simp)
+    have hcC : c ∈ C := hsubC (by simp)
+    have hb9 : b < 9 := Finset.mem_range.mp (Finset.mem_erase.mp hbC).2
+    have hc9 : c < 9 := Finset.mem_range.mp (Finset.mem_erase.mp hcC).2
+    have hbq : b ≠ q.val := (Finset.mem_erase.mp hbC).1
+    have hcq : c ≠ q.val := (Finset.mem_erase.mp hcC).1
+    let b' : Fin 9 := ⟨b,hb9⟩
+    let c' : Fin 9 := ⟨c,hc9⟩
+    have hb'q : b' ≠ q := fun h => hbq (congrArg Fin.val h)
+    have hc'q : c' ≠ q := fun h => hcq (congrArg Fin.val h)
+    have hinc : b' ∈ D ∨ c' ∈ D := by
+      obtain ⟨x,hx⟩ := hmeet
+      obtain ⟨hxpair,hxA⟩ := Finset.mem_inter.mp hx
+      simp only [Finset.mem_insert,Finset.mem_singleton] at hxpair
+      rcases hxpair with hxb | hxc
+      · exact Or.inl ((hAD b').mp (by simpa only [hxb] using hxA))
+      · exact Or.inr ((hAD c').mp (by simpa only [hxc] using hxA))
+    have habs : sel p (fun v => v) (2^b ^^^ 2^c) = false :=
+      habsent b (by simp) c (by simp) hbc
+    by_cases hlt : b < c
+    · refine ⟨(b',c'),?_,rfl⟩
+      apply Finset.mem_filter.mpr
+      exact ⟨Finset.mem_filter.mpr
+        ⟨Finset.mem_univ _,hlt,hb'q,hc'q,hinc⟩,habs⟩
+    · have hclt : c < b := by omega
+      refine ⟨(c',b'),?_,?_⟩
+      · apply Finset.mem_filter.mpr
+        constructor
+        · exact Finset.mem_filter.mpr
+            ⟨Finset.mem_univ _,hclt,hc'q,hb'q,hinc.symm⟩
+        · change sel p (fun v => v) (2^c ^^^ 2^b) = false
+          rw [Nat.xor_comm]
+          exact habs
+      · exact Finset.pair_comm b c
+  have hF : F.card ≤ N.card := by
+    let g : {e // e ∈ F} → {ab // ab ∈ N} := fun e =>
+      ⟨(hrepresent e.val e.property).choose,
+        (hrepresent e.val e.property).choose_spec.1⟩
+    have hg : ∀ e : {e // e ∈ F},
+        e.val = ({(g e).val.1.val,(g e).val.2.val} : Finset Nat) := by
+      intro e
+      exact (hrepresent e.val e.property).choose_spec.2
+    apply Finset.card_le_card_of_injective (f := g)
+    intro e d he
+    apply Subtype.ext
+    have hp := congrArg
+      (fun ab : {ab // ab ∈ N} => ({ab.val.1.val,ab.val.2.val} : Finset Nat)) he
+    exact (hg e).trans (hp.trans (hg d).symm)
+  have hparts : S.card + N.card = 7*D.card - D.card*(D.card-1)/2 := by
+    have h := PairCapacity134.selected_and_missing_card q D hqD
+      (fun ab => sel p (fun v => v) (2^ab.1.val ^^^ 2^ab.2.val) = true)
+    simpa only [Bool.not_eq_true] using h
+  have hsplit := Finset.card_sdiff_add_card_inter W ({0,1} : Finset Nat)
+  have hex : (W ∩ ({0,1} : Finset Nat)).card ≤ 2 := by
+    calc
+      (W ∩ ({0,1} : Finset Nat)).card ≤ ({0,1} : Finset Nat).card :=
+        Finset.card_le_card Finset.inter_subset_right
+      _ = 2 := by decide
+  change T.card + (W ∩ ({0,1} : Finset Nat)).card = W.card at hsplit
+  rw [hAcard]
+  omega
+
+#print axioms covered_positions_add_missing_card_le
+end Snake9.MissingCapacity137

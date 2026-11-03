@@ -1,0 +1,30 @@
+E:\Snake-in-a-box\milestones\137-actual-block-assembly\lean\MissingCapacity137.lean:51:50: error: unsolved goals
+m : ℕ
+p : Snake m
+hm : 1 ≤ m
+q : Fin 9
+I : Finset ℕ
+f : ℕ → Fin 9
+hzero : vx p 0 = 0
+hfirst : vx p 1 = 2 ^ ↑q
+hlabels : ∀ r ∈ I, f r ≠ q
+hfit : ∀ r ∈ I, 2 * r + 6 ≤ m
+hfour : ∀ r ∈ I, ∀ j < 4, vx p (2 * r + 2 * j) ∈ nbrs (2 ^ ↑(f r))
+A : Finset ℕ := Finset.image (fun r => ↑(f r)) I
+C : Finset ℕ := (Finset.range 9).erase ↑q
+F : Finset (Finset ℕ) :=
+  {e ∈ Finset.powersetCard 2 C |
+    (e ∩ A).Nonempty ∧ ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2 ^ b ^^^ 2 ^ c) = false}
+D : Finset (Fin 9) := Finset.image f I
+W : Finset ℕ := I.biUnion fun r => Finset.Icc r (r + 3)
+T : Finset ℕ := W \ {0, 1}
+B : Finset (Fin 9 × Fin 9) := {ab | ab.1 < ab.2 ∧ ab.1 ≠ q ∧ ab.2 ≠ q ∧ (ab.1 ∈ D ∨ ab.2 ∈ D)}
+S : Finset (Fin 9 × Fin 9) := {ab ∈ B | sel p (fun v => v) (2 ^ ↑ab.1 ^^^ 2 ^ ↑ab.2) = true}
+N : Finset (Fin 9 × Fin 9) := {ab ∈ B | sel p (fun v => v) (2 ^ ↑ab.1 ^^^ 2 ^ ↑ab.2) = false}
+hqD : q ∉ D
+hAD : ∀ (b : Fin 9), ↑b ∈ A ↔ b ∈ D
+⊢ Finset.image ((fun b => ↑b) ∘ f) I = Finset.image (fun r => ↑(f r)) I
+'Snake9.MissingCapacity137.covered_positions_add_missing_card_le' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

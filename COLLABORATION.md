@@ -1,3 +1,37 @@
+# Research update: milestone 137
+
+The complete actual-snake bound of twenty-four low-pair windows passed Lean.
+Any finite set of fitting canonical 012032 starts with relevant pair sum at
+most nine has size at most 24, allowing overlap and either length parity.
+The checked per-endpoint count is 12 under the unselected-common-neighbour
+assignment. Nine modules and 23 theorem reports passed; the final source
+also received an independent mathematical and scope review.
+
+The proof constructs actual blocks, counts the exceptional prefix once,
+subtracts actual missing pairs from capacity, sums degrees with repeated
+labels allowed, and excludes both exceptional parameter cases. The previous
+total 32 is improved to 24. The boundary-free count eleven, arbitrary distance-only assignment,
+sharpness and a new global length bound remain unresolved.
+
+The paper received a targeted update 137 with the completed proof. No named
+definition was added. Its authors and complete preamble are unchanged, and
+both saved copies match. Source checks pass; the built-in compiler failed
+before TeX in its Windows helper. The updated PDF and layout are unverified.
+Last full revision 136; next full revision 146.
+
+The maintained interval is 191–235, with incomplete independent rebuilding of
+the contributor upper proof. The optimum and 196 remain open. The uniform
+credit obstruction persists even with an allowance of two events. Next:
+investigate a necessary endpoint condition on the other seven-edge cycle,
+which has no 012032 event. Read milestones131–132 and the new137 note before
+setting a bounded local counterexample query. Retain all model assumptions.
+
+At the saved process observation, the separate milestone115 certificate job
+was live at 952/1397 modules. Check its command before any restart. The current
+checkpoint is progress toward the active research goal, not completion.
+
+## Earlier record
+
 # Research update: milestone 136
 
 Four Lean modules and eleven theorem reports passed. The checked results

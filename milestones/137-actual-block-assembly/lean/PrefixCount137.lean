@@ -1,0 +1,142 @@
+import IntervalCount136
+
+namespace Snake9.PrefixCount137
+
+/- The prefix consists of sampled positions zero and one. -/
+theorem interval_prefix_card (lo hi : Nat) :
+    ((Finset.Icc lo (hi + 3)) ∩ ({0,1} : Finset Nat)).card =
+      (if lo = 0 then 1 else 0) + (if lo ≤ 1 then 1 else 0) := by
+  by_cases hzero : lo = 0
+  · have hset : (Finset.Icc lo (hi + 3)) ∩ ({0,1} : Finset Nat) = {0,1} := by
+      ext x
+      simp only [Finset.mem_inter, Finset.mem_Icc, Finset.mem_insert,
+        Finset.mem_singleton]
+      omega
+    rw [hset]
+    norm_num [hzero]
+  · by_cases hone : lo = 1
+    · have hset : (Finset.Icc lo (hi + 3)) ∩ ({0,1} : Finset Nat) = {1} := by
+        ext x
+        simp only [Finset.mem_inter, Finset.mem_Icc, Finset.mem_insert,
+          Finset.mem_singleton]
+        omega
+      rw [hset]
+      norm_num [hone]
+    · have hlarge : ¬ lo ≤ 1 := by omega
+      have hset : (Finset.Icc lo (hi + 3)) ∩ ({0,1} : Finset Nat) = ∅ := by
+        ext x
+        simp only [Finset.mem_inter, Finset.mem_Icc, Finset.mem_insert,
+          Finset.mem_singleton, Finset.not_mem_empty, iff_false]
+        omega
+      rw [hset]
+      simp [hzero,hlarge]
+
+theorem interval_regular_set (lo hi : Nat) :
+    (Finset.Icc lo (hi + 3)) \ ({0,1} : Finset Nat) =
+      Finset.Icc (max lo 2) (hi + 3) := by
+  ext x
+  simp only [Finset.mem_sdiff, Finset.mem_Icc, Finset.mem_insert,
+    Finset.mem_singleton, max_le_iff]
+  omega
+
+theorem interval_regular_card (lo hi : Nat) :
+    ((Finset.Icc lo (hi + 3)) \ ({0,1} : Finset Nat)).card =
+      hi + 4 - max lo 2 := by
+  rw [interval_regular_set, Nat.card_Icc]
+
+theorem interval_card_split (lo hi : Nat) :
+    (Finset.Icc lo (hi + 3)).card = hi + 4 - max lo 2 +
+      ((Finset.Icc lo (hi + 3)) ∩ ({0,1} : Finset Nat)).card := by
+  rw [Nat.card_Icc, interval_prefix_card]
+  by_cases hzero : lo = 0
+  · simp [hzero] <;> omega
+  · by_cases hone : lo = 1
+    · simp [hone] <;> omega
+    · have htwo : 2 ≤ lo := by omega
+      have hlarge : ¬ lo ≤ 1 := by omega
+      simp [hzero,hlarge,max_eq_left htwo] <;> omega
+
+private theorem prefix_sum_zero {β : Type*} (B : List β) (lo hi : β → Nat) :
+    (∀ b ∈ B, 2 ≤ lo b) →
+    (B.map (fun b =>
+      ((Finset.Icc (lo b) (hi b + 3)) ∩ ({0,1} : Finset Nat)).card)).sum = 0 := by
+  induction B with
+  | nil => simp
+  | cons b B ih =>
+      intro hlarge
+      have hb := hlarge b (by simp)
+      have hzero : lo b ≠ 0 := by omega
+      have hone : ¬ lo b ≤ 1 := by omega
+      have htail := ih (fun c hc => hlarge c (List.mem_cons_of_mem b hc))
+      rw [List.map_cons, List.sum_cons, htail, interval_prefix_card]
+      simp [hzero,hone]
+
+/- Separation makes every block after the first start at least at three.
+   Thus any contributions at zero and one belong to the same first block.
+   No extra assumption that the blocks themselves are nonempty is required. -/
+theorem prefix_card_sum_eq {β : Type*} (B : List β) (lo hi : β → Nat)
+    (hsep : B.Pairwise (fun b c => hi b + 3 ≤ lo c)) :
+    (B.map (fun b =>
+      ((Finset.Icc (lo b) (hi b + 3)) ∩ ({0,1} : Finset Nat)).card)).sum =
+      (if ∃ b ∈ B, lo b = 0 then 1 else 0) +
+      (if ∃ b ∈ B, lo b ≤ 1 then 1 else 0) := by
+  classical
+  cases B with
+  | nil => simp
+  | cons b B =>
+      have hlater : ∀ c ∈ B, 3 ≤ lo c := by
+        intro c hc
+        have h := (List.pairwise_cons.mp hsep).1 c hc
+        omega
+      have htail := prefix_sum_zero B lo hi (fun c hc => by
+        have h := hlater c hc
+        omega)
+      have hexzero : (∃ c ∈ b :: B, lo c = 0) ↔ lo b = 0 := by
+        constructor
+        · rintro ⟨c,hc,hc0⟩
+          rcases List.mem_cons.mp hc with hc | hc
+          · subst c
+            exact hc0
+          · have h := hlater c hc
+            omega
+        · intro hb
+          exact ⟨b,by simp,hb⟩
+      have hexone : (∃ c ∈ b :: B, lo c ≤ 1) ↔ lo b ≤ 1 := by
+        constructor
+        · rintro ⟨c,hc,hc1⟩
+          rcases List.mem_cons.mp hc with hc | hc
+          · subst c
+            exact hc1
+          · have h := hlater c hc
+            omega
+        · intro hb
+          exact ⟨b,by simp,hb⟩
+      rw [List.map_cons, List.sum_cons, htail, Nat.add_zero, interval_prefix_card]
+      simp only [hexzero,hexone]
+
+theorem prefix_card_sum_le {β : Type*} (B : List β) (lo hi : β → Nat)
+    (hsep : B.Pairwise (fun b c => hi b + 3 ≤ lo c)) :
+    (B.map (fun b =>
+      ((Finset.Icc (lo b) (hi b + 3)) ∩ ({0,1} : Finset Nat)).card)).sum ≤
+      1 + (if ∃ b ∈ B, lo b = 0 then 1 else 0) := by
+  classical
+  rw [prefix_card_sum_eq B lo hi hsep]
+  split_ifs <;> omega
+
+theorem prefix_card_sum_le_two {β : Type*} (B : List β) (lo hi : β → Nat)
+    (hsep : B.Pairwise (fun b c => hi b + 3 ≤ lo c)) :
+    (B.map (fun b =>
+      ((Finset.Icc (lo b) (hi b + 3)) ∩ ({0,1} : Finset Nat)).card)).sum ≤ 2 := by
+  classical
+  have h := prefix_card_sum_le B lo hi hsep
+  split_ifs at h <;> omega
+
+#print axioms interval_prefix_card
+#print axioms interval_regular_set
+#print axioms interval_regular_card
+#print axioms interval_card_split
+#print axioms prefix_card_sum_eq
+#print axioms prefix_card_sum_le
+#print axioms prefix_card_sum_le_two
+
+end Snake9.PrefixCount137

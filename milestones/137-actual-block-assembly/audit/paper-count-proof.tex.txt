@@ -1,0 +1,93 @@
+A consecutive-block construction gives the stronger estimate. Sort the
+sampled starts and group consecutive gaps of at most two. Each block has
+one common coordinate. Its expanded interval runs from its first start to
+three positions after its last start. These intervals cover the original
+windows and, in their order, overlap in at most one position.
+
+\begin{lemma}[Improved count for one endpoint]\label{lem:twelve-endpoint-windows}
+Under the hypotheses of Lemma~\ref{lem:sixteen-endpoint-windows}, there are
+at most twelve starts.
+\end{lemma}
+\begin{proof}
+Use the same normalization and sampled starts. Let $W$ be their number,
+$k$ the number of blocks, and $A$ the common coordinates used. Put $a=|A|$.
+For $W>0$, we have $1\le a\le k$ and $a\le8$. Let $F$ be the absent
+coordinate pairs among the eight available coordinates that meet $A$, with
+$t=|F|$. Retain the incident and crossing degrees $d_u,s_u$ above.
+
+An interval containing $w$ starts has at least $w+3$ positions. Summing
+over the blocks and accounting for at most $k-1$ overlaps gives a covered
+union of at least $W+2k+1$ positions. Except at sampled positions zero and
+one, these are distinct selected coordinate pairs meeting $A$. The $t$
+absent pairs cannot occur among them. Consequently,
+\begin{equation}\label{eq:missing-capacity-twelve}
+W+2k+t\le7a-\binom a2+1.
+\end{equation}
+
+For each block, remove sampled positions zero and one when present, and
+let $\ell$ be the remaining length. These exceptional positions belong
+only to the first block, so their total contribution is at most two.
+Every block originally contains at least four positions, hence $\ell\ge2$,
+and
+\begin{equation}\label{eq:regular-sum-twelve}
+W+3k\le\sum_{\text{blocks}}\ell+2.
+\end{equation}
+If its common coordinate is $u$, its consecutive regular vertices are
+$\{u,b_1\},\ldots,\{u,b_\ell\}$. The $b_i$ are distinct, and each
+successive pair of them is absent by Lemma~\ref{lem:missing-opposite-pair}.
+Exactly $8-a-s_u$ coordinates outside $A$ can occur in this list: each
+outside coordinate gives either a selected pair through $u$ or one of
+the $s_u$ absent crossing pairs. The list bound above therefore gives
+\begin{equation}\label{eq:regular-degree-twelve}
+\ell+d_u\le\max\{1,8-a-s_u\}+t.
+\end{equation}
+
+For $a\le7$, the maximum is at most $8-a$. Every common coordinate occurs
+in at least one block. Repeated common coordinates can only increase the
+sum of their nonnegative degrees, so $\sum_{\text{blocks}}d_u\ge t$.
+Summing \eqref{eq:regular-degree-twelve} and using
+\eqref{eq:regular-sum-twelve} yields
+\begin{equation}\label{eq:degree-sum-twelve}
+W+3k+t\le k(8-a+t)+2.
+\end{equation}
+Suppose $W\ge13$. Inequality~\eqref{eq:missing-capacity-twelve} first gives
+$k\le8$. Checking the integer ranges $1\le a\le7$, $a\le k\le8$ and
+$0\le t\le7a-\binom a2-2k-12$ in
+\eqref{eq:degree-sum-twelve} leaves only $(a,k,t)=(5,5,3)$.
+This finite implication is checked in Lean.
+
+In that remaining case, each common coordinate occurs in exactly one block.
+Since $0\le s_u\le3$, inequality~\eqref{eq:regular-degree-twelve} implies
+\[
+\ell+d_u+s_u\le
+\begin{cases}7,&s_u=3,\\6,&s_u<3.\end{cases}
+\]
+At most one coordinate has $s_u=3$, and $\sum_{u\in A}(d_u+s_u)=6$.
+Thus the sum of the five regular lengths is at most $5\cdot6+1-6=25$.
+Equation~\eqref{eq:regular-sum-twelve} gives $W+15\le27$, a contradiction.
+
+If $a=8$, inequality~\eqref{eq:missing-capacity-twelve}, together with
+$k\ge8$ and $W\ge13$, forces $k=8$ and $t=0$. Equation
+\eqref{eq:regular-degree-twelve} then gives $\ell\le1$ for every block,
+contrary to $\ell\ge2$. The case $W=0$ is immediate. The construction,
+all counts and their application to actual snakes have passed Lean~\cite{count24archive}.
+\end{proof}
+
+\begin{theorem}[Improved number of low-pair windows]\label{thm:twenty-four-windows}
+Every snake in $\Q_9$ has at most twenty-four fitting canonical $012032$
+windows with $\alpha_{r+2}+\alpha_{r+4}\le9$. Windows may overlap, and
+each starting position is counted once. No parity assumption is required.
+\end{theorem}
+\begin{proof}
+Use the disjoint endpoint assignment from Theorem~\ref{thm:thirty-two-windows}
+and apply Lemma~\ref{lem:twelve-endpoint-windows} to each group.
+The full endpoint transfer and partition have passed Lean~\cite{count24archive}.
+\end{proof}
+
+The sharper proposed count of eleven at an endpoint with no counted boundary
+window remains under verification. The common unselected neighbour is still
+part of the per-endpoint assignment hypothesis. No sharpness assertion is made.
+The occurrence count alone gives no new upper bound on snake length;
+Section~\ref{sec:occurrence-credit-limit} identifies an obstruction to its
+use in the current uniform-credit comparison.
+

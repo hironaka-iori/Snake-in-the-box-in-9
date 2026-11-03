@@ -1,0 +1,174 @@
+import ActualCount135
+import ActualBlocks137
+import CountTwelve137
+import MissingCapacity137
+
+namespace Snake9.ActualCount137
+open Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow
+
+set_option maxHeartbeats 4000000
+
+theorem sampled_count_le_twelve {m : Nat} (p : Snake m) (hm : 1 ≤ m)
+    (q : Fin 9) (I : Finset Nat) (f : Nat → Fin 9)
+    (hzero : vx p 0 = 0) (hfirst : vx p 1 = 2^q.val)
+    (hlabels : ∀ r, r ∈ I → f r ≠ q)
+    (hfit : ∀ r, r ∈ I → 2*r+6 ≤ m)
+    (hfour : ∀ r, r ∈ I → ∀ j, j < 4 →
+      vx p (2*r+2*j) ∈ nbrs (2^(f r).val)) : I.card ≤ 12 := by
+  classical
+  by_cases hI : I.Nonempty
+  · let A := I.image (fun r => (f r).val)
+    let C := (Finset.range 9).erase q.val
+    let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+      ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+    have hA : A ⊆ C := by
+      intro a ha
+      obtain ⟨r,hr,rfl⟩ := Finset.mem_image.mp ha
+      apply Finset.mem_erase.mpr
+      refine ⟨?_,Finset.mem_range.mpr (f r).isLt⟩
+      intro he
+      exact hlabels r hr (Fin.ext he)
+    have ha : 1 ≤ A.card := by
+      obtain ⟨r,hr⟩ := hI
+      exact Finset.card_pos.mpr ⟨(f r).val,Finset.mem_image.mpr ⟨r,hr,rfl⟩⟩
+    have ha8 : A.card ≤ 8 := by
+      have hC : C.card=8 := by
+        change ((Finset.range 9).erase q.val).card=8
+        rw [Finset.card_erase_of_mem (Finset.mem_range.mpr q.isLt),Finset.card_range]
+      have h := Finset.card_le_card hA
+      omega
+    have hsize : ∀ e ∈ F, e.card=2 := by
+      intro e he
+      exact (Finset.mem_powersetCard.mp (Finset.mem_filter.mp he).1).2
+    have hmeet : ∀ e ∈ F, (e ∩ A).Nonempty := by
+      intro e he
+      exact (Finset.mem_filter.mp he).2.1
+    obtain ⟨B,hAeq,hstarts,hlen,hbound,hunion⟩ :=
+      ActualBlocks137.exists_actual_blocks p hm q I f hzero hfirst hlabels hfit hfour
+    have hcapacity := MissingCapacity137.covered_positions_add_missing_card_le
+      p hm q I f hzero hfirst hlabels hfit hfour
+    have hcapacity' : (I.biUnion (fun r => Finset.Icc r (r+3))).card+F.card ≤
+        7*A.card-A.card*(A.card-1)/2+2 := hcapacity
+    have hlow := hunion hI
+    apply CountTwelve137.count_le_twelve_from_blocks I.card B
+      (fun b => (f (b.headD 0)).val)
+      (fun b => b.getLastD 0+4-max (b.headD 0) 2) A F
+      hAeq.symm ha ha8 hsize hmeet ?_ hstarts hlen hbound
+    omega
+  · have hEmpty : I=∅ := Finset.not_nonempty_iff_eq_empty.mp hI
+    simp [hEmpty]
+
+theorem normalized_count_le_twelve {m : Nat} (p : Snake m)
+    (d : Fin 9) (S : Finset Nat) (hm : 1 ≤ m)
+    (hzero : vx p 0 = 0) (hfirst : vx p 1 = 2^d.val)
+    (hfit : ∀ r ∈ S, r+6 ≤ m)
+    (hlabels : ∀ r ∈ S, ∃ a : Fin 9, a ≠ d ∧
+      ∀ j, j < 4 → vx p (r+2*j) ∈ nbrs (2^a.val)) : S.card ≤ 12 := by
+  classical
+  have heven : ∀ r ∈ S, r % 2 = 0 := by
+    intro r hr
+    obtain ⟨a,had,hfour⟩ := hlabels r hr
+    have hr0 : vx p r ∈ nbrs (2^a.val) := by simpa using hfour 0 (by omega)
+    exact EvenWindows135.unit_neighbor_even_start p r a.val (by have := hfit r hr; omega)
+      a.isLt hzero hr0
+  let I := S.image (fun r => r/2)
+  have hinj : Set.InjOn (fun r : Nat => r/2) S := by
+    intro r hr s hs heq
+    change r/2 = s/2 at heq
+    have hrEven := heven r hr
+    have hsEven := heven s hs
+    omega
+  have hcard : I.card = S.card := Finset.card_image_of_injOn hinj
+  have hmem : ∀ r ∈ I, 2*r ∈ S := by
+    intro r hr
+    obtain ⟨s,hs,hse⟩ := Finset.mem_image.mp hr
+    change s/2 = r at hse
+    have hparity := heven s hs
+    have hs2 : s = 2*r := by omega
+    simpa only [hs2] using hs
+  let f : Nat → Fin 9 := fun r => if h : 2*r ∈ S then (hlabels (2*r) h).choose else d
+  have hf : ∀ r ∈ I, f r ≠ d ∧
+      ∀ j, j < 4 → vx p (2*r+2*j) ∈ nbrs (2^(f r).val) := by
+    intro r hr
+    have h := hmem r hr
+    simpa only [f,dif_pos h] using (hlabels (2*r) h).choose_spec
+  have hfitI : ∀ r ∈ I, 2*r+6 ≤ m := fun r hr => hfit (2*r) (hmem r hr)
+  have hbound := sampled_count_le_twelve p hm d I f hzero hfirst
+    (fun r hr => (hf r hr).1) hfitI (fun r hr => (hf r hr).2)
+  omega
+
+theorem assigned_count_le_twelve {m : Nat} (p : Snake m) (e : Nat)
+    (S : Finset Nat) (he : e=0 ∨ e=m)
+    (hfit : ∀ r ∈ S, r+6 ≤ m)
+    (hassigned : ∀ r ∈ S, ∃ z,
+      sel p (fun v => v) z = false ∧ vx p e ∈ nbrs z ∧
+      ∀ j, j < 4 → vx p (r+2*j) ∈ nbrs z) : S.card ≤ 12 := by
+  classical
+  by_cases hne : S.Nonempty
+  · obtain ⟨r0,hr0⟩ := hne
+    have hm : 1 ≤ m := by have := hfit r0 hr0; omega
+    obtain ⟨q,d,hzero,hd,hfirst,htransport⟩ :=
+      EndpointReduction134.endpoint_normalization p e hm he
+    let orient := fun r => if e=0 then r else m-r-6
+    let I := S.image orient
+    have hfitI : ∀ s ∈ I, s+6 ≤ m := by
+      intro s hs
+      obtain ⟨r,hr,hrs⟩ := Finset.mem_image.mp hs
+      have h := hfit r hr
+      dsimp only [orient] at hrs
+      split_ifs at hrs <;> omega
+    have hinj : Set.InjOn orient S := by
+      intro r hr s hs heq
+      have := hfit r hr
+      have := hfit s hs
+      dsimp only [orient] at heq
+      split_ifs at heq <;> omega
+    have hlabels : ∀ s ∈ I, ∃ a : Fin 9, a ≠ (⟨d,hd⟩ : Fin 9) ∧
+        ∀ j, j < 4 → vx q (s+2*j) ∈ nbrs (2^a.val) := by
+      intro s hs
+      obtain ⟨r,hr,hrs⟩ := Finset.mem_image.mp hs
+      obtain ⟨z,hnot,hadj,hfour⟩ := hassigned r hr
+      obtain ⟨_,a,ha,had,_,_,hnew,_⟩ :=
+        EndpointReduction134.endpoint_star_pairs p q e d r z hzero hfirst htransport
+          (hfit r hr) hnot hadj hfour
+      refine ⟨⟨a,ha⟩,?_,?_⟩
+      · intro had'
+        exact had (congrArg Fin.val had')
+      · simpa only [← hrs] using hnew
+    have hbound := normalized_count_le_twelve q ⟨d,hd⟩ I hm hzero hfirst hfitI hlabels
+    have hcard : I.card = S.card := Finset.card_image_of_injOn hinj
+    omega
+  · have hs : S = ∅ := Finset.not_nonempty_iff_eq_empty.mp hne
+    simp [hs]
+
+theorem low_pair_count_le_twenty_four {m : Nat} (p : Snake m) (S : Finset Nat)
+    (hfit : ∀ r ∈ S, r+6 ≤ m)
+    (hshape : ∀ r ∈ S, canon (dsOf p r 6) = [0,1,2,0,3,2])
+    (hpair : ∀ r ∈ S, coreAlpha p (r+2)+coreAlpha p (r+4) ≤ 9) :
+    S.card ≤ 24 := by
+  classical
+  let P : Nat → Prop := fun r => ∃ z,
+    sel p (fun v => v) z = false ∧ vx p 0 ∈ nbrs z ∧
+    ∀ j, j < 4 → vx p (r+2*j) ∈ nbrs z
+  have hleft := assigned_count_le_twelve p 0 (S.filter P) (Or.inl rfl)
+    (fun r hr => hfit r (Finset.mem_filter.mp hr).1)
+    (fun r hr => (Finset.mem_filter.mp hr).2)
+  have hright := assigned_count_le_twelve p m (S.filter (fun r => ¬ P r)) (Or.inr rfl)
+    (fun r hr => hfit r (Finset.mem_filter.mp hr).1) (by
+      intro r hr
+      obtain ⟨hrS,hn⟩ := Finset.mem_filter.mp hr
+      obtain ⟨e,z,he,_,hnot,hadj,hfour⟩ :=
+        CommonNeighbor134.actual_common_neighbor p r (hfit r hrS) (hshape r hrS) (hpair r hrS)
+      rcases he with he | he
+      · subst e
+        exact False.elim (hn ⟨z,hnot,hadj,hfour⟩)
+      · subst e
+        exact ⟨z,hnot,hadj,hfour⟩)
+  have hcard := Finset.filter_card_add_filter_neg_card_eq_card (s := S) P
+  omega
+
+#print axioms sampled_count_le_twelve
+#print axioms normalized_count_le_twelve
+#print axioms assigned_count_le_twelve
+#print axioms low_pair_count_le_twenty_four
+end Snake9.ActualCount137
