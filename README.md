@@ -1,3 +1,27 @@
+# Research update: milestone 149
+
+On the original 4,947,008-edge share graph, lowering the 012032 floor to 15
+cannot be compensated by any uniform occurrence credit. The other eight
+floors, event rule and occurrence allowance 24 are fixed. An eleven-cycle,
+an unchanged three-cycle and a new 28-edge walk force the comparison to be
+at least 235. Five arithmetic statements passed Lean; the exact saved
+graph identities were checked separately. This is a limitation of that
+specific graph argument, with no new global snake bound.
+
+The 012032 share-16 target remains necessary in this profile. The selected
+next step is still the existing 147 full replay, session 67526 and coordinator
+PID 15228 at this checkpoint. The same process resumed after the short 149
+arithmetic check. Revalidate it before any action; do not restart a live job.
+The 148 conditional actual-snake transfer is complete. Its core contradiction
+and prepared final composition remain pending.
+
+See milestones/149-share-credit-tradeoff/MATHEMATICAL_NOTE.md and the saved
+audit. Both paper copies were updated without new definitions or preamble
+changes. PDF preparation still fails in the Windows helper before TeX.
+The maintained interval remains 191--235 with the contributor independent
+rebuild caveat. Conditional234 retains its other premises. Goal ACTIVE;
+last full paper revision146, next156.
+
 # Research update: milestone 148
 
 The coordinate and reversal transfer for 012301 share 16 is checked. For every

@@ -1,3 +1,15 @@
+# Continue after milestone 149
+
+Read milestones/149-share-credit-tradeoff/MATHEMATICAL_NOTE.md first. The
+fixed-profile floor15/occurrence-credit tradeoff is ruled out for every
+credit. The graph identities and arithmetic have separate evidence; no
+new global bound is claimed. Do not repeat this failed tradeoff or run the
+unnecessary half-credit experiment. Keep the 012032 floor16 target.
+
+The same147 replay remains the selected next task. Its running coordinator
+was resumed after149. Everything below concerning that replay and148's
+completed conditional transfer remains applicable. The goal is ACTIVE.
+
 # Continue after milestone 148
 
 Work in E:/Snake-in-a-box. Apply tensai-bishoujo with the user's formal tone,
