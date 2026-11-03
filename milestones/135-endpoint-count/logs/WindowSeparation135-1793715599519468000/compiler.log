@@ -1,0 +1,46 @@
+E:\Snake-in-a-box\milestones\135-endpoint-count\lean\WindowSeparation135.lean:25:12: error: tactic 'rewrite' failed, did not find instance of the pattern in the target expression
+  ↑⟨c, hc⟩
+case intro.intro.intro.intro.inl.h
+a b w : ℕ
+ha : a < 9
+hb : b < 9
+hab : a ≠ b
+hwa : w ∈ nbrs (2 ^ a)
+hwb : w ∈ nbrs (2 ^ b)
+c : ℕ
+hc : c < 9
+hec : w = 2 ^ a ^^^ 2 ^ c
+d : ℕ
+hd : d < 9
+hed : w = 2 ^ b ^^^ 2 ^ d
+hab' : ⟨a, ha⟩ ≠ ⟨b, hb⟩
+hca : ⟨c, hc⟩ = ⟨a, ha⟩
+⊢ 2 ^ a ^^^ 2 ^ c = 0
+E:\Snake-in-a-box\milestones\135-endpoint-count\lean\WindowSeparation135.lean:27:12: error: tactic 'rewrite' failed, did not find instance of the pattern in the target expression
+  ↑⟨c, hc⟩
+case intro.intro.intro.intro.inr.h
+a b w : ℕ
+ha : a < 9
+hb : b < 9
+hab : a ≠ b
+hwa : w ∈ nbrs (2 ^ a)
+hwb : w ∈ nbrs (2 ^ b)
+c : ℕ
+hc : c < 9
+hec : w = 2 ^ a ^^^ 2 ^ c
+d : ℕ
+hd : d < 9
+hed : w = 2 ^ b ^^^ 2 ^ d
+hab' : ⟨a, ha⟩ ≠ ⟨b, hb⟩
+hcb : ⟨c, hc⟩ = ⟨b, hb⟩
+⊢ 2 ^ a ^^^ 2 ^ c = 2 ^ a ^^^ 2 ^ b
+'Snake9.WindowSeparation135.common_unit_neighbors' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.WindowSeparation135.selected_common_unit_pair' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.WindowSeparation135.different_labels_separated' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'Snake9.WindowSeparation135.sampled_window_separation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
