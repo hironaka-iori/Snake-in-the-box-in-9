@@ -1,0 +1,78 @@
+{
+  "recorded_at": "2026-11-03T07:25:10.982799+00:00",
+  "batches": [
+    {
+      "batch": "104-complete-potential-batch",
+      "pid": 21896,
+      "process": {
+        "ProcessId": 21896,
+        "ParentProcessId": 51472,
+        "Name": "python.exe",
+        "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 E:\\Snake-in-a-box\\milestones/104-complete-potential-batch/scripts/run_batch.py"
+      },
+      "process_live": true,
+      "snapshot": "audit/observed-104-complete-potential-batch-1793690710658880200.json",
+      "sha256": "fd36f39a247991d5c9862f923cf433c6cb7b39a00586575807e2c77abbcae216",
+      "recorded_status": "RUNNING",
+      "selected_modules": 370,
+      "progress_fields": {
+        "status": "RUNNING",
+        "pid": 21896,
+        "started_at": "2026-11-03T04:19:27.928806+00:00",
+        "plan_sha256": "9a690dd6c2c94e3b7a8466f087e158518fdef421acbeb102e8008cf10d8929a8",
+        "checker_sha256": "7c30d216e241c795fb24788e424e8faca86f64922a18ec84b4bee8fb5e385261",
+        "generator_sha256": "c545fcb70d755956a5f4616ee3da512cd6c7d9a9154b2e80ce775479d5546564",
+        "active": {
+          "module": "CompletedBatch104G191",
+          "checker_pid": 22944
+        },
+        "remaining_groups": 787,
+        "complete_graph_potential_certificates_checked": false,
+        "contexts_checked_by_profile": {
+          "completed": 247,
+          "conditional": 249
+        },
+        "contexts_remaining_by_profile": {
+          "completed": 544,
+          "conditional": 542
+        },
+        "updated_at": "2026-11-03T07:22:42.275691+00:00"
+      },
+      "checker_snapshot": "audit/observed-104-complete-potential-batch-checker-1793690710658880200.json",
+      "checker_snapshot_sha256": "8e328812d3d6fee6093a8403fe1f5eb1eb248b7a054c752a588554800ec69579",
+      "checker_passed_records": 0,
+      "checker_status": "RUNNING"
+    },
+    {
+      "batch": "115-total-count-certificate",
+      "pid": 43492,
+      "process": {
+        "ProcessId": 43492,
+        "ParentProcessId": 51472,
+        "Name": "python.exe",
+        "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 E:\\Snake-in-a-box\\milestones/115-total-count-certificate/scripts/run_batch.py"
+      },
+      "process_live": true,
+      "snapshot": "audit/observed-115-total-count-certificate-1793690710658880200.json",
+      "sha256": "c4279209ab43f2a97a5c7285dcfd7d162e7dc5f6ae977def5bbe0060b2c3ef2b",
+      "recorded_status": "RUNNING",
+      "checked_modules": 582,
+      "total_modules": 1397,
+      "checker_snapshot": "audit/observed-115-total-count-certificate-checker-1793690710658880200.json",
+      "checker_snapshot_sha256": "a92b2a8a7d9ebfacd71217575626743c33ae9939bc9230983a16ea23e1ac7627",
+      "checker_passed_records": 0,
+      "checker_status": "WAITING_FOR_COMPILER_SLOT"
+    },
+    {
+      "batch": "122-endpoint-equality",
+      "pid": 55040,
+      "process": null,
+      "process_live": false,
+      "snapshot": "audit/observed-122-endpoint-equality-1793690710658880200.json",
+      "sha256": "b93b44b0088ab7aeebe602cc768fdd8dc8bf6cd2ca3e17731b32a922df97287e",
+      "recorded_status": "PASS_ALL_ENDPOINT_CERTIFICATES_AND_ACTUAL_ASSEMBLY"
+    }
+  ],
+  "script_sha256": "31aaccb2b43329d6f913540b1e74140ebabaf031bdbb925688b12f5886a3397f",
+  "scope": "Point-in-time process-backed observations only; incomplete batches are not completed proofs."
+}

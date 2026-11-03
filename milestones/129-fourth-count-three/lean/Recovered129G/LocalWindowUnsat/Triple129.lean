@@ -1,0 +1,996 @@
+import Recovered129G.LocalWindowUnsat.Triple129.Check1
+import Recovered129G.LocalWindowUnsat.Triple129.Check2
+import Recovered129G.LocalWindowUnsat.Triple129.Check3
+import Recovered129G.LocalWindowUnsat.Triple129.Check4
+import Recovered129G.LocalWindowUnsat.Triple129.Check5
+import Recovered129G.LocalWindowUnsat.Triple129.Check6
+import Recovered129G.LocalWindowUnsat.Triple129.Check7
+import Recovered129G.LocalWindowUnsat.Triple129.Check8
+import Recovered129G.LocalWindowUnsat.Triple129.Check9
+import Recovered129G.LocalWindowUnsat.Triple129.Check10
+import Recovered129G.LocalWindowUnsat.Triple129.Check11
+import Recovered129G.LocalWindowUnsat.Triple129.Check12
+import Recovered129G.LocalWindowUnsat.Triple129.Check13
+import Recovered129G.LocalWindowUnsat.Triple129.Check14
+import Recovered129G.LocalWindowUnsat.Triple129.Check15
+import Recovered129G.LocalWindowUnsat.Triple129.Check16
+import Recovered129G.LocalWindowUnsat.Triple129.Check17
+import Recovered129G.LocalWindowUnsat.Triple129.Check18
+import Recovered129G.LocalWindowUnsat.Triple129.Check19
+import Recovered129G.LocalWindowUnsat.Triple129.Check20
+import Recovered129G.LocalWindowUnsat.Triple129.Check21
+import Recovered129G.LocalWindowUnsat.Triple129.Check22
+import Recovered129G.LocalWindowUnsat.Triple129.Check23
+import Recovered129G.LocalWindowUnsat.Triple129.Check24
+import Recovered129G.LocalWindowUnsat.Triple129.Check25
+import Recovered129G.LocalWindowUnsat.Triple129.Check26
+import Recovered129G.LocalWindowUnsat.Triple129.Check27
+import Recovered129G.LocalWindowUnsat.Triple129.Check28
+import Recovered129G.LocalWindowUnsat.Triple129.Check29
+import Recovered129G.LocalWindowUnsat.Triple129.Check30
+import Recovered129G.LocalWindowUnsat.Triple129.Check31
+import Recovered129G.LocalWindowUnsat.Triple129.Check32
+import Recovered129G.LocalWindowUnsat.Triple129.Check33
+import Recovered129G.LocalWindowUnsat.Triple129.Check34
+import Recovered129G.LocalWindowUnsat.Triple129.Check35
+import Recovered129G.LocalWindowUnsat.Triple129.Check36
+import Recovered129G.LocalWindowUnsat.Triple129.Check37
+import Recovered129G.LocalWindowUnsat.Triple129.Check38
+import Recovered129G.LocalWindowUnsat.Triple129.Check39
+import Recovered129G.LocalWindowUnsat.Triple129.Check40
+import Recovered129G.LocalWindowUnsat.Triple129.Check41
+import Recovered129G.LocalWindowUnsat.Triple129.Check42
+import Recovered129G.LocalWindowUnsat.Triple129.Check43
+import Recovered129G.LocalWindowUnsat.Triple129.Check44
+import Recovered129G.LocalWindowUnsat.Triple129.Check45
+import Recovered129G.LocalWindowUnsat.Triple129.Check46
+import Recovered129G.LocalWindowUnsat.Triple129.Check47
+import Recovered129G.LocalWindowUnsat.Triple129.Check48
+import Recovered129G.LocalWindowUnsat.Triple129.Check49
+import Recovered129G.LocalWindowUnsat.Triple129.Check50
+import Recovered129G.LocalWindowUnsat.Triple129.Check51
+import Recovered129G.LocalWindowUnsat.Triple129.Check52
+import Recovered129G.LocalWindowUnsat.Triple129.Check53
+import Recovered129G.LocalWindowUnsat.Triple129.Check54
+import Recovered129G.LocalWindowUnsat.Triple129.Check55
+import Recovered129G.LocalWindowUnsat.Triple129.Check56
+import Recovered129G.LocalWindowUnsat.Triple129.Check57
+import Recovered129G.LocalWindowUnsat.Triple129.Check58
+import Recovered129G.LocalWindowUnsat.Triple129.Check59
+import Recovered129G.LocalWindowUnsat.Triple129.Check60
+import Recovered129G.LocalWindowUnsat.Triple129.Check61
+import Recovered129G.LocalWindowUnsat.Triple129.Check62
+import Recovered129G.LocalWindowUnsat.Triple129.Check63
+import Recovered129G.LocalWindowUnsat.Triple129.Check64
+import Recovered129G.LocalWindowUnsat.Triple129.Check65
+import Recovered129G.LocalWindowUnsat.Triple129.Check66
+import Recovered129G.LocalWindowUnsat.Triple129.Check67
+import Recovered129G.LocalWindowUnsat.Triple129.Check68
+import Recovered129G.LocalWindowUnsat.Triple129.Check69
+import Recovered129G.LocalWindowUnsat.Triple129.Check70
+import Recovered129G.LocalWindowUnsat.Triple129.Check71
+import Recovered129G.LocalWindowUnsat.Triple129.Check72
+import Recovered129G.LocalWindowUnsat.Triple129.Check73
+import Recovered129G.LocalWindowUnsat.Triple129.Check74
+import Recovered129G.LocalWindowUnsat.Triple129.Check75
+import Recovered129G.LocalWindowUnsat.Triple129.Check76
+import Recovered129G.LocalWindowUnsat.Triple129.Check77
+import Recovered129G.LocalWindowUnsat.Triple129.Check78
+import Recovered129G.LocalWindowUnsat.Triple129.Check79
+import Recovered129G.LocalWindowUnsat.Triple129.Check80
+import Recovered129G.LocalWindowUnsat.Triple129.Check81
+import Recovered129G.LocalWindowUnsat.Triple129.Check82
+import Recovered129G.LocalWindowUnsat.Triple129.Check83
+import Recovered129G.LocalWindowUnsat.Triple129.Check84
+import Recovered129G.LocalWindowUnsat.Triple129.Check85
+import Recovered129G.LocalWindowUnsat.Triple129.Check86
+import Recovered129G.LocalWindowUnsat.Triple129.Check87
+import Recovered129G.LocalWindowUnsat.Triple129.Check88
+import Recovered129G.LocalWindowUnsat.Triple129.Check89
+import Recovered129G.LocalWindowUnsat.Triple129.Check90
+import Recovered129G.LocalWindowUnsat.Triple129.Check91
+import Recovered129G.LocalWindowUnsat.Triple129.Check92
+import Recovered129G.LocalWindowUnsat.Triple129.Check93
+import Recovered129G.LocalWindowUnsat.Triple129.Check94
+import Recovered129G.LocalWindowUnsat.Triple129.Check95
+import Recovered129G.LocalWindowUnsat.Triple129.Check96
+import Recovered129G.LocalWindowUnsat.Triple129.Check97
+import Recovered129G.LocalWindowUnsat.Triple129.Check98
+import Recovered129G.LocalWindowUnsat.Triple129.Check99
+import Recovered129G.LocalWindowUnsat.Triple129.Check100
+import Recovered129G.LocalWindowUnsat.Triple129.Check101
+import Recovered129G.LocalWindowUnsat.Triple129.Check102
+import Recovered129G.LocalWindowUnsat.Triple129.Check103
+import Recovered129G.LocalWindowUnsat.Triple129.Check104
+import Recovered129G.LocalWindowUnsat.Triple129.Check105
+import Recovered129G.LocalWindowUnsat.Triple129.Check106
+import Recovered129G.LocalWindowUnsat.Triple129.Check107
+import Recovered129G.LocalWindowUnsat.Triple129.Check108
+import Recovered129G.LocalWindowUnsat.Triple129.Check109
+
+/-! Kernel-checked LRAT refutation of the core of `triple129`: 50082 lemmas, 2628221 hints,
+435 segments (generated by `milestones/10-window-aggregate/scripts/gen_lean_lrat.py`). -/
+
+namespace Snake9.LocalWindow.Triple129
+open Snake9.LratFast
+open Snake9.Lrat (Tree TreeTrue andB)
+open Snake9.Lrat (unsat_of_raw)
+
+theorem unsat : Unsat cnf := by
+  apply unsat_of_raw
+  intro τ h
+  have h1 : TreeTrue τ start1 :=
+    start_true (raw := raw) (h := 13) (slots := inputSlots) τ h
+  have h2 : TreeTrue τ start2 :=
+    replay_true (t := start1) (ps := proof1) τ ok1 h1
+  have h3 : TreeTrue τ start3 :=
+    replay_true (t := start2) (ps := proof2) τ ok2 h2
+  have h4 : TreeTrue τ start4 :=
+    replay_true (t := start3) (ps := proof3) τ ok3 h3
+  have h5 : TreeTrue τ start5 :=
+    cp_true (s := start4) (ps := proof4) (t := start5) τ ok4 h4
+  have h6 : TreeTrue τ start6 :=
+    replay_true (t := start5) (ps := proof5) τ ok5 h5
+  have h7 : TreeTrue τ start7 :=
+    replay_true (t := start6) (ps := proof6) τ ok6 h6
+  have h8 : TreeTrue τ start8 :=
+    replay_true (t := start7) (ps := proof7) τ ok7 h7
+  have h9 : TreeTrue τ start9 :=
+    cp_true (s := start8) (ps := proof8) (t := start9) τ ok8 h8
+  have h10 : TreeTrue τ start10 :=
+    replay_true (t := start9) (ps := proof9) τ ok9 h9
+  have h11 : TreeTrue τ start11 :=
+    replay_true (t := start10) (ps := proof10) τ ok10 h10
+  have h12 : TreeTrue τ start12 :=
+    replay_true (t := start11) (ps := proof11) τ ok11 h11
+  have h13 : TreeTrue τ start13 :=
+    cp_true (s := start12) (ps := proof12) (t := start13) τ ok12 h12
+  have h14 : TreeTrue τ start14 :=
+    replay_true (t := start13) (ps := proof13) τ ok13 h13
+  have h15 : TreeTrue τ start15 :=
+    replay_true (t := start14) (ps := proof14) τ ok14 h14
+  have h16 : TreeTrue τ start16 :=
+    replay_true (t := start15) (ps := proof15) τ ok15 h15
+  have h17 : TreeTrue τ start17 :=
+    cp_true (s := start16) (ps := proof16) (t := start17) τ ok16 h16
+  have h18 : TreeTrue τ start18 :=
+    replay_true (t := start17) (ps := proof17) τ ok17 h17
+  have h19 : TreeTrue τ start19 :=
+    replay_true (t := start18) (ps := proof18) τ ok18 h18
+  have h20 : TreeTrue τ start20 :=
+    replay_true (t := start19) (ps := proof19) τ ok19 h19
+  have h21 : TreeTrue τ start21 :=
+    cp_true (s := start20) (ps := proof20) (t := start21) τ ok20 h20
+  have h22 : TreeTrue τ start22 :=
+    replay_true (t := start21) (ps := proof21) τ ok21 h21
+  have h23 : TreeTrue τ start23 :=
+    replay_true (t := start22) (ps := proof22) τ ok22 h22
+  have h24 : TreeTrue τ start24 :=
+    replay_true (t := start23) (ps := proof23) τ ok23 h23
+  have h25 : TreeTrue τ start25 :=
+    cp_true (s := start24) (ps := proof24) (t := start25) τ ok24 h24
+  have h26 : TreeTrue τ start26 :=
+    replay_true (t := start25) (ps := proof25) τ ok25 h25
+  have h27 : TreeTrue τ start27 :=
+    replay_true (t := start26) (ps := proof26) τ ok26 h26
+  have h28 : TreeTrue τ start28 :=
+    replay_true (t := start27) (ps := proof27) τ ok27 h27
+  have h29 : TreeTrue τ start29 :=
+    cp_true (s := start28) (ps := proof28) (t := start29) τ ok28 h28
+  have h30 : TreeTrue τ start30 :=
+    replay_true (t := start29) (ps := proof29) τ ok29 h29
+  have h31 : TreeTrue τ start31 :=
+    replay_true (t := start30) (ps := proof30) τ ok30 h30
+  have h32 : TreeTrue τ start32 :=
+    replay_true (t := start31) (ps := proof31) τ ok31 h31
+  have h33 : TreeTrue τ start33 :=
+    cp_true (s := start32) (ps := proof32) (t := start33) τ ok32 h32
+  have h34 : TreeTrue τ start34 :=
+    replay_true (t := start33) (ps := proof33) τ ok33 h33
+  have h35 : TreeTrue τ start35 :=
+    replay_true (t := start34) (ps := proof34) τ ok34 h34
+  have h36 : TreeTrue τ start36 :=
+    replay_true (t := start35) (ps := proof35) τ ok35 h35
+  have h37 : TreeTrue τ start37 :=
+    cp_true (s := start36) (ps := proof36) (t := start37) τ ok36 h36
+  have h38 : TreeTrue τ start38 :=
+    replay_true (t := start37) (ps := proof37) τ ok37 h37
+  have h39 : TreeTrue τ start39 :=
+    replay_true (t := start38) (ps := proof38) τ ok38 h38
+  have h40 : TreeTrue τ start40 :=
+    replay_true (t := start39) (ps := proof39) τ ok39 h39
+  have h41 : TreeTrue τ start41 :=
+    cp_true (s := start40) (ps := proof40) (t := start41) τ ok40 h40
+  have h42 : TreeTrue τ start42 :=
+    replay_true (t := start41) (ps := proof41) τ ok41 h41
+  have h43 : TreeTrue τ start43 :=
+    replay_true (t := start42) (ps := proof42) τ ok42 h42
+  have h44 : TreeTrue τ start44 :=
+    replay_true (t := start43) (ps := proof43) τ ok43 h43
+  have h45 : TreeTrue τ start45 :=
+    cp_true (s := start44) (ps := proof44) (t := start45) τ ok44 h44
+  have h46 : TreeTrue τ start46 :=
+    replay_true (t := start45) (ps := proof45) τ ok45 h45
+  have h47 : TreeTrue τ start47 :=
+    replay_true (t := start46) (ps := proof46) τ ok46 h46
+  have h48 : TreeTrue τ start48 :=
+    replay_true (t := start47) (ps := proof47) τ ok47 h47
+  have h49 : TreeTrue τ start49 :=
+    cp_true (s := start48) (ps := proof48) (t := start49) τ ok48 h48
+  have h50 : TreeTrue τ start50 :=
+    replay_true (t := start49) (ps := proof49) τ ok49 h49
+  have h51 : TreeTrue τ start51 :=
+    replay_true (t := start50) (ps := proof50) τ ok50 h50
+  have h52 : TreeTrue τ start52 :=
+    replay_true (t := start51) (ps := proof51) τ ok51 h51
+  have h53 : TreeTrue τ start53 :=
+    cp_true (s := start52) (ps := proof52) (t := start53) τ ok52 h52
+  have h54 : TreeTrue τ start54 :=
+    replay_true (t := start53) (ps := proof53) τ ok53 h53
+  have h55 : TreeTrue τ start55 :=
+    replay_true (t := start54) (ps := proof54) τ ok54 h54
+  have h56 : TreeTrue τ start56 :=
+    replay_true (t := start55) (ps := proof55) τ ok55 h55
+  have h57 : TreeTrue τ start57 :=
+    cp_true (s := start56) (ps := proof56) (t := start57) τ ok56 h56
+  have h58 : TreeTrue τ start58 :=
+    replay_true (t := start57) (ps := proof57) τ ok57 h57
+  have h59 : TreeTrue τ start59 :=
+    replay_true (t := start58) (ps := proof58) τ ok58 h58
+  have h60 : TreeTrue τ start60 :=
+    replay_true (t := start59) (ps := proof59) τ ok59 h59
+  have h61 : TreeTrue τ start61 :=
+    cp_true (s := start60) (ps := proof60) (t := start61) τ ok60 h60
+  have h62 : TreeTrue τ start62 :=
+    replay_true (t := start61) (ps := proof61) τ ok61 h61
+  have h63 : TreeTrue τ start63 :=
+    replay_true (t := start62) (ps := proof62) τ ok62 h62
+  have h64 : TreeTrue τ start64 :=
+    replay_true (t := start63) (ps := proof63) τ ok63 h63
+  have h65 : TreeTrue τ start65 :=
+    cp_true (s := start64) (ps := proof64) (t := start65) τ ok64 h64
+  have h66 : TreeTrue τ start66 :=
+    replay_true (t := start65) (ps := proof65) τ ok65 h65
+  have h67 : TreeTrue τ start67 :=
+    replay_true (t := start66) (ps := proof66) τ ok66 h66
+  have h68 : TreeTrue τ start68 :=
+    replay_true (t := start67) (ps := proof67) τ ok67 h67
+  have h69 : TreeTrue τ start69 :=
+    cp_true (s := start68) (ps := proof68) (t := start69) τ ok68 h68
+  have h70 : TreeTrue τ start70 :=
+    replay_true (t := start69) (ps := proof69) τ ok69 h69
+  have h71 : TreeTrue τ start71 :=
+    replay_true (t := start70) (ps := proof70) τ ok70 h70
+  have h72 : TreeTrue τ start72 :=
+    replay_true (t := start71) (ps := proof71) τ ok71 h71
+  have h73 : TreeTrue τ start73 :=
+    cp_true (s := start72) (ps := proof72) (t := start73) τ ok72 h72
+  have h74 : TreeTrue τ start74 :=
+    replay_true (t := start73) (ps := proof73) τ ok73 h73
+  have h75 : TreeTrue τ start75 :=
+    replay_true (t := start74) (ps := proof74) τ ok74 h74
+  have h76 : TreeTrue τ start76 :=
+    replay_true (t := start75) (ps := proof75) τ ok75 h75
+  have h77 : TreeTrue τ start77 :=
+    cp_true (s := start76) (ps := proof76) (t := start77) τ ok76 h76
+  have h78 : TreeTrue τ start78 :=
+    replay_true (t := start77) (ps := proof77) τ ok77 h77
+  have h79 : TreeTrue τ start79 :=
+    replay_true (t := start78) (ps := proof78) τ ok78 h78
+  have h80 : TreeTrue τ start80 :=
+    replay_true (t := start79) (ps := proof79) τ ok79 h79
+  have h81 : TreeTrue τ start81 :=
+    cp_true (s := start80) (ps := proof80) (t := start81) τ ok80 h80
+  have h82 : TreeTrue τ start82 :=
+    replay_true (t := start81) (ps := proof81) τ ok81 h81
+  have h83 : TreeTrue τ start83 :=
+    replay_true (t := start82) (ps := proof82) τ ok82 h82
+  have h84 : TreeTrue τ start84 :=
+    replay_true (t := start83) (ps := proof83) τ ok83 h83
+  have h85 : TreeTrue τ start85 :=
+    cp_true (s := start84) (ps := proof84) (t := start85) τ ok84 h84
+  have h86 : TreeTrue τ start86 :=
+    replay_true (t := start85) (ps := proof85) τ ok85 h85
+  have h87 : TreeTrue τ start87 :=
+    replay_true (t := start86) (ps := proof86) τ ok86 h86
+  have h88 : TreeTrue τ start88 :=
+    replay_true (t := start87) (ps := proof87) τ ok87 h87
+  have h89 : TreeTrue τ start89 :=
+    cp_true (s := start88) (ps := proof88) (t := start89) τ ok88 h88
+  have h90 : TreeTrue τ start90 :=
+    replay_true (t := start89) (ps := proof89) τ ok89 h89
+  have h91 : TreeTrue τ start91 :=
+    replay_true (t := start90) (ps := proof90) τ ok90 h90
+  have h92 : TreeTrue τ start92 :=
+    replay_true (t := start91) (ps := proof91) τ ok91 h91
+  have h93 : TreeTrue τ start93 :=
+    cp_true (s := start92) (ps := proof92) (t := start93) τ ok92 h92
+  have h94 : TreeTrue τ start94 :=
+    replay_true (t := start93) (ps := proof93) τ ok93 h93
+  have h95 : TreeTrue τ start95 :=
+    replay_true (t := start94) (ps := proof94) τ ok94 h94
+  have h96 : TreeTrue τ start96 :=
+    replay_true (t := start95) (ps := proof95) τ ok95 h95
+  have h97 : TreeTrue τ start97 :=
+    cp_true (s := start96) (ps := proof96) (t := start97) τ ok96 h96
+  have h98 : TreeTrue τ start98 :=
+    replay_true (t := start97) (ps := proof97) τ ok97 h97
+  have h99 : TreeTrue τ start99 :=
+    replay_true (t := start98) (ps := proof98) τ ok98 h98
+  have h100 : TreeTrue τ start100 :=
+    replay_true (t := start99) (ps := proof99) τ ok99 h99
+  have h101 : TreeTrue τ start101 :=
+    cp_true (s := start100) (ps := proof100) (t := start101) τ ok100 h100
+  have h102 : TreeTrue τ start102 :=
+    replay_true (t := start101) (ps := proof101) τ ok101 h101
+  have h103 : TreeTrue τ start103 :=
+    replay_true (t := start102) (ps := proof102) τ ok102 h102
+  have h104 : TreeTrue τ start104 :=
+    replay_true (t := start103) (ps := proof103) τ ok103 h103
+  have h105 : TreeTrue τ start105 :=
+    cp_true (s := start104) (ps := proof104) (t := start105) τ ok104 h104
+  have h106 : TreeTrue τ start106 :=
+    replay_true (t := start105) (ps := proof105) τ ok105 h105
+  have h107 : TreeTrue τ start107 :=
+    replay_true (t := start106) (ps := proof106) τ ok106 h106
+  have h108 : TreeTrue τ start108 :=
+    replay_true (t := start107) (ps := proof107) τ ok107 h107
+  have h109 : TreeTrue τ start109 :=
+    cp_true (s := start108) (ps := proof108) (t := start109) τ ok108 h108
+  have h110 : TreeTrue τ start110 :=
+    replay_true (t := start109) (ps := proof109) τ ok109 h109
+  have h111 : TreeTrue τ start111 :=
+    replay_true (t := start110) (ps := proof110) τ ok110 h110
+  have h112 : TreeTrue τ start112 :=
+    replay_true (t := start111) (ps := proof111) τ ok111 h111
+  have h113 : TreeTrue τ start113 :=
+    cp_true (s := start112) (ps := proof112) (t := start113) τ ok112 h112
+  have h114 : TreeTrue τ start114 :=
+    replay_true (t := start113) (ps := proof113) τ ok113 h113
+  have h115 : TreeTrue τ start115 :=
+    replay_true (t := start114) (ps := proof114) τ ok114 h114
+  have h116 : TreeTrue τ start116 :=
+    replay_true (t := start115) (ps := proof115) τ ok115 h115
+  have h117 : TreeTrue τ start117 :=
+    cp_true (s := start116) (ps := proof116) (t := start117) τ ok116 h116
+  have h118 : TreeTrue τ start118 :=
+    replay_true (t := start117) (ps := proof117) τ ok117 h117
+  have h119 : TreeTrue τ start119 :=
+    replay_true (t := start118) (ps := proof118) τ ok118 h118
+  have h120 : TreeTrue τ start120 :=
+    replay_true (t := start119) (ps := proof119) τ ok119 h119
+  have h121 : TreeTrue τ start121 :=
+    cp_true (s := start120) (ps := proof120) (t := start121) τ ok120 h120
+  have h122 : TreeTrue τ start122 :=
+    replay_true (t := start121) (ps := proof121) τ ok121 h121
+  have h123 : TreeTrue τ start123 :=
+    replay_true (t := start122) (ps := proof122) τ ok122 h122
+  have h124 : TreeTrue τ start124 :=
+    replay_true (t := start123) (ps := proof123) τ ok123 h123
+  have h125 : TreeTrue τ start125 :=
+    cp_true (s := start124) (ps := proof124) (t := start125) τ ok124 h124
+  have h126 : TreeTrue τ start126 :=
+    replay_true (t := start125) (ps := proof125) τ ok125 h125
+  have h127 : TreeTrue τ start127 :=
+    replay_true (t := start126) (ps := proof126) τ ok126 h126
+  have h128 : TreeTrue τ start128 :=
+    replay_true (t := start127) (ps := proof127) τ ok127 h127
+  have h129 : TreeTrue τ start129 :=
+    cp_true (s := start128) (ps := proof128) (t := start129) τ ok128 h128
+  have h130 : TreeTrue τ start130 :=
+    replay_true (t := start129) (ps := proof129) τ ok129 h129
+  have h131 : TreeTrue τ start131 :=
+    replay_true (t := start130) (ps := proof130) τ ok130 h130
+  have h132 : TreeTrue τ start132 :=
+    replay_true (t := start131) (ps := proof131) τ ok131 h131
+  have h133 : TreeTrue τ start133 :=
+    cp_true (s := start132) (ps := proof132) (t := start133) τ ok132 h132
+  have h134 : TreeTrue τ start134 :=
+    replay_true (t := start133) (ps := proof133) τ ok133 h133
+  have h135 : TreeTrue τ start135 :=
+    replay_true (t := start134) (ps := proof134) τ ok134 h134
+  have h136 : TreeTrue τ start136 :=
+    replay_true (t := start135) (ps := proof135) τ ok135 h135
+  have h137 : TreeTrue τ start137 :=
+    cp_true (s := start136) (ps := proof136) (t := start137) τ ok136 h136
+  have h138 : TreeTrue τ start138 :=
+    replay_true (t := start137) (ps := proof137) τ ok137 h137
+  have h139 : TreeTrue τ start139 :=
+    replay_true (t := start138) (ps := proof138) τ ok138 h138
+  have h140 : TreeTrue τ start140 :=
+    replay_true (t := start139) (ps := proof139) τ ok139 h139
+  have h141 : TreeTrue τ start141 :=
+    cp_true (s := start140) (ps := proof140) (t := start141) τ ok140 h140
+  have h142 : TreeTrue τ start142 :=
+    replay_true (t := start141) (ps := proof141) τ ok141 h141
+  have h143 : TreeTrue τ start143 :=
+    replay_true (t := start142) (ps := proof142) τ ok142 h142
+  have h144 : TreeTrue τ start144 :=
+    replay_true (t := start143) (ps := proof143) τ ok143 h143
+  have h145 : TreeTrue τ start145 :=
+    cp_true (s := start144) (ps := proof144) (t := start145) τ ok144 h144
+  have h146 : TreeTrue τ start146 :=
+    replay_true (t := start145) (ps := proof145) τ ok145 h145
+  have h147 : TreeTrue τ start147 :=
+    replay_true (t := start146) (ps := proof146) τ ok146 h146
+  have h148 : TreeTrue τ start148 :=
+    replay_true (t := start147) (ps := proof147) τ ok147 h147
+  have h149 : TreeTrue τ start149 :=
+    cp_true (s := start148) (ps := proof148) (t := start149) τ ok148 h148
+  have h150 : TreeTrue τ start150 :=
+    replay_true (t := start149) (ps := proof149) τ ok149 h149
+  have h151 : TreeTrue τ start151 :=
+    replay_true (t := start150) (ps := proof150) τ ok150 h150
+  have h152 : TreeTrue τ start152 :=
+    replay_true (t := start151) (ps := proof151) τ ok151 h151
+  have h153 : TreeTrue τ start153 :=
+    cp_true (s := start152) (ps := proof152) (t := start153) τ ok152 h152
+  have h154 : TreeTrue τ start154 :=
+    replay_true (t := start153) (ps := proof153) τ ok153 h153
+  have h155 : TreeTrue τ start155 :=
+    replay_true (t := start154) (ps := proof154) τ ok154 h154
+  have h156 : TreeTrue τ start156 :=
+    replay_true (t := start155) (ps := proof155) τ ok155 h155
+  have h157 : TreeTrue τ start157 :=
+    cp_true (s := start156) (ps := proof156) (t := start157) τ ok156 h156
+  have h158 : TreeTrue τ start158 :=
+    replay_true (t := start157) (ps := proof157) τ ok157 h157
+  have h159 : TreeTrue τ start159 :=
+    replay_true (t := start158) (ps := proof158) τ ok158 h158
+  have h160 : TreeTrue τ start160 :=
+    replay_true (t := start159) (ps := proof159) τ ok159 h159
+  have h161 : TreeTrue τ start161 :=
+    cp_true (s := start160) (ps := proof160) (t := start161) τ ok160 h160
+  have h162 : TreeTrue τ start162 :=
+    replay_true (t := start161) (ps := proof161) τ ok161 h161
+  have h163 : TreeTrue τ start163 :=
+    replay_true (t := start162) (ps := proof162) τ ok162 h162
+  have h164 : TreeTrue τ start164 :=
+    replay_true (t := start163) (ps := proof163) τ ok163 h163
+  have h165 : TreeTrue τ start165 :=
+    cp_true (s := start164) (ps := proof164) (t := start165) τ ok164 h164
+  have h166 : TreeTrue τ start166 :=
+    replay_true (t := start165) (ps := proof165) τ ok165 h165
+  have h167 : TreeTrue τ start167 :=
+    replay_true (t := start166) (ps := proof166) τ ok166 h166
+  have h168 : TreeTrue τ start168 :=
+    replay_true (t := start167) (ps := proof167) τ ok167 h167
+  have h169 : TreeTrue τ start169 :=
+    cp_true (s := start168) (ps := proof168) (t := start169) τ ok168 h168
+  have h170 : TreeTrue τ start170 :=
+    replay_true (t := start169) (ps := proof169) τ ok169 h169
+  have h171 : TreeTrue τ start171 :=
+    replay_true (t := start170) (ps := proof170) τ ok170 h170
+  have h172 : TreeTrue τ start172 :=
+    replay_true (t := start171) (ps := proof171) τ ok171 h171
+  have h173 : TreeTrue τ start173 :=
+    cp_true (s := start172) (ps := proof172) (t := start173) τ ok172 h172
+  have h174 : TreeTrue τ start174 :=
+    replay_true (t := start173) (ps := proof173) τ ok173 h173
+  have h175 : TreeTrue τ start175 :=
+    replay_true (t := start174) (ps := proof174) τ ok174 h174
+  have h176 : TreeTrue τ start176 :=
+    replay_true (t := start175) (ps := proof175) τ ok175 h175
+  have h177 : TreeTrue τ start177 :=
+    cp_true (s := start176) (ps := proof176) (t := start177) τ ok176 h176
+  have h178 : TreeTrue τ start178 :=
+    replay_true (t := start177) (ps := proof177) τ ok177 h177
+  have h179 : TreeTrue τ start179 :=
+    replay_true (t := start178) (ps := proof178) τ ok178 h178
+  have h180 : TreeTrue τ start180 :=
+    replay_true (t := start179) (ps := proof179) τ ok179 h179
+  have h181 : TreeTrue τ start181 :=
+    cp_true (s := start180) (ps := proof180) (t := start181) τ ok180 h180
+  have h182 : TreeTrue τ start182 :=
+    replay_true (t := start181) (ps := proof181) τ ok181 h181
+  have h183 : TreeTrue τ start183 :=
+    replay_true (t := start182) (ps := proof182) τ ok182 h182
+  have h184 : TreeTrue τ start184 :=
+    replay_true (t := start183) (ps := proof183) τ ok183 h183
+  have h185 : TreeTrue τ start185 :=
+    cp_true (s := start184) (ps := proof184) (t := start185) τ ok184 h184
+  have h186 : TreeTrue τ start186 :=
+    replay_true (t := start185) (ps := proof185) τ ok185 h185
+  have h187 : TreeTrue τ start187 :=
+    replay_true (t := start186) (ps := proof186) τ ok186 h186
+  have h188 : TreeTrue τ start188 :=
+    replay_true (t := start187) (ps := proof187) τ ok187 h187
+  have h189 : TreeTrue τ start189 :=
+    cp_true (s := start188) (ps := proof188) (t := start189) τ ok188 h188
+  have h190 : TreeTrue τ start190 :=
+    replay_true (t := start189) (ps := proof189) τ ok189 h189
+  have h191 : TreeTrue τ start191 :=
+    replay_true (t := start190) (ps := proof190) τ ok190 h190
+  have h192 : TreeTrue τ start192 :=
+    replay_true (t := start191) (ps := proof191) τ ok191 h191
+  have h193 : TreeTrue τ start193 :=
+    cp_true (s := start192) (ps := proof192) (t := start193) τ ok192 h192
+  have h194 : TreeTrue τ start194 :=
+    replay_true (t := start193) (ps := proof193) τ ok193 h193
+  have h195 : TreeTrue τ start195 :=
+    replay_true (t := start194) (ps := proof194) τ ok194 h194
+  have h196 : TreeTrue τ start196 :=
+    replay_true (t := start195) (ps := proof195) τ ok195 h195
+  have h197 : TreeTrue τ start197 :=
+    cp_true (s := start196) (ps := proof196) (t := start197) τ ok196 h196
+  have h198 : TreeTrue τ start198 :=
+    replay_true (t := start197) (ps := proof197) τ ok197 h197
+  have h199 : TreeTrue τ start199 :=
+    replay_true (t := start198) (ps := proof198) τ ok198 h198
+  have h200 : TreeTrue τ start200 :=
+    replay_true (t := start199) (ps := proof199) τ ok199 h199
+  have h201 : TreeTrue τ start201 :=
+    cp_true (s := start200) (ps := proof200) (t := start201) τ ok200 h200
+  have h202 : TreeTrue τ start202 :=
+    replay_true (t := start201) (ps := proof201) τ ok201 h201
+  have h203 : TreeTrue τ start203 :=
+    replay_true (t := start202) (ps := proof202) τ ok202 h202
+  have h204 : TreeTrue τ start204 :=
+    replay_true (t := start203) (ps := proof203) τ ok203 h203
+  have h205 : TreeTrue τ start205 :=
+    cp_true (s := start204) (ps := proof204) (t := start205) τ ok204 h204
+  have h206 : TreeTrue τ start206 :=
+    replay_true (t := start205) (ps := proof205) τ ok205 h205
+  have h207 : TreeTrue τ start207 :=
+    replay_true (t := start206) (ps := proof206) τ ok206 h206
+  have h208 : TreeTrue τ start208 :=
+    replay_true (t := start207) (ps := proof207) τ ok207 h207
+  have h209 : TreeTrue τ start209 :=
+    cp_true (s := start208) (ps := proof208) (t := start209) τ ok208 h208
+  have h210 : TreeTrue τ start210 :=
+    replay_true (t := start209) (ps := proof209) τ ok209 h209
+  have h211 : TreeTrue τ start211 :=
+    replay_true (t := start210) (ps := proof210) τ ok210 h210
+  have h212 : TreeTrue τ start212 :=
+    replay_true (t := start211) (ps := proof211) τ ok211 h211
+  have h213 : TreeTrue τ start213 :=
+    cp_true (s := start212) (ps := proof212) (t := start213) τ ok212 h212
+  have h214 : TreeTrue τ start214 :=
+    replay_true (t := start213) (ps := proof213) τ ok213 h213
+  have h215 : TreeTrue τ start215 :=
+    replay_true (t := start214) (ps := proof214) τ ok214 h214
+  have h216 : TreeTrue τ start216 :=
+    replay_true (t := start215) (ps := proof215) τ ok215 h215
+  have h217 : TreeTrue τ start217 :=
+    cp_true (s := start216) (ps := proof216) (t := start217) τ ok216 h216
+  have h218 : TreeTrue τ start218 :=
+    replay_true (t := start217) (ps := proof217) τ ok217 h217
+  have h219 : TreeTrue τ start219 :=
+    replay_true (t := start218) (ps := proof218) τ ok218 h218
+  have h220 : TreeTrue τ start220 :=
+    replay_true (t := start219) (ps := proof219) τ ok219 h219
+  have h221 : TreeTrue τ start221 :=
+    cp_true (s := start220) (ps := proof220) (t := start221) τ ok220 h220
+  have h222 : TreeTrue τ start222 :=
+    replay_true (t := start221) (ps := proof221) τ ok221 h221
+  have h223 : TreeTrue τ start223 :=
+    replay_true (t := start222) (ps := proof222) τ ok222 h222
+  have h224 : TreeTrue τ start224 :=
+    replay_true (t := start223) (ps := proof223) τ ok223 h223
+  have h225 : TreeTrue τ start225 :=
+    cp_true (s := start224) (ps := proof224) (t := start225) τ ok224 h224
+  have h226 : TreeTrue τ start226 :=
+    replay_true (t := start225) (ps := proof225) τ ok225 h225
+  have h227 : TreeTrue τ start227 :=
+    replay_true (t := start226) (ps := proof226) τ ok226 h226
+  have h228 : TreeTrue τ start228 :=
+    replay_true (t := start227) (ps := proof227) τ ok227 h227
+  have h229 : TreeTrue τ start229 :=
+    cp_true (s := start228) (ps := proof228) (t := start229) τ ok228 h228
+  have h230 : TreeTrue τ start230 :=
+    replay_true (t := start229) (ps := proof229) τ ok229 h229
+  have h231 : TreeTrue τ start231 :=
+    replay_true (t := start230) (ps := proof230) τ ok230 h230
+  have h232 : TreeTrue τ start232 :=
+    replay_true (t := start231) (ps := proof231) τ ok231 h231
+  have h233 : TreeTrue τ start233 :=
+    cp_true (s := start232) (ps := proof232) (t := start233) τ ok232 h232
+  have h234 : TreeTrue τ start234 :=
+    replay_true (t := start233) (ps := proof233) τ ok233 h233
+  have h235 : TreeTrue τ start235 :=
+    replay_true (t := start234) (ps := proof234) τ ok234 h234
+  have h236 : TreeTrue τ start236 :=
+    replay_true (t := start235) (ps := proof235) τ ok235 h235
+  have h237 : TreeTrue τ start237 :=
+    cp_true (s := start236) (ps := proof236) (t := start237) τ ok236 h236
+  have h238 : TreeTrue τ start238 :=
+    replay_true (t := start237) (ps := proof237) τ ok237 h237
+  have h239 : TreeTrue τ start239 :=
+    replay_true (t := start238) (ps := proof238) τ ok238 h238
+  have h240 : TreeTrue τ start240 :=
+    replay_true (t := start239) (ps := proof239) τ ok239 h239
+  have h241 : TreeTrue τ start241 :=
+    cp_true (s := start240) (ps := proof240) (t := start241) τ ok240 h240
+  have h242 : TreeTrue τ start242 :=
+    replay_true (t := start241) (ps := proof241) τ ok241 h241
+  have h243 : TreeTrue τ start243 :=
+    replay_true (t := start242) (ps := proof242) τ ok242 h242
+  have h244 : TreeTrue τ start244 :=
+    replay_true (t := start243) (ps := proof243) τ ok243 h243
+  have h245 : TreeTrue τ start245 :=
+    cp_true (s := start244) (ps := proof244) (t := start245) τ ok244 h244
+  have h246 : TreeTrue τ start246 :=
+    replay_true (t := start245) (ps := proof245) τ ok245 h245
+  have h247 : TreeTrue τ start247 :=
+    replay_true (t := start246) (ps := proof246) τ ok246 h246
+  have h248 : TreeTrue τ start248 :=
+    replay_true (t := start247) (ps := proof247) τ ok247 h247
+  have h249 : TreeTrue τ start249 :=
+    cp_true (s := start248) (ps := proof248) (t := start249) τ ok248 h248
+  have h250 : TreeTrue τ start250 :=
+    replay_true (t := start249) (ps := proof249) τ ok249 h249
+  have h251 : TreeTrue τ start251 :=
+    replay_true (t := start250) (ps := proof250) τ ok250 h250
+  have h252 : TreeTrue τ start252 :=
+    replay_true (t := start251) (ps := proof251) τ ok251 h251
+  have h253 : TreeTrue τ start253 :=
+    cp_true (s := start252) (ps := proof252) (t := start253) τ ok252 h252
+  have h254 : TreeTrue τ start254 :=
+    replay_true (t := start253) (ps := proof253) τ ok253 h253
+  have h255 : TreeTrue τ start255 :=
+    replay_true (t := start254) (ps := proof254) τ ok254 h254
+  have h256 : TreeTrue τ start256 :=
+    replay_true (t := start255) (ps := proof255) τ ok255 h255
+  have h257 : TreeTrue τ start257 :=
+    cp_true (s := start256) (ps := proof256) (t := start257) τ ok256 h256
+  have h258 : TreeTrue τ start258 :=
+    replay_true (t := start257) (ps := proof257) τ ok257 h257
+  have h259 : TreeTrue τ start259 :=
+    replay_true (t := start258) (ps := proof258) τ ok258 h258
+  have h260 : TreeTrue τ start260 :=
+    replay_true (t := start259) (ps := proof259) τ ok259 h259
+  have h261 : TreeTrue τ start261 :=
+    cp_true (s := start260) (ps := proof260) (t := start261) τ ok260 h260
+  have h262 : TreeTrue τ start262 :=
+    replay_true (t := start261) (ps := proof261) τ ok261 h261
+  have h263 : TreeTrue τ start263 :=
+    replay_true (t := start262) (ps := proof262) τ ok262 h262
+  have h264 : TreeTrue τ start264 :=
+    replay_true (t := start263) (ps := proof263) τ ok263 h263
+  have h265 : TreeTrue τ start265 :=
+    cp_true (s := start264) (ps := proof264) (t := start265) τ ok264 h264
+  have h266 : TreeTrue τ start266 :=
+    replay_true (t := start265) (ps := proof265) τ ok265 h265
+  have h267 : TreeTrue τ start267 :=
+    replay_true (t := start266) (ps := proof266) τ ok266 h266
+  have h268 : TreeTrue τ start268 :=
+    replay_true (t := start267) (ps := proof267) τ ok267 h267
+  have h269 : TreeTrue τ start269 :=
+    cp_true (s := start268) (ps := proof268) (t := start269) τ ok268 h268
+  have h270 : TreeTrue τ start270 :=
+    replay_true (t := start269) (ps := proof269) τ ok269 h269
+  have h271 : TreeTrue τ start271 :=
+    replay_true (t := start270) (ps := proof270) τ ok270 h270
+  have h272 : TreeTrue τ start272 :=
+    replay_true (t := start271) (ps := proof271) τ ok271 h271
+  have h273 : TreeTrue τ start273 :=
+    cp_true (s := start272) (ps := proof272) (t := start273) τ ok272 h272
+  have h274 : TreeTrue τ start274 :=
+    replay_true (t := start273) (ps := proof273) τ ok273 h273
+  have h275 : TreeTrue τ start275 :=
+    replay_true (t := start274) (ps := proof274) τ ok274 h274
+  have h276 : TreeTrue τ start276 :=
+    replay_true (t := start275) (ps := proof275) τ ok275 h275
+  have h277 : TreeTrue τ start277 :=
+    cp_true (s := start276) (ps := proof276) (t := start277) τ ok276 h276
+  have h278 : TreeTrue τ start278 :=
+    replay_true (t := start277) (ps := proof277) τ ok277 h277
+  have h279 : TreeTrue τ start279 :=
+    replay_true (t := start278) (ps := proof278) τ ok278 h278
+  have h280 : TreeTrue τ start280 :=
+    replay_true (t := start279) (ps := proof279) τ ok279 h279
+  have h281 : TreeTrue τ start281 :=
+    cp_true (s := start280) (ps := proof280) (t := start281) τ ok280 h280
+  have h282 : TreeTrue τ start282 :=
+    replay_true (t := start281) (ps := proof281) τ ok281 h281
+  have h283 : TreeTrue τ start283 :=
+    replay_true (t := start282) (ps := proof282) τ ok282 h282
+  have h284 : TreeTrue τ start284 :=
+    replay_true (t := start283) (ps := proof283) τ ok283 h283
+  have h285 : TreeTrue τ start285 :=
+    cp_true (s := start284) (ps := proof284) (t := start285) τ ok284 h284
+  have h286 : TreeTrue τ start286 :=
+    replay_true (t := start285) (ps := proof285) τ ok285 h285
+  have h287 : TreeTrue τ start287 :=
+    replay_true (t := start286) (ps := proof286) τ ok286 h286
+  have h288 : TreeTrue τ start288 :=
+    replay_true (t := start287) (ps := proof287) τ ok287 h287
+  have h289 : TreeTrue τ start289 :=
+    cp_true (s := start288) (ps := proof288) (t := start289) τ ok288 h288
+  have h290 : TreeTrue τ start290 :=
+    replay_true (t := start289) (ps := proof289) τ ok289 h289
+  have h291 : TreeTrue τ start291 :=
+    replay_true (t := start290) (ps := proof290) τ ok290 h290
+  have h292 : TreeTrue τ start292 :=
+    replay_true (t := start291) (ps := proof291) τ ok291 h291
+  have h293 : TreeTrue τ start293 :=
+    cp_true (s := start292) (ps := proof292) (t := start293) τ ok292 h292
+  have h294 : TreeTrue τ start294 :=
+    replay_true (t := start293) (ps := proof293) τ ok293 h293
+  have h295 : TreeTrue τ start295 :=
+    replay_true (t := start294) (ps := proof294) τ ok294 h294
+  have h296 : TreeTrue τ start296 :=
+    replay_true (t := start295) (ps := proof295) τ ok295 h295
+  have h297 : TreeTrue τ start297 :=
+    cp_true (s := start296) (ps := proof296) (t := start297) τ ok296 h296
+  have h298 : TreeTrue τ start298 :=
+    replay_true (t := start297) (ps := proof297) τ ok297 h297
+  have h299 : TreeTrue τ start299 :=
+    replay_true (t := start298) (ps := proof298) τ ok298 h298
+  have h300 : TreeTrue τ start300 :=
+    replay_true (t := start299) (ps := proof299) τ ok299 h299
+  have h301 : TreeTrue τ start301 :=
+    cp_true (s := start300) (ps := proof300) (t := start301) τ ok300 h300
+  have h302 : TreeTrue τ start302 :=
+    replay_true (t := start301) (ps := proof301) τ ok301 h301
+  have h303 : TreeTrue τ start303 :=
+    replay_true (t := start302) (ps := proof302) τ ok302 h302
+  have h304 : TreeTrue τ start304 :=
+    replay_true (t := start303) (ps := proof303) τ ok303 h303
+  have h305 : TreeTrue τ start305 :=
+    cp_true (s := start304) (ps := proof304) (t := start305) τ ok304 h304
+  have h306 : TreeTrue τ start306 :=
+    replay_true (t := start305) (ps := proof305) τ ok305 h305
+  have h307 : TreeTrue τ start307 :=
+    replay_true (t := start306) (ps := proof306) τ ok306 h306
+  have h308 : TreeTrue τ start308 :=
+    replay_true (t := start307) (ps := proof307) τ ok307 h307
+  have h309 : TreeTrue τ start309 :=
+    cp_true (s := start308) (ps := proof308) (t := start309) τ ok308 h308
+  have h310 : TreeTrue τ start310 :=
+    replay_true (t := start309) (ps := proof309) τ ok309 h309
+  have h311 : TreeTrue τ start311 :=
+    replay_true (t := start310) (ps := proof310) τ ok310 h310
+  have h312 : TreeTrue τ start312 :=
+    replay_true (t := start311) (ps := proof311) τ ok311 h311
+  have h313 : TreeTrue τ start313 :=
+    cp_true (s := start312) (ps := proof312) (t := start313) τ ok312 h312
+  have h314 : TreeTrue τ start314 :=
+    replay_true (t := start313) (ps := proof313) τ ok313 h313
+  have h315 : TreeTrue τ start315 :=
+    replay_true (t := start314) (ps := proof314) τ ok314 h314
+  have h316 : TreeTrue τ start316 :=
+    replay_true (t := start315) (ps := proof315) τ ok315 h315
+  have h317 : TreeTrue τ start317 :=
+    cp_true (s := start316) (ps := proof316) (t := start317) τ ok316 h316
+  have h318 : TreeTrue τ start318 :=
+    replay_true (t := start317) (ps := proof317) τ ok317 h317
+  have h319 : TreeTrue τ start319 :=
+    replay_true (t := start318) (ps := proof318) τ ok318 h318
+  have h320 : TreeTrue τ start320 :=
+    replay_true (t := start319) (ps := proof319) τ ok319 h319
+  have h321 : TreeTrue τ start321 :=
+    cp_true (s := start320) (ps := proof320) (t := start321) τ ok320 h320
+  have h322 : TreeTrue τ start322 :=
+    replay_true (t := start321) (ps := proof321) τ ok321 h321
+  have h323 : TreeTrue τ start323 :=
+    replay_true (t := start322) (ps := proof322) τ ok322 h322
+  have h324 : TreeTrue τ start324 :=
+    replay_true (t := start323) (ps := proof323) τ ok323 h323
+  have h325 : TreeTrue τ start325 :=
+    cp_true (s := start324) (ps := proof324) (t := start325) τ ok324 h324
+  have h326 : TreeTrue τ start326 :=
+    replay_true (t := start325) (ps := proof325) τ ok325 h325
+  have h327 : TreeTrue τ start327 :=
+    replay_true (t := start326) (ps := proof326) τ ok326 h326
+  have h328 : TreeTrue τ start328 :=
+    replay_true (t := start327) (ps := proof327) τ ok327 h327
+  have h329 : TreeTrue τ start329 :=
+    cp_true (s := start328) (ps := proof328) (t := start329) τ ok328 h328
+  have h330 : TreeTrue τ start330 :=
+    replay_true (t := start329) (ps := proof329) τ ok329 h329
+  have h331 : TreeTrue τ start331 :=
+    replay_true (t := start330) (ps := proof330) τ ok330 h330
+  have h332 : TreeTrue τ start332 :=
+    replay_true (t := start331) (ps := proof331) τ ok331 h331
+  have h333 : TreeTrue τ start333 :=
+    cp_true (s := start332) (ps := proof332) (t := start333) τ ok332 h332
+  have h334 : TreeTrue τ start334 :=
+    replay_true (t := start333) (ps := proof333) τ ok333 h333
+  have h335 : TreeTrue τ start335 :=
+    replay_true (t := start334) (ps := proof334) τ ok334 h334
+  have h336 : TreeTrue τ start336 :=
+    replay_true (t := start335) (ps := proof335) τ ok335 h335
+  have h337 : TreeTrue τ start337 :=
+    cp_true (s := start336) (ps := proof336) (t := start337) τ ok336 h336
+  have h338 : TreeTrue τ start338 :=
+    replay_true (t := start337) (ps := proof337) τ ok337 h337
+  have h339 : TreeTrue τ start339 :=
+    replay_true (t := start338) (ps := proof338) τ ok338 h338
+  have h340 : TreeTrue τ start340 :=
+    replay_true (t := start339) (ps := proof339) τ ok339 h339
+  have h341 : TreeTrue τ start341 :=
+    cp_true (s := start340) (ps := proof340) (t := start341) τ ok340 h340
+  have h342 : TreeTrue τ start342 :=
+    replay_true (t := start341) (ps := proof341) τ ok341 h341
+  have h343 : TreeTrue τ start343 :=
+    replay_true (t := start342) (ps := proof342) τ ok342 h342
+  have h344 : TreeTrue τ start344 :=
+    replay_true (t := start343) (ps := proof343) τ ok343 h343
+  have h345 : TreeTrue τ start345 :=
+    cp_true (s := start344) (ps := proof344) (t := start345) τ ok344 h344
+  have h346 : TreeTrue τ start346 :=
+    replay_true (t := start345) (ps := proof345) τ ok345 h345
+  have h347 : TreeTrue τ start347 :=
+    replay_true (t := start346) (ps := proof346) τ ok346 h346
+  have h348 : TreeTrue τ start348 :=
+    replay_true (t := start347) (ps := proof347) τ ok347 h347
+  have h349 : TreeTrue τ start349 :=
+    cp_true (s := start348) (ps := proof348) (t := start349) τ ok348 h348
+  have h350 : TreeTrue τ start350 :=
+    replay_true (t := start349) (ps := proof349) τ ok349 h349
+  have h351 : TreeTrue τ start351 :=
+    replay_true (t := start350) (ps := proof350) τ ok350 h350
+  have h352 : TreeTrue τ start352 :=
+    replay_true (t := start351) (ps := proof351) τ ok351 h351
+  have h353 : TreeTrue τ start353 :=
+    cp_true (s := start352) (ps := proof352) (t := start353) τ ok352 h352
+  have h354 : TreeTrue τ start354 :=
+    replay_true (t := start353) (ps := proof353) τ ok353 h353
+  have h355 : TreeTrue τ start355 :=
+    replay_true (t := start354) (ps := proof354) τ ok354 h354
+  have h356 : TreeTrue τ start356 :=
+    replay_true (t := start355) (ps := proof355) τ ok355 h355
+  have h357 : TreeTrue τ start357 :=
+    cp_true (s := start356) (ps := proof356) (t := start357) τ ok356 h356
+  have h358 : TreeTrue τ start358 :=
+    replay_true (t := start357) (ps := proof357) τ ok357 h357
+  have h359 : TreeTrue τ start359 :=
+    replay_true (t := start358) (ps := proof358) τ ok358 h358
+  have h360 : TreeTrue τ start360 :=
+    replay_true (t := start359) (ps := proof359) τ ok359 h359
+  have h361 : TreeTrue τ start361 :=
+    cp_true (s := start360) (ps := proof360) (t := start361) τ ok360 h360
+  have h362 : TreeTrue τ start362 :=
+    replay_true (t := start361) (ps := proof361) τ ok361 h361
+  have h363 : TreeTrue τ start363 :=
+    replay_true (t := start362) (ps := proof362) τ ok362 h362
+  have h364 : TreeTrue τ start364 :=
+    replay_true (t := start363) (ps := proof363) τ ok363 h363
+  have h365 : TreeTrue τ start365 :=
+    cp_true (s := start364) (ps := proof364) (t := start365) τ ok364 h364
+  have h366 : TreeTrue τ start366 :=
+    replay_true (t := start365) (ps := proof365) τ ok365 h365
+  have h367 : TreeTrue τ start367 :=
+    replay_true (t := start366) (ps := proof366) τ ok366 h366
+  have h368 : TreeTrue τ start368 :=
+    replay_true (t := start367) (ps := proof367) τ ok367 h367
+  have h369 : TreeTrue τ start369 :=
+    cp_true (s := start368) (ps := proof368) (t := start369) τ ok368 h368
+  have h370 : TreeTrue τ start370 :=
+    replay_true (t := start369) (ps := proof369) τ ok369 h369
+  have h371 : TreeTrue τ start371 :=
+    replay_true (t := start370) (ps := proof370) τ ok370 h370
+  have h372 : TreeTrue τ start372 :=
+    replay_true (t := start371) (ps := proof371) τ ok371 h371
+  have h373 : TreeTrue τ start373 :=
+    cp_true (s := start372) (ps := proof372) (t := start373) τ ok372 h372
+  have h374 : TreeTrue τ start374 :=
+    replay_true (t := start373) (ps := proof373) τ ok373 h373
+  have h375 : TreeTrue τ start375 :=
+    replay_true (t := start374) (ps := proof374) τ ok374 h374
+  have h376 : TreeTrue τ start376 :=
+    replay_true (t := start375) (ps := proof375) τ ok375 h375
+  have h377 : TreeTrue τ start377 :=
+    cp_true (s := start376) (ps := proof376) (t := start377) τ ok376 h376
+  have h378 : TreeTrue τ start378 :=
+    replay_true (t := start377) (ps := proof377) τ ok377 h377
+  have h379 : TreeTrue τ start379 :=
+    replay_true (t := start378) (ps := proof378) τ ok378 h378
+  have h380 : TreeTrue τ start380 :=
+    replay_true (t := start379) (ps := proof379) τ ok379 h379
+  have h381 : TreeTrue τ start381 :=
+    cp_true (s := start380) (ps := proof380) (t := start381) τ ok380 h380
+  have h382 : TreeTrue τ start382 :=
+    replay_true (t := start381) (ps := proof381) τ ok381 h381
+  have h383 : TreeTrue τ start383 :=
+    replay_true (t := start382) (ps := proof382) τ ok382 h382
+  have h384 : TreeTrue τ start384 :=
+    replay_true (t := start383) (ps := proof383) τ ok383 h383
+  have h385 : TreeTrue τ start385 :=
+    cp_true (s := start384) (ps := proof384) (t := start385) τ ok384 h384
+  have h386 : TreeTrue τ start386 :=
+    replay_true (t := start385) (ps := proof385) τ ok385 h385
+  have h387 : TreeTrue τ start387 :=
+    replay_true (t := start386) (ps := proof386) τ ok386 h386
+  have h388 : TreeTrue τ start388 :=
+    replay_true (t := start387) (ps := proof387) τ ok387 h387
+  have h389 : TreeTrue τ start389 :=
+    cp_true (s := start388) (ps := proof388) (t := start389) τ ok388 h388
+  have h390 : TreeTrue τ start390 :=
+    replay_true (t := start389) (ps := proof389) τ ok389 h389
+  have h391 : TreeTrue τ start391 :=
+    replay_true (t := start390) (ps := proof390) τ ok390 h390
+  have h392 : TreeTrue τ start392 :=
+    replay_true (t := start391) (ps := proof391) τ ok391 h391
+  have h393 : TreeTrue τ start393 :=
+    cp_true (s := start392) (ps := proof392) (t := start393) τ ok392 h392
+  have h394 : TreeTrue τ start394 :=
+    replay_true (t := start393) (ps := proof393) τ ok393 h393
+  have h395 : TreeTrue τ start395 :=
+    replay_true (t := start394) (ps := proof394) τ ok394 h394
+  have h396 : TreeTrue τ start396 :=
+    replay_true (t := start395) (ps := proof395) τ ok395 h395
+  have h397 : TreeTrue τ start397 :=
+    cp_true (s := start396) (ps := proof396) (t := start397) τ ok396 h396
+  have h398 : TreeTrue τ start398 :=
+    replay_true (t := start397) (ps := proof397) τ ok397 h397
+  have h399 : TreeTrue τ start399 :=
+    replay_true (t := start398) (ps := proof398) τ ok398 h398
+  have h400 : TreeTrue τ start400 :=
+    replay_true (t := start399) (ps := proof399) τ ok399 h399
+  have h401 : TreeTrue τ start401 :=
+    cp_true (s := start400) (ps := proof400) (t := start401) τ ok400 h400
+  have h402 : TreeTrue τ start402 :=
+    replay_true (t := start401) (ps := proof401) τ ok401 h401
+  have h403 : TreeTrue τ start403 :=
+    replay_true (t := start402) (ps := proof402) τ ok402 h402
+  have h404 : TreeTrue τ start404 :=
+    replay_true (t := start403) (ps := proof403) τ ok403 h403
+  have h405 : TreeTrue τ start405 :=
+    cp_true (s := start404) (ps := proof404) (t := start405) τ ok404 h404
+  have h406 : TreeTrue τ start406 :=
+    replay_true (t := start405) (ps := proof405) τ ok405 h405
+  have h407 : TreeTrue τ start407 :=
+    replay_true (t := start406) (ps := proof406) τ ok406 h406
+  have h408 : TreeTrue τ start408 :=
+    replay_true (t := start407) (ps := proof407) τ ok407 h407
+  have h409 : TreeTrue τ start409 :=
+    cp_true (s := start408) (ps := proof408) (t := start409) τ ok408 h408
+  have h410 : TreeTrue τ start410 :=
+    replay_true (t := start409) (ps := proof409) τ ok409 h409
+  have h411 : TreeTrue τ start411 :=
+    replay_true (t := start410) (ps := proof410) τ ok410 h410
+  have h412 : TreeTrue τ start412 :=
+    replay_true (t := start411) (ps := proof411) τ ok411 h411
+  have h413 : TreeTrue τ start413 :=
+    cp_true (s := start412) (ps := proof412) (t := start413) τ ok412 h412
+  have h414 : TreeTrue τ start414 :=
+    replay_true (t := start413) (ps := proof413) τ ok413 h413
+  have h415 : TreeTrue τ start415 :=
+    replay_true (t := start414) (ps := proof414) τ ok414 h414
+  have h416 : TreeTrue τ start416 :=
+    replay_true (t := start415) (ps := proof415) τ ok415 h415
+  have h417 : TreeTrue τ start417 :=
+    cp_true (s := start416) (ps := proof416) (t := start417) τ ok416 h416
+  have h418 : TreeTrue τ start418 :=
+    replay_true (t := start417) (ps := proof417) τ ok417 h417
+  have h419 : TreeTrue τ start419 :=
+    replay_true (t := start418) (ps := proof418) τ ok418 h418
+  have h420 : TreeTrue τ start420 :=
+    replay_true (t := start419) (ps := proof419) τ ok419 h419
+  have h421 : TreeTrue τ start421 :=
+    cp_true (s := start420) (ps := proof420) (t := start421) τ ok420 h420
+  have h422 : TreeTrue τ start422 :=
+    replay_true (t := start421) (ps := proof421) τ ok421 h421
+  have h423 : TreeTrue τ start423 :=
+    replay_true (t := start422) (ps := proof422) τ ok422 h422
+  have h424 : TreeTrue τ start424 :=
+    replay_true (t := start423) (ps := proof423) τ ok423 h423
+  have h425 : TreeTrue τ start425 :=
+    cp_true (s := start424) (ps := proof424) (t := start425) τ ok424 h424
+  have h426 : TreeTrue τ start426 :=
+    replay_true (t := start425) (ps := proof425) τ ok425 h425
+  have h427 : TreeTrue τ start427 :=
+    replay_true (t := start426) (ps := proof426) τ ok426 h426
+  have h428 : TreeTrue τ start428 :=
+    replay_true (t := start427) (ps := proof427) τ ok427 h427
+  have h429 : TreeTrue τ start429 :=
+    cp_true (s := start428) (ps := proof428) (t := start429) τ ok428 h428
+  have h430 : TreeTrue τ start430 :=
+    replay_true (t := start429) (ps := proof429) τ ok429 h429
+  have h431 : TreeTrue τ start431 :=
+    replay_true (t := start430) (ps := proof430) τ ok430 h430
+  have h432 : TreeTrue τ start432 :=
+    replay_true (t := start431) (ps := proof431) τ ok431 h431
+  have h433 : TreeTrue τ start433 :=
+    cp_true (s := start432) (ps := proof432) (t := start433) τ ok432 h432
+  have h434 : TreeTrue τ start434 :=
+    replay_true (t := start433) (ps := proof433) τ ok433 h433
+  have h435 : TreeTrue τ start435 :=
+    replay_true (t := start434) (ps := proof434) τ ok434 h434
+  exact final_false (s := start435) (ps := proof435) τ ok435 h435
+
+end Snake9.LocalWindow.Triple129
+
+#print axioms Snake9.LocalWindow.Triple129.unsat

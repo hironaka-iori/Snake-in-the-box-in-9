@@ -1,60 +1,55 @@
-# Continuation after milestone 128
+# Continuation after milestone 129
 
-Work in E:/Snake-in-a-box. Use the requested research skill. Introduce a
-definition only when it is essential and repeatedly used. Preserve the authors,
-local hyperlink settings, unrelated .gitignore and milestone 50 critical-family
-edits, and active proof jobs. Fetch GitHub and inspect the checkout first.
+Work in E:/Snake-in-a-box and use the requested research skill. Use ordinary
+notation; introduce a definition only when essential and repeatedly used.
+Preserve the three authors, local hyperlink settings, unrelated .gitignore
+and milestone 50 edits, and active proof jobs. Refresh GitHub first, with
+automatic Git maintenance disabled for the fetch to avoid duplicating the
+repository's ongoing maintenance.
 
-Read milestone 128's MATHEMATICAL_NOTE.md, audit/pair-derivation.md,
-audit/pair-counter-review.md, data/lean-data-review.json, and checkpoint.
-The independent counter review was frozen before the concrete Lean check;
-its statements that this new semantic connection was pending are superseded
-by the later pair-derivation note and successful receipts. That completion
-covers the added 2863 clauses only.
+Read129/MATHEMATICAL_NOTE.md, the three independent audit reports, the actual
+semantic derivation, and data/checkpoint.json. Restore archived raw traces
+with scripts/verify_saved.py --restore-archives when needed on a fresh checkout.
 
-Lean checks the actual 0120324 selected-corner cap34 and the concrete new
-counter. Preserve 42 occurrences over 37 distinct vertices, including the five
-doubled vertices 18,34,66,130,258. The new input has 104529 clauses and 6248
-occurring variables. Counter 8 uses fresh variables 7278 through8705. Its
-geometric justification is not an original-input-only RUP derivation.
-The preceding 101666-clause conjunction still needs to be accounted for in
-any complete actual-snake refutation. Do not reuse 127's identifier mapping
-for the added pair clauses without a new justification.
+The candidate is: in a fitting canonical 0120324 window, fourth count 3 forces
+the sum of counts3,5,6 to be at least 12. The selected contradiction uses no
+six-total or pair premise. Counter 0 encodes at most two endpoints; counter 4
+the fourth lower bound 3; counter 11 its upper bound 3; counter 12 the contrary
+triple upper bound 11. The 63 corner occurrences must retain multiplicity
+over 57 distinct vertices. All 512 primary and 512 endpoint meanings are retained,
+including semantic inputs that never occur as packed proof literals.
 
-One 180-second native run timed out, with 24.59375 seconds process CPU.
-Only its first 1000 positive-RUP deductions were replayed against the new input.
-No model or contradiction was obtained. Preserve the verified gzip archive;
-verify_saved.py --restore-archives restores raw trace bytes when needed on
-a fresh checkout. A partial trace is not an exclusion certificate.
+CoreSemantics129 now proves actual satisfaction of all 3500 selected clauses
+under fourth=3 and triple<=11. Its actual_triple_lower and actual_six_lower
+still have the explicit Unsat premise. Four helper/semantic modules have 17
+successful reports with standard axioms. Do not report the actual exclusion
+until the complete refutation and final assembly succeed.
 
-Next selected task: data/next-case-task.json. Under a total at most 22, split
-alpha_(r+4)=3 from alpha_(r+4)>=4. The existing pair theorem gives
-alpha_(r+2)>=5 in the first case, while first_fourth_exclusion gives
-alpha_(r+1)>=3. The remaining three counts then sum to at most 11.
-First check this actual-snake split and arithmetic in Lean; then encode
-and test the restricted branch. Keep both branches in the overall obligation.
-Neither branch is encoded or excluded at this checkpoint. Avoid simply
-repeating the unchanged unsplit input for another short wall-time timeout.
+The root replay driver is scripts/run_replay.py --timeout 600. Inspect
+data/replay-progress.json, replay.lock and current process commands before
+resuming. The frozen checkpoint is a prefix of 221 modules, not a completed
+proof. Reuse exact receipt/source/object/log/dependency hashes. Its fixed
+checker is LratFast with 13-bit keys and offset 2400. All 1695 proof variables
+fit; the actual maximum used key is 8190. There are 435 segments and 108
+checkpoints. Do not confuse the number 6902 of distinct keys with their maximum.
 
-The target remains a six-count floor 23 for 0120324. A proof would remove the
-sum-22 edge of the saved conditional comparison cycle but would not automatically
-improve the full graph minimum or the global upper bound. Universal floor 25,
-or the sufficient total-shortfall inequality retaining 2s0, remains a separate
-requirement for 234. The current maintained range is 191–235 with the contributor
-upper-proof rebuild limitation. Neither the optimum nor 196 is established.
-The overall research goal remains active.
+After the full Lean contradiction passes, add the small actual-snake assembly
+using the checked concrete semantics. Check the final theorem's axioms and
+state the exact result. Only then report the equality case excluded. The
+next mathematical case is fourth>=4 under six-total<=22. The first>=3 and
+second>=5 deductions are specific to fourth=3 and cannot be assumed there.
 
-At the 128 observation, drivers 104/115/122 were live, with 343 selected potential
-modules, 522 total-count modules, and 340 endpoint-plan receipts. These are
-point-in-time partial counts. Inspect actual process commands and terminal
-records before restarting anything. Preserve all old attempts and locks.
-New Lean checks use an isolated build and a fresh resource gate of at least
-1.5 GiB available memory and at most two other Lean processes.
+Milestone 122's endpoint driver reported completion during this round. Its
+independent completion review is saved alongside 129 if present. Read the
+audited theorem assumptions before using its at-most-13 equality-window count.
+It is a separate completed theorem, not a global upper-bound improvement.
+The 104 and 115 drivers remain separate pending proof obligations; inspect
+their current processes and progress rather than restarting them.
 
-The paper is revision 126, unchanged SHA256
-4667daec19f0b83af9fb129a263c8ae992757105414bad817c1ad13e1e11bb90,
-identical at E:/Snake-in-a-box/paper/snake9_research.tex and the open editor
-D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex. The last built-in
-compile failed before TeX in the Windows helper. The next full revision is 136.
-Keep implementation names out of mathematical publication text. Save and push
-reviewed checkpoints without treating the unresolved overall goal as complete.
+The maintained interval is 191–235, with the contributor upper-proof rebuild
+limitation. A single-pattern six-floor 23 does not prove 234. Continue the
+empty-square/global shortfall route once the local proof is closed. Paper 126
+is unchanged, with full revision next due 136. Preserve the open D: editor
+source and E: paper mirror; do not claim successful PDF compilation from the
+last restricted-token failure. Keep all hypotheses and numerical observations
+separate from completed theorems.

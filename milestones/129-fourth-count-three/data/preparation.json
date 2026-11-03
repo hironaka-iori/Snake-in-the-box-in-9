@@ -1,0 +1,143 @@
+{
+  "status": "PREPARED_FOURTH_THREE_BRANCH_LEAN_SPLIT_PENDING",
+  "pattern": "0120324",
+  "total_cap": 22,
+  "branch": "fourth_count_equals_three",
+  "necessary_intervals": [
+    [
+      3,
+      21
+    ],
+    [
+      5,
+      21
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      21
+    ]
+  ],
+  "other_positions": [
+    3,
+    5,
+    6
+  ],
+  "other_sum_upper": 11,
+  "pair_sum_lower": 8,
+  "base_clauses": 104529,
+  "new_clauses": 3014,
+  "clauses": 107543,
+  "declared_variables": 10175,
+  "occurring_variables": 7718,
+  "new_variables": 1470,
+  "first_new_variable": 8706,
+  "counters": [
+    {
+      "name": "first_lower_three",
+      "counter_index": 9,
+      "positions": [
+        1
+      ],
+      "upper": 18,
+      "kind": [
+        "lo",
+        0
+      ],
+      "first_new_variable": 8706,
+      "last_new_variable": 9083,
+      "occurrences": 21,
+      "distinct_vertices": 21,
+      "multiplicity_histogram": {
+        "1": 21
+      }
+    },
+    {
+      "name": "second_lower_five",
+      "counter_index": 10,
+      "positions": [
+        2
+      ],
+      "upper": 16,
+      "kind": [
+        "lo",
+        1
+      ],
+      "first_new_variable": 9084,
+      "last_new_variable": 9419,
+      "occurrences": 21,
+      "distinct_vertices": 21,
+      "multiplicity_histogram": {
+        "1": 21
+      }
+    },
+    {
+      "name": "fourth_upper_three",
+      "counter_index": 11,
+      "positions": [
+        4
+      ],
+      "upper": 3,
+      "kind": [
+        "hi",
+        3
+      ],
+      "first_new_variable": 9420,
+      "last_new_variable": 9482,
+      "occurrences": 21,
+      "distinct_vertices": 21,
+      "multiplicity_histogram": {
+        "1": 21
+      }
+    },
+    {
+      "name": "other_three_upper_eleven",
+      "counter_index": 12,
+      "positions": [
+        3,
+        5,
+        6
+      ],
+      "upper": 11,
+      "kind": [
+        "proved_other_three"
+      ],
+      "first_new_variable": 9483,
+      "last_new_variable": 10175,
+      "occurrences": 63,
+      "distinct_vertices": 57,
+      "multiplicity_histogram": {
+        "1": 51,
+        "2": 6
+      }
+    }
+  ],
+  "source_pins": {
+    "milestones/125-critical-six-count/lean/ActualBounds125.lean": "dbb9f2fbe1ea322903091a73eb3ed36cd677f80a6309cf5aee851a916654ab7a",
+    "milestones/125-critical-six-count/data/ActualBounds125-audit.json": "df9f9b6c1b883071a026d761d3eda47dd987a525d10ae65dc46fe1c70a1ddedc",
+    "milestones/121-replacement-window-pressure/lean/ActualPair121.lean": "17732a533cc39f73a1d140a69e5b666260a0fdc3ae5731611ff15b5f45090280",
+    "milestones/121-replacement-window-pressure/data/ActualPair121-audit.json": "03a00163d46b754fe8fbc28f2dfdcfbfd9206d4b88c07d44b5398483b95c61ae",
+    "milestones/128-coupled-pair/lean/PairLower128.lean": "6964a93d036b60a8e427f4459f23462102c9980051bae24b3d9591decaf19bd9",
+    "milestones/128-coupled-pair/data/preparation.json": "5d73915a1cecf80453f2c382934e06ae9ff281b098d32738f9ce9bc2f454701a",
+    "milestones/128-coupled-pair/work/pair.cnf": "a00f07497e7e1f4bf3e9bd31d74c1ef39999ebdc0d1019aecc860493ac05d2fc",
+    "milestones/128-coupled-pair/data/next-case-task.json": "0d032c96464c637472857439c0e79db25ca0b31f453810c7d31e94ebdee153a3",
+    "milestones/128-coupled-pair/data/verification.json": "a5dcf8e83244093f0dccca745a288ad9483d78053aac7aaa905e10cd893ed737",
+    "milestones/127-direct-cardinality/data/direct-clauses.json": "1b5ca3b77ed055718fc870b9ccefd36f4ee431dcec3ce98f7de28468a85200b3",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd"
+  },
+  "script_sha256": "430a607e12929f92789024117c2a50f67649273ca28a0c6fe942fbe86e33736d",
+  "cnf_sha256": "0d5e7e62e3c7ea54ffdabc02cf1d9d27c651fe3fd179320cc83f014ff9ac1ccd",
+  "counter_sha256": "61dfa77e2bcee6a356e5e807e11eb0d786d2703f7757bc2e3743332d168f233b",
+  "scope": "Restricted equality branch only. Retains all previous input and the total22 and paired constraints. A complete native result needs proof replay and actual-snake transfer. The fourth-count-at-least-four branch remains separate and unresolved."
+}
