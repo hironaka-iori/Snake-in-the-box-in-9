@@ -1,0 +1,41 @@
+"""Compose all checked raw chunks without unfolding their literal contents."""
+from pathlib import Path
+import hashlib,json
+H=Path(__file__).resolve().parents[1];R=H.parents[1]
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+module='Share146.Semantics147';p=H/'lean/Share146/Semantics147.lean'
+assert not (H/'data'/(module+'-audit.json')).exists()
+s='import Share146.Structure\n'+''.join(f'import Share146.Shard{i:02d}\n' for i in range(102))
+s+='set_option maxRecDepth 100000\nset_option maxHeartbeats 0\nset_option Elab.async false\n'
+s+='namespace Snake9.LocalWindow.ShareWindow146\nopen Snake9.LocalWindow.Tags\n'
+s+='''theorem interpreted_core147 (S E : Nat → Bool)
+    (ax : AxiomsS S E window (centresOf window bounds) resolution cap) :
+    cnfTrue (tauS S E meaning smeaning resolution ctrs tots) cnf = true := by
+  rw [centresK_eq] at ax
+'''
+for i in range(102):
+    s+=f'''  have h{i} : raw{i}.all (fun cl => clauseTrue
+      (tauS S E meaning smeaning resolution ctrs tots) (cl.map decodeLit)) = true :=
+    List.all_eq_true.mpr (sound_allS shard{i} counts_ok totals_ok ax)
+'''
+s+='  simp only [cnf, cnfTrue, List.all_map, raw, List.all_append, Bool.and_eq_true,\n'
+s+='    List.all_nil, and_true, and_assoc]\n'
+s+='  exact '+'⟨'+', '.join('h'+str(i) for i in range(102))+'⟩'+'\n'
+s+='''#print axioms interpreted_core147
+theorem local_share16_of_core_unsat147 (h : Unsat cnf) :
+    RefutedShare window bounds resolution cap :=
+  refutedShare_of_sat (fun S E ax => ⟨_, interpreted_core147 S E ax⟩) h
+#print axioms local_share16_of_core_unsat147
+end Snake9.LocalWindow.ShareWindow146
+'''
+p.write_text(s,encoding='utf-8',newline='\n')
+plan=dict(status='PREPARED_CORE_INTERPRETATION_ASSEMBLY',framework_modules=[],module_order=[module],
+    artifacts=[dict(module=module,path=p.relative_to(H).as_posix(),sha256=sha(p))],
+    source_files_sha256={str(Path(__file__).relative_to(R)):sha(__file__),str((H/'data/semantic-plan.json').relative_to(R)):sha(H/'data/semantic-plan.json')},
+    scope='Composition of102 clause chunks under AxiomsS, plus implication from a separate Unsat premise. It does not prove Unsat or an actual-snake share theorem.')
+(H/'data/assembly-plan.json').write_text(json.dumps(plan,indent=2)+'\n',encoding='utf-8',newline='\n')
+old=H/'scripts/check_module.py';new=H/'scripts/check_assembly.py';body=old.read_text(encoding='utf-8')
+assert body.count("planpath=H/'data/semantic-plan.json'")==1
+body=body.replace("planpath=H/'data/semantic-plan.json'","planpath=H/'data/assembly-plan.json'")
+new.write_text(body,encoding='utf-8',newline='\n')
+print(json.dumps(dict(status=plan['status'],module=module,source_sha256=sha(p))))

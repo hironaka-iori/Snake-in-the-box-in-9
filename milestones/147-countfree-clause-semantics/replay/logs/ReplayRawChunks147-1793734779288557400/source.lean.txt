@@ -1,0 +1,118 @@
+import ReplayTools147
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+set_option Elab.async false
+namespace Snake9.ReplayRawChunks147
+theorem raw_true (τ : Nat → Bool)
+    (h : Snake9.LocalWindow.cnfTrue τ Snake9.LocalWindow.ShareWindow146.cnf = true) :
+    Snake9.LocalWindow.ShareWindow146.raw.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true := by
+  simpa only [Snake9.LocalWindow.ShareWindow146.cnf, Snake9.LocalWindow.cnfTrue, List.all_map] using h
+#print axioms raw_true
+theorem chunks_true (τ : Nat → Bool)
+    (h : Snake9.LocalWindow.cnfTrue τ Snake9.LocalWindow.ShareWindow146.cnf = true) :
+    Snake9.LocalWindow.ShareWindow146.raw0.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw1.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw2.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw3.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw4.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw5.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw6.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw7.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw8.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw9.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw10.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw11.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw12.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw13.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw14.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw15.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw16.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw17.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw18.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw19.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw20.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw21.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw22.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw23.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw24.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw25.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw26.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw27.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw28.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw29.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw30.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw31.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw32.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw33.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw34.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw35.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw36.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw37.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw38.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw39.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw40.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw41.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw42.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw43.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw44.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw45.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw46.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw47.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw48.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw49.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw50.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw51.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw52.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw53.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw54.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw55.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw56.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw57.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw58.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw59.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw60.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw61.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw62.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw63.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw64.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw65.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw66.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw67.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw68.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw69.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw70.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw71.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw72.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw73.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw74.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw75.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw76.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw77.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw78.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw79.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw80.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw81.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw82.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw83.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw84.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw85.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw86.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw87.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw88.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw89.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw90.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw91.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw92.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw93.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw94.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw95.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw96.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw97.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw98.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw99.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw100.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true ∧
+    Snake9.LocalWindow.ShareWindow146.raw101.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true := by
+  simpa only [Snake9.LocalWindow.ShareWindow146.raw, List.all_append, List.all_nil, Bool.and_eq_true, and_true, and_assoc]
+    using raw_true τ h
+#print axioms chunks_true
+end Snake9.ReplayRawChunks147

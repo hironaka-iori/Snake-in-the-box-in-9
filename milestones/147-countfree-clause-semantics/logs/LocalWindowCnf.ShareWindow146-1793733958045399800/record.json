@@ -1,0 +1,604 @@
+{
+  "status": "PASS",
+  "pid": 25112,
+  "module": "LocalWindowCnf.ShareWindow146",
+  "source": "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\lean\\LocalWindowCnf\\ShareWindow146.lean",
+  "source_sha256": "e1cf98e441e937a27423a32084dfc19dd794137375efa8561a1c51ec880c9be2",
+  "checker_sha256": "4c6f89b52e0fd0b2e7be937793a8f3eef82d37e67cf6caf511878794cd35f234",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\data\\semantic-plan.json": "b256a76be31ea3c256a7bc09e44290736ad0f7bf1e9672a23172fa6fbc6350a9",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\data\\LocalWindowShareModel-audit.json": "f09573e5fe8ba0203299e590ff0e2742dc819fbc06108b42b6a8db2a19acfb4e",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\lean\\LocalWindowShareModel.lean": "3a9210925cbd9432b5c1022c9cd85abff80d8ee008ea8efb53affd75c931f3a3",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build\\LocalWindowShareModel.olean": "deab9f1d3413a3119f23f88e0eee71a7138b6b061c2fa19d0d1fd62605a16c6b",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\data\\LocalWindowModel-audit.json": "0579a9d2f73374d814945311bd46335d0f853fa30e0b7e5b41c761123ca5f78a",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\lean\\LocalWindowModel.lean": "5c374d6b74cbed0ebb91f93e53de21f6e33a85f64532dca6c09f7cefe3a6a8a0",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build\\LocalWindowModel.olean": "cdff343e0e81adb26337250528ae18a37d4294b6e00cb7ac77cbe223aa6645e9",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "toolchain_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "direct_dependencies": [
+    "d:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build\\LocalWindowShareModel.olean"
+  ],
+  "stdlib_scope": "The standard Lean4.19 library is trusted; compiler and direct standard-library objects are pinned. All project models are freshly checked from saved sources.",
+  "resource_gate": {
+    "processes": [],
+    "free_bytes": 7102803968
+  },
+  "resource_samples": [
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 236335104
+        }
+      ],
+      "free_bytes": 6855254016,
+      "seconds": 0.6409999999996217,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 236335104
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 279293952
+        }
+      ],
+      "free_bytes": 6788718592,
+      "seconds": 2.437999999998283,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 279293952
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 404140032
+        }
+      ],
+      "free_bytes": 6719082496,
+      "seconds": 4.077999999997701,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 404140032
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 418705408
+        }
+      ],
+      "free_bytes": 6652633088,
+      "seconds": 5.84400000000096,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 418705408
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 503750656
+        }
+      ],
+      "free_bytes": 6580645888,
+      "seconds": 7.702999999997701,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 503750656
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 583102464
+        }
+      ],
+      "free_bytes": 6509350912,
+      "seconds": 9.421999999998661,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 583102464
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 662949888
+        }
+      ],
+      "free_bytes": 6421041152,
+      "seconds": 11.21900000000096,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 662949888
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 774139904
+        }
+      ],
+      "free_bytes": 6343745536,
+      "seconds": 12.9529999999977,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 774139904
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 841560064
+        }
+      ],
+      "free_bytes": 6261653504,
+      "seconds": 14.71900000000096,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 841560064
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 865935360
+        }
+      ],
+      "free_bytes": 6190018560,
+      "seconds": 16.4529999999977,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 865935360
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 942440448
+        }
+      ],
+      "free_bytes": 6114693120,
+      "seconds": 18.2029999999977,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 942440448
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1143873536
+        }
+      ],
+      "free_bytes": 5969817600,
+      "seconds": 19.937999999998283,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1143873536
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ],
+      "free_bytes": 5822828544,
+      "seconds": 21.625,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ],
+      "free_bytes": 5836378112,
+      "seconds": 23.29699999999866,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ],
+      "free_bytes": 5830918144,
+      "seconds": 25.0,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ],
+      "free_bytes": 5830397952,
+      "seconds": 26.735000000000582,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ],
+      "free_bytes": 5828866048,
+      "seconds": 28.562999999998283,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1278046208
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5835128832,
+      "seconds": 30.51599999999962,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5819006976,
+      "seconds": 32.125,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5812768768,
+      "seconds": 33.84400000000096,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5822787584,
+      "seconds": 35.59400000000096,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5820395520,
+      "seconds": 37.31299999999828,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5825134592,
+      "seconds": 39.0,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5830160384,
+      "seconds": 40.68799999999828,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5826117632,
+      "seconds": 42.375,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5830742016,
+      "seconds": 44.01599999999962,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5833383936,
+      "seconds": 45.98500000000058,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5821374464,
+      "seconds": 47.7029999999977,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5842067456,
+      "seconds": 49.39099999999962,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ],
+      "free_bytes": 5838700544,
+      "seconds": 51.0779999999977,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 46256,
+          "ParentProcessId": 25112,
+          "PrivatePageCount": 1277931520
+        }
+      ]
+    }
+  ],
+  "timeout_seconds": 180,
+  "memory_limit_bytes": 3221225472,
+  "minimum_free_bytes": 805306368,
+  "compiler_threads": 2,
+  "compiler_stack_kb": 65536,
+  "preflight_seconds": 1.0619999999980791,
+  "log": "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\logs\\LocalWindowCnf.ShareWindow146-1793733958045399800\\compiler.log",
+  "paths": [
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build"
+  ],
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "2",
+    "-s",
+    "65536",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build\\LocalWindowCnf\\ShareWindow146.1793733958045399800.olean",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\lean\\LocalWindowCnf\\ShareWindow146.lean"
+  ],
+  "compiler_pid": 46256,
+  "exit_code": 0,
+  "stop_reason": null,
+  "compiler_wall_seconds": 52.15699999999924,
+  "postflight_seconds": 0.014999999999417923,
+  "seconds": 53.31199999999808,
+  "axioms": [],
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "object": "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build\\LocalWindowCnf\\ShareWindow146.olean",
+  "olean_sha256": "91c239fd0c47e520e3c1c14b6c8dba817bfa363a1e8a16c74249f176dace95a3"
+}

@@ -2940,8 +2940,16 @@ checked, while its sufficient universal upper bound remains unresolved
 
 The $012301$ share-16 target has a complete independent Boolean replay of
 285541 deductions and 31017505 propagation references from 12977 original
-core clauses. Its complete Lean replay, cycle-clause interpretation,
-coordinate transfer and reversal remain required~\cite{share145archive}.
+core clauses~\cite{share145archive}. The interpretation of every core clause
+has now been checked in Lean under the local path, endpoint and share-cap
+premises. This includes all six retained induced-eight-cycle exclusions,
+which follow from acyclicity. The composed implication from a contradiction
+of this exact core to the local share bound is also checked. The contradiction
+remains a premise of that implication. A separate 36-module replay pilot
+connects the original core to the initial proof state and checks the first
+1030 deductions, 6004 propagation references and a complete checkpoint.
+The complete Lean replay, coordinate transfer and reversal remain required
+~\cite{semantics147archive}.
 For the preserved $012034$ share-18 proof, the original-clause assignment
 now transfers through all 104 chunks to the materialized initial tree and
 composes with the checked 1055-deduction prefix using 6006 propagation
@@ -6254,6 +6262,14 @@ preserved initial tree and checked prefix}. Research record 146,
 \path{milestones/146-initial-tree-and-paper/data/bridge-completion.json}.
 The initial-database connection is complete; the full share replay and
 actual-snake share theorems remain unfinished.
+
+\bibitem{semantics147archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Complete clause interpretation and a
+checked replay pilot for the 012301 share certificate}. Research record 147,
+4 November 2026. Local research records:
+\path{milestones/147-countfree-clause-semantics/data/semantics-completion.json}
+and \path{milestones/147-countfree-clause-semantics/replay/data/pilot-completion.json}.
+The complete contradiction and its application to arbitrary snakes remain pending.
 
 \end{thebibliography}
 \end{document}

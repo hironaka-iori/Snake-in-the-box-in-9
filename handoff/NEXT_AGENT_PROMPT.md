@@ -1,53 +1,57 @@
-# Continue after milestone 146
+# Continue after milestone 147
 
 Work in E:/Snake-in-a-box. Apply tensai-bishoujo with the user's formal
-tone, no emojis and only necessary recurring definitions. Keep the open
-paper D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and repository
-mirror synchronized. Preserve authors Iori Hironaka, Tommy Ma, Steven Zhan
-and the entire preamble. Leave unrelated .gitignore and milestone50
-critical-family edits intact. Goal ACTIVE; round146 made progress.
-Full revision146 is complete; next156. Do not repeat completed work.
+tone, no emojis and only necessary recurring definitions. Keep the existing
+open paper D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex synchronized
+with paper/snake9_research.tex. Preserve authors Iori Hironaka, Tommy Ma,
+Steven Zhan and the complete preamble. Preserve unrelated .gitignore and
+milestone50 critical-family changes. Goal ACTIVE; round147 made progress.
+Last full paper revision146; next156. Compilation currently fails before TeX.
 
-Read milestones/146-initial-tree-and-paper/MATHEMATICAL_NOTE.md and
-data/checkpoint.json, data/semantic-progress.json and data/verification.json.
-RawChunksAssoc146, AssemblyAssoc146 and PrefixAssoc146 passed with four
-standard axiom reports. Original144 core-CNF truth transfers through104
-chunks to the exact initial tree and its1055-deduction/6006-reference prefix.
-The constructor body is unchanged; extraction normalizes conjunction
-association once. Preserve failed144/145 and first146 attempts. Full
-share18 replay, contradiction and actual-snake transfer remain unfinished.
+Read milestones/147-countfree-clause-semantics/MATHEMATICAL_NOTE.md and
+data/checkpoint.json. Semantics113 modules complete,111 axiom reports:
+all12977 original core clauses,102 clause modules,six acyclicity cuts.
+Semantics147 proves Unsat implies RefutedShare; Unsat is still a premise.
+The exact original input is unchanged. Do not repeat those checks.
 
-Selected task: complete count-free012301 share16 in both orientations.
-145 direct replay checked285541 deductions,31017505 references and12977
-core clauses, including six induced-eight-cycle exclusions.146 semantic
-plan pins105 modules, original clause IDs and all proof variables. Follow
-current semantic-progress rather than assuming the pilot completed all.
-Respect the import-support manifest. No semantic pilot alone proves
-unsatisfiability or the actual share bound. Complete the clause
-interpretation, bounded full Lean replay, cycle clauses, coordinate
-transport and reversal. Preserve the original proof and failed records.
+The replay36-module pilot is complete. The first full32-segment group
+also passes:47 accepted modules,8653 deductions,195344 references,complete
+checkpoint transfer. The immutable boundary is in
+replay/data/first-group-completion.json and first-group-progress-snapshot.json.
+The full generated plan has1789 modules,5089segments,160groups and ends in
+Unsat of the exact ShareWindow146 core. Every emitted proof literal and
+checkpoint was independently compared with the saved packed data.
 
-The012310 five-count theorem has no extra count, parity or endpoint premise.
-All1397 modules finished and were audited in145; do not restart its driver.
+First inspect replay/data/full-replay-progress.json, its lock, current
+processes and any work/live-replay147.json. A remaining full replay may
+already be running. Continue the same process, never duplicate it.
+If no process is active and the last run ended successfully, resume
+scripts/run_full_replay.py; accepted receipts are revalidated and reused.
+The script belongs under milestones/147-countfree-clause-semantics.
+If a module failed, inspect its exact failure before any new attempt.
+Do not mutate source plans, accepted source/object/log/checker snapshots,
+or dependency pins. A layout change needs a separate preserved plan.
 
-145 two-cycle obstruction: other weights and graph fixed,012301/012340
-floors at most16 plus arbitrary existing credit cannot bring comparison
-below235. Lower bound551875/2348; necessary325F+159G>9074. The012032
-floor16 increases the eleven-cycle total by57 and changes that hypothesis.
-Keep all three targets explicit. A saved-cycle relaxation or restricted
-Boolean model gives no global theorem alone. Maintained191--235 uses the
-archived contributor upper proof; complete independent rebuild is pending.
-Conditional234 retains local-share, reference and potential-certificate
-premises.196 and optimum are unresolved. Keep the goal ACTIVE.
+Lean4.19 rejects its advertised -M option. Use the external memory guard.
+Current runners require zero other Lean processes,free>=1.5GiB at launch,
+own private memory<=3GiB and free memory>=768MiB. Generic modules use
+one thread and8192KiB stack; concrete modules use two threads and65536KiB.
+Fullgraph also requires>=3GiBfree and no other fullgraph job.
 
-Use exact source/object/log/checker/dependency pins and accepted axioms only.
-Inspect current processes before resuming one completion driver. Lean gate
-free>=1.5GiB, at most2 existing Lean processes; own-process limit3GiB and
-free-memory floor768MiB. Current semantic pilot may require zero existing
-Lean processes. Fullgraph requires>=3GiBfree and no other fullgraph job.
+After complete replay, audit the final Unsat theorem and compose it with
+the checked local semantics, coordinate transport and reversal. No actual
+share16 theorem exists yet. Keep012032 and012340 as joint dependencies.
+The maintained191--235 interval uses the inspected contributor upper proof;
+a full independent rebuild is pending. Conditional234 retains its premises.
+The196 conjecture and optimum are unresolved. No new global bound in147.
 
-Paper source checks pass; built-in compilation failed before TeX due to
-Windows restricted-token helper configuration. Save exact diagnostics
-after future edits; no rebuilt PDF is verified. Keep the editor open.
-Fetch each round, stage only manifest files, commit quietly, push and verify
-origin/main. Publication receipts belong under work/. Preserve audited bytes.
+The1397-module012310 count-sum proof is complete and must not be restarted.
+The separate012034 share18 proof has a complete initial-tree bridge and
+1055-deduction prefix; its remaining full replay is unfinished.
+
+Large immutable replay inputs and all source modules are archived in147.
+Use scripts/restore_archives.py to restore missing exact bytes on a fresh
+checkout. Objects are local build outputs. See the publication manifest
+for exact published files. Live full-replay progress is deliberately
+outside the immutable publication boundary. Fetch each round, stage only
+manifest files, commit quietly, push and verify remote. Preserve failures.

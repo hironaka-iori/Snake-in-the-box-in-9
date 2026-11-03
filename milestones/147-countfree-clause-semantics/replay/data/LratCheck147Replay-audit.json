@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "pid": 50104,
+  "module": "LratCheck147Replay",
+  "source": "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\replay\\lean\\LratCheck147Replay.lean",
+  "source_sha256": "f249372a637dd2db069d54b4c901b66aaf65dd0e1eb6b225526d8bce8889f94a",
+  "checker_sha256": "675623920ebc3a69e212735e568b1049a8396a72fa1b88a1311801d7d9fd408e",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\replay\\data\\pilot-source-plan.json": "f6e57db8bd89618f9f4b3aa7ff47d5cf9e3e161ec1de4aa00b7e417db704e70f",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\data\\LocalWindowModel-audit.json": "0579a9d2f73374d814945311bd46335d0f853fa30e0b7e5b41c761123ca5f78a",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\lean\\LocalWindowModel.lean": "5c374d6b74cbed0ebb91f93e53de21f6e33a85f64532dca6c09f7cefe3a6a8a0",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build\\LocalWindowModel.olean": "cdff343e0e81adb26337250528ae18a37d4294b6e00cb7ac77cbe223aa6645e9",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\data\\semantic-plan.json": "b256a76be31ea3c256a7bc09e44290736ad0f7bf1e9672a23172fa6fbc6350a9",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "toolchain_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "direct_dependencies": [
+    "d:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build\\LocalWindowModel.olean"
+  ],
+  "stdlib_scope": "The standard Lean4.19 library is trusted; compiler and direct standard-library objects are pinned. All project models are freshly checked from saved sources.",
+  "resource_gate": {
+    "processes": [],
+    "free_bytes": 7230582784
+  },
+  "resource_samples": [
+    {
+      "processes": [
+        {
+          "ProcessId": 51872,
+          "ParentProcessId": 50104,
+          "PrivatePageCount": 120778752
+        }
+      ],
+      "free_bytes": 6975471616,
+      "seconds": 1.2190000000009604,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 51872,
+          "ParentProcessId": 50104,
+          "PrivatePageCount": 120778752
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 51872,
+          "ParentProcessId": 50104,
+          "PrivatePageCount": 507359232
+        }
+      ],
+      "free_bytes": 6893637632,
+      "seconds": 2.9530000000013388,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 51872,
+          "ParentProcessId": 50104,
+          "PrivatePageCount": 507359232
+        }
+      ]
+    }
+  ],
+  "timeout_seconds": 180,
+  "memory_limit_bytes": 3221225472,
+  "minimum_free_bytes": 805306368,
+  "compiler_threads": 1,
+  "compiler_stack_kb": 8192,
+  "preflight_seconds": 0.8439999999973224,
+  "log": "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\replay\\logs\\LratCheck147Replay-1793734764905821000\\compiler.log",
+  "paths": [
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\replay\\build",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build"
+  ],
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\replay\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\replay\\build\\LratCheck147Replay.1793734764905821000.olean",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\replay\\lean\\LratCheck147Replay.lean"
+  ],
+  "compiler_pid": 51872,
+  "exit_code": 0,
+  "stop_reason": null,
+  "compiler_wall_seconds": 3.9690000000009604,
+  "postflight_seconds": 0.014999999999417923,
+  "seconds": 4.827999999997701,
+  "axioms": [
+    {
+      "theorem": "Snake9.Lrat147Replay.rawMask_true",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Lrat147Replay.start_true",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "356083e063d8ce7b688b254eb54591b8945516048b8ac7fb1a012c2764b52d02",
+  "object": "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\replay\\build\\LratCheck147Replay.olean",
+  "olean_sha256": "9fe9980f8b2d0cc5dc8e389558999bcf97918e32a0aba1c8f9f9335247a05d6e"
+}
