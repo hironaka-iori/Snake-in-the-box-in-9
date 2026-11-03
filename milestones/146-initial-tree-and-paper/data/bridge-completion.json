@@ -1,0 +1,82 @@
+{
+  "status": "PASS_ORIGINAL_CNF_TO_INITIAL_TREE_AND_CHECKED_PREFIX",
+  "checked_modules": 3,
+  "axiom_reports": 4,
+  "original_core_clauses": 13224,
+  "raw_chunks": 104,
+  "tree_parts": 104,
+  "existing_prefix_deductions": 1055,
+  "existing_prefix_references": 6006,
+  "original_constructor_body_preserved": true,
+  "initial_tree_truth_bridge_complete": true,
+  "full_share18_replay_complete": false,
+  "actual_share18_theorem_complete": false,
+  "actual_share16_theorem_complete": false,
+  "receipts": [
+    {
+      "module": "RawChunksAssoc146",
+      "receipt": "data/RawChunksAssoc146-audit.json",
+      "receipt_sha256": "0efe965d546fafb95036ad7766311ba4b4a5fb2625e50c4218b3bf9d88cd463b",
+      "seconds": 5.640999999999622,
+      "axioms": [
+        {
+          "theorem": "Snake9.RawChunksAssoc146.raw_true",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.RawChunksAssoc146.chunks_true",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "AssemblyAssoc146",
+      "receipt": "data/AssemblyAssoc146-audit.json",
+      "receipt_sha256": "c4c03523c0f609e029292d3fa3c91b90a6263ad920e7bdbb33ee257779778d04",
+      "seconds": 13.562000000001717,
+      "axioms": [
+        {
+          "theorem": "Snake9.AssemblyAssoc146.start_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "PrefixAssoc146",
+      "receipt": "data/PrefixAssoc146-audit.json",
+      "receipt_sha256": "92338cb19705158bf8a35fb42bd60e00190a95f35bf2c7d72bee398b1cf10678",
+      "seconds": 2.8590000000003783,
+      "axioms": [
+        {
+          "theorem": "Snake9.PrefixAssoc146.checked_prefix_true",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    }
+  ],
+  "source_files_sha256": {
+    "milestones\\146-initial-tree-and-paper\\scripts\\verify_bridge.py": "996d98f8ed1afe87deae1529f1ff93e47f1b80d378e30c9a504a79145775efb2",
+    "milestones/146-initial-tree-and-paper/data/RawChunksAssoc146-audit.json": "0efe965d546fafb95036ad7766311ba4b4a5fb2625e50c4218b3bf9d88cd463b",
+    "milestones/146-initial-tree-and-paper/data/AssemblyAssoc146-audit.json": "c4c03523c0f609e029292d3fa3c91b90a6263ad920e7bdbb33ee257779778d04",
+    "milestones/146-initial-tree-and-paper/data/PrefixAssoc146-audit.json": "92338cb19705158bf8a35fb42bd60e00190a95f35bf2c7d72bee398b1cf10678",
+    "milestones/145-countfree-012301/lean/ChunkTruthAssemblyFixed145.lean": "08abee629d93337b5cc1c6214d4beacdc683ebbdbeda7fa04acfe8664e4ba38b",
+    "milestones/146-initial-tree-and-paper/lean/AssemblyAssoc146.lean": "8cb750249fedef668ab9d3a6bafc2fe4a6d53e186e937c237758b6774ba45434",
+    "milestones/144-countfree-share18/experiments/lean/LiteralProbe144.lean": "b411f3aa2e18f05e4f802fcdd03af0eef27a9f5493592022b0677d6b7aa519e8",
+    "milestones/144-countfree-share18/experiments/data/raw-init-probe.json": "e1c4774c5b7c6b7ae5f3300503678356d817c33501deaf05d9b74cc9b74e24a4",
+    "milestones/145-countfree-012301/data/chunked-bridge-completion.json": "636ce08141dfce6b1824c3274f84979fed223830115f20191ab39a1deae75c7e"
+  },
+  "statement": "For every assignment satisfying the original144 core CNF, the preserved materialized initial tree is true, and the1055-deduction prefix preserves truth.",
+  "improvement": "One conjunction extraction normalizes append association; this replaces104 separate whole-list membership extractions. Timings are bounded measurements on this machine, not a general complexity result.",
+  "scope": "The initial-database and bounded-prefix gap is closed. The full contradiction replay and actual-snake interpretation remain required; no new global bound."
+}

@@ -36,7 +36,24 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $m$ for the edge length, $T$ for the total singleton-square count and $s_0$ for the empty-square count, the identity is $T+2s_0+35(m+1)=9214$. For a canonical $012032$ window, the second and fourth internal counts have sum at least eight. Equality forces both endpoints into the common distance-two sphere and can occur at most thirteen times; it also requires an even path length and an even window start. A sum at most nine forces an endpoint to share an unselected neighbour with the four alternate window vertices. We prove that at most twenty-four such windows occur in any snake, allowing overlap and either length parity. Explicit odd-length snakes show that a uniform pair floor ten is false. A nine-transition exclusion removes one recorded competing cycle. A further local theorem shows that alternate internal counts $3,4,3$ in a $012032$ window force one intervening count to be at least six. The five internal counts of a canonical $012310$ window sum to at least $19$. Six-count and empty-square criteria give conditional improvements to 234 and 233, while surviving cycles limit the tested finite comparisons. The optimum and the numerical conjecture 196 remain unresolved.
+Let $a(9)$ be the maximum edge length of an induced path in the
+nine-dimensional binary hypercube. An explicit construction and an archived
+contributor proof give $191\le a(9)\le235$; a complete independent rebuild
+of the upper-bound proof remains pending. For a snake of length $m$, total
+singleton-square count $T$ and empty-square count $s_0$, the identity
+$T+2s_0+35(m+1)=9214$ supports count and share estimates. Completed local
+results include the sharp pair bound eight on $012032$, its endpoint and
+parity consequences, a bound of twenty-four low-pair windows, and a five-count
+sum of at least nineteen on $012310$. Direct six-count and empty-square
+criteria give conditional improvements to 234 and 233. A separate finite-graph
+comparison reaches 234 under five unfinished share bounds and explicit
+reference and potential-certificate premises. For the retained completed-share
+graph, two saved cycles impose $325F+159G>9074$ on the share floors for
+$012301$ and $012340$ if the eleven-cycle remains unchanged. Floors at most
+sixteen leave the comparison above 235. The proposed $012032$ floor changes
+that cycle, so the full conditional profile remains unresolved. The optimum
+and the numerical conjecture 196 remain open.
+
 \end{abstract}
 
 \clearpage
@@ -60,7 +77,7 @@ Integers encode binary words; $\oplus$ is exclusive-or. Translation by exclusive
 
 The exact values through dimension eight are listed in OEIS A099155 \cite{oeis}. Carlson and Hougen constructed a length-98 snake in dimension eight; the upper bound was established by exhaustive search by Östergård and Pettersson \cite{ostergard}. The universal bound $a(8)=98$ is used as a cited result here; a witness of that length is reproduced in Appendix~\ref{app:witness}, while the exhaustive upper bound is taken from that reference.
 
-Orland et al. supply 191-edge snakes in dimension nine and a public collection of 131 inequivalent examples \cite{orland,data}. Optimality is unresolved. These examples are not known to exhaust all isometry classes of longest snakes. The recorded examples are blocked at their endpoints. Section~\ref{sec:optimality} explains why this does not establish optimality.
+Orland et al. supply 191-edge snakes in dimension nine and a public collection of 131 inequivalent examples \cite{orland,data}. Optimality is unresolved. These examples are not known to exhaust all isometry classes of longest snakes. The recorded examples are blocked at their endpoints. Appendix~\ref{sec:optimality} explains why this does not establish optimality.
 
 \subsection{Counting notation}
 For a snake $P=(x_0,\ldots,x_m)$, write $S=V(P)$ and $v=|S|=m+1$. Thus $m$ always counts edges and $v$ counts vertices. A coordinate square is a two-dimensional face of the cube. Let $s_k$ count the distinct coordinate squares containing exactly $k$ vertices of $S$. For $x\in S$, let $\alpha_S(x)$ count squares meeting $S$ only at $x$, and put
@@ -83,7 +100,18 @@ The maximum edge length of an induced path in $\Q_9$ satisfies
 \end{theorem}
 The lower bound is verified from the explicit transition sequence in Theorem~\ref{thm:lower}. The proof of the upper bound has three steps. First, count coordinate squares exactly and establish positive singleton counts, with a stronger contribution at each endpoint. Second, exclude a finite family of local configurations and verify an integer potential on every remaining transition. Third, sum the potential inequalities and substitute the resulting count estimate into the square identity. Section~\ref{sec:upper-proof} gives this argument directly for 235.
 
-The argument proceeds from local geometry to global accounting. Section~\ref{sec:six-direct} first gives direct six-count criteria for 234 and 233, retaining the empty-square term. These criteria require no finite comparison graph. Sections~\ref{sec:empty-packing}--\ref{sec:countfree-catalogue} develop integer shares, forced-absence estimates and local count restrictions. Section~\ref{sec:common-budget} states the overlap capacities. Section~\ref{sec:long-models} derives the strengthened boundary estimate and a precise sufficient condition for 234. Section~\ref{sec:current-model} proves graph coverage and the complete weight interpretation, under the exact reference-catalogue premise. It then derives the upper-bound implications, identifies the least sufficient pending floors in the fixed model, and explains the limits of changing the potential parameters. Section~\ref{sec:sum-refinements} examines additional count-sum restrictions and the replacement cycles that limit their effect. Section~\ref{sec:closure} lists the remaining mathematical implications. The conjecture 196 and construction criteria follow. Historical finite models and all explicit witness sequences are retained in the appendices.
+The proof begins with the square census and the archived six-centre argument
+for 235. Direct six-count criteria then state sufficient conditions for
+234 and 233. Local count and endpoint theorems support the empty-square
+shares and their common overlap budgets. The finite comparison graph is
+treated through exact history recognition, coverage of actual state walks,
+edge-weight interpretation and the boundary estimate. The conditional 234
+comparison retains its five local share premises, reference refutations and
+complete potential certificate. Further proved count restrictions precede
+the current joint requirements on additional shares. Earlier model
+calculations, construction experiments, the numerical conjecture and all
+explicit witnesses are retained in the appendices.
+
 
 \begin{center}
 \begin{tabular}{p{0.27\textwidth}p{0.62\textwidth}}
@@ -93,11 +121,12 @@ $a(9)\ge191$ & An explicit snake with every vertex pair checked.\\
 $a(9)\le235$ & Archived contributor proof using 1287 local keys and a potential; the full independent rebuild remains pending.\\
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
-Conditional bound 234 & Slope 496, range 602 and boundary contribution 21; five local shares, the reference refutations and the full potential certificate remain pending.\\
+Conditional bound 234 & Slope 496, range 602 and boundary contribution 21. Five local shares, the remaining 1358 reference refutations and the complete finite potential certificate are still required.\\
 Graph interpretation and total charge & Complete coverage and all baseline weight components are checked. Twenty of 1378 reference entries are discharged; 1358 remain.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
 New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
 Endpoint and parity restrictions & Pair sum eight on $012032$ forces both endpoints into the common sphere, at most thirteen occurrences, and even path length and start.\\
+Five-count sum on $012310$ & The five internal counts sum to at least 19. All 1397 modules, including the actual-snake deduction, have completed checks; no extra count, endpoint-location or parity premise remains.\\
 Low-pair occurrence bound & At most twenty-four $012032$ windows have pair sum at most nine, with at most twelve assigned to either endpoint.\\
 $a(9)=196$ & A numerical extrapolation requiring both a construction and a next-length exclusion.\\
 \bottomrule
@@ -1154,7 +1183,7 @@ The sharper proposed count of eleven at an endpoint with no counted boundary
 window remains under verification. The common unselected neighbour is still
 part of the per-endpoint assignment hypothesis. No sharpness assertion is made.
 The occurrence count alone gives no new upper bound on snake length;
-Section~\ref{sec:occurrence-credit-limit} identifies an obstruction to its
+Appendix~\ref{sec:occurrence-credit-limit} identifies an obstruction to its
 use in the current uniform-credit comparison.
 
 
@@ -1263,7 +1292,7 @@ The complement $U$ contains $S$, and the expression in~\eqref{eq:absence-share} 
 
 The construction is invariant under translations and coordinate permutations. For eight-transition segments, choose internal positions 3 through 7. Direct enumeration gives 132 direction shapes up to relabelling, 76 with positive bounds, and maximum bound 18. For nine-transition segments, choose positions 4 through 8. There are 505 shapes, 357 with positive bounds; 231 improve on the corresponding eight-transition suffix, and the maximum is 54. All positive instances and their arbitrary-snake interpretations have passed Lean. The independent calculation enumerates all 4608 coordinate squares, every denominator and every summand. The formula also defines the zero entries, so no unlisted shape is assigned a positive bound~\cite{geometricarchive}.
 
-For longer segments, the same argument applies to any five selected centres. It supplies 20 checked ten-transition instances on an earlier attaining cycle, and 96 positive ten- or eleven-transition instances on the complete critical family discussed in Section~\ref{sec:restricted-family}. These are local inequalities for arbitrary matching segments; membership in a particular finite family is unnecessary for their validity.
+For longer segments, the same argument applies to any five selected centres. It supplies 20 checked ten-transition instances on an earlier attaining cycle, and 96 positive ten- or eleven-transition instances on the complete critical family discussed in Appendix~\ref{sec:restricted-family}. These are local inequalities for arbitrary matching segments; membership in a particular finite family is unnecessary for their validity.
 
 \subsection{Finite alternatives and complete neighbour choices}
 An absent-vertex calculation can be strengthened by branching on a vertex whose membership in $S$ is unknown. In the absent alternative, add that vertex to $D$. In the selected alternative, add it to $A$ and apply Lemma~\ref{lem:degree-forced}. A bound valid in both alternatives holds for the original segment.
@@ -1775,25 +1804,6 @@ The clipped boundary and arithmetic have passed Lean. For any concrete
 graph refinement, the validity and placement of every chosen local rule
 still have to be connected to these premises.
 
-\subsection{The earlier seven-centre model}
-The earlier computational model retains seven normalized directions and six count symbols, giving $34\cdot6^6=1\,586\,304$ states. A transition specifies eight directions and seven counts. It applies the radius-four catalogue to all represented subwindows and adds the identified proved exclusions and demands. The model also enforces Theorem~\ref{thm:outer-pair} in both orientations. Only the four completed cases of the six-centre all-four investigation are used; its remaining unproved cases are admitted. The transition weight is
-\[
-w=168b_{\mathrm{new}}+24D+42c,
-\]
-where $D$ is the maximum excess demand on the seven centres and $c\in\{0,1\}$ records one forward share occurrence ending at the new centre. This choice is motivated by~\eqref{eq:common-budget-charge}.
-
-Independent integer verification of the saved graph gives the exact normalized minimum cycle mean
-\begin{equation}\label{eq:six-count-mean}
-\min_{\gamma}\frac{\sum_{e\in\gamma}w(e)}{168|\gamma|}=\frac{42}{11}.
-\end{equation}
-The minimum ranges over nonempty directed cycles of this finite graph. Two certificates establish the equality. First, an integer potential $\pi$ of range 8064 satisfies
-\[
-7056+\pi(v)\le11w(u,v)+\pi(u)
-\]
-on every one of the $4\,551\,730$ retained transitions. The sharp pair restriction removes 9496 transitions from the preceding graph. Summing around any cycle cancels the potential and proves the lower bound in~\eqref{eq:six-count-mean}. Second, the replacement eleven-step cycle printed in Appendix~\ref{app:replacement-cycle} has appended-count sum 42 and $D=c=0$ at every step. It attains the bound. The arithmetic verification checks every edge of the saved graph; the full graph-generation and arbitrary-snake interpretation have not been checked in Lean.
-
-The cycle proves that these incorporated corrections leave this model's limiting mean unchanged. Its overlapping direction and count records do not specify a globally consistent selected-vertex set, so it supplies no snake construction. The endpoint refinement does not exclude it either: at its occurrence of the pattern in Theorem~\ref{thm:outer-pair}, the relevant counts sum to nine, already exceeding the endpoint-free lower bound eight. Other restrictions are therefore needed even after endpoint information is retained. The result is specific to this finite model and places no limit on stronger local or global methods. The preceding eleven-cycle and its numerical rejection tests remain in Appendix~\ref{app:six-count-cycle}, explicitly distinguished from the replacement cycle.
-
 \subsection{Joint charge and a conditional block estimate}
 The count excess and empty-square share can be budgeted together. Let $R_i$ be any valid lower bound for $\sum_{j=i+1}^{i+7}(24\delta_j+\sigma_{12}(x_j))$. Distinct seven-centre windows count each position at most seven times. Therefore
 \[
@@ -1915,7 +1925,7 @@ Telescoping along the open walk gives $p(m-8)\le dW+R$. Substitute Proposition~\
 \end{proof}
 
 \section{A finite comparison graph and its interpretation}\label{sec:current-model}
-This section specifies the baseline finite graph, proves how a snake determines its state sequence, and accounts for its edge weights. The reference-catalogue premise and the complete potential certificate are stated explicitly. Later refinements are compared separately in Section~\ref{sec:sum-refinements}, retaining each additional local hypothesis. Earlier models and their replacement cycles are retained in Appendix~\ref{app:earlier-long-models}.
+This section specifies the baseline finite graph, proves how a snake determines its state sequence, and accounts for its edge weights. The reference-catalogue premise and the complete potential certificate are stated explicitly. Later refinements are compared separately in Appendix~\ref{sec:sum-refinements}, retaining each additional local hypothesis. Earlier models and their replacement cycles are retained in Appendix~\ref{app:earlier-long-models}.
 
 \subsection{State meaning and local proof support}
 A state records eight canonically relabelled directions, five truncated singleton counts, and the relevant history of earlier nine-direction windows. There are 132 induced eight-direction shapes and 505 induced nine-direction extensions. For a transition starting at $r$, the source counts are
@@ -2435,6 +2445,547 @@ charge or a change to the graph or boundary argument is required to reach
 234. The rational arithmetic is checked separately from the finite graph and
 the pending local theorem~\cite{targetsharearchive}.
 
+\subsection{Least sufficient pending floors in the fixed model}\label{sec:least-floors}
+The preceding comparison with $012034=20$ asks for more than the present
+234 argument needs. Keep the graph, its other credits and the boundary
+inequality fixed. Allow only the five unfinished floors to decrease to
+nonnegative integers within their original target limits.
+
+\begin{proposition}[Integer floors sufficient for the current comparison]\label{prop:least-floors}
+In the order $012032,012034,012301,012340,012345$, the vectors in the box
+$[0,16]\times[0,20]\times[0,16]^3$ that admit the potential criterion
+\eqref{eq:strict234} on the saved graph are exactly
+\[
+(16,h,16,16,16),\qquad h\in\{18,19,20\}.
+\]
+This statement concerns integer floors and the fixed finite graph and
+boundary estimate. It asserts no universal local-share bound.
+\end{proposition}
+\begin{proof}[Finite certificates and comparison]
+For $(16,18,16,16,16)$, exact integer verification gives
+\[
+496+\pi(v)\le w(e)+\pi(u),\qquad 0\le\pi\le602
+\]
+on all 4947008 graph edges. The strict margin is
+$227\cdot496-111960-602=30>0$. Increasing any floor can only increase each
+weight, because the floor enters a maximum. The same potential therefore
+suffices for $h=19,20$.
+
+For necessity, weaken one floor as shown and keep the others at their
+original target values. Each resulting graph retains a cycle of mean 496
+and has the indicated open walk.
+\begin{center}\small
+\begin{tabular}{c r r r r}
+\toprule
+Shape & Floor & Walk length $k$ & Weight $C$ & $496k-C$\\\midrule
+$012032$ & 15 & 69 & 33592 & 632\\
+$012034$ & 17 & 51 & 24663 & 633\\
+$012301$ & 15 & 94 & 45992 & 632\\
+$012340$ & 15 & 77 & 37560 & 632\\
+$012345$ & 15 & 36 & 17224 & 632\\\bottomrule
+\end{tabular}
+\end{center}
+For any admissible slope $\mu$ and range $R$, cycle summation gives
+$\mu\le496$, and the walk gives $k\mu-C\le R$. Since $k\le227$,
+\[
+227\mu-R\le(227-k)496+C\le111960.
+\]
+Thus the strict criterion fails for each row, regardless of the potential.
+Every integer vector outside the asserted list lies componentwise below
+one of these failed profiles. A potential valid for smaller weights would
+also be valid for that profile, which is impossible. This covers simultaneous
+reductions without a separate test for every vector.
+
+The full edge calculation and all five cycle/walk witnesses have independent
+exact-integer checks. The general obstruction, arithmetic and monotonicity
+arguments have passed Lean; their concrete finite certificates retain the
+computational evidence just described~\cite{weightintegrationarchive}.
+\end{proof}
+
+The useful local target for $012034$ is consequently share at least 18,
+requiring exclusion of share at most 17. That local theorem remains open.
+Range 602 is sufficient; its optimality has not been established. In
+particular, the earlier seven-edge path still has weight 2872 at floor 18
+and deficit 600, so it supplies no lower bound of 602 on the range. Changed
+graph restrictions, boundary estimates or credits outside the stated box
+can change the conclusion.
+
+\subsection{When an added charge can improve the cycle mean}\label{sec:bonus-criterion}
+An added charge can improve the minimum mean only if it affects every
+cycle that currently attains the minimum. All graphs in this subsection are finite and have
+at least one directed cycle; all weights are rational.
+
+\label{def:zero-bonus}
+For a weighted directed graph $(G,w)$, let $\mathcal C(G)$ be its finite set
+of simple directed cycles and define
+\[
+\overline w(C)=\frac{1}{|C|}\sum_{e\in C}w(e),\qquad
+\mu(G,w)=\min_{C\in\mathcal C(G)}\overline w(C).
+\]
+A cycle $C$ is critical if $\overline w(C)=\mu(G,w)$. For a nonnegative
+edge bonus $B$, define the zero-bonus subgraph
+\[
+G_B^0=\bigl(V(G),\{e\in E(G):B(e)=0\}\bigr).
+\]
+
+\begin{proposition}[Exact criterion for improving the cycle mean]\label{prop:bonus-criterion}
+Keep $G$ fixed and let $B(e)\ge0$ for every edge. Then
+\[
+\mu(G,w+B)\ge\mu(G,w),
+\]
+with equality if and only if $G_B^0$ contains a critical cycle of $(G,w)$.
+Equivalently, the minimum mean increases strictly if and only if every
+previously critical cycle has positive total bonus.
+\end{proposition}
+\begin{proof}
+For every simple cycle,
+\[
+\overline{w+B}(C)=\overline w(C)+\frac{1}{|C|}\sum_{e\in C}B(e)
+\ge\overline w(C)\ge\mu(G,w).
+\]
+Taking the minimum proves monotonicity. If a critical cycle lies in $G_B^0$,
+its weight is unchanged and still attains the original minimum, proving
+equality.
+
+Conversely, suppose the minima are equal. The nonempty finite set of simple
+cycles contains a cycle attaining the new minimum. Both inequalities above
+must then be equalities for that cycle. It was critical before the bonus,
+and its total bonus is zero. Every summand is nonnegative, so every edge of
+the cycle has bonus zero, placing the cycle in $G_B^0$. This proves the
+equivalence. Since the new minimum cannot decrease, strict increase is
+equivalent to the absence of such a cycle, or to positive total bonus on
+every old critical cycle. Finiteness guarantees the attainment used here.
+The minimum-attainment, equality, strictness and nonnegative-sum implications
+have been checked in Lean for rational cycle means.
+\end{proof}
+
+This criterion gives an exact test for a proposed family of additional
+shares on a fixed finite graph: their combined positive increments must
+meet every critical cycle. Increasing a single witnessed cycle is insufficient
+when another critical cycle receives no bonus. The condition determines
+whether the finite mean increases; it does not by itself guarantee the
+strict numerical margin in~\eqref{eq:strict234}, bound the potential range,
+or prove that the additional shares are valid for actual snakes. When several
+share bounds concern the same five centres, first combine them by their
+maximum and define $B$ as the resulting change in edge weight. This preserves
+the accounting rule for overlapping alternatives.
+
+
+\section{Further proved count restrictions}\label{sec:proved-count-refinements}
+These three results hold for actual snakes without the additional count-sum
+hypotheses used by the historical comparison graphs. Appendix~\ref{sec:sum-refinements}
+records their effects on those graphs and the remaining conditional rules.
+
+\subsection{Five internal counts on $012310$}
+
+\begin{theorem}\label{thm:012310-total19}
+Let $x_0,\ldots,x_m$ be a snake in $Q_9$. If its six-transition segment
+starting at $x_r$ has canonical direction word $012310$ and $r+6\le m$, then
+\[
+\alpha_{r+1}+\alpha_{r+2}+\alpha_{r+3}+\alpha_{r+4}+\alpha_{r+5}\ge19.
+\]
+\end{theorem}
+\begin{proof}
+Translate the first vertex to zero and permute coordinates to obtain the
+canonical window. Assign the selected-vertex and endpoint indicators from
+the full snake. These assignments satisfy the local induced-path conditions,
+and the five local corner counts equal the five displayed counts.
+If their sum were at most $18$, the concrete count encoding would give
+a satisfying assignment of its retained $5067$-clause core. A checked
+refutation with $287753$ deductions and $16816989$ propagation references
+ends in the empty clause, giving a contradiction. The complete replay,
+count interpretation and arbitrary-snake deduction have passed Lean.
+The final statement requires only the fitting direction window.
+\end{proof}
+
+The preserved completion covers all $1397$ proof modules, including the
+final deduction above. A fresh audit checks their source, object, log and
+dependency hashes, with only the standard accepted axioms. The full input
+has $5114$ clauses; its five counters retain $105$ corner occurrences
+involving $84$ distinct corners~\cite{criticalcountarchive,totalcountarchive,share145archive}.
+The theorem requires only the fitting direction window. It completes one
+local premise in the comparison calculations and gives no new global bound
+by itself.
+
+\subsection{Excluding the recorded seven-edge cycle}\label{sec:seven-cycle-exclusion}
+\begin{theorem}\label{thm:nine-window-exclusion}
+Let $x_r,\ldots,x_{r+9}$ be a fitting window of a snake in $\Q_9$ whose
+transition word, after coordinate relabelling, is $012301430$.
+The following conditions cannot hold simultaneously:
+\[
+\alpha_{r+3}\ge6,\qquad
+(\alpha_{r+4},\alpha_{r+5},\alpha_{r+6},\alpha_{r+7},\alpha_{r+8})
+=(3,3,3,5,2).
+\]
+There is no restriction on the parity of the path length or the window start.
+\end{theorem}
+\begin{proof}
+Translate the first window vertex to zero and relabel the coordinates.
+The window vertices become
+\[
+0,1,3,7,15,14,12,28,20,21.
+\]
+Every actual snake containing this window satisfies the necessary finite
+local conditions: the prescribed vertices are selected, selected vertices
+have degree one or two, at most two vertices are endpoints, and no selected
+subset contains a cycle. The internal singleton counts are determined by
+the twenty-one opposite corners from Lemma~\ref{lem:window-missing-corners}.
+Impose the displayed counts and use the universal internal bound
+twenty-one for the remaining counts.
+
+The resulting Boolean system has a checked contradiction. Its retained
+2353 clauses are justified by the local conditions, and all 1340 deductions
+of the refutation have passed Lean. The interpretation of those clauses,
+the coordinate normalization and the implication for arbitrary snakes have
+also passed Lean. Hence an actual snake satisfying the displayed conditions
+would give a satisfying assignment to a refuted system, a contradiction~\cite{sevencyclearchive}.
+\end{proof}
+
+\subsection{A further restriction on the five internal counts}\label{sec:five-count-exclusion}
+\begin{theorem}\label{thm:alternate-three-four-three}
+Let $x_r,\ldots,x_{r+6}$ be a fitting canonical $012032$ window in a snake
+in $\Q_9$. If
+\[
+\alpha_{r+1}=3,\qquad \alpha_{r+3}=4,\qquad \alpha_{r+5}=3,
+\]
+then
+\[
+\alpha_{r+2}\ge6\quad\text{or}\quad\alpha_{r+4}\ge6.
+\]
+There is no restriction on the parity of the path or the positions of its endpoints.
+\end{theorem}
+\begin{proof}
+Translate and permute coordinates so that the window vertices are
+$0,1,3,7,6,14,10$. Each internal vertex has seven unused directions and
+therefore twenty-one opposite corners. Its singleton-square count equals
+the number of these corners absent from the path, by
+Lemma~\ref{lem:window-missing-corners}.
+
+Suppose both intervening counts are at most five. The five count intervals
+are then $[3,3],[0,5],[4,4],[0,5],[3,3]$. The necessary conditions for the
+selected vertices include degree at most two, positive degree, at most two
+endpoints, these corner-count intervals, and exclusion of selected cycles.
+A retained set of 4163 clauses from these conditions admits a contradiction
+certificate of 18606 deductions. Its clauses and every deduction, followed
+by their interpretation for an arbitrary snake, have been checked in Lean.
+The checked interpretation uses the stated upper bounds of five; equality
+at these two positions is unnecessary. The contradiction excludes the
+assumed intervals and proves the disjunction~\cite{fivecount140archive}.
+\end{proof}
+
+\section{Current limitations of the retained graph}\label{sec:current-limitations}
+The following results concern the retained graph and the specified share
+weights and occurrence event. Appendix~\ref{sec:sum-refinements} records
+its inherited local hypotheses and preceding comparisons. The cycle
+obstructions do not assert realizability by a complete snake. Changes to
+the $012032$ floor are stated separately because they alter the eleven-cycle.
+
+\subsection{A cycle unaffected by the selected share and occurrence credits}\label{sec:share18-unaffected-cycle}
+The retained calculation isolates the effect of the proposed count-free share
+floor $18$ for $012034$. It retains the graph and every other weight from
+the completed-share profile. At zero occurrence credit, the exact finite-graph
+calculation gives mean $5399/11$ and potential range $593$, hence comparison
+\[
+\frac{12138275}{51599}=235+\frac{12510}{51599}.
+\]
+Its attaining eleven-cycle contains four occurrence events and no $012034$
+suffix. Combining that cycle with the nine-cycle in Appendix~\ref{sec:share-floor-range} led to a test of
+the occurrence credit $C=601/36$. The two cycles alone admit mean $4472/9$
+and range $4391/18$, with comparison $235-3405/84544$. These parameters
+were therefore a candidate for the full graph, with no sufficiency claim.
+
+The full-graph test instead returns mean $3445/7$ and range $608$, giving
+\[
+\frac{23182022}{98535}=235+\frac{26297}{98535}.
+\]
+Its attaining fourteen-cycle has no occurrence events and no $012034$
+suffix in either orientation. This produces a stronger obstruction than
+the numerical failure of that particular credit~\cite{share144archive}.
+
+\begin{proposition}\label{prop:share18-independent-obstruction}
+Keep this retained graph, its other completed-share weights, and its
+occurrence indicator fixed. Changing only the count-free share floor for
+$012034$ and the nonnegative uniform occurrence credit cannot reduce the
+existing comparison below $235$.
+\end{proposition}
+\begin{proof}
+The fourteen-cycle has the unscaled weights
+\[
+256,\ 246,\ 736,\ 496,\ 371,\ 736,\ 364,\
+496,\ 486,\ 376,\ 736,\ 371,\ 496,\ 724.
+\]
+Their sum is $6890$. Its six-transition suffixes consist of eight copies
+of $012304$, four of $012301$, and two of $012340$, where shapes are
+identified up to coordinate relabelling and reversal. Thus neither of the
+two permitted changes alters any of its weights. Summing the potential
+inequalities around the cycle gives $14\mu\le6890$, or $\mu\le3445/7$.
+For $\mu,C,B,R\ge0$, the comparison consequently satisfies
+\[
+\frac{1098960+8\mu+BC+R}{4200+\mu}
+\ge\frac{1098960+8\mu}{4200+\mu}
+\ge\frac{1544056}{6569}
+=235+\frac{341}{6569}>235.
+\]
+The second ratio decreases with $\mu$ on this domain. The existing
+occurrence allowance is $B=24$. Lean checks the cycle summation and the
+comparison implications. A separate audit reconstructs the fourteen saved
+rows from the source graph and checks closure, shapes, weights and absence
+of occurrence events. The computation checks the potential inequalities
+on all $4661572$ retained edges; the independent audit checks the saved
+cycle and potential range, without claiming a second full-graph verification.
+\end{proof}
+
+This proposition restricts the chosen comparison method. It gives no
+improved upper bound for arbitrary snakes. Progress within this graph
+requires another share contribution or an exclusion affecting the surviving
+cycle. The conditional profile using all additional share floors remains
+separate and is not contradicted by this obstruction.
+
+The preserved share-18 certificate and the successive initial-database
+checks are recorded in Appendix~\ref{app:historical-verification-records}.
+Their current status is stated in Section~\ref{sec:verification}.
+
+\subsection{A necessary relation between two share floors}\label{sec:joint-share-floors}
+The same fourteen-cycle gives a more precise restriction on the next share
+targets. Keep the graph and all other edge weights fixed. Let $F\ge11$ and
+$G\ge4$ be the proposed count-free floors for $012301$ and $012340$,
+respectively, in the existing resolution-twelve units. The cycle weights become
+\[
+256,\ 240+F,\ 736,\ 496,\ 360+F,\ 736,\ 360+G,\
+496,\ 480+F,\ 376,\ 736,\ 360+F,\ 496,\ 720+G.
+\]
+The cycle has no occurrence events and no $012034$ suffix in either
+orientation. Its weights are therefore independent of the uniform occurrence
+credit and of any further change to the $012034$ floor.
+
+\begin{proposition}\label{prop:joint-share-necessary}
+Under these fixed-graph assumptions, a potential comparison strictly below
+$235$ requires
+\begin{equation}\label{eq:joint-share-necessary}
+457F+225G>9848+7BC.
+\end{equation}
+Here $B\ge0$ is the occurrence allowance, $C\ge0$ its uniform credit,
+$\mu\ge0$ the certified mean, and $R\ge0$ the potential range.
+\end{proposition}
+\begin{proof}
+Summing around the cycle gives
+\[
+7\mu\le3424+2F+G.
+\]
+Its first two consecutive edges have total weight $496+F$.
+Summing their potential inequalities and bounding the difference between
+their endpoint potentials by $R$ gives
+\[
+2\mu\le496+F+R.
+\]
+A comparison below $235$ is equivalent to
+$111960+BC+R<227\mu$. Substituting the range inequality yields
+$111464-F+BC<225\mu$. Multiplication by seven followed by the cycle
+mean bound gives~\eqref{eq:joint-share-necessary}. Lean checks these
+implications. A separate saved-cycle calculation checks the edge weights
+and their source identities~\cite{share145archive}.
+\end{proof}
+
+Three consequences guide the next computation. First, keeping the effective
+$012340$ floor at $4$, even increasing $F$ to $19$ leaves the comparison at least
+\[
+\frac{7723775}{32866}=235+\frac{265}{32866}.
+\]
+The same lower bound holds for smaller $F$, since the cycle edge weights
+are then no larger. Second, with $F=16$ and integer $G$, a successful
+comparison requires $G\ge12$. Third, with $F=G=16$ and the existing
+allowance $B=24$, it requires $C<19/3$. These are necessary conditions.
+They do not show that the remaining floors or credits suffice for the
+full graph, nor do they establish an improved bound for arbitrary snakes.
+
+The preceding eleven-cycle strengthens this restriction. It uses only the
+suffix shapes $012032$, $012314$ and $012031$, has base total $5399$,
+and contains four occurrence events. Consequently neither $F$ nor $G$
+changes its weights, and it always imposes
+\[
+11\mu\le5399+4C.
+\]
+With $B=24$, combining this inequality with the two-edge range inequality
+and a comparison below $235$ gives $11329-11F<636C$. Eliminating $C$
+using~\eqref{eq:joint-share-necessary} yields the stronger necessary condition
+\begin{equation}\label{eq:two-cycle-share-necessary}
+325F+159G>9074.
+\end{equation}
+In particular, retaining the eleven-cycle unchanged while fixing $F=16$
+requires integer $G\ge25$. This supersedes the weaker requirement $G\ge12$
+obtained from the fourteen-cycle alone.
+
+\begin{proposition}\label{prop:two-cycle-share16-obstruction}
+Keep these two cycles, their other weights, and the occurrence allowance
+$B=24$ fixed. Share floors at most $16$ for each of $012301$ and $012340$,
+together with any uniform occurrence credit and any $012034$ floor,
+leave the comparison at least
+\[
+\frac{551875}{2348}=235+\frac{95}{2348}>235.
+\]
+\end{proposition}
+\begin{proof}
+It is enough to use the edge-weight upper bounds with $F=G=16$.
+The fourteen-cycle gives $\mu\le496$ and $R\ge2\mu-512$.
+The eleven-cycle gives $24C\ge66\mu-32394$. Therefore
+\[
+\frac{1098960+8\mu+24C+R}{4200+\mu}
+\ge\frac{1066054+76\mu}{4200+\mu}
+\ge\frac{551875}{2348}.
+\]
+The last ratio decreases with $\mu\ge0$, so the final inequality follows
+from $\mu\le496$. Lean checks the implication and the exact gap above $235$.
+The listed arithmetic constraints attain equality at
+$\mu=496$, $C=57/4$ and $R=480$. This establishes the optimum of this
+arithmetic relaxation only; no full-graph potential is asserted.
+\end{proof}
+
+The existing $012032$ share-$16$ target is therefore relevant in addition
+to the two share floors above. It adds $57$ to the eleven-cycle total,
+raising that cycle's mean to $496$ at zero occurrence credit. The three
+proposed share floors then give mean $496$ on both saved cycles without
+occurrence credit. The other graph cycles, local proofs and global
+interpretation remain separate obligations.
+
+The current certificate status is stated in Section~\ref{sec:verification}.
+Appendix~\ref{app:historical-verification-records} preserves the native
+certificate counts and the earlier assembly attempts.
+
+\section{Remaining requirements for a stronger bound}\label{sec:closure}
+The maintained interval is $191\le a(9)\le235$, with the contributor-proof
+and independent-rebuild distinction stated in Section~\ref{sec:verification}.
+The direct route to 234 requires a universal six-count floor, the stated
+shortfall bound, or one of the joint count and empty-square assumptions.
+The proved $0123041$ class, the $012310$ five-count theorem and the necessary
+$0120324$ intervals do not establish any of those universal premises.
+The separate share argument has checked graph coverage and weight
+interpretation under its stated assumptions. Its remaining obligations are
+as follows.
+
+\begin{enumerate}
+\item Supply the remaining 1358 refutations in the exact union of 1378
+reference keys. Twenty entries have been discharged, with the equivalence
+to the reduced premise checked. The checked retention theorem and bound assembly use that
+union directly; reconstruction of two larger catalogue propositions is
+unnecessary. An exact source selection identifies the required entries.
+It does not prove their refutations.
+\item Complete the finite potential certificate on all 791 assigned
+direction/history contexts, for both floor choices, and check the final
+assembly. The full-key walk, total charge and telescoping implications
+are already checked. Exact-integer scans of all 4947008 accepted keys and
+the checked potential ranges support this task; partial Lean coverage
+does not replace its universal edge premise.
+\item For 234, additionally prove the five local shares
+$(16,18,16,16,16)$ for $012032,012034,012301,012340,012345$, including
+their geometric interpretation and reversal. The completed profile needs
+none of these additional share assumptions and currently recovers 235.
+\end{enumerate}
+
+Corollary~\ref{cor:reference-potential-bounds} states exactly how these
+requirements imply the two numerical bounds. The reference and potential
+tasks serve both arguments. The reduced $012034$ target avoids proving a
+stronger share than this comparison needs. It remains a mathematical
+obligation, irrespective of any earlier unsuccessful proof attempt.
+
+Proposition~\ref{prop:least-floors} identifies the least sufficient integer
+floors within its fixed box. The earlier slope-and-range comparisons remain
+valid for their specified profiles; they do not determine the least range
+for the reduced $012034$ floor 18. For the current retained graph,
+Proposition~\ref{prop:two-cycle-share16-obstruction} gives a comparison of at
+least $235+95/2348$ when the $012301$ and $012340$ floors are at most 16
+and the eleven-cycle remains unchanged. The necessary relation is
+$325F+159G>9074$. The existing $012032$ share-16 target adds 57 to the
+eleven-cycle and removes the unchanged-weight hypothesis. These three
+local targets therefore require a joint analysis, followed by the remaining
+graph and proof obligations. Stronger geometric restrictions, boundary
+accounting or conditions on actual initial and final states can change
+the comparison.
+
+The contributor's separate seven-centre count-only proposal also targets 234.
+Its inspected production record retains unfinished local certificates and
+transition checks~\cite{conditional234archive}. It is distinct from the present
+five-centre share argument and supplies no stronger main theorem here.
+
+\section{Verification scope and remaining problem}\label{sec:verification}
+The global conclusion remains $191\le a(9)\le235$. The lower bound follows
+from the explicit witness. The upper bound uses the square identity,
+endpoint estimates, 1287 catalogue keys, a finite potential and path
+summation. The completed contributor theorem has a successful archived
+dependency audit~\cite{bound235archive}. Its final source and saved audit were
+reviewed and its potential independently reconstructed. A complete
+independent rebuild remains pending.
+
+In the newer share argument, actual windows have consistent full direction,
+history and count keys. Coverage of the accepted-key graph, all 55
+history-share rules, the other baseline weight components, and the boundary
+and total-charge deductions have passed Lean under their stated premises.
+Twenty of the 1378 reference entries have checked refutations; 1358 remain.
+Exact-integer scans verify the two saved potentials on all 4947008 accepted
+keys, while the complete Lean edge certificate remains unfinished.
+The conditional 234 profile additionally requires share floors
+$(16,18,16,16,16)$ for $012032,012034,012301,012340,012345$ and has a
+strict margin of 30 at length 235 under those premises
+~\cite{referenceunionarchive,potentialcertificatearchive}.
+
+The completed actual-snake results include the sharp $012032$ pair
+inequality, its equality geometry and parity consequence, the parity-free
+endpoint implication, the twenty-four-window bound, the $0123041$
+six-count bound, the restrictions on low-total $0120324$ windows, and the
+nine-transition and five-count exclusions. The five-count sum at least 19
+on $012310$ is also complete: all 1397 proof modules and their saved
+dependencies have been audited. This theorem has no additional count,
+endpoint-location or parity premise. The direct shortfall implication is
+checked, while its sufficient universal upper bound remains unresolved
+~\cite{count24archive,fivecount140archive,share145archive}.
+
+The $012301$ share-16 target has a complete independent Boolean replay of
+285541 deductions and 31017505 propagation references from 12977 original
+core clauses. Its complete Lean replay, cycle-clause interpretation,
+coordinate transfer and reversal remain required~\cite{share145archive}.
+For the preserved $012034$ share-18 proof, the original-clause assignment
+now transfers through all 104 chunks to the materialized initial tree and
+composes with the checked 1055-deduction prefix using 6006 propagation
+references. The original constructor body is unchanged. The preceding
+assembly timeout is retained in Appendix~\ref{app:historical-verification-records}.
+The remaining full replay and actual-snake interpretation are unfinished.
+These records establish progress on certificates without completing either
+local share theorem~\cite{bridge146archive}.
+
+The saved-cycle obstructions concern their stated graph, weights and
+occurrence event. In particular, the joint-floor obstruction leaves the
+eleven-cycle unchanged, whereas the proposed $012032$ floor 16 raises its
+total by 57. It therefore leaves the full conditional 234 profile
+unresolved. No construction above 191 or matching optimality theorem has
+been obtained. The numerical conjecture 196 is used in none of the proved
+bounds. Section~\ref{sec:closure} states the remaining requirements.
+
+\appendix
+\section{Earlier fixed-graph comparison results}\label{app:historical-comparisons}
+The results in this appendix retain their original graph, weight and boundary
+hypotheses. They include the earlier seven-centre calculation, three
+slope-and-range comparisons, coarse floor weakenings and the baseline
+unsaturated-cycle obstruction. The later refined graph is treated in
+Section~\ref{sec:current-limitations}.
+
+\subsection{The earlier seven-centre model}
+The earlier computational model retains seven normalized directions and six count symbols, giving $34\cdot6^6=1\,586\,304$ states. A transition specifies eight directions and seven counts. It applies the radius-four catalogue to all represented subwindows and adds the identified proved exclusions and demands. The model also enforces Theorem~\ref{thm:outer-pair} in both orientations. Only the four completed cases of the six-centre all-four investigation are used; its remaining unproved cases are admitted. The transition weight is
+\[
+w=168b_{\mathrm{new}}+24D+42c,
+\]
+where $D$ is the maximum excess demand on the seven centres and $c\in\{0,1\}$ records one forward share occurrence ending at the new centre. This choice is motivated by~\eqref{eq:common-budget-charge}.
+
+Independent integer verification of the saved graph gives the exact normalized minimum cycle mean
+\begin{equation}\label{eq:six-count-mean}
+\min_{\gamma}\frac{\sum_{e\in\gamma}w(e)}{168|\gamma|}=\frac{42}{11}.
+\end{equation}
+The minimum ranges over nonempty directed cycles of this finite graph. Two certificates establish the equality. First, an integer potential $\pi$ of range 8064 satisfies
+\[
+7056+\pi(v)\le11w(u,v)+\pi(u)
+\]
+on every one of the $4\,551\,730$ retained transitions. The sharp pair restriction removes 9496 transitions from the preceding graph. Summing around any cycle cancels the potential and proves the lower bound in~\eqref{eq:six-count-mean}. Second, the replacement eleven-step cycle printed in Appendix~\ref{app:replacement-cycle} has appended-count sum 42 and $D=c=0$ at every step. It attains the bound. The arithmetic verification checks every edge of the saved graph; the full graph-generation and arbitrary-snake interpretation have not been checked in Lean.
+
+The cycle proves that these incorporated corrections leave this model's limiting mean unchanged. Its overlapping direction and count records do not specify a globally consistent selected-vertex set, so it supplies no snake construction. The endpoint refinement does not exclude it either: at its occurrence of the pattern in Theorem~\ref{thm:outer-pair}, the relevant counts sum to nine, already exceeding the endpoint-free lower bound eight. Other restrictions are therefore needed even after endpoint information is retained. The result is specific to this finite model and places no limit on stronger local or global methods. The preceding eleven-cycle and its numerical rejection tests remain in Appendix~\ref{app:six-count-cycle}, explicitly distinguished from the replacement cycle.
+
 \subsection{Joint limits of changing the slope and potential range}\label{sec:joint-optimality}
 The comparison in~\eqref{eq:improved-potential} depends on both the constant
 slope and the global range of the potential. A smaller slope might permit
@@ -2515,71 +3066,6 @@ additional restrictions valid for actual snakes, a stronger boundary sum,
 or a potential estimate depending on the actual initial and final states.
 It places no restriction on such changes to the argument.
 
-\subsection{Least sufficient pending floors in the fixed model}\label{sec:least-floors}
-The preceding comparison with $012034=20$ asks for more than the present
-234 argument needs. Keep the graph, its other credits and the boundary
-inequality fixed. Allow only the five unfinished floors to decrease to
-nonnegative integers within their original target limits.
-
-\begin{proposition}[Integer floors sufficient for the current comparison]\label{prop:least-floors}
-In the order $012032,012034,012301,012340,012345$, the vectors in the box
-$[0,16]\times[0,20]\times[0,16]^3$ that admit the potential criterion
-\eqref{eq:strict234} on the saved graph are exactly
-\[
-(16,h,16,16,16),\qquad h\in\{18,19,20\}.
-\]
-This statement concerns integer floors and the fixed finite graph and
-boundary estimate. It asserts no universal local-share bound.
-\end{proposition}
-\begin{proof}[Finite certificates and comparison]
-For $(16,18,16,16,16)$, exact integer verification gives
-\[
-496+\pi(v)\le w(e)+\pi(u),\qquad 0\le\pi\le602
-\]
-on all 4947008 graph edges. The strict margin is
-$227\cdot496-111960-602=30>0$. Increasing any floor can only increase each
-weight, because the floor enters a maximum. The same potential therefore
-suffices for $h=19,20$.
-
-For necessity, weaken one floor as shown and keep the others at their
-original target values. Each resulting graph retains a cycle of mean 496
-and has the indicated open walk.
-\begin{center}\small
-\begin{tabular}{c r r r r}
-\toprule
-Shape & Floor & Walk length $k$ & Weight $C$ & $496k-C$\\\midrule
-$012032$ & 15 & 69 & 33592 & 632\\
-$012034$ & 17 & 51 & 24663 & 633\\
-$012301$ & 15 & 94 & 45992 & 632\\
-$012340$ & 15 & 77 & 37560 & 632\\
-$012345$ & 15 & 36 & 17224 & 632\\\bottomrule
-\end{tabular}
-\end{center}
-For any admissible slope $\mu$ and range $R$, cycle summation gives
-$\mu\le496$, and the walk gives $k\mu-C\le R$. Since $k\le227$,
-\[
-227\mu-R\le(227-k)496+C\le111960.
-\]
-Thus the strict criterion fails for each row, regardless of the potential.
-Every integer vector outside the asserted list lies componentwise below
-one of these failed profiles. A potential valid for smaller weights would
-also be valid for that profile, which is impossible. This covers simultaneous
-reductions without a separate test for every vector.
-
-The full edge calculation and all five cycle/walk witnesses have independent
-exact-integer checks. The general obstruction, arithmetic and monotonicity
-arguments have passed Lean; their concrete finite certificates retain the
-computational evidence just described~\cite{weightintegrationarchive}.
-\end{proof}
-
-The useful local target for $012034$ is consequently share at least 18,
-requiring exclusion of share at most 17. That local theorem remains open.
-Range 602 is sufficient; its optimality has not been established. In
-particular, the earlier seven-edge path still has weight 2872 at floor 18
-and deficit 600, so it supplies no lower bound of 602 on the range. Changed
-graph restrictions, boundary estimates or credits outside the stated box
-can change the conclusion.
-
 \subsection{A short-walk obstruction to weakening the catalogue}\label{sec:short-walk}
 The need for the pending local shares can be tested beyond a single fixed potential. The following argument applies to any constant slope and any potential with a global range bound.
 
@@ -2621,67 +3107,6 @@ $012345$ & 12 & 12 & 632\\
 Direct array checks, separate from the discovery calculation, verify each walk's edges, endpoints and weights, and the retained cycle~\cite{obstructionarchive}. These finite witness checks have not been replayed in Lean. Proposition~\ref{prop:short-walk-obstruction} rules out repairing these six entire relaxed graphs merely by choosing another constant slope and potential under the present boundary budget.
 
 These earlier coarse weakenings alone do not determine the least sufficient floors. The one-unit and $18/17$ tests in Section~\ref{sec:least-floors} provide that sharper conclusion within the specified integer box. Nor is a graph walk known to arise from a complete snake or a permitted initial history. Additional geometric restrictions, reachability restrictions, or boundary estimates depending on the initial and final states may remove the obstruction. These are substantive changes to the mathematical model and remain possible routes.
-
-
-\subsection{When an added charge can improve the cycle mean}\label{sec:bonus-criterion}
-An added charge can improve the minimum mean only if it affects every
-cycle that currently attains the minimum. All graphs in this subsection are finite and have
-at least one directed cycle; all weights are rational.
-
-\label{def:zero-bonus}
-For a weighted directed graph $(G,w)$, let $\mathcal C(G)$ be its finite set
-of simple directed cycles and define
-\[
-\overline w(C)=\frac{1}{|C|}\sum_{e\in C}w(e),\qquad
-\mu(G,w)=\min_{C\in\mathcal C(G)}\overline w(C).
-\]
-A cycle $C$ is critical if $\overline w(C)=\mu(G,w)$. For a nonnegative
-edge bonus $B$, define the zero-bonus subgraph
-\[
-G_B^0=\bigl(V(G),\{e\in E(G):B(e)=0\}\bigr).
-\]
-
-\begin{proposition}[Exact criterion for improving the cycle mean]\label{prop:bonus-criterion}
-Keep $G$ fixed and let $B(e)\ge0$ for every edge. Then
-\[
-\mu(G,w+B)\ge\mu(G,w),
-\]
-with equality if and only if $G_B^0$ contains a critical cycle of $(G,w)$.
-Equivalently, the minimum mean increases strictly if and only if every
-previously critical cycle has positive total bonus.
-\end{proposition}
-\begin{proof}
-For every simple cycle,
-\[
-\overline{w+B}(C)=\overline w(C)+\frac{1}{|C|}\sum_{e\in C}B(e)
-\ge\overline w(C)\ge\mu(G,w).
-\]
-Taking the minimum proves monotonicity. If a critical cycle lies in $G_B^0$,
-its weight is unchanged and still attains the original minimum, proving
-equality.
-
-Conversely, suppose the minima are equal. The nonempty finite set of simple
-cycles contains a cycle attaining the new minimum. Both inequalities above
-must then be equalities for that cycle. It was critical before the bonus,
-and its total bonus is zero. Every summand is nonnegative, so every edge of
-the cycle has bonus zero, placing the cycle in $G_B^0$. This proves the
-equivalence. Since the new minimum cannot decrease, strict increase is
-equivalent to the absence of such a cycle, or to positive total bonus on
-every old critical cycle. Finiteness guarantees the attainment used here.
-The minimum-attainment, equality, strictness and nonnegative-sum implications
-have been checked in Lean for rational cycle means.
-\end{proof}
-
-This criterion gives an exact test for a proposed family of additional
-shares on a fixed finite graph: their combined positive increments must
-meet every critical cycle. Increasing a single witnessed cycle is insufficient
-when another critical cycle receives no bonus. The condition determines
-whether the finite mean increases; it does not by itself guarantee the
-strict numerical margin in~\eqref{eq:strict234}, bound the potential range,
-or prove that the additional shares are valid for actual snakes. When several
-share bounds concern the same five centres, first combine them by their
-maximum and define $B$ as the resulting change in edge weight. This preserves
-the accounting rule for overlapping alternatives.
 
 
 \subsection{An obstruction to bonuses confined to saturated counts}\label{sec:unsaturated-obstruction}
@@ -2749,11 +3174,14 @@ Together with the single-target comparison above, this explains why completing
 the $012034$ proof alone cannot settle the stronger bound.
 
 \section{Further count-sum restrictions and their limits}\label{sec:sum-refinements}
-The preceding graph and its proof obligations remain fixed. The experiments
-in this section add count restrictions to copies of that graph. Several
-restrictions remain hypotheses, even when the share floors are already
-proved. A completed-floor label therefore identifies the share inputs;
-it does not certify the resulting refined comparison for arbitrary snakes.
+This appendix preserves the successive count-sum and occurrence-credit
+calculations on refinements of the baseline graph. Each comparison retains
+its stated local hypotheses and share profile. A completed-floor label
+identifies the share inputs; several additional count restrictions remain
+unproved for actual snakes. The completed local results are collected in
+Section~\ref{sec:proved-count-refinements}, and the latest joint-floor
+limitations are in Section~\ref{sec:current-limitations}.
+
 
 \subsection{Local hypotheses and their verification status}
 The following table gives the ten sum rules used in the first comparison below.
@@ -2776,42 +3204,18 @@ $012310$ & & $1,2,3,4,5$ & 19\\
 $012345$ & & $1,2,3,4,5$ & 22\\\bottomrule
 \end{tabular}
 \end{center}
-The $012314$ row is Theorem~\ref{thm:outer-four-sum}. The following theorem
-establishes the $012310$ row without additional count or parity assumptions.
+The $012314$ row is Theorem~\ref{thm:outer-four-sum}. The $012310$ row is
+Theorem~\ref{thm:012310-total19}, which has no additional count or parity assumptions.
 
-\begin{theorem}\label{thm:012310-total19}
-Let $x_0,\ldots,x_m$ be a snake in $Q_9$. If its six-transition segment
-starting at $x_r$ has canonical direction word $012310$ and $r+6\le m$, then
-\[
-\alpha_{r+1}+\alpha_{r+2}+\alpha_{r+3}+\alpha_{r+4}+\alpha_{r+5}\ge19.
-\]
-\end{theorem}
-\begin{proof}
-Translate the first vertex to zero and permute coordinates to obtain the
-canonical window. Assign the selected-vertex and endpoint indicators from
-the full snake. These assignments satisfy the local induced-path conditions,
-and the five local corner counts equal the five displayed counts.
-If their sum were at most $18$, the concrete count encoding would give
-a satisfying assignment of its retained $5067$-clause core. A checked
-refutation with $287753$ deductions and $16816989$ propagation references
-ends in the empty clause, giving a contradiction. The complete replay,
-count interpretation and arbitrary-snake deduction have passed Lean.
-The final statement requires only the fitting direction window.
-\end{proof}
 
-The preserved completion covers all $1397$ proof modules, including the
-final deduction above. A fresh audit checks their source, object, log and
-dependency hashes, with only the standard accepted axioms. The full input
-has $5114$ clauses; its five counters retain $105$ corner occurrences
-involving $84$ distinct corners~\cite{criticalcountarchive,totalcountarchive,share145archive}.
 This discharges one local premise in the finite comparison. It gives no
 new global bound by itself. The other rows, apart from the two proved
 above, remain unproved for arbitrary snakes in the current Lean development.
 For $012340$ with middle count at most two, an independent native refutation
 supports $22$; its concrete interpretation and Lean replay remain unfinished.
 
-The remaining proposed restrictions have native solver exclusions with
-incomplete contradiction certificates. In particular, two proof-generation
+The remaining proposed restrictions have computational exclusions, while their
+complete Lean derivations remain unfinished. In particular, two proof-generation
 attempts for the outer-pair row reached their time limits. A checked local
 forest with counts $(6,5,4,5,3)$ attains its proposed sum nine, so the same
 relaxed local conditions cannot force ten. Such forests have multiple
@@ -3019,40 +3423,11 @@ proposition remains valid under its displayed hypotheses; its second cycle
 constraint must be reassessed in the restricted graph.
 
 
-\subsection{Excluding the recorded seven-edge cycle}\label{sec:seven-cycle-exclusion}
-\begin{theorem}\label{thm:nine-window-exclusion}
-Let $x_r,\ldots,x_{r+9}$ be a fitting window of a snake in $\Q_9$ whose
-transition word, after coordinate relabelling, is $012301430$.
-The following conditions cannot hold simultaneously:
-\[
-\alpha_{r+3}\ge6,\qquad
-(\alpha_{r+4},\alpha_{r+5},\alpha_{r+6},\alpha_{r+7},\alpha_{r+8})
-=(3,3,3,5,2).
-\]
-There is no restriction on the parity of the path length or the window start.
-\end{theorem}
-\begin{proof}
-Translate the first window vertex to zero and relabel the coordinates.
-The window vertices become
-\[
-0,1,3,7,15,14,12,28,20,21.
-\]
-Every actual snake containing this window satisfies the necessary finite
-local conditions: the prescribed vertices are selected, selected vertices
-have degree one or two, at most two vertices are endpoints, and no selected
-subset contains a cycle. The internal singleton counts are determined by
-the twenty-one opposite corners from Lemma~\ref{lem:window-missing-corners}.
-Impose the displayed counts and use the universal internal bound
-twenty-one for the remaining counts.
+\subsection{Effect of the nine-transition exclusion}
+Theorem~\ref{thm:nine-window-exclusion} gives the complete actual-snake
+exclusion used in the following calculation.
 
-The resulting Boolean system has a checked contradiction. Its retained
-2353 clauses are justified by the local conditions, and all 1340 deductions
-of the refutation have passed Lean. The interpretation of those clauses,
-the coordinate normalization and the implication for arbitrary snakes have
-also passed Lean. Hence an actual snake satisfying the displayed conditions
-would give a satisfying assignment to a refuted system, a contradiction~\cite{sevencyclearchive}.
-\end{proof}
-The seven-edge cycle in Section~\ref{sec:odd-refined-model} contains the
+The seven-edge cycle in Appendix~\ref{sec:odd-refined-model} contains the
 word $012301430$ with stored counts $(6,3,3,3,5,2)$. Its first symbol
 represents an actual count of at least six, so Theorem~\ref{thm:nine-window-exclusion}
 excludes that row and prevents realization of this cycle by consecutive
@@ -3124,45 +3499,18 @@ The five-cycle contains a canonical $012032$ window with internal counts
 $(3,5,4,5,3)$. The following exclusion removes this cycle and the earlier
 four-cycle from the strengthened model.
 
-\subsection{A further restriction on the five internal counts}\label{sec:five-count-exclusion}
-\begin{theorem}\label{thm:alternate-three-four-three}
-Let $x_r,\ldots,x_{r+6}$ be a fitting canonical $012032$ window in a snake
-in $\Q_9$. If
-\[
-\alpha_{r+1}=3,\qquad \alpha_{r+3}=4,\qquad \alpha_{r+5}=3,
-\]
-then
-\[
-\alpha_{r+2}\ge6\quad\text{or}\quad\alpha_{r+4}\ge6.
-\]
-There is no restriction on the parity of the path or the positions of its endpoints.
-\end{theorem}
-\begin{proof}
-Translate and permute coordinates so that the window vertices are
-$0,1,3,7,6,14,10$. Each internal vertex has seven unused directions and
-therefore twenty-one opposite corners. Its singleton-square count equals
-the number of these corners absent from the path, by
-Lemma~\ref{lem:window-missing-corners}.
+\subsection{Effect of the five-count exclusion}
+Theorem~\ref{thm:alternate-three-four-three} gives the complete actual-snake
+exclusion used in the following calculation.
 
-Suppose both intervening counts are at most five. The five count intervals
-are then $[3,3],[0,5],[4,4],[0,5],[3,3]$. The necessary conditions for the
-selected vertices include degree at most two, positive degree, at most two
-endpoints, these corner-count intervals, and exclusion of selected cycles.
-A retained set of 4163 clauses from these conditions admits a contradiction
-certificate of 18606 deductions. Its clauses and every deduction, followed
-by their interpretation for an arbitrary snake, have been checked in Lean.
-The checked interpretation uses the stated upper bounds of five; equality
-at these two positions is unnecessary. The contradiction excludes the
-assumed intervals and proves the disjunction~\cite{fivecount140archive}.
-\end{proof}
 
 The count vectors $(3,5,4,5,3)$ and $(3,5,4,4,3)$ are both excluded.
 They occur in the saved five-cycle and the earlier four-cycle, respectively.
 Recognition at the two available six-transition positions removes both
 cycles. Reversal preserves the statement. The additional-share six-cycle
 has no matching window and remains an obstruction for that profile.
-These statements identify deleted cycles; the new graph minimum has not
-yet been computed.
+These statements identify the deleted cycles. Appendix~\ref{sec:zero-credit-exclusion}
+gives the completed zero-credit calculation for the resulting graph.
 
 \subsection{Zero occurrence credit after the five-count exclusion}\label{sec:zero-credit-exclusion}
 Apply Theorem~\ref{thm:alternate-three-four-three} at both available
@@ -3330,211 +3678,11 @@ range $2173/9$ at that mean. Their comparison is
 $235-1245/42254$. Thus $15$ is the first integer floor not excluded by this
 cycle and its subwalks. This is not a sufficiency result for the full graph.
 Floor $18$ remains the existing requirement in the retained conditional
-profile, and is the selected next local theorem target.
+profile and one of its five local share targets.
 
-A separate contradiction query for the weaker floor $13$ used five broad
-count intervals $[0,21]$, share cap $12$, and no added cycle exclusions.
-Its dependency-trimmed Boolean certificate has 29165 deductions and
-1699457 propagation hints; two direct replays end in the empty clause.
-The Lean interpretation and replay had passed 23 of 231 planned modules
-when the stronger range obstruction made the weaker target insufficient
-for the comparison. The partial proof and all certificates are preserved.
-No actual-snake share-$13$ theorem is claimed. This calculation establishes
-a necessary threshold for the fixed graph argument, with no new global
-upper bound and no claim of an optimal range on the full graph.
+The separate share-13 certificate and its preserved partial verification
+are recorded in Appendix~\ref{app:historical-verification-records}.
 
-\subsection{A cycle unaffected by the selected share and occurrence credits}\label{sec:share18-unaffected-cycle}
-The next experiment isolates the effect of the proposed count-free share
-floor $18$ for $012034$. It retains the graph and every other weight from
-the completed-share profile. At zero occurrence credit, the exact finite-graph
-calculation gives mean $5399/11$ and potential range $593$, hence comparison
-\[
-\frac{12138275}{51599}=235+\frac{12510}{51599}.
-\]
-Its attaining eleven-cycle contains four occurrence events and no $012034$
-suffix. Combining that cycle with the preceding nine-cycle suggests testing
-the occurrence credit $C=601/36$. The two cycles alone admit mean $4472/9$
-and range $4391/18$, with comparison $235-3405/84544$. These parameters
-were therefore a candidate for the full graph, with no sufficiency claim.
-
-The full-graph test instead returns mean $3445/7$ and range $608$, giving
-\[
-\frac{23182022}{98535}=235+\frac{26297}{98535}.
-\]
-Its attaining fourteen-cycle has no occurrence events and no $012034$
-suffix in either orientation. This produces a stronger obstruction than
-the numerical failure of that particular credit~\cite{share144archive}.
-
-\begin{proposition}\label{prop:share18-independent-obstruction}
-Keep this retained graph, its other completed-share weights, and its
-occurrence indicator fixed. Changing only the count-free share floor for
-$012034$ and the nonnegative uniform occurrence credit cannot reduce the
-existing comparison below $235$.
-\end{proposition}
-\begin{proof}
-The fourteen-cycle has the unscaled weights
-\[
-256,\ 246,\ 736,\ 496,\ 371,\ 736,\ 364,\
-496,\ 486,\ 376,\ 736,\ 371,\ 496,\ 724.
-\]
-Their sum is $6890$. Its six-transition suffixes consist of eight copies
-of $012304$, four of $012301$, and two of $012340$, where shapes are
-identified up to coordinate relabelling and reversal. Thus neither of the
-two permitted changes alters any of its weights. Summing the potential
-inequalities around the cycle gives $14\mu\le6890$, or $\mu\le3445/7$.
-For $\mu,C,B,R\ge0$, the comparison consequently satisfies
-\[
-\frac{1098960+8\mu+BC+R}{4200+\mu}
-\ge\frac{1098960+8\mu}{4200+\mu}
-\ge\frac{1544056}{6569}
-=235+\frac{341}{6569}>235.
-\]
-The second ratio decreases with $\mu$ on this domain. The existing
-occurrence allowance is $B=24$. Lean checks the cycle summation and the
-comparison implications. A separate audit reconstructs the fourteen saved
-rows from the source graph and checks closure, shapes, weights and absence
-of occurrence events. The computation checks the potential inequalities
-on all $4661572$ retained edges; the independent audit checks the saved
-cycle and potential range, without claiming a second full-graph verification.
-\end{proof}
-
-This proposition restricts the chosen comparison method. It gives no
-improved upper bound for arbitrary snakes. Progress within this graph
-requires another share contribution or an exclusion affecting the surviving
-cycle. The conditional profile using all additional share floors remains
-separate and is not contradicted by this obstruction.
-
-The selected share-$18$ claim also has a preserved Boolean contradiction
-certificate. Its input uses $11924$ variables and $96091$ clauses, five
-broad count intervals $[0,21]$, radius four, resolution twelve, and share
-cap $17$. The independently checked certificate contains $145215$
-deductions, $14710881$ propagation references and $13224$ original core
-clauses. Its complete Lean interpretation remains pending. The first
-export passed six modules before memory pressure stopped the replay.
-A direct initial-database construction has a checked general soundness
-argument; a separately materialized database passes a $6006$-reference
-prefix check. The link from the latter representation to truth of the
-original clauses, the remaining replay, and the actual-snake interpretation
-are still required. No completed local share-$18$ theorem is claimed.
-
-\subsection{A necessary relation between two share floors}\label{sec:joint-share-floors}
-The same fourteen-cycle gives a more precise restriction on the next share
-targets. Keep the graph and all other edge weights fixed. Let $F\ge11$ and
-$G\ge4$ be the proposed count-free floors for $012301$ and $012340$,
-respectively, in the existing resolution-twelve units. The cycle weights become
-\[
-256,\ 240+F,\ 736,\ 496,\ 360+F,\ 736,\ 360+G,\
-496,\ 480+F,\ 376,\ 736,\ 360+F,\ 496,\ 720+G.
-\]
-The cycle has no occurrence events and no $012034$ suffix in either
-orientation. Its weights are therefore independent of the uniform occurrence
-credit and of any further change to the $012034$ floor.
-
-\begin{proposition}\label{prop:joint-share-necessary}
-Under these fixed-graph assumptions, a potential comparison strictly below
-$235$ requires
-\begin{equation}\label{eq:joint-share-necessary}
-457F+225G>9848+7BC.
-\end{equation}
-Here $B\ge0$ is the occurrence allowance, $C\ge0$ its uniform credit,
-$\mu\ge0$ the certified mean, and $R\ge0$ the potential range.
-\end{proposition}
-\begin{proof}
-Summing around the cycle gives
-\[
-7\mu\le3424+2F+G.
-\]
-Its first two consecutive edges have total weight $496+F$.
-Summing their potential inequalities and bounding the difference between
-their endpoint potentials by $R$ gives
-\[
-2\mu\le496+F+R.
-\]
-A comparison below $235$ is equivalent to
-$111960+BC+R<227\mu$. Substituting the range inequality yields
-$111464-F+BC<225\mu$. Multiplication by seven followed by the cycle
-mean bound gives~\eqref{eq:joint-share-necessary}. Lean checks these
-implications. A separate saved-cycle calculation checks the edge weights
-and their source identities~\cite{share145archive}.
-\end{proof}
-
-Three consequences guide the next computation. First, keeping the effective
-$012340$ floor at $4$, even increasing $F$ to $19$ leaves the comparison at least
-\[
-\frac{7723775}{32866}=235+\frac{265}{32866}.
-\]
-The same lower bound holds for smaller $F$, since the cycle edge weights
-are then no larger. Second, with $F=16$ and integer $G$, a successful
-comparison requires $G\ge12$. Third, with $F=G=16$ and the existing
-allowance $B=24$, it requires $C<19/3$. These are necessary conditions.
-They do not show that the remaining floors or credits suffice for the
-full graph, nor do they establish an improved bound for arbitrary snakes.
-
-The preceding eleven-cycle strengthens this restriction. It uses only the
-suffix shapes $012032$, $012314$ and $012031$, has base total $5399$,
-and contains four occurrence events. Consequently neither $F$ nor $G$
-changes its weights, and it always imposes
-\[
-11\mu\le5399+4C.
-\]
-With $B=24$, combining this inequality with the two-edge range inequality
-and a comparison below $235$ gives $11329-11F<636C$. Eliminating $C$
-using~\eqref{eq:joint-share-necessary} yields the stronger necessary condition
-\begin{equation}\label{eq:two-cycle-share-necessary}
-325F+159G>9074.
-\end{equation}
-In particular, retaining the eleven-cycle unchanged while fixing $F=16$
-requires integer $G\ge25$. This supersedes the weaker requirement $G\ge12$
-obtained from the fourteen-cycle alone.
-
-\begin{proposition}\label{prop:two-cycle-share16-obstruction}
-Keep these two cycles, their other weights, and the occurrence allowance
-$B=24$ fixed. Share floors at most $16$ for each of $012301$ and $012340$,
-together with any uniform occurrence credit and any $012034$ floor,
-leave the comparison at least
-\[
-\frac{551875}{2348}=235+\frac{95}{2348}>235.
-\]
-\end{proposition}
-\begin{proof}
-It is enough to use the edge-weight upper bounds with $F=G=16$.
-The fourteen-cycle gives $\mu\le496$ and $R\ge2\mu-512$.
-The eleven-cycle gives $24C\ge66\mu-32394$. Therefore
-\[
-\frac{1098960+8\mu+24C+R}{4200+\mu}
-\ge\frac{1066054+76\mu}{4200+\mu}
-\ge\frac{551875}{2348}.
-\]
-The last ratio decreases with $\mu\ge0$, so the final inequality follows
-from $\mu\le496$. Lean checks the implication and the exact gap above $235$.
-The listed arithmetic constraints attain equality at
-$\mu=496$, $C=57/4$ and $R=480$. This establishes the optimum of this
-arithmetic relaxation only; no full-graph potential is asserted.
-\end{proof}
-
-The existing $012032$ share-$16$ target is therefore relevant in addition
-to the two share floors above. It adds $57$ to the eleven-cycle total,
-raising that cycle's mean to $496$ at zero occurrence credit. The three
-proposed share floors then give mean $496$ on both saved cycles without
-occurrence credit. The other graph cycles, local proofs and global
-interpretation remain separate obligations.
-
-The saved Boolean certificate for $012301$ at cap $15$ has now been
-converted and independently replayed in full: $285541$ deductions and
-$31017505$ propagation references yield a contradiction from $12977$
-original core clauses. The original input has $11378$ variables and
-$92656$ clauses, including sixteen exclusions of induced eight-cycles;
-six of these exclusions occur in the retained core. The count intervals
-are all $[0,21]$. Interpreting this contradiction as a share-$16$ theorem
-still requires the complete Lean replay and the actual-snake interpretation,
-including the cycle exclusions.
-
-For the earlier share-$18$ proof, all $104$ smaller database parts now
-have checked truth-transfer arguments from the original clause chunks.
-The complete assembly reached its time limit without a checked theorem.
-The initial-database connection and the complete local proofs therefore
-remain pending. The successful component checks and the complete Boolean
-replay are recorded separately from those unresolved obligations.
 
 \subsection{What an integer improvement requires}
 The comparison~\eqref{eq:improved-potential} excludes length 235 exactly when
@@ -3559,312 +3707,82 @@ cycle, change the allowed walks or improve the global accounting. The
 saved cycles identify concrete windows for that next test; they are
 sequences in the comparison graph and supply no snake constructions.
 
-\section{Remaining requirements for a stronger bound}\label{sec:closure}
-The maintained interval is $191\le a(9)\le235$. The direct criteria in Section~\ref{sec:six-direct} require a universal six-count floor, a bound on total shortfall, or one of the stated joint count and empty-square assumptions. The proved $0123041$ class and the necessary $0120324$ intervals do not discharge these premises. For the separate share argument, the newer proof has
-completed its graph-coverage and weight-interpretation steps. Its remaining
-requirements are:
-\begin{enumerate}
-\item Supply the remaining 1358 refutations in the exact union of 1378
-reference keys. Twenty entries have been discharged, with the equivalence
-to the reduced premise checked. The checked retention theorem and bound assembly use that
-union directly; reconstruction of two larger catalogue propositions is
-unnecessary. An exact source selection identifies the required entries.
-It does not prove their refutations.
-\item Complete the finite potential certificate on all 791 assigned
-direction/history contexts, for both floor choices, and check the final
-assembly. The full-key walk, total charge and telescoping implications
-are already checked. Exact-integer scans of all 4947008 accepted keys and
-the checked potential ranges support this task; partial Lean coverage
-does not replace its universal edge premise.
-\item For 234, additionally prove the five local shares
-$(16,18,16,16,16)$ for $012032,012034,012301,012340,012345$, including
-their geometric interpretation and reversal. The completed profile needs
-none of these additional share assumptions and currently recovers 235.
-\end{enumerate}
+\section{Historical certificate and verification records}\label{app:historical-verification-records}
+The following records retain the evidence and unfinished tasks at their
+stated cutoffs. The later initial-database connection described in
+Section~\ref{sec:verification} supersedes that specific pending status;
+the earlier attempts remain part of the preserved record.
 
-Corollary~\ref{cor:reference-potential-bounds} states exactly how these
-requirements imply the two numerical bounds. The reference and potential
-tasks serve both arguments. The reduced $012034$ target avoids proving a
-stronger share than this comparison needs. It remains a mathematical
-obligation, irrespective of any earlier unsuccessful proof attempt.
+\subsection{The share-13 attempt at milestone 143}
 
-Proposition~\ref{prop:least-floors} identifies the limits of further reducing
-these five floors within the current integer box. Proposition~\ref{prop:joint-potential-optimality}
-settles the slope/range tradeoff for three specified earlier profiles;
-it does not settle the best range at the reduced floor 18. The baseline unsaturated
-cycle rules out such improvements while that graph is retained. The refinements in Section~\ref{sec:sum-refinements} replace this cycle; the later attaining cycles also avoid the additional $0123104$ target and leave the integer comparisons unchanged. The endpoint-occurrence bound must additionally address the obstruction in Proposition~\ref{prop:uniform-occurrence-credit}. Stronger
-geometric restrictions, improved boundary accounting or information about
-actual initial and final states can change these hypotheses.
+A separate contradiction query for the weaker floor $13$ used five broad
+count intervals $[0,21]$, share cap $12$, and no added cycle exclusions.
+Its dependency-trimmed Boolean certificate has 29165 deductions and
+1699457 propagation hints; two direct replays end in the empty clause.
+The Lean interpretation and replay had passed 23 of 231 planned modules
+when the stronger range obstruction made the weaker target insufficient
+for the comparison. The partial proof and all certificates are preserved.
+No actual-snake share-$13$ theorem is claimed. This calculation establishes
+a necessary threshold for the fixed graph argument, with no new global
+upper bound and no claim of an optimal range on the full graph.
+\subsection{The share-18 certificate at milestone 144}
+The following paragraph describes the milestone-144 cutoff.
 
-The contributor's separate seven-centre count-only proposal also targets 234.
-Its inspected production record retains unfinished local certificates and
-transition checks~\cite{conditional234archive}. It is distinct from the present
-five-centre share argument and supplies no stronger main theorem here.
+The selected share-$18$ claim also has a preserved Boolean contradiction
+certificate. Its input uses $11924$ variables and $96091$ clauses, five
+broad count intervals $[0,21]$, radius four, resolution twelve, and share
+cap $17$. The independently checked certificate contains $145215$
+deductions, $14710881$ propagation references and $13224$ original core
+clauses. Its complete Lean interpretation remains pending. The first
+export passed six modules before memory pressure stopped the replay.
+A direct initial-database construction has a checked general soundness
+argument; a separately materialized database passes a $6006$-reference
+prefix check. The link from the latter representation to truth of the
+original clauses, the remaining replay, and the actual-snake interpretation
+are still required. No completed local share-$18$ theorem is claimed.
+\subsection{The native $012301$ replay and assembly attempt at milestone 145}
+The following paragraphs describe the milestone-145 cutoff. Their
+initial-database connection was subsequently completed in milestone 146;
+the full local share theorems remain unfinished.
 
-\subsection{Sufficient charge inequalities}
-\begin{proposition}[Explicit charge targets]\label{prop:charge-targets}
-If every nontrivial snake satisfies $G_{12}\ge114v-191$, then $a(9)\le230$. If the weaker estimate $G_{12}\ge114v-1145$ holds for every nontrivial snake, then $a(9)\le231$.
-\end{proposition}
-\begin{proof}
-Proposition~\ref{prop:share-loss} gives $G_{12}+840v\le221136$. The first hypothesis gives $954v\le221327<954\cdot232$, hence $v\le231$. The second gives $954v\le222281<954\cdot233$, hence $v\le232$. Subtract one to count edges. The one-vertex case satisfies both conclusions directly.
-\end{proof}
-These conditional implications have been checked in Lean. Neither hypothesis has been proved for all snakes. A complete improvement requires verified local share bounds, coverage of every allowed sequence, and control of the initial and terminal contributions. Weighted packing is valid under the stated capacities; it supplies no additional credit on the zero-credit cycle of Proposition~\ref{prop:zero-credit}. The targets 230 and 231 remain longer-term conditional estimates.
+The saved Boolean certificate for $012301$ at cap $15$ has now been
+converted and independently replayed in full: $285541$ deductions and
+$31017505$ propagation references yield a contradiction from $12977$
+original core clauses. The original input has $11378$ variables and
+$92656$ clauses, including sixteen exclusions of induced eight-cycles;
+six of these exclusions occur in the retained core. The count intervals
+are all $[0,21]$. Interpreting this contradiction as a share-$16$ theorem
+still requires the complete Lean replay and the actual-snake interpretation,
+including the cycle exclusions.
 
-\subsection{A candidate restriction on consecutive counts of four}\label{sec:four-run}
-A direction-independent exclusion of six consecutive counts equal to four would replace several special direction cases by one restriction on the count sequence.
-\begin{conjecture}[Six-centre four-count restriction]\label{conj:six-fours}
-No snake in $\Q_9$ has six consecutive internal vertices whose singleton-square counts all equal four.
-\end{conjecture}
-An initial radius-four screen excluded all 132 normalized induced eight-transition patterns with seven internal counts equal to four. A shorter screen then excluded all 34 normalized induced seven-transition patterns with six such counts. The normalization of arbitrary snake segments and the complete 34-case classification have now been checked in Lean. Four numerical exclusions have also passed their proof replays; the remaining numerical cases are pending. Consequently Conjecture~\ref{conj:six-fours} remains unproved. The implication from all 34 exclusions to the conjecture is checked separately.
+For the earlier share-$18$ proof, all $104$ smaller database parts now
+have checked truth-transfer arguments from the original clause chunks.
+The complete assembly reached its time limit without a checked theorem.
+The initial-database connection and the complete local proofs therefore
+remain pending. The successful component checks and the complete Boolean
+replay are recorded separately from those unresolved obligations.
+\subsection{Completed initial-database connection at milestone 146}
+The original clause assignment transfers to all 104 chunks and then to the
+preserved materialized initial tree. The original constructor body is
+unchanged. The transfer composes with the existing prefix of 1055 deductions
+using 6006 propagation references. Three checked modules supply four axiom
+reports. The recorded checks use only the standard accepted axioms.
+The complete share-18 replay and actual-snake interpretation remain
+unfinished, as does the actual-snake share-16 theorem for $012301$
+~\cite{bridge146archive}.
 
-A five-centre all-four local forest was found and independently checked by explicit vertex and square counting; a separate model also accepted this fixed configuration. Hence the corresponding local-model exclusion cannot be shortened to five centres. This does not establish a complete snake with such a run. An independent scan of the 131 saved 191-edge snakes found maximum run length two. The bank is not exhaustive, so this observation supplies no universal bound. The conjectured six-centre restriction would replace several direction-specific obstructions with one condition on the count sequence.
-
-\begin{proposition}[Conditional frequency consequence]
-Assume Conjecture~\ref{conj:six-fours}. Among any $N$ consecutive internal positions, at least $\lfloor N/6\rfloor$ have singleton-square count different from four.
-\end{proposition}
-\begin{proof}
-Partition the first $6\lfloor N/6\rfloor$ positions into disjoint blocks of six. Each block contains a count different from four. The sequence argument and its conditional application to arbitrary snakes have been checked in Lean.
-\end{proof}
-
-\subsection{A limitation of uniform singleton-density estimates}
-The published bank includes a 192-vertex snake for which independent counting gives $T=1632$. This particular census has been checked in Python; its complete connection to the Lean incidence development remains to be checked. It implies that any valid uniform estimate $T\ge cv$ has $c\le17/2$.
-
-The elementary square-census equations alone cannot turn such an estimate into an upper bound below 210 edges. Indeed, the numerical census
-\[
-(v,a_0,a_1,a_2,a_3)=(211,17,1795,2587,209)
-\]
-satisfies
-\[
-a_0+a_1+a_2+a_3=4608,\qquad
- a_1+2a_2+3a_3=36v,\qquad a_3=v-2,
-\]
-and $a_1\ge(17/2)v$. No path realizing this census is asserted. It demonstrates that these numerical premises permit 211 vertices. The arithmetic implication has been checked in Lean. A stronger conclusion requires additional geometric restrictions, a length-dependent estimate, or another invariant.
-
-\section{A numerical conjecture and its limitations}\label{sec:hypothesis}
-\begin{center}
-\begin{tabular}{rrrr}
-\toprule
-$n$ & $a(n)$ & $3\cdot2^{n-3}$ & correction\\
-\midrule
-3&4&3&1\\4&7&6&1\\5&13&12&1\\
-6&26&24&2\\7&50&48&2\\8&98&96&2\\
-\bottomrule
-\end{tabular}
-\end{center}
-The baseline coefficient is also recovered from successive differences within the two triples:
-\[
-\frac{7-4}{2^4-2^3}=\frac{13-7}{2^5-2^4}
-=\frac{50-26}{2^7-2^6}=\frac{98-50}{2^8-2^7}=\frac38.
-\]
-Continuing the correction as $1,1,1,2,2,2,4,4,4,\ldots$ gives
-\begin{equation}\label{eq:model}
-\widehat a(n)=3\cdot2^{n-3}+2^{\lfloor(n-3)/3\rfloor},\qquad n\ge3.
-\end{equation}
-The terms at dimensions one and two are assigned separately as 1 and 2.
-
-\begin{conjecture}\label{conj:196}
-The maximum snake length in $\Q_9$ is $196$ edges.
-\end{conjecture}
-This numerical conjecture is motivated only by the displayed extrapolation; it is not used in any theorem in this paper. Equation~\eqref{eq:model} predicts $3\cdot64+4=196$.
-
-\begin{proposition}[Model recurrence]
-For $n\ge3$, the model satisfies
-\[
-\widehat a(n+3)+6\cdot2^{\lfloor(n-3)/3\rfloor}=8\widehat a(n).
-\]
-\end{proposition}
-\begin{proof}
-Put $t=n-3$ and $c=2^{\lfloor t/3\rfloor}$. Since $\lfloor(t+3)/3\rfloor=\lfloor t/3\rfloor+1$, the left side is
-$24\cdot2^t+2c+6c=8(3\cdot2^t+c)$.
-\end{proof}
-At $n=6$ the recurrence predicts $8\cdot26-12=196$. This is the same evidence as the correction table, not an independent argument.
-
-\begin{proposition}[The known terms do not determine the ninth prediction]
-The model
-\[
-\widetilde a(n)=3\cdot2^{n-3}+1+\left\lfloor\frac{n-3}{3}\right\rfloor
-\qquad(n\ge3)
-\]
-agrees with every known term, after assigning the first two terms separately, and gives $\widetilde a(9)=195\ne196$.
-\end{proposition}
-\begin{proof}
-For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, the corrections are respectively 3 and 4. Direct substitution proves the claim.
-\end{proof}
-Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
-
-\section{Construction and the requirements for optimality}\label{sec:optimality}
-\subsection{The next-length criterion}
-\begin{lemma}[Prefix restriction]\label{lem:prefix}
-Every prefix of a snake is a snake.
-\end{lemma}
-\begin{proof}
-Restrict the vertex sequence to its initial indices. Distinctness is inherited. Adjacency between any two retained indices has the same value and the same consecutive-index condition as in the original sequence.
-\end{proof}
-
-\begin{theorem}[Next-length exclusion]\label{thm:next}
-For every integer $b\ge0$, all snakes in $\Q_9$ have length at most $b$ if and only if no snake has length $b+1$.
-\end{theorem}
-\begin{proof}
-The upper bound directly excludes $b+1$. Conversely, a snake of any length larger than $b$ has a prefix of length $b+1$ by Lemma~\ref{lem:prefix}.
-\end{proof}
-
-\begin{corollary}
-Conjecture~\ref{conj:196} is equivalent to the conjunction of a 196-edge construction and nonexistence of a 197-edge snake. A 196-edge construction would contain a 192-edge prefix and would refute the proposed upper bound 191.
-\end{corollary}
-\begin{proof}
-Apply Theorem~\ref{thm:next} with $b=196$, and restrict a 196-edge snake to its first 193 vertices.
-\end{proof}
-For the competing optimum 191, the missing exclusion is the finite statement that no sequence $v_0,\ldots,v_{192}\in\{0,1\}^9$ is distinct and satisfies
-\[
-\Ham(v_i,v_j)=1\quad\Longleftrightarrow\quad |i-j|=1.
-\]
-The pairwise condition is required for every $0\le i<j\le192$. Neither next-length exclusion has been proved.
-
-\subsection{Endpoint maximality and maximum length}
-A snake $P=(v_0,\ldots,v_L)$ is blocked at its right endpoint when every neighbor $w$ of $v_L$ either equals a vertex $v_i$ with $i<L$, or is adjacent to such a vertex.
-\begin{lemma}[Blocking prevents endpoint extension]\label{lem:block}
-A right-blocked snake cannot be extended by appending one vertex while retaining its entire ordered sequence.
-\end{lemma}
-\begin{proof}
-An appended $w$ must be adjacent to $v_L$. If $w=v_i$ for an earlier index, distinctness fails. If $w\sim v_i$ for $i<L$, the appended vertex has a chord to an index at least two positions earlier. Both alternatives contradict the snake definition.
-\end{proof}
-
-\begin{theorem}[Endpoint maximality does not imply maximum length]
-There is a 93-edge snake in $\Q_9$ blocked at both endpoints, although a 191-edge snake exists in the same cube.
-\end{theorem}
-\begin{proof}
-The 93-edge sequence in Appendix~\ref{app:witness} specifies 94 vertices. Direct calculation verifies distinctness and the induced adjacency condition for all $\binom{94}{2}=4\,371$ unordered pairs. The appendix gives an earlier blocking vertex for each of the nine endpoint moves, in both the original and reversed orderings. Lemma~\ref{lem:block} excludes extension at either end. Theorem~\ref{thm:lower} supplies a strictly longer snake.
-\end{proof}
-
-\begin{theorem}[A sufficient universal blocking condition]
-If every 191-edge snake in $\Q_9$ is blocked at its right endpoint, then $a(9)=191$.
-\end{theorem}
-\begin{proof}
-If a 192-edge snake existed, its 191-edge prefix would admit extension by its remaining final vertex. This contradicts the universal blocking premise. Apply Theorem~\ref{thm:next} and the verified lower bound.
-\end{proof}
-The premise concerns every 191-edge snake. Blocking the 131 recorded classes is insufficient until completeness of the collection is established. Repeated recovery of the same classes is not a completeness proof.
-
-\subsection{Cycles as an alternative construction route}
-\begin{theorem}[Deleting a cycle vertex]
-Deleting one vertex from an induced cycle of $C$ vertices leaves a snake of length $C-2$.
-\end{theorem}
-\begin{proof}
-Order the cycle as $v_0,\ldots,v_{C-1},v_0$ and delete $v_{C-1}$. Among the remaining vertices, the only surviving cycle edges join consecutive indices. The closing edge involved the deleted vertex; the induced-cycle hypothesis forbids all other edges. The resulting path has $C-1$ vertices and $C-2$ edges.
-\end{proof}
-\begin{corollary}
-An induced cycle with 194 vertices in $\Q_9$ would disprove the upper bound 191.
-\end{corollary}
-\begin{proof}
-Deletion gives a 192-edge snake.
-\end{proof}
-In particular, a 192-vertex coil gives only a 190-edge snake through this deletion operation. Edge and vertex counts cannot be interchanged.
-
-\subsection{The two-layer construction and its obstruction}
-Write a vertex of $\Q_9$ as $(v,b)$ with $v\in\Q_8$ and $b\in\{0,1\}$. Vertices in the same layer retain their original adjacency. Across the layers,
-\[
-(u,0)\sim(v,1)\quad\Longleftrightarrow\quad u=v.
-\]
-The same description defines the product of an arbitrary graph with a binary edge. Taylor discusses such lifts in \cite{taylor}.
-
-\begin{theorem}[Exact joining condition]\label{thm:join}
-Let $P=(p_0,\ldots,p_r)$ and $R=(q_0,\ldots,q_s)$ be induced paths in a graph. The ordered sequence
-\[
-(p_0,0),\ldots,(p_r,0),(q_0,1),\ldots,(q_s,1)
-\]
-is an induced path precisely when
-\[
-p_i=q_j\quad\Longleftrightarrow\quad i=r\ \hbox{and}\ j=0.
-\]
-When valid, its length is $r+s+1$.
-\end{theorem}
-\begin{proof}
-The layer labels ensure that vertices in different layers are distinct. Each individual path retains its distinctness and induced adjacency conditions. Every cross-layer edge is caused by equality of the base vertices. In the displayed order there is exactly one consecutive pair across layers, at $(p_r,0),(q_0,1)$. Therefore the induced condition requires exactly the stated equality and forbids all other equalities. These conditions also suffice, since all possible pairs have been covered. The vertex count is $(r+1)+(s+1)$, hence the edge count is $r+s+1$.
-\end{proof}
-
-\begin{corollary}[Single-crossing length constraints]
-Assume the known bound $a(8)=98$. A single-crossing snake in $\Q_9$ has length at most 197. Length 196 requires layer lengths $(98,97)$ or $(97,98)$; length 197 requires $(98,98)$.
-\end{corollary}
-\begin{proof}
-The two layer segments are eight-dimensional snakes. Thus $r,s\le98$ and $L=r+s+1$. For $L=196$, $r+s=195$ forces the two possibilities; for $L=197$, both upper bounds must be attained.
-\end{proof}
-\begin{theorem}[Integer realization of the layer construction]
-The map $J(u,b)=u+256b$, for $0\le u<256$ and $b\in\{0,1\}$, is injective and preserves adjacency in both directions between $\Q_8\mathbin{\square}K_2$ and the integer encoding of $\Q_9$. Consequently, compatible layer paths of lengths 98 and 97 give a 196-edge snake under the same definition as the verified witness. Compatible paths of lengths 98 and 98 give a 197-edge snake and would refute the conjectured upper bound 196.
-\end{theorem}
-\begin{proof}
-The intervals $[0,255]$ and $[256,511]$ are disjoint, so equality of images forces equality of both components. Flipping a coordinate $k<8$ preserves the layer, because
-\[
-(u+256)\mathbin{\oplus}2^k=(u\mathbin{\oplus}2^k)+256,
-\qquad u\mathbin{\oplus}2^k<256.
-\]
-Flipping coordinate 8 exchanges $u$ and $u+256$. These are all nine possible flips. Thus adjacency within a layer is exactly eight-dimensional adjacency, while adjacency between layers requires equal base vertices. Compose this map with Theorem~\ref{thm:join}. The lengths become $98+97+1=196$ and $98+98+1=197$. Conversely, every unwanted equality between base vertices creates a nonconsecutive cross-layer edge, so the compatibility condition remains necessary after applying $J$.
-\end{proof}
-This argument covers snakes that cross a chosen coordinate exactly once. A general snake can cross every coordinate repeatedly. Its intersection with a layer can then be a disjoint union of paths, so bounding that entire intersection by a single-snake length would be invalid.
-
-The explicit compatible paths of lengths 96 and 94 in Appendix~\ref{app:joint-seed} give a 191-edge construction of this form. Restricted tests with a fixed 98-edge seed are described in Appendix~\ref{app:experiments}; their failure does not exclude other seeds or multiple-crossing paths.
-
-\section{Verification scope and remaining problem}\label{sec:verification}
-The global conclusion remains $191\le a(9)\le235$. The lower bound follows
-from the explicit witness. The upper bound uses the square identity,
-endpoint estimates, 1287 catalogue keys, a finite potential and path
-summation. The completed contributor theorem has a successful archived
-dependency audit~\cite{bound235archive}. Its final source and saved audit were
-reviewed and its potential independently reconstructed. A complete
-independent rebuild remains pending.
-
-For the newer share argument, every actual window has a consistent full
-direction/history/count key. All finite coverage classes and their assembly
-are checked. Every local weight component, including all 55 history rules
-and all compatible words, bounds the same five actual shares. The maximum,
-boundary estimate and total-weight budget are connected to arbitrary snakes.
-The exact-union assumption suffices to place their full-key sequence in the
-graph. These implications have passed Lean under the stated remaining
-reference and, for the conditional profile, local-share premises.
-
-The concrete potential ranges are checked. Independent exact-integer scans
-verify the two potential inequalities on every accepted graph key. The
-complete Lean edge-certificate batch remains unfinished. Its general
-assembly theorem and individual context receipts give partial progress;
-only completion of all required contexts and the final assembly can
-discharge the universal edge premise. Of the 1378 reference entries, twenty now have checked refutations in the
-current environment; the remaining 1358 form the reduced premise.
-
-The reduced five-floor target gives a strict margin of 30 at length 235.
-Its local share claims remain unproved. Earlier evidence for the stronger
-$012034$ target 20 supplies no proof of share 18 unless its contradiction
-and interpretation chain is completed. Finite cycles and open walks prove
-the stated limitations of the fixed comparison graphs, without asserting
-their realizability by complete snakes.
-
-The $012032$ pair bound, its equality geometry and parity restriction,
-the parity-free endpoint consequence and the twenty-four-window bound are
-checked for actual snakes. The nine-transition exclusion in
-Theorem~\ref{thm:nine-window-exclusion} also applies to arbitrary snakes and
-removes the recorded competing seven-edge cycle. The $0123041$ six-count bound, necessary intervals
-for low-total $0120324$ windows and fourth-count-three case are also checked. The direct shortfall theorem retains empty squares and requires no
-reference union or graph potential. Its sufficient upper bound on shortfall
-is unresolved. The broader sum family has mixed verification status, as
-detailed in Section~\ref{sec:sum-refinements}; neither its finite comparison
-nor the completed endpoint-equality and twenty-four-window theorems lower the maintained interval by themselves.
-
-No construction above 191 or matching optimality theorem has been obtained.
-The conjecture 196 remains a numerical extrapolation and is used in none
-of the proved bounds. Section~\ref{sec:closure} gives the precise remaining
-requirements for the current 234 argument and the changes that could
-strengthen it further.
-
-\appendix
 \section{Earlier complete finite models and their obstructions}\label{app:earlier-long-models}
 This appendix retains the earlier graph calculations and their original boundary estimates. Their exact finite statements remain valid for the recorded models. The current proof-supported comparison, stronger boundary estimate and remaining obligations are in Sections~\ref{sec:boundary21}--\ref{sec:closure}.
 
 \subsection{The limit of reweighting a fixed local calculation}
 Let $g_1,\ldots,g_5$ be the individual forced-share bounds at five centres, and let $H$ be the larger of their sum and another available total-share bound. For nonnegative coefficients $c,v_1,\ldots,v_5$ with $5c+\sum_i v_i=5$, the weighted share is at least $cH+\sum_i v_i g_i$. This follows by adding $c$ times the total bound and $v_i$ times each individual bound. The six vertices of this coefficient simplex are uniform weighting and weight five on a single centre.
 
-On the saved twenty-transition cycle of the eight-transition model, these six choices have integer means
+On the saved twenty-transition cycle of the eight-transition model, these six choices have means
 \[
 \frac{2468}{5},\quad\frac{987}{2},\quad493,\quad
 \frac{987}{2},\quad\frac{989}{2},\quad\frac{987}{2}.
 \]
-Their maximum is $989/2$. Linearity therefore bounds every fixed weighting in this relaxation by the same value on that cycle. Even with zero potential-range loss, setting $n=8$ in~\eqref{eq:general-window-potential} requires an integer mean greater than $9400/19>989/2$ to exclude $m=235$. The cycle coefficients were independently checked, and the convexity and boundary implications have passed Lean. This rules out that specific fixed-weight improvement; it does not constrain additional absent-vertex information or stronger count conditions.
+Their maximum is $989/2$. Linearity therefore bounds every fixed weighting in this relaxation by the same value on that cycle. Even with zero potential-range loss, setting $n=8$ in~\eqref{eq:general-window-potential} requires an unscaled mean greater than $9400/19>989/2$ to exclude $m=235$. The cycle coefficients were independently checked, and the convexity and boundary implications have passed Lean. This rules out that specific fixed-weight improvement; it does not constrain additional absent-vertex information or stronger count conditions.
 
 \subsection{Complete models before the eleven-transition refinements}
 The nine-transition model retains eight normalized directions and five count symbols in each state. A transition supplies nine directions and six counts, at internal positions 3 through 8. Its weight is $120b_{\mathrm{new}}+L$, where $L$ bounds the final five internal shares. Symbol six continues to represent $[6,21]$.
@@ -3886,7 +3804,7 @@ Above with both further count restrictions & $18823/4560$ & 13173896\\
 \end{center}
 The initial candidate refinement has unreplayed share premises. The forced-absence catalogues themselves are proved, while their inherited models retain earlier numerical rules. The complete eight-transition graph has 264384 states, and the nine-transition graph has 1026432. The changes in edge totals after adding history reflect different state spaces; they are not counts of newly allowed geometric configurations.
 
-For the nine-transition forced-absence model, the integer mean is $9891/20$, and the potential range is 12101. Equation~\eqref{eq:general-window-potential} gives the conditional estimate
+For the nine-transition forced-absence model, the unscaled mean is $9891/20$; the potential certificate uses denominator 20 and scaled range 12101. Equation~\eqref{eq:general-window-potential} gives the conditional estimate
 \[
 m\le\frac{22084829}{93891}.
 \]
@@ -3921,7 +3839,7 @@ Canonical labels alone do not always identify the longer word. For example,
 \]
 have identical triples of canonical nine-direction labels. Coordinate 0 has left the retained suffix before the last step, so that suffix does not distinguish its return from a new coordinate. The checked share rule for the first word cannot be applied to the second. That rule is omitted from the complete model; recovering it requires more history or another geometric proof. This explicit ambiguity prevents an unjustified identification of local contexts.
 
-All three final models in the comparison table have exact integer mean $18823/38$. Their potentials have range 23459 at denominator 38, and attaining cycles have 38 transitions. The conditional boundary calculation is
+All three final models in the comparison table have exact unscaled mean $18823/38$. Their potentials have range 23459 at denominator 38, and attaining cycles have 38 transitions. The conditional boundary calculation is
 \[
 (18823+4200\cdot38)m
 \le1099680\cdot38+8\cdot18823+23459,
@@ -4713,7 +4631,7 @@ Both endpoint counts are at least four, so $R_0=R_{v-1}=0$ and $2\alpha_0\ge8$. 
 The incidence estimate gives $T+35v\le9214$. Therefore $75v+3\le18428$, or $75v\le18425<75\cdot246$. Thus $v\le245$ and the edge count is at most 244. The zero-edge case is immediate.
 \end{proof}
 
-The sequence inequality and its conditional numerical consequence have also been checked in Lean. The exclusion of $(2,2,3)$ is now included in the complete window proof in Section~\ref{sec:window-aggregate}. A gap remains between the upper bound and the known construction.
+The sequence inequality and its conditional numerical consequence have also been checked in Lean. The exclusion of $(2,2,3)$ is now included in the complete window proof in Appendix~\ref{sec:window-aggregate}. A gap remains between the upper bound and the known construction.
 
 \subsection{The aggregate limit of local windows and the bounds 242 and 241}\label{sec:window-aggregate}
 The following smaller finite models explain the intermediate bounds. The complete 238 argument is retained in Appendix~\ref{app:bound238}, and the direct proof of 236 is in Appendix~\ref{app:bound236}. We decided the radius-three model for every triple of prescribed counts in $\{1,\ldots,6\}^3$ and both window shapes. Of the 216 triples, 144 admit an assignment for at least one shape. Two independent solvers with separate encodings returned the same answer in all 432 cases. Over bi-infinite sequences whose consecutive triples are admitted, the minimum mean count is $14/5$. It is attained by repeating $2,3,3,2,4$. The local restrictions proved above allow mean $7/3$. Larger counts were treated as unrestricted, so these values are lower bounds for the mean.
@@ -4728,6 +4646,7 @@ together with their reversals. Each of these has, for both window shapes and ori
 Suppose that no snake in $\Q_9$ contains three consecutive internal vertices whose counts form one of the triples above or their reversals. Then every snake in $\Q_9$ has at most 242 edges. If, in addition, no snake contains four consecutive internal vertices with counts $(2,4,2,3)$ or $(3,2,4,2)$, then every snake has at most 241 edges.
 \end{proposition}
 \begin{proof}
+For the first conclusion, paths with at most 242 edges already satisfy the claim; for the second, paths with at most 241 edges already satisfy it. In each remaining case all indexed internal counts below exist.
 Let $\beta_0,\ldots,\beta_{n-1}$ be the counts of the internal vertices, so $n=v-2$. Clamp each count above six to seven. Define $P$ on the 49 clamped pairs by the longest-path potential for the weight $14-5z$:
 $P(1,4)=3$, $P(2,2)=8$, $P(2,3)=6$, $P(2,4)=3$, $P(3,2)=9$, $P(3,3)=5$, $P(4,1)=12$, $P(4,2)=7$, $P(4,3)=2$, $P(c,1)=9$ and $P(c,2)=4$ for $c\ge5$, and $P=0$ otherwise. A check of all $8^3$ clamped triples shows that
 \[
@@ -5057,6 +4976,212 @@ Row & Direction word & Count word\\
 174 & $(0,1,2,3,0,4)$ & $(2,6,3,3,3)$\\
 175 & $(0,1,2,3,0,4)$ & $(3,4,3,4,4)$\\
 \end{longtable}
+
+\section{Further conditional targets}\label{app:research-targets}
+These conditional charge estimates, proposed count restrictions and
+limitations retain their original hypotheses. They supply additional
+research targets beyond the current conditional-234 argument.
+
+\subsection{Sufficient charge inequalities}
+\begin{proposition}[Explicit charge targets]\label{prop:charge-targets}
+If every nontrivial snake satisfies $G_{12}\ge114v-191$, then $a(9)\le230$. If the weaker estimate $G_{12}\ge114v-1145$ holds for every nontrivial snake, then $a(9)\le231$.
+\end{proposition}
+\begin{proof}
+Proposition~\ref{prop:share-loss} gives $G_{12}+840v\le221136$. The first hypothesis gives $954v\le221327<954\cdot232$, hence $v\le231$. The second gives $954v\le222281<954\cdot233$, hence $v\le232$. Subtract one to count edges. The one-vertex case satisfies both conclusions directly.
+\end{proof}
+These conditional implications have been checked in Lean. Neither hypothesis has been proved for all snakes. A complete improvement requires verified local share bounds, coverage of every allowed sequence, and control of the initial and terminal contributions. Weighted packing is valid under the stated capacities; it supplies no additional credit on the zero-credit cycle of Proposition~\ref{prop:zero-credit}. The targets 230 and 231 remain longer-term conditional estimates.
+
+\subsection{A candidate restriction on consecutive counts of four}\label{sec:four-run}
+A direction-independent exclusion of six consecutive counts equal to four would replace several special direction cases by one restriction on the count sequence.
+\begin{conjecture}[Six-centre four-count restriction]\label{conj:six-fours}
+No snake in $\Q_9$ has six consecutive internal vertices whose singleton-square counts all equal four.
+\end{conjecture}
+An initial radius-four screen excluded all 132 normalized induced eight-transition patterns with seven internal counts equal to four. A shorter screen then excluded all 34 normalized induced seven-transition patterns with six such counts. The normalization of arbitrary snake segments and the complete 34-case classification have now been checked in Lean. Four numerical exclusions have also passed their proof replays; the remaining numerical cases are pending. Consequently Conjecture~\ref{conj:six-fours} remains unproved. The implication from all 34 exclusions to the conjecture is checked separately.
+
+A five-centre all-four local forest was found and independently checked by explicit vertex and square counting; a separate model also accepted this fixed configuration. Hence the corresponding local-model exclusion cannot be shortened to five centres. This does not establish a complete snake with such a run. An independent scan of the 131 saved 191-edge snakes found maximum run length two. The bank is not exhaustive, so this observation supplies no universal bound. The conjectured six-centre restriction would replace several direction-specific obstructions with one condition on the count sequence.
+
+\begin{proposition}[Conditional frequency consequence]
+Assume Conjecture~\ref{conj:six-fours}. Among any $N$ consecutive internal positions, at least $\lfloor N/6\rfloor$ have singleton-square count different from four.
+\end{proposition}
+\begin{proof}
+Partition the first $6\lfloor N/6\rfloor$ positions into disjoint blocks of six. Each block contains a count different from four. The sequence argument and its conditional application to arbitrary snakes have been checked in Lean.
+\end{proof}
+
+\subsection{A limitation of uniform singleton-density estimates}
+The published bank includes a 192-vertex snake for which independent counting gives $T=1632$. This particular census has been checked in Python; its complete connection to the Lean incidence development remains to be checked. It implies that any valid uniform estimate $T\ge cv$ has $c\le17/2$.
+
+The elementary square-census equations alone cannot turn such an estimate into an upper bound below 210 edges. Indeed, the numerical census
+\[
+(v,a_0,a_1,a_2,a_3)=(211,17,1795,2587,209)
+\]
+satisfies
+\[
+a_0+a_1+a_2+a_3=4608,\qquad
+ a_1+2a_2+3a_3=36v,\qquad a_3=v-2,
+\]
+and $a_1\ge(17/2)v$. No path realizing this census is asserted. It demonstrates that these numerical premises permit 211 vertices. The arithmetic implication has been checked in Lean. A stronger conclusion requires additional geometric restrictions, a length-dependent estimate, or another invariant.
+
+\section{A numerical conjecture and its limitations}\label{sec:hypothesis}
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$n$ & $a(n)$ & $3\cdot2^{n-3}$ & correction\\
+\midrule
+3&4&3&1\\4&7&6&1\\5&13&12&1\\
+6&26&24&2\\7&50&48&2\\8&98&96&2\\
+\bottomrule
+\end{tabular}
+\end{center}
+The baseline coefficient is also recovered from successive differences within the two triples:
+\[
+\frac{7-4}{2^4-2^3}=\frac{13-7}{2^5-2^4}
+=\frac{50-26}{2^7-2^6}=\frac{98-50}{2^8-2^7}=\frac38.
+\]
+Continuing the correction as $1,1,1,2,2,2,4,4,4,\ldots$ gives
+\begin{equation}\label{eq:model}
+\widehat a(n)=3\cdot2^{n-3}+2^{\lfloor(n-3)/3\rfloor},\qquad n\ge3.
+\end{equation}
+The terms at dimensions one and two are assigned separately as 1 and 2.
+
+\begin{conjecture}\label{conj:196}
+The maximum snake length in $\Q_9$ is $196$ edges.
+\end{conjecture}
+This numerical conjecture is motivated only by the displayed extrapolation; it is not used in any theorem in this paper. Equation~\eqref{eq:model} predicts $3\cdot64+4=196$.
+
+\begin{proposition}[Model recurrence]
+For $n\ge3$, the model satisfies
+\[
+\widehat a(n+3)+6\cdot2^{\lfloor(n-3)/3\rfloor}=8\widehat a(n).
+\]
+\end{proposition}
+\begin{proof}
+Put $t=n-3$ and $c=2^{\lfloor t/3\rfloor}$. Since $\lfloor(t+3)/3\rfloor=\lfloor t/3\rfloor+1$, the left side is
+$24\cdot2^t+2c+6c=8(3\cdot2^t+c)$.
+\end{proof}
+At $n=6$ the recurrence predicts $8\cdot26-12=196$. This is the same evidence as the correction table, not an independent argument.
+
+\begin{proposition}[The known terms do not determine the ninth prediction]
+The model
+\[
+\widetilde a(n)=3\cdot2^{n-3}+1+\left\lfloor\frac{n-3}{3}\right\rfloor
+\qquad(n\ge3)
+\]
+agrees with every known term, after assigning the first two terms separately, and gives $\widetilde a(9)=195\ne196$.
+\end{proposition}
+\begin{proof}
+For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, the corrections are respectively 3 and 4. Direct substitution proves the claim.
+\end{proof}
+Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
+
+\section{Construction and the requirements for optimality}\label{sec:optimality}
+\subsection{The next-length criterion}
+\begin{lemma}[Prefix restriction]\label{lem:prefix}
+Every prefix of a snake is a snake.
+\end{lemma}
+\begin{proof}
+Restrict the vertex sequence to its initial indices. Distinctness is inherited. Adjacency between any two retained indices has the same value and the same consecutive-index condition as in the original sequence.
+\end{proof}
+
+\begin{theorem}[Next-length exclusion]\label{thm:next}
+For every integer $b\ge0$, all snakes in $\Q_9$ have length at most $b$ if and only if no snake has length $b+1$.
+\end{theorem}
+\begin{proof}
+The upper bound directly excludes $b+1$. Conversely, a snake of any length larger than $b$ has a prefix of length $b+1$ by Lemma~\ref{lem:prefix}.
+\end{proof}
+
+\begin{corollary}
+Conjecture~\ref{conj:196} is equivalent to the conjunction of a 196-edge construction and nonexistence of a 197-edge snake. A 196-edge construction would contain a 192-edge prefix and would refute the proposed upper bound 191.
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{thm:next} with $b=196$, and restrict a 196-edge snake to its first 193 vertices.
+\end{proof}
+For the competing optimum 191, the missing exclusion is the finite statement that no sequence $v_0,\ldots,v_{192}\in\{0,1\}^9$ is distinct and satisfies
+\[
+\Ham(v_i,v_j)=1\quad\Longleftrightarrow\quad |i-j|=1.
+\]
+The pairwise condition is required for every $0\le i<j\le192$. Neither next-length exclusion has been proved.
+
+\subsection{Endpoint maximality and maximum length}
+A snake $P=(v_0,\ldots,v_L)$ is blocked at its right endpoint when every neighbor $w$ of $v_L$ either equals a vertex $v_i$ with $i<L$, or is adjacent to such a vertex.
+\begin{lemma}[Blocking prevents endpoint extension]\label{lem:block}
+A right-blocked snake cannot be extended by appending one vertex while retaining its entire ordered sequence.
+\end{lemma}
+\begin{proof}
+An appended $w$ must be adjacent to $v_L$. If $w=v_i$ for an earlier index, distinctness fails. If $w\sim v_i$ for $i<L$, the appended vertex has a chord to an index at least two positions earlier. Both alternatives contradict the snake definition.
+\end{proof}
+
+\begin{theorem}[Endpoint maximality does not imply maximum length]
+There is a 93-edge snake in $\Q_9$ blocked at both endpoints, although a 191-edge snake exists in the same cube.
+\end{theorem}
+\begin{proof}
+The 93-edge sequence in Appendix~\ref{app:witness} specifies 94 vertices. Direct calculation verifies distinctness and the induced adjacency condition for all $\binom{94}{2}=4\,371$ unordered pairs. The appendix gives an earlier blocking vertex for each of the nine endpoint moves, in both the original and reversed orderings. Lemma~\ref{lem:block} excludes extension at either end. Theorem~\ref{thm:lower} supplies a strictly longer snake.
+\end{proof}
+
+\begin{theorem}[A sufficient universal blocking condition]
+If every 191-edge snake in $\Q_9$ is blocked at its right endpoint, then $a(9)=191$.
+\end{theorem}
+\begin{proof}
+If a 192-edge snake existed, its 191-edge prefix would admit extension by its remaining final vertex. This contradicts the universal blocking premise. Apply Theorem~\ref{thm:next} and the verified lower bound.
+\end{proof}
+The premise concerns every 191-edge snake. Blocking the 131 recorded classes is insufficient until completeness of the collection is established. Repeated recovery of the same classes is not a completeness proof.
+
+\subsection{Cycles as an alternative construction route}
+\begin{theorem}[Deleting a cycle vertex]
+Deleting one vertex from an induced cycle of $C$ vertices leaves a snake of length $C-2$.
+\end{theorem}
+\begin{proof}
+Order the cycle as $v_0,\ldots,v_{C-1},v_0$ and delete $v_{C-1}$. Among the remaining vertices, the only surviving cycle edges join consecutive indices. The closing edge involved the deleted vertex; the induced-cycle hypothesis forbids all other edges. The resulting path has $C-1$ vertices and $C-2$ edges.
+\end{proof}
+\begin{corollary}
+An induced cycle with 194 vertices in $\Q_9$ would disprove the upper bound 191.
+\end{corollary}
+\begin{proof}
+Deletion gives a 192-edge snake.
+\end{proof}
+In particular, a 192-vertex coil gives only a 190-edge snake through this deletion operation. Edge and vertex counts cannot be interchanged.
+
+\subsection{The two-layer construction and its obstruction}
+Write a vertex of $\Q_9$ as $(v,b)$ with $v\in\Q_8$ and $b\in\{0,1\}$. Vertices in the same layer retain their original adjacency. Across the layers,
+\[
+(u,0)\sim(v,1)\quad\Longleftrightarrow\quad u=v.
+\]
+The same description defines the product of an arbitrary graph with a binary edge. Taylor discusses such lifts in \cite{taylor}.
+
+\begin{theorem}[Exact joining condition]\label{thm:join}
+Let $P=(p_0,\ldots,p_r)$ and $R=(q_0,\ldots,q_s)$ be induced paths in a graph. The ordered sequence
+\[
+(p_0,0),\ldots,(p_r,0),(q_0,1),\ldots,(q_s,1)
+\]
+is an induced path precisely when
+\[
+p_i=q_j\quad\Longleftrightarrow\quad i=r\ \hbox{and}\ j=0.
+\]
+When valid, its length is $r+s+1$.
+\end{theorem}
+\begin{proof}
+The layer labels ensure that vertices in different layers are distinct. Each individual path retains its distinctness and induced adjacency conditions. Every cross-layer edge is caused by equality of the base vertices. In the displayed order there is exactly one consecutive pair across layers, at $(p_r,0),(q_0,1)$. Therefore the induced condition requires exactly the stated equality and forbids all other equalities. These conditions also suffice, since all possible pairs have been covered. The vertex count is $(r+1)+(s+1)$, hence the edge count is $r+s+1$.
+\end{proof}
+
+\begin{corollary}[Single-crossing length constraints]
+Assume the known bound $a(8)=98$. A single-crossing snake in $\Q_9$ has length at most 197. Length 196 requires layer lengths $(98,97)$ or $(97,98)$; length 197 requires $(98,98)$.
+\end{corollary}
+\begin{proof}
+The two layer segments are eight-dimensional snakes. Thus $r,s\le98$ and $L=r+s+1$. For $L=196$, $r+s=195$ forces the two possibilities; for $L=197$, both upper bounds must be attained.
+\end{proof}
+\begin{theorem}[Integer realization of the layer construction]
+The map $J(u,b)=u+256b$, for $0\le u<256$ and $b\in\{0,1\}$, is injective and preserves adjacency in both directions between $\Q_8\mathbin{\square}K_2$ and the integer encoding of $\Q_9$. Consequently, compatible layer paths of lengths 98 and 97 give a 196-edge snake under the same definition as the verified witness. Compatible paths of lengths 98 and 98 give a 197-edge snake and would refute the conjectured upper bound 196.
+\end{theorem}
+\begin{proof}
+The intervals $[0,255]$ and $[256,511]$ are disjoint, so equality of images forces equality of both components. Flipping a coordinate $k<8$ preserves the layer, because
+\[
+(u+256)\mathbin{\oplus}2^k=(u\mathbin{\oplus}2^k)+256,
+\qquad u\mathbin{\oplus}2^k<256.
+\]
+Flipping coordinate 8 exchanges $u$ and $u+256$. These are all nine possible flips. Thus adjacency within a layer is exactly eight-dimensional adjacency, while adjacency between layers requires equal base vertices. Compose this map with Theorem~\ref{thm:join}. The lengths become $98+97+1=196$ and $98+98+1=197$. Conversely, every unwanted equality between base vertices creates a nonconsecutive cross-layer edge, so the compatibility condition remains necessary after applying $J$.
+\end{proof}
+This argument covers snakes that cross a chosen coordinate exactly once. A general snake can cross every coordinate repeatedly. Its intersection with a layer can then be a disjoint union of paths, so bounding that entire intersection by a single-snake length would be invalid.
+
+The explicit compatible paths of lengths 96 and 94 in Appendix~\ref{app:joint-seed} give a 191-edge construction of this form. Restricted tests with a fixed 98-edge seed are described in Appendix~\ref{app:experiments}; their failure does not exclude other seeds or multiple-crossing paths.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
@@ -6121,6 +6246,14 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{A count-free share certificate and a cycl
 \bibitem{share145archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Joint share restrictions and a complete replay of the count-free certificate for 012301}. Research record 145, 4 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/145-countfree-012301}.
+
+\bibitem{bridge146archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Original-clause truth transfer to the
+preserved initial tree and checked prefix}. Research record 146,
+4 November 2026. Local research record:
+\path{milestones/146-initial-tree-and-paper/data/bridge-completion.json}.
+The initial-database connection is complete; the full share replay and
+actual-snake share theorems remain unfinished.
 
 \end{thebibliography}
 \end{document}

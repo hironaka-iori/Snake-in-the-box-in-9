@@ -1,0 +1,229 @@
+{
+  "status": "COMPLETE_SOURCE_REVIEW_WITH_CONCRETE_REVISION_RECOMMENDATIONS",
+  "source": {
+    "path": "paper/snake9_research.tex",
+    "bytes": 450526,
+    "lines": 6126,
+    "sha256": "c265a8cfd81812ae372e8568a7d45e898ba3e5d08affcbec911b0581d901f696"
+  },
+  "baseline_records": [
+    "milestones/145-countfree-012301/MATHEMATICAL_NOTE.md",
+    "milestones/145-countfree-012301/data/verification.json",
+    "milestones/145-countfree-012301/data/checkpoint.json"
+  ],
+  "read_ranges_inclusive": [
+    [
+      1,
+      390
+    ],
+    [
+      391,
+      820
+    ],
+    [
+      821,
+      1224
+    ],
+    [
+      1225,
+      1679
+    ],
+    [
+      1680,
+      1917
+    ],
+    [
+      1918,
+      2226
+    ],
+    [
+      2227,
+      2583
+    ],
+    [
+      2584,
+      2884
+    ],
+    [
+      2885,
+      3234
+    ],
+    [
+      3235,
+      3562
+    ],
+    [
+      3563,
+      3945
+    ],
+    [
+      3946,
+      4284
+    ],
+    [
+      4285,
+      4514
+    ],
+    [
+      4515,
+      4869
+    ],
+    [
+      4870,
+      5205
+    ],
+    [
+      5206,
+      5434
+    ],
+    [
+      5435,
+      5754
+    ],
+    [
+      5755,
+      6126
+    ]
+  ],
+  "reread_ranges_to_close_output_truncation": [
+    [
+      1459,
+      1489
+    ]
+  ],
+  "coverage_complete": true,
+  "review_path": "milestones/146-initial-tree-and-paper/audit/paper-review.md",
+  "checks_performed": [
+    "complete_source_read",
+    "baseline_status_record_read",
+    "source_sha256_match",
+    "label_and_reference_consistency",
+    "citation_key_consistency",
+    "local_printed_arithmetic_review"
+  ],
+  "checks_not_performed": [
+    "Lean_execution",
+    "solver_execution",
+    "full_graph_verification",
+    "external_retrieval",
+    "PDF_compilation",
+    "visual_PDF_review",
+    "fresh_certificate_replay"
+  ],
+  "mathematical_proof_from_source_inspection_claimed": false,
+  "source_inventory": {
+    "label_count": 261,
+    "duplicate_labels": [],
+    "unresolved_references": [],
+    "bibliography_entry_count": 63,
+    "unresolved_citations": [],
+    "environment_counts": {
+      "theorem": 49,
+      "proposition": 68,
+      "lemma": 29,
+      "corollary": 14,
+      "conjecture": 2,
+      "definition": 1,
+      "proof": 158,
+      "quote": 16,
+      "longtable": 3
+    }
+  },
+  "findings": [
+    {
+      "id": "S1",
+      "lines": [
+        3162,
+        3165
+      ],
+      "type": "stale_completion_status",
+      "description": "The statement that the new minimum is uncomputed is contradicted by the following completed zero-credit calculation."
+    },
+    {
+      "id": "S2",
+      "lines": [
+        3591,
+        3598
+      ],
+      "type": "stale_summary_scope",
+      "description": "Closure foregrounds a superseded uniform-credit cycle instead of the current joint-floor obstruction."
+    },
+    {
+      "id": "S3",
+      "lines": [
+        2782,
+        2811
+      ],
+      "type": "completed_result",
+      "description": "The 012310 five-count sum19 theorem is correctly recorded complete; add it to the introduction and verification inventories."
+    },
+    {
+      "id": "N1",
+      "lines": [
+        3862,
+        3924
+      ],
+      "type": "scaled_unit_terminology",
+      "description": "Rational means are called integer means; clarify denominator20 and scaled range12101."
+    },
+    {
+      "id": "M1",
+      "lines": [
+        4730,
+        4739
+      ],
+      "type": "proof_domain_omission",
+      "description": "Dispose of short paths before indexing the first two internal counts."
+    },
+    {
+      "id": "S4",
+      "lines": [
+        3407,
+        3418,
+        3532,
+        3537
+      ],
+      "type": "superseded_by_coordinator146_update",
+      "description": "The initial-tree truth bridge is now reported complete; preserve the145 timeout as historical and leave the full share18 replay and geometry pending."
+    }
+  ],
+  "current_status": {
+    "maintained_interval": [
+      191,
+      235
+    ],
+    "independent_contributor_upper_rebuild_complete": false,
+    "count115_complete": true,
+    "count115_modules": 1397,
+    "count115_statement": "The five internal singleton counts of a012310 window sum to at least19.",
+    "conditional234_refuted": false,
+    "share012301_native_replay_complete": true,
+    "share012301_actual_Lean_theorem_complete": false,
+    "share012034_full_Lean_replay_complete": false,
+    "share012034_actual_geometry_complete": false,
+    "joint_floor_necessary_condition": "325F+159G>9074",
+    "joint16_comparison": "235+95/2348",
+    "012032_share16_eleven_cycle_increment": 57
+  },
+  "coordinator146_update": {
+    "independently_rerun_by_reviewer": false,
+    "reported_initial_database_bridge_complete": true,
+    "reported_prefix_composition_complete": true,
+    "modules": [
+      "RawChunksAssoc146",
+      "AssemblyAssoc146",
+      "PrefixAssoc146"
+    ],
+    "times_seconds": [
+      5.641,
+      13.562,
+      2.859
+    ],
+    "prefix_deductions": 1055,
+    "prefix_propagation_references": 6006,
+    "publication_requires_coordinator_verified_source_and_receipt_reference": true
+  },
+  "scope": "Review and recommendations only; the root paper was unchanged by this agent.",
+  "review_sha256": "7e126929cd4173f7e2509690444e1a25c9cb831b87b2c539f29abf7e7df3a99f",
+  "source_unchanged_at_review_end": true
+}
