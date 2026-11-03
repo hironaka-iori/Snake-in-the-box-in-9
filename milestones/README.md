@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 116; the next full revision is 126. Source and witness checks pass; the built-in compiler failed before TeX processing.
 
+- [Milestone 121: a sharp pair bound and an endpoint hypothesis](121-replacement-window-pressure/README.md). Lean-checked pair sum 8, three complete attaining snakes and five catalogue consequences; endpoint necessity remains a candidate, numerical bounds unchanged.
+
 - [Milestone 120: a checked restriction on four outer counts](120-nine-transition-window/README.md). Lean checks the local theorem and three catalogue consequences; 63 additional graph removals, 1,363 reference entries pending, no numerical bound improvement.
 
 - [Milestone 119: actual counterexamples and full-cube count restrictions](119-shared-five-count-pressure/README.md). Lean-checked length148 counterexample, two replayed native contradictions and oriented graph audit; no new numerical bound.

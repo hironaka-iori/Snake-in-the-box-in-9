@@ -1,3 +1,60 @@
+# Continuation after milestone 121
+
+Work in E:/Snake-in-a-box. Apply the research skill with neutral concise prose.
+Use existing notation; define only essential repeated quantities. Read the 121
+mathematical note, final proof review and endpoint input audit before continuing.
+The pair bound and its three actual sharp witnesses are checked. The five new
+reference entries are checked; 1358 remain. The endpoint hypothesis is unproved.
+
+Certify the three saved endpoint contradictions for boundary pairs (2,6), (3,5)
+and (4,4). Each formula is the ordinary full-Q9 window encoding plus one clause
+requiring an endpoint outside the intersection of the two exact distance-two
+spheres. Rebuild and replay the saved negative cases before proving that extra
+clause sound under an actual counterexample. The existing actual pair theorem
+and reversal then reduce the equality case to these three inputs.
+
+Prove the resulting occurrence limit 14 and its odd-length consequence. Evaluate
+an endpoint credit on both graph profiles with the full 14C budget correction.
+Initially award it only to exact pairs (3,5), (4,4), (5,3): clipped symbols (2,6)
+or (6,2) may have actual sum greater than 8. The surviving completed-profile cycle
+has no 012032 window, so this credit alone cannot improve its cycle mean. Keep
+that limitation explicit when deciding the next numerical experiment.
+
+Do not rerun the same bounded probes merely to obtain another negative status.
+Their exact inputs and encoding audit are saved in `data/next-endpoint-task.json`.
+Preserve the active 104 and 115 batches and the pending 117/119 certificates.
+
+The ordinary full-cube encoding has 512 vertex variables and endpoint flag 513+v
+for each vertex v. The added positive clause contains flags for vertices outside
+the intersection of the exact distance-two spheres about window vertices 3 and 6.
+The audit checks all base clauses and that extra clause. No native refutation
+has yet been generated or replayed for these endpoint cases. Preserve the
+existing probes; generate distinct proof evidence. Their zero-cycle-cut native
+negative answers are candidates only.
+
+If the location claim is proved, equality forces both endpoints to have the
+same bipartite colour, hence even edge length. At most 14 different window starts
+can have equality because their first counted vertices lie in the intersection
+of the two endpoint distance-two spheres. The general transfer, intersection
+count and frequency argument still need Lean. Only the conditional 14C charge
+arithmetic is checked. The surviving completed-profile cycle has no 012032
+window, so this single new credit cannot improve its cycle mean.
+
+At the frozen 121 observation, 104 had 181/791 completed and 182/791 conditional
+contexts checked; 115 had 334/1397 modules. Both drivers were verified live by
+command line. Inspect live processes again before any intervention; partial
+checks do not complete either final assembly. Do not duplicate or alter jobs.
+The 117/119 negative certificates retain their pending Lean status.
+
+Paper and editor remain revision 116, next revision 126. Preserve all three
+authors, hypersetup, unrelated .gitignore and historical critical-family.json
+changes, and exact audited bytes. Fetch before each round and stage only a
+reviewed manifest. Keep the full goal active; the exact optimum and 196 remain
+unresolved. The maintained 191–235 interval still has the documented independent
+rebuild limitation; conditional 234 is unresolved.
+
+## Earlier continuation record
+
 # Continuation after milestone 120
 
 Work in E:/Snake-in-a-box. Apply the requested research skill with neutral,

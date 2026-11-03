@@ -1,5 +1,47 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 121 checkpoint
+
+For every 012032 window, the second and fourth internal singleton-square counts
+are each at least 2 and sum to at least 8. Lean checks the three local refutations,
+actual-snake interpretation, reversal and resulting inequalities. Complete
+snakes of 142, 138 and 144 edges attain the respective pairs (2,6), (3,5) and (4,4);
+their paths, directions and pair counts also pass Lean. The pair bound is sharp
+for actual snakes. No new mathematical definition is introduced.
+
+Five further reference cases are discharged. Twenty entries are now checked,
+and the exact remaining obligation has 1358 entries. The final proof checks cover
+40 modules and 47 printed axiom reports, including the three boundary witnesses
+and a separate conditional charge inequality. Standard foundations only occur
+in the reported dependencies.
+
+The pair restriction removes 14,646 additional graph transitions, including two
+edges of the former conditional cycle. A replacement four-cycle keeps mean 496,
+range 602 and integer comparison 234. The other profile retains its eighteen-cycle,
+mean 2915/6, range 1730/3 and comparison 235. Both graph experiments retain inherited
+unproved sum hypotheses and global assembly work. The local theorem and sharp
+witnesses establish no improved global upper bound.
+
+All three sharp witnesses place both endpoints at distance two from both counted
+vertices. Three full-Q9 tests demanding an endpoint outside that intersection
+return native UNSAT without cycle cuts. Their encodings have been audited, but
+the refutations and actual-snake endpoint interpretation remain unchecked.
+The proposed endpoint-necessity theorem is therefore a hypothesis.
+
+If proved, it would limit equality to fourteen windows in any snake and rule
+out equality in odd-length snakes. Those deductions have written arguments and
+a finite sphere-intersection check; their general Lean proofs remain pending.
+Lean already checks the conditional arithmetic with the 14C correction. This
+does not supply its missing geometric or occurrence-count hypotheses.
+
+The maintained interval remains 191 through 235 edges, with the contributor proof
+and archived audit for 235 and its complete independent rebuild pending.
+Conditional 234, the optimum and 196 remain unresolved. Paper revision 116 is
+unchanged; the next full manuscript revision is 126. The two pre-existing proof
+batches remain active; their exact process observations are in the checkpoint.
+
+Earlier checkpoints below are historical snapshots.
+
 ## Milestone 120 checkpoint
 
 For every six-transition window with canonical directions 012031, at least

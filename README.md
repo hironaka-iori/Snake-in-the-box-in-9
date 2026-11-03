@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 120](milestones/120-nine-transition-window/README.md) proves that a 012031 window has an outer count at least 4. Lean checks the actual-snake theorem, both graph orientations and three more reference exclusions. The 63 additional graph removals leave both numerical comparisons unchanged; 1,363 reference entries remain.
+Latest continuation: [milestone 121](milestones/121-replacement-window-pressure/README.md) proves a sharp second-fourth count sum of 8 for 012032. Three complete attaining snakes and five new reference exclusions pass Lean; 1,358 entries remain. The 14,646 additional graph removals leave both numerical comparisons unchanged. Three native endpoint tests motivate the next conditional argument.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
@@ -18,7 +18,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 116](milestones/116-paper-revision/README.md). The paper incorporates the arguments through milestone 115 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 126.
 
-Next research priority: Test full-Q9 realization of replacement-cycle edge 2511, word 012031041, with all six exact recorded counts and no sum cap. Evaluate any viable restriction on both profiles. Preserve the active 104 and 115 proof batches. Next paper revision: 126.
+Next research priority: Certify the endpoint-placement hypothesis for equality in the 012032 pair bound, then prove its occurrence limit of 14 and test an endpoint credit with the full correction on both profiles. Retain the distinction between exact counts and the symbol-6 interval. Preserve the active 104 and 115 batches. Next paper revision: 126.
 
 ## Historical checkpoints
 

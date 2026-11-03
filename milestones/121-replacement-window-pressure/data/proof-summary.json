@@ -1,0 +1,61 @@
+{
+  "status": "PASS_SHARP_PAIR_BOUND_AND_ACTUAL_ATTAINMENTS",
+  "checked_modules": 40,
+  "theorem_audits": 47,
+  "directions": [
+    0,
+    1,
+    2,
+    0,
+    3,
+    2
+  ],
+  "statement": "For every fitting actual-snake window012032, both alpha[r+2] and alpha[r+4] are at least2, and their sum is at least8.",
+  "selected_native_deductions": 6155,
+  "selected_native_hints": 362764,
+  "actual_receipt": "data/ActualPair121-audit.json",
+  "actual_receipt_sha256": "03a00163d46b754fe8fbc28f2dfdcfbfd9206d4b88c07d44b5398483b95c61ae",
+  "reference_receipt": "data/ReferenceCoverage121-audit.json",
+  "reference_receipt_sha256": "446c35a5013cee79b3053bed50f82f1cc11d54bd8a9e61cf189c0fc0824a30fc",
+  "new_reference_indices": [
+    196,
+    197,
+    198,
+    199,
+    200
+  ],
+  "reference_discharged": 20,
+  "reference_pending": 1358,
+  "boundary_witness_edges": [
+    142,
+    138,
+    144
+  ],
+  "boundary_count_pairs": [
+    [
+      2,
+      6
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      4
+    ]
+  ],
+  "boundary_receipt_hashes": {
+    "26": "b862eaa31b7cea84c1d80e83ea20bea5f6f270daea698aad1a6cf63350f10465",
+    "35": "acc33269cf59357b5812dbd71fbfe00dcbcf92269d982ff47fc53e72ed068329",
+    "44": "17b2d42e7b89d2cbc0bcc806fdb91b331083311262f12c5edac5b472f15c095a"
+  },
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "independent_review_sha256": "7011b59330d95202bb52fe245b4c1eae789daa947148facc0a8bb4d96b7eecab",
+  "endpoint_status": "Native UNSAT candidates and encoding audit only. Location, general sphere bound, frequency and parity consequences not yet Lean-checked.",
+  "scope": "Sharp local theorem and actual attaining snakes, five reference reductions and conditional charge arithmetic. No improved global upper bound."
+}
