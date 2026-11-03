@@ -1,0 +1,54 @@
+{
+  "status": "PROPOSED_NOT_IMPLEMENTED",
+  "shape": "0120324",
+  "cap": 22,
+  "original_clauses": 106348,
+  "direct_clauses": 235,
+  "bounds": [
+    [
+      1,
+      21
+    ],
+    [
+      2,
+      21
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      3,
+      21
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      21
+    ]
+  ],
+  "derivation": "For each centre with lower bound k, require a negative selected-vertex literal outside every set of k-1 omitted corners. There are four lower1 clauses,21 lower2 clauses,and210 lower3 clauses.",
+  "prelude": "Derive each added clause by ordered RUP from original F or earlier verified prelude clauses at IDs N+1 through N+235, N=106348. No circular or future hints.",
+  "solver": "Append exactly those clauses in the same order to the original CNF. Native proof deduction IDs must start above N+235.",
+  "replay": "Concatenate the prelude with the native proof and trim/replay against ORIGINAL F with N inputs. Treating all N+235 augmented clauses as trusted inputs would leave the proof incomplete.",
+  "validation": [
+    "Literal/variable numbering identical to original F",
+    "Each direct clause independently RUP checked",
+    "Every prelude/native clause ID and deletion dependency consistent",
+    "Final empty clause verified",
+    "Trimmed proof and native encoding both hashed",
+    "Concrete Lean semantics use original F",
+    "Complete Lean refutation and actual-snake transfer required"
+  ],
+  "source_pins": {
+    "work/0120324-total22-positive/full.cnf": "467a58303f629688e5c5dd26c83e7d4c64ccede4805ab2577823e4dbed30e91a",
+    "data/probes/0120324-total22-positive.json": "adc0f8dce7f18f27124cc86c23277b9883826b20e9ddf6d0ac231e638e7901e5",
+    "data/bounded-search-audit.json": "04c478706d5369926dc0e5b4f85eb0f595f248807bd995443ff661ad1bb78d71",
+    "data/ActualBounds125-audit.json": "df9f9b6c1b883071a026d761d3eda47dd987a525d10ae65dc46fe1c70a1ddedc",
+    "lean/ActualBounds125.lean": "dbb9f2fbe1ea322903091a73eb3ed36cd677f80a6309cf5aee851a916654ab7a"
+  },
+  "scope": "Encoding optimization proposal only. No new count floor or solver result."
+}

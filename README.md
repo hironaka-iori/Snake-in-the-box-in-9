@@ -1,3 +1,32 @@
+# Research update: milestone 125
+
+Retaining empty squares strengthens the checked six-count criterion. Any snake
+with at least 235 edges must have total shortfall below 25, across the first
+39 disjoint groups of six internal counts, at least 29 + 2s0. A proved upper
+bound of 28 + 2s0 on that sum would therefore imply length at most 234.
+
+Two weaker local hypotheses also have checked consequences: universal six-count
+floor 24 with at least six empty squares gives 234, and floor 23 with at least
+25 empty squares gives 234. Universal floor 25 with at least 14 empty squares
+gives 233. The empty-square conditions apply at the lengths being excluded;
+all these additional hypotheses remain unproved.
+
+For an actual 0120324 window whose total is at most 22, Lean proves the count
+intervals [1,21], [2,21], [1,21], [3,21], [1,21], [1,21]. This is a necessary
+restriction on a possible counterexample. Three complete-cube searches timed
+out, including the one using these intervals. No new count floor or improved
+unconditional global bound is claimed. The maintained range remains 191–235
+with its documented independent-rebuild limitation; the optimum and 196 remain
+unresolved. Three Lean modules and 19 dependency reports passed.
+
+See [the mathematical note](milestones/125-critical-six-count/MATHEMATICAL_NOTE.md),
+[proof review](milestones/125-critical-six-count/audit/proof-review.md), and
+[proof supplement](milestones/125-critical-six-count/audit/proof-supplement.md).
+The next full paper revision is due at milestone 126. A proposed cardinality
+encoding improvement is saved with exact proof obligations; it is untested.
+
+## Earlier record
+
 # Research update: milestone 124
 
 Lean proves that the six internal singleton-square counts sum to at least 25

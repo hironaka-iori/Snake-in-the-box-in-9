@@ -1,0 +1,20 @@
+{
+  "status": "STOPPED",
+  "pid": 6248,
+  "started_at": "2026-11-03T05:40:37.037037+00:00",
+  "modules": [
+    "EmptyTradeoff125",
+    "ActualBounds125"
+  ],
+  "records": [
+    {
+      "module": "EmptyTradeoff125",
+      "status": "PASS_REFERENCE_RECOVERY_MODULE",
+      "receipt_sha256": "1c29605cb87a8913531752c39ff92c406c8074e860351eabb4a97f6cc737c9fb",
+      "theorem_audits": 2
+    }
+  ],
+  "active": null,
+  "exception": "AssertionError(\"E:\\\\Snake-in-a-box\\\\milestones\\\\125-critical-six-count\\\\lean\\\\ActualBounds125.lean:18:4: error: unknown identifier 'dsOf_slice'\\nE:\\\\Snake-in-a-box\\\\milestones\\\\125-critical-six-count\\\\lean\\\\ActualBounds125.lean:16:32: error: unsolved goals\\nm : \u2115\\np : Snake m\\nr s w : \u2115\\nhr : r + 7 \u2264 m\\nhs : s + w \u2264 7\\n\u22a2 canon (List.take w (List.drop s (dsOf p r 7))) = canon (dsOf p (r + s) w)\\nE:\\\\Snake-in-a-box\\\\milestones\\\\125-critical-six-count\\\\lean\\\\ActualBounds125.lean:73:2: error: omega could not prove the goal:\\na possible counterexample may satisfy the constraints\\n  l \u2265 0\\n  k \u2265 0\\n  j \u2265 0\\n  i \u2265 0\\n  i + j + k + l \u2265 19\\n  h \u2265 0\\n  g \u2265 0\\n  f \u2265 0\\n  e \u2265 3\\n  d \u2265 2\\n  d + e + f + g + h \u2264 20\\n  0 \u2264 c \u2264 22\\n  b \u2265 0\\n  a \u2265 0\\n  a - b \u2265 7\\nwhere\\n a := \u2191m\\n b := \u2191r\\n c := \u2191(\u2211 j \u2208 range 6, coreAlpha p (r + j + 1))\\n d := \u2191(coreAlpha p (r + 2))\\n e := \u2191(coreAlpha p (r + 1))\\n f := \u2191(coreAlpha p (r + 3))\\n g := \u2191(coreAlpha p (r + 5))\\n h := \u2191(coreAlpha p (r + 6))\\n i := \u2191(coreAlpha p (r + (1 + 1)))\\n j := \u2191(coreAlpha p (r + (1 + 2)))\\n k := \u2191(coreAlpha p (r + (1 + 4)))\\n l := \u2191(coreAlpha p (r + (1 + 5)))\\n'Snake9.ActualBounds125.canonical_seven_slice' depends on axioms: [propext, sorryAx, Quot.sound]\\n'Snake9.ActualBounds125.prefix_and_suffix' depends on axioms: [propext, sorryAx, Quot.sound]\\n'Snake9.ActualBounds125.first_fourth_exclusion' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.ActualBounds125.second_fourth_minima_of_total22' depends on axioms: [propext,\\n sorryAx,\\n Classical.choice,\\n Quot.sound]\\n'Snake9.ActualBounds125.actual_six_bounds' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\\n\")",
+  "stopped_at": "2026-11-03T05:41:12.039461+00:00"
+}

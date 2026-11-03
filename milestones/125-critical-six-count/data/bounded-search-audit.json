@@ -1,0 +1,137 @@
+{
+  "status": "PASS_BOUNDED_SEARCH_FORMULA_AND_AVAILABLE_EVIDENCE",
+  "attempts": [
+    {
+      "name": "0120324-total22-positive",
+      "cap": 22,
+      "bounds": [
+        [
+          1,
+          21
+        ],
+        [
+          2,
+          21
+        ],
+        [
+          1,
+          21
+        ],
+        [
+          3,
+          21
+        ],
+        [
+          1,
+          21
+        ],
+        [
+          1,
+          21
+        ]
+      ],
+      "solver_status": "TIMEOUT",
+      "probe_status": "TIMEOUT",
+      "exit_code": 1,
+      "seconds": 60.06200000000172,
+      "variables": 7277,
+      "clauses": 106348,
+      "clauses_before_added_cuts": 106313,
+      "seed_cycles": 8,
+      "distinct_orbit_cuts": 35,
+      "orbit_permutations": 24,
+      "all_cut_cycles_verified": true,
+      "all_permutations_fix_window": true,
+      "literal_occurrences": 126,
+      "distinct_literals": 100,
+      "multiplicity_histogram": {
+        "1": 79,
+        "2": 16,
+        "3": 5
+      },
+      "full_formula_rebuilt": true,
+      "raw_lrat_bytes": 56430592,
+      "raw_proof_complete": false,
+      "stdout_prints_unsat": false,
+      "stdout_prints_sat": false,
+      "model": null,
+      "proof": null
+    }
+  ],
+  "producer_diff_verified": true,
+  "bounded_search_provenance": {
+    "source": "scripts/search_proof.py",
+    "source_sha256": "080f0533d10afb9c8d6cad4750cd39438ac179e0572dc05e44f508434821802a",
+    "new_script": "scripts/search_bounded.py",
+    "new_sha256": "94faa6ece61f8ba2e261d09a15fb04c1ac83db3d10b1f23a956fcf63c8955919",
+    "bounds": [
+      [
+        1,
+        21
+      ],
+      [
+        2,
+        21
+      ],
+      [
+        1,
+        21
+      ],
+      [
+        3,
+        21
+      ],
+      [
+        1,
+        21
+      ],
+      [
+        1,
+        21
+      ]
+    ],
+    "scope": "Count positivity, prefix pair minima, and a fourth-count case split motivate these explicit bounds. Actual-snake bridge must pass before a conditional native negative can be used universally."
+  },
+  "actual_bound_bridge": {
+    "status": "PENDING_AFTER_FAILED_SOURCE_CHECK",
+    "scope": "At audit time no successful ActualBounds125 receipt exists. Failed source-check evidence is preserved. The formula includes explicit lower bounds; this audit does not yet certify their applicability to actual snakes.",
+    "failed_attempts": [
+      {
+        "record": "milestones/125-critical-six-count/logs/ActualBounds125-1793684437037037800-record.json",
+        "record_sha256": "30daa99e943fde51bdd65438c38f8371746ec2e781b871255e3ffb873494db6c",
+        "exit_code": 1,
+        "timeout": false,
+        "log": "milestones/125-critical-six-count/logs/ActualBounds125-1793684437037037800.log",
+        "log_sha256": "7f9e38fea37b01f4f7d159437692defb47d8f49dbc0e7c7777d4629ebdb6e70f",
+        "source_snapshot": "milestones/125-critical-six-count/logs/attempt-1793684437037037800/ActualBounds125.lean.txt",
+        "source_sha256": "45cb191887dbb45eecd96c3a97a3920c63003f51ee3fcf410ba397c06a0993e5"
+      }
+    ]
+  },
+  "source_files_sha256": {
+    "milestones/125-critical-six-count/data/0120324-total22-positive-solver.json": "abb910c9e51d5204a086560580d8687924683f7aa69f0c04b6d82327a2f139df",
+    "milestones/125-critical-six-count/data/probes/0120324-total22-positive.json": "adc0f8dce7f18f27124cc86c23277b9883826b20e9ddf6d0ac231e638e7901e5",
+    "milestones/125-critical-six-count/scripts/search_bounded.py": "94faa6ece61f8ba2e261d09a15fb04c1ac83db3d10b1f23a956fcf63c8955919",
+    "milestones/124-six-count-cycle-pressure/data/probes/0120324-universal-total24-resume.json": "8a80f2d8f42f37ac06ed79f6906c2f61d7d0fdfd5764008ea111f1f83bd71d90",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "milestones/28-direct-share-certificates/scripts/direct.py": "a2dc4151244a28b5f95c6de26c36146f7297c9c32d9d422f9498b42f286cb126",
+    "milestones/124-six-count-cycle-pressure/data/universal-resume.json": "1d741d5ceee375eec6f36c72401e64de8524ffb0b0afb0ba4697157ae368f780",
+    "milestones/28-direct-share-certificates/scripts/tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+    "milestones/125-critical-six-count/work/0120324-total22-positive/full.cnf": "467a58303f629688e5c5dd26c83e7d4c64ccede4805ab2577823e4dbed30e91a",
+    "milestones/125-critical-six-count/work/0120324-total22-positive/full.raw.lrat": "5af6b0c95ebb5149a779b0dd8f958a0613f6c142d0cc3612651e43132cb6a719",
+    "milestones/125-critical-six-count/logs/0120324-total22-positive-solver.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "milestones/125-critical-six-count/logs/0120324-total22-positive-solver.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+    "milestones/125-critical-six-count/data/bounded-search-provenance.json": "613999614f3eda25fc84f38b969c27715848d15b78b1eb56bf7f54f59fca07a4",
+    "milestones/125-critical-six-count/scripts/search_proof.py": "080f0533d10afb9c8d6cad4750cd39438ac179e0572dc05e44f508434821802a",
+    "milestones/125-critical-six-count/logs/ActualBounds125-1793684437037037800-record.json": "30daa99e943fde51bdd65438c38f8371746ec2e781b871255e3ffb873494db6c",
+    "milestones/125-critical-six-count/logs/ActualBounds125-1793684437037037800.log": "7f9e38fea37b01f4f7d159437692defb47d8f49dbc0e7c7777d4629ebdb6e70f",
+    "milestones/125-critical-six-count/logs/attempt-1793684437037037800/ActualBounds125.lean.txt": "45cb191887dbb45eecd96c3a97a3920c63003f51ee3fcf410ba397c06a0993e5",
+    "milestones/125-critical-six-count/logs/attempt-1793684437037037800/checker.py.txt": "86bf5f973aa82b7bd8fd3d3c96bc6efe7b1fa05b7fea6769bbe9577b3d9c9430",
+    "milestones/125-critical-six-count/scripts/audit_bounded_search.py": "e4bf60d30ffedcd2a4d0a8dc5e22c74045225349315c8fa4d689c6c82ca00e6c"
+  },
+  "script_sha256": "e4bf60d30ffedcd2a4d0a8dc5e22c74045225349315c8fa4d689c6c82ca00e6c",
+  "cut_soundness": "Each listed set induces a connected cycle in Q9. An induced path cannot contain every vertex of such a set, so each exclusion is necessary for actual snakes. Unused-coordinate permutations are bijective cube automorphisms fixing the specified window; all images were checked.",
+  "scope": "Independent saved formula/orbit/multiplicity audit and terminal evidence review. Returned SAT assignments are checked against every clause and their actual induced components. Complete trimmed proofs are replayed only up to two million hints. Timeout or failure supplies no impossibility claim; cyclic models are not snakes. Explicit coordinate-wise lower bounds are added to this formula; their actual-snake applicability is separate from the native result. No solver or Lean compiler invocation, and no new Lean-certified total floor."
+}

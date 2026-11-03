@@ -1,3 +1,72 @@
+# Continuation after milestone 125
+
+Work in E:/Snake-in-a-box. Use the requested research skill. Keep prose precise
+and define only essential, repeatedly used quantities. Read milestone 125's
+mathematical note, main proof review, proof supplement and two search reviews.
+Verify the current checkpoint and fetch the remote before making changes.
+
+Milestone 126 is the scheduled full paper revision. Read the entire current
+editor source at D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and its
+E:/Snake-in-a-box/paper mirror. Preserve Iori Hironaka, Tommy Ma, Steven Zhan and
+local hyperlink settings. Incorporate results through 125, distinguish checked
+local/conditional/global claims, and use ordinary mathematical exposition
+without Lean file or implementation names. Use the built-in compiler on the
+saved editor file. The last unchanged revision is116.
+
+Current results: milestone 124 closed six-count floor 25 for 0123041 in either
+orientation. Round125 proves a retained empty-square necessary condition:
+for length at least 235, the first 39 disjoint blocks have total shortfall below 25
+at least 29+2s0. Thus shortfall at most 28+2s0 would give 234. Additional checked
+implications are universal floor 24 plus 6 empty squares =>234; floor 23 plus 25
+empty squares =>234; floor 25 plus 14 empty squares =>233. Empty-square premises
+need only apply at excluded lengths. All local universal/empty/shortfall
+premises remain unproved. The actual Lean interface counts 4 incidences per
+ordinary square; preserve that factor.
+
+The actual 0120324 counterexample restriction is now checked: if the six-count
+total is at most 22, the intervals are [1,21],[2,21],[1,21],[3,21],[1,21],[1,21].
+The fourth count 2 would imply total at least 24 using prefix/suffix theorems.
+The initial failed ActualBounds125 source/log is preserved separately from the
+successful repaired receipt. Its historical bounded-search audit still says
+bridge pending; the proof supplement supplies the subsequent successful result.
+
+All three native 125 searches timed out. They give neither contradictions nor
+models. The 35 sound cycle cuts arise from coordinate permutations of 8 earlier
+seeds. Original cap24, original cap22 and bounded cap22 traces are preserved
+locally, with compressed counterparts and exact restoration metadata.
+The manifest excludes their redundant raw copies; decompress the gzip files
+and check original SHA256 before rerunning search auditors on a fresh clone.
+Do not repeat the same bounded searches unchanged.
+
+The next concrete encoding task is data/next-encoding-task.json. Derive 235
+redundant direct cardinality clauses by explicit ordered RUP from the bounded
+formula F, which has N=106348 clauses. Assign them IDs N+1..N+235 and append
+them in exactly that order for the native solver. The later native deductions
+must have IDs above N+235. Concatenate the checked prelude and native proof, then
+trim and replay using ORIGINAL F with N inputs. Treating the 235 clauses as
+trusted inputs would invalidate the intended transfer. This proposal has been
+reviewed but not implemented/tested. Preserve literals, IDs and deletion
+semantics. Existing concrete semantic machinery can then use the original F.
+
+Only this count/empty-square route is selected. The inspected old inequalities
+alone admit abstract tuple (2,4,3,4,2,3), so they cannot produce floor 23 or 25.
+This tuple is not asserted to occur in a snake. Additional geometry or a checked
+contradiction is required. The 21-class native status remains 19 negative and 2
+UNKNOWN from 124, with only 0123041 newly closed at that checkpoint. The two
+unresolved classes are 0120310 and 0120324.
+
+Old 104/115/122 drivers were confirmed live in the saved process observation.
+Inspect actual processes and progress before resuming; do not duplicate them
+or change active source/checker/environment files. Round125 has no remaining
+search or Lean process once its final checkpoint is saved.
+
+The maintained interval is 191–235 with its independent-rebuild limitation.
+No optimum or 196 proof is available. Keep the goal active, save reviewed files,
+commit and push each round, and verify the remote commit. Preserve unrelated
+.gitignore and milestone50 critical-family.json changes.
+
+## Earlier continuation record
+
 # Continuation after milestone 124
 
 Work in E:/Snake-in-a-box. Apply the requested research skill with concise,

@@ -1,0 +1,46 @@
+E:\Snake-in-a-box\milestones\125-critical-six-count\lean\ActualBounds125.lean:18:4: error: unknown identifier 'dsOf_slice'
+E:\Snake-in-a-box\milestones\125-critical-six-count\lean\ActualBounds125.lean:16:32: error: unsolved goals
+m : ℕ
+p : Snake m
+r s w : ℕ
+hr : r + 7 ≤ m
+hs : s + w ≤ 7
+⊢ canon (List.take w (List.drop s (dsOf p r 7))) = canon (dsOf p (r + s) w)
+E:\Snake-in-a-box\milestones\125-critical-six-count\lean\ActualBounds125.lean:73:2: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  l ≥ 0
+  k ≥ 0
+  j ≥ 0
+  i ≥ 0
+  i + j + k + l ≥ 19
+  h ≥ 0
+  g ≥ 0
+  f ≥ 0
+  e ≥ 3
+  d ≥ 2
+  d + e + f + g + h ≤ 20
+  0 ≤ c ≤ 22
+  b ≥ 0
+  a ≥ 0
+  a - b ≥ 7
+where
+ a := ↑m
+ b := ↑r
+ c := ↑(∑ j ∈ range 6, coreAlpha p (r + j + 1))
+ d := ↑(coreAlpha p (r + 2))
+ e := ↑(coreAlpha p (r + 1))
+ f := ↑(coreAlpha p (r + 3))
+ g := ↑(coreAlpha p (r + 5))
+ h := ↑(coreAlpha p (r + 6))
+ i := ↑(coreAlpha p (r + (1 + 1)))
+ j := ↑(coreAlpha p (r + (1 + 2)))
+ k := ↑(coreAlpha p (r + (1 + 4)))
+ l := ↑(coreAlpha p (r + (1 + 5)))
+'Snake9.ActualBounds125.canonical_seven_slice' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.ActualBounds125.prefix_and_suffix' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.ActualBounds125.first_fourth_exclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.ActualBounds125.second_fourth_minima_of_total22' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'Snake9.ActualBounds125.actual_six_bounds' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

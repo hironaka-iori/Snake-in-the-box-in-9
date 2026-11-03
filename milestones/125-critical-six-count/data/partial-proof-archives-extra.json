@@ -1,0 +1,29 @@
+{
+  "status": "PASS_LOSSLESS_PARTIAL_TRACE_ARCHIVES",
+  "archives": [
+    {
+      "original": "work/0120324-total22-orbit/full.raw.lrat",
+      "original_sha256": "83dc5e50027b4ce25d9e39ad02f6b30a28e7805d4665066130b081fb0ea33e88",
+      "original_bytes": 48173056,
+      "archive": "work/0120324-total22-orbit/full.raw.lrat.gz",
+      "archive_sha256": "3cd80d2d8de5fd3f4d61555f81a5769dd91fd01c20f3241ddddb6aebf3273015",
+      "archive_bytes": 8174883,
+      "solver_record": "data/0120324-total22-orbit-solver.json",
+      "solver_record_sha256": "d42434cf0be60fb16ba753028bbd6b490d70f99f35b66c099bd5fcd98ad5853c"
+    },
+    {
+      "original": "work/0120324-total22-positive/full.raw.lrat",
+      "original_sha256": "5af6b0c95ebb5149a779b0dd8f958a0613f6c142d0cc3612651e43132cb6a719",
+      "original_bytes": 56430592,
+      "archive": "work/0120324-total22-positive/full.raw.lrat.gz",
+      "archive_sha256": "3e2098d59e1fe7767c2bf9c551b297bf191f4943b6f69e35e93106ef1c2a26ec",
+      "archive_bytes": 9284441,
+      "solver_record": "data/0120324-total22-positive-solver.json",
+      "solver_record_sha256": "abb910c9e51d5204a086560580d8687924683f7aa69f0c04b6d82327a2f139df"
+    }
+  ],
+  "originals_retained_locally": true,
+  "exclude_originals_from_git_manifest": true,
+  "script_sha256": "48bcde01b0bc6d859c10e8d49963b6a393460f98eb965470e2e8fa9311f26b39",
+  "scope": "Incomplete timeout traces only. Decompress each archive to its original relative path and verify the recorded SHA256 before rerunning auditors that require the raw file."
+}
