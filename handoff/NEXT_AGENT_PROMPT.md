@@ -1,3 +1,25 @@
+# Continue after milestone 150
+
+Read milestones/150-actual-pair-share/MATHEMATICAL_NOTE.md and
+data/checkpoint.json there. The exact 012032 core interpretation and
+conditional actual-snake share-16 transfer passed all 112 checks. The
+count-free contradiction still needs its Lean replay. Do not treat the
+numerical replay or clause semantics as a completed local theorem.
+
+The same 147 full replay for 012301 remains active. Revalidate coordinator
+PID 15228 and session 67526 against current process identity and progress.
+Do not launch a duplicate. After it completes, audit its exact receipts
+and run the guarded 148 final composition. The next new 012032 task is
+the prepared 38-module pilot. Serialize compilers; do not generate or
+launch its full replay until the initial-tree and prefix pilot passes.
+
+The stronger count-free 012032 proof supersedes the proposed one-unit
+actual-pair allowance as the selected task. The weaker cap14 numerical
+certificate and allowance note are retained without a second Lean
+pipeline. No new global bound follows. Keep all remaining local, reference
+and potential premises visible. Preserve unrelated edits and exact bytes.
+The goal remains ACTIVE. Earlier continuation notes below are historical.
+
 # Continue after milestone 149
 
 Read milestones/149-share-credit-tradeoff/MATHEMATICAL_NOTE.md first. The

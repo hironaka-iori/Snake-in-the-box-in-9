@@ -1,0 +1,19 @@
+{
+  "status": "PASS_TARGETED_CONDITIONAL_SHARE_PAPER_REVISION",
+  "source_sha256_before": "d8d8db8d88c0f26a5d46fdbe4736df8df523e9d9740e455318405e7c275e72b0",
+  "source_sha256_after": "23a76016133a77cbfc439a7429274ca7aea5b216f8fe2e3e72f2432c950a69a1",
+  "insertion_anchor": "For the preserved $012034$ share-18 proof, the original-clause assignment",
+  "added_text": "The $012032$ target now has a separate count-free certificate. A search\nwith the additional condition $\\alpha_{r+2}+\\alpha_{r+4}\\ge10$ produced\na retained proof using none of that condition's added clauses or variables.\nAll 13655 core clauses belong to the original model with share sum at most\n15. An independent replay checks all 58182 deductions and 5350080\npropagation references, ending in the empty clause. The absence of the\nadditional pair condition was checked against the complete original input.\n\nAll core-clause interpretations and the actual-snake transfer have passed\nLean in 112 modules. Conditional on a contradiction of this exact core,\nevery fitting window whose forward or reversed canonical directions are\n$012032$ satisfies\n\\[\n\\sum_{j=1}^{5}\\sigma_{12}(x_{r+j})\\ge16.\n\\]\nNo additional count, parity or endpoint-location hypothesis is required.\nThe complete numerical proof has also been transported to a packed replay\nwith 878 segments. Its initial-tree and prefix sources are prepared; they\nhave not yet been checked in Lean. The full contradiction therefore remains\nan explicit premise, and this target is still among the uncompleted local\nshare theorems~\\cite{share150archive}.\n\n",
+  "added_bibliography_entry": "\\bibitem{share150archive}\nI.~Hironaka, T.~Ma, and S.~Zhan, \\emph{A count-free certificate and\nconditional actual-snake share bound for 012032}, research archive,\nmilestone 150.\n\\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/150-actual-pair-share}.\n\n",
+  "authors_and_preamble_unchanged": true,
+  "new_definitions": 0,
+  "last_full_revision": 146,
+  "next_full_revision": 156,
+  "source_sha256_before_wording_amendment": "53f6565e04cbe852ce1949269e4f6802b84ea535987462ba64e6b4f619f8eec7",
+  "prose_replacements": [
+    {
+      "before": "without completing either\nlocal share theorem",
+      "after": "without completing these\nlocal share theorems"
+    }
+  ]
+}

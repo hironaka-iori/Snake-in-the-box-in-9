@@ -1,3 +1,25 @@
+# Research update: milestone 150
+
+The 012032 share-16 target now has a count-free numerical certificate:
+58,182 deductions and 5,350,080 references. Its retained core uses none
+of the added pair-count clauses or variables. All 112 Lean module checks
+for the exact clause interpretation and conditional actual-snake transfer
+passed. The complete contradiction remains an explicit premise.
+
+The complete numerical transport and its independent audit passed. The
+38-module initial-tree and prefix pilot is prepared and uncompiled. The
+existing 012301 full replay remains the only active long Lean job; its
+same coordinator resumed after this bounded batch. Inspect live progress
+before acting. Do not duplicate it or restart the completed 012310 proof.
+
+Read milestones/150-actual-pair-share/MATHEMATICAL_NOTE.md and its exact
+checkpoint. Native inputs and packed transport are preserved in verified
+archives. Both existing paper copies are updated without new definitions
+or preamble changes. The compiler helper still fails before TeX, so no
+new PDF is verified. The maintained interval is 191--235, subject to the
+contributor independent-rebuild caveat. Conditional 234 retains its other
+premises. Goal ACTIVE; last full paper revision 146, next 156.
+
 # Research update: milestone 149
 
 On the original 4,947,008-edge share graph, lowering the 012032 floor to 15

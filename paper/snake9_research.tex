@@ -3007,14 +3007,36 @@ $\sum_{j=1}^{5}\sigma_{12}(x_{r+j})\ge16$. The universal count bounds are
 sufficient; no additional count, parity or endpoint-location premise is
 imposed. Completion of the full Lean replay remains necessary to discharge
 the contradiction premise~\cite{semantics147archive,transfer148archive}.
+The $012032$ target now has a separate count-free certificate. A search
+with the additional condition $\alpha_{r+2}+\alpha_{r+4}\ge10$ produced
+a retained proof using none of that condition's added clauses or variables.
+All 13655 core clauses belong to the original model with share sum at most
+15. An independent replay checks all 58182 deductions and 5350080
+propagation references, ending in the empty clause. The absence of the
+additional pair condition was checked against the complete original input.
+
+All core-clause interpretations and the actual-snake transfer have passed
+Lean in 112 modules. Conditional on a contradiction of this exact core,
+every fitting window whose forward or reversed canonical directions are
+$012032$ satisfies
+\[
+\sum_{j=1}^{5}\sigma_{12}(x_{r+j})\ge16.
+\]
+No additional count, parity or endpoint-location hypothesis is required.
+The complete numerical proof has also been transported to a packed replay
+with 878 segments. Its initial-tree and prefix sources are prepared; they
+have not yet been checked in Lean. The full contradiction therefore remains
+an explicit premise, and this target is still among the uncompleted local
+share theorems~\cite{share150archive}.
+
 For the preserved $012034$ share-18 proof, the original-clause assignment
 now transfers through all 104 chunks to the materialized initial tree and
 composes with the checked 1055-deduction prefix using 6006 propagation
 references. The original constructor body is unchanged. The preceding
 assembly timeout is retained in Appendix~\ref{app:historical-verification-records}.
 The remaining full replay and actual-snake interpretation are unfinished.
-These records establish progress on certificates without completing either
-local share theorem~\cite{bridge146archive}.
+These records establish progress on certificates without completing these
+local share theorems~\cite{bridge146archive}.
 
 The saved-cycle obstructions concern their stated graph, weights and
 occurrence event. In particular, the joint-floor obstruction leaves the
@@ -6341,6 +6363,12 @@ source, object and dependency hashes.
 I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Uniform occurrence credit and the
 original share-floor profile}, research archive, milestone 149.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/149-share-credit-tradeoff}.
+
+\bibitem{share150archive}
+I.~Hironaka, T.~Ma, and S.~Zhan, \emph{A count-free certificate and
+conditional actual-snake share bound for 012032}, research archive,
+milestone 150.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/150-actual-pair-share}.
 
 \end{thebibliography}
 \end{document}
