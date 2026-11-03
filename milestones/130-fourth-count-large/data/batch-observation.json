@@ -1,0 +1,68 @@
+{
+  "recorded_at": "2026-11-03T12:41:47.516445+00:00",
+  "batches": [
+    {
+      "batch": "104-complete-potential-batch",
+      "pid": 21896,
+      "process": null,
+      "process_live": false,
+      "snapshot": "audit/observed-104-complete-potential-batch-1793709707343374600.json",
+      "sha256": "93ce035c9c12a2cc9408d667bbf5eae6dd878c1af6f3cbd3acea0beec61d792c",
+      "recorded_status": "STOPPED",
+      "selected_modules": 370,
+      "progress_fields": {
+        "status": "STOPPED",
+        "pid": 21896,
+        "started_at": "2026-11-03T04:19:27.928806+00:00",
+        "plan_sha256": "9a690dd6c2c94e3b7a8466f087e158518fdef421acbeb102e8008cf10d8929a8",
+        "checker_sha256": "7c30d216e241c795fb24788e424e8faca86f64922a18ec84b4bee8fb5e385261",
+        "generator_sha256": "c545fcb70d755956a5f4616ee3da512cd6c7d9a9154b2e80ce775479d5546564",
+        "active": null,
+        "remaining_groups": 787,
+        "complete_graph_potential_certificates_checked": false,
+        "contexts_checked_by_profile": {
+          "completed": 247,
+          "conditional": 249
+        },
+        "contexts_remaining_by_profile": {
+          "completed": 544,
+          "conditional": 542
+        },
+        "updated_at": "2026-11-03T07:32:48.823112+00:00",
+        "exception": "RuntimeError(('Both methods exceeded their limits', 'completed', 191))",
+        "stopped_at": "2026-11-03T07:32:48.823112+00:00"
+      }
+    },
+    {
+      "batch": "115-total-count-certificate",
+      "pid": 39044,
+      "process": {
+        "ProcessId": 39044,
+        "ParentProcessId": 31228,
+        "Name": "python.exe",
+        "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones\\115-total-count-certificate\\scripts\\run_batch.py"
+      },
+      "process_live": true,
+      "snapshot": "audit/observed-115-total-count-certificate-1793709707343374600.json",
+      "sha256": "5bb3f7b9babd83efd5cea048567627f18b1754bd808b1eefb4bc093469683a60",
+      "recorded_status": "RUNNING",
+      "checked_modules": 651,
+      "total_modules": 1397,
+      "checker_snapshot": "audit/observed-115-total-count-certificate-checker-1793709707343374600.json",
+      "checker_snapshot_sha256": "e309e6fd714008ccb251af69fa67b1e3431c11beb1e4768d61ce8f6b3a76a1d9",
+      "checker_passed_records": 0,
+      "checker_status": "RUNNING"
+    },
+    {
+      "batch": "122-endpoint-equality",
+      "pid": 55040,
+      "process": null,
+      "process_live": false,
+      "snapshot": "audit/observed-122-endpoint-equality-1793709707343374600.json",
+      "sha256": "b93b44b0088ab7aeebe602cc768fdd8dc8bf6cd2ca3e17731b32a922df97287e",
+      "recorded_status": "PASS_ALL_ENDPOINT_CERTIFICATES_AND_ACTUAL_ASSEMBLY"
+    }
+  ],
+  "script_sha256": "31aaccb2b43329d6f913540b1e74140ebabaf031bdbb925688b12f5886a3397f",
+  "scope": "Point-in-time process-backed observations only; incomplete batches are not completed proofs."
+}

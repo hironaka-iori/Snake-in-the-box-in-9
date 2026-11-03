@@ -1,0 +1,414 @@
+"""Independent audit of the fourth-count-at-least-four input and terminal native evidence."""
+from pathlib import Path
+from collections import Counter
+from itertools import combinations
+import argparse
+import ctypes
+import datetime
+import hashlib
+import json
+import time
+import subprocess
+
+HERE = Path(__file__).resolve().parents[1]
+ROOT = HERE.parents[1]
+PRIOR = ROOT / 'milestones/128-coupled-pair'
+PINS = {}
+
+
+def sha(path):
+    path = Path(path).resolve()
+    h = hashlib.sha256()
+    with path.open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            h.update(block)
+    try:
+        name = path.relative_to(ROOT).as_posix()
+    except ValueError:
+        name = str(path)
+    result = h.hexdigest()
+    if name in PINS:
+        assert PINS[name] == result, ('Changed input', name)
+    PINS[name] = result
+    return result
+
+
+def read(path):
+    sha(path)
+    return json.loads(Path(path).read_text(encoding='utf-8-sig'))
+
+
+def verify(path, expected):
+    assert sha(path) == expected, ('Hash mismatch', str(path))
+
+
+def parse_cnf(path):
+    sha(path)
+    header = None
+    clauses = []
+    with path.open('rt', encoding='ascii') as stream:
+        for line in stream:
+            fields = line.split()
+            if not fields or fields[0] == 'c':
+                continue
+            if fields[0] == 'p':
+                assert header is None and not clauses and fields[:2] == ['p', 'cnf'] and len(fields) == 4
+                header = tuple(map(int, fields[2:]))
+            else:
+                assert header is not None
+                numbers = tuple(map(int, fields))
+                assert numbers[-1] == 0 and all(0 < abs(x) <= header[0] for x in numbers[:-1])
+                clauses.append(numbers[:-1])
+    assert header is not None and len(clauses) == header[1]
+    return header, clauses
+
+
+def serialize(variables, clauses):
+    return (f'p cnf {variables} {len(clauses)}\n' + ''.join(' '.join(map(str, c)) + ' 0\n' for c in clauses)).encode('ascii')
+
+
+def reconstruct_counter(literals, upper, first_variable, counter_index):
+    register = lambda i, j: first_variable + upper * i + j
+    rows, tags = [], []
+    groups = [[] for _ in literals]
+
+    def add(clause, tag, group):
+        clause = tuple(clause)
+        rows.append(clause)
+        tags.append(tag)
+        groups[group].append(clause)
+
+    add((-literals[0], register(0, 0)), ['first', counter_index, 0], 0)
+    for j in range(1, upper):
+        add((-register(0, j),), ['zero', counter_index, j], 0)
+    for i in range(1, len(literals)):
+        add((-literals[i], register(i, 0)), ['first', counter_index, i], i)
+        add((-register(i - 1, 0), register(i, 0)), ['mono', counter_index, i - 1, 0], i)
+        for j in range(1, upper):
+            add((-literals[i], -register(i - 1, j - 1), register(i, j)), ['step', counter_index, i - 1, j - 1], i)
+            add((-register(i - 1, j), register(i, j)), ['mono', counter_index, i - 1, j], i)
+        add((-literals[i], -register(i - 1, upper - 1)), ['over', counter_index, i - 1], i)
+    meanings = {str(register(i, j)): ['r', counter_index, i, j]
+                for i in range(len(literals)) for j in range(upper)}
+    local_cases = clause_evaluations = 0
+    for i, literal in enumerate(literals):
+        for before in range(min(i, upper) + 1):
+            for true_occurrence in (0, 1):
+                after = before + true_occurrence
+                if after > upper:
+                    continue
+                values = {abs(literal): bool(true_occurrence) if literal > 0 else not bool(true_occurrence)}
+                for j in range(upper):
+                    values[register(i, j)] = after >= j + 1
+                    if i:
+                        values[register(i - 1, j)] = before >= j + 1
+                for clause in groups[i]:
+                    assert all(abs(x) in values for x in clause)
+                    assert any(values[abs(x)] == (x > 0) for x in clause)
+                    clause_evaluations += 1
+                local_cases += 1
+    return rows, tags, meanings, dict(local_threshold_cases=local_cases, clause_evaluations=clause_evaluations)
+
+
+def replay_prefix(path, original, limit=None, variables=9062):
+    class MemoryStatus(ctypes.Structure):
+        _fields_ = [('length', ctypes.c_ulong), ('load', ctypes.c_ulong),
+                    ('total_physical', ctypes.c_ulonglong), ('available_physical', ctypes.c_ulonglong),
+                    ('total_page', ctypes.c_ulonglong), ('available_page', ctypes.c_ulonglong),
+                    ('total_virtual', ctypes.c_ulonglong), ('available_virtual', ctypes.c_ulonglong),
+                    ('available_extended', ctypes.c_ulonglong)]
+    memory = MemoryStatus()
+    memory.length = ctypes.sizeof(memory)
+    assert ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(memory))
+    assert memory.available_physical >= 1024**3, ('Insufficient available memory for replay', memory.available_physical)
+    started = time.monotonic()
+    database = {i: c for i, c in enumerate(original, 1)}
+    last = len(original)
+    deductions = total_hints = deleted = 0
+    maximum_live = len(database)
+    maximum_hints = deletion_records = physical_lines = 0
+    empty = False
+    final_clause = None
+    consumed = hashlib.sha256()
+    with path.open('rb') as stream:
+        for line in stream:
+            physical_lines += 1
+            consumed.update(line)
+            fields = line.split()
+            if len(fields) > 1 and fields[1] == b'd':
+                assert fields[-1] == b'0'
+                for item in fields[2:-1]:
+                    identifier = int(item)
+                    assert identifier in database
+                    del database[identifier]
+                    deleted += 1
+                deletion_records += 1
+                continue
+            numbers = list(map(int, fields))
+            zero = numbers.index(0, 1)
+            identifier, clause, hints = numbers[0], tuple(numbers[1:zero]), numbers[zero + 1:-1]
+            assert numbers[-1] == 0 and identifier > last and hints
+            assert all(0 < h < identifier and h in database for h in hints)
+            assert all(0 < abs(x) <= variables for x in clause)
+            assigned = {}
+            for literal in clause:
+                truth = literal < 0
+                assert abs(literal) not in assigned or assigned[abs(literal)] == truth
+                assigned[abs(literal)] = truth
+            conflict = False
+            for offset, hint in enumerate(hints):
+                assert not conflict
+                remaining = set()
+                for literal in database[hint]:
+                    assert abs(literal) not in assigned or assigned[abs(literal)] != (literal > 0)
+                    if abs(literal) not in assigned:
+                        remaining.add(literal)
+                assert len(remaining) <= 1
+                if remaining:
+                    literal = remaining.pop()
+                    assigned[abs(literal)] = literal > 0
+                else:
+                    conflict = True
+                    assert offset == len(hints) - 1
+            assert conflict
+            database[identifier] = clause
+            last = identifier
+            deductions += 1
+            total_hints += len(hints)
+            maximum_hints = max(maximum_hints, len(hints))
+            maximum_live = max(maximum_live, len(database))
+            empty |= not clause
+            final_clause = clause
+            if limit is not None and deductions == limit:
+                break
+    if limit is None:
+        assert deductions > 0 and final_clause == (), 'Complete replay did not end in an empty derived clause'
+    else:
+        assert deductions == limit
+    return dict(status='PASS_COMPLETE_POSITIVE_RUP_BRANCH_REFUTATION' if limit is None else 'PASS_BOUNDED_PREFIX_ON_BRANCH_INPUT',
+                deductions=deductions, ordered_hints=total_hints,
+                deleted_identifiers_processed=deleted, last_identifier=last, empty_clause_in_prefix=empty,
+                consumed_prefix_sha256=consumed.hexdigest(), complete_refutation_checked=limit is None,
+                final_derived_clause_empty=final_clause == (), maximum_live_clauses=maximum_live,
+                remaining_live_clauses=len(database), maximum_hints_in_step=maximum_hints,
+                deletion_records=deletion_records, physical_lines=physical_lines,
+                initial_available_memory_bytes=memory.available_physical, seconds=time.monotonic()-started,
+                scope='Complete native proof of the exact 105246-clause restricted input when complete_refutation_checked is true. Actual-snake semantics and Lean replay remain separate.')
+
+
+def inspect_model(stdout, clauses, variables, window, corners):
+    literals = [int(token) for line in stdout.splitlines() if line.startswith('v ')
+                for token in line.split()[1:] if token != '0']
+    assert all(1 <= abs(x) <= variables for x in literals)
+    assert len(set(map(abs, literals))) == len(literals)
+    assignment = {abs(x): x > 0 for x in literals}
+    occurring = {abs(x) for clause in clauses for x in clause}
+    assert occurring <= assignment.keys()
+    assert all(any(assignment[abs(x)] == (x > 0) for x in clause) for clause in clauses)
+    selected = {v for v in range(512) if assignment[v + 1]}
+    assert set(window) <= selected
+    adjacency = {v: sorted(v ^ (1 << a) for a in range(9) if (v ^ (1 << a)) in selected) for v in selected}
+    assert all(1 <= len(ns) <= 2 for ns in adjacency.values())
+    endpoints = sorted(v for v in selected if len(adjacency[v]) == 1)
+    assert len(endpoints) <= 2
+    remaining = set(selected)
+    components = []
+    while remaining:
+        todo, reached = [min(remaining)], set()
+        while todo:
+            v = todo.pop()
+            if v not in remaining:
+                continue
+            reached.add(v)
+            remaining.remove(v)
+            todo.extend(adjacency[v])
+        components.append(sorted(reached))
+    cycles = [c for c in components if all(len(adjacency[v]) == 2 for v in c)]
+    alpha = [sum(v not in selected for v in opposite) for opposite in corners]
+    direct_alpha = [sum(all(v not in selected for v in (centre ^ (1 << a), centre ^ (1 << b),
+                                      centre ^ (1 << a) ^ (1 << b)))
+                        for a, b in combinations(range(9), 2)) for centre in window[1:-1]]
+    assert alpha == direct_alpha and sum(alpha) <= 22
+    assert all(a >= lo for a, lo in zip(alpha, [1, 2, 1, 4, 1, 1]))
+    assert alpha[1] + alpha[3] >= 8
+    path = None
+    pair_checks = 0
+    if not cycles:
+        assert len(components) == 1 and len(endpoints) == 2
+        path = [endpoints[0]]
+        while len(path) < len(selected):
+            candidates = [v for v in adjacency[path[-1]] if len(path) == 1 or v != path[-2]]
+            assert len(candidates) == 1 and candidates[0] not in path
+            path.append(candidates[0])
+        assert path[-1] == endpoints[1] and set(path) == selected
+        for i in range(len(path)):
+            for j in range(i + 1, len(path)):
+                assert ((path[i] ^ path[j]).bit_count() == 1) == (j == i + 1)
+                pair_checks += 1
+    return dict(status='PASS_COMPLETE_INDUCED_PATH' if path is not None else 'PASS_CNF_MODEL_WITH_CYCLE_COMPONENTS',
+                assignment_count=len(assignment), checked_input_clauses=len(clauses), selected_vertices=sorted(selected),
+                endpoints=endpoints, components=components, cycles=cycles, actual_six_counts=alpha,
+                six_sum=sum(alpha), other_sum=sum(alpha[i] for i in (2, 4, 5)), path=path,
+                path_length_edges=len(path) - 1 if path is not None else None, unordered_path_pairs_checked=pair_checks)
+
+
+def inspect_interrupted(clauses):
+    record = read(HERE / 'data/search.json')
+    assert record['status'] == 'RUNNING'
+    verify(HERE / 'scripts/search.py', record['script_sha256'])
+    verify(HERE / 'data/preparation.json', record['preparation_sha256'])
+    verify(HERE / 'work/large.cnf', record['cnf_sha256'])
+    verify(Path(record['command'][0]), record['solver_sha256'])
+    ids = [record['pid'], record['solver_pid']]
+    command = '@(Get-CimInstance Win32_Process | Where-Object {$_.ProcessId -in @(' + ','.join(map(str, ids)) + ')} | Select-Object ProcessId,Name,CommandLine)|ConvertTo-Json -Compress'
+    observed = subprocess.check_output(['powershell', '-NoProfile', '-Command', command], text=True).strip()
+    processes = json.loads(observed) if observed else []
+    assert not processes, ('Original process identifier present; inspect before auditing', processes)
+    path = HERE / 'work/large.raw.lrat'
+    before = sha(path)
+    scan = dict(physical_lines=0, deduction_records=0, deletion_records=0, empty_clause_records=0)
+    last = b''
+    with path.open('rb') as stream:
+        for line in stream:
+            scan['physical_lines'] += 1
+            fields = line.split(None, 2)
+            assert len(fields) >= 2
+            if fields[1] == b'd':
+                scan['deletion_records'] += 1
+            else:
+                scan['deduction_records'] += 1
+                scan['empty_clause_records'] += fields[1] == b'0'
+            last = line
+    scan.update(final_line_terminated=last.endswith(b'\n'), final_record_ends_in_zero=last.split()[-1:] == [b'0'])
+    prefix = replay_prefix(path, clauses, limit=5000, variables=9062)
+    assert sha(path) == before
+    for n in ['search.stdout.txt', 'search.stderr.txt']:
+        sha(HERE / 'logs' / n)
+    return dict(status='INTERRUPTED_NO_NATIVE_TERMINAL_RESULT', recorded_status=record['status'],
+                original_pids=ids, process_ids_absent_at_audit=True, bytes=path.stat().st_size,
+                sha256=before, scan=scan, checked_prefix=prefix,
+                scope='The original process identifiers are absent. Its stale RUNNING record does not establish an exit code, timeout, SAT or UNSAT result. Only the first 5000 deductions were replayed.')
+
+
+def inspect_resumed(clauses, variables, window, corners):
+    path = HERE / 'data/search-resumed.json'
+    if not path.exists():
+        return None
+    record = json.loads(path.read_text(encoding='utf-8-sig'))
+    if record['status'] == 'RUNNING':
+        return None
+    read(path)
+    verify(HERE / 'scripts/search_resumed.py', record['script_sha256'])
+    verify(HERE / 'data/preparation.json', record['preparation_sha256'])
+    verify(HERE / 'work/large.cnf', record['cnf_sha256'])
+    verify(Path(record['command'][0]), record['solver_sha256'])
+    stdout = HERE / 'logs/search-resumed.stdout.txt'
+    stderr = HERE / 'logs/search-resumed.stderr.txt'
+    verify(stdout, record['stdout_sha256'])
+    verify(stderr, record['stderr_sha256'])
+    raw = HERE / 'work/large-resumed.raw.lrat'
+    if record['raw_sha256'] is not None:
+        verify(raw, record['raw_sha256'])
+        assert raw.stat().st_size == record['raw_bytes']
+    result = dict(recorded_status=record['status'], recorded_exit_code=record['exit_code'],
+                  seconds=record['seconds'], raw_bytes=record['raw_bytes'])
+    if record['status'] == 'NATIVE_UNSAT_COMPLETE_REPLAY_PENDING':
+        assert record['exit_code'] == 20 and 's UNSATISFIABLE' in stdout.read_text()
+        result['proof'] = replay_prefix(raw, clauses, limit=None, variables=variables)
+    elif record['status'] == 'NATIVE_SAT_MODEL_CHECK_PENDING':
+        assert record['exit_code'] == 10 and 's SATISFIABLE' in stdout.read_text()
+        result['model'] = inspect_model(stdout.read_text(), clauses, variables, window, corners)
+    elif record['status'] == 'TIMEOUT':
+        assert record['exit_code'] not in [10,20]
+        result['proof_prefix'] = replay_prefix(raw, clauses, limit=5000, variables=variables)
+    else:
+        result['scope'] = 'No successful native outcome; no exclusion is inferred.'
+    result['scope'] = 'A full native refutation, if present, still requires its Lean replay and the complete actual-snake interpretation. A timeout or prefix is not an exclusion.'
+    return result
+
+
+def main():
+    started = time.monotonic()
+    sha(Path(__file__))
+    sha(ROOT / 'milestones/129-fourth-count-three/audit/audit_branch.py')
+    prep = read(HERE / 'data/preparation.json')
+    verify(HERE / 'scripts/prepare.py', prep['script_sha256'])
+    for name, digest in prep['source_pins'].items():
+        verify(ROOT / name, digest)
+    counter = read(HERE / 'data/large-counter.json')
+    verify(HERE / 'data/large-counter.json', prep['counter_sha256'])
+    header, clauses = parse_cnf(HERE / 'work/large.cnf')
+    old_header, base = parse_cnf(PRIOR / 'work/pair.cnf')
+    assert old_header == (8705,104529) and header == (9062,105246)
+    verify(HERE / 'work/large.cnf', prep['cnf_sha256'])
+    directions = [0,1,2,0,3,2,4]
+    window = [0]
+    for a in directions:
+        window.append(window[-1] ^ (1 << a))
+    corners = []
+    for i, v in enumerate(window[1:-1], 1):
+        unused = [a for a in range(9) if a not in [directions[i-1],directions[i]]]
+        corners.append([v ^ (1 << a) ^ (1 << b) for a,b in combinations(unused,2)])
+    assert all(len(cs) == len(set(cs)) == 21 for cs in corners)
+    assert counter['corner_lists'] == corners
+    literals = [v+1 for v in corners[3]]
+    assert counter['literals'] == literals
+    assert (counter['counter_index'],counter['position'],counter['absent_lower'],counter['selected_upper']) == (9,4,4,17)
+    assert (counter['first_new_variable'],counter['last_new_variable']) == (8706,9062)
+    extra, tags, meanings, threshold_checks = reconstruct_counter(literals,17,8706,9)
+    assert len(extra) == 717 and len(meanings) == 357
+    assert counter['clauses'] == [list(c) for c in extra] and counter['tags'] == tags
+    assert counter['registers'] == meanings
+    assert clauses == base + extra
+    assert (HERE / 'work/large.cnf').read_bytes() == serialize(9062,base+extra)
+    original_body = (PRIOR / 'work/pair.cnf').read_bytes().split(b'\n',1)[1]
+    assert serialize(9062,base+extra).split(b'\n',1)[1].startswith(original_body)
+    assert set(map(int,meanings)) == set(range(8706,9063))
+    assert all(abs(x)<=8705 for c in base for x in c)
+    assert all(abs(x)<=512 or 8706<=abs(x)<=9062 for c in extra for x in c)
+    case = read(ROOT / 'milestones/125-critical-six-count/data/probes/0120324-total22-positive.json')
+    assert case['window'] == window and case['bounds'] == [[1,21],[2,21],[1,21],[3,21],[1,21],[1,21]]
+    assert prep['necessary_intervals'] == [[1,21],[2,21],[1,21],[4,21],[1,21],[1,21]]
+    split_path = ROOT / 'milestones/129-fourth-count-three/lean/ActualSplit129.lean'
+    split_record_path = ROOT / 'milestones/129-fourth-count-three/logs/actual-split-1793689366716282000/record.json'
+    split = read(split_record_path)
+    assert split['status']=='PASS' and split['exit_code']==0 and split['dependencies_unchanged']
+    verify(split_path,split['source_sha256'])
+    verify(split_record_path.parent/'source.lean.txt',split['source_sha256'])
+    verify(split_record_path.parent/'checker.py.txt',split['checker_sha256'])
+    for field in ['object','importable_object','log']:
+        verify(Path(split[field]),split[field+'_sha256'])
+    for name,digest in split['dependencies'].items():
+        verify(Path(name),digest)
+    assert any(a['theorem']=='Snake9.ActualSplit129.actual_large_bounds' for a in split['axioms'])
+    assert all(set(a['axioms']) <= {'propext','Classical.choice','Quot.sound'} for a in split['axioms'])
+    source = split_path.read_text()
+    theorem = source[source.index('theorem actual_large_bounds'):source.index('theorem actual_exhaustive_bounds')]
+    assert '(hfourth : 4 ≤ coreAlpha p (r+4))' in theorem
+    assert '[(1,21),(2,21),(1,21),(4,21),(1,21),(1,21)]' in theorem
+    result = dict(status='PASS_INDEPENDENT_LARGE_BRANCH_INPUT_AND_NATIVE_EVIDENCE',
+                  completed_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                  base_clauses=len(base),added_clauses=len(extra),clauses=len(clauses),
+                  declared_variables=9062,occurring_variables=len({abs(x) for c in clauses for x in c}),
+                  fresh_variables=357,fresh_range=[8706,9062],counter_index=9,
+                  corner_lists=corners,exact_new_counter_bytes_tags_registers=True,base_body_bytes_unchanged=True,
+                  equality_case_constraints_appended=False,threshold_checks=threshold_checks,
+                  checked_actual_large_bounds_theorem=theorem.strip(),
+                  interrupted=inspect_interrupted(clauses))
+    resumed=inspect_resumed(clauses,9062,window,corners)
+    result['resumed']=resumed
+    result['seconds']=time.monotonic()-started
+    result['source_files_sha256']=dict(sorted(PINS.items()))
+    result['scope']='Exact complementary branch input and native evidence only. The new geometric counter interpretation, complete old-input transfer and any full Lean contradiction remain separate requirements.'
+    for name,digest in tuple(PINS.items()):
+        verify(Path(name) if Path(name).is_absolute() else ROOT/name,digest)
+    dest=HERE/'data'/('large-review.json' if resumed is not None else 'large-input-review.json')
+    assert not dest.exists(),str(dest)
+    dest.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+    print(json.dumps({k:v for k,v in result.items() if k not in ['source_files_sha256','checked_actual_large_bounds_theorem','corner_lists']},indent=2))
+
+
+if __name__=='__main__':
+    main()
+
+

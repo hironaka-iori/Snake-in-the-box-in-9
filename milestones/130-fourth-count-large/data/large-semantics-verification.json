@@ -1,0 +1,136 @@
+{
+  "status": "PASS_ACTUAL_LARGE_COUNTER_717_CLAUSES",
+  "lean_modules": 2,
+  "axiom_reports": 10,
+  "actual_selected_cap": 17,
+  "fourth_count_lower": 4,
+  "clauses": 717,
+  "registers": 357,
+  "actual_canonical_window_satisfaction": true,
+  "full_105246_clause_satisfaction": false,
+  "complete_refutation": false,
+  "new_six_count_floor": false,
+  "new_global_upper_bound": false,
+  "reports": [
+    {
+      "module": "LargeLower130",
+      "receipt": "data/independent-large-lower-audit.json",
+      "receipt_sha256": "ea9c2ecc611f904b21a6cd5afe424a40c58dc784d57697f82c384e5235811798",
+      "source_sha256": "409e774f6e9afd78a5c7a329e9a90e6b13176aa2d76cf41c02fe83e7bb0d73ac",
+      "object_sha256": "c567b6b10b8a739bb6f39920172ca604984cc5a9ae62a954e60f678303084076",
+      "seconds": 201.56200000000013,
+      "axioms": [
+        {
+          "theorem": "Snake9.LargeLower130.corner_list_eq",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LargeLower130.selected_absent_identity",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LargeLower130.actual_selected_bound",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LargeLower130.actual_normalized_bound",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LargeLower130.actual_counter_good",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "LargeClauses130",
+      "receipt": "data/independent-large-clauses-audit.json",
+      "receipt_sha256": "f24ab057716669c85530df69aff15b083117ac6d11c92e983901b8261522c38b",
+      "source_sha256": "b93ed3342b715a60b03daf129f957cf413563968584ebf2041bc087d2e790d4e",
+      "object_sha256": "21fe6ab9ca5689e25716615c09f830b06f85c0dec57d10b0eb6b1867d5fa2834",
+      "seconds": 60.375,
+      "axioms": [
+        {
+          "theorem": "Snake9.LargeClauses130.tags_checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.LargeClauses130.tags_checked_window",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LargeClauses130.actual_large_clauses",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LargeClauses130.actual_normalized_clauses",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LargeClauses130.literal_check",
+          "axioms": []
+        }
+      ]
+    }
+  ],
+  "pins": {
+    "data/independent-large-lower-audit.json": "ea9c2ecc611f904b21a6cd5afe424a40c58dc784d57697f82c384e5235811798",
+    "lean/LargeLower130.lean": "409e774f6e9afd78a5c7a329e9a90e6b13176aa2d76cf41c02fe83e7bb0d73ac",
+    "audit/check_large_lower.py": "192afb62d7aef38bed0e1fb41d7ccc1edd14e9090beeb13802d13ef6e7eeb3e3",
+    "logs/large-lower-1793708193521423200/compiler.log": "2e560ae2efa16d7a9b9d2b26220943261b94fffa7fc949a954ceb0f8331e1091",
+    "build-independent/LargeLower130-1793708193521423200.olean": "c567b6b10b8a739bb6f39920172ca604984cc5a9ae62a954e60f678303084076",
+    "build-independent/LargeLower130.olean": "c567b6b10b8a739bb6f39920172ca604984cc5a9ae62a954e60f678303084076",
+    "logs/large-lower-1793708193521423200/record.json": "ea9c2ecc611f904b21a6cd5afe424a40c58dc784d57697f82c384e5235811798",
+    "logs/large-lower-1793708193521423200/source.lean.txt": "409e774f6e9afd78a5c7a329e9a90e6b13176aa2d76cf41c02fe83e7bb0d73ac",
+    "logs/large-lower-1793708193521423200/checker.py.txt": "192afb62d7aef38bed0e1fb41d7ccc1edd14e9090beeb13802d13ef6e7eeb3e3",
+    "data/independent-large-clauses-audit.json": "f24ab057716669c85530df69aff15b083117ac6d11c92e983901b8261522c38b",
+    "lean/LargeClauses130.lean": "b93ed3342b715a60b03daf129f957cf413563968584ebf2041bc087d2e790d4e",
+    "audit/check_large_clauses.py": "f9833f21cc6002aa4b0f2107557700494c920e8b7bbbbf08b00954ff9eed6dfa",
+    "logs/large-clauses-1793708403994185400/compiler.log": "6a4014169321e1de18280e748291c8f2deee9eeec683a97a3ba52ee960f12be5",
+    "build-independent/LargeClauses130-1793708403994185400.olean": "21fe6ab9ca5689e25716615c09f830b06f85c0dec57d10b0eb6b1867d5fa2834",
+    "build-independent/LargeClauses130.olean": "21fe6ab9ca5689e25716615c09f830b06f85c0dec57d10b0eb6b1867d5fa2834",
+    "logs/large-clauses-1793708403994185400/record.json": "f24ab057716669c85530df69aff15b083117ac6d11c92e983901b8261522c38b",
+    "logs/large-clauses-1793708403994185400/source.lean.txt": "b93ed3342b715a60b03daf129f957cf413563968584ebf2041bc087d2e790d4e",
+    "logs/large-clauses-1793708403994185400/checker.py.txt": "f9833f21cc6002aa4b0f2107557700494c920e8b7bbbbf08b00954ff9eed6dfa",
+    "data/large-counter.json": "6eead330a382b126234b022800bda6888bdd72e4a60630f3d748e55e56322ff6",
+    "work/large.cnf": "85ed4f2dc93e3ce81f4b347ba2a399ad6034afc019cc06fa253e8d792b6ac67a",
+    "audit/check_lean_data.py": "39625bc84832d4978bd7fc88a5963abc87c44ccee813e316caf77b675a5614fc",
+    "data/preparation.json": "7909339627b2e0998bebf9d639cdb2102c2bc7a4b4012e942dfad2423fc724a8",
+    "data/lean-data-review.json": "349c3de84264af6b1df376697af786ed9c77762ba5f17e2b7628b9783f09b2b7",
+    "audit/generate_large_clauses.py": "3fb372ce3b3b33ae4335b047060797a6271a85a7dbf8cfcfe9e5451b8b48f0f9",
+    "audit/concrete-large-generation.json": "639dfbaaba2f3fd5f53891a359bb36cee3642a9f08f6a4984a1937dad70639c1",
+    "audit/prepare_checkers.py": "9896e4b98ad53f9101c26a4a2e7cbee860398b6503449b2ee666bdc0dcdedae2",
+    "audit/checker-generation.json": "86ef08a704c618078d60ebcc1f60fa96324c3fdd37590df05836308ca3b1d687",
+    "audit/write_large_derivation.py": "a0b11605f09ec877fcefa02812e1745b87c1c4a31ddb707ca03a30e116f4c222"
+  },
+  "scope": "For a fitting canonical0120324 window and actual fourth count>=4, an actual normalized assignment satisfies exactly the717 added clauses. No six-total cap or pair-count hypothesis is required."
+}

@@ -1,0 +1,88 @@
+{
+  "status": "OBSERVED_INTERRUPTED_OWNERS_ABSENT",
+  "observed_at": "2026-11-03T12:14:40.403195+00:00",
+  "processes": [
+    {
+      "ProcessId": 46036,
+      "ParentProcessId": 44436,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones\\130-fourth-count-large\\scripts\\recover_interruption.py"
+    }
+  ],
+  "missing_owners": [
+    15392,
+    43492,
+    47988,
+    52152,
+    55632
+  ],
+  "preserved": [
+    {
+      "original": "milestones/129-fourth-count-three/data/replay-progress.json",
+      "snapshot": "audit/interrupted/milestones/129-fourth-count-three/data/replay-progress.json",
+      "sha256": "5d270dd2ffd178acd2b2c3d92629d01038dcfe9e023e6c16ed1e51986fda7789"
+    },
+    {
+      "original": "milestones/129-fourth-count-three/data/replay.lock",
+      "snapshot": "audit/interrupted/milestones/129-fourth-count-three/data/replay.lock",
+      "sha256": "a94130aab92a13f099aa07f367414d526776b14b5a016100b73dfb631b8f0271"
+    },
+    {
+      "original": "milestones/115-total-count-certificate/data/batch-progress.json",
+      "snapshot": "audit/interrupted/milestones/115-total-count-certificate/data/batch-progress.json",
+      "sha256": "c4b43c7d413ef92225054f248c1f450abd412824a6f7a5f69d8ab16eb9e1444c"
+    },
+    {
+      "original": "milestones/115-total-count-certificate/data/batch.lock",
+      "snapshot": "audit/interrupted/milestones/115-total-count-certificate/data/batch.lock",
+      "sha256": "47173c114a2ba9d0365f9494b1e5bb8e23311ad90890628baaa6b8866538e933"
+    },
+    {
+      "original": "milestones/115-total-count-certificate/data/check.lock",
+      "snapshot": "audit/interrupted/milestones/115-total-count-certificate/data/check.lock",
+      "sha256": "80d6063d32cba7f808b502af245bcf7ada941d1aa1be72b88699fd9d68bd8e52"
+    },
+    {
+      "original": "milestones/130-fourth-count-large/data/search.json",
+      "snapshot": "audit/interrupted/milestones/130-fourth-count-large/data/search.json",
+      "sha256": "6686550ea45381cfc83b509e7ac2a3bc040a2f7f1d2b939c5ecd1dbd597b0338"
+    },
+    {
+      "original": "milestones/129-fourth-count-three/logs/replay-1793690483178319300.json",
+      "snapshot": "audit/interrupted/milestones/129-fourth-count-three/logs/replay-1793690483178319300.json",
+      "sha256": "5d270dd2ffd178acd2b2c3d92629d01038dcfe9e023e6c16ed1e51986fda7789"
+    },
+    {
+      "original": "milestones/115-total-count-certificate/logs/batch-1793679596748382300.json",
+      "snapshot": "audit/interrupted/milestones/115-total-count-certificate/logs/batch-1793679596748382300.json",
+      "sha256": "c4b43c7d413ef92225054f248c1f450abd412824a6f7a5f69d8ab16eb9e1444c"
+    },
+    {
+      "original": "milestones/115-total-count-certificate/logs/check-run-1793691735205969000.json",
+      "snapshot": "audit/interrupted/milestones/115-total-count-certificate/logs/check-run-1793691735205969000.json",
+      "sha256": "161ab768cbe47cdd74fbc8264bec21a3a3b03b6bfd4ef4d7f73b20f5a3f1a6c0"
+    },
+    {
+      "original": "milestones/130-fourth-count-large/work/large.raw.lrat",
+      "sha256": "276b386bd59ce1703dbe605959a6e4a6977f7da6e953df7519375e395f355388",
+      "bytes": 52822016
+    },
+    {
+      "original": "milestones/130-fourth-count-large/logs/search.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "original": "milestones/130-fourth-count-large/logs/search.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "locks_to_remove": [
+    "milestones/129-fourth-count-three/data/replay.lock",
+    "milestones/115-total-count-certificate/data/batch.lock",
+    "milestones/115-total-count-certificate/data/check.lock"
+  ],
+  "script_sha256": "e3f8dc2b2f5afa6cdc48e1c39c722b7f73369cecb8f5fe9dc06196845e093dcf",
+  "scope": "Missing processes establish interruption. Saved RUNNING records do not establish terminal exit status, timeout, or a completed proof. The old native trace and all compiler outputs are retained."
+}

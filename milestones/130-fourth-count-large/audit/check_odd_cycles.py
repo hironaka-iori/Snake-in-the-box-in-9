@@ -1,0 +1,145 @@
+"""Conditional parity comparisons on the two supplied saved cycles only."""
+from pathlib import Path
+from fractions import Fraction
+from itertools import product
+import datetime,hashlib,json
+
+H=Path(__file__).resolve().parents[1];R=H.parents[1]
+paths=[R/'milestones/121-replacement-window-pressure/data/pair-graph/results.json',
+       R/'milestones/124-six-count-cycle-pressure/data/graph-26-25-25/cycle-targets.json']
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+before={p.relative_to(R).as_posix():sha(p) for p in paths}
+first,second=[json.loads(p.read_text(encoding='utf-8-sig')) for p in paths]
+assert second['source']==paths[0].relative_to(R).as_posix()
+assert second['source_sha256']==before[second['source']]
+assert second['status']=='SAVED_ORIGINAL121_CYCLE_CONTEXTS'
+assert {p['profile'] for p in first['profiles']}=={p['profile'] for p in second['profiles']}
+target=[0,1,2,0,3,2]
+def canon(word):
+ labels={};out=[]
+ for x in word:
+  if x not in labels:labels[x]=len(labels)
+  out.append(labels[x])
+ return out
+assert canon(target[::-1])==target
+def pair_deleted(a,b):return a<6 and b<6 and a+b<9
+def credit(a,b):return 24*max(0,9-a-b)
+# Test the clipping interpretation over every admissible actual count value.
+actual_pairs=feasible_pairs=0
+for a,b in product(range(1,7),repeat=2):
+ options=[range(x,x+1) if x<6 else range(6,22) for x in [a,b]]
+ feasible=[]
+ for x,y in product(*options):
+  actual_pairs+=1
+  assert min(x,6)==a and min(y,6)==b
+  if x+y>=9:
+   feasible_pairs+=1;feasible.append((x,y))
+   assert credit(a,b)<=24*((x-a)+(y-b))
+ assert pair_deleted(a,b)==(not feasible)
+assert actual_pairs==441 and feasible_pairs==413
+profiles=[]
+for source in first['profiles']:
+ copied=next(p for p in second['profiles'] if p['profile']==source['profile'])
+ cycle=source['cycle'];assert len(cycle)>0
+ assert len({e['edge'] for e in cycle})==len(cycle)
+ assert [e['edge'] for e in cycle]==[e['edge'] for e in copied['edges']]
+ assert Fraction(source['mean'])==Fraction(source['p'],source['d'])==Fraction(copied['source_mean'])
+ assert Fraction(sum(e['weight'] for e in cycle),len(cycle))==Fraction(source['mean'])
+ rows=[]
+ for index,(edge,copy) in enumerate(zip(cycle,copied['edges'])):
+  assert edge['directions']==copy['directions']
+  assert edge['counts']==copy['chronological_counts']
+  assert edge['bonus']==copy['old_bonus24']
+  assert len(edge['directions'])==9 and len(edge['counts'])==6
+  assert canon(edge['directions'])==edge['directions']
+  assert all(1<=x<=6 for x in edge['counts'])
+  code=0
+  for x in edge['counts']:code=6*code+x-1
+  assert code==edge['count_code']
+  successor=cycle[(index+1)%len(cycle)]
+  assert edge['v']==successor['u']
+  assert edge['counts'][1:]==successor['counts'][:-1]
+  assert canon(edge['directions'][1:])==canon(successor['directions'][:-1])
+  placements=[]
+  for s in [0,1]:
+   word=edge['directions'][s+2:s+8];five=edge['counts'][s:s+5]
+   orientations=[]
+   for reverse in [False,True]:
+    oriented_word=word[::-1] if reverse else word
+    oriented_five=five[::-1] if reverse else five
+    if canon(oriented_word)==target:
+     a,b=oriented_five[1],oriented_five[3]
+     orientations.append(dict(reverse=reverse,canonical_word=canon(oriented_word),
+       oriented_five_counts=oriented_five,pair=[a,b],pair_sum=a+b,
+       pair_counts_exact=a<6 and b<6,delete=pair_deleted(a,b),
+       proposed_credit=credit(a,b) if s==1 else 0))
+   if orientations:
+    assert len({(o['pair_sum'],o['delete'],o['proposed_credit']) for o in orientations})==1
+    placements.append(dict(placement=s,direction_slice=[s+2,s+8],six_directions=word,
+      five_counts=five,orientations=orientations,delete=orientations[0]['delete'],
+      proposed_credit=orientations[0]['proposed_credit']))
+  deleted=any(p['delete'] for p in placements)
+  proposed=max([p['proposed_credit'] for p in placements]+[0])
+  combined=max(edge['bonus'],proposed)
+  new_weight=None if deleted else edge['weight']-edge['bonus']+combined
+  rows.append(dict(cycle_index=index,edge=edge['edge'],u=edge['u'],v=edge['v'],
+    directions=edge['directions'],counts=edge['counts'],old_weight=edge['weight'],
+    old_bonus=edge['bonus'],placements=placements,deleted=deleted,
+    proposed_suffix_credit=proposed,max_combined_bonus_if_retained=combined,
+    new_weight=new_weight,weight_change=None if deleted else new_weight-edge['weight']))
+ deleted_ids=[e['edge'] for e in rows if e['deleted']]
+ changed=[e['edge'] for e in rows if not e['deleted'] and e['weight_change']!=0]
+ survives=not deleted_ids
+ even_phases=[]
+ repetitions=1 if len(cycle)%2==0 else 2
+ for phase in [0,1]:
+  visits=[];suffix_starts=[]
+  for k in range(len(cycle)*repetitions):
+   edge=rows[k%len(cycle)];decisions=[]
+   for placement in edge['placements']:
+    s=placement['placement'];oriented=placement['orientations'][0]
+    exact_eight=oriented['pair_counts_exact'] and oriented['pair_sum']==8
+    start_offset=k+s+2;start_parity=(phase+start_offset)%2
+    rejected=exact_eight and start_parity==1
+    if exact_eight and s==1:suffix_starts.append(start_offset)
+    decisions.append(dict(placement=s,pair=oriented['pair'],exact_pair_eight=exact_eight,
+      window_start_offset=start_offset,window_start_parity=start_parity,rejected=rejected))
+   visits.append(dict(visit=k,cycle_index=k%len(cycle),edge=edge['edge'],placements=decisions,
+      rejected=any(d['rejected'] for d in decisions)))
+  assert len(suffix_starts)==len(set(suffix_starts))
+  rejected_visits=[v['visit'] for v in visits if v['rejected']]
+  period_survives=not rejected_visits;count=len(suffix_starts)
+  even_phases.append(dict(initial_phase=phase,repetitions_to_restore_phase=repetitions,
+    parity_period_edges=len(visits),rejected_edge_visits=rejected_visits,
+    rejected_distinct_edges=sorted({v['edge'] for v in visits if v['rejected']}),
+    parity_period_survives=period_survives,
+    saved_mean_if_survives=source['mean'] if period_survives else None,
+    exact_equality_suffix_start_offsets=suffix_starts,exact_equality_suffix_starts_per_period=count,
+    maximum_complete_periods_from_thirteen=13//count if period_survives and count else None,
+    first_excluded_complete_period_count=13//count+1 if period_survives and count else None,
+    visits=visits))
+ profiles.append(dict(profile=source['profile'],original_cycle_length=len(cycle),
+   original_weight_sum=sum(e['weight'] for e in cycle),original_mean=source['mean'],
+   deleted_edges=deleted_ids,surviving_weight_changed_edges=changed,
+   topological_cycle_survives=survives,old_mean_witness_survives=survives and not changed,
+   new_saved_cycle_mean=str(Fraction(sum(e['new_weight'] for e in rows),len(rows))) if survives else None,
+   matching_placements=sum(len(e['placements']) for e in rows),edges=rows,even_length_phases=even_phases))
+for name,digest in before.items():assert sha(R/name)==digest
+out=dict(status='PASS_CONDITIONAL_ODD_PAIR_FLOOR_SAVED_CYCLE_COMPARISON',
+ completed_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+ assumption='Odd-length snakes have pair floor9. For even-length snakes an exact pair-eight window starts at even index. At most13 fitting actual equality starts occur. This audit treats these as premises.',
+ source_files_sha256=before,script_sha256=sha(Path(__file__)),
+ placement_rule='At s=0,1 inspect directions[s+2:s+8] and counts[s:s+5], reversing both together when needed. Pair indices are1,3. Symbol6 denotes[6,21].',
+ deletion_rule='Delete only when both pair symbols are below6 and their sum is below9.',
+ credit_rule='At suffix placement1, propose24*max(0,9-clipped_pair_sum), then combine with the saved bonus by maximum.',
+ even_length_rule='For phase p and edge visit k, original start parity is(p+k+s+2)%2. Reverse orientation preserves it for even total length. Reject an exact pair8 only at odd start parity.',
+ occurrence_budget_rule='Count only exact-pair-eight matching suffix placement1, once per window start. A complete periodic walk is counted only when every designated window is realized and fitting.',
+ clipping_checks=dict(symbol_pairs=36,actual_pairs=actual_pairs,actual_pairs_satisfying_floor=feasible_pairs),
+ source_cycles_cross_checked=True,profiles=profiles,
+ scope='Only the two saved original121 cycles copied by124 are tested. No fullgraph construction, solver, Lean check, new minimum-mean computation or global snake bound is performed.')
+dest=H/'data/odd-cycle-review.json';assert not dest.exists();dest.write_text(json.dumps(out,indent=2)+'\n',encoding='utf-8')
+print(json.dumps({k:v for k,v in out.items() if k not in ['profiles','source_files_sha256']},indent=2))
+for p in profiles:
+ summary={k:v for k,v in p.items() if k not in ['edges','even_length_phases']}
+ summary['even_length_phases']=[{k:v for k,v in q.items() if k!='visits'} for q in p['even_length_phases']]
+ print(json.dumps(summary,indent=2))

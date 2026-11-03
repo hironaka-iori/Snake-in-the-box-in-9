@@ -1,55 +1,48 @@
-# Continuation after milestone 129
+# Continuation after milestone 130
 
-Work in E:/Snake-in-a-box and use the requested research skill. Use ordinary
-notation; introduce a definition only when essential and repeatedly used.
-Preserve the three authors, local hyperlink settings, unrelated .gitignore
-and milestone 50 edits, and active proof jobs. Refresh GitHub first, with
-automatic Git maintenance disabled for the fetch to avoid duplicating the
-repository's ongoing maintenance.
+Work in E:/Snake-in-a-box and use the requested research skill. Keep existing
+notation; add a definition only when essential and repeatedly used. Preserve
+the three authors, hyperlink settings, unrelated .gitignore and milestone50
+changes, and active proof jobs. Fetch GitHub with automatic maintenance disabled.
 
-Read129/MATHEMATICAL_NOTE.md, the three independent audit reports, the actual
-semantic derivation, and data/checkpoint.json. Restore archived raw traces
-with scripts/verify_saved.py --restore-archives when needed on a fresh checkout.
+Read milestones/130-fourth-count-large/MATHEMATICAL_NOTE.md, its independent
+equality-completion and odd-pair audits, and data/checkpoint.json. This
+milestone's restore command includes prerequisite129 archives. The archived
+199-module prefix is followed by a separate complete221-module record; do
+not mistake the earlier snapshot for the final status.
 
-The candidate is: in a fitting canonical 0120324 window, fourth count 3 forces
-the sum of counts3,5,6 to be at least 12. The selected contradiction uses no
-six-total or pair premise. Counter 0 encodes at most two endpoints; counter 4
-the fourth lower bound 3; counter 11 its upper bound 3; counter 12 the contrary
-triple upper bound 11. The 63 corner occurrences must retain multiplicity
-over 57 distinct vertices. All 512 primary and 512 endpoint meanings are retained,
-including semantic inputs that never occur as packed proof literals.
+Completed actual-snake results:
+1. Fitting canonical012032, pair8 forces even length and even start. Thus
+   pair>=9 if either is odd, including every fitting window of length235.
+2. Fitting canonical0120324, fourth=3 forces triple(3,5,6)>=12 and six>=23.
+   A total<=22 therefore forces fourth>=4. The full contradiction and final
+   application passed; no unproved local Unsat premise remains.
 
-CoreSemantics129 now proves actual satisfaction of all 3500 selected clauses
-under fourth=3 and triple<=11. Its actual_triple_lower and actual_six_lower
-still have the explicit Unsat premise. Four helper/semantic modules have 17
-successful reports with standard axioms. Do not report the actual exclusion
-until the complete refutation and final assembly succeed.
+The complementary fourth>=4 input has105246 clauses. Its717 new clauses have
+checked actual meaning, but the full conjunction and complete contradiction
+remain unresolved. The300-second retry timed out. Prefix replay5000 is not
+a full proof. Do not import the equality-case first>=3 or second>=5 here.
 
-The root replay driver is scripts/run_replay.py --timeout 600. Inspect
-data/replay-progress.json, replay.lock and current process commands before
-resuming. The frozen checkpoint is a prefix of 221 modules, not a completed
-proof. Reuse exact receipt/source/object/log/dependency hashes. Its fixed
-checker is LratFast with 13-bit keys and offset 2400. All 1695 proof variables
-fit; the actual maximum used key is 8190. There are 435 segments and 108
-checkpoints. Do not confuse the number 6902 of distinct keys with their maximum.
+NEXT SELECTED TASK: evaluate both full finite-graph profiles with the proved
+odd-length pair floor9 and the proposed0123104 six-count floor25. See
+data/next-pressure-task.json. The18-edge saved witness contains this shape
+ten times. Its hypothetical mean becomes3011/6; that is not a new graph
+minimum. The native0123104 probe in124 is UNSAT_UNCERTIFIED. Retain all
+inherited unproved sum hypotheses. Only pursue its expensive certificate
+if the full graph improves. Preserve clipped symbol6 as[6,21], the exact
+first-symbol guard, and maximum combination of overlapping credits.
 
-After the full Lean contradiction passes, add the small actual-snake assembly
-using the checked concrete semantics. Check the final theorem's axioms and
-state the exact result. Only then report the equality case excluded. The
-next mathematical case is fourth>=4 under six-total<=22. The first>=3 and
-second>=5 deductions are specific to fourth=3 and cannot be assumed there.
+Use121/scripts/evaluate_pair.py and124/scripts/evaluate_six_shapes.py as
+references. Record source hashes, all-edge inequalities, attaining cycles,
+potential ranges and conditional comparisons. Gate a full graph run on
+at least3GiB free memory. Do not duplicate live Lean jobs. Milestone115 is
+still pending;104 stopped after timeouts;129 is complete. Inspect current
+progress and process commands rather than inferring liveness from old files.
 
-Milestone 122's endpoint driver reported completion during this round. Its
-independent completion review is saved alongside 129 if present. Read the
-audited theorem assumptions before using its at-most-13 equality-window count.
-It is a separate completed theorem, not a global upper-bound improvement.
-The 104 and 115 drivers remain separate pending proof obligations; inspect
-their current processes and progress rather than restarting them.
-
-The maintained interval is 191–235, with the contributor upper-proof rebuild
-limitation. A single-pattern six-floor 23 does not prove 234. Continue the
-empty-square/global shortfall route once the local proof is closed. Paper 126
-is unchanged, with full revision next due 136. Preserve the open D: editor
-source and E: paper mirror; do not claim successful PDF compilation from the
-last restricted-token failure. Keep all hypotheses and numerical observations
-separate from completed theorems.
+The maintained interval remains191–235 with the contributor-proof rebuild
+limitation. No local result alone proves234 or233. The optimum and196 are
+open. The goal remains active. Paper126 is unchanged; full revision next136.
+Keep the D: editor source and E: paper mirror. Last PDF compilation was
+blocked before TeX by the split-root Windows token issue; do not claim a
+successful PDF. Preserve every interrupted or failed attempt and exact
+audited bytes. Commit/push a verified checkpoint at the end of each round.

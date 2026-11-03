@@ -1,3 +1,47 @@
+# Research update: milestone 130
+
+Two local inequalities are now proved for actual snakes. For a fitting
+canonical direction window 012032 beginning at position r,
+
+$$
+\alpha_{r+2}+\alpha_{r+4}=8
+\quad\Longrightarrow\quad m\equiv r\equiv0\pmod2.
+$$
+
+Consequently the pair sum is at least nine whenever the snake length or the
+window start is odd. The proof uses the completed endpoint theorem and the
+ordinary parity of cube vertices. No new mathematical definition is introduced.
+
+For a fitting canonical window 0120324, Lean also checks
+
+$$
+\alpha_{r+4}=3\quad\Longrightarrow\quad
+\alpha_{r+3}+\alpha_{r+5}+\alpha_{r+6}\ge12.
+$$
+
+Together with the established first and second count bounds, this gives a
+six-count sum of at least 23 in that case. All 221 modules of the exact
+contradiction and the final actual-snake application passed. The final
+statements have no remaining local-certificate premise. The complementary
+case with fourth count at least four remains unresolved: its separate search
+timed out without a model or contradiction. Lean checks the meaning of all
+717 added clauses for that case, which does not exclude it.
+
+The parity restriction removes the saved four-edge witness for odd-length
+snakes. The saved eighteen-edge witness has no matching pair window and
+survives. Its most frequent seven-direction shape is 0123104. A proposed
+six-count floor 25 for that shape increases this witness's hypothetical mean
+from 2915/6 to 3011/6, but the full graph has not been recomputed. The next
+selected test is that full comparison, preserving every inherited unproved
+hypothesis and combining overlapping credits by their maximum.
+
+The maintained interval remains 191–235, with the documented incomplete
+independent rebuild of the contributor upper-bound proof. No improved global
+bound is claimed. The optimum and 196 remain open. Paper revision 126 is
+unchanged; the next scheduled full revision is 136.
+
+## Earlier record
+
 # Research update: milestone 129
 
 The fourth-count-three case of the 0120324 window now has a complete native

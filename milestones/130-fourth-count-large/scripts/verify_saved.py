@@ -1,0 +1,155 @@
+"""Preserve and verify completed local results and explicitly unresolved cases."""
+from pathlib import Path
+import datetime,gzip,hashlib,json,re,subprocess,sys,tarfile
+H=Path(__file__).resolve().parents[1];R=H.parents[1]
+read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def pins(rows,base=R):
+ for n,d in rows.items():
+  p=Path(n);assert sha(p if p.is_absolute() else base/p)==d,n
+def stream_hash(f):
+ h=hashlib.sha256();n=0
+ for b in iter(lambda:f.read(1048576),b''):h.update(b);n+=len(b)
+ return h.hexdigest(),n
+originals=set()
+# Older manifests pin superseded root summaries. Restore their prerequisite
+# archives directly without applying those historical summary hashes.
+P=R/'milestones/129-fourth-count-three'
+for x in read(P/'data/archives.json')['files']:
+ arc=P/x['archive'];assert sha(arc)==x['archive_sha256']
+ with gzip.open(arc,'rb') as f:assert stream_hash(f)==(x['original_sha256'],x['original_bytes'])
+ dest=P/x['original']
+ if dest.exists():assert sha(dest)==x['original_sha256']
+ elif '--restore-archives' in sys.argv:
+  dest.parent.mkdir(parents=True,exist_ok=True)
+  with gzip.open(arc,'rb') as f,dest.open('xb') as out:
+   for b in iter(lambda:f.read(1048576),b''):out.write(b)
+for x in read(P/'data/endpoint122-archives.json')['archives']:
+ arc=P/x['path'];assert sha(arc)==x['sha256']
+ with tarfile.open(arc,'r:gz') as tar:
+  members=tar.getmembers();assert [m.name for m in members]==[a['path'] for a in x['files']]
+  for m,a in zip(members,x['files']):
+   dest=(R/a['path']).resolve()
+   assert dest.is_relative_to((R/'milestones/122-endpoint-equality').resolve())
+   assert m.isfile() and m.size==a['bytes']
+   with tar.extractfile(m) as f:b=f.read()
+   assert hashlib.sha256(b).hexdigest()==a['sha256']
+   if dest.exists():assert sha(dest)==a['sha256']
+   elif '--restore-archives' in sys.argv:
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    with dest.open('xb') as f:f.write(b)
+archives=read(H/'data/trace-archives.json')
+assert sha(H/'scripts/archive_traces.py')==archives['script_sha256']
+for x in archives['files']:
+ arc=H/x['archive'];assert sha(arc)==x['archive_sha256']
+ dest=H/x['original'];originals.add(dest)
+ with gzip.open(arc,'rb') as f:assert stream_hash(f)==(x['original_sha256'],x['original_bytes'])
+ if dest.exists():assert sha(dest)==x['original_sha256']
+ elif '--restore-archives' in sys.argv:
+  dest.parent.mkdir(parents=True,exist_ok=True)
+  with gzip.open(arc,'rb') as f,dest.open('xb') as out:
+   for b in iter(lambda:f.read(1048576),b''):out.write(b)
+for file,script,snapshot in [('replay129-archives.json','archive_replay_progress.py','observed-replay129.json'),
+                              ('replay129-completion-archives.json','archive_replay_completion.py','completed-replay129.json')]:
+ q=read(H/'data'/file)
+ assert sha(H/'scripts'/script)==q['script_sha256']
+ assert sha(H/'audit'/snapshot)==q['snapshot_sha256']
+ for x in q['archives']:
+  arc=H/x['path'];assert sha(arc)==x['sha256']
+  with tarfile.open(arc,'r:gz') as tar:
+   members=tar.getmembers();assert [m.name for m in members]==[a['path'] for a in x['files']]
+   for m,a in zip(members,x['files']):
+    dest=(R/a['path']).resolve()
+    assert dest.is_relative_to((R/'milestones/129-fourth-count-three').resolve())
+    assert m.isfile() and m.size==a['bytes']
+    with tar.extractfile(m) as f:b=f.read()
+    assert hashlib.sha256(b).hexdigest()==a['sha256']
+    if dest.exists():assert sha(dest)==a['sha256']
+    elif '--restore-archives' in sys.argv:
+     dest.parent.mkdir(parents=True,exist_ok=True)
+     with dest.open('xb') as f:f.write(b)
+manifest=H/'data/file-manifest.json'
+if not manifest.exists():
+ assert len(sys.argv)==1
+ assert read(H/'data/replay129-completion-archives.json')['complete_refutation_at_snapshot']
+ audits={}
+ for name in ['large-review','odd-cycle-review','equality-completion-review','odd-pair-verification',
+              'large-semantics-verification','lean-data-review']:
+  p=H/'data'/(name+'.json');q=read(p);assert q['status'].startswith('PASS')
+  if 'source_files_sha256' in q:pins(q['source_files_sha256'])
+  if name=='lean-data-review':pins(q['pins'],H)
+  audits[name]=dict(status=q['status'],sha256=sha(p))
+ checked=[]
+ for p in (H/'logs').glob('*/record.json'):
+  q=read(p);assert q['status']!='COMPILING'
+  if q['status']!='PASS':continue
+  assert q['exit_code']==0 and not q.get('timeout',False)
+  pins(q['dependencies'])
+  for k in ['object','importable_object','log']:assert sha(q[k])==q[k+'_sha256']
+  assert sha(p.parent/'source.lean.txt')==q['source_sha256']
+  assert sha(p.parent/'checker.py.txt')==q['checker_sha256']
+  name=Path(q['importable_object']).stem
+  assert sha(H/'lean'/(name+'.lean'))==q['source_sha256']
+  text=Path(q['log']).read_text()
+  rows=re.findall(r"'([^']+)' depends on axioms:\s*\[([^]]*)\]",text,re.S)
+  reports=[dict(theorem=n,axioms=re.findall(r'[A-Za-z][\w.]*',a)) for n,a in rows]
+  reports.extend(dict(theorem=n,axioms=[]) for n in re.findall(r"'([^']+)' does not depend on any axioms",text))
+  assert reports==q['axioms'] and 'sorryAx' not in text and 'error:' not in text
+  assert all(set(a['axioms'])<={'propext','Classical.choice','Quot.sound'} for a in reports)
+  checked.append(dict(module=name,receipt=p.relative_to(H).as_posix(),sha256=sha(p),reports=len(reports)))
+ assert {x['module'] for x in checked}=={'DfsParity','OddPair130','LargeLower130','LargeClauses130','ActualFourthThree130'}
+ assert sum(x['reports'] for x in checked)==25
+ paper=R/'paper/snake9_research.tex';editor=Path('D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex')
+ assert sha(paper)==sha(editor)=='4667daec19f0b83af9fb129a263c8ae992757105414bad817c1ad13e1e11bb90'
+ assert read(H/'data/search-resumed.json')['status']=='TIMEOUT'
+ assert read(H/'data/next-pressure-task.json')['status']=='PROPOSED_FULL_GRAPH_TEST_NOT_EXECUTED'
+ verification=dict(status='PASS_ACTUAL_PARITY_AND_FOURTH_EQUALITY_THEOREMS',
+  recorded_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+  lean_receipts=checked,axiom_reports=25,independent_audits=audits,
+  complete_triple_refutation_modules=221,actual_triple_floor12_when_fourth3=True,
+  actual_six_floor23_when_fourth3=True,actual_pair_floor9_when_length_or_start_odd=True,
+  fourth_ge4_excluded=False,universal_six_floor23_proved=False,new_global_bound=False,
+  complementary_search_status='TIMEOUT',interrupted_native_attempt_has_terminal_status=False,
+  next_full_graph_experiment_status='PROPOSED_NOT_EXECUTED',
+  scope='Two actual-snake local results; full complementary case and global improvement remain open.')
+ (H/'data/verification.json').write_text(json.dumps(verification,indent=2)+'\n',encoding='utf-8')
+ checkpoint=dict(status=verification['status'],goal_status='ACTIVE',previous_goal_turn='PROGRESS',
+  base_commit='772f8500c9c61339e92e67edcdde745c893e9390',
+  verification_sha256=sha(H/'data/verification.json'),
+  prior_checkpoint_sha256=sha(R/'milestones/129-fourth-count-three/data/checkpoint.json'),
+  current_interval=[191,235],interval_scope='Maintained contributor result with incomplete independent upper-proof rebuild.',
+  paper_revision=126,next_paper_revision=136,paper_sha256=sha(paper),
+  batch_observation_sha256=sha(H/'data/batch-observation.json'))
+ (H/'data/checkpoint.json').write_text(json.dumps(checkpoint,indent=2)+'\n',encoding='utf-8')
+ selected={p for p in H.rglob('*') if p.is_file() and p not in originals and p!=manifest
+  and '__pycache__' not in p.parts and p.suffix!='.tmp'
+  and (p.suffix!='.lock' or 'interrupted' in p.parts) and p.name!='stage-paths.nul'}
+ selected.update(R/n for n in ['README.md','COLLABORATION.md','RESEARCH_LEDGER.md','WORKSPACE.md',
+  'milestones/README.md','handoff/README.md','handoff/CURRENT_STATUS.md','handoff/NEXT_AGENT_PROMPT.md'])
+ rows=[dict(path=p.relative_to(R).as_posix(),bytes=p.stat().st_size,sha256=sha(p)) for p in sorted(selected)]
+ assert all(x['bytes']<100000000 for x in rows)
+ manifest.write_text(json.dumps(dict(status='SAVED_COMPLETED_LOCAL_THEOREMS130',files=rows,
+  excluded_archived_originals=sorted(p.relative_to(H).as_posix() for p in originals),
+  excluded_live_outputs='Other milestones current progress and active115 outputs remain local. Frozen observations are included.'),indent=2)+'\n',encoding='utf-8')
+j=read(manifest)
+for x in j['files']:
+ p=R/x['path'];assert p.stat().st_size==x['bytes'] and sha(p)==x['sha256'],x['path']
+names={x['path'] for x in j['files']}|{manifest.relative_to(R).as_posix()}
+g=['git','-c','core.commitGraph=false','-c','maintenance.auto=false','-c','gc.auto=0']
+if '--stage' in sys.argv:
+ assert not subprocess.check_output(g+['diff','--cached','--name-only'],cwd=R).strip()
+ p=H/'work/stage-paths.nul';p.write_bytes(b''.join(n.encode()+b'\0' for n in sorted(names)))
+ subprocess.run(g+['add','-f','--pathspec-from-file='+str(p),'--pathspec-file-nul'],cwd=R,check=True)
+if '--staged' in sys.argv:
+ actual=set(subprocess.check_output(g+['diff','--cached','--name-only','-z'],cwd=R).decode().strip('\0').split('\0'));assert names==actual
+ proc=subprocess.Popen(g+['cat-file','--batch'],cwd=R,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+ for name in sorted(names):
+  proc.stdin.write((':'+name+'\n').encode());proc.stdin.flush()
+  header=proc.stdout.readline().decode().split();assert header[1]=='blob'
+  b=proc.stdout.read(int(header[2]));assert proc.stdout.read(1)==b'\n'
+  expected=(R/name).read_bytes()
+  if not name.startswith('milestones/130-fourth-count-large/'):expected=expected.replace(b'\r\n',b'\n')
+  assert b==expected,name
+ proc.stdin.close();assert proc.wait()==0
+print(json.dumps(dict(status='PASS_STAGED' if '--staged' in sys.argv else 'PASS_SAVED',
+ files=len(names),bytes=sum(x['bytes'] for x in j['files'])+manifest.stat().st_size,new_global_bound=False)))
