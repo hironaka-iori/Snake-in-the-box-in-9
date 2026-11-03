@@ -1593,3 +1593,30 @@ See milestone 126's README, manuscript verification and reviews. The next
 research task remains the unimplemented 0120324 encoding proposal saved in
 milestone 125. Inspect the live 104/115/122 drivers before resuming any job.
 
+
+
+## Milestone 127: direct-clause equivalence and unresolved encoding tests
+
+The direct-clause representation of the existing lower count bounds is checked.
+One Lean module proves five generic counting statements. An independent replay
+derives all 235 concrete clauses from the original 106348 inputs using 132921
+ordered references. No new definition or six-count floor is introduced.
+
+Replacing six lower counters removes 4917 clauses and makes 2457 auxiliary
+variables unused. The reduced input has 101666 clauses and 4820 occurring
+variables, with exact input mapping for later proof transport. Both changed
+encodings timed out after 180 seconds; neither returned a model or contradiction.
+The first 1000 native deductions of each trace passed bounded original-input
+replay. This does not verify a complete contradiction. Partial traces are
+preserved locally and in lossless gzip archives.
+
+The maintained range remains 191–235 with the documented independent-rebuild
+limitation. The optimum, 196, and the needed conditions for 234/233 remain open.
+Paper revision 126 is unchanged; the next full revision is 136.
+
+The next focused task is to expose the proved second/fourth pair sum at least
+eight in the 0120324 encoding. It uses 42 corner occurrences over 37 vertices;
+the equivalent selected-occurrence cap is 34. The new counter and its semantic
+connection are not implemented. See
+`milestones/127-direct-cardinality/data/next-pair-task.json`.
+

@@ -1,0 +1,79 @@
+{
+  "status": "PASS_DIRECT_CLAUSE_CHECKPOINT_NO_NEW_COUNT_FLOOR",
+  "pins": {
+    "data/prelude.json": "f91c65dadae8e45dbf8f1a65350490117dab6e820bf1c6c4a706d0085a44944e",
+    "data/prelude-review.json": "3f5eb4263bc4a33259ba94fa96d6334584c6cafb6f5413c19cd33f4e3f80ed5a",
+    "data/reduced.json": "553852b7c37d7f83665c74aeb90eab0266450d7200e42a664bde8050470cb8cb",
+    "data/search-audit.json": "7aa1bf41daac9faedaf7e02cb37fe9677bf196405bfd35e2725eb63e4b337ef2",
+    "data/next-pair-task.json": "266631095ec132cff2071a22945f175da4ad0148cac3f248c775a257f00dfcae",
+    "audit/prelude-review.md": "da0425890434e849aa785c7c65b50b5be9e2f38e554c745978cf65f901af9485",
+    "audit/reduced-encoding-review.md": "7cbaebbd75e22be30b3c888f3cdaf1d6bf7cf43bd108ef009cfaa63bfe4e6887",
+    "audit/direct-cardinality-derivation.md": "e9dd8e35c7e91ae30a3debc1594f1bbbcffbe570630b38ba16bb0160b56c6502",
+    "MATHEMATICAL_NOTE.md": "4df5a8c6255ffeefa478750c862d0ac60ba5d692231b69c9553728aead3c353c",
+    "data/batch-observation.json": "2f59df1ab83197e6829235d0ae86f8bb11eb202f4b8bd1ddd47094695a021752"
+  },
+  "lean_receipt": "logs/direct-cardinality-1793686604453734400/record.json",
+  "lean_receipt_sha256": "d0c60fae429d948bd964cd9a8580a448d6b9d0810aa7ee3c3838c70db1a395a1",
+  "lean_modules": 1,
+  "axiom_reports": 5,
+  "direct_clauses": 235,
+  "ordered_references": 132921,
+  "original_formula_independently_rebuilt": true,
+  "new_definitions": 0,
+  "new_count_floor": false,
+  "new_global_bound": false,
+  "native_attempts": [
+    {
+      "name": "augmented",
+      "status": "TIMEOUT",
+      "wall_seconds": 180.06200000000172,
+      "input_clauses": 106583,
+      "initial_native_deductions_replayed": 1000,
+      "initial_hints_replayed": 2643,
+      "deletions_omitted": 999,
+      "transport_to_original_verified_on_prefix": true,
+      "full_native_proof_replayed": false,
+      "final_empty_clause_verified": false
+    },
+    {
+      "name": "reduced",
+      "status": "TIMEOUT",
+      "wall_seconds": 180.0470000000023,
+      "input_clauses": 101666,
+      "initial_native_deductions_replayed": 1000,
+      "initial_hints_replayed": 2643,
+      "deletions_omitted": 999,
+      "transport_to_original_verified_on_prefix": true,
+      "full_native_proof_replayed": false,
+      "final_empty_clause_verified": false
+    }
+  ],
+  "archives": [
+    {
+      "status": "PASS_LOSSLESS_NATIVE_TRACE_ARCHIVE",
+      "original": "work/augmented.raw.lrat",
+      "original_sha256": "740952a8e3bfb600fe4ce7bb1b73c13a7dc63a011ae5fb95be638cfd5b9828c8",
+      "original_bytes": 197902336,
+      "archive": "archives/augmented.raw.lrat.gz",
+      "archive_sha256": "105a1202c4e1f39bdfdcd0fa60daf780c6f76920715a81155d6bddc038b16248",
+      "archive_bytes": 32975533,
+      "solver_status": "TIMEOUT",
+      "script_sha256": "61b8195860e9743a06ae7e51a45ba3b03411e938ea0c0e88390c423fc97bb907",
+      "scope": "Byte preservation only; incomplete traces do not establish contradictions."
+    },
+    {
+      "status": "PASS_LOSSLESS_NATIVE_TRACE_ARCHIVE",
+      "original": "work/reduced.raw.lrat",
+      "original_sha256": "f98c2febec1c60866d963f164fbd9be3994ed2ebe87abb8f177d2b9d74463577",
+      "original_bytes": 160034816,
+      "archive": "archives/reduced.raw.lrat.gz",
+      "archive_sha256": "a8a98b047ec5b684dbc42e0bc04e4e3a4a2fddb634141cb387497dbdfe0cdd84",
+      "archive_bytes": 26821294,
+      "solver_status": "TIMEOUT",
+      "script_sha256": "61b8195860e9743a06ae7e51a45ba3b03411e938ea0c0e88390c423fc97bb907",
+      "scope": "Byte preservation only; incomplete traces do not establish contradictions."
+    }
+  ],
+  "next_pair_counter_implemented": false,
+  "scope": "Generic Lean cardinality proofs; independently reconstructed original formula and all235 original-input RUP derivations; smaller input and bounded trace-ID checks. Two native timeouts, no complete contradiction or improved bound."
+}

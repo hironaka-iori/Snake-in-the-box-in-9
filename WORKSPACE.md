@@ -6,19 +6,15 @@ The maintained manuscript is `paper/snake9_research.tex`. Its authors are Iori H
 
 ## Current direction
 
-Current checkpoint: [milestone 126](milestones/126-paper-revision/README.md).
-The selected route uses six consecutive singleton counts and retains empty
-squares. The maintained range is 191–235 with the documented upper-proof
-rebuild limitation; universal local floors and sufficient shortfall bounds
-remain unresolved. The manuscript revision through 125 is saved in both
-source locations, with no new definitions and preserved authors/settings.
-The built-in PDF compiler failed before TeX; source verification passed.
-The next full paper revision is 136.
-
-Next task: implement the reviewed cardinality-clause proposal saved in
-milestone125/data/next-encoding-task.json, using its actual repository path
-`milestones/125-critical-six-count/data/next-encoding-task.json`.
-Inspect existing live proof drivers before restarting anything.
+Current checkpoint: [milestone 127](milestones/127-direct-cardinality/README.md).
+The selected route uses six consecutive singleton counts and empty squares.
+The checked direct-clause encoding did not resolve 0120324 in two bounded runs.
+Next implement the proved pair-count inequality using the pinned specification
+in `milestones/127-direct-cardinality/data/next-pair-task.json` and check its
+new counter semantics. The maintained range remains 191–235; no new count floor
+or unconditional bound is claimed. Paper revision 126 is unchanged, with its
+compiler limitation preserved; next full revision 136. Inspect live proof
+drivers before restarting any work.
 
 ## Historical checkpoint notes
 

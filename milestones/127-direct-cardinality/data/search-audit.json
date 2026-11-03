@@ -1,0 +1,42 @@
+{
+  "status": "PASS_REDUCED_INPUTS_AND_BOUNDED_TRACE_TRANSPORT",
+  "attempts": [
+    {
+      "name": "augmented",
+      "status": "TIMEOUT",
+      "wall_seconds": 180.06200000000172,
+      "input_clauses": 106583,
+      "initial_native_deductions_replayed": 1000,
+      "initial_hints_replayed": 2643,
+      "deletions_omitted": 999,
+      "transport_to_original_verified_on_prefix": true,
+      "full_native_proof_replayed": false,
+      "final_empty_clause_verified": false
+    },
+    {
+      "name": "reduced",
+      "status": "TIMEOUT",
+      "wall_seconds": 180.0470000000023,
+      "input_clauses": 101666,
+      "initial_native_deductions_replayed": 1000,
+      "initial_hints_replayed": 2643,
+      "deletions_omitted": 999,
+      "transport_to_original_verified_on_prefix": true,
+      "full_native_proof_replayed": false,
+      "final_empty_clause_verified": false
+    }
+  ],
+  "pins": {
+    "data/prelude.json": "f91c65dadae8e45dbf8f1a65350490117dab6e820bf1c6c4a706d0085a44944e",
+    "data/prelude-review.json": "3f5eb4263bc4a33259ba94fa96d6334584c6cafb6f5413c19cd33f4e3f80ed5a",
+    "data/reduced.json": "553852b7c37d7f83665c74aeb90eab0266450d7200e42a664bde8050470cb8cb",
+    "data/search.json": "62457ee3dda6fb4b3f26a71440e1a2e63020f0507ec93dc10dbacbc238c43a2c",
+    "data/search-reduced.json": "3b3c7df8467cfd7c3d1d9598d1a8f44a548fd8b2bdc99577b508b8ee5ce2c0dc",
+    "work/original.cnf": "467a58303f629688e5c5dd26c83e7d4c64ccede4805ab2577823e4dbed30e91a",
+    "work/augmented.cnf": "0f7eb49e98d6adc53bdc66edea78dffab922b8081bf21c8c9598b2eb446ec9e1",
+    "work/reduced.cnf": "5e7e726dc2ebcc327eb1549d5cfec1ec3fe183ee5750f283d3db0af70d51389f",
+    "work/prelude.lrat": "3e6ca9a67e4cd65e9ebaae83183b17afee274266aeb1ec0a0920c9d0d669a35a"
+  },
+  "script_sha256": "551a97493753650f9750c3c011d596ba145b5de4e2b99578fec2156c4c061b81",
+  "scope": "Exact input checks and first1000 native RUP deductions per encoding transported to original inputs. Neither entire native trace nor a final contradiction is verified. No new count floor."
+}
