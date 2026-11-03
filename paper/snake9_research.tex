@@ -2948,8 +2948,13 @@ of this exact core to the local share bound is also checked. The contradiction
 remains a premise of that implication. A separate 36-module replay pilot
 connects the original core to the initial proof state and checks the first
 1030 deductions, 6004 propagation references and a complete checkpoint.
-The complete Lean replay, coordinate transfer and reversal remain required
-~\cite{semantics147archive}.
+The coordinate and reversal transfer is now checked conditional on a
+contradiction of this exact core. For every fitting six-transition window
+whose forward or reversed canonical directions are $012301$, it gives
+$\sum_{j=1}^{5}\sigma_{12}(x_{r+j})\ge16$. The universal count bounds are
+sufficient; no additional count, parity or endpoint-location premise is
+imposed. Completion of the full Lean replay remains necessary to discharge
+the contradiction premise~\cite{semantics147archive,transfer148archive}.
 For the preserved $012034$ share-18 proof, the original-clause assignment
 now transfers through all 104 chunks to the materialized initial tree and
 composes with the checked 1055-deduction prefix using 6006 propagation
@@ -6270,6 +6275,15 @@ checked replay pilot for the 012301 share certificate}. Research record 147,
 \path{milestones/147-countfree-clause-semantics/data/semantics-completion.json}
 and \path{milestones/147-countfree-clause-semantics/replay/data/pilot-completion.json}.
 The complete contradiction and its application to arbitrary snakes remain pending.
+
+\bibitem{transfer148archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{The actual-snake consequence of the
+012301 core refutation}. Research record 148, 4 November 2026.
+Local research record:
+\path{milestones/148-actual-snake-share-transfer/data/transfer-completion.json}.
+The forward and reversed consequences are checked with the contradiction
+premise retained. One earlier automaton data object is reused with matched
+source, object and dependency hashes.
 
 \end{thebibliography}
 \end{document}

@@ -1,0 +1,182 @@
+import Snake9
+
+namespace Snake9
+set_option maxHeartbeats 1000000
+set_option maxRecDepth 100000
+
+theorem adj_symmetric {u v : Vertex} (h : Adj u v) : Adj v u := by
+  obtain ⟨k,hk,he⟩ := (adj_iff_coordinate_flip u v).mp h
+  apply (adj_iff_coordinate_flip v u).mpr
+  refine ⟨k,hk,?_⟩
+  rw [he]
+  change u.val = (u.val ^^^ 2^k) ^^^ 2^k
+  rw [Nat.xor_assoc, Nat.xor_self, Nat.xor_zero]
+
+theorem adj_irreflexive (u : Vertex) : ¬ Adj u u := by
+  have h : ∀ u : Vertex, ¬ Adj u u := by decide
+  exact h u
+
+theorem path_adj_iff {m : Nat} (p : Snake m) (i j : Fin (m+1)) :
+    Adj (p.vertex i) (p.vertex j) ↔ i.val+1=j.val ∨ j.val+1=i.val := by
+  rcases Nat.lt_trichotomy i.val j.val with hlt | he | hgt
+  · rw [p.induced i j hlt]
+    omega
+  · have hij : i=j := Fin.ext he
+    subst j
+    simp only [adj_irreflexive, false_iff]
+    omega
+  · have hs : Adj (p.vertex i) (p.vertex j) ↔ Adj (p.vertex j) (p.vertex i) :=
+      ⟨adj_symmetric,adj_symmetric⟩
+    rw [hs,p.induced j i hgt]
+    omega
+
+theorem three_neighbors_repeat {m : Nat} (p : Snake m)
+    (i j k l : Fin (m+1))
+    (hj : Adj (p.vertex i) (p.vertex j))
+    (hk : Adj (p.vertex i) (p.vertex k))
+    (hl : Adj (p.vertex i) (p.vertex l)) : j=k ∨ j=l ∨ k=l := by
+  have hj' := (path_adj_iff p i j).mp hj
+  have hk' := (path_adj_iff p i k).mp hk
+  have hl' := (path_adj_iff p i l).mp hl
+  have hv : j.val=k.val ∨ j.val=l.val ∨ k.val=l.val := by omega
+  rcases hv with h | h | h
+  · exact Or.inl (Fin.ext h)
+  · exact Or.inr (Or.inl (Fin.ext h))
+  · exact Or.inr (Or.inr (Fin.ext h))
+
+theorem no_four_cycle {m : Nat} (p : Snake m)
+    (i j k l : Fin (m+1))
+    (hij : Adj (p.vertex i) (p.vertex j))
+    (hjk : Adj (p.vertex j) (p.vertex k))
+    (hkl : Adj (p.vertex k) (p.vertex l))
+    (hli : Adj (p.vertex l) (p.vertex i))
+    (hik : i ≠ k) (hjl : j ≠ l) : False := by
+  have h1 := (path_adj_iff p i j).mp hij
+  have h2 := (path_adj_iff p j k).mp hjk
+  have h3 := (path_adj_iff p k l).mp hkl
+  have h4 := (path_adj_iff p l i).mp hli
+  have hv1 : i.val ≠ k.val := fun h => hik (Fin.ext h)
+  have hv2 : j.val ≠ l.val := fun h => hjl (Fin.ext h)
+  omega
+
+def InPath {m : Nat} (p : Snake m) (v : Vertex) : Prop := ∃ i, p.vertex i=v
+
+theorem selected_three_neighbors_repeat {m : Nat} (p : Snake m)
+    {v a b c : Vertex} (hv : InPath p v) (ha : InPath p a)
+    (hb : InPath p b) (hc : InPath p c)
+    (hva : Adj v a) (hvb : Adj v b) (hvc : Adj v c) :
+    a=b ∨ a=c ∨ b=c := by
+  obtain ⟨i,rfl⟩ := hv
+  obtain ⟨j,rfl⟩ := ha
+  obtain ⟨k,rfl⟩ := hb
+  obtain ⟨l,rfl⟩ := hc
+  rcases three_neighbors_repeat p i j k l hva hvb hvc with h | h | h
+  · exact Or.inl (congrArg p.vertex h)
+  · exact Or.inr (Or.inl (congrArg p.vertex h))
+  · exact Or.inr (Or.inr (congrArg p.vertex h))
+
+def AtMostOneNeighbor {m : Nat} (p : Snake m) (v : Vertex) : Prop :=
+  ∀ a b, InPath p a → InPath p b → Adj v a → Adj v b → a=b
+
+theorem low_degree_index_is_endpoint {m : Nat} (p : Snake m) (i : Fin (m+1))
+    (h : AtMostOneNeighbor p (p.vertex i)) : i.val=0 ∨ i.val=m := by
+  by_cases hnot : i.val=0 ∨ i.val=m
+  · exact hnot
+  have hi0 : 0 < i.val := by omega
+  have him : i.val < m := by omega
+  let left : Fin (m+1) := ⟨i.val-1,by omega⟩
+  let right : Fin (m+1) := ⟨i.val+1,by omega⟩
+  have hl : Adj (p.vertex i) (p.vertex left) :=
+    (path_adj_iff p i left).mpr (Or.inr (by dsimp [left]; omega))
+  have hr : Adj (p.vertex i) (p.vertex right) :=
+    (path_adj_iff p i right).mpr (Or.inl rfl)
+  have he := p.distinct left right (h _ _ ⟨left,rfl⟩ ⟨right,rfl⟩ hl hr)
+  have hev := congrArg Fin.val he
+  dsimp [left,right] at hev
+  omega
+
+theorem three_low_degree_vertices_repeat {m : Nat} (p : Snake m)
+    {a b c : Vertex} (ha : InPath p a) (hb : InPath p b) (hc : InPath p c)
+    (la : AtMostOneNeighbor p a) (lb : AtMostOneNeighbor p b)
+    (lc : AtMostOneNeighbor p c) : a=b ∨ a=c ∨ b=c := by
+  obtain ⟨i,rfl⟩ := ha
+  obtain ⟨j,rfl⟩ := hb
+  obtain ⟨k,rfl⟩ := hc
+  have h1 := low_degree_index_is_endpoint p i la
+  have h2 := low_degree_index_is_endpoint p j lb
+  have h3 := low_degree_index_is_endpoint p k lc
+  have he : i.val=j.val ∨ i.val=k.val ∨ j.val=k.val := by omega
+  rcases he with h | h | h
+  · exact Or.inl (congrArg p.vertex (Fin.ext h))
+  · exact Or.inr (Or.inl (congrArg p.vertex (Fin.ext h)))
+  · exact Or.inr (Or.inr (congrArg p.vertex (Fin.ext h)))
+
+theorem selected_no_four_cycle {m : Nat} (p : Snake m)
+    {v a c b : Vertex} (hv : InPath p v) (ha : InPath p a)
+    (hc : InPath p c) (hb : InPath p b)
+    (hva : Adj v a) (hac : Adj a c) (hcb : Adj c b) (hbv : Adj b v)
+    (hvc : v ≠ c) (hab : a ≠ b) : False := by
+  obtain ⟨i,rfl⟩ := hv
+  obtain ⟨j,rfl⟩ := ha
+  obtain ⟨k,rfl⟩ := hc
+  obtain ⟨l,rfl⟩ := hb
+  exact no_four_cycle p i j k l hva hac hcb hbv
+    (fun h => hvc (congrArg p.vertex h)) (fun h => hab (congrArg p.vertex h))
+
+theorem exists_internal_neighbor {m : Nat} (p : Snake m) (hm : 3 ≤ m)
+    (i : Fin (m+1)) : ∃ j, 0 < j.val ∧ j.val < m ∧ Adj (p.vertex i) (p.vertex j) := by
+  by_cases hi : i.val+1 < m
+  · refine ⟨⟨i.val+1,by omega⟩,by simp only; omega,hi,?_⟩
+    exact (path_adj_iff p _ _).mpr (Or.inl rfl)
+  · refine ⟨⟨i.val-1,by omega⟩,by simp only; omega,by simp only; omega,?_⟩
+    apply (path_adj_iff p _ _).mpr
+    right
+    simp only
+    omega
+
+theorem internal_other_neighbor {m : Nat} (p : Snake m)
+    (j i : Fin (m+1)) (hj0 : 0 < j.val) (hjm : j.val < m) :
+    ∃ k, k ≠ i ∧ Adj (p.vertex j) (p.vertex k) := by
+  let left : Fin (m+1) := ⟨j.val-1,by omega⟩
+  let right : Fin (m+1) := ⟨j.val+1,by omega⟩
+  by_cases hi : i=left
+  · refine ⟨right,?_,(path_adj_iff p j right).mpr (Or.inl rfl)⟩
+    intro he
+    have hev := congrArg Fin.val (he.trans hi)
+    dsimp [left,right] at hev
+    omega
+  · refine ⟨left,Ne.symm hi,(path_adj_iff p j left).mpr (Or.inr ?_)⟩
+    dsimp [left]
+    omega
+
+theorem four_candidates_impossible {m : Nat} (p : Snake m)
+    (v q : Fin 4 → Vertex) (hv : ∀ k, InPath p (v k))
+    (vi : ∀ k l, v k=v l → k=l)
+    (qu : ∀ k l, InPath p (q k) → InPath p (q l) → k=l)
+    (hl : ∀ k, ¬ InPath p (q k) → AtMostOneNeighbor p (v k)) : False := by
+  have bad (a b c : Fin 4) (hab : a≠b) (hac : a≠c) (hbc : b≠c)
+      (ha : ¬ InPath p (q a)) (hb : ¬ InPath p (q b)) (hc : ¬ InPath p (q c)) : False := by
+    rcases three_low_degree_vertices_repeat p (hv a) (hv b) (hv c)
+      (hl a ha) (hl b hb) (hl c hc) with h | h | h
+    · exact hab (vi a b h)
+    · exact hac (vi a c h)
+    · exact hbc (vi b c h)
+  have absent (a b : Fin 4) (hab : a≠b) (ha : InPath p (q a)) : ¬ InPath p (q b) :=
+    fun hb => hab (qu a b ha hb)
+  by_cases h0 : InPath p (q 0)
+  · exact bad 1 2 3 (by decide) (by decide) (by decide)
+      (absent 0 1 (by decide) h0) (absent 0 2 (by decide) h0) (absent 0 3 (by decide) h0)
+  · by_cases h1 : InPath p (q 1)
+    · exact bad 0 2 3 (by decide) (by decide) (by decide)
+        h0 (absent 1 2 (by decide) h1) (absent 1 3 (by decide) h1)
+    · by_cases h2 : InPath p (q 2)
+      · exact bad 0 1 3 (by decide) (by decide) (by decide)
+          h0 h1 (absent 2 3 (by decide) h2)
+      · exact bad 0 1 2 (by decide) (by decide) (by decide) h0 h1 h2
+
+#print axioms no_four_cycle
+#print axioms selected_three_neighbors_repeat
+#print axioms low_degree_index_is_endpoint
+#print axioms three_low_degree_vertices_repeat
+#print axioms four_candidates_impossible
+end Snake9

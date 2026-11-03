@@ -1,0 +1,398 @@
+{
+  "status": "PASS_CONDITIONAL_ACTUAL_SNAKE_SHARE16_TRANSFER",
+  "checked_modules": 16,
+  "axiom_reports": 27,
+  "freshly_checked_project_helpers": 13,
+  "new_conditional_wrappers": 2,
+  "reused_data_axiom_audits": 1,
+  "inherited_data_object_reused": true,
+  "inherited_data_fresh_compilation": false,
+  "original_generic_definitions_preserved": true,
+  "selected_direction_proofs_preserved": true,
+  "coordinate_and_reversal_transfer_checked": true,
+  "extra_count_parity_or_endpoint_location_premises": false,
+  "remaining_mathematical_premise": "Unsat of the exact012301 cap15 core, or its equivalent local RefutedShare premise.",
+  "theorem_scope": "Every Snake m and fitting six-transition window whose forward or reversed canonical directions equal012301 has five-centre integer share sum at least16, conditional on the exact core refutation.",
+  "core_unsat_Lean_complete": false,
+  "unconditional_actual_snake_share16_complete": false,
+  "new_global_upper_bound": false,
+  "maximum_sampled_private_bytes": 2012512256,
+  "compiler_seconds": 76.79400000000169,
+  "receipts": [
+    {
+      "module": "WindowAutomatonDefs",
+      "receipt": "data/WindowAutomatonDefs-audit.json",
+      "sha256": "d59ddaa120ff90d75e40bb069126095857bd7cdbf0fc606e81f3c8b1093c876c",
+      "axioms": [],
+      "compiler_wall_seconds": 1.7030000000013388
+    },
+    {
+      "module": "DataDependencyAudit148",
+      "receipt": "data/DataDependencyAudit148-audit.json",
+      "sha256": "c2754a22dc3ecd3855e06111b1813ea7118e689d52e6bb95b3bd36a871bdb9fb",
+      "axioms": [
+        {
+          "theorem": "Snake9.WindowAutomaton.step_table",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.WindowAutomaton.pot_le",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.6559999999990396
+    },
+    {
+      "module": "WindowAutomatonLemmas",
+      "receipt": "data/WindowAutomatonLemmas-audit.json",
+      "sha256": "f3ebd013d67cf321754410b7e039348212a69a4d44bb4be83d5b01b91f5c0f63",
+      "axioms": [],
+      "compiler_wall_seconds": 1.7190000000009604
+    },
+    {
+      "module": "Snake9",
+      "receipt": "data/Snake9-audit.json",
+      "sha256": "572a21f70d4100bbd828f9969971165b966529a40ce8b45a22ba92e951bc9bf9",
+      "axioms": [
+        {
+          "theorem": "Snake9.no192_iff_upperBound",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.target192_impossible_iff_upperBound",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.6720000000022992
+    },
+    {
+      "module": "PathStructure",
+      "receipt": "data/PathStructure-audit.json",
+      "sha256": "b931b94ff5318d2efc76455dea0cea4a38dcb952fbc13ff0550a761e8f424c6e",
+      "axioms": [
+        {
+          "theorem": "Snake9.no_four_cycle",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.selected_three_neighbors_repeat",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.low_degree_index_is_endpoint",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.three_low_degree_vertices_repeat",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.four_candidates_impossible",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 3.5459999999984575
+    },
+    {
+      "module": "WindowAutomatonSequence",
+      "receipt": "data/WindowAutomatonSequence-audit.json",
+      "sha256": "d2cbb2bbad30a23612e7f3e6755deef7c0ce7f91b3a428e3753847028e29e216",
+      "axioms": [
+        {
+          "theorem": "Snake9.WindowAutomaton.total_bound",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.6869999999980791
+    },
+    {
+      "module": "WindowAutomatonBridge",
+      "receipt": "data/WindowAutomatonBridge-audit.json",
+      "sha256": "fd96fcb1840234d9e740d97c000fa57bd69f80d5e60f5394d93b4440efcc57f5",
+      "axioms": [
+        {
+          "theorem": "Snake9.WindowAutomaton.snake_inducedPattern",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 3.2810000000026776
+    },
+    {
+      "module": "LocalWindowBridge",
+      "receipt": "data/LocalWindowBridge-audit.json",
+      "sha256": "b100390ef008586f170991c867c4329da11b40e743d9c1ba9e04d8cb0ae7ebc1",
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.no_certified_window_core",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.no_quad_window_core",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 25.48400000000038
+    },
+    {
+      "module": "LocalWindowDirModel",
+      "receipt": "data/LocalWindowDirModel-audit.json",
+      "sha256": "46a9d17525190932c631714ec9e6dcf41159551695ff63a3e79dad950178f042",
+      "axioms": [],
+      "compiler_wall_seconds": 1.7180000000007567
+    },
+    {
+      "module": "LocalWindowDirKeys",
+      "receipt": "data/LocalWindowDirKeys-audit.json",
+      "sha256": "3b008dfd76cac0413d6e71ee2eb0f06344b87199b1e859be8b5feac9270f1e9c",
+      "axioms": [],
+      "compiler_wall_seconds": 1.7339999999967404
+    },
+    {
+      "module": "LocalWindowDirBridge",
+      "receipt": "data/LocalWindowDirBridge-audit.json",
+      "sha256": "ee4899e93e476db32188a6990260a0e5869345165f7c9060559b1b0226bae822",
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.refuted_dir",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 5.234000000000378
+    },
+    {
+      "module": "DirectionWindowBridge",
+      "receipt": "data/DirectionWindowBridge-audit.json",
+      "sha256": "39e8be3047e1941a6d0eceab4557e364218c0517f74c42ce8adbac2a1aea2ea9",
+      "axioms": [
+        {
+          "theorem": "Snake9.DirectionWindow.getD_idx",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.DirectionWindow.seenAfter_nodup",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.DirectionWindow.mem_seenAfter_cases",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.DirectionWindow.dsOf_rev",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.DirectionWindow.pathDir_eq_dir",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 3.3440000000009604
+    },
+    {
+      "module": "LocalWindowShareBridge",
+      "receipt": "data/LocalWindowShareBridge-audit.json",
+      "sha256": "9b8e7298a666664f5c1eb486d6598d3766cf7f055ee08aecf51c600dcd88f16c",
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.refuted_share_bridge",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.refuted_share_dir",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 3.3909999999996217
+    },
+    {
+      "module": "CanonicalShareAdapter",
+      "receipt": "data/CanonicalShareAdapter-audit.json",
+      "sha256": "cc8d31388c17dbfa640443be4f39c0b3b66c6e61044ff94c69ef56ee44e22f95",
+      "axioms": [
+        {
+          "theorem": "Snake9.CountFreeAdapter73.blockList_eq_dsOf",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.CountFreeAdapter73.canonical_share_bound",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.CountFreeAdapter73.reversed_canonical_share_bound",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.CountFreeAdapter73.share_bound_of_either_canonical_match",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.09400000000096
+    },
+    {
+      "module": "ShareTransfer148",
+      "receipt": "data/ShareTransfer148-audit.json",
+      "sha256": "05e8b06e35d8c0355090bdd12c40cc10ac1a4c3b77ff8315c60c4a04dff4e4e7",
+      "axioms": [
+        {
+          "theorem": "Snake9.ShareTransfer148.share16_of_local_refutation",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 5.25
+    },
+    {
+      "module": "ShareFromCore148",
+      "receipt": "data/ShareFromCore148-audit.json",
+      "sha256": "251c5ddd30b04c1c1da471c786662f00060f10cbdc6811e4330a00af428f88b7",
+      "axioms": [
+        {
+          "theorem": "Snake9.ShareTransfer148.share16_of_core_unsat",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 5.28099999999904
+    }
+  ],
+  "serialization_records": [
+    {
+      "path": "data/serialization-1793737160266185000.json",
+      "sha256": "e662e2e1e5d2bafe893c90fdd10c2f52c663397571a058ee841bec3970730e59",
+      "replay_pid": 15228,
+      "transfer_exit_code": 1
+    },
+    {
+      "path": "data/serialization-v2-1793737415604206600.json",
+      "sha256": "402d21eaa4871291588f4d6ec1602a528f738d2b9f14efae9786ed51430932bf",
+      "replay_pid": 15228,
+      "transfer_exit_code": 1
+    },
+    {
+      "path": "data/serialization-v3-1793737634955336000.json",
+      "sha256": "247b21673f5638499ba79833d81c74e9337df50d3c764f25a37b6995ec7a62d4",
+      "replay_pid": 15228,
+      "transfer_exit_code": 1
+    },
+    {
+      "path": "data/serialization-v4-1793737856661201800.json",
+      "sha256": "479bd2afe88ccb9152ebb557506578664bdeaced83bc7faef2450caaf3af0048",
+      "replay_pid": 15228,
+      "transfer_exit_code": 0
+    }
+  ],
+  "live_replay_process": {
+    "ProcessId": 15228,
+    "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/147-countfree-clause-semantics/scripts/run_full_replay.py",
+    "CreationDate": "/Date(1793736044795)/"
+  },
+  "live_replay_modules_observed": 188,
+  "live_replay_total_modules": 1789,
+  "recorded_at": "2026-11-03T20:34:50.992505+00:00",
+  "evidence_sha256": {
+    "data/transfer-plan-v4.json": "4b557d2f0fe260584d81f4d3f66404e8ebeb5c85b41c3a46d376d41ee30eb900",
+    "data/transfer-v4-progress.json": "4feb5cfdcf2ada6624ee8914ed953feef118948dcfaa96dfbd2e081a22a44763",
+    "data/reused-data-object.json": "7747e2fd3474207c725b1307900ce981a19d3053ae0d694ca959e2596f37e91f",
+    "data/core-source-review.json": "3e3b2e7e39be72b09c4789e0086d6a69c16d4b1bd40760a367ca42611dfccf96",
+    "data/direction-source-review.json": "ff95dfe7b44a280160992f838f6d44d2e318a5cc448c998561e400172acbc4b4",
+    "audit/import-review.json": "14592e14439daded334456dca8c57002abf283ad7d8de965e427ec432778df9d"
+  },
+  "trust_scope": "Standard Lean and Mathlib libraries remain trusted with pinned entry artifacts. One historical automaton data object is reused with exact source/object/log/dependency hashes and fresh axiom reports. All other additional project helpers were compiled in148;147 model and semantic receipts remain pinned."
+}
