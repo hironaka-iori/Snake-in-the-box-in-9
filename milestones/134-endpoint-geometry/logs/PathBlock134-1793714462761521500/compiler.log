@@ -1,0 +1,32 @@
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\PathBlock134.lean:21:57: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+note: this linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\PathBlock134.lean:40:49: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  c ≥ 0
+  b ≥ 0
+  b - c ≥ 2
+  a ≥ 0
+  a - b ≥ 0
+where
+ a := ↑(List.countP (fun p => p.1 || p.2) (l.zip l.tail))
+ b := ↑(List.count true l)
+ c := ↑(List.countP (fun p => p.1 || p.2) (l.zip (List.drop 1 l)))
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\PathBlock134.lean:40:49: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  c ≥ 0
+  b ≥ 0
+  b - c ≥ 2
+  a ≥ 0
+  a - b ≥ -1
+where
+ a := ↑(List.countP (fun p => p.1 || p.2) (l.zip l.tail))
+ b := ↑(List.count true l)
+ c := ↑(List.countP (fun p => p.1 || p.2) (l.zip (List.drop 1 l)))
+'Snake9.PathBlock134.count_true_le_incident_pairs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.PathBlock134.count_true_le_incident_pairs_of_false_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Snake9.PathBlock134.count_true_le_incident_pairs_add_one' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

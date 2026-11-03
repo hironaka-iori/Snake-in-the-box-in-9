@@ -1,0 +1,71 @@
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\EndpointReduction134.lean:66:7: error: unknown tactic
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\EndpointReduction134.lean:65:48: error: unsolved goals
+m : Nat
+p q : Snake m
+e z : Nat
+htransport : ∀ (i : Nat), i ≤ m → vx q i = vx p e ^^^ vx p (if e = 0 then i else m - i)
+hnot : sel p (fun v => v) z = false
+hs : sel q (fun v => v) (vx p e ^^^ z) = true
+i : Nat
+hi : i ≤ m
+heq : vx p e ^^^ vx p (if e = 0 then i else m - i) = vx p e ^^^ z
+hiz : vx p (if e = 0 then i else m - i) = z
+⊢ (if e = 0 then i else m - i) ≤ m
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\EndpointReduction134.lean:60:9: error: unsolved goals
+case true.intro.intro
+m : Nat
+p q : Snake m
+e z : Nat
+htransport : ∀ (i : Nat), i ≤ m → vx q i = vx p e ^^^ vx p (if e = 0 then i else m - i)
+hnot : sel p (fun v => v) z = false
+hs : sel q (fun v => v) (vx p e ^^^ z) = true
+i : Nat
+hi : i ≤ m
+heq : vx p e ^^^ vx p (if e = 0 then i else m - i) = vx p e ^^^ z
+hiz : vx p (if e = 0 then i else m - i) = z
+hidx : (if e = 0 then i else m - i) ≤ m
+⊢ true = false
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\EndpointReduction134.lean:90:5: error: unknown tactic
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\EndpointReduction134.lean:88:26: error: unsolved goals
+m : Nat
+p q : Snake m
+e d r z : Nat
+hzero : vx q 0 = 0
+hfirst : vx q 1 = 2 ^ d
+htransport : ∀ (i : Nat), i ≤ m → vx q i = vx p e ^^^ vx p (if e = 0 then i else m - i)
+hr : r + 6 ≤ m
+hnot : sel p (fun v => v) z = false
+hadj : vx p e ∈ nbrs z
+hfour : ∀ (j : Nat), j < 4 → vx p (r + 2 * j) ∈ nbrs z
+s : Nat := if e = 0 then r else m - r - 6
+⊢ (if e = 0 then r else m - r - 6) + 6 ≤ m
+E:\Snake-in-a-box\milestones\134-endpoint-geometry\lean\EndpointReduction134.lean:85:67: error: unsolved goals
+m : Nat
+p q : Snake m
+e d r z : Nat
+hzero : vx q 0 = 0
+hfirst : vx q 1 = 2 ^ d
+htransport : ∀ (i : Nat), i ≤ m → vx q i = vx p e ^^^ vx p (if e = 0 then i else m - i)
+hr : r + 6 ≤ m
+hnot : sel p (fun v => v) z = false
+hadj : vx p e ∈ nbrs z
+hfour : ∀ (j : Nat), j < 4 → vx p (r + 2 * j) ∈ nbrs z
+s : Nat := if e = 0 then r else m - r - 6
+hsfit : s + 6 ≤ m
+⊢ (if e = 0 then r else m - r - 6) + 6 ≤ m ∧
+    ∃ a,
+      a < 9 ∧
+        a ≠ d ∧
+          vx p e ^^^ z = 2 ^ a ∧
+            sel q (fun v => v) (2 ^ a) = false ∧
+              (∀ (j : Nat), j < 4 → vx q ((if e = 0 then r else m - r - 6) + 2 * j) ∈ nbrs (2 ^ a)) ∧
+                ∀ (j : Nat),
+                  j < 4 →
+                    (if e = 0 then r else m - r - 6) + 2 * j = 0 ∨
+                      (if e = 0 then r else m - r - 6) + 2 * j = 2 ∨
+                        ∃ b, b < 9 ∧ b ≠ a ∧ b ≠ d ∧ vx q ((if e = 0 then r else m - r - 6) + 2 * j) = 2 ^ a ^^^ 2 ^ b
+'Snake9.EndpointReduction134.vx_translate' depends on axioms: [propext, Quot.sound]
+'Snake9.EndpointReduction134.xor_neighbor' depends on axioms: [propext, Quot.sound]
+'Snake9.EndpointReduction134.endpoint_normalization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.EndpointReduction134.transported_unselected' depends on axioms: [propext, sorryAx]
+'Snake9.EndpointReduction134.endpoint_star_pairs' depends on axioms: [propext, sorryAx]

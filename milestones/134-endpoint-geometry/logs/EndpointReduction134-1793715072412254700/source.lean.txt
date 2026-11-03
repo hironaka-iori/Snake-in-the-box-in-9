@@ -1,0 +1,124 @@
+import CubeLocal
+import PairRepresentation134
+
+namespace Snake9.EndpointReduction134
+open Snake9.LocalWindow
+
+set_option maxHeartbeats 2000000
+
+theorem vx_translate {m : Nat} (p : Snake m) (t : Vertex) (i : Nat) (hi : i ≤ m) :
+    vx (translate p t) i = t.val ^^^ vx p i := by
+  unfold vx
+  rw [dif_pos (by omega),dif_pos (by omega)]
+  rfl
+
+theorem xor_neighbor (t z w : Nat) (h : w ∈ nbrs z) :
+    t ^^^ w ∈ nbrs (t ^^^ z) := by
+  obtain ⟨k,hk,he⟩ := (mem_nbrs _ _).mp h
+  apply (mem_nbrs _ _).mpr
+  refine ⟨k,hk,?_⟩
+  rw [he,Nat.xor_assoc]
+
+theorem endpoint_normalization {m : Nat} (p : Snake m) (e : Nat)
+    (hm : 1 ≤ m) (he : e=0 ∨ e=m) :
+    ∃ q : Snake m, ∃ d : Nat,
+      vx q 0 = 0 ∧ d < 9 ∧ vx q 1 = 2^d ∧
+      ∀ i, i ≤ m →
+        vx q i = vx p e ^^^ vx p (if e=0 then i else m-i) := by
+  have horient : ∃ q : Snake m, vx q 0 = 0 ∧
+      ∀ i, i ≤ m →
+        vx q i = vx p e ^^^ vx p (if e=0 then i else m-i) := by
+    by_cases he0 : e=0
+    · subst e
+      refine ⟨translate p ⟨vx p 0,vx_lt p 0⟩,?_,?_⟩
+      · rw [vx_translate p _ 0 (by omega)]
+        exact Nat.xor_self _
+      · intro i hi
+        rw [vx_translate p _ i hi]
+        simp only [ite_true]
+    · have hem : e=m := he.resolve_left he0
+      refine ⟨translate (revSnake p) ⟨vx p e,vx_lt p e⟩,?_,?_⟩
+      · rw [vx_translate (revSnake p) _ 0 (by omega),vx_rev p (by omega),
+          Nat.sub_zero]
+        change vx p e ^^^ vx p m = 0
+        rw [hem,Nat.xor_self]
+      · intro i hi
+        rw [vx_translate (revSnake p) _ i hi,vx_rev p hi]
+        simp only [if_neg he0]
+  obtain ⟨q,hzero,htransport⟩ := horient
+  have hstep := step_dir q (j := 0) (by omega)
+  refine ⟨q,dir q 0,hzero,hstep.1,?_,htransport⟩
+  simpa only [Nat.zero_add,hzero,Nat.zero_xor] using hstep.2
+
+theorem transported_unselected {m : Nat} (p q : Snake m) (e z : Nat)
+    (htransport : ∀ i, i ≤ m →
+      vx q i = vx p e ^^^ vx p (if e=0 then i else m-i))
+    (hnot : sel p (fun v => v) z = false) :
+    sel q (fun v => v) (vx p e ^^^ z) = false := by
+  cases hs : sel q (fun v => v) (vx p e ^^^ z) with
+  | false => rfl
+  | true =>
+    obtain ⟨i,hi,heq⟩ := (sel_iff q (fun v => v) (vx p e ^^^ z)).mp hs
+    change vx q i = vx p e ^^^ z at heq
+    rw [htransport i hi] at heq
+    have hiz := xor_left_inj (vx p e) heq
+    have hidx : (if e=0 then i else m-i) ≤ m := by
+      split_ifs <;> omega
+    have hs' : sel p (fun v => v) z = true :=
+      (sel_iff p (fun v => v) z).mpr ⟨_,hidx,hiz⟩
+    rw [hnot] at hs'
+    exact False.elim (Bool.false_ne_true hs')
+
+theorem endpoint_star_pairs {m : Nat} (p q : Snake m) (e d r z : Nat)
+    (hzero : vx q 0 = 0) (hfirst : vx q 1 = 2^d)
+    (htransport : ∀ i, i ≤ m →
+      vx q i = vx p e ^^^ vx p (if e=0 then i else m-i))
+    (hr : r+6 ≤ m)
+    (hnot : sel p (fun v => v) z = false)
+    (hadj : vx p e ∈ nbrs z)
+    (hfour : ∀ j, j < 4 → vx p (r+2*j) ∈ nbrs z) :
+    let s := if e=0 then r else m-r-6
+    s+6 ≤ m ∧ ∃ a : Nat, a < 9 ∧ a ≠ d ∧
+      vx p e ^^^ z = 2^a ∧ sel q (fun v => v) (2^a) = false ∧
+      (∀ j, j < 4 → vx q (s+2*j) ∈ nbrs (2^a)) ∧
+      ∀ j, j < 4 → s+2*j=0 ∨ s+2*j=2 ∨
+        ∃ b, b < 9 ∧ b ≠ a ∧ b ≠ d ∧ vx q (s+2*j) = 2^a ^^^ 2^b := by
+  dsimp only
+  let s := if e=0 then r else m-r-6
+  have hsfit : s+6 ≤ m := by
+    dsimp only [s]
+    split_ifs <;> omega
+  have hnewnot := transported_unselected p q e z htransport hnot
+  have hnewadj : vx q 0 ∈ nbrs (vx p e ^^^ z) := by
+    rw [hzero]
+    simpa only [Nat.xor_self] using xor_neighbor (vx p e) z (vx p e) hadj
+  obtain ⟨a,ha,had,heq⟩ := PairRepresentation134.unselected_neighbour_coordinate
+    q (by omega) d (vx p e ^^^ z) hzero hfirst hnewnot hnewadj
+  have hnewfour : ∀ j, j < 4 → vx q (s+2*j) ∈ nbrs (2^a) := by
+    intro j hj
+    have hidx : s+2*j ≤ m := by omega
+    rw [htransport _ hidx,← heq]
+    apply xor_neighbor
+    by_cases he0 : e=0
+    · simp only [if_pos he0]
+      have hs : s=r := by simp only [s,if_pos he0]
+      rw [hs]
+      exact hfour j hj
+    · simp only [if_neg he0]
+      have hs : s=m-r-6 := by simp only [s,if_neg he0]
+      have heven : m-(s+2*j) = r+2*(3-j) := by rw [hs]; omega
+      rw [heven]
+      exact hfour (3-j) (by omega)
+  refine ⟨hsfit,a,ha,had,heq,?_,hnewfour,?_⟩
+  · rw [← heq]
+    exact hnewnot
+  · intro j hj
+    exact PairRepresentation134.selected_neighbour_pairs q (by omega) d a (s+2*j)
+      ha had hzero hfirst (by omega) (hnewfour j hj)
+
+#print axioms vx_translate
+#print axioms xor_neighbor
+#print axioms endpoint_normalization
+#print axioms transported_unselected
+#print axioms endpoint_star_pairs
+end Snake9.EndpointReduction134
