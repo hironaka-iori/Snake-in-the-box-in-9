@@ -1,0 +1,81 @@
+{
+  "status": "PASS_SOURCE_REVIEW_RESULT_AVAILABLE",
+  "reviewed_utc": "2026-11-03T16:19:46.700458+00:00",
+  "source_derivation_diff_reviewed": true,
+  "new_profile_weight_multiplier": 1,
+  "new_profile_credit": "0",
+  "predecessor139_multiplier": 3,
+  "predecessor139_credit": "83/3",
+  "predecessor139_reconstruction_unchanged": true,
+  "historical_four_cycle_credit_check_unchanged": true,
+  "weak_exclusion_mask_unchanged": true,
+  "proof_gate_points_to_checked140_receipt": true,
+  "weak_theorem": "Snake9.Weak140.actual_weak_counts",
+  "checked_source_and_receipt_hashes": true,
+  "independent_lean_run": false,
+  "graph_arrays_loaded": false,
+  "independent_all_edge_scan": false,
+  "comparison": "(1098960*d+8*p+R)/(4200*d+p)",
+  "difference_from235": "(R+111960*d-227*p)/(4200*d+p)",
+  "target_at_mean496": "R/d < 632",
+  "arithmetic_cases": [
+    {
+      "p": 496,
+      "d": 1,
+      "range_scaled": 602,
+      "comparison": "551765/2348",
+      "below235": true
+    },
+    {
+      "p": 496,
+      "d": 1,
+      "range_scaled": 631,
+      "comparison": "1103559/4696",
+      "below235": true
+    },
+    {
+      "p": 496,
+      "d": 1,
+      "range_scaled": 632,
+      "comparison": "235",
+      "below235": false
+    },
+    {
+      "p": 2446,
+      "d": 5,
+      "range_scaled": 2973,
+      "comparison": "5517341/23446",
+      "below235": false
+    },
+    {
+      "p": 500,
+      "d": 1,
+      "range_scaled": 620,
+      "comparison": "55179/235",
+      "below235": true
+    }
+  ],
+  "result_review": {
+    "status": "PASS_BOUNDED_SAVED_RESULT_REVIEW",
+    "record": "data/result-review.json",
+    "record_sha256": "ca0992c79256d72790eaaab85af0c648327cd6d8e2b61c678eed3f10e52b3e44",
+    "report": "audit/result-review.md",
+    "report_sha256": "a7c125c55eb4657d8ee64a7128bc0b03d87401a2aa4f4fd5f6022615882bf8b7"
+  },
+  "source_files_sha256": {
+    "milestones/140-five-cycle-window/scripts/evaluate_graph.py": "ef83027eb70f0c2dd2a6e519d2cee78bcfe72e1559b6c04134d51dd5f55e6b42",
+    "milestones/141-zero-credit-comparison/scripts/prepare_graph.py": "a0a0b4ff4e64bfe58848719486fdfa592800755df1a180aa5016bb0f386535cf",
+    "milestones/141-zero-credit-comparison/scripts/evaluate_graph.py": "7099cb809feb6720ac64c91b760681d4dd9ad2589995691bc43d82d76daf0b4c",
+    "milestones/141-zero-credit-comparison/data/preparation.json": "9b8c990d1f718a7eee53300e2359471ab352b0d1d08e0a47ab95d1a60ae3a35e",
+    "milestones/140-five-cycle-window/data/proof-completion.json": "7ec6b2153e2f39f02a5493924e0a89f2779df27928793d4be872e468ba86169a",
+    "milestones/140-five-cycle-window/lean/Weak140Actual.lean": "4ad6037852f1c76183f0b596713a5d7c1d5638aaf6af45eee4960d5a7f3e8556",
+    "milestones/140-five-cycle-window/data/Weak140Actual-audit.json": "abb8c6f3f3dba5303841b14acf045358db41e9a504372c04fd1a248a01366c19"
+  },
+  "limitations": [
+    "No independent Lean compilation or certificate replay.",
+    "No graph computation or array loading during source review.",
+    "Both profiles retain inherited hypotheses and odd-length restrictions.",
+    "No new actual-snake bound is established by this review."
+  ],
+  "source_stage_initial_record_sha256": "296a61466ce7e742f1962537d67eeba156cdf7f97cee3611cfa5c807ef7390c0"
+}

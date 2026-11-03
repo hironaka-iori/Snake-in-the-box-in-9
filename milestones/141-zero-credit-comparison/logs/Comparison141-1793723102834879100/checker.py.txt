@@ -1,0 +1,72 @@
+"""Check one semantic module, preserving exact inputs, outputs and dependencies."""
+from pathlib import Path
+import argparse,hashlib,json,os,re,subprocess,sys,time
+H=Path(__file__).resolve().parents[1]; R=H.parents[1]
+B=Path('D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research/lean-4.19.0-windows/bin')
+read=lambda p:json.loads(Path(p).read_text(encoding='utf-8-sig'))
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+parser=argparse.ArgumentParser();parser.add_argument('module',choices=['Comparison141']);args=parser.parse_args()
+name=args.module; src=H/'lean'/(name+'.lean'); text=src.read_text(encoding='utf-8')
+assert not re.search(r'\b(sorry|admit|native_decide|axiom)\b',text)
+ef=R/'milestones/125-critical-six-count/data/environment-sum.json'; environment=read(ef)
+paths=[str(H/'build-independent'),str(H/'build-base'),str(R/'milestones/137-actual-block-assembly/build-independent'),str(H/'build-base'),str(R/'milestones/136-intervals-and-paper/build-independent'),str(H/'build-replay'),str(R/'milestones/135-endpoint-count/build-independent'),str(R/'milestones/134-endpoint-geometry/build-independent'),str(R/'milestones/132-odd-pair-endpoint/build-independent'),str(R/'milestones/132-odd-pair-endpoint/build-replay'),str(R/'milestones/133-endpoint-occurrences/build-independent'),str(B.parent.parent/'mathlib/.lake/build/lib/lean')]+environment['paths']
+deps={str(ef):sha(ef),str(B/'lean.exe'):sha(B/'lean.exe'),str(B/'lake.exe'):sha(B/'lake.exe')}
+for n,d in environment['receipts'].items():
+ p=R/n;assert sha(p)==d,n;deps[str(p)]=d
+for imp in re.findall(r'^import ([\w.]+)$',text,re.M):
+ obj=next((Path(p)/(imp.replace('.','/')+'.olean') for p in paths if (Path(p)/(imp.replace('.','/')+'.olean')).exists()),None)
+ assert obj is not None,imp
+ deps[str(obj)]=sha(obj)
+ rp=H/'data'/(imp+'-audit.json')
+ if not rp.exists():
+  for old in ['132-odd-pair-endpoint','133-endpoint-occurrences','134-endpoint-geometry','135-endpoint-count','136-intervals-and-paper']:
+   candidate=R/'milestones'/old/'data'/(imp+'-audit.json')
+   if candidate.exists():rp=candidate;break
+ if rp.exists():
+  receipt=read(rp);assert receipt['exit_code']==0 and not receipt.get('timeout',False)
+  assert sha(obj)==receipt.get('importable_object_sha256',receipt.get('olean_sha256'))
+  deps[str(rp)]=sha(rp)
+  oldroot=rp.parent.parent
+  oldsource=oldroot/'lean'/(imp.replace('.','/')+'.lean')
+  assert sha(oldsource)==receipt['source_sha256']
+  deps[str(oldsource)]=sha(oldsource)
+  for n,d in receipt['dependencies'].items():
+   p=Path(n);p=p if p.is_absolute() else R/p
+   assert sha(p)==d;deps[str(p)]=d
+resource=read_result=json.loads(subprocess.check_output(['powershell','-NoProfile','-Command',
+ "$o=Get-CimInstance Win32_OperatingSystem;$p=@(Get-CimInstance Win32_Process -Filter \"Name='lean.exe'\"|Select-Object ProcessId);@{available_bytes=[long]$o.FreePhysicalMemory*1024;processes=$p}|ConvertTo-Json -Depth 3 -Compress"],text=True))
+if resource['available_bytes']<1536*1024**2 or len(resource['processes'])>2:
+ print('NOT_STARTED_RESOURCE_GATE');sys.exit(0)
+run=str(time.time_ns());attempt=H/'logs'/(name+'-'+run);attempt.mkdir(parents=True)
+build=H/'build-independent';build.mkdir(exist_ok=True)
+obj=build/(name+'-'+run+'.olean');log=attempt/'compiler.log';record=attempt/'record.json'
+(attempt/'source.lean.txt').write_bytes(src.read_bytes());(attempt/'checker.py.txt').write_bytes(Path(__file__).read_bytes())
+state=dict(status='COMPILING',pid=os.getpid(),source=str(src),source_sha256=sha(src),checker_sha256=sha(__file__),
+ dependencies=deps,resource=resource,object=str(obj),log=str(log),paths=paths)
+def save():record.write_text(json.dumps(state,indent=2)+'\n',encoding='utf-8')
+env=os.environ.copy();env['PATH']=str(B)+';'+env['PATH'];env['LEAN_PATH']=';'.join(paths)
+command=[str(B/'lake.exe'),'env','lean','-s','65536','-R',str(H/'lean'),'-o',str(obj),str(src)]
+state['command']=command;save();start=time.monotonic()
+with log.open('w',encoding='utf-8') as out:
+ child=subprocess.Popen(command,cwd=B.parent.parent/'mathlib',env=env,stdout=out,stderr=subprocess.STDOUT)
+ state['launcher_pid']=child.pid;save()
+ try:code=child.wait(timeout=600)
+ except subprocess.TimeoutExpired:
+  subprocess.run(['taskkill','/PID',str(child.pid),'/T','/F'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+  code=child.wait();state['timeout']=True
+output=log.read_text(encoding='utf-8');reports=[dict(theorem=n,axioms=re.findall(r'[A-Za-z][\w.]*',a))
+ for n,a in re.findall(r"'([^']+)' depends on axioms:\s*\[([^]]*)\]",output,re.S)]
+reports.extend(dict(theorem=n,axioms=[]) for n in re.findall(r"'([^']+)' does not depend on any axioms",output))
+state.update(exit_code=code,seconds=time.monotonic()-start,log_sha256=sha(log),axioms=reports)
+ok=code==0 and not state.get('timeout') and 'error:' not in output and 'sorryAx' not in output
+ok=ok and len(reports)==text.count('#print axioms') and all(set(x['axioms'])<={'propext','Classical.choice','Quot.sound'} for x in reports)
+ok=ok and sha(src)==state['source_sha256'] and sha(__file__)==state['checker_sha256'] and all(sha(p)==d for p,d in deps.items())
+state['status']='PASS' if ok else 'FAILED'
+if obj.exists():state['object_sha256']=sha(obj)
+if ok:
+ stable=build/(name+'.olean');stable.write_bytes(obj.read_bytes())
+ state.update(importable_object=str(stable),importable_object_sha256=sha(stable))
+save()
+if ok:(H/'data'/(name+'-audit.json')).write_bytes(record.read_bytes())
+print(json.dumps(dict(status=state['status'],seconds=state['seconds'],axioms=reports,record=str(record))))
+sys.exit(0 if ok else 1)

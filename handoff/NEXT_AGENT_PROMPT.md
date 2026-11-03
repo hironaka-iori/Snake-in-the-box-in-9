@@ -1,51 +1,55 @@
-# Continue after milestone 140
+# Continue after milestone 141
 
 Work in E:/Snake-in-a-box with the requested research skill. Preserve the
-three authors, paper preamble/hypersetup and unrelated .gitignore/milestone50
-changes. Use only necessary notation. Keep the existing editor source and
-paper/snake9_research.tex identical. Fetch, preserve exact evidence, stage
-only a verified manifest, commit, push and verify each round. Goal ACTIVE.
+three authors, full paper preamble/hypersetup, and unrelated .gitignore and
+milestone50 edits. Only define necessary recurring notation. Keep the
+existing D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex editor and
+paper/snake9_research.tex identical. Fetch, retain exact evidence, stage
+only a verified manifest, commit/push/verify each round. Goal ACTIVE.
 
-The canonical012032 theorem is complete: counts1,3,5 equal3,4,3 force
-count2>=6 OR count4>=6. Read140/MATHEMATICAL_NOTE.md, proof-completion.json,
-Weak140Actual and its receipt.123 modules comprise the checked proof closure;
-ZeroCredit140 is a separate checked arithmetic result. Do not rerun the
-fixed native proof or completed contradiction. Original replay's final
-Mathlib lookup limitation was handled by the separate checker; preserve logs.
+141's zero-credit full graph finished; do not restart it.4661572 edges remain
+after200 deletions justified by140's checked theorem. Both profiles retain
+inherited count assumptions. Completed shares:mu3424/7,range4159/7,
+comparison7724271/32824>235. Additional shares:mu496,range602,
+comparison551765/2348=235-15/2348<235, integer comparison234. This recovers
+a conditional comparison; no new actual-snake bound or optimal range.
 
-NEXT SELECTED TASK: test zero occurrence credit after applying this theorem.
-Both earlier binding completed cycles are removed: the old four-cycle has
-counts35443, the new five-cycle35453. The additional-share six-cycle survives.
-For mean496 and C=0, rangeR<632 suffices for comparison<235. The old range602
-uses C=83/3, so verify every edge under the new weights. Its validity at zero
-credit is unknown. Compare BOTH profiles in the same new experiment.
+The evaluator checked all edges. Independent review checks221 selected
+original rows, all200 deletions, cycles, potentials, hashes and arithmetic;
+it does not repeat the all-edge scan. New conditional six-cycle differs
+from139's, but both have mean496 and zero events. Eight Lean arithmetic
+statements passed. Full graph-to-snake and Lean potential closure remain.
 
-The140/scripts/prepare_graph.py and evaluate_graph.py are prepared for the
-old C=83/3 and protected by a proof-completion gate. They reproduce139's
-removal set and both exact weight hashes before deletion, check both count
-placements and orientations, and keep all inherited hypotheses. Derive
-new141 files for zero credit; preserve140 sources/hashes. The full graph
-has not been rerun in140. Small recognition checks passed.
+NEXT SELECTED TASK: completed-share credit C=533/12. Its new seven-cycle
+has total3424 and2 events; a surviving zero-event18-cycle has current mean
+3011/6. Their caps intersect at that credit and target mean. To make the
+comparison<235 at this mean requires range<5341/6. Other cycles may
+intervene. Preserve the successful additional-share zero-credit result;
+only the completed profile needs this next optimisation calculation.
 
-Hypotheses still include earlier unproved count sums, hypothetical0123104
-six-floor25, odd-length pair floor9, and extra share floors for the additional
-profile. These calculations alone are not actual-snake upper bounds.
-Even-length reasoning and the complete graph-to-snake proof remain separate.
-The maintained interval191–235 and unresolved196 persist.
+Derive new142 scripts from141's frozen evaluate_graph.py, whose SHA is in
+preparation.json. New integer weights12*(base+shared)+533*event; actual mean
+and range are scaled down by12. Comparison numerator12*1098960*d+8*p+
+24*533*d+R_scaled; denominator12*4200*d+p. Target scaled mean6022 and
+strict range bound10682. Retain BOTH old139 predecessor weight checks at
+scale3/credit83. Keep140's actual weak-exclusion gate, both placements and
+orientations, full edge checks, resource limits and exact snapshots.
 
-The exact native proof has18606 deductions,1397536 hints and4163 core inputs.
-The two unused lower counters were replaced by empty endpoint counters;
-all used meanings and the UNSAT CNF are unchanged. No extra cycle cuts or
-endpoint-location assumptions were added. See independent-semantics audit.
+The actual140 theorem is complete: canonical012032 with alternate counts
+3,4,3 forces one intervening count>=6. The complete closure has123 modules;
+no solver or replay needs restarting. Current141 seven-cycle IDs:
+308563,3800424,2222339,147721,2200970,163743,2303752. See next-credit.json
+for the old18-cycle survival and exact parameter algebra. The relaxation
+minimum6624244/28211 is below235; it is not a claimed graph parameter optimum.
 
-Paper targeted revision140, no new definitions; last full136, next full146.
-Compiler/PDF status must be read from140/data/latex-compilation.json.
-Build objects remain local and their hashes are in receipts; Git retains
-source and certificate evidence. Never mistake a local cached object for
-an independently rebuilt dependency closure.
+Inherited hypotheses: earlier unproved count sums, hypothetical0123104
+six-floor25, odd-length pair floor9, and extra share floors for the second
+profile. The maintained interval191–235, incomplete independent upper-proof
+rebuild and unresolved196 persist. Do not infer even-length results silently.
 
-Milestone115 driver PID39044 was observed live at1095/1397 this round.
-Verify its current command before any action; never duplicate it.104 stopped,
-122 and129 completed. Lean needs>=1.5GiB free and at most2 existing Lean
-processes; full graph needs>=3GiB and no other full-graph job. Preserve every
-attempt and any new failures. Base commit8cc94035c72589d8d70edc31c576260d0cbef1d0.
+Paper targeted revision141, source checks pass, builtin compiler failed
+before TeX. No new definitions. Last full revision136; next full146.
+Milestone115 PID39044 observed live at1127/1397; verify current command,
+never duplicate.104 stopped;122/129 completed. No141 job remains running.
+Lean gate>=1.5GiB free and at most2 existing Lean; fullgraph>=3GiB and no
+other fullgraph. Base commit9f78ac76958cf146d1a90cd0a5743894a5f38284.
