@@ -1,0 +1,23 @@
+{
+  "status": "REVISED_SOURCE_PENDING_VERIFICATION",
+  "prior_sha256": "5e62b785321b8b624338e484560f3ac16d048699c841deeccc69573fd13be72f",
+  "paper_sha256": "4667daec19f0b83af9fb129a263c8ae992757105414bad817c1ad13e1e11bb90",
+  "prior_statements": 138,
+  "current_statements": 145,
+  "changed_prior_statements": [
+    "\\begin{proposition}[Twenty-one omitted singleton counts]\\label{prop:boundary21}\nLet $m\\ge8$. For $0\\le r<m-8$, let $L_r$ be a nonnegative lower bound for\n$\\sum_{i=4}^{8}\\sigma_{12}(x_{r+i})$, and put\n\\[\nW=\\sum_{r=0}^{m-9}\\bigl(120b_{r+8}+L_r\\bigr).\n\\]\nThe sum is empty when $m=8$. Then\n\\begin{equation}\\label{eq:boundary21}\nW+2520\\le5G_{12},\\qquad W+4200m\\le1098960.\n\\end{equation}\n\\end{proposition}"
+  ],
+  "added_statements": [
+    "\\begin{proposition}[Conditional bounds from six consecutive counts]\\label{prop:six-direct}\nEach row gives a sufficient condition for the indicated upper bound on the\nlength of a snake. The six-count bound is assumed at every fitting group.\nThe empty-square condition is required only at the lengths specified.\n\\begin{center}\n\\begin{tabular}{c l c}\n\\toprule\nSix-count bound & Empty-square condition & Conclusion\\\\\\midrule\n25 & None & $m\\le234$\\\\\n26 & None & $m\\le233$\\\\\n24 & $s_0\\ge6$ if $m\\ge235$ & $m\\le234$\\\\\n23 & $s_0\\ge25$ if $m\\ge235$ & $m\\le234$\\\\\n25 & $s_0\\ge14$ if $m\\ge234$ & $m\\le233$\\\\\\bottomrule\n\\end{tabular}\n\\end{center}\n\\end{proposition}",
+    "\\begin{theorem}[Necessary total shortfall at length 235]\\label{thm:six-shortfall}\nEvery snake with $m\\ge235$ satisfies\n\\begin{equation}\\label{eq:six-shortfall}\n\\sum_{b=0}^{38}\\max\\left\\{0,25-\\sum_{j=1}^{6}\\alpha_{6b+j}\\right\\}\n\\ge29+2s_0.\n\\end{equation}\nConsequently, an upper bound of $28+2s_0$ on this same sum for every snake\nwith $m\\ge235$ would imply $a(9)\\le234$.\n\\end{theorem}",
+    "\\begin{theorem}[A proved six-count window]\\label{thm:six-0123041}\nSuppose $r+7\\le m$ and the seven transitions beginning at $x_r$ have canonical\npattern $0123041$. Then\n\\[\n\\sum_{j=1}^{6}\\alpha_{r+j}\\ge25.\n\\]\nThe conclusion also holds when the segment is reversed.\n\\end{theorem}",
+    "\\begin{proposition}[An outer count at least four]\\label{prop:outer-012031}\nFor every fitting six-transition segment of pattern $012031$,\n\\[\n\\max\\{\\alpha_{r+1},\\alpha_{r+2},\\alpha_{r+4},\\alpha_{r+5}\\}\\ge4.\n\\]\nThe middle count has no additional restriction, and the conclusion also\nholds after reversal.\n\\end{proposition}",
+    "\\begin{theorem}[Second and fourth counts on $012032$]\\label{thm:pair-012032}\nSuppose $r+6\\le m$ and the six transitions beginning at $x_r$ have canonical\npattern $012032$. Then\n\\[\n\\alpha_{r+2}\\ge2,\\qquad \\alpha_{r+4}\\ge2,\\qquad\n\\alpha_{r+2}+\\alpha_{r+4}\\ge8.\n\\]\nThe sum bound is sharp for complete snakes. The pairs $(2,6)$, $(3,5)$ and\n$(4,4)$ all occur; reversal also gives $(6,2)$ and $(5,3)$.\n\\end{theorem}",
+    "\\begin{proposition}[A conditional limit on equality occurrences]\\label{prop:pair-equality-occurrences}\nAssume every $012032$ window with second and fourth counts summing to eight\nhas both counted vertices at distance two from both endpoints. Then at most\n13 such windows occur in a snake.\n\\end{proposition}",
+    "\\begin{proposition}[Low-total $0120324$ windows]\\label{prop:critical-six-intervals}\nSuppose $r+7\\le m$, the seven-transition pattern is $0120324$, and\n$\\sum_{j=1}^{6}\\alpha_{r+j}\\le22$. Then the six counts lie respectively in\n\\[\n([1,21],[2,21],[1,21],[3,21],[1,21],[1,21]).\n\\]\n\\end{proposition}",
+    "\\begin{proposition}[Boundary contribution of twenty-one]\\label{prop:boundary21}\nLet $m\\ge8$. For $0\\le r<m-8$, let $L_r$ be a nonnegative lower bound for\n$\\sum_{i=4}^{8}\\sigma_{12}(x_{r+i})$, and put\n\\[\nW=\\sum_{r=0}^{m-9}\\bigl(120b_{r+8}+L_r\\bigr).\n\\]\nThe sum is empty when $m=8$. Then\n\\begin{equation}\\label{eq:boundary21}\nW+2520\\le5G_{12},\\qquad W+4200m\\le1098960.\n\\end{equation}\n\\end{proposition}"
+  ],
+  "new_definitions": 0,
+  "authors_and_hypersetup_preserved": true,
+  "polish": "Clarified anchored-square verification scope, explicit share indices, removed temporary z/G/D aliases, distinguished graph stages."
+}

@@ -1567,3 +1567,29 @@ RUP from the original 106,348-clause bounded formula, then appends the native
 proof. Trimming against the original formula is essential. No such prelude or
 new solver run has been produced. Paper revision 116 remains unchanged; the
 full revision at 126 is now due. Old 104/115/122 batches remain separate.
+
+
+## Milestone 126: full paper revision and notation reduction
+
+The manuscript is revised through milestone 125. The direct six-count and
+empty-square argument now precedes the long graph construction. No new
+definition is added, and temporary joint-budget aliases are removed.
+The authors and complete local hyperlink settings are preserved.
+
+The paper distinguishes the proved 0123041 six-count bound, sharp 012032
+pair theorem and necessary 0120324 intervals from the unresolved universal
+floors and shortfall assumptions needed for 234 or 233. Twenty reference
+entries are discharged; 1358 and the five additional share targets remain.
+The maintained range is 191–235, with its documented independent-rebuild
+limitation. Neither the optimum nor 196 is established.
+
+All 16 printed snakes pass 148857 pair checks. Exact evidence from 188 prior
+Lean modules and 139 dependency reports is rechecked; there is no new Lean
+compilation this round. The built-in PDF compiler failed in its Windows helper
+before processing TeX. The source checks pass; PDF compilation and layout
+remain unverified. The next scheduled full paper revision is 136.
+
+See milestone 126's README, manuscript verification and reviews. The next
+research task remains the unimplemented 0120324 encoding proposal saved in
+milestone 125. Inspect the live 104/115/122 drivers before resuming any job.
+

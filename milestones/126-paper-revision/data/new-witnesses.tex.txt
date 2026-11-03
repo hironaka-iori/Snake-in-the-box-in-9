@@ -1,0 +1,38 @@
+\section{Sharp witnesses for the second and fourth counts on $012032$}\label{app:pair-012032-witnesses}
+
+The following complete snakes attain the boundary pairs of Theorem~\ref{thm:pair-012032}. Each transition string starts at the stated integer vertex, which need not be zero. The index $r$ is measured from that initial vertex. The designated segment is $(0,1,3,7,6,14,10)$ in all three cases.
+
+\subsection{The pair $(2,6)$}
+
+The snake has 142 edges, starts at $66$, and has the designated window at $r=120$. Its five internal singleton counts are $(10,2,8,6,12)$.
+
+\begin{quote}\ttfamily\small
+
+802382102341021827521637027815430852812086358302180587012034105748573041\\
+0378420458712752637081201438534718021371283208140120327380371581283208
+
+\end{quote}
+
+\subsection{The pair $(3,5)$}
+
+The snake has 138 edges, starts at $18$, and has the designated window at $r=114$. Its five internal singleton counts are $(13,3,12,5,12)$.
+
+\begin{quote}\ttfamily\small
+
+801503724125170125415721680723021761572031436532012514380742382458237401\\
+205620752017487130721576821023620148102517012032507512681083025705
+
+\end{quote}
+
+\subsection{The pair $(4,4)$}
+
+The snake has 144 edges, starts at $34$, and has the designated window at $r=136$. Its five internal singleton counts are $(12,4,12,4,13)$.
+
+\begin{quote}\ttfamily\small
+
+702380731837268764175671023713410460574521481541632037530236123081021608\\
+406102357302841627846028063183071827137081453081024820316381241801203263
+
+\end{quote}
+
+Direct reconstruction checks all 30184 unordered vertex pairs across these three snakes, together with the five counts in each designated window. Both endpoints are at Hamming distance two from both counted vertices. Complete Lean checks also verify these paths and counts~\cite{pair012032archive}. The witnesses establish sharpness of the pair inequality; their endpoint geometry alone supplies no universal equality theorem.

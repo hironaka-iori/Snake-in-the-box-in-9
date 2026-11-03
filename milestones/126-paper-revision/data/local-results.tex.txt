@@ -1,0 +1,112 @@
+\subsection{A restriction on four outer counts}\label{sec:outer-012031}
+\begin{proposition}[An outer count at least four]\label{prop:outer-012031}
+For every fitting six-transition segment of pattern $012031$,
+\[
+\max\{\alpha_{r+1},\alpha_{r+2},\alpha_{r+4},\alpha_{r+5}\}\ge4.
+\]
+The middle count has no additional restriction, and the conclusion also
+holds after reversal.
+\end{proposition}
+\begin{proof}[Computer-assisted proof]
+Normalize the segment and suppose all four indicated counts are at most
+three. The necessary selected-vertex, degree and missing-corner conditions
+have a checked contradiction with 5956 deductions. Its complete count
+interpretation, replay and transfer to arbitrary snakes have passed Lean.
+The reversed canonical word represents the same pattern and exchanges the
+four outer positions. Three further reference entries follow from this
+restriction. Sharpness for complete snakes remains unresolved
+~\cite{latersumarchive}.
+\end{proof}
+
+\subsection{A sharp pair bound for the pattern $012032$}\label{sec:pair-012032}
+\begin{theorem}[Second and fourth counts on $012032$]\label{thm:pair-012032}
+Suppose $r+6\le m$ and the six transitions beginning at $x_r$ have canonical
+pattern $012032$. Then
+\[
+\alpha_{r+2}\ge2,\qquad \alpha_{r+4}\ge2,\qquad
+\alpha_{r+2}+\alpha_{r+4}\ge8.
+\]
+The sum bound is sharp for complete snakes. The pairs $(2,6)$, $(3,5)$ and
+$(4,4)$ all occur; reversal also gives $(6,2)$ and $(5,3)$.
+\end{theorem}
+\begin{proof}[Computer-assisted proof]
+Normalize the selected segment to $(0,1,3,7,6,14,10)$. Complete checked
+contradictions exclude a second count at most one, a pair bounded by $(2,5)$,
+and a pair bounded by $(3,4)$. The necessary clauses use actual selected
+vertices, their path degrees and the missing-corner interpretation of each
+count. Their interpretations, complete contradiction replays and coordinate
+transport have passed Lean. Reversal exchanges the second and fourth
+positions and returns the same canonical direction pattern.
+
+Thus both counts are at least two. If their sum were at most seven, arrange
+the smaller first by reversal. It is either two, with the other at most five,
+or three, with the other at most four. Both cases are excluded. The complete
+142-, 138- and 144-edge snakes in Appendix~\ref{app:pair-012032-witnesses}
+attain the three displayed pairs. Their induced-path conditions, designated
+directions and singleton counts are checked in Lean~\cite{pair012032archive}.
+\end{proof}
+
+For this pattern, the case $(2,6)$ also forces both endpoints to lie at
+Hamming distance two from both counted vertices; its actual-snake proof
+is complete. Reversal gives the corresponding $(6,2)$ conclusion. The
+analogous statement for every pair with sum eight remains conditional:
+the remaining boundary cases require their complete checked deductions.
+The three printed witnesses satisfy the stronger endpoint statement,
+which alone does not prove it for every snake~\cite{endpointequalityarchive}.
+
+\begin{proposition}[A conditional limit on equality occurrences]\label{prop:pair-equality-occurrences}
+Assume every $012032$ window with second and fourth counts summing to eight
+has both counted vertices at distance two from both endpoints. Then at most
+13 such windows occur in a snake.
+\end{proposition}
+\begin{proof}
+The distance-two spheres about distinct vertices of $\Q_9$ intersect in at
+most 14 vertices. Translation reduces this finite fact to 511 nonzero
+endpoint differences and the 36 vertices at distance two from zero; the
+finite verification and its application to actual path positions have
+passed Lean. For a nonempty set $I$ of qualifying starts, the first counted
+positions $r+2$, for $r\in I$, are distinct. The further position
+$\max I+4$ exceeds all of them and is also counted by one of these windows.
+All $|I|+1$ vertices lie in the same intersection, so $|I|+1\le14$.
+The empty case is immediate~\cite{endpointequalityarchive}.
+\end{proof}
+This proposition retains the endpoint hypothesis. It supplies no bound on
+the number of six-count groups with sum below 25.
+
+\subsection{Necessary counts in an unresolved seven-transition window}\label{sec:critical-six}
+\begin{proposition}[Low-total $0120324$ windows]\label{prop:critical-six-intervals}
+Suppose $r+7\le m$, the seven-transition pattern is $0120324$, and
+$\sum_{j=1}^{6}\alpha_{r+j}\le22$. Then the six counts lie respectively in
+\[
+([1,21],[2,21],[1,21],[3,21],[1,21],[1,21]).
+\]
+\end{proposition}
+\begin{proof}
+The prefix has pattern $012032$, so Theorem~\ref{thm:pair-012032} gives
+$\alpha_{r+2},\alpha_{r+4}\ge2$. If $\alpha_{r+4}=2$, a checked prefix
+exclusion for this shape rules out $\alpha_{r+1}\le2$ when
+$\alpha_{r+4}\le3$, and hence gives $\alpha_{r+1}\ge3$. The suffix beginning
+at $r+1$ has canonical pattern $012314$, with middle count $\alpha_{r+4}$.
+Theorem~\ref{thm:outer-four-sum} therefore gives
+\[
+\alpha_{r+2}+\alpha_{r+3}+\alpha_{r+5}+\alpha_{r+6}\ge19.
+\]
+The six-count sum would be at least $3+2+19=24$, a contradiction.
+Consequently $\alpha_{r+4}\ge3$. Positivity and the internal upper bound
+21 give all other intervals. The prefix exclusion, canonical suffix
+identification and complete deduction for arbitrary snakes have passed
+Lean~\cite{criticalsixarchive}.
+\end{proof}
+This necessary condition leaves the proposed floor 23 unresolved. The
+selected older pair and five-count inequalities, together with the reviewed
+triple exclusion, permit the numerical tuple $(2,4,3,4,2,3)$ of total 18.
+No snake realizing it is asserted. It shows that this selected family of
+inequalities alone cannot prove 23; the review does not exhaust all earlier
+catalogue entries.
+
+Three full-cube searches for totals at most 24, at most 22, and at most 22
+with the proved intervals all reached their time limits. Their 126 corner
+occurrences retain repetitions over 100 distinct corners. The 35 added
+cycle exclusions and the encoded conditions were independently checked,
+but no search produced a complete model or contradiction. These outcomes
+establish no additional count floor~\cite{criticalsixarchive}.

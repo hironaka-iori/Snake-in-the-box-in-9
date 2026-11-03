@@ -1,17 +1,18 @@
-# Continuation after milestone 125
+# Continuation after milestone 126
 
 Work in E:/Snake-in-a-box. Use the requested research skill. Keep prose precise
 and define only essential, repeatedly used quantities. Read milestone 125's
 mathematical note, main proof review, proof supplement and two search reviews.
-Verify the current checkpoint and fetch the remote before making changes.
+Verify the milestone-126 checkpoint and fetch the remote before making changes.
 
-Milestone 126 is the scheduled full paper revision. Read the entire current
-editor source at D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and its
-E:/Snake-in-a-box/paper mirror. Preserve Iori Hironaka, Tommy Ma, Steven Zhan and
-local hyperlink settings. Incorporate results through 125, distinguish checked
-local/conditional/global claims, and use ordinary mathematical exposition
-without Lean file or implementation names. Use the built-in compiler on the
-saved editor file. The last unchanged revision is116.
+Milestone 126 completed the scheduled paper revision through result 125.
+Read its README, four audit reports and data/verification.json. The open editor
+source and E:/Snake-in-a-box/paper mirror are identical, with all authors and
+hyperlink settings preserved. Seven statements were added; no definitions
+were added. All prior mathematical content and appendices are retained,
+with three notation/title clarifications. The built-in compiler failed before
+TeX because of its Windows helper, so PDF compilation/layout are unverified.
+The next scheduled full paper revision is 136. Do not repeat the full review.
 
 Current results: milestone 124 closed six-count floor 25 for 0123041 in either
 orientation. Round125 proves a retained empty-square necessary condition:

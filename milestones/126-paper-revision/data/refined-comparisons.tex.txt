@@ -1,0 +1,65 @@
+\subsection{Later restrictions and replacement cycles}
+A further proposed rule for $012034$ is
+\[
+\alpha_{r+3}\le5\quad\Longrightarrow\quad
+\alpha_{r+1}+\alpha_{r+2}+\alpha_{r+4}+\alpha_{r+5}\ge16.
+\]
+An independent native replay verifies its contradiction, but the complete
+count interpretation and Lean replay remain pending. Granting this rule
+raises the first comparison mean to $2915/6$, with range $1730/3$; the
+conditional-share mean and range remain 496 and 602. The corresponding
+length fractions are
+\[
+\frac{1098960\cdot6+8\cdot2915+3460}{4200\cdot6+2915}
+=\frac{1324108}{5623},\qquad \frac{551765}{2348}.
+\]
+Their integer comparisons are still 235 and 234~\cite{latersumarchive}.
+
+Subsequent tests identify limits that are relevant to both profiles.
+On $012301$, proposed outer-four bound 13 fails in the relaxed local model:
+checked disconnected forests have count tuples $(4,2,10,2,3)$ and
+$(4,2,10,4,2)$. No complete-snake realization is inferred. On $012304$, a
+checked complete 148-edge snake has counts $(3,6,3,4,6)$, so a five-count
+bound 23 fails even with first, third and fourth counts at most four and
+the other two at least six. The path and exact counts have passed Lean.
+Two more specific five-count restrictions on $012304$ have independently
+replayed negative certificates, with their complete Lean deductions still
+pending~\cite{latersumarchive}.
+
+The proved $012031$ restriction in Proposition~\ref{prop:outer-012031} and
+the sharp $012032$ pair theorem remove additional transitions, but
+replacement cycles preserve both displayed means and ranges. Even deleting
+every endpoint-eligible equality key and every key with six recorded counts
+equal to four leaves attaining cycles. These deletions are hypothetical
+where their local exclusions remain unproved. In particular, the surviving
+three-cycle after the endpoint deletion has no eligible equality window;
+additional credit confined to such windows cannot increase its mean.
+
+The latest combined experiment grants six-count floors 26, 25 and 25 on
+$0123042$, $0120310$ and $0123024$, respectively, in addition to the inherited
+rules. Each of these three local floors remains unproved. A symbol below
+six specifies an exact count; symbol six retains its full interval
+$[6,21]$. The overlap accounting uses at most coefficient 20 for unrestricted
+six-position windows. Coefficient 24 is valid under the tested guard that
+the first count is exact and below six, since its excess is zero; overlapping
+alternative credits use their maximum. Thus no second use of the same
+excess is granted~\cite{latersumarchive,uniformsixarchive}.
+
+This experiment removes 10082 additional keys and increases credit on
+41762 retained keys. All 4673032 retained-edge inequalities were checked in
+the producer's exact enumeration, with an independent audit of the saved
+cycles, potentials and arithmetic. Both attaining cycles avoid the three
+tested patterns, so their means remain $2915/6$ and 496. Any further
+strengthening restricted to those three shapes leaves these cycle ceilings
+unchanged. Even setting the potential ranges to zero gives
+\[
+\frac{1323416}{5623}>235,\qquad
+\frac{137866}{587}>234.
+\]
+Hence range reduction alone cannot improve the respective integer bounds.
+The conditional four-cycle contains, up to reversal, $0120324$ windows with
+exact six-count sums 22, 24 and 26. A proved floor 23 would exclude its
+sum-22 edge; Section~\ref{sec:critical-six} records the remaining difficulty.
+These are comparison-graph cycles, with no asserted realization by complete
+snakes~\cite{uniformsixarchive,criticalsixarchive}.
+
