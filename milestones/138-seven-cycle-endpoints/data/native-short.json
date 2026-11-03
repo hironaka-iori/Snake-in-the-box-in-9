@@ -1,0 +1,344 @@
+{
+  "status": "NATIVE_REPLAY_PENDING_HINT_LIMIT",
+  "started_utc": "2026-11-03T15:13:52.527503+00:00",
+  "script_sha256": "48cba21d52e5076afd8203eaaec5e0f181abb47b8a6dfce3bf142cd75a056ef1",
+  "solver_timeout_seconds": 60,
+  "replay_hint_limit": 2000000,
+  "solver_runs": 1,
+  "lean_export_started": false,
+  "lean_started": false,
+  "source_files_sha256": {
+    "milestones/138-seven-cycle-endpoints/work/short/final.cnf": "002d8c95f567ad3011bf84e6a2135df059ced3d7bda5b1f348ec520d9ed53df3",
+    "milestones/138-seven-cycle-endpoints/work/short/base.cnf": "68c14aec1447777945dfa50cfb3e2da62be54b54702fa41308ba264de9ad168b",
+    "milestones/138-seven-cycle-endpoints/work/short/encoding.json": "6ea3c2329bf5c1fc6c645062b144d8ed97d7f0e258b87a2475b686ccd90e5852",
+    "milestones/138-seven-cycle-endpoints/work/short/worker-status.json": "100734063302321340b5d8d45eb897853f16ffcfe2a302408cdcae65679d41ef",
+    "milestones/138-seven-cycle-endpoints/work/short/cycle-cuts.json": "79ce53f9b60aa8a50b0d5f17201ee4669a33056b516c1f608e2f0339815b330a",
+    "milestones/109-relaxed-graph-test/upstream/milestones/10-window-aggregate/scripts/gen_lean_core.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "milestones/138-seven-cycle-endpoints/scripts/certify_short.py": "48cba21d52e5076afd8203eaaec5e0f181abb47b8a6dfce3bf142cd75a056ef1"
+  },
+  "solver_path": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+  "solver_sha256": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+  "initial_resources": {
+    "free_bytes": 1766932480
+  },
+  "variables": 2384,
+  "original_clauses": 96523,
+  "input_sha256": "002d8c95f567ad3011bf84e6a2135df059ced3d7bda5b1f348ec520d9ed53df3",
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+    "-q",
+    "--lrat",
+    "--no-binary",
+    "--seed=1",
+    "E:\\Snake-in-a-box\\milestones\\138-seven-cycle-endpoints\\work\\certificate-short\\input.cnf",
+    "E:\\Snake-in-a-box\\milestones\\138-seven-cycle-endpoints\\work\\certificate-short\\raw.lrat"
+  ],
+  "solver_pid": 26748,
+  "exit_code": 20,
+  "solver_seconds": 17.656999999999243,
+  "stdout_sha256": "e78eb858cfc756097d89bc504bb48af34e9c4e560777d5f241e7796da2d5b18c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "raw_sha256": "f10f09500b010dd13e7f323a28c553f6ee69847d8364eb17a0c48795bde36bad",
+  "raw_bytes": 19824933,
+  "trim_sha256": "3400a478ac33a1215f2247e4c92061c030ca4d4f9fe60c865cf6464329c3dfe9",
+  "core_sha256": "97d31d4b7f31b1d3ad8a1471b80deffa0ba96419757bec8fac9cbc358ef51e5d",
+  "core_ids_sha256": "082e15f6499aa77c37f0c9034a0068053c4112b89f867ed09b80339f02195d55",
+  "core_clauses": 4358,
+  "lemmas": 19338,
+  "hints": 2329967,
+  "core_premises": {
+    "extra_cycle_cuts": [
+      {
+        "clause_id": 96505,
+        "vertices": [
+          0,
+          1,
+          3,
+          7,
+          8,
+          12,
+          14,
+          15
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96506,
+        "vertices": [
+          18,
+          20,
+          21,
+          22,
+          25,
+          26,
+          27,
+          29
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96507,
+        "vertices": [
+          34,
+          36,
+          37,
+          38,
+          41,
+          42,
+          43,
+          45
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96508,
+        "vertices": [
+          48,
+          49,
+          51,
+          55,
+          56,
+          60,
+          62,
+          63
+        ],
+        "used": false
+      },
+      {
+        "clause_id": 96509,
+        "vertices": [
+          66,
+          68,
+          69,
+          70,
+          73,
+          74,
+          75,
+          77
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96510,
+        "vertices": [
+          80,
+          81,
+          83,
+          87,
+          88,
+          92,
+          94,
+          95
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96511,
+        "vertices": [
+          96,
+          97,
+          99,
+          103,
+          104,
+          108,
+          110,
+          111
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96512,
+        "vertices": [
+          117,
+          181,
+          245,
+          342,
+          373,
+          374,
+          375,
+          422,
+          437,
+          438,
+          439,
+          468,
+          470,
+          484,
+          486,
+          500
+        ],
+        "used": false
+      },
+      {
+        "clause_id": 96513,
+        "vertices": [
+          130,
+          132,
+          133,
+          134,
+          137,
+          138,
+          139,
+          141
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96514,
+        "vertices": [
+          144,
+          145,
+          147,
+          151,
+          152,
+          156,
+          158,
+          159
+        ],
+        "used": false
+      },
+      {
+        "clause_id": 96515,
+        "vertices": [
+          160,
+          161,
+          163,
+          167,
+          168,
+          172,
+          174,
+          175
+        ],
+        "used": false
+      },
+      {
+        "clause_id": 96516,
+        "vertices": [
+          192,
+          193,
+          195,
+          199,
+          200,
+          204,
+          206,
+          207
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96517,
+        "vertices": [
+          258,
+          260,
+          261,
+          262,
+          265,
+          266,
+          267,
+          269
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96518,
+        "vertices": [
+          272,
+          273,
+          275,
+          279,
+          280,
+          284,
+          286,
+          287
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96519,
+        "vertices": [
+          288,
+          289,
+          291,
+          295,
+          296,
+          300,
+          302,
+          303
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96520,
+        "vertices": [
+          315,
+          347,
+          379,
+          427,
+          443,
+          459,
+          475,
+          491
+        ],
+        "used": false
+      },
+      {
+        "clause_id": 96521,
+        "vertices": [
+          320,
+          321,
+          323,
+          327,
+          328,
+          332,
+          334,
+          335
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96522,
+        "vertices": [
+          384,
+          385,
+          387,
+          391,
+          392,
+          396,
+          398,
+          399
+        ],
+        "used": true
+      },
+      {
+        "clause_id": 96523,
+        "vertices": [
+          497,
+          498,
+          499,
+          505,
+          506,
+          509,
+          510,
+          511
+        ],
+        "used": false
+      }
+    ],
+    "interpretation": "Dependencies of this trimmed proof only. Original semantic tags identify the used count bounds; no minimality is claimed."
+  },
+  "replay_started": false,
+  "replay_reason": "The trimmed proof exceeds the requested2,000,000-hint limit; no replay was attempted.",
+  "finished_utc": "2026-11-03T15:14:19.081672+00:00",
+  "preserved_files_sha256": {
+    "input.cnf": "002d8c95f567ad3011bf84e6a2135df059ced3d7bda5b1f348ec520d9ed53df3",
+    "certify.exact.py": "48cba21d52e5076afd8203eaaec5e0f181abb47b8a6dfce3bf142cd75a056ef1",
+    "gen_lean_core.exact.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "stdout.txt": "e78eb858cfc756097d89bc504bb48af34e9c4e560777d5f241e7796da2d5b18c",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw.lrat": "f10f09500b010dd13e7f323a28c553f6ee69847d8364eb17a0c48795bde36bad",
+    "trimmed.lrat": "3400a478ac33a1215f2247e4c92061c030ca4d4f9fe60c865cf6464329c3dfe9",
+    "core-ids.json": "082e15f6499aa77c37f0c9034a0068053c4112b89f867ed09b80339f02195d55",
+    "core.cnf": "97d31d4b7f31b1d3ad8a1471b80deffa0ba96419757bec8fac9cbc358ef51e5d",
+    "core-premises.json": "b4b1a4fd6abdd3fa9e75fe70728e9052e626458d2bcd4068d4eb19ff4a26a56e"
+  },
+  "scope": "One fixed native solver run on the exact prepared input. A complete independent Python RUP replay certifies the finite CNF contradiction only. Lean replay and actual-snake clause interpretation remain pending; no new global bound."
+}

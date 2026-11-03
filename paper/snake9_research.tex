@@ -36,7 +36,7 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $m$ for the edge length, $T$ for the total singleton-square count and $s_0$ for the empty-square count, the identity is $T+2s_0+35(m+1)=9214$. For a canonical $012032$ window, the second and fourth internal counts have sum at least eight. Equality forces both endpoints into the common distance-two sphere and can occur at most thirteen times; it also requires an even path length and an even window start. A sum at most nine forces an endpoint to share an unselected neighbour with the four alternate window vertices. We prove that at most twenty-four such windows occur in any snake, allowing overlap and either length parity. Explicit odd-length snakes show that a uniform pair floor ten is false. Six-count and empty-square criteria give conditional improvements to 234 and 233, while surviving cycles limit the tested finite comparisons. The optimum and the numerical conjecture 196 remain unresolved.
+Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $m$ for the edge length, $T$ for the total singleton-square count and $s_0$ for the empty-square count, the identity is $T+2s_0+35(m+1)=9214$. For a canonical $012032$ window, the second and fourth internal counts have sum at least eight. Equality forces both endpoints into the common distance-two sphere and can occur at most thirteen times; it also requires an even path length and an even window start. A sum at most nine forces an endpoint to share an unselected neighbour with the four alternate window vertices. We prove that at most twenty-four such windows occur in any snake, allowing overlap and either length parity. Explicit odd-length snakes show that a uniform pair floor ten is false. A nine-transition exclusion removes one recorded competing cycle. Six-count and empty-square criteria give conditional improvements to 234 and 233, while surviving cycles limit the tested finite comparisons. The optimum and the numerical conjecture 196 remain unresolved.
 \end{abstract}
 
 \clearpage
@@ -2962,7 +2962,7 @@ The other profile has a seven-edge cycle whose shapes avoid the $012032$
 pair window. No complete snake realizing either cycle is asserted.
 
 \subsection{Limit of a uniform credit for endpoint occurrences}\label{sec:occurrence-credit-limit}
-Theorem~\ref{thm:thirty-two-windows} limits the number of low-pair windows.
+Theorem~\ref{thm:twenty-four-windows} limits the number of low-pair windows.
 The following comparison explains why an occurrence allowance alone cannot
 give a smaller length bound in the fixed first profile.
 
@@ -2991,11 +2991,61 @@ $C$ per occurrence bounds its mean by $488+C/2$. A competing seven-edge
 cycle has no such occurrence and has mean $3453/7$ under the same
 first-profile weights. These cycle data and the comparison formula are
 premises of the proposition. The second profile's mean 496 is a different
-weighting and must not replace $3453/7$ here. Neither the proved allowance
-32 nor the proposed allowance 24 overcomes this obstruction. Further
-progress must restrict the competing cycle, change the credit or improve
-the global comparison.
+weighting and must not replace $3453/7$ here. The proved allowance 24 does not overcome this obstruction in the original
+graph. The exclusion below removes the recorded competing cycle. The
+proposition remains valid under its displayed hypotheses; its second cycle
+constraint must be reassessed in the restricted graph.
 
+
+\subsection{Excluding the recorded seven-edge cycle}\label{sec:seven-cycle-exclusion}
+\begin{theorem}\label{thm:nine-window-exclusion}
+Let $x_r,\ldots,x_{r+9}$ be a fitting window of a snake in $\Q_9$ whose
+transition word, after coordinate relabelling, is $012301430$.
+The following conditions cannot hold simultaneously:
+\[
+\alpha_{r+3}\ge6,\qquad
+(\alpha_{r+4},\alpha_{r+5},\alpha_{r+6},\alpha_{r+7},\alpha_{r+8})
+=(3,3,3,5,2).
+\]
+There is no restriction on the parity of the path length or the window start.
+\end{theorem}
+\begin{proof}
+Translate the first window vertex to zero and relabel the coordinates.
+The window vertices become
+\[
+0,1,3,7,15,14,12,28,20,21.
+\]
+Every actual snake containing this window satisfies the necessary finite
+local conditions: the prescribed vertices are selected, selected vertices
+have degree one or two, at most two vertices are endpoints, and no selected
+subset contains a cycle. The internal singleton counts are determined by
+the twenty-one opposite corners from Lemma~\ref{lem:window-missing-corners}.
+Impose the displayed counts and use the universal internal bound
+twenty-one for the remaining counts.
+
+The resulting Boolean system has a checked contradiction. Its retained
+2353 clauses are justified by the local conditions, and all 1340 deductions
+of the refutation have passed Lean. The interpretation of those clauses,
+the coordinate normalization and the implication for arbitrary snakes have
+also passed Lean. Hence an actual snake satisfying the displayed conditions
+would give a satisfying assignment to a refuted system, a contradiction~\cite{sevencyclearchive}.
+\end{proof}
+The seven-edge cycle in Section~\ref{sec:odd-refined-model} contains the
+word $012301430$ with stored counts $(6,3,3,3,5,2)$. Its first symbol
+represents an actual count of at least six, so Theorem~\ref{thm:nine-window-exclusion}
+excludes that row and prevents realization of this cycle by consecutive
+windows of an actual snake. The four-edge cycle has no matching window.
+Deleting the newly excluded rows therefore leaves the first profile's
+minimum mean at 488: the old potential remains valid on the retained edges,
+and that four-edge cycle still attains 488. The second profile requires a
+new calculation; deleting its recorded attaining cycle alone gives no
+strict improvement of its minimum mean.
+
+A stronger candidate concerns the six-transition word $012301$ with its
+five internal counts bounded above by $(3,3,3,5,2)$. Its finite contradiction
+has passed an independent replay, but its complete Lean interpretation and
+refutation remain pending. It is not used as a proved exclusion here.
+Neither local result by itself establishes a smaller upper bound for $a(9)$.
 
 \subsection{What an integer improvement requires}
 The comparison~\eqref{eq:improved-potential} excludes length 235 exactly when
@@ -3298,7 +3348,9 @@ their realizability by complete snakes.
 
 The $012032$ pair bound, its equality geometry and parity restriction,
 the parity-free endpoint consequence and the twenty-four-window bound are
-checked for actual snakes. The $0123041$ six-count bound, necessary intervals
+checked for actual snakes. The nine-transition exclusion in
+Theorem~\ref{thm:nine-window-exclusion} also applies to arbitrary snakes and
+removes the recorded competing seven-edge cycle. The $0123041$ six-count bound, necessary intervals
 for low-total $0120324$ windows and fourth-count-three case are also checked. The direct shortfall theorem retains empty squares and requires no
 reference union or graph potential. Its sufficient upper bound on shortfall
 is unresolved. The broader sum family has mixed verification status, as
@@ -5548,6 +5600,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Interval construction, actual missing-pai
 \bibitem{count24archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Actual interval counts and a checked bound of twenty-four low-pair windows}. Research record 137, 3 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/137-actual-block-assembly}.
+
+\bibitem{sevencyclearchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{A checked nine-transition exclusion and the recorded seven-edge cycle}. Research record 138, 4 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/138-seven-cycle-endpoints}.
 
 \end{thebibliography}
 \end{document}

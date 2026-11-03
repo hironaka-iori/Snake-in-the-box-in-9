@@ -1,3 +1,25 @@
+# Research update: milestone 138
+
+A complete Lean proof excludes the canonical nine-transition row012301430
+with counts(>=6,3,3,3,5,2) at positions3–8, for arbitrary snakes and either
+parity. This removes the recorded competing seven-edge cycle. Deletion alone
+leaves the completed four-cycle and mean488. No new global length bound:
+the maintained interval remains191–235 with the documented upper-proof
+rebuild limitation.
+
+Next combine the proved exclusion with the24-window allowance. The first
+exact graph test is suffix credit83/3; target mean3011/6 and range<7753/6.
+The arithmetic is checked; the required potential is unproved. The stronger
+six-transition cap exclusion has independent proof replay only. See
+milestones/138-seven-cycle-endpoints/MATHEMATICAL_NOTE.md and its checkpoint.
+
+The existing paper was updated without new definitions; authors and preamble
+are unchanged. Source checks pass, but the PDF compiler failed before TeX.
+Last full revision136; targeted138; next full146. The separate115 batch was
+observed live at1017/1397. The research goal remains ACTIVE.
+
+## Earlier record
+
 # Research update: milestone 137
 
 The complete actual-snake bound of twenty-four low-pair windows passed Lean.

@@ -1,0 +1,2 @@
+E:\Snake-in-a-box\milestones\138-seven-cycle-endpoints\scripts\probe_short.py:13: SyntaxWarning: invalid escape sequence '\.'
+  raw=subprocess.check_output(['powershell','-NoProfile','-Command',"$o=Get-CimInstance Win32_OperatingSystem;@{free_bytes=[long]$o.FreePhysicalMemory*1024;processes=@(Get-CimInstance Win32_Process | Where-Object {$_.Name -eq 'python.exe' -and $_.CommandLine -match '138-seven-cycle-endpoints.*probe(?:_short)?\.py'} | Select-Object ProcessId,CommandLine)}|ConvertTo-Json -Depth 4 -Compress"],text=True)
