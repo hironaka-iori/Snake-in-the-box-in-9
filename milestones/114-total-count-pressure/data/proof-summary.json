@@ -1,0 +1,90 @@
+{
+  "status": "PASS_NATIVE_TOTAL_CERTIFICATE_CONDITIONAL_TRANSFER_AND_GRAPH_COMPARISONS",
+  "modules": [
+    {
+      "module": "TotalGeometry114",
+      "receipt_sha256": "6975b1a3057a32d3bbd6327a184afc4b87f2630cc10c0ee3810933c163a25d6b"
+    },
+    {
+      "module": "Comparison114",
+      "receipt_sha256": "5fd98f970998fa205ba40a8f7e0a98690f9d48e3cfa7c09a1aee864849871954"
+    }
+  ],
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.TotalGeometry114.actual_total_sum",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Comparison114.exclude235_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Comparison114.exclude234_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Comparison114.total19_ceiling_allows235",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "native_selected_certificate": {
+    "core_clauses": 5206,
+    "lemmas": 358464,
+    "hints": 22088504,
+    "independent_replay_core_and_original": true,
+    "concrete_lean_replay": false
+  },
+  "geometric_transfer_has_explicit_local_premise": true,
+  "new_mathematical_definitions": 0,
+  "new_global_bound": false,
+  "fixed_family_coefficient_ceilings": [
+    "2424/5",
+    "496"
+  ],
+  "integer_comparisons": [
+    235,
+    234
+  ],
+  "proof_prefix_match_bytes": 40935424,
+  "unselected_pooled_hints": 29534822,
+  "source_files_sha256": {
+    "milestones/114-total-count-pressure/data/TotalGeometry114-audit.json": "6975b1a3057a32d3bbd6327a184afc4b87f2630cc10c0ee3810933c163a25d6b",
+    "milestones/114-total-count-pressure/lean/TotalGeometry114.lean": "c0ff807395dd2d1c53eabb05f13a7d8a53632477ad680be251359b75ace02518",
+    "milestones/114-total-count-pressure/logs/TotalGeometry114-1793664595755628100.log": "d516eae40e6f496925535f4ab98e5e73f6982ba1b8675bd340f34cf8bb1ae26e",
+    "milestones/114-total-count-pressure/data/Comparison114-audit.json": "5fd98f970998fa205ba40a8f7e0a98690f9d48e3cfa7c09a1aee864849871954",
+    "milestones/114-total-count-pressure/lean/Comparison114.lean": "8dd58d11d18620087b76f3d4cd124fe785e585efc322f78f7a1d9059eb1eee57",
+    "milestones/114-total-count-pressure/logs/Comparison114-1793664948195817800.log": "0ab0ccfc564673e70c8b878a45b42cd0038ecac48cfe80116fbba5f46d9fd432",
+    "milestones/114-total-count-pressure/data/012310-total18-certificate.json": "50944a610c60a231b361cbc50def49664ad8f98d7e9d53f2dae67cde61155e75",
+    "milestones/114-total-count-pressure/data/extracted-core-scratch-solver.json": "e4dd95d39b1cc175c457938d5b7204af114455bf9fba1d7e5532fa6cf2c93798",
+    "milestones/114-total-count-pressure/scripts/replay_core.py": "ada1b3afed16d7ae053674a9803c2c51b6812402537a353b92df3992b509a5ce",
+    "milestones/114-total-count-pressure/data/native-core-audit.json": "6fd66ccb4625052a66baac02fe4c4fa8a3f00485f84a663ff4b1021fbeb7e03c",
+    "milestones/114-total-count-pressure/audit/native-core-review.md": "c43af7223afb16b3a63545369075edc582066d667b448929ebc9d70380db5c8a",
+    "milestones/114-total-count-pressure/data/cycle-audit.json": "fc245e6a30bb01b820434437bb8c20fc3c46f5d4016e7da7567618722d3e1eda",
+    "milestones/114-total-count-pressure/audit/cycle-review.md": "72e28d4916ba481689901ac61f09432669c41779dee95cba07f5e214044b621c",
+    "milestones/114-total-count-pressure/data/pooled-trim.json": "e5b031301d97fbc733faa2efe0bd32305912366f4b0fbcd4a687e3894ab3aca2",
+    "milestones/114-total-count-pressure/data/pooled-cuts-solver.json": "c4364cd11400fa610858f61f6ff64196353f3150305ce5c218dc467be370fdd6",
+    "milestones/114-total-count-pressure/data/cycle-cut-pool-extended.json": "b18fc634d4cf7661391ed2f44855557d576ef57c83815921e5b160755d302c9f",
+    "milestones/114-total-count-pressure/data/total19/results.json": "f5028e214497577cd79471c266f49a36bf3455850c79b1b7d8753084e47152e7",
+    "milestones/114-total-count-pressure/data/total20-hypothesis/results.json": "ae267fe66e2f6b04fd5960d253d19c6110ec586eaabcfb632e00e4a0d20d24a3",
+    "milestones/114-total-count-pressure/data/probes/012310-total18.json": "8239b1a79b7ba09e0864c5e44cd9fbf5245589526bbf700818a9bf2bd0c7d6b9",
+    "milestones/114-total-count-pressure/data/probes/012310-total19.json": "edefa939267f41aa24511f7c668a049a4155cd1b13949b12b4cb41bf7d5947e9"
+  },
+  "script_sha256": "f854c60d570a11e6cc9f9e0fca4562c3e74ea35a0006b2576d704ad5399b062f",
+  "scope": "The selected native contradiction was independently replayed in both identifier systems. This audit verifies its frozen bytes and successful helper receipts; it does not repeat the large replay. Complete concrete Lean certification and global integration remain pending."
+}

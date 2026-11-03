@@ -1,0 +1,7 @@
+{
+  "status": "REJECTED_LITERAL_ORDER_DIFFERENCE_BEFORE_SOLVER",
+  "script": "scripts/certify_extracted_core.py",
+  "error": "AssertionError: Extracted clause is not an original input",
+  "diagnosis": "The converter reordered literals in 4535 of 5431 clauses. After sorting the literal multisets, every clause maps injectively to an original input. The revised certify_core_permuted.py restores the original literal order before invoking the solver.",
+  "scope": "The initial attempt started no solver. Both scripts and the independent mapping audit are preserved."
+}

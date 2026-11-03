@@ -1066,3 +1066,44 @@ pending. Conditional 234, the exact optimum and 196 remain unresolved.
 Paper revision 106 is unchanged; the next full revision is 116.
 
 Next research priority: Test total count at most 18 on canonical 012310, without extra count caps. Both replacement cycles contain such a window. Compare a viable restriction on both full profiles before proof export. Preserve milestone 104 and avoid repeated coefficient sweeps within the current eight-rule family.
+
+
+## Milestone 114: total-count certificate and finite comparisons
+
+The native contradiction for five-count total at most 18 on canonical
+012310 has been independently replayed in both core and original-CNF
+identifier systems. It uses 5,206 input clauses, 358,464 deductions and
+22,088,504 propagation hints. Its concrete counter interpretation and
+full Lean replay remain pending. Lean checks the conditional geometric
+transfer and three exact comparison lemmas: two modules, four standard
+axiom reports, and no new mathematical definitions.
+
+The nine-rule finite experiment removes 2,263 further keys beyond 113,
+retaining 4,865,603. Its completed-floor mean rises to 2424/5 with range 2881/5;
+comparison 5517073/23424 retains integer 235. The conditional profile remains
+496/602 and integer 234. A stronger total-20 hypothesis has an UNKNOWN
+local probe, lowers only the first range to 565, and retains both integers.
+Zero-deficit cycles fix coefficient ceilings 2424/5 and 496 in these families.
+Both profiles continue to assume other unproved local rules.
+
+The selected proof completed in 20.656 seconds using temporary storage,
+after the same formula/options timed out at 60 seconds on the research
+volume. Their first 40,935,424 proof bytes agree. Reusing 115 valid cycle
+cuts produced a larger retained proof and was not selected. Preserve all
+attempts and the independently replayed original certificate.
+
+The next priority is reducing that certificate before concrete Lean
+export. The subsequent common local target is 012345, with exact tuples
+(4,3,3,5,4), (5,4,2,5,5), and (5,4,3,4,5). A middle count at most 3
+and total at most 21 remains an untested combination.
+
+Milestone 104 resumed after its unchanged interrupted module passed on
+retry. This process-verified snapshot records 105/791 completed
+and 104/791 conditional contexts, with active module
+`ConditionalBatch104G086`. Preserve the running batch. The reference
+union still has 1,366 unresolved entries. No new global upper bound is
+established; the maintained interval is 191 through 235 edges with the
+full independent rebuild pending. Conditional 234 and the optimum remain
+unresolved. Paper revision 106 is unchanged; next full revision 116.
+
+Next research priority: Reduce the selected 012310 total-count certificate and export its concrete semantics and refutation to Lean. Preserve the resumed milestone 104 batch. Subsequently test the recorded 012345 count cells on both profiles; avoid coefficient sweeps within the current fixed families.

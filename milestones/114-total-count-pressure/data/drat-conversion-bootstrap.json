@@ -1,0 +1,73 @@
+{
+  "status": "TIMEOUT_OR_FAILED",
+  "compiler": "C:\\Users\\hironakaiori\\AppData\\Local\\Temp\\pip-target-rhmo53tp\\lib\\python\\ziglang\\zig.exe",
+  "compiler_sha256": "2e44af5bbf7a72ef8cbdae370284687c95d65a19affa469d2ad0364d905b8e84",
+  "source": "E:\\Snake-in-a-box\\work\\keep96\\vendor\\drat-trim\\drat-trim.c",
+  "source_sha256": "d834b649f437e091597f5347f259b9f681087f89ca0844d0cee250a1a1a0c2ee",
+  "command": [
+    "C:\\Users\\hironakaiori\\AppData\\Local\\Temp\\pip-target-rhmo53tp\\lib\\python\\ziglang\\zig.exe",
+    "cc",
+    "E:\\Snake-in-a-box\\work\\keep96\\vendor\\drat-trim\\drat-trim.c",
+    "-O2",
+    "-std=c99",
+    "-Dgetc_unlocked=getc",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\114-total-count-pressure\\build-native\\drat-trim.exe"
+  ],
+  "build_exit": 0,
+  "build_log_sha256": "df247d039dab8d36a5436ed9f672903becdfc4b2e74aa0415b8aedf354ad15a6",
+  "script_sha256": "36fb7f4c0652174a2f339fd21a0df5baeed862b7044b09f033a87b2ba45cf40c",
+  "checker_sha256": "40c21fa7132ab37b2083e4647b2bb1f28f11cd4e4787ec7bc2c45e95d84a50a1",
+  "controls": [
+    {
+      "name": "valid",
+      "exit_code": 0,
+      "verified": true,
+      "expected": true,
+      "log_sha256": "68693805ad857dff4a1e18c932bdfe5c49ef03864197419181d3267029106b3d"
+    },
+    {
+      "name": "invalid",
+      "exit_code": 1,
+      "verified": false,
+      "expected": false,
+      "log_sha256": "9d96766a2627f5f2474696447799b420fbbb98b80a8e518dbabc4d86002e2392"
+    },
+    {
+      "name": "truncated",
+      "exit_code": 1,
+      "verified": false,
+      "expected": false,
+      "log_sha256": "6a8c0e30f4f1d5f89aab2d3ea202d6dde64c0adace4aaea64fe15dd8d9af2dc5"
+    }
+  ],
+  "conversion_command": [
+    "E:\\Snake-in-a-box\\milestones\\114-total-count-pressure\\build-native\\drat-trim.exe",
+    "E:\\Snake-in-a-box\\milestones\\114-total-count-pressure\\work\\012310-total18\\full.cnf",
+    "E:\\Snake-in-a-box\\milestones\\114-total-count-pressure\\work\\012310-total18-cadical153\\proof.drat",
+    "-L",
+    "E:\\Snake-in-a-box\\milestones\\114-total-count-pressure\\work\\drat-conversion-bootstrap\\full.lrat",
+    "-c",
+    "E:\\Snake-in-a-box\\milestones\\114-total-count-pressure\\work\\drat-conversion-bootstrap\\core.cnf",
+    "-t",
+    "120"
+  ],
+  "cnf_sha256": "5cfbc8c1f60b60a7327c6cf0b959b2b2e1cce7302070afccae146472a3f3a3bf",
+  "drat_sha256": "050fbefc5f449fed070435fa549239e0911a7b0baa23d2cfccd1fd441db3a3e0",
+  "exit_code": null,
+  "seconds": 126.1400000000001,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "artifacts": [
+    {
+      "path": "work/drat-conversion-bootstrap/full.lrat",
+      "bytes": 75089435,
+      "sha256": "6a14431594f5c3c31d67e9211bb1e7940bd9d0f1f3f2d2fc77e880fb0f6786e8"
+    },
+    {
+      "path": "work/drat-conversion-bootstrap/core.cnf",
+      "bytes": 104789,
+      "sha256": "4bb165e486d935839dba961f1949cfd03c8f1a67b7e3a0affe92a81429382790"
+    }
+  ],
+  "scope": "Native checker with valid/invalid/truncated controls. Output still requires independent RUP replay, concrete semantics and Lean replay."
+}

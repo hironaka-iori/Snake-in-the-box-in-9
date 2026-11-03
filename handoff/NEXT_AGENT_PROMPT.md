@@ -1,96 +1,125 @@
 # Continuation assignment
 
-Continue the empty-square/count-sum route in `E:/Snake-in-a-box`.
-Read milestone 113's mathematical note, proof summary, checkpoint and
-independent review. Keep the research goal active. Use existing notation;
-introduce a definition only when essential and repeatedly used.
+Continue the empty-square/count-sum route in `E:/Snake-in-a-box`, using
+existing notation. Read milestone 114's mathematical note, proof summary,
+checkpoint and final review. Keep the research goal active. Verify the
+live milestone 104 process before changing anything associated with it.
 
-## First mathematical test
+## First proof task
 
-Test canonical direction pattern `012310` with five unrestricted count
-bounds `[0,21]` and total at most 18. The replacement completed cycle
-contains `(3,4,5,3,3)` and `(3,3,5,4,3)`; the conditional cycle contains
-`(2,4,5,5,2)`. Each sums to 18. A valid total lower bound of 19 would remove
-an edge from each saved cycle. Further cycles may preserve the means, so
-evaluate a viable inequality on both full profiles before expensive
-proof export. This exact total test was not run in milestone 113.
+Reduce the cost of the selected native contradiction and check the
+concrete five-count inequality in Lean. The target is canonical `012310`,
+five internal count total at least 19, with no additional count caps.
 
-Use a new milestone folder and preserve existing outputs. If the test
-produces a model, independently reconstruct all degrees, counts, boundary
-conditions and cycles. If it reports UNSAT, retain that status as native
-evidence until a concrete contradiction has been replayed and its actual
-snake interpretation checked. UNKNOWN provides no impossibility result.
+Selected evidence in milestone 114:
 
-## Current limitations and available proofs
+- `data/012310-total18-certificate.json`.
+- `work/012310-total18/full.cnf`: 3,129 variables, 55,860 clauses,
+  including eight connected induced-cycle exclusions.
+- `work/012310-total18/full.trim.lrat`: 5,206 used original clauses,
+  358,464 deductions, 22,088,504 hints; independently replayed after
+  mapping identifiers back to the full formula.
+- `work/extracted-core-scratch/core.trim.lrat`: the same selected
+  deduction before full-CNF identifier mapping.
+- `scripts/replay_core.py`: successful two-stage RUP replay.
 
-Milestone 113's candidate is: canonical `012034` with central caps `(5,4,5)`
-implies outer pair at least 9. Its cap-8 native probe reports UNSAT without
-extra cycle cuts. Both CaDiCaL 2.1 proof attempts, default and `--plain`,
-time out after 30 seconds. Their distinct CNFs and partial proof files
-are saved; do not restart either unchanged merely because it is pending.
+Do not reclassify this as a checked actual-snake theorem yet. The full
+Lean certificate and its concrete interpretation remain pending.
+`TotalGeometry114.actual_total_sum` checks only the geometric transfer
+under an explicit local contradiction. `Comparison114` checks three
+arithmetic statements; neither module discharges the concrete contradiction.
 
-`PairGeometry113.actual_pair_sum` passes Lean but retains the local
-contradiction premise. It is not a completed concrete pair-sum theorem.
-`PairBudget113` passes three arithmetic lemmas: a pair deficit is bounded
-by the two excesses, and its weighted maximum with previous credit fits
-the existing shared budget. Local lower bounds remain hypotheses.
-There are two successful modules, four standard axiom reports and no
-new definitions in this round.
+The existing core-refinement/export scripts in milestone 112 are useful
+references. Try a bounded refinement or changed solver configuration
+before exporting hundreds of thousands of deductions. Preserve the
+selected verified certificate if another attempt fails or grows.
+Use system temporary storage for large native proof output, followed by
+a verified copy to the research folder. The unchanged formula/options
+completed there in 20.656 seconds after a 60-second attempt on the research
+volume timed out; their first 40,935,424 proof bytes are identical.
 
-The exact local witness `(6,5,4,5,3)` attains pair sum 9 under the caps.
-Two more witnesses have counts `(10,4,4,3,6)` and `(5,5,4,5,5)`.
-All three have relaxed boundaries and multiple components. They limit
-the local model and do not construct complete snakes.
+The first extracted-core attempt failed because its literal order differed
+from the original clauses. Independent multiset matching found 4,535 such
+permutations among 5,431 extracted clauses. The successful attempt restores
+the original literal order. Preserve both input mappings and all failed
+attempts. The separate DRAT conversion timed out and its LRAT is partial;
+the successful selected contradiction comes from the later direct LRAT run.
 
-Milestone 112's `ActualSum112.actual_outer_sum` is a complete checked
-actual-snake result: canonical `012314`, middle at most 2, outer four sum
-at least 19. Its checked sum semantics preserve all repeated literals.
-That sum has 84 occurrences and 70 distinct literals. The present pair
-sum has 42 occurrences and 41 distinct literals; preserve multiplicity.
+The 115-cycle strengthened alternative retains 29,534,822 hints and is
+unselected and unreplayed. Do not silently use it in place of the verified
+22,088,504-hint certificate. All its cycles were independently checked as
+valid exclusions, but that alone does not check its proof.
 
-## Both graph comparisons
+## Lean export requirements
 
-Milestone 113 `data/pair-rules.json` contains the previous seven rules
-and the new pair candidate. The graph retains 4,867,866 full keys after
-41,361 further deletions beyond milestone 112. Direction, history and
-count code must all be retained. Count symbol 6 represents actual counts
-6 through 21. A rule applies only when its whole bucket satisfies every
-count cap. Reverse count positions when reversing the direction window.
+The five-count sum contains 105 literal occurrences and 84 distinct
+literals: 68 occur once, 11 twice and 5 three times. Deduplication changes
+the inequality. Reuse `SumCountSemantics112` with all five selected centres.
+The window vertices are `[0,1,3,7,15,13,12]`, and the centre/direction pairs
+are `(1,0,1),(3,1,2),(7,2,3),(15,3,1),(13,1,0)`.
 
-Take the maximum applicable weighted deficit. The generic fixed budget
-uses `4*a+b<=120`; pair and outer-four deficits have coefficient `a`,
-total-five deficits coefficient `min(a,b)`. Existing share credit is
-separate. Balanced coefficients `(24,24)` give mean/range 484/557 in the
-completed-floor profile and 496/602 in the conditional-floor profile.
-The resulting rational comparisons are `1103389/4684` and `551765/2348`,
-with integer floors 235 and 234. Both calculations assume unproved sum
-rules. The name `completed` refers only to its share-floor source.
+When adapting the milestone 112 exporter, append this case's cycle cuts
+before asserting equality with the saved full CNF and generating tags.
+Its earlier proof had no such added cuts. Keep the extra sum counter and
+its full multiset of negative primary literals. Check every finite
+counter/tag/permutation claim in Lean before combining with the refutation.
 
-Every applicable count deficit is zero on each saved replacement cycle.
-Therefore any nonnegative coefficient changes within this fixed family
-leave cycle ceilings 484 and 496. Balanced coefficients attain both.
-Milestone 112's checked arithmetic also rules out an integer improvement
-from reducing nonnegative potential ranges alone at these mean ceilings.
-Do not repeat coefficient sweeps within this family.
+Count active variables before choosing an audited checker offset and
+word width. The previous 112 proof used a bijective renumbering to put
+1,718 active variables below offset 2,400. This case may need a different
+audited variant. Preserve the full variable bijection and independently
+check its CNF, proof and meaning-table transformations.
 
-## Preserve and verify
+Use at most one additional Lean compiler alongside milestone 104, with
+the existing memory gate. Preserve unique failed attempts and all hashes.
+Do not count generated modules as checked. The eventual actual-snake
+theorem must discharge `hlocal` without a collective reference-catalogue
+premise and print its axiom dependencies.
 
-Verify milestone 104's live process before interpreting its saved state.
-Never restart or modify that active batch. Allow at most one additional
-Lean compiler, following the existing memory gate. Keep all immutable
-receipts, failed attempts and raw proofs. Run milestone 113's
-`scripts/verify_saved.py --verify` against the saved checkpoint. Restore
-missing large originals with `--restore-archives` on a fresh checkout.
+## Mathematical comparisons and subsequent target
 
-The original reference union still has 1,366 unresolved entries; twelve
-checked indices are `0,472,495,535,572,602,619,620,1006,1010,1011,1014`.
-The new pair experiment closes none. Complete graph integration,
-orientation guards, remaining local hypotheses and aggregate potential
-assembly remain separate proof obligations.
+The total-19 finite experiment retains 4,865,603 full keys, 2,263 fewer
+than milestone 113. Its completed-floor mean/range is `2424/5,2881/5`,
+with comparison `5517073/23424` and integer floor 235. The conditional
+profile remains mean/range `496,602`, comparison `551765/2348`, floor 234.
+Both assume the earlier unproved sum rules.
 
-The maintained range remains 191 through 235 edges, with a complete
-independent rebuild of upper-bound evidence pending. Conditional 234,
-the optimum and 196 remain unresolved. Check GitHub before work and push
-a reviewed completed round. Preserve unrelated local edits. Keep paper
-revision 106, the three authors and hypersetup; revise the full paper at
-round 116 unless the user requests an earlier revision.
+The total-20 hypothesis has only an UNKNOWN 30-second probe. It retains
+4,859,836 keys and lowers the first range to 565, with comparison
+`5517017/23424`; both integer floors remain unchanged. It supplies no
+UNSAT support for the stronger local bound. Saved zero-deficit cycles
+bound the means by `2424/5` and 496 for all nonnegative coefficient choices
+within these fixed families. Do not repeat coefficient sweeps.
+
+Lean checks that excluding 235 via the existing comparison requires
+`227*p > 111960*d+R`; excluding 234 requires `226*p > 116160*d+R`.
+At mean at most `2424/5`, every nonnegative potential range still permits
+235. More range optimization alone cannot reach 234 from this mean.
+
+After advancing the concrete proof, test the common surviving suffix
+shape `012345`. Exact count tuples are `(4,3,3,5,4)` for the completed
+cycle, and `(5,4,2,5,5)` or `(5,4,3,4,5)` for the stronger hypothetical
+conditional cycle. The broad middle count at most 3 and total at most 21 cell is
+untested. Verify any local witness directly, and compare viable
+restrictions on both full profiles before expensive proof export.
+
+## Preservation
+
+The old milestone 104 attempt ended with a termination code and no Lean
+diagnostic. Its unchanged retry passed in 175.61 seconds, and the original
+batch driver resumed. Saved observations are dated; query the live process.
+Do not restart a live job or alter its sources. Retain failed and successful
+receipts, including the stopped-state snapshot in114.
+
+Use `scripts/verify_saved.py --verify` for this round. Missing large raw
+proof files can be restored with `--restore-archives`; they remain present
+on this machine. The live resumed-batch output logs are deliberately outside
+the frozen manifest; immutable snapshots are saved instead.
+
+The original reference union still has 1,366 unresolved entries; checked
+indices are `0,472,495,535,572,602,619,620,1006,1010,1011,1014`. Complete
+global integration and the maintained upper bound's independent rebuild
+remain pending. The range is 191 through 235 edges; conditional 234, the
+optimum and 196 remain unresolved. Check GitHub and publish reviewed rounds.
+Keep the three authors and hypersetup. Paper revision 106 remains current;
+perform the next full revision at 116. Introduce no unnecessary definitions.

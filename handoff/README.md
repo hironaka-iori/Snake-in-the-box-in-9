@@ -1,37 +1,33 @@
 # Research handover
 
-Work in `E:/Snake-in-a-box`. Start with milestone 113's mathematical note,
-proof summary, checkpoint and independent review. `CURRENT_STATUS.md`
-begins with the latest checkpoint; older sections are historical.
+Work in `E:/Snake-in-a-box`. Start with milestone 114's mathematical note,
+proof summary, checkpoint and final review. Older checkpoint sections are
+historical. No numerical improvement to the maintained global interval
+191 through 235 edges is established; the complete independent rebuild
+of the upper-bound evidence remains pending.
 
-No new numerical upper bound is established. The maintained range is
-191 through 235 edges, based on the contributor proof and archived audit;
-the complete independent rebuild remains pending. Conditional 234, the
-exact optimum and 196 are unresolved.
+The new native result is a fully replayed contradiction for five-count
+total at most 18 on canonical `012310`. The selected certificate has
+5,206 input clauses, 358,464 deductions and 22,088,504 hints. Its concrete
+counter interpretation and full Lean replay remain pending. Lean checks
+the geometric transfer with that local contradiction as a premise and
+three exact comparison lemmas. No definitions were added.
 
-Milestone 112's actual-snake theorem remains available: on canonical
-`012314`, a middle count at most 2 forces the four outer counts to sum
-to at least 19. Its full contradiction and transfer pass Lean without
-a collective reference-catalogue premise.
+The nine-rule finite experiment improves the completed-floor mean from
+484 to 484.8, retaining integer comparison 235. The conditional-floor
+comparison remains 234. A stronger sum-20 hypothesis has only an UNKNOWN
+local probe and improves only the first potential range. Zero-deficit
+cycles give coefficient ceilings 484.8 and 496 within these fixed families.
 
-Milestone 113 tests a different pattern, `012034`: central caps `(5,4,5)`
-appear to force an outer-pair sum of at least 9. Native UNSAT supports
-this candidate, while both complete-proof attempts timed out. Lean
-checks its geometric transfer only with the local contradiction as an
-explicit premise. Lean also checks the shared pair-credit arithmetic.
-No new mathematical definitions were introduced.
+The next priority is reducing the selected proof before Lean export.
+After that, `012345` exact count cells identify a common remaining target.
+See `NEXT_AGENT_PROMPT.md` for exact files, assumptions and preservation
+requirements. Milestone 112's actual-snake `012314` outer-sum theorem
+remains checked; the new unrestricted total-sum theorem is not yet at
+that evidence level.
 
-A verified relaxed local configuration attains counts `(6,5,4,5,3)`.
-Thus the present local assumptions cannot force outer sum 10. Assuming
-the sum-9 rule removes 41,361 more graph keys, but the two comparisons
-remain 235 and 234. Zero-deficit replacement cycles rule out coefficient
-improvement within the present eight-rule family.
-
-The next bounded test is total count at most 18 on `012310`. Such windows
-occur on both replacement cycles. See `NEXT_AGENT_PROMPT.md` for the
-precise cases and evidence requirements.
-
-Preserve milestone 104's live batch and all audited bytes. Use the saved
-manifest verifier and restore missing large files from verified archives.
-Keep the three authors and hypersetup. Paper revision 106 remains current;
-the next full revision is 116. Define only essential concepts that recur.
+Milestone 104 resumed after one successful unchanged retry of its
+interrupted module. Verify its current process and preserve its receipts.
+Keep the three authors and hypersetup. The paper remains at revision 106;
+the next full revision is 116. Define only essential, repeatedly used
+concepts. Large raw proof files remain local with verified gzip copies.

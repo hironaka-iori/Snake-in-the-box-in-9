@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 113](milestones/113-all-four-sum-pressure/README.md) checks shared pair-credit arithmetic and a conditional geometric transfer. A locally sharp candidate removes 41,361 more graph keys; comparisons remain 235 and conditional 234. Replacement cycles fix the present coefficient ceilings.
+Latest continuation: [milestone 114](milestones/114-total-count-pressure/README.md) independently replays a native total-count contradiction and checks its conditional geometric transfer. The completed-floor finite mean improves to 484.8; integer comparisons remain 235 and conditional 234. Concrete Lean replay is the next proof obligation.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -16,7 +16,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 106](milestones/106-paper-revision/README.md). The paper incorporates the arguments through milestone 105 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 116.
 
-Next research priority: Test total count at most 18 on canonical 012310, without extra count caps. Both replacement cycles contain such a window. Compare a viable restriction on both full profiles before proof export. Preserve milestone 104 and avoid repeated coefficient sweeps within the current eight-rule family.
+Next research priority: Reduce the selected 012310 total-count certificate and export its concrete semantics and refutation to Lean. Preserve the resumed milestone 104 batch. Subsequently test the recorded 012345 count cells on both profiles; avoid coefficient sweeps within the current fixed families.
 
 ## Historical checkpoints
 

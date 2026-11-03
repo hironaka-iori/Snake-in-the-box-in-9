@@ -1,5 +1,45 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 114 checkpoint
+
+The native contradiction for five-count total at most 18 on canonical
+012310 has been independently replayed in both core and original-CNF
+identifier systems. It uses 5,206 input clauses, 358,464 deductions and
+22,088,504 propagation hints. Its concrete counter interpretation and
+full Lean replay remain pending. Lean checks the conditional geometric
+transfer and three exact comparison lemmas: two modules, four standard
+axiom reports, and no new mathematical definitions.
+
+The nine-rule finite experiment removes 2,263 further keys beyond 113,
+retaining 4,865,603. Its completed-floor mean rises to 2424/5 with range 2881/5;
+comparison 5517073/23424 retains integer 235. The conditional profile remains
+496/602 and integer 234. A stronger total-20 hypothesis has an UNKNOWN
+local probe, lowers only the first range to 565, and retains both integers.
+Zero-deficit cycles fix coefficient ceilings 2424/5 and 496 in these families.
+Both profiles continue to assume other unproved local rules.
+
+The selected proof completed in 20.656 seconds using temporary storage,
+after the same formula/options timed out at 60 seconds on the research
+volume. Their first 40,935,424 proof bytes agree. Reusing 115 valid cycle
+cuts produced a larger retained proof and was not selected. Preserve all
+attempts and the independently replayed original certificate.
+
+The next priority is reducing that certificate before concrete Lean
+export. The subsequent common local target is 012345, with exact tuples
+(4,3,3,5,4), (5,4,2,5,5), and (5,4,3,4,5). A middle count at most 3
+and total at most 21 remains an untested combination.
+
+Milestone 104 resumed after its unchanged interrupted module passed on
+retry. This process-verified snapshot records 105/791 completed
+and 104/791 conditional contexts, with active module
+`ConditionalBatch104G086`. Preserve the running batch. The reference
+union still has 1,366 unresolved entries. No new global upper bound is
+established; the maintained interval is 191 through 235 edges with the
+full independent rebuild pending. Conditional 234 and the optimum remain
+unresolved. Paper revision 106 is unchanged; next full revision 116.
+
+Earlier checkpoint sections below are historical snapshots.
+
 ## Milestone 113 checkpoint
 
 On canonical 012034, central caps (5,4,5) appear to force the outer
