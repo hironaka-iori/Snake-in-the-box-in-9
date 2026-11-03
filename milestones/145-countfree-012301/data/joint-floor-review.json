@@ -1,0 +1,822 @@
+{
+  "status": "PASS_BOUNDED_JOINT_FLOOR_CYCLE_AND_ARITHMETIC_REVIEW",
+  "recorded_at": "2026-11-03T18:09:56.485177+00:00",
+  "source_files_sha256": {
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/scripts/analyze_joint_floors.py": "0dd1373436b304834658ee69f12c74ea5bd4f66424c57bbc9cba501cd66e4c85",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/data/share18-credit601-over36/results.json": "7ad732a8cfdb2f2d7580dc5821bf84f75cc271df7049726d5906e489b50a470d",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/data/retuned-review.json": "e7e54f67312d03f60ab015a603bd583b11c3b35398cf794fd4316e6953837665",
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/lean/JointFloors145.lean": "519f5b1bcbcbf8efbc15eef04d617d1f6bfef7586e56766a76ba45c0448ebafb",
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/data/joint-floor-analysis.json": "d653af4da058477f398e434c4850b67b531f304e30bc8a8f0201dc32e3fca032",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/scripts/evaluate_retuned.py": "b8a449083353ca7dec443a5cdf417a71ed1a6af33f3141d7ff30782a7c216b44",
+    "E:/Snake-in-a-box/milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/data/JointFloors145-audit.json": "1fc640e65655a04bb460e3f76b22d2374229570b9e5168fc223e29d3afda422d",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/data/graph-review.json": "c8ca447a4a12577e7efb5839d166e68fe689dab46a2426c9f207c985d718f960",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/data/share18-impact/results.json": "269bd2361a7e272feff2793927ea2555f5fde5dd6259ab8bb0e4442d354148dd",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/data/share18-impact/removed-indices.json": "b29c2d2717b5d2e1cfefb95b827b1aa0f59376e0fbcdaf693e5553ddf85e82f9",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/data/share18-credit601-over36/removed-indices.json": "b29c2d2717b5d2e1cfefb95b827b1aa0f59376e0fbcdaf693e5553ddf85e82f9",
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/lean/TwoCycles145.lean": "83a81fa5ab075fbfbd1c2b867bde4ca4876352b66012e906ee7f3adfda7eee5f",
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/data/TwoCycles145-audit.json": "786b7422303d519be4cedc929e5ad5c7dbec9880aacb9192e2c797800b8435f9"
+  },
+  "cycle_mapping": [
+    {
+      "index": 0,
+      "edge": 973890,
+      "u": 205943,
+      "v": 279211,
+      "canonical_suffix": "012304",
+      "forward_suffix": "012341",
+      "reverse_suffix": "012304",
+      "clipped_entering_count": 2,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 256,
+      "floor_parameter": null,
+      "old_weight_minus120count": 16
+    },
+    {
+      "index": 1,
+      "edge": 1205785,
+      "u": 279211,
+      "v": 563299,
+      "canonical_suffix": "012301",
+      "forward_suffix": "012301",
+      "reverse_suffix": "012301",
+      "clipped_entering_count": 2,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 246,
+      "floor_parameter": "F",
+      "old_weight_minus120count": 6
+    },
+    {
+      "index": 2,
+      "edge": 2552723,
+      "u": 563299,
+      "v": 689303,
+      "canonical_suffix": "012304",
+      "forward_suffix": "012304",
+      "reverse_suffix": "012341",
+      "clipped_entering_count": 6,
+      "count6_means_at_least6": true,
+      "original_profile_weight": 736,
+      "floor_parameter": null,
+      "old_weight_minus120count": 16
+    },
+    {
+      "index": 3,
+      "edge": 3050240,
+      "u": 689303,
+      "v": 216717,
+      "canonical_suffix": "012304",
+      "forward_suffix": "012341",
+      "reverse_suffix": "012304",
+      "clipped_entering_count": 4,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 496,
+      "floor_parameter": null,
+      "old_weight_minus120count": 16
+    },
+    {
+      "index": 4,
+      "edge": 991817,
+      "u": 216717,
+      "v": 304976,
+      "canonical_suffix": "012301",
+      "forward_suffix": "012301",
+      "reverse_suffix": "012301",
+      "clipped_entering_count": 3,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 371,
+      "floor_parameter": "F",
+      "old_weight_minus120count": 11
+    },
+    {
+      "index": 5,
+      "edge": 1272513,
+      "u": 304976,
+      "v": 686789,
+      "canonical_suffix": "012304",
+      "forward_suffix": "012304",
+      "reverse_suffix": "012341",
+      "clipped_entering_count": 6,
+      "count6_means_at_least6": true,
+      "original_profile_weight": 736,
+      "floor_parameter": null,
+      "old_weight_minus120count": 16
+    },
+    {
+      "index": 6,
+      "edge": 3029988,
+      "u": 686789,
+      "v": 209408,
+      "canonical_suffix": "012340",
+      "forward_suffix": "012340",
+      "reverse_suffix": "012340",
+      "clipped_entering_count": 3,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 364,
+      "floor_parameter": "G",
+      "old_weight_minus120count": 4
+    },
+    {
+      "index": 7,
+      "edge": 976241,
+      "u": 209408,
+      "v": 276675,
+      "canonical_suffix": "012304",
+      "forward_suffix": "012341",
+      "reverse_suffix": "012304",
+      "clipped_entering_count": 4,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 496,
+      "floor_parameter": null,
+      "old_weight_minus120count": 16
+    },
+    {
+      "index": 8,
+      "edge": 1202057,
+      "u": 276675,
+      "v": 563637,
+      "canonical_suffix": "012301",
+      "forward_suffix": "012301",
+      "reverse_suffix": "012301",
+      "clipped_entering_count": 4,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 486,
+      "floor_parameter": "F",
+      "old_weight_minus120count": 6
+    },
+    {
+      "index": 9,
+      "edge": 2553325,
+      "u": 563637,
+      "v": 691328,
+      "canonical_suffix": "012304",
+      "forward_suffix": "012304",
+      "reverse_suffix": "012341",
+      "clipped_entering_count": 3,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 376,
+      "floor_parameter": null,
+      "old_weight_minus120count": 16
+    },
+    {
+      "index": 10,
+      "edge": 3052648,
+      "u": 691328,
+      "v": 213317,
+      "canonical_suffix": "012304",
+      "forward_suffix": "012341",
+      "reverse_suffix": "012304",
+      "clipped_entering_count": 6,
+      "count6_means_at_least6": true,
+      "original_profile_weight": 736,
+      "floor_parameter": null,
+      "old_weight_minus120count": 16
+    },
+    {
+      "index": 11,
+      "edge": 987229,
+      "u": 213317,
+      "v": 307904,
+      "canonical_suffix": "012301",
+      "forward_suffix": "012301",
+      "reverse_suffix": "012301",
+      "clipped_entering_count": 3,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 371,
+      "floor_parameter": "F",
+      "old_weight_minus120count": 11
+    },
+    {
+      "index": 12,
+      "edge": 1275764,
+      "u": 307904,
+      "v": 688803,
+      "canonical_suffix": "012304",
+      "forward_suffix": "012304",
+      "reverse_suffix": "012341",
+      "clipped_entering_count": 4,
+      "count6_means_at_least6": false,
+      "original_profile_weight": 496,
+      "floor_parameter": null,
+      "old_weight_minus120count": 16
+    },
+    {
+      "index": 13,
+      "edge": 3031022,
+      "u": 688803,
+      "v": 205943,
+      "canonical_suffix": "012340",
+      "forward_suffix": "012340",
+      "reverse_suffix": "012340",
+      "clipped_entering_count": 6,
+      "count6_means_at_least6": true,
+      "original_profile_weight": 724,
+      "floor_parameter": "G",
+      "old_weight_minus120count": 4
+    }
+  ],
+  "profile": "completed_plus_012034_share18_pending",
+  "cycle_vertices_distinct": true,
+  "cycle_shape_counts": {
+    "012304": 8,
+    "012301": 4,
+    "012340": 2
+  },
+  "F_positions": [
+    1,
+    4,
+    8,
+    11
+  ],
+  "G_positions": [
+    6,
+    13
+  ],
+  "affine_regime": {
+    "F_min": 11,
+    "G_min": 4,
+    "total_constant": 6848,
+    "F_coefficient": 4,
+    "G_coefficient": 2,
+    "first_two_constant": 496,
+    "first_two_F_coefficient": 1
+  },
+  "algebra": {
+    "cycle_cap": "7*mu <=3424+2F+G",
+    "range_constraint": "2*mu <=496+F+R",
+    "comparison_target": "(1098960+8*mu+B*C+R)/(4200+mu)<235",
+    "denominator_assumption": "mu>=0",
+    "numerator_step": "111960+B*C+R<227*mu",
+    "range_substitution": "111464-F+B*C<225*mu",
+    "necessary_tradeoff": "9848+7*B*C<457*F+225*G"
+  },
+  "checked_comparisons": [
+    {
+      "F": 16,
+      "G": 4,
+      "weights": [
+        256,
+        256,
+        736,
+        496,
+        376,
+        736,
+        364,
+        496,
+        496,
+        376,
+        736,
+        376,
+        496,
+        724
+      ],
+      "mean": "3460/7",
+      "two_edge_range_at_mean": "3336/7",
+      "comparison_lower_bound": "1930934/8215",
+      "gap_from235": "409/8215",
+      "maximizing_proper_subwalks": [
+        {
+          "start": 0,
+          "length": 2
+        }
+      ],
+      "fraction_derivative_numerator": -1056448,
+      "tradeoff_margin_without_cost": -1636
+    },
+    {
+      "F": 19,
+      "G": 4,
+      "weights": [
+        256,
+        259,
+        736,
+        496,
+        379,
+        736,
+        364,
+        496,
+        499,
+        376,
+        736,
+        379,
+        496,
+        724
+      ],
+      "mean": "3466/7",
+      "two_edge_range_at_mean": "3327/7",
+      "comparison_lower_bound": "7723775/32866",
+      "gap_from235": "265/32866",
+      "maximizing_proper_subwalks": [
+        {
+          "start": 0,
+          "length": 2
+        }
+      ],
+      "fraction_derivative_numerator": -1056445,
+      "tradeoff_margin_without_cost": -265
+    },
+    {
+      "F": 20,
+      "G": 4,
+      "weights": [
+        256,
+        260,
+        736,
+        496,
+        380,
+        736,
+        364,
+        496,
+        500,
+        376,
+        736,
+        380,
+        496,
+        724
+      ],
+      "mean": "3468/7",
+      "two_edge_range_at_mean": "3324/7",
+      "comparison_lower_bound": "643649/2739",
+      "gap_from235": "-16/2739",
+      "maximizing_proper_subwalks": [
+        {
+          "start": 0,
+          "length": 2
+        }
+      ],
+      "fraction_derivative_numerator": -1056444,
+      "tradeoff_margin_without_cost": 192
+    },
+    {
+      "F": 16,
+      "G": 11,
+      "weights": [
+        256,
+        256,
+        736,
+        496,
+        376,
+        736,
+        371,
+        496,
+        496,
+        376,
+        736,
+        376,
+        496,
+        731
+      ],
+      "mean": "3467/7",
+      "two_edge_range_at_mean": "3350/7",
+      "comparison_lower_bound": "7723806/32867",
+      "gap_from235": "61/32867",
+      "maximizing_proper_subwalks": [
+        {
+          "start": 0,
+          "length": 2
+        }
+      ],
+      "fraction_derivative_numerator": -1056448,
+      "tradeoff_margin_without_cost": -61
+    },
+    {
+      "F": 16,
+      "G": 12,
+      "weights": [
+        256,
+        256,
+        736,
+        496,
+        376,
+        736,
+        372,
+        496,
+        496,
+        376,
+        736,
+        376,
+        496,
+        732
+      ],
+      "mean": "3468/7",
+      "two_edge_range_at_mean": "3352/7",
+      "comparison_lower_bound": "1930954/8217",
+      "gap_from235": "-41/8217",
+      "maximizing_proper_subwalks": [
+        {
+          "start": 0,
+          "length": 2
+        }
+      ],
+      "fraction_derivative_numerator": -1056448,
+      "tradeoff_margin_without_cost": 164
+    },
+    {
+      "F": 16,
+      "G": 16,
+      "weights": [
+        256,
+        256,
+        736,
+        496,
+        376,
+        736,
+        376,
+        496,
+        496,
+        376,
+        736,
+        376,
+        496,
+        736
+      ],
+      "mean": "496",
+      "two_edge_range_at_mean": "480",
+      "comparison_lower_bound": "137926/587",
+      "gap_from235": "-19/587",
+      "maximizing_proper_subwalks": [
+        {
+          "start": 0,
+          "length": 2
+        }
+      ],
+      "fraction_derivative_numerator": -1056448,
+      "tradeoff_margin_without_cost": 1064
+    }
+  ],
+  "consequences": {
+    "F16_G_integer_min": 12,
+    "F16_G_real_strict_lower_bound": "2536/225",
+    "F19_G4_comparison_lower_bound": "7723775/32866",
+    "F19_G4_gap": "265/32866",
+    "F16_G16_B24_credit_strict_upper_bound": "19/3"
+  },
+  "monotonic_extension": {
+    "F19_G4": "For any F<=19 and G<=4, with all other weights and retained edges fixed, each cycle edge weight is at most its (19,4) value. Thus the same cap/range inequalities and obstruction hold, including F below the affine regime.",
+    "F16_G11": "Similarly, F<=16 and G<=11 are dominated by (16,11); the obstruction uses nonnegative B*C.",
+    "limitation": "The symbolic affine formula itself is valid only for F>=11,G>=4; lower parameters require monotone domination, not substitution into that formula."
+  },
+  "existing_lean_receipt": {
+    "path": "E:/Snake-in-a-box/milestones/145-countfree-012301/data/JointFloors145-audit.json",
+    "sha256": "1fc640e65655a04bb460e3f76b22d2374229570b9e5168fc223e29d3afda422d",
+    "recorded_status": "PASS",
+    "axioms": [
+      {
+        "theorem": "Snake9.JointFloors145.cycle_mean_cap",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "theorem": "Snake9.JointFloors145.two_edge_range",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "theorem": "Snake9.JointFloors145.necessary_tradeoff",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "theorem": "Snake9.JointFloors145.floor19_lower_bound",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "theorem": "Snake9.JointFloors145.floor19_gap",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "theorem": "Snake9.JointFloors145.floor16_needs_second_floor12",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "theorem": "Snake9.JointFloors145.both16_credit_limit",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    ],
+    "scope": "Read existing parent receipt only; no Lean process or complete dependency audit in this review"
+  },
+  "limitations": [
+    "No full graph or optimizer run; no new source-array extraction. Original mapping relies on the frozen144 independent14-row audit, whose hash is checked, with current direction-code and count-code decoding rechecked.",
+    "No new Lean run. Source statements were checked against the arithmetic; any parent compilation receipt is reported separately.",
+    "Necessary conditions in the fixed retained weighted graph only; full graph minima, a sufficiently small potential range, actual share theorems and graph-to-snake assembly remain separate.",
+    "The first two edges maximize the proper-subwalk deficit only in the six saved cases checked here; the general tradeoff needs only their valid range inequality.",
+    "Arbitrary012034 floor and uniform credit on the existing event do not alter this cycle because neither shape nor event occurs; changes to other weights or removal of these cycle edges invalidate this particular comparison.",
+    "The two-cycle obstruction holds only while the eleven-cycle retains the stated weights; in particular it does not exclude the broader conditional profile that strengthens012032 and other shapes."
+  ],
+  "two_cycle_extension": {
+    "status": "PASS_BOUNDED_SAVED_ELEVEN_CYCLE_AND_EXACT_ELIMINATION_REVIEW",
+    "first_single_cycle_review_sha256": "76754d4ad90cf7b4cf30d07877a44f1ea0d8e217f3720f8182a00f65dc48a5d4",
+    "eleven_cycle_rows": [
+      {
+        "index": 0,
+        "edge": 2222339,
+        "u": 480298,
+        "v": 59102,
+        "canonical_suffix": "012032",
+        "base_weight": 360,
+        "occurrence_event": true,
+        "counts": [
+          5,
+          4,
+          4,
+          4,
+          5,
+          3
+        ]
+      },
+      {
+        "index": 1,
+        "edge": 147722,
+        "u": 59102,
+        "v": 479031,
+        "canonical_suffix": "012314",
+        "base_weight": 496,
+        "occurrence_event": false,
+        "counts": [
+          4,
+          4,
+          4,
+          5,
+          3,
+          4
+        ]
+      },
+      {
+        "index": 2,
+        "edge": 2221095,
+        "u": 479031,
+        "v": 59277,
+        "canonical_suffix": "012032",
+        "base_weight": 480,
+        "occurrence_event": true,
+        "counts": [
+          4,
+          4,
+          5,
+          3,
+          4,
+          4
+        ]
+      },
+      {
+        "index": 3,
+        "edge": 147978,
+        "u": 59277,
+        "v": 480081,
+        "canonical_suffix": "012314",
+        "base_weight": 496,
+        "occurrence_event": false,
+        "counts": [
+          4,
+          5,
+          3,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "index": 4,
+        "edge": 2208886,
+        "u": 480081,
+        "v": 42249,
+        "canonical_suffix": "012031",
+        "base_weight": 496,
+        "occurrence_event": false,
+        "counts": [
+          5,
+          3,
+          4,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "index": 5,
+        "edge": 118572,
+        "u": 42249,
+        "v": 455672,
+        "canonical_suffix": "012031",
+        "base_weight": 376,
+        "occurrence_event": false,
+        "counts": [
+          3,
+          4,
+          4,
+          4,
+          4,
+          3
+        ]
+      },
+      {
+        "index": 6,
+        "edge": 2140364,
+        "u": 455672,
+        "v": 4660,
+        "canonical_suffix": "012314",
+        "base_weight": 616,
+        "occurrence_event": false,
+        "counts": [
+          4,
+          4,
+          4,
+          4,
+          3,
+          5
+        ]
+      },
+      {
+        "index": 7,
+        "edge": 2534,
+        "u": 4660,
+        "v": 230139,
+        "canonical_suffix": "012032",
+        "base_weight": 487,
+        "occurrence_event": true,
+        "counts": [
+          4,
+          4,
+          4,
+          3,
+          5,
+          4
+        ]
+      },
+      {
+        "index": 8,
+        "edge": 1107797,
+        "u": 230139,
+        "v": 478821,
+        "canonical_suffix": "012314",
+        "base_weight": 496,
+        "occurrence_event": false,
+        "counts": [
+          4,
+          4,
+          3,
+          5,
+          4,
+          4
+        ]
+      },
+      {
+        "index": 9,
+        "edge": 2220859,
+        "u": 478821,
+        "v": 58017,
+        "canonical_suffix": "012032",
+        "base_weight": 480,
+        "occurrence_event": true,
+        "counts": [
+          4,
+          3,
+          5,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "index": 10,
+        "edge": 146785,
+        "u": 58017,
+        "v": 480298,
+        "canonical_suffix": "012314",
+        "base_weight": 616,
+        "occurrence_event": false,
+        "counts": [
+          3,
+          5,
+          4,
+          4,
+          4,
+          5
+        ]
+      }
+    ],
+    "eleven_cycle_shape_counts": {
+      "012032": 4,
+      "012314": 5,
+      "012031": 2
+    },
+    "eleven_cycle_total": "5399+4*C",
+    "event_positions": [
+      0,
+      2,
+      7,
+      9
+    ],
+    "same_removed_edge_set_verified": true,
+    "necessary_credit": "11329-11*F<636*C",
+    "necessary_joint_floors": "9074<325*F+159*G",
+    "F16_G_integer_min_if_eleven_cycle_unchanged": 25,
+    "F16_G_real_strict_lower_bound": "3874/159",
+    "both16_comparison_lower_bound": "551875/2348",
+    "both16_gap_from235": "95/2348",
+    "scalar_relaxation_attainment": {
+      "mu": "496",
+      "C": "57/4",
+      "R": "480",
+      "three_scalar_constraints_equalities": true,
+      "comparison": "551875/2348",
+      "scope": "A point satisfying the three scalar inequalities; not a potential certificate for the full graph"
+    },
+    "algebra": {
+      "credit_cost_lower_bound": "24*C>=66*mu-32394",
+      "range_lower_bound": "R>=2*mu-512",
+      "numerator_lower_bound": "1066054+76*mu",
+      "fraction_derivative_numerator": -746854
+    },
+    "existing_lean_receipt": {
+      "path": "E:/Snake-in-a-box/milestones/145-countfree-012301/data/TwoCycles145-audit.json",
+      "sha256": "786b7422303d519be4cedc929e5ad5c7dbec9880aacb9192e2c797800b8435f9",
+      "recorded_status": "PASS",
+      "axioms": [
+        {
+          "theorem": "Snake9.TwoCycles145.eleven_cycle_mean_cap",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.TwoCycles145.necessary_credit",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.TwoCycles145.necessary_joint_floors",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.TwoCycles145.both16_lower_bound",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.TwoCycles145.both16_gap",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.TwoCycles145.both16_cycle_relaxation_attains",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.TwoCycles145.floor16_needs25_if_eleven_cycle_unchanged",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "scope": "Parent receipt read, no Lean invoked and no complete dependency audit repeated"
+    },
+    "scope": "Same retained graph and all other weights fixed, B=24. The eleven-cycle has no F/G/012034 suffixes. Raising the012032 share floor or another weight on that cycle changes its cap; the full conditional catalogue already changes other floors, so this is not an obstruction to that full profile."
+  }
+}

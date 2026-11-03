@@ -1,0 +1,39 @@
+{
+  "status": "PASS_EXACT_TWO_SAVED_CYCLE_AUDIT",
+  "eleven_cycle_edges": [
+    2222339,
+    147722,
+    2221095,
+    147978,
+    2208886,
+    118572,
+    2140364,
+    2534,
+    1107797,
+    2220859,
+    146785
+  ],
+  "eleven_cycle_base_total": 5399,
+  "occurrence_events": 4,
+  "unaffected_by": [
+    "012034",
+    "012301",
+    "012340"
+  ],
+  "necessary_condition": "325F + 159G > 9074",
+  "both16_comparison_lower_bound": "551875/2348",
+  "gap_above_235": "95/2348",
+  "relaxation_attaining_parameters": {
+    "mean": "496",
+    "credit": "57/4",
+    "range": "480"
+  },
+  "selected_continuation": "Target the existing 012032 share16 together with 012301/012340 share16; retain the current012301 certificate and finish its Lean obligations.",
+  "scope": "Fixed graph and other weights. Exact optimum only of the listed two-cycle/two-edge arithmetic relaxation, not of the full graph. No local share theorem or global bound.",
+  "source_files_sha256": {
+    "milestones/145-countfree-012301/scripts/analyze_two_cycles.py": "dfae183ff90270824c8f0351cadc3eb783c294766a8f3581a03b3a4d10cd5eae",
+    "milestones/144-countfree-share18/data/share18-impact/results.json": "269bd2361a7e272feff2793927ea2555f5fde5dd6259ab8bb0e4442d354148dd",
+    "milestones/144-countfree-share18/data/graph-review.json": "c8ca447a4a12577e7efb5839d166e68fe689dab46a2426c9f207c985d718f960",
+    "milestones/145-countfree-012301/data/joint-floor-analysis.json": "d653af4da058477f398e434c4850b67b531f304e30bc8a8f0201dc32e3fca032"
+  }
+}

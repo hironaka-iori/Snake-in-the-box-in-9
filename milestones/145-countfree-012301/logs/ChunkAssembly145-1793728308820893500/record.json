@@ -1,0 +1,833 @@
+{
+  "status": "FAILED",
+  "pid": 52244,
+  "source": "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\lean\\ChunkAssembly145.lean",
+  "source_sha256": "57a305bcc418a9c0201c5cbdea1cf7ec1d07136bc9483bb2963c5aae4b683775",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\125-critical-six-count\\data\\environment-sum.json": "0c1f6313b5f72ffa0efa1ea556c6644dd7d4d453d4d890793ef3871cb270f581",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe": "864d733fc2903cacaac67a5f705fa8dce917629c98c3a185d314e2f9860e7367",
+    "E:\\Snake-in-a-box\\milestones\\51-exact-bucket-pressure\\data\\verification.json": "5a8b07eeb9fd8cafd8da8faea4fbb1a5c677b84933d6039ce82c356308e1669d",
+    "E:\\Snake-in-a-box\\milestones\\52-share-on-235\\data\\verification.json": "271bafc176b112250f0c64d0ce03d52abd01f08d621dd6d473ba9e22bd963e5b",
+    "E:\\Snake-in-a-box\\milestones\\53-shares-on-sat-obstruction\\data\\verification.json": "1146f0edf57ac2a2c853b99271da6460d5febe31d0d0063657da3cb49b4d1ffa",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\data\\integration-audit.json": "d90a4c77464c10db1d62a8b70cb7f14bb15fac5162ca01255128fd727d5d1d01",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\environment.json": "539e397ac1e02c3bec42678fee66b2232feba4bda84a91f0040377f569e117d0",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\Port98M51SharePressure-audit.json": "00e919bcd5051272667aa80ca43a4f069c69318a9aa7ddb3875058ef67371186",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\Port98M52SharePressure-audit.json": "0f3aa2bdd4adb2c4077b324bb28c070664ff59505003df528bfcff407671fcd9",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\Port98M53ShareBound0-audit.json": "cd2a34ccd8988fe154f03e583686348bcda2050abf3c6b518a297c0c98d99015",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\Port98M53ShareBound5-audit.json": "e95c86c91adb2ba7c497a67e877993d31998f173dc5304fe0bcfc676288dac2e",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\Port98CombinedCatalogue-audit.json": "495c03b57b7b7af8ac4d911faf4378d085c64dcdd738af547bb20ff3088dea3e",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\CombinedEnvironment98-audit.json": "d015139890715b34fd45712c9b9940c54c797d97a44aaf3396dd8cdf49115720",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\CountFreeCredits98-audit.json": "aac33bd386d036aa26f476d24d5b2b519c365351b29278eadb98f6f3f79e6c4d",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\CountConditionedCredits98-audit.json": "54985bac89abed5a60c85a06f9e472dc2e5c25ac00dc9eb3282d15d54d94146c",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\ActualGraphKeys98-audit.json": "90c36682ef6244d50a4536a5219dc8232a08165afcf70662e110b912d06f3028",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\CombinedWeights98-audit.json": "b2eab901e1abcc87b922b1a328994162b2b98a2437952c826638b710ce30e149",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\GlobalCharge98-audit.json": "c6c9ea3a00493284d7dbd85d4638bbcd9419f64df7c0a3cd2f500508703c3f99",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\data\\PotentialAssembly98-audit.json": "9867da10284e8b29749b0cf92587cedcf5559a6483a144af113aaa7f76509cbf",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\environment.json": "474d6cfa67d4e2dc27d4d2fa992ce4ee2e5fa04f404bee3db433346c724c4d84",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\checkpoint.json": "adce0ff9294b038fce9aa430d1a6aceed56552162db41c454ef0e5cabdd1ffd9",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\proof-summary.json": "4068c2429b9bccc51ff23e76523ba34112abf44e942c9296202c071fd67415d0",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\PotentialTree99-audit.json": "d153250a6f1ae1e4c765391b33d141410827c2a60daaa5e829137f7428662c07",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\CompletedValues99D1-audit.json": "a5be90873bf00493b4edb235c5b8540561b9e843953e283a9017e1a64d7f4262",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\CompletedValues99D2-audit.json": "a6e2acbc07b05cf6075ddb6bfe1432b6c61e1767303659475d0702d3a8ba8d9a",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\CompletedValues99D3-audit.json": "828cb6ca2da857e59f929267edb7daf61b1dfaff946511b30945f41231b521a4",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\CompletedValues99D4-audit.json": "1d2cb397b50e1e48d99d8fce3a9fe5293deb7581ad60767fa6457b594764f5e6",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\CompletedValues99D5-audit.json": "8ba7e44fa757ac2f902510cc94ef9e2aca83ef380f32a6dbba2596a44d6ab996",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\CompletedPotential99-audit.json": "d196370010c318130800a954487d47bcf9875e74b1ebb6a80d8764ad410f0a58",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\ConditionalValues99D1-audit.json": "4cf53fc0bfc87e7bf36bc7c48b37a3b8480d6a885796e263e3546a7ca3f6900c",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\ConditionalValues99D2-audit.json": "77dd673814f6d3977ead2ea0198d257e52560fc88f5472798bd86ca70181a98c",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\ConditionalValues99D3-audit.json": "83acc731308fa6b708f800b32e377dfa49ebd598eaf962767d26988e78c5c006",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\ConditionalValues99D4-audit.json": "d77c0f4f8ddc139b39dea3589d8af7dc3b3170563a33d62b20df7c353cea2bd5",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\ConditionalValues99D5-audit.json": "f32910ed9cab38294f2abcd6ccce8369d4fce2d2da7454ba9f7ded0f179ab7ff",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\ConditionalPotential99-audit.json": "56e888d481b48e27f4bedcfd470d83b62e68f4bdf700bce9893257b98e37faab",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\FastDiagram99-audit.json": "cd7ee8cfcddfa298d8a591651a8133ab4aabd031805ce36f158e3bd22d01be92",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\PotentialChecker99-audit.json": "45e3eb673e226e716446eeb60b47bdc0eec1d5b9627f3c357b34da73eb2d835d",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\PotentialPilot99-audit.json": "8be369d5d8c8ba0ec1d1131400e9a85a7bcb7449107eda45dcaaa3038184c5ec",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\ConcreteAssembly99-audit.json": "a2a530bb18c3fc4029c681dfa01b4db89ec232b20f65371c20d1a99234ead97c",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\data\\PotentialPilotLarge99-audit.json": "f7e9bb13f7b7b4f1f9023ea766a1e7abae9d7706ee3b3be64fadc68a5b9d2a96",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\data\\environment.json": "d92413fe344d2c45208298f2466a49849d5680d1162e0446a8bd66140db04f7b",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\data\\checkpoint.json": "ea1c7436c43a0d32236c8aad21c8036622962db3e5667cbb07b1331b835caeea",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\data\\proof-summary.json": "d451476d50a6b75eeeb4eed6e0df038add1b1638b357cf08d0cbe6555709b568",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\data\\ContextEndpoints100-audit.json": "9addbbeebd8db33775a86981fb6e0e3c199edd08b56c31bdbd129c70921141ce",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\data\\PrefixChecker100-audit.json": "ee73a42b1a8ab4cd834611946006dbfca1c601c2c3fdf71f74fb029dad754f12",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\data\\ReducedCompleted100-audit.json": "135a5488ffdccc2006f283b594fbfb26a54e5fd5e97f16b5d492408e56d06a28",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\data\\ReducedConditional100-audit.json": "8f9ff0b9c6acdd62ced1a9aa1b2a68132c8cbfead703d2e0ed55bf5af6e068ce",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\data\\WeightSpecialization100-audit.json": "8be307898f892cec11415ae005dca4d5d2b5625092615a0c48bfe01cf0935e77",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\environment.json": "3c52066c01cd913d787f5edcb2c5bbe3df2fe01d274dcef24ab366f22f7822cb",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\checkpoint.json": "fd5ebccf1f4eee9e428e222556361ccf447a465c4f9029cd86ad5052851f25a7",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\proof-summary.json": "0f1dec054071312a57d179bbe6747ccc1a7212754b21a9c3e112dc62b290c7a6",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\AllContextSpecializations101-audit.json": "27b50610a01da71194d1dc2028b97598d56d814174ec364efe9b57402f42841c",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\CompletedEmitting101-audit.json": "d566504e16a884a9de7e968803c4627d89a6274416b45c26124d8ba373b4e7d2",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\ConditionalEmitting101-audit.json": "a3b0b3558789dfe40960eb4c5d7b17a855e380764e9a415b9ec03bb8298f08a4",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group00-audit.json": "c8955ee1cfe162ef94bff8208a00d27484d013d80cc89fe863eede6eac47bc75",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group01-audit.json": "e20d059f6ff30f112323c6f58dacbc7b9116a32eebba9c3b65f8318d39383be5",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group02-audit.json": "415a8d942fc9ba19430c9e2cb366a2c50eae8f21f63d16fa709c027c695724f3",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group03-audit.json": "a264b57a324b71b5c7f0d59ada35b809db49cc709be0792105d76300bd8fc8a4",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group04-audit.json": "fb7443d9edb6545e7b8a9c7ffc4a84d874d2ab1339664a694d0ab72c0a36ffbc",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group05-audit.json": "ba4cc1d57aec21f160b6fafb27260b3de2bd7198e5653cf1f9e27931e777f6c2",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group06-audit.json": "accb6f8554b6203ab8303df4de8a00379aba5e4e2c5dc552052c5d00a6f20d4f",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group07-audit.json": "26dfddae4f3b53d3b8bf54da1398fbe8fd1da022c3fa2c0d1d4769c88eef261b",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group08-audit.json": "21ca338c36ff87cf87091e1fd1884af7df05dd6459450a081636d67489737d8c",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group09-audit.json": "fa1ddafdf25ee2fc27db9547634af0b784733a5f46f75aea521c734f37796ea3",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group10-audit.json": "3c5a6c9b68b9d219599254f8e7a082a1e16f77bcd8c03866bee59d1e9e31f5e3",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group11-audit.json": "34308c266781cad210284dbfb2ff438a73440a4c0c75a5ab7870af294bae239a",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Context101Group12-audit.json": "0fa7f3f698f0fad3e03d26f86c987a5291f00aee81287af7a8ea3e3ac8d3609d",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\ContextPilot101-audit.json": "aa4c6e94c47ba99ac66d0e3fcf5900eccfb8f158bde76aa7b420d63641f9316c",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\ContextWeights101-audit.json": "171bd41834f8435ca887c007d14618ba34923915989d84b9fd421114c11913ba",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Batch02-audit.json": "5faf2d246cd4ea98db1d04d7278f639f7d9392d1a1bc412aadd330d317057390",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Group00-audit.json": "a51d30b5e875692e279eaade65f8fa21e6982bbf0b101e2da7bf8556d3cb981e",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Group01-audit.json": "3dc8752cfdba7efa036ad97edff800345da1f37ff91ba41a26829eceb5d8d566",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Group02-audit.json": "774269a2c31dc10447f50de1040ec32dfa09b6e5623711f715e704444ff85e68",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Group03-audit.json": "04a28572ee739c2413d9fd8774f9ea60326fd1a947f01483b95bfe57b34cb15d",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Group04-audit.json": "565c71f828fe4cf1ef3c3f25377b4cb72fac13dbaa37dde7c9004302eba9b234",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Group05-audit.json": "5427e8572986c852cb069896d12e3c0e6e3b7c25e10a72277278d9a17660946e",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Group06-audit.json": "ba2fdca39caa9f2cda7f5d7e9e12882c0e870bf22ac0cd2dde3aac7ad3899201",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\Direction101Group07-audit.json": "fe6892c2a3c656122f46fc2e212f5baadf374e41e36e83c44c8d3ddf0d3799ef",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\DirectionPilot101-audit.json": "1d9371deb096ec6be61fd167bb41369fc68b2978d498d08c6ba75d45d390f1d4",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\EmittingPilot101-audit.json": "12de7c3da4bcb2a99ab565e834f88b719324d1a375adf80253a225b0c98fa0bf",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\data\\EmittingReduction101-audit.json": "b21aee29bf2026de219a165bde88a4179fbb1e1dfb49f3ac84073447b0b5927b",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\environment.json": "e8804aacfb353d33f2def50dea15beed208eb6287bbc9923711225a0b8f4bba1",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\checkpoint.json": "aea577f28c3058e3b541ec85a97b140b861e3560fe3afb1272630fff01b68ec5",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\proof-summary.json": "35f36c2f99552f4402089c7bd63daf37f14fc13358ab487332ed1d8e1e0a56f1",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\AllPotentialBlocks102-audit.json": "32e2871e2a4a6a3704f0cb6d6836a7fca00807045b3fd0a203343b80f5425182",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\BoundedPrefixTransfer102-audit.json": "f11e0477a10ee5de518a0f05652af662dd5fee23ade1b4df76ba2f93fb94f845",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\CompletedBlock102D0Q0-audit.json": "7bb544dfe3cbcce8388c6dd01833ea6739c0cd5cd1cce790c8058a1c832cd978",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\CompletedBlock102D10Q0-audit.json": "6972a9ee4d9a136b6a1b87f7bae25b7efcd1b6eef7ea8e3a58546c05135b181a",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\CompletedBlock102D1Q0-audit.json": "354128c5494fd9ade75ff33fac8c0f7dda7b99c2c36049a8e9c7590e76f259c2",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\CompletedBlock102D99Q37-audit.json": "d2ee078ddb62d3fbf20115bad2906ca61db1091b1817aac8a935910cb44a2e8a",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\CompletedBlock102D9Q0-audit.json": "12523b0089a00ec93dd30d385a97e6d2793ffda4ac51298b4515a614c87f53b6",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\ConditionalBlock102D0Q0-audit.json": "0f08c5af76bf489f3f1e6d91c80175255adc5d2362e161172927c5a7c07f5573",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\ConditionalBlock102D10Q0-audit.json": "591b77ca9044eb8bb19616248d682b9258cb346ce6b9ccbda6e8aa6cba6dac05",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\ConditionalBlock102D1Q0-audit.json": "6b60ea70490bd1487df4a7b08ce2c7278b328d5f2f525c26280c71c950708fdf",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\ConditionalBlock102D99Q37-audit.json": "a399135599e628b1c62668bca5955ed02a7c29b131e11f75d46f4fbbb3137ee4",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\ConditionalBlock102D9Q0-audit.json": "b3412b0e5e5a3ff84dcdeed1c0d3da584ad1c53ee51cb075e35f3ddb27b00f2e",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\ControlledBle102-audit.json": "3481eac05710b619d5eb5598ea46d6e00feb81926dbe0171f646b61fabe64feb",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\ControlledDecide102-audit.json": "7c0cfa8afa3471b51fe952d93621fe5c996b71eeadc0c0683d78c2d472ffa4bb",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\NatBoolean102-audit.json": "db1e822fb32340423b819a164fe2433c30b554f3c927f637b9855263a3772f8d",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\PotentialBlocks102-audit.json": "f125a6053d2a14247c96f66c5170f9478dd2d2fdb368d7a2df753479d96f2fc7",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\PotentialRoots102Group00-audit.json": "00f82bfd0956ee98ab3bc86445ea36783684adf5b27164a8efe0a363a382bc90",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\PotentialRoots102Group01-audit.json": "c693b9d9d743128143f6e4f1364317642e8056db9baf028c9a450bdf12c9ba23",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\PotentialRoots102Group02-audit.json": "a03eb813a13be7cafded52b001f2943bc12077f337933bb1677413b858f654af",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\data\\PotentialRoots102Group03-audit.json": "10760cbeccf362fdaff1273b2a4ddd40a8d807afa91592780ce29927209c2599",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\environment.json": "3fee3b1f77e63f5461712504a0b2537d3f3e94d4c27802fd6275b288ba608b52",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\checkpoint.json": "6b93f03615f694193f39023747da0b746896fd074d65252ab312f150d0882b45",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\proof-summary.json": "3d42fc8475d9a2c9d8bcd719b7abf45101247b474e6e472b452d1759b6db09a4",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\CompletedBaseline103D0Q0-audit.json": "4ca663965491e9d2a0155102ce1b9384764dd2e599cebdb6553a1a5776b15875",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\CompletedBaseline103D99Q37-audit.json": "d71ed51dc08037fa46e42ee6aa17241031ee6126a1007a393e3446bc8cd979e5",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\CompletedJoint103D0Q0-audit.json": "80d96130c617d49181a924c5928b73668a411bdbf6aa49a0b4d50d196bdac033",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\CompletedJoint103D99Q37-audit.json": "0378ebde74a5f2ce27b221bf4a79816b86325d6fbd4289643c10b8039b50a122",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\ConditionalBaseline103D0Q0-audit.json": "f33b2a4638ba3a66f1560bd41968bea90cdec6dac79d6e7be844c7574120f600",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\ConditionalBaseline103D99Q37-audit.json": "7f48ea0eb166367a8e06d00f2500f2f410a7ffd3cee009f6af217f1147b87fe0",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\ConditionalJoint103D0Q0-audit.json": "5661af38baf8c68b450dc00b4133748933a8f387c41ec5cc07b97588ba0a2b37",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\ConditionalJoint103D99Q37-audit.json": "7c1b993b2d5494ffa4a5c28595d87a025c20350a8d0b917997a556c87a37e6b0",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\JointArithmetic103-audit.json": "700ae2a75f04cb58cf2f366cdbd5dc4ed4f5834504443dece24a1c49a9ad51b4",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\JointTraversal103-audit.json": "afaf7d2ac1293282c50e75e91764087797d01a568564dc0c0e45731ae2486b6e",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\data\\TreeStep103-audit.json": "581e16606129888b72923fa99742b493e92af6669a6a9c6665a94ae6bf52bdb0",
+    "E:\\Snake-in-a-box\\milestones\\105-reference-proof-closure\\data\\environment.json": "514f1f896e74d08d1cf36773b7a503d0588e9534ffdf96471de0cfe0c33ca509",
+    "E:\\Snake-in-a-box\\milestones\\105-reference-proof-closure\\data\\proof-summary.json": "2c0b88cea651b5f35750854e6c05d9e7712770682075928a80cd00d06cd18a9f",
+    "E:\\Snake-in-a-box\\milestones\\105-reference-proof-closure\\data\\ReferenceAssembly105-audit.json": "e485f4e361cea23de119a93f6724eac35b24bf5564fc057dc7fb10a759020c25",
+    "E:\\Snake-in-a-box\\milestones\\107-reference-refutation-recovery\\data\\environment-isolated.json": "caab96097ca12686a81c8e438a552deb654c0b685a12ee754a9e155c941dea28",
+    "E:\\Snake-in-a-box\\milestones\\107-reference-refutation-recovery\\data\\proof-summary.json": "101e24ddce593a7154590fae96f78cbbc4a765a91bed4e8d2e948d5df3f15728",
+    "E:\\Snake-in-a-box\\milestones\\107-reference-refutation-recovery\\data\\RecoveredReference107-audit.json": "a9b18aa162718761a6cf97e70e2f58cf24fb21a4ca90837472eebd6f98967eff",
+    "E:\\Snake-in-a-box\\milestones\\108-smaller-reference-recovery\\data\\environment-isolated.json": "471c298e57b2b0e16508b7703edcf02961a6993f46ef218d84dea23bceeb839a",
+    "E:\\Snake-in-a-box\\milestones\\108-smaller-reference-recovery\\data\\proof-summary.json": "d6cb89a1fc6794f14ab94a175a4fc85bd2eea8b6c4d54c918e2b5733c6b9149e",
+    "E:\\Snake-in-a-box\\milestones\\108-smaller-reference-recovery\\data\\RelaxedReference108-audit.json": "420706f34c7693306bbdda9e95261f9e841a9524da8fc8c39c05fcf6407fea75",
+    "E:\\Snake-in-a-box\\milestones\\109-relaxed-graph-test\\data\\environment-isolated.json": "262ed7e07c3f0adfc074375caac61f8ec59b80f919b0fc605620647516054d13",
+    "E:\\Snake-in-a-box\\milestones\\110-critical-cycle-core-screen\\data\\environment-isolated.json": "5628fdc2aa47ab626621ef63475da335d8e23bfef9a48b7ca3f0eaa800874cc7",
+    "E:\\Snake-in-a-box\\milestones\\110-critical-cycle-core-screen\\data\\proof-summary.json": "144a34aea7a0bae92507ae0ead814ade48a6420ea1e3dda0023c4c3ff11727d7",
+    "E:\\Snake-in-a-box\\milestones\\110-critical-cycle-core-screen\\data\\PlainCount110-audit.json": "cc24fb5a8e4eeb09e89144d8c861b39b3aaa3cff1112f03e712e7744d585ed3c",
+    "E:\\Snake-in-a-box\\milestones\\111-critical-count-intervals\\data\\environment-isolated.json": "e02138a32192866fe4f6ca417ecc28a5a50f4e9b49345747b6656936dd60aa74",
+    "E:\\Snake-in-a-box\\milestones\\120-nine-transition-window\\data\\environment-isolated.json": "defd894272f95787abfd1107d829c9e72ab4afc8f8ae0f08eed927faac38a45d",
+    "E:\\Snake-in-a-box\\milestones\\120-nine-transition-window\\data\\final-receipt-review.json": "3f4151f5201a14a3f19a317dca34c55a44649bff5a23d496354e1eb632673d6d",
+    "E:\\Snake-in-a-box\\milestones\\120-nine-transition-window\\data\\ActualOuter120-audit.json": "757f98c8b6cf1aaf0c1f26470ee954a7312b659a3bb9ef3651dc0998c60cf6bb",
+    "E:\\Snake-in-a-box\\milestones\\120-nine-transition-window\\data\\ReferenceCoverage120-audit.json": "e627ea0a2bf307207e68a952517ede5b63af085cc295a00f8f81da4cdacbe8f7",
+    "E:\\Snake-in-a-box\\milestones\\121-replacement-window-pressure\\data\\environment-isolated.json": "c40a129428e9f7a65c1a16c5bab71e0ef3173e806f19736db473626a95725300",
+    "E:\\Snake-in-a-box\\milestones\\121-replacement-window-pressure\\data\\final-receipt-review.json": "7011b59330d95202bb52fe245b4c1eae789daa947148facc0a8bb4d96b7eecab",
+    "E:\\Snake-in-a-box\\milestones\\121-replacement-window-pressure\\data\\ActualPair121-audit.json": "03a00163d46b754fe8fbc28f2dfdcfbfd9206d4b88c07d44b5398483b95c61ae",
+    "E:\\Snake-in-a-box\\milestones\\122-endpoint-equality\\data\\environment-isolated.json": "b997547dc0d3b14cb82a678ec2c93c8d7eafac744c2e62c05365f9df4ef0ad84",
+    "E:\\Snake-in-a-box\\milestones\\122-endpoint-equality\\data\\proof-review.json": "276553d90e6b3f2515cebc810e27587e8f0d81e913964cec0507fb9e9d71bf4e",
+    "E:\\Snake-in-a-box\\milestones\\122-endpoint-equality\\data\\EndpointFrequencyTight122-audit.json": "aa4b66c4be773fa4ba0995d5675cb6d1df69d24b1de34c3d8077fa4ca5513895",
+    "E:\\Snake-in-a-box\\milestones\\123-six-count-recovery\\data\\environment-isolated.json": "cd3d77263e30ee3731e7a5a31cb35b504ec9117f594059c495955882a8da45a8",
+    "E:\\Snake-in-a-box\\milestones\\123-six-count-recovery\\data\\proof-review.json": "2033778163e5c8406a8bcb17496a43b7177037da90aaae659e917c9ed17cc3f9",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\data\\SumCountSemantics112-audit.json": "0c887390bdfddf201fd4a359026ad50f5bf3ad84c67ee4e79e4eb1d8a070cd2d",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\data\\environment-isolated.json": "5753ea6efaab58a35f9bd35afb3f84e76a19171e14502127d3d5738043253b11",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\lean\\SumCountSemantics112.lean": "23b816a0f54dce1fd6fb502c6b366bfac58ac3bf86cdff4c874d7105e848f5c7",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\build-sum-semantics\\SumCountSemantics112.olean": "00ddd59e5e5f6771e6365ec25a8c4d17e5a902464e290db682c9079a3ae9ceb8",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\logs\\SumCountSemantics112-1793659023061976800.log": "5d57f8e82396f59c1514b4cb7312a4a8d087d405720ce77a8777d09a4bf08a5b",
+    "E:\\Snake-in-a-box\\milestones\\111-critical-count-intervals\\lean\\CounterSound111.lean": "1401c38d80c4e39c8ee43928af85394c3863f670a0f308cccff09aefabe9b2c4",
+    "E:\\Snake-in-a-box\\milestones\\111-critical-count-intervals\\build-isolated\\CounterSound111.olean": "35db8221a64f6d5af3f067617dfd90869696aaec97578495f2f9f957d96beb27",
+    "E:\\Snake-in-a-box\\milestones\\111-critical-count-intervals\\logs\\CounterSound111-1793656300472981100.log": "d5e98c5a0735b3508788b189a8c43bd0c4d0077d8e53c153e1d704ed317e509f",
+    "E:\\Snake-in-a-box\\milestones\\111-critical-count-intervals\\logs\\attempt-1793656300472981100\\CounterSound111.lean.txt": "1401c38d80c4e39c8ee43928af85394c3863f670a0f308cccff09aefabe9b2c4",
+    "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\build\\758bddcc97f84b6fbaa2c693d4931cea\\LocalWindowTags.olean": "4817fce74821d3f5c8c2e75e9ab6a996e9c65c0a37eae21d68485dc3849711c0",
+    "E:\\Snake-in-a-box\\milestones\\111-critical-count-intervals\\data\\CounterSound111-audit.json": "7c40150800a9b91e71e3d786e241f08acdd89269e0ba16ef45c42dfef2752b93",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\lake-manifest.json": "134206d98c64064cea35395c7ab469d7f0782b1383deaecf63322abc1fd5b1d1",
+    "E:\\Snake-in-a-box\\work\\final_lean\\LocalWindowTags.lean": "1e9aad3e4c99acf4fa01b00dcc65330a8d633826079a3d0955716ccb0f36ec71",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\data\\environment-sum.json": "e63f71c6a01af6f9db20dabbee71c4cea7774750eacf90be2c0db2d34b43a349",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\data\\proof-review.json": "b7ebb252f84dfa2ba037b426e16952ba2753404fe0927dc3bc0c7d29298ecbba",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\data\\ActualUniform124-audit.json": "ccdab72090934992c81384130b73d77b6caceaf76762c36d6bb04e6428c8af0c",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\lean\\ActualUniform124.lean": "48c903830b6af9a660f98dc2b30253b1ad47804d1319cbc0247cb677e73b1869",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\build-isolated\\ActualUniform124.olean": "c403df75cb66c21ee499a886b53813404f24abe4afaa64c950a22cbd5d5a79d4",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\logs\\ActualUniform124-1793683596189616100.log": "e6f286f042b57d56cbb5191ecbe887113016e82b260aabfafd1731e46b197037",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\data\\UniformSixBound124-audit.json": "134f8fa8d8075730812ad0d368a496a7dae2a0b15563b62bea179e5850f2e353",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\lean\\UniformSixBound124.lean": "5511b27d270b649f968c2ca220f6fd03418873849eb12cbd4950f6da2ea55a9a",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\build-isolated\\UniformSixBound124.olean": "098cfaa310569a5d9516b549957373311ab326dd02926f7fb162189f95581875",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\logs\\UniformSixBound124-1793682190812152500.log": "0fa808c6fb4ab897f3331a20f4771179ca58d98ba6ae832222d278036551748e",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\data\\SixDeficit124-audit.json": "d5042d18eb8c8bbf5376bc8db3c656f8d57789e2f13ce0f67937bcc2c40e7b04",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\lean\\SixDeficit124.lean": "289d8b2b2a48f493344bf5007880bc7aad2a82225467016765a17ad436fca74a",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\build-isolated\\SixDeficit124.olean": "1418f0e8f1a63d32d2e1a84ee0d1b77bb1b225003026923e6c35240f1a2ddf01",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\logs\\SixDeficit124-1793682818566459800.log": "a94535a025f904632324018b17f6666887b6db9f09193e93793fff908392be15",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14500.olean": "e151c4a5ae3115149ebf28efa371c68b3b18014697f48b3e5146f5b80ac60bd7",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14500-audit.json": "b69924a652a3b1c68a26614027b9baae9a0ff13b8676c40a361840bf8974ffed",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkData145.olean": "52451c2c689685ee46b05f50b8021226fa4105ceccfdcc6ba7e1a655869e2d89",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkData145-audit.json": "32b4e4e9178b50bfc08792feb4c659b9e2754ea71d322c50298e108c3a320c24",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\InputTree145.olean": "d46a3358ddb9c805d431bc77ddc2333fc50f64c7acc86780c06fc554e27cbcfc",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\InputTree145-audit.json": "b3df4fcdd1cca85fece752882b819e938feb9f2150dab28d8458ef20c910c2a2",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\build-base\\LratFast144.olean": "2e1ead1ac895ba4fdaa3cb469e2a4bc32aa08e34e1dc2e6b23fc0d53b7aeedbd",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\data\\LratFast144-audit.json": "d73eb35cd19542b474ad14638f1a71d9d770395eb505426efbffc4d2c1b63a8e",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\data\\proof-plan-base.json": "f398fcd7276e16732723e015cd127d2bc372b270912bfa95d68e40c7c866f2ec",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\scripts\\run_replay.py": "daaf159cbeb24d20739822982abd659d10feb64c269dccb1568c44b6ff50e193",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\scripts\\export_lean.py": "615b482e378961653270a4e624acd6686efdac3e5512cf5b0c9578dcd189f768",
+    "E:\\Snake-in-a-box\\milestones\\72-four-count-proof-closure\\critical-current\\scripts\\prepare_lean.py": "9f10dbe7b75a2b66ba6d14908db1cf6f2a78916e5f5e9c49e50b0653397818b9",
+    "E:\\Snake-in-a-box\\milestones\\109-relaxed-graph-test\\upstream\\milestones\\10-window-aggregate\\scripts\\gen_lean_lrat.py": "2f4b1339817194163a080468d2e404dd7d14e7c048f8fc90e0a2691b243bf384",
+    "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\gen_checker_variants.py": "e150f051dc32f02d02ac6f0009fabb20029ab561cb9fbd7390c5aeef85266ec8",
+    "E:\\Snake-in-a-box\\work\\final_lean\\LratCheck.lean": "02ac28a84c423e74ce9afa792793194a7f5737602e0beb6c0ef296bcf40482d3",
+    "E:\\Snake-in-a-box\\work\\final_lean\\LratFast.lean": "3c28de2b6f8dfca3c451b2cfa3a1865c577935770b7f7128ea69c061e5cf428a",
+    "E:\\Snake-in-a-box\\milestones\\72-four-count-proof-closure\\critical-current\\scripts\\assemble_countfree.py": "88b588e269d0ee68dc0a33b938bc9fd9840d44489625b8c890ff367aca066bbe",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\scripts\\add_reversal.py": "faacd5347d32aaa76275c7709d047500f53a810b7da94005073e18578bbb3333",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\cases\\case7302\\lean\\Share7302\\Geometry.lean": "0e0737f6478b7a85e021167b3e0d84a744efd7e4d45dd73f3cd0f73b5f5d1cee",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\data\\native-alternative.json": "d120d3460250b2c8efd2598678ba593893fbc75120b46e57a0f06ce5a54af687",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\data\\alternative-review.json": "475e135176575a00a52dd4dd40c7f50c5f6acf24451ab6c21628dcad855229b3",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\data\\preparation.json": "2f9004d21fe4aa23e37d72270e8e627c8a82330c2b7be925eb95ea7c48530446",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-alternative\\input.cnf": "ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-alternative\\trimmed.lrat": "56c1b991bc56f38dc12fc74fb76bcbbb329864d4f6dfa094320e05e7c7cd1551",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-alternative\\core-ids.json": "5aa29ff13ba61e2fdc604339f4a7b78a50279fc6852ef68e156381c119180b77",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\data\\LratCheck144-audit.json": "63650a0e69b04089f78f3ec875e53273fa6375e452ff1ecfda6478532285d2d3",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\build-base\\LratCheck144.olean": "28771cdbe8751e6cad589fd4cc399ac16614804a5360ab36542204e536529b81",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\experiments\\build\\LiteralData144.olean": "de4aff29603d5b44b33c8d94b7918ffc19408aa2828581e2891c1a4e304e1f62",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\experiments\\data\\LiteralData144-audit.json": "546f925b0531e23c7d0a7d0be6597bbf9ab86cfa71b62a2a9c525d36e3c518b2",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14501.olean": "e60e87d3717a546ac0c174a58720f95619e038faf025ca470141d93fde8cb423",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14501-audit.json": "f2fe9033256049f4403305b209d6e920c294658ab23fc183a0af1f4cfd1e740c",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14502.olean": "3f11050803162663671c40baadd677eb80fb8013f97897cd8fa3b7c2facff4ef",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14502-audit.json": "2bb962278b084abec5e9e39fb86949678d2d10d7755aa800435b349947d800af",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14503.olean": "4e02c3dac3ea0b162d896f540d5ff0650d22db320bf5da425cac548883bccb12",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14503-audit.json": "3a06febf3a3a712fcc7b357c157af7e5bcf27149435db32e9e5ff54d823587ed",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14504.olean": "34e420b2845aa06b34825da3a143d740d1a2944036e5bdaf423880fab8a812c7",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14504-audit.json": "aaa49a4c98c34473970fbe542248ea073430576ba3742bfd8a501051f02b1873",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14505.olean": "b672ddd7bd4410dd5282db032d6dfbc903fc9313d02e5000d04ef2476f887d7c",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14505-audit.json": "5da79e537980bcaf6a7633920f9aec198030f06b3d2f11fe13418fd4449e3f4f",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14506.olean": "fdea3148834a50471a3eb45b4e6bedf70ab66f07d1ac1bb06a1b43cba346241b",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14506-audit.json": "8f3f4aa13cf59c574e683afc65b9b680beef20cc42a58faee8a0dedbeb839418",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14507.olean": "fb546be2f4274086a7572fd6ed52b7b8de22ab965ccfa035e78c404cc1b75419",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14507-audit.json": "238e53a9513b973d2b6d49de7921991950dbbfe7c2b33e631098f852be0d3ca9",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14508.olean": "d432b28f8413d421259841004231227cbab26d8ef74e72124dcb07cee20756c5",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14508-audit.json": "b2fbb74b2f8f9675bd5c021fd9fc4f9f9d5352fbd5f2c88a2b1de2d94569466a",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14509.olean": "f6198f5443f4f497c7d9062854b423a3d800f109ff88fda35813b71d8eb54d29",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14509-audit.json": "39f872399ff01efbdfbd8dc811dcdbb532237bb6a2c3be881968bfe3704167e8",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14510.olean": "9d789149d8412e61f73b0f7ca1fd8ea748cf4a03aae517a4d1cb9a8763817221",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14510-audit.json": "03c3986e8de9d8f1af7bdb5cbeb9336f34b9f700ce43c89acf2afbfccdd750b8",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14511.olean": "f44e8d78788e2677cc4691278bbd485af0efc000dd88987360d1c781f4a20285",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14511-audit.json": "70a8925f3418fff0f2feae75482299aa13035a10e55d35b8b59b5dd5887ba119",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkParts14512.olean": "45204a89a5dc84ccdfcf61d8791c0b193ac5a24fb00574baf6b39e756d687734",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\data\\ChunkParts14512-audit.json": "c96840b07db1e970db92c9baa5064afd9f31469431a456d988a9a7c3e2b6cdf8",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\build-base\\LocalWindowCnf\\ShareWindow144.olean": "eea9ecbff4fd2af878d00d3dc83d0d30aaa5ccd82d65b2652bf46c8508362d17",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\data\\LocalWindowCnf.ShareWindow144-audit.json": "3e49df6b951230145d36a85cdca4bdd0bb77e58da8b81e2b1d685abff1f1ad08",
+    "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\build\\758bddcc97f84b6fbaa2c693d4931cea\\LocalWindowShareModel.olean": "deab9f1d3413a3119f23f88e0eee71a7138b6b061c2fa19d0d1fd62605a16c6b"
+  },
+  "checker_sha256": "ec34a9cedccc44dc0711d30634dd22897d91061fc6de77157acf92d53e1bdb91",
+  "resource_gate": {
+    "processes": [
+      {
+        "ProcessId": 43900,
+        "ParentProcessId": 41232,
+        "PrivatePageCount": 1043263488
+      }
+    ],
+    "free_bytes": 6710542336
+  },
+  "resource_samples": [
+    {
+      "processes": [],
+      "free_bytes": 7226015744,
+      "seconds": 0.7340000000003783,
+      "owned_lean_processes": []
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 643538944
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 645070848
+        }
+      ],
+      "free_bytes": 6932205568,
+      "seconds": 3.422000000002299,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 643538944
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 677945344
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 1259024384
+        }
+      ],
+      "free_bytes": 6219640832,
+      "seconds": 6.2810000000026776,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 677945344
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 697909248
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 1322823680
+        }
+      ],
+      "free_bytes": 6156787712,
+      "seconds": 8.984000000000378,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 697909248
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 745185280
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 1412894720
+        }
+      ],
+      "free_bytes": 6053003264,
+      "seconds": 11.812000000001717,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 745185280
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 739803136
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 1371484160
+        }
+      ],
+      "free_bytes": 6055903232,
+      "seconds": 14.75,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 739803136
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 760946688
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 1341497344
+        }
+      ],
+      "free_bytes": 6080520192,
+      "seconds": 17.57800000000134,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 760946688
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 810459136
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 1468428288
+        }
+      ],
+      "free_bytes": 5985812480,
+      "seconds": 20.32800000000134,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 810459136
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 899563520
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 1936457728
+        }
+      ],
+      "free_bytes": 5379977216,
+      "seconds": 23.07800000000134,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 899563520
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1047769088
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 2458005504
+        }
+      ],
+      "free_bytes": 4726738944,
+      "seconds": 25.906000000002678,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1047769088
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1182248960
+        },
+        {
+          "ProcessId": 44616,
+          "ParentProcessId": 43984,
+          "PrivatePageCount": 2790092800
+        }
+      ],
+      "free_bytes": 4244381696,
+      "seconds": 28.625,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1182248960
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1244590080
+        }
+      ],
+      "free_bytes": 6408572928,
+      "seconds": 31.389999999999418,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1244590080
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1372766208
+        }
+      ],
+      "free_bytes": 6199627776,
+      "seconds": 34.06200000000172,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1372766208
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1484722176
+        },
+        {
+          "ProcessId": 10180,
+          "ParentProcessId": 26080,
+          "PrivatePageCount": 463814656
+        }
+      ],
+      "free_bytes": 6001004544,
+      "seconds": 36.81200000000172,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1484722176
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1550258176
+        },
+        {
+          "ProcessId": 10180,
+          "ParentProcessId": 26080,
+          "PrivatePageCount": 497434624
+        }
+      ],
+      "free_bytes": 5914091520,
+      "seconds": 39.5,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1550258176
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1686441984
+        },
+        {
+          "ProcessId": 10180,
+          "ParentProcessId": 26080,
+          "PrivatePageCount": 531501056
+        }
+      ],
+      "free_bytes": 5765545984,
+      "seconds": 42.34400000000096,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1686441984
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1784414208
+        },
+        {
+          "ProcessId": 10180,
+          "ParentProcessId": 26080,
+          "PrivatePageCount": 665980928
+        }
+      ],
+      "free_bytes": 5516529664,
+      "seconds": 45.1720000000023,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1784414208
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1833598976
+        },
+        {
+          "ProcessId": 10180,
+          "ParentProcessId": 26080,
+          "PrivatePageCount": 987111424
+        }
+      ],
+      "free_bytes": 5262467072,
+      "seconds": 47.9220000000023,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1833598976
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1907404800
+        },
+        {
+          "ProcessId": 10180,
+          "ParentProcessId": 26080,
+          "PrivatePageCount": 987111424
+        }
+      ],
+      "free_bytes": 5225279488,
+      "seconds": 50.63999999999942,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 1907404800
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 2022641664
+        }
+      ],
+      "free_bytes": 5596835840,
+      "seconds": 53.45300000000134,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 2022641664
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 2414092288
+        },
+        {
+          "ProcessId": 46616,
+          "ParentProcessId": 53824,
+          "PrivatePageCount": 749690880
+        }
+      ],
+      "free_bytes": 4666073088,
+      "seconds": 56.23400000000038,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 2414092288
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 3038031872
+        },
+        {
+          "ProcessId": 46616,
+          "ParentProcessId": 53824,
+          "PrivatePageCount": 1114501120
+        }
+      ],
+      "free_bytes": 3745947648,
+      "seconds": 59.03100000000268,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 3038031872
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 3635290112
+        },
+        {
+          "ProcessId": 46616,
+          "ParentProcessId": 53824,
+          "PrivatePageCount": 1093783552
+        }
+      ],
+      "free_bytes": 3123556352,
+      "seconds": 61.7970000000023,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 55156,
+          "ParentProcessId": 14636,
+          "PrivatePageCount": 3635290112
+        }
+      ]
+    }
+  ],
+  "timeout_seconds": 180,
+  "memory_limit_bytes": 3221225472,
+  "minimum_free_bytes": 805306368,
+  "log": "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\logs\\ChunkAssembly145-1793728308820893500\\compiler.log",
+  "paths": [
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\build-base",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\experiments\\build",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\build\\lib\\lean",
+    "E:\\Snake-in-a-box\\milestones\\125-critical-six-count\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\124-six-count-cycle-pressure\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\123-six-count-recovery\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\122-endpoint-equality\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\121-replacement-window-pressure\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\120-nine-transition-window\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\111-critical-count-intervals\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\110-critical-cycle-core-screen\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\109-relaxed-graph-test\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\108-smaller-reference-recovery\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\107-reference-refutation-recovery\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\105-reference-proof-closure\\build",
+    "E:\\Snake-in-a-box\\milestones\\103-joint-potential-traversal\\build",
+    "E:\\Snake-in-a-box\\milestones\\102-potential-block-reduction\\build",
+    "E:\\Snake-in-a-box\\milestones\\101-context-specialization\\build",
+    "E:\\Snake-in-a-box\\milestones\\100-prefix-potential-checker\\build",
+    "E:\\Snake-in-a-box\\milestones\\99-defined-potential-certificates\\build",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\build",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\build\\support",
+    "E:\\Snake-in-a-box\\milestones\\97-geometric-credit-integration\\build",
+    "E:\\Snake-in-a-box\\milestones\\95-history-credit-integration\\build",
+    "E:\\Snake-in-a-box\\milestones\\94-history-share-dispatch\\build",
+    "E:\\Snake-in-a-box\\milestones\\92-full-witness-batch\\build",
+    "E:\\Snake-in-a-box\\milestones\\90-context-witness-certificates\\build",
+    "E:\\Snake-in-a-box\\milestones\\89-shared-cover-certification\\build",
+    "E:\\Snake-in-a-box\\milestones\\88-retention-diagram-certificate\\build",
+    "E:\\Snake-in-a-box\\milestones\\87-retained-array-membership\\build",
+    "E:\\Snake-in-a-box\\milestones\\87-retained-array-membership\\build\\RetainedPredicates-support",
+    "E:\\Snake-in-a-box\\milestones\\85-reference-catalogue-union\\build",
+    "E:\\Snake-in-a-box\\milestones\\79-retained-edge-guards\\build",
+    "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\numeric\\build",
+    "E:\\Snake-in-a-box\\milestones\\78-numeric-history-transition\\build",
+    "E:\\Snake-in-a-box\\milestones\\77-direction-state-coverage\\build",
+    "E:\\Snake-in-a-box\\milestones\\77-direction-state-coverage\\history\\build",
+    "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\history\\build",
+    "E:\\Snake-in-a-box\\milestones\\75-exact-history-bridge\\lookup\\build",
+    "E:\\Snake-in-a-box\\milestones\\74-graph-interpretation-audit\\build",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\adapter\\build",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\coverage\\build",
+    "E:\\Snake-in-a-box\\milestones\\72-four-count-proof-closure\\critical-current\\share-proof\\build\\semantic",
+    "E:\\Snake-in-a-box\\milestones\\32-seven-count-four-screen\\build\\cc4a6ed007924637afe87021c13a85ca",
+    "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\build\\758bddcc97f84b6fbaa2c693d4931cea",
+    "E:\\Snake-in-a-box\\milestones\\20-middle-path-release\\build",
+    "E:\\Snake-in-a-box\\milestones\\14-component-construction\\build",
+    "E:\\Snake-in-a-box\\milestones\\07-window-223\\lean\\generated\\geometry\\support-ci2y7deg",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\.lake\\build\\lib\\lean",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy",
+    "E:\\Snake-in-a-box\\milestones\\81-recovered-short-rule-retention\\build",
+    "E:\\Snake-in-a-box\\milestones\\81-recovered-short-rule-retention\\build\\support",
+    "E:\\Snake-in-a-box\\milestones\\84-history-exclusion-retention\\build",
+    "E:\\Snake-in-a-box\\milestones\\72-four-count-proof-closure\\build\\950fed501ad64859af6f7f46cf3857db",
+    "E:\\Snake-in-a-box\\milestones\\50-three-count-return\\build\\c80b2812b6624e6385cd1667587e75a6",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\build\\combined",
+    "E:\\Snake-in-a-box\\milestones\\51-exact-bucket-pressure\\build\\55ecf328890243e29b79ec112a723515",
+    "E:\\Snake-in-a-box\\milestones\\52-share-on-235\\build\\4b0096d8ced0498fb4d7b1e7dbf342d3",
+    "E:\\Snake-in-a-box\\milestones\\53-shares-on-sat-obstruction\\build\\1b46e9a3c76d43c5907fa4aab8c11d3e",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\build-isolated",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\build-sum-semantics",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\build-sum-geometry"
+  ],
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe",
+    "env",
+    "lean",
+    "-s",
+    "65536",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\build-independent\\ChunkAssembly145.1793728308820893500.olean",
+    "E:\\Snake-in-a-box\\milestones\\145-countfree-012301\\lean\\ChunkAssembly145.lean"
+  ],
+  "launcher_pid": 14636,
+  "exit_code": 1,
+  "stop_reason": "MEMORY_LIMIT",
+  "seconds": 62.01499999999942,
+  "axioms": [],
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

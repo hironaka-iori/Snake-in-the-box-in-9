@@ -1,52 +1,65 @@
-# Continue after milestone144
+# Continue after milestone145
 
-Work in E:/Snake-in-a-box. Use tensai-bishoujo; formal prose, no emojis,
-unnecessary definitions, or Lean identifiers in the paper. Preserve the open
-D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and repo mirror,
-authors Iori Hironaka, Tommy Ma, Steven Zhan, preamble and hypersetup. Preserve
-unrelated .gitignore and milestone50 critical-family changes. Goal ACTIVE.
+Work in E:/Snake-in-a-box. Use the tensai-bishoujo skill with the user's
+formal voice, no emojis or unnecessary definitions. Keep the open editor
+D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and paper mirror
+synchronised. Preserve authors Iori Hironaka, Tommy Ma, Steven Zhan,
+preamble and hypersetup. Leave unrelated .gitignore and milestone50
+critical-family changes intact. Goal ACTIVE, this round made progress.
 
-First read milestones/144-countfree-share18/MATHEMATICAL_NOTE.md and
-data/next-task.json. Main result: source-audited zero-event14cycle with shapes
-012304 eight times,012301 four times,012340 twice capsmean3445/7. No012034
-in either orientation. Lean proves comparison>=235+341/6569 for nonnegative
-cost/range. Thus ANY012034 floor plus ANYuniform credit on the same event
-cannot reach234 with other graph weights fixed. Do not repeat those searches.
+Read145/MATHEMATICAL_NOTE.md and data/checkpoint.json under milestones/.
+Main mathematical result: with other weights/edges fixed,012301/012340
+floors16 plus arbitrary existing occurrence credit and012034 floor cannot
+bring comparison below235. Exact lower bound551875/2348=235+95/2348.
+Fourteen-cycle:7mu<=3424+2F+G,2mu<=496+F+R. Eleven-cycle:11mu<=5399+4C.
+With B24 a successful comparison needs325F+159G>9074. Thus F16 would need
+G>=25 while the eleven-cycle is unchanged. Better use existing012032
+share16, which adds57 to that cycle. Both cycles then have mean496 atC0
+with all three proposed floors16. This is a saved-cycle argument only.
+14 arithmetic statements passed Lean; inspect receipts and bounded review.
 
-Selected next target: count-free012301 share16, resolution12, five broad
-[0,21] internal-count bounds, both orientations. First locate the saved native
-proof in the72 catalogue and verify exact evidence. Case7303 directory does
-not exist; do not infer a prepared Lean chain. This floor raises14cycle total
-by30.012340 floor16 raises another24; together itsmean=496. The11cycle needs
-012032 floor16, adding57 to reach496. These are saved-cycle effects only.
+Current target remains count-free012301 share16, both orientations. Its
+original72/critical-current pysat3-cap15 certificate has11378 variables,
+92656 clauses,16 induced-eight-cycle cuts (6 in core),12977 core clauses.
+145 conversion-long completed, and direct-replay.json verifies285541
+deductions/31017505 references to the final contradiction. Full input/core
+and exact archives were independently audited. No actual share theorem yet.
+Do not rerun the timed-out90s compact-core attempt or first conversion.
+Exact originals are local; scripts/restore_proofs.py restores published gzip
+archives after checking hashes. Historical conversion and failed traces
+are intentionally preserved. Full proof uses original input identities.
 
-144share18:11924vars96091clauses; complete alternative native proof has145215
-deductions14710881hints13224coreclauses. Independent RUP review passed at20M
-limit; producer pending12Mlimit record is deliberately unchanged. First native
-120stimeout trace preserved separately. Input and export audits passed.1324
-Lean modules generated;6 passed, then Check1 manually stopped for memory.
-warmup-stop.json overrides stale RUNNING progress. Do not restart unchanged.
+Initial-tree work is on preserved144 data: InputTree145 generic soundness
+passed;28 chunked modules/419 reports passed, including104 part truth
+transfers. ChunkTruthAssemblyFixed145 timed out181.610s under180s limit;
+peak sampled private memory1.25GB. No accepted final theorem/object.
+PrefixTruth145 is prepared but uncompiled. Do not infer whole-tree truth
+from part checks. Next split original-CNF-to-chunk truth extraction from
+final constructor assembly into separately checked modules, preserving
+all prior failures. Then generate/replay012301 using exact key and variable
+transport, original core IDs, justified cycle cuts and final geometry.
 
-Replay improvement: experiments/RawInit144 generic preorder builder soundness
-passed, but recursive264/6006hint probes exceeded3GiB. Explicit balanced
-LiteralData144 passed compilation; LiteralSmall144 and LiteralProbe144 passed
-264/6006hints in2.8/5.5s. MATERIALIZED INITIAL TREE TRUTH BRIDGE IS MISSING.
-Complete that bridge before any actual theorem claim. Then regenerate every
-key/hint/checkpoint under the bijection and simulate the entire proof. Old
-packed receipt applies only to the old export. Preserve all attempts/objects.
+Do not spend graph runs retuning uniform credit on only the two floors:
+the two-cycle obstruction already rules it out. Further conditional graph
+tests must specify the three-floor profile and inherited assumptions.
+The maintained191--235 interval and conditional234 have unchanged global
+proof limits.196 and optimum remain unresolved.
 
-14new arithmetic reports passed,2generic soundness reports,2bounded prefix
-reports; all accepted axioms standard. No full actual share18 or global bound.
-Both graph evaluations have producer all-edge checks, bounded independent
-cycle audits, no independent all-edge repeat. Global interval191–235 unchanged
-with contributor rebuild limitation.196/optimum unresolved. Existing stronger
-conditional234 profile is separate and still has outstanding dependencies.
+Paper145 is targeted; last full136,next146. Always compile the saved editor
+file with the built-in tool after edits. Tool preparation may fail before
+TeX; record exact diagnostics and do not claim a PDF. Fetch each round,
+stage only manifest files, quiet commit/push and verify remote. Preserve
+audited bytes. Lean requires>=1.5GiBfree, at most2 existing Lean processes;
+new runner caps its own process3GiB and free-memory floor768MiB. Fullgraph
+requires>=3GiBfree and no other graph run. Inspect115's actual process and
+latest record before acting; never duplicate its completion driver. The
+point-in-time145 batch observations are not a substitute for current state.
 
-Paper targeted144; source checks pass; preview tool fails beforeTeX dueWindows
-launcher restrictions. NoPDF. Lastfull136,next146. Separate115PID39044 was
-observedlive1287/1397; inspect exactprocess beforeacting, neverduplicate.104
-stopped122complete.144jobsallcomplete/stopped. Resourcegates:Lean>=1.5GiBfree,
-atmost2existingLean; fullgraph>=3GiBfree,nootherfullgraph. New probe runner
-activelycapsLean3GiB andstopsbelow768MiBfree. Fetcheachround,manifest-stage,
-quietcommit,push,verify. FourlargeLRAToriginalsremainlocal andhaveexactgzip
-archives/restorescripts forGit; preserveall exactsources/receipts/hashes.
+Completion update:115 is now PASS_COMPLETE_TOTAL_COUNT_PROOF,1397/1397,
+including ActualTotal115.actual_total_sum. This is an arbitrary-snake
+canonical012310 five-count sum>=19 theorem, with no extra count/parity
+hypotheses.145/data/total115-completion.json freshly verifies every receipt,
+source/object/log hash and recorded dependency. Exact successful receipts,
+logs, source and checker snapshots are in three archive parts, with a safe
+restore script. No115 driver needs resuming. This discharges one inherited
+local premise only. Other global assumptions and graph assembly remain.

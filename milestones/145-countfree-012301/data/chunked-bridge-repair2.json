@@ -1,0 +1,464 @@
+{
+  "status": "PREPARED_ASSEMBLY_REPAIR2_TRUTH_TRANSFER",
+  "source_files_sha256": {
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/scripts/prepare_chunked_bridge.py": "00508dcfe4425df5ff0cc9c756c5214bbc811e0b67c82f3b1bf2c590d434d7d6",
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/lean/InputData145.lean": "bfe5024e5e7642d02a5bbbdd3ab58db3d430bb04f92889db18a55ae01e98f85b",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/experiments/lean/LiteralData144.lean": "e4143c321f24aab2ef047bf5272bad683db3bc295d39fb785b7a43966fd92ef0",
+    "E:/Snake-in-a-box/milestones/144-countfree-share18/lean/LocalWindowCnf/ShareWindow144.lean": "1fa19f9fa0fe21ef77240a2572eee3a8dfd8c886cfd8359341415bd59b0320ad",
+    "E:/Snake-in-a-box/milestones/145-countfree-012301/lean/InputTree145.lean": "fb0def28d9116c8d93171f68ed82fbc476cb814ccff52ab8d07668c6113cfc37"
+  },
+  "generated_sha256": {
+    "ChunkTruthTools145": "9d7b1e0fd32acef3a938ff6de73f07e2b1451d214f2bd97e0d36ccf460d235c8",
+    "ChunkTruthParts14500": "d229d2dd0cec97824f967ae5cdb17d5f81d4ca8751ab99c2568d722e1f9c3672",
+    "ChunkTruthParts14501": "6b740c615a5bc5faedab7ad942aed422781034a1135c83c57350aac8eabb7821",
+    "ChunkTruthParts14502": "6231f260759307d1580b261e476a9773f162c9d71bebcb88778bd38116ba9b11",
+    "ChunkTruthParts14503": "4cd2a5bf39d31e4f11477442111a3ed7fd278deb106d6b3d79711e43935a2577",
+    "ChunkTruthParts14504": "9c1deee1be48fb9506e533ff5b0cf14523e459f09dc8c11a78f0183cf781446e",
+    "ChunkTruthParts14505": "3cb56c897b668d1a30c2c9e83e49b0dd202fae253208f97e4ab0e0a7d90e3314",
+    "ChunkTruthParts14506": "cd70fd7ca795841e1bf074ce8426523c882e31865639f4b2cd7c2bd0d50584ef",
+    "ChunkTruthParts14507": "b724a49769dea504cdf5c8575ce6273995da794512b2e2cfa73500d3e551aaaf",
+    "ChunkTruthParts14508": "7a000ac927aa9c9d7664e1ac70691bc848cbc1e440339f3811af2c89a73f14a1",
+    "ChunkTruthParts14509": "cd0efacb48d6aeb406ed3a2178f7bb8b3f159e615b047a9752a14f512c9d86d8",
+    "ChunkTruthParts14510": "c351ee6b5a1fcb6c39df82014c59d6f79560bc8ce16b01d82229e4dc49e5c99d",
+    "ChunkTruthParts14511": "491cfce2829fb24e19b59093bf39da83c41ca94e1a969e4ed2547f39564b6f07",
+    "ChunkTruthParts14512": "54fd8f65a56b5b084ac6f04e998f1337c1759921b37444db3c7a745eba0c05d1",
+    "ChunkTruthAssembly145": "5867e0cc8f03c0a65ee9b1b4237413e72394f9750d32c47245e51188734ef4f6"
+  },
+  "check_order": [
+    "ChunkTruthTools145",
+    "ChunkTruthParts14500",
+    "ChunkTruthParts14501",
+    "ChunkTruthParts14502",
+    "ChunkTruthParts14503",
+    "ChunkTruthParts14504",
+    "ChunkTruthParts14505",
+    "ChunkTruthParts14506",
+    "ChunkTruthParts14507",
+    "ChunkTruthParts14508",
+    "ChunkTruthParts14509",
+    "ChunkTruthParts14510",
+    "ChunkTruthParts14511",
+    "ChunkTruthParts14512",
+    "ChunkTruthAssembly145"
+  ],
+  "generator_source": "\"\"\"Preserve the stopped prototype and generate a sharded initial-tree bridge.\"\"\"\nfrom pathlib import Path\nimport ast, hashlib, json, re\n\nH=Path(__file__).resolve().parents[1]; R=H.parents[1]\nprototype=H/'lean/InputData145.lean'\nliteral=R/'milestones/144-countfree-share18/experiments/lean/LiteralData144.lean'\ncnf=R/'milestones/144-countfree-share18/lean/LocalWindowCnf/ShareWindow144.lean'\nsha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()\nsource=prototype.read_text()\ndefinitions=re.findall(r'^def (part\\d+|tree) : InputTree := (.*)$',source,re.M)\nassert len(definitions)==105\nparts={name:body for name,body in definitions}\n\ndef parse(body):\n    toks=re.findall(r'InputTree\\.\\w+|part\\d+|\\d+|[()\\[\\],]',body); i=0\n    def expr():\n        nonlocal i\n        t=toks[i];i+=1\n        if t.startswith('part'):return ('part',t)\n        if t=='InputTree.empty':return ('empty',)\n        assert t=='('\n        kind=toks[i];i+=1\n        if kind=='InputTree.tautology':\n            d,b=int(toks[i]),int(toks[i+1]);i+=2\n            assert toks[i]==')';i+=1\n            return ('tautology',d,b)\n        assert kind=='InputTree.node'\n        key=int(toks[i]);i+=1;assert toks[i]=='[';i+=1;cl=[]\n        while toks[i]!=']':\n            if toks[i]!=',':cl.append(int(toks[i]))\n            i+=1\n        i+=1; left=expr();right=expr();assert toks[i]==')';i+=1\n        return ('node',key,cl,left,right)\n    ans=expr();assert i==len(toks);return ans\n\ntrees={name:parse(body) for name,body in definitions}\ndef clauses(t):\n    if t[0] in ('empty','tautology'):return []\n    if t[0]=='part':return clauses(trees[t[1]])\n    return [t[2]]+clauses(t[3])+clauses(t[4])\n\nraw=[]\nfor text in re.findall(r'^def raw\\d+ : List \\(List Nat\\) := (.*)$',cnf.read_text(),re.M):\n    raw.extend(ast.literal_eval(text))\nassert len(raw)==13224 and clauses(trees['tree'])==raw\n\ndef raw_expression(t):\n    if t[0] in ('empty','tautology'):return '[]'\n    if t[0]=='part':return t[1]+'.clauses'\n    return f'({t[2]} :: ({raw_expression(t[3])} ++ {raw_expression(t[4])}))'\n\ndef build_expression(t):\n    if t[0]=='empty':return 'Snake9.Lrat144.Tree.nil'\n    if t[0]=='tautology':return f'(Snake9.LratFast144.perf {t[1]} {t[2]})'\n    if t[0]=='part':return t[1]+'.build'\n    return f'(Snake9.Lrat144.Tree.node {t[1]} (Snake9.Lrat144.rawMask {t[2]}) {build_expression(t[3])} {build_expression(t[4])})'\n\n\nsettings='set_option maxRecDepth 100000\\nset_option maxHeartbeats 0\\nset_option Elab.async false\\n'\nns='namespace Snake9.ChunkData145\\nopen Snake9.InputTree145 (InputTree)\\n'\ngenerated={}\ndef save(name,text):\n p=H/'lean'/(name+'.lean');assert not p.exists(),p\n p.write_text(text,encoding='utf-8',newline='\\n');generated[name]=sha(p)\n\nsave('ChunkTruthTools145','import InputTree145\\nimport LocalWindowCnf.ShareWindow144\\n'+settings+ns+r'''\ntheorem all_take_drop {\u03b1 : Type} (f : \u03b1 \u2192 Bool) (xs : List \u03b1)\n    (h : xs.all f = true) (offset count : Nat) :\n    ((xs.drop offset).take count).all f = true := by\n  apply List.all_eq_true.mpr\n  intro x hx\n  exact List.all_eq_true.mp h x (List.mem_of_mem_drop (List.mem_of_mem_take hx))\n\ntheorem all_of_subset {\u03b1 : Type} (f : \u03b1 \u2192 Bool) {xs ys : List \u03b1}\n    (h : xs.all f = true) (hs : \u2200 x \u2208 ys, x \u2208 xs) : ys.all f = true := by\n  exact List.all_eq_true.mpr (fun x hx => List.all_eq_true.mp h x (hs x hx))\n\ntheorem build_true_of_slice (\u03c4 : Nat \u2192 Bool) (t : InputTree)\n    (xs : List (List Nat)) (offset count : Nat)\n    (heq : t.clauses = (xs.drop offset).take count)\n    (h : xs.all (fun c => Snake9.LocalWindow.clauseTrue \u03c4\n      (c.map Snake9.LocalWindow.decodeLit)) = true) :\n    Snake9.Lrat144.TreeTrue \u03c4 t.build := by\n  apply t.build_true \u03c4\n  rw [List.all_map, heq]\n  exact all_take_drop _ xs h offset count\n#print axioms all_take_drop\n#print axioms all_of_subset\n#print axioms build_true_of_slice\nend Snake9.ChunkData145\n''')\n\npositions={};cursor=0;nodepositions={}\ndef locate(t):\n global cursor\n if t[0] in ('empty','tautology'):return\n if t[0]=='part':\n  positions[t[1]]=(cursor,len(clauses(trees[t[1]])));cursor+=positions[t[1]][1];return\n nodepositions[t[1]]=cursor;cursor+=1;locate(t[3]);locate(t[4])\nlocate(trees['tree']);assert cursor==13224\nrawname=lambda j:f'Snake9.LocalWindow.ShareWindow144.raw{j}'\nf='(fun c => Snake9.LocalWindow.clauseTrue \u03c4 (c.map Snake9.LocalWindow.decodeLit))'\nshards=[]\nfor n in range(13):\n name=f'ChunkTruthParts145{n:02d}';shards.append(name)\n text=f'import ChunkParts145{n:02d}\\nimport ChunkTruthTools145\\n'+settings+ns\n for i in range(n*8,n*8+8):\n  offset,count=positions[f'part{i}'];j=offset//128;last=(offset+count-1)//128;assert last<=j+1\n  xs=rawname(j) if last==j else f'({rawname(j)} ++ {rawname(last)})'\n  text+=f'theorem part{i}_slice : part{i}.clauses = (({xs}).drop {offset%128}).take {count} := by\\n  rw [part{i}_clauses]\\n  rfl\\n'\n  text+=f'theorem part{i}_true (\u03c4 : Nat \u2192 Bool)\\n    (h0 : {rawname(j)}.all {f} = true)\\n'\n  if last!=j:text+=f'    (h1 : {rawname(last)}.all {f} = true)\\n'\n  text+=f'    : Snake9.Lrat144.TreeTrue \u03c4 Snake9.LiteralData144.part{i} := by\\n  rw [\u2190 part{i}_build]\\n  apply build_true_of_slice \u03c4 part{i} {xs} {offset%128} {count} part{i}_slice\\n'\n  text+='  exact h0\\n' if j==last else '  rw [List.all_append]\\n  exact Bool.and_eq_true.mpr \u27e8h0, h1\u27e9\\n'\n  text+=f'#print axioms part{i}_slice\\n#print axioms part{i}_true\\n'\n text+='end Snake9.ChunkData145\\n';save(name,text)\n\ntext=''.join('import '+n+'\\n' for n in shards)+settings+ns\ntext+='''theorem start_true (\u03c4 : Nat \u2192 Bool)\n    (h : Snake9.LocalWindow.cnfTrue \u03c4 Snake9.LocalWindow.ShareWindow144.cnf = true) :\n    Snake9.Lrat144.TreeTrue \u03c4 Snake9.LiteralData144.start := by\n'''\ntext+=f'  have hraw : Snake9.LocalWindow.ShareWindow144.raw.all {f} = true := by\\n    simpa only [Snake9.LocalWindow.ShareWindow144.cnf, Snake9.LocalWindow.cnfTrue, List.all_map] using h\\n'\nrawsum=' ++ '.join(rawname(i) for i in range(104))+' ++ []'\nfor i in range(104):\n text+=f'  have h{i} : {rawname(i)}.all {f} = true := by\\n    apply all_of_subset _ hraw\\n    intro c hc\\n    change c \u2208 '+rawsum+'\\n'\n term='(List.mem_append_left _ hc)'\n for j in range(i-1,-1,-1):term='(List.mem_append_right '+rawname(j)+' '+term+')'\n text+='    exact '+term+'\\n'\n\ndef proof(t):\n if t[0]=='empty':return 'Snake9.Lrat144.TreeTrue.nil'\n if t[0]=='tautology':return f'(Snake9.LratFast144.perf_true \u03c4 {t[1]} {t[2]})'\n if t[0]=='part':\n  i=int(t[1][4:]);off,cnt=positions[t[1]];a=off//128;b=(off+cnt-1)//128\n  return f'(part{i}_true \u03c4 h{a}'+('' if a==b else f' h{b}')+')'\n k=nodepositions[t[1]]//128\n lit=f'(Snake9.Lrat144.rawMask_true \u03c4 {t[2]} (List.all_eq_true.mp h{k} {t[2]} (by decide +kernel)))'\n return f'(Snake9.Lrat144.TreeTrue.node {lit}\\n    {proof(t[3])}\\n    {proof(t[4])})'\ntext+='  exact '+proof(trees['tree'])+'\\n#print axioms start_true\\nend Snake9.ChunkData145\\n'\nsave('ChunkTruthAssembly145',text)\nreceipt=dict(status='PREPARED_ASSEMBLY_REPAIR2_TRUTH_TRANSFER',source_files_sha256={p.as_posix():sha(p) for p in [Path(__file__),prototype,literal,cnf,H/'lean/InputTree145.lean']},generated_sha256=generated,check_order=['ChunkTruthTools145']+shards+['ChunkTruthAssembly145'],generator_source=generation_source,part_ranges=positions,scope='Avoid every full-tree equality: transfer truth from at most two original128-clause chunks per part, then assemble the existing LiteralData144.start by TreeTrue constructors.')\np=H/'data/chunked-bridge-repair2.json';assert not p.exists();p.write_text(json.dumps(receipt,indent=2)+'\\n')\nprint('PREPARED',len(generated),'modules')\n",
+  "part_ranges": {
+    "part0": [
+      7,
+      127
+    ],
+    "part1": [
+      134,
+      127
+    ],
+    "part2": [
+      262,
+      127
+    ],
+    "part3": [
+      389,
+      127
+    ],
+    "part4": [
+      518,
+      127
+    ],
+    "part5": [
+      645,
+      127
+    ],
+    "part6": [
+      773,
+      127
+    ],
+    "part7": [
+      900,
+      127
+    ],
+    "part8": [
+      1030,
+      127
+    ],
+    "part9": [
+      1157,
+      127
+    ],
+    "part10": [
+      1285,
+      127
+    ],
+    "part11": [
+      1412,
+      127
+    ],
+    "part12": [
+      1541,
+      127
+    ],
+    "part13": [
+      1668,
+      127
+    ],
+    "part14": [
+      1796,
+      127
+    ],
+    "part15": [
+      1923,
+      127
+    ],
+    "part16": [
+      2054,
+      127
+    ],
+    "part17": [
+      2181,
+      127
+    ],
+    "part18": [
+      2309,
+      127
+    ],
+    "part19": [
+      2436,
+      127
+    ],
+    "part20": [
+      2565,
+      127
+    ],
+    "part21": [
+      2692,
+      127
+    ],
+    "part22": [
+      2820,
+      127
+    ],
+    "part23": [
+      2947,
+      127
+    ],
+    "part24": [
+      3077,
+      127
+    ],
+    "part25": [
+      3204,
+      127
+    ],
+    "part26": [
+      3332,
+      127
+    ],
+    "part27": [
+      3459,
+      127
+    ],
+    "part28": [
+      3588,
+      127
+    ],
+    "part29": [
+      3715,
+      127
+    ],
+    "part30": [
+      3843,
+      127
+    ],
+    "part31": [
+      3970,
+      127
+    ],
+    "part32": [
+      4102,
+      127
+    ],
+    "part33": [
+      4229,
+      127
+    ],
+    "part34": [
+      4357,
+      127
+    ],
+    "part35": [
+      4484,
+      127
+    ],
+    "part36": [
+      4613,
+      127
+    ],
+    "part37": [
+      4740,
+      127
+    ],
+    "part38": [
+      4868,
+      127
+    ],
+    "part39": [
+      4995,
+      127
+    ],
+    "part40": [
+      5125,
+      127
+    ],
+    "part41": [
+      5252,
+      127
+    ],
+    "part42": [
+      5380,
+      127
+    ],
+    "part43": [
+      5507,
+      127
+    ],
+    "part44": [
+      5636,
+      127
+    ],
+    "part45": [
+      5763,
+      127
+    ],
+    "part46": [
+      5891,
+      127
+    ],
+    "part47": [
+      6018,
+      127
+    ],
+    "part48": [
+      6149,
+      127
+    ],
+    "part49": [
+      6276,
+      127
+    ],
+    "part50": [
+      6404,
+      127
+    ],
+    "part51": [
+      6531,
+      127
+    ],
+    "part52": [
+      6660,
+      127
+    ],
+    "part53": [
+      6787,
+      127
+    ],
+    "part54": [
+      6915,
+      127
+    ],
+    "part55": [
+      7042,
+      127
+    ],
+    "part56": [
+      7172,
+      127
+    ],
+    "part57": [
+      7299,
+      127
+    ],
+    "part58": [
+      7427,
+      127
+    ],
+    "part59": [
+      7554,
+      127
+    ],
+    "part60": [
+      7683,
+      127
+    ],
+    "part61": [
+      7810,
+      127
+    ],
+    "part62": [
+      7938,
+      127
+    ],
+    "part63": [
+      8065,
+      127
+    ],
+    "part64": [
+      8198,
+      127
+    ],
+    "part65": [
+      8325,
+      127
+    ],
+    "part66": [
+      8453,
+      127
+    ],
+    "part67": [
+      8580,
+      127
+    ],
+    "part68": [
+      8709,
+      127
+    ],
+    "part69": [
+      8836,
+      127
+    ],
+    "part70": [
+      8964,
+      127
+    ],
+    "part71": [
+      9091,
+      127
+    ],
+    "part72": [
+      9221,
+      127
+    ],
+    "part73": [
+      9348,
+      127
+    ],
+    "part74": [
+      9476,
+      127
+    ],
+    "part75": [
+      9603,
+      127
+    ],
+    "part76": [
+      9732,
+      127
+    ],
+    "part77": [
+      9859,
+      127
+    ],
+    "part78": [
+      9987,
+      127
+    ],
+    "part79": [
+      10114,
+      127
+    ],
+    "part80": [
+      10245,
+      127
+    ],
+    "part81": [
+      10372,
+      127
+    ],
+    "part82": [
+      10500,
+      127
+    ],
+    "part83": [
+      10627,
+      127
+    ],
+    "part84": [
+      10756,
+      127
+    ],
+    "part85": [
+      10883,
+      127
+    ],
+    "part86": [
+      11011,
+      127
+    ],
+    "part87": [
+      11138,
+      127
+    ],
+    "part88": [
+      11268,
+      127
+    ],
+    "part89": [
+      11395,
+      127
+    ],
+    "part90": [
+      11523,
+      127
+    ],
+    "part91": [
+      11650,
+      127
+    ],
+    "part92": [
+      11779,
+      127
+    ],
+    "part93": [
+      11906,
+      127
+    ],
+    "part94": [
+      12034,
+      127
+    ],
+    "part95": [
+      12161,
+      127
+    ],
+    "part96": [
+      12293,
+      127
+    ],
+    "part97": [
+      12420,
+      127
+    ],
+    "part98": [
+      12548,
+      127
+    ],
+    "part99": [
+      12675,
+      127
+    ],
+    "part100": [
+      12804,
+      127
+    ],
+    "part101": [
+      12931,
+      127
+    ],
+    "part102": [
+      13059,
+      127
+    ],
+    "part103": [
+      13186,
+      38
+    ]
+  },
+  "scope": "Avoid every full-tree equality: transfer truth from at most two original128-clause chunks per part, then assemble the existing LiteralData144.start by TreeTrue constructors."
+}
