@@ -1,3 +1,23 @@
+# Research update: milestone 123
+
+The six-count work gives checked overlap accounting and a new unproved candidate:
+the six internal counts sum to at least 26 on the seven-direction pattern
+0123042. Two negative full-cube searches support it; no contradiction certificate
+or actual-snake transfer has been completed for this candidate.
+
+Neither the recovered exact-six-fours exclusion nor the tested sum credits
+improve the integer comparisons. Replacement cycles avoid 0123042 entirely.
+The next focused targets are 0120310 and 0123024, with recorded six-count sum 24.
+The maintained interval remains 191–235, with its existing independent-rebuild
+limitation; 234 remains conditional. No new mathematical definitions were added.
+
+See [mathematical note](../milestones/123-six-count-recovery/MATHEMATICAL_NOTE.md),
+[proof review](../milestones/123-six-count-recovery/audit/proof-review.md), and
+[graph obstruction](../milestones/123-six-count-recovery/audit/six-sum-guarded-review.md).
+Paper revision 116 is unchanged; the next full revision is 126.
+
+## Earlier record
+
 # Research update: milestone 122
 
 The arbitrary-snake endpoint restriction for the 012032 count pair (2,6) is

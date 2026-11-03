@@ -1,0 +1,335 @@
+{
+  "status": "PASS_SAVED_UNIFORM20_CYCLES_AND_UNBOUNDED_FLOOR_OBSTRUCTION",
+  "completed_floors": [
+    25,
+    26,
+    27
+  ],
+  "skipped_floors": [
+    28
+  ],
+  "profiles": [
+    {
+      "L": 25,
+      "profile": "completed",
+      "mean": "2428/5",
+      "range": "2863/5",
+      "comparison": "5517087/23428",
+      "integer": 235,
+      "ideal_zero_range_comparison": "1378556/5857",
+      "ideal_zero_range_integer": 235,
+      "six_matches": 0,
+      "endpoint_matches": 0,
+      "result_sha256": "44ec5298a829acfd805ab3852eee4810cf574a9e3223ab83d9f0393dd47a67a6"
+    },
+    {
+      "L": 25,
+      "profile": "conditional_floor18",
+      "mean": "496",
+      "range": "602",
+      "comparison": "551765/2348",
+      "integer": 234,
+      "ideal_zero_range_comparison": "137866/587",
+      "ideal_zero_range_integer": 234,
+      "six_matches": 0,
+      "endpoint_matches": 0,
+      "result_sha256": "44ec5298a829acfd805ab3852eee4810cf574a9e3223ab83d9f0393dd47a67a6"
+    },
+    {
+      "L": 26,
+      "profile": "completed",
+      "mean": "2428/5",
+      "range": "2863/5",
+      "comparison": "5517087/23428",
+      "integer": 235,
+      "ideal_zero_range_comparison": "1378556/5857",
+      "ideal_zero_range_integer": 235,
+      "six_matches": 0,
+      "endpoint_matches": 0,
+      "result_sha256": "0640e633fc5b25df81434ddc00d58f7498bcba23d5306fb0cf222cf82dd65c13"
+    },
+    {
+      "L": 26,
+      "profile": "conditional_floor18",
+      "mean": "496",
+      "range": "602",
+      "comparison": "551765/2348",
+      "integer": 234,
+      "ideal_zero_range_comparison": "137866/587",
+      "ideal_zero_range_integer": 234,
+      "six_matches": 0,
+      "endpoint_matches": 0,
+      "result_sha256": "0640e633fc5b25df81434ddc00d58f7498bcba23d5306fb0cf222cf82dd65c13"
+    },
+    {
+      "L": 27,
+      "profile": "completed",
+      "mean": "2428/5",
+      "range": "2863/5",
+      "comparison": "5517087/23428",
+      "integer": 235,
+      "ideal_zero_range_comparison": "1378556/5857",
+      "ideal_zero_range_integer": 235,
+      "six_matches": 0,
+      "endpoint_matches": 0,
+      "result_sha256": "d8c8c3ec323569b10386e3c4c3c00dd817bd89083e8cef67f99641a8f075e731"
+    },
+    {
+      "L": 27,
+      "profile": "conditional_floor18",
+      "mean": "496",
+      "range": "602",
+      "comparison": "551765/2348",
+      "integer": 234,
+      "ideal_zero_range_comparison": "137866/587",
+      "ideal_zero_range_integer": 234,
+      "six_matches": 0,
+      "endpoint_matches": 1,
+      "result_sha256": "d8c8c3ec323569b10386e3c4c3c00dd817bd89083e8cef67f99641a8f075e731"
+    }
+  ],
+  "witnesses": [
+    {
+      "profile": "completed",
+      "cycle_edges": [
+        3365083,
+        1609336,
+        241469,
+        3524983,
+        1649746,
+        374772,
+        2611989,
+        3476077,
+        1615594,
+        229809
+      ],
+      "mean": "2428/5",
+      "zero_six_matches": true,
+      "zero_endpoint_matches": true,
+      "ideal_zero_range_comparison": "1378556/5857"
+    },
+    {
+      "profile": "conditional_floor18",
+      "cycle_edges": [
+        1130731,
+        2141975,
+        15763
+      ],
+      "mean": "496",
+      "zero_six_matches": true,
+      "zero_endpoint_matches": true,
+      "ideal_zero_range_comparison": "137866/587"
+    }
+  ],
+  "reason": "For L>=25 weights only increase and retained edges only decrease. Both L25attaining cycles have no matching target window, so their weights and retention never change; they also avoid endpoint credits. L25potentials remain valid. Means are therefore fixed for every larger L. EvenR=0cannotimprove eitherintegercomparison.",
+  "next_target_cycle": [
+    {
+      "edge": 1130731,
+      "nine_directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        2,
+        4,
+        3,
+        2
+      ],
+      "six_counts": [
+        3,
+        5,
+        4,
+        3,
+        5,
+        4
+      ],
+      "last_seven_directions": [
+        2,
+        3,
+        0,
+        2,
+        4,
+        3,
+        2
+      ],
+      "canonical_forward": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1,
+        0
+      ],
+      "canonical_reverse": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1,
+        0
+      ],
+      "canonical_unoriented": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1,
+        0
+      ],
+      "counts_in_canonical_orientation": [
+        3,
+        5,
+        4,
+        3,
+        5,
+        4
+      ],
+      "six_sum": 24,
+      "first_integer_floor_excluding_this_exact_tuple": 25,
+      "status": "UNTESTED_NEXT_TARGET"
+    },
+    {
+      "edge": 2141975,
+      "nine_directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        4,
+        2,
+        1,
+        0
+      ],
+      "six_counts": [
+        5,
+        4,
+        3,
+        5,
+        4,
+        3
+      ],
+      "last_seven_directions": [
+        2,
+        3,
+        1,
+        4,
+        2,
+        1,
+        0
+      ],
+      "canonical_forward": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        2,
+        4
+      ],
+      "canonical_reverse": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        4,
+        2
+      ],
+      "canonical_unoriented": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        2,
+        4
+      ],
+      "counts_in_canonical_orientation": [
+        5,
+        4,
+        3,
+        5,
+        4,
+        3
+      ],
+      "six_sum": 24,
+      "first_integer_floor_excluding_this_exact_tuple": 25,
+      "status": "UNTESTED_NEXT_TARGET"
+    },
+    {
+      "edge": 15763,
+      "nine_directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1,
+        0,
+        4,
+        3
+      ],
+      "six_counts": [
+        4,
+        3,
+        5,
+        4,
+        3,
+        5
+      ],
+      "last_seven_directions": [
+        2,
+        0,
+        3,
+        1,
+        0,
+        4,
+        3
+      ],
+      "canonical_forward": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        4,
+        2
+      ],
+      "canonical_reverse": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        2,
+        4
+      ],
+      "canonical_unoriented": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        2,
+        4
+      ],
+      "counts_in_canonical_orientation": [
+        5,
+        3,
+        4,
+        5,
+        3,
+        4
+      ],
+      "six_sum": 24,
+      "first_integer_floor_excluding_this_exact_tuple": 25,
+      "status": "UNTESTED_NEXT_TARGET"
+    }
+  ],
+  "scope": "Saved-cycle arithmetic and explicit finite-graph obstruction argument. Producerchecked allretainededges for reportedpotentials. No independent fullgraphrebuild or Leanproof; no actualsnakebound."
+}

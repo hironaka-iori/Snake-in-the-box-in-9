@@ -1,3 +1,54 @@
+# Continuation after milestone 123
+
+Work in E:/Snake-in-a-box. Apply the requested research skill with formal,
+concise prose. Reuse the manuscript notation. Define only essential quantities
+used repeatedly. Read milestone 123/MATHEMATICAL_NOTE.md and its proof and graph
+reviews before starting another calculation.
+
+The six-count hypothesis for 0123042 is sum at least 26. Full-cube sum <= 24 and
+resumed sum <= 25 searches are native UNSAT without checked contradiction
+certificates. The cap-25 attempt before resuming is UNKNOWN. All saved cuts
+and counter multiplicities have independent encoding audits. The last cyclic
+censuses are not path witnesses. The final resumed formula has 102168 clauses;
+its recorded clauses field excludes the six cuts added during that resume.
+
+Do not spend the next round increasing this single shape's sum floor. An
+attaining cycle avoids every 0123042 window, so neither the uniform 20 scheme nor
+the guarded 24 scheme improves its mean. The zero-range comparison also rules
+out an integer improvement within these fixed graph families. Uniform L25,26,27
+and guarded L25 were run; uniform L28 and guarded L26 were deliberately skipped.
+The uniform driver stopped at a reserved output-directory boundary; its RUNNING
+summary is historical, with a separate intentional-stop record. Inspect actual
+processes instead of inferring liveness from that summary.
+
+The most useful next count-sum tests target 0120310 or 0123024 (reverse 0123142).
+The saved conditional cycle uses exact tuples rotating (3,5,4,3,5,4), sum 24.
+The prepared untested targets are data/six-sum-graph/next-targets.json.
+Try to falsify a floor 25 on these shapes before certificate work. Preserve full
+[6,21] intervals anywhere a symbol 6 appears. Recompute both graph profiles if
+a new restriction survives; a single excluded cycle does not establish improvement.
+
+Lean checked five modules and seven dependency reports. SixCharge123 proves
+six-window coefficient 20 accounting. GuardedCharge123 keeps 24 only when the
+first actual count is <= 6; a graph symbol < 6 is a safe sufficient guard. Take MAX
+with the old suffix credit, never add overlapping deficit credits. These results
+retain their local sum premises and do not prove floor 26. The case 10 CNF and
+satisfiability interpretation are checked; its remaining 200 replay modules
+are saved but not launched, because the numerical tests showed no benefit.
+
+Inspect the 123/data/batch-observation.json snapshot and current process commands
+before touching 104, 115 or 122. Their prior driver PIDs are 21896, 43492, 55040.
+Sources and partial receipts are pinned. Never duplicate an active proof job,
+change its source/checker while running, or regard a partial batch as a theorem.
+
+Maintain 191–235 with the documented independent rebuild limitation; conditional
+234, the optimum and 196 remain unresolved. Keep the research goal active. Paper
+revision 116 is unchanged and the next full revision is 126. Preserve all three
+authors, local hypersetup, and unrelated tracked worktree changes. Fetch GitHub
+before the next round; review, commit and push only this round's own files.
+
+## Earlier continuation record
+
 # Continuation after milestone 122
 
 Work in E:/Snake-in-a-box. Use the requested research skill with neutral prose.

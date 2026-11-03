@@ -1,0 +1,52 @@
+{
+  "status": "PASS_GUARDED24_SAVED_CYCLES_AND_UNBOUNDED_FLOOR_OBSTRUCTION",
+  "summary_sha256": "9f612a67c073eb753fc880738c7e8cc5200a174700357feb2568625b74142ce4",
+  "result_sha256": "828b2de9ce666403493232f6e447435079a3fb01a2653b2a0aaed6626eebedaf",
+  "profiles": [
+    {
+      "profile": "completed",
+      "mean": "2915/6",
+      "range": "1730/3",
+      "bound": "1324108/5623",
+      "integer": 235,
+      "zero_range_bound": "1323416/5623",
+      "zero_range_integer": 235,
+      "cycle_edges": [
+        3360987,
+        1609403,
+        241712,
+        3577410,
+        1719625,
+        463685,
+        2941505,
+        934679,
+        1332711,
+        3490529,
+        1620155,
+        230938,
+        3364935,
+        1608593,
+        208356,
+        3365083,
+        1609336,
+        212865
+      ]
+    },
+    {
+      "profile": "conditional_floor18",
+      "mean": "496",
+      "range": "602",
+      "bound": "551765/2348",
+      "integer": 234,
+      "zero_range_bound": "137866/587",
+      "zero_range_integer": 234,
+      "cycle_edges": [
+        1130731,
+        2141975,
+        15763
+      ]
+    }
+  ],
+  "reason": "Both attaining cycles avoid allmatching0123042windows and allendpoint events. Increasing floorL leaves these cycles unchanged and can onlyincrease otherweights or remove otheredges; the verifiedL25potentialremainsvalid. The means cannot improve for anyL>=25. EvenR=0retains integer235/234.",
+  "scope": "Savedcycle arithmetic, MAXweightrelation, potentialdataandpincheck. Producerchecked everynewretainededgeusing reused121potentials. No independent graph enumeration or Lean proof."
+}

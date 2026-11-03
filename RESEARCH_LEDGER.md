@@ -1456,3 +1456,33 @@ that limitation explicit when deciding the next numerical experiment.
 Do not rerun the same bounded probes merely to obtain another negative status.
 Their exact inputs and encoding audit are saved in `data/next-endpoint-task.json`.
 Preserve the active 104 and 115 batches and the pending 117/119 certificates.
+
+
+## Milestone 123: six-count accounting and surviving obstructions
+
+The six-count work gives checked overlap accounting and a new unproved candidate:
+the six internal counts sum to at least 26 on the seven-direction pattern
+0123042. Two negative full-cube searches support it; no contradiction certificate
+or actual-snake transfer has been completed for this candidate.
+
+Neither the recovered exact-six-fours exclusion nor the tested sum credits
+improve the integer comparisons. Replacement cycles avoid 0123042 entirely.
+The next focused targets are 0120310 and 0123024, with recorded six-count sum 24.
+The maintained interval remains 191–235, with its existing independent-rebuild
+limitation; 234 remains conditional. No new mathematical definitions were added.
+
+Five Lean modules and seven printed dependency reports cover conditional
+CNF semantics and the two counting schemes. The recovered case 10 has
+55,823 retained deductions; its 202-module contradiction export remains
+pending after the two semantic modules. No new contradiction batch was started.
+
+The full-cube cap-25 resume is uncertified UNSAT with 19 valid cycle cuts.
+Its final reconstructed formula has 102,168 clauses, 5,198 variables, and
+126 count-literal occurrences across 106 vertices. A scan of 134 saved paths
+finds minimum 43 on this shape, which is only finite-bank evidence.
+
+The uniform coefficient-20 runs at L=25,26,27 and guarded coefficient-24
+run at L=25 retain the 235/234 integer comparisons. Larger values are ruled
+out as a useful change to this graph family by cycles with no matching window,
+even at zero potential range. Older 104/115/122 batches remain separate.
+Exact checks, sources and continuation targets are in milestone123.

@@ -1,0 +1,85 @@
+{
+  "status": "PASS_GUARDED24_AND_UNBOUNDED_FLOOR_OBSTRUCTION",
+  "requested_floors": [
+    25,
+    26
+  ],
+  "completed": [
+    {
+      "L": 25,
+      "results": "data/six-sum-guarded-graph-l25/results.json",
+      "results_sha256": "828b2de9ce666403493232f6e447435079a3fb01a2653b2a0aaed6626eebedaf",
+      "profiles": [
+        {
+          "profile": "completed",
+          "mean": "2915/6",
+          "range": "1730/3",
+          "comparison_bound": "1324108/5623",
+          "comparison_integer_bound": 235,
+          "cycle_guarded_matching": 0
+        },
+        {
+          "profile": "conditional_floor18",
+          "mean": "496",
+          "range": "602",
+          "comparison_bound": "551765/2348",
+          "comparison_integer_bound": 234,
+          "cycle_guarded_matching": 0
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    26
+  ],
+  "coefficient": 24,
+  "guard": "First of six clipped symbols is below6; its actual count is exact.",
+  "shared_budget": "MAX of old24bonus and guarded24six-deficit, using only lastfive excess counts.",
+  "source_files_sha256": {
+    "milestones/123-six-count-recovery/../120-nine-transition-window/data/full-rules.json": "dae2b8fc4c807501037041ffada61d80cda1acbf03a3b4536c84338d444a2f57",
+    "milestones/111-critical-count-intervals/data/probes/outer-sum21-sorted.json": "ef079635e3bd95560b0b6d227346f486febd37b700da07e5c8ceffe5a682f82d",
+    "milestones/111-critical-count-intervals/data/probes/centre3-sum18-sorted.json": "41fd75bf1c242c4bc4ae4577547f03274816444ef11f5cb642214daa5fb5b3ea",
+    "milestones/111-critical-count-intervals/data/probes/centre21-sum16.json": "49b52abaf47058d2c11295f65aeef3319e951e1e0f81f8420c192fb5e952059e",
+    "milestones/112-critical-sum-refinement/data/probes/012340-middle5-outer17.json": "4f90e856240fc0db5c0f0649c0a840e0b19b254626372c4d274bbc05e84a4724",
+    "milestones/112-critical-sum-refinement/data/probes/012034-total19.json": "58279638ad42b6a828d8df3da4f6434eb2fc481197ef08fd9058c5a25a32d7ed",
+    "milestones/112-critical-sum-refinement/data/probes/012031-upper5-outer14.json": "0471bff64811b5a990e3a39279ef96b80de0522ae5334485181d804bd27dc444",
+    "milestones/112-critical-sum-refinement/data/probes/012314-upper2-outer18.json": "4d35886143ab0e838fb6f4a09383d6bc990ef426d5956b862b67c292d5b22c06",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-middle545-pair8.json": "0ff87327b1855fc6264f75e589d3aea7904c55f406800b060a9974427489d44d",
+    "milestones/114-total-count-pressure/data/probes/012310-total18.json": "8239b1a79b7ba09e0864c5e44cd9fbf5245589526bbf700818a9bf2bd0c7d6b9",
+    "milestones/115-total-count-certificate/data/probes/012345-total21.json": "1d569db624ef6945c47b6377e1f0f430af625d817b8bff813c0450a6d519209d",
+    "milestones/117-cycle-sum-refinement/data/probes/012034-middle5-outer15.json": "c27773d28143ffb110eb36fda66c85714de5e7e207df9cd2b964bef65018220f",
+    "milestones/119-shared-five-count-pressure/data/full-probes/012304-completed-b-total22-full.json": "a7ee00aa7d9d6ca34a6b04c7914880ab977a4b106bd211e201123ebedc3723f1",
+    "milestones/119-shared-five-count-pressure/data/full-probes/012304-conditional-a-total22-full.json": "0111462ffdc5ed222d0ce32552cf38e3265911c26945332457e36aac988c8522",
+    "milestones/117-cycle-sum-refinement/data/middle5-rules.json": "da6f3cb15b868886b2a05bf9fa86a01b3e20611f360d840969a036023e9349e3",
+    "milestones/117-cycle-sum-refinement/data/middle5-outer16/results.json": "9c1dbfb8bfb5ad4f7ceed82bfb550e178febddaff699b540bd4933a7fd3dd9a0",
+    "milestones/119-shared-five-count-pressure/data/full-critical23/results.json": "83523df8acd4b8506e0407608ded961dbca6be02e8cf6195e28d72f0cda724f3",
+    "milestones/120-nine-transition-window/data/outer3/results.json": "c60809a238d091b1a29030237860a984d28074b181fd857b1cf96c706bff2034",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/73-countfree-share-catalogue/data/proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18.json": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+    "milestones/111-critical-count-intervals/data/middle325-profiles/removed-indices.json": "ffaae82933775c8d76c5410c216910e3e3cab8873ea5a996b7336e511aa6ad84",
+    "milestones/113-all-four-sum-pressure/data/pair24/removed-indices.json": "69757d3b0201163cf18c66dc61ba7b2911793ccef0e99d190f62cf4ae11d741b",
+    "milestones/117-cycle-sum-refinement/data/middle5-outer16/removed-indices.json": "47a30b951071923dbb1cf8c7acb3bf7bf9ebf26836dc04dbd1d88af99687f7ab",
+    "milestones/119-shared-five-count-pressure/data/full-critical23/removed-indices.json": "47a30b951071923dbb1cf8c7acb3bf7bf9ebf26836dc04dbd1d88af99687f7ab",
+    "milestones/120-nine-transition-window/data/probes/012031-outer3-radius3.json": "2869cf27002a9e1b97418fbf9ab4df7e26b694bf4000caba47b3ff978ba67e34",
+    "milestones/120-nine-transition-window/data/outer3/removed-indices.json": "2fe9b0c6ce59158e69ef84a58d1ccd854890c2c1e6b4d7259212e4949ddcc082",
+    "milestones/121-replacement-window-pressure/data/pair-guards.json": "cef76dfe2988fc2b55f10c68a6c0fa93cc8aa8687414d1edacc6e143f9d5bbef",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair1-free.json": "bb78fd30e6ff99a95dffb140c8c270f808b98adcd1539a39688c68c730d66a41",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair25.json": "0aafbfdf74a87c8ddde7490d0ab119b0e8909e54443ca7bf21d77ecc92129535",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair34.json": "c5a816a228be74c80acf8c6ddde4baf58be071dddc2c4c1d12b8b9908f014200",
+    "milestones/121-replacement-window-pressure/data/pair-graph/results.json": "7492ff3a45178740d3253c679bcdd2f5e7907be907f055f455e739cde0b327bf",
+    "milestones/121-replacement-window-pressure/data/pair-graph/removed-indices.json": "2313ad546b73b8836c42494ebbbc9a47540dd96ef2432cb85e781cae6b2668c5",
+    "milestones/32-seven-count-four-screen/data/cases.json": "f28e3c8f6d29d163fa126d4dcad23d53cd3dcc85e40251300036c3808f12b4cb",
+    "milestones/123-six-count-recovery/data/probes/0123042-total24-full.json": "6d3c6213f7d2381d53d03ffc67ffe722eeafb7e02675a23296fa4ab7b6bb436f",
+    "milestones/123-six-count-recovery/data/probes/0123042-total25-resume.json": "2f427aa8bbc0b641de47ffd62d544edc46a3069a44b136a64cb9b11dfb88c0ea",
+    "milestones/123-six-count-recovery/data/six-sum-graph-l25/results.json": "44ec5298a829acfd805ab3852eee4810cf574a9e3223ab83d9f0393dd47a67a6",
+    "milestones/121-replacement-window-pressure/data/pair-graph/completed-potential.i64.gz": "1061a706bf44ff64e8197519b2d9051d0620353d40411a0fa3afaeca63a00f9b",
+    "milestones/121-replacement-window-pressure/data/pair-graph/conditional_floor18-potential.i64.gz": "229728100c8ce314c9bc0641244f10069e53b5413056508357f8cb918d7cd129"
+  },
+  "script_sha256": "2ff7d3e0abcf931201ac2c696cffe18eefa4921e965030279a86f9026ea1171d",
+  "scope": "Conditional graph experiment. Floors25and26have native negative evidence only; concrete refutations, guarded last-five accounting and actual global assembly require separate proof. No global bound.",
+  "skip_reason": "Both attaining cycles avoid all matching six-count windows and endpoint events. Monotonicity and these fixed cycles establish unchanged means for every larger floor; zero-range comparisons already prohibit integer improvement.",
+  "seconds": 76.2970000000023
+}

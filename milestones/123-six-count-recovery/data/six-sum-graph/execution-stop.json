@@ -1,0 +1,19 @@
+{
+  "status": "STOPPED_AFTER_VERIFIED_ZERO_MATCH_OBSTRUCTION",
+  "observed_at": "2026-11-03T04:50:26.988431+00:00",
+  "completed_floors": [
+    25,
+    26,
+    27
+  ],
+  "skipped_floors": [
+    28
+  ],
+  "driver_exit_code": 1,
+  "stop_reason": "Parent requested avoiding redundant larger floors afterL25cycles in bothprofiles had no matching six-count or endpoint windows. L27was already in flight and finished. A reserved skippedL28directory triggered the existing overwrite guard beforeL28started. Active source and prior output bytes were not edited.",
+  "original_summary_sha256": "376f64325fd73b056f2ec9cdb04605380601c421034fcc642363c71b80703a6a",
+  "skipped_record": "data/six-sum-graph-l28/SKIPPED.json",
+  "skipped_record_sha256": "2608cb35ab5231271d89cfeee78b24141dd79b1827bf84017eb86ffbc1081967",
+  "optional_endpoint": "Not run: L25attaining cycles have zero eligible endpoint windows.",
+  "scope": "The six requested profile checks atL25,L26,L27 completed. The original intermediate summary retains RUNNING as historical bytes; this terminal stop record supersedes that process status. No global bound."
+}
