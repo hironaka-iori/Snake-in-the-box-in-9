@@ -1,0 +1,183 @@
+{
+  "status": "PASS_COMPLETE_NATIVE_RUP_REPLAY",
+  "started_utc": "2026-11-03T13:16:08.238014+00:00",
+  "script_sha256": "96f575cd9262ec0684650dc2e4eeb8971bc2896eaca760d0d45dc164fd44c353",
+  "solver_timeout_seconds": 60,
+  "replay_hint_limit": 2000000,
+  "solver_runs": 1,
+  "lean_export_started": false,
+  "lean_started": false,
+  "source_files_sha256": {
+    "milestones/132-odd-pair-endpoint/work/base.cnf": "e3fc20584cbd7d112b1e638e99374deb5ce0be8b9bafb185c7fc82bb1bb19caf",
+    "milestones/132-odd-pair-endpoint/data/preparation.json": "9229ece677271d286e66213dff8729a29f5bd05d752ff5879ce531a1833eb69f",
+    "milestones/132-odd-pair-endpoint/data/encoding.json": "47a267631a66d8bb37e56cff8d4b3c175506c91bccaeaa4a2a56ad6643b7748d",
+    "milestones/132-odd-pair-endpoint/work/probe-initial/worker-status.json": "f8a395d988310cddf7a284637b5c4cdfadb8020783916fbc01e4a0e8cd589f6d",
+    "milestones/132-odd-pair-endpoint/work/probe-initial/final.cnf": "e3fc20584cbd7d112b1e638e99374deb5ce0be8b9bafb185c7fc82bb1bb19caf",
+    "milestones/109-relaxed-graph-test/upstream/milestones/10-window-aggregate/scripts/gen_lean_core.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "milestones/132-odd-pair-endpoint/scripts/certify.py": "96f575cd9262ec0684650dc2e4eeb8971bc2896eaca760d0d45dc164fd44c353"
+  },
+  "solver_path": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+  "solver_sha256": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+  "initial_resources": {
+    "free_bytes": 3618537472
+  },
+  "variables": 2426,
+  "original_clauses": 96552,
+  "input_sha256": "e3fc20584cbd7d112b1e638e99374deb5ce0be8b9bafb185c7fc82bb1bb19caf",
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+    "-q",
+    "--lrat",
+    "--no-binary",
+    "--seed=1",
+    "E:\\Snake-in-a-box\\milestones\\132-odd-pair-endpoint\\work\\certificate\\input.cnf",
+    "E:\\Snake-in-a-box\\milestones\\132-odd-pair-endpoint\\work\\certificate\\raw.lrat"
+  ],
+  "solver_pid": 3444,
+  "exit_code": 20,
+  "solver_seconds": 4.280999999999949,
+  "stdout_sha256": "e78eb858cfc756097d89bc504bb48af34e9c4e560777d5f241e7796da2d5b18c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "raw_sha256": "39c8c06e7ee858cf7d9712683e7de37ed8088a4865b759a26945d002c7f47f12",
+  "raw_bytes": 5043555,
+  "trim_sha256": "a8f6ec40b4b900c23c75c2e196b35baa0274cba9497b6ff7d4bd4089d2c6b129",
+  "core_sha256": "4bdfc5526378c0e057197039c41a07113da324ffcd13e2c1f48897edd2f7e4b0",
+  "core_ids_sha256": "33392730d82af06a61827c5428974df149779ff592425b61abe89acdbbf4f728",
+  "core_clauses": 683,
+  "lemmas": 13299,
+  "hints": 554859,
+  "core_premises": {
+    "parity_clauses": [
+      {
+        "parity": "even",
+        "original_clause_id": 96537,
+        "in_core": false,
+        "literal_count": 256
+      },
+      {
+        "parity": "odd",
+        "original_clause_id": 96538,
+        "in_core": false,
+        "literal_count": 256
+      }
+    ],
+    "negative_common_endpoint_units": [
+      {
+        "vertex": 0,
+        "flag": 513,
+        "original_clause_id": 96539,
+        "in_core": true
+      },
+      {
+        "vertex": 5,
+        "flag": 518,
+        "original_clause_id": 96540,
+        "in_core": false
+      },
+      {
+        "vertex": 10,
+        "flag": 523,
+        "original_clause_id": 96541,
+        "in_core": true
+      },
+      {
+        "vertex": 15,
+        "flag": 528,
+        "original_clause_id": 96542,
+        "in_core": false
+      },
+      {
+        "vertex": 18,
+        "flag": 531,
+        "original_clause_id": 96543,
+        "in_core": true
+      },
+      {
+        "vertex": 23,
+        "flag": 536,
+        "original_clause_id": 96544,
+        "in_core": false
+      },
+      {
+        "vertex": 34,
+        "flag": 547,
+        "original_clause_id": 96545,
+        "in_core": true
+      },
+      {
+        "vertex": 39,
+        "flag": 552,
+        "original_clause_id": 96546,
+        "in_core": false
+      },
+      {
+        "vertex": 66,
+        "flag": 579,
+        "original_clause_id": 96547,
+        "in_core": true
+      },
+      {
+        "vertex": 71,
+        "flag": 584,
+        "original_clause_id": 96548,
+        "in_core": false
+      },
+      {
+        "vertex": 130,
+        "flag": 643,
+        "original_clause_id": 96549,
+        "in_core": true
+      },
+      {
+        "vertex": 135,
+        "flag": 648,
+        "original_clause_id": 96550,
+        "in_core": false
+      },
+      {
+        "vertex": 258,
+        "flag": 771,
+        "original_clause_id": 96551,
+        "in_core": true
+      },
+      {
+        "vertex": 263,
+        "flag": 776,
+        "original_clause_id": 96552,
+        "in_core": false
+      }
+    ],
+    "pair_counter_clauses_in_core": 435,
+    "base_clauses_in_core": 241,
+    "interpretation": "These are dependencies of this particular trimmed contradiction; absence means the certificate does not use that input clause. This does not certify minimality or an actual-snake theorem."
+  },
+  "replay_started": true,
+  "replay": {
+    "status": "PASS_COMPLETE_NATIVE_RUP_REPLAY",
+    "lemmas": 13299,
+    "hints": 554859,
+    "derived_literal_occurrences": 123485,
+    "max_step_hints": 147,
+    "original_ids_preserved": true,
+    "original_clause_literal_multiplicity_preserved": true,
+    "every_trimmed_step_checked": true,
+    "final_empty_clause_checked": true,
+    "core_inputs_used": 683,
+    "seconds": 0.39099999999962165
+  },
+  "finished_utc": "2026-11-03T13:16:17.050429+00:00",
+  "preserved_files_sha256": {
+    "input.cnf": "e3fc20584cbd7d112b1e638e99374deb5ce0be8b9bafb185c7fc82bb1bb19caf",
+    "certify.exact.py": "96f575cd9262ec0684650dc2e4eeb8971bc2896eaca760d0d45dc164fd44c353",
+    "gen_lean_core.exact.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "stdout.txt": "e78eb858cfc756097d89bc504bb48af34e9c4e560777d5f241e7796da2d5b18c",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw.lrat": "39c8c06e7ee858cf7d9712683e7de37ed8088a4865b759a26945d002c7f47f12",
+    "trimmed.lrat": "a8f6ec40b4b900c23c75c2e196b35baa0274cba9497b6ff7d4bd4089d2c6b129",
+    "core-ids.json": "33392730d82af06a61827c5428974df149779ff592425b61abe89acdbbf4f728",
+    "core.cnf": "4bdfc5526378c0e057197039c41a07113da324ffcd13e2c1f48897edd2f7e4b0",
+    "core-premises.json": "c824f8695a8411df0f8560e134229dfd67d4151026d230449985bd14c82e9e2b",
+    "replay.json": "ef046860d743530a58212193221bc1c27e18421d46a3d93884e7395e85a9bf90"
+  },
+  "scope": "One fixed native solver run on the exact prepared input. A complete independent Python RUP replay certifies the finite CNF contradiction only. Lean replay and actual-snake clause interpretation remain pending; no new global bound."
+}

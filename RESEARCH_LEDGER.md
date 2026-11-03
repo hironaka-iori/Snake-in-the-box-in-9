@@ -1,3 +1,37 @@
+# Research update: milestone 132
+
+A new local theorem has passed the complete Lean check. In any snake in Q9,
+a fitting canonical 012032 window with second-plus-fourth internal count at
+most nine forces one endpoint to be at Hamming distance two from both counted
+centres. There is no length-parity assumption. Consequently the pair sum is
+at least ten whenever neither endpoint has those two distances.
+
+The proof includes all 51 certificate modules, the interpretation of all 683
+selected clauses for an actual snake, and the final coordinate transfer.
+It preserves the 42 corner occurrences, including five vertices counted twice.
+The final statements use only the standard Lean axioms recorded in their logs.
+The two failed semantic attempts and the successful checks are saved.
+
+This is an unconditional local result. It supplies no new global upper bound.
+The maintained interval remains 191–235, with the documented incomplete
+independent rebuild of the contributor upper-bound proof. The optimum and
+the proposed value 196 remain unresolved.
+
+A separate Lean-checked arithmetic result limits the current uniform-credit
+approach. The two surviving cycle constraints keep its comparison above 235
+when the endpoint-event allowance is at least two. This limitation concerns
+the stated fixed model and formula. It does not rule out sharper geometric
+restrictions or a revised graph that excludes other surviving cycles.
+
+Next: use the endpoint theorem to study how low-pair windows can occur along
+one actual snake. The earlier bound of thirteen windows requires proximity
+to BOTH endpoints and cannot be reused for this one-endpoint conclusion.
+Retain the seven-edge competing cycle when testing any proposed improvement.
+No new mathematical definition is introduced. Paper revision 126 is unchanged;
+the next scheduled full paper revision is136.
+
+## Earlier record
+
 # Research update: milestone 131
 
 The full graph comparison has completed. Adding the proved odd-length pair

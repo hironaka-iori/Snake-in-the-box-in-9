@@ -1,0 +1,26 @@
+{
+  "status": "GENERATED_LEAN_NOT_RUN",
+  "base_clauses": 676,
+  "endpoint_units": 7,
+  "counter_occurrences": 42,
+  "counter_distinct_literals": 37,
+  "used_counter_indices": [
+    1
+  ],
+  "chunks": 11,
+  "parity_premises": false,
+  "source_files_sha256": {
+    "milestones/132-odd-pair-endpoint/scripts/prepare_semantics.py": "e6de4b78bfd83626349958025cf14b3740f489b6f9db99d875005096e8126a77",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/132-odd-pair-endpoint/data/selected-core-semantics.json": "6b37e884a592e2519c4f32f8c673cb9d4db59c6d44561e5cf1f562c0a7113d63",
+    "milestones/132-odd-pair-endpoint/lean/CoreSemantics132.lean": "2b7bfc33fb2b811f0a5d02116517c38e3d9f58430a54b19ba96b6caef9d8510b"
+  },
+  "check_order": [
+    "ActualCounters132",
+    "Recovered132G.LocalWindowCnf.Endpoint132",
+    "CoreSemantics132",
+    "Recovered132G.LocalWindowUnsat.Endpoint132",
+    "ActualEndpoint132"
+  ],
+  "limitations": "Semantic source and final geometric assembly require successful Lean checks. No native solver or Lean process was started by this generator."
+}

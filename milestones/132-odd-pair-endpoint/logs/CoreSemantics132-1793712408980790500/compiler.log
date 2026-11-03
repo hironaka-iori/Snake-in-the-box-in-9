@@ -1,0 +1,28 @@
+E:\Snake-in-a-box\milestones\132-odd-pair-endpoint\lean\CoreSemantics132.lean:130:2: error: unsolved goals
+case inr.intro.intro
+m : ℕ
+p : Snake m
+P : CPerm
+r : ℕ
+hr : r + 6 ≤ m
+hP : ∀ j < 6, P.fwd (dir p (r + j)) = [0, 1, 2, 0, 3, 2].getD j 0
+hpair : coreAlpha p (r + 2) + coreAlpha p (r + 4) ≤ 9
+hnone : ∀ v ∈ [0, 10, 18, 34, 66, 130, 258], frameE p P (vx p r) v = false
+S : ℕ → Bool := sel p (amap P (vx p r))
+E : ℕ → Bool := frameE p P (vx p r)
+ax : Axioms S E Endpoint132.window (centresOf Endpoint132.window Endpoint132.bounds)
+hg : JointTags.Good S E meaning (counters.getD 1 dfltCtr)
+hv : JointTags.Valid S E meaning counters
+a : ℕ
+ha : a ∈ Snake9.CoreSemantics132.units
+hcl : [a] ∈ Endpoint132.baseRaw ++ Endpoint132.endpointRaw
+hu : [a] ∈ List.map (fun a => [a]) Snake9.CoreSemantics132.units
+hn : negE meaning a = true
+hm : vl meaning a ∈ [0, 10, 18, 34, 66, 130, 258]
+hf : E (vl meaning a) = false
+⊢ (!false) = true
+'Snake9.CoreSemantics132.pair_checked' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.CoreSemantics132.tags_checked' depends on axioms: [propext]
+'Snake9.CoreSemantics132.units_checked' does not depend on any axioms
+'Snake9.CoreSemantics132.actual_satisfies_core' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.CoreSemantics132.actual_frame_endpoint' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
