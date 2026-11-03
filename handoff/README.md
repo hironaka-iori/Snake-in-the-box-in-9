@@ -1,59 +1,52 @@
 # Research handover
 
 Read [current status](CURRENT_STATUS.md), [next steps](NEXT_AGENT_PROMPT.md),
-and [milestone 119](../milestones/119-shared-five-count-pressure/README.md).
+and [milestone 120](../milestones/120-nine-transition-window/README.md).
 
-A complete 148-edge snake contains a 012304 window with singleton counts
-(3,6,3,4,6). Its total 22 disproves the proposed lower bound 23, even with
-the first, third and fourth counts at most 4 and the other two at least 6.
-Lean checks the complete induced path, window directions, exact counts and
-counterexample. Nine axiom reports pass in 36.656 seconds. No mathematical
-terminology was introduced, and no new long-snake lower bound is claimed.
+For every six-transition window with canonical directions 012031, at least
+one of the first, second, fourth and fifth internal singleton-square counts
+is at least 4. The middle count is unrestricted. Lean checks the local
+contradiction, its transfer to every actual snake, both graph orientations,
+and three new reference-catalogue consequences. There are 26 checked modules
+and 11 printed theorem-dependency audits. No new mathematical definition is used.
 
-Four local probes give four independently checked local forests. Six full-cube
-probes give three complete snakes, two native contradictions and one UNKNOWN.
-The complete snakes have 148,148 and 144 edges. The last realizes the exact
-critical tuple (4,6,2,4,6). Boundary relaxation is therefore insufficient to
-explain every surviving low-count state.
+The original nine-transition target, edge 18806 with word 012031043, is
+therefore excluded over its entire recorded count intervals. Weakening that
+target exposed the shorter restriction. The selected proof has 5,956 deductions
+and 344,241 hints; a separate encoder reconstruction and native replay agree.
+Three more reference entries are discharged, taking the checked total to 15
+and the remaining total from 1,366 to 1,363.
 
-The two full-cube contradictions support total at least 23 under the respective
-bounds [2,6..21,2,3,6..21] and [2,6..21,4,2,6..21]. Plain and tagged encoders
-produce identical formulas. Separate native replay checks 19264 and 43795
-deductions with 2240349 and 5045692 hints. Both concrete Lean contradictions,
-sum semantics and actual-snake transfers remain pending. Their exact proofs
-are preserved locally and in four verified transport archives.
+The graph experiment removes 63 additional transitions, including two edges
+of the old conditional cycle. A replacement five-cycle preserves its mean
+496 and potential range 602. The other profile retains mean 2915/6 and range
+1730/3. Their integer comparisons remain 234 and 235, respectively. These
+experiments inherit unresolved count-sum hypotheses and graph assembly work;
+the new local theorem does not make either experiment unconditional.
 
-The oriented 13-rule experiment reproduces the 117 removal set and both full
-weight vectors before applying the new rules. They add credit on 449 and 446
-suffix keys and remove no edges. Replacement cycles preserve both means and
-ranges: 2915/6 with 1730/3, and 496 with 602. Integer comparisons remain 235 and 234.
-All-edge potential inequalities were checked by the producer; the independent
-review checks saved cycles, orientations, potential bytes and arithmetic.
+The radius-three model admits a checked disconnected forest with counts
+(4,4,13,4,4). The corresponding full-Q9 search remains UNKNOWN after 20 seconds
+and 31 retained cycle cuts. Thus sharpness for actual snakes is unresolved.
+All 131 saved bank paths pass 2,402,016 pair checks. Their 868 occurrences of
+012031 have largest outer count at least 7. No replacement-cycle count tuple
+occurs in that bank. These finite observations give no universal strengthening.
 
-The replacement cycles have no common five-centre direction shape. The next
-single test is the full nine-transition word 012031043 from edge 18806, with
-all six recorded counts constrained simultaneously and no extra sum cap.
+At the process-verified snapshot, batch 104 has checked 170/791 completed-profile
+contexts and 167/791 conditional-profile contexts; batch 115 has checked
+277/1397 modules. Both drivers remain active and unchanged. Their final proofs
+are pending. The maintained interval remains 191 through 235 edges, supported
+by the contributor proof and archived audit for 235; its complete independent
+rebuild remains pending. Conditional 234, the optimum and the value 196 remain
+unresolved. Paper revision 116 and both source copies are unchanged; the next
+full paper revision is 126.
 
-At the process-verified snapshot,104 reports 162/791 contexts in each profile;
-115 reports 232/1397 checked modules. Both drivers remain active and unchanged.
-Their final assemblies remain pending. The maintained interval remains 191
-through 235 edges, with the contributor proof and archived audit for 235 and its
-complete independent rebuild pending. Conditional 234 and the optimum remain
-unresolved. There are 1366 pending reference entries. Paper revision 116 is
-unchanged; the next full revision is 126.
+Test full-Q9 realization of edge 2511 from the replacement five-cycle. Its
+nine directions are [0,1,2,0,3,1,0,4,1], and its eight internal count bounds are
+[[0,21],[0,21],[4,4],[4,4],[3,3],[5,5],[4,4],[4,4]]. The six recorded counts
+are at centres 3 through 8. No sum cap, history condition or share condition
+is added. The prepared input is `data/next-edge-case.json`; it is untested.
 
-Test the full-Q 9 realization of edge 18806, whose nine directions are
-[0,1,2,0,3,1,0,4,3]. Its eight internal-centre bounds are
-[[0,21],[0,21],[6,21],[3,3],[3,3],[6,21],[3,3],[3,3]].
-The first two centres are unrestricted. The six recorded counts lie at
-centres 3 through 8. Retain the entire interval [6,21] for each symbol 6.
-Do not impose total 24: that would test only exact 6 values and could not
-exclude the full bucket. The prepared case is data/next-edge-case.json.
-It has not been searched in 119.
-
-A positive full-cube result must pass connectedness and all-pairs induced-path
-checks. An UNKNOWN result remains unresolved. A negative result needs a saved
-certificate and independent encoding/proof checks before any exclusion is used.
-Evaluate any viable restriction on both profiles. Do not duplicate or change
-the active 104 and 115 proof batches. The new 119 native contradictions and the 117
-count contradiction remain pending Lean work.
+A positive result needs an independent complete-path check. A negative result
+needs a saved refutation, an encoding check and Lean replay. Test any viable
+restriction on both profiles before claiming numerical progress. Preserve the
+live 104 and 115 jobs and the pending 117 and 119 negative certificates.

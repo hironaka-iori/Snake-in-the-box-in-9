@@ -1,0 +1,113 @@
+{
+  "status": "PASS_WINDOW_PROVENANCE_CUTS_AND_POSITIVE_GEOMETRY",
+  "probes": [
+    {
+      "probe": "data/probes/012031-first4.json",
+      "sha256": "19262f22b2c148b901ba7ff96ac76fc02299b09eb50f54b827dce853c587ad1d",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 3,
+      "cuts": 0,
+      "seconds": 0.6720000000004802
+    },
+    {
+      "probe": "data/probes/012031-outer3-radius3.json",
+      "sha256": "2869cf27002a9e1b97418fbf9ab4df7e26b694bf4000caba47b3ff978ba67e34",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 3,
+      "cuts": 0,
+      "seconds": 0.125
+    },
+    {
+      "probe": "data/probes/012031-outer3-radius9.json",
+      "sha256": "05889f6929080b5b49eafa23308bb6bc97256bfec5298c032c374e3dc1f183c8",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 9,
+      "cuts": 0,
+      "seconds": 0.25
+    },
+    {
+      "probe": "data/probes/012031-outer4-full.json",
+      "sha256": "ef67d3b0d498ecefbf518ebe0ace9a6dd8615357824963e7dde746bbe2e30c22",
+      "status": "UNKNOWN",
+      "radius": 9,
+      "cuts": 31,
+      "seconds": 20.031999999999243
+    },
+    {
+      "probe": "data/probes/012031-outer4.json",
+      "sha256": "67f4b82e44446a66fe3a0d742157f5a7b73f3604179e562165e75aa747a27c48",
+      "status": "SAT_LOCAL_CANDIDATE",
+      "radius": 3,
+      "cuts": 0,
+      "seconds": 0.031000000000858563,
+      "counts": [
+        4,
+        4,
+        13,
+        4,
+        4
+      ],
+      "selected": 104,
+      "components": [
+        36,
+        19,
+        25,
+        10,
+        7,
+        7
+      ],
+      "interior_endpoints": 2,
+      "complete_snake": false
+    },
+    {
+      "probe": "data/probes/012031-second4.json",
+      "sha256": "07f8a3507361211a3882f5b452dc67ec387171ae68bcaafde5b9d0977424ef17",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 3,
+      "cuts": 0,
+      "seconds": 0.9220000000004802
+    },
+    {
+      "probe": "data/probes/edge18806-full.json",
+      "sha256": "7745a254314f83a95a80e74f2e9ee62095bdc475e60a7992360d8a90c5b75db9",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 9,
+      "cuts": 0,
+      "seconds": 0.06300000000010186
+    },
+    {
+      "probe": "data/probes/edge18806-radius3.json",
+      "sha256": "5d5e72853656be44ab042253d183e5b780f0108da28d572abeb6676930f24fe8",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 3,
+      "cuts": 0,
+      "seconds": 0.01600000000144064
+    },
+    {
+      "probe": "data/probes/edge18806-radius4.json",
+      "sha256": "12064489d4bd96b3c9ac05f6758467e166c472b49ecc0db71b959003024ccf64",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 4,
+      "cuts": 0,
+      "seconds": 0.031000000000858563
+    },
+    {
+      "probe": "data/probes/four-caps3-radius3.json",
+      "sha256": "ef921928d8fc47aeca575874d44fd6e1d861a7312bd0128859a6520fe9a03b8d",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 3,
+      "cuts": 0,
+      "seconds": 0.0319999999992433
+    },
+    {
+      "probe": "data/probes/four-caps3-radius9.json",
+      "sha256": "254e1bb8797a4b09ce181e866206802a42b5ff7b7f2f3285917bfa4c854c9de9",
+      "status": "UNSAT_UNCERTIFIED",
+      "radius": 9,
+      "cuts": 0,
+      "seconds": 0.030999999999039574
+    }
+  ],
+  "script_sha256": "5e5d748e6c1955992821ad8dd295d9eabb2a94898eee3e0d655ee9fd26facbc7",
+  "scope": "Positive geometry and all retained cuts independently checked. Native UNSAT statuses are not certified by this probe audit; the selected outer3 proof has separate native and Lean evidence. UNKNOWN remains unresolved."
+}

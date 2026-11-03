@@ -1,3 +1,45 @@
+# Continuation after milestone 120
+
+Work in E:/Snake-in-a-box. Apply the requested research skill with neutral,
+concise prose and existing notation. Define only essential repeated quantities.
+Read the 120 mathematical note and final proof review. Its local theorem and
+three new catalogue instances are Lean checked: 1,363 reference entries remain.
+Historical pending labels in earlier reports are superseded by the final receipts.
+
+Test full-Q9 realization of edge 2511 from the replacement five-cycle. Its
+nine directions are [0,1,2,0,3,1,0,4,1], and its eight internal count bounds are
+[[0,21],[0,21],[4,4],[4,4],[3,3],[5,5],[4,4],[4,4]]. The six recorded counts
+are at centres 3 through 8. No sum cap, history condition or share condition
+is added. The prepared input is `data/next-edge-case.json`; it is untested.
+
+A positive result needs an independent complete-path check. A negative result
+needs a saved refutation, an encoding check and Lean replay. Test any viable
+restriction on both profiles before claiming numerical progress. Preserve the
+live 104 and 115 jobs and the pending 117 and 119 negative certificates.
+
+Copy the prepared next-edge input into the next milestone and retain its source
+hash. The 120 probe program supports all eight count intervals without a sum
+counter. A full-Q9 positive answer is a candidate until independently checked;
+a negative answer needs its complete proof. The four-outer-at-most-four full-Q9
+search remains UNKNOWN with 31 saved cycle cuts. The bank scan is finite evidence
+only. Neither replacement cycle is established as an actual snake.
+
+The frozen 120 observation records 170 completed and 167 conditional contexts
+out of 791 in batch 104, and 277/1397 modules in batch 115. Verify live processes
+before acting; these counts may advance. Do not restart or change pinned jobs.
+The 117 and 119 negative certificates retain their pending Lean obligations.
+
+Both current graph experiments retain unproved sum rules and global assembly
+work despite the new unconditional local theorem. The maintained interval is
+191 through 235 edges, with the contributor proof and archived audit for 235;
+its complete independent rebuild remains pending. Conditional 234 is unresolved.
+Paper and editor remain at revision 116; revise at 126. Preserve all three authors,
+hypersetup, the unrelated .gitignore and historical critical-family.json edits,
+and exact audited bytes. Fetch before each round and stage only a reviewed
+manifest. Keep the full research goal active; the optimum and 196 are unresolved.
+
+## Earlier continuation record
+
 # Continuation after milestone 119
 
 Work in E:/Snake-in-a-box. Apply the requested research skill using neutral,

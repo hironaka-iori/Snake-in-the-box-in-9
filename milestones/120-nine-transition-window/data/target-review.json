@@ -1,0 +1,347 @@
+{
+  "status": "PASS_ALIGNMENT_AND_BOUNDED_EXISTING_GUARD_REVIEW",
+  "full_key": {
+    "edge": 18806,
+    "di": 2,
+    "q": 0,
+    "code": 42098,
+    "counts6": [
+      6,
+      3,
+      3,
+      6,
+      3,
+      3
+    ]
+  },
+  "word": [
+    0,
+    1,
+    2,
+    0,
+    3,
+    1,
+    0,
+    4,
+    3
+  ],
+  "vertices": [
+    0,
+    1,
+    3,
+    7,
+    6,
+    14,
+    12,
+    13,
+    29,
+    21
+  ],
+  "bounds": [
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      6,
+      21
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      6,
+      21
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      3
+    ]
+  ],
+  "count_alignment": "The six recorded symbols are coreAlpha(r+3) through coreAlpha(r+8); first two internal counts are unrestricted.",
+  "native_status": "UNSAT_UNCERTIFIED",
+  "native_seconds": 0.06300000000010186,
+  "cycle_cuts": 0,
+  "sum_counter_added": false,
+  "six_transition_subwindows": [
+    {
+      "offset": 0,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1
+      ],
+      "canonical_shape": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1
+      ],
+      "reverse": false,
+      "canonical_bounds": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "outer_sum_lower": 6,
+      "middle_upper5_guaranteed": false,
+      "middle_upper5_possible": false
+    },
+    {
+      "offset": 1,
+      "directions": [
+        1,
+        2,
+        0,
+        3,
+        1,
+        0
+      ],
+      "canonical_shape": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1
+      ],
+      "reverse": true,
+      "canonical_bounds": [
+        [
+          6,
+          21
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          0,
+          21
+        ]
+      ],
+      "outer_sum_lower": 15,
+      "middle_upper5_guaranteed": true,
+      "middle_upper5_possible": true
+    },
+    {
+      "offset": 2,
+      "directions": [
+        2,
+        0,
+        3,
+        1,
+        0,
+        4
+      ],
+      "canonical_shape": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        4
+      ],
+      "reverse": false,
+      "canonical_bounds": [
+        [
+          6,
+          21
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "outer_sum_lower": 18,
+      "middle_upper5_guaranteed": true,
+      "middle_upper5_possible": true
+    },
+    {
+      "offset": 3,
+      "directions": [
+        0,
+        3,
+        1,
+        0,
+        4,
+        3
+      ],
+      "canonical_shape": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1
+      ],
+      "reverse": false,
+      "canonical_bounds": [
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "outer_sum_lower": 12,
+      "middle_upper5_guaranteed": false,
+      "middle_upper5_possible": false
+    }
+  ],
+  "old_rule": {
+    "name": "012031-upper5-outer15",
+    "directions": [
+      0,
+      1,
+      2,
+      0,
+      3,
+      1
+    ],
+    "positions": [
+      0,
+      1,
+      3,
+      4
+    ],
+    "lower": 15,
+    "probe": "milestones/112-critical-sum-refinement/data/probes/012031-upper5-outer14.json",
+    "bounds": [
+      [
+        0,
+        21
+      ],
+      [
+        0,
+        21
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        0,
+        21
+      ],
+      [
+        0,
+        21
+      ]
+    ]
+  },
+  "old_rule_probe_status": "UNSAT_UNCERTIFIED",
+  "old_rule_probe_seconds": 10.828000000001339,
+  "old_rule_status_scope": "112 mathematical note explicitly leaves this inequality pending. The checked ActualSum112 actual_outer_sum is for012314 and middle<=2, not this rule.",
+  "reference_catalogue": {
+    "keys": 1378,
+    "shape_matching_placements": 1101,
+    "direct_interval_containment_matches": [],
+    "source_pins": {
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk00.lean": "b0cb139224819f2bbe52f11e196e01b66821d4541f0866e2129f515ee5368063",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk01.lean": "66dfd5c10e8b5f5e5dbee36c0206cceba50a16a73f40e72d12155b6ad3a9ddbe",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk02.lean": "eaf83416715cdc1d7d7dc2f0ef0cd35b37b473e4b91baaf45ae5418228bdf217",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk03.lean": "d7031bc8ddc03d7de8c565426a1b8e1116026f20266d1ed49993137099060e9a",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk04.lean": "4ee15230902653556da53b1c9d5afad2fa6d203e6d942baa293e275ccb94ee3f",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk05.lean": "e1def9b6155bebc21d10dbbde66b13b8e6a57ea69809af84331db37b2e557b21",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk06.lean": "27206b4cc27952648b9edad7d52ea67fbb9a537662c67ac7d25be8d30f515e03",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk07.lean": "6b9a47152e9419a9858fdadb7f13a4f7956d93eb93c2905ce478ebc1b3d048e2",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk08.lean": "b58dd2dd5c2c8865750d25a0892458cc2833c8930189845cad8cf3ff5ada894e",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk09.lean": "bef5dce3121dfd79f513c8dbd0bd75394bba465c86c93a0e413904c919f49a7d",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk10.lean": "64fb245f8eaa9f38a8d59e7268b1668aed9b54f0f964c52e845d4d027450faf0",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk11.lean": "b0addb179648f57ad3327d9135412b8c2196cbc0481cd2a5daa094c2835956fe",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk12.lean": "65c0c8b04133a46cd2af14168299f54a23331d6eae1fb0afb7dbeff74c830bb7",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk13.lean": "50417781d10913fc845020504b07c75b7f92b8dceab70de6045988afe3fe8743",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk14.lean": "e6f01e7bbd002e117a8b6404242f7fb1f57aae239e1b3e91cf0354a053f465f1",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk15.lean": "09cf899a21f30a9a9d7d0b25d89c14873ed5bcf53eddeb3d444829a66730c91b",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk16.lean": "160e4e5ab2fe91dc26dfde381fa6cc308d01ff81cde369ca34cbe0280db2f42b",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk17.lean": "49204fa5defdf31fe68e8e9df52cef06ac513ef75b4c4a6590074c3b76158dda",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk18.lean": "a25022a85cde8628c37dd550224ac3286bdacd913d5455387d348355d1f56b99",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk19.lean": "f225edc6ddca59417031d4b8fb596141d64a824c865fd30b21e9c863f8185be3",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk20.lean": "879464d1dbcd3bc4c737245741219fd2f83e9ece523b21352b02ca7c221a6d1a",
+      "milestones/85-reference-catalogue-union/lean/ReferenceChunk21.lean": "206b0467e9167b135e2506ec0062c58603cb119b9f836f4e9f746ca133fbabf9"
+    },
+    "scope": "All contained contiguous key windows in the9directions, both orientations. Tests whether the complete stated intervals force a single listed forbidden key. Does not decide logical implication from combinations of restrictions or geometry."
+  },
+  "pins": {
+    "milestones/120-nine-transition-window/data/probes/edge18806-full.json": "7745a254314f83a95a80e74f2e9ee62095bdc475e60a7992360d8a90c5b75db9",
+    "milestones/120-nine-transition-window/scripts/probe_window.py": "dba85e108a6e7b505a062e0ed595e4ea67b745e37591d0aa6ac4120ad16aa753",
+    "milestones/119-shared-five-count-pressure/data/graph-audit.json": "76a3119d3410330827418c5039203e579ccd27a91c7c9315d786eb78c9bcb177",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/112-critical-sum-refinement/data/probes/012031-upper5-outer14.json": "0471bff64811b5a990e3a39279ef96b80de0522ae5334485181d804bd27dc444",
+    "milestones/112-critical-sum-refinement/lean/ActualSum112.lean": "9e5f7db4a74440971e5bd3d9ada06c1973c021614df22e94d09aa803d83f759d",
+    "milestones/112-critical-sum-refinement/mathematical-note.md": "6cd200a71ac18e448392dd0793f7485090fb6af64a57b7897fd69d68acd95b07",
+    "milestones/79-retained-edge-guards/lean/CountWindows.lean": "ec60fb130f2d25f02da27df5052e48caa09c9a9113de7c6ac5e74295604d01a2",
+    "milestones/85-reference-catalogue-union/lean/ReferenceUnion.lean": "ed210b12a54cf11ec5e3f50f2d8ecbe836847202e113230eaaeb9a18b296520d"
+  },
+  "conclusion": "Alignment correct;012031 upper5 outer15 is inapplicable or already satisfied on all relevant contained windows. No direct contained1378catalogue key is forced. Native UNSAT remains uncertified; no novelty or absence of every prior implication claimed."
+}

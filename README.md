@@ -4,7 +4,7 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 119](milestones/119-shared-five-count-pressure/README.md) checks an actual count-total counterexample in Lean and replays two full-cube contradictions. Both new conditional graph rules leave the integer comparisons unchanged. The next test constrains a complete nine-transition window.
+Latest continuation: [milestone 120](milestones/120-nine-transition-window/README.md) proves that a 012031 window has an outer count at least 4. Lean checks the actual-snake theorem, both graph orientations and three more reference exclusions. The 63 additional graph removals leave both numerical comparisons unchanged; 1,363 reference entries remain.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
@@ -18,7 +18,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 116](milestones/116-paper-revision/README.md). The paper incorporates the arguments through milestone 115 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 126.
 
-Next research priority: Test full-Q9 realization of edge 18806, word 012031043, with all six recorded count intervals and no extra sum cap. Check both profiles for any viable restriction. Preserve both active proof batches and all pending negative-certificate status. Next paper revision: 126.
+Next research priority: Test full-Q9 realization of replacement-cycle edge 2511, word 012031041, with all six exact recorded counts and no sum cap. Evaluate any viable restriction on both profiles. Preserve the active 104 and 115 proof batches. Next paper revision: 126.
 
 ## Historical checkpoints
 

@@ -1,0 +1,56 @@
+{
+  "status": "PASS_ACTUAL_OUTER_COUNTS_AND_THREE_REFERENCE_CASES",
+  "checked_modules": 26,
+  "theorem_audits": 11,
+  "directions": [
+    0,
+    1,
+    2,
+    0,
+    3,
+    1
+  ],
+  "bounds": [
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      3
+    ]
+  ],
+  "statement": "For every fitting actual-snake window012031, max(alpha[r+1],alpha[r+2],alpha[r+4],alpha[r+5])>=4.",
+  "actual_receipt": "data/ActualOuter120-audit.json",
+  "actual_receipt_sha256": "757f98c8b6cf1aaf0c1f26470ee954a7312b659a3bb9ef3651dc0998c60cf6bb",
+  "reference_receipt": "data/ReferenceCoverage120-audit.json",
+  "reference_receipt_sha256": "e627ea0a2bf307207e68a952517ede5b63af085cc295a00f8f81da4cdacbe8f7",
+  "new_reference_indices": [
+    126,
+    127,
+    138
+  ],
+  "reference_discharged": 15,
+  "reference_pending": 1363,
+  "selected_native_deductions": 5956,
+  "selected_native_hints": 344241,
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "independent_review_sha256": "3f4151f5201a14a3f19a317dca34c55a44649bff5a23d496354e1eb632673d6d",
+  "scope": "Completed local theorem and encoded exclusions. No proof of sharpness, no completed global assembly and no improved numerical bound."
+}
