@@ -1,0 +1,356 @@
+{
+  "status": "PASS_STATIC_AND_INDEPENDENT_SAVED_CYCLE_REVIEW",
+  "static_review": true,
+  "inherited124_prefix_exact": true,
+  "preparation_and_snapshot_hashes_match": true,
+  "actual_pair_cases": 441,
+  "clipped_six_cases": 46656,
+  "parity_receipt_verified": true,
+  "all_edge_algorithm_reviewed": true,
+  "all_edge_inequalities_independently_recomputed": false,
+  "limitations": [
+    "No independent rerun of the full graph or its all-edge inequalities.",
+    "Both graph profiles retain inherited unproved count-sum hypotheses.",
+    "The conditional_floor18 profile retains additional share-floor hypotheses.",
+    "The 0123104 six-count floor25 is hypothetical.",
+    "Pair9 applies to odd snake length; graph-to-snake coverage and charge assembly remain pending.",
+    "No new actual-snake upper bound is established."
+  ],
+  "observed_run_status": "PASS_CONDITIONAL_FULL_GRAPH_EXACT_MINIMA",
+  "profiles": [
+    {
+      "profile": "completed",
+      "mean": "488",
+      "cycle_length": 4,
+      "cycle_weights_source_checked": true,
+      "cycle_potential_slacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "potential_range": 585,
+      "comparison": "1103449/4688"
+    },
+    {
+      "profile": "conditional_floor18",
+      "mean": "496",
+      "cycle_length": 7,
+      "cycle_weights_source_checked": true,
+      "cycle_potential_slacks": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "potential_range": 602,
+      "comparison": "551765/2348"
+    }
+  ],
+  "selected_original_edges": 29,
+  "npz_members_read_once": true,
+  "largest_array_bytes": 19788032,
+  "all_source_array_hashes_verified": true,
+  "source_direction_sorted": true,
+  "saved18_mean": "3011/6",
+  "result_source_pins_verified": 43,
+  "run_source_hashes_verified": true,
+  "completed_at": "2026-11-03T12:57:55.323297+00:00",
+  "seconds": 60.672000000000025,
+  "source_files_sha256": {
+    "milestones/131-odd-pair-six-count/audit/check_graph_result.py": "cf1b54525ea274a2cf269d30832d1eadc6b81d1e1ee50d5757069e407cb4ea19",
+    "milestones/124-six-count-cycle-pressure/scripts/evaluate_six_shapes.py": "066b117d63f3d6cf78341073fa7b7a09dd39946a7f4b77961bf71b23114e782f",
+    "milestones/131-odd-pair-six-count/data/preparation-note.json": "e72be2890c3188cb646253a07926b9f55a247b1737d6eee6efc3b2008b5a7f6b",
+    "milestones/131-odd-pair-six-count/scripts/prepare_graph.py": "ea9c46904e1ef1dcccf279cb48d235bde3662902857977d5b0fe160461595391",
+    "milestones/131-odd-pair-six-count/scripts/evaluate_graph.py": "86386a1a117dfd9080b7360f9b99a641054fe9ea174baa9a2b532b33199e52ac",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/evaluate_graph.exact.py": "86386a1a117dfd9080b7360f9b99a641054fe9ea174baa9a2b532b33199e52ac",
+    "milestones/130-fourth-count-large/data/odd-pair-verification.json": "06b2eac79854bf65ba839bf49c56965df6dc888dc5c5804f67c11d15af26e799",
+    "milestones/130-fourth-count-large/data/independent-parity-dependency-audit.json": "5f8b67a27a12ab58f38103f685a615a1439d2deec0a98c7e8a97a84a619b6759",
+    "milestones/130-fourth-count-large/lean/DfsParity.lean": "c92b3421c70fc530cd48b4e02add01b07a44693b5f8b2669223cc5db62e01a0a",
+    "milestones/130-fourth-count-large/audit/check_parity_dependency.py": "1a2f20d6af633c4aab8ef9896018d926c7e604aba628b1b7958334699344c17a",
+    "milestones/130-fourth-count-large/logs/parity-dependency-1793708740459684900/compiler.log": "f90e7743396dfb8fade514a527d8b5cfb5b075eba524a9a91957e8007369eb07",
+    "milestones/130-fourth-count-large/build-independent/DfsParity-1793708740459684900.olean": "4315db5e773d6344d0ce0961044f8158ee070e10e32456234e25cba81b385483",
+    "milestones/130-fourth-count-large/build-independent/DfsParity.olean": "4315db5e773d6344d0ce0961044f8158ee070e10e32456234e25cba81b385483",
+    "milestones/130-fourth-count-large/logs/parity-dependency-1793708740459684900/record.json": "5f8b67a27a12ab58f38103f685a615a1439d2deec0a98c7e8a97a84a619b6759",
+    "milestones/130-fourth-count-large/logs/parity-dependency-1793708740459684900/source.lean.txt": "c92b3421c70fc530cd48b4e02add01b07a44693b5f8b2669223cc5db62e01a0a",
+    "milestones/130-fourth-count-large/logs/parity-dependency-1793708740459684900/checker.py.txt": "1a2f20d6af633c4aab8ef9896018d926c7e604aba628b1b7958334699344c17a",
+    "milestones/130-fourth-count-large/data/independent-odd-pair-audit.json": "e849bb0bfd2c7870f83398feb855f0aab03a22f786a1c54905e5900ff51244b8",
+    "milestones/130-fourth-count-large/lean/OddPair130.lean": "ac5ece213598a89df242f46e5702b9b6b84cd443a9651e0bcc180269addc9fee",
+    "milestones/130-fourth-count-large/audit/check_odd_pair.py": "c61dd01f044e0ef46d221300676dba0fe8d666d02d906a9cf840559d0bec1054",
+    "milestones/130-fourth-count-large/logs/odd-pair-1793708831580458200/compiler.log": "7e2de6a797a6393f189373df4601095a3e3972c039dcbaa8e8e99cecd7d84404",
+    "milestones/130-fourth-count-large/build-independent/OddPair130-1793708831580458200.olean": "3cbcbf5b092f02e898d5742ccf58715d80b7b7252a916e7d53ef0ee6ed867301",
+    "milestones/130-fourth-count-large/build-independent/OddPair130.olean": "3cbcbf5b092f02e898d5742ccf58715d80b7b7252a916e7d53ef0ee6ed867301",
+    "milestones/130-fourth-count-large/logs/odd-pair-1793708831580458200/record.json": "e849bb0bfd2c7870f83398feb855f0aab03a22f786a1c54905e5900ff51244b8",
+    "milestones/130-fourth-count-large/logs/odd-pair-1793708831580458200/source.lean.txt": "ac5ece213598a89df242f46e5702b9b6b84cd443a9651e0bcc180269addc9fee",
+    "milestones/130-fourth-count-large/logs/odd-pair-1793708831580458200/checker.py.txt": "c61dd01f044e0ef46d221300676dba0fe8d666d02d906a9cf840559d0bec1054",
+    "milestones/130-fourth-count-large/audit/parity-source-copy.json": "dd690cd6cdcafa513d56803663d387429f03c68e4865b86d2e0664e09b909cca",
+    "milestones/130-fourth-count-large/audit/write_odd_pair_derivation.py": "56fbfa956ba0312da95443ddfaa4d67e59422f888b1d4ecac76c03f9f152a710",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/run-status.json": "e5b26d85b4655246f613c666570b2c359ea84abdafa767bee7884466382df172",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/results.json": "157c1cd0751b487e220b954f441670839c50078167f54c83557f43f98fb8fd2d",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/worker-resources.json": "e964a49863b6fc5561659112a02c1ea8dae19be054ea1d8b062bff9af1c55854",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25-launch.json": "6298171507d8a0cf7e443bcf8c384b5bf867eb065b57109788e3eecb71b5975c",
+    "milestones/131-odd-pair-six-count/scripts/run_ready.py": "49fef0a8b38b535e91ab312b727dd62c3240acda3dce2db89ce78f5aba2144da",
+    "milestones/131-odd-pair-six-count/../120-nine-transition-window/data/full-rules.json": "dae2b8fc4c807501037041ffada61d80cda1acbf03a3b4536c84338d444a2f57",
+    "milestones/111-critical-count-intervals/data/probes/outer-sum21-sorted.json": "ef079635e3bd95560b0b6d227346f486febd37b700da07e5c8ceffe5a682f82d",
+    "milestones/111-critical-count-intervals/data/probes/centre3-sum18-sorted.json": "41fd75bf1c242c4bc4ae4577547f03274816444ef11f5cb642214daa5fb5b3ea",
+    "milestones/111-critical-count-intervals/data/probes/centre21-sum16.json": "49b52abaf47058d2c11295f65aeef3319e951e1e0f81f8420c192fb5e952059e",
+    "milestones/112-critical-sum-refinement/data/probes/012340-middle5-outer17.json": "4f90e856240fc0db5c0f0649c0a840e0b19b254626372c4d274bbc05e84a4724",
+    "milestones/112-critical-sum-refinement/data/probes/012034-total19.json": "58279638ad42b6a828d8df3da4f6434eb2fc481197ef08fd9058c5a25a32d7ed",
+    "milestones/112-critical-sum-refinement/data/probes/012031-upper5-outer14.json": "0471bff64811b5a990e3a39279ef96b80de0522ae5334485181d804bd27dc444",
+    "milestones/112-critical-sum-refinement/data/probes/012314-upper2-outer18.json": "4d35886143ab0e838fb6f4a09383d6bc990ef426d5956b862b67c292d5b22c06",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-middle545-pair8.json": "0ff87327b1855fc6264f75e589d3aea7904c55f406800b060a9974427489d44d",
+    "milestones/114-total-count-pressure/data/probes/012310-total18.json": "8239b1a79b7ba09e0864c5e44cd9fbf5245589526bbf700818a9bf2bd0c7d6b9",
+    "milestones/115-total-count-certificate/data/probes/012345-total21.json": "1d569db624ef6945c47b6377e1f0f430af625d817b8bff813c0450a6d519209d",
+    "milestones/117-cycle-sum-refinement/data/probes/012034-middle5-outer15.json": "c27773d28143ffb110eb36fda66c85714de5e7e207df9cd2b964bef65018220f",
+    "milestones/119-shared-five-count-pressure/data/full-probes/012304-completed-b-total22-full.json": "a7ee00aa7d9d6ca34a6b04c7914880ab977a4b106bd211e201123ebedc3723f1",
+    "milestones/119-shared-five-count-pressure/data/full-probes/012304-conditional-a-total22-full.json": "0111462ffdc5ed222d0ce32552cf38e3265911c26945332457e36aac988c8522",
+    "milestones/117-cycle-sum-refinement/data/middle5-rules.json": "da6f3cb15b868886b2a05bf9fa86a01b3e20611f360d840969a036023e9349e3",
+    "milestones/117-cycle-sum-refinement/data/middle5-outer16/results.json": "9c1dbfb8bfb5ad4f7ceed82bfb550e178febddaff699b540bd4933a7fd3dd9a0",
+    "milestones/119-shared-five-count-pressure/data/full-critical23/results.json": "83523df8acd4b8506e0407608ded961dbca6be02e8cf6195e28d72f0cda724f3",
+    "milestones/120-nine-transition-window/data/outer3/results.json": "c60809a238d091b1a29030237860a984d28074b181fd857b1cf96c706bff2034",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/73-countfree-share-catalogue/data/proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18.json": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+    "milestones/111-critical-count-intervals/data/middle325-profiles/removed-indices.json": "ffaae82933775c8d76c5410c216910e3e3cab8873ea5a996b7336e511aa6ad84",
+    "milestones/113-all-four-sum-pressure/data/pair24/removed-indices.json": "69757d3b0201163cf18c66dc61ba7b2911793ccef0e99d190f62cf4ae11d741b",
+    "milestones/117-cycle-sum-refinement/data/middle5-outer16/removed-indices.json": "47a30b951071923dbb1cf8c7acb3bf7bf9ebf26836dc04dbd1d88af99687f7ab",
+    "milestones/119-shared-five-count-pressure/data/full-critical23/removed-indices.json": "47a30b951071923dbb1cf8c7acb3bf7bf9ebf26836dc04dbd1d88af99687f7ab",
+    "milestones/120-nine-transition-window/data/probes/012031-outer3-radius3.json": "2869cf27002a9e1b97418fbf9ab4df7e26b694bf4000caba47b3ff978ba67e34",
+    "milestones/120-nine-transition-window/data/outer3/removed-indices.json": "2fe9b0c6ce59158e69ef84a58d1ccd854890c2c1e6b4d7259212e4949ddcc082",
+    "milestones/121-replacement-window-pressure/data/pair-guards.json": "cef76dfe2988fc2b55f10c68a6c0fa93cc8aa8687414d1edacc6e143f9d5bbef",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair1-free.json": "bb78fd30e6ff99a95dffb140c8c270f808b98adcd1539a39688c68c730d66a41",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair25.json": "0aafbfdf74a87c8ddde7490d0ab119b0e8909e54443ca7bf21d77ecc92129535",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair34.json": "c5a816a228be74c80acf8c6ddde4baf58be071dddc2c4c1d12b8b9908f014200",
+    "milestones/121-replacement-window-pressure/data/pair-graph/results.json": "7492ff3a45178740d3253c679bcdd2f5e7907be907f055f455e739cde0b327bf",
+    "milestones/121-replacement-window-pressure/data/pair-graph/removed-indices.json": "2313ad546b73b8836c42494ebbbc9a47540dd96ef2432cb85e781cae6b2668c5",
+    "milestones/130-fourth-count-large/data/next-pressure-task.json": "267eaf3eb1ca52bcb4aeb193effaf852e1e9a2b089a1dfe0ca07db98952127db",
+    "milestones/124-six-count-cycle-pressure/data/graph-26-25-25/cycle-targets.json": "9d5bf150fca0903496cd1a4e1b55d37457176699477f634b242c500d3adf00c4",
+    "milestones/124-six-count-cycle-pressure/data/probes/0123104-universal-total24-resume.json": "b0d9cc22991c2ae8992ffa4725449752952825085bb2c1c21f6e993b15accd1f",
+    "milestones/130-fourth-count-large/data/odd-cycle-review.json": "4fe9390a9bdb6a9f760d0213891f894f6bcd21e3db93a13276ad70aec66436fb",
+    "milestones/121-replacement-window-pressure/scripts/evaluate_pair.py": "dc4c28743da89797a59966548dc0c4a384ad3bba300ffa520c9dd5030e80c514",
+    "milestones/51-exact-bucket-pressure/scripts/analyze_share.py": "54fe61b1155719de043a6082a43f96fcf800f40a653d6e97a7a9b5b0b1333586",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/completed-profile.json": "669f4baa182ed83153a4e22b54eae83edf1239a698c58fbb0eda3fd13e26ad20",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/completed-potential.i64.gz": "a4f29e98f4f93b9a0732606498b97587290aa428b2816c6feebc13e01c17ef82",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/conditional_floor18-profile.json": "50b8d6e045204cb6983c27778cc99e26ed43279be4e298848efdc2c22e5c4ebb",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/conditional_floor18-potential.i64.gz": "c67e697ac38e736643b42b9609c3d6a3402cc4757b5929755b097193359245a6",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/stdout.log": "acda74204367106b42667e66eb50c27efc5909b85e22c3f0c3ea61001d1f9e94",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/stderr.log": "ed658cc2701b76b948a5c9308b123bc927a68ee04fbe54746d47d779d0d14f7c"
+  },
+  "baseline_comparison": [
+    {
+      "profile": "completed",
+      "baseline_mean": "2915/6",
+      "new_mean": "488",
+      "mean_increase": "13/6",
+      "baseline_range": "1730/3",
+      "new_range": "585",
+      "baseline_comparison": "1324108/5623",
+      "new_comparison": "1103449/4688",
+      "baseline_integer": 235,
+      "new_integer": 235
+    },
+    {
+      "profile": "conditional_floor18",
+      "baseline_mean": "496",
+      "new_mean": "496",
+      "mean_increase": "0",
+      "baseline_range": "602",
+      "new_range": "602",
+      "baseline_comparison": "551765/2348",
+      "new_comparison": "551765/2348",
+      "baseline_integer": 234,
+      "new_integer": 234
+    }
+  ],
+  "saved_cycle_obstructions": [
+    {
+      "profile": "completed",
+      "canonical_seven_shapes": [
+        [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4
+        ]
+      ],
+      "pair_matches": [
+        {
+          "edge": 2222328,
+          "placement": 1,
+          "pair": [
+            4,
+            5
+          ],
+          "sum": 9
+        },
+        {
+          "edge": 147674,
+          "placement": 0,
+          "pair": [
+            4,
+            5
+          ],
+          "sum": 9
+        },
+        {
+          "edge": 2220858,
+          "placement": 1,
+          "pair": [
+            5,
+            4
+          ],
+          "sum": 9
+        },
+        {
+          "edge": 146782,
+          "placement": 0,
+          "pair": [
+            5,
+            4
+          ],
+          "sum": 9
+        }
+      ],
+      "no_pair_deletion": true,
+      "no_added_pair_credit": true,
+      "no_six25_shape_match": true,
+      "no_added_six_credit": true
+    },
+    {
+      "profile": "conditional_floor18",
+      "canonical_seven_shapes": [
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          5
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          5
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          2
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4
+        ]
+      ],
+      "pair_matches": [],
+      "no_pair_deletion": true,
+      "no_added_pair_credit": true,
+      "no_six25_shape_match": true,
+      "no_added_six_credit": true
+    }
+  ],
+  "initial_review_sha256": "883604f0d7b84b498f9813c978f25f133cfe63aa8f88a97125712fb7a1295b01",
+  "initial_checker_sha256": "e3760b2a13a1bd046bda86e9f29156991b521968638033a7ac3be9ec4b69c453",
+  "supplement_method": "Only already source-checked saved cycle rows and hash-identical result JSON were read. No graph array was loaded again.",
+  "supplement_completed_at": "2026-11-03T12:59:08.901845+00:00",
+  "single_pattern_consequence": {
+    "profiles": [
+      {
+        "profile": "completed",
+        "unchanged_minimum": "488",
+        "zero_range_comparison": "68929/293",
+        "excess_above_current_integer": "74/293",
+        "next_integer_target": 234,
+        "next_integer_target_unreachable_by_same_comparison": true
+      },
+      {
+        "profile": "conditional_floor18",
+        "unchanged_minimum": "496",
+        "zero_range_comparison": "137866/587",
+        "excess_above_current_integer": "508/587",
+        "next_integer_target": 233,
+        "next_integer_target_unreachable_by_same_comparison": true
+      }
+    ],
+    "statement": "With every other hypothesis fixed, raising only the0123104 floor from25 upward leaves both attaining cycles and weights unchanged. Edge weights can only increase and edges can only be deleted. The old potentials remain valid, so the exact finite-graph minima stay488 and496. Even zero potential range cannot reach comparison integer targets234 and233.",
+    "method": "Elementary monotonicity deduction from the checked saved cycles and exact rational comparison; no new graph calculation.",
+    "previous_review_sha256": "35b5f1b2bd92b2da1a980d52dd7ba7657cf838067bc4848027b51520aa63a5ff",
+    "previous_checker_sha256": "9704c8659f966573d8969eb0c0026ef834e2311f0617a934818bfde14d2c861b"
+  }
+}

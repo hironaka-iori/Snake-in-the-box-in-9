@@ -1,3 +1,41 @@
+# Research update: milestone 131
+
+The full graph comparison has completed. Adding the proved odd-length pair
+bound nine and the proposed 0123104 six-count bound twenty-five raises the
+first profile's minimum from 2915/6 to 488. Its integer comparison remains
+235. The additional-share profile retains minimum 496 and its previous
+integer comparison 234. Both profiles still contain unproved hypotheses;
+these are finite-model comparisons, with no new bound for actual snakes.
+
+The new attaining cycles avoid 0123104. Raising only that proposed bound
+above twenty-five therefore cannot improve either minimum in this model.
+The existing potentials remain valid as weights increase or edges disappear,
+and the same unaffected cycles attain equality. Even zero potential range
+would leave the comparisons above 235 and 234, respectively. This rules out
+further progress toward 234/233 by strengthening only that pattern.
+
+The first profile's four-edge cycle consists entirely of 0120324 windows
+up to reversal, with relevant pair sums exactly nine. This identifies the
+next question: for an odd-length snake, does a fitting 012032 window with
+pair sum nine force one endpoint to be at Hamming distance two from both
+counted centres? This is a hypothesis. A screen of 133 validated saved snakes
+found 54 relevant windows and no pair-sum-nine window, so it gives no evidence
+for or against the hypothesis.
+
+The evaluator checked every retained-edge potential inequality; the
+independent review reconstructed the saved cycles from original graph rows
+and checked their weights, adjacency and zero slacks. It did not repeat the
+full all-edge calculation. No new Lean theorem is claimed in this round.
+The next selected task is a direct counterexample search for the odd-length
+endpoint statement, followed by a checked certificate if the search is negative.
+
+The maintained interval remains 191–235, with the documented incomplete
+independent rebuild of the contributor upper-bound proof. The optimum and
+196 remain open. Existing notation is retained. Paper revision 126 is
+unchanged; the next scheduled full revision is 136.
+
+## Earlier record
+
 # Research update: milestone 130
 
 Two local inequalities are now proved for actual snakes. For a fitting

@@ -1,0 +1,40 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "source_derivation": "milestones/124-six-count-cycle-pressure/scripts/evaluate_six_shapes.py",
+  "source_sha256": "066b117d63f3d6cf78341073fa7b7a09dd39946a7f4b77961bf71b23114e782f",
+  "prepare_sha256": "ea9c46904e1ef1dcccf279cb48d235bde3662902857977d5b0fe160461595391",
+  "evaluate_sha256": "86386a1a117dfd9080b7360f9b99a641054fe9ea174baa9a2b532b33199e52ac",
+  "baseline": "The inherited124 reconstruction is retained through its121 removal and full-weight hash assertions.",
+  "profiles": [
+    "completed",
+    "conditional_floor18"
+  ],
+  "odd_length_pair_floor": 9,
+  "hypothetical_six_shape": "0123104",
+  "hypothetical_six_floor": 25,
+  "checks_run": {
+    "ast_parsed_both_scripts": true,
+    "actual_pair_cases": 441,
+    "clipped_six_cases": 46656
+  },
+  "checks_not_run": [
+    "full graph loading",
+    "baseline121 reconstruction",
+    "minimum cycle mean",
+    "all-edge potential certificate",
+    "Lean",
+    "SAT"
+  ],
+  "runtime": {
+    "minimum_free_memory_bytes": 3221225472,
+    "duplicate_process_check": true,
+    "exclusive_lock": true,
+    "default_timeout_seconds": 3600,
+    "timeout_and_failure_records_preserved": true,
+    "exact_script_snapshot": true,
+    "all_edge_potential_check": true,
+    "attaining_cycle_check": true
+  },
+  "saved18_cycle_reference": "3011/6, checked at experiment runtime only",
+  "scope": "Preparation only. Both profiles retain their inherited hypotheses and the six-count floor remains hypothetical. No bound is obtained by preparing these scripts."
+}
