@@ -1,3 +1,29 @@
+# Continuation after manuscript revision 116
+
+Work in E:/Snake-in-a-box. Read milestone 116 and the current status first.
+Use the tensai-bishoujo skill with the user's requested neutral, concise
+mathematical prose. Introduce definitions only when essential and repeatedly
+used. Preserve the existing symbols and all three authors.
+
+Next research priority: Preserve both live proof batches and verify any final assembly before upgrading its status. Inspect the 26-edge and six-edge replacement cycles in milestone 115; test a shared count restriction on a direction shape they actually contain. Further strengthening only 012345 cannot improve their means. Keep both share profiles in the comparison, and continue the remaining 1,366 reference obligations. Next full paper revision: 126.
+
+Read the live progress records in milestones 104 and 115 and verify their
+processes before any action. Do not start another driver or edit their
+active sources, scripts or checker. A partial module count proves no final
+contradiction or global theorem. The selected source export for 115 is
+already archived; use its documented restoration and verification procedure.
+
+The revised open source is D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex,
+mirrored at paper/snake9_research.tex. Keep its editor open and preserve its
+hypersetup settings exactly. Revision 116 passed source and witness checks;
+the built-in compiler failed before TeX. No current PDF is verified.
+
+Preserve unrelated .gitignore and historical critical-family.json changes.
+Fetch before each round and stage only the reviewed milestone manifest.
+The optimum remains unresolved; do not mark the research goal complete.
+
+## Earlier continuation record
+
 # Continuation assignment
 
 Continue the count and empty-square route in `E:/Snake-in-a-box`.

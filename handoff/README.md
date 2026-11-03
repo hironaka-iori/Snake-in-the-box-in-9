@@ -1,41 +1,38 @@
-# Current research handover
+# Research handover
 
-Work in `E:/Snake-in-a-box`. Start with milestone 115's README,
-mathematical note, proof summary, checkpoint and three independent reviews.
-The goal remains active. The optimum and 196 are unresolved. The maintained
-interval is 191 through 235 edges, with the contributor proof and archived
-audit distinguished from a complete independent rebuild.
+Start with [current status](CURRENT_STATUS.md) and the
+[continuation assignment](NEXT_AGENT_PROMPT.md). The latest saved round is
+[milestone 116](../milestones/116-paper-revision/README.md).
 
-Two Lean verification batches are running. Their saved checkpoints are
-dated observations. Verify the process identified by each live
-`data/batch-progress.json` before taking action:
+The paper is revised through milestone 115, with no new definitions. Its
+single named definition is the problem itself. All 135 previous statement
+blocks, author metadata, hyperlink settings and appendices are preserved.
+Three statement blocks collect checked count restrictions and the shared
+excess budget. All 13 printed snakes pass 118,673 pairwise adjacency checks.
+Nine reused module receipts, their exact source/object/log bytes and 47
+printed axiom reports were checked. No new Lean compiler was launched.
 
-- `milestones/104-complete-potential-batch`: complete graph-potential work.
-- `milestones/115-total-count-certificate`: concrete `012310` total-count
-  refutation and its final actual-snake theorem, 1,397 planned modules.
+The new local results include the 012340 three-count restriction and the
+012314 theorem: middle count at most 2 forces the outer four counts to sum
+to at least 19. The paper states their proofs using ordinary count notation.
+Twelve of the 1,378 reference entries are discharged; 1,366 remain.
 
-Do not restart a process merely because a tool observation timed out.
-Respect the existing limit of one additional Lean compiler alongside
-milestone 104. Successful receipts pin sources, objects, logs and
-dependencies; generated files and partial runs do not establish a theorem.
+The expanded count-sum family is explicitly conditional. Its finite means
+6309/13 and 496 retain integer comparisons 235 and 234. The final attaining
+cycles contain no 012345 window, so strengthening only that rule to total
+at least 23 leaves their weights and the exact means unchanged. The 23
+candidate has native negative evidence and a six-component local equality
+witness, without a checked negative certificate or a complete-snake witness.
 
-The new local candidate is a five-count total of at least 23 whenever
-six consecutive directions are distinct. Native UNSAT evidence and a
-verified local forest with total 23 are saved. A checked negative
-certificate is still needed. The forest has six components and supplies
-no complete-snake sharpness result.
+At this process-verified observation, milestone 104 has
+148/791 completed-profile and 147/791 conditional-profile
+contexts checked. Milestone 115 has 123/1397 modules checked. Both
+drivers remain active; full certificates and the 012310 actual theorem are
+pending. Exact partial receipts and logs are archived in this milestone.
 
-The finite graph means reached `6309/13` and `496`, with integer
-comparisons 235 and conditional 234. Saved attaining cycles contain no
-`012345` window at either placement. Strengthening only that local rule
-cannot improve these means. New restrictions must affect those cycles.
-
-For a fresh checkout, restore milestone 115's proof and generated-source
-archives with its `scripts/verify_saved.py --restore-archives`. The exact
-source bytes remain present locally. Frozen manifests exclude live logs
-and progress files, which are replaced by dated immutable snapshots.
-
-Paper revision 106 remains in the existing editor and repository mirror.
-The next full revision, 116, is due. Preserve the three authors, hyperlink
-settings and existing editor. Introduce a definition only if essential
-and repeatedly used. Preserve the unrelated `.gitignore` change.
+The built-in compiler failed before TeX processing because its Windows
+helper could not prepare the preview. No new PDF or page layout is verified.
+The maintained interval remains 191 through 235 edges, with the archived
+contributor proof and pending complete independent rebuild. Conditional
+234, the optimum and 196 remain unresolved. The next full paper revision
+is scheduled for milestone 126.
