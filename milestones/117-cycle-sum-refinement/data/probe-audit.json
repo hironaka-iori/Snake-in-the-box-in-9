@@ -1,0 +1,43 @@
+{
+  "status": "PASS_PROBE_PINS_CYCLE_CUTS_AND_WITNESS_COVERAGE",
+  "probes": [
+    {
+      "probe": "data/probes/012034-caps5-total20.json",
+      "status": "UNKNOWN",
+      "sha256": "f4e21cb5e2e4b2c99671beb50eb66fb461734b4bd77a3a6ff430b36cfcea7f9b",
+      "cuts": 0,
+      "seconds": 12.04699999999957
+    },
+    {
+      "probe": "data/probes/012034-middle5-outer15.json",
+      "status": "UNSAT_UNCERTIFIED",
+      "sha256": "c27773d28143ffb110eb36fda66c85714de5e7e207df9cd2b964bef65018220f",
+      "cuts": 0,
+      "seconds": 5.764999999999418
+    },
+    {
+      "probe": "data/probes/012034-middle5-outer16.json",
+      "status": "UNKNOWN",
+      "sha256": "a760e8ce977440c9bbc484a1bbf2c6c11314ab2f27fb5585a8b3456bac801fd1",
+      "cuts": 2,
+      "seconds": 15.063000000000102
+    },
+    {
+      "probe": "data/probes/012034-middle5-outer17.json",
+      "status": "SAT_LOCAL_WITNESS",
+      "sha256": "3cfa45ca772b353a1902ca46b4e8c424593d3284dc8eba6466acf1cd00318fed",
+      "cuts": 0,
+      "seconds": 7.875
+    },
+    {
+      "probe": "data/probes/012034-total20.json",
+      "status": "UNKNOWN",
+      "sha256": "247e43ab8b030ea618adaa1dd4ea4ff57cf9421c2bc2c4d2552d4b11c230fd97",
+      "cuts": 0,
+      "seconds": 12.016000000000531
+    }
+  ],
+  "witness_audit_sha256": "d77a5e1f3e197ee60e89f607c3d0623dfff938f6ce4bec65936bd189e810b49d",
+  "script_sha256": "d3d8fb0e3cb37b6938e51c81f807d57f3d08aa91584a4d9f061e74dd2110c825",
+  "scope": "Validates provenance, every added induced-cycle exclusion and positive-witness audit coverage. Does not independently certify any UNSAT solver answer."
+}

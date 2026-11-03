@@ -1,3 +1,29 @@
+# Continuation after milestone 117
+
+Work in E:/Snake-in-a-box. Read the latest mathematical note and checkpoint.
+Use the research skill with formal, concise prose. Introduce definitions
+only when essential and repeatedly used. Keep the existing count notation
+and the empty-square/count-sum route.
+
+Next research priority: Preserve both live proof batches. Check existing witnesses, then test outer sum at most 12 on canonical 012301; replacement cycles have outer sums 11 and 12 with middle count in [6,21]. Compare any viable restriction on both profiles. The 012034 outer-16 candidate still needs concrete Lean semantics and full contradiction. Next paper revision: 126.
+
+The selected native proof is work/core0/core.trim.lrat in milestone 117.
+Its input identifiers are in data/refine-core0.json; independent original-CNF
+replay is in data/replay-core0.json. Preserve the 84 repeated counter entries.
+An active-variable bijection is needed before bounded-literal export;
+the selected proof uses 1,709 variables. No full Lean contradiction or actual
+local theorem is claimed. The conditional transfer passes Lean.
+
+Use scripts/verify_saved.py --restore-archives after a clone to restore
+missing large proofs without overwriting differing bytes. Inspect saved
+attempts and live processes before retrying work. Do not duplicate either
+active batch or edit its pinned inputs. Paper and editor remain revision 116;
+revise next at 126. Preserve authors and hypersetup, unrelated local changes,
+and exact audited bytes. Stage only the reviewed milestone manifest. The
+full research goal remains active.
+
+## Earlier continuation record
+
 # Continuation after manuscript revision 116
 
 Work in E:/Snake-in-a-box. Read milestone 116 and the current status first.

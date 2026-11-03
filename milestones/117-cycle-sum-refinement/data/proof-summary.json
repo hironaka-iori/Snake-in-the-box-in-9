@@ -1,0 +1,43 @@
+{
+  "status": "PASS_CONDITIONAL_GEOMETRY_ARITHMETIC_AND_NATIVE_REFINEMENT",
+  "modules": [
+    {
+      "module": "SumGeometry117",
+      "receipt_sha256": "5f8e5918f5371e7aeb515ea6dc5c0ae241ef2fb1c7ee3189ecce1b169b72e88f",
+      "theorem_audits": [
+        {
+          "theorem": "Snake9.SumGeometry117.comparison_barrier",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.SumGeometry117.comparison_value",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.SumGeometry117.actual_outer_sum",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    }
+  ],
+  "native_original_certificate_sha256": "9d402160d792b5c50de63b22dee90815dd9103a7755fe26cd3bc8d3ec8e54f7f",
+  "selected_native_replay_sha256": "465fdd5862e4d569ebbe1008f0180f484f3ceda6c8938e5e7af3539766c74605",
+  "successful_modules": 1,
+  "axiom_reports": 3,
+  "actual_local_theorem_checked": false,
+  "concrete_sum_semantics_checked": false,
+  "complete_lean_contradiction_checked": false,
+  "new_definitions": 0,
+  "scope": "Conditional actual-snake transfer and arithmetic pass Lean. Native contradiction independently replayed; full Lean chain pending."
+}

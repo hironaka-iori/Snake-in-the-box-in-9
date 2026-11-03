@@ -2,6 +2,8 @@
 
 The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 106; the next full revision is 116. Source and witness checks pass; the built-in compiler failed before TeX processing.
 
+- [Milestone 117: count-sum refinement on both surviving cycles](117-cycle-sum-refinement/README.md). Replayed native contradiction; conditional Lean transfer; finite mean 2915/6; integer comparisons unchanged.
+
 - [Milestone 116: manuscript revision with count-sum results](116-paper-revision/README.md). No new definitions; exact source and witness checks; conditional graph limits; both proof batches preserved.
 
 - [Milestone 115: concrete count semantics and distinct-direction windows](115-total-count-certificate/README.md). Checked semantics, running Lean contradiction batch, a local total23 candidate and improved finite means; no new integer bound.

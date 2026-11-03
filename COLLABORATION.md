@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 116](milestones/116-paper-revision/README.md) revises the paper through 115 without new definitions, states the checked count restrictions and common excess budget, and distinguishes conditional finite improvements from actual bounds. Source and witness checks pass; the PDF compiler remains unavailable.
+Latest continuation: [milestone 117](milestones/117-cycle-sum-refinement/README.md) replays a count-sum contradiction that removes both prior attaining cycles. The conditional finite mean rises to 2915/6; integer comparisons remain 235 and 234. Lean checks the conditional geometric transfer and arithmetic. No new definitions or global bound.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -16,7 +16,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 106](milestones/106-paper-revision/README.md). The paper incorporates the arguments through milestone 105 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 116.
 
-Next research priority: Preserve both live proof batches and verify any final assembly before upgrading its status. Inspect the 26-edge and six-edge replacement cycles in milestone 115; test a shared count restriction on a direction shape they actually contain. Further strengthening only 012345 cannot improve their means. Keep both share profiles in the comparison, and continue the remaining 1,366 reference obligations. Next full paper revision: 126.
+Next research priority: Preserve both live proof batches. Check existing witnesses, then test outer sum at most 12 on canonical 012301; replacement cycles have outer sums 11 and 12 with middle count in [6,21]. Compare any viable restriction on both profiles. The 012034 outer-16 candidate still needs concrete Lean semantics and full contradiction. Next paper revision: 126.
 
 ## Historical checkpoints
 
