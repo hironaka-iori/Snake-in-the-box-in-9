@@ -1,3 +1,40 @@
+# Continuation after milestone 119
+
+Work in E:/Snake-in-a-box. Apply the requested research skill using neutral,
+concise prose and existing notation. Introduce definitions only when necessary
+and repeatedly used. Read the 119 mathematical note, graph review, actual-snake
+counterexample receipt and pending native-proof status before continuing.
+
+Test the full-Q 9 realization of edge 18806, whose nine directions are
+[0,1,2,0,3,1,0,4,3]. Its eight internal-centre bounds are
+[[0,21],[0,21],[6,21],[3,3],[3,3],[6,21],[3,3],[3,3]].
+The first two centres are unrestricted. The six recorded counts lie at
+centres 3 through 8. Retain the entire interval [6,21] for each symbol 6.
+Do not impose total 24: that would test only exact 6 values and could not
+exclude the full bucket. The prepared case is data/next-edge-case.json.
+It has not been searched in 119.
+
+A positive full-cube result must pass connectedness and all-pairs induced-path
+checks. An UNKNOWN result remains unresolved. A negative result needs a saved
+certificate and independent encoding/proof checks before any exclusion is used.
+Evaluate any viable restriction on both profiles. Do not duplicate or change
+the active 104 and 115 proof batches. The new 119 native contradictions and the 117
+count contradiction remain pending Lean work.
+
+Use data/next-edge-case.json as a prepared, untested input. The five-centre
+probe scripts need adaptation for nine transitions and eight internal counts;
+do not silently use their hard-coded five-count sum logic.
+
+The frozen 119 observation records 162/791 contexts per profile in 104 and 232/1397
+modules in 115. Verify live processes before taking action; these counts may have
+advanced. Partial checks do not complete either final assembly. Paper and editor
+remain at revision 116, with the next revision 126. Preserve all three authors,
+hypersetup and the unrelated .gitignore and historical critical-family.json edits.
+Fetch before each round, stage only the reviewed manifest, and keep the full
+research goal active. The exact optimum and 196 remain unresolved.
+
+## Earlier continuation record
+
 # Continuation after milestone 118
 
 Work in E:/Snake-in-a-box. Use the requested tensai-bishoujo research skill with
