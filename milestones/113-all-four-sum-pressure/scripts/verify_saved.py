@@ -1,0 +1,74 @@
+"""Freeze this round or verify its exact local/staged files and lossless archives."""
+from pathlib import Path
+import gzip, hashlib, json, re, shutil, subprocess, sys
+HERE=Path(__file__).resolve().parents[1]; ROOT=HERE.parents[1]
+read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
+sha=lambda b:hashlib.sha256(b).hexdigest()
+def stream_hash(f):
+    h=hashlib.sha256(); size=0
+    for block in iter(lambda:f.read(1024*1024),b''):h.update(block);size+=len(block)
+    return size,h.hexdigest()
+
+archives=read(HERE/'data/large-artifact-archives.json')
+assert archives['status']=='LOSSLESS_ARCHIVES_VERIFIED_ORIGINALS_RETAINED'
+originals={r['original'] for r in archives['files']}
+for r in archives['files']:
+    packed,raw=HERE/r['archive'],HERE/r['original']
+    assert packed.is_relative_to(HERE) and raw.is_relative_to(HERE)
+    with packed.open('rb') as f:assert stream_hash(f)==(r['archive_bytes'],r['archive_sha256'])
+    with gzip.open(packed,'rb') as f:assert stream_hash(f)==(r['bytes'],r['sha256'])
+    if '--restore-archives' in sys.argv and not raw.exists():
+        raw.parent.mkdir(parents=True,exist_ok=True)
+        with gzip.open(packed,'rb') as src,raw.open('xb') as dst:shutil.copyfileobj(src,dst,1024*1024)
+    if raw.exists():
+        with raw.open('rb') as f:assert stream_hash(f)==(r['bytes'],r['sha256'])
+if '--restore-archives' in sys.argv:
+    print('PASS_ARCHIVES_RESTORED_OR_ALREADY_PRESENT',len(archives['files']));sys.exit(0)
+
+c=read(HERE/'data/checkpoint.json');manifest=HERE/'data/file-manifest.json'
+assert c['status']=='PASS_PAIR_BUDGET_CONDITIONAL_TRANSFER_AND_FIXED_FAMILY_LIMITATION'
+assert sha((ROOT/c['prior_checkpoint']).read_bytes())==c['prior_checkpoint_sha256']
+assert sha((HERE/'data/batch-observation.json').read_bytes())==c['batch_observation_sha256']
+for p,digest in c['evidence_sha256'].items():assert sha((HERE/p).read_bytes())==digest,p
+review=(HERE/'audit/final-review.md').read_text(encoding='utf-8')
+reviewpins=re.findall(r'^\|`([^`]+)`\|`([0-9a-f]{64})`\|$',review,re.M)
+assert len(reviewpins)==12
+for p,digest in reviewpins:assert sha((HERE/p).read_bytes())==digest,p
+paper=(ROOT/'paper/snake9_research.tex').read_bytes()
+assert sha(paper)==c['paper_sha256']
+editor=Path('D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex')
+if editor.exists():assert editor.read_bytes()==paper
+assert c['new_mathematical_definitions']==0 and not c['new_global_bound']
+
+if '--verify' not in sys.argv and '--staged' not in sys.argv:
+    assert not manifest.exists()
+    paths=[p for p in HERE.rglob('*') if p.is_file() and p!=manifest
+        and '__pycache__' not in p.relative_to(HERE).parts
+        and not any(part.startswith('build') for part in p.relative_to(HERE).parts[:-1])
+        and p.relative_to(HERE).as_posix() not in originals]
+    paths += [ROOT/p for p in read(HERE/'data/additional-batch-evidence.json')]
+    paths += [ROOT/p for p in ['README.md','COLLABORATION.md','RESEARCH_LEDGER.md','milestones/README.md',
+        'handoff/README.md','handoff/CURRENT_STATUS.md','handoff/NEXT_AGENT_PROMPT.md']]
+    rows=[dict(path=p.relative_to(ROOT).as_posix(),bytes=p.stat().st_size,sha256=sha(p.read_bytes())) for p in sorted(set(paths))]
+    assert all(r['bytes']<100*1024*1024 for r in rows)
+    manifest.write_text(json.dumps(dict(status='SAVED_PAIR_BUDGET_CONDITIONAL_TRANSFER_AND_LOCAL_LIMITATIONS',files=rows,
+        raw_artifact_policy='Large original partial proofs remain local and have verified lossless gzip transport copies.',
+        scope='Generic Lean budget and conditional geometry, native candidate, three local witnesses, unchanged conditional graph comparisons and exact coefficient ceilings. No improved numerical bound.'),indent=2)+'\n',encoding='utf-8')
+    print('SAVED_MANIFEST',len(rows),'files',sum(r['bytes'] for r in rows),'bytes')
+else:
+    rows=read(manifest)['files']
+    for r in rows:
+        raw=(ROOT/r['path']).read_bytes()
+        assert len(raw)==r['bytes'] and sha(raw)==r['sha256'],r['path']
+    if '--staged' in sys.argv:
+        names=[r['path'] for r in rows]+[manifest.relative_to(ROOT).as_posix()]
+        actual=subprocess.check_output(['git','-c','core.commitGraph=false','diff','--cached','--name-only'],cwd=ROOT,text=True).splitlines()
+        assert set(actual)==set(names),'Index differs from reviewed manifest'
+        index=''.join(subprocess.check_output(['git','-c','core.commitGraph=false','ls-files','-s','--',*names[i:i+35]],cwd=ROOT,text=True)
+                      for i in range(0,len(names),35))
+        blobs={line.split('\t',1)[1]:line.split()[1] for line in index.splitlines()}
+        for name in names:
+            raw=(ROOT/name).read_bytes()
+            if not name.startswith(('milestones/104-','milestones/113-')):raw=raw.replace(b'\r\n',b'\n')
+            assert hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==blobs[name],name
+    print('PASS_EXACT_STAGED_FILES' if '--staged' in sys.argv else 'PASS_LOCAL_MANIFEST',len(rows))

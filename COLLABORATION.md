@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 112](milestones/112-critical-sum-refinement/README.md) proves an actual count-sum theorem and a shared charging budget. The expanded conditional graph reaches completed mean 484; integer comparisons remain 235 and conditional 234. Zero-deficit cycles rule out further coefficient improvement within this fixed family.
+Latest continuation: [milestone 113](milestones/113-all-four-sum-pressure/README.md) checks shared pair-credit arithmetic and a conditional geometric transfer. A locally sharp candidate removes 41,361 more graph keys; comparisons remain 235 and conditional 234. Replacement cycles fix the present coefficient ceilings.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -14,9 +14,9 @@ Count-free share continuation: [current comparison](milestones/80-012310-share-c
 
 Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved-rule-conditional-pressure/README.md), on the conditional optimisation track. The forty recovered proved rules reduce the additional count premises for **234** from **18,788 to 14,155**, a reduction of **4,633 (24.66%)**. Independent verification checks all **3,533,981 retained transitions** and every mandatory-key witness. Recomputing the full conditional model raises its exact integer mean to **1492/3**, but the earlier potential needs fewer count proofs and is retained. Eight new Lean audits cover pruning and conditional arithmetic. The contributor-checked global interval remains **191 <= a(9) <= 235**. Selected count premises, complete graph-to-snake assembly and Lean graph-potential replay remain pending.
 
-Current manuscript revision: [milestone 96](milestones/96-paper-revision/README.md). All 130 prior statements and the original appendix body are preserved; four statements bring the total to 134. All 13 printed snakes pass 118,673 vertex-pair checks, and all 199 labels resolve. The 55-row history table matches the checked 69-word catalogue and eight capped bounds. Authors and hyperlink settings are unchanged, and the editor and repository sources are identical. The built-in compiler could not start its helper, so no updated PDF or layout check is claimed.
+Current manuscript revision: [milestone 106](milestones/106-paper-revision/README.md). The paper incorporates the arguments through milestone 105 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 116.
 
-Next research priority: Test the exact all-4 configuration on 012034, then seek a stronger family sum inequality if it is impossible. Compare every viable candidate on both full profiles. Do not repeat coefficient sweeps for the current seven rules; preserve the running milestone 104 batch and all pending proof evidence.
+Next research priority: Test total count at most 18 on canonical 012310, without extra count caps. Both replacement cycles contain such a window. Compare a viable restriction on both full profiles before proof export. Preserve milestone 104 and avoid repeated coefficient sweeps within the current eight-rule family.
 
 ## Historical checkpoints
 

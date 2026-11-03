@@ -1,0 +1,77 @@
+{
+  "module": "PairBudget113",
+  "status": "PASS_PAIR_BUDGET_ARITHMETIC",
+  "run": "1793660771050384800",
+  "started_at": "2026-11-02T23:06:11.717560+00:00",
+  "source_sha256": "43e14e2778dce88e152f8b46976bd5ebe36949328dac46478b5e3c2c251c3d76",
+  "source_snapshot": "logs/PairBudget113-1793660771050384800-source.lean.txt",
+  "checker_sha256": "58568d4beb7e4108ed722eac8840fe36ca8d3c69e9f00d04100d52cf30d8d6ed",
+  "checker_snapshot": "logs/PairBudget113-1793660771050384800-checker.py.txt",
+  "dependencies": {
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\Mathlib\\Tactic.lean": "5d88b2d206b874329d3cd82828a8dbc3cc2594dfedb0dbfd9dd7ce7b4535731f",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\build\\lib\\lean\\Mathlib\\Tactic.olean": "e47e8c8e7322c616b383f316a18c708f8ea108830f36609aaa2689fb652391f6",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\lake-manifest.json": "134206d98c64064cea35395c7ab469d7f0782b1383deaecf63322abc1fd5b1d1",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe": "864d733fc2903cacaac67a5f705fa8dce917629c98c3a185d314e2f9860e7367",
+    "E:\\Snake-in-a-box\\milestones\\41-joint-intervening-sum\\lean\\JointExcess.lean": "5f0c52c2931ed35fa8e48456f56773a289f2b61556902e3cc1a64a7bd83a8b2a",
+    "E:\\Snake-in-a-box\\milestones\\98-concrete-weight-integration\\lean\\GlobalCharge98.lean": "3bce11e1fcbb19c51385c0def17617f3ffc87ea4c23ed16c95fef3fee10cdc29",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\lean\\SumBudget112.lean": "1581ec791726928ff778d491a31dd0e5c8e219d57f07683d289c3913ce8a9d64",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\build\\SumBudget112.olean": "b497839ee963f4104431d549e1d57dd300b5d53b5a88ebd5e754e8330cdf9199",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\logs\\SumBudget112-1793658663317802500.log": "04ba58149c7867a38100baee815f57978bbae091de39e858649e60a7d7d74225",
+    "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\data\\SumBudget112-audit.json": "e889af4429c8de2b5534dc6c79eed99f105c79cbdecf80981d164c93884af13e"
+  },
+  "other_lean_processes": [
+    {
+      "ProcessId": 34564,
+      "PrivatePageCount": 7662202880,
+      "CommandLine": "\"lean\" \"-s\" \"65536\" \"-R\" \"E:\\Snake-in-a-box\\milestones\\104-complete-potential-batch\\lean\" \"-o\" \"E:\\Snake-in-a-box\\milestones\\104-complete-potential-batch\\build\\CompletedBatch104G079.1793660707063346500.olean\" \"E:\\Snake-in-a-box\\milestones\\104-complete-potential-batch\\lean\\CompletedBatch104G079.lean\""
+    }
+  ],
+  "gate": "At most one other Lean process, with aggregate private memory below 8 GiB.",
+  "scope": "Generic arithmetic and boundary accounting only; all local sum bounds remain explicit premises.",
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lake.exe",
+    "env",
+    "lean",
+    "-s",
+    "65536",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\113-all-four-sum-pressure\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\113-all-four-sum-pressure\\build\\PairBudget113.1793660771050384800.olean",
+    "E:\\Snake-in-a-box\\milestones\\113-all-four-sum-pressure\\lean\\PairBudget113.lean"
+  ],
+  "cwd": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib",
+  "launcher_pid": 36492,
+  "exit_code": 0,
+  "timeout": false,
+  "seconds": 15.26600000000326,
+  "log": "logs/PairBudget113-1793660771050384800.log",
+  "log_sha256": "d693a342f61bc7a423806e91594d3cbf5524e95bb443158b803298fa64a6c431",
+  "olean_sha256": "127b6e810140d661887198f91c9550d193cdc3224c68111c2867085080ba95de",
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.PairBudget113.pair_deficit_le",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.PairBudget113.shared_pair_budget",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.PairBudget113.shared_count_pair_budget",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ]
+}

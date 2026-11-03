@@ -1,5 +1,46 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 113 checkpoint
+
+On canonical 012034, central caps (5,4,5) appear to force the outer
+pair to sum to at least 9. Native UNSAT supports the candidate, but two
+30-second proof-generation attempts timed out. Lean checks the geometric
+transfer with the local contradiction retained as an explicit premise.
+No concrete actual-snake pair inequality is claimed.
+
+Lean also checks that the pair deficit fits the existing shared maximum
+credit with capacity 4*a+b<=120. There are two successful modules, four
+standard axiom reports and no new mathematical definitions. Eleven local
+tests comprise six native UNSAT results, two UNKNOWN results and three
+independently verified local witnesses. The witness (6,5,4,5,3) attains
+pair sum 9, so the current relaxed assumptions cannot force 10.
+
+The pair hypothesis removes 41,361 further keys beyond milestone 112,
+leaving 4,867,866. Both finite comparisons remain unchanged: completed
+mean/range 484/557 gives 1103389/4684, with integer floor 235; conditional
+496/602 gives 551765/2348, with floor 234. Both assume unproved sum rules.
+Replacement cycles have zero applicable deficits, proving coefficient
+ceilings 484/496 within this fixed eight-rule family. No new global
+numerical snake bound follows.
+
+Both replacement cycles contain a 012310 window with five-count sum 18.
+The next bounded test is total at most 18 on that pattern with no extra
+count caps. A total lower bound of 19 would remove these cycles; compare
+both full profiles to determine whether other attaining cycles survive.
+
+At this saved process-verified observation, milestone 104 was RUNNING with
+95/791 completed and 94/791 conditional contexts
+checked. Its active module was `CompletedBatch104G081`. Preserve
+that batch and all immutable evidence. The reference union still has
+1,366 unresolved entries.
+
+The maintained interval remains 191 through 235 edges, based on the
+contributor proof and archived audit, with a full independent rebuild
+pending. Conditional 234, the exact optimum and 196 remain unresolved.
+Paper revision 106 is unchanged; the next full revision is 116.
+
+Earlier checkpoint sections below are historical snapshots.
+
 ## Milestone 112 checkpoint
 
 A new actual-snake theorem proves that on canonical direction pattern

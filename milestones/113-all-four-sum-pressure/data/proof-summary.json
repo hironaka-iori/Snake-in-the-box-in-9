@@ -1,0 +1,185 @@
+{
+  "status": "PASS_PAIR_BUDGET_AND_CONDITIONAL_TRANSFER_LOCAL_LIMITATION",
+  "modules": [
+    {
+      "module": "PairGeometry113",
+      "receipt": "data/PairGeometry113-audit.json",
+      "receipt_sha256": "4f9693eea6ee0b5c444bea836fe9118db7f6ced8c8a9b5912a6f1c33aab12a22"
+    },
+    {
+      "module": "PairBudget113",
+      "receipt": "data/PairBudget113-audit.json",
+      "receipt_sha256": "cc72af732c689b51e332ea201e35683dd096a697493b3bb04dae5aaa51df4423"
+    }
+  ],
+  "theorem_audits": [
+    {
+      "theorem": "Snake9.PairGeometry113.actual_pair_sum",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.PairBudget113.pair_deficit_le",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.PairBudget113.shared_pair_budget",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.PairBudget113.shared_count_pair_budget",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "probes": [
+    {
+      "name": "012034-exact43454",
+      "status": "UNSAT_UNCERTIFIED",
+      "cuts": 0
+    },
+    {
+      "name": "012034-exact44444",
+      "status": "UNSAT_UNCERTIFIED",
+      "cuts": 0
+    },
+    {
+      "name": "012034-middle4-outer5-sum16",
+      "status": "UNKNOWN",
+      "cuts": 0
+    },
+    {
+      "name": "012034-middle445",
+      "status": "SAT_LOCAL_WITNESS",
+      "cuts": 0
+    },
+    {
+      "name": "012034-middle545-pair8",
+      "status": "UNSAT_UNCERTIFIED",
+      "cuts": 0
+    },
+    {
+      "name": "012034-middle545-pair9",
+      "status": "SAT_LOCAL_WITNESS",
+      "cuts": 12
+    },
+    {
+      "name": "012034-upper44444",
+      "status": "UNSAT_UNCERTIFIED",
+      "cuts": 0
+    },
+    {
+      "name": "012034-upper44454",
+      "status": "UNSAT_UNCERTIFIED",
+      "cuts": 0
+    },
+    {
+      "name": "012034-upper45454",
+      "status": "UNSAT_UNCERTIFIED",
+      "cuts": 0
+    },
+    {
+      "name": "012034-upper55455",
+      "status": "SAT_LOCAL_WITNESS",
+      "cuts": 5
+    },
+    {
+      "name": "012310-exact44444",
+      "status": "UNKNOWN",
+      "cuts": 0
+    }
+  ],
+  "native_proof_timeouts": [
+    {
+      "name": "012034-middle545-pair8",
+      "status": "TIMEOUT",
+      "raw_bytes": 34676736
+    },
+    {
+      "name": "012034-middle545-pair8-plain",
+      "status": "TIMEOUT",
+      "raw_bytes": 29310976
+    }
+  ],
+  "profile_comparisons": [
+    {
+      "label": "interval45454",
+      "edges": 4887350,
+      "additional": 21877
+    },
+    {
+      "label": "pair24",
+      "edges": 4867866,
+      "additional": 41361
+    }
+  ],
+  "source_files_sha256": {
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-exact43454.json": "80b9fd33d6b0e1f8427baf8f6533acacb5e741443a597943db92ee3acda0857f",
+    "milestones/113-all-four-sum-pressure/data/cases-common.json": "70d1afe98a7827f6569b70235580fff3398e370e18134a8dd5a4b2eae593a414",
+    "milestones/28-direct-share-certificates/scripts/tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+    "milestones/28-direct-share-certificates/scripts/direct.py": "a2dc4151244a28b5f95c6de26c36146f7297c9c32d9d422f9498b42f286cb126",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-exact44444.json": "def7a0d20f4a4a612691b909fbe7d93824faa02f371103dfc3f2cee36d19e8b8",
+    "milestones/113-all-four-sum-pressure/data/cases-initial.json": "16891d6d4d24923c01ed326da0cbccd1777b974d1fc4dcdb15185162fd764e6f",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-middle4-outer5-sum16.json": "181a574a172ab1b4ee49eff8bcf12db20a983808931a174fc4c809c7e47e0f4e",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-middle445.json": "095b58a8ee93f7977450a703c689ae8f56c62e15aa017ddc5b1753128d217fca",
+    "milestones/113-all-four-sum-pressure/data/cases-relaxed.json": "8d3867258b752885b293e59b0e09c5fca0713e9e618c83b3d189065de618cec1",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-middle545-pair8.json": "0ff87327b1855fc6264f75e589d3aea7904c55f406800b060a9974427489d44d",
+    "milestones/113-all-four-sum-pressure/data/cases-pair.json": "81ec42fce4c691e2b5b434ff9fc28d260f337550b53b0489f99fd9b688d1a421",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-middle545-pair9.json": "cfd2bd41504e5e3aec0fdd83c58a3c165bfc37062a34faa8ff79d34148354076",
+    "milestones/113-all-four-sum-pressure/data/cases-pair-sharpness.json": "bd78faffd6d9128529069f09b1374b2bea0786644be945f03cede46333595427",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-upper44444.json": "5f15ef08a2da98a6d8b46e55b42ffd4cc4eb7575698bdf7f4ef0be728dd81e4b",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-upper44454.json": "ceab537b9bc9eba8834e1dd060a99a6d273f223fdc0fc48cbf1dab10199041d4",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-upper45454.json": "b4d3577880860817d398edf80676f6603ff1b1948a8766fa3492dda5e81dea9e",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-upper55455.json": "7010ee319622efd36b9d3e50dfb4204585d47d77141cb532dabcbd548e01f50b",
+    "milestones/113-all-four-sum-pressure/data/probes/012310-exact44444.json": "9f284cfd831ecdffad6b5a24ddebb533a31b75aac075b43efb0022b45e7b25c1",
+    "milestones/113-all-four-sum-pressure/data/012034-middle545-pair8-solver.json": "fcc961b63a9a2d810e316e74ed8b4815defc82883a42fe2550a84018b26434db",
+    "milestones/113-all-four-sum-pressure/data/012034-middle545-pair8-plain-solver.json": "69b0e872d88b0be18e36c89806b5e336c11b55385d60f08ce3b9b6c0f93b886b",
+    "milestones/113-all-four-sum-pressure/data/PairGeometry113-audit.json": "4f9693eea6ee0b5c444bea836fe9118db7f6ced8c8a9b5912a6f1c33aab12a22",
+    "milestones/113-all-four-sum-pressure/lean/PairGeometry113.lean": "91242537197f531629b1a3d144770e6234363561b530ccff1e41926fdb78fdb5",
+    "milestones/113-all-four-sum-pressure/logs/PairGeometry113-1793660440889016500.log": "2b7dd9b4614a48e7e1d00b59556c15035e2e90e8e4c017c9b8adc24d46e1e97d",
+    "milestones/113-all-four-sum-pressure/data/PairBudget113-audit.json": "cc72af732c689b51e332ea201e35683dd096a697493b3bb04dae5aaa51df4423",
+    "milestones/113-all-four-sum-pressure/lean/PairBudget113.lean": "43e14e2778dce88e152f8b46976bd5ebe36949328dac46478b5e3c2c251c3d76",
+    "milestones/113-all-four-sum-pressure/logs/PairBudget113-1793660771050384800.log": "d693a342f61bc7a423806e91594d3cbf5524e95bb443158b803298fa64a6c431",
+    "milestones/113-all-four-sum-pressure/data/interval45454/results.json": "0d11ddeb7a9f146f637f4cc96597614dacc1446698cfbf0fe5068a7919d3b339",
+    "milestones/113-all-four-sum-pressure/data/sum-rules112.json": "bbcd323d7d4e349432d10a4122c16d290dae5b10c5e4fafe3e47902732ab592d",
+    "milestones/111-critical-count-intervals/data/probes/outer-sum21-sorted.json": "ef079635e3bd95560b0b6d227346f486febd37b700da07e5c8ceffe5a682f82d",
+    "milestones/111-critical-count-intervals/data/probes/centre3-sum18-sorted.json": "41fd75bf1c242c4bc4ae4577547f03274816444ef11f5cb642214daa5fb5b3ea",
+    "milestones/111-critical-count-intervals/data/probes/centre21-sum16.json": "49b52abaf47058d2c11295f65aeef3319e951e1e0f81f8420c192fb5e952059e",
+    "milestones/112-critical-sum-refinement/data/probes/012340-middle5-outer17.json": "4f90e856240fc0db5c0f0649c0a840e0b19b254626372c4d274bbc05e84a4724",
+    "milestones/112-critical-sum-refinement/data/probes/012034-total19.json": "58279638ad42b6a828d8df3da4f6434eb2fc481197ef08fd9058c5a25a32d7ed",
+    "milestones/112-critical-sum-refinement/data/probes/012031-upper5-outer14.json": "0471bff64811b5a990e3a39279ef96b80de0522ae5334485181d804bd27dc444",
+    "milestones/112-critical-sum-refinement/data/probes/012314-upper2-outer18.json": "4d35886143ab0e838fb6f4a09383d6bc990ef426d5956b862b67c292d5b22c06",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/73-countfree-share-catalogue/data/proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18.json": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+    "milestones/111-critical-count-intervals/data/middle325-profiles/removed-indices.json": "ffaae82933775c8d76c5410c216910e3e3cab8873ea5a996b7336e511aa6ad84",
+    "milestones/112-critical-sum-refinement/data/expanded24/removed-indices.json": "eb28544c4fc845e145d833e22843078abd58ed65f442f28257ef4c3db4b26684",
+    "milestones/113-all-four-sum-pressure/data/proposed-intervals.json": "b22a7a2ec4d8b4927c548880f0178e5b721289206698bd2b47aa5f956ac8a9ad",
+    "milestones/113-all-four-sum-pressure/data/pair24/results.json": "0bdd988a2c7bf544d83af323685fe73e9bf48119adc70bf7bf1a7cbbe4d33a70",
+    "milestones/113-all-four-sum-pressure/data/pair-rules.json": "eb5151118d4d22684fb52e13b05db2cab03db76727f99b3175fd8f6777f7e129",
+    "milestones/113-all-four-sum-pressure/data/independent-check.json": "717b8d520e7f90e5001d42ca8f862aa0e609da21e7ccf39863d9e54ac1644f2f"
+  },
+  "script_sha256": "1c03d7f8760f1704426d9f17bf696a0698de5463947ba371d2b4236938a17f5f",
+  "new_mathematical_definitions": 0,
+  "concrete_pair_contradiction_checked": false,
+  "complete_graph_lean_certificate": false,
+  "new_global_bound": false,
+  "scope": "Exact CNF reconstruction, saved source pins and two successful Lean modules checked. Pair geometry retains a local contradiction premise. Native UNSAT and partial proofs do not discharge it. Independent witnesses and replacement cycles limit this fixed family."
+}
