@@ -36,7 +36,7 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $\alpha_i$ for the singleton-square count at path vertex $i$, $T=\sum_i\alpha_i$, and $s_0$ for the number of empty squares, the exact identity is $T+2s_0+35(m+1)=9214$. Direct summation shows that a universal lower bound of 25 on six consecutive internal counts would imply $a(9)\le234$; a bound of 26 would imply $a(9)\le233$. A weaker sufficient condition bounds the combined shortfall below 25 over 39 disjoint groups by $28+2s_0$. These implications are checked, while their additional hypotheses remain unresolved. The six-count bound 25 is proved for direction pattern $0123041$ and its reversal. A sharp pair-count theorem and a restriction on possible $0120324$ counterexamples supply further local constraints. Separately, empty-square shares and finite comparison graphs yield conditional bounds and identify surviving cycles that limit the tested refinements. Twenty of 1378 reference entries are discharged; the remaining refutations, complete potential certificate and five additional share bounds retain their stated roles. The optimum and the numerical conjecture 196 remain unresolved.
+Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $m$ for the edge length, $T$ for the total singleton-square count and $s_0$ for the empty-square count, the identity is $T+2s_0+35(m+1)=9214$. For a canonical $012032$ window, the second and fourth internal counts have sum at least eight. Equality forces both endpoints into the common distance-two sphere and can occur at most thirteen times; it also requires an even path length and an even window start. A sum at most nine forces an endpoint to share an unselected neighbour with the four alternate window vertices. We prove that at most thirty-two such windows occur in any snake, allowing overlap and either length parity. Explicit odd-length snakes show that a uniform pair floor ten is false. Six-count and empty-square criteria give conditional improvements to 234 and 233, while surviving cycles limit the tested finite comparisons. A stronger twenty-four-window estimate remains under verification. The optimum and the numerical conjecture 196 remain unresolved.
 \end{abstract}
 
 \clearpage
@@ -96,7 +96,9 @@ Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbou
 Conditional bound 234 & Slope 496, range 602 and boundary contribution 21; five local shares, the reference refutations and the full potential certificate remain pending.\\
 Graph interpretation and total charge & Complete coverage and all baseline weight components are checked. Twenty of 1378 reference entries are discharged; 1358 remain.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
-New local count restrictions & The six-count floor 25 is proved for $0123041$. The $012032$ pair bound eight is sharp; $0120324$ has a checked necessary interval restriction.\\
+New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
+Endpoint and parity restrictions & Pair sum eight on $012032$ forces both endpoints into the common sphere, at most thirteen occurrences, and even path length and start.\\
+Low-pair occurrence bound & At most thirty-two $012032$ windows have pair sum at most nine. The proposed total twenty-four remains under verification.\\
 $a(9)=196$ & A numerical extrapolation requiring both a construction and a next-length exclusion.\\
 \bottomrule
 \end{tabular}
@@ -863,39 +865,248 @@ attain the three displayed pairs. Their induced-path conditions, designated
 directions and singleton counts are checked in Lean~\cite{pair012032archive}.
 \end{proof}
 
-For this pattern, the case $(2,6)$ also forces both endpoints to lie at
-Hamming distance two from both counted vertices; its actual-snake proof
-is complete. Reversal gives the corresponding $(6,2)$ conclusion. The
-analogous statement for every pair with sum eight remains conditional:
-the remaining boundary cases require their complete checked deductions.
-The three printed witnesses satisfy the stronger endpoint statement,
-which alone does not prove it for every snake~\cite{endpointequalityarchive}.
+\begin{theorem}[Endpoint geometry at equality]\label{thm:pair-eight-endpoints}\label{prop:pair-equality-occurrences}
+If a fitting canonical $012032$ window satisfies
+$\alpha_{r+2}+\alpha_{r+4}=8$, both counted vertices are at Hamming distance
+two from both endpoints. At most thirteen such window starts occur in any snake.
+\end{theorem}
+\begin{proof}[Computer-assisted proof and counting]
+The pair minima and reversal reduce equality to the caps $(2,6)$, $(3,5)$
+and $(4,4)$. For each cap, a complete checked contradiction excludes an
+endpoint outside the fourteen-vertex common distance-two sphere in normalized
+coordinates. The actual-snake interpretations, all three contradiction
+certificates and coordinate transfers are complete~\cite{endpointcompletionarchive}.
 
-\begin{proposition}[A conditional limit on equality occurrences]\label{prop:pair-equality-occurrences}
-Assume every $012032$ window with second and fourth counts summing to eight
-has both counted vertices at distance two from both endpoints. Then at most
-13 such windows occur in a snake.
-\end{proposition}
-\begin{proof}
-The distance-two spheres about distinct vertices of $\Q_9$ intersect in at
-most 14 vertices. Translation reduces this finite fact to 511 nonzero
-endpoint differences and the 36 vertices at distance two from zero; the
-finite verification and its application to actual path positions have
-passed Lean. For a nonempty set $I$ of qualifying starts, the first counted
-positions $r+2$, for $r\in I$, are distinct. The further position
-$\max I+4$ exceeds all of them and is also counted by one of these windows.
-All $|I|+1$ vertices lie in the same intersection, so $|I|+1\le14$.
-The empty case is immediate~\cite{endpointequalityarchive}.
+The distance-two spheres about two distinct vertices of $\Q_9$ intersect
+in at most fourteen vertices. Translation reduces this finite fact to
+511 nonzero endpoint differences and the 36 vertices at distance two from
+zero. The finite verification and its application to actual path positions
+have passed Lean. For a nonempty set $I$ of qualifying starts, the positions
+$r+2$, for $r\in I$, are distinct. The further position $\max I+4$ exceeds
+all of them and is counted by one of these windows. All $|I|+1$ vertices
+lie in the same intersection, so $|I|+1\le14$. The empty case is immediate.
+The theorem has no remaining local-certificate premise; attainment of thirteen
+is not asserted.
 \end{proof}
-This proposition retains the endpoint hypothesis. It supplies no bound on
-the number of six-count groups with sum below 25.
+
+\begin{corollary}[Parity at equality]\label{cor:pair-nine-parity}
+Equality of the pair sum to eight requires both $m$ and $r$ to be even.
+Consequently $\alpha_{r+2}+\alpha_{r+4}\ge9$ whenever $m$ or $r$ is odd.
+\end{corollary}
+\begin{proof}
+Hamming distance two preserves the parity of the number of nonzero cube
+coordinates. The preceding theorem gives the same parity to $x_0$, $x_m$
+and $x_{r+2}$. Each path edge reverses that parity, so $m$ and $r+2$ are
+even. Integrality and the pair floor eight give the result. These parity
+deductions have passed Lean~\cite{endpointcompletionarchive}.
+\end{proof}
+
+The bound nine for odd-length snakes is sharp. A 149-edge snake has internal
+counts $(8,6,10,3,8)$ in the normalized window; a 133-edge snake has counts
+$(11,4,13,5,12)$. Their relevant pairs are $(6,3)$ and $(4,5)$. Thus a
+uniform pair floor ten fails even when both counts are at least four.
+The complete paths, counts and endpoint distances have passed Lean.
+Appendix~\ref{app:odd-pair-witnesses} gives their transition sequences.
+These examples supply no record construction or realization of an entire
+critical comparison-graph cycle~\cite{oddwitnessarchive}.
+
+\subsection{An endpoint forced by a pair sum at most nine}\label{sec:small-pair-endpoint}
+\begin{theorem}[Endpoint and common neighbour]\label{thm:small-pair-endpoint}
+Suppose a fitting window beginning at $x_r$ has canonical directions
+$012032$ and $\alpha_{r+2}+\alpha_{r+4}\le9$. There is an endpoint
+$x_e$, with $e\in\{0,m\}$, such that
+\[
+\Ham(x_e,x_{r+2})=\Ham(x_e,x_{r+4})=2.
+\]
+Moreover, an unselected vertex $z$ is adjacent to $x_e$ and to each of
+$x_r,x_{r+2},x_{r+4},x_{r+6}$. No parity assumption on $m$ or $r$ is needed.
+\end{theorem}
+\begin{proof}[Computer-assisted proof and geometric transfer]
+Normalize the window to $(0,1,3,7,6,14,10)$. The counted centres are 3 and 6.
+Their eligible square lists contain 42 opposite-corner occurrences over
+37 distinct vertices; the five shared corners are each counted twice.
+Suppose the pair sum is at most nine and neither endpoint has the two
+required distances. Give each represented vertex its actual path and
+endpoint membership, and interpret each count register by its prefix threshold.
+The following necessary conditions hold:
+\begin{center}\small
+\begin{tabular}{l r}
+\toprule Condition & Selected clauses\\\midrule
+The seven window vertices are selected & 7\\
+A selected vertex has at most two selected neighbours & 192\\
+A selected degree-one vertex is an endpoint & 32\\
+Ten specified six-vertex cycles are not wholly selected & 10\\
+The 42 corner occurrences have sum at most nine & 435\\
+Seven specified vertices are not endpoints & 7\\\bottomrule
+\end{tabular}
+\end{center}
+The last seven vertices are $0,10,18,34,66,130,258$, each at distance two
+from both centres. A complete certificate contradicts these 683 clauses.
+All clause interpretations, the 13299 deductions and the coordinate transfer
+have passed Lean. The selected proof uses neither an endpoint-parity premise
+nor a global endpoint-count register~\cite{lowpairarchive}.
+
+The other seven vertices in the common distance-two sphere are
+$5,15,23,39,71,135,263$. They are adjacent to the selected internal vertex 7,
+whose two path neighbours exhaust its selected degree, so none is selected.
+A qualifying endpoint therefore belongs to the displayed seven-vertex list.
+Every member of that list and the alternate window vertices $0,3,6,10$ is
+adjacent to vertex 2. Transfer this neighbour to the original coordinates.
+It is absent: a selected vertex adjacent to both $x_r$ and $x_{r+6}$ would
+have to be consecutive to both, which is impossible. The stronger
+common-neighbour conclusion is also checked~\cite{occurrencearchive}.
+\end{proof}
+
+\begin{corollary}\label{cor:pair-ten-without-endpoint}
+If neither endpoint is at distance two from both counted centres of a
+fitting $012032$ window, then $\alpha_{r+2}+\alpha_{r+4}\ge10$.
+\end{corollary}
+\begin{proof}
+Use the contrapositive of Theorem~\ref{thm:small-pair-endpoint} and integrality.
+\end{proof}
+
+\subsection{Counting windows assigned to an endpoint}\label{sec:endpoint-occurrences}
+\begin{lemma}[Count for one endpoint]\label{lem:sixteen-endpoint-windows}
+Fix an endpoint and a set of fitting six-transition window starts. Suppose
+each window's four alternate vertices and that endpoint share an unselected
+neighbour. Then there are at most sixteen starts.
+\end{lemma}
+\begin{proof}
+Orient the path from the endpoint and translate it to zero, using the same
+transformed path for all windows. Write its first successor as $\{b\}$,
+identifying a cube vertex with its nonzero coordinates. A window's common
+neighbour with the endpoint is a unit vertex $\{a\}$, with $a\ne b$
+because it is unselected. Its selected neighbours have even parity. Every
+window start is therefore even, and dividing the starts by two preserves
+their distinctness.
+
+Let $I$ be these sampled starts. Each $r\in I$ covers $[r,r+3]$ and is
+assigned its common coordinate. Let $A$ be the coordinates used and $a=|A|$.
+They exclude $b$, so $a\le8$. If $u<v$ have different common coordinates
+and $v<u+3$, their windows share two positive sampled positions. The only
+common neighbours of two distinct unit vertices are zero and their pair
+vertex. Both shared positions would equal that pair, violating injectivity.
+Thus differently labelled starts satisfy $u+3\le v$.
+
+For nonempty $I$, this separation implies
+\[
+|I|+2a+1\le\left|\bigcup_{r\in I}[r,r+3]\right|.
+\]
+Insert the starts in increasing order. The first contributes four positions.
+Each later start contributes at least one new position. If its coordinate
+has not occurred previously, separation supplies three new positions,
+accounting for the additional two in $2a$.
+
+A selected pair containing $b$ is adjacent to the first successor and hence
+can occur only at path index two. Every covered position other than sampled
+indices zero and one is consequently a pair among the other eight coordinates,
+incident to $A$. There are $7a-\binom a2$ such pairs. Distinct positions
+represent distinct vertices, so
+\[
+\left|\bigcup_{r\in I}[r,r+3]\right|\le7a-\binom a2+2.
+\]
+Hence $|I|\le1+5a-\binom a2\le16$; the last inequality follows from
+$(a-5)(a-6)\ge0$ for integral $a$. The empty case is immediate.
+Reversal sends a fitting start $r$ to $m-r-6$ injectively, covering either
+endpoint. The normalization, parity, separation, capacity and full count
+have passed Lean~\cite{occurrencearchive}.
+\end{proof}
+
+\begin{theorem}[Number of low-pair windows]\label{thm:thirty-two-windows}
+Every snake in $\Q_9$ has at most thirty-two fitting canonical $012032$
+windows with $\alpha_{r+2}+\alpha_{r+4}\le9$. Windows may overlap, and
+each starting position is counted once.
+\end{theorem}
+\begin{proof}
+Assign a window to the initial endpoint whenever it admits the unselected
+common neighbour in Theorem~\ref{thm:small-pair-endpoint}, and assign every
+remaining window to the final endpoint. The two groups are disjoint and
+exhaustive. Lemma~\ref{lem:sixteen-endpoint-windows} bounds each by sixteen.
+The resulting actual-snake theorem has passed Lean~\cite{occurrencearchive}.
+\end{proof}
+The sixteen-window statement retains its common-neighbour hypothesis. The
+two distance equalities alone are a broader assignment condition. The
+thirteen-window theorem uses both endpoints and specifically pair sum eight;
+it cannot be applied separately to the groups above.
+
+\subsection{Missing pairs and the proposed stronger count}\label{sec:missing-pair-occurrences}
+\begin{lemma}[Missing opposite pair]\label{lem:missing-opposite-pair}
+Normalize an endpoint to zero. If $j\ge2$ and consecutive sampled vertices
+are $x_j=\{a,b\}$ and $x_{j+2}=\{a,c\}$ for distinct coordinates, then
+$x_{j+1}=\{a,b,c\}$ and $\{b,c\}$ is absent from the entire snake.
+\end{lemma}
+\begin{proof}
+The possible intermediaries are $\{a\}$ and $\{a,b,c\}$. The former would
+be adjacent to the initial endpoint at a nonconsecutive position. The triple
+is forced. If the opposite pair were selected, the triple would have a third
+selected neighbour. Both deductions have passed Lean~\cite{occurrencearchive}.
+\end{proof}
+
+Within a consecutive interval sharing one coordinate, the other coordinates
+are distinct. Each successive pair of other coordinates is missing by the
+lemma. For a set $A$ of common coordinates, such a list has length at most
+the maximum of one and the number of available coordinates outside $A$, plus
+the number of eligible missing pairs incident to $A$. If an outside coordinate
+occurs, count each consecutive block in $A$ against distinct incident edges
+of the list. Otherwise the vertex count exceeds the edge count by one.
+The list inequality and its application to actual snake vertices are checked.
+
+Let $F$ be the missing pairs meeting $A$, put $t=|F|$, and, for $u\in A$,
+let $d_u$ count its incident missing pairs and $s_u$ those going outside $A$.
+The identities used to sum interval estimates are
+\[
+|\{e\in F:u\notin e\}|=t-d_u,\qquad
+\sum_{u\in A}d_u\ge t,\qquad
+\sum_{u\in A}(d_u+s_u)=2t.
+\]
+An internal pair contributes two to the last sum; a crossing pair contributes
+one degree and one crossing degree. If $t=3$, at most one coordinate has
+$s_u=3$, since each crossing pair has only one member in $A$. These
+finite-set statements have passed Lean~\cite{occurrencearchive}.
+
+A consecutive-block construction is also checked: sort the sampled starts
+and group consecutive gaps of at most two. Each block has one common coordinate,
+the blocks partition the starts, and their expanded intervals overlap in at
+most one position. The missing-pair finite set can now be taken directly
+from the actual snake; its run bound uses the actual degree and at most
+$8-|A|$ outside coordinates. Summing all these statements with the unique
+exceptional prefix remains unfinished~\cite{intervalassemblyarchive}.
+
+A written interval argument proposes twelve assigned windows per endpoint,
+or eleven when no counted window has that endpoint as a boundary. Its complete
+assembly is still under verification. Twenty-four remains a proposed total;
+Theorem~\ref{thm:thirty-two-windows} is the completed count used here.
+Neither count alone improves the upper bound on snake length.
+Section~\ref{sec:occurrence-credit-limit} gives a separate obstruction to the
+current uniform-credit comparison.
+
 
 \subsection{Necessary counts in an unresolved seven-transition window}\label{sec:critical-six}
+\begin{proposition}[Fourth count equal to three]\label{prop:fourth-three-twelve}
+For a fitting canonical $0120324$ window,
+\[
+\alpha_{r+4}=3\quad\Longrightarrow\quad
+\alpha_{r+3}+\alpha_{r+5}+\alpha_{r+6}\ge12.
+\]
+Under the same assumption $\alpha_{r+4}=3$, its six internal counts have sum at least 23.
+\end{proposition}
+\begin{proof}[Computer-assisted proof and summation]
+Under the contrary triple sum at most eleven, the actual-snake interpretation
+satisfies 3500 selected clauses. A complete contradiction with 50082 deductions,
+its count conversion, clause interpretation and final coordinate transfer have
+passed Lean. Thus the triple sum is at least twelve. The established prefix
+restriction gives $\alpha_{r+1}\ge3$ when $\alpha_{r+4}\le3$, and the
+pair bound gives $\alpha_{r+2}\ge5$. Adding these two counts, the fourth
+count three and the triple lower bound gives $3+5+3+12=23$.
+There is no remaining local-certificate premise~\cite{endpointcompletionarchive}.
+\end{proof}
+
+
 \begin{proposition}[Low-total $0120324$ windows]\label{prop:critical-six-intervals}
 Suppose $r+7\le m$, the seven-transition pattern is $0120324$, and
 $\sum_{j=1}^{6}\alpha_{r+j}\le22$. Then the six counts lie respectively in
 \[
-([1,21],[2,21],[1,21],[3,21],[1,21],[1,21]).
+([1,21],[2,21],[1,21],[4,21],[1,21],[1,21]).
 \]
 \end{proposition}
 \begin{proof}
@@ -909,10 +1120,11 @@ Theorem~\ref{thm:outer-four-sum} therefore gives
 \alpha_{r+2}+\alpha_{r+3}+\alpha_{r+5}+\alpha_{r+6}\ge19.
 \]
 The six-count sum would be at least $3+2+19=24$, a contradiction.
-Consequently $\alpha_{r+4}\ge3$. Positivity and the internal upper bound
-21 give all other intervals. The prefix exclusion, canonical suffix
-identification and complete deduction for arbitrary snakes have passed
-Lean~\cite{criticalsixarchive}.
+Consequently $\alpha_{r+4}\ge3$. Proposition~\ref{prop:fourth-three-twelve}
+excludes equality to three under the assumed total at most 22, so
+$\alpha_{r+4}\ge4$. Positivity and the internal upper bound 21 give the
+other intervals. The constituent exclusions and actual-snake deductions
+have passed Lean~\cite{criticalsixarchive,endpointcompletionarchive}.
 \end{proof}
 This necessary condition leaves the proposed floor 23 unresolved. The
 selected older pair and five-count inequalities, together with the reviewed
@@ -921,12 +1133,15 @@ No snake realizing it is asserted. It shows that this selected family of
 inequalities alone cannot prove 23; the review does not exhaust all earlier
 catalogue entries.
 
-Three full-cube searches for totals at most 24, at most 22, and at most 22
+Three earlier full-cube searches for totals at most 24, at most 22, and at most 22
 with the proved intervals all reached their time limits. Their 126 corner
 occurrences retain repetitions over 100 distinct corners. The 35 added
 cycle exclusions and the encoded conditions were independently checked,
 but no search produced a complete model or contradiction. These outcomes
-establish no additional count floor~\cite{criticalsixarchive}.
+establish no additional count floor~\cite{criticalsixarchive}. The later
+fourth-count-three result closes that case, while the complementary case
+$\alpha_{r+4}\ge4$ remains unresolved. Subsequent encoding changes and
+partial deductions provide no exclusion of this complementary case.
 
 
 \section{Deriving empty-square bounds from local geometry}\label{sec:forced-charge}
@@ -2607,7 +2822,7 @@ where their local exclusions remain unproved. In particular, the surviving
 three-cycle after the endpoint deletion has no eligible equality window;
 additional credit confined to such windows cannot increase its mean.
 
-The latest combined experiment grants six-count floors 26, 25 and 25 on
+A preceding combined experiment grants six-count floors 26, 25 and 25 on
 $0123042$, $0120310$ and $0123024$, respectively, in addition to the inherited
 rules. Each of these three local floors remains unproved. A symbol below
 six specifies an exact count; symbol six retains its full interval
@@ -2637,6 +2852,74 @@ snakes~\cite{uniformsixarchive,criticalsixarchive}.
 
 
 
+\subsection{Odd-length refinement and surviving cycles}\label{sec:odd-refined-model}
+Apply the proved pair floor nine for odd-length snakes and additionally grant
+a six-count floor 25 on $0123104$, retaining the inherited unproved rules.
+The resulting finite graph has 1601856 states and 4661773 edges. Its
+completed-share profile has minimum mean 488, range 585 and comparison
+\[
+\frac{1103449}{4688}>235,
+\]
+while the additional-share profile retains mean 496, range 602 and comparison
+$551765/2348>234$. Exact integer calculations check the potential on every
+retained edge and a cycle attaining each mean. An independent review checks
+the saved cycle rows and arithmetic without repeating the full edge scan.
+The additional local hypotheses remain unproved, and the complete Lean
+integration of the comparison graph remains pending. These are finite-model comparisons~\cite{latercomparisonarchive}.
+
+Both attaining cycles avoid $0123104$. Increasing only its proposed floor
+can delete edges or increase weights, preserving the old potential
+inequalities. The unchanged cycles still attain the old means. Thus this
+single refinement cannot lower either integer comparison. Even zero potential
+range gives $68929/293>235$ and $137866/587>234$.
+
+In the first profile, the four-edge cycle has canonical $0120324$ count
+vectors, allowing reversal,
+\[
+(4,5,3,4,4,5),\quad(4,4,3,5,4,4),\quad
+(3,4,4,5,3,4),\quad(3,5,4,4,3,5).
+\]
+Each relevant pair sums to nine. The fourth count is four or five, so
+Proposition~\ref{prop:fourth-three-twelve} does not remove these windows.
+The other profile has a seven-edge cycle whose shapes avoid the $012032$
+pair window. No complete snake realizing either cycle is asserted.
+
+\subsection{Limit of a uniform credit for endpoint occurrences}\label{sec:occurrence-credit-limit}
+Theorem~\ref{thm:thirty-two-windows} limits the number of low-pair windows.
+The following comparison explains why an occurrence allowance alone cannot
+give a smaller length bound in the fixed first profile.
+
+\begin{proposition}[Two-cycle obstruction to uniform credit]\label{prop:uniform-occurrence-credit}
+Let $C,R,\mu\ge0$ and $B\ge2$. Suppose
+\[
+\mu\le488+C/2,\qquad \mu\le3453/7.
+\]
+Then
+\[
+\frac{1098960+8\mu+BC+R}{4200+\mu}>235.
+\]
+\end{proposition}
+\begin{proof}
+Since $BC\ge2C$, the numerator after subtracting $235(4200+\mu)$ is
+at least
+\[
+(2C-4\mu+1952)+223(3453/7-\mu)+R+37/7>0.
+\]
+Each parenthesized term is nonnegative, and the denominator is positive.
+The strict comparison and its extension to every $B\ge2$ have passed
+Lean~\cite{lowpairarchive}.
+\end{proof}
+The saved four-edge cycle has two relevant suffix occurrences, so credit
+$C$ per occurrence bounds its mean by $488+C/2$. A competing seven-edge
+cycle has no such occurrence and has mean $3453/7$ under the same
+first-profile weights. These cycle data and the comparison formula are
+premises of the proposition. The second profile's mean 496 is a different
+weighting and must not replace $3453/7$ here. Neither the proved allowance
+32 nor the proposed allowance 24 overcomes this obstruction. Further
+progress must restrict the competing cycle, change the credit or improve
+the global comparison.
+
+
 \subsection{What an integer improvement requires}
 The comparison~\eqref{eq:improved-potential} excludes length 235 exactly when
 $227p>111960d+R$, and excludes length 234 exactly when
@@ -2653,7 +2936,7 @@ The ten-rule completed-floor mean is below the first threshold, since
 \[
 111960\cdot13-227\cdot6309=23337>0.
 \]
-The later completed-share mean is also below the first threshold, since $111960\cdot6-227\cdot2915=10055>0$. The conditional-share mean is below the second, since
+The preceding completed-share mean is below the first threshold, since $111960\cdot6-227\cdot2915=10055>0$. The odd-length refinement is also below it: $111960-227\cdot488=1184>0$. The conditional-share mean is below the second, since
 $116160-226\cdot496=4064>0$. Hence range reduction alone cannot improve
 the two integer comparisons. Further progress must affect a surviving
 cycle, change the allowed walks or improve the global accounting. The
@@ -2693,7 +2976,7 @@ Proposition~\ref{prop:least-floors} identifies the limits of further reducing
 these five floors within the current integer box. Proposition~\ref{prop:joint-potential-optimality}
 settles the slope/range tradeoff for three specified earlier profiles;
 it does not settle the best range at the reduced floor 18. The baseline unsaturated
-cycle rules out such improvements while that graph is retained. The refinements in Section~\ref{sec:sum-refinements} replace this cycle; the latest attaining cycles avoid all three seven-transition shapes tested there and still leave the integer comparisons unchanged. Stronger
+cycle rules out such improvements while that graph is retained. The refinements in Section~\ref{sec:sum-refinements} replace this cycle; the later attaining cycles also avoid the additional $0123104$ target and leave the integer comparisons unchanged. The endpoint-occurrence bound must additionally address the obstruction in Proposition~\ref{prop:uniform-occurrence-credit}. Stronger
 geometric restrictions, improved boundary accounting or information about
 actual initial and final states can change these hypotheses.
 
@@ -2936,13 +3219,14 @@ and interpretation chain is completed. Finite cycles and open walks prove
 the stated limitations of the fixed comparison graphs, without asserting
 their realizability by complete snakes.
 
-The pair bound for $012032$, the six-count bound for $0123041$, and the
-necessary intervals for low-total $0120324$ windows are checked for actual
-snakes. The direct shortfall theorem retains empty squares and requires no
+The $012032$ pair bound, its equality geometry and parity restriction,
+the parity-free endpoint consequence and the thirty-two-window bound are
+checked for actual snakes. The $0123041$ six-count bound, necessary intervals
+for low-total $0120324$ windows and fourth-count-three case are also checked. The direct shortfall theorem retains empty squares and requires no
 reference union or graph potential. Its sufficient upper bound on shortfall
 is unresolved. The broader sum family has mixed verification status, as
 detailed in Section~\ref{sec:sum-refinements}; neither its finite comparison
-nor the incomplete endpoint-equality argument lowers the maintained interval.
+nor the completed endpoint-equality and thirty-two-window theorems lower the maintained interval by themselves.
 
 No construction above 191 or matching optimality theorem has been obtained.
 The conjecture 196 remains a numerical extrapolation and is used in none
@@ -4971,6 +5255,34 @@ The snake has 144 edges, starts at $34$, and has the designated window at $r=136
 Direct reconstruction checks all 30184 unordered vertex pairs across these three snakes, together with the five counts in each designated window. Both endpoints are at Hamming distance two from both counted vertices. Complete Lean checks also verify these paths and counts~\cite{pair012032archive}. The witnesses establish sharpness of the pair inequality; their endpoint geometry alone supplies no universal equality theorem.
 
 
+\section{Odd-length witnesses attaining pair sum nine}\label{app:odd-pair-witnesses}
+Both complete snakes below contain the normalized window $(0,1,3,7,6,14,10)$.
+They show that nine is sharp for odd-length snakes, including when both
+counts are at least four. They do not improve the 191-edge construction.
+
+\subsection{The pair $(6,3)$}
+The snake has 149 edges, starts at vertex 18, ends at vertex 13, and has its designated window at $r=130$. Its five internal counts are $(8,6,10,3,8)$.
+
+\begin{quote}\ttfamily\small
+52305217312031582356327813021841580230521731203158237427810281321028\\
+50213865875081025375076423180578162513712516571258671023812518012032\\
+7352385318037
+\end{quote}
+
+\subsection{The pair $(4,5)$}
+The snake has 133 edges, starts at vertex 25, ends at vertex 130, and has its designated window at $r=27$. Its five internal counts are $(11,4,13,5,12)$.
+
+\begin{quote}\ttfamily\small
+21542168361203783658728561501203243803468275845310248538403106124608\\
+43648743602831758710247286143203143087048516531430421561741658608
+\end{quote}
+
+Only endpoint 18 qualifies in the first example; the window begins 130
+path steps after it. Only endpoint 130 qualifies in the second; the window
+begins 106 path steps before it. Hamming proximity does not imply proximity
+along the path. Complete Lean checks verify both paths, their counts, window
+directions and endpoint distances~\cite{oddwitnessarchive}.
+
 \clearpage
 \addcontentsline{toc}{section}{References}
 \begin{thebibliography}{99}\raggedright
@@ -5136,6 +5448,25 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Six-count coverage, a proved local bound 
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Retained empty-square criteria and necessary intervals for a critical six-count window}. Research milestone 125, 3 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/091b041b798f070de625fd6554b6f760cedeb646/milestones/125-critical-six-count}.
 
+
+\bibitem{endpointcompletionarchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Completed endpoint-equality certificates, parity and the fourth-count-three theorem}. Research records 129--130, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/61a7f80224433e4a576a955f85248accc0d515d9/milestones}.
+\bibitem{latercomparisonarchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Odd-pair refinement and surviving finite-model cycles}. Research record 131, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/61a7f80224433e4a576a955f85248accc0d515d9/milestones/131-odd-pair-six-count}.
+\bibitem{lowpairarchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{A parity-free endpoint consequence and the uniform-credit obstruction}. Research record 132, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/61a7f80224433e4a576a955f85248accc0d515d9/milestones/132-odd-pair-endpoint}.
+\bibitem{oddwitnessarchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Odd-length sharpness witnesses and a proposed stronger occurrence argument}. Research record 133, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/554ba969d07c0c47344248a55a844f58ec762800/milestones/133-endpoint-occurrences}.
+\bibitem{occurrencearchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Endpoint geometry, missing pairs and a checked bound of thirty-two low-pair windows}. Research records 134--135, 3 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/61a7f80224433e4a576a955f85248accc0d515d9/milestones/135-endpoint-count}.
+\bibitem{intervalassemblyarchive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Interval construction, actual missing-pair sets and manuscript revision}. Research record 136, 3 November 2026. The final stronger occurrence assembly remains incomplete.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/136-intervals-and-paper}.
 
 \end{thebibliography}
 \end{document}

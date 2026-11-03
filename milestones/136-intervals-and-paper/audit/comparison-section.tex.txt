@@ -1,0 +1,67 @@
+\subsection{Odd-length refinement and surviving cycles}\label{sec:odd-refined-model}
+Apply the proved pair floor nine for odd-length snakes and additionally grant
+a six-count floor 25 on $0123104$, retaining the inherited unproved rules.
+The resulting finite graph has 1601856 states and 4661773 edges. Its
+completed-share profile has minimum mean 488, range 585 and comparison
+\[
+\frac{1103449}{4688}>235,
+\]
+while the additional-share profile retains mean 496, range 602 and comparison
+$551765/2348>234$. Exact integer calculations check the potential on every
+retained edge and a cycle attaining each mean. An independent review checks
+the saved cycle rows and arithmetic without repeating the full edge scan.
+The additional local hypotheses remain unproved, and the complete Lean
+integration of the comparison graph remains pending. These are finite-model comparisons~\cite{latercomparisonarchive}.
+
+Both attaining cycles avoid $0123104$. Increasing only its proposed floor
+can delete edges or increase weights, preserving the old potential
+inequalities. The unchanged cycles still attain the old means. Thus this
+single refinement cannot lower either integer comparison. Even zero potential
+range gives $68929/293>235$ and $137866/587>234$.
+
+In the first profile, the four-edge cycle has canonical $0120324$ count
+vectors, allowing reversal,
+\[
+(4,5,3,4,4,5),\quad(4,4,3,5,4,4),\quad
+(3,4,4,5,3,4),\quad(3,5,4,4,3,5).
+\]
+Each relevant pair sums to nine. The fourth count is four or five, so
+Proposition~\ref{prop:fourth-three-twelve} does not remove these windows.
+The other profile has a seven-edge cycle whose shapes avoid the $012032$
+pair window. No complete snake realizing either cycle is asserted.
+
+\subsection{Limit of a uniform credit for endpoint occurrences}\label{sec:occurrence-credit-limit}
+Theorem~\ref{thm:thirty-two-windows} limits the number of low-pair windows.
+The following comparison explains why an occurrence allowance alone cannot
+give a smaller length bound in the fixed first profile.
+
+\begin{proposition}[Two-cycle obstruction to uniform credit]\label{prop:uniform-occurrence-credit}
+Let $C,R,\mu\ge0$ and $B\ge2$. Suppose
+\[
+\mu\le488+C/2,\qquad \mu\le3453/7.
+\]
+Then
+\[
+\frac{1098960+8\mu+BC+R}{4200+\mu}>235.
+\]
+\end{proposition}
+\begin{proof}
+Since $BC\ge2C$, the numerator after subtracting $235(4200+\mu)$ is
+at least
+\[
+(2C-4\mu+1952)+223(3453/7-\mu)+R+37/7>0.
+\]
+Each parenthesized term is nonnegative, and the denominator is positive.
+The strict comparison and its extension to every $B\ge2$ have passed
+Lean~\cite{lowpairarchive}.
+\end{proof}
+The saved four-edge cycle has two relevant suffix occurrences, so credit
+$C$ per occurrence bounds its mean by $488+C/2$. A competing seven-edge
+cycle has no such occurrence and has mean $3453/7$ under the same
+first-profile weights. These cycle data and the comparison formula are
+premises of the proposition. The second profile's mean 496 is a different
+weighting and must not replace $3453/7$ here. Neither the proved allowance
+32 nor the proposed allowance 24 overcomes this obstruction. Further
+progress must restrict the competing cycle, change the credit or improve
+the global comparison.
+

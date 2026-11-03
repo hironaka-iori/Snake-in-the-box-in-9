@@ -1,0 +1,19 @@
+\begin{proposition}[Fourth count equal to three]\label{prop:fourth-three-twelve}
+For a fitting canonical $0120324$ window,
+\[
+\alpha_{r+4}=3\quad\Longrightarrow\quad
+\alpha_{r+3}+\alpha_{r+5}+\alpha_{r+6}\ge12.
+\]
+Under the same assumption $\alpha_{r+4}=3$, its six internal counts have sum at least 23.
+\end{proposition}
+\begin{proof}[Computer-assisted proof and summation]
+Under the contrary triple sum at most eleven, the actual-snake interpretation
+satisfies 3500 selected clauses. A complete contradiction with 50082 deductions,
+its count conversion, clause interpretation and final coordinate transfer have
+passed Lean. Thus the triple sum is at least twelve. The established prefix
+restriction gives $\alpha_{r+1}\ge3$ when $\alpha_{r+4}\le3$, and the
+pair bound gives $\alpha_{r+2}\ge5$. Adding these two counts, the fourth
+count three and the triple lower bound gives $3+5+3+12=23$.
+There is no remaining local-certificate premise~\cite{endpointcompletionarchive}.
+\end{proof}
+

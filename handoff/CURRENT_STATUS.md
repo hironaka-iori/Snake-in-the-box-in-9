@@ -1,3 +1,37 @@
+# Research update: milestone 136
+
+Four Lean modules and eleven theorem reports passed. The checked results
+construct blocks of nearby window starts, bound the overlap of their covered
+intervals, apply the run-length estimate to actual missing pairs, and count
+the available outside coordinates. Maximal intervals in the full snake are
+unnecessary for this block construction. No named definition is added.
+
+The complete actual-snake occurrence bound remains sixteen per endpoint and
+thirty-two in total under the checked common-neighbour assignment. Twelve
+and twenty-four remain pending: the block construction must still be combined
+with the boundary count, degree sums and exceptional case. See
+`milestones/136-intervals-and-paper/MATHEMATICAL_NOTE.md` for the exact scope.
+
+The paper is now revision 136. The existing editor source and repository copy
+match, with all three authors and the complete hyperlink settings preserved.
+The final source checks resolve every reference and reconstruct the two new
+printed witnesses over 20,086 vertex pairs. The built-in compiler failed
+before TeX execution because of a Windows helper restriction; the updated
+PDF and its layout remain unverified. The next full paper revision is 146.
+
+The recorded global interval remains 191–235, with incomplete independent
+rebuilding of the contributor upper proof. Optimality and 196 are unresolved.
+The fixed uniform-credit comparison still cannot lower the length bound
+using an occurrence allowance of at least two. Further length improvement
+requires its remaining cycle constraint or a stronger comparison.
+
+The saved process observation found the milestone 115 job live at 917 of
+1397 modules. Its incomplete progress is separate from this round's results.
+Check the live process before any restart. The next selected task is the
+actual-block assembly of the stronger endpoint count.
+
+## Earlier record
+
 # Research update: milestone 135
 
 A complete theorem for actual snakes has passed Lean: at most thirty-two

@@ -1,0 +1,72 @@
+E:\Snake-in-a-box\milestones\136-intervals-and-paper\lean\OutsideCount136.lean:35:14: error: tactic 'cases' failed, nested error:
+dependent elimination failed, failed to solve equation
+  List.filter (fun b => decide ((fun b => b ≠ a ∧ sel p (fun v => v) (2 ^ a ^^^ 2 ^ b) = true) b))
+      ((List.range 9).erase q) =
+    b :: as✝
+at case List.Mem.head
+E:\Snake-in-a-box\milestones\136-intervals-and-paper\lean\OutsideCount136.lean:38:13: error: invalid constructor ⟨...⟩, expected type must be an inductive type with only one constructor 
+  List.Mem b
+    (List.filter (fun b => decide ((fun b => b ≠ a ∧ sel p (fun v => v) (2 ^ a ^^^ 2 ^ b) = true) b))
+      ((List.range 9).erase q))
+E:\Snake-in-a-box\milestones\136-intervals-and-paper\lean\OutsideCount136.lean:75:8: error: tactic 'apply' failed, failed to unify
+  False
+with
+  Decidable (∃ b ∈ e, b ∉ A)
+case refine_1
+m : ℕ
+p : Snake m
+a q : ℕ
+A : Finset ℕ
+hq : q < 9
+ha : a ∈ A
+hA : A ⊆ (Finset.range 9).erase q
+C : Finset ℕ := (Finset.range 9).erase q
+U : Finset ℕ := {b ∈ C | b ≠ a ∧ sel p (fun v => v) (2 ^ a ^^^ 2 ^ b) = true}
+F : Finset (Finset ℕ) :=
+  {e ∈ Finset.powersetCard 2 C |
+    (e ∩ A).Nonempty ∧ ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2 ^ b ^^^ 2 ^ c) = false}
+M : Finset ℕ := {b ∈ C \ A | sel p (fun v => v) (2 ^ a ^^^ 2 ^ b) = false}
+haC : a ∈ C
+hne : ∀ b ∉ A, b ≠ a
+hselected : U \ A = {b ∈ C \ A | sel p (fun v => v) (2 ^ a ^^^ 2 ^ b) = true}
+e : Finset ℕ
+he : e ∈ {e ∈ F | a ∈ e ∧ ¬e ⊆ A}
+heF : e ∈ F
+hae : a ∈ e
+hcross : ¬e ⊆ A
+heC : e ∈ Finset.powersetCard 2 C
+hmeet : (e ∩ A).Nonempty
+habsent : ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2 ^ b ^^^ 2 ^ c) = false
+heSub : e ⊆ C
+heCard : e.card = 2
+⊢ Decidable (∃ b ∈ e, b ∉ A)
+E:\Snake-in-a-box\milestones\136-intervals-and-paper\lean\OutsideCount136.lean:99:10: error: tactic 'rewrite' failed, did not find instance of the pattern in the target expression
+  (fun b => {a, b}) c
+m : ℕ
+p : Snake m
+a q : ℕ
+A : Finset ℕ
+hq : q < 9
+ha : a ∈ A
+hA : A ⊆ (Finset.range 9).erase q
+C : Finset ℕ := (Finset.range 9).erase q
+U : Finset ℕ := {b ∈ C | b ≠ a ∧ sel p (fun v => v) (2 ^ a ^^^ 2 ^ b) = true}
+F : Finset (Finset ℕ) :=
+  {e ∈ Finset.powersetCard 2 C |
+    (e ∩ A).Nonempty ∧ ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2 ^ b ^^^ 2 ^ c) = false}
+M : Finset ℕ := {b ∈ C \ A | sel p (fun v => v) (2 ^ a ^^^ 2 ^ b) = false}
+haC : a ∈ C
+hne : ∀ b ∉ A, b ≠ a
+hselected : U \ A = {b ∈ C \ A | sel p (fun v => v) (2 ^ a ^^^ 2 ^ b) = true}
+himage : Finset.image (fun b => {a, b}) M = {e ∈ F | a ∈ e ∧ ¬e ⊆ A}
+b : ℕ
+hb : b ∈ ↑M
+c : ℕ
+hc : c ∈ ↑M
+he : (fun b => {a, b}) b = (fun b => {a, b}) c
+hbA : b ∉ A
+⊢ b ∈ {a, c}
+'Snake9.OutsideCount136.outside_card_add_crossing_degree' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,207 @@
+\begin{theorem}[Endpoint geometry at equality]\label{thm:pair-eight-endpoints}\label{prop:pair-equality-occurrences}
+If a fitting canonical $012032$ window satisfies
+$\alpha_{r+2}+\alpha_{r+4}=8$, both counted vertices are at Hamming distance
+two from both endpoints. At most thirteen such window starts occur in any snake.
+\end{theorem}
+\begin{proof}[Computer-assisted proof and counting]
+The pair minima and reversal reduce equality to the caps $(2,6)$, $(3,5)$
+and $(4,4)$. For each cap, a complete checked contradiction excludes an
+endpoint outside the fourteen-vertex common distance-two sphere in normalized
+coordinates. The actual-snake interpretations, all three contradiction
+certificates and coordinate transfers are complete~\cite{endpointcompletionarchive}.
+
+The distance-two spheres about two distinct vertices of $\Q_9$ intersect
+in at most fourteen vertices. Translation reduces this finite fact to
+511 nonzero endpoint differences and the 36 vertices at distance two from
+zero. The finite verification and its application to actual path positions
+have passed Lean. For a nonempty set $I$ of qualifying starts, the positions
+$r+2$, for $r\in I$, are distinct. The further position $\max I+4$ exceeds
+all of them and is counted by one of these windows. All $|I|+1$ vertices
+lie in the same intersection, so $|I|+1\le14$. The empty case is immediate.
+The theorem has no remaining local-certificate premise; attainment of thirteen
+is not asserted.
+\end{proof}
+
+\begin{corollary}[Parity at equality]\label{cor:pair-nine-parity}
+Equality of the pair sum to eight requires both $m$ and $r$ to be even.
+Consequently $\alpha_{r+2}+\alpha_{r+4}\ge9$ whenever $m$ or $r$ is odd.
+\end{corollary}
+\begin{proof}
+Hamming distance two preserves the parity of the number of nonzero cube
+coordinates. The preceding theorem gives the same parity to $x_0$, $x_m$
+and $x_{r+2}$. Each path edge reverses that parity, so $m$ and $r+2$ are
+even. Integrality and the pair floor eight give the result. These parity
+deductions have passed Lean~\cite{endpointcompletionarchive}.
+\end{proof}
+
+The bound nine for odd-length snakes is sharp. A 149-edge snake has internal
+counts $(8,6,10,3,8)$ in the normalized window; a 133-edge snake has counts
+$(11,4,13,5,12)$. Their relevant pairs are $(6,3)$ and $(4,5)$. Thus a
+uniform pair floor ten fails even when both counts are at least four.
+The complete paths, counts and endpoint distances have passed Lean.
+Appendix~\ref{app:odd-pair-witnesses} gives their transition sequences.
+These examples supply no record construction or realization of an entire
+critical comparison-graph cycle~\cite{oddwitnessarchive}.
+
+\subsection{An endpoint forced by a pair sum at most nine}\label{sec:small-pair-endpoint}
+\begin{theorem}[Endpoint and common neighbour]\label{thm:small-pair-endpoint}
+Suppose a fitting window beginning at $x_r$ has canonical directions
+$012032$ and $\alpha_{r+2}+\alpha_{r+4}\le9$. There is an endpoint
+$x_e$, with $e\in\{0,m\}$, such that
+\[
+\Ham(x_e,x_{r+2})=\Ham(x_e,x_{r+4})=2.
+\]
+Moreover, an unselected vertex $z$ is adjacent to $x_e$ and to each of
+$x_r,x_{r+2},x_{r+4},x_{r+6}$. No parity assumption on $m$ or $r$ is needed.
+\end{theorem}
+\begin{proof}[Computer-assisted proof and geometric transfer]
+Normalize the window to $(0,1,3,7,6,14,10)$. The counted centres are 3 and 6.
+Their eligible square lists contain 42 opposite-corner occurrences over
+37 distinct vertices; the five shared corners are each counted twice.
+Suppose the pair sum is at most nine and neither endpoint has the two
+required distances. Give each represented vertex its actual path and
+endpoint membership, and interpret each count register by its prefix threshold.
+The following necessary conditions hold:
+\begin{center}\small
+\begin{tabular}{l r}
+\toprule Condition & Selected clauses\\\midrule
+The seven window vertices are selected & 7\\
+A selected vertex has at most two selected neighbours & 192\\
+A selected degree-one vertex is an endpoint & 32\\
+Ten specified six-vertex cycles are not wholly selected & 10\\
+The 42 corner occurrences have sum at most nine & 435\\
+Seven specified vertices are not endpoints & 7\\\bottomrule
+\end{tabular}
+\end{center}
+The last seven vertices are $0,10,18,34,66,130,258$, each at distance two
+from both centres. A complete certificate contradicts these 683 clauses.
+All clause interpretations, the 13299 deductions and the coordinate transfer
+have passed Lean. The selected proof uses neither an endpoint-parity premise
+nor a global endpoint-count register~\cite{lowpairarchive}.
+
+The other seven vertices in the common distance-two sphere are
+$5,15,23,39,71,135,263$. They are adjacent to the selected internal vertex 7,
+whose two path neighbours exhaust its selected degree, so none is selected.
+A qualifying endpoint therefore belongs to the displayed seven-vertex list.
+Every member of that list and the alternate window vertices $0,3,6,10$ is
+adjacent to vertex 2. Transfer this neighbour to the original coordinates.
+It is absent: a selected vertex adjacent to both $x_r$ and $x_{r+6}$ would
+have to be consecutive to both, which is impossible. The stronger
+common-neighbour conclusion is also checked~\cite{occurrencearchive}.
+\end{proof}
+
+\begin{corollary}\label{cor:pair-ten-without-endpoint}
+If neither endpoint is at distance two from both counted centres of a
+fitting $012032$ window, then $\alpha_{r+2}+\alpha_{r+4}\ge10$.
+\end{corollary}
+\begin{proof}
+Use the contrapositive of Theorem~\ref{thm:small-pair-endpoint} and integrality.
+\end{proof}
+
+\subsection{Counting windows assigned to an endpoint}\label{sec:endpoint-occurrences}
+\begin{lemma}[Count for one endpoint]\label{lem:sixteen-endpoint-windows}
+Fix an endpoint and a set of fitting six-transition window starts. Suppose
+each window's four alternate vertices and that endpoint share an unselected
+neighbour. Then there are at most sixteen starts.
+\end{lemma}
+\begin{proof}
+Orient the path from the endpoint and translate it to zero, using the same
+transformed path for all windows. Write its first successor as $\{b\}$,
+identifying a cube vertex with its nonzero coordinates. A window's common
+neighbour with the endpoint is a unit vertex $\{a\}$, with $a\ne b$
+because it is unselected. Its selected neighbours have even parity. Every
+window start is therefore even, and dividing the starts by two preserves
+their distinctness.
+
+Let $I$ be these sampled starts. Each $r\in I$ covers $[r,r+3]$ and is
+assigned its common coordinate. Let $A$ be the coordinates used and $a=|A|$.
+They exclude $b$, so $a\le8$. If $u<v$ have different common coordinates
+and $v<u+3$, their windows share two positive sampled positions. The only
+common neighbours of two distinct unit vertices are zero and their pair
+vertex. Both shared positions would equal that pair, violating injectivity.
+Thus differently labelled starts satisfy $u+3\le v$.
+
+For nonempty $I$, this separation implies
+\[
+|I|+2a+1\le\left|\bigcup_{r\in I}[r,r+3]\right|.
+\]
+Insert the starts in increasing order. The first contributes four positions.
+Each later start contributes at least one new position. If its coordinate
+has not occurred previously, separation supplies three new positions,
+accounting for the additional two in $2a$.
+
+A selected pair containing $b$ is adjacent to the first successor and hence
+can occur only at path index two. Every covered position other than sampled
+indices zero and one is consequently a pair among the other eight coordinates,
+incident to $A$. There are $7a-\binom a2$ such pairs. Distinct positions
+represent distinct vertices, so
+\[
+\left|\bigcup_{r\in I}[r,r+3]\right|\le7a-\binom a2+2.
+\]
+Hence $|I|\le1+5a-\binom a2\le16$; the last inequality follows from
+$(a-5)(a-6)\ge0$ for integral $a$. The empty case is immediate.
+Reversal sends a fitting start $r$ to $m-r-6$ injectively, covering either
+endpoint. The normalization, parity, separation, capacity and full count
+have passed Lean~\cite{occurrencearchive}.
+\end{proof}
+
+\begin{theorem}[Number of low-pair windows]\label{thm:thirty-two-windows}
+Every snake in $\Q_9$ has at most thirty-two fitting canonical $012032$
+windows with $\alpha_{r+2}+\alpha_{r+4}\le9$. Windows may overlap, and
+each starting position is counted once.
+\end{theorem}
+\begin{proof}
+Assign a window to the initial endpoint whenever it admits the unselected
+common neighbour in Theorem~\ref{thm:small-pair-endpoint}, and assign every
+remaining window to the final endpoint. The two groups are disjoint and
+exhaustive. Lemma~\ref{lem:sixteen-endpoint-windows} bounds each by sixteen.
+The resulting actual-snake theorem has passed Lean~\cite{occurrencearchive}.
+\end{proof}
+The sixteen-window statement retains its common-neighbour hypothesis. The
+two distance equalities alone are a broader assignment condition. The
+thirteen-window theorem uses both endpoints and specifically pair sum eight;
+it cannot be applied separately to the groups above.
+
+\subsection{Missing pairs and the proposed stronger count}\label{sec:missing-pair-occurrences}
+\begin{lemma}[Missing opposite pair]\label{lem:missing-opposite-pair}
+Normalize an endpoint to zero. If $j\ge2$ and consecutive sampled vertices
+are $x_j=\{a,b\}$ and $x_{j+2}=\{a,c\}$ for distinct coordinates, then
+$x_{j+1}=\{a,b,c\}$ and $\{b,c\}$ is absent from the entire snake.
+\end{lemma}
+\begin{proof}
+The possible intermediaries are $\{a\}$ and $\{a,b,c\}$. The former would
+be adjacent to the initial endpoint at a nonconsecutive position. The triple
+is forced. If the opposite pair were selected, the triple would have a third
+selected neighbour. Both deductions have passed Lean~\cite{occurrencearchive}.
+\end{proof}
+
+Within a consecutive interval sharing one coordinate, the other coordinates
+are distinct. Each successive pair of other coordinates is missing by the
+lemma. For a set $A$ of common coordinates, such a list has length at most
+the maximum of one and the number of available coordinates outside $A$, plus
+the number of eligible missing pairs incident to $A$. If an outside coordinate
+occurs, count each consecutive block in $A$ against distinct incident edges
+of the list. Otherwise the vertex count exceeds the edge count by one.
+The list inequality and its application to actual snake vertices are checked.
+
+Let $F$ be the missing pairs meeting $A$, put $t=|F|$, and, for $u\in A$,
+let $d_u$ count its incident missing pairs and $s_u$ those going outside $A$.
+The identities used to sum interval estimates are
+\[
+|\{e\in F:u\notin e\}|=t-d_u,\qquad
+\sum_{u\in A}d_u\ge t,\qquad
+\sum_{u\in A}(d_u+s_u)=2t.
+\]
+An internal pair contributes two to the last sum; a crossing pair contributes
+one degree and one crossing degree. If $t=3$, at most one coordinate has
+$s_u=3$, since each crossing pair has only one member in $A$. These
+finite-set statements have passed Lean~\cite{occurrencearchive}.
+
+A written interval argument proposes twelve assigned windows per endpoint,
+or eleven when no counted window has that endpoint as a boundary. Its complete
+assembly is still under verification. Twenty-four remains a proposed total;
+Theorem~\ref{thm:thirty-two-windows} is the completed count used here.
+Neither count alone improves the upper bound on snake length.
+Section~\ref{sec:occurrence-credit-limit} gives a separate obstruction to the
+current uniform-credit comparison.
+

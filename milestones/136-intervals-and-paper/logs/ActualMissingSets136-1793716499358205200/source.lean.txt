@@ -1,0 +1,111 @@
+import ActualRunBound134
+import MissingDegree135
+import Mathlib.Tactic
+
+namespace Snake9.ActualMissingSets136
+open Snake9.LocalWindow
+
+set_option maxHeartbeats 1000000
+
+/-- The selected neighbours and missing pairs are taken from the actual snake.
+The coordinate assumptions exclude the first direction and the fixed anchor. -/
+theorem length_le_actual_missing_pairs {m : Nat} (p : Snake m)
+    (j a q : Nat) (L : List Nat) (A : Finset Nat)
+    (hq : q < 9) (ha : a ∈ A) (hA : A ⊆ (Finset.range 9).erase q)
+    (hj : 4 ≤ j) (hzero : vx p 0 = 0)
+    (hcoords : ∀ b, b ∈ L → b < 9 ∧ b ≠ a ∧ b ≠ q)
+    (hfit : ∀ i, i < L.length → j + 2*i ≤ m)
+    (hvalues : ∀ i, i < L.length →
+      vx p (j + 2*i) = 2^a ^^^ 2^(L.getD i 0)) :
+    let C := (Finset.range 9).erase q
+    let U := C.filter (fun b => b ≠ a ∧ sel p (fun v => v) (2^a ^^^ 2^b) = true)
+    let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+      ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+    L.length ≤ max 1 ((U \ A).card) + (F.filter (fun e => a ∉ e)).card ∧
+    L.length ≤ max 1 ((U \ A).card) +
+      (F.card - (F.filter (fun e => a ∈ e)).card) ∧
+    (U \ A).card ≤ 8 - A.card := by
+  classical
+  dsimp only
+  let C := (Finset.range 9).erase q
+  let U := C.filter (fun b => b ≠ a ∧ sel p (fun v => v) (2^a ^^^ 2^b) = true)
+  let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+    ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+  change L.length ≤ max 1 ((U \ A).card) + (F.filter (fun e => a ∉ e)).card ∧
+    L.length ≤ max 1 ((U \ A).card) +
+      (F.card - (F.filter (fun e => a ∈ e)).card) ∧
+    (U \ A).card ≤ 8 - A.card
+  have ha9 : a < 9 := Finset.mem_range.mp (Finset.mem_erase.mp (hA ha)).2
+  have hC (b : Nat) (hb : b ∈ L) : b ∈ C := by
+    exact Finset.mem_erase.mpr
+      ⟨(hcoords b hb).2.2,Finset.mem_range.mpr (hcoords b hb).1⟩
+  have hU : ∀ b ∈ L, b ∈ U := by
+    intro b hb
+    obtain ⟨i,hi,hget⟩ := List.getElem_of_mem hb
+    have hgetD : L.getD i 0 = b := by
+      simpa only [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem hi,
+        Option.getD_some] using hget
+    have hselected : sel p (fun v => v) (2^a ^^^ 2^b) = true := by
+      apply (sel_iff p (fun v => v) _).mpr
+      exact ⟨j+2*i,hfit i hi,by simpa only [hgetD] using hvalues i hi⟩
+    exact Finset.mem_filter.mpr ⟨hC b hb,(hcoords b hb).2.1,hselected⟩
+  have hF : ∀ b ∈ L, ∀ c ∈ L, b ≠ c →
+      (∀ k, k ≤ m → vx p k ≠ 2^b ^^^ 2^c) →
+      (decide (b ∈ A) || decide (c ∈ A)) = true →
+      ({b,c} : Finset Nat) ∈ F.filter (fun e => a ∉ e) := by
+    intro b hb c hc hbc hmissing hincident
+    have habsent : sel p (fun v => v) (2^b ^^^ 2^c) = false := by
+      cases hs : sel p (fun v => v) (2^b ^^^ 2^c) with
+      | false => rfl
+      | true =>
+        obtain ⟨k,hk,hv⟩ := (sel_iff p (fun v => v) _).mp hs
+        exact False.elim (hmissing k hk hv)
+    have hmeet : (({b,c} : Finset Nat) ∩ A).Nonempty := by
+      have hinc : b ∈ A ∨ c ∈ A := by simpa using hincident
+      rcases hinc with hbA | hcA
+      · exact ⟨b,Finset.mem_inter.mpr ⟨by simp,hbA⟩⟩
+      · exact ⟨c,Finset.mem_inter.mpr ⟨by simp,hcA⟩⟩
+    apply Finset.mem_filter.mpr
+    constructor
+    · apply Finset.mem_filter.mpr
+      refine ⟨Finset.mem_powersetCard.mpr ⟨?_,Finset.card_pair hbc⟩,hmeet,?_⟩
+      · intro x hx
+        simp only [Finset.mem_insert,Finset.mem_singleton] at hx
+        rcases hx with hxb | hxc
+        · rw [hxb]
+          exact hC b hb
+        · rw [hxc]
+          exact hC c hc
+      · intro x hx y hy hxy
+        simp only [Finset.mem_insert,Finset.mem_singleton] at hx hy
+        rcases hx with rfl | rfl <;> rcases hy with rfl | rfl
+        · exact False.elim (hxy rfl)
+        · exact habsent
+        · simpa only [Nat.xor_comm] using habsent
+        · exact False.elim (hxy rfl)
+    · simp only [Finset.mem_insert,Finset.mem_singleton,not_or]
+      exact ⟨(hcoords b hb).2.1.symm,(hcoords c hc).2.1.symm⟩
+  have hrun := ActualRunBound134.length_le_outside_card_or_one_add_missing_card
+    p j a L U (fun b => decide (b ∈ A)) (F.filter (fun e => a ∉ e))
+    (by omega) ha9 hzero (fun b hb => ⟨(hcoords b hb).1,(hcoords b hb).2.1⟩)
+    hfit hvalues hU hF
+  have houtside : U.filter (fun b => decide (b ∈ A) = false) = U \ A := by
+    ext b
+    simp
+  rw [houtside] at hrun
+  refine ⟨hrun,?_,?_⟩
+  · simpa only [MissingDegree135.nonincident_card_eq_sub_degree F a] using hrun
+  · have hsub : U \ A ⊆ C \ A := by
+      intro b hb
+      obtain ⟨hbU,hbA⟩ := Finset.mem_sdiff.mp hb
+      exact Finset.mem_sdiff.mpr ⟨(Finset.mem_filter.mp hbU).1,hbA⟩
+    have hCcard : C.card = 8 := by
+      change ((Finset.range 9).erase q).card = 8
+      rw [Finset.card_erase_of_mem (Finset.mem_range.mpr hq),Finset.card_range]
+    calc
+      (U \ A).card ≤ (C \ A).card := Finset.card_le_card hsub
+      _ = C.card - A.card := Finset.card_sdiff hA
+      _ = 8 - A.card := by rw [hCcard]
+
+#print axioms length_le_actual_missing_pairs
+end Snake9.ActualMissingSets136

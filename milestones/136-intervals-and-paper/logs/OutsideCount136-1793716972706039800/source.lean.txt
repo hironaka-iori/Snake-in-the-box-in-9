@@ -1,0 +1,118 @@
+import ActualMissingSets136
+
+namespace Snake9.OutsideCount136
+open Snake9.LocalWindow
+
+set_option maxHeartbeats 1000000
+
+/-- Every outside coordinate gives either a selected pair or a missing crossing
+pair through the fixed anchor, and these two alternatives are disjoint. -/
+theorem outside_card_add_crossing_degree {m : Nat} (p : Snake m)
+    (a q : Nat) (A : Finset Nat) (hq : q < 9)
+    (ha : a ∈ A) (hA : A ⊆ (Finset.range 9).erase q) :
+    let C := (Finset.range 9).erase q
+    let U := C.filter (fun b => b ≠ a ∧ sel p (fun v => v) (2^a ^^^ 2^b) = true)
+    let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+      ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+    (U \ A).card + (F.filter (fun e => a ∈ e ∧ ¬ e ⊆ A)).card = 8 - A.card := by
+  classical
+  dsimp only
+  let C := (Finset.range 9).erase q
+  let U := C.filter (fun b => b ≠ a ∧ sel p (fun v => v) (2^a ^^^ 2^b) = true)
+  let F := (C.powersetCard 2).filter (fun e => (e ∩ A).Nonempty ∧
+    ∀ b ∈ e, ∀ c ∈ e, b ≠ c → sel p (fun v => v) (2^b ^^^ 2^c) = false)
+  let M := (C \ A).filter (fun b => sel p (fun v => v) (2^a ^^^ 2^b) = false)
+  change (U \ A).card + (F.filter (fun e => a ∈ e ∧ ¬ e ⊆ A)).card = 8 - A.card
+  have haC : a ∈ C := hA ha
+  have hne (b : Nat) (hb : b ∉ A) : b ≠ a := by
+    intro he
+    exact hb (by simpa only [he] using ha)
+  have hselected : U \ A =
+      (C \ A).filter (fun b => sel p (fun v => v) (2^a ^^^ 2^b) = true) := by
+    dsimp only [U]
+    ext b
+    simp only [Finset.mem_sdiff,Finset.mem_filter]
+    constructor
+    · rintro ⟨⟨hbC,hba,hsel⟩,hbA⟩
+      exact ⟨⟨hbC,hbA⟩,hsel⟩
+    · rintro ⟨⟨hbC,hbA⟩,hsel⟩
+      exact ⟨⟨hbC,hne b hbA,hsel⟩,hbA⟩
+  have himage : M.image (fun b => ({a,b} : Finset Nat)) =
+      F.filter (fun e => a ∈ e ∧ ¬ e ⊆ A) := by
+    ext e
+    constructor
+    · intro he
+      obtain ⟨b,hb,rfl⟩ := Finset.mem_image.mp he
+      obtain ⟨hbCA,habsent⟩ := Finset.mem_filter.mp hb
+      obtain ⟨hbC,hbA⟩ := Finset.mem_sdiff.mp hbCA
+      have hab : a ≠ b := (hne b hbA).symm
+      apply Finset.mem_filter.mpr
+      refine ⟨?_,by simp,?_⟩
+      · apply Finset.mem_filter.mpr
+        refine ⟨Finset.mem_powersetCard.mpr ⟨?_,Finset.card_pair hab⟩,?_,?_⟩
+        · intro x hx
+          simp only [Finset.mem_insert,Finset.mem_singleton] at hx
+          rcases hx with hxa | hxb
+          · rw [hxa]
+            exact haC
+          · rw [hxb]
+            exact hbC
+        · exact ⟨a,Finset.mem_inter.mpr ⟨by simp,ha⟩⟩
+        · intro x hx y hy hxy
+          simp only [Finset.mem_insert,Finset.mem_singleton] at hx hy
+          rcases hx with hxa | hxb <;> rcases hy with hya | hyb
+          · exact False.elim (hxy (hxa.trans hya.symm))
+          · simpa only [hxa,hyb] using habsent
+          · simpa only [hxb,hya,Nat.xor_comm] using habsent
+          · exact False.elim (hxy (hxb.trans hyb.symm))
+      · intro hsub
+        exact hbA (hsub (by simp))
+    · intro he
+      obtain ⟨heF,hae,hcross⟩ := Finset.mem_filter.mp he
+      obtain ⟨heC,hmeet,habsent⟩ := Finset.mem_filter.mp heF
+      obtain ⟨heSub,heCard⟩ := Finset.mem_powersetCard.mp heC
+      have hex : ∃ b, b ∈ e ∧ b ∉ A := Finset.not_subset.mp hcross
+      obtain ⟨b,hbe,hbA⟩ := hex
+      have hab : a ≠ b := (hne b hbA).symm
+      have hpSub : ({a,b} : Finset Nat) ⊆ e := by
+        intro x hx
+        simp only [Finset.mem_insert,Finset.mem_singleton] at hx
+        rcases hx with hxa | hxb
+        · rw [hxa]
+          exact hae
+        · rw [hxb]
+          exact hbe
+      have hpEq : ({a,b} : Finset Nat) = e :=
+        Finset.eq_of_subset_of_card_le hpSub (by rw [heCard,Finset.card_pair hab])
+      apply Finset.mem_image.mpr
+      refine ⟨b,?_,hpEq⟩
+      exact Finset.mem_filter.mpr
+        ⟨Finset.mem_sdiff.mpr ⟨heSub hbe,hbA⟩,habsent a hae b hbe hab⟩
+  have hinj : Set.InjOn (fun b => ({a,b} : Finset Nat)) M := by
+    intro b hb c hc he
+    change ({a,b} : Finset Nat) = {a,c} at he
+    have hbA : b ∉ A := (Finset.mem_sdiff.mp (Finset.mem_filter.mp hb).1).2
+    have hbpair : b ∈ ({a,c} : Finset Nat) := by
+      rw [← he]
+      simp
+    simpa only [Finset.mem_insert,Finset.mem_singleton,hne b hbA,false_or] using hbpair
+  have hcard : M.card = (F.filter (fun e => a ∈ e ∧ ¬ e ⊆ A)).card := by
+    rw [← himage]
+    exact (Finset.card_image_of_injOn hinj).symm
+  have hpartition : (U \ A).card + M.card = (C \ A).card := by
+    rw [hselected]
+    have h := Finset.filter_card_add_filter_neg_card_eq_card
+      (s := C \ A) (fun b => sel p (fun v => v) (2^a ^^^ 2^b) = true)
+    simpa only [Bool.not_eq_true] using h
+  have hCcard : C.card = 8 := by
+    change ((Finset.range 9).erase q).card = 8
+    rw [Finset.card_erase_of_mem (Finset.mem_range.mpr hq),Finset.card_range]
+  calc
+    (U \ A).card + (F.filter (fun e => a ∈ e ∧ ¬ e ⊆ A)).card =
+        (U \ A).card + M.card := by rw [hcard]
+    _ = (C \ A).card := hpartition
+    _ = C.card - A.card := Finset.card_sdiff hA
+    _ = 8 - A.card := by rw [hCcard]
+
+#print axioms outside_card_add_crossing_degree
+end Snake9.OutsideCount136
