@@ -1,49 +1,48 @@
-# Continue after milestone 142
+# Continue after milestone 143
 
-Work in E:/Snake-in-a-box using tensai-bishoujo. Preserve the three authors,
-paper preamble/hypersetup and unrelated .gitignore and milestone50 edits.
-Only define necessary recurring notation. Edit the existing D:/Codex/
-2026-10-13/new-chat/outputs/snake9_research.tex in place and keep the repo
-paper copy identical. Fetch each round, retain exact evidence, stage only
-a verified manifest, commit/push/verify. Goal ACTIVE; no exact optimum.
+Use E:/Snake-in-a-box and tensai-bishoujo. Preserve three authors, the paper
+preamble/hypersetup, existing D:/Codex/2026-10-13/new-chat/outputs/
+snake9_research.tex editor and its repo mirror, unrelated .gitignore and
+milestone50 edits. Define only necessary recurring notation. Fetch, retain
+exact evidence, stage a verified manifest, commit/push/verify each round.
+Goal ACTIVE; optimum and196 unresolved.
 
-142 is complete. Do not restart its graph test. On4661572 edges, credit533/12
-gives mean4406/9,range5377/9,comparison9940859/42206>235. The new9-cycle
-has no credited events and base weights610,489,376,730,369,492,600,364,376.
-Its mean caps all uniform credits on this fixed indicator. Lean checked
-the lower comparison4962944/21103=235+3739/21103 even at zero cost/range.
-Do not continue tuning this credit without changing the obstructing cycle.
+142 disproved credit533/12. 143 sharpens the next share target using range:
+at012034 floor14 the zero-event9-cycle totals4448 and its last5 edges total
+2230. Hence mu<=4448/9,R>=5mu-2230. Lean proves comparison>=4964197/21124
+=235+57/21124 for any nonnegative occurrence cost. Smaller floors decrease
+these weights. This rules out every floor<=14 in the unchanged model.
+Floor15 is first not excluded by this cycle+walk; not globally sufficient.
 
-NEXT SELECTED TASK: count-free012034 empty-square share13 (scale12), both
-orientations, five internal centres, with no extra count assumptions. This
-weak target is chosen because it removes this9-cycle's zero-cost/range
-obstruction and may have a smaller proof. A separate cap12 native instance
-is appropriate; preserve7302's oldcap19/share20 input and selected replay.
-Last oldCheck1 timed out after900s; no7302process was live at142 inspection.
-Never duplicate a live job. Check for a simpler existing certificate first.
-Floor13 gives this cycle total4442 versus4436 for12. Floor18 adds66,total4472.
-All gains come from012034; the other additional floors contribute zero on
-these nine rows. Reversal must reverse the five local counts, not overwrite
-the chronological last count used in the graph edge's120*last term.
-See142/data/share-targets.json for exact rows and pins. Clipped6 means>=6.
+NEXT SELECTED TASK: count-free012034 share18, resolution12, five internal
+centres, both orientations. Build a SEPARATE cap17 query with five broad
+[0,21] count bounds, radius4, no added cuts. Target18 because it is already
+required by the retained conditional234 profile. Complete the certificate,
+semantics, actual-window mapping, reversal and axiom audit before updating
+completed shares. Other share/count and graph-to-snake hypotheses remain.
 
-The saved conditional234 profile still needs012034 share18 and its other
-additional floors. 141's zero-credit comparison551765/2348<235 is retained.
-A local13 theorem alone proves no global improvement. Only after actual
-semantics, certificate, reversal and axiom audit should it enter completed
-shares; then inspect the full graph and all remaining assumptions.
+143 cap12/share13:10616vars,88038clauses,10078coreclauses,29165deductions,
+1699457hints; two full RUP replays passed. Generated Lean plan231modules,
+23 passed. Driver26336 intentionally terminated after 23 completed modules, following the
+new obstruction. data/intentional-stop.json overrides stale RUNNING status;
+do not restart automatically. Preserve all sources/objects/logs. Old7302
+cap19/share20 unchanged; its historicalCheck1 timed out after900s.
 
-142's evaluator checked all edges; independent review checked40 rows,
-cycle/slacks/potential range, unchanged removal bytes and arithmetic. It
-did not repeat the full edge scan or establish optimal range. Ten Lean
-arithmetic reports passed. Inherited count-sum claims, hypothetical0123104
-six-floor25, odd-length pair restriction and full graph-to-snake assembly
-remain. Maintained191–235, incomplete independent contributor235 rebuild,
-and unresolved196 persist. Local140 actual theorem is already complete.
+For new18 work,143/scripts/prepare.py,certify_base.py,export_lean.py provide
+the pipeline. Use new paths/namespace/pins and actual proof widths; never
+overwrite12 or20 evidence. Encoder28/scripts/tagged_share.py preserves35
+incidences on32 neighbors. Core tags and cap rounding matter. The general
+share bridge supports actual snakes/reversal; the new full chain must pass.
+Independent143 native audit reconstructs base and share encodings.
 
-Paper targeted142, no new definitions, source checks pass. Builtin preview
-compiler failed before TeX; no PDF claimed. Last full136; next146. Separate
-115 driverPID39044 observed live at1158/1397; inspect current state, never
-duplicate.104 stopped;122/129 complete. Lean gate>=1.5GiB free and at most
-two existing Lean; fullgraph>=3GiB and no other fullgraph. Base commit
-a42168ba3c810068bc9961849a6a9c6f7c618710. Exact evidence is retained.
+143 Range143 has7 checked reports; cycle-only potentials attain the saved
+subwalk range. No fullgraph range optimum/new fullgraph calculation. Retained
+conditional551765/2348<235 and maintained191–235 unchanged. Contributor235
+independent rebuild incomplete. Inherited sums, hypothetical0123104floor25,
+odd-pair9, extra share premises and actual-snake graph assembly remain.
+
+Paper targeted143; source checks pass, no definitions added. Builtin compiler
+failed before TeX; no PDF. Last full136; next146. Separate115PID39044 observed
+live1203/1397; inspect current command, never duplicate.104 stopped;122/129
+complete. Lean gate>=1.5GiB free and<=2 existing Lean; fullgraph>=3GiB and
+no other fullgraph. Base d29e9db3e5590942fbd4ba4a966e89b1f65870ab.

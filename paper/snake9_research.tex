@@ -3258,6 +3258,69 @@ Potential-range optimality, a full Lean graph certificate, and the complete
 comparison for arbitrary snakes remain unresolved. No new unconditional
 upper bound is obtained in this test.
 
+\subsection{A necessary share floor after accounting for the range}\label{sec:share-floor-range}
+The preceding cycle also limits the benefit of a weaker share theorem.
+Six of its nine edges have canonical suffix $012034$, allowing reversal.
+Increasing only the count-free share floor on that shape to $18$ raises
+these six weights by $8,9,8,9,18,14$. The other additional share floors do
+not change this cycle. A floor of $13$ would raise its total weight from
+$4406$ to $4442$, which removes its zero-cost, zero-range obstruction.
+A valid potential, however, must also satisfy the inequalities along each
+subwalk~\cite{range143archive}.
+
+\begin{proposition}\label{prop:share-fourteen-obstruction}
+Keep the retained graph, its other weights, and its occurrence indicator
+fixed. A count-free share floor of at most $14$ on $012034$, with any
+nonnegative uniform occurrence credit, cannot reduce the existing comparison
+below $235$, regardless of the choice of potential.
+\end{proposition}
+\begin{proof}
+At floor $14$, the nine cycle weights are
+\[
+614,\ 494,\ 376,\ 734,\ 374,\ 492,\ 614,\ 374,\ 376.
+\]
+Their sum is $4448$. The last five edges form a walk of total weight $2230$.
+No edge in the cycle carries an occurrence event. Hence every valid
+mean and potential range satisfy
+\[
+\mu\le\frac{4448}{9},\qquad R\ge5\mu-2230.
+\]
+The first inequality follows by summing the nine potential inequalities
+around the cycle. The second follows by summing along the five-edge walk
+and bounding the difference between its endpoint potentials by $R$.
+All weights on this cycle and walk can only decrease when the floor is
+lowered, so both inequalities remain valid for every floor at most $14$.
+For $\mu,C,B\ge0$, these two restrictions give
+\[
+\frac{1098960+8\mu+BC+R}{4200+\mu}
+\ge\frac{1096730+13\mu}{4200+\mu}
+\ge\frac{4964197}{21124}
+=235+\frac{57}{21124}>235.
+\]
+The middle ratio decreases with $\mu$ on this domain. The graph uses
+$B=24$. Lean checks the cycle summation, the walk summation, and the
+comparison implications. The concrete saved graph rows and their weights
+were checked separately.
+\end{proof}
+
+For the nine-cycle alone, floor $15$ gives mean $4454/9$ and minimum
+range $2173/9$ at that mean. Their comparison is
+$235-1245/42254$. Thus $15$ is the first integer floor not excluded by this
+cycle and its subwalks. This is not a sufficiency result for the full graph.
+Floor $18$ remains the existing requirement in the retained conditional
+profile, and is the selected next local theorem target.
+
+A separate contradiction query for the weaker floor $13$ used five broad
+count intervals $[0,21]$, share cap $12$, and no added cycle exclusions.
+Its dependency-trimmed Boolean certificate has 29165 deductions and
+1699457 propagation hints; two direct replays end in the empty clause.
+The Lean interpretation and replay had passed 23 of 231 planned modules
+when the stronger range obstruction made the weaker target insufficient
+for the comparison. The partial proof and all certificates are preserved.
+No actual-snake share-$13$ theorem is claimed. This calculation establishes
+a necessary threshold for the fixed graph argument, with no new global
+upper bound and no claim of an optimal range on the full graph.
+
 \subsection{What an integer improvement requires}
 The comparison~\eqref{eq:improved-potential} excludes length 235 exactly when
 $227p>111960d+R$, and excludes length 234 exactly when
@@ -5831,6 +5894,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Zero occurrence credit after the five-cou
 \bibitem{credit142archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{A zero-event nine-cycle obstructing uniform occurrence credit}. Research record 142, 4 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/142-retuned-occurrence-credit}.
+
+\bibitem{range143archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{A cycle and subwalk obstruction to small empty-square share floors}. Research record 143, 4 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/143-countfree-share13}.
 
 \end{thebibliography}
 \end{document}

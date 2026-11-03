@@ -1,0 +1,156 @@
+{
+  "status": "PASS_INDEPENDENT_INPUT_CORE_AND_NATIVE_RUP_REVIEW",
+  "recorded_at": "2026-11-03T16:51:21.255617+00:00",
+  "seconds": 2.077999999997701,
+  "variables": 10616,
+  "clauses": 88038,
+  "base_clauses": 54746,
+  "ball_vertices": 421,
+  "core_clauses": 10078,
+  "core_id_min": 1,
+  "core_id_max": 88038,
+  "core_triples_sha256": "aed616622e121d118afdab32b03cf53ca87084c01289f5f0f8c856ec377ff5b6",
+  "full_tag_counts": {
+    "emptyE": 980,
+    "old/cut": 12996,
+    "old/deg2": 26874,
+    "old/degPos": 286,
+    "old/endLow": 10296,
+    "old/endSel": 286,
+    "old/first": 286,
+    "old/lowEnd": 2574,
+    "old/mono": 570,
+    "old/over": 285,
+    "old/step": 285,
+    "old/window": 7,
+    "old/zero": 1,
+    "shareCap": 1,
+    "shareCl": 4095,
+    "totDown": 2275,
+    "totUp": 25941
+  },
+  "core_tag_counts": {
+    "emptyE": 727,
+    "old/cut": 142,
+    "old/deg2": 2303,
+    "old/degPos": 77,
+    "old/endLow": 59,
+    "old/endSel": 3,
+    "old/first": 30,
+    "old/lowEnd": 496,
+    "old/mono": 536,
+    "old/over": 128,
+    "old/step": 98,
+    "old/window": 7,
+    "shareCap": 1,
+    "shareCl": 468,
+    "totDown": 929,
+    "totUp": 4074
+  },
+  "ordinary_cycle_clause_counts": {
+    "4": 2844,
+    "6": 10152
+  },
+  "added_cycle_cuts": 0,
+  "endpoint_budget": 2,
+  "alpha_bounds": [
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ]
+  ],
+  "share": {
+    "centres": 5,
+    "incidences": 35,
+    "distinct_neighbor_vertices": 32,
+    "empty_square_variables": 980,
+    "cap_literals": 455,
+    "totalizers": 71,
+    "resolution": 12,
+    "cap": 12,
+    "duplicate_semantic_incidence_meanings_preserved": true
+  },
+  "replay": {
+    "deductions": 29165,
+    "hints": 1699457,
+    "derived_literal_occurrences": 352804,
+    "maximum_step_hints": 570,
+    "final_empty_clause": true,
+    "original_clause_ids_preserved": true,
+    "literal_multiplicity_preserved": true,
+    "trimmed_lines_are_unchanged_ordered_raw_lines": true
+  },
+  "checks": [
+    "All saved native/source/executable pins matched",
+    "Exact reconstructed CNF byte equality",
+    "Independent untagged base encoding matched",
+    "Complete meanings and tags matched",
+    "All totalizer clause families reconstructed from register meanings",
+    "All share thresholds, neighborhood geometry and cap independently reconstructed",
+    "Every original core clause and tag checked",
+    "Independent complete positive-hint RUP replay",
+    "Old7302 completion record unchanged before and after"
+  ],
+  "no_solver_lean_or_graph_invocation": true,
+  "semantic_obligations": [
+    "Kernel replay of the complete core contradiction",
+    "Actual induced-path assignment satisfies degree, endpoint and ordinary four/six-cycle clauses",
+    "Integer share interpretation and cap saturation with repeated incidences preserved",
+    "Coordinate relabelling and reversed-path transport when applying reverse orientation"
+  ],
+  "limitations": [
+    "Finite Boolean contradiction only; no actual-snake share theorem claimed",
+    "No parity, total-length, far-endpoint, fixed-alpha or extra cycle-cut assumptions",
+    "Old7302 preservation checked for its saved completion record; no entire-directory before/after claim",
+    "This audit does not assess partial Lean receipts"
+  ],
+  "sources_sha256": {
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/scripts/prepare.py": "71fddfe61cbfad8b1301b5506ff3089e9530d316df1264ca77cabe6ee5a39235",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/audit/input-source-prepare.py.txt": "71fddfe61cbfad8b1301b5506ff3089e9530d316df1264ca77cabe6ee5a39235",
+    "E:/Snake-in-a-box/milestones/28-direct-share-certificates/scripts/tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/audit/input-source-tagged_share.py.txt": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+    "E:/Snake-in-a-box/milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/audit/input-source-gen_lean_sat.py.txt": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "E:/Snake-in-a-box/milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/audit/input-source-wincert.py.txt": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "E:/Snake-in-a-box/milestones/142-retuned-occurrence-credit/data/share-targets.json": "d7dd20aaa1c6c4f958530e54b0669ea05cd228900283c2ee55c8aa270ee78422",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/short/base.cnf": "0aefcf5d2581644340010b1f514a32915da5d61d19b1e6a093cc5ffbe50c4d2e",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/short/encoding.json": "48f7b53f2ee624d973fecbc12c977bdd3306709e908fd3501d53db07892e807d",
+    "E:/Snake-in-a-box/milestones/109-relaxed-graph-test/upstream/milestones/10-window-aggregate/scripts/gen_lean_core.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/scripts/certify_base.py": "2e8be2420c89e12a5e298fa10784ec5633d7c5151cf27380bad33b1d691fc7e5",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/input.cnf": "0aefcf5d2581644340010b1f514a32915da5d61d19b1e6a093cc5ffbe50c4d2e",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/certify.exact.py": "2e8be2420c89e12a5e298fa10784ec5633d7c5151cf27380bad33b1d691fc7e5",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/gen_lean_core.exact.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/stdout.txt": "e78eb858cfc756097d89bc504bb48af34e9c4e560777d5f241e7796da2d5b18c",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/raw.lrat": "04f0d4aacb9fdcd01049a0fcbc4c69982ad40f36797e12f68fe9be76e82e6306",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/trimmed.lrat": "dcf65dd8ddb7b794be74aecfdd4567264ee429652a226f99474a55b09db0c593",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/core-ids.json": "623ce681a17f04abfd6b8876c6adc6e55e58e0ab2cac2832108464c47aa438d9",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/core.cnf": "bee9c1cfa0d711c07d7ae2de6fbeae95bbda44e03620b4d083c4605f4dfca3bb",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/core-premises.json": "9efac719ec56ec48ec5a3f22939f836573345e0f1847c9e41e30552ab5ec964b",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/certificate-base/replay.json": "47ce4d0a920f7f1b6053761c320384014c5c49e6bf8fc9af0ca72fc33b066332",
+    "D:/Codex/2026-10-01/it-should-have-a-property-of/work/lean-research/lean-4.19.0-windows/bin/cadical.exe": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/work/short/meanings.json.gz": "dcdec78663d1da2168e1269b9ab631f604d39ca7eadeecafab2db80338b773e7",
+    "E:/Snake-in-a-box/milestones/73-countfree-share-catalogue/cases/case7302/logs/completion-record.json": "c0842765713928509183200c0809b035a195061b162a190d3761a2d3272b0d19",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/audit/old-share20-completion-record.json": "c0842765713928509183200c0809b035a195061b162a190d3761a2d3272b0d19",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/audit/review-native.py": "6702973a02ead68428d89ecc94ce2d34e7769336c7b390455543c8560a74a1d1",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/data/native-base.json": "b3c53fcea4575485625076bc5eeb0c9afcc8304ffe20a14a495b1453c2d9ca28",
+    "E:/Snake-in-a-box/milestones/143-countfree-share13/data/old-share20-observation.json": "a9f58b3430c6762b82fb0c7b646aaf94200b6688df631f7c15fbb48971225a87"
+  }
+}
