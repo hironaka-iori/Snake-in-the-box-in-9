@@ -1,0 +1,26 @@
+{
+  "status": "PASS_INCOMPLETE_REPLAY_REJECTED",
+  "checks": [
+    {
+      "script": "audit_full.py",
+      "sha256": "488310926d0c36829c84ba4a6edeba7d308d2f41a3fcb0794c9ea4056ecef45c",
+      "exit_code": 2,
+      "output": {
+        "status": "WAITING_FOR_COMPLETE_REPLAY",
+        "replay_status": "RUNNING",
+        "checked": 124
+      }
+    },
+    {
+      "script": "check_complete.py",
+      "sha256": "7b639e79080f1259c7f009e142eacfc1f8b9efa121fc8d3dd5dd271099fa64df",
+      "exit_code": 2,
+      "output": {
+        "status": "WAITING_FOR_COMPLETE_REPLAY",
+        "replay_status": "RUNNING",
+        "checked": 125
+      }
+    }
+  ],
+  "no_acceptance_artifact_created": true
+}

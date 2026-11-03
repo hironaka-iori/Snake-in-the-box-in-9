@@ -1,0 +1,202 @@
+{
+  "status": "PASS_BOUNDED_COMPLETION_SOURCE_REVIEW_WITH_FULL_REPLAY_PENDING",
+  "reviewed_at_utc": "2026-11-03T22:04:42.511160+00:00",
+  "scope": "Read-only source, small metadata and hash comparisons. No compiler, solver, proof replay, process changes or Git operations.",
+  "source_derivation": {
+    "completion_plan_exact": true,
+    "generated_checker_exact": true,
+    "checker_literal_replacements": 7,
+    "stronger_driver_exact": true,
+    "stronger_driver_literal_replacements": 7
+  },
+  "acceptance": {
+    "required_modules": 342,
+    "exact_order_required": true,
+    "per_receipt_source_object_log_snapshot_dependencies_required": true,
+    "axiom_reports": 1027,
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "closed_unsat_required": "Snake9.ReplayFull150.unsat",
+    "complete_transport": {
+      "deductions": 58182,
+      "references": 5350080,
+      "segments": 878,
+      "initial_clauses": 13655,
+      "final_original_clause": 205425,
+      "final_tree_key": 12069
+    },
+    "actual_snake_check_separate": true
+  },
+  "theorem": {
+    "name": "Snake9.ShareTransfer152.share16",
+    "status": "SOURCE_ONLY_PENDING_COMPLETE_REPLAY_AND_COMPILATION",
+    "premises": [
+      "p : Snake m",
+      "r + 6 <= m",
+      "canon(dsOf p r 6) = 012032 OR canon(reverse(dsOf p r 6)) = 012032"
+    ],
+    "conclusion": "16 <= sum_{i=0}^4 coreShare 12 p (r+i+1)",
+    "extra_pair_count_premise": false,
+    "parity_premise": false,
+    "endpoint_location_premise": false,
+    "unsat_premise_discharged_by_closed_import": true,
+    "global_upper_bound_claim": false
+  },
+  "serialization": {
+    "original_resumed_success_required": true,
+    "complete_audit_required": true,
+    "same_147_process_handle_used": true,
+    "current_147_checker_waited_before_new_check": true,
+    "owned_final_checker_preflight_waited_before_resume": true,
+    "watchdog_and_finally_recovery_inspected": true,
+    "runtime_recovery_tested_by_reviewer": false
+  },
+  "already_accepted_import_receipts": [
+    {
+      "module": "ShareFromCore150",
+      "axioms": [
+        {
+          "theorem": "Snake9.ShareTransfer150.share16_of_core_unsat",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "receipt_sha256": "cf0ba57ced4de4f380660bc1d84e70ffeec1608e892b9f2c9ac8251ad6f88475"
+    },
+    {
+      "module": "Share150.Semantics150",
+      "axioms": [
+        {
+          "theorem": "Snake9.LocalWindow.ShareWindow150.interpreted_core150",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LocalWindow.ShareWindow150.local_share16_of_core_unsat150",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "receipt_sha256": "0de0d103b5b213af2da2ffb99cf3ca2a364e0d286b4894e4fdae065a000d6009"
+    }
+  ],
+  "strengthening": {
+    "shape": "012032",
+    "bounds": [
+      [
+        0,
+        21
+      ],
+      [
+        0,
+        21
+      ],
+      [
+        0,
+        21
+      ],
+      [
+        0,
+        21
+      ],
+      [
+        0,
+        21
+      ]
+    ],
+    "resolution": 12,
+    "radius": 4,
+    "endpoint_budget": 2,
+    "cap": 16,
+    "target": 17,
+    "variables": 11651,
+    "clauses": 94331,
+    "extra_clauses": 0,
+    "extra_cycle_cuts": [],
+    "status": "TIMEOUT",
+    "seconds": 62.56300000000192,
+    "exit_code": 1,
+    "raw_bytes": 66801664,
+    "complete_certificate": false,
+    "actual_snake_theorem": false
+  },
+  "observed_pending": {
+    "replay_status": "RUNNING",
+    "accepted_modules": 137,
+    "active": {
+      "module": "ReplayCheckpoint150_00320",
+      "pid": 45404,
+      "log": "logs/full-replay-launch-1793742452680750200-ReplayCheckpoint150_00320.log"
+    },
+    "progress_updated_at": "2026-11-03T22:04:38.053685+00:00",
+    "progress_snapshot_sha256": "93fd7e19fa98583b0c785ff1345f59aae9d4ad9afe61ad62a3a168881eb60b96",
+    "controller_status": "RUNNING_FULL_REPLAY_ALONE",
+    "controller_snapshot_sha256": "688b3c832fb56df0e264698cbdf76e9111d646cf710c7b9fb0020e0cf30edfe7",
+    "replay_completion_exists": false,
+    "actual_receipt_exists": false
+  },
+  "findings": [],
+  "limitations": [
+    "The full342-receipt audit has not been executed by this reviewer; the replay was still running at capture.",
+    "Recorded successful semantic imports were hash-checked; their full transitive receipt closure was not re-audited in this bounded review.",
+    "The strengthening input header, clause count, meanings length and producer/source pins were checked; its entire CNF was not independently rebuilt.",
+    "The watchdog review is static and does not test abnormal process termination.",
+    "No completed contradiction or actual-snake theorem is claimed for152."
+  ],
+  "pins": {
+    "milestones/152-countfree-share16-completion/scripts/audit_full.py": "488310926d0c36829c84ba4a6edeba7d308d2f41a3fcb0794c9ea4056ecef45c",
+    "milestones/152-countfree-share16-completion/scripts/check_complete.py": "7b639e79080f1259c7f009e142eacfc1f8b9efa121fc8d3dd5dd271099fa64df",
+    "milestones/152-countfree-share16-completion/scripts/prepare_completion.py": "ec4e625980f549abaf4ba4dc61628e0d1c10b251bf4f7bad6936b9107157509e",
+    "milestones/152-countfree-share16-completion/scripts/prepare_stronger.py": "de5cec79e9610aa678e282e926cd053a9e4645d1c486b838ad1460d2ec5c6b56",
+    "milestones/152-countfree-share16-completion/scripts/serialize_final.py": "4109dcea1c137a493e87212dd867ea6cf29f0ebc44abc563efe5d1606b4e60f1",
+    "milestones/152-countfree-share16-completion/scripts/continue_after_replay.py": "d7a34525c966a5c7ae61343faa88d59de48c3f1c600a901eea11e8519300398f",
+    "milestones/152-countfree-share16-completion/data/completion-plan.json": "e01bc7024d5940e4e25665e9cf3d3726858a544a8f23929fea7d01df6c44f7ea",
+    "milestones/152-countfree-share16-completion/data/completion-preparation.json": "ae73db257487c2be722e109d8c08e8a8c466ead09e5003242a2ee4293f73de94",
+    "milestones/152-countfree-share16-completion/data/pending-guard-tests.json": "4e6dbdea48021ce530fbe0d679b610330134e3be74fd60751fe14b6c6b483c51",
+    "milestones/152-countfree-share16-completion/data/final-runner-preparation.json": "e519a30318b3460fccad8e18339da45b494cf5b7732730105c42e530d68f257b",
+    "milestones/152-countfree-share16-completion/lean/ShareComplete152.lean": "b2cedb46c0548e664989371f88e9730ccf2ac6595aa15961a39b80b04c1aba16",
+    "milestones/150-actual-pair-share/scripts/check_module.py": "e000b69ba1fdf839542f901de406ec814b793d4fdde3c3616ca91bb2a949063e",
+    "milestones/150-actual-pair-share/data/semantic-plan.json": "441d2c40159ac43641839c86b0f812498661f69e39a54b9bac2b54e7c55d4962",
+    "milestones/28-direct-share-certificates/scripts/tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/input.cnf": "101d05115b6dc19cb1c803d69e53a2559bec5718cf7ca1f49b33793caa7ec862",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/meanings.json.gz": "76fa145846d167395329642a9b0af337135ee082804f2a057b4edd6e268e65d0",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/encoding.json": "471eec59166363bce490d6bb669486e4295b009610e537e99ea201cd3b3788a7",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/driver.exact.py": "430e15f618c570d6fb97d062114f91bb34615ad30a52a4f9f0c3f38b766d8c19",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/trimmer.exact.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/replay-source.exact.py": "37c5b2192838862b8a65408741d06e72161e51d796accc3d0a487875324a676e",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/solver-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/solver-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/raw.lrat": "e3a5ae235130ba6f21d7109f06fa0680e9bb73981f882fcbe1496048813b7b52",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/solver-run.json": "2a8ea22db1f57cb405aaaad356dbcb54c978dbef3e1a9aec18673e57bd7d8f98",
+    "milestones/152-countfree-share16-completion/strengthening/data/preparation.json": "836b9a904520b64b2c9a6cddd1a05150eca9c2a4da5c448eb2e496bac15cfd1c",
+    "milestones/152-countfree-share16-completion/strengthening/data/native-queries.json": "0d8cd2a0b677539cbc77e572cc0b3532a93fde197490d3c0833077194898b7ed",
+    "milestones/152-countfree-share16-completion/strengthening/scripts/native_queries.py": "430e15f618c570d6fb97d062114f91bb34615ad30a52a4f9f0c3f38b766d8c19",
+    "milestones/150-actual-pair-share/lean/ShareFromCore150.lean": "3a23263a837b92cc4b1e3095deeb8d9c439c8ce98bceed200c5c8b30c41b14ba",
+    "milestones/150-actual-pair-share/build/ShareFromCore150.olean": "54f5d1e163c926f75e86dc06e4528d60db2d2cc4532d7230958c3b27fc8ba265",
+    "milestones/150-actual-pair-share/logs/ShareFromCore150-1793740713453993100/compiler.log": "d88598b9c6dacbba4f83a40a4bbd005b52af4753890d2b8aae70ab9bda488a8a",
+    "milestones/150-actual-pair-share/data/ShareFromCore150-audit.json": "cf0ba57ced4de4f380660bc1d84e70ffeec1608e892b9f2c9ac8251ad6f88475",
+    "milestones/150-actual-pair-share/lean/Share150/Semantics150.lean": "892b386db9ab3648cc4aa2171f2cb8f73e2e54b907c19896ad4748509a6e844d",
+    "milestones/150-actual-pair-share/build/Share150/Semantics150.olean": "1ab24a60f10f5bd67ca4b01d97c438cd0e266a4cbf8dc9003f8799ba4df94ed6",
+    "milestones/150-actual-pair-share/logs/Share150.Semantics150-1793740691124880100/compiler.log": "568b2be5ffd4b5ce48aeb49e56663f5dbf249ab2719c3867cb5ecd35653fced1",
+    "milestones/150-actual-pair-share/data/Share150.Semantics150-audit.json": "0de0d103b5b213af2da2ffb99cf3ca2a364e0d286b4894e4fdae065a000d6009",
+    "milestones/148-actual-snake-share-transfer/lean/CanonicalShareAdapter.lean": "fc2aced85e8b3159ea65f750e7e3d64716284d650f354848b62af640768d3cc2",
+    "milestones/151-countfree-replay-pilot/lean/ReplayUnsat150.lean": "2bb0ac9cedfec1f3b1a076203a5593d0b11eaf6ae07ef94c5b2ca916dfac0387",
+    "milestones/151-countfree-replay-pilot/data/full-execution-plan.json": "733af4bf4f91216d3d344315b69ee600827eb9ab179fa4eea62e97e9817a887f",
+    "milestones/151-countfree-replay-pilot/audit/replay-review.json": "ed6039bfdfca718e46384b58cff5eee6542010c3dbfee53311bef30c54aab601",
+    "milestones/150-actual-pair-share/replay/data/packed-replay.json": "8506196ed6d3c21caae089c38c5e5e3e88d1cd8734c6534b4c1261dd19b14c0b"
+  }
+}

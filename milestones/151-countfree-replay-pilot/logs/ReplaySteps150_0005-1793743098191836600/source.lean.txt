@@ -1,0 +1,51 @@
+import ReplayCheck150_00160
+import ReplayCheck150_00164
+import ReplayCheck150_00168
+import ReplayCheck150_00172
+import ReplayCheck150_00176
+import ReplayCheck150_00180
+import ReplayCheck150_00184
+import ReplayCheck150_00188
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+set_option Elab.async false
+
+namespace Snake9.ReplayFull150
+open Snake9.Lrat150Replay (TreeTrue)
+open Snake9.LratFast150Replay
+theorem steps5 (τ : Nat → Bool) (h160 : TreeTrue τ start160) : TreeTrue τ start192 := by
+  have h161 : TreeTrue τ start161 := replay_true τ ok160 h160
+  have h162 : TreeTrue τ start162 := replay_true τ ok161 h161
+  have h163 : TreeTrue τ start163 := replay_true τ ok162 h162
+  have h164 : TreeTrue τ start164 := replay_true τ ok163 h163
+  have h165 : TreeTrue τ start165 := replay_true τ ok164 h164
+  have h166 : TreeTrue τ start166 := replay_true τ ok165 h165
+  have h167 : TreeTrue τ start167 := replay_true τ ok166 h166
+  have h168 : TreeTrue τ start168 := replay_true τ ok167 h167
+  have h169 : TreeTrue τ start169 := replay_true τ ok168 h168
+  have h170 : TreeTrue τ start170 := replay_true τ ok169 h169
+  have h171 : TreeTrue τ start171 := replay_true τ ok170 h170
+  have h172 : TreeTrue τ start172 := replay_true τ ok171 h171
+  have h173 : TreeTrue τ start173 := replay_true τ ok172 h172
+  have h174 : TreeTrue τ start174 := replay_true τ ok173 h173
+  have h175 : TreeTrue τ start175 := replay_true τ ok174 h174
+  have h176 : TreeTrue τ start176 := replay_true τ ok175 h175
+  have h177 : TreeTrue τ start177 := replay_true τ ok176 h176
+  have h178 : TreeTrue τ start178 := replay_true τ ok177 h177
+  have h179 : TreeTrue τ start179 := replay_true τ ok178 h178
+  have h180 : TreeTrue τ start180 := replay_true τ ok179 h179
+  have h181 : TreeTrue τ start181 := replay_true τ ok180 h180
+  have h182 : TreeTrue τ start182 := replay_true τ ok181 h181
+  have h183 : TreeTrue τ start183 := replay_true τ ok182 h182
+  have h184 : TreeTrue τ start184 := replay_true τ ok183 h183
+  have h185 : TreeTrue τ start185 := replay_true τ ok184 h184
+  have h186 : TreeTrue τ start186 := replay_true τ ok185 h185
+  have h187 : TreeTrue τ start187 := replay_true τ ok186 h186
+  have h188 : TreeTrue τ start188 := replay_true τ ok187 h187
+  have h189 : TreeTrue τ start189 := replay_true τ ok188 h188
+  have h190 : TreeTrue τ start190 := replay_true τ ok189 h189
+  have h191 : TreeTrue τ start191 := replay_true τ ok190 h190
+  have h192 : TreeTrue τ start192 := cp_true τ ok191 h191
+  exact h192
+#print axioms steps5
+end Snake9.ReplayFull150

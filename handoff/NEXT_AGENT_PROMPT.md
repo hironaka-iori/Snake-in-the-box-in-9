@@ -1,3 +1,21 @@
+# Continue after the milestone 152 running checkpoint
+
+Read milestones/152-countfree-share16-completion/MATHEMATICAL_NOTE.md and
+data/checkpoint.json. The accepted prefix is 154/342 modules. Inspect current
+progress before acting: the full replay and final-composition continuation
+are already running/waiting, and147 is temporarily held. Do not duplicate
+them. The source review is complete; proof completion remains pending.
+
+After complete replay and the queued composition succeed, run152
+scripts/audit_actual.py, then scripts/update_paper.py; verify and compile the
+existing open paper. Publish final evidence in a separate completion
+manifest without editing this frozen checkpoint. The complete012310 proof
+must not be restarted. The cap16/target17 experiment timed out and should
+not be reported as a theorem or a counterexample.
+
+Historical continuation instructions follow; this paragraph takes priority
+where their old job status differs. Last full paper revision146; next156.
+
 # Continue after milestone 151
 
 Read milestones/151-countfree-replay-pilot/MATHEMATICAL_NOTE.md and its

@@ -1,3 +1,23 @@
+# Research update: milestone 152
+
+The 012032 complete Lean replay is running; 154/342 modules are accepted
+at the immutable checkpoint. Complete contradiction and final actual-snake
+share16 remain pending. Their guarded audit and composition are already
+queued. Read milestones/152-countfree-share16-completion/MATHEMATICAL_NOTE.md
+and data/checkpoint.json before acting.
+
+The same 012301 coordinator is temporarily held, not actively compiling.
+The controller will resume it after the current batch; the queued final
+check also preserves and resumes it. Revalidate live process identities.
+Do not start another replay or restart completed proofs.
+
+The bounded target17 query timed out; no stronger bound or sharpness result
+was obtained. Exact inputs and incomplete output are archived. Paper copies
+remain unchanged; a guarded update is prepared for proof completion.
+Maintained interval191--235 retains the contributor rebuild caveat.
+Conditional234 retains its other premises. Goal ACTIVE; full revision146,
+next156. This running checkpoint will remain immutable after completion.
+
 # Research update: milestone 151
 
 The 012032 initial-state connection and first 32 replay segments passed
