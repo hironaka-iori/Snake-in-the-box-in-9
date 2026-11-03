@@ -1,0 +1,33 @@
+import Recovered122G.LocalWindowUnsat.End26.Data7
+import Recovered122G.LocalWindowUnsat.End26.Data8
+
+/-! Kernel checks of segments 37-42 of `end26` (generated). -/
+
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+
+set_option Elab.async false
+
+namespace Snake9.LocalWindow.End26
+open Snake9.LratFastEndpoint122
+open Snake9.Lrat (Tree TreeTrue andB)
+
+theorem ok37 : check start37 proof37 = true := by
+  decide +kernel
+
+theorem ok38 : check start38 proof38 = true := by
+  decide +kernel
+
+theorem ok39 : check start39 proof39 = true := by
+  decide +kernel
+
+theorem ok40 : check start40 proof40 = true := by
+  decide +kernel
+
+theorem ok41 : check start41 proof41 = true := by
+  decide +kernel
+
+theorem ok42 : andB (check start42 proof42) (cpOk (replay start42 proof42) start43) = true := by
+  decide +kernel
+
+end Snake9.LocalWindow.End26

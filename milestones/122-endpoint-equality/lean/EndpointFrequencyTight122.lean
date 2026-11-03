@@ -1,0 +1,108 @@
+import EndpointFrequency122
+
+namespace Snake9.EndpointFrequencyTight122
+open Snake9.LocalWindow Snake9.EndpointGeometry122 Snake9.EndpointFrequency122
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+
+-- Reuse the checked common-sphere calculation for arbitrary selected positions.
+theorem selected_positions_card_le_fourteen {m : Nat} (p : Snake m)
+    (hm : 0 < m) (J : Finset Nat)
+    (hfit : ∀ j ∈ J, j ≤ m)
+    (hend : ∀ j ∈ J,
+      hamming (vx p j) (vx p 0) = 2 ∧
+      hamming (vx p j) (vx p m) = 2) :
+    J.card ≤ 14 := by
+  let t := vx p 0
+  let d := t ^^^ vx p m
+  let f : Nat → Nat := fun j => t ^^^ vx p j
+  let T := ((freePairs 9 9).map (fun ab => 2^ab.1 ^^^ 2^ab.2)).toFinset
+  have hdlt : d < 512 :=
+    Nat.xor_lt_two_pow (n := 9) (vx_lt p 0) (vx_lt p m)
+  have hne : vx p 0 ≠ vx p m := by
+    intro he
+    have hi := vx_inj p (i := 0) (j := m) (by omega) (by omega) he
+    omega
+  have hdne : d ≠ 0 := by
+    intro he
+    have hx := congrArg (fun z => t ^^^ z) he
+    change t ^^^ (t ^^^ vx p m) = t ^^^ 0 at hx
+    have hz : vx p m = t := by
+      simpa only [← Nat.xor_assoc, Nat.xor_self, Nat.zero_xor, Nat.xor_zero] using hx
+    exact hne hz.symm
+  have hcard : (T.filter (fun v => hamming d v = 2)).card ≤ 14 :=
+    intersection_card_le ⟨d,hdlt⟩ hdne
+  have hbound : J.card ≤ (T.filter (fun v => hamming d v = 2)).card := by
+    apply Finset.card_le_card_of_injOn f
+    · intro j hj
+      have hfj : f j < 512 :=
+        Nat.xor_lt_two_pow (n := 9) (vx_lt p 0) (vx_lt p j)
+      have hjends := hend j hj
+      have hzero : hamming 0 (f j) = 2 := by
+        have hx := hamming_xor t t (vx p j)
+        rw [Nat.xor_self] at hx
+        exact hx.trans ((hamming_comm t (vx p j)).trans hjends.1)
+      have hdist : hamming d (f j) = 2 :=
+        (hamming_xor t (vx p m) (vx p j)).trans
+          ((hamming_comm (vx p m) (vx p j)).trans hjends.2)
+      exact Finset.mem_filter.mpr ⟨zero_sphere_mem ⟨f j,hfj⟩ hzero,hdist⟩
+    · intro j hj k hk he
+      have hv : vx p j = vx p k := xor_left_inj t he
+      exact vx_inj p (hfit j hj) (hfit k hk) hv
+  exact hbound.trans hcard
+
+-- The second centre of the last window adds a position beyond every first centre.
+theorem pair_window_count_le_thirteen {m : Nat} (p : Snake m) (I : Finset Nat)
+    (hfit : ∀ r ∈ I, r+6 ≤ m)
+    (hend : ∀ r ∈ I,
+      (hamming (vx p (r+2)) (vx p 0) = 2 ∧
+       hamming (vx p (r+2)) (vx p m) = 2) ∧
+      (hamming (vx p (r+4)) (vx p 0) = 2 ∧
+       hamming (vx p (r+4)) (vx p m) = 2)) :
+    I.card ≤ 13 := by
+  by_cases hI : I = ∅
+  · simp [hI]
+  have hnonempty : I.Nonempty := Finset.nonempty_iff_ne_empty.mpr hI
+  let last := I.max' hnonempty
+  have hlast : last ∈ I := Finset.max'_mem I hnonempty
+  have hlastfit := hfit last hlast
+  have hm : 0 < m := by omega
+  let J := insert (last+4) (I.image (fun r => r+2))
+  have hJfit : ∀ j ∈ J, j ≤ m := by
+    intro j hj
+    change j ∈ insert (last+4) (I.image (fun r => r+2)) at hj
+    rcases Finset.mem_insert.mp hj with hnew | himage
+    · omega
+    · obtain ⟨r,hr,he⟩ := Finset.mem_image.mp himage
+      have h := hfit r hr
+      omega
+  have hJend : ∀ j ∈ J,
+      hamming (vx p j) (vx p 0) = 2 ∧
+      hamming (vx p j) (vx p m) = 2 := by
+    intro j hj
+    change j ∈ insert (last+4) (I.image (fun r => r+2)) at hj
+    rcases Finset.mem_insert.mp hj with hnew | himage
+    · subst j
+      exact (hend last hlast).2
+    · obtain ⟨r,hr,he⟩ := Finset.mem_image.mp himage
+      subst j
+      exact (hend r hr).1
+  have hnew : last+4 ∉ I.image (fun r => r+2) := by
+    intro hmem
+    obtain ⟨r,hr,he⟩ := Finset.mem_image.mp hmem
+    have hle : r ≤ last := Finset.le_max' I r hr
+    omega
+  have himagecard : (I.image (fun r => r+2)).card = I.card := by
+    apply Finset.card_image_of_injective
+    intro r s he
+    change r+2 = s+2 at he
+    omega
+  have hJcard : J.card = I.card+1 := by
+    change (insert (last+4) (I.image (fun r => r+2))).card = I.card+1
+    rw [Finset.card_insert_of_not_mem hnew, himagecard]
+  have hbound := selected_positions_card_le_fourteen p hm J hJfit hJend
+  omega
+
+#print axioms selected_positions_card_le_fourteen
+#print axioms pair_window_count_le_thirteen
+end Snake9.EndpointFrequencyTight122

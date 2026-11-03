@@ -1,0 +1,33 @@
+import LocalWindowTags
+
+namespace Snake9.EndpointClause122
+open Snake9.LocalWindow Snake9.LocalWindow.Tags
+
+theorem clause_of_endpoint (S E : Nat → Bool) (M : MT) (cs : List Ctr)
+    (cl : List Nat) (hpos : cl.all (posE M) = true)
+    (h : ∃ a ∈ cl, E (vl M a) = true) :
+    clauseTrue (tau S E M cs) (cl.map decodeLit) = true := by
+  obtain ⟨a, ha, hE⟩ := h
+  apply List.any_eq_true.mpr
+  refine ⟨decodeLit a, List.mem_map.mpr ⟨a, ha, rfl⟩, ?_⟩
+  rw [lit_posE (List.all_eq_true.mp hpos a ha)]
+  exact hE
+
+theorem sat_append (S E : Nat → Bool) (M : MT) (cs : List Ctr)
+    (w : List Nat) (b : List (Nat × Nat)) (tags : List Tag)
+    (baseRaw : List (List Nat)) (cl : List Nat)
+    (hcheck : checkAll M cs w b tags baseRaw = true)
+    (hpos : cl.all (posE M) = true)
+    (h : ∃ a ∈ cl, E (vl M a) = true)
+    (ax : Axioms S E w (centresOf w b)) :
+    cnfTrue (tau S E M cs) ((baseRaw ++ [cl]).map (·.map decodeLit)) = true := by
+  have hbase := sound M cs w b tags baseRaw hcheck S E ax
+  have hcl := clause_of_endpoint S E M cs cl hpos h
+  simpa only [List.map_append, List.map_cons, List.map_nil, cnfTrue,
+    List.all_append, List.all_cons, List.all_nil, Bool.and_true] using
+    Bool.and_eq_true.mpr ⟨hbase, hcl⟩
+
+end Snake9.EndpointClause122
+
+#print axioms Snake9.EndpointClause122.clause_of_endpoint
+#print axioms Snake9.EndpointClause122.sat_append

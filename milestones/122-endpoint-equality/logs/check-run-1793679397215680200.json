@@ -1,0 +1,28 @@
+{
+  "status": "STOPPED",
+  "pid": 13508,
+  "started_at": "2026-11-03T04:16:37.215680+00:00",
+  "modules": [
+    "LocalEndpoint26122",
+    "ActualEndpoint26122",
+    "EndpointBudget122",
+    "EndpointFrequencyTight122"
+  ],
+  "records": [
+    {
+      "module": "LocalEndpoint26122",
+      "status": "PASS_REFERENCE_RECOVERY_MODULE",
+      "receipt_sha256": "0ca04cb5bc8c4a5038e9376a3d8883672e8ea312460f37ce194060303f31b8fb",
+      "theorem_audits": 1
+    },
+    {
+      "module": "ActualEndpoint26122",
+      "status": "PASS_REFERENCE_RECOVERY_MODULE",
+      "receipt_sha256": "44c65b2be72edcdcbe34e84c4b9eb6cbcf68e93d42fc3da8f717f2c6cc3eef98",
+      "theorem_audits": 1
+    }
+  ],
+  "active": null,
+  "exception": "AssertionError(\"E:\\\\Snake-in-a-box\\\\milestones\\\\122-endpoint-equality\\\\lean\\\\EndpointBudget122.lean:10:27: error: type mismatch\\n  mul_le_mul_of_nonneg_left ht hC\\nhas type\\n  C * t \u2264 C * 13 : Prop\\nbut is expected to have type\\n  C * t \u2264 13 * C : Prop\\n'Snake9.EndpointBudget122.charge_arithmetic' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\\n'Snake9.EndpointBudget122.conditional_mean_limit' depends on axioms: [propext, Classical.choice, Quot.sound]\\n'Snake9.EndpointBudget122.completed_mean_limit' depends on axioms: [propext, Classical.choice, Quot.sound]\\n\")",
+  "stopped_at": "2026-11-03T04:17:10.240967+00:00"
+}

@@ -1,0 +1,28 @@
+import ReferenceInterface
+
+namespace Snake9.EndpointBudget122
+
+theorem charge_arithmetic (m W p d R C t : Int)
+    (hd : 0 ≤ d) (hC : 0 ≤ C) (ht : t ≤ 13)
+    (hbudget : W + 4200*m ≤ 1098960)
+    (hpotential : p*(m-8)-R ≤ d*(W+C*t)) :
+    (4200*d+p)*m ≤ 1098960*d + 13*C*d + 8*p + R := by
+  have hct : C*t ≤ 13*C := mul_le_mul_of_nonneg_left ht hC
+  have hdct : d*(C*t) ≤ d*(13*C) := mul_le_mul_of_nonneg_left hct hd
+  have hdb : d*(W+4200*m) ≤ d*1098960 := mul_le_mul_of_nonneg_left hbudget hd
+  nlinarith
+
+theorem conditional_mean_limit (C R : Rat) (hC : 0 ≤ C) (hR : 0 ≤ R) :
+    234 < (1098960 + 13*C + 8*496 + R)/(4200+496) := by
+  apply (lt_div_iff₀ (by norm_num : (0:Rat) < 4200+496)).2
+  nlinarith
+
+theorem completed_mean_limit (C R : Rat) (hC : 0 ≤ C) (hR : 0 ≤ R) :
+    235 < (1098960*6 + 13*C*6 + 8*2915 + R)/(4200*6+2915) := by
+  apply (lt_div_iff₀ (by norm_num : (0:Rat) < 4200*6+2915)).2
+  nlinarith
+
+end Snake9.EndpointBudget122
+#print axioms Snake9.EndpointBudget122.charge_arithmetic
+#print axioms Snake9.EndpointBudget122.conditional_mean_limit
+#print axioms Snake9.EndpointBudget122.completed_mean_limit

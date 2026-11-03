@@ -1,3 +1,48 @@
+# Continuation after milestone 122
+
+Work in E:/Snake-in-a-box. Use the requested research skill with neutral prose.
+Keep established notation and define only essential repeated quantities.
+Read the 122 mathematical note, proof review and graph obstruction report.
+
+The (2,6) endpoint case is proved for actual snakes. The general canonical transfer,
+five-case equality assembly (with local premises), and geometric bound13 are
+checked. The remaining 381-module batch proves the (3,5)/(4,4) cases and then
+ActualEndpoint122. A complete universal equality theorem and its 13-occurrence
+consequence require this batch to finish; partial replay is insufficient.
+
+Inspect data/pending-progress.json, data/check.lock and actual process command
+lines before touching the 122 batch. Its launched driver PID was 55040. The sources,
+checker, plan and preceding 67 proof receipts are pinned. Do not duplicate or edit
+an active verification. A missing driver with orphan children is not a safe restart.
+
+The original 104/115 drivers had disappeared despite stale RUNNING files. Their
+states/locks were preserved in122/audit/stopped-batches, then only confirmed stale
+locks were removed. The unchanged drivers were resumed with PIDs 21896 and 43492.
+At the stopped snapshot 104 had 185 completed and 184 conditional contexts out of 791;
+115 had 357/1397 modules. Use fresh process checks; PIDs and progress may change.
+
+The endpoint graph experiment is negative for numerical improvement. Exact suffix
+pairs (3,5),(4,4),(5,3) define 9,577 keys. Adding C=4 or deleting all these keys leaves
+means 2915/6 and 496 unchanged. Even zero occurrence cost and zero potential range
+cannot improve the 235/234 integer comparisons. The stronger occurrence allowance 13
+therefore does not rescue this credit family. No new global upper bound is claimed.
+
+The conditional obstruction is the all-four three-cycle with edges 1275804,3049577,988624;
+direction words012304235,012341254,012301430; every six-count vector is(4,4,4,4,4,4).
+Inspect existing milestone32 seven-count-four certificates and other saved
+six-fours cases for exact placement and coverage. Prepared full-Q9 inputs in
+122/data/next-six-four-cases.json give eight internal intervals: two unrestricted,
+then six exact 4. They are unsearched. Do not infer seven-centre coverage from six
+recorded counts, and do not claim this finite graph cycle is an actual snake.
+
+The exact optimum and 196 remain unresolved. Maintain 191–235 with its documented
+independent-rebuild limitation; conditional 234 retains its premises. Keep the full
+goal active. Paper/editor remain revision 116; next full revision 126. Preserve all
+three authors, hypersetup, unrelated worktree changes and audited bytes. Refresh
+GitHub before the next round, use explicit E: workdir, and stage only reviewed files.
+
+## Earlier continuation record
+
 # Continuation after milestone 121
 
 Work in E:/Snake-in-a-box. Apply the research skill with neutral concise prose.

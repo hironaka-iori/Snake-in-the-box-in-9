@@ -1,0 +1,134 @@
+import ReferenceInterface
+
+namespace Snake9.EndpointGeometry122
+open Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow
+open Snake9.Guards79
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+
+-- Same distance definition as milestone 45, EndpointDistance.lean:7.
+def hamming (u v : Nat) : Nat :=
+  (List.range 9).countP (fun k => (u ^^^ v).testBit k)
+
+-- Generic proof reused from milestone 45, EndpointPair.lean:64.
+-- No dependency on that module's particular endpoint certificate is needed.
+theorem pullback_two_flips (P : CPerm) (t c z a b : Nat)
+    (ht : t<512) (hc : c<512) (hz : z<512)
+    (ha : a<9) (hb : b<9) (hab : a≠b)
+    (he : amap P t z = (amap P t c ^^^ 2^a) ^^^ 2^b) :
+    ∃ u v : Nat, u<9 ∧ v<9 ∧ u≠v ∧ z=(c ^^^ 2^u) ^^^ 2^v := by
+  have hu := P.bwd_lt a ha
+  have hv := P.bwd_lt b hb
+  have huv : P.bwd a ≠ P.bwd b := by
+    intro h
+    have h' := congrArg P.fwd h
+    rw [P.fwd_bwd a ha,P.fwd_bwd b hb] at h'
+    exact hab h'
+  refine ⟨P.bwd a,P.bwd b,hu,hv,huv,?_⟩
+  apply amap_inj P ht hz (xor_pow_lt (xor_pow_lt hc hu) hv)
+  rw [amap_flip P t _ hv,amap_flip P t _ hu,P.fwd_bwd a ha,P.fwd_bwd b hb]
+  exact he
+
+-- Generic proof reused from milestone 45, EndpointDistance.lean:10.
+theorem two_flips_distance (c a b : Nat) (ha : a<9) (hb : b<9) (hab : a≠b) :
+    hamming c ((c ^^^ 2^a) ^^^ 2^b) = 2 := by
+  have ht : ∀ a b : Fin 9, a≠b → hamming 0 (2^a.val ^^^ 2^b.val) = 2 := by
+    decide +kernel
+  have hf : (⟨a,ha⟩ : Fin 9) ≠ ⟨b,hb⟩ := by
+    intro h
+    exact hab (congrArg Fin.val h)
+  have hx := ht ⟨a,ha⟩ ⟨b,hb⟩ hf
+  simpa [hamming,Nat.xor_assoc] using hx
+
+theorem common_sphere_two_flips {v : Nat}
+    (hv : v ∈ [0,5,10,15,18,23,34,39,66,71,130,135,258,263])
+    (c : Nat) (hc : c=3 ∨ c=6) :
+    ∃ a b : Nat, a<9 ∧ b<9 ∧ a≠b ∧ v=(c ^^^ 2^a) ^^^ 2^b := by
+  have hv512 : v < 512 := by
+    have hs : ([0,5,10,15,18,23,34,39,66,71,130,135,258,263] : List Nat).all
+        (fun x => decide (x < 512)) = true := by decide +kernel
+    exact of_decide_eq_true (List.all_eq_true.mp hs v hv)
+  have hcheck : ∀ x : Fin 512,
+      x.val ∈ [0,5,10,15,18,23,34,39,66,71,130,135,258,263] →
+      (∃ a b : Fin 9, a≠b ∧ x.val=(3 ^^^ 2^a.val) ^^^ 2^b.val) ∧
+      (∃ a b : Fin 9, a≠b ∧ x.val=(6 ^^^ 2^a.val) ^^^ 2^b.val) := by
+    decide +kernel
+  have h := hcheck ⟨v,hv512⟩ hv
+  rcases hc with rfl | rfl
+  · obtain ⟨a,b,hab,he⟩ := h.1
+    exact ⟨a.val,b.val,a.isLt,b.isLt,(fun e => hab (Fin.ext e)),he⟩
+  · obtain ⟨a,b,hab,he⟩ := h.2
+    exact ⟨a.val,b.val,a.isLt,b.isLt,(fun e => hab (Fin.ext e)),he⟩
+
+theorem actual_endpoints {m : Nat} (p : Snake m) (r a b : Nat)
+    (hlocal : ∀ S E : Nat → Bool,
+      Axioms S E (winOf [0,1,2,0,3,2])
+        (centresOf (winOf [0,1,2,0,3,2])
+          [(0,21),(0,a),(0,21),(0,b),(0,21)]) →
+      ∀ v, E v = true →
+        v ∈ [0,5,10,15,18,23,34,39,66,71,130,135,258,263])
+    (hr : r+6 ≤ m)
+    (hshape : canon (dsOf p r 6) = [0,1,2,0,3,2])
+    (h2 : coreAlpha p (r+2) ≤ a) (h4 : coreAlpha p (r+4) ≤ b) :
+    ∀ k, k=0 ∨ k=m →
+      hamming (vx p (r+2)) (vx p k) = 2 ∧
+      hamming (vx p (r+4)) (vx p k) = 2 := by
+  obtain ⟨u,hu,hu9,hlen,hcs⟩ := actual_canonical_frame p r 6 hr
+  let P := mkPerm u
+  have hsp := mkPerm_spec hu hu9 hlen
+  have hP : ∀ j, j < ([0,1,2,0,3,2] : List Nat).length →
+      P.fwd (dir p (r+j)) = ([0,1,2,0,3,2] : List Nat).getD j 0 := by
+    intro j hj
+    have hj6 : j < 6 := by simpa using hj
+    obtain ⟨hi,hd⟩ := hcs j hj6
+    change (mkPerm u).fwd (dir p (r+j)) = _
+    rw [← hd]
+    simpa only [hshape] using hsp _ hi
+  have hb : ∀ i, i < ([(0,21),(0,a),(0,21),(0,b),(0,21)] : List (Nat × Nat)).length →
+      (([(0,21),(0,a),(0,21),(0,b),(0,21)] : List (Nat × Nat)).getD i (0,21)).1 ≤ coreAlpha p (r+i+1) ∧
+      coreAlpha p (r+i+1) ≤
+        (([(0,21),(0,a),(0,21),(0,b),(0,21)] : List (Nat × Nat)).getD i (0,21)).2 := by
+    intro i hi
+    change i < 5 at hi
+    interval_cases i
+    · exact ⟨Nat.zero_le _,coreAlpha_le_21 p (by omega) (by omega)⟩
+    · exact ⟨Nat.zero_le _,by simpa using h2⟩
+    · exact ⟨Nat.zero_le _,coreAlpha_le_21 p (by omega) (by omega)⟩
+    · exact ⟨Nat.zero_le _,by simpa using h4⟩
+    · exact ⟨Nat.zero_le _,coreAlpha_le_21 p (by omega) (by omega)⟩
+  have hfit : r + ([0,1,2,0,3,2] : List Nat).length ≤ m := by simpa using hr
+  have ax := frame_axioms p P r (canon_winOf [0,1,2,0,3,2]) rfl hfit hP hb
+  have hc2 := frame_window p P r (canon_winOf [0,1,2,0,3,2]) hfit hP 2 (by decide)
+  have hc4 := frame_window p P r (canon_winOf [0,1,2,0,3,2]) hfit hP 4 (by decide)
+  change 3 = amap P (vx p r) (vx p (r+2)) at hc2
+  change 6 = amap P (vx p r) (vx p (r+4)) at hc4
+  intro k hk
+  have hk_le : k ≤ m := by rcases hk with rfl | rfl <;> omega
+  have hs : sel p (amap P (vx p r)) (amap P (vx p r) (vx p k)) = true :=
+    (sel_iff _ _ _).2 ⟨k,hk_le,rfl⟩
+  have he : frameE p P (vx p r) (amap P (vx p r) (vx p k)) = true := by
+    unfold frameE
+    rw [hs]
+    rcases hk with rfl | rfl <;> simp
+  have hv := hlocal _ _ ax _ he
+  constructor
+  · obtain ⟨i,j,hi,hj,hij,hz⟩ := common_sphere_two_flips hv 3 (Or.inl rfl)
+    obtain ⟨i',j',hi',hj',hij',hz'⟩ :=
+      pullback_two_flips P (vx p r) (vx p (r+2)) (vx p k) i j
+        (vx_lt p r) (vx_lt p (r+2)) (vx_lt p k) hi hj hij
+        (by rw [← hc2]; exact hz)
+    rw [hz']
+    exact two_flips_distance _ i' j' hi' hj' hij'
+  · obtain ⟨i,j,hi,hj,hij,hz⟩ := common_sphere_two_flips hv 6 (Or.inr rfl)
+    obtain ⟨i',j',hi',hj',hij',hz'⟩ :=
+      pullback_two_flips P (vx p r) (vx p (r+4)) (vx p k) i j
+        (vx_lt p r) (vx_lt p (r+4)) (vx_lt p k) hi hj hij
+        (by rw [← hc4]; exact hz)
+    rw [hz']
+    exact two_flips_distance _ i' j' hi' hj' hij'
+
+#print axioms pullback_two_flips
+#print axioms two_flips_distance
+#print axioms common_sphere_two_flips
+#print axioms actual_endpoints
+end Snake9.EndpointGeometry122

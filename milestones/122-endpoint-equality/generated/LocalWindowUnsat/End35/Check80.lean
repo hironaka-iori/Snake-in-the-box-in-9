@@ -1,0 +1,29 @@
+import LocalWindowUnsat.End35.Data80
+
+/-! Kernel checks of segments 475-479 of `end35` (generated). -/
+
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+
+set_option Elab.async false
+
+namespace Snake9.LocalWindow.End35
+open Snake9.LratFastEndpoint122
+open Snake9.Lrat (Tree TreeTrue andB)
+
+theorem ok475 : check start475 proof475 = true := by
+  decide +kernel
+
+theorem ok476 : check start476 proof476 = true := by
+  decide +kernel
+
+theorem ok477 : check start477 proof477 = true := by
+  decide +kernel
+
+theorem ok478 : check start478 proof478 = true := by
+  decide +kernel
+
+theorem ok479 : andB (check start479 proof479) (hasEmpty (replay start479 proof479) 4096) = true := by
+  decide +kernel
+
+end Snake9.LocalWindow.End35

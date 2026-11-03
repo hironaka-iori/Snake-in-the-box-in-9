@@ -1,3 +1,22 @@
+# Research update: milestone 122
+
+The arbitrary-snake endpoint restriction for the 012032 count pair (2,6) is
+Lean checked. The conditional equality assembly and geometric occurrence limit
+13 are checked; the (3,5)/(4,4) certificates and unconditional equality conclusion
+remain in a 381-module batch. The endpoint credit cannot improve the current
+integer comparisons: an all-four three-cycle survives even deletion of every
+eligible equality event. The maintained interval remains 191–235, with the existing
+independent-rebuild limitation; conditional 234 remains unresolved.
+
+See [mathematical note](../milestones/122-endpoint-equality/MATHEMATICAL_NOTE.md),
+[proof review](../milestones/122-endpoint-equality/audit/proof-review.md), and
+[graph review](../milestones/122-endpoint-equality/audit/endpoint-graph-review.md).
+The next numerical target is the three all-four keys in
+`milestones/122-endpoint-equality/data/next-six-four-cases.json`; inspect existing
+seven-count coverage before searching. Paper revision 116 is unchanged; revise at 126.
+
+## Earlier record
+
 # Current mathematical status and continuation priorities
 
 ## Milestone 121 checkpoint

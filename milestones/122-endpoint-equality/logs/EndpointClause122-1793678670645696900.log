@@ -1,0 +1,10 @@
+E:\Snake-in-a-box\milestones\122-endpoint-equality\lean\EndpointClause122.lean:28:2: error: 'change' tactic failed, pattern
+  (cnfTrue (tau S E M cs) (List.map (fun x => List.map decodeLit x) baseRaw) &&
+      decide (clauseTrue (tau S E M cs) (List.map decodeLit cl) = true)) =
+    true
+is not definitionally equal to target
+  ((List.map (fun x => List.map decodeLit x) baseRaw).all (clauseTrue (tau S E M cs)) &&
+      clauseTrue (tau S E M cs) (List.map decodeLit cl)) =
+    true
+'Snake9.EndpointClause122.clause_of_endpoint' depends on axioms: [propext, Quot.sound]
+'Snake9.EndpointClause122.sat_append' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
