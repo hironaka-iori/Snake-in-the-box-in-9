@@ -1,0 +1,93 @@
+{
+  "status": "NATIVE_REPLAY_PENDING_HINT_LIMIT",
+  "started_utc": "2026-11-03T17:02:12.467709+00:00",
+  "pid": 46260,
+  "source_files_sha256": {
+    "milestones/144-countfree-share18/scripts/certify_alternative.py": "1121fca1d717cd06d6e52943e3e8568e49d773dd7c268cde0bfec4b878f8b5cd",
+    "milestones/144-countfree-share18/scripts/certify_base.py": "37c5b2192838862b8a65408741d06e72161e51d796accc3d0a487875324a676e",
+    "milestones/144-countfree-share18/work/short/base.cnf": "ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7",
+    "milestones/144-countfree-share18/data/preparation.json": "2f9004d21fe4aa23e37d72270e8e627c8a82330c2b7be925eb95ea7c48530446",
+    "milestones/144-countfree-share18/data/native-base.json": "0af5b79520d5538d90b71ffb71590c97afb1293c46c2b2bb19e36713dfacbd77",
+    "milestones/109-relaxed-graph-test/upstream/milestones/10-window-aggregate/scripts/gen_lean_core.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "work/share-wheels/drat-trim.exe": "cdbb67d12934ab2a3442e11aca7fbda0b4f00900faca9dc05162cb84de1ee2f8"
+  },
+  "variables": 11924,
+  "original_clauses": 96091,
+  "input_sha256": "ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7",
+  "solver_runs": 1,
+  "initial_resources": {
+    "free_bytes": 6087610368
+  },
+  "core_premises": {
+    "extra_cycle_cuts": []
+  },
+  "replay_hint_limit": 12000000,
+  "first_attempt_status": "TIMEOUT",
+  "lean_started": false,
+  "worker_pid": 49376,
+  "worker_command": [
+    "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\scripts\\certify_alternative.py",
+    "--worker"
+  ],
+  "worker_exit": 0,
+  "worker_result": {
+    "status": "UNSAT_DRAT_UNCHECKED",
+    "pid": 49376,
+    "cnf_sha256": "ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7",
+    "solver": "PySAT Cadical153",
+    "solver_files_sha256": {
+      "E:\\Snake-in-a-box\\work\\share_packages\\pysat\\solvers.py": "b84f0790c70b5af2f85ab82d0e1441aea874c2ae6483d90da40286a01397e065",
+      "E:\\Snake-in-a-box\\work\\share_packages\\pysolvers.cp312-win_amd64.pyd": "e0d04271f7f8f4717fd986e9ac0a944b04ae07f51138213b9d7fb9c5bfe00508"
+    },
+    "variables": 11924,
+    "clauses": 96091,
+    "extra_cycle_cuts": [],
+    "drat_sha256": "929406e2e0259bedcbf9cee9c2a15fe6b8c5d63d45d4834497c39e0c0f1e39e4",
+    "drat_bytes": 43666660,
+    "seconds": 32.14099999999962,
+    "cnf_unchanged": true
+  },
+  "conversion_command": [
+    "E:\\Snake-in-a-box\\work\\share-wheels\\drat-trim.exe",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-alternative\\input.cnf",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-alternative\\raw.drat",
+    "-U",
+    "-L",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-alternative\\raw.lrat",
+    "-c",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-alternative\\drat-core.cnf",
+    "-t",
+    "120"
+  ],
+  "converter_pid": 51000,
+  "conversion_exit": 0,
+  "lemmas": 145215,
+  "hints": 14710881,
+  "core_clauses": 13224,
+  "trim_sha256": "56c1b991bc56f38dc12fc74fb76bcbbb329864d4f6dfa094320e05e7c7cd1551",
+  "core_sha256": "0896c77503b6f50c7bdef5ec0aacd866812fea2f599377b6a8eaf83d2f0b34f4",
+  "core_ids_sha256": "5aa29ff13ba61e2fdc604339f4a7b78a50279fc6852ef68e156381c119180b77",
+  "raw_sha256": "59f52ed4cf85028e68c4ec0120867cca805b588debc26ee41bbc83e7144781f7",
+  "raw_bytes": 111358773,
+  "finished_utc": "2026-11-03T17:05:04.303534+00:00",
+  "preserved_files_sha256": {
+    "input.cnf": "ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7",
+    "certify.exact.py": "1121fca1d717cd06d6e52943e3e8568e49d773dd7c268cde0bfec4b878f8b5cd",
+    "worker-stdout.txt": "2f2de4fa91460cbeec007826d25bd11b81c6e90a35b759f63c3671646d25e571",
+    "worker-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw.drat": "929406e2e0259bedcbf9cee9c2a15fe6b8c5d63d45d4834497c39e0c0f1e39e4",
+    "worker.json": "debb40a50c0de3d16c1bff4df989ed69f65478d8400d2fea9225ca278501c49b",
+    "conversion-stdout.txt": "ffbe34d8be4855d537bae2d5d8454159f9fe3b54de08a057cd7a47b5dd35e5f2",
+    "conversion-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw.lrat": "59f52ed4cf85028e68c4ec0120867cca805b588debc26ee41bbc83e7144781f7",
+    "drat-core.cnf": "6fa2aceeede8a4a3309e54997f408c310d5dc8266c6662bf5986c75ea206ad57",
+    "trimmed.lrat": "56c1b991bc56f38dc12fc74fb76bcbbb329864d4f6dfa094320e05e7c7cd1551",
+    "core-ids.json": "5aa29ff13ba61e2fdc604339f4a7b78a50279fc6852ef68e156381c119180b77",
+    "core.cnf": "0896c77503b6f50c7bdef5ec0aacd866812fea2f599377b6a8eaf83d2f0b34f4"
+  },
+  "scope": "A separate proof-producing solver attempt on the same cap17 input. Only PASS_COMPLETE_NATIVE_RUP_REPLAY establishes the independently replayed Boolean contradiction. Lean and actual-snake interpretation remain pending."
+}

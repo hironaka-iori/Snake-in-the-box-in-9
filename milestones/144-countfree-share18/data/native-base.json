@@ -1,0 +1,50 @@
+{
+  "status": "TIMEOUT",
+  "started_utc": "2026-11-03T16:58:38.048413+00:00",
+  "script_sha256": "37c5b2192838862b8a65408741d06e72161e51d796accc3d0a487875324a676e",
+  "solver_timeout_seconds": 120,
+  "replay_hint_limit": 12000000,
+  "solver_runs": 1,
+  "lean_export_started": false,
+  "lean_started": false,
+  "source_files_sha256": {
+    "milestones/144-countfree-share18/work/short/base.cnf": "ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7",
+    "milestones/144-countfree-share18/work/short/encoding.json": "2f9004d21fe4aa23e37d72270e8e627c8a82330c2b7be925eb95ea7c48530446",
+    "milestones/109-relaxed-graph-test/upstream/milestones/10-window-aggregate/scripts/gen_lean_core.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "milestones/144-countfree-share18/scripts/certify_base.py": "37c5b2192838862b8a65408741d06e72161e51d796accc3d0a487875324a676e"
+  },
+  "solver_path": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+  "solver_sha256": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+  "initial_resources": {
+    "free_bytes": 5919768576
+  },
+  "variables": 11924,
+  "original_clauses": 96091,
+  "input_sha256": "ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7",
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+    "-q",
+    "--lrat",
+    "--no-binary",
+    "--seed=1",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-base\\input.cnf",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\work\\certificate-base\\raw.lrat"
+  ],
+  "solver_pid": 18340,
+  "exit_code": 1,
+  "solver_seconds": 120.15599999999904,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "raw_sha256": "f67662311bd49e20f3bbda9206f9d02cf64e99fbda34002a15f5bd1b5bff8377",
+  "raw_bytes": 143839232,
+  "finished_utc": "2026-11-03T17:00:39.357822+00:00",
+  "preserved_files_sha256": {
+    "input.cnf": "ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7",
+    "certify.exact.py": "37c5b2192838862b8a65408741d06e72161e51d796accc3d0a487875324a676e",
+    "gen_lean_core.exact.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw.lrat": "f67662311bd49e20f3bbda9206f9d02cf64e99fbda34002a15f5bd1b5bff8377"
+  },
+  "scope": "One fixed native solver run on the exact prepared input. A complete independent Python RUP replay certifies the finite CNF contradiction only. Lean replay and actual-snake clause interpretation remain pending; no new global bound."
+}

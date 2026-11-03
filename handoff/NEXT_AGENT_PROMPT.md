@@ -1,48 +1,52 @@
-# Continue after milestone 143
+# Continue after milestone144
 
-Use E:/Snake-in-a-box and tensai-bishoujo. Preserve three authors, the paper
-preamble/hypersetup, existing D:/Codex/2026-10-13/new-chat/outputs/
-snake9_research.tex editor and its repo mirror, unrelated .gitignore and
-milestone50 edits. Define only necessary recurring notation. Fetch, retain
-exact evidence, stage a verified manifest, commit/push/verify each round.
-Goal ACTIVE; optimum and196 unresolved.
+Work in E:/Snake-in-a-box. Use tensai-bishoujo; formal prose, no emojis,
+unnecessary definitions, or Lean identifiers in the paper. Preserve the open
+D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and repo mirror,
+authors Iori Hironaka, Tommy Ma, Steven Zhan, preamble and hypersetup. Preserve
+unrelated .gitignore and milestone50 critical-family changes. Goal ACTIVE.
 
-142 disproved credit533/12. 143 sharpens the next share target using range:
-at012034 floor14 the zero-event9-cycle totals4448 and its last5 edges total
-2230. Hence mu<=4448/9,R>=5mu-2230. Lean proves comparison>=4964197/21124
-=235+57/21124 for any nonnegative occurrence cost. Smaller floors decrease
-these weights. This rules out every floor<=14 in the unchanged model.
-Floor15 is first not excluded by this cycle+walk; not globally sufficient.
+First read milestones/144-countfree-share18/MATHEMATICAL_NOTE.md and
+data/next-task.json. Main result: source-audited zero-event14cycle with shapes
+012304 eight times,012301 four times,012340 twice capsmean3445/7. No012034
+in either orientation. Lean proves comparison>=235+341/6569 for nonnegative
+cost/range. Thus ANY012034 floor plus ANYuniform credit on the same event
+cannot reach234 with other graph weights fixed. Do not repeat those searches.
 
-NEXT SELECTED TASK: count-free012034 share18, resolution12, five internal
-centres, both orientations. Build a SEPARATE cap17 query with five broad
-[0,21] count bounds, radius4, no added cuts. Target18 because it is already
-required by the retained conditional234 profile. Complete the certificate,
-semantics, actual-window mapping, reversal and axiom audit before updating
-completed shares. Other share/count and graph-to-snake hypotheses remain.
+Selected next target: count-free012301 share16, resolution12, five broad
+[0,21] internal-count bounds, both orientations. First locate the saved native
+proof in the72 catalogue and verify exact evidence. Case7303 directory does
+not exist; do not infer a prepared Lean chain. This floor raises14cycle total
+by30.012340 floor16 raises another24; together itsmean=496. The11cycle needs
+012032 floor16, adding57 to reach496. These are saved-cycle effects only.
 
-143 cap12/share13:10616vars,88038clauses,10078coreclauses,29165deductions,
-1699457hints; two full RUP replays passed. Generated Lean plan231modules,
-23 passed. Driver26336 intentionally terminated after 23 completed modules, following the
-new obstruction. data/intentional-stop.json overrides stale RUNNING status;
-do not restart automatically. Preserve all sources/objects/logs. Old7302
-cap19/share20 unchanged; its historicalCheck1 timed out after900s.
+144share18:11924vars96091clauses; complete alternative native proof has145215
+deductions14710881hints13224coreclauses. Independent RUP review passed at20M
+limit; producer pending12Mlimit record is deliberately unchanged. First native
+120stimeout trace preserved separately. Input and export audits passed.1324
+Lean modules generated;6 passed, then Check1 manually stopped for memory.
+warmup-stop.json overrides stale RUNNING progress. Do not restart unchanged.
 
-For new18 work,143/scripts/prepare.py,certify_base.py,export_lean.py provide
-the pipeline. Use new paths/namespace/pins and actual proof widths; never
-overwrite12 or20 evidence. Encoder28/scripts/tagged_share.py preserves35
-incidences on32 neighbors. Core tags and cap rounding matter. The general
-share bridge supports actual snakes/reversal; the new full chain must pass.
-Independent143 native audit reconstructs base and share encodings.
+Replay improvement: experiments/RawInit144 generic preorder builder soundness
+passed, but recursive264/6006hint probes exceeded3GiB. Explicit balanced
+LiteralData144 passed compilation; LiteralSmall144 and LiteralProbe144 passed
+264/6006hints in2.8/5.5s. MATERIALIZED INITIAL TREE TRUTH BRIDGE IS MISSING.
+Complete that bridge before any actual theorem claim. Then regenerate every
+key/hint/checkpoint under the bijection and simulate the entire proof. Old
+packed receipt applies only to the old export. Preserve all attempts/objects.
 
-143 Range143 has7 checked reports; cycle-only potentials attain the saved
-subwalk range. No fullgraph range optimum/new fullgraph calculation. Retained
-conditional551765/2348<235 and maintained191–235 unchanged. Contributor235
-independent rebuild incomplete. Inherited sums, hypothetical0123104floor25,
-odd-pair9, extra share premises and actual-snake graph assembly remain.
+14new arithmetic reports passed,2generic soundness reports,2bounded prefix
+reports; all accepted axioms standard. No full actual share18 or global bound.
+Both graph evaluations have producer all-edge checks, bounded independent
+cycle audits, no independent all-edge repeat. Global interval191–235 unchanged
+with contributor rebuild limitation.196/optimum unresolved. Existing stronger
+conditional234 profile is separate and still has outstanding dependencies.
 
-Paper targeted143; source checks pass, no definitions added. Builtin compiler
-failed before TeX; no PDF. Last full136; next146. Separate115PID39044 observed
-live1203/1397; inspect current command, never duplicate.104 stopped;122/129
-complete. Lean gate>=1.5GiB free and<=2 existing Lean; fullgraph>=3GiB and
-no other fullgraph. Base d29e9db3e5590942fbd4ba4a966e89b1f65870ab.
+Paper targeted144; source checks pass; preview tool fails beforeTeX dueWindows
+launcher restrictions. NoPDF. Lastfull136,next146. Separate115PID39044 was
+observedlive1287/1397; inspect exactprocess beforeacting, neverduplicate.104
+stopped122complete.144jobsallcomplete/stopped. Resourcegates:Lean>=1.5GiBfree,
+atmost2existingLean; fullgraph>=3GiBfree,nootherfullgraph. New probe runner
+activelycapsLean3GiB andstopsbelow768MiBfree. Fetcheachround,manifest-stage,
+quietcommit,push,verify. FourlargeLRAToriginalsremainlocal andhaveexactgzip
+archives/restorescripts forGit; preserveall exactsources/receipts/hashes.

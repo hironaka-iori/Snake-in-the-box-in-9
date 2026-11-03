@@ -1,0 +1,126 @@
+{
+  "status": "PASS_EXACT_SAVED_CYCLE_TARGET_COMPARISON",
+  "cycles": [
+    {
+      "cycle_length": 11,
+      "baseline_mean": "5399/11",
+      "targets": [
+        {
+          "shape": "012032",
+          "floor": 16,
+          "gains": [
+            16,
+            0,
+            16,
+            0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            16,
+            0
+          ],
+          "total_gain": 57,
+          "mean_if_added_alone": "496"
+        }
+      ],
+      "combined_mean": "496",
+      "combined_total": "5456",
+      "scope": "Only these saved cycles, not sufficiency on the full graph."
+    },
+    {
+      "cycle_length": 14,
+      "baseline_mean": "3445/7",
+      "targets": [
+        {
+          "shape": "012301",
+          "floor": 16,
+          "gains": [
+            0,
+            10,
+            0,
+            0,
+            5,
+            0,
+            0,
+            0,
+            10,
+            0,
+            0,
+            5,
+            0,
+            0
+          ],
+          "total_gain": 30,
+          "mean_if_added_alone": "3460/7"
+        },
+        {
+          "shape": "012340",
+          "floor": 16,
+          "gains": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            12
+          ],
+          "total_gain": 24,
+          "mean_if_added_alone": "3457/7"
+        }
+      ],
+      "combined_mean": "496",
+      "combined_total": "6944",
+      "scope": "Only these saved cycles, not sufficiency on the full graph."
+    }
+  ],
+  "selected_next_shape": "012301",
+  "selected_floor": 16,
+  "resolution": 12,
+  "broad_count_intervals": [
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ]
+  ],
+  "reason": "The surviving14-cycle gains30 from012301 floor16 and24 from012340 floor16. Select012301 first; both are needed to bring this cycle to mean496 under the existing target floors. The separate11-cycle still requires012032 floor16 or another valid change.",
+  "actual_theorem_complete": false,
+  "existing_case_label": 7303,
+  "case_directory_present": false,
+  "next_actions": [
+    "Locate and validate the saved012301 native refutation before generating any new query.",
+    "Check exact saved-cycle and full-graph impact before committing to a large replay.",
+    "For replay, complete the literal-initial-tree validity proof; do not reuse a prefix receipt as a local snake theorem."
+  ],
+  "source_files_sha256": {
+    "milestones\\144-countfree-share18\\scripts\\select_next_share.py": "3c407cc694ef235a9ab1113994979f9baaa3de5eabd9ce0d1a8507bf857afe0a",
+    "milestones\\144-countfree-share18\\data\\share18-impact\\results.json": "269bd2361a7e272feff2793927ea2555f5fde5dd6259ab8bb0e4442d354148dd",
+    "milestones\\144-countfree-share18\\data\\share18-credit601-over36\\results.json": "7ad732a8cfdb2f2d7580dc5821bf84f75cc271df7049726d5906e489b50a470d",
+    "milestones\\144-countfree-share18\\data\\retuned-review.json": "e7e54f67312d03f60ab015a603bd583b11c3b35398cf794fd4316e6953837665"
+  }
+}

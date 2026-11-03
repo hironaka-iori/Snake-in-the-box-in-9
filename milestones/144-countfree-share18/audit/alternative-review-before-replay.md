@@ -1,0 +1,17 @@
+# Independent review of the alternative share18 certificate
+
+Review status: `PASS_ALTERNATIVE_INPUT_REVIEW_NO_COMPLETED_NATIVE_REPLAY`.
+
+The alternate producer's terminal status is `NATIVE_REPLAY_PENDING_HINT_LIMIT`. PySAT Cadical153 returned UNSAT and saved a DRAT proof after 32.141 seconds. The separate `drat-trim -U -L` conversion exited successfully and printed `s VERIFIED`, reporting zero RAT lemmas and 82.704 seconds of verification. Its dependency-trimmed LRAT contains 145,215 deductions, 14,710,881 hints and 13,224 original input clauses. The hint count exceeds the configured 12-million-hint ceiling; neither the producer nor this independent review completed a direct unit-propagation replay.
+
+The alternate input is byte-identical to the previously reviewed cap17 input, with SHA-256 `ee9b49bb9c4ef3ff764febf44967d8a5008ddfcf4a1f324fd5eaae90170284a7`. This review reconstructed all 96,091 clauses and 11,924 variables again, verified the complete semantic tables and share thresholds, and independently matched the ordinary base encoder. The resolution remains 12, all five singleton-count intervals remain `[0,21]`, and there are no added cycle cuts.
+
+The alternate script differs in the proof-producing solver backend and the DRAT-to-LRAT conversion. It bootstraps the solver with the complete saved input and adds no clauses after initialization. The worker's solver-module hashes, the converter executable, generator sources, all saved alternate files and the immutable first-attempt evidence matched their recorded hashes. The worker's record states that the input remained unchanged.
+
+The converter's 13,224-clause core was checked as a submultiset of the original input, retaining multiplicities while allowing literal reordering in the converter's output. Separately, each trimmed core ID was checked as a valid, distinct original clause index. The trimmed core CNF is exactly the original clauses selected by those IDs, with the original variable numbers, literal order and multiplicities. It is also a submultiset of the converter core. No renumbered-core interpretation was substituted for the original IDs.
+
+The saved conversion command explicitly uses RUP-only mode. The converter's own zero-RAT report supports that provenance, but the current audit has not scanned and replayed every LRAT deduction. Raw LRAT contains deletion commands; any later direct replay must check that trimmed deductions retain original IDs and positive hints. Dropping deletions is logically sound when previously established clauses remain available and derived IDs are not reused. The prepared checker contains these checks for a completed replay, but that branch was not executed in this review.
+
+The conversion provides a converter-verified Boolean refutation. Independent direct replay remains pending under the recorded ceiling. Complete Lean replay, the actual-snake assignment to the clause families, integer-share rounding and saturation, and coordinate/reversal transport remain separate obligations. No actual share18 theorem or new global snake bound is claimed by this audit.
+
+The first native timeout review remains frozen and unchanged. Selected share13 evidence and the old case7302 completion record also matched their pinned hashes. The audit invoked no solver, converter, Lean compiler or graph search. Exact pins and the checks actually executed are recorded in `data/alternative-review.json`; the separate checker is `audit/review-alternative.py`.
