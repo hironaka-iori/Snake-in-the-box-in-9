@@ -1,5 +1,32 @@
 # Current mathematical status and continuation priorities
 
+## Milestone 115 checkpoint
+
+Milestone 115 reduces the 012310 native certificate to 287,753 deductions
+and 16,816,989 propagation hints, and checks its concrete interpretation
+in Lean. The complete native export passes simulation. Its sequential
+Lean batch has 50/1397 checked modules in this process-verified
+snapshot; the full contradiction and final actual-snake theorem remain pending.
+
+The new candidate is that five internal counts sum to at least 23 when
+the six consecutive directions are distinct. Native tests reject totals
+at most 22 after five validated cycle cuts; a verified six-component local
+forest attains 23. The negative certificate and complete-snake sharpness
+remain unresolved. Simpler end-cap restrictions have explicit local controls.
+
+The final graph means are 6309/13 and 496, with valid ranges 7656/13 and 602.
+Integer comparisons remain 235 and conditional 234. The attaining cycles
+contain no 012345 window at either placement, so further strengthening
+that rule leaves the means unchanged by monotonicity. Even zero potential
+range cannot improve these integers at the present means.
+
+The maintained interval remains 191 through 235 edges, with the contributor
+evidence and complete independent rebuild obligation preserved. Milestone 104
+also remains live. This is a dated snapshot, not permission to restart either
+batch. Paper revision 106 is unchanged; full revision 116 is due next.
+
+Earlier checkpoints below are historical snapshots.
+
 ## Milestone 114 checkpoint
 
 The native contradiction for five-count total at most 18 on canonical

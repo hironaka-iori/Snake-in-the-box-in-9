@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 114](milestones/114-total-count-pressure/README.md) independently replays a native total-count contradiction and checks its conditional geometric transfer. The completed-floor finite mean improves to 484.8; integer comparisons remain 235 and conditional 234. Concrete Lean replay is the next proof obligation.
+Latest continuation: [milestone 115](milestones/115-total-count-certificate/README.md) checks concrete count semantics and starts the full Lean refutation batch. A new distinct-direction candidate gives five-count total at least 23. Finite means improve to 6309/13 and remain 496; integer comparisons stay 235 and conditional 234.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -16,7 +16,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 106](milestones/106-paper-revision/README.md). The paper incorporates the arguments through milestone 105 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 116.
 
-Next research priority: Reduce the selected 012310 total-count certificate and export its concrete semantics and refutation to Lean. Preserve the resumed milestone 104 batch. Subsequently test the recorded 012345 count cells on both profiles; avoid coefficient sweeps within the current fixed families.
+Next research priority: Preserve both live Lean batches, complete the 012310 contradiction, and certify the 012345 total-23 candidate. Further restrictions must affect the saved replacement cycles, which contain no 012345 window. Full paper revision 116 is due next.
 
 ## Historical checkpoints
 

@@ -4,11 +4,11 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 114](milestones/114-total-count-pressure/README.md) independently replays a native total-count contradiction and checks its conditional geometric transfer. The completed-floor finite mean improves to 484.8; integer comparisons remain 235 and conditional 234. Concrete Lean replay is the next proof obligation.
+Latest continuation: [milestone 115](milestones/115-total-count-certificate/README.md) checks concrete count semantics and starts the full Lean refutation batch. A new distinct-direction candidate gives five-count total at least 23. Finite means improve to 6309/13 and remain 496; integer comparisons stay 235 and conditional 234.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
-Case 7305 is complete: 465 modules and 100 theorem audits passed, including geometry and reversal. Its checked archives restore all sources and the compact proof. The completed catalogue now contains four target cases. No case7305 proof process remains active. The paper is revision 96 and matches the existing editor source.
+Case 7305 is complete: 465 modules and 100 theorem audits passed, including geometry and reversal. Its checked archives restore all sources and the compact proof. The completed catalogue now contains four target cases. No case7305 proof process remains active. At that checkpoint, the paper was revision 96; the current revision is 106.
 
 Active research: [milestone 73](milestones/73-countfree-share-catalogue/README.md) now supplies four of the nine target count-free shares: 012031, 012304 and 012314 have floor 16; 012310 has floor 12. Coverage, canonical coordinate transfer, reversal, global share accounting and overlap are checked. The combined catalogue retains five local certificate premises. The full target 234 remains conditional on these, graph interpretation and potential replay. The maintained interval remains **191 <= a(9) <= 235**. Milestone 72 separately retains six unresolved count-certificate cases.
 
@@ -18,7 +18,7 @@ Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved
 
 Current manuscript revision: [milestone 106](milestones/106-paper-revision/README.md). The paper incorporates the arguments through milestone 105 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 116.
 
-Next research priority: Reduce the selected 012310 total-count certificate and export its concrete semantics and refutation to Lean. Preserve the resumed milestone 104 batch. Subsequently test the recorded 012345 count cells on both profiles; avoid coefficient sweeps within the current fixed families.
+Next research priority: Preserve both live Lean batches, complete the 012310 contradiction, and certify the 012345 total-23 candidate. Further restrictions must affect the saved replacement cycles, which contain no 012345 window. Full paper revision 116 is due next.
 
 ## Historical checkpoints
 

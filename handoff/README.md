@@ -1,33 +1,41 @@
-# Research handover
+# Current research handover
 
-Work in `E:/Snake-in-a-box`. Start with milestone 114's mathematical note,
-proof summary, checkpoint and final review. Older checkpoint sections are
-historical. No numerical improvement to the maintained global interval
-191 through 235 edges is established; the complete independent rebuild
-of the upper-bound evidence remains pending.
+Work in `E:/Snake-in-a-box`. Start with milestone 115's README,
+mathematical note, proof summary, checkpoint and three independent reviews.
+The goal remains active. The optimum and 196 are unresolved. The maintained
+interval is 191 through 235 edges, with the contributor proof and archived
+audit distinguished from a complete independent rebuild.
 
-The new native result is a fully replayed contradiction for five-count
-total at most 18 on canonical `012310`. The selected certificate has
-5,206 input clauses, 358,464 deductions and 22,088,504 hints. Its concrete
-counter interpretation and full Lean replay remain pending. Lean checks
-the geometric transfer with that local contradiction as a premise and
-three exact comparison lemmas. No definitions were added.
+Two Lean verification batches are running. Their saved checkpoints are
+dated observations. Verify the process identified by each live
+`data/batch-progress.json` before taking action:
 
-The nine-rule finite experiment improves the completed-floor mean from
-484 to 484.8, retaining integer comparison 235. The conditional-floor
-comparison remains 234. A stronger sum-20 hypothesis has only an UNKNOWN
-local probe and improves only the first potential range. Zero-deficit
-cycles give coefficient ceilings 484.8 and 496 within these fixed families.
+- `milestones/104-complete-potential-batch`: complete graph-potential work.
+- `milestones/115-total-count-certificate`: concrete `012310` total-count
+  refutation and its final actual-snake theorem, 1,397 planned modules.
 
-The next priority is reducing the selected proof before Lean export.
-After that, `012345` exact count cells identify a common remaining target.
-See `NEXT_AGENT_PROMPT.md` for exact files, assumptions and preservation
-requirements. Milestone 112's actual-snake `012314` outer-sum theorem
-remains checked; the new unrestricted total-sum theorem is not yet at
-that evidence level.
+Do not restart a process merely because a tool observation timed out.
+Respect the existing limit of one additional Lean compiler alongside
+milestone 104. Successful receipts pin sources, objects, logs and
+dependencies; generated files and partial runs do not establish a theorem.
 
-Milestone 104 resumed after one successful unchanged retry of its
-interrupted module. Verify its current process and preserve its receipts.
-Keep the three authors and hypersetup. The paper remains at revision 106;
-the next full revision is 116. Define only essential, repeatedly used
-concepts. Large raw proof files remain local with verified gzip copies.
+The new local candidate is a five-count total of at least 23 whenever
+six consecutive directions are distinct. Native UNSAT evidence and a
+verified local forest with total 23 are saved. A checked negative
+certificate is still needed. The forest has six components and supplies
+no complete-snake sharpness result.
+
+The finite graph means reached `6309/13` and `496`, with integer
+comparisons 235 and conditional 234. Saved attaining cycles contain no
+`012345` window at either placement. Strengthening only that local rule
+cannot improve these means. New restrictions must affect those cycles.
+
+For a fresh checkout, restore milestone 115's proof and generated-source
+archives with its `scripts/verify_saved.py --restore-archives`. The exact
+source bytes remain present locally. Frozen manifests exclude live logs
+and progress files, which are replaced by dated immutable snapshots.
+
+Paper revision 106 remains in the existing editor and repository mirror.
+The next full revision, 116, is due. Preserve the three authors, hyperlink
+settings and existing editor. Introduce a definition only if essential
+and repeatedly used. Preserve the unrelated `.gitignore` change.
