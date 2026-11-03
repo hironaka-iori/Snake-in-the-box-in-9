@@ -1,0 +1,92 @@
+{
+  "status": "PROPOSED_EXHAUSTIVE_SPLIT_NOT_ENCODED_OR_SEARCHED",
+  "pattern": "0120324",
+  "sum_cap": 22,
+  "branches": [
+    {
+      "fourth_count": 3,
+      "necessary_intervals": [
+        [
+          3,
+          21
+        ],
+        [
+          5,
+          21
+        ],
+        [
+          1,
+          21
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          1,
+          21
+        ],
+        [
+          1,
+          21
+        ]
+      ],
+      "other_positions": [
+        3,
+        5,
+        6
+      ],
+      "other_sum_upper": 11
+    },
+    {
+      "fourth_count_lower": 4,
+      "necessary_intervals": [
+        [
+          1,
+          21
+        ],
+        [
+          2,
+          21
+        ],
+        [
+          1,
+          21
+        ],
+        [
+          4,
+          21
+        ],
+        [
+          1,
+          21
+        ],
+        [
+          1,
+          21
+        ]
+      ]
+    }
+  ],
+  "proof_obligations": [
+    "Use actual_six_bounds under the total22 hypothesis to obtain fourth count at least3.",
+    "Split into fourth count3 and fourth count at least4; both cases are required.",
+    "In the first case actual_pair_sum gives second count at least5.",
+    "In the first case first_fourth_exclusion gives first count at least3.",
+    "Subtract these lower counts and the fourth count3 from the total22 to get the other three counts at most11.",
+    "Check this arithmetic for actual snakes in Lean before using new branch constraints in a final exclusion.",
+    "Retain the combined six-count target and the checked paired constraint; do not narrow the claim to only one branch.",
+    "A complete native result requires proof replay and full actual-snake transfer."
+  ],
+  "source_pins": {
+    "milestones/125-critical-six-count/lean/ActualBounds125.lean": "dbb9f2fbe1ea322903091a73eb3ed36cd677f80a6309cf5aee851a916654ab7a",
+    "milestones/125-critical-six-count/data/ActualBounds125-audit.json": "df9f9b6c1b883071a026d761d3eda47dd987a525d10ae65dc46fe1c70a1ddedc",
+    "milestones/121-replacement-window-pressure/lean/ActualPair121.lean": "17732a533cc39f73a1d140a69e5b666260a0fdc3ae5731611ff15b5f45090280",
+    "milestones/121-replacement-window-pressure/data/ActualPair121-audit.json": "03a00163d46b754fe8fbc28f2dfdcfbfd9206d4b88c07d44b5398483b95c61ae",
+    "milestones/128-coupled-pair/lean/PairLower128.lean": "6964a93d036b60a8e427f4459f23462102c9980051bae24b3d9591decaf19bd9",
+    "milestones/128-coupled-pair/data/preparation.json": "5d73915a1cecf80453f2c382934e06ae9ff281b098d32738f9ce9bc2f454701a",
+    "milestones/128-coupled-pair/work/pair.cnf": "a00f07497e7e1f4bf3e9bd31d74c1ef39999ebdc0d1019aecc860493ac05d2fc"
+  },
+  "script_sha256": "9edd7867846d242fba9542362dc528cfa24de4994d771826614cf2901edd7198",
+  "scope": "Written arithmetic consequences of checked premises and a proposed next search. No branch is excluded, and the new split assembly has not been checked in Lean."
+}

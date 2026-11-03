@@ -1,0 +1,44 @@
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:22:4: error: unknown identifier '«pairCorners».length'
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:22:30: error: unknown identifier '«pairCorners».toFinset.card'
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:24:24: error: unknown identifier '«pairCorners».count'
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:25:4: error: unknown identifier '«pairCorners».all'
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:30:4: error: unknown identifier '«pairCorners».countP'
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:41:6: error: tactic 'rewrite' failed, did not find instance of the pattern in the target expression
+  let y :=
+    let y :=
+      let y := [102, 166, 294, 198, 326, 390];
+      258 :: 54 :: 86 :: 150 :: 278 :: y;
+    let y := 260 :: 18 :: 34 :: 66 :: 130 :: y;
+    0 :: 20 :: 36 :: 68 :: 132 :: y;
+  let y :=
+    let y := 99 :: 163 :: 291 :: 195 :: 323 :: 387 :: y;
+    267 :: 51 :: 83 :: 147 :: 275 :: y;
+  let y := 258 :: 27 :: 43 :: 75 :: 139 :: y;
+  10 :: 18 :: 34 :: 66 :: 130 :: y
+S : ℕ → Bool
+l2 : (freePairs 1 2).length = 21
+l4 : (freePairs 0 3).length = 21
+h2 : List.countP S (corners { v := 3, d₁ := 1, d₂ := 2, lo := 0, hi := 21 }) + absentCorners S 3 1 2 = 21
+h4 : List.countP S (corners { v := 6, d₁ := 0, d₂ := 3, lo := 0, hi := 21 }) + absentCorners S 6 0 3 = 21
+⊢ sorry + absentCorners S 3 1 2 + absentCorners S 6 0 3 = 42
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:49:4: error: unknown identifier '«pairCorners».countP'
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:71:6: error: unknown identifier '«pairCorners».countP'
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:84:8: warning: declaration uses 'sorry'
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:85:5: warning: unused variable `hr`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:86:5: warning: unused variable `hshape`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:87:5: warning: unused variable `hP`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:91:5: warning: unused variable `hmap`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:91:47: warning: unused variable `hk`
+note: this linter can be disabled with `set_option linter.unusedVariables false`
+E:\Snake-in-a-box\milestones\128-coupled-pair\lean\PairLower128.lean:107:4: warning: 'exact actual_selected_bound p P r hr hshape hP' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+'Snake9.PairLower128.corner_list_eq' depends on axioms: [propext]
+'Snake9.PairLower128.corner_multiplicities' depends on axioms: [sorryAx]
+'Snake9.PairLower128.selected_absent_identity' depends on axioms: [propext, sorryAx]
+'Snake9.PairLower128.actual_selected_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.PairLower128.actual_normalized_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.PairLower128.actual_counter_good' depends on axioms: [propext, sorryAx, Quot.sound]

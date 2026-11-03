@@ -1,3 +1,33 @@
+# Research update: milestone 128
+
+The proved 012032 pair inequality is now connected in Lean to the concrete
+0120324 search: at most 34 of its 42 paired corner occurrences are selected.
+Five repeated vertices retain both occurrences. Lean also checks satisfaction
+of all 2863 added counter clauses for actual snakes. Two modules and ten
+dependency reports passed. The conjunction with the preceding 101666 clauses
+and a complete contradiction remain separate requirements.
+
+An independent audit reconstructs the new input exactly, and a separate
+parser matches the Lean certificate data to the added clauses. The bounded
+search timed out after 180.062 seconds, using 24.59375 seconds of process CPU
+time. Its first 1000 deductions pass a check against the new input; no complete
+refutation or new count floor is established. The partial trace is saved in
+a verified lossless archive.
+
+The next selected task splits the fourth count into equality to three and
+at least four. In the equality case, existing results force the first count
+to be at least three and the second at least five, leaving at most eleven
+for the other three counts under the total-22 hypothesis. The split assembly
+is written but not yet checked in Lean; neither branch has been excluded.
+See `milestones/128-coupled-pair/data/next-case-task.json`.
+
+The maintained range remains 191–235 with the documented independent-rebuild
+limitation. The optimum, 196, and the hypotheses for 234/233 remain open.
+No new mathematical definition is introduced. Paper revision 126 is unchanged;
+the next scheduled full revision is 136.
+
+## Earlier record
+
 # Research update: milestone 127
 
 The direct-clause representation of the existing lower count bounds is checked.

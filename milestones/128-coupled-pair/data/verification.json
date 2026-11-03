@@ -1,0 +1,54 @@
+{
+  "status": "PASS_PAIR_COUNTER_SEMANTICS_NO_NEW_COUNT_FLOOR",
+  "pins": {
+    "data/preparation.json": "5d73915a1cecf80453f2c382934e06ae9ff281b098d32738f9ce9bc2f454701a",
+    "data/pair-review.json": "ea5c8516931d96496a1d62b4817975962efdd73ca7dd8de0390094f6a58d1a7f",
+    "data/lean-data-review.json": "120a34a96f16e5142829dfffc5cd3713f6c94c792eda99ba3d0cb2271191956f",
+    "data/search.json": "d42dde1f72a14f0907d62e11ad45471907e7eab62d51a3c8e4f505fa928ca2f6",
+    "data/next-case-task.json": "0d032c96464c637472857439c0e79db25ca0b31f453810c7d31e94ebdee153a3",
+    "data/next-split-counts.json": "64c8cae07d351cd7118cc39da8d9ebb2f891c6f5c44a2758e834453c5871a59b",
+    "audit/pair-counter-review.md": "065dd0bc0f03c42a9606a26c4dd1f1472c63c782bf2b466cbeec4fde834f090f",
+    "audit/pair-derivation.md": "ae3f9c90c3dc4db815f0353bfcf4845abd29047c5a782775a5dd8c786c7c04b5",
+    "MATHEMATICAL_NOTE.md": "bc5154cf5ec8000d7b40d48ea4cb8f0823493c9ed57749b5f6a20a14c814f964",
+    "data/batch-observation.json": "8c8a7813074a1fa8e27061fcbdd42bf4e2f0b883905149d895b93e02e5358544"
+  },
+  "lean_receipts": [
+    {
+      "module": "PairLower128",
+      "path": "logs/pair-lower-1793687781271460700/record.json",
+      "sha256": "14c459d1dc8136f097225a474b6839d0fc9c7d456d2f614b5b62075676ab9996",
+      "axiom_reports": 6,
+      "seconds": 17.3279999999977
+    },
+    {
+      "module": "PairClauses128",
+      "path": "logs/pair-clauses-1793688604745603200/record.json",
+      "sha256": "c8da35480f8ea53ea5f80b345f0d00c0407dfed22ca34e2cd46f2c18ad983390",
+      "axiom_reports": 4,
+      "seconds": 169.81300000000192
+    }
+  ],
+  "lean_modules": 2,
+  "axiom_reports": 10,
+  "new_count_floor": false,
+  "new_global_bound": false,
+  "added_clauses": 2863,
+  "complete_combined_input_semantics": false,
+  "complete_refutation": false,
+  "original_only_derivation": false,
+  "native_status": "TIMEOUT",
+  "native_prefix_deductions": 1000,
+  "archive": {
+    "status": "PASS_LOSSLESS_NATIVE_TRACE_ARCHIVE",
+    "original": "work/pair.raw.lrat",
+    "original_sha256": "e6af53d1f85f0afc3717c00d34a9481dfdebc59a88498f6e4fae95e9cc762431",
+    "original_bytes": 176984064,
+    "archive": "archives/pair.raw.lrat.gz",
+    "archive_sha256": "ad88de9e0a057cd7d2efd4f76eb3e4b62e5bbba691bd0bf9ddc73bff13bdcdf9",
+    "archive_bytes": 29694276,
+    "solver_status": "TIMEOUT",
+    "script_sha256": "607b44b58b3d2285e22d15e803a3d420ef9975e92e5db8ff107ac18d2414cf9f",
+    "scope": "Byte preservation only; incomplete traces do not establish contradictions."
+  },
+  "scope": "Lean checks actual selected-occurrence cap34 and satisfaction of all added2863 clauses. The complete104529-clause conjunction and a final contradiction remain unchecked. No new six-count floor or global bound."
+}
