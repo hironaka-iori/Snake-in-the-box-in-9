@@ -1,0 +1,105 @@
+{
+  "status": "PASS_SOURCE_REVIEW_RESULT_AVAILABLE",
+  "reviewed_utc": "2026-11-03T16:33:02.629878+00:00",
+  "complete_source_diff_reviewed": true,
+  "new_profiles": [
+    "completed"
+  ],
+  "new_weight_multiplier": 12,
+  "new_credit": "533/12",
+  "new_comparison": "(12*1098960*d+8*p+24*533*d+R)/(12*4200*d+p)",
+  "actual_mean": "p/(12*d)",
+  "actual_range": "R/(12*d)",
+  "difference_from235": "(R+1356312*d-227*p)/(50400*d+p)",
+  "target_scaled_mean": 6022,
+  "target_strict_scaled_range": 10682,
+  "historical139_multiplier": 3,
+  "historical139_credit": "83/3",
+  "historical139_reconstruction_unchanged": true,
+  "predecessor141_both_zero_credit_hashes_checked_by_evaluator": true,
+  "predecessor141_removal_set_checked_by_evaluator": true,
+  "retained_additional_profile": {
+    "source": "milestones/141-zero-credit-comparison/data/five-cycle-zero/results.json",
+    "mean": "496",
+    "range": "602",
+    "credit": "0",
+    "comparison": "551765/2348"
+  },
+  "proof_gate_unchanged_and_pinned": true,
+  "exclusions_and_event_guard_unchanged": true,
+  "arithmetic_cases": [
+    {
+      "p": 6022,
+      "d": 1,
+      "range_scaled": 0,
+      "comparison": "6624244/28211",
+      "below235": true
+    },
+    {
+      "p": 6022,
+      "d": 1,
+      "range_scaled": 10681,
+      "comparison": "13259169/56422",
+      "below235": true
+    },
+    {
+      "p": 6022,
+      "d": 1,
+      "range_scaled": 10682,
+      "comparison": "235",
+      "below235": false
+    },
+    {
+      "p": 6022,
+      "d": 1,
+      "range_scaled": 10683,
+      "comparison": "13259171/56422",
+      "below235": false
+    },
+    {
+      "p": 6000,
+      "d": 1,
+      "range_scaled": 9000,
+      "comparison": "276194/1175",
+      "below235": false
+    },
+    {
+      "p": 3424,
+      "d": 7,
+      "range_scaled": 4159,
+      "comparison": "92433735/356224",
+      "below235": false
+    }
+  ],
+  "result_review": {
+    "status": "PASS_BOUNDED_SAVED_RESULT_REVIEW",
+    "record": "data/result-review.json",
+    "record_sha256": "677e6003b1f23e3f7ae07c1504c63076b35c70d15679c35c732f614bc665f33a",
+    "report": "audit/result-review.md",
+    "report_sha256": "eb79e025bc620f53a57e6d406a2d9d945dd7ea61386aeb97a895c9252c9f1afc"
+  },
+  "graph_arrays_loaded": false,
+  "independent_graph_run": false,
+  "independent_all_edge_scan": false,
+  "lean_run": false,
+  "solver_run": false,
+  "source_files_sha256": {
+    "milestones/141-zero-credit-comparison/scripts/evaluate_graph.py": "7099cb809feb6720ac64c91b760681d4dd9ad2589995691bc43d82d76daf0b4c",
+    "milestones/142-retuned-occurrence-credit/scripts/prepare_graph.py": "03e9d126515978a4fadb946f8bacd244c4e54884bf62deb0737bbf357fd328eb",
+    "milestones/142-retuned-occurrence-credit/scripts/evaluate_graph.py": "c057930ea46b47ad896105c37c668c01c60c235c738479d764c83a479d9b1208",
+    "milestones/142-retuned-occurrence-credit/data/preparation.json": "31004866dea45e75cac40ea0634aa0f64e9dc0b8e67f500afd49eb77845386f4",
+    "milestones/141-zero-credit-comparison/data/five-cycle-zero/results.json": "e09abb05d937a51a8ca81fc1fcccedeb951640fbcb0d4a3cedaf4eb039872bb1",
+    "milestones/141-zero-credit-comparison/data/next-credit.json": "25d77a3e6e217f39652962287b8369e5459bf2b4367289ebb0373b6974526262",
+    "milestones/141-zero-credit-comparison/data/Comparison141-audit.json": "52e1a52022ca5e6bbe1b56ff32a62116748f32546b7aca530a92c125605c4780",
+    "milestones/140-five-cycle-window/data/proof-completion.json": "7ec6b2153e2f39f02a5493924e0a89f2779df27928793d4be872e468ba86169a",
+    "milestones/140-five-cycle-window/lean/Weak140Actual.lean": "4ad6037852f1c76183f0b596713a5d7c1d5638aaf6af45eee4960d5a7f3e8556",
+    "milestones/140-five-cycle-window/data/Weak140Actual-audit.json": "abb8c6f3f3dba5303841b14acf045358db41e9a504372c04fd1a248a01366c19"
+  },
+  "limitations": [
+    "Only source derivation and exact arithmetic have been reviewed at this stage.",
+    "The existing additional-share profile is retained with zero credit; it is not recomputed with the new credit.",
+    "Inherited local hypotheses, odd-length restrictions, and graph-to-snake obligations remain.",
+    "The selected credit is a candidate from two cycle comparisons; no parameter optimum is established."
+  ],
+  "source_stage_initial_record_sha256": "06aec064455b419b7ff6b06b27ab9016c6dde71acd6ae3babbc2de4bd12af414"
+}

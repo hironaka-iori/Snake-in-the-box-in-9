@@ -1,0 +1,71 @@
+import Mathlib.Tactic
+
+namespace Snake9.Obstruction142
+
+theorem zero_event_cycle_mean :
+    ((610 + 489 + 376 + 730 + 369 + 492 + 600 + 364 + 376 : ℚ) / 9) =
+      4406 / 9 := by norm_num
+
+theorem zero_cost_comparison :
+    (1098960 + 8 * (4406 / 9 : ℚ)) / (4200 + 4406 / 9) =
+      235 + 3739 / 21103 := by norm_num
+
+theorem uniform_credit_obstruction {μ C B R : ℚ}
+    (hμ : 0 ≤ μ) (hcap : μ ≤ 4406 / 9)
+    (hC : 0 ≤ C) (hB : 0 ≤ B) (hR : 0 ≤ R) :
+    235 < (1098960 + 8 * μ + B * C + R) / (4200 + μ) := by
+  have hp : (0 : ℚ) < 4200 + μ := by linarith
+  apply (lt_div_iff₀ hp).2
+  have hBC := mul_nonneg hB hC
+  nlinarith
+
+theorem uniform_credit_lower_bound {μ C B R : ℚ}
+    (hμ : 0 ≤ μ) (hcap : μ ≤ 4406 / 9)
+    (hC : 0 ≤ C) (hB : 0 ≤ B) (hR : 0 ≤ R) :
+    4962944 / 21103 ≤ (1098960 + 8 * μ + B * C + R) / (4200 + μ) := by
+  have hp : (0 : ℚ) < 4200 + μ := by linarith
+  apply (le_div_iff₀ hp).2
+  have hBC := mul_nonneg hB hC
+  nlinarith
+
+theorem tested_comparison :
+    (1098960 + 8 * (4406 / 9 : ℚ) + 24 * (533 / 12) + 5377 / 9) /
+      (4200 + 4406 / 9) = 9940859 / 42206 := by norm_num
+
+theorem tested_comparison_interval :
+    (235 : ℚ) < 9940859 / 42206 ∧ (9940859 / 42206 : ℚ) < 236 := by
+  norm_num
+
+theorem tested_integer_consequence {m : ℕ}
+    (h : (m : ℚ) ≤ 9940859 / 42206) : m ≤ 235 := by
+  have hm : (m : ℚ) < 236 := lt_of_le_of_lt h tested_comparison_interval.2
+  have hm' : m < 236 := by exact_mod_cast hm
+  omega
+
+theorem required_total_weight_increase {Δ : ℚ}
+    (h : (235 : ℚ) > (1098960 + 8 * ((4406 + Δ) / 9)) /
+      (4200 + (4406 + Δ) / 9)) (hΔ : 0 ≤ Δ) :
+    7478 / 227 < Δ := by
+  have hp : (0 : ℚ) < 4200 + (4406 + Δ) / 9 := by linarith
+  have hh := (div_lt_iff₀ hp).1 h
+  nlinarith
+
+theorem floor12_cycle_still_obstructs :
+    (235 : ℚ) < (1098960 + 8 * (4436 / 9 : ℚ)) / (4200 + 4436 / 9) := by
+  norm_num
+
+theorem floor13_cycle_passes_zero_cost_test :
+    (1098960 + 8 * (4442 / 9 : ℚ)) / (4200 + 4442 / 9) < (235 : ℚ) := by
+  norm_num
+
+#print axioms zero_event_cycle_mean
+#print axioms zero_cost_comparison
+#print axioms uniform_credit_obstruction
+#print axioms uniform_credit_lower_bound
+#print axioms tested_comparison
+#print axioms tested_comparison_interval
+#print axioms tested_integer_consequence
+#print axioms required_total_weight_increase
+#print axioms floor12_cycle_still_obstructs
+#print axioms floor13_cycle_passes_zero_cost_test
+end Snake9.Obstruction142
