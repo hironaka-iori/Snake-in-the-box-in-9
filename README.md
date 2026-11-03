@@ -4,11 +4,11 @@ Authors of the manuscript: **Iori Hironaka, Tommy Ma, and Steven Zhan**.
 
 This repository is an ongoing investigation of the longest induced path in the nine-dimensional binary hypercube. Length means the number of **edges**. The exact optimum has not been established by this project.
 
-Latest continuation: [milestone 117](milestones/117-cycle-sum-refinement/README.md) replays a count-sum contradiction that removes both prior attaining cycles. The conditional finite mean rises to 2915/6; integer comparisons remain 235 and 234. Lean checks the conditional geometric transfer and arithmetic. No new definitions or global bound.
+Latest continuation: [milestone 118](milestones/118-shared-cycle-outer-sum/README.md) disproves the proposed outer-sum rule in the local model, checks two critical forests in Lean, and proves that the remaining total-sum candidates alone cannot improve either integer comparison. No new mathematical terminology or numerical bound.
 
 [Milestone 74](milestones/74-graph-interpretation-audit/README.md) checks four state-shift identities and a short-walk obstruction lemma. Six exact graph witnesses show that changing the constant slope or potential cannot compensate for the specified weakenings of the pending share rules under the present boundary budget. This adds no unconditional numerical bound.
 
-Case 7305 is complete: 465 modules and 100 theorem audits passed, including geometry and reversal. Its checked archives restore all sources and the compact proof. The completed catalogue now contains four target cases. No case7305 proof process remains active. At that checkpoint, the paper was revision 96; the current revision is 106.
+Case 7305 is complete: 465 modules and 100 theorem audits passed, including geometry and reversal. Its checked archives restore all sources and the compact proof. The completed catalogue now contains four target cases. No case7305 proof process remains active. At that checkpoint, the paper was revision 96; the current revision is 116.
 
 Active research: [milestone 73](milestones/73-countfree-share-catalogue/README.md) now supplies four of the nine target count-free shares: 012031, 012304 and 012314 have floor 16; 012310 has floor 12. Coverage, canonical coordinate transfer, reversal, global share accounting and overlap are checked. The combined catalogue retains five local certificate premises. The full target 234 remains conditional on these, graph interpretation and potential replay. The maintained interval remains **191 <= a(9) <= 235**. Milestone 72 separately retains six unresolved count-certificate cases.
 
@@ -16,9 +16,9 @@ Count-free share continuation: [current comparison](milestones/80-012310-share-c
 
 Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved-rule-conditional-pressure/README.md), on the conditional optimisation track. The forty recovered proved rules reduce the additional count premises for **234** from **18,788 to 14,155**, a reduction of **4,633 (24.66%)**. Independent verification checks all **3,533,981 retained transitions** and every mandatory-key witness. Recomputing the full conditional model raises its exact integer mean to **1492/3**, but the earlier potential needs fewer count proofs and is retained. Eight new Lean audits cover pruning and conditional arithmetic. The contributor-checked global interval remains **191 <= a(9) <= 235**. Selected count premises, complete graph-to-snake assembly and Lean graph-potential replay remain pending.
 
-Current manuscript revision: [milestone 106](milestones/106-paper-revision/README.md). The paper incorporates the arguments through milestone 105 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 116.
+Current manuscript revision: [milestone 116](milestones/116-paper-revision/README.md). The paper incorporates the arguments through milestone 115 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 126.
 
-Next research priority: Preserve both live proof batches. Check existing witnesses, then test outer sum at most 12 on canonical 012301; replacement cycles have outer sums 11 and 12 with middle count in [6,21]. Compare any viable restriction on both profiles. The 012034 outer-16 candidate still needs concrete Lean semantics and full contradiction. Next paper revision: 126.
+Next research priority: Test coupled counts on the shared 012304 windows, preserving every symbol 6 as [6,21]. Compare any candidate credit on both saved cycles before exporting a large proof. Preserve both live proof batches and the pending 117 contradiction. Next paper revision: 126.
 
 ## Historical checkpoints
 

@@ -1,0 +1,43 @@
+{
+  "status": "PASS_PROBE_PINS_CYCLE_CUTS_AND_WITNESS_COVERAGE",
+  "probes": [
+    {
+      "probe": "data/probes/012301-completed-cycle.json",
+      "status": "SAT_LOCAL_WITNESS",
+      "sha256": "07ac474673e7577962e42fe59b38af421e624c62856566dfd946d5236c84b8aa",
+      "cuts": 35,
+      "seconds": 0.5
+    },
+    {
+      "probe": "data/probes/012301-conditional-cycle.json",
+      "status": "SAT_LOCAL_WITNESS",
+      "sha256": "631a3af23992b2e7da9c2af8f06ef258a44c6bbcee9c3fea2a4128ad95e03888",
+      "cuts": 7,
+      "seconds": 0.09399999999914144
+    },
+    {
+      "probe": "data/probes/012301-middle6-outer12.json",
+      "status": "SAT_LOCAL_WITNESS",
+      "sha256": "4255c379c661c6c97b21945f7f6231095cd712f0e136499b02a36cb450acd0a2",
+      "cuts": 34,
+      "seconds": 0.46899999999914144
+    },
+    {
+      "probe": "data/probes/012301-outer12.json",
+      "status": "SAT_LOCAL_WITNESS",
+      "sha256": "fefc2c2a67e92c0ce83b454b14a6fe95d40403d1ce6ec7f0a0527e604fc344d2",
+      "cuts": 18,
+      "seconds": 0.4220000000004802
+    },
+    {
+      "probe": "data/probes/012301-outer13.json",
+      "status": "SAT_LOCAL_WITNESS",
+      "sha256": "1a48328824d93f416e0a3ba59b8c90a5c01a1dfb28b2ca12ca751aacfa405379",
+      "cuts": 17,
+      "seconds": 0.0319999999992433
+    }
+  ],
+  "witness_audit_sha256": "4daaafba615db6c7cf8576cafdf798ee30b63718d3947b6c74e88b7505e211b0",
+  "script_sha256": "d3d8fb0e3cb37b6938e51c81f807d57f3d08aa91584a4d9f061e74dd2110c825",
+  "scope": "Validates provenance, every added induced-cycle exclusion and positive-witness audit coverage. Does not independently certify any UNSAT solver answer."
+}

@@ -1,3 +1,36 @@
+# Continuation after milestone 118
+
+Work in E:/Snake-in-a-box. Use the requested tensai-bishoujo research skill with
+neutral, concise mathematical prose. Define only essential repeated concepts.
+Read the 118 note, witness reviews, cycle limits and exact verification receipt.
+
+Continue the same count-sum and empty-square route on 012304, the other
+shape shared by both surviving cycles. Inspect existing witnesses first.
+The completed profile has bucket tuples (2,6,2,4,6) and (2,6,2,3,6);
+the conditional profile has (2,6,4,2,6) and (4,6,2,4,6). Every symbol 6
+represents [6,21]. Test coupled sums or conditions that cover those full
+intervals. Before investing in a large refutation, compute its best possible
+credit on both saved cycles under the shared budget. The 118 analysis shows
+that proving only the two remaining 012301 total candidates cannot improve
+the integer bounds in this fixed family.
+
+The two remaining 012301 total candidates are UNKNOWN, not certified exclusions.
+The outer-13 candidate has verified local counterexamples. Do not rerun their
+bounded tests without a concrete improvement to the model or search strategy.
+The ten witnesses have relaxed boundaries and are not complete snakes.
+
+Read the 104 and 115 progress files and inspect live processes before any action.
+The frozen 118 observation had 157/791 contexts per profile and 193/1397 modules;
+those counts may have advanced. Do not duplicate drivers or change pinned inputs.
+The 117 native contradiction still needs concrete sum semantics and full Lean replay.
+
+Preserve the existing open editor and paper revision 116. Next revision 126.
+Preserve all three authors and hypersetup, unrelated .gitignore and historical
+critical-family.json changes, and exact audited bytes. Fetch before the next round
+and stage only the reviewed manifest. The full research goal remains active.
+
+## Earlier continuation record
+
 # Continuation after milestone 117
 
 Work in E:/Snake-in-a-box. Read the latest mathematical note and checkpoint.

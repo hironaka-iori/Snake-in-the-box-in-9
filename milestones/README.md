@@ -1,6 +1,8 @@
 # Research milestones
 
-The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 106; the next full revision is 116. Source and witness checks pass; the built-in compiler failed before TeX processing.
+The exact optimum remains unresolved. The contributor-checked interval is 191 <= a(9) <= 235 edges. Milestones 73 and 80 check four of nine count-free shares, actual-snake catalogue coverage, canonical dispatch and global share accounting. The combined catalogue theorem retains five local certificate premises; 234 remains conditional on these and the graph assembly. The manuscript is at revision 116; the next full revision is 126. Source and witness checks pass; the built-in compiler failed before TeX processing.
+
+- [Milestone 118: local counterexamples and limits of total-count pressure](118-shared-cycle-outer-sum/README.md). Ten audited local witnesses, two Lean-checked critical forests and fixed-family ceilings; no new numerical bound.
 
 - [Milestone 117: count-sum refinement on both surviving cycles](117-cycle-sum-refinement/README.md). Replayed native contradiction; conditional Lean transfer; finite mean 2915/6; integer comparisons unchanged.
 

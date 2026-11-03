@@ -2,7 +2,7 @@
 
 Checkpoint: 3 November 2026. Manuscript authors: Iori Hironaka, Tommy Ma, and Steven Zhan.
 
-Latest continuation: [milestone 117](milestones/117-cycle-sum-refinement/README.md) replays a count-sum contradiction that removes both prior attaining cycles. The conditional finite mean rises to 2915/6; integer comparisons remain 235 and 234. Lean checks the conditional geometric transfer and arithmetic. No new definitions or global bound.
+Latest continuation: [milestone 118](milestones/118-shared-cycle-outer-sum/README.md) disproves the proposed outer-sum rule in the local model, checks two critical forests in Lean, and proves that the remaining total-sum candidates alone cannot improve either integer comparison. No new mathematical terminology or numerical bound.
 
 Start with [the current research handover](handoff/README.md). It records the completed case7305 theorem, five remaining local share targets, graph-interpretation gaps and the current comparison. The dated handovers and earlier entries below retain their historical evidence.
 
@@ -14,9 +14,9 @@ Count-free share continuation: [current comparison](milestones/80-012310-share-c
 
 Preceding completed mathematical checkpoint: [milestone 71](milestones/71-proved-rule-conditional-pressure/README.md), on the conditional optimisation track. The forty recovered proved rules reduce the additional count premises for **234** from **18,788 to 14,155**, a reduction of **4,633 (24.66%)**. Independent verification checks all **3,533,981 retained transitions** and every mandatory-key witness. Recomputing the full conditional model raises its exact integer mean to **1492/3**, but the earlier potential needs fewer count proofs and is retained. Eight new Lean audits cover pruning and conditional arithmetic. The contributor-checked global interval remains **191 <= a(9) <= 235**. Selected count premises, complete graph-to-snake assembly and Lean graph-potential replay remain pending.
 
-Current manuscript revision: [milestone 106](milestones/106-paper-revision/README.md). The paper incorporates the arguments through milestone 105 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 116.
+Current manuscript revision: [milestone 116](milestones/116-paper-revision/README.md). The paper incorporates the arguments through milestone 115 and retains one named definition, for the problem itself. All 13 printed snakes pass 118,673 vertex-pair checks. Authors, hyperlink settings and appendices are preserved. Source checks pass; the built-in compiler failed before TeX processing, so no current PDF or visual layout is verified. The next full revision is 126.
 
-Next research priority: Preserve both live proof batches. Check existing witnesses, then test outer sum at most 12 on canonical 012301; replacement cycles have outer sums 11 and 12 with middle count in [6,21]. Compare any viable restriction on both profiles. The 012034 outer-16 candidate still needs concrete Lean semantics and full contradiction. Next paper revision: 126.
+Next research priority: Test coupled counts on the shared 012304 windows, preserving every symbol 6 as [6,21]. Compare any candidate credit on both saved cycles before exporting a large proof. Preserve both live proof batches and the pending 117 contradiction. Next paper revision: 126.
 
 ## Historical checkpoints
 

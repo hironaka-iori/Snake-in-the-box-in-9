@@ -1,0 +1,91 @@
+{
+  "status": "PASS_CONDITIONAL_SAVED_CYCLE_LIMITS",
+  "profiles": [
+    {
+      "profile": "completed",
+      "cycle_length": 18,
+      "old_weight_sum": 8745,
+      "suffix_deficit_sum": 2,
+      "maximum_total_coefficient": 24,
+      "maximum_cycle_mean": "977/2",
+      "zero_range_comparison": "2205736/9377",
+      "cannot_exclude_length": 235,
+      "scaled_comparison_margin": 2141,
+      "windows": [
+        {
+          "edge": 1719644,
+          "offset": 1,
+          "counts": [
+            4,
+            2,
+            6,
+            2,
+            3
+          ],
+          "assumed_lower": 19,
+          "deficit": 2
+        },
+        {
+          "edge": 463728,
+          "offset": 0,
+          "counts": [
+            4,
+            2,
+            6,
+            2,
+            3
+          ],
+          "assumed_lower": 19,
+          "deficit": 2
+        }
+      ]
+    },
+    {
+      "profile": "conditional_floor18",
+      "cycle_length": 3,
+      "old_weight_sum": 1488,
+      "suffix_deficit_sum": 1,
+      "maximum_total_coefficient": 24,
+      "maximum_cycle_mean": "504",
+      "zero_range_comparison": "22979/98",
+      "cannot_exclude_length": 234,
+      "scaled_comparison_margin": 2256,
+      "windows": [
+        {
+          "edge": 1275421,
+          "offset": 0,
+          "counts": [
+            4,
+            2,
+            6,
+            4,
+            2
+          ],
+          "assumed_lower": 19,
+          "deficit": 1
+        },
+        {
+          "edge": 992595,
+          "offset": 1,
+          "counts": [
+            4,
+            2,
+            6,
+            4,
+            2
+          ],
+          "assumed_lower": 19,
+          "deficit": 1
+        }
+      ]
+    }
+  ],
+  "assumptions": [
+    "Unrestricted 012301 total at least18",
+    "For012301 with middle at least6, total at least19"
+  ],
+  "coefficient_argument": "4a+c<=120 implies min(a,c)<=24. Use maximum applicable deficit, never their sum.",
+  "graph_audit_sha256": "13039f91dc62cc7f7b476364883a0f9126978da0daa563e1ebc74aedddf19fed",
+  "script_sha256": "bb69c17474909645a4e053e549ef493a228b7d7b04889bc456ed1d1cb80e9975",
+  "scope": "No new rule is asserted. Retained old cycles give ceilings for a hypothetical extension of the fixed rule family. They do not establish new minimum means, potentials, or global bounds."
+}
