@@ -1,3 +1,23 @@
+# Research update: milestone 151
+
+The 012032 initial-state connection and first 32 replay segments passed
+Lean: 3,728 deductions and 195,386 references, including the checkpoint
+transfer. There are 49 accepted modules out of 342 prepared for the full
+replay. Exact generated sources and accepted evidence are saved; the full
+contradiction and actual-snake composition remain pending.
+
+The same 147 job for 012301 resumed after both bounded batches. The next
+selected task is the smaller remaining 012032 replay, using a guarded
+controller to keep a single Lean compiler active and preserve that existing
+job. Revalidate process identity and current progress before acting. The
+completed 012310 proof and accepted 151 prefix must not be restarted.
+
+Read milestones/151-countfree-replay-pilot/MATHEMATICAL_NOTE.md. Both paper
+copies are updated, with no new definitions or preamble changes. The PDF
+helper still fails before TeX. No new global bound; maintained 191--235
+and the contributor rebuild caveat remain. Conditional 234 retains its
+other premises. Goal ACTIVE; last full paper revision 146, next 156.
+
 # Research update: milestone 150
 
 The 012032 share-16 target now has a count-free numerical certificate:

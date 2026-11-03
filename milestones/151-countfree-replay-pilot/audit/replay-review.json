@@ -1,0 +1,1351 @@
+{
+  "status": "PASS_COMPLETED_PILOT_EVIDENCE_AND_FULL_SOURCE_LAYOUT_AUDIT",
+  "scope": "Revalidated existing completed pilot records and independently checked full generated source layout against the previously audited150 transport. No compiler or propagation replay.",
+  "counts": {
+    "pilot_modules": 38,
+    "pilot_axiom_reports": 120,
+    "pilot_deductions": 2169,
+    "pilot_references": 6151,
+    "initial_core_clauses": 13655,
+    "initial_raw_chunks": 107,
+    "pilot_dependency_hash_references_revalidated": 1279,
+    "full_source_modules": 342,
+    "full_source_bytes": 36831638,
+    "segments": 878,
+    "groups": 28,
+    "full_checkpoint_modules": 27,
+    "all_checkpoint_lists_compared": 28,
+    "checking_modules": 220,
+    "proof_data_modules": 28,
+    "composition_modules": 28,
+    "deductions_compared_to_packed_bytes": 58182,
+    "recorded_total_references": 5350080
+  },
+  "transition_counts": {
+    "replay_true": 850,
+    "cp_true": 27,
+    "final_false": 1
+  },
+  "pilot_result": {
+    "start_true": "CNF truth implies TreeTrue of the complete materialized initial database.",
+    "prefix_check": "Closed successful check of the first2169 deductions and complete checkpoint match.",
+    "prefix_true": "For any Boolean assignment, CNF truth implies TreeTrue of the post-prefix checkpoint.",
+    "complete_unsatisfiability": false
+  },
+  "first_group_source": {
+    "statement": "steps0 (tau) (h0 : TreeTrue tau start0) : TreeTrue tau start32",
+    "segments": [
+      0,
+      31
+    ],
+    "deductions": 3728,
+    "references": 195386,
+    "ends_in_checkpoint_truth": true,
+    "asserts_final_contradiction": false,
+    "first_group_completion_audited": false
+  },
+  "final_source": {
+    "statement": "Snake9.ReplayFull150.unsat : Snake9.LocalWindow.Unsat Snake9.LocalWindow.ShareWindow150.cnf",
+    "last_group": 27,
+    "last_group_segments": [
+      864,
+      877
+    ],
+    "final_segment": 877,
+    "final_original_clause_id": 205425,
+    "final_empty_tree_key": 12069,
+    "all28_groups_composed": true,
+    "full_replay_completion_audited": false
+  },
+  "checks": [
+    "All38 pilot source bytes remain identical to150 and appear unchanged in the full inventory.",
+    "All38 successful receipts,120 axiom reports parsed from exact logs, source/object/log hashes and explicit dependencies match.",
+    "Every342 source hash/size and both planned dependency orders match; no placeholder, added axiom or native_decide occurs.",
+    "Every58182 proof literal matches the saved packed stream, with exact contiguous878-segment coverage and recorded byte boundaries.",
+    "All27 full checkpoint lists plus the pilot checkpoint equal their pinned150 files.",
+    "Every local check, ordinary transition, checkpoint transition, final-empty application and final group composition is present with matching indices."
+  ],
+  "generator_derivation": "initial, pilot, full and shared emission-function ASTs are identical to150. Changes route input to150 and output to151, enforce --full and require the recorded successful pilot. No generated theorem-body change.",
+  "findings": [
+    {
+      "severity": "minor_metadata",
+      "issue": "full-source-plan.full_generation_command retains the inherited emit_lean.py filename. The actual151 generator is scripts/emit_full.py; use that saved file with --full. This does not alter the emitted proof or recorded generator hash."
+    }
+  ],
+  "limitations": [
+    "No new compiler, solver, Git or process-control command was run.",
+    "No unit propagation, semantic-clause interpretation or last-use allocation was repeated; the pinned150 transport audit is reused.",
+    "The active first-group run was not awaited or independently certified here. Its source conclusion is checkpoint truth only.",
+    "The full contradiction source remains subject to all remaining Lean checks. Neither a complete CNF refutation nor an actual-snake share theorem follows from the pilot alone."
+  ],
+  "pins": {
+    "E:\\Snake-in-a-box\\milestones\\150-actual-pair-share\\audit\\transport-review.json": "e705a688230c84116ec26e25a6fad5f2ad0bab89e09f5f7a832adf14e3c97eec",
+    "E:\\Snake-in-a-box\\milestones\\150-actual-pair-share\\replay\\data\\packed-replay.json": "8506196ed6d3c21caae089c38c5e5e3e88d1cd8734c6534b4c1261dd19b14c0b",
+    "E:\\Snake-in-a-box\\milestones\\150-actual-pair-share\\replay\\data\\sizing.json": "ce7b232e98c4eaab0ad90d441e968f6fd514955ad7bc6a4041555310232cf836",
+    "E:\\Snake-in-a-box\\milestones\\150-actual-pair-share\\replay\\data\\transport.json": "b55cde404a83eeb85af4a997fb743d2a52a53f6e94bd29569a440b2ed35ebe01",
+    "E:\\Snake-in-a-box\\milestones\\150-actual-pair-share\\replay\\data\\packed-steps.bin": "c460ba96b5e6ce52e11dbafd44aa5a62687f7f27207a401aaacd8efc421b0c00",
+    "E:\\Snake-in-a-box\\milestones\\150-actual-pair-share\\replay\\emit_lean.py": "758e468c590be2c4c2079c26265f87161a7bccc12183deda68353a95a0d9ba25",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\scripts\\emit_full.py": "5cb84237e200507ed33385d6d8bf9dc37cb5b6e49a171f9642da060a51958911",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\scripts\\check_replay.py": "15ed18296894bec5a9c959d62184d61184ed1ad371dea69977d0e1d9223c06e7",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\pilot-source-plan.json": "8aa9d4e6a48bfb82212c74dd1b6f9ebf4e1334fe56c93b5584bf04a6fdd4e39c",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\pilot-completion.json": "c429e1dd4ba2aa7fa8cc91c9cbb546546a37293db9389203fc3f8072fbf9f32d",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\full-source-plan.json": "d9665236564285af5073f64e7df0b8f816d750ef211476376177f36b1717dcce",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\full-execution-plan.json": "733af4bf4f91216d3d344315b69ee600827eb9ab179fa4eea62e97e9817a887f",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayAssembly150.lean": "a7c76b8a4916693812236919d5588f5d3e270b0e2f9364690cb34d8d774d489e",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayPilotCheck150.lean": "78997596a2e166e5de94463b96f124f0c9c9338efc30f16a48f31fe42e8f7e0f",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayPilotConsequence150.lean": "2ca2244b06fbfe513fbd177becfcfce21398afaddcb545c54c3cd17a26cb40e5",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplaySteps150_0000.lean": "249a7d7b78c88b87625d41d4f815378085492b60d33bc14390fad2081db4cf4a",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplaySteps150_0027.lean": "9dbad7f85bb2d63d2485567315d44d280f00693fb6252f8f455aedf908951257",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayUnsat150.lean": "2bb0ac9cedfec1f3b1a076203a5593d0b11eaf6ae07ef94c5b2ca916dfac0387"
+  },
+  "pilot_receipts": [
+    {
+      "module": "LratCheck150Replay",
+      "receipt_sha256": "a6f583c183fd9b1971b25c07d17665e02cabf6a4e28c6f1f7183e50a306e358d",
+      "source_sha256": "400fe4f60ac353ff5237841dfea71f74dda0329973c621cbbbe9e884760938c3",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\LratCheck150Replay.olean",
+      "object_sha256": "0e6557fc2647d2029d677605ed057f3120354d5764c3cd49639c50849597564d",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\LratCheck150Replay-1793741328488238000\\compiler.log",
+      "log_sha256": "5d41da53b50a6ee3743ef0892e5a32ece540a44b98b1226136bd473ad92aebbd",
+      "axioms": [
+        {
+          "theorem": "Snake9.Lrat150Replay.rawMask_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Lrat150Replay.start_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "LratFast150Replay",
+      "receipt_sha256": "55d91a2714023f28eda1499c642f3da2e79b1df7a883c895df565041022ca457",
+      "source_sha256": "2548dc19c3b6d4d027ffe21e233255c9edb9a128313b299c8f2da52b2bcedf01",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\LratFast150Replay.olean",
+      "object_sha256": "2f4250976c38a5cb988ff45a6d10b1f681731091cf119701c3db564a0966d2e4",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\LratFast150Replay-1793741334429763400\\compiler.log",
+      "log_sha256": "6893078e79aea1da7785d6ad9510c22d370370249b4032e333a2292f1d10dcec",
+      "axioms": [
+        {
+          "theorem": "Snake9.LratFast150Replay.cp_true",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LratFast150Replay.final_false",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "InputTree150Replay",
+      "receipt_sha256": "1dc5d09e5b30720683bd57a7281e7525a81d073c0b53a5fcc7d0b3aef55cc71a",
+      "source_sha256": "3169162f910e6fa68449eedb0f12d98f992c67691be9975c20e0a367398a35ac",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\InputTree150Replay.olean",
+      "object_sha256": "b5c17e0e67bc03fca10c4a24d8f855486693199dd80331a4d963fb256c7c9230",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\InputTree150Replay-1793741337524773900\\compiler.log",
+      "log_sha256": "b73bd359459ea483e0e5b12d0090780cfc8a247491dc4fdc9c8c611d1247d6f0",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayInput150.InputTree.build_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayInput150.InputTree.start_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTools150",
+      "receipt_sha256": "b1e59d7cfa6b71cf7062f625fa6545c26ac225968d4d7cecae949df48f1499ad",
+      "source_sha256": "b0b001c8f2a6afa5c539bcdbe2940a86a14dd88423e5efbb428fa6bbae836ad5",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTools150.olean",
+      "object_sha256": "e2d5498bbc5e2ea1411742402f7f2002f362b384c85617181877c18e906a8502",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTools150-1793741340419669100\\compiler.log",
+      "log_sha256": "29a4036da824e46cd87aaa3b36b86bb81eb57efe9bff73642a52ead65a7e2438",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.all_take_drop",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.all_of_subset",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.build_true_of_slice",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayRawChunks150",
+      "receipt_sha256": "a8dac97fc5cabb1dbc853dbe8075a586ef0fe7f9e1f5bcbf3a48f7e9edb474eb",
+      "source_sha256": "3d58a61ecd39614524cd21123d40ec6a51091b9e13744c6a878293160db616da",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayRawChunks150.olean",
+      "object_sha256": "9071d9c09e5dd09df21805c3b4c1df9b543ea7bcf05cdbee1e0e80b48ba071ae",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayRawChunks150-1793741343546778100\\compiler.log",
+      "log_sha256": "af493084c34078e479e71fa658b32fef194f376ffaf3c3291f594556bc74ceb1",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayRawChunks150.chunks_true",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayParts15000",
+      "receipt_sha256": "a589f62f929db5ec77cae312110463eed5c2a43f3c2851b3815281e1c99c257f",
+      "source_sha256": "cc88eebe019481de0f941673278e6a6e5a4b6aa8d13d755d014c4896dd8e4d47",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15000.olean",
+      "object_sha256": "ff647c00178fd02fbe52bee653a4e54c8e817e158bed50ee0ef68248b28c5cbf",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15000-1793741348339790900\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15001",
+      "receipt_sha256": "e128a1b12a21e0c5678723210c89ea68f9bd128e567d67cc275a9cfe8293104b",
+      "source_sha256": "c85a61a5fccb1ceca34b94786828cf46c38bd4e3f67be346a5accf9b9c6838ce",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15001.olean",
+      "object_sha256": "06daf17c66dde1b0a425be36ab57d57a86409d74ce2bbb9f9eafe68b8e9f7b7e",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15001-1793741360026142400\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15002",
+      "receipt_sha256": "e3e8f8a2e9531f965fd40e2b3b64f31e885202aa820c5040f3970c11814ea467",
+      "source_sha256": "32a0330f90a801eefbed9c1de7cd8242439eb24ee4ac6fe16aeec5b07c059fa2",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15002.olean",
+      "object_sha256": "964d05075472fd02bb8027c0fdeff5bff712027f7334abe07000e390845f0195",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15002-1793741373209322400\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15003",
+      "receipt_sha256": "943ea57b521052cdc80fb0e76df70ba22484b3fe319902874f1f0b87b5d64803",
+      "source_sha256": "f28142c90053f34aa6782800f13d105b9496a6db4a69f4ba1f2992df061d3456",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15003.olean",
+      "object_sha256": "34a81eb6d172d6784fabbe8e6a144bdf52a6c25be8e1a75365798a8305dc9e21",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15003-1793741384664914300\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15004",
+      "receipt_sha256": "f670a9e9f2aadf465a67718544ea2039d6c5ee74ba64de0176aeeb1fd750ab41",
+      "source_sha256": "482faafab7e71a0a5f90aee51018e2facba657e5e4b1bf2700c7c9c74cc143d6",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15004.olean",
+      "object_sha256": "11ec9c41d50d768e116812d648c6962f292f99077fda05e44dd73ce0d42d81e7",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15004-1793741396125636900\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15005",
+      "receipt_sha256": "43f93bf36794a90be0a63ddafff1168bcfe6ed9c5f8f930fecc6b5dce1dff04c",
+      "source_sha256": "e67642fedf9f540f5011e534c1be1b024e559a419eda134d2d2c861c0c0b411c",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15005.olean",
+      "object_sha256": "db66fe0f6eb56f3d3d33138e3afc2fbf9c342ccdca1ddecf35b845853779de9d",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15005-1793741407885081300\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15006",
+      "receipt_sha256": "4bc9af70a2f4e4ae527df175c8a91db4fb41dd756e3e9fba4edcb9ea224910d8",
+      "source_sha256": "0cf2cc6d706942f8e06ee91d32445152cae26fc53d07459385b4471175fd273d",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15006.olean",
+      "object_sha256": "84aa1f9f419ec68120a31b300ca0b0ee9e787d242e28c336b3a536ce147a1cb7",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15006-1793741416049997100\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15007",
+      "receipt_sha256": "e52241ae1bf90ce4e4ae8a4b3960f1c13e385a03d1a516cb4bc4d42d092a29ac",
+      "source_sha256": "43e0e7a6e627290cecfbeb6a70922c0ca11168541bbb3890b722a82c2aad1e59",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15007.olean",
+      "object_sha256": "7365e762397f2a5db90493a3abfb5313247a0f9485149e827169590855452712",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15007-1793741424214016000\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15008",
+      "receipt_sha256": "06048538727d03adfb6aaa89c9c208cab06466d654261ca86a0450afe03da159",
+      "source_sha256": "d018645bc66f206fc09e95e0be8c78b51a43b91b8d83e437d4c533a5bd5f6de5",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15008.olean",
+      "object_sha256": "781fca6b8ec27fa82d1a42a4beb5af9ee165c210ab17ac253796e13f23d9f4ba",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15008-1793741434230267400\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15009",
+      "receipt_sha256": "434e748fab6bed6c1d9da62cf0ad5d0de983930b2491ccfe3a4a0a95d344a484",
+      "source_sha256": "ae993947acd2d57673c0fc10858c707a214e770df82b068d0f181ee4d1e4428e",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15009.olean",
+      "object_sha256": "23cf6159d6da9ea286e560dc861b0030f09b92d193842d06b7b2333033e90354",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15009-1793741444280183500\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15010",
+      "receipt_sha256": "a1f37251662a4c1d0296cf8b61017d56ba884e5ad7bf0a641fb335904cc96205",
+      "source_sha256": "a836eb5c3674f46ee3dcc1621170972dde7e2181d4766d240e5cb1fc521cba17",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15010.olean",
+      "object_sha256": "ad9e858713c508868fd1ef52622906395ce55f75c948041f9ef9d22c035f1049",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15010-1793741452357458300\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15011",
+      "receipt_sha256": "cb7fb19433c060112df1fa0dbcf2356b7d88349242a3bdfd7cd3343571ff3d87",
+      "source_sha256": "ef098d551cf82761b8d485ceebebf52744d9b0ebfe1b4d69b674545f902ff175",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15011.olean",
+      "object_sha256": "a66cfcda633e2bc9d7c5b3ad0ae125f43ab5fb1707132752d561c2f593a5edf5",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15011-1793741462336584300\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15012",
+      "receipt_sha256": "aef6953419f0bd86817624721b8bf3721753ff344ea232e683f8d41df78fb761",
+      "source_sha256": "6e43397b97d61a4e05d809e7a6254a1e4238399a49e08d3faac3eb38cc50b4d5",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15012.olean",
+      "object_sha256": "f7c1a64be6e09eee5551653a02e297d08a2a77b4eeb5794c896e0e4456b4ff0a",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15012-1793741472161291900\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayParts15013",
+      "receipt_sha256": "ef1a9eda4fa58af76b7f1c87577a91a4cdadb1533955b7578ea75c31467ad8d7",
+      "source_sha256": "457c06be4db2258cb98e10bfa18f90cf4507cd9c4a5f8fb6929a33ee621cf335",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayParts15013.olean",
+      "object_sha256": "0b96420946f57320995367a70ba68037858a1d429ee671dc0b9c39cd3da37520",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayParts15013-1793741480311190400\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayInitial150",
+      "receipt_sha256": "288d8f5624cf4df09333d34b6cad4590a4e2500f8ce7022b587cb3c24fc68e19",
+      "source_sha256": "325d6cf726bef66467c08e8ff891c98a80d391944457a50e6c215dbc43547d8e",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayInitial150.olean",
+      "object_sha256": "3fe34d72ac61ea233d02749747cea8cd75133e041060636cefcaa49052c97c7a",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayInitial150-1793741485275594300\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayTruth15000",
+      "receipt_sha256": "2839c2b1c6b7a8f33ea7beff76fce71417e72d356e3cd228fab4c89d8c440cda",
+      "source_sha256": "045904df67c6e4e6e60af86ebd87e9576f186f05be0ea9903de1ae704997e8ec",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15000.olean",
+      "object_sha256": "879134c9a1b3b15289e14406374984856332c3d8f9ed30a0321c0ae1b604607c",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15000-1793741489027440400\\compiler.log",
+      "log_sha256": "2ed52395dc442299ba0cc88d7d5d83978c5ef7b2805fc275899576c7bea85077",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part0_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part1_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part2_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part3_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part4_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part5_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part6_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part7_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15001",
+      "receipt_sha256": "bc2b631821deef8fdc66446da8a96c2563ba74ef9027bc63dd3f399511808bd0",
+      "source_sha256": "cc0580397a20567ba595c0258a9ab9baa2a63a94a3e3d36fe00cca352338bc09",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15001.olean",
+      "object_sha256": "c125d49a8b61c2b1a182dbf1f137243045c56c2d5c16dbab98e99e9f6207a21b",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15001-1793741492427168700\\compiler.log",
+      "log_sha256": "c2a0e2d9fae81ba97c52c15c78fd77d14386badc32cfc0b7357606941c7cebd3",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part8_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part9_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part10_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part11_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part12_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part13_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part14_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part15_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15002",
+      "receipt_sha256": "7bb7da203d6cdbfd2411bb8c94677c65680899da7afa80cfe98ce7a740623c0f",
+      "source_sha256": "45d814dbf88c161274dbb6ce8c9ab60e870a7f396d5d21b3a3b7db1d7b26090a",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15002.olean",
+      "object_sha256": "1b04a2b376d7e5be992205f179b6b846d6be96a9d6919fc988c663bc0e614057",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15002-1793741495817203500\\compiler.log",
+      "log_sha256": "280e3554ff2ec73a229ef76a0a811e847fc23252c2722820cc168ae12b802d50",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part16_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part17_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part18_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part19_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part20_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part21_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part22_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part23_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15003",
+      "receipt_sha256": "eeb52d88c9e32af40dfa3609bfd1df4ebb09ef2fca60cabc98b8775fd9a1ee17",
+      "source_sha256": "3fedf29a1c4f2e37d2bc0c8e643e0359ffaf856d935f132315c10a30a183958f",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15003.olean",
+      "object_sha256": "96b48c0152d7bcfc26391bdd950c735c1da83a0d5b63d3e4d78df607d39b7214",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15003-1793741500868723700\\compiler.log",
+      "log_sha256": "04145334fee757b97cd4b1c2eb2bad1379963205e45c534d7885c9ddd7d10c32",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part24_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part25_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part26_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part27_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part28_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part29_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part30_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part31_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15004",
+      "receipt_sha256": "8bd50829f04fa5ce5ba598ba1a24dfbe7166a38e2dc51ce67eaaee40de3f6d93",
+      "source_sha256": "36a197960848dd02c9c8eea205d441f8ce5e5ac1cd92eff0c148a66c3002c35a",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15004.olean",
+      "object_sha256": "0eda39d9791bb1770a153792abbe059bf57d2523646bc208b819655883ed10f3",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15004-1793741504155187500\\compiler.log",
+      "log_sha256": "4398daa445ff43c87351b4d940349d21317aba4a62b4f65793e766ba5b0e35ee",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part32_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part33_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part34_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part35_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part36_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part37_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part38_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part39_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15005",
+      "receipt_sha256": "f7a1a116d2456610ab6057766d3d3f0941b75813d3c8ffec4b73baa49e542063",
+      "source_sha256": "24929f2f6821b9dbedd2e86e6cb39c6cc165b5d727ad839f4bdcec0aff51e9a8",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15005.olean",
+      "object_sha256": "126651ac66df82d8f4fea6fcfafc88dcb1ec23c0d1443feddeae24fdf07a80a8",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15005-1793741507558074600\\compiler.log",
+      "log_sha256": "9ae15fb91c07f76fa5a8d719d56cc8a89718a804ed854ce8778d596b1282c162",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part40_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part41_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part42_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part43_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part44_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part45_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part46_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part47_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15006",
+      "receipt_sha256": "add0e7bf79fcb71d026b75ffe1da49d2de465a54101a76e8f23df6f5ec44dee0",
+      "source_sha256": "0b3874f473d55f0996f798a5400981d68c479cf1646020eca240c0926c6d90e9",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15006.olean",
+      "object_sha256": "c9e0bff36ed0896aead1a2816eae8b7fa0dc430ef8acd38427e5e35c009b6498",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15006-1793741510846796900\\compiler.log",
+      "log_sha256": "02cfb62142d374976cb1ffd38932a3572d3c7c26e0ae15571f094a515a131f9c",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part48_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part49_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part50_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part51_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part52_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part53_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part54_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part55_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15007",
+      "receipt_sha256": "ce587999274e0de5de5308e3d392f3a6480ebe49aba44b0f51b1a392e5f33ca3",
+      "source_sha256": "4566552f9734375f15c6853002693cc1efda28411ee98d370bd29abd05df830f",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15007.olean",
+      "object_sha256": "0153e89d215539450d1f267bfe482aed89dd1b71ab62dc13d88d583dd462c79f",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15007-1793741514225784600\\compiler.log",
+      "log_sha256": "7004179c9a9cff8dae9e12f19b30626e4178932baddcbcc7b8dced7c495edeb1",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part56_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part57_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part58_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part59_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part60_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part61_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part62_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part63_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15008",
+      "receipt_sha256": "da80ca186d0c7f78e44c7aa111b9f9fdf21be84cc67410132ff9c7558daf2e92",
+      "source_sha256": "8dfb7f01155d1f56cb19d4a2340bb803f3f50a771212eea345e3612b155cc9f1",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15008.olean",
+      "object_sha256": "1ac9526671690d8d434cade2b7b5e88f860253d2180eab826d7ef6e12d4003cc",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15008-1793741517490099600\\compiler.log",
+      "log_sha256": "d5c0a46aa0423c06b38c985f60a665991d0c0c33eb3f76da5afa6ac64faf93ff",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part64_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part65_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part66_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part67_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part68_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part69_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part70_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part71_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15009",
+      "receipt_sha256": "2f59f246243dcb4a25314e40a4eb5d2cfe8b8fa8447a63568a9cd6a0bfe05dde",
+      "source_sha256": "a7833f21de80f04421e15524ca070a1c2916523bbd4d2c2dcacc7b0e132229ab",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15009.olean",
+      "object_sha256": "57faf67514e4c1de149c8674099c360fc017c31ceefcf8a1b4de355895b4b8c1",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15009-1793741521129513900\\compiler.log",
+      "log_sha256": "becf700dde44f44f39f4576e864a5dd3ed346e0a7a72a83b02d5cc254a474cb1",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part72_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part73_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part74_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part75_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part76_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part77_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part78_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part79_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15010",
+      "receipt_sha256": "b27bc9b670ed2d80c7e090d5c6d723f0b730e183c9f56a3cc0940fcf6017e50f",
+      "source_sha256": "8fb6415117600644f17857878fe2432d9bfe7e327b5bebd188a125183e35983f",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15010.olean",
+      "object_sha256": "bfd8664652df03be55906b028fcb8cedb030c14228e0828d25931b128aeeb788",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15010-1793741524305157200\\compiler.log",
+      "log_sha256": "531fa8cd1288650c8436732a0dc375cccfb040cffab9e057604e9d7a08027c97",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part80_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part81_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part82_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part83_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part84_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part85_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part86_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part87_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15011",
+      "receipt_sha256": "1fee9ee3d1ad6cd297454df698ec25bc9e41a4f004dde558da896876832708e0",
+      "source_sha256": "8c8b788702431eddf68015a634503f76d799ab760aab0ec61e36ca0585adc533",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15011.olean",
+      "object_sha256": "124887cb069ff44c5274e567b89d9c084009e8fec6be38c34ff17e24a80fa8e5",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15011-1793741527495404200\\compiler.log",
+      "log_sha256": "2e91f2fbaefe4c4a7b23aa3b61b3d39941c0eaae8a88c295f3192c3971d07b26",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part88_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part89_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part90_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part91_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part92_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part93_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part94_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part95_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15012",
+      "receipt_sha256": "31aaa8c3e6faa13e2a8043c279b4527365449316e49adf6ba711cb2c0f7d58f8",
+      "source_sha256": "2a97b5afb8a56731958b39852e364941cc35cc5e5fdfbb6715490c506fd0ebc8",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15012.olean",
+      "object_sha256": "7c3c198e5b20bd4597ebb2dbcb3e8550a977a057cfa52e8aa1c666bc520450f8",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15012-1793741530702015700\\compiler.log",
+      "log_sha256": "29507891f3d6bec01b26b04f6e08ffeebe0d760f68c9ed74ae31d5712a3afffb",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part96_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part97_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part98_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part99_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part100_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part101_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part102_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part103_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayTruth15013",
+      "receipt_sha256": "509005cf3c4b903e5acef07fe0d58358c21fcc86e2b7f1af0b0c578da334dbf0",
+      "source_sha256": "29a3578493fbe18a0efacc1562f682ac9d7939b0d14278f8de13bfe5b631034b",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayTruth15013.olean",
+      "object_sha256": "969e1c032f5bf3772f8f78050bb08d607b1072019b8e93157406f46a60133960",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayTruth15013-1793741533852930300\\compiler.log",
+      "log_sha256": "5fd45cb1d2c7490ac53f46bddb6b373991c39690c51c11a7a414f17f5be78b22",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.part104_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part105_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData150.part106_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayAssembly150",
+      "receipt_sha256": "91b4f14abd7fc3f7db7073824155287df729ecf708bf0c2ce334a76c2920897f",
+      "source_sha256": "a7c76b8a4916693812236919d5588f5d3e270b0e2f9364690cb34d8d774d489e",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayAssembly150.olean",
+      "object_sha256": "80f175be03faf267f00fdfb18104692e19e17de7994f5200b3f769d79d87cc9b",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayAssembly150-1793741536989433800\\compiler.log",
+      "log_sha256": "43bc29f69c4a46a973d83054be37c0c767d84f32b4adf701840b09c78b12fe77",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData150.start_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayPilotData150",
+      "receipt_sha256": "69b6f0899b03f3ef9c18ebb4cbde62fa47a83408cd28ac35d2e241b2f3aaa4cf",
+      "source_sha256": "5997fdcfd08aeb0fcf7afdcf762fc971569058107eb1fe44bc828921e6529986",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayPilotData150.olean",
+      "object_sha256": "58ff7507a4c9c359ae9d29b205a0888b97b105b643133f76a72c9f569a646bf1",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayPilotData150-1793741552720149900\\compiler.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "axioms": []
+    },
+    {
+      "module": "ReplayPilotCheck150",
+      "receipt_sha256": "1d388b098542c5810e3027d3c76231a518f5f6a236878d8f5f9d32bdcc6d054b",
+      "source_sha256": "78997596a2e166e5de94463b96f124f0c9c9338efc30f16a48f31fe42e8f7e0f",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayPilotCheck150.olean",
+      "object_sha256": "640b8ab6ced8f13f914be65e302a8f8f132e5767fce5e5e2f76f05076f7017aa",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayPilotCheck150-1793741561505200700\\compiler.log",
+      "log_sha256": "7c3b58bc9a1bbed3267c762d49439e55ac92e966ce64cace2089f634b52e4771",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayPilot150.prefix_check",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "ReplayPilotConsequence150",
+      "receipt_sha256": "b2b99dc6b29e23385375f7371dec777438caecd33f3f59bd2d662590ce1e97fe",
+      "source_sha256": "2ca2244b06fbfe513fbd177becfcfce21398afaddcb545c54c3cd17a26cb40e5",
+      "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayPilotConsequence150.olean",
+      "object_sha256": "2758d1388b7ad6eebdc5ebd34b5b3dc4163822d4ef68efd0add2e53d424a77d2",
+      "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayPilotConsequence150-1793741576866101200\\compiler.log",
+      "log_sha256": "e208bd1e89e832f0e847220a4aee2d5379af6dbf8d8e8954137d736227602843",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayPilot150.prefix_true",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    }
+  ],
+  "seconds": 4.203,
+  "compiler_invoked": false,
+  "solver_invoked": false,
+  "propagation_repeated": false,
+  "processes_touched": false
+}

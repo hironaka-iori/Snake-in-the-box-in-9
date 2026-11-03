@@ -1,3 +1,34 @@
+# Continue after milestone 151
+
+Read milestones/151-countfree-replay-pilot/MATHEMATICAL_NOTE.md and its
+checkpoint first. The exact initial-tree bridge and first 32 segments
+are accepted: 49/342 modules, 3,728 deductions, 195,386 references.
+
+The selected next task is the remaining 012032 full replay. Its sources,
+dependency order and bounded checker are prepared in 151. Do not regenerate
+accepted sources or rerun the completed prefix. Reuse its receipts after
+checking exact source/object/log/dependency hashes. Full replay is still
+uncompleted; after it passes, audit and compose with the checked 150
+actual-snake share-16 implication.
+
+The original 147 coordinator (PID 15228, session 67526 at this checkpoint)
+has resumed. Verify it live before any action. Prepare a guarded full-run
+controller, following the existing suspend/wait/resume and watchdog method,
+to run the remaining 151 modules without another active Lean compiler.
+The first-group controller has --limit 11 and is already finished; do not
+mistake it for the full-run controller. Never restart a confirmed-live job.
+
+The live 151 full-replay progress file is excluded from the publication
+manifest; its immutable first-group snapshot is included. Inspect the live
+file and process identity before deciding whether a later run has started.
+The source plan's old regeneration filename is metadata only; the actual
+generator is scripts/emit_full.py. Use the verified archives to restore
+missing sources instead of modifying them.
+
+Maintain all remaining local/reference/potential premises of conditional
+234. No new global bound follows yet. Preserve unrelated edits and keep
+the goal ACTIVE. Earlier notes below record historical choices.
+
 # Continue after milestone 150
 
 Read milestones/150-actual-pair-share/MATHEMATICAL_NOTE.md and
