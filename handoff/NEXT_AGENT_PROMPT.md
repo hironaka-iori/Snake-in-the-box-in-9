@@ -1,72 +1,64 @@
-# Continue after milestone138
+# Continue after milestone139
 
-Work in E:/Snake-in-a-box. Use the requested research skill. Define only
-essential repeatedly used quantities. Preserve Iori Hironaka, Tommy Ma and
-Steven Zhan, the full paper preamble/hypersetup, unrelated .gitignore and
-milestone50 changes. Keep the existing D:/Codex/2026-10-13/new-chat/outputs/
-snake9_research.tex editor source and paper/snake9_research.tex synchronized.
-Fetch per round, save exact evidence, stage an explicit checkpoint manifest,
-commit, push and verify. The goal is ACTIVE and this checkpoint is progress.
+Work in E:/Snake-in-a-box, use the requested research skill, and define only
+essential repeatedly used quantities. Preserve all three authors, the full
+paper preamble/hypersetup and unrelated .gitignore/milestone50 changes.
+Keep the existing D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex
+editor and paper/snake9_research.tex synchronized. No new editor tab.
+Fetch each round, preserve exact evidence, stage only a checkpoint manifest,
+commit, push and verify. Goal ACTIVE; previous turn PROGRESS.
 
-Read milestone138/README.md and MATHEMATICAL_NOTE.md first, then
-data/proof-completion.json, audit/final-statement-review.md,
-audit/graph-base-next.md and audit/credit-next.md.
+Read milestone139/MATHEMATICAL_NOTE.md, data/exclusion-credit83/results.json,
+data/result-review.json and the three new Lean receipts. This round's
+experiment finished; do not restart it. There is no live139 job.
+The exact graph has4661772 edges after deleting only992157. Uniform credit
+83/3 on8846 exact suffix events yields means2446/5 and496 with ranges2973/5
+and602. Comparisons5520661/23446 and552097/2348 both exceed235.
+All-edge potentials were checked by the evaluator; independent review checks
+saved cycles/rows/potentials/arithmetic and does not repeat that entire scan.
 
-COMPLETED: actual nine-transition exclusion012301430 with counts
-(>=6,3,3,3,5,2) at local positions3–8. Final source is
-lean/ActualBase138Minimal.lean. Its four reports use only standard axioms.
-Fourteen CNF/semantic/LRAT modules plus this final wrapper passed.
-Credit138 separately passed three arithmetic reports. The original exported
-ActualBase138 wrapper failed during dependency import; do not interpret its
-STOPPED record as failure of the replacement theorem. data/proof-completion
-is the authoritative completion index. Do not recompile the entire proof.
+Both new attaining cycles receive zero occurrence credit. Lean proves that
+any nonnegative uniform credit, allowance and range cannot make the completed
+comparison reach235 or the additional-share comparison reach234, given
+their respective mean caps2446/5 and496. For allowance24 and the completed
+four-/five-cycle caps, the arithmetic relaxation minimum is2757328/11723,
+attained arithmetically atC12/5,mu2446/5,R0. No graph potential attaining this
+range is claimed. Credit139 separately transfers the clipped event subset
+to the actual24-window theorem. All3 modules/6reports passed standard axioms.
 
-SELECTED NEXT TASK: a new exact graph experiment, combining the proved
-full-nine deletion with the already proved allowance24 for low-pair012032
-suffix events. Start with uniform credit C=83/3. The four-cycle has two
-events and mean488+C/2; the eighteen-cycle has zero events and mean3011/6.
-At this credit both comparisons meet at3011/6. For mean>=3011/6 and
-potential range R<7753/6, the inherited comparison is below235; this algebra
-passed Lean. Existence of such a potential is unproved. Multiply integer
-weights consistently by3; audit all state encoding, suffix positions,
-overlap, clipping, old removals and exact predecessor hashes. Evaluate both
-completed-share and conditional-share profiles with their respective
-premises, ranges and integer targets. A finite graph result alone is not
-an actual-snake upper bound.
+NEXT SELECTED ROUTE: ordinary local feasibility of012032 with EXACT five
+counts(3,5,4,5,3). Relevant pair sum10; no endpoint theorem currently covers
+it. Start a bounded necessary full-cube model, allow up to2 endpoints
+without location or parity restrictions, and separate cycle-only SAT models
+from actual paths. Reuse the pinned generic count and cycle encoders from138.
+An UNSAT result needs a preserved certificate and actual-snake interpretation.
+An actual SAT witness would refute ordinary exclusion and should guide a
+subsequent endpoint or empty-square test. Do not assume its geometry.
 
-The full-nine rule is forward-only from stored data: directions012301430,
-symbols(6,3,3,3,5,2). It removes edge992157, not1273862, from the saved
-seven-cycle. Do not reverse the six stored counts as a nine-word reversal;
-two needed original counts are absent. The short-cap mask in graph-next.md
-is NOT yet justified. Adding only the proved deletion leaves completed
-minimum488 unchanged; the new endpoint credit must be evaluated jointly.
+The new completed5cycle edges are308566,3806548,2195856,163743,2303753.
+Firstrowword012034054, sixcounts335453, suffix012032/fivecounts35453.
+All135 saved actual snakes were revalidated;0 exact matches, despite136
+suffix shape hits. See critical-witness-screen.json. The full-nine row is
+a narrower fallback if the six-word condition is feasible.
 
-PENDING STRONGER ROUTE:012301 with upper caps(3,3,3,5,2). Native proof has
-19338 deductions,2329967 hints,4358 inputs and13 used extra cycle cuts.
-All deductions passed independent replay in data/replay-short.json.
-No Lean export was run. scripts/export_short.py is prepared but unchecked
-as a full Lean chain. Preserve its bytes since the base export pins them.
-The sole-eight-cycle relaxation SAT model is a union containing cycles,
-not a snake. The endpoint-away query was prepared but never run.
-The base proof's x>=6 counter is unused; dropping that hypothesis still
-requires a checked semantic specialization.
+The new additional-share6cycle edges are1274753,3051941,992121,1273780,
+3047601,990202. Their exact rows are in the graph result. Do not conflate
+profiles or treat count symbol6 as exact. The old138 cap(3,3,3,5,2) does
+not match either new cycle and is not selected for an expensive Lean batch.
 
-REPRODUCTION: the generic module names shadowed legacy namespaces when
-the original wrapper imported CanonicalExclusions. The final wrapper
-imports only DirectionWindowBridge and copies the exact normalization proof
-from79. It passes without the unrelated catalogue. The abandoned bulk
-dependency copies were removed after path/hash verification; originals and
-failure records remain. Do not rerun restore_overlay.py. Use the final
-minimal-wrapper receipt and the successful14 original receipts.
+Inherited comparison assumptions remain: odd-length pair floor9, hypothetical
+0123104 six-floor25, earlier unproved count sums, and extra share floors for
+the additional profile. An even-length upper bound does not follow from
+the odd-length comparison. Complete graph-to-snake/potential obligations
+remain distinct. The maintained interval191–235 and unresolved196 persist.
 
-PAPER: targeted update138, no new definitions. All three authors and the
-preamble unchanged; source checks pass. The built-in compiler failed before
-TeX execution, so PDF/layout remain unverified. Next full revision146.
-The interval191–235, optimum unresolved and196 unproved remain unchanged.
+Paper targeted update139, SHA recorded in paper-revision.json; no new
+definitions, unchanged authors/preamble. Source checks pass; built-in
+compiler failed before TeX. Last full revision136; next full146.
 
-LONG JOB: milestone115 PID39044 was observed live at1017/1397. Verify its
-current process command before any action; never duplicate it.104 stopped,
-122 completed,129 completed. Lean gate:>=1.5GiB free and at most2 existing
-Lean processes; full graph>=3GiB and no concurrent full-graph job.
-Historical base commit9d24cbe7260ee87dd3d79b2e410d54527819f273.
-The new138 commit is identified by Git history and the checkpoint manifest.
+Milestone115 PID39044 was observed LIVE at1056/1397. Verify current process
+command before acting; never duplicate it.104 stopped,122 and129 completed.
+Lean gate>=1.5GiB free and at most2 existing Lean processes; fullgraph>=3GiB,
+no concurrent fullgraph. Use exact source hashes and preserve all attempts.
+Historical base commitd59f82f7d30c348d768c90edf56754c5bc877e39.
+The new139 commit is identified by Git history/checkpoint manifest.

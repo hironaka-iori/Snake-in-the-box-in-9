@@ -3047,6 +3047,63 @@ has passed an independent replay, but its complete Lean interpretation and
 refutation remain pending. It is not used as a proved exclusion here.
 Neither local result by itself establishes a smaller upper bound for $a(9)$.
 
+\subsection{Uniform credit after the new exclusion}\label{sec:credit-after-exclusion}
+Delete the row excluded by Theorem~\ref{thm:nine-window-exclusion} and add
+credit $83/3$ for each suffix $012032$ window whose two relevant count
+symbols are both below six and have sum at most nine. These exact symbols
+certify actual low-pair windows. Distinct suffix starts are distinct path
+starts, so Theorem~\ref{thm:twenty-four-windows} bounds their number by 24.
+The truncation implication and this transfer of the occurrence bound have
+passed Lean.
+
+Exact integer calculations on the remaining 4661772 edges give the
+following results. The old local hypotheses, including the odd-length
+pair floor and the proposed six-count floor, remain in force.
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Profile & Minimum mean & Potential range & Comparison\\
+\midrule
+Completed shares & $2446/5$ & $2973/5$ & $5520661/23446$\\
+Additional shares & $496$ & $602$ & $552097/2348$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The computation checks every potential inequality and an attaining cycle
+for each mean. An independent review reconstructs the saved cycles and
+checks their weights, adjacency, potential values and arithmetic; it does
+not repeat the full edge scan. The two attaining cycles have five and six
+edges respectively, and neither receives occurrence credit. Both displayed
+comparisons exceed 235. These remain finite-model calculations~\cite{credit139archive}.
+
+The five-cycle's unchanged mean bounds the completed profile by
+$\mu\le2446/5$ for every nonnegative uniform credit $C$. The surviving
+four-cycle also gives $\mu\le488+C/2$. Consequently, for $\mu,R\ge0$,
+\[
+\frac{1098960+8\mu+24C+R}{4200+\mu}
+\ge \frac{2757328}{11723}>235.
+\]
+Indeed, $C\ge2\mu-976$ bounds the first ratio below by
+$(1075536+56\mu)/(4200+\mu)$. Cross-multiplication shows that this expression
+decreases with $\mu$, so substitution of $\mu=2446/5$ proves the displayed
+bound. Equality in this arithmetic relaxation occurs at
+$C=12/5$, $\mu=2446/5$ and $R=0$. No graph potential attaining these
+parameters is asserted.
+
+More generally, the five-cycle prevents this comparison from reaching 235
+even with any nonnegative occurrence allowance. For the additional-share
+profile, its unchanged six-cycle gives $\mu\le496$ and prevents the analogous
+comparison from reaching 234. These arithmetic implications have passed
+Lean. They limit uniform credit on the specified graph and weight profiles;
+new exclusions, different credits and different charge comparisons remain
+outside their scope.
+
+The five-cycle contains the canonical suffix $012032$ with internal counts
+$(3,5,4,5,3)$. Its relevant pair sums to ten, so the present low-pair endpoint
+theorem supplies no consequence for this window. A scan of 135 saved snakes
+found no exact match. This finite observation leaves its feasibility open
+and identifies the next local test; it supplies no exclusion theorem.
+
 \subsection{What an integer improvement requires}
 The comparison~\eqref{eq:improved-potential} excludes length 235 exactly when
 $227p>111960d+R$, and excludes length 234 exactly when
@@ -5604,6 +5661,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Actual interval counts and a checked boun
 \bibitem{sevencyclearchive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{A checked nine-transition exclusion and the recorded seven-edge cycle}. Research record 138, 4 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/138-seven-cycle-endpoints}.
+
+\bibitem{credit139archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Uniform occurrence credit after the nine-transition exclusion}. Research record 139, 4 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/139-exclusion-occurrence-credit}.
 
 \end{thebibliography}
 \end{document}

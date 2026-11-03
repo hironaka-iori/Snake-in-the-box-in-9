@@ -1,3 +1,22 @@
+# Research update: milestone139
+
+The combined exclusion and uniform-credit graph calculation completed.
+Means2446/5 and496 are attained by new five- and six-edge cycles with zero
+credited events. Both credit83/3 comparisons remain above235. Independent
+saved-result review passed. Lean checked the counted-suffix allowance24
+and the resulting obstruction for every nonnegative uniform credit.
+Even the completed two-cycle arithmetic relaxation has optimum
+2757328/11723>235. This fixed credit route cannot supply the next integer
+improvement; inherited local hypotheses and graph assembly remain pending.
+
+Next: bounded feasibility test for012032 with exact counts(3,5,4,5,3).
+None of135 saved snakes matches it. The maintained interval remains191–235.
+Read milestones/139-exclusion-occurrence-credit/MATHEMATICAL_NOTE.md.
+Paper update139 adds no definitions; source checks pass, PDF unavailable.
+The separate115 batch was observed live at1056/1397. Goal ACTIVE.
+
+## Earlier record
+
 # Research update: milestone 138
 
 A complete Lean proof excludes the canonical nine-transition row012301430
