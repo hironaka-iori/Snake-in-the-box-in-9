@@ -1,0 +1,71 @@
+{
+  "status": "SOURCE_PREPARED_LEAN_PENDING",
+  "module_order": [
+    "Weak140Semantics",
+    "Weak140Actual"
+  ],
+  "final_theorem": "Snake9.Weak140.actual_one_count_ge_six",
+  "source_files_sha256": {
+    "milestones/140-five-cycle-window/scripts/prepare_weak.py": "3dfefc81baf41cd71366831fbdb306e2d07fec805ef50118f3825a55565642f2",
+    "milestones/140-five-cycle-window/data/proof-plan-base.json": "7258a30c6bd9b9740dfc2fc64eb42ccc1a629aec7d5889acdee205504f4e75e6",
+    "milestones/140-five-cycle-window/data/selected-core-semantics-base.json": "a48d8a934f4a1f0e717536b27fe8f2a9f7021af6e2216fd207576b60e18dd0f0",
+    "milestones/140-five-cycle-window/data/independent-semantics.json": "be17d7498b663079f9294d97aeff9dde0beef79abe46bc2b202fd3fb07aeb087",
+    "milestones/140-five-cycle-window/scripts/actual-wrapper.lean.txt": "f71ad85da51a9a56089d7620d406452ec112a3c1063575a5a9c10a79e7f66bfc",
+    "milestones/140-five-cycle-window/lean/LocalWindowCnf/CycleBase140.lean": "1f884767eee40024521fd69d3fd4dc28127670317a5adfad8c13340d4b707176",
+    "milestones/140-five-cycle-window/lean/LocalWindowSat/CycleBase140.lean": "c436f0427603d7cf5c2ca824e60eeaf7e78ac8e2895343dcd4ba1070a15209e9",
+    "milestones/140-five-cycle-window/lean/LocalWindowUnsat/CycleBase140.lean": "c246a3d1f22fdaaee4d5103a0100365233ccbc09c668ec1d2e2b5227071a40ef",
+    "work/final_lean/LocalWindowTags.lean": "1e9aad3e4c99acf4fa01b00dcc65330a8d633826079a3d0955716ccb0f36ec71"
+  },
+  "outputs": {
+    "lean/Weak140Semantics.lean": "ebeb75f3936a37885c30e2a05267236dab9620a37780ae1f49282b76a5a76b76",
+    "lean/Weak140Actual.lean": "4ad6037852f1c76183f0b596713a5d7c1d5638aaf6af45eee4960d5a7f3e8556"
+  },
+  "expected_axiom_reports": [
+    2,
+    5
+  ],
+  "unchanged_cnf_module": "LocalWindowCnf.CycleBase140",
+  "unchanged_unsat_module": "LocalWindowUnsat.CycleBase140",
+  "weak_bounds": [
+    [
+      3,
+      3
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      3,
+      3
+    ]
+  ],
+  "neutralized_counter_indices": [
+    4,
+    8
+  ],
+  "used_counter_indices": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    9,
+    10
+  ],
+  "unused_registers": 672,
+  "unused_registers_absent_from_core": true,
+  "unused_registers_absent_from_used_counter_literals": true,
+  "elementary_counter_conditions_checked": true,
+  "scope": "Source preparation only. Generic checkAll and actual-snake consequences await Lean. The original exact source and proof plan are unchanged; no solver or Lean ran."
+}

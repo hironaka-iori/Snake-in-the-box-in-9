@@ -36,7 +36,7 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $m$ for the edge length, $T$ for the total singleton-square count and $s_0$ for the empty-square count, the identity is $T+2s_0+35(m+1)=9214$. For a canonical $012032$ window, the second and fourth internal counts have sum at least eight. Equality forces both endpoints into the common distance-two sphere and can occur at most thirteen times; it also requires an even path length and an even window start. A sum at most nine forces an endpoint to share an unselected neighbour with the four alternate window vertices. We prove that at most twenty-four such windows occur in any snake, allowing overlap and either length parity. Explicit odd-length snakes show that a uniform pair floor ten is false. A nine-transition exclusion removes one recorded competing cycle. Six-count and empty-square criteria give conditional improvements to 234 and 233, while surviving cycles limit the tested finite comparisons. The optimum and the numerical conjecture 196 remain unresolved.
+Let $a(9)$ denote the maximum edge length of an induced path in the nine-dimensional binary hypercube. An explicit construction and an archived contributor proof give $191\le a(9)\le235$; a complete independent rebuild of the upper-bound proof remains pending. Writing $m$ for the edge length, $T$ for the total singleton-square count and $s_0$ for the empty-square count, the identity is $T+2s_0+35(m+1)=9214$. For a canonical $012032$ window, the second and fourth internal counts have sum at least eight. Equality forces both endpoints into the common distance-two sphere and can occur at most thirteen times; it also requires an even path length and an even window start. A sum at most nine forces an endpoint to share an unselected neighbour with the four alternate window vertices. We prove that at most twenty-four such windows occur in any snake, allowing overlap and either length parity. Explicit odd-length snakes show that a uniform pair floor ten is false. A nine-transition exclusion removes one recorded competing cycle. A further local theorem shows that alternate internal counts $3,4,3$ in a $012032$ window force one intervening count to be at least six. Six-count and empty-square criteria give conditional improvements to 234 and 233, while surviving cycles limit the tested finite comparisons. The optimum and the numerical conjecture 196 remain unresolved.
 \end{abstract}
 
 \clearpage
@@ -3098,11 +3098,61 @@ Lean. They limit uniform credit on the specified graph and weight profiles;
 new exclusions, different credits and different charge comparisons remain
 outside their scope.
 
-The five-cycle contains the canonical suffix $012032$ with internal counts
-$(3,5,4,5,3)$. Its relevant pair sums to ten, so the present low-pair endpoint
-theorem supplies no consequence for this window. A scan of 135 saved snakes
-found no exact match. This finite observation leaves its feasibility open
-and identifies the next local test; it supplies no exclusion theorem.
+The five-cycle contains a canonical $012032$ window with internal counts
+$(3,5,4,5,3)$. The following exclusion removes this cycle and the earlier
+four-cycle from the strengthened model.
+
+\subsection{A further restriction on the five internal counts}\label{sec:five-count-exclusion}
+\begin{theorem}\label{thm:alternate-three-four-three}
+Let $x_r,\ldots,x_{r+6}$ be a fitting canonical $012032$ window in a snake
+in $\Q_9$. If
+\[
+\alpha_{r+1}=3,\qquad \alpha_{r+3}=4,\qquad \alpha_{r+5}=3,
+\]
+then
+\[
+\alpha_{r+2}\ge6\quad\text{or}\quad\alpha_{r+4}\ge6.
+\]
+There is no restriction on the parity of the path or the positions of its endpoints.
+\end{theorem}
+\begin{proof}
+Translate and permute coordinates so that the window vertices are
+$0,1,3,7,6,14,10$. Each internal vertex has seven unused directions and
+therefore twenty-one opposite corners. Its singleton-square count equals
+the number of these corners absent from the path, by
+Lemma~\ref{lem:window-missing-corners}.
+
+Suppose both intervening counts are at most five. The five count intervals
+are then $[3,3],[0,5],[4,4],[0,5],[3,3]$. The necessary conditions for the
+selected vertices include degree at most two, positive degree, at most two
+endpoints, these corner-count intervals, and exclusion of selected cycles.
+A retained set of 4163 clauses from these conditions admits a contradiction
+certificate of 18606 deductions. Its clauses and every deduction, followed
+by their interpretation for an arbitrary snake, have been checked in Lean.
+The checked interpretation uses the stated upper bounds of five; equality
+at these two positions is unnecessary. The contradiction excludes the
+assumed intervals and proves the disjunction~\cite{fivecount140archive}.
+\end{proof}
+
+The count vectors $(3,5,4,5,3)$ and $(3,5,4,4,3)$ are both excluded.
+They occur in the saved five-cycle and the earlier four-cycle, respectively.
+Recognition at the two available six-transition positions removes both
+cycles. Reversal preserves the statement. The additional-share six-cycle
+has no matching window and remains an obstruction for that profile.
+These statements identify deleted cycles; the new graph minimum has not
+yet been computed.
+
+Removing the earlier four-cycle permits a new test with zero occurrence
+credit. If the revised comparison has mean $496$ and potential range
+$R<632$, then
+\[
+\frac{1098960+8\cdot496+R}{4200+496}<235.
+\]
+Cross-multiplication gives exactly the condition $R<632$; this arithmetic
+has also passed Lean. The previous range $602$ was established for credit
+$83/3$, so it supplies no zero-credit potential without a new edge check.
+All inherited count and share hypotheses and the separate graph-to-snake
+obligations remain. No smaller global upper bound follows yet.
 
 \subsection{What an integer improvement requires}
 The comparison~\eqref{eq:improved-potential} excludes length 235 exactly when
@@ -5665,6 +5715,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{A checked nine-transition exclusion and t
 \bibitem{credit139archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Uniform occurrence credit after the nine-transition exclusion}. Research record 139, 4 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/139-exclusion-occurrence-credit}.
+
+\bibitem{fivecount140archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{A five-count exclusion and a revised zero-credit test}. Research record 140, 4 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/140-five-cycle-window}.
 
 \end{thebibliography}
 \end{document}

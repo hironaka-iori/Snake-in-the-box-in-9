@@ -1,0 +1,968 @@
+{
+  "status": "EXPORTED_AND_SIMULATED_LEAN_PENDING",
+  "stats": {
+    "name": "base140",
+    "module": "CycleBase140",
+    "lemmas": 18606,
+    "hints": 1397536,
+    "slots": 4776,
+    "segments": 229,
+    "checkpoints": 57,
+    "seg_hints": [
+      6174,
+      6085,
+      6129,
+      6083,
+      6003,
+      6056,
+      6009,
+      6339,
+      6247,
+      6000,
+      6029,
+      6034,
+      6122,
+      6295,
+      6136,
+      6043,
+      6427,
+      6157,
+      6079,
+      6048,
+      6016,
+      6051,
+      6312,
+      6036,
+      6128,
+      6011,
+      6700,
+      6048,
+      6295,
+      6203,
+      6059,
+      6109,
+      6062,
+      6017,
+      6125,
+      6053,
+      6046,
+      6168,
+      6057,
+      6012,
+      6221,
+      6128,
+      6191,
+      6099,
+      6019,
+      6325,
+      6015,
+      6029,
+      6013,
+      6036,
+      6358,
+      6170,
+      6034,
+      6211,
+      6039,
+      6015,
+      6001,
+      6044,
+      6010,
+      6034,
+      6066,
+      6029,
+      6104,
+      6174,
+      6456,
+      6011,
+      6020,
+      6055,
+      6132,
+      6091,
+      6009,
+      6042,
+      6247,
+      6099,
+      6008,
+      6106,
+      6030,
+      6314,
+      6247,
+      6213,
+      6160,
+      6152,
+      6000,
+      6002,
+      6087,
+      6388,
+      6492,
+      6148,
+      6110,
+      6262,
+      6281,
+      6086,
+      6553,
+      6055,
+      6432,
+      6030,
+      6081,
+      6140,
+      6171,
+      6090,
+      6025,
+      6043,
+      6064,
+      6072,
+      6000,
+      6124,
+      6142,
+      6132,
+      6020,
+      6039,
+      6057,
+      6165,
+      6091,
+      6121,
+      6155,
+      6271,
+      6032,
+      6040,
+      6001,
+      6039,
+      6026,
+      6085,
+      6010,
+      6018,
+      6047,
+      6027,
+      6223,
+      6080,
+      6064,
+      6116,
+      6076,
+      6083,
+      6029,
+      6107,
+      6129,
+      6019,
+      6000,
+      6098,
+      6139,
+      6062,
+      6134,
+      6035,
+      6081,
+      6018,
+      6062,
+      6076,
+      6174,
+      6094,
+      6092,
+      6057,
+      6028,
+      6000,
+      6015,
+      6141,
+      6015,
+      6038,
+      6016,
+      6044,
+      6024,
+      6003,
+      6071,
+      6065,
+      6096,
+      6030,
+      6277,
+      6017,
+      6040,
+      6102,
+      6031,
+      6145,
+      6040,
+      6063,
+      6150,
+      6071,
+      6053,
+      6172,
+      6030,
+      6032,
+      6215,
+      6011,
+      6096,
+      6153,
+      6016,
+      6278,
+      6267,
+      6327,
+      6332,
+      6006,
+      6043,
+      6049,
+      6311,
+      6024,
+      6136,
+      6464,
+      6192,
+      6001,
+      6002,
+      6068,
+      6058,
+      6019,
+      6022,
+      6027,
+      6122,
+      6162,
+      6025,
+      6368,
+      6006,
+      6002,
+      6004,
+      6182,
+      6135,
+      6211,
+      6083,
+      6006,
+      6016,
+      6361,
+      6143,
+      6100,
+      6097,
+      6031,
+      6097,
+      6036,
+      6126,
+      6109,
+      6035,
+      6185,
+      6148,
+      6077,
+      4681
+    ],
+    "simulated": true,
+    "forced_segments": 0,
+    "lean_bytes": 16155314,
+    "check_modules": 58
+  },
+  "module_order": [
+    "LocalWindowCnf.CycleBase140",
+    "LocalWindowSat.CycleBase140",
+    "LocalWindowUnsat.CycleBase140.Data0",
+    "LocalWindowUnsat.CycleBase140.Data1",
+    "LocalWindowUnsat.CycleBase140.Data10",
+    "LocalWindowUnsat.CycleBase140.Data11",
+    "LocalWindowUnsat.CycleBase140.Data12",
+    "LocalWindowUnsat.CycleBase140.Data13",
+    "LocalWindowUnsat.CycleBase140.Data14",
+    "LocalWindowUnsat.CycleBase140.Data15",
+    "LocalWindowUnsat.CycleBase140.Data16",
+    "LocalWindowUnsat.CycleBase140.Data17",
+    "LocalWindowUnsat.CycleBase140.Data18",
+    "LocalWindowUnsat.CycleBase140.Data19",
+    "LocalWindowUnsat.CycleBase140.Data2",
+    "LocalWindowUnsat.CycleBase140.Data20",
+    "LocalWindowUnsat.CycleBase140.Data21",
+    "LocalWindowUnsat.CycleBase140.Data22",
+    "LocalWindowUnsat.CycleBase140.Data23",
+    "LocalWindowUnsat.CycleBase140.Data24",
+    "LocalWindowUnsat.CycleBase140.Data25",
+    "LocalWindowUnsat.CycleBase140.Data26",
+    "LocalWindowUnsat.CycleBase140.Data27",
+    "LocalWindowUnsat.CycleBase140.Data28",
+    "LocalWindowUnsat.CycleBase140.Data29",
+    "LocalWindowUnsat.CycleBase140.Data3",
+    "LocalWindowUnsat.CycleBase140.Data30",
+    "LocalWindowUnsat.CycleBase140.Data31",
+    "LocalWindowUnsat.CycleBase140.Data32",
+    "LocalWindowUnsat.CycleBase140.Data33",
+    "LocalWindowUnsat.CycleBase140.Data34",
+    "LocalWindowUnsat.CycleBase140.Data35",
+    "LocalWindowUnsat.CycleBase140.Data36",
+    "LocalWindowUnsat.CycleBase140.Data37",
+    "LocalWindowUnsat.CycleBase140.Data38",
+    "LocalWindowUnsat.CycleBase140.Data39",
+    "LocalWindowUnsat.CycleBase140.Data4",
+    "LocalWindowUnsat.CycleBase140.Data40",
+    "LocalWindowUnsat.CycleBase140.Data41",
+    "LocalWindowUnsat.CycleBase140.Data42",
+    "LocalWindowUnsat.CycleBase140.Data43",
+    "LocalWindowUnsat.CycleBase140.Data44",
+    "LocalWindowUnsat.CycleBase140.Data45",
+    "LocalWindowUnsat.CycleBase140.Data46",
+    "LocalWindowUnsat.CycleBase140.Data47",
+    "LocalWindowUnsat.CycleBase140.Data48",
+    "LocalWindowUnsat.CycleBase140.Data49",
+    "LocalWindowUnsat.CycleBase140.Data5",
+    "LocalWindowUnsat.CycleBase140.Data50",
+    "LocalWindowUnsat.CycleBase140.Data51",
+    "LocalWindowUnsat.CycleBase140.Data52",
+    "LocalWindowUnsat.CycleBase140.Data53",
+    "LocalWindowUnsat.CycleBase140.Data54",
+    "LocalWindowUnsat.CycleBase140.Data55",
+    "LocalWindowUnsat.CycleBase140.Data56",
+    "LocalWindowUnsat.CycleBase140.Data57",
+    "LocalWindowUnsat.CycleBase140.Data58",
+    "LocalWindowUnsat.CycleBase140.Data6",
+    "LocalWindowUnsat.CycleBase140.Data7",
+    "LocalWindowUnsat.CycleBase140.Data8",
+    "LocalWindowUnsat.CycleBase140.Data9",
+    "LocalWindowUnsat.CycleBase140.Check1",
+    "LocalWindowUnsat.CycleBase140.Check10",
+    "LocalWindowUnsat.CycleBase140.Check11",
+    "LocalWindowUnsat.CycleBase140.Check12",
+    "LocalWindowUnsat.CycleBase140.Check13",
+    "LocalWindowUnsat.CycleBase140.Check14",
+    "LocalWindowUnsat.CycleBase140.Check15",
+    "LocalWindowUnsat.CycleBase140.Check16",
+    "LocalWindowUnsat.CycleBase140.Check17",
+    "LocalWindowUnsat.CycleBase140.Check18",
+    "LocalWindowUnsat.CycleBase140.Check19",
+    "LocalWindowUnsat.CycleBase140.Check2",
+    "LocalWindowUnsat.CycleBase140.Check20",
+    "LocalWindowUnsat.CycleBase140.Check21",
+    "LocalWindowUnsat.CycleBase140.Check22",
+    "LocalWindowUnsat.CycleBase140.Check23",
+    "LocalWindowUnsat.CycleBase140.Check24",
+    "LocalWindowUnsat.CycleBase140.Check25",
+    "LocalWindowUnsat.CycleBase140.Check26",
+    "LocalWindowUnsat.CycleBase140.Check27",
+    "LocalWindowUnsat.CycleBase140.Check28",
+    "LocalWindowUnsat.CycleBase140.Check29",
+    "LocalWindowUnsat.CycleBase140.Check3",
+    "LocalWindowUnsat.CycleBase140.Check30",
+    "LocalWindowUnsat.CycleBase140.Check31",
+    "LocalWindowUnsat.CycleBase140.Check32",
+    "LocalWindowUnsat.CycleBase140.Check33",
+    "LocalWindowUnsat.CycleBase140.Check34",
+    "LocalWindowUnsat.CycleBase140.Check35",
+    "LocalWindowUnsat.CycleBase140.Check36",
+    "LocalWindowUnsat.CycleBase140.Check37",
+    "LocalWindowUnsat.CycleBase140.Check38",
+    "LocalWindowUnsat.CycleBase140.Check39",
+    "LocalWindowUnsat.CycleBase140.Check4",
+    "LocalWindowUnsat.CycleBase140.Check40",
+    "LocalWindowUnsat.CycleBase140.Check41",
+    "LocalWindowUnsat.CycleBase140.Check42",
+    "LocalWindowUnsat.CycleBase140.Check43",
+    "LocalWindowUnsat.CycleBase140.Check44",
+    "LocalWindowUnsat.CycleBase140.Check45",
+    "LocalWindowUnsat.CycleBase140.Check46",
+    "LocalWindowUnsat.CycleBase140.Check47",
+    "LocalWindowUnsat.CycleBase140.Check48",
+    "LocalWindowUnsat.CycleBase140.Check49",
+    "LocalWindowUnsat.CycleBase140.Check5",
+    "LocalWindowUnsat.CycleBase140.Check50",
+    "LocalWindowUnsat.CycleBase140.Check51",
+    "LocalWindowUnsat.CycleBase140.Check52",
+    "LocalWindowUnsat.CycleBase140.Check53",
+    "LocalWindowUnsat.CycleBase140.Check54",
+    "LocalWindowUnsat.CycleBase140.Check55",
+    "LocalWindowUnsat.CycleBase140.Check56",
+    "LocalWindowUnsat.CycleBase140.Check57",
+    "LocalWindowUnsat.CycleBase140.Check58",
+    "LocalWindowUnsat.CycleBase140.Check6",
+    "LocalWindowUnsat.CycleBase140.Check7",
+    "LocalWindowUnsat.CycleBase140.Check8",
+    "LocalWindowUnsat.CycleBase140.Check9",
+    "LocalWindowUnsat.CycleBase140",
+    "ActualBase140"
+  ],
+  "final_module": "ActualBase140",
+  "cnf_module": "LocalWindowCnf.CycleBase140",
+  "final_theorem": "Snake9.LocalWindow.CycleBase140.actual_exact_counts",
+  "refuted_theorem": "Snake9.LocalWindow.CycleBase140.refuted",
+  "expected_axiom_reports": 4,
+  "artifacts": [
+    {
+      "path": "lean/ActualBase140.lean",
+      "sha256": "2b10199d40b09579a09cb11fadd19b228f117a790f26a43ee1474204e5d6bee6"
+    },
+    {
+      "path": "lean/LocalWindowCnf/CycleBase140.lean",
+      "sha256": "1f884767eee40024521fd69d3fd4dc28127670317a5adfad8c13340d4b707176"
+    },
+    {
+      "path": "lean/LocalWindowSat/CycleBase140.lean",
+      "sha256": "c436f0427603d7cf5c2ca824e60eeaf7e78ac8e2895343dcd4ba1070a15209e9"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check1.lean",
+      "sha256": "dd0cb39c649fa4010980846ad45ec3bfd4e176fab1974e6832a953d868412687"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check10.lean",
+      "sha256": "49886658320b50bd29fa3169940bf0bf276b68ca91bd4bf36f97b1237abb1e75"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check11.lean",
+      "sha256": "a5bac9e8d6b33207a305bd1437aa9894781d047cb733fe72ca9dccd3c67ceb92"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check12.lean",
+      "sha256": "7b4f255aca54aeda4e5c33c5c0b294aa0c0fff39d1bc1d23faf025b10bb6e51f"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check13.lean",
+      "sha256": "8a0526aa5fccb67f9753bf80962ac220e384423dee819f2280228fe217096e99"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check14.lean",
+      "sha256": "c75100d17a45b31dac9190fe2449a1f8cd6b708bd9032a3a449852fc2048ed2d"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check15.lean",
+      "sha256": "ec8fcfbe0630ae310221f7ed3a749a639733da9bb76ee690d2c167420676fed7"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check16.lean",
+      "sha256": "3a9734229df002ac4fc8a7471d82581bc5eba7cdc178a998f523d87099db424e"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check17.lean",
+      "sha256": "ea0160026cf6c5cf61b19c152961f8897b66d6cb9715ba40d2ded61bf647405c"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check18.lean",
+      "sha256": "87506d63750da6fa4b97d6ccd1de194ce6b014cdfbf993ae984b8451512b511d"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check19.lean",
+      "sha256": "9420f147259dfc42de28124f00edb5278e9a67c022479f6e05214acaff43b69d"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check2.lean",
+      "sha256": "9682a7694bb0efb16275283043f30d4e6d0c0fdd6d6cdaf271f7ae8b3356148d"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check20.lean",
+      "sha256": "86ed500700a357f19b5329529968fc98d4d8afbf0681f3bd2718f831df57078a"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check21.lean",
+      "sha256": "cb200f3e950cdd03be2ac46aeebad6aafecdb203a010a4f3c63d19cbb0f8fc9c"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check22.lean",
+      "sha256": "c9141b034eba1e8a278bd785e0aa710ab073507085a7af0722815a214fba65ed"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check23.lean",
+      "sha256": "5093bda7c726a8f58ad06e3ac15962c4182806c5fba1c34f810ea229eafdb34f"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check24.lean",
+      "sha256": "85ca79c629c26583ad144f07e4690c845ed9ba287eaa375c2d0657114a41be8b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check25.lean",
+      "sha256": "8061c43305fded23e0127f4643a77c3ce2d25f98be488b5c2bceedc653d64fc2"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check26.lean",
+      "sha256": "93df9cf61316ec5d42353bb41fa982bedc49897d007db9b802da45fa7d7a9a3f"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check27.lean",
+      "sha256": "adc15f5febacd303f4c07ea9588a790079df2a8cb2b788a6ee9b5d07352d9e12"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check28.lean",
+      "sha256": "011ca96f8dc2dd8dd88c3413eb5f1a7bffafb02e1335a9a5db53e64bb13cf48f"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check29.lean",
+      "sha256": "0eb9de520dcb6f5940054faf82027fdb055fb015250f0f860a2f52888e3fec1e"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check3.lean",
+      "sha256": "843de779846e0b711d059d51673489184d36f0829866db78011c3cb192705de8"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check30.lean",
+      "sha256": "ba32b55eb6c79f5573724b527d405dc3710bf7684703e38cd2bc9ce8d42b115b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check31.lean",
+      "sha256": "303ecb249b199dc20669ceb15d1fdfac4a5ee15b12f69399152851c6f82f990b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check32.lean",
+      "sha256": "4ba0ac321e18a17e214a06ea861342f628e5b9d6d0fb9f47d0dce9f7435e0659"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check33.lean",
+      "sha256": "3e2dbf4357598f5a73ef509edc11546c125ac95c1f2a5783479064ee3fc74528"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check34.lean",
+      "sha256": "3992089f3e4da5d86bf9d8a41a76c571ea88f6948dd017dc8e35403c518872d1"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check35.lean",
+      "sha256": "ce0c5f4647358c3a83ab29ac50a32c2b5b0389ec585289632b9275f64cb1cdc1"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check36.lean",
+      "sha256": "c5e8ba6895cea06a6865804d732c866e973df011edc3c0eb74d9f57949825fb0"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check37.lean",
+      "sha256": "6224d25698f2332ee865aa434786c80de0c4aebc94d6047d989503445035eb80"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check38.lean",
+      "sha256": "8081ce1b8abe10741ab64a142403753119c9f4cdf10ddd1638cde8112d6069b0"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check39.lean",
+      "sha256": "8fc388d4b0c9736b11d508604ff532daf4285ef95760c51aa7028815100445e5"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check4.lean",
+      "sha256": "8594fc2b725a40638a754e030d33678b242b911df0af9527e02332d3e5c74fb7"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check40.lean",
+      "sha256": "d724210a62aa08a44af6d238f106c2d025d054cd77581da187bf34ed2e7e850e"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check41.lean",
+      "sha256": "d8675579c451ac78e72e4942ad6eb94794e3b8daaaae4b62c526a3cb7ec022e4"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check42.lean",
+      "sha256": "310b0e54a29491172836d597f6f8d00c6d8192fbc66cd1287284f6acea8deac6"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check43.lean",
+      "sha256": "2f75ff00599742c3887a19a48280ba1c40afe3fb52767934b614a3c908e927fe"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check44.lean",
+      "sha256": "987938b2ae184cc6611695d95a5e814884070c5c4f78fab7fc0289eb6759c2cd"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check45.lean",
+      "sha256": "e9a7e0f2c42a671e9728bb83f1b8c1c2d003de5a4e11716d9b5ffc8641218b83"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check46.lean",
+      "sha256": "8f15216a55b4bedc2265f4caa4ab21beb65ab3a8dd055783483c23f62cef5eb3"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check47.lean",
+      "sha256": "5aef112fb1d450a3fa33e986f6702e6560bf7d458f61a4b27322b648afe1a763"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check48.lean",
+      "sha256": "34ab04ca0ac1946da5a306c8c8b1b56cff7e21d0c744fbb609dc52993949930b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check49.lean",
+      "sha256": "d14e39c00824db780d25e7760257f87ed504ac5fac08425042c42da79ea7b27c"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check5.lean",
+      "sha256": "ffd289f7197eb4f67b8fb4e757b3b14e7e461022612e331672f33e86b3639a5d"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check50.lean",
+      "sha256": "445c8459f6f11000efbf6595d2982ae2e8b7d6ffcec74a1cf64dd1204b1cd091"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check51.lean",
+      "sha256": "66ee730983255e530fdf43cec029852ef3337752eee6133ffffbb7f746478368"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check52.lean",
+      "sha256": "5fda8ed50988df4f9c27553c999b0e4ddd254c0bb0ad258fe65d82514511c71c"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check53.lean",
+      "sha256": "07036373f91ed17991446045b88137a8d5c6fe8f8975c5b163fd2d411702dcef"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check54.lean",
+      "sha256": "f1a836c0f854520c2dbab97f30401da2c1dbe40d09f4ec95537549030229b4e2"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check55.lean",
+      "sha256": "790ca7f8689b7686f1593cc74fb7b426cf42d610c52417645cba85ff3b8d8da8"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check56.lean",
+      "sha256": "bb7bf8285d16994606283c4dbf836dd3ff4204a18bd7cdffc6a63bb01f19218b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check57.lean",
+      "sha256": "022e58ae83ddad8cb712238671f0b112744ece88d2159b4f1e8d94d527d7fcf4"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check58.lean",
+      "sha256": "1b456f6166d7a736ceb1954d8eb60a168fc330b34ac185ad590eb9109cee7e2b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check6.lean",
+      "sha256": "2cc2b8eebb5360d2923b47ffb5ce3d4c0c91f93d260d94e96bb1c75f00d5ba6b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check7.lean",
+      "sha256": "d26054fd2f5e1d903261b531d91830c8c239324eae6446bf245d0a0ebcfa1326"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check8.lean",
+      "sha256": "029c1882334ecbe2480957561b08e1e19760a3f579c9c6d75719a08de9760283"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Check9.lean",
+      "sha256": "bf310e2ae5908da976a8e4d2d320dea21ae3dc6baad3113acfd17620fd3126af"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data0.lean",
+      "sha256": "dd0e4210c2bbb3c1972d929d7c7e909d9eac62a86e9c81b3fbce5c76ad08e87f"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data1.lean",
+      "sha256": "6fc7dff8a88443168dcc10c78cf087362440dfbecc44a76c5b0132fa7478f460"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data10.lean",
+      "sha256": "a697923370fb22e543dc2a8275f286657eb946f66e2d143fca5346133ab5ea1a"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data11.lean",
+      "sha256": "0de1493496219ef7539fc3b45328a41ccd42a5246c7c006ef093ff44e37b80d0"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data12.lean",
+      "sha256": "a93cdc271e04b29eb3f06725771fd0b9bef17cd2547517e88e95a56be6bf47fb"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data13.lean",
+      "sha256": "28585e5d4ec887d059255e9bb429c9cbd4487d74343c67a7b777fdc69c94b2c8"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data14.lean",
+      "sha256": "a3d13f27e0f2d16c1d5d49c4c246fb97545ab588526a12b085884dfa78b5ee7c"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data15.lean",
+      "sha256": "3ba5e677bd2feb224dd2f6c915754baccb27922bf65d39ea6d55abae29973ae0"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data16.lean",
+      "sha256": "af6e65817fd53c9ba9c7e35d0a085f6fab74f049bd3f107b98320b80a913ca17"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data17.lean",
+      "sha256": "18199c0d9c21d29745574c0e4f01889ee07590571976f6ed87d5cdbbcaf30fe7"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data18.lean",
+      "sha256": "147070d65b49794538fe4082b599bcdc6187c244ffb7447612650d63562525a4"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data19.lean",
+      "sha256": "36adb8be376311e98d270d6bc5b8b115a8c618416e64ac9cbdd26bcd2948e363"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data2.lean",
+      "sha256": "dd3bb3a27190b484eb6255b8889cd2e1762053136c0d6b581848b0e3d785b7de"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data20.lean",
+      "sha256": "1d44076b902a4797c27a99e066747238e67c7f86ef1aa26be3a9a00729a00774"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data21.lean",
+      "sha256": "a59d04f70c3bf48c20ea333afb70e717bda350270bcf90d2f3c9b8bab601ee4a"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data22.lean",
+      "sha256": "6394873103b4e0455ba09368f5aeb0069a7107bc557642f247ef21d9929f41b5"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data23.lean",
+      "sha256": "4391e7a31dea4c6e956beb0155a8bbfd3b746c053b08f5ab2846d8e68f7a8fcd"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data24.lean",
+      "sha256": "3911d126a0813795dfe838b4fead8ce81f207735f2fd28f34c0d62f017717963"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data25.lean",
+      "sha256": "af2fd17c4c65b697c939c1995ab6e8fe245750b1a4e5b9733f8994c2c23f8852"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data26.lean",
+      "sha256": "9cf3948e57c7b442496260a763c61da75d7ba5ef8506b359721071b550bf4a64"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data27.lean",
+      "sha256": "f105b92cc0aaf3215304fb93097717926412d36151f062f909c27e9dc3452434"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data28.lean",
+      "sha256": "68f86fb756dad4faf74d3794ec4af4f837857977413c353a42d93ceeb2f9e873"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data29.lean",
+      "sha256": "ef606e9c006465457fe2ba42fb14ec81de8d8cde907aac3ac9a3ae550ff49340"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data3.lean",
+      "sha256": "51e5b53909fe98f377d474f157e64bbe51eb1b60fd689003190fdde8c9d543ad"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data30.lean",
+      "sha256": "85a244ebe2cc57c2faa182414a6de60ca20dfd588abe568ac01611d5f6e7a128"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data31.lean",
+      "sha256": "6fbb54a353bf0871e70b6e3979a4d08bb0bd815c50b290d1a2ea023d68954ec0"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data32.lean",
+      "sha256": "3bfaf3aa528dd6e95d36e893d4e371ba5553b2dd1d22d7c8f9d0ad0a24ba95cb"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data33.lean",
+      "sha256": "91e264e8d78ab68762ff8508b2862ccb4507723ea00663227d108aaaf92b26b1"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data34.lean",
+      "sha256": "7b441717c3419e78196bc6c169675d80eb1182aa55906ef1eb4320c25e60ff12"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data35.lean",
+      "sha256": "eae5ec66fe79d7ada5ee0ddf1500a18e909f971793eeea85da434b2157bd8b7a"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data36.lean",
+      "sha256": "24b6d0ef61dc820be0b325a260261e80bd61e3adb8f0f5cd85bfe41e8aff14b7"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data37.lean",
+      "sha256": "2ca9130d546f894d8238f0a58f4ac32ce41da2b9b7647db249decab60d4318cd"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data38.lean",
+      "sha256": "3a6d557e7daa16d829840607ace49e60ba159d847e38b384c6543a5882b46e6b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data39.lean",
+      "sha256": "b25d892f59ae3822229da9768c34ad4f92d9d816665755613c6929c8c5dd3f0a"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data4.lean",
+      "sha256": "0af8941e42746dfcdf0c5a9614c7bb814f27a2ff58bd7ea265dd405c3ef55702"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data40.lean",
+      "sha256": "1f9d2cf40ce8cce514628bdf4754b997b315c4d612c84375c6f074e2e7696e8b"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data41.lean",
+      "sha256": "fbfac23d1e284e2ace8df97c35662e19c6566cfcde0ae26f717160ae696be06d"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data42.lean",
+      "sha256": "c7bdfe53e186ce1b06c3931fdefd3366746eb41b5ae9eef14b323c2449bad2b8"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data43.lean",
+      "sha256": "6d4fc6df28ca3c7d2289e0447f83b4daa66519451a976102931f6c4e17d3a906"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data44.lean",
+      "sha256": "ab8079c638e0bb137cd330b56936c3821a95da31c5924d77d6c44ae790755bfc"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data45.lean",
+      "sha256": "bcb7ed06dad9640f218354e29d73c22910e71456f2076a3bf2deafa075e527b5"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data46.lean",
+      "sha256": "d0b9e57bd99d1e257ed1797396c49c8fe12f3c09b958e008804d832cc149eb9a"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data47.lean",
+      "sha256": "53f905b2aedde394a12b0eaf2cd8a6e807d622bb5c2da30db4f39a325a683d6e"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data48.lean",
+      "sha256": "c28f965d67f2697f9706d8fae7fdfb6d66da5932220ee1321982a2cf175ee905"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data49.lean",
+      "sha256": "0c9f63d00ac15530487577cd3f3e432fe10fb22d1a606db536255adfbb486297"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data5.lean",
+      "sha256": "b5331779019458cf598feffce51332de9bcc91b914bbbe5820c02924e8253d0e"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data50.lean",
+      "sha256": "c2a134fb49196edbb80c37fe7845bd5785f172f1ad7786e8301c0cf4f95822f5"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data51.lean",
+      "sha256": "cabc30831b60b8ddf792d60ba0edad9992bf2a2cade49aaf728e6df7ef820f3f"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data52.lean",
+      "sha256": "04b138db6d38379db62a72fe308fa309a04afe2f5c29d9e82daf4d73f5765d71"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data53.lean",
+      "sha256": "a187d5457498c3eb5922c41b125c7a2e6fafb0cbfd104da7b4813c591f84a1bb"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data54.lean",
+      "sha256": "ca8f1dd856a5b5aa7da7e7b9db12d769988ea7a2b8ac20de999f0f4a03969042"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data55.lean",
+      "sha256": "aae4d772b338d8f70d4dac27e09a651c9c48589fa06425c245b61acb1649de71"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data56.lean",
+      "sha256": "d867220505da3f7e5a8d7b18db05d799618af405d933ee77021e697454199382"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data57.lean",
+      "sha256": "b845edaba9d0792236397d2fcfd59e122c03ae1730bde29833d98ffe5206d960"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data58.lean",
+      "sha256": "4e7bd961050f7276a0fa46826c728e1960c56831529e8c278149a0640b1b466c"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data6.lean",
+      "sha256": "c15ad062c3c786107bc424bde790d8d70dd207ff2acce9ea92ac83aa76ca59b4"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data7.lean",
+      "sha256": "e4003489f2c8edb88c3809980c2a7b9b79fb1d6675402623159f79c61b9c957c"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data8.lean",
+      "sha256": "1caa244ab1a95098d4d94c13ca9c2169afd2ec372446ce72c34bd2b948e1a7e2"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140/Data9.lean",
+      "sha256": "9e72e90b4c73b369e52a2fa6e92aaec214af364bace0b665bcb742ce9f90ac86"
+    },
+    {
+      "path": "lean/LocalWindowUnsat/CycleBase140.lean",
+      "sha256": "c246a3d1f22fdaaee4d5103a0100365233ccbc09c668ec1d2e2b5227071a40ef"
+    }
+  ],
+  "checker_module": "LratFast",
+  "checker_object": "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\build\\758bddcc97f84b6fbaa2c693d4931cea\\LratFast.olean",
+  "checker_object_sha256": "a62a30cc4872321c4a08585ce59105a2d3aa4b8bc15ea14bf13253fcde86d05b",
+  "checker_receipt": "E:\\Snake-in-a-box\\milestones\\112-critical-sum-refinement\\data\\Refined112.LocalWindowUnsat.Sum3142.Data0-audit.json",
+  "checker_receipt_sha256": "a2e1b560bf5966d462c20ae36b4cdbd68499037888b84c5ceb28d5d285d0ac07",
+  "source_files_sha256": {
+    "milestones/140-five-cycle-window/scripts/actual-wrapper.lean.txt": "f71ad85da51a9a56089d7620d406452ec112a3c1063575a5a9c10a79e7f66bfc",
+    "milestones/140-five-cycle-window/scripts/export_short.py": "73da83d9baf9d4fca5a7217e192114c42b2331c032388bcb22583c660c8139e1",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "milestones/109-relaxed-graph-test/upstream/milestones/10-window-aggregate/scripts/gen_lean_lrat.py": "2f4b1339817194163a080468d2e404dd7d14e7c048f8fc90e0a2691b243bf384",
+    "milestones/140-five-cycle-window/data/native-base.json": "65b620b51b3bf2232347ec98ea3ebbcd853c94a322d74d64467aa93506feca4c",
+    "milestones/140-five-cycle-window/work/short/encoding.json": "eee7a09f3e00e75e3b0926c5eabcac00dc40203bf93b9e447f5d372fd57c6f7d",
+    "milestones/140-five-cycle-window/work/certificate-base/input.cnf": "65865ffd848ac195628c681cbf782ec5fb8734ac473dab3f686ae8a4ed063efd",
+    "milestones/140-five-cycle-window/work/certificate-base/trimmed.lrat": "2df45fc43c0c9accd0d89d5be6a3fb207d56873139ed66d00786e335c77841de",
+    "milestones/140-five-cycle-window/work/certificate-base/core-ids.json": "01e387a12d6b929c81f39966a423024c760234ce52711e50e0528be24a79083b",
+    "work/final_lean/LocalWindowModel.lean": "5c374d6b74cbed0ebb91f93e53de21f6e33a85f64532dca6c09f7cefe3a6a8a0",
+    "work/final_lean/LocalWindowTags.lean": "1e9aad3e4c99acf4fa01b00dcc65330a8d633826079a3d0955716ccb0f36ec71",
+    "work/final_lean/LocalWindowBridge.lean": "f4079fec8009e019d048db4b5a6764291165308352e9281d6921ffa022c65def",
+    "milestones/79-retained-edge-guards/lean/CanonicalExclusions.lean": "5d21253e72a72dc74c979e1b7be05491b3415fe56e5a497340e96e920c56780d",
+    "milestones/140-five-cycle-window/scripts/export_base.py": "d8b5fa7ae62146e441c8f022dcdbe862b4e3491fe72060c8c979048963ff9665"
+  },
+  "semantic_data_sha256": "a48d8a934f4a1f0e717536b27fe8f2a9f7021af6e2216fd207576b60e18dd0f0",
+  "export_artifacts": [
+    {
+      "path": "work/export-base/base140.cnf",
+      "sha256": "23b7f7ec03d3f3ab50451337d647f2f97ce37a0aff679a734a1656b65335c69b"
+    },
+    {
+      "path": "work/export-base/base140.lrat",
+      "sha256": "c5ff9315268b53282de4ded72fcd1849daf3589034c1e0adeda92dda259d38b1"
+    },
+    {
+      "path": "work/export-base/meta/base140.json",
+      "sha256": "7bf171f7df0414248edda6a91778b4d6b59b6dc4f1cf8ba3f0e28f966fbb8118"
+    },
+    {
+      "path": "work/export-base/source-snapshots/export_short.py",
+      "sha256": "73da83d9baf9d4fca5a7217e192114c42b2331c032388bcb22583c660c8139e1"
+    },
+    {
+      "path": "work/export-base/source-snapshots/gen_lean_lrat.py",
+      "sha256": "2f4b1339817194163a080468d2e404dd7d14e7c048f8fc90e0a2691b243bf384"
+    },
+    {
+      "path": "work/export-base/source-snapshots/gen_lean_sat.py",
+      "sha256": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd"
+    },
+    {
+      "path": "work/export-base/source-snapshots/wincert.py",
+      "sha256": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01"
+    }
+  ],
+  "active_variables": 1690,
+  "original_variables": 4253,
+  "used_extra_cycle_cuts": 0,
+  "used_counter_indices": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    9,
+    10
+  ],
+  "used_counter_kinds": {
+    "0": [
+      "ends"
+    ],
+    "1": [
+      "hi",
+      0
+    ],
+    "2": [
+      "lo",
+      0
+    ],
+    "3": [
+      "hi",
+      1
+    ],
+    "5": [
+      "hi",
+      2
+    ],
+    "6": [
+      "lo",
+      2
+    ],
+    "7": [
+      "hi",
+      3
+    ],
+    "9": [
+      "hi",
+      4
+    ],
+    "10": [
+      "lo",
+      4
+    ]
+  },
+  "seconds": 14.985000000000582,
+  "lean_started": false,
+  "scope": "Python checks and packed replay passed. Lean sources and actual-snake bridge remain unchecked until separate Lean receipts pass. No global upper bound is claimed."
+}

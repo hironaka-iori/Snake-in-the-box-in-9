@@ -1,0 +1,422 @@
+{
+  "status": "PASS_INDEPENDENT_ENCODING_AND_CORE_AUDIT",
+  "method": "Independent reconstruction with Python standard library; no project generator imports, solver, or Lean. Existing RUP replay receipt verified; proof structure scanned without rerunning RUP.",
+  "directions": [
+    0,
+    1,
+    2,
+    0,
+    3,
+    2
+  ],
+  "window": [
+    0,
+    1,
+    3,
+    7,
+    6,
+    14,
+    10
+  ],
+  "counts": [
+    3,
+    5,
+    4,
+    5,
+    3
+  ],
+  "counted_offsets": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "corner_details": [
+    {
+      "offset": 1,
+      "vertex": 1,
+      "path_directions": [
+        0,
+        1
+      ],
+      "corner_vertices": [
+        13,
+        21,
+        37,
+        69,
+        133,
+        261,
+        25,
+        41,
+        73,
+        137,
+        265,
+        49,
+        81,
+        145,
+        273,
+        97,
+        161,
+        289,
+        193,
+        321,
+        385
+      ],
+      "exact_count": 3
+    },
+    {
+      "offset": 2,
+      "vertex": 3,
+      "path_directions": [
+        1,
+        2
+      ],
+      "corner_vertices": [
+        10,
+        18,
+        34,
+        66,
+        130,
+        258,
+        27,
+        43,
+        75,
+        139,
+        267,
+        51,
+        83,
+        147,
+        275,
+        99,
+        163,
+        291,
+        195,
+        323,
+        387
+      ],
+      "exact_count": 5
+    },
+    {
+      "offset": 3,
+      "vertex": 7,
+      "path_directions": [
+        0,
+        2
+      ],
+      "corner_vertices": [
+        13,
+        21,
+        37,
+        69,
+        133,
+        261,
+        31,
+        47,
+        79,
+        143,
+        271,
+        55,
+        87,
+        151,
+        279,
+        103,
+        167,
+        295,
+        199,
+        327,
+        391
+      ],
+      "exact_count": 4
+    },
+    {
+      "offset": 4,
+      "vertex": 6,
+      "path_directions": [
+        0,
+        3
+      ],
+      "corner_vertices": [
+        0,
+        20,
+        36,
+        68,
+        132,
+        260,
+        18,
+        34,
+        66,
+        130,
+        258,
+        54,
+        86,
+        150,
+        278,
+        102,
+        166,
+        294,
+        198,
+        326,
+        390
+      ],
+      "exact_count": 5
+    },
+    {
+      "offset": 5,
+      "vertex": 14,
+      "path_directions": [
+        2,
+        3
+      ],
+      "corner_vertices": [
+        13,
+        31,
+        47,
+        79,
+        143,
+        271,
+        28,
+        44,
+        76,
+        140,
+        268,
+        62,
+        94,
+        158,
+        286,
+        110,
+        174,
+        302,
+        206,
+        334,
+        398
+      ],
+      "exact_count": 3
+    }
+  ],
+  "original_variables": 4253,
+  "original_clauses": 100253,
+  "core_clauses": 4163,
+  "proof_active_variables": 1690,
+  "native_deductions": 18606,
+  "native_hints": 1397536,
+  "extra_cycle_cuts": [],
+  "forbidden_endpoints": [],
+  "parity_restriction": false,
+  "full_tag_counts": {
+    "window": 7,
+    "deg2": 43008,
+    "degPos": 512,
+    "endSel": 512,
+    "lowEnd": 4608,
+    "endLow": 18432,
+    "first": 722,
+    "zero": 96,
+    "mono": 3122,
+    "step": 2411,
+    "over": 711,
+    "cut": 26112
+  },
+  "core_tag_counts": {
+    "window": 7,
+    "deg2": 1614,
+    "lowEnd": 489,
+    "endLow": 30,
+    "degPos": 42,
+    "endSel": 11,
+    "first": 95,
+    "mono": 1156,
+    "step": 441,
+    "over": 184,
+    "cut": 94
+  },
+  "counter_usage": [
+    {
+      "index": 0,
+      "kind": [
+        "ends"
+      ],
+      "threshold": 2,
+      "input_literals": 512,
+      "core_clause_count": 982,
+      "used": true
+    },
+    {
+      "index": 1,
+      "kind": [
+        "hi",
+        0
+      ],
+      "threshold": 3,
+      "input_literals": 21,
+      "core_clause_count": 116,
+      "used": true
+    },
+    {
+      "index": 2,
+      "kind": [
+        "lo",
+        0
+      ],
+      "threshold": 18,
+      "input_literals": 21,
+      "core_clause_count": 69,
+      "used": true
+    },
+    {
+      "index": 3,
+      "kind": [
+        "hi",
+        1
+      ],
+      "threshold": 5,
+      "input_literals": 21,
+      "core_clause_count": 156,
+      "used": true
+    },
+    {
+      "index": 4,
+      "kind": [
+        "lo",
+        1
+      ],
+      "threshold": 16,
+      "input_literals": 21,
+      "core_clause_count": 0,
+      "used": false
+    },
+    {
+      "index": 5,
+      "kind": [
+        "hi",
+        2
+      ],
+      "threshold": 4,
+      "input_literals": 21,
+      "core_clause_count": 143,
+      "used": true
+    },
+    {
+      "index": 6,
+      "kind": [
+        "lo",
+        2
+      ],
+      "threshold": 17,
+      "input_literals": 21,
+      "core_clause_count": 106,
+      "used": true
+    },
+    {
+      "index": 7,
+      "kind": [
+        "hi",
+        3
+      ],
+      "threshold": 5,
+      "input_literals": 21,
+      "core_clause_count": 119,
+      "used": true
+    },
+    {
+      "index": 8,
+      "kind": [
+        "lo",
+        3
+      ],
+      "threshold": 16,
+      "input_literals": 21,
+      "core_clause_count": 0,
+      "used": false
+    },
+    {
+      "index": 9,
+      "kind": [
+        "hi",
+        4
+      ],
+      "threshold": 3,
+      "input_literals": 21,
+      "core_clause_count": 116,
+      "used": true
+    },
+    {
+      "index": 10,
+      "kind": [
+        "lo",
+        4
+      ],
+      "threshold": 18,
+      "input_literals": 21,
+      "core_clause_count": 69,
+      "used": true
+    }
+  ],
+  "unused_counter_indices": [
+    4,
+    8
+  ],
+  "all_variable_meanings_match": true,
+  "all_counter_literals_match": true,
+  "full_cnf_byte_identity": true,
+  "core_byte_identity": true,
+  "source_files_sha256": {
+    "milestones/139-exclusion-occurrence-credit/data/exclusion-credit83/results.json": "f641bff071d86701feca3a0c80e5ee3e7f65b35e511e91029ba14813d23eb23f",
+    "milestones/140-five-cycle-window/scripts/prepare_short.py": "6d5ad99d452077e390c4856cd1fbf33e4ecbdf542de099155264fc81bcc63a71",
+    "milestones/140-five-cycle-window/scripts/probe_short.py": "9947f38cbe3f194941d17064222bdbe40389de69711b2bf14b806892db4e38ad",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "milestones/140-five-cycle-window/work/short/base.cnf": "65865ffd848ac195628c681cbf782ec5fb8734ac473dab3f686ae8a4ed063efd",
+    "milestones/140-five-cycle-window/work/short/encoding.json": "eee7a09f3e00e75e3b0926c5eabcac00dc40203bf93b9e447f5d372fd57c6f7d",
+    "milestones/109-relaxed-graph-test/upstream/milestones/10-window-aggregate/scripts/gen_lean_core.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "milestones/140-five-cycle-window/scripts/certify_base.py": "46d6a3c1f11e942ca5fc662877bdb078af0164eb70f65f9e7f5f12dba33d8d1d",
+    "milestones/140-five-cycle-window/work/certificate-base/input.cnf": "65865ffd848ac195628c681cbf782ec5fb8734ac473dab3f686ae8a4ed063efd",
+    "milestones/140-five-cycle-window/work/certificate-base/certify.exact.py": "46d6a3c1f11e942ca5fc662877bdb078af0164eb70f65f9e7f5f12dba33d8d1d",
+    "milestones/140-five-cycle-window/work/certificate-base/gen_lean_core.exact.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "milestones/140-five-cycle-window/work/certificate-base/stdout.txt": "e78eb858cfc756097d89bc504bb48af34e9c4e560777d5f241e7796da2d5b18c",
+    "milestones/140-five-cycle-window/work/certificate-base/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "milestones/140-five-cycle-window/work/certificate-base/raw.lrat": "c3a12219c1dca0f056b2bd53c9eae90ed9c08b97b42900e5caf6add2aa8d7114",
+    "milestones/140-five-cycle-window/work/certificate-base/trimmed.lrat": "2df45fc43c0c9accd0d89d5be6a3fb207d56873139ed66d00786e335c77841de",
+    "milestones/140-five-cycle-window/work/certificate-base/core-ids.json": "01e387a12d6b929c81f39966a423024c760234ce52711e50e0528be24a79083b",
+    "milestones/140-five-cycle-window/work/certificate-base/core.cnf": "2f1a4671573b4d1ef1f3ad9c681076143c2224e771413c0ce02f9ef4249ac6e6",
+    "milestones/140-five-cycle-window/work/certificate-base/core-premises.json": "978f77878a78e950c4da2b9408e6adc0a8299913462dd0a04f2bacc25a709a00",
+    "milestones/140-five-cycle-window/work/certificate-base/replay.json": "4d5311920426370c4ca7ba685f7d15f1b7239afb409287304ec21827e77db54b"
+  },
+  "reviewed_files_sha256": {
+    "milestones/140-five-cycle-window/scripts/prepare_short.py": "6d5ad99d452077e390c4856cd1fbf33e4ecbdf542de099155264fc81bcc63a71",
+    "milestones/140-five-cycle-window/work/short/encoding.json": "eee7a09f3e00e75e3b0926c5eabcac00dc40203bf93b9e447f5d372fd57c6f7d",
+    "milestones/140-five-cycle-window/data/native-base.json": "65b620b51b3bf2232347ec98ea3ebbcd853c94a322d74d64467aa93506feca4c",
+    "milestones/140-five-cycle-window/work/certificate-base/replay.json": "4d5311920426370c4ca7ba685f7d15f1b7239afb409287304ec21827e77db54b",
+    "work/final_lean/LocalWindowTags.lean": "1e9aad3e4c99acf4fa01b00dcc65330a8d633826079a3d0955716ccb0f36ec71"
+  },
+  "scope": "Necessary exact-count encoding and original-core provenance checked. Native replay is verified by its preserved receipt; Lean actual-snake exclusion remains the parent verification step. No new global bound or strengthened count statement is claimed.",
+  "unused_counter_registers_absent_from_core_and_proof": true,
+  "candidate_specialization": {
+    "bounds": [
+      [
+        3,
+        3
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        3,
+        3
+      ]
+    ],
+    "status": "CANDIDATE_SEPARATE_LEAN_SEMANTICS_REQUIRED",
+    "reason": "Lower-bound counter indices4 and8 occur in no retained core clause; none of their registers occur in the retained proof.",
+    "sufficient_semantic_change": "Use relaxed bounds at offsets2 and4 and replace unused counter entries4 and8 by dfltCtr = empty literal list, threshold2, endpoint kind. Preserve counter indices and every used entry. Alternatively set their lower-bound thresholds to21 with zero lower bounds. Run the generic semantic check and actual-snake bridge against the unchanged core.",
+    "caveat": "The exact-count checkAll theorem validates every counter and cannot simply be reused with weaker hypotheses. No strengthening has been Lean-checked by this audit."
+  }
+}

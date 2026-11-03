@@ -1,0 +1,160 @@
+{
+  "status": "PASS_SAVED_CYCLE_POSITION_CHECK",
+  "rows": [
+    {
+      "profile": "completed",
+      "edge": 308566,
+      "matches": [
+        {
+          "placement": 1,
+          "reverse": false,
+          "original_directions": [
+            0,
+            3,
+            4,
+            0,
+            5,
+            4
+          ],
+          "counts": [
+            3,
+            5,
+            4,
+            5,
+            3
+          ],
+          "exact_match": true,
+          "weakened_match": true
+        },
+        {
+          "placement": 1,
+          "reverse": true,
+          "original_directions": [
+            4,
+            5,
+            0,
+            4,
+            3,
+            0
+          ],
+          "counts": [
+            3,
+            5,
+            4,
+            5,
+            3
+          ],
+          "exact_match": true,
+          "weakened_match": true
+        }
+      ]
+    },
+    {
+      "profile": "completed",
+      "edge": 3806548,
+      "matches": [
+        {
+          "placement": 0,
+          "reverse": false,
+          "original_directions": [
+            2,
+            3,
+            4,
+            2,
+            5,
+            4
+          ],
+          "counts": [
+            3,
+            5,
+            4,
+            5,
+            3
+          ],
+          "exact_match": true,
+          "weakened_match": true
+        },
+        {
+          "placement": 0,
+          "reverse": true,
+          "original_directions": [
+            4,
+            5,
+            2,
+            4,
+            3,
+            2
+          ],
+          "counts": [
+            3,
+            5,
+            4,
+            5,
+            3
+          ],
+          "exact_match": true,
+          "weakened_match": true
+        }
+      ]
+    },
+    {
+      "profile": "completed",
+      "edge": 2195856,
+      "matches": []
+    },
+    {
+      "profile": "completed",
+      "edge": 163743,
+      "matches": []
+    },
+    {
+      "profile": "completed",
+      "edge": 2303753,
+      "matches": []
+    },
+    {
+      "profile": "conditional_floor18",
+      "edge": 1274753,
+      "matches": []
+    },
+    {
+      "profile": "conditional_floor18",
+      "edge": 3051941,
+      "matches": []
+    },
+    {
+      "profile": "conditional_floor18",
+      "edge": 992121,
+      "matches": []
+    },
+    {
+      "profile": "conditional_floor18",
+      "edge": 1273780,
+      "matches": []
+    },
+    {
+      "profile": "conditional_floor18",
+      "edge": 3047601,
+      "matches": []
+    },
+    {
+      "profile": "conditional_floor18",
+      "edge": 990202,
+      "matches": []
+    }
+  ],
+  "completed_exact_edges": [
+    308566,
+    3806548
+  ],
+  "completed_weakened_edges": [
+    308566,
+    3806548
+  ],
+  "conditional_profile_matched_edges": [],
+  "source_files_sha256": {
+    "milestones/139-exclusion-occurrence-credit/data/exclusion-credit83/results.json": "f641bff071d86701feca3a0c80e5ee3e7f65b35e511e91029ba14813d23eb23f",
+    "milestones/140-five-cycle-window/scripts/check_cycle_positions.py": "4f581568e78549a7832d73e7d0ccc8083b0a2176625d9d12b81eb6a2afa756b8"
+  },
+  "scope": "Only the saved five- and six-edge cycles were checked. Exact exclusion is native-replay verified with Lean pending; weakening also needs a checked semantic specialization. No recomputed graph minimum or upper bound is asserted."
+}

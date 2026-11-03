@@ -1,0 +1,79 @@
+{
+  "status": "PASS_COMPLETE_NATIVE_RUP_REPLAY",
+  "started_utc": "2026-11-03T15:54:10.596230+00:00",
+  "script_sha256": "46d6a3c1f11e942ca5fc662877bdb078af0164eb70f65f9e7f5f12dba33d8d1d",
+  "solver_timeout_seconds": 60,
+  "replay_hint_limit": 2000000,
+  "solver_runs": 1,
+  "lean_export_started": false,
+  "lean_started": false,
+  "source_files_sha256": {
+    "milestones/140-five-cycle-window/work/short/base.cnf": "65865ffd848ac195628c681cbf782ec5fb8734ac473dab3f686ae8a4ed063efd",
+    "milestones/140-five-cycle-window/work/short/encoding.json": "eee7a09f3e00e75e3b0926c5eabcac00dc40203bf93b9e447f5d372fd57c6f7d",
+    "milestones/109-relaxed-graph-test/upstream/milestones/10-window-aggregate/scripts/gen_lean_core.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "milestones/140-five-cycle-window/scripts/certify_base.py": "46d6a3c1f11e942ca5fc662877bdb078af0164eb70f65f9e7f5f12dba33d8d1d"
+  },
+  "solver_path": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+  "solver_sha256": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+  "initial_resources": {
+    "free_bytes": 1737793536
+  },
+  "variables": 4253,
+  "original_clauses": 100253,
+  "input_sha256": "65865ffd848ac195628c681cbf782ec5fb8734ac473dab3f686ae8a4ed063efd",
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+    "-q",
+    "--lrat",
+    "--no-binary",
+    "--seed=1",
+    "E:\\Snake-in-a-box\\milestones\\140-five-cycle-window\\work\\certificate-base\\input.cnf",
+    "E:\\Snake-in-a-box\\milestones\\140-five-cycle-window\\work\\certificate-base\\raw.lrat"
+  ],
+  "solver_pid": 50260,
+  "exit_code": 20,
+  "solver_seconds": 10.640999999999622,
+  "stdout_sha256": "e78eb858cfc756097d89bc504bb48af34e9c4e560777d5f241e7796da2d5b18c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "raw_sha256": "c3a12219c1dca0f056b2bd53c9eae90ed9c08b97b42900e5caf6add2aa8d7114",
+  "raw_bytes": 14599179,
+  "trim_sha256": "2df45fc43c0c9accd0d89d5be6a3fb207d56873139ed66d00786e335c77841de",
+  "core_sha256": "2f1a4671573b4d1ef1f3ad9c681076143c2224e771413c0ce02f9ef4249ac6e6",
+  "core_ids_sha256": "01e387a12d6b929c81f39966a423024c760234ce52711e50e0528be24a79083b",
+  "core_clauses": 4163,
+  "lemmas": 18606,
+  "hints": 1397536,
+  "core_premises": {
+    "extra_cycle_cuts": [],
+    "interpretation": "Dependencies of this trimmed proof only. Original semantic tags identify the used count bounds; no minimality is claimed."
+  },
+  "replay_started": true,
+  "replay": {
+    "status": "PASS_COMPLETE_NATIVE_RUP_REPLAY",
+    "lemmas": 18606,
+    "hints": 1397536,
+    "derived_literal_occurrences": 302160,
+    "max_step_hints": 908,
+    "original_ids_preserved": true,
+    "original_clause_literal_multiplicity_preserved": true,
+    "every_trimmed_step_checked": true,
+    "final_empty_clause_checked": true,
+    "core_inputs_used": 4163,
+    "seconds": 0.8119999999998981
+  },
+  "finished_utc": "2026-11-03T15:54:26.136628+00:00",
+  "preserved_files_sha256": {
+    "input.cnf": "65865ffd848ac195628c681cbf782ec5fb8734ac473dab3f686ae8a4ed063efd",
+    "certify.exact.py": "46d6a3c1f11e942ca5fc662877bdb078af0164eb70f65f9e7f5f12dba33d8d1d",
+    "gen_lean_core.exact.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "stdout.txt": "e78eb858cfc756097d89bc504bb48af34e9c4e560777d5f241e7796da2d5b18c",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw.lrat": "c3a12219c1dca0f056b2bd53c9eae90ed9c08b97b42900e5caf6add2aa8d7114",
+    "trimmed.lrat": "2df45fc43c0c9accd0d89d5be6a3fb207d56873139ed66d00786e335c77841de",
+    "core-ids.json": "01e387a12d6b929c81f39966a423024c760234ce52711e50e0528be24a79083b",
+    "core.cnf": "2f1a4671573b4d1ef1f3ad9c681076143c2224e771413c0ce02f9ef4249ac6e6",
+    "core-premises.json": "978f77878a78e950c4da2b9408e6adc0a8299913462dd0a04f2bacc25a709a00",
+    "replay.json": "4d5311920426370c4ca7ba685f7d15f1b7239afb409287304ec21827e77db54b"
+  },
+  "scope": "One fixed native solver run on the exact prepared input. A complete independent Python RUP replay certifies the finite CNF contradiction only. Lean replay and actual-snake clause interpretation remain pending; no new global bound."
+}

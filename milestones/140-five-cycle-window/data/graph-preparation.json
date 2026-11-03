@@ -1,0 +1,138 @@
+{
+  "status": "PREPARED_NOT_EXECUTED_PROOF_REQUIRED",
+  "source_sha256": "c38a19a4e6288f8c1e88bbc9c004525527bc613339683157569c88f0d0e244c7",
+  "prepare_sha256": "f3dd3f9850dceb43dfb64b9430779a3050afaa89795cde2f36c1ff1e49eb9e1d",
+  "evaluate_sha256": "ef83027eb70f0c2dd2a6e519d2cee78bcfe72e1559b6c04134d51dd5f55e6b42",
+  "profiles": [
+    "completed",
+    "conditional_floor18"
+  ],
+  "credit": "83/3",
+  "weight_multiplier": 3,
+  "occurrence_allowance": 24,
+  "candidate": {
+    "directions": [
+      0,
+      1,
+      2,
+      0,
+      3,
+      2
+    ],
+    "bounds": [
+      [
+        3,
+        3
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        3,
+        3
+      ]
+    ],
+    "placements": [
+      0,
+      1
+    ],
+    "orientations": [
+      "forward",
+      "reverse"
+    ],
+    "all_matching_symbols_below6": true
+  },
+  "checks": {
+    "ast_parsed": true,
+    "five_count_cases": 7776,
+    "direction_placement_cases": 1010,
+    "missing_gate_receipt_rejected": true,
+    "gate_before_graph_import": true,
+    "full_graph_run": false,
+    "lean_run": false,
+    "solver_run": false
+  },
+  "predecessor_saved_cycles": [
+    {
+      "profile": "completed",
+      "removed": [
+        308566,
+        3806548
+      ],
+      "matches": [
+        {
+          "row": 0,
+          "edge": 308566,
+          "placement": 1,
+          "reverse": false,
+          "counts": [
+            3,
+            5,
+            4,
+            5,
+            3
+          ]
+        },
+        {
+          "row": 0,
+          "edge": 308566,
+          "placement": 1,
+          "reverse": true,
+          "counts": [
+            3,
+            5,
+            4,
+            5,
+            3
+          ]
+        },
+        {
+          "row": 1,
+          "edge": 3806548,
+          "placement": 0,
+          "reverse": false,
+          "counts": [
+            3,
+            5,
+            4,
+            5,
+            3
+          ]
+        },
+        {
+          "row": 1,
+          "edge": 3806548,
+          "placement": 0,
+          "reverse": true,
+          "counts": [
+            3,
+            5,
+            4,
+            5,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "profile": "conditional_floor18",
+      "removed": [],
+      "matches": []
+    }
+  ],
+  "inputs_sha256": {
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/139-exclusion-occurrence-credit/data/exclusion-credit83/results.json": "f641bff071d86701feca3a0c80e5ee3e7f65b35e511e91029ba14813d23eb23f"
+  },
+  "proof_gate": "Requires future data/proof-completion.json with PASS and weak_actual_theorem source and successful audit receipt hashes; no completion file is created.",
+  "scope": "Preparation only. The weak actual theorem is required before execution. Both inherited profiles, odd-length restrictions, hypothetical floors, and graph-to-snake obligations remain."
+}

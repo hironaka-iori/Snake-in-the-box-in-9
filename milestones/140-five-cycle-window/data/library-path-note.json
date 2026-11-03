@@ -1,0 +1,10 @@
+{
+  "status": "FINAL_WRAPPER_NEEDS_EXPLICIT_MATHLIB_PATH",
+  "attempt": "Directory junction under build-base/Mathlib",
+  "error": "New-Item -ItemType Junction returned Incorrect function; no alias was established.",
+  "current_driver_unchanged": true,
+  "proof_sources_unchanged": true,
+  "library_bytes_unchanged": true,
+  "next_action": "Let the live replay finish its120 CNF/semantic/UNSAT modules. If it stops before ActualBase140 because Mathlib.Tactic is absent from its explicit dependency-search list, run scripts/check_module.py ActualBase140, which supplies the real Mathlib path. Then run Weak140Actual after Weak140Semantics passes. Preserve the original driver record and all120 receipts; never rerun the solver or completed replay.",
+  "alias_path_exists": false
+}

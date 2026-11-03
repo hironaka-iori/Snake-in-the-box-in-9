@@ -1,64 +1,51 @@
-# Continue after milestone139
+# Continue after milestone 140
 
-Work in E:/Snake-in-a-box, use the requested research skill, and define only
-essential repeatedly used quantities. Preserve all three authors, the full
-paper preamble/hypersetup and unrelated .gitignore/milestone50 changes.
-Keep the existing D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex
-editor and paper/snake9_research.tex synchronized. No new editor tab.
-Fetch each round, preserve exact evidence, stage only a checkpoint manifest,
-commit, push and verify. Goal ACTIVE; previous turn PROGRESS.
+Work in E:/Snake-in-a-box with the requested research skill. Preserve the
+three authors, paper preamble/hypersetup and unrelated .gitignore/milestone50
+changes. Use only necessary notation. Keep the existing editor source and
+paper/snake9_research.tex identical. Fetch, preserve exact evidence, stage
+only a verified manifest, commit, push and verify each round. Goal ACTIVE.
 
-Read milestone139/MATHEMATICAL_NOTE.md, data/exclusion-credit83/results.json,
-data/result-review.json and the three new Lean receipts. This round's
-experiment finished; do not restart it. There is no live139 job.
-The exact graph has4661772 edges after deleting only992157. Uniform credit
-83/3 on8846 exact suffix events yields means2446/5 and496 with ranges2973/5
-and602. Comparisons5520661/23446 and552097/2348 both exceed235.
-All-edge potentials were checked by the evaluator; independent review checks
-saved cycles/rows/potentials/arithmetic and does not repeat that entire scan.
+The canonical012032 theorem is complete: counts1,3,5 equal3,4,3 force
+count2>=6 OR count4>=6. Read140/MATHEMATICAL_NOTE.md, proof-completion.json,
+Weak140Actual and its receipt.123 modules comprise the checked proof closure;
+ZeroCredit140 is a separate checked arithmetic result. Do not rerun the
+fixed native proof or completed contradiction. Original replay's final
+Mathlib lookup limitation was handled by the separate checker; preserve logs.
 
-Both new attaining cycles receive zero occurrence credit. Lean proves that
-any nonnegative uniform credit, allowance and range cannot make the completed
-comparison reach235 or the additional-share comparison reach234, given
-their respective mean caps2446/5 and496. For allowance24 and the completed
-four-/five-cycle caps, the arithmetic relaxation minimum is2757328/11723,
-attained arithmetically atC12/5,mu2446/5,R0. No graph potential attaining this
-range is claimed. Credit139 separately transfers the clipped event subset
-to the actual24-window theorem. All3 modules/6reports passed standard axioms.
+NEXT SELECTED TASK: test zero occurrence credit after applying this theorem.
+Both earlier binding completed cycles are removed: the old four-cycle has
+counts35443, the new five-cycle35453. The additional-share six-cycle survives.
+For mean496 and C=0, rangeR<632 suffices for comparison<235. The old range602
+uses C=83/3, so verify every edge under the new weights. Its validity at zero
+credit is unknown. Compare BOTH profiles in the same new experiment.
 
-NEXT SELECTED ROUTE: ordinary local feasibility of012032 with EXACT five
-counts(3,5,4,5,3). Relevant pair sum10; no endpoint theorem currently covers
-it. Start a bounded necessary full-cube model, allow up to2 endpoints
-without location or parity restrictions, and separate cycle-only SAT models
-from actual paths. Reuse the pinned generic count and cycle encoders from138.
-An UNSAT result needs a preserved certificate and actual-snake interpretation.
-An actual SAT witness would refute ordinary exclusion and should guide a
-subsequent endpoint or empty-square test. Do not assume its geometry.
+The140/scripts/prepare_graph.py and evaluate_graph.py are prepared for the
+old C=83/3 and protected by a proof-completion gate. They reproduce139's
+removal set and both exact weight hashes before deletion, check both count
+placements and orientations, and keep all inherited hypotheses. Derive
+new141 files for zero credit; preserve140 sources/hashes. The full graph
+has not been rerun in140. Small recognition checks passed.
 
-The new completed5cycle edges are308566,3806548,2195856,163743,2303753.
-Firstrowword012034054, sixcounts335453, suffix012032/fivecounts35453.
-All135 saved actual snakes were revalidated;0 exact matches, despite136
-suffix shape hits. See critical-witness-screen.json. The full-nine row is
-a narrower fallback if the six-word condition is feasible.
+Hypotheses still include earlier unproved count sums, hypothetical0123104
+six-floor25, odd-length pair floor9, and extra share floors for the additional
+profile. These calculations alone are not actual-snake upper bounds.
+Even-length reasoning and the complete graph-to-snake proof remain separate.
+The maintained interval191–235 and unresolved196 persist.
 
-The new additional-share6cycle edges are1274753,3051941,992121,1273780,
-3047601,990202. Their exact rows are in the graph result. Do not conflate
-profiles or treat count symbol6 as exact. The old138 cap(3,3,3,5,2) does
-not match either new cycle and is not selected for an expensive Lean batch.
+The exact native proof has18606 deductions,1397536 hints and4163 core inputs.
+The two unused lower counters were replaced by empty endpoint counters;
+all used meanings and the UNSAT CNF are unchanged. No extra cycle cuts or
+endpoint-location assumptions were added. See independent-semantics audit.
 
-Inherited comparison assumptions remain: odd-length pair floor9, hypothetical
-0123104 six-floor25, earlier unproved count sums, and extra share floors for
-the additional profile. An even-length upper bound does not follow from
-the odd-length comparison. Complete graph-to-snake/potential obligations
-remain distinct. The maintained interval191–235 and unresolved196 persist.
+Paper targeted revision140, no new definitions; last full136, next full146.
+Compiler/PDF status must be read from140/data/latex-compilation.json.
+Build objects remain local and their hashes are in receipts; Git retains
+source and certificate evidence. Never mistake a local cached object for
+an independently rebuilt dependency closure.
 
-Paper targeted update139, SHA recorded in paper-revision.json; no new
-definitions, unchanged authors/preamble. Source checks pass; built-in
-compiler failed before TeX. Last full revision136; next full146.
-
-Milestone115 PID39044 was observed LIVE at1056/1397. Verify current process
-command before acting; never duplicate it.104 stopped,122 and129 completed.
-Lean gate>=1.5GiB free and at most2 existing Lean processes; fullgraph>=3GiB,
-no concurrent fullgraph. Use exact source hashes and preserve all attempts.
-Historical base commitd59f82f7d30c348d768c90edf56754c5bc877e39.
-The new139 commit is identified by Git history/checkpoint manifest.
+Milestone115 driver PID39044 was observed live at1095/1397 this round.
+Verify its current command before any action; never duplicate it.104 stopped,
+122 and129 completed. Lean needs>=1.5GiB free and at most2 existing Lean
+processes; full graph needs>=3GiB and no other full-graph job. Preserve every
+attempt and any new failures. Base commit8cc94035c72589d8d70edc31c576260d0cbef1d0.
