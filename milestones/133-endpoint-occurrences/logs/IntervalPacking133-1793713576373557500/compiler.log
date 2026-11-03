@@ -1,0 +1,22 @@
+E:\Snake-in-a-box\milestones\133-endpoint-occurrences\lean\IntervalPacking133.lean:112:6: error: unsolved goals
+case neg
+α : Type u_1
+inst✝ : DecidableEq α
+label : ℕ → α
+I : Finset ℕ
+hne : I.Nonempty
+hsep✝ : ∀ u ∈ I, ∀ v ∈ I, u < v → label u ≠ label v → u + 3 ≤ v
+J : Finset ℕ
+a : ℕ
+hmax : ∀ x ∈ ∅, x < a
+ih :
+  ∅.Nonempty →
+    (∀ u ∈ ∅, ∀ v ∈ ∅, u < v → label u ≠ label v → u + 3 ≤ v) →
+      #∅ + 2 * #(image label ∅) + 1 ≤ #(∅.biUnion fun r => Icc r (r + 3))
+hJ : (insert a ∅).Nonempty
+hsep : ∀ u ∈ insert a ∅, ∀ v ∈ insert a ∅, u < v → label u ≠ label v → u + 3 ≤ v
+ha : a ∉ ∅
+hs : ¬∅.Nonempty
+⊢ 4 ≤ a + 3 + 1 - a
+'Snake9.IntervalPacking133.interval_union_lower' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.IntervalPacking133.numeric_bound' depends on axioms: [propext, Quot.sound]

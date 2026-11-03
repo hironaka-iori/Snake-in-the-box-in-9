@@ -1,0 +1,124 @@
+import Mathlib.Data.Finset.Max
+import Mathlib.Data.Finset.Union
+import Mathlib.Order.Interval.Finset.Nat
+import Mathlib.Tactic
+
+namespace Snake9.IntervalPacking133
+open Finset
+
+set_option maxHeartbeats 2000000
+
+theorem interval_union_lower {α : Type*} [DecidableEq α]
+    (label : Nat → α) (I : Finset Nat) (hne : I.Nonempty)
+    (hsep : ∀ u ∈ I, ∀ v ∈ I, u < v → label u ≠ label v → u+3 ≤ v) :
+    I.card + 2*(I.image label).card + 1 ≤
+      (I.biUnion (fun r => Finset.Icc r (r+3))).card := by
+  have hall : ∀ J : Finset Nat, J.Nonempty →
+      (∀ u ∈ J, ∀ v ∈ J, u < v → label u ≠ label v → u+3 ≤ v) →
+      J.card + 2*(J.image label).card + 1 ≤
+        (J.biUnion (fun r => Finset.Icc r (r+3))).card := by
+    intro J
+    refine Finset.induction_on_max J ?_ ?_
+    · intro hJ
+      exact False.elim (Finset.not_nonempty_empty hJ)
+    · intro a s hmax ih hJ hsep
+      have ha : a ∉ s := by
+        intro ha
+        exact Nat.lt_irrefl a (hmax a ha)
+      by_cases hs : s.Nonempty
+      · have hsep_s : ∀ u ∈ s, ∀ v ∈ s,
+            u < v → label u ≠ label v → u+3 ≤ v := by
+          intro u hu v hv huv hlabel
+          exact hsep u (mem_insert_of_mem hu) v (mem_insert_of_mem hv) huv hlabel
+        have hold := ih hs hsep_s
+        let U := s.biUnion (fun r => Finset.Icc r (r+3))
+        let V := (insert a s).biUnion (fun r => Finset.Icc r (r+3))
+        have hsub : U ⊆ V := by
+          intro x hx
+          obtain ⟨r,hr,hx⟩ := mem_biUnion.mp hx
+          exact mem_biUnion.mpr ⟨r,mem_insert_of_mem hr,hx⟩
+        have htail : ∀ x, a ≤ x → x ≤ a+3 → x ∈ V := by
+          intro x hlo hhi
+          exact mem_biUnion.mpr ⟨a,mem_insert_self _ _,mem_Icc.mpr ⟨hlo,hhi⟩⟩
+        have hcardI : (insert a s).card = s.card+1 := card_insert_of_not_mem ha
+        change s.card + 2*(s.image label).card+1 ≤ U.card at hold
+        change (insert a s).card + 2*((insert a s).image label).card+1 ≤ V.card
+        by_cases hlabel : label a ∈ s.image label
+        · have hbound : ∀ x ∈ U, x ≤ a+2 := by
+            intro x hx
+            obtain ⟨r,hr,hxr⟩ := mem_biUnion.mp hx
+            have hri := hmax r hr
+            have hxi := (mem_Icc.mp hxr).2
+            omega
+          have hnew : a+3 ∉ U := by
+            intro hnew
+            have := hbound (a+3) hnew
+            omega
+          have hsubset : insert (a+3) U ⊆ V := by
+            intro x hx
+            rcases mem_insert.mp hx with rfl | hx
+            · exact htail _ (by omega) (by omega)
+            · exact hsub hx
+          have hmore := card_le_card hsubset
+          rw [card_insert_of_not_mem hnew] at hmore
+          have himage : (insert a s).image label = s.image label := by
+            rw [image_insert,insert_eq_of_mem hlabel]
+          rw [hcardI,himage]
+          omega
+        · have hbound : ∀ x ∈ U, x ≤ a := by
+            intro x hx
+            obtain ⟨r,hr,hxr⟩ := mem_biUnion.mp hx
+            have hdiff : label r ≠ label a := by
+              intro heq
+              exact hlabel (mem_image.mpr ⟨r,hr,heq⟩)
+            have hgap := hsep r (mem_insert_of_mem hr) a (mem_insert_self _ _)
+              (hmax r hr) hdiff
+            have hxi := (mem_Icc.mp hxr).2
+            omega
+          have h1 : a+1 ∉ U := by
+            intro hx
+            have := hbound (a+1) hx
+            omega
+          have h2 : a+2 ∉ U := by
+            intro hx
+            have := hbound (a+2) hx
+            omega
+          have h3 : a+3 ∉ U := by
+            intro hx
+            have := hbound (a+3) hx
+            omega
+          have h2' : a+2 ∉ insert (a+3) U := by
+            simp only [mem_insert,not_or]
+            exact ⟨by omega,h2⟩
+          have h1' : a+1 ∉ insert (a+2) (insert (a+3) U) := by
+            simp only [mem_insert,not_or]
+            exact ⟨by omega,⟨by omega,h1⟩⟩
+          have hsubset : insert (a+1) (insert (a+2) (insert (a+3) U)) ⊆ V := by
+            intro x hx
+            rcases mem_insert.mp hx with rfl | hx
+            · exact htail _ (by omega) (by omega)
+            rcases mem_insert.mp hx with rfl | hx
+            · exact htail _ (by omega) (by omega)
+            rcases mem_insert.mp hx with rfl | hx
+            · exact htail _ (by omega) (by omega)
+            · exact hsub hx
+          have hmore := card_le_card hsubset
+          rw [card_insert_of_not_mem h1',card_insert_of_not_mem h2',
+            card_insert_of_not_mem h3] at hmore
+          have himage : ((insert a s).image label).card = (s.image label).card+1 := by
+            rw [image_insert,card_insert_of_not_mem hlabel]
+          rw [hcardI,himage]
+          omega
+      · have hempty : s = ∅ := Finset.not_nonempty_iff_eq_empty.mp hs
+        subst s
+        simp [Nat.card_Icc]
+        omega
+  exact hall I hne hsep
+
+theorem numeric_bound (n q : Nat) (hq : q ≤ 8)
+    (h : n+2*q+1 ≤ 7*q-q*(q-1)/2+2) : n ≤ 16 := by
+  interval_cases q <;> norm_num at h <;> omega
+
+#print axioms interval_union_lower
+#print axioms numeric_bound
+end Snake9.IntervalPacking133

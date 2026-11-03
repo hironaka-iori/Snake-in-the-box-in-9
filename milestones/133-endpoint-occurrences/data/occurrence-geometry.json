@@ -1,0 +1,443 @@
+{
+  "status": "WRITTEN_GEOMETRIC_BOUND_WITH_BOUNDED_NATIVE_CHECKS",
+  "created_utc": "2026-11-03T13:50:50.918356+00:00",
+  "result": {
+    "one_endpoint_max": 12,
+    "without_counted_boundary_window_max": 11,
+    "formula": "W <= 11 + delta",
+    "delta": "1 exactly when a counted window includes the assigned endpoint as a boundary; otherwise 0",
+    "lean_checked": false,
+    "sharpness_asserted": false,
+    "new_global_length_bound": false
+  },
+  "scope": "Actual induced paths in Q9; distinct fitting canonical 012032 window starts assigned to one endpoint at distance two from both centres; pair <=9 ensures such an assignment via milestone132.",
+  "source_pins": {
+    "milestones/132-odd-pair-endpoint/lean/ActualEndpoint132.lean": {
+      "sha256": "573b0366c7dd40f141634f8721d49e64710b6677ba4c9a4ca33ef6704c5dc9bf",
+      "bytes": 2701
+    },
+    "milestones/132-odd-pair-endpoint/data/ActualEndpoint132-audit.json": {
+      "sha256": "2dd716c8a26e25d243c6c0c22c8b2ca038240fab62a5c59a5dd8fc40777a5dfc",
+      "bytes": 68208
+    },
+    "milestones/132-odd-pair-endpoint/audit/endpoint-core-review.md": {
+      "sha256": "6ce1e6f34d273934be69aaca6ca982f932484f08988cc0a82c5c53b5984fbbbd",
+      "bytes": 6707
+    },
+    "milestones/132-odd-pair-endpoint/data/endpoint-core-review.json": {
+      "sha256": "173c5f19df6dccb6c4a86cc5386106430236d1080124d014928fd0745e836008",
+      "bytes": 141382
+    }
+  },
+  "prior_theorem_receipt_status": "PASS",
+  "prior_theorem_receipt_source_hash_matches": true,
+  "normalization_checks": {
+    "all_vertices_tested": 512,
+    "common_sphere": [
+      0,
+      5,
+      10,
+      15,
+      18,
+      23,
+      34,
+      39,
+      66,
+      71,
+      130,
+      135,
+      258,
+      263
+    ],
+    "forbidden_by_internal_degree": [
+      5,
+      15,
+      23,
+      39,
+      71,
+      135,
+      263
+    ],
+    "allowed_geometry": [
+      {
+        "endpoint": 0,
+        "alternate_supports": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "anchor": 1,
+        "boundary": true
+      },
+      {
+        "endpoint": 10,
+        "alternate_supports": [
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "anchor": 3,
+        "boundary": true
+      },
+      {
+        "endpoint": 18,
+        "alternate_supports": [
+          [
+            1,
+            4
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "anchor": 4,
+        "boundary": false
+      },
+      {
+        "endpoint": 34,
+        "alternate_supports": [
+          [
+            1,
+            5
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "anchor": 5,
+        "boundary": false
+      },
+      {
+        "endpoint": 66,
+        "alternate_supports": [
+          [
+            1,
+            6
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ]
+        ],
+        "anchor": 6,
+        "boundary": false
+      },
+      {
+        "endpoint": 130,
+        "alternate_supports": [
+          [
+            1,
+            7
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ]
+        ],
+        "anchor": 7,
+        "boundary": false
+      },
+      {
+        "endpoint": 258,
+        "alternate_supports": [
+          [
+            1,
+            8
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            8
+          ]
+        ],
+        "anchor": 8,
+        "boundary": false
+      }
+    ],
+    "reversal_canonical_shape": [
+      0,
+      1,
+      2,
+      0,
+      3,
+      2
+    ]
+  },
+  "integer_reduction": {
+    "assumed_X_min": 13,
+    "k_upper_justification": "First inequality and 7*a-C(a,2)<=28 imply k<=8.",
+    "a_range": [
+      1,
+      7
+    ],
+    "k_range": "a through 8",
+    "t_range": "0 through 7*a-C(a,2)",
+    "cases_surviving_both_inequalities": [
+      [
+        5,
+        5,
+        3,
+        13,
+        14
+      ]
+    ],
+    "rows": [
+      {
+        "a": 1,
+        "first_inequality_eligible": []
+      },
+      {
+        "a": 2,
+        "first_inequality_eligible": []
+      },
+      {
+        "a": 3,
+        "first_inequality_eligible": [
+          {
+            "k": 3,
+            "t": 0,
+            "first": 13,
+            "second": 8
+          }
+        ]
+      },
+      {
+        "a": 4,
+        "first_inequality_eligible": [
+          {
+            "k": 4,
+            "t": 0,
+            "first": 15,
+            "second": 6
+          },
+          {
+            "k": 4,
+            "t": 1,
+            "first": 14,
+            "second": 9
+          },
+          {
+            "k": 4,
+            "t": 2,
+            "first": 13,
+            "second": 12
+          },
+          {
+            "k": 5,
+            "t": 0,
+            "first": 13,
+            "second": 7
+          }
+        ]
+      },
+      {
+        "a": 5,
+        "first_inequality_eligible": [
+          {
+            "k": 5,
+            "t": 0,
+            "first": 16,
+            "second": 2
+          },
+          {
+            "k": 5,
+            "t": 1,
+            "first": 15,
+            "second": 6
+          },
+          {
+            "k": 5,
+            "t": 2,
+            "first": 14,
+            "second": 10
+          },
+          {
+            "k": 5,
+            "t": 3,
+            "first": 13,
+            "second": 14
+          },
+          {
+            "k": 6,
+            "t": 0,
+            "first": 14,
+            "second": 2
+          },
+          {
+            "k": 6,
+            "t": 1,
+            "first": 13,
+            "second": 7
+          }
+        ]
+      },
+      {
+        "a": 6,
+        "first_inequality_eligible": [
+          {
+            "k": 6,
+            "t": 0,
+            "first": 16,
+            "second": -4
+          },
+          {
+            "k": 6,
+            "t": 1,
+            "first": 15,
+            "second": 1
+          },
+          {
+            "k": 6,
+            "t": 2,
+            "first": 14,
+            "second": 6
+          },
+          {
+            "k": 6,
+            "t": 3,
+            "first": 13,
+            "second": 11
+          },
+          {
+            "k": 7,
+            "t": 0,
+            "first": 14,
+            "second": -5
+          },
+          {
+            "k": 7,
+            "t": 1,
+            "first": 13,
+            "second": 1
+          }
+        ]
+      },
+      {
+        "a": 7,
+        "first_inequality_eligible": [
+          {
+            "k": 7,
+            "t": 0,
+            "first": 15,
+            "second": -12
+          },
+          {
+            "k": 7,
+            "t": 1,
+            "first": 14,
+            "second": -6
+          },
+          {
+            "k": 7,
+            "t": 2,
+            "first": 13,
+            "second": 0
+          },
+          {
+            "k": 8,
+            "t": 0,
+            "first": 13,
+            "second": -14
+          }
+        ]
+      }
+    ],
+    "a8_case": "First inequality forces k=8,t=0; absent missing leaf edges prevent any interval of length four, including the optional boundary interval."
+  },
+  "exceptional_check": {
+    "anchor_count": 5,
+    "outside_coordinates": 3,
+    "possible_incident_edges": 25,
+    "missing_edge_count": 3,
+    "subsets_checked": 2300,
+    "sum_missing_degree_plus_cross_degree": 6,
+    "epsilon_histogram": {
+      "0": 2295,
+      "1": 5
+    },
+    "maximum_X_from_refinement": 12
+  },
+  "proof_obligations_not_lean_checked": [
+    "Transport actual endpoint geometry to coordinate pairs on eight coordinates plus one exceptional pair.",
+    "Maximal anchored interval decomposition, overlap bound, and optional virtual boundary convention.",
+    "Consecutive selected pairs force the opposite pair absent.",
+    "Simple-path block count and exceptional five-anchor refinement.",
+    "Final finite arithmetic and actual-snake occurrence assembly."
+  ],
+  "executed": {
+    "solver_runs": 0,
+    "lean_runs": 0,
+    "full_graph_runs": 0
+  },
+  "audit_report": {
+    "path": "E:\\Snake-in-a-box\\milestones\\133-endpoint-occurrences\\audit\\occurrence-geometry.md",
+    "sha256": "087ce55493a219060ea9648018d480c7b390344a5920ad8fd4e57a8fbebab3cf",
+    "bytes": 9843
+  },
+  "scope_limits": [
+    "No attainment or novelty claim.",
+    "No assertion that a pair-nine witness exists.",
+    "No endpoint count from milestone122 is reused.",
+    "No graph-to-snake upper-bound comparison is included.",
+    "Small finite checks validate only the listed components of the written proof."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "status": "PREPARED_SINGLE_BALANCED_QUERY_NOT_RUN",
+  "cnf": "milestones/133-endpoint-occurrences/work/probe-balanced/base.cnf",
+  "cnf_sha256": "b4f1d4aec5bf5f6b163be7d971a91b9f389c11edc24f0959c428135827cfc85b",
+  "encoding_sha256": "0afe66da7050ef9482436c8f5b7aa1cbc1b334617cce432710274bdcad34b7f0",
+  "source_files_sha256": {
+    "milestones/133-endpoint-occurrences/scripts/prepare_balanced.py": "c5237429efee43d3608cc0ce506dfd98a6ea78e11814697c84b769a040a17122",
+    "milestones/133-endpoint-occurrences/scripts/probe_balanced.py": "480b12104286f85fcb97ffe9157acf120793470c472850498f44d88a76696269",
+    "milestones/132-odd-pair-endpoint/scripts/probe.py": "ce4b283b8dac45d8ee823cc9244a854833d144b32f83e05c79e08776cd14c623",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "work/share_packages/pysat/solvers.py": "b84f0790c70b5af2f85ab82d0e1441aea874c2ae6483d90da40286a01397e065",
+    "work/share_packages/pysolvers.cp312-win_amd64.pyd": "e0d04271f7f8f4717fd986e9ac0a944b04ae07f51138213b9d7fb9c5bfe00508"
+  },
+  "variables": 3140,
+  "clauses": 97972,
+  "pair_occurrences": 42,
+  "pair_unique_literals": 37,
+  "lower_counts": [
+    4,
+    4
+  ],
+  "fixed_or_forbidden_endpoints": false,
+  "plain_and_tagged_base_equal": true,
+  "syntax_checked": true,
+  "nominal_solver_seconds": 45,
+  "hard_parent_timeout_seconds": 90,
+  "conflicts_per_call": 1000,
+  "minimum_free_bytes": 1610612736,
+  "solver_started": false,
+  "lean_started": false,
+  "tested_hypothesis": "For odd length and a fitting012032 window, alpha2>=4 and alpha4>=4 imply alpha2+alpha4>=10.",
+  "scope": "One bounded native falsification query only. SAT requires independent path/count checks. Native UNSAT is uncertified; UNKNOWN or timeout gives no exclusion. No global bound."
+}

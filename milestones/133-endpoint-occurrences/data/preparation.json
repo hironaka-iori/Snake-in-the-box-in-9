@@ -1,0 +1,32 @@
+{
+  "status": "PREPARED_ONE_SHARPNESS_PROBE_NOT_RUN",
+  "cnf": "milestones/133-endpoint-occurrences/work/probe-endpoint0/base.cnf",
+  "cnf_sha256": "229bf16b5ddb58023b9a860109e716ac7d8336e68e383a1f6a64fab8380420a7",
+  "encoding_sha256": "ca23efd0e2e0b49457bf05363ec8d2c01367142590a3a68be56643745df47464",
+  "source_files_sha256": {
+    "milestones/133-endpoint-occurrences/scripts/prepare.py": "90c6faf4166330a05e761370be30def7c4c660e1e75ed8cc6aba28dacd70814b",
+    "milestones/133-endpoint-occurrences/scripts/probe.py": "15785dafdd224027d57de50f21e417f144976b14312fe31873af5bcce865037c",
+    "milestones/132-odd-pair-endpoint/scripts/probe.py": "ce4b283b8dac45d8ee823cc9244a854833d144b32f83e05c79e08776cd14c623",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "work/share_packages/pysat/solvers.py": "b84f0790c70b5af2f85ab82d0e1441aea874c2ae6483d90da40286a01397e065",
+    "work/share_packages/pysolvers.cp312-win_amd64.pyd": "e0d04271f7f8f4717fd986e9ac0a944b04ae07f51138213b9d7fb9c5bfe00508"
+  },
+  "variables": 2426,
+  "clauses": 96539,
+  "pair_occurrences": 42,
+  "pair_unique_literals": 37,
+  "required_endpoint_vertex": 0,
+  "full_cube": true,
+  "plain_and_tagged_base_equal": true,
+  "syntax_checked": true,
+  "nominal_solver_seconds": 45,
+  "hard_parent_timeout_seconds": 90,
+  "conflicts_per_call": 1000,
+  "minimum_free_bytes": 1610612736,
+  "solver_started": false,
+  "lean_started": false,
+  "derived_probe_source": "milestones/132-odd-pair-endpoint/scripts/probe.py",
+  "purpose": "Seek an actual odd induced path beginning with012032 whose two counted centres have pair sum9.",
+  "scope": "One bounded sharpness test. A SAT witness requires full independent path and count checks; native UNSAT is uncertified; UNKNOWN or timeout gives no exclusion. No global bound."
+}
