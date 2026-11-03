@@ -1,0 +1,75 @@
+{
+  "status": "PASS_SAVED_CYCLES_PINS_AND_ALL_FLOOR_OBSTRUCTION",
+  "source_files_sha256": {
+    "milestones/124-six-count-cycle-pressure/data/probes/0120310-total24-full-next.json": "03504e6b5ced0b98e4791f72a58557bdf706a99f18d07d76af12602077893c89",
+    "milestones/124-six-count-cycle-pressure/data/probes/0123024-total24-full-next.json": "f62e606e346e9edd04d9134da765d30fc09dd230bfdc5474227c5d463fe96bd7",
+    "milestones/124-six-count-cycle-pressure/data/graph-26-25-25/results.json": "d3b3c248c4fd14491d444413f18e9a8b5768f12849945ded16afcc44412d9f1a",
+    "milestones/124-six-count-cycle-pressure/data/graph-26-25-25/cycle-targets.json": "9d5bf150fca0903496cd1a4e1b55d37457176699477f634b242c500d3adf00c4",
+    "milestones/124-six-count-cycle-pressure/data/graph-26-25-25/removed-indices.json": "64754a4edc18c7f1a601efe7ab70b6c945e91159f0e389d3c6a74ceb9d6c0871",
+    "milestones/124-six-count-cycle-pressure/data/graph-26-25-25/baseline121-removed-indices.json": "2313ad546b73b8836c42494ebbbc9a47540dd96ef2432cb85e781cae6b2668c5",
+    "milestones/124-six-count-cycle-pressure/scripts/evaluate_six_shapes.py": "066b117d63f3d6cf78341073fa7b7a09dd39946a7f4b77961bf71b23114e782f"
+  },
+  "profiles": [
+    {
+      "profile": "completed",
+      "cycle_length": 18,
+      "mean": "2915/6",
+      "range": "1730/3",
+      "comparison": "1324108/5623",
+      "integer": 235,
+      "zero_range_comparison": "1323416/5623",
+      "all_target_matches": 0,
+      "endpoint_eligible": 0,
+      "saved_potential_and_cycle_checks": "PASS"
+    },
+    {
+      "profile": "conditional_floor18",
+      "cycle_length": 4,
+      "mean": "496",
+      "range": "602",
+      "comparison": "551765/2348",
+      "integer": 234,
+      "zero_range_comparison": "137866/587",
+      "all_target_matches": 0,
+      "endpoint_eligible": 2,
+      "saved_potential_and_cycle_checks": "PASS"
+    }
+  ],
+  "native_probe_observations": [
+    {
+      "file": "data/probes/0120310-total24-full-next.json",
+      "status": "UNKNOWN",
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        1,
+        0
+      ],
+      "cap": 24,
+      "cycle_cuts": 0,
+      "solver_seconds": 30.139999999999418
+    },
+    {
+      "file": "data/probes/0123024-total24-full-next.json",
+      "status": "UNSAT_UNCERTIFIED",
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        2,
+        4
+      ],
+      "cap": 24,
+      "cycle_cuts": 0,
+      "solver_seconds": 23.531000000002678
+    }
+  ],
+  "full_edge_check_scope": "Producer checked every retained edge for each profile. This subsequent saved-data audit checks source pins, removals, cycle membership/chaining, directions/counts/weights against121, potential files/ranges and equality on cycle edges, arithmetic and target absence. It does not independently reconstruct full weights or rerun Lean.",
+  "all_floor_argument": "For any componentwise larger floors on these three shapes, edge weights only increase and deletions only enlarge. Both fixed attaining cycles contain none of those shapes, so their edges and weights remain unchanged. The checked121 potentials stay valid and the unchanged cycles attain the same means. Thus all larger floors have these exact finite-graph means.",
+  "scope": "All local premises and global assembly remain separate. New negative native results are uncertified; UNKNOWN supplies no floor."
+}

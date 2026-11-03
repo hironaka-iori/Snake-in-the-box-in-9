@@ -1,0 +1,101 @@
+import UniformSixBound124
+
+/-!
+Conditional arithmetic with deficits from39 disjoint six-count blocks.
+No universal local floor, exception count, or endpoint interpretation is assumed
+without an explicit hypothesis.
+-/
+namespace Snake9.SixDeficit124
+open Finset
+open scoped BigOperators
+
+set_option maxHeartbeats 2000000
+
+theorem blocks_with_deficits (alpha : Nat → Nat) (B L : Nat) :
+    B*L ≤ (∑ i ∈ range (6*B), alpha (i+1))+
+      ∑ b ∈ range B, (L-∑ j ∈ range 6, alpha (6*b+j+1)) := by
+  induction B with
+  | zero => simp
+  | succ B ih =>
+      have hlast : L ≤ (∑ j ∈ range 6, alpha (6*B+j+1))+
+          (L-∑ j ∈ range 6, alpha (6*B+j+1)) := by omega
+      rw [Nat.succ_mul, Nat.mul_succ, Finset.sum_range_add,
+        Finset.sum_range_succ (fun b => L-∑ j ∈ range 6, alpha (6*b+j+1)) B]
+      omega
+
+theorem bound234_of_deficit28 (alpha : Nat → Nat) (m : Nat)
+    (h0 : 4 ≤ alpha 0) (hend : 4 ≤ alpha m)
+    (hpos : ∀ i, 0 < i → i < m → 1 ≤ alpha i)
+    (hdef : 235 ≤ m →
+      (∑ b ∈ range 39, (25-∑ j ∈ range 6, alpha (6*b+j+1))) ≤ 28)
+    (hsquare : (∑ i ∈ range (m+1), alpha i)+35*(m+1) ≤ 9214) :
+    m ≤ 234 := by
+  by_contra h
+  have hm : 235 ≤ m := by omega
+  have hd := hdef hm
+  have hb := blocks_with_deficits alpha 39 25
+  norm_num at hb
+  have hrest : m-235 ≤ ∑ j ∈ range (m-235), alpha (234+j+1) := by
+    calc
+      _ = ∑ _j ∈ range (m-235), (1 : Nat) := by simp
+      _ ≤ _ := Finset.sum_le_sum (by
+        intro j hj
+        have h := Finset.mem_range.mp hj
+        exact hpos (234+j+1) (by omega) (by omega))
+  have hsplit := Finset.sum_range_add (fun i => alpha (i+1)) 234 (m-235)
+  have hlen : 234+(m-235) = m-1 := by omega
+  rw [hlen] at hsplit
+  have hp := Finset.sum_range_succ' alpha (m-1)
+  have hm1 : m-1+1 = m := by omega
+  rw [hm1] at hp
+  have hpath : (∑ i ∈ range (m+1), alpha i) =
+      alpha 0+(∑ i ∈ range (m-1), alpha (i+1))+alpha m := by
+    rw [Finset.sum_range_succ, hp]
+    omega
+  omega
+
+theorem deficit26_of_thirteen_exceptions (s : Nat → Nat)
+    (hmin : ∀ b < 39, 23 ≤ s b)
+    (hfew : ((range 39).filter (fun b => s b < 25)).card ≤ 13) :
+    (∑ b ∈ range 39, (25-s b)) ≤ 26 := by
+  calc
+    _ ≤ ∑ b ∈ range 39, (if s b < 25 then 2 else 0) := by
+      apply Finset.sum_le_sum
+      intro b hb
+      have h := hmin b (Finset.mem_range.mp hb)
+      by_cases hlt : s b < 25
+      · simp only [if_pos hlt]
+        omega
+      · simp only [if_neg hlt]
+        omega
+    _ = ∑ _b ∈ (range 39).filter (fun b => s b < 25), (2 : Nat) := by
+      rw [Finset.sum_filter]
+    _ = ((range 39).filter (fun b => s b < 25)).card*2 := by
+      simp [nsmul_eq_mul]
+    _ ≤ 26 := by omega
+
+theorem deficit28_of_fourteen_exceptions (s : Nat → Nat)
+    (hmin : ∀ b < 39, 23 ≤ s b)
+    (hfew : ((range 39).filter (fun b => s b < 25)).card ≤ 14) :
+    (∑ b ∈ range 39, (25-s b)) ≤ 28 := by
+  calc
+    _ ≤ ∑ b ∈ range 39, (if s b < 25 then 2 else 0) := by
+      apply Finset.sum_le_sum
+      intro b hb
+      have h := hmin b (Finset.mem_range.mp hb)
+      by_cases hlt : s b < 25
+      · simp only [if_pos hlt]
+        omega
+      · simp only [if_neg hlt]
+        omega
+    _ = ∑ _b ∈ (range 39).filter (fun b => s b < 25), (2 : Nat) := by
+      rw [Finset.sum_filter]
+    _ = ((range 39).filter (fun b => s b < 25)).card*2 := by
+      simp [nsmul_eq_mul]
+    _ ≤ 28 := by omega
+
+#print axioms blocks_with_deficits
+#print axioms bound234_of_deficit28
+#print axioms deficit26_of_thirteen_exceptions
+#print axioms deficit28_of_fourteen_exceptions
+end Snake9.SixDeficit124

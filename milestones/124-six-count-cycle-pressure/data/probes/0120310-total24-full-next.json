@@ -1,0 +1,75 @@
+{
+  "name": "0120310-total24-full-next",
+  "directions": [
+    0,
+    1,
+    2,
+    0,
+    3,
+    1,
+    0
+  ],
+  "bounds": [
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      0,
+      21
+    ]
+  ],
+  "positions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "cap": 24,
+  "radius": 9,
+  "status": "UNKNOWN",
+  "source": "milestones/123-six-count-recovery/data/six-sum-graph-l25/results.json",
+  "source_sha256": "44ec5298a829acfd805ab3852eee4810cf574a9e3223ab83d9f0393dd47a67a6",
+  "hypothesis": "Sixinternalactualcounts sum>=25; proposed to cover the surviving exactsum24cycle, unproved.",
+  "source_target_file": "milestones/123-six-count-recovery/data/six-sum-graph/next-targets.json",
+  "source_target_sha256": "2ac5f5b2bb2fc283af5d7cb543576dcc66cba688f4b05e1313c1710527d63399",
+  "selected": null,
+  "census": null,
+  "cycle_cuts": [],
+  "variables": 5072,
+  "clauses": 101898,
+  "literal_occurrences": 126,
+  "distinct_literals": 104,
+  "build_seconds": 0.11000000000058208,
+  "solver_seconds": 30.139999999999418,
+  "nominal_seconds": 30.0,
+  "conflict_budget_per_call": 1000,
+  "calls": 510,
+  "source_files_sha256": {
+    "milestones/124-six-count-cycle-pressure/data/cases.json": "57f4f4a86e9b876bfa0d368b45c37d59df29c264d81697e49a7ae79419700810",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "milestones/28-direct-share-certificates/scripts/tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+    "milestones/28-direct-share-certificates/scripts/direct.py": "a2dc4151244a28b5f95c6de26c36146f7297c9c32d9d422f9498b42f286cb126"
+  },
+  "script_sha256": "37d721332bd9a7181b4c4c510d4c2843fcc5a835ffaca163d3963168df48b979",
+  "scope": "Native full-cube evidence with preserved literal multiplicity. Positive selected sets require independent path verification; negative results require certificates and a semantic bridge. No universal six-count bound is established."
+}

@@ -1,3 +1,32 @@
+# Research update: milestone 124
+
+Lean proves that the six internal singleton-square counts sum to at least 25
+for direction pattern 0123041 in either orientation, in an actual snake.
+This closes one of the 21 reversal classes. There are 46 checked modules and
+22 printed dependency reports in the round.
+
+The universal six-count floor 25 would give length at most 234; floor 26 would
+give at most 233. Lean checks these implications for actual snakes. It also
+checks a weaker sufficient condition for 234: total shortfall below 25 is at
+most 28 across 39 disjoint six-count groups. These additional assumptions remain
+unproved. The existing notation is sufficient; no new definition is introduced.
+
+The full-cube screen gives 19 negative classes, including the checked class.
+The other 18 need checked contradiction proofs. Classes 0120310 and 0120324
+remain unresolved. The three-pattern graph experiment cannot improve the
+235/234 integer comparisons because attaining cycles avoid all three patterns.
+The maintained range remains 191–235 with its documented independent-rebuild
+limitation. Neither the optimum nor 196 is established.
+
+See [the mathematical note](milestones/124-six-count-cycle-pressure/MATHEMATICAL_NOTE.md),
+[proof review](milestones/124-six-count-cycle-pressure/audit/proof-review.md), and
+[coverage review](milestones/124-six-count-cycle-pressure/audit/coverage-review.md).
+Paper revision 116 is unchanged; the next full revision is 126.
+The next priority is resolving 0120310 and 0120324 or proving the stated
+39-group shortfall bound. The older 104, 115 and 122 batches remain separate.
+
+## Earlier record
+
 # Research update: milestone 123
 
 The six-count work gives checked overlap accounting and a new unproved candidate:

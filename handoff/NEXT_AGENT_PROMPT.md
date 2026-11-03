@@ -1,3 +1,65 @@
+# Continuation after milestone 124
+
+Work in E:/Snake-in-a-box. Apply the requested research skill with concise,
+precise prose. Define only essential quantities that are used repeatedly.
+Read milestone 124/MATHEMATICAL_NOTE.md and its proof, probe, coverage and graph
+reviews. Check the exact file manifest and the current remote before editing.
+
+The completed result is the six-count floor 25 for canonical seven-transition
+shape 0123041 in either orientation of an actual snake. All 46 modules and 22
+printed dependency reports passed, including the contradiction, semantics,
+coordinate transfer, reversal, and conditional actual-snake bounds.
+
+The main hypothesis is that every six consecutive internal singleton-square
+counts sum to at least 25. If proved, the checked counting argument gives
+length at most 234 directly. Floor 26 would give at most 233. A weaker checked
+criterion for 234 is total shortfall at most 28 below 25 across the first 39
+disjoint groups of six internal counts, relevant when length is at least 235.
+If all those group sums are at least 23, at most 14 exceptions below 25 suffice.
+Neither the minimum 23 nor the exception-frequency premise is proved here.
+Do not identify these exceptions with milestone 122 occurrences without a new
+geometric theorem.
+
+The exhaustive native coverage comprises 21 reversal classes: 19 negative,
+including the single checked class, and two UNKNOWN, 0120310 and 0120324.
+Eighteen additional negative cases still need certificates and Lean transfer.
+The 0123042 prior native case supports the stronger floor 26. Neither UNKNOWN
+case is a counterexample. The 134-path bank minimum 31 is finite evidence only.
+
+Prioritise a decisive result on 0120310 or 0120324. Use a materially changed
+proof-producing search or a structural deduction; do not repeat the unchanged
+45-second resumes. Inspect the saved cycle cuts and counter multiplicities.
+The conditional attaining cycle has all windows in reversal class 0120324,
+with exact sums 22, 24 and 26. A true floor 23 already removes its sum-22 edge.
+The other attaining cycle uses 0120340, 0120342, 0123014 and 0123104. Uniform
+coverage or a proved total shortfall budget can address these obstructions.
+
+Further increases to floors on 0123042, 0120310 and 0123024 cannot improve the
+tested graph means: both saved attaining cycles avoid all three shapes. The
+zero-range comparisons still exceed the next target integers. No further
+sweep of those same three floor parameters is justified by this experiment.
+
+Preserve both stopped exporter records and archives, the initial compile timeout,
+and all successful retries. The final 0123041 artifact audit and Lean receipts
+establish the result; neither exporter process ended successfully. Historical
+normalization logs have some missing source/object hash pairings. Refresh those
+before claiming a freshly rebuilt universal coverage theorem.
+
+The old 104, 115 and 122 verification drivers were observed running. Inspect
+actual processes and saved progress before resuming; do not duplicate them or
+edit their live source, checker, plan or environment files. Round 124 has no
+remaining compiler or search process.
+
+The maintained interval remains 191 through 235 with the existing independent
+rebuild limitation. No new unconditional global bound is claimed. The optimum
+and 196 remain unresolved. Paper revision 116 is unchanged; revise fully at 126,
+using the current editor source and its E: mirror, preserving authors and
+hyperlink settings. Keep the active goal open, commit the reviewed next
+checkpoint, and verify the remote after pushing. Preserve unrelated .gitignore
+and milestone50 critical-family.json modifications.
+
+## Earlier continuation record
+
 # Continuation after milestone 123
 
 Work in E:/Snake-in-a-box. Apply the requested research skill with formal,

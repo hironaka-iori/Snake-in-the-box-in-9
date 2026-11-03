@@ -1486,3 +1486,45 @@ run at L=25 retain the 235/234 integer comparisons. Larger values are ruled
 out as a useful change to this graph family by cycles with no matching window,
 even at zero potential range. Older 104/115/122 batches remain separate.
 Exact checks, sources and continuation targets are in milestone123.
+
+
+## Milestone 124: one six-count class and conditional length criteria
+
+Lean proves that the six internal singleton-square counts sum to at least 25
+for direction pattern 0123041 in either orientation, in an actual snake.
+This closes one of the 21 reversal classes. There are 46 checked modules and
+22 printed dependency reports in the round.
+
+The universal six-count floor 25 would give length at most 234; floor 26 would
+give at most 233. Lean checks these implications for actual snakes. It also
+checks a weaker sufficient condition for 234: total shortfall below 25 is at
+most 28 across 39 disjoint six-count groups. These additional assumptions remain
+unproved. The existing notation is sufficient; no new definition is introduced.
+
+The full-cube screen gives 19 negative classes, including the checked class.
+The other 18 need checked contradiction proofs. Classes 0120310 and 0120324
+remain unresolved. The three-pattern graph experiment cannot improve the
+235/234 integer comparisons because attaining cycles avoid all three patterns.
+The maintained range remains 191–235 with its documented independent-rebuild
+limitation. Neither the optimum nor 196 is established.
+
+The chosen 0123041 full-cube formula has 101,898 clauses and no appended cycle
+cuts. Its certificate has 3,649 retained inputs, 5,746 deductions and 439,766
+propagation hints. The independent audit preserves all 126 corner occurrences
+across 105 distinct vertices and checks the generated proof against its sources.
+The local conclusion includes coordinate transfer and reversal.
+
+The 39-group shortfall criterion allows at most 14 groups below 25 if every
+group is at least 23. No endpoint interpretation or frequency theorem for these
+groups is available. The endpoint occurrence result from milestone 122 cannot
+be substituted without a new geometric argument.
+
+Both exporter attempts have preserved error records. The second saved complete
+artifacts before its error; archived output and published files match. The
+initial semantic compile timed out at 180 seconds, and the preserved retry
+passed with a 600-second limit. No proof is inferred from those failed attempts.
+All final source/object/log/dependency receipts are independently checked.
+
+The latest process-backed observation keeps the 104/115/122 batches separate.
+Their saved progress is a point-in-time record and must be checked again before
+resuming. The manuscript is unchanged, with revision 126 scheduled next.
