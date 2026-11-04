@@ -1,0 +1,42 @@
+{
+  "status": "PASS_SOURCE_AND_PENDING_GUARDS_ONLY",
+  "copied_modules": 34,
+  "copied_source_bytes": 1885795,
+  "expected_axiom_reports": 106,
+  "external_imports": [
+    "LocalWindowCnf.ShareWindow153",
+    "LocalWindowModel"
+  ],
+  "Lean_started": false,
+  "full_sources_generated": false,
+  "finished_pilot_claim_created": false,
+  "pending_guard_tests": [
+    {
+      "script": "finish_pilot.py",
+      "arguments": [
+        "--verify-only"
+      ],
+      "expected_exit_code": 2,
+      "exit_code": 2,
+      "stdout": "{\"status\": \"WAITING_FOR_PILOT_CHECKS\"}\n",
+      "stderr": ""
+    },
+    {
+      "script": "emit_full.py",
+      "arguments": [
+        "--full",
+        "--max-source-mib",
+        "256"
+      ],
+      "expected_exit_code": 1,
+      "exit_code": 1,
+      "stdout": "{\"status\": \"WAITING_FOR_PILOT_CHECKS\"}\n",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\Snake-in-a-box\\milestones\\155-share17-replay\\scripts\\emit_full.py\", line 223, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"E:\\Snake-in-a-box\\milestones\\155-share17-replay\\scripts\\emit_full.py\", line 188, in main\n    subprocess.run([sys.executable,'-B','-X','utf8',str(OUT/'scripts/finish_pilot.py'),'--verify-only'],cwd=ROOT,check=True)\n  File \"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['C:\\\\Users\\\\hironakaiori\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe', '-B', '-X', 'utf8', 'E:\\\\Snake-in-a-box\\\\milestones\\\\155-share17-replay\\\\scripts\\\\finish_pilot.py', '--verify-only']' returned non-zero exit status 2.\n"
+    }
+  ],
+  "sources_unchanged": true,
+  "preparation_sha256": "36890229d3f613319ad894e668cb76f3c9150adfd83dc554da334e164e8f55f7",
+  "source_plan_sha256": "3e2184c490254df64160ec62dc8792ee270aa64aee2b1ccf75e8b616a4bcb310",
+  "verifier_sha256": "723a09aae458c86cfe1016106c016d4005e144d0045e6d2f66cb846d0a333f08",
+  "scope": "Source copies, import order, Python syntax, and refusal to accept/generate beyond a missing pilot. No Lean theorem has been checked by this test."
+}

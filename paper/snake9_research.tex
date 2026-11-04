@@ -3056,11 +3056,20 @@ replay under the broader conditions
 \alpha_{r+3}=4,\qquad \alpha_{r+4}\le5,\qquad
 \alpha_{r+5}=3.
 \]
-The compact core is unchanged. These certificates support share at least
-17 under the displayed hypotheses; their Lean clause interpretation,
-complete contradiction replay and application to arbitrary snakes remain
-unfinished. The generated exact-count sources do not yet interpret the
-broader conditions. No completed local theorem is asserted here.
+The compact core is unchanged. Its broader clause interpretation and
+transfer to arbitrary coordinates and reversed windows have now passed
+Lean in 98 modules. This establishes the share-17 implication under an
+explicit unsatisfiability premise for that core. The complete contradiction
+replay remains unfinished, so the share-17 bound under the displayed count
+hypotheses is still conditional~\cite{broader154archive}.
+
+Broadening the count conditions does not add credit to the retained graph
+used for the saved critical cycles. That graph already requires
+$\alpha_{r+2}+\alpha_{r+4}\ge9$ in this context. Together with
+$\alpha_{r+2}\le4$ and $\alpha_{r+4}\le5$, this forces the two counts
+to equal 4 and 5. An inventory finds 100 additional matching rows in the
+source graph, all already excluded from the retained graph. This
+calculation concerns that graph and its removal hypotheses.
 
 If the exact-context result and its reversal are established, they raise
 two edges of the eleven-cycle by one relative to the profile imposing
@@ -6423,6 +6432,11 @@ and removal of two unused count assumptions}, research archive, milestone 153.
 I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Complete count-independent share
 bound for the 012032 window}, research archive, milestone 152.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/152-countfree-share16-completion}.
+
+\bibitem{broader154archive}
+I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Broader critical-window share
+interpretation and its retained-graph effect}, research archive, milestone 154.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/154-share17-broader-semantics}.
 
 \end{thebibliography}
 \end{document}

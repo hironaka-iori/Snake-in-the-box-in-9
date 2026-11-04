@@ -1,0 +1,56 @@
+{
+  "status": "PASS_NATIVE_RESOURCE_SOURCE_AND_PENDING_GUARDS_ONLY",
+  "copied_modules": 34,
+  "copied_source_bytes": 1885795,
+  "Lean_started": false,
+  "solver_started": false,
+  "full_sources_generated": false,
+  "finished_pilot_claim_created": false,
+  "pending_guard_tests": [
+    {
+      "script": "finish_pilot_v2.py",
+      "arguments": [
+        "--verify-only"
+      ],
+      "expected_exit_code": 2,
+      "exit_code": 2,
+      "stdout": "{\"status\": \"WAITING_FOR_PILOT_CHECKS\"}\n",
+      "stderr": ""
+    },
+    {
+      "script": "emit_full_v2.py",
+      "arguments": [
+        "--full",
+        "--max-source-mib",
+        "256"
+      ],
+      "expected_exit_code": 1,
+      "exit_code": 1,
+      "stdout": "{\"status\": \"WAITING_FOR_PILOT_CHECKS\"}\n",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\Snake-in-a-box\\milestones\\155-share17-replay\\scripts\\emit_full_v2.py\", line 223, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"E:\\Snake-in-a-box\\milestones\\155-share17-replay\\scripts\\emit_full_v2.py\", line 188, in main\n    subprocess.run([sys.executable,'-B','-X','utf8',str(OUT/'scripts/finish_pilot_v2.py'),'--verify-only'],cwd=ROOT,check=True)\n  File \"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['C:\\\\Users\\\\hironakaiori\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe', '-B', '-X', 'utf8', 'E:\\\\Snake-in-a-box\\\\milestones\\\\155-share17-replay\\\\scripts\\\\finish_pilot_v2.py', '--verify-only']' returned non-zero exit status 2.\n"
+    }
+  ],
+  "native_snapshot": {
+    "free_bytes": 2381070336,
+    "total_bytes": 16573128704,
+    "processes": [
+      {
+        "ProcessId": 51028,
+        "ParentProcessId": 32068,
+        "PrivatePageCount": 259633152,
+        "WorkingSetSize": 422297600
+      }
+    ],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 85,
+    "snapshot_seconds": 0.01599999999962165
+  },
+  "source_plan_unchanged": true,
+  "original155_files_unchanged": true,
+  "preparation_sha256": "b4249383d5dd36899dd18157b456c22f9a8d0e8eb399f26e4ae50cc91a3a22ef",
+  "source_plan_sha256": "3e2184c490254df64160ec62dc8792ee270aa64aee2b1ccf75e8b616a4bcb310",
+  "helper_sha256": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+  "verifier_sha256": "201aafcc9cfc33d966371cf3e91d20e30cd4fc85752f098a0b7c0613c56ec191",
+  "scope": "V2 execution-source identities, syntax, native snapshot, and refusal of incomplete pilot acceptance/full generation. No Lean theorem was checked. A concurrent154 Lean process may appear in the read-only snapshot."
+}

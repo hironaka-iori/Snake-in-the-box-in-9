@@ -1,3 +1,23 @@
+# Research update: broader critical-window interpretation checked
+
+All 98 modules interpreting the shared share-17 certificate and transferring
+it to actual snakes have passed Lean. The count conditions are alpha1=4,
+alpha2<=4, alpha3=4, alpha4<=5 and alpha5=3, with reversed conditions for
+reversed canonical directions. The contradiction remains an explicit
+premise. The final share-17 theorem and any new global bound remain pending.
+
+The universal 012032 share-16 theorem is complete in milestone 152. Next,
+run the single share-17 replay in milestone 155, audit its pilot, then emit
+and check the full contradiction and compose the actual-snake consequence.
+Inspect live processes before starting another compiler. Use the v2 native
+resource scripts. The original CIM monitor was delayed during a low-memory
+event; its failed run and all accepted source bytes are preserved.
+
+Broadening adds 100 source-graph rows and no retained rows. The retained
+pair-sum condition forces the two relaxed counts back to 4 and 5. The
+eleven-cycle still has two target edges. Last full paper revision: 146;
+next: 156. Historical updates follow.
+
 # Research update: universal 012032 share 16 completed
 
 The complete contradiction replay and actual-snake composition have passed

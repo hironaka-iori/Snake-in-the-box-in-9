@@ -1,0 +1,58 @@
+{
+  "status": "PREPARED_NATIVE_RESOURCE_RECOVERY_UNCHECKED",
+  "Lean_started": false,
+  "source_artifacts_identical": true,
+  "modules": 98,
+  "compiler_threads": 1,
+  "compiler_stack_kb": 8192,
+  "reused_accepted_modules": [
+    "LocalWindowCnf.ShareWindow153"
+  ],
+  "original_files_unchanged": true,
+  "native_before": {
+    "free_bytes": 3027927040,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 81,
+    "snapshot_seconds": 0.01599999999962165
+  },
+  "native_after": {
+    "free_bytes": 3029356544,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 81,
+    "snapshot_seconds": 0.015000000001236913
+  },
+  "one_cim_observation": {
+    "status": "RETURNED",
+    "seconds": 0.8279999999995198,
+    "exit_code": 0,
+    "stderr": "",
+    "snapshot": {
+      "processes": [],
+      "free_bytes": 2967506944
+    },
+    "free_bytes_within_native_bracket_plus128MiB": true,
+    "stable_pid_sets_equal": true,
+    "stable_process_memory": []
+  },
+  "preflight_gate_current": true,
+  "source_files_sha256": {
+    "milestones/154-share17-broader-semantics/scripts/prepare_checks_v2.py": "8b6a316ae3a8f8963c31a390223a7d2fcd8d876594c13893e3c0bbe4161a3cd5",
+    "milestones/154-share17-broader-semantics/scripts/native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "milestones/154-share17-broader-semantics/scripts/check_module_v2.py": "8811d84f9cb49ce2b48abcaf1964bcc7693800293f08e573d3043c1d64a0c0ed",
+    "milestones/154-share17-broader-semantics/scripts/run_semantics_v2.py": "2c44959e050b4b3ac5901aaf2c155881ca31ce111fba3f1df063dcc695b52ead",
+    "milestones/154-share17-broader-semantics/data/semantic-plan-v2.json": "a8d8b9fe0b86ce80ffef1c393c069facc573cebeeb023628163608e879deb14e",
+    "milestones/154-share17-broader-semantics/data/semantic-plan.json": "532047c4812e9aa871e04298ce1cbcb13d3426329eb3ce82d90f14232f1ea89b",
+    "milestones/154-share17-broader-semantics/data/semantic-progress.json": "3008aad72d8dac8dca92d10fc709800b31e2a2576b29c60f1553847a5541b072",
+    "milestones/154-share17-broader-semantics/data/LocalWindowCnf.ShareWindow153-audit.json": "e1745219124ebd35e78a05ca8cbb9129141701c13d7765361fe199a9bd97abd9",
+    "milestones/154-share17-broader-semantics/scripts/check_module.py": "78bb7161d40d98de614ce790605fb47e5da86934bb340bfcdb8574219a8ce8e0",
+    "milestones/154-share17-broader-semantics/scripts/run_semantics.py": "866e6c19adb4048c26623e00215d04118e60d74f3f763804ff41fcc9927a6cc2",
+    "milestones/150-actual-pair-share/data/semantic-plan.json": "441d2c40159ac43641839c86b0f812498661f69e39a54b9bac2b54e7c55d4962"
+  },
+  "scope": "New recovery sources only. Native snapshots and one bounded CIM observation were taken. No compiler or proof check was launched; existing accepted core receipt and all old plans/checkers remain unchanged."
+}
