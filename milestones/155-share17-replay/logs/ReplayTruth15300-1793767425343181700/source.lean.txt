@@ -1,0 +1,112 @@
+import ReplayParts15300
+import ReplayTools153
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+set_option Elab.async false
+
+namespace Snake9.ReplayData153
+theorem part0_slice : input0.clauses = ((Snake9.LocalWindow.ShareWindow153.raw0 ++ Snake9.LocalWindow.ShareWindow153.raw1).drop 7).take 127 := by
+  rw [part0_clauses]
+  rfl
+theorem part0_true (τ : Nat → Bool)
+    (h0 : Snake9.LocalWindow.ShareWindow153.raw0.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    (h1 : Snake9.LocalWindow.ShareWindow153.raw1.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    : Snake9.Lrat153Replay.TreeTrue τ part0 := by
+  rw [← part0_build]
+  apply build_true_of_slice τ input0 (Snake9.LocalWindow.ShareWindow153.raw0 ++ Snake9.LocalWindow.ShareWindow153.raw1) 7 127 part0_slice
+  rw [List.all_append]
+  rw [h0, h1]
+  rfl
+#print axioms part0_true
+theorem part1_slice : input1.clauses = ((Snake9.LocalWindow.ShareWindow153.raw1 ++ Snake9.LocalWindow.ShareWindow153.raw2).drop 6).take 127 := by
+  rw [part1_clauses]
+  rfl
+theorem part1_true (τ : Nat → Bool)
+    (h1 : Snake9.LocalWindow.ShareWindow153.raw1.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    (h2 : Snake9.LocalWindow.ShareWindow153.raw2.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    : Snake9.Lrat153Replay.TreeTrue τ part1 := by
+  rw [← part1_build]
+  apply build_true_of_slice τ input1 (Snake9.LocalWindow.ShareWindow153.raw1 ++ Snake9.LocalWindow.ShareWindow153.raw2) 6 127 part1_slice
+  rw [List.all_append]
+  rw [h1, h2]
+  rfl
+#print axioms part1_true
+theorem part2_slice : input2.clauses = ((Snake9.LocalWindow.ShareWindow153.raw2 ++ Snake9.LocalWindow.ShareWindow153.raw3).drop 6).take 127 := by
+  rw [part2_clauses]
+  rfl
+theorem part2_true (τ : Nat → Bool)
+    (h2 : Snake9.LocalWindow.ShareWindow153.raw2.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    (h3 : Snake9.LocalWindow.ShareWindow153.raw3.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    : Snake9.Lrat153Replay.TreeTrue τ part2 := by
+  rw [← part2_build]
+  apply build_true_of_slice τ input2 (Snake9.LocalWindow.ShareWindow153.raw2 ++ Snake9.LocalWindow.ShareWindow153.raw3) 6 127 part2_slice
+  rw [List.all_append]
+  rw [h2, h3]
+  rfl
+#print axioms part2_true
+theorem part3_slice : input3.clauses = ((Snake9.LocalWindow.ShareWindow153.raw3 ++ Snake9.LocalWindow.ShareWindow153.raw4).drop 5).take 127 := by
+  rw [part3_clauses]
+  rfl
+theorem part3_true (τ : Nat → Bool)
+    (h3 : Snake9.LocalWindow.ShareWindow153.raw3.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    (h4 : Snake9.LocalWindow.ShareWindow153.raw4.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    : Snake9.Lrat153Replay.TreeTrue τ part3 := by
+  rw [← part3_build]
+  apply build_true_of_slice τ input3 (Snake9.LocalWindow.ShareWindow153.raw3 ++ Snake9.LocalWindow.ShareWindow153.raw4) 5 127 part3_slice
+  rw [List.all_append]
+  rw [h3, h4]
+  rfl
+#print axioms part3_true
+theorem part4_slice : input4.clauses = ((Snake9.LocalWindow.ShareWindow153.raw4 ++ Snake9.LocalWindow.ShareWindow153.raw5).drop 6).take 127 := by
+  rw [part4_clauses]
+  rfl
+theorem part4_true (τ : Nat → Bool)
+    (h4 : Snake9.LocalWindow.ShareWindow153.raw4.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    (h5 : Snake9.LocalWindow.ShareWindow153.raw5.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    : Snake9.Lrat153Replay.TreeTrue τ part4 := by
+  rw [← part4_build]
+  apply build_true_of_slice τ input4 (Snake9.LocalWindow.ShareWindow153.raw4 ++ Snake9.LocalWindow.ShareWindow153.raw5) 6 127 part4_slice
+  rw [List.all_append]
+  rw [h4, h5]
+  rfl
+#print axioms part4_true
+theorem part5_slice : input5.clauses = ((Snake9.LocalWindow.ShareWindow153.raw5 ++ Snake9.LocalWindow.ShareWindow153.raw6).drop 5).take 127 := by
+  rw [part5_clauses]
+  rfl
+theorem part5_true (τ : Nat → Bool)
+    (h5 : Snake9.LocalWindow.ShareWindow153.raw5.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    (h6 : Snake9.LocalWindow.ShareWindow153.raw6.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    : Snake9.Lrat153Replay.TreeTrue τ part5 := by
+  rw [← part5_build]
+  apply build_true_of_slice τ input5 (Snake9.LocalWindow.ShareWindow153.raw5 ++ Snake9.LocalWindow.ShareWindow153.raw6) 5 127 part5_slice
+  rw [List.all_append]
+  rw [h5, h6]
+  rfl
+#print axioms part5_true
+theorem part6_slice : input6.clauses = ((Snake9.LocalWindow.ShareWindow153.raw6 ++ Snake9.LocalWindow.ShareWindow153.raw7).drop 5).take 127 := by
+  rw [part6_clauses]
+  rfl
+theorem part6_true (τ : Nat → Bool)
+    (h6 : Snake9.LocalWindow.ShareWindow153.raw6.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    (h7 : Snake9.LocalWindow.ShareWindow153.raw7.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    : Snake9.Lrat153Replay.TreeTrue τ part6 := by
+  rw [← part6_build]
+  apply build_true_of_slice τ input6 (Snake9.LocalWindow.ShareWindow153.raw6 ++ Snake9.LocalWindow.ShareWindow153.raw7) 5 127 part6_slice
+  rw [List.all_append]
+  rw [h6, h7]
+  rfl
+#print axioms part6_true
+theorem part7_slice : input7.clauses = ((Snake9.LocalWindow.ShareWindow153.raw7 ++ Snake9.LocalWindow.ShareWindow153.raw8).drop 4).take 127 := by
+  rw [part7_clauses]
+  rfl
+theorem part7_true (τ : Nat → Bool)
+    (h7 : Snake9.LocalWindow.ShareWindow153.raw7.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    (h8 : Snake9.LocalWindow.ShareWindow153.raw8.all (fun c => Snake9.LocalWindow.clauseTrue τ (c.map Snake9.LocalWindow.decodeLit)) = true)
+    : Snake9.Lrat153Replay.TreeTrue τ part7 := by
+  rw [← part7_build]
+  apply build_true_of_slice τ input7 (Snake9.LocalWindow.ShareWindow153.raw7 ++ Snake9.LocalWindow.ShareWindow153.raw8) 4 127 part7_slice
+  rw [List.all_append]
+  rw [h7, h8]
+  rfl
+#print axioms part7_true
+end Snake9.ReplayData153

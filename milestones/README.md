@@ -1,3 +1,20 @@
+# Research update: share-17 initial replay checked
+
+The 34-module initial replay and checkpoint have passed Lean, covering
+2,095 deductions and 6,002 propagation references with 106 axiom reports.
+The full 137-module source export is prepared. Its runner reuses the 34
+accepted modules and checks the remaining 103. The complete contradiction
+and its final application to actual snakes remain pending.
+
+Read milestones/155-share17-replay/PILOT_CHECKPOINT.md. Inspect its full
+replay progress and actual process before starting or resuming a compiler.
+After all 137 modules pass, audit the complete replay and check the separate
+actual-snake composition. The share-17 count conditions remain required.
+No new global bound is claimed. The paper already records the unresolved
+contradiction. Last full paper revision: 146; next: 156.
+
+Historical updates follow.
+
 # Research update: broader critical-window interpretation checked
 
 All 98 modules interpreting the shared share-17 certificate and transferring
