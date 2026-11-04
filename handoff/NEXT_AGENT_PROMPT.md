@@ -1,3 +1,25 @@
+# Current result: extended share-18 proof checkpoint
+
+Milestones 161 and 162 now connect 128 continuation segments in
+4 complete groups to the original clause set through a Lean-checked
+consequence theorem. Including the earlier prefix, this covers
+13,535 deductions and 787,366 references.
+There remain 131,680 deductions and 13,923,515 references.
+
+Read milestones/162-share18-composition-plan/COMPLETION.md and its adjacent
+data/completion.json. Continue the existing161 replay in bounded batches,
+reusing accepted modules. Its sources and execution plan are unchanged.
+Historical publication manifests refer to their recorded commits; do not
+expect their old progress-file hashes to match a later continuation.
+
+The final geometry and reversal sources are compatible with the accepted
+encoding and can be reused unchanged after the full contradiction passes.
+The refutation wrapper must then consume that completed contradiction.
+These final checks are still pending. The universal012034 share-18 theorem
+and a new global upper bound are not established.
+
+Last full paper revision:156; next:166. Historical updates follow.
+
 # Current result: first continuation group checked in Lean
 
 Milestone 161 passed its twelve-module pilot: 32 continuation segments,
