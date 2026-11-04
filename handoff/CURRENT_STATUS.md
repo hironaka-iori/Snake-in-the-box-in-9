@@ -1,5 +1,37 @@
 # Current result: extended share-18 proof checkpoint
 
+Milestones 161 and 163 now connect 448 continuation segments in
+14 complete groups to the original clause set through a Lean-checked
+consequence theorem. Including the earlier prefix, this covers
+33,111 deductions and 2,734,960 references.
+There remain 112,104 deductions and 11,975,921 references.
+
+Read milestones/163-share18-replay-continuation/COMPLETION.md and its adjacent
+data/completion.json. Continue the existing161 replay in bounded batches,
+reusing accepted modules. Its sources and execution plan are unchanged.
+Historical publication manifests refer to their recorded commits; do not
+expect their old progress-file hashes to match a later continuation.
+
+The final geometry and reversal sources are compatible with the accepted
+encoding and can be reused unchanged after the full contradiction passes.
+The refutation wrapper must then consume that completed contradiction.
+These final checks are still pending. The universal012034 share-18 theorem
+and a new global upper bound are not established.
+
+Seven additional arithmetic statements passed Lean. Retaining the existing
+corner-share loss subtracts five times that loss from the comparison
+numerator. At mean4462/9, range601 and correction0, an integer loss of at
+least4 crosses the strict235 threshold. The packing and potential premises
+remain explicit. Neither a positive global loss bound nor a compatible
+full-graph potential was proved. Read
+milestones/163-share18-replay-continuation/ROUNDING_LOSS.md and its adjacent
+data/remainder-completion.json. This is a conditional refinement; the
+unconditional numerical bound is unchanged.
+
+Last full paper revision:156; next:166. Historical updates follow.
+
+# Current result: extended share-18 proof checkpoint
+
 Milestones 161 and 162 now connect 128 continuation segments in
 4 complete groups to the original clause set through a Lean-checked
 consequence theorem. Including the earlier prefix, this covers
