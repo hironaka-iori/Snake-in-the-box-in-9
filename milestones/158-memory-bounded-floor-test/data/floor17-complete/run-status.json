@@ -1,0 +1,83 @@
+{
+  "status": "PASS_FIXED_MEAN_TARGET_OBSTRUCTION",
+  "started_utc": "2026-11-04T05:58:52.233532+00:00",
+  "parent_pid": 29056,
+  "preparation_sha256": "f3603cbfd6bc7feac81d67969eb95ec64290cdc3f3202d817546a2697de19009",
+  "initial_resources": {
+    "free_bytes": 2495709184,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 84,
+    "snapshot_seconds": 0.01599999999962165,
+    "lean_processes": [],
+    "graph_processes": [
+      {
+        "pid": 29056,
+        "command": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/158-memory-bounded-floor-test/scripts/run_potential_v5.py --label floor17-complete"
+      }
+    ],
+    "owned_memory": [
+      {
+        "pid": 29056,
+        "private_bytes": 12480512
+      }
+    ]
+  },
+  "discovery_seconds_limit": 600,
+  "total_seconds_limit": 900,
+  "stop_reason": null,
+  "peak_owned_private_bytes": 424538112,
+  "new_global_bound": false,
+  "worker_pid": 40864,
+  "command": [
+    "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\Snake-in-a-box\\milestones\\158-memory-bounded-floor-test\\scripts\\potential_range_v5.py",
+    "--run",
+    "E:\\Snake-in-a-box\\milestones\\158-memory-bounded-floor-test\\data\\floor17-complete",
+    "--parent",
+    "29056"
+  ],
+  "last_resources": {
+    "free_bytes": 2649636864,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 84,
+    "snapshot_seconds": 0.01599999999962165,
+    "lean_processes": [],
+    "graph_processes": [
+      {
+        "pid": 29056,
+        "command": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/158-memory-bounded-floor-test/scripts/run_potential_v5.py --label floor17-complete"
+      },
+      {
+        "pid": 40864,
+        "command": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -B -X utf8 E:\\Snake-in-a-box\\milestones\\158-memory-bounded-floor-test\\scripts\\potential_range_v5.py --run E:\\Snake-in-a-box\\milestones\\158-memory-bounded-floor-test\\data\\floor17-complete --parent 29056"
+      }
+    ],
+    "owned_memory": [
+      {
+        "pid": 29056,
+        "private_bytes": 13410304
+      },
+      {
+        "pid": 40864,
+        "private_bytes": 226627584
+      }
+    ]
+  },
+  "progress": {
+    "phase": "FINALIZING",
+    "worker_pid": 40864,
+    "discovery_started": 21526.484,
+    "discovery_seconds": 30.375,
+    "status": "PASS_FIXED_MEAN_TARGET_OBSTRUCTION"
+  },
+  "exit_code": 0,
+  "result_sha256": "9fdcf79bf1f29c98db28a9f0451003cd0ef3a74a114debc9e5e5622eec5406a6",
+  "finished_utc": "2026-11-04T05:59:48.012330+00:00"
+}

@@ -1,0 +1,83 @@
+{
+  "status": "FAILED",
+  "started_utc": "2026-11-04T05:56:39.828617+00:00",
+  "parent_pid": 36444,
+  "preparation_sha256": "8dac01542789a06f611980089437e9e88bfd46b352f47a40f9014a71678b0f3e",
+  "initial_resources": {
+    "free_bytes": 2522935296,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 84,
+    "snapshot_seconds": 0.030999999999039574,
+    "lean_processes": [],
+    "graph_processes": [
+      {
+        "pid": 36444,
+        "command": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/158-memory-bounded-floor-test/scripts/run_potential_v4.py --label floor17-mapped-retry"
+      }
+    ],
+    "owned_memory": [
+      {
+        "pid": 36444,
+        "private_bytes": 12582912
+      }
+    ]
+  },
+  "discovery_seconds_limit": 600,
+  "total_seconds_limit": 900,
+  "stop_reason": null,
+  "peak_owned_private_bytes": 598437888,
+  "new_global_bound": false,
+  "worker_pid": 27020,
+  "command": [
+    "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\Snake-in-a-box\\milestones\\158-memory-bounded-floor-test\\scripts\\potential_range_v4.py",
+    "--run",
+    "E:\\Snake-in-a-box\\milestones\\158-memory-bounded-floor-test\\data\\floor17-mapped-retry",
+    "--parent",
+    "36444"
+  ],
+  "last_resources": {
+    "free_bytes": 2251866112,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 86,
+    "snapshot_seconds": 0.01600000000325963,
+    "lean_processes": [],
+    "graph_processes": [
+      {
+        "pid": 36444,
+        "command": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/158-memory-bounded-floor-test/scripts/run_potential_v4.py --label floor17-mapped-retry"
+      },
+      {
+        "pid": 27020,
+        "command": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -B -X utf8 E:\\Snake-in-a-box\\milestones\\158-memory-bounded-floor-test\\scripts\\potential_range_v4.py --run E:\\Snake-in-a-box\\milestones\\158-memory-bounded-floor-test\\data\\floor17-mapped-retry --parent 36444"
+      }
+    ],
+    "owned_memory": [
+      {
+        "pid": 36444,
+        "private_bytes": 13770752
+      },
+      {
+        "pid": 27020,
+        "private_bytes": 225939456
+      }
+    ]
+  },
+  "progress": {
+    "phase": "DISCOVERY",
+    "worker_pid": 27020,
+    "iteration": 12,
+    "discovery_started": 21392.765,
+    "journal_bytes": 2327136,
+    "maximum_deficit": 603
+  },
+  "error": "PermissionError(13, 'Permission denied')",
+  "finished_utc": "2026-11-04T05:57:05.829313+00:00"
+}

@@ -1,3 +1,28 @@
+# Current result: weaker local floor refuted
+
+Milestone 158 completes the test prepared in 157. Lowering only the
+conditional 012034 share floor from 18 to 17 cannot preserve the comparison
+below 235, even after varying mean, potential range and nonnegative uniform
+occurrence credit. A nine-cycle and nine-edge walk imply a comparison of
+at least 235 + 175/42262. Six arithmetic statements passed Lean.
+
+The disk-backed implementation reproduced the accepted 156 weights before
+changing the floor. The final search and independent source-row audit are
+complete. Read milestones/158-memory-bounded-floor-test/MATHEMATICAL_NOTE.md,
+data/completion.json and NEXT_STEP.md. Do not restart the pending 157 test;
+its question is resolved by this stronger result. Earlier stopped and failed
+attempts are historical records, not current jobs.
+
+This establishes a limitation of the specified conditional finite model.
+It supplies no new unconditional snake bound and no proof that the true
+optimum is 196. Remaining local, reference and graph-to-snake obligations
+retain their scope. The next local investigation should alter the identified
+cycle rather than retune the same three parameters.
+
+The paper remains at its compiled full revision 156; both copies are
+unchanged. The next full revision is 166, when the completed 158 result is
+to be incorporated. Historical updates follow.
+
 # Current checkpoint: weaker local share assumption
 
 Milestone 156 established the exact retained-comparison optimum
