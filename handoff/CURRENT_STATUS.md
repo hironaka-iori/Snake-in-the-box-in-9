@@ -1,3 +1,28 @@
+# Two-round stopping point: milestones 164 and 165
+
+The requested two additional rounds are complete. Research is stopping for
+the user's requested pause. No research worker is left running.
+
+Round 164 found a minimum potential range of 5411/9 at mean 4462/9 on the
+retained conditional graph. Under total rounding loss at least 4, the
+comparison is 235 - 3/42262, hence at most 234 edges. The positive-loss
+premise and inherited graph-to-snake obligations remain unproved. Read
+milestones/164-loss-corrected-potential/MATHEMATICAL_NOTE.md.
+
+Round 165 checked five numerical arithmetic statements in Lean. It also
+revalidated all 216 accepted replay modules. The next module could not
+start because free memory was below the unchanged 2 GiB startup gate.
+No new replay deductions were added. The accepted prefix remains 448
+continuation segments in 14 complete groups: 33,111 deductions and
+2,734,960 references, including the earlier prefix. There remain 112,104
+deductions and 11,975,921 references. The full contradiction and the
+actual-snake share-18 theorem remain pending.
+
+No new unconditional upper bound is claimed. Read
+milestones/165-share18-continuation-and-pause/COMPLETION.md and its adjacent
+data/completion.json. Resume only after user authorization.
+Last full paper revision: 156; next scheduled full revision: 166.
+
 # Current result: extended share-18 proof checkpoint
 
 Milestones 161 and 163 now connect 448 continuation segments in

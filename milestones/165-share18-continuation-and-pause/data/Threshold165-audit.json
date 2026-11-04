@@ -1,0 +1,408 @@
+{
+  "status": "PASS",
+  "module": "Threshold165",
+  "source": "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\lean\\Threshold165.lean",
+  "source_sha256": "e2b335c0fe9d08fdbd0e0da0a610266a993a6264d65618e6b347337ae20bce22",
+  "checker_sha256": "081994201a42f25bf51c15456f208a8eb390b617706813e801531c84e9e11f2d",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\data\\threshold-execution.json": "6024f9fc4ec0dce00b7a18cb651cfc8586e1c979e6b557b24fa71621212ae532",
+    "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\lean\\Threshold165.lean": "e2b335c0fe9d08fdbd0e0da0a610266a993a6264d65618e6b347337ae20bce22",
+    "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\scripts\\check_threshold.py": "081994201a42f25bf51c15456f208a8eb390b617706813e801531c84e9e11f2d",
+    "E:\\Snake-in-a-box\\milestones\\163-share18-replay-continuation\\data\\remainder-execution-v2.json": "3948995b8fe9be86c89120aba0ea5cc5e899694a46d89e6a910e142b4accd1de",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\build\\lib\\lean\\Mathlib\\Data\\Rat\\Defs.olean": "c91249a6e673e77ae7dd8c8effa391c41677ce66b0f753781c099758e55e89ff",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\build\\lib\\lean\\Mathlib\\Tactic\\Linarith.olean": "b9438f24d9d07ebcf4314313cb6b49a64377c977b5f6bbc13afb95c9937cf6e4",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\build\\lib\\lean\\Mathlib\\Tactic\\NormNum.olean": "1c6c764a13f068ccaf21bc658aa563115be7995ae3e1e9ecb6f07695fbab9186",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Lean\\Elab\\Tactic\\Omega.olean": "4b2613345cb64b57ac4f8a0183f43e1afe4138ef8eaed2158e9d053107262491"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\logs\\Threshold165-1793793816069012300\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\lean\\Threshold165.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\logs\\Threshold165-1793793816069012300\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2335113216,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 85,
+    "snapshot_seconds": 0.03099999999994907
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2315694080,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 48099328,
+          "WorkingSetSize": 30277632
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2285146112,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 37085184,
+          "WorkingSetSize": 39059456
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.01499999999987267
+    },
+    {
+      "free_bytes": 2250903552,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 39493632,
+          "WorkingSetSize": 41046016
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2298167296,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 42426368,
+          "WorkingSetSize": 43106304
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.01499999999987267
+    },
+    {
+      "free_bytes": 2293452800,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 44847104,
+          "WorkingSetSize": 45162496
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2285842432,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 47755264,
+          "WorkingSetSize": 47296512
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2367004672,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 49963008,
+          "WorkingSetSize": 49299456
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 85,
+      "snapshot_seconds": 0.03099999999994907
+    },
+    {
+      "free_bytes": 2307506176,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 51937280,
+          "WorkingSetSize": 51056640
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2320580608,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 54009856,
+          "WorkingSetSize": 52891648
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 85,
+      "snapshot_seconds": 0.01499999999987267
+    },
+    {
+      "free_bytes": 2303414272,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 56057856,
+          "WorkingSetSize": 54562816
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2306555904,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 58249216,
+          "WorkingSetSize": 56586240
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.01499999999987267
+    },
+    {
+      "free_bytes": 2267643904,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 60284928,
+          "WorkingSetSize": 58441728
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2136121344,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 84434944,
+          "WorkingSetSize": 189059072
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 87,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 1893011456,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 125669376,
+          "WorkingSetSize": 429199360
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.01499999999987267
+    },
+    {
+      "free_bytes": 1680134144,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 125669376,
+          "WorkingSetSize": 646041600
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.0
+    },
+    {
+      "free_bytes": 1588809728,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 126734336,
+          "WorkingSetSize": 732233728
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 1531514880,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 122470400,
+          "WorkingSetSize": 757932032
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 1426366464,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 159961088,
+          "WorkingSetSize": 783884288
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01499999999987267
+    },
+    {
+      "free_bytes": 1431412736,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 140730368,
+          "WorkingSetSize": 795324416
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.0
+    },
+    {
+      "free_bytes": 1430749184,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 31904,
+          "ParentProcessId": 5668,
+          "PrivatePageCount": 168030208,
+          "WorkingSetSize": 838823936
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.0
+    }
+  ],
+  "compiler_pid": 31904,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 20.389999999999873,
+  "axioms": [
+    {
+      "theorem": "Snake9.Threshold165.attained_comparison",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Threshold165.conditional_edge_bound",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Threshold165.scaled_comparison",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Threshold165.integer_edge_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Threshold165.saved_walks",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "log_sha256": "6cc2e37a26bc659cab3706b7dd95de94b404d57088d7cdcdfe0de18a84df4090",
+  "object": "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\build\\Threshold165.olean",
+  "olean_sha256": "fe3b4beb89abba50b3d3fbc87c8c188050b15849aa74dee5f34936985fcbe266"
+}
