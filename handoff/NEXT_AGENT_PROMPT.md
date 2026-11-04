@@ -1,3 +1,24 @@
+# Current result: checked share-18 replay checkpoint
+
+Milestone 159 completed the interpretation of all 13,224 clauses in the
+universal 012034 share-18 proof core: 109 modules and 108 axiom reports.
+Milestone 160 reproduced the accepted 1,055-deduction prefix exactly and
+checked three checkpoint modules in Lean. The new checkpoint inherits truth
+from the original CNF; live clauses are retained and dead entries become
+tautologies under the checked checkpoint rule.
+
+Read milestones/159-share18-proof-continuation/data/semantics-completion.json
+and milestones/160-share18-replay-transport/COMPLETION.md with its adjacent
+data/completion.json. These stages are complete. Do not restart the old159
+stopped batch or repeat its accepted clauses and structure checks.
+
+Next continue the remaining 144,160 deductions and 14,704,875 references
+from the checked checkpoint. Then check final contradiction assembly,
+actual-snake transfer and reversal. The universal share-18 theorem and a
+new global bound are not yet established. No new Boolean query is needed.
+
+Last full paper revision: 156; next: 166. Historical updates follow.
+
 # Current result: universal share-18 CNF interpretation completed
 
 Milestone 159 passed the interpretation of all 13,224 clauses in the

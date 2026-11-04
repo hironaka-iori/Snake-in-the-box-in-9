@@ -1,0 +1,71 @@
+{
+  "status": "PASS_EXACT_ACCEPTED_PREFIX_TRANSPORT_CHECKPOINT_SOURCE_ONLY",
+  "parent_pid": 54116,
+  "source_plan_sha256": "7bbd94122f3375408688a376c5acdf6a2b6fcc1be44d08a65638f47b1748a82d",
+  "terminal159": {
+    "path": "milestones/159-share18-proof-continuation/data/semantic-progress.json",
+    "sha256": "0ba931bd5a91ee2f1a3a1f9638b8c52e63b553f030ac66de192d1b050dd4c493",
+    "status": "STOPPED_ON_FAILED_OR_INCOMPLETE_MODULE",
+    "final_progress": {
+      "path": "milestones/159-share18-proof-continuation/data/semantic-final-progress.json",
+      "sha256": "13232579f6e5e6501ba61894bd0dc5abe19b84250af6196c8a35a6f1fa6bbe96",
+      "status": "PASS_COMPLETE_SEMANTIC_MODULES"
+    }
+  },
+  "initial_resources": {
+    "free_bytes": 3173335040,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 80,
+    "snapshot_seconds": 0.01599999999962165,
+    "lean_processes": [],
+    "graph_processes": [],
+    "owned_memory": [
+      {
+        "pid": 54116,
+        "private_bytes": 12341248
+      }
+    ]
+  },
+  "peak_owned_private_bytes": 98537472,
+  "stop_reason": null,
+  "memory_limit_bytes": 1073741824,
+  "timeout_seconds": 180,
+  "Lean_invoked": false,
+  "solver_invoked": false,
+  "worker_pid": 16868,
+  "command": [
+    "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\Snake-in-a-box\\milestones\\160-share18-replay-transport\\scripts\\prefix_transport.py",
+    "--run",
+    "E:\\Snake-in-a-box\\milestones\\160-share18-replay-transport\\data\\prefix1055",
+    "--parent",
+    "54116"
+  ],
+  "last_resources": {
+    "free_bytes": 3080884224,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 81,
+    "snapshot_seconds": 0.01599999999962165,
+    "lean_processes": [],
+    "graph_processes": [],
+    "owned_memory": [
+      {
+        "pid": 54116,
+        "private_bytes": 12341248
+      },
+      {
+        "pid": 16868,
+        "private_bytes": 86196224
+      }
+    ]
+  },
+  "exit_code": 0,
+  "receipt_sha256": "8921753b2efaf86b964431f64a776bcefa70c9900a211ec3a3993d4f5f0f0866"
+}
