@@ -1,0 +1,3943 @@
+{
+  "status": "PASS_COMPLETE_SHARED_SHARE17_CORE_CONTRADICTION",
+  "checked_modules": 137,
+  "reused_pilot_modules": 34,
+  "new_modules": 103,
+  "axiom_reports": 407,
+  "initial_core_clauses": 11869,
+  "tree_height": 14,
+  "segments": 290,
+  "deductions": 30305,
+  "references": 1754767,
+  "final_original_clause_id": 190427,
+  "final_tree_key": 4398,
+  "final_theorem": "Snake9.ReplayFull153.unsat",
+  "final_CNF": "Snake9.LocalWindow.ShareWindow153.cnf",
+  "complete_shared_core_contradiction": true,
+  "actual_snake_share17_complete": false,
+  "new_global_upper_bound": false,
+  "maximum_sampled_private_bytes": 2036826112,
+  "compiler_wall_seconds": 1252.3640000000087,
+  "receipts": [
+    {
+      "module": "LratCheck153Replay",
+      "receipt": "data/LratCheck153Replay-audit.json",
+      "sha256": "f552b420c2cf5eb1166b94dd41fb3f868fbe8580fca2f37d59c57d79a7f4a3b9",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.Lrat153Replay.rawMask_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.Lrat153Replay.start_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 3.110000000000582,
+      "seconds": 3.437000000001717
+    },
+    {
+      "module": "LratFast153Replay",
+      "receipt": "data/LratFast153Replay-audit.json",
+      "sha256": "157298c9b6b62b5caea25b17d8dc8ab352c278311e9efbad648b22f4d2d77f50",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.LratFast153Replay.cp_true",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.LratFast153Replay.final_false",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.172000000002299,
+      "seconds": 2.4069999999992433
+    },
+    {
+      "module": "InputTree153Replay",
+      "receipt": "data/InputTree153Replay-audit.json",
+      "sha256": "12babaee85207806385a2c23cb3e4f3a6a8756148188a0fb4b31008a354984b0",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayInput153.InputTree.build_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayInput153.InputTree.start_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.1559999999990396,
+      "seconds": 1.4529999999977008
+    },
+    {
+      "module": "ReplayTools153",
+      "receipt": "data/ReplayTools153-audit.json",
+      "sha256": "44091e64a0ec1a7c6a5d7c5301aff050afb2dd40835c73bfb7c591fed93ffac0",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.all_take_drop",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.all_of_subset",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.build_true_of_slice",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0309999999990396,
+      "seconds": 2.0159999999996217
+    },
+    {
+      "module": "ReplayRawChunks153",
+      "receipt": "data/ReplayRawChunks153-audit.json",
+      "sha256": "478d45a7bfc7141c1ede4daec03afb1538407998d1ba77accf8635f80b5ea033",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayRawChunks153.chunks_true",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 5.281999999999243,
+      "seconds": 5.889999999999418
+    },
+    {
+      "module": "ReplayParts15300",
+      "receipt": "data/ReplayParts15300-audit.json",
+      "sha256": "3595004014948b375143d96ece8d12220d342151bf2745bfc121eb4c931e6188",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 13.829000000001543,
+      "seconds": 14.437999999998283
+    },
+    {
+      "module": "ReplayParts15301",
+      "receipt": "data/ReplayParts15301-audit.json",
+      "sha256": "a90af5661605ee9e432d54394834760bf06b8a140b717ecc9b948d490494c027",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 10.4220000000023,
+      "seconds": 10.889999999999418
+    },
+    {
+      "module": "ReplayParts15302",
+      "receipt": "data/ReplayParts15302-audit.json",
+      "sha256": "574c385fff9cb3a8cff51e42ace0baaa7de81245741a7c11a923ef0c42096edb",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 9.7029999999977,
+      "seconds": 10.0470000000023
+    },
+    {
+      "module": "ReplayParts15303",
+      "receipt": "data/ReplayParts15303-audit.json",
+      "sha256": "027d74b26154ec6da7f57dadcf62d8a38914f096c097eccf6292e9b98be848e8",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 6.172000000002299,
+      "seconds": 6.46900000000096
+    },
+    {
+      "module": "ReplayParts15304",
+      "receipt": "data/ReplayParts15304-audit.json",
+      "sha256": "05c7164f9a96aadd8f7669bc3f278f2bc87f397393794c24bd1ba2012ce2a6ff",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 9.390999999999622,
+      "seconds": 9.7029999999977
+    },
+    {
+      "module": "ReplayParts15305",
+      "receipt": "data/ReplayParts15305-audit.json",
+      "sha256": "62ec7c83abbf903819727a50ec5ba5b4a0a9d76955d9ceb54e39182511b3414d",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 10.76600000000326,
+      "seconds": 11.09400000000096
+    },
+    {
+      "module": "ReplayParts15306",
+      "receipt": "data/ReplayParts15306-audit.json",
+      "sha256": "b2b036ae282e47b3572b075bc5ec030f6b2b0c85547d7257d70a8629b185d8d7",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 7.985000000000582,
+      "seconds": 8.546999999998661
+    },
+    {
+      "module": "ReplayParts15307",
+      "receipt": "data/ReplayParts15307-audit.json",
+      "sha256": "56ee7b0372a524c733bf2b7f8d6a054c64b9c7ef86761685b7a7ce5b43c59d6b",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 9.389999999999418,
+      "seconds": 9.78099999999904
+    },
+    {
+      "module": "ReplayParts15308",
+      "receipt": "data/ReplayParts15308-audit.json",
+      "sha256": "c192891619a77adf5a37b3c5ed1f8d3a3702713ef89d3b1e1c2a4f94d2680c39",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 7.23399999999674,
+      "seconds": 7.53099999999904
+    },
+    {
+      "module": "ReplayParts15309",
+      "receipt": "data/ReplayParts15309-audit.json",
+      "sha256": "e44f1960df58c5d15496499bae4c0010d1bcfb1f0561848b06b93c3c2cf57c4d",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 7.234000000000378,
+      "seconds": 7.51600000000326
+    },
+    {
+      "module": "ReplayParts15310",
+      "receipt": "data/ReplayParts15310-audit.json",
+      "sha256": "ed66a3c4f7c6ca300d23129a50dd7cbfe5da517b2982a383a7437d49bed65481",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 7.281999999999243,
+      "seconds": 7.64100000000326
+    },
+    {
+      "module": "ReplayParts15311",
+      "receipt": "data/ReplayParts15311-audit.json",
+      "sha256": "0f797406a20dedea330757b23d88c44f9ccdbedb28c8a8632249a9dbf9a7c24b",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 5.2189999999973224,
+      "seconds": 5.610000000000582
+    },
+    {
+      "module": "ReplayInitial153",
+      "receipt": "data/ReplayInitial153-audit.json",
+      "sha256": "cdb5792ffc1bc6f9da6749728f8e6e6aeaf25e5d1ca697dac266f19a3a23be61",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 1.0940000000009604,
+      "seconds": 2.5469999999986612
+    },
+    {
+      "module": "ReplayTruth15300",
+      "receipt": "data/ReplayTruth15300-audit.json",
+      "sha256": "b2776cf3e44b8f7efc4d33e4e565afdbb035d5f6b2bf489be795ac66a884916d",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part0_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part1_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part2_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part3_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part4_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part5_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part6_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part7_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.547000000002299,
+      "seconds": 3.0310000000026776
+    },
+    {
+      "module": "ReplayTruth15301",
+      "receipt": "data/ReplayTruth15301-audit.json",
+      "sha256": "ef3b2cf01fea35ff07808687023267ccf8b54e6fe2c7009f45a683f4e500a534",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part8_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part9_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part10_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part11_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part12_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part13_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part14_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part15_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.110000000000582,
+      "seconds": 2.5780000000013388
+    },
+    {
+      "module": "ReplayTruth15302",
+      "receipt": "data/ReplayTruth15302-audit.json",
+      "sha256": "7318c8a70129090bb4b07b17504477c51778bf206401be6fdffa732cab6c6df3",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part16_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part17_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part18_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part19_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part20_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part21_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part22_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part23_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.125,
+      "seconds": 2.735000000000582
+    },
+    {
+      "module": "ReplayTruth15303",
+      "receipt": "data/ReplayTruth15303-audit.json",
+      "sha256": "2708d7dc647ab4c0d73bd33fddf2d2570d572d80b2251303b16c398c193c2cb3",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part24_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part25_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part26_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part27_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part28_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part29_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part30_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part31_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.125,
+      "seconds": 2.562999999998283
+    },
+    {
+      "module": "ReplayTruth15304",
+      "receipt": "data/ReplayTruth15304-audit.json",
+      "sha256": "2d23879800e8babf8e83a5b4737a9b3033ad174ef29ac0fc01a4efa4f26c0366",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part32_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part33_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part34_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part35_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part36_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part37_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part38_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part39_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.125,
+      "seconds": 2.5930000000007567
+    },
+    {
+      "module": "ReplayTruth15305",
+      "receipt": "data/ReplayTruth15305-audit.json",
+      "sha256": "ba29044bfe615f3ef92263767dd32ade054250d4569a58c31a0fecdc936a32c6",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part40_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part41_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part42_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part43_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part44_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part45_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part46_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part47_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.0780000000013388,
+      "seconds": 2.577999999997701
+    },
+    {
+      "module": "ReplayTruth15306",
+      "receipt": "data/ReplayTruth15306-audit.json",
+      "sha256": "54929abb3142d0783950ac778506b08380d0df4809f9f0cd5b6e98b65b581bd4",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part48_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part49_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part50_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part51_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part52_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part53_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part54_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part55_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.063000000001921,
+      "seconds": 2.562000000001717
+    },
+    {
+      "module": "ReplayTruth15307",
+      "receipt": "data/ReplayTruth15307-audit.json",
+      "sha256": "5dac74829cbb49e2e56ce92475d6461cbf833ebb8cf34572b6a3dde9e74b957e",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part56_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part57_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part58_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part59_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part60_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part61_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part62_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part63_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.062000000001717,
+      "seconds": 2.5159999999996217
+    },
+    {
+      "module": "ReplayTruth15308",
+      "receipt": "data/ReplayTruth15308-audit.json",
+      "sha256": "a693cf59a385c868b7cfa57ef07d887e58662419fe7143b71487c1cbe50bbf25",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part64_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part65_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part66_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part67_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part68_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part69_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part70_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part71_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.063000000001921,
+      "seconds": 2.5309999999990396
+    },
+    {
+      "module": "ReplayTruth15309",
+      "receipt": "data/ReplayTruth15309-audit.json",
+      "sha256": "54610ac0a9dcf00cd4dfb66b64a6dcf2191538360bea3d7e5a0c4b0bc6e5910b",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part72_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part73_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part74_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part75_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part76_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part77_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part78_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part79_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.061999999998079,
+      "seconds": 2.5790000000015425
+    },
+    {
+      "module": "ReplayTruth15310",
+      "receipt": "data/ReplayTruth15310-audit.json",
+      "sha256": "2ab3b9628a154c7f041ad29ba5203203a38d071a224fb0324fdd3ce3363763c0",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part80_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part81_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part82_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part83_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part84_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part85_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part86_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part87_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.125,
+      "seconds": 2.625
+    },
+    {
+      "module": "ReplayTruth15311",
+      "receipt": "data/ReplayTruth15311-audit.json",
+      "sha256": "cdf46011f5390aeb4defe4135a7d8b0df548364e6a86f548f8b72a051405ea41",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.part88_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part89_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part90_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part91_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayData153.part92_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 2.0780000000013388,
+      "seconds": 2.562000000001717
+    },
+    {
+      "module": "ReplayAssembly153",
+      "receipt": "data/ReplayAssembly153-audit.json",
+      "sha256": "b6de08adca7c2e9f953725f92aa9c3c004444ad3b5d3e07bbf450b92139b6c73",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayData153.start_true",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 9.39100000000326,
+      "seconds": 11.625
+    },
+    {
+      "module": "ReplayPilotData153",
+      "receipt": "data/ReplayPilotData153-audit.json",
+      "sha256": "c8911b4b8619927ef87fcde5de62c88ba94d03db24ca81a0a2cae10281b85c46",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [],
+      "compiler_wall_seconds": 7.78099999999904,
+      "seconds": 8.406999999999243
+    },
+    {
+      "module": "ReplayPilotCheck153",
+      "receipt": "data/ReplayPilotCheck153-audit.json",
+      "sha256": "a573ab155e9978c7a38b541cb9dee55bc584dc4554a5936b749653c05da830b8",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayPilot153.prefix_check",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.515999999999622,
+      "seconds": 13.09400000000096
+    },
+    {
+      "module": "ReplayPilotConsequence153",
+      "receipt": "data/ReplayPilotConsequence153-audit.json",
+      "sha256": "c4acd58331cbb29874596d005ae243830c381b718dd3db8faaf880400b3ddbec",
+      "checker_sha256": "f5657bc5b6670768403100a39dac1e09c67cada00fcf8bda186e09bf86eacd89",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayPilot153.prefix_true",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0470000000022992,
+      "seconds": 2.0159999999996217
+    },
+    {
+      "module": "ReplayCheckpoint153_00032",
+      "receipt": "data/ReplayCheckpoint153_00032-audit.json",
+      "sha256": "3732c05826f062825048f7ce18a2d721c707b816fd7d3427f62c9f00e1b7fd30",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 7.34400000000096,
+      "seconds": 7.765999999999622
+    },
+    {
+      "module": "ReplayCheckpoint153_00064",
+      "receipt": "data/ReplayCheckpoint153_00064-audit.json",
+      "sha256": "250990373686f1cbb50ef7edf970773c903824c42ac151cbe3aa1b57abc3a082",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 8.656999999999243,
+      "seconds": 9.01600000000326
+    },
+    {
+      "module": "ReplayCheckpoint153_00096",
+      "receipt": "data/ReplayCheckpoint153_00096-audit.json",
+      "sha256": "856e6c8b8d591de8195737c18ca5dcf4487051d849bd3b6d02f4f50c229ea474",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 8.90599999999904,
+      "seconds": 9.3279999999977
+    },
+    {
+      "module": "ReplayCheckpoint153_00128",
+      "receipt": "data/ReplayCheckpoint153_00128-audit.json",
+      "sha256": "a2e2858c3576fff715aa8367c145f73240bf6ecf8e6802cb853be72c0528239a",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 6.359000000000378,
+      "seconds": 6.717999999997119
+    },
+    {
+      "module": "ReplayCheckpoint153_00160",
+      "receipt": "data/ReplayCheckpoint153_00160-audit.json",
+      "sha256": "0517ab339f2a469caef952e515b069c894eeb9cd9bce23e2ae9c63863a7a4145",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 6.202999999997701,
+      "seconds": 6.546999999998661
+    },
+    {
+      "module": "ReplayCheckpoint153_00192",
+      "receipt": "data/ReplayCheckpoint153_00192-audit.json",
+      "sha256": "59fefbbad6901f23af6c3d98470284977810a0c6306a79c9b725996397eaff54",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 6.203000000001339,
+      "seconds": 6.5459999999984575
+    },
+    {
+      "module": "ReplayCheckpoint153_00224",
+      "receipt": "data/ReplayCheckpoint153_00224-audit.json",
+      "sha256": "5bae1762bb22faef519232698a1919c8cf832a2381713c3ce49bdc2cf87e40f1",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 7.34400000000096,
+      "seconds": 7.75
+    },
+    {
+      "module": "ReplayCheckpoint153_00256",
+      "receipt": "data/ReplayCheckpoint153_00256-audit.json",
+      "sha256": "3a3a51defbb36884f547559c5e6c30177f8bc608aaca520fc90b5c139ab0d9ef",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 6.297000000002299,
+      "seconds": 6.735000000000582
+    },
+    {
+      "module": "ReplayCheckpoint153_00288",
+      "receipt": "data/ReplayCheckpoint153_00288-audit.json",
+      "sha256": "3e859f1b2e461b91d2fb47cf6fdaf9941fb3f260083d135f8310fd031fed3121",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 6.312999999998283,
+      "seconds": 6.718000000000757
+    },
+    {
+      "module": "ReplayData153_0000",
+      "receipt": "data/ReplayData153_0000-audit.json",
+      "sha256": "94ee32bcd2e55290ab0eb2b680b2d74342bb13c081a47478c8f80ba76a185f12",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 4.21900000000096,
+      "seconds": 5.047000000002299
+    },
+    {
+      "module": "ReplayCheck153_00000",
+      "receipt": "data/ReplayCheck153_00000-audit.json",
+      "sha256": "dcad8a21fd51193063daefdd93a85bb029a9f8c423a3ee5a343b4d5887934030",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok0",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok1",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok2",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok3",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 13.592999999997119,
+      "seconds": 14.264999999999418
+    },
+    {
+      "module": "ReplayCheck153_00004",
+      "receipt": "data/ReplayCheck153_00004-audit.json",
+      "sha256": "b36f1d648bd9c8c17de9790b16fbad12a57a59562a57161cea4a0ef69ee88ff4",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok4",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok5",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok6",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok7",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 14.015999999999622,
+      "seconds": 14.687999999998283
+    },
+    {
+      "module": "ReplayCheck153_00008",
+      "receipt": "data/ReplayCheck153_00008-audit.json",
+      "sha256": "a6f09e58c2f270279c758bff7f51e408b5ed247cce3e72c5c32e74669bb91f9e",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok8",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok9",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok10",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok11",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 19.65700000000288,
+      "seconds": 20.295999999998457
+    },
+    {
+      "module": "ReplayCheck153_00012",
+      "receipt": "data/ReplayCheck153_00012-audit.json",
+      "sha256": "e1b7cfacb5d092e1685d18e17b21aa88de3bc58c9a986cb978facb077d420580",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok12",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok13",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok14",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok15",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 21.73400000000038,
+      "seconds": 22.39099999999962
+    },
+    {
+      "module": "ReplayCheck153_00016",
+      "receipt": "data/ReplayCheck153_00016-audit.json",
+      "sha256": "0488387f2a443ed37c8dce3f271e1b588bc61309aeaf04f1cfbbc3a9c184324a",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok16",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok17",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok18",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok19",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 23.01599999999962,
+      "seconds": 23.71900000000096
+    },
+    {
+      "module": "ReplayCheck153_00020",
+      "receipt": "data/ReplayCheck153_00020-audit.json",
+      "sha256": "1715bf588d492aa0cc10411492b42dc056e23ec215e950c282ae52e205584c2a",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok20",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok21",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok22",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok23",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 23.0,
+      "seconds": 23.68800000000192
+    },
+    {
+      "module": "ReplayCheck153_00024",
+      "receipt": "data/ReplayCheck153_00024-audit.json",
+      "sha256": "13acfdf0a962fa955540e9c017a2723d40f77114f0d66902138f2e9d14adf372",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok24",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok25",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok26",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok27",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 24.062999999998283,
+      "seconds": 24.70300000000134
+    },
+    {
+      "module": "ReplayCheck153_00028",
+      "receipt": "data/ReplayCheck153_00028-audit.json",
+      "sha256": "25b0884cb0ede3bb7908cb3cfcff020b88d22ccb2d24b86dd120e7da88811ecf",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok28",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok29",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok30",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok31",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 31.65599999999904,
+      "seconds": 32.29699999999866
+    },
+    {
+      "module": "ReplaySteps153_0000",
+      "receipt": "data/ReplaySteps153_0000-audit.json",
+      "sha256": "02512d40989714cc5f5f3b698f694adb61ec8fc90c2731c7d5b22eacadcc3aba",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps0",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0619999999980791,
+      "seconds": 2.2659999999996217
+    },
+    {
+      "module": "ReplayData153_0001",
+      "receipt": "data/ReplayData153_0001-audit.json",
+      "sha256": "2453a8979d95e6b87d61128f2acd2ca7ba92307f417c575fa50d2af7f7f15f23",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 2.0780000000013388,
+      "seconds": 2.5309999999990396
+    },
+    {
+      "module": "ReplayCheck153_00032",
+      "receipt": "data/ReplayCheck153_00032-audit.json",
+      "sha256": "f9260476c607977582c4f9f88d2d4a89d12637446f87a11d6c1a631a56d4098e",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok32",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok33",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok34",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok35",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 9.25,
+      "seconds": 9.625
+    },
+    {
+      "module": "ReplayCheck153_00036",
+      "receipt": "data/ReplayCheck153_00036-audit.json",
+      "sha256": "5aa65c57abb4d7c6a8997710847d7cd52c4d65dc5a3e6abfe7ea4580bc11acf0",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok36",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok37",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok38",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok39",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.3279999999977,
+      "seconds": 11.68800000000192
+    },
+    {
+      "module": "ReplayCheck153_00040",
+      "receipt": "data/ReplayCheck153_00040-audit.json",
+      "sha256": "e9f762764b0f62c3997337bbe3f933091766dec391b1b4b8ed75bbc5e891b3d9",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok40",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok41",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok42",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok43",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.28099999999904,
+      "seconds": 10.65599999999904
+    },
+    {
+      "module": "ReplayCheck153_00044",
+      "receipt": "data/ReplayCheck153_00044-audit.json",
+      "sha256": "93bd867dfebe01b2f3826530d9e0a563c7a41e0b86214efbf38853d19762f5b5",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok44",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok45",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok46",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok47",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.531000000002678,
+      "seconds": 11.889999999999418
+    },
+    {
+      "module": "ReplayCheck153_00048",
+      "receipt": "data/ReplayCheck153_00048-audit.json",
+      "sha256": "10ec4cd4321c50fbd28ff097ab637cbcebe06a11df5c30e93a764b408d53aec1",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok48",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok49",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok50",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok51",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.296999999998661,
+      "seconds": 11.687000000001717
+    },
+    {
+      "module": "ReplayCheck153_00052",
+      "receipt": "data/ReplayCheck153_00052-audit.json",
+      "sha256": "98c5805d87e8ad4a24652e13743a1c50332c0f7640816c33cb8b18f0727a13b8",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok52",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok53",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok54",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok55",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.34400000000096,
+      "seconds": 12.734000000000378
+    },
+    {
+      "module": "ReplayCheck153_00056",
+      "receipt": "data/ReplayCheck153_00056-audit.json",
+      "sha256": "683ac4d721a0497d4a8411cc759dfebbe7fffafb8b0c5954b486f3fded65af0a",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok56",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok57",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok58",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok59",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.312999999998283,
+      "seconds": 12.687999999998283
+    },
+    {
+      "module": "ReplayCheck153_00060",
+      "receipt": "data/ReplayCheck153_00060-audit.json",
+      "sha256": "8c841bcc669e7a7974c6d95e5d2b993b7c8b7d25f047753d5d7817d3089abe9a",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok60",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok61",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok62",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok63",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 19.84299999999712,
+      "seconds": 20.2029999999977
+    },
+    {
+      "module": "ReplaySteps153_0001",
+      "receipt": "data/ReplaySteps153_0001-audit.json",
+      "sha256": "95355d03a6c82d5898557866ef1b7d2c319ca0a6c5dd87f5b5573d81c4d81ed7",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps1",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0940000000009604,
+      "seconds": 2.25
+    },
+    {
+      "module": "ReplayData153_0002",
+      "receipt": "data/ReplayData153_0002-audit.json",
+      "sha256": "3d79400e88a1d9ad9a157e823ad23a84f7b2b0c0859489495f6818a28b596329",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 2.1409999999996217,
+      "seconds": 2.7040000000015425
+    },
+    {
+      "module": "ReplayCheck153_00064",
+      "receipt": "data/ReplayCheck153_00064-audit.json",
+      "sha256": "dd17693c4ab515ecdc8ade247654b40823e30c9ffabaf137972c000f3709b111",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok64",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok65",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok66",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok67",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.485000000000582,
+      "seconds": 10.860000000000582
+    },
+    {
+      "module": "ReplayCheck153_00068",
+      "receipt": "data/ReplayCheck153_00068-audit.json",
+      "sha256": "c71ee49582697cfc32bb5da2f73fc3c1b66d08a36179c3c238b4a7b5030547a1",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok68",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok69",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok70",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok71",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.43800000000192,
+      "seconds": 10.7970000000023
+    },
+    {
+      "module": "ReplayCheck153_00072",
+      "receipt": "data/ReplayCheck153_00072-audit.json",
+      "sha256": "1e9b0a0a2cb7d67162e6bd76f35febf2b9458faf9d84e3206cf35d70d23145a1",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok72",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok73",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok74",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok75",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.9220000000023,
+      "seconds": 12.35899999999674
+    },
+    {
+      "module": "ReplayCheck153_00076",
+      "receipt": "data/ReplayCheck153_00076-audit.json",
+      "sha256": "25a0536555d50c2fa604231bc90900f1d9f170d25267ebad27d841dc98e77ff9",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok76",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok77",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok78",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok79",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.375,
+      "seconds": 11.81300000000192
+    },
+    {
+      "module": "ReplayCheck153_00080",
+      "receipt": "data/ReplayCheck153_00080-audit.json",
+      "sha256": "ae41dc95e20d3c83093b1e7e4fb0800d1f26ef598db8fe344d35064d9592b1e6",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok80",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok81",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok82",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok83",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.328000000001339,
+      "seconds": 12.656999999999243
+    },
+    {
+      "module": "ReplayCheck153_00084",
+      "receipt": "data/ReplayCheck153_00084-audit.json",
+      "sha256": "097962921811a74d154fbca34604fc9b2d33766a5f143b94861001f7911a57f2",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok84",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok85",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok86",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok87",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.28099999999904,
+      "seconds": 11.578000000001339
+    },
+    {
+      "module": "ReplayCheck153_00088",
+      "receipt": "data/ReplayCheck153_00088-audit.json",
+      "sha256": "975876301ec7415a0825264f400965d5d3dc29ee6eddbe06a85213015ab143f4",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok88",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok89",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok90",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok91",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.390999999999622,
+      "seconds": 12.64100000000326
+    },
+    {
+      "module": "ReplayCheck153_00092",
+      "receipt": "data/ReplayCheck153_00092-audit.json",
+      "sha256": "b269a66eea4a415fee51b90897851fbed63dd56fa94bbbefadfe3d7019b3a277",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok92",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok93",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok94",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok95",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 17.71900000000096,
+      "seconds": 18.125
+    },
+    {
+      "module": "ReplaySteps153_0002",
+      "receipt": "data/ReplaySteps153_0002-audit.json",
+      "sha256": "933eebdfbcae37addbd5330307710acec7b87b397c63fb61ea2e6b7d727bb230",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps2",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0320000000028813,
+      "seconds": 1.625
+    },
+    {
+      "module": "ReplayData153_0003",
+      "receipt": "data/ReplayData153_0003-audit.json",
+      "sha256": "7e0109f485acabdd00f0ae72f5657e772049687df538a72ae4a4502073299861",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 2.125,
+      "seconds": 2.5780000000013388
+    },
+    {
+      "module": "ReplayCheck153_00096",
+      "receipt": "data/ReplayCheck153_00096-audit.json",
+      "sha256": "1126393ffa018e180c6b80634acc21f76c8c3b5864854b14efed0fcc36f1b08b",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok96",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok97",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok98",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok99",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 9.360000000000582,
+      "seconds": 9.734000000000378
+    },
+    {
+      "module": "ReplayCheck153_00100",
+      "receipt": "data/ReplayCheck153_00100-audit.json",
+      "sha256": "f85e56754bcea28da2079801df87091d2a0adf9ec69e863b8c8a8e391e1b347b",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok100",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok101",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok102",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok103",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.98399999999674,
+      "seconds": 11.359000000000378
+    },
+    {
+      "module": "ReplayCheck153_00104",
+      "receipt": "data/ReplayCheck153_00104-audit.json",
+      "sha256": "1200691a4a986932d25b83a81e620653b796b87257d21cf158d021f38524b5ae",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok104",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok105",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok106",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok107",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.43699999999808,
+      "seconds": 11.796999999998661
+    },
+    {
+      "module": "ReplayCheck153_00108",
+      "receipt": "data/ReplayCheck153_00108-audit.json",
+      "sha256": "c40cd3c3a62f3a6130bbeae28bd94d9d7a30f8b4c78de6ad67a743d891a0d19c",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok108",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok109",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok110",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok111",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.421999999998661,
+      "seconds": 11.75
+    },
+    {
+      "module": "ReplayCheck153_00112",
+      "receipt": "data/ReplayCheck153_00112-audit.json",
+      "sha256": "006adec91c5b80444da6521f70f95a5a08686e6d7930fd37169dca089d51365e",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok112",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok113",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok114",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok115",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.328000000001339,
+      "seconds": 11.65599999999904
+    },
+    {
+      "module": "ReplayCheck153_00116",
+      "receipt": "data/ReplayCheck153_00116-audit.json",
+      "sha256": "46781f29764b677220a95965081feae259dfcaa14063922d8be3ec2b2517a61d",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok116",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok117",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok118",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok119",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.375,
+      "seconds": 12.7029999999977
+    },
+    {
+      "module": "ReplayCheck153_00120",
+      "receipt": "data/ReplayCheck153_00120-audit.json",
+      "sha256": "1fdd51c6e9a894f77ac69e88ca08c2cbfb026ad6226a87704a111e1652d07ab8",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok120",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok121",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok122",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok123",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.328000000001339,
+      "seconds": 12.65599999999904
+    },
+    {
+      "module": "ReplayCheck153_00124",
+      "receipt": "data/ReplayCheck153_00124-audit.json",
+      "sha256": "4ee090a62bb5f3e898496598b3e637728fc60fe6e7a5af3981940045d51cd69e",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok124",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok125",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok126",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok127",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 18.5,
+      "seconds": 18.84299999999712
+    },
+    {
+      "module": "ReplaySteps153_0003",
+      "receipt": "data/ReplaySteps153_0003-audit.json",
+      "sha256": "753940e7c180dece54c52cda592c956ad9aa25b03976520aae2788ee33df3db0",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps3",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0469999999986612,
+      "seconds": 2.014999999999418
+    },
+    {
+      "module": "ReplayData153_0004",
+      "receipt": "data/ReplayData153_0004-audit.json",
+      "sha256": "f636d0fe71b4a4f6df8e9efdb6642aba73de167b2b0f725a30f97f245a87134d",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 2.125,
+      "seconds": 2.4690000000009604
+    },
+    {
+      "module": "ReplayCheck153_00128",
+      "receipt": "data/ReplayCheck153_00128-audit.json",
+      "sha256": "fe06e7282d129d431fe26d9a57a22d62c0767c7c95a676aa89aed6e98be5e21b",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok128",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok129",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok130",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok131",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 9.296999999998661,
+      "seconds": 9.609000000000378
+    },
+    {
+      "module": "ReplayCheck153_00132",
+      "receipt": "data/ReplayCheck153_00132-audit.json",
+      "sha256": "29610d71095c118a3770573ebab5c9733b538c5b17a0448cd810dd82ea4bc707",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok132",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok133",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok134",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok135",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.31300000000192,
+      "seconds": 10.625
+    },
+    {
+      "module": "ReplayCheck153_00136",
+      "receipt": "data/ReplayCheck153_00136-audit.json",
+      "sha256": "596f05a7793bcaa5e501914e0746c892855c3688072eb6c89d681e6c43f4a718",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok136",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok137",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok138",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok139",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.437999999998283,
+      "seconds": 11.75
+    },
+    {
+      "module": "ReplayCheck153_00140",
+      "receipt": "data/ReplayCheck153_00140-audit.json",
+      "sha256": "411070c51e1dc1ab3bb41b46a64d3f056ab545199c2a303ea7a22f1b65de29fd",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok140",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok141",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok142",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok143",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.35899999999674,
+      "seconds": 12.65599999999904
+    },
+    {
+      "module": "ReplayCheck153_00144",
+      "receipt": "data/ReplayCheck153_00144-audit.json",
+      "sha256": "c8b6919cbc8bd4a8ba3ec581a68a9060839227c3204f0cca6a7d51a19453f94c",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok144",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok145",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok146",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok147",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 15.53099999999904,
+      "seconds": 15.859000000000378
+    },
+    {
+      "module": "ReplayCheck153_00148",
+      "receipt": "data/ReplayCheck153_00148-audit.json",
+      "sha256": "33b31001e6054c3f8410b0c483335575a70757c05096d406d13e6e42d8e25afd",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok148",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok149",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok150",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok151",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 15.562000000001717,
+      "seconds": 15.860000000000582
+    },
+    {
+      "module": "ReplayCheck153_00152",
+      "receipt": "data/ReplayCheck153_00152-audit.json",
+      "sha256": "3b8db10e5d1ef5185a71c217da572481b479fa3167f7022f8b1537f4f3f4be0c",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok152",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok153",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok154",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok155",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 16.889999999999418,
+      "seconds": 17.26599999999962
+    },
+    {
+      "module": "ReplayCheck153_00156",
+      "receipt": "data/ReplayCheck153_00156-audit.json",
+      "sha256": "43fa5475ced9ac2cc27586bb1394cc21a46d5a82cd35a0677ea7dfe7abdc2958",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok156",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok157",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok158",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok159",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 22.92199999999866,
+      "seconds": 23.28099999999904
+    },
+    {
+      "module": "ReplaySteps153_0004",
+      "receipt": "data/ReplaySteps153_0004-audit.json",
+      "sha256": "d4663b461cffae9912bf1197b4ac20cd270b3b5834de3e880735f92ba597f9fb",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps4",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0930000000007567,
+      "seconds": 2.0940000000009604
+    },
+    {
+      "module": "ReplayData153_0005",
+      "receipt": "data/ReplayData153_0005-audit.json",
+      "sha256": "39fde7d11203063a9eff706a2fc91607ecc7208d8f6e5a69956e0e3355c1bbcd",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 2.1090000000003783,
+      "seconds": 2.5309999999990396
+    },
+    {
+      "module": "ReplayCheck153_00160",
+      "receipt": "data/ReplayCheck153_00160-audit.json",
+      "sha256": "2ed6a83b62fc24e2239f5ce82e0dcb278e4be031dbde327032049a0e214e3b70",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok160",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok161",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok162",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok163",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 9.40599999999904,
+      "seconds": 9.718000000000757
+    },
+    {
+      "module": "ReplayCheck153_00164",
+      "receipt": "data/ReplayCheck153_00164-audit.json",
+      "sha256": "5401e470d43999bb8f16e817ccbe57424a4581844d2de0238179d0b9855ca89b",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok164",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok165",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok166",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok167",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.90599999999904,
+      "seconds": 11.265999999999622
+    },
+    {
+      "module": "ReplayCheck153_00168",
+      "receipt": "data/ReplayCheck153_00168-audit.json",
+      "sha256": "d08f7e7580b401725f7f0de3404f212c7fae75ad2b13a21baaa40e3d3b2ad8ea",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok168",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok169",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok170",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok171",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.514999999999418,
+      "seconds": 11.890999999999622
+    },
+    {
+      "module": "ReplayCheck153_00172",
+      "receipt": "data/ReplayCheck153_00172-audit.json",
+      "sha256": "885aaf547b9efb0b022fdf04fc29e4bf5e5b8fd15907e257f6b258df085de77c",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok172",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok173",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok174",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok175",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.5470000000023,
+      "seconds": 11.921999999998661
+    },
+    {
+      "module": "ReplayCheck153_00176",
+      "receipt": "data/ReplayCheck153_00176-audit.json",
+      "sha256": "e6e0c8046fe18f069ddb5f2bd6ff25e1a9f69d407f23d0951ce4fa0a792881bf",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok176",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok177",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok178",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok179",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.625,
+      "seconds": 13.0
+    },
+    {
+      "module": "ReplayCheck153_00180",
+      "receipt": "data/ReplayCheck153_00180-audit.json",
+      "sha256": "5ad9bcf472afeda33cb382bef38c1cf15e3ee994698f86b15c478c44449fc044",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok180",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok181",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok182",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok183",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 13.03099999999904,
+      "seconds": 13.40599999999904
+    },
+    {
+      "module": "ReplayCheck153_00184",
+      "receipt": "data/ReplayCheck153_00184-audit.json",
+      "sha256": "a05e555e5b108ceca6b889c2e5f7975056ae1c4e3cc508a13b4fe4e731554ad8",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok184",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok185",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok186",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok187",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 13.34400000000096,
+      "seconds": 13.687999999998283
+    },
+    {
+      "module": "ReplayCheck153_00188",
+      "receipt": "data/ReplayCheck153_00188-audit.json",
+      "sha256": "9b2e4b76b3c18dcf342bf9838a8ebf6780736c4282a1164c92943325f3891f67",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok188",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok189",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok190",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok191",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 18.75,
+      "seconds": 19.14099999999962
+    },
+    {
+      "module": "ReplaySteps153_0005",
+      "receipt": "data/ReplaySteps153_0005-audit.json",
+      "sha256": "ec3b879d4ce08b5bad7f1e3bf851f04428e8c8dd2a164bea66dcb41c4ecccc27",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps5",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0780000000013388,
+      "seconds": 2.0940000000009604
+    },
+    {
+      "module": "ReplayData153_0006",
+      "receipt": "data/ReplayData153_0006-audit.json",
+      "sha256": "4aa9708a847d931e3591606db629df77143f5ffcbd5a5e54dc6d1343da5bcd26",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 2.0780000000013388,
+      "seconds": 2.452999999997701
+    },
+    {
+      "module": "ReplayCheck153_00192",
+      "receipt": "data/ReplayCheck153_00192-audit.json",
+      "sha256": "88175ef0961a633fe4136ff2680d2f7791d0f228be92818c7fc98fb38e700b94",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok192",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok193",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok194",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok195",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 9.31300000000192,
+      "seconds": 9.640999999999622
+    },
+    {
+      "module": "ReplayCheck153_00196",
+      "receipt": "data/ReplayCheck153_00196-audit.json",
+      "sha256": "f3b7c8a745abef78a78b38022a80c48d611753a9f6c2a91f15d67165a3d9772e",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok196",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok197",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok198",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok199",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.468000000000757,
+      "seconds": 10.81199999999808
+    },
+    {
+      "module": "ReplayCheck153_00200",
+      "receipt": "data/ReplayCheck153_00200-audit.json",
+      "sha256": "1947bd9a40a29254994cc9e245960e0c15e6e855b52ff1499564f43678212058",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok200",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok201",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok202",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok203",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.329000000001543,
+      "seconds": 11.656000000002678
+    },
+    {
+      "module": "ReplayCheck153_00204",
+      "receipt": "data/ReplayCheck153_00204-audit.json",
+      "sha256": "9d6946007dbea2aa6397b7e212628e50b9272987753f1939c4647b9e0b6d5881",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok204",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok205",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok206",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok207",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.34400000000096,
+      "seconds": 12.670999999998457
+    },
+    {
+      "module": "ReplayCheck153_00208",
+      "receipt": "data/ReplayCheck153_00208-audit.json",
+      "sha256": "7c15bf77d8eaba22ea51afebfbbab715651715c136fd8c083be328e342a5dc64",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok208",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok209",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok210",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok211",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.4220000000023,
+      "seconds": 12.764999999999418
+    },
+    {
+      "module": "ReplayCheck153_00212",
+      "receipt": "data/ReplayCheck153_00212-audit.json",
+      "sha256": "ec8178b7202f4ce0f8fa2c14c84736cecf5af6186196c57d0ab9ea46f910fa4b",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok212",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok213",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok214",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok215",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 13.625,
+      "seconds": 13.968999999997322
+    },
+    {
+      "module": "ReplayCheck153_00216",
+      "receipt": "data/ReplayCheck153_00216-audit.json",
+      "sha256": "a2f112c949298c08b833209481aee30d3b6be62f240c35d12b284af81462c456",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok216",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok217",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok218",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok219",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 13.593999999997322,
+      "seconds": 13.90599999999904
+    },
+    {
+      "module": "ReplayCheck153_00220",
+      "receipt": "data/ReplayCheck153_00220-audit.json",
+      "sha256": "20f56dd53e3bf7bed57541928c1be198537ece3a1eb15d96cbc5844f46aa29e5",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok220",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok221",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok222",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok223",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 20.76599999999962,
+      "seconds": 21.15599999999904
+    },
+    {
+      "module": "ReplaySteps153_0006",
+      "receipt": "data/ReplaySteps153_0006-audit.json",
+      "sha256": "9e7248a0054308b3d40f13841117a35c9902058a7d3185c482b47663f6d7a4c6",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps6",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.1089999999967404,
+      "seconds": 2.1089999999967404
+    },
+    {
+      "module": "ReplayData153_0007",
+      "receipt": "data/ReplayData153_0007-audit.json",
+      "sha256": "fa3a024940f4e733e2caa244c6daa93ead56ca08d977c547ba25a39653adc433",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 3.172000000002299,
+      "seconds": 3.5940000000009604
+    },
+    {
+      "module": "ReplayCheck153_00224",
+      "receipt": "data/ReplayCheck153_00224-audit.json",
+      "sha256": "287520adaa90ef2d9e1ad24079aa9223b662a5ed5478395d8faf5436fe8219a2",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok224",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok225",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok226",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok227",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.312000000001717,
+      "seconds": 10.670999999998457
+    },
+    {
+      "module": "ReplayCheck153_00228",
+      "receipt": "data/ReplayCheck153_00228-audit.json",
+      "sha256": "99118cad814c11f852675465b1ba654c6c83219bdca6b17c097f6ed5006b4aad",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok228",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok229",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok230",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok231",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.5470000000023,
+      "seconds": 10.890999999999622
+    },
+    {
+      "module": "ReplayCheck153_00232",
+      "receipt": "data/ReplayCheck153_00232-audit.json",
+      "sha256": "a662da5fc4488477b37b5871636d119ec8835132e8f6d249cac5fd63aa36e090",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok232",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok233",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok234",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok235",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 10.281999999999243,
+      "seconds": 10.59400000000096
+    },
+    {
+      "module": "ReplayCheck153_00236",
+      "receipt": "data/ReplayCheck153_00236-audit.json",
+      "sha256": "d368b70863b9c63e3a28eb0981f3cfe2598906ee5503453f178263f8c1dbdef8",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok236",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok237",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok238",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok239",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.375,
+      "seconds": 11.703000000001339
+    },
+    {
+      "module": "ReplayCheck153_00240",
+      "receipt": "data/ReplayCheck153_00240-audit.json",
+      "sha256": "277a2ba5b53bc6b8e58d53c4ca76e52d0c95a7caa4116cdf94fc03aafde4fc39",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok240",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok241",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok242",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok243",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.3279999999977,
+      "seconds": 11.6720000000023
+    },
+    {
+      "module": "ReplayCheck153_00244",
+      "receipt": "data/ReplayCheck153_00244-audit.json",
+      "sha256": "e5047ebd43ab01b1b2517ab8b196860b6e4efc1879a99af364151eccb8f57dc2",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok244",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok245",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok246",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok247",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.34400000000096,
+      "seconds": 12.68800000000192
+    },
+    {
+      "module": "ReplayCheck153_00248",
+      "receipt": "data/ReplayCheck153_00248-audit.json",
+      "sha256": "56d041da838c2096dfcb6b780431ba217ae21723f09b71d3c68b6a76c261638b",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok248",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok249",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok250",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok251",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.375,
+      "seconds": 12.687000000001717
+    },
+    {
+      "module": "ReplayCheck153_00252",
+      "receipt": "data/ReplayCheck153_00252-audit.json",
+      "sha256": "a11490d730374210ed0a3d1ba5384974f95d3789372472210f1831bac38236d1",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok252",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok253",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok254",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok255",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 16.485000000000582,
+      "seconds": 16.81300000000192
+    },
+    {
+      "module": "ReplaySteps153_0007",
+      "receipt": "data/ReplaySteps153_0007-audit.json",
+      "sha256": "f1e1859954089ecc7d42bab82e60f53d0d6e84ab27c73a1cf590eea921cc3d80",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps7",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0469999999986612,
+      "seconds": 1.8590000000003783
+    },
+    {
+      "module": "ReplayData153_0008",
+      "receipt": "data/ReplayData153_0008-audit.json",
+      "sha256": "647d95dc0be7ad342ebc341932d3a33751097d2b530dd79ae508c9c6f1feb902",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 2.062000000001717,
+      "seconds": 2.3909999999996217
+    },
+    {
+      "module": "ReplayCheck153_00256",
+      "receipt": "data/ReplayCheck153_00256-audit.json",
+      "sha256": "ad29c6a511668a9941921c5748fe5de065d4ef078ae82783aafd8bed1141bb4e",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok256",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok257",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok258",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok259",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 9.40599999999904,
+      "seconds": 9.7970000000023
+    },
+    {
+      "module": "ReplayCheck153_00260",
+      "receipt": "data/ReplayCheck153_00260-audit.json",
+      "sha256": "279a20714d59d0691ef821158e9efa58ae535c64b1224ed1e84546ed01d47b50",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok260",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok261",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok262",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok263",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.453000000001339,
+      "seconds": 11.78099999999904
+    },
+    {
+      "module": "ReplayCheck153_00264",
+      "receipt": "data/ReplayCheck153_00264-audit.json",
+      "sha256": "f980482d54fedba62d30356d54ccc4f99becd76b183de643b45269a889842bdb",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok264",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok265",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok266",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok267",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.453000000001339,
+      "seconds": 11.8279999999977
+    },
+    {
+      "module": "ReplayCheck153_00268",
+      "receipt": "data/ReplayCheck153_00268-audit.json",
+      "sha256": "73796110731755cdc674cb891b1ae6c7d6a22affa3af4d62c28663646f2fc63c",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok268",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok269",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok270",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok271",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.389999999999418,
+      "seconds": 11.71900000000096
+    },
+    {
+      "module": "ReplayCheck153_00272",
+      "receipt": "data/ReplayCheck153_00272-audit.json",
+      "sha256": "b2392fee4f442c3996359a9d26cd2d490b147a0d23dcbb573e099f3420d21e8b",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok272",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok273",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok274",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok275",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 11.9529999999977,
+      "seconds": 12.312000000001717
+    },
+    {
+      "module": "ReplayCheck153_00276",
+      "receipt": "data/ReplayCheck153_00276-audit.json",
+      "sha256": "9adc101c7f3e1c5960b87c48c7058af2e87f8716898c5e0e91d9a16371e70c09",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok276",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok277",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok278",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok279",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 12.359000000000378,
+      "seconds": 12.656999999999243
+    },
+    {
+      "module": "ReplayCheck153_00280",
+      "receipt": "data/ReplayCheck153_00280-audit.json",
+      "sha256": "4b4ed63758f4f1c12e2b168a6454865c5e35e7c37f2cba8184f272f240967c88",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok280",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok281",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok282",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok283",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 13.421999999998661,
+      "seconds": 13.765999999999622
+    },
+    {
+      "module": "ReplayCheck153_00284",
+      "receipt": "data/ReplayCheck153_00284-audit.json",
+      "sha256": "c2d1c4dd9494e352881ee8cb564dc014c181050f8a6dd185cff860d644ea27ff",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok284",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok285",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok286",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok287",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 15.43699999999808,
+      "seconds": 15.7970000000023
+    },
+    {
+      "module": "ReplaySteps153_0008",
+      "receipt": "data/ReplaySteps153_0008-audit.json",
+      "sha256": "c7671b8bbde759b272bf0b932e9d31bbf391837e23b4a4cd6f240066196bb50f",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps8",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0940000000009604,
+      "seconds": 2.1560000000026776
+    },
+    {
+      "module": "ReplayData153_0009",
+      "receipt": "data/ReplayData153_0009-audit.json",
+      "sha256": "f6cbaa00548092da18fc614c4e14fb9f3fd643f72477ed656dae605d76afe074",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [],
+      "compiler_wall_seconds": 1.0309999999990396,
+      "seconds": 1.375
+    },
+    {
+      "module": "ReplayCheck153_00288",
+      "receipt": "data/ReplayCheck153_00288-audit.json",
+      "sha256": "2ef048aa78e3e491e5ebdb5b3ac8d315163427a6d8282964f22a763a7b36e363",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.ok288",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "Snake9.ReplayFull153.ok289",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 3.202999999997701,
+      "seconds": 3.5160000000032596
+    },
+    {
+      "module": "ReplaySteps153_0009",
+      "receipt": "data/ReplaySteps153_0009-audit.json",
+      "sha256": "9926e13f8228527d768583b7908496abc694c11a0649ff3f45c291ccf20c393a",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.steps9",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.0469999999986612,
+      "seconds": 1.4059999999990396
+    },
+    {
+      "module": "ReplayUnsat153",
+      "receipt": "data/ReplayUnsat153-audit.json",
+      "sha256": "08e63d4fd0cd0ae449a11599a66d27c83ec840d700852b7b5ad03522cc2a9b23",
+      "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+      "axioms": [
+        {
+          "theorem": "Snake9.ReplayFull153.unsat",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "compiler_wall_seconds": 1.1090000000003783,
+      "seconds": 3.514999999999418
+    }
+  ],
+  "source_files_sha256": {
+    "milestones/155-share17-replay/scripts/finish_full_replay.py": "995d4d7864cc37ba6842823c0534d30659c9cbf32f16ec12372f162d04d9cc06",
+    "milestones/155-share17-replay/data/full-source-plan.json": "2c69145d8f81115ef23dbc1ef5a612e4e2d897b26dd7251952078e9df65783fe",
+    "milestones/155-share17-replay/data/full-execution-preparation.json": "bd44b3901ceba62f321a9b47f58ddd4200d0b2ff8f2b324a0046e4fbf14e944a",
+    "milestones/155-share17-replay/data/full-replay-progress.json": "7536a11451334dcc59c7e96f994da373658458d9da1d2aa02cad1dff195d0913",
+    "milestones/153-pair-conditioned-share17/replay/data/packed-replay.json": "869ed8558fbd07385e5744efc0efe4dfa7ba91343554e21c85472e6fea7733f1",
+    "milestones/153-pair-conditioned-share17/replay/data/sizing.json": "00a01b58fae751c9ba05c289de026049d2d421dbd47f1c669a22c8169c1c7cd7",
+    "milestones/154-share17-broader-semantics/data/LocalWindowCnf.ShareWindow153-audit.json": "e1745219124ebd35e78a05ca8cbb9129141701c13d7765361fe199a9bd97abd9",
+    "milestones/155-share17-replay/data/ReplayUnsat153-audit.json": "08e63d4fd0cd0ae449a11599a66d27c83ec840d700852b7b5ad03522cc2a9b23",
+    "milestones/155-share17-replay/data/pilot-completion-v2.json": "9884226f15f1c026c021ca3084e49987bbdea677110c249c90b25fcb911c4db7"
+  },
+  "scope": "The complete contradiction of the exact shared compact CNF is accepted. Composition with the separately checked broader actual-snake implication is still required. This audit supplies no new global snake bound."
+}

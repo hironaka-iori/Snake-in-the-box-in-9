@@ -1,3 +1,24 @@
+# Current result: local share 17 completed
+
+The 137-module contradiction replay, 98-module interpretation and final
+actual-snake composition are complete. The five local count conditions and
+their reversed form remain hypotheses; universal012032 share17 is unproved.
+The universal share16 theorem remains available without those restrictions.
+
+Three short range implications have also passed Lean. In the specified
+fixed profile with012301 and012340 floors16, the retained fourteen-cycle
+keeps the comparison at least235-19/587. This limits this comparison's
+ability to reach233; it is no new global upper bound.
+
+Both existing paper sources were updated identically and the built-in
+compiler succeeded. Authors and preamble are unchanged. The next full
+paper revision is156, with a full review of current claims and historical material.
+Read milestones/155-share17-replay/COMPLETION.md, its actual-snake completion
+record, and analysis/RANGE_NOTE.md. The maintained interval and conditional
+234 obligations retain their documented scope. The optimum remains open.
+
+Historical updates follow.
+
 # Research update: share-17 initial replay checked
 
 The 34-module initial replay and checkpoint have passed Lean, covering

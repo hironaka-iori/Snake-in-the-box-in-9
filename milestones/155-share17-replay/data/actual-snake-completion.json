@@ -1,0 +1,88 @@
+{
+  "status": "PASS_ACTUAL_SNAKE_SHARE17_WITH_COUNT_CONDITIONS",
+  "theorem": "Snake9.CriticalShare155.share17",
+  "actual_snake_composition_complete": true,
+  "shared_core_contradiction_complete": true,
+  "semantic_modules": 98,
+  "replay_modules": 137,
+  "directions": [
+    0,
+    1,
+    2,
+    0,
+    3,
+    2
+  ],
+  "bounds": [
+    [
+      4,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      3,
+      3
+    ]
+  ],
+  "reverse_bounds": [
+    [
+      3,
+      3
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      4
+    ]
+  ],
+  "resolution": 12,
+  "share_lower_bound": 17,
+  "count_conditions_retained": true,
+  "reversal_included": true,
+  "extra_unsat_premise": false,
+  "universal_012032_share17": false,
+  "new_global_upper_bound": false,
+  "final_axioms": [
+    {
+      "theorem": "Snake9.CriticalShare155.share17",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "expected_signature": "theorem share17 {m : Nat} (p : Snake m) (r : Nat) (hr : r+6 \u2264 m) (hcase : (canon (dsOf p r 6) = [0,1,2,0,3,2] \u2227 coreAlpha p (r+1) = 4 \u2227 coreAlpha p (r+2) \u2264 4 \u2227 coreAlpha p (r+3) = 4 \u2227 coreAlpha p (r+4) \u2264 5 \u2227 coreAlpha p (r+5) = 3) \u2228 (canon (dsOf p r 6).reverse = [0,1,2,0,3,2] \u2227 coreAlpha p (r+1) = 3 \u2227 coreAlpha p (r+2) \u2264 5 \u2227 coreAlpha p (r+3) = 4 \u2227 coreAlpha p (r+4) \u2264 4 \u2227 coreAlpha p (r+5) = 4)) : 17 \u2264 ((List.range 5).map fun i => coreShare 12 p (r+i+1)).sum",
+  "source_files_sha256": {
+    "milestones/155-share17-replay/scripts/audit_actual.py": "d402f94b8249e04be16b83f417c31d4ecb3630338d794b3b8afefdae5e48648e",
+    "milestones/155-share17-replay/data/final-composition-plan.json": "148bcc13417983da9d388115fb7fce239f42235729efa066b55f2ba73ca46a83",
+    "milestones/154-share17-broader-semantics/data/semantics-completion.json": "e8f3f4a40a6b0f3b26d008daefbed20316f02ce907a455afb6d4ca271c09c87f",
+    "milestones/155-share17-replay/data/full-replay-completion.json": "d074744dc80ccead20ca771b84a358543a3f7756f0d85a253f03638aa21f3ee6",
+    "milestones/155-share17-replay/data/ShareComplete155-audit.json": "0027ebec6e634f1a556211f79fe387cc432f4a57ba3d08d2dda3fe51da269423",
+    "milestones/155-share17-replay/lean/ShareComplete155.lean": "3652fbffbd7977553308f05a744d3a0c88c3fe0ec1d2206291691e0726fe160b",
+    "milestones/155-share17-replay/data/final-target.json": "5a6a915ac47d379e7c0a3f98b11acea2ef457794de072f7433a0039840113513"
+  },
+  "scope": "Every actual Q9 snake window satisfying one of the stated forward or reversed count conditions has five-centre share at least17. No Unsat premise remains. No statement about all012032 windows or a new global maximum is asserted."
+}

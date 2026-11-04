@@ -1,3 +1,52 @@
+# Current result: local share 17 completed
+
+The 137-module contradiction replay, 98-module interpretation and final
+actual-snake composition are complete. The five local count conditions and
+their reversed form remain hypotheses; universal012032 share17 is unproved.
+The universal share16 theorem remains available without those restrictions.
+
+Three short range implications have also passed Lean. In the specified
+fixed profile with012301 and012340 floors16, the retained fourteen-cycle
+keeps the comparison at least235-19/587. This limits this comparison's
+ability to reach233; it is no new global upper bound.
+
+Both existing paper sources were updated identically and the built-in
+compiler succeeded. Authors and preamble are unchanged. The next full
+paper revision is156, with a full review of current claims and historical material.
+Read milestones/155-share17-replay/COMPLETION.md, its actual-snake completion
+record, and analysis/RANGE_NOTE.md. The maintained interval and conditional
+234 obligations retain their documented scope. The optimum remains open.
+
+Historical updates follow.
+
+# Research update: count-conditioned share-17 theorem checked
+
+The complete 137-module contradiction replay and its application to actual
+snakes have passed Lean. The replay covers 30,305 deductions and 1,754,767
+propagation references, with 407 axiom reports; the broader interpretation
+and transfer use 98 checked modules with 100 axiom reports. The final
+composition has one further axiom report and no contradiction premise.
+
+For a fitting six-transition window with forward canonical directions
+012032, the five counts must satisfy (4, at most 4, 4, at most 5, 3).
+For reversed canonical directions 012032, their original-order conditions
+are (3, at most 5, 4, at most 4, 4). Under either condition, the five-centre
+share at resolution 12 is at least 17. These count hypotheses remain.
+The universal 012032 floor is 16; a universal floor 17 is not asserted.
+
+Read milestones/155-share17-replay/COMPLETION.md and its saved actual-snake
+audit. The two matching eleven-cycle edges receive one extra unit each
+relative to the universal-floor-16 profile, raising its saved total from
+5456 to 5458. This does not provide a new potential or global bound.
+The conditional 234 comparison still requires its four other local floors,
+reference refutations and complete potential certificate. The maintained
+191--235 interval retains its contributor-proof and independent-rebuild
+distinction. Both existing paper sources now state the local theorem;
+their document compilation is a separate pending check. Last full paper
+revision: 146; next: 156. This is a narrow completion update.
+
+Historical updates follow; their pending statuses describe earlier stages.
+
 # Research checkpoint: 68 share-17 replay modules accepted
 
 The complete replay remains unfinished. Its next compiler launch stopped

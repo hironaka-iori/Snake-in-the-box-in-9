@@ -44,14 +44,16 @@ singleton-square count $T$ and empty-square count $s_0$, the identity
 $T+2s_0+35(m+1)=9214$ supports count and share estimates. Completed local
 results include the sharp pair bound eight on $012032$, its endpoint and
 parity consequences, a bound of twenty-four low-pair windows, and a five-count
-sum of at least nineteen on $012310$. Direct six-count and empty-square
-criteria give conditional improvements to 234 and 233. A separate finite-graph
-comparison reaches 234 under five unfinished share bounds and explicit
+sum of at least nineteen on $012310$. The universal $012032$ share floor
+16 and a stronger floor 17 under explicit local count conditions are now
+proved. Direct six-count and empty-square criteria give conditional
+improvements to 234 and 233. A separate finite-graph
+comparison reaches 234 under four remaining local share bounds and explicit
 reference and potential-certificate premises. For the retained completed-share
 graph, two saved cycles impose $325F+159G>9074$ on the share floors for
 $012301$ and $012340$ if the eleven-cycle remains unchanged. Floors at most
-sixteen leave the comparison above 235. The proposed $012032$ floor changes
-that cycle, so the full conditional profile remains unresolved. The optimum
+sixteen leave the comparison above 235. The proved universal $012032$ share-16 floor changes that cycle, so the
+full conditional profile remains unresolved. The optimum
 and the numerical conjecture 196 remain open.
 
 \end{abstract}
@@ -106,8 +108,9 @@ for 235. Direct six-count criteria then state sufficient conditions for
 shares and their common overlap budgets. The finite comparison graph is
 treated through exact history recognition, coverage of actual state walks,
 edge-weight interpretation and the boundary estimate. The conditional 234
-comparison retains its five local share premises, reference refutations and
-complete potential certificate. Further proved count restrictions precede
+comparison retains four unresolved local share premises, reference
+refutations and the complete potential certificate; its $012032$ share-16
+premise is established. Further proved count restrictions precede
 the current joint requirements on additional shares. Earlier model
 calculations, construction experiments, the numerical conjecture and all
 explicit witnesses are retained in the appendices.
@@ -121,7 +124,7 @@ $a(9)\ge191$ & An explicit snake with every vertex pair checked.\\
 $a(9)\le235$ & Archived contributor proof using 1287 local keys and a potential; the full independent rebuild remains pending.\\
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
-Conditional bound 234 & Slope 496, range 602 and boundary contribution 21. Five local shares, the remaining 1358 reference refutations and the complete finite potential certificate are still required.\\
+Conditional bound 234 & Slope 496, range 602 and boundary contribution 21. Four local shares remain unresolved; the $012032$ share-16 premise is established. The remaining 1358 reference refutations and complete finite potential certificate are still required.\\
 Graph interpretation and total charge & Complete coverage and all baseline weight components are checked. Twenty of 1378 reference entries are discharged; 1358 remain.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
 New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
@@ -2948,7 +2951,7 @@ for the reduced $012034$ floor 18. For the current retained graph,
 Proposition~\ref{prop:two-cycle-share16-obstruction} gives a comparison of at
 least $235+95/2348$ when the $012301$ and $012340$ floors are at most 16
 and the eleven-cycle remains unchanged. The necessary relation is
-$325F+159G>9074$. The existing $012032$ share-16 target adds 57 to the
+$325F+159G>9074$. The proved $012032$ share-16 floor adds 57 to the
 eleven-cycle and removes the unchanged-weight hypothesis. These three
 local targets therefore require a joint analysis, followed by the remaining
 graph and proof obligations. Stronger geometric restrictions, boundary
@@ -3056,12 +3059,51 @@ replay under the broader conditions
 \alpha_{r+3}=4,\qquad \alpha_{r+4}\le5,\qquad
 \alpha_{r+5}=3.
 \]
-The compact core is unchanged. Its broader clause interpretation and
-transfer to arbitrary coordinates and reversed windows have now passed
-Lean in 98 modules. This establishes the share-17 implication under an
-explicit unsatisfiability premise for that core. The complete contradiction
-replay remains unfinished, so the share-17 bound under the displayed count
-hypotheses is still conditional~\cite{broader154archive}.
+The compact core is unchanged. Its interpretation and coordinate and
+reversal transfer have passed Lean in 98 modules. The complete 137-module
+contradiction replay and the final application to actual snakes have also
+passed Lean, giving the following local theorem.
+
+\begin{theorem}[Count-conditioned share on $012032$]
+\label{thm:critical-count-share17}
+Let $P=(x_0,\ldots,x_m)$ be a snake in $\Q_9$, with $r+6\le m$.
+Suppose that one of the following conditions holds:
+\begin{enumerate}
+\item The six-transition window beginning at $r$ has canonical directions
+$012032$, and
+\[
+\alpha_{r+1}=4,\quad \alpha_{r+2}\le4,\quad
+\alpha_{r+3}=4,\quad \alpha_{r+4}\le5,\quad \alpha_{r+5}=3.
+\]
+\item Its reversed transition sequence has canonical directions $012032$,
+and the counts in the original order satisfy
+\[
+\alpha_{r+1}=3,\quad \alpha_{r+2}\le5,\quad
+\alpha_{r+3}=4,\quad \alpha_{r+4}\le4,\quad \alpha_{r+5}=4.
+\]
+\end{enumerate}
+Then
+\[
+\sum_{j=1}^{5}\sigma_{12}(x_{r+j})\ge17.
+\]
+\end{theorem}
+\begin{proof}
+The checked interpretation shows that a window satisfying either set of
+hypotheses and having share sum at most 16 would satisfy the retained
+11869-clause core. The complete replay derives the empty clause from
+that core through 30305 deductions and 1754767 propagation references.
+The checked coordinate and reversal transfer applies this contradiction
+to the given snake. Since the share sum is an integer, it is at least 17.
+The final composition has no remaining contradiction premise. Its saved
+source, object, log and dependency records have been audited; the external
+Lean and mathematics libraries remain trusted~\cite{broader154archive,share155archive}.
+\end{proof}
+
+The count hypotheses are essential to the scope of this theorem. The
+universal $012032$ floor established above remains 16. The new local
+theorem alone does not complete the conditional bound 234: the four
+remaining share floors, reference refutations and potential certificate
+listed in Section~\ref{sec:closure} remain required.
 
 Broadening the count conditions does not add credit to the retained graph
 used for the saved critical cycles. That graph already requires
@@ -3071,11 +3113,12 @@ to equal 4 and 5. An inventory finds 100 additional matching rows in the
 source graph, all already excluded from the retained graph. This
 calculation concerns that graph and its removal hypotheses.
 
-If the exact-context result and its reversal are established, they raise
-two edges of the eleven-cycle by one relative to the profile imposing
-universal $012032$ share 16. Its total then increases from 5456 to 5458.
-The fourteen-cycle remains unchanged, and this calculation alone gives
-no improved global bound~\cite{critical153archive}.
+Assigning the proved exact-context result and its reversal as additional
+floors raises two edges of the saved eleven-cycle by one relative to the
+profile imposing universal $012032$ share 16. Its total increases from
+5456 to 5458. The fourteen-cycle remains unchanged. This is a calculation
+for the saved graph and weights; it supplies neither a potential on every
+edge nor an improved global bound~\cite{critical153archive,share155archive}.
 
 For the preserved $012034$ share-18 proof, the original-clause assignment
 now transfers through all 104 chunks to the materialized initial tree and
@@ -6437,6 +6480,12 @@ bound for the 012032 window}, research archive, milestone 152.
 I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Broader critical-window share
 interpretation and its retained-graph effect}, research archive, milestone 154.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/154-share17-broader-semantics}.
+
+\bibitem{share155archive}
+I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Complete contradiction replay and
+count-conditioned critical-window share theorem}, research archive,
+milestone 155.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/155-share17-replay}.
 
 \end{thebibliography}
 \end{document}

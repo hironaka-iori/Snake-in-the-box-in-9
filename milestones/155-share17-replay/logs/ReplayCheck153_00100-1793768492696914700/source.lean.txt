@@ -1,0 +1,21 @@
+import ReplayData153_0003
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+set_option Elab.async false
+
+namespace Snake9.ReplayFull153
+open Snake9.Lrat153Replay (andB)
+open Snake9.LratFast153Replay
+theorem ok100 : check start100 proof100 = true := by
+  decide +kernel
+#print axioms ok100
+theorem ok101 : check start101 proof101 = true := by
+  decide +kernel
+#print axioms ok101
+theorem ok102 : check start102 proof102 = true := by
+  decide +kernel
+#print axioms ok102
+theorem ok103 : check start103 proof103 = true := by
+  decide +kernel
+#print axioms ok103
+end Snake9.ReplayFull153

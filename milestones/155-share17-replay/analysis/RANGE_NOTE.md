@@ -2,7 +2,7 @@
 
 This note concerns the fixed graph comparison. It establishes no new upper
 bound for arbitrary snakes. The saved-row and rational calculations were
-rechecked; the new arithmetic implication below awaits Lean verification.
+rechecked. The three arithmetic implications have now passed Lean.
 
 The older three-cycle from milestone 149 cannot be used unchanged in the
 later retained graph: two of its three edges were removed. The fourteen-cycle
@@ -71,3 +71,10 @@ target within this fixed model.
 
 Evidence: range-scope-review.json. Its saved-row extraction is inherited from
 the pinned prior audits; this round did not reload every graph array.
+
+## Subsequent Lean verification
+
+The three arithmetic statements in this note have now passed Lean with
+only the permitted standard axioms. See range-lean-check.json for the
+exact hypotheses, source, compiler log and dependency hashes. The graph
+extraction scope and absence of a new global snake bound are unchanged.

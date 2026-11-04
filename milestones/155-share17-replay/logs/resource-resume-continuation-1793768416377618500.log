@@ -1,0 +1,12 @@
+{"status": "FAILED_REQUIRES_INSPECTION", "pid": 12420, "started_at": "2026-11-04T05:00:18.898688+00:00", "plan_sha256": "148bcc13417983da9d388115fb7fce239f42235729efa066b55f2ba73ca46a83", "expected_full_driver": {"creation_filetime": 134382420163823743, "image": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe", "exit_code": 259, "pid": 43336, "started_at": "2026-11-04T05:00:16.490328+00:00", "driver_sha256": "67c164ac59b9885a37a08a6ae7c579d04161c1135e8c5f8342cd6d29a6765edb", "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc", "plan_sha256": "2c69145d8f81115ef23dbc1ef5a612e4e2d897b26dd7251952078e9df65783fe", "observed_checked_modules": 22, "creation_utc": "2026-11-04T05:00:16.382374+00:00", "verified_live_at_preparation": true}, "held_process_handle": true, "stages": [], "active_pid": null, "last_checked_modules": 136, "exception": "AssertionError()", "finished_at": "2026-11-04T05:12:47.891256+00:00"}
+Traceback (most recent call last):
+  File "E:\Snake-in-a-box\milestones\155-share17-replay\scripts\continue_after_full.py", line 110, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "E:\Snake-in-a-box\milestones\155-share17-replay\scripts\continue_after_full.py", line 73, in main
+    observed=identity(driver);assert observed['exit_code']==0,observed
+             ^^^^^^^^^^^^^^^^
+  File "E:\Snake-in-a-box\milestones\155-share17-replay\scripts\continue_after_full.py", line 21, in identity
+    assert kernel.QueryFullProcessImageNameW(handle,0,buffer,ctypes.byref(size))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

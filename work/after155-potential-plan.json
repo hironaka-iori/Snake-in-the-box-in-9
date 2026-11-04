@@ -1,0 +1,2466 @@
+{
+  "status": "PREPARED_SAVED_ROW_ASSESSMENT_NO_NEW_POTENTIAL",
+  "created_at": "2026-11-04T05:09:43.213322+00:00",
+  "choice": "144 retained graph; full conditional floors; suffix maximum for01203216/17; C=0; minimum range at mean496",
+  "graph": {
+    "source": "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz",
+    "source_edges": 4947008,
+    "states": 1601856,
+    "removals": "milestones/144-countfree-share18/data/share18-impact/removed-indices.json",
+    "retained_edges": 4661572,
+    "new_removals": false
+  },
+  "floors": {
+    "012031": 16,
+    "012032": 16,
+    "012034": 18,
+    "012301": 16,
+    "012304": 16,
+    "012310": 12,
+    "012314": 16,
+    "012340": 16,
+    "012345": 16
+  },
+  "pending_floors": {
+    "012034": 18,
+    "012301": 16,
+    "012340": 16,
+    "012345": 16
+  },
+  "local_gate": {
+    "path": "milestones/155-share17-replay/data/actual-snake-completion.json",
+    "status": "PASS_ACTUAL_SNAKE_SHARE17_WITH_COUNT_CONDITIONS",
+    "future_gate_not_checked_here": true
+  },
+  "recognition": {
+    "bounds": [
+      [
+        4,
+        4
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        3,
+        3
+      ]
+    ],
+    "reverse_bounds": [
+      [
+        3,
+        3
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        4,
+        4
+      ]
+    ],
+    "suffix_directions_zero_based_half_open": [
+      3,
+      9
+    ],
+    "suffix_counts_zero_based_half_open": [
+      1,
+      6
+    ],
+    "orientations": "OR forward canonical012032 and bounds; or reversed directions and reversed counts with same bounds",
+    "prefix_credit": false,
+    "clipped6_means": [
+      6,
+      21
+    ],
+    "clipped6_cannot_match": true,
+    "expected_source_suffix_matches": 156,
+    "expected_retained_suffix_matches": 91
+  },
+  "weight": {
+    "formula": "max(source_weight,120*last_count+max(shape_floor,17 if suffix_match else0))+max(old_bonus24,pair_bonus24,six_bonus24)",
+    "universal_and_conditioned_floors_combined_by_maximum": true,
+    "shared_count_bonuses_combined_by_maximum": true,
+    "uniform_occurrence_credit": 0,
+    "uniform_credit_boundary_cost": 0
+  },
+  "inherited_assumptions": {
+    "count_rules": [
+      {
+        "name": "012340-middle2-outer22",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 22,
+        "probe": "milestones/111-critical-count-intervals/data/probes/outer-sum21-sorted.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012340-middle3-outer19",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 19,
+        "probe": "milestones/111-critical-count-intervals/data/probes/centre3-sum18-sorted.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012340-outer17",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 17,
+        "probe": "milestones/111-critical-count-intervals/data/probes/centre21-sum16.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012340-middle5-outer18",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 18,
+        "probe": "milestones/112-critical-sum-refinement/data/probes/012340-middle5-outer17.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012034-total20",
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          4
+        ],
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 20,
+        "probe": "milestones/112-critical-sum-refinement/data/probes/012034-total19.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012031-upper5-outer15",
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          1
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 15,
+        "probe": "milestones/112-critical-sum-refinement/data/probes/012031-upper5-outer14.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012314-upper2-outer19",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 19,
+        "probe": "milestones/112-critical-sum-refinement/data/probes/012314-upper2-outer18.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012034-middle545-pair9",
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          4
+        ],
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          4
+        ],
+        "lower": 9,
+        "probe": "milestones/113-all-four-sum-pressure/data/probes/012034-middle545-pair8.json"
+      },
+      {
+        "name": "012310-total19",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          0
+        ],
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 19,
+        "probe": "milestones/114-total-count-pressure/data/probes/012310-total18.json"
+      },
+      {
+        "probe": "milestones/115-total-count-certificate/data/probes/012345-total21.json",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 22,
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ],
+        "name": "012345-total22",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          4
+        ],
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "name": "012034-middle5-outer16",
+        "lower": 16,
+        "probe": "milestones/117-cycle-sum-refinement/data/probes/012034-middle5-outer15.json"
+      },
+      {
+        "name": "012304-completed-b-total23",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4
+        ],
+        "bounds": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            21
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            6,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 23,
+        "probe": "milestones/119-shared-five-count-pressure/data/full-probes/012304-completed-b-total22-full.json"
+      },
+      {
+        "name": "012304-conditional-a-total23",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4
+        ],
+        "bounds": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            21
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 23,
+        "probe": "milestones/119-shared-five-count-pressure/data/full-probes/012304-conditional-a-total22-full.json"
+      }
+    ],
+    "count_rules_status": "The144 producer accepts UNSAT_UNCERTIFIED probes; all hypotheses remain unless later exact actual-snake proofs are separately pinned",
+    "six_count_floor": {
+      "shape": "0123104",
+      "floor": 25,
+      "status": "hypothetical",
+      "credit_guard": "First chronological stored count below6",
+      "deletion": "All six counts exact and sum below25"
+    },
+    "pair_floor": 9,
+    "pair_scope": "Odd edge lengths, including235; longer snakes have235-edge induced prefixes",
+    "checked_later_exclusions": [
+      "milestone138 actual nine-transition exclusion",
+      "milestone140 weak012032 five-count exclusion"
+    ],
+    "reference_union": 1378,
+    "reference_entries_pending": 1358,
+    "finite_contexts": 791,
+    "reference_potential_and_graph_to_snake_obligations_remain": true
+  },
+  "original_source_profile": {
+    "saved_row_recalculation": {
+      "three_cycle": {
+        "rows": [
+          {
+            "edge": 1131395,
+            "u": 245540,
+            "v": 454588,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              2,
+              4,
+              3,
+              2
+            ],
+            "counts": [
+              4,
+              3,
+              5,
+              4,
+              3,
+              5
+            ],
+            "base_weight": 611,
+            "share17_match": false,
+            "floor16_weight": 616,
+            "floor17_weight": 616
+          },
+          {
+            "edge": 2139224,
+            "u": 454588,
+            "v": 5931,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              2,
+              1,
+              0
+            ],
+            "counts": [
+              3,
+              5,
+              4,
+              3,
+              5,
+              4
+            ],
+            "base_weight": 484,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 17417,
+            "u": 5931,
+            "v": 245540,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              4,
+              3
+            ],
+            "counts": [
+              5,
+              4,
+              3,
+              5,
+              4,
+              3
+            ],
+            "base_weight": 370,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          }
+        ],
+        "length": 3,
+        "floor16_total": 1488,
+        "floor17_total": 1488,
+        "share17_matches": [],
+        "deficit_at496": 0
+      },
+      "eleven_cycle": {
+        "rows": [
+          {
+            "edge": 2222339,
+            "u": 480298,
+            "v": 59102,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              4
+            ],
+            "counts": [
+              5,
+              4,
+              4,
+              4,
+              5,
+              3
+            ],
+            "base_weight": 360,
+            "share17_match": true,
+            "floor16_weight": 376,
+            "floor17_weight": 377
+          },
+          {
+            "edge": 147722,
+            "u": 59102,
+            "v": 479031,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              3,
+              5
+            ],
+            "counts": [
+              4,
+              4,
+              4,
+              5,
+              3,
+              4
+            ],
+            "base_weight": 480,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 2221095,
+            "u": 479031,
+            "v": 59277,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              4
+            ],
+            "counts": [
+              4,
+              4,
+              5,
+              3,
+              4,
+              4
+            ],
+            "base_weight": 480,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 147978,
+            "u": 59277,
+            "v": 480081,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              3,
+              5
+            ],
+            "counts": [
+              4,
+              5,
+              3,
+              4,
+              4,
+              4
+            ],
+            "base_weight": 480,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 2208886,
+            "u": 480081,
+            "v": 42249,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              1
+            ],
+            "counts": [
+              5,
+              3,
+              4,
+              4,
+              4,
+              4
+            ],
+            "base_weight": 487,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 118572,
+            "u": 42249,
+            "v": 455672,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              0,
+              2
+            ],
+            "counts": [
+              3,
+              4,
+              4,
+              4,
+              4,
+              3
+            ],
+            "base_weight": 371,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 2140364,
+            "u": 455672,
+            "v": 4660,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              2,
+              1,
+              0
+            ],
+            "counts": [
+              4,
+              4,
+              4,
+              4,
+              3,
+              5
+            ],
+            "base_weight": 604,
+            "share17_match": false,
+            "floor16_weight": 616,
+            "floor17_weight": 616
+          },
+          {
+            "edge": 2534,
+            "u": 4660,
+            "v": 230139,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              4,
+              1
+            ],
+            "counts": [
+              4,
+              4,
+              4,
+              3,
+              5,
+              4
+            ],
+            "base_weight": 487,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 1107797,
+            "u": 230139,
+            "v": 478821,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              2,
+              4,
+              0,
+              5
+            ],
+            "counts": [
+              4,
+              4,
+              3,
+              5,
+              4,
+              4
+            ],
+            "base_weight": 490,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 2220859,
+            "u": 478821,
+            "v": 58017,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              4
+            ],
+            "counts": [
+              4,
+              3,
+              5,
+              4,
+              4,
+              4
+            ],
+            "base_weight": 480,
+            "share17_match": true,
+            "floor16_weight": 496,
+            "floor17_weight": 497
+          },
+          {
+            "edge": 146785,
+            "u": 58017,
+            "v": 480298,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              3,
+              5
+            ],
+            "counts": [
+              3,
+              5,
+              4,
+              4,
+              4,
+              5
+            ],
+            "base_weight": 600,
+            "share17_match": false,
+            "floor16_weight": 616,
+            "floor17_weight": 616
+          }
+        ],
+        "length": 11,
+        "floor16_total": 5456,
+        "floor17_total": 5458,
+        "share17_matches": [
+          2222339,
+          2220859
+        ],
+        "deficit_at496": -2
+      },
+      "zero_event_walk": {
+        "rows": [
+          {
+            "edge": 4895760,
+            "u": 1018655,
+            "v": 1267483,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              4,
+              3
+            ],
+            "counts": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              2
+            ],
+            "base_weight": 240,
+            "share17_match": false,
+            "floor16_weight": 252,
+            "floor17_weight": 252
+          },
+          {
+            "edge": 4484568,
+            "u": 1267483,
+            "v": 1601829,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              3,
+              2,
+              0
+            ],
+            "counts": [
+              6,
+              6,
+              6,
+              6,
+              2,
+              4
+            ],
+            "base_weight": 480,
+            "share17_match": false,
+            "floor16_weight": 498,
+            "floor17_weight": 498
+          },
+          {
+            "edge": 3455563,
+            "u": 1601829,
+            "v": 1555040,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              2,
+              1,
+              5,
+              0
+            ],
+            "counts": [
+              6,
+              6,
+              6,
+              2,
+              4,
+              3
+            ],
+            "base_weight": 360,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 1882917,
+            "u": 1555040,
+            "v": 162338,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              0,
+              4,
+              5,
+              1
+            ],
+            "counts": [
+              6,
+              6,
+              2,
+              4,
+              3,
+              3
+            ],
+            "base_weight": 360,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 567947,
+            "u": 162338,
+            "v": 935152,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              4,
+              5,
+              0,
+              4
+            ],
+            "counts": [
+              6,
+              2,
+              4,
+              3,
+              3,
+              5
+            ],
+            "base_weight": 612,
+            "share17_match": false,
+            "floor16_weight": 616,
+            "floor17_weight": 616
+          },
+          {
+            "edge": 4335674,
+            "u": 935152,
+            "v": 704261,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              2,
+              4,
+              6
+            ],
+            "counts": [
+              2,
+              4,
+              3,
+              3,
+              5,
+              6
+            ],
+            "base_weight": 731,
+            "share17_match": false,
+            "floor16_weight": 736,
+            "floor17_weight": 736
+          },
+          {
+            "edge": 3126820,
+            "u": 704261,
+            "v": 228704,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              1,
+              3,
+              5,
+              1
+            ],
+            "counts": [
+              4,
+              3,
+              3,
+              5,
+              6,
+              3
+            ],
+            "base_weight": 373,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 1106556,
+            "u": 228704,
+            "v": 477985,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              2,
+              4,
+              0,
+              5
+            ],
+            "counts": [
+              3,
+              3,
+              5,
+              6,
+              3,
+              2
+            ],
+            "base_weight": 250,
+            "share17_match": false,
+            "floor16_weight": 256,
+            "floor17_weight": 256
+          },
+          {
+            "edge": 2220392,
+            "u": 477985,
+            "v": 60779,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              4
+            ],
+            "counts": [
+              3,
+              5,
+              6,
+              3,
+              2,
+              6
+            ],
+            "base_weight": 720,
+            "share17_match": false,
+            "floor16_weight": 736,
+            "floor17_weight": 736
+          },
+          {
+            "edge": 149782,
+            "u": 60779,
+            "v": 481317,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              3,
+              5
+            ],
+            "counts": [
+              5,
+              6,
+              3,
+              2,
+              6,
+              4
+            ],
+            "base_weight": 480,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 2210538,
+            "u": 481317,
+            "v": 41888,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              1
+            ],
+            "counts": [
+              6,
+              3,
+              2,
+              6,
+              4,
+              3
+            ],
+            "base_weight": 367,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 118448,
+            "u": 41888,
+            "v": 453507,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              0,
+              2
+            ],
+            "counts": [
+              3,
+              2,
+              6,
+              4,
+              3,
+              4
+            ],
+            "base_weight": 491,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 2145965,
+            "u": 453507,
+            "v": 7223,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              2,
+              1,
+              5
+            ],
+            "counts": [
+              2,
+              6,
+              4,
+              3,
+              4,
+              6
+            ],
+            "base_weight": 724,
+            "share17_match": false,
+            "floor16_weight": 736,
+            "floor17_weight": 736
+          },
+          {
+            "edge": 5169,
+            "u": 7223,
+            "v": 229964,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              4,
+              1
+            ],
+            "counts": [
+              6,
+              4,
+              3,
+              4,
+              6,
+              3
+            ],
+            "base_weight": 367,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 1107656,
+            "u": 229964,
+            "v": 477769,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              2,
+              4,
+              0,
+              5
+            ],
+            "counts": [
+              4,
+              3,
+              4,
+              6,
+              3,
+              2
+            ],
+            "base_weight": 250,
+            "share17_match": false,
+            "floor16_weight": 256,
+            "floor17_weight": 256
+          },
+          {
+            "edge": 2220173,
+            "u": 477769,
+            "v": 59483,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              4
+            ],
+            "counts": [
+              3,
+              4,
+              6,
+              3,
+              2,
+              6
+            ],
+            "base_weight": 720,
+            "share17_match": false,
+            "floor16_weight": 736,
+            "floor17_weight": 736
+          },
+          {
+            "edge": 148339,
+            "u": 59483,
+            "v": 481317,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              3,
+              5
+            ],
+            "counts": [
+              4,
+              6,
+              3,
+              2,
+              6,
+              4
+            ],
+            "base_weight": 480,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 2210538,
+            "u": 481317,
+            "v": 41888,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              1
+            ],
+            "counts": [
+              6,
+              3,
+              2,
+              6,
+              4,
+              3
+            ],
+            "base_weight": 367,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 118448,
+            "u": 41888,
+            "v": 453507,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              0,
+              2
+            ],
+            "counts": [
+              3,
+              2,
+              6,
+              4,
+              3,
+              4
+            ],
+            "base_weight": 491,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 2145965,
+            "u": 453507,
+            "v": 7223,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              2,
+              1,
+              5
+            ],
+            "counts": [
+              2,
+              6,
+              4,
+              3,
+              4,
+              6
+            ],
+            "base_weight": 724,
+            "share17_match": false,
+            "floor16_weight": 736,
+            "floor17_weight": 736
+          },
+          {
+            "edge": 19041,
+            "u": 7223,
+            "v": 245515,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              4,
+              3
+            ],
+            "counts": [
+              6,
+              4,
+              3,
+              4,
+              6,
+              2
+            ],
+            "base_weight": 250,
+            "share17_match": false,
+            "floor16_weight": 256,
+            "floor17_weight": 256
+          },
+          {
+            "edge": 1131365,
+            "u": 245515,
+            "v": 454436,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              2,
+              4,
+              3,
+              2
+            ],
+            "counts": [
+              4,
+              3,
+              4,
+              6,
+              2,
+              3
+            ],
+            "base_weight": 371,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 2146754,
+            "u": 454436,
+            "v": 5021,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              2,
+              1,
+              5
+            ],
+            "counts": [
+              3,
+              4,
+              6,
+              2,
+              3,
+              6
+            ],
+            "base_weight": 724,
+            "share17_match": false,
+            "floor16_weight": 736,
+            "floor17_weight": 736
+          },
+          {
+            "edge": 3074,
+            "u": 5021,
+            "v": 232306,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              1,
+              0,
+              4,
+              1
+            ],
+            "counts": [
+              4,
+              6,
+              2,
+              3,
+              6,
+              5
+            ],
+            "base_weight": 607,
+            "share17_match": false,
+            "floor16_weight": 616,
+            "floor17_weight": 616
+          },
+          {
+            "edge": 1110299,
+            "u": 232306,
+            "v": 476270,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              2,
+              4,
+              0,
+              5
+            ],
+            "counts": [
+              6,
+              2,
+              3,
+              6,
+              5,
+              3
+            ],
+            "base_weight": 370,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 2219250,
+            "u": 476270,
+            "v": 58262,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              4
+            ],
+            "counts": [
+              2,
+              3,
+              6,
+              5,
+              3,
+              3
+            ],
+            "base_weight": 360,
+            "share17_match": false,
+            "floor16_weight": 376,
+            "floor17_weight": 376
+          },
+          {
+            "edge": 147196,
+            "u": 58262,
+            "v": 481767,
+            "directions": [
+              0,
+              1,
+              2,
+              0,
+              3,
+              2,
+              4,
+              3,
+              5
+            ],
+            "counts": [
+              3,
+              6,
+              5,
+              3,
+              3,
+              4
+            ],
+            "base_weight": 480,
+            "share17_match": false,
+            "floor16_weight": 496,
+            "floor17_weight": 496
+          },
+          {
+            "edge": 2211193,
+            "u": 481767,
+            "v": 44587,
+            "directions": [
+              0,
+              1,
+              2,
+              3,
+              1,
+              4,
+              3,
+              5,
+              1
+            ],
+            "counts": [
+              6,
+              5,
+              3,
+              3,
+              4,
+              2
+            ],
+            "base_weight": 247,
+            "share17_match": false,
+            "floor16_weight": 256,
+            "floor17_weight": 256
+          }
+        ],
+        "length": 28,
+        "floor16_total": 13286,
+        "floor17_total": 13286,
+        "share17_matches": [],
+        "deficit_at496": 602
+      }
+    },
+    "removed_in144": {
+      "three_cycle": [
+        {
+          "position": 0,
+          "edge": 1131395
+        },
+        {
+          "position": 2,
+          "edge": 17417
+        }
+      ],
+      "eleven_cycle": [],
+      "new_walk": [
+        {
+          "position": 4,
+          "edge": 567947
+        },
+        {
+          "position": 5,
+          "edge": 4335674
+        },
+        {
+          "position": 27,
+          "edge": 2211193
+        }
+      ]
+    },
+    "mean_cap": 496,
+    "walk_range_inequality": "R>=28*mu-13286",
+    "saved_potential_range": 602,
+    "saved_potential_mean": 496,
+    "old_all_edge_check": "Saved acceptance only; not rerun here",
+    "monotonic_reuse": "The source potential remains feasible after nonnegative share17 changes",
+    "finite_profile_optimal_comparison": "551765/2348",
+    "finite_profile_optimal_expression": "235-30/4696",
+    "algebra": "B>=(1085674+36mu)/(4200+mu)>=its value at496 for0<=mu<=496; derivative numerator=-934474",
+    "skip_redundant_source_optimization": true,
+    "actual_snake_bound": false
+  },
+  "fourteen_cycle": {
+    "rows": [
+      {
+        "edge": 973890,
+        "u": 205943,
+        "v": 279211,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4,
+          2,
+          0
+        ],
+        "counts": [
+          3,
+          6,
+          3,
+          4,
+          6,
+          2
+        ],
+        "shape": "012304",
+        "old_weight": 256,
+        "conditional_weight": 256,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 1205785,
+        "u": 279211,
+        "v": 563299,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          1,
+          3,
+          0
+        ],
+        "counts": [
+          6,
+          3,
+          4,
+          6,
+          2,
+          2
+        ],
+        "shape": "012301",
+        "old_weight": 246,
+        "conditional_weight": 256,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 2552723,
+        "u": 563299,
+        "v": 689303,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0,
+          2,
+          3,
+          5
+        ],
+        "counts": [
+          3,
+          4,
+          6,
+          2,
+          2,
+          6
+        ],
+        "shape": "012304",
+        "old_weight": 736,
+        "conditional_weight": 736,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 3050240,
+        "u": 689303,
+        "v": 216717,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          5,
+          4
+        ],
+        "counts": [
+          4,
+          6,
+          2,
+          2,
+          6,
+          4
+        ],
+        "shape": "012304",
+        "old_weight": 496,
+        "conditional_weight": 496,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 991817,
+        "u": 216717,
+        "v": 304976,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4,
+          3,
+          0
+        ],
+        "counts": [
+          6,
+          2,
+          2,
+          6,
+          4,
+          3
+        ],
+        "shape": "012301",
+        "old_weight": 371,
+        "conditional_weight": 376,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 1272513,
+        "u": 304976,
+        "v": 686789,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          2,
+          3,
+          5
+        ],
+        "counts": [
+          2,
+          2,
+          6,
+          4,
+          3,
+          6
+        ],
+        "shape": "012304",
+        "old_weight": 736,
+        "conditional_weight": 736,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 3029988,
+        "u": 686789,
+        "v": 209408,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          5,
+          3
+        ],
+        "counts": [
+          2,
+          6,
+          4,
+          3,
+          6,
+          3
+        ],
+        "shape": "012340",
+        "old_weight": 364,
+        "conditional_weight": 376,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 976241,
+        "u": 209408,
+        "v": 276675,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4,
+          2,
+          0
+        ],
+        "counts": [
+          6,
+          4,
+          3,
+          6,
+          3,
+          4
+        ],
+        "shape": "012304",
+        "old_weight": 496,
+        "conditional_weight": 496,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 1202057,
+        "u": 276675,
+        "v": 563637,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          1,
+          3,
+          0
+        ],
+        "counts": [
+          4,
+          3,
+          6,
+          3,
+          4,
+          4
+        ],
+        "shape": "012301",
+        "old_weight": 486,
+        "conditional_weight": 496,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 2553325,
+        "u": 563637,
+        "v": 691328,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0,
+          2,
+          3,
+          5
+        ],
+        "counts": [
+          3,
+          6,
+          3,
+          4,
+          4,
+          3
+        ],
+        "shape": "012304",
+        "old_weight": 376,
+        "conditional_weight": 376,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 3052648,
+        "u": 691328,
+        "v": 213317,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          5,
+          4
+        ],
+        "counts": [
+          6,
+          3,
+          4,
+          4,
+          3,
+          6
+        ],
+        "shape": "012304",
+        "old_weight": 736,
+        "conditional_weight": 736,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 987229,
+        "u": 213317,
+        "v": 307904,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          1,
+          4,
+          3,
+          0
+        ],
+        "counts": [
+          3,
+          4,
+          4,
+          3,
+          6,
+          3
+        ],
+        "shape": "012301",
+        "old_weight": 371,
+        "conditional_weight": 376,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 1275764,
+        "u": 307904,
+        "v": 688803,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4,
+          2,
+          3,
+          5
+        ],
+        "counts": [
+          4,
+          4,
+          3,
+          6,
+          3,
+          4
+        ],
+        "shape": "012304",
+        "old_weight": 496,
+        "conditional_weight": 496,
+        "shared_bonus": 0,
+        "share17_match": false
+      },
+      {
+        "edge": 3031022,
+        "u": 688803,
+        "v": 205943,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          2,
+          5,
+          3
+        ],
+        "counts": [
+          4,
+          3,
+          6,
+          3,
+          4,
+          6
+        ],
+        "shape": "012340",
+        "old_weight": 724,
+        "conditional_weight": 736,
+        "shared_bonus": 0,
+        "share17_match": false
+      }
+    ],
+    "old144_total": 6890,
+    "old144_cap": "3445/7",
+    "old144_comparison_floor": "235+341/6569",
+    "selected_conditional_total": 6944,
+    "selected_mean_cap": 496,
+    "extra012301_credit": 30,
+    "extra012340_credit": 24,
+    "share17_matches": 0,
+    "minimum_range_at496": 480,
+    "range_witness": {
+      "edges": [
+        973890,
+        1205785
+      ],
+      "length": 2,
+      "weight": 512,
+      "deficit": 480
+    },
+    "no149_three_cycle_transfer": true
+  },
+  "next_test": {
+    "script_to_implement": "work/after155_potential_test.py",
+    "script_exists": false,
+    "target_mean": 496,
+    "initial_feasible_range": 602,
+    "known_range_lower_bound": 480,
+    "goal": "R<602; integer R<=601",
+    "conditional234_threshold": "R<632",
+    "comparison": "235-(632-R)/4696",
+    "baseline144_weight_sha256": "84b20fe191990faa4c5bdabda20568b37544a2fee44b71a0b42b73109f209286",
+    "warm_start": "Recheck saved source range602 potential on all retained updated edges",
+    "algorithm": "All-zero synchronous exact shortest paths with edge lengths W-496; normalize stable distances and scan every retained inequality",
+    "minimal_span_reason": "Maximum directed-path deficit lower-bounds every span; stable super-source distances attain it",
+    "require_stable_max_distance_zero": true,
+    "certificate": "Potential plus complete edge slack scan and a walk attaining the range deficit",
+    "predecessor_storage": "Bounded-memory per-layer changed-state journal on disk",
+    "time_budget_seconds": 600,
+    "iteration_budget": 1500,
+    "minimum_free_memory_bytes": 3221225472,
+    "maximum_owned_private_bytes": 3221225472,
+    "preflight": "After proof jobs finish, one graph process, native resource snapshots, no compiler overlap",
+    "timeout_status": "UNRESOLVED; no minimality claim",
+    "joint_mean_range_optimum_claimed": false,
+    "new_global_bound": false
+  },
+  "input_pins": {
+    "milestones/120-nine-transition-window/data/full-rules.json": "dae2b8fc4c807501037041ffada61d80cda1acbf03a3b4536c84338d444a2f57",
+    "milestones/111-critical-count-intervals/data/probes/outer-sum21-sorted.json": "ef079635e3bd95560b0b6d227346f486febd37b700da07e5c8ceffe5a682f82d",
+    "milestones/111-critical-count-intervals/data/probes/centre3-sum18-sorted.json": "41fd75bf1c242c4bc4ae4577547f03274816444ef11f5cb642214daa5fb5b3ea",
+    "milestones/111-critical-count-intervals/data/probes/centre21-sum16.json": "49b52abaf47058d2c11295f65aeef3319e951e1e0f81f8420c192fb5e952059e",
+    "milestones/112-critical-sum-refinement/data/probes/012340-middle5-outer17.json": "4f90e856240fc0db5c0f0649c0a840e0b19b254626372c4d274bbc05e84a4724",
+    "milestones/112-critical-sum-refinement/data/probes/012034-total19.json": "58279638ad42b6a828d8df3da4f6434eb2fc481197ef08fd9058c5a25a32d7ed",
+    "milestones/112-critical-sum-refinement/data/probes/012031-upper5-outer14.json": "0471bff64811b5a990e3a39279ef96b80de0522ae5334485181d804bd27dc444",
+    "milestones/112-critical-sum-refinement/data/probes/012314-upper2-outer18.json": "4d35886143ab0e838fb6f4a09383d6bc990ef426d5956b862b67c292d5b22c06",
+    "milestones/113-all-four-sum-pressure/data/probes/012034-middle545-pair8.json": "0ff87327b1855fc6264f75e589d3aea7904c55f406800b060a9974427489d44d",
+    "milestones/114-total-count-pressure/data/probes/012310-total18.json": "8239b1a79b7ba09e0864c5e44cd9fbf5245589526bbf700818a9bf2bd0c7d6b9",
+    "milestones/115-total-count-certificate/data/probes/012345-total21.json": "1d569db624ef6945c47b6377e1f0f430af625d817b8bff813c0450a6d519209d",
+    "milestones/117-cycle-sum-refinement/data/probes/012034-middle5-outer15.json": "c27773d28143ffb110eb36fda66c85714de5e7e207df9cd2b964bef65018220f",
+    "milestones/119-shared-five-count-pressure/data/full-probes/012304-completed-b-total22-full.json": "a7ee00aa7d9d6ca34a6b04c7914880ab977a4b106bd211e201123ebedc3723f1",
+    "milestones/119-shared-five-count-pressure/data/full-probes/012304-conditional-a-total22-full.json": "0111462ffdc5ed222d0ce32552cf38e3265911c26945332457e36aac988c8522",
+    "milestones/117-cycle-sum-refinement/data/middle5-rules.json": "da6f3cb15b868886b2a05bf9fa86a01b3e20611f360d840969a036023e9349e3",
+    "milestones/117-cycle-sum-refinement/data/middle5-outer16/results.json": "9c1dbfb8bfb5ad4f7ceed82bfb550e178febddaff699b540bd4933a7fd3dd9a0",
+    "milestones/119-shared-five-count-pressure/data/full-critical23/results.json": "83523df8acd4b8506e0407608ded961dbca6be02e8cf6195e28d72f0cda724f3",
+    "milestones/120-nine-transition-window/data/outer3/results.json": "c60809a238d091b1a29030237860a984d28074b181fd857b1cf96c706bff2034",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/73-countfree-share-catalogue/data/proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18.json": "32090c554c40b97f1c656099ae10b935758ddb2575024d18cd69567ee71a6294",
+    "milestones/111-critical-count-intervals/data/middle325-profiles/removed-indices.json": "ffaae82933775c8d76c5410c216910e3e3cab8873ea5a996b7336e511aa6ad84",
+    "milestones/113-all-four-sum-pressure/data/pair24/removed-indices.json": "69757d3b0201163cf18c66dc61ba7b2911793ccef0e99d190f62cf4ae11d741b",
+    "milestones/117-cycle-sum-refinement/data/middle5-outer16/removed-indices.json": "47a30b951071923dbb1cf8c7acb3bf7bf9ebf26836dc04dbd1d88af99687f7ab",
+    "milestones/119-shared-five-count-pressure/data/full-critical23/removed-indices.json": "47a30b951071923dbb1cf8c7acb3bf7bf9ebf26836dc04dbd1d88af99687f7ab",
+    "milestones/120-nine-transition-window/data/probes/012031-outer3-radius3.json": "2869cf27002a9e1b97418fbf9ab4df7e26b694bf4000caba47b3ff978ba67e34",
+    "milestones/120-nine-transition-window/data/outer3/removed-indices.json": "2fe9b0c6ce59158e69ef84a58d1ccd854890c2c1e6b4d7259212e4949ddcc082",
+    "milestones/121-replacement-window-pressure/data/pair-guards.json": "cef76dfe2988fc2b55f10c68a6c0fa93cc8aa8687414d1edacc6e143f9d5bbef",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair1-free.json": "bb78fd30e6ff99a95dffb140c8c270f808b98adcd1539a39688c68c730d66a41",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair25.json": "0aafbfdf74a87c8ddde7490d0ab119b0e8909e54443ca7bf21d77ecc92129535",
+    "milestones/121-replacement-window-pressure/data/probes/012032-pair34.json": "c5a816a228be74c80acf8c6ddde4baf58be071dddc2c4c1d12b8b9908f014200",
+    "milestones/121-replacement-window-pressure/data/pair-graph/results.json": "7492ff3a45178740d3253c679bcdd2f5e7907be907f055f455e739cde0b327bf",
+    "milestones/121-replacement-window-pressure/data/pair-graph/removed-indices.json": "2313ad546b73b8836c42494ebbbc9a47540dd96ef2432cb85e781cae6b2668c5",
+    "milestones/130-fourth-count-large/data/next-pressure-task.json": "267eaf3eb1ca52bcb4aeb193effaf852e1e9a2b089a1dfe0ca07db98952127db",
+    "milestones/124-six-count-cycle-pressure/data/graph-26-25-25/cycle-targets.json": "9d5bf150fca0903496cd1a4e1b55d37457176699477f634b242c500d3adf00c4",
+    "milestones/124-six-count-cycle-pressure/data/probes/0123104-universal-total24-resume.json": "b0d9cc22991c2ae8992ffa4725449752952825085bb2c1c21f6e993b15accd1f",
+    "milestones/130-fourth-count-large/data/odd-pair-verification.json": "06b2eac79854bf65ba839bf49c56965df6dc888dc5c5804f67c11d15af26e799",
+    "milestones/130-fourth-count-large/data/odd-cycle-review.json": "4fe9390a9bdb6a9f760d0213891f894f6bcd21e3db93a13276ad70aec66436fb",
+    "milestones/131-odd-pair-six-count/scripts/prepare_graph.py": "ea9c46904e1ef1dcccf279cb48d235bde3662902857977d5b0fe160461595391",
+    "milestones/124-six-count-cycle-pressure/scripts/evaluate_six_shapes.py": "066b117d63f3d6cf78341073fa7b7a09dd39946a7f4b77961bf71b23114e782f",
+    "milestones/121-replacement-window-pressure/scripts/evaluate_pair.py": "dc4c28743da89797a59966548dc0c4a384ad3bba300ffa520c9dd5030e80c514",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/results.json": "157c1cd0751b487e220b954f441670839c50078167f54c83557f43f98fb8fd2d",
+    "milestones/131-odd-pair-six-count/data/odd-pair9-six25/removed-indices.json": "8f5f6c2fbb8a8c84fb1317ea4d3330116f141b6fcc7be5a1d88142dbf94577a7",
+    "milestones/138-seven-cycle-endpoints/data/proof-completion.json": "446b3316a563097f1b00c6b008931b8b14160f5fac623f685b5e1de71d94fb79",
+    "milestones/138-seven-cycle-endpoints/data/ActualBase138Minimal-audit.json": "8fae0221b041bc53d1ae18f6f43520af51e03ea4bd7ba6d2ca891d2007c8ff95",
+    "milestones/138-seven-cycle-endpoints/lean/ActualBase138Minimal.lean": "d024e01bf668a7d67b71b9c4d015be9249a187534575af6ad901d7ace3edb078",
+    "milestones/137-actual-block-assembly/data/verification.json": "9177532099518d3b829bafbde3985566f4dffb6b5fc5c25686171ba31e52df09",
+    "milestones/137-actual-block-assembly/data/ActualCount137-audit.json": "443bb4eaf4750246fd66b5ac141db5caaf0580883ce6bb03f1430f268c1e94da",
+    "milestones/137-actual-block-assembly/lean/ActualCount137.lean": "6c663ff371f792efe9078f34b3a1bca87334c8e1f5716ef4653e4c544b11eaaf",
+    "milestones/138-seven-cycle-endpoints/data/Credit138-audit.json": "d5922537c3cce7621d4deb261cc90291c1c5a696511ed7f8e1902ae038ab4d88",
+    "milestones/138-seven-cycle-endpoints/lean/Credit138.lean": "2ea8baa70e3542918325d1d2f4a2bfe6ec4c11b33200c9d62fc7b6d3c88007fc",
+    "milestones/139-exclusion-occurrence-credit/scripts/prepare_graph.py": "2d6c9cec482cd88597e33e3f4535b7027acbddff9be9700f1c4b17b3634e1509",
+    "milestones/139-exclusion-occurrence-credit/data/exclusion-credit83/results.json": "f641bff071d86701feca3a0c80e5ee3e7f65b35e511e91029ba14813d23eb23f",
+    "milestones/139-exclusion-occurrence-credit/data/exclusion-credit83/removed-indices.json": "b818392396e237bb6d3c32c3fc3cd19faec1bd8f1b1725e639b426e05380b2ac",
+    "milestones/140-five-cycle-window/data/proof-completion.json": "7ec6b2153e2f39f02a5493924e0a89f2779df27928793d4be872e468ba86169a",
+    "milestones/140-five-cycle-window/lean/Weak140Actual.lean": "4ad6037852f1c76183f0b596713a5d7c1d5638aaf6af45eee4960d5a7f3e8556",
+    "milestones/140-five-cycle-window/data/Weak140Actual-audit.json": "abb8c6f3f3dba5303841b14acf045358db41e9a504372c04fd1a248a01366c19",
+    "milestones/141-zero-credit-comparison/scripts/prepare_graph.py": "a0a0b4ff4e64bfe58848719486fdfa592800755df1a180aa5016bb0f386535cf",
+    "milestones/141-zero-credit-comparison/data/preparation.json": "9b8c990d1f718a7eee53300e2359471ab352b0d1d08e0a47ab95d1a60ae3a35e",
+    "milestones/139-exclusion-occurrence-credit/scripts/evaluate_graph.py": "c38a19a4e6288f8c1e88bbc9c004525527bc613339683157569c88f0d0e244c7",
+    "milestones/140-five-cycle-window/scripts/prepare_graph.py": "f3dd3f9850dceb43dfb64b9430779a3050afaa89795cde2f36c1ff1e49eb9e1d",
+    "milestones/140-five-cycle-window/data/graph-preparation.json": "ab1b4579d86a0cb7c001be7c931e511626b68b2a58eaf68c792d8fc92927c958",
+    "milestones/141-zero-credit-comparison/data/five-cycle-zero/results.json": "e09abb05d937a51a8ca81fc1fcccedeb951640fbcb0d4a3cedaf4eb039872bb1",
+    "milestones/141-zero-credit-comparison/data/five-cycle-zero/removed-indices.json": "b29c2d2717b5d2e1cfefb95b827b1aa0f59376e0fbcdaf693e5553ddf85e82f9",
+    "milestones/142-retuned-occurrence-credit/scripts/prepare_graph.py": "03e9d126515978a4fadb946f8bacd244c4e54884bf62deb0737bbf357fd328eb",
+    "milestones/142-retuned-occurrence-credit/data/preparation.json": "31004866dea45e75cac40ea0634aa0f64e9dc0b8e67f500afd49eb77845386f4",
+    "milestones/141-zero-credit-comparison/data/next-credit.json": "25d77a3e6e217f39652962287b8369e5459bf2b4367289ebb0373b6974526262",
+    "milestones/141-zero-credit-comparison/data/Comparison141-audit.json": "52e1a52022ca5e6bbe1b56ff32a62116748f32546b7aca530a92c125605c4780",
+    "milestones/144-countfree-share18/scripts/prepare_graph.py": "5fb57d60f8b8c9186e5b973e5c9626b94ddcef02ac8c997ee8258169762063ec",
+    "milestones/144-countfree-share18/data/graph-preparation.json": "d6120ae3d1474ae67f714c3497640ef0fd13cb7aa3e570b84a4047078e961b16",
+    "milestones/144-countfree-share18/data/alternative-review.json": "475e135176575a00a52dd4dd40c7f50c5f6acf24451ab6c21628dcad855229b3",
+    "milestones/144-countfree-share18/scripts/evaluate_graph.py": "25bb5aab4657577caf2e5941f23b44e18a36f9e4fe8a44bc538ca277306168ba",
+    "milestones/144-countfree-share18/data/share18-impact/results.json": "269bd2361a7e272feff2793927ea2555f5fde5dd6259ab8bb0e4442d354148dd",
+    "milestones/144-countfree-share18/data/share18-impact/removed-indices.json": "b29c2d2717b5d2e1cfefb95b827b1aa0f59376e0fbcdaf693e5553ddf85e82f9",
+    "milestones/144-countfree-share18/data/share18-credit601-over36/results.json": "7ad732a8cfdb2f2d7580dc5821bf84f75cc271df7049726d5906e489b50a470d",
+    "milestones/144-countfree-share18/MATHEMATICAL_NOTE.md": "a4a9ef94f466817701a2397bc4f7f5e7ebeae8ece1f8b686344129ec86eea00e",
+    "milestones/149-share-credit-tradeoff/scripts/find_potential.py": "6dbc41dc31e8913d65188ec428778db4adcb08232d0b680c85d756d327cab1fe",
+    "milestones/149-share-credit-tradeoff/scripts/check_saved_potential.py": "8bc6f66a5f4a351c3d3af2c80e03e6088581e429da9547b4998a9fd33fe6e9dd",
+    "milestones/149-share-credit-tradeoff/data/saved-potential-test.json": "ca3ac001978644a92a10e00147a2654235124b1ad6964e24cdd7ba81dd2574ca",
+    "milestones/149-share-credit-tradeoff/audit/graph-review.json": "29c1a4af5863eea9b8144953b4dc3b152368c2a86c744dccc8091c0c2507f418",
+    "milestones/154-share17-broader-semantics/audit/broader-graph-effect.json": "272508cf0ef3ef28cee7ddad0c38133253131650dd736ad3c3cba49974be8266",
+    "milestones/154-share17-broader-semantics/audit/broader-graph-effect.py": "83c9f480bd1a7b292900cb654cf33caa8db25ae7f7b968c8e2f2ceba9c65aa3e",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/test.py": "7c8326a3bd4b102961a353a751253fee9beb9442cde6b80dc7de1b15f4080b1d",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor18-potential.i64.gz": "95f57387e714339d4d55d0bc916597920af6b90de9cf5cd62d0296659c8a2dab",
+    "paper/snake9_research.tex": "b0f0519df6121e7347aadbfd70f4cde6163013ebea413c216984161fb4a1d2ce"
+  },
+  "inherited144_pins_rehashed": 73,
+  "source_arrays_sha256": {
+    "U": "e910280dc3ad25c32010127c7af2f7d837a162e1095a4aa85fdd0f996b08f46d",
+    "V": "21956ceeb6414238baae68543ac9677c791c07575deeb2664facdf6490374f94",
+    "weight": "acd19583f5de41d789206d369e37493228e8b8b85708db2427781f0d6766b5d4",
+    "direction": "e0e598fa564c6474be6ef98215886248bfca188f3eb47c59b2d9e96ea20b8705",
+    "history": "23eb7524f277153fc0ca23ce4cdf005e28c8091f7993b44bfa34812a5adb57d7",
+    "count_code": "1917e3700ccdee418c22f29829b309775f9212f026e55e394038c1ddfa25210e"
+  },
+  "arrays_loaded": false,
+  "compiler_or_solver_started": false,
+  "scope": "Source inspection, streaming file hashes and saved-row arithmetic only. No new all-edge certificate, no Lean theorem, and no global bound."
+}
