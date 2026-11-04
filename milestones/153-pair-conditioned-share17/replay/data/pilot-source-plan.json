@@ -1,0 +1,272 @@
+{
+  "status": "SOURCE_PREPARED_UNCHECKED",
+  "mode": "bounded_initial_tree_and_prefix_pilot",
+  "module_order": [
+    "LratCheck153Replay",
+    "LratFast153Replay",
+    "InputTree153Replay",
+    "ReplayTools153",
+    "ReplayRawChunks153",
+    "ReplayParts15300",
+    "ReplayParts15301",
+    "ReplayParts15302",
+    "ReplayParts15303",
+    "ReplayParts15304",
+    "ReplayParts15305",
+    "ReplayParts15306",
+    "ReplayParts15307",
+    "ReplayParts15308",
+    "ReplayParts15309",
+    "ReplayParts15310",
+    "ReplayParts15311",
+    "ReplayInitial153",
+    "ReplayTruth15300",
+    "ReplayTruth15301",
+    "ReplayTruth15302",
+    "ReplayTruth15303",
+    "ReplayTruth15304",
+    "ReplayTruth15305",
+    "ReplayTruth15306",
+    "ReplayTruth15307",
+    "ReplayTruth15308",
+    "ReplayTruth15309",
+    "ReplayTruth15310",
+    "ReplayTruth15311",
+    "ReplayAssembly153",
+    "ReplayPilotData153",
+    "ReplayPilotCheck153",
+    "ReplayPilotConsequence153"
+  ],
+  "module_count": 34,
+  "source_bytes": 1885795,
+  "initial_subtrees": 93,
+  "cnf_dependency": "LocalWindowCnf.ShareWindow153",
+  "cnf_namespace": "Snake9.LocalWindow.ShareWindow153",
+  "pilot_deductions": 2095,
+  "pilot_hints": 6002,
+  "full_expected_module_count": 137,
+  "full_segments": 290,
+  "full_checkpoint_groups": 10,
+  "full_source_size_basis": {
+    "proof_literals_bytes": 8103542,
+    "checkpoint_literals_upper_bytes": 3330579
+  },
+  "full_generation_command": "python -B emit_lean.py --full --max-source-mib 256",
+  "generator_sha256": "9a6a382d1002db02a6d11ee7ba6f1091bff6f19b79445a5281ad6cae504e49c4",
+  "copied_source_pins": {
+    "milestones/144-countfree-share18/lean/LratCheck144.lean": "09f164a49d9511205d60292c64b1db4509ef34b82c131d0a4ecda8a3977c005b",
+    "milestones/144-countfree-share18/lean/LratFast144.lean": "f0101d53f2c2651e585f31938e0b5be7b82de49f7ee7c27333b6112116ace56c",
+    "milestones/145-countfree-012301/lean/InputTree145.lean": "fb0def28d9116c8d93171f68ed82fbc476cb814ccff52ab8d07668c6113cfc37",
+    "milestones/145-countfree-012301/lean/ChunkTruthTools145.lean": "9d7b1e0fd32acef3a938ff6de73f07e2b1451d214f2bd97e0d36ccf460d235c8"
+  },
+  "artifacts": [
+    {
+      "module": "LratCheck153Replay",
+      "path": "lean/LratCheck153Replay.lean",
+      "sha256": "017bb93d5d428179cc399129e57536aee1238f12b66499bba56af067264924c1",
+      "bytes": 23747
+    },
+    {
+      "module": "LratFast153Replay",
+      "path": "lean/LratFast153Replay.lean",
+      "sha256": "bf628c4d9911d1d5d881b83ae89f83df31e00c3b470e43be690283a49ebfa76d",
+      "bytes": 16023
+    },
+    {
+      "module": "InputTree153Replay",
+      "path": "lean/InputTree153Replay.lean",
+      "sha256": "a93e5aa924f594f27e4df26fb72dc26093bfe59e1bd9c117c6017c0721b8d2a6",
+      "bytes": 1663
+    },
+    {
+      "module": "ReplayTools153",
+      "path": "lean/ReplayTools153.lean",
+      "sha256": "2ed9c046a7d5c8aa7f395b2b8404f0aca8faa7906cd6e2f79c8af15f9898cb8f",
+      "bytes": 1274
+    },
+    {
+      "module": "ReplayRawChunks153",
+      "path": "lean/ReplayRawChunks153.lean",
+      "sha256": "fb1619c59346f452f03e4d6175c4f9ee35c003eb3976550f88641e2a5cd8677d",
+      "bytes": 13555
+    },
+    {
+      "module": "ReplayParts15300",
+      "path": "lean/ReplayParts15300.lean",
+      "sha256": "9eecea9df17cd15f38e9c1f1a8776ae732c0b533f0003741fdf8e7a9e628a630",
+      "bytes": 130263
+    },
+    {
+      "module": "ReplayTruth15300",
+      "path": "lean/ReplayTruth15300.lean",
+      "sha256": "6d9d7dc869a6530a32f998a11d780e8e9662aaa692e83773e6af5c5e12dcee9f",
+      "bytes": 6404
+    },
+    {
+      "module": "ReplayParts15301",
+      "path": "lean/ReplayParts15301.lean",
+      "sha256": "41819d7e825fef1f4797053cd7f9bd1e64c10f599c1b079bd145129f7352779e",
+      "bytes": 136666
+    },
+    {
+      "module": "ReplayTruth15301",
+      "path": "lean/ReplayTruth15301.lean",
+      "sha256": "22f84185d7b0f15a14068a36242db89e87388a6b5f4dd2872018a4130e3a578a",
+      "bytes": 6523
+    },
+    {
+      "module": "ReplayParts15302",
+      "path": "lean/ReplayParts15302.lean",
+      "sha256": "a3a2118807409fdf75a2517048f8fab2d7a28d5001a72c053dccc3198fa933b0",
+      "bytes": 126108
+    },
+    {
+      "module": "ReplayTruth15302",
+      "path": "lean/ReplayTruth15302.lean",
+      "sha256": "1a694668b8c1186fbfc837cd7e2683e4d6fe3b5f6fb0d28204344d9bfab6c0b5",
+      "bytes": 6556
+    },
+    {
+      "module": "ReplayParts15303",
+      "path": "lean/ReplayParts15303.lean",
+      "sha256": "e951558576324c5b36c6de2e19096bb8bfb1ff958366423912faf647e5db92e8",
+      "bytes": 98532
+    },
+    {
+      "module": "ReplayTruth15303",
+      "path": "lean/ReplayTruth15303.lean",
+      "sha256": "fddc45d12401144ea3516d7bcccd938afd3951b59d2031894a1d76a552928b69",
+      "bytes": 6556
+    },
+    {
+      "module": "ReplayParts15304",
+      "path": "lean/ReplayParts15304.lean",
+      "sha256": "b3a421c2a414c5c762371b05468aba00f5bd11de139e55ed4c5190e42186f93d",
+      "bytes": 106656
+    },
+    {
+      "module": "ReplayTruth15304",
+      "path": "lean/ReplayTruth15304.lean",
+      "sha256": "dedbfc3137b11f9c6107ea0d2ec05f3e6345c6b066dbf30b03ec28e32a145cdf",
+      "bytes": 6556
+    },
+    {
+      "module": "ReplayParts15305",
+      "path": "lean/ReplayParts15305.lean",
+      "sha256": "b24c692cb7ba8a47e82bfc8aa627a18d7278a6e6466266ef33e399525940d4aa",
+      "bytes": 107421
+    },
+    {
+      "module": "ReplayTruth15305",
+      "path": "lean/ReplayTruth15305.lean",
+      "sha256": "1a0b103da1374ca30ded3bdc2fc30ae01547ec004b55dd68003408c311ced470",
+      "bytes": 6556
+    },
+    {
+      "module": "ReplayParts15306",
+      "path": "lean/ReplayParts15306.lean",
+      "sha256": "3af40404266aa559c1655de15fdec3c3e0e7f6763c0e5443193dc1e99263c885",
+      "bytes": 107046
+    },
+    {
+      "module": "ReplayTruth15306",
+      "path": "lean/ReplayTruth15306.lean",
+      "sha256": "495648e00ed75b14d09b00deeac0b7c50eeb8e1853472ba8d46f9def837e9435",
+      "bytes": 6556
+    },
+    {
+      "module": "ReplayParts15307",
+      "path": "lean/ReplayParts15307.lean",
+      "sha256": "6bdd644a2d8438812fbdd00c2d4f7dce3c7f44b02f1e0199ab048e6cd5bc117b",
+      "bytes": 106986
+    },
+    {
+      "module": "ReplayTruth15307",
+      "path": "lean/ReplayTruth15307.lean",
+      "sha256": "54655fa2a1b2e1dcb3c315eff0caed167189cd2327ede913235013c45f03402c",
+      "bytes": 6293
+    },
+    {
+      "module": "ReplayParts15308",
+      "path": "lean/ReplayParts15308.lean",
+      "sha256": "cecee80e3cace58f6b07cf8f77b430735043485dbbdfaab8ae0760e05c736ba5",
+      "bytes": 106260
+    },
+    {
+      "module": "ReplayTruth15308",
+      "path": "lean/ReplayTruth15308.lean",
+      "sha256": "4bdaa812129e5157737f79cf0fe602ddb9abaf953e0fd04afcdd931cef2a025d",
+      "bytes": 6556
+    },
+    {
+      "module": "ReplayParts15309",
+      "path": "lean/ReplayParts15309.lean",
+      "sha256": "9125222cbac19edc75ebe89febf58280346c9004d39e943457435a267ecd299d",
+      "bytes": 104779
+    },
+    {
+      "module": "ReplayTruth15309",
+      "path": "lean/ReplayTruth15309.lean",
+      "sha256": "2484502f4717d28236ef35b3bc564f9e357e3103701044e0e7aad2df089518ff",
+      "bytes": 6556
+    },
+    {
+      "module": "ReplayParts15310",
+      "path": "lean/ReplayParts15310.lean",
+      "sha256": "1613e788b708b406a589f2bdd0ed02bee7d69ab65c54594c1bb960dd6d1318f9",
+      "bytes": 113560
+    },
+    {
+      "module": "ReplayTruth15310",
+      "path": "lean/ReplayTruth15310.lean",
+      "sha256": "30375eefe6194b35ea02c4f14d3fd62d0d72783a33dacb4c8b61bd0009119519",
+      "bytes": 6556
+    },
+    {
+      "module": "ReplayParts15311",
+      "path": "lean/ReplayParts15311.lean",
+      "sha256": "4390337367d25d776cbd44559abbd2c36f428b9cc9f9eab38b7cb3362f9953f7",
+      "bytes": 68481
+    },
+    {
+      "module": "ReplayTruth15311",
+      "path": "lean/ReplayTruth15311.lean",
+      "sha256": "2e7260f1b274e87decfa0554b22bef2f3e1c00883b597116b757f5fca0064417",
+      "bytes": 3903
+    },
+    {
+      "module": "ReplayInitial153",
+      "path": "lean/ReplayInitial153.lean",
+      "sha256": "0193a83c749cfcd2553ef10692088b43228c6487cd1ed1d07f2e1c0754c2a064",
+      "bytes": 5536
+    },
+    {
+      "module": "ReplayAssembly153",
+      "path": "lean/ReplayAssembly153.lean",
+      "sha256": "93a708957667b52e33c678e62dab48c5a4f8d97b05a57e66e3c4e2fbcd60c1d9",
+      "bytes": 18862
+    },
+    {
+      "module": "ReplayPilotData153",
+      "path": "lean/ReplayPilotData153.lean",
+      "sha256": "b8f619e5d19d54150acb3020f05be654174f42be03164987f68d10554fab9c3f",
+      "bytes": 415891
+    },
+    {
+      "module": "ReplayPilotCheck153",
+      "path": "lean/ReplayPilotCheck153.lean",
+      "sha256": "15b0e22dcda80ebf49f6fb02d68acdc37eda94c1a4d5f5e2da6e7b11153546b0",
+      "bytes": 424
+    },
+    {
+      "module": "ReplayPilotConsequence153",
+      "path": "lean/ReplayPilotConsequence153.lean",
+      "sha256": "0f9ec0549fb5c66d2ce5a5f2c8ecec653f9cec15b7d2333126372d867a7cd0f7",
+      "bytes": 491
+    }
+  ],
+  "lean_invoked": false,
+  "solver_invoked": false,
+  "axiom_expectation": "Only standard Lean axioms; no sorryAx, added axioms or native_decide.",
+  "remaining": "Compile fresh checkers, full initial-tree bridge, prefix with checkpoint; then full packed replay and final unsat theorem. Actual-snake semantics belongs to parent pipeline."
+}

@@ -1,0 +1,77 @@
+{
+  "status": "PREPARED_CRITICAL_CONTEXT_SHARE17_TEST",
+  "encoding": {
+    "label": "critical17",
+    "status": "PREPARED_UNSOLVED_CRITICAL_CONTEXT_QUERY",
+    "directions": [
+      0,
+      1,
+      2,
+      0,
+      3,
+      2
+    ],
+    "window": [
+      0,
+      1,
+      3,
+      7,
+      6,
+      14,
+      10
+    ],
+    "bounds": [
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        3,
+        3
+      ]
+    ],
+    "resolution": 12,
+    "radius": 4,
+    "endpoint_budget": 2,
+    "share_cap": 16,
+    "target_share": 17,
+    "actual_pair_minimum": null,
+    "actual_pair_value": 9,
+    "source_cycle_edge": 2222339,
+    "variables": 13856,
+    "clauses": 98836,
+    "base_clauses": 98836,
+    "extra_clauses": 0,
+    "extra_cycle_cuts": [],
+    "cnf_sha256": "13c985b502b7c98db2d5a01876c4d94d290cd4f68362788d52c51d498e6eb69e",
+    "meanings_sha256": "a00c4ccb970637fa3b992f2bb0a0a76d3d8973ca9dc1241285817c6863b3e495",
+    "source_files_sha256": {
+      "milestones/153-pair-conditioned-share17/scripts/prepare_critical.py": "5371d07e7f4a7d2b940f9a37a383ba887a0ee9adf6a080ed03e36c641a63790e",
+      "milestones/28-direct-share-certificates/scripts/tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+      "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+      "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+      "milestones/149-share-credit-tradeoff/audit/graph-review.json": "29c1a4af5863eea9b8144953b4dc3b152368c2a86c744dccc8091c0c2507f418"
+    },
+    "scope": "Only the exact five-count context4,4,4,5,3 is tested. No universal or high-pair share claim; no actual snake theorem before complete interpretation and replay."
+  },
+  "source_driver_sha256": "7c2149b46e130c67467a0a011a7a4f697dad422cf0749aef9514d29150479909",
+  "driver_sha256": "6fbc7635ddf45c60544a7ec0dda62526c6ba90e19abc04e52daf786dd05ad68d",
+  "solver_seconds": 90,
+  "replay_seconds": 90,
+  "hypothesis": "An actual012032 window with five counts4,4,4,5,3 has share>=17.",
+  "motivation": "The high-pair restriction misses every012032 occurrence on the critical eleven-cycle. This exact context occurs on that cycle.",
+  "universal_share17": false,
+  "new_global_upper_bound": false
+}

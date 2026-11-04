@@ -1,0 +1,1075 @@
+{
+  "status": "PASS_BOUNDED_CONDITIONAL_QUERY_AND_SAVED_CYCLE_AUDIT",
+  "reviewed_at_utc": "2026-11-03T22:17:40.862742+00:00",
+  "query": {
+    "shape": "012032",
+    "share_cap": 16,
+    "target_share": 17,
+    "pair_positions": [
+      2,
+      4
+    ],
+    "actual_pair_minimum": 10,
+    "conditional": true,
+    "universal_pair_minimum_claim": false,
+    "base_variables": 11651,
+    "base_clauses": 94331,
+    "variables": 11825,
+    "clauses": 94839,
+    "extra_variables": 174,
+    "extra_clauses": 508,
+    "base_prefix_byte_identical_to152": true,
+    "all_extra_clauses_reconstructed": true,
+    "corner_occurrences": 42,
+    "distinct_corners": 37,
+    "multiplicity_preserved": true,
+    "no_extra_cycle_cuts": true,
+    "status": "TIMEOUT",
+    "seconds": 92.45300000000134,
+    "exit_code": 1,
+    "raw_proof_bytes": 100036608,
+    "complete_replay_exists": false
+  },
+  "indexing": {
+    "stored_count_positions": "chronological vertex positions3..8 of the nine-transition row",
+    "suffix_transitions": "ds[3:9]",
+    "suffix_internal_counts": "counts[1:6]",
+    "suffix_pair": "counts[2],counts[4]",
+    "eligible_prefix_transitions": "ds[2:8]",
+    "eligible_prefix_pair": "counts[1],counts[3]",
+    "reversal": "Exchanges second and fourth internal counts; their sum is unchanged.",
+    "symbol6": "An interval [6,21], not an exact6. Lower stored pair sum >=10 is sufficient for the premise; smaller stored sums containing6 are ambiguous."
+  },
+  "cycles": {
+    "eleven": {
+      "rows": [
+        {
+          "position": 0,
+          "edge": 2222339,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            1,
+            4,
+            3,
+            5,
+            4
+          ],
+          "counts": [
+            5,
+            4,
+            4,
+            4,
+            5,
+            3
+          ],
+          "canonical_suffix": "012032",
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "pair_exact": true
+        },
+        {
+          "position": 1,
+          "edge": 147722,
+          "directions": [
+            0,
+            1,
+            2,
+            0,
+            3,
+            2,
+            4,
+            3,
+            5
+          ],
+          "counts": [
+            4,
+            4,
+            4,
+            5,
+            3,
+            4
+          ],
+          "canonical_suffix": "012314",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 2,
+          "edge": 2221095,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            1,
+            4,
+            3,
+            5,
+            4
+          ],
+          "counts": [
+            4,
+            4,
+            5,
+            3,
+            4,
+            4
+          ],
+          "canonical_suffix": "012032",
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "pair_exact": true
+        },
+        {
+          "position": 3,
+          "edge": 147978,
+          "directions": [
+            0,
+            1,
+            2,
+            0,
+            3,
+            2,
+            4,
+            3,
+            5
+          ],
+          "counts": [
+            4,
+            5,
+            3,
+            4,
+            4,
+            4
+          ],
+          "canonical_suffix": "012314",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 4,
+          "edge": 2208886,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            1,
+            4,
+            3,
+            5,
+            1
+          ],
+          "counts": [
+            5,
+            3,
+            4,
+            4,
+            4,
+            4
+          ],
+          "canonical_suffix": "012031",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 5,
+          "edge": 118572,
+          "directions": [
+            0,
+            1,
+            2,
+            0,
+            3,
+            2,
+            4,
+            0,
+            2
+          ],
+          "counts": [
+            3,
+            4,
+            4,
+            4,
+            4,
+            3
+          ],
+          "canonical_suffix": "012031",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 6,
+          "edge": 2140364,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            1,
+            4,
+            2,
+            1,
+            0
+          ],
+          "counts": [
+            4,
+            4,
+            4,
+            4,
+            3,
+            5
+          ],
+          "canonical_suffix": "012314",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 7,
+          "edge": 2534,
+          "directions": [
+            0,
+            1,
+            2,
+            0,
+            3,
+            1,
+            0,
+            4,
+            1
+          ],
+          "counts": [
+            4,
+            4,
+            4,
+            3,
+            5,
+            4
+          ],
+          "canonical_suffix": "012032",
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "pair_exact": true
+        },
+        {
+          "position": 8,
+          "edge": 1107797,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            2,
+            4,
+            0,
+            5
+          ],
+          "counts": [
+            4,
+            4,
+            3,
+            5,
+            4,
+            4
+          ],
+          "canonical_suffix": "012314",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 9,
+          "edge": 2220859,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            1,
+            4,
+            3,
+            5,
+            4
+          ],
+          "counts": [
+            4,
+            3,
+            5,
+            4,
+            4,
+            4
+          ],
+          "canonical_suffix": "012032",
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "pair_exact": true
+        },
+        {
+          "position": 10,
+          "edge": 146785,
+          "directions": [
+            0,
+            1,
+            2,
+            0,
+            3,
+            2,
+            4,
+            3,
+            5
+          ],
+          "counts": [
+            3,
+            5,
+            4,
+            4,
+            4,
+            5
+          ],
+          "canonical_suffix": "012314",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        }
+      ],
+      "closed": true,
+      "count_shift_consistent": true,
+      "direction_overlap_consistent": true,
+      "suffix_shape_counts": {
+        "012032": 4,
+        "012314": 5,
+        "012031": 2
+      },
+      "suffix_pair_ge10_events": 0,
+      "all_four_placements": [
+        {
+          "edge": 2222339,
+          "placement": 1,
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 2222339,
+          "placement": 3,
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 147722,
+          "placement": 0,
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 147722,
+          "placement": 2,
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 2221095,
+          "placement": 1,
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 2221095,
+          "placement": 3,
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 147978,
+          "placement": 0,
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 147978,
+          "placement": 2,
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 2208886,
+          "placement": 1,
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 118572,
+          "placement": 0,
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 2534,
+          "placement": 3,
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 1107797,
+          "placement": 2,
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 2220859,
+          "placement": 1,
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 2220859,
+          "placement": 3,
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 146785,
+          "placement": 0,
+          "pair": [
+            4,
+            5
+          ],
+          "pair_sum": 9,
+          "exact": true
+        },
+        {
+          "edge": 146785,
+          "placement": 2,
+          "pair": [
+            5,
+            4
+          ],
+          "pair_sum": 9,
+          "exact": true
+        }
+      ],
+      "distinct_suffix_matches": 4,
+      "eligible_prefix_matches": 4
+    },
+    "fourteen": {
+      "rows": [
+        {
+          "position": 0,
+          "edge": 973890,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            1,
+            4,
+            2,
+            0
+          ],
+          "counts": [
+            3,
+            6,
+            3,
+            4,
+            6,
+            2
+          ],
+          "canonical_suffix": "012304",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 1,
+          "edge": 1205785,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            4,
+            1,
+            3,
+            0
+          ],
+          "counts": [
+            6,
+            3,
+            4,
+            6,
+            2,
+            2
+          ],
+          "canonical_suffix": "012301",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 2,
+          "edge": 2552723,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            0,
+            2,
+            3,
+            5
+          ],
+          "counts": [
+            3,
+            4,
+            6,
+            2,
+            2,
+            6
+          ],
+          "canonical_suffix": "012304",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 3,
+          "edge": 3050240,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            1,
+            2,
+            5,
+            4
+          ],
+          "counts": [
+            4,
+            6,
+            2,
+            2,
+            6,
+            4
+          ],
+          "canonical_suffix": "012304",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 4,
+          "edge": 991817,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            1,
+            4,
+            3,
+            0
+          ],
+          "counts": [
+            6,
+            2,
+            2,
+            6,
+            4,
+            3
+          ],
+          "canonical_suffix": "012301",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 5,
+          "edge": 1272513,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            4,
+            2,
+            3,
+            5
+          ],
+          "counts": [
+            2,
+            2,
+            6,
+            4,
+            3,
+            6
+          ],
+          "canonical_suffix": "012304",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 6,
+          "edge": 3029988,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            1,
+            2,
+            5,
+            3
+          ],
+          "counts": [
+            2,
+            6,
+            4,
+            3,
+            6,
+            3
+          ],
+          "canonical_suffix": "012340",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 7,
+          "edge": 976241,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            1,
+            4,
+            2,
+            0
+          ],
+          "counts": [
+            6,
+            4,
+            3,
+            6,
+            3,
+            4
+          ],
+          "canonical_suffix": "012304",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 8,
+          "edge": 1202057,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            4,
+            1,
+            3,
+            0
+          ],
+          "counts": [
+            4,
+            3,
+            6,
+            3,
+            4,
+            4
+          ],
+          "canonical_suffix": "012301",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 9,
+          "edge": 2553325,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            0,
+            2,
+            3,
+            5
+          ],
+          "counts": [
+            3,
+            6,
+            3,
+            4,
+            4,
+            3
+          ],
+          "canonical_suffix": "012304",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 10,
+          "edge": 3052648,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            1,
+            2,
+            5,
+            4
+          ],
+          "counts": [
+            6,
+            3,
+            4,
+            4,
+            3,
+            6
+          ],
+          "canonical_suffix": "012304",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 11,
+          "edge": 987229,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            1,
+            4,
+            3,
+            0
+          ],
+          "counts": [
+            3,
+            4,
+            4,
+            3,
+            6,
+            3
+          ],
+          "canonical_suffix": "012301",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 12,
+          "edge": 1275764,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            0,
+            4,
+            2,
+            3,
+            5
+          ],
+          "counts": [
+            4,
+            4,
+            3,
+            6,
+            3,
+            4
+          ],
+          "canonical_suffix": "012304",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        },
+        {
+          "position": 13,
+          "edge": 3031022,
+          "directions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            1,
+            2,
+            5,
+            3
+          ],
+          "counts": [
+            4,
+            3,
+            6,
+            3,
+            4,
+            6
+          ],
+          "canonical_suffix": "012340",
+          "pair": null,
+          "pair_sum": null,
+          "pair_exact": null
+        }
+      ],
+      "closed": true,
+      "count_shift_consistent": true,
+      "direction_overlap_consistent": true,
+      "suffix_shape_counts": {
+        "012304": 8,
+        "012301": 4,
+        "012340": 2
+      },
+      "suffix_pair_ge10_events": 0,
+      "all_four_placements": [],
+      "distinct_suffix_matches": 0,
+      "eligible_prefix_matches": 0
+    }
+  },
+  "profile_distinctions": {
+    "milestone144_eleven_base_total": 5399,
+    "milestone149_eleven_floor15_base_total": 5452,
+    "milestone149_eleven_floor15_credit1_total": 5456,
+    "milestone144_fourteen_base_total": 6890,
+    "milestone145_fourteen_parametric_total": "6848+4F+2G",
+    "milestone145_first_two_edge_total": "496+F",
+    "restricted_bonus_changes_any_cycle": false,
+    "milestone149_eleven_if_universal_012032_floor16": 5456
+  },
+  "algebra": {
+    "milestone145_same_model_necessary_condition": "325F+159G>9074",
+    "milestone145_both16_lower_comparison": "551875/2348",
+    "milestone145_gap_above235": "95/2348",
+    "unaffected_by_restricted_bonus": true,
+    "scope": "These formulas retain their original fixed-graph and other-weight hypotheses.149 uses an older graph with removed rows in its other witnesses; do not transfer its full obstruction to144."
+  },
+  "recommendation": "Deprioritize this restricted target after the completed bounded timeout: it changes neither saved critical cycle, regardless of bonus size. A later retry should be justified by a verified potential-range benefit on affected rows, or by further rules changing the remaining obstructions. Cycle invariance alone does not rule out improving the range elsewhere.",
+  "limitations": [
+    "No graph search, full-graph potential scan, compiler, solver, proof replay, process changes, or Git operations were performed.",
+    "Original source-array extraction is inherited from the pinned independent144/149 audits. This review recomputes saved-row decoding, direction shapes, all four placements, overlaps, and exact arithmetic; it does not stream the source arrays again.",
+    "These are cycles in a finite relaxation, not constructions of actual snakes. Their invariance is a graph-method limitation, not a refutation of the proposed local theorem.",
+    "The153 native timeout leaves the conditional share17 statement unresolved.",
+    "The proposed conditional theorem cannot be applied to clipped rows whose actual pair floor10 is not certified by available counts.",
+    "The old145 numerical obstruction uses its original012032 baseline. A new universal share16 floor changes that baseline, so the old bound must not be transferred unchanged to a new profile."
+  ],
+  "source_files_sha256": {
+    "milestones/153-pair-conditioned-share17/work/highpair17/encoding.json": "882b4c328a110c97b268408239fd15237054f1abe666f1be2ac2729f2e8e4d55",
+    "milestones/153-pair-conditioned-share17/data/preparation.json": "49dcae5f53811a8fecb42ad1d26cb885a46b58cb4eceabb5367ee77f4660c6c2",
+    "milestones/153-pair-conditioned-share17/data/native-queries.json": "d1f83e4b69d0131948726feb8d389dd54ae8390b4775532f3d84bb89344d61a9",
+    "milestones/153-pair-conditioned-share17/work/highpair17/solver-run.json": "1061a046509a01f15d56eb330a6d84b5fc04d564db12e38b7fef15544020809e",
+    "milestones/153-pair-conditioned-share17/work/highpair17/input.cnf": "1165e88048874aaab410709cf36edc42346c33641c917e72cf3f12e73410cb43",
+    "milestones/153-pair-conditioned-share17/work/highpair17/meanings.json.gz": "21726d5f26925ca9d1b8aa2c30281a671c48d7243599fb1a6c25fe0095c64d7d",
+    "milestones/153-pair-conditioned-share17/scripts/prepare.py": "5e3eed478adf9eaf384fe8f18777e5cc8c02246ad62deed84792d17593007267",
+    "milestones/28-direct-share-certificates/scripts/tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+    "milestones/10-window-aggregate/scripts/gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+    "milestones/10-window-aggregate/scripts/wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/encoding.json": "471eec59166363bce490d6bb669486e4295b009610e537e99ea201cd3b3788a7",
+    "milestones/150-actual-pair-share/scripts/prepare.py": "e5d8ccd2aeb15e58b4c1c690b81d3510c15ec04498c93b2d97719be648fcd575",
+    "milestones/153-pair-conditioned-share17/scripts/native_queries.py": "7c2149b46e130c67467a0a011a7a4f697dad422cf0749aef9514d29150479909",
+    "milestones/152-countfree-share16-completion/strengthening/work/universal17/input.cnf": "101d05115b6dc19cb1c803d69e53a2559bec5718cf7ca1f49b33793caa7ec862",
+    "milestones/153-pair-conditioned-share17/work/highpair17/driver.exact.py": "7c2149b46e130c67467a0a011a7a4f697dad422cf0749aef9514d29150479909",
+    "milestones/153-pair-conditioned-share17/work/highpair17/trimmer.exact.py": "7f4b12eaa27d7734b8e888b31cac6077a7e2cbf8513cb9c31519bc45bf4e3010",
+    "milestones/153-pair-conditioned-share17/work/highpair17/replay-source.exact.py": "37c5b2192838862b8a65408741d06e72161e51d796accc3d0a487875324a676e",
+    "milestones/153-pair-conditioned-share17/work/highpair17/solver-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "milestones/153-pair-conditioned-share17/work/highpair17/solver-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "milestones/153-pair-conditioned-share17/work/highpair17/raw.lrat": "d19d3297c87db84f180ab0feeca479b853ea082c7bd095b721b8d4d0740eb117",
+    "milestones/149-share-credit-tradeoff/audit/graph-review.json": "29c1a4af5863eea9b8144953b4dc3b152368c2a86c744dccc8091c0c2507f418",
+    "milestones/144-countfree-share18/data/graph-review.json": "c8ca447a4a12577e7efb5839d166e68fe689dab46a2426c9f207c985d718f960",
+    "milestones/144-countfree-share18/data/retuned-review.json": "e7e54f67312d03f60ab015a603bd583b11c3b35398cf794fd4316e6953837665",
+    "milestones/145-countfree-012301/data/two-cycle-analysis.json": "05f3732502d32b81ea9d8159597344ef138fd0acc51d84499820a32109ae591a",
+    "milestones/145-countfree-012301/data/joint-floor-analysis.json": "d653af4da058477f398e434c4850b67b531f304e30bc8a8f0201dc32e3fca032",
+    "milestones/145-countfree-012301/scripts/analyze_two_cycles.py": "dfae183ff90270824c8f0351cadc3eb783c294766a8f3581a03b3a4d10cd5eae",
+    "milestones/144-countfree-share18/data/share18-impact/results.json": "269bd2361a7e272feff2793927ea2555f5fde5dd6259ab8bb0e4442d354148dd",
+    "milestones/145-countfree-012301/scripts/analyze_joint_floors.py": "0dd1373436b304834658ee69f12c74ea5bd4f66424c57bbc9cba501cd66e4c85",
+    "milestones/144-countfree-share18/data/share18-credit601-over36/results.json": "7ad732a8cfdb2f2d7580dc5821bf84f75cc271df7049726d5906e489b50a470d",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/144-countfree-share18/scripts/evaluate_graph.py": "25bb5aab4657577caf2e5941f23b44e18a36f9e4fe8a44bc538ca277306168ba",
+    "milestones/149-share-credit-tradeoff/scripts/find_potential.py": "6dbc41dc31e8913d65188ec428778db4adcb08232d0b680c85d756d327cab1fe",
+    "milestones/144-countfree-share18/audit/review-graph.py": "ef0d13672a28b98e2f642df1a50f841ef860189b649f97f7ef6dbadc34530831",
+    "milestones/144-countfree-share18/audit/review-retuned.py": "6a0db0ab5955b85a216d47c1f0bcc8f2fe80fb5f8e107be6d8c0c5b1081f71c6",
+    "milestones/153-pair-conditioned-share17/scripts/prepare_critical.py": "5371d07e7f4a7d2b940f9a37a383ba887a0ee9adf6a080ed03e36c641a63790e",
+    "milestones/153-pair-conditioned-share17/critical/data/preparation.json": "3b106cd5e623f88f9876e273f99cb6880809ae2c978ec46c9c647d37912f21a2",
+    "milestones/153-pair-conditioned-share17/critical/work/critical17/encoding.json": "b18bca8904e2226d16be1f1ff1b8723ef815bf1b1d531020b872eea3dccb3a5a",
+    "milestones/153-pair-conditioned-share17/critical/work/critical17/input.cnf": "13c985b502b7c98db2d5a01876c4d94d290cd4f68362788d52c51d498e6eb69e",
+    "milestones/153-pair-conditioned-share17/critical/work/critical17/meanings.json.gz": "a00c4ccb970637fa3b992f2bb0a0a76d3d8973ca9dc1241285817c6863b3e495",
+    "milestones/153-pair-conditioned-share17/critical/scripts/native_queries.py": "6fbc7635ddf45c60544a7ec0dda62526c6ba90e19abc04e52daf786dd05ad68d"
+  },
+  "critical_context_addendum": {
+    "reviewed_at_utc": "2026-11-03T22:19:42.111056+00:00",
+    "source_edge": 2222339,
+    "source_six_counts": [
+      5,
+      4,
+      4,
+      4,
+      5,
+      3
+    ],
+    "suffix_five_counts": [
+      4,
+      4,
+      4,
+      5,
+      3
+    ],
+    "forward_canonical_shape": "012032",
+    "bounds": [
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        3,
+        3
+      ]
+    ],
+    "pair_value": 9,
+    "share_cap": 16,
+    "target_share": 17,
+    "variables": 13856,
+    "clauses": 98836,
+    "indexing_correct": true,
+    "exact_context_matches_in_eleven_cycle": [
+      {
+        "edge": 2222339,
+        "reverse": false,
+        "counts": [
+          4,
+          4,
+          4,
+          5,
+          3
+        ]
+      },
+      {
+        "edge": 2220859,
+        "reverse": true,
+        "counts": [
+          4,
+          4,
+          4,
+          5,
+          3
+        ]
+      }
+    ],
+    "possible_same_profile_weight_increment_after_actual_theorem": {
+      "forward_only_total": 1,
+      "with_reverse_transfer_total": 2,
+      "scope": "Increment relative to universal012032 share16 with all other149 weights fixed; assumes a valid new share17 theorem and its integration."
+    },
+    "native_observed_status": "BOUNDED_NATIVE_QUERIES_FINISHED",
+    "native_observed_query_status": "PASS_COMPLETE_NATIVE_RUP_REPLAY",
+    "native_snapshot_sha256": "a4c8b598cf524e443e4efccb3f09319251769f2e7c50cecf1ac1fe972730ebb6",
+    "native_proof_audited": false,
+    "scope": "Preparation/indexing and source pins only. No local theorem, replay, or fullgraph outcome inferred."
+  }
+}

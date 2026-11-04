@@ -1,0 +1,367 @@
+import LratCheck153Replay
+
+/-!
+# A faster kernel-evaluable LRAT checker
+
+The same proof format and soundness argument as `LratCheck` (whose trees, clause
+semantics and lemmas are reused), with three changes that make kernel evaluation
+several times faster:
+
+* every operation evaluated by the kernel is a kernel-accelerated `Nat` primitive
+  (`Nat.ble`, `Nat.beq`, `Nat.land`, `Nat.shiftRight`, …) applied directly, instead of
+  `Nat.blt` or the `&&&`/`>>>`/`|||` notations, which the kernel unfolds through several
+  definitions and instances at every use;
+* the initial database shape is the perfect tree `perf h 0` with keys `1 … 2^h - 1` in
+  order, built by one recursion instead of thousands of insertions;
+* a checkpoint is a list of clauses in pre-order of `perf h 0` (the word `0` for an unused
+  slot), built into a tree by one pass (`pre`); `cpOk` checks that each of its clauses is
+  stored under the same key in the replayed database, so no property of `pre` is needed
+  for soundness.  (Each tree clause is then a small closed term `entC x` with a literal
+  `x`, which the kernel evaluates once and caches; a packed stream of entries, parsed with
+  a running state, made every clause term depend on the whole stream and the checks about
+  twice as slow.)
+
+Proof data are lists of `Nat`s, one per lemma, holding 14-bit words (lowest first):
+
+  `slot  (lit+1) … (lit+1)  0  hint … hint  0`
+
+and a checkpoint entry is `(lit+1) … (lit+1)` (or `0`).
+-/
+
+namespace Snake9.LratFast153Replay
+
+open Snake9.LocalWindow
+open Snake9.Lrat153Replay (Tree TreeTrue MaskTrue AllFalse bitTrue taut rawMask andB)
+
+noncomputable section
+
+/-- Kernel branch `if c then t else e`, written with `Bool.rec`. -/
+local macro "kif " c:term " then " t:term " else " e:term : term =>
+  `(Bool.rec (motive := fun _ => _) $e $t $c)
+
+/-- Continue with the clause stored under key `k` (or with `dflt`). -/
+def lookB (t : Tree) (k : Nat) (dflt : Bool) (f : Nat → Bool) : Bool :=
+  Tree.rec (motive := fun _ => Bool) dflt
+    (fun key c _ _ fl fr => kif Nat.ble key k then (kif Nat.beq k key then f c else fr) else fl) t
+
+def lookT (t : Tree) (k : Nat) (dflt : Tree) (f : Nat → Tree) : Tree :=
+  Tree.rec (motive := fun _ => Tree) dflt
+    (fun key c _ _ fl fr => kif Nat.ble key k then (kif Nat.beq k key then f c else fr) else fl) t
+
+/-- Store clause `c` under key `k`. -/
+def setT (t : Tree) (k c : Nat) : Tree :=
+  Tree.rec (motive := fun _ => Tree) (Tree.node k c .nil .nil)
+    (fun key c' l r fl fr =>
+      kif Nat.ble key k then
+        (kif Nat.beq k key then Tree.node key c l r else Tree.node key c' l fr)
+      else Tree.node key c' fl r) t
+
+/-- `setT`, then evaluate the path to `k`. -/
+def insertF (t : Tree) (k c : Nat) : Tree :=
+  let t' := setT t k c
+  lookT t' k t' (fun _ => t')
+
+/-- Copies of `setT`/`insertF` used by `replay`, so that the trees of `replay` and of
+`check` are different terms. -/
+def setT' (t : Tree) (k c : Nat) : Tree :=
+  Tree.rec (motive := fun _ => Tree) (Tree.node k c .nil .nil)
+    (fun key c' l r fl fr =>
+      kif Nat.ble key k then
+        (kif Nat.beq k key then Tree.node key c l r else Tree.node key c' l fr)
+      else Tree.node key c' fl r) t
+
+def insertF' (t : Tree) (k c : Nat) : Tree :=
+  let t' := setT' t k c
+  lookT t' k t' (fun _ => t')
+
+/-! ## Lemmas -/
+
+/-- Read the literal words of a lemma: returns the clause and the remaining words. -/
+def litsL (fuel : Nat) : Nat → Nat → Nat × Nat :=
+  Nat.rec (motive := fun _ => Nat → Nat → Nat × Nat) (fun c x => (c, x))
+    (fun _ ih c x =>
+      kif Nat.beq (Nat.land x 16383) 0 then (c, Nat.shiftRight x 14)
+      else ih (Nat.lor c (Nat.shiftLeft 1 (Nat.sub (Nat.land x 16383) 1))) (Nat.shiftRight x 14))
+    fuel
+
+def lemC (x : Nat) : Nat := (litsL 255 0 (Nat.shiftRight x 14)).1
+def lemH (x : Nat) : Nat := (litsL 255 0 (Nat.shiftRight x 14)).2
+
+/-- `2 ^ 8192`: the negated literals are the bits from 8192 on. -/
+@[irreducible] def big : Nat := Nat.pow 2 8192
+
+/-- After looking up a hint clause: `u` are its literals not known to be false. -/
+def hstep (ih : Nat → Nat → Bool) (z x u : Nat) : Bool :=
+  kif Nat.beq u 0 then true else
+  kif Nat.beq (Nat.land u (Nat.sub u 1)) 0 then
+    ih (kif Nat.ble big u then Nat.lor z (Nat.shiftRight u 8192)
+        else Nat.lor z (Nat.shiftLeft u 8192)) x
+  else ih z x
+
+/-- Unit propagation over the hint words `x`; `z` holds the literals known false.
+Returns `true` iff a conflict is reached. -/
+def hints (db : Tree) (fuel : Nat) : Nat → Nat → Bool :=
+  Nat.rec (motive := fun _ => Nat → Nat → Bool) (fun _ _ => false)
+    (fun _ ih z x =>
+      lookB db (Nat.land x 16383) false
+        (fun d => hstep ih z (Nat.shiftRight x 14) (Nat.xor d (Nat.land d z)))) fuel
+
+def rup (t : Tree) (x : Nat) : Bool := hints t 4095 (lemC x) (lemH x)
+
+def ins (t : Tree) (x : Nat) : Tree := insertF t (Nat.land x 16383) (lemC x)
+def ins' (t : Tree) (x : Nat) : Tree := insertF' t (Nat.land x 16383) (lemC x)
+
+def check (t : Tree) (ps : List Nat) : Bool :=
+  List.rec (motive := fun _ => Tree → Bool) (fun _ => true)
+    (fun x _ ih t => andB (rup t x) (ih (ins t x))) ps t
+
+def replay (t : Tree) (ps : List Nat) : Tree :=
+  List.rec (motive := fun _ => Tree → Tree) (fun t => t)
+    (fun x _ ih t =>
+      let t' := ins' t x
+      Lrat153Replay.seqT t' (ih t')) ps t
+
+/-! ## Initial database and checkpoints -/
+
+/-- The perfect tree of depth `d` with keys `b + 1 … b + 2^d - 1` in order, every clause
+the tautology. -/
+def perf (d : Nat) : Nat → Tree :=
+  Nat.rec (motive := fun _ => Nat → Tree) (fun _ => Tree.nil)
+    (fun d ih b => Tree.node (Nat.add b (Nat.pow 2 d)) taut (ih b) (ih (Nat.add b (Nat.pow 2 d)))) d
+
+def loadRaw (t : Tree) (raw : List (List Nat)) (slots : List Nat) : Tree :=
+  List.rec (motive := fun _ => Tree → List Nat → Tree) (fun t _ => t)
+    (fun c _ ih t sl => List.rec (motive := fun _ => Tree) t
+      (fun k rest _ => let t' := insertF t k (rawMask c); Lrat153Replay.seqT t' (ih t' rest)) sl) raw t slots
+
+/-- A checkpoint entry: its clause, or the tautology for `0`. -/
+def entC (x : Nat) : Nat := kif Nat.beq x 0 then taut else (litsL 255 0 x).1
+
+/-- The tree of depth `d` (keys as in `perf d b`) whose clauses are the entries `es` in
+pre-order; also returns the unused entries. -/
+def pre (d : Nat) : Nat → List Nat → Tree × List Nat :=
+  Nat.rec (motive := fun _ => Nat → List Nat → Tree × List Nat) (fun _ es => (Tree.nil, es))
+    (fun d ih b es => List.rec (motive := fun _ => Tree × List Nat) (Tree.nil, List.nil)
+      (fun x rest _ =>
+        let L := ih b rest
+        let R := ih (Nat.add b (Nat.pow 2 d)) L.2
+        (Tree.node (Nat.add b (Nat.pow 2 d)) (entC x) L.1 R.1, R.2)) es) d
+
+/-- The database of a checkpoint. -/
+def build (h : Nat) (es : List Nat) : Tree := (pre h 0 es).1
+
+/-- Every clause of `t` is the tautology or stored under the same key in `R`. -/
+def cpOk (R t : Tree) : Bool :=
+  Tree.rec (motive := fun _ => Bool) true
+    (fun k c _ _ fl fr =>
+      andB (kif Nat.beq c taut then true else lookB R k false (fun d => Nat.beq d c))
+        (andB fl fr)) t
+
+/-- The empty clause is stored under key `k`. -/
+def hasEmpty (t : Tree) (k : Nat) : Bool := lookB t k false (fun c => Nat.beq c 0)
+
+end
+
+/-! ## Soundness -/
+
+open Snake9.Lrat153Replay (maskTrue_taut not_maskTrue_zero single_bit testBit_diff bitTrue_add bitTrue_sub
+  seqT seqT_eq andB_eq_true rawMask_true)
+
+theorem lookB_spec {τ : Nat → Bool} (P : Bool → Prop) (k : Nat) (dflt : Bool) (f : Nat → Bool)
+    (hd : P dflt) (hf : ∀ c, MaskTrue τ c → P (f c)) : ∀ t, TreeTrue τ t → P (lookB t k dflt f)
+  | .nil, _ => hd
+  | .node key c l r, .node hc hl hr => by
+    show P (Bool.rec (lookB l k dflt f) (Bool.rec (lookB r k dflt f) (f c) (Nat.beq k key))
+      (Nat.ble key k))
+    cases Nat.ble key k
+    · exact lookB_spec P k dflt f hd hf l hl
+    · cases Nat.beq k key
+      · exact lookB_spec P k dflt f hd hf r hr
+      · exact hf c hc
+
+theorem lookT_const (k : Nat) (d : Tree) : ∀ t, lookT t k d (fun _ => d) = d
+  | .nil => rfl
+  | .node key c l r => by
+    show Bool.rec (lookT l k d (fun _ => d)) (Bool.rec (lookT r k d (fun _ => d)) d (Nat.beq k key))
+      (Nat.ble key k) = d
+    rw [lookT_const k d l, lookT_const k d r]
+    cases Nat.ble key k <;> cases Nat.beq k key <;> rfl
+
+theorem setT_true {τ : Nat → Bool} (k c : Nat) (hc : MaskTrue τ c) :
+    ∀ t, TreeTrue τ t → TreeTrue τ (setT t k c)
+  | .nil, _ => .node hc .nil .nil
+  | .node key c' l r, .node hc' hl hr => by
+    show TreeTrue τ (Bool.rec (Tree.node key c' (setT l k c) r)
+      (Bool.rec (Tree.node key c' l (setT r k c)) (Tree.node key c l r) (Nat.beq k key))
+      (Nat.ble key k))
+    cases Nat.ble key k
+    · exact .node hc' (setT_true k c hc l hl) hr
+    · cases Nat.beq k key
+      · exact .node hc' hl (setT_true k c hc r hr)
+      · exact .node hc hl hr
+
+theorem setT'_eq (t : Tree) (k c : Nat) : setT' t k c = setT t k c := rfl
+
+theorem insertF_eq (t : Tree) (k c : Nat) : insertF t k c = setT t k c :=
+  lookT_const k (setT t k c) (setT t k c)
+
+theorem insertF'_eq (t : Tree) (k c : Nat) : insertF' t k c = setT t k c :=
+  lookT_const k (setT' t k c) (setT' t k c)
+
+theorem insertF_true {τ : Nat → Bool} {t : Tree} (k : Nat) {c : Nat} (ht : TreeTrue τ t)
+    (hc : MaskTrue τ c) : TreeTrue τ (insertF t k c) := by
+  rw [insertF_eq]; exact setT_true k c hc t ht
+
+theorem hstep_sound {τ : Nat → Bool} (ih : Nat → Nat → Bool)
+    (hih : ∀ z x, AllFalse τ z → ih z x = true → False)
+    (z x d : Nat) (hz : AllFalse τ z) (hd : MaskTrue τ d)
+    (h : hstep ih z x (Nat.xor d (Nat.land d z)) = true) : False := by
+  obtain ⟨j, hdj, htj⟩ := hd
+  have hzj : z.testBit j = false := by
+    cases hzb : z.testBit j
+    · rfl
+    · have := hz j hzb; rw [htj] at this; exact absurd this (by decide)
+  have huj : (Nat.xor d (Nat.land d z)).testBit j = true := by
+    show (d ^^^ (d &&& z)).testBit j = true
+    rw [testBit_diff, hdj, hzj]; rfl
+  revert h huj
+  generalize Nat.xor d (Nat.land d z) = u
+  intro h huj
+  have hst : hstep ih z x u = Bool.rec (motive := fun _ => Bool)
+      (Bool.rec (motive := fun _ => Bool) (ih z x)
+        (ih (Bool.rec (motive := fun _ => Nat) (z ||| (u <<< 8192)) (z ||| (u >>> 8192))
+          (Nat.ble big u)) x) ((u &&& (u - 1)).beq 0)) true (u.beq 0) := rfl
+  rw [hst] at h
+  cases h0 : u.beq 0
+  · rw [h0] at h
+    cases h1 : (u &&& (u - 1)).beq 0
+    · rw [h1] at h; exact hih z x hz h
+    · rw [h1] at h
+      have hsingle : ∀ i, u.testBit i = true → i = j := by
+        intro i hi
+        have hand : u &&& (u - 1) = 0 := Nat.eq_of_beq_eq_true h1
+        exact single_bit u (fun k => by rw [← Nat.testBit_and, hand, Nat.zero_testBit]) i j hi huj
+      cases h2 : Nat.ble big u
+      · rw [h2] at h
+        refine hih _ x ?_ h
+        intro b hb
+        rw [Nat.testBit_or] at hb
+        rcases Bool.or_eq_true_iff.mp hb with hb | hb
+        · exact hz b hb
+        · rw [Nat.testBit_shiftLeft, Bool.and_eq_true] at hb
+          have hb1 : b ≥ 8192 := of_decide_eq_true hb.1
+          have := hsingle _ hb.2
+          have e : b = j + 8192 := by omega
+          rw [e, bitTrue_add, htj]; rfl
+      · rw [h2] at h
+        refine hih _ x ?_ h
+        intro b hb
+        rw [Nat.testBit_or] at hb
+        rcases Bool.or_eq_true_iff.mp hb with hb | hb
+        · exact hz b hb
+        · rw [Nat.testBit_shiftRight] at hb
+          have := hsingle _ hb
+          have e : b = j - 8192 := by omega
+          rw [e, bitTrue_sub τ j (by omega), htj]; rfl
+  · have hu0 : u = 0 := Nat.eq_of_beq_eq_true h0
+    rw [hu0, Nat.zero_testBit] at huj
+    exact absurd huj (by decide)
+
+theorem hints_sound {τ : Nat → Bool} {db : Tree} (hdb : TreeTrue τ db) :
+    ∀ fuel z x, AllFalse τ z → hints db fuel z x = true → False := by
+  intro fuel
+  induction fuel with
+  | zero =>
+    intro z x _ h
+    rw [show hints db 0 z x = false from rfl] at h
+    exact absurd h (by decide)
+  | succ n ih =>
+    intro z x hz h
+    have key := lookB_spec (τ := τ) (fun b => AllFalse τ z → b = true → False) (Nat.land x 16383)
+      false (fun d => hstep (hints db n) z (Nat.shiftRight x 14) (Nat.xor d (Nat.land d z)))
+      (fun _ h => absurd h (by decide))
+      (fun c hc hz h => hstep_sound (hints db n) ih z (Nat.shiftRight x 14) c hz hc h) db hdb
+    exact key hz h
+
+theorem rup_sound {τ : Nat → Bool} {t : Tree} (ht : TreeTrue τ t) {x : Nat}
+    (h : rup t x = true) : MaskTrue τ (lemC x) := by
+  apply Classical.byContradiction
+  intro hn
+  have hz : AllFalse τ (lemC x) := by
+    intro b hb
+    cases hbt : bitTrue τ b
+    · rfl
+    · exact absurd ⟨b, hb, hbt⟩ hn
+  exact hints_sound ht 4095 (lemC x) (lemH x) hz h
+
+theorem replay_true (τ : Nat → Bool) {t : Tree} {ps : List Nat} (h : check t ps = true)
+    (ht : TreeTrue τ t) : TreeTrue τ (replay t ps) := by
+  induction ps generalizing t with
+  | nil => exact ht
+  | cons x xs ih =>
+    have h' := andB_eq_true h
+    have hins : TreeTrue τ (ins t x) := insertF_true _ ht (rup_sound ht h'.1)
+    have e : replay t (x :: xs) = replay (ins t x) xs := by
+      show seqT (ins' t x) (replay (ins' t x) xs) = _
+      rw [seqT_eq]
+      show replay (insertF' t (Nat.land x 16383) (lemC x)) xs
+        = replay (insertF t (Nat.land x 16383) (lemC x)) xs
+      rw [insertF_eq, insertF'_eq]
+    rw [e]
+    exact ih h'.2 hins
+
+/-! ### Initial database, checkpoints, final conflict -/
+
+theorem perf_true (τ : Nat → Bool) : ∀ d b, TreeTrue τ (perf d b)
+  | 0, _ => .nil
+  | d + 1, b => .node (maskTrue_taut τ) (perf_true τ d b) (perf_true τ d _)
+
+theorem loadRaw_true (τ : Nat → Bool) : ∀ (raw : List (List Nat)) (slots : List Nat) (t : Tree),
+    (raw.map (·.map decodeLit)).all (clauseTrue τ) = true → TreeTrue τ t →
+    TreeTrue τ (loadRaw t raw slots)
+  | [], _, _, _, ht => ht
+  | _ :: _, [], _, _, ht => ht
+  | c :: cs, k :: ks, t, h, ht => by
+    show TreeTrue τ (seqT (insertF t k (rawMask c)) (loadRaw (insertF t k (rawMask c)) cs ks))
+    rw [seqT_eq]
+    simp only [List.map_cons, List.all_cons, Bool.and_eq_true] at h
+    exact loadRaw_true τ cs ks _ h.2 (insertF_true k ht (rawMask_true τ c h.1))
+
+theorem start_true (τ : Nat → Bool) {raw : List (List Nat)} {h : Nat} {slots : List Nat}
+    (hr : cnfTrue τ (raw.map (·.map decodeLit)) = true) :
+    TreeTrue τ (loadRaw (perf h 0) raw slots) :=
+  loadRaw_true τ raw slots _ hr (perf_true τ h 0)
+
+theorem cpOk_true (τ : Nat → Bool) {R : Tree} (hR : TreeTrue τ R) :
+    ∀ t, cpOk R t = true → TreeTrue τ t
+  | .nil, _ => .nil
+  | .node k c l r, h => by
+    have h' := andB_eq_true h
+    have h'' := andB_eq_true h'.2
+    refine .node ?_ (cpOk_true τ hR l h''.1) (cpOk_true τ hR r h''.2)
+    have hc := h'.1
+    revert hc
+    show Bool.rec (lookB R k false (fun d => Nat.beq d c)) true (Nat.beq c taut) = true →
+      MaskTrue τ c
+    cases hct : Nat.beq c taut
+    · exact lookB_spec (τ := τ) (fun b => b = true → MaskTrue τ c) k false
+        (fun d => Nat.beq d c) (fun h => absurd h (by decide))
+        (fun d hd h => (Nat.eq_of_beq_eq_true h) ▸ hd) R hR
+    · intro _
+      exact (Nat.eq_of_beq_eq_true hct) ▸ maskTrue_taut τ
+
+theorem cp_true (τ : Nat → Bool) {s : Tree} {ps : List Nat} {t : Tree}
+    (h : andB (check s ps) (cpOk (replay s ps) t) = true) (hs : TreeTrue τ s) : TreeTrue τ t :=
+  cpOk_true τ (replay_true τ (andB_eq_true h).1 hs) t (andB_eq_true h).2
+
+theorem final_false (τ : Nat → Bool) {s : Tree} {ps : List Nat} {k : Nat}
+    (h : andB (check s ps) (hasEmpty (replay s ps) k) = true) (hs : TreeTrue τ s) : False :=
+  lookB_spec (τ := τ) (fun b => b = true → False) k false (fun c => Nat.beq c 0)
+    (fun h => absurd h (by decide))
+    (fun c hc h => not_maskTrue_zero τ ((Nat.eq_of_beq_eq_true h) ▸ hc))
+    (replay s ps) (replay_true τ (andB_eq_true h).1 hs) (andB_eq_true h).2
+
+end Snake9.LratFast153Replay
+
+#print axioms Snake9.LratFast153Replay.cp_true
+#print axioms Snake9.LratFast153Replay.final_false

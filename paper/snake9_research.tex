@@ -3032,6 +3032,38 @@ There are 49 accepted modules among the 342 prepared for the full replay.
 The final contradiction remains uncompleted and is still an explicit
 premise of the actual-snake share bound~\cite{share150archive,pilot151archive}.
 
+A separate certificate targets the $012032$ windows on the surviving
+eleven-cycle. A proposed improvement restricted to
+$\alpha_{r+2}+\alpha_{r+4}\ge10$ leaves that cycle unchanged: all four
+of its $012032$ windows have exact pair sum nine. The companion
+fourteen-cycle contains no $012032$ window. This observation concerns
+these cycles and does not rule out improving the potential elsewhere.
+
+The five-count context $(4,4,4,5,3)$ instead occurs on the eleven-cycle.
+Adjoining share at most 16 to its necessary local conditions gives a
+certificate with 11869 retained clauses, 30305 deductions and 1754767
+propagation references. Complete numerical replay reaches the empty clause.
+The retained proof uses none of the registers enforcing the lower bounds
+on the second and fourth counts. Removing those counters and relabelling
+every retained clause and proof step gives a second complete numerical
+replay under the broader conditions
+\[
+\alpha_{r+1}=4,\qquad \alpha_{r+2}\le4,\qquad
+\alpha_{r+3}=4,\qquad \alpha_{r+4}\le5,\qquad
+\alpha_{r+5}=3.
+\]
+The compact core is unchanged. These certificates support share at least
+17 under the displayed hypotheses; their Lean clause interpretation,
+complete contradiction replay and application to arbitrary snakes remain
+unfinished. The generated exact-count sources do not yet interpret the
+broader conditions. No completed local theorem is asserted here.
+
+If the exact-context result and its reversal are established, they raise
+two edges of the eleven-cycle by one relative to the profile imposing
+universal $012032$ share 16. Its total then increases from 5456 to 5458.
+The fourteen-cycle remains unchanged, and this calculation alone gives
+no improved global bound~\cite{critical153archive}.
+
 For the preserved $012034$ share-18 proof, the original-clause assignment
 now transfers through all 104 chunks to the materialized initial tree and
 composes with the checked 1055-deduction prefix using 6006 propagation
@@ -6377,6 +6409,11 @@ milestone 150.
 I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Initial-state connection and bounded
 replay of the count-free 012032 certificate}, research archive, milestone 151.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/151-countfree-replay-pilot}.
+
+\bibitem{critical153archive}
+I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Critical-window share certificates
+and removal of two unused count assumptions}, research archive, milestone 153.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/153-pair-conditioned-share17}.
 
 \end{thebibliography}
 \end{document}

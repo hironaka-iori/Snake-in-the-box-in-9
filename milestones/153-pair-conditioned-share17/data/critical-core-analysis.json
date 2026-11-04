@@ -1,0 +1,159 @@
+{
+  "status": "PASS_CRITICAL_CORE_INPUT_AND_PREMISE_AUDIT",
+  "core_clauses": 11869,
+  "deductions": 30305,
+  "propagation_references": 1754767,
+  "original_variables": 13856,
+  "core_variables": 5707,
+  "derived_variables": 4342,
+  "old_clause_families": {
+    "window": 7,
+    "deg2": 2148,
+    "lowEnd": 508,
+    "endLow": 73,
+    "degPos": 80,
+    "endSel": 7,
+    "first": 122,
+    "mono": 906,
+    "step": 463,
+    "over": 168,
+    "cut": 127
+  },
+  "share_clause_families": {
+    "emptyE": 790,
+    "totUp": 4907,
+    "totDown": 1021,
+    "shareCl": 541,
+    "shareCap": 1
+  },
+  "retained_counter_overflows": [
+    {
+      "counter": 0,
+      "kind": [
+        "ends"
+      ],
+      "threshold": 2,
+      "overflow_clauses": 98,
+      "inputs": 286
+    },
+    {
+      "counter": 1,
+      "kind": [
+        "hi",
+        0
+      ],
+      "threshold": 4,
+      "overflow_clauses": 14,
+      "inputs": 21
+    },
+    {
+      "counter": 2,
+      "kind": [
+        "lo",
+        0
+      ],
+      "threshold": 17,
+      "overflow_clauses": 2,
+      "inputs": 21
+    },
+    {
+      "counter": 3,
+      "kind": [
+        "hi",
+        1
+      ],
+      "threshold": 4,
+      "overflow_clauses": 10,
+      "inputs": 21
+    },
+    {
+      "counter": 5,
+      "kind": [
+        "hi",
+        2
+      ],
+      "threshold": 4,
+      "overflow_clauses": 11,
+      "inputs": 21
+    },
+    {
+      "counter": 6,
+      "kind": [
+        "lo",
+        2
+      ],
+      "threshold": 17,
+      "overflow_clauses": 3,
+      "inputs": 21
+    },
+    {
+      "counter": 7,
+      "kind": [
+        "hi",
+        3
+      ],
+      "threshold": 5,
+      "overflow_clauses": 10,
+      "inputs": 21
+    },
+    {
+      "counter": 9,
+      "kind": [
+        "hi",
+        4
+      ],
+      "threshold": 3,
+      "overflow_clauses": 18,
+      "inputs": 21
+    },
+    {
+      "counter": 10,
+      "kind": [
+        "lo",
+        4
+      ],
+      "threshold": 18,
+      "overflow_clauses": 2,
+      "inputs": 21
+    }
+  ],
+  "count_bounds": [
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      3,
+      3
+    ]
+  ],
+  "share_cap": 16,
+  "extra_cycle_cuts": [],
+  "native_replay_complete": true,
+  "Lean_replay_complete": false,
+  "actual_snake_theorem_complete": false,
+  "new_global_upper_bound": false,
+  "source_files_sha256": {
+    "milestones\\153-pair-conditioned-share17\\scripts\\analyze_critical_core.py": "26921c6f04ba2cb90e8330a315bd175a1db421b989cb8452151fb0802246956a",
+    "milestones\\153-pair-conditioned-share17\\critical\\work\\critical17\\input.cnf": "13c985b502b7c98db2d5a01876c4d94d290cd4f68362788d52c51d498e6eb69e",
+    "milestones\\153-pair-conditioned-share17\\critical\\work\\critical17\\core.cnf": "ce1712c639faac4ecef68eac66caf48e4498d3c9fa6e1441d17ee264755d983f",
+    "milestones\\153-pair-conditioned-share17\\critical\\work\\critical17\\core-ids.json": "9a28135be7bd92f92afb772f42bbb50610f6e30229b6cae7f4c485909660dc14",
+    "milestones\\153-pair-conditioned-share17\\critical\\work\\critical17\\trimmed.lrat": "c3a7cb6b891cf7c2809a1d4702dce8cfd2a5611b823c350c1a6e3446f79e8b1b",
+    "milestones\\153-pair-conditioned-share17\\critical\\work\\critical17\\native-replay.json": "9e802880b17a0612243edb1d632e602f4d61cb9a7b1a84161aa98482bff2db95",
+    "milestones\\153-pair-conditioned-share17\\critical\\work\\critical17\\meanings.json.gz": "a00c4ccb970637fa3b992f2bb0a0a76d3d8973ca9dc1241285817c6863b3e495",
+    "milestones\\153-pair-conditioned-share17\\critical\\work\\critical17\\encoding.json": "b18bca8904e2226d16be1f1ff1b8723ef815bf1b1d531020b872eea3dccb3a5a"
+  },
+  "scope": "The retained core is an exact subset of the specified critical-context input. Overflow tags identify count assumptions used; no automatic weakening or completed actual-snake theorem is asserted."
+}

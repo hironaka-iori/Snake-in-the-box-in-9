@@ -1,0 +1,1464 @@
+{
+  "status": "PASS_INDEPENDENT_SELECTED_ROW_AND_ALL_CREDIT_OBSTRUCTION_AUDIT",
+  "source_files_sha256": {
+    "milestones/149-share-credit-tradeoff/data/new-potential.json": "9dca9beef99ef182329deaf9b73d83c4fe94ce2a9e51a7c4fe61cd471ecf4245",
+    "milestones/149-share-credit-tradeoff/scripts/find_potential.py": "6dbc41dc31e8913d65188ec428778db4adcb08232d0b680c85d756d327cab1fe",
+    "milestones/149-share-credit-tradeoff/data/saved-potential-test.json": "ca3ac001978644a92a10e00147a2654235124b1ad6964e24cdd7ba81dd2574ca",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/144-countfree-share18/data/share18-impact/results.json": "269bd2361a7e272feff2793927ea2555f5fde5dd6259ab8bb0e4442d354148dd",
+    "milestones/144-countfree-share18/data/share18-impact/removed-indices.json": "b29c2d2717b5d2e1cfefb95b827b1aa0f59376e0fbcdaf693e5553ddf85e82f9",
+    "milestones/144-countfree-share18/scripts/evaluate_graph.py": "25bb5aab4657577caf2e5941f23b44e18a36f9e4fe8a44bc538ca277306168ba",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/input-pins.json": "10b6d36daa159b3422889aff63c62e65a10f69fbcda85e3dfd019c2aa2afce27",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/case7301.json": "992a6e79d8b584c8a0260cb7faa9d7e85389025b9de549cb8acc77ebe6b37cd6",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/case7307.json": "ed4945c388e51afb79a6c989c59e47eb37231241002537b25c1861961bc23739",
+    "milestones/97-geometric-credit-integration/floor-sensitivity/012034-minimum/floor17.json": "ab46cfe7e456f3bc8e0b70b1be1b67f2ed257c0d8b5fd42a22974da2707a75d9"
+  },
+  "source_arrays_sha256": {
+    "U": "e910280dc3ad25c32010127c7af2f7d837a162e1095a4aa85fdd0f996b08f46d",
+    "V": "21956ceeb6414238baae68543ac9677c791c07575deeb2664facdf6490374f94",
+    "weight": "acd19583f5de41d789206d369e37493228e8b8b85708db2427781f0d6766b5d4",
+    "direction": "e0e598fa564c6474be6ef98215886248bfca188f3eb47c59b2d9e96ea20b8705",
+    "history": "23eb7524f277153fc0ca23ce4cdf005e28c8091f7993b44bfa34812a5adb57d7",
+    "count_code": "1917e3700ccdee418c22f29829b309775f9212f026e55e394038c1ddfa25210e"
+  },
+  "source_graph_edges": 4947008,
+  "source_graph_states": 1601856,
+  "selected_unique_rows": 39,
+  "fixed_floors": {
+    "012031": 16,
+    "012032": 15,
+    "012034": 18,
+    "012301": 16,
+    "012304": 16,
+    "012310": 12,
+    "012314": 16,
+    "012340": 16,
+    "012345": 16
+  },
+  "occurrence_allowance": 24,
+  "event_rule": "Canonical suffix012032; chronological six-symbol indices2 and4 both below6 and sum at most9. Symbol6 denotes actual count at least6 and never certifies this event.",
+  "three_cycle": {
+    "rows": [
+      {
+        "edge": 1131395,
+        "u": 245540,
+        "v": 454588,
+        "direction": 108,
+        "history": 0,
+        "count_code": 26908,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          2,
+          4,
+          3,
+          2
+        ],
+        "counts": [
+          4,
+          3,
+          5,
+          4,
+          3,
+          5
+        ],
+        "shape": "012031",
+        "base_weight": 611,
+        "event": false,
+        "weaker_weight_without_credit": 616,
+        "weight": 616
+      },
+      {
+        "edge": 2139224,
+        "u": 454588,
+        "v": 5931,
+        "direction": 198,
+        "history": 0,
+        "count_code": 21483,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          2,
+          1,
+          0
+        ],
+        "counts": [
+          3,
+          5,
+          4,
+          3,
+          5,
+          4
+        ],
+        "shape": "012314",
+        "base_weight": 484,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 17417,
+        "u": 5931,
+        "v": 245540,
+        "direction": 2,
+        "history": 0,
+        "count_code": 35588,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          1,
+          0,
+          4,
+          3
+        ],
+        "counts": [
+          5,
+          4,
+          3,
+          5,
+          4,
+          3
+        ],
+        "shape": "012031",
+        "base_weight": 370,
+        "event": false,
+        "weaker_weight_without_credit": 376,
+        "weight": 376
+      }
+    ],
+    "length": 3,
+    "weight": 1488,
+    "events": 0,
+    "mean_cap": "mu<=496"
+  },
+  "eleven_cycle": {
+    "rows": [
+      {
+        "edge": 2222339,
+        "u": 480298,
+        "v": 59102,
+        "direction": 210,
+        "history": 0,
+        "count_code": 35774,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          4
+        ],
+        "counts": [
+          5,
+          4,
+          4,
+          4,
+          5,
+          3
+        ],
+        "shape": "012032",
+        "base_weight": 360,
+        "event": true,
+        "weaker_weight_without_credit": 375,
+        "weight": 376
+      },
+      {
+        "edge": 147722,
+        "u": 59102,
+        "v": 479031,
+        "direction": 24,
+        "history": 0,
+        "count_code": 28023,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          3,
+          5
+        ],
+        "counts": [
+          4,
+          4,
+          4,
+          5,
+          3,
+          4
+        ],
+        "shape": "012314",
+        "base_weight": 480,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 2221095,
+        "u": 479031,
+        "v": 59277,
+        "direction": 210,
+        "history": 0,
+        "count_code": 28173,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          4
+        ],
+        "counts": [
+          4,
+          4,
+          5,
+          3,
+          4,
+          4
+        ],
+        "shape": "012032",
+        "base_weight": 480,
+        "event": true,
+        "weaker_weight_without_credit": 495,
+        "weight": 496
+      },
+      {
+        "edge": 147978,
+        "u": 59277,
+        "v": 480081,
+        "direction": 24,
+        "history": 0,
+        "count_code": 29073,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          3,
+          5
+        ],
+        "counts": [
+          4,
+          5,
+          3,
+          4,
+          4,
+          4
+        ],
+        "shape": "012314",
+        "base_weight": 480,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 2208886,
+        "u": 480081,
+        "v": 42249,
+        "direction": 208,
+        "history": 0,
+        "count_code": 34473,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          1
+        ],
+        "counts": [
+          5,
+          3,
+          4,
+          4,
+          4,
+          4
+        ],
+        "shape": "012031",
+        "base_weight": 487,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 118572,
+        "u": 42249,
+        "v": 455672,
+        "direction": 19,
+        "history": 0,
+        "count_code": 20216,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          0,
+          2
+        ],
+        "counts": [
+          3,
+          4,
+          4,
+          4,
+          4,
+          3
+        ],
+        "shape": "012031",
+        "base_weight": 371,
+        "event": false,
+        "weaker_weight_without_credit": 376,
+        "weight": 376
+      },
+      {
+        "edge": 2140364,
+        "u": 455672,
+        "v": 4660,
+        "direction": 198,
+        "history": 0,
+        "count_code": 27988,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          2,
+          1,
+          0
+        ],
+        "counts": [
+          4,
+          4,
+          4,
+          4,
+          3,
+          5
+        ],
+        "shape": "012314",
+        "base_weight": 604,
+        "event": false,
+        "weaker_weight_without_credit": 616,
+        "weight": 616
+      },
+      {
+        "edge": 2534,
+        "u": 4660,
+        "v": 230139,
+        "direction": 0,
+        "history": 0,
+        "count_code": 27963,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          1,
+          0,
+          4,
+          1
+        ],
+        "counts": [
+          4,
+          4,
+          4,
+          3,
+          5,
+          4
+        ],
+        "shape": "012032",
+        "base_weight": 487,
+        "event": true,
+        "weaker_weight_without_credit": 495,
+        "weight": 496
+      },
+      {
+        "edge": 1107797,
+        "u": 230139,
+        "v": 478821,
+        "direction": 104,
+        "history": 0,
+        "count_code": 27813,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          2,
+          4,
+          0,
+          5
+        ],
+        "counts": [
+          4,
+          4,
+          3,
+          5,
+          4,
+          4
+        ],
+        "shape": "012314",
+        "base_weight": 490,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 2220859,
+        "u": 478821,
+        "v": 58017,
+        "direction": 210,
+        "history": 0,
+        "count_code": 26913,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          4
+        ],
+        "counts": [
+          4,
+          3,
+          5,
+          4,
+          4,
+          4
+        ],
+        "shape": "012032",
+        "base_weight": 480,
+        "event": true,
+        "weaker_weight_without_credit": 495,
+        "weight": 496
+      },
+      {
+        "edge": 146785,
+        "u": 58017,
+        "v": 480298,
+        "direction": 24,
+        "history": 0,
+        "count_code": 21514,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          3,
+          5
+        ],
+        "counts": [
+          3,
+          5,
+          4,
+          4,
+          4,
+          5
+        ],
+        "shape": "012314",
+        "base_weight": 600,
+        "event": false,
+        "weaker_weight_without_credit": 616,
+        "weight": 616
+      }
+    ],
+    "length": 11,
+    "weight_without_credit": 5452,
+    "events": 4,
+    "mean_cap": "11mu<=5452+4C"
+  },
+  "zero_event_walk": {
+    "rows": [
+      {
+        "edge": 4895760,
+        "u": 1018655,
+        "v": 1267483,
+        "direction": 496,
+        "history": 0,
+        "count_code": 46651,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          4,
+          3
+        ],
+        "counts": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          2
+        ],
+        "shape": "012310",
+        "base_weight": 240,
+        "event": false,
+        "weaker_weight_without_credit": 252,
+        "weight": 252
+      },
+      {
+        "edge": 4484568,
+        "u": 1267483,
+        "v": 1601829,
+        "direction": 460,
+        "history": 31,
+        "count_code": 46629,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          3,
+          2,
+          0
+        ],
+        "counts": [
+          6,
+          6,
+          6,
+          6,
+          2,
+          4
+        ],
+        "shape": "012034",
+        "base_weight": 480,
+        "event": false,
+        "weaker_weight_without_credit": 498,
+        "weight": 498
+      },
+      {
+        "edge": 3455563,
+        "u": 1601829,
+        "v": 1555040,
+        "direction": 350,
+        "history": 74,
+        "count_code": 46496,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          2,
+          1,
+          5,
+          0
+        ],
+        "counts": [
+          6,
+          6,
+          6,
+          2,
+          4,
+          3
+        ],
+        "shape": "012345",
+        "base_weight": 360,
+        "event": false,
+        "weaker_weight_without_credit": 376,
+        "weight": 376
+      },
+      {
+        "edge": 1882917,
+        "u": 1555040,
+        "v": 162338,
+        "direction": 180,
+        "history": 68,
+        "count_code": 45698,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          0,
+          4,
+          5,
+          1
+        ],
+        "counts": [
+          6,
+          6,
+          2,
+          4,
+          3,
+          3
+        ],
+        "shape": "012304",
+        "base_weight": 360,
+        "event": false,
+        "weaker_weight_without_credit": 376,
+        "weight": 376
+      },
+      {
+        "edge": 567947,
+        "u": 162338,
+        "v": 935152,
+        "direction": 67,
+        "history": 0,
+        "count_code": 40912,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          4,
+          5,
+          0,
+          4
+        ],
+        "counts": [
+          6,
+          2,
+          4,
+          3,
+          3,
+          5
+        ],
+        "shape": "012031",
+        "base_weight": 612,
+        "event": false,
+        "weaker_weight_without_credit": 616,
+        "weight": 616
+      },
+      {
+        "edge": 4335674,
+        "u": 935152,
+        "v": 704261,
+        "direction": 443,
+        "history": 0,
+        "count_code": 12197,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          2,
+          4,
+          6
+        ],
+        "counts": [
+          2,
+          4,
+          3,
+          3,
+          5,
+          6
+        ],
+        "shape": "012314",
+        "base_weight": 731,
+        "event": false,
+        "weaker_weight_without_credit": 736,
+        "weight": 736
+      },
+      {
+        "edge": 3126820,
+        "u": 704261,
+        "v": 228704,
+        "direction": 309,
+        "history": 0,
+        "count_code": 26528,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          1,
+          3,
+          5,
+          1
+        ],
+        "counts": [
+          4,
+          3,
+          3,
+          5,
+          6,
+          3
+        ],
+        "shape": "012032",
+        "base_weight": 373,
+        "event": false,
+        "weaker_weight_without_credit": 375,
+        "weight": 375
+      },
+      {
+        "edge": 1106556,
+        "u": 228704,
+        "v": 477985,
+        "direction": 104,
+        "history": 0,
+        "count_code": 19201,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          2,
+          4,
+          0,
+          5
+        ],
+        "counts": [
+          3,
+          3,
+          5,
+          6,
+          3,
+          2
+        ],
+        "shape": "012314",
+        "base_weight": 250,
+        "event": false,
+        "weaker_weight_without_credit": 256,
+        "weight": 256
+      },
+      {
+        "edge": 2220392,
+        "u": 477985,
+        "v": 60779,
+        "direction": 210,
+        "history": 0,
+        "count_code": 21899,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          4
+        ],
+        "counts": [
+          3,
+          5,
+          6,
+          3,
+          2,
+          6
+        ],
+        "shape": "012032",
+        "base_weight": 720,
+        "event": false,
+        "weaker_weight_without_credit": 735,
+        "weight": 735
+      },
+      {
+        "edge": 149782,
+        "u": 60779,
+        "v": 481317,
+        "direction": 24,
+        "history": 0,
+        "count_code": 38085,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          3,
+          5
+        ],
+        "counts": [
+          5,
+          6,
+          3,
+          2,
+          6,
+          4
+        ],
+        "shape": "012314",
+        "base_weight": 480,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 2210538,
+        "u": 481317,
+        "v": 41888,
+        "direction": 208,
+        "history": 0,
+        "count_code": 41888,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          1
+        ],
+        "counts": [
+          6,
+          3,
+          2,
+          6,
+          4,
+          3
+        ],
+        "shape": "012031",
+        "base_weight": 367,
+        "event": false,
+        "weaker_weight_without_credit": 376,
+        "weight": 376
+      },
+      {
+        "edge": 118448,
+        "u": 41888,
+        "v": 453507,
+        "direction": 19,
+        "history": 0,
+        "count_code": 18051,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          0,
+          2
+        ],
+        "counts": [
+          3,
+          2,
+          6,
+          4,
+          3,
+          4
+        ],
+        "shape": "012031",
+        "base_weight": 491,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 2145965,
+        "u": 453507,
+        "v": 7223,
+        "direction": 199,
+        "history": 0,
+        "count_code": 14999,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          2,
+          1,
+          5
+        ],
+        "counts": [
+          2,
+          6,
+          4,
+          3,
+          4,
+          6
+        ],
+        "shape": "012314",
+        "base_weight": 724,
+        "event": false,
+        "weaker_weight_without_credit": 736,
+        "weight": 736
+      },
+      {
+        "edge": 5169,
+        "u": 7223,
+        "v": 229964,
+        "direction": 0,
+        "history": 0,
+        "count_code": 43340,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          1,
+          0,
+          4,
+          1
+        ],
+        "counts": [
+          6,
+          4,
+          3,
+          4,
+          6,
+          3
+        ],
+        "shape": "012032",
+        "base_weight": 367,
+        "event": false,
+        "weaker_weight_without_credit": 375,
+        "weight": 375
+      },
+      {
+        "edge": 1107656,
+        "u": 229964,
+        "v": 477769,
+        "direction": 104,
+        "history": 0,
+        "count_code": 26761,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          2,
+          4,
+          0,
+          5
+        ],
+        "counts": [
+          4,
+          3,
+          4,
+          6,
+          3,
+          2
+        ],
+        "shape": "012314",
+        "base_weight": 250,
+        "event": false,
+        "weaker_weight_without_credit": 256,
+        "weight": 256
+      },
+      {
+        "edge": 2220173,
+        "u": 477769,
+        "v": 59483,
+        "direction": 210,
+        "history": 0,
+        "count_code": 20603,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          4
+        ],
+        "counts": [
+          3,
+          4,
+          6,
+          3,
+          2,
+          6
+        ],
+        "shape": "012032",
+        "base_weight": 720,
+        "event": false,
+        "weaker_weight_without_credit": 735,
+        "weight": 735
+      },
+      {
+        "edge": 148339,
+        "u": 59483,
+        "v": 481317,
+        "direction": 24,
+        "history": 0,
+        "count_code": 30309,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          3,
+          5
+        ],
+        "counts": [
+          4,
+          6,
+          3,
+          2,
+          6,
+          4
+        ],
+        "shape": "012314",
+        "base_weight": 480,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 2210538,
+        "u": 481317,
+        "v": 41888,
+        "direction": 208,
+        "history": 0,
+        "count_code": 41888,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          1
+        ],
+        "counts": [
+          6,
+          3,
+          2,
+          6,
+          4,
+          3
+        ],
+        "shape": "012031",
+        "base_weight": 367,
+        "event": false,
+        "weaker_weight_without_credit": 376,
+        "weight": 376
+      },
+      {
+        "edge": 118448,
+        "u": 41888,
+        "v": 453507,
+        "direction": 19,
+        "history": 0,
+        "count_code": 18051,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          0,
+          2
+        ],
+        "counts": [
+          3,
+          2,
+          6,
+          4,
+          3,
+          4
+        ],
+        "shape": "012031",
+        "base_weight": 491,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 2145965,
+        "u": 453507,
+        "v": 7223,
+        "direction": 199,
+        "history": 0,
+        "count_code": 14999,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          2,
+          1,
+          5
+        ],
+        "counts": [
+          2,
+          6,
+          4,
+          3,
+          4,
+          6
+        ],
+        "shape": "012314",
+        "base_weight": 724,
+        "event": false,
+        "weaker_weight_without_credit": 736,
+        "weight": 736
+      },
+      {
+        "edge": 19041,
+        "u": 7223,
+        "v": 245515,
+        "direction": 2,
+        "history": 0,
+        "count_code": 43339,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          1,
+          0,
+          4,
+          3
+        ],
+        "counts": [
+          6,
+          4,
+          3,
+          4,
+          6,
+          2
+        ],
+        "shape": "012031",
+        "base_weight": 250,
+        "event": false,
+        "weaker_weight_without_credit": 256,
+        "weight": 256
+      },
+      {
+        "edge": 1131365,
+        "u": 245515,
+        "v": 454436,
+        "direction": 108,
+        "history": 0,
+        "count_code": 26756,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          2,
+          4,
+          3,
+          2
+        ],
+        "counts": [
+          4,
+          3,
+          4,
+          6,
+          2,
+          3
+        ],
+        "shape": "012031",
+        "base_weight": 371,
+        "event": false,
+        "weaker_weight_without_credit": 376,
+        "weight": 376
+      },
+      {
+        "edge": 2146754,
+        "u": 454436,
+        "v": 5021,
+        "direction": 199,
+        "history": 0,
+        "count_code": 20573,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          2,
+          1,
+          5
+        ],
+        "counts": [
+          3,
+          4,
+          6,
+          2,
+          3,
+          6
+        ],
+        "shape": "012314",
+        "base_weight": 724,
+        "event": false,
+        "weaker_weight_without_credit": 736,
+        "weight": 736
+      },
+      {
+        "edge": 3074,
+        "u": 5021,
+        "v": 232306,
+        "direction": 0,
+        "history": 0,
+        "count_code": 30130,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          1,
+          0,
+          4,
+          1
+        ],
+        "counts": [
+          4,
+          6,
+          2,
+          3,
+          6,
+          5
+        ],
+        "shape": "012032",
+        "base_weight": 607,
+        "event": false,
+        "weaker_weight_without_credit": 615,
+        "weight": 615
+      },
+      {
+        "edge": 1110299,
+        "u": 232306,
+        "v": 476270,
+        "direction": 104,
+        "history": 0,
+        "count_code": 40814,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          2,
+          4,
+          0,
+          5
+        ],
+        "counts": [
+          6,
+          2,
+          3,
+          6,
+          5,
+          3
+        ],
+        "shape": "012314",
+        "base_weight": 370,
+        "event": false,
+        "weaker_weight_without_credit": 376,
+        "weight": 376
+      },
+      {
+        "edge": 2219250,
+        "u": 476270,
+        "v": 58262,
+        "direction": 210,
+        "history": 0,
+        "count_code": 11606,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          4
+        ],
+        "counts": [
+          2,
+          3,
+          6,
+          5,
+          3,
+          3
+        ],
+        "shape": "012032",
+        "base_weight": 360,
+        "event": false,
+        "weaker_weight_without_credit": 375,
+        "weight": 375
+      },
+      {
+        "edge": 147196,
+        "u": 58262,
+        "v": 481767,
+        "direction": 24,
+        "history": 0,
+        "count_code": 22983,
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          2,
+          4,
+          3,
+          5
+        ],
+        "counts": [
+          3,
+          6,
+          5,
+          3,
+          3,
+          4
+        ],
+        "shape": "012314",
+        "base_weight": 480,
+        "event": false,
+        "weaker_weight_without_credit": 496,
+        "weight": 496
+      },
+      {
+        "edge": 2211193,
+        "u": 481767,
+        "v": 44587,
+        "direction": 208,
+        "history": 0,
+        "count_code": 44587,
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4,
+          3,
+          5,
+          1
+        ],
+        "counts": [
+          6,
+          5,
+          3,
+          3,
+          4,
+          2
+        ],
+        "shape": "012031",
+        "base_weight": 247,
+        "event": false,
+        "weaker_weight_without_credit": 256,
+        "weight": 256
+      }
+    ],
+    "length": 28,
+    "weight": 13280,
+    "events": 0,
+    "range_inequality": "28mu<=13280+R"
+  },
+  "removed_in_later144_graph": {
+    "three_cycle": [
+      {
+        "position": 0,
+        "edge": 1131395
+      },
+      {
+        "position": 2,
+        "edge": 17417
+      }
+    ],
+    "eleven_cycle": [],
+    "new_walk": [
+      {
+        "position": 4,
+        "edge": 567947
+      },
+      {
+        "position": 5,
+        "edge": 4335674
+      },
+      {
+        "position": 27,
+        "edge": 2211193
+      }
+    ]
+  },
+  "all_credit_algebra": {
+    "constraints": [
+      "mu>=0",
+      "mu<=496",
+      "11mu<=5452+4C",
+      "28mu<=13280+R"
+    ],
+    "numerator": "1098960+8mu+24C+R",
+    "denominator": "4200+mu",
+    "excess_lower_bound": "numerator-235*denominator>=65968-133mu>=0",
+    "comparison_lower_bound": 235,
+    "scalar_equality": {
+      "mu": 496,
+      "C": 1,
+      "R": 608
+    },
+    "attainment_scope": "Only the listed scalar relaxation; no full-graph potential is asserted."
+  },
+  "monotonic_extension": "With all other floors fixed, lowering012032 below15 or lowering012340 below16 cannot remove this obstruction. The separate77-edge zero-event witness excludes012340<=15 even with01203216.",
+  "execution": {
+    "lean_invoked": false,
+    "solver_invoked": false,
+    "graph_search_invoked": false,
+    "full_potential_recomputed": false,
+    "git_invoked": false
+  },
+  "scope": "Original full97 graph and its unchanged boundary budget. Independent source-array/row validation and exact arithmetic. The later144 graph removes3 occurrences from the28-walk, so this particular obstruction is not transferred to that graph. No actual-snake or global optimality conclusion."
+}

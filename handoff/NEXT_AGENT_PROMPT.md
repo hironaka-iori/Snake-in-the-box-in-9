@@ -1,3 +1,24 @@
+# Research update: milestone 153
+
+A complete numerical certificate supports the 012032 share-17 target under
+counts alpha1=4, alpha2<=4, alpha3=4, alpha4<=5, alpha5=3, with reversal.
+Removing two unused lower-bound counters preserves the compact core and
+every compact proof step. Lean verification and the actual-snake theorem
+remain pending. The exact evidence and remaining work are recorded in
+milestones/153-pair-conditioned-share17/MATHEMATICAL_NOTE.md.
+
+The computer restarted after the user pause. The old 151/152/147 processes
+are absent. Recovery revalidates 301 accepted universal-share modules and
+continues at the first unchecked one. Read the live recovery record at
+milestones/152-countfree-share16-completion/data/reboot-recovery-v2-progress.json;
+do not launch another replay or rely on the historical RUNNING records.
+After it passes, audit the reboot recovery and use
+`152-countfree-share16-completion/scripts/update_paper_after153.py`.
+The 147 proof retains its accepted files; reschedule it after this check.
+
+No new global bound is established. Last full paper revision: 146; next: 156.
+Historical updates below describe their original checkpoints.
+
 # Continue after the milestone 152 running checkpoint
 
 Read milestones/152-countfree-share16-completion/MATHEMATICAL_NOTE.md and
