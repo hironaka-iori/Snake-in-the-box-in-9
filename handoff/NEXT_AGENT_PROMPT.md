@@ -1,3 +1,24 @@
+# Current result: universal share-18 CNF interpretation completed
+
+Milestone 159 passed the interpretation of all 13,224 clauses in the
+012034 share-18 proof core: 109 modules accounted for and 108 axiom reports.
+All original mathematical source bytes were preserved. The initial 106
+checks and two final assembly checks are accepted. The historical missing-
+dependency failure is resolved by a separately pinned environment.
+
+Read milestones/159-share18-proof-continuation/MATHEMATICAL_NOTE.md and
+data/semantics-completion.json. Do not restart the old stopped batch. The
+complete contradiction replay, actual-snake transfer and reversal theorem
+remain unfinished. No global snake bound has changed.
+
+Milestone 160 prepares exact replay-prefix transport and a checkpoint.
+Reuse the accepted initial tree and 1,055 deductions. The remaining full
+replay has 144,160 deductions and 14,704,875 references. No new Boolean
+query is needed. The selected count-conditioned case follows from the
+universal theorem once that proof is complete.
+
+Last compiled full paper revision: 156; next: 166. Historical updates follow.
+
 # Current result: weaker local floor refuted
 
 Milestone 158 completes the test prepared in 157. Lowering only the
