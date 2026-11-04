@@ -1,0 +1,2563 @@
+{
+  "status": "PASS_INDEPENDENT_SCALED_WALK_AUDIT",
+  "input_sha256": {
+    "milestones/164-loss-corrected-potential/data/scaled-floor17/result.json": "ab6eb59e23ad519a36a4514f116dd406f18766aa5da596f72ef9c6330c87facb",
+    "milestones/156-potential-range-and-paper/data/share17-range496/result.json": "f6ece94e6d284d0ee735913c4fe0c39a13a3eda27fb3fbab54b518403036850b",
+    "milestones/72-four-count-proof-closure/critical-current/data/source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "milestones/59-extended-share-window/extended/data/model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "milestones/120-nine-transition-window/data/full-rules.json": "dae2b8fc4c807501037041ffada61d80cda1acbf03a3b4536c84338d444a2f57",
+    "milestones/144-countfree-share18/data/share18-impact/removed-indices.json": "b29c2d2717b5d2e1cfefb95b827b1aa0f59376e0fbcdaf693e5553ddf85e82f9",
+    "milestones/72-four-count-proof-closure/critical-current/build/source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34"
+  },
+  "verified_array_sha256": {
+    "U": {
+      "sha256": "e910280dc3ad25c32010127c7af2f7d837a162e1095a4aa85fdd0f996b08f46d",
+      "dtype": "<i4",
+      "length": 4947008
+    },
+    "V": {
+      "sha256": "21956ceeb6414238baae68543ac9677c791c07575deeb2664facdf6490374f94",
+      "dtype": "<i4",
+      "length": 4947008
+    },
+    "weight": {
+      "sha256": "acd19583f5de41d789206d369e37493228e8b8b85708db2427781f0d6766b5d4",
+      "dtype": "<i4",
+      "length": 4947008
+    },
+    "direction": {
+      "sha256": "e0e598fa564c6474be6ef98215886248bfca188f3eb47c59b2d9e96ea20b8705",
+      "dtype": "<i4",
+      "length": 4947008
+    },
+    "count_code": {
+      "sha256": "1917e3700ccdee418c22f29829b309775f9212f026e55e394038c1ddfa25210e",
+      "dtype": "<i4",
+      "length": 4947008
+    }
+  },
+  "selected_unique_rows": 50,
+  "walk": [
+    {
+      "edge": 4001343,
+      "u": 1259711,
+      "v": 1594075,
+      "direction_index": 395,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0,
+        4,
+        3
+      ],
+      "count_code": 46651,
+      "counts": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        2
+      ],
+      "suffix_shape": "012310",
+      "suffix_counts": [
+        6,
+        6,
+        6,
+        6,
+        2
+      ],
+      "source_weight": 240,
+      "floor": 12,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012310-total19",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 252,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 4684655,
+      "u": 1594075,
+      "v": 1251908,
+      "direction_index": 462,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        3,
+        2,
+        6
+      ],
+      "count_code": 46628,
+      "counts": [
+        6,
+        6,
+        6,
+        6,
+        2,
+        3
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        6,
+        6,
+        6,
+        2,
+        3
+      ],
+      "source_weight": 362,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 377,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3607986,
+      "u": 1251908,
+      "v": 1586139,
+      "direction_index": 353,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2,
+        1,
+        5,
+        4
+      ],
+      "count_code": 46491,
+      "counts": [
+        6,
+        6,
+        6,
+        2,
+        3,
+        4
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        6,
+        2,
+        3,
+        4
+      ],
+      "source_weight": 480,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1742133,
+      "u": 1586139,
+      "v": 1507556,
+      "direction_index": 177,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        0,
+        4,
+        3,
+        1
+      ],
+      "count_code": 45668,
+      "counts": [
+        6,
+        6,
+        2,
+        3,
+        4,
+        3
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        6,
+        2,
+        3,
+        4,
+        3
+      ],
+      "source_weight": 373,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 491025,
+      "u": 1507556,
+      "v": 1385981,
+      "direction_index": 55,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4,
+        2,
+        0,
+        5
+      ],
+      "count_code": 40733,
+      "counts": [
+        6,
+        2,
+        3,
+        4,
+        3,
+        6
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        2,
+        3,
+        4,
+        3,
+        6
+      ],
+      "source_weight": 734,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 736,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3097773,
+      "u": 1385981,
+      "v": 1177523,
+      "direction_index": 305,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        6
+      ],
+      "count_code": 11123,
+      "counts": [
+        2,
+        3,
+        4,
+        3,
+        6,
+        6
+      ],
+      "suffix_shape": "012345",
+      "suffix_counts": [
+        3,
+        4,
+        3,
+        6,
+        6
+      ],
+      "source_weight": 733,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012345-total22",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 736,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1035319,
+      "u": 1177523,
+      "v": 1466419,
+      "direction_index": 99,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        5,
+        1
+      ],
+      "count_code": 20083,
+      "counts": [
+        3,
+        4,
+        3,
+        6,
+        6,
+        2
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        4,
+        3,
+        6,
+        6,
+        2
+      ],
+      "source_weight": 245,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 257,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1438764,
+      "u": 1466419,
+      "v": 1341333,
+      "direction_index": 147,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        5,
+        0,
+        3
+      ],
+      "count_code": 27189,
+      "counts": [
+        4,
+        3,
+        6,
+        6,
+        2,
+        4
+      ],
+      "suffix_shape": "012310",
+      "suffix_counts": [
+        3,
+        6,
+        6,
+        2,
+        4
+      ],
+      "source_weight": 484,
+      "floor": 12,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012310-total19",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 492,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 4644346,
+      "u": 1341333,
+      "v": 1251777,
+      "direction_index": 462,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        3,
+        2,
+        6
+      ],
+      "count_code": 23169,
+      "counts": [
+        3,
+        6,
+        6,
+        2,
+        4,
+        4
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        6,
+        6,
+        2,
+        4,
+        4
+      ],
+      "source_weight": 482,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        },
+        {
+          "name": "012034-middle5-outer16",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 497,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3607570,
+      "u": 1251777,
+      "v": 1585352,
+      "direction_index": 353,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2,
+        1,
+        5,
+        4
+      ],
+      "count_code": 45704,
+      "counts": [
+        6,
+        6,
+        2,
+        4,
+        4,
+        3
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        2,
+        4,
+        4,
+        3
+      ],
+      "source_weight": 360,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1740363,
+      "u": 1585352,
+      "v": 1502834,
+      "direction_index": 177,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        0,
+        4,
+        3,
+        1
+      ],
+      "count_code": 40946,
+      "counts": [
+        6,
+        2,
+        4,
+        4,
+        3,
+        3
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        2,
+        4,
+        4,
+        3,
+        3
+      ],
+      "source_weight": 373,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 485017,
+      "u": 1502834,
+      "v": 1388753,
+      "direction_index": 55,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4,
+        2,
+        0,
+        5
+      ],
+      "count_code": 12401,
+      "counts": [
+        2,
+        4,
+        4,
+        3,
+        3,
+        6
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        4,
+        4,
+        3,
+        3,
+        6
+      ],
+      "source_weight": 734,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 736,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3071540,
+      "u": 1388753,
+      "v": 214378,
+      "direction_index": 304,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4
+      ],
+      "count_code": 27754,
+      "counts": [
+        4,
+        4,
+        3,
+        3,
+        6,
+        5
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        4,
+        3,
+        3,
+        6,
+        5
+      ],
+      "source_weight": 605,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 616,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 988350,
+      "u": 214378,
+      "v": 306493,
+      "direction_index": 95,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        3,
+        0
+      ],
+      "count_code": 26557,
+      "counts": [
+        4,
+        3,
+        3,
+        6,
+        5,
+        2
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        3,
+        3,
+        6,
+        5,
+        2
+      ],
+      "source_weight": 251,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 256,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1274028,
+      "u": 306493,
+      "v": 688113,
+      "direction_index": 131,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        2,
+        3,
+        5
+      ],
+      "count_code": 19377,
+      "counts": [
+        3,
+        3,
+        6,
+        5,
+        2,
+        4
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        3,
+        6,
+        5,
+        2,
+        4
+      ],
+      "source_weight": 486,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3048993,
+      "u": 688113,
+      "v": 217353,
+      "direction_index": 304,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4
+      ],
+      "count_code": 22953,
+      "counts": [
+        3,
+        6,
+        5,
+        2,
+        4,
+        4
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        5,
+        2,
+        4,
+        4
+      ],
+      "source_weight": 485,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 993074,
+      "u": 217353,
+      "v": 308793,
+      "direction_index": 95,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        3,
+        0
+      ],
+      "count_code": 44409,
+      "counts": [
+        6,
+        5,
+        2,
+        4,
+        4,
+        4
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        5,
+        2,
+        4,
+        4,
+        4
+      ],
+      "source_weight": 491,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1276984,
+      "u": 308793,
+      "v": 686363,
+      "direction_index": 131,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        2,
+        3,
+        5
+      ],
+      "count_code": 33179,
+      "counts": [
+        5,
+        2,
+        4,
+        4,
+        4,
+        6
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        2,
+        4,
+        4,
+        4,
+        6
+      ],
+      "source_weight": 726,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 736,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3004252,
+      "u": 686363,
+      "v": 1171075,
+      "direction_index": 302,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        1
+      ],
+      "count_code": 12451,
+      "counts": [
+        2,
+        4,
+        4,
+        4,
+        6,
+        2
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        4,
+        4,
+        4,
+        6,
+        2
+      ],
+      "source_weight": 245,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        },
+        {
+          "name": "012034-middle5-outer16",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 257,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 940753,
+      "u": 1171075,
+      "v": 1458838,
+      "direction_index": 90,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        0,
+        3
+      ],
+      "count_code": 28054,
+      "counts": [
+        4,
+        4,
+        4,
+        6,
+        2,
+        5
+      ],
+      "suffix_shape": "012310",
+      "suffix_counts": [
+        4,
+        4,
+        6,
+        2,
+        5
+      ],
+      "source_weight": 610,
+      "floor": 12,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012310-total19",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 612,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1342209,
+      "u": 1458838,
+      "v": 1334727,
+      "direction_index": 139,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        3,
+        2,
+        5
+      ],
+      "count_code": 28359,
+      "counts": [
+        4,
+        4,
+        6,
+        2,
+        5,
+        4
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        4,
+        6,
+        2,
+        5,
+        4
+      ],
+      "source_weight": 496,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        },
+        {
+          "name": "012034-middle5-outer16",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 497,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3610721,
+      "u": 1334727,
+      "v": 1359883,
+      "direction_index": 353,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2,
+        1,
+        5,
+        4
+      ],
+      "count_code": 30187,
+      "counts": [
+        4,
+        6,
+        2,
+        5,
+        4,
+        2
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        2,
+        5,
+        4,
+        2
+      ],
+      "source_weight": 240,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 256,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1726006,
+      "u": 1359883,
+      "v": 1503046,
+      "direction_index": 177,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        0,
+        4,
+        3,
+        1
+      ],
+      "count_code": 41158,
+      "counts": [
+        6,
+        2,
+        5,
+        4,
+        2,
+        5
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        2,
+        5,
+        4,
+        2,
+        5
+      ],
+      "source_weight": 608,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 616,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 485348,
+      "u": 1503046,
+      "v": 1390025,
+      "direction_index": 55,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4,
+        2,
+        0,
+        5
+      ],
+      "count_code": 13673,
+      "counts": [
+        2,
+        5,
+        4,
+        2,
+        5,
+        6
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        5,
+        4,
+        2,
+        5,
+        6
+      ],
+      "source_weight": 734,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 736,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3073126,
+      "u": 1390025,
+      "v": 214232,
+      "direction_index": 304,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4
+      ],
+      "count_code": 35384,
+      "counts": [
+        5,
+        4,
+        2,
+        5,
+        6,
+        3
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        4,
+        2,
+        5,
+        6,
+        3
+      ],
+      "source_weight": 365,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 988258,
+      "u": 214232,
+      "v": 305618,
+      "direction_index": 95,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        3,
+        0
+      ],
+      "count_code": 25682,
+      "counts": [
+        4,
+        2,
+        5,
+        6,
+        3,
+        3
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        2,
+        5,
+        6,
+        3,
+        3
+      ],
+      "source_weight": 371,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1273264,
+      "u": 305618,
+      "v": 690639,
+      "direction_index": 131,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        2,
+        3,
+        5
+      ],
+      "count_code": 14127,
+      "counts": [
+        2,
+        5,
+        6,
+        3,
+        3,
+        4
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        5,
+        6,
+        3,
+        3,
+        4
+      ],
+      "source_weight": 486,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3051952,
+      "u": 690639,
+      "v": 216957,
+      "direction_index": 304,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4
+      ],
+      "count_code": 38109,
+      "counts": [
+        5,
+        6,
+        3,
+        3,
+        4,
+        4
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        3,
+        3,
+        4,
+        4
+      ],
+      "source_weight": 485,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 992170,
+      "u": 216957,
+      "v": 306415,
+      "direction_index": 95,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        3,
+        0
+      ],
+      "count_code": 42031,
+      "counts": [
+        6,
+        3,
+        3,
+        4,
+        4,
+        2
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        3,
+        3,
+        4,
+        4,
+        2
+      ],
+      "source_weight": 251,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 256,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1273897,
+      "u": 306415,
+      "v": 687647,
+      "direction_index": 131,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        2,
+        3,
+        5
+      ],
+      "count_code": 18911,
+      "counts": [
+        3,
+        3,
+        4,
+        4,
+        2,
+        6
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        3,
+        4,
+        4,
+        2,
+        6
+      ],
+      "source_weight": 726,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 736,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3005092,
+      "u": 687647,
+      "v": 1171007,
+      "direction_index": 302,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        1
+      ],
+      "count_code": 20159,
+      "counts": [
+        3,
+        4,
+        4,
+        2,
+        6,
+        6
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        4,
+        4,
+        2,
+        6,
+        6
+      ],
+      "source_weight": 725,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        },
+        {
+          "name": "012034-middle5-outer16",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 737,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 940670,
+      "u": 1171007,
+      "v": 1458428,
+      "direction_index": 90,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        0,
+        3
+      ],
+      "count_code": 27644,
+      "counts": [
+        4,
+        4,
+        2,
+        6,
+        6,
+        3
+      ],
+      "suffix_shape": "012310",
+      "suffix_counts": [
+        4,
+        2,
+        6,
+        6,
+        3
+      ],
+      "source_weight": 370,
+      "floor": 12,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012310-total19",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 372,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1341768,
+      "u": 1458428,
+      "v": 1332267,
+      "direction_index": 139,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        3,
+        2,
+        5
+      ],
+      "count_code": 25899,
+      "counts": [
+        4,
+        2,
+        6,
+        6,
+        3,
+        4
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        2,
+        6,
+        6,
+        3,
+        4
+      ],
+      "source_weight": 496,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 497,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3545649,
+      "u": 1332267,
+      "v": 396452,
+      "direction_index": 352,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2,
+        1,
+        5,
+        3
+      ],
+      "count_code": 15428,
+      "counts": [
+        2,
+        6,
+        6,
+        3,
+        4,
+        3
+      ],
+      "suffix_shape": "012340",
+      "suffix_counts": [
+        6,
+        6,
+        3,
+        4,
+        3
+      ],
+      "source_weight": 360,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012340-middle3-outer19",
+          "credit": 0
+        },
+        {
+          "name": "012340-outer17",
+          "credit": 0
+        },
+        {
+          "name": "012340-middle5-outer18",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1660909,
+      "u": 396452,
+      "v": 100345,
+      "direction_index": 174,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        0,
+        4,
+        2,
+        1
+      ],
+      "count_code": 45913,
+      "counts": [
+        6,
+        6,
+        3,
+        4,
+        3,
+        2
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        3,
+        4,
+        3,
+        2
+      ],
+      "source_weight": 240,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 256,
+      "retained": true,
+      "occurrence_event": false
+    }
+  ],
+  "walk_length": 35,
+  "walk_weight": 16751,
+  "scaled_deficit": 5411,
+  "target_range": 5413,
+  "target_refuted": false,
+  "old_nine_walk": [
+    {
+      "edge": 4001343,
+      "u": 1259711,
+      "v": 1594075,
+      "direction_index": 395,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0,
+        4,
+        3
+      ],
+      "count_code": 46651,
+      "counts": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        2
+      ],
+      "suffix_shape": "012310",
+      "suffix_counts": [
+        6,
+        6,
+        6,
+        6,
+        2
+      ],
+      "source_weight": 240,
+      "floor": 12,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012310-total19",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 252,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 4684655,
+      "u": 1594075,
+      "v": 1251908,
+      "direction_index": 462,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        3,
+        2,
+        6
+      ],
+      "count_code": 46628,
+      "counts": [
+        6,
+        6,
+        6,
+        6,
+        2,
+        3
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        6,
+        6,
+        6,
+        2,
+        3
+      ],
+      "source_weight": 362,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 377,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3607986,
+      "u": 1251908,
+      "v": 1586139,
+      "direction_index": 353,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2,
+        1,
+        5,
+        4
+      ],
+      "count_code": 46491,
+      "counts": [
+        6,
+        6,
+        6,
+        2,
+        3,
+        4
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        6,
+        2,
+        3,
+        4
+      ],
+      "source_weight": 480,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1742134,
+      "u": 1586139,
+      "v": 1507557,
+      "direction_index": 177,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        0,
+        4,
+        3,
+        1
+      ],
+      "count_code": 45669,
+      "counts": [
+        6,
+        6,
+        2,
+        3,
+        4,
+        4
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        6,
+        2,
+        3,
+        4,
+        4
+      ],
+      "source_weight": 493,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 491026,
+      "u": 1507557,
+      "v": 1385986,
+      "direction_index": 55,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4,
+        2,
+        0,
+        5
+      ],
+      "count_code": 40738,
+      "counts": [
+        6,
+        2,
+        3,
+        4,
+        4,
+        5
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        2,
+        3,
+        4,
+        4,
+        5
+      ],
+      "source_weight": 614,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 616,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3069298,
+      "u": 1385986,
+      "v": 213327,
+      "direction_index": 304,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4
+      ],
+      "count_code": 11151,
+      "counts": [
+        2,
+        3,
+        4,
+        4,
+        5,
+        4
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        3,
+        4,
+        4,
+        5,
+        4
+      ],
+      "source_weight": 485,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 987251,
+      "u": 213327,
+      "v": 307965,
+      "direction_index": 95,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        3,
+        0
+      ],
+      "count_code": 20253,
+      "counts": [
+        3,
+        4,
+        4,
+        5,
+        4,
+        4
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        4,
+        4,
+        5,
+        4,
+        4
+      ],
+      "source_weight": 491,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 496,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1275893,
+      "u": 307965,
+      "v": 689168,
+      "direction_index": 131,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        2,
+        3,
+        5
+      ],
+      "count_code": 28208,
+      "counts": [
+        4,
+        4,
+        5,
+        4,
+        4,
+        3
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        4,
+        5,
+        4,
+        4,
+        3
+      ],
+      "source_weight": 366,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3049938,
+      "u": 689168,
+      "v": 215905,
+      "direction_index": 304,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4
+      ],
+      "count_code": 29281,
+      "counts": [
+        4,
+        5,
+        4,
+        4,
+        3,
+        2
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        5,
+        4,
+        4,
+        3,
+        2
+      ],
+      "source_weight": 245,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 256,
+      "retained": true,
+      "occurrence_event": false
+    }
+  ],
+  "cycle": [
+    {
+      "edge": 991858,
+      "u": 216752,
+      "v": 305186,
+      "direction_index": 95,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        3,
+        0
+      ],
+      "count_code": 40802,
+      "counts": [
+        6,
+        2,
+        3,
+        6,
+        3,
+        3
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        2,
+        3,
+        6,
+        3,
+        3
+      ],
+      "source_weight": 371,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1272641,
+      "u": 305186,
+      "v": 688049,
+      "direction_index": 131,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        2,
+        3,
+        5
+      ],
+      "count_code": 11537,
+      "counts": [
+        2,
+        3,
+        6,
+        3,
+        3,
+        6
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        3,
+        6,
+        3,
+        3,
+        6
+      ],
+      "source_weight": 726,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 736,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3005579,
+      "u": 688049,
+      "v": 1173417,
+      "direction_index": 302,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        1
+      ],
+      "count_code": 22569,
+      "counts": [
+        3,
+        6,
+        3,
+        3,
+        6,
+        4
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        6,
+        3,
+        3,
+        6,
+        4
+      ],
+      "source_weight": 485,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        },
+        {
+          "name": "012034-middle5-outer16",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 497,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 943614,
+      "u": 1173417,
+      "v": 1457336,
+      "direction_index": 90,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        4,
+        0,
+        3
+      ],
+      "count_code": 42104,
+      "counts": [
+        6,
+        3,
+        3,
+        6,
+        4,
+        3
+      ],
+      "suffix_shape": "012310",
+      "suffix_counts": [
+        3,
+        3,
+        6,
+        4,
+        3
+      ],
+      "source_weight": 370,
+      "floor": 12,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012310-total19",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 372,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1340646,
+      "u": 1457336,
+      "v": 1333493,
+      "direction_index": 139,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        4,
+        3,
+        2,
+        5
+      ],
+      "count_code": 19349,
+      "counts": [
+        3,
+        3,
+        6,
+        4,
+        3,
+        6
+      ],
+      "suffix_shape": "012034",
+      "suffix_counts": [
+        3,
+        6,
+        4,
+        3,
+        6
+      ],
+      "source_weight": 736,
+      "floor": 17,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [
+        {
+          "name": "012034-total20",
+          "credit": 0
+        },
+        {
+          "name": "012034-middle5-outer16",
+          "credit": 0
+        }
+      ],
+      "share17_match": false,
+      "weight": 737,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3609461,
+      "u": 1333493,
+      "v": 1360255,
+      "direction_index": 353,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        2,
+        1,
+        5,
+        4
+      ],
+      "count_code": 22783,
+      "counts": [
+        3,
+        6,
+        4,
+        3,
+        6,
+        2
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        4,
+        3,
+        6,
+        2
+      ],
+      "source_weight": 240,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 256,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 1726634,
+      "u": 1360255,
+      "v": 1505276,
+      "direction_index": 177,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        0,
+        4,
+        3,
+        1
+      ],
+      "count_code": 43388,
+      "counts": [
+        6,
+        4,
+        3,
+        6,
+        2,
+        3
+      ],
+      "suffix_shape": "012301",
+      "suffix_counts": [
+        4,
+        3,
+        6,
+        2,
+        3
+      ],
+      "source_weight": 368,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 487872,
+      "u": 1505276,
+      "v": 1387853,
+      "direction_index": 55,
+      "directions": [
+        0,
+        1,
+        2,
+        0,
+        3,
+        4,
+        2,
+        0,
+        5
+      ],
+      "count_code": 27053,
+      "counts": [
+        4,
+        3,
+        6,
+        2,
+        3,
+        6
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        3,
+        6,
+        2,
+        3,
+        6
+      ],
+      "source_weight": 734,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 736,
+      "retained": true,
+      "occurrence_event": false
+    },
+    {
+      "edge": 3070840,
+      "u": 1387853,
+      "v": 216752,
+      "direction_index": 304,
+      "directions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        5,
+        4
+      ],
+      "count_code": 22352,
+      "counts": [
+        3,
+        6,
+        2,
+        3,
+        6,
+        3
+      ],
+      "suffix_shape": "012304",
+      "suffix_counts": [
+        6,
+        2,
+        3,
+        6,
+        3
+      ],
+      "source_weight": 365,
+      "floor": 16,
+      "old_bonus": 0,
+      "pair_bonus": 0,
+      "six_bonus": 0,
+      "shared_bonus": 0,
+      "applicable_count_rules": [],
+      "share17_match": false,
+      "weight": 376,
+      "retained": true,
+      "occurrence_event": false
+    }
+  ],
+  "cycle_total": 4462,
+  "cycle_occurrences": 0,
+  "new_global_bound": false,
+  "new_lean_check": false,
+  "audit_script_sha256": "6aa18be5d282fd37b096e081d8205372e92bcddb2b1d5bb11a13242d2b760d06"
+}

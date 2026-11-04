@@ -1,0 +1,83 @@
+{
+  "status": "PASS_MINIMUM_SCALED_RANGE_AT_MEAN4462",
+  "started_utc": "2026-11-04T12:02:25.740808+00:00",
+  "parent_pid": 26460,
+  "preparation_sha256": "0af7745e4baf6f35e051905da6520dcd44328aba9e6aa9fb8a6ed008ce264d57",
+  "initial_resources": {
+    "free_bytes": 2340802560,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 85,
+    "snapshot_seconds": 0.03099999999994907,
+    "lean_processes": [],
+    "graph_processes": [
+      {
+        "pid": 26460,
+        "command": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/164-loss-corrected-potential/scripts/run_potential_v5.py --label scaled-floor17"
+      }
+    ],
+    "owned_memory": [
+      {
+        "pid": 26460,
+        "private_bytes": 12283904
+      }
+    ]
+  },
+  "discovery_seconds_limit": 600,
+  "total_seconds_limit": 900,
+  "stop_reason": null,
+  "peak_owned_private_bytes": 595468288,
+  "new_global_bound": false,
+  "worker_pid": 36552,
+  "command": [
+    "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\Snake-in-a-box\\milestones\\164-loss-corrected-potential\\scripts\\potential_range_v5.py",
+    "--run",
+    "E:\\Snake-in-a-box\\milestones\\164-loss-corrected-potential\\data\\scaled-floor17",
+    "--parent",
+    "26460"
+  ],
+  "last_resources": {
+    "free_bytes": 2390568960,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 85,
+    "snapshot_seconds": 0.016000000000076398,
+    "lean_processes": [],
+    "graph_processes": [
+      {
+        "pid": 26460,
+        "command": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/164-loss-corrected-potential/scripts/run_potential_v5.py --label scaled-floor17"
+      },
+      {
+        "pid": 36552,
+        "command": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -B -X utf8 E:\\Snake-in-a-box\\milestones\\164-loss-corrected-potential\\scripts\\potential_range_v5.py --run E:\\Snake-in-a-box\\milestones\\164-loss-corrected-potential\\data\\scaled-floor17 --parent 26460"
+      }
+    ],
+    "owned_memory": [
+      {
+        "pid": 26460,
+        "private_bytes": 14426112
+      },
+      {
+        "pid": 36552,
+        "private_bytes": 253046784
+      }
+    ]
+  },
+  "progress": {
+    "phase": "FINALIZING",
+    "worker_pid": 36552,
+    "discovery_started": 3063.328,
+    "discovery_seconds": 10.342999999999847,
+    "status": "PASS_MINIMUM_SCALED_RANGE_AT_MEAN4462"
+  },
+  "exit_code": 0,
+  "result_sha256": "ab6eb59e23ad519a36a4514f116dd406f18766aa5da596f72ef9c6330c87facb",
+  "finished_utc": "2026-11-04T12:02:59.179004+00:00"
+}
