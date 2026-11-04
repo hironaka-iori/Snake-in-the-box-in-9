@@ -1,0 +1,83 @@
+{
+  "status": "PASS_MINIMUM_RANGE_AT_MEAN496",
+  "started_utc": "2026-11-04T05:19:12.796192+00:00",
+  "parent_pid": 14152,
+  "preparation_sha256": "7319be1786142709414d078183b43b961f4137809351d4c4eee2cd1b053226cb",
+  "initial_resources": {
+    "free_bytes": 3365965824,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 79,
+    "snapshot_seconds": 0.01599999999962165,
+    "lean_processes": [],
+    "graph_processes": [
+      {
+        "pid": 14152,
+        "command": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/156-potential-range-and-paper/scripts/run_potential.py --label share17-range496"
+      }
+    ],
+    "owned_memory": [
+      {
+        "pid": 14152,
+        "private_bytes": 12357632
+      }
+    ]
+  },
+  "discovery_seconds_limit": 600,
+  "total_seconds_limit": 900,
+  "stop_reason": null,
+  "peak_owned_private_bytes": 2087157760,
+  "new_global_bound": false,
+  "worker_pid": 2972,
+  "command": [
+    "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\Snake-in-a-box\\milestones\\156-potential-range-and-paper\\scripts\\potential_range.py",
+    "--run",
+    "E:\\Snake-in-a-box\\milestones\\156-potential-range-and-paper\\data\\share17-range496",
+    "--parent",
+    "14152"
+  ],
+  "last_resources": {
+    "free_bytes": 3419996160,
+    "total_bytes": 16573128704,
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 79,
+    "snapshot_seconds": 0.01599999999962165,
+    "lean_processes": [],
+    "graph_processes": [
+      {
+        "pid": 14152,
+        "command": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/156-potential-range-and-paper/scripts/run_potential.py --label share17-range496"
+      },
+      {
+        "pid": 2972,
+        "command": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -B -X utf8 E:\\Snake-in-a-box\\milestones\\156-potential-range-and-paper\\scripts\\potential_range.py --run E:\\Snake-in-a-box\\milestones\\156-potential-range-and-paper\\data\\share17-range496 --parent 14152"
+      }
+    ],
+    "owned_memory": [
+      {
+        "pid": 14152,
+        "private_bytes": 13283328
+      },
+      {
+        "pid": 2972,
+        "private_bytes": 867381248
+      }
+    ]
+  },
+  "progress": {
+    "phase": "FINALIZING",
+    "worker_pid": 2972,
+    "discovery_started": 19205.75,
+    "discovery_seconds": 1.5780000000013388,
+    "status": "PASS_MINIMUM_RANGE_AT_MEAN496"
+  },
+  "exit_code": 0,
+  "result_sha256": "f6ece94e6d284d0ee735913c4fe0c39a13a3eda27fb3fbab54b518403036850b",
+  "finished_utc": "2026-11-04T05:20:37.655555+00:00"
+}
