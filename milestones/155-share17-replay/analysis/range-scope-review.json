@@ -1,0 +1,56 @@
+{
+  "status": "PASS_SAVED_ROW_AND_EXACT_ARITHMETIC_REVIEW_LEAN_PENDING",
+  "source_files_sha256": {
+    "milestones/153-pair-conditioned-share17/audit/pair-query-and-cycle-review.json": "1a28c70810fcb802a255d253e6d86e010ad180af718e2dca4d1caccc7108cda5",
+    "milestones/145-countfree-012301/data/joint-floor-analysis.json": "d653af4da058477f398e434c4850b67b531f304e30bc8a8f0201dc32e3fca032",
+    "milestones/149-share-credit-tradeoff/audit/graph-review.json": "29c1a4af5863eea9b8144953b4dc3b152368c2a86c744dccc8091c0c2507f418",
+    "milestones/144-countfree-share18/data/share18-impact/removed-indices.json": "b29c2d2717b5d2e1cfefb95b827b1aa0f59376e0fbcdaf693e5553ddf85e82f9",
+    "milestones/155-share17-replay/analysis/review_range.py": "0b5bb97b4ed6f07c0a8a2a371bd19c226ea84d68a8a314e9d08e0c674e6b0af5"
+  },
+  "fourteen_cycle_edges": [
+    973890,
+    1205785,
+    2552723,
+    3050240,
+    991817,
+    1272513,
+    3029988,
+    976241,
+    1202057,
+    2553325,
+    3052648,
+    987229,
+    1275764,
+    3031022
+  ],
+  "all_fourteen_edges_retained": true,
+  "all_placement_012032_matches": [],
+  "weight_regime": "Preserved145 affine profile, F>=11 and G>=4; all other cycle weights fixed.",
+  "F16_G16": {
+    "cycle_total": 6944,
+    "mean_cap": "496",
+    "two_edge_sum": 512,
+    "comparison_lower_bound": "137926/587",
+    "gap_below235": "19/587",
+    "gap_above234": "568/587"
+  },
+  "target233_necessary_condition": "455F +224G >42672 +168C",
+  "target233_F16_requires": "G>158 if C>=0; this is necessary, never sufficient.",
+  "old149_cycle_removed_edges": [
+    {
+      "position": 0,
+      "edge": 1131395
+    },
+    {
+      "position": 2,
+      "edge": 17417
+    }
+  ],
+  "lean_checked": false,
+  "new_global_upper_bound": false,
+  "limitations": [
+    "Saved-row review reuses prior graph extraction; no new full-array audit.",
+    "Changing or removing the fourteen cycle, its other weights, or the comparison invalidates this restriction.",
+    "Local share17 completion is separately recorded."
+  ]
+}

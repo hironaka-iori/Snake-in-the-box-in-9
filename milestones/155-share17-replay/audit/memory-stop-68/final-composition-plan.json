@@ -1,0 +1,145 @@
+{
+  "status": "PREPARED_COUNT_CONDITIONED_ACTUAL_SNAKE_COMPOSITION",
+  "Lean_started": false,
+  "module_order": [
+    "ShareComplete155"
+  ],
+  "framework_modules": [
+    "ShareComplete155"
+  ],
+  "artifacts": [
+    {
+      "module": "ShareComplete155",
+      "path": "lean/ShareComplete155.lean",
+      "sha256": "3652fbffbd7977553308f05a744d3a0c88c3fe0ec1d2206291691e0726fe160b",
+      "bytes": 870
+    }
+  ],
+  "expected_signature": "theorem share17 {m : Nat} (p : Snake m) (r : Nat) (hr : r+6 \u2264 m) (hcase : (canon (dsOf p r 6) = [0,1,2,0,3,2] \u2227 coreAlpha p (r+1) = 4 \u2227 coreAlpha p (r+2) \u2264 4 \u2227 coreAlpha p (r+3) = 4 \u2227 coreAlpha p (r+4) \u2264 5 \u2227 coreAlpha p (r+5) = 3) \u2228 (canon (dsOf p r 6).reverse = [0,1,2,0,3,2] \u2227 coreAlpha p (r+1) = 3 \u2227 coreAlpha p (r+2) \u2264 5 \u2227 coreAlpha p (r+3) = 4 \u2227 coreAlpha p (r+4) \u2264 4 \u2227 coreAlpha p (r+5) = 4)) : 17 \u2264 ((List.range 5).map fun i => coreShare 12 p (r+i+1)).sum",
+  "expected_theorem": "Snake9.CriticalShare155.share17",
+  "directions": [
+    0,
+    1,
+    2,
+    0,
+    3,
+    2
+  ],
+  "bounds": [
+    [
+      4,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      3,
+      3
+    ]
+  ],
+  "reverse_bounds": [
+    [
+      3,
+      3
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      4
+    ]
+  ],
+  "count_conditions_retained": true,
+  "extra_unsat_premise": false,
+  "new_global_upper_bound": false,
+  "inherited_modules": {},
+  "external_library_search_paths": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\build\\lib\\lean",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\packages\\plausible\\.lake\\build\\lib\\lean",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\packages\\LeanSearchClient\\.lake\\build\\lib\\lean",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\packages\\importGraph\\.lake\\build\\lib\\lean",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\packages\\proofwidgets\\.lake\\build\\lib\\lean",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\packages\\aesop\\.lake\\build\\lib\\lean",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\packages\\Qq\\.lake\\build\\lib\\lean",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\packages\\batteries\\.lake\\build\\lib\\lean"
+  ],
+  "external_pins": {
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\Mathlib\\Tactic.lean": "5d88b2d206b874329d3cd82828a8dbc3cc2594dfedb0dbfd9dd7ce7b4535731f",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\build\\lib\\lean\\Mathlib\\Tactic.olean": "e47e8c8e7322c616b383f316a18c708f8ea108830f36609aaa2689fb652391f6",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\Mathlib\\Tactic\\IntervalCases.lean": "ac97db38607e33b0d151752dda3489774e7cb3fe3c149522123695c8cca90c56",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\.lake\\build\\lib\\lean\\Mathlib\\Tactic\\IntervalCases.olean": "0e8d4b2309ec121fcd730b2a17219325b305525df8f0de9a414b3e1ba4c8d403",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\lean-toolchain": "f28855f24b5253d7e8949f38027066a06cdde238520086d421ba7ad24c27a691",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\mathlib\\lake-manifest.json": "134206d98c64064cea35395c7ab469d7f0782b1383deaecf63322abc1fd5b1d1"
+  },
+  "resource_helper_sha256": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+  "direct_import_receipts": {
+    "CriticalShareAdapter154": {
+      "receipt": "milestones/154-share17-broader-semantics/data/CriticalShareAdapter154-audit.json",
+      "source": "milestones/154-share17-broader-semantics/lean/CriticalShareAdapter154.lean",
+      "source_sha256": "584ec07a84003de52fa26e341cf1ee0f1baf63cec94962ac3e9dd426e0209488"
+    },
+    "ReplayUnsat153": {
+      "receipt": "milestones/155-share17-replay/data/ReplayUnsat153-audit.json",
+      "source": "milestones/155-share17-replay/lean/ReplayUnsat153.lean",
+      "source_sha256": "f577b29a3dc4d73464a4bdc5af4b318561d4d88c855ee42effc24cb8249e7ca2"
+    }
+  },
+  "full_driver": {
+    "creation_filetime": 134382412600550283,
+    "image": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "exit_code": 259,
+    "pid": 50056,
+    "started_at": "2026-11-04T04:47:40.175085+00:00",
+    "driver_sha256": "67c164ac59b9885a37a08a6ae7c579d04161c1135e8c5f8342cd6d29a6765edb",
+    "checker_sha256": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc",
+    "plan_sha256": "2c69145d8f81115ef23dbc1ef5a612e4e2d897b26dd7251952078e9df65783fe",
+    "observed_checked_modules": 57,
+    "creation_utc": "2026-11-04T04:47:40.055029+00:00",
+    "verified_live_at_preparation": true
+  },
+  "script_pins": {
+    "milestones/155-share17-replay/scripts/prepare_final_check.py": "ac1a75ee009c234558e67ccbc2122ec6483a13599e4731e835ddbbe524c6b455",
+    "milestones/155-share17-replay/scripts/check_final.py": "d78a737b64b9e746d352822a2534e630fcdff7747c7bca23dad58f0369e74ea3",
+    "milestones/155-share17-replay/scripts/audit_actual.py": "d402f94b8249e04be16b83f417c31d4ecb3630338d794b3b8afefdae5e48648e",
+    "milestones/155-share17-replay/scripts/continue_after_full.py": "d3bf4257d59d03636d73c76fd318030e9a46c085cfcb4a8c496a06a64aa056b5",
+    "milestones/155-share17-replay/scripts/finish_full_replay.py": "995d4d7864cc37ba6842823c0534d30659c9cbf32f16ec12372f162d04d9cc06",
+    "milestones/155-share17-replay/scripts/native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413"
+  },
+  "input_pins": {
+    "milestones/155-share17-replay/lean/ShareComplete155.lean": "3652fbffbd7977553308f05a744d3a0c88c3fe0ec1d2206291691e0726fe160b",
+    "milestones/155-share17-replay/data/final-target.json": "5a6a915ac47d379e7c0a3f98b11acea2ef457794de072f7433a0039840113513",
+    "milestones/154-share17-broader-semantics/lean/CriticalShareAdapter154.lean": "584ec07a84003de52fa26e341cf1ee0f1baf63cec94962ac3e9dd426e0209488",
+    "milestones/155-share17-replay/lean/ReplayUnsat153.lean": "f577b29a3dc4d73464a4bdc5af4b318561d4d88c855ee42effc24cb8249e7ca2",
+    "milestones/154-share17-broader-semantics/data/semantics-completion.json": "e8f3f4a40a6b0f3b26d008daefbed20316f02ce907a455afb6d4ca271c09c87f",
+    "milestones/154-share17-broader-semantics/data/semantic-plan-v2.json": "a8d8b9fe0b86ce80ffef1c393c069facc573cebeeb023628163608e879deb14e",
+    "milestones/154-share17-broader-semantics/data/source-plan.json": "9074e35df90bb1589133b3d0cf8576510efb279118b4d6f2fb1f0ad0e16246ff",
+    "milestones/154-share17-broader-semantics/data/semantic-progress-v2.json": "2837ffd5e80466f7f7c7cf841500b62071e0bce0de8db3f5bcb88ea1757c7e94",
+    "milestones/154-share17-broader-semantics/scripts/finish_semantics_v2.py": "f919b5b04f80173ca74b67fcd406651086f4211d75567d0d9c85cb1c76af4949",
+    "milestones/154-share17-broader-semantics/scripts/check_module_v2.py": "8811d84f9cb49ce2b48abcaf1964bcc7693800293f08e573d3043c1d64a0c0ed",
+    "milestones/155-share17-replay/data/full-source-plan.json": "2c69145d8f81115ef23dbc1ef5a612e4e2d897b26dd7251952078e9df65783fe",
+    "milestones/155-share17-replay/data/full-execution-preparation.json": "bd44b3901ceba62f321a9b47f58ddd4200d0b2ff8f2b324a0046e4fbf14e944a",
+    "milestones/155-share17-replay/scripts/run_full_replay.py": "67c164ac59b9885a37a08a6ae7c579d04161c1135e8c5f8342cd6d29a6765edb",
+    "milestones/155-share17-replay/scripts/check_full_replay.py": "7c6c739aee7bcef0e816d373767e4249f9d4c7fd02af5e9db5e37878fe9b8bbc"
+  },
+  "scope": "Prepared final composition only. Continue only after the same full driver completes and its137-module evidence passes the full auditor. The98-module count-conditioned semantics is already accepted. No compiler was launched by preparation."
+}

@@ -1,3 +1,14 @@
+# Research checkpoint: 68 share-17 replay modules accepted
+
+The complete replay remains unfinished. Its next compiler launch stopped
+at the memory check; 68 accepted modules and their exact evidence are
+preserved. A recovery process waits for sufficient memory before one
+resumption attempt. Inspect its live state before starting another job.
+Read milestones/155-share17-replay/MEMORY_RECOVERY.md. The final local
+theorem, paper update and any new global bound remain pending.
+
+Historical updates follow.
+
 # Research update: share-17 initial replay checked
 
 The 34-module initial replay and checkpoint have passed Lean, covering
