@@ -1,3 +1,7 @@
+## Resume round 168 first
+
+Goal active. Read milestones/168-undominated-cube-bridge/README.md and review/six-empty-squares.md. New written result e(q)>=6 at an undominated center, loss contribution>=72; full Lean remains pending. Independent review and exhaustive small coordinate-graph checks passed. Current plan has no accepted dependency chain; rebuild EightCycle168, Snake9, PathStructure, CubeLocal, Undominated167, CubeUndominated168 in that order. Preserve resource limits. The prior PathStructure finite irreflexivity test exceeded its limit; it now has an untested algebraic replacement. Do not claim the entire result is Lean-checked. Next complete the graph counting and eight-cycle interpretation. Earlier pause text is historical.
+
 # Two-round stopping point: small loss and undominated corners
 
 Rounds 166 and 167 are complete. Research stops here for the requested

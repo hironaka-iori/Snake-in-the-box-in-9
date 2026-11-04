@@ -705,6 +705,60 @@ The printed 191-edge snake already has a selected neighbour at every
 cube vertex, so the domination condition alone supplies no improved
 length bound.
 
+\begin{lemma}[Six empty squares at an undominated corner]
+\label{lem:six-empty-undominated}
+For a nontrivial snake in $\Q_9$, $d(q)=0$ implies $e(q)\ge6$.
+Consequently, $\sum_q r_{12}(q)\le71$ implies that every cube vertex
+has a selected neighbour.
+\end{lemma}
+\begin{proof}
+Translate $q$ to zero and let $H$ be the simple graph on the nine
+coordinate directions whose edges are the missing weight-two vertices.
+Zero and all weight-one vertices are unselected, so $|E(H)|=e(q)$.
+The argument of Lemma~\ref{lem:undominated-corners} excludes two isolated
+vertices of $H$. Suppose that $|E(H)|\le5$.
+
+If $H$ has an isolated vertex $c$, the other eight vertices have positive
+degree and total degree at most ten. At least six therefore have degree
+one. For each such direction $a$, with unique partner $a'$, the selected
+pair $\{c,a\}$ has only the possible selected neighbour $\{c,a,a'\}$.
+Minimum degree forces that neighbour. Three of these distinct pair
+vertices already contradict the two-endpoint property.
+
+Thus $H$ has no isolated vertex. Its degree sum lies between nine and
+ten and is even, so it equals ten. Exactly one direction has degree two,
+and eight have degree one. Hence $H$ consists of a three-vertex path and
+three isolated edges.
+
+Choose two isolated edges $\{a,a'\}$ and $\{b,b'\}$. Their four cross-pair
+vertices are selected. Each can have selected neighbours only among the
+four triples obtained by adjoining the partner of one coordinate;
+any other triple would have three selected pair neighbours. These four
+pairs and four possible triples form an eight-cycle. An included triple
+already has two selected pair neighbours, so it cannot have a selected
+weight-four neighbour. The selected part of this eight-cycle therefore
+has no selected edge leading outside it.
+
+At least one triple is absent, since a path contains no cycle. The two cross-pair vertices adjacent to an absent triple each have
+only one remaining possible selected neighbour. Minimum degree forces
+that neighbour, so both are endpoints of the whole snake. The three choices of two isolated edges
+give disjoint sets of pair and triple vertices, since their coordinate
+supports identify the two chosen edges. They force at least six distinct
+endpoints, a contradiction. Thus $e(q)\ge6$.
+
+Finally, a degree-zero corner contributes $12e(q)\ge72$ to a sum of
+nonnegative remainders. This proves the loss implication.
+\end{proof}
+
+This strengthening is a written geometric proof. An exhaustive integer
+check of all 443704 coordinate graphs with at most five edges leaves
+3780 graphs after the two endpoint restrictions; all have the stated
+three-vertex-path and three-isolated-edge structure. A separate check of
+the 16 possible triple selections verifies the eight-cycle endpoint
+count. These finite checks support the proof but do not constitute its
+complete Lean verification, which remains pending. The strengthened
+domination threshold alone gives no new numerical length bound.
+
 \begin{lemma}[Weighted window packing]\label{lem:share-packing}
 Let $\sigma_j\ge0$ be shares at finitely many positions. Suppose that a family of windows $I_t$ has bounds $b_t\le\sum_{j\in I_t}\sigma_j$. If rational weights $w_t\ge0$ satisfy
 \[

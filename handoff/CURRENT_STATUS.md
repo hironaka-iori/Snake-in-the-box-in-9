@@ -1,3 +1,15 @@
+# Active continuation: round 168
+
+The goal has resumed. The two-round pause recorded below is historical.
+
+New written result: an undominated Q9 snake vertex has at least six empty squares, so total loss at most 71 implies domination. Proof: the missing-pair graph with at most five edges either forces three endpoints directly or consists of P3 plus three isolated edges; pairs of isolated edges force disjoint closed eight-cycle subgraphs and too many endpoints. Independent written review found no gap. Native checks cover all 443704 simple coordinate graphs with at most five edges and all 16 triple selections per eight-cycle. These are not a complete Lean proof.
+
+The actual-cube Lean source is drafted. The initial core Snake9 check passed, but its plan was superseded and that receipt is retained as historical. PathStructure exceeded the 256 MiB small-module limit; its finite adjacency test was replaced by an algebraic proof. Subsequent startup checks found less than the required 1 GiB available, so revised modules remain unverified. Existing large-replay limits remain unchanged. No compiler remains running.
+
+Next: run the pinned round168 modules under the existing resource limits; finish the graph-counting and eight-cycle interpretation in Lean. The numerical bound remains conditional at 234, with no new unconditional bound. Both main-paper copies contain the new written proof. The short explanation remains a round167 snapshot with added reasoning.
+
+---
+
 # Two-round stopping point: small loss and undominated corners
 
 Rounds 166 and 167 are complete. Research stops here for the requested
