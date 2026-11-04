@@ -1,3 +1,24 @@
+# Current result: first continuation group checked in Lean
+
+Milestone 161 passed its twelve-module pilot: 32 continuation segments,
+6,050 new deductions and 196,276 references. Together with
+the accepted prefix, 7,105 deductions are now connected to the original
+clause set through checked checkpoint consequences.
+
+The remaining continuation has 138,110 deductions and
+14,508,599 references. Its sources are already generated and pinned;
+do not regenerate them or restart accepted modules. Read
+milestones/161-share18-full-replay/PILOT_COMPLETION.md and its adjacent
+data/pilot-completion.json before resuming scripts/run_replay.py in bounded
+batches. The driver rechecks and reuses accepted objects.
+
+The complete contradiction, actual-snake transfer and reversal are still
+pending. The universal 012034 share-18 theorem and a new global upper bound
+are not established. The completed interpretation in milestone 159 and
+checkpoint in milestone 160 remain accepted.
+
+Last full paper revision: 156; next: 166. Historical updates follow.
+
 # Current result: checked share-18 replay checkpoint
 
 Milestone 159 completed the interpretation of all 13,224 clauses in the

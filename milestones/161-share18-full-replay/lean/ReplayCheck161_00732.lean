@@ -1,0 +1,21 @@
+import ReplayData161_0022
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+set_option Elab.async false
+
+namespace Snake9.ReplayFull161
+open Snake9.Lrat144 (andB)
+open Snake9.LratFast144
+theorem ok732 : check start732 proof732 = true := by
+  decide +kernel
+#print axioms ok732
+theorem ok733 : check start733 proof733 = true := by
+  decide +kernel
+#print axioms ok733
+theorem ok734 : check start734 proof734 = true := by
+  decide +kernel
+#print axioms ok734
+theorem ok735 : andB (check start735 proof735) (cpOk (replay start735 proof735) start736) = true := by
+  decide +kernel
+#print axioms ok735
+end Snake9.ReplayFull161
