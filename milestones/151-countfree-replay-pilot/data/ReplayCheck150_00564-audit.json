@@ -1,0 +1,231 @@
+{
+  "status": "PASS",
+  "pid": 19940,
+  "module": "ReplayCheck150_00564",
+  "source": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayCheck150_00564.lean",
+  "source_sha256": "063b4c4b6788c2301adccef0c8d8fd82127ca30ca3faab5948faa29cc81ed880",
+  "checker_sha256": "f4dfc59652734bfb53e3aa90f2d96cc16127e57e92ac7f15ff57f98311b910ad",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\full-execution-plan.json": "733af4bf4f91216d3d344315b69ee600827eb9ab179fa4eea62e97e9817a887f",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\ReplayData150_0017-audit.json": "c68516e3877d2bacdfdb12887ce46cc065604d6232c395160bd6f28b7edcd834",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayData150_0017.lean": "9fae2eb23a9f4505a2fc22a6d0244cdd6df5cf0c9ffba5c1218ed00c2ec4e866",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayData150_0017.olean": "f01f9e11391ca1c707ee7318faddf2bf671dd10eeec65f73332f6b1ec27659b3",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\ReplayCheckpoint150_00544-audit.json": "f369318dd24fa7b3109bb7e3d98a5f6a5e3009a1584ee19e069b58249c7e588d",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayCheckpoint150_00544.lean": "5c1836a78a2137b3da641d81806a8fd5770003c913c5621cc08dca24ca1de94e",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayCheckpoint150_00544.olean": "3f4000e1b43d77d169cecc49f873dc3fb67efacc35d2026feeeec66688c2de9a",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\LratFast150Replay-audit.json": "55d91a2714023f28eda1499c642f3da2e79b1df7a883c895df565041022ca457",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\LratFast150Replay.lean": "2548dc19c3b6d4d027ffe21e233255c9edb9a128313b299c8f2da52b2bcedf01",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\LratFast150Replay.olean": "2f4250976c38a5cb988ff45a6d10b1f681731091cf119701c3db564a0966d2e4",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\pilot-source-plan.json": "8aa9d4e6a48bfb82212c74dd1b6f9ebf4e1334fe56c93b5584bf04a6fdd4e39c",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\LratCheck150Replay-audit.json": "a6f583c183fd9b1971b25c07d17665e02cabf6a4e28c6f1f7183e50a306e358d",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\LratCheck150Replay.lean": "400fe4f60ac353ff5237841dfea71f74dda0329973c621cbbbe9e884760938c3",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\LratCheck150Replay.olean": "0e6557fc2647d2029d677605ed057f3120354d5764c3cd49639c50849597564d",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\data\\LocalWindowModel-audit.json": "0579a9d2f73374d814945311bd46335d0f853fa30e0b7e5b41c761123ca5f78a",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\lean\\LocalWindowModel.lean": "5c374d6b74cbed0ebb91f93e53de21f6e33a85f64532dca6c09f7cefe3a6a8a0",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build\\LocalWindowModel.olean": "cdff343e0e81adb26337250528ae18a37d4294b6e00cb7ac77cbe223aa6645e9",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\data\\semantic-plan.json": "b256a76be31ea3c256a7bc09e44290736ad0f7bf1e9672a23172fa6fbc6350a9",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\ReplayCheckpoint150_00576-audit.json": "574e47a9d80060bdfab4848712bb2e57662953a7f81067c5baac960ef3d3f481",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayCheckpoint150_00576.lean": "2220a37e1fe2fe26fd33a9968938537464893fc50dcf86a1249ef9bc249d5367",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayCheckpoint150_00576.olean": "19d6abd73963a3c16701c5dc1d9ad350da4043f743a16c5a235992bac8e8d036"
+  },
+  "toolchain_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "direct_dependencies": [
+    "d:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayData150_0017.olean"
+  ],
+  "stdlib_scope": "The standard Lean4.19 library is trusted; compiler and direct standard-library objects are pinned. The38 pilot modules are freshly checked. The exact concrete input from150 and generic local models from147 are reused with pinned source/object/log/dependency receipts. Each dependency is hashed once in preflight and again after compilation.",
+  "resource_gate": {
+    "processes": [],
+    "free_bytes": 6535737344
+  },
+  "resource_samples": [
+    {
+      "processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 240128000
+        }
+      ],
+      "free_bytes": 6295289856,
+      "seconds": 0.6569999999992433,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 240128000
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 591245312
+        }
+      ],
+      "free_bytes": 5954519040,
+      "seconds": 2.313000000001921,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 591245312
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 569044992
+        }
+      ],
+      "free_bytes": 5934227456,
+      "seconds": 3.9219999999986612,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 569044992
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 637390848
+        }
+      ],
+      "free_bytes": 5879967744,
+      "seconds": 5.7189999999973224,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 637390848
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 622669824
+        }
+      ],
+      "free_bytes": 5896249344,
+      "seconds": 7.438000000001921,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 622669824
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 593448960
+        }
+      ],
+      "free_bytes": 5931192320,
+      "seconds": 9.156999999999243,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 593448960
+        }
+      ]
+    },
+    {
+      "processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 679059456
+        }
+      ],
+      "free_bytes": 5849890816,
+      "seconds": 10.860000000000582,
+      "owned_lean_processes": [
+        {
+          "ProcessId": 52924,
+          "ParentProcessId": 19940,
+          "PrivatePageCount": 679059456
+        }
+      ]
+    }
+  ],
+  "timeout_seconds": 180,
+  "memory_limit_bytes": 3221225472,
+  "minimum_free_bytes": 805306368,
+  "compiler_threads": 2,
+  "compiler_stack_kb": 65536,
+  "preflight_seconds": 0.9690000000045984,
+  "log": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\logs\\ReplayCheck150_00564-1793744559581393500\\compiler.log",
+  "paths": [
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build",
+    "E:\\Snake-in-a-box\\milestones\\150-actual-pair-share\\build",
+    "E:\\Snake-in-a-box\\milestones\\147-countfree-clause-semantics\\build"
+  ],
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "2",
+    "-s",
+    "65536",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayCheck150_00564.1793744559581393500.olean",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\lean\\ReplayCheck150_00564.lean"
+  ],
+  "compiler_pid": 52924,
+  "exit_code": 0,
+  "stop_reason": null,
+  "compiler_wall_seconds": 11.875,
+  "postflight_seconds": 0.046999999998661224,
+  "seconds": 12.906000000002678,
+  "axioms": [
+    {
+      "theorem": "Snake9.ReplayFull150.ok564",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.ReplayFull150.ok565",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.ReplayFull150.ok566",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.ReplayFull150.ok567",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "log_sha256": "860b681a24a8650cda804f23fa6ac380e5248e2170d98bafed78c52feb52f5e6",
+  "object": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\build\\ReplayCheck150_00564.olean",
+  "olean_sha256": "b64bff1b81086ff0bd1c28124c68b834f26a37673f398bf6bd29f910fd38d253"
+}

@@ -1,0 +1,51 @@
+{
+  "status": "PAUSED_OWNED_VERIFICATION_PROCESSES",
+  "recorded_at": "2026-11-03T22:35:49.436445+00:00",
+  "suspended": [
+    {
+      "ProcessId": 46168,
+      "ParentProcessId": 2312,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/152-countfree-share16-completion/scripts/serialize_complete.py",
+      "CreationDate": "/Date(1793742437693)/",
+      "suspend_return_code": 0
+    },
+    {
+      "ProcessId": 50496,
+      "ParentProcessId": 6528,
+      "Name": "python.exe",
+      "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/152-countfree-share16-completion/scripts/continue_after_replay.py",
+      "CreationDate": "/Date(1793743447513)/",
+      "suspend_return_code": 0
+    },
+    {
+      "ProcessId": 29628,
+      "ParentProcessId": 46168,
+      "Name": "python.exe",
+      "CommandLine": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -B -X utf8 E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\scripts\\serialize_complete.py --watchdog E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\data\\serialization-1793742438473223500.json",
+      "CreationDate": "/Date(1793742439062)/",
+      "suspend_return_code": 0
+    },
+    {
+      "ProcessId": 10396,
+      "ParentProcessId": 46168,
+      "Name": "python.exe",
+      "CommandLine": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -B -X utf8 E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\scripts\\run_full_replay.py",
+      "CreationDate": "/Date(1793742452499)/",
+      "suspend_return_code": 0
+    },
+    {
+      "ProcessId": 30504,
+      "ParentProcessId": 10396,
+      "Name": "python.exe",
+      "CommandLine": "C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe -B -X utf8 E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\scripts\\check_full_replay.py ReplaySteps150_0023 --timeout 180",
+      "CreationDate": "/Date(1793745347729)/",
+      "suspend_return_code": 0
+    }
+  ],
+  "already_held147_pid": 15228,
+  "already_held147_not_suspended_again": true,
+  "newest153_pushed": false,
+  "resume_note": "Verify process creation identities, then resume exactly these suspended processes once each. Resume descendants before151driver, then controller/watchdog and continuation. Keep147held until its152controller resumes it. Do not restart proof jobs.",
+  "latest151_progress": "RUNNING"
+}

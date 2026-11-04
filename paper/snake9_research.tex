@@ -1662,12 +1662,12 @@ H=\sum_{i=1}^{5}\sigma_{12}(y_i).
 Letters represented by different digits always denote different coordinate directions.
 
 \begin{theorem}[Completed count-independent share bounds]\label{thm:countfree-completed}
-For a six-transition segment with shape $012031$, $012304$, or $012314$, one has $H\ge16$. For shape $012310$ and for six distinct directions, with shape $012345$, one has $H\ge12$. Each statement also holds for the reversed segment, with no singleton-count hypotheses.
+For a six-transition segment with shape $012031$, $012032$, $012304$, or $012314$, one has $H\ge16$. For shape $012310$ and for six distinct directions, with shape $012345$, one has $H\ge12$. Each statement also holds for the reversed segment, with no singleton-count hypotheses.
 \end{theorem}
 \begin{proof}
 Translate the first vertex to zero and apply a coordinate permutation to obtain the displayed shape. Select the segment in the union of the radius-four neighbourhoods of its five internal centres. Every actual snake satisfies the selected-degree restrictions, the bound of two on fully represented endpoints, and the exclusions of selected cycles. Its singleton counts lie between one and twenty-one. The empty-square indicators and integer quotient counters compute the five shares on these centres.
 
-For each of the first three shapes, adjoining $H\le15$ to these necessary conditions gives an inconsistent Boolean formula. For each of the two remaining shapes, adjoining $H\le11$ gives an inconsistent formula. The clause interpretations, contradiction certificates, coordinate transport and reversal have all passed Lean checks. Since $H$ is an integer, the exclusions give the stated bounds~\cite{countfreearchive,shareclosurearchive}.
+For each of the first four shapes, adjoining $H\le15$ to these necessary conditions gives an inconsistent Boolean formula. For each of the two remaining shapes, adjoining $H\le11$ gives an inconsistent formula. The clause interpretations, contradiction certificates, coordinate transport and reversal have all passed Lean checks. Since $H$ is an integer, the exclusions give the stated bounds~\cite{countfreearchive,shareclosurearchive,share152archive}.
 \end{proof}
 
 \begin{theorem}[A count-conditioned share of 120]\label{thm:share120}
@@ -1689,7 +1689,7 @@ The original nine-shape target is displayed below. Its status column refers to t
 \toprule
 Shape & Target for $H$ & Status of the local snake theorem\\\midrule
 $012031$ & 16 & Checked\\
-$012032$ & 16 & Pending\\
+$012032$ & 16 & Checked\\
 $012034$ & 20 & Pending\\
 $012301$ & 16 & Pending\\
 $012304$ & 16 & Checked\\
@@ -1700,7 +1700,7 @@ $012345$ & 16 & Pending; the weaker bound 12 is checked\\
 \bottomrule
 \end{tabular}
 \end{center}
-All nine target formulas have independently checked native Boolean refutations. Five still lack a completed Lean chain through the contradiction and geometric interpretation. The $012310$ target now has a completed contradiction replay, arbitrary-coordinate interpretation and reversal. Five local shapes therefore remain unresolved. The current conditional argument uses floor 18 for $012034$ and the displayed targets for the other four pending shapes. The classification and conditional combination are checked separately from those premises. For $012034$, clause interpretation has passed, while the contradiction replay and target share theorem remain incomplete~\cite{shareclosurearchive,targetsharearchive}.
+All nine target formulas have independently checked native Boolean refutations. Four still lack a completed Lean chain through the contradiction and geometric interpretation: $012034$, $012301$, $012340$ and $012345$. The $012032$ share-16 bound now has a complete contradiction replay, arbitrary-coordinate interpretation and reversal. The current conditional argument requires floor 18 for $012034$ and floor 16 for the other three pending shapes. The classification and conditional combination are checked separately from those premises. For $012034$, clause interpretation has passed, while the contradiction replay and target share theorem remain incomplete~\cite{shareclosurearchive,targetsharearchive,share152archive}.
 
 Theorem~\ref{thm:share120} and the count-independent bounds may apply to the same five centres. Their maximum is a valid lower bound for $H$. Adding such alternative bounds would count the same share more than once. The complete models below use the maximum rule throughout.
 
@@ -2448,7 +2448,7 @@ the pending local theorem~\cite{targetsharearchive}.
 \subsection{Least sufficient pending floors in the fixed model}\label{sec:least-floors}
 The preceding comparison with $012034=20$ asks for more than the present
 234 argument needs. Keep the graph, its other credits and the boundary
-inequality fixed. Allow only the five unfinished floors to decrease to
+inequality fixed. Allow only the five selected floors to decrease to
 nonnegative integers within their original target limits.
 
 \begin{proposition}[Integer floors sufficient for the current comparison]\label{prop:least-floors}
@@ -2891,6 +2891,7 @@ $R\ge28\mu-13280$. Therefore
 &\ge\frac{1052968+102\mu}{4200+\mu}\\
 &=235+\frac{65968-133\mu}{4200+\mu}\ge235.
 \end{aligned}
+\]
 The denominator is positive and $65968=133\cdot496$. The arithmetic
 implication has passed Lean under the three displayed graph inequalities.
 \end{proof}
@@ -2927,10 +2928,11 @@ assembly. The full-key walk, total charge and telescoping implications
 are already checked. Exact-integer scans of all 4947008 accepted keys and
 the checked potential ranges support this task; partial Lean coverage
 does not replace its universal edge premise.
-\item For 234, additionally prove the five local shares
-$(16,18,16,16,16)$ for $012032,012034,012301,012340,012345$, including
-their geometric interpretation and reversal. The completed profile needs
-none of these additional share assumptions and currently recovers 235.
+\item For 234, complete the remaining local shares
+$(18,16,16,16)$ for $012034,012301,012340,012345$, including
+their geometric interpretation and reversal. The $012032$ share-16
+requirement is established. The completed baseline profile needs none
+of these additional share assumptions and currently recovers 235.
 \end{enumerate}
 
 Corollary~\ref{cor:reference-potential-bounds} states exactly how these
@@ -2974,10 +2976,12 @@ and total-charge deductions have passed Lean under their stated premises.
 Twenty of the 1378 reference entries have checked refutations; 1358 remain.
 Exact-integer scans verify the two saved potentials on all 4947008 accepted
 keys, while the complete Lean edge certificate remains unfinished.
-The conditional 234 profile additionally requires share floors
+The conditional 234 profile uses share floors
 $(16,18,16,16,16)$ for $012032,012034,012301,012340,012345$ and has a
-strict margin of 30 at length 235 under those premises
-~\cite{referenceunionarchive,potentialcertificatearchive}.
+strict margin of 30 at length 235 under those premises. The $012032$
+floor is now established; the remaining four floors and the separate
+reference and potential obligations remain
+~\cite{referenceunionarchive,potentialcertificatearchive,share152archive}.
 
 The completed actual-snake results include the sharp $012032$ pair
 inequality, its equality geometry and parity consequence, the parity-free
@@ -3015,22 +3019,22 @@ All 13655 core clauses belong to the original model with share sum at most
 propagation references, ending in the empty clause. The absence of the
 additional pair condition was checked against the complete original input.
 
-All core-clause interpretations and the actual-snake transfer have passed
-Lean in 112 modules. Conditional on a contradiction of this exact core,
-every fitting window whose forward or reversed canonical directions are
-$012032$ satisfies
+The 112 core-clause interpretation and geometric-transfer modules are
+checked. All 342 modules of the complete contradiction replay have now
+passed Lean, covering the 878 segments and ending in the empty clause.
+Composing these results proves that every fitting window whose forward
+or reversed canonical directions are $012032$ satisfies
 \[
 \sum_{j=1}^{5}\sigma_{12}(x_{r+j})\ge16.
 \]
-No additional count, parity or endpoint-location hypothesis is required.
-The complete numerical proof has also been transported to a packed replay
-with 878 segments. A 38-module pilot now connects the exact core to the
-initial replay state and checks 2169 deductions with 6151 propagation
-references. The first 32-segment block extends the checked prefix to
-3728 deductions and 195386 references, including its checkpoint transfer.
-There are 49 accepted modules among the 342 prepared for the full replay.
-The final contradiction remains uncompleted and is still an explicit
-premise of the actual-snake share bound~\cite{share150archive,pilot151archive}.
+The final actual-snake composition has also passed Lean. There is no
+remaining contradiction premise or additional count, parity or
+endpoint-location hypothesis. Exact sources, compiled objects and saved
+dependency records were checked; the inherited coordinate machinery
+includes one previously compiled data object, and the external Lean and
+mathematics libraries remain trusted. This completes the $012032$ case
+of Theorem~\ref{thm:countfree-completed}, while the other four target
+shapes remain unresolved~\cite{share150archive,pilot151archive,share152archive}.
 
 A separate certificate targets the $012032$ windows on the surviving
 eleven-cycle. A proposed improvement restricted to
@@ -3075,7 +3079,7 @@ local share theorems~\cite{bridge146archive}.
 
 The saved-cycle obstructions concern their stated graph, weights and
 occurrence event. In particular, the joint-floor obstruction leaves the
-eleven-cycle unchanged, whereas the proposed $012032$ floor 16 raises its
+eleven-cycle unchanged, whereas the established $012032$ floor 16 raises its
 total by 57. It therefore leaves the full conditional 234 profile
 unresolved. No construction above 191 or matching optimality theorem has
 been obtained. The numerical conjecture 196 is used in none of the proved
@@ -6414,6 +6418,11 @@ replay of the count-free 012032 certificate}, research archive, milestone 151.
 I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Critical-window share certificates
 and removal of two unused count assumptions}, research archive, milestone 153.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/153-pair-conditioned-share17}.
+
+\bibitem{share152archive}
+I.~Hironaka, T.~Ma, and S.~Zhan, \emph{Complete count-independent share
+bound for the 012032 window}, research archive, milestone 152.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/152-countfree-share16-completion}.
 
 \end{thebibliography}
 \end{document}

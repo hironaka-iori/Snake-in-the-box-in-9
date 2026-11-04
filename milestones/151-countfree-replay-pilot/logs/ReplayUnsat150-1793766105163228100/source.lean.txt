@@ -1,0 +1,69 @@
+import ReplayAssembly150
+import ReplaySteps150_0000
+import ReplaySteps150_0001
+import ReplaySteps150_0002
+import ReplaySteps150_0003
+import ReplaySteps150_0004
+import ReplaySteps150_0005
+import ReplaySteps150_0006
+import ReplaySteps150_0007
+import ReplaySteps150_0008
+import ReplaySteps150_0009
+import ReplaySteps150_0010
+import ReplaySteps150_0011
+import ReplaySteps150_0012
+import ReplaySteps150_0013
+import ReplaySteps150_0014
+import ReplaySteps150_0015
+import ReplaySteps150_0016
+import ReplaySteps150_0017
+import ReplaySteps150_0018
+import ReplaySteps150_0019
+import ReplaySteps150_0020
+import ReplaySteps150_0021
+import ReplaySteps150_0022
+import ReplaySteps150_0023
+import ReplaySteps150_0024
+import ReplaySteps150_0025
+import ReplaySteps150_0026
+import ReplaySteps150_0027
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+set_option Elab.async false
+
+namespace Snake9.ReplayFull150
+open Snake9.Lrat150Replay (TreeTrue unsat_of_raw)
+theorem unsat : Snake9.LocalWindow.Unsat Snake9.LocalWindow.ShareWindow150.cnf := by
+  apply unsat_of_raw
+  intro τ h
+  have h0 : TreeTrue τ start0 := Snake9.ReplayData150.start_true τ h
+  have h32 : TreeTrue τ start32 := steps0 τ h0
+  have h64 : TreeTrue τ start64 := steps1 τ h32
+  have h96 : TreeTrue τ start96 := steps2 τ h64
+  have h128 : TreeTrue τ start128 := steps3 τ h96
+  have h160 : TreeTrue τ start160 := steps4 τ h128
+  have h192 : TreeTrue τ start192 := steps5 τ h160
+  have h224 : TreeTrue τ start224 := steps6 τ h192
+  have h256 : TreeTrue τ start256 := steps7 τ h224
+  have h288 : TreeTrue τ start288 := steps8 τ h256
+  have h320 : TreeTrue τ start320 := steps9 τ h288
+  have h352 : TreeTrue τ start352 := steps10 τ h320
+  have h384 : TreeTrue τ start384 := steps11 τ h352
+  have h416 : TreeTrue τ start416 := steps12 τ h384
+  have h448 : TreeTrue τ start448 := steps13 τ h416
+  have h480 : TreeTrue τ start480 := steps14 τ h448
+  have h512 : TreeTrue τ start512 := steps15 τ h480
+  have h544 : TreeTrue τ start544 := steps16 τ h512
+  have h576 : TreeTrue τ start576 := steps17 τ h544
+  have h608 : TreeTrue τ start608 := steps18 τ h576
+  have h640 : TreeTrue τ start640 := steps19 τ h608
+  have h672 : TreeTrue τ start672 := steps20 τ h640
+  have h704 : TreeTrue τ start704 := steps21 τ h672
+  have h736 : TreeTrue τ start736 := steps22 τ h704
+  have h768 : TreeTrue τ start768 := steps23 τ h736
+  have h800 : TreeTrue τ start800 := steps24 τ h768
+  have h832 : TreeTrue τ start832 := steps25 τ h800
+  have h864 : TreeTrue τ start864 := steps26 τ h832
+  exact steps27 τ h864
+#print axioms unsat
+end Snake9.ReplayFull150

@@ -1,0 +1,28 @@
+import ReplayCheck150_00864
+import ReplayCheck150_00868
+import ReplayCheck150_00872
+import ReplayCheck150_00876
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+set_option Elab.async false
+
+namespace Snake9.ReplayFull150
+open Snake9.Lrat150Replay (TreeTrue)
+open Snake9.LratFast150Replay
+theorem steps27 (τ : Nat → Bool) (h864 : TreeTrue τ start864) : False := by
+  have h865 : TreeTrue τ start865 := replay_true τ ok864 h864
+  have h866 : TreeTrue τ start866 := replay_true τ ok865 h865
+  have h867 : TreeTrue τ start867 := replay_true τ ok866 h866
+  have h868 : TreeTrue τ start868 := replay_true τ ok867 h867
+  have h869 : TreeTrue τ start869 := replay_true τ ok868 h868
+  have h870 : TreeTrue τ start870 := replay_true τ ok869 h869
+  have h871 : TreeTrue τ start871 := replay_true τ ok870 h870
+  have h872 : TreeTrue τ start872 := replay_true τ ok871 h871
+  have h873 : TreeTrue τ start873 := replay_true τ ok872 h872
+  have h874 : TreeTrue τ start874 := replay_true τ ok873 h873
+  have h875 : TreeTrue τ start875 := replay_true τ ok874 h874
+  have h876 : TreeTrue τ start876 := replay_true τ ok875 h875
+  have h877 : TreeTrue τ start877 := replay_true τ ok876 h876
+  exact final_false τ ok877 h877
+#print axioms steps27
+end Snake9.ReplayFull150

@@ -1,3 +1,24 @@
+# Research update: universal 012032 share 16 completed
+
+The complete contradiction replay and actual-snake composition have passed
+Lean. Every fitting 012032 window, including reversal, has five-centre share
+at least 16 without additional local-count assumptions. The recovered run
+revalidated 301 accepted modules and completed all 342. The final theorem
+and every saved dependency receipt were audited.
+
+Read milestones/152-countfree-share16-completion/COMPLETION.md. Its completion
+checkpoint is separate from the earlier running checkpoint. Four target
+shapes remain for the conditional 234 route; other reference and potential
+obligations remain. No new global upper bound is established.
+
+Next: check the broader critical-context share-17 interpretation and its
+single contradiction replay in milestones 154--155. Inspect their live
+progress before starting another compiler. The old 147 job ended at reboot,
+with 448 accepted modules preserved; it is not a currently held process.
+Last full paper revision: 146; next: 156.
+
+Historical updates follow.
+
 # Research update: milestone 153
 
 A complete numerical certificate supports the 012032 share-17 target under

@@ -1,0 +1,57 @@
+{
+  "status": "FAILED_REQUIRES_INSPECTION",
+  "pid": 48396,
+  "started_at": "2026-11-04T04:13:27.502969+00:00",
+  "boot_observation": {
+    "boot_ms": 1793750429500,
+    "processes": [
+      {
+        "ProcessId": 48396,
+        "ParentProcessId": 50020,
+        "Name": "python.exe",
+        "CreationDate": "/Date(1793765605931)/",
+        "CommandLine": "\"C:\\Users\\hironakaiori\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe\" -B -X utf8 milestones/152-countfree-share16-completion/scripts/recover_after_reboot.py"
+      }
+    ]
+  },
+  "previous_accepted_modules": 301,
+  "previous_processes_confirmed_absent": true,
+  "historical_records": [
+    {
+      "source": "E:\\Snake-in-a-box\\work\\user-pause-153.json",
+      "archive": "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\audit\\reboot-recovery\\user-pause-153.json",
+      "sha256": "555e8237a3d6f15bdc4869ad49ec3b9df4718b29ba708e403767cc8513a9f514"
+    },
+    {
+      "source": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\full-replay-progress.json",
+      "archive": "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\audit\\reboot-recovery\\full-replay-progress.json",
+      "sha256": "3eb2f67bcea10377ba1fae73e4b251f654fddff5ffc53b0e0e0db5c96ea6645a"
+    },
+    {
+      "source": "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\data\\full-replay-batch.lock",
+      "archive": "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\audit\\reboot-recovery\\full-replay-batch.lock",
+      "sha256": "0eeb2e98ca7c42c0da446e324c337a92fc7d250bbc72ef907a90be2c984dd597"
+    },
+    {
+      "source": "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\data\\final-continuation-progress.json",
+      "archive": "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\audit\\reboot-recovery\\final-continuation-progress.json",
+      "sha256": "8055ee6a0c2d5ce8f6c53b6c9f7865027d599509e80a675fc33105c5615c31a1"
+    },
+    {
+      "source": "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\data\\serialization-1793742438473223500.json",
+      "archive": "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\audit\\reboot-recovery\\serialization-1793742438473223500.json",
+      "sha256": "688b3c832fb56df0e264698cbdf76e9111d646cf710c7b9fb0020e0cf30edfe7"
+    }
+  ],
+  "stages": [],
+  "pins": {
+    "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\scripts\\recover_after_reboot.py": "6cd30135a41be271d94359d633067c939f934c712dd05c389e0737be6ca0fb29",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\scripts\\run_full_replay.py": "1a10b07e682fd2fe80117982196d93001ea6dcafadb9a008e52c621c3b60317a",
+    "E:\\Snake-in-a-box\\milestones\\151-countfree-replay-pilot\\scripts\\check_full_replay.py": "f4dfc59652734bfb53e3aa90f2d96cc16127e57e92ac7f15ff57f98311b910ad",
+    "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\scripts\\audit_full.py": "488310926d0c36829c84ba4a6edeba7d308d2f41a3fcb0794c9ea4056ecef45c",
+    "E:\\Snake-in-a-box\\milestones\\152-countfree-share16-completion\\scripts\\check_complete.py": "7b639e79080f1259c7f009e142eacfc1f8b9efa121fc8d3dd5dd271099fa64df"
+  },
+  "policy": "Original driver revalidates and reuses every accepted receipt. The 147 job is absent after reboot; no hold or resume is needed.",
+  "exception": "FileNotFoundError(2, 'No such file or directory')",
+  "finished_at": "2026-11-04T04:13:27.537800+00:00"
+}
