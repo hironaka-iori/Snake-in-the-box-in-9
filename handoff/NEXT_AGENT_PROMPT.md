@@ -1,3 +1,28 @@
+# Current checkpoint: weaker local share assumption
+
+Milestone 156 established the exact retained-comparison optimum
+551765/2348 = 235 - 15/2348. Its full paper revision compiled successfully.
+This is a finite-method result, with no new unconditional snake bound.
+
+Milestone 157 asks whether lowering the conditional 012034 share floor
+from 18 to 17 still permits mean 496 and integer range 603 through 631.
+Five Lean arithmetic statements exclude shifts and scalings of the old
+potential and establish the necessary target range. The exact graph test
+is prepared, with original weights reproduced before any change.
+
+The launch stopped before graph loading: 2,430,287,872 bytes were available,
+below the existing 3 GiB threshold. No graph worker or run directory was
+created. Feasibility remains unresolved. Read
+milestones/157-weaker-share-floor/CHECKPOINT.md for the exact resumption
+command and data/checkpoint.json for the verified evidence record.
+
+Do not restart completed work in milestones 155 or 156. All remaining
+local, count, reference and graph-to-snake obligations retain their stated
+scope. The optimum of Q9 remains open. Last full paper revision: 156;
+next full revision: 166. Both paper copies remain identical.
+
+Historical updates follow; their statuses describe earlier stages.
+
 # Current result: exact limit of the retained comparison
 
 Milestone156 is complete. The count-conditioned share17 theorem leaves the
