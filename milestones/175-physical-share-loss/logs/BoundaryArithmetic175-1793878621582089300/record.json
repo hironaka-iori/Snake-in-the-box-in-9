@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "module": "BoundaryArithmetic175",
+  "source": "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\lean\\BoundaryArithmetic175.lean",
+  "source_sha256": "f6d0c9a406181e9debcc1670b1bebacb7ada660f684aa2b17e87e0e7991f7073",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\data\\BoundaryArithmetic175-execution.json": "4c590d1f1b1e15d7aa5caeb2adf303015869034240e8c71a32be10a92010a259",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\lean\\BoundaryArithmetic175.lean": "f6d0c9a406181e9debcc1670b1bebacb7ada660f684aa2b17e87e0e7991f7073",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\logs\\BoundaryArithmetic175-1793878621582089300\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\lean\\BoundaryArithmetic175.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\logs\\BoundaryArithmetic175-1793878621582089300\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2987098112,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 81,
+    "snapshot_seconds": 0.015000000000100044
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 3031756800,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 46656,
+          "ParentProcessId": 35576,
+          "PrivatePageCount": 48144384,
+          "WorkingSetSize": 25165824
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 81,
+      "snapshot_seconds": 0.015999999999849024
+    },
+    {
+      "free_bytes": 2753802240,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 46656,
+          "ParentProcessId": 35576,
+          "PrivatePageCount": 150523904,
+          "WorkingSetSize": 286281728
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 83,
+      "snapshot_seconds": 0.016000000000076398
+    }
+  ],
+  "compiler_pid": 46656,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0620000000001255,
+  "axioms": [
+    {
+      "theorem": "BoundaryArithmetic175.seven_count_minimum",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "BoundaryArithmetic175.stronger_boundary_comparison",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "BoundaryArithmetic175.conditional_upper_234",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "3fcdef5662bda5a33a4efcab9a7e9c7fd6831e67d71b4b8dc0c0f8eba06c5eda",
+  "object": "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\build\\BoundaryArithmetic175.olean",
+  "olean_sha256": "cea0058d3ed891e30da9ec116f6ec954c21d0257dc541c2bc25383f28c86a9dd"
+}

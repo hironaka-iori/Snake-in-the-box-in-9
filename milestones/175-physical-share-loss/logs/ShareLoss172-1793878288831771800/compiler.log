@@ -1,0 +1,33 @@
+E:\Snake-in-a-box\milestones\175-physical-share-loss\lean\ShareLoss172.lean:19:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+note: this linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+E:\Snake-in-a-box\milestones\175-physical-share-loss\lean\ShareLoss172.lean:33:34: error: ambiguous, possible interpretations 
+  _root_.flip : (?m.14995 → ?m.14996 → ?m.14997) → ?m.14996 → ?m.14995 → ?m.14997
+  
+  SquareIncidence.flip : Coord → Vertex → Vertex
+E:\Snake-in-a-box\milestones\175-physical-share-loss\lean\ShareLoss172.lean:22:42: error: unsolved goals
+m : ℕ
+p : Snake m
+q : Vertex
+P : Coord × Coord → Prop :=
+  fun ab =>
+    ¬InPath p q ∧ ¬InPath p (vxor q (unit ab.1)) ∧ ¬InPath p (vxor q (unit ab.2)) ∧ ¬InPath p (vxor q (pair ab.1 ab.2))
+ab : { ab // ab.1 < ab.2 }
+a✝ : ab ∈ Finset.univ
+⊢ (if
+        ¬InPath p q ∧
+          ¬InPath p (vxor q (unit (↑ab).1)) ∧
+            ¬InPath p (vxor q (unit (↑ab).2)) ∧ ¬InPath p (vxor q (pair (↑ab).1 (↑ab).2)) then
+      1
+    else 0) =
+    if
+        ¬InPath p q ∧
+          ¬InPath p (SquareIncidence.flip (↑ab).1 q) ∧
+            ¬InPath p (SquareIncidence.flip (↑ab).2 q) ∧ ¬InPath p (vxor q (pair (↑ab).1 (↑ab).2)) then
+      1
+    else 0
+'Snake9.Integration172.empty_count_eq_emptyAt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.Integration172.neighbor_count_eq_selDeg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.Integration172.corner_loss_eq_remainder' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.Integration172.exact_share_loss' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.Integration172.charge_budget_with_loss' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+E:\Snake-in-a-box\milestones\175-physical-share-loss\lean\ShareLoss172.lean:75:0: error: invalid 'end', name mismatch (expected nothing)

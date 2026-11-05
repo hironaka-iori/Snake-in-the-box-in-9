@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "module": "SixBoundaryArithmetic175",
+  "source": "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\lean\\SixBoundaryArithmetic175.lean",
+  "source_sha256": "73abec0acb470ef0aba86d1b84108a7a039528a917a53c96b1e3a8db73af0b9e",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\data\\SixBoundaryArithmetic175-execution.json": "33f34b028049683326b27f41c932e72a55e6bea992bec8ac76c831881c71c586",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\lean\\SixBoundaryArithmetic175.lean": "73abec0acb470ef0aba86d1b84108a7a039528a917a53c96b1e3a8db73af0b9e",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\logs\\SixBoundaryArithmetic175-1793878931141799900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\lean\\SixBoundaryArithmetic175.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\logs\\SixBoundaryArithmetic175-1793878931141799900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 3094085632,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 81,
+    "snapshot_seconds": 0.015999999999849024
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 3088728064,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 2668,
+          "ParentProcessId": 41600,
+          "PrivatePageCount": 48099328,
+          "WorkingSetSize": 24633344
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 81,
+      "snapshot_seconds": 0.015999999999849024
+    },
+    {
+      "free_bytes": 2823479296,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 2668,
+          "ParentProcessId": 41600,
+          "PrivatePageCount": 198369280,
+          "WorkingSetSize": 282980352
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 82,
+      "snapshot_seconds": 0.016000000000076398
+    }
+  ],
+  "compiler_pid": 2668,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0779999999999745,
+  "axioms": [
+    {
+      "theorem": "SixBoundaryArithmetic175.six_count_minimum",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "SixBoundaryArithmetic175.retained_census",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "SixBoundaryArithmetic175.critical_empty_squares",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "SixBoundaryArithmetic175.fourteen_empty_squares_excludes_235",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "f4ae6b257d98beb15377925f96440f055968557f097b3be6e4ec872dfd6e1fbb",
+  "object": "E:\\Snake-in-a-box\\milestones\\175-physical-share-loss\\build\\SixBoundaryArithmetic175.olean",
+  "olean_sha256": "1d6c6cf69170c685d42bc63a7e24cc6e896e4ae4d4f72eefc120896e305c7996"
+}

@@ -1,0 +1,75 @@
+import Compatibility172
+
+open scoped BigOperators
+namespace Snake9.Integration172
+open SquareIncidence Count171
+noncomputable section
+
+private theorem flip_pair (q : Vertex) (a b : Coord) :
+    flip b (flip a q) = vxor q (pair a b) := by
+  apply Fin.ext
+  exact Nat.xor_assoc _ _ _
+
+private theorem count_as_sum {α : Type} (l : List α) (P : α → Prop) [DecidablePred P] :
+    l.countP (fun x => decide (P x)) = (l.map (fun x => if P x then 1 else 0)).sum := by
+  induction l with
+  | nil => rfl
+  | cons a l ih =>
+    simp only [List.countP_cons,List.map_cons,List.sum_cons,ih]
+    by_cases h : P a <;> simp [h] <;> omega
+
+theorem empty_count_eq_emptyAt {m : Nat} (p : Snake m) (q : Vertex) :
+    emptySquareCount p q = emptyAt p q := by
+  classical
+  let P : Coord × Coord → Prop := fun ab =>
+    ¬ InPath p q ∧ ¬ InPath p (vxor q (unit ab.1)) ∧
+    ¬ InPath p (vxor q (unit ab.2)) ∧ ¬ InPath p (vxor q (pair ab.1 ab.2))
+  change axes.countP (fun ab => decide (P ab)) = emptyAt p q
+  rw [count_as_sum, ← List.sum_toFinset _ axes_nodup]
+  rw [Finset.sum_subtype axes.toFinset (fun ab => by simpa using mem_axes ab)]
+  unfold emptyAt
+  apply Finset.sum_congr rfl
+  intro ab _
+  simp only [P, empty, flip_pair, flip]
+
+theorem neighbor_count_eq_selDeg {m : Nat} (p : Snake m) (q : Vertex) :
+    selectedNeighborCount p q = selDeg p q := by
+  classical
+  unfold selectedNeighborCount selDeg selected
+  rw [Finset.card_filter]
+  rfl
+
+theorem corner_loss_eq_remainder {m : Nat} (p : Snake m) (q : Vertex) :
+    cornerLoss p q = (12 * emptyAt p q) % selDeg p q := by
+  unfold cornerLoss
+  rw [empty_count_eq_emptyAt, neighbor_count_eq_selDeg]
+  split
+  · rename_i hz
+    rw [hz, Nat.mod_zero]
+  · rfl
+
+theorem exact_share_loss {m : Nat} (p : Snake m) :
+    (∑ x, selected p x * shareN 12 p x) + totalLoss p =
+      12 * totalEmptyAnchored p := by
+  classical
+  rw [share_double_count]
+  unfold totalLoss
+  rw [← Finset.sum_add_distrib, ← emptyAt_total, Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro q _
+  rw [corner_loss_eq_remainder]
+  exact Nat.div_add_mod (12 * emptyAt p q) (selDeg p q)
+
+theorem charge_budget_with_loss {m : Nat} (p : Snake m) (hm : 1 ≤ m) :
+    24 * totalSingleton p + (∑ x, selected p x * shareN 12 p x) +
+      840 * (m+1) + totalLoss p ≤ 221136 := by
+  have hs := exact_share_loss p
+  have hi := incidence_bound_with_empty p hm
+  omega
+
+#print axioms empty_count_eq_emptyAt
+#print axioms neighbor_count_eq_selDeg
+#print axioms corner_loss_eq_remainder
+#print axioms exact_share_loss
+#print axioms charge_budget_with_loss
+end Snake9.Integration172
