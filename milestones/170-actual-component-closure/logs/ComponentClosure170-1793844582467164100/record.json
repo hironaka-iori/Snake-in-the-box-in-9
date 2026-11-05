@@ -1,0 +1,167 @@
+{
+  "status": "PASS",
+  "module": "ComponentClosure170",
+  "source": "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\lean\\ComponentClosure170.lean",
+  "source_sha256": "82e71cd5ede72974a1874cba054022620859c5f14e6ec9158aa0f71f926e745b",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\data\\ComponentClosure170-execution.json": "16152f7ed065caf64ad3c524a6d231f58aef8eef8fb3992ddc5d5afb515e05ff",
+    "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\lean\\ComponentClosure170.lean": "82e71cd5ede72974a1874cba054022620859c5f14e6ec9158aa0f71f926e745b",
+    "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\scripts\\check_local.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\local-execution.json": "9106a82fef0b8435042b988fc5bb9fbf82af1e48cc550a783e8ad15a0dbb6f95",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\CubeUndominated168.lean": "714f9f220957dd6d2a593c11d93f51152f121370f69b1c80ef09d4572106094a",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\check_local.py": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\CubeLocal-audit.json": "b6b9d63da8af6938757fb9fc0a3808121e5206a33573f7002a3b5bc96a7984f4",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\Undominated167-audit.json": "52c2756051c52d7002e331abd7de127320d206066bfd30ee8491222a08727b39",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\CubeLocal.olean": "8d2eb83032762ab49ea993e6b0364fcb43db7e2af156fbe4535e111a71417b49",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\Undominated167.olean": "69c02b9eb283f630bb24a896ce78e8080e2b56ba5c6af37a3910227cdcaa71d0",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\CubeUndominated168.olean": "442705855282a1ce923ed7a49e4853daf02f7120a5784eeed530210d552e7b10",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\CubeUndominated168-1793844173759741700\\compiler.log": "da7790f731b747125dfb851868d6d4d00202ffdbaa49faf42da5541387e4c464",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\CubeUndominated168-audit.json": "db1aa199d207443060efed4334eb9f5ebc3a935ddfbc7565ef530750563205e2",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathClosure169.lean": "a22e60f0dc58f7d837e45a7fb9391c31e562d6fc5c5e9bc59819dd2ba818136f",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\PathStructure-audit.json": "c020a9beef6d601a3f74d7ec74598a85d007ed589869b6aabf2353bd7a941182",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\PathStructure.olean": "42aaa5fedff3f9e52df33754711c5dd52bccdc4b776ae45af8f8e075d13ba4bb",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\PathClosure169.olean": "ec38a6c9a491ab92ef2c4e0db9695e86b96c77b07f5909589703ad739c985489",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\PathClosure169-1793844134475588000\\compiler.log": "855a91d55bd57948fc70f1d19a6691bd03c4f0edc0797ca92c1eb11aa296966d",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\PathClosure169-audit.json": "964307e879592b0f04e6e69b14684f644a564424b3b886924333b60ce5027769",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\logs\\ComponentClosure170-1793844582467164100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\lean\\ComponentClosure170.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\logs\\ComponentClosure170-1793844582467164100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1456394240,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 91,
+    "snapshot_seconds": 0.01599999999996271
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1381949440,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 57856,
+          "ParentProcessId": 55712,
+          "PrivatePageCount": 48148480,
+          "WorkingSetSize": 25219072
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 1385287680,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 57856,
+          "ParentProcessId": 55712,
+          "PrivatePageCount": 37273600,
+          "WorkingSetSize": 39383040
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01599999999996271
+    },
+    {
+      "free_bytes": 1381511168,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 57856,
+          "ParentProcessId": 55712,
+          "PrivatePageCount": 40787968,
+          "WorkingSetSize": 41803776
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01599999999996271
+    },
+    {
+      "free_bytes": 1314156544,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 57856,
+          "ParentProcessId": 55712,
+          "PrivatePageCount": 50561024,
+          "WorkingSetSize": 106844160
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.015000000000100044
+    },
+    {
+      "free_bytes": 1183260672,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 57856,
+          "ParentProcessId": 55712,
+          "PrivatePageCount": 132157440,
+          "WorkingSetSize": 267345920
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.0
+    }
+  ],
+  "compiler_pid": 57856,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 5.125,
+  "axioms": [
+    {
+      "theorem": "Snake9.Component170.cross_selected",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.Component170.family_closed",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Component170.all_selected_in_family",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "e363020f8317392ca0a636f32826c39317d0d3f158af3ba4d1cf82b792e5b69a",
+  "object": "E:\\Snake-in-a-box\\milestones\\170-actual-component-closure\\build\\ComponentClosure170.olean",
+  "olean_sha256": "e7bd3076e822930648050c320102221b9a4e07adc394ec78a1aaaa442d6d9eec"
+}

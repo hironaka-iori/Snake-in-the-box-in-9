@@ -774,12 +774,16 @@ Direct checks of distinctness and every pairwise adjacency confirm the
 four constructions. This does not establish attainability of the lower
 bound $e(q)=8$ in the connected case.
 
-The component theorem is a written geometric proof with an independent
-review. Lean has checked the required path degree and endpoint lemmas,
-the coordinate pair-and-triple implications, and the statement that a
-nonempty selected subset closed under adjacency contains the whole path.
-The actual candidate subset, its closure, component classification,
-and final graph and loss counting still require assembly in Lean.
+The component restriction has now been checked in Lean for actual cube
+paths. The checks construct a nonempty family closed under selected
+adjacency, derive the coordinate cuts from missing-pair reachability,
+and identify every edge in the disconnected case with membership in the
+same one of two nonempty classes. Translation handles arbitrary
+undominated centres. The equivalence between a missing pair and its
+empty coordinate square is also checked. The finite edge counts leading
+to $e(q)\ge8$, the exact disconnected-case length count, and the final
+loss inequality still require assembly in Lean. Their written proofs
+and the direct construction checks remain separate evidence.
 No improved unconditional numerical length bound is claimed.
 
 \begin{lemma}[Weighted window packing]\label{lem:share-packing}

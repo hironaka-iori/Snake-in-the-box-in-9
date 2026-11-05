@@ -1,0 +1,238 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\newtheorem{lemma}{Lemma}
+\title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
+\author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
+\date{Research state after round 169: 5 November 2026}
+\begin{document}
+\maketitle
+
+\textbf{Problem and present status.}
+A snake in $Q_9$ is an induced path: two of its vertices are adjacent in
+the cube exactly when they are consecutive on the path. Length counts
+edges. A 191-edge construction is verified by checking that all its vertices
+are distinct and that adjacency holds exactly for consecutive pairs.
+The project records an
+archived contributor proof of the upper bound 235; its complete independent
+rebuild remains pending. The exact maximum is unresolved. The prediction
+196 comes from extrapolating the first eight dimensions, but an alternative
+extrapolation gives 195 while fitting the same data. Neither prediction
+is used below. Construction and repair searches have produced no snake
+longer than 191.
+
+\textbf{1. An exact global budget.}
+Let the snake have $m\ge1$ edges and $v=m+1$ selected vertices, with selected
+set $S$. Let $s_k$ count coordinate squares containing exactly $k$ selected
+vertices, and write $T=s_1$. Choosing two varying coordinates and fixing
+the other seven gives $\binom92 2^7=4608$ squares; choosing the two varying
+coordinates through a fixed vertex gives $\binom92=36$. Four selected
+corners would form a cycle, which an induced path cannot contain. The two
+neighbours of an internal path vertex determine a unique three-selected-corner
+square. Conversely, those three corners have a unique middle vertex.
+This correspondence gives $s_3=v-2$.
+Consequently,
+\[
+\sum_{k=0}^3s_k=4608,\qquad s_1+2s_2+3s_3=36v,
+\qquad \boxed{T+2s_0+35v=9214.}
+\]
+Subtracting twice the square count from the incidence count and using
+$s_3=v-2$ proves the boxed identity. The archived singleton estimate
+$T\ge4m-21$ then gives $39m+2s_0\le9200$. Since $39\cdot236>9200$,
+this excludes $m\ge236$, assuming the archived singleton estimate applies.
+At $m=235$ it forces $2s_0\le35$, hence
+$s_0\le17$. Proving $s_0\ge18$ for that case would therefore exclude it;
+that extra premise remains unresolved.
+
+\textbf{2. Distributing the empty-square contribution.}
+For each cube vertex $q$, let $e(q)$ count empty squares containing it and
+let $d(q)$ count its selected neighbours. Assign to each $x\in S$ the share
+\[
+\sigma_{12}(x)=\sum_{q\sim x}\left\lfloor\frac{12e(q)}{d(q)}\right\rfloor.
+\]
+Each $q$ in this sum has the selected neighbour $x$, so $d(q)>0$.
+Set $r_{12}(q)=12e(q)\bmod d(q)$
+when $d(q)>0$, and $r_{12}(q)=12e(q)$ otherwise. Write
+$L=\sum_qr_{12}(q)$ for the total loss. For fixed $q$, exactly $d(q)$
+selected vertices receive its share. Thus the amount distributed is
+$d(q)\lfloor12e(q)/d(q)\rfloor$, and adding its remainder recovers
+$12e(q)$. At degree zero the remainder accounts for all of that amount.
+Each empty square has four corners, so summing gives
+\[
+\sum_{x\in S}\sigma_{12}(x)+L=12\sum_q e(q)=48s_0.
+\]
+Multiply the square identity by 24 and substitute this equality:
+\begin{equation}\label{eq:budget}
+\boxed{24T+\sum_{x\in S}\sigma_{12}(x)+840(m+1)+L=221136.}
+\end{equation}
+Thus the empty-square contribution and its rounding loss are accounted
+for exactly. A lower bound on the loss can strengthen the final comparison.
+
+\newpage
+\textbf{3. From local restrictions to a length inequality.}
+Local theorems restrict the singleton counts and shares around consecutive
+path segments. For example, on direction pattern $012032$, the second and
+fourth internal singleton counts sum to at least eight; equality forces
+endpoint proximity. The five-centre share is at least sixteen universally,
+and at least seventeen under specified count conditions. Other required
+share floors remain pending. Repeated digits in a pattern denote repeated
+coordinate flips. The local computer-assisted proofs exclude a smaller
+count or share by encoding necessary adjacency, degree and count conditions,
+then checking a contradiction certificate. Their application requires a
+checked interpretation for every fitting snake segment.
+
+Assume $m\ge9$; shorter snakes already satisfy the target bound. Let
+$\alpha_i$ count squares whose only selected vertex is $x_i$, and truncate
+it to $b_i=\min\{6,\alpha_i\}$. A nine-transition window beginning at $r$
+charges $120b_{r+8}$ and a lower bound on the shares at positions
+$r+4,\ldots,r+8$. Let $W$ sum these charges over $r=0,\ldots,m-9$.
+Each count at positions $8,\ldots,m-1$ is charged once, and each share
+belongs to at most five such windows. The established local inequalities
+give at least four at each endpoint, at least four for each of the pairs
+$(1,2),(3,4),(5,6)$, and at least one at position 7. The uncharged counts
+therefore total at least $4+4+3\cdot4+1=21$. Since truncation only decreases
+a count and $120\cdot21=2520$,
+\[
+W+2520\le120T+5\sum_{x\in S}\sigma_{12}(x).
+\]
+Multiply~\eqref{eq:budget} by five and replace its count-and-share term
+by this lower bound. Moving the constant terms uses
+$5\cdot221136-4200-2520=1098960$, giving
+\begin{equation}\label{eq:weighted}
+W+4200m+5L\le1098960.
+\end{equation}
+
+A finite graph records the recent directions, counts and relevant history.
+A valid snake must trace its transitions, and each edge weight must be a
+valid local lower bound. If a potential $p$ satisfies
+$w(u,v)+p(u)-p(v)\ge\mu$ on every traced edge and has range at most $R$,
+then summing along the $m-8$ transitions cancels every intermediate
+potential value. Only $p(\text{first})-p(\text{last})$ remains, and this
+is at most $R$. Hence $\mu(m-8)\le W+R$. Substituting
+$W\ge\mu(m-8)-R$ into~\eqref{eq:weighted} gives
+\begin{equation}\label{eq:comparison}
+\boxed{(4200+\mu)m\le1098960+8\mu+R-5L.}
+\end{equation}
+This version uses no additional occurrence credit. Graph coverage, local
+weight validity and the boundary estimate are essential premises.
+Excluding a graph transition is justified only when no relevant snake can
+use it; an inequality checked on a restricted graph alone cannot supply
+that justification.
+
+\textbf{4. The successful finite comparison.}
+In the current retained graph, weaken the $012034$ share floor from eighteen
+to seventeen and retain the other specified floors and count restrictions.
+Exact integer checks on all 4,661,572 retained edges give
+\[
+9w(u,v)+p(u)-p(v)\ge4462,\qquad 0\le p\le5411.
+\]
+A retained 35-edge walk has unscaled weight 16751. Summing along it gives
+$p(\text{first})-p(\text{last})\ge35\cdot4462-9\cdot16751=5411$.
+Every feasible potential therefore has range at least 5411, matching the
+range of the exhibited potential.
+Thus the exhibited range is minimum at this mean; optimisation over all
+means is not established. In~\eqref{eq:comparison}, take
+\[
+\mu=\frac{4462}{9},\qquad R=\frac{5411}{9}.
+\]
+Multiplying the numerator and denominator of~\eqref{eq:comparison} by
+nine gives $m\le(9931747-45L)/42262$. For $L\ge4$ this becomes
+\[
+\boxed{m\le\frac{9931567}{42262}=235-\frac3{42262}<235,\quad m\le234.}
+\]
+At $L=3$, the comparison is instead $235+42/42262$, so four is the exact
+integer threshold at these parameters: $m$ is an integer, so any upper
+bound strictly below 235 implies $m\le234$. A bound strictly between 235
+and 236 still permits $m=235$. These arithmetic implications are
+Lean-checked. The edge scan is a separate exact-integer computation.
+The positive-loss premise, remaining local floors, reference exclusions,
+retained count restrictions, applicable parity conditions, and complete
+graph-to-snake certificate still have to be discharged. The hypothetical
+235-edge case has odd length; this supplies its parity premise only.
+
+\newpage
+\textbf{5. What loss at most three would require.}
+Every empty square at $q$ uses two unselected neighbour directions, giving
+$e(q)\le\binom{9-d(q)}2$. The degrees $1,2,3,4,6$ divide twelve;
+degree seven permits at most one empty square; degrees eight and nine
+permit none. Hence
+\[
+L=12\sum_{d(q)=0}e(q)
+ +\sum_{d(q)=5}\bigl(2e(q)\bmod5\bigr)
+ +5\sum_{d(q)=7}e(q).
+\]
+At degree five the counts $e=0,\ldots,6$ give residues $0,2,4,1,3,0,2$.
+Thus $L\le3$ forbids positive $e$ at degrees zero and seven, forbids
+$e=2$ at degree five, and allows at most three degree-five corners with
+positive residue: a forbidden corner would contribute at least four,
+and four positive integer residues would already sum to at least four.
+Count five at degree five has zero residue and remains possible. Six finite arithmetic statements supporting these restrictions
+have passed Lean under the stated geometric bound.
+
+\begin{lemma}[Undominated corners]
+For a nontrivial snake, $d(q)=0$ implies $e(q)\ge8$.
+\end{lemma}
+\begin{proof}
+Translate $q$ to zero. Zero and all unit vertices are absent. Form the
+graph $H$ on the nine directions whose edges are the absent pair vertices;
+its edge count is $e(q)$. If $H$ is connected, it has at least eight edges.
+
+If $H$ is disconnected, choose two components $A,B$. Every cross-pair
+$\{a,b\}$ is selected. Its selected neighbours can only be triples formed
+from an edge of $H$ within one component and a direction in the other.
+Every other triple would have three selected pair neighbours. Each
+selected candidate triple already has two selected cross-pair neighbours,
+so it cannot have a selected neighbour outside this family.
+
+The selected part of this family is therefore nonempty and closed under
+adjacency. Since a path is connected, it contains the whole snake.
+A third component, or a nonedge within $A$ or $B$, would give a selected
+pair outside this family. Thus $H$ consists of exactly two complete
+graphs. Their sizes sum to nine, and their combined edge counts are
+28, 22, 18, or 16. These are all at least eight.
+\end{proof}
+An undominated vertex contributes at least $12\cdot8=96$ to the loss.
+Nonnegativity of the other remainders therefore gives
+\[
+\boxed{L\le95\ \Longrightarrow\ d(q)\ge1\text{ for every }q\in Q_9.}
+\]
+In particular, the unresolved $L\le3$ case must dominate the whole cube.
+
+The disconnected case is completely restricted in length: with component
+sizes $a,b$, all $ab$ cross-pairs occur, and selected triples have degree
+two. The alternating path has $ab-1$ triples, hence $m=2ab-2$.
+The only lengths are 14, 26, 34, and 38, and checked constructions attain
+all four. Thus every undominated centre of a longer snake has connected
+$H$. Attainability of $e(q)=8$ in that connected case is unresolved here.
+
+\textbf{6. Exact frontier and verification boundary.}
+The printed 191-edge snake already dominates the cube and has loss 163;
+the 131 saved 191-edge snakes have losses 152--913. Disconnected zero-loss
+examples satisfy selected-degree conditions and two endpoints while
+retaining cycles; other zero-loss examples are acyclic with many endpoints.
+These observations provide no universal loss lower bound. In particular,
+domination alone cannot settle the remaining case: it removes the
+degree-zero contribution to $L$, while the degree-five and degree-seven
+contributions can still vanish. Connectedness and the path structure must
+therefore enter any argument that rules out these zero-loss configurations.
+
+The undominated-corner proof above is a written geometric proof. Lean
+has checked the pair-and-triple implications for actual cube vertices and
+the path-closure principle. The candidate family and its closure, graph
+classification, and final counting still require assembly in Lean.
+A separate pending local share certificate has 33,111 of 145,215 deductions
+checked; its partial replay establishes no final contradiction.
+The next target is to exclude $L\le3$ for dominating snakes of at least
+235 edges, while completing all premises of~\eqref{eq:comparison}.
+No improved unconditional numerical bound is claimed.
+
+\smallskip
+{\small Full arguments and evidence are in the companion manuscript
+\texttt{snake9\_research.tex} and research records 163--169.}
+\end{document}

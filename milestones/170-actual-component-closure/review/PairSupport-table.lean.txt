@@ -1,0 +1,51 @@
+import CubeLocal
+
+set_option maxRecDepth 100000
+set_option maxHeartbeats 2000000
+
+namespace Snake9.PairSupport170
+
+-- A three-coordinate certificate, rather than a four-coordinate equality table.
+private theorem pair_bit_support : ∀ a b k : Coord, a ≠ b →
+    ((pair a b).val.testBit k.val = true ↔ k = a ∨ k = b) := by decide
+
+theorem pair_support_unique (a b c d : Coord)
+    (hab : a ≠ b) (hcd : c ≠ d) (he : pair a b = pair c d) :
+    (a = c ∧ b = d) ∨ (a = d ∧ b = c) := by
+  have hbit : (pair a b).val.testBit a.val = true :=
+    (pair_bit_support a b a hab).mpr (Or.inl rfl)
+  have hcbit : (pair c d).val.testBit a.val = true := by
+    rw [← he]
+    exact hbit
+  rcases (pair_bit_support c d a hcd).mp hcbit with hac | had
+  · subst c
+    exact Or.inl ⟨rfl, pair_injective_right a b d he⟩
+  · subst d
+    have he' : pair a b = pair a c := he.trans (pair_comm c a)
+    exact Or.inr ⟨rfl, pair_injective_right a b c he'⟩
+
+-- Parity is used only as an internal invariant. The finite certificates have
+-- 81 and 729 coordinate tuples; neither enumerates four coordinates.
+private def bitParity (v : Vertex) : Bool :=
+  (List.range 9).foldl (fun parity k => parity != v.val.testBit k) false
+
+private theorem pair_parity : ∀ a b : Coord, bitParity (pair a b) = false := by
+  decide
+
+private theorem triple_parity : ∀ a b k : Coord,
+    bitParity (triple a b k) = true := by
+  decide
+
+theorem pair_not_adjacent (a b c d : Coord) : ¬ Adj (pair a b) (pair c d) := by
+  intro hadj
+  obtain ⟨k, he⟩ := neighbor_pair a b hadj
+  have hp := pair_parity c d
+  have ht := triple_parity a b k
+  rw [he] at hp
+  rw [ht] at hp
+  cases hp
+
+#print axioms pair_support_unique
+#print axioms pair_not_adjacent
+
+end Snake9.PairSupport170
