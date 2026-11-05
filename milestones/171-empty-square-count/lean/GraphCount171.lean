@@ -1,0 +1,29 @@
+import CountAxes171
+import Mathlib.Combinatorics.SimpleGraph.Acyclic
+
+namespace Snake9.Count171
+
+def missingGraph {m : Nat} (p : Snake m) : SimpleGraph Coord where
+  Adj := Component170.MissingEdge p
+  symm := fun _ _ h => Component170.missing_edge_symm p h
+  loopless := fun a h => h.1 rfl
+
+theorem missing_reach_graph_reachable {m : Nat} (p : Snake m) {a b : Coord}
+    (h : Component170.MissingReach p a b) : (missingGraph p).Reachable a b := by
+  induction h with
+  | refl => exact SimpleGraph.Reachable.refl _
+  | step h he ih => exact ih.trans (SimpleGraph.Adj.reachable he)
+
+theorem connected_missing_graph_edge_bound {m : Nat} (p : Snake m)
+    (h : ∀ a b, Component170.MissingReach p a b) :
+    8 ≤ Nat.card (missingGraph p).edgeSet := by
+  have hc : (missingGraph p).Connected :=
+    { preconnected := fun a b => missing_reach_graph_reachable p (h a b) }
+  have hcard := hc.card_vert_le_card_edgeSet_add_one
+  have hn : Nat.card Coord = 9 := by simp [Coord]
+  rw [hn] at hcard
+  omega
+
+#print axioms missing_reach_graph_reachable
+#print axioms connected_missing_graph_edge_bound
+end Snake9.Count171

@@ -1,0 +1,53 @@
+import EmptySquareBridge170
+
+namespace Snake9.Count171
+
+def axes : List (Coord × Coord) :=
+  ((List.finRange 9).flatMap fun a => (List.finRange 9).map fun b => (a,b)).filter
+    (fun ab => ab.1.val < ab.2.val)
+
+theorem axes_length : axes.length = 36 := by decide
+
+theorem axes_nodup : axes.Nodup := by decide
+
+theorem mem_axes (ab : Coord × Coord) : ab ∈ axes ↔ ab.1.val < ab.2.val := by
+  have hmem : ∀ a : Coord, a ∈ List.finRange 9 := by decide
+  simp [axes, hmem]
+
+noncomputable def missingPairCount {m : Nat} (p : Snake m) : Nat := by
+  classical
+  exact axes.countP (fun ab => decide (Component170.MissingEdge p ab.1 ab.2))
+
+noncomputable def emptySquareCount {m : Nat} (p : Snake m) (q : Vertex) : Nat := by
+  classical
+  exact axes.countP (fun ab => decide
+    (¬ InPath p q ∧ ¬ InPath p (vxor q (unit ab.1)) ∧
+     ¬ InPath p (vxor q (unit ab.2)) ∧ ¬ InPath p (vxor q (pair ab.1 ab.2))))
+
+theorem empty_count_eq_missing_count {m : Nat} (p : Snake m) (hm : 1 ≤ m)
+    (q : Vertex) (hq : ∀ v, InPath p v → ¬ Adj q v) :
+    emptySquareCount p q = missingPairCount (translate p q) := by
+  classical
+  unfold emptySquareCount missingPairCount
+  apply List.countP_congr
+  intro ab hab
+  have hlt := (mem_axes ab).mp hab
+  have hne : ab.1 ≠ ab.2 := by intro he; rw [he] at hlt; omega
+  simpa only [decide_eq_true_eq] using
+    Component170.empty_square_missing_edge_iff p hm q hq ab.1 ab.2 hne
+
+theorem empty_count_le_36 {m : Nat} (p : Snake m) (q : Vertex) :
+    emptySquareCount p q ≤ 36 := by
+  classical
+  unfold emptySquareCount
+  have h := List.countP_le_length (l := axes)
+    (p := fun ab => decide (¬ InPath p q ∧ ¬ InPath p (vxor q (unit ab.1)) ∧
+      ¬ InPath p (vxor q (unit ab.2)) ∧ ¬ InPath p (vxor q (pair ab.1 ab.2))))
+  simpa only [axes_length] using h
+
+#print axioms axes_length
+#print axioms axes_nodup
+#print axioms mem_axes
+#print axioms empty_count_eq_missing_count
+#print axioms empty_count_le_36
+end Snake9.Count171

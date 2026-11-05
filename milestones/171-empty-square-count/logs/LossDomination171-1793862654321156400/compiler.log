@@ -1,0 +1,14 @@
+E:\Snake-in-a-box\milestones\171-empty-square-count\lean\LossDomination171.lean:30:8: error: unknown constant 'Finset.single_le_sum'
+E:\Snake-in-a-box\milestones\171-empty-square-count\lean\LossDomination171.lean:38:4: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  0 ≤ c ≤ 95
+  b ≥ 8
+  a ≥ 1
+where
+ a := ↑m
+ b := ↑(emptySquareCount p q)
+ c := ↑(if True then 12 * emptySquareCount p q else 12 * emptySquareCount p q % 0)
+'Snake9.Count171.undominated_neighbor_count_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.Count171.corner_loss_le_total' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.Count171.undominated_total_loss_ge_96' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Snake9.Count171.small_loss_dominates' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

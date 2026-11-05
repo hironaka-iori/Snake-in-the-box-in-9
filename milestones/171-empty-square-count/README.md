@@ -1,0 +1,11 @@
+# Round171: eight empty squares and small-loss domination checked end to end
+
+Goal active. Six new Lean modules pass with16 printed theorem axiom reports. The chain includes the36 distinct sorted coordinate pairs, equality of the physical empty-square count with the actual graph edge count, the lower bound8, the explicit total remainder sum, and L<=95 implies every cube vertex has a selected neighbor. A final bijection identifies the coordinate-neighbor count with the count of actual selected cube vertices. This resolves the geometry and numerical local bound from169–170.
+
+The connected branch uses Mathlib's connected-graph edge bound. The disconnected branch embeds a complete graph on at least5 vertices, giving at least10 edges, which suffices for8. No assumption asserts the desired bound. Exact disconnected-case lengths14,26,34,38 remain a written result with native-checked constructions; their cardinal proof is not part of the accepted Lean chain.
+
+Representation boundary: new counts are explicit physical cube counts and the remainder formula from the paper. An explicit equality with the older SquareIncidence/ShareCharge global-budget implementation is still needed for one combined Lean derivation. This result alone does not establish L>=4 in the dominating235-edge case and supplies no new numerical upper bound.
+
+Runtime: the missing Mathlib Acyclic artifact and18 missing dependency cache files were retrieved from the matching local Lean/mathlib cache setup. The legacy Mathlib.Tactic object hash stayed e47e8c8e7322c616b383f316a18c708f8ea108830f36609aaa2689fb652391f6. Core counting uses the unchanged1GiB/256MiB/60sec profile. Mathlib modules use the unchanged2GiB startup,768MiB reserve,3GiB private,180sec profile. No compiler remains running at completion. No proof placeholders, native_decide or new axioms occur in accepted sources; reports use only standard propext/Classical.choice/Quot.sound or none.
+
+Next: identify the new physical counts and remainder sum with the earlier global share-budget representation, without mixing incompatible CubeLocal dependency builds. Then return to the unresolved dominating small-loss cases and remaining local share certificates. The exact disconnected length count is a separate pending verification. Full manuscript revision remains scheduled for176.

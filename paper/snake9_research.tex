@@ -774,16 +774,19 @@ Direct checks of distinctness and every pairwise adjacency confirm the
 four constructions. This does not establish attainability of the lower
 bound $e(q)=8$ in the connected case.
 
-The component restriction has now been checked in Lean for actual cube
-paths. The checks construct a nonempty family closed under selected
-adjacency, derive the coordinate cuts from missing-pair reachability,
-and identify every edge in the disconnected case with membership in the
-same one of two nonempty classes. Translation handles arbitrary
-undominated centres. The equivalence between a missing pair and its
-empty coordinate square is also checked. The finite edge counts leading
-to $e(q)\ge8$, the exact disconnected-case length count, and the final
-loss inequality still require assembly in Lean. Their written proofs
-and the direct construction checks remain separate evidence.
+The component restriction, the local bound $e(q)\ge8$, and the implication
+$L\le95$ to domination have now been checked in Lean for nontrivial actual
+cube paths. The counting proof enumerates the 36 distinct unordered
+coordinate pairs, identifies missing pairs with physical empty squares,
+and proves equality with the graph edge count. It also verifies that the
+neighbour-direction count equals the count of selected neighbouring cube
+vertices. In the disconnected branch, the checked lower bound uses the
+simpler observation that one complete component has at least five vertices
+and hence at least ten edges. The exact disconnected-case length count
+remains a written deduction supported by the checked constructions.
+The new remainder-sum representation still needs an explicit identification
+with the earlier implementation of the global share budget before these
+certificates are combined in a single Lean derivation.
 No improved unconditional numerical length bound is claimed.
 
 \begin{lemma}[Weighted window packing]\label{lem:share-packing}
