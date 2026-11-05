@@ -1,0 +1,68 @@
+{
+  "status": "THREE_REQUESTED_ROUNDS_ENDED_WITH_EXPLICIT_PENDING_INTEGRATION",
+  "accepted_modules": {
+    "SmallLossCore174-audit.json": {
+      "sha256": "100c839a451bf4b65af03458b0c2cbea8aa172720d77fdbfd1397ad667c589a0",
+      "axiom_reports": 4,
+      "axioms": [
+        {
+          "theorem": "Snake9.SmallLossArithmetic174.positive_count_le_sum",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.SmallLossArithmetic174.small_loss_support",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.SmallLossArithmetic174.degree_five_excludes_residue_two",
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "Snake9.SmallLossArithmetic174.zero_loss_divisibility",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ]
+    },
+    "LossShapes174-audit.json": {
+      "sha256": "ce0fc11fdc0caf0a172ca6a7134d3f9cac52dfaf38a40c151303fd37c793fdbe",
+      "axiom_reports": 1,
+      "axioms": [
+        {
+          "theorem": "Snake9.SmallLossArithmetic174.positive_loss_shapes",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ]
+    }
+  },
+  "actual_snake_wrapper_checked": false,
+  "goal_pause_requested": true,
+  "resource_snapshot": {
+    "free_bytes": 2191929344,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 86,
+    "snapshot_seconds": 0.016000000000076398
+  },
+  "completed_rounds": [
+    172,
+    173,
+    174
+  ]
+}

@@ -1,0 +1,15 @@
+E:\Snake-in-a-box\milestones\174-small-loss-support-and-pause\lean\SmallLossCore174.lean:15:6: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  c ≥ 0
+  b ≥ 0
+  a ≥ 0
+  a - b ≥ 0
+  a - b - c ≤ -1
+where
+ a := ↑l.sum
+ b := ↑(List.countP (fun n => decide (0 < n)) l)
+ c := ↑(if false = true then 1 else 0)
+'Snake9.SmallLossArithmetic174.positive_count_le_sum' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.SmallLossArithmetic174.small_loss_support' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.SmallLossArithmetic174.degree_five_excludes_residue_two' depends on axioms: [propext, Quot.sound]
+'Snake9.SmallLossArithmetic174.zero_loss_divisibility' depends on axioms: [propext]

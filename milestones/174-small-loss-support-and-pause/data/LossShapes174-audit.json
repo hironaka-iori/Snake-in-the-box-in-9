@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "module": "LossShapes174",
+  "source": "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\lean\\LossShapes174.lean",
+  "source_sha256": "8f18e920a551c478ec5b9df208a5bcf270ad4a66f924357f874c4be4f797af27",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\data\\LossShapes174-execution.json": "a8b34306c632e7f92d399ed73be2ef790806d9f239de3aba030b263fc6106e31",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\lean\\LossShapes174.lean": "8f18e920a551c478ec5b9df208a5bcf270ad4a66f924357f874c4be4f797af27",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\logs\\LossShapes174-1793877920376117200\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\lean\\LossShapes174.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\logs\\LossShapes174-1793877920376117200\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1704235008,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.014999999999986358
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1692278784,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 1768,
+          "ParentProcessId": 45324,
+          "PrivatePageCount": 48095232,
+          "WorkingSetSize": 25014272
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.01599999999996271
+    }
+  ],
+  "compiler_pid": 1768,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.0620000000000118,
+  "axioms": [
+    {
+      "theorem": "Snake9.SmallLossArithmetic174.positive_loss_shapes",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "5105257ed0ce4c946216f7c15661bec7b6c00f81f877c5b426c9715e40d7cd82",
+  "object": "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\build\\LossShapes174.olean",
+  "olean_sha256": "d0d534af5c13a46c95c3d469592cc8dcec8d709496a6eee8e752f77d205c3c11"
+}

@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 171: 5 November 2026}
+\date{Research state after round 174: 5 November 2026}
 \begin{document}
 \maketitle
 
@@ -230,11 +230,24 @@ The exact disconnected-case length count remains a written deduction;
 identification with the earlier global-budget implementation is pending.
 A separate pending local share certificate has 33,111 of 145,215 deductions
 checked; its partial replay establishes no final contradiction.
-The next target is to exclude $L\le3$ for dominating snakes of at least
-235 edges, while completing all premises of~\eqref{eq:comparison}.
+The exact integer reduction now passed Lean: the stated packing, budget,
+and potential inequalities force $m=235$ and $L\le3$ whenever $m\ge235$.
+Indeed they give $42262m+45L\le9931747$, leaving only 177 for $45L$
+at $m=235$. All these graph and budget premises must still apply to the
+same actual snake; the integration proof is drafted but unexecuted.
+
+For $L\le3$, at most three corners can have positive remainder. Up to
+order, their positive losses are $()$, $(1)$, $(2)$, $(3)$, $(1,1)$,
+$(1,2)$, or $(1,1,1)$. Every other corner satisfies $d(q)\mid12e(q)$.
+A degree-five corner cannot have $e(q)\equiv2\pmod5$, since that gives
+remainder four. These finite-list and modular implications passed Lean;
+the actual-snake wrapper remains pending with the budget integration.
+The next target is to rule out these possibilities in a dominating
+235-edge snake, while completing the remaining window premises.
+Research pauses after round 174 as requested.
 No improved unconditional numerical bound is claimed.
 
 \smallskip
 {\small Full arguments and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 163--171.}
+\texttt{snake9\_research.tex} and research records 163--174.}
 \end{document}

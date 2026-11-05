@@ -1,0 +1,91 @@
+{
+  "status": "FAILED",
+  "module": "SmallLossCore174",
+  "source": "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\lean\\SmallLossCore174.lean",
+  "source_sha256": "2169d7ad79346b295b630a500a293b4b1e3c0f53244a7daac49a5aacfd996160",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\data\\SmallLossCore174-execution.json": "e7aaa4d5e6b89d15a370f145f8fe14944f3a7784d690093a5b5d0d76955b53e1",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\lean\\SmallLossCore174.lean": "2169d7ad79346b295b630a500a293b4b1e3c0f53244a7daac49a5aacfd996160",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\logs\\SmallLossCore174-1793877746497569300\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\lean\\SmallLossCore174.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\174-small-loss-support-and-pause\\logs\\SmallLossCore174-1793877746497569300\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1923047424,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 88,
+    "snapshot_seconds": 0.014999999999986358
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1908367360,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 37832,
+          "ParentProcessId": 48508,
+          "PrivatePageCount": 48107520,
+          "WorkingSetSize": 25300992
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.014999999999986358
+    }
+  ],
+  "compiler_pid": 37832,
+  "exit_code": 1,
+  "stop_reason": null,
+  "seconds": 1.0939999999999372,
+  "axioms": [
+    {
+      "theorem": "Snake9.SmallLossArithmetic174.positive_count_le_sum",
+      "axioms": [
+        "propext",
+        "sorryAx",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.SmallLossArithmetic174.small_loss_support",
+      "axioms": [
+        "propext",
+        "sorryAx",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.SmallLossArithmetic174.degree_five_excludes_residue_two",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.SmallLossArithmetic174.zero_loss_divisibility",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "log_sha256": "8021fb6426dd876f0a63b601db3b56cd5681c409ca3c9403ae4a83a9f38d8c40"
+}
