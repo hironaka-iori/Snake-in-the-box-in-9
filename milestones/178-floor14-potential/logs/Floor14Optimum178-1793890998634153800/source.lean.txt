@@ -1,0 +1,62 @@
+import Std
+namespace Floor14Optimum178
+
+theorem fixed_comparison (m W G L : Nat) (hm : 8≤m)
+    (hb : G+840*(m+1)+L≤221136) (hp : W+2880≤5*G)
+    (hw : 4448*(m-8)≤9*W+5346) :
+    42248*m+45*L≤9928330 := by omega
+
+theorem uniform_comparison (m W G L : Nat) (hm : 8≤m)
+    (hb : G+840*(m+1)+L≤221136) (hp : W+2880≤5*G)
+    (hw : 4448*(m-8)≤9*W+5380) :
+    42248*m+45*L≤9928364 := by omega
+
+theorem uniform_upper234 (m W G L : Nat) (hm : 8≤m)
+    (hb : G+840*(m+1)+L≤221136) (hp : W+2880≤5*G)
+    (hw : 4448*(m-8)≤9*W+5380) (hl : 2≤L) : m≤234 := by
+  have := uniform_comparison m W G L hm hb hp hw
+  omega
+
+theorem critical_zero_or_one (m W G L : Nat) (hm : 235≤m)
+    (hb : G+840*(m+1)+L≤221136) (hp : W+2880≤5*G)
+    (hw : 4448*(m-8)≤9*W+5380) : m=235 ∧ (L=0 ∨ L=1) := by
+  have := uniform_comparison m W G L (by omega) hb hp hw
+  omega
+
+theorem fixed_loss_one_optimum (p d R : Nat)
+    (hc : 9*p≤4448*d) (hw : 9*p≤3854*d+R) :
+    9928285*(4200*d+p)≤42248*(1098595*d+8*p+R) := by omega
+
+theorem uniform_loss_one_optimum (p d R : Nat)
+    (hc : 9*p≤4448*d) (hw : 8*p≤3356*d+R) :
+    9928319*(4200*d+p)≤42248*(1098595*d+8*p+R) := by omega
+
+theorem fixed_loss_one_obstruction (p d R : Nat)
+    (hc : 9*p≤4448*d) (hw : 9*p≤3854*d+R) :
+    9*(227*p)+5*d≤9*(111595*d+R) := by omega
+
+theorem uniform_loss_one_obstruction (p d R : Nat)
+    (hc : 9*p≤4448*d) (hw : 8*p≤3356*d+R) :
+    9*(227*p)+39*d≤9*(111595*d+R) := by omega
+
+theorem fixed_equality_parameters (p d R : Nat)
+    (hc : 9*p≤4448*d) (hw : 9*p≤3854*d+R)
+    (he : 9928285*(4200*d+p)=42248*(1098595*d+8*p+R)) :
+    9*p=4448*d ∧ 9*R=5346*d := by omega
+
+theorem uniform_equality_parameters (p d R : Nat)
+    (hc : 9*p≤4448*d) (hw : 8*p≤3356*d+R)
+    (he : 9928319*(4200*d+p)=42248*(1098595*d+8*p+R)) :
+    9*p=4448*d ∧ 9*R=5380*d := by omega
+
+#print axioms fixed_comparison
+#print axioms uniform_comparison
+#print axioms uniform_upper234
+#print axioms critical_zero_or_one
+#print axioms fixed_loss_one_optimum
+#print axioms uniform_loss_one_optimum
+#print axioms fixed_loss_one_obstruction
+#print axioms uniform_loss_one_obstruction
+#print axioms fixed_equality_parameters
+#print axioms uniform_equality_parameters
+end Floor14Optimum178

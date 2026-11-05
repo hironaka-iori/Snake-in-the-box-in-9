@@ -1,0 +1,83 @@
+{
+  "round": 178,
+  "status": "COMPLETE_CONDITIONAL_OPTIMIZATION",
+  "finished_utc": "2026-11-05T15:11:40.703958+00:00",
+  "requested_research_started_utc": "2026-11-05T14:57:06+00:00",
+  "new_unconditional_bound": false,
+  "maintained_project_interval": [
+    191,
+    235
+  ],
+  "upper235_full_independent_rebuild": "pending",
+  "profiles": [
+    {
+      "profile": "fixed14",
+      "receipt_sha256": "8481d3c802767c9054d5e7108f254155f218f68e88abcdc3d9732a2d4698e11a",
+      "scaled_mean": 4448,
+      "scaled_range": 5346,
+      "sufficient_integer_loss": 2
+    },
+    {
+      "profile": "joint14-opt",
+      "receipt_sha256": "3bb526f24360d70b50dd1b96118eeb7789211941ef84838ceb976cbdac75b12d",
+      "scaled_mean": 4448,
+      "scaled_range": 5380,
+      "sufficient_integer_loss": 2
+    }
+  ],
+  "lean_modules": [
+    {
+      "module": "Floor14Optimum178",
+      "receipt_sha256": "a2fb708dcfd8f7ee8c622fcfb892c2c6b7036caf017b0e97e6583a614c867830",
+      "reports": 4
+    },
+    {
+      "module": "Floor14Obstruction178",
+      "receipt_sha256": "d0f1a65932508e11359c34ecbb0e69bc1a117694f1bddd9a5142eb2e301b2a9d",
+      "reports": 4
+    },
+    {
+      "module": "LossOneSignature178",
+      "receipt_sha256": "8041423936f134566810d66443ee7cd99bc0d16982e1f20b4cfa6adc64240f29",
+      "reports": 1
+    },
+    {
+      "module": "ActualFloor14Case178",
+      "receipt_sha256": "c6c5b9dd8701f837225e808d1d2861f17ee0f6e7e3bcd7319c94e201c6513c46",
+      "reports": 2
+    },
+    {
+      "module": "ScalarFeasibility178",
+      "receipt_sha256": "f5e51696ca7980a51b7c3bb2d4fdbc70ac733c05a5daab0e8866324c4b1e19d7",
+      "reports": 1
+    }
+  ],
+  "theorem_dependency_reports": 12,
+  "dependency_files_rechecked": 450,
+  "actual_snake_implication": "PASS_UNDER_EXPLICIT_LOCAL_WINDOW_AND_POTENTIAL_PREMISES",
+  "scalar_integer_witness": {
+    "m": 235,
+    "L": 1,
+    "G": 22895,
+    "W": 111595
+  },
+  "remaining_case": "m=235 and L in {0,1}; dominating, at most one positive remainder",
+  "loss_one_signature": {
+    "selected_neighbours": 5,
+    "empty_incident_squares": 3,
+    "geometric_pair_bound": "written direct counting; finite arithmetic checked"
+  },
+  "next_local_target": "Prove universal floor14, and stronger floor15 for low loss; rational share16 is a proposed sufficient target, unproved.",
+  "remaining_graph_premises": "Inherited count restrictions, reference exclusions, graph-to-snake coverage, complete Lean edge certificate.",
+  "share18_replay": [
+    33111,
+    145215
+  ],
+  "documents": {
+    "paper\\snake9_research.tex": "058fd03e22b683a440fa82f4123413bdadeef42ba42d77b363e12358839eda0c",
+    "paper\\snake9_frontier_explanation.tex": "db499696e6a6ff79d821cf641b1516f6874cae9b0ec98b31666e9f9a91865cd6"
+  },
+  "pause_requested": true,
+  "next_manuscript_wide_review": 186,
+  "scope": "Finite graph optimum and conditional actual-snake reduction; not a solution of the Q9 optimum."
+}

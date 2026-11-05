@@ -3536,63 +3536,111 @@ exposed the decisive nine-edge cycle and led to the corrected floor-fifteen
 mean. No solver failure is used as an impossibility proof~\cite{boundary176archive}.
 
 
-\subsection{Trading a weaker share floor against positive loss}
+\subsection{Floor fourteen and the exact loss threshold}
 \label{sec:floor14-loss}
-The preceding least-floor statement assumes only $L\ge0$. Positive loss
-permits a weaker local requirement without recomputing the potential.
-If every pending floor decreases by one, each edge weight decreases by
-at most one. Indeed, the weight is the maximum of a fixed source bound
-and a count term plus the maximum of the share floor and a fixed
-count-conditioned bound, followed by an unchanged additional credit.
-Each maximum preserves the one-unit bound. Thus the same potential
-satisfies an edge inequality whose scaled mean is nine smaller.
+The least-floor statement in Proposition~\ref{prop:floor15-optimum}
+uses only $L\ge0$. Positive loss permits weaker local shares.
+Keep the same retained graph, count restrictions, completed floors,
+count-conditioned increment and interpretation premises. Exact potentials
+now give the following two profiles; the entries refer to
+$012034,012301,012340,012345$, respectively:
+\[
+\begin{array}{c|c|c|c}
+\text{pending floors}&9\mu&9R&\text{resulting inequality}\\\hline
+(14,16,16,16)&4448&5346&42248m+45L\le9928330\\
+(14,14,14,14)&4448&5380&42248m+45L\le9928364
+\end{array}
+\]
+Every potential inequality was checked on all 4661572 retained edges.
+These improve the preceding reused-potential sufficient loss thresholds
+of seventeen and twenty-three to two for both profiles.
 
-\begin{proposition}[Sufficient loss for floor fourteen]
-Retain the graph, count restrictions, completed floors and interpretation
-premises of Section~\ref{sec:boundary-retuning}. Then either of the
-following sets of additional premises implies $m\le234$:
-\begin{enumerate}
-\item the four pending local share floors are at least fourteen and $L\ge23$;
-\item the $012034$ floor is at least fourteen, the other three pending
-floors are at least sixteen, and $L\ge17$.
-\end{enumerate}
+\begin{proposition}[Floor fourteen with loss at least two]
+Under the retained local and graph premises, uniform pending floor
+fourteen and $L\ge2$ imply $m\le234$. A hypothetical path with
+$m\ge235$ satisfying these premises has $m=235$ and $L\in\{0,1\}$.
 \end{proposition}
 \begin{proof}
-For the first case, reuse the potential for $(15,15,15,15)$. Its scaled
-mean becomes 4444 and its scaled range remains 5384. Summing along
-$m-8$ transitions gives $4444(m-8)\le9W+5384$. Combining this with
-$W+4200m+5L\le1098600$ yields
+The uniform potential gives $4448(m-8)\le9W+5380$.
+Combine it with $W+4200m+5L\le1098600$ to obtain the second
+inequality in the table. At $m=235$ it requires $45L\le84$,
+so $L\le1$. At $m\ge236$ the inequality is impossible even when
+$L=0$. With $L\ge2$, the length comparison is
 \[
-42244m+45L\le9928336.
+m\le235-\frac6{42248}<235.
 \]
-At $m=235$, this requires $45L\le996$, hence $L\le22$.
-For the second case, reuse the potential for $(15,16,16,16)$, with
-scaled mean 4445 and scaled range 5374. The same calculation gives
-\[
-42245m+45L\le9928334.
-\]
-At $m=235$ it requires $45L\le759$, hence $L\le16$.
-Larger lengths only strengthen both contradictions.
+The first profile similarly requires $45L\le50$ at length 235 and
+gives $m\le235-40/42248$ when $L\ge2$.
 \end{proof}
 
-The weight transfer and both arithmetic deductions pass Lean. They use
-the previously scanned finite potentials; no new edge scan or complete
-Lean graph certificate is asserted. The loss thresholds 23 and 17 are
-exact for these reused comparisons, but their optimality over other
-potentials is unresolved. At scaled mean 4448, an improved floor-fourteen
-potential, keeping the other three pending floors at sixteen, with scaled range $R_{\mathrm{sc}}$ would suffice whenever
-$R_{\mathrm{sc}}+1\le5296+45L$. In particular, range at most 5340
-would suffice with $L\ge1$. The saved walk forces range at least 5310
-at that mean; it does not establish the existence of such a potential.
-A fresh computation was prevented from starting by the established
-memory threshold, so this possibility remains open.
+\begin{proposition}[Optimality of the sufficient integer loss]
+In either fixed profile above, using boundary twenty-four, zero
+occurrence credit and a scalar lower bound on $L$, two is the least
+sufficient nonnegative integer loss threshold obtainable by varying
+the nonnegative rational potential mean and range.
+\end{proposition}
+\begin{proof}
+A common retained nine-edge cycle has weight 4448, so $9\mu\le4448$.
+For $(14,16,16,16)$ a retained nine-edge walk has weight 3854;
+for the uniform profile an eight-edge walk has weight 3356.
+They force $R\ge9\mu-3854$ and $R\ge8\mu-3356$, respectively.
+With $L=1$, the comparison is
+\[
+\frac{1098595+8\mu+R}{4200+\mu}.
+\]
+Substituting the respective walk bound gives
+$(1094741+17\mu)/(4200+\mu)$ or
+$(1095239+16\mu)/(4200+\mu)$. Each expression decreases for
+$\mu\ge0$. The cycle bound therefore gives the respective minima
+\[
+235+\frac5{42248},\qquad 235+\frac{39}{42248}.
+\]
+Both exceed 235. The displayed potentials attain the mean and range
+bounds, and loss two suffices by the preceding proposition. Loss zero
+cannot improve the comparison. This proves the stated optimality.
+\end{proof}
 
-This gives a precise case reduction for the uniform-floor route. If
-floor fourteen and the retained graph premises can be proved universally,
-the stronger floor fifteen is needed only for hypothetical 235-edge
-snakes with $L\le22$. Every such snake dominates the cube, since an
-undominated vertex contributes at least 96 to $L$. No claim that the
-remaining low-loss case is impossible follows from this reduction.
+The scalar constraints themselves also admit integer values
+$m=235$, $L=1$, $G=22895$ and $W=111595$: the global budget and packing
+inequality are equalities, and both potential inequalities hold.
+This arithmetic witness passes Lean. It is not a snake construction;
+it shows that integer rounding of these aggregate constraints alone
+cannot remove the remaining case.
+
+The cycle and walk weights were reconstructed separately from the original
+source rows. Lean checks the comparison, critical-case reduction and
+common-denominator optimality inequalities. A combined actual-snake proof
+also checks the length, loss, domination and support conclusions under
+explicit window and potential premises. The finite potential scans
+and the universal graph-to-snake interpretation remain different proof
+obligations; the latter is still incomplete. No new unconditional length
+bound follows from this optimization.
+
+The remaining geometric cases have a precise local description.
+Since $L\le1<96$, every cube vertex has a selected neighbour. If $L=0$,
+all corner remainders vanish. If $L=1$, exactly one corner has remainder
+one and all others have remainder zero. Every empty square at a corner
+uses two of its $9-d$ unselected neighbours, so
+$e\le\binom{9-d}{2}$. Under $1\le d\le9$ and $0\le e\le36$,
+this bound and $12e\bmod d=1$ force $d=5$ and $e=3$.
+The finite arithmetic classification passes Lean; the geometric
+count bound is the direct pair-counting argument just given.
+This identifies the possible exceptional corner, without excluding it.
+
+A useful next local target is to exploit this restricted rounding loss.
+For a set $C$ of selected window centres, let $k(q)$ count its neighbours
+in $C$. Double counting the rational shares gives
+\[
+\sum_{x\in C}\sigma_{12}(x)
+=\sum_{q:d(q)>0}\frac{12e(q)k(q)}{d(q)}
+-\sum_{q:d(q)>0}\frac{r(q)k(q)}{d(q)},
+\qquad
+0\le\sum_{q:d(q)>0}\frac{r(q)k(q)}{d(q)}\le L,
+\]
+because $0\le k(q)\le d(q)$. Thus a rational-share lower bound of
+sixteen would imply integer share at least fifteen when $L\le1$.
+Establishing that rational lower bound on the required windows is a
+proposed continuation, not a result of the present computation.
 
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 The maintained interval is $191\le a(9)\le235$, with the contributor-proof

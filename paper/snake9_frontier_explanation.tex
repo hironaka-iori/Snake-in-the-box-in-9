@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 177: 5 November 2026}
+\date{Research state after round 178: 6 November 2026}
 \begin{document}
 \maketitle
 
@@ -147,30 +147,45 @@ that the true local share minimum is fifteen, or that a different graph,
 boundary argument or positive-loss estimate cannot improve the result.
 
 
-\textbf{5. A weaker floor when the loss is positive.}
-Lowering each pending floor by one decreases any edge weight by at most
-one: all other terms stay fixed, and taking a maximum preserves this
-bound. Therefore the saved potential still works after its scaled mean
-decreases by nine. Reusing the two potentials above gives
+\textbf{5. Floor fourteen and the two remaining loss cases.}
+New potentials improve the earlier sufficient loss thresholds. Under
+the same retained graph and count premises, they give
 \[
-\begin{array}{c|c|c}
-\text{floors}&\text{resulting inequality}&\text{sufficient loss}\\\hline
-(14,14,14,14)&42244m+45L\le9928336&L\ge23\\
-(14,16,16,16)&42245m+45L\le9928334&L\ge17
+\begin{array}{c|c|c|c}
+\text{floors}&9\mu&9R&\text{inequality}\\\hline
+(14,16,16,16)&4448&5346&42248m+45L\le9928330\\
+(14,14,14,14)&4448&5380&42248m+45L\le9928364
 \end{array}
 \]
-At $m=235$, the first inequality forces $L\le22$, and the second forces
-$L\le16$. This proves both sufficient thresholds. The transfer and
-arithmetic pass Lean; all local and graph premises remain explicit.
-These thresholds are sufficient and have not been optimized over new
-potentials. A fresh optimization did not start because insufficient
-memory was available. At scaled mean 4448, range at most 5340 would
-make $L\ge1$ sufficient, but such a potential has not been obtained.
+Every inequality on the 4,661,572 retained graph edges passed an exact
+integer scan. At $m=235$, even the weaker second row forces
+$45L\le84$, hence $L\le1$. Thus uniform floor fourteen and $L\ge2$
+suffice for the conditional upper bound 234. The remaining hypothetical
+case has exactly 235 edges and $L=0$ or $L=1$.
 
-Consequently, if the four floor-fourteen bounds and graph premises are
-established, the stronger floor-fifteen argument need only address
-$L\le22$. Those snakes dominate the cube by the existing 96-loss
-bound for an undominated vertex. The low-loss case remains unresolved.
+Two is the least sufficient integer loss threshold for these fixed
+comparisons. A nine-edge cycle of weight 4448 forces $9\mu\le4448$.
+A nine-edge walk of weight 3854 in the first profile, and an eight-edge
+walk of weight 3356 in the second, force the respective range bounds.
+With $L=1$, minimizing the resulting expressions over allowed means
+still gives $235+5/42248$ and $235+39/42248$. Both exceed 235;
+the new potentials attain those minima. Changing the mean and range
+alone therefore cannot make one unit of loss sufficient. Lean checks
+these deductions and their actual-snake implications under explicit window
+and potential premises; scalar reconstruction checks the witness rows.
+
+Both remaining loss cases dominate the cube. At $L=0$ every corner
+remainder vanishes. At $L=1$, exactly one is positive; it must have
+five selected neighbours and three incident empty squares. Indeed,
+$e\le\binom{9-d}{2}$, and the finite possibilities with
+$12e\bmod d=1$ give only $(d,e)=(5,3)$. This arithmetic is Lean-checked.
+Neither remaining case has been excluded.
+
+For the next local proof, the rational share of a window exceeds its
+integer share by at most $L$: each corner's remainder is counted with
+a factor between zero and one. A rational-share lower bound of sixteen
+would therefore imply integer share at least fifteen when $L\le1$.
+That local rational lower bound is a proposed target and remains unproved.
 
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -194,10 +209,10 @@ contradiction. Neither a longer construction nor a proof of 196 was obtained.
 The immediate continuation should establish the weakest sufficient local
 profile and the remaining graph premises. The new six-count boundary also
 supports the independent target $s_0\ge14$ at length 235. Research pauses
-after round 177 as requested; the records preserve the successful
+after round 178 as requested; the records preserve the successful
 certificates, unsuccessful parameter trials and exact remaining assumptions.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--177.}
+\texttt{snake9\_research.tex} and research records 175--178.}
 \end{document}

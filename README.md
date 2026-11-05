@@ -1,3 +1,13 @@
+# Current result after round 178
+
+Research pauses after the requested round. The maintained interval remains 191–235 edges, with the archived 235 proof's complete independent rebuild pending. No new unconditional numerical bound is claimed.
+
+Uniform pending share floors14 now suffice for conditional234 when L >=2. Exact potentials and cycle/walk certificates show that two is the least sufficient integer loss for these fixed retained-graph comparisons. The remaining case has exactly235 edges and L=0 or1; it dominates the cube, and at L=1 the unique positive-remainder corner has five selected neighbours and three incident empty squares. The local floor and graph premises remain unresolved.
+
+Read [the current frontier](handoff/CURRENT_STATUS.md), [round178](milestones/178-floor14-potential/README.md), [the main manuscript](paper/snake9_research.tex), and [the short explanation](paper/snake9_frontier_explanation.tex). Next manuscript-wide review:186.
+
+## Previous checkpoints
+
 # Current result after round177
 
 Round177 is complete; research pauses at the user's request. The maintained interval is191–235 edges, with the archived235 proof's complete independent rebuild pending. The strongest loss-free conditional bound remains234 using the four pending floor15 premises and the retained graph conditions.

@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "module": "Floor14Optimum178",
+  "source": "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\lean\\Floor14Optimum178.lean",
+  "source_sha256": "bf4fcf527cc0937fe6ed3576202da9bf8fde1c0df30363ac9dcab18a0813b102",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\data\\Floor14Optimum178-execution.json": "4650dd90842060395340eeb2c82a0b6177d5dc453174235b461c42f9556bccd8",
+    "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\lean\\Floor14Optimum178.lean": "bf4fcf527cc0937fe6ed3576202da9bf8fde1c0df30363ac9dcab18a0813b102",
+    "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\logs\\Floor14Optimum178-1793891018257474600\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\lean\\Floor14Optimum178.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\logs\\Floor14Optimum178-1793891018257474600\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2496188416,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 84,
+    "snapshot_seconds": 0.031000000000858563
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2483085312,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 26024,
+          "ParentProcessId": 28368,
+          "PrivatePageCount": 48091136,
+          "WorkingSetSize": 29097984
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 85,
+      "snapshot_seconds": 0.01599999999962165
+    }
+  ],
+  "compiler_pid": 26024,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.0630000000001019,
+  "axioms": [
+    {
+      "theorem": "Floor14Optimum178.fixed_comparison",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Floor14Optimum178.uniform_comparison",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Floor14Optimum178.uniform_upper234",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Floor14Optimum178.critical_zero_or_one",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "daf89c66933ec0044a50fd485ff9f640022f5311056f31e04a03c9aa2fd8ceff",
+  "object": "E:\\Snake-in-a-box\\milestones\\178-floor14-potential\\build\\Floor14Optimum178.olean",
+  "olean_sha256": "65ca40b05e763abf04fa3e8239808c8737996bc0626fd4a11098999118b6e92a"
+}
