@@ -21,8 +21,13 @@ edges. A verified construction has 191 edges. The project retains an
 archived contributor proof of the upper bound 235, whose complete
 independent rebuild remains pending. The maximum is unresolved.
 The numerical prediction 196 has neither a construction nor an optimality
-proof. The current advance strengthens the boundary accounting and reduces
-the local premises needed for a conditional upper bound of 234.
+proof. The current conditional result is: uniform pending share floor
+fourteen, together with the retained graph premises and $L\ge2$, implies
+$m\le234$. Under those same share and graph premises, every remaining
+hypothetical snake with $m\ge235$ has exactly 235 edges and $L=0$ or $L=1$.
+Here $L$ is the total integer share loss defined in Section 2 below.
+The argument leading to this reduction, and its unresolved premises,
+are given in order.
 
 \textbf{1. The exact square budget.}
 Write $v=m+1$, let $T$ count coordinate squares with exactly one selected
@@ -91,7 +96,7 @@ identity by 24 gives
 The physical counts, exact share-plus-loss identity and sufficient budget
 inequality are now connected in one checked Lean proof.
 
-\textbf{3. The stronger boundary is the decisive change.}
+\textbf{3. From local windows to a global length bound.}
 The nine-transition model charges $120\min\{6,\alpha_{r+8}\}$ and a
 valid lower bound on the five shares at positions $r+4,\ldots,r+8$.
 Let $W$ be the sum over all $m-8$ windows. The omitted singleton positions
@@ -114,8 +119,11 @@ The old potential $\mu=4462/9$, $R=5411/9$ therefore already implies
 $m\le235-3063/42262<235$ using only $L\ge0$.
 A separate proof of $L\ge4$ is no longer needed for this conditional route.
 
-\textbf{4. Weaker local floors and an exact limit of this comparison.}
-The finite retained graph has 4,661,572 edges. Fresh integer scans give
+\textbf{4. The conditional route with no positive-loss premise.}
+The finite retained graph has 4,661,572 edges. A direction pattern records
+successive coordinate flips, with coordinate labels renamed consistently.
+A share floor is a lower bound on the sum of the five integer shares
+at the associated window centres. The accepted integer scans give
 these sufficient profiles, listing the pending floors for
 $012034,012301,012340,012345$ in that order:
 \[
@@ -126,26 +134,18 @@ $012034,012301,012340,012345$ in that order:
 \end{array}
 \]
 Each comparison is strictly below 235 and gives the integer bound 234
-if the local and graph premises apply. Both displayed rows use newly computed potentials. An intermediate
-profile $(16,15,15,15)$ was obtained by lowering each edge weight by at
-most one and retaining the previous potential.
-All retained edge inequalities were checked with exact integer arithmetic;
-Lean checks the arithmetic implications separately.
+if the local and graph premises apply. All retained edge inequalities were
+checked with exact integer arithmetic; Lean checks the conditional
+implications for actual snakes. The uniform floor-fifteen profile is
+therefore a sufficient route to 234 without proving positive loss.
+Its four local floors and inherited graph premises remain to be proved.
 
-For the second profile, a nine-edge cycle has weight 4454 and an eight-edge
-walk has weight 3362. They force $9\mu\le4454$ and
-$R\ge8\mu-3362$. Substitution shows that the displayed comparison is
-minimum over nonnegative rational means and ranges, at zero occurrence
-credit. The exhibited potential attains it. If the $012034$ floor is
-lowered to fourteen while the other floors stay sixteen, a cycle of
-weight 4448 and a nine-edge walk of weight 3858 instead force every such
-comparison to be at least $235+7/21124$. Thus fifteen is the least
-integer $012034$ floor with the other floors fixed at sixteen. By
-monotonicity, it is also the least common floor for all four pending
-shapes in this comparison family. This does not assert
-that the true local share minimum is fifteen, or that a different graph,
-boundary argument or positive-loss estimate cannot improve the result.
-
+For the second profile, a nine-edge cycle of weight 4454 and an eight-edge
+walk of weight 3362 force $9\mu\le4454$ and $R\ge8\mu-3362$.
+Substituting into the length comparison shows that the displayed value
+is minimum over nonnegative rational means and ranges for that fixed
+profile, using zero occurrence credit. This finite optimization does
+not establish the local geometric premises.
 
 \textbf{5. Floor fourteen and the two remaining loss cases.}
 New potentials improve the earlier sufficient loss thresholds. Under
@@ -167,25 +167,54 @@ Two is the least sufficient integer loss threshold for these fixed
 comparisons. A nine-edge cycle of weight 4448 forces $9\mu\le4448$.
 A nine-edge walk of weight 3854 in the first profile, and an eight-edge
 walk of weight 3356 in the second, force the respective range bounds.
-With $L=1$, minimizing the resulting expressions over allowed means
-still gives $235+5/42248$ and $235+39/42248$. Both exceed 235;
-the new potentials attain those minima. Changing the mean and range
-alone therefore cannot make one unit of loss sufficient. Lean checks
+With $L=1$, the length comparison is
+\[
+\frac{1098595+8\mu+R}{4200+\mu}.
+\]
+Substituting $R\ge9\mu-3854$ or $R\ge8\mu-3356$ gives, respectively,
+\[
+\frac{1094741+17\mu}{4200+\mu},\qquad
+\frac{1095239+16\mu}{4200+\mu}.
+\]
+Both decrease as $\mu$ increases, so the cycle bound makes their minima
+occur at $\mu=4448/9$. The resulting values are
+$235+5/42248$ and $235+39/42248$. Both exceed 235, and the new potentials
+attain these minima. Thus changing the mean and range alone cannot make
+one unit of loss sufficient for these fixed graph and boundary comparisons. Lean checks
 these deductions and their actual-snake implications under explicit window
 and potential premises; scalar reconstruction checks the witness rows.
 
-Both remaining loss cases dominate the cube. At $L=0$ every corner
+Integer rounding of the aggregate constraints also leaves the case open:
+\[
+(m,L,G,W)=(235,1,22895,111595)
+\]
+satisfies the global budget, packing constraint and both potential
+inequalities. This arithmetic witness is Lean-checked. It is not a
+snake construction; it identifies a limitation of those aggregate
+constraints alone.
+
+Both remaining loss cases dominate the cube, meaning every cube vertex
+has a selected neighbour. At $L=0$ every corner
 remainder vanishes. At $L=1$, exactly one is positive; it must have
 five selected neighbours and three incident empty squares. Indeed,
 $e\le\binom{9-d}{2}$, and the finite possibilities with
 $12e\bmod d=1$ give only $(d,e)=(5,3)$. This arithmetic is Lean-checked.
 Neither remaining case has been excluded.
 
-For the next local proof, the rational share of a window exceeds its
-integer share by at most $L$: each corner's remainder is counted with
-a factor between zero and one. A rational-share lower bound of sixteen
-would therefore imply integer share at least fifteen when $L\le1$.
-That local rational lower bound is a proposed target and remains unproved.
+For a set $C$ of selected window centres, let $k(q)$ count the selected
+neighbours of $q$ belonging to $C$, and let $r(q)$ be its remainder.
+Since $0\le k(q)\le d(q)$, double counting gives
+\[
+\sum_{x\in C}\sigma_{12}(x)
+=\sum_{q:d(q)>0}\frac{12e(q)k(q)}{d(q)}
+-\sum_{q:d(q)>0}\frac{r(q)k(q)}{d(q)},
+\qquad
+0\le\sum_{q:d(q)>0}\frac{r(q)k(q)}{d(q)}\le L.
+\]
+Consequently, a rational-share lower bound of sixteen would imply integer
+share at least fifteen when $L\le1$. This is the proposed next local
+proof target. The double-counting deduction is written here; the required
+rational lower bound remains unproved.
 
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -197,6 +226,11 @@ Thus $L\le95$ forces domination. The earlier $L\le3$ reduction and sparse
 positive-remainder restrictions are checked, although they are unnecessary
 for the stronger conditional comparison above.
 
+Round 178 added five accepted Lean modules with twelve theorem dependency
+reports, including the actual-snake reduction under explicit local-window
+and potential premises. The full finite-graph certificate has not been
+checked in Lean.
+
 The numerical upper bound 234 remains conditional. Required local share
 floors, retained count restrictions, reference exclusions and the complete
 graph-to-snake certificate must still be established. In particular, the
@@ -206,11 +240,21 @@ prove that every snake traces that graph. The partial local share replay
 still checks only 33,111 of 145,215 deductions and establishes no final
 contradiction. Neither a longer construction nor a proof of 196 was obtained.
 
-The immediate continuation should establish the weakest sufficient local
-profile and the remaining graph premises. The new six-count boundary also
-supports the independent target $s_0\ge14$ at length 235. Research pauses
-after round 178 as requested; the records preserve the successful
-certificates, unsuccessful parameter trials and exact remaining assumptions.
+The remaining work is therefore:
+\begin{enumerate}
+\item Prove the four floor-fourteen local bounds for the general case,
+and discharge every retained count, exclusion and graph-coverage premise.
+\item Resolve the remaining $L=0$ and $L=1$ cases. A sufficient alternative
+is to prove floor fifteen on their relevant windows and apply the
+loss-free comparison in Section 4; rational share at least sixteen is
+one proposed way to obtain that local bound.
+\item Keep the independent empty-square route available: proving
+$s_0\ge14$ for a hypothetical 235-edge snake would exclude that length
+through the retained count-only inequality.
+\end{enumerate}
+These are outstanding requirements, not completed results. The research
+goal remains paused after round 178; this explanation records the current
+frontier without starting a further research round.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
