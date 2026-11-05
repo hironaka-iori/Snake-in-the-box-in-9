@@ -1,0 +1,127 @@
+{
+  "status": "PASS",
+  "module": "CoreThreshold173",
+  "source": "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\lean\\CoreThreshold173.lean",
+  "source_sha256": "b070bcdc22ad991e04c097ea14a81b4ae468e0c635c80d758bed6a7c77f7814e",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\data\\CoreThreshold173-execution.json": "c8a5ae2ab81f905a00f5122840fb50fdf35f5c8342ee909af55b94b77847e3e9",
+    "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\lean\\CoreThreshold173.lean": "b070bcdc22ad991e04c097ea14a81b4ae468e0c635c80d758bed6a7c77f7814e",
+    "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\logs\\CoreThreshold173-1793877714846687100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\lean\\CoreThreshold173.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\logs\\CoreThreshold173-1793877714846687100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1767583744,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.01599999999996271
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1765556224,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 11920,
+          "ParentProcessId": 40680,
+          "PrivatePageCount": 48103424,
+          "WorkingSetSize": 22908928
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.01599999999996271
+    },
+    {
+      "free_bytes": 1743646720,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 11920,
+          "ParentProcessId": 40680,
+          "PrivatePageCount": 37744640,
+          "WorkingSetSize": 39653376
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.0
+    },
+    {
+      "free_bytes": 1742196736,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 11920,
+          "ParentProcessId": 40680,
+          "PrivatePageCount": 41529344,
+          "WorkingSetSize": 42352640
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.0
+    },
+    {
+      "free_bytes": 1610383360,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 11920,
+          "ParentProcessId": 40680,
+          "PrivatePageCount": 54251520,
+          "WorkingSetSize": 188010496
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.0
+    }
+  ],
+  "compiler_pid": 11920,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 4.078000000000088,
+  "axioms": [
+    {
+      "theorem": "Snake9.CriticalArithmetic173.loss_threshold",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.CriticalArithmetic173.positive_loss_excludes_235",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "717c3bbb58b182c9f5bc0ad7018a49f7a1e17591c40686037c6c7de885794955",
+  "object": "E:\\Snake-in-a-box\\milestones\\173-critical-case-reduction\\build\\CoreThreshold173.olean",
+  "olean_sha256": "c6b5af7124cc859f214a588c23e7fd19477da479fd75efcefffb7dfc92846a33"
+}
