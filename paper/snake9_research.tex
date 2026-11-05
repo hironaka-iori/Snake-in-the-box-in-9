@@ -3535,6 +3535,65 @@ retained as failed or unresolved trials. A long walk from one such trial
 exposed the decisive nine-edge cycle and led to the corrected floor-fifteen
 mean. No solver failure is used as an impossibility proof~\cite{boundary176archive}.
 
+
+\subsection{Trading a weaker share floor against positive loss}
+\label{sec:floor14-loss}
+The preceding least-floor statement assumes only $L\ge0$. Positive loss
+permits a weaker local requirement without recomputing the potential.
+If every pending floor decreases by one, each edge weight decreases by
+at most one. Indeed, the weight is the maximum of a fixed source bound
+and a count term plus the maximum of the share floor and a fixed
+count-conditioned bound, followed by an unchanged additional credit.
+Each maximum preserves the one-unit bound. Thus the same potential
+satisfies an edge inequality whose scaled mean is nine smaller.
+
+\begin{proposition}[Sufficient loss for floor fourteen]
+Retain the graph, count restrictions, completed floors and interpretation
+premises of Section~\ref{sec:boundary-retuning}. Then either of the
+following sets of additional premises implies $m\le234$:
+\begin{enumerate}
+\item the four pending local share floors are at least fourteen and $L\ge23$;
+\item the $012034$ floor is at least fourteen, the other three pending
+floors are at least sixteen, and $L\ge17$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For the first case, reuse the potential for $(15,15,15,15)$. Its scaled
+mean becomes 4444 and its scaled range remains 5384. Summing along
+$m-8$ transitions gives $4444(m-8)\le9W+5384$. Combining this with
+$W+4200m+5L\le1098600$ yields
+\[
+42244m+45L\le9928336.
+\]
+At $m=235$, this requires $45L\le996$, hence $L\le22$.
+For the second case, reuse the potential for $(15,16,16,16)$, with
+scaled mean 4445 and scaled range 5374. The same calculation gives
+\[
+42245m+45L\le9928334.
+\]
+At $m=235$ it requires $45L\le759$, hence $L\le16$.
+Larger lengths only strengthen both contradictions.
+\end{proof}
+
+The weight transfer and both arithmetic deductions pass Lean. They use
+the previously scanned finite potentials; no new edge scan or complete
+Lean graph certificate is asserted. The loss thresholds 23 and 17 are
+exact for these reused comparisons, but their optimality over other
+potentials is unresolved. At scaled mean 4448, an improved floor-fourteen
+potential, keeping the other three pending floors at sixteen, with scaled range $R_{\mathrm{sc}}$ would suffice whenever
+$R_{\mathrm{sc}}+1\le5296+45L$. In particular, range at most 5340
+would suffice with $L\ge1$. The saved walk forces range at least 5310
+at that mean; it does not establish the existence of such a potential.
+A fresh computation was prevented from starting by the established
+memory threshold, so this possibility remains open.
+
+This gives a precise case reduction for the uniform-floor route. If
+floor fourteen and the retained graph premises can be proved universally,
+the stronger floor fifteen is needed only for hypothetical 235-edge
+snakes with $L\le22$. Every such snake dominates the cube, since an
+undominated vertex contributes at least 96 to $L$. No claim that the
+remaining low-loss case is impossible follows from this reduction.
+
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 The maintained interval is $191\le a(9)\le235$, with the contributor-proof
 and independent-rebuild distinction stated in Section~\ref{sec:verification}.

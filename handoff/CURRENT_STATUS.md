@@ -1,3 +1,16 @@
+# Round 177: completed loss tradeoff; requested pause
+
+Round177 is complete. Pause the goal after publication, and do not resume without a new user instruction. The maintained project interval remains 191–235 edges; the complete independent rebuild of the archived contributor 235 proof is still pending. No new unconditional bound or construction is claimed.
+
+The new conditional alternatives reuse the accepted round176 potentials. Uniform pending floors14 give 42244m +45L <=9928336 and imply234 if L >=23. Floors(14,16,16,16) give 42245m +45L <=9928334 and imply234 if L >=17. Eight Lean theorem dependency reports pass. The maximum-weight and edge transfer are checked, so a new full graph scan is unnecessary for these reused potentials. The inherited local, count, exclusion and graph interpretation premises remain unresolved.
+
+Under uniform floor14 and those graph premises, only hypothetical235-edge snakes with L <=22 still need the stronger floor15 argument. They dominate the cube by the established undominated-vertex loss bound96. This is a conditional case reduction, not an exclusion of the remaining case.
+
+An attempted fresh optimization did not launch because the startup memory threshold was unmet. For profile(14,16,16,16), scaled mean4448 and range at most5340 would suffice with L >=1. The saved walk gives range at least5310; a feasible potential in that interval remains unknown. The new thresholds23 and17 are sufficient, with no claim of global optimality.
+
+Read milestones/177-floor14-loss-tradeoff/README.md and data/completion.json. The prior round details below remain valid. The main manuscript and short explanation include the new deduction; the authors and hyperlink settings are unchanged. Next manuscript-wide review remains186.
+
+## Retained frontier from rounds 175–176
 # Rounds 175–176: stronger boundaries and weaker share requirements
 
 Research is paused after the two requested substantial rounds. The Q9 optimum remains unresolved. The maintained project interval is 191–235 edges, with the existing qualification that the contributor's 235 proof has not been independently rebuilt in full. The new conclusion 234 remains conditional.

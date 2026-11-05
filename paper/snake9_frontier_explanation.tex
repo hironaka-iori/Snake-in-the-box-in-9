@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after rounds 175--176: 5 November 2026}
+\date{Research state after round 177: 5 November 2026}
 \begin{document}
 \maketitle
 
@@ -146,7 +146,33 @@ shapes in this comparison family. This does not assert
 that the true local share minimum is fifteen, or that a different graph,
 boundary argument or positive-loss estimate cannot improve the result.
 
-\textbf{5. What is proved, and what remains.}
+
+\textbf{5. A weaker floor when the loss is positive.}
+Lowering each pending floor by one decreases any edge weight by at most
+one: all other terms stay fixed, and taking a maximum preserves this
+bound. Therefore the saved potential still works after its scaled mean
+decreases by nine. Reusing the two potentials above gives
+\[
+\begin{array}{c|c|c}
+\text{floors}&\text{resulting inequality}&\text{sufficient loss}\\\hline
+(14,14,14,14)&42244m+45L\le9928336&L\ge23\\
+(14,16,16,16)&42245m+45L\le9928334&L\ge17
+\end{array}
+\]
+At $m=235$, the first inequality forces $L\le22$, and the second forces
+$L\le16$. This proves both sufficient thresholds. The transfer and
+arithmetic pass Lean; all local and graph premises remain explicit.
+These thresholds are sufficient and have not been optimized over new
+potentials. A fresh optimization did not start because insufficient
+memory was available. At scaled mean 4448, range at most 5340 would
+make $L\ge1$ sufficient, but such a potential has not been obtained.
+
+Consequently, if the four floor-fourteen bounds and graph premises are
+established, the stronger floor-fifteen argument need only address
+$L\le22$. Those snakes dominate the cube by the existing 96-loss
+bound for an undominated vertex. The low-loss case remains unresolved.
+
+\textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
 empty-square argument also proves that an undominated vertex contributes
@@ -168,10 +194,10 @@ contradiction. Neither a longer construction nor a proof of 196 was obtained.
 The immediate continuation should establish the weakest sufficient local
 profile and the remaining graph premises. The new six-count boundary also
 supports the independent target $s_0\ge14$ at length 235. Research pauses
-after these two rounds as requested; the records preserve the successful
+after round 177 as requested; the records preserve the successful
 certificates, unsuccessful parameter trials and exact remaining assumptions.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--176.}
+\texttt{snake9\_research.tex} and research records 175--177.}
 \end{document}

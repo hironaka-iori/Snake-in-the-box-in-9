@@ -1,3 +1,12 @@
+# Current result after round177
+
+Round177 is complete; research pauses at the user's request. The maintained interval is191–235 edges, with the archived235 proof's complete independent rebuild pending. The strongest loss-free conditional bound remains234 using the four pending floor15 premises and the retained graph conditions.
+
+The new deduction weakens all four pending floors to14 when L >=23; weakening only012034 to14 with the other three pending floors16 requires L >=17. The reused-potential transfer and arithmetic passed Lean. Local floors and inherited graph premises remain unresolved. No new unconditional bound is claimed.
+
+Read [the current handoff](handoff/CURRENT_STATUS.md) and [round177](milestones/177-floor14-loss-tradeoff/README.md). The [main manuscript](paper/snake9_research.tex) and [short explanation](paper/snake9_frontier_explanation.tex) contain the proof and its limits. Next manuscript-wide revision:186.
+
+## Previous checkpoint
 # Current result after rounds 175–176
 
 Research is paused at the author's request after two additional rounds.
