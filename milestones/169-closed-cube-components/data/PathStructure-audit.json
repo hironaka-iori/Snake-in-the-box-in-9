@@ -1,0 +1,105 @@
+{
+  "status": "PASS",
+  "module": "PathStructure",
+  "source": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathStructure.lean",
+  "source_sha256": "f3f2eea633c39cc7c9f1634df4770de44f2eafe792ed673fca9a7a0b8df98d97",
+  "checker_sha256": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\local-execution.json": "9106a82fef0b8435042b988fc5bb9fbf82af1e48cc550a783e8ad15a0dbb6f95",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathStructure.lean": "f3f2eea633c39cc7c9f1634df4770de44f2eafe792ed673fca9a7a0b8df98d97",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\check_local.py": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\Snake9-audit.json": "76a84072ff2738f19122740151b0a14d6601fa64348c831e3dd01307618f31df",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\Snake9.olean": "28cf5573e4da0783c3445a0c54d97d9af8a3d7ae38a0a03b9b2ede3e47543a38"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\PathStructure-1793844106121600700\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathStructure.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\PathStructure-1793844106121600700\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1664065536,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.016000000000019554
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1639854080,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 26040,
+          "ParentProcessId": 25036,
+          "PrivatePageCount": 48103424,
+          "WorkingSetSize": 25174016
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.01599999999996271
+    },
+    {
+      "free_bytes": 1396588544,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 26040,
+          "ParentProcessId": 25036,
+          "PrivatePageCount": 180121600,
+          "WorkingSetSize": 292286464
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.03100000000000591
+    }
+  ],
+  "compiler_pid": 26040,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0790000000000077,
+  "axioms": [
+    {
+      "theorem": "Snake9.selected_three_neighbors_repeat",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.low_degree_index_is_endpoint",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.three_low_degree_vertices_repeat",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "27624854d0322974237fe23c6f7fd067d31d123494a92cfd43b882aca38fe0b9",
+  "object": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\PathStructure.olean",
+  "olean_sha256": "42aaa5fedff3f9e52df33754711c5dd52bccdc4b776ae45af8f8e075d13ba4bb"
+}

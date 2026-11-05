@@ -1,0 +1,77 @@
+\begin{theorem}[Components of the missing-pair graph]
+\label{thm:missing-pair-components}
+Let $q$ have no selected neighbour in a nontrivial snake in $\Q_9$.
+Translate $q$ to zero, and join two coordinate directions in a graph $H$
+exactly when their weight-two vertex is unselected. Then $H$ is connected
+or is the disjoint union of exactly two complete graphs.
+In the latter case, if their sizes are $a,b$, then
+\[
+a+b=9,\qquad m=2ab-2\in\{14,26,34,38\}.
+\]
+Consequently,
+\[
+\boxed{d(q)=0\ \Longrightarrow\ e(q)\ge8,}
+\qquad
+\boxed{\sum_q r_{12}(q)\le95\ \Longrightarrow\ d(q)\ge1\text{ for every }q.}
+\]
+For a snake longer than 38 edges, $H$ is connected at every undominated centre.
+\end{theorem}
+\begin{proof}
+Zero is unselected, since every selected vertex has a selected neighbour.
+All unit vertices are unselected by the hypothesis on $q$. Thus edges of
+$H$ correspond exactly to empty squares through zero.
+
+Suppose $H$ is disconnected and choose two components $A,B$.
+Every pair $\{a,b\}$ with $a\in A$, $b\in B$ is selected. Consider the
+set consisting of these cross-pairs and the candidate triples formed
+from an edge of $H$ in one component and a coordinate in the other.
+Only its intersection with the selected path is considered below;
+candidate triples need not all be selected.
+
+A selected neighbour of a cross-pair is a triple $\{a,b,k\}$ with three
+distinct coordinates. If $k$ belongs to neither component, all three
+pair sides are selected, contradicting maximum degree two. If $k\in A$
+but $ak$ is not an edge of $H$, the same contradiction applies; likewise
+for $B$. Thus every selected neighbour is a candidate triple in the set.
+Conversely, a selected candidate triple already has two distinct selected
+cross-pair neighbours. Its remaining pair side is absent, and degree two
+excludes every selected weight-four neighbour. The selected portion of
+the set is therefore nonempty and closed under selected adjacency.
+
+A nonempty subset of a path closed under adjacency contains the whole
+path: start at any vertex in the subset and follow the path in both
+directions. Therefore every selected vertex belongs to this set.
+A third component would supply a selected pair meeting $A$ and that
+component, outside the set. A nonedge within $A$ or within $B$ would also
+supply a selected pair outside it. Both are impossible. Hence there are
+exactly two components, and each is complete.
+
+There are now exactly $ab$ selected pair vertices, and all other selected
+vertices are triples of degree two. Both endpoints are pair vertices.
+The path alternates between pairs and triples, so it contains $ab-1$
+triples and has $2ab-2$ edges. The four possible unordered component sizes
+are $1+8$, $2+7$, $3+6$, and $4+5$, giving the stated lengths.
+
+If $H$ is connected, it has at least eight edges. In the disconnected
+case its edge count is $\binom a2+\binom b2$, respectively 28, 22, 18,
+or 16 for those four sizes. In every case $e(q)=|E(H)|\ge8$.
+An undominated centre therefore contributes at least $12\cdot8=96$ to
+the nonnegative loss sum, proving the final implication.
+\end{proof}
+
+All four disconnected-case lengths are attained. List the $a\times b$
+cross-pairs row by row, reversing the order in alternate rows, and insert
+the union triple between each consecutive pair. Each triple has exactly
+its two intended selected pair neighbours, so this is an induced path.
+Direct checks of distinctness and every pairwise adjacency confirm the
+four constructions. This does not establish attainability of the lower
+bound $e(q)=8$ in the connected case.
+
+The component theorem is a written geometric proof with an independent
+review. Lean has checked the required path degree and endpoint lemmas,
+the coordinate pair-and-triple implications, and the statement that a
+nonempty selected subset closed under adjacency contains the whole path.
+The actual candidate subset, its closure, component classification,
+and final graph and loss counting still require assembly in Lean.
+No improved unconditional numerical length bound is claimed.
+

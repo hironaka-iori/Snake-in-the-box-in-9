@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "module": "PathClosure169",
+  "source": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathClosure169.lean",
+  "source_sha256": "a22e60f0dc58f7d837e45a7fb9391c31e562d6fc5c5e9bc59819dd2ba818136f",
+  "checker_sha256": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\local-execution.json": "9106a82fef0b8435042b988fc5bb9fbf82af1e48cc550a783e8ad15a0dbb6f95",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathClosure169.lean": "a22e60f0dc58f7d837e45a7fb9391c31e562d6fc5c5e9bc59819dd2ba818136f",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\check_local.py": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\PathStructure-audit.json": "c020a9beef6d601a3f74d7ec74598a85d007ed589869b6aabf2353bd7a941182",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\PathStructure.olean": "42aaa5fedff3f9e52df33754711c5dd52bccdc4b776ae45af8f8e075d13ba4bb"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\PathClosure169-1793844134475588000\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathClosure169.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\PathClosure169-1793844134475588000\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1093656576,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 93,
+    "snapshot_seconds": 0.016000000000019554
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1082482688,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 45764,
+          "ParentProcessId": 25700,
+          "PrivatePageCount": 48144384,
+          "WorkingSetSize": 23248896
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.016000000000019554
+    }
+  ],
+  "compiler_pid": 45764,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.0629999999999882,
+  "axioms": [
+    {
+      "theorem": "Snake9.PathClosure169.closed_selected_contains_all",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.PathClosure169.closed_selected_no_outside",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "855a91d55bd57948fc70f1d19a6691bd03c4f0edc0797ca92c1eb11aa296966d",
+  "object": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\PathClosure169.olean",
+  "olean_sha256": "ec38a6c9a491ab92ef2c4e0db9695e86b96c77b07f5909589703ad739c985489"
+}

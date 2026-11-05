@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "module": "CubeUndominated168",
+  "source": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\CubeUndominated168.lean",
+  "source_sha256": "714f9f220957dd6d2a593c11d93f51152f121370f69b1c80ef09d4572106094a",
+  "checker_sha256": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\local-execution.json": "9106a82fef0b8435042b988fc5bb9fbf82af1e48cc550a783e8ad15a0dbb6f95",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\CubeUndominated168.lean": "714f9f220957dd6d2a593c11d93f51152f121370f69b1c80ef09d4572106094a",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\check_local.py": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\CubeLocal-audit.json": "b6b9d63da8af6938757fb9fc0a3808121e5206a33573f7002a3b5bc96a7984f4",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\Undominated167-audit.json": "52c2756051c52d7002e331abd7de127320d206066bfd30ee8491222a08727b39",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\CubeLocal.olean": "8d2eb83032762ab49ea993e6b0364fcb43db7e2af156fbe4535e111a71417b49",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\Undominated167.olean": "69c02b9eb283f630bb24a896ce78e8080e2b56ba5c6af37a3910227cdcaa71d0"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\CubeUndominated168-1793844173759741700\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\CubeUndominated168.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\CubeUndominated168-1793844173759741700\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1960599552,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 88,
+    "snapshot_seconds": 0.016000000000019554
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1986433024,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 10304,
+          "ParentProcessId": 28772,
+          "PrivatePageCount": 35004416,
+          "WorkingSetSize": 37519360
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.016000000000019554
+    },
+    {
+      "free_bytes": 1894404096,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 10304,
+          "ParentProcessId": 28772,
+          "PrivatePageCount": 53780480,
+          "WorkingSetSize": 177790976
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.014999999999986358
+    },
+    {
+      "free_bytes": 2029883392,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 10304,
+          "ParentProcessId": 28772,
+          "PrivatePageCount": 175308800,
+          "WorkingSetSize": 277860352
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 87,
+      "snapshot_seconds": 0.031999999999982265
+    }
+  ],
+  "compiler_pid": 10304,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.140000000000043,
+  "axioms": [
+    {
+      "theorem": "Snake9.Undominated168.selected_neighbor",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Undominated168.selected_triple_distinct",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Undominated168.minimum_pair_neighbor",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Undominated168.maximum_triple_neighbors",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Undominated168.no_two_unused_directions",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Undominated168.matching_pair_low_degree",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Undominated168.three_matching_pairs_impossible",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "da7790f731b747125dfb851868d6d4d00202ffdbaa49faf42da5541387e4c464",
+  "object": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\CubeUndominated168.olean",
+  "olean_sha256": "442705855282a1ce923ed7a49e4853daf02f7120a5784eeed530210d552e7b10"
+}

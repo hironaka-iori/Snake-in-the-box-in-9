@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 167: 4 November 2026}
+\date{Research state after round 169: 5 November 2026}
 \begin{document}
 \maketitle
 
@@ -176,36 +176,40 @@ Count five at degree five has zero residue and remains possible. Six finite arit
 have passed Lean under the stated geometric bound.
 
 \begin{lemma}[Undominated corners]
-If every selected vertex has degree one or two, then $d(q)=0$ implies
-$e(q)\ge4$. Equality forces at least eight selected degree-one vertices.
-For a nontrivial snake, therefore, $d(q)=0$ implies $e(q)\ge5$.
+For a nontrivial snake, $d(q)=0$ implies $e(q)\ge8$.
 \end{lemma}
 \begin{proof}
-Translate $q$ to zero. It is unselected by minimum selected degree, and
-all weight-one vertices are unselected. Empty squares through zero
-correspond to missing weight-two vertices, viewed as pairs of directions.
-If two directions $a,b$ occur in no missing pair, the pair vertex
-$\{a,b\}$ is selected. Any selected triple neighbour $\{a,b,k\}$ would
-have the three selected neighbours $\{a,b\},\{a,k\},\{b,k\}$,
-violating maximum degree two.
-The pair vertex would then have no selected neighbour, also impossible.
-The missing pairs therefore cover at least eight directions, requiring
-at least four pairs.
+Translate $q$ to zero. Zero and all unit vertices are absent. Form the
+graph $H$ on the nine directions whose edges are the absent pair vertices;
+its edge count is $e(q)$. If $H$ is connected, it has at least eight edges.
 
-With exactly four pairs, each of those eight directions occurs once:
-the pairs form a matching, leaving one unused direction $c$. For each
-matched direction $a$ with partner $a'$, the selected pair $\{c,a\}$ can
-have only the selected neighbour $\{c,a,a'\}$; any other triple would again
-have three selected pair neighbours. Minimum degree forces that neighbour.
-The eight distinct pairs $\{c,a\}$ are therefore degree-one vertices.
-A snake has two endpoints, which excludes equality.
+If $H$ is disconnected, choose two components $A,B$. Every cross-pair
+$\{a,b\}$ is selected. Its selected neighbours can only be triples formed
+from an edge of $H$ within one component and a direction in the other.
+Every other triple would have three selected pair neighbours. Each
+selected candidate triple already has two selected cross-pair neighbours,
+so it cannot have a selected neighbour outside this family.
+
+The selected part of this family is therefore nonempty and closed under
+adjacency. Since a path is connected, it contains the whole snake.
+A third component, or a nonedge within $A$ or $B$, would give a selected
+pair outside this family. Thus $H$ consists of exactly two complete
+graphs. Their sizes sum to nine, and their combined edge counts are
+28, 22, 18, or 16. These are all at least eight.
 \end{proof}
-An undominated vertex consequently contributes at least $12\cdot5=60$
-to the loss. Since every remainder is nonnegative,
+An undominated vertex contributes at least $12\cdot8=96$ to the loss.
+Nonnegativity of the other remainders therefore gives
 \[
-\boxed{L\le59\ \Longrightarrow\ d(q)\ge1\text{ for every }q\in Q_9.}
+\boxed{L\le95\ \Longrightarrow\ d(q)\ge1\text{ for every }q\in Q_9.}
 \]
 In particular, the unresolved $L\le3$ case must dominate the whole cube.
+
+The disconnected case is completely restricted in length: with component
+sizes $a,b$, all $ab$ cross-pairs occur, and selected triples have degree
+two. The alternating path has $ab-1$ triples, hence $m=2ab-2$.
+The only lengths are 14, 26, 34, and 38, and checked constructions attain
+all four. Thus every undominated centre of a longer snake has connected
+$H$. Attainability of $e(q)=8$ in that connected case is unresolved here.
 
 \textbf{6. Exact frontier and verification boundary.}
 The printed 191-edge snake already dominates the cube and has loss 163;
@@ -218,9 +222,10 @@ degree-zero contribution to $L$, while the degree-five and degree-seven
 contributions can still vanish. Connectedness and the path structure must
 therefore enter any argument that rules out these zero-loss configurations.
 
-The undominated-corner proof above is a written geometric proof. Six
-supporting logical and arithmetic statements passed Lean, while the full
-cube interpretation, matching count and global-sum assembly remain pending.
+The undominated-corner proof above is a written geometric proof. Lean
+has checked the pair-and-triple implications for actual cube vertices and
+the path-closure principle. The candidate family and its closure, graph
+classification, and final counting still require assembly in Lean.
 A separate pending local share certificate has 33,111 of 145,215 deductions
 checked; its partial replay establishes no final contradiction.
 The next target is to exclude $L\le3$ for dominating snakes of at least
@@ -229,5 +234,5 @@ No improved unconditional numerical bound is claimed.
 
 \smallskip
 {\small Full arguments and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 163--167.}
+\texttt{snake9\_research.tex} and research records 163--169.}
 \end{document}

@@ -1,3 +1,19 @@
+# Current continuation after round169
+
+Round169: missing-pair components and a stronger undominated bound
+
+The goal remains active. At an undominated Q9 center, the graph of absent coordinate pairs is either connected or exactly two clique components. Written proof and independent review give e(q)>=8 and L<=95 implies domination. If disconnected, the entire snake alternates between ab crosspairs and ab-1 triples; m=2ab-2 is14,26,34,38. All four cases have saved constructions checked for distinct vertices and every pairwise cube adjacency. Every undominated center of a longer snake has connected missing-pair graph.
+
+Lean verification: seven modules have PASS receipts with 24 printed axiom reports, including the reused six-statement round167 module. New actual-cube pair/triple and endpoint deductions passed; the generic path-closure theorem passed. The finite eight-cycle endpoint inequality also passed. No new axioms, sorry, admit, or native_decide occur in accepted sources. Full component theorem is NOT yet Lean-checked: the actual candidate subset, its closure, outside witnesses, graph classification/counting, and final loss assembly remain.
+
+Resource-safe change: rebuilt only required PathStructure lemmas and replaced finite cube identities with algebraic proofs. The current PathStructure peak sampled180121600 bytes and CubeLocal48136192 bytes. Existing limits unchanged. Historical failed attempts remain in logs and review; current accepted receipts are data/*-audit.json. Undominated167 reuses its original checked object and receipt; all source/object/log/dependency hashes were validated.
+
+No new unconditional numerical upper bound. The conditional234 comparison still needs L>=4 for the relevant dominating snakes and all its other documented local/global premises. Next priority is actual-cube candidate-set closure and component theorem assembly, followed by restrictions on dominating small-loss cases. The six-square result from168 is superseded by the eight-square theorem in the manuscript. Full-paper revision schedule remains next176.
+
+---
+
+Earlier records follow; their pause and weaker-bound statements are historical.
+
 ## Resume round 168 first
 
 Goal active. Read milestones/168-undominated-cube-bridge/README.md and review/six-empty-squares.md. New written result e(q)>=6 at an undominated center, loss contribution>=72; full Lean remains pending. Independent review and exhaustive small coordinate-graph checks passed. Current plan has no accepted dependency chain; rebuild EightCycle168, Snake9, PathStructure, CubeLocal, Undominated167, CubeUndominated168 in that order. Preserve resource limits. The prior PathStructure finite irreflexivity test exceeded its limit; it now has an untested algebraic replacement. Do not claim the entire result is Lean-checked. Next complete the graph counting and eight-cycle interpretation. Earlier pause text is historical.

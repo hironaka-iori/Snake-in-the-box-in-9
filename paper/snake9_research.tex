@@ -705,59 +705,82 @@ The printed 191-edge snake already has a selected neighbour at every
 cube vertex, so the domination condition alone supplies no improved
 length bound.
 
-\begin{lemma}[Six empty squares at an undominated corner]
-\label{lem:six-empty-undominated}
-For a nontrivial snake in $\Q_9$, $d(q)=0$ implies $e(q)\ge6$.
-Consequently, $\sum_q r_{12}(q)\le71$ implies that every cube vertex
-has a selected neighbour.
-\end{lemma}
+\begin{theorem}[Components of the missing-pair graph]
+\label{thm:missing-pair-components}
+Let $q$ have no selected neighbour in a nontrivial snake in $\Q_9$.
+Translate $q$ to zero, and join two coordinate directions in a graph $H$
+exactly when their weight-two vertex is unselected. Then $H$ is connected
+or is the disjoint union of exactly two complete graphs.
+In the latter case, if their sizes are $a,b$, then
+\[
+a+b=9,\qquad m=2ab-2\in\{14,26,34,38\}.
+\]
+Consequently,
+\[
+\boxed{d(q)=0\ \Longrightarrow\ e(q)\ge8,}
+\qquad
+\boxed{\sum_q r_{12}(q)\le95\ \Longrightarrow\ d(q)\ge1\text{ for every }q.}
+\]
+For a snake longer than 38 edges, $H$ is connected at every undominated centre.
+\end{theorem}
 \begin{proof}
-Translate $q$ to zero and let $H$ be the simple graph on the nine
-coordinate directions whose edges are the missing weight-two vertices.
-Zero and all weight-one vertices are unselected, so $|E(H)|=e(q)$.
-The argument of Lemma~\ref{lem:undominated-corners} excludes two isolated
-vertices of $H$. Suppose that $|E(H)|\le5$.
+Zero is unselected, since every selected vertex has a selected neighbour.
+All unit vertices are unselected by the hypothesis on $q$. Thus edges of
+$H$ correspond exactly to empty squares through zero.
 
-If $H$ has an isolated vertex $c$, the other eight vertices have positive
-degree and total degree at most ten. At least six therefore have degree
-one. For each such direction $a$, with unique partner $a'$, the selected
-pair $\{c,a\}$ has only the possible selected neighbour $\{c,a,a'\}$.
-Minimum degree forces that neighbour. Three of these distinct pair
-vertices already contradict the two-endpoint property.
+Suppose $H$ is disconnected and choose two components $A,B$.
+Every pair $\{a,b\}$ with $a\in A$, $b\in B$ is selected. Consider the
+set consisting of these cross-pairs and the candidate triples formed
+from an edge of $H$ in one component and a coordinate in the other.
+Only its intersection with the selected path is considered below;
+candidate triples need not all be selected.
 
-Thus $H$ has no isolated vertex. Its degree sum lies between nine and
-ten and is even, so it equals ten. Exactly one direction has degree two,
-and eight have degree one. Hence $H$ consists of a three-vertex path and
-three isolated edges.
+A selected neighbour of a cross-pair is a triple $\{a,b,k\}$ with three
+distinct coordinates. If $k$ belongs to neither component, all three
+pair sides are selected, contradicting maximum degree two. If $k\in A$
+but $ak$ is not an edge of $H$, the same contradiction applies; likewise
+for $B$. Thus every selected neighbour is a candidate triple in the set.
+Conversely, a selected candidate triple already has two distinct selected
+cross-pair neighbours. Its remaining pair side is absent, and degree two
+excludes every selected weight-four neighbour. The selected portion of
+the set is therefore nonempty and closed under selected adjacency.
 
-Choose two isolated edges $\{a,a'\}$ and $\{b,b'\}$. Their four cross-pair
-vertices are selected. Each can have selected neighbours only among the
-four triples obtained by adjoining the partner of one coordinate;
-any other triple would have three selected pair neighbours. These four
-pairs and four possible triples form an eight-cycle. An included triple
-already has two selected pair neighbours, so it cannot have a selected
-weight-four neighbour. The selected part of this eight-cycle therefore
-has no selected edge leading outside it.
+A nonempty subset of a path closed under adjacency contains the whole
+path: start at any vertex in the subset and follow the path in both
+directions. Therefore every selected vertex belongs to this set.
+A third component would supply a selected pair meeting $A$ and that
+component, outside the set. A nonedge within $A$ or within $B$ would also
+supply a selected pair outside it. Both are impossible. Hence there are
+exactly two components, and each is complete.
 
-At least one triple is absent, since a path contains no cycle. The two cross-pair vertices adjacent to an absent triple each have
-only one remaining possible selected neighbour. Minimum degree forces
-that neighbour, so both are endpoints of the whole snake. The three choices of two isolated edges
-give disjoint sets of pair and triple vertices, since their coordinate
-supports identify the two chosen edges. They force at least six distinct
-endpoints, a contradiction. Thus $e(q)\ge6$.
+There are now exactly $ab$ selected pair vertices, and all other selected
+vertices are triples of degree two. Both endpoints are pair vertices.
+The path alternates between pairs and triples, so it contains $ab-1$
+triples and has $2ab-2$ edges. The four possible unordered component sizes
+are $1+8$, $2+7$, $3+6$, and $4+5$, giving the stated lengths.
 
-Finally, a degree-zero corner contributes $12e(q)\ge72$ to a sum of
-nonnegative remainders. This proves the loss implication.
+If $H$ is connected, it has at least eight edges. In the disconnected
+case its edge count is $\binom a2+\binom b2$, respectively 28, 22, 18,
+or 16 for those four sizes. In every case $e(q)=|E(H)|\ge8$.
+An undominated centre therefore contributes at least $12\cdot8=96$ to
+the nonnegative loss sum, proving the final implication.
 \end{proof}
 
-This strengthening is a written geometric proof. An exhaustive integer
-check of all 443704 coordinate graphs with at most five edges leaves
-3780 graphs after the two endpoint restrictions; all have the stated
-three-vertex-path and three-isolated-edge structure. A separate check of
-the 16 possible triple selections verifies the eight-cycle endpoint
-count. These finite checks support the proof but do not constitute its
-complete Lean verification, which remains pending. The strengthened
-domination threshold alone gives no new numerical length bound.
+All four disconnected-case lengths are attained. List the $a\times b$
+cross-pairs row by row, reversing the order in alternate rows, and insert
+the union triple between each consecutive pair. Each triple has exactly
+its two intended selected pair neighbours, so this is an induced path.
+Direct checks of distinctness and every pairwise adjacency confirm the
+four constructions. This does not establish attainability of the lower
+bound $e(q)=8$ in the connected case.
+
+The component theorem is a written geometric proof with an independent
+review. Lean has checked the required path degree and endpoint lemmas,
+the coordinate pair-and-triple implications, and the statement that a
+nonempty selected subset closed under adjacency contains the whole path.
+The actual candidate subset, its closure, component classification,
+and final graph and loss counting still require assembly in Lean.
+No improved unconditional numerical length bound is claimed.
 
 \begin{lemma}[Weighted window packing]\label{lem:share-packing}
 Let $\sigma_j\ge0$ be shares at finitely many positions. Suppose that a family of windows $I_t$ has bounds $b_t\le\sum_{j\in I_t}\sigma_j$. If rational weights $w_t\ge0$ satisfy

@@ -1,0 +1,123 @@
+{
+  "status": "PASS",
+  "module": "Undominated167",
+  "source": "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\lean\\Undominated167.lean",
+  "source_sha256": "9b38ab700de3e786bf5e24cd531429f4db4295086e4cee76fee23f3eeb035422",
+  "checker_sha256": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\data\\local-execution.json": "dcbd4bf34971f825710c919ad991a9fd1096bafab0d1ed502534aefc00d0ea8c",
+    "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\lean\\Undominated167.lean": "9b38ab700de3e786bf5e24cd531429f4db4295086e4cee76fee23f3eeb035422",
+    "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\scripts\\check_local.py": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+    "E:\\Snake-in-a-box\\milestones\\165-share18-continuation-and-pause\\data\\threshold-execution.json": "6024f9fc4ec0dce00b7a18cb651cfc8586e1c979e6b557b24fa71621212ae532",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\logs\\Undominated167-1793799272849962300\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\lean\\Undominated167.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\logs\\Undominated167-1793799272849962300\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1180798976,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 92,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1164718080,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 23996,
+          "ParentProcessId": 24808,
+          "PrivatePageCount": 48095232,
+          "WorkingSetSize": 23048192
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.01599999999962165
+    },
+    {
+      "free_bytes": 974163968,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 23996,
+          "ParentProcessId": 24808,
+          "PrivatePageCount": 99278848,
+          "WorkingSetSize": 202301440
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 94,
+      "snapshot_seconds": 0.01599999999962165
+    },
+    {
+      "free_bytes": 1034002432,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 23996,
+          "ParentProcessId": 24808,
+          "PrivatePageCount": 256139264,
+          "WorkingSetSize": 283820032
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.031000000000858563
+    }
+  ],
+  "compiler_pid": 23996,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.0930000000007567,
+  "axioms": [
+    {
+      "theorem": "Snake9.Undominated167.matching_forces_unique_neighbor",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.Undominated167.no_two_unused",
+      "axioms": []
+    },
+    {
+      "theorem": "Snake9.Undominated167.incidence_lower_bound",
+      "axioms": []
+    },
+    {
+      "theorem": "Snake9.Undominated167.equality_coverage",
+      "axioms": []
+    },
+    {
+      "theorem": "Snake9.Undominated167.endpoint_exclusion",
+      "axioms": []
+    },
+    {
+      "theorem": "Snake9.Undominated167.loss_from_undominated",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "91ecca67ab2b712144fd9b7e6a2245aff235fd73f7d2beb4070673dd051b7e9d",
+  "object": "E:\\Snake-in-a-box\\milestones\\167-undominated-corners\\build\\Undominated167.olean",
+  "olean_sha256": "69c02b9eb283f630bb24a896ce78e8080e2b56ba5c6af37a3910227cdcaa71d0"
+}

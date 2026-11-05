@@ -1,0 +1,124 @@
+{
+  "status": "FAILED",
+  "module": "PathStructure",
+  "source": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathStructure.lean",
+  "source_sha256": "678f7f452436f7b025a96f85f2949d0dd3feeea890e76b96c6428757917d53bc",
+  "checker_sha256": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\local-execution.json": "1b931924feb8fab6497007066f94fcb4217a129422d23d55de5a68594b726115",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathStructure.lean": "678f7f452436f7b025a96f85f2949d0dd3feeea890e76b96c6428757917d53bc",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\check_local.py": "a8fec9c66961274fe09e08666603b8ec2b1080e3efdca3d97857d1682ffe482e",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\data\\Snake9-audit.json": "153c584cd55a1d972b27fb340bbdd2c30632679ed094146151fa49d7168b8616",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\build\\Snake9.olean": "28cf5573e4da0783c3445a0c54d97d9af8a3d7ae38a0a03b9b2ede3e47543a38"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\PathStructure-1793803883670743200\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\lean\\PathStructure.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\169-closed-cube-components\\logs\\PathStructure-1793803883670743200\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1299427328,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 92,
+    "snapshot_seconds": 0.01599999999962165
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1268166656,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 18596,
+          "ParentProcessId": 43596,
+          "PrivatePageCount": 37576704,
+          "WorkingSetSize": 39505920
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.0319999999992433
+    },
+    {
+      "free_bytes": 1049387008,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 18596,
+          "ParentProcessId": 43596,
+          "PrivatePageCount": 249806848,
+          "WorkingSetSize": 284364800
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.031000000000858563
+    }
+  ],
+  "compiler_pid": 18596,
+  "exit_code": 1,
+  "stop_reason": null,
+  "seconds": 2.125,
+  "axioms": [
+    {
+      "theorem": "Snake9.no_four_cycle",
+      "axioms": [
+        "propext",
+        "sorryAx",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.selected_three_neighbors_repeat",
+      "axioms": [
+        "propext",
+        "sorryAx",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.low_degree_index_is_endpoint",
+      "axioms": [
+        "propext",
+        "sorryAx",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.three_low_degree_vertices_repeat",
+      "axioms": [
+        "propext",
+        "sorryAx",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.four_candidates_impossible",
+      "axioms": [
+        "propext",
+        "sorryAx",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "22f5ef363e7a09023e1481afb2d96f208c1757e2995b2cbda88282199906c85b"
+}
