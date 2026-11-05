@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "module": "Retuning176",
+  "source": "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\lean\\Retuning176.lean",
+  "source_sha256": "40d17a106377eaea9d4e0f7cf90edee38be7989445315fcd7a99e56b53ae97f4",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\data\\Retuning176-execution.json": "a1d5b2475312331c960180e85f0c7f9e217f84c05fce3fe88a3e0eae7244ee9c",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\lean\\Retuning176.lean": "40d17a106377eaea9d4e0f7cf90edee38be7989445315fcd7a99e56b53ae97f4",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\logs\\Retuning176-1793879541875879800\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\lean\\Retuning176.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\logs\\Retuning176-1793879541875879800\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 3147464704,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 81,
+    "snapshot_seconds": 0.01499999999987267
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 3137499136,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 44968,
+          "ParentProcessId": 39616,
+          "PrivatePageCount": 48091136,
+          "WorkingSetSize": 23916544
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 81,
+      "snapshot_seconds": 0.0
+    },
+    {
+      "free_bytes": 2884071424,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 44968,
+          "ParentProcessId": 39616,
+          "PrivatePageCount": 167579648,
+          "WorkingSetSize": 265875456
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 82,
+      "snapshot_seconds": 0.01499999999987267
+    }
+  ],
+  "compiler_pid": 44968,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0779999999999745,
+  "axioms": [
+    {
+      "theorem": "Retuning176.floor14_all_means_obstruction",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Retuning176.floor14_strict_margin",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Retuning176.floor15_range_criterion",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Retuning176.one_unit_edge_transfer",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Retuning176.one_unit_comparison",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Retuning176.one_unit_exact",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Retuning176.seven_disjoint_occurrences",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Retuning176.thirty_three_overlapping_occurrences",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "04d13d8b77135cc48f451a68a709000089b8d07e60e99b41711e06eb9b3cb40a",
+  "object": "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\build\\Retuning176.olean",
+  "olean_sha256": "416df209aca9363215b74c75eae7afaf7cc0e7fb44e6cad4e001c1322d3a2bb1"
+}

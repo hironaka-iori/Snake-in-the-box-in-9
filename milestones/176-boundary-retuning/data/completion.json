@@ -1,0 +1,103 @@
+{
+  "status": "PASS_TWO_ROUND_COMPLETION",
+  "round": 176,
+  "round_start_utc": "2026-11-05T11:45:30+00:00",
+  "audit_utc": "2026-11-05T11:59:50.841727+00:00",
+  "accepted": [
+    {
+      "module": "FinalBoundary176",
+      "source_sha256": "a5847482626465e2ba1790a88f6aa3635eb6db69d05aa574869c604b56f3ae04",
+      "object_sha256": "d5c99676b30d642cce113a2330945442673e42ee7a7a698cccc87e6d8580fca8",
+      "axiom_reports": 1
+    },
+    {
+      "module": "Floor15Optimum176",
+      "source_sha256": "0eba4b01ea9baf035ad96ea82c4f5e6ffe58abc4ca82a32cf48d1486e4f72a47",
+      "object_sha256": "f4f2f9f042a5377fe5f3cf2ec0b484907f65dcb703f6fd3e0d34066a6bba4969",
+      "axiom_reports": 3
+    },
+    {
+      "module": "Retuning176",
+      "source_sha256": "40d17a106377eaea9d4e0f7cf90edee38be7989445315fcd7a99e56b53ae97f4",
+      "object_sha256": "416df209aca9363215b74c75eae7afaf7cc0e7fb44e6cad4e001c1322d3a2bb1",
+      "axiom_reports": 8
+    },
+    {
+      "module": "Uniform15Arithmetic176",
+      "source_sha256": "b66dc0e7f077500d8c8a62b1621812ccab59140f4aa55afccfc0d04d7c4bee6b",
+      "object_sha256": "ba0f08a4f7a795053c84f08935cbafaec8997c16b2a9823aee97aa670a9354cc",
+      "axiom_reports": 1
+    }
+  ],
+  "axiom_reports": 13,
+  "native": [
+    {
+      "folder": "graph",
+      "result_sha256": "275f68289131e84e70de3b6d3d4b17de6b82e938682c56907ffc7554cda30464",
+      "peak_private_bytes": 575885312
+    },
+    {
+      "folder": "graph-final",
+      "result_sha256": "16d3605939f2e5d4bc2e457a965b276d606eca83682ab090cca29a7a1a42c85f",
+      "peak_private_bytes": 526880768
+    },
+    {
+      "folder": "graph-joint15",
+      "result_sha256": "7c0611993092559cc72f08ad12189c8ee191b814679e2cd62503e424c57c1ad5",
+      "peak_private_bytes": 589922304
+    }
+  ],
+  "documents": [
+    {
+      "file": "E:\\Snake-in-a-box\\paper\\snake9_research.tex",
+      "editor": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_research.tex",
+      "sha256": "897e6709d3beec2d4b62c2445877f4312dea1a8c82e56db58908901a18c27d92",
+      "lines": 7123,
+      "builtin_compile": "success",
+      "undefined_references": 0,
+      "undefined_citations": 0
+    },
+    {
+      "file": "E:\\Snake-in-a-box\\paper\\snake9_frontier_explanation.tex",
+      "editor": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_frontier_explanation.tex",
+      "sha256": "ef858a125978b9f1a260b698f3f7157a47d29e82dfd5aec841969c4c0bd1902e",
+      "lines": 177,
+      "builtin_compile": "success",
+      "undefined_references": 0,
+      "undefined_citations": 0
+    }
+  ],
+  "protected_files": {
+    ".gitignore": "20d6df071a62fabfd98360ddf985088445fde2dec19ef0281f5ab5c6d2b1941b",
+    "milestones/50-three-count-return/excess-screen/data/critical-family.json": "466e23170f15072cae3643971b5d9a62b2227fc9ffb4bca276173dc19892db82"
+  },
+  "resources": {
+    "free_bytes": 1942466560,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 88,
+    "snapshot_seconds": 0.016000000000076398
+  },
+  "uniform_pending_floors": {
+    "012034": 15,
+    "012301": 15,
+    "012340": 15,
+    "012345": 15
+  },
+  "final_scaled_mean": 4453,
+  "final_scaled_range": 5384,
+  "scale": 9,
+  "final_comparison": "235 - 1047/42253",
+  "new_unconditional_numerical_length_bound": false,
+  "requested_goal_action": "pause",
+  "last_manuscript_revision": 176,
+  "next_manuscript_revision": 186,
+  "remaining_premises": [
+    "Local floor15 proofs",
+    "Retained count conditions including hypothetical0123104 six-count floor25",
+    "Reference exclusions",
+    "Complete finite Lean edge certificate and graph-to-snake interpretation"
+  ]
+}

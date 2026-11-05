@@ -1,0 +1,519 @@
+{
+  "version": 1,
+  "base_head": "6416730735e338fbf794eb04ffb25cd481b21b82",
+  "scopes": [
+    "milestones/176-boundary-retuning",
+    "milestones/176-boundary-retuning"
+  ],
+  "documents": [
+    "README.md",
+    "handoff/CURRENT_STATUS.md",
+    "handoff/NEXT_AGENT_PROMPT.md",
+    "paper/snake9_research.tex",
+    "paper/snake9_frontier_explanation.tex"
+  ],
+  "files": {
+    "README.md": {
+      "action": "add",
+      "sha256": "1826eeb9c79e05d66ee84c8afa9584aedbfc66937cd748331ac58ca88b8afd73",
+      "bytes": 100727
+    },
+    "handoff/CURRENT_STATUS.md": {
+      "action": "add",
+      "sha256": "703b08811e78f3e3d0ccff5148ef24690a07a57472f2325e973597004f1e569b",
+      "bytes": 6257
+    },
+    "handoff/NEXT_AGENT_PROMPT.md": {
+      "action": "add",
+      "sha256": "2fc2f4c51ebbd29328815852adf0db7e3ccc7f866a4bc90a130300161c38c949",
+      "bytes": 1881
+    },
+    "milestones/176-boundary-retuning/.gitattributes": {
+      "action": "add",
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992",
+      "bytes": 9
+    },
+    "milestones/176-boundary-retuning/README.md": {
+      "action": "add",
+      "sha256": "703b08811e78f3e3d0ccff5148ef24690a07a57472f2325e973597004f1e569b",
+      "bytes": 6257
+    },
+    "milestones/176-boundary-retuning/build/FinalBoundary176.olean": {
+      "action": "add",
+      "sha256": "d5c99676b30d642cce113a2330945442673e42ee7a7a698cccc87e6d8580fca8",
+      "bytes": 89344
+    },
+    "milestones/176-boundary-retuning/build/Floor15Optimum176.olean": {
+      "action": "add",
+      "sha256": "f4f2f9f042a5377fe5f3cf2ec0b484907f65dcb703f6fd3e0d34066a6bba4969",
+      "bytes": 210288
+    },
+    "milestones/176-boundary-retuning/build/Retuning176.olean": {
+      "action": "add",
+      "sha256": "416df209aca9363215b74c75eae7afaf7cc0e7fb44e6cad4e001c1322d3a2bb1",
+      "bytes": 238656
+    },
+    "milestones/176-boundary-retuning/build/Uniform15Arithmetic176.olean": {
+      "action": "add",
+      "sha256": "ba0f08a4f7a795053c84f08935cbafaec8997c16b2a9823aee97aa670a9354cc",
+      "bytes": 93504
+    },
+    "milestones/176-boundary-retuning/data/FinalBoundary176-audit.json": {
+      "action": "add",
+      "sha256": "735cce8697da5fac6e683d119d810c538ffb0d85df500d32fde51a97bff034a3",
+      "bytes": 86725
+    },
+    "milestones/176-boundary-retuning/data/FinalBoundary176-execution.json": {
+      "action": "add",
+      "sha256": "f5e7c98f6895a21a3e6319d69ebed5296cc35ef044076077c582c4064aa34d20",
+      "bytes": 78569
+    },
+    "milestones/176-boundary-retuning/data/Floor15Optimum176-audit.json": {
+      "action": "add",
+      "sha256": "a4b7379e832368d12e296ada7c5d939a5e5ab2bce16b55338348bd29127467af",
+      "bytes": 5255
+    },
+    "milestones/176-boundary-retuning/data/Floor15Optimum176-execution.json": {
+      "action": "add",
+      "sha256": "4fdaa6381dfef10b5080b15ecd82c149796547cfcb8cd1eecc6b8cf9b48d423f",
+      "bytes": 852
+    },
+    "milestones/176-boundary-retuning/data/Retuning176-audit.json": {
+      "action": "add",
+      "sha256": "c39f2d0cb4ff24d8f1ac74b7bc30ca4943ecc11e2cad700f5c5f9b6c9a68902c",
+      "bytes": 4901
+    },
+    "milestones/176-boundary-retuning/data/Retuning176-execution.json": {
+      "action": "add",
+      "sha256": "a1d5b2475312331c960180e85f0c7f9e217f84c05fce3fe88a3e0eae7244ee9c",
+      "bytes": 840
+    },
+    "milestones/176-boundary-retuning/data/Uniform15Arithmetic176-audit.json": {
+      "action": "add",
+      "sha256": "cc9c4cdcae0c09776f95013aa6e05a5edaf3273fad0c626bcbe6e9e0b2aba305",
+      "bytes": 3571
+    },
+    "milestones/176-boundary-retuning/data/Uniform15Arithmetic176-execution.json": {
+      "action": "add",
+      "sha256": "c37e765ca7f53a64818097d82fdc51745ddcbb37e6b17d4e2afa2834a00c9c9e",
+      "bytes": 862
+    },
+    "milestones/176-boundary-retuning/data/completion.json": {
+      "action": "add",
+      "sha256": "4942c44c6b94d7d6ed4f09c84ec4804299b0ae4e12e0718cd28b51a2d821ea79",
+      "bytes": 3794
+    },
+    "milestones/176-boundary-retuning/data/graph-final-run.json": {
+      "action": "add",
+      "sha256": "857b94e205d2c206ef3d2b1a8381827c326f9b88ab4fe7d565e92f013f84403f",
+      "bytes": 673
+    },
+    "milestones/176-boundary-retuning/data/graph-final/floor15.json": {
+      "action": "add",
+      "sha256": "5d052e9c61ef30895869a28b379d22c247073fe7a89cec1871c2312c340abeba",
+      "bytes": 1625
+    },
+    "milestones/176-boundary-retuning/data/graph-final/potential-floor15.i64.gz": {
+      "action": "add",
+      "sha256": "8bc1edb62676ee455d5da133b2e5bbc0bfda5acccb3e6eecf8b7bbcf623839f8",
+      "bytes": 230399
+    },
+    "milestones/176-boundary-retuning/data/graph-final/progress.json": {
+      "action": "add",
+      "sha256": "41091fb7819e7f50ae1715ebcdfc099e9d2d1887f86cc7a91439f5ae2ae8896d",
+      "bytes": 29
+    },
+    "milestones/176-boundary-retuning/data/graph-final/results.json": {
+      "action": "add",
+      "sha256": "16d3605939f2e5d4bc2e457a965b276d606eca83682ab090cca29a7a1a42c85f",
+      "bytes": 14907
+    },
+    "milestones/176-boundary-retuning/data/graph-joint15-run.json": {
+      "action": "add",
+      "sha256": "f801483267b96923a266c7fd63519ae39aee241761cbd40a568a8b38e756f8b8",
+      "bytes": 689
+    },
+    "milestones/176-boundary-retuning/data/graph-joint15/floor15.json": {
+      "action": "add",
+      "sha256": "40c1562d9096119f69283d7c13eba7417367d558cd0a657a656f61731c13cb31",
+      "bytes": 1625
+    },
+    "milestones/176-boundary-retuning/data/graph-joint15/potential-floor15.i64.gz": {
+      "action": "add",
+      "sha256": "2e71ad5f6a3215b87117dda9cc6c02f1c04b50ff3dc8b10fc9ce990a4d6af960",
+      "bytes": 230555
+    },
+    "milestones/176-boundary-retuning/data/graph-joint15/progress.json": {
+      "action": "add",
+      "sha256": "41091fb7819e7f50ae1715ebcdfc099e9d2d1887f86cc7a91439f5ae2ae8896d",
+      "bytes": 29
+    },
+    "milestones/176-boundary-retuning/data/graph-joint15/results.json": {
+      "action": "add",
+      "sha256": "7c0611993092559cc72f08ad12189c8ee191b814679e2cd62503e424c57c1ad5",
+      "bytes": 14907
+    },
+    "milestones/176-boundary-retuning/data/graph-next-run.json": {
+      "action": "add",
+      "sha256": "ac24e588b5c5157de82e5f4e6b2c001fbd31b669ff4721ea59f3ea98c90e8994",
+      "bytes": 700
+    },
+    "milestones/176-boundary-retuning/data/graph-next/floor15.json": {
+      "action": "add",
+      "sha256": "ac3e8746e67f2d1cfed4aeab753a2a79005f80bd2658e657cd8311feb2644203",
+      "bytes": 32590
+    },
+    "milestones/176-boundary-retuning/data/graph-next/progress.json": {
+      "action": "add",
+      "sha256": "e60ecec686f5461c2197858a28c71ef524d1b28f7a2af982891272178f2a99ae",
+      "bytes": 150
+    },
+    "milestones/176-boundary-retuning/data/graph-run.json": {
+      "action": "add",
+      "sha256": "e000aea04916353b6e6960651e8467e3994fa5b3c4fae609f9e6243c2207e032",
+      "bytes": 672
+    },
+    "milestones/176-boundary-retuning/data/graph/floor10.json": {
+      "action": "add",
+      "sha256": "02e2a11eba6b3a2f2254a33655dd69d91d2e33b7fe10da2f0ac843475f4afbcc",
+      "bytes": 1254
+    },
+    "milestones/176-boundary-retuning/data/graph/floor11.json": {
+      "action": "add",
+      "sha256": "cf5c3234c7ada4773be700868f56648186e3fba3f0cfddecb010dc09fe2cb51a",
+      "bytes": 4778
+    },
+    "milestones/176-boundary-retuning/data/graph/floor12.json": {
+      "action": "add",
+      "sha256": "95a329e7ed4bab0a860317ea7f66af3bb8dcc6706315eb417f3f868728d408a4",
+      "bytes": 13696
+    },
+    "milestones/176-boundary-retuning/data/graph/progress.json": {
+      "action": "add",
+      "sha256": "41091fb7819e7f50ae1715ebcdfc099e9d2d1887f86cc7a91439f5ae2ae8896d",
+      "bytes": 29
+    },
+    "milestones/176-boundary-retuning/data/graph/results.json": {
+      "action": "add",
+      "sha256": "275f68289131e84e70de3b6d3d4b17de6b82e938682c56907ffc7554cda30464",
+      "bytes": 37052
+    },
+    "milestones/176-boundary-retuning/data/independent-witness-audit.json": {
+      "action": "add",
+      "sha256": "4b141bad9fac0f4d42aaf554e0decda518c2ee7b0bcf9b2ef8661a28d14160da",
+      "bytes": 1711
+    },
+    "milestones/176-boundary-retuning/data/latex-compile.json": {
+      "action": "add",
+      "sha256": "59f6659b7bee46d0bacc89db2f870526ff5491c0fec4d43ee0de1d71f7b8d8c1",
+      "bytes": 878
+    },
+    "milestones/176-boundary-retuning/data/manual-stop-next.json": {
+      "action": "add",
+      "sha256": "a134e513fff1a8770138261f31a2267bd99ab3bc45d518db81a13ab00b331218",
+      "bytes": 332
+    },
+    "milestones/176-boundary-retuning/data/scalar-obstructions.json": {
+      "action": "add",
+      "sha256": "a6087b7c81b067b98cc523da57a9d5b67ff165688b9c9056910d35e71d2d6d3b",
+      "bytes": 44709
+    },
+    "milestones/176-boundary-retuning/data/stderr-final.log": {
+      "action": "add",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "milestones/176-boundary-retuning/data/stderr-joint15.log": {
+      "action": "add",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "milestones/176-boundary-retuning/data/stderr-next.log": {
+      "action": "add",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "milestones/176-boundary-retuning/data/stderr.log": {
+      "action": "add",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "milestones/176-boundary-retuning/data/stdout-final.log": {
+      "action": "add",
+      "sha256": "d10fca6c5c4be51231a020b2a2d2de8d1264fc6d5a434430610bfb0648047bea",
+      "bytes": 185
+    },
+    "milestones/176-boundary-retuning/data/stdout-joint15.log": {
+      "action": "add",
+      "sha256": "f7478269424fefd1efb295b2cc81cd0b0a61dc34355b9dad826f87592e81c586",
+      "bytes": 185
+    },
+    "milestones/176-boundary-retuning/data/stdout-next.log": {
+      "action": "add",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "milestones/176-boundary-retuning/data/stdout.log": {
+      "action": "add",
+      "sha256": "471620ff2523cd2a06309d858fbb8bc2887af5b6536128d278eb280f4ca88450",
+      "bytes": 284
+    },
+    "milestones/176-boundary-retuning/lean/FinalBoundary176.lean": {
+      "action": "add",
+      "sha256": "a5847482626465e2ba1790a88f6aa3635eb6db69d05aa574869c604b56f3ae04",
+      "bytes": 910
+    },
+    "milestones/176-boundary-retuning/lean/Floor15Optimum176.lean": {
+      "action": "add",
+      "sha256": "0eba4b01ea9baf035ad96ea82c4f5e6ffe58abc4ca82a32cf48d1486e4f72a47",
+      "bytes": 752
+    },
+    "milestones/176-boundary-retuning/lean/Retuning176.lean": {
+      "action": "add",
+      "sha256": "40d17a106377eaea9d4e0f7cf90edee38be7989445315fcd7a99e56b53ae97f4",
+      "bytes": 1661
+    },
+    "milestones/176-boundary-retuning/lean/Uniform15Arithmetic176.lean": {
+      "action": "add",
+      "sha256": "b66dc0e7f077500d8c8a62b1621812ccab59140f4aa55afccfc0d04d7c4bee6b",
+      "bytes": 296
+    },
+    "milestones/176-boundary-retuning/logs/FinalBoundary176-1793879747566677900/checker.py.txt": {
+      "action": "add",
+      "sha256": "78d7f9d294be375c8a3524a146c3026d0e2ea44779d862114a53f9e6006c4bae",
+      "bytes": 5706
+    },
+    "milestones/176-boundary-retuning/logs/FinalBoundary176-1793879747566677900/compiler.log": {
+      "action": "add",
+      "sha256": "92ddf97cdd9d8331b3b7c82211655463a1b114ffa7ed30c8a5e2723d1994efa9",
+      "bytes": 117
+    },
+    "milestones/176-boundary-retuning/logs/FinalBoundary176-1793879747566677900/module.olean": {
+      "action": "add",
+      "sha256": "d5c99676b30d642cce113a2330945442673e42ee7a7a698cccc87e6d8580fca8",
+      "bytes": 89344
+    },
+    "milestones/176-boundary-retuning/logs/FinalBoundary176-1793879747566677900/record.json": {
+      "action": "add",
+      "sha256": "735cce8697da5fac6e683d119d810c538ffb0d85df500d32fde51a97bff034a3",
+      "bytes": 86725
+    },
+    "milestones/176-boundary-retuning/logs/FinalBoundary176-1793879747566677900/source.lean.txt": {
+      "action": "add",
+      "sha256": "a5847482626465e2ba1790a88f6aa3635eb6db69d05aa574869c604b56f3ae04",
+      "bytes": 910
+    },
+    "milestones/176-boundary-retuning/logs/Floor15Optimum176-1793879599657431000/checker.py.txt": {
+      "action": "add",
+      "sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+      "bytes": 5705
+    },
+    "milestones/176-boundary-retuning/logs/Floor15Optimum176-1793879599657431000/compiler.log": {
+      "action": "add",
+      "sha256": "9e05cabf9864ffa0f85c3bc32ec05898ae61d0458ab8bac68da8ec0f5709fdf4",
+      "bytes": 297
+    },
+    "milestones/176-boundary-retuning/logs/Floor15Optimum176-1793879599657431000/module.olean": {
+      "action": "add",
+      "sha256": "f4f2f9f042a5377fe5f3cf2ec0b484907f65dcb703f6fd3e0d34066a6bba4969",
+      "bytes": 210288
+    },
+    "milestones/176-boundary-retuning/logs/Floor15Optimum176-1793879599657431000/record.json": {
+      "action": "add",
+      "sha256": "a4b7379e832368d12e296ada7c5d939a5e5ab2bce16b55338348bd29127467af",
+      "bytes": 5255
+    },
+    "milestones/176-boundary-retuning/logs/Floor15Optimum176-1793879599657431000/source.lean.txt": {
+      "action": "add",
+      "sha256": "0eba4b01ea9baf035ad96ea82c4f5e6ffe58abc4ca82a32cf48d1486e4f72a47",
+      "bytes": 752
+    },
+    "milestones/176-boundary-retuning/logs/Retuning176-1793879541875879800/checker.py.txt": {
+      "action": "add",
+      "sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+      "bytes": 5705
+    },
+    "milestones/176-boundary-retuning/logs/Retuning176-1793879541875879800/compiler.log": {
+      "action": "add",
+      "sha256": "04d13d8b77135cc48f451a68a709000089b8d07e60e99b41711e06eb9b3cb40a",
+      "bytes": 829
+    },
+    "milestones/176-boundary-retuning/logs/Retuning176-1793879541875879800/module.olean": {
+      "action": "add",
+      "sha256": "416df209aca9363215b74c75eae7afaf7cc0e7fb44e6cad4e001c1322d3a2bb1",
+      "bytes": 238656
+    },
+    "milestones/176-boundary-retuning/logs/Retuning176-1793879541875879800/record.json": {
+      "action": "add",
+      "sha256": "c39f2d0cb4ff24d8f1ac74b7bc30ca4943ecc11e2cad700f5c5f9b6c9a68902c",
+      "bytes": 4901
+    },
+    "milestones/176-boundary-retuning/logs/Retuning176-1793879541875879800/source.lean.txt": {
+      "action": "add",
+      "sha256": "40d17a106377eaea9d4e0f7cf90edee38be7989445315fcd7a99e56b53ae97f4",
+      "bytes": 1661
+    },
+    "milestones/176-boundary-retuning/logs/Uniform15Arithmetic176-1793879745533621100/checker.py.txt": {
+      "action": "add",
+      "sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+      "bytes": 5705
+    },
+    "milestones/176-boundary-retuning/logs/Uniform15Arithmetic176-1793879745533621100/compiler.log": {
+      "action": "add",
+      "sha256": "13cb4e899d61429866ec9d31c8168c668d5d4202dbbdab6d3680b11e18bedce8",
+      "bytes": 95
+    },
+    "milestones/176-boundary-retuning/logs/Uniform15Arithmetic176-1793879745533621100/module.olean": {
+      "action": "add",
+      "sha256": "ba0f08a4f7a795053c84f08935cbafaec8997c16b2a9823aee97aa670a9354cc",
+      "bytes": 93504
+    },
+    "milestones/176-boundary-retuning/logs/Uniform15Arithmetic176-1793879745533621100/record.json": {
+      "action": "add",
+      "sha256": "cc9c4cdcae0c09776f95013aa6e05a5edaf3273fad0c626bcbe6e9e0b2aba305",
+      "bytes": 3571
+    },
+    "milestones/176-boundary-retuning/logs/Uniform15Arithmetic176-1793879745533621100/source.lean.txt": {
+      "action": "add",
+      "sha256": "b66dc0e7f077500d8c8a62b1621812ccab59140f4aa55afccfc0d04d7c4bee6b",
+      "bytes": 296
+    },
+    "milestones/176-boundary-retuning/review/main-revision-stage1.json": {
+      "action": "add",
+      "sha256": "6182c703fe654944202c273df1bcbeb354abc7757de43ccfc63b99d8532bab41",
+      "bytes": 385
+    },
+    "milestones/176-boundary-retuning/review/manuscript-review.md": {
+      "action": "add",
+      "sha256": "fb387ab4892360545b842baa9da0f5f8bccfe17a6056c2beeb94767802ad128d",
+      "bytes": 1864
+    },
+    "milestones/176-boundary-retuning/review/snake9_frontier_explanation.tex.before.txt": {
+      "action": "add",
+      "sha256": "9e9b6f252b34219b543cf717156d078de985a44355e0a6b40c00176fc0a77b6d",
+      "bytes": 13427
+    },
+    "milestones/176-boundary-retuning/review/snake9_research.tex.before.txt": {
+      "action": "add",
+      "sha256": "8d5c245ca4727ca6eb76e39dd382bd5b67f09b0cf77d52c278ea03038f2f6d1e",
+      "bytes": 497525
+    },
+    "milestones/176-boundary-retuning/scripts/audit_completion.py": {
+      "action": "add",
+      "sha256": "d5ff751729dabb1c6bafa3e88963af62deb68249d56226d2b2cfbe7b16c32ec8",
+      "bytes": 4392
+    },
+    "milestones/176-boundary-retuning/scripts/audit_witnesses.py": {
+      "action": "add",
+      "sha256": "2f993fb6a94d4a892de5b0f03b6a45f29300a6bca2cab7f5395802d35cbdad93",
+      "bytes": 2825
+    },
+    "milestones/176-boundary-retuning/scripts/check_core.py": {
+      "action": "add",
+      "sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+      "bytes": 5705
+    },
+    "milestones/176-boundary-retuning/scripts/check_mathlib.py": {
+      "action": "add",
+      "sha256": "78d7f9d294be375c8a3524a146c3026d0e2ea44779d862114a53f9e6006c4bae",
+      "bytes": 5706
+    },
+    "milestones/176-boundary-retuning/scripts/native_guard_v5.py": {
+      "action": "add",
+      "sha256": "492f448c3b67c719f8a7f1be64efb74c580d635251476402750130a4c1b4a02c",
+      "bytes": 4211
+    },
+    "milestones/176-boundary-retuning/scripts/native_resources.py": {
+      "action": "add",
+      "sha256": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+      "bytes": 5908
+    },
+    "milestones/176-boundary-retuning/scripts/prepare.py": {
+      "action": "add",
+      "sha256": "5e55a557a51813206182fda1d3eed2ff043ec8217d122ed0749c746297151738",
+      "bytes": 4070
+    },
+    "milestones/176-boundary-retuning/scripts/prepare_core.py": {
+      "action": "add",
+      "sha256": "afe22f3bf37624a192818342f14a5e851817397a4c5441f9a30cf2ce55e3f499",
+      "bytes": 686
+    },
+    "milestones/176-boundary-retuning/scripts/publication.py": {
+      "action": "add",
+      "sha256": "ba79f6f2b06f0e96e6bf26c4cf96c9dcf4f00a694208816e0e6cd16d6bed8a32",
+      "bytes": 12276
+    },
+    "milestones/176-boundary-retuning/scripts/reconstruct_mapped.py": {
+      "action": "add",
+      "sha256": "97e893f5f4e1bbc13ba9227f74ae6e1d9f55b080e16f8553d7e8518f6248db81",
+      "bytes": 4322
+    },
+    "milestones/176-boundary-retuning/scripts/retune.py": {
+      "action": "add",
+      "sha256": "523cb699cba7da8f82cdbc9d738cac8fe870cc07f880db5e69c837c28f398740",
+      "bytes": 7353
+    },
+    "milestones/176-boundary-retuning/scripts/retune_final.py": {
+      "action": "add",
+      "sha256": "08a342d1609174f835e6cd8d15c0354ed9fd3a840d50f3979e737ae5f6a58dd0",
+      "bytes": 7433
+    },
+    "milestones/176-boundary-retuning/scripts/retune_joint15.py": {
+      "action": "add",
+      "sha256": "bb0d4c802fa172cf097542867589e682b2e3bf1dafd4f6293e76a527e43ce693",
+      "bytes": 7440
+    },
+    "milestones/176-boundary-retuning/scripts/retune_next.py": {
+      "action": "add",
+      "sha256": "b1e1d5d3209c05d36f23aa1b80bbc016e08e7422d24d6d53784e97e1613733a5",
+      "bytes": 7451
+    },
+    "milestones/176-boundary-retuning/scripts/revise_final.py": {
+      "action": "add",
+      "sha256": "c748a4304a9b3fa99596f1afaee9bb2ad6481304924dcd360b6907c80bcf54d8",
+      "bytes": 13423
+    },
+    "milestones/176-boundary-retuning/scripts/revise_main.py": {
+      "action": "add",
+      "sha256": "009c6fd47389e563cdd915f827ab6043667b8137409f6362776dcb24154f2da1",
+      "bytes": 12968
+    },
+    "milestones/176-boundary-retuning/scripts/run_retune.py": {
+      "action": "add",
+      "sha256": "a30577f7dec55894163425b2cdef91e8a095a0bfdc3f898a97d49acee940ba78",
+      "bytes": 1866
+    },
+    "milestones/176-boundary-retuning/scripts/run_retune_final.py": {
+      "action": "add",
+      "sha256": "d7a126e9524d819c0a9d93c4b7b5f95281a90f6abe3c88b05126840679a9c90a",
+      "bytes": 1920
+    },
+    "milestones/176-boundary-retuning/scripts/run_retune_joint15.py": {
+      "action": "add",
+      "sha256": "f54c780d9d5f6f0d36bc6bd5e48e48b37e0b26496a708f073eae4191605b0783",
+      "bytes": 1930
+    },
+    "milestones/176-boundary-retuning/scripts/run_retune_next.py": {
+      "action": "add",
+      "sha256": "197a8bccce12dfa4064750186efd55bba7b747679e0e0aad4009b22e29158315",
+      "bytes": 1915
+    },
+    "milestones/176-boundary-retuning/scripts/scalar_obstructions.py": {
+      "action": "add",
+      "sha256": "0acf16aa9701bd3b94f288893af763b7fb058244ae2a0e9690361f0581ba56e4",
+      "bytes": 3529
+    },
+    "paper/snake9_frontier_explanation.tex": {
+      "action": "add",
+      "sha256": "ef858a125978b9f1a260b698f3f7157a47d29e82dfd5aec841969c4c0bd1902e",
+      "bytes": 9146
+    },
+    "paper/snake9_research.tex": {
+      "action": "add",
+      "sha256": "897e6709d3beec2d4b62c2445877f4312dea1a8c82e56db58908901a18c27d92",
+      "bytes": 507228
+    }
+  },
+  "self_policy": "Manifest excluded from its own files; its exact bytes are separately verified in the index.",
+  "scope": "Round176 research artifacts and current documents; exact-byte publication."
+}

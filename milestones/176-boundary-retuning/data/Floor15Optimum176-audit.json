@@ -1,0 +1,136 @@
+{
+  "status": "PASS",
+  "module": "Floor15Optimum176",
+  "source": "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\lean\\Floor15Optimum176.lean",
+  "source_sha256": "0eba4b01ea9baf035ad96ea82c4f5e6ffe58abc4ca82a32cf48d1486e4f72a47",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\data\\Floor15Optimum176-execution.json": "4fdaa6381dfef10b5080b15ecd82c149796547cfcb8cd1eecc6b8cf9b48d423f",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\lean\\Floor15Optimum176.lean": "0eba4b01ea9baf035ad96ea82c4f5e6ffe58abc4ca82a32cf48d1486e4f72a47",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\logs\\Floor15Optimum176-1793879599657431000\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\lean\\Floor15Optimum176.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\logs\\Floor15Optimum176-1793879599657431000\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 3190595584,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 80,
+    "snapshot_seconds": 0.016000000000076398
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 3182465024,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 34272,
+          "ParentProcessId": 3800,
+          "PrivatePageCount": 48091136,
+          "WorkingSetSize": 25477120
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 80,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2932883456,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 34272,
+          "ParentProcessId": 3800,
+          "PrivatePageCount": 104886272,
+          "WorkingSetSize": 274169856
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 82,
+      "snapshot_seconds": 0.01499999999987267
+    },
+    {
+      "free_bytes": 2883137536,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 34272,
+          "ParentProcessId": 3800,
+          "PrivatePageCount": 147316736,
+          "WorkingSetSize": 316534784
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 82,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2837250048,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 34272,
+          "ParentProcessId": 3800,
+          "PrivatePageCount": 243990528,
+          "WorkingSetSize": 373940224
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 82,
+      "snapshot_seconds": 0.01499999999987267
+    }
+  ],
+  "compiler_pid": 34272,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 4.266000000000076,
+  "axioms": [
+    {
+      "theorem": "Floor15Optimum176.joint_mean_range_lower_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Floor15Optimum176.equality_parameters",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Floor15Optimum176.actual_comparison_arithmetic",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "9e05cabf9864ffa0f85c3bc32ec05898ae61d0458ab8bac68da8ec0f5709fdf4",
+  "object": "E:\\Snake-in-a-box\\milestones\\176-boundary-retuning\\build\\Floor15Optimum176.olean",
+  "olean_sha256": "f4f2f9f042a5377fe5f3cf2ec0b484907f65dcb703f6fd3e0d34066a6bba4969"
+}

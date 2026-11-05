@@ -47,20 +47,23 @@ shares of empty squares. Completed results include the sharp pair bound
 eight on $012032$, a bound of twenty-four low-pair windows, a five-count
 sum of at least nineteen on $012310$, the universal $012032$ share floor
 16, and a stronger floor 17 under specified local count conditions.
-The conditional comparison giving 234 still requires four local share
-theorems, reference refutations and the complete potential certificate.
-For a further retained finite graph with its additional count assumptions,
-an exact computation and cycle-and-walk inequalities determine the best
-comparison after the stronger share is installed: $235-15/2348$, attained
-at mean 496, range 602 and zero uniform occurrence credit. Thus retuning
-those parameters cannot strengthen that fixed comparison. Retaining the
-exact rounding loss permits a different conditional comparison with the
-$012034$ floor weakened to 17. At mean $4462/9$ and range $5411/9$, a total
-loss of at least four gives $m\le235-3/42262$, hence $m\le234$.
-The positive-loss premise and inherited geometric and certificate
-requirements remain unresolved. Explicit disconnected configurations
-have zero loss, so local degree restrictions alone cannot supply the
-missing premise. The optimum and the numerical conjecture 196 remain open.
+A new boundary argument gives sums at least fourteen and sixteen for
+six and seven consecutive internal counts. Together with the endpoint
+bounds, these improve the omitted contributions in the two finite-graph
+arguments. The archived count-only argument now yields
+$39m+2s_0\le9192$, so a hypothetical 235-edge snake has at most thirteen
+empty squares. In the share argument, the boundary contribution rises
+from twenty-one to twenty-four. The existing potential with mean
+$4462/9$ and range $5411/9$ then gives the conditional bound
+$m\le235-3063/42262$, without a positive-loss assumption.
+The physical share-loss identity, the new boundary counts and their
+actual-snake accounting have passed Lean checks. The finite potential
+and its local-share, count-restriction and graph-coverage premises remain
+separate obligations. Retuning lowers the $012034$ floor to fifteen with the other pending
+floors fixed. A cycle-and-walk argument proves this integer threshold
+is least for the specified comparison. A second sufficient profile
+lowers all four pending floors simultaneously to fifteen. No new unconditional numerical length bound is claimed; the
+optimum and the numerical conjecture 196 remain open.
 
 \end{abstract}
 
@@ -109,7 +112,9 @@ The maximum edge length of an induced path in $\Q_9$ satisfies
 The lower bound is verified from the explicit transition sequence in Theorem~\ref{thm:lower}. The proof of the upper bound has three steps. First, count coordinate squares exactly and establish positive singleton counts, with a stronger contribution at each endpoint. Second, exclude a finite family of local configurations and verify an integer potential on every remaining transition. Third, sum the potential inequalities and substitute the resulting count estimate into the square identity. Section~\ref{sec:upper-proof} gives this argument directly for 235.
 
 The proof begins with the square census and the archived six-centre argument
-for 235. Direct six-count criteria then state sufficient conditions for
+for 235. The new six-count boundary strengthens its retained empty-square
+inequality, while the seven-count boundary strengthens the share argument
+without requiring a positive lower bound on rounding loss. Direct six-count criteria then state sufficient conditions for
 234 and 233. Local count and endpoint theorems support the empty-square
 shares and their common overlap budgets. The finite comparison graph is
 treated through exact history recognition, coverage of actual state walks,
@@ -130,7 +135,7 @@ $a(9)\ge191$ & An explicit snake with every vertex pair checked.\\
 $a(9)\le235$ & Archived contributor proof using 1287 local keys and a potential; the full independent rebuild remains pending.\\
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
-Conditional bound 234 & Slope 496, range 602 and boundary contribution 21. Four local shares remain unresolved; the $012032$ share-16 premise is established. The remaining 1358 reference refutations and complete finite potential certificate are still required.\\
+Conditional bound 234 & The new boundary contribution 24 removes the positive-loss premise from the retained floor-17 comparison. Local shares, reference exclusions, count restrictions and the complete graph certificate remain separate obligations.\\
 Actual-state construction and weight accounting & State construction, non-reference filters and baseline weights are checked. Reference retention remains conditional on 1358 entries of the 1378-key union.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
 New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
@@ -138,7 +143,7 @@ Endpoint and parity restrictions & Pair sum eight on $012032$ forces both endpoi
 Five-count sum on $012310$ & The five internal counts sum to at least 19. All 1397 modules, including the actual-snake deduction, have completed checks; no extra count, endpoint-location or parity premise remains.\\
 Low-pair occurrence bound & At most twenty-four $012032$ windows have pair sum at most nine, with at most twelve assigned to either endpoint.\\
 Local share bounds on $012032$ & Universal floor 16 and floor 17 under the count conditions of Theorem~\ref{thm:critical-count-share17}.\\
-Retained finite comparisons & The earlier loss-discarding optimum is $235-15/2348$. With the $012034$ floor 17 and total loss at least four, a checked finite potential gives $235-3/42262$. The loss and geometric premises remain unresolved.\\
+Boundary and retained comparisons & Six and seven omitted internal counts contribute at least 14 and 16. The former gives $s_0\le13$ at length 235 using the archived walk; the latter gives conditional 234 with nonnegative loss.\\
 $a(9)=196$ & A numerical extrapolation requiring both a construction and a next-length exclusion.\\
 \bottomrule
 \end{tabular}
@@ -223,6 +228,36 @@ All pair vertices $at$ with $t\ne a$ are now absent. Thus the selected vertex $a
 
 The endpoint estimate does not extend as a lower bound of two to every internal vertex. Theorem~\ref{thm:square-counterexample} gives a 137-edge snake with an internal count equal to one. The explicit witness and its verification are retained in the appendices.
 
+\subsection{Short sums needed at the boundary}
+\begin{lemma}[Six and seven internal counts]\label{lem:boundary-short-sums}
+Any six consecutive internal singleton counts sum to at least fourteen;
+any seven sum to at least sixteen.
+\end{lemma}
+\begin{proof}
+The counts are positive. Theorems~\ref{thm:no-adjacent-one-three} and
+\ref{thm:no-three-twos} establish that a count one has internal neighbours
+at least four, and three consecutive counts cannot all equal two.
+Every adjacent pair therefore sums to at least four. Every triple sums
+to at least six, with equality possible only for $(1,4,1)$: if no count
+is one, all three are at least two and equality is excluded; if a count
+is one, its neighbour restrictions give the stated case.
+
+Four consecutive counts sum to at least nine. Otherwise both disjoint
+pairs would sum to four, which forces all four counts to equal two and
+contradicts the triple restriction. Split six counts into two triples.
+If both sums exceed six, their total is at least fourteen. If one triple
+is $(1,4,1)$, the adjacent count in the other triple is at least four,
+and the remaining pair sums to at least four, again giving fourteen.
+For seven counts, split into four followed by three. Unless the last
+triple is $(1,4,1)$, the total is at least $9+7=16$. In that exceptional
+case, the preceding count is at least four and the first triple contributes
+at least six, so the total is at least $6+4+6=16$.
+\end{proof}
+The numerical bounds are sharp under these count restrictions alone:
+$(2,2,3,2,2,3)$ and $(2,2,3,2,2,3,2)$ attain them. No snake realizing
+these tuples at a minimal boundary is asserted. The arithmetic and its
+application to actual snake prefixes have passed Lean checks~\cite{boundary175archive}.
+
 \subsection{Reading a singleton count from missing corners}
 \begin{lemma}[Missing corners at a prescribed internal vertex]\label{lem:window-missing-corners}
 Let $S$ be the vertex set of a snake, and suppose $v,v+e_a,v+e_b\in S$, with $a\ne b$. Among the 21 unordered coordinate pairs $\{c,d\}$ disjoint from $\{a,b\}$, exactly $\alpha_S(v)$ have $v+e_c+e_d\notin S$.
@@ -275,38 +310,53 @@ There are 132 normalized induced eight-direction words. Each is checked against 
 \begin{proposition}[Singleton estimate with boundary terms]\label{prop:count-235}
 Every nontrivial $m$-edge snake in $\Q_9$ satisfies
 \begin{equation}\label{eq:count-235}
-4m\le T+21.
+4m\le T+13.
 \end{equation}
 \end{proposition}
 \begin{proof}
-Suppose $m\ge7$. Write $d_i$ for the direction joining $x_i$ to $x_{i+1}$. At index $i$, the state records $d_i,\ldots,d_{i+6}$ and $b_{i+2},\ldots,b_{i+6}$. Its next transition appends $b_{i+7}$. Summing~\eqref{eq:six-centre-step} over the $m-7$ transitions gives
+For $m\ge7$, the archived six-centre state walk appends counts
+$b_7,\ldots,b_{m-1}$ and has $m-7$ transitions. Summing
+\eqref{eq:six-centre-step} and using the potential range seven gives
 \[
-4(m-7)+\Psi_{m-7}\le\sum_{j=7}^{m-1}b_j+\Psi_0.
+4(m-7)\le\sum_{j=7}^{m-1}b_j+7.
 \]
-The first six internal singleton counts contribute at least six and the two endpoints contribute at least eight. Hence $\sum_{j=7}^{m-1}b_j\le T-14$. Using $0\le\Psi\le7$ gives
-\[
-4m-28\le T-14+7=T-7,
-\]
-which proves the assertion. For $1\le m<7$, positivity and the endpoint bounds give $T\ge m+7$, and $4m\le m+28\le T+21$.
+Lemma~\ref{lem:boundary-short-sums} gives at least fourteen from the
+first six internal counts, and the endpoints contribute at least eight.
+Since $b_j\le\alpha_j$, the sum on the right is at most $T-22$.
+Thus $4m-28\le T-15$, proving the assertion. For $1\le m<7$,
+positivity and the endpoint bounds give $T\ge m+7$ and $4m\le T+13$.
+The new boundary and this deduction are Lean-checked under the stated
+archived walk premise; its complete independent rebuild remains pending.
 \end{proof}
 
 \begin{theorem}[Retained empty-square bound]\label{thm:upper235}
 Every nontrivial $m$-edge snake in $\Q_9$ satisfies
 \begin{equation}\label{eq:retained-empty-235}
-\boxed{39m+2s_0\le9200.}
+\boxed{39m+2s_0\le9192.}
 \end{equation}
 In particular, $m\le235$.
 \end{theorem}
 \begin{proof}
-Substitute $T\ge4m-21$ into $T+2s_0+35(m+1)=9214$. This gives $39m+2s_0+14\le9214$. Since $s_0\ge0$ and $39\cdot236=9204>9200$, integrality gives $m\le235$. The zero-edge path satisfies the upper bound directly. Together with Theorem~\ref{thm:lower}, this proves Theorem~\ref{thm:main}.
+Substitute $T\ge4m-13$ into $T+2s_0+35(m+1)=9214$.
+This gives $39m+2s_0\le9192$. Since $39\cdot236=9204>9192$,
+integrality gives $m\le235$. The zero-edge path satisfies the length
+bound directly. Together with Theorem~\ref{thm:lower}, this proves
+Theorem~\ref{thm:main}, with the archived-proof qualification already stated.
 \end{proof}
 
-\begin{corollary}[Eighteen-empty-square target]\label{cor:eighteen-empty}
-A snake with at least eighteen empty squares has at most 234 edges. It therefore suffices to prove $s_0\ge18$ for every hypothetical 235-edge snake in order to improve the universal upper bound to 234.
+\begin{corollary}[Fourteen-empty-square target]\label{cor:eighteen-empty}\label{cor:fourteen-empty}
+A snake with at least fourteen empty squares has at most 234 edges.
+In particular, a hypothetical 235-edge snake has $s_0\le13$.
 \end{corollary}
 \begin{proof}
-Equation~\eqref{eq:retained-empty-235} gives $39m\le9164<39\cdot235=9165$. The threshold cannot be reduced using this inequality alone: the numerical pair $(m,s_0)=(235,17)$ satisfies it. This numerical consistency asserts no realizing snake. The retained-identity arithmetic and the threshold implications have been checked in Lean under their stated count and incidence premises.
+For $m\ge235$, inequality~\eqref{eq:retained-empty-235} gives
+$2s_0\le9192-39\cdot235=27$, so $s_0\le13$.
+Conversely, $s_0\ge14$ gives $39m\le9164<39\cdot235$.
+The count and census implications have passed Lean under their stated
+premises. This improves the former target of eighteen empty squares;
+the numerical length upper bound remains 235.
 \end{proof}
+
 The following sections retain the empty-square term through local share inequalities. They also describe restrictions on singleton counts needed to interpret those inequalities. The earlier 236 proof is preserved in Appendix~\ref{app:bound236}.
 
 \section{Direct six-count bounds with empty squares retained}\label{sec:six-direct}
@@ -784,12 +834,13 @@ vertices. In the disconnected branch, the checked lower bound uses the
 simpler observation that one complete component has at least five vertices
 and hence at least ten edges. The exact disconnected-case length count
 remains a written deduction supported by the checked constructions.
-The new remainder-sum representation still needs an explicit identification
-with the earlier implementation of the global share budget before these
-certificates are combined in a single Lean derivation.
+The physical empty-square and neighbour counts now have checked
+identifications with the earlier share-budget quantities. The exact
+share-plus-loss identity and the resulting budget inequality are checked
+in the same Lean derivation.
 No improved unconditional numerical length bound is claimed.
 
-\paragraph{The remaining critical case after rounds 172--174.}
+\paragraph{The small-loss reduction with the earlier boundary.}
 Write $G=24T+\sum_{x\in S}\sigma_{12}(x)$. The following reduction uses
 only the three explicit premises
 \[
@@ -816,18 +867,14 @@ their positive remainders are one of
 \]
 At every other corner, $d(q)\mid12e(q)$. At degree five, the possibility
 $e(q)\equiv2\pmod5$ would contribute four and is therefore excluded.
-The finite-list support bound, the complete positive-remainder list,
-and these modular deductions have passed Lean as arithmetic statements.
-Their combined instantiation with the older global-budget implementation
-remains pending. In particular, the preceding restrictions do not exclude
-a dominating 235-edge snake.
-
-The old share-budget proofs and the new physical loss theorem have passed
-a joint import and axiom check. A proof identifying their counts and
-retaining the exact loss in the budget has been written, but its compiler
-run was withheld by the established memory limit. This verification gap
-is preserved explicitly; compatibility alone does not establish the
-identification. Research pauses after round 174 at the author's request.
+The finite-list classification and modular deductions have passed Lean.
+The actual-snake support bound, divisibility restriction and conditional
+length reduction are now checked with the physical loss and global budget.
+These conclusions describe the earlier boundary-21 argument. The stronger
+boundary-24 argument below excludes length 235 under the same potential
+premise without any separate lower bound on $L$. The local share and graph
+premises remain unresolved; consequently this does not exclude a
+235-edge snake unconditionally.
 
 \begin{lemma}[Weighted window packing]\label{lem:share-packing}
 Let $\sigma_j\ge0$ be shares at finitely many positions. Suppose that a family of windows $I_t$ has bounds $b_t\le\sum_{j\in I_t}\sigma_j$. If rational weights $w_t\ge0$ satisfy
@@ -939,10 +986,16 @@ Assume the sum is at most $L-1$. The path, count, share, and cap clauses then ha
 Ordinary local forests matching these five rows have share sums 263, 307, 378, 855, and 450, respectively. They show that the corresponding ordinary local conditions are consistent. They establish neither full-snake realizability nor sharpness of the stated share bounds.
 
 \begin{corollary}[Sufficient occurrence counts]\label{cor:share-occurrences-234}
-Nine pairwise disjoint five-centre occurrences with $L=96$ imply $m\le234$. Alternatively, 43 such occurrences with distinct starting positions suffice, allowing overlap.
+Seven pairwise disjoint five-centre occurrences with $L=96$ imply $m\le234$. Alternatively, 33 such occurrences with distinct starting positions suffice, allowing overlap.
 \end{corollary}
 \begin{proof}
-Disjoint occurrences give $\Sigma\ge9\cdot96=864$, hence $s_0\ge18$. For arbitrary distinct starts, any position lies in at most five windows, so $5\Sigma\ge43\cdot96=4128$. Combining with $\Sigma\le48s_0$ gives $240s_0\ge4128>240\cdot17$, again $s_0\ge18$. Apply Corollary~\ref{cor:eighteen-empty}. The numerical implications and overlap accounting have passed Lean. Neither required occurrence frequency is established for arbitrary snakes.
+Disjoint occurrences give $\Sigma\ge7\cdot96=672$, hence $s_0\ge14$.
+For distinct starts, every position lies in at most five windows, so
+$5\Sigma\ge33\cdot96=3168$. Combining this with $\Sigma\le48s_0$
+gives $240s_0\ge3168>240\cdot13$, again $s_0\ge14$.
+Apply Corollary~\ref{cor:fourteen-empty}. The numerical deductions have
+passed Lean under their count, share and overlap premises. Neither
+required occurrence frequency is established for arbitrary snakes.
 \end{proof}
 
 \subsection{Short return and low-count restrictions}\label{sec:short-returns}
@@ -1944,7 +1997,7 @@ The final composition has no remaining contradiction premise. Its saved
 source, object, log and dependency records have been audited; the external
 Lean and mathematics libraries remain trusted~\cite{broader154archive,share155archive}.
 \end{proof}
-The original nine-shape target is displayed below. Its status column refers to that target, so the completed share of twelve for $012345$ does not certify sixteen. Section~\ref{sec:least-floors} reduces the required $012034$ floor from 20 to 18; the weaker target still needs a local proof.
+The original nine-shape target is displayed below. Its status column refers to that target, so the completed share of twelve for $012345$ does not certify sixteen. Section~\ref{sec:least-floors} records the earlier reduction of the $012034$ floor from 20 to 18 at boundary twenty-one. The current boundary-twenty-four comparison uses floor fifteen for all four pending shapes, as stated in Section~\ref{sec:boundary-retuning}; these weaker local floors still need proofs.
 \begin{center}\small
 \begin{tabular}{c r l}
 \toprule
@@ -1961,7 +2014,7 @@ $012345$ & 16 & Pending; the weaker bound 12 is checked\\
 \bottomrule
 \end{tabular}
 \end{center}
-All nine target formulas have independently checked native Boolean refutations. Four still lack a completed Lean chain through the contradiction and geometric interpretation: $012034$, $012301$, $012340$ and $012345$. The $012032$ share-16 bound now has a complete contradiction replay, arbitrary-coordinate interpretation and reversal. The earlier conditional argument discards the remainder and requires floor 18 for $012034$ and floor 16 for the other three pending shapes. Section~\ref{sec:retained-loss-comparison} gives an alternative using floor 17 and a separate total-loss premise. The classification and conditional combination are checked separately from those premises. For $012034$, clause interpretation has passed, while the contradiction replay and target share theorem remain incomplete~\cite{shareclosurearchive,targetsharearchive,share152archive}.
+All nine target formulas have independently checked native Boolean refutations. Four still lack a completed Lean chain through the contradiction and geometric interpretation: $012034$, $012301$, $012340$ and $012345$. The $012032$ share-16 bound now has a complete contradiction replay, arbitrary-coordinate interpretation and reversal. The earlier conditional argument discards the remainder and requires floor 18 for $012034$ and floor 16 for the other three pending shapes. Section~\ref{sec:retained-loss-comparison} records the earlier floor-17 argument with a loss premise. The stronger boundary in Proposition~\ref{prop:boundary24} removes that loss requirement, and Section~\ref{sec:boundary-retuning} considers weaker floors. The classification and conditional combination are checked separately from those premises. For $012034$, clause interpretation has passed, while the contradiction replay and target share theorem remain incomplete~\cite{shareclosurearchive,targetsharearchive,share152archive}.
 
 Theorems~\ref{thm:share120} and~\ref{thm:critical-count-share17} and the count-independent bounds may apply to the same five centres. Their maximum is a valid lower bound for $H$. Adding such alternative bounds would count the same share more than once. The complete models below use the maximum rule throughout.
 
@@ -2135,7 +2188,7 @@ Each share is counted by at most five distinct starts, so $\sum_r L_r\le5\Sigma$
 
 For $m<n$, the elementary bound $m<n$ suffices whenever the intended upper bound is at least $n-1$. No empty or negative number of windows is used. The earlier eight-transition accounting and its zero-credit obstruction are retained in Appendix~\ref{app:earlier-five-model}.
 
-\subsection{The strengthened boundary estimate}\label{sec:boundary21}
+\subsection{Boundary contributions of twenty-one and twenty-four}\label{sec:boundary21}
 The general bound in Proposition~\ref{prop:general-window-budget} uses positivity at each omitted internal position. For nine-transition windows, the adjacent-pair restriction gives a stronger estimate.
 
 \begin{proposition}[Boundary contribution of twenty-one]\label{prop:boundary21}
@@ -2166,6 +2219,38 @@ Each path position occurs in at most five of the charged share windows. Hence $\
 \]
 implies the second inequality in~\eqref{eq:boundary21}. The actual-snake prefix estimate, indexed summation, and global arithmetic have passed Lean checks~\cite{boundaryarchive}.
 \end{proof}
+
+\begin{proposition}[Boundary contribution of twenty-four]\label{prop:boundary24}
+With the notation and local share premises of Proposition~\ref{prop:boundary21},
+\[
+\boxed{W+2880\le5G_{12},\qquad W+4200m+5L\le1098600,}
+\]
+where $L=\sum_qr_{12}(q)$.
+\end{proposition}
+\begin{proof}
+The omitted singleton positions are $0,1,\ldots,7,m$. The seven internal
+counts sum to at least sixteen by Lemma~\ref{lem:boundary-short-sums};
+the two endpoints contribute at least eight. Thus
+$\sum_{j=8}^{m-1}b_j+24\le T$.
+Each selected share is counted by at most five windows, so the first
+inequality follows after multiplying the count inequality by 120.
+Combining it with $5G_{12}+4200(m+1)+5L\le1105680$ gives the second.
+The actual counts, share reindexing and indexed window capacity have all
+passed Lean checks; each local lower bound remains an explicit premise.
+\end{proof}
+Consequently, whenever $\mu(m-8)\le W+R$, the stronger comparison is
+\begin{equation}\label{eq:boundary24-comparison}
+\boxed{(4200+\mu)m+5L\le1098600+8\mu+R.}
+\end{equation}
+At the previously checked parameters $\mu=4462/9$ and $R=5411/9$,
+this gives
+\[
+42262m+45L\le9928507,
+\qquad m\le235-\frac{3063}{42262}<235.
+\]
+Thus $m\le234$ using only $L\ge0$. This actual-snake implication has
+passed Lean under its local-share and potential premises. The old
+boundary-21 comparisons remain valid as weaker historical comparisons.
 
 \begin{corollary}[Potential criterion for excluding 235]\label{cor:potential234}
 Suppose every snake of length $m\ge9$ traces a walk of $m-8$ transitions with weights $120b_{r+8}+L_r$ as in Proposition~\ref{prop:boundary21}. Suppose also that a potential of range at most $R$ satisfies
@@ -2739,7 +2824,7 @@ The preceding comparison with $012034=20$ asks for more than the present
 inequality fixed. Allow only the five selected floors to decrease to
 nonnegative integers within their original target limits.
 
-\begin{proposition}[Integer floors sufficient for the current comparison]\label{prop:least-floors}
+\begin{proposition}[Integer floors sufficient for the earlier comparison]\label{prop:least-floors}
 In the order $012032,012034,012301,012340,012345$, the vectors in the box
 $[0,16]\times[0,20]\times[0,16]^3$ that admit the potential criterion
 \eqref{eq:strict234} on the saved graph are exactly
@@ -3017,9 +3102,12 @@ at these two positions is unnecessary. The contradiction excludes the
 assumed intervals and proves the disjunction~\cite{fivecount140archive}.
 \end{proof}
 
-\section{Current limitations of the retained graph}\label{sec:current-limitations}
+\section{Retained-graph comparisons and their limitations}\label{sec:current-limitations}
 This section fixes the retained graph of 4661572 transitions and the
-archived weights specified in each proposition.
+archived weights specified in each proposition. The earlier comparisons
+use boundary twenty-one; Section~\ref{sec:boundary-retuning} explicitly
+replaces it by twenty-four. Their optimality statements must be read with
+their respective boundary constants.
 Appendix~\ref{sec:sum-refinements} records the additional count hypotheses
 used to construct that graph. Its cycle witnesses need not be realizable
 by complete snakes. The baseline comparisons precede installation of the
@@ -3286,11 +3374,13 @@ weights increase, none belongs to either obstruction. Increasing weights
 or deleting edges elsewhere preserves both lower-bound witnesses and
 the feasible recorded potential, so it cannot change this optimum.
 A further improvement must alter at least one witness or the comparison
-itself. The conditional integer conclusion remains 234; its unresolved
+itself. Proposition~\ref{prop:boundary24} changes the boundary constant and
+therefore lies outside this earlier optimisation statement. The conditional integer conclusion remains 234; its unresolved
 geometric and certificate premises are not discharged by this optimization.
 
 \subsection{A weaker local floor with the loss retained}\label{sec:retained-loss-comparison}
-Keep the retained graph and its additional count restrictions, but weaken
+The following records the boundary-21 comparison used before the improvement
+in Proposition~\ref{prop:boundary24}. Keep the retained graph and its additional count restrictions, but weaken
 the $012034$ share floor from 18 to 17. All other floors and the
 count-conditioned $012032$ increment remain as in the preceding profile.
 A retained nine-edge cycle has weight 4462, and a retained nine-edge walk
@@ -3334,7 +3424,7 @@ obligations~\cite{loss164archive,threshold165archive}.
 To exclude a hypothetical 235-edge snake, its odd length supplies the
 applicable parity premise; the other premises still require proof.
 
-\paragraph{Tests of the missing loss premise.}
+\paragraph{Tests of the former positive-loss target.}
 An independent enumeration of coordinate squares gives loss 163 for the
 printed 191-edge witness. The 131 saved 191-edge snakes have losses from
 152 to 913. These observations impose no bound on unknown longer snakes.
@@ -3351,16 +3441,110 @@ Neither is a snake or a counterexample at the target length. They show
 why the omitted global path requirements cannot be inferred from the
 local degree or acyclicity condition alone.
 
+\subsection{Retuning after the stronger boundary}\label{sec:boundary-retuning}
+All comparisons in this subsection use boundary twenty-four, zero
+occurrence credit and only the nonnegativity of the total loss. They
+retain the same 4661572 edges, the additional count restrictions, and the
+proved count-conditioned $012032$ increment. In particular, the hypothetical
+six-count floor 25 for $0123104$, its specified first-count condition,
+remaining reference exclusions and graph interpretation are still separate
+premises. Lowering a share floor does not establish any of these premises.
+
+The following two weaker profiles are sufficient for the finite comparison.
+The four displayed floors are for $012034,012301,012340,012345$, respectively;
+the completed floors on all other shapes remain unchanged.
+\[
+\begin{array}{c|c|c|c}
+\text{pending floors}&\mu&R&\text{length comparison}\\\hline
+(15,15,15,15)&4453/9&5384/9&235-1047/42253\\
+(15,16,16,16)&4454/9&5374/9&235-642/21127
+\end{array}
+\]
+Both rows give $m\le234$ under the local and global premises.
+An intermediate profile $(16,15,15,15)$ was first checked using the
+old potential: each edge weight decreases by at most one, so the scaled
+mean decreases from 4462 to 4453 at range 5411. Retuning then gives the
+first displayed profile with all four pending floors fifteen:
+\[
+9w(u,v)+p(u)-p(v)\ge4453,\qquad 0\le p\le5384.
+\]
+All 4661572 inequalities pass an exact integer scan. The resulting bound
+is $42253m+45L\le9928408$, which is strictly below length 235 even when
+$L=0$. Its arithmetic and actual-snake implication under the window and
+potential premises have passed Lean.
+For the second row, a new potential satisfies
+\[
+9w(u,v)+p(u)-p(v)\ge4454,\qquad 0\le p\le5374
+\]
+on every retained edge. Substitution into
+\eqref{eq:boundary24-comparison} gives
+$42254m+45L\le9928406$. These finite edge scans use exact integer
+arithmetic. Lean checks the transfer and numerical implications;
+a complete Lean certificate for every retained edge remains unfinished.
+
+\begin{proposition}[Least floor and optimal comparison in the fixed profile]
+\label{prop:floor15-optimum}
+Keep the other pending floors at sixteen, the retained graph unchanged,
+and use the boundary-24 comparison with zero occurrence credit and no
+positive-loss premise. The least sufficient integer floor on $012034$
+is fifteen. At that floor, the least comparison over nonnegative rational
+means and ranges is
+\[
+\frac{4964203}{21127}=235-\frac{642}{21127},
+\]
+attained at $\mu=4454/9$ and $R=5374/9$.
+\end{proposition}
+\begin{proof}
+At floor fifteen, a retained nine-edge cycle has weight 4454 and a
+retained eight-edge walk has weight 3362. Hence every feasible mean and
+range satisfy
+\[
+9\mu\le4454,\qquad R\ge8\mu-3362.
+\]
+The comparison is therefore at least
+\[
+\frac{1095238+16\mu}{4200+\mu}
+\ge\frac{4964203}{21127}.
+\]
+The middle expression decreases with $\mu\ge0$, so its minimum under
+the cycle bound is attained at $4454/9$. Equality also requires
+$R=5374/9$. The exhibited potential attains both values. Its range is
+independently forced by the eight-edge walk since
+$8\cdot4454-9\cdot3362=5374$.
+
+At floor fourteen, the same nine-edge cycle has weight 4448, and a
+retained nine-edge walk has weight 3858. Thus
+$9\mu\le4448$ and $R\ge9\mu-3858$, yielding
+\[
+\frac{1098600+8\mu+R}{4200+\mu}
+\ge\frac{1094742+17\mu}{4200+\mu}
+\ge235+\frac7{21124}>235.
+\]
+Lower floors cannot improve this obstruction because they only decrease
+edge weights. The concrete cycle and walks were reconstructed independently
+from the original source rows; their weights, retention and consecutive
+endpoints were checked. The common-denominator inequalities and equality
+conditions have passed Lean. Since lowering the other floors cannot improve the floor-fourteen
+obstruction, fifteen is also the least common integer floor for these
+four shapes in this family. This is a limitation of the specified finite
+comparison, and it can change with additional loss information, different
+boundary information or justified graph changes.
+\end{proof}
+Trials at incorrectly high means for floors twelve through fifteen were
+retained as failed or unresolved trials. A long walk from one such trial
+exposed the decisive nine-edge cycle and led to the corrected floor-fifteen
+mean. No solver failure is used as an impossibility proof~\cite{boundary176archive}.
+
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 The maintained interval is $191\le a(9)\le235$, with the contributor-proof
 and independent-rebuild distinction stated in Section~\ref{sec:verification}.
-The retained-loss alternative in Section~\ref{sec:retained-loss-comparison}
-requires total loss at least four for the hypothetical 235-edge case,
-as well as every inherited graph premise. A concrete next target is to
-exclude total loss at most three under the full path conditions.
-Corollary~\ref{cor:small-loss-domination} restricts this target to snakes
-whose selected neighbourhoods cover the whole cube.
-The finite zero-loss countermodels do not settle that target.
+The boundary-24 argument removes the additional positive-loss requirement
+from the retained finite comparison. The principal remaining work is to
+establish the weakened local share floors and every retained graph
+assumption. Small-loss geometry remains useful information about snakes,
+but proving $L\ge4$ is no longer necessary for this conditional route.
+The strengthened count-only argument also reduces the sufficient
+empty-square target from eighteen to fourteen.
 The direct route to 234 requires a universal six-count floor, the stated
 shortfall bound, or one of the joint count and empty-square assumptions.
 The proved $0123041$ class, the $012310$ five-count theorem and the necessary
@@ -3382,7 +3566,7 @@ assembly. The full-key walk, total charge and telescoping implications
 are already checked. Exact-integer scans of all 4947008 accepted keys and
 the checked potential ranges support this task; partial Lean coverage
 does not replace its universal edge premise.
-\item For 234, complete the remaining local shares
+\item For the earlier accepted-key profile giving 234, complete the remaining local shares
 $(18,16,16,16)$ for $012034,012301,012340,012345$, including
 their geometric interpretation and reversal. The $012032$ share-16
 requirement is established. The completed baseline profile needs none
@@ -3431,7 +3615,7 @@ and total-charge deductions have passed Lean under their stated premises.
 Twenty of the 1378 reference entries have checked refutations; 1358 remain.
 Exact-integer scans verify the two saved potentials on all 4947008 accepted
 keys, while the complete Lean edge certificate remains unfinished.
-The conditional 234 profile uses share floors
+The earlier accepted-key conditional 234 profile uses share floors
 $(16,18,16,16,16)$ for $012032,012034,012301,012340,012345$ and has a
 strict margin of 30 at length 235 under those premises. The $012032$
 floor is now established; the remaining four floors and the separate
@@ -6926,6 +7110,14 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Exact numerical thresholds for the retain
 \bibitem{replay165archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Partial certificate replay and its verified stopping point}. Research record, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/958068470c2f6f252f858b1661142d0746582d1b/milestones/161-share18-full-replay}.
+
+\bibitem{boundary175archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Physical share-loss integration and stronger boundary counts}. Research milestone 175, 5 November 2026. Ten checked modules, the actual-snake boundary and the archived-walk qualification are recorded at
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/64167307/milestones/175-physical-share-loss}.
+
+\bibitem{boundary176archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Boundary-twenty-four retuning and weaker sufficient shares}. Research milestone 176, 5 November 2026. The retained-graph potentials, independent source-row witnesses, arithmetic checks and unresolved geometric premises are recorded at
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/176-boundary-retuning}.
 
 \end{thebibliography}
 \end{document}

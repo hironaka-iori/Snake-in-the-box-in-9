@@ -1,0 +1,686 @@
+{
+  "status": "PASS_REWEIGHTING_AND_BOUNDED_RETUNING",
+  "profiles": [
+    {
+      "profile": "floor16",
+      "floor012034": 16,
+      "other_pending_floors": 16,
+      "status": "PASS_REUSED_POTENTIAL",
+      "scaled_mean": 4453,
+      "scale": 9,
+      "range": 5411,
+      "changed_edges": 925075,
+      "maximum_decrease": 1,
+      "weight_sha256": "46557800b546b6c117997b5cbb2f53f1d0e42d40800e7c38e9eef748ae14e6db",
+      "scan": {
+        "minimum_slack": 0,
+        "violations": 0,
+        "edges": 4661572
+      },
+      "comparison": "9928435/42253"
+    },
+    {
+      "profile": "joint-one-unit",
+      "floor012034": 16,
+      "other_pending_floors": 15,
+      "status": "PASS_REUSED_POTENTIAL",
+      "scaled_mean": 4453,
+      "scale": 9,
+      "range": 5411,
+      "changed_edges": 2352867,
+      "maximum_decrease": 1,
+      "weight_sha256": "75e2155edb23db8e49f82fc9b1441a397e2634f01b28e0fd948a511dd6f3cfd0",
+      "scan": {
+        "minimum_slack": 0,
+        "violations": 0,
+        "edges": 4661572
+      },
+      "comparison": "9928435/42253"
+    },
+    {
+      "profile": "floor15",
+      "floor012034": 15,
+      "other_pending_floors": 16,
+      "status": "PASS_POTENTIAL",
+      "scaled_mean": 4454,
+      "scale": 9,
+      "range_lower_bound": 5374,
+      "maximum_acceptable_range": 6657,
+      "weight_sha256": "de9a7bcd212606ee800e81a731cd410287805ca81a1f4158d7776807a9aeeced",
+      "iterations": 26,
+      "seconds": 5.063000000000102,
+      "walk": [
+        {
+          "source_edge": 4794490,
+          "u": 995327,
+          "v": 1259707,
+          "weight": 255
+        },
+        {
+          "source_edge": 4001322,
+          "u": 1259707,
+          "v": 1594052,
+          "weight": 372
+        },
+        {
+          "source_edge": 4684558,
+          "u": 1594052,
+          "v": 1251771,
+          "weight": 495
+        },
+        {
+          "source_edge": 3607554,
+          "u": 1251771,
+          "v": 1585317,
+          "weight": 496
+        },
+        {
+          "source_edge": 1740309,
+          "u": 1585317,
+          "v": 1502626,
+          "weight": 616
+        },
+        {
+          "source_edge": 484809,
+          "u": 1502626,
+          "v": 1387503,
+          "weight": 496
+        },
+        {
+          "source_edge": 3070339,
+          "u": 1387503,
+          "v": 214652,
+          "weight": 376
+        },
+        {
+          "source_edge": 988715,
+          "u": 214652,
+          "v": 308137,
+          "weight": 256
+        }
+      ],
+      "range": 5374,
+      "scan": {
+        "minimum_slack": 0,
+        "violations": 0,
+        "edges": 4661572
+      },
+      "potential_file": "potential-floor15.i64.gz",
+      "potential_sha256": "fb9d3d135e3313fe208fee5ee9133f76c9eed256af39d73db6b9bb1175bbc99e",
+      "potential_archive_sha256": "8bc1edb62676ee455d5da133b2e5bbc0bfda5acccb3e6eecf8b7bbcf623839f8",
+      "comparison": "4964203/21127"
+    }
+  ],
+  "input_pins": {
+    "E:\\Snake-in-a-box\\milestones\\164-loss-corrected-potential\\data\\scaled-floor17\\result.json": "ab6eb59e23ad519a36a4514f116dd406f18766aa5da596f72ef9c6330c87facb",
+    "E:\\Snake-in-a-box\\milestones\\72-four-count-proof-closure\\critical-current\\data\\source-proved-model.json": "b667dade57b02849a3169c521c95dc3e5e9ce394101ad82d4cb55ee5c893c821",
+    "E:\\Snake-in-a-box\\milestones\\72-four-count-proof-closure\\critical-current\\build\\source-graph.npz": "b40f1ca44ad8f3269f890efe8decc60f19dabd647f11255c05df3727341c2c34",
+    "E:\\Snake-in-a-box\\milestones\\59-extended-share-window\\extended\\data\\model.json": "2334325d650cc9b71c0c6ab836183cecd4f1fc4d8b6555f63211592a22a0e2bf",
+    "E:\\Snake-in-a-box\\milestones\\73-countfree-share-catalogue\\data\\proved-model.json": "785956145396df7cf6230c446a9e7469b7c4b1713c6cf70d21a9091f1c8f7907",
+    "E:\\Snake-in-a-box\\milestones\\120-nine-transition-window\\data\\full-rules.json": "dae2b8fc4c807501037041ffada61d80cda1acbf03a3b4536c84338d444a2f57",
+    "E:\\Snake-in-a-box\\milestones\\144-countfree-share18\\data\\share18-impact\\removed-indices.json": "b29c2d2717b5d2e1cfefb95b827b1aa0f59376e0fbcdaf693e5553ddf85e82f9",
+    "E:\\Snake-in-a-box\\milestones\\164-loss-corrected-potential\\data\\scaled-floor17\\potential.i64.gz": "c86d90dfc69e74dacbe698487a8341f33864705801f0f5082a500b2c39414df9"
+  },
+  "inherited_assumptions": {
+    "count_rules": [
+      {
+        "name": "012340-middle2-outer22",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 22,
+        "probe": "milestones/111-critical-count-intervals/data/probes/outer-sum21-sorted.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012340-middle3-outer19",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 19,
+        "probe": "milestones/111-critical-count-intervals/data/probes/centre3-sum18-sorted.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012340-outer17",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 17,
+        "probe": "milestones/111-critical-count-intervals/data/probes/centre21-sum16.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012340-middle5-outer18",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 18,
+        "probe": "milestones/112-critical-sum-refinement/data/probes/012340-middle5-outer17.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012034-total20",
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          4
+        ],
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 20,
+        "probe": "milestones/112-critical-sum-refinement/data/probes/012034-total19.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012031-upper5-outer15",
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          1
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 15,
+        "probe": "milestones/112-critical-sum-refinement/data/probes/012031-upper5-outer14.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012314-upper2-outer19",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          4
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "lower": 19,
+        "probe": "milestones/112-critical-sum-refinement/data/probes/012314-upper2-outer18.json",
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ]
+      },
+      {
+        "name": "012034-middle545-pair9",
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          4
+        ],
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          4
+        ],
+        "lower": 9,
+        "probe": "milestones/113-all-four-sum-pressure/data/probes/012034-middle545-pair8.json"
+      },
+      {
+        "name": "012310-total19",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          1,
+          0
+        ],
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 19,
+        "probe": "milestones/114-total-count-pressure/data/probes/012310-total18.json"
+      },
+      {
+        "probe": "milestones/115-total-count-certificate/data/probes/012345-total21.json",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 22,
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ],
+        "name": "012345-total22",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "directions": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          4
+        ],
+        "bounds": [
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            21
+          ],
+          [
+            0,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "name": "012034-middle5-outer16",
+        "lower": 16,
+        "probe": "milestones/117-cycle-sum-refinement/data/probes/012034-middle5-outer15.json"
+      },
+      {
+        "name": "012304-completed-b-total23",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4
+        ],
+        "bounds": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            21
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            6,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 23,
+        "probe": "milestones/119-shared-five-count-pressure/data/full-probes/012304-completed-b-total22-full.json"
+      },
+      {
+        "name": "012304-conditional-a-total23",
+        "directions": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          4
+        ],
+        "bounds": [
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            21
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            6,
+            21
+          ]
+        ],
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "lower": 23,
+        "probe": "milestones/119-shared-five-count-pressure/data/full-probes/012304-conditional-a-total22-full.json"
+      }
+    ],
+    "count_rules_status": "The144 producer accepts UNSAT_UNCERTIFIED probes; all hypotheses remain unless later exact actual-snake proofs are separately pinned",
+    "six_count_floor": {
+      "shape": "0123104",
+      "floor": 25,
+      "status": "hypothetical",
+      "credit_guard": "First chronological stored count below6",
+      "deletion": "All six counts exact and sum below25"
+    },
+    "pair_floor": 9,
+    "pair_scope": "Odd edge lengths, including235; longer snakes have235-edge induced prefixes",
+    "checked_later_exclusions": [
+      "milestone138 actual nine-transition exclusion",
+      "milestone140 weak012032 five-count exclusion"
+    ],
+    "reference_union": 1378,
+    "reference_entries_pending": 1358,
+    "finite_contexts": 791,
+    "reference_potential_and_graph_to_snake_obligations_remain": true
+  },
+  "new_global_bound": false,
+  "complete_Lean_graph_certificate": false,
+  "baseline_weight_sha256": "22497b6436475fbd248e456d87ed9e7eb7ac4cf9d78ef2804704f1ef905024b2",
+  "retained_edges": 4661572
+}

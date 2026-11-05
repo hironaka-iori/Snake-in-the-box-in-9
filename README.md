@@ -1,3 +1,14 @@
+# Current result after rounds 175–176
+
+Research is paused at the author's request after two additional rounds.
+The project interval remains191–235 edges, with the archived235 proof's full independent rebuild still pending. No new unconditional numerical bound is claimed.
+
+The new actual-snake boundary is24 instead of21. Together with a freshly checked retained-graph potential, the four pending shares need only floor15, and the conditional234 argument no longer needs positive rounding loss. The independent count-only route now needs fourteen empty squares at length235 instead of eighteen. The physical loss integration and boundary accounting pass Lean.
+
+Read [the current handoff](handoff/CURRENT_STATUS.md), [round175](milestones/175-physical-share-loss/README.md), and [round176](milestones/176-boundary-retuning/README.md) for exact assumptions and evidence. The revised [main paper](paper/snake9_research.tex) and [short explanation](paper/snake9_frontier_explanation.tex) both compiled successfully. Last manuscript revision176; next186.
+
+## Historical records
+
 # Two-round stopping point: small loss and undominated corners
 
 Rounds 166 and 167 are complete. Research stops here for the requested

@@ -1,0 +1,9 @@
+# Manuscript revision176: consistency review
+
+The source was revised in place in the open editor folder and mirrored to paper/. The pre-revision copies are preserved here as .tex.before.txt evidence. The main preamble, author order and hypersetup are byte-equivalent as text; the original newline convention is retained. The short explanation preserves its preamble except the research-state date.
+
+Review scope: the abstract, overview and evidence table; exact square census and count-only235 derivation; new six- and seven-count boundary proof; physical loss integration; old small-loss reduction; five-centre occurrence threshold; local-floor catalogue; boundary packing; old and new retained-graph comparisons; closure and verification statements; bibliography. The entire documents were scanned for duplicate labels, missing references and missing citation keys. No such errors remain. This review reuses the existing proofs in unchanged historical sections; it is not an independent replay or a claim to have re-proved every historical theorem.
+
+The earlier boundary21 comparisons are explicitly identified as earlier fixed-model statements. Their numerical optimality statements remain valid in that scope. Current assertions now use boundary24 and the weaker uniform15 profile. The floor14/15 threshold concerns a specified finite comparison and is not a claim about the true geometric share minimum. The retained0123104 floor25 premise remains hypothetical. The archived235 proof retains its independent-rebuild qualification.
+
+Both current saved sources compiled successfully with the built-in editor compiler. No separate PDF was created, and no page-by-page visual review is claimed. The exact final source hashes are in data/latex-compile.json. Sources for rounds175–176 and failed computational attempts remain separate from the publication text.
