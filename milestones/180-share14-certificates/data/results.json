@@ -1,0 +1,296 @@
+{
+  "status": "FINISHED_BOUNDED_LOCAL_SEARCH",
+  "initial_resources": {
+    "free_bytes": 1841229824,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 88,
+    "snapshot_seconds": 0.01600000000325963
+  },
+  "results": [
+    {
+      "shape": "012034",
+      "target_share": 14,
+      "cap": 13,
+      "count_bounds": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ]
+      ],
+      "radius": 4,
+      "cycle_cuts": [],
+      "window": [
+        0,
+        1,
+        3,
+        7,
+        6,
+        14,
+        30
+      ],
+      "variables": 10854,
+      "clauses": 89487,
+      "cnf_sha256": "06ed8436ec93fd0ad44b06d3adfc74aeee565b3c55d4251923bf02a347e8a9e4",
+      "source_pins": {
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+        "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\scripts\\tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+        "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+        "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\scripts\\solve.py": "e78f161f8825a49fbc1fb44b38d1538840bf4d6ba356b2654f56d52d503143be"
+      },
+      "status": "UNSAT_NATIVE_REPLAY_PENDING",
+      "encoding_seconds": 1.860000000000582,
+      "peak_owned_private": 44212224,
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+        "-q",
+        "--lrat",
+        "--no-binary",
+        "--seed=1",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\cache\\012034\\input.cnf",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\cache\\012034\\raw.lrat"
+      ],
+      "pid": 59244,
+      "exit_code": 20,
+      "solver_seconds": 22.437999999994645,
+      "raw_bytes": 30302424,
+      "raw_sha256": "05f72273efc29545d6cc737bc18a85e37439ffdb6f0a185586341572ebc26f07",
+      "artifacts": {
+        "012034.cnf.gz": "b9feddd7d07cb155da588c1195eac40cc49d3a88b7354b544f45d3c1866e6ab4",
+        "012034.meanings.json.gz": "04e821c3daa5d259b954a1d1482f6bed1b8a2b9ff2cc4f2c953085ea06e63c7f",
+        "012034.lrat.gz": "a50793205f0dd3157ba30b587cabff96b6c29ee8bb39a4f7b13eb3e2ea969f5c"
+      }
+    },
+    {
+      "shape": "012301",
+      "target_share": 14,
+      "cap": 13,
+      "count_bounds": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ]
+      ],
+      "radius": 4,
+      "cycle_cuts": [],
+      "window": [
+        0,
+        1,
+        3,
+        7,
+        15,
+        14,
+        12
+      ],
+      "variables": 10854,
+      "clauses": 89487,
+      "cnf_sha256": "b6db5cafbcc726ff21bc89885b966af1b8100b55300ad369b966518a46bdd436",
+      "source_pins": {
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+        "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\scripts\\tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+        "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+        "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\scripts\\solve.py": "e78f161f8825a49fbc1fb44b38d1538840bf4d6ba356b2654f56d52d503143be"
+      },
+      "status": "SAT_NATIVE",
+      "encoding_seconds": 1.4060000000026776,
+      "peak_owned_private": 44511232,
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+        "-q",
+        "--lrat",
+        "--no-binary",
+        "--seed=1",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\cache\\012301\\input.cnf",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\cache\\012301\\raw.lrat"
+      ],
+      "pid": 47260,
+      "exit_code": 10,
+      "solver_seconds": 0.3120000000053551,
+      "raw_bytes": 325021,
+      "raw_sha256": "7bb073532fa60ac8f701347d0d7f537089cfc01862220a61fc0b503a112137bb",
+      "artifacts": {
+        "012301.cnf.gz": "1160d2e3c9f563d736ec090285c5b38cbb1fc9159f57743e1357007f076148a4",
+        "012301.meanings.json.gz": "097e662b6a4fd768ea829d316fd213ed43b89a036270f4ca138962e85053cc91"
+      }
+    },
+    {
+      "shape": "012340",
+      "target_share": 14,
+      "cap": 13,
+      "count_bounds": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ]
+      ],
+      "radius": 4,
+      "cycle_cuts": [],
+      "window": [
+        0,
+        1,
+        3,
+        7,
+        15,
+        31,
+        30
+      ],
+      "variables": 10854,
+      "clauses": 89487,
+      "cnf_sha256": "8ba088bcf0470680bded41e3699ec2d9aafcf519027429563d121fc1503f10e7",
+      "source_pins": {
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+        "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\scripts\\tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+        "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+        "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\scripts\\solve.py": "e78f161f8825a49fbc1fb44b38d1538840bf4d6ba356b2654f56d52d503143be"
+      },
+      "status": "UNSAT_NATIVE_REPLAY_PENDING",
+      "encoding_seconds": 1.389999999999418,
+      "peak_owned_private": 49479680,
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+        "-q",
+        "--lrat",
+        "--no-binary",
+        "--seed=1",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\cache\\012340\\input.cnf",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\cache\\012340\\raw.lrat"
+      ],
+      "pid": 57236,
+      "exit_code": 20,
+      "solver_seconds": 21.781000000002678,
+      "raw_bytes": 28078670,
+      "raw_sha256": "80d358eac2f1da465549e49be6a8459ea353b63dbec36b35f3618a985c5e2c2a",
+      "artifacts": {
+        "012340.cnf.gz": "d85dad093365542de57295d1c5e33d6bbaaf5bb029fa63e2ccb97df2cc1fe951",
+        "012340.meanings.json.gz": "73cc0929d7f347306baef4a41f853f9f6efa33d67546856c0df9709cc5a93d13",
+        "012340.lrat.gz": "e1b6c31af947631f1b499bc0e3757d94b2946ba8c3bd9882128370afbd1eff70"
+      }
+    },
+    {
+      "shape": "012345",
+      "target_share": 14,
+      "cap": 13,
+      "count_bounds": [
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ],
+        [
+          0,
+          21
+        ]
+      ],
+      "radius": 4,
+      "cycle_cuts": [],
+      "window": [
+        0,
+        1,
+        3,
+        7,
+        15,
+        31,
+        63
+      ],
+      "variables": 10854,
+      "clauses": 89487,
+      "cnf_sha256": "391e771bb4b8bea17cfa2c1761109418e64407cb706858a0eeb1a49818ab7b9c",
+      "source_pins": {
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+        "E:\\Snake-in-a-box\\milestones\\28-direct-share-certificates\\scripts\\tagged_share.py": "4a0d79a5a0dfc816d54119dee1b126da954aa7b91f74d63476ce8d22e6f41808",
+        "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\gen_lean_sat.py": "33e6094ba48ddd8fa6cb7c9e9c2c2cab15c4e9a68908b0427125a2b11c683ecd",
+        "E:\\Snake-in-a-box\\milestones\\10-window-aggregate\\scripts\\wincert.py": "346cc64a58d475a51d4a1622c549c79426035e8df014ebd7bc42097067b9ff01",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\scripts\\solve.py": "e78f161f8825a49fbc1fb44b38d1538840bf4d6ba356b2654f56d52d503143be"
+      },
+      "status": "UNSAT_NATIVE_REPLAY_PENDING",
+      "encoding_seconds": 1.5160000000032596,
+      "peak_owned_private": 54984704,
+      "command": [
+        "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+        "-q",
+        "--lrat",
+        "--no-binary",
+        "--seed=1",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\cache\\012345\\input.cnf",
+        "E:\\Snake-in-a-box\\milestones\\180-share14-certificates\\cache\\012345\\raw.lrat"
+      ],
+      "pid": 33352,
+      "exit_code": 20,
+      "solver_seconds": 85.79700000000594,
+      "raw_bytes": 122182401,
+      "raw_sha256": "30354ad3b3e04d5da0826df9cf160b2d0055c4a36d00cd31c8d34500b29fa237",
+      "artifacts": {
+        "012345.cnf.gz": "7614038657a688d8d9a4620acddddb804d193062ec4b7b29928597c236d2df5f",
+        "012345.meanings.json.gz": "9824f4e30ea2e48b64d3fa465073f8503f18927a456bd37d614c9b399d4d0221",
+        "012345.lrat.gz": "8b9673fad7195e0d0391cc632248f1cde79b4a90aa9a1e786c63e6699241d6b8"
+      }
+    }
+  ],
+  "Lean_replay": false,
+  "actual_snake_bridge": false,
+  "new_global_bound": false
+}

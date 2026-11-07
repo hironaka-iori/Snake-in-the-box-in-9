@@ -1,3 +1,9 @@
+# Round180 complete: 2 of3 requested rounds
+
+Proceed with round181, then pause. Three floor14 queries returned native UNSAT with saved LRAT evidence. The012301 query has a verified zero-share, zero-local-loss assignment containing sixteen eight-cycles. Its canonical window can be closed by vertex4 or8; both are forbidden in an actual snake. Read milestones/180-share14-certificates/README.md. No global numerical bound changed.
+
+## Earlier checkpoint
+
 # Current instruction: complete rounds179–181, then pause
 
 Round179 is complete (1 of3). It reduces the low-loss rational-share target to a strict bound greater than72/5 using a2/5 rounding deficit on the four pending patterns. Read milestones/179-window-rounding/README.md. Two rounds remain; the earlier pause instruction below is superseded by the current user resume.

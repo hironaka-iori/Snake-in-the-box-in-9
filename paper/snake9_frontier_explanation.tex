@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 179: 7 November 2026}
+\date{Research state after round 180: 7 November 2026}
 \begin{document}
 \maketitle
 
@@ -234,6 +234,20 @@ Clearing denominators by 2520 gives $A=2520S+B$, with $B\le1008$,
 so $A>36288$ implies $S\ge15$. These arithmetic statements pass Lean.
 The required rational lower bound remains an open local proof target.
 
+\paragraph{An obstruction to a purely local low-loss proof.}
+The unrestricted radius-four share-cap-thirteen queries give native UNSAT
+outputs for $012034,012340,012345$, with proof replay still pending.
+For $012301$, a checked satisfying assignment has all five shares zero
+and zero loss over the window-neighbour set. It contains sixteen induced
+eight-cycles and is not a snake. Its total global loss is 5922, so it
+also fails the global low-loss hypothesis. The example shows why adding
+only the local remainder budget does not establish the proposed share bound.
+
+In canonical coordinates the window is $0,1,3,7,15,14,12$.
+Either endpoint-common-neighbour, 4 or 8, would close an eight-cycle;
+the saved model selects 8. An actual induced path must exclude both.
+The next step is to incorporate this path restriction into the local query.
+
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -270,10 +284,10 @@ one proposed way to obtain that local bound.
 $s_0\ge14$ for a hypothetical 235-edge snake would exclude that length
 through the retained count-only inequality.
 \end{enumerate}
-These are outstanding requirements, not completed results. The goal has resumed for three requested rounds. Round 179 is complete;
-two further rounds remain before the requested pause.
+These are outstanding requirements, not completed results. The goal has resumed for three requested rounds. Round 180 is complete;
+one further round remains before the requested pause.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--179.}
+\texttt{snake9\_research.tex} and research records 175--180.}
 \end{document}

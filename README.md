@@ -1,3 +1,9 @@
+# Current result after round180
+
+Two of three requested rounds are complete. The local012301 relaxation admits zero shares and zero local loss through a configuration containing eight-cycles. Three other floor14 queries yielded native UNSAT proofs, with replay pending. Read [round180](milestones/180-share14-certificates/README.md). One round remains before the requested pause.
+
+## Earlier checkpoints
+
 # Current result after round179
 
 One of three requested rounds is complete. The low-loss rational-share target improves to a strict bound greater than72/5, with the actual lower-bound proof still pending. Read [round179](milestones/179-window-rounding/README.md). The maintained project interval and inherited proof gaps are unchanged.
