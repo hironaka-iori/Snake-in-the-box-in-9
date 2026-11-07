@@ -1,3 +1,9 @@
+# Current instruction: complete rounds179–181, then pause
+
+Round179 is complete (1 of3). It reduces the low-loss rational-share target to a strict bound greater than72/5 using a2/5 rounding deficit on the four pending patterns. Read milestones/179-window-rounding/README.md. Two rounds remain; the earlier pause instruction below is superseded by the current user resume.
+
+## Previous checkpoint
+
 # Round 178: exact floor14 loss threshold; pause after publication
 
 The user requested one thorough round of approximately 15–20 minutes, then a pause. Round178 establishes a new conditional result. The maintained project interval is 191–235 edges; the archived contributor235 proof still lacks a complete independent rebuild. No new unconditional bound or longer construction is claimed.

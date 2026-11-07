@@ -3642,6 +3642,24 @@ sixteen would imply integer share at least fifteen when $L\le1$.
 Establishing that rational lower bound on the required windows is a
 proposed continuation, not a result of the present computation.
 
+\paragraph{Sharper rounding bound for the pending patterns.}
+For each of $012034,012301,012340,012345$, a cube vertex is adjacent to
+at most two of the five window centres. Three neighbours would have to
+be the first, third and fifth centres, since all neighbours have the same
+parity. The first and fifth centres differ in four coordinates in these
+patterns and therefore cannot share a neighbour. Canonical finite
+neighbour enumerations also pass Lean; transfer by translation and
+coordinate permutation is the written geometric argument.
+
+When $L=1$, the only positive remainder has degree five. Its contribution
+to a window's rational-to-integer deficit is therefore at most $2/5$.
+Thus a strict rational share bound greater than $72/5$ suffices for
+integer share at least fifteen; at $L=0$, a strict bound greater than
+fourteen suffices. Equality at $72/5$ does not suffice by this argument.
+Clearing denominators by 2520 gives $A=2520S+B$, with $B\le1008$,
+so $A>36288$ implies $S\ge15$. These arithmetic statements pass Lean.
+The required rational lower bound remains an open local proof target.
+
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 The maintained interval is $191\le a(9)\le235$, with the contributor-proof
 and independent-rebuild distinction stated in Section~\ref{sec:verification}.

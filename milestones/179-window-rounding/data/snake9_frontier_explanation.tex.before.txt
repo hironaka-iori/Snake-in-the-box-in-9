@@ -1,0 +1,262 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\newtheorem{lemma}{Lemma}
+\title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
+\author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
+\date{Research state after round 178: 6 November 2026}
+\begin{document}
+\maketitle
+
+\textbf{Problem and present result.}
+A snake in $Q_9$ is an induced path: two selected vertices are adjacent
+exactly when they are consecutive on the path. Its length $m$ counts
+edges. A verified construction has 191 edges. The project retains an
+archived contributor proof of the upper bound 235, whose complete
+independent rebuild remains pending. The maximum is unresolved.
+The numerical prediction 196 has neither a construction nor an optimality
+proof. The current conditional result is: uniform pending share floor
+fourteen, together with the retained graph premises and $L\ge2$, implies
+$m\le234$. Under those same share and graph premises, every remaining
+hypothetical snake with $m\ge235$ has exactly 235 edges and $L=0$ or $L=1$.
+Here $L$ is the total integer share loss defined in Section 2 below.
+The argument leading to this reduction, and its unresolved premises,
+are given in order.
+
+\textbf{1. The exact square budget.}
+Write $v=m+1$, let $T$ count coordinate squares with exactly one selected
+corner, and let $s_0$ count empty squares. There are
+$\binom92 2^7=4608$ coordinate squares, and each vertex lies in 36 of them.
+A snake contains no fully selected square. Its three-selected-corner
+squares correspond exactly to its $v-2$ internal vertices. Counting
+squares and selected corner incidences therefore gives
+\[
+\boxed{T+2s_0+35(m+1)=9214.}
+\]
+This identity converts a lower count estimate into an upper length estimate.
+
+Let $\alpha_i$ be the singleton-square count at the $i$th path vertex.
+Every count is positive, the endpoint counts are at least four, an internal
+count one has internal neighbours at least four, and three consecutive
+internal counts cannot all equal two. These are established geometric
+results. They imply that six internal counts sum to at least fourteen and
+seven sum to at least sixteen.
+
+Here is the short deduction. Every adjacent pair sums to at least four.
+A triple sums to at least six, with equality only at $(1,4,1)$; four
+counts sum to at least nine, since two pairs each summing to four would
+force four twos. Split six counts into two triples. If one has sum six,
+its adjacent count in the other triple is at least four and the remaining
+pair contributes at least four. Otherwise both triples sum to at least
+seven. For seven counts, split into four and three. The ordinary case
+contributes at least $9+7$; a final $(1,4,1)$ forces at least $6+4+6$.
+These deductions and their application to actual snake prefixes pass Lean.
+
+The archived count-only potential gives
+$4(m-7)\le\sum_{j=7}^{m-1}\min\{6,\alpha_j\}+7$ for $m\ge7$.
+The six omitted internal counts and the endpoints now contribute at
+least $14+8=22$, yielding $T\ge4m-13$. Shorter nontrivial paths satisfy
+this estimate directly. Substitution into the square identity gives
+\[
+\boxed{39m+2s_0\le9192.}
+\]
+Thus $m\le235$, and $m=235$ requires $s_0\le13$. Proving fourteen empty
+squares in that case would suffice to reach 234; the earlier target was
+eighteen. This deduction uses the archived walk estimate. Its new boundary
+and arithmetic are checked; the archive's full independent rebuild is
+still pending. Seven disjoint share-96 windows, or 33 such windows with
+distinct starts allowing overlap, would also force fourteen empty squares.
+Their required occurrence frequencies remain unproved.
+
+\textbf{2. Retaining the empty-square contribution exactly.}
+For a cube vertex $q$, let $e(q)$ count incident empty squares and $d(q)$
+count selected neighbours. Each selected vertex $x$ receives the integer share
+\[
+\sigma_{12}(x)=\sum_{q\sim x}\left\lfloor\frac{12e(q)}{d(q)}\right\rfloor.
+\]
+Every denominator here is positive because $x$ is selected. Define the
+remainder at $q$ to be $12e(q)\bmod d(q)$ for $d(q)>0$, and $12e(q)$
+otherwise; let $L$ be their sum. Exactly $d(q)$ selected vertices receive
+$q$'s share, and the division algorithm recovers $12e(q)$ after the
+remainder is added. Each empty square has four corners, so
+\[
+\sum_{x\in S}\sigma_{12}(x)+L=48s_0.
+\]
+Writing $G=24T+\sum_{x\in S}\sigma_{12}(x)$ and multiplying the square
+identity by 24 gives
+\[
+\boxed{G+840(m+1)+L=221136.}
+\]
+The physical counts, exact share-plus-loss identity and sufficient budget
+inequality are now connected in one checked Lean proof.
+
+\textbf{3. From local windows to a global length bound.}
+The nine-transition model charges $120\min\{6,\alpha_{r+8}\}$ and a
+valid lower bound on the five shares at positions $r+4,\ldots,r+8$.
+Let $W$ be the sum over all $m-8$ windows. The omitted singleton positions
+are $0,1,\ldots,7,m$. Their counts sum to at least $16+8=24$.
+Each share appears in at most five windows. Consequently,
+\[
+W+2880\le5G,\qquad W+4200m+5L\le1098600.
+\]
+The earlier proof used only 21 omitted counts. The new estimate is checked
+for actual snakes, with each local share lower bound retained as a premise.
+
+If every traced edge satisfies
+$w(u,v)+p(u)-p(v)\ge\mu$ and the potential range is at most $R$,
+summing cancels intermediate potential values and yields
+$\mu(m-8)\le W+R$. Combining the inequalities gives
+\[
+\boxed{(4200+\mu)m+5L\le1098600+8\mu+R.}
+\]
+The old potential $\mu=4462/9$, $R=5411/9$ therefore already implies
+$m\le235-3063/42262<235$ using only $L\ge0$.
+A separate proof of $L\ge4$ is no longer needed for this conditional route.
+
+\textbf{4. The conditional route with no positive-loss premise.}
+The finite retained graph has 4,661,572 edges. A direction pattern records
+successive coordinate flips, with coordinate labels renamed consistently.
+A share floor is a lower bound on the sum of the five integer shares
+at the associated window centres. The accepted integer scans give
+these sufficient profiles, listing the pending floors for
+$012034,012301,012340,012345$ in that order:
+\[
+\begin{array}{c|c|c|c}
+\text{floors}&\mu&R&\text{comparison}\\\hline
+(15,15,15,15)&4453/9&5384/9&235-1047/42253\\
+(15,16,16,16)&4454/9&5374/9&235-642/21127
+\end{array}
+\]
+Each comparison is strictly below 235 and gives the integer bound 234
+if the local and graph premises apply. All retained edge inequalities were
+checked with exact integer arithmetic; Lean checks the conditional
+implications for actual snakes. The uniform floor-fifteen profile is
+therefore a sufficient route to 234 without proving positive loss.
+Its four local floors and inherited graph premises remain to be proved.
+
+For the second profile, a nine-edge cycle of weight 4454 and an eight-edge
+walk of weight 3362 force $9\mu\le4454$ and $R\ge8\mu-3362$.
+Substituting into the length comparison shows that the displayed value
+is minimum over nonnegative rational means and ranges for that fixed
+profile, using zero occurrence credit. This finite optimization does
+not establish the local geometric premises.
+
+\textbf{5. Floor fourteen and the two remaining loss cases.}
+New potentials improve the earlier sufficient loss thresholds. Under
+the same retained graph and count premises, they give
+\[
+\begin{array}{c|c|c|c}
+\text{floors}&9\mu&9R&\text{inequality}\\\hline
+(14,16,16,16)&4448&5346&42248m+45L\le9928330\\
+(14,14,14,14)&4448&5380&42248m+45L\le9928364
+\end{array}
+\]
+Every inequality on the 4,661,572 retained graph edges passed an exact
+integer scan. At $m=235$, even the weaker second row forces
+$45L\le84$, hence $L\le1$. Thus uniform floor fourteen and $L\ge2$
+suffice for the conditional upper bound 234. The remaining hypothetical
+case has exactly 235 edges and $L=0$ or $L=1$.
+
+Two is the least sufficient integer loss threshold for these fixed
+comparisons. A nine-edge cycle of weight 4448 forces $9\mu\le4448$.
+A nine-edge walk of weight 3854 in the first profile, and an eight-edge
+walk of weight 3356 in the second, force the respective range bounds.
+With $L=1$, the length comparison is
+\[
+\frac{1098595+8\mu+R}{4200+\mu}.
+\]
+Substituting $R\ge9\mu-3854$ or $R\ge8\mu-3356$ gives, respectively,
+\[
+\frac{1094741+17\mu}{4200+\mu},\qquad
+\frac{1095239+16\mu}{4200+\mu}.
+\]
+Both decrease as $\mu$ increases, so the cycle bound makes their minima
+occur at $\mu=4448/9$. The resulting values are
+$235+5/42248$ and $235+39/42248$. Both exceed 235, and the new potentials
+attain these minima. Thus changing the mean and range alone cannot make
+one unit of loss sufficient for these fixed graph and boundary comparisons. Lean checks
+these deductions and their actual-snake implications under explicit window
+and potential premises; scalar reconstruction checks the witness rows.
+
+Integer rounding of the aggregate constraints also leaves the case open:
+\[
+(m,L,G,W)=(235,1,22895,111595)
+\]
+satisfies the global budget, packing constraint and both potential
+inequalities. This arithmetic witness is Lean-checked. It is not a
+snake construction; it identifies a limitation of those aggregate
+constraints alone.
+
+Both remaining loss cases dominate the cube, meaning every cube vertex
+has a selected neighbour. At $L=0$ every corner
+remainder vanishes. At $L=1$, exactly one is positive; it must have
+five selected neighbours and three incident empty squares. Indeed,
+$e\le\binom{9-d}{2}$, and the finite possibilities with
+$12e\bmod d=1$ give only $(d,e)=(5,3)$. This arithmetic is Lean-checked.
+Neither remaining case has been excluded.
+
+For a set $C$ of selected window centres, let $k(q)$ count the selected
+neighbours of $q$ belonging to $C$, and let $r(q)$ be its remainder.
+Since $0\le k(q)\le d(q)$, double counting gives
+\[
+\sum_{x\in C}\sigma_{12}(x)
+=\sum_{q:d(q)>0}\frac{12e(q)k(q)}{d(q)}
+-\sum_{q:d(q)>0}\frac{r(q)k(q)}{d(q)},
+\qquad
+0\le\sum_{q:d(q)>0}\frac{r(q)k(q)}{d(q)}\le L.
+\]
+Consequently, a rational-share lower bound of sixteen would imply integer
+share at least fifteen when $L\le1$. This is the proposed next local
+proof target. The double-counting deduction is written here; the required
+rational lower bound remains unproved.
+
+\textbf{6. What is proved, and what remains.}
+The local count exclusions, new boundary counts, physical loss identity,
+share packing and conditional arithmetic are Lean-checked. The actual-cube
+empty-square argument also proves that an undominated vertex contributes
+at least 96 to $L$: its missing-pair graph is connected, with at least
+eight edges, or consists of two complete components, which have even more.
+Thus $L\le95$ forces domination. The earlier $L\le3$ reduction and sparse
+positive-remainder restrictions are checked, although they are unnecessary
+for the stronger conditional comparison above.
+
+Round 178 added five accepted Lean modules with twelve theorem dependency
+reports, including the actual-snake reduction under explicit local-window
+and potential premises. The full finite-graph certificate has not been
+checked in Lean.
+
+The numerical upper bound 234 remains conditional. Required local share
+floors, retained count restrictions, reference exclusions and the complete
+graph-to-snake certificate must still be established. In particular, the
+retained model includes a hypothetical six-count floor 25 on $0123104$
+under its specified count conditions. A finite graph computation cannot
+prove that every snake traces that graph. The partial local share replay
+still checks only 33,111 of 145,215 deductions and establishes no final
+contradiction. Neither a longer construction nor a proof of 196 was obtained.
+
+The remaining work is therefore:
+\begin{enumerate}
+\item Prove the four floor-fourteen local bounds for the general case,
+and discharge every retained count, exclusion and graph-coverage premise.
+\item Resolve the remaining $L=0$ and $L=1$ cases. A sufficient alternative
+is to prove floor fifteen on their relevant windows and apply the
+loss-free comparison in Section 4; rational share at least sixteen is
+one proposed way to obtain that local bound.
+\item Keep the independent empty-square route available: proving
+$s_0\ge14$ for a hypothetical 235-edge snake would exclude that length
+through the retained count-only inequality.
+\end{enumerate}
+These are outstanding requirements, not completed results. The research
+goal remains paused after round 178; this explanation records the current
+frontier without starting a further research round.
+
+\smallskip
+{\small Full proofs and evidence are in the companion manuscript
+\texttt{snake9\_research.tex} and research records 175--178.}
+\end{document}

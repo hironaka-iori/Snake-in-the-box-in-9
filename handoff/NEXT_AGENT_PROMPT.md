@@ -1,3 +1,9 @@
+# Current instruction: complete rounds179–181, then pause
+
+Round179 is complete (1 of3). It reduces the low-loss rational-share target to a strict bound greater than72/5 using a2/5 rounding deficit on the four pending patterns. Read milestones/179-window-rounding/README.md. Two rounds remain; the earlier pause instruction below is superseded by the current user resume.
+
+## Previous checkpoint
+
 # Resume only after a new user instruction
 
 Round178 completes the requested bounded continuation. Pause after publication. Do not begin round179 until the user resumes the goal.

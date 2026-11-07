@@ -1,3 +1,9 @@
+# Current result after round179
+
+One of three requested rounds is complete. The low-loss rational-share target improves to a strict bound greater than72/5, with the actual lower-bound proof still pending. Read [round179](milestones/179-window-rounding/README.md). The maintained project interval and inherited proof gaps are unchanged.
+
+## Earlier checkpoints
+
 # Current result after round 178
 
 Research pauses after the requested round. The maintained interval remains 191–235 edges, with the archived 235 proof's complete independent rebuild pending. No new unconditional numerical bound is claimed.
