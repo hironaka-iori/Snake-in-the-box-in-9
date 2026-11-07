@@ -1,10 +1,10 @@
-# Current result after round 181
+# Current result after round 182
 
-The three requested rounds, 179–181, are complete; research pauses here. The maintained interval remains 191–235 edges, with the archived upper-bound proof's complete independent rebuild pending. No new unconditional numerical bound is claimed.
+Round182 is complete; research pauses at the user's request. The maintained interval remains191–235 edges, with the archived235 proof's complete independent rebuild pending. No new unconditional numerical bound is claimed.
 
-The low-loss rational-share target is now strictly greater than 72/5. Necessary path restrictions exclude closing vertices and require a six-edge window to extend in a longer snake. These properties pass Lean and strengthen the remaining local floor-14 calculation. Read [round 181](milestones/181-cycle-closure/README.md) for the exact native-replay and Lean evidence status.
+All four floor-14 Boolean certificates now have complete native refutation replays. A new Lean-checked actual-path deduction restricts the012301 window's extension to an unused coordinate. A representative-extension floor15 query also has a complete native refutation replay; its full Lean and geometric interpretation remain pending. A checked cycle/walk obstruction shows that this single upgrade cannot yet lower the current comparison below235 in the remaining loss cases. Read [the round182 note](milestones/182-extended-share-frontier/MATHEMATICAL_NOTE.md).
 
-The [current handoff](handoff/CURRENT_STATUS.md), [main manuscript](paper/snake9_research.tex) and [short frontier explanation](paper/snake9_frontier_explanation.tex) are updated. The upper bound 234 still requires the unresolved local and retained-graph premises and a resolution of the remaining loss-zero/loss-one cases, or stronger local floors.
+The [current handoff](handoff/CURRENT_STATUS.md), [main manuscript](paper/snake9_research.tex) and [short explanation](paper/snake9_frontier_explanation.tex) are updated. The complete Lean local-certificate and inherited graph/count requirements remain open.
 
 ## Earlier checkpoints
 

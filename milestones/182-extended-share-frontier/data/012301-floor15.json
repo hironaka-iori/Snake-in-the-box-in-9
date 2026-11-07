@@ -1,0 +1,72 @@
+{
+  "shape": "012301",
+  "status": "BOUNDED_STOP",
+  "target_share": 15,
+  "cap": 14,
+  "producer_sha256": "48b99d3bdd387a0edff7b6507dbf5a099555dcb648d34bc8407d40c571e33c68",
+  "initial_resources": {
+    "free_bytes": 1329512448,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 91,
+    "snapshot_seconds": 0.03200000000651926
+  },
+  "source_cnf_sha256": "b6db5cafbcc726ff21bc89885b966af1b8100b55300ad369b966518a46bdd436",
+  "source_semantics_sha256": "097e662b6a4fd768ea829d316fd213ed43b89a036270f4ca138962e85053cc91",
+  "cnf_sha256": "31ee6cd4d3465348cb2750bab4eaf3f44c05de11700e0e29248b0b84c2db0859",
+  "variables": 13435,
+  "clauses": 100106,
+  "removed_clause": [
+    -10854
+  ],
+  "added_clauses": 10620,
+  "path_clauses": [
+    [
+      -5
+    ],
+    [
+      -9
+    ],
+    [
+      3,
+      5,
+      9,
+      14,
+      17,
+      29,
+      33,
+      45,
+      65,
+      77,
+      127,
+      139,
+      238,
+      250
+    ]
+  ],
+  "private_limit": 268435456,
+  "reserve": 805306368,
+  "peak_private": 38858752,
+  "solver_sha256": "4fb5f4f94a3632c185ea763f7da627d40038cca38d9481952d00d04cc881c94f",
+  "pid": 47284,
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\cadical.exe",
+    "-q",
+    "--lrat",
+    "--no-binary",
+    "--seed=1",
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\cache\\012301-floor15\\input.cnf",
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\cache\\012301-floor15\\raw.lrat"
+  ],
+  "exit_code": 1,
+  "seconds": 87.48399999999674,
+  "raw_sha256": "6dc60001850412ef270d8295e632d515dc802785f1079b3703c044101dcf9a65",
+  "raw_bytes": 134676480,
+  "artifacts": {
+    "012301-floor15.cnf.gz": "b2be155c2a1cac3a7737c93b27cc318c2538050a750fd6f797a22e3a7b79e51c",
+    "012301-floor15.delta.json.gz": "0bfab1526e9cdfbb42b477d45161f66b137184829841df0641f2e044f1b4cc00",
+    "012301-floor15.lrat.gz": "1c24d1cdc02ec860e0a9e55f824f239df2efe9b6a7fd4db42c49cc0b96bec6cd"
+  }
+}

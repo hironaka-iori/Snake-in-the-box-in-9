@@ -1,0 +1,103 @@
+import ClosingVertex181
+import WindowExtension181
+
+namespace Snake9.ExtensionDirection182
+
+theorem extra_exclusions {m : Nat} (p : Snake m)
+    (h1 : InPath p 1) (h3 : InPath p 3) (h7 : InPath p 7)
+    (h15 : InPath p 15) (h14 : InPath p 14) :
+    ¬ InPath p 2 ∧ ¬ InPath p 13 := by
+  constructor
+  · intro h2
+    rcases selected_three_neighbors_repeat p h3 h1 h7 h2
+      (by decide) (by decide) (by decide) with h | h | h
+    · exact (by decide : (1 : Vertex) ≠ 7) h
+    · exact (by decide : (1 : Vertex) ≠ 2) h
+    · exact (by decide : (7 : Vertex) ≠ 2) h
+  · intro h13
+    rcases selected_three_neighbors_repeat p h15 h7 h14 h13
+      (by decide) (by decide) (by decide) with h | h | h
+    · exact (by decide : (7 : Vertex) ≠ 14) h
+    · exact (by decide : (7 : Vertex) ≠ 13) h
+    · exact (by decide : (14 : Vertex) ≠ 13) h
+
+theorem low_coordinate_values :
+    (∀ a : Fin 4, 2^a.val=1 ∨ 2^a.val=2 ∨ 2^a.val=4 ∨ 2^a.val=8) ∧
+    (∀ a : Fin 4, Nat.xor 12 (2^a.val)=13 ∨ Nat.xor 12 (2^a.val)=14 ∨
+      Nat.xor 12 (2^a.val)=8 ∨ Nat.xor 12 (2^a.val)=4) := by decide
+
+theorem external_neighbor_coordinate {m : Nat} (p : Snake m) (q : Vertex)
+    (hq : InPath p q) (hadj : Adj 0 q ∨ Adj 12 q)
+    (hne1 : q ≠ 1) (hne14 : q ≠ 14)
+    (h2 : ¬ InPath p 2) (h4 : ¬ InPath p 4)
+    (h8 : ¬ InPath p 8) (h13 : ¬ InPath p 13) :
+    ∃ a : Nat, 4≤a ∧ a<9 ∧
+      (q.val=2^a ∨ q.val=Nat.xor 12 (2^a)) := by
+  rcases hadj with h | h
+  · obtain ⟨a,ha,he⟩ := (adj_iff_coordinate_flip 0 q).mp h
+    change q.val=Nat.xor 0 (2^a) at he
+    rw [Nat.zero_xor] at he
+    have hlow : ¬ a<4 := by
+      intro hb
+      have hc := low_coordinate_values.1 ⟨a,hb⟩
+      change 2^a=1 ∨ 2^a=2 ∨ 2^a=4 ∨ 2^a=8 at hc
+      rcases hc with hc | hc | hc | hc
+      · exact hne1 (Fin.ext (he.trans hc))
+      · exact h2 (by have eq : q=(2 : Vertex) := Fin.ext (he.trans hc); simpa [eq] using hq)
+      · exact h4 (by have eq : q=(4 : Vertex) := Fin.ext (he.trans hc); simpa [eq] using hq)
+      · exact h8 (by have eq : q=(8 : Vertex) := Fin.ext (he.trans hc); simpa [eq] using hq)
+    exact ⟨a,by omega,ha,Or.inl he⟩
+  · obtain ⟨a,ha,he⟩ := (adj_iff_coordinate_flip 12 q).mp h
+    change q.val=Nat.xor 12 (2^a) at he
+    have hlow : ¬ a<4 := by
+      intro hb
+      have hc := low_coordinate_values.2 ⟨a,hb⟩
+      change Nat.xor 12 (2^a)=13 ∨ Nat.xor 12 (2^a)=14 ∨
+        Nat.xor 12 (2^a)=8 ∨ Nat.xor 12 (2^a)=4 at hc
+      rcases hc with hc | hc | hc | hc
+      · exact h13 (by have eq : q=(13 : Vertex) := Fin.ext (he.trans hc); simpa [eq] using hq)
+      · exact hne14 (Fin.ext (he.trans hc))
+      · exact h8 (by have eq : q=(8 : Vertex) := Fin.ext (he.trans hc); simpa [eq] using hq)
+      · exact h4 (by have eq : q=(4 : Vertex) := Fin.ext (he.trans hc); simpa [eq] using hq)
+    exact ⟨a,by omega,ha,Or.inr he⟩
+
+theorem canonical_window_extends_in_unused_coordinate {m : Nat} (p : Snake m)
+    (i : Fin (m+1)) (hfit : i.val+6≤m) (hm : 7≤m)
+    (hv : ∀ t : Fin 7,
+      p.vertex ⟨i.val+t.val,by have ht := t.isLt; omega⟩ =
+        ([0,1,3,7,15,14,12] : List Vertex)[t.val]!) :
+    ∃ q : Vertex, InPath p q ∧ ∃ a : Nat, 4≤a ∧ a<9 ∧
+      (q.val=2^a ∨ q.val=Nat.xor 12 (2^a)) := by
+  let j : Fin (m+1) := ⟨i.val+6,by omega⟩
+  let i1 : Fin (m+1) := ⟨i.val+1,by omega⟩
+  let i5 : Fin (m+1) := ⟨i.val+5,by omega⟩
+  have hv0 : p.vertex i=0 := by simpa using hv ⟨0,by decide⟩
+  have hv6 : p.vertex j=12 := by simpa [j] using hv ⟨6,by decide⟩
+  have hv1 : p.vertex i1=1 := by simpa [i1] using hv ⟨1,by decide⟩
+  have hv5 : p.vertex i5=14 := by simpa [i5] using hv ⟨5,by decide⟩
+  have h3 : InPath p 3 := ⟨⟨i.val+2,by omega⟩,by simpa using hv ⟨2,by decide⟩⟩
+  have h7 : InPath p 7 := ⟨⟨i.val+3,by omega⟩,by simpa using hv ⟨3,by decide⟩⟩
+  have h15 : InPath p 15 := ⟨⟨i.val+4,by omega⟩,by simpa using hv ⟨4,by decide⟩⟩
+  have hex := extra_exclusions p ⟨i1,hv1⟩ h3 h7 h15 ⟨i5,hv5⟩
+  have hclose := ClosingVertex181.canonical_window_excludes_closers p i j
+    (by dsimp [j]; omega) hv0 hv6
+  obtain ⟨k,hout,hadj⟩ := WindowExtension181.window_must_extend p i j rfl hm
+  have hne1 : p.vertex k≠1 := by
+    intro he
+    have hk := congrArg Fin.val (p.distinct k i1 (he.trans hv1.symm))
+    dsimp [i1,j] at hk hout
+    omega
+  have hne14 : p.vertex k≠14 := by
+    intro he
+    have hk := congrArg Fin.val (p.distinct k i5 (he.trans hv5.symm))
+    dsimp [i5,j] at hk hout
+    omega
+  rw [hv0,hv6] at hadj
+  exact ⟨p.vertex k,⟨k,rfl⟩,external_neighbor_coordinate p (p.vertex k)
+    ⟨k,rfl⟩ hadj hne1 hne14 hex.1 hclose.1 hclose.2 hex.2⟩
+
+#print axioms extra_exclusions
+#print axioms low_coordinate_values
+#print axioms external_neighbor_coordinate
+#print axioms canonical_window_extends_in_unused_coordinate
+end Snake9.ExtensionDirection182

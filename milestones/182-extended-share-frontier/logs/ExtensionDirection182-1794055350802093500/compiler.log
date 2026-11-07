@@ -1,0 +1,25 @@
+E:\Snake-in-a-box\milestones\182-extended-share-frontier\lean\ExtensionDirection182.lean:39:8: error: tactic 'rewrite' failed, did not find instance of the pattern in the target expression
+  0 ^^^ ?x
+case inl.intro.intro
+m : Nat
+p : Snake m
+q : Vertex
+hq : InPath p q
+hne1 : q ≠ 1
+hne14 : q ≠ 14
+h2 : ¬InPath p 2
+h4 : ¬InPath p 4
+h8 : ¬InPath p 8
+h13 : ¬InPath p 13
+h : Adj 0 q
+a : Nat
+ha : a < 9
+he : ↑q = Nat.xor 0 (2 ^ a)
+⊢ ∃ a, 4 ≤ a ∧ a < 9 ∧ (↑q = 2 ^ a ∨ ↑q = Nat.xor 12 (2 ^ a))
+'Snake9.ExtensionDirection182.extra_exclusions' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.ExtensionDirection182.low_coordinate_values' depends on axioms: [propext]
+'Snake9.ExtensionDirection182.external_neighbor_coordinate' depends on axioms: [propext, sorryAx, Quot.sound]
+'Snake9.ExtensionDirection182.canonical_window_extends_in_unused_coordinate' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

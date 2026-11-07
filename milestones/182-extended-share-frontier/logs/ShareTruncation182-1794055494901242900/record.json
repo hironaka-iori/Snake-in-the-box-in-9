@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "module": "ShareTruncation182",
+  "source": "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\lean\\ShareTruncation182.lean",
+  "source_sha256": "1147f816b1967d33c9f7c573fa3e3861e57f7a76ecb6bcf0c4323b645d4cbec3",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\data\\ShareTruncation182-execution.json": "c94e8addb096151281b46e02409efcfb69cc6ade47f80f52afcccfe36e9f0efa",
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\lean\\ShareTruncation182.lean": "1147f816b1967d33c9f7c573fa3e3861e57f7a76ecb6bcf0c4323b645d4cbec3",
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\Snake9.lean": "e0a835b04a42837495aee7d389b1a66dc562573bcbdab33777cb69aac8da9dc0",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\.lake\\build\\lib\\lean\\Snake9.olean": "1068be3d102bce076158008a9f5045f284b2800ab99b0496a6ff2cd9e0ae884a",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\PathStructure.lean": "6267168775a17ce9a256fba7e6f6b58d46f6fa38f85ada282df525b200d341bd",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\.lake\\build\\lib\\lean\\PathStructure.olean": "69c871f5e201fc151f1a724d40837804d06a79029b6cf4d6266a07a4a65afda7",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\manifest.json": "c2d95bc79425c266e890494ff1a3a779928030e3b2c469da02abc77f66919f81",
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\logs\\ShareTruncation182-1794055494901242900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\lean\\ShareTruncation182.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\logs\\ShareTruncation182-1794055494901242900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1118810112,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 93,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1069658112,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 27516,
+          "ParentProcessId": 13148,
+          "PrivatePageCount": 35450880,
+          "WorkingSetSize": 39116800
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 27516,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.1089999999967404,
+  "axioms": [
+    {
+      "theorem": "ShareTruncation182.bounded_sum",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ShareTruncation182.cap_fourteen_exact",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "efa1f3f7f3049b08c7909b1463fe09c2dcf5852339b3c30b7c4ce890622f5511",
+  "object": "E:\\Snake-in-a-box\\milestones\\182-extended-share-frontier\\build\\ShareTruncation182.olean",
+  "olean_sha256": "42313101123ae34df584d73915aec09031f8540ea884bb9f3e3c1e7e68764cdf"
+}

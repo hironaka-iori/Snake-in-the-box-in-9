@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 181}
+\date{Research state after round 182}
 \begin{document}
 \maketitle
 
@@ -262,12 +262,62 @@ share 6, rational share $52/7$ and window-neighbour loss 5. In that
 assignment, the entire window is an isolated seven-vertex component.
 Adding the necessary extension condition removes this example. The
 resulting share-cap-thirteen query returns a native contradiction.
-The saved native refutation awaits replay; its first replay attempt was stopped before reading the proof because available memory was below the fixed startup threshold.
+The complete saved proof now passes native replay, including its final
+empty clause. All four floor-fourteen inputs therefore have complete
+native refutation checks.
 The extension condition is valid for every actual snake of length at
 least seven, so it covers all lengths relevant to the upper-bound argument.
 The full Lean replay and the transfer from arbitrary coordinates to the
 Boolean model remain pending. No unconditional numerical bound follows
 from these local computations alone.
+
+\paragraph{The extension uses an unused coordinate.}
+The possible extension can be restricted further. At the endpoint 0,
+coordinates 0 and 1 give the existing neighbour 1 or the forbidden vertex 2.
+Selecting 2 would give vertex 3 three selected neighbours: 1, 7 and 2.
+Coordinates 2 and 3 give the excluded closing vertices 4 and 8.
+At endpoint 12, the first four coordinates give 13, 14, 8 and 4.
+Here 14 is the existing neighbour, and selecting 13 would give vertex 15
+the three selected neighbours 7, 14 and 13. Therefore every external
+extension uses a coordinate $a$ with $4\le a<9$.
+The degree exclusions and this canonical-window statement pass Lean checks.
+
+Permuting the five unused coordinates and, if necessary, reversing the
+window reduces the extension to vertex 16 at the first end. The reversal
+is normalized by translation by 12 followed by the coordinate swaps
+$0\leftrightarrow1$ and $2\leftrightarrow3$. This preserves the five-centre
+share sum. The representative extended segment is
+$16,0,1,3,7,15,14,12$, with relabelled transition word $0123412$.
+The full isometry transfer remains a written argument.
+
+The floor-fifteen query allowing either extension reached its proof-size
+limit and gives no conclusion. With the representative extension fixed,
+the query excluding share at most fourteen returned a contradiction.
+Its complete native proof replay passed. This is stronger local Boolean
+evidence for $012301$; its full Lean and geometric interpretation remain
+unfinished.
+
+\paragraph{Why this single improvement does not reduce the comparison.}
+In the retained profile $(14,15,14,14)$, ordered as
+$012034,012301,012340,012345$, the saved nine-edge cycle still has weight
+4448: none of its edges has shape $012301$. The saved eight-edge walk
+has two such edges, so its weight rises from 3356 to 3358. Direct
+reconstruction of the source rows checks both identities. Every mean
+and range for this fixed graph must therefore satisfy
+\[
+9\mu\le4448,\qquad R\ge8\mu-3358.
+\]
+For $L=1$, these constraints imply
+\[
+\frac{1098595+8\mu+R}{4200+\mu}
+\ge235+\frac{21}{42248}>235.
+\]
+Lean checks this comparison for arbitrary nonnegative rational parameters
+after clearing denominators. The $L=0$ comparison is larger still.
+Thus raising only the $012301$ floor to fifteen cannot yield 234 through
+the current mean-and-range argument in the two remaining loss cases.
+This is an obstruction from saved walks, with no claim that a new
+potential attains the displayed lower comparison.
 
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -308,10 +358,10 @@ retain necessary path restrictions, including extension.
 $s_0\ge14$ for a hypothetical 235-edge snake would exclude that length
 through the retained count-only inequality.
 \end{enumerate}
-Rounds 179--181 complete the three requested rounds. Research pauses
-at this frontier; these outstanding requirements remain unresolved.
+Round 182 completes the requested continuation. Research pauses at
+this frontier; these outstanding requirements remain unresolved.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--181.}
+\texttt{snake9\_research.tex} and research records 175--182.}
 \end{document}
