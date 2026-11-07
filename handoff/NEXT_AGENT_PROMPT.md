@@ -1,27 +1,15 @@
-# Round180 complete: 2 of3 requested rounds
+# Paused after three completed rounds: 179–181
 
-Proceed with round181, then pause. Three floor14 queries returned native UNSAT with saved LRAT evidence. The012301 query has a verified zero-share, zero-local-loss assignment containing sixteen eight-cycles. Its canonical window can be closed by vertex4 or8; both are forbidden in an actual snake. Read milestones/180-share14-certificates/README.md. No global numerical bound changed.
+Resume only after an explicit new user instruction. Do not start round 182 automatically.
 
-## Earlier checkpoint
+Read CURRENT_STATUS.md, milestones/181-cycle-closure/README.md and its data/completion.json. The maintained interval is 191–235 with the archived-235 independent-rebuild qualification. No new unconditional bound or longer construction was obtained.
 
-# Current instruction: complete rounds179–181, then pause
+The selected route remains empty-square charging. The new contribution is a necessary extension condition for the 012301 share query. Closing vertices 4 and 8 are excluded by a Lean-checked actual-snake lemma; a second checked lemma forces a six-edge window to extend when m>=7. The closing-only model has share 6 and an isolated window. The extended cap-13 query is UNSAT. The saved native refutation awaits replay; its first replay attempt was stopped before reading the proof because available memory was below the fixed startup threshold.
 
-Round179 is complete (1 of3). It reduces the low-loss rational-share target to a strict bound greater than72/5 using a2/5 rounding deficit on the four pending patterns. Read milestones/179-window-rounding/README.md. Two rounds remain; the earlier pause instruction below is superseded by the current user resume.
+On resumption, prioritize completing the Lean contradiction/semantic chain for the four floor-14 local certificates. The three other patterns have complete native replays. For 012301, use the extended input, not the satisfiable original or closing-only input. Existing source hashes, original inputs, compressed proofs, solver logs, Lean receipts and model reconstructions are saved. Do not replace native verification by an unsupported claim of a universal Lean-checked share theorem.
 
-## Previous checkpoint
+The next mathematical strengthening is floor 15 in the remaining global loss cases L=0 or1. Rational share >72/5 suffices there by the 2/5 deficit bound. Include actual-path restrictions in any query; a local remainder budget alone admits the original zero-share cycle model. Do not conflate global L<=1 with a local remainder bound. The exceptional remainder may be outside the window. Universal floor 14 and inherited graph/count conditions are still needed before applying 42248m+45L<=9928364.
 
-# Resume only after a new user instruction
+Native replay used a 1 GiB startup requirement, 256 MiB private-memory cap, 768 MiB free reserve and 240-second limit. The streamed solver used the same memory guard and a 90-second/128 MiB raw-proof limit. The separate full encoder retained its 1.5 GiB startup requirement; its floor-15 attempt did not start. Preserve startup-stop evidence. Never relax memory guards to conceal a resource failure. Confirm prior workers have terminated before restarting any bounded job. The short core Lean profile is unchanged; avoid simultaneous heavy workers.
 
-Round178 completes the requested bounded continuation. Pause after publication. Do not begin round179 until the user resumes the goal.
-
-Read handoff/CURRENT_STATUS.md and milestones/178-floor14-potential/README.md, then data/completion.json for exact evidence status. The full optimum remains unresolved. No construction exceeds191, and196 remains unproved. The maintained upper235 has the archived-proof/full-independent-rebuild qualification.
-
-The new sufficient profile is uniform pending floor14 with L >=2. Its scaled mean4448 and scaled range5380 give42248m+45L <=9928364. Both fixed-other16 and uniform14 profiles provably need at least two units of scalar loss in their current graph/boundary comparison. Merely changing mean or range cannot improve that threshold. The previous open range5310–5340 question is resolved negatively by a new9-edge walk: fixed-other16 requires range at least5346 at maximal mean4448, and all smaller means still fail at L=1.
-
-The remaining hypothetical235-edge case has L=0 or1 and dominates Q9. At L=1 its sole positive-remainder vertex has five selected neighbours and three empty incident squares. First pursue universal floor14 certificates and stronger floor15 certificates restricted to this small-loss case. A concrete possible approach is a rational window-share bound16, since total rounding loss within any window is at most L. This identity is a written double-counting argument, not a checked new rational-share lower bound. Add local remainder-budget <=1 constraints only when the global L <=1 premise is explicit; the exceptional vertex may be outside the local window. Existing conditional graph/count restrictions remain unresolved and must not be concealed.
-
-The smaller-memory producer matched three archived weight hashes and then scanned all retained edges. It streams batches from memory-mapped source columns. Its512MiB private cap plus768MiB reserve yields a1.25GiB startup requirement, with measured peak private use about86MiB. This is a different producer from the older full-array2GiB-startup implementation. Preserve the existing core Lean256MiB cap and Mathlib2GiB startup profile. All large source-column caches stay local; original source columns can be extracted from the archived source-graph.npz. No graph worker should remain live after completion.
-
-Preserve .gitignore and milestone50 critical-family.json unrelated edits. Preserve the original D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex editor file, E:/Snake-in-a-box/paper mirrors, author order and hypersetup. Main and short explanation updated178; next manuscript-wide review186. Check GitHub before resuming. Do not run or create software tests unless explicitly requested; Lean proof checking is authorized by the goal.
-
-The combined actual-snake module passed: under the explicit local-window and potential premises, it proves conditional234 when L >=2 and the length235/loss0-or1/domination/at-most-one-positive-corner reduction otherwise. Five accepted Lean modules have twelve theorem dependency reports, including the integer scalar witness m=235,L=1,G=22895,W=111595. The full graph certificate and geometric coverage are still pending.
+Preserve the original D: manuscript/editor and its E: mirror, all three authors and hypersetup. Update both documents after new findings; the next full rewrite review is round 186. Check GitHub before new research and publish each completed round. Do not run or create software tests unless explicitly requested. Lean proof checking is authorized. Preserve unrelated .gitignore and milestone-50 changes.

@@ -1,31 +1,21 @@
-# Round180 complete: 2 of3 requested rounds
+# Round 181 complete: three requested rounds finished; pause
 
-Proceed with round181, then pause. Three floor14 queries returned native UNSAT with saved LRAT evidence. The012301 query has a verified zero-share, zero-local-loss assignment containing sixteen eight-cycles. Its canonical window can be closed by vertex4 or8; both are forbidden in an actual snake. Read milestones/180-share14-certificates/README.md. No global numerical bound changed.
+Rounds 179, 180 and 181 complete the user's three-round instruction. Pause the goal after publication. Do not begin round 182 without a new instruction to resume.
 
-## Earlier checkpoint
+The maintained project interval is 191–235 edges. The archived contributor proof of 235 still lacks a complete independent rebuild. The upper bound 234 remains conditional; 196 remains conjectural, and no new construction exceeds 191.
 
-# Current instruction: complete rounds179–181, then pause
+Round 179 sharpened the local rational-to-integer deficit to at most 2/5 when global loss L=1. For the four pending patterns, rational share strictly greater than 72/5 suffices for integer share at least 15 when L<=1. Equality does not suffice. Lean checks the arithmetic and canonical incidence statements; the written double counting and coordinate transfer must retain their scope.
 
-Round179 is complete (1 of3). It reduces the low-loss rational-share target to a strict bound greater than72/5 using a2/5 rounding deficit on the four pending patterns. Read milestones/179-window-rounding/README.md. Two rounds remain; the earlier pause instruction below is superseded by the current user resume.
+Round 180 found native floor-14 refutations for 012034, 012340 and 012345. Its original 012301 model has share zero and zero window-neighbour loss, but contains sixteen eight-cycles and has global loss 5922. It is not a snake.
 
-## Previous checkpoint
+Round 181 checked two actual-snake properties in Lean: a common neighbour of path positions separated by more than two edges is absent, and a six-edge window in a snake of length at least seven extends at one end. Four theorem dependency reports passed across two modules. Canonical closing vertices 4 and 8 must therefore be absent from the 012301 window 0,1,3,7,15,14,12.
 
-# Round 178: exact floor14 loss threshold; pause after publication
+Closing exclusions alone still allow a verified model with integer share 6, rational share 52/7, local loss 5 and global loss 64517. Its window is an isolated seven-vertex component, and other components include fifteen eight-cycles. Adding the necessary extension clause gives native UNSAT at cap 13. The saved native refutation awaits replay; its first replay attempt was stopped before reading the proof because available memory was below the fixed startup threshold.
 
-The user requested one thorough round of approximately 15–20 minutes, then a pause. Round178 establishes a new conditional result. The maintained project interval is 191–235 edges; the archived contributor235 proof still lacks a complete independent rebuild. No new unconditional bound or longer construction is claimed.
+The three round-180 refutations now pass full native replay. Across all accepted round-181 replays, 439,401 added clauses and 22,402,565 propagation hints were checked, including a final empty clause for each accepted input. Native replay is separate from Lean replay and from the arbitrary-snake interpretation of the Boolean encoding.
 
-Uniform pending floors (14,14,14,14), in the order012034,012301,012340,012345, now have an exact finite potential with scaled mean4448 and scaled range5380, at scale9. All4,661,572 retained edge inequalities pass. Together with the actual boundary and loss budget this gives42248m +45L <=9928364. Therefore L >=2 implies m <=234; m >=235 instead forces m=235 and L in{0,1}.
+The uniform floor-14 retained-graph comparison is 42248m+45L<=9928364. Conditional on its local and graph premises, L>=2 implies m<=234; m>=235 forces m=235 and L in {0,1}. Both low-loss cases dominate Q9. At L=1 the unique positive-remainder corner has d=5 and e=3. Neither case is excluded. Uniform floor 15 would yield conditional 234 without a loss premise.
 
-The profile(14,16,16,16) has the same mean and scaled range5346, giving42248m +45L <=9928330 and the same sufficient integer loss2. A common9-edge cycle of weight4448 and respective9/8-edge walks of weights3854/3356 prove that L=1 is insufficient for every nonnegative rational mean/range in these fixed comparisons. Their best L=1 comparisons are235+5/42248 and235+39/42248, attained by the new potentials. Thus2 is the least sufficient integer loss threshold in this precise finite comparison, without claims about all possible stronger arguments.
+Inherited requirements remain: retained count restrictions, including the hypothetical 0123104 six-count floor 25 under its exact count conditions; 1358 reference entries; 791 context obligations; graph-to-snake coverage; complete Lean finite-edge and local certificates. The older share-18 Lean replay remains at 33,111/145,215 deductions with no final contradiction. Do not confuse it with the new native replays.
 
-The remaining low-loss snakes dominate the cube. At L=0 every remainder vanishes. At L=1 exactly one vertex has positive remainder, and the elementary bound e <=choose(9-d,2) forces its degree/empty-square counts to be d=5,e=3. The arithmetic classification is Lean-checked. Neither case is excluded.
-
-For a local window, rational share minus integer share is at most L. A rational-share lower bound16 would therefore imply integer share15 when L <=1. This proposed local lower bound remains unproved. In a local certificate, the inherited global L <=1 condition can restrict the sum of corner remainders over the window's neighbour set to at most one; the exceptional corner may lie outside the window. Universal floor14 still needs its own proof for larger-loss snakes.
-
-Read milestones/178-floor14-potential/README.md, data/completion.json, data/joint14-opt.json and data/witnesses.json. Three archived weight hashes were reproduced before reweighting. Independent scalar reconstruction checks the concrete witness rows. Initial suboptimal trials and failed proof/witness attempts remain separate from accepted evidence.
-
-All inherited premises remain: the local floors, retained count restrictions including hypothetical0123104 six-count floor25 with its exact first-count condition, reference exclusions, graph-to-snake coverage and the complete Lean edge certificate. The1358 reference entries and791 context obligations retain their scope. Share18 replay is unchanged at33,111/145,215 deductions, without final contradiction.
-
-The strongest loss-free conditional profile remains uniform15 from round176. The independent count route still needs fourteen empty squares at235, using39m+2s0 <=9192 under the archived walk estimate. The main paper and short explanation are updated in place. Authors and hypersetup are unchanged; next manuscript-wide review remains186.
-
-The combined actual-snake module passed: under the explicit local-window and potential premises, it proves conditional234 when L >=2 and the length235/loss0-or1/domination/at-most-one-positive-corner reduction otherwise. Five accepted Lean modules have twelve theorem dependency reports, including the integer scalar witness m=235,L=1,G=22895,W=111595. The full graph certificate and geometric coverage are still pending.
+Read milestones/181-cycle-closure/README.md and data/completion.json, then the updated main paper and short explanation in paper/. Authors and hypersetup are preserved. The authoritative editor copies remain in D:/Codex/2026-10-13/new-chat/outputs/. Next manuscript-wide review remains round 186. Preserve unrelated .gitignore and milestone-50 edits. All uncompressed proof caches remain local; compressed evidence is included in publication.

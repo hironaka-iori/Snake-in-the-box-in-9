@@ -1,6 +1,10 @@
-# Current result after round180
+# Current result after round 181
 
-Two of three requested rounds are complete. The local012301 relaxation admits zero shares and zero local loss through a configuration containing eight-cycles. Three other floor14 queries yielded native UNSAT proofs, with replay pending. Read [round180](milestones/180-share14-certificates/README.md). One round remains before the requested pause.
+The three requested rounds, 179–181, are complete; research pauses here. The maintained interval remains 191–235 edges, with the archived upper-bound proof's complete independent rebuild pending. No new unconditional numerical bound is claimed.
+
+The low-loss rational-share target is now strictly greater than 72/5. Necessary path restrictions exclude closing vertices and require a six-edge window to extend in a longer snake. These properties pass Lean and strengthen the remaining local floor-14 calculation. Read [round 181](milestones/181-cycle-closure/README.md) for the exact native-replay and Lean evidence status.
+
+The [current handoff](handoff/CURRENT_STATUS.md), [main manuscript](paper/snake9_research.tex) and [short frontier explanation](paper/snake9_frontier_explanation.tex) are updated. The upper bound 234 still requires the unresolved local and retained-graph premises and a resolution of the remaining loss-zero/loss-one cases, or stronger local floors.
 
 ## Earlier checkpoints
 

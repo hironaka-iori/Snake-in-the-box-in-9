@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 180: 7 November 2026}
+\date{Research state after round 181}
 \begin{document}
 \maketitle
 
@@ -211,10 +211,10 @@ Since $0\le k(q)\le d(q)$, double counting gives
 \qquad
 0\le\sum_{q:d(q)>0}\frac{r(q)k(q)}{d(q)}\le L.
 \]
-Consequently, a rational-share lower bound of sixteen would imply integer
-share at least fifteen when $L\le1$. This is the proposed next local
-proof target. The double-counting deduction is written here; the required
-rational lower bound remains unproved.
+This bounds the local rounding deficit by $L$. The sharper incidence
+argument below reduces the sufficient rational-share target to a
+strict bound greater than $72/5$ when $L\le1$. The double-counting
+deduction is written here; the required rational lower bound remains unproved.
 
 \paragraph{Sharper rounding bound for the pending patterns.}
 For each of $012034,012301,012340,012345$, a cube vertex is adjacent to
@@ -234,19 +234,40 @@ Clearing denominators by 2520 gives $A=2520S+B$, with $B\le1008$,
 so $A>36288$ implies $S\ge15$. These arithmetic statements pass Lean.
 The required rational lower bound remains an open local proof target.
 
-\paragraph{An obstruction to a purely local low-loss proof.}
-The unrestricted radius-four share-cap-thirteen queries give native UNSAT
-outputs for $012034,012340,012345$, with proof replay still pending.
-For $012301$, a checked satisfying assignment has all five shares zero
-and zero loss over the window-neighbour set. It contains sixteen induced
-eight-cycles and is not a snake. Its total global loss is 5922, so it
-also fails the global low-loss hypothesis. The example shows why adding
-only the local remainder budget does not establish the proposed share bound.
+\paragraph{Path restrictions for the remaining window.}
+The radius-four share-cap-thirteen queries for $012034,012340,012345$
+now have complete native proof replays. Every added clause and the final
+contradiction were checked against the saved input. This verification
+does not yet supply a Lean contradiction proof or the full geometric
+interpretation of the encoding.
 
-In canonical coordinates the window is $0,1,3,7,15,14,12$.
-Either endpoint-common-neighbour, 4 or 8, would close an eight-cycle;
-the saved model selects 8. An actual induced path must exclude both.
-The next step is to incorporate this path restriction into the local query.
+The original $012301$ relaxation admits a checked selected set with all
+five shares zero and zero loss over the window-neighbour set. It has
+sixteen induced eight-cycle components and total loss 5922. Hence a
+local remainder budget alone does not remove this obstruction; the
+configuration does not satisfy the hypotheses of an actual low-loss snake.
+
+In canonical coordinates, the window is $0,1,3,7,15,14,12$. Its endpoints
+have common neighbours 4 and 8. A common neighbour of two path vertices
+separated by more than two edges cannot belong to an induced path:
+its path index would have to differ by one from both indices, forcing
+their separation to be at most two. Thus both closing vertices are absent.
+Moreover, a six-edge window in a snake of length at least seven extends
+at one end. If the window starts after the first path vertex, use its
+predecessor; otherwise use the successor of its last vertex. These
+two path properties and the canonical exclusions pass Lean checks.
+
+The closing exclusions alone leave a checked assignment with integer
+share 6, rational share $52/7$ and window-neighbour loss 5. In that
+assignment, the entire window is an isolated seven-vertex component.
+Adding the necessary extension condition removes this example. The
+resulting share-cap-thirteen query returns a native contradiction.
+The saved native refutation awaits replay; its first replay attempt was stopped before reading the proof because available memory was below the fixed startup threshold.
+The extension condition is valid for every actual snake of length at
+least seven, so it covers all lengths relevant to the upper-bound argument.
+The full Lean replay and the transfer from arbitrary coordinates to the
+Boolean model remain pending. No unconditional numerical bound follows
+from these local computations alone.
 
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -268,26 +289,29 @@ floors, retained count restrictions, reference exclusions and the complete
 graph-to-snake certificate must still be established. In particular, the
 retained model includes a hypothetical six-count floor 25 on $0123104$
 under its specified count conditions. A finite graph computation cannot
-prove that every snake traces that graph. The partial local share replay
+prove that every snake traces that graph. The older share-eighteen Lean replay
 still checks only 33,111 of 145,215 deductions and establishes no final
-contradiction. Neither a longer construction nor a proof of 196 was obtained.
+contradiction. The new floor-fourteen native replays are separate
+certificates and do not complete that older Lean replay. Neither a longer construction nor a proof of 196 was obtained.
 
 The remaining work is therefore:
 \begin{enumerate}
-\item Prove the four floor-fourteen local bounds for the general case,
-and discharge every retained count, exclusion and graph-coverage premise.
+\item Complete the Lean proofs and geometric interpretation of the
+four floor-fourteen certificates, and discharge every retained count,
+exclusion and graph-coverage premise.
 \item Resolve the remaining $L=0$ and $L=1$ cases. A sufficient alternative
 is to prove floor fifteen on their relevant windows and apply the
-loss-free comparison in Section 4; rational share at least sixteen is
-one proposed way to obtain that local bound.
+loss-free comparison in Section 4. A strict rational-share bound
+greater than $72/5$ is sufficient when $L\le1$. Its proof must
+retain necessary path restrictions, including extension.
 \item Keep the independent empty-square route available: proving
 $s_0\ge14$ for a hypothetical 235-edge snake would exclude that length
 through the retained count-only inequality.
 \end{enumerate}
-These are outstanding requirements, not completed results. The goal has resumed for three requested rounds. Round 180 is complete;
-one further round remains before the requested pause.
+Rounds 179--181 complete the three requested rounds. Research pauses
+at this frontier; these outstanding requirements remain unresolved.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--180.}
+\texttt{snake9\_research.tex} and research records 175--181.}
 \end{document}

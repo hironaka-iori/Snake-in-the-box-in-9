@@ -1,0 +1,123 @@
+{
+  "status": "PASS",
+  "module": "ClosingVertex181",
+  "source": "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\lean\\ClosingVertex181.lean",
+  "source_sha256": "8c1ef0efb0daded8965132f2150df3c7dd3aeee0bb3d2a330e3aa93a5c8e66a8",
+  "checker_sha256": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\data\\ClosingVertex181-execution.json": "dceeee8da53fc9b54b0ac6ba059ab5365b814c64c2f551fa05ba07cf0d619c30",
+    "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\lean\\ClosingVertex181.lean": "8c1ef0efb0daded8965132f2150df3c7dd3aeee0bb3d2a330e3aa93a5c8e66a8",
+    "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\scripts\\check_core.py": "adadaaba00d64761a2dbb21d85ad4c3adaad2032ee3c21bde7d702391b2d0abd",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+    "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\Snake9.lean": "e0a835b04a42837495aee7d389b1a66dc562573bcbdab33777cb69aac8da9dc0",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\.lake\\build\\lib\\lean\\Snake9.olean": "1068be3d102bce076158008a9f5045f284b2800ab99b0496a6ff2cd9e0ae884a",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\PathStructure.lean": "6267168775a17ce9a256fba7e6f6b58d46f6fa38f85ada282df525b200d341bd",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\core\\.lake\\build\\lib\\lean\\PathStructure.olean": "69c871f5e201fc151f1a724d40837804d06a79029b6cf4d6266a07a4a65afda7",
+    "E:\\Snake-in-a-box\\work\\spectral\\.verification\\strengthened-n8g3mwjy\\manifest.json": "c2d95bc79425c266e890494ff1a3a779928030e3b2c469da02abc77f66919f81",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\logs\\ClosingVertex181-1794033386894419900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\lean\\ClosingVertex181.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\logs\\ClosingVertex181-1794033386894419900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1162067968,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 92,
+    "snapshot_seconds": 0.0
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1164460032,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 56728,
+          "ParentProcessId": 55364,
+          "PrivatePageCount": 48152576,
+          "WorkingSetSize": 25124864
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1084915712,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 56728,
+          "ParentProcessId": 55364,
+          "PrivatePageCount": 50143232,
+          "WorkingSetSize": 98742272
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.031000000002677552
+    },
+    {
+      "free_bytes": 988356608,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 56728,
+          "ParentProcessId": 55364,
+          "PrivatePageCount": 82452480,
+          "WorkingSetSize": 253140992
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 94,
+      "snapshot_seconds": 0.01600000000325963
+    }
+  ],
+  "compiler_pid": 56728,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.0939999999973224,
+  "axioms": [
+    {
+      "theorem": "Snake9.ClosingVertex181.common_neighbor_absent",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Snake9.ClosingVertex181.canonical_closing_neighbors",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Snake9.ClosingVertex181.canonical_window_excludes_closers",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "ea0b988c8023f6c2f322e0b82f1307718eeeba9857f31db8999add071dccec75",
+  "object": "E:\\Snake-in-a-box\\milestones\\181-cycle-closure\\build\\ClosingVertex181.olean",
+  "olean_sha256": "4321ccccf8c2265afe9945b45e9381f9245f3bec5a1b7d9d513272b4a2054e51"
+}

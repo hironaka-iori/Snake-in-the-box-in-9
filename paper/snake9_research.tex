@@ -62,7 +62,13 @@ and its local-share, count-restriction and graph-coverage premises remain
 separate obligations. Retuning lowers the $012034$ floor to fifteen with the other pending
 floors fixed. A cycle-and-walk argument proves this integer threshold
 is least for the specified comparison. A second sufficient profile
-lowers all four pending floors simultaneously to fifteen. No new unconditional numerical length bound is claimed; the
+lowers all four pending floors simultaneously to fifteen. Uniform floor
+fourteen also suffices when total rounding loss is at least two.
+The remaining hypothetical 235-edge case has loss zero or one.
+New path restrictions exclude closing vertices and require a local
+window to extend; they strengthen the native floor-fourteen calculation.
+The full local Lean certificates remain pending.
+No new unconditional numerical length bound is claimed; the
 optimum and the numerical conjecture 196 remain open.
 
 \end{abstract}
@@ -3637,10 +3643,10 @@ in $C$. Double counting the rational shares gives
 \qquad
 0\le\sum_{q:d(q)>0}\frac{r(q)k(q)}{d(q)}\le L,
 \]
-because $0\le k(q)\le d(q)$. Thus a rational-share lower bound of
-sixteen would imply integer share at least fifteen when $L\le1$.
-Establishing that rational lower bound on the required windows is a
-proposed continuation, not a result of the present computation.
+because $0\le k(q)\le d(q)$. This bounds the local rounding deficit
+by the global loss. For the four pending patterns, the sharper
+incidence argument below reduces the sufficient rational-share
+target to a strict bound greater than $72/5$ when $L\le1$.
 
 \paragraph{Sharper rounding bound for the pending patterns.}
 For each of $012034,012301,012340,012345$, a cube vertex is adjacent to
@@ -3660,19 +3666,40 @@ Clearing denominators by 2520 gives $A=2520S+B$, with $B\le1008$,
 so $A>36288$ implies $S\ge15$. These arithmetic statements pass Lean.
 The required rational lower bound remains an open local proof target.
 
-\paragraph{An obstruction to a purely local low-loss proof.}
-The unrestricted radius-four share-cap-thirteen queries give native UNSAT
-outputs for $012034,012340,012345$, with proof replay still pending.
-For $012301$, a checked satisfying assignment has all five shares zero
-and zero loss over the window-neighbour set. It contains sixteen induced
-eight-cycles and is not a snake. Its total global loss is 5922, so it
-also fails the global low-loss hypothesis. The example shows why adding
-only the local remainder budget does not establish the proposed share bound.
+\paragraph{Path restrictions for the remaining window.}
+The radius-four share-cap-thirteen queries for $012034,012340,012345$
+now have complete native proof replays. Every added clause and the final
+contradiction were checked against the saved input. This verification
+does not yet supply a Lean contradiction proof or the full geometric
+interpretation of the encoding.
 
-In canonical coordinates the window is $0,1,3,7,15,14,12$.
-Either endpoint-common-neighbour, 4 or 8, would close an eight-cycle;
-the saved model selects 8. An actual induced path must exclude both.
-The next step is to incorporate this path restriction into the local query.
+The original $012301$ relaxation admits a checked selected set with all
+five shares zero and zero loss over the window-neighbour set. It has
+sixteen induced eight-cycle components and total loss 5922. Hence a
+local remainder budget alone does not remove this obstruction; the
+configuration does not satisfy the hypotheses of an actual low-loss snake.
+
+In canonical coordinates, the window is $0,1,3,7,15,14,12$. Its endpoints
+have common neighbours 4 and 8. A common neighbour of two path vertices
+separated by more than two edges cannot belong to an induced path:
+its path index would have to differ by one from both indices, forcing
+their separation to be at most two. Thus both closing vertices are absent.
+Moreover, a six-edge window in a snake of length at least seven extends
+at one end. If the window starts after the first path vertex, use its
+predecessor; otherwise use the successor of its last vertex. These
+two path properties and the canonical exclusions pass Lean checks.
+
+The closing exclusions alone leave a checked assignment with integer
+share 6, rational share $52/7$ and window-neighbour loss 5. In that
+assignment, the entire window is an isolated seven-vertex component.
+Adding the necessary extension condition removes this example. The
+resulting share-cap-thirteen query returns a native contradiction.
+The saved native refutation awaits replay; its first replay attempt was stopped before reading the proof because available memory was below the fixed startup threshold.
+The extension condition is valid for every actual snake of length at
+least seven, so it covers all lengths relevant to the upper-bound argument.
+The full Lean replay and the transfer from arbitrary coordinates to the
+Boolean model remain pending. No unconditional numerical bound follows
+from these local computations alone.
 
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 The maintained interval is $191\le a(9)\le235$, with the contributor-proof
