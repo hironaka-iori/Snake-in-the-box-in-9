@@ -3751,6 +3751,25 @@ the current mean-and-range argument in the two remaining loss cases.
 This is an obstruction from saved walks, with no claim that a new
 potential attains the displayed lower comparison.
 
+\paragraph{A smaller certificate for the critical floor fifteen.}
+The radius-four query for $012034$ excluding integer share at most fourteen
+now has a complete native refutation. It uses the broad count intervals
+$[0,21]$ and the existing local constraints, with no additional extension
+or cycle clauses. Its complete replay checks 119,146 deductions.
+Extracting the dependency closure of the final contradiction reduces this
+to 12,424 original clauses and 52,489 deductions, with 3,619,677 propagation
+hints. Both this core and its dense variable renaming pass separate full
+native replays. The dense proof has 5,342 variables; a last-use schedule
+needs at most 12,593 stored clauses. These sizes fit the existing Lean
+checker's data format, while the actual kernel replay and geometric
+interpretation remain unfinished.
+
+This certificate addresses the shape occurring six times on the critical
+nine-edge cycle. It motivates checking the weaker profile $(15,14,14,14)$,
+in the order $012034,012301,012340,012345$. Whether that profile already
+removes the loss premise requires a fresh full retained-graph calculation.
+No improved global comparison is asserted from the local certificate alone.
+
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 The maintained interval is $191\le a(9)\le235$, with the contributor-proof
 and independent-rebuild distinction stated in Section~\ref{sec:verification}.

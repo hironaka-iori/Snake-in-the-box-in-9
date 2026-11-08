@@ -1,10 +1,10 @@
-# Current result after round 182
+# Current result after round183
 
-Round182 is complete; research pauses at the user's request. The maintained interval remains191–235 edges, with the archived235 proof's complete independent rebuild pending. No new unconditional numerical bound is claimed.
+The first of two requested rounds is complete. The critical012034 floor15 input now has a complete native refutation, reduced to a replayed dependency core of52489 deductions and5342 variables. Its full Lean and geometric interpretation remain unfinished.
 
-All four floor-14 Boolean certificates now have complete native refutation replays. A new Lean-checked actual-path deduction restricts the012301 window's extension to an unused coordinate. A representative-extension floor15 query also has a complete native refutation replay; its full Lean and geometric interpretation remain pending. A checked cycle/walk obstruction shows that this single upgrade cannot yet lower the current comparison below235 in the remaining loss cases. Read [the round182 note](milestones/182-extended-share-frontier/MATHEMATICAL_NOTE.md).
+Round184 will examine whether profile(15,14,14,14) already removes the loss premise from the retained comparison, then research will pause. No new unconditional bound is claimed; the maintained range191–235 retains the archived235 independent-rebuild qualification.
 
-The [current handoff](handoff/CURRENT_STATUS.md), [main manuscript](paper/snake9_research.tex) and [short explanation](paper/snake9_frontier_explanation.tex) are updated. The complete Lean local-certificate and inherited graph/count requirements remain open.
+Read [round183](milestones/183-critical-floor15/README.md), [the current handoff](handoff/CURRENT_STATUS.md) and [the short explanation](paper/snake9_frontier_explanation.tex).
 
 ## Earlier checkpoints
 

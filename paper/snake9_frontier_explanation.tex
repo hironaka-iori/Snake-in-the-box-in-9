@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 182}
+\date{Research state after round 183}
 \begin{document}
 \maketitle
 
@@ -319,6 +319,25 @@ the current mean-and-range argument in the two remaining loss cases.
 This is an obstruction from saved walks, with no claim that a new
 potential attains the displayed lower comparison.
 
+\paragraph{A smaller certificate for the critical floor fifteen.}
+The radius-four query for $012034$ excluding integer share at most fourteen
+now has a complete native refutation. It uses the broad count intervals
+$[0,21]$ and the existing local constraints, with no additional extension
+or cycle clauses. Its complete replay checks 119,146 deductions.
+Extracting the dependency closure of the final contradiction reduces this
+to 12,424 original clauses and 52,489 deductions, with 3,619,677 propagation
+hints. Both this core and its dense variable renaming pass separate full
+native replays. The dense proof has 5,342 variables; a last-use schedule
+needs at most 12,593 stored clauses. These sizes fit the existing Lean
+checker's data format, while the actual kernel replay and geometric
+interpretation remain unfinished.
+
+This certificate addresses the shape occurring six times on the critical
+nine-edge cycle. It motivates checking the weaker profile $(15,14,14,14)$,
+in the order $012034,012301,012340,012345$. Whether that profile already
+removes the loss premise requires a fresh full retained-graph calculation.
+No improved global comparison is asserted from the local certificate alone.
+
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -358,10 +377,10 @@ retain necessary path restrictions, including extension.
 $s_0\ge14$ for a hypothetical 235-edge snake would exclude that length
 through the retained count-only inequality.
 \end{enumerate}
-Round 182 completes the requested continuation. Research pauses at
-this frontier; these outstanding requirements remain unresolved.
+Round 183 is the first of two requested rounds. Round 184 will examine
+the weaker share profile; research will pause after that round.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--182.}
+\texttt{snake9\_research.tex} and research records 175--183.}
 \end{document}
