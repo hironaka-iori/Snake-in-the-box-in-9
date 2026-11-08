@@ -1,10 +1,10 @@
-# Current result after round183
+# Current result after round 184
 
-The first of two requested rounds is complete. The critical012034 floor15 input now has a complete native refutation, reduced to a replayed dependency core of52489 deductions and5342 variables. Its full Lean and geometric interpretation remain unfinished.
+The two requested rounds, 183 and 184, are complete; research pauses here. The weaker pending-share profile $(15,14,14,14)$ suffices for conditional $234$ without positive loss. Its refined potential gives $42254m+45L\le9928453$, and a cycle/walk argument proves the comparison optimal for the fixed profile and accounting.
 
-Round184 will examine whether profile(15,14,14,14) already removes the loss premise from the retained comparison, then research will pause. No new unconditional bound is claimed; the maintained range191–235 retains the archived235 independent-rebuild qualification.
+All numerical local floors in this profile have native contradiction certificates. Their full Lean and geometric interpretation, and the inherited graph/count requirements, remain unfinished. The maintained project range is 191–235; the archived upper-bound proof still awaits a complete independent rebuild. No new unconditional numerical bound is claimed.
 
-Read [round183](milestones/183-critical-floor15/README.md), [the current handoff](handoff/CURRENT_STATUS.md) and [the short explanation](paper/snake9_frontier_explanation.tex).
+Read [round184](milestones/184-single-critical-floor/README.md), [the current handoff](handoff/CURRENT_STATUS.md), [the main manuscript](paper/snake9_research.tex) and [the frontier explanation](paper/snake9_frontier_explanation.tex).
 
 ## Earlier checkpoints
 

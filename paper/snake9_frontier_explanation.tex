@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 183}
+\date{Research state after round 184}
 \begin{document}
 \maketitle
 
@@ -21,13 +21,13 @@ edges. A verified construction has 191 edges. The project retains an
 archived contributor proof of the upper bound 235, whose complete
 independent rebuild remains pending. The maximum is unresolved.
 The numerical prediction 196 has neither a construction nor an optimality
-proof. The current conditional result is: uniform pending share floor
-fourteen, together with the retained graph premises and $L\ge2$, implies
-$m\le234$. Under those same share and graph premises, every remaining
-hypothetical snake with $m\ge235$ has exactly 235 edges and $L=0$ or $L=1$.
-Here $L$ is the total integer share loss defined in Section 2 below.
-The argument leading to this reduction, and its unresolved premises,
-are given in order.
+proof. The current sufficient pending-share profile is $(15,14,14,14)$
+for $012034,012301,012340,012345$, respectively. Together with the retained
+local and graph premises, it implies $m\le234$ without a positive-loss
+assumption. All four required numerical floors have native contradiction
+certificates; their complete Lean and geometric interpretation, and the
+inherited graph requirements, remain unfinished. The argument and these
+limitations are given in order.
 
 \textbf{1. The exact square budget.}
 Write $v=m+1$, let $T$ count coordinate squares with exactly one selected
@@ -119,37 +119,68 @@ The old potential $\mu=4462/9$, $R=5411/9$ therefore already implies
 $m\le235-3063/42262<235$ using only $L\ge0$.
 A separate proof of $L\ge4$ is no longer needed for this conditional route.
 
-\textbf{4. The conditional route with no positive-loss premise.}
-The finite retained graph has 4,661,572 edges. A direction pattern records
-successive coordinate flips, with coordinate labels renamed consistently.
-A share floor is a lower bound on the sum of the five integer shares
-at the associated window centres. The accepted integer scans give
-these sufficient profiles, listing the pending floors for
-$012034,012301,012340,012345$ in that order:
+\textbf{4. One critical floor fifteen gives the conditional bound.}
+A direction pattern records successive coordinate flips, with labels renamed
+consistently. A share floor bounds the sum at the associated five window
+centres. The finite retained graph has 4,661,572 edges. The current sufficient
+floors, ordered as $012034,012301,012340,012345$, are $(15,14,14,14)$.
+The graph construction retains all its previously stated count and exclusion
+premises.
+
+The weaker pending-share profile
 \[
-\begin{array}{c|c|c|c}
-\text{floors}&\mu&R&\text{comparison}\\\hline
-(15,15,15,15)&4453/9&5384/9&235-1047/42253\\
-(15,16,16,16)&4454/9&5374/9&235-642/21127
-\end{array}
+(15,14,14,14),\qquad\text{for }012034,012301,012340,012345,
 \]
-Each comparison is strictly below 235 and gives the integer bound 234
-if the local and graph premises apply. All retained edge inequalities were
-checked with exact integer arithmetic; Lean checks the conditional
-implications for actual snakes. The uniform floor-fifteen profile is
-therefore a sufficient route to 234 without proving positive loss.
-Its four local floors and inherited graph premises remain to be proved.
+admits a retained-graph potential with $\mu=4454/9$ and $R=5421/9$.
+All 4,661,572 edge inequalities passed an exact integer scan, after
+reconstruction reproduced three archived weight hashes. Substituting
+in the boundary-24 comparison gives
+\[
+\boxed{42254m+45L\le9928453.}
+\]
+Since $L\ge0$ and $235\cdot42254=9928453+1237$, this yields
+\[
+m\le235-\frac{1237}{42254}<235,\qquad m\le234.
+\]
+Thus only the critical pending floor must reach fifteen; the other three
+may remain fourteen. No separate exclusion of $L=0$ or $L=1$ is required
+for this sufficient profile. Lean also checks the implication for actual snakes, with the local-window
+and potential inequalities retained as explicit premises.
 
-For the second profile, a nine-edge cycle of weight 4454 and an eight-edge
-walk of weight 3362 force $9\mu\le4454$ and $R\ge8\mu-3362$.
-Substituting into the length comparison shows that the displayed value
-is minimum over nonnegative rational means and ranges for that fixed
-profile, using zero occurrence credit. This finite optimization does
-not establish the local geometric premises.
+A reconstructed nine-edge cycle has weight 4454, and a 24-edge walk has
+weight 11275. Hence every admissible mean and range for this fixed graph
+satisfies $9\mu\le4454$ and $R\ge24\mu-11275$. Consequently,
+\[
+\frac{1098600+8\mu+R}{4200+\mu}
+\ge\frac{1087325+32\mu}{4200+\mu}
+\ge\frac{9928453}{42254}.
+\]
+The middle expression decreases with $\mu$, and the new potential attains
+the final value at $\mu=4454/9$. The denominator-cleared optimality
+deduction passes Lean. This proves optimality of the loss-free comparison
+for the fixed profile, boundary and zero occurrence credit.
 
-\textbf{5. Floor fourteen and the two remaining loss cases.}
-New potentials improve the earlier sufficient loss thresholds. Under
-the same retained graph and count premises, they give
+Fifteen is also the least sufficient integer floor for $012034$ when the
+other pending floors stay fourteen in this argument. At uniform floor
+fourteen, the saved cycle and walk force $9\mu\le4448$ and
+$R\ge8\mu-3356$, keeping the loss-zero comparison strictly above 235.
+The strict arithmetic obstruction passes Lean; lowering that floor further
+only weakens edge weights.
+
+Every numerical floor in the new profile has a complete native Boolean
+refutation. The $012301$ floor-fourteen input uses the necessary extension
+condition for snakes with at least seven edges; shorter snakes already
+satisfy the desired global bound. The full Lean contradiction chains,
+geometric interpretation and inherited count and graph premises remain
+unfinished. The optimized comparison therefore remains conditional.
+
+An earlier sufficient profile raised all four pending floors to fifteen.
+The new profile weakens three of those requirements. Its purpose is to
+reduce the local proof obligations while retaining the conditional bound 234.
+
+\textbf{5. An alternative route using only floor fourteen.}
+If the critical floor is left at fourteen, the following earlier
+comparisons still apply under their retained graph and count premises:
 \[
 \begin{array}{c|c|c|c}
 \text{floors}&9\mu&9R&\text{inequality}\\\hline
@@ -333,10 +364,10 @@ checker's data format, while the actual kernel replay and geometric
 interpretation remain unfinished.
 
 This certificate addresses the shape occurring six times on the critical
-nine-edge cycle. It motivates checking the weaker profile $(15,14,14,14)$,
-in the order $012034,012301,012340,012345$. Whether that profile already
-removes the loss premise requires a fresh full retained-graph calculation.
-No improved global comparison is asserted from the local certificate alone.
+nine-edge cycle. It supplies the critical local input for the weaker profile $(15,14,14,14)$,
+in the order $012034,012301,012340,012345$. The full retained-graph calculation in Section 4 now establishes its
+sufficiency under the stated premises. The local certificate alone
+does not establish the global comparison.
 
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -365,22 +396,23 @@ certificates and do not complete that older Lean replay. Neither a longer constr
 
 The remaining work is therefore:
 \begin{enumerate}
-\item Complete the Lean proofs and geometric interpretation of the
-four floor-fourteen certificates, and discharge every retained count,
-exclusion and graph-coverage premise.
-\item Resolve the remaining $L=0$ and $L=1$ cases. A sufficient alternative
-is to prove floor fifteen on their relevant windows and apply the
-loss-free comparison in Section 4. A strict rational-share bound
-greater than $72/5$ is sufficient when $L\le1$. Its proof must
-retain necessary path restrictions, including extension.
-\item Keep the independent empty-square route available: proving
-$s_0\ge14$ for a hypothetical 235-edge snake would exclude that length
-through the retained count-only inequality.
+\item Complete the Lean contradiction and geometric interpretation for
+the required profile $(15,14,14,14)$. The compact critical certificate
+contains 52,489 deductions and 5,342 variables.
+\item Discharge the retained count restrictions, reference and context
+exclusions, graph coverage and complete finite-edge certificate. These
+remain essential assumptions of the conditional upper bound.
+\item If an alternative argument is pursued, the uniform floor-fourteen
+route still needs to remove its loss-zero and loss-one cases. The separate
+count-only route would be completed by proving $s_0\ge14$ for a hypothetical
+235-edge snake. Neither alternative is required by the new sufficient
+profile once its own premises are proved.
 \end{enumerate}
-Round 183 is the first of two requested rounds. Round 184 will examine
-the weaker share profile; research will pause after that round.
+Rounds 183 and 184 complete the two requested rounds. Research pauses
+at this frontier. No unconditional numerical bound or longer construction
+has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--183.}
+\texttt{snake9\_research.tex} and research records 175--184.}
 \end{document}

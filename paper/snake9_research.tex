@@ -62,9 +62,12 @@ and its local-share, count-restriction and graph-coverage premises remain
 separate obligations. Retuning lowers the $012034$ floor to fifteen with the other pending
 floors fixed. A cycle-and-walk argument proves this integer threshold
 is least for the specified comparison. A second sufficient profile
-lowers all four pending floors simultaneously to fifteen. Uniform floor
-fourteen also suffices when total rounding loss is at least two.
-The remaining hypothetical 235-edge case has loss zero or one.
+lowers all four pending floors simultaneously to fifteen. Further
+optimization shows that only the $012034$ floor must reach fifteen;
+the other three pending floors may stay fourteen. The resulting
+conditional comparison is $m\le235-1237/42254<235$, with no
+positive-loss premise. A cycle and a 24-edge walk prove that this
+comparison is optimal for the fixed profile and accounting.
 New path restrictions exclude closing vertices and require a local
 window to extend; they strengthen the native floor-fourteen calculation.
 The full local Lean certificates remain pending.
@@ -3765,10 +3768,58 @@ checker's data format, while the actual kernel replay and geometric
 interpretation remain unfinished.
 
 This certificate addresses the shape occurring six times on the critical
-nine-edge cycle. It motivates checking the weaker profile $(15,14,14,14)$,
-in the order $012034,012301,012340,012345$. Whether that profile already
-removes the loss premise requires a fresh full retained-graph calculation.
-No improved global comparison is asserted from the local certificate alone.
+nine-edge cycle. It supplies the critical local input for the weaker profile $(15,14,14,14)$,
+in the order $012034,012301,012340,012345$. The full retained-graph calculation below confirms its sufficiency
+under the stated premises. The local certificate alone does not
+establish the global comparison.
+
+\paragraph{One critical floor fifteen suffices.}
+The weaker pending-share profile
+\[
+(15,14,14,14),\qquad\text{for }012034,012301,012340,012345,
+\]
+admits a retained-graph potential with $\mu=4454/9$ and $R=5421/9$.
+All 4,661,572 edge inequalities passed an exact integer scan, after
+reconstruction reproduced three archived weight hashes. Substituting
+in the boundary-24 comparison gives
+\[
+\boxed{42254m+45L\le9928453.}
+\]
+Since $L\ge0$ and $235\cdot42254=9928453+1237$, this yields
+\[
+m\le235-\frac{1237}{42254}<235,\qquad m\le234.
+\]
+Thus only the critical pending floor must reach fifteen; the other three
+may remain fourteen. No separate exclusion of $L=0$ or $L=1$ is required
+for this sufficient profile. Lean also checks the implication for actual snakes, with the local-window
+and potential inequalities retained as explicit premises.
+
+A reconstructed nine-edge cycle has weight 4454, and a 24-edge walk has
+weight 11275. Hence every admissible mean and range for this fixed graph
+satisfies $9\mu\le4454$ and $R\ge24\mu-11275$. Consequently,
+\[
+\frac{1098600+8\mu+R}{4200+\mu}
+\ge\frac{1087325+32\mu}{4200+\mu}
+\ge\frac{9928453}{42254}.
+\]
+The middle expression decreases with $\mu$, and the new potential attains
+the final value at $\mu=4454/9$. The denominator-cleared optimality
+deduction passes Lean. This proves optimality of the loss-free comparison
+for the fixed profile, boundary and zero occurrence credit.
+
+Fifteen is also the least sufficient integer floor for $012034$ when the
+other pending floors stay fourteen in this argument. At uniform floor
+fourteen, the saved cycle and walk force $9\mu\le4448$ and
+$R\ge8\mu-3356$, keeping the loss-zero comparison strictly above 235.
+The strict arithmetic obstruction passes Lean; lowering that floor further
+only weakens edge weights.
+
+Every numerical floor in the new profile has a complete native Boolean
+refutation. The $012301$ floor-fourteen input uses the necessary extension
+condition for snakes with at least seven edges; shorter snakes already
+satisfy the desired global bound. The full Lean contradiction chains,
+geometric interpretation and inherited count and graph premises remain
+unfinished. The optimized comparison therefore remains conditional.
 
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 The maintained interval is $191\le a(9)\le235$, with the contributor-proof
