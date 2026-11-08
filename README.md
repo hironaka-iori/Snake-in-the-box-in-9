@@ -1,3 +1,11 @@
+# Current result after round 185
+
+The requested round is complete; research pauses after publication. Lean checked the permutation-aware cap-counting and share-clause soundness theorem for the streamed critical certificate. Concrete counter and totalizer checks remain unfinished because they exceed the unchanged memory limit. Zero of 98 concrete clause batches has passed.
+
+The conditional bound remains 234 with profile (15,14,14,14). No new unconditional numerical bound is claimed. Read [round 185](milestones/185-critical-kernel/README.md), [the current handoff](handoff/CURRENT_STATUS.md), [the main manuscript](paper/snake9_research.tex) and [the short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 184
 
 The two requested rounds, 183 and 184, are complete; research pauses here. The weaker pending-share profile $(15,14,14,14)$ suffices for conditional $234$ without positive loss. Its refined potential gives $42254m+45L\le9928453$, and a cycle/walk argument proves the comparison optimal for the fixed profile and accounting.

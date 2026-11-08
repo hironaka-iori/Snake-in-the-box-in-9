@@ -1,0 +1,117 @@
+import Share185.Structure
+import Share185.Shard00
+import Share185.Shard01
+import Share185.Shard02
+import Share185.Shard03
+import Share185.Shard04
+import Share185.Shard05
+import Share185.Shard06
+import Share185.Shard07
+import Share185.Shard08
+import Share185.Shard09
+import Share185.Shard10
+import Share185.Shard11
+import Share185.Shard12
+import Share185.Shard13
+import Share185.Shard14
+import Share185.Shard15
+import Share185.Shard16
+import Share185.Shard17
+import Share185.Shard18
+import Share185.Shard19
+import Share185.Shard20
+import Share185.Shard21
+import Share185.Shard22
+import Share185.Shard23
+import Share185.Shard24
+import Share185.Shard25
+import Share185.Shard26
+import Share185.Shard27
+import Share185.Shard28
+import Share185.Shard29
+import Share185.Shard30
+import Share185.Shard31
+import Share185.Shard32
+import Share185.Shard33
+import Share185.Shard34
+import Share185.Shard35
+import Share185.Shard36
+import Share185.Shard37
+import Share185.Shard38
+import Share185.Shard39
+import Share185.Shard40
+import Share185.Shard41
+import Share185.Shard42
+import Share185.Shard43
+import Share185.Shard44
+import Share185.Shard45
+import Share185.Shard46
+import Share185.Shard47
+import Share185.Shard48
+import Share185.Shard49
+import Share185.Shard50
+import Share185.Shard51
+import Share185.Shard52
+import Share185.Shard53
+import Share185.Shard54
+import Share185.Shard55
+import Share185.Shard56
+import Share185.Shard57
+import Share185.Shard58
+import Share185.Shard59
+import Share185.Shard60
+import Share185.Shard61
+import Share185.Shard62
+import Share185.Shard63
+import Share185.Shard64
+import Share185.Shard65
+import Share185.Shard66
+import Share185.Shard67
+import Share185.Shard68
+import Share185.Shard69
+import Share185.Shard70
+import Share185.Shard71
+import Share185.Shard72
+import Share185.Shard73
+import Share185.Shard74
+import Share185.Shard75
+import Share185.Shard76
+import Share185.Shard77
+import Share185.Shard78
+import Share185.Shard79
+import Share185.Shard80
+import Share185.Shard81
+import Share185.Shard82
+import Share185.Shard83
+import Share185.Shard84
+import Share185.Shard85
+import Share185.Shard86
+import Share185.Shard87
+import Share185.Shard88
+import Share185.Shard89
+import Share185.Shard90
+import Share185.Shard91
+import Share185.Shard92
+import Share185.Shard93
+import Share185.Shard94
+import Share185.Shard95
+import Share185.Shard96
+import Share185.Shard97
+set_option maxRecDepth 100000
+set_option maxHeartbeats 0
+namespace Snake9.LocalWindow.ShareWindow185
+open Snake9.LocalWindow.Tags Snake9.LocalWindow.Tags185
+theorem clauses_ok : ckAllS meaning smeaning resolution ctrs tots window cap tags raw = true := by
+  unfold tags raw
+  simp only [ckAllS_append]
+  simp only [shard0, shard1, shard2, shard3, shard4, shard5, shard6, shard7, shard8, shard9, shard10, shard11, shard12, shard13, shard14, shard15, shard16, shard17, shard18, shard19, shard20, shard21, shard22, shard23, shard24, shard25, shard26, shard27, shard28, shard29, shard30, shard31, shard32, shard33, shard34, shard35, shard36, shard37, shard38, shard39, shard40, shard41, shard42, shard43, shard44, shard45, shard46, shard47, shard48, shard49, shard50, shard51, shard52, shard53, shard54, shard55, shard56, shard57, shard58, shard59, shard60, shard61, shard62, shard63, shard64, shard65, shard66, shard67, shard68, shard69, shard70, shard71, shard72, shard73, shard74, shard75, shard76, shard77, shard78, shard79, shard80, shard81, shard82, shard83, shard84, shard85, shard86, shard87, shard88, shard89, shard90, shard91, shard92, shard93, shard94, shard95, shard96, shard97, Bool.true_and, ckAllS]
+theorem input_true (S E : Nat → Bool) (ax : AxiomsS S E window (centresOf window bounds) resolution cap) :
+  cnfTrue (tauS S E meaning smeaning resolution ctrs tots) cnf = true := by
+  exact soundS meaning smeaning resolution ctrs tots window bounds cap tags raw
+    (by simp only [checkAllS, counts_ok, totals_ok, clauses_ok, Bool.and_self]) S E ax
+theorem refuted_of_unsat (h : Unsat cnf) : RefutedShare window bounds resolution cap :=
+  refutedShare_of_sat (fun S E ax => ⟨_, input_true S E ax⟩) h
+#print axioms clauses_ok
+#print axioms input_true
+#print axioms refuted_of_unsat
+end Snake9.LocalWindow.ShareWindow185

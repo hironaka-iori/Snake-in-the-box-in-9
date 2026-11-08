@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 184}
+\date{Research state after round 185}
 \begin{document}
 \maketitle
 
@@ -368,6 +368,34 @@ nine-edge cycle. It supplies the critical local input for the weaker profile $(1
 in the order $012034,012301,012340,012345$. The full retained-graph calculation in Section 4 now establishes its
 sufficiency under the stated premises. The local certificate alone
 does not establish the global comparison.
+
+\paragraph{Reordering threshold terms in the critical certificate.}
+The streamed $012034$ input appends the fifteenth threshold bit for each
+of its 35 corner occurrences after the first fourteen layers. The earlier
+clause checker required the threshold terms in a fixed order. Its
+soundness proof now allows any permutation of those terms, preserving
+multiplicities. Indeed, for nonnegative integer corner shares $s_j$,
+\[
+\sum_{j=1}^{35}\sum_{t=1}^{15}\mathbf{1}_{\{t\le s_j\}}
+ =\sum_{j=1}^{35}\min(s_j,15)\le\sum_{j=1}^{35}s_j.
+\]
+A permutation preserves the left-hand count. Thus a physical window
+share at most fourteen permits an assignment satisfying the cap clause,
+which negates the counter output for at least fifteen true terms.
+The internal counter implications follow from
+$i\le A$ and $j\le B$ implying $i+j\le A+B$ for the two child counts.
+The selected-vertex, endpoint and empty-square assumptions are unchanged.
+
+The generalized counting lemma and clause-soundness theorem pass Lean.
+The reconstructed input also matches all 12,424 clauses of the saved
+dense core exactly. Its complete concrete interpretation is still
+pending: the counter and totalizer structure checks exceed the existing
+256 MiB limit when checked as single propositions. Splitting constant
+data and supplying explicit meaning trees has not removed that
+obstruction. No concrete clause batch or final contradiction was
+accepted in this round. The next step is to prove those structural
+conditions in smaller parts, then check the 98 clause batches and their
+composition. The numerical bound 234 retains its stated assumptions.
 
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
