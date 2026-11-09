@@ -16,6 +16,13 @@ kernel by `work/final_lean/LocalWindowCnfPack.lean`:
   the kept counters get their meaning, every other subtree is `.z` (one bit);
 * `tags`: `CnfPack.tagsCL`, 4 bits per tag plus its arguments at the widths of this window.
 
+Widened bounds (milestones/25-k7-234/certify, seeds of `gen_k7_core.py run --plan`): a core JSON
+with `lean_bounds` gets `bounds := [(lo, hi), ...]` (those bounds) instead of `boundsOf syms`.  The
+CNF and the core are those of the key's own bounds `meta['bounds']`; only the counters that a core
+clause uses are kept, and each of them must agree with `lean_bounds` (checked here as `ctrOK`
+does in the kernel: an `alpha <= hi` counter needs the same `hi`, an `alpha >= lo` counter the
+same `lo`), so `sat` holds for `Axioms` with the wider bounds and the same replay refutes them.
+
 Soundness does not depend on the encoding: `Tags.sound` holds for every meaning tree, counter
 and tag list that `checkAll` accepts, and `sat` and the replay's `unsat` are both about
 `cnf = raw.map (·.map decodeLit)`.  The script still checks every encoding against a Python
@@ -287,6 +294,18 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False, par
     used_c = {t[1] for t in tags if t[0] in ('first', 'zero', 'mono', 'step', 'over')}
     ctr_lists = [[kind_code(kind), k] + [GS.code(l) for l in lits] if ci in used_c else [0, 2]
                  for ci, (lits, k, kind) in enumerate(enc.ctrs)]
+    lean_bounds = meta.get('lean_bounds')
+    if lean_bounds is not None:   # widened seed bounds: every kept counter must match them
+        lb = [tuple(x) for x in lean_bounds]
+        for ci in used_c:
+            lits_, k_, kind_ = enc.ctrs[ci]
+            if kind_[0] == 'hi':
+                assert kind_[1] < len(lb) and lb[kind_[1]][1] == k_, (name, kind_, lb)
+            elif kind_[0] == 'lo':
+                assert kind_[1] < len(lb) and lb[kind_[1]][0] + k_ == 21, (name, kind_, lb)
+        bounds_txt = '[' + ', '.join('(%d, %d)' % x for x in lb) + ']'
+    else:
+        bounds_txt = 'boundsOf %s' % meta['syms']
     w = bl(max(x for l in raw + ctr_lists for x in l))
     assert max(len(c) for c in raw) < 256
     raw_cs = pack_lists(raw, 8, w, chunk)
@@ -316,8 +335,11 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False, par
             'in their original order, with the\noriginal variable numbers.  Directions `%s`, lumped counts `%s`.'
             % (radius, name, ME, len(core), meta['cnf_clauses'], os.path.basename(os.path.normpath(core_dir)),
                name, dirs, syms))
+    if lean_bounds is not None:
+        head += ('\nThe core uses no counter of a widened side, so `bounds` are the widened bounds `%s`\n'
+                 '(`gen_k7_core.py run --plan`), wider than `boundsOf %s`.' % (bounds_txt, syms))
     cnf_defs = ['noncomputable def window : List Nat := winOf %s' % dirs,
-                'noncomputable def bounds : List (Nat × Nat) := boundsOf %s' % syms, '',
+                'noncomputable def bounds : List (Nat × Nat) := %s' % bounds_txt, '',
                 '/-- Literals coded by `decodeLit` (`CnfPack.unpackL`, %d bits each). -/' % w,
                 'noncomputable def raw : List (List Nat) := CnfPack.unpackL 8 %d %s' % (w, lits(raw_cs)), '',
                 'noncomputable def cnf : List (List Int) := raw.map (·.map decodeLit)', '']
@@ -354,7 +376,7 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False, par
                 t = '%s ++ (%s)' % (nm(base, i), t) if i < np_ - 2 else '%s ++ %s' % (nm(base, i), t)
             return t
         cnf_defs = ['noncomputable def window : List Nat := winOf %s' % dirs,
-                    'noncomputable def bounds : List (Nat × Nat) := boundsOf %s' % syms, '',
+                    'noncomputable def bounds : List (Nat × Nat) := %s' % bounds_txt, '',
                     '/-- Literals coded by `decodeLit` (`CnfPack.unpackL`, %d bits each)%s. -/'
                     % (w, '' if np_ == 1 else ', in %d parts' % np_)]
         for i, (s, e) in enumerate(parts):

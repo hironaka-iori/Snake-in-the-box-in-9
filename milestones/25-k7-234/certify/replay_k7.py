@@ -20,6 +20,9 @@ The analogue of `milestones/23-k6-lean/certify/replay_k6.py gen --packed` for th
   python3 replay_k7.py measure --work DIR      # hints of the core proofs only (no Lean files)
   python3 replay_k7.py build [--limit N]       # guarded, one module per `lean` call (generated cases only)
 
+With `--plan` (`families_k7.py`), `gen` skips every core whose key `gen_k7_core.py final --plan`
+derives from the certificate of its seed (run `gen_k7_core.py run --plan` to the end first).
+
 Cases run smallest first (by the full-proof hint estimate of the core JSON); a case whose
 replay module exists is skipped, so every step resumes.
 """
@@ -63,9 +66,14 @@ def gen(a):
     cadical = K.cadical_wrapper(a.work, a.fsize_mb)
     si, sn = map(int, a.shard.split('/'))
     done = spent = 0
+    plan = K.load_plan(a.plan) if a.plan else None
     for i, (name, meta) in enumerate(cases(a.core)):
         if i % sn != si or (a.names and name not in a.names):
             continue
+        key = (tuple(meta['dirs']), tuple(meta['syms']))
+        if plan and (K.seed_derivation(plan, key, a.core) is not None or
+                     (key in plan['seed_bounds'] and 'lean_bounds' not in meta)):
+            continue       # proved from its seed (or a seed not yet certified with its plan bounds)
         mod = meta['module'].split('.')[-1]
         if os.path.exists(os.path.join(a.out, 'LocalWindowUnsat', mod + '.lean')):
             continue
@@ -164,6 +172,8 @@ def main():
     g.add_argument('--limit', type=int, default=0)
     g.add_argument('--budget-hints', type=float, default=0,
                    help='stop after the cases generated in this call reach this many hints (a batch)')
+    g.add_argument('--plan', default='', help='seed plan (families_k7.py): skip the keys that `gen_k7_core.py '
+                                              'final --plan` derives from their seeds')
     g.add_argument('names', nargs='*')
     m = sub.add_parser('measure')
     m.add_argument('--work', required=True)

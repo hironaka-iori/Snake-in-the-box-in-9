@@ -39,14 +39,27 @@ prefix `K7`:
   * `LocalWindowDirUnsatK7.lean`: `allRefutedK7 : AllRefutedK7`, the premise that
     `LocalWindowDirGlue7<T>` and `UpperBound234` (`gen_lean_glue7.py`) take.
 
+Seeds and families (`--plan data/seeds234.json.gz`, written by `families_k7.py`): `run --plan`
+certifies only the seed keys of the plan, each with its widened Lean bounds (`bounds := [...]`
+in the Cnf module, `lean_bounds` in the core JSON).  The core is taken from the first
+configuration of `FULL_PORTFOLIO` whose used counters allow the planned bounds (`--unsat` first,
+the configuration of the plan); if none does, the bounds are narrowed to what the core allows.
+After the seeds, every key whose seed no longer implies it (checked with the mirror of the Lean
+checks, `families_k7.derivable`) is certified on its own (an *orphan*).  `final --plan` proves
+every key of a chunk from its own certificate if it has one, else from its seed: by L1
+`refuted_key_of_wide` (same window, `widerB`) or L2 `refuted_key_sub` (sub-window, reversal,
+relabelling, `subOK`) of `work/final_lean/LocalWindowFamilies.lean`, each side condition one
+kernel `decide`.  The statements `K7….refuted : Refuted (winOf ds) (boundsOf syms)`, the chunk
+theorems and `allRefutedK7 : AllRefutedK7` are exactly those of the plain run.
+
 Solver runs are sequential; every CaDiCaL call goes through a wrapper with `nice -n 19` and
 a file-size cap on the raw proof.  Resumable: a key whose JSON and Cnf module exist is
 skipped.
 
   nice -n 19 python3 gen_k7_core.py run --keys KEYS.json.gz --work DIR [--out ROOT] [--kinds H,F,k6]
-                                        [--only DS:SYMS ...] [--limit N] [--max-est HINTS]
+                                        [--only DS:SYMS ...] [--limit N] [--max-est HINTS] [--plan PLAN]
   python3 gen_k7_core.py cnfsat --work DIR [--out ROOT] NAME ...   # rewrite Cnf modules from core JSONs
-  python3 gen_k7_core.py final --keys KEYS.json.gz [--out ROOT] [--chunks 0,1,...]
+  python3 gen_k7_core.py final --keys KEYS.json.gz [--out ROOT] [--chunks 0,1,...] [--plan PLAN]
   python3 gen_k7_core.py regen --out CERTDIR NAME ...      # CNFs (.cnf.gz) from the core JSONs
 
 See `README.md` (this directory) for the five-key validation and the commands of a full run.
@@ -63,6 +76,8 @@ import wincert                         # noqa: E402
 import gen_lean_core as GC             # noqa: E402
 import gen_lean_sat as GS              # noqa: E402
 import gen_lean_cnfsat_packed as CP    # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import families_k7 as FK               # noqa: E402
 
 LEAN = os.path.join(ROOT, 'work', 'final_lean')
 CORE = os.path.join(ROOT, 'milestones', '10-window-aggregate', 'data', 'lean_core_direction_k7')
@@ -176,10 +191,60 @@ def disk_free_mb():
 
 # ------------------------------------------------------------------- run ---
 
-def one(dirs, syms, work, certs, cadical, out, core, log, part_lits):
+def used_counters(dirs, syms, ids, npre):
+    """(lo, hi): the 0-based centres whose `alpha >= lo` / `alpha <= hi` counter has a clause
+    in the core `ids` (clause ids of the CNF; ids above `npre` are cycle cuts)."""
+    window = wincert.window_from_dirs(list(dirs))
+    bounds = GC.dir_bounds(syms)
+    alpha = [lo if lo == hi else (lo, hi) for lo, hi in bounds]
+    alpha += [None] * GS.uncounted_centres(window, bounds)
+    enc = GS.TaggedEncoding(window, alpha, radius=RADIUS)
+    used = {enc.tags[i - 1][1] for i in ids if i <= npre and enc.tags[i - 1][0] in
+            ('first', 'zero', 'mono', 'step', 'over')}
+    kinds = [enc.ctrs[c][2] for c in used]
+    return {k[1] for k in kinds if k[0] == 'lo'}, {k[1] for k in kinds if k[0] == 'hi'}
+
+
+def allowed(plan, syms, lo_used, hi_used):
+    """The bounds `plan` (widened bounds of the key) narrowed to what a core with these counters
+    allows: a used counter keeps the key's own bound on its side."""
+    out = []
+    for i, s in enumerate(syms):
+        lo, hi = FK.bound_of(s)
+        plo, phi = plan[i] if i < len(plan) else FK.TRIV
+        out.append((lo if i in lo_used else plo, hi if i in hi_used else phi))
+    while out and out[-1] == FK.TRIV:
+        out.pop()
+    return out
+
+
+def seed_core(name, work, cadical, certs, dirs, syms, npre, plan):
+    """Core of a seed: the first configuration of `FULL_PORTFOLIO` whose core allows the planned
+    bounds, else the one that keeps the most widened sides.  Returns (ids, info, lean bounds)."""
+    cnf = GC.extract_cnf(name, work, certs)
+    best = None
+    for cfg in GC.FULL_PORTFOLIO:
+        nl, nh, desc, ids = GC.best_cadical_proof(cnf, os.path.join(work, name + '.full'), cadical, [1],
+                                                  portfolio=[cfg], rounds=1)
+        os.remove(os.path.join(work, name + '.full.lrat'))
+        lb = allowed(plan, syms, *used_counters(dirs, syms, ids, npre))
+        score = sum((x[1] - x[0]) for x in lb) + 22 * (len(syms) - len(lb))
+        cand = (lb == [tuple(x) for x in plan], score, -nh, ids, {'full_lemmas': nl, 'full_hints': nh,
+                                                                   'full_seed': desc}, lb)
+        if best is None or cand[:3] > best[:3]:
+            best = cand
+        if cand[0]:
+            break
+    return best[3], best[4], best[5]
+
+
+def one(dirs, syms, work, certs, cadical, out, core, log, part_lits, plan=None):
+    """Certify one key; with `plan` (its widened bounds) as a seed with those bounds, or as many
+    of them as its core allows."""
     name, module = case_name(dirs, syms), module_name(dirs, syms)
     mp = os.path.join(core, name + '.json')
-    if os.path.exists(mp) and os.path.exists(os.path.join(out, 'LocalWindowCnf', module + '.lean')):
+    if os.path.exists(mp) and os.path.exists(os.path.join(out, 'LocalWindowCnf', module + '.lean')) and \
+            (plan is None or 'lean_bounds' in json.load(open(mp))):
         return None
     t0 = time.time()
     enc = encoding(dirs, syms)
@@ -192,7 +257,11 @@ def one(dirs, syms, work, certs, cadical, out, core, log, part_lits):
     gz = os.path.join(certs, name + '.cnf.gz')
     sha = write_gz_cnf(enc, gz)
     t1 = time.time()
-    ids, finfo = GC.full_core_ids(name, work, cadical, [1], certs)
+    if plan is None:
+        ids, finfo = GC.full_core_ids(name, work, cadical, [1], certs)
+        lean_bounds = None
+    else:
+        ids, finfo, lean_bounds = seed_core(name, work, cadical, certs, dirs, syms, npre, plan)
     t2 = time.time()
     bounds = GC.dir_bounds(syms)
     meta = {'name': name, 'module': 'LocalWindowCnf.' + module, 'kind': kind_of(dirs, syms),
@@ -208,6 +277,9 @@ def one(dirs, syms, work, certs, cadical, out, core, log, part_lits):
             'lrat_producer': 'core_lrat (cadical on the core; regenerated by replay_k7.py, not committed)',
             'lrat': {'lemmas': finfo['full_lemmas'], 'hints': finfo['full_hints'], 'estimated_from_full_proof': True},
             'core_ids': ids}
+    if plan is not None:
+        meta['plan_bounds'] = [list(x) for x in plan]
+        meta['lean_bounds'] = [list(x) for x in lean_bounds]
     json.dump(meta, open(mp, 'w'))
     r = CP.emit(name, certs, core, out, part_lits=part_lits)
     t3 = time.time()
@@ -218,6 +290,9 @@ def one(dirs, syms, work, certs, cadical, out, core, log, part_lits):
            'clauses': len(enc.clauses), 'cuts': ncuts, 'core': len(ids), 'core_lits': r['lits'],
            'full_hints': finfo['full_hints'], 'cnfsat_src_bytes': r['lean_bytes'], 'check_parts': r['check_parts'],
            'enc_s': round(t1 - t0, 2), 'core_s': round(t2 - t1, 2), 'emit_s': round(t3 - t2, 2)}
+    if plan is not None:
+        rec.update(seed=True, plan_bounds=meta['plan_bounds'], lean_bounds=meta['lean_bounds'],
+                   as_planned=meta['lean_bounds'] == meta['plan_bounds'], core_config=finfo['full_seed'])
     with open(log, 'a') as f:
         f.write(json.dumps(rec) + '\n')
     return rec
@@ -238,20 +313,96 @@ def run(a):
     kinds = set(a.kinds.split(','))
     keys = [k for k in keys if kind_of(*k) in kinds]
     est = key_estimates(a.keys)
+    plan = load_plan(a.plan) if a.plan else None
+    if plan:
+        seeds = plan['seed_bounds']
+        nk = len(keys)
+        keys = [k for k in keys if k in seeds]
+        print(json.dumps({'plan_seeds': len(seeds), 'seeds_here': len(keys), 'keys_here': nk}), flush=True)
     keys.sort(key=lambda k: (est.get(k, 1e12), k))       # smallest estimate first
     n = 0
+    stopped = False
     for k in keys:
         if a.max_est and est.get(k, 0) > a.max_est:
             continue
         if disk_free_mb() < a.min_disk_mb:
             print('stop: disk below %d MB' % a.min_disk_mb, flush=True)
+            stopped = True
             break
-        rec = one(k[0], k[1], a.work, certs, cadical, a.out, a.core, a.log, a.part_lits)
+        rec = one(k[0], k[1], a.work, certs, cadical, a.out, a.core, a.log, a.part_lits,
+                  plan['seed_bounds'][k] if plan else None)
         if rec:
             n += 1
             print(json.dumps(rec), flush=True)
             if a.limit and n >= a.limit:
+                stopped = True
                 break
+    if plan and not stopped:
+        # keys whose seed (as certified) no longer implies them: certify them on their own
+        allk = set(k for ch in new_chunks(a.keys, a.chunk) for k in ch)
+        orph = [k for k in plan['derived'] if k in allk and (not a.only or k in want)
+                and kind_of(*k) in kinds and derivation(plan, k, a.core) is None]
+        unproved = [k for k in orph if not os.path.exists(os.path.join(a.core, case_name(*k) + '.json'))]
+        print(json.dumps({'orphans': len(orph), 'orphans_to_certify': len(unproved)}), flush=True)
+        for k in sorted(unproved, key=lambda k: (est.get(k, 1e12), k)):
+            if disk_free_mb() < a.min_disk_mb:
+                print('stop: disk below %d MB' % a.min_disk_mb, flush=True)
+                break
+            rec = one(k[0], k[1], a.work, certs, cadical, a.out, a.core, a.log, a.part_lits)
+            if rec:
+                rec['orphan'] = True
+                print(json.dumps(rec), flush=True)
+
+
+# ------------------------------------------------------------------ plan ---
+
+def load_plan(path):
+    """The seed plan of `families_k7.py`: `seed_bounds` {key: widened bounds} and `derived`
+    {key: (seed key, method, v, s)} for the keys that are not seeds."""
+    d = json.load(gzip.open(path, 'rt'))
+    keys = [(tuple(k[1]), tuple(k[2])) for k in d['keys']]
+    seeds = [(keys[i], [tuple(x) for x in b]) for i, b in d['seeds']]
+    derived = {}
+    for k, (si, m, v, s) in zip(keys, d['derive']):
+        if m != 'self':
+            derived[k] = (seeds[si][0], m, v, s)
+    return {'seed_bounds': dict(seeds), 'derived': derived, 'summary': d['summary']}
+
+
+def own_meta(k, core):
+    p = os.path.join(core, case_name(*k) + '.json')
+    return json.load(open(p)) if os.path.exists(p) else None
+
+
+def derivation(plan, k, core):
+    """How key `k` is proved once its certificates exist: ('L1' | 'L2', seed meta, v, s) from the
+    certificate of its seed (with the bounds that certificate has), else ('own', meta) from its own
+    certificate, else None.  A seed is its own certificate."""
+    dv = seed_derivation(plan, k, core)
+    if dv is not None:
+        return dv
+    m = own_meta(k, core)
+    if m is not None and (k not in plan['seed_bounds'] or 'lean_bounds' in m):
+        return ('own', m)
+    return None
+
+
+def seed_derivation(plan, k, core):
+    if k not in plan['derived']:
+        return None
+    sk, meth, v, s = plan['derived'][k]
+    sm = own_meta(sk, core)
+    if sm is None or 'lean_bounds' not in sm:
+        return None
+    lb = [tuple(x) for x in sm.get('lean_bounds') or GC.dir_bounds(sk[1])]
+    seed = (None, list(sk[0]), list(sk[1]))
+    key = (None, list(k[0]), list(k[1]))
+    if meth == 'L1' and list(sk[0]) == list(k[0]) and FK.wider_b(lb, FK.bounds_of(k[1])):
+        return ('L1', sm, None, None)
+    if meth == 'L2' and FK.subok(v, s, FK.win_of(sk[0]), lb, FK.win_of(k[0]), FK.bounds_of(k[1])):
+        return ('L2', sm, v, s)
+    dv = FK.derivable(seed, lb, key)          # the planned derivation failed: search again
+    return (dv[0], sm, dv[1], dv[2]) if dv else None
 
 
 # ----------------------------------------------------------------- final ---
@@ -260,17 +411,44 @@ def lst(c):
     return '[' + ', '.join(map(str, c)) + ']'
 
 
-def chunk_module(ci, ch, part, n_chunks):
+def proof_term(k, dv):
+    """(proof of `Refuted (winOf ds) (boundsOf syms)`, certificate module) for key `k` and its
+    derivation `dv` (`derivation`; None: the plain certificate of the key)."""
+    m = module_name(*k)
+    if dv is None or (dv[0] == 'own' and dv[1].get('lean_bounds') is None):
+        return f'Tags.refuted_of_sat {m}.sat {m}.unsat', m
+    if dv[0] == 'own':      # a seed: its widened certificate, narrowed back to its own bounds (L1)
+        return (f'Families.refuted_key_of_wide (Tags.refuted_of_sat {m}.sat {m}.unsat)\n'
+                f'    (by decide +kernel)'), m
+    sm = dv[1]['module'].split('.')[-1]
+    cert = f'(Tags.refuted_of_sat {sm}.sat {sm}.unsat)'
+    if dv[0] == 'L1':
+        return f'Families.refuted_key_of_wide {cert}\n    (by decide +kernel)', sm
+    return (f'Families.refuted_key_sub (mkPerm {lst(dv[2])}) {dv[3]}\n    {cert}\n'
+            f'    (by decide +kernel)'), sm
+
+
+def chunk_module(ci, ch, part, n_chunks, dvs=None):
     mods = [module_name(*k) for k in ch]
-    imports = ''.join(f'import LocalWindowUnsat.{m}\n' for m in mods)
+    pts = [proof_term(k, dvs[k] if dvs else None) for k in ch]
+    certs = sorted(set(c for _, c in pts))
+    imports = ''.join(f'import LocalWindowUnsat.{m}\n' for m in certs)
     refuted = ''.join(f'theorem {m}.refuted : Refuted (winOf {lst(d)}) (boundsOf {lst(s)}) :=\n'
-                      f'  Tags.refuted_of_sat {m}.sat {m}.unsat\n\n' for m, (d, s) in zip(mods, ch))
+                      f'  {pt}\n\n' for m, (d, s), (pt, _) in zip(mods, ch, pts))
+    nown = sum(1 for k in ch if (dvs is None or dvs[k][0] == 'own'))
+    fam = '' if dvs is None else f'''
+Seeds and families (`--plan`): {nown} of the keys have their own certificate (a seed with widened
+bounds is narrowed back by L1, `Families.refuted_key_of_wide`); the other {len(ch) - nown} follow from
+the widened certificate of their seed, by L1 (same window, `widerB`, {sum(1 for k in ch if dvs[k][0] == 'L1')} keys) or by L2
+(`Families.refuted_key_sub`: the seed's window mapped into the key's by a cube automorphism
+`amap (mkPerm v) s`, `subOK`, {sum(1 for k in ch if dvs[k][0] == 'L2')} keys).  The chunk imports the {len(certs)} certificates it uses.
+'''
     term = 'trivial'
     for m in reversed(mods):
         term = f'And.intro {m}.refuted\n    ({term})'
     nh = sum(kind_of(*k) == 'H' for k in ch)
     return f'''import LocalWindowTags
-import LocalWindowDirKeysK7_P{part}
+{'' if dvs is None else 'import LocalWindowFamilies' + chr(10)}import LocalWindowDirKeysK7_P{part}
 {imports}
 /-!
 # Chunk {ci} of the {n_chunks} chunks of new certificates of the seven-centre bound
@@ -281,7 +459,7 @@ directions, 7 counts, the last interior vertex uncounted), the packed core modul
 `LocalWindowCnf.K7…` proves that its UNSAT core follows from the snake conditions `Axioms`
 (`sat`), and the replay `LocalWindowUnsat.K7…` refutes the core (`unsat`).  Together they give
 `Refuted (winOf ds) (boundsOf syms)` (`Tags.refuted_of_sat`).
--/
+{fam}-/
 
 set_option maxRecDepth 100000
 
@@ -331,16 +509,33 @@ def final(a):
     part = key_parts(chunks, a.keys_per_module)
     sel = range(len(chunks)) if not a.chunks else [int(c) for c in a.chunks.split(',')]
     missing = []
+    plan = load_plan(a.plan) if a.plan else None
+    unproved = []
+    os.makedirs(a.out, exist_ok=True)
     for ci in sel:
+        dvs = None
+        if plan:
+            dvs = {k: derivation(plan, k, a.core) for k in chunks[ci]}
+            unproved += [module_name(*k) for k, dv in dvs.items() if dv is None]
+            if any(dv is None for dv in dvs.values()):
+                continue
+            for k, dv in dvs.items():
+                if dv[0] in ('L1', 'L2'):
+                    assert FK.derivable((None, list(dv[1]['dirs']), list(dv[1]['syms'])),
+                                        [tuple(x) for x in dv[1]['lean_bounds']], (None, list(k[0]), list(k[1])))
         for k in chunks[ci]:
-            if not os.path.exists(os.path.join(a.out, 'LocalWindowUnsat', module_name(*k) + '.lean')):
-                missing.append(module_name(*k))
+            cm = module_name(*k) if not dvs else proof_term(k, dvs[k])[1]
+            if not os.path.exists(os.path.join(a.out, 'LocalWindowUnsat', cm + '.lean')):
+                missing.append(cm)
         open(os.path.join(a.out, f'LocalWindowDirUnsatK7_{ci}.lean'), 'w').write(
-            chunk_module(ci, chunks[ci], part[ci], len(chunks)))
+            chunk_module(ci, chunks[ci], part[ci], len(chunks), dvs))
+    if unproved:
+        raise SystemExit(f'{len(unproved)} keys have neither a certificate nor a certified seed that '
+                         f'implies them (run `run --plan` to the end first), e.g. {unproved[:5]}')
     if not a.chunks:
         open(os.path.join(a.out, 'LocalWindowDirUnsatK7.lean'), 'w').write(aggregate_module(chunks))
     print(f'wrote {len(sel)} chunk modules' + ('' if a.chunks else ' and LocalWindowDirUnsatK7.lean') +
-          f' in {a.out}; {len(missing)} replay modules not generated yet', flush=True)
+          f' in {a.out}; {len(set(missing))} replay modules not generated yet', flush=True)
 
 
 def cnfsat(a):
@@ -376,6 +571,8 @@ def main():
     r.add_argument('--max-est', type=float, default=0, help='skip keys with a larger hint estimate')
     r.add_argument('--min-disk-mb', type=int, default=700)
     r.add_argument('--fsize-mb', type=int, default=700, help='cap on a raw CaDiCaL proof')
+    r.add_argument('--plan', default='', help='seed plan (families_k7.py): certify its seeds with widened '
+                                              'bounds, then the keys their certificates no longer imply')
     c = sub.add_parser('cnfsat')
     c.add_argument('--work', required=True)
     c.add_argument('--out', default=LEAN)
@@ -391,6 +588,8 @@ def main():
     f.add_argument('--chunk', type=int, default=400)
     f.add_argument('--keys-per-module', type=int, default=4000, help='as gen_lean_glue7.py keys')
     f.add_argument('--chunks', default='', help='only these chunk modules (no aggregate)')
+    f.add_argument('--plan', default='', help='seed plan: derive keys from their seeds (L1/L2)')
+    f.add_argument('--core', default=CORE, help='core JSON directory (with --plan)')
     g = sub.add_parser('regen')
     g.add_argument('--out', required=True)
     g.add_argument('--core', default=CORE)
