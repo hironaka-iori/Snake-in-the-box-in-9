@@ -120,7 +120,7 @@ In Q8, annealing runs of 4·10^8 steps found nothing above 112 for any c in 8–
 | Q8, c = 14, L = 127 / 126 / 125 / 124 | UNSAT | 53 s / 76 s / 136 s / 501 s |
 | Q8, c = 14, L = 123 | UNSAT | 1517 s |
 | Q8, c = 14, L = 122 | UNSAT | 3327 s |
-| Q8, c = 14, L = 121 | see `data/q8_runs.txt` | |
+| Q8, c = 14, L = 121 | unknown | > 6000 s (run lost at a container restart) |
 
   **Proved here:** g7(c) ≤ 57 for c ≤ 8, against the lower bound 56, and g8(c) ≤ g8(14) ≤ 121 for c ≤ 14, against the lower bound 112.
 
