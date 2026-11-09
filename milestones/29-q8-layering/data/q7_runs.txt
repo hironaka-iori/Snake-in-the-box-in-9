@@ -1,0 +1,10 @@
+# Q7 SAT runs (gforest.py, CaDiCaL 1.9.5 via python-sat, one core at nice 15, symmetry breaking on)
+# query: is there an induced linear forest in Q7 with >= L vertices and <= c paths?
+# encodings: lazy = lazy cycle cuts; levels = level encoding D=32; s6 = plus |F cap Q6| <= g6(#pieces) on all 14 halves
+c=8 L=57 lazy    UNKNOWN after 564 s (450 cut rounds, each round slower)
+c=8 L=57 levels  UNKNOWN after 2400 s (timeout)
+c=8 L=57 levels+s6 UNKNOWN after 1800 s (timeout)
+c=8 L=60 levels  UNSAT 39.3 s        -> g7(8) <= 59
+c=8 L=60 levels+s6 UNSAT 71.6 s
+c=8 L=59 levels  UNSAT 226.0 s       -> g7(8) <= 58
+c=8 L=58 levels  UNSAT 1605.7 s      -> g7(8) <= 57   (so g7(c) <= 57 for all c <= 8; lower bound 56 for 4 <= c <= 8)

@@ -133,3 +133,19 @@ def report_lower():
 
 if __name__ == '__main__':
     report_lower()
+
+
+def ladder():
+    """a(9) bound from hypothetical proven bounds g8(c) <= X for c <= 13 and g8(14) <= Y,
+    together with the Lean bound a(9) <= 235 (so only m <= 235 has to be excluded)."""
+    rows = []
+    for X, Y in ((118, 118), (117, 118), (117, 117), (116, 117), (115, 117), (114, 117), (113, 117),
+                 (112, 117), (112, 122), (112, 123)):
+        g = lambda p, t: 0 if p <= 0 else (X if p <= 13 else (Y if p == 14 else 128))
+        rows.append((X, Y, bound1(9, g, mmax=236)))
+    return rows
+
+
+if __name__ == '__main__':
+    for X, Y, b in ladder():
+        print('g8(<=13) <= %d, g8(14) <= %d  ->  a(9) <= %d' % (X, Y, b))
