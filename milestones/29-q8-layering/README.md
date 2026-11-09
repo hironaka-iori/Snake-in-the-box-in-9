@@ -1,8 +1,8 @@
 # Layering through induced linear forests in Q8
 
-Run of 9 November 2026. One core at nice 15, about 4 hours.
+Run of 9 November 2026. One core at nice 15, about 5 hours.
 
-**Status:** exact small tables, construction data, and an assessment. Nothing here is a Lean theorem, and no bound changes.
+**Status:** exact small tables, construction data, a few SAT-proved upper bounds (g7(c) ≤ 57 for c ≤ 8, g8(14) ≤ 123), and an assessment. Nothing here is a Lean theorem, and no bound on a(9) changes.
 
 ## Question
 
@@ -28,14 +28,14 @@ Here `g3(p, t)` allows exactly p paths, at most t of them with fewer than 3 vert
 
 Parity facts (`k_i ≡ u_i + w_i` for the end vertices; the number of odd `k_i` is `d(u, w) ≡ m`) only choose between the two `(t_a, t_b)` cases. The edge-count variant is equivalent with exact piece counts and weaker with "at most".
 
-What the inequality demands at n = 9, given the Lean bound a(9) ≤ 235:
+What the inequality demands at n = 9, given the Lean bound a(9) ≤ 235 (G is monotone, so only k = 24, 25, 26 matter; see the ladder in §4):
 
 | target | conditions |
 |---|---|
 | a(9) ≤ 234 | g8(13) + g8(14) ≤ 235 |
-| a(9) ≤ 230 | g8(13) ≤ 115 and g8(13) + g8(14) ≤ 234 |
-| a(9) ≤ 226 | g8(13) ≤ 113 and g8(13) + g8(14) ≤ 234 |
-| a(9) ≤ 223 | g8(12), g8(13) ≤ 112 and g8(13) + g8(14) ≤ 234 |
+| a(9) ≤ 233 | g8(14) ≤ 117 |
+| a(9) ≤ 227 | g8(13) ≤ 114 and g8(14) ≤ 117 |
+| a(9) ≤ 223 | g8(13) ≤ 112 and g8(14) ≤ 122 |
 
 ## 1. Exact values for n = 4, 5, 6 (`gforest.py`, `gtable.py`; data in `data/g{4,5,6}.jsonl`)
 
@@ -72,7 +72,7 @@ Cross-checks:
 | 5 | 15 (exact g4) | 13 | 15 % |
 | 6 | 28 (exact g5) | 26 | 8 % |
 | 7 | 56 (exact g6) | 50 | 12 % |
-| 8 | 111 if g7 equals its lower bounds below | 98 | 13 % |
+| 8 | 111 if g7 equals its lower bounds below; **113 proved** (§4) | 98 | 13 % (proved: 15 %) |
 | 9 | **223** if g8 equals its lower bounds below | 191–235 | — |
 
 Two cuts (quarters, Q_{N-2}) are useless: 31 at N = 6 and 63 at N = 7, both Huang. At N = 9 it gives 246 even with g7 equal to its lower bounds, because `g7(13) ≥ 61`.
@@ -105,35 +105,62 @@ In Q8, annealing runs of 4·10^8 steps, and a 15-minute SAT search for 113 verti
 - **Recursive layering** (`recursion.py`, `data/recursion.json`):
   - From the exact g6 table it gives g7(c) ≤ 57, 58, …, 63 for c = 1..7, and 64 from c = 8 on.
   - From those values it gives g8(c) ≤ 128 for every c.
-  - The cut in the least-used direction produces about c + (f − c)/8 pieces, so even exact g7 values would give g8(13) ≤ 2·g7(13) ≥ 122.
-  - Cutting a forest does not preserve "few paths". This is the same loss that makes the snake inequality lossy, but it compounds.
-- **Spectral and counting:** the Huang interlacing argument does not see the number of paths, because every forest has λ1 < 2 < √8. The higher-moment identities reproduce the square census (milestone 22 §0–3). The subcube-local version, `e(F ∩ Q6) ≤ 24` when a Q6 holds at least 4 pieces, averages to e(F) ≤ 128.
-- **Direct SAT:**
-  - The Q6 plateau claims (g6(4) ≤ 28 and so on) take under 1 s with symmetry breaking.
-  - The Q7 analogue g7(8) ≤ 56 (no forest with 57 vertices and at most 8 paths) is **unresolved** after 40 min with lazy cuts and after 40 min with levels, and also with the implied constraints `|F ∩ Q6| ≤ g6(#pieces)` on all 14 halves. See `data/q7_runs.txt`.
-  - Q8 at 113–118 vertices with 13–14 paths is far beyond that.
+  - The least-used direction of a forest with c paths and f vertices still produces c + (f − c)/8 pieces. So even exact g7 values give only g8(13) ≤ 2·g7(13), and g7(13) ≥ 61.
+  - Cutting a forest does not preserve "few paths". The loss that the snake inequality suffers once compounds at every level.
+- **Spectral and counting:** the Huang interlacing argument does not see the number of paths, because every forest has λ1 < 2 < √8. The higher-moment identities reproduce the square census (milestone 22). Subcube-local versions average out: `e(F ∩ Q6) ≤ 24` whenever a Q6 holds at least 4 pieces, which gives e(F) ≤ 128 at best.
+- **Direct SAT** (level encoding, symmetry breaking; `data/q7_runs.txt`, `data/q8_runs.txt`):
 
-**With what can be proved today, layering gives a(9) ≤ 255.** The values g8(1) = 99 (from a(8) = 98, a literature result not checked in Lean) and Huang's 128 are all there is. That is far weaker than the Lean bound of 235.
+| query (≤ c paths, ≥ L vertices) | result | time |
+|---|---|---|
+| Q7, c = 8, L = 60 / 59 / 58 | UNSAT | 39 s / 226 s / 1606 s |
+| Q7, c = 8, L = 57 (the plateau value + 1) | unknown | > 2400 s (lazy cuts, levels, and levels + implied Q6 tables all fail) |
+| Q8, c = 14, L = 127 / 126 / 125 / 124 | UNSAT | 53 s / 76 s / 136 s / 501 s |
+| Q8, c = 14, L = 123 | see `data/q8_runs.txt` | |
+| Q8, c = 14, L = 122 | unknown | > 2700 s |
+
+  **Proved here:** g7(c) ≤ 57 for c ≤ 8, against the lower bound 56, and g8(14) ≤ 123, against the lower bound 112.
+
+  Neither the implied subcube tables nor sorting the free coordinates by edge count helped: 72 s against 39 s, and 236 s against 226 s.
+
+**Implied bounds.**
+
+- *N = 8 (calibration).* With g7(c) ≤ 57 for c ≤ 8 and the recursion values above, layering **proves a(8) ≤ 113** (truth 98). Every input is a SAT result of the certifiable kind.
+- *N = 9.* With what is proved (g8 ≤ 128, g8(14) ≤ 123, and g8(1) = 99 from the literature value a(8) = 98), layering gives **a(9) ≤ 245**. That matches the old milestone-5 bound and is far weaker than the Lean bound of 235.
+
+Ladder of what would follow from proved values (`layer.py`, `ladder()`, using a(9) ≤ 235):
+
+| proved g8(c) for c ≤ 13 | proved g8(14) | a(9) ≤ |
+|---|---|---|
+| 117 | 118 | 234 |
+| 117 | 117 | 233 |
+| 116 | 117 | 231 |
+| 115 | 117 | 229 |
+| 114 | 117 | 227 |
+| 113 | 117 | 225 |
+| 112 | ≤ 122 | 223 |
 
 ## 5. Assessment
 
 - **Layering is potentially strong, not weak.**
   - Milestone 22 put the exact-data value somewhere in 224–255.
-  - The new data, the exact Q6 table and the plateau seen in Q7 and Q8, put it at **about 223** if Conjecture P holds.
+  - The exact Q6 table and the plateau seen in Q7 and Q8 put it at **about 223** if Conjecture P holds.
   - The calibration is 8–15 % above the truth at N = 5–8.
-  - The bound comes from the plateau, which is a global feature: few paths cost 2^(n-4) vertices against Huang. Local windows cannot see it.
-- **The bottleneck is purely computational,** and it is severe.
-  - Proving any useful bound needs `g8(13) + g8(14) ≤ 235` (for 234), down to `g8(13) ≤ 112` (for 223). These are exhaustive statements about Q8 with 13–14 paths.
-  - Our pipeline gains a factor of more than 1000 from Q6 to Q7 and still fails on Q7. A naive Q8 instance is out of reach, and so is a(8) = 98-scale effort.
-  - The two-cut variant needs only Q7, but it is dead: g7(13) ≥ 61 gives 4·61 > 236.
-- **What a rigorous version would need:**
-  1. A Q8 search that scales. Candidates:
-     - cube-and-conquer over the restriction to one Q7 half, using the exact Q7 tables as pruning constraints;
-     - a symmetry-reduced orbit enumeration of the 13–14 pieces' endpoint sets;
-     - stronger implied constraints, such as Q6- and Q7-subcube tables and the Huang 2^(k-1) caps.
-  2. Proving the Q7 plateau first (g7(c) ≤ 56 for 4 ≤ c ≤ 8) as the test case.
-  3. Certification as in the existing chain. Each leaf is a CNF: the base encoding, plus cycle cuts (a cut is valid if its vertex set spans a cycle of Q_n, which is decidable), or the level encoding, whose soundness is a short lemma about minima. CaDiCaL then gives LRAT, which the Lean kernel checks. The lemma that "the halves are induced linear forests with that many pieces, internal pieces of at least 3 vertices" is elementary.
-  4. A cheaper intermediate: `g8(13) ≤ 117` and `g8(14) ≤ 118` already give a(9) ≤ 234. They have 5–6 vertices of slack over the conjecture, but slack did not make the Q7 analogue easy either (`data/q7_runs.txt`).
+  - The gain comes from the plateau, a global effect: few paths cost 2^(n-4) vertices against Huang. Windows cannot see it. So layering is the one known route below the 222–227 local ceiling, as the question anticipated.
+- **The bottleneck is purely computational.**
+  - Every useful step needs an exhaustive statement about Q8 forests with 13–14 paths.
+  - The first step that improves on 235 is g8(14) ≤ 117 (giving 233). That is 6 vertices below what is proved today (123), and 5 above the conjecture.
+  - On one core, each further vertex costs a factor of about 2–4 at L = 127–124, and 6–7 near the tight end in Q7. A rough extrapolation for L = 118 is 10^6–10^8 core-seconds. That is out of reach here, but it is perhaps reachable with a parallel cube-and-conquer and better encodings.
+  - The tight value g8(13) ≤ 112, which is what 223 needs, looks harder than the Q7 plateau g7(8) ≤ 56, which this encoding cannot settle in 40 min.
+  - The two-cut variant needs only Q7, but it is dead: g7(13) ≥ 61, so 4·61 > 236.
+- **What a rigorous version needs:**
+  1. A scalable Q8 search. Candidates:
+     - cube-and-conquer, for example on the restriction to a Q6 or Q7 subcube, using the exact smaller tables as pruning constraints;
+     - better acyclicity encodings;
+     - full orbit-based symmetry breaking (the group has order 2^8·8!; only the path prefix is fixed now).
+  2. Settle the Q7 plateau g7(8) = 56 first, as a stepping stone and to test Conjecture P.
+  3. Certification as in the existing chain. The decision problem is a single CNF: base encoding plus level encoding, or base plus cycle cuts (each cut checkably spans a cycle of Q_n). CaDiCaL emits LRAT, which the Lean kernel checks, as for the window certificates.
+     - Lean lemmas needed: (i) the halves of a snake are induced linear forests with floor(k/2)+1 and ceil(k/2) pieces, internal pieces with at least 3 vertices; (ii) the level encoding is sound (a cycle has a minimum level); (iii) the symmetry normalisation; (iv) the arithmetic of the ladder.
+     - The LRAT for the hard Q8 instances would be very large. Reasonable as a stored artifact only if the instance solves in core-days rather than core-years.
 
 ## Files
 
@@ -145,4 +172,4 @@ In Q8, annealing runs of 4·10^8 steps, and a 15-minute SAT search for 113 verti
 - `scripts/forest_sa.c`: simulated annealing, used for lower bounds only.
 - `data/g4.jsonl`, `data/g5.jsonl`, `data/g6.jsonl`: exact tables, with witnesses and solver logs.
 - `data/sa_lower.jsonl`: lower-bound witnesses for Q7 and Q8.
-- `data/recursion.json`, `data/q7_runs.txt`: recursion output and the Q7 SAT attempts.
+- `data/recursion.json`, `data/q7_runs.txt`, `data/q8_runs.txt`: recursion output and the Q7 and Q8 SAT runs.

@@ -1,0 +1,8 @@
+# Q8 SAT runs (gforest.py, level encoding D=64, symmetry breaking, CaDiCaL 1.9.5 via python-sat,
+# one core at nice 15, RSS about 0.4 GB).  query: induced linear forest in Q8, <= c paths, >= L vertices?
+c=14 L=127 UNSAT 53.4 s
+c=14 L=126 UNSAT 76.0 s
+c=14 L=125 UNSAT 136.1 s
+c=14 L=124 UNSAT 500.7 s     -> g8(14) <= 123 (hence g8(c) <= 123 for all c <= 14)
+c=14 L=122 UNKNOWN after 2700 s (timeout)
+c=17 L=113 (SAT direction, lazy... levels) no model found in 900 s (a 113-vertex 17-path forest exists by construction: 16 P7 + 1 isolated)

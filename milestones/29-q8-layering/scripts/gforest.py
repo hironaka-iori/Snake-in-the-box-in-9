@@ -46,7 +46,7 @@ def cube_cycles(n):
     return out
 
 
-def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None, levels=None, sub=None):
+def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None, levels=None, sub=None, sortdirs=False):
     V = 1 << n
     pool = pool or IDPool()
     s = [pool.id(('s', u)) for u in range(V)]
@@ -121,12 +121,53 @@ def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None, l
                     a = pool.id(('a', u, i, j)); al.append(a)
                     cl += [[-a, s[y]], [-a, -o[y, j]]]
                 cl.append([-two] + ([o[u, j + 1]] if j < D else []) + al)
+    if sym and sortdirs and n >= 6:
+        # coordinates 4..n-1 play symmetric roles in every constraint above (the path prefix uses
+        # only 0..3), so WLOG their edge counts are sorted: k_4 <= k_5 <= ... <= k_{n-1}.
+        K = 48
+        outs = []
+        for d in range(4, n):
+            lits = []
+            for u in range(V):
+                if not u >> d & 1:
+                    x = pool.id(('X', u, d))
+                    cl += [[-x, s[u]], [-x, s[u | 1 << d]], [x, -s[u], -s[u | 1 << d]]]
+                    lits.append(x)
+            outs.append(full_totalizer(lits, K, pool, cl))
+        for a, b in zip(outs, outs[1:]):
+            for t in range(min(len(a), len(b))):
+                cl.append([-a[t], b[t]])
     if sub:
         for k, g in sub:
             cl += subcube_bounds(n, k, g, s, pool)
     if extra:
         cl += extra
     return pool, s, cl
+
+
+def full_totalizer(lits, K, pool, cl):
+    """Unary counter with both directions: out[j-1] <-> (sum of lits >= j), for j <= K."""
+    if len(lits) == 1:
+        return lits[:]
+    h = len(lits) // 2
+    a = full_totalizer(lits[:h], K, pool, cl)
+    b = full_totalizer(lits[h:], K, pool, cl)
+    m = min(K, len(a) + len(b))
+    o = [pool.id() for _ in range(m)]
+    A = [None] + a; B = [None] + b                      # A[i] <-> sum_a >= i
+    for i in range(0, len(a) + 1):
+        for j in range(0, len(b) + 1):
+            if 1 <= i + j <= m:                         # a>=i & b>=j -> o>=i+j
+                c = [o[i + j - 1]]
+                if i: c.append(-A[i])
+                if j: c.append(-B[j])
+                cl.append(c)
+            if i + j + 1 <= m:                          # a<i+1 & b<j+1 -> o<i+j+1
+                c = [-o[i + j]]
+                if i + 1 <= len(a): c.append(A[i + 1])
+                if j + 1 <= len(b): c.append(B[j + 1])
+                cl.append(c)
+    return o
 
 
 def subcube_bounds(n, k, g, s, pool):
@@ -203,8 +244,8 @@ def check_forest(sel, n):
 CUTS = {}
 
 
-def search(n, cmax, L, tmax=600, cmin=None, short=None, sym=True, extra=None, verbose=False, levels=None, sub=None):
-    pool, s, cl = encode(n, cmax, L, cmin, short, sym, extra=extra, levels=levels, sub=sub)
+def search(n, cmax, L, tmax=600, cmin=None, short=None, sym=True, extra=None, verbose=False, levels=None, sub=None, sortdirs=False):
+    pool, s, cl = encode(n, cmax, L, cmin, short, sym, extra=extra, levels=levels, sub=sub, sortdirs=sortdirs)
     cuts = CUTS.setdefault(n, [])
     V = 1 << n
     t0 = time.time(); rounds = 0
