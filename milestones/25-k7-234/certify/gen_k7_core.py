@@ -462,7 +462,7 @@ directions, 7 counts, the last interior vertex uncounted), the packed core modul
 {fam}-/
 
 set_option maxRecDepth 100000
-
+{'' if dvs is None else '-- one declaration at a time: parallel elaboration keeps the kernel data of every `decide`' + chr(10) + '-- (1.0 GB for 50 L2 derivations, 0.46 GB without)' + chr(10) + 'set_option Elab.async false' + chr(10)}
 namespace Snake9.LocalWindow
 
 {refuted}theorem allRefutedK7_{ci} : AllRefutedList dirKeysK7_{ci} :=

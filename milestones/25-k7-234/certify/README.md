@@ -67,7 +67,9 @@ about the 10th, 38th and 84th percentile of the 192 F8 keys. They went through `
 So F8 replays cost about 0.17–0.19 ms and 2.8–2.9 B per hint, like the packed k6 windows of
 milestone 26.
 
-**Budget of the certificates.** The unit costs are measured:
+**Budget of the certificates** (every key certified; with the seed plan the run certifies
+2,815 seeds for 104 CPU-hours and 4.5 GB, see "Seeds and families" below). The unit costs are
+measured:
 
 | item | unit cost |
 |---|---|
@@ -109,6 +111,130 @@ about 0.04 GB: Sequence 3.8 MB, bridge 4.5 MB, key, reuse and glue modules 4.5 M
   (`unneeded_oleans.txt`, 0.28 GB) does not change the conclusion. Re-replaying the old Q/R
   windows with the packed encoding would free about 17.9 GB (see "Disk on this machine" below).
   That replaces existing oleans, so it is the owner's decision.
+
+## Seeds and families (9 November): certify 2,815 seeds, derive the other 6,969 keys
+
+`../../30-certificate-families/README.md` found that the UNSAT cores of most new keys leave a count
+bound unused, so one *widened* certificate implies sibling keys. This is now the production path:
+the big run certifies only the **seeds** of `data/seeds234.json.gz`, and every other key of
+`dirKeysK7` is derived from its seed in the chunk modules. The statements do not change:
+`K7….refuted : Refuted (winOf ds) (boundsOf syms)` for every key, `allRefutedK7_<c> : AllRefutedList
+dirKeysK7_<c>`, and `allRefutedK7 : AllRefutedK7`. So the glue, the chain and `UpperBound234` stay
+as they are.
+
+**New totals** (unit costs of "Budget of the certificates"; hints are the key-set estimates):
+
+| | certificates | hints | replay CPU, `.olean` | Cnf+Sat CPU, `.olean` | total |
+|---|---|---|---|---|---|
+| every key (before) | 9,784 | 1.733 G | 108.6 h, 5.28 GB | 29.0 h, 0.53 GB | **137.7 h, 5.82 GB** |
+| **seeds** (k6 2,126, F8 110, H9 579) | **2,815** | **1.493 G** | 92.0 h, 4.34 GB | 12.2 h, 0.19 GB | **104.2 h, 4.53 GB** |
+| seeds, 8 seeds x 5 rounds (about −18 % hints) | 2,815 | about 1.22 G | about 75.6 h, 3.58 GB | 12.2 h, 0.19 GB | **about 88 h, 3.8 GB** |
+| derived keys in the chunk modules (3,849 L1, 3,120 L2) | — | — | 0.01 s (L1) to 0.08 s (L2) per key, about 1.5 kB of `.olean` per key | | about 10 min, 15 MB |
+
+The 1.1 G hints of the 447 expensive seeds are tight cores and share nothing, so the hints drop
+by only 14 %, while the certificates drop by 71 % (mostly cheap H9 and low-count k6 keys).
+
+### Lemmas (`work/final_lean/LocalWindowFamilies.lean`, lakefile entry `LocalWindowFamilies`)
+
+All of them depend on `propext`, `Classical.choice`, `Quot.sound` only (compiled with `lean -o` into
+scratch, 4.3 s, 0.74 MB of `.olean`).
+
+- **L1** `refuted_narrow` / `refuted_key_of_wide`: `Refuted (winOf ds) wide` and
+  `widerB wide (boundsOf syms) = true` give `Refuted (winOf ds) (boundsOf syms)`.
+- **L2** `refuted_sub` / `refuted_key_sub`: from `Refuted W' b'` and `subOK Q s W' b' W b = true`,
+  `Refuted W b`. `subOK` checks that the cube automorphism `amap Q s` (`LocalWindowBridge`) maps every
+  vertex of `W'` into `W`, and every centre of `W'` (as `Tags.centresK` computes them) to a centre
+  of `W` with the same pair of path directions and a narrower range. A centre with range `(0, ≥ 21)`
+  and distinct directions needs no partner. This covers sub-windows, reversal and relabelling,
+  like the sub-window use in the bridges (`refuted_dirH`, `no_forb_H9`), but at the level of
+  `Refuted`.
+- The core of L2 is `axioms_pull`. If `Axioms S E W cen` holds, then so does
+  `Axioms (pull Q s S) (pull Q s E) W' cen'`, where `pull Q s S u = (u < 512 && S (amap Q s u))`.
+  It is the generic analogue of `frame_axioms`:
+  - degrees, cycle cuts and endpoints are invariant (`cnt_amap`, with the inverse
+    `amap Q.inv (bperm Q s)`);
+  - absent corners are invariant (`absent_pull`, `absent_le`, `absentCorners_comm`).
+- L2 took about 330 lines, inside the 150–400 line estimate of milestone 30 (Route A, no bridge
+  change). A derived key is one term:
+  - `Families.refuted_key_of_wide (Tags.refuted_of_sat S.sat S.unsat) (by decide +kernel)`, or
+  - `Families.refuted_key_sub (mkPerm v) s (Tags.refuted_of_sat S.sat S.unsat) (by decide +kernel)`.
+  
+  Here `v` is a permutation list of `0..8` and `s < 512`.
+
+### The plan (`families_k7.py` → `data/seeds234.json.gz`, 73 kB)
+
+- **Widened bounds.** For each new key, the bounds `wide K` come from the milestone-30 core
+  (CaDiCaL `--seed=1 --unsat`). They keep `lo` if the core uses the `alpha >= lo` counter of the
+  centre (else 0) and `hi` if it uses `alpha <= hi` (else 21). Trailing `(0, 21)` are dropped. The
+  window is never trimmed: milestone 30's 17 trimmed families would need their own certificates.
+  2,456 of the 2,815 seeds are widened somewhere.
+- **Implications.** `widerB` and `subOK` are mirrored exactly in Python (`subok`, `sub_params`
+  tries every offset in both orientations), so every recorded derivation is one the kernel
+  accepts. Of 7.3 M candidate pairs, 200,408 hold by L1 and 141,589 by L2.
+- **Seeds.** A weighted greedy cover, with cost = hints + 5,000 per window, as `families.py` does.
+  This gives 2,815 seeds, 11 more than milestone 30's 2,804, because trimming is not used.
+- **Derivations.** 3,849 keys follow by L1 and 3,120 by L2 (2,674 H9, 377 k6, 69 F8). Each derived
+  key names the cheapest chosen seed that implies it, by L1 if possible.
+- **File format.**
+  - `keys`: the new keys, `[kind, ds, syms]`.
+  - `seeds`: `[key index, wide bounds]`.
+  - `derive`: per key, `[seed, 'self' | 'L1' | 'L2', v, s]`.
+  - `summary`: the totals above.
+
+### The driver
+
+- **`gen_k7_core.py run --plan P`.**
+  - It certifies only the seeds of `P` that are new keys of `--keys`, smallest first, each with
+    its widened bounds.
+  - The CNF and the core are those of the key's own bounds. The core is taken from the first
+    configuration of `FULL_PORTFOLIO` whose used counters allow the planned bounds. `--unsat` comes
+    first, which is the configuration of the plan; all three validation seeds took it.
+  - If no configuration allows the planned bounds, the bounds are narrowed to what the core allows.
+  - The core JSON records `lean_bounds` and `plan_bounds`. The Cnf module says
+    `bounds := [(lo, hi), ...]` instead of `boundsOf syms`.
+  - `gen_lean_cnfsat_packed.py` asserts, as `ctrOK` does, that every kept counter agrees with
+    those bounds.
+  - After the seeds, every key that its certified seed no longer implies (an *orphan*) is
+    certified on its own, with plain bounds. This is re-checked with the Lean mirror.
+- **`replay_k7.py gen --plan P`.** Replays the seeds and orphans only. It skips core JSONs of keys
+  that are derived from their seed, such as the committed validation JSONs of earlier runs.
+- **`gen_k7_core.py final --plan P`.** Each key is proved from its seed's certificate if that
+  certificate implies it (L1 or L2), else from its own certificate. A seed is narrowed back to its
+  own bounds by L1.
+  - Each chunk imports the certificates it uses.
+  - It sets `Elab.async false`. With parallel elaboration, 50 L2 derivations took 1.0 GB and a
+    400-key chunk went over 2.9 GB; without it they take 0.46 and 0.52 GB.
+  - A key with neither a certificate nor a certified seed stops `final` with a list.
+- **Tests of the failure path** (Python only, on a copy of the core JSONs): narrowing the H9 seed's
+  `lean_bounds` to `(4, 4)` at its first centre made 4 of its 6 family keys orphans. `final`
+  refused with their names, `run --plan` certified the 4 orphans, and `final` then proved them from
+  their own certificates.
+
+### Validation: 3 seeds and 20 derived keys (`data/keys_famsample.json.gz`, `data/famsample_runs.jsonl`)
+
+- **Keys.** Three seeds of the plan and 20 keys of their families:
+  - L1: 4 k6 keys of the seed `0123410`, 3 H9 keys of the H9 seed, 3 k6 keys of `012304`;
+  - L2 forwards: 1 H9 key of `0123410`, and 1 H9 and 2 seven-direction k6 keys of `012304`;
+  - L2 backwards: 2 H9 keys of `0123410`, 3 H9 keys of the H9 seed and 1 H9 key of `012304`.
+- **Pipeline.** Real cores (`run --plan`), packed replays (`replay_k7.py gen --plan`, seeds 2,
+  1 round), `gen_lean_glue7.py keys --noncomputable` (2 chunks: 11 k6 keys, 12 H9 keys) and
+  `final --plan`. Every module was compiled with `measure.py` into scratch.
+- **Result.** `LocalWindowDirUnsatK7_0`, `_1` and `allRefutedK7 : AllRefutedK7` (the premise as
+  `gen_lean_glue7.py keys` defines it) depend on **`propext`, `Classical.choice`, `Quot.sound`**.
+  So do the three `sat` and three `unsat`.
+- **Core JSONs.** In `milestones/10-window-aggregate/data/lean_core_direction_k7/`.
+
+| seed | kind | widened bounds | core / literals | hints | Cnf CPU, RSS | replay CPU, RSS |
+|---|---|---|---|---|---|---|
+| `K7012342154A4535431` | H9 | `(0,21)` ×6, `(0,1)` | 15 / 29 | 26 | 0.5 s, 0.43 GB | 0.2 s, 0.42 GB |
+| `K70123410A335654` | k6 | `(0,3)`, `(0,21)` ×4, `(0,4)` | 81 / 196 | 213 | 1.0 s, 0.50 GB | 0.5 s, 0.44 GB |
+| `K7012304A15464` | k6 | `(0,1)`, `(0,21)` ×3, `(0,4)` | 126 / 353 | 327 | 1.1 s, 0.51 GB | 0.3 s, 0.44 GB |
+
+| module | keys (own / L1 / L2) | CPU, RSS, `.olean` |
+|---|---|---|
+| `LocalWindowDirUnsatK7_0` | 11 (2 / 7 / 2) | 0.57 s, 0.44 GB, 50 kB |
+| `LocalWindowDirUnsatK7_1` | 12 (1 / 3 / 8) | 0.97 s, 0.46 GB, 58 kB |
+| stress module, not committed: 400 family keys of the three seeds | 400 (0 / 166 / 234) | 20.6 s, 0.52 GB, 629 kB |
 
 ## Per-key measurements
 
@@ -261,12 +387,12 @@ Preconditions:
   is the chosen key set.
 
 ```sh
-# 0. Libraries the new modules import.  ProofPack, LocalWindowCnfPack and the O5k checkers have
-#    lakefile entries; LocalWindowTagsSplit and LocalWindowDirGlue7, like every K7 module, are
-#    built with --direct (no lakefile entry).
+# 0. Libraries the new modules import.  ProofPack, LocalWindowCnfPack, LocalWindowFamilies and the
+#    O5k checkers have lakefile entries; LocalWindowTagsSplit and LocalWindowDirGlue7, like every
+#    K7 module, are built with --direct (no lakefile entry).
 cd work/final_lean
 nice -n 19 python3 ../guarded_lake_build.py --direct --trust-mtime --jobs 1 \
-    ProofPack LocalWindowCnfPack LocalWindowTagsSplit LocalWindowDirGlue7 \
+    ProofPack LocalWindowCnfPack LocalWindowTagsSplit LocalWindowDirGlue7 LocalWindowFamilies \
     LratFast2_O5k14 LratFast2_O5k15 LratFast2_O5k16 LratFast2_O5k17 \
     LratFast2F_O5k14 LratFast2F_O5k15 LratFast2F_O5k16 LratFast2F_O5k17
 cd ../..
@@ -274,17 +400,22 @@ cd ../..
 # 1. The key modules of the new keys (dirKeysK7_<c>, AllRefutedK7).
 python3 milestones/25-k7-234/lean/scripts/gen_lean_glue7.py keys --keys $K
 
-# 2. Cores and packed Cnf+Sat modules (about 2 s of solver time per H9 key, more for k6 keys).
-nice -n 19 python3 milestones/25-k7-234/certify/gen_k7_core.py run --keys $K --work $S/k7core --min-disk-mb 2000
+# 2. Cores and packed Cnf+Sat modules of the 2,815 seeds of the plan P, with their widened
+#    bounds, then of the orphans (keys their certified seed no longer implies), if any.  Run it
+#    to the end (it resumes) before step 3.  About 2 s of solver time per H9 key, more for k6.
+P=milestones/25-k7-234/certify/data/seeds234.json.gz
+nice -n 19 python3 milestones/25-k7-234/certify/gen_k7_core.py run --keys $K --plan $P \
+    --work $S/k7core --min-disk-mb 2000
 
-# 3. Replays in batches; repeat until `gen` writes nothing.  Proofs of 8 seeds x 5 rounds
-#    (-18 % hints on the five keys).
-nice -n 19 python3 milestones/25-k7-234/certify/replay_k7.py gen --work $S/k7replay \
+# 3. Replays of the seeds and orphans in batches; repeat until `gen` writes nothing.  Proofs of
+#    8 seeds x 5 rounds (-18 % hints on the five keys).  --plan skips derived keys.
+nice -n 19 python3 milestones/25-k7-234/certify/replay_k7.py gen --plan $P --work $S/k7replay \
     --seeds 8 --rounds 5 --budget-hints 50e6 --min-disk-mb 2000
 python3 milestones/25-k7-234/certify/replay_k7.py build --jobs 1 --heavy-jobs 3 --rss-cap-gb 3.5
 
-# 4. The chunk modules and the premise allRefutedK7.
-python3 milestones/25-k7-234/certify/gen_k7_core.py final --keys $K
+# 4. The chunk modules (each key from its seed by L1/L2, or from its own certificate) and the
+#    premise allRefutedK7.  `final` stops with a list if a key has neither.
+python3 milestones/25-k7-234/certify/gen_k7_core.py final --keys $K --plan $P
 cd work/final_lean
 nice -n 19 python3 ../guarded_lake_build.py --direct --trust-mtime --jobs 1 --rss-cap-gb 4 \
     --log .lake/guarded_build_k7.jsonl LocalWindowDirUnsatK7
@@ -295,8 +426,8 @@ cd ../..
 ```
 
 Before the audit,
-`grep -rlE "sorry|native_decide|^axiom" work/final_lean/LocalWindow{Cnf,Unsat}/K7* work/final_lean/LocalWindowDir*K7*.lean work/final_lean/LocalWindowTagsSplit.lean`
-must print nothing. It printed nothing for the five-key run.
+`grep -rlE "sorry|native_decide|^axiom" work/final_lean/LocalWindow{Cnf,Unsat}/K7* work/final_lean/LocalWindowDir*K7*.lean work/final_lean/LocalWindowTagsSplit.lean work/final_lean/LocalWindowFamilies.lean`
+must print nothing. It printed nothing for the five-key run and for the family sample.
 
 The five-key validation, in the same order, in a scratch root `$H` (oleans in `$H/olean`, first in
 `LEAN_PATH`):
@@ -420,4 +551,8 @@ Hints are counted from the replay headers.
 | `data/keys_f8three.json.gz`, `data/f8three_runs.jsonl` | the three F8 validation keys of the final set and their measurements (31 October) |
 | `PROGRESS-B234.md` | the production shard build of the B234 chain on this machine |
 | `work/final_lean/LocalWindowTagsSplit.lean` | `pwL`, `ctrOKL`, `ctrOK_of_ctrOKL`, `ckAll_append`, `checkAll_of_parts` |
-| `milestones/10-window-aggregate/scripts/gen_lean_sat.py`, `gen_lean_cnfsat_packed.py` | `uncounted_centres` (H9 alpha padding); `--part-lits` |
+| `milestones/10-window-aggregate/scripts/gen_lean_sat.py`, `gen_lean_cnfsat_packed.py` | `uncounted_centres` (H9 alpha padding); `--part-lits`; explicit `lean_bounds` (widened seeds) |
+| `families_k7.py` → `data/seeds234.json.gz` | the seed plan: widened bounds, L1/L2 derivations checked by the Lean mirror, greedy cover (Seeds and families) |
+| `gen_k7_core.py run/final --plan`, `replay_k7.py gen --plan` | seeds with widened bounds, orphans, chunk modules with derived keys |
+| `data/keys_famsample.json.gz`, `data/famsample_runs.jsonl` | the 23 keys of the family validation (3 seeds, 20 derived) and their measurements; the seeds' core JSONs are in `lean_core_direction_k7/` |
+| `work/final_lean/LocalWindowFamilies.lean` | L1 `refuted_narrow`, `refuted_key_of_wide`; L2 `axioms_pull`, `subOK`, `refuted_sub`, `refuted_key_sub` |

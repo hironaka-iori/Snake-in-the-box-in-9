@@ -146,7 +146,7 @@ cheaper that is known.
 
 ## 5. Proposed Lean lemmas
 
-**L1 `refuted_narrow` (implemented: `lean/LocalWindowFamilies.lean`, compiled in scratch; axioms
+**L1 `refuted_narrow` (implemented: now `work/final_lean/LocalWindowFamilies.lean`, compiled in scratch; axioms
 `propext`, `Classical.choice`, `Quot.sound`).**
 
 ```lean
@@ -173,7 +173,9 @@ Use:
   then a portfolio on that core. It must take the `--unsat` core used here, or recompute E from
   the core it keeps.
 
-**L2 `refuted_sub` (proposed, not implemented).**
+**L2 `refuted_sub` (proposed here; since implemented by Route A in `work/final_lean/LocalWindowFamilies.lean`
+with a kernel-decided check `subOK`, and used by the production plan, `../25-k7-234/certify/README.md`,
+"Seeds and families").**
 
 ```lean
 -- o = orientation, i = offset: the slice of (ds, syms) at i, reversed if o = 1, relabels onto cs,
@@ -222,7 +224,7 @@ The derivations themselves cost one `decide` on short lists per key, a few ms ea
   from one CaDiCaL configuration, and another proof of the same key can use different counters.
 - The greedy set cover is not optimal. Removing a key does not change the automaton or its
   table: every key stays in `AllRefutedK7`, it is only *proved* differently.
-- L2 is specified, not built.
+- L2 was specified here, not built. It is built now (see §5).
 
 ## Files
 
@@ -234,9 +236,9 @@ The derivations themselves cost one `decide` on short lists per key, a few ms ea
 | `verify_e.py` → `data/verify_e.json` | brute-force re-check of the implications; own-ball solves of the trimmed E's |
 | `box.py` → `data/box.jsonl` | the 60 range-key experiments |
 | `poolcand.py` → `data/poolcand.json`, `data/pool_cores.jsonl.gz` | pool keys whose widened core implies an expensive seed |
-| `lean/LocalWindowFamilies.lean` | L1 (`widerB`, `refuted_narrow`, `refuted_key_of_wide`, an example) |
+| `work/final_lean/LocalWindowFamilies.lean` (moved from `lean/`) | L1 (`widerB`, `refuted_narrow`, `refuted_key_of_wide`, an example) and L2 (`axioms_pull`, `subOK`, `refuted_sub`) |
 
 Reproduce: `nice -n 15 python classify.py; python cores.py; python families.py; python box.py
 --top 60; python verify_e.py 40; python poolcand.py --ham 2 --top 300 --budget 2400`. Compile
 L1: copy the file into a scratch root and run
-`LEAN_PATH=<scratch>/olean:work/final_lean/.lake/build/lib/lean lean -o <scratch>/olean/LocalWindowFamilies.olean LocalWindowFamilies.lean`.
+`LEAN_PATH=<scratch>/olean:work/final_lean/.lake/build/lib/lean lean -o <scratch>/olean/LocalWindowFamilies.olean work/final_lean/LocalWindowFamilies.lean`.
