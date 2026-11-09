@@ -61,6 +61,14 @@ def world(pq, tag0=None):
     if tag0:
         miss = W.load(tag0)
         L.log(f'loaded {tag0} ({miss} keys missing from the pool)')
+        hp = os.path.join(L.D, f'h8keys_{tag0}.json')
+        if os.path.exists(hp):
+            prev = json.load(open(hp))
+            add_single(W, [('H', tuple(a), tuple(b)) for a, b, g, h in prev], [g for a, b, g, h in prev],
+                       [h for a, b, g, h in prev])
+            for j in range(W.nK - len(prev), W.nK):
+                W.chosen[j] = True; W.cnt[W.hits(j)] += 1
+            W.h8tag = tag0
     return W
 
 
@@ -265,6 +273,19 @@ def add_keys(W, newk, sec, PC):
     W.chosen = np.concatenate([W.chosen, np.zeros(len(newk), bool)])
 
 
+def carry_h8(W, tag0, tag):
+    """Write the H8 cuts still chosen in W as data/h8keys_TAG.json."""
+    hp = os.path.join(L.D, f'h8keys_{tag0}.json')
+    if not os.path.exists(hp):
+        return
+    out = []
+    for j in np.flatnonzero(W.chosen):
+        k = W.keys[j]
+        if len(k) == 3 and k[0] == 'H':
+            out.append([list(k[1]), list(k[2]), int(W.hits(j)[0]), round(float(W.khints[j]))])
+    json.dump(out, open(os.path.join(L.D, f'h8keys_{tag}.json'), 'w'))
+
+
 def exact(tag0, tag, mincost=0.0, budget=None, maxcost=None):
     pq = tuple(json.load(open(os.path.join(L.D, f'sum_{tag0}.json')))[x] for x in ('P', 'Q', 'B'))
     W = world(pq, tag0)
@@ -288,6 +309,7 @@ def exact(tag0, tag, mincost=0.0, budget=None, maxcost=None):
     ok, it, rng = W.check(); assert ok
     st['seconds'] = round(time.time() - t0)
     st['objective_before'] = o0
+    carry_h8(W, tag0, tag)
     return W.save(tag, dict(step='exact', exact=st))
 
 
@@ -336,3 +358,130 @@ if __name__ == '__main__':
     elif cmd == 'share':
         share_resolve(sys.argv[2], sys.argv[3], float(sys.argv[4]) if len(sys.argv) > 4 else 60,
                       float(sys.argv[5]) if len(sys.argv) > 5 else 3600)
+
+
+# ------------------------------------------------------------------ H8: the full 8-direction step window
+OH8 = os.path.join(L.D, 'oracle_h8.jsonl')
+
+
+def h8_key(W, g):
+    """H8 key of transition g: the step's 8 directions with the 6 counts of vertices n+2..n+7 (the
+    first interior vertex n+1 uncounted), in milestone 25's H form (reversed, uncounted last)."""
+    e = int(g) // L.NT; x = int(g) % L.NT
+    ds = W.Pr.ext[e][3]
+    t = tuple(x // 6 ** k % 6 + 1 for k in range(5, -1, -1))
+    return ('H', L.C.canon(tuple(reversed(ds))), tuple(reversed(t)))
+
+
+def h8_oracle():
+    st, sec = {}, {}
+    if os.path.exists(OH8):
+        for l in open(OH8):
+            r = json.loads(l); k = ('H', tuple(r['dirs']), tuple(r['syms']))
+            st[k] = r['result']; sec[k] = r['seconds']
+    return st, sec
+
+
+def decide_h8(k, tl=20.0):
+    while L.disk_mb() < 300:
+        L.log('disk below 300 MB: waiting'); time.sleep(60)
+    enc = L.k7.encoding(k)
+    st, sel, cuts, sec = ws.solve(enc, tl)
+    with open(OH8, 'a') as f:
+        f.write(json.dumps(dict(kind='H', dirs=list(k[1]), syms=list(k[2]), result=st, seconds=round(sec, 3),
+                                cuts=cuts, nv=enc.nv, ncl=len(enc.clauses))) + '\n')
+    return st, sec
+
+
+def add_single(W, ks, gs, hs, basis='H8'):
+    """Append exclusions that cover exactly the transitions gs (an under-approximation of what the
+    H8 key excludes in Lean: excluding more transitions only removes step constraints)."""
+    W.kg = np.concatenate([W.kg, np.array(gs, np.int32)])
+    W.kptr = np.concatenate([W.kptr, W.kptr[-1] + np.arange(1, len(gs) + 1)])
+    for k in ks:
+        W.kid[k] = len(W.keys); W.keys.append(k)
+    W.nK = len(W.keys)
+    W.khints = np.concatenate([W.khints, hs]); W.kcore = np.concatenate([W.kcore, np.full(len(hs), 600.0)])
+    W.kbasis += [basis] * len(hs)
+    W.kfree = np.concatenate([W.kfree, np.zeros(len(hs), bool)])
+    W.kcost = np.concatenate([W.kcost, np.array(hs) + E.OVH_CERT])
+    W.chosen = np.concatenate([W.chosen, np.zeros(len(hs), bool)])
+
+
+def h8(tag0, tag, budget, tl=20.0, maxu=400):
+    """Replace paid share thresholds and plain keys by H8 cuts of the transitions that need them,
+    most expensive first: decide the H8 window of every needing transition; if all are UNSAT and
+    their cost is below the certificate's, add them and lower the share (exact, warm BF) or drop
+    the key; undo on failure."""
+    pq = tuple(json.load(open(os.path.join(L.D, f'sum_{tag0}.json')))[x] for x in ('P', 'Q', 'B'))
+    W = world(pq, tag0)
+    st, sec = h8_oracle()
+    for k, s in st.items():                      # earlier H8 decisions: re-add the chosen ones below
+        pass
+    ok, it, rng = W.check(); assert ok
+    C4 = L.P4.Costs(ovh=0.0)
+    t0 = time.time(); log = []; chosenH = []
+    items = [(W.share_obj(i, W.lvl[i]), 1, int(i)) for i in np.flatnonzero(W.lvl > W.sF)]
+    items += [(W.kcost[j], 0, int(j)) for j in np.flatnonzero(W.chosen & ~W.kfree) if not W.kbasis[j] == 'H8']
+    items.sort(key=lambda t: -t[0])
+    for c0, kind, j in items:
+        if time.time() - t0 > budget:
+            break
+        if c0 < 5e4:
+            break
+        crit, need, shcov = critical_state(W)
+        if kind == 1:
+            es = W.sord[W.sstart[j]:W.sstart[j + 1]].astype(np.int64)
+            es = es[(W.cnt[es] == 0) & crit[es] & (need[es] > W.sF[j])]
+        else:
+            gs = W.hits(j).astype(np.int64)
+            es = gs[crit[gs] & (W.cnt[gs] == 1) & ~shcov[gs]]
+        if len(es) == 0 or len(es) > maxu:
+            log.append(dict(kind=kind, item=j, U=int(len(es)), skipped=True)); continue
+        keys, hs, okall = [], [], True
+        tot = 0.0
+        for g in es:
+            k = h8_key(W, g)
+            s = st.get(k)
+            if s is None:
+                s, sc = decide_h8(k, tl); st[k] = s; sec[k] = sc
+            if s != 'UNSAT':
+                okall = False; break
+            h, _, _ = C4.new(k, sec[k]); keys.append(k); hs.append(h); tot += h
+        uk = len(set(keys))
+        tot_obj = tot + E.OVH_CERT * uk
+        rec = dict(kind='share' if kind else 'plain', item=j, cost=round(c0), U=int(len(es)), all_unsat=okall,
+                   h8_cost=round(tot_obj) if okall else None, replaced=False)
+        if okall and tot_obj < c0:
+            n0 = W.nK; pi0 = W.pi.copy(); lv0 = int(W.lvl[j]) if kind == 1 else None
+            add_single(W, keys, [int(g) for g in es], hs)
+            for jj in range(n0, W.nK):
+                W.chosen[jj] = True; W.cnt[W.hits(jj)] += 1
+            if kind == 1:
+                W.exact_share([j])
+                gain = W.share_obj(j, lv0) - W.share_obj(j, W.lvl[j])
+                rec['new_level'] = int(W.lvl[j]); rec['replaced'] = bool(gain > tot_obj)
+                if not rec['replaced']:
+                    W.lvl[j] = lv0
+            else:
+                a_, d_, _ = W.exact_plain([j]); rec['replaced'] = bool(d_)
+            if rec['replaced']:
+                chosenH += [[list(k[1]), list(k[2]), int(g), round(h)] for k, g, h in zip(keys, es, hs)]
+            else:
+                for jj in range(n0, W.nK):
+                    W.chosen[jj] = False; W.cnt[W.hits(jj)] -= 1
+                W.pi = pi0
+        log.append(rec)
+        if len(log) % 25 == 0:
+            L.log(f'  h8: {len(log)} items, {sum(r.get("replaced", False) for r in log)} replaced, '
+                  f'objective {W.summary()["objective"] / 1e9:.3f} G, {time.time() - t0:.0f}s')
+    ok, it, rng = W.check(); assert ok
+    json.dump(log, open(os.path.join(L.D, f'h8log_{tag}.json'), 'w'))
+    prev = json.load(open(os.path.join(L.D, f'h8keys_{tag0}.json'))) if os.path.exists(os.path.join(L.D, f'h8keys_{tag0}.json')) else []
+    json.dump(prev + chosenH, open(os.path.join(L.D, f'h8keys_{tag}.json'), 'w'))
+    return W.save(tag, dict(step='h8', replaced=sum(r.get('replaced', False) for r in log), tried=len(log),
+                            h8_cuts=len(prev) + len(chosenH)))
+
+
+if __name__ == '__main__' and sys.argv[1] == 'h8':
+    h8(sys.argv[2], sys.argv[3], float(sys.argv[4]))

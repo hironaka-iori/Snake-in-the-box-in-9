@@ -323,7 +323,8 @@ class World:
         ph = float(self.khints[paid].sum()); sh = float(sum(h for _, h, _ in sh_paid))
         ncent = {}
         for j in paid:
-            ncent[len(self.keys[j][1])] = ncent.get(len(self.keys[j][1]), 0) + 1
+            c = 'H8' if len(self.keys[j]) == 3 else len(self.keys[j][1])
+            ncent[c] = ncent.get(c, 0) + 1
         return dict(P=self.P, Q=self.Q, B=self.B, lam=self.P / self.Q, lam_alpha=self.P / self.Q / 120,
                     Rmax=self.Rmax, range=int(-self.pi.min()), bound=L.bound233(self.P, self.Q, self.B),
                     plain_keys=int(self.chosen.sum()), plain_free=int((self.chosen & self.kfree).sum()),
@@ -338,16 +339,20 @@ class World:
         if extra:
             s.update(extra)
         keys = [[list(self.keys[j][0]), list(self.keys[j][1]), self.kbasis[j], round(float(self.khints[j]))]
-                for j in np.flatnonzero(self.chosen)]
+                for j in np.flatnonzero(self.chosen) if len(self.keys[j]) == 2]
+        h8 = [[list(self.keys[j][1]), list(self.keys[j][2]), round(float(self.khints[j]))]
+              for j in np.flatnonzero(self.chosen) if len(self.keys[j]) == 3]
         sh = []
         for i in np.flatnonzero(self.lvl > 0):
             h, b = self.share_cost(i, self.lvl[i])
             k = self.k5keys[i]
             sh.append([list(k[0]), list(k[1]), int(self.lvl[i]), int(self.slb[i]), b, round(h)])
         with gzip.open(os.path.join(L.D, f'set_{tag}.json.gz'), 'wt') as f:
-            json.dump(dict(summary=s, plain=keys, share=sh,
+            json.dump(dict(summary=s, plain=keys, share=sh, h8=h8,
                            format=dict(plain='[dirs, lumped syms (1..5, 6 = 6..21), basis, hints]',
-                                       share='[dirs, lumped syms, level used T (share sum >= T), proved lb, basis, hints]')), f)
+                                       share='[dirs, lumped syms, level used T (share sum >= T), proved lb, basis, hints]',
+                                       h8='[dirs (8, reversed: uncounted vertex last), 6 lumped syms (reversed), hints]: '
+                                          'Refuted (winOf dirs) (boundsOf syms) with the 7th centre uncounted')), f)
         json.dump(s, open(os.path.join(L.D, f'sum_{tag}.json'), 'w'), indent=1)
         return s
 
