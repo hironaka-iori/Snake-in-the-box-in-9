@@ -22,8 +22,8 @@ OW3 = os.path.join(HERE, 'data', 'oracle_w3.jsonl')
 
 
 def _append(path, r):
-    if C.disk_mb() < 300:
-        raise SystemExit('disk below 300 MB')
+    while C.disk_mb() < 300:              # never write below 300 MB free: wait for the disk
+        C.log('disk below 300 MB, waiting'); time.sleep(60)
     with open(path, 'a') as f:
         f.write(json.dumps(r) + '\n')
 
