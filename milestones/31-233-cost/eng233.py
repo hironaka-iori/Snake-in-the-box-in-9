@@ -188,7 +188,7 @@ class World:
         off = np.repeat(st - np.concatenate(([0], np.cumsum(ln)[:-1])), ln)
         return self.uord[off + np.arange(tot)].astype(np.int64)
 
-    def relax(self, es, maxrounds=60):
+    def relax(self, es, maxrounds=40):
         """Warm relaxation after the edges es became allowed or cheaper.  True if the potential
         stays within the range (pi updated, a fixed point again); False (pi restored) otherwise."""
         pi = self.pi
