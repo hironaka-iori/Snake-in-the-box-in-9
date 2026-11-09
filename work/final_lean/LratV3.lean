@@ -15,9 +15,11 @@ Here there is no database.  Every clause is addressed by where it was *written*:
 * a lemma by its segment and its index in that segment's proof list.
 
 A segment `c` (0-based) of the proof is the list `segP Ps c` of lemma words (lowest `W`-bit
-word first) `(lit+1) … (lit+1) 0 hint … hint 0`.  A hint word `w` is
+word first) `n lit₁ … litₙ hint … hint 0`, a literal word being its bit position.  A hint word
+`w` is
 
-* `w ≥ FLAG`: entry `w - FLAG` of the segment's reference table `T`.  A reference `r` names
+* `w ≥ FLAG`: entry `w - FLAG` of the segment's reference table `T` (chunks `tw + 2^6 st` of
+  1024 fields of `tw` bits, `fieldT`; entry 0 is unused).  A reference `r` names
   the input clause `r >>> 12` if `r &&& 4095 = 0`, else lemma `r >>> 12` of segment
   `(r &&& 4095) - 1`, which must be an earlier segment;
 * `1 ≤ w < FLAG`: lemma `w - 1` of the current segment, which must be an earlier lemma;
@@ -25,13 +27,14 @@ word first) `(lit+1) … (lit+1) 0 hint … hint 0`.  A hint word `w` is
 
 Lookups go through `Nat.rec` on the hint word (as `LratFast2.getS`), so the kernel evaluates
 each referenced clause once per declaration and finds it in its cache afterwards.  Lists are
-indexed by two-level drops (`nthN`, `nthR`, `nthP`: 64 elements per step), so that every
-intermediate tail is cached and no evaluation recurses deeply.
+indexed by two-level drops (`nthN`, `nthR`: 64 elements per step), written so that every
+intermediate tail is a term with literal arguments that the kernel caches, and no evaluation
+recurses deeply.
 
 **Soundness needs no relation between the tables and the proof.** Whatever a reference or a
 hint word says, the looked-up clause is an input clause, a lemma of an earlier segment, an
 earlier lemma of the current segment, or the tautology `x₀ ∨ ¬x₀`; all of these are true
-(`look_true`).  Out-of-range references give the tautology.  So the reference tables are
+(`resolve_true`, `getE_true`, `getL_true`).  Out-of-range references give the tautology.  So the reference tables are
 unchecked data, like the hints.  The segment theorems chain by induction on the segment
 (`seg_step`), and the last segment must contain the empty clause (`final_false`).
 
@@ -89,16 +92,14 @@ def segP (Ps : List (List Nat)) (c : Nat) : List Nat :=
 
 /-! ## Clauses -/
 
-/-- Read literal words `(lit+1)` up to a `0`: returns the clause and the remaining words. -/
-def litsL (W M : Nat) (fuel : Nat) : Nat → Nat → Nat × Nat :=
+/-- Read `n` literal words (bit positions): returns the clause and the remaining words. -/
+def litsN (W M : Nat) (n : Nat) : Nat → Nat → Nat × Nat :=
   Nat.rec (motive := fun _ => Nat → Nat → Nat × Nat) (fun c x => (c, x))
-    (fun _ ih c x =>
-      kif Nat.beq (Nat.land x M) 0 then (c, Nat.shiftRight x W)
-      else ih (Nat.lor c (Nat.shiftLeft 1 (Nat.sub (Nat.land x M) 1))) (Nat.shiftRight x W))
-    fuel
+    (fun _ ih c x => ih (Nat.lor c (Nat.shiftLeft 1 (Nat.land x M))) (Nat.shiftRight x W)) n
 
-def lemC (W M x : Nat) : Nat := (litsL W M 255 0 x).1
-def lemH (W M x : Nat) : Nat := (litsL W M 255 0 x).2
+/-- The clause of a lemma word `n lit … lit hint … hint 0` and its hint words. -/
+def lemC (W M x : Nat) : Nat := (litsN W M (Nat.land x M) 0 (Nat.shiftRight x W)).1
+def lemH (W M x : Nat) : Nat := (litsN W M (Nat.land x M) 0 (Nat.shiftRight x W)).2
 
 /-- Clause of `decodeLit` codes; a variable `≥ OFF` makes it the tautology. -/
 def rawMask (OFF : Nat) (c : List Nat) : Nat :=
@@ -128,10 +129,17 @@ def resolve (OFF W M : Nat) (raw : List (List Nat)) (Ps : List (List Nat)) (c r 
     (fun m _ j => kif Nat.ble (Nat.succ m) c then headL OFF W M (nthN (segP Ps m) j) else taut OFF)
     (Nat.land r 4095) (Nat.shiftRight r 12)
 
-/-- The clause of the table entry `e`. -/
+/-- Field `j` of a table chunk `tw + 2^6 st` (fields of `tw` bits, lowest first). -/
+def fieldT (ch j : Nat) : Nat :=
+  Nat.land (Nat.shiftRight ch (Nat.add 6 (Nat.mul j (Nat.land ch 63))))
+    (Nat.sub (Nat.shiftLeft 1 (Nat.land ch 63)) 1)
+
+/-- The clause of the table entry `e`: the reference in field `e % 1024` of chunk `e / 1024`. -/
 def lookE (OFF W M : Nat) (raw : List (List Nat)) (Ps : List (List Nat)) (T : List Nat) (c e : Nat) :
     Nat :=
-  List.rec (motive := fun _ => Nat) (taut OFF) (fun r _ _ => resolve OFF W M raw Ps c r) (nthN T e)
+  resolve OFF W M raw Ps c
+    (fieldT (List.rec (motive := fun _ => Nat) 0 (fun ch _ _ => ch) (nthN T (Nat.shiftRight e 10)))
+      (Nat.land e 1023))
 
 /-- `lookE … e` through a term that depends only on the value of `e` (cached by the kernel). -/
 def getE (OFF W M : Nat) (raw : List (List Nat)) (Ps : List (List Nat)) (T : List Nat) (c e : Nat) :
@@ -397,11 +405,7 @@ theorem getE_true {W M : Nat} {raw : List (List Nat)} {Ps : List (List Nat)} {T 
     show MaskTrue OFF τ (Nat.add 0 (lookE OFF W M raw Ps T c (Nat.succ m)))
     rw [show Nat.add 0 (lookE OFF W M raw Ps T c (Nat.succ m)) = lookE OFF W M raw Ps T c (m + 1)
       from Nat.zero_add _]
-    show MaskTrue OFF τ (List.rec (motive := fun _ => Nat) (taut OFF)
-      (fun r _ _ => resolve OFF W M raw Ps c r) (nthN T (m + 1)))
-    cases nthN T (m + 1) with
-    | nil => exact maskTrue_taut hoff
-    | cons r _ => exact resolve_true hoff hraw hP r
+    exact resolve_true hoff hraw hP _
 
 /-- Lemma `j - 1` of `P`, for `1 ≤ j ≤ i`, when the first `i` lemmas of `P` are true. -/
 theorem getL_true {W M : Nat} {P : List Nat} {i : Nat}
