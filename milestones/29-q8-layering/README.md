@@ -2,7 +2,7 @@
 
 Run of 9 November 2026. One core at nice 15, about 5 hours.
 
-**Status:** exact small tables, construction data, a few SAT-proved upper bounds (g7(c) ≤ 57 for c ≤ 8, g8(c) ≤ 122 for c ≤ 14), and an assessment. Nothing here is a Lean theorem, and no bound on a(9) changes.
+**Status:** exact small tables, construction data, a few SAT-proved upper bounds (g7(c) ≤ 57 for c ≤ 8, g8(c) ≤ 121 for c ≤ 14), and an assessment. Nothing here is a Lean theorem, and no bound on a(9) changes.
 
 ## Question
 
@@ -100,7 +100,7 @@ In Q8, annealing runs of 4·10^8 steps found nothing above 112 for any c in 8–
 - in Q7, lower bounds of 56 throughout c = 4–8, against the proved upper bound 57;
 - the matching 7·2^(n-4) constructions.
 
-**Conjecture P:** g8(c) = 112 for 8 ≤ c ≤ 16. If it holds, layering gives **a(9) ≤ 223 edges**. That is below the local-window ceiling of 222–227 and far below 234. It only needs `g8(13) ≤ 112`, because `g8(14) ≤ 122` is proved below.
+**Conjecture P:** g8(c) = 112 for 8 ≤ c ≤ 16. If it holds, layering gives **a(9) ≤ 223 edges**. That is below the local-window ceiling of 222–227 and far below 234. It only needs `g8(13) ≤ 112`, because `g8(14) ≤ 121` is proved below.
 
 ## 4. What is actually provable about g8
 
@@ -119,16 +119,17 @@ In Q8, annealing runs of 4·10^8 steps found nothing above 112 for any c in 8–
 | Q7, c = 8, L = 57 (the plateau value + 1) | unknown | > 2400 s (lazy cuts, levels, and levels + implied Q6 tables all fail) |
 | Q8, c = 14, L = 127 / 126 / 125 / 124 | UNSAT | 53 s / 76 s / 136 s / 501 s |
 | Q8, c = 14, L = 123 | UNSAT | 1517 s |
-| Q8, c = 14, L = 122 | unknown | > 2700 s |
+| Q8, c = 14, L = 122 | UNSAT | 3327 s |
+| Q8, c = 14, L = 121 | see `data/q8_runs.txt` | |
 
-  **Proved here:** g7(c) ≤ 57 for c ≤ 8, against the lower bound 56, and g8(c) ≤ g8(14) ≤ 122 for c ≤ 14, against the lower bound 112.
+  **Proved here:** g7(c) ≤ 57 for c ≤ 8, against the lower bound 56, and g8(c) ≤ g8(14) ≤ 121 for c ≤ 14, against the lower bound 112.
 
   Neither the implied subcube tables nor sorting the free coordinates by edge count helped: 72 s against 39 s, and 236 s against 226 s.
 
 **Implied bounds.**
 
 - *N = 8 (calibration).* With g7(c) ≤ 57 for c ≤ 8 and the recursion values above, layering **proves a(8) ≤ 113** (truth 98). Every input is a SAT result of the certifiable kind.
-- *N = 9.* With what is proved (g8(c) ≤ 122 for c ≤ 14, and Huang's 128 beyond), layering gives **a(9) ≤ 243**. That is far weaker than the Lean bound of 235.
+- *N = 9.* With what is proved (g8(c) ≤ 121 for c ≤ 14, and Huang's 128 beyond), layering gives **a(9) ≤ 241**. That is far weaker than the Lean bound of 235.
 
 Ladder of what would follow from proved values (`layer.py`, `ladder()`, using a(9) ≤ 235):
 
@@ -140,10 +141,10 @@ Ladder of what would follow from proved values (`layer.py`, `ladder()`, using a(
 | 115 | 117 | 229 |
 | 114 | 117 | 227 |
 | 113 | 117 | 225 |
-| 113 | 122 (proved) | 234 |
-| 112 | 122 (proved) | **223** |
+| 113 | 121 (proved) | 234 |
+| 112 | 121 (proved) | **223** |
 
-Since g8(14) ≤ 122 is now proved, **a(9) ≤ 223 follows from the single statement g8(13) ≤ 112** (together with the Lean bound 235). That statement is the Q8 case of the plateau. Without it, the cheapest improvement is g8(14) ≤ 117, which gives 233.
+Since g8(14) ≤ 121 is now proved, **a(9) ≤ 223 follows from the single statement g8(13) ≤ 112** (together with the Lean bound 235). That statement is the Q8 case of the plateau. Without it, the cheapest improvement is g8(14) ≤ 117, which gives 233.
 
 ## 5. Assessment
 
@@ -154,8 +155,8 @@ Since g8(14) ≤ 122 is now proved, **a(9) ≤ 223 follows from the single state
   - The gain comes from the plateau, a global effect: few paths cost 2^(n-4) vertices against Huang. Windows cannot see it. So layering is the one known route below the 222–227 local ceiling, as the question anticipated.
 - **The bottleneck is purely computational.**
   - Every useful step needs an exhaustive statement about Q8 forests with 13–14 paths.
-  - The first step that improves on 235 is g8(14) ≤ 117 (giving 233). That is 5 vertices below what is proved today (122), and 5 above the conjecture.
-  - On one core, the run times for L = 127, 126, …, 123 are 53, 76, 136, 501 and 1517 s. Each further vertex costs a factor of about 3–4, and the factor rose to 6–7 near the tight end in Q7. A rough extrapolation for L = 118, that is g8(14) ≤ 117, is 4·10^5–10^7 core-seconds: core-weeks to core-months. That is out of reach here, but it is perhaps reachable with a parallel cube-and-conquer and better encodings.
+  - The first step that improves on 235 is g8(14) ≤ 117 (giving 233). That is 4 vertices below what is proved today (121), and 5 above the conjecture.
+  - On one core, the run times for L = 127, 126, …, 122 are 53, 76, 136, 501, 1517 and 3327 s, so each further vertex costs a factor of 2–4. In Q7 the factor rose to 6–7 within 2–3 vertices of the optimum. A rough extrapolation for L = 118, that is g8(14) ≤ 117, is 10^5–10^6 core-seconds: core-days to core-weeks. **That is a realistic target** for a long single run or a modest parallel cube-and-conquer, and it would give a(9) ≤ 233.
   - The tight value g8(13) ≤ 112, which is what 223 needs, looks harder than the Q7 plateau g7(8) ≤ 56, which this encoding cannot settle in 40 min.
   - The two-cut variant needs only Q7, but it is dead: g7(13) ≥ 61, so 4·61 > 236.
 - **What a rigorous version needs:**
