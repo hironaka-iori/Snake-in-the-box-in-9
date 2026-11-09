@@ -73,10 +73,17 @@ def lumped_choices(a):
 # ------------------------------------------------------------------ share oracle (5-windows, M = 12)
 def share_records():
     """Every 5-window share record of milestone 11 (refine_share semantics)."""
-    import refine_share as RS
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        'refine_share_m11', os.path.join(MS, '11-local-ceiling', 's0_share_loop', 'refine_share.py'))
+    RS = importlib.util.module_from_spec(spec); spec.loader.exec_module(RS)
     O = RS.ShareOracle()                      # s0_radius4 E1 seeds + share_oracle.jsonl
     for f in (os.path.join(MS, '11-local-ceiling', 'k6_loop', 'oracle_share.jsonl'),
-              os.path.join(MS, '11-local-ceiling', 's0_k6_ceiling', 'oracle5_extra.jsonl')):
+              os.path.join(MS, '11-local-ceiling', 's0_k6_ceiling', 'oracle5_extra.jsonl'),
+              os.path.join(HERE, 'data', 'oracle_share.jsonl'),
+              os.path.join(HERE, 'data', 'oracle_share_bulk.jsonl')):
+        if not os.path.exists(f):
+            continue
         for l in open(f):
             r = json.loads(l)
             if len(r['alpha']) == 5:
@@ -132,7 +139,10 @@ def w3_setup():
     K6W3L = os.path.join(MS, '22-global-arguments', 'k6_w3_loop', 'data')
     W3S = os.path.join(MS, '22-global-arguments', 'w3_survey', 'data')
     O = survey.Oracle(os.path.join(K6W3L, 'w3_loop_oracle.jsonl'))
-    for f in (os.path.join(K6W3, 'w3_k6_oracle.jsonl'), os.path.join(W3S, 'w3_alpha_oracle.jsonl')):
+    for f in (os.path.join(K6W3, 'w3_k6_oracle.jsonl'), os.path.join(W3S, 'w3_alpha_oracle.jsonl'),
+              os.path.join(HERE, 'data', 'oracle_w3.jsonl')):
+        if not os.path.exists(f):
+            continue
         for l in open(f):
             O.apply(json.loads(l))
     sub = R.Sub()
@@ -202,19 +212,49 @@ class W3Tables:
 
 # ------------------------------------------------------------------ graph
 def load_keyfile(path):
+    if path == 'cert':
+        return CERT_KEYS()
     d = json.load(gzip.open(path, 'rt') if path.endswith('.gz') else open(path))
-    ks = d['keys'] if 'keys' in d else d
+    if 'cases' in d:
+        ks = [(c['dirs'], c['alpha']) for c in d['cases'] if c.get('drat_trim_verified')]
+    else:
+        ks = d['keys'] if 'keys' in d else d
     out = []
     for e in ks:
         ds, al = e[0], e[1]
-        out.append(fp.lkey(tuple(ds), tuple(GA.sym_of(tuple(a)) for a in al)))
+        ch = [lumped_choices(a) for a in al]
+        for t in itertools.product(*ch):       # a range key excludes every lumped key it contains
+            out.append(fp.lkey(tuple(ds), t))
     return out
 
 
-def build(keys='all', with_share=True, with_w3=True, certified_share=False, cache=True):
+def own_plain_unsat():
+    """Plain UNSAT keys found by this milestone (data/oracle_plain.jsonl), lumped."""
+    import glob
+    out = []
+    for f in sorted(glob.glob(os.path.join(HERE, 'data', 'oracle_plain*.jsonl'))):
+        for l in open(f):
+            r = json.loads(l)
+            if r['result'] == 'UNSAT':
+                for t in itertools.product(*[lumped_choices(a) for a in r['alpha']]):
+                    out.append(fp.lkey(tuple(r['dirs']), t))
+    return out
+
+
+def CERT_KEYS():
+    """Plain keys whose certificates are Lean-replayed today (the 237/236/235 chains)."""
+    out = []
+    for f in (os.path.join(MS, '10-window-aggregate', 'data', 'direction_certificates_r4b.json'),
+              os.path.join(MS, '10-window-aggregate', 'data', 'direction_certificates_r4c.json'),
+              os.path.join(MS, '23-k6-lean', 'full_product', 'keys_235.json')):
+        out += load_keyfile(f)
+    return sorted(set(out))
+
+
+def build(keys='all', with_share=True, with_w3=True, certified_share=False, cache=False):
     """Arrays over the allowed transitions of the full product:
     U, V (int32 states), A (int8), S5 (int32), W6 (int32), G (int64 global ids e*NT + x)."""
-    tag = f"{os.path.basename(keys) if keys != 'all' else 'all'}_{int(with_share)}{int(with_w3)}{int(certified_share)}"
+    tag = f"{os.path.basename(keys)}_{int(with_share)}{int(with_w3)}{int(certified_share)}"
     npz = os.path.join(SCR, f'graph_{tag}.npz')
     if cache and os.path.exists(npz):
         z = np.load(npz)
@@ -223,7 +263,7 @@ def build(keys='all', with_share=True, with_w3=True, certified_share=False, cach
     Pr = fp.Product()
     if keys == 'all':
         S = fp.Status()
-        ks = S.unsat()
+        ks = S.unsat() + own_plain_unsat()
         if with_w3:
             W3 = W3Tables()
             ks = list(set(ks) | set(W3.excl_keys()))
@@ -309,10 +349,13 @@ def _evaluate(nxt, cost):
 def howard(n, U, V, W, maxit=1000, verbose=False):
     """Minimum cycle mean by policy iteration (vectorised).  Every node must have an out-edge.
     Returns (mean float, list of edge indices (into the given arrays) of a minimum cycle)."""
-    order = np.argsort(U, kind='stable')
-    Us, Vs, Ws = U[order].astype(np.int64), V[order].astype(np.int64), W[order].astype(np.float64)
+    nodes, Uc = np.unique(U, return_inverse=True)
+    Vc = np.searchsorted(nodes, V)
+    assert (nodes[Vc] == V).all(), 'edge into a node without out-edges (prune first)'
+    n = len(nodes)
+    order = np.argsort(Uc, kind='stable')
+    Us, Vs, Ws = Uc[order].astype(np.int64), Vc[order].astype(np.int64), W[order].astype(np.float64)
     starts = np.searchsorted(Us, np.arange(n))
-    assert (np.bincount(Us, minlength=n) > 0).all(), 'dead node'
     E = len(Us); ar = np.arange(E)
     pol = starts.copy()
     scale = max(1.0, float(np.abs(Ws).max()))
@@ -386,3 +429,22 @@ def cycle_info(G, idx, cyc):
         out.append(dict(shape=''.join(map(str, shp[u // NC])), counts=t, A=int(G['A'][e]),
                         S5=int(G['S5'][e]), W6=int(G['W6'][e]), g=g))
     return out
+
+
+def step_windows(g, Pr=None):
+    """(ext dirs ds, counts t, 5-window lumped key, 6-window lumped key) of global transition id g."""
+    if Pr is None:
+        Pr = _PR[0] if _PR else _PR.append(fp.Product()) or _PR[0]
+    e = int(g) // NT; x = int(g) % NT
+    ds = Pr.ext[e][3]
+    t = tuple(x // 6 ** k % 6 + 1 for k in range(5, -1, -1))
+    return ds, t, fp.lkey(ds[2:8], t[1:]), fp.lkey(ds[1:8], t)
+
+
+_PR = []
+
+
+def rkey_of(lk):
+    """refine.key form (dirs, alpha ranges) of a lumped key."""
+    from refine import key as rkey
+    return rkey(tuple(lk[0]), tuple(LUMP[s] for s in lk[1]))
