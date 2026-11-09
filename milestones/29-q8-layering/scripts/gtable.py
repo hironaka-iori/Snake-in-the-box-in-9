@@ -1,7 +1,7 @@
 """Exact tables of g_n(c) (<= c paths), g=_n(c) (exactly c paths) and g3_n(c,t) (exactly c paths,
 at most t of them with < 3 vertices), for c = 1.. until g_n(c) = 2^(n-1) (Huang's bound, which no
 induced subgraph of max degree 2 can exceed since sqrt(n) > 2 for n >= 5).
-usage: python3 gtable.py n [cmax] [timeout_per_query]   -> JSON lines on stdout
+usage: python3 gtable.py n [cmax] [timeout_per_query] [cstart] [start_L] [--le]   -> JSON lines on stdout
 """
 import sys, time, json
 from gforest import search, check_forest
@@ -46,8 +46,10 @@ if __name__ == '__main__':
     cmax = int(sys.argv[2]) if len(sys.argv) > 2 else 99
     tmax = float(sys.argv[3]) if len(sys.argv) > 3 else 1800
     half = 1 << (n - 1)
-    prev = 1
-    for c in range(1, cmax + 1):
+    cstart = int(sys.argv[4]) if len(sys.argv) > 4 else 1
+    prev = int(sys.argv[5]) if len(sys.argv) > 5 else 1
+    only_le = '--le' in sys.argv
+    for c in range(cstart, cmax + 1):
         rec = {'n': n, 'c': c}
         g, w, log = maxL(n, c, prev, tmax)
         rec['g_le'] = g; rec['log_le'] = log
@@ -55,6 +57,7 @@ if __name__ == '__main__':
             rec['wit_le'] = w; rec['wit_le_paths'] = check_forest(w, n)
         if isinstance(g, int):
             prev = g
+        if isinstance(g, int) and not only_le:
             ge, we, loge = maxL(n, c, g, tmax, cmin=c)
             rec['g_eq'] = ge; rec['log_eq'] = loge
             if isinstance(ge, int):

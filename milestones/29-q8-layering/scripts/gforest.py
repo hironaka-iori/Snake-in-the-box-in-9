@@ -23,6 +23,7 @@ from pysat.card import CardEnc, EncType
 from pysat.solvers import Solver
 
 SOLVER = 'cadical195'
+SYMCAP = 99      # cap on the symmetry-breaking depth r (for soundness cross-checks)
 
 
 def cube_cycles(n):
@@ -45,7 +46,7 @@ def cube_cycles(n):
     return out
 
 
-def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None):
+def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None, levels=None):
     V = 1 << n
     pool = pool or IDPool()
     s = [pool.id(('s', u)) for u in range(V)]
@@ -89,7 +90,7 @@ def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None):
     for cy in cube_cycles(n):
         cl.append([-s[u] for u in cy])
     if sym:
-        r = -(-L // max(cmax, 1))
+        r = min(-(-L // max(cmax, 1)), SYMCAP)
         e = [1 << i for i in range(n)]
         cl.append([s[0]]); cl.append([-pool.id(('two', 0))])
         if r >= 2:
@@ -102,6 +103,24 @@ def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None):
         if r >= 5 and n >= 4:
             v3 = e[0] | e[1] | e[2]
             cl.append([s[e[1] | e[2]], s[v3 | e[3]]]); cl += [[-s[v3 | e[i]]] for i in range(4, n)]
+    if levels:
+        # acyclicity by levels: o(u,j) = [level(u) >= j], j = 1..D.  Every internal vertex has a
+        # selected neighbour of strictly smaller level (so no cycle survives: look at its minimum).
+        # Complete when D >= floor((longest path - 1)/2); D = 2^(n-2) always suffices.
+        D = levels
+        o = {(u, j): pool.id(('o', u, j)) for u in range(V) for j in range(1, D + 1)}
+        for u in range(V):
+            two = pool.id(('two', u))
+            for j in range(1, D):
+                cl.append([-o[u, j + 1], o[u, j]])
+            cl.append([-two, o[u, 1]])
+            for j in range(1, D + 1):
+                al = []
+                for i in range(n):
+                    y = u ^ (1 << i)
+                    a = pool.id(('a', u, i, j)); al.append(a)
+                    cl += [[-a, s[y]], [-a, -o[y, j]]]
+                cl.append([-two] + ([o[u, j + 1]] if j < D else []) + al)
     if extra:
         cl += extra
     return pool, s, cl
@@ -139,8 +158,8 @@ def check_forest(sel, n):
 CUTS = {}
 
 
-def search(n, cmax, L, tmax=600, cmin=None, short=None, sym=True, extra=None, verbose=False):
-    pool, s, cl = encode(n, cmax, L, cmin, short, sym, extra=extra)
+def search(n, cmax, L, tmax=600, cmin=None, short=None, sym=True, extra=None, verbose=False, levels=None):
+    pool, s, cl = encode(n, cmax, L, cmin, short, sym, extra=extra, levels=levels)
     cuts = CUTS.setdefault(n, [])
     V = 1 << n
     t0 = time.time(); rounds = 0
@@ -171,14 +190,15 @@ if __name__ == '__main__':
     args = sys.argv[1:]
     exact = '--exact' in args
     short = None
+    levels = None
+    if '--levels' in args:
+        ix = args.index('--levels'); levels = int(args[ix + 1]); del args[ix:ix + 2]
     if '--short' in args:
-        short = int(args[args.index('--short') + 1])
+        ix = args.index('--short'); short = int(args[ix + 1]); del args[ix:ix + 2]
     nums = [a for a in args if not a.startswith('--')]
-    if short is not None:
-        nums.remove(str(short))
     n, c, L = map(int, nums[:3])
     tmax = float(nums[3]) if len(nums) > 3 else 600
-    st, sel, r = search(n, c, L, tmax, cmin=c if exact else None, short=short, verbose=True)
+    st, sel, r = search(n, c, L, tmax, cmin=c if exact else None, short=short, verbose=True, levels=levels)
     print('n=%d paths%s%d |F|>=%d short=%s: %s (cut rounds %d)' % (n, '=' if exact else '<=', c, L, short, st, r), flush=True)
     if sel:
         print(' witness |F|=%d paths, sizes:' % len(sel), check_forest(sel, n))
