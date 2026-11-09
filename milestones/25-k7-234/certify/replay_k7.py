@@ -17,8 +17,15 @@ The analogue of `milestones/23-k6-lean/certify/replay_k6.py gen --packed` for th
   It imports the packed core module `LocalWindowCnf.K7…` and proves `K7….unsat : Unsat cnf`.
 
   python3 replay_k7.py gen --work DIR [--out ROOT] [--shard i/n] [--limit N] [--budget-hints H] [NAME ...]
+  python3 replay_k7.py gen --checker v3 ...   # checker v3 (LratV3, about 1.4-1.65x faster in the kernel)
   python3 replay_k7.py measure --work DIR      # hints of the core proofs only (no Lean files)
   python3 replay_k7.py build [--limit N]       # guarded, one module per `lean` call (generated cases only)
+
+With `--checker v3` the replay module is written by
+`milestones/26-replay-efficiency/scripts/gen_lean_lrat_v3.py` for the checker `work/final_lean/LratV3.lean`
+(no clause database: hints name clauses by where they were written; one module, the same name and the
+same theorem `unsat : Unsat cnf`; default `--seg 60000`); see milestones/26-replay-efficiency/README.md,
+"Checker v3".  Without it the output is unchanged.
 
 With `--plan` (`families_k7.py`), `gen` skips every core whose key `gen_k7_core.py final --plan`
 derives from the certificate of its seed (run `gen_k7_core.py run --plan` to the end first).
@@ -38,6 +45,7 @@ import gen_lean_core as GC              # noqa: E402
 
 LEAN = K.LEAN
 O5K = os.path.join(ROOT, 'milestones', '23-k6-lean', 'scripts', 'gen_lean_lrat_o5k.py')
+V3 = os.path.join(ROOT, 'milestones', '26-replay-efficiency', 'scripts', 'gen_lean_lrat_v3.py')
 
 
 def cases(core):
@@ -83,15 +91,21 @@ def gen(a):
         _, info = GC.core_lrat(name, meta['core_ids'], a.work, cadical, list(range(1, a.seeds + 1)), certs,
                                rounds=a.rounds)
         off = offset(meta['variables'])
-        for bits in ((14, 15, 16, 17) if off == 5000 else (13, 14, 15, 16, 17)):
-            cmd = [sys.executable, O5K if off == 5000 else os.path.join(S10, 'gen_lean_lrat.py'),
-                   '--work', a.work, '--data', a.core, '--out', a.out, '--seg', str(a.seg), '--cp', str(a.cp),
-                   '--group', str(a.group), '--wbits', str(bits), '--off', str(off), '--noncomputable-data',
-                   '--fast', '--split', '--packed', '--pack-chunk', str(a.pack_chunk), name]
+        for bits in ((0,) if a.checker == 'v3' else (14, 15, 16, 17) if off == 5000 else (13, 14, 15, 16, 17)):
+            if a.checker == 'v3':   # one call: the word width is chosen by the generator
+                cmd = [sys.executable, V3, '--work', a.work, '--data', a.core, '--out', a.out,
+                       '--seg', str(a.seg or 60000), '--off', str(off), '--pack-chunk', str(a.pack_chunk), name]
+            else:
+                cmd = [sys.executable, O5K if off == 5000 else os.path.join(S10, 'gen_lean_lrat.py'),
+                       '--work', a.work, '--data', a.core, '--out', a.out, '--seg', str(a.seg or 25000),
+                       '--cp', str(a.cp), '--group', str(a.group), '--wbits', str(bits), '--off', str(off),
+                       '--noncomputable-data', '--fast', '--split', '--packed', '--pack-chunk', str(a.pack_chunk),
+                       name]
             r = subprocess.run(['nice', '-n', '19', *cmd], capture_output=True, text=True)
             if r.returncode == 0:
                 rec = {'case': name, 'module': mod, 'kind': meta.get('kind'), 'variables': meta['variables'],
                        'core': len(meta['core_ids']), 'wbits': bits, 'off': off,
+                       **({'checker': 'v3'} if a.checker == 'v3' else {}),
                        'core_lrat_hints': info['hints'], 'core_lrat_lemmas': info['lemmas'],
                        'est_hints': meta['lrat']['hints'], 'producer': info['producer'],
                        'replay_src_bytes': os.path.getsize(os.path.join(a.out, 'LocalWindowUnsat', mod + '.lean')),
@@ -164,7 +178,9 @@ def main():
     g = sub.add_parser('gen')
     g.add_argument('--work', required=True)
     g.add_argument('--out', default=LEAN, help='Lean root that receives LocalWindowUnsat/K7*')
-    g.add_argument('--seg', type=int, default=25000)
+    g.add_argument('--seg', type=int, default=0, help='hints per kernel check (default 25000; 60000 with v3)')
+    g.add_argument('--checker', choices=('packed', 'v3'), default='packed',
+                   help='packed: LratFast2/2F (the 235 build); v3: LratV3 (gen_lean_lrat_v3.py)')
     g.add_argument('--cp', type=int, default=3)
     g.add_argument('--group', type=int, default=4)
     g.add_argument('--pack-chunk', type=int, default=16384, help='bytes per ProofPack chunk')
