@@ -95,7 +95,10 @@ The data show a clear pattern, a **plateau at 7·2^(n-4)**:
 
 Above the plateau, each extra path adds exactly one isolated vertex up to `2^(n-1)`, so `g_n(c) = 3·2^(n-3) + c` there. This holds exactly for n = 5 and 6.
 
-In Q8, annealing runs of 4·10^8 steps, and a 15-minute SAT search for 113 vertices with 17 paths, found nothing above 112 for any c in 8–20.
+In Q8, annealing runs of 4·10^8 steps found nothing above 112 for any c in 8–20, and neither did a 15-minute SAT search for 113 vertices with 17 paths. But for c = 17–20 the construction above gives 113–116, so these searches are blind at exactly this level. **The evidence for the plateau in Q8 is therefore the pattern, not the searches:**
+- exact in Q5 and Q6;
+- in Q7, lower bounds of 56 throughout c = 4–8, against the proved upper bound 57;
+- the matching 7·2^(n-4) constructions.
 
 **Conjecture P:** g8(c) = 112 for 8 ≤ c ≤ 16. If it holds, layering gives **a(9) ≤ 223 edges**. That is below the local-window ceiling of 222–227 and far below 234. It only needs `g8(13) ≤ 112`, because `g8(14) ≤ 122` is proved below.
 
