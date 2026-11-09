@@ -1,0 +1,27 @@
+{
+  "status": "STARTUP_STOP",
+  "pid": 17540,
+  "started_utc": "2026-11-09T07:21:29.017648+00:00",
+  "checks": [
+    {
+      "module": "Share186.Totals",
+      "exit_code": 0,
+      "stdout": "PASS Share186.Totals seconds 2.547 reason None\n",
+      "stderr": ""
+    },
+    {
+      "module": "Share185.Structure",
+      "exit_code": 0,
+      "stdout": "PASS Share185.Structure seconds 2.391 reason None\n",
+      "stderr": ""
+    },
+    {
+      "module": "Share185.Shard00",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\Snake-in-a-box\\milestones\\186-structural-interpretation\\scripts\\check_core.py\", line 55, in <module>\n    p=Path(name).resolve();assert p.is_file();deps[str(p)]=sha(p)\n                                  ^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "resource_waits": [],
+  "current_module": "Share185.Shard00"
+}

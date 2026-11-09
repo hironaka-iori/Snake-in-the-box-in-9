@@ -1,11 +1,11 @@
 # Resume only after a new instruction
 
-Round 185 has finished and the user requested a pause. Do not start round 186 automatically.
+Round 186 is complete and the user requested a pause. Do not start round 187 automatically.
 
-Read CURRENT_STATUS.md and milestones/185-critical-kernel/README.md. The permutation-aware generic checker is Lean-checked. Concrete Counts and Totals are the immediate obstruction: each exceeded the 256 MiB private-memory cap. Divide them into smaller logical components before running the 98 concrete clause batches. Zero of those batches is accepted. Use the saved source order and exact receipts; do not restart completed generic proofs or the native solver.
+Read CURRENT_STATUS.md, milestones/186-structural-interpretation/README.md and its data/completion.json and current-order.json. Reuse accepted modules and inspect remaining failures before a single sequential proof worker. Do not change exact clauses, mappings or accepted source hashes. The native critical refutation is already complete; its Lean replay and actual-snake transfer remain unfinished.
 
-The reduced critical CNF remains byte-identical to round 183. Preserve clause and variable mappings. After initial-database truth is proved, complete its 52,489-deduction Lean refutation and geometric transfer. The older share-18 proof is separate.
+Check GitHub before further research. Maintain the 1 GiB startup, 256 MiB private-memory and 768 MiB free-memory limits for core checks. Preserve the separate Mathlib limits, all failure snapshots and the older share-18 checkpoint. The full manuscript-wide review remains pending. Update the existing D: sources and E: mirrors in place, preserving authors and hypersetup.
 
-Keep core startup at 1 GiB, private memory at 256 MiB and free reserve at 768 MiB. Keep the separate Mathlib profile unchanged. Inspect live processes before starting one sequential worker. Preserve failures and exact audited bytes.
+Conditional 234 is not an unconditional result. The four local certificates and the retained count/reference/context/graph obligations must all be discharged. The qualified project interval remains 191–235.
 
-Check GitHub before research. Update the existing D: LaTeX sources and E: mirrors while preserving authors and hypersetup. Full manuscript review is due in round 186. Conditional 234 and the qualified range 191–235 remain unchanged; no unconditional improvement or optimality is established.
+The immediate next unaccepted batch is Share185.Shard38. Batches 00–37 cover 4,864 clauses; 7,560 clauses remain. The two-half split of batch 37 and Share186.ClauseAppend are accepted examples for splitting subsequent oversized batches. All 73 individual counter conditions and their aggregate structural theorem are accepted. The 60 remaining batches and final initial-database composition are unfinished.

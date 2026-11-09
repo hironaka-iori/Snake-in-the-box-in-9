@@ -1,13 +1,15 @@
-# Round 185 complete; pause after publication
+# Round 186 complete; pause after publication
 
-The user requested one 15–25 minute round and then a pause. Round 185 is complete. Do not start round 186 without a new instruction.
+The user requested one 20–30 minute round and then a pause. Do not start round 187 without a new instruction.
 
-Lean checked the generalized cap-counting and share-clause soundness theorem with permutations of threshold terms, preserving multiplicities. This addresses the ordering of the streamed 012034 input, where the fifteenth layer is appended after the first fourteen layers.
+Both the endpoint counter and all 72 totalizer conditions are now checked. 38 of 98 concrete clause batches have passed. The initial-database truth theorem remains incomplete.
 
-The dense CNF is unchanged: 12,424 clauses and 5,342 proof variables. Interpretation uses 5,906 variables. There are 98 accepted modules among 200 current modules, covering generic proofs and constant data. Zero of 98 concrete clause batches has passed. Isolated Counts and Totals checks still exceed the unchanged 256 MiB private-memory cap. No initial-database truth, final contradiction or actual-snake floor-15 theorem is claimed.
+209 new modules are accepted among 270 planned modules; 98 earlier accepted modules are inherited. The exact 12,424-clause critical input is unchanged. The full 52,489-deduction Lean contradiction and actual-snake floor fifteen remain pending. Read milestones/186-structural-interpretation/README.md and data/completion.json for the precise proof boundary and preserved failures.
 
 The comparison remains 42254m + 45L <= 9928453, yielding conditional 234 from profile (15,14,14,14) and inherited local and graph premises. No unconditional improvement was obtained. The project range remains 191–235, with the archived 235 proof's independent rebuild pending.
 
-Read milestones/185-critical-kernel/README.md, data/completion.json and data/current-order.json. Next: prove concrete structural conditions in smaller parts; complete 98 clause batches and composition; then complete the compact Lean contradiction and geometric transfer. The native critical proof has 52,489 deductions and should not be regenerated.
+Resume remaining structural checks, 98 clause batches and composition from data/current-order.json; reuse accepted receipts. Then complete the critical contradiction and geometric transfer. Do not regenerate the native solver proof. The other local shares, hypothetical 0123104 floor 25, reference/context exclusions and full graph proof remain separate gaps. The old share-18 replay remains separate at 33,111/145,215.
 
-The hypothetical 0123104 six-count floor 25, reference/context exclusions, graph coverage and complete finite-edge proof remain unresolved. The old share-18 replay remains separate at 33,111/145,215 deductions. Preserve authors, hypersetup, D: sources, E: mirrors, unrelated changes and failure evidence. Full manuscript review is due in round 186.
+The current paper summary and dependencies were revised. A full manuscript-wide review remains pending. Preserve authors, hypersetup, D: originals, E: mirrors, unrelated edits and failure evidence. Keep existing resource guards and one heavy worker.
+
+The immediate next unaccepted batch is Share185.Shard38. Batches 00–37 cover 4,864 clauses; 7,560 clauses remain. The two-half split of batch 37 and Share186.ClauseAppend are accepted examples for splitting subsequent oversized batches. All 73 individual counter conditions and their aggregate structural theorem are accepted. The 60 remaining batches and final initial-database composition are unfinished.

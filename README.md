@@ -1,3 +1,11 @@
+# Current result after round 186
+
+The requested round is complete; research pauses after publication. Both the endpoint counter and all 72 totalizer conditions are now checked. 38 of 98 concrete clause batches have passed. The initial-database truth theorem remains incomplete.
+
+The conditional bound remains 234 with profile (15,14,14,14). The critical Lean contradiction and actual-snake transfer remain pending. No new unconditional numerical bound is claimed. Read [round 186](milestones/186-structural-interpretation/README.md), [the current handoff](handoff/CURRENT_STATUS.md), [the main manuscript](paper/snake9_research.tex) and [the short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 185
 
 The requested round is complete; research pauses after publication. Lean checked the permutation-aware cap-counting and share-clause soundness theorem for the streamed critical certificate. Concrete counter and totalizer checks remain unfinished because they exceed the unchanged memory limit. Zero of 98 concrete clause batches has passed.

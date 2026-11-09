@@ -37,43 +37,41 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \maketitle
 \begin{abstract}
 Let $a(9)$ be the maximum edge length of an induced path in the
-nine-dimensional binary hypercube. An explicit construction and an archived
-contributor proof give $191\le a(9)\le235$; a complete independent rebuild
-of the upper-bound proof remains pending. The exact square census
-$T+2s_0+35(m+1)=9214$ retains both the singleton-square count $T$ and the
-empty-square count $s_0$ for a snake of length $m$.
-We develop local count restrictions, endpoint occurrence bounds and integer
-shares of empty squares. Completed results include the sharp pair bound
-eight on $012032$, a bound of twenty-four low-pair windows, a five-count
-sum of at least nineteen on $012310$, the universal $012032$ share floor
-16, and a stronger floor 17 under specified local count conditions.
-A new boundary argument gives sums at least fourteen and sixteen for
-six and seven consecutive internal counts. Together with the endpoint
-bounds, these improve the omitted contributions in the two finite-graph
-arguments. The archived count-only argument now yields
-$39m+2s_0\le9192$, so a hypothetical 235-edge snake has at most thirteen
-empty squares. In the share argument, the boundary contribution rises
-from twenty-one to twenty-four. The existing potential with mean
-$4462/9$ and range $5411/9$ then gives the conditional bound
-$m\le235-3063/42262$, without a positive-loss assumption.
-The physical share-loss identity, the new boundary counts and their
-actual-snake accounting have passed Lean checks. The finite potential
-and its local-share, count-restriction and graph-coverage premises remain
-separate obligations. Retuning lowers the $012034$ floor to fifteen with the other pending
-floors fixed. A cycle-and-walk argument proves this integer threshold
-is least for the specified comparison. A second sufficient profile
-lowers all four pending floors simultaneously to fifteen. Further
-optimization shows that only the $012034$ floor must reach fifteen;
-the other three pending floors may stay fourteen. The resulting
-conditional comparison is $m\le235-1237/42254<235$, with no
-positive-loss premise. A cycle and a 24-edge walk prove that this
-comparison is optimal for the fixed profile and accounting.
-New path restrictions exclude closing vertices and require a local
-window to extend; they strengthen the native floor-fourteen calculation.
-The full local Lean certificates remain pending.
-No new unconditional numerical length bound is claimed; the
-optimum and the numerical conjecture 196 remain open.
+nine-dimensional binary hypercube. A verified construction gives
+$a(9)\ge191$. The project retains an archived contributor proof of
+$a(9)\le235$, whose complete independent rebuild remains pending.
+For a snake of length $m$, singleton-square count $T$ and empty-square
+count $s_0$, the exact identity
+$T+2s_0+35(m+1)=9214$ converts local counting estimates into length bounds.
 
+We prove local singleton-count restrictions, endpoint occurrence bounds
+and integer-share identities that retain the contribution of empty
+squares. Six and seven consecutive internal counts have sums at least
+fourteen and sixteen. These improve the boundary contributions of the
+two retained finite-graph arguments. The archived count-only estimate
+then yields $39m+2s_0\le9192$, so a 235-edge snake would have at most
+thirteen empty squares.
+
+For the current share argument, the sufficient pending local floors are
+$(15,14,14,14)$ on the direction patterns
+$012034,012301,012340,012345$. With the stated count restrictions,
+reference exclusions and graph-coverage premises, a retained-graph
+potential gives $42254m+45L\le9928453$, where $L\ge0$ is the exact
+division remainder in the share identity. It follows that $m\le234$.
+A cycle and a 24-edge walk prove this comparison optimal for that fixed
+profile and boundary accounting. The boundary argument, physical share
+accounting and conditional numerical implication have passed Lean checks;
+the finite potential has passed an exact integer scan.
+
+All four required numerical share floors have native contradiction
+certificates. Their complete Lean contradictions and geometric
+interpretation remain unfinished, together with inherited local and
+graph premises. The critical floor-fifteen certificate has been reduced
+to 12,424 input clauses and 52,489 deductions. The current verification
+work preserves this input while dividing its interpretation into smaller
+proofs. Thus 234 remains conditional. No new unconditional numerical
+upper bound is claimed, and the optimum and conjectured value 196 remain
+unresolved.
 \end{abstract}
 
 \clearpage
@@ -144,7 +142,7 @@ $a(9)\ge191$ & An explicit snake with every vertex pair checked.\\
 $a(9)\le235$ & Archived contributor proof using 1287 local keys and a potential; the full independent rebuild remains pending.\\
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
-Conditional bound 234 & The new boundary contribution 24 removes the positive-loss premise from the retained floor-17 comparison. Local shares, reference exclusions, count restrictions and the complete graph certificate remain separate obligations.\\
+Conditional bound 234 & Profile $(15,14,14,14)$ and boundary contribution 24 give $42254m+45L\le9928453$. Complete local-share proofs, reference exclusions, count restrictions and the graph certificate remain pending.\\
 Actual-state construction and weight accounting & State construction, non-reference filters and baseline weights are checked. Reference retention remains conditional on 1358 entries of the 1378-key union.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
 New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
@@ -3840,16 +3838,48 @@ The selected-vertex, endpoint and empty-square assumptions are unchanged.
 
 The generalized counting lemma and clause-soundness theorem pass Lean.
 The reconstructed input also matches all 12,424 clauses of the saved
-dense core exactly. Its complete concrete interpretation is still
-pending: the counter and totalizer structure checks exceed the existing
+dense core exactly. At the end of round 185, its concrete interpretation remained
+pending: the counter and totalizer structure checks exceeded the existing
 256 MiB limit when checked as single propositions. Splitting constant
 data and supplying explicit meaning trees has not removed that
 obstruction. No concrete clause batch or final contradiction was
-accepted in this round. The next step is to prove those structural
+accepted in round 185. The next step was to prove those structural
 conditions in smaller parts, then check the 98 clause batches and their
 composition. The numerical bound 234 retains its stated assumptions.
 
+\paragraph{Dividing the concrete interpretation into smaller proofs.}
+The endpoint counter contains 286 distinct vertex flags. Its literal
+interpretation is now checked in eighteen blocks. Strict ordering is
+proved within each block and between each block and its suffix; a general
+append lemma combines these results. This establishes the entire endpoint
+counter condition while retaining the existing memory limit.
+
+The two large share counters contain 490 and 525 threshold occurrences.
+Their threshold lists consist of fourteen terms for each of 35 corner
+occurrences, followed in the larger counter by the fifteenth terms.
+An inductive list-permutation proof moves these last terms beside their
+respective first fourteen terms. It preserves multiplicities, including
+corners shared by several centres. Thus it requires no distinct-corner
+assumption. The general reordering proof passes Lean.
+
+Both the endpoint counter and all 72 totalizer conditions are now checked. 38 of 98 concrete clause batches have passed. The initial-database truth theorem remains incomplete.
+The full 52,489-deduction critical Lean refutation and its interpretation
+for actual snakes remain pending. The exact 12,424-clause input is
+unchanged. This progress reduces the verification work still required;
+it does not establish a new numerical upper bound.
+
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
+
+The current sufficient profile is $(15,14,14,14)$ on
+$012034,012301,012340,012345$. Its proof requires completion of the local
+certificates and their actual-snake interpretation, including the
+extension condition used for $012301$ when $m\ge7$. It also retains the
+specified six-count condition on $0123104$, reference and context
+exclusions, graph coverage and the complete finite-edge certificate.
+The older stronger profiles below record earlier proof obligations; they
+are not additional numerical requirements of the current profile.
+
+
 The maintained interval is $191\le a(9)\le235$, with the contributor-proof
 and independent-rebuild distinction stated in Section~\ref{sec:verification}.
 The boundary-24 argument removes the additional positive-loss requirement

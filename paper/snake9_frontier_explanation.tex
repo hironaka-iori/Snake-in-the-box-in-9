@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 185}
+\date{Research state after round 186}
 \begin{document}
 \maketitle
 
@@ -388,14 +388,35 @@ The selected-vertex, endpoint and empty-square assumptions are unchanged.
 
 The generalized counting lemma and clause-soundness theorem pass Lean.
 The reconstructed input also matches all 12,424 clauses of the saved
-dense core exactly. Its complete concrete interpretation is still
-pending: the counter and totalizer structure checks exceed the existing
+dense core exactly. At the end of round 185, its concrete interpretation remained
+pending: the counter and totalizer structure checks exceeded the existing
 256 MiB limit when checked as single propositions. Splitting constant
 data and supplying explicit meaning trees has not removed that
 obstruction. No concrete clause batch or final contradiction was
-accepted in this round. The next step is to prove those structural
+accepted in round 185. The next step was to prove those structural
 conditions in smaller parts, then check the 98 clause batches and their
 composition. The numerical bound 234 retains its stated assumptions.
+
+\paragraph{Dividing the concrete interpretation into smaller proofs.}
+The endpoint counter contains 286 distinct vertex flags. Its literal
+interpretation is now checked in eighteen blocks. Strict ordering is
+proved within each block and between each block and its suffix; a general
+append lemma combines these results. This establishes the entire endpoint
+counter condition while retaining the existing memory limit.
+
+The two large share counters contain 490 and 525 threshold occurrences.
+Their threshold lists consist of fourteen terms for each of 35 corner
+occurrences, followed in the larger counter by the fifteenth terms.
+An inductive list-permutation proof moves these last terms beside their
+respective first fourteen terms. It preserves multiplicities, including
+corners shared by several centres. Thus it requires no distinct-corner
+assumption. The general reordering proof passes Lean.
+
+Both the endpoint counter and all 72 totalizer conditions are now checked. 38 of 98 concrete clause batches have passed. The initial-database truth theorem remains incomplete.
+The full 52,489-deduction critical Lean refutation and its interpretation
+for actual snakes remain pending. The exact 12,424-clause input is
+unchanged. This progress reduces the verification work still required;
+it does not establish a new numerical upper bound.
 
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -436,11 +457,11 @@ count-only route would be completed by proving $s_0\ge14$ for a hypothetical
 235-edge snake. Neither alternative is required by the new sufficient
 profile once its own premises are proved.
 \end{enumerate}
-Rounds 183 and 184 complete the two requested rounds. Research pauses
+Round 186 completes the requested continuation. Research pauses
 at this frontier. No unconditional numerical bound or longer construction
 has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--184.}
+\texttt{snake9\_research.tex} and research records 175--186.}
 \end{document}

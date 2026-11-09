@@ -1,0 +1,27 @@
+{
+  "status": "CHECK_STOP",
+  "pid": 44260,
+  "started_utc": "2026-11-09T07:11:17.342634+00:00",
+  "checks": [
+    {
+      "module": "Share186.EndpointSorted",
+      "exit_code": 0,
+      "stdout": "PASS Share186.EndpointSorted seconds 2.407 reason None\n",
+      "stderr": ""
+    },
+    {
+      "module": "Share186.Counts",
+      "exit_code": 0,
+      "stdout": "PASS Share186.Counts seconds 1.344 reason None\n",
+      "stderr": ""
+    },
+    {
+      "module": "Share186.CapData",
+      "exit_code": 1,
+      "stdout": "FAILED Share186.CapData seconds 2.171 reason MEMORY_LIMIT\n",
+      "stderr": ""
+    }
+  ],
+  "resource_waits": [],
+  "current_module": "Share186.CapData"
+}

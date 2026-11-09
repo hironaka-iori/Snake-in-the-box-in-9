@@ -1,0 +1,39 @@
+{
+  "status": "CHECK_STOP",
+  "pid": 23876,
+  "started_utc": "2026-11-09T07:26:35.952562+00:00",
+  "checks": [
+    {
+      "module": "Share186.ClauseAppend",
+      "exit_code": 0,
+      "stdout": "PASS Share186.ClauseAppend seconds 1.375 reason None\n",
+      "stderr": ""
+    },
+    {
+      "module": "Share186.Clause37Left",
+      "exit_code": 0,
+      "stdout": "PASS Share186.Clause37Left seconds 2.391 reason None\n",
+      "stderr": ""
+    },
+    {
+      "module": "Share186.Clause37Right",
+      "exit_code": 0,
+      "stdout": "PASS Share186.Clause37Right seconds 2.453 reason None\n",
+      "stderr": ""
+    },
+    {
+      "module": "Share185.Shard37",
+      "exit_code": 0,
+      "stdout": "PASS Share185.Shard37 seconds 1.391 reason None\n",
+      "stderr": ""
+    },
+    {
+      "module": "Share185.Shard38",
+      "exit_code": 1,
+      "stdout": "FAILED Share185.Shard38 seconds 2.687 reason MEMORY_LIMIT\n",
+      "stderr": ""
+    }
+  ],
+  "resource_waits": [],
+  "current_module": "Share185.Shard38"
+}
