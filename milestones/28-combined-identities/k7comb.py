@@ -31,6 +31,7 @@ def load_k7(which='best'):
     if which == 'pool':                   # every known UNSAT k6/F8/H9 key (milestone 25 pool)
         import prune234
         S, O, keys6, newk = prune234.pool()
+        keys6 = sorted(set(keys6) | set(k for k in C.own_plain_unsat() if 2 <= len(k[1]) <= 6))
         K = k7.K7(Dummy(), keys6)
         for k in newk:
             K.add_new(k)

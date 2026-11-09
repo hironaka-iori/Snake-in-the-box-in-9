@@ -15,8 +15,8 @@ potential), and their cost.
    check then holds on every transition the chosen keys leave allowed.
 4. Costs.  Plain: 23-k6-lean/full_product/prune.load_costs (measured, est_r4, 1.49e6 t^0.843 on the
    key's own solve time, class median); this milestone's own keys by the same fit on their seconds.
-   Share: 0.5 M hints per solver-second of the threshold call that proved the needed level or more
-   (s0_share_loop calibration, 30 samples), min 20 k.  Disk/olean: 2.9 B per hint (milestone 26).
+   Share: 1.0 M hints per solver-second of the threshold call that proved the needed level or more
+   (share_samples.py: 0.7-1.0 M per second on 6 samples of this run), min 12 k.  Disk/olean: 2.9 B per hint (milestone 26).
 usage: certplan.py P/Q
 """
 import sys, os, json, time, itertools, glob, gzip
@@ -92,7 +92,7 @@ def main():
             sh['lean'] += 1; continue
         cands = [s for (TT, s) in ssec.get(k, []) if TT >= T]
         s = min(cands) if cands else None
-        h = max(2e4, 5e5 * s) if s is not None else None
+        h = max(1.2e4, 1.0e6 * s) if s is not None else None
         sh['solver'] += 1; sh['hints'] += h or 0
         sh['rows'].append(dict(key=[list(k[0]), list(k[1])], T=T, seconds=s, hints=h))
     C.log(f"share: {len(req)} keys needed, {sh['lean']} covered by Lean floors, {sh['solver']} solver "
