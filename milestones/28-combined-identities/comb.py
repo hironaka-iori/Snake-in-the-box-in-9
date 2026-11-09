@@ -81,10 +81,12 @@ def share_records():
     for f in (os.path.join(MS, '11-local-ceiling', 'k6_loop', 'oracle_share.jsonl'),
               os.path.join(MS, '11-local-ceiling', 's0_k6_ceiling', 'oracle5_extra.jsonl'),
               os.path.join(HERE, 'data', 'oracle_share.jsonl'),
-              os.path.join(HERE, 'data', 'oracle_share_bulk.jsonl')):
+              os.path.join(HERE, 'data', 'oracle_share_bulk.jsonl'),
+              os.path.join(HERE, 'data', 'oracle_share_r232.jsonl.gz'),
+              os.path.join(HERE, 'data', 'oracle_share_r232.jsonl')):
         if not os.path.exists(f):
             continue
-        for l in open(f):
+        for l in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f)):
             r = json.loads(l)
             if len(r['alpha']) == 5:
                 O.apply(r)
@@ -232,8 +234,9 @@ def own_plain_unsat():
     """Plain UNSAT keys found by this milestone (data/oracle_plain.jsonl), lumped."""
     import glob
     out = []
-    for f in sorted(glob.glob(os.path.join(HERE, 'data', 'oracle_plain*.jsonl'))):
-        for l in open(f):
+    for f in sorted(glob.glob(os.path.join(HERE, 'data', 'oracle_plain*.jsonl'))
+                    + glob.glob(os.path.join(HERE, 'data', 'oracle_plain*.jsonl.gz'))):
+        for l in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f)):
             r = json.loads(l)
             if r['result'] == 'UNSAT':
                 for t in itertools.product(*[lumped_choices(a) for a in r['alpha']]):
@@ -292,6 +295,10 @@ def build(keys='all', with_share=True, with_w3=True, certified_share=False, cach
     G = dict(U=np.concatenate(Us), V=np.concatenate(Vs), A=np.concatenate(As), S5=np.concatenate(Ss),
              W6=np.concatenate(Ws), G=np.concatenate(Gs))
     G['n'] = np.array(len(Pr.shp) * NC)
+    if with_share and not certified_share and os.environ.get('NOCTX') != '1':
+        import share7                         # context share thresholds (Refinement toward 232)
+        nctx = share7.apply_all(G, Pr, canon, GA.cnt_idx, NT, np)
+        log(f'context share records applied to {nctx} transitions')
     if with_w3:
         G['c1'] = np.array(min(W3.single.values()))
     else:

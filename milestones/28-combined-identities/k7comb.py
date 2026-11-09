@@ -55,6 +55,12 @@ def edges(K, share, w3):
     z5 = np.zeros(6 ** 5, np.int64)
     i5 = ((np.arange(NC) % 1296)[:, None] * 6 + np.arange(6)[None, :])          # (NC, 6)
     Us, Vs, As, Ss, Ws = [], [], [], [], []
+    CX = {}                                             # context share records (share7.py)
+    if share == 'all' and os.environ.get('NOCTX') != '1':
+        import share7
+        for (ctx, c, t), st in share7.Ctx().st.items():
+            if st['lb'] > 0:
+                CX.setdefault((ctx, tuple(c)), []).append((C.GA.cnt_idx(tuple(t)), st['lb']))
     for i in range(K.nX):
         e, e2 = K.XE[i]
         X = K.X[i]
@@ -64,6 +70,10 @@ def edges(K, share, w3):
         Vs.append((e2 * NT + mid * 6 + s).astype(np.int32))
         As.append((s + 1).astype(np.int8))
         Ss.append(SD.get(C.canon(X[3:9]), z5)[i5[mid, s]].astype(np.int32))
+        for ctx, lo in ((7, 2), (8, 1)):
+            for x, lb in CX.get((ctx, C.canon(X[lo:9])), ()):
+                hit = (mid * 6 + s) == x
+                Ss[-1][hit] = np.maximum(Ss[-1][hit], lb)
         if W3 is not None:
             Ws.append(W3.dense(C.canon(X[2:9]))[mid * 6 + s].astype(np.int32))
         else:
