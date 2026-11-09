@@ -84,13 +84,13 @@ def one(k, wd):
             st, lem, hints, ids = lrat_core(cnf, len(enc.clauses), wd)
             if st == 'UNSAT':
                 break
-            # cyclic model: add its cycles as cuts (as wincert.decide does) and retry
-            cads = subprocess.run([CAD, '-q', cnf], capture_output=True, text=True, timeout=600)
-            cyc = k7.W.cycles_of(model_sel(enc, cads.stdout))
-            if not cyc:
-                return dict(kind=k[0], dirs=list(k[1]), syms=list(k[2]), result='SAT')
-            for c in cyc:
-                enc.add_cycle_cut(c); cuts += 1
+            # cyclic model: add every cut the incremental lazy-cut solve needs (wincert.decide
+            # adds them to enc), then one more proof run
+            n0 = len(enc.clauses)
+            st2, _, _ = k7.W.decide(enc, certify=False)
+            if st2 != 'UNSAT':
+                return dict(kind=k[0], dirs=list(k[1]), syms=list(k[2]), result=st2)
+            cuts += len(enc.clauses) - n0
     finally:
         if os.path.exists(cnf):
             os.remove(cnf)
@@ -116,6 +116,13 @@ def one(k, wd):
                 cuts=cuts, cuts_used=cu, sup=format(sup, 'x'), s=round(time.time() - t, 3))
 
 
+def records():
+    """The records of data/cores.jsonl, or of the committed data/cores.jsonl.gz."""
+    if os.path.exists(OUT):
+        return [json.loads(l) for l in open(OUT)]
+    return [json.loads(l) for l in gzip.open(OUT + '.gz', 'rt')]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--limit', type=int, default=0)
@@ -126,9 +133,9 @@ def main():
             if b != 'reuse']
     todo.sort(reverse=(a.order == 'dear'))
     done = set()
-    if os.path.exists(OUT):
-        for l in open(OUT):
-            r = json.loads(l); done.add((r['kind'], tuple(r['dirs']), tuple(r['syms'])))
+    if os.path.exists(OUT) or os.path.exists(OUT + '.gz'):
+        for r in records():
+            done.add((r['kind'], tuple(r['dirs']), tuple(r['syms'])))
     wd = os.path.join(SCR, 'work'); os.makedirs(wd, exist_ok=True)
     n = 0; t0 = time.time()
     with open(OUT, 'a') as f:

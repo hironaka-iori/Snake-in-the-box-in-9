@@ -67,20 +67,21 @@ def main():
     d = json.load(gzip.open(os.path.join(CO.M25, 'data', 'keys_best234.json.gz'), 'rt'))
     keys = [(k[0], tuple(k[1]), tuple(k[2])) for k in d['keys']]
     full = {}
-    for l in open(CO.OUT):
-        r = json.loads(l)
+    for r in CO.records():
         if r.get('hints') is not None:
             full[(r['kind'], tuple(r['dirs']), tuple(r['syms']))] = r['hints']
     sib = json.load(gzip.open(os.path.join(HERE, 'data', 'siblings.json.gz'), 'rt'))
+    seeds = {(x[0], tuple(x[1]), tuple(x[2])) for x in
+             json.load(gzip.open(os.path.join(HERE, 'data', 'seeds.json.gz'), 'rt'))['full']}
     cands = []
     for g in sib:
         for run in runs_of([tuple(m) for m in g['members']]):
             mk = [keys[i] for _, i, _ in run]
-            if not all(k in full for k in mk):
+            if not all(k in full and k in seeds for k in mk):
                 continue
             tot = sum(full[k] for k in mk)
-            if tot >= a.minh:
-                cands.append((tot, g, run, mk))
+            if sum(m[2] for m in run) >= a.minh:
+                cands.append((sum(m[2] for m in run), g, run, mk))
     cands.sort(key=lambda x: -x[0])
     out = os.path.join(HERE, 'data', 'box.jsonl')
     done = set()
@@ -107,7 +108,7 @@ def main():
                        members=json.loads(tag), member_hints=[full[k] for k in mk], sum=tot,
                        result=st, hints=h, core=core, cuts=cuts, s=round(time.time() - t0, 2))
             f.write(json.dumps(rec, separators=(',', ':')) + '\n'); f.flush()
-            print(st, len(mk), tot, h, round(h / tot, 3) if h else None, flush=True)
+            print(st, len(mk), tot, h, round(h / tot, 3) if h else None, rec['s'], flush=True)
             n += 1
             if n >= a.top:
                 break
