@@ -1,5 +1,9 @@
 # Replay efficiency: `.olean` bytes and kernel time per LRAT hint
 
+*Update, 9 November: the checker v3 (`work/final_lean/LratV3.lean`, section
+[Checker v3](#checker-v3-9-november-no-clause-database-about-2x-less-kernel-time)) halves the kernel
+time per hint of the packed replays.*
+
 Study of 29 October 2026, about 4 h on one core (`nice -n 15`, every Lean process under a 2.9 GB
 RSS guard, next to another agent's jobs on the other 3 cores). Nothing was deployed. No existing
 module, `.olean` or `LocalWindowUnsat/` file was touched. Every test module was compiled with
@@ -394,6 +398,147 @@ python3 milestones/26-replay-efficiency/scripts/measure.py --src $S/src --out $S
 (`gen_k6_core.regen_cnf`). `replay_k6.py gen` writes it into `$S/work/certs` and deletes it when
 it is done.
 
+## Checker v3 (9 November): no clause database, about 2x less kernel time
+
+Study of 9 November 2026, about 3 h on one core (`nice -n 10`, every `lean` under a 2.9 GB RSS
+guard, two other agents on the other cores). Everything was compiled with `lean -o` into a scratch
+directory listed first in `LEAN_PATH`; no existing checker, `.olean` or `LocalWindowUnsat/` file was
+touched. The LRAT proofs are those of the 235 build (`core_lrat`, seeds 1-2, 1 round). Every row is
+in `data/v3_runs.jsonl`.
+
+**Result.** A new checker `work/final_lean/LratV3.lean` with generator `scripts/gen_lean_lrat_v3.py`
+(`replay_k7.py gen --checker v3`). Same module name and same theorem `Snake9.LocalWindow.<M>.unsat :
+Unsat cnf` as the packed replays, so `Tags.refuted_of_sat S.sat S.unsat` and everything downstream
+are unchanged. Every `unsat` below depends on `propext`, `Classical.choice`, `Quot.sound` only.
+
+| window | kind | hints | packed (seg 25k, cp 3): CPU, `.olean`, RSS | **v3 (seg 60k)**: CPU, `.olean`, RSS | speed-up |
+|---|---|---|---|---|---|
+| K012031A42652 | k6 | 1,580 | 1.35 s, 37.0 kB, 0.53 GB | 0.39 s, 36.5 kB, 0.45 GB | 3.5x |
+| K012340A26336 | k6 | 99,805 | 19.31 s, 251 kB, 1.04 GB | 10.99 s, 234 kB, 1.08 GB | 1.76x |
+| K012304A43633 | k6 | 495,204 | 104.42 s, 1.45 MB, 1.38 GB | 56.72 s, 1.23 MB, 1.32 GB | 1.84x |
+| K012301A32534 | k6 | 1,517,293 | 390.88 s, 5.75 MB, 1.90 GB (14-bit words) | 195.89 s, 3.89 MB, 1.69 GB | **2.00x** |
+| K7012031041A2555246 | H9, O5k | 2,514 | 2.27 s, 42.5 kB, 0.61 GB | 0.99 s, 41.7 kB, 0.50 GB | 2.3x |
+| K701203104A6325635 | F8, O5k | 227,042 | 47.59 s, 663 kB, 1.38 GB | 28.05 s, 591 kB, 1.34 GB | 1.70x |
+| **total** | | 2,343,428 | 565.8 s (0.241 ms/hint), 8.19 MB | **293.0 s (0.125 ms/hint), 6.02 MB** | **1.93x** |
+
+CPU is the whole `lean` run (elaboration and kernel). So v3 needs about **0.12-0.13 ms per hint**
+on the large windows instead of 0.21-0.26, and 2.4-2.6 B of `.olean` per hint instead of 2.9-3.8
+(no checkpoints, no slot keys). For the 1.49 G hints of the 2,815 seeds of the 234 plan this is
+about **50 kernel-hours instead of 92** (about 42 h with the 8 x 5 proofs), and about 1 GB less
+`.olean`.
+
+### Where the time goes in the packed checker
+
+Measured by single-theorem probes (`decide +kernel` of parts of a check on the data of a compiled
+replay module, `set_option profiler true`) on a 25 k-hint segment of K012340A26336, whose check
+`ok1` takes 6.4 s:
+
+| part | kernel s | share |
+|---|---|---|
+| start database `loadRaw`: 1,968 tree insertions (about 1 ms each) | 2.0 | 31 % |
+| decoding the core (`rawMask` over `raw`) | 0.5 | 8 % |
+| lemma tree `D` of `check2`: about 330 insertions and 1,500 lookups | 1.5 | 23 % |
+| hint loop: words, flags, lemma decoding | 0.8-1.0 | 14 % |
+| cached start lookups (`getS`) | 0.4 | 6 % |
+| unit propagation (`hstep`) | 0.2-0.5 | 6 % |
+
+The later checks also replay one or two earlier segments (about 0.3 s each) and rebuild the start
+database from a checkpoint (`build`, 1.2-2.5 s). So more than half of the kernel time goes to the
+clause tree, not to unit propagation. A sampling profile of the `lean` process (gdb, 120 stack
+samples, `scripts/pmp.py`, `scripts/pmpagg.py`) agrees with that picture: the time is in generic
+kernel machinery. About 20 % is in hash-table lookups of the whnf caches, 15 % in destroying those
+caches at the end of each declaration, 10 % in `instantiate` (its `replace` cache), and about 20 % in
+allocation and freeing. GMP work on the clause masks is under 2 %. So a step costs about the same
+whatever `Nat` operation it does, and what counts is the number of kernel reduction steps.
+
+### The checker
+
+- **No database.** Every clause is named by where it was written:
+  - an input clause by its index in `raw`;
+  - a lemma by its segment and its index in that segment's proof list.
+- **Hint words.** A hint word `w` of segment `c` is one of three kinds:
+  - `w ≥ FLAG`: entry `w - FLAG` of the segment's reference table `t<c>`;
+  - `1 ≤ w < FLAG`: lemma `w - 1` of the current segment;
+  - `0`: the end of the hints.
+- **References.** A reference is `idx << 12 | seg`: input clause `idx` if `seg = 0`, else lemma
+  `idx` of segment `seg - 1`.
+- **Tables.** A table holds the distinct references of the segment's hints into the core and into
+  earlier segments (1.5-3.3 k entries per 60 k hints). It is stored as chunks of 1,024 fixed-width
+  fields (`fieldT`).
+- **Lemma words.** A lemma word is `n lit₁ … litₙ hint … hint 0`: a literal word is its bit
+  position, and `n` is the number of literals.
+- **Caching.** Every lookup goes through a `Nat.rec` on the hint word, as `LratFast2.getS` does, so
+  the kernel evaluates each referenced clause once per declaration.
+- **Lists.** Lists are indexed by two-level drops (`nthN`, `nthR`), written so that every
+  intermediate tail is a term with literal arguments. The kernel caches those across lookups, and
+  no evaluation recurses more than about 100 levels deep.
+- **Segments are independent.** There is no replay and no checkpoint. `ok<c> : check OFF W M FLAG raw
+  Ps t<c> c = true` mentions only the data. The last check is `andB (check …) (hasEmpty W M (segP Ps
+  c))`.
+- **One module serves every window.** `OFF`, `W`, `M`, `FLAG` are arguments: literals at the call
+  site. The same `LratV3` serves O4k (13-bit) and O5k (14-bit) windows; the generator picks the
+  narrowest word width.
+
+**Soundness.** It is proved in `LratV3.lean` with standard axioms; the generated `unsat` was
+checked with `#print axioms`.
+
+- **Lookups.** No relation between the tables, hints and proof is needed. Whatever a word says, the
+  looked-up clause is one of:
+  - an input clause (`RawTrue`, from `cnfTrue` by `rawTrue_of_cnf`);
+  - a lemma of an earlier segment (`SegsTrue … c`);
+  - an earlier lemma of the current segment. The kernel tests `w ≤ i`; the invariant is that the
+    first `i` lemmas are true;
+  - the tautology `x₀ ∨ ¬x₀`, for anything out of range.
+
+  This is `resolve_true`, `getE_true`, `getL_true`.
+- **Unit propagation.** `hstep_sound` is the argument of `LratCheck`, with `OFF` as a parameter.
+- **Chaining.** `seg_step : RawTrue → check … c = true → SegsTrue … c → SegsTrue … (c + 1)`, and
+  `final_false` for the empty clause.
+- **The tables are unchecked data, like the hints.** A wrong table can only make a check fail. A
+  test with two table entries swapped made the kernel reject the module.
+- **Mirror.** `gen_lean_lrat_v3.py --check` runs a Python mirror of `check`, which accepts at most
+  what the kernel accepts. The generator also checks that every packed list decodes to its words.
+
+### Ideas tried
+
+| idea | measured | soundness | kept |
+|---|---|---|---|
+| **v3 database-free check, first version** (end-marked literal words, `NatPack` tables, seg 60k) | K012340 19.31 → 12.09 s, K012304 104.42 → 70.71 s, K012301 390.88 → 237.36 s (1.44-1.65x) | proved (above) | superseded by the next row |
+| **+ count-prefixed literal words, tables as fixed-width chunks** (no `List.append` in the decoder) | 12.09 → 10.99, 70.71 → 56.72, 237.36 → 195.89 s (1.10-1.25x more); **1.70-2.00x in all** | proved | **yes** |
+| segment size with v3 (K012304) | 30k / 60k / 125k: 57.4 / 56.7 / 59.3 s, RSS 0.98 / 1.32 / 2.03 GB; K012301 30k: 207.4 s, 1.34 GB | — | 60k default (`--seg`) |
+| v3 with 25k segments, first version (K012301) | 272.5 s against 237.4 s at 60k | — | no |
+| first `resolve` (segment taken from the reference by `Nat.sub`) | K012304 377.6 s (3.6x slower than packed). Every lookup into an earlier segment walked its list from the start, because the list term differed per reference | proved | fixed by the `Nat.rec` on the segment number |
+| strict propagation state (`z`, `x` passed through a `Nat.rec` "let" so that they stay literals) | a 25k-hint segment 3.4 → 28-30 s | equivalent | no |
+| loop variants: inline `hstep`, a dispatch function taking the word once, four hints per `Nat.rec` step, branch-free negation `z ∣ (u >>> OFF) ∣ (u <<< OFF)` with the conflict test moved to the end, two-argument lookup constants | all within ±6 % of each other (2.9-3.3 s per 25k hints; the noise of these runs is about ±10 %) | — | no |
+| LRAT deletion information, a flatter or single-`Nat` database | subsumed: v3 has no database. A table holds only the clauses a segment references | — | — |
+| shorter proofs (§5: 8 seeds x 5 rounds) | −15 to −18 % hints; time is proportional, so it adds to v3 | none (any proof is checked) | already in the handoff plan |
+
+### Use
+
+```sh
+# libraries (no lakefile entry needed; as the other K7 libraries, built with --direct)
+cd work/final_lean
+nice -n 19 python3 ../guarded_lake_build.py --direct --trust-mtime --jobs 1 ProofPack LratV3
+cd ../..
+# replays with the v3 checker (default --seg 60000); everything else as in milestones/25-k7-234/certify
+python3 milestones/25-k7-234/certify/replay_k7.py gen --checker v3 --work $S --plan $P ...
+python3 milestones/25-k7-234/certify/replay_k7.py build
+# one window by hand (LRAT and CNF in DIR, core JSON in CORE)
+python3 milestones/26-replay-efficiency/scripts/gen_lean_lrat_v3.py --work DIR --data CORE --out ROOT --check NAME
+```
+
+- Without `--checker v3`, `replay_k7.py` passes exactly the arguments it passed before, so the
+  packed modules and their log lines are unchanged.
+- The 235/236/237 modules and their checkers (`LratCheck*`, `LratFast*`, `LratFast2*`, `LratFast2F*`)
+  are not touched.
+- **Limits** (asserted by the generator):
+  - fewer than 4,095 segments;
+  - fewer than 4,094 hints per lemma (the fuel of `hints`);
+  - at most `--max-lemmas` (4,000) lemmas per segment;
+  - word width 13-17 bits, chosen from the largest literal bit, local index and table index.
+- **Pitfall.** A scratch `LEAN_PATH` entry that contains a `LocalWindowCnf/` directory hides the
+  production `LocalWindowCnf/*.olean`, even when the module wanted is not in it.
+
 ## What this does not cover
 
 - **Cnf/Sat modules.** *(Done since, see [Production](#production).)* These are not studied here. `raw` is a literal `List (List Nat)`: the
@@ -423,6 +568,9 @@ it is done.
 | `work/final_lean/ProofPack.lean`, `work/final_lean/LocalWindowCnfPack.lean` | (Production) the replay-data decoder (as `lean/ProofPack.lean`) and the core/soundness-data decoders, with lakefile entries |
 | `milestones/10-window-aggregate/scripts/gen_lean_lrat.py --packed`, `milestones/23-k6-lean/certify/replay_k6.py gen --packed` | (Production) one packed replay module per window |
 | `milestones/10-window-aggregate/scripts/gen_lean_cnfsat_packed.py` | (Production) one packed core + clause-soundness module per window |
+| `work/final_lean/LratV3.lean`, `scripts/gen_lean_lrat_v3.py` | (Checker v3) the database-free checker with its soundness proof, and its generator (`replay_k7.py gen --checker v3`) |
+| `scripts/pmp.py`, `scripts/pmpagg.py` | (Checker v3) stack sampling of a running `lean` with gdb, and the aggregation |
+| `data/v3_runs.jsonl` | (Checker v3) every build of that section |
 
 **Reproduce.**
 

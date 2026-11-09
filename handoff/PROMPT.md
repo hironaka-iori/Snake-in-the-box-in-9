@@ -54,6 +54,13 @@ compiled to `upper_bound_234`. H9 (5 keys) and F8 (3 keys) certificates were val
      number of orphans.
   2. `replay_k7.py gen --plan $P` (packed encodings, `--part-lits` for large H9/F8 cores, 8 seeds x 5
      rounds) and `replay_k7.py build`.
+     **Faster option:** `replay_k7.py gen --checker v3 --plan $P` writes the replays for the checker v3
+     (`work/final_lean/LratV3.lean`; build it with `ProofPack` in step 0, `--direct`). It has the same
+     module and theorem names and about half the kernel time: 0.12-0.13 against 0.21-0.26 ms per hint
+     on 0.1-1.5 M-hint windows, 1.7-2.0x, and 2.3-3.5x on small windows. It also needs about 25 % less
+     `.olean`. Validated end to end on 4 k6 windows, 1 F8 and 1 H9 key (standard axioms); see
+     `milestones/26-replay-efficiency/README.md`, "Checker v3". Use one checker for the whole run, or
+     mix them per window: the statements are identical.
   3. `gen_k7_core.py final --keys $K --plan $P`, then build the chunk modules `LocalWindowDirUnsatK7_<c>`
      (each derives its keys by one kernel `decide` per key: 0.01-0.08 s, 0.5 GB per 400-key chunk) and
      `LocalWindowDirUnsatK7`.
