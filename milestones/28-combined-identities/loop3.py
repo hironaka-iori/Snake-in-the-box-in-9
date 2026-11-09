@@ -12,7 +12,7 @@ window on it (binding-cycle keys first), cheapest first:
         above the step's current S5;
      c. else (CTX8=1) a ctx-8 threshold.
 If a round can test nothing, timed-out levels are retried once with TLLONG.
-New calls: data/oracle_plain_r232.jsonl, data/oracle_share_r232.jsonl, data/oracle_share7_r232.jsonl;
+New calls: data/oracle_plain_r232.jsonl, data/oracle_share_r232.jsonl, data/ctxshare_r232.jsonl;
 rounds: data/loop232_rounds.jsonl.
 usage: nice -n 10 python loop3.py HOURS [TL] [TLLONG]
 """

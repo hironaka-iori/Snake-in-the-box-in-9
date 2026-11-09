@@ -14,7 +14,7 @@ lower bound of the share sum of the trailing 5-window and the arithmetic (*) of 
 A record is oriented (no reversal: the share centres are the trailing ones); it applies to the
 transitions whose ds[8-ctx:8] has the same canonical labelling and whose counts are t.
 
-Records (data/oracle_share7_r232.jsonl[.gz]): dirs (ctx directions, canonical labels), t (6 lumped
+Records (data/ctxshare_r232.jsonl[.gz]): dirs (ctx directions, canonical labels), t (6 lumped
 counts), ctx, T, result (UNSAT: trailing share >= T), witness5 (trailing share of a SAT model),
 seconds, nv, ncl.  The SAT encoding is wincert_share.ShareEncoding with the share totalizer built
 only over the trailing 5 centres (same clause kinds, so the Lean RefutedShare bridge needs only a
@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.join(MS, '11-local-ceiling', 's0_share_loop'))
 import wincert_share as ws
 from wincert import window_from_dirs
 
-FILE = os.path.join(HERE, 'data', 'oracle_share7_r232.jsonl')
+FILE = os.path.join(HERE, 'data', 'ctxshare_r232.jsonl')   # not oracle_share*: other readers glob that prefix
 LUMP = {i: (i, i) for i in range(1, 6)}; LUMP[6] = (6, 21)
 FREE = (1, 21)
 INF = 10 ** 6
