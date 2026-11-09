@@ -25,7 +25,7 @@ SV.OPL = os.path.join(HERE, 'data', 'oracle_plain_bulk.jsonl')
 SV.OSH = os.path.join(HERE, 'data', 'oracle_share_bulk.jsonl')
 INF = 10 ** 6
 LEVELS = [16, 24, 32, 48, 72, 108, 150, 200, 260]
-BATCH = 400
+BATCH = 300
 LOG = os.path.join(HERE, 'data', 'bulk_rounds.jsonl')
 
 
