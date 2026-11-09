@@ -95,6 +95,8 @@ def prepare(a):
     os.makedirs(tmp)
     cmd = [sys.executable, GEN, '--keys', *a.keys, '--tag', T, '--lam', a.lam, '--noncomputable',
            '--out-stronger', tmp, '--out-core', tmp, '--summary', os.path.join(tmp, 'summary.json')]
+    if a.shard_v2:
+        cmd += ['--shard-v2', a.shard_v2]
     if not a.write_manifest:
         sel = [m[len(f'WindowAutomaton7{T}Shard'):] for m in shards]
         cmd += ['--shards', ','.join(sel) if sel else 'none']
@@ -244,6 +246,10 @@ def main():
                    help='place the sources of all modules, built or not (e.g. before chain_audit.py, '
                         'which needs the source of every core module it imports); with the fixed mtime '
                         'they stay older than their .olean')
+    p.add_argument('--shard-v2', default=None, choices=['t2', 't1', 'label'],
+                   help='generate the shard v2 modules (gen_lean_automaton7.py --shard-v2 GRAIN); use the '
+                        'v2 manifest (data/shards7_<T>_v2.sha256) and build WindowAutomaton7V2 into '
+                        'work/spectral/.verification/chain first')
     p.add_argument('--min-disk-mb', type=float, default=0,
                    help='place nothing (exit 3) below this much free disk; generating needs about '
                         '30 kB per shard (and 23 MB for the data module, while it is not built)')

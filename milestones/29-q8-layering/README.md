@@ -128,7 +128,7 @@ In Q8, annealing runs of 4·10^8 steps found nothing above 112 for any c in 8–
 
 **Implied bounds.**
 
-- *N = 8 (calibration).* With g7(c) ≤ 57 for c ≤ 8 and the recursion values above, layering **proves a(8) ≤ 113** (truth 98). Every input is a SAT result of the certifiable kind.
+- *N = 8 (calibration).* With g7(c) ≤ 57 for c ≤ 8, layering **proves a(8) ≤ 113** (truth 98). Only c ≤ 8 is needed, since floor(127/8) = 15 gives at most 8 pieces per half. The input is one SAT run (1606 s) that the same LRAT pipeline could certify; no LRAT was produced here.
 - *N = 9.* With what is proved (g8(c) ≤ 121 for c ≤ 14, and Huang's 128 beyond), layering gives **a(9) ≤ 241**. That is far weaker than the Lean bound of 235.
 
 Ladder of what would follow from proved values (`layer.py`, `ladder()`, using a(9) ≤ 235):

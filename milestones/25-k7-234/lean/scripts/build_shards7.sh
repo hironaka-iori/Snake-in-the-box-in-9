@@ -20,7 +20,16 @@ PREP_DISK_MB=${PREP_DISK_MB:-258}
 R=$(cd "$(dirname "$0")/../../../.." && pwd)
 S=$R/milestones/25-k7-234/lean/scripts
 W=$R/work/final_lean/.lake/b234
-MAN=$R/milestones/25-k7-234/lean/data/shards7_$T.sha256
+# SHARD_V2=label (or t1, t2): the shard v2 modules (gen_lean_automaton7.py --shard-v2), checked against
+# the v2 manifest; WindowAutomaton7V2 must be built into work/spectral/.verification/chain first.
+SHARD_V2=${SHARD_V2:-}
+if [ -n "$SHARD_V2" ]; then
+  MAN=${MAN:-$R/milestones/25-k7-234/lean/data/shards7_${T}_v2.sha256}
+  V2ARGS="--shard-v2 $SHARD_V2"
+else
+  MAN=${MAN:-$R/milestones/25-k7-234/lean/data/shards7_$T.sha256}
+  V2ARGS=""
+fi
 mkdir -p "$W"
 export PATH=/home/user/lean-deps/toolchain/lean-4.19.0-linux/bin:$PATH
 export LEAN_PATH=$R/work/spectral/.verification/chain
@@ -31,7 +40,7 @@ while :; do
   HEAVY=$(cat "$W/heavy_jobs" 2>/dev/null || echo 3)
   echo "== $(date -u +%FT%TZ) batch: prepare (free $(df -m "$R" | awk 'NR==2{print $4}') MB)"
   nice -n 10 python3 "$S/shard_build7.py" prepare --keys "$KEYS" --tag "$T" --lam "$LAM" \
-      --manifest "$MAN" --limit "$BATCH" --min-disk-mb "$PREP_DISK_MB"
+      --manifest "$MAN" --limit "$BATCH" --min-disk-mb "$PREP_DISK_MB" $V2ARGS
   rc=$?
   [ $rc -eq 2 ] && { echo "== all modules of $T built"; exit 0; }
   if [ $rc -eq 3 ]; then

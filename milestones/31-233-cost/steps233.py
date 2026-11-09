@@ -283,7 +283,7 @@ def exact(tag0, tag, mincost=0.0, budget=None, maxcost=None):
             a, b, _ = W.exact_plain([j]); st['plain_tried'] += a; st['plain_dropped'] += b
         else:
             a, b, _ = W.exact_share([j]); st['share_tried'] += a; st['share_lowered'] += b
-        if n % 1000 == 999:
+        if n % 200 == 199:
             L.log(f'  exact {n + 1}/{len(items)}: {st}, objective {W.summary()["objective"] / 1e9:.3f} G')
     ok, it, rng = W.check(); assert ok
     st['seconds'] = round(time.time() - t0)

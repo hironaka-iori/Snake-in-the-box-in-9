@@ -210,6 +210,59 @@ class Product:
         return (live_src.reshape(NS, 1) & ~F.reshape(NS, 6)).ravel()
 
 
+def win_codes(excl, dirs, w, n, code):
+    """Codes (forward `code`, reversed `code + 1`) of the window `dirs` on the last w of n
+    counts, as an int8 array over 6^n (0 = not excluded); the first one in that order wins."""
+    F = np.zeros((6,) * n, np.int8)
+    pre = (slice(None),) * (n - w)
+    for sy in excl.get(canon(tuple(reversed(dirs))), ()):
+        F[pre + tuple(x - 1 for x in reversed(sy))] = code + 1
+    for sy in excl.get(canon(dirs), ()):
+        F[pre + tuple(x - 1 for x in sy)] = code
+    return F.ravel()
+
+
+def first_code(arrs):
+    out = np.zeros_like(arrs[0])
+    for a in reversed(arrs):
+        out = np.where(a != 0, a, out)
+    return out
+
+
+def shard_witness(Pr, pot, P, Q, i, d):
+    """The witness codes of `check7In2W` (WindowAutomaton7V2.lean) for 8-shape i and label d:
+    per source state (6^6, order cntIdx6 of t0..t5) 0 = check its transitions, 2(w-2)+1 / +2 =
+    its own window of w+1 directions excluded (forward / reversed); per transition (6^7, source
+    then s) 0 = the step inequality, 2(w-2)+1 / +2 = the window of w+1 directions ending at the
+    new vertex (w = 2..7), 13 = H9.  Dead sources always take their own window (one lookup
+    instead of six inequalities); their transition codes are 0 and never read."""
+    h = Pr.shapes[i]
+    X = h + (d,)
+    j = Pr.sidx[canon(X[1:])]
+    sc = first_code([win_codes(Pr.excl, h[8 - w - 1:], w, 6, 2 * (w - 2) + 1) for w in range(2, 7)])
+    wc = first_code([win_codes(Pr.excl, X[9 - w - 1:], w, 7, 2 * (w - 2) + 1) for w in range(2, 8)])
+    H = np.zeros((6,) * 7, np.int8)
+    for sy in Pr.hby.get(canon(tuple(reversed(X))), ()):
+        H[tuple(x - 1 for x in reversed(sy))] = 13
+    wc = first_code([wc, H.ravel()]).reshape(NS, 6)
+    s = np.arange(1, 7, dtype=np.int64)
+    ok = (P + pot[j].reshape(1, NS // 6, 6) <= Q * s + pot[i].reshape(6, NS // 6, 1)).reshape(NS, 6)
+    live = sc == 0
+    tc = np.where(ok | ~live[:, None], 0, wc).astype(np.int8)
+    bad = live[:, None] & ~ok & (wc == 0)
+    assert not bad.any(), ('transition without a witness', X)
+    return sc, tc
+
+
+def nib_lit(nibs):
+    """Hex literal of a nibble array (nibble k at bits 4k..4k+3)."""
+    nibs = np.asarray(nibs, np.uint8)
+    if len(nibs) % 2:
+        nibs = np.append(nibs, np.uint8(0))
+    v = int.from_bytes((nibs[0::2] | (nibs[1::2] << 4)).tobytes(), 'little')
+    return f'0x{v:x}'
+
+
 def bellman_ford(Pr, masks, P, Q, max_iter):
     pi = np.zeros((132, NS), np.int64)
     w = Q * np.arange(1, 7, dtype=np.int64) - P
@@ -323,6 +376,16 @@ def main():
     ap.add_argument('--split', choices=['t1', 't2'], default='t2',
                     help='one kernel declaration per (label, t1) [6^5 transitions, about 3 GB] '
                          'or per (label, t1, t2) [6^4 transitions, about 0.7 GB; default]')
+    ap.add_argument('--shard-v2', nargs='?', const='t1', choices=['t2', 't1', 'label'], default=None,
+                    help='shard v2: the witness-driven checks of work/spectral/stronger/WindowAutomaton7V2.lean, '
+                         'one `decide +kernel` per (label, t1) (`check7InW`, the default of the flag), per label '
+                         '(`check7AtW`, smaller .olean, about 1.1 GB) or per (label, t1, t2) (`check7In2W`), '
+                         'bridged by `check7In_of_W` / `check7At_of_W` / '
+                         '`check7In_of_W` / `check7In2_of_W`; same module names and the same final theorem '
+                         '`shard7<T>_<i>_<t0>`, so the Sequence module is unchanged (with --split t2 only)')
+    ap.add_argument('--manifest-out', default=None,
+                    help='write the sha256 manifest of the data module and the 792 shards (the format of '
+                         'shard_build7.py) instead of the modules (needs --shards all and --write all)')
     ap.add_argument('--out-stronger', default=STRONGER)
     ap.add_argument('--out-core', default=CORE)
     ap.add_argument('--summary', default=None)
@@ -336,6 +399,8 @@ def main():
                          'values; the kernel checks only unfold them, and the .olean is about 15 times '
                          'smaller)')
     a = ap.parse_args()
+    if a.shard_v2 and a.split != 't2':
+        ap.error('--shard-v2 needs --split t2')
     T = a.tag
     t_start = time.time()
     k6, hk = load_keys(a.keys)
@@ -585,6 +650,45 @@ theorem {nm}_{t1} : check7In tables7{T} {c} {t0} {t1} = true := by
                         decls.append(f'''theorem {nm} : check7At tables7{T} {c} {t0} = true :=
   check7At_of _ _ _ {' '.join(f'{nm}_{t1}' for t1 in range(1, 7))}
 ''')
+                    elif induced(h + (d,)) and a.shard_v2:
+                        sc, tc = shard_witness(Pr, dpi, P, Q, i, d)
+                        blk = slice((t0 - 1) * NS // 6, t0 * NS // 6)   # (t1, t2, t3, t4, t5) of t0
+                        sc, tc = sc[blk], tc[blk]
+                        if a.shard_v2 == 'label':
+                            decls.append(f'''set_option maxRecDepth 100000 in
+theorem {nm}_w : check7AtW tables7{T} {c} {t0} (nat_lit {nib_lit(sc)})
+    (nat_lit {nib_lit(tc.ravel())}) = true := by
+  decide +kernel
+''')
+                            decls.append(f'''theorem {nm} : check7At tables7{T} {c} {t0} = true :=
+  check7At_of_W _ _ _ _ _ {nm}_w
+''')
+                        else:
+                            for t1 in range(1, 7):
+                                b1 = slice((t1 - 1) * 1296, t1 * 1296)
+                                if a.shard_v2 == 't1':
+                                    decls.append(f'''set_option maxRecDepth 100000 in
+theorem {nm}_{t1}w : check7InW tables7{T} {c} {t0} {t1} (nat_lit {nib_lit(sc[b1])})
+    (nat_lit {nib_lit(tc[b1].ravel())}) = true := by
+  decide +kernel
+''')
+                                    pf = f'check7In_of_W _ _ _ _ _ _ {nm}_{t1}w'
+                                else:
+                                    for t2 in range(1, 7):
+                                        b2 = slice((t1 - 1) * 1296 + (t2 - 1) * 216, (t1 - 1) * 1296 + t2 * 216)
+                                        decls.append(f'''set_option maxRecDepth 100000 in
+theorem {nm}_{t1}_{t2}w : check7In2W tables7{T} {c} {t0} {t1} {t2} (nat_lit {nib_lit(sc[b2])})
+    (nat_lit {nib_lit(tc[b2].ravel())}) = true := by
+  decide +kernel
+''')
+                                    pf = (f"check7In_of _ _ _ _ " +
+                                          ' '.join(f'(check7In2_of_W _ _ _ _ _ _ _ {nm}_{t1}_{t2}w)' for t2 in range(1, 7)))
+                                decls.append(f'''theorem {nm}_{t1} : check7In tables7{T} {c} {t0} {t1} = true :=
+  {pf}
+''')
+                            decls.append(f'''theorem {nm} : check7At tables7{T} {c} {t0} = true :=
+  check7At_of _ _ _ {' '.join(f'{nm}_{t1}' for t1 in range(1, 7))}
+''')
                     elif induced(h + (d,)):
                         for t1 in range(1, 7):
                             for t2 in range(1, 7):
@@ -606,13 +710,18 @@ theorem {nm}_{t1}_{t2} : check7In2 tables7{T} {c} {t0} {t1} {t2} = true := by
                 proof = 'rfl'
                 for d, nm in enumerate(labs):
                     proof = f'allBelow_succ_of {d} _ ({proof}) {nm}'
+                v2doc = (f'''
+Shard v2 (one kernel check per {dict(t2='(label, t1, t2)', t1='(label, t1)', label='label')[a.shard_v2 or 't2']}): the witness-driven checks of
+WindowAutomaton7V2.  The two literals hold one 4-bit code per source state and per transition;
+a code only chooses the disjunct the kernel evaluates (step inequality, own window, k6/F8 window,
+H9), and the bridge theorems give `check7At` whatever the codes.''' if a.shard_v2 else '')
                 out[os.path.join(a.out_stronger, f'WindowAutomaton7{T}Shard{i}_{t0}.lean')] = f'''/-
 Generated by {ME}.  Shard ({i}, {t0}) of the step table of `tables7{T}`:
 canonical 8-shape {lst(h)} extended by every restricted growth label (at most {bnd}),
 first count {t0}.  One kernel check per {'(label, t1), 6^5' if a.split == 't1' else '(label, t1, t2), 6^4'} transitions each: the kernel
-caches live for one declaration, so the peak memory is that of one declaration.
+caches live for one declaration, so the peak memory is that of one declaration.{v2doc}
 -/
-import WindowAutomaton7{T}Data
+import WindowAutomaton7{T}Data{chr(10) + 'import WindowAutomaton7V2' if a.shard_v2 else ''}
 
 set_option Elab.async false
 
@@ -697,6 +806,20 @@ end Snake9.WindowAutomaton
     out[os.path.join(a.out_stronger, f'WindowAutomaton7{T}Sequence.lean')] = seq
     if a.write == 'shards':
         out = {p: t for p, t in out.items() if os.path.basename(p).startswith(f'WindowAutomaton7{T}Shard')}
+    if a.manifest_out:
+        # the manifest of shard_build7.py (data module, then the shards), without writing any module
+        import hashlib
+        names = [f'WindowAutomaton7{T}Data'] + [f'WindowAutomaton7{T}Shard{i}_{t0}' for i in range(132)
+                                                 for t0 in range(1, 7)]
+        by = {os.path.basename(p)[:-5]: t for p, t in out.items()}
+        missing = [m for m in names if m not in by]
+        if missing:
+            raise SystemExit(f'--manifest-out needs every shard and the data module ({len(missing)} missing)')
+        with open(a.manifest_out, 'w') as f:
+            for m in names:
+                f.write(f'{hashlib.sha256(by[m].encode()).hexdigest()}  {m}.lean\n')
+        print(f'wrote {a.manifest_out} ({len(names)} sources, no module written)', flush=True)
+        out = {}
     for p, t in out.items():
         os.makedirs(os.path.dirname(p), exist_ok=True)
         if not (os.path.exists(p) and open(p).read() == t):

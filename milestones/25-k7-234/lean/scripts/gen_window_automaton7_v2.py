@@ -1,0 +1,284 @@
+"""Write work/spectral/stronger/WindowAutomaton7V2.lean, the witness-driven shard check (shard v2)
+of the seven-centre automaton and its soundness bridge (milestones/25-k7-234/lean/README.md,
+"Shard v2").
+
+The Lean file spells out, for each of the 12 k6/F8 windows of a transition and the 10 own windows
+of a source state, the `symIdx` arithmetic of its counts with kernel primitives, and one proof
+case per window; this script keeps the 22 cases consistent.
+
+  python gen_window_automaton7_v2.py [OUT]     (default: work/spectral/stronger/WindowAutomaton7V2.lean)
+"""
+import os, sys
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, '..', '..', '..', '..', 'work', 'spectral',
+                                                          'stronger', 'WindowAutomaton7V2.lean')
+
+
+def ix(base, xs):
+    """symIdx/cntIdx-like arithmetic: ((x0 * base + x1) * base + ...), with x0 alone first."""
+    acc = xs[0]
+    for x in xs[1:]:
+        a = acc if (' ' not in acc or acc.startswith('(')) else f'({acc})'
+        acc = f'Nat.add (Nat.mul {a} {base}) {x}'
+    return acc
+def par(e): return e if ' ' not in e else f'({e})'
+def m1(x): return f'(Nat.sub {x} 1)'
+def fb(ds, s0, rest):
+    return f'(fb7 T {ds} {s0} {par(ix(7, rest))})' if rest else None
+tr_args = []
+for w in range(2, 8):
+    k = 8 - w   # c.drop k has w + 1 directions
+    u = ['t0', 't1', 't2', 't3', 't4', 't5', 's'][7 - w:]
+    tr_args.append(f'(fb7 T (c.drop {k}) {u[0]} {par(ix(7, u[1:]))})')
+    r = list(reversed(u))
+    tr_args.append(f'(fb7 T (c.drop {k}).reverse {r[0]} {par(ix(7, r[1:]))})')
+src_args = []
+for w in range(2, 7):
+    k = 7 - w
+    u = ['t0', 't1', 't2', 't3', 't4', 't5'][6 - w:]
+    src_args.append(f'(fb7 T (h.drop {k}) {u[0]} {par(ix(7, u[1:]))})')
+    r = list(reversed(u))
+    src_args.append(f'(fb7 T (h.drop {k}).reverse {r[0]} {par(ix(7, r[1:]))})')
+idxd = ix(6, [m1('t3'), m1('t4'), m1('t5'), m1('s')])
+idxs = ix(6, [m1('t2'), m1('t3'), m1('t4'), m1('t5')])
+NL = '\n    '
+lean = f'''import WindowAutomaton7Defs
+
+/-!
+# Witness-driven shard check of the seven-centre automaton (shard v2)
+
+`check7In2W T c t0 t1 t2 ws wt` evaluates, for every source state `(t3, t4, t5)` and every new
+count `s`, ONE disjunct of `check7In2 T c t0 t1 t2`, chosen by 4-bit codes in the literals `ws`
+(per source) and `wt` (per transition).  A wrong code only makes the check fail.  All arithmetic
+is written with the kernel's GMP primitives (`Nat.add`, `Nat.mul`, `Nat.sub`, `Nat.shiftRight`,
+`Nat.land`, `Nat.beq`, `Nat.ble`) and the list recursions of `cntIdx6`/`symIdx` are unfolded.
+
+Written by `milestones/25-k7-234/lean/scripts/gen_window_automaton7_v2.py`, which spells out the
+index arithmetic and the case proofs; edit the script, not this file.
+-/
+
+namespace Snake9.WindowAutomaton
+
+/-- 4-bit field `i` of `w`. -/
+def code4 (w i : Nat) : Nat := Nat.land (Nat.shiftRight w (Nat.mul 4 i)) 15
+
+/-- `y` if the bit `m` (a power of two) of `k` is set, else `x`. -/
+def sel2 (k m : Nat) (x y : Bool) : Bool := cond (Nat.beq (Nat.land k m) 0) x y
+
+/-- One of 16 Booleans, selected by the low four bits of `k` (lazy in the others). -/
+def bsel4 (k : Nat) (x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 : Bool) : Bool :=
+  sel2 k 8
+    (sel2 k 4
+      (sel2 k 2 (sel2 k 1 x0 x1) (sel2 k 1 x2 x3))
+      (sel2 k 2 (sel2 k 1 x4 x5) (sel2 k 1 x6 x7)))
+    (sel2 k 4
+      (sel2 k 2 (sel2 k 1 x8 x9) (sel2 k 1 x10 x11))
+      (sel2 k 2 (sel2 k 1 x12 x13) (sel2 k 1 x14 x15)))
+
+/-- The exclusion bit of the window `ds` with first count `s0`; `i` is the `symIdx` of the
+other counts (the body of `forbBit6`). -/
+def fb7 (T : Tables7) (ds : List Nat) (s0 i : Nat) : Bool :=
+  Nat.beq (Nat.land (Nat.shiftRight (T.forb (T.wIdx (shapeCode (canon ds))) s0) i) 1) 1
+
+/-- The step inequality, the potential rows `rs` (source) and `rd` (target) given. -/
+def ineq7F (T : Tables7) (rs rd t2 t3 t4 t5 s : Nat) : Bool :=
+  Nat.ble (Nat.add T.num (Nat.land (Nat.shiftRight rd (Nat.mul T.bits ({idxd})))
+      (Nat.sub (Nat.pow 2 T.bits) 1)))
+    (Nat.add (Nat.mul T.den s) (Nat.land (Nat.shiftRight rs (Nat.mul T.bits ({idxs})))
+      (Nat.sub (Nat.pow 2 T.bits) 1)))
+
+/-- One transition: code 0 the inequality, `2 (w - 2) + 1` and `2 (w - 2) + 2` the window of
+`w + 1` directions ending at the new vertex (forward, reversed; w = 2..7), 13 the H9 window. -/
+def tr7F (T : Tables7) (c : List Nat) (rs rd t0 t1 t2 t3 t4 t5 s code : Nat) : Bool :=
+  cond (Nat.beq code 0) (ineq7F T rs rd t2 t3 t4 t5 s) (bsel4 code false
+    {NL.join(tr_args)}
+    (wforbH T c [t0, t1, t2, t3, t4, t5, s]) false false)
+
+/-- One source state: code 0 its transitions `go`, `2 (w - 2) + 1` and `2 (w - 2) + 2` its own
+window of `w + 1` directions (forward, reversed; w = 2..6). -/
+def src7F (T : Tables7) (h : List Nat) (t0 t1 t2 t3 t4 t5 code : Nat) (go : Bool) : Bool :=
+  cond (Nat.beq code 0) go (bsel4 code false
+    {NL.join(src_args)}
+    false false false false false)
+
+/-- Field of the source state `(t3, t4, t5)`: `(t3 - 1) * 36 + (t4 - 1) * 6 + (t5 - 1)`. -/
+def srcIx (t3 t4 t5 : Nat) : Nat := Nat.sub (Nat.add (Nat.mul (Nat.add (Nat.mul t3 6) t4) 6) t5) 43
+
+/-- The witness-driven form of `check7In2`: `ws` holds a 4-bit code per source state (field
+`srcIx t3 t4 t5`, 216 fields), `wt` one per transition (field `6 * srcIx t3 t4 t5 + s - 1`,
+1,296 fields). -/
+def check7In2W (T : Tables7) (c : List Nat) (t0 t1 t2 ws wt : Nat) : Bool :=
+  let rs := T.pot (T.pIdx (shapeCode (canon (c.take 8)))) t0 t1
+  let rd := T.pot (T.pIdx (shapeCode (canon (c.drop 1)))) t1 t2
+  allSym (fun t3 => allSym (fun t4 => allSym (fun t5 =>
+    src7F T (c.take 8) t0 t1 t2 t3 t4 t5 (code4 ws (srcIx t3 t4 t5))
+      (allSym (fun s => tr7F T c rs rd t0 t1 t2 t3 t4 t5 s
+        (code4 wt (Nat.add (Nat.mul (srcIx t3 t4 t5) 6) (Nat.sub s 1))))))))
+
+/-- `check7In2W` for every `t2`: block `t2 - 1` of `ws` (864 bits) and of `wt` (5,184 bits). -/
+def check7InW (T : Tables7) (c : List Nat) (t0 t1 ws wt : Nat) : Bool :=
+  allSym (fun t2 => check7In2W T c t0 t1 t2 (Nat.shiftRight ws (Nat.mul 864 (Nat.sub t2 1)))
+    (Nat.shiftRight wt (Nat.mul 5184 (Nat.sub t2 1))))
+
+/-- `check7InW` for every `t1`: block `t1 - 1` of `ws` (5,184 bits) and of `wt` (31,104 bits).
+The `inducedPattern` test of `check7At` is not evaluated (the shards use it on induced labels). -/
+def check7AtW (T : Tables7) (c : List Nat) (t0 ws wt : Nat) : Bool :=
+  allSym (fun t1 => check7InW T c t0 t1 (Nat.shiftRight ws (Nat.mul 5184 (Nat.sub t1 1)))
+    (Nat.shiftRight wt (Nat.mul 31104 (Nat.sub t1 1))))
+
+end Snake9.WindowAutomaton
+'''
+
+# ---------------------------------------------------------------- soundness part
+def lst(xs): return '[' + ', '.join(xs) + ']'
+U7 = ['t0', 't1', 't2', 't3', 't4', 't5', 's']
+U6 = U7[:6]
+def case_fb(dsexpr, u, rev):
+    """proof bullet for a selected fb7 disjunct of window dirs `dsexpr`, counts u (forward)."""
+    if not rev:
+        s0, rest, dsx, syx = u[0], u[1:], f'({dsexpr})', lst(u)
+    else:
+        r = list(reversed(u)); s0, rest, dsx, syx = r[0], r[1:], f'({dsexpr}).reverse', f'{lst(u)}.reverse'
+    return (f'''  · have h' : wforbA6 T.k6 {dsx} {syx} = true := by
+      have e := fb7_eq T {dsx} {s0} {lst(rest)}
+      rw [symIdx_eq{len(rest)}] at e
+      rw [e] at h
+      exact h
+    simp only [Bool.or_eq_true, wforb6, h', true_or, or_true]''')
+tr_cases = ['  · simp at h']
+for w in range(2, 8):
+    k = 8 - w; u = U7[7 - w:]
+    tr_cases.append(case_fb(f'c.drop {k}', u, False)); tr_cases.append(case_fb(f'c.drop {k}', u, True))
+tr_cases.append('''  · simp only [Bool.or_eq_true, h, true_or, or_true]''')
+tr_cases += ['  · simp at h', '  · simp at h']
+src_cases = ['  · simp at h']
+for w in range(2, 7):
+    k = 7 - w; u = U6[6 - w:]
+    src_cases.append(case_fb(f'h.drop {k}', u, False).replace("h' :", "h' :").replace(
+        "simp only [Bool.or_eq_true, wforb6, h', true_or, or_true]", "right; simp only [own7, Bool.or_eq_true, wforb6, h', true_or, or_true]"))
+    src_cases.append(case_fb(f'h.drop {k}', u, True).replace(
+        "simp only [Bool.or_eq_true, wforb6, h', true_or, or_true]", "right; simp only [own7, Bool.or_eq_true, wforb6, h', true_or, or_true]"))
+src_cases += ['  · simp at h'] * 5
+# src7F uses `h` for the shape; rename the hypothesis there
+def indent(x): return '\n'.join('  ' + l for l in x.split('\n'))
+def symlem(n):
+    xs = [f'x{i}' for i in range(n)]
+    return (f'theorem symIdx_eq{n} ({" ".join(xs)} : Nat) :\n    symIdx {lst(xs)} 0 = {ix(7, xs)} := by\n'
+            f'  simp only [symIdx, Nat.zero_mul, Nat.zero_add]; try rfl\n')
+proofs = '\n'.join(symlem(n) for n in range(1, 7)) + f'''
+theorem nat_beq_eq (a b : Nat) : Nat.beq a b = (a == b) := by
+  cases h : Nat.beq a b
+  · have := Nat.ne_of_beq_eq_false h; simp [this]
+  · have := Nat.eq_of_beq_eq_true h; simp [this]
+
+theorem nat_ble_eq (a b : Nat) : Nat.ble a b = decide (a ≤ b) := by
+  cases h : Nat.ble a b
+  · have : ¬ a ≤ b := fun hle => by simp [Nat.ble_eq_true_of_le hle] at h
+    simp [this]
+  · simp [Nat.le_of_ble_eq_true h]
+
+theorem fb7_eq (T : Tables7) (ds : List Nat) (s0 : Nat) (rest : List Nat) :
+    fb7 T ds s0 (symIdx rest 0) = wforbA6 T.k6 ds (s0 :: rest) := by
+  unfold fb7 wforbA6 forbBit6
+  rw [nat_beq_eq]
+  rfl
+
+theorem cntIdx4_eq (a b c d : Nat) :
+    cntIdx6 [a, b, c, d] 0 = {ix(6, [m1('a'), m1('b'), m1('c'), m1('d')])} := by
+  simp only [cntIdx6, Nat.zero_mul, Nat.zero_add]; rfl
+
+theorem sel2_sound {{k m : Nat}} {{x y : Bool}} {{P Q : Prop}} (hx : x = true → P) (hy : y = true → Q)
+    (h : sel2 k m x y = true) : P ∨ Q := by
+  unfold sel2 at h
+  cases hb : Nat.beq (Nat.land k m) 0 <;> rw [hb] at h <;> simp only [cond_true, cond_false] at h
+  · exact Or.inr (hy h)
+  · exact Or.inl (hx h)
+
+theorem bsel4_sound {{k : Nat}} {{x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 : Bool}}
+    (h : bsel4 k x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 = true) :
+    (((x0 = true ∨ x1 = true) ∨ (x2 = true ∨ x3 = true)) ∨
+      ((x4 = true ∨ x5 = true) ∨ (x6 = true ∨ x7 = true))) ∨
+    (((x8 = true ∨ x9 = true) ∨ (x10 = true ∨ x11 = true)) ∨
+      ((x12 = true ∨ x13 = true) ∨ (x14 = true ∨ x15 = true))) :=
+  sel2_sound
+    (sel2_sound (sel2_sound (sel2_sound id id) (sel2_sound id id))
+      (sel2_sound (sel2_sound id id) (sel2_sound id id)))
+    (sel2_sound (sel2_sound (sel2_sound id id) (sel2_sound id id))
+      (sel2_sound (sel2_sound id id) (sel2_sound id id))) h
+
+theorem ineq7F_sound (T : Tables7) (c : List Nat) (rs rd t0 t1 t2 t3 t4 t5 s : Nat)
+    (hrs : rs = T.pot (T.pIdx (shapeCode (canon (c.take 8)))) t0 t1)
+    (hrd : rd = T.pot (T.pIdx (shapeCode (canon (c.drop 1)))) t1 t2)
+    (h : ineq7F T rs rd t2 t3 t4 t5 s = true) :
+    decide (T.num + pot7 T (c.drop 1) [t1, t2, t3, t4, t5, s] ≤
+      T.den * s + pot7 T (c.take 8) [t0, t1, t2, t3, t4, t5]) = true := by
+  have e1 : pot7 T (c.drop 1) [t1, t2, t3, t4, t5, s] =
+      Nat.land (Nat.shiftRight rd (Nat.mul T.bits ({idxd}))) (Nat.sub (Nat.pow 2 T.bits) 1) := by
+    rw [hrd]; simp only [pot7, potAt7, cntIdx4_eq]; rfl
+  have e2 : pot7 T (c.take 8) [t0, t1, t2, t3, t4, t5] =
+      Nat.land (Nat.shiftRight rs (Nat.mul T.bits ({idxs}))) (Nat.sub (Nat.pow 2 T.bits) 1) := by
+    rw [hrs]; simp only [pot7, potAt7, cntIdx4_eq]; rfl
+  unfold ineq7F at h
+  rw [nat_ble_eq] at h
+  rw [e1, e2]
+  exact h
+
+/-- A selected transition disjunct implies the transition disjunction of `check7In2`. -/
+theorem tr7F_sound (T : Tables7) (c : List Nat) (rs rd t0 t1 t2 t3 t4 t5 s code : Nat)
+    (hrs : rs = T.pot (T.pIdx (shapeCode (canon (c.take 8)))) t0 t1)
+    (hrd : rd = T.pot (T.pIdx (shapeCode (canon (c.drop 1)))) t1 t2)
+    (h : tr7F T c rs rd t0 t1 t2 t3 t4 t5 s code = true) :
+    (wforb6 T.k6 (c.drop 6) [t5, s] || wforb6 T.k6 (c.drop 5) [t4, t5, s] ||
+      wforb6 T.k6 (c.drop 4) [t3, t4, t5, s] || wforb6 T.k6 (c.drop 3) [t2, t3, t4, t5, s] ||
+      wforb6 T.k6 (c.drop 2) [t1, t2, t3, t4, t5, s] ||
+      wforb6 T.k6 (c.drop 1) [t0, t1, t2, t3, t4, t5, s] ||
+      wforbH T c [t0, t1, t2, t3, t4, t5, s] ||
+      decide (T.num + pot7 T (c.drop 1) [t1, t2, t3, t4, t5, s] ≤
+        T.den * s + pot7 T (c.take 8) [t0, t1, t2, t3, t4, t5])) = true := by
+  unfold tr7F at h
+  cases hb : Nat.beq code 0 <;> rw [hb] at h <;> simp only [cond_true, cond_false] at h
+  · rcases bsel4_sound h with ((((h | h) | (h | h)) | ((h | h) | (h | h))) |
+      (((h | h) | (h | h)) | ((h | h) | (h | h))))
+{chr(10).join(indent(x) for x in tr_cases)}
+  · have h' := ineq7F_sound T c rs rd t0 t1 t2 t3 t4 t5 s hrs hrd h
+    simp only [Bool.or_eq_true, h', or_true]
+
+/-- A selected source disjunct: the transitions, or an own window of the source state. -/
+theorem src7F_sound (T : Tables7) (h : List Nat) (t0 t1 t2 t3 t4 t5 code : Nat) (go : Bool)
+    (hh : src7F T h t0 t1 t2 t3 t4 t5 code go = true) :
+    go = true ∨ own7 T h t0 t1 t2 t3 t4 t5 = true := by
+  unfold src7F at hh
+  cases hb : Nat.beq code 0 <;> rw [hb] at hh <;> simp only [cond_true, cond_false] at hh
+  · rcases bsel4_sound hh with ((((hh | hh) | (hh | hh)) | ((hh | hh) | (hh | hh))) |
+      (((hh | hh) | (hh | hh)) | ((hh | hh) | (hh | hh))))
+{chr(10).join(indent(x).replace("rw [e] at h", "rw [e] at hh").replace("exact h\n", "exact hh\n").replace("simp at h", "simp at hh") for x in src_cases)}
+  · exact Or.inl hh
+
+/-- **Bridge**: the witness-driven check implies the step test of `check7In2`, whatever the
+codes `ws`, `wt`. -/
+theorem check7In2_of_W (T : Tables7) (c : List Nat) (t0 t1 t2 ws wt : Nat)
+    (h : check7In2W T c t0 t1 t2 ws wt = true) : check7In2 T c t0 t1 t2 = true := by
+  unfold check7In2
+  unfold check7In2W at h
+  refine allSym_of_forall _ (fun t3 h3 h3' => allSym_of_forall _ (fun t4 h4 h4' =>
+    allSym_of_forall _ (fun t5 h5 h5' => ?_)))
+  have hs := allSym_spec _ (allSym_spec _ (allSym_spec _ h t3 h3 h3') t4 h4 h4') t5 h5 h5'
+  rcases src7F_sound _ _ _ _ _ _ _ _ _ _ hs with hg | ho
+  · refine Bool.or_eq_true_iff.2 (Or.inr (allSym_of_forall _ (fun s hs1 hs6 => ?_)))
+    exact tr7F_sound T c _ _ t0 t1 t2 t3 t4 t5 s _ rfl rfl (allSym_spec _ hg s hs1 hs6)
+  · exact Bool.or_eq_true_iff.2 (Or.inl ho)
+
+theorem check7In_of_W (T : Tables7) (c : List Nat) (t0 t1 ws wt : Nat)
+    (h : check7InW T c t0 t1 ws wt = true) : check7In T c t0 t1 = true := by
+  unfold check7In
+  exact allSym_of_forall _ (fun t2 h1 h6 => check7In2_of_W _ _ _ _ _ _ _ (allSym_spec _ h t2 h1 h6))
+
+/-- **Bridge** used by the shards: the witness-driven check of one label implies `check7At`. -/
+theorem check7At_of_W (T : Tables7) (c : List Nat) (t0 ws wt : Nat)
+    (h : check7AtW T c t0 ws wt = true) : check7At T c t0 = true := by
+  unfold check7At
+  exact Bool.or_eq_true_iff.2 (Or.inr (allSym_of_forall _ (fun t1 h1 h6 =>
+    check7In_of_W _ _ _ _ _ _ (allSym_spec _ h t1 h1 h6))))
+'''
+lean2 = lean.replace('end Snake9.WindowAutomaton\n', '/-! ### Soundness -/\n\n' + proofs + '\nend Snake9.WindowAutomaton\n\n#print axioms Snake9.WindowAutomaton.check7In2_of_W\n#print axioms Snake9.WindowAutomaton.check7In_of_W\n#print axioms Snake9.WindowAutomaton.check7At_of_W\n')
+open(OUT, 'w').write(lean2)
