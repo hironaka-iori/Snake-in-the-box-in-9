@@ -46,7 +46,7 @@ def cube_cycles(n):
     return out
 
 
-def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None, levels=None):
+def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None, levels=None, sub=None):
     V = 1 << n
     pool = pool or IDPool()
     s = [pool.id(('s', u)) for u in range(V)]
@@ -121,9 +121,54 @@ def encode(n, cmax, L, cmin=None, short=None, sym=True, pool=None, extra=None, l
                     a = pool.id(('a', u, i, j)); al.append(a)
                     cl += [[-a, s[y]], [-a, -o[y, j]]]
                 cl.append([-two] + ([o[u, j + 1]] if j < D else []) + al)
+    if sub:
+        for k, g in sub:
+            cl += subcube_bounds(n, k, g, s, pool)
     if extra:
         cl += extra
     return pool, s, cl
+
+
+def subcube_bounds(n, k, g, s, pool):
+    """Implied constraints |F cap Q| <= g_k(p_Q) for every k-subcube Q, where p_Q is the number of
+    pieces (paths of F cap Q), from a table g = {p: upper bound for Q_k} (beyond the table 2^(k-1)).
+    2 p_Q = sum over x in F cap Q of (2 - deg_Q(x)), counted by local endpoint literals.
+    For each j with g(j) < 2^(k-1):  y_j or (2p_Q >= 2j+1)  and  not y_j or (|F cap Q| <= g(j))."""
+    half = 1 << (k - 1)
+    V = 1 << n
+    out = []
+    js = [j for j in sorted(g) if g[j] < half]
+    for dirs in combinations(range(n), k):
+        m = sum(1 << d for d in dirs)
+        for base in range(V):
+            if base & m:
+                continue
+            tag = ('Q', m, base)
+            verts = [u for u in range(V) if (u & ~m) == base]
+            ends = []
+            for u in verts:
+                nb = [s[u ^ (1 << d)] for d in dirs]
+                pr = []
+                for a, b in combinations(range(k), 2):
+                    p = pool.id(tag + ('p', u, a, b)); pr.append(p)
+                    out.extend([[-p, nb[a]], [-p, nb[b]], [p, -nb[a], -nb[b]]])
+                two = pool.id(tag + ('two', u)); anyn = pool.id(tag + ('any', u))
+                out.append([-two] + pr); out.extend([[two, -p] for p in pr])
+                out.append([-anyn] + nb); out.extend([[anyn, -x] for x in nb])
+                e1 = pool.id(tag + ('e1', u)); e0 = pool.id(tag + ('e0', u))
+                out.extend([[-e1, s[u]], [-e1, -two], [e1, -s[u], two]])
+                out.extend([[-e0, s[u]], [-e0, -anyn], [e0, -s[u], anyn]])
+                ends += [e1, e0]
+            vs = [s[u] for u in verts]
+            for j in js:
+                y = pool.id(tag + ('y', j))
+                for c in CardEnc.atleast(ends, bound=2 * j + 1, vpool=pool, encoding=EncType.seqcounter).clauses:
+                    out.append(c + [y])
+                for c in CardEnc.atmost(vs, bound=g[j], vpool=pool, encoding=EncType.seqcounter).clauses:
+                    out.append(c + [-y])
+            for c in CardEnc.atmost(vs, bound=half, vpool=pool, encoding=EncType.seqcounter).clauses:
+                out.append(c)
+    return out
 
 
 def components(sel, n):
@@ -158,8 +203,8 @@ def check_forest(sel, n):
 CUTS = {}
 
 
-def search(n, cmax, L, tmax=600, cmin=None, short=None, sym=True, extra=None, verbose=False, levels=None):
-    pool, s, cl = encode(n, cmax, L, cmin, short, sym, extra=extra, levels=levels)
+def search(n, cmax, L, tmax=600, cmin=None, short=None, sym=True, extra=None, verbose=False, levels=None, sub=None):
+    pool, s, cl = encode(n, cmax, L, cmin, short, sym, extra=extra, levels=levels, sub=sub)
     cuts = CUTS.setdefault(n, [])
     V = 1 << n
     t0 = time.time(); rounds = 0

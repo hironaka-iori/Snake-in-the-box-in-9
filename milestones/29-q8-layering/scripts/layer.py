@@ -97,3 +97,39 @@ if __name__ == '__main__':
               % (N, n, b_le, b_eq, b_3))
         if n <= 5:
             print('N=%d (quarters Q%d): two cuts m <= %d' % (n + 2, n, bound2(n + 2, gle)))
+
+
+def lower_tables():
+    """Best known lower bounds for g7, g8 (SA witnesses in ../data/sa_lower.jsonl, the snake values
+    g7(1) = 51, g8(1) = 99, and the obvious extensions: g(c+1) >= g(c), and deleting isolated
+    vertices of a witness, e.g. the Q8 witness 16 x P7 + 16 isolated gives g8(c) >= 96 + c, c >= 16)."""
+    lb = {7: {1: 51}, 8: {1: 99}}
+    for l in open('../data/sa_lower.jsonl'):
+        r = json.loads(l)
+        iso = r['path_sizes'].count(1)
+        for t in range(iso + 1):      # dropping t isolated vertices keeps an induced linear forest
+            c = r['paths'] - t
+            if c >= 1:
+                lb[r['n']][c] = max(lb[r['n']].get(c, 0), r['size'] - t)
+    for n, half in ((7, 64), (8, 128)):
+        cur = 0
+        for c in range(1, 2 * half):
+            cur = max(cur, lb[n].get(c, 0)); lb[n][c] = min(cur, half)
+    return lb
+
+
+def report_lower():
+    lb = lower_tables()
+    for n in (7, 8):
+        g = lambda p, n=n: 0 if p <= 0 else lb[n][p]
+        print('g%d lower bounds:' % n, [lb[n][c] for c in range(1, 33 if n == 8 else 17)])
+        b1 = bound1(n + 1, lambda p, t: g(p))
+        print('  one-cut layering bound for N=%d if g%d equalled these values: m <= %d' % (n + 1, n, b1))
+        if n == 7:
+            print('  two-cut layering bound for N=9 if g7 equalled these values: m <= %d' % bound2(9, g))
+    huang = lambda p, t: 0 if p <= 0 else (99 if p == 1 else 128)
+    print('provable (Huang g8 <= 128, g8(1) = 99): m <=', bound1(9, huang))
+
+
+if __name__ == '__main__':
+    report_lower()
