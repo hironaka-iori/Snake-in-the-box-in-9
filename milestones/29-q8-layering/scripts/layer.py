@@ -140,7 +140,7 @@ def ladder():
     together with the Lean bound a(9) <= 235 (so only m <= 235 has to be excluded)."""
     rows = []
     for X, Y in ((118, 118), (117, 118), (117, 117), (116, 117), (115, 117), (114, 117), (113, 117),
-                 (112, 117), (112, 122), (112, 123)):
+                 (112, 117), (113, 122), (112, 122), (112, 123)):
         g = lambda p, t: 0 if p <= 0 else (X if p <= 13 else (Y if p == 14 else 128))
         rows.append((X, Y, bound1(9, g, mmax=236)))
     return rows
