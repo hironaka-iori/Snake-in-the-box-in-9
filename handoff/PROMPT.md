@@ -73,6 +73,13 @@ compiled to `upper_bound_234`. H9 (5 keys) and F8 (3 keys) certificates were val
   `lean/data/shards7_B234.sha256`) and built as `PROGRESS-B234.md` describes. With plenty of disk you can
   prepare all of them at once and run one guarded build with many heavy jobs (cap about 2.5 GB each); the
   sweeper is only needed when disk is short.
+  **Faster option (shard v2, about 27x):** the same shards checked through witness codes
+  (`work/spectral/stronger/WindowAutomaton7V2.lean`, bridge `check7In_of_W`; propext and Quot.sound
+  only): about 5-6 CPU-hours in all, 11-35 s and about 0.5 GB per shard, `.olean` about 13 % smaller.
+  Build `WindowAutomaton7V2` into `work/spectral/.verification/chain` first, then run the driver with
+  `SHARD_V2=t1` (manifest `lean/data/shards7_B234_v2.sha256`). Same module names and the same theorem
+  `shard7B234_<i>_<t0>`, so nothing downstream changes and v1/v2 shards can be mixed. See
+  `milestones/25-k7-234/lean/README.md`, "Shard v2".
 - **Audit:** `chain_audit.py --target UpperBound234 --log outputs/upper-bound-234-audit-<host>.log --axioms
   Snake9.upper_bound_234 Snake9.verified_interval_191_234`. Write `outputs/upper-bound-234-replay-<host>.log`
   in the style of `outputs/upper-bound-235-replay-linux.log`.

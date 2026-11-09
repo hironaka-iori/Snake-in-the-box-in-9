@@ -19,6 +19,13 @@ fixed on the way. The glue (`allRefuted7L417d_of_parts`, axioms `propext`, `Quot
 **160 CPU-hours** (fit within 3 % on 4 shards) at 0.9–1.2 GB each, or about 140 with 3 declarations
 grouped (2.05 GB). See [the 29 October run](#composition-test-and-glue-29-october).
 
+**Update, 9 November.** Shard v2 (`gen_lean_automaton7.py --shard-v2`): the same 792 shards, checked
+through witness codes that pick one disjunct per transition (`WindowAutomaton7V2`, bridge
+`check7In_of_W`, axioms `propext`, `Quot.sound`). About **27x faster** on three B234 shards measured
+against v1 in the same session (295 → 10.7 s, 718 → 26.7 s, 952 → 34.5 s), about 0.5 GB each and
+13 % smaller `.olean`: about **5-6 CPU-hours** for all 792. Same module names and final theorems. See
+[Shard v2](#shard-v2-witness-driven-checks-9-november).
+
 ## The automaton on the Lean side
 
 The plan of `../README.md` §5 is followed, with three changes:
@@ -55,6 +62,7 @@ Everything else is the plan:
 | `work/spectral/stronger/DirectionWindowBridge7.lean` (core) | `Cover7` (lengths 3..8), `cover7_ok`, **`cover7_rows`** (row by row, each row against one chunk of keys: `rowOK6_mono`, `mem_flatten_getD`), `cover7_spec`; `keysOKH`, `CoverH`, `encB_inj`, `isRGS_lt`, **`coverH_spec`**; `refuted_extend`, **`refuted_dirH`** (7 bounds on a 9-direction window, the 8th interior vertex unconstrained); `window_refute7`, `no_forb_window7` (3..8); `window_refuteH`, **`no_forb_H9`** (by reversal); **`direction_windows_core7`** |
 | `work/spectral/stronger/AggregateDirection7Conditional.lean` (mathlib) | `upper_of_windows7`, **`upper_of_refuted7`** |
 | `scripts/gen_lean_automaton7.py` | keys (`k6`/`F`/`H`), tables, full-product Gauss-Seidel Bellman-Ford with the closed-set skip, decode-and-recheck of every transition, modules: Keys (row-aligned chunks), Data (one potential definition per 8-shape), 792 shards, Sequence (`ShapesCover7` split in 203 prefixes of length 6, each checked per 7th digit: 877 declarations). Shards hold one `decide +kernel` per (label, t1, t2), 1,296 transitions, `check7In2` (default `--split t2`); `--split t1` gives the planned 18,180 declarations of 7,776 transitions |
+| `work/spectral/stronger/WindowAutomaton7V2.lean` (core; written by `scripts/gen_window_automaton7_v2.py`) | shard v2: `check7In2W`/`check7InW`/`check7AtW` (witness-driven, kernel primitives), **`check7In2_of_W`**, **`check7In_of_W`**, **`check7At_of_W`** (`propext`, `Quot.sound`); `gen_lean_automaton7.py --shard-v2 [t1\|t2\|label]`, `--manifest-out`; manifest `data/shards7_B234_v2.sha256` |
 | `scripts/gen_lean_chain7.py` | `DirectionWindowBridge7<T>` (`keysOK6`, `keysOKH`, `CoverH`, the zero checks with length 8 split in 15 prefixes, one declaration per nonzero row, `Windows7`) and `AggregateDirection7<T>` (`upper_<N>_of_refuted7<T>`) |
 | `work/final_lean/LocalWindowDirGlue7.lean` (core) | `AllRefutedSrcs.flatten` (all-refuted chunks give an all-refuted flattened list), `AllRefutedSrcs.cons'`/`nil'`, `allRefutedSrcs_four` |
 | `scripts/gen_lean_glue7.py` | `keys`: `LocalWindowDirKeysK7` (+ `_P<i>`), the new keys (in none of `dirKeysR4b`, `dirKeysR4`, `dirKeysK6`) in 93 chunks of 400, `AllRefutedK7 = AllRefutedSrcs dirChunksK7` (`--noncomputable`: `noncomputable def`, 15 times smaller oleans); `glue`: `LocalWindowDirGlue7<T>`; `reuse`: the three modules below that replace the old aggregates; `final [--reuse]`: `UpperBound<N>` |
@@ -371,6 +379,169 @@ shards are compiled into `work/final_lean/.lake/build/lib/lean`.
 The disk model of `../certify/README.md` (23.7 kB + 1.33 kB per `decide`) predicts 218 kB for these
 shards and **167 MB** for all 792 (111,366 `decide`s), without `.ilean`.
 
+## Shard v2: witness-driven checks (9 November)
+
+Study of 9 November 2026 on one core (`nice -n 10`, one `lean` at a time, every module compiled with
+`lean -o` into a scratch directory listed first in `LEAN_PATH`, two other agents on the other cores, so
+the CPU times are upper bounds). No existing module or `.olean` was touched; the 18 built B234 shards
+were only read.
+
+**Result.** `gen_lean_automaton7.py --shard-v2` writes shards that check **about 27 times faster**
+(11-35 s instead of 5-16 min per shard; about **5-6 CPU-hours instead of about 160** for the 792
+shards) at 0.21-0.24 GB of anonymous memory instead of about 1 GB, with about 13 % smaller `.olean`
+files. They keep the module names and the final theorem `shard7<T>_<i>_<t0>` with the same statement,
+so the Sequence module, the aggregate and `UpperBound234` are unchanged, and v1 and v2 shards can be
+mixed (the 18 built v1 shards stay valid).
+
+### Where the time of a v1 shard goes
+
+Single-theorem probes (`decide +kernel` of one part of `check7In2` over the 1,296 transitions of one
+declaration: shard (3, 6), label 0, t1 = 1, t2 = 2; timestamps between theorems), in ms per
+evaluation:
+
+| part | ms | note |
+|---|---|---|
+| whole `check7In2` | 3.9 per transition | 5.0 s per declaration |
+| H9 lookup `wforbH` | **4.5** | key `encB 9 (canon ds.reverse ++ syms.reverse)`: 1.9; `NTree.mem` on the spine: 2.4 (one balanced 400-key subtree alone: 1.6) |
+| one k6/F8 window `wforb6` (both orientations), 3 to 8 directions | 0.04, 0.11, 0.66, 0.95, 1.07, 1.23 | one orientation of the 8-direction window: 0.51 |
+| own windows `own7` (per source state) | 1.9 | |
+| step inequality | 0.64 | two `pot7`, the `cntIdx6` list recursion dominates |
+| `bif` tree lookups (`wIdx`, `forb`, `pIdx`, potential rows) with a varying key | 0.02 | cheap: they are not the cost |
+| `canon` of a varying 7-list | 1.1 | constant ones are cached by the kernel |
+| `symIdx` of 6 counts | 0.34 | list recursion (structural recursion through `brecOn`) |
+| 8 arithmetic operations on small literals | 0.06 | |
+
+So the kernel time is list recursion (`symIdx`, `cntIdx6`, `List.reverse`, `encB`, `canon`) and the
+H9 tree walk, not arithmetic and not the `bif` lookups. The checker evaluates the disjunction in its
+order: for every allowed transition all 12 window lookups, the H9 lookup and the inequality, about
+10 ms. In shard (3, 6), 29,204 of the 41,916 transitions of live source states satisfy the
+inequality (only 7 need H9), and they account for almost all of its 295 s.
+
+### The v2 check
+
+`work/spectral/stronger/WindowAutomaton7V2.lean` (core Lean, imports `WindowAutomaton7Defs`; written
+by `scripts/gen_window_automaton7_v2.py`):
+
+- **Witness codes.** `check7In2W T c t0 t1 t2 ws wt` has the loops of `check7In2`, but evaluates
+  ONE disjunct per source state and per transition, chosen by 4-bit codes in two literals: per source
+  state `(t3, t4, t5)` (216 fields of `ws`) 0 = its transitions, or one of its 10 own windows; per
+  transition (1,296 fields of `wt`) 0 = the step inequality, 1..12 = one of the 12 k6/F8 windows
+  ending at the new vertex, 13 = H9. A code only selects a disjunct (`bsel4`), so a wrong code makes
+  the check fail and can never make it pass. No search, no negative lookup: an allowed transition costs
+  one inequality.
+- **No list recursion.** The selected disjuncts are written with the kernel's GMP primitives
+  (`Nat.add`, `Nat.mul`, `Nat.sub`, `Nat.shiftRight`, `Nat.land`, `Nat.beq`, `Nat.ble`): `fb7` is the
+  body of `forbBit6` with the `symIdx` arithmetic unfolded (and the reversed count list written out),
+  `ineq7F` is the inequality with the `cntIdx6` arithmetic unfolded and the two potential rows of the
+  declaration `let`-bound. The table lookups (`T.wIdx`, `T.forb`, `T.pIdx`, `T.pot`) are those of
+  `tables7<T>`; only the H9 disjunct still calls `wforbH` (at most 7 times per shard).
+- **Soundness.** `check7In2_of_W : check7In2W T c t0 t1 t2 ws wt = true → check7In2 T c t0 t1 t2 =
+  true` for every table, window and codes; `check7In_of_W` and `check7At_of_W` for the grouped forms
+  `check7InW` (one `t1`, 6 blocks) and `check7AtW` (one label, 36 blocks). The proof: `bsel4_sound`
+  (the selected Boolean is one of the 16), `fb7_eq` with `symIdx_eq1..6` (each selected window is the
+  corresponding `wforbA6` disjunct of `wforb6`), `ineq7F_sound` (with `cntIdx4_eq`, equal to the
+  inequality of `check7In2`), `src7F_sound` (`own7`), then `allSym_spec`/`allSym_of_forall`. Axioms:
+  `propext`, `Quot.sound`. So the kernel still checks, for every transition of the shard, either its
+  inequality or one window that excludes it or one own window that excludes its source state.
+- **Generator** (`--shard-v2 [label|t1|t2]`, with `--split t2`): `shard_witness` computes the codes
+  with numpy from the decoded tables and potential (the same ones the Python re-check uses) and
+  asserts that every transition of a live source state with a failing inequality has a window; dead
+  source states always take their own window (one lookup instead of six inequalities). Without the
+  flag the output is byte-identical to the manifest `data/shards7_B234.sha256`.
+
+### Measurements
+
+All runs on one core next to two other agents, CPU seconds of the whole `lean` run (`wait4`; import
+of the data module included), peak RSS with the anonymous part in brackets. v1 and v2 were measured in
+the same session. A transition is one (source state, s) pair of a `check7In2` block, 6^4 per
+(label, t1, t2): 93,312, 186,624 and 279,936 in the three shards.
+
+| shard | labels | v1 (`check7In2`, 36 `decide`s per label) | **v2, `--shard-v2` (t1, default)** | speed-up | v1 ms/transition | v2 ms/transition |
+|---|---|---|---|---|---|---|
+| (3, 6) | 2 | 295.4 s, 1.01 GB, 124.6 kB | **10.7 s**, 0.45 GB (0.21), 110.6 kB | **27.5x** | 3.17 | 0.115 |
+| (0, 1) | 4 | 718.0 s, 1.24 GB, 217.2 kB | **26.7 s**, 0.46 GB (0.22), 189.1 kB | **26.9x** | 3.85 | 0.143 |
+| (95, 2) | 6 | 952.4 s, 1.16 GB (0.92), 312.8 kB | **34.5 s**, 0.48 GB (0.24), 270.7 kB | **27.6x** | 3.40 | 0.123 |
+| (100, 1) | 2 | 274-289 s (production log, 3 jobs) | 12.7 s, 0.45 GB (0.21), 110.6 kB | about 22x | | |
+| (101, 1) | 5 | 705-723 s (production log, 3 jobs) | 30.8 s, 0.48 GB (0.24), 229.8 kB | about 23x | | |
+
+Repeated runs differ by up to 10 % (95_2: 34.5 and 37.1 s). Every v2 shard theorem depends on
+`propext` and `Quot.sound` only.
+
+**Declaration size** (same witnesses, raw `nat_lit` literals):
+
+| one `decide +kernel` per | check | (3, 6) | (95, 2) | anonymous memory |
+|---|---|---|---|---|
+| (label, t1, t2), 1,296 transitions | `check7In2W` | 12.3 s, 202 kB | 40.9 s, 545 kB | 0.10-0.13 GB |
+| **(label, t1), 7,776 transitions** | **`check7InW`** | **10.7 s, 111 kB** | **34.5 s, 271 kB** | **0.21-0.24 GB** |
+| label, 46,656 transitions | `check7AtW` | 13.8 s, 88 kB | 40.9 s, 204 kB | 0.99-1.12 GB |
+
+`--shard-v2` defaults to (label, t1); `--shard-v2 label` gives the smallest `.olean` (about 35 % below
+v1) at about 1.1 GB.
+
+**Projection for the 792 shards.** The v2 times fit `0.5 s + 5.9 s x induced labels` (5 shards, within
+8 %). With 3,030 (shard, induced label) pairs this is **about 5.1 CPU-hours**, or about 5.9 with the
+measured 27x applied to the 159 CPU-hours of the v1 fit; 1.7-2 hours of wall time with 3 jobs.
+`.olean`: about 0.87 of v1, so about 145 MB instead of 167 MB. Sources: 115-340 kB per shard (v1:
+16-46 kB), deleted by the sweeper after the build as before.
+
+### Ideas tried
+
+Probes on shard (3, 6), label 0, (t1, t2) = (6, 6), ms per evaluation in the v2 setting:
+inequality 0.11, decoding a code 0.06, dispatch and decoding 0.13, one selected window 0.10, H9 5.6
+(used at most 7 times per shard). One declaration of v2 took 0.17-0.23 s against 3.6-5.8 s for v1.
+
+| idea of the task | what was done | speed-up | soundness |
+|---|---|---|---|
+| per-state transition lists as packed literals | not needed: the window shapes and their codes (`canon`, `shapeCode`, `wIdx`) of a declaration are constant terms that the kernel caches; what costs is evaluating disjuncts that are false | — | — |
+| forbidden-transition bitmask / membership certificate | **the witness codes**: per transition the index of the window that excludes it (or 0 = inequality, 13 = H9), per source state its own window; the kernel only evaluates the selected disjunct, never searches and never proves a lookup negative | **about 7.5x** alone (three declarations: 0.45-0.75 s against 3.5-5.5 s for v1) | any code selects one disjunct of the original check (`bsel4_sound`), so a wrong witness fails the check |
+| kernel primitives instead of instance arithmetic, `cntIdx6`/`symIdx` unfolded | `Nat.add`/`Nat.mul`/`Nat.shiftRight`/`Nat.land`/`Nat.beq`/`Nat.ble` written directly; dispatch on bits with `Nat.land`/`Nat.beq` instead of `!=`; code 0 tested first | about 3x on top (0.17-0.23 s per declaration); dispatch 0.42 → 0.13 ms, inequality 0.25 → 0.11 ms | `fb7_eq`, `symIdx_eq*`, `cntIdx4_eq`, `nat_beq_eq`, `nat_ble_eq` |
+| one packed potential literal per shard | not needed: the two potential rows of a declaration are `let`-bound in `check7In2W` and read once (cached); a lookup in the `bif` trees costs 0.02 ms | — | the rows are `T.pot` itself |
+| larger declarations | (label, t1): −15 % time, −50 % `.olean` against (label, t1, t2); per label: slower and 1.1 GB; 36 checks as one `&&` (v1 style grouping): 31 s and 325 kB for (3, 6), worse | 1.15x | `check7In_of_W`, `check7At_of_W` |
+| witness literals in separate `noncomputable def`s | 299 kB instead of 227 kB for (3, 6), worse; raw `nat_lit` literals instead: 227 → 202 kB | — | — |
+
+### Composition test
+
+The five v2 shards above (scratch `.olean`, first in `LEAN_PATH`, so for (0, 1), (100, 1) and (101, 1)
+they shadow the built v1 shards), the 15 other built v1 shards (read only) and 772 scratch `sorry`
+stubs of the remaining shards (121 s in all); the certificates `LocalWindowDirUnsatK7` and
+`LocalWindowDirUnsatReuse7B234` were `sorry` stubs too. Everything else was compiled from the committed
+sources into the scratch directory; all of it was deleted afterwards (36 MB).
+
+| module | time | memory | result |
+|---|---|---|---|
+| `LocalWindowDirKeys7B234_P0…P2`, `LocalWindowDirKeys7B234` | 28-33 s each | 0.52-0.66 GB | — |
+| `WindowAutomaton7B234Sequence` (792 shard imports, v1, v2 and stubs) | 245 s | 1.96 GB (1.70) | `stepOK7B234`: `sorryAx` only through the stubs |
+| `DirectionWindowBridge7B234` | 525 s | 1.53 GB (1.16) | `windows7B234`, `cover7B234`: the standard three; `coverH7B234`: `propext`, `Quot.sound` |
+| `AggregateDirection7B234` | 10 s | 2.66 GB (0.21) | `upper_234_of_refuted7B234`: `sorryAx` only through the stubs |
+| `LocalWindowDirGlue7`, `LocalWindowDirKeysK7_P0…P2`, `LocalWindowDirKeysK7`, `LocalWindowDirKeysReuse7B234` | 0.2-36 s each | ≤ 0.66 GB | — |
+| `LocalWindowDirGlue7B234Reuse` | 50 s | 0.82 GB (0.48) | `allRefuted7B234_of_reuse`: `propext`, `Quot.sound` |
+| `UpperBound234` | 3 s | 2.68 GB (0.22) | **`upper_bound_234`, `verified_interval_191_234`: `sorryAx` only through the stubs** |
+
+Exactly the 774 stub modules printed `declaration uses 'sorry'`; every v2 shard theorem
+`shard7B234_<i>_<t0>` depends on `propext` and `Quot.sound` only. So the v2 shards drop into the chain
+unchanged.
+
+### Production
+
+1. Build `WindowAutomaton7V2` into `work/spectral/.verification/chain` next to `WindowAutomaton7Defs`
+   (core Lean, 1-2 s; no `chain_audit.py` target imports it, because the shards are core leaves), e.g.
+   `python3 work/spectral/chain_audit.py --mathlib-dir <mathlib> --target WindowAutomaton7V2 --log
+   outputs/window-automaton7-v2-<host>.log --axioms Snake9.WindowAutomaton.check7At_of_W
+   Snake9.WindowAutomaton.check7In_of_W`.
+2. Shards: `SHARD_V2=t1 milestones/25-k7-234/lean/scripts/build_shards7.sh` (the driver passes
+   `--shard-v2 t1` to `shard_build7.py prepare`, which checks every source against
+   `data/shards7_B234_v2.sha256`). The manifest was written with `gen_lean_automaton7.py --shard-v2
+   --manifest-out` (no module written); its data-module line is the v1 one. Shards whose `.olean`
+   exists (v1 or v2) are skipped. With about 0.5 GB per shard, the RSS cap can drop to 1 GB and the
+   heavy jobs can go up to the core count.
+3. Nothing after the shards changes: the Sequence, `AggregateDirection7B234` and `UpperBound234` only
+   use the theorems `shard7B234_<i>_<t0>`.
+
+Files: `work/spectral/stronger/WindowAutomaton7V2.lean` (new), `scripts/gen_window_automaton7_v2.py`
+(writes it), `scripts/gen_lean_automaton7.py` (`--shard-v2 [t1|t2|label]`, `--manifest-out`),
+`scripts/shard_build7.py` (`prepare --shard-v2`), `scripts/build_shards7.sh` (`SHARD_V2`, `MAN`),
+`data/shards7_B234_v2.sha256`.
+
 ## What remains for a real k7 chain
 
 This list was written for L417d. For the final set B234 the figures are 9,784 new keys and
@@ -381,6 +552,7 @@ This list was written for L417d. For the final set B234 the figures are 9,784 ne
    about 34 G hints. The disk requirement (`../README.md`) is the blocker. They must end in a
    module `LocalWindowDirUnsatK7` with `allRefutedK7 : AllRefutedK7`.
 2. **The 792 shards:** about 160 CPU-hours at 0.9–1.2 GB each (or about 140 with triples).
+   *(9 November: with shard v2, about 5-6 CPU-hours at about 0.5 GB each; see "Shard v2".)*
    - Possible speed-ups, none tried:
      - a balanced skeleton for the H9 spine, instead of a walk of up to 44 nodes;
      - fewer window lookups per transition. The six k6/F8 lookups in both orientations dominate.
