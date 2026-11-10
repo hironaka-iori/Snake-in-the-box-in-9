@@ -1,25 +1,35 @@
 import LocalWindowTags
 
 /-!
-# Clause soundness with a flat meaning table (Sat v2)
+# Clause soundness with flat tables and a kernel-native checker (Sat v2)
 
 A new checker family for the clause-soundness modules, next to `Tags.checkAll`
-(`LocalWindowTags`), which stays unchanged for the existing certificates.  The checker and its
-soundness proof are those of `LocalWindowTags`, with two changes:
+(`LocalWindowTags`), which stays unchanged for the existing certificates (235-237 depend on it).
+Writer: `milestones/10-window-aggregate/scripts/gen_lean_cnfsat_packed.py --sat-v2`; measurements
+in `milestones/26-replay-efficiency/README.md`, "Sat v2".  Three layers:
 
-* **The meaning tree is a function.**  Every definition takes `M : Nat → MT` (the meaning of a
-  variable) where `Tags` takes a tree `M : MT` and looks variables up with `MT.get`.  A
-  certificate passes `getF T W cw iw`: entry `x` is the `W`-bit field of the single numeral `T`
-  at bit `x * W`, read by one shift and one mask (GMP operations in the kernel).  The lookups by
-  structural recursion on the tree were most of the kernel time of `Tags.checkAll`
-  (`milestones/26-replay-efficiency/README.md`, "Sat v2").
-* **The endpoint order is checked on adjacent entries** (`pwL`, linear), as `ctrOKL` of
-  `LocalWindowTagsSplit` does, instead of on all pairs (`pw`).
+1. **`checkAll`, `sound`**: the checker and the soundness proof of `LocalWindowTags`, copied
+   with one change of representation: every definition takes the meanings as a function
+   `M : Nat → MT` where `Tags` takes a tree `M : MT` read by `MT.get` (`M.get x` became `M x`).
+   The endpoint order of `ctrOK` is checked on adjacent entries (`pwL`, linear) instead of on
+   all pairs, as `ctrOKL` of `LocalWindowTagsSplit` does.  A certificate passes
+   `getF T W cw iw`: entry `x` is the `W`-bit field of the numeral `T` at bit `x * W`, one shift
+   and one mask in the kernel (GMP), where `MT.get` took a structural recursion per lookup.
+2. **`checkAllK`, `soundK`**: the same Bool computed with `Nat.beq`, `Nat.ble`, `Nat.blt`,
+   `List.rec` and `Bool.rec` directly, an explicit neighbour list (`nbrsK`) and no instances or
+   equation compilers in the evaluated terms.  `checkAllK_eq` proves `checkAllK = checkAll` for
+   all arguments.
+3. **`checkAllT`, `soundT`**: `checkAllK` with literal `i` of counter `c` read from a table
+   `CT c i` (`ctrTab`) instead of walking the counter's list, and the table checked against the
+   counters once, in one pass (`agreeC`).  `ckAllT_eq` proves it equal to `ckAllK` under
+   `agreeC`.
 
-`sound` holds for every `M : Nat → MT`, counter list and tag list that `checkAll` accepts, so the
-decoder `getF` needs no proof: a wrong table can only make a kernel check fail.  The assignment
-is `tau S E M cs`, as in `Tags` with `M.get` replaced by `M`.  The data types (`MT`, `Ctr`,
-`Tag`) and the kernel-friendly centres (`centresK`) are those of `Tags`.
+`sound`, `soundK` and `soundT` hold for every `M : Nat → MT`, counter table, counter list and tag
+list that the checker accepts, so the decoders `getF` and `ctrTab` need no proofs: a wrong table
+can only make a kernel check fail.  The assignment is `tau S E M cs` (that of `Tags` with
+`M.get` replaced by `M`), and `sat : ∀ S E, Axioms … → ∃ τ, cnfTrue τ cnf = true` has the
+statement of the existing modules, so `Tags.refuted_of_sat` and everything downstream are
+unchanged.  The data types (`MT`, `Ctr`, `Tag`) and `centresK` are those of `Tags`.
 -/
 
 namespace Snake9.LocalWindow.TagsW

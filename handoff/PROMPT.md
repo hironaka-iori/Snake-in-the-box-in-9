@@ -53,6 +53,13 @@ compiled to `upper_bound_234`; with all 792 real v2 shards (not stubs) the condi
   1. `gen_k7_core.py run --keys $K --plan $P` to the end. It certifies the seeds with their widened
      bounds, then any *orphan* (a key its certified seed no longer implies) on its own; report the
      number of orphans.
+     **Faster option (Sat v2):** add `--sat-v2` (to `run`, or `gen_k7_core.py cnfsat --sat-v2` to rewrite
+     existing core modules). The clause soundness is then checked by `TagsW.checkAllT`
+     (`work/final_lean/LocalWindowTagsW.lean`; build it in step 0, `--direct`): 4.5-6x less CPU and
+     0.6-0.8 GB instead of 1.2-2.6 GB per module, about 5-6 instead of 29 CPU-hours for the 234 run,
+     8-12 kB more `.olean` per module. Same module names and the same `sat` statement, so replays and
+     chunk modules are unchanged. Validated end to end on a k6, an H9 and an F8 window (standard
+     axioms); see `milestones/26-replay-efficiency/README.md`, "Sat v2".
   2. `replay_k7.py gen --plan $P` (packed encodings, `--part-lits` for large H9/F8 cores, 8 seeds x 5
      rounds) and `replay_k7.py build`.
      **Faster option:** `replay_k7.py gen --checker v3 --plan $P` writes the replays for the checker v3

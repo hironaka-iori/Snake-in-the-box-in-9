@@ -45,6 +45,15 @@ kernel caches (`work/final_lean/LocalWindowTagsSplit.lean`): `check_ctrs` checks
 the core clauses in consecutive parts of at most N literals (`raw = raw_0 ++ (raw_1 ++ …)`,
 `tags` likewise); `checkAll_of_parts` and `ckAll_append` give `check`.  The names and the
 statements of `raw`, `cnf`, `tags`, `check` and `sat` are those of the default layout.
+
+--sat-v2 (a new path, milestones/26-replay-efficiency/README.md, "Sat v2"; without it the output is
+unchanged) proves the clause soundness with the checker family `TagsW` of
+`work/final_lean/LocalWindowTagsW.lean` instead of `Tags.checkAll`: `meaning : Nat → MT` is a flat
+table (`mtab`, one field per variable, `TagsW.getF`), the counter literals are a second table
+(`ctab`, `TagsW.ctrTab`), and `check : TagsW.checkAllT meaning ctl ctrs window bounds tags raw = true`
+is the kernel-native checker (`TagsW.soundT`).  `raw`, `cnf`, `ctrs`, `tags` and the statement of
+`sat` are unchanged, so the replays and `Tags.refuted_of_sat` are too.  With --part-lits the parts
+are `check_agree` (the counter table), `check_ctrs` and `check_<i>` (`TagsW.ckAllT`).
 """
 import argparse, json, os, sys
 
@@ -477,6 +486,13 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False, par
                       '%d part(s) of at most %d literals (`check_<i>`), combined by `checkAll_of_parts` and\n'
                       '`ckAll_append` (`LocalWindowTagsSplit`).  The data are packed (`LocalWindowCnfPack`). -/'
                       % (len(parts) + 1, len(parts), part_lits))
+        if sat_v2:
+            doc = head + ('\n`sat`: every clause of the core follows from the snake axioms (`TagsW.soundT`,\n'
+                          '`LocalWindowTagsW`).  `check` is proved in %d kernel evaluations: the counter table\n'
+                          '(`check_agree`), the counters (`check_ctrs`) and the clauses in %d part(s) of at most %d\n'
+                          'literals (`check_<i>`), combined by `TagsW.checkAllT_of_parts` and `TagsW.ckAllT_append`.\n'
+                          'The data are packed (`LocalWindowCnfPack`, `TagsW.getF`, `TagsW.ctrTab`). -/'
+                          % (len(parts) + 2, len(parts), part_lits))
         files['LocalWindowCnf'] = '\n'.join(imports + ['', doc, ''] + opt +
                                             ['namespace ' + ns, '', 'open Snake9.LocalWindow.Tags', ''] +
                                             cnf_defs + sat_defs + ['end ' + ns, ''])
@@ -492,6 +508,10 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False, par
     else:
         doc = head + ('\n`sat`: every clause of the core follows from the snake axioms (`Tags.sound`, one kernel\n'
                       'evaluation of `checkAll`).  The data are packed (`LocalWindowCnfPack`). -/')
+        if sat_v2:
+            doc = head + ('\n`sat`: every clause of the core follows from the snake axioms (`TagsW.soundT`, one kernel\n'
+                          'evaluation of `TagsW.checkAllT`, `LocalWindowTagsW`).  The data are packed\n'
+                          '(`LocalWindowCnfPack`, `TagsW.getF`, `TagsW.ctrTab`). -/')
         files['LocalWindowCnf'] = '\n'.join(imports + ['', doc, ''] +
                                             opt + ['namespace ' + ns, '', 'open Snake9.LocalWindow.Tags', ''] +
                                             cnf_defs + sat_defs + ['end ' + ns, ''])

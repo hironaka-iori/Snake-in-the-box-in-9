@@ -4,6 +4,10 @@
 [Checker v3](#checker-v3-9-november-no-clause-database-about-2x-less-kernel-time)) halves the kernel
 time per hint of the packed replays.*
 
+*Update, 10 November: Sat v2 (`work/final_lean/LocalWindowTagsW.lean`, `gen_lean_cnfsat_packed.py
+--sat-v2`, section [Sat v2](#sat-v2-10-november-clause-soundness-45-6x-faster-2-3x-less-memory))
+makes the clause-soundness modules 4.5-6x faster with 2-3x less memory.*
+
 Study of 29 October 2026, about 4 h on one core (`nice -n 15`, every Lean process under a 2.9 GB
 RSS guard, next to another agent's jobs on the other 3 cores). Nothing was deployed. No existing
 module, `.olean` or `LocalWindowUnsat/` file was touched. Every test module was compiled with
@@ -539,6 +543,136 @@ python3 milestones/26-replay-efficiency/scripts/gen_lean_lrat_v3.py --work DIR -
 - **Pitfall.** A scratch `LEAN_PATH` entry that contains a `LocalWindowCnf/` directory hides the
   production `LocalWindowCnf/*.olean`, even when the module wanted is not in it.
 
+## Sat v2 (10 November): clause soundness 4.5-6x faster, 2-3x less memory
+
+Study of 10 November 2026, about 1 h on one core (`nice -n 15`, every `lean` under the 2.9 GB guard
+of `scripts/measure.py`, three other agents on the machine). Everything was compiled with `lean -o`
+into a scratch directory listed first in `LEAN_PATH` and deleted afterwards. No existing checker,
+decoder, `.olean` or `LocalWindowCnf/`/`LocalWindowSat/` file was touched: `Tags.checkAll`,
+`Tags.sound`, `mtB`, `mtS`, `tagsOf` and the default output of the generators are unchanged
+(checked byte for byte for the default, `--split` and `--part-lits` layouts). Every row is in
+`data/satv2_runs.jsonl`.
+
+**Result.** A new checker family `work/final_lean/LocalWindowTagsW.lean` (namespace `TagsW`) and the
+generator option `gen_lean_cnfsat_packed.py --sat-v2` (also `gen_k7_core.py run|cnfsat --sat-v2`).
+The module keeps its name and the statements of `raw`, `cnf`, `ctrs`, `tags` and `sat`, so the
+replays (packed or v3) and `Tags.refuted_of_sat` are unchanged.
+
+| core | kind | clauses / literals | production (`Tags.checkAll`): CPU, RSS, `.olean` | **`--sat-v2`**: CPU, RSS, `.olean` | speed-up |
+|---|---|---|---|---|---|
+| K012340A26336 | k6 | 1,968 / 7,558 | 22.75 s, 2.60 GB, 56.9 kB | **3.67 s, 0.80 GB**, 64.7 kB | **6.2x** |
+| K7012031041A2555246 | H9 (`--part-lits 4000`) | 1,032 / 2,807 | 7.95 s, 1.16 GB, 50.9 kB | **1.75 s, 0.59 GB**, 62.0 kB | **4.5x** |
+| K701203104A6325635 | F8 (`--part-lits 4000`) | 2,805 / 10,677 | 18.77 s, 1.41 GB, 77.0 kB | **3.98 s, 0.62 GB**, 89.1 kB | **4.7x** |
+| **total** | | | 49.5 s | **9.4 s** | **5.3x** |
+
+CPU is the whole `lean` run (imports, elaboration and kernel), the mean of 2 runs for production
+and 4 (k6, H9) or 3 (F8) for v2; single runs vary by about ±15 %. At these rates the Sat/Cnf modules
+of the 234 run (about 29 CPU-hours) need about 5-6 CPU-hours, and every one fits in 0.6-0.8 GB
+instead of 2.0-2.6 GB, so 3-4 times as many run side by side. The `.olean` grows by 8-12 kB per
+module (the flat tables), about +0.4 GB over 37 k windows.
+
+**End to end.** On all three windows the replay `LocalWindowUnsat.<M>` compiled against the v2 module
+(packed checker for K012340A26336, `LratV3` for the K7 cores: 20.3 s, 0.7 s, 27.5 s), and so did
+`Tags.refuted_of_sat <M>.sat <M>.unsat : Refuted <M>.window <M>.bounds`. `#print axioms` gives
+`propext`, `Classical.choice`, `Quot.sound` for every `sat` and every `refuted`.
+
+### Where the time goes in `Tags.checkAll`
+
+Single-theorem probes (`decide +kernel` of parts of `check` on the data of the compiled module,
+`set_option profiler true`, kernel seconds; each probe pays the decoding again):
+
+| part (K012340A26336) | production | on the flat table |
+|---|---|---|
+| decoding `raw`, `tags`, `ctrs` (`zip` and lengths) | 0.66 | 0.5 |
+| traversal of the 7,558 core literals, no lookup (with decoding) | 1.95 | 1.95 (generic `List.all`); 0.62 with `allK` (F8 core, 10,677 literals) |
+| the same with a meaning lookup per literal (1,253 distinct variables) | 7.45 | 1.37-1.84 (the lookup is free) |
+| counters (`ctrOK`) | 7.4, of which ≈ 6.1 the quadratic endpoint order (`pw`); `ctrOKL`: 1.31 | 0.43 (`TagsW.ctrOK`); `ctrOKK` 0.31 on the F8 core |
+| all clause checks (`ckAll`) | 12.2 | ≈ 2.5 for all of `check` with `checkAllT` (module CPU minus imports) |
+
+- **Meaning lookups.** `MT.get` is a structural recursion on a tree of depth 12-13, and the tree is
+  itself decoded lazily from `mtS`. That costs about 5 ms per distinct variable. A field of one
+  numeral (`Nat.shiftRight` and `Nat.land`, GMP in the kernel) costs nothing measurable: the
+  probes with and without the lookup take the same time.
+- **Counters.** 6 of the 7.4 s are the all-pairs order check of the endpoint counter (286-348
+  literals). `ctrOKL` (adjacent pairs) was already used by the `--part-lits` path of the H9 windows.
+- **Clause comparisons.** What is left is the generic machinery: `List.contains`, `==` on lists,
+  `decide (a ≤ b)`, `List.range`, equation compilers. In the kernel every such step is an
+  unfolding through instances. Micro-probes on 500 vertices: `nbrs v` 1.2 ms against 0.6 ms
+  written out; the neighbour count of a cut clause (`cnt` of `contains` over `nbrs`) 7 ms
+  against 0.6 ms with `Nat.beq`, `List.rec` and `Bool.rec`. Per family (F8 core, generic checker
+  on the flat table): a cut clause 40 ms, a `lowEnd` clause 6 ms, a `deg2` clause 2 ms.
+- **Tag decoding** is under 0.3 s on every core.
+- **Share core** (main's share floor 7300, `Tags.checkAllS`, in main's layout of `Structure` plus 41
+  shard modules): `ctrOK` 8.5 s and `totOK` 7.9 s (`Structure`, 16.8 s and 1.79 GB), and the 41
+  clause shards 59.4 s (about 0.5 s of kernel each, the rest imports).
+
+### The checker family `TagsW`
+
+1. **`checkAll`, `sound`** (`LocalWindowTags` with one change of representation): every definition
+   takes `M : Nat → MT`, where `Tags` takes a tree read by `MT.get`. The text of the checker and
+   of its soundness proof is that of `LocalWindowTags` with `M.get x` replaced by `M x`; only the
+   endpoint order becomes `pwL` (adjacent entries, with `pw_of_pwL`). A certificate passes
+   `getF mtab W cw iw`: field `x` of `W` bits of one numeral, with the leaf codes of `mtS`; unused
+   variables are `0` (`.z`).
+2. **`checkAllK`, `soundK`**: the same Bool written for the kernel: `Nat.beq`, `Nat.ble`, `Nat.blt`,
+   `Nat.mod`, `Nat.div`, `List.rec`, `Bool.rec`, and the neighbour list written out (`nbrsK`).
+   `checkAllK_eq : checkAllK M cs w b tags raw = checkAll M cs w b tags raw` for all arguments,
+   from one equation per primitive (`allK_eq`, `memK_eq`, `sublK_eq`, `eqMapK_iff`, `cntK_eq`,
+   `eraseK_eq`, `getK_eq`, `pwLK_eq`, …) and per family (`ckCutK_eq`, …, `ctrOKK_eq`).
+3. **`checkAllT`, `soundT`**: literal `i` of counter `c` is read from a table (`ctrTab ctab w offs`)
+   instead of by walking the decoded list (up to 348 steps per counter clause). `agreeC` checks the
+   table against `ctrs` in one pass, and under it `ckAllT_eq : ckAllT = ckAllK`.
+
+**Soundness by construction.** `sound`, `soundK`, `soundT` hold for every lookup function, counter
+table, counter list and tag list that the checker accepts. So the decoders `getF` and `ctrTab`,
+like `CnfPack`, need no proofs: a wrong table can only make a kernel check fail. The generator still
+checks every table against a Python mirror. `sat` is `⟨TagsW.tau S E meaning ctrs, TagsW.soundT …⟩`;
+`TagsW.tau` is `Tags.tau` with `M.get` replaced by `M`. Everything is proved with `propext`,
+`Classical.choice`, `Quot.sound` (`#print axioms TagsW.soundT`).
+
+### Ideas tried
+
+| idea | measured (K012340A26336 unless noted) | soundness | kept |
+|---|---|---|---|
+| linear endpoint order alone (production checker, `--part-lits 100000`: `ctrOKL`, two declarations) | 22.75 → 14.18 s, 2.60 → 1.74 GB | existing (`LocalWindowTagsSplit`) | in `TagsW` |
+| **flat meaning table** + linear order (`TagsW.checkAll`) | 8.83 s, 1.33 GB (2.6x); H9 3.17 s (2.5x), F8 10.25 s (1.9x) | proved (layer 1) | yes |
+| **kernel-native checker** (`checkAllK`) | 3.52 s, 0.82 GB; H9 1.62 s, F8 4.31 s | proved equal (layer 2) | yes |
+| **counter literals from a table**, one linear agreement pass (`checkAllT`) | 3.3-4.0 s (within noise); H9 1.56-2.1 s; F8 4.31 → 3.67-4.33 s (up to 15 %), +2-6 kB `.olean` | proved (layer 3) | yes (`--sat-v2`) |
+| split into declarations (`--sat-v2 --part-lits 2000`) | 2.76 s, **0.56 GB**, but 74.6 kB `.olean` (+10 kB) | as `ckAllT_append` | option; 4000 for H9/F8 as before |
+| per-clause witnesses (rule and table entries shipped with each clause) | not built: after layer 2 a clause costs about 0.3-0.5 ms of kernel time, and the remaining searches (`memK` in a 9-element list, `sublK` against `nbrsK`) cost about as much as checking a shipped position would | — | no |
+| **share checker** `TagsSW` (`work/final_lean/LocalWindowTagsSW.lean`): `LocalWindowTagsShare` over two lookup functions, old families by `ckClauseK`, counters by `ctrOKK`; share families and `totOK` generic | floor 7300: `Structure` 16.82 s / 1.79 GB → 3.04-3.38 s / 0.78 GB; 41 shards 59.4 → 21.5 s; all 41 shard theorems in one module 11.6 s / 0.61 GB. **76.2 → 24.5 s (3.1x)** in main's layout | proved (`TagsSW.soundS`, standard axioms) | library only: no generator writes share Sat modules on this branch |
+
+The share end to end: `TagsSW.checkAllS` of floor 7300 composed from the shards
+(`TagsSW.ckAllS_append`, `TagsSW.checkAllS_of_parts`), its `sat`, and
+`Tags.refutedShare_of_sat sat unsat : RefutedShare window bounds resolution cap` with main's replay
+`LocalWindowUnsat.ShareWindow7300` (read from the `.olean` built by the floors port; not copied)
+compiled with the standard axioms. The data module was converted by
+`scripts/satv2_convert_share.py`. A future generator of the 490 paid share thresholds of the 233
+plan (milestone 31) can use `TagsSW` the same way; a kernel-native `totOK` and share families
+(as layer 2) were not written.
+
+### Use
+
+```sh
+# library (no lakefile entry needed; like LratV3, built with --direct)
+cd work/final_lean
+nice -n 19 python3 ../guarded_lake_build.py --direct --trust-mtime --jobs 1 LocalWindowTagsW
+cd ../..
+# k6 cores
+python3 milestones/10-window-aggregate/scripts/gen_lean_cnfsat_packed.py --certs $S/certs \
+  --core milestones/10-window-aggregate/data/lean_core_direction_k6 --out $S/src --sat-v2 NAME
+# k7 cores (H9, F8; --part-lits 4000 is the default there)
+python3 milestones/25-k7-234/certify/gen_k7_core.py cnfsat --work $S/work --out $S/src --sat-v2 NAME
+python3 milestones/25-k7-234/certify/gen_k7_core.py run ... --sat-v2
+```
+
+- `LocalWindowCnfPack` is still needed (it decodes `raw`, `ctrs`, `tags`); `LocalWindowTagsSplit` is
+  not imported by `--sat-v2` modules.
+- Use one checker per module; v2 and production modules can be mixed freely in one chain, since
+  every `sat` has the same statement.
+- The `.olean` of a `--sat-v2` module is 8-12 kB larger. `LocalWindowTagsW.olean` itself is a new
+  library dependency of every such module.
+
 ## What this does not cover
 
 - **Cnf/Sat modules.** *(Done since, see [Production](#production).)* These are not studied here. `raw` is a literal `List (List Nat)`: the
@@ -571,6 +705,10 @@ python3 milestones/26-replay-efficiency/scripts/gen_lean_lrat_v3.py --work DIR -
 | `work/final_lean/LratV3.lean`, `scripts/gen_lean_lrat_v3.py` | (Checker v3) the database-free checker with its soundness proof, and its generator (`replay_k7.py gen --checker v3`) |
 | `scripts/pmp.py`, `scripts/pmpagg.py` | (Checker v3) stack sampling of a running `lean` with gdb, and the aggregation |
 | `data/v3_runs.jsonl` | (Checker v3) every build of that section |
+| `work/final_lean/LocalWindowTagsW.lean`, `work/final_lean/LocalWindowTagsSW.lean` | (Sat v2) the checker family `TagsW` (flat tables, kernel-native checker, counter table) and the share checker `TagsSW`, with their soundness proofs |
+| `gen_lean_cnfsat_packed.py --sat-v2`, `gen_k7_core.py run/cnfsat --sat-v2` | (Sat v2) packed core modules checked by `TagsW.checkAllT` |
+| `scripts/satv2_convert_share.py` | (Sat v2) conversion of a main share floor to `TagsSW`, for the measurement |
+| `data/satv2_runs.jsonl` | (Sat v2) every build of that section |
 
 **Reproduce.**
 

@@ -59,6 +59,7 @@ skipped.
   nice -n 19 python3 gen_k7_core.py run --keys KEYS.json.gz --work DIR [--out ROOT] [--kinds H,F,k6]
                                         [--only DS:SYMS ...] [--limit N] [--max-est HINTS] [--plan PLAN]
   python3 gen_k7_core.py cnfsat --work DIR [--out ROOT] NAME ...   # rewrite Cnf modules from core JSONs
+  (`run` and `cnfsat` take --sat-v2: the clause soundness by `TagsW.checkAllT`, gen_lean_cnfsat_packed.py --sat-v2)
   python3 gen_k7_core.py final --keys KEYS.json.gz [--out ROOT] [--chunks 0,1,...] [--plan PLAN]
   python3 gen_k7_core.py regen --out CERTDIR NAME ...      # CNFs (.cnf.gz) from the core JSONs
 
