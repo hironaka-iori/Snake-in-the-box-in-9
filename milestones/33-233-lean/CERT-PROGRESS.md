@@ -55,3 +55,8 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   6.5 GB cap. Probe: the last clause part (the cap-totalizer clauses, 4,000 literals) took 5.9 GB.
   Fix: share modules with cap ≥ 24 use parts of 1,000 literals (500 from cap 60); cap 99 then
   compiles in 82 s at 3.43 GB. Production restarted (PID in `prod.pid`).
+- 19:00: batch 4 (159 certificates, 22.9 M replay hints): generation 925 s (the 8 x 5 proofs of the
+  53 cores above 200 k hints took 644 s of it, for about 12 % fewer hints), build 2,104 s wall
+  (replays 2,761 s = 0.12 ms/hint; Cnf 1,410 s). The 8 x 5 portfolio now only from 5 M hints
+  (`replay --big 5e6`). Remaining: 1,988 certificates, 6.15 G full-proof hints (estimate; replay
+  hints are 0.7-0.8 of it so far).

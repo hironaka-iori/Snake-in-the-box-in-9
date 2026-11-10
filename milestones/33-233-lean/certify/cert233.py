@@ -1169,7 +1169,7 @@ def main():
         ps[c].add_argument('--limit', type=int, default=0)
         ps[c].add_argument('--budget-hints', type=float, default=0)
         ps[c].add_argument('names', nargs='*')
-    ps['replay'].add_argument('--big', type=float, default=200000)
+    ps['replay'].add_argument('--big', type=float, default=5e6)
     ps['final'].add_argument('--chunk', type=int, default=400)
     ps['final'].add_argument('--share-chunk', type=int, default=50)
     a = ap.parse_args()
