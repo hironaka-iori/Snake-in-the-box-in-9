@@ -81,6 +81,16 @@ The 17 other shared modules reuse this branch's existing `.olean` files (13 core
 reboot, and `work/spectral/.verification/chain/Floors233Main.olean` imports them. On a new machine, or after a
 reboot, rerun steps 1, 3 and 5 (about 1.2 hours of wall time on 2 cores; 34 MB of network).
 
+**Disk copy (10 November).** After the replay migration of milestone 34 freed disk, the port root was
+copied to disk with `cp -a /dev/shm/floors233 /home/user/floors233` (461 MB, 1,044 port `.olean` files;
+`diff -rq` against the tmpfs copy prints nothing), and a new overlay was made on disk with
+`python3 -I scripts/floors_overlay.py /home/user/floors233/.lake/build/lib/lean /home/user/floors233-lp`
+(1,044 port and 42,084 core symlinks, none dangling). Use `--extra-lean-path /home/user/floors233-lp` from
+now on; both survive a reboot. The tmpfs copies were left in place. The tmpfs overlay has 10,339 dangling
+links to the old `LocalWindowUnsat/<W>/Data*/Check*` files that the migration deleted; Lean never opens
+them (no module imports them any more), but a new overlay should be made from the disk copy as above.
+Floors233Main was not recompiled against the disk copy (its `.olean` records module names, not paths).
+
 ## Verdict
 
 **All five floors are literal: main's theorems prove this branch's copies, with no bridge lemma.**
