@@ -1,15 +1,16 @@
 /-
-TEMPLATE, not yet compiled: it needs main's floor modules built on this branch
-(`milestones/33-233-lean/scripts/port_main_floors.py`, see `../FLOORS.md`).
-
 `floors233` discharges the premise `Floors233` of `upper_233_of_refuted6SB233` with main's
-theorems.  The three milestone-73 floors are restated here with main's two-line proofs
+theorems, and `upper_233_of_certs6SB233` is the 233 chain whose only premises are the
+certificate obligations `AllRefuted6SB233` and `AllRefutedShare6SB233`.
+
+The three milestone-73 floors are restated here with main's two-line proofs
 (`Snake9.CatalogueIntegration73.canonical7300/7304/7306`, `CombinedCatalogue.lean`), so the
 build needs the three case certificates `Share73xx.Reversal` and `CanonicalShareAdapter`, but
 not the rest of `CombinedCatalogue` (case 7305, coverage, dispatch, `CountFreeTarget`).
 
-Build: put this file in the chain build dir and compile it with one `lean -o`, `LEAN_PATH` =
-port build dir, chain build dir, core build dir, mathlib (the same as for the port).
+Build: main's 1,042 floor modules are fetched from origin/main by blob sha and compiled on
+this branch (see `milestones/33-233-lean/FLOORS.md`, "Port run"); then
+`chain_audit.py --target Floors233Main --extra-lean-path <port build dir>` compiles this module.
 -/
 import Floors233Bridge
 import AggregateDirection6SB233

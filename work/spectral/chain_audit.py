@@ -17,6 +17,15 @@ SPECTRAL = Path(__file__).resolve().parent
 CORE = SPECTRAL.parent / 'final_lean'
 PIN = "c44e0c8ee63ca166450922a373c7409c5d26b00b"
 ALLOWED = {'propext', 'Classical.choice', 'Quot.sound'}
+EXTRA = []   # --extra-lean-path: prebuilt .olean roots (e.g. main's ported floor modules)
+
+
+def extra_olean(m):
+    for d in EXTRA:
+        p = d / (m.replace('.', '/') + '.olean')
+        if p.exists():
+            return p
+    return None
 
 
 def src(mod):
@@ -35,7 +44,8 @@ def dep_mtime(d, build):
     for p in (build / (d + '.olean'), CORE / '.lake/build/lib/lean' / (d.replace('.', '/') + '.olean')):
         if p.exists():
             return p.stat().st_mtime
-    return 0
+    p = extra_olean(d)
+    return p.stat().st_mtime if p else 0
 
 
 def order(target):
@@ -48,7 +58,7 @@ def order(target):
         seen.add(m)
         p = src(m)
         if p is None:
-            if not (CORE / (m.replace('.', '/') + '.lean')).exists() \
+            if not (CORE / (m.replace('.', '/') + '.lean')).exists() and extra_olean(m) is None \
                     and not m.startswith(('Mathlib', 'Std', 'Lean', 'Init')):
                 raise SystemExit(f'unknown module {m}')
             return
@@ -71,7 +81,11 @@ def main():
                     help='skip modules whose .olean in the build dir is newer than their source '
                          'and than the .olean of each of their imports '
                          '(development only; a clean audit recompiles everything)')
+    ap.add_argument('--extra-lean-path', action='append', default=[], type=Path,
+                    help='a directory of prebuilt .olean files, appended to LEAN_PATH; its modules are '
+                         'leaves of the chain (never compiled here). Repeatable')
     a = ap.parse_args()
+    EXTRA.extend(d.resolve() for d in a.extra_lean_path)
     mathlib = a.mathlib_dir.resolve()
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=mathlib, text=True).strip()
     if head != PIN:
@@ -82,7 +96,7 @@ def main():
     build = Path(a.build_dir).resolve()
     build.mkdir(parents=True, exist_ok=True)
     env = os.environ.copy()
-    env['LEAN_PATH'] = os.pathsep.join([str(CORE / '.lake/build/lib/lean'), str(build)])
+    env['LEAN_PATH'] = os.pathsep.join([str(CORE / '.lake/build/lib/lean'), str(build), *map(str, EXTRA)])
     log = open(a.log, 'a')
 
     def out(s):
