@@ -1,6 +1,6 @@
 # The certificate cost of a Lean-checked 233 (share-weighted k6 chain)
 
-Run of 9–10 November 2026, about 20:10 to 03:00. It used one core at `nice -n 10` (peak RSS about
+Run of 9–10 November 2026, about 20:10 to 02:20. It used one core at `nice -n 10` (peak RSS about
 0.4 GB) and added under 2 MB of data. Solver and Python only: no lake and no Lean. Every LRAT proof
 streamed through a FIFO into `lrattrim` and was never stored. The container restarted once (22:15);
 the run resumed from the committed state.
@@ -8,14 +8,14 @@ the run resumed from the committed state.
 **Answer.** Milestone 28's 233 route is the share-weighted k6 chain at λ = 520, i.e. 13/3 in alpha
 units. After the cost reduction below it needs
 
-> **@@HINTS@@ G LRAT hints in @@NCERT@@ certificates**: @@PLAIN@@ plain keys (including @@H8@@ H8 cuts)
-> and @@SHARE@@ share thresholds, on top of the 1,383 replayed keys and main's share floors.
-> At checker v3's 0.1 ms/hint that is **@@KH1@@ kernel-hours** (@@KH2@@ at 0.2 ms/hint), and about
-> **@@GB@@ GB of `.olean`** at 2.5 B/hint, plus about @@CNF@@ GB of Cnf/Sat modules.
-> @@FAMLINE@@
+> **3.21 G LRAT hints in 6,163 certificates**: 5,673 plain keys (including 262 H8 cuts)
+> and 490 share thresholds, on top of the 1,383 replayed keys and main's share floors.
+> At checker v3's 0.1 ms/hint that is **89 kernel-hours** (178 at 0.2 ms/hint), and about
+> **8.0 GB of `.olean`** at 2.5 B/hint, plus about 0.3 GB of Cnf/Sat modules.
+> With the family lemmas L1/L2 the cost is **3.00 G hints in 4,030 certificates**: 83 kernel-hours at 0.1 ms/hint (167 at 0.2), and 7.5 GB.
 
-That is about **2.2×** the k7 234 set (1.73 G; 1.49 G with L1/L2), for one more edge. The first
-estimate of milestone 28 was 47 G, so the reduction is about **@@FACTOR@@×**. The set is
+That is about **1.9×** the k7 234 set, which needs 1.73 G (2.0× with families on both: 3.00 G against 1.49 G), for one more edge. The first
+estimate of milestone 28 was 47 G, so the reduction is about **15×**. The set is
 `data/keys233_best.json.gz` and the summary is `data/cost233_best.json`.
 
 ## The bound being certified
@@ -29,7 +29,7 @@ a Bellman-Ford potential of range at most `2^B − 1`, milestone 28's (*) gives
 
 So m = 234 is excluded iff `227 P − 117000 Q ≥ 2^B` (`lib233.best_pq`, `bound233`). At P/Q = 520/1
 with B = 10: `4720 m ≤ 1104463`, so **m ≤ 233**. The range allowed is 1,023; the best set uses
-@@RANGE@@. Every set below was re-checked by a fresh Bellman-Ford on all 6,158,592 transitions.
+784. Every set below was re-checked by a fresh Bellman-Ford on all 6,158,592 transitions.
 
 ## Steps and what each saved
 
@@ -53,9 +53,9 @@ All numbers are LRAT hints of the Lean replays. Cost model:
 | 4. **exact drops** (warm Bellman-Ford; plain keys and share levels interleaved by cost) | `x520b` | 520 | **5,416** | **492** | **3.80 G** | **9.6 G**: 10,302 keys dropped, 942 share levels lowered (367 of the 492 paid levels end below their proved threshold) |
 | 5. λ choice | `x519`, `g524`, `p518` | 519 / 524 / 518 | 5,259 | 502 | 3.79 G at 519 | none: 519 equals 520 (range 31,447 of 32,767, no slack left); 524 is 25 % worse halfway through its exact pass; 518 cannot meet its range (594 > 585). **520 is kept** (Q = 1, B = 10, range 784 of 1,023) |
 | 6. H8 cuts (the full 8-direction step window, first interior vertex uncounted, inside the k6 product) | `h520` | 520 | 5,673 (262 H8) | 490 | 3.77 G | 38 M (7 of 91 items replaced) |
-| 7. share thresholds re-solved at the level used | `s520` | 520 | | @@S7SHARE@@ | @@S7HINTS@@ | @@S7SAVED@@ |
-| 8. main's Lean share floors | | | | | | @@FLOORS@@ |
-| 9. families L1/L2 | | | | | | @@FAM@@ |
+| 7. share thresholds re-solved at the level used | `s520` | 520 | 5,673 | 490 | **3.21 G** (share 0.78 G) | **0.55 G** (share 1.34 → 0.78 G). Each paid threshold was solved again at the level the set uses (60 s limit, most expensive first). 5 timed out and keep their old cost |
+| 8. main's Lean share floors | | | | | | **≈ 0.57 G and 12,058 certificates** (≈ 0.6 GB of Cnf modules). 12,058 of the 23,544 floor-covered 5-windows are used by the potential. 11,801 of them need at most 16. A sample of 20, solved at the needed level, averages 47 k hints (`data/floors_s520.json`). They cost nothing here |
+| 9. families L1/L2 | | | | | | **0.21 G and 2,133 certificates** (L1 alone: 0.19 G and 1,843). These are milestone 30's widened cores and greedy cover on the paid k6 keys. Cores came from milestone 30 (the 234 set) plus 656 computed here; 2,242 keys in sibling groups still lack one, so this is a lower bound. Share thresholds are not widened: no `RefutedShare` analogue of `refuted_narrow` exists yet |
 
 Notes on the steps:
 
@@ -101,15 +101,108 @@ Notes on the steps:
 
 ## The best set
 
-@@BEST@@
+| | value |
+|---|---|
+| λ | P/Q = **520/1** (13/3 alpha units). B = 10. Potential range **784** of 1,023 allowed. `4720 m ≤ 1104463`, so **m ≤ 233** |
+| plain keys | **7,056**: 1,383 already replayed (free), **5,411 paid k6 keys** (9 with 4 centres, 1,344 with 5, 4,058 with 6) and **262 H8 cuts**. Together they hold **2.43 G hints**: the top 100 hold 0.67 G and the top 1,000 hold 1.99 G. The largest key costs 11 M hints (a 4-centre key on 01203, fitted, never measured); the median 66 k. 1,130 paid keys (0.33 G) have measured replays |
+| share levels | **23,783** 5-windows carry a level. **23,293** of them are at or under main's Lean floors (free). **490 paid `RefutedShare` thresholds** hold **0.78 G**: the top 10 hold 0.18 G and the top 100 hold 0.56 G; the largest is 39 M (012304 / 3,5,3,4,6 at 48) and the median 0.60 M. By level used: 126 at 16 or below, 106 at 17–24, 110 at 25–48, 121 at 49–100, 27 above 100. 389 of the 490 use a level below the proved threshold |
+| total | **3.21 G hints in 6,163 certificates**. That is **89 kernel-hours at 0.1 ms/hint** and 178 at 0.2 ms/hint. It is **8.0 GB of `.olean`** at 2.5 B/hint, plus about 0.31 GB of Cnf/Sat modules |
+| with L1/L2 | **3.00 G hints in 4,030 certificates**: 83 / 167 kernel-hours, 7.5 GB. This is a lower bound on what families save, since only 3,169 of the 5,411 paid keys have a core |
+| summary | `data/cost233_best.json` (with the whole chain) |
 
 ## Lean plan for the share-weighted chain
 
-@@LEANPLAN@@
+The chain is milestone 23's k6 chain (`WindowAutomaton6Defs`, `DirectionWindowBridge6`,
+`AggregateDirection6Conditional`) with one more table, a second certificate type and a different
+final identity. Everything below the automaton (the `Refuted` replays, `AllRefutedList`, the
+bridges) is reused as it is.
+
+### 1. Automaton (`WindowAutomaton6SDefs.lean`, a copy of `WindowAutomaton6Defs`)
+
+- **`Tables6S`** = `Tables6` plus a share table:
+  - `sIdx : Nat → Nat` maps a 6-direction (5-centre) shape code to a row;
+  - `shr : Nat → Nat → Nat` maps (row, first count) to packed fields at `cntIdx` of the other
+    four counts, in the format of `pot`, holding the level `L`.
+
+  The table holds the levels of `data/keys233_best.json.gz` (`share`, column 3) plus main's floors.
+  A field is the maximum over both orientations.
+- **`share6 T c t`** looks the trailing 5-window up in both orientations and returns the larger
+  value.
+- **`check6SAt`** is `check6At` with the step test
+
+  `num + pot6 (c.drop 1) [t1..t4, s] ≤ den * (120 * s + share6 (c.drop 2) [t1..t4, s]) + pot6 (c.take 7) [t0..t4]`.
+
+  The potential uses `B` bits (`B = 10` at `P/Q = 520/1`). The weight needs 13 to 14 bits. Each
+  transition costs one more table lookup. The 204-shard layout of `ShardsOK6` stays the same.
+- **`invariant6S` / `total_bound6S`** are copies of `invariant6` / `total_bound6`. They give
+  `P (m-7) ≤ Q Σ_{n<m-7} (120 sym a(n+7) + S5 n) + (2^B - 1)`.
+
+### 2. Certificates: two types
+
+| type | statement | checker | count (best set) |
+|---|---|---|---|
+| plain key (k6) | `Refuted (winOf ds) (boundsOf syms)` | the existing LRAT replay (checker v3) and `LocalWindowTags` clause soundness | see README |
+| **share threshold (new for this chain)** | `RefutedShare (winOf ds) (boundsOf syms) 12 (L - 1)`: on every fitting window the M = 12 share sum of the 5 centres is at least `L` | the same LRAT replay on the share CNF (`wincert_share`: window + totalizers + `shareCl` + `shareCap`); clause soundness by `LocalWindowTagsShare` / `LocalWindowTagsSharePacked` (`Tags.soundS`, `checkAllS`) | see README |
+
+- The LRAT replay of a share CNF is the same kernel computation as a plain one. Its Cnf/Sat module
+  carries the share meaning tree and tags (`mtB64`, `tagsOfS`). A share core is 3 to 5 times
+  larger than a plain core (8 k to 38 k clauses; `data/replay233.jsonl`).
+- **`cover6S`** is the analogue of `cover6_rows`. Every nonzero field of `shr` at level `L` must
+  be backed by one of:
+  - (a) a `RefutedShare … 12 (L' - 1)` certificate with `L' ≥ L`, turned into
+    `L ≤ Σ_{i<5} coreShare 12 p (r+i+1)` by `refuted_share_dir`
+    (`work/final_lean/LocalWindowShareBridge.lean`);
+  - (b) for `L ≤ 16` on 012032/012031/012304/012314, or `L ≤ 17` on the milestone-155 counts,
+    main's universal floor theorems (milestones 73, 152, 155; their files are on `origin/main`
+    and must be brought over).
+- Plain keys merge as now, through `allRefuted_of_merge` of the 236/237/235 lists and the new
+  chunks. With L1/L2 (`LocalWindowFamilies.lean`), the derived keys are one
+  `refuted_key_of_wide` / `refuted_sub` term each.
+
+### 3. Glue: share identity + automaton bound (differs from the k7 234 chain)
+
+The 234 chain ends with the alpha aggregate `sumA (m-1) ≤ 9171 - 35 m`, which is
+`countSeq_facts`, and `total_bound7`. The 233 chain replaces it with three pieces.
+
+1. **Window bounds.** For every step n, `S5 n ≤ Σ_{j=n+3}^{n+7} coreShare 12 p j`. This comes
+   from `cover6S` and `refuted_share_dir` (or a floor theorem), applied to the snake's window at
+   n+2 with its lumped counts.
+2. **Share identity.** `core_charge_sum_le 12 p`
+   (`work/spectral/stronger/ShareBridge.lean`) gives
+   `Σ_{k≤m} (24 coreAlpha p k + coreShare 12 p k) + 840 (m+1) ≤ 221136`.
+3. **Combination.** Milestone 28's `combined_bound` (`lean/CombinedShareToy.lean`, core Lean,
+   standard axioms) is proved for arbitrary sequences. From the telescoped inequality, the window
+   bounds (each 5-window counted once, `window5`), `sym ≤ α`, `4 ≤ α 0`, `4 ≤ α m` and `1 ≤ α j`,
+   it derives `(P + 4200 Q) m ≤ 1099800 Q + 7 P + R`. With `P/Q = 520`, `R = 2^10 - 1` this is
+   `4720 m ≤ 1104463`, so **m ≤ 233**. The real chain needs one adapter: it replaces `rsum` by the
+   project's `Finset.sum` over `Finset.range` (the form `core_charge_sum_le` uses), and identifies
+   `sym (a j)` with `symC (coreAlpha p j)` as `upper_of_windows6` does.
+
+So the k7 234 chain has one certificate type (`Refuted`) and an alpha aggregate. The 233 chain
+needs:
+- a second certificate type (`RefutedShare` with level `L`), with its own clause-soundness tags;
+- a share table and `cover6S` in the automaton;
+- a final combination step that uses the share identity `core_charge_sum_le` in place of
+  `countSeq_facts`.
+
+It needs no H9/F8 windows. The automaton stays k6: 34 · 6^5 states, 204 shards.
+
+### 4. Modules and budget
+
+- Automaton: Keys and Data modules, plus the share table (about 24 k 5-window fields, 5.7 k rows
+  at most), 204 shards, Sequence.
+  - The shards are the k6 shards with one more lookup: about 6 to 8 CPU-hours (5.9 measured for
+    K235).
+- Certificates: replays plus Cnf/Sat modules, one per paid certificate (see README for counts,
+  hints, kernel hours and `.olean`).
+- Glue:
+  - `AllRefuted233` (merge of the plain chunks);
+  - `AllShare233` (the share certificates by row, plus the floor theorems);
+  - `UpperBound233` imports the chain, the glue and `ShareBridge`.
 
 ## Caveats
 
-- Hints are measured for @@MEAS@@ of the paid plain keys and modelled for the rest. The model is
+- Hints are measured for 1,130 (0.33 G) of the paid plain keys and modelled for the rest. The model is
   milestone 25's bins (measured/modelled 1.019 on 3,059 random keys there, and 1.00 on 14 here).
   The share costs rest on 27 replays (the fit's prediction/measured is 0.94). Share thresholds that
   were not re-solved are priced at the solve time of a higher level, which is an upper bound.
@@ -133,7 +226,7 @@ Notes on the steps:
 | `data/keys233_best.json.gz` | **the best set**: `plain` [dirs, lumped syms, basis, hints], `share` [dirs, lumped syms, level used, proved lb, basis, hints], `h8` [dirs (reversed, uncounted last), syms, hints] |
 | `data/cost233_best.json` | **cost summary**: hints, kernel-hours at 0.1 / 0.2 ms/hint, `.olean` GB at 2.5 B/hint, and the chain of steps |
 | `data/set_*.json.gz`, `data/sum_*.json` | every intermediate set (`recost520`, `p520`, `g520`, `p520b`, `g520b`, `x520b`, `x519`, `p519`, `g519`, `p524`, `g524`, `h520`, `s520`) |
-| `data/replay233.jsonl`, `data/oracle_plain233.jsonl`, `data/oracle_h8.jsonl`, `data/oracle_share233.jsonl`, `data/giants_*.json`, `data/h8log_h520.json`, `data/h8keys_*.json`, `data/floors_*.json`, `data/fam_*.json`, `data/cores233.jsonl` | measurements, decisions and step logs |
+| `data/replay233.jsonl`, `data/oracle_plain233.jsonl`, `data/oracle_h8.jsonl`, `data/oracle_share233.jsonl`, `data/giants_*.json`, `data/h8log_h520.json`, `data/h8keys_*.json`, `data/floors_*.json`, `data/fam_*.json`, `data/cores233.jsonl.gz` | measurements, decisions and step logs |
 
 Reproduce (about 3 h on one core):
 
