@@ -1146,6 +1146,195 @@ end
 
 end Kernel
 
+/-! ## Counter literals from a table (`checkAllT`)
+
+`ckFirstK`, `ckStepK` and `ckOverK` read literal `i` of counter `c` by walking the decoded
+list, `i` steps per clause (the endpoint counter has up to about 350 literals).  `checkAllT`
+reads it from a table `CT c i` instead, and checks once, in one pass over every counter, that
+`CT c i` is literal `i` of counter `c` (`agreeC`).  A clause check only reads `CT c i` after
+testing `i < length`, so the table is needed on the literals of the counters only. -/
+
+section Table
+
+noncomputable section
+
+local macro "kif " c:term " then " t:term " else " e:term : term =>
+  `(Bool.rec (motive := fun _ => _) $e $t $c)
+
+/-- `CT c (i₀ + i) = l[i]` for every `i`. -/
+def agreeL (CT : Nat → Nat → Nat) (c : Nat) (l : List Nat) : Nat → Bool :=
+  List.rec (motive := fun _ => Nat → Bool) (fun _ => true)
+    (fun a _ ih i => kif Nat.beq (CT c i) a then ih (Nat.succ i) else false) l
+
+/-- `agreeL` for counter `c₀ + c` of `cs`, for every `c`. -/
+def agreeC (CT : Nat → Nat → Nat) (cs : List Ctr) : Nat → Bool :=
+  List.rec (motive := fun _ => Nat → Bool) (fun _ => true)
+    (fun ct _ ih c => kif agreeL CT c ct.lits 0 then ih (Nat.succ c) else false) cs
+
+theorem agreeL_get (CT : Nat → Nat → Nat) (c : Nat) :
+    ∀ (l : List Nat) (i₀ : Nat), agreeL CT c l i₀ = true →
+      ∀ i, i < l.length → CT c (i₀ + i) = l.getD i 0
+  | [], _, _, i, hi => absurd hi (Nat.not_lt_zero i)
+  | a :: t, i₀, h, i, hi => by
+    have h' : (kif Nat.beq (CT c i₀) a then agreeL CT c t (Nat.succ i₀) else false) = true := h
+    cases hb : Nat.beq (CT c i₀) a
+    · rw [hb] at h'; exact absurd h' Bool.false_ne_true
+    · rw [hb] at h'
+      cases i with
+      | zero => simpa using Nat.eq_of_beq_eq_true hb
+      | succ i =>
+        have := agreeL_get CT c t (Nat.succ i₀) h' i (by simp at hi; omega)
+        rw [show i₀ + (i + 1) = Nat.succ i₀ + i by omega, this]; simp
+
+theorem agreeC_get (CT : Nat → Nat → Nat) :
+    ∀ (cs : List Ctr) (c₀ : Nat), agreeC CT cs c₀ = true →
+      ∀ c i, i < (cs.getD c dfltCtr).lits.length →
+        CT (c₀ + c) i = (cs.getD c dfltCtr).lits.getD i 0
+  | [], _, _, c, i, hi => by simp [dfltCtr] at hi
+  | ct :: t, c₀, h, c, i, hi => by
+    have h' : (kif agreeL CT c₀ ct.lits 0 then agreeC CT t (Nat.succ c₀) else false) = true := h
+    cases hb : agreeL CT c₀ ct.lits 0
+    · rw [hb] at h'; exact absurd h' Bool.false_ne_true
+    · rw [hb] at h'
+      cases c with
+      | zero =>
+        simp only [List.getD_cons_zero] at hi ⊢
+        have := agreeL_get CT c₀ ct.lits 0 hb i hi
+        simpa using this
+      | succ c =>
+        simp only [List.getD_cons_succ] at hi ⊢
+        have := agreeC_get CT t (Nat.succ c₀) h' c i hi
+        rw [show c₀ + (c + 1) = Nat.succ c₀ + c by omega, this]
+
+def ckFirstT (M : Nat → MT) (CT : Nat → Nat → Nat) (cs : List Ctr) (c i : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b] => Nat.blt i (lenK (getK cs dfltCtr c).lits) && negOfK a (CT c i) && posRK M b c i 0
+  | _ => false
+
+def ckStepT (M : Nat → MT) (CT : Nat → Nat → Nat) (cs : List Ctr) (c i j : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b, d] => Nat.blt (Nat.add i 1) (lenK (getK cs dfltCtr c).lits) &&
+      negOfK a (CT c (Nat.add i 1)) && negRK M b c i j && posRK M d c (Nat.add i 1) (Nat.add j 1)
+  | _ => false
+
+def ckOverT (M : Nat → MT) (CT : Nat → Nat → Nat) (cs : List Ctr) (c i : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b] => Nat.blt (Nat.add i 1) (lenK (getK cs dfltCtr c).lits) &&
+      negOfK a (CT c (Nat.add i 1)) && Nat.ble 1 (getK cs dfltCtr c).k &&
+      negRK M b c i (Nat.sub (getK cs dfltCtr c).k 1)
+  | _ => false
+
+def ckClauseT (M : Nat → MT) (CT : Nat → Nat → Nat) (cs : List Ctr) (w : List Nat) (t : Tag)
+    (cl : List Nat) : Bool :=
+  match t with
+  | .first c i => ckFirstT M CT cs c i cl
+  | .step c i j => ckStepT M CT cs c i j cl
+  | .over c i => ckOverT M CT cs c i cl
+  | t => ckClauseK M cs w t cl
+
+section TEqs
+
+variable {M : Nat → MT} {CT : Nat → Nat → Nat} {cs : List Ctr}
+
+/-- Under `agreeC`, a table read behind a length test is the list read. -/
+theorem read_eq (hA : agreeC CT cs 0 = true) {c i : Nat}
+    (hb : Nat.blt i (lenK (getK cs dfltCtr c).lits) = true) : CT c i = getK (getK cs dfltCtr c).lits 0 i := by
+  rw [lenK_eq, getK_eq] at hb
+  have hi : i < (cs.getD c dfltCtr).lits.length := by simpa using hb
+  have := agreeC_get CT cs 0 hA c i hi
+  rw [Nat.zero_add] at this
+  rw [this, getK_eq, getK_eq]
+
+theorem ckClauseT_eq (hA : agreeC CT cs 0 = true) (w : List Nat) (t : Tag) (cl : List Nat) :
+    ckClauseT M CT cs w t cl = ckClauseK M cs w t cl := by
+  cases t with
+  | first c i =>
+    simp only [ckClauseT, ckClauseK]
+    match cl with
+    | [a, b] =>
+      simp only [ckFirstT, ckFirstK]
+      cases hb : Nat.blt i (lenK (getK cs dfltCtr c).lits)
+      · rfl
+      · rw [read_eq hA hb]
+    | [] | [_] | _ :: _ :: _ :: _ => rfl
+  | step c i j =>
+    simp only [ckClauseT, ckClauseK]
+    match cl with
+    | [a, b, d] =>
+      simp only [ckStepT, ckStepK]
+      cases hb : Nat.blt (Nat.add i 1) (lenK (getK cs dfltCtr c).lits)
+      · rfl
+      · rw [read_eq hA hb]
+    | [] | [_] | [_, _] | _ :: _ :: _ :: _ :: _ => rfl
+  | over c i =>
+    simp only [ckClauseT, ckClauseK]
+    match cl with
+    | [a, b] =>
+      simp only [ckOverT, ckOverK]
+      cases hb : Nat.blt (Nat.add i 1) (lenK (getK cs dfltCtr c).lits)
+      · rfl
+      · rw [read_eq hA hb]
+    | [] | [_] | _ :: _ :: _ :: _ => rfl
+  | _ => rfl
+
+end TEqs
+
+def ckAllT (M : Nat → MT) (CT : Nat → Nat → Nat) (cs : List Ctr) (w : List Nat) (tags : List Tag)
+    (raw : List (List Nat)) : Bool :=
+  List.rec (motive := fun _ => List (List Nat) → Bool)
+    (fun r => List.rec (motive := fun _ => Bool) true (fun _ _ _ => false) r)
+    (fun t _ ih r => List.rec (motive := fun _ => Bool) false
+      (fun cl cls _ => kif ckClauseT M CT cs w t cl then ih cls else false) r) tags raw
+
+theorem ckAllT_eq {M : Nat → MT} {CT : Nat → Nat → Nat} {cs : List Ctr} (hA : agreeC CT cs 0 = true)
+    (w : List Nat) : ∀ (tags : List Tag) (raw : List (List Nat)),
+      ckAllT M CT cs w tags raw = ckAllK M cs w tags raw
+  | [], [] => rfl
+  | [], _ :: _ => rfl
+  | _ :: _, [] => rfl
+  | t :: ts, cl :: cls => by
+    show (kif ckClauseT M CT cs w t cl then ckAllT M CT cs w ts cls else false) =
+      (kif ckClauseK M cs w t cl then ckAllK M cs w ts cls else false)
+    rw [ckAllT_eq hA w ts cls, ckClauseT_eq hA]
+
+def checkAllT (M : Nat → MT) (CT : Nat → Nat → Nat) (cs : List Ctr) (w : List Nat)
+    (b : List (Nat × Nat)) (tags : List Tag) (raw : List (List Nat)) : Bool :=
+  agreeC CT cs 0 && allK (ctrOKK M (centresK w b)) cs && ckAllT M CT cs w tags raw
+
+/-- Main soundness theorem of the table checker. -/
+theorem soundT (M : Nat → MT) (CT : Nat → Nat → Nat) (cs : List Ctr) (w : List Nat)
+    (b : List (Nat × Nat)) (tags : List Tag) (raw : List (List Nat))
+    (h : checkAllT M CT cs w b tags raw = true) (S E : Nat → Bool) (ax : Axioms S E w (centresOf w b)) :
+    cnfTrue (tau S E M cs) (raw.map (·.map decodeLit)) = true := by
+  simp only [checkAllT, Bool.and_eq_true] at h
+  obtain ⟨⟨hA, hc⟩, ha⟩ := h
+  rw [ckAllT_eq hA] at ha
+  exact soundK M cs w b tags raw (checkAllK_of_parts hc ha) S E ax
+
+/-- Two consecutive parts of the clauses, checked separately. -/
+theorem ckAllT_append (M : Nat → MT) (CT : Nat → Nat → Nat) (cs : List Ctr) (w : List Nat)
+    (hA : agreeC CT cs 0 = true)
+    (t₁ : List Tag) (r₁ : List (List Nat)) (t₂ : List Tag) (r₂ : List (List Nat))
+    (h₁ : ckAllT M CT cs w t₁ r₁ = true) (h₂ : ckAllT M CT cs w t₂ r₂ = true) :
+    ckAllT M CT cs w (t₁ ++ t₂) (r₁ ++ r₂) = true := by
+  rw [ckAllT_eq hA] at h₁ h₂ ⊢; exact ckAllK_append M cs w t₁ r₁ t₂ r₂ h₁ h₂
+
+theorem checkAllT_of_parts {M : Nat → MT} {CT : Nat → Nat → Nat} {cs : List Ctr} {w : List Nat}
+    {b : List (Nat × Nat)} {tags : List Tag} {raw : List (List Nat)}
+    (hA : agreeC CT cs 0 = true) (hc : allK (ctrOKK M (centresK w b)) cs = true)
+    (ha : ckAllT M CT cs w tags raw = true) : checkAllT M CT cs w b tags raw = true := by
+  simp only [checkAllT, Bool.and_eq_true]
+  exact ⟨⟨hA, hc⟩, ha⟩
+
+/-- The counter table of a certificate: literal `i` of counter `c` is the `w`-bit field
+`offs[c] + i` of `T`. -/
+def ctrTab (T w : Nat) (offs : List Nat) (c i : Nat) : Nat :=
+  Nat.land (Nat.shiftRight T (Nat.mul (Nat.add (getK offs 0 c) i) w)) (Nat.sub (Nat.shiftLeft 1 w) 1)
+
+end
+
+end Table
+
 /-! ## Flat meaning tables -/
 
 section Decode
