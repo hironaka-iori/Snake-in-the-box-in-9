@@ -37,3 +37,6 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   module compiled in scratch with `lean -o`; `allRefutedMini6SB233` and `allRefutedShareMini6SB233`
   depend on `propext`, `Classical.choice`, `Quot.sound`. Details in `certify/README.md`.
 - 11:46: phase 2 (cores) started: 2 shards, PIDs 14294 and 14295.
+- 11:58: `prod233.py --kinds share --once` tested on the first 9 share thresholds (core shard 1 paused
+  by SIGSTOP meanwhile): staleness simulation 29 modules, only the 18 new ones stale; built 18/18 in
+  92 s with one job (share Cnf 4-17 s, 0.65-1.33 GB; replays 0.8-2.8 s, under 0.62 GB); 18 sources swept.

@@ -107,7 +107,7 @@ def main():
         t0 = time.time()
         env = dict(os.environ, PATH=LEANBIN + ':' + os.environ['PATH'])
         for step in ('cnf', 'replay'):
-            r = subprocess.run([sys.executable, os.path.join(HERE, 'cert233.py'), step, '--min-disk-mb',
+            r = subprocess.run([sys.executable, os.path.join(HERE, 'cert233.py'), step, '--kinds', a.kinds, '--min-disk-mb',
                                 str(a.reserve_mb - 200), *batch], env=env, capture_output=True, text=True)
             if r.returncode:
                 log({'error': step, 'stderr': r.stderr[-2000:]})
