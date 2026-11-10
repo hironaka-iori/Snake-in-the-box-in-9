@@ -236,6 +236,19 @@ theorem shareRowOK_of_zero (T : Tables6S) (ks : List (List Nat × List Nat × Na
     allSym_of_forall _ (fun t3 _ _ => allSym_of_forall _ (fun t4 _ _ => ?_))))
   simp [shareAt6, h]
 
+/-- `allSym` from its six values (one declaration per first count in generated modules). -/
+theorem allSym_of6 (f : Nat → Bool) (h1 : f 1 = true) (h2 : f 2 = true) (h3 : f 3 = true)
+    (h4 : f 4 = true) (h5 : f 5 = true) (h6 : f 6 = true) : allSym f = true := by
+  refine allSym_of_forall _ (fun s hs hs' => ?_)
+  have : s = 1 ∨ s = 2 ∨ s = 3 ∨ s = 4 ∨ s = 5 ∨ s = 6 := by omega
+  rcases this with rfl | rfl | rfl | rfl | rfl | rfl
+  · exact h1
+  · exact h2
+  · exact h3
+  · exact h4
+  · exact h5
+  · exact h6
+
 /-- `ShareCover` from one cheap kernel evaluation (the rows outside `shapes` are zero) and one
 declaration per listed shape. -/
 theorem shareCover_rows {T : Tables6S} {ks : List (List Nat × List Nat × Nat)}
@@ -323,6 +336,21 @@ theorem share_windows6S {T : Tables6S} {ks : List (List Nat × List Nat × Nat)}
   omega
 
 end Window
+
+/-! ## Lists of facts (generated instances prove `AllP P l` by one nested anonymous constructor,
+which elaborates much faster than a case split over a long membership) -/
+
+/-- `P` holds for every element of the list, as a nested conjunction. -/
+def AllP {α : Type} (P : α → Prop) : List α → Prop
+  | [] => True
+  | a :: l => P a ∧ AllP P l
+
+theorem AllP.mem {α : Type} {P : α → Prop} : ∀ {l : List α}, AllP P l → ∀ x ∈ l, P x
+  | [], _, x, hx => absurd hx List.not_mem_nil
+  | _ :: _, h, x, hx => by
+    rcases List.mem_cons.1 hx with rfl | hx
+    · exact h.1
+    · exact AllP.mem h.2 x hx
 
 /-! ## The k6 cover chunk by chunk -/
 

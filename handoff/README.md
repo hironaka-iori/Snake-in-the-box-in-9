@@ -42,6 +42,22 @@ Python 复核。
 这台云端机器上分片只编了 18/792 个（容器反复重启，磁盘只剩约 0.4 GB），这些 olean 不值得搬，
 新设备直接重编即可。
 
+## 233 (share-weighted k6 chain)
+
+The Lean framework for 233 is in `milestones/33-233-lean/README.md`.
+
+- **Generic modules.** `WindowAutomaton6SDefs`, `WindowAutomaton6SV2`, `DirectionWindowBridge6S` and
+  `AggregateDirection6SConditional` compile with the standard axioms.
+- **Toy chain.** It compiles without `sorry`.
+- **Real set.** The generators reproduce λ = 520/1, range 784/1023 and `4720 m ≤ 1104463` on the
+  real set, with all 10.4 M transitions re-checked in Python.
+- **Real chain.** In scratch, the real keys, data, bridge (full covers) and aggregate modules
+  compile, together with 9 real shards. With the other shards and the certificates stubbed, the
+  chain composes to `upper_bound_233`.
+- **Missing.** 5,411 new plain k6 keys, 262 H8 cuts and 490 share thresholds (about 3.2 G hints);
+  main's floor theorems, which are a premise (`Floors233`); and the 204 shards (about 0.65
+  CPU-hours).
+
 ## 怎么在新设备上继续
 
 把 `handoff/PROMPT.md` 里分隔线以下的内容整段贴给新设备上的 Claude Code。它会按顺序：装环境 →

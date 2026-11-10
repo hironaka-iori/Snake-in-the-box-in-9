@@ -85,6 +85,19 @@ compiled to `upper_bound_234`. H9 (5 keys) and F8 (3 keys) certificates were val
   in the style of `outputs/upper-bound-235-replay-linux.log`.
 - Before the audit, `grep -rlE "sorry|native_decide|^axiom"` over all new K7/B234 modules must print nothing.
 
+## 2b. Optional after 234: the share-weighted 233 chain (tag B233)
+Framework and generators: `milestones/33-233-lean/README.md`. Generic modules (core:
+`WindowAutomaton6SDefs`, `WindowAutomaton6SV2`, `DirectionWindowBridge6S`, plus
+`milestones/28-combined-identities/lean/CombinedShareToy.lean`; mathlib: `AggregateDirection6SConditional`
+after `ShareCharge`/`ShareBridge`) compile with standard axioms; the toy chain compiles without `sorry`.
+Generate with `gen_lean_automaton6s.py --set milestones/31-233-cost/data/keys233_best.json.gz --tag B233
+--lam 520/1 --bits 10 --expect-range 784 --expect-bound 233` and `gen_lean_chain6s.py --tag B233`.
+The instance theorem `upper_233_of_refuted6SB233` takes `AllRefuted6SB233` (6,794 plain k6 keys, 1,383
+already replayed, and 262 H8 cuts), `AllRefutedShare6SB233` (490 `RefutedShare … 12 (L-1)` thresholds)
+and `Floors233` (main's share16 of milestone 152, canonical7300/7304/7306 of milestone 73, share17 of
+milestone 155; their statements are copied, their proofs are not on this branch). Shards: 204, about
+10 s and 0.55 GB each, about 0.65 CPU-hours in all. Certificates: about 3.2 G hints (milestone 31).
+
 ## 3. Rules learned the hard way
 - Build only with `work/guarded_lake_build.py --direct --trust-mtime`; never a plain `lake build` over many
   certificate modules. `--heavy-jobs` about (RAM_GB - 8) / 4 for replay checks with `--rss-cap-gb 6.5`; run
