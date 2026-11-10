@@ -60,3 +60,21 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   (replays 2,761 s = 0.12 ms/hint; Cnf 1,410 s). The 8 x 5 portfolio now only from 5 M hints
   (`replay --big 5e6`). Remaining: 1,988 certificates, 6.15 G full-proof hints (estimate; replay
   hints are 0.7-0.8 of it so far).
+- 19:40: state: 1,252 of 3,118 certificates built (1,150 seeds of 2,637, 102 share keys of 490):
+  82.4 M replay hints (0.76 of their full-proof estimate), replay `.olean` 219 MB (2.66 B/hint),
+  Cnf `.olean` 108 MB (87 kB each). Batch 5 (113 certificates): generation 289 s, build 1,707 s.
+  Production keeps running (`prod233.py`, PID in `$CERT233_SCR/prod.pid`).
+
+## Projection (measured rates)
+
+- Remaining: 1,866 certificates, 6.1 G full-proof hints, so about 4.6 G replay hints at 0.76.
+- Kernel: 0.12 ms/hint for the replays plus the Cnf modules: about 160-190 CPU-hours, i.e. about
+  80-95 h of wall time on 2 cores (milestone 31 projected 3.0 G hints; the `--unsat` cores used here
+  give longer proofs than its best-of-two cores).
+- Disk: about 12 GB more of `.olean` (2.66 B/hint) against about 8 GB free now; `prod233.py` waits
+  for space (reserve 1.4 GB).
+- Then: `cert233.py final` (already written once; rerun to refresh), build
+  `LocalWindowDirUnsat6SB233` and `LocalWindowShareUnsat6SB233` with the guarded build, rebuild the
+  floors overlay (`scripts/floors_overlay.py /home/user/floors233/.lake/build/lib/lean NEWDIR`, since
+  the overlay must list the new `LocalWindowCnf`/`LocalWindowUnsat` files), and run
+  `chain_audit.py --target UpperBound233 --reuse --extra-lean-path NEWDIR --log outputs/upper-bound-233-audit-linux.log --axioms Snake9.upper_bound_233 Snake9.verified_interval_191_233`.
