@@ -88,15 +88,18 @@ which is the best any such LP could do (§2).
 | 6 | 4 | 28 | 29.33 | 31 (31.46) | 30 (30.96) |
 | 6 | 6 | 30 | 30.67 | 31 (31.94) | 31 (31.51) |
 | 6 | 8 | 32 | 32 | 32 | 32 |
-| 7 | 1 | 51 (exact: snake) | | 62 (62.19) | TAG7_1 |
-| 7 | 4 | 56–57 | | 62 (62.76) | TAG7_4 |
-| 7 | 8 | 56–57 | | 63 (63.48) | TAG7_8 |
+| 7 | 1 | 51 (exact: snake) | | 62 (62.19) | – |
+| 7 | 4 | 56–57 | | 62 (62.76) | – |
+| 7 | 8 | 56–57 | | 63 (63.48) | – |
 | 8 | 8 | ≥ 112 | ≥ 112 | 126 (126.40) | not run |
 | 8 | 13 | ≥ 112 | ≥ 115.33 | 127 (127.10) | not run |
 | 8 | 14 | ≥ 112, ≤ 121 | ≥ 116 | 127 (127.21) | not run |
 | 8 | 16 | ≥ 112 | ≥ 117.33 | 127 (127.44) | not run |
 | 8 | 32 | 128 | 128 | 128 | not run |
 
+- **Tagged runs stop at n = 6.** The tagged pattern enumeration for n = 7 has 3 outside
+  directions and up to 7·10^6 tag assignments. In pure Python it did not finish within 1 h, and
+  it was stopped. n = 8 has about 2.4·10^8 assignments and would need C.
 - **The bounds are valid.** No bound undercuts a known value. It cannot: every forest, and even
   every set in §5, is a feasible point.
 - **For g8 they are useless.** The hyper LP gives 126–127 for c = 8–16, against Huang's 128.
@@ -212,4 +215,4 @@ genuine-forest encoding, which was unknown after more than 2400 s.
 - `data/fakesat_q7.jsonl`: the Q7 query that was abandoned.
 
 Reproduce: `pip install --user highspy`; then, in `scripts/`, run `python3 run_lp.py hyper 5 6 7 8`,
-`python3 run_lp.py tagged 5 6 7`, and `python3 fake_table.py 6 4`.
+`python3 run_lp.py tagged 5 6`, and `python3 fake_table.py 6 4`.
