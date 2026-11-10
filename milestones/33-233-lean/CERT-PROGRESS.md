@@ -47,3 +47,7 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   43,484-module closure: only these 3 stale.
 - 14:45: production started: `prod233.py --jobs 1 --batch-hints 3e7` (PID in `$CERT233_SCR/prod.pid`);
   jobs 2 once the last share cores finish. Resume: rerun the same command (it skips built modules).
+- 15:00-17:12: production ran (jobs 2) until a container restart (usage-limit pause); state at
+  restart: 632 seed and 16 share certificates built (Cnf + replay), no `.olean` without an `ok`
+  record in `.lake/guarded_build_233cert.jsonl`.
+- 17:16: production restarted, `prod233.py --jobs 2 --batch-hints 3e7`.
