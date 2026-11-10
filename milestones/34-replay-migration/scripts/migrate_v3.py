@@ -112,7 +112,10 @@ def old_files(w):
 
 
 def run_lean(args, env, cap_gb, cwd=None):
-    p = subprocess.Popen(['nice', '-n', '10', LEAN, *args], env=env, stdout=subprocess.PIPE,
+    # 1 GB stacks (process and Lean threads): the kernel checks of a few R windows with very long
+    # lemmas overflow the default 8 MB ("Stack overflow detected")
+    p = subprocess.Popen(['prlimit', '--stack=1073741824', 'nice', '-n', '10', LEAN, '--tstack=1048576', *args],
+                         env=env, stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT, cwd=cwd)
     killed, peak = [], [0]
 
