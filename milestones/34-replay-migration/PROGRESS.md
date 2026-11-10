@@ -123,3 +123,4 @@ For K windows `migrate_v3.py` has a K path (cores of `lean_core_direction_k6`, C
   directory of Q01230A3243 was deleted, and the driver restarted at 17:15 with `--stop-at`
   1794361440 (01:44 UTC); two staged .olean files (built, not verified) and four staged sources were reused.
 - 18:47 UTC: 416 windows swapped (263 Q, 153 R; 9.78 GB -> 0.85 GB); disk free 8.0 GB.
+- 20:27 UTC: 497 windows swapped (316 Q, 181 R; 10.58 GB -> 1.02 GB); disk free 8.5 GB.
