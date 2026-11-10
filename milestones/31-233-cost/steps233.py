@@ -339,9 +339,12 @@ def share_resolve(tag0, tag, tl=60.0, budget=3600, minh=0.0):
         s, sec = decide_share(k, T, tl)
         res[s] = res.get(s, 0) + 1
         L.log(f'share {k} T={T} (lb {W.slb[i]}): {s} {sec:.1f}s, was {h / 1e6:.1f} M')
-    W2 = world(pq, tag0)
-    ok, it, rng = W2.check(); assert ok
-    return W2.save(tag, dict(step='share_resolve', results=res))
+    lv = W.lvl.copy()                     # one world per process: fp.Status mutates k6loop's OPLAIN
+    W.load_share(None)
+    W.lvl = np.maximum(lv, W.sF)
+    ok, it, rng = W.check(); assert ok
+    carry_h8(W, tag0, tag)
+    return W.save(tag, dict(step='share_resolve', results=res))
 
 
 # ------------------------------------------------------------------ H8: the full 8-direction step window
