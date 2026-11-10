@@ -124,3 +124,11 @@ For K windows `migrate_v3.py` has a K path (cores of `lean_core_direction_k6`, C
   1794361440 (01:44 UTC); two staged .olean files (built, not verified) and four staged sources were reused.
 - 18:47 UTC: 416 windows swapped (263 Q, 153 R; 9.78 GB -> 0.85 GB); disk free 8.0 GB.
 - 20:27 UTC: 497 windows swapped (316 Q, 181 R; 10.58 GB -> 1.02 GB); disk free 8.5 GB.
+- 21:29-21:59 UTC: R012301A33533 and R01234A3345 failed with `Stack overflow detected` (C stack
+  of the kernel check). `run_lean` now runs `lean` under `prlimit --stack=1073741824` with
+  `--tstack=1048576` (1 GB stacks); the driver was restarted and retries them first (their
+  sources stay staged when a build fails).
+- 22:05 UTC: container restart. 580 windows swapped by then (352 Q, 228 R; 11.26 GB -> 1.18 GB).
+  The coordinator relaunched the driver at 22:07 with `--jobs 1` (the 233 production uses the
+  other two `lean` slots) and `--stop-at` +48 h; PID in `/home/user/v3stage/run2.pid`. No staged
+  .olean was left half-written, and no swap was interrupted.
