@@ -51,11 +51,16 @@ def m28_committed(prefix):
     """Milestone 28 data files with this prefix that are committed (the refinement toward 232 writes
     uncommitted files there; only committed data are used)."""
     import subprocess
-    try:
+    import time as _t
+    out = []
+    for _ in range(20):                         # retry while another agent holds the index
         out = subprocess.run(['git', 'ls-files', os.path.join(M28, 'data')], capture_output=True, text=True,
                              cwd=MS).stdout.split()
-    except Exception:
-        out = []
+        if out:
+            break
+        _t.sleep(3)
+    if not out:
+        raise RuntimeError('git ls-files of milestone 28 data failed')
     root = os.path.abspath(os.path.join(MS, '..'))
     fs = [os.path.join(MS, f) for f in out]
     return sorted(f for f in fs if os.path.basename(f).startswith(prefix) and os.path.exists(f))
@@ -66,7 +71,15 @@ def jl(f):
     if f.startswith(M28 + os.sep):
         import subprocess
         rel = os.path.relpath(f, os.path.join(MS, '..'))
-        raw = subprocess.run(['git', 'show', f'HEAD:{rel}'], capture_output=True, cwd=MS).stdout
+        import time as _t
+        for _ in range(20):                     # another agent may be committing (index lock): retry
+            p = subprocess.run(['git', 'show', f'HEAD:{rel}'], capture_output=True, cwd=MS)
+            if p.returncode == 0 and p.stdout:
+                break
+            _t.sleep(3)
+        else:
+            raise RuntimeError(f'git show HEAD:{rel} failed: {p.stderr[:200]}')
+        raw = p.stdout
         if f.endswith('.gz'):
             raw = gzip.decompress(raw)
         return (json.loads(l) for l in raw.decode().splitlines() if l.strip())
