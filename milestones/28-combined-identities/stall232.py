@@ -7,14 +7,14 @@ G = C.build('all', with_share=True, with_w3=False)
 C.fp.K6.OPLAIN = C.os.path.join(C.MS, '11-local-ceiling', 'k6_loop', 'oracle_plain.jsonl')
 S = C.fp.Status()
 for k in C.own_plain_unsat(): S.st[k] = 'UNSAT'
-f = C.os.path.join(C.HERE, 'data', 'oracle_plain_r232.jsonl')
-for l in open(f):
+import glob, gzip
+for l in (x for f in sorted(glob.glob(C.os.path.join(C.HERE, 'data', 'oracle_plain_r232*.jsonl*'))) for x in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f))):
     r = json.loads(l)
     if r['result'] != 'UNSAT' and len(r['alpha']) in (5, 6) and all(a[0]==a[1] or a==[6,21] for a in r['alpha']):
         t = tuple(C.GA.sym_of(tuple(a)) for a in r['alpha'])
         S.st.setdefault(C.fp.lkey(tuple(r['dirs']), t), r['result'])
 O = C.share_records(); X = S7.Ctx()
-d = json.load(open('data/b_232_final.json'))
+d = json.load(open('data/b_231try_final.json'))
 Pr = C.fp.Product()
 cnt = collections.Counter(); rows = []
 for c in d['cycle']:

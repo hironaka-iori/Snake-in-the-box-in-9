@@ -76,8 +76,9 @@ def main():
     C.fp.K6.OPLAIN = os.path.join(C.MS, '11-local-ceiling', 'k6_loop', 'oracle_plain.jsonl')
     S = C.fp.Status()
     new = set()
-    f = os.path.join(HERE, 'data', 'oracle_plain_r232.jsonl')
-    for l in (open(f) if os.path.exists(f) else []):
+    import glob
+    for f in sorted(glob.glob(os.path.join(HERE, 'data', 'oracle_plain_r232*.jsonl*'))):
+      for l in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f)):
         r = json.loads(l)
         if r['result'] == 'UNSAT':
             for t in itertools.product(*[C.lumped_choices(a) for a in r['alpha']]):

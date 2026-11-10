@@ -11,7 +11,7 @@ bound stays **235**.
 
 **Update (section "Refinement toward 232").** With context share thresholds (the trailing 5-centre
 share bounded inside the step's 7- or 8-direction window), the same chain gives **m <= 232** with solver data
-(lambda = 13033/24 = 4.5253 alpha units, potential range 6.97). The corrected witnessed ceiling of
+(lambda = 13033/24 = 4.5253 alpha units, potential range 6.97; after the second run 7154/13 = 4.5859, still 232: 231 needs 4.678). The corrected witnessed ceiling of
 5-window shares is 230.1.
 
 Stage A (the identities, their Lean statements, the window data, and which data are certified) is in
@@ -305,12 +305,43 @@ were never replayed.
   thousands more ctx-7/ctx-8 thresholds at T = 48-108, where the timeouts sit. The local ceilings
   (230 for 5-window shares, about 222 for w3 and loose ctx-7 witnesses) are far below the lower side.
 
+### Second run toward 231 (10 November, 02:21 to 08:46, 2 workers)
+
+`loop4.py` is `loop3.py` with the tests of each phase on 2 worker processes. It runs plain tests at
+60 s, thresholds at 120 s and long retries at 1,800 s. Untested 6-windows come first. It also fixes the
+second-`Status` reader. New records are in `data/*_r232b.jsonl.gz`, rounds in
+`data/loop232b_rounds.jsonl.gz`.
+
+| time | round | lambda (alpha) | real m |
+|---|---|---|---|
+| 02:22 | 0 | 4.5253 | 232.68 |
+| 04:01 | 50 | 4.5444 | 232.57 |
+| 05:56 | 100 | 4.5630 | 232.46 |
+| 07:45 | 150 | 4.5778 | 232.38 |
+| 08:45 | 169 | **4.5859** (7154/13) | 232.33 |
+
+- **Exact result** (`data/b_231try_final.json`): **m <= 232**, at lambda_t = 7154/13 with R = 7.61 alpha.
+  231 needs lambda > (125400 + R/Q)/225, which is **4.678 alpha**. The run got 0.06 of the 0.15 it
+  needed, at 0.0094 alpha/h (6.4 h), so about 10 h more at that rate.
+- **Calls:** 2,897 6-window UNSAT, 969 SAT and 22 timeouts; 596 5-window SAT; 426 5-window share
+  thresholds UNSAT (73 timeouts, 8 SAT); 744 ctx-7 and 59 ctx-8 thresholds UNSAT (20 timeouts). No
+  round was left without a cheap test, so the 1,800 s retries were never triggered.
+- **Level set at lambda_t = 550** (`data/level_550_1.json`, R 902, bound 232): 1,355 5-window share
+  keys (by needed T: 335/230/206/31/515/38), 728 ctx keys (54/321/263/60/24/6), and 31,532 plain keys,
+  of which 4,742 are new 6-count keys. Main's floors cover 524,639 of the 567,506 share uses.
+- **Binding cycle at the end** (`data/stall_final_cycle.json`): 52 steps. On 44 of them the 6-window
+  is untested, none carries a timeout, and only one is fully witnessed. Missing tests still limit the
+  bound. The extra lambda came mostly from cheap 6-window exclusions and from ctx-7 thresholds at
+  T = 24-48. Without the context records, lambda is 4.4795 (233).
+- The ceilings are unchanged: 230.1 for 5-window shares, and a loose 221.7 for ctx-7 (6,830
+  ctx-7-witnessed transitions, still only one live 3-cycle).
+
 ### Files of this section
 
 | file | contents |
 |---|---|
 | `share7.py` | context share encoding (`SubShareEncoding`), records, application to the product |
-| `loop3.py` | the one-core refinement with context thresholds |
+| `loop3.py`, `loop4.py` | the refinement with context thresholds (one core; 2 workers) |
 | `eval232.py` | exact bound (*) with lambda_t search |
 | `level_needs.py` | key and threshold sets of one potential |
 | `stall232.py`, `ceilctx232.py` | binding-cycle census and the ctx-7 test of the 5-window ceiling cycle |
