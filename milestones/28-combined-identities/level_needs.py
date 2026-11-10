@@ -71,6 +71,9 @@ def main():
     red = Q * wa - P + pi[Ga['U'][ex].astype(np.int64)] - pi[Ga['V'][ex].astype(np.int64)]
     bad = ex[red < 0]
     C.log(f'shares used on {len(used)} transitions ({nc} by main floors); exclusions used on {len(bad)} transitions')
+    # k6loop.OPLAIN is a module global that the first fp.Status() redirects; restore it so this second
+    # Status also reads 11-local-ceiling/k6_loop/oracle_plain.jsonl
+    C.fp.K6.OPLAIN = os.path.join(C.MS, '11-local-ceiling', 'k6_loop', 'oracle_plain.jsonl')
     S = C.fp.Status()
     new = set()
     f = os.path.join(HERE, 'data', 'oracle_plain_r232.jsonl')

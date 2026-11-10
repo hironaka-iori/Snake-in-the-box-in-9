@@ -439,20 +439,24 @@ def h8(tag0, tag, budget, tl=20.0, maxu=400):
         if len(es) == 0 or len(es) > maxu:
             log.append(dict(kind=kind, item=j, U=int(len(es)), skipped=True)); continue
         keys, hs, okall = [], [], True
-        tot = 0.0
+        tot = 0.0; ges = []; nsat = 0
         for g in es:
             k = h8_key(W, g)
             s = st.get(k)
             if s is None:
                 s, sc = decide_h8(k, tl); st[k] = s; sec[k] = sc
             if s != 'UNSAT':
-                okall = False; break
-            h, _, _ = C4.new(k, sec[k]); keys.append(k); hs.append(h); tot += h
+                okall = False; nsat += 1
+                if nsat > max(2, len(es) // 4):
+                    break
+                continue
+            h, _, _ = C4.new(k, sec[k]); keys.append(k); hs.append(h); tot += h; ges.append(int(g))
         uk = len(set(keys))
         tot_obj = tot + E.OVH_CERT * uk
         rec = dict(kind='share' if kind else 'plain', item=j, cost=round(c0), U=int(len(es)), all_unsat=okall,
-                   h8_cost=round(tot_obj) if okall else None, replaced=False)
-        if okall and tot_obj < c0:
+                   not_unsat=nsat, h8_cost=round(tot_obj), replaced=False)
+        es = np.array(ges, np.int64)
+        if nsat <= max(2, rec['U'] // 4) and len(es) and tot_obj < c0:
             n0 = W.nK; pi0 = W.pi.copy(); lv0 = int(W.lvl[j]) if kind == 1 else None
             add_single(W, keys, [int(g) for g in es], hs)
             for jj in range(n0, W.nK):
