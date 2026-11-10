@@ -97,6 +97,24 @@ already replayed, and 262 H8 cuts), `AllRefutedShare6SB233` (490 `RefutedShare �
 and `Floors233` (main's share16 of milestone 152, canonical7300/7304/7306 of milestone 73, share17 of
 milestone 155; their statements are copied, their proofs are not on this branch). Shards: 204, about
 10 s and 0.55 GB each, about 0.65 CPU-hours in all. Certificates: about 3.2 G hints (milestone 31).
+The conditional 233 compiles (commit 35cff09e, `outputs/aggregate-233-conditional-chain-linux.log`).
+
+**Discharging `Floors233`** (`milestones/33-233-lean/FLOORS.md`). Main's five floor theorems prove this
+branch's copies literally: their `Snake`, `canon`, `dsOf`, `dir`, `coreAlpha`, `coreShare` and
+`RefutedShare` come from modules that are byte-identical to ours or of which ours is a superset. Lean 4.19.0
+and mathlib c44e0c8e are the same. `work/spectral/stronger/Floors233Bridge.lean` compiles, and its
+`floors233_of_main` takes main's five statements verbatim and returns `Floors233`. Port steps:
+1. Free about 0.7 GB of disk; the build needs about 0.45 GB of `.olean` files.
+2. Run `python3 milestones/33-233-lean/scripts/port_main_floors.py --build-dir B --delete-sources --max-rss-gb 6.5
+   --log L`. It builds the 1,042 new modules of `data/main_floor_modules.json` in order, one `lean -o` each,
+   fetching the sources from main by blob sha (gh API, no git fetch). The 151 replay sources and the 73
+   cases come from main's archives. Use `--only ShareComplete152`, `--only ShareComplete155` or
+   `--only Share7306.Reversal` to build one part at a time. This is 2.5 to 3 CPU-hours. Main's milestone-73
+   LRAT checks exceed 3 GB of RSS: `Check1` of 7300 was stopped at the 3 GB cap after 85 s.
+3. Regenerate the 204 B233 shards if their `.olean` files are gone, then compile `Floors233Bridge` and
+   `milestones/33-233-lean/lean/Floors233Main.lean` with `LEAN_PATH` = B, core, chain and mathlib. The second
+   gives `Snake9.Floors233Port.upper_233_of_certs6SB233 : AllRefuted6SB233 → AllRefutedShare6SB233 → m ≤ 233`;
+   audit its axioms.
 
 ## 3. Rules learned the hard way
 - Build only with `work/guarded_lake_build.py --direct --trust-mtime`; never a plain `lake build` over many
