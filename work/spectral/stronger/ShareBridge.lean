@@ -128,7 +128,7 @@ theorem shareSeq_eq_coreShare {m : Nat} (M : Nat) (p : Snake m) (k : Nat) (hk : 
     shareSeq M p k = coreShare M p k := by
   rw [shareSeq_eq M p k (by omega), shareN_eq_coreShare]
 
-theorem countSeq_eq_coreAlpha {m : Nat} (p : Snake m) (k : Nat) (hk : k ≤ m) :
+theorem countSeq_eq_coreAlpha_le {m : Nat} (p : Snake m) (k : Nat) (hk : k ≤ m) :
     countSeq p k = coreAlpha p k := by
   rw [countSeq_eq p k (by omega), localAlpha_eq_coreAlpha]
 
@@ -180,7 +180,7 @@ theorem core_charge_sum_le {m : Nat} (M : Nat) (p : Snake m) (hm : 1 ≤ m) :
     apply Finset.sum_congr rfl
     intro k hk
     rw [Finset.mem_range] at hk
-    rw [countSeq_eq_coreAlpha p k (by omega), shareSeq_eq_coreShare M p k (by omega)]
+    rw [countSeq_eq_coreAlpha_le p k (by omega), shareSeq_eq_coreShare M p k (by omega)]
   rw [e]
   exact h
 

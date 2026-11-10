@@ -59,14 +59,14 @@ theorem upper_of_windows6S (T : Tables6S) (hT : StepOK6S T) {m : Nat} (p : Snake
   have hpos' : ∀ j, 1 ≤ j → j + 1 ≤ m → 1 ≤ coreAlpha p j := by
     intro j hj hjm
     have := hpos (j - 1) (by omega)
-    rw [show j - 1 + 1 = j by omega, countSeq_eq_coreAlpha p j (by omega)] at this
+    rw [show j - 1 + 1 = j by omega, countSeq_eq_coreAlpha_le p j (by omega)] at this
     exact this
   have htel := total_bound6S T hT (pathDir p) (coreAlpha p) m (by omega) hpos'
     (fun i hi => snake_inducedPattern_block p i 8 hi) hw
   have hid := core_charge_sum_le 12 p (by omega)
   rw [← rsum_eq_sum] at hid
-  rw [countSeq_eq_coreAlpha p 0 (by omega)] at h0
-  rw [countSeq_eq_coreAlpha p m (by omega)] at h1
+  rw [countSeq_eq_coreAlpha_le p 0 (by omega)] at h0
+  rw [countSeq_eq_coreAlpha_le p m (by omega)] at h1
   exact Combined.combined_bound T.k6.num T.k6.den (2 ^ T.k6.bits - 1) m (coreAlpha p)
     (coreShare 12 p) (fun j => sym (coreAlpha p j))
     (fun n => share6 T [pathDir p (n+2), pathDir p (n+3), pathDir p (n+4), pathDir p (n+5),
