@@ -83,7 +83,9 @@ def share_records():
               os.path.join(HERE, 'data', 'oracle_share.jsonl'),
               os.path.join(HERE, 'data', 'oracle_share_bulk.jsonl'),
               os.path.join(HERE, 'data', 'oracle_share_r232.jsonl.gz'),
-              os.path.join(HERE, 'data', 'oracle_share_r232.jsonl')):
+              os.path.join(HERE, 'data', 'oracle_share_r232.jsonl'),
+              os.path.join(HERE, 'data', 'oracle_share_r232b.jsonl.gz'),
+              os.path.join(HERE, 'data', 'oracle_share_r232b.jsonl')):
         if not os.path.exists(f):
             continue
         for l in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f)):
