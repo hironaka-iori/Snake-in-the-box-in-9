@@ -388,10 +388,10 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False, par
                     'noncomputable def mtab : Nat := nat_lit 0x%x' % mtab,
                     'noncomputable def meaning : Nat → MT := TagsW.getF mtab %d %d %d' % (mw, cw, iw),
                     ''] + sat_defs[4:9] + [
-                    'theorem check : TagsW.checkAll meaning ctrs window bounds tags raw = true := by decide +kernel', '',
+                    'theorem check : TagsW.checkAllK meaning ctrs window bounds tags raw = true := by decide +kernel', '',
                     'theorem sat : ∀ S E : Nat → Bool,',
                     '    Axioms S E window (centresOf window bounds) → ∃ τ, cnfTrue τ cnf = true :=',
-                    '  fun S E h => ⟨TagsW.tau S E meaning ctrs, TagsW.sound meaning ctrs window bounds tags raw check S E h⟩',
+                    '  fun S E h => ⟨TagsW.tau S E meaning ctrs, TagsW.soundK meaning ctrs window bounds tags raw check S E h⟩',
                     '']
     opt = ['set_option maxRecDepth 100000', 'set_option maxHeartbeats 0', '']
     imports = ['import LocalWindowDirModel', 'import LocalWindowCnfPack'] + (['import LocalWindowTagsW'] if sat_v2 else [])
@@ -429,20 +429,22 @@ def emit(name, certs, core_dir, out, chunk=4096, split=False, compare=False, par
                     % (nm('tags', i), cw, iw, jw, lits(tag_ps[i])) for i in range(np_)]
         if np_ > 1:
             tag_defs.append('noncomputable def tags : List Tag := %s' % app('tags'))
-        pre = 'TagsW.' if sat_v2 else ''
+        pre, K = ('TagsW.', 'K') if sat_v2 else ('', '')
         checks = ['/-- The counters, with the endpoint order checked on adjacent entries (`ctrOKL`). -/',
-                  'theorem check_ctrs : ctrs.all (%s meaning (centresK window bounds)) = true := by '
-                  'decide +kernel' % ('TagsW.ctrOK' if sat_v2 else 'ctrOKL'), '']
+                  ('theorem check_ctrs : TagsW.allK (TagsW.ctrOKK meaning (centresK window bounds)) ctrs = true := '
+                   'by decide +kernel' if sat_v2 else
+                   'theorem check_ctrs : ctrs.all (ctrOKL meaning (centresK window bounds)) = true := by '
+                   'decide +kernel'), '']
         for i, (s, e) in enumerate(parts):
             checks += ['/-- Core clauses %d to %d (%d literals). -/' % (s + 1, e, sum(map(len, core[s:e]))),
-                       'theorem check_%d : %sckAll meaning ctrs window %s %s = true := by decide +kernel'
-                       % (i, pre, nm('tags', i), nm('raw', i)), '']
+                       'theorem check_%d : %sckAll%s meaning ctrs window %s %s = true := by decide +kernel'
+                       % (i, pre, K, nm('tags', i), nm('raw', i)), '']
         term = 'check_%d' % (np_ - 1)
         for i in reversed(range(np_ - 1)):
-            term = pre + 'ckAll_append meaning ctrs window %s %s _ _ check_%d\n      (%s)' % (nm('tags', i), nm('raw', i), i, term)
+            term = pre + 'ckAll' + K + '_append meaning ctrs window %s %s _ _ check_%d\n      (%s)' % (nm('tags', i), nm('raw', i), i, term)
         sat_defs = sat_defs[:7] + ['\n\n'.join(tag_defs), ''] + checks + [
-            'theorem check : %scheckAll meaning ctrs window bounds tags raw = true :=' % pre,
-            '  %scheckAll_of_parts check_ctrs\n    (%s)' % (pre, term), ''] + sat_defs[-4:]
+            'theorem check : %scheckAll%s meaning ctrs window bounds tags raw = true :=' % (pre, K),
+            '  %scheckAll%s_of_parts check_ctrs\n    (%s)' % (pre, K, term), ''] + sat_defs[-4:]
         if not sat_v2:
             imports.append('import LocalWindowTagsSplit')
         # one kernel check at a time: the parts are separate declarations so that their caches

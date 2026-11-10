@@ -702,6 +702,450 @@ theorem checkAll_of_parts {M : Nat → MT} {cs : List Ctr} {w : List Nat} {b : L
   simp only [checkAll, Bool.and_eq_true]
   exact ⟨hc, ha⟩
 
+/-! ## The kernel-native checker `checkAllK`
+
+`checkAll` above evaluates `List.all`, `List.contains`, `==` on lists, `decide (a ≤ b)` and the
+like through their instances and equation compilers, and in the kernel every such step is an
+unfolding.  `checkAllK` computes the same Bool with `Nat.beq`, `Nat.ble`, `Nat.blt`, `List.rec`
+and `Bool.rec` directly, and an explicit neighbour list (`nbrsK`).  `checkAllK_eq` proves the two
+equal for all arguments, so `soundK` is `sound`. -/
+
+section Kernel
+
+noncomputable section
+
+/-- Kernel branch `if c then t else e`, written with `Bool.rec`. -/
+local macro "kif " c:term " then " t:term " else " e:term : term =>
+  `(Bool.rec (motive := fun _ => _) $e $t $c)
+
+theorem nbeq (a b : Nat) : Nat.beq a b = (a == b) := by
+  rw [Bool.eq_iff_iff, Nat.beq_eq, beq_iff_eq]
+
+theorem nble (a b : Nat) : Nat.ble a b = decide (a ≤ b) := by
+  rw [Bool.eq_iff_iff, Nat.ble_eq, decide_eq_true_eq]
+
+theorem nblt (a b : Nat) : Nat.blt a b = decide (a < b) := by
+  rw [Bool.eq_iff_iff, Nat.blt_eq, decide_eq_true_eq]
+
+/-! ### List primitives -/
+
+def allK {α : Type} (p : α → Bool) (l : List α) : Bool :=
+  List.rec (motive := fun _ => Bool) true (fun a _ ih => kif p a then ih else false) l
+
+theorem allK_eq {α : Type} (p : α → Bool) : ∀ l : List α, allK p l = l.all p
+  | [] => rfl
+  | a :: t => by
+    have ih := allK_eq p t
+    show (kif p a then allK p t else false) = (p a && t.all p)
+    rw [ih]; cases p a <;> rfl
+
+def memK (x : Nat) (l : List Nat) : Bool :=
+  List.rec (motive := fun _ => Bool) false (fun a _ ih => kif Nat.beq a x then true else ih) l
+
+theorem memK_eq (x : Nat) : ∀ l : List Nat, memK x l = l.contains x
+  | [] => rfl
+  | a :: t => by
+    have ih := memK_eq x t
+    show (kif Nat.beq a x then true else memK x t) = (a :: t).contains x
+    rw [ih, List.contains_cons, nbeq]
+    by_cases h : a = x
+    · subst h; simp
+    · have h' : (a == x) = false := by simp [h]
+      have h'' : (x == a) = false := by simp [Ne.symm h]
+      rw [h', h'']; rfl
+
+def mapK (f : Nat → Nat) (l : List Nat) : List Nat :=
+  List.rec (motive := fun _ => List Nat) [] (fun a _ ih => f a :: ih) l
+
+theorem mapK_eq (f : Nat → Nat) : ∀ l : List Nat, mapK f l = l.map f
+  | [] => rfl
+  | a :: t => by
+    show f a :: mapK f t = f a :: t.map f
+    rw [mapK_eq f t]
+
+def lenK {α : Type} (l : List α) : Nat :=
+  List.rec (motive := fun _ => Nat) 0 (fun _ _ ih => Nat.succ ih) l
+
+theorem lenK_eq {α : Type} : ∀ l : List α, lenK l = l.length
+  | [] => rfl
+  | _ :: t => by show Nat.succ (lenK t) = t.length + 1; rw [lenK_eq t]
+
+/-- `l.getD i d`. -/
+def getK {α : Type} (l : List α) (d : α) : Nat → α :=
+  List.rec (motive := fun _ => Nat → α) (fun _ => d)
+    (fun a _ ih i => Nat.rec (motive := fun _ => α) a (fun j _ => ih j) i) l
+
+theorem getK_eq {α : Type} (d : α) : ∀ (l : List α) (i : Nat), getK l d i = l.getD i d
+  | [], _ => by simp [getK]
+  | a :: t, 0 => by show a = _; simp
+  | a :: t, i + 1 => by
+    show getK t d i = (a :: t).getD (i + 1) d
+    rw [getK_eq d t i]; simp
+
+def cntK (f : Nat → Bool) (l : List Nat) : Nat :=
+  List.rec (motive := fun _ => Nat) 0 (fun a _ ih => kif f a then Nat.succ ih else ih) l
+
+theorem cntK_eq (f : Nat → Bool) : ∀ l : List Nat, cntK f l = cnt f l
+  | [] => rfl
+  | a :: t => by
+    show (kif f a then Nat.succ (cntK f t) else cntK f t) = cnt f (a :: t)
+    rw [cntK_eq f t]; unfold cnt; cases h : f a <;> simp [List.filter_cons, h]
+
+/-- `subl l m`. -/
+def sublK (l m : List Nat) : Bool :=
+  List.rec (motive := fun _ => List Nat → Bool)
+    (fun l => List.rec (motive := fun _ => Bool) true (fun _ _ _ => false) l)
+    (fun b _ ih l => List.rec (motive := fun _ => Bool) true
+      (fun a as _ => kif Nat.beq a b then ih as else ih (a :: as)) l) m l
+
+theorem sublK_eq : ∀ (l m : List Nat), sublK l m = subl l m
+  | [], [] => rfl
+  | [], _ :: _ => by simp [sublK, subl]
+  | _ :: _, [] => by simp [sublK, subl]
+  | a :: as, b :: bs => by
+    show (kif Nat.beq a b then sublK as bs else sublK (a :: as) bs) = subl (a :: as) (b :: bs)
+    rw [sublK_eq as bs, sublK_eq (a :: as) bs, nbeq]
+    by_cases h : a = b
+    · subst h; simp [subl]
+    · have h' : (a == b) = false := by simp [h]
+      rw [h']; simp [subl, h]
+
+/-- `l.map f == m`. -/
+def eqMapK (f : Nat → Nat) (l m : List Nat) : Bool :=
+  List.rec (motive := fun _ => List Nat → Bool)
+    (fun m => List.rec (motive := fun _ => Bool) true (fun _ _ _ => false) m)
+    (fun a _ ih m => List.rec (motive := fun _ => Bool) false
+      (fun b bs _ => kif Nat.beq (f a) b then ih bs else false) m) l m
+
+theorem eqMapK_iff (f : Nat → Nat) : ∀ (l m : List Nat), eqMapK f l m = true ↔ l.map f = m
+  | [], [] => by simp [eqMapK]
+  | [], _ :: _ => by simp [eqMapK]
+  | _ :: _, [] => by simp [eqMapK]
+  | a :: as, b :: bs => by
+    show (kif Nat.beq (f a) b then eqMapK f as bs else false) = true ↔ _
+    have ih := eqMapK_iff f as bs
+    cases h : Nat.beq (f a) b
+    · have h' : f a ≠ b := Nat.ne_of_beq_eq_false h
+      show false = true ↔ _
+      simp [h']
+    · simp only [Nat.beq_eq] at h
+      simp only [List.map_cons, List.cons.injEq, h, true_and]
+      exact ih
+
+theorem eqMapK_eq (f : Nat → Nat) (l m : List Nat) : eqMapK f l m = (l.map f == m) := by
+  rw [Bool.eq_iff_iff, eqMapK_iff, beq_iff_eq]
+
+/-- `l.eraseIdx t`. -/
+def eraseK (l : List Nat) : Nat → List Nat :=
+  List.rec (motive := fun _ => Nat → List Nat) (fun _ => [])
+    (fun a as ih t => Nat.rec (motive := fun _ => List Nat) as (fun t' _ => a :: ih t') t) l
+
+theorem eraseK_eq : ∀ (l : List Nat) (t : Nat), eraseK l t = l.eraseIdx t
+  | [], _ => by simp [eraseK]
+  | _ :: as, 0 => by show as = _; simp
+  | a :: as, t + 1 => by
+    show a :: eraseK as t = (a :: as).eraseIdx (t + 1)
+    rw [eraseK_eq as t]; simp
+
+/-- `pwL (a :: t)`. -/
+def pwLA (a : Nat) (t : List Nat) : Bool :=
+  List.rec (motive := fun _ => Nat → Bool) (fun _ => true)
+    (fun b _ ih a => kif Nat.blt a b then ih b else false) t a
+
+theorem pwLA_eq : ∀ (a : Nat) (t : List Nat), pwLA a t = pwL (a :: t)
+  | _, [] => rfl
+  | a, b :: t => by
+    show (kif Nat.blt a b then pwLA b t else false) = pwL (a :: b :: t)
+    rw [pwLA_eq b t, nblt]; simp only [pwL]; cases decide (a < b) <;> rfl
+
+def pwLK (l : List Nat) : Bool :=
+  List.rec (motive := fun _ => Bool) true (fun a t _ => pwLA a t) l
+
+theorem pwLK_eq : ∀ l : List Nat, pwLK l = pwL l
+  | [] => rfl
+  | a :: t => pwLA_eq a t
+
+/-- `nbrs v`, written out. -/
+def nbrsK (v : Nat) : List Nat :=
+  [Nat.xor v 1, Nat.xor v 2, Nat.xor v 4, Nat.xor v 8, Nat.xor v 16, Nat.xor v 32, Nat.xor v 64,
+    Nat.xor v 128, Nat.xor v 256]
+
+theorem nbrsK_eq (v : Nat) : nbrsK v = nbrs v := rfl
+
+/-! ### Literals -/
+
+def isRK (M : Nat → MT) (x c i j : Nat) : Bool :=
+  match M x with
+  | .r c' i' j' => Nat.beq c' c && Nat.beq i' i && Nat.beq j' j
+  | _ => false
+
+theorem isRK_eq (M : Nat → MT) (x c i j : Nat) : isRK M x c i j = isR M x c i j := by
+  unfold isRK isR; split <;> simp [nbeq]
+
+def vlK (M : Nat → MT) (a : Nat) : Nat := vOf M (Nat.div a 2)
+def posPK (M : Nat → MT) (a : Nat) : Bool :=
+  Nat.beq (Nat.mod a 2) 0 && Nat.ble 2 a && isP M (Nat.div a 2)
+def negPK (M : Nat → MT) (a : Nat) : Bool :=
+  Nat.beq (Nat.mod a 2) 1 && Nat.ble 2 a && isP M (Nat.div a 2)
+def posEK (M : Nat → MT) (a : Nat) : Bool :=
+  Nat.beq (Nat.mod a 2) 0 && Nat.ble 2 a && isE M (Nat.div a 2)
+def negEK (M : Nat → MT) (a : Nat) : Bool :=
+  Nat.beq (Nat.mod a 2) 1 && Nat.ble 2 a && isE M (Nat.div a 2)
+def posRK (M : Nat → MT) (a c i j : Nat) : Bool :=
+  Nat.beq (Nat.mod a 2) 0 && Nat.ble 2 a && isRK M (Nat.div a 2) c i j
+def negRK (M : Nat → MT) (a c i j : Nat) : Bool :=
+  Nat.beq (Nat.mod a 2) 1 && Nat.ble 2 a && isRK M (Nat.div a 2) c i j
+def negOfK (a l : Nat) : Bool :=
+  Nat.beq (Nat.div a 2) (Nat.div l 2) && !Nat.beq (Nat.mod a 2) (Nat.mod l 2) && Nat.ble 2 l
+def baseOKK (M : Nat → MT) (l : Nat) : Bool :=
+  Nat.ble 2 l && (isP M (Nat.div l 2) || isE M (Nat.div l 2))
+
+theorem vlK_eq (M : Nat → MT) (a : Nat) : vlK M a = vl M a := rfl
+theorem posPK_eq (M : Nat → MT) (a : Nat) : posPK M a = posP M a := by
+  simp only [posPK, posP, nbeq, nble]; rfl
+theorem negPK_eq (M : Nat → MT) (a : Nat) : negPK M a = negP M a := by
+  simp only [negPK, negP, nbeq, nble]; rfl
+theorem posEK_eq (M : Nat → MT) (a : Nat) : posEK M a = posE M a := by
+  simp only [posEK, posE, nbeq, nble]; rfl
+theorem negEK_eq (M : Nat → MT) (a : Nat) : negEK M a = negE M a := by
+  simp only [negEK, negE, nbeq, nble]; rfl
+theorem posRK_eq (M : Nat → MT) (a c i j : Nat) : posRK M a c i j = posR M a c i j := by
+  simp only [posRK, posR, nbeq, nble, isRK_eq]; rfl
+theorem negRK_eq (M : Nat → MT) (a c i j : Nat) : negRK M a c i j = negR M a c i j := by
+  simp only [negRK, negR, nbeq, nble, isRK_eq]; rfl
+theorem negOfK_eq (a l : Nat) : negOfK a l = negOf a l := by
+  simp only [negOfK, negOf, nbeq, nble, bne]; rfl
+theorem baseOKK_eq (M : Nat → MT) (l : Nat) : baseOKK M l = baseOK M l := by
+  simp only [baseOKK, baseOK, nble]; rfl
+
+theorem posPK_fun (M : Nat → MT) : posPK M = posP M := funext (posPK_eq M)
+theorem negPK_fun (M : Nat → MT) : negPK M = negP M := funext (negPK_eq M)
+theorem posEK_fun (M : Nat → MT) : posEK M = posE M := funext (posEK_eq M)
+theorem vlK_fun (M : Nat → MT) : vlK M = vl M := rfl
+theorem baseOKK_fun (M : Nat → MT) : baseOKK M = baseOK M := funext (baseOKK_eq M)
+
+/-! ### Counters and clauses -/
+
+def ctrOKK (M : Nat → MT) (cens : List Centre) (ct : Ctr) : Bool :=
+  allK (baseOKK M) ct.lits &&
+  match ct.kind with
+  | .ends => Nat.beq ct.k 2 && allK (posEK M) ct.lits && pwLK (mapK (vlK M) ct.lits)
+  | .hi ci => Nat.blt ci (lenK cens) && allK (negPK M) ct.lits &&
+      Nat.beq ct.k (getK cens dfltCentre ci).hi && eqMapK (vlK M) ct.lits (corners (getK cens dfltCentre ci))
+  | .lo ci => Nat.blt ci (lenK cens) && allK (posPK M) ct.lits &&
+      Nat.beq (Nat.add ct.k (getK cens dfltCentre ci).lo)
+        (lenK (freePairs (getK cens dfltCentre ci).d₁ (getK cens dfltCentre ci).d₂)) &&
+      eqMapK (vlK M) ct.lits (corners (getK cens dfltCentre ci))
+
+theorem ctrOKK_eq (M : Nat → MT) (cens : List Centre) (ct : Ctr) : ctrOKK M cens ct = ctrOK M cens ct := by
+  unfold ctrOKK ctrOK
+  cases ct.kind <;>
+    simp only [allK_eq, baseOKK_fun, posEK_fun, negPK_fun, posPK_fun, pwLK_eq, mapK_eq, vlK_fun,
+      nbeq, nblt, lenK_eq, getK_eq, eqMapK_eq] <;> rfl
+
+def ckWindowK (M : Nat → MT) (w : List Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a] => posPK M a && memK (vlK M a) w
+  | _ => false
+
+def ckDeg2K (M : Nat → MT) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b, c, d] => negPK M a && negPK M b && negPK M c && negPK M d &&
+      sublK [vlK M b, vlK M c, vlK M d] (nbrsK (vlK M a))
+  | _ => false
+
+def ckDegPosK (M : Nat → MT) (cl : List Nat) : Bool :=
+  match cl with
+  | a :: rest => negPK M a && allK (posPK M) rest && eqMapK (vlK M) rest (nbrsK (vlK M a))
+  | _ => false
+
+def ckEndSelK (M : Nat → MT) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b] => negEK M a && posPK M b && Nat.beq (vlK M a) (vlK M b)
+  | _ => false
+
+def ckLowEndK (M : Nat → MT) (t : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | a :: b :: rest => negPK M a && posEK M b && Nat.beq (vlK M a) (vlK M b) && allK (posPK M) rest &&
+      eqMapK (vlK M) rest (eraseK (nbrsK (vlK M a)) t)
+  | _ => false
+
+def ckEndLowK (M : Nat → MT) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b, c] => negEK M a && negPK M b && negPK M c && sublK [vlK M b, vlK M c] (nbrsK (vlK M a))
+  | _ => false
+
+def ckCutK (M : Nat → MT) (cl : List Nat) : Bool :=
+  !cl.isEmpty && allK (negPK M) cl &&
+    allK (fun v => Nat.ble 2 (cntK (fun w => memK w (mapK (vlK M) cl)) (nbrsK v))) (mapK (vlK M) cl)
+
+def ckFirstK (M : Nat → MT) (cs : List Ctr) (c i : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b] => Nat.blt i (lenK (getK cs dfltCtr c).lits) &&
+      negOfK a (getK (getK cs dfltCtr c).lits 0 i) && posRK M b c i 0
+  | _ => false
+
+def ckZeroK (M : Nat → MT) (c j : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a] => Nat.ble 1 j && negRK M a c 0 j
+  | _ => false
+
+def ckMonoK (M : Nat → MT) (c i j : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b] => negRK M a c i j && posRK M b c (Nat.add i 1) j
+  | _ => false
+
+def ckStepK (M : Nat → MT) (cs : List Ctr) (c i j : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b, d] => Nat.blt (Nat.add i 1) (lenK (getK cs dfltCtr c).lits) &&
+      negOfK a (getK (getK cs dfltCtr c).lits 0 (Nat.add i 1)) && negRK M b c i j &&
+      posRK M d c (Nat.add i 1) (Nat.add j 1)
+  | _ => false
+
+def ckOverK (M : Nat → MT) (cs : List Ctr) (c i : Nat) (cl : List Nat) : Bool :=
+  match cl with
+  | [a, b] => Nat.blt (Nat.add i 1) (lenK (getK cs dfltCtr c).lits) &&
+      negOfK a (getK (getK cs dfltCtr c).lits 0 (Nat.add i 1)) && Nat.ble 1 (getK cs dfltCtr c).k &&
+      negRK M b c i (Nat.sub (getK cs dfltCtr c).k 1)
+  | _ => false
+
+def ckClauseK (M : Nat → MT) (cs : List Ctr) (w : List Nat) (t : Tag) (cl : List Nat) : Bool :=
+  match t with
+  | .window => ckWindowK M w cl
+  | .deg2 => ckDeg2K M cl
+  | .degPos => ckDegPosK M cl
+  | .endSel => ckEndSelK M cl
+  | .lowEnd t => ckLowEndK M t cl
+  | .endLow => ckEndLowK M cl
+  | .cut => ckCutK M cl
+  | .first c i => ckFirstK M cs c i cl
+  | .zero c j => ckZeroK M c j cl
+  | .mono c i j => ckMonoK M c i j cl
+  | .step c i j => ckStepK M cs c i j cl
+  | .over c i => ckOverK M cs c i cl
+
+section Eqs
+
+variable (M : Nat → MT) (cs : List Ctr)
+
+theorem ckWindowK_eq (w cl : List Nat) : ckWindowK M w cl = ckWindow M w cl := by
+  match cl with
+  | [] => rfl
+  | [a] => simp only [ckWindowK, ckWindow, posPK_eq, memK_eq, vlK_eq]
+  | _ :: _ :: _ => rfl
+
+theorem ckDeg2K_eq (cl : List Nat) : ckDeg2K M cl = ckDeg2 M cl := by
+  match cl with
+  | [a, b, c, d] => simp only [ckDeg2K, ckDeg2, negPK_eq, sublK_eq, nbrsK_eq, vlK_eq]
+  | [] | [_] | [_, _] | [_, _, _] | _ :: _ :: _ :: _ :: _ :: _ => rfl
+
+theorem ckDegPosK_eq (cl : List Nat) : ckDegPosK M cl = ckDegPos M cl := by
+  match cl with
+  | [] => rfl
+  | a :: rest => simp only [ckDegPosK, ckDegPos, negPK_eq, allK_eq, posPK_fun, eqMapK_eq, vlK_fun, nbrsK_eq]
+
+theorem ckEndSelK_eq (cl : List Nat) : ckEndSelK M cl = ckEndSel M cl := by
+  match cl with
+  | [a, b] => simp only [ckEndSelK, ckEndSel, negEK_eq, posPK_eq, nbeq, vlK_eq]
+  | [] | [_] | _ :: _ :: _ :: _ => rfl
+
+theorem ckLowEndK_eq (t : Nat) (cl : List Nat) : ckLowEndK M t cl = ckLowEnd M t cl := by
+  match cl with
+  | a :: b :: rest =>
+    simp only [ckLowEndK, ckLowEnd, negPK_eq, posEK_eq, nbeq, vlK_fun, allK_eq, posPK_fun, eqMapK_eq,
+      eraseK_eq, nbrsK_eq]
+  | [] | [_] => rfl
+
+theorem ckEndLowK_eq (cl : List Nat) : ckEndLowK M cl = ckEndLow M cl := by
+  match cl with
+  | [a, b, c] => simp only [ckEndLowK, ckEndLow, negEK_eq, negPK_eq, sublK_eq, nbrsK_eq, vlK_eq]
+  | [] | [_] | [_, _] | _ :: _ :: _ :: _ :: _ => rfl
+
+theorem ckCutK_eq (cl : List Nat) : ckCutK M cl = ckCut M cl := by
+  simp only [ckCutK, ckCut, allK_eq, negPK_fun, mapK_eq, vlK_fun, memK_eq, cntK_eq, nbrsK_eq, nble]
+
+theorem ckFirstK_eq (c i : Nat) (cl : List Nat) : ckFirstK M cs c i cl = ckFirst M cs c i cl := by
+  match cl with
+  | [a, b] => simp only [ckFirstK, ckFirst, nblt, lenK_eq, getK_eq, negOfK_eq, posRK_eq]
+  | [] | [_] | _ :: _ :: _ :: _ => rfl
+
+theorem ckZeroK_eq (c j : Nat) (cl : List Nat) : ckZeroK M c j cl = ckZero M c j cl := by
+  match cl with
+  | [a] => simp only [ckZeroK, ckZero, nble, negRK_eq]
+  | [] | _ :: _ :: _ => rfl
+
+theorem ckMonoK_eq (c i j : Nat) (cl : List Nat) : ckMonoK M c i j cl = ckMono M c i j cl := by
+  match cl with
+  | [a, b] => simp only [ckMonoK, ckMono, negRK_eq, posRK_eq] <;> rfl
+  | [] | [_] | _ :: _ :: _ :: _ => rfl
+
+theorem ckStepK_eq (c i j : Nat) (cl : List Nat) : ckStepK M cs c i j cl = ckStep M cs c i j cl := by
+  match cl with
+  | [a, b, d] => simp only [ckStepK, ckStep, nblt, lenK_eq, getK_eq, negOfK_eq, negRK_eq, posRK_eq] <;> rfl
+  | [] | [_] | [_, _] | _ :: _ :: _ :: _ :: _ => rfl
+
+theorem ckOverK_eq (c i : Nat) (cl : List Nat) : ckOverK M cs c i cl = ckOver M cs c i cl := by
+  match cl with
+  | [a, b] => simp only [ckOverK, ckOver, nblt, nble, lenK_eq, getK_eq, negOfK_eq, negRK_eq] <;> rfl
+  | [] | [_] | _ :: _ :: _ :: _ => rfl
+
+theorem ckClauseK_eq (w : List Nat) (t : Tag) (cl : List Nat) :
+    ckClauseK M cs w t cl = ckClause M cs w t cl := by
+  cases t <;> simp only [ckClauseK, ckClause, ckWindowK_eq, ckDeg2K_eq, ckDegPosK_eq, ckEndSelK_eq,
+    ckLowEndK_eq, ckEndLowK_eq, ckCutK_eq, ckFirstK_eq, ckZeroK_eq, ckMonoK_eq, ckStepK_eq, ckOverK_eq]
+
+end Eqs
+
+def ckAllK (M : Nat → MT) (cs : List Ctr) (w : List Nat) (tags : List Tag) (raw : List (List Nat)) : Bool :=
+  List.rec (motive := fun _ => List (List Nat) → Bool)
+    (fun r => List.rec (motive := fun _ => Bool) true (fun _ _ _ => false) r)
+    (fun t _ ih r => List.rec (motive := fun _ => Bool) false
+      (fun cl cls _ => kif ckClauseK M cs w t cl then ih cls else false) r) tags raw
+
+theorem ckAllK_eq (M : Nat → MT) (cs : List Ctr) (w : List Nat) :
+    ∀ (tags : List Tag) (raw : List (List Nat)), ckAllK M cs w tags raw = ckAll M cs w tags raw
+  | [], [] => rfl
+  | [], _ :: _ => rfl
+  | _ :: _, [] => rfl
+  | t :: ts, cl :: cls => by
+    show (kif ckClauseK M cs w t cl then ckAllK M cs w ts cls else false) = ckAll M cs w (t :: ts) (cl :: cls)
+    rw [ckAllK_eq M cs w ts cls, ckClauseK_eq]; simp only [ckAll]; cases ckClause M cs w t cl <;> rfl
+
+def checkAllK (M : Nat → MT) (cs : List Ctr) (w : List Nat) (b : List (Nat × Nat))
+    (tags : List Tag) (raw : List (List Nat)) : Bool :=
+  allK (ctrOKK M (centresK w b)) cs && ckAllK M cs w tags raw
+
+theorem checkAllK_eq (M : Nat → MT) (cs : List Ctr) (w : List Nat) (b : List (Nat × Nat))
+    (tags : List Tag) (raw : List (List Nat)) : checkAllK M cs w b tags raw = checkAll M cs w b tags raw := by
+  have : ctrOKK M (centresK w b) = ctrOK M (centresK w b) := funext (ctrOKK_eq M _)
+  simp only [checkAllK, checkAll, allK_eq, this, ckAllK_eq]
+
+/-- Main soundness theorem of the kernel-native checker. -/
+theorem soundK (M : Nat → MT) (cs : List Ctr) (w : List Nat) (b : List (Nat × Nat)) (tags : List Tag)
+    (raw : List (List Nat)) (h : checkAllK M cs w b tags raw = true) (S E : Nat → Bool)
+    (ax : Axioms S E w (centresOf w b)) :
+    cnfTrue (tau S E M cs) (raw.map (·.map decodeLit)) = true :=
+  sound M cs w b tags raw (by rw [← checkAllK_eq]; exact h) S E ax
+
+/-- Two consecutive parts of the clauses, checked separately. -/
+theorem ckAllK_append (M : Nat → MT) (cs : List Ctr) (w : List Nat)
+    (t₁ : List Tag) (r₁ : List (List Nat)) (t₂ : List Tag) (r₂ : List (List Nat))
+    (h₁ : ckAllK M cs w t₁ r₁ = true) (h₂ : ckAllK M cs w t₂ r₂ = true) :
+    ckAllK M cs w (t₁ ++ t₂) (r₁ ++ r₂) = true := by
+  rw [ckAllK_eq] at h₁ h₂ ⊢; exact ckAll_append M cs w t₁ r₁ t₂ r₂ h₁ h₂
+
+/-- `checkAllK` from the counters and the clauses, checked separately. -/
+theorem checkAllK_of_parts {M : Nat → MT} {cs : List Ctr} {w : List Nat} {b : List (Nat × Nat)}
+    {tags : List Tag} {raw : List (List Nat)}
+    (hc : allK (ctrOKK M (centresK w b)) cs = true) (ha : ckAllK M cs w tags raw = true) :
+    checkAllK M cs w b tags raw = true := by
+  simp only [checkAllK, Bool.and_eq_true]
+  exact ⟨hc, ha⟩
+
+end
+
+end Kernel
+
 /-! ## Flat meaning tables -/
 
 section Decode
