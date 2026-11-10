@@ -9,6 +9,11 @@ an edge weight `120 sym + S5` on the Lean k6 full product, gives **m <= 233** (s
 never helps: the LP optimum puts weight 0 on it in every data state. With certified data only, the
 bound stays **235**.
 
+**Update (section "Refinement toward 232").** With context share thresholds (the trailing 5-centre
+share bounded inside the step's 7- or 8-direction window), the same chain gives **m <= 232** with solver data
+(lambda = 13033/24 = 4.5253 alpha units, potential range 6.97). The corrected witnessed ceiling of
+5-window shares is 230.1.
+
 Stage A (the identities, their Lean statements, the window data, and which data are certified) is in
 `INVENTORY.md`.
 
@@ -103,7 +108,10 @@ with optimistic shares. Most binding windows were plain-UNSAT 6-windows that sol
 - **Witnessed ceiling** (`ceiling.py ceiling`, `data/c_ceiling.json`). Take the minimum over cycles whose
   every 6-window is plain-SAT and every 5-window has a share witness. Before this run it was the
   period-3 family 0123014/0123042/0123412, alpha 3,6,3,3,6,4, mu 4.98 (230.1). New 6-window exclusions
-  killed it. It is now the 14-cycle of `../11-local-ceiling/s0_k6_ceiling` (alpha 6+,5,3,4,3,3,6+,…),
+  killed it. **[Corrected in "Refinement toward 232": this was an artefact. `ceiling.py` did not read
+  this milestone's own plain-SAT records, and a second `fp.Status()` in one process misses
+  `k6_loop/oracle_plain.jsonl`. With both fixed, the period-3 family is still witnessed and the
+  5-window ceiling is 230.1, not 223.5.]** It is now the 14-cycle of `../11-local-ceiling/s0_k6_ceiling` (alpha 6+,5,3,4,3,3,6+,…),
   mu = 5214/7/120 = 6.207, **m <= 223.5**. The witnesses are unminimised plain models, so this cap is
   loose. No set of 5-window share certificates and k <= 7 plain keys can lift that cycle on this
   automaton.
@@ -189,6 +197,131 @@ The chain is the k6 chain of milestone 23 with one extra table. Every other piec
    `(P + 4200 Q) m ≤ 1099800 Q + 7 P + R` (`combined_bound`). With P/Q = 520 and R = 736 this gives
    `m ≤ 233` (`m_le_233`). In the real chain, `rsum` is replaced by the project's `psum`/`Finset.sum`.
 
+
+## Refinement toward 232
+
+Run of 9-10 November 2026, 20:13 to 02:10, at `nice -n 10` on one core (peak RSS 1.2 GB for the k7
+product, 0.6 GB otherwise). There was a container restart at 22:15; the loop resumed from the committed
+records. Solver side only. **Result: m <= 232 with solver data**, at lambda = 13033/24 = 543.04
+(4.5253 alpha units). 231 is out of reach of this loop.
+
+### What changed
+
+- **Context share thresholds** (`share7.py`). The step weight needs a lower bound on the share sum of
+  the trailing 5 centres n+3..n+7. Milestone 28 took it from the 6-direction 5-window alone. Here it can
+  also come from the longer window of the same step: ctx 7 (directions ds[1:8], the step's 6 counts) or
+  ctx 8 (ds[0:8], with the count at n+1 free). In both, the share totalizer covers only the trailing 5
+  centres. The class is `SubShareEncoding`, which is `wincert_share.ShareEncoding` restricted to a range
+  of centres, with the same clause kinds. Every step has exactly one such window, so
+  `S5 = max(5-window lb, ctx lb)` stays a lower bound and the arithmetic (*) is unchanged. A ctx
+  record is oriented (no reversal). `comb.build` and `k7comb.edges` apply them; set `NOCTX=1` to switch
+  them off.
+- **`loop3.py`** is `loop.py` on one core, with these per-window steps: 6-window plain test (run in
+  the step's orientation, so that a SAT model also gives the ctx-7 trailing-share witness), 5-window
+  plain test, 5-window threshold, and then, if the 5-window is stuck at its witness or at a timed-out
+  level, a ctx-7 threshold and after it a ctx-8 threshold. Timed-out levels are retried once at 600 s.
+- **`eval232.py`**: the exact bound (*). It runs Howard on the live core, then integer Bellman-Ford on
+  all allowed transitions at lambda_t = lambda and at quarter values below it. 232 needs
+  `226 lambda_t > 121200 + R/Q`, which is about 540 for R of about 830.
+- **`level_needs.py P/Q`**: the key and threshold sets one potential uses (see below).
+
+### Rounds (`data/loop232_rounds.jsonl.gz`, 118 rounds, 5.3 h of loop time)
+
+| time | round | lambda (alpha) | real m | bound |
+|---|---|---|---|---|
+| 20:21 | 0 | 4.4675 (11258/21) | 233.01 | 233 |
+| 21:12 | 20 | 4.4826 | 232.93 | 233 |
+| 22:18 | 40 | 4.4965 | 232.84 | 233 (lambda_t 539, R 804: margin 614 is too small) |
+| 22:41 | 60 | **4.5007** (49148/91) | 232.82 | **232** (lambda_t 540, R 820 < 840; `data/b_232_r60.json`) |
+| 00:18 | 87 | 4.5126 (28700/53) | 232.75 | 232 (lambda_t 1083/2, R 1652/2) |
+| 01:57 | 118 | **4.5253** (13033/24) | 232.68 | **232** (lambda_t 543, R 837 = 6.97 alpha; `data/b_232_final.json`) |
+
+New solver calls: 2,049 UNSAT, 1,042 SAT and 60 timed-out 6-windows; 761 SAT and 13 timed-out
+5-windows (`oracle_plain_r232.jsonl.gz`). 5-window share thresholds: 258 UNSAT (117 at 16, 91 at 24,
+39 at 48, 8 at 72, 3 above 100), 76 timeouts and 1 SAT (`oracle_share_r232.jsonl.gz`). Context
+thresholds: 400 ctx-7 UNSAT (45 at 16, 180 at 24, 127 at 32, 23 at 48-60, 25 above 72), 22 timeouts
+and 3 SAT; 8 ctx-8 UNSAT and 4 timeouts; plus 1,042 ctx-7 witnesses from the 6-window models
+(`ctxshare_r232.jsonl.gz`). Solver time: 1.5 h on 6-window plain tests, 2.0 h on 5-window thresholds,
+and 1.3 h on context thresholds.
+
+### Key and threshold sets per level (`data/level_*.json`)
+
+`level_needs.py` fixes one Bellman-Ford potential and lists what it uses. It counts the shares needed
+on allowed transitions, split into those covered by main's Lean floors, by 5-window thresholds and by
+context thresholds. For each excluded transition it would otherwise violate, it counts one plain key:
+the shortest known UNSAT suffix window, chosen greedily, so this count is an upper bound for that
+potential. "new" means a key found in this section.
+
+| level | lambda_t, R | share uses (main floors) | 5-window share keys (by needed T: <=16/24/48/72/108/more) | ctx keys (same bins) | plain keys (3/4/5/6/7 directions; 7-dir new) |
+|---|---|---|---|---|---|
+| 233 | 520, 624 | 637,050 (585,476) | 1,105 (233/169/142/13/513/35) | 107 (18/47/32/5/2/3) | 15,790 (4/43/266/2,957/12,520; 601) |
+| 232 | 543, 837 | 551,204 (513,627) | 1,143 (250/181/147/14/515/36) | 279 (37/123/95/9/10/5) | 28,733 (4/43/266/2,958/25,462; 1,951) |
+
+At 233 the context keys are not needed: milestone 28 reached 233 without them. The table lists them
+because this potential uses them. At 232 the potential needs 1,143 RefutedShare thresholds, 279 ctx
+thresholds (a new certificate type: RefutedShare with a centre range, ctx 7 or 8) and about 28.7 k
+plain keys. Of the plain keys, 1,951 are new 6-count keys; nearly all of the rest are solver keys that
+were never replayed.
+
+### Why it slows, and what helps
+
+- **Context windows are what break the stall.** With the context records switched off (`NOCTX=1`,
+  `data/b_232_noctx.json`), lambda stays at 6980/13 = **4.4744** (233). That value did not move from
+  00:18 to 02:00: every gain after it came through ctx-7/8 thresholds. On the old 5-window ceiling
+  cycle (below), 7 of the 12 ctx-7 thresholds at T = 5-window witness + 1 are UNSAT (`ceilctx232.py`).
+  So 7-direction share windows do lift cycles that no 5-window certificate can lift.
+- **w3 still gets weight 0** (`lp.py all all 1`, `data/b_232_share_w3.json`). Every b > 0 lowers the
+  bound (232.751 at b = 0, 232.752 at b = 0.001). The binding windows carry only the w3 DP floors,
+  1632-1639.
+- **Three-square bonus.** The pattern 0123415 occurs once on the 53-cycle of 00:18. That is worth at
+  most 30 share units, or 0.005 alpha, and less as a convex combination, so it was not used. **Share
+  16/17 floors** (main) are already in. They cover 93 % of the share uses at both levels.
+- **k7 product** (`k7comb.py pool all 0`, `data/k7_pool_all_0.json`, 37.1 M transitions, all
+  F8/H9 keys and every context record). At the 00:18 data it gives lambda = 9208/17 = **4.5137**
+  (bound 232, R 6.47 alpha), against 4.5126 on k6. The k7 keys add 0.001: the binding windows are
+  untested, not k7-limited.
+- **Binding cycle at the end** (`stall232.py`, `data/stall_final_cycle.json`). It has 96 steps, A mean
+  4.40, S5 mean 15.5. On 64 steps the 6-window is untested, and only 5 steps are fully witnessed (6-window
+  plain-SAT, 5-window witness and ctx-7 witness). 22 steps carry a timed-out level. The loop is still
+  limited by missing tests, not by a witnessed obstruction. But the cycles get longer (30-100 steps
+  instead of 3-40) and the timeouts more frequent. The rate fell from 0.015 alpha/h (first 2 h) to
+  0.008 alpha/h (last hour).
+- **231 needs** `225 lambda > 125400 + R/Q`, which is lambda > about 561 = **4.676 alpha** with R of
+  about 840. That is 0.15 alpha above what was reached, about 20 h at the current rate, and the rate is
+  falling.
+
+### Ceiling
+
+- **5-window shares + k <= 6-count plain keys** (`ceiling.py ceiling` with the reader fixes,
+  `data/c_ceiling_232.json`). The witnessed ceiling is the period-3 family 0123014/0123042/0123412,
+  lambda 7175/12 = 4.983, **m >= 230.1**. With this data type no bound below 230 is possible. The
+  earlier 223.5 (`data/c_ceiling.json`) came from a witness set that was missing this milestone's own
+  SAT records.
+- **With context thresholds** that family is not a ceiling: 7 of its 12 ctx-7 windows prove more than
+  the 5-window witness. The ctx-7-witnessed transitions (3,386, only those with a trailing-share
+  witness from this run's models) carry a single live 3-cycle at lambda 6.539 (m >= 221.7). That is a
+  valid but very loose ceiling for ctx-7 + k6. No ctx-8 witnesses exist.
+- Realistic outlook: 232 is in hand with solver data. 231 needs about 0.15 alpha more and probably
+  thousands more ctx-7/ctx-8 thresholds at T = 48-108, where the timeouts sit. The local ceilings
+  (230 for 5-window shares, about 222 for w3 and loose ctx-7 witnesses) are far below the lower side.
+
+### Files of this section
+
+| file | contents |
+|---|---|
+| `share7.py` | context share encoding (`SubShareEncoding`), records, application to the product |
+| `loop3.py` | the one-core refinement with context thresholds |
+| `eval232.py` | exact bound (*) with lambda_t search |
+| `level_needs.py` | key and threshold sets of one potential |
+| `stall232.py`, `ceilctx232.py` | binding-cycle census and the ctx-7 test of the 5-window ceiling cycle |
+| `data/oracle_plain_r232.jsonl.gz`, `data/oracle_share_r232.jsonl.gz`, `data/ctxshare_r232.jsonl.gz` | every new solver call (context records are kept outside the `oracle_share` prefix) |
+| `data/loop232_rounds.jsonl.gz` | rounds |
+| `data/b_232_*.json`, `data/level_*.json`, `data/k7_pool_all_0.json`, `data/c_ceiling_232.json`, `data/stall_final_cycle.json` | results |
+
+Caveats specific to this section: every number below 233 rests on solver answers (plain keys, share
+and context thresholds). Context thresholds need a centre-range version of the RefutedShare bridge,
+which does not exist yet. `loop3.State` inherits the second-`Status` reader bug, which only causes
+repeated tests, never wrong exclusions. Bounds are always computed in a fresh process (`eval232.py`).
 
 ## Caveats
 
