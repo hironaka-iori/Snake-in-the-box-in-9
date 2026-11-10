@@ -68,3 +68,8 @@ same LRAT SHA256 as the 29 Oct packed pilot. v3 module (`gen_lean_lrat_v3.py`, s
   max(0.19 ms/hint, 0.62 x old check wall): the large Q windows take 0.19-0.24 ms/hint).
 - 07:56 UTC: 179 windows swapped (101 Q, 78 R), 967 MB of old files replaced by 91 MB; disk free
   1.2 GB; Q01203A4344 (12.2 M hints) and Q01234A4334 (16.3 M) building.
+- 08:50 UTC: main's floor port copied from tmpfs to disk: `/home/user/floors233` (461 MB, `cp -a`,
+  `diff -rq` clean). `/dev/shm/floors233` left in place. The on-disk overlay is made at the end.
+- 09:47 UTC: 187 windows swapped (107 Q, 80 R), 3.22 GB of old files replaced by 0.24 GB; disk
+  free 2.7 GB. Building Q01234A3335 and Q0120A334 (24.0 M hints). R01203A4434 (39 M hints) and
+  R01203A3453 (34 M) are past the time budget of this run (estimated 7.5 h and 4.1 h of CPU).
