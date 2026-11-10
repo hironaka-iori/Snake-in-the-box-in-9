@@ -40,7 +40,8 @@ Already committed and checked (do not regenerate unless a check fails): the k7 f
 key, bridge, Sequence and Aggregate modules, the reuse glue `LocalWindowDirUnsatReuse7B234` /
 `LocalWindowDirGlue7B234Reuse`, the K7 key modules `LocalWindowDirKeysK7*`, and
 `work/spectral/stronger/UpperBound234.lean`. With the shards and `LocalWindowDirUnsatK7` stubbed, the chain
-compiled to `upper_bound_234`. H9 (5 keys) and F8 (3 keys) certificates were validated end to end.
+compiled to `upper_bound_234`; with all 792 real v2 shards (not stubs) the conditional
+`upper_234_of_refuted7B234` passed the axiom audit (`outputs/aggregate-234-conditional-chain-linux.log`). H9 (5 keys) and F8 (3 keys) certificates were validated end to end.
 - **New certificates: certify the 2,815 seeds, then build the chunk modules.** The 9,784 new keys are
   not certified one by one. The seed plan `milestones/25-k7-234/certify/data/seeds234.json.gz` lists
   2,815 seed keys with widened count bounds (1.493 G hints; about 104 CPU-hours and 4.5 GB of .olean,
@@ -112,7 +113,7 @@ and mathlib c44e0c8e are the same. `work/spectral/stronger/Floors233Bridge.lean`
    `--only Share7306.Reversal` to build one part at a time. This is 2.5 to 3 CPU-hours. Main's milestone-73
    LRAT checks exceed 3 GB of RSS: `Check1` of 7300 was stopped at the 3 GB cap after 85 s.
 3. Regenerate the 204 B233 shards if their `.olean` files are gone, then compile `Floors233Bridge` and
-   `milestones/33-233-lean/lean/Floors233Main.lean` with `LEAN_PATH` = B, core, chain and mathlib. The second
+   `work/spectral/stronger/Floors233Main.lean` with `LEAN_PATH` = B, core, chain and mathlib. The second
    gives `Snake9.Floors233Port.upper_233_of_certs6SB233 : AllRefuted6SB233 → AllRefutedShare6SB233 → m ≤ 233`;
    audit its axioms.
 

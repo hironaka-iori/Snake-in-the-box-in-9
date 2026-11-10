@@ -10,7 +10,9 @@
 | 191 ≤ a(9) | Lean 检查的显式 191 边 snake | `README.md` |
 | a(9) ≤ 235 | **无条件，Lean 端到端检查**，只用 `propext`、`Classical.choice`、`Quot.sound` | `outputs/upper-bound-235-audit-linux.log`，`milestones/23-k6-lean/` |
 | a(9) ≤ 236、237、238 | 同上（被 235 涵盖） | `outputs/upper-bound-23{6,7,8}-audit-linux.log` |
-| a(9) ≤ 234 | **求解器侧已确定，Lean 链条已打通，还差构建**：792 个自动机分片和 2,815 个种子证书（其余 6,969 个键由族引理推出） | `milestones/25-k7-234/` |
+| a(9) ≤ 234 | **Conditional, Lean-checked** (10 Nov): `upper_234_of_refuted7B234 : AllRefuted7B234 → m ≤ 234`, standard axioms only, all 792 v2 shards built on the cloud machine. Not unconditional: still needs 2,815 seed certificates (families L1/L2 derive the other 6,969 keys) | `outputs/aggregate-234-conditional-chain-linux.log`, `milestones/25-k7-234/` |
+| a(9) ≤ 233 | **Conditional, Lean-checked** (10 Nov): `upper_233_of_refuted6SB233 (h : AllRefuted6SB233) (hs : AllRefutedShare6SB233) (hF : Floors233) : m ≤ 233`, standard axioms. Needs about 3.2 G hints of certificates and the port of main's floors (in progress) | `outputs/aggregate-233-conditional-chain-linux.log`, `milestones/33-233-lean/` |
+| a(9) ≤ 232 | Solver-side only, not proved (milestone 28, "Refinement toward 232", λ = 4.5253 α units; 5-window share ceiling 230.1) | `milestones/28-combined-identities/` |
 
 235–238 的审计都只在这台云端 Linux 上、对增量构建的核心做过；还没有从源码完整重建过一次。
 新设备从源码重建时会顺带补上这一点。
@@ -39,8 +41,7 @@ Python 复核。
 
 建议机器：16 核以上、64 GB 内存、约 60 GB 空闲磁盘。16 核时总共大约 1–2 天。
 
-这台云端机器上分片只编了 18/792 个（容器反复重启，磁盘只剩约 0.4 GB），这些 olean 不值得搬，
-新设备直接重编即可。
+Update, 10 November: on the cloud machine all 792 shards were built with shard v2 and the conditional chain audited (`outputs/aggregate-234-conditional-chain-linux.log`). The `.olean` files are not committed, so the new machine rebuilds the shards (v2: about 5-6 CPU-hours).
 
 ## 233 (share-weighted k6 chain)
 
@@ -51,12 +52,13 @@ The Lean framework for 233 is in `milestones/33-233-lean/README.md`.
 - **Toy chain.** It compiles without `sorry`.
 - **Real set.** The generators reproduce λ = 520/1, range 784/1023 and `4720 m ≤ 1104463` on the
   real set, with all 10.4 M transitions re-checked in Python.
-- **Real chain.** In scratch, the real keys, data, bridge (full covers) and aggregate modules
-  compile, together with 9 real shards. With the other shards and the certificates stubbed, the
-  chain composes to `upper_bound_233`.
+- **Real chain.** Conditional 233 is Lean-checked (commit `35cff09e`): all 204 v2 shards, the keys,
+  data, Sequence, bridge and aggregate compiled for real, and `upper_233_of_refuted6SB233` uses the
+  standard axioms only (`outputs/aggregate-233-conditional-chain-linux.log`).
 - **Missing.** 5,411 new plain k6 keys, 262 H8 cuts and 490 share thresholds (about 3.2 G hints);
-  main's floor theorems, which are a premise (`Floors233`); and the 204 shards (about 0.65
-  CPU-hours).
+  main's floor theorems, which are a premise (`Floors233`, literally main's five theorems, see
+  `milestones/33-233-lean/FLOORS.md`; port in progress); and, on a new machine, a rebuild of the 204
+  shards (about 0.65 CPU-hours).
 
 ## 怎么在新设备上继续
 
