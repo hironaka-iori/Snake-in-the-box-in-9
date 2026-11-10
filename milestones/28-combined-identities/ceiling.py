@@ -39,7 +39,18 @@ def tables():
 
 def arrays(G):
     O, UB, TST = tables()
+    # k6loop.OPLAIN is redirected by the first fp.Status() of the process (comb.build); restore it so
+    # this Status also reads 11-local-ceiling/k6_loop/oracle_plain.jsonl (fixed in the 232 refinement)
+    C.fp.K6.OPLAIN = os.path.join(C.MS, '11-local-ceiling', 'k6_loop', 'oracle_plain.jsonl')
     S = C.fp.Status()
+    for k in C.own_plain_unsat():
+        S.st[k] = 'UNSAT'
+    import glob as _g, gzip as _gz
+    for f in sorted(_g.glob(os.path.join(HERE, 'data', 'oracle_plain*.jsonl'))):
+        for l in open(f):
+            r = json.loads(l)
+            if r['result'] == 'SAT' and all(a[0] == a[1] or tuple(a) == (6, 21) for a in r['alpha']):
+                S.st.setdefault(C.fp.lkey(tuple(r['dirs']), tuple(C.GA.sym_of(tuple(a)) for a in r['alpha'])), 'SAT')
     Pr = C.fp.Product()
     ub = np.full(len(G['U']), INF, np.int64); tst = np.zeros(len(G['U']), bool)
     sat6 = np.zeros(len(G['U']), bool)
@@ -69,7 +80,7 @@ def main():
     G = C.build('all', with_share=True, with_w3=True)
     n = int(G['n'])
     npz = os.path.join(C.SCR, 'ceiling_arrays.npz')
-    if os.path.exists(npz):
+    if os.path.exists(npz) and os.environ.get('RECOMPUTE') != '1':
         z = np.load(npz); ub, tst, sat6 = z['ub'], z['tst'], z['sat6']
     else:
         ub, tst, sat6 = arrays(G); np.savez(npz, ub=ub, tst=tst, sat6=sat6)
