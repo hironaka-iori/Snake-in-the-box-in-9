@@ -117,3 +117,8 @@ For K windows `migrate_v3.py` has a K path (cores of `lean_core_direction_k6`, C
   setsid nohup python3 migrate_v3.py run --jobs 2 --min-disk-mb 1500 --rss-cap-gb 6.0 --min-avail-gb 6.5 \
       --stop-at 1794348000 @../data/order2.tsv >> /home/user/v3stage/run2.log 2>&1 &
   ```
+- ~17:12 UTC: container restart (tmpfs wiped: `/dev/shm/floors233` is gone; the disk copy
+  `/home/user/floors233` and overlay `/home/user/floors233-lp` are intact). At that point 349
+  windows were swapped (208 Q, 141 R; 8.53 GB -> 0.66 GB). Nothing was running; the partial work
+  directory of Q01230A3243 was deleted, and the driver restarted at 17:15 with `--stop-at`
+  1794361440 (01:44 UTC); two staged .olean files (built, not verified) and four staged sources were reused.
