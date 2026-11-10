@@ -51,3 +51,7 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   restart: 632 seed and 16 share certificates built (Cnf + replay), no `.olean` without an `ok`
   record in `.lake/guarded_build_233cert.jsonl`.
 - 17:16: production restarted, `prod233.py --jobs 2 --batch-hints 3e7`.
+- 18:05: batch 3 (334 certificates) built 332; two share Cnf modules with caps 99 and 107 hit the
+  6.5 GB cap. Probe: the last clause part (the cap-totalizer clauses, 4,000 literals) took 5.9 GB.
+  Fix: share modules with cap ≥ 24 use parts of 1,000 literals (500 from cap 60); cap 99 then
+  compiles in 82 s at 3.43 GB. Production restarted (PID in `prod.pid`).

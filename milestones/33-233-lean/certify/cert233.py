@@ -77,6 +77,7 @@ SCR = os.environ.get('CERT233_SCR', '/home/user/cert233work')
 ME = 'milestones/33-233-lean/certify/cert233.py'
 T = 'B233'
 PART_LITS = 4000
+SHARE_PART_LITS = int(os.environ.get("CERT233_SHARE_PART_LITS", "1000"))   # share cores: smaller parts (kernel caches per declaration)
 MRES = 12
 
 
@@ -622,7 +623,8 @@ def emit_share(meta, out):
         else:
             kt = '(.%s %d)' % kind
         return '⟨Tags.natsOf %d (nat_lit 0x%x), %s⟩' % (len(cl), st, kt)
-    parts = CP.clause_parts(core, PART_LITS)
+    # the cap totalizer grows with the cap; its clauses fill the kernel caches of their declaration
+    parts = CP.clause_parts(core, 4000 if meta['cap'] < 24 else SHARE_PART_LITS if meta['cap'] < 60 else SHARE_PART_LITS // 2)
     np_ = len(parts)
     raw_ps = [CP.pack_lists(raw[s:e], 8, w, 4096) for s, e in parts]
     assert sum((CP.unpack_lists(c, 8, w) for c in raw_ps), []) == raw
