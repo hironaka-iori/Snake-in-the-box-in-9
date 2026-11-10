@@ -52,7 +52,7 @@ two retained finite-graph arguments. The archived count-only estimate
 then yields $39m+2s_0\le9192$, so a 235-edge snake would have at most
 thirteen empty squares.
 
-For the current share argument, the sufficient pending local floors are
+For the retained seven-step share argument, the sufficient pending local floors are
 $(15,14,14,14)$ on the direction patterns
 $012034,012301,012340,012345$. With the stated count restrictions,
 reference exclusions and graph-coverage premises, a retained-graph
@@ -69,7 +69,11 @@ interpretation remain unfinished, together with inherited local and
 graph premises. The critical floor-fifteen certificate has been reduced
 to 12,424 input clauses and 52,489 deductions. The current verification
 work preserves this input while dividing its interpretation into smaller
-proofs. Thus 234 remains conditional. No new unconditional numerical
+proofs. A separate contributor comparison gives conditional 233. We show
+that the stronger six-count boundary permits a four-unit allowance in
+each of its share requirements; the arithmetic passes Lean, while the
+complete actual-snake integration and local certificates remain pending.
+No new unconditional numerical
 upper bound is claimed, and the optimum and conjectured value 196 remain
 unresolved.
 \end{abstract}
@@ -142,6 +146,7 @@ $a(9)\ge191$ & An explicit snake with every vertex pair checked.\\
 $a(9)\le235$ & Archived contributor proof using 1287 local keys and a potential; the full independent rebuild remains pending.\\
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
+Conditional bound 233 & Contributor chain and saved Linux evidence inspected; production local certificates remain pending. New boundary accounting permits four units of share allowance, with the actual-snake integration unfinished.\\
 Conditional bound 234 & Profile $(15,14,14,14)$ and boundary contribution 24 give $42254m+45L\le9928453$. Complete local-share proofs, reference exclusions, count restrictions and the graph certificate remain pending.\\
 Actual-state construction and weight accounting & State construction, non-reference filters and baseline weights are checked. Reference retention remains conditional on 1358 entries of the 1378-key union.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
@@ -3862,11 +3867,84 @@ respective first fourteen terms. It preserves multiplicities, including
 corners shared by several centres. Thus it requires no distinct-corner
 assumption. The general reordering proof passes Lean.
 
-Both the endpoint counter and all 72 totalizer conditions are now checked. 38 of 98 concrete clause batches have passed. The initial-database truth theorem remains incomplete.
+At the end of round 186, the endpoint counter, all 72 totalizer conditions, and 38 of 98 concrete clause batches had passed. The initial-database truth theorem remains incomplete.
 The full 52,489-deduction critical Lean refutation and its interpretation
 for actual snakes remain pending. The exact 12,424-clause input is
 unchanged. This progress reduces the verification work still required;
 it does not establish a new numerical upper bound.
+
+At the end of round 187, 93 of 98 complete clause batches (11904 of 12,424 clauses) have passed Lean. The initial-database truth theorem remains incomplete. The full critical contradiction and the actual-snake floor-fifteen theorem remain pending.
+
+\subsection{Reducing the share requirements in the six-step comparison}\label{sec:slack233}
+The contributor's six-step comparison now has a checked conditional
+implication to $m\le233$, with its production local certificates still
+pending. Its saved source and compilation record have been inspected;
+an independent rebuild is incomplete. The following deduction weakens
+the share premises while preserving the original table and potential.
+
+Assume $m\ge7$. Let $S_n$ be the table's share value at step $n$,
+and let $\sigma_i$ denote the physical integer share at path vertex $i$.
+Suppose each step satisfies
+\[
+S_n\le\sigma_{n+3}+\sigma_{n+4}+\sigma_{n+5}
+       +\sigma_{n+6}+\sigma_{n+7}+q,
+\qquad 0\le n<m-7.
+\]
+Here $q$ is a nonnegative integer allowance. Write
+$W=\sum_{n=0}^{m-8}(120b_{n+7}+S_n)$, with $b_i\le\alpha_i$.
+The six omitted internal counts sum to at least fourteen and the two
+endpoints contribute at least eight. Each physical share occurs in at
+most five windows. Therefore
+\[
+W\le120(T-22)+5\sum_{i=0}^{m}\sigma_i+q(m-7).
+\]
+Substitution of the exact physical share identity gives
+\begin{equation}\label{eq:slack-budget233}
+W+4200m+5L\le1098840+q(m-7).
+\end{equation}
+The omitted-count contribution improves from fourteen in the contributor's
+present accounting to twenty-two, a gain of $120\cdot8=960$.
+
+\begin{proposition}[Four-unit allowance in the share requirements]
+Suppose the original potential gives $520(m-7)\le W+1023$ and the
+share requirement above holds with $q=4$. Then $m\le233$.
+\end{proposition}
+\begin{proof}
+Combining the potential inequality with~\eqref{eq:slack-budget233} gives
+\[
+4716m+5L\le1103475.
+\]
+At $m\ge234$ the left side is at least $1103544$, since $L\ge0$.
+The excess is 69. Paths with fewer than seven edges already satisfy
+the conclusion.
+\end{proof}
+
+A certified potential range of 784 would allow $q=5$ instead:
+$4715m+5L\le1103229$, excluding $m\ge234$ by 81. With the existing
+range 1023, the five-unit allowance gives
+$4715m+5L\le1103468$. Hence a remaining snake of length at least 234
+would have $L\le31$. It suffices to establish the four-unit requirements
+only in this low-loss case and the five-unit requirements generally.
+The earlier domination theorem applies, since $31<96$: every cube vertex
+then has a selected neighbour. The required improved shares in this
+dominating case remain unproved.
+
+These arithmetic implications pass Lean, including examples showing their
+limits: $(m,W,L)=(234,117017,0)$ satisfies the five-unit inequalities with
+range 1023, and $(234,117256,0)$ satisfies the six-unit inequalities with
+range 784. These are numerical examples, with no claim of geometric
+realizability. The new sequence argument still requires integration with
+the contributor's actual-snake interpretation.
+
+A native count of the saved share table finds that the four-unit allowance
+reduces its 490 paid share obligations to 459 using the four universal
+share-sixteen floors already present in the contributor's chain.
+The two established universal share-twelve floors cover 33 further rows,
+leaving 426. Completion of the critical $012034$ floor fifteen would
+reduce this to 373. Five-unit allowance would give 366 with that floor.
+These counts have no completed Lean coverage proof and measure certificate
+requirements, rather than computation time. The separate count-certificate
+requirements remain unchanged. Thus 233 remains conditional.
 
 \section{Remaining requirements for a stronger bound}\label{sec:closure}
 

@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 186}
+\date{Research state after round 187}
 \begin{document}
 \maketitle
 
@@ -26,8 +26,10 @@ for $012034,012301,012340,012345$, respectively. Together with the retained
 local and graph premises, it implies $m\le234$ without a positive-loss
 assumption. All four required numerical floors have native contradiction
 certificates; their complete Lean and geometric interpretation, and the
-inherited graph requirements, remain unfinished. The argument and these
-limitations are given in order.
+inherited graph requirements, remain unfinished. A separate contributor chain gives conditional 233; the new boundary
+argument weakens its local share requirements. Its full certificate
+assembly and the new geometric integration remain pending. The argument
+and these limitations are given in order.
 
 \textbf{1. The exact square budget.}
 Write $v=m+1$, let $T$ count coordinate squares with exactly one selected
@@ -412,11 +414,54 @@ respective first fourteen terms. It preserves multiplicities, including
 corners shared by several centres. Thus it requires no distinct-corner
 assumption. The general reordering proof passes Lean.
 
-Both the endpoint counter and all 72 totalizer conditions are now checked. 38 of 98 concrete clause batches have passed. The initial-database truth theorem remains incomplete.
+At the end of round 186, the endpoint counter, all 72 totalizer conditions, and 38 of 98 concrete clause batches had passed. The initial-database truth theorem remains incomplete.
 The full 52,489-deduction critical Lean refutation and its interpretation
 for actual snakes remain pending. The exact 12,424-clause input is
 unchanged. This progress reduces the verification work still required;
 it does not establish a new numerical upper bound.
+
+At the end of round 187, 93 of 98 complete clause batches (11904 of 12,424 clauses) have passed Lean. The initial-database truth theorem remains incomplete. The full critical contradiction and the actual-snake floor-fifteen theorem remain pending.
+
+\paragraph{The conditional 233 comparison and weaker share requirements.}
+The contributor's six-step argument now supplies a conditional bound 233.
+Its saved source and Linux compilation record have been inspected;
+the production local certificates and an independent rebuild remain
+unfinished. A new deduction reduces the share requirements in that argument.
+
+Keep its original table weights and write their sum as $W$.
+There are $m-7$ windows. Suppose each table share value exceeds the physical
+five-centre share by at most $q$. The omitted six internal counts and two
+endpoints contribute at least $14+8=22$, while every physical share is
+counted at most five times. Consequently
+\[
+W\le120(T-22)+5\sum_i\sigma_{12}(x_i)+q(m-7).
+\]
+The exact identity in Section 2 then gives
+\[
+W+4200m+5L\le1098840+q(m-7).
+\]
+The original potential supplies $520(m-7)\le W+1023$. Setting $q=4$ yields
+\[
+\boxed{4716m+5L\le1103475\quad\Longrightarrow\quad m\le233.}
+\]
+Indeed, $m=234$ makes the left side at least $1103544$, exceeding the
+right side by 69. This uses the stronger boundary contribution to gain
+960 units, permitting weaker local shares without changing the potential.
+
+Five units of allowance would suffice if a smaller potential range of
+784 were certified. With range 1023, five units instead force $L\le31$
+for any remaining $m\ge234$. The earlier domination theorem then forces
+every cube vertex to have a selected neighbour. Thus another sufficient
+route is to prove the four-unit requirements in this low-loss case and
+the five-unit requirements generally. The stronger low-loss shares are
+still unproved. All these numerical implications pass Lean; their
+integration with the contributor's actual-snake argument is pending.
+
+In the saved table, four-unit allowance makes 31 of 490 paid share
+obligations follow from the four share-sixteen floors. Two established
+share-twelve floors cover another 33 rows, leaving 426. Completing the
+critical $012034$ floor fifteen would leave 373. These are native table
+counts, with the Lean lookup and coverage proof still pending.
 
 \textbf{6. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -433,7 +478,7 @@ reports, including the actual-snake reduction under explicit local-window
 and potential premises. The full finite-graph certificate has not been
 checked in Lean.
 
-The numerical upper bound 234 remains conditional. Required local share
+Both the retained bound 234 and the contributor bound 233 remain conditional. Required local share
 floors, retained count restrictions, reference exclusions and the complete
 graph-to-snake certificate must still be established. In particular, the
 retained model includes a hypothetical six-count floor 25 on $0123104$
@@ -445,6 +490,9 @@ certificates and do not complete that older Lean replay. Neither a longer constr
 
 The remaining work is therefore:
 \begin{enumerate}
+\item Integrate the improved six-count boundary and four-unit share allowance
+into the contributor comparison. Complete its required local certificates
+and the coverage proof for the relaxed share table.
 \item Complete the Lean contradiction and geometric interpretation for
 the required profile $(15,14,14,14)$. The compact critical certificate
 contains 52,489 deductions and 5,342 variables.
@@ -457,11 +505,11 @@ count-only route would be completed by proving $s_0\ge14$ for a hypothetical
 235-edge snake. Neither alternative is required by the new sufficient
 profile once its own premises are proved.
 \end{enumerate}
-Round 186 completes the requested continuation. Research pauses
+Round 187 completes the requested continuation. Research pauses
 at this frontier. No unconditional numerical bound or longer construction
 has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--186.}
+\texttt{snake9\_research.tex} and research records 175--187.}
 \end{document}

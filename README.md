@@ -1,3 +1,11 @@
+# Current result after round 187
+
+Research pauses after publication. New Lean-checked boundary accounting permits four units of slack in the contributor's conditional 233 share requirements. The complete local certificates and actual-snake integration remain pending. 93/98 complete clause batches (11904/12,424 clauses) now pass Lean; 303 new modules are accepted.
+
+No unconditional numerical bound has changed. Read [round 187](milestones/187-clause-interpretation/README.md), [the mathematical deduction](milestones/187-clause-interpretation/MATHEMATICAL_NOTE.md), [the current handoff](handoff/CURRENT_STATUS.md), [the paper](paper/snake9_research.tex), and [the frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 186
 
 The requested round is complete; research pauses after publication. Both the endpoint counter and all 72 totalizer conditions are now checked. 38 of 98 concrete clause batches have passed. The initial-database truth theorem remains incomplete.
