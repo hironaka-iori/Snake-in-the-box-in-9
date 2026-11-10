@@ -238,7 +238,7 @@ def seed_core(name, work, cadical, certs, dirs, syms, npre, plan):
     return best[3], best[4], best[5]
 
 
-def one(dirs, syms, work, certs, cadical, out, core, log, part_lits, plan=None):
+def one(dirs, syms, work, certs, cadical, out, core, log, part_lits, plan=None, sat_v2=False):
     """Certify one key; with `plan` (its widened bounds) as a seed with those bounds, or as many
     of them as its core allows."""
     name, module = case_name(dirs, syms), module_name(dirs, syms)
@@ -281,7 +281,7 @@ def one(dirs, syms, work, certs, cadical, out, core, log, part_lits, plan=None):
         meta['plan_bounds'] = [list(x) for x in plan]
         meta['lean_bounds'] = [list(x) for x in lean_bounds]
     json.dump(meta, open(mp, 'w'))
-    r = CP.emit(name, certs, core, out, part_lits=part_lits)
+    r = CP.emit(name, certs, core, out, part_lits=part_lits, sat_v2=sat_v2)
     t3 = time.time()
     for p in (gz, os.path.join(work, name + '.cnf')):
         if os.path.exists(p):
@@ -330,7 +330,7 @@ def run(a):
             stopped = True
             break
         rec = one(k[0], k[1], a.work, certs, cadical, a.out, a.core, a.log, a.part_lits,
-                  plan['seed_bounds'][k] if plan else None)
+                  plan['seed_bounds'][k] if plan else None, sat_v2=a.sat_v2)
         if rec:
             n += 1
             print(json.dumps(rec), flush=True)
@@ -348,7 +348,7 @@ def run(a):
             if disk_free_mb() < a.min_disk_mb:
                 print('stop: disk below %d MB' % a.min_disk_mb, flush=True)
                 break
-            rec = one(k[0], k[1], a.work, certs, cadical, a.out, a.core, a.log, a.part_lits)
+            rec = one(k[0], k[1], a.work, certs, cadical, a.out, a.core, a.log, a.part_lits, sat_v2=a.sat_v2)
             if rec:
                 rec['orphan'] = True
                 print(json.dumps(rec), flush=True)
@@ -544,7 +544,7 @@ def cnfsat(a):
     os.makedirs(certs, exist_ok=True)
     for n in a.names:
         gz = regen_cnf(json.load(open(os.path.join(a.core, n + '.json'))), os.path.join(certs, n + '.cnf.gz'))
-        print(json.dumps(CP.emit(n, certs, a.core, a.out, part_lits=a.part_lits)), flush=True)
+        print(json.dumps(CP.emit(n, certs, a.core, a.out, part_lits=a.part_lits, sat_v2=a.sat_v2)), flush=True)
         os.remove(gz)
 
 
@@ -582,6 +582,8 @@ def main():
         p.add_argument('--part-lits', type=int, default=PART_LITS,
                        help='`check` in parts of at most this many literals, counters by ctrOKL '
                             '(gen_lean_cnfsat_packed.py --part-lits); 0: one `check`')
+        p.add_argument('--sat-v2', action='store_true',
+                       help='clause soundness by the checker family TagsW (gen_lean_cnfsat_packed.py --sat-v2)')
     f = sub.add_parser('final')
     f.add_argument('--keys', nargs='+', required=True)
     f.add_argument('--out', default=LEAN)
