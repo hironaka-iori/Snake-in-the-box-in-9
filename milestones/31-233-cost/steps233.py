@@ -344,22 +344,6 @@ def share_resolve(tag0, tag, tl=60.0, budget=3600, minh=0.0):
     return W2.save(tag, dict(step='share_resolve', results=res))
 
 
-if __name__ == '__main__':
-    cmd = sys.argv[1]
-    if cmd == 'recost':
-        recost()
-    elif cmd == 'prune':
-        prune(pq_of(sys.argv[2]), sys.argv[3])
-    elif cmd == 'giants':
-        giants(sys.argv[2], sys.argv[3], float(sys.argv[4]), float(sys.argv[5]))
-    elif cmd == 'exact':
-        exact(sys.argv[2], sys.argv[3], float(sys.argv[4]) if len(sys.argv) > 4 else 0.0,
-              float(sys.argv[5]) if len(sys.argv) > 5 else None)
-    elif cmd == 'share':
-        share_resolve(sys.argv[2], sys.argv[3], float(sys.argv[4]) if len(sys.argv) > 4 else 60,
-                      float(sys.argv[5]) if len(sys.argv) > 5 else 3600)
-
-
 # ------------------------------------------------------------------ H8: the full 8-direction step window
 OH8 = os.path.join(L.D, 'oracle_h8.jsonl')
 
@@ -487,5 +471,19 @@ def h8(tag0, tag, budget, tl=20.0, maxu=400):
                             h8_cuts=len(prev) + len(chosenH)))
 
 
-if __name__ == '__main__' and sys.argv[1] == 'h8':
-    h8(sys.argv[2], sys.argv[3], float(sys.argv[4]))
+if __name__ == '__main__':
+    cmd = sys.argv[1]
+    if cmd == 'recost':
+        recost()
+    elif cmd == 'prune':
+        prune(pq_of(sys.argv[2]), sys.argv[3])
+    elif cmd == 'giants':
+        giants(sys.argv[2], sys.argv[3], float(sys.argv[4]), float(sys.argv[5]))
+    elif cmd == 'exact':
+        exact(sys.argv[2], sys.argv[3], float(sys.argv[4]) if len(sys.argv) > 4 else 0.0,
+              float(sys.argv[5]) if len(sys.argv) > 5 else None)
+    elif cmd == 'share':
+        share_resolve(sys.argv[2], sys.argv[3], float(sys.argv[4]) if len(sys.argv) > 4 else 60,
+                      float(sys.argv[5]) if len(sys.argv) > 5 else 3600)
+    elif cmd == 'h8':
+        h8(sys.argv[2], sys.argv[3], float(sys.argv[4]))
