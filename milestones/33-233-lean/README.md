@@ -39,6 +39,20 @@ B233 chain for real, with no stub: the 204 shards, the data, keys, Sequence, bri
 obligations `AllRefuted6SB233`, `AllRefutedShare6SB233` and the floors `Floors233`.
 **No unconditional 233 is checked yet.** That still needs the certificates listed in "Remaining work".
 
+**Update, 10 November (later): `Floors233` is discharged.** Main's 1,042 floor modules (commit `32d14f72`,
+fetched by blob sha) were compiled on this branch: 1,044/1,044 modules with the two unbuilt branch modules,
+0 failed, 2.3 CPU-hours, 477 MB of `.olean` in tmpfs, peak 6.24 GB. Then `work/spectral/stronger/Floors233Main.lean`
+compiles, and `chain_audit.py` prints
+
+```
+'Snake9.Floors233Port.floors233' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.Floors233Port.upper_233_of_certs6SB233' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+(`outputs/floors233-linux.log`). `upper_233_of_certs6SB233 : AllRefuted6SB233 → AllRefutedShare6SB233 → m ≤ 233`
+has only the certificate obligations as premises. Run, provenance and the tmpfs caveat:
+[FLOORS.md, "Port run"](FLOORS.md#port-run-10-november-floors233-is-discharged).
+
 ## The chain
 
 | module | side | contents |
@@ -230,7 +244,7 @@ audit needs the source of every core module it imports.
 | plain k6 keys, new | `Refuted` (LRAT replay with checker v3, `LocalWindowTags` clause soundness) | 5,411 (2,133 of them derivable by L1/L2 of `LocalWindowFamilies` from 3,278 seeds) | 2.40 G hints (2.19 G with L1/L2) |
 | H8 cuts | `Refuted (winOf ds) (boundsOf syms)` with 6 bounds for 7 interior vertices (as H9 in milestone 25) | 262 | 0.03 G hints |
 | share thresholds | `RefutedShare (winOf ds) (boundsOf syms) 12 (L−1)`, the share CNF (`wincert_share`) replayed with `LocalWindowTagsShare`/`…SharePacked` clause soundness | 490 | 0.78 G hints |
-| floors | `Floors233`: main's `share16` (152), `canonical7300/7304/7306` (73), `share17` (155), built on this branch. The definitions are literally this branch's, and `floors233_of_main` (`Floors233Bridge`) is compiled; see [FLOORS.md](FLOORS.md) | 5 theorems | 1,042 modules of main, 2.5 to 3 CPU-hours, about 0.45 GB of `.olean` (`scripts/port_main_floors.py`) |
+| floors | `Floors233`: main's `share16` (152), `canonical7300/7304/7306` (73), `share17` (155), built on this branch; `Snake9.Floors233Port.floors233`, see [FLOORS.md](FLOORS.md) | 5 theorems | **done** (10 November: 1,042 modules of main, 2.3 CPU-hours, 477 MB of `.olean`) |
 | shards | `shard6SB233_<i>_<t0>` (generator, `--shards all`) | 204 | **done** (10 November, 0.69 CPU-hours) |
 | glue | `LocalWindowDirUnsat6SB233`: `AllRefuted6SB233` from the replays, by `allRefuted_of_merge` and chunk modules. `LocalWindowShareUnsat6SB233`: `AllRefutedShare6SB233`. `UpperBound233`: the scratch file of this run with the stubs replaced | 3 modules | small |
 
@@ -242,10 +256,9 @@ The conditional chain has been built (see "Production build" above). What is lef
 
 1. The certificates `AllRefuted6SB233` (5,411 new plain k6 keys and 262 H8 keys; the other 1,383 are
    reused) and `AllRefutedShare6SB233` (490 share keys).
-2. `Floors233`, from main's milestones 73, 152 and 155: port main's modules, then compile `lean/Floors233Main.lean`
-   (plan and measurements in [FLOORS.md](FLOORS.md)).
+2. ~~`Floors233`~~: done; `Floors233Main` gives `upper_233_of_certs6SB233` ([FLOORS.md](FLOORS.md)).
 3. The glue `LocalWindowDirUnsat6SB233` and `LocalWindowShareUnsat6SB233`, and `UpperBound233`
-   applying `upper_233_of_refuted6SB233` to them.
+   applying `Snake9.Floors233Port.upper_233_of_certs6SB233` to them.
 
 ## Files
 

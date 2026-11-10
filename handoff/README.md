@@ -11,7 +11,7 @@
 | a(9) ≤ 235 | **无条件，Lean 端到端检查**，只用 `propext`、`Classical.choice`、`Quot.sound` | `outputs/upper-bound-235-audit-linux.log`，`milestones/23-k6-lean/` |
 | a(9) ≤ 236、237、238 | 同上（被 235 涵盖） | `outputs/upper-bound-23{6,7,8}-audit-linux.log` |
 | a(9) ≤ 234 | **Conditional, Lean-checked** (10 Nov): `upper_234_of_refuted7B234 : AllRefuted7B234 → m ≤ 234`, standard axioms only, all 792 v2 shards built on the cloud machine. Not unconditional: still needs 2,815 seed certificates (families L1/L2 derive the other 6,969 keys) | `outputs/aggregate-234-conditional-chain-linux.log`, `milestones/25-k7-234/` |
-| a(9) ≤ 233 | **Conditional, Lean-checked** (10 Nov): `upper_233_of_refuted6SB233 (h : AllRefuted6SB233) (hs : AllRefutedShare6SB233) (hF : Floors233) : m ≤ 233`, standard axioms. Needs about 3.2 G hints of certificates and the port of main's floors (in progress) | `outputs/aggregate-233-conditional-chain-linux.log`, `milestones/33-233-lean/` |
+| a(9) ≤ 233 | **Conditional, Lean-checked** (10 Nov): `upper_233_of_refuted6SB233 (h : AllRefuted6SB233) (hs : AllRefutedShare6SB233) (hF : Floors233) : m ≤ 233`, standard axioms. **Floors discharged** (10 Nov): `Floors233Port.upper_233_of_certs6SB233 (h : AllRefuted6SB233) (hs : AllRefutedShare6SB233) : m ≤ 233`, standard axioms. Needs about 3.2 G hints of certificates | `outputs/aggregate-233-conditional-chain-linux.log`, `milestones/33-233-lean/` |
 | a(9) ≤ 232 | Solver-side only, not proved (milestone 28, "Refinement toward 232", λ = 4.5253 α units; 5-window share ceiling 230.1) | `milestones/28-combined-identities/` |
 
 235–238 的审计都只在这台云端 Linux 上、对增量构建的核心做过；还没有从源码完整重建过一次。
@@ -55,10 +55,14 @@ The Lean framework for 233 is in `milestones/33-233-lean/README.md`.
 - **Real chain.** Conditional 233 is Lean-checked (commit `35cff09e`): all 204 v2 shards, the keys,
   data, Sequence, bridge and aggregate compiled for real, and `upper_233_of_refuted6SB233` uses the
   standard axioms only (`outputs/aggregate-233-conditional-chain-linux.log`).
-- **Missing.** 5,411 new plain k6 keys, 262 H8 cuts and 490 share thresholds (about 3.2 G hints);
-  main's floor theorems, which are a premise (`Floors233`, literally main's five theorems, see
-  `milestones/33-233-lean/FLOORS.md`; port in progress); and, on a new machine, a rebuild of the 204
-  shards (about 0.65 CPU-hours).
+- **Floors.** `Floors233` is discharged (10 Nov): main's 1,042 floor modules (commit `32d14f72`, by blob
+  sha) compiled here, and `Snake9.Floors233Port.upper_233_of_certs6SB233 : AllRefuted6SB233 →
+  AllRefutedShare6SB233 → m ≤ 233` uses the standard axioms only (`outputs/floors233-linux.log`,
+  `milestones/33-233-lean/FLOORS.md`, "Port run"). The port `.olean` files were in tmpfs: rebuild them on a
+  new machine (about 2.3 CPU-hours).
+- **Missing.** 5,411 new plain k6 keys, 262 H8 cuts and 490 share thresholds (about 3.2 G hints), the glue
+  modules and `UpperBound233`; and, on a new machine, a rebuild of the 204 shards (about 0.65 CPU-hours)
+  and of the floor port.
 
 ## 怎么在新设备上继续
 

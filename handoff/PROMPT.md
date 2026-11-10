@@ -103,7 +103,7 @@ Generate with `gen_lean_automaton6s.py --set milestones/31-233-cost/data/keys233
 The instance theorem `upper_233_of_refuted6SB233` takes `AllRefuted6SB233` (6,794 plain k6 keys, 1,383
 already replayed, and 262 H8 cuts), `AllRefutedShare6SB233` (490 `RefutedShare … 12 (L-1)` thresholds)
 and `Floors233` (main's share16 of milestone 152, canonical7300/7304/7306 of milestone 73, share17 of
-milestone 155; their statements are copied, their proofs are not on this branch). Shards: 204, about
+milestone 155; discharged by the port below). Shards: 204, about
 10 s and 0.55 GB each, about 0.65 CPU-hours in all. Certificates: about 3.2 G hints (milestone 31).
 The conditional 233 compiles (commit 35cff09e, `outputs/aggregate-233-conditional-chain-linux.log`).
 
@@ -111,18 +111,21 @@ The conditional 233 compiles (commit 35cff09e, `outputs/aggregate-233-conditiona
 branch's copies literally: their `Snake`, `canon`, `dsOf`, `dir`, `coreAlpha`, `coreShare` and
 `RefutedShare` come from modules that are byte-identical to ours or of which ours is a superset. Lean 4.19.0
 and mathlib c44e0c8e are the same. `work/spectral/stronger/Floors233Bridge.lean` compiles, and its
-`floors233_of_main` takes main's five statements verbatim and returns `Floors233`. Port steps:
-1. Free about 0.7 GB of disk; the build needs about 0.45 GB of `.olean` files.
-2. Run `python3 milestones/33-233-lean/scripts/port_main_floors.py --build-dir B --delete-sources --max-rss-gb 6.5
-   --log L`. It builds the 1,042 new modules of `data/main_floor_modules.json` in order, one `lean -o` each,
-   fetching the sources from main by blob sha (gh API, no git fetch). The 151 replay sources and the 73
-   cases come from main's archives. Use `--only ShareComplete152`, `--only ShareComplete155` or
-   `--only Share7306.Reversal` to build one part at a time. This is 2.5 to 3 CPU-hours. Main's milestone-73
-   LRAT checks exceed 3 GB of RSS: `Check1` of 7300 was stopped at the 3 GB cap after 85 s.
-3. Regenerate the 204 B233 shards if their `.olean` files are gone, then compile `Floors233Bridge` and
-   `work/spectral/stronger/Floors233Main.lean` with `LEAN_PATH` = B, core, chain and mathlib. The second
-   gives `Snake9.Floors233Port.upper_233_of_certs6SB233 : AllRefuted6SB233 → AllRefutedShare6SB233 → m ≤ 233`;
-   audit its axioms.
+`floors233_of_main` takes main's five statements verbatim and returns `Floors233`. **Done on 10 November**
+(FLOORS.md, "Port run"; `outputs/floors233-linux.log`): `Snake9.Floors233Port.upper_233_of_certs6SB233 :
+AllRefuted6SB233 → AllRefutedShare6SB233 → m ≤ 233`, standard axioms. To redo it on a new machine
+(the port `.olean` files are not committed):
+1. `python3 -I milestones/33-233-lean/scripts/fetch_main_floors.py R R-archives` (R outside the repository,
+   e.g. tmpfs; gh API by blob sha, no git fetch; 83 MB of sources, 34 MB of network).
+2. Simulate staleness with `closure()`/`uptodate()` on R (no branch module may appear), then
+   `nice -n 10 python3 work/guarded_lake_build.py ShareComplete152 ShareComplete155 Share7300.Reversal
+   Share7304.Reversal Share7306.Reversal CanonicalShareAdapter --root R --direct --trust-mtime --no-ilean
+   --jobs 2 --rss-cap-gb 6.5 --min-free-gb 7` with `LEAN_PATH` = core build, chain build, mathlib packages.
+   1,044 modules, about 2.3 CPU-hours, 477 MB of `.olean`; `Check1` of case 7306 peaks at 6.24 GB.
+3. Regenerate the 204 B233 shard sources if gone (sha256-check, old mtime), then
+   `python3 -I milestones/33-233-lean/scripts/floors_overlay.py R/.lake/build/lib/lean OVL` and
+   `chain_audit.py --target Floors233Main --reuse --extra-lean-path OVL --axioms
+   Snake9.Floors233Port.floors233 Snake9.Floors233Port.upper_233_of_certs6SB233`.
 
 ## 3. Rules learned the hard way
 - Build only with `work/guarded_lake_build.py --direct --trust-mtime`; never a plain `lake build` over many

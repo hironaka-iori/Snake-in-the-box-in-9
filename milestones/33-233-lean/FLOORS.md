@@ -3,6 +3,84 @@
 Audit of 10 November 2026. Main was read at commit `32d14f72` (9 November) through the GitHub API (git
 trees and blobs by sha), without a branch fetch. Nothing was written to main.
 
+## Port run (10 November): `Floors233` is discharged
+
+**Main's floor modules were compiled on this branch, and `Floors233` is a theorem.** With it,
+
+```
+theorem Snake9.Floors233Port.upper_233_of_certs6SB233 (h : LocalWindow.AllRefuted6SB233)
+    (hs : LocalWindow.AllRefutedShare6SB233) {m : Nat} (p : Snake m) : m ≤ 233
+'Snake9.Floors233Port.floors233' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.Floors233Port.upper_233_of_certs6SB233' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+(`outputs/floors233-linux.log`, `# AXIOM AUDIT PASSED`). Its only premises are the certificate
+obligations `AllRefuted6SB233` and `AllRefutedShare6SB233`.
+
+**Provenance.** Every fetched source is from origin/main at commit
+`32d14f728013acf732c2b6af0b9b341e458769b5`, read through the GitHub API by git blob sha (no git
+fetch), and checked against the git blob sha recorded per module in `data/main_floor_modules.json`
+(git blob `13cbd759`, sha256 `e0769a76…1d1d`). That file is the provenance record: one entry per module
+with its source blob (or archive blob and member), its git blob sha and its imports.
+
+| source on main | blob sha | modules |
+|---|---|---:|
+| single files (`150/lean`, `152/lean`, `153/lean/LocalWindowCnf`, `154/lean`, `155/lean`, `148/lean`) | one blob each, listed in the manifest | 347 |
+| `milestones/151-countfree-replay-pilot/archives/sources151-part00.zip` | `401bab200087334bcdfb3eb172f110c6fc9d4e61` | 339 |
+| `milestones/73-countfree-share-catalogue/cases/case7300/data/lean-sources.tar.gz` | `0e046c65e7a5132fd2c9dbbf78222c60058202f9` | 70 |
+| `…/cases/case7304/data/lean-sources.tar.gz` | `2ff2cd5e5ba5b23c521c32a2998ae1f7dae9fb0a` | 105 |
+| `…/cases/case7306/data/lean-sources.tar.gz` | `bbfdb7ee232ffa23e80c7a16d7ad2cf0aeb8bf57` | 181 |
+| this branch: `LocalWindowTagsShare`, `LocalWindowTagsSharePacked` (sources identical to main's, not built before) | `e86deaf6`, `31135692` | 2 |
+
+The 17 other shared modules reuse this branch's existing `.olean` files (13 core, 6 chain).
+
+**How it was run.**
+
+1. `scripts/fetch_main_floors.py ROOT CACHE` wrote the 1,042 fetched sources and the 2 branch copies into a
+   project root outside the repository (`/dev/shm/floors233`; the root file system had about 600 MB free,
+   which the 0.48 GB of `.olean` files would not fit with a 200 MB margin). It asserts that no fetched module
+   shadows a source or `.olean` of this branch. The fetched sources are not in the repository, so no
+   `.gitignore` entry is needed; they are regenerable from the manifest.
+2. Staleness check before building: `closure()`/`uptodate()` of `work/guarded_lake_build.py` on the port
+   root gives 1,044 modules, none of them a branch module (branch modules have no source in the root and are
+   leaves). The same check with the core root on the 13 core modules the port imports gives 11 modules in the
+   closure and 0 stale. No existing `.olean` of this branch was rebuilt or touched.
+3. `nice -n 10 work/guarded_lake_build.py <6 targets> --root /dev/shm/floors233 --direct --trust-mtime
+   --no-ilean --jobs 2 --rss-cap-gb 6.5 --min-free-gb 7`, `LEAN_PATH` = core build, chain build, mathlib
+   (at most 2 `lean` processes). Result: **1,044/1,044 modules, 0 failed**, 4,157 s wall time
+   (plus about 2 min of a first attempt with one job), **8,283 s summed per-module time (2.3 CPU-hours)**.
+   The log is `outputs/floors233-port-linux.jsonl`.
+   - The 23 LRAT checks of cases 7300/7304/7306 took 1,780 s in all. Peak RSS: 6.24 GB
+     (`LocalWindowUnsat.ShareWindow7306.Check1`, 217 s), 4.19 GB (7304 `Check1`), 3.22 GB (7300 `Check1`);
+     every other module stayed below 2.9 GB.
+   - 1,848 `#print axioms` reports in the build logs, all within `propext`, `Classical.choice`,
+     `Quot.sound`; no `declaration uses 'sorry'`; `grep -rlE "sorry|native_decide|^axiom"` over the
+     fetched sources prints nothing.
+   - `.olean` files: 477 MB (estimate 0.45 GB).
+   - `LocalWindowCnf.ShareWindow7304` was finished by a compiler orphaned when the first attempt was
+     restarted; it was recompiled to a scratch file afterwards and is byte-identical.
+4. The 204 B233 shard sources and the data module were regenerated (`gen_lean_automaton6s.py`, 4 s, into a
+   temporary directory), checked with `data/shards6s_B233.sha256`, and placed in `work/final_lean` with the
+   old mtime 1793232000, because `chain_audit.py` needs the source of each core module it imports. Their
+   `.olean` files had been kept, and nothing was rebuilt.
+5. `chain_audit.py --target Floors233Main --reuse --extra-lean-path /dev/shm/floors233-lp
+   --log outputs/floors233-linux.log --axioms Snake9.Floors233Port.floors233
+   Snake9.Floors233Port.upper_233_of_certs6SB233`. The `--reuse` rule was simulated first: only
+   `Floors233Bridge` and `Floors233Main` were stale, and the other 170 chain modules were reused.
+   `Floors233Main` took 6 s and 3.11 GB. (A first attempt with the port root itself as the extra path failed
+   at the import of `LocalWindowCnf.ShareWindow150`; the log keeps it. See the next point.)
+   - The overlay is made by `scripts/floors_overlay.py /dev/shm/floors233/.lake/build/lib/lean /dev/shm/floors233-lp`.
+   - `--extra-lean-path` (new) puts prebuilt `.olean` roots first in `LEAN_PATH` and treats their modules as
+     leaves. Lean resolves a module in the first `LEAN_PATH` entry that has its top-level directory, and the
+     core already has `LocalWindowCnf/` and `LocalWindowUnsat/`. So `/dev/shm/floors233-lp` is a symlink
+     overlay: the 1,044 port `.olean` files plus symlinks to the core's 52,405 `.olean` files under those two
+     directories (no name collides). The script refuses an extra root that would shadow a core or chain
+     `.olean` with a different file.
+
+**Caveat: the port `.olean` files are in tmpfs.** `/dev/shm/floors233` (and the overlay) do not survive a
+reboot, and `work/spectral/.verification/chain/Floors233Main.olean` imports them. On a new machine, or after a
+reboot, rerun steps 1, 3 and 5 (about 1.2 hours of wall time on 2 cores; 34 MB of network).
+
 ## Verdict
 
 **All five floors are literal: main's theorems prove this branch's copies, with no bridge lemma.**
@@ -60,7 +138,8 @@ of that build with this branch by git blob sha.
     `ShareFloor16`/`ShareFloor17`.
   - `floors233_fields` is the converse.
   - Axioms: `[propext, Quot.sound]`. These come from the definitions in the statement (`coreShare`, …).
-- **`milestones/33-233-lean/lean/Floors233Main.lean`** is a template that is **not yet compiled**.
+- **`work/spectral/stronger/Floors233Main.lean`** (moved from `milestones/33-233-lean/lean/`; compiled
+  since the port run above).
   - It restates `canonical7300/7304/7306` with main's two-line proofs. They use
     `share_bound_of_either_canonical_match` of `CanonicalShareAdapter` and the case certificates
     `LocalWindow.ShareWindow73xx.refuted`. So the port needs `Share73xx.Reversal` and not the whole
@@ -137,7 +216,7 @@ built on Windows, so every module is recompiled here.
    - It stops on a failure, on `sorry`, or on a non-standard axiom report.
    - It is resumable, because a module whose `.olean` exists is skipped.
    - `--only ShareComplete152` (or `ShareComplete155`, `Share7306.Reversal`) builds one floor at a time.
-3. Copy `Floors233Bridge.lean` and `lean/Floors233Main.lean` into the chain build dir and compile them with one
+3. (Done; see "Port run".) Copy `Floors233Bridge.lean` and `work/spectral/stronger/Floors233Main.lean` into the chain build dir and compile them with one
    `lean -o` each. `LEAN_PATH` is the same plus the mathlib packages. The B233 chain `.olean` files
    (`AggregateDirection6SB233` and the modules it imports) must be present; the 204 shards were deleted after
    the production audit and must be regenerated, which takes about 0.7 CPU-hours (README, "Production build").

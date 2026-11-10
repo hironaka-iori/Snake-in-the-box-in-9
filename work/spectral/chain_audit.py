@@ -82,10 +82,19 @@ def main():
                          'and than the .olean of each of their imports '
                          '(development only; a clean audit recompiles everything)')
     ap.add_argument('--extra-lean-path', action='append', default=[], type=Path,
-                    help='a directory of prebuilt .olean files, appended to LEAN_PATH; its modules are '
-                         'leaves of the chain (never compiled here). Repeatable')
+                    help='a directory of prebuilt .olean files, put FIRST in LEAN_PATH (Lean resolves a '
+                         'module in the first entry that has its top-level directory, so a root that '
+                         'shares one with the core, e.g. LocalWindowCnf, must also hold symlinks to '
+                         'the core .olean files there); its modules are leaves of the chain (never '
+                         'compiled here). It may not shadow a core or chain .olean. Repeatable')
     a = ap.parse_args()
     EXTRA.extend(d.resolve() for d in a.extra_lean_path)
+    for d in EXTRA:
+        for f in d.rglob('*.olean'):
+            r = f.relative_to(d)
+            for q in (CORE / '.lake/build/lib/lean' / r, Path(a.build_dir) / r):
+                if q.exists() and q.resolve() != f.resolve():
+                    raise SystemExit(f'{f} would shadow {q}')
     mathlib = a.mathlib_dir.resolve()
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=mathlib, text=True).strip()
     if head != PIN:
@@ -96,7 +105,7 @@ def main():
     build = Path(a.build_dir).resolve()
     build.mkdir(parents=True, exist_ok=True)
     env = os.environ.copy()
-    env['LEAN_PATH'] = os.pathsep.join([str(CORE / '.lake/build/lib/lean'), str(build), *map(str, EXTRA)])
+    env['LEAN_PATH'] = os.pathsep.join([*map(str, EXTRA), str(CORE / '.lake/build/lib/lean'), str(build)])
     log = open(a.log, 'a')
 
     def out(s):
