@@ -40,3 +40,10 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 11:58: `prod233.py --kinds share --once` tested on the first 9 share thresholds (core shard 1 paused
   by SIGSTOP meanwhile): staleness simulation 29 modules, only the 18 new ones stale; built 18/18 in
   92 s with one job (share Cnf 4-17 s, 0.65-1.33 GB; replays 0.8-2.8 s, under 0.62 GB); 18 sources swept.
+- 14:35: plain/H8 cores done (5,673). `plan`: 2,637 seeds (2,098 widened), 2,613 keys by L1 and
+  423 by L2 (80 s); `data/seeds6SB233.json.gz`. `final` written (30 modules, merge orders checked).
+- 14:42: built `LocalWindowDirKeysN6SB233` (43 s), `LocalWindowDirKeysR6SB233`, and
+  `LocalWindowDirUnsatR6SB233` (the 1,383 reused keys; 53 s, 3.28 GB); staleness simulation of the
+  43,484-module closure: only these 3 stale.
+- 14:45: production started: `prod233.py --jobs 1 --batch-hints 3e7` (PID in `$CERT233_SCR/prod.pid`);
+  jobs 2 once the last share cores finish. Resume: rerun the same command (it skips built modules).
