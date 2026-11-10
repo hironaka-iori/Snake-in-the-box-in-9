@@ -30,7 +30,8 @@ Pipeline (milestones/25-k7-234/certify is the template: gen_k7_core.py, replay_k
           checked in parts; the core is renumbered compactly).
   replay  `LocalWindowUnsat/<M>.lean` per seed and share key: the checker v3 (`LratV3`,
           `gen_lean_lrat_v3.py`, seg 60k); proofs of 8 seeds x 5 rounds for cores of at least
-          --big hints, else 2 seeds x 1 round.
+          --big hints, else 2 seeds x 1 round; `--warm 32` (cache warm-up of `raw` and of earlier
+          segments before a check that jumps far into them: else the kernel's stack overflows).
   final   `LocalWindowDirKeysN6SB233` (the new keys in chunks), `LocalWindowDirUnsatN6SB233_<c>`
           (each new key from its seed by L1/L2 or its own certificate; `Elab.async false`),
           `LocalWindowDirKeysR6SB233` / `LocalWindowDirUnsatR6SB233` (the reused keys from their
@@ -77,6 +78,7 @@ SCR = os.environ.get('CERT233_SCR', '/home/user/cert233work')
 ME = 'milestones/33-233-lean/certify/cert233.py'
 T = 'B233'
 PART_LITS = 4000
+WARM = 32   # gen_lean_lrat_v3 --warm: a jump of ~110 blocks into `raw` overflowed the stack (T012345A36236K87)
 SHARE_PART_LITS = int(os.environ.get("CERT233_SHARE_PART_LITS", "1000"))   # share cores: smaller parts (kernel caches per declaration)
 MRES = 12
 
@@ -736,7 +738,7 @@ def replay(a):
         t1 = time.time()
         GC.extract_cnf(name, work, certs)
         cmd = [sys.executable, V3, '--work', work, '--data', jd, '--out', a.out, '--seg', '60000',
-               '--off', str(offset(meta['variables'])), name]
+               '--off', str(offset(meta['variables'])), '--warm', str(WARM), name]
         r = subprocess.run(['nice', '-n', '10', *cmd], capture_output=True, text=True)
         if r.returncode != 0:
             print(r.stderr[-3000:], file=sys.stderr)

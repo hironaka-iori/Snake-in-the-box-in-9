@@ -64,6 +64,24 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   82.4 M replay hints (0.76 of their full-proof estimate), replay `.olean` 219 MB (2.66 B/hint),
   Cnf `.olean` 108 MB (87 kB each). Batch 5 (113 certificates): generation 289 s, build 1,707 s.
   Production keeps running (`prod233.py`, PID in `$CERT233_SCR/prod.pid`).
+- 22:07: production relaunched after a container restart (`prod233.py --jobs 2 --batch-hints 3e7`).
+- 22:20: fix of the one failed module, `LocalWindowUnsat.T012345A36236K87` (batch of 91, "Stack
+  overflow detected"). Compiling each `ok<c>` alone: only `ok2` overflows (the main theorem and
+  the Cnf/Sat module are fine; `--max-lemmas 2000` does not help). Cause: the kernel caches
+  `drop64R raw (b + 1)` only within one declaration, and the first lookup of block `b` forces
+  every block from the highest one already evaluated up to `b` recursively; segment 2 jumps by
+  138 blocks (8,800 input clauses) at once (the passing segments: at most 79). Fix:
+  `gen_lean_lrat_v3.py --warm N` (default 0, so the migration is unchanged): for a segment that
+  jumps by more than N blocks into `raw` or an earlier segment's lemma list, `warm<c> : andB W
+  (check ...) = true` by `decide +kernel`, where `W` evaluates every N-th block in increasing order
+  (`seqN (headR OFF (nthR raw 64k)) true`), and `ok<c>` is the same statement as before, by
+  `(andB_eq_true warm<c>).2`. `cert233.py replay` passes `--warm 32`. The module (same LRAT,
+  238,843 hints) compiles in 49 s. `prod233.py` now deletes and regenerates the source of a module
+  whose last guarded build failed after the source was written, keeps running after a batch with
+  at most 20 unbuilt modules, and leaves a module that failed twice out of the rest of the run.
+  No other failure in `prod6SB233.jsonl` or `.lake/guarded_build_233cert.jsonl` (the two share Cnf
+  modules killed at the RSS cap on 18:05 are built). State: 1,345 of 3,118 certificates (1,227
+  seeds, 118 share keys).
 
 ## Projection (measured rates)
 

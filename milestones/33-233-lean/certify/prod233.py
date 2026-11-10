@@ -15,7 +15,10 @@ first) whose replay `.olean` does not exist yet, up to --batch-hints LRAT hints 
 Before each batch it waits until `df -m /` shows at least --reserve-mb + the batch's estimated size
 (about 2.6 B per hint + 100 kB per module, sources included); the migration agent's headroom is in
 --reserve-mb (default 1,400 MB: 400 MB floor + 1 GB).  Resumable: everything it writes is checked
-for existence first.  Log: `data/prod6SB233.jsonl`.
+for existence first, except that the source of a module whose last guarded build failed after
+the source was written is deleted and regenerated (`reset_failed`).  A batch with at most 20
+unbuilt modules does not stop the run; a module that fails twice is left out of the rest of
+the run.  Log: `data/prod6SB233.jsonl`.
 
   setsid nohup nice -n 10 python3 prod233.py [--batch-hints 4e7] [--jobs 2] [--until UNIX] &
 """
@@ -62,6 +65,40 @@ def stale_check(targets, batch):
     return len(deps), sorted(m for m in deps if st[m]), bad
 
 
+GLOG = os.path.join(LEAN, '.lake', 'guarded_build_233cert.jsonl')
+GLOGS = os.path.join(LEAN, '.lake', 'guarded_logs')
+
+
+def last_status():
+    st = {}
+    if os.path.exists(GLOG):
+        for line in open(GLOG):
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if 'module' in r:
+                st[r['module']] = r['status']
+    return st
+
+
+def reset_failed(names):
+    """Delete the source of every module of `names` whose last guarded build failed (or was
+    killed) after the source was written, so `cert233.py cnf`/`replay` (which skip existing
+    sources) regenerate it with the current generator.  A source written after its failure
+    (already regenerated) is kept."""
+    st, out = last_status(), []
+    for nm in names:
+        for d in ('LocalWindowCnf', 'LocalWindowUnsat'):
+            m, src = d + '.' + nm, os.path.join(LEAN, d, nm + '.lean')
+            lg = os.path.join(GLOGS, m + '.log')
+            if st.get(m) in ('failed', 'killed') and not built(d, nm) and os.path.exists(src) and \
+                    os.path.exists(lg) and os.path.getmtime(src) < os.path.getmtime(lg):
+                os.remove(src)
+                out.append(m)
+    return out
+
+
 def sweep(names):
     n = 0
     for nm in names:
@@ -86,11 +123,13 @@ def main():
     ap.add_argument('--once', action='store_true')
     a = ap.parse_args()
     ns = C.argparse.Namespace(keys_from='', plan=C.PLAN, core=C.CORE, names=[])
+    fails = {}   # module name -> failed builds in this run; after 2 it is left for a later run
     while True:
         if a.until and time.time() > a.until:
             log({'stop': 'until'})
             return
-        items = [(h, it) for h, it, m in C.work_items(ns, set(a.kinds.split(','))) if not built('LocalWindowUnsat', it[2])]
+        items = [(h, it) for h, it, m in C.work_items(ns, set(a.kinds.split(',')))
+                 if not built('LocalWindowUnsat', it[2]) and fails.get(it[2], 0) < 2]
         if not items:
             log({'done': 'all certificates built'})
             return
@@ -100,6 +139,9 @@ def main():
                 break
             batch.append(it[2])
             tot += h
+        reset = reset_failed(batch)
+        if reset:
+            log({'regenerate': reset})
         need = a.reserve_mb + int(tot * 2.6e-6 * 1.0) + len(batch) // 10 + 50
         while C.disk_free_mb() < need:
             log({'wait_disk': C.disk_free_mb(), 'need': need})
@@ -130,8 +172,11 @@ def main():
         log({'batch': len(batch), 'hints_est': int(tot), 'closure': ncl, 'stale': len(stale), 'built': nok,
              'swept_sources': nsw, 'gen_s': round(t1 - t0), 'build_s': round(t2 - t1), 'rc': r.returncode,
              'tail': r.stdout[-600:], 'disk_free_mb': C.disk_free_mb(), 'first': batch[0], 'last': batch[-1]})
-        if r.returncode:
-            return
+        bad_now = [n for n in batch if not built('LocalWindowUnsat', n)]
+        for n in bad_now:
+            fails[n] = fails.get(n, 0) + 1
+        if r.returncode and (a.once or not bad_now or len(bad_now) > 20):
+            return   # a failure that is not confined to a few modules: stop for inspection
         if a.once:
             return
 

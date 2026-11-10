@@ -90,7 +90,37 @@ def pack(ws, W):
     return x
 
 
-def export(name, work, data, outroot, seg_hints, OFF, check, chunk=16384, wmin=13, max_lemmas=4000):
+def warm_blocks(lemmas, cuts, where, raw_idx, c, warm):
+    """The 64-element blocks to evaluate before the check of segment `c`, per list: ('R', b) for
+    `raw`, (s, b) for the lemma list of segment s < c.  The kernel caches `drop64R raw (b + 1)`
+    (and `drop64N`) only within one declaration; the first lookup of a block `b` forces every
+    block from the highest one already evaluated up to `b` recursively, one stack level each.  A
+    jump of about 100 blocks (6,400 input clauses) overflows the default 8 MB stack, so when a
+    segment jumps by more than `warm` blocks, every `warm`-th block of that list up to its highest
+    one is evaluated first, in increasing order."""
+    if not warm:
+        return []
+    top, jump = {}, {}
+    for j in range(cuts[c], cuts[c + 1]):
+        for h in lemmas[j][2]:
+            if h in where:
+                s, jj = where[h]
+                if s == c:
+                    continue
+                key, b = s, jj >> 6
+            else:
+                key, b = 'R', raw_idx[h] >> 6
+            t = top.get(key, 0)
+            jump[key] = max(jump.get(key, 0), b - t)
+            top[key] = max(t, b)
+    out = []
+    for key in sorted(top, key=lambda k: (k != 'R', k if k != 'R' else 0)):
+        if jump[key] > warm:
+            out += [(key, b) for b in range(warm, top[key] + 1, warm)]
+    return out
+
+
+def export(name, work, data, outroot, seg_hints, OFF, check, chunk=16384, wmin=13, max_lemmas=4000, warm=0):
     meta = json.load(open(os.path.join(data, name + '.json')))
     mod = meta['module'].split('.')[-1]
     core_ids = meta['core_ids']
@@ -180,12 +210,33 @@ def export(name, work, data, outroot, seg_hints, OFF, check, chunk=16384, wmin=1
         L += ['noncomputable def t%d : List Nat := [\n%s]' %
               (c, ',\n'.join('  nat_lit 0x%x' % x for x in tpack(table))), '']
     args = '%d %d %d %d raw Ps' % (OFF, W, M, FLAG)
+    nwarm = 0
     for c in range(nseg):
         if c < nseg - 1:
-            L += ['theorem ok%d : Snake9.LratV3.check %s t%d %d = true := by' % (c, args, c, c), '  decide +kernel', '']
+            stmt = 'Snake9.LratV3.check %s t%d %d' % (args, c, c)
         else:
-            L += ['theorem ok%d : Snake9.LratV3.andB (Snake9.LratV3.check %s t%d %d) (Snake9.LratV3.hasEmpty %d %d (Snake9.LratV3.segP Ps %d)) = true := by'
-                  % (c, args, c, c, W, M, c), '  decide +kernel', '']
+            stmt = 'Snake9.LratV3.andB (Snake9.LratV3.check %s t%d %d) (Snake9.LratV3.hasEmpty %d %d (Snake9.LratV3.segP Ps %d))' % (
+                args, c, c, W, M, c)
+        wb = warm_blocks(lemmas, cuts, where, raw_idx, c, warm)
+        if not wb:
+            L += ['theorem ok%d : %s = true := by' % (c, stmt), '  decide +kernel', '']
+            continue
+        # `andB w b` evaluates `w` first; `seqN x true` forces `x` and is `true`, so the warm-up
+        # only fills the kernel's cache, and `ok<c>` is the same statement as without it
+        nwarm += len(wb)
+        ws_ = []
+        for key, b in wb:
+            if key == 'R':
+                x = 'Snake9.LratV3.headR %d (Snake9.LratV3.nthR raw %d)' % (OFF, 64 * b)
+            else:
+                x = 'Snake9.LratV3.headL %d %d %d (Snake9.LratV3.nthN (Snake9.LratV3.segP Ps %d) %d)' % (OFF, W, M, key, 64 * b)
+            ws_.append('Snake9.LratV3.seqN (%s) true' % x)
+        wt = 'true'
+        for x in reversed(ws_):
+            wt = 'Snake9.LratV3.andB (%s)\n    (%s)' % (x, wt)
+        L += ['theorem warm%d : Snake9.LratV3.andB\n    (%s)\n    (%s) = true := by' % (c, wt, stmt), '  decide +kernel', '',
+              'theorem ok%d : %s = true := (Snake9.LratV3.andB_eq_true warm%d).2' % (c, stmt, c), '']
+    stats['warm_blocks'] = nwarm
     L += ['theorem unsat : Unsat cnf := by', '  apply Snake9.LratV3.unsat_of_raw', '  intro τ h',
           '  have hoff : 0 < %d := by decide' % OFF,
           '  have hr : Snake9.LratV3.RawTrue %d τ raw := Snake9.LratV3.rawTrue_of_cnf hoff h' % OFF,
@@ -283,11 +334,14 @@ def main():
     ap.add_argument('--check', action='store_true')
     ap.add_argument('--max-lemmas', type=int, default=4000, help='lemmas per segment at most')
     ap.add_argument('--pack-chunk', type=int, default=16384, help='bytes per ProofPack chunk (at most 16384)')
+    ap.add_argument('--warm', type=int, default=0,
+                    help='evaluate every WARM-th 64-block of a list first when a segment jumps by more '
+                         'than WARM blocks in it (0: never; see warm_blocks)')
     ap.add_argument('names', nargs='+')
     a = ap.parse_args()
     for n in a.names:
         print(json.dumps(export(n, a.work, a.data, a.out, a.seg, a.off, a.check, a.pack_chunk,
-                                max_lemmas=a.max_lemmas)), flush=True)
+                                max_lemmas=a.max_lemmas, warm=a.warm)), flush=True)
 
 
 if __name__ == '__main__':
