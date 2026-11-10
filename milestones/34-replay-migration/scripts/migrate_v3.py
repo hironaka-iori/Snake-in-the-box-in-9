@@ -292,23 +292,33 @@ def run(a):
     def stop():
         return a.stop_at and time.time() > a.stop_at
 
+    def est(w):
+        return max(0.2e-3 * hints[w], 1.1 * a.est.get(w, 0))
+
+    def need_mb(w):
+        return 1 + 40 * hints[w] / 2**20 * (2 if w[0] == 'R' else 1)
+
     def gen_worker():
+        """Takes the first window of the order whose staging peak fits the free disk now (smaller
+        windows go ahead of one that has to wait for disk freed by the swaps)."""
         try:
-            for w in todo:
+            pending = list(todo)
+            while pending:
                 if stop() or state['err']:
                     break
-                P = stage_paths(w)
-                if a.stop_at and 0.2e-3 * hints[w] > a.stop_at - time.time() and not os.path.exists(P['olean']):
+                pending = [w for w in pending if not (a.stop_at and est(w) > a.stop_at - time.time()
+                                                      and not os.path.exists(stage_paths(w)['olean']))]
+                free = disk_free_mb()
+                w = next((w for w in pending if os.path.exists(stage_paths(w)['olean'])
+                          or os.path.exists(stage_paths(w)['src']) or free - need_mb(w) >= a.min_disk_mb), None)
+                if w is None:
+                    time.sleep(20)
                     continue
-                if not os.path.exists(P['olean']):
-                    need = 1 + 40 * hints[w] / 2**20 * (2 if w[0] == 'R' else 1)
-                    while disk_free_mb() - need < a.min_disk_mb:
-                        if stop():
-                            return
-                        time.sleep(20)
-                    # do not run too far ahead of the builders
-                    while len(q_build) >= a.ahead:
-                        time.sleep(5)
+                # do not run too far ahead of the builders
+                while len(q_build) >= a.ahead and not stop():
+                    time.sleep(5)
+                pending.remove(w)
+                if not os.path.exists(stage_paths(w)['olean']):
                     gen(w, cs)
                 with lock:
                     q_build.append(w)
@@ -331,7 +341,7 @@ def run(a):
             if not os.path.exists(P['olean']):
                 if stop():
                     return
-                if a.stop_at and 0.2e-3 * hints[w] > a.stop_at - time.time():
+                if a.stop_at and est(w) > a.stop_at - time.time():
                     log(dict(window=w, step='deferred', reason='estimated build time beyond --stop-at'))
                     P2 = stage_paths(w)
                     if os.path.exists(P2['src']):
@@ -350,7 +360,12 @@ def run(a):
     while any(t.is_alive() for t in ths) or built:
         time.sleep(5)
         with lock:
-            batch = list(built) if (len(built) >= a.verify_batch or not any(t.is_alive() for t in ths[1:])) else []
+            if built and state.get('first_built') is None:
+                state['first_built'] = time.time()
+            batch = list(built) if (len(built) >= a.verify_batch or not any(t.is_alive() for t in ths[1:])
+                                    or (built and time.time() - state['first_built'] > 120)) else []
+            if batch:
+                state['first_built'] = None
             for w in batch:
                 built.remove(w)
         if batch:
@@ -384,8 +399,16 @@ def main():
     ap.add_argument('windows', nargs='*')
     a = ap.parse_args()
     ws = []
+    a.est = {}
     for m in a.windows:
-        ws += [x.split()[0] for x in open(m[1:]) if x.strip() and not x.startswith('#')] if m.startswith('@') else [m]
+        if m.startswith('@'):
+            for x in open(m[1:]):
+                if x.strip() and not x.startswith('#'):
+                    f = x.split('\t')
+                    ws.append(f[0])
+                    a.est[f[0]] = float(f[4])   # cpu_est_s of order.tsv
+        else:
+            ws.append(m)
     a.windows = ws
     {'run': run, 'status': status}[a.cmd](a)
 

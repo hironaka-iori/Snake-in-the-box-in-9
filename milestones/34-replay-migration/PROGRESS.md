@@ -63,3 +63,8 @@ same LRAT SHA256 as the 29 Oct packed pilot. v3 module (`gen_lean_lrat_v3.py`, s
 ## Log
 
 - 05:58 UTC: full run started, `--stop-at` 13:00 UTC (no build started that would end after it).
+- 06:20 UTC: driver restarted twice (gen now skips ahead to windows that fit the free disk; a
+  window is verified at most 120 s after it is built; CPU model of `order.py` recalibrated to
+  max(0.19 ms/hint, 0.62 x old check wall): the large Q windows take 0.19-0.24 ms/hint).
+- 07:56 UTC: 179 windows swapped (101 Q, 78 R), 967 MB of old files replaced by 91 MB; disk free
+  1.2 GB; Q01203A4344 (12.2 M hints) and Q01234A4334 (16.3 M) building.

@@ -2,7 +2,7 @@
 subject to disk: a window is taken only when its staging peak fits the free disk (above the
 guard) that the windows before it leave.  Old bytes, hints and old check wall time come from
 milestones/26-replay-efficiency/data/migration_plan.json (Q and R).  Model from the pilot
-(data/pilot.jsonl): v3 .olean = 30 KB + 2.6 B/hint; CPU = max(0.13 ms/hint, 0.45 x old check
+(data/pilot.jsonl): v3 .olean = 30 KB + 2.6 B/hint; CPU = max(0.19 ms/hint, 0.62 x old check
 wall); regeneration 12 s per million hints and core round; staging peak 1 MB + 30 B/hint/round.
 
   python3 order.py [--free-mb 580] [--guard-mb 250] [--skip W ...]
@@ -20,7 +20,7 @@ for w in ws:
     r = 2 if w['module'][0] == 'R' else 1
     w['new_est'] = 30000 + 2.6 * w['hints']
     w['freed_est'] = w['old_bytes'] - w['new_est']
-    w['cpu_est'] = max(0.13e-3 * w['hints'], 0.45 * w['old_check_wall_s'], 0.5) + 12e-6 * w['hints'] * r
+    w['cpu_est'] = max(0.19e-3 * w['hints'], 0.62 * w['old_check_wall_s'], 0.5) + 12e-6 * w['hints'] * r
     w['stage_mb'] = 1 + 30 * w['hints'] * r / 2**20
     w['eff'] = w['freed_est'] / w['cpu_est']
 ws.sort(key=lambda w: -w['eff'])
