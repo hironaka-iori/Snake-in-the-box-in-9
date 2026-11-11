@@ -108,3 +108,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 2026-11-11 17:14 UTC check-in: 2423 / 3,118 certificate modules built, 9.5 GB free (migration finished at 16:12).
 - 2026-11-11 18:15 UTC check-in: 2456 / 3,118 certificate modules built, 9.4 GB free.
 - 2026-11-11 19:16 UTC check-in: 2489 / 3,118 certificate modules built, 9.3 GB free.
+- 2026-11-11 20:17 UTC check-in: 2517 / 3,118 certificate modules built, 9.2 GB free.
