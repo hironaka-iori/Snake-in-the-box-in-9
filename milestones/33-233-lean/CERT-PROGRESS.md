@@ -100,3 +100,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 2026-11-11 08:53 UTC check-in: 1,996 / 3,118 certificate modules built, production and migration both running, 9.4 GB free.
 - 2026-11-11 09:56 UTC check-in: 2073 / 3,118 certificate modules built, production and migration both running, 7.5 GB free.
 - 2026-11-11 10:58 UTC check-in: 2139 / 3,118 certificate modules built, 8.4 GB free.
+- 2026-11-11 12:00 UTC check-in: 2199 / 3,118 certificate modules built, 10.0 GB free.
