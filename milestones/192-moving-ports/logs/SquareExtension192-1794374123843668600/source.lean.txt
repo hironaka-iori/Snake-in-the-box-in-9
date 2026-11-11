@@ -1,0 +1,71 @@
+import SquareCase192_00
+import SquareCase192_01
+import SquareCase192_02
+import SquareCase192_03
+import SquareCase192_04
+import SquareCase192_05
+import SquareCase192_06
+import SquareCase192_07
+import SquareCase192_08
+import SquareCase192_09
+import SquareCase192_10
+import SquareCase192_11
+import SquareCase192_12
+import SquareCase192_13
+import SquareCase192_14
+import SquareCase192_15
+import SquareCase192_16
+import SquareCase192_17
+namespace SquareChoice192
+def endpoint (right : Bool) : Nat := if right then 191 else 0
+
+theorem noEndpointExtension (x : Nat → Bool) (right : Bool) (k : Fin 9)
+    (h0 : x 0=false) (h191 : x 191=false)
+    (hs : ∀ i j, i<192 → j<192 → (i+1<j ∨ j+1<i) →
+      conflict (pick original alternate x i) (pick original alternate x j)=false)
+    (he : ∀ i, i<192 → i≠endpoint right →
+      conflict (Nat.xor (original (endpoint right)) (2^k.val))
+        (pick original alternate x i)=false) : False := by
+  cases right
+  · have hk : k.val=0 ∨ k.val=1 ∨ k.val=2 ∨ k.val=3 ∨ k.val=4 ∨ k.val=5 ∨ k.val=6 ∨ k.val=7 ∨ k.val=8 := by omega
+    rcases hk with h0|h1|h2|h3|h4|h5|h6|h7|h8
+    · rw [h0] at he
+      exact case00 x h0 h191 hs he
+    · rw [h1] at he
+      exact case01 x h0 h191 hs he
+    · rw [h2] at he
+      exact case02 x h0 h191 hs he
+    · rw [h3] at he
+      exact case03 x h0 h191 hs he
+    · rw [h4] at he
+      exact case04 x h0 h191 hs he
+    · rw [h5] at he
+      exact case05 x h0 h191 hs he
+    · rw [h6] at he
+      exact case06 x h0 h191 hs he
+    · rw [h7] at he
+      exact case07 x h0 h191 hs he
+    · rw [h8] at he
+      exact case08 x h0 h191 hs he
+  · have hk : k.val=0 ∨ k.val=1 ∨ k.val=2 ∨ k.val=3 ∨ k.val=4 ∨ k.val=5 ∨ k.val=6 ∨ k.val=7 ∨ k.val=8 := by omega
+    rcases hk with h0|h1|h2|h3|h4|h5|h6|h7|h8
+    · rw [h0] at he
+      exact case09 x h0 h191 hs he
+    · rw [h1] at he
+      exact case10 x h0 h191 hs he
+    · rw [h2] at he
+      exact case11 x h0 h191 hs he
+    · rw [h3] at he
+      exact case12 x h0 h191 hs he
+    · rw [h4] at he
+      exact case13 x h0 h191 hs he
+    · rw [h5] at he
+      exact case14 x h0 h191 hs he
+    · rw [h6] at he
+      exact case15 x h0 h191 hs he
+    · rw [h7] at he
+      exact case16 x h0 h191 hs he
+    · rw [h8] at he
+      exact case17 x h0 h191 hs he
+#print axioms noEndpointExtension
+end SquareChoice192

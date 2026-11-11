@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 191}
+\date{Research state after round 192}
 \begin{document}
 \maketitle
 
@@ -684,6 +684,61 @@ middle and outer components together. They provide no new record.
 
 
 
+\paragraph{Changing endpoints and crossing vertices.}
+A 191-edge path has endpoints of opposite colours, whereas a
+192-edge path has endpoints of the same colour. A one-edge improvement
+must therefore change at least one global endpoint.
+
+Let $d$ count omitted old endpoints and $a$ count new endpoints among
+the added vertices. The replacement identities become
+\[
+e(A)+a=e(D)+\delta+d,\qquad e(A,C)+d=e(D,C)+a.
+\]
+Indeed, the degree sums of the omitted and added vertices are
+$2|D|-d$ and $2|A|-a$. Substituting these in the previous edge-count
+argument gives the corrections. Their finite counting consequences
+pass Lean. An old endpoint retained as internal must acquire one
+extra neighbour after accounting for deleted neighbours.
+
+A joint search now permits both endpoints, both faces and all crossings
+to change. It computationally excludes a 192-edge path omitting at
+most four vertices of the selected 191-edge witness. Thus at least
+five omissions and six additions are needed in this local problem.
+This solver result lacks a Lean contradiction certificate. The case
+with at most six omissions and two crossings remains unresolved.
+
+A different investigation considers replacing any internal vertex
+$v_i$ by the other square corner
+$v_{i-1}\oplus v_i\oplus v_{i+1}$. A conflict with a retained vertex
+forces another substitution; conflicts between two new vertices
+forbid that pair of substitutions. A proposed endpoint extension
+supplies further forced and forbidden choices. Propagating the forced
+choices decides this restricted problem: if no conflict occurs,
+leaving every other position unchanged gives a valid assignment.
+
+All 2358 endpoint candidates across the 131 saved snakes are excluded
+by this native calculation, even with arbitrarily many simultaneous
+square substitutions. The 147 valid closures produced by forcing one
+substitution all lead to existing bank classes. These 147 cases do
+not enumerate every valid simultaneous substitution set.
+
+For the selected 191-edge witness, the corresponding geometric
+exclusion is checked in Lean for both endpoints and all nine extension
+directions. The proof permits arbitrary Boolean choices at all 190
+internal positions and checks the actual alternate-corner coordinates.
+It uses only nonconsecutive vertex separation and separation from the
+proposed extension vertex, which are necessary conditions for an induced
+path. All 18 candidate contradictions and their combined statement pass.
+The complete 131-witness census remains a native computation; this Lean
+result certifies the selected witness, without asserting its optimality.
+
+
+Further construction searches can use larger replacement regions,
+reordered components, or successive batches with recomputed corners.
+The one-batch exclusion does not settle those possibilities.
+No longer snake or improved global upper bound has been obtained.
+
+
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -727,13 +782,13 @@ count-only route would be completed by proving $s_0\ge14$ for a hypothetical
 235-edge snake. Neither alternative is required by the new sufficient
 profile once its own premises are proved.
 \end{enumerate}
-Round 191 adds attachment and colour restrictions, excludes at most seven
-omissions computationally, and compares lifts from fixed optimal middle
-paths. The manuscript-wide review completed in round 190 remains separate
+Round 192 adds endpoint corrections and a geometric Lean exclusion of
+coordinated square substitutions followed by extension for one selected
+191-edge witness. The full-bank exclusion remains native. The manuscript-wide review completed in round 190 remains separate
 from the pending certificate and proof rebuilds.
 No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--191.}
+\texttt{snake9\_research.tex} and research records 175--192.}
 \end{document}

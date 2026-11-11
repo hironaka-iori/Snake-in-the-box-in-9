@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "module": "SquareChoice192",
+  "source": "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\lean\\SquareChoice192.lean",
+  "source_sha256": "649bed61783b264068b0ebc6a9e86ee83bef8141b73a2a65ae4a45303420654a",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\data\\SquareChoice192-execution.json": "4717bbdfb396f023fc8f2d2403b653b26c7c7b9b412f9be4725ceed6c53bae52",
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\lean\\SquareChoice192.lean": "649bed61783b264068b0ebc6a9e86ee83bef8141b73a2a65ae4a45303420654a",
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\data\\seed.json": "018e194137801a7cff0fd20d41a17e2a10397492a98ae4ac193dba912c26c399",
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\data\\coordinated-certificates.json": "83d0de9aa1d99a011c17ceacf008452d2c7f247b0238ea87397f04dd374fa89c",
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\logs\\SquareChoice192-1794373956911537200\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\lean\\SquareChoice192.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\logs\\SquareChoice192-1794373956911537200\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1400008704,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 91,
+    "snapshot_seconds": 0.0
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1404784640,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 46168,
+          "ParentProcessId": 53984,
+          "PrivatePageCount": 48115712,
+          "WorkingSetSize": 25108480
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01599999999962165
+    },
+    {
+      "free_bytes": 1196007424,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 46168,
+          "ParentProcessId": 53984,
+          "PrivatePageCount": 65966080,
+          "WorkingSetSize": 232230912
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.015000000001236913
+    }
+  ],
+  "compiler_pid": 46168,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0789999999997235,
+  "axioms": [
+    {
+      "theorem": "SquareChoice192.forceOld",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "SquareChoice192.forbidNew",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "SquareChoice192.propagate",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "SquareChoice192.pairImpossible",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "log_sha256": "79fb927bf72fc7f683b057c21f2867bafa4e6307f0df7973d1ef3a51aeddbc56",
+  "object": "E:\\Snake-in-a-box\\milestones\\192-moving-ports\\build\\SquareChoice192.olean",
+  "olean_sha256": "b5c42fdf16105ba8079911886bac2250789bb8744e4fca34252ed73ad64420dc"
+}

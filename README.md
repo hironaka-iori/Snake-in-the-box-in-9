@@ -1,3 +1,13 @@
+# Current result after round 192
+
+The goal is active. Lean now excludes every simultaneous fixed-square substitution followed by an endpoint extension for the selected 191-edge witness. All 18 geometric cases and their combined statement pass. The broader native census excludes 2358 candidates across all 131 saved witnesses.
+
+Endpoint corrections extend the replacement accounting to moving endpoints. A joint solver model excludes a 192-edge path omitting at most four vertices of the selected witness, with endpoints and crossings unrestricted; that numerical exclusion has no Lean contradiction certificate. No longer Q9 snake or improved global bound was obtained.
+
+Read [round 192](milestones/192-moving-ports/README.md), [the argument](milestones/192-moving-ports/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), [paper](paper/snake9_research.tex), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 191
 
 The round is complete; research pauses after publication. A fixed optimal26-edge Q6 middle lifts to at most48 edges, while a shorter24-edge middle supports the known50-edge construction. The48 result has both solver and complete native enumeration evidence. This identifies compatibility of the components as the next construction focus.
