@@ -84,7 +84,11 @@ witnesses, a common 95-edge middle component supplies a concrete
 construction route through compatible lower-dimensional paths.
 The associated 194-edge target remains a construction hypothesis.
 Fixed-component searches and replacement enumerations identify
-restrictions in this family without producing a longer snake.
+restrictions in this family without producing a longer snake. An exact
+edge count shows that fixed-endpoint replacements preserve the number
+of components among the deleted and added vertices; the current
+computational exclusions require at least six omitted vertices to
+replace the common 95-edge path by a 97-edge path.
 \end{abstract}
 
 \clearpage
@@ -123,13 +127,16 @@ b_i=\min\{6,\alpha_i\},\qquad \delta_i=\alpha_i-b_i.
 Thus $\alpha_i=b_i+\delta_i$ with $\delta_i\ge0$. A count symbol $b_i<6$ specifies the exact count; $b_i=6$ represents every count from six through twenty-one. Lemma~\ref{lem:window-missing-corners} explains the upper value twenty-one. When these quantities are summed over the whole path, the same definitions are used at the endpoints, without asserting the internal upper bound there.
 
 \subsection{Results and proof dependencies}
-\begin{theorem}[Main result]\label{thm:main}
-The maximum edge length of an induced path in $\Q_9$ satisfies
+\begin{theorem}[Verified construction and archived upper bound]\label{thm:main}
+The explicit construction and the archived contributor upper-bound argument
+give the project interval
 \[
 \boxed{191\le a(9)\le235.}
 \]
+The upper bound is the archived contributor result; its complete independent
+rebuild remains pending.
 \end{theorem}
-The lower bound is verified from the explicit transition sequence in Theorem~\ref{thm:lower}. The proof of the upper bound has three steps. First, count coordinate squares exactly and establish positive singleton counts, with a stronger contribution at each endpoint. Second, exclude a finite family of local configurations and verify an integer potential on every remaining transition. Third, sum the potential inequalities and substitute the resulting count estimate into the square identity. Section~\ref{sec:upper-proof} gives this argument directly for 235.
+The lower bound is verified from the explicit transition sequence in Theorem~\ref{thm:lower}. The archived upper-bound argument has three steps. First, count coordinate squares exactly and establish positive singleton counts, with a stronger contribution at each endpoint. Second, exclude a finite family of local configurations and verify an integer potential on every remaining transition. Third, sum the potential inequalities and substitute the resulting count estimate into the square identity. Section~\ref{sec:upper-proof} records this argument for 235.
 
 The proof begins with the square census and the archived six-centre argument
 for 235. The new six-count boundary strengthens its retained empty-square
@@ -2018,7 +2025,7 @@ The final composition has no remaining contradiction premise. Its saved
 source, object, log and dependency records have been audited; the external
 Lean and mathematics libraries remain trusted~\cite{broader154archive,share155archive}.
 \end{proof}
-The original nine-shape target is displayed below. Its status column refers to that target, so the completed share of twelve for $012345$ does not certify sixteen. Section~\ref{sec:least-floors} records the earlier reduction of the $012034$ floor from 20 to 18 at boundary twenty-one. The current boundary-twenty-four comparison uses floor fifteen for all four pending shapes, as stated in Section~\ref{sec:boundary-retuning}; these weaker local floors still need proofs.
+The original nine-shape target is displayed below. Its status column refers to that target, so the completed share of twelve for $012345$ does not certify sixteen. Section~\ref{sec:least-floors} records the earlier reduction of the $012034$ floor from 20 to 18 at boundary twenty-one. The current boundary-twenty-four comparison uses the pending floors $(15,14,14,14)$ for $012034,012301,012340,012345$, respectively, as stated in Section~\ref{sec:floor14-loss}; their complete Lean proofs and geometric interpretation remain unfinished.
 \begin{center}\small
 \begin{tabular}{c r l}
 \toprule
@@ -4031,7 +4038,8 @@ transition checks~\cite{conditional234archive}. It is distinct from the present
 five-centre share argument and supplies no stronger main theorem here.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
-The global conclusion remains $191\le a(9)\le235$. The lower bound follows
+The maintained project interval is $191\le a(9)\le235$, with the archived
+upper-bound qualification stated below. The lower bound follows
 from the explicit witness. The upper bound uses the square identity,
 endpoint estimates, 1287 catalogue keys, a finite potential and path
 summation. The completed contributor theorem has a successful archived
@@ -4046,12 +4054,16 @@ and total-charge deductions have passed Lean under their stated premises.
 Twenty of the 1378 reference entries have checked refutations; 1358 remain.
 Exact-integer scans verify the two saved potentials on all 4947008 accepted
 keys, while the complete Lean edge certificate remains unfinished.
-The earlier accepted-key conditional 234 profile uses share floors
+The earlier sufficient accepted-key conditional 234 profile uses share floors
 $(16,18,16,16,16)$ for $012032,012034,012301,012340,012345$ and has a
 strict margin of 30 at length 235 under those premises. The $012032$
 floor is now established; the remaining four floors and the separate
 reference and potential obligations remain
 ~\cite{referenceunionarchive,potentialcertificatearchive,share152archive}.
+The current sufficient pending profile is $(15,14,14,14)$, as described in
+Section~\ref{sec:floor14-loss}. The separate conditional-233 comparison
+and its four-unit share allowance retain their stated local-certificate
+and actual-snake integration requirements.
 
 The completed actual-snake results include the sharp $012032$ pair
 inequality, its equality geometry and parity consequence, the parity-free
@@ -4104,7 +4116,8 @@ dependency records were checked; the inherited coordinate machinery
 includes one previously compiled data object, and the external Lean and
 mathematics libraries remain trusted. This completes the $012032$ case
 of Theorem~\ref{thm:countfree-completed}, while the other four target
-shapes remain unresolved~\cite{share150archive,pilot151archive,share152archive}.
+shapes remain unresolved at their original target floors
+~\cite{share150archive,pilot151archive,share152archive}.
 
 A separate certificate targets the $012032$ windows on the surviving
 eleven-cycle. A proposed improvement restricted to
@@ -4886,8 +4899,7 @@ For the nine-cycle alone, floor $15$ gives mean $4454/9$ and minimum
 range $2173/9$ at that mean. Their comparison is
 $235-1245/42254$. Thus $15$ is the first integer floor not excluded by this
 cycle and its subwalks. This is not a sufficiency result for the full graph.
-Floor $18$ remains the requirement for $012034$ in the retained
-conditional profile. The four remaining local share targets are
+For this earlier profile, floor $18$ is the requirement for $012034$. The four remaining local share targets are
 $012034=18$, $012301=16$, $012340=16$, and $012345=16$.
 
 The separate share-13 certificate and its preserved partial verification
@@ -6191,7 +6203,7 @@ Row & Direction word & Count word\\
 \section{Further conditional targets}\label{app:research-targets}
 These conditional charge estimates, proposed count restrictions and
 limitations retain their original hypotheses. They supply additional
-research targets beyond the current conditional-234 argument.
+research targets beyond the retained conditional comparisons.
 
 \subsection{Sufficient charge inequalities}
 \begin{proposition}[Explicit charge targets]\label{prop:charge-targets}
@@ -6536,7 +6548,8 @@ For a 194-edge two-crossing construction, the three component lengths
 must sum to 192, for example a 97-edge middle path and outer paths
 totalling 95. Such compatible paths have not been constructed.
 The target 196 and the maximum in dimension nine remain unresolved.
-
+The exact data, computations and proof receipts for this comparison are
+archived in~\cite{construction188archive}.
 
 \subsection{Replacement restrictions in the common 95-edge component}
 \label{sec:middle-replacements}
@@ -6653,11 +6666,130 @@ at least seven new vertices. The numerical restriction is specific to
 this path and retains the stated certificate limitation.
 
 
-The remaining construction problem therefore permits simultaneous
-changes in separated parts of the 95-edge path, or changes to its
-surrounding components and crossing vertices. The fixed-component
+Further searches can allow a larger contiguous replacement, changes
+in separated parts of the 95-edge path, or changes to its surrounding
+components and crossing vertices. The fixed-component
 exclusions identify limitations of the current family; they do not
-bound the maximum snake length in $Q_9$.
+bound the maximum snake length in $Q_9$. The exact enumeration ranges,
+solver inputs, outputs and verification receipts are archived
+in~\cite{replacement189archive}.
+
+\subsection{Component balance in a fixed-endpoint replacement}
+\label{sec:exchange-balance}
+The replacement search admits a general counting restriction. Let $P,Q$
+be induced paths in the same finite graph with the same two endpoints,
+where $Q$ is $\delta\ge0$ edges longer. Write
+\[
+D=V(P)\setminus V(Q),\qquad A=V(Q)\setminus V(P),
+\qquad C=V(P)\cap V(Q).
+\]
+For a vertex set $X$, let $e(X)$ denote the number of edges in its
+induced subgraph. For disjoint sets, let $e(X,Y)$ count edges between
+them. These counts refer to the same ambient graph.
+
+\begin{proposition}[Component balance]
+If $|D|=r$, then $|A|=r+\delta$ and
+\[
+\boxed{e(A)=e(D)+\delta,\qquad
+e(A,C)=e(D,C)=2\bigl(r-e(D)\bigr).}
+\]
+Moreover, the subgraphs induced by $D$ and $A$ have the same number
+of connected components.
+\end{proposition}
+\begin{proof}
+The vertex-count difference equals the edge-length difference, so
+$|A|=r+\delta$. The common endpoints belong to $C$. Every vertex of
+$D$ is therefore internal in $P$, and every vertex of $A$ is internal
+in $Q$. Their degree sums give
+\[
+2r=2e(D)+e(D,C),\qquad
+2(r+\delta)=2e(A)+e(A,C).
+\]
+Since both paths are induced, their common vertices induce exactly
+the same edges in both paths. Subtracting their total edge counts gives
+\[
+\delta=e(A)+e(A,C)-e(D)-e(D,C).
+\]
+Substitution of the degree sums yields $e(A)=e(D)+\delta$, and then
+the boundary identity follows. Both $D$ and $A$ induce disjoint unions
+of paths, so their component counts are respectively
+$r-e(D)$ and $(r+\delta)-e(A)$, which are equal.
+\end{proof}
+The finite edge-accounting identities and the deductions under explicit
+degree and size premises have passed Lean. The correspondence between
+arbitrary induced paths and those finite-list premises is given by the
+written argument above; its full Lean integration is not claimed here.
+
+For a two-edge improvement with five omitted vertices, let $c$ count
+the omitted intervals in the original path. The possibilities are
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+$c$ & $e(D)$ & $e(A)$ & Added vertices\\
+\midrule
+1 & 4 & 6 & 7\\
+2 & 3 & 5 & 7\\
+3 & 2 & 4 & 7\\
+4 & 1 & 3 & 7\\
+5 & 0 & 2 & 7\\
+\bottomrule
+\end{tabular}
+\end{center}
+Thus connected pieces cannot be added independently of the deleted
+interval structure. For example, five separated deletions require the
+seven added vertices to induce exactly two edges and five components.
+
+\paragraph{Completing the five-omission cases computationally.}
+The unrestricted five-omission circuit search remains unresolved after
+120 seconds, and a separate two-interval circuit search remains unresolved
+after 60 seconds. A direct enumeration resolves the latter case.
+There are four ordered interval-size splits, $(1,4),(2,3),(3,2),(4,1)$,
+and 4005 placements for each, giving 16020 interval pairs.
+Deleting the intervals leaves three retained chains. The endpoint
+chains have fixed orientations; the middle chain can reverse.
+The seven added vertices must occupy two connecting paths whose edge
+lengths sum to nine. All possible length pairs from $(2,7)$ through
+$(7,2)$ were examined, and none gives a replacement. The one-interval
+case was already included in the preceding contiguous-block enumeration.
+
+For the remaining cases $c\ge3$, a smaller relaxation selects 98 vertices,
+including the two fixed endpoints, and retains exactly 91 vertices of
+the original path. Every selected non-endpoint must have two selected
+neighbours and each endpoint must have one. It also imposes the component
+balance identity, $e(D)\le2$, and excludes selecting all four vertices
+of any coordinate square. Every desired induced path satisfies these
+conditions. The relaxation may still permit disconnected longer cycles,
+which would require additional exclusions if feasible solutions arose.
+Instead, the solver reports infeasibility before any such extra exclusion,
+in 3.062 seconds. There are 1792 coordinate-square inequalities.
+
+Combining the interval enumerations with this solver result excludes all
+five-omission replacements. Together with the earlier cases, the current
+computational restriction is
+\[
+\boxed{|V(P)\setminus V(Q)|\ge6,\qquad
+|V(Q)\setminus V(P)|\ge8}
+\]
+for a 97-edge path $Q$ with the same endpoints as the common 95-edge path
+$P$. The finite exclusions and solver infeasibility have not been
+transferred into a complete Lean contradiction certificate. This is a
+restriction on this replacement problem, without a new global bound.
+
+A 120-second overlap-maximization run returns the supplied known
+97-edge seed, retaining 52 of the original 96 vertices. No closer path
+was found, and optimality was not established. The seed has 30 forbidden
+overlaps in the first surrounding configuration, so it does not yield
+a nine-dimensional improvement. Across all endpoint-preserving placements
+of this displayed seed family, 52 is the largest retained intersection.
+Thus the current lower restriction of six omitted vertices and the
+explicit example omitting 44 leave a substantial gap for the minimum
+number of omissions. The lower restriction retains the computational
+verification qualifications above. A larger contiguous replacement,
+separated changes, and revised crossing vertices remain possible.
+
+The saved equations, search models, outcomes and proof receipts are
+recorded in~\cite{exchange190archive}.
+
 
 
 \section{Construction experiments and their scope}\label{app:experiments}
@@ -7815,6 +7947,20 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Physical share-loss integration and stron
 \bibitem{boundary176archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Boundary-twenty-four retuning and weaker sufficient shares}. Research milestone 176, 5 November 2026. The retained-graph potentials, independent source-row witnesses, arithmetic checks and unresolved geometric premises are recorded at
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/176-boundary-retuning}.
+
+
+\bibitem{construction188archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Constructions between dimensions six through nine}. Research record 188, 11 November 2026. Source sequences, coordinate cuts, finite comparisons and proof receipts:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/11db4c849b1700ecc6dc5a67afcd5a8674738815/milestones/188-dimensional-constructions}.
+
+\bibitem{replacement189archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Restrictions on fixed-endpoint middle-path replacements}. Research record 189, 11 November 2026. Complete and partial enumeration ranges, exact solver models, outcomes and proof receipts:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/2b7f244e6b5e7267e663d8e2aa88594c601975fe/milestones/189-middle-replacements}.
+
+
+\bibitem{exchange190archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Component balance and five-omission replacement restrictions}. Research record 190, 11 November 2026. Finite edge-accounting proofs, complete two-interval enumeration, degree-and-square relaxation, nearest-seed search and manuscript-review receipt:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/190-exchange-constraints}.
 
 \end{thebibliography}
 \end{document}

@@ -1,0 +1,76 @@
+import Std
+namespace ExchangeAccounting190
+
+def bit (b : Bool) : Nat := if b then 1 else 0
+
+def edges {V : Type} (es : List (V × V)) (s : V → Bool) : Nat :=
+  es.countP (fun e => s e.1 && s e.2)
+
+def removed {V : Type} (s t : V → Bool) (v : V) : Bool := s v && !t v
+
+def incidence {V : Type} (es : List (V × V)) (s t : V → Bool) : Nat :=
+  ((es.map fun e => if s e.1 && s e.2 then
+    bit (!t e.1) + bit (!t e.2) else 0)).sum
+
+def boundary {V : Type} (es : List (V × V)) (s t : V → Bool) : Nat :=
+  es.countP (fun e => s e.1 && s e.2 && (t e.1 != t e.2))
+
+theorem edgeAccounting {V : Type} (es : List (V × V)) (s t : V → Bool) :
+    edges es t + incidence es s t + edges es (removed t s) =
+    edges es s + incidence es t s + edges es (removed s t) := by
+  induction es with
+  | nil => simp [edges, incidence]
+  | cons e es ih =>
+    rcases e with ⟨u,v⟩
+    simp only [edges, incidence, List.countP_cons, List.map_cons, List.sum_cons] at *
+    cases hs : s u <;> cases ht : s v <;> cases hu : t u <;> cases hv : t v <;>
+      simp_all [removed, bit] <;> omega
+
+theorem incidenceAccounting {V : Type} (es : List (V × V)) (s t : V → Bool) :
+    incidence es s t = 2 * edges es (removed s t) + boundary es s t := by
+  induction es with
+  | nil => simp [edges, incidence, boundary]
+  | cons e es ih =>
+    rcases e with ⟨u,v⟩
+    simp only [edges, incidence, boundary, List.countP_cons, List.map_cons, List.sum_cons] at *
+    cases hs : s u <;> cases ht : s v <;> cases hu : t u <;> cases hv : t v <;>
+      simp_all [removed, bit] <;> omega
+
+theorem fixedEndpointExchange {V : Type} (es : List (V × V))
+    (s t : V → Bool) (r a gain : Nat)
+    (hvertices : a = r + gain)
+    (hdeletedDegree : incidence es s t = 2*r)
+    (haddedDegree : incidence es t s = 2*a)
+    (hedges : edges es t = edges es s + gain) :
+    edges es (removed t s) = edges es (removed s t) + gain ∧
+    boundary es t s + 2*edges es (removed s t) = 2*r := by
+  have h := edgeAccounting es s t
+  have hb := incidenceAccounting es t s
+  omega
+
+theorem componentAccounting {V : Type} (es : List (V × V))
+    (s t : V → Bool) (r a gain c : Nat)
+    (hvertices : a = r + gain)
+    (hdeletedDegree : incidence es s t = 2*r)
+    (haddedDegree : incidence es t s = 2*a)
+    (hedges : edges es t = edges es s + gain)
+    (hblocks : r = c + edges es (removed s t)) :
+    a = c + edges es (removed t s) ∧ boundary es t s = 2*c := by
+  have h := fixedEndpointExchange es s t r a gain hvertices hdeletedDegree haddedDegree hedges
+  omega
+
+theorem fiveVertexCases (deletedEdges addedEdges components : Nat)
+    (h : deletedEdges + components = 5)
+    (hpos : 1 ≤ components) (hgain : addedEdges = deletedEdges+2) :
+    (deletedEdges=0 ∧ addedEdges=2 ∧ components=5) ∨
+    (deletedEdges=1 ∧ addedEdges=3 ∧ components=4) ∨
+    (deletedEdges=2 ∧ addedEdges=4 ∧ components=3) ∨
+    (deletedEdges=3 ∧ addedEdges=5 ∧ components=2) ∨
+    (deletedEdges=4 ∧ addedEdges=6 ∧ components=1) := by omega
+
+#print axioms edgeAccounting
+#print axioms incidenceAccounting
+#print axioms fixedEndpointExchange
+#print axioms componentAccounting
+#print axioms fiveVertexCases
+end ExchangeAccounting190

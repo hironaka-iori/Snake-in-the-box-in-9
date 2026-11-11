@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 189}
+\date{Research state after round 190}
 \begin{document}
 \maketitle
 
@@ -33,6 +33,7 @@ assembly and the new geometric integration remain pending. The argument
 and these limitations are given in order.
 
 \textbf{1. The exact square budget.}
+Assume $m\ge1$; the single-vertex path satisfies the length bounds directly.
 Write $v=m+1$, let $T$ count coordinate squares with exactly one selected
 corner, and let $s_0$ count empty squares. There are
 $\binom92 2^7=4608$ coordinate squares, and each vertex lies in 36 of them.
@@ -102,6 +103,7 @@ inequality are now connected in one checked Lean proof.
 \textbf{3. From local windows to a global length bound.}
 The nine-transition model charges $120\min\{6,\alpha_{r+8}\}$ and a
 valid lower bound on the five shares at positions $r+4,\ldots,r+8$.
+Assume $m\ge8$; shorter paths already satisfy the stated upper bounds.
 Let $W$ be the sum over all $m-8$ windows. The omitted singleton positions
 are $0,1,\ldots,7,m$. Their counts sum to at least $16+8=24$.
 Each share appears in at most five windows. Consequently,
@@ -111,8 +113,8 @@ W+2880\le5G,\qquad W+4200m+5L\le1098600.
 The earlier proof used only 21 omitted counts. The new estimate is checked
 for actual snakes, with each local share lower bound retained as a premise.
 
-If every traced edge satisfies
-$w(u,v)+p(u)-p(v)\ge\mu$ and the potential range is at most $R$,
+For a nonnegative mean $\mu$, suppose every traced edge satisfies
+$w(u,v)+p(u)-p(v)\ge\mu$ and the potential range is at most $R\ge0$,
 summing cancels intermediate potential values and yields
 $\mu(m-8)\le W+R$. Combining the inequalities gives
 \[
@@ -544,8 +546,8 @@ passes Lean: each initial overlap must be removed from at least one
 set. Here the designated crossing vertices are omitted from the ground
 set. The finite placement counts are native computations.
 
-An exhaustive search excludes improvement by replacing any single
-interval containing at most 42 internal vertices of the common
+An exhaustive search excludes a two-edge improvement obtained by replacing
+any single interval containing at most 42 internal vertices of the common
 95-edge path. A second search covers two separated changed positions,
 including reversal of the retained middle section, and also finds
 no replacement. Deleting two separated vertices leaves three chains;
@@ -571,10 +573,61 @@ at least seven new vertices. The numerical restriction is specific to
 this path and retains the stated certificate limitation.
 
 
-The next constructive route must allow coordinated changes in
-separated parts of the path or vary the surrounding components and
-crossing vertices. No longer snake or improved global bound has been
+Further searches can allow a larger contiguous replacement, changes
+in separated parts of the path, or changes to the surrounding components
+and crossing vertices. No longer snake or improved global bound has been
 obtained.
+
+
+\paragraph{A general restriction on replacements.}
+Let $D$ be the vertices omitted from an induced path and $A$ the vertices
+added to a longer induced path with the same endpoints. If the gain is
+$\delta$ edges and $|D|=r$, then $|A|=r+\delta$. Writing $C$ for the
+common vertices, the internal degree sums are
+\[
+2r=2e(D)+e(D,C),\qquad
+2(r+\delta)=2e(A)+e(A,C).
+\]
+The common induced edges cancel when the two path lengths are subtracted.
+Consequently
+\[
+e(A)=e(D)+\delta,\qquad e(A,C)=e(D,C)=2(r-e(D)).
+\]
+Since a union of paths has vertex count minus edge count components,
+$D$ and $A$ have the same number of components. Lean checks the finite
+edge accounting and the deduction from the displayed degree and size
+premises; the full arbitrary-path integration remains separate.
+
+For five omissions and a two-edge gain, the numbers of deleted internal
+edges are $4,3,2,1,0$ according as the omissions form one through five
+intervals. The seven added vertices then induce $6,5,4,3,2$ edges.
+The one-interval case was already excluded. An exhaustive search of
+all 16020 two-interval placements, both middle-chain orientations and
+all compatible connector lengths excludes that case as well.
+For three or more intervals, a degree-and-square relaxation reports
+infeasibility. It requires the path degrees, the exact replacement
+counts and edge identity, and at most three selected vertices per
+coordinate square. These are necessary conditions for every desired
+path, so infeasibility excludes the remaining cases.
+
+The combined computational restriction is now at least six omitted
+original vertices and eight added vertices for a fixed-endpoint
+97-edge replacement. The native exclusions and solver result still
+lack a complete Lean contradiction certificate. They do not establish
+optimality of the 95-edge component or the 191-edge snake.
+
+A 120-second overlap-maximization run returns the supplied known
+97-edge seed, retaining 52 of the original 96 vertices. No closer path
+was found, and optimality was not established. The seed has 30 forbidden
+overlaps in the first surrounding configuration, so it does not yield
+a nine-dimensional improvement. Across all endpoint-preserving placements
+of this displayed seed family, 52 is the largest retained intersection.
+Thus the current lower restriction of six omitted vertices and the
+explicit example omitting 44 leave a substantial gap for the minimum
+number of omissions. The lower restriction retains the computational
+verification qualifications above. A larger contiguous replacement,
+separated changes, and revised crossing vertices remain possible.
+
 
 
 \textbf{7. What is proved, and what remains.}
@@ -620,11 +673,12 @@ count-only route would be completed by proving $s_0\ge14$ for a hypothetical
 235-edge snake. Neither alternative is required by the new sufficient
 profile once its own premises are proved.
 \end{enumerate}
-Round 189 adds replacement restrictions within the common construction
-family and a checked overlap-repair inequality.
+Round 190 adds the replacement component balance and the five-omission
+exclusion. The manuscript-wide consistency review is complete; it does
+not replace the pending certificate and proof rebuilds.
 No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--189.}
+\texttt{snake9\_research.tex} and research records 175--190.}
 \end{document}

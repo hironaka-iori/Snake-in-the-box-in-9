@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "module": "IncidenceBalance190",
+  "source": "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\lean\\IncidenceBalance190.lean",
+  "source_sha256": "ea369b85aaad500a00384837b4452be536002b471992698d1c60805b0b229dc6",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\data\\IncidenceBalance190-execution.json": "1f3862e35bbfab59634067ae900c232a3722d4e77809d6103e924dd2029308d6",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\lean\\IncidenceBalance190.lean": "ea369b85aaad500a00384837b4452be536002b471992698d1c60805b0b229dc6",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\data\\middle95.json": "ef95ff8a6006b94db004f185bffa7285385700040a220280f02c49950a5b1b0e",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\data\\EdgeData190-audit.json": "9c90fd543f323f5910a25abbc300125332c9ef7c224352df505f08fd41ec1ca4",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\build\\EdgeData190.olean": "7a112417d8a5a9fcb026fd20fd84cda8514a9e9c4dfe9893a8e3b4ba884d25c9"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\logs\\IncidenceBalance190-1794366475173326000\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\lean\\IncidenceBalance190.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\logs\\IncidenceBalance190-1794366475173326000\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1437605888,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 91,
+    "snapshot_seconds": 0.016000000000076398
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1393229824,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 19820,
+          "ParentProcessId": 16260,
+          "PrivatePageCount": 37462016,
+          "WorkingSetSize": 39489536
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.016000000000076398
+    }
+  ],
+  "compiler_pid": 19820,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.1089999999999236,
+  "axioms": [
+    {
+      "theorem": "ExchangeAccounting190.incidenceAccounting",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "d686dabd6ef0ef98b431fea9b52433e59854cb4951418981a0be78e1466ba831",
+  "object": "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\build\\IncidenceBalance190.olean",
+  "olean_sha256": "c6ab62ed885fa8db937462777294ce747e6c44053089da0811c6b99c14740ac0"
+}

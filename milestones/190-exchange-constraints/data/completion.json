@@ -1,0 +1,70 @@
+{
+  "round": 190,
+  "status": "PROGRESS",
+  "previous_turn": "PROGRESS: round189 published replacement restrictions and checked overlap repair.",
+  "utc": "2026-11-11T03:17:54.928945+00:00",
+  "goal_status": "pause_after_publication_requested_by_user",
+  "accepted_modules": [
+    {
+      "module": "EdgeData190",
+      "receipt_sha256": "9c90fd543f323f5910a25abbc300125332c9ef7c224352df505f08fd41ec1ca4",
+      "reports": 2
+    },
+    {
+      "module": "EdgeBalance190",
+      "receipt_sha256": "0ba1c51d2ac17b6371d9763411b6d43e64e2fdaf37e3054cc85f54be14e9204e",
+      "reports": 1
+    },
+    {
+      "module": "IncidenceBalance190",
+      "receipt_sha256": "bf38b1ebf11276a7eba3bc86c9b68f7cdef5a048a0c38a2fc26b65ee7a7e51ca",
+      "reports": 1
+    },
+    {
+      "module": "ExchangeAccounting190",
+      "receipt_sha256": "7b438cc0cd5b76931167b3533edd1ead889fa7c15bc1a8952de5ff420885bd98",
+      "reports": 3
+    }
+  ],
+  "failed_attempts": [
+    {
+      "record": "logs\\ExchangeAccounting190-1794366330501752800\\record.json",
+      "status": "FAILED",
+      "reason": "MEMORY_LIMIT"
+    },
+    {
+      "record": "logs\\ExchangeAccounting190-1794366401993337700\\record.json",
+      "status": "FAILED",
+      "reason": "MEMORY_LIMIT"
+    },
+    {
+      "record": "logs\\ExchangeAccounting190-1794366440872857400\\record.json",
+      "status": "FAILED",
+      "reason": "MEMORY_LIMIT"
+    }
+  ],
+  "mathematical_result": "For fixed-endpoint induced path replacements with gain delta, e(A)=e(D)+delta and deleted/added induced forests have equal component counts. Finite edge identities and arithmetic checked under explicit degree/size premises; arbitrary-path bridge remains written.",
+  "native_five_omission_coverage": {
+    "one_interval": "Round189 contiguous-size5 completed.",
+    "two_intervals": "16020 pairs; both orientations of retained middle chain; no replacement.",
+    "three_or_more_intervals": "Degree/square relaxation INFEASIBLE;1792 square cuts; zero dynamic cycle cuts."
+  },
+  "minimum_omissions_for_fixed_port97": {
+    "value": 6,
+    "status": "computational; complete Lean contradiction certificate pending"
+  },
+  "nearest_search": {
+    "status": "FEASIBLE",
+    "retained_old_vertices": 52,
+    "omissions": 44,
+    "same_as_known_seed": true,
+    "first_context_forbidden_overlap": 30,
+    "optimality": false
+  },
+  "new_q9_record": false,
+  "new_global_upper_bound": false,
+  "manuscript_review": "Completed whole-source consistency/domain/evidence-status review; no full proof rebuild claimed.",
+  "next_scheduled_review": 200,
+  "resume_task": "Investigate six-omission replacements or larger contiguous/multi-component changes using component balance; check any resulting97-edge witness against all84surrounding contexts. Preserve all existing proofs and qualified upper-bound work.",
+  "contributor_head": "f393c48e5e583e57d3cbb66e4330f960033229b1"
+}

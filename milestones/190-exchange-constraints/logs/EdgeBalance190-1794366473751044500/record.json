@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "module": "EdgeBalance190",
+  "source": "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\lean\\EdgeBalance190.lean",
+  "source_sha256": "277ddd0f1a377098ac86ae0409fb8f2354978e69daa76128053ba0291d5f318c",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\data\\EdgeBalance190-execution.json": "1f3862e35bbfab59634067ae900c232a3722d4e77809d6103e924dd2029308d6",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\lean\\EdgeBalance190.lean": "277ddd0f1a377098ac86ae0409fb8f2354978e69daa76128053ba0291d5f318c",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\data\\middle95.json": "ef95ff8a6006b94db004f185bffa7285385700040a220280f02c49950a5b1b0e",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\data\\EdgeData190-audit.json": "9c90fd543f323f5910a25abbc300125332c9ef7c224352df505f08fd41ec1ca4",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\build\\EdgeData190.olean": "7a112417d8a5a9fcb026fd20fd84cda8514a9e9c4dfe9893a8e3b4ba884d25c9"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\logs\\EdgeBalance190-1794366473751044500\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\lean\\EdgeBalance190.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\logs\\EdgeBalance190-1794366473751044500\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1437474816,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 91,
+    "snapshot_seconds": 0.01499999999987267
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1429303296,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 32384,
+          "ParentProcessId": 14176,
+          "PrivatePageCount": 48095232,
+          "WorkingSetSize": 25239552
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01499999999987267
+    }
+  ],
+  "compiler_pid": 32384,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.0630000000001019,
+  "axioms": [
+    {
+      "theorem": "ExchangeAccounting190.edgeAccounting",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "fe69c8ea9a21665901aa913dfcf43ef6a76d666bd8ee7fdc04e3911258aca249",
+  "object": "E:\\Snake-in-a-box\\milestones\\190-exchange-constraints\\build\\EdgeBalance190.olean",
+  "olean_sha256": "91c6d5396503b78b1a4a3f241b8592ed6eb5de055dcc6b4c10b280244883904a"
+}

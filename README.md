@@ -1,3 +1,11 @@
+# Current result after round 190
+
+The requested round is complete; research pauses after publication. Component balance gives e(A)=e(D)+delta for fixed-endpoint replacements. All five-omission replacements of the common95-edge component are now computationally excluded, giving a minimum of6omissions/8additions for a97-edge replacement. The finite exclusions still lack a complete Lean contradiction certificate. No longerQ9snake or global bound was obtained.
+
+The whole-source manuscript consistency review is complete, with archived-bound qualifications, current share profiles, domains, search scopes and citations corrected. Read [round190](milestones/190-exchange-constraints/README.md), [the argument](milestones/190-exchange-constraints/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), [paper](paper/snake9_research.tex), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round189
 
 The common95-edge middle path resists local improvement: all single replacement intervals through42 internal vertices and all two-position changes are excluded by native enumeration. The exactly-three-omission solver case is INFEASIBLE; exactly four is INFEASIBLE. The nested47→49 replacement is also excluded with its31/15pieces fixed. These are restricted computational results without complete Lean certificates, and no longer snake or global bound follows.
