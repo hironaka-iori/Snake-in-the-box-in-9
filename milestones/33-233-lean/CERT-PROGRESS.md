@@ -97,3 +97,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   the overlay must list the new `LocalWindowCnf`/`LocalWindowUnsat` files), and run
   `chain_audit.py --target UpperBound233 --reuse --extra-lean-path NEWDIR --log outputs/upper-bound-233-audit-linux.log --axioms Snake9.upper_bound_233 Snake9.verified_interval_191_233`.
 - 2026-11-11 07:51 UTC check-in: 1,909 / 3,118 certificate modules built, production and migration both running, 9.2 GB free.
+- 2026-11-11 08:53 UTC check-in: 1,996 / 3,118 certificate modules built, production and migration both running, 9.4 GB free.
