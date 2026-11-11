@@ -132,3 +132,17 @@ For K windows `migrate_v3.py` has a K path (cores of `lean_core_direction_k6`, C
   The coordinator relaunched the driver at 22:07 with `--jobs 1` (the 233 production uses the
   other two `lean` slots) and `--stop-at` +48 h; PID in `/home/user/v3stage/run2.pid`. No staged
   .olean was left half-written, and no swap was interrupted.
+
+## Second run finished (16:12 UTC, 11 Nov)
+
+- `migrate_v3.py status`: **746 of 748** Q/R windows swapped to the v3 encoding (387 Q, 359 R);
+  14.42 GB of old replay files replaced by 1.56 GB (12.85 GB freed). K windows were left as they are
+  (already packed).
+- Failed: `R01203A4434` and `R01203A4443` (the two largest R windows, 39 M and 42 M hints). Both
+  builds were killed at the 6.5 GB RSS cap after 1.6 h and 1.9 h. Their old replays were not touched
+  (the swap only happens after a successful build and verify), so the 236 chain still has a valid
+  replay for each.
+- Not done yet, deferred until the 233 production finishes (the machine has 4 cores and 15 GB, and
+  the production uses two `lean` slots): rebuild `LocalWindowDirUnsatR4b` and `LocalWindowDirUnsatR4`
+  as in "Aggregates and audits" (R4 peaks at 10.5 GB), rerun the 236/235/237 audits
+  (`/home/user/v3stage/audits.sh`), and retry the two failed windows with `--rss-cap-gb 10`.
