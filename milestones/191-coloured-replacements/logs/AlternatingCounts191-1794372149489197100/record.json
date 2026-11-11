@@ -1,0 +1,82 @@
+{
+  "status": "FAILED",
+  "module": "AlternatingCounts191",
+  "source": "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\lean\\AlternatingCounts191.lean",
+  "source_sha256": "3552631ae9b13540524d78b18b30cbd49aea784f96e174d253301121f5f03a5c",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\data\\AlternatingCounts191-execution.json": "8ec8d02bcf523a0621cae600dd938f7a57fe64329db4bd178aa57dd52065b168",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\lean\\AlternatingCounts191.lean": "3552631ae9b13540524d78b18b30cbd49aea784f96e174d253301121f5f03a5c",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\data\\middle95.json": "ef95ff8a6006b94db004f185bffa7285385700040a220280f02c49950a5b1b0e",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\logs\\AlternatingCounts191-1794372149489197100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\lean\\AlternatingCounts191.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\logs\\AlternatingCounts191-1794372149489197100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2776080384,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 83,
+    "snapshot_seconds": 0.01599999999962165
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2742136832,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 51548,
+          "ParentProcessId": 46628,
+          "PrivatePageCount": 48115712,
+          "WorkingSetSize": 25112576
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 83,
+      "snapshot_seconds": 0.01599999999962165
+    }
+  ],
+  "compiler_pid": 51548,
+  "exit_code": 1,
+  "stop_reason": null,
+  "seconds": 1.0310000000008586,
+  "axioms": [
+    {
+      "theorem": "Replacement191.singletonRequirement",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Replacement191.pairedCount",
+      "axioms": []
+    },
+    {
+      "theorem": "Replacement191.alternatingColourCount",
+      "axioms": []
+    },
+    {
+      "theorem": "Replacement191.replacement95to97",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "e2931a67504221961a81f76d58e7b449308bdbc3e4a9eeac22831b13443bece4"
+}

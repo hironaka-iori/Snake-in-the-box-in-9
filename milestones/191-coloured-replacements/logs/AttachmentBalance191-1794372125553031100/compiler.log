@@ -1,0 +1,17 @@
+E:\Snake-in-a-box\milestones\191-coloured-replacements\lean\AttachmentBalance191.lean:16:4: error: tactic 'generalize' failed, result is not type correct
+  ∀ (x : Bool),
+    (if x = true then 1 else 0) + count vs p =
+      ((if (x && q v) = true then 1 else 0) + count vs fun v => p v && q v) +
+        ((if (x && !q v) = true then 1 else 0) + count vs fun v => p v && !q v)
+case cons
+V : Type
+p q : V → Bool
+v : V
+vs : List V
+ih : count vs p = (count vs fun v => p v && q v) + count vs fun v => p v && !q v
+⊢ (if p v = true then 1 else 0) + count vs p =
+    ((if (p v && q v) = true then 1 else 0) + count vs fun v => p v && q v) +
+      ((if (p v && !q v) = true then 1 else 0) + count vs fun v => p v && !q v)
+'Replacement191.countPartition' depends on axioms: [sorryAx]
+'Replacement191.retainedVertexBalance' depends on axioms: [propext, sorryAx, Quot.sound]
+'Replacement191.gainedColour' depends on axioms: [propext, sorryAx, Quot.sound]

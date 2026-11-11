@@ -1,0 +1,65 @@
+{
+  "round": 191,
+  "status": "PROGRESS",
+  "utc": "2026-11-11T04:52:58.189694+00:00",
+  "goal_status": "pause_after_publication_requested_by_user",
+  "accepted_modules": [
+    {
+      "module": "AttachmentBalance191",
+      "receipt_sha256": "ab76f419a85094517cfa77e0cd5c928cb1755b1451d27b5e7d8e3ac43160a969",
+      "reports": 3
+    },
+    {
+      "module": "AlternatingCounts191",
+      "receipt_sha256": "648a9f0949a20d24a92d9453f8cd82db74d180191aab8ce8587a0e9f5f590fcd",
+      "reports": 4
+    }
+  ],
+  "failed_attempts": [
+    {
+      "record": "logs\\AttachmentBalance191-1794372125553031100\\record.json",
+      "reason": null,
+      "exit_code": 1
+    },
+    {
+      "record": "logs\\AlternatingCounts191-1794372149489197100\\record.json",
+      "reason": null,
+      "exit_code": 1
+    },
+    {
+      "record": "logs\\AlternatingCounts191-1794372163910771100\\record.json",
+      "reason": null,
+      "exit_code": 1
+    }
+  ],
+  "minimum_omissions_for_fixed_port97": {
+    "value": 8,
+    "status": "native solver exclusion; Lean contradiction certificate pending"
+  },
+  "unknown_queries": [
+    "at most eight omissions",
+    "unrestricted middle with first outer context fixed",
+    "fixed98-middle Q9 target192"
+  ],
+  "fixed_optimal_middle_lifts": {
+    "Q6_middle26": {
+      "optimum": 48,
+      "solver_status": "OPTIMAL",
+      "native_enumeration": true
+    },
+    "Q7_middle50": {
+      "witness": 89,
+      "inherited_restricted_upper": 97,
+      "optimum_known": false
+    },
+    "Q8_middle98": {
+      "target": 192,
+      "status": "UNKNOWN"
+    }
+  },
+  "new_q9_record": false,
+  "new_global_upper_bound": false,
+  "next_scheduled_manuscript_review": 200,
+  "contributor_head": "f393c48e5e583e57d3cbb66e4330f960033229b1",
+  "next_direction": "Optimize the middle path together with its compatible two outer paths; fixed optimal low-dimensional seeds need not give the best lifts. Eight-omission local search remains unresolved."
+}

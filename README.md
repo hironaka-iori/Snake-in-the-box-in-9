@@ -1,3 +1,13 @@
+# Current result after round 191
+
+The round is complete; research pauses after publication. A fixed optimal26-edge Q6 middle lifts to at most48 edges, while a shorter24-edge middle supports the known50-edge construction. The48 result has both solver and complete native enumeration evidence. This identifies compatibility of the components as the next construction focus.
+
+For the common95-edge path with fixed endpoints, at most7 omissions is computationally excluded, so a97-edge replacement needs at least8 omissions/10 additions. Lean checks finite attachment balance and alternating-colour counts; the numerical exclusions have no Lean contradiction certificate. No longer Q9 snake or new global bound was obtained.
+
+Read [round191](milestones/191-coloured-replacements/README.md), [the argument](milestones/191-coloured-replacements/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), [paper](paper/snake9_research.tex), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 190
 
 The requested round is complete; research pauses after publication. Component balance gives e(A)=e(D)+delta for fixed-endpoint replacements. All five-omission replacements of the common95-edge component are now computationally excluded, giving a minimum of6omissions/8additions for a97-edge replacement. The finite exclusions still lack a complete Lean contradiction certificate. No longerQ9snake or global bound was obtained.

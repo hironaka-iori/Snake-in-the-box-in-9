@@ -1,19 +1,21 @@
-Research is to pause after round190 publication. Resume only upon a new user instruction.
+Research pauses after round191 publication. Resume only upon a new user instruction.
 
-# Round 190 complete; pause after publication
+# Round 191 complete; pause after publication
 
-The user explicitly requested pausing after this round. Finish publication and pause the goal. Do not start round191 without a new resume request.
+The user requested pausing after this round. Do not begin round192 without a new resume instruction.
 
-The current direction is dimension-lifting constructions. Read milestones/190-exchange-constraints/MATHEMATICAL_NOTE.md and data/completion.json. For same-endpoint induced paths, with D omitted and A added, e(A)=e(D)+delta and D,A have equal component counts. Lean checks the finite edge identities and arithmetic under explicit degree/size premises; the arbitrary-path integration remains written.
+Read milestones/191-coloured-replacements/MATHEMATICAL_NOTE.md and data/completion.json. The current direction is dimension lifting. The most useful new comparison is that the displayed optimal26-edge Q6 middle supports a maximum48-edge two-crossing lift, whereas the known50-edge construction uses a shorter24-edge middle. The restricted48 optimum has both a solver result and a complete native enumeration:10381 paths from each port, maximum22 compatible outer vertices. No complete Lean exclusion certificate.
 
-The common95-edge component cannot gain two edges through at most five omissions according to the combined native computations. One interval is covered by round189. Round190 exhausts16020two-interval five-omission placements, including middle-chain reversal and every possible connector-length pair. The remaining3–5interval cases are excluded by a degree/square relaxation (1792squares, zero dynamic cycle cuts,3.062seconds). No complete Lean contradiction certificate. Minimum6omissions and8additions is a computational local restriction, not a global bound.
+The fixed50-edge Q7 middle yields an89-edge witness in the new bounded optimization. Its restricted optimum lies between89 and97 using the earlier singleton-inclusive exclusion of98 or more. The fixed98-edge Q8 middle targeting192 remains UNKNOWN after180seconds. These are fixed-seed statements, without classification of all optimal lower-dimensional paths.
 
-The nearest search returned exactly the supplied known97-edge seed:52common vertices,44omissions,30forbidden overlaps with the first surrounding context. All pairs pass, but no new closer97path, nearest-path optimality or193-edgeQ9snake. The next new search is six omissions, or larger contiguous/coordinated changes and altered ports. Compare anynew97path with all84contexts.
+For the common95-edge path and its fixed endpoints, at most6 omissions is INFEASIBLE13.203s; at most7 is INFEASIBLE30.344s. Both use all Q8 vertices, exact degrees, colour balance, exchange accounting and1792 square cuts, with no interval restriction or dynamic cycle cuts. Hence minimum8 omissions/10 additions computationally. No Lean contradiction certificate. At most8 omissions is UNKNOWN120s. The unrestricted97-edge replacement with the first Q9 outer context fixed is also UNKNOWN120s. The known97 seed remains44 omissions and incompatible with that outer context.
 
-All search and proof processes are terminal. Preserve models, finite-search ranges and failed proof snapshots. Do not repeat unchanged120second general-five or nearest queries, or the60second circuit two-interval case; the latter is superseded by complete native enumeration. One heavy research worker at a time; Lean limits remain1GiB free at startup,768MiB reserve,256MiB private memory.
+Lean accepts AttachmentBalance191 and AlternatingCounts191, seven dependency reports. At every retained vertex, added-neighbour count equals deleted-neighbour count. A95-to97 replacement gains one vertex of each colour. Finite count cancellation and alternating sequence counting are checked; the complete generic path-to-list bridge remains written. Preserve the three failed source-elaboration snapshots and immutable accepted receipts.
 
-Manuscript-wide consistency/domain/evidence review completed for all round189source:7820main lines and630short lines;20corrections saved with exact hashes. This is not a full proof rebuild. Next scheduled review200. ExistingD: manuscripts andE: mirrors preserve authors and hypersetup.
+On resumption, prioritize joint changes of the middle and compatible outer paths, including crossing vertices. Maximizing middle length alone can lose lift length. Eight-omission search is optional; change the model or use component/connector structure before spending another identical120seconds. Do not claim novelty or a new Q9 record.
 
-Inherited upper-bound work unchanged: round18793/98clause batches (11904/12424), critical floor15 and actual-snake transfer pending; conditional233/234; archived235 independent rebuild pending. Round188directQ8pairwiseLean recheck remains pending. No unconditional bound or proof of196 added.
+All research workers must be terminal before publication and pause. One heavy research worker at a time; Lean startup1GiB, reserve768MiB, per-process256MiB and60s timeout unchanged. Do not rerun old close/preparation scripts over accepted milestones.
 
-Fetched research/unconditional-241 atf393c48e5e583e57d3cbb66e4330f960033229b1, without merging or independent rebuild. Preserve unrelated.gitignore and milestones/50-three-count-return/excess-screen/data/critical-family.json edits.
+Inherited upper-bound work unchanged: archived235 independent rebuild pending; conditional233/234; round18793/98clause batches11904/12424; critical contradiction and actual-snake transfer pending. Round188directQ8all-pairsLean recheck pending. Whole-source consistency review completed190; next200.
+
+Initial Git refresh found no new commits. Contributor research/unconditional-241 remains f393c48e5e583e57d3cbb66e4330f960033229b1. Preserve unrelated.gitignore and milestones/50-three-count-return/excess-screen/data/critical-family.json. Editor files remain in D:/Codex/2026-10-13/new-chat/outputs, mirrored to E:/Snake-in-a-box/paper, with authors and hypersetup preserved.

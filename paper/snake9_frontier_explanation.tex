@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 190}
+\date{Research state after round 191}
 \begin{document}
 \maketitle
 
@@ -610,7 +610,7 @@ counts and edge identity, and at most three selected vertices per
 coordinate square. These are necessary conditions for every desired
 path, so infeasibility excludes the remaining cases.
 
-The combined computational restriction is now at least six omitted
+The round-190 computational restriction was at least six omitted
 original vertices and eight added vertices for a fixed-endpoint
 97-edge replacement. The native exclusions and solver result still
 lack a complete Lean contradiction certificate. They do not establish
@@ -622,11 +622,65 @@ was found, and optimality was not established. The seed has 30 forbidden
 overlaps in the first surrounding configuration, so it does not yield
 a nine-dimensional improvement. Across all endpoint-preserving placements
 of this displayed seed family, 52 is the largest retained intersection.
-Thus the current lower restriction of six omitted vertices and the
-explicit example omitting 44 leave a substantial gap for the minimum
+The lower restriction of six omitted vertices at that stage and the
+explicit example omitting 44 left a substantial gap for the minimum
 number of omissions. The lower restriction retains the computational
 verification qualifications above. A larger contiguous replacement,
 separated changes, and revised crossing vertices remain possible.
+
+
+
+\paragraph{Current replacement frontier.}
+At every retained vertex $v$, the number of adjacent added vertices
+equals the number of adjacent deleted vertices:
+\[
+|N(v)\cap A|=|N(v)\cap D|.
+\]
+Both paths give $v$ the same degree, and its retained neighbours are
+unchanged. Subtracting those neighbours proves the equality. An added
+vertex therefore cannot touch a retained vertex that lost no neighbour.
+
+The cube's two colours alternate along a path. A 95-edge path has
+48 vertices of each colour, and a 97-edge path has 49 of each.
+Consequently the replacement must add one more vertex than it deletes
+in each colour. Lean checks the finite counting and alternating-sequence
+arguments; the full graph-to-list interpretation remains separate.
+
+A model allowing all cube vertices now excludes replacements omitting
+at most six or at most seven original vertices. It fixes the endpoints,
+selects 98 vertices, requires the path degrees and colour counts, and
+imposes the exchange identity and all square exclusions. These
+conditions hold for every desired replacement. Their infeasibility
+therefore gives the computational restriction
+\[
+|D|\ge8,\qquad |A|\ge10.
+\]
+The eight-omission query remains unresolved after 120 seconds.
+The exclusions have no Lean contradiction certificate. The known
+97-edge placement omitting 44 vertices remains the explicit upper
+example for this local distance problem, so the remaining range is
+$8\le r\le44$, with the lower end subject to that qualification.
+
+A separate query retains the outer components of the first saved
+nine-dimensional configuration while allowing the middle path to change
+without an omission limit. The 97-edge target remains unresolved after
+120 seconds. This supplies neither a construction nor an exclusion.
+
+
+The lower-dimensional comparison also shows why compatibility matters.
+With the displayed optimal 26-edge $Q_6$ path fixed as the middle,
+the solver gives a maximum 48-edge two-crossing lift, whereas the
+known 50-edge construction uses a shorter 24-edge middle:
+\[
+2+26+18+2=48<50=18+24+6+2.
+\]
+This is a restriction for the displayed seed, without a classification
+of all optimal 26-edge paths. With the displayed 50-edge middle in
+$Q_7$, an 89-edge lift is found; its restricted optimum remains
+between 89 and 97 using the earlier exclusion. The 192-edge target
+with the displayed 98-edge middle in $Q_8$ remains unresolved after
+180 seconds. These computations support searching for compatible
+middle and outer components together. They provide no new record.
 
 
 
@@ -673,12 +727,13 @@ count-only route would be completed by proving $s_0\ge14$ for a hypothetical
 235-edge snake. Neither alternative is required by the new sufficient
 profile once its own premises are proved.
 \end{enumerate}
-Round 190 adds the replacement component balance and the five-omission
-exclusion. The manuscript-wide consistency review is complete; it does
-not replace the pending certificate and proof rebuilds.
+Round 191 adds attachment and colour restrictions, excludes at most seven
+omissions computationally, and compares lifts from fixed optimal middle
+paths. The manuscript-wide review completed in round 190 remains separate
+from the pending certificate and proof rebuilds.
 No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--190.}
+\texttt{snake9\_research.tex} and research records 175--191.}
 \end{document}

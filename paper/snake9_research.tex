@@ -87,7 +87,7 @@ Fixed-component searches and replacement enumerations identify
 restrictions in this family without producing a longer snake. An exact
 edge count shows that fixed-endpoint replacements preserve the number
 of components among the deleted and added vertices; the current
-computational exclusions require at least six omitted vertices to
+computational exclusions require at least eight omitted vertices to
 replace the common 95-edge path by a 97-edge path.
 \end{abstract}
 
@@ -6764,8 +6764,8 @@ Instead, the solver reports infeasibility before any such extra exclusion,
 in 3.062 seconds. There are 1792 coordinate-square inequalities.
 
 Combining the interval enumerations with this solver result excludes all
-five-omission replacements. Together with the earlier cases, the current
-computational restriction is
+five-omission replacements. Together with the earlier cases, the round-190
+computational restriction was
 \[
 \boxed{|V(P)\setminus V(Q)|\ge6,\qquad
 |V(Q)\setminus V(P)|\ge8}
@@ -6781,8 +6781,8 @@ was found, and optimality was not established. The seed has 30 forbidden
 overlaps in the first surrounding configuration, so it does not yield
 a nine-dimensional improvement. Across all endpoint-preserving placements
 of this displayed seed family, 52 is the largest retained intersection.
-Thus the current lower restriction of six omitted vertices and the
-explicit example omitting 44 leave a substantial gap for the minimum
+The lower restriction of six omitted vertices at that stage and the
+explicit example omitting 44 left a substantial gap for the minimum
 number of omissions. The lower restriction retains the computational
 verification qualifications above. A larger contiguous replacement,
 separated changes, and revised crossing vertices remain possible.
@@ -6790,6 +6790,152 @@ separated changes, and revised crossing vertices remain possible.
 The saved equations, search models, outcomes and proof receipts are
 recorded in~\cite{exchange190archive}.
 
+
+
+\subsection{Attachment and colour restrictions on a replacement}
+\label{sec:attachment-colour}
+The component balance has a pointwise refinement. Retain the notation
+$D,A,C$ from Section~\ref{sec:exchange-balance}, and let $N(v)$ be the
+neighbours of $v$ in the ambient graph.
+
+\begin{proposition}[Retained-vertex attachment balance]
+For every $v\in C$,
+\[
+|N(v)\cap A|=|N(v)\cap D|.
+\]
+\end{proposition}
+\begin{proof}
+If both paths consist of one vertex, the assertion is immediate.
+Otherwise the degree of $v$ in each path is one if it is a common endpoint and
+two otherwise. Its neighbours in $C$ agree in both induced paths.
+Subtracting these common neighbours from the equal degrees proves
+the assertion.
+\end{proof}
+In particular, a retained vertex that loses no neighbour cannot be
+adjacent to an added vertex. If it loses one or two neighbours, it
+must receive exactly that many new neighbours. Summing this equality
+recovers the boundary part of component balance.
+
+The binary cube has two vertex colours, determined by the parity of
+the number of nonzero coordinates. Write $D_i,A_i$ for the omitted
+and added vertices of colour $i\in\{0,1\}$.
+\begin{proposition}[Colour counts]
+If a same-endpoint replacement gains $2k$ edges, then
+\[
+|A_0|=|D_0|+k,\qquad |A_1|=|D_1|+k.
+\]
+\end{proposition}
+\begin{proof}
+Colours alternate along each path. If the endpoints have opposite
+colours, each path has equal numbers of both colours. If the endpoints
+have the same colour, that colour occurs once more than the other.
+The endpoints are unchanged, so the colour imbalance is unchanged.
+The total vertex count increases by $2k$; each colour therefore gains
+$k$ vertices. Cancelling the common vertices proves the equations.
+\end{proof}
+For the $95\to97$ replacement, the colour counts increase from
+$(48,48)$ to $(49,49)$. The saved Lean proofs check cancellation of
+finite neighbour counts under the equal-degree premise, alternating
+sequence counts, and cancellation of common coloured vertices.
+The generic graph-to-list correspondence remains a written argument.
+These equalities are necessary conditions already implied by the
+complete induced-degree model; no independent improvement in its
+strength is asserted.
+
+\paragraph{The enlarged finite search.}
+The new model allows every vertex of $Q_8$ and fixes the original
+endpoints. It selects 98 vertices, imposes the induced path degrees,
+the colour counts $(49,49)$, the exchange edge identity, and the 1792
+square exclusions. For a prescribed integer $r$, it retains at least
+$96-r$ original vertices. There is no restriction on the number of
+deleted intervals. The model can admit longer disconnected cycles,
+so it is initially a relaxation of the desired path problem.
+
+The cases $r=6$ and $r=7$ are infeasible in 13.203 and 30.344 seconds,
+respectively, before any additional cycle exclusion. Thus the current
+computational restriction for this particular 95-edge path is
+\[
+\boxed{|D|\ge8,\qquad |A|\ge10.}
+\]
+The case $r=8$ remains unresolved after 120 seconds. These solver
+exclusions lack Lean contradiction certificates and give no global
+upper bound. Together with the known 97-edge placement omitting 44
+vertices, they leave the computationally qualified range $8\le r\le44$
+for the minimum number of omissions.
+
+A separate query retains the outer components of the first saved
+nine-dimensional configuration while allowing the middle path to change
+without an omission limit. The 97-edge target remains unresolved after
+120 seconds. This supplies neither a construction nor an exclusion.
+
+
+\paragraph{A restriction for future component searches.}
+If $D$ has $c$ components, the $r+2$ added vertices also have $c$
+components. If $s$ of them are singletons, the other components have
+at least two vertices, giving
+\[
+r+2\ge s+2(c-s),\qquad s\ge\max\{0,2c-r-2\}.
+\]
+The integer implication passes Lean under the displayed size premise.
+Each singleton must connect two retained vertices at Hamming distance
+two. More generally, deletion leaves $c+1$ retained chains, which the
+replacement must order and orient. Its $c$ connectors have total edge
+length $r+2+c$. For any chosen order, their endpoint Hamming distances
+cannot sum to more than this, and each connector length has the same
+parity as its endpoint distance. These filters do not guarantee
+chord-free connectors. They describe a possible next search without
+changing the numerical conclusions above.
+
+\paragraph{Optimal middle paths need not give optimal lifts.}
+For a fixed middle path of $b$ edges, let the two compatible outer
+paths together use $u$ vertices. Their total edge count is $u-2$, so
+the lifted snake has $b+u$ edges after the two crossings are added.
+This makes compatibility part of the construction objective.
+
+With the displayed optimal 26-edge path in $Q_6$ fixed as the middle,
+the maximum is $u=22$, giving a 48-edge lift. The solver establishes
+this restricted optimum in 0.328 seconds and supplies a witness with
+outer lengths 2 and 18. In contrast, the previously checked 50-edge
+construction uses a 24-edge middle and outer lengths 18 and 6:
+\[
+2+26+18+2=48,\qquad 18+24+6+2=50.
+\]
+This comparison concerns the specified middle paths. It gives no
+classification of all optimal 26-edge snakes.
+
+An independent enumeration lists all 10381 induced paths from each port
+in the allowed graph, including singleton paths. Examining compatible
+pairs, with pruning only by their total size, again gives a maximum
+of 22 outer vertices. This is a complete native enumeration; a Lean
+completeness certificate remains pending.
+
+With the displayed 50-edge $Q_7$ path fixed, a 120-second optimization
+finds an 89-edge lift and does not establish optimality. The earlier
+restricted exclusion of a lift of at least 98 edges remains applicable,
+so the attainable maximum in this fixed family is computationally
+between 89 and 97. Both numerical upper statements retain their native
+certificate limitations.
+
+Finally, fixing the displayed 98-edge $Q_8$ path and seeking a
+192-edge lift gives no resolution after 180 seconds. Singleton outer
+paths are allowed in all three models. The search models enforce
+induced degrees at most two, degree at most one at the two ports,
+an edge count two less than the vertex count, and a flow requiring
+every component to contain a port. A cycle component would have degree
+two at every vertex and therefore could not contain a port. All
+components are consequently paths, and the edge count implies exactly
+two components, one at each port. Thus the selected graph is a pair
+of disjoint nonadjacent paths. Every returned
+joined witness also passes a direct all-pairs adjacency check.
+
+The useful direction is to vary the middle path and its compatible
+outer paths together. Maximizing the middle length alone can reduce
+the resulting lift, as the $Q_6$ comparison demonstrates.
+
+
+The inputs, models, solver outcomes and proof receipts are saved
+in~\cite{replacement191archive}. No longer nine-dimensional snake has
+been obtained in this round.
 
 
 \section{Construction experiments and their scope}\label{app:experiments}
@@ -7961,6 +8107,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Restrictions on fixed-endpoint middle-pat
 \bibitem{exchange190archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Component balance and five-omission replacement restrictions}. Research record 190, 11 November 2026. Finite edge-accounting proofs, complete two-interval enumeration, degree-and-square relaxation, nearest-seed search and manuscript-review receipt:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/190-exchange-constraints}.
+
+\bibitem{replacement191archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Attachment balance, coloured replacements and fixed-middle lifts}. Research record 191, 11 November 2026. Finite counting proofs, replacement models, dimensional comparisons and proof receipts:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/191-coloured-replacements}.
 
 \end{thebibliography}
 \end{document}
