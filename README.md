@@ -1,3 +1,11 @@
+# Current result after round189
+
+The common95-edge middle path resists local improvement: all single replacement intervals through42 internal vertices and all two-position changes are excluded by native enumeration. The exactly-three-omission solver case is INFEASIBLE; exactly four is INFEASIBLE. The nested47→49 replacement is also excluded with its31/15pieces fixed. These are restricted computational results without complete Lean certificates, and no longer snake or global bound follows.
+
+The overlap-repair inequality and nested joining implications pass Lean. Read [round189](milestones/189-middle-replacements/README.md), [the argument](milestones/189-middle-replacements/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), [paper](paper/snake9_research.tex), and [frontier explanation](paper/snake9_frontier_explanation.tex). The goal remains active.
+
+## Earlier checkpoints
+
 # Current result after round 188
 
 The construction investigation now compares6→7,7→8 and8→9. Lean checks the exact three-path joining rule and the concrete18+24+6+2=50 reconstruction. The published98-edge representative has at least four crossings in every coordinate. A common95-edge middle-path type in84 saved191-edge witnesses supplies a specific construction route. No new record or numerical upper bound is claimed.

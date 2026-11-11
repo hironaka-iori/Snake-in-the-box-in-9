@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 188}
+\date{Research state after round 189}
 \begin{document}
 \maketitle
 
@@ -515,9 +515,66 @@ The fixed 50-edge middle-path search reports no two-crossing lift
 of at least 98 edges; this is a restricted solver exclusion without
 a Lean certificate. A bounded search with the 95-edge middle path
 fixed and both outer paths nontrivial leaves the 192-edge target
-unresolved. No longer construction has been found. The next step
-is the fixed-endpoint 95-to-97 replacement search, followed by varying
-the surrounding components if that restricted problem is excluded.
+unresolved. No longer construction has been found. The restrictions obtained from this replacement investigation are
+described below.
+
+
+\paragraph{What obstructs a replacement in the common family.}
+The family has 48, 96 and 192 selected vertices at lengths 47, 95 and
+191. Its balanced face sizes explain this observed doubling, without
+establishing a general recurrence.
+
+The direct fixed-endpoint 95-to-97 search remains unresolved. A smaller
+attempt retains the 31- and 15-edge pieces and replaces the 47-edge
+component by a 49-edge path. The solver excludes this even after all
+external nine-dimensional restrictions are removed. This exclusion
+concerns those fixed pieces and has no Lean contradiction certificate.
+
+The displayed optimal lower-dimensional seeds are also far from the
+required compatibility. All 1440 endpoint-preserving placements of
+the applicable 97-edge truncation overlap the fixed outer vertices
+at least 23 times, across all 84 contexts. At the nested level all
+960 placements of the 49-edge truncations have at least eleven
+forbidden overlaps. The general inequality
+\[
+|A\cap B|\le |A\setminus A'|+|B\setminus B'|
+\quad\text{when }A'\cap B'=\varnothing
+\]
+passes Lean: each initial overlap must be removed from at least one
+set. Here the designated crossing vertices are omitted from the ground
+set. The finite placement counts are native computations.
+
+An exhaustive search excludes improvement by replacing any single
+interval containing at most 42 internal vertices of the common
+95-edge path. A second search covers two separated changed positions,
+including reversal of the retained middle section, and also finds
+no replacement. Deleting two separated vertices leaves three chains;
+their two new connections must have lengths $(2,4)$, $(3,3)$ or $(4,2)$.
+These cases were completely enumerated. Together with the adjacent
+cases, this means a fixed-endpoint 97-edge replacement must omit at
+least three original vertices and add at least five. The complete
+Lean interpretation of these finite exclusions remains pending.
+
+A further search requires a 97-edge path with the same endpoints
+to retain exactly 93 of the original 96 vertices. All other cube vertices
+are available, and no external nine-dimensional restriction is imposed.
+The solver reports infeasibility in 28.641 seconds. Combined with the
+smaller complete enumerations, this gives the computational conclusion
+that at least four original vertices must be omitted. This last step
+depends on the solver exclusion, which has no Lean contradiction
+certificate.
+
+The corresponding search retaining exactly 92 original vertices
+also reports infeasibility. Under these solver results, a fixed-endpoint
+97-edge replacement must omit at least five original vertices and add
+at least seven new vertices. The numerical restriction is specific to
+this path and retains the stated certificate limitation.
+
+
+The next constructive route must allow coordinated changes in
+separated parts of the path or vary the surrounding components and
+crossing vertices. No longer snake or improved global bound has been
+obtained.
 
 
 \textbf{7. What is proved, and what remains.}
@@ -563,10 +620,11 @@ count-only route would be completed by proving $s_0\ge14$ for a hypothetical
 235-edge snake. Neither alternative is required by the new sufficient
 profile once its own premises are proved.
 \end{enumerate}
-Round 188 adds the construction comparison and exact joining deduction.
+Round 189 adds replacement restrictions within the common construction
+family and a checked overlap-repair inequality.
 No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--188.}
+\texttt{snake9\_research.tex} and research records 175--189.}
 \end{document}

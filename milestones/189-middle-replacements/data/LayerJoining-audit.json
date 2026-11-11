@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "module": "LayerJoining",
+  "source": "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\lean\\LayerJoining.lean",
+  "source_sha256": "30687e190d96818b64569e90faaff50eba28acf7698e4ffa8c6d89d8fe640a74",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\data\\LayerJoining-execution.json": "01a4a98ef461c9f72eade9696ade15540627ad9839a17472a4de814c43ec3935",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\lean\\LayerJoining.lean": "30687e190d96818b64569e90faaff50eba28acf7698e4ffa8c6d89d8fe640a74",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\data\\replacement-contexts.json": "dbe2b55cb7f249a79af3d57714141f9aa6902409455f39e6c1003be3d5a8e9af",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\data\\known97-replacements.json": "50457d4f39f83ecd86060951c070eaf69c67dd6b162755dc7f54e70c1a21491c",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\logs\\LayerJoining-1794364843528236200\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\lean\\LayerJoining.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\logs\\LayerJoining-1794364843528236200\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2654269440,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 83,
+    "snapshot_seconds": 0.016000000000076398
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2638020608,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 8444,
+          "ParentProcessId": 49804,
+          "PrivatePageCount": 48123904,
+          "WorkingSetSize": 24387584
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 84,
+      "snapshot_seconds": 0.016000000000076398
+    },
+    {
+      "free_bytes": 2428239872,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 8444,
+          "ParentProcessId": 49804,
+          "PrivatePageCount": 64577536,
+          "WorkingSetSize": 229543936
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 85,
+      "snapshot_seconds": 0.0
+    },
+    {
+      "free_bytes": 2789883904,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 8444,
+          "ParentProcessId": 49804,
+          "PrivatePageCount": 173625344,
+          "WorkingSetSize": 277803008
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 83,
+      "snapshot_seconds": 0.01499999999987267
+    }
+  ],
+  "compiler_pid": 8444,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.0779999999999745,
+  "axioms": [
+    {
+      "theorem": "LayerJoining.join",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "LayerJoining.compatibility_necessary",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "LayerJoining.lengths_for_196",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "LayerJoining.lengths_for_197",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "LayerJoining.single_crossing_upper",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "d2a05866845d5448c0955304f133543bf184de8918f6649e8d34bf8e01d9a243",
+  "object": "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\build\\LayerJoining.olean",
+  "olean_sha256": "afd32c6da92896046c6fcb18bf563c9ca40b68630a89384a53d38d8d59568817"
+}

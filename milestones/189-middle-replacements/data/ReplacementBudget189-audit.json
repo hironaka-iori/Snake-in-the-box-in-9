@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "module": "ReplacementBudget189",
+  "source": "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\lean\\ReplacementBudget189.lean",
+  "source_sha256": "9f869fa03099f2a975c628e73d5e853861428349e71fa5375ab3c3f2e587996b",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\data\\ReplacementBudget189-execution.json": "01a4a98ef461c9f72eade9696ade15540627ad9839a17472a4de814c43ec3935",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\lean\\ReplacementBudget189.lean": "9f869fa03099f2a975c628e73d5e853861428349e71fa5375ab3c3f2e587996b",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\data\\replacement-contexts.json": "dbe2b55cb7f249a79af3d57714141f9aa6902409455f39e6c1003be3d5a8e9af",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\data\\known97-replacements.json": "50457d4f39f83ecd86060951c070eaf69c67dd6b162755dc7f54e70c1a21491c",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\logs\\ReplacementBudget189-1794364849631808700\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\lean\\ReplacementBudget189.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\logs\\ReplacementBudget189-1794364849631808700\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 3108831232,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 81,
+    "snapshot_seconds": 0.016000000000076398
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 3101048832,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 30464,
+          "ParentProcessId": 51144,
+          "PrivatePageCount": 48103424,
+          "WorkingSetSize": 25288704
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 81,
+      "snapshot_seconds": 0.01499999999987267
+    },
+    {
+      "free_bytes": 2843512832,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 30464,
+          "ParentProcessId": 51144,
+          "PrivatePageCount": 116002816,
+          "WorkingSetSize": 262610944
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 82,
+      "snapshot_seconds": 0.016000000000076398
+    }
+  ],
+  "compiler_pid": 30464,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.063000000000102,
+  "axioms": [
+    {
+      "theorem": "MiddleReplacement189.overlapRepairBudget",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "MiddleReplacement189.fixedOuterBudget",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "1fe1ba4543733005d17d72ff059c02879de8d5a77b435a457a0e086a962dd11f",
+  "object": "E:\\Snake-in-a-box\\milestones\\189-middle-replacements\\build\\ReplacementBudget189.olean",
+  "olean_sha256": "964a699a1429fefb31c1a24af40b3a12982a4f506278fccec03a172ef30566f4"
+}

@@ -1,0 +1,12 @@
+from pathlib import Path
+H=Path('E:/Snake-in-a-box/milestones/189-middle-replacements')
+s=(H/'scripts/three_changes.py').read_text()
+s=s.replace('import sys,json,time,hashlib','import sys,json,time,hashlib,argparse')
+s=s.replace("row=json.loads", "ap=argparse.ArgumentParser();ap.add_argument('--edits',type=int,required=True);ap.add_argument('--seconds',type=float,default=90);args=ap.parse_args();tag=f'exact-edits{args.edits}'\nrow=json.loads",1)
+s=s.replace('==93)', '==96-args.edits)').replace('==93\n','==96-args.edits\n')
+s=s.replace("H/'data/three-changes.pbtxt'", "H/'data'/(tag+'.pbtxt')")
+s=s.replace('max_time_in_seconds=90','max_time_in_seconds=args.seconds').replace("'time_limit':90", "'time_limit':args.seconds,'original_vertices_removed':args.edits")
+s=s.replace("'scope':'A97-edgeQ8path with the same ports, retaining exactly93 of the96 vertices of the common95-edge path. All outside vertices are available; no Q9 outer restrictions.'", "'scope':f'A97-edgeQ8path with the same ports, retaining exactly{96-args.edits} of the96 vertices of the common95-edge path. All outside vertices are available; no Q9 outer restrictions.'")
+s=s.replace("H/'data/three-changes.json'", "H/'data'/(tag+'.json')")
+s=s.replace(";(H/'scripts/three_changes.py').write_bytes(Path(__file__).read_bytes())",'')
+(H/'scripts/edit_neighbourhood.py').write_text(s,encoding='utf-8',newline='\n');(H/'scripts/prepare_edits.py').write_bytes(Path(__file__).read_bytes())

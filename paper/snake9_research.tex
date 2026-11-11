@@ -83,6 +83,8 @@ least four crossings in every coordinate. Among the saved 191-edge
 witnesses, a common 95-edge middle component supplies a concrete
 construction route through compatible lower-dimensional paths.
 The associated 194-edge target remains a construction hypothesis.
+Fixed-component searches and replacement enumerations identify
+restrictions in this family without producing a longer snake.
 \end{abstract}
 
 \clearpage
@@ -6524,7 +6526,7 @@ broader distinction between compatible path lifting \cite{taylor}
 and the more general construction methods used for the known records
 \cite{orland}.
 
-The next construction step is to vary the middle path together with
+The construction problem permits varying the middle path together with
 the two outer components, retaining the exact intersection and
 separation conditions. A useful first restricted target is a
 97-edge replacement for the common 95-edge middle path with its
@@ -6534,6 +6536,128 @@ For a 194-edge two-crossing construction, the three component lengths
 must sum to 192, for example a 97-edge middle path and outer paths
 totalling 95. Such compatible paths have not been constructed.
 The target 196 and the maximum in dimension nine remain unresolved.
+
+
+\subsection{Replacement restrictions in the common 95-edge component}
+\label{sec:middle-replacements}
+The common construction family has lengths $47,95,191$, corresponding
+to 48, 96 and 192 selected vertices. Its two-crossing decompositions
+double the selected-vertex count at each of these steps:
+\[
+95=31+47+15+2,\qquad 191=95+94+2.
+\]
+The two outer components contain 48 vertices in the first decomposition
+and 96 in the second. This is a property of the saved family. It does
+not give a construction that doubles every lower-dimensional snake.
+
+\paragraph{Keeping the surrounding components fixed.}
+A 97-edge replacement between the two endpoints of the 95-edge middle
+path must avoid every vertex of the two outer paths except the two
+designated crossing vertices. The endpoints have Hamming distance three.
+Each of the 84 saved contexts leaves 162 permitted eight-dimensional
+vertices. Removing non-endpoint leaves and components outside the route
+between the endpoints leaves all 162 vertices. A fixed-endpoint search
+in the first context remains unresolved after 120 seconds.
+
+There is a smaller nested problem. Retain the 31- and 15-edge pieces
+inside the 95-edge path and replace their 47-edge middle component by
+a 49-edge seven-dimensional path. The resulting middle path would
+have $31+49+15+2=97$ edges, and a compatible outer pair totalling 94
+edges would give 193. The two joining implications pass Lean under
+their explicit compatibility hypotheses.
+
+The nested endpoints have Hamming distance five. Including the external
+nine-dimensional restrictions leaves between 64 and 72 permitted
+seven-dimensional vertices. The first context, with 72 permitted
+vertices, gives a solver exclusion. Removing all external restrictions
+leaves 82 permitted vertices, and this relaxed problem also gives a
+solver exclusion. Thus the reported obstruction already concerns the
+fixed 31- and 15-edge pieces. The exclusion has no Lean contradiction
+certificate and does not exclude changes to those pieces or their
+crossing vertices.
+
+\paragraph{How far the displayed optimal seeds are from compatibility.}
+Of the two 97-edge endpoint truncations of the displayed 98-edge snake,
+only one has endpoint distance three. Its two orientations and all
+$3!5!$ endpoint-preserving coordinate permutations give 1440 placements
+against each saved context. Every placement overlaps the forbidden
+outer vertices at least 23 times. The best overlap in a context is
+23 in seven cases, 24 in 33 cases, 25 in 36 cases, and 26 in eight cases.
+
+At the nested level, both 49-edge truncations of the displayed 50-edge
+snake have endpoint distance five. Their two orientations and all
+$5!2!$ coordinate permutations give 960 placements. The minimum
+forbidden overlap is 11, 12, 13 or 14 in respectively 34, 30, 17 or
+three contexts. These are complete finite comparisons for the stated
+seed families. They do not classify all paths of lengths 97 or 49.
+
+The following elementary inequality gives these overlap counts a
+precise interpretation. Exclude the designated crossing vertices from
+the ground set. Let $A,B$ be an initial candidate middle set and outer
+set, and let $A',B'$ be revised disjoint sets. Then
+\[
+\boxed{|A\cap B|\le |A\setminus A'|+|B\setminus B'|.}
+\]
+Every vertex in $A\cap B$ must be removed from at least one of the two
+sets, because it cannot belong to both $A'$ and $B'$. Summing this
+pointwise statement proves the inequality. Its finite counting form
+passes Lean. In particular, a placement with 23 forbidden overlaps
+requires at least 23 removals in total from the candidate middle and
+outer vertex sets before it can become compatible. This counts removals;
+it does not assert that 23 changes suffice to reconstruct paths.
+The numerical placement census remains a separate native computation.
+
+\paragraph{Changing the common path itself.}
+An exhaustive depth-first search retains the 95-edge path outside one
+contiguous block of internal vertices and replaces that block by a path
+two edges longer. Every block size from one through 42 was completely
+searched, comprising 3087 intervals, with no replacement found.
+The run examined only part of size 43 before reaching its limit; no
+exclusion is claimed for that entire size. These searches omit the
+external nine-dimensional restrictions, so adding those restrictions
+cannot produce a replacement in the excluded intervals.
+
+A separate enumeration allows two nonadjacent internal positions to
+change. Deleting them leaves three retained path components. The first
+and last components contain the fixed endpoints; the middle component
+can be traversed in either direction. A 97-edge replacement requires
+two connecting paths of total length six. Each connection has length
+at least two, since its endpoints were nonconsecutive vertices of the
+original induced path. The only length pairs are therefore
+$(2,4),(3,3),(4,2)$. All 4278 position pairs and both possible middle
+orientations were examined, with no replacement found. Adjacent
+deletions and a single deletion are covered by the preceding interval
+search. Retaining every original vertex also cannot lengthen a path
+with the same endpoints, since all original edges remain forced.
+
+Consequently, these native finite enumerations imply that a 97-edge
+path with the same endpoints must omit at least three vertices of the
+common 95-edge path and add at least five new vertices. Their complete
+Lean interpretation remains pending. The contiguous-block result
+does not require 43 omitted vertices: a few changes at widely separated
+positions could have a span longer than 42.
+
+A further search requires a 97-edge path with the same endpoints
+to retain exactly 93 of the original 96 vertices. All other cube vertices
+are available, and no external nine-dimensional restriction is imposed.
+The solver reports infeasibility in 28.641 seconds. Combined with the
+smaller complete enumerations, this gives the computational conclusion
+that at least four original vertices must be omitted. This last step
+depends on the solver exclusion, which has no Lean contradiction
+certificate.
+
+The corresponding search retaining exactly 92 original vertices
+also reports infeasibility. Under these solver results, a fixed-endpoint
+97-edge replacement must omit at least five original vertices and add
+at least seven new vertices. The numerical restriction is specific to
+this path and retains the stated certificate limitation.
+
+
+The remaining construction problem therefore permits simultaneous
+changes in separated parts of the 95-edge path, or changes to its
+surrounding components and crossing vertices. The fixed-component
+exclusions identify limitations of the current family; they do not
+bound the maximum snake length in $Q_9$.
 
 
 \section{Construction experiments and their scope}\label{app:experiments}
