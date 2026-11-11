@@ -1,0 +1,8 @@
+import CubeData8188
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+namespace Dimensional188.Witness8
+theorem transitions_agree : ∀ i : Fin 98,
+  (pathVertex ⟨i.val+1,by omega⟩).val = Nat.xor (pathVertex ⟨i.val,by omega⟩).val (2^transitions[i.val]!) := by decide +kernel
+#print axioms transitions_agree
+end Dimensional188.Witness8

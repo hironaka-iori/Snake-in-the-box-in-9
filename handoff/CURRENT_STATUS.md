@@ -1,21 +1,17 @@
-# Round 187 complete; pause after publication
+# Current frontier after round 188
 
-The user requested completion of this full round and then a pause. Do not start round 188 without a new instruction.
+The goal is active. The user resumed research and requested dimension-lifting relations6→7,7→8,8→9. Continue this construction direction. The previous round187 pause was fulfilled and superseded by the resume instruction.
 
-93/98 complete clause batches (11904/12,424 clauses) now pass Lean; 303 new modules are accepted. The complete critical Lean contradiction and actual-snake floor fifteen remain pending. See milestones/187-clause-interpretation/data/completion.json for the exact accepted modules and the next pending module; partial pieces are listed separately from complete batches.
+Read milestones/188-dimensional-constructions/MATHEMATICAL_NOTE.md and data/completion.json. The exact three-path joining theorem and actual18+24+6+2=50 construction pass Lean. Published Q8 witness: minimum four crossings; decomposition8,25,10,25,26. Q9 bank:84 cases use one95-edge middle type, itself31+47+15+2, with outer components totalling94. The95-edge type is not a segment of the displayed98-edge witness. Native classification only; no universal optimal-witness classification.
 
-The main result of this round is a Lean-checked deduction that allows every share requirement in the contributor's conditional 233 comparison to be weakened by four. The stronger omitted-count contribution 22 gains 960 units. Keeping the original table and potential gives 4716m+5L<=1103475, excluding 234 by 69. The actual-snake integration remains pending.
+Next: search a97-edge path between the fixed ports of the common95-edge middle path while retaining its outer Q8 components, excluding all other projected overlaps. Success gives193. Failure only excludes that fixed context; then vary components and ports. Fixed endpoints preserve length parity, so95→98 is impossible without changing a port.194 remains a provisional construction target; no optimum claim.
 
-Five-point allowance would suffice with certified range 784. With range 1023 it forces L<=31 for m>=234, so the established domination theorem applies. Proving four-point shares only in that low-loss case, and five-point shares generally, also suffices. This conditional reduction passes Lean; no improved low-loss share theorem has been proved.
+The fixed50→98 two-crossing model was corrected to allow single-vertex outer components; the corrected run is INFEASIBLE in22.875 seconds, without Lean certification. The fixed95→192 run is UNKNOWN at120 seconds and requires nontrivial outer paths. Keep scopes separate and do not repeat unchanged bounded searches.
 
-The native table census reduces 490 paid share obligations to 426 using six known universal floors, and to 373 if critical floor fifteen is completed (366 with five-point slack). This includes 33 rows covered by the two older share-12 theorems, whose source/object hashes match the saved integration receipt. Sixteen of those 33 already follow at the original level. The narrower census using only four share-16 floors gives 459/406/399. These counts need a Lean lookup/coverage proof and do not measure runtime savings. Plain/H8 obligations are unchanged.
+The full direct Q8 pairwise Lean recheck remains pending due256MiB limits, although native pairwise verification and Lean transition/minimum-count proofs passed. Source snapshots and failed receipts are retained. No active worker remains. Reuse accepted artifacts; do not regenerate their execution plans. The normal guard is1GiB free at startup,768MiB reserve,256MiB private memory,one Lean worker.
 
-The inspected contributor commit is e7b21e0c8704b716115cda60a05e3b4c5d1c059f on research/unconditional-241. Its conditional 233 source and saved Linux receipts are preserved here. All new native cores are reported generated, but full production Lean replay/glue is pending. That chain was not independently rebuilt locally.
+Upper-bound checkpoint preserved: round187 has93/98 clause batches (11904/12424 clauses). Critical floor15 contradiction and actual-snake transfer remain pending. Four-unit share allowance with stronger boundary22 gives conditional233 via4716m+5L≤1103475. Native paid-key census426 (373 if critical floor15 is completed); Lean coverage pending. Archived235 needs complete independent rebuild. No new numerical bound is claimed.
 
-The project range remains 191--235, with the archived 235 proof's full independent rebuild pending. No new unconditional numerical bound, longer construction or proof of 196 is claimed. The retained-profile conditional 234 argument is preserved as a separate route.
+Fetched contributor branch research/unconditional-241 at f393c48e5e583e57d3cbb66e4330f960033229b1, 'Check-in:233 production and migration progress'. It has not been merged or independently rebuilt this round. Reinspect before relying on new results.
 
-Read milestones/187-clause-interpretation/MATHEMATICAL_NOTE.md for the deduction and limitations, data/share-slack-census.json for the exact rows, and data/current-order.json for proof resumption. The original 12,424-clause input and native 52,489-deduction refutation are unchanged. Do not rerun the solver. The older share-18 replay stays separate at 33,111/145,215 deductions.
-
-Resource limits remain: one sequential Lean worker, 1 GiB free at startup, 256 MiB private memory, 768 MiB free reserve. The failed large cycle piece was replaced by eight-clause pieces; both affected batches pass. All failed attempts and exact snapshots remain saved. No proof worker remains running at closure.
-
-Existing D: manuscripts and E: mirrors are updated with authors and hypersetup preserved. The full manuscript-wide review remains pending. Preserve unrelated changes and accepted proof artifacts.
+The existing D: manuscripts and E: paper mirrors are updated; authors and hypersetup are preserved. The full manuscript-wide review is overdue and remains pending. Preserve unrelated .gitignore and milestones/50-three-count-return/excess-screen/data/critical-family.json changes.

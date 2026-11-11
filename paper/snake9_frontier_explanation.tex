@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 187}
+\date{Research state after round 188}
 \begin{document}
 \maketitle
 
@@ -21,7 +21,8 @@ edges. A verified construction has 191 edges. The project retains an
 archived contributor proof of the upper bound 235, whose complete
 independent rebuild remains pending. The maximum is unresolved.
 The numerical prediction 196 has neither a construction nor an optimality
-proof. The current sufficient pending-share profile is $(15,14,14,14)$
+proof. The current construction investigation compares dimensions six
+through nine, with 194 as a provisional target and no new witness. The current sufficient pending-share profile is $(15,14,14,14)$
 for $012034,012301,012340,012345$, respectively. Together with the retained
 local and graph premises, it implies $m\le234$ without a positive-loss
 assumption. All four required numerical floors have native contradiction
@@ -463,7 +464,63 @@ share-twelve floors cover another 33 rows, leaving 426. Completing the
 critical $012034$ floor fifteen would leave 373. These are native table
 counts, with the Lean lookup and coverage proof still pending.
 
-\textbf{6. What is proved, and what remains.}
+\textbf{6. The construction relation between dimensions.}
+The equalities $50=2\cdot26-2$ and $98=2\cdot50-2$ suggest 194 as
+a construction target in dimension nine. They give no recurrence
+theorem or optimality argument. Cutting a snake at its $q$ edges in
+one coordinate gives $q+1$ lower-dimensional path components, whose
+lengths sum to $m-q$. This follows simply by partitioning its edges
+into crossing edges and edges within the two faces.
+
+For the published representatives, cuts with the fewest crossings give
+\[
+26=2+13+9+2,\qquad
+50=18+24+6+2,\qquad
+98=8+25+10+25+26+4.
+\]
+The 98-edge representative crosses every coordinate at least four
+times, so its construction cannot be explained by one or two crossings.
+One face contains two 25-edge components, or 52 vertices. This exceeds
+the 51 vertices allowed in one seven-dimensional snake, illustrating
+why a face must be treated as a collection of paths. These statements
+describe the given representatives, without classifying all optima.
+
+An exact construction rule is available. Take three induced paths
+$P,Q,R$ of lengths $a,b,c$ in $Q_n$. Require that $P,Q$ share only
+their joining endpoint, that $Q,R$ share only their joining endpoint,
+and that $P,R$ are disjoint with no edge between them. Placing $P,R$
+in one face and $Q$ in the other gives a snake of length $a+b+c+2$.
+Within each face the assumptions exclude chords; across the faces,
+equality of projected vertices creates exactly the two crossing edges.
+This rule and the concrete $18+24+6+2=50$ reconstruction pass Lean.
+
+Of 131 saved 191-edge snakes, 84 have the same 95-edge middle-path
+type in a two-crossing decomposition, up to cube symmetries and
+reversal. This path is not a segment of the displayed 98-edge snake.
+It decomposes as $95=31+47+15+2$; its two outer components in $Q_9$
+total 94 edges, giving $191=95+94+2$. These are native finite-data
+comparisons. They suggest retaining compatible components and their
+endpoints when passing to the next dimension.
+
+Cube vertices have two colours according to Hamming-weight parity,
+and every edge changes colour. Hence fixed endpoints force the parity
+of a replacement path's length. The alternating-colour deduction
+passes Lean. A 97-edge replacement for the 95-edge middle path with
+the same endpoints and fixed outer components would give 193 edges.
+It still must avoid all unintended intersections with those components.
+A 194-edge two-crossing construction would require component lengths
+totalling 192, for example $97+95$ across the middle and outer parts.
+
+The fixed 50-edge middle-path search reports no two-crossing lift
+of at least 98 edges; this is a restricted solver exclusion without
+a Lean certificate. A bounded search with the 95-edge middle path
+fixed and both outer paths nontrivial leaves the 192-edge target
+unresolved. No longer construction has been found. The next step
+is the fixed-endpoint 95-to-97 replacement search, followed by varying
+the surrounding components if that restricted problem is excluded.
+
+
+\textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
 empty-square argument also proves that an undominated vertex contributes
@@ -488,7 +545,8 @@ still checks only 33,111 of 145,215 deductions and establishes no final
 contradiction. The new floor-fourteen native replays are separate
 certificates and do not complete that older Lean replay. Neither a longer construction nor a proof of 196 was obtained.
 
-The remaining work is therefore:
+The current priority is the construction investigation in Section 6.
+The preserved upper-bound work remains:
 \begin{enumerate}
 \item Integrate the improved six-count boundary and four-unit share allowance
 into the contributor comparison. Complete its required local certificates
@@ -505,11 +563,10 @@ count-only route would be completed by proving $s_0\ge14$ for a hypothetical
 235-edge snake. Neither alternative is required by the new sufficient
 profile once its own premises are proved.
 \end{enumerate}
-Round 187 completes the requested continuation. Research pauses
-at this frontier. No unconditional numerical bound or longer construction
-has been added.
+Round 188 adds the construction comparison and exact joining deduction.
+No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--187.}
+\texttt{snake9\_research.tex} and research records 175--188.}
 \end{document}

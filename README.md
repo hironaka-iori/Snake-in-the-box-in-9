@@ -1,3 +1,11 @@
+# Current result after round 188
+
+The construction investigation now compares6→7,7→8 and8→9. Lean checks the exact three-path joining rule and the concrete18+24+6+2=50 reconstruction. The published98-edge representative has at least four crossings in every coordinate. A common95-edge middle-path type in84 saved191-edge witnesses supplies a specific construction route. No new record or numerical upper bound is claimed.
+
+Read [round188](milestones/188-dimensional-constructions/README.md), [the argument](milestones/188-dimensional-constructions/MATHEMATICAL_NOTE.md), [the current handoff](handoff/CURRENT_STATUS.md), [the paper](paper/snake9_research.tex) and [the short explanation](paper/snake9_frontier_explanation.tex). The goal remains active. The next restricted target is a compatible95-to-97 middle-path replacement, which would give193 edges.
+
+## Earlier checkpoints
+
 # Current result after round 187
 
 Research pauses after publication. New Lean-checked boundary accounting permits four units of slack in the contributor's conditional 233 share requirements. The complete local certificates and actual-snake integration remain pending. 93/98 complete clause batches (11904/12,424 clauses) now pass Lean; 303 new modules are accepted.

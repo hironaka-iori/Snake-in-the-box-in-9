@@ -76,6 +76,13 @@ complete actual-snake integration and local certificates remain pending.
 No new unconditional numerical
 upper bound is claimed, and the optimum and conjectured value 196 remain
 unresolved.
+We also examine how explicit snakes decompose across coordinate faces.
+A checked three-path joining rule reconstructs the 50-edge witness from
+components of lengths 18, 24 and 6. The 98-edge representative needs at
+least four crossings in every coordinate. Among the saved 191-edge
+witnesses, a common 95-edge middle component supplies a concrete
+construction route through compatible lower-dimensional paths.
+The associated 194-edge target remains a construction hypothesis.
 \end{abstract}
 
 \clearpage
@@ -6385,6 +6392,150 @@ This argument covers snakes that cross a chosen coordinate exactly once. A gener
 
 The explicit compatible paths of lengths 96 and 94 in Appendix~\ref{app:joint-seed} give a 191-edge construction of this form. Restricted tests with a fixed 98-edge seed are described in Appendix~\ref{app:experiments}; their failure does not exclude other seeds or multiple-crossing paths.
 
+\subsection{What the transitions from six to nine dimensions preserve}
+\label{sec:dimensional-constructions}
+The numerical relations
+\[
+a(7)=2a(6)-2=50,\qquad a(8)=2a(7)-2=98
+\]
+suggest 194 as a construction target in dimension nine. These two
+equalities give no recurrence theorem or upper bound. To investigate
+their structural content, we cut explicit published snakes along a
+coordinate and retain every resulting path component.
+
+Deleting the edges in coordinate $k$ from an $m$-edge snake produces
+$q+1$ consecutive components, where $q$ is the number of occurrences
+of $k$ in its transition sequence. Projection onto the other coordinates
+makes each component an induced path in the lower-dimensional cube.
+If their lengths are $\ell_0,\ldots,\ell_q$, then
+\[
+m=q+\sum_{j=0}^{q}\ell_j.
+\]
+Indeed, the deleted edges account for $q$ edges, and all other edges
+belong to exactly one component. Components in the same face have
+disjoint vertex sets with no edge between them. Across opposite faces,
+projected vertex sets intersect exactly at the vertices where a crossing
+is intended. Any further intersection would produce a chord.
+
+For the representatives in the published transition catalogue
+\cite{records}, a coordinate with the fewest occurrences gives the
+following decompositions. Lengths count edges throughout.
+\begin{center}
+\begin{tabular}{crcl}
+\toprule
+Dimension & Length & Crossings & Projected component lengths\\
+\midrule
+6 & 26 & 2 & $2,13,9$\\
+7 & 50 & 2 & $18,24,6$\\
+8 & 98 & 4 & $8,25,10,25,26$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The 50-edge representative crosses every coordinate at least twice;
+the 98-edge representative crosses every coordinate at least four
+times. Coordinate permutations and path reversal preserve these
+minimum counts. Thus the displayed 98-edge snake cannot be obtained
+by a construction with three or fewer crossings in any coordinate.
+This statement concerns this representative. It does not classify
+every optimal snake.
+
+The cut of the 98-edge snake puts the two 25-edge components in one
+face, containing 52 vertices, and the other three components in the
+other face, containing 47 vertices. This gives a concrete reason to
+retain collections of paths: the first face has more than the 51
+vertices permitted in one seven-dimensional snake, while remaining
+a valid disconnected induced subgraph.
+
+\begin{proposition}[Joining three paths across two faces]
+Let $P,Q,R$ be induced paths of lengths $a,b,c$ in $Q_n$.
+Suppose that $P$ and $Q$ intersect only at the final vertex of $P$
+and the initial vertex of $Q$, and that $Q$ and $R$ intersect only
+at the final vertex of $Q$ and the initial vertex of $R$.
+Suppose also that $P$ and $R$ are disjoint and no edge joins them.
+Then following $P$ in face zero, $Q$ in face one, and $R$ in face zero
+gives an induced path of length $a+b+c+2$ in $Q_{n+1}$.
+\end{proposition}
+\begin{proof}
+Each component supplies an induced path within its face. The assumption
+on $P$ and $R$ excludes both repeated vertices and additional edges
+in face zero. Edges across the two faces correspond precisely to
+equal base vertices. The two intersection assumptions therefore
+give exactly the two intended crossing edges. This accounts for
+every pair of vertices and all $a+b+c+2$ edges.
+\end{proof}
+The general joining deduction and the concrete reconstruction
+$18+24+6+2=50$ have passed Lean checks. The latter reconstructs the
+displayed seven-dimensional witness from three six-dimensional paths;
+it does not use a longest six-dimensional path as its middle component.
+
+\paragraph{The relation visible in the nine-dimensional constructions.}
+Among the 131 saved 191-edge witnesses, the minimum coordinate crossing
+counts have distribution
+\[
+1:25,\qquad 2:88,\qquad 3:12,\qquad 4:6.
+\]
+The one-crossing examples split into lengths 96 and 94. The 88
+two-crossing cuts have only three middle-path types up to translation,
+coordinate permutation and reversal: 84 have a 95-edge middle path,
+two have a 93-edge middle path, and two have a 92-edge middle path.
+None of these three types is a contiguous segment of the displayed
+98-edge snake, even after these symmetries. This is an exact finite
+comparison of the saved data, independently of how those witnesses
+were originally discovered.
+
+The common 95-edge middle path itself has a two-crossing decomposition
+\[
+95=31+47+15+2.
+\]
+In the nine-dimensional witnesses that use it, the two outer paths
+have total length 94, giving $191=95+94+2$.
+Consequently this family supplies a concrete construction chain
+through compatible components in dimensions seven, eight and nine.
+It gives no claim that the individual components are optimal.
+The data comparisons in this paragraph have native exhaustive pair
+and transition checks; their entire classification has not been
+transferred into Lean.
+
+\paragraph{Fixed endpoints constrain replacements.}
+Colour a cube vertex by the parity of its Hamming weight. Each edge
+changes its colour. A path between fixed endpoints therefore has
+length parity determined by their colours, so any replacement between
+the same endpoints changes length by an even number. The alternating
+colour calculation passes Lean. In particular, the 95-edge middle
+path can be replaced by a 97-edge path with the same endpoints only
+if the required path exists; a 98-edge replacement cannot preserve
+both endpoints. The same restriction applies to replacing its
+47-edge component by a longer component.
+
+\paragraph{Construction searches and their limits.}
+With the 24-edge middle component fixed in $Q_6$, an exact opposite-face
+search recovers a 50-edge snake in $Q_7$. With the published 50-edge
+snake fixed as the middle component in $Q_7$, the corresponding search
+reports infeasibility for a lift of at least 98 edges with exactly two
+crossings. The latter search allows single-vertex outer components.
+Its exclusion is specific to this middle path and has no Lean
+contradiction certificate.
+
+With the common 95-edge middle component fixed in $Q_8$, a 120-second
+search for a lift of at least 192 edges returns unresolved. That run
+requires both outer components to have positive length. It establishes
+neither existence nor impossibility. These results agree with the
+broader distinction between compatible path lifting \cite{taylor}
+and the more general construction methods used for the known records
+\cite{orland}.
+
+The next construction step is to vary the middle path together with
+the two outer components, retaining the exact intersection and
+separation conditions. A useful first restricted target is a
+97-edge replacement for the common 95-edge middle path with its
+endpoints and outer components fixed; success would give 193 edges.
+Failure would exclude only that fixed surrounding configuration.
+For a 194-edge two-crossing construction, the three component lengths
+must sum to 192, for example a 97-edge middle path and outer paths
+totalling 95. Such compatible paths have not been constructed.
+The target 196 and the maximum in dimension nine remain unresolved.
+
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -7235,7 +7386,7 @@ directions and endpoint distances~\cite{oddwitnessarchive}.
 \bibitem{ostergard} P.~R.~J. Östergård and V.~H. Pettersson. Exhaustive Search for Snake-in-the-Box Codes. \emph{Graphs and Combinatorics} 31 (2015), 1019--1028. \url{https://doi.org/10.1007/s00373-014-1423-3}.
 \bibitem{orland} P.~Orland et al. \emph{New Snake-in-the-Box Records via Snakepit Surgery and Learned Construction}. arXiv:2607.15270v3, 30 September 2026. \url{https://arxiv.org/html/2607.15270v3}.
 \bibitem{data} Math-AI-Caltech. \emph{Snake-in-the-Box: public record data}. \url{https://github.com/Math-AI-Caltech/Snake-in-the-Box}. Accessed 15 October 2026.
-\bibitem{records} T.~Ace. \emph{Snake-in-the-Box lower bounds and transition sequences}. \url{https://www.minortriad.com/snake/}. Accessed 13 October 2026.
+\bibitem{records} T.~Ace. \emph{Snake-in-the-Box lower bounds and transition sequences}. \url{https://www.minortriad.com/snake/}. Accessed 13 October and 11 November 2026.
 \bibitem{taylor} T.~Taylor. \emph{Constructing longer snakes and improved asymptotic bounds in hypercubes}. arXiv:2609.27483v1, 23 September 2026. \url{https://arxiv.org/html/2609.27483v1}.
 \bibitem{huang} H.~Huang. Induced subgraphs of hypercubes and a proof of the Sensitivity Conjecture. \emph{Annals of Mathematics} 190 (2019), 949--955. \url{https://annals.math.princeton.edu/2019/190-3/p06}.
 \bibitem{lukito} A.~Lukito and A.~J. van Zanten. A New Non-Asymptotic Upper Bound for Snake-in-the-Box Codes. \emph{Journal of Combinatorial Mathematics and Combinatorial Computing} 39 (2001), 147--156. \url{https://combinatorialpress.com/article/jcmcc/Volume%20039/vol-039-paper%2012.pdf}.
