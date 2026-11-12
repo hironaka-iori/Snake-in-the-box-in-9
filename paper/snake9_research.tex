@@ -7055,6 +7055,96 @@ The models, geometric certificates, witnesses and proof receipts are
 recorded in~\cite{moving192archive}.
 
 
+
+\subsection{Contiguous replacements and repeated local moves}
+\label{sec:block193}
+Let $P=(p_0,\ldots,p_L)$ be an induced path and replace the subpath
+from $u=p_i$ to $v=p_j$ by another induced path with the same endpoints.
+Write $C=\{p_0,\ldots,p_i\}\cup\{p_j,\ldots,p_L\}$ for the retained
+vertices and $I$ for the replacement's internal vertices.
+
+\begin{proposition}[Criterion for a contiguous replacement]
+The concatenated path is induced if and only if
+\[
+I\cap\left(C\cup\bigcup_{z\in C\setminus\{u,v\}}N(z)\right)=\varnothing.
+\]
+Here $N(z)$ denotes the neighbours of $z$ in the cube.
+\end{proposition}
+\begin{proof}
+A collision repeats a retained vertex, and an edge from the replacement
+interior to a retained non-anchor is a chord. These prove necessity.
+For sufficiency, the replacement's inducedness controls its internal
+pairs and contacts with the two anchors. Retained pairs keep their
+original relationships. The displayed condition excludes every remaining
+collision or chord. If a block has one edge, its adjacent anchors
+permit only that edge as an induced replacement. The same argument
+applies at either global endpoint, with the absent exterior segment omitted.
+\end{proof}
+The new length is $L-(j-i)+\ell$, where $\ell$ is the replacement length.
+Cube bipartiteness forces $\ell\equiv j-i\pmod 2$. In particular,
+preserving both global endpoints permits only even changes in length.
+The sufficient replacement criterion at unchanged length passes Lean;
+the variable-length set statement above is a written deduction.
+
+\begin{proposition}[Closure under repeated replacements]
+Suppose a collection of path symmetry classes is closed under an allowed
+replacement rule invariant under those symmetries. If every class has
+blocked endpoints, no finite sequence of allowed replacements starting
+in the collection can produce a path admitting an endpoint extension.
+\end{proposition}
+\begin{proof}
+Induction on the number of replacements keeps the path in the collection.
+Cube isometries preserve endpoint extendibility, and path reversal
+interchanges the two endpoints. The final path therefore has blocked endpoints.
+\end{proof}
+The general induction and nonextension implication pass Lean with
+explicit closure and blocked-family premises.
+
+\paragraph{The complete finite census.}
+For each of the 131 saved 191-edge snakes, all induced replacements
+of every contiguous block of 2--33 edges by a path of the same length
+were enumerated. Every valid result belongs to an existing saved
+symmetry class; there are 43,094 valid moves, with repeated outcomes
+counted separately. No move changes the crossing positions of a
+coordinate used exactly twice. Blocks of one edge have no alternative.
+The complete bank is therefore computationally closed under these moves.
+Since all its endpoints are blocked, the proposition excludes any
+finite sequence of such moves followed by one endpoint extension.
+This numerical closure premise has no complete Lean enumeration certificate.
+It supplies a restriction on this move family, with no global upper bound.
+
+The search over 25--36-edge blocks reached complete coverage through
+33 edges before its stopping condition. Later partial results do not
+extend the complete range. The search enumerates every legal next
+neighbour in the region freed by the deletion, pruning only repetitions,
+chords, forbidden retained contacts, and impossible distance or parity.
+Every accepted entire path is also checked directly.
+
+\paragraph{Shortening and subsequent growth.}
+Every replacement of a 4--24-edge block by a path shorter by two edges
+was also enumerated. The resulting 189-edge paths form 231 symmetry
+classes. Among these, 220 admit no endpoint addition and 11 admit at
+most one. All choices of endpoint at each growth step are covered.
+Thus endpoint additions alone cannot recover even 191 edges from
+these states. Internal reroutings of the shortened paths remain open.
+
+\paragraph{Necessary locations for a useful replacement.}
+For a proposed extension vertex $w$, every original nonattachment
+vertex equal or adjacent to $w$ must be removed. If their smallest
+and largest indices are $r$ and $s$, replacing the block from $i$ to
+$j$ requires
+\[
+i<r\le s<j,\qquad j-i\ge s-r+2.
+\]
+Indeed, each retained blocker would still violate distinctness or
+create a chord with $w$. The interior requirement and the span
+inequality pass Lean under explicit agreement and separation premises.
+This condition can restrict the larger-block search before enumeration;
+it does not ensure that a replacement exists. The next construction
+search can impose all these blocker requirements and target a
+192-edge path directly. Evidence and remaining scopes are recorded
+in~\cite{block193archive}.
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -8232,6 +8322,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Attachment balance, coloured replacements
 \bibitem{moving192archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Moving endpoints and coordinated square substitutions}. Research record 192, 11 November 2026. Endpoint-corrected counting, joint replacement models, full-bank native certificates and a concrete Lean geometric exclusion:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/192-moving-ports}.
+
+\bibitem{block193archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Contiguous replacements and closure of the saved snake bank}. Research record 193, 12 November 2026. Complete and partial block enumerations, shorter-path regrowth, blocker spans and proof receipts:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/193-block-reroutings}.
 
 \end{thebibliography}
 \end{document}

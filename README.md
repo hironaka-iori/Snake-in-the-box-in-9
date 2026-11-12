@@ -1,3 +1,13 @@
+# Current result after round 193
+
+The 131 saved 191-edge snakes are computationally closed under all length-preserving contiguous replacements of at most 33 edges. Thus repeating these moves cannot unlock an endpoint extension. Lean checks the general closure argument and the sufficient replacement criterion; the finite bank census remains native. No longer snake or improved global numerical bound was found.
+
+All two-edge shortenings inside 4--24-edge blocks produce 231 shorter symmetry classes. Of these, 220 allow no endpoint addition and 11 allow only one. Rerouting shorter states before regrowth and targeted larger replacements remain open.
+
+Read [round193](milestones/193-block-reroutings/README.md), [the argument](milestones/193-block-reroutings/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), [paper](paper/snake9_research.tex), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 192
 
 The goal is active. Lean now excludes every simultaneous fixed-square substitution followed by an endpoint extension for the selected 191-edge witness. All 18 geometric cases and their combined statement pass. The broader native census excludes 2358 candidates across all 131 saved witnesses.

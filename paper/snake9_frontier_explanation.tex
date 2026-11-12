@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 192}
+\date{Research state after round 193}
 \begin{document}
 \maketitle
 
@@ -739,6 +739,38 @@ The one-batch exclusion does not settle those possibilities.
 No longer snake or improved global upper bound has been obtained.
 
 
+
+\paragraph{Larger contiguous replacements.}
+The completed census now replaces every block of 2--33 edges in each
+of the 131 saved 191-edge snakes by every induced route of the same
+length between its endpoints. Every valid result remains in an
+existing symmetry class. This gives a stronger consequence than a
+single failed move: any finite sequence of these replacements stays
+in the bank and therefore cannot unlock an endpoint extension.
+The general induction passes Lean; the numerical bank-closure premise
+remains a native computation.
+
+The replacement criterion is direct. Its internal vertices must avoid
+all retained vertices and all neighbours of retained vertices other
+than the two anchors. Its own inducedness controls contacts with the
+anchors. This excludes every possible repeat or chord, including for
+blocks touching a global endpoint. Lean checks the sufficient criterion
+for replacements of unchanged length.
+
+Shortening a block by two edges was also examined for all block
+lengths 4--24. The resulting 189-edge paths form 231 symmetry classes:
+220 allow no endpoint addition and 11 allow only one. None regrows to
+191 through endpoint additions alone. Rerouting a shortened path
+before regrowth remains open.
+
+The next search can focus on the old vertices that block a proposed
+new endpoint. Every such vertex must lie inside the replaced block.
+If their first and last indices are $r,s$, the block needs at least
+$s-r+2$ edges. This necessary condition and its underlying retained-vertex
+argument pass Lean. It directs larger replacements towards the
+192-edge target; it does not prove their existence. Complete native
+coverage currently ends at 33 edges, and no global bound has changed.
+
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -782,7 +814,7 @@ count-only route would be completed by proving $s_0\ge14$ for a hypothetical
 235-edge snake. Neither alternative is required by the new sufficient
 profile once its own premises are proved.
 \end{enumerate}
-Round 192 adds endpoint corrections and a geometric Lean exclusion of
+Round 193 adds the contiguous-replacement criterion and the general closure argument, with the finite census described above. Round 192 adds endpoint corrections and a geometric Lean exclusion of
 coordinated square substitutions followed by extension for one selected
 191-edge witness. The full-bank exclusion remains native. The manuscript-wide review completed in round 190 remains separate
 from the pending certificate and proof rebuilds.
@@ -790,5 +822,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--192.}
+\texttt{snake9\_research.tex} and research records 175--193.}
 \end{document}
