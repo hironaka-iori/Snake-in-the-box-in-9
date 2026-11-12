@@ -7358,6 +7358,63 @@ are written deductions; the solver encoding and numerical searches
 are not complete Lean certificates. Records appear
 in~\cite{forests195archive}.
 
+
+\subsection{Cycle exclusions in the paired-path search}
+\label{sec:cycles196}
+
+Fix the involution of the first saved 47-edge pair from the preceding
+comparison. It exchanges coordinates 0 with 3 and 2 with 4 and flips
+coordinates 0 through 5. In its 128-vertex quotient,16 pairs of adjacent
+vertices have two possible lifted edges; their endpoints cannot both
+be selected. The full quotient adjacency is retained when imposing
+inducedness. The target is 50 quotient vertices, corresponding to two
+49-edge paths in $Q_8$.
+
+For a selected vertex $v$, impose degree $2x_v-e_v$, where $x_v$ is its
+selection indicator and $e_v\le x_v$ its endpoint indicator. Require
+$\sum x_v=50$ and $\sum e_v=2$. Both endpoints may move. The involution
+preserves parity, so a path has 25 selected vertices of each colour.
+These degree conditions allow a path together with disconnected cycles.
+Each observed cycle $C$ supplies the necessary inequality
+\[
+\sum_{v\in C}x_v\le |C|-1.
+\]
+
+\begin{lemma}
+No nonempty finite vertex set having two distinct neighbours within
+the set at every vertex can be contained in an induced path.
+\end{lemma}
+\begin{proof}
+Choose a contained vertex having greatest index along the path.
+Its two distinct internal neighbours must both occur before it.
+Inducedness requires each to occupy the immediately preceding index,
+which is impossible.
+\end{proof}
+The finite-maximum argument and this noncontainment statement pass
+Lean. The three specific 36-vertex sets used below also have checked
+neighbour and noncontainment proofs for the actual quotient relation.
+These certificates justify the cuts; they do not certify the final
+solver infeasibility.
+
+With one seed endpoint fixed, the query permitting at most four
+omitted seed orbits is infeasible in 7.469 seconds. Allowing both
+endpoints to move gives infeasibility in 51.688 seconds, after three
+cycle exclusions. Thus a 50-vertex safe quotient path under this
+involution, if one exists, must omit at least five of the 48 seed
+orbits and add at least seven. The paired forest must consequently
+omit at least ten old vertices and add at least fourteen. These
+counts concern the union of the paired paths; they do not apply
+separately to either labelled component.
+
+The first six-omission run stopped for the free-memory reserve.
+The six-omission retry returned UNKNOWN after 150.062 seconds. The six-omission case remains unresolved.
+The strongest recorded necessary omission count is therefore 5
+seed orbits. This restriction is computational and confined to the
+specified involution. It establishes neither an attained minimum nor
+a new global bound or construction. A larger pair must still have
+compatible crossing ports and opposite-face paths. Exact models,
+cycle sets and proof receipts appear in~\cite{cycles196archive}.
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -8547,6 +8604,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Targeted extensions and lower-dimensional
 \bibitem{forests195archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Dimensional transfer through symmetric path forests}. Research record195, 12 November2026. Lifting proofs, symmetry comparisons and restricted construction searches:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/195-shortened-reroutings}.
+
+\bibitem{cycles196archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Cycle exclusions for symmetric paired-path constructions}. Research record 196, 12 November 2026. Solver models, exact cycle cuts and checked noncontainment proofs:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/196-quotient-cycle-cuts}.
 
 \end{thebibliography}
 \end{document}

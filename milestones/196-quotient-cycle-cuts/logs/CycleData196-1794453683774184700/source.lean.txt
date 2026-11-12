@@ -1,0 +1,15 @@
+import CycleCut196
+namespace CycleData196
+def partner (x : Nat) : Nat := Nat.xor ((x / 1 % 2) * 8 + (x / 2 % 2) * 2 + (x / 4 % 2) * 16 + (x / 8 % 2) * 1 + (x / 16 % 2) * 4 + (x / 32 % 2) * 32 + (x / 64 % 2) * 64 + (x / 128 % 2) * 128) 63
+def orbit (x : Nat) : Nat := min x (partner x)
+def Adj (x y : Nat) : Prop := orbit (Nat.xor x 1)=y ∨ orbit (Nat.xor x 2)=y ∨ orbit (Nat.xor x 4)=y ∨ orbit (Nat.xor x 8)=y ∨ orbit (Nat.xor x 16)=y ∨ orbit (Nat.xor x 32)=y ∨ orbit (Nat.xor x 64)=y ∨ orbit (Nat.xor x 128)=y
+instance (x y : Nat) : Decidable (Adj x y) := inferInstanceAs (Decidable (_ ∨ _))
+def prev (i : Fin 36) : Fin 36 := ⟨(i.val+35)%36,by omega⟩
+def next (i : Fin 36) : Fin 36 := ⟨(i.val+1)%36,by omega⟩
+def values0 : Array Nat := #[4, 5, 21, 17, 81, 65, 67, 71, 79, 77, 76, 92, 84, 86, 82, 90, 91, 27, 155, 154, 146, 150, 148, 156, 157, 141, 143, 135, 131, 129, 128, 136, 8, 30, 14, 6]
+def cycle0 (i : Fin 36) : Nat := values0[i.val]!
+def values1 : Array Nat := #[4, 5, 21, 17, 81, 65, 67, 71, 79, 77, 93, 92, 84, 86, 82, 90, 91, 27, 155, 154, 146, 150, 148, 156, 157, 141, 143, 135, 131, 129, 128, 136, 8, 30, 14, 6]
+def cycle1 (i : Fin 36) : Nat := values1[i.val]!
+def values2 : Array Nat := #[4, 5, 21, 17, 81, 65, 67, 71, 79, 77, 76, 92, 84, 86, 82, 90, 91, 27, 155, 154, 146, 150, 148, 156, 157, 141, 143, 135, 131, 129, 128, 136, 8, 10, 14, 6]
+def cycle2 (i : Fin 36) : Nat := values2[i.val]!
+end CycleData196

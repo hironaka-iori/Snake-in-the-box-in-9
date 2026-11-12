@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 195}
+\date{Research state after round 196}
 \begin{document}
 \maketitle
 
@@ -830,6 +830,26 @@ selections are fixed. The next attempt starts from an observed
 cycles as they appear. A larger pair must still be joined to a
 compatible opposite-face forest before it yields a longer snake.
 
+
+\paragraph{Removing disconnected cycles from the construction search.}
+For the chosen symmetric 47-edge pair, the revised search permits
+both endpoints to move and seeks50 quotient vertices. Its degree
+constraints can produce a path together with cycles. Whenever a
+cycle appears, at least one of its vertices must be excluded.
+The reason is direct: the greatest-indexed cycle vertex on an
+induced path would need two distinct neighbours at the same
+preceding position. Lean checks this argument and all three
+36-vertex cycle sets used in the four-omission calculation.
+
+That calculation is infeasible even with free endpoints. Hence any
+desired50-vertex safe quotient path under this involution must omit
+at least five seed orbits and add at least seven, corresponding to
+ten omitted and fourteen added vertices in the paired forest.
+The numerical infeasibility remains a native solver result.
+The six-omission retry returned UNKNOWN after 150.062 seconds. The six-omission case remains unresolved.
+No longer nine-dimensional snake follows. A larger pair must still
+be completed by a compatible opposite-face forest.
+
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -881,5 +901,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--195.}
+\texttt{snake9\_research.tex} and research records 175--196.}
 \end{document}

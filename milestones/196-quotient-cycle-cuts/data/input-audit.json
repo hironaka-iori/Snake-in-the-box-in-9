@@ -1,0 +1,65 @@
+{
+  "inputs": [
+    {
+      "result": "affine50-omit4",
+      "status": "INFEASIBLE",
+      "seconds": 7.46900000000096,
+      "iterations": 1,
+      "cycle_cuts": 0,
+      "model_sha256": "a6edd7dfcb606ba9e5f1f1897b2eb4a360ad8caa0c31cfb77283a1ae8c011dff"
+    },
+    {
+      "result": "affine50-free-omit4",
+      "status": "INFEASIBLE",
+      "seconds": 51.6880000000001,
+      "iterations": 4,
+      "cycle_cuts": 3,
+      "model_sha256": "d4cff54e4ff35212f17b4f16d1f249f34693834646d77b3ee88690a0ac4dd74e"
+    },
+    {
+      "result": "affine50-free-omit6",
+      "status": "RESOURCE_LIMIT",
+      "seconds": 30.89099999999962,
+      "iterations": 1,
+      "cycle_cuts": 0,
+      "model_sha256": "f19c0243824d216d95ed2ae2fe8c8adbccd4b314dd53a517252ce93228f7cb9b"
+    },
+    {
+      "result": "affine50-free-omit6-retry",
+      "status": "UNKNOWN",
+      "seconds": 150.0619999999999,
+      "iterations": 1,
+      "cycle_cuts": 0,
+      "model_sha256": "f19c0243824d216d95ed2ae2fe8c8adbccd4b314dd53a517252ce93228f7cb9b"
+    }
+  ],
+  "cycle_sets_match": true,
+  "proof_receipts": [
+    {
+      "module": "CycleCut196",
+      "reports": 2,
+      "receipt_sha256": "4663e51f32682ee99a9ba4d0db3d8d5ae6ec9bacb25033070f56bbf6c2827c96"
+    },
+    {
+      "module": "CycleData196",
+      "reports": 0,
+      "receipt_sha256": "5c8bc6c4d0d119558432b14366634ad8d87768d7525faa8a8877347143cdb154"
+    },
+    {
+      "module": "ConcreteCycle196_0",
+      "reports": 3,
+      "receipt_sha256": "1d291fac2059bc7c81cf1b055381c3986c4fa0b76f91b9a2c5bac98b7b6af2bf"
+    },
+    {
+      "module": "ConcreteCycle196_1",
+      "reports": 3,
+      "receipt_sha256": "a52db7c88d4980019dc0e6846748d94b6733f7692a2c4bd1a95847d6c7e6b38c"
+    },
+    {
+      "module": "ConcreteCycle196_2",
+      "reports": 3,
+      "receipt_sha256": "5a98dfe380976bc9b8c7ed3eafac05a4b209bfcb59079647f2c6616bee4f3875"
+    }
+  ],
+  "resource_retry_same_initial_model": true
+}

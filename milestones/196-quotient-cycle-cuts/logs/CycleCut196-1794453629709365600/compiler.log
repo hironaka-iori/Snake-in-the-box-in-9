@@ -1,0 +1,21 @@
+E:\Snake-in-a-box\milestones\196-quotient-cycle-cuts\lean\CycleCut196.lean:12:4: error: tactic 'assumption' failed
+case zero
+f : Nat → Nat
+j : Nat
+hj : j ≤ 0
+h : j = 0
+⊢ f 0 ≤ f 0
+E:\Snake-in-a-box\milestones\196-quotient-cycle-cuts\lean\CycleCut196.lean:28:8: error: tactic 'assumption' failed
+case neg
+f : Nat → Nat
+n i : Nat
+hi : i ≤ n
+hmax : ∀ (j : Nat), j ≤ n → f j ≤ f i
+top : ¬f (n + 1) ≤ f i
+j : Nat
+hj : j ≤ n + 1
+old : ¬j ≤ n
+he : j = n + 1
+⊢ f (n + 1) ≤ f (n + 1)
+'CycleCut196.finiteMaximum' depends on axioms: [propext, sorryAx, Quot.sound]
+'CycleCut196.noContainedDegreeTwo' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,3 +1,11 @@
+# Current result after round 196
+
+The paired-path construction now has a restricted computational exclusion: the chosen 50-vertex safe quotient path must omit at least 5 seed orbits. The four-omission free-end query was excluded using three 36-vertex cycle cuts, each checked in Lean. Final solver infeasibility remains outside Lean. No new Q9 record or global bound follows.
+
+The user requested a pause after this round. Read [round196](milestones/196-quotient-cycle-cuts/README.md), [the argument](milestones/196-quotient-cycle-cuts/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 195
 
 The current construction route transfers the two-path face pattern of the98-edge Q8 snake to Q9. A checked quotient-lifting argument produces two disjoint nonadjacent paths from a suitable quotient path. The observed25-edge pair and saved47-edge pairs have different involution types; distance-two partners require explicit forbidden-pair constraints.

@@ -1,0 +1,104 @@
+{
+  "status": "PASS",
+  "module": "ConcreteCycle196_1",
+  "source": "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\lean\\ConcreteCycle196_1.lean",
+  "source_sha256": "dfe2d1abf108396ab18a4b3e2810bf3bfb403c9aa679bcfbf28b446c46505bfc",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\data\\ConcreteCycle196_1-execution.json": "99dcb98d1dcf3c84022ab38fd7a1df0f133405acc53ba14080a332695ad37954",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\lean\\ConcreteCycle196_1.lean": "dfe2d1abf108396ab18a4b3e2810bf3bfb403c9aa679bcfbf28b446c46505bfc",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\data\\cycle-cuts.json": "1fa217bd50d50ed9e2fba9aadc5de3e65f81a90d9837d50ab33e73aaf476e25e",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\data\\CycleData196-audit.json": "5c8bc6c4d0d119558432b14366634ad8d87768d7525faa8a8877347143cdb154",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\build\\CycleData196.olean": "f58a3425eb3360ef0e09cf52fb7383727dac63553cfe6987417b49a7a6874c6e"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\logs\\ConcreteCycle196_1-1794453688545985100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\lean\\ConcreteCycle196_1.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\logs\\ConcreteCycle196_1-1794453688545985100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2414465024,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 85,
+    "snapshot_seconds": 0.01599999999962165
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2406395904,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 48040,
+          "ParentProcessId": 30336,
+          "PrivatePageCount": 48107520,
+          "WorkingSetSize": 25153536
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 85,
+      "snapshot_seconds": 0.01599999999962165
+    },
+    {
+      "free_bytes": 2097287168,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 48040,
+          "ParentProcessId": 30336,
+          "PrivatePageCount": 229801984,
+          "WorkingSetSize": 358981632
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 87,
+      "snapshot_seconds": 0.015000000001236913
+    }
+  ],
+  "compiler_pid": 48040,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.07799999999952,
+  "axioms": [
+    {
+      "theorem": "ConcreteCycle196_1.neighbours",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ConcreteCycle196_1.edges",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ConcreteCycle196_1.excluded",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "44e6a3ca47f9a559fb742c2e288d00a7d892b1edd64c2a0be75eb646114630b5",
+  "object": "E:\\Snake-in-a-box\\milestones\\196-quotient-cycle-cuts\\build\\ConcreteCycle196_1.olean",
+  "olean_sha256": "4e8e2c69c888b1834309b517691d59d7bc1a3d5d1b979e76c740010646089691"
+}
