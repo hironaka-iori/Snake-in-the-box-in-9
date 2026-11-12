@@ -132,3 +132,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 2026-11-12 15:30 UTC check-in: 2865 / 3,118 certificate modules built, 6.7 GB free, 6 GB memory available with two pre-generators.
 - 2026-11-12 16:31 UTC check-in: 2878 / 3,118 certificate modules built, 6.7 GB free. Batches of 10 modules in 11 s generation + 2,320-2,400 s build (about 15 an hour); no failure; 3 GB memory available.
 - 2026-11-12 17:32 UTC check-in: 2895 / 3,118 certificate modules built, 6.7 GB free. Batches of 10 in 11 s generation + 2,320-2,480 s build; no failure; 6 GB memory available.
+- 2026-11-12 18:36 UTC check-in: 2908 / 3,118 certificate modules built, 6.6 GB free; gen_s 10 s, no failure, 4 GB memory available. (17:34: an unscoped `git pull` fetched all branches, 3.9 GB pack, removed after fsck; remote.origin.fetch now limited to this branch.)
