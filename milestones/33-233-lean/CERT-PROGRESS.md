@@ -118,3 +118,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 2026-11-12 03:30 UTC check-in: 2677 / 3,118 certificate modules built, 8.5 GB free.
 - 2026-11-12 04:32 UTC check-in: 2698 / 3,118 certificate modules built, 8.6 GB free.
 - 2026-11-12 05:38 UTC check-in: 2716 / 3,118 certificate modules built, 8.3 GB free.
+- 2026-11-12 06:40 UTC check-in: 2732 / 3,118 certificate modules built, 8.1 GB free. Production restarted with `--jobs 4 --batch-hints 6e7` (the replay migration no longer uses the cores; driver of c06694bc: regenerate sources of failed modules, tolerate up to 20 failed modules per batch). The final chunks `LocalWindowDirUnsatN6SB233_10`..`_13` (all their certificates present) were built early: 7-15 s and 0.5 GB each.
