@@ -1,0 +1,116 @@
+{
+  "round": 195,
+  "status": "PROGRESS",
+  "goal_status": "active",
+  "previous_turn_classification": "PROGRESS: round194 results and pause handoff published; explicit user resumption now applies",
+  "utc": "2026-11-12T03:08:43.298811+00:00",
+  "base_head": "81b720d98709b1f49c3133e374b40f50167735cb",
+  "contributor_head": "ecc47830c77df280f402f851799336dc81a7f680",
+  "accepted_modules": [
+    {
+      "module": "QuotientLift195",
+      "reports": 3,
+      "receipt_sha256": "4c3ff3f210d0fa8960797f7fde4f1dd3d0d28644b33e1a3cab8a01207827e895"
+    },
+    {
+      "module": "Symmetry195",
+      "reports": 4,
+      "receipt_sha256": "c409afee7b6cf16049280616ac4e564438c8b783cdea2b33402fa4d7e00f332a"
+    },
+    {
+      "module": "SymmetryEdges195_0",
+      "reports": 1,
+      "receipt_sha256": "b9c22be1f6c1e641e3fba9cd6ac3252442c1b0c4667a2b6b7e330db8579ee54b"
+    },
+    {
+      "module": "SymmetryEdges195_1",
+      "reports": 1,
+      "receipt_sha256": "9a59a5faa8a2e465313645cd27c9a145e0785444e7f7a700c3bdcff2def34381"
+    },
+    {
+      "module": "SymmetryEdges195_2",
+      "reports": 1,
+      "receipt_sha256": "2fa307fa5677ed89365b1970e8878d5b498c36fe2c072ba21de389170a4b88dd"
+    },
+    {
+      "module": "SymmetryEdges195_3",
+      "reports": 1,
+      "receipt_sha256": "172504393b5abce468e6ec6dfdb80fd073ff49b05c217ff9d1ab6a6b92a9af91"
+    },
+    {
+      "module": "SymmetryEdges195_4",
+      "reports": 1,
+      "receipt_sha256": "4b90e5de017520006b25163a0f0799e010b81d38f5f9f06334bdfb1712ae9851"
+    },
+    {
+      "module": "SymmetryEdges195_5",
+      "reports": 1,
+      "receipt_sha256": "55af83766b7eeb5838ef267ad0f07f745491b9bdd3987a02b365a54a36f58fb9"
+    },
+    {
+      "module": "SymmetryEdges195_6",
+      "reports": 1,
+      "receipt_sha256": "8ab98c97888b1c2f09bdde5e064c074a9a5991bb972335c2ef7b40bfa81fadd9"
+    },
+    {
+      "module": "SymmetryEdges195_7",
+      "reports": 1,
+      "receipt_sha256": "02d0476b650e3d61a0371977f23eb8c70431d3a93114c622255710adb764e138"
+    },
+    {
+      "module": "QuotientPorts195",
+      "reports": 1,
+      "receipt_sha256": "fbd9f5994f5d7e20f55e6dac6cf47ce1150cbe4f17095504ab5a01ce2e402cca"
+    }
+  ],
+  "dimensional_pattern": "Q8 two25-edge components are exchanged by one coordinate transposition and three fixed coordinate flips; use two-path faces and four crossings for Q9.",
+  "restricted_symmetric_join_maximum": 42,
+  "paired_forest_vertices": 86,
+  "balanced47_symmetry_maps": 20,
+  "searches": {
+    "quotient50": {
+      "status": "UNKNOWN",
+      "seconds": 120.07899999999972,
+      "witness": false
+    },
+    "affine50-omit4": {
+      "status": "UNKNOWN",
+      "seconds": 90.0,
+      "witness": false
+    },
+    "lower-four98": {
+      "status": "UNKNOWN",
+      "seconds": 30.0,
+      "witness": false
+    },
+    "bank-four192": {
+      "status": "UNKNOWN",
+      "seconds": 120.0,
+      "witness": false
+    },
+    "lower-four98-fixed": {
+      "status": "OPTIMAL",
+      "seconds": 0.014999999999417923,
+      "witness": true
+    },
+    "bank-four191-fixed": {
+      "status": "OPTIMAL",
+      "seconds": 0.01600000000144064,
+      "witness": true
+    }
+  },
+  "interrupted_short_state_search": {
+    "status": "RESOURCE_LIMIT",
+    "completed_states": 6,
+    "discovered_states": 238,
+    "counts_by_edges": {
+      "189": 231,
+      "190": 7
+    },
+    "complete_closure": false
+  },
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "next_direction": "Use the observed47-edge paired-forest involution and safe quotient edges. Replace the expensive flow formulation by a degree relaxation with sound cycle exclusions; retain the full quotient contact graph and forbid both endpoints of double-lift edges. Continue towards a100-vertex two-path face and a compatible95-vertex opposite face for194 edges.",
+  "scope": "Lean checks generic lifting and the distance-three involution properties. Native restricted enumeration and model witnesses remain separate. All UNKNOWN outcomes are unresolved. The affine omission limit counts quotient orbits, equivalently at most8 omitted vertices from the96-vertex paired forest, not at most4 per labelled path."
+}

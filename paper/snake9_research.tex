@@ -7235,9 +7235,128 @@ all 49-edge snakes.
 This example demonstrates a substantial local obstruction in a path
 that is known to be suboptimal. Accordingly, the $Q_9$ exclusions
 provide search restrictions without evidence of global optimality.
-The next construction route is to reroute the shorter 189-edge states
-before endpoint regrowth. Records and proof receipts are retained
+Round194 proposed rerouting the shorter189-edge states before
+endpoint regrowth. The following subsection develops the subsequent
+dimensional construction route. Records and proof receipts are retained
 in~\cite{target194archive}.
+
+
+\subsection{Dimensional transfer through two-path faces}
+\label{sec:forests195}
+
+The comparison $18+24+6+2=50$ shows that compatible components can
+outperform a lift built around a longer middle path. The next transition
+has a different useful feature:
+\[
+98=8+25+10+25+26+4.
+\]
+Two of the five projected components occupy one face and contain
+$2(25+1)=52$ vertices, exceeding the 51 vertices of a longest single
+$Q_7$ snake. The other face contains 47 vertices in three components.
+This motivates a four-crossing construction in $Q_9$.
+
+\begin{proposition}[Joining two path forests]
+Let $Q_n[A]$ consist of two nontrivial paths and $Q_n[B]$ of three
+paths. Suppose $A\cap B$ consists of four vertices, each an endpoint
+of its $A$ component and of degree at most one in $Q_n[B]$.
+If the incidence multigraph on the five components, with one edge
+for each common vertex, is connected, then
+$A\times\{0\}\cup B\times\{1\}$ induces a path in $Q_{n+1}$
+of length $|A|+|B|-1$.
+\end{proposition}
+\begin{proof}
+All selected degrees are at most two. The number of selected edges is
+\[
+(|A|-2)+(|B|-3)+4=|A|+|B|-1.
+\]
+The incidence condition gives connectivity. A connected finite graph
+of maximum degree two with one fewer edge than vertices is a path.
+Every possible cube edge has been included: within faces by the
+induced-forest hypotheses, and between faces exactly at $A\cap B$.
+\end{proof}
+The opposite-face components must contain one, two and one ports,
+with the two-port component connecting different $A$ components.
+Singleton outer components are allowed. Without connectivity, a
+cycle and a separate path may satisfy the same degree counts.
+
+\paragraph{A symmetry visible in the lower-dimensional construction.}
+Index coordinates from zero. The two 25-edge components above are
+exchanged by
+\[
+g(x)=\sigma(x)\oplus e_0\oplus e_3\oplus e_6,
+\]
+where $\sigma$ exchanges coordinates 2 and 5. Here $g^2$ is the identity,
+and $\Ham(x,g(x))$ is 3 or 5. Extend $g$ to $Q_8$ by leaving coordinate 7
+unchanged. Identifying each vertex with its partner gives a 128-vertex
+quotient graph; two pairs are adjacent when a cube edge joins them.
+It is the Cartesian product of the corresponding 64-vertex quotient
+of $Q_7$ and one binary edge.
+
+\begin{proposition}[Lifting a quotient path]
+For this involution, every induced quotient path of length $\ell$
+lifts to two disjoint, nonadjacent induced paths of length $\ell$
+in $Q_8$.
+\end{proposition}
+\begin{proof}
+Choose either representative of the first quotient vertex.
+Each following step has exactly one neighbouring representative:
+two representatives of the next pair cannot both be neighbours,
+since their mutual distance is at least three. The partner choices
+give the second path. Distinct quotient vertices prevent repeated
+or shared lifted vertices. An edge between nonconsecutive lifted
+vertices would project to a quotient chord. An edge between the
+two paths at consecutive positions would contradict uniqueness of
+the lifted edge, and the paired vertices at the same position are
+nonadjacent.
+\end{proof}
+The generic lifting and separation arguments pass Lean. Finite
+checks also establish this involution's values, cube-edge images,
+and the required separation for all 256 vertices of $Q_8$.
+
+Two 49-edge lifted paths would occupy 100 vertices. A compatible
+opposite-face forest on 95 vertices would then produce 194 edges;
+97 opposite-face vertices would produce 196. These are construction
+targets. Their existence and any optimality conclusion remain open.
+For 194 edges, the opposite-face colour difference must be $1$ or $-1$,
+because the two 49-edge paths are balanced and cube parity reverses
+between faces.
+
+\paragraph{Finite evidence and the next construction.}
+A native enumeration of 1536 specified commuting isometries considers
+all one-crossing joins of two contiguous subpaths of the displayed
+25-edge quotient path. Its restricted maximum is 42 edges, yielding
+two nonadjacent42-edge paths in $Q_8$. This gives 86 face vertices
+and does not settle the unrestricted quotient maximum.
+
+The saved $Q_9$ bank contains balanced 47-edge pairs related by
+different involutions:20 labelled maps were found by matching
+transitions, allowing reversal. Their minimum partner distance can
+be two. In that case some quotient edges lift to squares, so their
+two endpoints cannot both be selected. Keeping the full quotient
+adjacency relation is essential; merely deleting these edges would
+hide cross-path contacts. A further Lean separation argument uses
+uniqueness only on the chosen path steps.
+
+The 50-vertex quotient query for the extended lower-dimensional
+symmetry remains unresolved after 120 seconds. For the first observed
+47-edge pair, the query allowing at most four omitted seed orbits,
+with one endpoint fixed, remains unresolved after 90 seconds.
+The omission count concerns quotient orbits, hence at most eight
+vertices from the original96-vertex paired forest; it does not
+control each labelled path separately. A four-crossing query with
+the 98-vertex bank face fixed and target 192 edges also remains
+unresolved after 120 seconds.
+
+With both face selections fixed to known examples, the contraction
+and connectivity model reconstructs the 98-edge and 191-edge paths;
+both decoded paths pass native all-pairs checks. These computations
+provide no new record or global bound. The next attempt uses the
+observed 47-edge pair, retains the forbidden-pair conditions, and
+excludes disconnected cycles as they occur instead of repeating
+the unchanged connectivity-flow query. The construction criteria
+are written deductions; the solver encoding and numerical searches
+are not complete Lean certificates. Records appear
+in~\cite{forests195archive}.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
@@ -8424,6 +8543,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Contiguous replacements and closure of th
 \bibitem{target194archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Targeted extensions and lower-dimensional local obstructions}. Research record 194, 12 November 2026. Region enumerations, solver models, coverage records and checked path constructions:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/194-targeted-extensions}.
+
+\bibitem{forests195archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Dimensional transfer through symmetric path forests}. Research record195, 12 November2026. Lifting proofs, symmetry comparisons and restricted construction searches:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/195-shortened-reroutings}.
 
 \end{thebibliography}
 \end{document}

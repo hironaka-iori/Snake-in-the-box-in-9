@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 194}
+\date{Research state after round 195}
 \begin{document}
 \maketitle
 
@@ -795,8 +795,40 @@ explicit 43-edge replacement succeeds. Both paths and their retained
 positions are checked in Lean; the numerical lower cutoff is native.
 Thus the required block size in this example lies between 38 and 43.
 Large local obstructions can coexist with a better global construction.
-The next $Q_9$ search will allow rerouting of the shorter 189-edge
-states before endpoint regrowth.
+The proposed rerouting search on the shorter189-edge states remains
+incomplete. The current dimensional route is described next.
+
+
+\paragraph{Transferring the dimensional construction.}
+The useful patterns are compatibility in $6\to 7$ and multiple
+components per face in $7\to 8$. In the 98-edge example, one face
+contains two 25-edge paths, hence 52 vertices; the other contains
+three paths with 47 vertices. Four crossings join these five
+components. For $8\to 9$, two 49-edge paths in one face and 95
+compatible vertices in three opposite-face paths would give 194
+edges. This remains a construction target.
+
+The two 25-edge components are exchanged by an involution that swaps
+two coordinates and flips three others. Identifying paired vertices
+reduces the search to a smaller graph. An induced path there lifts
+to two disjoint, nonadjacent paths: a repeat or a nonconsecutive
+contact would project to a repeat or chord, while the distance
+between partners prevents two lifts of a consecutive edge.
+The lifting argument and this symmetry's finite properties pass Lean.
+
+A restricted construction using 1536 placements reaches two 42-edge
+paths in $Q_8$, giving86 face vertices. The saved $Q_9$ bank instead
+provides symmetric47-edge pairs under other involutions. Their
+quotients require an additional rule: both endpoints of an edge
+that lifts to a square cannot be selected. A Lean separation lemma
+supports this version under explicit safe-step hypotheses.
+
+The larger quotient and four-crossing searches remain unresolved.
+Known 98- and 191-edge patterns are reconstructed when their face
+selections are fixed. The next attempt starts from an observed
+47-edge pair and seeks a larger pair while excluding disconnected
+cycles as they appear. A larger pair must still be joined to a
+compatible opposite-face forest before it yields a longer snake.
 
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -849,5 +881,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--194.}
+\texttt{snake9\_research.tex} and research records 175--195.}
 \end{document}

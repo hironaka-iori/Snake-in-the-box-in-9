@@ -1,3 +1,13 @@
+# Current result after round 195
+
+The current construction route transfers the two-path face pattern of the98-edge Q8 snake to Q9. A checked quotient-lifting argument produces two disjoint nonadjacent paths from a suitable quotient path. The observed25-edge pair and saved47-edge pairs have different involution types; distance-two partners require explicit forbidden-pair constraints.
+
+The restricted symmetric construction reaches two42-edge Q8 paths. Larger searches remain unresolved. Known98- and191-edge patterns are reconstructed with face selections fixed. No new record or global bound is claimed. Research remains active.
+
+Read [round195](milestones/195-shortened-reroutings/README.md), [the argument](milestones/195-shortened-reroutings/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 194
 
 A single contiguous replacement of at most 44 edges followed by one endpoint addition is computationally excluded for every saved 191-edge Q9 snake. Repeated-move closure remains established natively only through 33 edges.
