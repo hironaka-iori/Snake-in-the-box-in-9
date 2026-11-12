@@ -135,3 +135,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 2026-11-12 18:36 UTC check-in: 2908 / 3,118 certificate modules built, 6.6 GB free; gen_s 10 s, no failure, 4 GB memory available. (17:34: an unscoped `git pull` fetched all branches, 3.9 GB pack, removed after fsck; remote.origin.fetch now limited to this branch.)
 - 2026-11-12 19:38 UTC check-in: 2924 / 3,118 certificate modules built, 6.6 GB free; batches of 8-9 modules in 2,095-2,379 s, gen_s 9-10 s, no failure.
 - 2026-11-12 20:33 UTC: container restart (2935 built at the time); relaunched `prod233.py --jobs 4 --batch-hints 6e7` (PID 396) and pregen workers 0/1 after clearing the 97 pre-generator claims.
+- 2026-11-12 20:40 UTC check-in: 2935 / 3,118 built, 6.4 GB free; prod generating its first batch itself after the restart; pregen worker 2 restarted while no build runs (12 GB available).
