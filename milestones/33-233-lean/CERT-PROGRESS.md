@@ -122,3 +122,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 2026-11-12 07:23 UTC check-in: 2747 / 3,118 certificate modules built, 8.0 GB free. First 4-job batch: 15 modules (58 M hints) in 267 s generation + 1,647 s build, no failure; 4 lean jobs at 1.4-1.7 GB each, 8 GB memory available.
 - 2026-11-12 08:24 UTC check-in: 2775 / 3,118 certificate modules built, 7.9 GB free (about 28 modules an hour on 4 jobs; batches of 14-15 modules, 270-470 s generation + 1,700 s build, no failure).
 - 2026-11-12 09:26 UTC check-in: 2797 / 3,118 certificate modules built, 7.7 GB free (22 in the last hour: the remaining modules are larger, about 4 M hints each; no failure; 7 GB memory available during builds).
+- 2026-11-12 10:28 UTC check-in: 2814 / 3,118 certificate modules built, 7.6 GB free (17 in the last hour; batches of 12-13 modules, about 4.5 M hints each; no failure).
