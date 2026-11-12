@@ -1,23 +1,23 @@
-Continue the active construction goal from round193. Inspect current repository and remote state before proceeding.
+Continue the active construction goal from round 194. Inspect the current worktree and remote state before continuing.
 
-# Round 193 complete; goal active
+# Round 194 complete; goal active
 
-The explicit resumption supersedes the preceding pause. Read milestones/193-block-reroutings/MATHEMATICAL_NOTE.md and data/completion.json.
+Read milestones/194-targeted-extensions/MATHEMATICAL_NOTE.md and data/completion.json. The previous turn was progress and the active goal remains unresolved.
 
-All length-preserving contiguous replacements of 2--33 edges over all 131 saved 191-edge snakes were enumerated. There are 43094 valid moves, counting repeated outcomes; every result belongs to an existing bank class and no two-crossing positions change. One-edge blocks have no alternative. Since all bank endpoints are blocked, any finite sequence of these moves cannot unlock endpoint extension. This conclusion has a native closure premise; Lean checks only the general finite-chain implication and the sufficient unchanged-length replacement criterion.
+Q9: every single length-preserving contiguous replacement of at most 44 edges followed immediately by one endpoint addition is computationally excluded for all 131 saved 191-edge snakes. This cutoff concerns one operation. Only round 193 has such closure through 33 edges. No longer Q9 snake or global numerical bound follows.
 
-All two-edge shortenings inside 4--24-edge blocks yield 231 symmetry classes of 189-edge paths. Complete endpoint growth finds 220 with no extension and 11 with maximum one added edge. No shorter state recovers 191 by endpoint growth alone. Do not confuse these 231 shorter classes with new 191-edge classes.
+The initial baseline visited 34--42; all 512 unresolved queries through 42 were excluded by 373 distinct solver models. The later scan visited 43--51 with many UNKNOWN cases; a bounded retry of 43--45 yields the complete cutoff 44. Read per-length coverage, rather than interpreting COMPLETE as infeasibility. Globally interrupted active queries are outside the unknown list and remain unresolved. Raw solver files are local and also packaged in data/solver-models.zip for publication; extract into the milestone folder for replay. Initial models require any recorded dynamic cycle cuts.
 
-The larger sweep was TIME_LIMIT; complete all-bank coverage ends at 33. The partial row is in data/regions25-36.json. Do not claim full exclusion beyond the completed range. No longer snake or global numerical bound was obtained.
+Q7 comparison: the 48-edge lift from the fixed optimal26-edge Q6 middle is known suboptimal. Its one-replacement-plus-addition minimum lies in [38,43]. Exclusion through 37 is native. An aligned known 49-edge subpath gives the 43-edge construction. Both actual48- and 49-edge paths and retained positions are checked in Lean. This is direct evidence that strong local rigidity does not imply optimality.
 
-Two Lean modules pass, five dependency reports. EndpointBlockers193 proves that old blockers of a proposed extension must lie in the changed interior; their first/last indices r,s force block length at least s-r+2. The 2358 candidate blocker lists are saved. Numerical enumeration completeness remains outside Lean.
+Pruning194 checks degree-one deletion, adjacent-anchor length1, colour-count arithmetic and the single-attachment obstruction. LowerData194/LowerRows194/LowerWitness194 check the two concrete Q7 paths. Native numerical coverage and complete graph-decomposition transfer remain outside Lean. Two initial failed pruning source snapshots are preserved; accepted modules pass without admitted statements.
 
-Next: search larger blocks targeted to a specified extension vertex, requiring all its old blockers to be removed and all replacement vertices to avoid the new endpoint's forbidden contacts. Alternatively reroute the 189-edge shortened states before endpoint regrowth. Neither has been attempted here. Do not repeat the completed unchanged-length scans.
+Next constructive route: reroute the 231 shorter189-edge states from round 193 before endpoint growth, beginning with the 11 classes permitting one endpoint addition. Those changed shorter states fall outside the established191-edge closure. This route has not yet been attempted. Do not repeat completed targeted exclusions.
 
-The dimensional route remains: the displayed optimal 26-edge Q6 middle lifts to at most 48 in its fixed-middle problem, while the shorter 24-edge middle supports 50. The fixed 50-edge Q7 middle has range 89--97; the fixed 98-edge Q8 middle targeting 192 is unresolved. Fixed 95-to-97 middle replacements need at least 8 omissions computationally; the whole 191-to-192 model needs at least 5 omissions/6 additions. These have different scopes.
+Inherited dimensional findings: fixed26-edge Q6 middle maximum48; shorter24-edge middle supports50. Fixed50-edge Q7 middle range89--97; fixed98-edge Q8 middle targeting192 remains unresolved. Fixed95-to 97 middle replacements require at least8 omissions computationally; whole191-to 192 replacements require at least5 omissions/6 additions. Preserve their distinct scopes.
 
-Round 192's concrete square-substitution plus extension exclusion for normalized bank25 remains Lean-checked. Its full 131-bank census is native. The 147 rooted closures do not enumerate all simultaneous subsets.
+Archived 235 independent rebuild remains pending;233/234 conditional; round 187: 93/98 batches and 11904/12424 clauses checked; critical contradiction and actual-snake transfer pending. Contributor branch was unchanged at aeab10ecbab6480a11f927e590b664bd7f0b4f5f on initial fetch. Whole-source review next at 200.
 
-Contributor branch at aeab10ecbab6480a11f927e590b664bd7f0b4f5f reports 2639/3118 production modules and 746/748 replay migrations; fetched diff saved, not merged or independently rebuilt. Archived 235 independent rebuild remains pending; 233/234 conditional; round 187 coverage 93/98 batches and 11904/12424 clauses; critical contradiction and actual-snake transfer pending. Whole-source review next at 200.
+Preserve unrelated edits, currently .gitignore. Edit existing D:/Codex/2026-10-13/new-chat/outputs manuscripts and mirror E:/Snake-in-a-box/paper. Authors and hypersetup remain unchanged. Keep one heavy worker and the existing memory/time guards. All research worker handles are terminal at publication.
 
-Preserve unrelated .gitignore and milestones/50-three-count-return/excess-screen/data/critical-family.json modifications. Editor originals are the two existing D:/Codex/2026-10-13/new-chat/outputs TeX files, mirrored in E:/Snake-in-a-box/paper. Authors and hyperlink settings preserved. Keep one heavy worker and the existing memory/time guards. All research sessions are terminal at publication.
+Publication fetch: the contributor branch advanced to ecc47830c77df280f402f851799336dc81a7f680, reporting 2659 of 3118 production modules. The diff is saved in milestone194 data/contributor-final.diff. It was neither merged nor independently rebuilt.

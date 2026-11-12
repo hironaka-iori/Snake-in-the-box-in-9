@@ -7145,6 +7145,100 @@ search can impose all these blocker requirements and target a
 192-edge path directly. Evidence and remaining scopes are recorded
 in~\cite{block193archive}.
 
+
+\subsection{Targeted extensions and a lower-dimensional obstruction}
+\label{sec:target194}
+The necessary blocker interval allows the search to fix a proposed new
+endpoint before enumerating replacements. Every old collision or chord
+with that endpoint must lie strictly inside the replaced block. The
+replacement interior then avoids the retained vertices, the neighbours
+of retained non-anchors, and the new endpoint and its neighbours.
+
+\begin{proposition}[Pruning a replacement region]
+Let $G$ be the allowed graph and $u,v$ its distinct required anchors.
+Deleting a vertex other than $u,v$ with degree at most one preserves
+every simple $u$--$v$ path. The same holds after any finite sequence
+of these deletions. A remaining route must lie in the component of
+$u$ containing $v$, and its length is at least their graph distance.
+\end{proposition}
+\begin{proof}
+Each internal vertex of a simple path has two distinct path neighbours.
+It cannot be the first deleted path vertex. Induction gives the
+repeated-deletion assertion. Connectivity and distance follow from
+the route itself.
+\end{proof}
+The nonterminal deletion implication passes Lean for the actual
+injective path representation.
+
+Suppose a surviving region contains $N_0,N_1$ vertices of the two
+cube colours. An induced route of length $\ell$ between opposite
+colours satisfies
+\[
+\ell\le2\min(N_0,N_1)-1.
+\]
+If both endpoints have colour $c$, then
+\[
+\ell\le2\min(N_c-1,N_{1-c}).
+\]
+These follow by alternating the vertex colours along the route;
+their arithmetic implications pass Lean under the count premises.
+
+Decompose the surviving graph into maximal biconnected blocks,
+treating each bridge as a block. Only blocks on the unique route
+between the anchors in the block-cut tree can be used. A detour into
+an attached branch would revisit its attachment vertex. Apply the
+colour bound within each used block and add the resulting edge bounds.
+If a block's entry and exit are adjacent, its bound is one: a longer
+induced route would have their edge as a chord. The single-attachment
+contradiction and the adjacent-anchor statement pass Lean. The
+decomposition computation and its complete transfer remain outside
+the checked proof.
+
+\paragraph{Current nine-dimensional cutoff.}
+All single length-preserving replacements of blocks of at most 44
+edges, followed immediately by one endpoint addition, are now
+computationally excluded for every saved 191-edge snake. The search
+combines complete enumeration, the preceding necessary bounds, and
+selected-vertex solver models. The latter impose the required size,
+the two anchor degrees, degree two at every other selected vertex,
+colour counts and square exclusions. Longer disconnected cycles are
+excluded as they appear. Infeasibility therefore excludes the desired
+path, although these numerical solver results have no Lean contradiction
+certificates. Later incomplete ranges retain their unresolved queries.
+
+This cutoff concerns one replacement immediately followed by growth.
+It does not extend the repeated-move closure beyond 33 edges: a larger
+replacement could reach a new 191-edge class before further changes.
+
+\paragraph{A suboptimal lower-dimensional example.}
+The 48-edge $Q_7$ lift obtained from the displayed optimal 26-edge
+$Q_6$ middle is globally suboptimal, because a 50-edge $Q_7$ snake is
+known. Nevertheless, the same replacement-and-addition operation
+cannot improve this particular lift to 49 edges using a block of
+at most 37 edges, by complete native enumeration and solver exclusions.
+
+An explicit alignment of a 49-edge subpath of the displayed 50-edge
+snake gives an improvement using a 43-edge replacement. It replaces
+the block from position 0 to position 43 of the old path, retains
+positions 43--48 and the old initial anchor, and adds one new initial
+vertex. Both the old 48-edge path and the resulting 49-edge path,
+together with these retained positions, pass Lean checks.
+The minimum block length for this operation therefore lies in
+\[
+38\le k_{\min}\le43.
+\]
+The lower inequality remains a native computational exclusion; the
+exact minimum is unresolved. The displayed construction was selected
+from 576 aligned placements of known subpaths, without classifying
+all 49-edge snakes.
+
+This example demonstrates a substantial local obstruction in a path
+that is known to be suboptimal. Accordingly, the $Q_9$ exclusions
+provide search restrictions without evidence of global optimality.
+The next construction route is to reroute the shorter 189-edge states
+before endpoint regrowth. Records and proof receipts are retained
+in~\cite{target194archive}.
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -8326,6 +8420,10 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Moving endpoints and coordinated square s
 \bibitem{block193archive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Contiguous replacements and closure of the saved snake bank}. Research record 193, 12 November 2026. Complete and partial block enumerations, shorter-path regrowth, blocker spans and proof receipts:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/193-block-reroutings}.
+
+\bibitem{target194archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Targeted extensions and lower-dimensional local obstructions}. Research record 194, 12 November 2026. Region enumerations, solver models, coverage records and checked path constructions:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/194-targeted-extensions}.
 
 \end{thebibliography}
 \end{document}

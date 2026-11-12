@@ -1,3 +1,13 @@
+# Current result after round 194
+
+A single contiguous replacement of at most 44 edges followed by one endpoint addition is computationally excluded for every saved 191-edge Q9 snake. Repeated-move closure remains established natively only through 33 edges.
+
+The lower-dimensional comparison is decisive for interpretation: a known suboptimal48-edge Q7 lift resists this operation through 37 edges, yet a43-edge replacement gives49. Both concrete paths and retained positions pass Lean. Strong local obstruction therefore does not establish global optimality.
+
+Read [round 194](milestones/194-targeted-extensions/README.md), [the argument](milestones/194-targeted-extensions/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), [paper](paper/snake9_research.tex), and [frontier explanation](paper/snake9_frontier_explanation.tex). The goal remains active; no new Q9 record or global numerical bound was obtained.
+
+## Earlier checkpoints
+
 # Current result after round 193
 
 The 131 saved 191-edge snakes are computationally closed under all length-preserving contiguous replacements of at most 33 edges. Thus repeating these moves cannot unlock an endpoint extension. Lean checks the general closure argument and the sufficient replacement criterion; the finite bank census remains native. No longer snake or improved global numerical bound was found.

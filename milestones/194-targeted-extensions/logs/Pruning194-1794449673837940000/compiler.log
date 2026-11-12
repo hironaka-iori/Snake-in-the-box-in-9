@@ -1,0 +1,42 @@
+E:\Snake-in-a-box\milestones\194-targeted-extensions\lean\Pruning194.lean:18:6: error: tactic 'subst' failed, did not find equation for eliminating 'i'
+case neg
+V : Type
+R : V → V → Prop
+m : Nat
+p : InducedPath V R m
+allowed : V → Prop
+v : V
+symmetric : ∀ (x y : V), R x y → R y x
+covered : ∀ (i : Fin (m + 1)), allowed (p.vertex i)
+thin : ∀ (x y : V), allowed x → allowed y → R v x → R v y → x = y
+hfirst : v ≠ p.vertex ⟨0, ⋯⟩
+hlast : v ≠ p.vertex ⟨m, ⋯⟩
+i : Fin (m + 1)
+he : p.vertex i = v
+hn : ¬0 < ↑i
+hi : i = ⟨0, ⋯⟩
+⊢ 0 < ↑i
+E:\Snake-in-a-box\milestones\194-targeted-extensions\lean\Pruning194.lean:24:6: error: tactic 'subst' failed, did not find equation for eliminating 'i'
+case neg
+V : Type
+R : V → V → Prop
+m : Nat
+p : InducedPath V R m
+allowed : V → Prop
+v : V
+symmetric : ∀ (x y : V), R x y → R y x
+covered : ∀ (i : Fin (m + 1)), allowed (p.vertex i)
+thin : ∀ (x y : V), allowed x → allowed y → R v x → R v y → x = y
+hfirst : v ≠ p.vertex ⟨0, ⋯⟩
+hlast : v ≠ p.vertex ⟨m, ⋯⟩
+i : Fin (m + 1)
+he : p.vertex i = v
+hi0 : 0 < ↑i
+hn : ¬↑i < m
+hi : i = ⟨m, ⋯⟩
+⊢ ↑i < m
+'Pruning194.lowDegreeExcluded' depends on axioms: [propext, sorryAx, Quot.sound]
+'Pruning194.adjacentAnchors' depends on axioms: [propext, Quot.sound]
+'Pruning194.equalColourBound' depends on axioms: [propext, Quot.sound]
+'Pruning194.oppositeColourBound' depends on axioms: [propext, Quot.sound]
+'Pruning194.singleAttachmentObstruction' depends on axioms: [propext, Quot.sound]

@@ -1,0 +1,45 @@
+E:\Snake-in-a-box\milestones\194-targeted-extensions\lean\Pruning194.lean:15:5: error: unknown tactic
+E:\Snake-in-a-box\milestones\194-targeted-extensions\lean\Pruning194.lean:14:26: error: unsolved goals
+V : Type
+R : V → V → Prop
+m : Nat
+p : InducedPath V R m
+allowed : V → Prop
+v : V
+symmetric : ∀ (x y : V), R x y → R y x
+covered : ∀ (i : Fin (m + 1)), allowed (p.vertex i)
+thin : ∀ (x y : V), allowed x → allowed y → R v x → R v y → x = y
+hfirst : v ≠ p.vertex ⟨0, ⋯⟩
+hlast : v ≠ p.vertex ⟨m, ⋯⟩
+i : Fin (m + 1)
+he : p.vertex i = v
+⊢ 0 < ↑i
+E:\Snake-in-a-box\milestones\194-targeted-extensions\lean\Pruning194.lean:12:65: error: unsolved goals
+V : Type
+R : V → V → Prop
+m : Nat
+p : InducedPath V R m
+allowed : V → Prop
+v : V
+symmetric : ∀ (x y : V), R x y → R y x
+covered : ∀ (i : Fin (m + 1)), allowed (p.vertex i)
+thin : ∀ (x y : V), allowed x → allowed y → R v x → R v y → x = y
+hfirst : v ≠ p.vertex ⟨0, ⋯⟩
+hlast : v ≠ p.vertex ⟨m, ⋯⟩
+i : Fin (m + 1)
+he : p.vertex i = v
+hi0 : 0 < ↑i
+⊢ False
+E:\Snake-in-a-box\milestones\194-targeted-extensions\lean\Pruning194.lean:45:38: error: function expected at
+  Nat.le_min
+term has type
+  ?m.802 ≤ min ?m.803 ?m.804 ↔ ?m.802 ≤ ?m.803 ∧ ?m.802 ≤ ?m.804
+E:\Snake-in-a-box\milestones\194-targeted-extensions\lean\Pruning194.lean:50:33: error: function expected at
+  Nat.le_min
+term has type
+  ?m.1099 ≤ min ?m.1100 ?m.1101 ↔ ?m.1099 ≤ ?m.1100 ∧ ?m.1099 ≤ ?m.1101
+'Pruning194.lowDegreeExcluded' depends on axioms: [propext, sorryAx, Quot.sound]
+'Pruning194.adjacentAnchors' depends on axioms: [propext, Quot.sound]
+'Pruning194.equalColourBound' depends on axioms: [propext, sorryAx, Quot.sound]
+'Pruning194.oppositeColourBound' depends on axioms: [propext, sorryAx, Quot.sound]
+'Pruning194.singleAttachmentObstruction' depends on axioms: [propext, Quot.sound]

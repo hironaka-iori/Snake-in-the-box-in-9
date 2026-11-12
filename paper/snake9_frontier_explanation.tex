@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 193}
+\date{Research state after round 194}
 \begin{document}
 \maketitle
 
@@ -771,6 +771,33 @@ argument pass Lean. It directs larger replacements towards the
 192-edge target; it does not prove their existence. Complete native
 coverage currently ends at 33 edges, and no global bound has changed.
 
+
+\paragraph{Targeted growth and the lower-dimensional comparison.}
+Fixing the proposed new endpoint allows the search to remove its
+blocking vertices first. Repeatedly delete non-anchor vertices with
+at most one available neighbour; an internal path vertex needs two
+distinct path neighbours. Reject disconnected anchors or insufficient
+colour counts. Attached graph branches cannot be used without
+revisiting their attachment vertex. If a required section has adjacent
+entry and exit vertices, inducedness forces their edge directly.
+The key implications pass Lean; finite coverage remains native.
+
+These bounds and selected-vertex solver models exclude every single
+replacement of at most 44 edges immediately followed by one endpoint
+addition, for all saved 191-edge snakes. This is a one-operation
+cutoff. The earlier repeated-move closure still extends only through
+33 edges.
+
+A lower-dimensional comparison prevents interpreting these exclusions
+as optimality. The known suboptimal 48-edge $Q_7$ lift cannot improve
+to 49 by this operation with a block of at most 37 edges, yet an
+explicit 43-edge replacement succeeds. Both paths and their retained
+positions are checked in Lean; the numerical lower cutoff is native.
+Thus the required block size in this example lies between 38 and 43.
+Large local obstructions can coexist with a better global construction.
+The next $Q_9$ search will allow rerouting of the shorter 189-edge
+states before endpoint regrowth.
+
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -822,5 +849,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--193.}
+\texttt{snake9\_research.tex} and research records 175--194.}
 \end{document}

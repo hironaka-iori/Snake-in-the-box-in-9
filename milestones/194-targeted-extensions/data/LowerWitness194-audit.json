@@ -1,0 +1,135 @@
+{
+  "status": "PASS",
+  "module": "LowerWitness194",
+  "source": "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\lean\\LowerWitness194.lean",
+  "source_sha256": "654152e1a0acd3845dce577d8afba6f4d1b934024289b82dd357a5d613c9d3e3",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\LowerWitness194-execution.json": "df4abd6bbdad3bee421d56e255016f3439052a13090a7d66d3600b59e1f8c265",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\lean\\LowerWitness194.lean": "654152e1a0acd3845dce577d8afba6f4d1b934024289b82dd357a5d613c9d3e3",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\data\\LayerJoining-execution.json": "2187afc7ab6021c9e78a5af7a952ce89504811d1464f639f8f71aafac230837b",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\lean\\LayerJoining.lean": "30687e190d96818b64569e90faaff50eba28acf7698e4ffa8c6d89d8fe640a74",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\sources\\minortriad-index.html": "b88238efa289eb5a1969c9815d7ad1a7bf7d25650e9093c09509e4b46bbe0f49",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\data\\lower-dimensional-seeds.json": "d62c92cc97eae196b21aeefe2111adfb03cc3121b9b62ba7e3e2c6ee6920c20d",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\data\\LayerJoining-audit.json": "5bf56f4c5598049f588c8f4a10ec32bda13642a4da2602f61b6e9f1d926dad77",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\build\\LayerJoining.olean": "afd32c6da92896046c6fcb18bf563c9ca40b68630a89384a53d38d8d59568817",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\aligned-lower49.json": "9a0e9c1f59389c3c368371543579ef320a7d8319c0635e3fab597e319345a1f6",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\lower-input.json": "20554dbc6bbe6e112bcb69743740e1d34febb181d563b5750d5a843814e01d59",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\lower-provenance.json": "0e3dc46441b523f0ffca43776afd1a7e4cf5dcdb67d69dfe830cb1d20976f525",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\LowerRows194_0-audit.json": "513e64beffbf17140e674b7c3cb0128ab7060909b4e44fc5857c0e974d89a118",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\LowerRows194_1-audit.json": "7fb496b18d2ee54f2c0163958fad54563476788a6aad2ebb8da5e073bc018f6a",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\LowerRows194_2-audit.json": "47999a66764e166fdce9cac69f1290134b29ecc6651581e207f8277a972b8ec7",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\LowerRows194_3-audit.json": "95f48c23149474ada2e44b3684148b9876ef61d672b595ee14432c13c4bc5ae3",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\LowerRows194_4-audit.json": "7b55545a46ba02669c8e28859bd64bd508645e04079048444824e34a5dc01318",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\LowerRows194_5-audit.json": "39f21f8fa35e657b0f3a67e6034d6f867cf3350642b9ba3a719ff19308ef1a94",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\data\\LowerRows194_6-audit.json": "2e03a522cf68ac369402384a5e4b9868b579ff0172b42f6c1eb3f2e37ae13d1c",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\build\\LowerRows194_0.olean": "bacfa1665cad069f229e013f1b74284bbd347b81927c777d3827f2c21b625c6e",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\build\\LowerRows194_1.olean": "2d45ceca5604cbe0c6418cbdda50377297f39279ed03716eecd8efd456d80d61",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\build\\LowerRows194_2.olean": "73930882be3b9292c5d9e86625215b4c8781bdc5c86f2e23ee5aefa60aee47d4",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\build\\LowerRows194_3.olean": "af19e9b74c6e720a2570462236e7a5060e9f58d1c48a16c34d7c97d16e2fcde1",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\build\\LowerRows194_4.olean": "09d673600127bb8443c17145c78015eca311c8e2f9c6e41695a5c35df4f40b0d",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\build\\LowerRows194_5.olean": "3acdce127959d1a233dd4d461f0d100b9dd1a75a879a49d34901e02f0c001c87",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\build\\LowerRows194_6.olean": "3a3d17b390f5aa2403af378eae2d54a5953f6d4f51def802b02bfd16cac304d9"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\logs\\LowerWitness194-1794450717834094700\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\lean\\LowerWitness194.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\logs\\LowerWitness194-1794450717834094700\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1727438848,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.01599999999962165
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1720369152,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 6912,
+          "ParentProcessId": 47100,
+          "PrivatePageCount": 48107520,
+          "WorkingSetSize": 24317952
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.01599999999962165
+    },
+    {
+      "free_bytes": 1460670464,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 6912,
+          "ParentProcessId": 47100,
+          "PrivatePageCount": 110825472,
+          "WorkingSetSize": 266723328
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01599999999962165
+    },
+    {
+      "free_bytes": 1439764480,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 6912,
+          "ParentProcessId": 47100,
+          "PrivatePageCount": 130334720,
+          "WorkingSetSize": 289361920
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.015000000001236913
+    }
+  ],
+  "compiler_pid": 6912,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.1089999999985594,
+  "axioms": [
+    {
+      "theorem": "Lower194.oldPath",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Lower194.newPath",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "6a94250f32079804f11608d3c6ab26da4f95253d81b915c7031681db1eec7839",
+  "object": "E:\\Snake-in-a-box\\milestones\\194-targeted-extensions\\build\\LowerWitness194.olean",
+  "olean_sha256": "8b9bb0cd97692b645f11b6ef0306fffef4608fae87ed460d6a81b9d20982b013"
+}
