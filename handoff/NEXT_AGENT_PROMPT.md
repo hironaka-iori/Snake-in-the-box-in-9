@@ -1,8 +1,8 @@
-Continue the active construction goal from round 194. Inspect the current worktree and remote state before continuing.
+The user requested a pause after round 194. Do not continue research until she explicitly resumes. Upon resumption, inspect the current worktree and remote state before continuing from the frontier below.
 
-# Round 194 complete; goal active
+# Round 194 complete; research paused at the user's request
 
-Read milestones/194-targeted-extensions/MATHEMATICAL_NOTE.md and data/completion.json. The previous turn was progress and the active goal remains unresolved.
+Read milestones/194-targeted-extensions/MATHEMATICAL_NOTE.md and data/completion.json. The research goal remains unresolved. The completion record preserves the active status at the time the research results were saved, before this pause instruction was applied.
 
 Q9: every single length-preserving contiguous replacement of at most 44 edges followed immediately by one endpoint addition is computationally excluded for all 131 saved 191-edge snakes. This cutoff concerns one operation. Only round 193 has such closure through 33 edges. No longer Q9 snake or global numerical bound follows.
 
@@ -18,6 +18,6 @@ Inherited dimensional findings: fixed26-edge Q6 middle maximum48; shorter24-edge
 
 Archived 235 independent rebuild remains pending;233/234 conditional; round 187: 93/98 batches and 11904/12424 clauses checked; critical contradiction and actual-snake transfer pending. Contributor branch was unchanged at aeab10ecbab6480a11f927e590b664bd7f0b4f5f on initial fetch. Whole-source review next at 200.
 
-Preserve unrelated edits, currently .gitignore. Edit existing D:/Codex/2026-10-13/new-chat/outputs manuscripts and mirror E:/Snake-in-a-box/paper. Authors and hypersetup remain unchanged. Keep one heavy worker and the existing memory/time guards. All research worker handles are terminal at publication.
+Preserve unrelated edits, currently .gitignore and milestones/50-three-count-return/excess-screen/data/critical-family.json. Edit existing D:/Codex/2026-10-13/new-chat/outputs manuscripts and mirror E:/Snake-in-a-box/paper. Authors and hypersetup remain unchanged. Keep one heavy worker and the existing memory/time guards. All research worker handles are terminal at publication.
 
 Publication fetch: the contributor branch advanced to ecc47830c77df280f402f851799336dc81a7f680, reporting 2659 of 3118 production modules. The diff is saved in milestone194 data/contributor-final.diff. It was neither merged nor independently rebuilt.
