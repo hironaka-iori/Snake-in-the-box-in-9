@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 200}
+\date{Research state after round 201}
 \begin{document}
 \maketitle
 
@@ -22,7 +22,8 @@ archived contributor proof of the upper bound 235, whose complete
 independent rebuild remains pending. The maximum is unresolved.
 The numerical prediction 196 has neither a construction nor an optimality
 proof. The current construction investigation compares dimensions six
-through nine, with 194 as a provisional target and no new witness. The current sufficient pending-share profile is $(15,14,14,14)$
+through nine, with general restrictions on two-parent constructions
+and no new witness. The current sufficient pending-share profile is $(15,14,14,14)$
 for $012034,012301,012340,012345$, respectively. Together with the retained
 local and graph premises, it implies $m\le234$ without a positive-loss
 assumption. All four required numerical floors have native contradiction
@@ -932,6 +933,71 @@ Further work must change the parent shapes or the face arrangement,
 or use matching steps in the earlier quotient. No longer snake or
 improved global numerical bound has been obtained.
 
+
+\paragraph{Fundamental restrictions on dimensional constructions.}
+Let two positive-length parent paths of lengths $p,q\le a(n)$ lie
+in opposite faces. Delete $D$ original vertices and add $A$ vertices
+outside the original copies. Assume the entire final induced graph is
+a path of length $L$ with $k$ crossings between faces. Let $b$ count
+deleted original endpoints, $e$ count original within-parent edges
+deleted at both ends, and $H$ count final within-face edges touching
+an added vertex, each edge once. Then
+\[
+\boxed{L+k+b+e+H=p+q+2+2A,\qquad L+k\le2a(n)+2+2A.}
+\]
+The proof is an edge count. Initially there are $p+q$ within-face
+edges. Deleting vertices removes $2D-b-e$ of them. Adding the $H$
+new within-face edges and $k$ crossings gives all final edges, while
+the final vertex count is $p+q+2-D+A=L+1$.
+
+Without additions, the same calculation gives $k=1+D-b-e$.
+If $C$ is the original projected intersection, its cross-face edges
+form a matching. Every destroyed crossing needs a deletion, so
+$C\le D+k$ and $D\ge\lceil(C-1)/2\rceil$.
+These restrictions apply to two specified parent paths; an arbitrary
+higher-dimensional snake need not have such a representation.
+
+The 50-edge $Q_7$ representative has a two-crossing split and is not
+excluded by the resulting bound $k\le4$ for two $Q_6$ parents.
+For the saved 98-edge $Q_8$ representative, every split except one
+has at least five crossings, violating $98+k\le102$.
+The remaining split has four crossings and face sizes 47 and 52.
+A $Q_7$ parent has at most 51 vertices. Thus this witness cannot
+be obtained by deletions alone from two $Q_7$ parents in any
+coordinate split. The concrete coordinate obstruction passes Lean.
+This conclusion explains a limitation of extrapolating the earlier
+construction through two complete parent paths.
+
+For 196 edges in $Q_9$, deletion alone from two parents of length
+at most 98 permits at most one deletion and two crossings.
+An internal deletion splits one 98-edge parent into two pieces.
+The intact 98-edge parent must join these pieces through its two
+endpoints, and those two attachment points must be the only retained
+projected intersections. The initial intersection therefore has size
+two or three. This is an exact criterion, with a written necessity
+and sufficiency proof in the main paper.
+
+If four or more crossings are required, at least one addition is
+necessary. With exactly one addition, equality forces two 98-edge
+parents, two isolated internal omissions, exactly four crossings and
+$b=e=H=0$. The added vertex has no same-face neighbour and is
+therefore a global endpoint. Removing it leaves a 195-edge,
+three-crossing snake with $C\le5$. At $C=5$, every omitted shared
+projection retains its opposite copy. That copy prevents attachment
+at an endpoint exposed by a deletion, so the new endpoint must
+attach at an original parent endpoint. If both final endpoints must
+be original vertices, at least two additions are required instead.
+Existence of the one-addition alternative remains unresolved.
+
+Six new Lean modules check 24 theorem statements or dependency reports,
+covering the list accounting, endpoint geometry, overlap equality and
+concrete coordinate obstruction. The complete interpretation for arbitrary
+geometric constructions and the one-deletion classification remain
+written proofs. The next theoretical question is whether suitably
+placed 98-edge parents satisfy the exact one-deletion criterion, or
+produce the necessary 195-edge predecessor. No new witness or global
+bound follows from the restrictions alone.
+
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -985,5 +1051,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--200.}
+\texttt{snake9\_research.tex} and research records 175--201.}
 \end{document}

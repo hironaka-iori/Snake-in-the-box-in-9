@@ -1,3 +1,11 @@
+# Current result after round 201
+
+General two-parent accounting gives L+k<=2a(n)+2+2A, linking final length, face crossings and added vertices. It excludes a deletion-only two-parent representation of the displayed98-edge Q8 witness and sharply restricts196-edge constructions. Six Lean modules pass with24 reports; full geometric interpretation and the exact one-deletion classification retain explicit written-proof scope.
+
+No new Q9 witness or global bound was obtained. The user requested a pause after this round. Read [round201](milestones/201-crossing-deletion/README.md), [the proof](milestones/201-crossing-deletion/MATHEMATICAL_NOTE.md), [verification](milestones/201-crossing-deletion/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex). Resume only on new user instruction.
+
+## Earlier checkpoints
+
 # Current result after round 200
 
 A complete native census limits two independently trimmed copies of the specified Q7 parent to92 separated Q8 vertices, even with every cube isometry allowed. Six counting and interval deductions pass Lean. Coupled four-omission repairs are excluded at two starting placements;13 further representative cases are saved for continuation. No new Q9 witness or global bound is claimed.

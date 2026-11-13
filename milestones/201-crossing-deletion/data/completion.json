@@ -1,0 +1,89 @@
+{
+  "round": 201,
+  "status": "PROGRESS",
+  "previous_turn_classification": "PROGRESS: round200 completed a native trimming census, six Lean deductions and the whole-manuscript review.",
+  "goal_status": "pause_requested_after_publication",
+  "utc": "2026-11-13T06:45:52.943336+00:00",
+  "base_head": "a04ff0f1fcce2185ecd898d87b3423df7eb32afe",
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "solver_searches": [],
+  "accepted_lean_modules": [
+    "CrossingDeletion201",
+    "LayerEndpoint201",
+    "TwoParents201",
+    "EndpointGeometry201",
+    "OverlapEquality201",
+    "CutObstruction201"
+  ],
+  "theorem_reports": 24,
+  "proofs": [
+    {
+      "module": "CrossingDeletion201",
+      "receipt": "data\\CrossingDeletion201-audit.json",
+      "sha256": "c4f530b4bb9c4cdde35aa2a152d4320fe48bd77a21aae796ff0464b28f8f36c5",
+      "reports": 10,
+      "seconds": 3.109999999998763
+    },
+    {
+      "module": "LayerEndpoint201",
+      "receipt": "data\\LayerEndpoint201-audit.json",
+      "sha256": "9a95c1a71f42cac6f7fd0084a0dc4d5160ada946c70eff965134b4b448640c8d",
+      "reports": 1,
+      "seconds": 2.061999999999898
+    },
+    {
+      "module": "TwoParents201",
+      "receipt": "data\\TwoParents201-audit.json",
+      "sha256": "0090bf773ab486d602e1090e729d16cf5b53774173f407344b7c6d5e4d20d06c",
+      "reports": 2,
+      "seconds": 2.0939999999991414
+    },
+    {
+      "module": "EndpointGeometry201",
+      "receipt": "data\\EndpointGeometry201-audit.json",
+      "sha256": "eb9cdf9f38beeefa8cba67d3db17c5f9fae232d75c449a5cd6bd50649d843512",
+      "reports": 4,
+      "seconds": 1.0630000000001019
+    },
+    {
+      "module": "OverlapEquality201",
+      "receipt": "data\\OverlapEquality201-audit.json",
+      "sha256": "ac2cfc7771ab8b928aff1be1268f1cbb3c6af2379893e31517992ef9d3d0ac75",
+      "reports": 4,
+      "seconds": 2.125
+    },
+    {
+      "module": "CutObstruction201",
+      "receipt": "data\\CutObstruction201-audit.json",
+      "sha256": "2338c279f5a2cbb4f7d603fe96cfed1bd56c461df4cf863be73f8c6734a59176",
+      "reports": 3,
+      "seconds": 2.063000000000102
+    }
+  ],
+  "checked_scope": "Generic Boolean-list accounting, explicit count-equation composition, numerical implications, actual induced-path endpoint geometry, overlap equality, two small concrete paths and the Q8 all-coordinate obstruction.",
+  "written_proof_scope": "Full arbitrary-graph count interpretation, exact one-deletion classification, and composed C=5 attachment restriction.",
+  "key_consequences": [
+    "L+k<=2a(n)+2+2A for the specified two-parent construction",
+    "The saved98-edge Q8 witness has no deletion-only two-Q7-parent representation in any coordinate split",
+    "A deletion-only196-edge Q9 construction has at most one deletion and at most two crossings",
+    "With196 edges,k>=4,A=1, the addition must be a global endpoint; its195-edge predecessor has3 crossings andC<=5"
+  ],
+  "commentary_correction": "At least two additions for196 edges and4 crossings requires both final endpoints to be original vertices. With one added endpoint the equality alternative is unresolved.",
+  "contributor": {
+    "base": "0cb8450707e481db49b6204587e45db9ae0df589",
+    "head": "816bbcf557c946227151bc4cee48357f1e7a4d65",
+    "changed": true,
+    "diff_sha256": "98c80bf04d5d4132f3cc629bed2bb032c40701a6d5f2adbfaf15263290e34896",
+    "reported_built": 3005,
+    "reported_total": 3127,
+    "scope": "Contributor 05:49 UTC progress report inspected; no local independent rebuild or merge. Archived235 rebuild remains pending;233/234 remain conditional."
+  },
+  "compiled_documents": [
+    "main",
+    "frontier"
+  ],
+  "whole_manuscript_review_round": 200,
+  "next_whole_manuscript_review_round": 210,
+  "next_action": "Pause after confirmed publication. Resume only on new user instruction, prioritizing exact parent compatibility proofs for the one-deletion196 criterion or195-edge three-crossing predecessor. Round200 catalogue is secondary."
+}

@@ -1,0 +1,52 @@
+import LayerJoining
+namespace EndpointGeometry201
+open LayerJoining
+
+theorem bothEndpointNeighbour {V : Type} {R : V → V → Prop} {m : Nat}
+    (symm : ∀ x y, R x y → R y x) (irrefl : ∀ x, ¬ R x x)
+    (p : InducedPath V R m) (i : Fin (m+1))
+    (first : R (p.vertex i) (p.vertex ⟨0,by omega⟩))
+    (last : R (p.vertex i) (p.vertex ⟨m,by omega⟩)) : m=2 := by
+  by_cases h0 : i.val=0
+  · have he : i=⟨0,by omega⟩ := Fin.ext h0
+    rw [he] at first
+    exact False.elim (irrefl _ first)
+  by_cases hm : i.val=m
+  · have he : i=⟨m,by omega⟩ := Fin.ext hm
+    rw [he] at last
+    exact False.elim (irrefl _ last)
+  have hi := i.isLt
+  have left := (p.induced ⟨0,by omega⟩ i (by simp only [Fin.val_mk];omega)).mp (symm _ _ first)
+  have right := (p.induced i ⟨m,by omega⟩ (by simp only [Fin.val_mk];omega)).mp last
+  simp only [Fin.val_mk] at left right
+  omega
+
+theorem oppositeCopyBlocks {V : Type} {R : V → V → Prop}
+    (x y : V) (b : Bool) (adj : R y x) :
+    LayerAdj R (y,!b) (x,!b) ∧ LayerAdj R (y,!b) (y,b) := by
+  constructor
+  · exact Or.inl ⟨rfl,adj⟩
+  · exact Or.inr ⟨by cases b <;> decide,rfl⟩
+
+def Adj (x y : Nat) : Prop :=
+  let d := Nat.xor x y
+  d=1 ∨ d=2 ∨ d=4 ∨ d=8
+instance (x y : Nat) : Decidable (Adj x y) := inferInstanceAs (Decidable (_ ∨ _))
+def deletionExample : Array Nat := #[0,4,5,7,3]
+def additionExample : Array Nat := #[0,1,9,11,15,14,6]
+
+theorem deletionExample_checked : ∀ i j : Fin 5,
+    (deletionExample[i.val]! = deletionExample[j.val]! ↔ i=j) ∧
+    (Adj deletionExample[i.val]! deletionExample[j.val]! ↔
+      i.val+1=j.val ∨ j.val+1=i.val) := by decide +kernel
+
+theorem additionExample_checked : ∀ i j : Fin 7,
+    (additionExample[i.val]! = additionExample[j.val]! ↔ i=j) ∧
+    (Adj additionExample[i.val]! additionExample[j.val]! ↔
+      i.val+1=j.val ∨ j.val+1=i.val) := by decide +kernel
+
+#print axioms bothEndpointNeighbour
+#print axioms oppositeCopyBlocks
+#print axioms deletionExample_checked
+#print axioms additionExample_checked
+end EndpointGeometry201

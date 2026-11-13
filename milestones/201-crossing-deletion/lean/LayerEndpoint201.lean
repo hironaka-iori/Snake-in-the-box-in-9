@@ -1,0 +1,36 @@
+import LayerJoining
+namespace LayerEndpoint201
+open LayerJoining
+
+theorem isolatedInLayer_endpoint {V : Type} {R : V → V → Prop} {m : Nat}
+    (symm : ∀ x y, R x y → R y x)
+    (p : InducedPath (V × Bool) (LayerAdj R) m) (i : Fin (m+1))
+    (isolated : ∀ j, ¬ ((p.vertex i).2=(p.vertex j).2 ∧
+      R (p.vertex i).1 (p.vertex j).1)) : i.val=0 ∨ i.val=m := by
+  by_cases h0 : i.val=0
+  · exact Or.inl h0
+  by_cases hm : i.val=m
+  · exact Or.inr hm
+  have hi := i.isLt
+  let u : Fin (m+1) := ⟨i.val-1,by omega⟩
+  let v : Fin (m+1) := ⟨i.val+1,by omega⟩
+  have left := (p.induced u i (by dsimp [u] <;> omega)).mpr (by dsimp [u] <;> omega)
+  have right := (p.induced i v (by dsimp [v] <;> omega)).mpr (by dsimp [v] <;> omega)
+  have hl : (p.vertex u).2≠(p.vertex i).2 ∧ (p.vertex u).1=(p.vertex i).1 := by
+    rcases left with h | h
+    · exact False.elim (isolated u ⟨h.1.symm,symm _ _ h.2⟩)
+    · exact h
+  have hr : (p.vertex i).2≠(p.vertex v).2 ∧ (p.vertex i).1=(p.vertex v).1 := by
+    rcases right with h | h
+    · exact False.elim (isolated v h)
+    · exact h
+  have faces : (p.vertex u).2=(p.vertex v).2 := by
+    cases a : (p.vertex u).2 <;> cases b : (p.vertex i).2 <;>
+      cases c : (p.vertex v).2 <;> simp_all
+  have eqv : p.vertex u=p.vertex v := Prod.ext (hl.2.trans hr.2) faces
+  have eqi := congrArg Fin.val (p.distinct u v eqv)
+  dsimp [u,v] at eqi
+  omega
+
+#print axioms isolatedInLayer_endpoint
+end LayerEndpoint201

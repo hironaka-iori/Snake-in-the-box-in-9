@@ -70,6 +70,10 @@ of the specified 50-edge $Q_7$ parent yield at most 92 separated vertices,
 even when all cube isometries are allowed. This restriction motivates
 changes to the parent shapes. Generic counting deductions are checked
 in Lean; the numerical placement censuses retain their separate scope.
+A general two-parent identity gives $L+k\le2a(n)+2+2A$, where
+$k$ counts crossings and $A$ counts added vertices. It excludes a
+deletion-only two-parent representation of the displayed 98-edge snake
+and sharply restricts such constructions of a 196-edge snake.
 No longer $Q_9$ snake or improved unconditional numerical bound is
 obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
@@ -7800,6 +7804,186 @@ placements, allowing six total omissions remains unresolved after
 copies. They give no upper bound for arbitrary $Q_9$ snakes and no
 opposite-face completion. Exact inputs and outcomes are retained in
 research record~\cite{research200}.
+
+
+\subsection{Crossings and deletions between two parent paths}
+\label{sec:crossing-deletion201}
+The following argument applies to every relative placement of the parent
+paths, including placements without symmetry. It separates a general
+dimensional construction restriction from the finite families above.
+
+\begin{proposition}[Two-parent crossing identity]
+\label{prop:crossing-deletion201}
+Let $P,Q$ be induced paths of positive lengths $p,q$ in $Q_n$, placed
+in opposite faces of $Q_{n+1}$, and put $N=p+q+2$.
+Delete $D$ vertices from these layered copies and add $A$ vertices
+outside their original union. Suppose that the entire resulting induced
+graph is one nonempty path of length $L$, with $k$ edges across the
+new coordinate. Let $b$ count deleted original endpoints, separately
+in each parent, $e$ count original within-parent edges deleted at both
+ends, and $H$ count final within-face edges incident to an added vertex,
+each edge once. Then
+\begin{equation}\label{eq:crossing-deletion201}
+\boxed{k+b+e+H=1+D+A,\qquad L+k+b+e+H=N+2A.}
+\end{equation}
+In particular, if $p,q\le a(n)$, then
+\begin{equation}\label{eq:crossing-bound201}
+\boxed{L+k\le2a(n)+2+2A.}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Initially the within-face edge count is $N-2$. The sum of the original
+within-parent degrees of deleted vertices is $2D-b$. An edge whose two
+ends are deleted occurs twice in this sum, so exactly $2D-b-e$ original
+within-face edges disappear. The final vertex and edge counts satisfy
+\[
+L+1=N-D+A,\qquad L=N-2-2D+b+e+H+k.
+\]
+Subtracting gives the first identity; eliminating $D$ gives the second.
+The bound follows from $N\le2a(n)+2$ and $b,e,H\ge0$.
+\end{proof}
+The same proof works in $G\square K_2$ for any simple graph $G$.
+Positive-length parents ensure that each original endpoint has degree
+one. A singleton parent would require degree deficit two in place of
+one. The final path may be a singleton; the empty graph is excluded.
+The hypothesis concerns every edge of the induced graph, including
+any unwanted chord.
+
+\begin{corollary}[Deletion and projected overlap]
+\label{cor:overlap201}
+If $A=0$, then $H=0$ and
+\[
+k=1+D-b-e,\qquad L=N-k-b-e,\qquad k\le D+1.
+\]
+For the original projected intersection $C=|V(P)\cap V(Q)|$,
+\[
+C\le D+k=1+2D-b-e,\qquad
+D\ge\left\lceil\frac{C-1}{2}\right\rceil.
+\]
+If $C=D+k$, each deleted copy has a shared projection whose opposite
+copy is retained.
+\end{corollary}
+\begin{proof}
+The original cross-face edges form a matching of size $C$. Each edge
+either survives or has a deleted endpoint; one deletion can destroy
+only one such edge. This proves $C\le D+k$. More precisely, if $t$
+counts original crossing edges deleted at both ends, and $z$ counts
+deletions outside the original intersection, then $C+t+z=k+D$.
+Equality forces $t=z=0$. The remaining claims follow from
+\eqref{eq:crossing-deletion201}.
+\end{proof}
+The inequality $C\le D+k$ continues to hold with additions, since
+surviving original crossings are a subset of all final crossings.
+These counts are necessary restrictions and do not ensure connectivity.
+
+\paragraph{Exactly one deletion.}
+With no additions and one deleted original endpoint, $k=1$.
+The retained part of that parent and the intact other parent join
+exactly when their projected intersection is a single common endpoint.
+The initial intersection has size one or two.
+
+For an internal deletion, write $P=(p_0,\ldots,p_p)$ and delete
+$x=p_i$, where $1\le i\le p-1$. The two surviving pieces
+$P^-=(p_0,\ldots,p_{i-1})$ and $P^+=(p_{i+1},\ldots,p_p)$ are
+nonempty, disjoint and nonadjacent. There are exactly two crossings.
+Writing $Q=(q_0,\ldots,q_q)$, the retained graph is an induced path
+if and only if there are
+\[
+u\in\{p_0,p_{i-1}\},\qquad v\in\{p_{i+1},p_p\}
+\]
+with
+\begin{equation}\label{eq:one-deletion201}
+\{q_0,q_q\}=\{u,v\},\qquad
+\bigl(V(P)\setminus\{x\}\bigr)\cap V(Q)=\{u,v\}.
+\end{equation}
+For necessity, connectivity attaches each piece to $Q$ once.
+The attachments must use endpoints, since an internal vertex already
+has degree two. For sufficiency, traverse $P^-$, $Q$, $P^+$ in the
+appropriate orientations. The intersection condition supplies exactly
+the intended crossings, and original inducedness excludes all other
+edges. This also covers singleton pieces.
+
+Thus $C=2$ or $3$. If $C=3$, then $x\in V(Q)$. Choosing both
+$u=p_{i-1}$ and $v=p_{i+1}$ makes $x$ adjacent to both endpoints
+of $Q$. Its position on the induced path must then be both $1$ and
+$q-1$, giving $q=2$. Hence for $q>2$ and $C=3$, at least one
+attachment must be an original endpoint of $P$.
+
+\paragraph{The distinction between the lower-dimensional constructions.}
+For a 50-edge $Q_7$ snake obtained by deletions from two $Q_6$ parents,
+$a(6)=26$ and \eqref{eq:crossing-bound201} give $k\le4$.
+The saved 50-edge representative has a two-crossing split, with pieces
+of lengths $18,24,6$, and a three-crossing split. These satisfy this
+necessary restriction. Completion of their face forests to suitable
+parent paths is a further requirement.
+
+For a 98-edge $Q_8$ snake obtained by deletions from two $Q_7$ parents,
+the same bound gives $k\le4$. At $k=4$, equality forces $p=q=50$,
+$D=3$ and $b=e=0$: three isolated internal omissions.
+The saved 98-edge representative has crossing counts
+\[
+(14,21,5,13,26,4,7,8)
+\]
+in coordinates $0,\ldots,7$. Its only four-crossing split, coordinate
+5, has face sizes $47$ and $52$. A $Q_7$ parent contains at most 51
+vertices. Every coordinate therefore violates either the crossing bound
+or the parent size bound. This particular 98-edge snake cannot be
+obtained solely by deleting vertices from two $Q_7$ parent paths in
+any coordinate split. Cube isometries preserve this conclusion.
+It is a restriction on the displayed witness, with no assertion about
+all optimal $Q_8$ snakes. Its face forests require a more general
+construction than this two-parent deletion model.
+
+\paragraph{The 196-edge target.}
+For $p,q\le98$, no additions and $L=196$, the vertex count and
+\eqref{eq:crossing-bound201} imply $D\le1$ and $k\le2$.
+The only parent sizes are $98,97$ with no deletion, or $98,98$ with
+one deletion. In the first case the parents meet at a single common
+endpoint. In the second case an endpoint deletion gives a one-crossing
+join, while an internal deletion gives exactly
+\eqref{eq:one-deletion201}: an intact 98-edge middle path and outside
+pieces totalling 96 edges. In particular, $C\ge4$ excludes a
+deletion-only 196-edge construction from two 98-edge parents.
+When $C=3$, both newly exposed endpoints cannot serve as attachments.
+A mixed choice of one original and one exposed endpoint requires $i$
+odd, since the endpoints of a 98-edge cube path have the same colour.
+The historical endpoint-aligned placement census does not automatically
+cover attachments at newly exposed endpoints.
+
+Allowing additions and requiring $k\ge4$ gives $A\ge1$.
+If $A=1$, equality is forced:
+\[
+p=q=98,\quad D=2,\quad k=4,\quad b=e=H=0.
+\]
+Both omissions are internal and no original within-parent edge joins
+them. The added vertex has no selected neighbour in its own face.
+Since it has at most one neighbour across the new coordinate, it must
+be a global endpoint. Removing it leaves a deletion-only 195-edge
+snake with three crossings, and hence $C\le5$.
+
+If $C=5$, the equality case of Corollary~\ref{cor:overlap201}
+forces the opposite copy of each deleted projection to remain.
+The added endpoint cannot attach across the coordinate at an endpoint
+exposed by such a deletion: it would also be adjacent within its face
+to that retained opposite copy, contradicting $H=0$.
+Thus at $C=5$ it must attach to an original parent endpoint.
+Consequently at least two additions are necessary if both final
+endpoints must be retained original vertices. Without this endpoint
+condition, the one-addition alternative remains unresolved.
+
+\paragraph{Scope of the proof checks.}
+Lean checks the Boolean-list edge and vertex accounting for arbitrary
+parent lengths, the two-parent composition under the explicit final
+vertex and edge count equations, and the numerical equality deductions.
+It also checks the induced-path endpoint lemma, the common-neighbour
+restriction, the overlap equality and the concrete coordinate obstruction
+for the 98-edge witness. Two small induced paths verify sharpness of
+the one-deletion overlap bound and the endpoint-addition possibility.
+The identification of all counts with an arbitrary geometric
+construction, the complete one-deletion classification and the composed
+$C=5$ attachment conclusion have the written proofs above; their full
+geometric assembly has not been checked in Lean. None of these results
+gives a longer $Q_9$ snake or a new global numerical bound.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
