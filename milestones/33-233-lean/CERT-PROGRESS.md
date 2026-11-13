@@ -141,3 +141,12 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 2026-11-12 23:50 UTC check-in: 2965 / 3,118 built, 6.0 GB free; batches of 7-8 modules in 2,300-2,860 s, gen_s 8-9 s; no failure.
 - 2026-11-13 00:35 UTC: correction: the certificate total is 3,127 (`cert233.py status`: 2,637 seeds + 490 share), not 3,118 as written in earlier lines; production always worked from the full list. Now 2,971 / 3,127 built (2,537 seed + 434 share).
 - 00:50: post-production prepared as `certify/post233.sh` (not run yet). It fixes two errors in the plan above: `chain_audit.py` needs `--mathlib-dir /home/user/lean-deps/mathlib4`, and the overlay must drop its links to LocalWindowTagsShare(Packed).olean (byte-identical separate copies in the core lib, else chain_audit stops with 'would shadow').
+- 01:00: remaining-work estimate (read-only analysis of work_items and the build logs): the 157 remaining
+  certificates hold 2.85 G estimated hints (all 2,978 built so far: 3.44 G), up to 77.6 M per module
+  (largest built: 8.7 M). Expected about 140-165 h more at the old settings; generation (cadical,
+  ~est^1.43, up to ~6 h per module) becomes the bottleneck, batches shrink to 1 module above 3e7.
+  Actions: production restarted at a batch boundary with `--batch-hints 1.2e8` (PID 8129); stale
+  `$CERT233_SCR/pregen2` scratch (177 MB) removed. Planned: before free disk nears 3000 MB, restart the
+  pregens with `--min-disk-mb 2300` (they exit, not wait, below their floor); before the six largest
+  modules (from S012301A34354, 47 M est. hints; predicted RSS up to ~9 GB), restart prod with
+  `--rss-cap-gb 11` (they would otherwise be killed at 6.5 GB, deterministically, twice).
