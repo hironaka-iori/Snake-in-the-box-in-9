@@ -1,3 +1,11 @@
+# Current result after round 198
+
+The symmetry quotient now has a three-case endpoint reduction and eight clique restrictions. Connected regrowth supplies two separated 47-edge Q8 paths, inequivalent to the 36 saved comparison forests. Their 192-edge completion remains unresolved. No new Q9 record or global numerical bound is claimed.
+
+Read [round198](milestones/198-symmetry-cliques/README.md), [the argument](milestones/198-symmetry-cliques/MATHEMATICAL_NOTE.md), [verification status](milestones/198-symmetry-cliques/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex). Research remains active.
+
+## Earlier checkpoints
+
 # Current result after round 197
 
 Symmetry organizes the paired-path search into 20 free involution types in Q8. A complete census of 6,512 Q7 affine involutions relative to one fixed seed finds two one-contact placements. Restricted repairs exclude at most four omissions; larger repairs remain unresolved. No new Q9 record or numerical bound is claimed.

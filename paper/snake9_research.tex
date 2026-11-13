@@ -7536,6 +7536,112 @@ The resulting pair must still have compatible crossing ports and
 opposite-face paths. The complete census, models and ten accepted
 Lean modules are recorded in~\cite{symmetry197archive}.
 
+
+\subsection{Clique restrictions and three endpoint classes}
+\label{sec:symmetry198}
+
+Consider the one-contact symmetry from the preceding subsection:
+$h$ exchanges coordinates 1 with 4 and 3 with 6, then translates by 126.
+Let $G$ be the graph consisting of $Q_7$ and the additional edges
+$x\leftrightarrow h(x)$. Its extension to $Q_8$ has minimum displacement
+three, so there are no loops or double-lift restrictions.
+
+\begin{proposition}
+The graph $G$ contains exactly eight copies of $K_4$, with disjoint
+vertex sets, and exactly 32 triangles. An induced path uses at most
+two vertices of each of these cliques.
+\end{proposition}
+\begin{proof}
+The displacement of $h$ is
+\[
+\Ham(x,h(x))=2+2\mathbf1_{x_1=x_4}+2\mathbf1_{x_3=x_6}.
+\]
+A triangle must use exactly one matching edge: ordinary cube edges
+have no triangle, and two matching edges cannot meet. Its matching
+endpoints must have Hamming distance two. This happens exactly when
+$x_1\oplus x_4=x_3\oplus x_6=1$.
+Fix these four coordinates and coordinate 0, and vary coordinates 2 and 5.
+The resulting square receives both diagonals from $h$, giving a $K_4$.
+There are eight choices, and every triangle arises in this way. Each
+clique has four triangles. Any larger clique or another $K_4$ would
+contain a triangle already confined to one of these groups. Finally,
+three selected vertices in one group would form a triangle, which
+cannot lie in an induced path.
+\end{proof}
+
+Coordinate 0 is unaffected by $h$. Thus $G$ is the Cartesian product
+of one edge with a 64-vertex graph. Each clique is paired with its
+translate by 1. At most one coordinate-0 edge in such a paired group
+can belong to an induced path, since two force a four-cycle. This
+restriction is already implied by the full square exclusions.
+
+\begin{proposition}
+The graph $G$ has exactly three vertex orbits under graph automorphisms,
+with representatives 10, 2 and 0 and sizes 32, 64 and 32, respectively.
+Every induced path in $G$ can be carried to one with first endpoint
+among these three representatives.
+\end{proposition}
+\begin{proof}
+Let $k$ count the equal-bit pairs among $(1,4)$ and $(3,6)$.
+The triangle vertices have $k=0$. An edge changes $k$ by at most one,
+and matching edges preserve it. Flipping one coordinate of each
+equal-bit pair reaches a triangle vertex in exactly $k$ steps.
+Hence $k$ is the distance from the triangle vertices and is invariant
+under every graph automorphism.
+
+Translations by 1, 4, 32, 18 and 72 commute with $h$, as does the
+coordinate permutation $(1\ 3)(4\ 6)$. They therefore preserve $G$.
+The paired translations alter the common orientations freely;
+the fixed-coordinate translations alter the remaining bits. Exchanging
+the pairs relates the two possibilities when exactly one pair agrees.
+These operations are transitive on each of the three classes, whose
+sizes and representatives follow directly. Mapping the first endpoint
+of a path by the appropriate automorphism preserves its length and
+inducedness.
+\end{proof}
+This permits three endpoint cases for an unrestricted search. A retained
+seed condition must be transported as well; imposing the three roots
+while leaving a fixed seed unchanged would not give a complete search.
+
+An ordered extension search starts from the earlier 46-vertex direct
+subpath in each orientation. With the first 18 vertices fixed, exhaustive
+native searches visit 447,558 and 31,252 nodes and attain maxima 46 and
+48 quotient vertices, respectively. These are exact maxima only for the
+two specified prefix-extension families. Searches retaining 12 vertices
+stop after about 35 seconds per orientation and yield no upper restriction.
+
+The 48-vertex result uses only ordinary cube steps and gives two
+separated 47-edge paths in $Q_8$. The first starts at 63 with transition
+sequence
+\[
+\mathtt{42104260210430240530421043024056042153124012310}.
+\]
+The second starts at 137, with coordinates 1 and 4 and coordinates 3
+and 6 exchanged in the transitions. The final vertices are 1 and 255.
+Every pairwise path and separation condition passes a direct native check.
+Their cross-distance counts at distances 0 through 8 are
+\[
+(0,0,160,390,576,658,388,104,28).
+\]
+This distribution differs from that of every one of the 36 face forests
+saved in the earlier comparison. Distance preservation therefore proves
+inequivalence to those forests; this does not classify all faces of all
+known nine-dimensional snakes.
+
+The connected quotient model with the eight clique restrictions remains
+unresolved for 50 vertices and at most five omitted seed vertices after
+90.047 seconds. The new 96-vertex paired face requires 97 compatible
+opposite-face vertices to produce 192 edges. Its four-port completion
+query remains unresolved after 120.047 seconds. Neither timeout is an
+exclusion. No numerical bound changes.
+
+The concrete triangle data and Boolean occupancy implication pass Lean. The endpoint transport theorem passes Lean. The complete concrete paired-path checks pass Lean. The concrete triangle noncontainment theorem also passes Lean. The exact three-orbit classification has the written proof above. Finite search outcomes remain native computations.
+Exact inputs, witnesses, restricted searches and proof receipts appear
+in~\cite{symmetry198archive}. The next unrestricted construction search
+can use the three endpoint cases. The simpler family avoiding all matching
+steps may also be searched separately; in that family ordinary cube
+parity balance is valid and $S\cap h(S)=\varnothing$ is required.
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -8739,6 +8845,11 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Symmetry classes and quotient constructio
 Research record 197, 13 November 2026. Complete placement census,
 restricted repairs and checked quotient identities:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/197-symmetry-placement}.
+
+\bibitem{symmetry198archive}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Clique restrictions and endpoint classes in a symmetry quotient}.
+Research record 198, 13 November 2026. Concrete paired paths, exact structural data and verification receipts:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/198-symmetry-cliques}.
 
 \end{thebibliography}
 \end{document}

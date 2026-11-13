@@ -1,0 +1,76 @@
+import EndpointFacts198
+import LayerJoining
+import EndpointStep198_0
+import EndpointStep198_1
+import EndpointStep198_2
+import EndpointStep198_3
+import EndpointStep198_4
+import EndpointStep198_5
+namespace EndpointTransport198
+open LayerJoining EndpointData198
+set_option maxRecDepth 10000
+
+theorem allSteps (k : Fin 6) (v : Fin 128) (d : Fin 8) :
+ generator k (neighbour v d) = neighbour (generator k v) (direction k d) := by
+ rcases k with ⟨k,hk⟩
+ have cases : k=0 ∨ k=1 ∨ k=2 ∨ k=3 ∨ k=4 ∨ k=5 := by omega
+ rcases cases with rfl | rfl | rfl | rfl | rfl | rfl
+ · exact EndpointStep198_0.step v d
+ · exact EndpointStep198_1.step v d
+ · exact EndpointStep198_2.step v d
+ · exact EndpointStep198_3.step v d
+ · exact EndpointStep198_4.step v d
+ · exact EndpointStep198_5.step v d
+
+theorem preserves (k : Fin 6) (v w : Fin 128) (h : Adj v w) :
+ Adj (generator k v) (generator k w) := by
+ obtain ⟨d,hd⟩ := h
+ refine ⟨direction k d,?_⟩
+ rw [←allSteps,hd]
+
+theorem preservesIff (k : Fin 6) (v w : Fin 128) :
+ Adj (generator k v) (generator k w) ↔ Adj v w := by
+ constructor
+ · intro h
+   have hx := preserves k _ _ h
+   simpa only [involution] using hx
+ · exact preserves k v w
+
+def transform {m : Nat} (p : InducedPath (Fin 128) Adj m) (k : Fin 6) :
+ InducedPath (Fin 128) Adj m where
+ vertex i := generator k (p.vertex i)
+ distinct i j he := by
+  apply p.distinct
+  have h := congrArg (generator k) he
+  simpa only [involution] using h
+ induced i j hij := by rw [preservesIff];exact p.induced i j hij
+
+def transformWord {m : Nat} (p : InducedPath (Fin 128) Adj m) :
+ List (Fin 6) → InducedPath (Fin 128) Adj m
+ | [] => p
+ | k::ks => transformWord (transform p k) ks
+
+theorem wordVertex {m : Nat} (p : InducedPath (Fin 128) Adj m)
+ (ks : List (Fin 6)) (i : Fin (m+1)) :
+ (transformWord p ks).vertex i = evaluate ks (p.vertex i) := by
+ induction ks generalizing p with
+ | nil => rfl
+ | cons k ks ih => simpa only [transformWord,evaluate,transform] using ih (transform p k)
+
+theorem threeEndpoints {m : Nat} (p : InducedPath (Fin 128) Adj m) :
+ ∃ q : InducedPath (Fin 128) Adj m,
+ (q.vertex ⟨0,by omega⟩).val=10 ∨
+ (q.vertex ⟨0,by omega⟩).val=2 ∨
+ (q.vertex ⟨0,by omega⟩).val=0 := by
+ let i : Fin (m+1) := ⟨0,by omega⟩
+ refine ⟨transformWord p (word (p.vertex i)),?_⟩
+ have he := wordVertex p (word (p.vertex i)) i
+ have h := normalized (p.vertex i)
+ simpa only [←he] using h
+
+#print axioms allSteps
+#print axioms preservesIff
+#print axioms transform
+#print axioms wordVertex
+#print axioms threeEndpoints
+end EndpointTransport198

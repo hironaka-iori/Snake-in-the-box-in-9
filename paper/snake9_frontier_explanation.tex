@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 197}
+\date{Research state after round 198}
 \begin{document}
 \maketitle
 
@@ -852,47 +852,50 @@ be completed by a compatible opposite-face forest.
 
 
 \paragraph{Using symmetry to organize the next construction.}
-Write a cube involution as a coordinate permutation followed by bit
-flips. Its permutation consists of transposed pairs and fixed coordinates.
-Translation of the origin removes the flips on transposed pairs. Thus,
-up to cube conjugacy, only the number of pairs and the number of flipped
-fixed coordinates matter. The latter number is exactly the minimum
-distance between paired vertices: every fixed flip contributes one,
-while the transposed pairs can contribute zero.
+A cube involution is classified, up to cube conjugacy, by its coordinate
+swaps and flipped fixed coordinates. Translation of the origin removes
+flips on swapped pairs. The number of flipped fixed coordinates equals
+the minimum distance between paired vertices. Choosing one such coordinate
+gives $g(y,b)=(h(y),1-b)$, whose quotient is $Q_7$ with the additional
+edges $y\leftrightarrow h(y)$. Three flipped fixed coordinates for $g$
+eliminate partner edges and double-lift restrictions.
 
-Choosing one flipped fixed coordinate gives
-$g(y,b)=(h(y),1-b)$. Its quotient is the ordinary $Q_7$ graph with the
-additional matching $y\leftrightarrow h(y)$. A path in this quotient
-lifts to two separated $Q_8$ paths when orbits containing partner
-edges are omitted and the endpoints of a double-lift edge are never
-both selected. Three flipped fixed coordinates for $g$ remove
-both obstructions. Lean checks the earlier symmetry's concrete quotient,
-including all 1024 neighbour identities.
-
-Symmetry should act on the two components. A fixed-point-free symmetry
-preserving a single finite path must reverse it, since fixing an endpoint
-fixes every vertex by path distance. Reversal forces either a fixed
-middle vertex or two adjacent exchanged middle vertices. Therefore a
+A free symmetry preserving one finite snake must reverse it: fixing an
+endpoint fixes every vertex by path distance. Reversal forces either
+a fixed middle vertex or adjacent exchanged middle vertices. Thus a
 symmetry moving every vertex by at least two edges cannot preserve
-one whole snake. Lean checks the central contradiction under the
-reversal premise; the preceding path-automorphism argument is written.
+one whole snake. It can exchange two components, with the final joining
+paths breaking the symmetry.
 
-The census covers all 6512 affine involutions $h$ in 20 types, relative
-to the displayed 50-edge $Q_7$ seed. Direct compatible subpaths reach
-45 edges, giving two separated paths with 92 vertices. Two placements
-have only one unwanted contact. Both require at least five omitted
-seed vertices and four additions to reach 50 quotient vertices,
-according to restricted solver exclusions. The seed has a quotient
-chord and is not itself a valid quotient snake. The cleaner case has
-contact $(4,38)$ and partner distance at least three. Searches with
-eight omissions remain unresolved for both 50 and 49 quotient vertices.
+The full census of 6512 affine involutions against one 50-edge $Q_7$
+seed identified two one-contact placements. The chosen case exchanges
+coordinates 1 with 4 and 3 with 6 and translates by 126. Its quotient
+has eight disjoint $K_4$ groups, each allowing at most two path vertices.
+Indeed, a triangle uses one matching edge of Hamming length two;
+this requires the bits in each swapped pair to differ. Varying the
+two flipped fixed coordinates then gives a square with both diagonals.
 
-The next step is to retain that contact as a deliberate path edge,
-remove an ordinary neighbour at each end, and reconnect the remaining
-chains; a second branch omits a contact endpoint. Endpoint compatibility
-with the opposite-face forest must be retained. This provides a more
-specific construction route without changing the numerical bounds.
-The census and solver exclusions have not been certified in Lean.
+There are exactly three endpoint classes, represented by 10, 2 and 0.
+They are distinguished by distances zero, one and two from the triangle
+vertices. Paired translations, fixed-coordinate translations and exchange
+of the two coordinate pairs act transitively within each class.
+An unrestricted path search therefore needs only three fixed endpoints.
+A retained seed must be transformed too if such a condition is imposed.
+
+A connected extension search now produces two separated 47-edge $Q_8$
+paths under this symmetry. Their cross-distance distribution differs
+from all 36 saved comparison forests, providing a distinct candidate.
+The paths use only ordinary $Q_7$ steps, so each remains in one
+seven-dimensional face. Their 96 vertices need 97 compatible vertices
+in the opposite face to produce a 192-edge snake. That completion
+query remains unresolved after 120.047 seconds. The 50-vertex quotient
+search with at most five seed omissions is also unresolved.
+
+The concrete triangle data and Boolean occupancy implication pass Lean. The endpoint transport theorem passes Lean. The complete concrete paired-path checks pass Lean. The concrete triangle noncontainment theorem also passes Lean. The exact three-orbit classification has the written proof above. Finite search outcomes remain native computations.
+The next step uses the three endpoint cases or the simpler subfamily
+avoiding matching steps. Any larger pair still needs a compatible
+opposite-face completion. No longer snake or improved numerical bound
+has been obtained.
 
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -945,5 +948,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--197.}
+\texttt{snake9\_research.tex} and research records 175--198.}
 \end{document}

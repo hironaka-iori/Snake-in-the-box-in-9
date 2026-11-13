@@ -1,0 +1,29 @@
+from pathlib import Path
+import json,subprocess,sys,time
+from native_resources import snapshot
+H=Path(__file__).resolve().parents[1];R=H.parents[1]
+modules=['EndpointData198']+[f'EndpointVertex198_{b}' for b in range(8)]+['EndpointFacts198']+[n for k in range(6) for n in ([f'EndpointChunk198_{k}_{b}' for b in range(8)]+[f'EndpointStep198_{k}'])]+['EndpointTransport198']+[f'PairRows198_{b}' for b in range(4)]+['Cliques198']
+start=time.monotonic();receipt=H/'data'/('proof-resume-'+str(time.time_ns())+'.json');rows=[];waits=[];state='RUNNING'
+for module in modules:
+ if (H/'data'/(module+'-audit.json')).exists():
+  rows.append(dict(module=module,status='PREVIOUSLY_ACCEPTED'));continue
+ while True:
+  snap=snapshot()
+  if snap['errors'] or snap['processes'] or snap['free_bytes']<1080*1024**2:
+   waits.append(dict(module=module,seconds=time.monotonic()-start,snapshot=snap))
+   receipt.write_text(json.dumps(dict(status='WAITING_MEMORY',rows=rows,waits=waits),indent=2)+'\n')
+   if time.monotonic()-start>180:state='DEFERRED';break
+   time.sleep(3);continue
+  prepared=subprocess.run([sys.executable,'-B','-X','utf8',str(H/'scripts/prepare_proof.py'),module],cwd=R,capture_output=True,text=True)
+  if prepared.returncode:print(prepared.stdout+prepared.stderr,flush=True);state='STOPPED';break
+  r=subprocess.run([sys.executable,'-B','-X','utf8',str(H/'scripts/check_core.py'),module],cwd=R,capture_output=True,text=True)
+  output=r.stdout+r.stderr;print(output,flush=True)
+  (H/'logs'/(module+'-resume-'+str(time.time_ns())+'.log')).write_text(output,encoding='utf-8')
+  if r.returncode and 'AssertionError:' in output and 'free_bytes' in output:
+   time.sleep(3);continue
+  rows.append(dict(module=module,exit_code=r.returncode));state='RUNNING' if r.returncode==0 else 'STOPPED';break
+ receipt.write_text(json.dumps(dict(status=state,rows=rows,waits=waits),indent=2)+'\n')
+ if state!='RUNNING':break
+if len(rows)==len(modules) and state=='RUNNING':state='COMPLETE'
+receipt.write_text(json.dumps(dict(status=state,rows=rows,waits=waits,seconds=time.monotonic()-start),indent=2)+'\n')
+print('RESUME',state,flush=True)
