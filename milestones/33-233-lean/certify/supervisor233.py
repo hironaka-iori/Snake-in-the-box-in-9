@@ -33,10 +33,24 @@ def log(**r):
 
 
 def mem_avail_gb():
+    """MemAvailable, capped by the headroom of this process's memory cgroup (v1).  The cgroup limit
+    (about 13.4 GiB here) is below the machine's RAM, so MemAvailable alone overstates what is left."""
+    avail = 0.0
     for line in open('/proc/meminfo'):
         if line.startswith('MemAvailable:'):
-            return int(line.split()[1]) / 2 ** 20
-    return 0.0
+            avail = int(line.split()[1]) / 2 ** 20
+            break
+    try:
+        rel = [l.split(':', 2)[2].strip() for l in open('/proc/self/cgroup') if l.split(':')[1] == 'memory'][0]
+        d = '/sys/fs/cgroup/memory' + rel
+        lim = int(open(d + '/memory.limit_in_bytes').read())
+        use = int(open(d + '/memory.usage_in_bytes').read())
+        st = dict(l.split() for l in open(d + '/memory.stat'))
+        if lim < 1 << 50:
+            avail = min(avail, (lim - use + int(st.get('total_inactive_file', 0))) / 2 ** 30)
+    except (OSError, IndexError, ValueError):
+        pass
+    return avail
 
 
 def procs():
