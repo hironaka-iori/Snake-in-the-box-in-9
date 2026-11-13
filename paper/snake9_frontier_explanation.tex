@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 199}
+\date{Research state after round 200}
 \begin{document}
 \maketitle
 
@@ -852,7 +852,11 @@ be completed by a compatible opposite-face forest.
 
 
 \paragraph{Using symmetry to organize the next construction.}
-The involution quotient from the preceding work has three endpoint
+A different involution gives the quotient used in the current endpoint
+searches. In coordinates 0 through 6, let $h$ exchange 1 with 4 and
+3 with 6, then translate by 126. Add $x\leftrightarrow h(x)$ to the
+ordinary $Q_7$ edges. Its $Q_8$ extension has minimum displacement three
+and no double-lift restrictions. This quotient has three endpoint
 classes, represented by 10, 2 and 0. They are distances zero, one and
 two from its triangle vertices. Cube symmetries act transitively in
 each class, so three unrestricted endpoint cases cover every quotient
@@ -893,8 +897,30 @@ face from these saved families. The calculation does not cover all
 possible parent shapes.
 
 The generic path-image, layer-separation and representative-change
-arguments pass Lean, with five theorem reports. The complete numerical
-censuses remain native computations, without a Lean replay.
+arguments pass Lean. The complete numerical censuses remain native
+computations, without a Lean replay.
+
+The trimming family now has an exact native limit. Two independently
+trimmed copies of the published 51-vertex parent give at most 92
+separated vertices, over all cube isometries. To see why the search is
+complete, let $C$ count shared vertices and $D$ count deleted parent
+vertices. Each shared vertex requires a deletion, so $C\le D$.
+A retained total of at least 92 forces $D\le10$. Only 1363 isometries
+have $C\le10$. For each, all 66 first-parent trims of cost at most ten
+are examined; the best second interval is the largest gap avoiding
+their collisions. The 89958 resulting cases attain 92 and never exceed it.
+The 96-vertex forest found earlier changes the parent shape and is
+therefore outside this trimming family.
+
+For a repaired pair with additions, let $A$ count added vertices.
+A 100-vertex target obeys $D=A+2$. Together with $C\le D$, this leaves
+exactly sixteen starting isometries for repairs with $D\le4$, or fifteen
+cases after identifying inverse maps. The native catalogue currently excludes 2 of the fifteen inverse-pair representatives at four total omissions; 13 representatives remain unresolved. The two minimum-intersection cases are among the exclusions. No complete four-omission exclusion is claimed.
+The overlap-cover inequality, repair balance and interval bounds for
+the two minimum-overlap cases pass Lean. The catalogue outcomes remain
+native solver results. Six-omission searches in those two placements
+remain unresolved after 60 seconds each.
+
 
 The next broader query seeks any 49-vertex induced path in the
 complement of the published 51-vertex parent. This allowed graph has
@@ -951,11 +977,13 @@ profile once its own premises are proved.
 \end{enumerate}
 Round 193 adds the contiguous-replacement criterion and the general closure argument, with the finite census described above. Round 192 adds endpoint corrections and a geometric Lean exclusion of
 coordinated square substitutions followed by extension for one selected
-191-edge witness. The full-bank exclusion remains native. The manuscript-wide review completed in round 190 remains separate
-from the pending certificate and proof rebuilds.
+191-edge witness. The full-bank exclusion remains native. The manuscript-wide source review
+completed in round 200 corrects a historical merger claim, distinguishes
+the two symmetry quotients, and clarifies finite-walk boundary terms.
+It is separate from the pending certificate and proof rebuilds.
 No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--199.}
+\texttt{snake9\_research.tex} and research records 175--200.}
 \end{document}

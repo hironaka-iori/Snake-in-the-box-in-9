@@ -36,63 +36,42 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ be the maximum edge length of an induced path in the
-nine-dimensional binary hypercube. A verified construction gives
-$a(9)\ge191$. The project retains an archived contributor proof of
-$a(9)\le235$, whose complete independent rebuild remains pending.
+Let $a(9)$ denote the maximum edge length of an induced path in the
+nine-dimensional binary hypercube. An explicit checked construction gives
+$a(9)\ge191$. The project retains an archived contributor argument for
+$a(9)\le235$; its complete independent rebuild remains pending.
+
 For a snake of length $m$, singleton-square count $T$ and empty-square
-count $s_0$, the exact identity
-$T+2s_0+35(m+1)=9214$ converts local counting estimates into length bounds.
+count $s_0$, we prove the exact identity
+$T+2s_0+35(m+1)=9214$. Local singleton-count restrictions, endpoint
+occurrence bounds and integer-share identities retain the contribution
+of empty squares. Six and seven consecutive internal counts have sums
+at least fourteen and sixteen. The stronger boundary gives
+$39m+2s_0\le9192$ under the archived count-only argument, so a
+235-edge snake would have at most thirteen empty squares.
 
-We prove local singleton-count restrictions, endpoint occurrence bounds
-and integer-share identities that retain the contribution of empty
-squares. Six and seven consecutive internal counts have sums at least
-fourteen and sixteen. These improve the boundary contributions of the
-two retained finite-graph arguments. The archived count-only estimate
-then yields $39m+2s_0\le9192$, so a 235-edge snake would have at most
-thirteen empty squares.
+For the retained share comparison, the sufficient pending local profile
+is $(15,14,14,14)$ on four specified transition shapes. Together with
+the remaining coverage, reference-exclusion and potential premises,
+it would prove $a(9)\le234$. A separate contributor comparison targets
+233 and retains unresolved certificate and interpretation requirements.
+These conditional comparisons are distinguished from completed local
+theorems and numerical calculations on finite graphs.
 
-For the retained seven-step share argument, the sufficient pending local floors are
-$(15,14,14,14)$ on the direction patterns
-$012034,012301,012340,012345$. With the stated count restrictions,
-reference exclusions and graph-coverage premises, a retained-graph
-potential gives $42254m+45L\le9928453$, where $L\ge0$ is the exact
-division remainder in the share identity. It follows that $m\le234$.
-A cycle and a 24-edge walk prove this comparison optimal for that fixed
-profile and boundary accounting. The boundary argument, physical share
-accounting and conditional numerical implication have passed Lean checks;
-the finite potential has passed an exact integer scan.
-
-All four required numerical share floors have native contradiction
-certificates. Their complete Lean contradictions and geometric
-interpretation remain unfinished, together with inherited local and
-graph premises. The critical floor-fifteen certificate has been reduced
-to 12,424 input clauses and 52,489 deductions. The current verification
-work preserves this input while dividing its interpretation into smaller
-proofs. A separate contributor comparison gives conditional 233. We show
-that the stronger six-count boundary permits a four-unit allowance in
-each of its share requirements; the arithmetic passes Lean, while the
-complete actual-snake integration and local certificates remain pending.
-No new unconditional numerical
-upper bound is claimed, and the optimum and conjectured value 196 remain
-unresolved.
-We also examine how explicit snakes decompose across coordinate faces.
-A checked three-path joining rule reconstructs the 50-edge witness from
-components of lengths 18, 24 and 6. The 98-edge representative needs at
-least four crossings in every coordinate. Among the saved 191-edge
-witnesses, a common 95-edge middle component supplies a concrete
-construction route through compatible lower-dimensional paths.
-The associated 194-edge target remains a construction hypothesis.
-Fixed-component searches and replacement enumerations identify
-restrictions in this family without producing a longer snake. An exact
-edge count shows that fixed-endpoint replacements preserve the number
-of components among the deleted and added vertices; the current
-computational exclusions require at least eight omitted vertices to
-replace the common 95-edge path by a 97-edge path. Allowing endpoints
-to move introduces exact endpoint corrections to the same accounting.
-For a selected 191-edge witness, a geometric Lean proof excludes every
-simultaneous alternate-square substitution followed by one endpoint
-extension; this is a restricted construction obstruction.
+The constructive analysis studies how lower-dimensional paths can be
+joined across coordinate faces. It includes checked joining and
+replacement identities, restrictions on moving endpoints, and a concrete
+pair of separated 47-edge paths in $Q_8$. Symmetry reduces one quotient
+search to three endpoint classes. More generally, two parent paths with
+sets $S,T$ can be placed in opposite faces without cross-edges exactly
+when $S\cap f(T)=\varnothing$ for their relative cube isometry $f$.
+A complete native census finds that two independently trimmed copies
+of the specified 50-edge $Q_7$ parent yield at most 92 separated vertices,
+even when all cube isometries are allowed. This restriction motivates
+changes to the parent shapes. Generic counting deductions are checked
+in Lean; the numerical placement censuses retain their separate scope.
+No longer $Q_9$ snake or improved unconditional numerical bound is
+obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
 
 \clearpage
@@ -857,7 +836,7 @@ four constructions. This does not establish attainability of the lower
 bound $e(q)=8$ in the connected case.
 
 The component restriction, the local bound $e(q)\ge8$, and the implication
-$L\le95$ to domination have now been checked in Lean for nontrivial actual
+$\sum_q r_{12}(q)\le95$ to domination have now been checked in Lean for nontrivial actual
 cube paths. The counting proof enumerates the 36 distinct unordered
 coordinate pairs, identifies missing pairs with physical empty squares,
 and proves equality with the graph edge count. It also verifies that the
@@ -873,8 +852,9 @@ in the same Lean derivation.
 No improved unconditional numerical length bound is claimed.
 
 \paragraph{The small-loss reduction with the earlier boundary.}
-Write $G=24T+\sum_{x\in S}\sigma_{12}(x)$. The following reduction uses
-only the three explicit premises
+Write $G=24T+\sum_{x\in S}\sigma_{12}(x)$ and
+$L=\sum_q r_{12}(q)\in\mathbb Z_{\ge0}$, and let $W$ denote the
+window-weight total. The following reduction uses the three premises
 \[
 W+2520\le5G,\qquad G+840(m+1)+L\le221136,\qquad
 4462(m-8)\le9W+5411.
@@ -2907,8 +2887,12 @@ arguments have passed Lean; their concrete finite certificates retain the
 computational evidence just described~\cite{weightintegrationarchive}.
 \end{proof}
 
-The useful local target for $012034$ is consequently share at least 18,
-requiring exclusion of share at most 17. That local theorem remains open.
+For this earlier boundary-twenty-one comparison, the sufficient local
+target for $012034$ is share at least 18, requiring exclusion of share
+at most 17. That local theorem remains open. The current
+boundary-twenty-four profile in Section~\ref{sec:floor14-loss} requires
+only share at least 15 for this shape, together with its other stated
+premises.
 The saved potential has range 602 at mean 496. On this original graph, a
 saved 28-edge walk has weight 13286 under the sufficient floor profile,
 so every potential at that mean has range at least 602. The range is
@@ -5900,7 +5884,7 @@ The complete chain, including the 22 refutations and their geometric interpretat
 
  All four-vertex windows with counts in $\{1,\ldots,5\}$ were decided. Ignoring which window shape occurs, the minimum mean remains exactly $3$, because $(3,3,3,3)$ is admitted by the shape with transition sequence $(0,1,2,3,0)$. Three consecutive windows of that shape would make vertices seven steps apart adjacent. The later refinements track transitions, use radius four, and retain the empty-square term $s_0$.
 
-\paragraph{A direction-aware automaton.} Tracking transitions does help. Let a state consist of the last six transition directions, up to relabelling of coordinates (there are twelve induced shapes), and the last three counts, with counts at least six represented by one symbol (2592 states). A transition appends a direction and a count, and is admitted unless the seven-direction block fails to be an induced path or some window of two, three or four consecutive centres ending at the new vertex is known to be infeasible in the radius-three model. Windows not yet examined are admitted, so the minimum cycle mean of this automaton is a valid lower bound on the average internal count. A refinement loop alternates a minimum-mean-cycle computation with queries to the local model for the windows on that cycle. It stabilises at mean $10/3$ after five rounds; six directions of memory are necessary and sufficient for this value. A dual pruning step reduces the exclusions used to 145 windows, each with an independently checked refutation certificate, and an integer potential of range $8$ on the 2592 states.
+\paragraph{A direction-aware automaton.} Tracking transitions does help. Let a state consist of the last six transition directions, up to relabelling of coordinates (there are twelve induced shapes), and the last three counts, with counts at least six represented by one symbol (2592 states). A transition appends a direction and a count, and is admitted unless the seven-direction block fails to be an induced path or some window of two, three or four consecutive centres ending at the new vertex is known to be infeasible in the radius-three model. Windows not yet examined are admitted. The minimum cycle mean controls long-run average counts; finite snakes require the boundary terms in the potential summation below. A refinement loop alternates a minimum-mean-cycle computation with queries to the local model for the windows on that cycle. It stabilises at mean $10/3$ after five rounds; six directions of memory are necessary and sufficient for this value. A dual pruning step reduces the exclusions used to 145 windows, each with an independently checked refutation certificate, and an integer potential of range $8$ on the 2592 states.
 
 \begin{proposition}[Conditional upper bound 239]\label{prop:direction239}
 Suppose that no snake in $\Q_9$ contains a window of two, three or four consecutive internal vertices whose transition shape and counts (with counts at least six represented by one symbol) form one of the 145 certified patterns. Then every snake in $\Q_9$ has at most 239 edges.
@@ -7510,6 +7494,9 @@ at zero-based positions $(38,43)$ and $(4,38)$, respectively.
 The added edges close cycles of lengths 6 and 35. The second placement
 extends to a $Q_8$ map of type $(2,3)$, with minimum displacement three
 and no double-lift restrictions. Its quotient is nonbipartite.
+Here one contact counts one unordered pair $\{u,h(u)\}$ of selected
+vertices. For these fixed-point-free maps, one contact means
+$|S\cap h(S)|=2$, consistent with Section~\ref{sec:symmetry199}.
 
 For both one-contact cases, native solver calculations exclude a
 50-vertex induced quotient path omitting at most four seed vertices,
@@ -7684,8 +7671,12 @@ exactly a separated placement. There are $5040\cdot128=645120$ entries
 for each parent pair.
 
 Both parent paths may be normalized independently when all isometries
-are included. Replacing them by $\alpha(S),\beta(T)$ changes the relative
-map to $\alpha^{-1}f\beta$, which still ranges over the full family.
+are included. More precisely,
+\[
+|\alpha(S)\cap f(\beta(T))|
+=|S\cap(\alpha^{-1}f\beta)(T)|.
+\]
+The maps on the right still range over every cube isometry.
 Reversing the ordered pair replaces $f$ by $f^{-1}$ and preserves the
 intersection size, so unordered parent pairs suffice. Independent
 normalization would generally be invalid for an involution-only family;
@@ -7742,6 +7733,73 @@ Changing only the relative symmetry cannot improve the completely
 scanned parent pairs. Further progress requires other parent shapes,
 paths using matching steps in the quotient, or a different face
 arrangement. No new $Q_9$ witness or global bound follows from this round.
+
+
+\subsection{The exact limit of trimming two copies of one parent}
+\label{sec:repair200}
+
+Let the two full parent paths have 51 vertices each. For a fixed relative
+isometry $f$, write $C=|S\cap f(S)|$. If $D$ original vertices are removed
+in total from the two copies to obtain disjoint retained sets, then
+\[
+C\le D.
+\]
+Indeed, each common vertex must be removed from at least one copy, and
+one deletion removes at most one such coincidence. Equivalently, the
+coincidences form a matching between the two lists of parent positions.
+The same inequality holds when new vertices are subsequently added,
+provided the final sets are disjoint. The Boolean counting deduction
+has been checked in Lean.
+
+For trimming alone, the retained total is $102-D$. A result of at least
+92 vertices therefore has $D\le10$ and $C\le10$. This reduces a complete
+search over all 645120 cube isometries to the 1363 maps with at most ten
+coincidences. For each such map, there are 66 ways to remove at most ten
+vertices from the two ends of the first parent. Its retained vertices
+forbid a specified list of positions in the second parent. The longest
+permitted second subpath is exactly the largest gap between those
+forbidden positions. This exhausts every potentially competitive pair
+of contiguous subpaths, including unequal lengths and different trims.
+
+The native census examines 89958 first intervals and obtains the exact
+maximum 92. It is attained by retaining positions $5,\ldots,50$ in
+both copies for the map exchanging coordinates $(1,4)$ and $(3,6)$
+and translating by 126. Thus even arbitrary relative isometries do not
+improve the earlier 92-vertex direct-trimming construction from this
+particular parent. The saved 96-vertex forest uses a changed parent path
+and lies outside this restricted family. The complete numerical census
+has no Lean replay.
+
+The two minimum-intersection placements also admit short direct bounds.
+Their coincidences occur at position pairs $(38,43),(43,38)$ and
+$(4,38),(38,4)$, respectively. For retained intervals $[a,b)$ and $[c,d)$,
+with endpoints between 0 and 51, forbidding both coincidences gives
+$(b-a)+(d-c)\le89$ in the first case and at most 92 in the second.
+These interval implications have been checked in Lean; the identification
+of the concrete coincidence positions is supplied by the saved native data.
+
+For a coupled repair with additions, let $A$ count new vertices in total.
+A 100-vertex target satisfies
+\[
+100=102-D+A,\qquad D=A+2.
+\]
+This identity follows by partitioning each original and final set into
+retained, removed and added vertices, and is checked in Lean. A repair
+with $D\le4$ can start only at one of the sixteen relative isometries
+with $C\le4$. Fourteen are involutions; the other two are inverses and
+give equivalent repair problems after exchanging the parents and
+applying the inverse isometry. There are therefore fifteen cases.
+
+The native catalogue currently excludes 2 of the fifteen inverse-pair representatives at four total omissions; 13 representatives remain unresolved. The two minimum-intersection cases are among the exclusions. No complete four-omission exclusion is claimed.
+
+The connected repair models allow both paths and all endpoints to move,
+with 49 to 51 vertices per path and 100 in total. They impose no symmetry
+relation between the final paths. For each of the two minimum-intersection
+placements, allowing six total omissions remains unresolved after
+60 seconds. These computations concern repairs of the specified parent
+copies. They give no upper bound for arbitrary $Q_9$ snakes and no
+opposite-face completion. Exact inputs and outcomes are retained in
+research record~\cite{research200}.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
@@ -7823,7 +7881,7 @@ P_{41}\sqcup 6C_{26}
 after about 0.93 seconds, preserving all 197 selected vertices in number while replacing five vertices of the preceding candidate. Its path has 40 edges. The next round was unresolved after 20 seconds. Thus one component merger has been achieved in this experiment, while six cyclic components remain. The full solver implementation is not Lean-verified; its saved feasible sets and the returned paths have independent adjacency checks. Continuing from this configuration must retain the previously accumulated cycle exclusions.
 
 \subsection{Frozen components and larger cycle configurations}
-Further mergers retained five or four of the 26-cycles and replaced the remaining selected vertices by one path of 66 or 92 edges. Both accumulated cycle exclusions were preserved, and both path endpoints were free. Retaining the entire preceding 40-edge path gave infeasibility in the restricted model. Releasing that path, or allowing either of two pairs of cycles to change, remained unresolved after 60 seconds. The fixed-path diagnostic found no first extension from endpoint 120, and only the addition of vertex 2 from endpoint 0, with no further available continuation. These outcomes concern the specified intermediate configuration and provide no global bound.
+Further merger searches retained five or four of the 26-cycles and sought a replacement path of 66 or 92 edges. Both accumulated cycle exclusions were preserved, and both path endpoints were free. Retaining the entire preceding 40-edge path gave infeasibility in the restricted model. Releasing that path, or allowing either of two pairs of cycles to change, remained unresolved after 60 seconds. The fixed-path diagnostic found no first extension from endpoint 120, and only the addition of vertex 2 from endpoint 0, with no further available continuation. These outcomes concern the specified intermediate configuration and provide no global bound.
 
 If $F$ is the frozen vertex set and $R$ is the changing path, then $F\cap R=\varnothing$. A cycle exclusion for a set $C$ becomes
 \[
@@ -8098,7 +8156,7 @@ At radius four, a forest exists with interior endpoint budget two. At radius fiv
 
 A Boolean encoding of the radius-five, budget-two model records the exact cycle cuts. Removing irrelevant clauses and replacing auxiliary counters by direct restrictions on triples of endpoint indicators gives a 567-clause core involving 252 Boolean variables. Its certificate consists of 398 derived clauses obtained by reverse unit propagation: assume the negation of the proposed clause, propagate the cited clauses, and obtain a contradiction. The resulting Boolean contradiction has been independently machine-checked through ordinary logical proof steps. This certifies the explicit formula; no geometric exclusion is asserted without the remaining interpretation proof.
 
-The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the current interval $191\le a(9)\le235$.
+The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the project interval $191\le a(9)\le235$, whose upper bound retains the archived-proof qualification.
 
 \subsection{An auxiliary conditional singleton estimate}
 \begin{proposition}[Conditional estimate from a singleton surplus]
@@ -8111,7 +8169,7 @@ The checked incidence identity, $E\ge0$, and $W\le v-2$ give
 \]
 Substituting $T\ge2v-92$ yields $148v\le37\,224$. Since $148\cdot252=37\,296$, it follows that $v\le251$ and hence $v-1\le250$. The arithmetic implication has been independently machine-checked; its new aggregate premise remains unproved.
 \end{proof}
-A Hamming ball of radius two in $\Q_9$ contains $1+9+\binom92=46$ vertices. Thus, if every vertex with exactly one singleton square were proved to lie within distance two of an endpoint, at most 92 vertices could be exceptional. Lemma~\ref{lem:one-square} would then suggest the required aggregate inequality: nonexceptional vertices contribute at least two singleton incidences and exceptional vertices at least one. The endpoint statement and its checked aggregation remain open. This conditional estimate is weaker than the upper bound 235 in Theorem~\ref{thm:upper235}. It records the quantitative consequence originally motivating the endpoint-proximity investigation.
+A Hamming ball of radius two in $\Q_9$ contains $1+9+\binom92=46$ vertices. Thus, if every vertex with exactly one singleton square were proved to lie within distance two of an endpoint, at most 92 vertices could be exceptional. Lemma~\ref{lem:one-square} would then suggest the required aggregate inequality: nonexceptional vertices contribute at least two singleton incidences and exceptional vertices at least one. The endpoint statement and its checked aggregation remain open. This conditional estimate is weaker than the archived upper bound 235 in Theorem~\ref{thm:upper235}. It records the quantitative consequence originally motivating the endpoint-proximity investigation.
 
 \subsection{Fixed-seed two-layer tests}
 The length-98 seed in Appendix~\ref{app:witness} is taken from \cite{records} and independently checked against all pairwise conditions. Two tests were performed. First, truncate either endpoint of an isometric copy to length 97, choose both joining endpoints, and enumerate all $8!$ coordinate permutations. Translation is forced by identifying the chosen endpoints. The $2\cdot2\cdot2\cdot8!=322\,560$ placements, counted with possible duplication, have minimum overlap 15. Theorem~\ref{thm:join} requires overlap one. Second, a constraint solver searched for an arbitrary length-97 partner avoiding every seed vertex except the chosen endpoint. Both endpoint instances were infeasible. These restricted computational exclusions have not been independently certified; other length-98 seeds and multiple-crossing constructions remain possible.
@@ -8270,7 +8328,7 @@ A five-vertex induced window has, up to translation and permutation of coordinat
 
 For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. For the repeated-coordinate case, the explicit Boolean contradiction has now been checked in Lean, using a sequence of smaller proofs after the single-file translation exceeded available memory. At that stage the distinct-coordinate certificate and the complete geometric assembly were unfinished. Those earlier checks therefore did not establish the premise of Proposition~\ref{prop:conditional244}. The later complete window proof establishes it independently.
 
-The missing-corner identity, the threshold-counter equivalence, and their connection for each normalized center have been checked in Lean. The finite corner lists have 21 distinct entries and agree with the eligible coordinate pairs. Generic endpoint-count and degree clauses, together with all 112 distinct cycle cuts retained by the two Boolean cores, have also been checked. Completing this particular approach would still require assembling the exact input clauses under one assignment and establishing the reduction from arbitrary five-vertex windows. This earlier route left the geometric assembly incomplete. The later six-centre proof in Section~\ref{sec:upper-proof} establishes the current interval $191\le a(9)\le235$.
+The missing-corner identity, the threshold-counter equivalence, and their connection for each normalized center have been checked in Lean. The finite corner lists have 21 distinct entries and agree with the eligible coordinate pairs. Generic endpoint-count and degree clauses, together with all 112 distinct cycle cuts retained by the two Boolean cores, have also been checked. Completing this particular approach would still require assembling the exact input clauses under one assignment and establishing the reduction from arbitrary five-vertex windows. This earlier route left the geometric assembly incomplete. The later archived contributor six-centre argument in Section~\ref{sec:upper-proof} supplies the project interval $191\le a(9)\le235$, with the complete independent rebuild still pending.
 
 \section{Explicit transition sequences and blockers}\label{app:witness}
 All coordinates are numbered from zero. Spaces only separate groups; start at the zero vertex unless another initial vertex is stated, and apply each coordinate flip in order.
@@ -8959,6 +9017,14 @@ I. Hironaka, T. Ma and S. Zhan,
 research record 199, 13 November 2026. Complete finite placement data,
 general separation deductions and verification receipts:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/199-parent-diversity}.
+
+
+\bibitem{research200}
+I. Hironaka, T. Ma and S. Zhan,
+\emph{Collision counting, coupled repairs and manuscript review},
+research record 200, 13 November 2026. Complete trimming census,
+repair models, counting proofs and source-review reports:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/200-overlap-repair}.
 
 \end{thebibliography}
 \end{document}

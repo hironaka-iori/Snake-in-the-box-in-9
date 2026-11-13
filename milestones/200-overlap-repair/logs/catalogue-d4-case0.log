@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "E:\Snake-in-a-box\milestones\200-overlap-repair\scripts\coupled_catalogue.py", line 10, in <module>
+    gate=snapshot();assert not gate['errors'] and not gate['processes'] and gate['free_bytes']>=1024**3,gate
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'free_bytes': 1037848576, 'total_bytes': 16573128704, 'processes': [], 'errors': [], 'provider': 'GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo', 'memory_load_percent': 93, 'snapshot_seconds': 0.014999999999417923}

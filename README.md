@@ -1,3 +1,11 @@
+# Current result after round 200
+
+A complete native census limits two independently trimmed copies of the specified Q7 parent to92 separated Q8 vertices, even with every cube isometry allowed. Six counting and interval deductions pass Lean. Coupled four-omission repairs are excluded at two starting placements;13 further representative cases are saved for continuation. No new Q9 witness or global bound is claimed.
+
+The entire manuscript and frontier explanation were reviewed and corrected. The user requested a pause after this round. Read [round200](milestones/200-overlap-repair/README.md), [the argument](milestones/200-overlap-repair/MATHEMATICAL_NOTE.md), [verification status](milestones/200-overlap-repair/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex). Resume research only on new user instruction.
+
+## Earlier checkpoints
+
 # Current result after round 199
 
 Symmetry placement now includes all cube isometries and different parent shapes. Complete finite scans exclude100-vertex paired faces from the saved50-plus50 and51-plus49 parent banks. The general placement reasoning passes Lean; the numerical censuses remain native. The broader complement-path search is unresolved, and no new Q9 record or global bound is claimed.
