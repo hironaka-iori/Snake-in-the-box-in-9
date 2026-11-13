@@ -139,3 +139,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 2026-11-12 21:46 UTC check-in: 2943 / 3,118 built, 6.2 GB free; first post-restart batch: 8 modules, gen_s 521, build_s 3,017 (slowed by three pre-generators); pregen worker 2 stopped again (2 GB available).
 - 2026-11-12 22:48 UTC check-in: 2955 / 3,118 built, 6.1 GB free; last batch 8 modules, gen_s 9, build_s 2,618; no failure; 4 GB available.
 - 2026-11-12 23:50 UTC check-in: 2965 / 3,118 built, 6.0 GB free; batches of 7-8 modules in 2,300-2,860 s, gen_s 8-9 s; no failure.
+- 2026-11-13 00:35 UTC: correction: the certificate total is 3,127 (`cert233.py status`: 2,637 seeds + 490 share), not 3,118 as written in earlier lines; production always worked from the full list. Now 2,971 / 3,127 built (2,537 seed + 434 share).
