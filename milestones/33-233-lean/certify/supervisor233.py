@@ -52,7 +52,9 @@ def procs():
 def state():
     rows = procs()
     lean = sum(1 for _, _, c, _ in rows if c == 'lean')
-    replays = [(pid, a) for pid, _, _, a in rows if 'cert233.py replay' in a]
+    rep = {pid for pid, _, _, a in rows if 'cert233.py replay' in a}
+    # the pool children of a replay with --seed-jobs > 1 carry the same command line: count top-level ones
+    replays = [(pid, a) for pid, pp, _, a in rows if pid in rep and pp not in rep]
     kids = {}
     for pid, pp, _, _ in rows:
         kids.setdefault(pp, []).append(pid)
