@@ -52,6 +52,7 @@ def main():
     ap.add_argument('--worker', type=int, required=True)
     ap.add_argument('--ahead', type=int, default=30)
     ap.add_argument('--min-disk-mb', type=int, default=3000)
+    ap.add_argument('--seed-jobs', default='1', help="passed to cert233.py replay ('auto': use idle cores)")
     a = ap.parse_args()
     scr = os.path.join(BASE, 'pregen%d' % a.worker)
     os.makedirs(scr, exist_ok=True)
@@ -96,7 +97,7 @@ def main():
             continue
         t0 = time.time()
         r = subprocess.run([sys.executable, os.path.join(HERE, 'cert233.py'), 'replay', '--kinds', 'seed,share',
-                            '--min-disk-mb', str(a.min_disk_mb), '--out', out, pick],
+                            '--min-disk-mb', str(a.min_disk_mb), '--seed-jobs', a.seed_jobs, '--out', out, pick],
                            capture_output=True, text=True, env=dict(os.environ, CERT233_SCR=scr))
         p = os.path.join(out, 'LocalWindowUnsat', pick + '.lean')
         if r.returncode != 0 or not os.path.exists(p):

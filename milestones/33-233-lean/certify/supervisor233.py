@@ -2,8 +2,9 @@
 """Keep the cores busy during the 233 certificate production by adding and retiring
 `pregen233.py` workers.
 
-Every --interval seconds it counts the busy processes, `lean` (builds of prod's guarded build) plus
-running `cert233.py replay` generations (prod's own and the workers'); each uses about one core.
+Every --interval seconds it counts the busy cores: `lean` processes (builds of prod's guarded build)
+plus, for each running `cert233.py replay` (prod's own and the workers'), its cadical processes (at
+least one).  Workers it starts pass `--seed-jobs auto` (parallel cadical runs on idle cores).
 
 * busy < --cores, MemAvailable >= --start-mem-gb, free disk >= --min-disk-mb + 500, and no start in
   the last --start-gap seconds: start a worker with the lowest free index (at most --max-workers).
@@ -52,12 +53,21 @@ def state():
     rows = procs()
     lean = sum(1 for _, _, c, _ in rows if c == 'lean')
     replays = [(pid, a) for pid, _, _, a in rows if 'cert233.py replay' in a]
+    kids = {}
+    for pid, pp, _, _ in rows:
+        kids.setdefault(pp, []).append(pid)
+    comm = {pid: c for pid, _, c, _ in rows}
+
+    def cadicals(pid):
+        return sum((comm.get(k) == 'cadical') + cadicals(k) for k in kids.get(pid, []))
+    # a replay with --seed-jobs > 1 runs several cadical processes: count each as a core
+    cores = sum(max(1, cadicals(pid)) for pid, _ in replays)
     workers = {}
     for pid, _, _, a in rows:
         m = re.search(r'pregen233\.py --worker (\d+)', a)
         if m and 'python' in a.split()[0]:
             workers[int(m.group(1))] = pid
-    return lean, replays, workers, rows
+    return lean, replays, workers, rows, cores
 
 
 def kill_tree(pid, rows):
@@ -81,6 +91,7 @@ def main():
     ap.add_argument('--min-disk-mb', type=int, default=2300)
     ap.add_argument('--start-gap', type=int, default=180)
     ap.add_argument('--interval', type=int, default=60)
+    ap.add_argument('--seed-jobs', default='auto', help='for the workers it starts')
     a = ap.parse_args()
     last_start = 0.0
     last_note = None
@@ -92,7 +103,7 @@ def main():
                 pass
         except ChildProcessError:
             pass
-        lean, replays, workers, rows = state()
+        lean, replays, workers, rows, gen_cores = state()
         legacy &= set(workers.values())
         for pid in list(legacy):
             if not any(pp == pid for _, pp, _, _ in rows):
@@ -104,11 +115,11 @@ def main():
             time.sleep(5 if legacy else 1)
             continue
         next_main = time.time() + a.interval
-        busy = lean + len(replays)
+        busy = lean + gen_cores
         mem = mem_avail_gb()
         disk = shutil.disk_usage('/').free // 2 ** 20
         pending = [i for i in workers if os.path.exists(os.path.join(BASE, 'pregen_stop%d' % i))]
-        note = dict(lean=lean, replays=len(replays), workers=sorted(workers), mem_gb=round(mem, 1), disk_mb=disk)
+        note = dict(lean=lean, replays=len(replays), gen_cores=gen_cores, workers=sorted(workers), mem_gb=round(mem, 1), disk_mb=disk)
         if mem < a.kill_mem_gb and len(workers) > a.min_workers:
             i = max(workers)
             mine = [(pid, ar) for pid, ar in replays if 'pregen%d/out' % i in ar]
@@ -135,7 +146,7 @@ def main():
             env = dict(os.environ, CERT233_SCR=BASE, PATH=LEANBIN + ':' + os.environ.get('PATH', ''))
             with open(os.path.join(BASE, 'logs', 'pregen%d.log' % i), 'a') as lf:
                 subprocess.Popen(['nice', '-n', '12', sys.executable, os.path.join(HERE, 'pregen233.py'),
-                                  '--worker', str(i), '--min-disk-mb', str(a.min_disk_mb)],
+                                  '--worker', str(i), '--min-disk-mb', str(a.min_disk_mb), '--seed-jobs', a.seed_jobs],
                                  cwd=HERE, env=env, stdout=lf, stderr=subprocess.STDOUT, start_new_session=True)
             last_start = time.time()
             log(action='start', worker=i, **note)

@@ -345,10 +345,24 @@ def _cnf_clauses(cnf):
     return nv, cl
 
 
-def best_cadical_proof(cnf, out_prefix, cadical, seeds, portfolio=None, rounds=None):
+def _cadical_candidate(args):
+    """One portfolio run of best_cadical_proof: cadical --lrat on `cur`, trimmed into `tmp`."""
+    cadical, seed, extra, cur, raw, tmp, nloc = args
+    r = subprocess.run([cadical, '-q', '--lrat', '--no-binary', f'--seed={seed}', *extra, cur, raw],
+                       capture_output=True, text=True)
+    assert 's UNSATISFIABLE' in r.stdout, (cur, seed, extra, r.stdout[-300:], r.stderr[-300:])
+    nl, nh, used = trim_lrat(raw, tmp, nloc)
+    os.remove(raw)
+    return nl, nh, used
+
+
+def best_cadical_proof(cnf, out_prefix, cadical, seeds, portfolio=None, rounds=None, jobs=None):
     """Run cadical --lrat on `cnf` with every configuration of `portfolio` (default
     PORTFOLIO; each seed of `seeds` for configurations without --unsat), trim, and keep the
     proof with the fewest hints; with `rounds` > 1 repeat on the clauses that proof uses.
+    `jobs` (an int, or a function called once per round returning one) runs that many
+    configurations of a round in parallel; the choice is the same as with one job (the first
+    configuration, in portfolio order, with the fewest hints), so the output is identical.
     Writes `out_prefix.lrat` with the clause ids of `cnf` (lemma ids above its clause
     count).  Returns (lemmas, hints, description of the run, used clause ids)."""
     portfolio = PORTFOLIO if portfolio is None else portfolio
@@ -361,21 +375,36 @@ def best_cadical_proof(cnf, out_prefix, cadical, seeds, portfolio=None, rounds=N
     for rnd in range(rounds):
         nloc = len(idmap)
         rb = None                     # best of this round: (hints, lemmas, tmp, used, desc)
-        for extra in portfolio:
-            for seed in (seeds[:1] if '--unsat' in extra else seeds):
-                raw = f'{out_prefix}.raw.lrat'
-                r = subprocess.run([cadical, '-q', '--lrat', '--no-binary', f'--seed={seed}', *extra, cur, raw],
-                                   capture_output=True, text=True)
-                assert 's UNSATISFIABLE' in r.stdout, (cur, seed, extra, r.stdout[-300:], r.stderr[-300:])
-                tmp = f'{out_prefix}.cand.lrat'
-                nl, nh, used = trim_lrat(raw, tmp, nloc)
-                os.remove(raw)
-                if rb is None or nh < rb[0]:
-                    os.replace(tmp, f'{out_prefix}.round.lrat')
-                    desc = ' '.join(['--seed=%d' % seed, *extra]) + (' (core round %d)' % (rnd + 1) if rnd else '')
-                    rb = (nh, nl, f'{out_prefix}.round.lrat', used, desc)
-                else:
-                    os.remove(tmp)
+        nj = (jobs() if callable(jobs) else jobs) or 1
+        cands = [(extra, seed) for extra in portfolio for seed in (seeds[:1] if '--unsat' in extra else seeds)]
+        if nj > 1 and len(cands) > 1:
+            args = [(cadical, seed, extra, cur, f'{out_prefix}.c{k}.raw.lrat', f'{out_prefix}.c{k}.cand.lrat', nloc)
+                    for k, (extra, seed) in enumerate(cands)]
+            with Pool(min(nj, len(cands))) as pool:
+                # results in portfolio order: a loser's file is deleted as soon as it is compared
+                for (extra, seed), (_, _, _, _, _, tmp, _), (nl, nh, used) in zip(
+                        cands, args, pool.imap(_cadical_candidate, args)):
+                    if rb is None or nh < rb[0]:
+                        os.replace(tmp, f'{out_prefix}.round.lrat')
+                        desc = ' '.join(['--seed=%d' % seed, *extra]) + (' (core round %d)' % (rnd + 1) if rnd else '')
+                        rb = (nh, nl, f'{out_prefix}.round.lrat', used, desc)
+                    else:
+                        os.remove(tmp)
+            cands = []
+        for extra, seed in cands:
+            raw = f'{out_prefix}.raw.lrat'
+            r = subprocess.run([cadical, '-q', '--lrat', '--no-binary', f'--seed={seed}', *extra, cur, raw],
+                               capture_output=True, text=True)
+            assert 's UNSATISFIABLE' in r.stdout, (cur, seed, extra, r.stdout[-300:], r.stderr[-300:])
+            tmp = f'{out_prefix}.cand.lrat'
+            nl, nh, used = trim_lrat(raw, tmp, nloc)
+            os.remove(raw)
+            if rb is None or nh < rb[0]:
+                os.replace(tmp, f'{out_prefix}.round.lrat')
+                desc = ' '.join(['--seed=%d' % seed, *extra]) + (' (core round %d)' % (rnd + 1) if rnd else '')
+                rb = (nh, nl, f'{out_prefix}.round.lrat', used, desc)
+            else:
+                os.remove(tmp)
         nh, nl, path, used, desc = rb
         if best is None or nh < best[0]:
             # rewrite the proof with the ids of `cnf`: clause j -> idmap[j-1], lemma j -> j - nloc + ncl
@@ -414,7 +443,7 @@ def full_core_ids(name, work, cadical, seeds, certs=DCERTS, rounds=None):
     return used, {'full_lemmas': nl, 'full_hints': nh, 'full_seed': seed}   # seed: description of the run
 
 
-def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS, rounds=None):
+def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS, rounds=None, jobs=None):
     """NAME.lrat in `work`: a cadical proof of the core alone, with clause ids remapped to
     the numbering of the committed CNF (core clause i -> core_ids[i-1], lemma j ->
     ncl + j - ncore), so that gen_lean_lrat.py reads it like a drat-trim proof.  Regenerated
@@ -433,7 +462,7 @@ def core_lrat(name, core_ids, work, cadical, seeds, certs=DCERTS, rounds=None):
         for i in core_ids:
             g.write(clauses[i - 1])
     nl, nh, seed, used = best_cadical_proof(core_cnf, os.path.join(work, name + '.core'), cadical, seeds,
-                                            rounds=rounds)
+                                            rounds=rounds, jobs=jobs)
 
     def remap(h):
         return core_ids[h - 1] if h <= ncore else ncl + h - ncore

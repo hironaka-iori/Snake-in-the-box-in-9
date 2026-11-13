@@ -155,6 +155,34 @@ def disk_free_mb():
     return st.f_bavail * st.f_frsize // (1 << 20)
 
 
+def mem_avail_gb():
+    for line in open('/proc/meminfo'):
+        if line.startswith('MemAvailable:'):
+            return int(line.split()[1]) / (1 << 20)
+    return 0.0
+
+
+def seed_jobs(h, a):
+    """Parallel cadical runs per round for a replay of `h` estimated hints (`--seed-jobs`):
+    an int, or 'auto': the idle cores (of --cores, less running lean and cadical processes) plus
+    one, at most 8, limited by disk (15 B of scratch per estimated hint and run, above
+    --min-disk-mb + 500 MB) and memory (70 B per estimated hint and run, above 3 GB available).
+    The proof chosen does not depend on it."""
+    if a.seed_jobs != 'auto':
+        return int(a.seed_jobs)
+
+    def f():
+        comm = subprocess.run(['ps', '-eo', 'comm='], capture_output=True, text=True).stdout.split()
+        idle = max(0, a.cores - comm.count('lean') - comm.count('cadical'))
+        disk = (disk_free_mb() - a.min_disk_mb - 500) / max(1.0, h * 15e-6)
+        mem = (mem_avail_gb() - 3.0) / max(0.05, h * 70e-9)
+        n = max(1, min(8, idle + 1, int(disk), int(mem)))
+        print(json.dumps({'seed_jobs': n, 'idle': idle, 'disk_runs': round(disk, 1), 'mem_runs': round(mem, 1)}),
+              flush=True)
+        return n
+    return f
+
+
 def core_path(core, name):
     return os.path.join(core, name + '.json.gz')
 
@@ -734,7 +762,7 @@ def replay(a):
         big = h >= a.big
         t0 = time.time()
         _, info = GC.core_lrat(name, meta['core_ids'], work, cad, list(range(1, (8 if big else 2) + 1)), certs,
-                               rounds=5 if big else 1)
+                               rounds=5 if big else 1, jobs=seed_jobs(h, a))
         t1 = time.time()
         GC.extract_cnf(name, work, certs)
         cmd = [sys.executable, V3, '--work', work, '--data', jd, '--out', a.out, '--seg', '60000',
@@ -1172,6 +1200,8 @@ def main():
         ps[c].add_argument('--budget-hints', type=float, default=0)
         ps[c].add_argument('names', nargs='*')
     ps['replay'].add_argument('--big', type=float, default=5e6)
+    ps['replay'].add_argument('--seed-jobs', default='1', help="parallel cadical runs per round, or 'auto'")
+    ps['replay'].add_argument('--cores', type=int, default=4, help='for --seed-jobs auto')
     ps['final'].add_argument('--chunk', type=int, default=400)
     ps['final'].add_argument('--share-chunk', type=int, default=50)
     a = ap.parse_args()
