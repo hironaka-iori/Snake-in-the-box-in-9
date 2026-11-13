@@ -17,7 +17,8 @@ kernel when the production machine builds it, so a source made elsewhere needs n
        free disk stays above --min-disk-mb plus the source size: fetch that single branch into a
        throwaway bare repository, write the source atomically into work/final_lean/LocalWindowUnsat
        (where prod233.py and pregen233.py look for it), append record.json to data/replay6SB233.jsonl,
-       delete the remote branch, delete the bare repository.  At most --ahead unbuilt sources are kept.
+       try to delete the remote branch (this session's proxy refuses that; consumed names are kept in
+       $CERT233_SCR/xfer_consumed), delete the bare repository.  At most --ahead unbuilt sources are kept.
        A claim file in $CERT233_SCR/pregen_claims is written for every name that has a branch, so
        pregen233.py workers leave those names alone.
 
@@ -139,6 +140,18 @@ def pull(a):
     ns = C.argparse.Namespace(keys_from='', plan=C.PLAN, core=C.CORE, names=[])
     olean = lambda n: os.path.exists(os.path.join(LEAN, '.lake/build/lib/lean/LocalWindowUnsat', n + '.olean'))  # noqa
     src = lambda n: os.path.join(LEAN, 'LocalWindowUnsat', n + '.lean')  # noqa
+    done_p = os.path.join(scr, 'xfer_consumed')
+    done = set(open(done_p).read().split()) if os.path.exists(done_p) else set()
+
+    def consume(n):
+        # The session's git proxy refuses branch deletion (HTTP 403), so deletion is best effort and the
+        # consumed names are remembered locally; leftover xfer/233/* branches are removed at the end.
+        done.add(n)
+        with open(done_p, 'a') as f:
+            f.write(n + '\n')
+        r = subprocess.run(['git', 'push', '-q', 'origin', '--delete', PFX + n], cwd=ROOT, capture_output=True)
+        log(name=n, consumed=True, branch_deleted=r.returncode == 0)
+
     while True:
         order = [it[2] for h, it, m in C.work_items(ns, {'seed', 'share'})]
         left = [n for n in order if not olean(n)]
@@ -157,12 +170,11 @@ def pull(a):
                     os.close(os.open(os.path.join(claims, n), os.O_CREAT | os.O_EXCL | os.O_WRONLY))
                 except FileExistsError:
                     pass
-        for n in [n for n in order if n in have and (olean(n) or os.path.exists(src(n)))]:
+        for n in [n for n in order if n in have and n not in done and (olean(n) or os.path.exists(src(n)))]:
             # built or already materialized (prod or pregen got there first): the branch is no longer needed
-            retry(lambda: git('push', '-q', 'origin', '--delete', PFX + n))
-            log(name=n, deleted='not needed')
+            consume(n)
         ready = sum(1 for n in left if os.path.exists(src(n)))
-        for n in [n for n in left if n in have and not os.path.exists(src(n))]:
+        for n in [n for n in left if n in have and n not in done and not os.path.exists(src(n))]:
             if ready >= a.ahead:
                 break
             b = bare(tempfile.mkdtemp(dir=scr, prefix='pull'))
@@ -188,7 +200,7 @@ def pull(a):
                             f.write(json.dumps({**rec, 'generated_on': 'remote'}) + '\n')
                     ready += 1
                     log(name=n, materialized=len(raw), gen_s=meta['gen_s'])
-                retry(lambda: git('push', '-q', 'origin', '--delete', PFX + n))
+                consume(n)
             except (RuntimeError, subprocess.CalledProcessError, AssertionError, OSError) as e:
                 log(name=n, error=str(e)[:300])
             finally:
