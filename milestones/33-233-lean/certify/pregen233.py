@@ -9,7 +9,9 @@ building now (read from the command lines of its `cert233.py replay` / `guarded_
 children), and is not claimed by another worker (an O_EXCL file in $CERT233_SCR/pregen_claims).
 It runs `cert233.py replay --out <own tree> NAME` and then moves the source into
 `work/final_lean/LocalWindowUnsat` unless a source or `.olean` appeared there meanwhile (prod
-generated it itself: the copy is dropped).  The generated source is the same as prod's own
+generated it itself: the copy is dropped).  It also helps prod's current replay from the end of its
+list backwards (prod goes forwards and skips names whose source exists).  Touch
+$CERT233_SCR/pregen_stop<i> to make worker i exit before its next item (used by supervisor233.py).  The generated source is the same as prod's own
 (`cert233.py replay` is deterministic given the key), so prod builds it unchanged.  Only the
 --ahead first eligible certificates are taken; it stops below --min-disk-mb.
 
@@ -23,20 +25,26 @@ LEAN = os.path.join(ROOT, 'work', 'final_lean')
 BASE = os.environ.get('CERT233_SCR', '/home/user/cert233work')
 
 
+def _names(line):
+    for w in line.split():
+        if w.startswith('LocalWindowUnsat.'):
+            w = w.split('.', 1)[1]
+        if w[:1] in 'ST' and 'A' in w and '/' not in w and '-' not in w:
+            yield w
+
+
 def prod_current():
-    """Names in the command lines of prod's current replay generation or guarded build."""
+    """(names of prod's current replay generation, in its order; names of its guarded build)."""
     out = subprocess.run(['ps', '-eo', 'args'], capture_output=True, text=True).stdout
-    cur = set()
+    rep, build = [], set()
     for line in out.splitlines():
         if 'pregen' in line:
             continue
-        if 'cert233.py replay' in line or 'guarded_lake_build.py' in line:
-            for w in line.split():
-                if w.startswith('LocalWindowUnsat.'):
-                    w = w.split('.', 1)[1]
-                if w[:1] in 'ST' and 'A' in w and '/' not in w and '-' not in w:
-                    cur.add(w)
-    return cur
+        if 'cert233.py replay' in line:
+            rep += [w for w in _names(line) if w not in rep]
+        elif 'guarded_lake_build.py' in line:
+            build.update(_names(line))
+    return rep, build
 
 
 def main():
@@ -53,6 +61,7 @@ def main():
     claims = os.path.join(BASE, 'pregen_claims')
     os.makedirs(claims, exist_ok=True)
     out = os.path.join(scr, 'out')
+    stop = os.path.join(BASE, 'pregen_stop%d' % a.worker)   # touch to stop after the current item
     ns = C.argparse.Namespace(keys_from='', plan=C.PLAN, core=C.CORE, names=[])
     olean = lambda n: os.path.exists(os.path.join(LEAN, '.lake/build/lib/lean/LocalWindowUnsat', n + '.olean'))  # noqa
     src = lambda n: os.path.join(LEAN, 'LocalWindowUnsat', n + '.lean')  # noqa
@@ -65,8 +74,15 @@ def main():
         if not items:
             log({'done': 'all built'})
             return
-        cur = prod_current()
-        todo = [n for n in items if n not in cur and not os.path.exists(src(n))][:a.ahead]
+        if os.path.exists(stop):
+            os.remove(stop)
+            log({'stop': 'requested'})
+            return
+        rep, build = prod_current()
+        # prod's own replay goes through its list in order and skips names whose source exists:
+        # help it from the end of its list backwards, then take the items after its batch.
+        mine = [n for n in reversed(rep) if not os.path.exists(src(n)) and not olean(n)]
+        todo = mine + [n for n in items if n not in rep and n not in build and not os.path.exists(src(n))][:a.ahead]
         pick = None
         for n in todo:
             try:
@@ -88,7 +104,9 @@ def main():
             if os.path.exists(p):
                 os.remove(p)
             continue   # the claim stays: prod generates this one itself
-        if os.path.exists(src(pick)) or olean(pick) or pick in prod_current():
+        if os.path.exists(src(pick)) or olean(pick):
+            # prod generated it meanwhile (the same deterministic text): drop the copy.  A source prod is
+            # still writing is overwritten by identical text; prod builds only after its replay ends.
             os.remove(p)
             log({'name': pick, 'dropped': 'prod got there first', 's': round(time.time() - t0)})
         else:

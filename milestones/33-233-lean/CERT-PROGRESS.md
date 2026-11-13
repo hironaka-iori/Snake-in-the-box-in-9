@@ -156,3 +156,4 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   replay; started pregen workers 2 and 3; `$CERT233_SCR/waitbatch.sh` relaunches prod once the 13 sources
   exist and then stops workers 2/3. Lesson: change --batch-hints only when the pregenerated buffer
   covers the new batch.
+- 01:16: `supervisor233.py` started (log `$CERT233_SCR/logs/supervisor.log`): adds pregen workers when lean builds + replays use fewer than 4 cores (MemAvailable >= 4 GB), retires them above 5, kills one below 1.2 GB; swaps the old workers for the new pregen233.py (helps prod's current replay from the end of its list, never drops a source, stop file) at their next item boundary.
