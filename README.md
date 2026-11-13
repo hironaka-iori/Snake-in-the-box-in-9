@@ -1,3 +1,11 @@
+# Current result after round 199
+
+Symmetry placement now includes all cube isometries and different parent shapes. Complete finite scans exclude100-vertex paired faces from the saved50-plus50 and51-plus49 parent banks. The general placement reasoning passes Lean; the numerical censuses remain native. The broader complement-path search is unresolved, and no new Q9 record or global bound is claimed.
+
+Read [round199](milestones/199-parent-diversity/README.md), [the argument](milestones/199-parent-diversity/MATHEMATICAL_NOTE.md), [verification status](milestones/199-parent-diversity/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex). Research remains active.
+
+## Earlier checkpoints
+
 # Current result after round 198
 
 The symmetry quotient now has a three-case endpoint reduction and eight clique restrictions. Connected regrowth supplies two separated 47-edge Q8 paths, inequivalent to the 36 saved comparison forests. Their 192-edge completion remains unresolved. No new Q9 record or global numerical bound is claimed.

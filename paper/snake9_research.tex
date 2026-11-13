@@ -7642,6 +7642,107 @@ can use the three endpoint cases. The simpler family avoiding all matching
 steps may also be searched separately; in that family ordinary cube
 parity balance is valid and $S\cap h(S)=\varnothing$ is required.
 
+
+\subsection{Relative placements without an involution restriction}
+\label{sec:symmetry199}
+
+The preceding quotient uses an involution to exchange two components.
+A more general construction permits different parent shapes and any
+relative cube isometry.
+
+\begin{proposition}
+Let $P,Q$ be induced paths in $Q_7$ with vertex sets $S,T$, and let
+$f$ be a cube isometry. The copies $(P,0)$ and $(f(Q),1)$ are separated
+induced paths in $Q_8$ if and only if
+\[
+S\cap f(T)=\varnothing.
+\]
+\end{proposition}
+\begin{proof}
+Within either face, the embedding and the isometry preserve distances,
+so both paths remain induced. Across the two faces,
+\[
+\Ham((u,0),(f(v),1))=1+\Ham(u,f(v)).
+\]
+An edge between the paths therefore exists exactly when their projections
+coincide. Distinctness across the faces is automatic.
+\end{proof}
+The proposition requires neither congruent parents nor $f^2=\mathrm{id}$.
+It does not provide an involution quotient: the map
+$(y,b)\mapsto(f(y),1-b)$ has square $(y,b)\mapsto(f^2(y),b)$.
+
+For a fixed pair of parent sets, all relative placements can be counted
+directly. Every cube isometry is $f(v)=\pi(v)\oplus t$, with $\pi$ a
+coordinate permutation. For each of the $7!=5040$ permutations, compute
+\[
+c_\pi(t)=\#\{(u,v)\in S\times T:u\oplus\pi(v)=t\},
+\qquad t\in Q_7.
+\]
+Because $\pi$ is bijective, each intersection vertex determines one
+pair, giving $c_\pi(t)=|S\cap(\pi(T)\oplus t)|$. Thus a zero entry is
+exactly a separated placement. There are $5040\cdot128=645120$ entries
+for each parent pair.
+
+Both parent paths may be normalized independently when all isometries
+are included. Replacing them by $\alpha(S),\beta(T)$ changes the relative
+map to $\alpha^{-1}f\beta$, which still ranges over the full family.
+Reversing the ordered pair replaces $f$ by $f^{-1}$ and preserves the
+intersection size, so unordered parent pairs suffice. Independent
+normalization would generally be invalid for an involution-only family;
+conjugation preserves that family when the same coordinate change is
+applied on both sides.
+
+Parents are deduplicated using transition words, relabelling coordinates
+in their order of first appearance and allowing reversal. Equality of
+these normalized words is equivalent to a cube isometry of the paths:
+translation fixes the starting vertex, the coordinate correspondence
+then fixes every step, and unused coordinates can be matched arbitrarily.
+Conversely, an isometry between paths preserves their order or reverses it.
+
+Extending the first 24 vertices of the published 51-vertex $Q_7$ parent
+in both orientations exhausts three classes with 50 vertices and fourteen
+classes with 49 vertices. The extension requires each new vertex to avoid
+all earlier vertices and their neighbourhoods except the current endpoint.
+This covers exactly the extensions of those two prefixes. Searches from
+16-vertex prefixes stop at 3,000,001 visited nodes each and add no new class;
+they do not exhaust the larger families.
+
+\begin{center}
+\begin{tabular}{lrrl}
+\toprule
+Parent sizes & Pairs & Placements per pair & Minimum intersection\\
+\midrule
+51 and 51 & 1 & 645120 & 2\\
+50 and 50 & 6 & 645120 & 2 in every case\\
+51 and 49 & 14 & 645120 & 2 in twelve cases; 3 in two\\
+\bottomrule
+\end{tabular}
+\end{center}
+The first row uses the published parent twice. The second uses all
+unordered pairs, including self-pairs, of the three saved classes.
+The third pairs the published parent with each saved 49-vertex class.
+These complete native calculations exclude a separated 100-vertex face
+for the latter two saved families. They do not classify all $Q_7$ paths.
+The numerical censuses have no proof-assistant replay; the general
+path-image, separation and representative-change deductions pass Lean.
+Exact inputs, coverage counts and intersection histograms are retained
+in research record~\cite{research199}.
+
+The three unrestricted quotient cases with first endpoint 10, 2 or 0
+each remain unresolved after a 45-second search. An alternative fixes
+the published 51-vertex parent and allows any 49-vertex induced path
+in its complement, a graph with 77 vertices and 141 edges. A connected
+circuit query with no symmetry or seed-overlap restriction remains
+unresolved after 60 seconds. None of these time limits excludes a path.
+
+A successful complement construction would give 100 vertices in the
+paired $Q_8$ face. A four-crossing $Q_9$ completion still needs 93,
+95 or 97 opposite-face vertices for 192, 194 or 196 edges, respectively.
+Changing only the relative symmetry cannot improve the completely
+scanned parent pairs. Further progress requires other parent shapes,
+paths using matching steps in the quotient, or a different face
+arrangement. No new $Q_9$ witness or global bound follows from this round.
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -8850,6 +8951,14 @@ restricted repairs and checked quotient identities:
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Clique restrictions and endpoint classes in a symmetry quotient}.
 Research record 198, 13 November 2026. Concrete paired paths, exact structural data and verification receipts:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/198-symmetry-cliques}.
+
+
+\bibitem{research199}
+I. Hironaka, T. Ma and S. Zhan,
+\emph{Relative symmetry placements and parent diversity},
+research record 199, 13 November 2026. Complete finite placement data,
+general separation deductions and verification receipts:
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/199-parent-diversity}.
 
 \end{thebibliography}
 \end{document}
