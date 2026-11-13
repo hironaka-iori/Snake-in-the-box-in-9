@@ -1,3 +1,13 @@
+# Current result after round 197
+
+Symmetry organizes the paired-path search into 20 free involution types in Q8. A complete census of 6,512 Q7 affine involutions relative to one fixed seed finds two one-contact placements. Restricted repairs exclude at most four omissions; larger repairs remain unresolved. No new Q9 record or numerical bound is claimed.
+
+Ten Lean modules check the concrete quotient and central symmetry obstruction. The classification has a written proof; the full placement census and solver infeasibility remain native. Research is active.
+
+Read [round 197](milestones/197-symmetry-placement/README.md), [the argument](milestones/197-symmetry-placement/MATHEMATICAL_NOTE.md), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 196
 
 The paired-path construction now has a restricted computational exclusion: the chosen 50-vertex safe quotient path must omit at least 5 seed orbits. The four-omission free-end query was excluded using three 36-vertex cycle cuts, each checked in Lean. Final solver infeasibility remains outside Lean. No new Q9 record or global bound follows.

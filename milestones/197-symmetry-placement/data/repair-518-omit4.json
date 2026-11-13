@@ -1,0 +1,101 @@
+{
+  "status": "INFEASIBLE",
+  "arguments": {
+    "vertices": 50,
+    "omissions": 4,
+    "seconds": 35.0,
+    "case": 518,
+    "free_ends": true,
+    "tag": "repair-518-omit4"
+  },
+  "seconds": 2.1569999999999254,
+  "root": null,
+  "affine_case": {
+    "permutation": [
+      0,
+      4,
+      2,
+      3,
+      1,
+      6,
+      5
+    ],
+    "translation": 100,
+    "fixed_flip": 2,
+    "pairs": [
+      [
+        1,
+        4
+      ],
+      [
+        5,
+        6
+      ]
+    ],
+    "full_path_conflicts": [
+      [
+        0,
+        19
+      ],
+      [
+        12,
+        33
+      ]
+    ],
+    "maximum_subpath_vertices": 38,
+    "maximal_windows": [
+      [
+        13,
+        50
+      ]
+    ]
+  },
+  "quotient_vertices": 128,
+  "bad_edges": 16,
+  "squares": 1000,
+  "iterations": [
+    {
+      "status": "INFEASIBLE",
+      "seconds": 2.1597618,
+      "branches": 73339,
+      "conflicts": 4481,
+      "cuts_before": 0
+    }
+  ],
+  "dynamic_cycle_cuts": [],
+  "witness": null,
+  "source_sha256": "2d5e15c5c056cb73e1ddf1a8eeff7ee7d840dc22e428858f189ab97e1d604b9a",
+  "profile_sha256": "d62c92cc97eae196b21aeefe2111adfb03cc3121b9b62ba7e3e2c6ee6920c20d",
+  "model_sha256": "ce1198f9b54f8e3659c8c7dcbb3c465d1f41ef0b949bf84b70f82d3f13c2ce90",
+  "script_sha256": "36d838cb2d57dc5b641bc5df5a8c634302115a1b531477394d8e2a7eecf7af65",
+  "resource_gate": {
+    "free_bytes": 1763889152,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.016000000000076398
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1745932288,
+      "total_bytes": 16573128704,
+      "processes": [],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.015999999999849024
+    },
+    {
+      "free_bytes": 1756569600,
+      "total_bytes": 16573128704,
+      "processes": [],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.015000000000100044
+    }
+  ],
+  "scope": "Exact-size induced path in the specified Q7-plus-matching graph, with bounded omissions from the displayed51-vertex Q7 path and optional fixed endpoint. The seed has additional quotient contacts and is not itself a safe quotient path. Initial degree relaxation permits disjoint cycles; all recorded cycle cuts are required for the final model. Native solver exclusions are not Lean contradiction certificates."
+}
