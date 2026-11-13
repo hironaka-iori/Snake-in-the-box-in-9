@@ -150,3 +150,9 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
   pregens with `--min-disk-mb 2300` (they exit, not wait, below their floor); before the six largest
   modules (from S012301A34354, 47 M est. hints; predicted RSS up to ~9 GB), restart prod with
   `--rss-cap-gb 11` (they would otherwise be killed at 6.5 GB, deterministically, twice).
+- 00:55: the 1.2e8 batch (13 modules) held 7 without a pregenerated source, so prod generated them
+  serially with the build cores idle (and pregen had dropped two of them, S0123104A435535 and
+  T012034A46335K59, as "prod got there first", leaving their claims). Stopped prod (8129) and its
+  replay; started pregen workers 2 and 3; `$CERT233_SCR/waitbatch.sh` relaunches prod once the 13 sources
+  exist and then stops workers 2/3. Lesson: change --batch-hints only when the pregenerated buffer
+  covers the new batch.
