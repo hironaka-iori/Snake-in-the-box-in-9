@@ -48,6 +48,18 @@ def region(case,index,budget,solver_name,checker=None,baseline=False,generated=F
             ls=[lit(i,a) for a in bits(d)]
             solver.add_clause(ls)
             for u,v in combinations(ls,2):solver.add_clause([-u,-v])
+        if solver_name=="cadical195_rows":
+            # Every bit direction is symmetric before its first occurrence.
+            # In canonical chronological order, all bits previously used form
+            # an initial segment. A used bit first appears as a 1 in a word.
+            for i,d in enumerate(ds):
+                for b in range(6):
+                    f=1+n*(64+len(perms))+6*i+b
+                    earlier=[f-6] if i else []
+                    ones=[lit(i,w) for w in bits(d) if w>>b&1]
+                    solver.add_clause([-f,*earlier,*ones])
+                    for x in earlier+ones:solver.add_clause([-x,f])
+                    if i and b:solver.add_clause([-f,f-7])
         for c in m["constraints"]:
             i,j=c["x"],c["y"]
             cols={b:[] for b in bits(ds[j])}
@@ -80,7 +92,8 @@ def region(case,index,budget,solver_name,checker=None,baseline=False,generated=F
                 for a in fixed:solver.add_clause(prefix+[-lit(i,a),flag])
                 previous=flag
     from pysat.solvers import Solver
-    with Solver(name=solver_name,with_proof=checker is not None) as solver:
+    real_solver="cadical195" if solver_name=="cadical195_rows" else solver_name
+    with Solver(name=real_solver,with_proof=checker is not None) as solver:
         clauses=[]
         if checker is None:emit(solver)
         else:
