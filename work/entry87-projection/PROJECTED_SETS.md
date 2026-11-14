@@ -1,0 +1,19 @@
+# A 192-edge snake must change every bank projection
+
+Take any of the 131 recorded 191-edge snakes and erase any one of its nine coordinates. Write P for the set of eight-bit addresses that remain. A target snake may have any initial address, use either layer at each address, and visit the addresses in any order. None of the 1,179 choices of source and erased coordinate admits a 192-edge snake whose projection is exactly P. The result extends to any cube-isometric image of P by applying the inverse isometry to both layers.
+
+Every address has either one or two occupied copies. A doubled address contains the vertical edge. Each of its copies therefore has room for at most one further edge. Every occupied neighbour of its projected address contributes at least one such edge, so the address has at most two neighbours in P. When two adjacent addresses both double, their four copies form a square. In particular the doubled addresses form an independent subset of the vertices of degree at most two in the graph induced by P.
+
+There must be exactly 193 − |P| doubled addresses. The 1,179 indexed sets give 1,043 distinct labelled sets. For 475 the degree bound alone gives too few possible doubles. In the other 568 cases, binary variables record occupancy of each copy. Require two degree-one endpoints and degree two at every other occupied copy. The endpoints have the same cube parity because the path has even length. Exclude full squares in either layer. A true path satisfies every clause. All 568 initial formulas are contradictory without any generated connectivity clauses. The independently replayed trimmed proofs use **4,588,447 resolution steps**.
+
+[Complete census](punctured-free-order-0-5000.json), [formula construction](punctured_pit.py), [proofs, hashes and formula archive index](projected-shadow-certified.json), [compact proof archive](projected-shadow-cores.zip), [archive and replay code](projection_archive.py).
+
+## Changing one projected address
+
+The first enlargement permits arbitrary crossing choices and chronological order after adding any single absent address or deleting any single present one. Across the 1,043 distinct sets there are 1,043 × 256 = 267,008 indexed changes. First require a projected Hamilton path, so the two colours of the projected addresses differ by at most one in size, there are no isolated sites, and there are at most two leaves. For a matching in the graph on degree-at-most-two addresses, at least one endpoint of each matched edge must stay single. This tightens the bound on available doubles.
+
+For each source set encode every remaining change of the given sign in one formula. Exactly one address changes. Its two layer choices are then free whenever the address is present. The 1,043 addition models represent 50,016 structurally admissible indexed additions. All are UNSAT. Of the deletion groups, 274 have zero structurally admissible changes. The other 769 groups represent 61,029 indexed deletions and all return UNSAT. No generated cycle clause was needed. Both signs have a positive control that recovers a known 191-edge path by undoing a deliberate change to the projection. These are complete solver results. The separate checked proof archive above covers the unchanged sets.
+
+Consequently any 192-edge snake differs in at least **two projected addresses** from each of these bank sets, even up to a translation and coordinate permutation of the eight-dimensional cube. The same conclusion holds regardless of which coordinate of the target is erased, since the nine coordinates of the cube can be permuted.
+
+[Structural tests](punctured_add.py), [simultaneous encoding and controls](projection_ball.py), [addition ledger 1](projection-ball-add-0-522-30000.json), [addition ledger 2](projection-ball-add-522-1043-30000.json), [deletion ledger 1](projection-ball-remove-0-522-30000.json), [deletion ledger 2](projection-ball-remove-522-1043-30000.json).
