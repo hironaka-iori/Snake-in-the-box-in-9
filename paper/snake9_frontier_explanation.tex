@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 215}
+\date{Research state after round 216}
 \begin{document}
 \maketitle
 
@@ -479,13 +479,36 @@ Lean now checks this composition and preservation of the same assignment
 for all four families, without requiring a saturated parity alphabet.
 The new continuation combines this rule with partner capacity.
 It examines 2,650,260 additional nodes and records 29,311,693 word-removal operations by the added rule.
-The case remains open with 5 unfinished regions.
+At the round-215 cutoff, the case remains open with five unfinished regions.
 
 The four maximal distinct-word families of each parity supply a
 possible extension. On the thirteen inherited regions, however,
 their apparent additional deletions disappear after the existing
 family and binary rules reach closure. This comparison gives no
 evidence that adding those families improves the search.
+
+
+\paragraph{Pairs need a common third value.}
+Two successive free-coordinate steps leave the outer words at distance
+zero or two: the two flipped coordinates are equal or different.
+The reconstructed path supplies these successive edges, and Lean checks
+the resulting implication. Distinct decoded outer words force distance two.
+
+More information comes from the middle domain. Outer words 5 and 6
+have only common neighbours 4 and 7. If both are unavailable, the pair
+cannot occur, even when each outer word has other available neighbours.
+For each of three pair relations, retaining only pairs with a compatible
+third value preserves every fitting assignment: its actual third value
+is the witness. The same restriction remains valid in smaller domains.
+This reasoning and the concrete support example are checked in Lean.
+
+The five-region comparison finds 940 unsupported pair occurrences
+without removing an individual word. It omits some native rules and
+establishes no speed advantage. The continuation therefore retains
+the pair information during later branching, deriving it only at each
+job's start and reloading the original relations for every new job.
+Native execution and full search certification remain separate.
+The new continuation examines 2,044,830 nodes and records 3,706,395 repeated pair-removal operations. The model remains open with 9 unfinished regions.
 
 \section{What would resolve the question}
 The current upper bound is 233. A smaller bound requires a stronger
@@ -504,7 +527,7 @@ universal 197-edge exclusion would settle the proposed value exactly.
 
 \smallskip
 {\small Detailed proofs, explicit witnesses and verification records are
-retained in the companion manuscript and milestones through round 215.
+retained in the companion manuscript and milestones through round 216.
 The known small-dimensional values are listed in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

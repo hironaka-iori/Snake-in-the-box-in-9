@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 215, 15 November 2026}
+\date{Research state after round 216, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -7101,7 +7101,7 @@ Native execution and complete traversal retain their separate
 verification status~\cite{research215}.
 
 The separate continuation accepted 500 new jobs and examined 2,650,260 additional nodes. The added word-capacity rule recorded 29,311,693 value-removal operations and 841,841 contradiction returns. These are repeated operations across branches; they do not establish a speed improvement.
-The case remains open with 5 unfinished regions. No new parent class, longer snake or complete coordinate-case exclusion is obtained.
+At the round-215 cutoff, the case remains open with five unfinished regions. No new parent class, longer snake or complete coordinate-case exclusion is obtained.
 
 A further comparison considers all maximal same-parity families whose
 words must be distinct. Each contains every multi-visit interval and
@@ -7114,6 +7114,75 @@ region is already deficient under the existing rules. Thus this
 snapshot supplies no evidence of additional propagation strength.
 The comparison is a separate finite-domain calculation, without a
 new path exclusion or a checked implementation of mixed-family rules.
+
+
+\subsection{Joint support among successive free-word groups}
+\label{sec:joint216}
+Capacity restrictions concern distinct values within families. A different
+restriction uses the simultaneous compatibility of three groups.
+
+\begin{lemma}\label{lem:two-step216}
+If $u,v,w\in Q_r$ satisfy $d(u,v)=d(v,w)=1$, then
+$d(u,w)\in\{0,2\}$. If $u\ne w$, then $d(u,w)=2$.
+\end{lemma}
+\begin{proof}
+Each step flips one coordinate. Flipping the same coordinate twice
+returns to $u$; flipping different coordinates changes exactly two.
+\end{proof}
+
+The reconstructed path supplies one free-coordinate edge between each
+successive pair of groups. The lemma therefore applies to groups
+$g,g+1,g+2$. The zero-distance possibility must be retained unless
+their decoded outer words are known to differ. Inequality of unbounded
+integer labels alone would not justify removing it.
+
+\begin{proposition}[Preserving jointly supported pairs]\label{prop:joint216}
+Let $A,B,C$ be three current word domains, with necessary binary
+relations $R_{AB},R_{BC},R_{AC}$. Retain a pair $(a,b)\in R_{AB}$
+only if some $c\in C$ satisfies both $(b,c)\in R_{BC}$ and
+$(a,c)\in R_{AC}$. Apply the analogous restriction to the other
+two relations. Every fitting complete assignment survives these
+restrictions. They remain valid for every subsequent subdomain of
+the domains used to derive them.
+\end{proposition}
+\begin{proof}
+The actual third value of any fitting assignment witnesses the
+required support for each of its three assigned pairs. Thus each
+restriction preserves that same assignment. Repetition preserves
+the statement by induction. An assignment in smaller domains also
+belongs to the original domains, so it has the same support witness.
+\end{proof}
+
+Independent support can miss this restriction. In one analyzed region,
+the outer words 5 and 6 are allowed and have distance two. Their only
+common six-bit neighbours are 4 and 7, both absent from the middle
+domain. Nevertheless, 5 has available middle neighbours 21 and 37,
+while 6 has 22 and 38. The pair $(5,6)$ is therefore impossible even
+though neither value is individually unsupported. The two common
+neighbours and the stated support distinction have finite Lean checks.
+
+On the five inherited regions, binary propagation and the four-family
+capacity rules reach a fixed point. The additional distance-zero-or-two
+condition removes no individual value. Joint support then excludes
+940 pair occurrences, including 44 occurrences on consecutive pairs.
+Installing one projection pass and repeating those existing rules
+still removes no individual value. These are occurrences across
+regions and triples, without a count of distinct global exclusions.
+The comparison omits partner, lexicographic and higher-order exclusion
+rules, so it does not reproduce the entire native propagation.
+
+The continuation retains the projected pair restrictions during later
+branching. It derives them only at the beginning of a submitted job,
+after ordinary propagation, using at most four sweeps. Descendant
+domains only shrink, and the original relations are reloaded for each
+new job. These conditions permit restrictions derived from the initial
+domains to remain in force throughout that job. Four sweeps bound the
+work; no closure claim is made. The checked pair-preservation argument
+and the actual-path composition retain explicit domain and outer-relation
+premises. Native table interpretation and complete execution remain
+separate verification obligations~\cite{research216}.
+
+The continuation accepts 400 new jobs and examines 2,044,830 additional nodes. The new rule records 3,706,395 pair-removal operations. These repeated operations do not establish a speed improvement. The case remains open with 9 unfinished regions; no new parent, longer snake or complete coordinate-case exclusion is obtained.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
@@ -10666,6 +10735,13 @@ Snake-in-the-box project. \emph{Combining actual-word capacity and partner
 capacity in the retained-coordinate construction}. Research milestone
 215, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/215-word-partner-capacity}.
+
+
+\bibitem{research216}
+Snake-in-the-box project. \emph{Joint word support and two-step geometry
+in the retained-coordinate construction}. Research milestone 216,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/216-joint-word-support}.
 
 \end{thebibliography}
 \end{document}

@@ -1,0 +1,52 @@
+import IntervalGeometry213
+
+set_option Elab.async false
+set_option maxRecDepth 10000
+set_option maxHeartbeats 20000000
+
+namespace ConcreteGeometry213
+
+open IndexedCriterion206 Square209
+
+def source : List Nat := [0,1,3,7,15,13,12,28,30,62,46,38,36,52,116,124,108,109,111,103,119,55,183,167,175,173,172,188,184,56,40,41,43,59,187,155,153,137,136,138,202,194,192,193,209,211,243,227,235,233,249,253,245,229,228,230,238,254,250,122,106,98,96,97,113,49,177,161,160,162,178,50,18,82,80,88,72,73,75,91,95,223,207,205,204,220,212,214,150,134,132,133,149,21,85,69,68,70,78]
+
+def base (v : Nat) : Nat :=
+  (if v.testBit 0 then 1 else 0) + (if v.testBit 6 then 2 else 0)
+
+def groups : List Nat := [0,0,1,2,3,4,4,5,6,7,8,9,10,11,11,12,13,13,14,15,16,16,17,18,19,20,20,21,22,23,24,24,25,26,27,28,29,30,30,31,31,32,33,33,34,35,36,37,38,39,40,41,42,43,43,44,45,46,47,48,49,50,51,51,52,52,53,54,54,55,56,57,58,58,59,60,61,61,62,63,64,65,66,67,67,68,69,70,70,71,72,72,73,74,74,75,75,76,77]
+
+
+def baseRaw (i : Nat) : Square209.Vertex :=
+  ((source[i]!).testBit 0, (source[i]!).testBit 6)
+
+def z (i : Fin 99) : Square209.Vertex := baseRaw i.val
+def group (i : Fin 99) : Nat := groups[i.val]!
+
+def chosen0 : List Nat := [0,4,16,20,24,30,52,54,58,70,72,74,14,34,36,38,40,42,62,64,66,12,32,44,46,48,50,60,68,76]
+def outside0 : List Nat := [2,6,8,10,18,22,26,28,56]
+def chosen1 : List Nat := [11,13,31,33,43,51,61,67,75,5,7,9,21,23,55,57,71,1,3,17,19,25,27,29,53,73]
+def outside1 : List Nat := [15,35,37,39,41,45,47,49,59,63,65,69,77]
+
+theorem extraction :
+    source.length = 99 ∧ groups.length = 99 ∧
+    groups.all (fun g => decide (g < 78)) = true := by
+  decide +kernel
+
+#print axioms extraction
+
+theorem consecutive_groups_data :
+    (List.range 98).all (fun i => decide
+      (groups[i+1]! = groups[i]! ∨ groups[i+1]! = groups[i]!+1)) = true := by
+  decide +kernel
+
+#print axioms consecutive_groups_data
+
+theorem source_group_recurrence :
+    groups[0]! = 0 ∧ (List.range 98).all (fun i => decide
+      (groups[i+1]! = groups[i]! +
+        (if base (source[i+1]!) = base (source[i]!) then 1 else 0))) = true := by
+  decide +kernel
+
+#print axioms source_group_recurrence
+
+end ConcreteGeometry213

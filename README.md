@@ -1,3 +1,11 @@
+# Current result after round 216
+
+Joint word-pair support is checked in Lean and retained at each submitted search root. The new continuation examines 2,044,830 nodes and records 3,706,395 repeated pair removals. Case[0,6] remains open with 9 regions. The recorded interval remains191<=a(9)<=233; no numerical bound or new construction is obtained, and the contributor proof's independent full rebuild is pending.
+
+Read [the mathematical argument](milestones/216-joint-word-support/MATHEMATICAL_NOTE.md), [evidence](milestones/216-joint-word-support/data/completion.json), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex). The goal remains active. New search ledgers store local counters and link prior evidence explicitly.
+
+## Earlier checkpoints
+
 # Current result after round 215
 
 Actual-word subset capacity is now derived from the source-specific induced path and combined with partner capacity. The new native continuation examines 2,650,260 nodes and records 29,311,693 word-removal operations. Case[0,6] remains open with5 regions. No new snake, global bound or complete coordinate-case exclusion is obtained. The recorded interval remains191<=a(9)<=233; the contributor proof's independent full rebuild is pending.

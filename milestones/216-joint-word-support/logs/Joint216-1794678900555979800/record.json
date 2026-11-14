@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "module": "Joint216",
+  "source": "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\lean\\Joint216.lean",
+  "source_sha256": "b4242e42f6db251688747bbcbc4efa1c7b758c68dcf22cab419bb6a428775bcf",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\data\\Joint216-execution.json": "5db249113d2bec3811a105a589ea7e983773b8654b008cdbf29aed0e68529134",
+    "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\lean\\Joint216.lean": "b4242e42f6db251688747bbcbc4efa1c7b758c68dcf22cab419bb6a428775bcf",
+    "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\logs\\Joint216-1794678900555979800\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\lean\\Joint216.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\logs\\Joint216-1794678900555979800\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1307185152,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 92,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1314385920,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 45392,
+          "ParentProcessId": 4532,
+          "PrivatePageCount": 48250880,
+          "WorkingSetSize": 26783744
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.01600000000325963
+    }
+  ],
+  "compiler_pid": 45392,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.0780000000086147,
+  "axioms": [
+    {
+      "theorem": "Joint216.pair_projection_preserves",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Joint216.projection_preserves_subdomain_assignment",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Joint216.empty_joint_support_impossible",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "ac896703c2891b70b98e401b7790c207c678e5bd941c6de4d864116b47e8773f",
+  "object": "E:\\Snake-in-a-box\\milestones\\216-joint-word-support\\build\\Joint216.olean",
+  "olean_sha256": "3751e94391b91cd67cae5bfb760f760f1921eab291a461b5a5671bda82620cfd"
+}
