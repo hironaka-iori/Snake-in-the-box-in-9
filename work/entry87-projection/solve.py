@@ -33,7 +33,7 @@ def defects(path):
             if ((v^path[i]).bit_count()!=1 if i+1==j else (v^path[i]).bit_count()<2)]
 
 
-def model(path, bits, conflict_budget=None):
+def model(path, bits, conflict_budget=None, anchors=None, certificate=None):
     mask=sum(1<<b for b in bits)
     dim=len(bits)
     size=1<<dim
@@ -68,11 +68,16 @@ def model(path, bits, conflict_budget=None):
         return 1+size*r+w
     def decode(chosen):
         return [z|sum(((chosen[r]>>i)&1)<<c for i,c in enumerate(bits)) for z,r in zip(base,run)]
-    with Cadical195() as sat:
+    clauses=[] if certificate is not None else None
+    with Cadical195(with_proof=certificate is not None) as sat:
+        def add(clause):
+            sat.add_clause(clause)
+            if clauses is not None:
+                clauses.append(clause)
         for r,domain in enumerate(domains):
-            sat.add_clause([lit(r,w) for w in domain])
+            add([lit(r,w) for w in domain])
             for x,y in combinations(domain,2):
-                sat.add_clause([-lit(r,x),-lit(r,y)])
+                add([-lit(r,x),-lit(r,y)])
             # Canonical first use: the set of coordinates ever used before
             # a position is an initial segment. Its membership is monotone.
             # A bit first appears as 1 in the word after its first transition.
@@ -80,16 +85,29 @@ def model(path, bits, conflict_budget=None):
                 seen=1+size*n+dim*r+c
                 ones=[lit(r,w) for w in domain if w>>c&1]
                 earlier=[seen-dim] if r else []
-                sat.add_clause([-seen,*earlier,*ones])
+                add([-seen,*earlier,*ones])
                 for alternative in earlier+ones:
-                    sat.add_clause([-alternative,seen])
+                    add([-alternative,seen])
                 if c and r:
-                    sat.add_clause([-seen,seen-dim-1])
+                    add([-seen,seen-dim-1])
         for (a,b),s in relations.items():
             for left,right in [(a,b),(b,a)]:
                 for x in domains[left]:
-                    sat.add_clause([-lit(left,x)]+[lit(right,y) for y in domains[right]
+                    add([-lit(left,x)]+[lit(right,y) for y in domains[right]
                                                    if s>>(x^y).bit_count()&1])
+        if anchors is not None:
+            assert 0<len(anchors)<=size//2 and len(set(anchors))==len(anchors)
+            for a,b in combinations(sorted(anchors),2):
+                assert a%2==b%2 and not (relations.get((a,b),1)&1)
+            # These distinct words exhaust all words of that parity at equality.
+            for w in range(size):
+                if w.bit_count()%2!=anchors[0]%2:
+                    continue
+                literals=[lit(r,w) for r in anchors if w in domains[r]]
+                if len(anchors)==size//2:
+                    add(literals)
+                for l1,l2 in combinations(literals,2):
+                    add([-l1,-l2])
         if conflict_budget is None:
             answer=sat.solve()
         else:
@@ -97,6 +115,15 @@ def model(path, bits, conflict_budget=None):
             answer=sat.solve_limited()
         result=dict(status={True:"SAT",False:"UNSAT",None:"OPEN"}[answer],
                     reason="CaDiCaL",runs=n,stats=sat.accum_stats())
+        if answer is False and certificate is not None:
+            nvar=max(abs(x) for clause in clauses for x in clause)
+            with certificate.with_suffix(".cnf").open("w",encoding="ascii",newline="\n") as f:
+                f.write(f"p cnf {nvar} {len(clauses)}\n")
+                for clause in clauses:
+                    f.write(" ".join(map(str,clause))+" 0\n")
+            with certificate.with_suffix(".drat").open("w",encoding="ascii",newline="\n") as f:
+                for line in sat.get_proof():
+                    f.write(line+"\n")
         if answer:
             positive=set(v for v in sat.get_model() if v>0)
             chosen=[next(w for w in domain if lit(r,w) in positive) for r,domain in enumerate(domains)]
