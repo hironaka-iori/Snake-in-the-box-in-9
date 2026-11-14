@@ -1,3 +1,13 @@
+# Current result after round 204
+
+The whole-snake preservation theorem now allows an arbitrary cube isometry in every coordinate slice. A complete native enumeration of all 254 nontrivial coordinate partitions shows that this entire family cannot change the saved 98-edge Q8 parent's cube-isometry class. Five Lean modules pass with 28 dependency reports for the general criteria, crossing-word restrictions and concrete obstructions; the full finite enumeration remains native.
+
+All 44016 examined single-three-cycle choices on the saved Q9 bank stay in existing classes. No longer Q9 snake or new global bound was obtained. The user requested a pause after this round; publication and compilation precede the goal pause. Resume only on a new user request.
+
+Read [round204](milestones/204-cyclic-symmetry/README.md), [the argument](milestones/204-cyclic-symmetry/MATHEMATICAL_NOTE.md), [verification](milestones/204-cyclic-symmetry/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 203
 
 A controlled involutive block isometry now has an exact criterion preserving every pair relation of a whole snake. It changes the saved 50-edge Q7 parent to a different cube class, with endpoint distance 2 instead of 6. Generic rigidity and complete finite case coverage show that every admissible transformation in this entire class leaves the saved 98-edge Q8 parent in its original cube-isometry class.

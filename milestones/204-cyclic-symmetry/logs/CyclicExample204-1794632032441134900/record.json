@@ -1,0 +1,96 @@
+{
+  "status": "FAILED",
+  "module": "CyclicExample204",
+  "source": "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\lean\\CyclicExample204.lean",
+  "source_sha256": "da9f9c4f9f0fb283c1eb1068cd55844f50d4c558a53b6424b51512c723a5d416",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\data\\CyclicExample204-execution.json": "52b9bc34ba7a570ad40ed8afc3f864da11a23f7cc290f7cd42a097575ef68842",
+    "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\lean\\CyclicExample204.lean": "da9f9c4f9f0fb283c1eb1068cd55844f50d4c558a53b6424b51512c723a5d416",
+    "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\data\\LayerJoining-audit.json": "5bf56f4c5598049f588c8f4a10ec32bda13642a4da2602f61b6e9f1d926dad77",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\data\\LayerJoining-execution.json": "2187afc7ab6021c9e78a5af7a952ce89504811d1464f639f8f71aafac230837b",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\lean\\LayerJoining.lean": "30687e190d96818b64569e90faaff50eba28acf7698e4ffa8c6d89d8fe640a74",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\sources\\minortriad-index.html": "b88238efa289eb5a1969c9815d7ad1a7bf7d25650e9093c09509e4b46bbe0f49",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\data\\lower-dimensional-seeds.json": "d62c92cc97eae196b21aeefe2111adfb03cc3121b9b62ba7e3e2c6ee6920c20d",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\build\\LayerJoining.olean": "afd32c6da92896046c6fcb18bf563c9ca40b68630a89384a53d38d8d59568817",
+    "E:\\Snake-in-a-box\\milestones\\188-dimensional-constructions\\logs\\LayerJoining-1794363464895210300\\compiler.log": "d2a05866845d5448c0955304f133543bf184de8918f6649e8d34bf8e01d9a243"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\logs\\CyclicExample204-1794632032441134900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\lean\\CyclicExample204.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\204-cyclic-symmetry\\logs\\CyclicExample204-1794632032441134900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2067861504,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 87,
+    "snapshot_seconds": 0.01599999999598367
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2062811136,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 43420,
+          "ParentProcessId": 51620,
+          "PrivatePageCount": 48087040,
+          "WorkingSetSize": 24375296
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 87,
+      "snapshot_seconds": 0.01599999999598367
+    }
+  ],
+  "compiler_pid": 43420,
+  "exit_code": 1,
+  "stop_reason": null,
+  "seconds": 1.0469999999986612,
+  "axioms": [
+    {
+      "theorem": "CyclicExample204.completeSnakes",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "CyclicExample204.images",
+      "axioms": [
+        "propext",
+        "sorryAx"
+      ]
+    },
+    {
+      "theorem": "CyclicExample204.orderThree",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "CyclicExample204.repetitionChord",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "log_sha256": "2ead64e0823d9a04c2dde1133f74b74fa0138466d9ba2dcd99766edb79de6472"
+}

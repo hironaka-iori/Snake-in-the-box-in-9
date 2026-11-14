@@ -1,0 +1,28 @@
+import Std
+namespace CyclicExample204
+def original : Array Nat := #[5,1,0,8,10,11,15]
+def once : Array Nat := #[5,1,0,8,12,14,15]
+def twice : Array Nat := #[5,1,0,8,9,13,15]
+def change (x : Nat) : Nat := if x.testBit 3 then
+    8+(if x.testBit 0 then 2 else 0)+(if x.testBit 1 then 4 else 0)+(if x.testBit 2 then 1 else 0)
+  else x
+def Adj (x y : Nat) : Prop :=
+  let d := Nat.xor x y
+  d=1 ∨ d=2 ∨ d=4 ∨ d=8
+instance (x y : Nat) : Decidable (Adj x y) := inferInstanceAs (Decidable (_ ∨ _))
+theorem completeSnakes : ∀ i j : Fin 7,
+    original[i.val]! < 16 ∧ once[i.val]! < 16 ∧
+    (original[i.val]! = original[j.val]! ↔ i=j) ∧
+    (once[i.val]! = once[j.val]! ↔ i=j) ∧
+    (Adj original[i.val]! original[j.val]! ↔ i.val+1=j.val ∨ j.val+1=i.val) ∧
+    (Adj once[i.val]! once[j.val]! ↔ i.val+1=j.val ∨ j.val+1=i.val) := by decide +kernel
+theorem images : ∀ i : Fin 7, change original[i.val]! = once[i.val]! ∧
+    change (change original[i.val]!)=twice[i.val]! := by decide +kernel
+theorem orderThree : ∀ x : Fin 16, change (change (change x.val))=x.val := by decide +kernel
+theorem repetitionChord : 1+1<4 ∧ ¬Adj original[1]! original[4]! ∧
+    ¬Adj once[1]! once[4]! ∧ Adj twice[1]! twice[4]! := by decide +kernel
+#print axioms completeSnakes
+#print axioms images
+#print axioms orderThree
+#print axioms repetitionChord
+end CyclicExample204

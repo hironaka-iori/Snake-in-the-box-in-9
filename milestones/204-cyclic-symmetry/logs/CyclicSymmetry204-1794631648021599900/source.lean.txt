@@ -1,0 +1,97 @@
+import FibreSymmetry204
+namespace CyclicSymmetry204
+open LayerJoining FibreSymmetry204
+inductive Phase where | zero | one | two deriving DecidableEq
+open Phase
+def add : Phase → Phase → Phase
+  | zero,b => b
+  | one,zero => one | one,one => two | one,two => zero
+  | two,zero => two | two,one => zero | two,two => one
+def neg : Phase → Phase | zero => zero | one => two | two => one
+def sub (a b : Phase) := add a (neg b)
+def rot {W : Type} (h : W → W) : Phase → W → W
+  | zero,u => u | one,u => h u | two,u => h (h u)
+
+theorem compose {W : Type} (h : W → W) (cube : ∀ u, h (h (h u))=u)
+    (a b : Phase) (u : W) : rot h a (rot h b u)=rot h (add a b) u := by
+  cases a <;> cases b <;> simp [rot,add,cube]
+
+theorem inverse {W : Type} (h : W → W) (cube : ∀ u, h (h (h u))=u)
+    (a : Phase) (u : W) : rot h (neg a) (rot h a u)=u := by
+  rw [compose h cube]; cases a <;> simp [add,neg,rot]
+
+theorem rotInjective {W : Type} (h : W → W) (cube : ∀ u, h (h (h u))=u)
+    (a : Phase) (u v : W) (eq : rot h a u=rot h a v) : u=v := by
+  have e := congrArg (rot h (neg a)) eq
+  simpa only [inverse h cube] using e
+
+theorem rotIsometry {W : Type} (T : W → W → Prop) (h : W → W)
+    (iso : ∀ u v, T (h u) (h v) ↔ T u v) (a : Phase) (u v : W) :
+    T (rot h a u) (rot h a v) ↔ T u v := by
+  cases a <;> simp [rot,iso]
+
+theorem relativeEquality {W : Type} (h : W → W) (cube : ∀ u, h (h (h u))=u)
+    (a b : Phase) (u v : W) : rot h a u=rot h b v ↔ rot h (sub a b) u=v := by
+  have comm : add (neg b) a=sub a b := by cases a <;> cases b <;> rfl
+  have cancel : add (neg b) b=zero := by cases b <;> rfl
+  constructor
+  · intro eq
+    have e := congrArg (rot h (neg b)) eq
+    simpa only [compose h cube,comm,cancel,rot] using e
+  · intro eq
+    apply rotInjective h cube (neg b)
+    simpa only [compose h cube,comm,cancel,rot] using eq
+
+theorem wholeCriterion {V W : Type} (R : V → V → Prop) (T : W → W → Prop)
+    (h : W → W) (cube : ∀ u, h (h (h u))=u)
+    (iso : ∀ u v, T (h u) (h v) ↔ T u v) (f : V → Phase) (S : V × W → Prop) :
+    (∀ x y, S x → S y → (Adj R T (change (fun z => rot h (f z)) x) (change (fun z => rot h (f z)) y) ↔ Adj R T x y)) ↔
+    (∀ x y, S x → S y → R x.1 y.1 → (rot h (sub (f x.1) (f y.1)) x.2=y.2 ↔ x.2=y.2)) := by
+  rw [wholeSetCriterion R T (fun z => rot h (f z)) (fun z => rotInjective h cube (f z)) (fun z => rotIsometry T h iso (f z))]
+  simp only [relativeEquality h cube]
+
+theorem movedFree {W : Type} (h : W → W) (cube : ∀ u, h (h (h u))=u)
+    (u : W) (moved : h u ≠ u) (a b : Phase) : rot h a u=rot h b u ↔ a=b := by
+  have twice : h (h u) ≠ u := by
+    intro eq
+    have e := congrArg h eq
+    rw [cube] at e
+    exact moved e.symm
+  have apart : h u ≠ h (h u) := by
+    intro eq
+    have e := rotInjective h cube one u (h u) eq
+    exact moved e.symm
+  cases a <;> cases b <;> simp [rot,moved,Ne.symm moved,twice,Ne.symm twice,apart,Ne.symm apart]
+
+theorem selectorConstant {V W : Type} {R : V → V → Prop} {T : W → W → Prop} {m : Nat}
+    (p : InducedPath (V × W) (Adj R T) m) (h : W → W)
+    (cube : ∀ u, h (h (h u))=u) (f : V → Phase)
+    (moved : ∀ i, h (p.vertex i).2 ≠ (p.vertex i).2)
+    (compatible : ∀ i j, R (p.vertex i).1 (p.vertex j).1 →
+      (rot h (f (p.vertex i).1) (p.vertex i).2=rot h (f (p.vertex j).1) (p.vertex j).2 ↔ (p.vertex i).2=(p.vertex j).2)) :
+    ∀ i, f (p.vertex i).1=f (p.vertex ⟨0,by omega⟩).1 := by
+  have walk : ∀ n (hn : n<m+1), f (p.vertex ⟨n,hn⟩).1=f (p.vertex ⟨0,by omega⟩).1 := by
+    intro n; induction n with
+    | zero => intro hn; rfl
+    | succ n ih =>
+      intro hn
+      have hn0 : n<m+1 := by omega
+      have edge := (p.induced ⟨n,hn0⟩ ⟨n+1,hn⟩ (by simp)).mpr (by rfl)
+      have step : f (p.vertex ⟨n,hn0⟩).1=f (p.vertex ⟨n+1,hn⟩).1 := by
+        rcases edge with same | cross
+        · rw [same.1]
+        · have eq := (compatible _ _ cross.1).mpr cross.2
+          rw [←cross.2] at eq
+          exact (movedFree h cube _ (moved _) _ _).mp eq
+      exact step.symm.trans (ih hn0)
+  intro i; exact walk i.val i.isLt
+
+#print axioms compose
+#print axioms inverse
+#print axioms rotInjective
+#print axioms rotIsometry
+#print axioms relativeEquality
+#print axioms wholeCriterion
+#print axioms movedFree
+#print axioms selectorConstant
+end CyclicSymmetry204

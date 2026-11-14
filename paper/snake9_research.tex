@@ -74,11 +74,13 @@ A general two-parent identity gives $L+k\le2a(n)+2+2A$, where
 $k$ counts crossings and $A$ counts added vertices. It excludes a
 deletion-only two-parent representation of the displayed 98-edge snake
 and sharply restricts such constructions of a 196-edge snake.
-Controlled block involutions give an exact whole-snake preservation
-criterion and a checked change of a 50-edge parent beyond cube isometry.
-Generic rigidity and finite case coverage show that this entire family
-cannot change the saved 98-edge parent's cube-isometry class. One- and
-two-pair operations also leave the saved 191-edge witness bank closed.
+Independent cube isometries on coordinate slices give an exact
+whole-snake preservation criterion. Controlled involutions yield a
+checked change of a 50-edge parent beyond cube isometry. A complete
+native comparison of all 254 nontrivial coordinate partitions finds
+that the broader slice-isometry family cannot change the saved
+98-edge parent's cube-isometry class. The examined one-/two-pair and
+single-three-cycle operations leave the saved 191-edge bank closed.
 No longer $Q_9$ snake or improved unconditional numerical bound is
 obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
@@ -8265,9 +8267,154 @@ checks all $51\times51$ pairs in both paths. The accepted total is
 56 modules and 71 dependency reports. Component reformulations,
 classification, equivariance and the full extension interpretation
 retain the written scope above; censuses remain native. Evidence is
-recorded in~\cite{research203}. A higher-order block isometry is a
-remaining direction for changing the saved $Q_8$ parent; success or
-a longer construction is not predicted by these results.
+recorded in~\cite{research203}. The following generalization examines
+all isometry orders and permits different isometries in different
+slices, giving a stronger restriction on this saved parent.
+
+\subsection{Independent isometries on coordinate slices}
+\label{sec:slices204}
+For a fixed coordinate partition, choose a block cube isometry $g_z$
+for every base word and define
+\[
+F(z,u)=(z,g_z(u)).
+\]
+Each slice may use a different isometry. The resulting map is bijective
+on all cube vertices. For neighbouring slices, let $A=S_z$, $B=S_w$
+and $r=g_z^{-1}g_w$.
+
+\begin{theorem}[Whole-snake gluing criterion]
+\label{thm:slices204}
+The map preserves adjacency and nonadjacency of every selected pair
+if and only if, for each neighbouring slice pair,
+\[
+r(c)=c\quad(c\in A\cap B),\qquad
+r(B\setminus A)\cap A=\varnothing.
+\]
+Under these conditions the image of the entire ordered snake is
+an induced snake of the same length.
+\end{theorem}
+\begin{proof}
+Pairs in one slice undergo a common isometry; slices at base distance
+at least two cannot supply an edge. In neighbouring slices, image
+adjacency is $g_z(u)=g_w(v)$, equivalently $u=r(v)$. Requiring this
+exactly when $u=v$ fixes every common word and prevents each word of
+$B\setminus A$ from entering $A$. These conditions exhaust all pairs.
+Bijectivity preserves distinctness.
+\end{proof}
+
+\begin{proposition}[Crossing-word restriction]
+\label{prop:columns204}
+Suppose $C=A\cap B\ne\varnothing$ and choose $c\in C$. Form the
+binary matrix with rows $x\oplus c$ for $x\in C$. The cube isometries
+fixing every member of $C$ are precisely
+\[
+r(x)=c\oplus\pi(x\oplus c),
+\]
+where $\pi$ permutes coordinates within classes of identical columns.
+If all columns differ, the relative map must be identity.
+\end{proposition}
+\begin{proof}
+Every cube isometry is a translation followed by a coordinate
+permutation. Fixing $c$ determines the translation. Fixing the
+remaining words is equivalent to $\pi(x\oplus c)=x\oplus c$ on
+every row, which holds exactly for permutations of identical columns.
+\end{proof}
+
+With $k$ block coordinates, distinct columns require at least
+$1+\lceil\log_2 k\rceil$ crossing words, since the anchor row is
+zero. Repeated columns can still force identity after the
+no-new-contact condition is imposed. The relative choices form a
+product of symmetric groups before that final restriction; the
+surviving choices need not form a group.
+
+\paragraph{Complete finite comparison for the saved $Q_8$ parent.}
+The native enumeration covers all nontrivial coordinate partitions.
+By base dimension $1,\ldots,7$, their counts are
+\[
+(8,28,56,70,56,28,8),\qquad\text{total }254.
+\]
+For every partition, independently choosing arbitrary block cube
+isometries in the occupied slices yields only the original
+cube-isometry class when the whole-snake criterion holds. The two
+trivial partitions give a global cube isometry or identity.
+For the eight single-coordinate cuts, the crossing counts are
+$(14,21,5,13,26,4,7,8)$ and the pointwise stabilizer sizes are
+$(2,1,4,2,1,4,2,1)$. Only identity survives in each cut.
+
+To establish coverage, normalize one occupied slice map to identity
+by a common global block isometry. Actual snake crossings connect
+all occupied slices, so an unassigned slice always has an assigned
+crossing neighbour. Proposition~\ref{prop:columns204} enumerates
+every relative map through that neighbour. Compose it with the
+assigned map and impose Theorem~\ref{thm:slices204} against all
+assigned adjacent slices, including pairs with empty intersection.
+Recursion then covers every completion. All completed paths are
+checked on every vertex pair.
+
+Maps agreeing pointwise on a slice's selected words may be identified.
+If $g'_z$ replaces $g_z$ with the same selected images and a future
+desired map is $h$, the relative map $(g'_z)^{-1}h$ still belongs
+to the complete permitted list and reconstructs $h$. Thus this
+identification preserves image completeness. Comparing normalized
+transition words in both orientations gives the complete cube-class
+comparison for induced paths.
+
+The family is equivariant under cube isometries, which transport the
+partition and slice maps. The same finite conclusion therefore
+holds under arbitrary iterations with changing partitions. This
+restriction concerns the specified saved 98-edge parent. It uses
+written coverage arguments and native enumeration; the complete
+254-partition calculation has not been replayed in Lean. It does
+not classify all 98-edge snakes or all changes to the selected
+paths within a slice.
+
+\paragraph{Cyclic rotations and nonedge constraints.}
+For $h^3=\mathrm{id}$, put $g_z=h^{f(z)}$, with
+$f(z)\in\mathbb Z/3\mathbb Z$. Compatibility across neighbours is
+\[
+h^{f(z)-f(w)}(u)=v\quad\Longleftrightarrow\quad u=v.
+\]
+A shared moved word forces equal phases. Distinct words in a common
+moved orbit forbid one nonzero phase difference; several restrictions
+can forbid both. If every selected block word is moved, following
+the snake forces a single phase throughout. The generic identities,
+criterion and rigidity are checked in Lean.
+
+The saved $Q_8$ parent is rigid in all 224 single-three-cycle and
+8960 two-three-cycle cases, exhausting its order-three block maps.
+One single-cycle case illustrates the role of nonedges. For the
+rotation of coordinates $(0,3,4)$, the preliminary equality graph
+has an isolated component at base word 70. Rotating that component
+once sends endpoint 78 to 86, adjacent to the earlier vertex 82 at
+index 73. Rotating it twice sends the endpoint to 71, adjacent to
+vertex 7 at index 3. Both chords are checked in Lean. Keeping the
+consecutive edges alone would miss these obstructions.
+
+On the 131 saved $Q_9$ snakes, all 44016 single-three-cycle choices
+and their compatible phase assignments were enumerated. The 194
+nonzero assignments produce 34 existing bank classes and no class
+outside the bank. Equivariance gives closure under mixed iterations
+with the previously closed one-/two-pair families. Multiple-three-cycle
+and arbitrary-slice $Q_9$ comparisons remain unexamined.
+
+\paragraph{A valid map need not remain admissible on repetition.}
+Rotate coordinates $0\to1\to2\to0$ in the bit-3-one face of $Q_4$.
+The complete path $(5,1,0,8,10,11,15)$ maps to
+$(5,1,0,8,12,14,15)$, also an induced path. A second application gives
+$(5,1,0,8,9,13,15)$, with a chord between positions 1 and 4.
+Lean checks both valid paths, both images, the order-three identity,
+and this chord. Thus admissible choices for one fixed snake need
+not be closed under composition. Any sequence admissible at every
+step for one fixed cyclic action still reduces to a cumulative
+assignment admissible on the original path.
+
+Five modules give 28 accepted Lean dependency reports, covering
+general gluing, cyclic identities, column rigidity, selected-image
+transfer and the concrete examples. Native enumeration and its full
+coverage retain the stated separate scope~\cite{research204}.
+The next certification task is a checked completeness certificate
+for the finite comparison. Further construction requires different
+parents or changes outside the covered slice-isometry family.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
@@ -9509,6 +9656,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Whole-snake block symmetry,
 rigidity of a saved eight-dimensional parent, and a different
 seven-dimensional parent}. Research record 203, 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/203-block-symmetry}.
+
+\bibitem{research204}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Whole-snake gluing of
+coordinate-slice isometries and a complete finite parent comparison}.
+Research record 204, 14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/204-cyclic-symmetry}.
 
 \end{thebibliography}
 \end{document}

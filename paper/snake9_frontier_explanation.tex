@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 203}
+\date{Research state after round 204}
 \begin{document}
 \maketitle
 
@@ -1082,10 +1082,58 @@ For the saved $Q_9$ bank, all 198072 two-pair cases produce only
 existing bank classes. Combined with the preceding one-pair result,
 this family remains closed under arbitrary iterations. Three- and
 four-pair cases in $Q_9$ remain unexamined. No stronger global bound
-or longer snake follows. For the saved $Q_8$ parent, the next
-fundamental option is a block isometry of higher order, together
-with a new exact compatibility criterion. Enlarging an involutive
-block alone has now been exhausted for that parent.
+or longer snake follows. The next result examines every order of
+block isometry on the saved $Q_8$ parent.
+
+\paragraph{Independent isometries in every coordinate slice.}
+Assign an arbitrary cube isometry $g_z$ to each slice and set
+$F(z,u)=(z,g_z(u))$. For neighbouring slices with selected block
+sets $A,B$, put $r=g_z^{-1}g_w$. The whole snake is preserved exactly
+when $r$ fixes every word in $A\cap B$ and
+\[
+r(B\setminus A)\cap A=\varnothing.
+\]
+The first condition retains actual crossings; the second prevents
+new ones. Within a slice the common isometry preserves every pair,
+and non-neighbouring slices cannot create edges. Lean checks this
+criterion and the full induced image-path construction.
+
+Choose a shared word $c$ across an actual crossing. Every relative
+map fixing it is $r(x)=c\oplus\pi(x\oplus c)$. To fix all shared
+words, $\pi$ may permute only coordinates with identical columns
+in the matrix of shared words translated by $c$. This enumerates
+all relative isometries, of every order. Distinct columns force
+identity; otherwise the no-new-crossing condition further restricts
+the choices. The column equivalence and rigidity pass Lean.
+
+A complete native enumeration examines all 254 nontrivial coordinate
+partitions of the saved 98-edge $Q_8$ parent, allowing independent
+cube isometries in every slice. Every admissible image stays in its
+original cube-isometry class. Root normalization removes one global
+isometry; actual crossings connect the slices, and the complete
+relative-map lists enumerate every subsequent choice. Maps agreeing
+on all selected words of a slice can safely be identified. The
+coverage argument received independent source review, but the full
+finite enumeration has not been checked in Lean.
+
+This family is invariant under cube isometries, so arbitrary sequences
+of these moves, including changes of partition, also cannot change
+this saved parent's cube class. This strengthens the earlier
+involution result and exhausts higher-order controlled block rotations
+for that parent. It does not classify other 98-edge parents.
+
+In $Q_9$, all 44016 single-three-cycle choices on the saved bank
+produce only existing classes. The 194 nonzero phase assignments
+represent 34 existing classes. Broader $Q_9$ slice transformations
+remain unexamined. A separate checked $Q_4$ example shows that a
+rotation producing a valid whole snake once can create a chord on
+its second application; admissibility must be evaluated on the
+current selected set.
+
+The next certification task is to check the complete 254-partition
+calculation in Lean. A construction beyond this restriction must
+change the selected paths within slices or use different parents.
+No longer $Q_9$ snake or improved global numerical bound is obtained.
 
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -1140,5 +1188,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--203.}
+\texttt{snake9\_research.tex} and research records 175--204.}
 \end{document}

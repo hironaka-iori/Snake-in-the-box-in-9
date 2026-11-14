@@ -1,0 +1,58 @@
+E:\Snake-in-a-box\milestones\204-cyclic-symmetry\lean\CyclicSymmetry204.lean:40:4: error: type mismatch, term
+  e
+after simplification has type
+  (match neg b,
+      match a, u with
+      | zero, u => u
+      | one, u => h u
+      | two, u => h (h u) with
+    | zero, u => u
+    | one, u => h u
+    | two, u => h (h u)) =
+    match neg b,
+      match b, v with
+      | zero, u => u
+      | one, u => h u
+      | two, u => h (h u) with
+    | zero, u => u
+    | one, u => h u
+    | two, u => h (h u) : Prop
+but is expected to have type
+  (match sub a b, u with
+    | zero, u => u
+    | one, u => h u
+    | two, u => h (h u)) =
+    v : Prop
+E:\Snake-in-a-box\milestones\204-cyclic-symmetry\lean\CyclicSymmetry204.lean:43:4: error: type mismatch, term
+  eq
+after simplification has type
+  (match sub a b, u with
+    | zero, u => u
+    | one, u => h u
+    | two, u => h (h u)) =
+    v : Prop
+but is expected to have type
+  (match neg b,
+      match a, u with
+      | zero, u => u
+      | one, u => h u
+      | two, u => h (h u) with
+    | zero, u => u
+    | one, u => h u
+    | two, u => h (h u)) =
+    match neg b,
+      match b, v with
+      | zero, u => u
+      | one, u => h u
+      | two, u => h (h u) with
+    | zero, u => u
+    | one, u => h u
+    | two, u => h (h u) : Prop
+'CyclicSymmetry204.compose' depends on axioms: [propext]
+'CyclicSymmetry204.inverse' depends on axioms: [propext]
+'CyclicSymmetry204.rotInjective' depends on axioms: [propext]
+'CyclicSymmetry204.rotIsometry' depends on axioms: [propext]
+'CyclicSymmetry204.relativeEquality' depends on axioms: [sorryAx]
+'CyclicSymmetry204.wholeCriterion' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'CyclicSymmetry204.movedFree' depends on axioms: [propext]
+'CyclicSymmetry204.selectorConstant' depends on axioms: [propext, Quot.sound]
