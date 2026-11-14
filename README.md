@@ -1,3 +1,13 @@
+# Current result after round 212
+
+Spare-word capacity now gives a proved partner-support restriction for the whole-coordinate history model. Three new Lean modules pass with eight reports, including the group inequality |J|<=|N(J)|+s. The implemented rule restricts sharing only after the spare allowance is exhausted.
+
+The [0,6] search remains open after120 saved transitions and1,051,511 nodes, with11 pending regions. No new Q9 witness or global bound is obtained. The user requested a pause after this round; resume only on a new instruction.
+
+Read [the argument](milestones/212-spare-support/MATHEMATICAL_NOTE.md), [proofs and search cutoff](milestones/212-spare-support/data/completion.json), [saved-chain audit](milestones/212-spare-support/logs/spare-chain-review.md), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 211
 
 Subset capacity is now proved and used in the open six-coordinate search. Six Lean modules pass with nineteen reports, covering the generic counting deductions and concrete source counts. A further consequence forces at least seven outside intervals to share with antipodal partners in each parity for retained coordinates [0,6]; its unsaturated-family search implementation remains pending.

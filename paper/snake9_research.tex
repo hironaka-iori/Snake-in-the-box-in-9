@@ -6753,8 +6753,8 @@ Here $q=32$. These are aggregate requirements; no particular outside
 interval is forced to share by the counts alone. Lean checks the
 finite-list inequality, its shared-word consequence and the source-derived
 counts separately. The whole-path interpretation has the written argument
-above; its complete Lean assembly remains pending. The corresponding
-unsaturated-family search rules are not implemented in this round.
+above; its complete Lean assembly remains pending. The round-211 counts alone do not identify which outside intervals
+share. Section~\ref{sec:spare212} develops their domain consequences.
 
 \paragraph{Finding the subsets.}
 A matching assigns a different allowed word to each of the 32 variables.
@@ -6783,6 +6783,87 @@ and 3,721,372 nodes. The last run retained its pending regions and exited
 normally after the resource monitor requested a memory stop. The 196
 new state transitions were independently audited. The number of unresolved
 six-coordinate pairs remains 27~\cite{research211}.
+
+
+\subsection{Using the remaining capacity to restrict partner sharing}
+\label{sec:spare212}
+The previous inequality bounds the number of outside intervals whose
+words are absent from the chosen family. It also gives a restriction
+on their current domains, even when the chosen family is unsaturated.
+
+\begin{proposition}[Spare capacity and partner support]\label{prop:spare212}
+Let $C$ and $O$ be disjoint families of variables taking words from an
+alphabet of size $q$. Values are pairwise distinct within each family.
+For $x\in O$, let $A_x\subseteq C$ contain every member of $C$ that
+can share a value with $x$. Write $D_x$ for the current domain and put
+\[
+s=q-|C|,\qquad P_x=\bigcup_{y\in A_x}D_y,\qquad
+F=\{x\in O:D_x\cap P_x=\varnothing\}.
+\]
+Every satisfying assignment requires $|F|\le s$. If $|F|=s$, replacing
+$D_x$ by $D_x\cap P_x$ for each $x\in O\setminus F$ preserves every
+satisfying assignment.
+\end{proposition}
+\begin{proof}
+The chosen family uses $|C|$ different words. At most $s$ words of the
+alphabet remain unused by it. Since outside values are also distinct,
+at most $s$ outside variables can use these remaining words. Every
+member of $F$ must do so: sharing with a listed partner is excluded by
+its domain, and sharing with any other member of $C$ is excluded by
+the partner hypothesis. This proves the bound. If $|F|=s$, these
+variables exhaust the allowance. Every other outside variable must
+share with a member of $C$, necessarily a listed partner. Its actual
+word therefore belongs to $P_x$. The same complete assignment
+survives all stated domain restrictions.
+\end{proof}
+
+The two parity families for retained coordinates $(0,6)$ have
+$(|C|,|O|,s)=(30,9,2)$ and $(26,13,6)$, respectively.
+The restrictions therefore activate after two even outside variables,
+or six odd outside variables, are forced to avoid sharing.
+The forced variables retain their unshared options.
+Before the allowance is exhausted, this argument alone gives no
+support restriction on another individual outside variable.
+
+Lean checks the exception-counting deduction and its composition with
+assigned values, partner completeness and domain containment. The
+exception list and the implication from missing support are derived
+in that composition. The geometric hypotheses, native domain masks
+and complete search traversal retain their separate verification
+obligations~\cite{research212}.
+
+\paragraph{A stronger necessary condition for groups of outside variables.}
+For $J\subseteq O$, let $N(J)$ contain the $y\in C$ for which some
+$x\in J$ has $y\in A_x$ and $D_x\cap D_y\ne\varnothing$. Then
+\begin{equation}\label{eq:partner-capacity212}
+|J|\le |N(J)|+s.
+\end{equation}
+Indeed, each member of $J$ that shares a chosen-family word determines
+a partner in $N(J)$. Distinct outside words give distinct partners.
+The remaining members number at most $s$. This proves the inequality.
+The earlier rejection rule is its special case $J=F$, for which
+$N(J)$ is empty. The general inequality also detects competition for
+too few partners when every individual outside variable has support.
+Its generic finite counting argument is checked separately in Lean;
+it is not integrated into the native search in this round.
+
+\paragraph{Finite search and evidence boundary.}
+The new search starts from the complete unchanged case retaining
+$(0,6)$. It preserves all 78 root domains, the binary relations,
+excluded source-isometric assignments and symmetry normalization.
+The two added support families are consequences of 41,312 inspected
+equal-word exclusions in the original tables. The input and root
+preservation have an independent audit. This is a fresh complete-root
+run; the earlier nonresumable limited search supplies no inherited
+coverage. The current engine applies Proposition~\ref{prop:spare212}.
+At the round-212 cutoff, the model remains open after 120 saved
+steps and 1,051,511 nodes, with 11 unfinished regions.
+The other saved cases are unchanged, and 27 six-coordinate choices
+remain unresolved~\cite{research212}.
+
+No controlled comparison establishes a speed improvement. An open
+model gives no exclusion, and neither the restricted search nor its
+generic counting lemmas determine the optimum in $Q_9$.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained project interval is $191\le a(9)\le235$, with the archived
@@ -10299,6 +10380,11 @@ in CSPs}. Proceedings of AAAI-94, pp.~362--367, 1994.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Subset capacity in the
 six-coordinate history search}. Research record 211, November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/211-subset-capacity}.
+
+\bibitem{research212}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Spare capacity and partner support
+in whole-coordinate history searches}. Research record 212, November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/212-spare-support}.
 
 \end{thebibliography}
 \end{document}

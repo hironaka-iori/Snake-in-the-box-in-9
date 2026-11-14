@@ -1,0 +1,76 @@
+{
+  "round": 212,
+  "status": "PROGRESS",
+  "pause_requested": true,
+  "goal_state": "PAUSE_REQUESTED_AFTER_PUBLICATION",
+  "started_utc": "2026-11-14T13:47:57+00:00",
+  "utc": "2026-11-14T13:58:36.814220+00:00",
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "new_six_coordinate_exclusions": 0,
+  "accepted_lean_modules": 3,
+  "theorem_reports": 8,
+  "proofs": [
+    {
+      "module": "SpareSupport212",
+      "receipt": "data\\SpareSupport212-audit.json",
+      "sha256": "6477a892009008091cc7525162ea3cdd7c4ca9a27d81a2fcfc4f58d2e1bbe380",
+      "reports": 4
+    },
+    {
+      "module": "SupportBridge212",
+      "receipt": "data\\SupportBridge212-audit.json",
+      "sha256": "6e1b89b2bd431b6f744ad991addbc04d529bc7354c6881217fcd18829522f70d",
+      "reports": 3
+    },
+    {
+      "module": "PartnerSubset212",
+      "receipt": "data\\PartnerSubset212-audit.json",
+      "sha256": "3a9de16069e81e9d411b9e97e93a310fa5f86bdf5d081105f8186cbd5eb97be2",
+      "reports": 1
+    }
+  ],
+  "case22": {
+    "status": "OPEN",
+    "jobs": 120,
+    "pending": 11,
+    "nodes": 1051511,
+    "seconds": 76.07700000000004,
+    "state_sha256": "6a2090ba3a2af9561461bf7ff5f6ef133996a25c13dbc32d48f74d29b2aa90a8"
+  },
+  "new_results": {
+    "LIMIT": 16,
+    "EXHAUSTED": 104
+  },
+  "new_operation_totals": {
+    "nodes": 1051511,
+    "seconds": 76.07700000000004,
+    "support_calls": 903253,
+    "support_removals": 63089,
+    "support_failures": 311,
+    "saturated_budgets": 100290
+  },
+  "six_coordinate_unresolved": 27,
+  "terminal_worker_session": 8406,
+  "native_stop": "120-job budget; exit 0; no resource stop or witness",
+  "review_hashes": {
+    "support-engine-review.md": "6e6903b0a0150e34586f7163547fe3db0f76e88d5d3a6ac776b677f4452ffc72",
+    "support-input-review.md": "6e1a1daf58c1282c7f5d6cbdd949d3bcd331dbd720fc01eacca933c64ac807fe",
+    "spare-chain-review.md": "f05f6169ebd46ad091659ab77e35ba66fe60e7e61304bf249a66d73b5b60245f",
+    "final-math-review.md": "9221761f3085f38bbb1b3f17788232155eebcc520ca9ecfc987ebb25632afba2"
+  },
+  "complete_geometric_model_assembly": false,
+  "complete_native_certificate": false,
+  "software_tests_created_or_run": false,
+  "group_rule_implemented": false,
+  "group_rule_saved_regions_violated": 0,
+  "compile_success": true,
+  "document_verification": "data/document-verification.json",
+  "next_step": "After explicit resume, retain the frozen case and proof boundaries. Complete the geometric-to-model assembly or evaluate partner matching deeper in search; the group rule gives no immediate exclusion of the eleven saved regions.",
+  "supplementary_written_argument": {
+    "path": "logs/orientation-note.md",
+    "sha256": "63bf80c8de0e37e3a2d7794829dc3071fd78e47525d0033611a71301ca08885a",
+    "lean_checked": false,
+    "implemented": false
+  }
+}

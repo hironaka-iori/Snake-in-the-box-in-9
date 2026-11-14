@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 211}
+\date{Research state after round 212}
 \begin{document}
 \maketitle
 
@@ -283,9 +283,9 @@ snakes.
 
 For six free coordinates, preserving histories $(1,4)$ also forces the
 original class in the completed native search. The other 27 choices
-remain unresolved. Three have saved unfinished searches:
-$(0,4)$, $(3,4)$ and $(0,5)$; the remaining 24 have only initial limited
-runs. Exhausted individual branches do not exclude an open whole model.
+remain unresolved. Four have saved unfinished searches:
+$(0,4)$, $(3,4)$, $(0,5)$ and $(0,6)$; the remaining 23 have only initial
+limited runs. Exhausted individual branches do not exclude an open whole model.
 
 \paragraph{A capacity deduction for the whole path.}
 With two retained coordinates, the base is a square. Distinct intervals
@@ -341,8 +341,8 @@ The matching implementation and complete traversal retain native status;
 the generic Lean result does not certify a whole-model exclusion.
 The $(0,5)$ case remains open after 196 new continuation steps,
 with 11 unfinished regions and 3,721,372 cumulative nodes. The latest
-resource stop retained its pending regions. The other 26 unresolved
-six-coordinate cases were unchanged in this round.
+resource stop retained its pending regions. The round-212 search below addresses $(0,6)$; the remaining saved
+cases are unchanged.
 
 \paragraph{When the chosen family leaves spare words.}
 The outside singleton intervals themselves require distinct words:
@@ -360,10 +360,36 @@ must share. For $(0,6)$ at least seven of nine even outside intervals,
 and seven of thirteen odd outside intervals, must share with antipodal
 partners. Which intervals share remains undetermined.
 
-Lean checks the counting implications and the literal source counts.
-The complete geometric assembly remains a written proof. These
-unsaturated-family constraints are a next search direction; their
-implementation is still pending.
+\paragraph{When the spare allowance is exhausted.}
+For an outside interval $x$, take the union $P_x$ of its allowed
+partners' current domains. If $D_x\cap P_x=\varnothing$, its value must
+be absent from the chosen family. Distinct outside values consume
+different unused words. Thus there can be at most two such even
+intervals or six such odd intervals for $(0,6)$.
+
+Once this allowance is reached, every other outside interval must
+share; intersecting its domain with $P_x$ preserves every solution.
+The forced unshared intervals keep their options. Lean checks the
+counting argument and the link from partner domains to actual
+exceptions under explicit distinctness and partner hypotheses.
+The complete geometric assembly and native traversal remain separate.
+
+More generally, for a set $J$ of outside intervals let $N(J)$ contain
+the chosen-family intervals that are listed partners of a member of
+$J$ and have an intersecting current domain. With spare allowance $s$,
+\[
+|J|\le |N(J)|+s.
+\]
+Shared members inject into distinct partners; at most $s$ members
+remain unshared. This generic counting consequence is also checked in
+Lean. Its group rule is a possible stronger search step; only the
+zero-support and exhausted-allowance rules are implemented here.
+
+At the round-212 cutoff, the model remains open after 120 saved
+steps and 1,051,511 nodes, with 11 unfinished regions.
+The other saved cases are unchanged, and 27 six-coordinate choices
+remain unresolved.
+
 
 No controlled comparison establishes a speed improvement.
 
@@ -392,7 +418,7 @@ universal 197-edge exclusion would settle the proposed value exactly.
 
 \smallskip
 {\small Detailed proofs, explicit witnesses and verification records are
-retained in the companion manuscript and milestones through round 211.
+retained in the companion manuscript and milestones through round 212.
 The known small-dimensional values are listed in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

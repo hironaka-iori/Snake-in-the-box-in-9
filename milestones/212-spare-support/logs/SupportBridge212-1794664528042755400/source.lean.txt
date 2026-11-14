@@ -1,0 +1,109 @@
+import Spare211
+import SpareSupport212
+
+/-!
+Source prepared for checking; not compiled by its author.
+The lists C and O contain variable identifiers, and values assigns words.
+Partner completeness and domain containment are hypotheses, rather than
+conclusions about a cube, a native model, or a search.
+-/
+
+namespace SupportBridge212
+
+/-- The list of outside indices whose actual values are absent from C
+has at most the spare alphabet capacity. -/
+theorem exception_budget (C O pool : List Nat) (values : Nat → Nat)
+    (hC : (C.map values).Nodup)
+    (hO : (O.map values).Nodup)
+    (hCpool : ∀ c, c ∈ C → values c ∈ pool)
+    (hOpool : ∀ i, i ∈ O → values i ∈ pool) :
+    (O.filter (fun i => !((C.map values).contains (values i)))).length
+      ≤ pool.length - C.length := by
+  have hc : ∀ w, w ∈ C.map values → w ∈ pool := by
+    intro w hw
+    obtain ⟨c, hc, rfl⟩ := List.mem_map.mp hw
+    exact hCpool c hc
+  have ho : ∀ w, w ∈ O.map values → w ∈ pool := by
+    intro w hw
+    obtain ⟨i, hi, rfl⟩ := List.mem_map.mp hw
+    exact hOpool i hi
+  have h := Spare211.spare_capacity
+    (C.map values) (O.map values) pool hC hO hc ho
+  have hcount :
+      C.length +
+        (O.filter (fun i => !((C.map values).contains (values i)))).length
+        ≤ pool.length := by
+    simpa [List.filter_map, Function.comp_def] using h
+  omega
+
+/-- Every possible actual sharer in C is a listed partner, whose domain
+is included in support. Absence of support therefore implies exception
+membership for an outside index. -/
+theorem unsupported_exception
+    (C O partners support : List Nat)
+    (values : Nat → Nat) (domains : Nat → List Nat) (i : Nat)
+    (hi : i ∈ O)
+    (hfit : ∀ c, c ∈ C → values c ∈ domains c)
+    (hpartners : ∀ c, c ∈ C → values c = values i → c ∈ partners)
+    (hsupport : ∀ c, c ∈ partners →
+      ∀ w, w ∈ domains c → w ∈ support)
+    (hmissing : values i ∉ support) :
+    i ∈ O.filter (fun j => !((C.map values).contains (values j))) := by
+  have hnot : values i ∉ C.map values := by
+    intro hw
+    obtain ⟨c, hc, heq⟩ := List.mem_map.mp hw
+    have hp := hpartners c hc heq
+    have hs := hsupport c hp (values c) (hfit c hc)
+    exact hmissing (heq ▸ hs)
+  simpa [hnot] using hi
+
+/-- With every domain-forced exception counted and the spare capacity
+exhausted, support filtering at another outside variable preserves the
+same complete assignment. The actual exception list is derived here. -/
+theorem saturated_support_preserves_assignment
+    (C O pool F : List Nat) (chosen : Nat)
+    (values : Nat → Nat) (domains partners support : Nat → List Nat)
+    (hC : (C.map values).Nodup)
+    (hO : (O.map values).Nodup)
+    (hCpool : ∀ c, c ∈ C → values c ∈ pool)
+    (hOpool : ∀ i, i ∈ O → values i ∈ pool)
+    (hF : F.Nodup)
+    (hFoutside : ∀ i, i ∈ F → i ∈ O)
+    (hforced : ∀ i, i ∈ F →
+      ∀ w, w ∈ domains i → w ∉ support i)
+    (hfit : ∀ i, values i ∈ domains i)
+    (hpartners : ∀ i, i ∈ O → ∀ c, c ∈ C →
+      values c = values i → c ∈ partners i)
+    (hsupport : ∀ i, i ∈ O → ∀ c, c ∈ partners i →
+      ∀ w, w ∈ domains c → w ∈ support i)
+    (hsaturated : F.length = pool.length - C.length)
+    (hchosen : chosen ∈ O)
+    (hnotforced : chosen ∉ F) :
+    ∀ g, values g ∈
+      (if g = chosen then
+        (domains g).filter (fun word => decide (word ∈ support chosen))
+      else domains g) := by
+  let E := O.filter (fun i => !((C.map values).contains (values i)))
+  have hcapacity : E.length ≤ pool.length - C.length :=
+    exception_budget C O pool values hC hO hCpool hOpool
+  have hsubset : ∀ i, i ∈ F → i ∈ E := by
+    intro i hi
+    have ho := hFoutside i hi
+    exact unsupported_exception C O (partners i) (support i)
+      values domains i ho (fun c _ => hfit c)
+      (hpartners i ho) (hsupport i ho)
+      (hforced i hi (values i) (hfit i))
+  have hunsupported : values chosen ∉ support chosen → chosen ∈ E := by
+    intro hmissing
+    exact unsupported_exception C O (partners chosen) (support chosen)
+      values domains chosen hchosen (fun c _ => hfit c)
+      (hpartners chosen hchosen) (hsupport chosen hchosen) hmissing
+  exact SpareSupport212.support_filter_preserves_assignment
+    F E (support chosen) (pool.length - C.length) chosen values domains
+    hF hsubset hcapacity hsaturated hnotforced hunsupported hfit
+
+#print axioms exception_budget
+#print axioms unsupported_exception
+#print axioms saturated_support_preserves_assignment
+
+end SupportBridge212
