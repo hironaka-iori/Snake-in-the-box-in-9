@@ -12,7 +12,8 @@ struct Node {
     int leaf=-1;
 };
 
-int main() {
+int main(int argc,char**argv) {
+    const int bridge=argc>1?stoi(argv[1]):0;
     int nl,nr;
     if (!(cin>>nl>>nr)) return 2;
     vector<string> left(nl),right(nr);
@@ -38,12 +39,15 @@ int main() {
             for(int b=0;b<9;++b) blocked[v^(1<<b)]=true;
         }
         array<int,9> image{};
+        vector<int> bridge_steps;
         auto visit=[&](auto&& self,int p,int at,int named,int used)->bool {
             ++states;
             if(nodes[p].leaf>=0) {
                 ++leaves; cout<<"found "<<l<<" "<<nodes[p].leaf<<" "<<named;
                 for(int i=0;i<named;++i) cout<<" "<<image[i];
-                cout<<" "<<states<<"\n"; return true;
+                cout<<" "<<states<<" "<<bridge_steps.size();
+                for(int b:bridge_steps) cout<<" "<<b;
+                cout<<"\n"; return true;
             }
             for(int b=0;b<=named && b<9;++b) {
                 int child=nodes[p].child[b]; if(!child) continue;
@@ -61,7 +65,24 @@ int main() {
             }
             return false;
         };
-        if(visit(visit,0,0,0,0)) return 0;
+        // Vertex zero is the active hinge. 'blocked' is the union of the
+        // closed neighbourhoods of all preceding non-hinge vertices.
+        auto grow=[&](auto&& self,int at,int remaining)->bool {
+            if(!remaining) return visit(visit,0,at,0,0);
+            for(int b=0;b<9;++b) {
+                int next=at^(1<<b);
+                if(blocked[next]) continue;
+                array<int,10> fresh{}; int count=0;
+                auto mark=[&](int x){if(!blocked[x]) {blocked[x]=true;fresh[count++]=x;}};
+                mark(at); for(int a=0;a<9;++a) mark(at^(1<<a));
+                bridge_steps.push_back(b);
+                if(self(self,next,remaining-1)) return true;
+                bridge_steps.pop_back();
+                for(int i=0;i<count;++i) blocked[fresh[i]]=false;
+            }
+            return false;
+        };
+        if(grow(grow,0,bridge)) return 0;
     }
     cout<<"complete "<<states<<" "<<leaves<<" "<<nodes.size()<<"\n";
 }

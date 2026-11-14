@@ -22,15 +22,19 @@ def vertices(seq,perm=tuple(range(9))):
     return q
 
 
-def join(left,right,exe):
+def join(left,right,exe,bridge=0):
     ls=list(left); rs=list(right)
     data=b"\n".join([f"{len(ls)} {len(rs)}".encode(),*ls,*rs])
-    ans=subprocess.run([str(exe)],input=data,capture_output=True,check=True).stdout.split()
+    ans=subprocess.run([str(exe),str(bridge)],input=data,capture_output=True,check=True).stdout.split()
     if ans[0]==b"found":
         l,r,n,*tail=map(int,ans[1:]); perm=tail[:n]
-        a=vertices(ls[l]); b=vertices(rs[r],perm); q=a[::-1]+b[1:]
-        assert len(q)==len(ls[l])+len(rs[r])+1 and not defects(q)
-        return dict(status="FOUND",left=left[ls[l]],right=right[rs[r]],states=tail[-1],vertices=q)
+        states,size,*moves=tail[n:]
+        assert size==bridge==len(moves)
+        middle=vertices(bytes(48+v for v in moves))
+        a=vertices(ls[l]); b=vertices(rs[r],perm)
+        q=a[::-1]+middle[1:]+[v^middle[-1] for v in b[1:]]
+        assert len(q)==len(ls[l])+len(rs[r])+bridge+1 and not defects(q)
+        return dict(status="FOUND",left=left[ls[l]],right=right[rs[r]],states=states,vertices=q)
     assert ans[0]==b"complete" and ans[2]==b"0"
     return dict(status="exhausted",states=int(ans[1]),trie_nodes=int(ans[3]))
 
@@ -39,6 +43,7 @@ if __name__=="__main__":
     p=argparse.ArgumentParser()
     p.add_argument("left",type=int); p.add_argument("right",type=int)
     p.add_argument("--interior",action="store_true"); p.add_argument("--extended",action="store_true")
+    p.add_argument("--bridge",type=int,default=0)
     p.add_argument("--exe",type=Path,default=Path("mixed-halves.exe"))
     a=p.parse_args()
     assert sha256(BANK.read_bytes()).hexdigest()==BANK_HASH
@@ -47,12 +52,15 @@ if __name__=="__main__":
     exe=a.exe.resolve()
     # Two differently labelled halves of a known record recover a valid record.
     mid=96; q=paths[0]
-    ls=words([q[:mid+1][::-1]],mid,False); rs=words([q[mid:]],len(q)-1-mid,False)
-    assert len(join(ls,rs,exe)["vertices"])==192
+    ls=words([q[:mid+1][::-1]],mid,False)
+    for gap in {0,min(a.bridge,6)}:
+        rs=words([q[mid+gap:]],len(q)-1-mid-gap,False)
+        assert len(join(ls,rs,exe,gap)["vertices"])==192
     ls=words(paths,a.left,a.interior)
     rs=ls if a.left==a.right else words(paths,a.right,a.interior)
     print("Arms",len(ls),len(rs),flush=True)
     out=dict(left_length=a.left,right_length=a.right,interior=a.interior,sources=len(paths),
-             left_classes=len(ls),right_classes=len(rs),**join(ls,rs,exe))
-    save(Path(f"mixed-halves-{a.left}-{a.right}-{int(a.interior)}-{len(paths)}.json"),out)
+             left_classes=len(ls),right_classes=len(rs),bridge=a.bridge,**join(ls,rs,exe,a.bridge))
+    suffix=f"-bridge{a.bridge}" if a.bridge else ""
+    save(Path(f"mixed-halves-{a.left}-{a.right}-{int(a.interior)}-{len(paths)}{suffix}.json"),out)
     print(out["status"],out["states"],flush=True)
