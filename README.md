@@ -1,3 +1,15 @@
+# Current result after round 206
+
+Complete native enumeration covers all 70 ways to free four coordinate histories of the saved 98-edge Q8 parent while retaining the other histories at every index. After excluding six explicit isometric assignments in each normalized model, every search exhausts. A different class requires at least five changed histories under the same length and indexed comparison. This source-specific result does not give a Q9 length bound.
+
+For five free coordinates, one of 56 models exhausts and 55 reach their search limits. No new parent is found. The remaining cases are unresolved.
+
+Lean accepts the general whole-path pair criterion and substitution soundness, in one module with 8 dependency reports. Concrete model interpretation, normalization, search coverage and isometry-witness certification remain pending; the 70 exclusions retain native-enumeration status. The earlier round 205 accepted files are unchanged.
+
+Read [the argument](milestones/206-four-history/MATHEMATICAL_NOTE.md), [results and verification](milestones/206-four-history/data/completion.json), [current handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex). No longer Q9 snake or improved global bound is claimed. The user requested a pause after this round; resume only on a new instruction.
+
+## Earlier checkpoints
+
 # Current result after round 205
 
 For a nonempty ordered induced path with all indexed coordinates except two fixed, the exact number of target paths is 2^(1+c0+c1), where c0,c1 count the two active base graphs' components. There are 2^(c0+c1-r) classes under global isometries of the two free coordinates, with r nonempty parity graphs. Connected active graphs force one global isometry on the whole snake. The theorem has a written proof and independent review; its complete Lean assembly is pending.

@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 205}
+\date{Research state after round 206}
 \begin{document}
 \maketitle
 
@@ -24,7 +24,9 @@ The numerical prediction 196 has neither a construction nor an optimality
 proof. The current construction investigation compares dimensions six
 through nine, with general restrictions on two-parent constructions
 and no new witness. A whole-path classification now restricts changes
-to one or two coordinate histories; its argument and proof-assistant
+to one or two coordinate histories. A new native enumeration excludes
+a different class of the saved 98-edge parent even with four arbitrary
+coordinate histories free. Its precise scope and proof-assistant
 boundaries are explained in Section 6. The current sufficient pending-share profile is $(15,14,14,14)$
 for $012034,012301,012340,012345$, respectively. Together with the retained
 local and graph premises, it implies $m\le234$ without a positive-loss
@@ -1212,6 +1214,49 @@ natively on all 99 vertices; their Lean replay is pending. These
 proof gaps remain separate from the component classification.
 No new numerical bound or longer $Q_9$ construction is claimed.
 
+\paragraph{Four arbitrary histories: the current construction frontier.}
+The restriction above can be strengthened for the saved parent.
+Write a target as $((z_i,u_i))$, retaining its indexed base words
+$z_i$ and allowing every possible free-coordinate word $u_i$.
+The full snake condition, for every $i<j$, is
+\[
+d(z_i,z_j)+d(u_i,u_j)
+\begin{cases}
+=1,&j=i+1,\\
+\ge2,&j\ge i+2.
+\end{cases}
+\]
+This follows because Hamming distance adds across disjoint coordinate
+blocks. The second line excludes both repeated vertices and unwanted
+edges. Consecutive base edges force equal block words, so merging
+their indices into intervals gives one variable per interval without
+losing any target. Every indexed pair condition remains in the model,
+including pairs whose indices merge into one variable.
+
+Global translation and coordinate permutation normalize the initial
+block word to zero and the first block transition to the first
+coordinate. Interval parities then alternate. Each variable ranges
+over all words of its required parity, without a slice-isometry
+restriction. All 70 choices of four free coordinates exhaust after
+excluding six explicitly witnessed isometric assignments each.
+Thus the native calculation requires at least five changed coordinate
+histories for a different class of this parent, at the same length
+and index matching. It supplies no global length bound.
+
+Lean checks the general pair criterion, its equivalence with the
+usual distinctness and adjacency requirements, and interval
+substitution soundness. The concrete tables, normalization, search
+coverage and isometry witnesses still require Lean certification.
+The 70 exclusions retain native-enumeration status.
+
+For five free coordinates, one of 56 choices exhausts and 55 reach
+their three-second search limits. The exhausted choice is
+$\{0,2,3,5,6\}$, leaving coordinates $\{1,4,7\}$ fixed. No new
+parent is found; the other 55 choices remain unresolved. Removing
+equivalent assignments under the remaining coordinate permutations
+is a possible next improvement. Even a successful new parent would
+need a separate $Q_9$ joining construction.
+
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -1265,5 +1310,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--205.}
+\texttt{snake9\_research.tex} and research records 175--206.}
 \end{document}

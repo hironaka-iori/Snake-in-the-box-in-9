@@ -1,0 +1,829 @@
+{
+  "version": 1,
+  "base_head": "f7111c97022ef9bc92badade22331d1e207d730e",
+  "scopes": [
+    "milestones/206-four-history",
+    "milestones/206-four-history"
+  ],
+  "documents": [
+    "README.md",
+    "handoff/CURRENT_STATUS.md",
+    "handoff/NEXT_AGENT_PROMPT.md",
+    "paper/snake9_research.tex",
+    "paper/snake9_frontier_explanation.tex"
+  ],
+  "files": {
+    "README.md": {
+      "action": "add",
+      "sha256": "ccd87b2635a3c08a32b50d24372a5bd6df351e3c142817ba96caaa4134353a6d",
+      "bytes": 123983
+    },
+    "handoff/CURRENT_STATUS.md": {
+      "action": "add",
+      "sha256": "f3fd7f54024355a2a0e80b447214d3003f39bf3d52d32c5afe00a976158076c9",
+      "bytes": 5427
+    },
+    "handoff/NEXT_AGENT_PROMPT.md": {
+      "action": "add",
+      "sha256": "f3fd7f54024355a2a0e80b447214d3003f39bf3d52d32c5afe00a976158076c9",
+      "bytes": 5427
+    },
+    "milestones/206-four-history/.gitattributes": {
+      "action": "add",
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992",
+      "bytes": 9
+    },
+    "milestones/206-four-history/MATHEMATICAL_NOTE.md": {
+      "action": "add",
+      "sha256": "8d9defebd629752ebe3ce2d83e691c7b2ad2e3cef11de5f9ddace9328edf1589",
+      "bytes": 7784
+    },
+    "milestones/206-four-history/README.md": {
+      "action": "add",
+      "sha256": "8eb56a531da14208f9201fcd1c66922337fec67fb36a90c7da1551007863ac54",
+      "bytes": 1356
+    },
+    "milestones/206-four-history/build/IndexedCriterion206.olean": {
+      "action": "add",
+      "sha256": "e55f024a27aa7c267a95548832b7006d88a18dd4a1894fa6f9d8c26ebfa46ca4",
+      "bytes": 260520
+    },
+    "milestones/206-four-history/data/IndexedCriterion206-audit.json": {
+      "action": "add",
+      "sha256": "3f5cda21d7160686e391f0599ee90f855cd8a46884a10dbb44c15a141144db3f",
+      "bytes": 4952
+    },
+    "milestones/206-four-history/data/IndexedCriterion206-execution.json": {
+      "action": "add",
+      "sha256": "71c1e3c9596457c5826063040d875254c636b1cde82e43f8676d44b13a83531b",
+      "bytes": 654
+    },
+    "milestones/206-four-history/data/completion.json": {
+      "action": "add",
+      "sha256": "24dbee96b3b5050f6b7b44c3a5cba27876b70d6351bd6916b64cd3eba5ca3ee1",
+      "bytes": 5061
+    },
+    "milestones/206-four-history/data/contributor-status.json": {
+      "action": "add",
+      "sha256": "67617efacfbd7cfb26de80457514c9c1c810a4eb3422f070076cec1855c798c3",
+      "bytes": 382
+    },
+    "milestones/206-four-history/data/history-search-5.json": {
+      "action": "add",
+      "sha256": "fac925e88cbe16e2c07145ce1dc93aace9701c3de1f902574e963d2b27e186f6",
+      "bytes": 24514
+    },
+    "milestones/206-four-history/data/history-search.json": {
+      "action": "add",
+      "sha256": "4f26c471e4a88dbdbc77fd4646ad05747dd26038c23d08a474c2fc8572114b91",
+      "bytes": 29563
+    },
+    "milestones/206-four-history/data/lower-dimensional-input.json": {
+      "action": "add",
+      "sha256": "d62c92cc97eae196b21aeefe2111adfb03cc3121b9b62ba7e3e2c6ee6920c20d",
+      "bytes": 83606
+    },
+    "milestones/206-four-history/data/model-0.json": {
+      "action": "add",
+      "sha256": "fd0995fd25087c8d751e14e3394ec726644641d87650da817ae7fe7d8d970d8a",
+      "bytes": 98712
+    },
+    "milestones/206-four-history/data/model-1.json": {
+      "action": "add",
+      "sha256": "df9ce01faa4dc595cdd7edf8bd9fce6a52109b8ae8550e26864dbfed1cea702c",
+      "bytes": 125001
+    },
+    "milestones/206-four-history/data/model-10.json": {
+      "action": "add",
+      "sha256": "7bae573e9293791073710bcec30170abc836f0c0c1475d619633bfc10a92cdb3",
+      "bytes": 128543
+    },
+    "milestones/206-four-history/data/model-11.json": {
+      "action": "add",
+      "sha256": "82d1c208c9eb08e6ac949dd83fdc22f5637cd82d8f132bc52686d2fb666330de",
+      "bytes": 132023
+    },
+    "milestones/206-four-history/data/model-12.json": {
+      "action": "add",
+      "sha256": "a5e499840900996279672d8b4fcbe948f58e8bfc50be1c3c4b25c282e544c257",
+      "bytes": 82326
+    },
+    "milestones/206-four-history/data/model-13.json": {
+      "action": "add",
+      "sha256": "8816336b45f644496574681ffa7e82b03e8216c2dfcaa5769d60ac405a45a082",
+      "bytes": 86610
+    },
+    "milestones/206-four-history/data/model-14.json": {
+      "action": "add",
+      "sha256": "29fb306e0f35eb153a5bffd91b200a7b6bf0f9576704d3504c6ddaf04244a70f",
+      "bytes": 93247
+    },
+    "milestones/206-four-history/data/model-15.json": {
+      "action": "add",
+      "sha256": "d5c064e21719197f08174a7071355ac901ab96783202dba1e43f4fe0b036ce60",
+      "bytes": 110123
+    },
+    "milestones/206-four-history/data/model-16.json": {
+      "action": "add",
+      "sha256": "e261f5972553a0bb15829812c5896c6c6e301d441fb505cf49bbecf84310a1ba",
+      "bytes": 63465
+    },
+    "milestones/206-four-history/data/model-17.json": {
+      "action": "add",
+      "sha256": "908ab4f500c7c6c1ae8bb6d63624b9f095cf7aa4090fff91617a5b95140ba87e",
+      "bytes": 69481
+    },
+    "milestones/206-four-history/data/model-18.json": {
+      "action": "add",
+      "sha256": "319339b6fd94a36de426a3e9fb4227956a23417293e083ecb6159835545bd4a5",
+      "bytes": 71923
+    },
+    "milestones/206-four-history/data/model-19.json": {
+      "action": "add",
+      "sha256": "302428940711c675ebee57cb2600b41f1441e1c9135523da9d6866774946c010",
+      "bytes": 90863
+    },
+    "milestones/206-four-history/data/model-2.json": {
+      "action": "add",
+      "sha256": "8e6e552825c35638dbb3ab2131107491ee85fee7dddc74454b3f037775e0b792",
+      "bytes": 79103
+    },
+    "milestones/206-four-history/data/model-20.json": {
+      "action": "add",
+      "sha256": "536440420f8948fbfbc9a48e23481d87a43283d724668b7879ede63eb83b10dd",
+      "bytes": 97993
+    },
+    "milestones/206-four-history/data/model-21.json": {
+      "action": "add",
+      "sha256": "1fdd8160ed23f2b0028b03cd80ceafcf52056dc4f4c117deda1a2de53400d7ae",
+      "bytes": 98274
+    },
+    "milestones/206-four-history/data/model-22.json": {
+      "action": "add",
+      "sha256": "d65ad6e9b0998864bc10adc6839bd43297bd03055f44599824cd28eeda810a51",
+      "bytes": 50934
+    },
+    "milestones/206-four-history/data/model-23.json": {
+      "action": "add",
+      "sha256": "59644a83f8a150e71587034aa4b10d23e0c88cdab482cc72981aab1c8acbbc46",
+      "bytes": 50377
+    },
+    "milestones/206-four-history/data/model-24.json": {
+      "action": "add",
+      "sha256": "4977bc4ae2abce22c625379b1ba7490917457b5250bb4e48ba1c842b0b8921c1",
+      "bytes": 56827
+    },
+    "milestones/206-four-history/data/model-25.json": {
+      "action": "add",
+      "sha256": "3401a684cc4ffb15e6a0ed449e77553c937610e3e4d0bbbc2cefde540ddfa441",
+      "bytes": 108200
+    },
+    "milestones/206-four-history/data/model-26.json": {
+      "action": "add",
+      "sha256": "c080e539357a22aaf7af003c24873b17eedbbd789db32781301f1edf5f49d706",
+      "bytes": 114624
+    },
+    "milestones/206-four-history/data/model-27.json": {
+      "action": "add",
+      "sha256": "eda36067ce01b7b80a36732103dfac779eba26e5ad5278051c9531995be9579c",
+      "bytes": 116983
+    },
+    "milestones/206-four-history/data/model-28.json": {
+      "action": "add",
+      "sha256": "0cf1cd21f449d6a2f2f83290dfbda46be4cf073ad42a76df8e80b1aa7a7c56a1",
+      "bytes": 65710
+    },
+    "milestones/206-four-history/data/model-29.json": {
+      "action": "add",
+      "sha256": "d1db53fd0f8669c9e3396b8109acbd9dfbdc5b5324d29e57d464050a9bce0315",
+      "bytes": 71078
+    },
+    "milestones/206-four-history/data/model-3.json": {
+      "action": "add",
+      "sha256": "983a6dd6449250dc4151ee372158f031cdc10ad0129e9c8abe1e74948c9e0c27",
+      "bytes": 86352
+    },
+    "milestones/206-four-history/data/model-30.json": {
+      "action": "add",
+      "sha256": "2857cde86c6586bc909a917f3bc72778e91888d66f0a81ee8119fe8b4ccf1729",
+      "bytes": 76110
+    },
+    "milestones/206-four-history/data/model-31.json": {
+      "action": "add",
+      "sha256": "f833e38ad765ae03f36a2a94c5c8ea3435d8049c36af3f362c364fe614b6dd35",
+      "bytes": 95245
+    },
+    "milestones/206-four-history/data/model-32.json": {
+      "action": "add",
+      "sha256": "d30c9d76a693b70cc6de0e9295d50094ca4ef6d4df9c19be1e9d5840af95dfaf",
+      "bytes": 95003
+    },
+    "milestones/206-four-history/data/model-33.json": {
+      "action": "add",
+      "sha256": "431fff16dee654a2396462f04264e740c5f591b8d200768aa05463b940044122",
+      "bytes": 102798
+    },
+    "milestones/206-four-history/data/model-34.json": {
+      "action": "add",
+      "sha256": "4679f5a451c454e1ca359813edb82580e2e53b970fe411eed6c8705c59068e5f",
+      "bytes": 55350
+    },
+    "milestones/206-four-history/data/model-35.json": {
+      "action": "add",
+      "sha256": "10673ecead325ef13c5e9f4195adc0adaab247ed466a69b670206779bf287fcb",
+      "bytes": 125059
+    },
+    "milestones/206-four-history/data/model-36.json": {
+      "action": "add",
+      "sha256": "d1a18ca814a661f1a428eb23628799363e7b56e565351cd429748ca0758035ec",
+      "bytes": 74950
+    },
+    "milestones/206-four-history/data/model-37.json": {
+      "action": "add",
+      "sha256": "e73d34b55c2735f3897d997969d4deba911758e0fe2389101b5c18aab4cd671c",
+      "bytes": 81973
+    },
+    "milestones/206-four-history/data/model-38.json": {
+      "action": "add",
+      "sha256": "d62dbe82fd042e2016a5ec10d8f0fc9a768b073142e606dfc76cab16307ed99b",
+      "bytes": 86418
+    },
+    "milestones/206-four-history/data/model-39.json": {
+      "action": "add",
+      "sha256": "c47e8a516c01a5a9fccc0e36f7483534df04ebff564804746cca050750eaa968",
+      "bytes": 110372
+    },
+    "milestones/206-four-history/data/model-4.json": {
+      "action": "add",
+      "sha256": "47fdc2d416e343c94b41461bac495b9e34fcf5894e1fb591ff7d289dfd155f8e",
+      "bytes": 88581
+    },
+    "milestones/206-four-history/data/model-40.json": {
+      "action": "add",
+      "sha256": "c83850b933c86258796d0fa9343c88a4b1cabfd82441a16b6eecd319c15cc740",
+      "bytes": 115220
+    },
+    "milestones/206-four-history/data/model-41.json": {
+      "action": "add",
+      "sha256": "7549af49abe7fc00cb81effc5072fe285fdb159b25863208e2db4eb5d33f936f",
+      "bytes": 117462
+    },
+    "milestones/206-four-history/data/model-42.json": {
+      "action": "add",
+      "sha256": "6a2e79e10807b548cfdf19eeb2f2b5792541b9ce16821bde9865aa1423fb18c0",
+      "bytes": 64867
+    },
+    "milestones/206-four-history/data/model-43.json": {
+      "action": "add",
+      "sha256": "3466992c2dac3b84c195b97669f6b57a9d378ced9f77422e0219f40e46c060d3",
+      "bytes": 66919
+    },
+    "milestones/206-four-history/data/model-44.json": {
+      "action": "add",
+      "sha256": "4cbcc312c079bd21bde4ede79dffb5b7a43e563fb3cfbbf21e9911fdeb29fc09",
+      "bytes": 72505
+    },
+    "milestones/206-four-history/data/model-45.json": {
+      "action": "add",
+      "sha256": "b961085b2df3cdfd9b3d3bdb528aa10b8a66b06100d800446626fde1aaea723c",
+      "bytes": 121152
+    },
+    "milestones/206-four-history/data/model-46.json": {
+      "action": "add",
+      "sha256": "cb0b6056e48d995158f3ea80b9333e0c0d1675c6a34954ca4a9813c0fb75489d",
+      "bytes": 128483
+    },
+    "milestones/206-four-history/data/model-47.json": {
+      "action": "add",
+      "sha256": "ad730c30df967eaa7a141bd7f67b22a2489940133f03d1d40c0976b57ea0ca51",
+      "bytes": 132905
+    },
+    "milestones/206-four-history/data/model-48.json": {
+      "action": "add",
+      "sha256": "f24cc7947d88cda0d279266f38d1e983426a8ca560404c96381de699a882b7f8",
+      "bytes": 77478
+    },
+    "milestones/206-four-history/data/model-49.json": {
+      "action": "add",
+      "sha256": "4b6dce6f4afb83be039070f7da761a994032aba0630a00c7511cb25bc4df161e",
+      "bytes": 84712
+    },
+    "milestones/206-four-history/data/model-5-0.json": {
+      "action": "add",
+      "sha256": "60fe441ff9df7e2c63792911e198659c946f3b52367c8639459b076af827d1d0",
+      "bytes": 708324
+    },
+    "milestones/206-four-history/data/model-5-1.json": {
+      "action": "add",
+      "sha256": "de81566d13cc1f348d6774472a55b0b80c05a2231314470f27b94487bc4ed9b9",
+      "bytes": 472843
+    },
+    "milestones/206-four-history/data/model-5-10.json": {
+      "action": "add",
+      "sha256": "4eb1ce5155ec104edf5c00408ec802aa2f46fdc6652b0a733a2af45f86bed9c8",
+      "bytes": 692971
+    },
+    "milestones/206-four-history/data/model-5-11.json": {
+      "action": "add",
+      "sha256": "23118dbfa3310e99dd817cdd7f3462077ed7bcfeadbeb5ea32cd5b6705bd6f95",
+      "bytes": 729908
+    },
+    "milestones/206-four-history/data/model-5-12.json": {
+      "action": "add",
+      "sha256": "4b34da7200c5ba8562df678bedcd25b4bf08b88b527cc23d73016f3da96f7556",
+      "bytes": 751115
+    },
+    "milestones/206-four-history/data/model-5-13.json": {
+      "action": "add",
+      "sha256": "20108430bf3c8f94a58981bdaa8419fc11f708e81eccf4fb2e16022bf035a181",
+      "bytes": 486481
+    },
+    "milestones/206-four-history/data/model-5-14.json": {
+      "action": "add",
+      "sha256": "d47a9a95b4f03c765f221429944a7c8922803b0d206ea1800162780bef4a7054",
+      "bytes": 517870
+    },
+    "milestones/206-four-history/data/model-5-15.json": {
+      "action": "add",
+      "sha256": "fe2e74856d0c9b547d559d8ed8312e60bb3573921456e4ca5679df493362d218",
+      "bytes": 549911
+    },
+    "milestones/206-four-history/data/model-5-16.json": {
+      "action": "add",
+      "sha256": "98553cf42314e5331576bb87de17d374851e8bc74976edd1d55c2e10e6decde0",
+      "bytes": 639435
+    },
+    "milestones/206-four-history/data/model-5-17.json": {
+      "action": "add",
+      "sha256": "a4e0a1de64ac5a60d66873d444e36bcd877d4a2d9af15c16b9b32ba25f0a2ab9",
+      "bytes": 652102
+    },
+    "milestones/206-four-history/data/model-5-18.json": {
+      "action": "add",
+      "sha256": "84dabcd044dad0b3f8348ead4c85c333d16f11a5a8843ee917043b078856d5f4",
+      "bytes": 690504
+    },
+    "milestones/206-four-history/data/model-5-19.json": {
+      "action": "add",
+      "sha256": "a8cc896b9849f9f6e00fe498eedcc46ca739fb1add32a7bc3988e844ff2433ed",
+      "bytes": 439989
+    },
+    "milestones/206-four-history/data/model-5-2.json": {
+      "action": "add",
+      "sha256": "3bb14085d18e118500ab0e84409ceb06ac83a52615afa26e08b60d2c7d401578",
+      "bytes": 513859
+    },
+    "milestones/206-four-history/data/model-5-20.json": {
+      "action": "add",
+      "sha256": "97d2c4728d8147f3c69dfb8211200e3b8a7878f67743bdc619bbbc476a5a5bc5",
+      "bytes": 537140
+    },
+    "milestones/206-four-history/data/model-5-21.json": {
+      "action": "add",
+      "sha256": "b82f106cee9dd29e59f40605247cbcbd98e0a413717a21f97c9d6e200daa123f",
+      "bytes": 571464
+    },
+    "milestones/206-four-history/data/model-5-22.json": {
+      "action": "add",
+      "sha256": "d0178bafac53385b5f835ed05733d8f3d4d565cee95764f55c4250e866261db6",
+      "bytes": 581856
+    },
+    "milestones/206-four-history/data/model-5-23.json": {
+      "action": "add",
+      "sha256": "143add53a6d7fc0d13ac78bf9ea4c5fbe2c6502bae67f531e5b9f74ad83eacdd",
+      "bytes": 328132
+    },
+    "milestones/206-four-history/data/model-5-24.json": {
+      "action": "add",
+      "sha256": "b9c2765184d542fad96852b50a1207c860ad7db74bc981432b45735525f60f52",
+      "bytes": 335557
+    },
+    "milestones/206-four-history/data/model-5-25.json": {
+      "action": "add",
+      "sha256": "f9ba597bbaf9813eabfa19d87b541a79daea31f13e63aad1ae49f4731146a872",
+      "bytes": 370270
+    },
+    "milestones/206-four-history/data/model-5-26.json": {
+      "action": "add",
+      "sha256": "7d4ee79c072945e2a1b68e0ab20c45381111c383730a6b73c9c320d9a5a1523d",
+      "bytes": 471215
+    },
+    "milestones/206-four-history/data/model-5-27.json": {
+      "action": "add",
+      "sha256": "b653c637fd3faf1eb07abd7094a9cc261500deaf4bbeb1689ea64d669db5d824",
+      "bytes": 463587
+    },
+    "milestones/206-four-history/data/model-5-28.json": {
+      "action": "add",
+      "sha256": "49014f118a0d76203832b3073ea7b98ef771c7276a525f1a6646e8f386aa00a2",
+      "bytes": 503910
+    },
+    "milestones/206-four-history/data/model-5-29.json": {
+      "action": "add",
+      "sha256": "06555602b9d3a4b484f84ad03d79a866025657e02fdb73f557cde98d08e5c7e4",
+      "bytes": 262626
+    },
+    "milestones/206-four-history/data/model-5-3.json": {
+      "action": "add",
+      "sha256": "c71ea3039e2083822bd504f1aface5cac238696f96cb40b9f3d7b1962a322189",
+      "bytes": 527928
+    },
+    "milestones/206-four-history/data/model-5-30.json": {
+      "action": "add",
+      "sha256": "31eb4c57ace6eabc12a1bb6991b1e247b59e969ba113c65fd7bc213fe7de0c51",
+      "bytes": 559132
+    },
+    "milestones/206-four-history/data/model-5-31.json": {
+      "action": "add",
+      "sha256": "233b8248bf084412991e6c44ce139e7d942c8499a54108e9c36115c67d036108",
+      "bytes": 571404
+    },
+    "milestones/206-four-history/data/model-5-32.json": {
+      "action": "add",
+      "sha256": "45564e1dbe83b7aeaf4d1b13fd5bb2d93f9b6313b0b67a8ce0bfdc3cff4a050a",
+      "bytes": 607944
+    },
+    "milestones/206-four-history/data/model-5-33.json": {
+      "action": "add",
+      "sha256": "f20a0582ccba77d0f70a1cb68932c96349309a3676a7d19598153f2088beab85",
+      "bytes": 357436
+    },
+    "milestones/206-four-history/data/model-5-34.json": {
+      "action": "add",
+      "sha256": "d0eee387e58a8fe651c94617df9aabc17be4fba42ad34f0c8525c9f5b246df1e",
+      "bytes": 490130
+    },
+    "milestones/206-four-history/data/model-5-35.json": {
+      "action": "add",
+      "sha256": "61b4bdc1c0602a7420545158d68e6984a50b9da40bd8e78b73699697e8cfedf0",
+      "bytes": 619123
+    },
+    "milestones/206-four-history/data/model-5-36.json": {
+      "action": "add",
+      "sha256": "2bfb9ac7d681aa6ca86a800b5bca03c4e85d10bdad9ab5538f55e3b194a5c72b",
+      "bytes": 643263
+    },
+    "milestones/206-four-history/data/model-5-37.json": {
+      "action": "add",
+      "sha256": "ddccb347487eb2a29464d6a35c659eb81376720038121d360fb726cf2f7bba63",
+      "bytes": 663052
+    },
+    "milestones/206-four-history/data/model-5-38.json": {
+      "action": "add",
+      "sha256": "f7b8deadfa4ce95334a1622e70a3a0c19855a87652bb85fc789d9ac4cb7486af",
+      "bytes": 387895
+    },
+    "milestones/206-four-history/data/model-5-39.json": {
+      "action": "add",
+      "sha256": "89d2c41187d8f9b5d153b78a4e1127e76dd997271af3a6d278215c56c12a4e74",
+      "bytes": 405822
+    },
+    "milestones/206-four-history/data/model-5-4.json": {
+      "action": "add",
+      "sha256": "cf0a99de819c9bcdb66a14601d46b752691594762da2a40999155a084daf9617",
+      "bytes": 623474
+    },
+    "milestones/206-four-history/data/model-5-40.json": {
+      "action": "add",
+      "sha256": "25b09961ddd114d62365c80fd573140935556707397358314296ed92ccf4978d",
+      "bytes": 441251
+    },
+    "milestones/206-four-history/data/model-5-41.json": {
+      "action": "add",
+      "sha256": "74b7e60a71e67d6611fc40088cdc34cc699f12e14970e6ceed1c6a52ab46a822",
+      "bytes": 565176
+    },
+    "milestones/206-four-history/data/model-5-42.json": {
+      "action": "add",
+      "sha256": "66ebe719de6b8d7161586d18810bcf103bcf55f86669c0a136cc2af2fde70baa",
+      "bytes": 573819
+    },
+    "milestones/206-four-history/data/model-5-43.json": {
+      "action": "add",
+      "sha256": "f32270677a9c88b4dbca23f7e67bf4edd9431eae1e4119f804970e205069b84a",
+      "bytes": 603485
+    },
+    "milestones/206-four-history/data/model-5-44.json": {
+      "action": "add",
+      "sha256": "d876b9db35f776e9258511a4dc9ef968af3552fec7d0ab13a5ad4507dc33e5bd",
+      "bytes": 331972
+    },
+    "milestones/206-four-history/data/model-5-45.json": {
+      "action": "add",
+      "sha256": "d7cff9a43b592c6cbc0c468dc43a4e6368b130d521286ce5f4ad1f54d4c5b31e",
+      "bytes": 637278
+    },
+    "milestones/206-four-history/data/model-5-46.json": {
+      "action": "add",
+      "sha256": "4baa8691c925a18c3718fed18ed341a5b29ecc4c6d60141fa76263d61c5c3bfd",
+      "bytes": 655630
+    },
+    "milestones/206-four-history/data/model-5-47.json": {
+      "action": "add",
+      "sha256": "5469b805b247b372f31d053ee398129d82965133081fa1954b7af4f710611f66",
+      "bytes": 686128
+    },
+    "milestones/206-four-history/data/model-5-48.json": {
+      "action": "add",
+      "sha256": "b116d75597882f815b4431fb75678822b8d51b406fd2f3a695e8778a681db70e",
+      "bytes": 424354
+    },
+    "milestones/206-four-history/data/model-5-49.json": {
+      "action": "add",
+      "sha256": "abad5527645c36cec9c0b18df52f8281f5707fff54168a023336a173049ae48d",
+      "bytes": 587832
+    },
+    "milestones/206-four-history/data/model-5-5.json": {
+      "action": "add",
+      "sha256": "b3ac29a8ce5d5af53f8add03ce9e2a96459c199523fe3a45baf54458cb3594fb",
+      "bytes": 655056
+    },
+    "milestones/206-four-history/data/model-5-50.json": {
+      "action": "add",
+      "sha256": "219150def8138f687c665afb3f6d6acf84df074a46fb4e1460ec9a01682b16fb",
+      "bytes": 448558
+    },
+    "milestones/206-four-history/data/model-5-51.json": {
+      "action": "add",
+      "sha256": "1089f6d165d5494c757d4341709d985c114414302c636010fb6275463a925058",
+      "bytes": 453359
+    },
+    "milestones/206-four-history/data/model-5-52.json": {
+      "action": "add",
+      "sha256": "c1ae6ea909881827ea5fc977ab6413e5d1f4195cedb3c96c715f85e610e87e67",
+      "bytes": 487982
+    },
+    "milestones/206-four-history/data/model-5-53.json": {
+      "action": "add",
+      "sha256": "676649a6284d653a403d2c0360058f7ed73d08ab567c46c88e0e4eaeac848e09",
+      "bytes": 245000
+    },
+    "milestones/206-four-history/data/model-5-54.json": {
+      "action": "add",
+      "sha256": "cf865c254d60d5cf40d6443c008297870bc9d213bc8876e934db063a038d3dc1",
+      "bytes": 377792
+    },
+    "milestones/206-four-history/data/model-5-55.json": {
+      "action": "add",
+      "sha256": "d0509959f78069032f0e6bfb176ae972babfd56f6aa3aa058d2d2b567e13747a",
+      "bytes": 474976
+    },
+    "milestones/206-four-history/data/model-5-6.json": {
+      "action": "add",
+      "sha256": "5068fac8ef6d9b9638764204a17ce8af549b5ba4c9a73ce56b40455371967124",
+      "bytes": 667405
+    },
+    "milestones/206-four-history/data/model-5-7.json": {
+      "action": "add",
+      "sha256": "f9d543baa060cd8f81f8d6738455e28eec47f7d25641169adea49d5c387df6d3",
+      "bytes": 409798
+    },
+    "milestones/206-four-history/data/model-5-8.json": {
+      "action": "add",
+      "sha256": "e7507ced1c4ba6e6722759f24b07e8099a520175a5392247e78d02310b077874",
+      "bytes": 421846
+    },
+    "milestones/206-four-history/data/model-5-9.json": {
+      "action": "add",
+      "sha256": "8b1265fd0f71e59c8913c41492200ccbd5553d3f9be6592ceb166f4436b37524",
+      "bytes": 458255
+    },
+    "milestones/206-four-history/data/model-5.json": {
+      "action": "add",
+      "sha256": "c36aa1227865a5cc651cc0e5d9083e6a55a01a265c1a2caa2038fb53f504f0cf",
+      "bytes": 138206
+    },
+    "milestones/206-four-history/data/model-50.json": {
+      "action": "add",
+      "sha256": "670482989d04d2858b02178ce3018b6947e6cf0e3a345925dbe4b3f4d67df9f4",
+      "bytes": 90228
+    },
+    "milestones/206-four-history/data/model-51.json": {
+      "action": "add",
+      "sha256": "d49313fc05a7b35268ff71ef01b5bbd9a1fd3a69cc087375a86aabec0edbe514",
+      "bytes": 112460
+    },
+    "milestones/206-four-history/data/model-52.json": {
+      "action": "add",
+      "sha256": "4e7c2f74a3cd4acea4e034cf0cdaf4b90b902b21a5a1947547ef46c803d6d311",
+      "bytes": 114268
+    },
+    "milestones/206-four-history/data/model-53.json": {
+      "action": "add",
+      "sha256": "f8cac90c434fd3e53213b9b2d616e67b068bddde5f3bbb0d0e859b9f2db079d3",
+      "bytes": 121308
+    },
+    "milestones/206-four-history/data/model-54.json": {
+      "action": "add",
+      "sha256": "03e626d20e59fa46e74586029df3e51023c0ff12c7cd76bb1968d94aab4f9524",
+      "bytes": 69742
+    },
+    "milestones/206-four-history/data/model-55.json": {
+      "action": "add",
+      "sha256": "25debadf0f06ce3b191cb0db4bec4ed93c9332bf44b04ccc6481fd98ebc070da",
+      "bytes": 88393
+    },
+    "milestones/206-four-history/data/model-56.json": {
+      "action": "add",
+      "sha256": "b400ddae931e96ea562c529d945e5c5f77d6ef1b52ad53865f2a31ba2158ca53",
+      "bytes": 93987
+    },
+    "milestones/206-four-history/data/model-57.json": {
+      "action": "add",
+      "sha256": "9649b48b952eba5e32a2caa444867782a35104cd469ce385626e5c1bcc9ffc82",
+      "bytes": 94790
+    },
+    "milestones/206-four-history/data/model-58.json": {
+      "action": "add",
+      "sha256": "6f805e1a65dec4b19fe01007e5a9adb4229a0294085875cef39f709db546706c",
+      "bytes": 44723
+    },
+    "milestones/206-four-history/data/model-59.json": {
+      "action": "add",
+      "sha256": "f92b3242cc2314d0ada5f78d688a31b7471cb9ccf74f4939a5247719f2958516",
+      "bytes": 46735
+    },
+    "milestones/206-four-history/data/model-6.json": {
+      "action": "add",
+      "sha256": "da6dbeafefa682174356d31adc955a38c85887cb7e9795f04f223cfd5507a44f",
+      "bytes": 93429
+    },
+    "milestones/206-four-history/data/model-60.json": {
+      "action": "add",
+      "sha256": "1c27c5e6a486762e26112851f768bbd1f03b857a7c5b6e32120d008f1d9e1a66",
+      "bytes": 52600
+    },
+    "milestones/206-four-history/data/model-61.json": {
+      "action": "add",
+      "sha256": "a885ed581352b7d33d458294932aa74808ceadc2d9bc953c1b4e995ca07338eb",
+      "bytes": 75682
+    },
+    "milestones/206-four-history/data/model-62.json": {
+      "action": "add",
+      "sha256": "b1d795a20b4426c0f6c14efbbbede5b15bde0b44bbf090db8c8037349956a79a",
+      "bytes": 73918
+    },
+    "milestones/206-four-history/data/model-63.json": {
+      "action": "add",
+      "sha256": "a3033437383bcae7cede8c353a82304155a1bdc1219ecaab6d12299f21d93644",
+      "bytes": 80820
+    },
+    "milestones/206-four-history/data/model-64.json": {
+      "action": "add",
+      "sha256": "3244cdcee3a275e3220c18074fabfe712a0c779deb6e1912bad891aa8e620115",
+      "bytes": 32499
+    },
+    "milestones/206-four-history/data/model-65.json": {
+      "action": "add",
+      "sha256": "1259bcd8534566c69428e9773972f9639dacaaa5e63937d3718b179ca099830d",
+      "bytes": 92127
+    },
+    "milestones/206-four-history/data/model-66.json": {
+      "action": "add",
+      "sha256": "d5c8ca0086aea5b9fd00e002e68d84d863bb198219be825dc28a2d615dafddf5",
+      "bytes": 94201
+    },
+    "milestones/206-four-history/data/model-67.json": {
+      "action": "add",
+      "sha256": "9d71f00edb6a78a0cbac9318e02ca70776681971fc81b11c3540c9d94cf96ecd",
+      "bytes": 99732
+    },
+    "milestones/206-four-history/data/model-68.json": {
+      "action": "add",
+      "sha256": "3f006b17c51b28ba57a22dd1c2ea45e0b222f46fdf59418c5fd8564b9da0bd7a",
+      "bytes": 51008
+    },
+    "milestones/206-four-history/data/model-69.json": {
+      "action": "add",
+      "sha256": "d4bf1bfd86ebd6865a7e8e620f440154415ede14afe3efc3ff9210f4a1949839",
+      "bytes": 77628
+    },
+    "milestones/206-four-history/data/model-7.json": {
+      "action": "add",
+      "sha256": "2a08e4add0e7a7247aa5027eedadb3aa165d1ce0ca21119b8e4b52ee65aa842c",
+      "bytes": 101200
+    },
+    "milestones/206-four-history/data/model-8.json": {
+      "action": "add",
+      "sha256": "178290e855d059098a5190d065b5d47fe2e3341275a26c01b696ea53894fb609",
+      "bytes": 106399
+    },
+    "milestones/206-four-history/data/model-9.json": {
+      "action": "add",
+      "sha256": "615dc08912736b0cb0508e70247c84a0b12533eaa2dfe1195a8b33d1afc969fe",
+      "bytes": 120375
+    },
+    "milestones/206-four-history/data/result-summary.json": {
+      "action": "add",
+      "sha256": "00edfe9459db857bc1f6c2e8a73c60169d87ad54bb81582dba07330993f1a1f5",
+      "bytes": 1724
+    },
+    "milestones/206-four-history/data/search-progress.json": {
+      "action": "add",
+      "sha256": "fac925e88cbe16e2c07145ce1dc93aace9701c3de1f902574e963d2b27e186f6",
+      "bytes": 24514
+    },
+    "milestones/206-four-history/lean/IndexedCriterion206.lean": {
+      "action": "add",
+      "sha256": "64d1272dfe373326429a61883343a2644a3a54fef698770bfa27572f8ac5e256",
+      "bytes": 7307
+    },
+    "milestones/206-four-history/logs/IndexedCriterion206-1794649909274679600/checker.py.txt": {
+      "action": "add",
+      "sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+      "bytes": 5617
+    },
+    "milestones/206-four-history/logs/IndexedCriterion206-1794649909274679600/compiler.log": {
+      "action": "add",
+      "sha256": "9dde5252c21b0e8366259ae3c67037f1c4bf3fce630d85438fbc76707c6e880d",
+      "bytes": 777
+    },
+    "milestones/206-four-history/logs/IndexedCriterion206-1794649909274679600/module.olean": {
+      "action": "add",
+      "sha256": "e55f024a27aa7c267a95548832b7006d88a18dd4a1894fa6f9d8c26ebfa46ca4",
+      "bytes": 260520
+    },
+    "milestones/206-four-history/logs/IndexedCriterion206-1794649909274679600/record.json": {
+      "action": "add",
+      "sha256": "3f5cda21d7160686e391f0599ee90f855cd8a46884a10dbb44c15a141144db3f",
+      "bytes": 4952
+    },
+    "milestones/206-four-history/logs/IndexedCriterion206-1794649909274679600/source.lean.txt": {
+      "action": "add",
+      "sha256": "64d1272dfe373326429a61883343a2644a3a54fef698770bfa27572f8ac5e256",
+      "bytes": 7307
+    },
+    "milestones/206-four-history/logs/contributor-changes.diff": {
+      "action": "add",
+      "sha256": "c62ba654d0cbb1e3bfb045fa1b18d25bb3499f8a666bdb50e13e8456bcc2ce9c",
+      "bytes": 2563
+    },
+    "milestones/206-four-history/logs/contributor-progress.md": {
+      "action": "add",
+      "sha256": "e20a7f2c61ebf4796cdd4f05adc528959b80eaa73223fc756b7ee4355fc31acc",
+      "bytes": 32006
+    },
+    "milestones/206-four-history/logs/editor-compilation.json": {
+      "action": "add",
+      "sha256": "492aa3c52c93b270272aa332186a9e500e359a237944a4ff83195901618aa453",
+      "bytes": 853
+    },
+    "milestones/206-four-history/logs/history-search-four.py.txt": {
+      "action": "add",
+      "sha256": "d91628352e9652b422495262c4a98d254f55afdc499cee3d53677be25af61ef3",
+      "bytes": 7924
+    },
+    "milestones/206-four-history/logs/model-review.md": {
+      "action": "add",
+      "sha256": "3d5b435633b66b6bbba29914bd190eef3ec8873f9c7cb7f649c6cd55bd105c25",
+      "bytes": 8009
+    },
+    "milestones/206-four-history/logs/search-review.md": {
+      "action": "add",
+      "sha256": "08542217434dec0b180db88eaed2902161a52e65549453852804b26eace0cf2f",
+      "bytes": 8267
+    },
+    "milestones/206-four-history/scripts/check_core.py": {
+      "action": "add",
+      "sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+      "bytes": 5617
+    },
+    "milestones/206-four-history/scripts/history_search.py": {
+      "action": "add",
+      "sha256": "d91628352e9652b422495262c4a98d254f55afdc499cee3d53677be25af61ef3",
+      "bytes": 7924
+    },
+    "milestones/206-four-history/scripts/history_search_larger.py": {
+      "action": "add",
+      "sha256": "e96cea7d793be2e77022c784179d29ce82f2f5c4cbb51c1840d6dc90deb9ae41",
+      "bytes": 8421
+    },
+    "milestones/206-four-history/scripts/native_resources.py": {
+      "action": "add",
+      "sha256": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+      "bytes": 5908
+    },
+    "milestones/206-four-history/scripts/prepare_proof.py": {
+      "action": "add",
+      "sha256": "b47fb4326688a96a3b8d1872f6eb278f55c79ecdacf4773b3c600c2ca43dd0d4",
+      "bytes": 1222
+    },
+    "milestones/206-four-history/scripts/publication.py": {
+      "action": "add",
+      "sha256": "c1936cdf8decb712cfa5df0eb009f5ad2aca27e8cdb326d0ea34c1eb633bfe04",
+      "bytes": 12117
+    },
+    "paper/snake9_frontier_explanation.tex": {
+      "action": "add",
+      "sha256": "48b2fca20d6e892e6d92f41984a9eb0b369174ee0b5e2e62417c849b2b0ec0e7",
+      "bytes": 70840
+    },
+    "paper/snake9_research.tex": {
+      "action": "add",
+      "sha256": "ee93390499f8c084a4ed5af52629b6192907e2f025c1e4d4809f693d1ca6028d",
+      "bytes": 645868
+    }
+  },
+  "self_policy": "Manifest excluded from its own files; its exact bytes are separately verified in the index.",
+  "scope": "Round206 research artifacts and current documents; exact-byte publication."
+}

@@ -85,6 +85,11 @@ A separate classification counts all ordered embeddings with only two
 coordinate histories free and proves whole-path rigidity when the two
 active base graphs are connected. Its proof is written; the complete
 Lean assembly remains pending.
+An unrestricted native search over all 70 four-coordinate choices
+also leaves that saved parent's class unchanged. A different class
+therefore requires at least five changed histories at fixed length
+and index matching; the general pair criterion passes Lean, while
+the complete finite exclusion certificate remains pending.
 No longer $Q_9$ snake or improved unconditional numerical bound is
 obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
@@ -8623,11 +8628,90 @@ natively at every one of their 99 vertices. Their Lean replay
 remains pending. Thus the full 254-partition rigidity result retains
 its written-proof and native-enumeration status~\cite{research205}.
 
-The next construction direction must permit a different parent or
-changes outside the covered slice-isometry family. For the present
-parent, changing at least four coordinate histories is necessary
-for a new class when length and indexed base words are retained.
-No longer $Q_9$ snake or improved global bound is obtained.
+The next calculation allows arbitrary words in the free coordinates
+and strengthens this source-specific restriction to five changed
+histories. No longer $Q_9$ snake or improved global bound is obtained.
+
+\subsection{Four unrestricted coordinate histories}
+\label{sec:history206}
+Write the saved ordered source as $P=((z_i,s_i))_{i=0}^{98}$,
+with $z_i$ the fixed base words. Allow arbitrary target block words
+$u_i$ of the same dimension and put $Q=((z_i,u_i))_{i=0}^{98}$.
+No extension of the selected correspondence to a cube isometry
+is assumed.
+
+\begin{proposition}[Exact indexed pair criterion]
+The target $Q$ is an induced path in the specified order exactly
+when, for every $i<j$,
+\[
+\Ham(z_i,z_j)+\Ham(u_i,u_j)
+\begin{cases}
+=1,&j=i+1,\\
+\ge2,&j\ge i+2.
+\end{cases}
+\]
+\end{proposition}
+\begin{proof}
+Hamming distance is the sum of the distances on disjoint coordinate
+blocks. A consecutive pair must have distance one. Every other pair
+must have distance at least two, which excludes both repetition and
+an unwanted edge. These conditions account for all pairs.
+\end{proof}
+
+For a nonconsecutive pair, base distance zero requires block
+distance at least two; base distance one requires different block
+words; base distance at least two gives no further restriction.
+For a consecutive pair, base distance one forces equal block words,
+and base distance zero forces block distance one.
+
+Merge indices joined by consecutive base-coordinate edges into
+chronological intervals. Every target has a constant block word on
+each interval. One word variable per interval therefore represents
+every target. Substitute these variables into every indexed pair
+condition and intersect conditions on each variable pair, retaining
+also conditions whose indices belong to the same interval. Distinct
+intervals need not have different word values.
+
+A global block translation makes the initial target word zero.
+Numbering intervals from zero, their block parities then equal
+their interval numbers modulo two. A global block-coordinate
+permutation makes the first block transition use the first coordinate.
+Both operations preserve the whole-path cube-isometry class.
+That transition exists for every four-coordinate choice: otherwise
+99 distinct vertices would lie in a slice of size 16.
+
+The resulting finite domains contain every block word of the
+required parity. All $\binom84=70$ choices of four free coordinates
+were enumerated. Each normalized model contains six explicit
+assignments obtained by forward global cube isometries of the source.
+After excluding those assignments, all 70 searches exhaust, using
+2,524 search nodes in total. All excluded assignments have saved
+permutations and complete vertex images. Independent source review
+found no unsound constraint or exclusion~\cite{research206}.
+
+Consequently, at the native-enumeration evidence level, every induced
+98-edge target retaining any four indexed coordinate histories of
+this saved parent is cube-isometric to it. Allowing fewer free
+coordinates is a subfamily of these models. A different class thus
+requires at least five changed histories under the fixed length and
+index matching. The conclusion concerns this source; it does not
+classify all 98-edge paths or establish a global $Q_9$ bound.
+
+Lean checks the exact pair criterion on Boolean coordinate words,
+its equivalence with distinctness and consecutive-only adjacency,
+the distance case split, and interval substitution soundness.
+The concrete domains and tables, interval construction, normalization,
+complete search trees and excluded-isometry witnesses still need
+their Lean connections. The generic theorem does not certify the
+70 individual exclusions.
+
+All 56 five-coordinate choices were subsequently attempted with
+three-second search limits. Only the choice with free coordinates
+$\{0,2,3,5,6\}$ exhausts. The other 55 reach their limits and remain
+unresolved. No new parent is found. The next constructive task is
+to reduce the residual permutations of the five-coordinate models
+and examine their unresolved branches. A new parent would still
+require a separate successful joining construction in $Q_9$.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
@@ -9881,6 +9965,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Two-coordinate history
 classification and finite slice certificates}. Research record 205,
 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/205-slice-certification}.
+
+\bibitem{research206}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Unrestricted coordinate
+histories and an exact whole-path criterion}. Research record 206,
+14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/206-four-history}.
 
 \end{thebibliography}
 \end{document}

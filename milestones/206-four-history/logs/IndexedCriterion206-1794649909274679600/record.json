@@ -1,0 +1,142 @@
+{
+  "status": "PASS",
+  "module": "IndexedCriterion206",
+  "source": "E:\\Snake-in-a-box\\milestones\\206-four-history\\lean\\IndexedCriterion206.lean",
+  "source_sha256": "64d1272dfe373326429a61883343a2644a3a54fef698770bfa27572f8ac5e256",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\206-four-history\\data\\IndexedCriterion206-execution.json": "71c1e3c9596457c5826063040d875254c636b1cde82e43f8676d44b13a83531b",
+    "E:\\Snake-in-a-box\\milestones\\206-four-history\\lean\\IndexedCriterion206.lean": "64d1272dfe373326429a61883343a2644a3a54fef698770bfa27572f8ac5e256",
+    "E:\\Snake-in-a-box\\milestones\\206-four-history\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\206-four-history\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\206-four-history\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\206-four-history\\logs\\IndexedCriterion206-1794649909274679600\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\206-four-history\\lean\\IndexedCriterion206.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\206-four-history\\logs\\IndexedCriterion206-1794649909274679600\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2337243136,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 85,
+    "snapshot_seconds": 0.01600000000325963
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2323976192,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 10300,
+          "ParentProcessId": 48676,
+          "PrivatePageCount": 48078848,
+          "WorkingSetSize": 24350720
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 85,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 2165403648,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 10300,
+          "ParentProcessId": 48676,
+          "PrivatePageCount": 56131584,
+          "WorkingSetSize": 203132928
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 10300,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0780000000086147,
+  "axioms": [
+    {
+      "theorem": "IndexedCriterion206.hamming_append",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "IndexedCriterion206.hamming_eq_zero_iff",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "IndexedCriterion206.pair_graph_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "IndexedCriterion206.indexed_graph_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "IndexedCriterion206.indexed_product_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "IndexedCriterion206.distance_cases",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "IndexedCriterion206.interval_substitution_sound",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "IndexedCriterion206.relation_substitution_sound",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "9dde5252c21b0e8366259ae3c67037f1c4bf3fce630d85438fbc76707c6e880d",
+  "object": "E:\\Snake-in-a-box\\milestones\\206-four-history\\build\\IndexedCriterion206.olean",
+  "olean_sha256": "e55f024a27aa7c267a95548832b7006d88a18dd4a1894fa6f9d8c26ebfa46ca4"
+}
