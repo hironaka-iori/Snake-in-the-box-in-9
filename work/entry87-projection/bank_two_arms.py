@@ -107,6 +107,7 @@ def examine(row,tag,budget,checker):
             report.update(checked_export(sat,clauses,Path("bank-two-proof-"+tag),checker))
     save(Path("bank-two-"+tag+("-checked" if checker else "")+".json"),report)
     print(tag,status,report["stats"]["conflicts"],flush=True)
+    return report
 
 
 if __name__=="__main__":
