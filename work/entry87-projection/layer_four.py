@@ -7,8 +7,9 @@ from ortools.sat.python import cp_model
 from solve import save,defects
 
 
-def find(dim,sizes,seconds,seed,hint=None,radius=None):
+def find(dim,sizes,seconds,seed,hint=None,radius=None,flexible=False,desired=None):
     size=1<<dim;order=[0,1,3,2];model=cp_model.CpModel()
+    target=desired if desired is not None else sum(sizes)
     x={(l,v):model.new_bool_var(f"x{l}_{v}") for l in range(4) for v in range(size)}
     end={(l,v):model.new_bool_var(f"e{l}_{v}") for l in range(4) for v in range(size)}
     # The first cross can be translated to address zero. The inner-coordinate
@@ -25,7 +26,11 @@ def find(dim,sizes,seconds,seed,hint=None,radius=None):
         model.add_exactly_one(flags.values());joints.append(flags)
     for v in range(size):model.add(x[0,v]+x[2,v]<=1)
     for idx,l in enumerate(order):
-        model.add(sum(x[l,v] for v in range(size))==sizes[idx])
+        selected=sum(x[l,v] for v in range(size))
+        if flexible:
+            if dim==7:model.add(selected<=51)
+            model.add(selected>=2)
+        else:model.add(selected==sizes[idx])
         model.add(sum(end[l,v] for v in range(size))==2)
         if idx:
             for v,h in joints[idx-1].items():model.add(end[l,v]>=h)
@@ -47,7 +52,9 @@ def find(dim,sizes,seconds,seed,hint=None,radius=None):
         even_ends=[end[l,v] for v in range(size) if v.bit_count()%2==0]
         # If both ends are even, there is one extra even vertex; if both are
         # odd, one fewer. Opposite endpoint colours give equal classes.
-        model.add(2*sum(even)==sizes[idx]+sum(even_ends)-1)
+        n=sum(x[l,v] for v in range(size)) if flexible else sizes[idx]
+        model.add(2*sum(even)==n+sum(even_ends)-1)
+    model.add(sum(x.values())==target)
     if hint:
         for (l,v),var in x.items():model.add_hint(var,int(v in hint[l]))
         if radius is not None:
@@ -69,7 +76,7 @@ def find(dim,sizes,seconds,seed,hint=None,radius=None):
         while (nxt:=graph[q[-1]]&unseen):
             v=nxt.pop();q.append(v);unseen.remove(v)
         if not unseen:
-            assert len(q)==sum(sizes) and not defects(q)
+            assert len(q)==target and not defects(q)
             if q[0]>>dim==2:q.reverse()
             status="FOUND";witness=q;break
         while unseen:
@@ -78,7 +85,7 @@ def find(dim,sizes,seconds,seed,hint=None,radius=None):
                 fresh=graph[stack.pop()]&unseen;unseen-=fresh;stack.extend(fresh);component|=fresh
             assert all(len(graph[v]&component)==2 for v in component)
             cuts.append(sorted(component));model.add(sum(x[v>>dim,v&(size-1)] for v in component)<len(component))
-    return dict(dim=dim,layer_sizes=sizes,status=status,seconds=seconds,seed=seed,cuts=cuts,
+    return dict(dim=dim,layer_sizes=sizes,flexible=flexible,target=target,status=status,seconds=seconds,seed=seed,cuts=cuts,
                 branches=branches,conflicts=conflicts,witness=witness)
 
 

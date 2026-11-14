@@ -15,7 +15,7 @@ int main(int argc,char**argv){
     if(argc!=2)return 2;int minimum=stoi(argv[1]),dim,id;string line;
     map<string,array<int,3>> bank;
     while(cin>>dim>>id>>line){
-        array<int,20> last{};array<int,20> count{};int active=0,start=0;
+        array<int,20> count{};int active=0,start=0;
         for(int j=0;j<int(line.size());++j){
             int bit=line[j]-'A';if(bit<0||bit>=dim)return 3;
             if(!count[bit]&&active==7){

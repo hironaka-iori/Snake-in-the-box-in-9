@@ -4,7 +4,6 @@ from collections import Counter
 from itertools import combinations
 from pathlib import Path
 from projection_seeds190 import seeds
-from punctured_lift import project
 from solve import BANK,BANK_HASH,defects,save,sha256
 
 
