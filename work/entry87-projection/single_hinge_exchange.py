@@ -11,12 +11,12 @@ from punctured_lift import project
 from solve import BANK,BANK_HASH,defects,save,sha256
 
 
-def search(W,budget,control=False,roots=None,removals=1,crossings=1):
+def search(W,budget,control=False,roots=None,removals=1,crossings=1,root_pairs=None):
     W=set(W);n=8;holes=set(range(256))-W
     adj=[[v^(1<<b) for b in range(n)] for v in range(256)]
     removed=0 if control else removals
     added=0 if control else 193-crossings-len(W)+removals
-    assert 1<=crossings<=5 and added>=0
+    assert 1<=crossings<=6 and added>=0
     root_candidates=[v for v in range(256) if len(set(adj[v])&W)<=2+removed]
     if len(root_candidates)<crossings:
         return [dict(root=None,status="EXHAUSTED",reason="too few possible doubled addresses",
@@ -80,10 +80,20 @@ def search(W,budget,control=False,roots=None,removals=1,crossings=1):
                 if v&mask:continue
                 sites=(v,v^(1<<i),v^(1<<j),v^mask)
                 for b in range(2):add([-face[b][s] for s in sites])
+        if crossings==2 and target>131:
+            # A common occupied neighbour forces the entire middle arm to have
+            # three vertices. The other face holds at most 128 (see the Q4 proof).
+            for v,ns in enumerate(adj):
+                for r,s in combinations((u for u in ns if u in hinge),2):
+                    add([-hinge[r],-hinge[s],-occupied[v]])
         rows=[]
-        for root,h in hinge.items():
+        splits=[(v,None) for v in hinge] if root_pairs is None else root_pairs
+        for root,other in splits:
             if roots is not None and root not in roots:continue
-            assumptions=[h]+([-lit for v,lit in hinge.items() if v<root] if crossings>1 else [])
+            assumptions=[hinge[root]]+([-lit for v,lit in hinge.items() if v<root] if crossings>1 else [])
+            if other is not None:
+                assert crossings==2 and root<other
+                assumptions.append(hinge[other])
             start=solver.accum_stats()["conflicts"];cuts=0;witness=None
             while True:
                 left=budget-(solver.accum_stats()["conflicts"]-start)
@@ -111,7 +121,9 @@ def search(W,budget,control=False,roots=None,removals=1,crossings=1):
                         extra=graph[stack.pop()]&rem;component.update(extra);stack.extend(extra);rem-=extra
                     assert all(len(graph[v]&component)==2 for v in component)
                     add([-face[v>>8][v&255] for v in sorted(component)]);cuts+=1
-            rows.append(dict(root=root,status=status,witness=witness,cycle_cuts=cuts,conflicts=solver.accum_stats()["conflicts"]-start))
+            row=dict(root=root,status=status,witness=witness,cycle_cuts=cuts,conflicts=solver.accum_stats()["conflicts"]-start)
+            if other is not None:row["second"]=other
+            rows.append(row)
             if witness:break
     return rows
 
@@ -120,7 +132,7 @@ if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("first",type=int);p.add_argument("stop",type=int)
     p.add_argument("--budget",type=int,default=150000);p.add_argument("--retry-from",type=int)
     p.add_argument("--removals",type=int,default=1);p.add_argument("--root",type=int)
-    p.add_argument("--crossings",type=int,choices=range(1,6),default=1);a=p.parse_args()
+    p.add_argument("--crossings",type=int,choices=range(1,7),default=1);a=p.parse_args()
     raw=BANK.read_bytes();assert sha256(raw).hexdigest()==BANK_HASH;bank=json.loads(raw)
     for source in range(a.first,a.stop):
         P,sw=project(bank[source]["vertex_sequence"],5);assert len(sw)==1 and len(P)==191
