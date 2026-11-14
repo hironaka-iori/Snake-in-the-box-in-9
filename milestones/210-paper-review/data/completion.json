@@ -1,0 +1,125 @@
+{
+  "round": 210,
+  "status": "REVIEW_COMPLETE",
+  "utc": "2026-11-14T11:25:24.868290+00:00",
+  "started_utc": "2026-11-14T11:11:13+00:00",
+  "base_head": "41d038f36b0ccdaa0494967d2b677f3463a4ee22",
+  "pause_requested": true,
+  "requested_final_goal_state": "PAUSED",
+  "goal_action": "Pause after successful publication; no subsequent research round.",
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "new_native_exclusions": 0,
+  "accepted_lean_modules_this_round": 0,
+  "software_tests_created_or_run": false,
+  "whole_original_main_paper_reviewed_lines": 10200,
+  "main_review_ranges": [
+    [
+      1,
+      3300
+    ],
+    [
+      3301,
+      6300
+    ],
+    [
+      6301,
+      10200
+    ]
+  ],
+  "main_review_reports": [
+    "logs/review-main-1.md",
+    "logs/review-main-2.md",
+    "logs/review-main-3.md"
+  ],
+  "revision_reviews": [
+    "logs/review-revision.md",
+    "logs/review-frontier.md"
+  ],
+  "documents": {
+    "snake9_research.tex": {
+      "editor_source": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_research.tex",
+      "repository_source": "E:\\Snake-in-a-box\\paper\\snake9_research.tex",
+      "sha256": "1774986363bdefddd5f05db5452b3b645da3f17602963d4fb8047b4489145594",
+      "bytes": 656835,
+      "lines": 10198,
+      "before_sha256": "4e902994337c8ef30d3d308e6915d7d43a80cb357570926fa23ab5fb42b8f73a"
+    },
+    "snake9_frontier_explanation.tex": {
+      "editor_source": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_frontier_explanation.tex",
+      "repository_source": "E:\\Snake-in-a-box\\paper\\snake9_frontier_explanation.tex",
+      "sha256": "b9a0547bfc5fe09362236e0b11ff51e17b0adc9f3c441a66051629dbb7194044",
+      "bytes": 16997,
+      "lines": 361,
+      "before_sha256": "3c59d926a831551f877cea4d22c0507eea19bbcfdacf6c50dcef575412eb2642"
+    }
+  },
+  "compile_receipts": [
+    "data/frontier-compile.json",
+    "data/main-compile.json"
+  ],
+  "search_checkpoint": "milestones/209-slice-capacity/data/completion.json",
+  "search_checkpoint_sha256": "6e67868dda6b250947ff1f3d181d5e96d89eb6d4031218aea5b4d7f4e3feaf80",
+  "unchanged_search_cases": [
+    {
+      "index": 24,
+      "base": [
+        0,
+        4
+      ],
+      "status": "OPEN",
+      "committed_jobs": 150,
+      "pending": 8,
+      "nodes": 9625900,
+      "solver_seconds": 297.28900000000004,
+      "state": "data/case-24/state.json",
+      "state_sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "capacity_removals": 0,
+      "partner_removals": 0,
+      "capacity_failures": 0
+    },
+    {
+      "index": 9,
+      "base": [
+        3,
+        4
+      ],
+      "status": "OPEN",
+      "committed_jobs": 150,
+      "pending": 3,
+      "nodes": 8142891,
+      "solver_seconds": 253.36299999999994,
+      "state": "data/case-9/state.json",
+      "state_sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "capacity_removals": 0,
+      "partner_removals": 0,
+      "capacity_failures": 0
+    },
+    {
+      "index": 23,
+      "base": [
+        0,
+        5
+      ],
+      "status": "OPEN",
+      "committed_jobs": 100,
+      "pending": 7,
+      "nodes": 2683356,
+      "solver_seconds": 245.65499999999994,
+      "state": "data/case-23/state.json",
+      "state_sha256": "ec3701961111ed7af971295d4512853adaa4f26dc120bc559e70e39b4176d32e",
+      "capacity_removals": 2253129,
+      "partner_removals": 10136052,
+      "capacity_failures": 893000
+    }
+  ],
+  "six_coordinate_total_exhausted": 1,
+  "six_coordinate_total_unresolved": 27,
+  "next_step_after_resume": "Subset capacity in the saturated 32-interval distinctness family, with a checked generic implication and explicit search-frontier transfer; or exact continuation of frozen searches.",
+  "limits": [
+    "No clean rebuild of the full archived235 dependency closure.",
+    "No rerun or new certification of native exclusions.",
+    "No new Lean compilation this round.",
+    "No complete page-by-page visual audit."
+  ]
+}

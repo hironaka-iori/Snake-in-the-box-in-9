@@ -1,3 +1,13 @@
+# Current result after round 210
+
+The complete paper has been reviewed and reorganized into upper-bound deductions and constructions/whole-snake restrictions. The short frontier explanation now gives the logical chain with brief proofs. Both documents compile successfully; authors and the main paper's local hypersetup settings are preserved.
+
+The research frontier is unchanged: a verified 191-edge construction, the completed archived 235 theorem with its independent rebuild pending, conditional routes to 234 and 233, and 27 unresolved six-history models of the saved Q8 parent. No new mathematical bound, search exclusion or Lean module is claimed in this review. The user requested a pause after this round; resume only on a new instruction.
+
+Read [the review and current argument](milestones/210-paper-review/MATHEMATICAL_NOTE.md), [completion record](milestones/210-paper-review/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), [main paper](paper/snake9_research.tex) and [short frontier explanation](paper/snake9_frontier_explanation.tex). Frozen search states remain in [round209](milestones/209-slice-capacity).
+
+## Earlier checkpoints
+
 # Current result after round 209
 
 Square-base geometry gives a capacity inequality for whole coordinate histories. The retained pair [0,5] saturates the capacity of 32 even words, forcing nine shared words at opposite singleton slices. Three Lean modules pass with 13 reports, covering the geometric core, capacity and support implications, and source-derived interval counts. The full model and native exclusions remain separate.
