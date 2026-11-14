@@ -41,7 +41,9 @@ def search(root,budget,encoding,solver_name,first_step=None,first_cuts=False,che
     eligible=opposite if vertex_target%2==0 else [v for v in same if v!=root]
     endpoint={v:pool.id(("end",v)) for v in eligible}
     encoder={"totalizer":EncType.totalizer,"network":EncType.cardnetwrk,"sequential":EncType.seqcounter}[encoding]
-    prefix=Path("partner-proof-"+(str(root) if label is None else label))
+    certificate_tag=str(root) if label is None else label
+    if label is None and vertex_target!=94:certificate_tag+=f"-v{vertex_target}"
+    prefix=Path("partner-proof-"+certificate_tag)
     clauses=[]
     with Solver(name=solver_name,with_proof=checker is not None) as engine:
         if checker is None:sat=engine
