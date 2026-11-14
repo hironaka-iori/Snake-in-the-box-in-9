@@ -3,7 +3,7 @@ import argparse
 from pathlib import Path
 from joint_four_repair import sources
 from opposite_anchors import arrangements
-from one_layer_core import N,study
+from one_layer_core import N,mutations,study
 from solve import defects,save
 
 
@@ -34,15 +34,27 @@ def bridges(a,c,width):
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("first",type=int);p.add_argument("stop",type=int)
     p.add_argument("--width",type=int,default=10);p.add_argument("--keep",type=int,default=1000)
-    p.add_argument("--nodes",type=int,default=500000);a=p.parse_args();rows=[]
+    p.add_argument("--nodes",type=int,default=500000)
+    p.add_argument("--end-trim",type=int,default=0);a=p.parse_args();rows=[]
     for i,(_,axes,q) in enumerate(sources()):
         for orientation,paths in enumerate(arrangements(q)):
             idx=2*i+orientation
             if not a.first<=idx<a.stop:continue
             data=bridges(paths[0],paths[2],a.width)
+            if a.end_trim:
+                interior,data_nodes=data;combined={};base=paths[2]
+                oldcores={tuple(base[j:j+len(base)-15]) for j in range(16)}
+                for c in interior:
+                    changed,visited=mutations(paths[0],list(c),a.end_trim);data_nodes+=visited
+                    for qnew in changed:
+                        if qnew in interior:continue
+                        if any(qnew[j:j+len(base)-15] in oldcores for j in range(len(qnew)-len(base)+16)):continue
+                        combined[qnew]=None
+                data=combined,data_nodes
             r=study(paths,0,a.keep,a.nodes,True,data)
             rows.append(dict(index=idx,source=i,axes=axes,**r))
-            save(Path(f"interior-layer-{a.first}-{a.stop}-{a.width}-{a.keep}-{a.nodes}.json"),rows)
+            suffix=f"-ends{a.end_trim}" if a.end_trim else ""
+            save(Path(f"interior-layer-{a.first}-{a.stop}-{a.width}-{a.keep}-{a.nodes}{suffix}.json"),rows)
             if r["best_edges"]>=192:break
         if rows and rows[-1]["best_edges"]>=192:break
     print(len(rows),sum(r["candidates"] for r in rows),max((r["best_edges"] for r in rows),default=0))
