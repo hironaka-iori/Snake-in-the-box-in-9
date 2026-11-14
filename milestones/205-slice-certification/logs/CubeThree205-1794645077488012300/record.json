@@ -1,0 +1,120 @@
+{
+  "status": "PASS",
+  "module": "CubeThree205",
+  "source": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\CubeThree205.lean",
+  "source_sha256": "164619e31b0663e394ba2f9437a5e745dac4339056e9d8d93fceda800f117dc0",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\CubeThree205-execution.json": "7bf3d9e251209e55ab4c89e7f0b86d4bfd2893e476d631edc2f143cad993a7a8",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\CubeThree205.lean": "164619e31b0663e394ba2f9437a5e745dac4339056e9d8d93fceda800f117dc0",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\CubeThree205-1794645077488012300\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\CubeThree205.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\CubeThree205-1794645077488012300\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2425143296,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 85,
+    "snapshot_seconds": 0.01600000000325963
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2421919744,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 58152,
+          "ParentProcessId": 46580,
+          "PrivatePageCount": 48095232,
+          "WorkingSetSize": 27385856
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 85,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 2149396480,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 58152,
+          "ParentProcessId": 46580,
+          "PrivatePageCount": 118460416,
+          "WorkingSetSize": 269205504
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 87,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 58152,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0780000000086147,
+  "axioms": [
+    {
+      "theorem": "CubeThree205.sameParityColour",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "CubeThree205.oppositeParityAdjacency",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "CubeThree205.selectedColourCorrespondence",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "CubeThree205.fourCoordinateData",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "CubeThree205.smallPaths",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "CubeThree205.colourEven",
+      "axioms": []
+    },
+    {
+      "theorem": "CubeThree205.colourOpposite",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "963d0d1dfd7160f890da633b36c53bc4c090e4481eec47ab94e4e1117169a34f",
+  "object": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\build\\CubeThree205.olean",
+  "olean_sha256": "ab76fe9f60463e2e57565754ed7e6ced79798e9b5c8b90dca306f86befff481c"
+}

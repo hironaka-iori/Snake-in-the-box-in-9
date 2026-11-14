@@ -81,6 +81,10 @@ native comparison of all 254 nontrivial coordinate partitions finds
 that the broader slice-isometry family cannot change the saved
 98-edge parent's cube-isometry class. The examined one-/two-pair and
 single-three-cycle operations leave the saved 191-edge bank closed.
+A separate classification counts all ordered embeddings with only two
+coordinate histories free and proves whole-path rigidity when the two
+active base graphs are connected. Its proof is written; the complete
+Lean assembly remains pending.
 No longer $Q_9$ snake or improved unconditional numerical bound is
 obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
@@ -8416,6 +8420,215 @@ The next certification task is a checked completeness certificate
 for the finite comparison. Further construction requires different
 parents or changes outside the covered slice-isometry family.
 
+\section{Two-coordinate history classification}
+\label{sec:history205}
+
+Fixing the indexed base coordinates gives a stronger restriction than
+assuming slice isometries in advance. The following classification
+derives those local extensions and describes the whole ordered path.
+
+\begin{theorem}[Two-coordinate history classification]
+\label{thm:history205}
+Let $P=((z_i,u_i))_{i=0}^{m}$ be a nonempty ordered induced cube
+path, with $u_i\in Q_2$ and $z_i$ containing the remaining coordinates.
+For $\varepsilon\in\{0,1\}$, let $B_\varepsilon$ be the graph of
+occupied base words $z_i$ with block parity $\varepsilon$, using
+base-cube adjacency, and let $c_\varepsilon$ be its number of
+components. An empty graph has zero components. Then exactly
+\[
+2^{1+c_0+c_1}
+\]
+ordered induced paths $((z_i,v_i))_{i=0}^{m}$ have the prescribed
+indexed base words. If $r$ is the number of nonempty $B_\varepsilon$,
+these paths form exactly
+\[
+2^{c_0+c_1-r}
+\]
+classes under global isometries of the two block coordinates alone.
+The initial block word and endpoints are unrestricted.
+\end{theorem}
+\begin{proof}
+The full-vertex parity changes at every step of each path. Since the
+base words agree at corresponding indices, source and target block
+parities differ by one constant $\delta$. Fix a flip $X$ of the first
+block coordinate. Applying $X^\delta$ to the target normalizes this
+offset to zero.
+
+At a fixed base word and parity, the selected correspondence is
+injective and takes a subset of a two-element diagonal into that
+same diagonal. On every nonempty subset it extends uniquely to
+identity or diagonal transposition. Write $\tau_0$ for the map
+exchanging $00,11$ and fixing $01,10$, and $\tau_1$ for the map
+exchanging $01,10$ and fixing $00,11$. These commuting square
+isometries are coordinate swap followed by flipping both bits,
+and coordinate swap, respectively. The normalized target therefore
+chooses one binary switch on each occupied base word of each parity.
+
+For two neighbouring active base words, unequal switches toggle
+equality of any chosen pair of block words on that diagonal.
+Full adjacency between the slices is exactly block-word equality.
+Both paths are induced in the same index order, so every selected
+pair must retain its adjacency status. The switch is consequently
+constant on each component of $B_\varepsilon$.
+
+Conversely, choose a switch independently on each such component.
+Within a slice the combined map is a square isometry. Between
+slices at base distance at least two, no edge is possible. Between
+neighbouring slices, opposite block parities remain unequal, while
+same-parity selected words receive the same switch and retain their
+equality status. Thus distinctness and every selected edge and
+nonedge are preserved. The resulting sequence is an induced path;
+a final application of $X^\delta$ preserves this property.
+
+Different offsets give different block parities, and different
+switches on an occupied component change a selected word. The
+parameters are therefore bijective, proving the first count.
+
+The eight square isometries act on this family. A parity-changing
+isometry fixes no selected word. Among the four parity-preserving
+maps, only switches on unoccupied diagonals fix the entire ordered
+target. Every stabilizer has size $2^{2-r}$, hence every orbit has
+size $2^{r+1}$. Division gives the second count.
+\end{proof}
+
+For fixed block parity, the component switches are commuting
+involutions. A switch acts on every selected vertex in its component
+simultaneously; different components have disjoint supports within
+one parity, while the two diagonal actions commute across parities.
+Their products form a group isomorphic to
+$(\mathbb Z/2\mathbb Z)^{c_0+c_1}$, acting freely and transitively
+on the parity-normalized target embeddings. This is a symmetry
+of whole ordered embeddings. A switch need not fix the source
+vertex set or preserve adjacency outside the selected paths.
+
+\begin{corollary}[Whole-path rigidity]
+If each nonempty $B_\varepsilon$ is connected, every target in
+Theorem~\ref{thm:history205} is obtained by one global block
+isometry. If only one coordinate may change, every target is the
+source or its global flip in that coordinate.
+\end{corollary}
+\begin{proof}
+Connectedness gives $c_0+c_1=r$, so the second count is one.
+For one free coordinate, the constant full-parity difference is
+exactly the xor difference of that bit. Consecutive cube adjacency
+already proves this latter assertion.
+\end{proof}
+
+The class count uses only block isometries. Allowing transformations
+of base coordinates, exchanges between base and block coordinates,
+or reversal can identify further paths. For one vertex the counts
+are four targets and one class. If both block parities occur and
+both active graphs are connected, there are eight targets and one
+class. No optimality assumption is needed.
+
+For the saved 98-edge $Q_8$ parent, the native calculation finds
+both active graphs connected for all 28 coordinate pairs. All 56
+spanning trees and their complete source-position coverage are
+recorded. The theorem therefore excludes a new class from changing
+only one or two coordinate histories of that parent, at the stated
+written-proof and native-data evidence level. It does not cover
+a change of index order or length, or a different parent. The
+three-coordinate case is treated below.
+
+\paragraph{Proof-assistant boundary.}
+The parity-offset argument, extension on a two-element diagonal,
+and general spanning-tree constancy pass Lean. The complete
+geometric classification and counting theorem have written proofs
+and independent review; their assembled Lean proof remains pending.
+All 56 source-specific graph certificates also pass after the
+finite assertions are split into blocks of eight positions. Earlier
+unchunked attempts exceeded the existing memory limit.
+
+\begin{theorem}[Three-coordinate extension]
+\label{thm:extension205}
+Every injective parity-preserving map from a selected subset of
+$Q_3$ into $Q_3$ that preserves adjacency and nonadjacency extends
+to a parity-preserving cube isometry.
+\end{theorem}
+\begin{proof}
+Label an antipodal pair by its even word: use $c(u)=u$ for even
+$u$ and $c(u)=u\oplus111$ for odd $u$. There are four labels.
+Among equal-parity words, label equality is word equality.
+Opposite-parity words with equal labels are antipodes; those with
+different labels are adjacent.
+
+The selected map induces a well-defined injective map on its
+represented labels. Selected antipodes remain opposite in parity
+and nonadjacent, hence antipodal. Distinct labels remain distinct
+by injectivity in equal parity and by adjacency in opposite
+parity. Extend this partial injection to a permutation of all
+four labels.
+
+The maps $u\mapsto\pi(u)\oplus b$, with $\pi\in S_3$ and $b$
+even, give 24 parity-preserving cube isometries. Their action on
+the four even words is faithful. Fixing zero forces $b=0$;
+fixing each weight-two word then fixes its missing coordinate,
+so $\pi$ is identity. Their induced actions are therefore all
+24 label permutations. An isometry realizing the extended
+permutation agrees with the selected map, since parity and label
+uniquely specify each word.
+\end{proof}
+
+For two ordered induced paths agreeing outside three coordinates
+at every index, normalize their constant parity difference by a
+global block-bit flip. Each selected-slice correspondence meets
+Theorem~\ref{thm:extension205} and therefore extends to a cube
+isometry. Undoing normalization preserves this conclusion.
+Thus arbitrary changes to three coordinate histories already
+belong to the slice-isometry family of Theorem~\ref{thm:slices204}.
+
+Combined with the native all-partition result, this shows that a
+different class of the saved 98-edge parent requires at least four
+changed coordinate histories, at the same length and fixed index
+comparison. Here classes allow global cube isometries and possible
+path reversal, as in the native comparison. This consequence
+inherits that calculation's evidence level.
+
+The extension assertion fails in $Q_4$ even for whole induced
+paths. In integer encoding, take
+\[
+P=(0,1,3,7,6),\qquad Q=(0,1,3,7,15).
+\]
+Both are induced four-edge paths with matching parity at each
+index. Their endpoint distances are two and four, so their
+indexed correspondence cannot extend to a cube isometry. They
+remain inequivalent when reversal is allowed. Lean checks both
+complete paths, distinctness, parity alignment and these distances.
+This example constructs no new $Q_8$ parent or $Q_9$ record.
+Lean checks the three-coordinate parity/antipodal identities, the induced injective correspondence of selected labels, and two complete four-dimensional paths with different endpoint distances. The full extension theorem and its connection
+to the finite census remain to be assembled in Lean.
+
+The saved 26-edge $Q_6$ and 50-edge $Q_7$ examples also have
+one restricted block-isometry class for all 15 and 21 coordinate
+pairs, respectively, by native component calculation. These three
+individual examples do not establish a dimensional recurrence.
+
+\paragraph{Finite slice certificates.}
+The 254 prepared slice models have 5,821 variables, 23,892 initial
+candidate values and 460,858 compatibility entries. Initial
+propagation removes 16,166 values, leaving 7,726; residual branching
+gives 321 complete assignments. The elimination theorem removes
+a candidate only when every value in the entire current neighbouring
+domain is incompatible. Complete branching then covers every
+assignment satisfying the explicit finite model.
+
+Lean accepts complete coverage for 254 of the 254 explicit finite models, using 625 of the 625 planned data, elimination and cover modules. This statement concerns assignments to the literal domains and compatibility tables.
+
+This coverage statement still requires three geometric connections:
+completeness of the actual cube-isometry domains, the exact meaning
+of the literal compatibility tables, and global-isometry witnesses
+for all surviving leaves. Concrete permutations, translations and
+orientations have been saved for all 321 leaves and compared
+natively at every one of their 99 vertices. Their Lean replay
+remains pending. Thus the full 254-partition rigidity result retains
+its written-proof and native-enumeration status~\cite{research205}.
+
+The next construction direction must permit a different parent or
+changes outside the covered slice-isometry family. For the present
+parent, changing at least four coordinate histories is necessary
+for a new class when length and indexed base words are retained.
+No longer $Q_9$ snake or improved global bound is obtained.
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -9662,6 +9875,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Whole-snake gluing of
 coordinate-slice isometries and a complete finite parent comparison}.
 Research record 204, 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/204-cyclic-symmetry}.
+
+\bibitem{research205}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Two-coordinate history
+classification and finite slice certificates}. Research record 205,
+14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/205-slice-certification}.
 
 \end{thebibliography}
 \end{document}

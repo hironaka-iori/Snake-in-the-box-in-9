@@ -1,0 +1,84 @@
+import HistoryData205
+namespace ActivePair205_0_1
+open HistoryData205 ActiveTree205
+namespace Even
+def words : Array Nat := #[0,4,12,36,68,132,28,52,100,164,92,116,180,96,108,228,160,172,88,124,220,188,224,80,72,212,204,184,232,240,192,208,152,56,136,40]
+def parents : Array Nat := #[0,0,1,1,1,1,2,3,3,3,6,7,7,8,8,8,9,9,10,10,10,12,13,18,18,20,20,21,22,22,22,23,27,27,32,33]
+def positions : Array Nat := #[0,3,4,12,96,90,7,13,19,23,80,14,22,62,16,54,68,24,75,15,81,27,47,74,76,86,82,28,48,46,42,45,35,29,38,30]
+def cover : Array Nat := #[0,0,0,1,2,0,2,6,0,0,0,0,3,7,11,19,14,0,14,8,11,7,12,9,17,0,17,21,27,33,35,0,35,33,27,32,0,0,34,0,0,0,30,0,0,31,29,22,28,0,0,0,0,0,15,0,0,0,0,0,0,0,13,0,0,0,0,0,16,0,0,0,0,0,23,18,24,0,24,18,10,20,26,0,26,20,25,0,0,0,5,0,0,0,0,0,4,0,0]
+def active (x : Nat) : Bool := (Bool.xor (x.testBit 0) (x.testBit 1)) == false
+def base (x : Nat) : Nat := x &&& 252
+def Selected (x : Nat) : Prop := ∃ i : Fin 99, active seed[i.val]! = true ∧ base seed[i.val]! = x
+theorem coverageCheck : (List.range 99).all (fun i => decide (active seed[i]! = true →
+    cover[i]! < 36 ∧ words[cover[i]!]! = base seed[i]!)) = true := by decide +kernel
+theorem coverage : ∀ i : Fin 99, active seed[i.val]! = true →
+    cover[i.val]! < 36 ∧ words[cover[i.val]!]! = base seed[i.val]! := by
+  intro i
+  exact of_decide_eq_true (List.all_eq_true.mp coverageCheck i.val (List.mem_range.mpr i.isLt))
+theorem parentCheck : (List.range 36).all (fun j => decide (positions[j]! < 99 ∧
+    active seed[positions[j]!]! = true ∧ words[j]! = base seed[positions[j]!]! ∧
+    (0<j → parents[j]! < j ∧ adjacent words[parents[j]!]! words[j]!))) = true := by decide +kernel
+theorem parentFacts : ∀ j : Fin 36, positions[j.val]! < 99 ∧
+    active seed[positions[j.val]!]! = true ∧ words[j.val]! = base seed[positions[j.val]!]! ∧
+    (0<j.val → parents[j.val]! < j.val ∧ adjacent words[parents[j.val]!]! words[j.val]!) := by
+  intro j
+  exact of_decide_eq_true (List.all_eq_true.mp parentCheck j.val (List.mem_range.mpr j.isLt))
+theorem constantOnActive {W : Type} (f : Nat → W)
+    (same : ∀ x y, Selected x → Selected y → adjacent x y → f x=f y) :
+    ∀ x, Selected x → f x=f words[0]! := by
+  apply coveredConstant (fun i => words[i]!) (fun i => parents[i]!) 36 Selected adjacent f
+  · intro j hj
+    have h := parentFacts ⟨j,hj⟩
+    exact ⟨⟨positions[j]!,h.1⟩,h.2.1,h.2.2.1.symm⟩
+  · intro x hx
+    rcases hx with ⟨i,ha,hb⟩
+    have h := coverage i ha
+    exact ⟨cover[i.val]!,h.1,h.2.trans hb⟩
+  · intro j hpos hj; exact ((parentFacts ⟨j,hj⟩).2.2.2 hpos).1
+  · intro j hpos hj; exact ((parentFacts ⟨j,hj⟩).2.2.2 hpos).2
+  · exact same
+#print axioms coverage
+#print axioms parentFacts
+#print axioms constantOnActive
+end Even
+namespace Odd
+def words : Array Nat := #[0,16,20,48,80,28,84,148,112,176,208,12,60,68,212,132,120,96,160,192,44,76,244,104,248,200,40,36,108,172,72,204,252,228,232,136,236,152]
+def parents : Array Nat := #[0,0,1,1,1,2,2,2,3,3,4,5,5,6,6,7,8,8,9,10,11,11,14,16,16,19,20,20,20,20,21,21,22,22,23,25,28,35]
+def positions : Array Nat := #[1,72,93,65,73,8,94,88,64,66,44,5,9,95,87,89,59,61,67,41,10,98,52,60,50,40,31,11,17,25,77,83,51,53,49,37,56,36]
+def cover : Array Nat := #[0,0,0,0,0,11,0,0,5,12,20,27,0,0,0,0,0,28,0,0,0,0,0,0,0,29,0,0,0,0,0,26,0,0,0,0,37,35,0,35,25,19,0,19,10,0,0,0,0,34,24,32,22,33,0,33,36,32,24,16,23,17,0,17,8,3,9,18,0,18,9,3,1,4,0,0,0,30,0,0,0,0,0,31,0,0,0,14,7,15,0,15,7,2,6,13,0,13,21]
+def active (x : Nat) : Bool := (Bool.xor (x.testBit 0) (x.testBit 1)) == true
+def base (x : Nat) : Nat := x &&& 252
+def Selected (x : Nat) : Prop := ∃ i : Fin 99, active seed[i.val]! = true ∧ base seed[i.val]! = x
+theorem coverageCheck : (List.range 99).all (fun i => decide (active seed[i]! = true →
+    cover[i]! < 38 ∧ words[cover[i]!]! = base seed[i]!)) = true := by decide +kernel
+theorem coverage : ∀ i : Fin 99, active seed[i.val]! = true →
+    cover[i.val]! < 38 ∧ words[cover[i.val]!]! = base seed[i.val]! := by
+  intro i
+  exact of_decide_eq_true (List.all_eq_true.mp coverageCheck i.val (List.mem_range.mpr i.isLt))
+theorem parentCheck : (List.range 38).all (fun j => decide (positions[j]! < 99 ∧
+    active seed[positions[j]!]! = true ∧ words[j]! = base seed[positions[j]!]! ∧
+    (0<j → parents[j]! < j ∧ adjacent words[parents[j]!]! words[j]!))) = true := by decide +kernel
+theorem parentFacts : ∀ j : Fin 38, positions[j.val]! < 99 ∧
+    active seed[positions[j.val]!]! = true ∧ words[j.val]! = base seed[positions[j.val]!]! ∧
+    (0<j.val → parents[j.val]! < j.val ∧ adjacent words[parents[j.val]!]! words[j.val]!) := by
+  intro j
+  exact of_decide_eq_true (List.all_eq_true.mp parentCheck j.val (List.mem_range.mpr j.isLt))
+theorem constantOnActive {W : Type} (f : Nat → W)
+    (same : ∀ x y, Selected x → Selected y → adjacent x y → f x=f y) :
+    ∀ x, Selected x → f x=f words[0]! := by
+  apply coveredConstant (fun i => words[i]!) (fun i => parents[i]!) 38 Selected adjacent f
+  · intro j hj
+    have h := parentFacts ⟨j,hj⟩
+    exact ⟨⟨positions[j]!,h.1⟩,h.2.1,h.2.2.1.symm⟩
+  · intro x hx
+    rcases hx with ⟨i,ha,hb⟩
+    have h := coverage i ha
+    exact ⟨cover[i.val]!,h.1,h.2.trans hb⟩
+  · intro j hpos hj; exact ((parentFacts ⟨j,hj⟩).2.2.2 hpos).1
+  · intro j hpos hj; exact ((parentFacts ⟨j,hj⟩).2.2.2 hpos).2
+  · exact same
+#print axioms coverage
+#print axioms parentFacts
+#print axioms constantOnActive
+end Odd
+end ActivePair205_0_1

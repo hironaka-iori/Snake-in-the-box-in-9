@@ -1,0 +1,105 @@
+{
+  "status": "FAILED",
+  "module": "FiniteDomain205",
+  "source": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\FiniteDomain205.lean",
+  "source_sha256": "07be39f209fd7fa64cff8e43b1ac391c0314980e23791793abbd9fbeaa4af4f1",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\FiniteDomain205-execution.json": "e871a9d4276b563cd34c54956c9be56e71d8900525e8bdc00a5bda4970523cba",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\FiniteDomain205.lean": "07be39f209fd7fa64cff8e43b1ac391c0314980e23791793abbd9fbeaa4af4f1",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\FiniteDomain205-1794642567955908100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\FiniteDomain205.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\FiniteDomain205-1794642567955908100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2223411200,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 86,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2204205056,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 51668,
+          "ParentProcessId": 3204,
+          "PrivatePageCount": 48111616,
+          "WorkingSetSize": 28868608
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.015999999988707714
+    },
+    {
+      "free_bytes": 2008236032,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 51668,
+          "ParentProcessId": 3204,
+          "PrivatePageCount": 56029184,
+          "WorkingSetSize": 216223744
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 87,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 51668,
+  "exit_code": 1,
+  "stop_reason": null,
+  "seconds": 2.062999999994645,
+  "axioms": [
+    {
+      "theorem": "FiniteDomain205.exclude",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "FiniteDomain205.remove",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "FiniteDomain205.forced",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "FiniteDomain205.impossible",
+      "axioms": [
+        "sorryAx"
+      ]
+    }
+  ],
+  "log_sha256": "8b3747ad086760f35da5d34afd3d23f8d551bfebca79221e6e6073f4330f5ad4"
+}

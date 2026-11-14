@@ -1,0 +1,73 @@
+\paragraph{Whole-path classification with two free coordinates.}
+Write the ordered source as $((z_i,u_i))$, where $u_i\in Q_2$
+contains the two coordinates allowed to change. For each block
+parity, form the graph of occupied base words using base-cube
+adjacency, and let its component count be $c_0$ or $c_1$.
+There are exactly $2^{1+c_0+c_1}$ ordered induced paths with
+these same indexed base words. If $r$ parity graphs are nonempty,
+the number of classes under global block isometries is
+$2^{c_0+c_1-r}$.
+
+The reason is short. Full parity changes at every path step,
+so source and target have one constant block-parity offset.
+After a global bit flip removes it, each selected correspondence
+acts within a two-element diagonal and extends to identity or
+diagonal transposition. Neighbouring active base words must choose
+the same transposition: unequal choices toggle a selected pair's
+adjacency. Conversely, switches constant on components preserve
+every edge and nonedge. This gives the first count. The eight
+square isometries have stabilizers of size $2^{2-r}$, giving the
+second count. The latter concerns only block isometries, with
+index order and all base words fixed.
+
+The component switches commute and each is its own inverse.
+They therefore give a symmetry group acting on entire ordered
+embeddings, with every selected vertex in a component switched
+simultaneously. The action need not fix the original vertex set.
+
+Thus connectedness of each nonempty active graph forces one
+global block isometry to carry the entire snake to its target.
+Native spanning trees establish this connectedness for both
+parities of all 28 coordinate pairs of the saved $Q_8$ parent.
+Changing only one or two coordinate histories therefore yields
+no new class for that parent. Changing only one coordinate is
+even more restricted: the parity argument directly forces one
+constant bit flip. Three or more changed histories, different
+parents, and changes of length remain outside this restriction.
+
+The classification has a complete written proof and independent
+review. Lean accepts its parity and diagonal-extension components
+and the general spanning-tree argument; the full assembled
+theorem is pending. The source-specific graph checks exceeded
+the memory limit and are saved for smaller proof units.
+
+@@FINITE_STATUS@@
+
+\paragraph{Why three coordinates are also insufficient here.}
+Every parity-preserving selected correspondence in $Q_3$ that
+preserves adjacency and nonadjacency extends to a cube isometry. Label the four
+antipodal pairs by their even words. Equal-parity distinct words
+have different labels; opposite-parity words are adjacent exactly
+when their labels differ. The correspondence therefore induces a
+partial injective permutation of four labels. Every full permutation
+of those labels is realized by one of the 24 parity-preserving
+cube isometries.
+
+Normalizing the common parity offset applies this extension in
+each slice of two snakes with matching indexed base words. Hence
+every change to three coordinate histories already belongs to the
+slice-isometry family. The saved parent's native rigidity result
+therefore requires at least four changed histories for a new class,
+with global cube isometry and reversal allowed. In four coordinates
+the local extension principle fails: $0000,0011$ can map to
+$0000,1111$, preserving parity and nonadjacency while changing
+distance. This identifies an available direction; it gives no
+whole-snake construction. @@CUBE_THREE_STATUS@@
+
+The finite-model coverage must still be connected to the actual
+cube-isometry domains and compatibility tables. Explicit global
+isometries for all 321 surviving leaves are saved and checked
+natively on all 99 vertices; their Lean replay is pending. These
+proof gaps remain separate from the component classification.
+No new numerical bound or longer $Q_9$ construction is claimed.
+

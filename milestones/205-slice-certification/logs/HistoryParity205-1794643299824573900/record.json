@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "module": "HistoryParity205",
+  "source": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\HistoryParity205.lean",
+  "source_sha256": "86fe507e70970d7c0e32db8dd9d7510a44b72bd2f016320cca4fe9f0df98c99c",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\HistoryParity205-execution.json": "dff6afbecd2910e636d9d4fce28c0e8a2c94e7ce92eb8393d5ddb8d7fdd90de6",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\HistoryParity205.lean": "86fe507e70970d7c0e32db8dd9d7510a44b72bd2f016320cca4fe9f0df98c99c",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\HistoryParity205-1794643299824573900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\HistoryParity205.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\HistoryParity205-1794643299824573900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1725014016,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.01600000000325963
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1701076992,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 46896,
+          "ParentProcessId": 55192,
+          "PrivatePageCount": 48107520,
+          "WorkingSetSize": 30822400
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 46896,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.125,
+  "axioms": [
+    {
+      "theorem": "HistoryParity205.xorSolve",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "HistoryParity205.differenceConstant",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "HistoryParity205.oneBitHistory",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "HistoryParity205.xorCancel",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "0e39ba9c47f299ed64d0c5d62374c82ff106d291a73c8ddd7073799f5ba915fb",
+  "object": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\build\\HistoryParity205.olean",
+  "olean_sha256": "7fe262a984bafb4f9dfbbc4fd49f9d3985b32929f541b862320a997f75c6d126"
+}

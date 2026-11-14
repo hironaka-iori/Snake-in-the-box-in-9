@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "module": "DiagonalExtension205",
+  "source": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\DiagonalExtension205.lean",
+  "source_sha256": "9abe49331ab86cdcf362f4913319fc239622d8b166781903630232820f9858c4",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\DiagonalExtension205-execution.json": "aae3e57a29811ea65232d73077fcd82a6e3f15f6a3a091b1c69faa6496c9523b",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\DiagonalExtension205.lean": "9abe49331ab86cdcf362f4913319fc239622d8b166781903630232820f9858c4",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\DiagonalExtension205-1794643325546208900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\DiagonalExtension205.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\DiagonalExtension205-1794643325546208900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1822191616,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.01600000000325963
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1774440448,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 28136,
+          "ParentProcessId": 53756,
+          "PrivatePageCount": 48087040,
+          "WorkingSetSize": 26316800
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.03200000000651926
+    },
+    {
+      "free_bytes": 1546928128,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 28136,
+          "ParentProcessId": 53756,
+          "PrivatePageCount": 108105728,
+          "WorkingSetSize": 280612864
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 28136,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0939999999973224,
+  "axioms": [
+    {
+      "theorem": "DiagonalExtension205.sameDisplacement",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "DiagonalExtension205.reconstruction",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "DiagonalExtension205.selectedExtension",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "DiagonalExtension205.actParity",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "DiagonalExtension205.actInvolution",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "DiagonalExtension205.oppositeParity",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "071121a9d43ffc3c35b8a69dcdb9ef38319a1a405c3ecc1cd78f313f25871b06",
+  "object": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\build\\DiagonalExtension205.olean",
+  "olean_sha256": "eab4f288dda01c8853fa822f5e8d4d80fe5849694f3a110ffa1edc7f50432c71"
+}

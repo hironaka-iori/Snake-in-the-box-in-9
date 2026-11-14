@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "module": "PartitionCover205_128",
+  "source": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\PartitionCover205_128.lean",
+  "source_sha256": "620b70eb3cf06de6277c0ec19a001ba92b50ce75704afc32fdbb16e8f4f9ce37",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\PartitionCover205_128-execution.json": "acb50baaebef855694095fd4dd4503a77133813259d785f8b0ad932250d52d9c",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\PartitionCover205_128.lean": "620b70eb3cf06de6277c0ec19a001ba92b50ce75704afc32fdbb16e8f4f9ce37",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\FiniteDomain205-audit.json": "5f5659eaaff1b3610519577bc208773fb76558e58888d8cb193d27ed1ff6338e",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\FiniteDomain205-execution.json": "d365d59dc1888bb1749569384f126f01c650941c7878b10388bfa3aa1aabb006",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\FiniteDomain205.lean": "b6ee63aa0c8533d778ceb492de9ff2a19abb647f6303c86dfdf6b0d6f7e2bb07",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\build\\FiniteDomain205.olean": "467696d829cce7d45e9735f77c3f6e281ef98582f9c54a317befe46ece14e8c4",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\FiniteDomain205-1794642613548417700\\compiler.log": "edd2119e232628047344f8d605605fb230fc216dd3a18b1ab5b90a6bd7cf5623"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\PartitionCover205_128-1794643575895989100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\PartitionCover205_128.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\PartitionCover205_128-1794643575895989100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1859809280,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 88,
+    "snapshot_seconds": 0.01600000000325963
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1842847744,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 53044,
+          "ParentProcessId": 41928,
+          "PrivatePageCount": 48091136,
+          "WorkingSetSize": 25268224
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1727561728,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 53044,
+          "ParentProcessId": 41928,
+          "PrivatePageCount": 3678208,
+          "WorkingSetSize": 16625664
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 53044,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.077999999994063,
+  "axioms": [
+    {
+      "theorem": "PartitionCover205_128.cover",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "225a44b2add69016f95bb37d2267b77d873e9990461c8c06eeed63af78a5827b",
+  "object": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\build\\PartitionCover205_128.olean",
+  "olean_sha256": "aebd35c39bb9280b19e640efced0db2ed7c2aea2f6b617e6da2a8ba6e055504f"
+}

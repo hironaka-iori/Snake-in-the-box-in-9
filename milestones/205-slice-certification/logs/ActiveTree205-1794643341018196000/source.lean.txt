@@ -1,0 +1,34 @@
+import Std
+namespace ActiveTree205
+theorem treeConstant {V W : Type} (word : Nat → V) (parent : Nat → Nat) (n : Nat)
+    (f : V → W) (earlier : ∀ i, 0<i → i<n → parent i<i)
+    (equal : ∀ i, 0<i → i<n → f (word (parent i))=f (word i)) :
+    ∀ i, i<n → f (word i)=f (word 0) := by
+  intro i
+  induction i using Nat.strongRecOn with
+  | h i ih =>
+    intro hi
+    by_cases zero : i=0
+    · subst i; rfl
+    · have positive : 0<i := by omega
+      have hp := earlier i positive hi
+      exact (equal i positive hi).symm.trans (ih (parent i) hp (by omega))
+
+theorem coveredConstant {V W : Type} (word : Nat → V) (parent : Nat → Nat) (n : Nat)
+    (S : V → Prop) (R : V → V → Prop) (f : V → W)
+    (selected : ∀ i, i<n → S (word i))
+    (covered : ∀ x, S x → ∃ i, i<n ∧ word i=x)
+    (earlier : ∀ i, 0<i → i<n → parent i<i)
+    (edges : ∀ i, 0<i → i<n → R (word (parent i)) (word i))
+    (same : ∀ x y, S x → S y → R x y → f x=f y) :
+    ∀ x, S x → f x=f (word 0) := by
+  have equal : ∀ i, 0<i → i<n → f (word (parent i))=f (word i) := by
+    intro i hpos hi
+    exact same _ _ (selected _ (Nat.lt_trans (earlier i hpos hi) hi)) (selected _ hi) (edges i hpos hi)
+  intro x hx
+  rcases covered x hx with ⟨i,hi,hx⟩
+  rw [←hx]
+  exact treeConstant word parent n f earlier equal i hi
+#print axioms treeConstant
+#print axioms coveredConstant
+end ActiveTree205

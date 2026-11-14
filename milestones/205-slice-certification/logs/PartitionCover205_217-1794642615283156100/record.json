@@ -1,0 +1,690 @@
+{
+  "status": "FAILED",
+  "module": "PartitionCover205_217",
+  "source": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\PartitionCover205_217.lean",
+  "source_sha256": "07f8dd5f579b5a9f09da13e47371ace33e3ba41e4b2e0b1adfa1bff915393eb6",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\PartitionCover205_217-execution.json": "d2c31d9dfebfad6a86ea9fba80d0bb41e4af3c5fa821b6520eb724345fc9fac3",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\PartitionCover205_217.lean": "07f8dd5f579b5a9f09da13e47371ace33e3ba41e4b2e0b1adfa1bff915393eb6",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\FiniteDomain205-audit.json": "5f5659eaaff1b3610519577bc208773fb76558e58888d8cb193d27ed1ff6338e",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\FiniteDomain205-execution.json": "d365d59dc1888bb1749569384f126f01c650941c7878b10388bfa3aa1aabb006",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\FiniteDomain205.lean": "b6ee63aa0c8533d778ceb492de9ff2a19abb647f6303c86dfdf6b0d6f7e2bb07",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\build\\FiniteDomain205.olean": "467696d829cce7d45e9735f77c3f6e281ef98582f9c54a317befe46ece14e8c4",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\FiniteDomain205-1794642613548417700\\compiler.log": "edd2119e232628047344f8d605605fb230fc216dd3a18b1ab5b90a6bd7cf5623"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\PartitionCover205_217-1794642615283156100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\PartitionCover205_217.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\PartitionCover205_217-1794642615283156100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1625153536,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 90,
+    "snapshot_seconds": 0.03200000000651926
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1664970752,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 48103424,
+          "WorkingSetSize": 25231360
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1402970112,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 109531136,
+          "WorkingSetSize": 266391552
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1393434624,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 109531136,
+          "WorkingSetSize": 270995456
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.030999999988125637
+    },
+    {
+      "free_bytes": 1408901120,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 109531136,
+          "WorkingSetSize": 278380544
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1412268032,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 109531136,
+          "WorkingSetSize": 278446080
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1402564608,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 109531136,
+          "WorkingSetSize": 279953408
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1376751616,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 282746880
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1365610496,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 284393472
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1360396288,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 285741056
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.03199999999196734
+    },
+    {
+      "free_bytes": 1361367040,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 286846976
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1380376576,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 142168064,
+          "WorkingSetSize": 285765632
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1372938240,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 140464128,
+          "WorkingSetSize": 295358464
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1347407872,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 140333056,
+          "WorkingSetSize": 295546880
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.031000000002677552
+    },
+    {
+      "free_bytes": 1362104320,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 140922880,
+          "WorkingSetSize": 296022016
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1356029952,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 142168064,
+          "WorkingSetSize": 296980480
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1322786816,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 142430208,
+          "WorkingSetSize": 297619456
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.030999999988125637
+    },
+    {
+      "free_bytes": 1390428160,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 298418176
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1420468224,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 300650496
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1428484096,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 301801472
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1454284800,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 301821952
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1444028416,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 301842432
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1464721408,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 301854720
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1467899904,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 301883392
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.015999999988707714
+    },
+    {
+      "free_bytes": 1471029248,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 303009792
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1444958208,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 303022080
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1415196672,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 303558656
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.031000000002677552
+    },
+    {
+      "free_bytes": 1441058816,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 307249152
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1376464896,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 307249152
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1298509824,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 307261440
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.03199999999196734
+    },
+    {
+      "free_bytes": 1332510720,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143151104,
+          "WorkingSetSize": 307269632
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1325735936,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143032320,
+          "WorkingSetSize": 309571584
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1329467392,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143032320,
+          "WorkingSetSize": 309780480
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.031000000002677552
+    },
+    {
+      "free_bytes": 1351335936,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143032320,
+          "WorkingSetSize": 309788672
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1345236992,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143032320,
+          "WorkingSetSize": 310128640
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1391198208,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143032320,
+          "WorkingSetSize": 311451648
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1340755968,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 143032320,
+          "WorkingSetSize": 311463936
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.015999999988707714
+    },
+    {
+      "free_bytes": 1328537600,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 176652288,
+          "WorkingSetSize": 328609792
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1268051968,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 215449600,
+          "WorkingSetSize": 372256768
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.03200000000651926
+    },
+    {
+      "free_bytes": 1207369728,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 245514240,
+          "WorkingSetSize": 403279872
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1138929664,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16492,
+          "ParentProcessId": 51428,
+          "PrivatePageCount": 281063424,
+          "WorkingSetSize": 427749376
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.01600000000325963
+    }
+  ],
+  "compiler_pid": 16492,
+  "exit_code": 1,
+  "stop_reason": "MEMORY_LIMIT",
+  "seconds": 39.812999999994645,
+  "axioms": [],
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

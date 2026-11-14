@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "module": "ActiveTree205",
+  "source": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\ActiveTree205.lean",
+  "source_sha256": "6bb56a60f749e3c261f469827afc28babdb33c15091c91638002c85e04346593",
+  "checker_sha256": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\data\\ActiveTree205-execution.json": "ee6817f8f6a01c474e53b64f2743a9aa894f4de44eee8d7b9097790c97044508",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\ActiveTree205.lean": "6bb56a60f749e3c261f469827afc28babdb33c15091c91638002c85e04346593",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\ActiveTree205-1794643357275611200\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\lean\\ActiveTree205.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\logs\\ActiveTree205-1794643357275611200\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1772003328,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1749086208,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 50908,
+          "ParentProcessId": 11436,
+          "PrivatePageCount": 48136192,
+          "WorkingSetSize": 30883840
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 50908,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.062999999994645,
+  "axioms": [
+    {
+      "theorem": "ActiveTree205.treeConstant",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ActiveTree205.coveredConstant",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "153cce2deb00344efbb4a17beb5a68d00a9ad52d4369c28ddfe462b665b29bb3",
+  "object": "E:\\Snake-in-a-box\\milestones\\205-slice-certification\\build\\ActiveTree205.olean",
+  "olean_sha256": "eff225800ada15195fdceda08af528ace4a8db601f3e94cb9d77206d5373219e"
+}

@@ -1,0 +1,38 @@
+import FiniteDomain205
+namespace PartitionCover205_154
+open FiniteDomain205
+set_option maxRecDepth 100000
+set_option maxHeartbeats 2000000
+def r0 : Array Nat := #[3]
+def r1 : Array Nat := #[3]
+def r2 : Array Nat := #[85]
+def r3 : Array Nat := #[50529027]
+def r4 : Array Nat := #[1,2]
+def r5 : Array Nat := #[1,64]
+def r6 : Array Nat := #[1,1]
+def r7 : Array Nat := #[1,2]
+def r8 : Array Nat := #[15,240]
+def r9 : Array Nat := #[265,2305]
+def r10 : Array Nat := #[63,4032]
+def r11 : Array Nat := #[1,2]
+def r12 : Array Nat := #[1,0,0,0,64,0,0,0]
+def r13 : Array Nat := #[1,2,4,8,16,32,64,128]
+def r14 : Array Nat := #[1,2,4,8,16,32,64,128]
+def r15 : Array Nat := #[1,2,4,8,16,32,64,128,256,512,1024,2048]
+def r16 : Array Nat := #[1,0,0,0,0,0,16,0,0,0,0,0]
+def r17 : Array Nat := #[63,2,63,2,4032,128,4032,128]
+def r18 : Array Nat := #[1,2,4,8,16,32,64,128]
+def r19 : Array Nat := #[3,0,0,0,0,0,48,0,0,0,0,0]
+def r20 : Array Nat := #[1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
+def r21 : Array Nat := #[1,1,2,2,4,4,8,8,16,16,32,32,64,64,128,128,256,256,512,512,1024,1024,2048,2048,4096,4096,8192,8192,16384,16384,32768,32768]
+def r22 : Array Nat := #[17,0,0,0,2,0,0,192,68,0,0,0,8,0,0,0,17,0,0,0,32,0,0,12,68,0,0,0,128,0,0,0]
+def r23 : Array Nat := #[3]
+def r24 : Array Nat := #[17]
+def r25 : Array Nat := #[3,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0]
+def r26 : Array Nat := #[1,1,2,2,4,4,8,8,16,16,32,32,64,64,128,128]
+def r27 : Array Nat := #[71,116]
+def r28 : Array Nat := #[1,2,4,8,16,32,64,128]
+def r29 : Array Nat := #[1,2,4,8,16,32,64,128]
+def r30 : Array Nat := #[1,2,4,8,16,32,64,128]
+def r31 : Array Nat := #[1,2,4,8,16,32,64,128]
+end PartitionCover205_154

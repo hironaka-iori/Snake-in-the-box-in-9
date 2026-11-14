@@ -1,0 +1,42 @@
+E:\Snake-in-a-box\milestones\205-slice-certification\lean\DiagonalExtension205.lean:30:4: error: unsolved goals
+case false
+S : Square → Prop
+g : Square → Square
+inj : ∀ (u v : Square), S u → S v → g u = g v → u = v
+preserve : ∀ (u : Square), S u → parity (g u) = parity u
+f : Bool → Bool := fun e => decide (∃ u, S u ∧ parity u = e ∧ displacement u (g u) = true)
+u : Square
+hu : S u
+hd : displacement u (g u) = false
+no : ¬∃ v, S v ∧ parity v = parity u ∧ displacement v (g v) = true
+⊢ ((S (false, false) → parity (false, false) = parity u → displacement (false, false) (g (false, false)) = false) ∧
+      (S (false, true) → parity (false, true) = parity u → displacement (false, true) (g (false, true)) = false)) ∧
+    (S (true, false) → parity (true, false) = parity u → displacement (true, false) (g (true, false)) = false) ∧
+      (S (true, true) → parity (true, true) = parity u → displacement (true, true) (g (true, true)) = false)
+E:\Snake-in-a-box\milestones\205-slice-certification\lean\DiagonalExtension205.lean:36:4: error: unsolved goals
+case true
+S : Square → Prop
+g : Square → Square
+inj : ∀ (u v : Square), S u → S v → g u = g v → u = v
+preserve : ∀ (u : Square), S u → parity (g u) = parity u
+f : Bool → Bool := fun e => decide (∃ u, S u ∧ parity u = e ∧ displacement u (g u) = true)
+u : Square
+hu : S u
+hd : displacement u (g u) = true
+yes : ∃ v, S v ∧ parity v = parity u ∧ displacement v (g v) = true
+⊢ (S (false, false) ∧ parity (false, false) = parity u ∧ displacement (false, false) (g (false, false)) = true ∨
+      S (false, true) ∧ parity (false, true) = parity u ∧ displacement (false, true) (g (false, true)) = true) ∨
+    S (true, false) ∧ parity (true, false) = parity u ∧ displacement (true, false) (g (true, false)) = true ∨
+      S (true, true) ∧ parity (true, true) = parity u ∧ displacement (true, true) (g (true, true)) = true
+E:\Snake-in-a-box\milestones\205-slice-certification\lean\DiagonalExtension205.lean:47:76: error: unsolved goals
+case true
+f : Bool → Bool
+u : Square
+h : f (parity u) = true
+⊢ f (parity (!u.fst, !u.snd)) = true
+'DiagonalExtension205.sameDisplacement' depends on axioms: [propext]
+'DiagonalExtension205.reconstruction' depends on axioms: [propext]
+'DiagonalExtension205.selectedExtension' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'DiagonalExtension205.oppositeParity' does not depend on any axioms
+'DiagonalExtension205.actParity' depends on axioms: [propext]
+'DiagonalExtension205.actInvolution' depends on axioms: [propext, sorryAx]
