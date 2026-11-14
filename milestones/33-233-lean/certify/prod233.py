@@ -82,6 +82,13 @@ def last_status():
     return st
 
 
+def remote_build_names():
+    """Certificates built on other machines (`xfer233.py build`/`opull`), listed one per line in
+    $CERT233_SCR/remote_build: left out here, their .olean files arrive through xfer/233o/* branches."""
+    p = os.path.join(os.environ.get('CERT233_SCR', ''), 'remote_build')
+    return set(open(p).read().split()) if os.path.exists(p) else set()
+
+
 def reset_failed(names):
     """Delete the source of every module of `names` whose last guarded build failed (or was
     killed) after the source was written, so `cert233.py cnf`/`replay` (which skip existing
@@ -128,8 +135,9 @@ def main():
         if a.until and time.time() > a.until:
             log({'stop': 'until'})
             return
+        skip = remote_build_names()
         items = [(h, it) for h, it, m in C.work_items(ns, set(a.kinds.split(',')))
-                 if not built('LocalWindowUnsat', it[2]) and fails.get(it[2], 0) < 2]
+                 if not built('LocalWindowUnsat', it[2]) and fails.get(it[2], 0) < 2 and it[2] not in skip]
         if not items:
             log({'done': 'all certificates built'})
             return

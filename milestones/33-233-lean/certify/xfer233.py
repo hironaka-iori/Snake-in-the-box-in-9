@@ -174,7 +174,9 @@ def pull(a):
             # built or already materialized (prod or pregen got there first): the branch is no longer needed
             consume(n)
         ready = sum(1 for n in left if os.path.exists(src(n)))
-        for n in [n for n in left if n in have and n not in done and not os.path.exists(src(n))]:
+        rb = os.path.join(scr, 'remote_build')   # built elsewhere: their .olean files come through opull
+        skip = set(open(rb).read().split()) if os.path.exists(rb) else set()
+        for n in [n for n in left if n in have and n not in done and n not in skip and not os.path.exists(src(n))]:
             if ready >= a.ahead:
                 break
             b = bare(tempfile.mkdtemp(dir=scr, prefix='pull'))
@@ -208,9 +210,194 @@ def pull(a):
         time.sleep(a.every)
 
 
+OPFX = 'refs/heads/xfer/233o/'
+LIB = os.path.join(LEAN, '.lake', 'build', 'lib', 'lean')
+GLB = os.path.join(ROOT, 'work', 'guarded_lake_build.py')
+LEANBIN = os.path.dirname(CADICAL)
+LEAN_COMMIT = '6caaee842e94'   # `lean --version` of the production machine (Lean 4.19.0)
+
+
+def ls_branches(pfx):
+    out = retry(lambda: git('ls-remote', URL, pfx + '*'))
+    return {line.split('\t')[1][len(pfx):] for line in out.splitlines() if '\t' in line}
+
+
+def fetch_blobs(ref, b):
+    """Fetch the single branch `ref` into the bare repository `b`; return (record, parts reader)."""
+    retry(lambda: git('fetch', '-q', URL, f'{ref}:refs/x/s', cwd=b))
+    blob = lambda p: subprocess.run(['git', 'cat-file', 'blob', f'refs/x/s:{p}'], cwd=b,  # noqa
+                                    capture_output=True, check=True).stdout
+    return json.loads(blob('record.json')), blob
+
+
+def push_blobs(ref, files, meta, scr, msg):
+    """One orphan commit holding gzip -9 parts (< 45 MiB) of each file and record.json."""
+    b = bare(tempfile.mkdtemp(dir=scr, prefix='push'))
+    entries, p = [], os.path.join(b, 'part')
+    for k, data in enumerate(files):
+        z = gzip.compress(data, 9)
+        meta['files'][k]['parts'] = 0
+        for i in range(0, len(z), PART):
+            open(p, 'wb').write(z[i:i + PART])
+            sha = git('hash-object', '-w', p, cwd=b).strip()
+            entries.append(f'100644 blob {sha}\tf{k}part{i // PART:02d}')
+            meta['files'][k]['parts'] += 1
+    open(p, 'w').write(json.dumps(meta))
+    sha = git('hash-object', '-w', p, cwd=b).strip()
+    entries.append(f'100644 blob {sha}\trecord.json')
+    tree = git('mktree', cwd=b, inp='\n'.join(entries) + '\n').strip()
+    commit = subprocess.run(['git', '-c', 'user.name=xfer233', '-c', 'user.email=xfer233@localhost', 'commit-tree',
+                             tree, '-m', msg], cwd=b, capture_output=True, text=True, check=True).stdout.strip()
+    retry(lambda: git('push', '-q', URL, f'{commit}:{ref}', cwd=b))
+    shutil.rmtree(b)
+    return commit
+
+
+def build(a):
+    """Remote machine: build LocalWindowCnf.<n> and LocalWindowUnsat.<n> for --names with the production
+    machine's exact command (guarded_lake_build --direct, Lean 4.19.0 commit LEAN_COMMIT), push both
+    .olean files of each built certificate to xfer/233o/<n>.  Sources come from xfer/233/<n> (replay)
+    and `cert233.py cnf` (core).  Modules that fail are retried once with --jobs 1."""
+    import hashlib
+    scr = os.environ.setdefault('CERT233_SCR', os.path.join(os.path.expanduser('~'), 'xfer233scr'))
+    os.makedirs(scr, exist_ok=True)
+    ver = subprocess.run([os.path.join(LEANBIN, 'lean'), '--version'], capture_output=True, text=True).stdout
+    if LEAN_COMMIT not in ver:
+        raise SystemExit(f'need Lean 4.19.0 commit {LEAN_COMMIT} in {LEANBIN}, found: {ver.strip()}')
+    done = ls_branches(OPFX)
+    todo = [n for n in a.names if n not in done]
+    for n in todo:
+        s = os.path.join(LEAN, 'LocalWindowUnsat', n + '.lean')
+        if os.path.exists(s):
+            continue
+        b = bare(tempfile.mkdtemp(dir=scr, prefix='src'))
+        meta, blob = fetch_blobs(PFX + n, b)
+        raw = gzip.decompress(b''.join(blob(f'part{i:02d}') for i in range(meta['parts'])))
+        assert len(raw) == meta['bytes'], 'size mismatch'
+        open(s + '.xfer', 'wb').write(raw)
+        os.replace(s + '.xfer', s)
+        shutil.rmtree(b)
+        log(name=n, source=len(raw))
+    env = dict(os.environ, PATH=LEANBIN + ':' + os.environ['PATH'])
+    if todo:
+        r = subprocess.run([sys.executable, os.path.join(HERE, 'cert233.py'), 'cnf', '--kinds', 'seed,share', *todo],
+                           env=env, capture_output=True, text=True)
+        if r.returncode:
+            raise SystemExit('cnf failed: ' + r.stderr[-1500:])
+    glog = os.path.join(scr, 'guarded_remote.jsonl')
+    pushed = set()
+
+    def push_ready():
+        st = {}
+        if os.path.exists(glog):
+            for line in open(glog):
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                if 'module' in r:
+                    st[r['module']] = r
+        for n in todo:
+            r = st.get('LocalWindowUnsat.' + n)
+            if n in pushed or not r or r['status'] != 'ok':
+                continue
+            paths = [os.path.join(LIB, d, n + '.olean') for d in ('LocalWindowCnf', 'LocalWindowUnsat')]
+            data = [open(p, 'rb').read() for p in paths]
+            meta = {'name': n, 'lean_version': ver.strip(), 'seconds': r['seconds'], 'peak_rss_gb': r['peak_rss_gb'],
+                    'jobs': r.get('jobs'), 'host_cpus': os.cpu_count(),
+                    'files': [{'path': os.path.relpath(p, LIB), 'bytes': len(d), 'sha256': hashlib.sha256(d).hexdigest()}
+                              for p, d in zip(paths, data)]}
+            commit = push_blobs(OPFX + n, data, meta, scr, f'xfer 233 olean {n}')
+            pushed.add(n)
+            log(name=n, olean_pushed=commit, seconds=r['seconds'], peak_rss_gb=r['peak_rss_gb'])
+
+    for jobs in (a.jobs, 1):
+        left = [n for n in todo if n not in pushed]
+        if not left:
+            break
+        p = subprocess.Popen(['nice', '-n', '10', sys.executable, GLB, '--root', LEAN, '--direct', '--trust-mtime',
+                              '--no-ilean', '--jobs', str(jobs), '--heavy', r'^LocalWindow(Unsat|Cnf)\.(S|T)',
+                              '--heavy-jobs', str(jobs), '--rss-cap-gb', str(a.rss_cap_gb), '--min-free-gb', '3.0',
+                              '--min-disk-mb', '800', '--log', glog, *['LocalWindowUnsat.' + n for n in left]],
+                             env=env, cwd=LEAN, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        log(build=left, jobs=jobs, pid=p.pid)
+        while p.poll() is None:
+            push_ready()
+            time.sleep(30)
+        push_ready()
+    failed = [n for n in todo if n not in pushed]
+    log(done=sorted(pushed), failed=failed)
+
+
+def opull(a):
+    """Production machine (daemon): install the .olean files of xfer/233o/<n> for the names in
+    $CERT233_SCR/remote_build (sha256 and Lean commit checked; LocalWindowCnf first, each written
+    atomically), delete the local sources of <n> as prod233's sweep does, log the build record to
+    data/remotebuild6SB233.jsonl, remember <n> in $CERT233_SCR/oxfer_consumed."""
+    import hashlib
+    scr = os.environ.get('CERT233_SCR', '/home/user/cert233work')
+    done_p = os.path.join(scr, 'oxfer_consumed')
+    done = set(open(done_p).read().split()) if os.path.exists(done_p) else set()
+    olean = lambda n: os.path.exists(os.path.join(LIB, 'LocalWindowUnsat', n + '.olean'))  # noqa
+    while True:
+        names = open(os.path.join(scr, 'remote_build')).read().split()
+        left = [n for n in names if not olean(n)]
+        if not left:
+            log(done='all remote .olean files installed')
+            return
+        try:
+            have = ls_branches(OPFX)
+        except RuntimeError as e:
+            log(error=str(e)[:300])
+            time.sleep(a.every)
+            continue
+        for n in [n for n in left if n in have]:
+            b = bare(tempfile.mkdtemp(dir=scr, prefix='opull'))
+            try:
+                meta, blob = fetch_blobs(OPFX + n, b)
+                assert LEAN_COMMIT in meta['lean_version'], 'Lean version ' + meta['lean_version']
+                need = sum(f['bytes'] for f in meta['files']) >> 20
+                if disk_free_mb() < a.min_disk_mb + need:
+                    log(wait='disk', free_mb=disk_free_mb(), need_mb=need)
+                    break
+                datas = []
+                for k, f in enumerate(meta['files']):
+                    d = gzip.decompress(b''.join(blob(f'f{k}part{i:02d}') for i in range(f['parts'])))
+                    assert len(d) == f['bytes'] and hashlib.sha256(d).hexdigest() == f['sha256'], 'checksum ' + f['path']
+                    datas.append(d)
+                for f, d in zip(meta['files'], datas):   # LocalWindowCnf first, LocalWindowUnsat last
+                    dst = os.path.join(LIB, f['path'])
+                    os.makedirs(os.path.dirname(dst), exist_ok=True)
+                    open(dst + '.xfer', 'wb').write(d)
+                    os.replace(dst + '.xfer', dst)
+                for d in ('LocalWindowCnf', 'LocalWindowUnsat'):
+                    s = os.path.join(LEAN, d, n + '.lean')
+                    if os.path.exists(s):
+                        os.remove(s)
+                with open(os.path.join(DATA, 'remotebuild6SB233.jsonl'), 'a') as f:
+                    f.write(json.dumps({k: v for k, v in meta.items()}) + '\n')
+                if n not in done:
+                    done.add(n)
+                    with open(done_p, 'a') as f:
+                        f.write(n + '\n')
+                log(name=n, installed=[f['path'] for f in meta['files']], seconds=meta['seconds'])
+            except (RuntimeError, subprocess.CalledProcessError, AssertionError, OSError, ValueError, KeyError) as e:
+                log(name=n, error=str(e)[:300])
+            finally:
+                shutil.rmtree(b, ignore_errors=True)
+        time.sleep(a.every)
+
+
 def main():
     ap = argparse.ArgumentParser()
     sp = ap.add_subparsers(dest='cmd', required=True)
+    bp = sp.add_parser('build')
+    bp.add_argument('--names', nargs='+', required=True)
+    bp.add_argument('--jobs', type=int, default=3)
+    bp.add_argument('--rss-cap-gb', type=float, default=11)
+    op = sp.add_parser('opull')
+    op.add_argument('--every', type=int, default=300)
+    op.add_argument('--min-disk-mb', type=int, default=1500)
     g = sp.add_parser('gen')
     g.add_argument('--names', nargs='+', required=True)
     g.add_argument('--seed-jobs', default='auto')
@@ -221,7 +408,7 @@ def main():
     p.add_argument('--ahead', type=int, default=14)
     p.add_argument('--min-disk-mb', type=int, default=2300)
     a = ap.parse_args()
-    gen(a) if a.cmd == 'gen' else pull(a)
+    {'gen': gen, 'pull': pull, 'build': build, 'opull': opull}[a.cmd](a)
 
 
 if __name__ == '__main__':
