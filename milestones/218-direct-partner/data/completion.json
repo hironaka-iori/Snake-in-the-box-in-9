@@ -1,0 +1,122 @@
+{
+  "round": 218,
+  "status": "PROGRESS",
+  "previous_goal_turn": "PROGRESS",
+  "started_utc": "2026-11-14T18:30:16+00:00",
+  "utc": "2026-11-14T18:46:04.602557+00:00",
+  "goal_state": "ACTIVE",
+  "pause_policy": "Continue across rounds; contributor work alone cannot trigger a pause. Honor direct user pauses and the stated own-work substantial-result or prolonged-stall condition.",
+  "email_sent": false,
+  "email_limitation": "No sending connector available.",
+  "interval": [
+    191,
+    233
+  ],
+  "contributor_revision": "b0521e1d14fd52c62db4cdeccc356b70a623eb82",
+  "contributor_changed": false,
+  "independent_233_rebuild": false,
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "accepted_new_modules": 2,
+  "theorem_reports": 5,
+  "proofs": [
+    {
+      "module": "Cycle218",
+      "receipt": "milestones\\218-direct-partner\\data\\Cycle218-audit.json",
+      "sha256": "d90cc4c8d8a9efbbceaa8ca37de70059d6a3bbbfbe2029ae3d436db704ccb996",
+      "reports": 2
+    },
+    {
+      "module": "PartnerParity218",
+      "receipt": "milestones\\218-direct-partner\\data\\PartnerParity218-audit.json",
+      "sha256": "0b19cedfd1608e9a911b175b59c772bfa16d15248e312b9749f096cc2e8fe990",
+      "reports": 3
+    }
+  ],
+  "search": {
+    "roots": [
+      {
+        "root": 0,
+        "status": "UNKNOWN",
+        "elapsed_seconds": 240.11000000000058,
+        "solver_seconds": 240.04227930000002,
+        "branches": 12142979,
+        "conflicts": 8006576,
+        "iterations": 1,
+        "initial_cycle_cuts": 279,
+        "dynamic_cycle_cuts": 0,
+        "result_sha256": "2a684927082b696f98d3fed61a9578e7e9c1a2d9ee0612d0bcd914f956a78e86",
+        "receipt_sha256": "479018d3cbeb4b40ff7770278e41873571a8fb2a03451713868173b6ccadf3c1",
+        "maximum_sampled_private_bytes": 73646080
+      },
+      {
+        "root": 78,
+        "status": "UNKNOWN",
+        "elapsed_seconds": 240.04699999999139,
+        "solver_seconds": 240.0020944,
+        "branches": 12434743,
+        "conflicts": 8403733,
+        "iterations": 1,
+        "initial_cycle_cuts": 274,
+        "dynamic_cycle_cuts": 0,
+        "result_sha256": "ebcbc3b34db486b3835465757fe6a5d201ce223bf4c8c7ee3694e586d6d3d989",
+        "receipt_sha256": "9686595b8bb7440294066dc8cd15f7db67795c84a6b400cb51ff4046f1539102",
+        "maximum_sampled_private_bytes": 73531392
+      }
+    ],
+    "new_q9_record": false,
+    "new_global_bound": false,
+    "both_native_excluded": false,
+    "scope": "Two arbitrary93-edge partner queries for one fixed98-edge parent. Native exclusions, if any, have no Lean contradiction certificate. UNKNOWN gives no exclusion."
+  },
+  "first_attempt": "Interrupted on sampled memory limit before a model/result existed; no mathematical inference.",
+  "retry_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "partner_audit_sha256": "922632ea9fe4b75b36b42736c72da56e8baa452936895997a84d85bfb29f9bb0",
+  "frozen_parent_search_states": {
+    "22": {
+      "path": "milestones\\217-long-parent-search\\data\\case-22\\state.json",
+      "sha256": "79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452"
+    },
+    "23": {
+      "path": "milestones\\211-subset-capacity\\data\\case-23\\state.json",
+      "sha256": "3b7733ba9ad904608c050ed63199b13a295c56db6d3b1ded909ef13be38d5e7d",
+      "state_jobs": 296,
+      "pending": 11,
+      "state_nodes": 3721372,
+      "counter_scope": "historical cumulative"
+    },
+    "24": {
+      "path": "milestones\\209-slice-capacity\\data\\case-24\\state.json",
+      "sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "state_jobs": 150,
+      "pending": 8,
+      "state_nodes": 9625900,
+      "counter_scope": "historical cumulative"
+    },
+    "9": {
+      "path": "milestones\\209-slice-capacity\\data\\case-9\\state.json",
+      "sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "state_jobs": 150,
+      "pending": 3,
+      "state_nodes": 8142891,
+      "counter_scope": "historical cumulative"
+    }
+  },
+  "six_coordinate_unresolved": 27,
+  "complete_native_certificate": false,
+  "software_tests_created_or_run": false,
+  "compile_success": true,
+  "review_hashes": {
+    "cycle-proof-review.md": "d465f5b5053343e7dcb829fd6906c62f089f930e6149ec4275bcd28c44639132",
+    "partner-parity-proof.md": "eebd1cb4b15f91976e2e101c4f102d3c5c692d45b7466b863f4b35f283e4f584",
+    "partner-model-review.md": "83a8d6b3c44e22806fecb8445a26c6d1d40a1abda7739c028d744c9b9ee79d33",
+    "partner-result-review.md": "0520054199dd2a327717a74e34b50a2ba3d76c8a316ade86512c768fd40fdc04"
+  },
+  "graph_refinement_sha256": "09c8df649f1cc89962ff0d31218304c85fa1e928d565f7d0ff90f485d0388bb1",
+  "next_step": "Evaluate the explicit linear relaxation of the fixed-parent partner model at both roots. For each non-root vertex with selection x, endpoint indicator e, ambient degree d and selected-neighbour sum s, replace conditional degree by 2x-e <= s <= d-(d-2)x-e, with 0<=e<=x<=1 and e=0 at other even vertices. Keep root selection/degree1, one free odd endpoint, parity balance and every verified cycle inequality. Maximize total selection after relaxing Boolean variables to [0,1]. An upper bound below94 would exclude this parent target only after an exact rational dual certificate is checked, preferably in Lean. A bound at least94 would show that this relaxation is insufficient, not that a partner exists. Do not repeat an unchanged long query or claim a global Q9 upper bound from a fixed-parent result."
+}

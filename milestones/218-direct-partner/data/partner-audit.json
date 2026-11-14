@@ -1,0 +1,104 @@
+{
+  "status": "PASS_SAVED_MODEL_AND_RECORD_AUDIT",
+  "first_failed_attempt": {
+    "execution_sha256": "1e228b4468670c0c7f75d936fe19fe3d97e31c030ffb740aa9b45015c3a293e8",
+    "status": "INTERRUPTED",
+    "exit_code": 1,
+    "stop_reason": "MEMORY_LIMIT",
+    "wall_seconds": 2.7339999999967404,
+    "peak_private_bytes": 590295040,
+    "minimum_sample_free_bytes": 2420539392
+  },
+  "retry_roots": [
+    {
+      "root": 0,
+      "resources": {
+        "execution_sha256": "479018d3cbeb4b40ff7770278e41873571a8fb2a03451713868173b6ccadf3c1",
+        "status": "ACCEPTED_NATIVE_RESULT",
+        "exit_code": 0,
+        "stop_reason": null,
+        "wall_seconds": 247.0,
+        "peak_private_bytes": 73646080,
+        "minimum_sample_free_bytes": 2098442240
+      },
+      "allowed_vertices": 158,
+      "initial_cycle_cuts": 279,
+      "models": {
+        "initial": {
+          "sha256": "939b9b757bc71eafe736bb74197e8043c4892b0c4a8b0df2ddef3dfff6c7957f",
+          "variables": 237,
+          "constraints": 520
+        },
+        "final": {
+          "sha256": "939b9b757bc71eafe736bb74197e8043c4892b0c4a8b0df2ddef3dfff6c7957f",
+          "variables": 237,
+          "constraints": 520
+        }
+      },
+      "verified_rooted_components": [],
+      "status": "UNKNOWN",
+      "result_sha256": "2a684927082b696f98d3fed61a9578e7e9c1a2d9ee0612d0bcd914f956a78e86",
+      "model_description_sha256": "017a5f809d969f5a7871e2e7be912a462bd894ee9934cb9764ab93f0728e468b",
+      "iterations": 1,
+      "feasible_relaxation_iterations": 0,
+      "dynamic_cycle_cuts": 0,
+      "solver_seconds": 240.04227930000002,
+      "elapsed_seconds": 240.11000000000058,
+      "longest_partner_edges": null,
+      "conclusion": "UNKNOWN_NO_EXCLUSION"
+    },
+    {
+      "root": 78,
+      "resources": {
+        "execution_sha256": "9686595b8bb7440294066dc8cd15f7db67795c84a6b400cb51ff4046f1539102",
+        "status": "ACCEPTED_NATIVE_RESULT",
+        "exit_code": 0,
+        "stop_reason": null,
+        "wall_seconds": 241.31299999999464,
+        "peak_private_bytes": 73531392,
+        "minimum_sample_free_bytes": 2335391744
+      },
+      "allowed_vertices": 158,
+      "initial_cycle_cuts": 274,
+      "models": {
+        "initial": {
+          "sha256": "d66e3eac8ef583819515928f352e62d9282397efc6f296b00af82c21656a5c48",
+          "variables": 237,
+          "constraints": 515
+        },
+        "final": {
+          "sha256": "d66e3eac8ef583819515928f352e62d9282397efc6f296b00af82c21656a5c48",
+          "variables": 237,
+          "constraints": 515
+        }
+      },
+      "verified_rooted_components": [],
+      "status": "UNKNOWN",
+      "result_sha256": "ebcbc3b34db486b3835465757fe6a5d201ce223bf4c8c7ee3694e586d6d3d989",
+      "model_description_sha256": "d8ea1ad8e91c6ea85cd60078148fc1e7830b52419c8b1374dd7f7171662c78b8",
+      "iterations": 1,
+      "feasible_relaxation_iterations": 0,
+      "dynamic_cycle_cuts": 0,
+      "solver_seconds": 240.0020944,
+      "elapsed_seconds": 240.04699999999139,
+      "longest_partner_edges": null,
+      "conclusion": "UNKNOWN_NO_EXCLUSION"
+    }
+  ],
+  "retry_solver_seconds": 480.04437370000005,
+  "roots_without_terminal_receipts": [],
+  "retry_feasible_relaxations": 0,
+  "retry_dynamic_cuts": 0,
+  "pins": {
+    "scripts/audit_partner_results.py": "e4e6ee3c455cf518501bad7c961788139ad56ec46eb759cc569d79426e480723",
+    "scripts/partner_search.py": "cebcf267fe2ba1ae2d19bfb917246e296221b0e3f719500b7e2e42c7190b45c5",
+    "scripts/run_partner.py": "107140d550ed4ec8706d64f324fdda888f7e8bf834db396e2e428baa930aca97",
+    "scripts/native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "data/seed98.json": "2b328e537867b097316150be170a9af68e5af492bc7667d3b781b77d39e4e2f5",
+    "data/complement-graph.json": "6af4976a40d897be2c43790c75b66fac0473f0a97226d3fdb106140744a94c82",
+    "data/threads1/batch-progress.json": "b05fb6bbb81a8bad86d30ea1e9fc1876a54391d4b197e0ac5001f40120db3936",
+    "logs/partner-model-review.md": "83a8d6b3c44e22806fecb8445a26c6d1d40a1abda7739c028d744c9b9ee79d33"
+  },
+  "protobuf_definition_sha256": "ac12f9549e96ff7f496846144c794d7cb17d869fccb6d050896787226e48209e",
+  "scope": "No solver execution or proof replay. Exact exported linear model formula/order, native records and saved paths are inspected. First interrupted attempt excluded from retry counts. Native infeasibility has no separate certificate; UNKNOWN gives no exclusion."
+}

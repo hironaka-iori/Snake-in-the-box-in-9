@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 217, 15 November 2026}
+\date{Research state after round 218, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -7225,6 +7225,55 @@ circuit formulation. Its runtime advantage is unproved.
 The source review, graph data and continuation records are retained
 in milestone 217~\cite{research217}.
 
+
+\subsection{Preserving compatible paths under cycle exclusions}
+\label{sec:partner218}
+The direct partner search selects 94 vertices of the allowed graph.
+The joining endpoint is selected and has degree one; one other selected
+vertex is an endpoint, and every remaining selected vertex has degree two.
+These degree equations apply only to selected vertices. No condition
+restricts the partner to a copy, prefix or local modification of a saved path.
+
+The joining vertices 0 and 78 have even parity. Each cube edge flips parity,
+so the 94 positions of a 93-edge partner contain 47 vertices of each parity,
+and the free endpoint has odd parity. The propagation of parity from
+actual consecutive path edges, the final endpoint parity and the two
+counts are checked in Lean for equal-length Boolean-word paths.
+
+\begin{proposition}\label{prop:cycle-cut218}
+Let $C$ be the vertex set of a simple cycle in a symmetric graph, and let
+$S$ be contained in the vertex set of an induced path. Then
+\[
+|S\cap C|\le |C|-1.
+\]
+The cycle need not be induced.
+\end{proposition}
+\begin{proof}
+If all cycle vertices belonged to the path, choose the one appearing
+last along the path. Its two distinct cycle neighbours would both
+appear earlier. Inducedness would force both to be its immediately
+preceding path vertex, a contradiction. At least one cycle vertex is
+therefore missing, which gives the inequality.
+\end{proof}
+Lean checks both noncontainment and the resulting count, with explicit
+cycle distinctness, consecutive edges and the closing edge.
+
+The degree conditions alone permit one path and additional disjoint cycles.
+The search initially excludes every saved coordinate square and every
+saved six-cycle obtained by removing antipodal vertices from a three-face.
+These give 279 initial cuts for endpoint 0 and 274 for endpoint 78.
+Whenever a returned selection has a separate cycle, the same inequality
+excludes that cycle and the model is solved again. A connected selection
+must still pass direct induced-path and joining checks. The generic Lean
+results do not certify numerical cycle extraction, constraint serialization
+or native solver exhaustion~\cite{research218}.
+
+At endpoint 0, the 240-second query returns \texttt{UNKNOWN}, after 240.042 reported solver seconds; 0 dynamic cycle cuts are added.
+At endpoint 78, the 240-second query returns \texttt{UNKNOWN}, after 240.002 reported solver seconds; 0 dynamic cycle cuts are added.
+The unresolved cases remain open. No longer snake or global numerical bound is obtained, and no speed comparison is established.
+
+An initial invocation exceeded the memory limit before producing a model or mathematical result. Limiting the numerical-library thread counts allowed the same model to run within the recorded resource limits. The failed invocation and subsequent receipts are retained separately.
+
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
 from the explicit witness. The completed contributor upper theorem and
@@ -10789,6 +10838,12 @@ in the retained-coordinate construction}. Research milestone 216,
 Snake-in-the-box project. \emph{Longer parent-search jobs and the direct
 93-edge compatible-path target}. Research milestone 217, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/217-long-parent-search}.
+
+
+\bibitem{research218}
+Snake-in-the-box project. \emph{Direct compatible-partner queries, parity
+and cycle-cut preservation}. Research milestone 218, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/218-direct-partner}.
 
 \end{thebibliography}
 \end{document}

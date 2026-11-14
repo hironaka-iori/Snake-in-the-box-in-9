@@ -1,3 +1,11 @@
+# Current result after round 218
+
+Two new Lean modules check necessary cycle and parity constraints for the direct93-edge compatible-partner target. Endpoint queries return 0:UNKNOWN, 78:UNKNOWN. No longer snake or global bound is obtained. The goal remains active; next is an explicit linear relaxation and, if strong enough, an exact weighted inequality certificate.
+
+Read [the argument](milestones/218-direct-partner/MATHEMATICAL_NOTE.md), [evidence](milestones/218-direct-partner/data/completion.json), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 217
 
 The longer continuation examines 5,228,502 additional nodes; case[0,6] remains open with 8 regions. Review identifies a direct unresolved target: a93-edge partner for the saved98-edge Q8 path would give192 edges in Q9. This route does not first require a different optimal parent. Both endpoint queries remain unresolved; the next search will use degree conditions and cycle exclusions.

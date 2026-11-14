@@ -1,24 +1,18 @@
-# Current state after round 217
+# Current state after round 218
 
 Goal ACTIVE. Continue across rounds; contributor work alone cannot trigger a pause. Honor direct user pauses and the stated own-work substantial-result or prolonged-stall condition. No email sent; no sending connector is available.
 
-Read milestones/217-long-parent-search/MATHEMATICAL_NOTE.md, logs/compatible-parent-review.md and data/completion.json. No new Lean theorem or numerical bound this round. The native engine and accepted216 propagation proofs are unchanged. The saved transition audit is distinct from a complete native execution certificate.
+Read milestones/218-direct-partner/MATHEMATICAL_NOTE.md and data/completion.json. Cycle218 and PartnerParity218 pass with five reports: actual-path cycle occupancy and93-edge parity/endpoints/counts. Numerical encoding and native exhaustion are separate obligations.
 
-The interval remains191<=a(9)<=233. Contributor b0521e1d and final audit b65d30ca are unchanged; independent full rebuild of233 remains pending. No different parent or longer snake was obtained.
+|0|UNKNOWN|240.042|12,142,979|8,006,576|0|
+|78|UNKNOWN|240.002|12,434,743|8,403,733|0|
 
-| Case | Retained pair | Saved milestone | Cumulative jobs | Pending | Cumulative nodes |
-|---|---|---|---:|---:|---:|
-|22|[0,6]|217-long-parent-search|1260|8|11,724,609|
-|23|[0,5]|211-subset-capacity|296|11|3,721,372|
-|24|[0,4]|209-slice-capacity|150|8|9,625,900|
-|9|[3,4]|209-slice-capacity|150|3|8,142,891|
+The direct partner queries remain subject to their saved statuses; UNKNOWN gives no exclusion. No192-edge witness or new global bound was obtained. The interval remains191<=a(9)<=233, with independent full rebuilding of233 pending. Contributor b0521e1d and final audit b65d30ca are unchanged.
 
-Case22 hash: 79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452. IMPORTANT: version2 state counters and receipt paths are local to217. The summary is cumulative and links216's cumulative1140-job baseline. Only retained[1,4] is exhausted among28 choices;27 remain unresolved.
+Next: Evaluate the explicit linear relaxation of the fixed-parent partner model at both roots. For each non-root vertex with selection x, endpoint indicator e, ambient degree d and selected-neighbour sum s, replace conditional degree by 2x-e <= s <= d-(d-2)x-e, with 0<=e<=x<=1 and e=0 at other even vertices. Keep root selection/degree1, one free odd endpoint, parity balance and every verified cycle inequality. Maximize total selection after relaxing Boolean variables to [0,1]. An upper bound below94 would exclude this parent target only after an exact rational dual certificate is checked, preferably in Lean. A bound at least94 would show that this relaxation is insufficient, not that a partner exists. Do not repeat an unchanged long query or claim a global Q9 upper bound from a fixed-parent result.
 
-Next: Prioritize the direct 93-edge partner of the saved 98-edge Q8 parent at both endpoints 0 and 78. Use exactly the 158 allowed vertices, one prescribed endpoint and the other endpoint free. Adapt the selected-degree and cycle-cut approach from rounds190/192, removing every replacement-specific overlap, omission and crossing constraint. Select94 vertices with47 of each parity; exactly two endpoint indicators, each bounded by its selection indicator; conditional selected-degree=2-endpoint. Use valid square/six-cycle cuts and add disconnected-cycle cuts as needed. A connected witness gives192 Q9 edges through the existing Lean-checked joining theorem. Inspect and Lean-check any new witness; UNKNOWN or a resource stop gives no exclusion. Do not repeat the already excluded fixed-parent97 query or assume this alternative is faster.
+The first run exceeded memory during startup and produced no mathematical result. Preserve data/root-0 and its original source snapshots. The retry is data/threads1/root-0 and root-78. Set OPENBLAS_NUM_THREADS, OMP_NUM_THREADS, MKL_NUM_THREADS and NUMEXPR_NUM_THREADS to1 before numerical imports. Keep one heavy worker, startup>=1GiB free, reserve>=768MiB, private<=256MiB, Lean60s,-j1,-s8192,55s startupwait. No software tests unless requested. Never restart a live handle after an observation timeout.
 
-Exact sources: outputs/snake8_witness.json; work/layer_search.py and work/exact_search.py; outputs/layer_search.json and layer_threshold.json. Do not call layer_search.seed(), which rewrites the archived witness. Read the immutable JSON. Candidate replacement code: milestones/190-exchange-constraints/scripts/cycle_cuts.py and milestones/192-moving-ports/scripts/joint_replacement.py. Graph lists and static cycle vertex sets are in217/data/complement-graph.json. Existing joining proofs are in outputs/LayerJoining.lean and IntegerLayerBridge.lean, with later checked copies in188/189. Preserve endpoint orientation when constructing Q9.
+Parent search remains frozen in217: case 22 state SHA79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452,1260 cumulative jobs,11,724,609nodes,8pending. State counters are local to217; summary totals are cumulative. Other cases23/24/9 remain in211/209/209. Only retained[1,4] is exhausted;27six-coordinate choices remain unresolved. Do not overwrite prior evidence.
 
-One heavy worker only; startup>=1GiB free, reserve>=768MiB, private<=256MiB; Lean60s,-j1,-s8192,55s startupwait. No software tests unless requested. Never restart a live process after an observation timeout. Preserve frozen evidence and unrelated .gitignore/milestone50 edits. Keep assertion checks enabled.
-
-Editor originals: D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and snake9_frontier_explanation.tex. Both compile and match paper mirrors. Preserve all authors and hypersetup. Compile frontier first, main last. Full-paper review next220. Publish only the exact scoped manifest.
+Existing editor originals remain D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and snake9_frontier_explanation.tex. Both compile and match paper mirrors. Preserve all three authors and hypersetup. Compile frontier first, main last. Full-paper review220. Preserve unrelated .gitignore and milestone50 edits. Publish only the exact scoped manifest.

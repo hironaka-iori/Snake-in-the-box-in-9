@@ -1,0 +1,140 @@
+"""Arbitrary rooted93-edge partner in the fixed parent's allowed graph.
+
+The degree relaxation can contain separate cycles. Only a directly validated
+connected path is reported FEASIBLE. UNKNOWN never means an exclusion.
+"""
+from pathlib import Path
+import argparse, hashlib, json, os, sys, time
+
+H = Path(__file__).resolve().parents[1]
+R = H.parents[1]
+sys.path.insert(0, str(R / 'work/solver_packages'))
+import ortools
+from ortools.sat.python import cp_model
+
+def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p, obj):
+    q = p.with_name(p.name + '.tmp')
+    q.write_text(json.dumps(obj, indent=2) + '\n', encoding='utf-8')
+    os.replace(q, p)
+
+ap = argparse.ArgumentParser()
+ap.add_argument('--root', type=int, required=True, choices=[0, 78])
+ap.add_argument('--seconds', type=float, default=240)
+a = ap.parse_args()
+F = H / 'data' / ('root-' + str(a.root))
+assert F.is_dir() and not (F / 'result.json').exists()
+p = json.loads((H / 'data/seed98.json').read_bytes())['vertex_sequence']
+assert len(p) == len(set(p)) == 99 and p[0] == 0 and p[-1] == 78
+assert all(0 <= v < 256 for v in p)
+assert all(((p[i] ^ p[j]).bit_count() == 1) == (j == i + 1) for i in range(99) for j in range(i + 1, 99))
+V = sorted(set(range(256)) - (set(p) - {a.root}))
+S = set(V)
+NB = {v:{v ^ (1 << k) for k in range(8)} & S for v in V}
+even = [v for v in V if v.bit_count() % 2 == 0]
+odd = [v for v in V if v.bit_count() % 2 == 1]
+assert len(V) == 158 and len(even) == len(odd) == 79 and a.root in even
+saved = json.loads((H / 'data/complement-graph.json').read_bytes())
+graph = next(r for r in saved['reports'] if r['root'] == a.root)
+assert saved['sha256'] == sha(H / 'data/seed98.json')
+assert graph['allowed_vertices'] == V
+initial_cuts = graph['coordinate_squares'] + graph['three_cube_induced_six_cycles']
+assert len({tuple(c) for c in initial_cuts}) == len(initial_cuts)
+for c in initial_cuts:
+    assert len(c) == len(set(c)) >= 3 and set(c) <= S
+    assert all(len(NB[v] & set(c)) == 2 for v in c)
+
+model = cp_model.CpModel()
+x = {v:model.new_bool_var('x' + str(v)) for v in V}
+end = {v:model.new_bool_var('end' + str(v)) for v in odd}
+model.add(x[a.root] == 1)
+model.add(sum(x[v] for v in even) == 47)
+model.add(sum(x[v] for v in odd) == 47)
+model.add(sum(end.values()) == 1)
+for v in V:
+    degree = sum(x[u] for u in sorted(NB[v]))
+    if v == a.root:
+        model.add(degree == 1)
+    elif v in end:
+        model.add(end[v] <= x[v])
+        model.add(degree == 2 - end[v]).only_enforce_if(x[v])
+    else:
+        model.add(degree == 2).only_enforce_if(x[v])
+for c in initial_cuts:
+    model.add(sum(x[v] for v in c) <= len(c) - 1)
+model.export_to_file(str(F / 'initial-model.pbtxt'))
+inputs = {'source_sha256':sha(__file__), 'seed_sha256':sha(H / 'data/seed98.json'),
+          'graph_sha256':sha(H / 'data/complement-graph.json'),
+          'initial_model_sha256':sha(F / 'initial-model.pbtxt'), 'ortools_version':ortools.__version__}
+save(F / 'model-description.json', {**inputs, 'root':a.root, 'vertices':V, 'target_edges':93,
+    'selected_even':47, 'selected_odd':47, 'free_endpoints':odd, 'initial_cycle_cuts':initial_cuts,
+    'replacement_restrictions':[], 'symmetry_restrictions':[],
+    'scope':'Only the other98 vertices of the fixed parent are forbidden. Arbitrary partner; second endpoint free.'})
+
+started = time.monotonic()
+steps, cuts = [], []
+status_name, solution, joined = 'UNKNOWN', None, None
+last_selected = None
+while time.monotonic() - started < a.seconds:
+    solver = cp_model.CpSolver()
+    solver.parameters.num_search_workers = 1
+    solver.parameters.max_time_in_seconds = max(.001, a.seconds - (time.monotonic() - started))
+    solver.parameters.max_memory_in_mb = 256
+    solver.parameters.random_seed = 218
+    status = solver.solve(model)
+    entry = {'iteration':len(steps), 'status':solver.status_name(status), 'solver_seconds':solver.wall_time,
+             'branches':solver.num_branches, 'conflicts':solver.num_conflicts}
+    if status not in [cp_model.FEASIBLE, cp_model.OPTIMAL]:
+        steps.append(entry)
+        status_name = solver.status_name(status)
+        break
+    chosen = {v for v in V if solver.value(x[v])}
+    finish = [v for v in odd if solver.value(end[v])]
+    assert len(finish) == 1 and len(chosen) == 94 and a.root in chosen
+    assert all(len(NB[v] & chosen) == (1 if v in [a.root, finish[0]] else 2) for v in chosen)
+    remaining = set(chosen); components = []
+    while remaining:
+        v = min(remaining); remaining.remove(v); component = {v}; todo = [v]
+        while todo:
+            u = todo.pop()
+            for w in sorted(NB[u] & remaining):
+                remaining.remove(w); component.add(w); todo.append(w)
+        components.append(sorted(component))
+    path_component = next(c for c in components if a.root in c)
+    assert finish[0] in path_component
+    cycles = [c for c in components if a.root not in c]
+    for c in cycles:
+        assert len(c) >= 4 and all(len(NB[v] & set(c)) == 2 for v in c)
+    entry.update(selected=sorted(chosen), endpoint=finish[0], components=components, added_cycle_cuts=cycles)
+    steps.append(entry); last_selected = sorted(chosen)
+    if not cycles:
+        q = [a.root]; previous = None
+        while q[-1] != finish[0]:
+            options = (NB[q[-1]] & chosen) - ({previous} if previous is not None else set())
+            assert len(options) == 1
+            w = next(iter(options)); assert w not in q
+            previous = q[-1]; q.append(w)
+        assert len(q) == len(set(q)) == 94
+        assert all(((q[i] ^ q[j]).bit_count() == 1) == (j == i + 1) for i in range(94) for j in range(i + 1, 94))
+        assert set(p) & set(q) == {a.root}
+        first = p if p[-1] == a.root else list(reversed(p))
+        joined = first + [v + 256 for v in q]
+        assert len(joined) == len(set(joined)) == 193
+        assert all(((joined[i] ^ joined[j]).bit_count() == 1) == (j == i + 1) for i in range(193) for j in range(i + 1, 193))
+        solution = q; status_name = 'FEASIBLE'; break
+    for c in cycles:
+        assert c not in cuts and c not in initial_cuts
+        model.add(sum(x[v] for v in c) <= len(c) - 1)
+        cuts.append(c)
+    save(F / 'checkpoint.json', {'status':'OPEN_WITH_CYCLE_CUTS', 'iterations':steps, 'dynamic_cycle_cuts':cuts})
+    print(json.dumps({k:v for k,v in entry.items() if k not in ['selected','components','added_cycle_cuts']} |
+                     {'component_sizes':[len(c) for c in components], 'cycle_cuts_added':len(cycles)}), flush=True)
+model.export_to_file(str(F / 'final-model.pbtxt'))
+result = {**inputs, 'status':status_name, 'root':a.root, 'target_edges':93, 'target_q9_edges':192,
+    'time_limit':a.seconds, 'elapsed_seconds':time.monotonic() - started,
+    'initial_cycle_cut_count':len(initial_cuts), 'dynamic_cycle_cuts':cuts, 'iterations':steps,
+    'partner':solution, 'joined_q9':joined, 'last_relaxation_selection':last_selected,
+    'final_model_sha256':sha(F / 'final-model.pbtxt'),
+    'scope':'Native fixed-parent query. FEASIBLE requires an independently checked path; an exclusion needs a separate proof certificate. UNKNOWN and resource stops give no exclusion.'}
+save(F / 'result.json', result)
+print(json.dumps({k:v for k,v in result.items() if k not in ['iterations','dynamic_cycle_cuts','partner','joined_q9','last_relaxation_selection']}), flush=True)

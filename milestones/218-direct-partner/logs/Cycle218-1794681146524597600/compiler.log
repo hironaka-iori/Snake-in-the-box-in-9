@@ -1,0 +1,75 @@
+E:\Snake-in-a-box\milestones\218-direct-partner\lean\Cycle218.lean:28:62: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  a ≥ 0
+where
+ a := ↑n
+E:\Snake-in-a-box\milestones\218-direct-partner\lean\Cycle218.lean:56:10: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  b ≥ 0
+  a ≥ 0
+  a - b ≥ -1
+where
+ a := ↑n
+ b := ↑↑⟨n + 2, ⋯⟩
+E:\Snake-in-a-box\milestones\218-direct-partner\lean\Cycle218.lean:60:16: error: tactic 'rewrite' failed, motive is not type correct:
+  fun _a => R (c _a) (c ⟨0, ⋯⟩)
+Error: application type mismatch
+  cycle_not_contained._proof_11 _a ht
+argument
+  ht
+has type
+  ¬↑i + 1 < n + 3 : Prop
+but is expected to have type
+  ¬↑_a + 1 < n + 3 : Prop
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+case neg
+V : Type
+R : V → V → Prop
+m n : Nat
+p : InducedPath V R m
+c : Fin (n + 3) → V
+distinct : ∀ (i j : Fin (n + 3)), c i = c j → i = j
+symmetric : ∀ (u v : V), R u v → R v u
+step : ∀ (i j : Fin (n + 3)), ↑i + 1 = ↑j → R (c i) (c j)
+closing : R (c ⟨n + 2, ⋯⟩) (c ⟨0, ⋯⟩)
+prev : Fin (n + 3) → Fin (n + 3) := fun i => ⟨if ↑i = 0 then n + 2 else ↑i - 1, ⋯⟩
+next : Fin (n + 3) → Fin (n + 3) := fun i => ⟨if ↑i + 1 < n + 3 then ↑i + 1 else 0, ⋯⟩
+neighbours : ∀ (i : Fin (n + 3)), c (prev i) ≠ c i ∧ c (next i) ≠ c i ∧ c (prev i) ≠ c (next i)
+i : Fin (n + 3)
+ht : ¬↑i + 1 < n + 3
+hi : i = ⟨n + 2, ⋯⟩
+hn : next i = ⟨0, ⋯⟩
+⊢ R (c i) (c ⟨0, ⋯⟩)
+E:\Snake-in-a-box\milestones\218-direct-partner\lean\Cycle218.lean:97:5: error: unknown tactic
+E:\Snake-in-a-box\milestones\218-direct-partner\lean\Cycle218.lean:96:48: error: unsolved goals
+V : Type
+R : V → V → Prop
+m n : Nat
+p : InducedPath V R m
+c : Fin (n + 3) → V
+distinct : ∀ (i j : Fin (n + 3)), c i = c j → i = j
+symmetric : ∀ (u v : V), R u v → R v u
+step : ∀ (i j : Fin (n + 3)), ↑i + 1 = ↑j → R (c i) (c j)
+closing : R (c ⟨n + 2, ⋯⟩) (c ⟨0, ⋯⟩)
+selected : V → Bool
+fits : ∀ (i : Fin (n + 3)), selected (c i) = true → ∃ j, p.vertex j = c i
+⊢ ∃ i, selected (c i) = false
+E:\Snake-in-a-box\milestones\218-direct-partner\lean\Cycle218.lean:94:64: error: unsolved goals
+V : Type
+R : V → V → Prop
+m n : Nat
+p : InducedPath V R m
+c : Fin (n + 3) → V
+distinct : ∀ (i j : Fin (n + 3)), c i = c j → i = j
+symmetric : ∀ (u v : V), R u v → R v u
+step : ∀ (i j : Fin (n + 3)), ↑i + 1 = ↑j → R (c i) (c j)
+closing : R (c ⟨n + 2, ⋯⟩) (c ⟨0, ⋯⟩)
+selected : V → Bool
+fits : ∀ (i : Fin (n + 3)), selected (c i) = true → ∃ j, p.vertex j = c i
+missing : ∃ i, selected (c i) = false
+⊢ List.count true (List.ofFn fun i => selected (c i)) ≤ n + 2
+'Cycle218.cycle_not_contained' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'Cycle218.cycle_cut' depends on axioms: [propext, sorryAx, Quot.sound]

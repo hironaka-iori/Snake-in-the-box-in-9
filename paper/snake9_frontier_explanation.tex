@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 217}
+\date{Research state after round 218}
 \begin{document}
 \maketitle
 
@@ -530,6 +530,24 @@ and cycle exclusions, with no assumed speed improvement.
 
 The longer continuation of the different-parent search examines 5,228,502 additional nodes. It remains open with 8 unfinished regions and produces no new parent.
 
+
+\paragraph{The partner model and its cycle cuts.}
+A 93-edge partner beginning at an even vertex uses 47 vertices of each
+parity and ends at an odd vertex. Lean derives these facts from actual
+consecutive cube edges. The new model leaves that odd endpoint free
+and requires degree one at the two selected endpoints and degree two
+at every other selected vertex.
+
+Separate cycles can satisfy these degree conditions. For every cycle
+$C$, an induced path must omit at least one vertex of $C$.
+Indeed, the last cycle vertex along the path cannot have two distinct
+earlier cycle neighbours: both would have to be its immediate predecessor.
+Lean checks this argument and the inequality $|S\cap C|\le |C|-1$
+for a selection $S$ drawn from an actual induced path. Numerical cycle
+extraction and solver exhaustion remain separate verification obligations.
+
+The two new 240-second endpoint queries return \texttt{UNKNOWN} at 0, \texttt{UNKNOWN} at 78. Every unresolved query remains open. No new global bound or longer snake is obtained.
+
 \section{What would resolve the question}
 The current upper bound is 233. A smaller bound requires a stronger
 argument. The alternative comparisons above retain their own local
@@ -548,7 +566,7 @@ universal 197-edge exclusion would settle the proposed value exactly.
 
 \smallskip
 {\small Detailed proofs, explicit witnesses and verification records are
-retained in the companion manuscript and milestones through round 217.
+retained in the companion manuscript and milestones through round 218.
 The known small-dimensional values are listed in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
