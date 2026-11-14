@@ -112,6 +112,22 @@ int main(int argc,char**argv){
     for(int x=0;x<512;++x)
         if(popcount(unsigned(x))%2==p && !cube.selected[x])other.push_back(x);
     uint64_t cases=0,passing_degree=0,passing_both=0,skipped=0;
+    if(mode==2){
+        for(int i=start;i<end;++i){
+            int a=old[i];cube.toggle(a);
+            for(int b:other){
+                cube.toggle(b);++cases;
+                if(cube.degrees_ok()){
+                    ++passing_degree;
+                    if(cube.connected()){++passing_both;cout<<a<<' '<<b<<'\n';}
+                }
+                cube.toggle(b);
+            }
+            cube.toggle(a);
+        }
+        cout<<"count "<<cases<<' '<<passing_degree<<' '<<passing_both<<" 0\n";
+        return 0;
+    }
     for(int i=start;i<end;++i){
         int a=old[i];cube.toggle(a);
         for(int j=i+1;j<int(old.size());++j){
