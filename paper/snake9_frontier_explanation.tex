@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 206}
+\date{Research state after round 207}
 \begin{document}
 \maketitle
 
@@ -25,7 +25,7 @@ proof. The current construction investigation compares dimensions six
 through nine, with general restrictions on two-parent constructions
 and no new witness. A whole-path classification now restricts changes
 to one or two coordinate histories. A new native enumeration excludes
-a different class of the saved 98-edge parent even with four arbitrary
+a different class of the saved 98-edge parent even with five arbitrary
 coordinate histories free. Its precise scope and proof-assistant
 boundaries are explained in Section 6. The current sufficient pending-share profile is $(15,14,14,14)$
 for $012034,012301,012340,012345$, respectively. Together with the retained
@@ -1214,7 +1214,7 @@ natively on all 99 vertices; their Lean replay is pending. These
 proof gaps remain separate from the component classification.
 No new numerical bound or longer $Q_9$ construction is claimed.
 
-\paragraph{Four arbitrary histories: the current construction frontier.}
+\paragraph{Arbitrary histories: the current construction frontier.}
 The restriction above can be strengthened for the saved parent.
 Write a target as $((z_i,u_i))$, retaining its indexed base words
 $z_i$ and allowing every possible free-coordinate word $u_i$.
@@ -1249,13 +1249,40 @@ substitution soundness. The concrete tables, normalization, search
 coverage and isometry witnesses still require Lean certification.
 The 70 exclusions retain native-enumeration status.
 
-For five free coordinates, one of 56 choices exhausts and 55 reach
-their three-second search limits. The exhausted choice is
-$\{0,2,3,5,6\}$, leaving coordinates $\{1,4,7\}$ fixed. No new
-parent is found; the other 55 choices remain unresolved. Removing
-equivalent assignments under the remaining coordinate permutations
-is a possible next improvement. Even a successful new parent would
-need a separate $Q_9$ joining construction.
+The five-coordinate calculation now exhausts all 56 choices after
+reducing the remaining coordinate permutations. With the initial
+word and first transition normalized, permutations of the other
+four coordinates form a group of 24 maps. Applying one map to
+every interval word acts on the whole snake and preserves every
+constraint. Each finite orbit has a lexicographically least tuple,
+so retaining such tuples preserves every orbit.
+
+The pruning rule has a short proof. If every earlier domain is
+fixed pointwise by a permutation $\pi$, a current value
+$u>\pi(u)$ would be the first difference and violate the chosen
+order. It can be deleted. The scan must stop as soon as a retained
+value satisfies $u<\pi(u)$, since that choice already makes the
+comparison strict and leaves later values unrestricted by this
+comparison. Lean checks this rule and the finite-minimum argument.
+
+All 56 models exhaust after excluding the witnessed source-isometric
+assignments. A different class of this saved parent therefore requires
+at least \emph{six} changed coordinate histories at fixed length and
+index matching, at the native-enumeration evidence level. The complete
+Lean certificate for the concrete searches remains pending. All 28
+six-coordinate choices reach their initial two-second limits and
+remain unresolved. No new parent is found.
+
+There is also a short checked obstruction to reversing this whole
+parent. Its edges $(1,3)$ and $(15,13)$ have equal bitwise differences.
+Their reversal images would be $(70,68)$ and $(85,21)$, with different
+coordinate directions. A cube isometry preserves equality of edge
+differences, so it cannot perform that reversal. Lean checks the
+argument and the relevant indices in the entire saved source.
+
+The next construction step is to retain unfinished branches of the
+six-coordinate models across resource stops. A successful different
+parent would still need a separate $Q_9$ joining construction.
 
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -1310,5 +1337,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--206.}
+\texttt{snake9\_research.tex} and research records 175--207.}
 \end{document}

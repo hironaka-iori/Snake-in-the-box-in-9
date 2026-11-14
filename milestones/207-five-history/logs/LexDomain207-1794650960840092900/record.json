@@ -1,0 +1,110 @@
+{
+  "status": "FAILED",
+  "module": "LexDomain207",
+  "source": "E:\\Snake-in-a-box\\milestones\\207-five-history\\lean\\LexDomain207.lean",
+  "source_sha256": "4014d2f11ac8711c760108d20f70c3e8370e30f27460ac2d5cca57fc255929e3",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\data\\LexDomain207-execution.json": "2a811538ed4efef3b1de8f9ba89dcb4f8ca4f6ccbcf46073e61032e7cf4657c2",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\lean\\LexDomain207.lean": "4014d2f11ac8711c760108d20f70c3e8370e30f27460ac2d5cca57fc255929e3",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\logs\\LexDomain207-1794650960840092900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\lean\\LexDomain207.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\207-five-history\\logs\\LexDomain207-1794650960840092900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1076715520,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 93,
+    "snapshot_seconds": 0.031000000002677552
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1039478784,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 7060,
+          "ParentProcessId": 17132,
+          "PrivatePageCount": 34283520,
+          "WorkingSetSize": 37163008
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 887513088,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 7060,
+          "ParentProcessId": 17132,
+          "PrivatePageCount": 56156160,
+          "WorkingSetSize": 206684160
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 94,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 7060,
+  "exit_code": 1,
+  "stop_reason": null,
+  "seconds": 2.1089999999967404,
+  "axioms": [
+    {
+      "theorem": "LexDomain207.lex_total",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "LexDomain207.lex_trans",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "LexDomain207.finite_minimum",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "LexDomain207.closed_family_has_leader",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "LexDomain207.lex_refl",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "23643b450daf4b4867849d7ef7086081150276c51c9b9f6358e10efee8bdd756"
+}

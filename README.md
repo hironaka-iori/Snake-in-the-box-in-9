@@ -1,3 +1,13 @@
+# Current result after round 207
+
+All 56 five-coordinate models of the saved 98-edge Q8 parent now exhaust in native enumeration. Under fixed length and indexed comparison, a different cube-isometry class requires at least six changed coordinate histories. No new Q9 witness or global bound is obtained. All 28 six-coordinate choices remain unresolved after their initial two-second screens.
+
+Two Lean modules pass with 17 dependency reports: the general lexicographic orbit reduction and a concrete obstruction to reversing the entire saved parent. The complete finite-search certificate remains pending. Source and implementation reviews are retained separately from the kernel-checked statements.
+
+Read [the argument](milestones/207-five-history/MATHEMATICAL_NOTE.md), [all 56 exclusions](milestones/207-five-history/data/five-coordinate-summary.json), [completion record](milestones/207-five-history/data/completion.json), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex). The user instructed continued work; the goal remains active.
+
+## Earlier checkpoints
+
 # Current result after round 206
 
 Complete native enumeration covers all 70 ways to free four coordinate histories of the saved 98-edge Q8 parent while retaining the other histories at every index. After excluding six explicit isometric assignments in each normalized model, every search exhausts. A different class requires at least five changed histories under the same length and indexed comparison. This source-specific result does not give a Q9 length bound.

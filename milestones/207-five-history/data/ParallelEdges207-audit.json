@@ -1,0 +1,157 @@
+{
+  "status": "PASS",
+  "module": "ParallelEdges207",
+  "source": "E:\\Snake-in-a-box\\milestones\\207-five-history\\lean\\ParallelEdges207.lean",
+  "source_sha256": "5fe1c16c40c582fe73ed956cf9fc774af6ae94e06fd32c1cf993ee7c9787e80b",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\data\\ParallelEdges207-execution.json": "3c4450bb32cba58f912ff749a3fb4551b9ee5088c88cbff66652c8601ef00922",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\lean\\ParallelEdges207.lean": "5fe1c16c40c582fe73ed956cf9fc774af6ae94e06fd32c1cf993ee7c9787e80b",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\logs\\ParallelEdges207-1794651369573021500\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\207-five-history\\lean\\ParallelEdges207.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\207-five-history\\logs\\ParallelEdges207-1794651369573021500\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1208926208,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 92,
+    "snapshot_seconds": 0.015999999988707714
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1181122560,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 30680,
+          "ParentProcessId": 16768,
+          "PrivatePageCount": 48091136,
+          "WorkingSetSize": 29081600
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.031000000002677552
+    },
+    {
+      "free_bytes": 990093312,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 30680,
+          "ParentProcessId": 16768,
+          "PrivatePageCount": 55029760,
+          "WorkingSetSize": 199540736
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 94,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 921075712,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 30680,
+          "ParentProcessId": 16768,
+          "PrivatePageCount": 251252736,
+          "WorkingSetSize": 293699584
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 94,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 30680,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.1719999999913853,
+  "axioms": [
+    {
+      "theorem": "ParallelEdges207.source_not_reversed",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ParallelEdges207.difference_affine",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ParallelEdges207.parallel_preserved",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ParallelEdges207.edge_difference_data",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "ParallelEdges207.source_parallel",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ParallelEdges207.target_not_parallel",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ParallelEdges207.no_prescribed_affine",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ParallelEdges207.no_affine_assignment",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ParallelEdges207.source_index_data",
+      "axioms": []
+    },
+    {
+      "theorem": "ParallelEdges207.xor_cancel_right",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "f3b1fc1c7e260fa7a97b4a3df27ab51a4ee984e8313e02ebc53667629fe244f6",
+  "object": "E:\\Snake-in-a-box\\milestones\\207-five-history\\build\\ParallelEdges207.olean",
+  "olean_sha256": "424fb23c9b4acacbf9a5bfa53a34b52f9bcb6c8b359ba95a2848ccf90b4588b2"
+}

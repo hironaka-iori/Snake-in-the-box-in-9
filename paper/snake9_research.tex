@@ -85,11 +85,12 @@ A separate classification counts all ordered embeddings with only two
 coordinate histories free and proves whole-path rigidity when the two
 active base graphs are connected. Its proof is written; the complete
 Lean assembly remains pending.
-An unrestricted native search over all 70 four-coordinate choices
-also leaves that saved parent's class unchanged. A different class
-therefore requires at least five changed histories at fixed length
-and index matching; the general pair criterion passes Lean, while
-the complete finite exclusion certificate remains pending.
+Unrestricted native searches over all 70 four-coordinate choices
+and all 56 five-coordinate choices also leave that saved parent's
+class unchanged. A different class therefore requires at least six
+changed histories at fixed length and index matching. The general
+pair criterion and residual-symmetry reduction pass Lean; the complete
+finite exclusion certificate remains pending.
 No longer $Q_9$ snake or improved unconditional numerical bound is
 obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
@@ -8708,10 +8709,83 @@ their Lean connections. The generic theorem does not certify the
 All 56 five-coordinate choices were subsequently attempted with
 three-second search limits. Only the choice with free coordinates
 $\{0,2,3,5,6\}$ exhausts. The other 55 reach their limits and remain
-unresolved. No new parent is found. The next constructive task is
-to reduce the residual permutations of the five-coordinate models
-and examine their unresolved branches. A new parent would still
-require a separate successful joining construction in $Q_9$.
+unresolved at that stage. The following calculation resolves these
+55 cases by reducing the residual coordinate permutations and
+continuing the difficult searches. A new parent would still require
+a separate successful joining construction in $Q_9$.
+
+\subsection{Residual symmetry and five-coordinate rigidity}
+\label{sec:history207}
+After normalizing the initial block word to zero and the first
+transition to the first coordinate, the permutations of the other
+four block coordinates form a group of 24 maps. Each map acts on
+every interval word and therefore on the whole ordered snake.
+It preserves Hamming distance, parity, the fixed base histories
+and both normalizations. Every finite orbit has a lexicographically
+least interval tuple, so retaining these tuples preserves every orbit.
+This argument allows nontrivial stabilizers and needs no division
+by the group order.
+
+\begin{lemma}[Safe lexicographic deletion]
+Fix a residual permutation $\pi$. If all values of every domain
+before position $j$ are fixed by $\pi$, every lexicographically
+admissible value $u$ at position $j$ satisfies $u\le\pi(u)$.
+\end{lemma}
+\begin{proof}
+Every earlier chosen value agrees with its image. A value
+$u>\pi(u)$ would therefore be the first difference and would
+violate the required lexicographic comparison. After removing
+such values, the argument can continue to the next position only
+when every retained value is fixed. A retained value $u<\pi(u)$
+already makes the comparison strict and permits either comparison
+sign at every later position.
+\end{proof}
+
+This deletion preserves every admissible completion and may be
+interleaved with binary propagation and complete branching. Each
+forbidden source-isometric tuple is part of a complete residual
+orbit: composing its block-coordinate assignment with a residual
+permutation gives another enumerated assignment. Thus the symmetry
+reduction also covers the model after these tuples are excluded.
+
+All $\binom85=56$ five-coordinate models now exhaust. The literal
+models agree with those of the preceding calculation. Each excludes
+24 explicitly witnessed source-isometric assignments. Four difficult
+cases required longer searches; the selected successful records
+total 1,526,383 nodes. Independent source review found no unsound
+deletion or omitted branch~\cite{research207}.
+
+At the native-enumeration evidence level, every induced 98-edge
+target retaining any three indexed coordinate histories of this
+saved parent is cube-isometric to it. Consequently a different
+class requires at least six changed histories at the same length
+and index matching. This statement neither classifies all 98-edge
+snakes nor establishes a numerical upper bound in $Q_9$.
+
+Lean checks finite lexicographic minima, representatives for closed
+finite families and the fixed-prefix deletion argument. The concrete
+coordinate action, normalization, exact tables, search coverage and
+isometry exclusions still require their assembled Lean certificate.
+The finite census retains its separate native status. The first
+six-coordinate screen reaches its time limits in all 28 cases;
+all remain unresolved and no new parent is found.
+
+\begin{proposition}[Obstruction to reversing the saved parent]
+No cube isometry reverses the entire saved 98-edge parent.
+\end{proposition}
+\begin{proof}
+A cube isometry has the form $f(x)=\pi(x)\oplus b$, so
+$f(x)\oplus f(y)=\pi(x\oplus y)$. Equal difference words must
+remain equal. The source edges at zero-based positions 1 and 4
+are $(1,3)$ and $(15,13)$; both have difference 2. Reversal would
+send them to $(70,68)$ and $(85,21)$, whose differences are 2 and
+64. This contradicts preservation of equal differences.
+\end{proof}
+Lean checks this argument and its index identities in the literal
+99-vertex source. It excludes reversal even for a coordinate map
+that is not assumed bijective. Transformations producing a different
+whole embedding remain available; the proposition concerns the
+specified reversal of this parent.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
@@ -9971,6 +10045,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Unrestricted coordinate
 histories and an exact whole-path criterion}. Research record 206,
 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/206-four-history}.
+
+\bibitem{research207}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Residual coordinate symmetry,
+five-coordinate rigidity and a whole-parent reversal obstruction}.
+Research record 207, 14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/207-five-history}.
 
 \end{thebibliography}
 \end{document}
