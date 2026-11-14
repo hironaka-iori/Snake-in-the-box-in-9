@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "module": "ConcreteSpare47",
+  "source": "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\lean\\ConcreteSpare47.lean",
+  "source_sha256": "4ce88dba3e2873bffdfa7d768e0df4a371cc9e32a5f71218af4d99f87d3b0690",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\data\\ConcreteSpare47-execution.json": "cc24affdc41976361ab537fe742b072c835d51c3ab8f94bd8ccc05344f004efc",
+    "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\lean\\ConcreteSpare47.lean": "4ce88dba3e2873bffdfa7d768e0df4a371cc9e32a5f71218af4d99f87d3b0690",
+    "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\logs\\ConcreteSpare47-1794663533839002000\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\lean\\ConcreteSpare47.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\logs\\ConcreteSpare47-1794663533839002000\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1715654656,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.031000000002677552
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1705336832,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 49944,
+          "ParentProcessId": 54488,
+          "PrivatePageCount": 48164864,
+          "WorkingSetSize": 26578944
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1567899648,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 49944,
+          "ParentProcessId": 54488,
+          "PrivatePageCount": 57667584,
+          "WorkingSetSize": 220557312
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1502425088,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 49944,
+          "ParentProcessId": 54488,
+          "PrivatePageCount": 121761792,
+          "WorkingSetSize": 306532352
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.01600000000325963
+    }
+  ],
+  "compiler_pid": 49944,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.1089999999967404,
+  "axioms": [
+    {
+      "theorem": "ConcreteSpare47.source_intervals",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "ConcreteSpare47.even_counts",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ConcreteSpare47.even_partition",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "4d90d23cd52662849e4884e55e06a62a2464faae17733df9841a9d0cfbad9b1a",
+  "object": "E:\\Snake-in-a-box\\milestones\\211-subset-capacity\\build\\ConcreteSpare47.olean",
+  "olean_sha256": "581cdfd4982329d0a51d234a6a1fef6bfd0b44df111cb01143fd5f12dd088eca"
+}

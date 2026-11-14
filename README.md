@@ -1,3 +1,13 @@
+# Current result after round 211
+
+Subset capacity is now proved and used in the open six-coordinate search. Six Lean modules pass with nineteen reports, covering the generic counting deductions and concrete source counts. A further consequence forces at least seven outside intervals to share with antipodal partners in each parity for retained coordinates [0,6]; its unsaturated-family search implementation remains pending.
+
+The [0,5] continuation adds196 accepted steps and1,038,016 nodes, retaining11 unfinished regions after a safe resource stop. It remains open. No new Q9 witness or global bound is claimed. The goal is ACTIVE after the user's resume.
+
+Read [the mathematical argument](milestones/211-subset-capacity/MATHEMATICAL_NOTE.md), [proofs and cutoff](milestones/211-subset-capacity/data/completion.json), [native chain audit](milestones/211-subset-capacity/logs/subset-chain-review.md), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 210
 
 The complete paper has been reviewed and reorganized into upper-bound deductions and constructions/whole-snake restrictions. The short frontier explanation now gives the logical chain with brief proofs. Both documents compile successfully; authors and the main paper's local hypersetup settings are preserved.

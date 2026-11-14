@@ -6688,6 +6688,102 @@ open. The other 24 unresolved pairs retain only their initial limited
 searches. The exhausted pair $(1,4)$ remains the sole six-coordinate
 exclusion. No new parent or global $Q_9$ bound follows.
 
+
+\subsection{Subset capacity within the square-base family}
+\label{sec:subset211}
+The saturated family contains 32 intervals whose free words must be
+pairwise distinct. Its joint domain restrictions can therefore be stronger
+than separate binary supports. This is an application of standard matching
+methods for distinct-value constraints~\cite{regin1994}; no novelty of the
+general filtering principle is claimed.
+
+\begin{proposition}[Subset capacity and reserved words]\label{prop:subset211}
+Let $I$ be a finite family of variables whose assigned words must be
+pairwise distinct. For $i\in I$, let $D_i$ be its finite allowed-word set.
+For $J\subseteq I$, put $U=\bigcup_{j\in J}D_j$.
+Every satisfying assignment requires $|U|\ge|J|$.
+If $|U|=|J|$, deleting $U$ from each $D_i$ with $i\in I\setminus J$
+preserves every satisfying assignment.
+\end{proposition}
+\begin{proof}
+The assigned words inject $J$ into $U$, proving the inequality.
+In the equality case, their image is all of $U$. Every other variable
+in $I$ must differ from each of those words and therefore lies outside
+$U$. The same complete assignment survives each deletion, so every
+other constraint on it remains satisfied.
+\end{proof}
+The equality conclusion also applies to a variable outside $I$ if
+it is proved unequal to every member of $J$. It cannot be applied to
+the nine outside singleton intervals merely because they are outside
+the chosen family: their allowed antipodal sharing must be retained.
+Four Lean deductions check saturation, outside-word exclusion,
+preservation of the same assignment after domain filtering, and the
+deficient-pool contradiction. These checks retain explicit distinctness,
+domain-containment and conflict premises~\cite{research211}.
+
+
+\paragraph{Outside sharing when words remain unused.}
+The same square geometry gives an aggregate condition without full
+saturation. Choose the larger singleton family at each antipodal pair
+and all multi-visit intervals. The remaining singleton intervals occupy
+at most two adjacent corners. Their free words are pairwise distinct:
+equal words would repeat a vertex at one corner or create a chord
+between the two corners.
+
+Let $C$ be the words assigned to the chosen family and $O$ those assigned
+to the outside intervals of that parity. If the alphabet has size $q$,
+then $C$ and $O\setminus C$ are disjoint subsets of it, so
+\[
+|C|+|O\setminus C|\le q,\qquad
+|C\cap O|\ge |C|+|O|-q.
+\]
+Thus at most $q-|C|$ outside intervals avoid sharing with the chosen
+family. Every shared word still requires an antipodal singleton partner.
+For the literal source, the checked counts give
+\[
+\begin{array}{c|c|r|r|r}
+\text{retained coordinates}&\text{parity}&|C|&|O|&
+\text{required shared words}\\\hline
+(4,7)&\text{even}&31&2&\ge1\\
+(0,6)&\text{even}&30&9&\ge7\\
+(0,6)&\text{odd}&26&13&\ge7
+\end{array}
+\]
+Here $q=32$. These are aggregate requirements; no particular outside
+interval is forced to share by the counts alone. Lean checks the
+finite-list inequality, its shared-word consequence and the source-derived
+counts separately. The whole-path interpretation has the written argument
+above; its complete Lean assembly remains pending. The corresponding
+unsaturated-family search rules are not implemented in this round.
+
+\paragraph{Finding the subsets.}
+A matching assigns a different allowed word to each of the 32 variables.
+When a matching is found, direct an arc from a variable to the owner of
+every word in its domain. Every reachable set is closed under these arcs.
+Its domain union is therefore precisely the matched words of its members,
+and has the same cardinality. Such a set supplies the equality case of
+Proposition~\ref{prop:subset211}. Failed augmentation can instead supply
+a deficient subset. The implementation recomputes the actual union and
+cardinality before every rejection or deletion. Matching serves to find
+the subsets; the explicit counting condition justifies the deductions.
+Only other members of the distinct-word family are pruned.
+
+The seven unfinished regions for retained coordinates $(0,5)$ were
+transferred with all domain vectors, their order and the original binary
+model unchanged. The new engine retains the previous branching and
+saved-coverage procedure. Its source and transfer have independent
+reviews, while the concrete masks, matching discovery and entire native
+traversal remain outside the Lean proof. Search totals at the round-211
+cutoff are recorded below. No speed improvement is inferred from raw
+pruning counters, and no completed global bound follows.
+At the round-211 cutoff, retained pair $(0,5)$ remains open with
+11 unfinished regions. The new engine adds 196 accepted continuation
+steps and 1,038,016 nodes; including round 209, this case has 296 steps
+and 3,721,372 nodes. The last run retained its pending regions and exited
+normally after the resource monitor requested a memory stop. The 196
+new state transitions were independently audited. The number of unresolved
+six-coordinate pairs remains 27~\cite{research211}.
+
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained project interval is $191\le a(9)\le235$, with the archived
 upper-bound qualification stated below. The lower bound follows
@@ -10193,6 +10289,16 @@ I. Hironaka, T. Ma and S. Zhan, \emph{Square-base capacity and forced
 shared words in coordinate-history searches}. Research record 209,
 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/209-slice-capacity}.
+
+\bibitem{regin1994}
+J.-C.~R\'egin. \emph{A filtering algorithm for constraints of difference
+in CSPs}. Proceedings of AAAI-94, pp.~362--367, 1994.
+\url{https://cdn.aaai.org/AAAI/1994/AAAI94-055.pdf}.
+
+\bibitem{research211}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Subset capacity in the
+six-coordinate history search}. Research record 211, November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/211-subset-capacity}.
 
 \end{thebibliography}
 \end{document}

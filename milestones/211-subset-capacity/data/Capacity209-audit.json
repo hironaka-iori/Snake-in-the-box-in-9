@@ -1,0 +1,115 @@
+{
+  "status": "PASS",
+  "module": "Capacity209",
+  "source": "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\lean\\Capacity209.lean",
+  "source_sha256": "70f9b06815716432b38c89b7bd2955f6551b593d869bb61116ed0fbf4329c2ac",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\data\\Capacity209-execution.json": "2a32a5ad5cbe9faf5f9212d7e0ff98dc0de8e91b3365d6a1bd1bc66548c92e3f",
+    "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\lean\\Capacity209.lean": "70f9b06815716432b38c89b7bd2955f6551b593d869bb61116ed0fbf4329c2ac",
+    "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\logs\\Capacity209-1794653892099321100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\lean\\Capacity209.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\logs\\Capacity209-1794653892099321100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2304909312,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 86,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2289725440,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 38864,
+          "ParentProcessId": 51536,
+          "PrivatePageCount": 48082944,
+          "WorkingSetSize": 24780800
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 2135314432,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 38864,
+          "ParentProcessId": 51536,
+          "PrivatePageCount": 56147968,
+          "WorkingSetSize": 207560704
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 87,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 38864,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.063000000009197,
+  "axioms": [
+    {
+      "theorem": "Capacity209.distinct_length_le",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Capacity209.saturated_covers",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Capacity209.domain_capacity",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Capacity209.unique_support_forces",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Capacity209.partner_support",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "8a0b5b575626ffa215763d52736f015b2f86a65deab7973b2448b7dd361ea476",
+  "object": "E:\\Snake-in-a-box\\milestones\\209-slice-capacity\\build\\Capacity209.olean",
+  "olean_sha256": "98f347a92aec362a8df9b5ef9297b129ce926e68ab3adf2c4adabd9bb764c8c3"
+}

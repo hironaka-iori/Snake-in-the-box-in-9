@@ -1,0 +1,361 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\newtheorem{lemma}{Lemma}
+\title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
+\author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
+\date{Research state after round 210}
+\begin{document}
+\maketitle
+
+\section{Question and evidence}
+Let $a(n)$ be the largest edge length of an induced path in the binary
+hypercube $Q_n$. An induced path has distinct vertices, with adjacency
+exactly between consecutive indices. A length-$m$ snake has $m+1$ vertices.
+
+The verified $Q_9$ construction has 191 edges. The archived contributor
+theorem $a(9)\le235$ has a successful saved compilation and axiom audit;
+its complete independent rebuild remains pending. The proposed
+improvements to 234 and 233
+retain explicit unproved premises. Thus the archived project interval
+is $191\le a(9)\le235$, with different verification histories at its ends.
+
+The known values through dimension eight are
+\[
+1,2,4,7,13,26,50,98.
+\]
+The prediction $a(9)=196$ comes from a numerical continuation of these
+values. Another continuation agrees through dimension eight and predicts
+195; the recent relations $50=2\cdot26-2$ and $98=2\cdot50-2$ instead
+suggest 194 as a construction target. None is a recurrence theorem.
+A proof of 196 would require a 196-edge witness and exclusion of every
+197-edge snake: any longer snake would contain a 197-edge prefix.
+
+The argument below has two branches. Counting coordinate squares seeks
+a universal upper bound. Compatible lower-dimensional paths and changes
+to their entire embeddings seek a better construction. Restricted
+search failures do not join these branches into an optimality proof.
+
+\section{The exact square budget}
+Assume $m\ge1$ and put $v=m+1$. Let $s_j$ count coordinate squares
+containing exactly $j$ selected vertices, and put $T=s_1$.
+There are $4608$ squares, and each selected vertex belongs to 36.
+A snake contains no fully selected square. Its three-selected-corner
+squares correspond exactly to its internal vertices, so $s_3=v-2$.
+The two counts
+\[
+s_0+s_1+s_2+s_3=4608,\qquad s_1+2s_2+3s_3=36v
+\]
+therefore give
+\[
+\boxed{T+2s_0+35(m+1)=9214.}
+\]
+This is an exact identity for every nontrivial snake.
+
+Write $\alpha_i$ for the singleton-square count at path vertex $i$.
+The established local geometry gives positive counts, endpoint counts
+at least four, internal neighbours of a count one at least four, and
+excludes three consecutive internal twos. These imply sums at least
+14 and 16 for six and seven consecutive internal counts.
+
+For the brief count argument, adjacent pairs contribute at least four.
+A triple contributes at least six, with equality only at $(1,4,1)$;
+four counts contribute at least nine. Split six counts into two triples.
+If one is $(1,4,1)$, the next count contributes at least four and the
+remaining pair at least four; otherwise the triples contribute seven
+each. For seven counts, use a four-plus-three split and the same
+neighbour restriction in the exceptional triple case.
+
+The archived count-only potential supplies
+\[
+4(m-7)\le\sum_{j=7}^{m-1}\min(6,\alpha_j)+7
+\]
+for $m\ge7$. Adding the six omitted internal counts and the two endpoints
+gives $T\ge4m-13$. Shorter nontrivial paths satisfy this weaker estimate
+directly. Hence
+\[
+\boxed{39m+2s_0\le9192.}
+\]
+It yields 235, and a hypothetical 235-edge snake must have $s_0\le13$.
+Proving at least fourteen empty squares in that case would yield 234.
+That additional assertion is open. The strengthened boundary deduction
+is checked in Lean; the archived walk premise retains its separate
+independent-rebuild requirement.
+
+\section{How empty squares could improve the bound}
+Let $S$ be the selected vertex set. For a cube vertex $q$, let $e(q)$ count its incident empty squares and
+$d(q)$ its selected neighbours. A selected vertex $x$ receives the share
+\[
+\sigma_{12}(x)=\sum_{q\sim x}
+ \left\lfloor\frac{12e(q)}{d(q)}\right\rfloor.
+\]
+Every denominator in this sum is positive. Let $L$ be the sum of
+$12e(q)\bmod d(q)$ where $d(q)>0$, and of $12e(q)$ where $d(q)=0$.
+The division algorithm and the four corners of each empty square give
+\[
+\sum_{x\in S}\sigma_{12}(x)+L=48s_0.
+\]
+With $G=24T+\sum_{x\in S}\sigma_{12}(x)$, the square identity becomes
+\[
+G+840(m+1)+L=221136.
+\]
+
+For $m\ge9$ in the retained nine-transition comparison, let $W$ be the total
+window weight. Assume that each window weight is bounded by its stated
+physical singleton and share contributions. Seven omitted internal
+counts and the two endpoints contribute at least 24, and each share
+occurs in at most five windows. Thus
+\[
+W+2880\le5G,\qquad W+4200m+5L\le1098600.
+\]
+If every edge of the actual state walk satisfies
+$w(u,v)+p(u)-p(v)\ge\mu$, with potential range at most $R$, telescoping gives
+$\mu(m-8)\le W+R$. Consequently
+\[
+\boxed{(4200+\mu)m+5L\le1098600+8\mu+R.}
+\]
+
+The sufficient pending share floors on
+$012034,012301,012340,012345$ are $(15,14,14,14)$.
+For the specified retained graph, exact integer scans support
+$\mu=4454/9$ and $R=5421/9$, giving
+\[
+42254m+45L\le9928453.
+\]
+Since $235\cdot42254=9928453+1237$, these premises imply $m\le234$.
+The local Boolean refutations do not yet supply every required Lean
+contradiction, geometric interpretation, count restriction, reference
+exclusion and complete graph certificate. The conclusion remains
+conditional. The older accepted-key graph uses a different catalogue
+and potential; its outstanding obligations must not be substituted
+for this retained graph's own requirements.
+Snakes with fewer than nine edges already satisfy these candidate bounds.
+
+Uniform floors fourteen instead give
+$42248m+45L\le9928364$. At $m=235$ this forces $L\le1$.
+A universal proof of $L\ge2$ would complete that alternative, but the
+loss-zero and loss-one cases remain unresolved. Small-loss geometry
+does show that $L\le95$ forces every cube vertex to have a selected
+neighbour; domination alone does not exclude either case.
+
+A separate contributor comparison uses $m-7$ windows and
+$520(m-7)\le W+1023$. The stronger boundary permits each table share
+to exceed its physical counterpart by at most four while still giving
+\[
+4716m+5L\le1103475.
+\]
+At $m=234$ the left side is at least $1103544$, so the stated premises
+would give 233. The relaxed share coverage, required local certificates
+and actual-snake integration remain separate obligations. Compilation
+progress on individual modules does not by itself discharge them.
+
+\section{What transfers from dimensions six and seven}
+Cutting a snake at its $k$ edges in one coordinate gives $k+1$ path
+components in the two faces, with total internal length $m-k$.
+For the saved lower-dimensional representatives,
+\[
+26=2+13+9+2,\quad
+50=18+24+6+2,\quad
+98=8+25+10+25+26+4.
+\]
+The final term in each expression counts crossings. These are
+decompositions of particular witnesses, without a classification of
+all optimal lower-dimensional snakes.
+
+Two paths placed in opposite faces have a cross-edge exactly where
+their projections coincide. Therefore paths of lengths $p,q$ sharing
+only their designated joining endpoint give $p+q+1$ edges after one
+crossing. More generally, place paths $P,R$ in one face and $Q$ in the
+other. Suppose $P,R$ are disjoint and nonadjacent. Require the projected
+intersections of $Q$ with them to be singletons consisting of the two
+distinct endpoints of $Q$ and one endpoint of each outer path. The result has
+$|E(P)|+|E(Q)|+|E(R)|+2$ edges. Within-face separation and the two
+prescribed projected intersections exclude every chord.
+This explains the checked $18+24+6+2=50$ construction.
+
+The 98-edge representative crosses every coordinate at least four
+times. At its four-crossing split, one face has two 25-edge paths,
+hence 52 vertices. A single $Q_7$ snake has at most 51 vertices.
+This is why passing to higher dimension requires compatible collections
+of paths rather than simply placing two maximum parents together.
+
+There is also a general accounting restriction. Start with two
+positive-length parents of lengths $p,q\le a(n)$ in opposite faces.
+Delete $D$ original vertices and add $A$ new vertices. Suppose the
+final induced graph is a snake of length $m$ with $k$ crossings.
+Let $b$ count deleted original endpoints, $e$ original within-face
+parent edges deleted at both ends, and $H$ final within-face edges
+touching a new vertex.
+Then
+\[
+m+k+b+e+H=p+q+2+2A,\qquad
+\boxed{m+k\le2a(n)+2+2A.}
+\]
+Indeed, deletion removes $2D-b-e$ original edges, while the final vertex
+count gives $p+q+2-D+A=m+1$. Substitute this into the final edge count.
+
+Without additions, a 196-edge $Q_9$ construction from two parents of
+length at most 98 permits at most one deletion and two crossings.
+It must use lengths 98 and 97 without deletion, or two lengths 98
+with one deletion. An internal deletion splits one parent into two
+pieces; the other must join them at exactly two retained projected
+intersections. This is a necessary compatibility problem, not an
+existence result.
+
+For the saved 98-edge $Q_8$ path, deletion from two $Q_7$ parents would
+require $k\le4$. Every split except one violates this; the remaining
+split has the impossible 52-vertex face. Thus that particular
+$7\to8$ construction already lies outside deletion-only two-parent lifts.
+These restrictions explain why the numerical doubling pattern does not
+supply an $8\to9$ construction.
+
+\section{Whole-snake transformations and their limits}
+Write a vertex as $(z,u)$ for a coordinate partition. Assign an
+isometry $g_z$ of the free-coordinate cube to each retained-coordinate
+slice, and map $(z,u)$ to $(z,g_z(u))$. This is one map on the whole
+cube. Within a slice it preserves distances; between non-neighbouring
+slices no edge can arise.
+
+For adjacent slices with selected free-word sets $B_z,B_w$, put
+$h=g_z^{-1}g_w$. Every path edge and nonedge is preserved exactly when
+\[
+h(u)=u\quad(u\in B_z\cap B_w),\qquad
+h(B_w\setminus B_z)\cap B_z=\varnothing.
+\]
+The first condition retains the existing crossings. The second
+prevents new projected coincidences. These account for all remaining
+pairs, proving the whole-snake criterion.
+
+Controlled reflections and block involutions are subfamilies.
+They can change a saved 50-edge $Q_7$ parent to a different cube class.
+For the saved 98-edge $Q_8$ parent, a complete native census over all
+254 nontrivial coordinate partitions finds no new class even when
+each slice has an arbitrary isometry. Lean has checked the generic
+criterion and complete coverage of the literal finite tables.
+Connecting those tables and all surviving leaves to the geometry
+remains unfinished; the geometric census conclusion retains native status.
+
+With two free coordinates, a written classification uses a possible
+uniform parity offset followed by independent component switches to
+describe every target with the same indexed retained words. Its complete
+Lean assembly remains pending. Connected active graphs force one global
+free-coordinate isometry. In three free coordinates, every injective
+map on a selected subset that preserves parity, adjacency and nonadjacency
+extends to an isometry: its action is an injective partial permutation
+of the four antipodal-pair labels. Thus these changes are included in
+the slice-isometry family. The extension principle fails in four
+coordinates, where induced paths with the same indexed parity can
+have different endpoint distances. This motivates unrestricted
+coordinate-history searches.
+
+\section{The current construction frontier}
+For the saved source, retain the base word $z_i$ at each index and
+allow arbitrary free words $u_i$. The exact condition is
+\[
+d(z_i,z_j)+d(u_i,u_j)
+\begin{cases}
+=1,&j=i+1,\\
+\ge2,&j\ge i+2.
+\end{cases}
+\]
+Hamming distance adds across the blocks. The second condition excludes
+both repeats and chords. Consecutive retained-coordinate edges force
+one constant free word, so their indices can be merged into maximal
+intervals while keeping every pair constraint. Successive intervals
+are joined by a free-coordinate edge, so their word parities alternate.
+
+Translation and coordinate permutation normalize the initial free
+word and first free transition. Every residual permutation orbit has
+a lexicographically least tuple, so selecting these representatives
+preserves all possibilities up to the allowed symmetry. All 70
+four-free-coordinate models and all 56 five-free-coordinate models
+exhaust after explicitly source-isometric assignments are excluded.
+At the native-enumeration evidence level, a different class of this
+particular source requires at least six changed histories, with the
+same length and index matching. This does not classify all 98-edge
+snakes.
+
+For six free coordinates, preserving histories $(1,4)$ also forces the
+original class in the completed native search. The other 27 choices
+remain unresolved. Three have saved unfinished searches:
+$(0,4)$, $(3,4)$ and $(0,5)$; the remaining 24 have only initial limited
+runs. Exhausted individual branches do not exclude an open whole model.
+
+\paragraph{A capacity deduction for the whole path.}
+With two retained coordinates, the base is a square. Distinct intervals
+of the same free-word parity have no consecutive original indices.
+If they share a free word, every base pair across them must have
+distance two. Otherwise a full vertex repeats or a chord appears.
+A square vertex has one opposite corner, so both visit sets must be
+singletons at opposite corners.
+
+For one parity, let $M$ count intervals visiting multiple base vertices
+and $N_z$ count singleton intervals at $z$. Choose all multi-visit intervals
+and the larger singleton family from each opposite pair. Their words
+are distinct, proving
+\[
+\boxed{M+\max(N_{00},N_{11})+\max(N_{01},N_{10})\le2^{r-1},}
+\]
+where $r\ge1$ is the number of free coordinates.
+
+For retained coordinates $(0,5)$, the even counts are
+$M=12$ and $(N_{00},N_{01},N_{10},N_{11})=(5,4,10,10)$.
+Thus 32 selected intervals use all 32 even words of $Q_6$.
+Every remaining singleton at $00$ must share with one at $11$,
+and each at $01$ with one at $10$. Exactly nine words are shared by
+pairs of intervals. Individual partners remain choices.
+
+Each even word must therefore remain available in at least one of
+the 32 domains. A sole possible carrier is forced. An outside
+singleton's domain may be intersected with the union of its possible
+partners' domains. These are consequences of the original model.
+Lean checks the square geometry, generic capacity implications, and
+the interval counts derived directly from the literal source.
+The complete geometry-to-model assembly and native search remain
+outside those checks.
+
+The strengthened $(0,5)$ search is open after 2,683,356 nodes.
+Its pruning is active, but no controlled comparison establishes a
+speed improvement. The general capacity principle also applies to
+any subset of interval variables whose assigned words must be pairwise
+distinct: their combined allowed words must be at least as numerous
+as the variables. This provides
+a possible further strengthening beyond the implemented support rules.
+
+\paragraph{Why continuation does not discard unfinished cases.}
+Splitting a domain $D$ into $\{a\}$ and $D\setminus\{a\}$ partitions its
+assignments. On interruption, save the unfinished descendants and
+each ancestor's unexamined remaining values. Replacing one covered
+region by covering descendants preserves coverage; soundly exhausted
+regions can be removed. An empty frontier excludes solutions only
+under those soundness premises. Lean checks the generic reasoning.
+Saved hashes and independently audited state transitions identify
+the native calculation; they do not certify its entire traversal.
+
+\section{What would resolve the question}
+The upper-bound route needs its remaining local certificates,
+geometric interpretations and complete graph-to-snake argument.
+The construction route needs a genuinely different compatible parent
+or face arrangement and a checked joining construction. Finding a new
+$Q_8$ parent alone would not prove a longer $Q_9$ snake.
+
+If every remaining six-coordinate model exhausts, the source-specific
+requirement rises to seven changed histories. If one yields a new
+parent, its compatibility must still be established. Neither outcome
+settles the global optimum. A 196-edge witness together with a
+universal 197-edge exclusion would settle the proposed value exactly.
+
+\smallskip
+{\small Detailed proofs, explicit witnesses and verification records are
+retained in the companion manuscript and milestones through round 210.
+The known small-dimensional values are listed in
+\href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
+construction is in
+\href{https://arxiv.org/html/2607.15270v3}{Orland et al., arXiv:2607.15270v3}.}
+\end{document}

@@ -1,0 +1,34 @@
+E:\Snake-in-a-box\milestones\211-subset-capacity\lean\Sharing211.lean:11:67: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  d ≥ 0
+  c ≥ 0
+  b ≥ 0
+  b - c - d ≥ 0
+  a ≥ 0
+  a - b ≤ 0
+where
+ a := ↑(List.filter (fun w => !decide (w ∈ C)) ws).length
+ b := ↑ws.length
+ c := ↑(if w ∈ C then w :: List.filter (fun w => decide (w ∈ C)) ws
+    else List.filter (fun w => decide (w ∈ C)) ws).length
+ d := ↑(if w ∈ C then List.filter (fun w => !decide (w ∈ C)) ws
+    else w :: List.filter (fun w => !decide (w ∈ C)) ws).length
+E:\Snake-in-a-box\milestones\211-subset-capacity\lean\Sharing211.lean:11:67: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  d ≥ 0
+  c ≥ 0
+  b ≥ 0
+  b - c - d ≥ 0
+  a ≥ 0
+  a - b ≤ 0
+where
+ a := ↑(List.filter (fun w => !decide (w ∈ C)) ws).length
+ b := ↑ws.length
+ c := ↑(if w ∈ C then w :: List.filter (fun w => decide (w ∈ C)) ws
+    else List.filter (fun w => decide (w ∈ C)) ws).length
+ d := ↑(if w ∈ C then List.filter (fun w => !decide (w ∈ C)) ws
+    else w :: List.filter (fun w => !decide (w ∈ C)) ws).length
+'Sharing211.forced_sharing' depends on axioms: [propext, sorryAx, Quot.sound]
+'Sharing211.one_of_two' depends on axioms: [propext, Quot.sound]
+'Sharing211.seven_of_nine' depends on axioms: [propext, Quot.sound]
+'Sharing211.seven_of_thirteen' depends on axioms: [propext, Quot.sound]

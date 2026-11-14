@@ -1,0 +1,87 @@
+{
+  "round": 211,
+  "status": "PROGRESS",
+  "goal_state": "ACTIVE",
+  "pause_requested": false,
+  "started_utc": "2026-11-14T13:28:20+00:00",
+  "utc": "2026-11-14T13:42:52.211354+00:00",
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "new_six_coordinate_exclusions": 0,
+  "accepted_lean_modules": 6,
+  "theorem_reports": 19,
+  "proofs": [
+    {
+      "module": "Subset211",
+      "receipt": "data\\Subset211-audit.json",
+      "sha256": "3f471492d909e45637731ff62245b37bd86fe41e2e4c947e3831378f2a9fe1e7",
+      "reports": 4
+    },
+    {
+      "module": "Spare211",
+      "receipt": "data\\Spare211-audit.json",
+      "sha256": "0e94e798e1bb25ed991c70d45cf336ffd01a66f3de3cd2798d261124c2673fb6",
+      "reports": 3
+    },
+    {
+      "module": "Sharing211",
+      "receipt": "data\\Sharing211-audit.json",
+      "sha256": "7b0ccc78e78b042f35f214e030b24d5ff1e41f920c549fc5db5ec1a1bc9568ff",
+      "reports": 4
+    },
+    {
+      "module": "ConcreteSpare47",
+      "receipt": "data\\ConcreteSpare47-audit.json",
+      "sha256": "b35e3dd93435cee7accac82e6c3818157b44691087d5739830bfa6355029b2d0",
+      "reports": 3
+    },
+    {
+      "module": "ConcreteSpare06",
+      "receipt": "data\\ConcreteSpare06-audit.json",
+      "sha256": "65c92902f4065ac6bd76bd7357fc519a06caf7071bd00955a2ba1b2f456586c9",
+      "reports": 3
+    },
+    {
+      "module": "ConcreteSpare06Odd",
+      "receipt": "data\\ConcreteSpare06Odd-audit.json",
+      "sha256": "d4824b09b555534cb319f39b1775cb505f1f8e42b2ac45dc25664ddce65ca17f",
+      "reports": 2
+    }
+  ],
+  "case23": {
+    "status": "OPEN",
+    "jobs": 296,
+    "pending": 11,
+    "nodes": 3721372,
+    "seconds": 361.03300000000036,
+    "state_sha256": "3b7733ba9ad904608c050ed63199b13a295c56db6d3b1ded909ef13be38d5e7d"
+  },
+  "new_transitions": 196,
+  "new_results": {
+    "EXHAUSTED": 170,
+    "LIMIT": 26
+  },
+  "new_operation_totals": {
+    "nodes": 1038016,
+    "seconds": 115.37800000000009,
+    "subset_calls": 867316,
+    "subset_removals": 5022135,
+    "subset_failures": 84079,
+    "tight_sets": 25063584
+  },
+  "six_coordinate_unresolved": 27,
+  "other_active_states": "milestones/209-slice-capacity/data/completion.json",
+  "stopped_sessions": [
+    64900,
+    67658,
+    22497
+  ],
+  "native_stop": "RESOURCE_STOP; terminal exit0, retained11regions",
+  "software_tests_created_or_run": false,
+  "complete_native_certificate": false,
+  "new_general_consequence": "At most the spare parity capacity can be used by outside intervals without an antipodal chosen-family partner.",
+  "next_step": "Implement aggregate spare-word restrictions for [0,6] and/or continue frozen [0,5]; retain proof and search scope.",
+  "document_verification": "data/document-verification.json",
+  "compile_success": true,
+  "final_math_review": "logs/final-math-review.md"
+}
