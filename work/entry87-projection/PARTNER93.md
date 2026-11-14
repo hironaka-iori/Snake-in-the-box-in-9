@@ -1,0 +1,9 @@
+# A 93-edge partner for the existing parent
+
+Fix the saved 98-edge path in one eight-dimensional face. For either endpoint t, allow the other face to use t and the 157 vertices outside the parent. Two opposite-face vertices are adjacent precisely if their eight-bit addresses agree. Thus a 93-edge partner starting at t and avoiding every other parent vertex gives a 192-edge nine-cube path. The candidate uses 94 vertices, 47 of each parity. [Main branch's construction review](https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/8931c1efdf9397211b2047b7fea8e446c5d642d3/milestones/217-long-parent-search/logs/compatible-parent-review.md).
+
+### Which existing 93-edge arcs are closest?
+
+Take every 93-edge window of every one of the 131 published 191-edge bank snakes. A window belongs to some eight-dimensional face exactly when its transitions use at most eight coordinates. Considering both endpoint orientations gives 828 qualifying indexed windows. Renaming the flip directions in order of first appearance gives 66 rooted classes. All relative rooted placements of a class in the partner face are obtained by the 8! coordinate permutations, translating the first point to t.
+
+Counting forbidden parent vertices gives a minimum of **10 at t=0** and **12 at t=78**, across 5,322,240 placements. The respective minimizing representatives are entry 127, start position 0, reversed, and entry 4, start position 2, reversed. Thus every such placed arc would require at least that many of its vertices to be replaced to fit the selected endpoint. This is a lower bound for the specified collection of arcs. It establishes a concrete reason to seek a new shape directly in the complement. [Window extraction and independent verification](partner_orbits.py), [placement enumerator](partner_orbits.cpp), [per-class results](partner-orbits.json).

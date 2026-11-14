@@ -36,7 +36,7 @@ def defects(path):
 
 
 def model(path, bits, conflict_budget=None, anchors=None, certificate=None, anchor_families=(),
-          strengthened=False,distance_table=None):
+          strengthened=False,distance_table=None,nogoods=()):
     mask=sum(1<<b for b in bits)
     dim=len(bits)
     size=1<<dim
@@ -102,6 +102,10 @@ def model(path, bits, conflict_budget=None, anchors=None, certificate=None, anch
             sat.add_clause(clause)
             if clauses is not None:
                 clauses.append(clause)
+        for assignment in nogoods:
+            assert len(assignment)==n
+            if all(word in domains[r] for r,word in enumerate(assignment)):
+                add([-lit(r,word) for r,word in enumerate(assignment)])
         for r,domain in enumerate(domains):
             add([lit(r,w) for w in domain])
             for x,y in combinations(domain,2):
