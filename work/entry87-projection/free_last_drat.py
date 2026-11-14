@@ -21,12 +21,14 @@ def jobs():
     return list(work.items())
 
 
-def decide(domain,target,budget,tag,checker):
+def decide(domain,target,budget,tag,checker,tip=None):
     S=set(domain);graph={v:{v^(1<<b) for b in range(7)}&S for v in S}
     reach={0};todo=[0]
     while todo:
         new=graph[todo.pop()]-reach;reach|=new;todo.extend(new)
     if len(reach)<target:return dict(status="component")
+    if tip is not None and (tip not in reach or tip==0 or tip.bit_count()%2!=(target-1)%2):
+        return dict(status="tip unreachable")
     pool=IDPool();sel={v:pool.id(("vertex",v)) for v in sorted(reach)}
     end={v:pool.id(("end",v)) for v in sorted(reach)};clauses=[];cuts=[]
     with Solver(name="cadical195",with_proof=bool(checker)) as sat:
@@ -39,6 +41,7 @@ def decide(domain,target,budget,tag,checker):
         if len(odd)<target//2 or len(sel)-len(odd)<(target+1)//2:return dict(status="parity")
         eq(odd,target//2);eq([lit for v,lit in sel.items() if not v.bit_count()%2],(target+1)//2)
         eq(end.values(),2);add([end[0]])
+        if tip is not None:add([end[tip]])
         for v in sorted(reach):
             x=sel[v];e=end[v];ns=[sel[w] for w in sorted(graph[v])]
             add([-e,x]);add([-x,*ns])
