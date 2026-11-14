@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 202}
+\date{Research state after round 203}
 \begin{document}
 \maketitle
 
@@ -1047,6 +1047,46 @@ that the two exposed ports and the retained opposite copy of the
 omitted vertex form a complete two-edge component in the other face.
 This last conclusion has a written proof and remains necessary only.
 
+\paragraph{Larger blocks and a complete rigidity result for one parent.}
+Replace the square reflection by any involutive cube isometry $h$
+on a coordinate block and set $F_f(z,u)=(z,h^{f(z)}(u))$.
+Join neighbouring base fibres when their selected block words meet
+the same two-element orbit of $h$. The whole snake is preserved
+exactly when $f$ is constant on every component of this graph.
+Indeed, only different selectors across such fibres can change
+equality of block words, which is exactly cross-fibre adjacency.
+The graph itself is invariant under the map.
+
+If no selected block word is fixed by $h$, following consecutive
+snake edges forces one selector value throughout. The map then agrees
+on the whole snake with identity or global $h$. Any block involution
+with a fixed word is a product of coordinate swaps, possibly with
+both bits of a pair complemented. Unchanged block coordinates can
+be put in the base. For the saved 98-edge $Q_8$ parent, all 56
+one-pair, 840 two-pair and 3360 three-pair graphs are connected.
+Four pairs leave no base coordinates. This exhausts all cases:
+every admissible controlled block involution, and every sequence of
+them, leaves this parent's cube-isometry class unchanged. The generic
+criterion and rigidity pass Lean; classification and complete case
+coverage use written arguments and native censuses.
+
+Two simultaneous complemented swaps do change the saved 50-edge
+$Q_7$ parent. Using pairs $(0,4),(1,2)$ and base word 40 changes
+its endpoint distance from six to two. Lean checks both entire
+51-vertex paths and every pair relation. This gives a different
+parent shape at the same length. Complete placement and trimming
+censuses still limit original/image and image/image pairs to 92
+separated vertices, so this change has not improved the construction.
+
+For the saved $Q_9$ bank, all 198072 two-pair cases produce only
+existing bank classes. Combined with the preceding one-pair result,
+this family remains closed under arbitrary iterations. Three- and
+four-pair cases in $Q_9$ remain unexamined. No stronger global bound
+or longer snake follows. For the saved $Q_8$ parent, the next
+fundamental option is a block isometry of higher order, together
+with a new exact compatibility criterion. Enlarging an involutive
+block alone has now been exhausted for that parent.
+
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -1100,5 +1140,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--202.}
+\texttt{snake9\_research.tex} and research records 175--203.}
 \end{document}

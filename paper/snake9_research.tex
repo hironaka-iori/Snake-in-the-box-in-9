@@ -74,9 +74,11 @@ A general two-parent identity gives $L+k\le2a(n)+2+2A$, where
 $k$ counts crossings and $A$ counts added vertices. It excludes a
 deletion-only two-parent representation of the displayed 98-edge snake
 and sharply restricts such constructions of a 196-edge snake.
-Controlled square reflections give a whole-snake preservation criterion
-and a checked example beyond cube isometry. Their native census also
-identifies a closed family within the saved 191-edge witness bank.
+Controlled block involutions give an exact whole-snake preservation
+criterion and a checked change of a 50-edge parent beyond cube isometry.
+Generic rigidity and finite case coverage show that this entire family
+cannot change the saved 98-edge parent's cube-isometry class. One- and
+two-pair operations also leave the saved 191-edge witness bank closed.
 No longer $Q_9$ snake or improved unconditional numerical bound is
 obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
@@ -8126,6 +8128,147 @@ therefore 3 or 95. Both indices are odd and the parent endpoint colours
 agree. This is a written geometric deduction; its complete Lean assembly
 and existence of the construction remain open.
 
+\subsection{Whole-snake symmetry on larger coordinate blocks}
+\label{sec:block203}
+The preceding construction extends to any involutive cube isometry $h$
+on a chosen coordinate block. Write a vertex as $(z,u)$ and define
+\[
+F_f(z,u)=(z,h^{f(z)}(u)),\qquad f:Q_{n-k}\longrightarrow\{0,1\}.
+\]
+This is an involution of the entire vertex set. For $S\subseteq Q_n$,
+write $S_z$ for its block words above $z$. Form a graph whose vertices
+are the base fibres containing a selected word moved by $h$. Join
+neighbouring base words $z,w$ when $S_z$ and $S_w$ meet the same
+two-element orbit of $h$.
+
+\begin{theorem}[Block preservation criterion]
+\label{thm:block203}
+The map $F_f$ preserves adjacency and nonadjacency of every pair in
+$S$ if and only if $f$ is constant on every component of this graph.
+Consequently it maps an entire ordered snake to an induced snake of
+the same length. The constraint graph is unchanged by the transformation.
+\end{theorem}
+\begin{proof}
+In one base fibre both block words receive the same isometry. Base
+words at distance at least two cannot yield adjacent vertices.
+Between neighbouring base fibres, adjacency is equality of block
+words. Different selectors change that equality exactly when the two
+words belong to the same moved two-cycle. Fixed words and different
+orbits retain their relations. These are exactly the graph's equality
+constraints. Involutivity preserves distinctness, and applying $h$
+does not change which block orbits a fibre meets.
+\end{proof}
+
+Admissible maps for a fixed block compose by xor of component selectors.
+Complementing all selectors composes with the global isometry $h$.
+This remains a transformation between embedded whole snakes; a
+set-preserving automorphism of one finite snake is still identity
+or reversal.
+
+\begin{proposition}[Rigidity without selected fixed words]
+\label{prop:block-rigid203}
+If no selected block word is fixed by $h$, every admissible $F_f$
+agrees on a connected snake with identity or the global block isometry.
+\end{proposition}
+\begin{proof}
+Along an edge inside one base fibre the selector is unchanged.
+Across fibres the block words agree and are moved, so the constraint
+graph again forces equal selectors. Induction along the whole path
+makes the selector constant on every occupied fibre.
+\end{proof}
+
+\paragraph{Exhausting the involutive cases for the saved $Q_8$ parent.}
+Write $h(u)=\pi u\oplus b$. Involutivity implies $\pi^2=\mathrm{id}$
+and $\pi b=b$. If $h$ fixes a word $c$, then
+\[
+h(u)=c\oplus\pi(u\oplus c).
+\]
+Thus it is a product of disjoint coordinate swaps, with an optional
+complement on both coordinates of each pair. Every coordinate fixed
+by $\pi$ must have zero translation bit. Such unchanged coordinates
+may be put in the base, allowing every selector from the original
+partition. Cases without fixed words satisfy
+Proposition~\ref{prop:block-rigid203}.
+
+For the saved 98-edge $Q_8$ parent, all 56 one-pair, 840 two-pair and
+3360 three-pair constraint graphs are connected in the complete native
+censuses. Four pairs leave no base coordinate and therefore give an
+ordinary global isometry. These cases exhaust every involutive
+coordinate-block isometry. Consequently every admissible map in this
+entire class gives a cube-isometric copy of this particular parent.
+Cube isometries transport the move family, so arbitrary iterations
+have the same limitation. The classification and iteration argument
+are written proofs using the recorded finite census premises; this
+is neither a complete Lean replay nor a statement about all 98-edge
+snakes.
+
+\paragraph{A different 50-edge parent.}
+For the saved $Q_7$ parent, simultaneously use complemented swaps on
+$(0,4)$ and $(1,2)$, with base coordinates $3,5,6$. Apply them only
+when the base word is encoded by 40. The constraint components are
+\[
+\{40\},\qquad\{0,8,32,64,72,96,104\}.
+\]
+The first 45 vertices, through vertex 60, stay unchanged; the final
+six vertices change as follows:
+\[
+(56,40,41,43,47,63)\longmapsto(62,63,47,43,41,40).
+\]
+The original endpoints are $0,63$, at Hamming distance six. The image
+endpoints are $0,40$, at distance two. Both full 50-edge paths, their
+positionwise image relation and these endpoint distances are checked
+in Lean. Hence they are inequivalent under cube isometry, including
+reversal. Rigidity of the original under the one-pair family also
+shows that arbitrary iterations of those earlier moves cannot reach
+this new cube class.
+
+Complete enumeration of all 645120 relative cube isometries, for
+original/image and image/image parent pairs separately, still gives
+minimum projected overlap two and maximum 92 separated vertices
+after independent contiguous trimming. To reach at least 92, at most
+ten of the 102 parent vertices can be omitted. This bounds the original
+overlap by ten and leaves 66 first-parent intervals to examine; for
+each, the longest collision-free interval in the other parent gives
+the optimum. Witnesses attaining 92 make this cutoff exhaustive.
+The new shape therefore gives no larger construction in this family.
+
+\paragraph{Scope in $Q_9$ and a growth criterion.}
+For all 131 saved $Q_9$ snakes, the two-pair census covers 198072 choices.
+Its 74 nontrivial component switches all remain in existing bank
+classes. Every constraint graph has at most two components, so
+complements cover all selector combinations. Together with the
+one-pair census and equivariance, this gives closure under arbitrary
+iterations using one or two pairs. Three- and four-pair $Q_9$ maps
+remain unexamined.
+
+For a candidate preimage vertex $v\notin S$ and endpoint $t$, first
+preserve all old pairs in $S$. If $v,s$ lie over neighbouring base
+words in a common moved orbit, put $r=0$ for equal block words and
+$r=1$ for distinct orbit partners. Then
+\[
+F_f(v)\sim F_f(s)\quad\Longleftrightarrow\quad
+f(z_v)\oplus f(z_s)=r.
+\]
+Use this equation for $s=t$ and the opposite right-hand side for every
+other affected selected vertex. Unaffected pairs must already have
+the required status. After contracting the old equality components,
+all new equations meet the variable containing $z_v$; they are
+consistent precisely when repeated labels agree and self-loops have
+label zero. Injectivity then gives a valid new endpoint. Ordinary
+pair preservation on $S\cup\{v\}$ would retain any existing blockers.
+No extension search has been performed with this criterion.
+
+Lean checks the general pair criterion, whole induced image path,
+orbit invariance, composition, rigidity, the displayed matching law
+and the fixed-word conjugacy identity. The concrete parent proof
+checks all $51\times51$ pairs in both paths. The accepted total is
+56 modules and 71 dependency reports. Component reformulations,
+classification, equivariance and the full extension interpretation
+retain the written scope above; censuses remain native. Evidence is
+recorded in~\cite{research203}. A higher-order block isometry is a
+remaining direction for changing the saved $Q_8$ parent; success or
+a longer construction is not predicted by these results.
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -9361,5 +9504,11 @@ I. Hironaka, T. Ma and S. Zhan,
 \emph{Controlled reflections and whole-snake compatibility},
 research record 202, 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/202-parent-compatibility}.
+\bibitem{research203}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Whole-snake block symmetry,
+rigidity of a saved eight-dimensional parent, and a different
+seven-dimensional parent}. Research record 203, 14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/203-block-symmetry}.
+
 \end{thebibliography}
 \end{document}

@@ -1,0 +1,100 @@
+import LayerJoining
+namespace BlockSymmetry203
+open LayerJoining
+
+def twist {W : Type} (h : W → W) (b : Bool) (u : W) : W := if b then h u else u
+def affected {W : Type} (h : W → W) (u v : W) : Prop := h u ≠ u ∧ (u=v ∨ h u=v)
+def Adj {V W : Type} (R : V → V → Prop) (T : W → W → Prop) (x y : V × W) : Prop :=
+  (x.1=y.1 ∧ T x.2 y.2) ∨ (R x.1 y.1 ∧ x.2=y.2)
+def change {V W : Type} (h : W → W) (f : V → Bool) (x : V × W) : V × W :=
+  (x.1,twist h (f x.1) x.2)
+
+theorem hInjective {W : Type} (h : W → W) (inv : ∀ u, h (h u)=u)
+    (u v : W) (eq : h u=h v) : u=v := by
+  have e := congrArg h eq
+  simpa only [inv] using e
+
+theorem crossEquality {W : Type} (h : W → W) (inv : ∀ u, h (h u)=u) (u v : W) :
+    u=h v ↔ h u=v := by
+  constructor
+  · intro eq; rw [eq,inv]
+  · intro eq; rw [←eq,inv]
+
+theorem changedMatching {W : Type} (h : W → W) (u v : W) :
+    (h u=v ↔ u=v) ↔ ¬ affected h u v := by
+  classical
+  by_cases a : u=v <;> by_cases b : h u=v <;> simp_all [affected]
+
+theorem matchingCriterion {W : Type} (h : W → W) (inv : ∀ u, h (h u)=u)
+    (c d : Bool) (u v : W) :
+    ((twist h c u=twist h d v) ↔ u=v) ↔ (c=d ∨ ¬ affected h u v) := by
+  cases c <;> cases d
+  · simp [twist]
+  · simpa [twist,crossEquality h inv] using changedMatching h u v
+  · simpa [twist] using changedMatching h u v
+  · have hi : h u=h v ↔ u=v := ⟨hInjective h inv u v,congrArg h⟩
+    simp [twist,hi]
+
+theorem involution {V W : Type} (h : W → W) (inv : ∀ u, h (h u)=u)
+    (f : V → Bool) (x : V × W) : change h f (change h f x)=x := by
+  rcases x with ⟨z,u⟩
+  cases hf : f z <;> simp [change,twist,hf,inv]
+
+theorem pairCriterion {V W : Type} (R : V → V → Prop) (T : W → W → Prop)
+    (h : W → W) (inv : ∀ u, h (h u)=u) (iso : ∀ u v, T (h u) (h v) ↔ T u v)
+    (f : V → Bool) (x y : V × W) :
+    (Adj R T (change h f x) (change h f y) ↔ Adj R T x y) ↔
+    (R x.1 y.1 → affected h x.2 y.2 → f x.1=f y.1) := by
+  classical
+  rcases x with ⟨z,u⟩
+  rcases y with ⟨w,v⟩
+  by_cases eq : z=w
+  · subst w
+    have hi : h u=h v ↔ u=v := ⟨hInjective h inv u v,congrArg h⟩
+    cases hf : f z <;> simp [Adj,change,twist,hf,iso,hi]
+  · by_cases hr : R z w
+    · simp only [Adj,change,Prod.fst,Prod.snd,eq,false_and,false_or,hr,true_and,true_implies]
+      rw [matchingCriterion h inv]
+      constructor
+      · intro hh ha
+        rcases hh with hh | hh
+        · exact hh
+        · exact False.elim (hh ha)
+      · intro hh
+        by_cases ha : affected h u v
+        · exact Or.inl (hh ha)
+        · exact Or.inr ha
+    · simp [Adj,change,eq,hr]
+
+theorem wholeSetCriterion {V W : Type} (R : V → V → Prop) (T : W → W → Prop)
+    (h : W → W) (inv : ∀ u, h (h u)=u) (iso : ∀ u v, T (h u) (h v) ↔ T u v)
+    (f : V → Bool) (S : V × W → Prop) :
+    (∀ x y, S x → S y → (Adj R T (change h f x) (change h f y) ↔ Adj R T x y)) ↔
+    (∀ x y, S x → S y → R x.1 y.1 → affected h x.2 y.2 → f x.1=f y.1) := by
+  constructor
+  · intro hs x y hx hy; exact (pairCriterion R T h inv iso f x y).mp (hs x y hx hy)
+  · intro hs x y hx hy; exact (pairCriterion R T h inv iso f x y).mpr (hs x y hx hy)
+
+def imagePath {V W : Type} {R : V → V → Prop} {T : W → W → Prop} {m : Nat}
+    (p : InducedPath (V × W) (Adj R T) m)
+    (h : W → W) (inv : ∀ u, h (h u)=u) (iso : ∀ u v, T (h u) (h v) ↔ T u v)
+    (f : V → Bool)
+    (compatible : ∀ i j, R (p.vertex i).1 (p.vertex j).1 →
+      affected h (p.vertex i).2 (p.vertex j).2 → f (p.vertex i).1=f (p.vertex j).1) :
+    InducedPath (V × W) (Adj R T) m where
+  vertex i := change h f (p.vertex i)
+  distinct i j eq := by
+    apply p.distinct i j
+    have e := congrArg (change h f) eq
+    simpa only [involution h inv] using e
+  induced i j hij := ((pairCriterion R T h inv iso f _ _).mpr (compatible i j)).trans (p.induced i j hij)
+
+#print axioms hInjective
+#print axioms crossEquality
+#print axioms changedMatching
+#print axioms matchingCriterion
+#print axioms involution
+#print axioms pairCriterion
+#print axioms wholeSetCriterion
+#print axioms imagePath
+end BlockSymmetry203

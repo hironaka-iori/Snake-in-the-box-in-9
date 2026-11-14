@@ -1,0 +1,13 @@
+E:\Snake-in-a-box\milestones\203-block-symmetry\lean\BlockRigidity203.lean:11:43: error: unsolved goals
+W : Type
+h : W → W
+inv : ∀ (u : W), h (h u) = u
+u v : W
+hi : h u = h v ↔ u = v
+⊢ ¬h u = u → (h u = v ∨ h (h u) = v ↔ u = v ∨ h u = v)
+'BlockRigidity203.affectedLeft' depends on axioms: [propext]
+'BlockRigidity203.affectedRight' depends on axioms: [propext, sorryAx]
+'BlockRigidity203.orbitInvariant' depends on axioms: [propext, sorryAx]
+'BlockRigidity203.compose' depends on axioms: [propext]
+'BlockRigidity203.selectorConstant' depends on axioms: [propext, Quot.sound]
+'BlockRigidity203.noFixedVertexRigid' depends on axioms: [propext, Quot.sound]

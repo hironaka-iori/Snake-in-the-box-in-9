@@ -1,3 +1,13 @@
+# Current result after round 203
+
+A controlled involutive block isometry now has an exact criterion preserving every pair relation of a whole snake. It changes the saved 50-edge Q7 parent to a different cube class, with endpoint distance 2 instead of 6. Generic rigidity and complete finite case coverage show that every admissible transformation in this entire class leaves the saved 98-edge Q8 parent in its original cube-isometry class.
+
+All 56 Lean modules pass, with 71 dependency reports, including both complete Q7 paths. Native placement censuses still limit the examined parent pairs to 92 separated vertices. One-/two-pair moves leave the saved Q9 bank closed. No longer Q9 snake or new global bound was obtained; the goal remains active.
+
+Read [round203](milestones/203-block-symmetry/README.md), [the proof and limits](milestones/203-block-symmetry/MATHEMATICAL_NOTE.md), [verification](milestones/203-block-symmetry/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 202
 
 A controlled square reflection now has an exact criterion preserving every edge and nonedge of a whole snake. Three Lean modules pass with 21 dependency reports and a concrete example beyond cube isometry. The native census shows rigidity of the saved 98-edge Q8 parent under this family, and closure of the saved Q9 bank under its arbitrary iterations. A separate written proof restricts one omission in the saturated overlap-five construction to index 3 or 95.
