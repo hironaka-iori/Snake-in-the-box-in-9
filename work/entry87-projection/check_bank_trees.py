@@ -4,7 +4,8 @@ from pathlib import Path
 from bank_parity import inputs
 
 
-def graph(anchors,parity):
+def graph(anchors,parity,endcaps=None):
+    if endcaps is None:endcaps=bool(parity)
     labels=sorted(anchors)
     n=len(labels);adj=[set() for _ in range(n+1)]
     def add(i,j):adj[i].add(j);adj[j].add(i)
@@ -12,8 +13,8 @@ def graph(anchors,parity):
         if w.bit_count()%2==parity:continue
         neighbors=[i for i,x in enumerate(labels) if (w^x).bit_count()==1]
         if len(neighbors)==2:add(*neighbors)
-        elif len(neighbors)==1 and parity:add(n,neighbors[0])
-    if not parity:
+        elif len(neighbors)==1 and endcaps:add(n,neighbors[0])
+    if not endcaps:
         for i in range(n):add(n,i)
     return adj,[set() for _ in adj]
 

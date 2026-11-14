@@ -86,6 +86,7 @@ struct Cube {
     }
 };
 
+#ifndef PARITY_CUBE_ONLY
 int main(int argc,char**argv){
     if(argc==3 && string(argv[1])=="--inspect"){
         Cube cube(stoi(argv[2]));
@@ -108,6 +109,43 @@ int main(int argc,char**argv){
         old.push_back(x);cube.toggle(x);
     }
     sort(old.begin(),old.end());
+    if(mode==3 || mode==4){
+        if(mode==3 && (start!=0 || end!=96))return 2;
+        if(old.size()!=96 || start<0 || end>96 || start>=end)return 2;
+        for(int v=0;v<512;++v)
+            if(popcount(unsigned(v))%2==p && !cube.selected[v])other.push_back(v);
+        uint64_t cases=0,degree=0,connected=0;
+        for(int i=start;i<(mode==3?start+1:end);++i){
+            int removed=old[i];
+            if(mode==4)cube.toggle(removed);
+            for(int j=0;j<int(other.size());++j){
+                int x=other[j];cube.toggle(x);
+                auto evaluate=[&](int y){
+                    ++cases;
+                    // The 97-anchor class itself supplies both endpoints, for
+                    // either value of the geometric parity p.
+                    if(cube.frequencies[0]==0 && cube.frequencies[1]<=2){
+                        ++degree;
+                        if(cube.connected()){
+                            ++connected;
+                            if(mode==4)cout<<removed<<' ';
+                            cout<<x;
+                            if(mode==4)cout<<' '<<y;
+                            cout<<'\n';
+                        }
+                    }
+                };
+                if(mode==3)evaluate(-1);
+                else for(int k=j+1;k<int(other.size());++k){
+                    int y=other[k];cube.toggle(y);evaluate(y);cube.toggle(y);
+                }
+                cube.toggle(x);
+            }
+            if(mode==4)cube.toggle(removed);
+        }
+        cout<<"count "<<cases<<' '<<degree<<' '<<connected<<" 0\n";
+        return 0;
+    }
     if(old.size()!=size_t(97-p) || start<0 || end>int(old.size()) || start>=end)return 2;
     for(int x=0;x<512;++x)
         if(popcount(unsigned(x))%2==p && !cube.selected[x])other.push_back(x);
@@ -156,4 +194,6 @@ int main(int argc,char**argv){
         cube.toggle(a);
     }
     cout<<"count "<<cases<<' '<<passing_degree<<' '<<passing_both<<' '<<skipped<<'\n';
+    return 0;
 }
+#endif
