@@ -1,3 +1,11 @@
+# Current result after round 213
+
+The contributor branch has completed the unconditional bound233, supported by a saved assembly/axiom audit; independent full rebuilding remains pending. The recorded interval is191<=a(9)<=233. The construction proof now derives [0,6] partner restrictions from the actual reconstructed path and composes the spare-capacity filter. No new snake or construction-search exclusion is obtained.
+
+Read [the argument](milestones/213-interval-geometry/MATHEMATICAL_NOTE.md), [accepted proofs](milestones/213-interval-geometry/data/completion.json), [contributor review](milestones/213-interval-geometry/logs/contributor233-review.md), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex). The user authorized pausing at this significant review point.
+
+## Earlier checkpoints
+
 # Current result after round 212
 
 Spare-word capacity now gives a proved partner-support restriction for the whole-coordinate history model. Three new Lean modules pass with eight reports, including the group inequality |J|<=|N(J)|+s. The implemented rule restricts sharing only after the spare allowance is exhausted.

@@ -1,0 +1,25 @@
+import ConcreteRelations213
+
+set_option Elab.async false
+set_option maxRecDepth 10000
+set_option maxHeartbeats 20000000
+
+namespace ConcreteGeometry213
+open IndexedCriterion206 Square209
+
+theorem certificate_coverage :
+    certificates.map (fun c => (c.1,c.2.1)) = requiredPairs := by
+  simp only [certificates, List.map_map, Function.comp_def, certificate_pair,
+    List.map_id_fun]
+
+#print axioms certificate_coverage
+
+#eval do (← IO.getStdout).flush
+
+
+theorem certificate_validity : certificates.all validCertificate = true := by
+  decide +kernel
+
+#print axioms certificate_validity
+
+end ConcreteGeometry213

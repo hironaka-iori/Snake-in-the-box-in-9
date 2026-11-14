@@ -1,0 +1,120 @@
+import IntervalGeometry213
+
+set_option Elab.async false
+set_option maxRecDepth 10000
+set_option maxHeartbeats 20000000
+
+namespace ConcreteGeometry213
+
+open IndexedCriterion206 Square209
+
+def source : List Nat := [0,1,3,7,15,13,12,28,30,62,46,38,36,52,116,124,108,109,111,103,119,55,183,167,175,173,172,188,184,56,40,41,43,59,187,155,153,137,136,138,202,194,192,193,209,211,243,227,235,233,249,253,245,229,228,230,238,254,250,122,106,98,96,97,113,49,177,161,160,162,178,50,18,82,80,88,72,73,75,91,95,223,207,205,204,220,212,214,150,134,132,133,149,21,85,69,68,70,78]
+
+def base (v : Nat) : Nat :=
+  (if v.testBit 0 then 1 else 0) + (if v.testBit 6 then 2 else 0)
+
+def groupsFrom (previous current : Nat) : List Nat → List Nat
+  | [] => []
+  | z :: zs =>
+    let next := if z = previous then current + 1 else current
+    next :: groupsFrom z next zs
+
+def groups : List Nat :=
+  match source.map base with
+  | [] => []
+  | z :: zs => 0 :: groupsFrom z 0 zs
+
+def baseRaw (i : Nat) : Square209.Vertex :=
+  ((source[i]!).testBit 0, (source[i]!).testBit 6)
+
+def z (i : Fin 99) : Square209.Vertex := baseRaw i.val
+def group (i : Fin 99) : Nat := groups[i.val]!
+
+def chosen0 : List Nat := [0,4,16,20,24,30,52,54,58,70,72,74,14,34,36,38,40,42,62,64,66,12,32,44,46,48,50,60,68,76]
+def outside0 : List Nat := [2,6,8,10,18,22,26,28,56]
+def chosen1 : List Nat := [11,13,31,33,43,51,61,67,75,5,7,9,21,23,55,57,71,1,3,17,19,25,27,29,53,73]
+def outside1 : List Nat := [15,35,37,39,41,45,47,49,59,63,65,69,77]
+
+def partners : Nat → List Nat
+  | 2 => [12,32,44,46,48,50,60,68,76]
+  | 6 => [14,34,36,38,40,42,62,64,66]
+  | 8 => [14,34,36,38,40,42,62,64,66]
+  | 10 => [14,34,36,38,40,42,62,64,66]
+  | 15 => [5,7,9,21,23,55,57,71]
+  | 18 => [12,32,44,46,48,50,60,68,76]
+  | 22 => [14,34,36,38,40,42,62,64,66]
+  | 26 => [12,32,44,46,48,50,60,68,76]
+  | 28 => [12,32,44,46,48,50,60,68,76]
+  | 35 => [5,7,9,21,23,55,57,71]
+  | 37 => [5,7,9,21,23,55,57,71]
+  | 39 => [5,7,9,21,23,55,57,71]
+  | 41 => [5,7,9,21,23,55,57,71]
+  | 45 => [1,3,17,19,25,27,29,53,73]
+  | 47 => [1,3,17,19,25,27,29,53,73]
+  | 49 => [1,3,17,19,25,27,29,53,73]
+  | 56 => [14,34,36,38,40,42,62,64,66]
+  | 59 => [1,3,17,19,25,27,29,53,73]
+  | 63 => [5,7,9,21,23,55,57,71]
+  | 65 => [5,7,9,21,23,55,57,71]
+  | 69 => [1,3,17,19,25,27,29,53,73]
+  | 77 => [1,3,17,19,25,27,29,53,73]
+  | _ => []
+
+def withinPairs (xs : List Nat) : List (Nat × Nat) :=
+  xs.flatMap (fun x => (xs.filter (fun y => decide (x < y))).map (fun y => (x,y)))
+
+def familyPairs (C O : List Nat) : List (Nat × Nat) :=
+  withinPairs C ++ withinPairs O ++
+    O.flatMap (fun x => (C.filter (fun y => !(partners x).contains y)).map (fun y => (x,y)))
+
+def requiredPairs : List (Nat × Nat) :=
+  familyPairs chosen0 outside0 ++ familyPairs chosen1 outside1
+
+def firstIndex : List Nat := [0,2,3,4,5,7,8,9,10,11,12,13,15,16,18,19,20,22,23,24,25,27,28,29,30,32,33,34,35,36,37,39,41,42,44,45,46,47,48,49,50,51,52,53,55,56,57,58,59,60,61,62,64,66,67,69,70,71,72,74,75,76,78,79,80,81,82,83,85,86,87,89,90,92,93,95,97,98]
+def secondIndex : List Nat := [1,2,3,4,6,7,8,9,10,11,12,14,15,17,18,19,21,22,23,24,26,27,28,29,31,32,33,34,35,36,38,40,41,43,44,45,46,47,48,49,50,51,52,54,55,56,57,58,59,60,61,63,65,66,68,69,70,71,73,74,75,77,78,79,80,81,82,84,85,86,88,89,91,92,94,96,97,98]
+
+def makeCertificate (xy : Nat × Nat) : Nat × Nat × Nat × Nat :=
+  let x := xy.1
+  let y := xy.2
+  let a := firstIndex[x]!
+  let b := firstIndex[y]!
+  let i := if baseRaw a = opposite (baseRaw b) then secondIndex[x]! else a
+  let j := if baseRaw i = opposite (baseRaw b) then secondIndex[y]! else b
+  (x,y,i,j)
+
+def certificates : List (Nat × Nat × Nat × Nat) := requiredPairs.map makeCertificate
+
+def validCertificate (c : Nat × Nat × Nat × Nat) : Bool :=
+  let (x,y,i,j) := c
+  decide (i < 99 ∧ j < 99 ∧ groups[i]! = x ∧ groups[j]! = y ∧
+    x ≠ y ∧ x % 2 = y % 2 ∧ baseRaw i ≠ opposite (baseRaw j))
+
+theorem extraction :
+    source.length = 99 ∧ groups.length = 99 ∧
+    groups.all (fun g => decide (g < 78)) = true := by
+  decide +kernel
+
+#print axioms extraction
+
+theorem consecutive_groups_data :
+    (List.range 98).all (fun i => decide
+      (groups[i+1]! = groups[i]! ∨ groups[i+1]! = groups[i]!+1)) = true := by
+  decide +kernel
+
+#print axioms consecutive_groups_data
+
+theorem certificate_coverage :
+    certificates.map (fun c => (c.1,c.2.1)) = requiredPairs ∧
+    requiredPairs.length = 1291 := by
+  constructor
+  · simp [certificates, makeCertificate, List.map_map, Function.comp_def]
+  · decide +kernel
+
+#print axioms certificate_coverage
+
+theorem certificate_validity : certificates.all validCertificate = true := by
+  decide +kernel
+
+#print axioms certificate_validity
+
+end ConcreteGeometry213

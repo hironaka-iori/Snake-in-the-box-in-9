@@ -32,15 +32,16 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{\today}
+\date{Research state after round 213, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
 Let $a(9)$ denote the maximum edge length of an induced path in the
 nine-dimensional binary hypercube. An explicit checked construction and
-a completed archived contributor theorem give $191\le a(9)\le235$.
-The saved upper-bound audit is successful; its complete independent
-rebuild remains pending.
+a completed contributor theorem give $191\le a(9)\le233$.
+The pinned contributor source has no remaining certificate or floor
+premise, and its saved final assembly and axiom audit are successful.
+A complete independent rebuild remains pending~\cite{bound233archive}.
 
 For a snake of length $m$, singleton-square count $T$ and empty-square
 count $s_0$, the exact census is $T+2s_0+35(m+1)=9214$.
@@ -49,7 +50,9 @@ $39m+2s_0\le9192$. Thus fourteen empty squares would suffice to exclude
 length 235. Integer shares retain the empty-square contribution in
 stronger conditional comparisons. Four unresolved local share floors,
 $(15,14,14,14)$, together with specified graph and certificate premises,
-would give $a(9)\le234$. A separate contributor comparison targets 233.
+would give $a(9)\le234$. This alternative comparison is numerically
+superseded by the completed contributor bound 233; its own premises
+remain unresolved.
 
 The construction analysis derives restrictions on joining paths in
 opposite coordinate faces and gives criteria for changing an entire
@@ -65,8 +68,9 @@ Lean checks; the complete finite search certificates and geometric
 assembly retain their stated limitations.
 
 The paper separates written proofs, checked implications, native
-enumerations and unresolved premises. No construction above 191 or
-improved unconditional numerical bound is obtained. The value 196
+enumerations and unresolved premises. The contributor bound improves
+the archived upper bound from 235 to 233; no construction above 191
+is obtained. The value 196
 remains a conjecture requiring both a construction and an upper bound.
 \end{abstract}
 
@@ -110,17 +114,25 @@ Thus $\alpha_i=b_i+\delta_i$ with $\delta_i\ge0$. A count symbol $b_i<6$ specifi
 The explicit construction and the archived contributor upper-bound argument
 give the project interval
 \[
-\boxed{191\le a(9)\le235.}
+\boxed{191\le a(9)\le233.}
 \]
-The upper bound is the completed contributor theorem at the cited archival
-revision, with a successful saved compilation and axiom audit. A complete
-independent rebuild of its dependency closure remains pending.
+The upper bound is the completed contributor theorem at revision
+\texttt{b0521e1d}, with its final assembly and axiom audit recorded at
+\texttt{b65d30ca}~\cite{bound233archive}. Its theorem has no remaining
+certificate or floor premise. A complete independent rebuild of its
+dependency closure remains pending.
 \end{theorem}
-The lower bound is verified from the explicit transition sequence in Theorem~\ref{thm:lower}. The archived upper-bound argument has three steps. First, count coordinate squares exactly and establish positive singleton counts, with a stronger contribution at each endpoint. Second, exclude a finite family of local configurations and verify an integer potential on every remaining transition. Third, sum the potential inequalities and substitute the resulting count estimate into the square identity. Section~\ref{sec:upper-proof} records this argument for 235.
+The lower bound is verified from the explicit transition sequence in
+Theorem~\ref{thm:lower}. The completed upper bound combines the square
+census, local count and share certificates, and a finite potential summed
+along every actual snake. Section~\ref{sec:bound233} records the completed
+233 chain. Section~\ref{sec:upper-proof} preserves the earlier 235 argument
+and its empty-square refinement with their original constants.
 
 The argument has two parts. The first develops the square census,
 local count restrictions and empty-square shares, then states the precise
-remaining conditions for bounds 234 and 233. The seven-count boundary
+completed contributor bound 233 and the remaining conditions for
+alternative 234 and relaxed 233 comparisons. The seven-count boundary
 allows the current retained comparison to use nonnegative loss alone.
 The second examines numerical conjectures, constructions across
 dimensions, transformations of whole snakes and restrictions obtained
@@ -136,11 +148,12 @@ weights and boundary; later improvements do not silently change its premises.
 \toprule
 Claim & Evidence and scope\\\midrule
 $a(9)\ge191$ & An explicit snake with every vertex pair checked.\\
-$a(9)\le235$ & Archived contributor proof using 1287 local keys and a potential; the full independent rebuild remains pending.\\
+$a(9)\le233$ & Completed contributor theorem with saved final assembly and standard-axiom audit; full independent rebuild pending.\\
+Historical bound 235 & Archived proof using 1287 local keys and a potential; its count identities remain useful, while the numerical bound is superseded.\\
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
-Conditional bound 233 & Contributor chain and saved Linux evidence inspected; production local certificates remain pending. New boundary accounting permits four units of share allowance, with the actual-snake integration unfinished.\\
-Conditional bound 234 & Profile $(15,14,14,14)$ and boundary contribution 24 give $42254m+45L\le9928453$. Complete local-share proofs, reference exclusions, count restrictions and the graph certificate remain pending.\\
+Relaxed 233 comparison & The original contributor chain is complete. The separate four-unit share allowance retains its own relaxed coverage and actual-snake integration premises.\\
+Alternative conditional 234 & Numerically superseded by 233. Profile $(15,14,14,14)$ and boundary contribution 24 give $42254m+45L\le9928453$. Complete local-share proofs, reference exclusions, count restrictions and the graph certificate remain pending.\\
 Actual-state construction and weight accounting & State construction, non-reference filters and baseline weights are checked. Reference retention remains conditional on 1358 entries of the 1378-key union.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
 New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
@@ -273,6 +286,10 @@ The two specified neighbors exhaust the selected neighbors of $v$, since a verte
 \end{proof}
 
 \section{The upper bound 235 and the retained empty-square term}\label{sec:upper-proof}
+This section preserves the earlier count-only argument and its original
+constants. Its numerical upper bound is superseded by the completed
+contributor theorem in Section~\ref{sec:bound233}; the identities and
+conditional refinements below retain their stated mathematical scope.
 The square identity reduces the upper-bound problem to a lower estimate for $T$. We obtain that estimate from necessary conditions on short path segments. The local conditions exclude configurations, the finite potential combines the exclusions, and the final summation accounts for the ends of the path.
 \subsection{Normalization and necessary local conditions}
 A finite transition word is normalized by replacing its distinct coordinate labels, in order of first appearance, by $0,1,2,\ldots$. This replacement extends to a permutation of all nine coordinates. Translation makes its first vertex zero. Both operations preserve adjacency, endpoints, and singleton counts. Reversal permits the same exclusion to be used in either orientation.
@@ -3878,12 +3895,47 @@ it does not establish a new numerical upper bound.
 
 At the end of round 187, 93 of 98 complete clause batches (11904 of 12,424 clauses) have passed Lean. The initial-database truth theorem remains incomplete. The full critical contradiction and the actual-snake floor-fifteen theorem remain pending.
 
+\section{Completed contributor bound 233}\label{sec:bound233}
+The contributor theorem at revision \texttt{b0521e1d} states that every
+snake in $Q_9$ has at most 233 edges~\cite{bound233archive}. Its final source
+applies the two completed local-certificate aggregates to the B233
+comparison, with all five required share floors already supplied.
+The separate relaxed comparison below is not required by this theorem.
+
+For $m\ge7$, let $W$ denote the original B233 total window weight.
+The completed window potential and original charge accounting give
+\[
+520(m-7)\le W+1023,\qquad W+4200m\le1099800.
+\]
+The first inequality telescopes over the $m-7$ windows; the second
+combines their singleton and share contributions with the square census.
+The finite table checks, exclusion certificates and share-floor proofs
+supply these inequalities for every actual snake in the contributor chain.
+Eliminating $W$ gives
+\[
+4720m\le1104463<1104480=4720\cdot234.
+\]
+The gap at length 234 is 17, so integrality gives $m\le233$.
+Lengths $m<7$ satisfy the conclusion directly.
+
+The saved Linux audit at \texttt{b65d30ca} records successful final
+assembly and only \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound} for both the upper theorem and the $191$--$233$
+interval theorem. It reused 172 of 173 chain modules. Its dependencies
+include an external floor-object overlay and nineteen cloud-built
+certificates imported after hash and toolchain checks. Generated
+certificate sources were deleted after compilation, and some earlier
+replay objects were migrated with preserved modification times.
+An independent full source rebuild and independent recheck of those
+imported objects remain pending. These are verification limitations,
+not additional hypotheses in the final upper-bound theorem.
+
 \subsection{Reducing the share requirements in the six-step comparison}\label{sec:slack233}
-The contributor's six-step comparison now has a checked conditional
-implication to $m\le233$, with its production local certificates still
-pending. Its saved source and compilation record have been inspected;
-an independent rebuild is incomplete. The following deduction weakens
-the share premises while preserving the original table and potential.
+The original contributor six-step comparison is complete, as recorded
+in Section~\ref{sec:bound233}. The following separate deduction weakens
+its share requirements while preserving the original table and potential.
+The relaxed coverage and actual-snake integration require their own proofs;
+they are not premises of the completed original theorem.
 
 Assume $m\ge7$. Let $S_n$ be the table's share value at step $n$,
 and let $\sigma_i$ denote the physical integer share at path vertex $i$.
@@ -3947,9 +3999,14 @@ leaving 426. Completion of the critical $012034$ floor fifteen would
 reduce this to 373. Five-unit allowance would give 366 with that floor.
 These counts have no completed Lean coverage proof and measure certificate
 requirements, rather than computation time. The separate count-certificate
-requirements remain unchanged. Thus 233 remains conditional.
+requirements for this relaxed route remain unchanged. This alternative
+route to 233 remains conditional; the original contributor route is complete.
 
-\section{Remaining requirements for a stronger bound}\label{sec:closure}
+\section{Remaining requirements for alternative comparisons}\label{sec:closure}
+The completed contributor bound 233 numerically supersedes the proposed
+234 comparisons and matches the relaxed 233 target. The requirements
+below concern those separate arguments; they do not qualify the completed
+theorem of Section~\ref{sec:bound233}.
 
 \paragraph{Current retained graph.}
 The sufficient profile is $(15,14,14,14)$ on
@@ -3962,12 +4019,11 @@ exclusions, graph coverage and the complete finite-edge certificate.
 These premises are separate from the accepted-key package below.
 
 
-The maintained interval is $191\le a(9)\le235$, with the contributor-proof
+The maintained interval is $191\le a(9)\le233$, with the contributor-proof
 and independent-rebuild distinction stated in Section~\ref{sec:verification}.
 The boundary-24 argument removes the additional positive-loss requirement
-from the retained finite comparison. The principal remaining work is to
-establish the weakened local share floors and every retained graph
-assumption. Small-loss geometry remains useful information about snakes,
+from the retained finite comparison. Completing this alternative argument requires establishing the weakened
+local share floors and every retained graph assumption. Small-loss geometry remains useful information about snakes,
 but proving $L\ge4$ is no longer necessary for this conditional route.
 The strengthened count-only argument also reduces the sufficient
 empty-square target from eighteen to fourteen.
@@ -6865,17 +6921,74 @@ No controlled comparison establishes a speed improvement. An open
 model gives no exclusion, and neither the restricted search nor its
 generic counting lemmas determine the optimum in $Q_9$.
 
-\section{Verification scope and remaining problem}\label{sec:verification}
-The maintained project interval is $191\le a(9)\le235$, with the archived
-upper-bound qualification stated below. The lower bound follows
-from the explicit witness. The upper bound uses the square identity,
-endpoint estimates, 1287 catalogue keys, a finite potential and path
-summation. The completed contributor theorem has a successful archived
-dependency audit~\cite{bound235archive}. Its final source and saved audit were
-reviewed and its potential independently reconstructed. A complete
-independent rebuild remains pending.
 
-In the newer share argument, actual windows have consistent full direction,
+\subsection{Deriving partner restrictions from the indexed path}
+\label{sec:interval213}
+The capacity argument requires distinct chosen values, distinct outside
+values and complete partner lists. These restrictions follow directly
+from the path condition for the saved retained-coordinate construction.
+Write each vertex as $(z_i,u_{g(i)})$, where $z_i\in Q_2$ and $g(i)$
+identifies its constant-free-word interval. At consecutive indices,
+the identifier stays unchanged or increases by one.
+
+\begin{proposition}[Shared words across coordinate intervals]\label{prop:interval213}
+Suppose $(z_i,u_{g(i)})$ is an induced path. If two different group
+identifiers have the same parity and carry the same free word, every
+base vertex of one group is opposite every base vertex of the other.
+Each sharing group contains only one original path index. Three
+different groups of that parity cannot carry a common free word.
+\end{proposition}
+\begin{proof}
+Representatives of different groups with equal identifier parity cannot
+be consecutive: a change at consecutive indices increases the identifier
+by one and changes its parity. Their full vertices therefore have Hamming
+distance at least two. Equal free words contribute zero distance, so the
+two-coordinate bases must be opposite.
+
+Fix a representative of the second group. Every representative of the
+first is at its unique opposite corner and carries the same free word.
+Two such indices would repeat a full vertex, contrary to injectivity.
+The same reasoning applies to the second group. With three sharing
+groups, being opposite twice makes the first and third bases equal.
+Their free words are also equal, again repeating a full vertex.
+\end{proof}
+
+This argument has passed Lean directly from the indexed induced-path
+condition, including either ordering of the representative indices.
+For retained coordinates $(0,6)$, the grouping recurrence is checked
+against the literal 99-vertex source. Every required chosen-family,
+outside-family and nonpartner inequality has original-index witnesses
+whose base corners are not opposite. The complete witness coverage
+and validity are checked in bounded pieces and then assembled.
+Applying Proposition~\ref{prop:interval213} derives distinctness and
+partner completeness for both parity families~\cite{research213}.
+A further checked composition supplies support-filter preservation
+directly from this reconstructed-path premise: two forced even
+exceptions or six forced odd exceptions exhaust the allowance in a
+32-word pool. Domain containment and assignment fitting remain explicit.
+
+Thus the source-specific support argument no longer assumes those
+geometric restrictions separately from the reconstructed path.
+Alphabet membership, current domain containment, coordinate
+normalization and the complete native search certificate remain separate.
+Decoding an arbitrary natural number into six bits alone does not prove
+membership in the intended parity alphabet. The saved search states and
+construction lower bound are unchanged in this round.
+
+\section{Verification scope and remaining problem}\label{sec:verification}
+The maintained interval is $191\le a(9)\le233$. The lower bound follows
+from the explicit witness. The completed contributor upper theorem and
+its saved final assembly and axiom audit are pinned to revisions
+\texttt{b0521e1d} and \texttt{b65d30ca}~\cite{bound233archive}.
+Section~\ref{sec:bound233} gives the original B233 charge and potential
+deduction. No certificate or floor premise remains in that theorem.
+The audit reused 172 chain modules and depended on external floor and
+cloud-built objects; an independent full rebuild remains pending.
+The earlier 235 theorem, its independent numerical potential reconstruction
+and its retained empty-square argument are preserved as historical results
+in Section~\ref{sec:upper-proof}~\cite{bound235archive}.
+
+In the separate retained share argument, actual windows have consistent full direction,
 history and count keys. Coverage of the accepted-key graph, all 55
 history-share rules, the other baseline weight components, and the boundary
 and total-charge deductions have passed Lean under their stated premises.
@@ -6889,9 +7002,10 @@ floor is now established; the remaining four floors and the separate
 reference and potential obligations remain
 ~\cite{referenceunionarchive,potentialcertificatearchive,share152archive}.
 The current sufficient pending profile is $(15,14,14,14)$, as described in
-Section~\ref{sec:floor14-loss}. The separate conditional-233 comparison
-and its four-unit share allowance retain their stated local-certificate
-and actual-snake integration requirements.
+Section~\ref{sec:floor14-loss}. These conditional 234 comparisons are
+numerically superseded by the completed contributor theorem. The separate
+four-unit-allowance comparison in Section~\ref{sec:slack233} retains its
+own relaxed local-coverage and actual-snake integration requirements.
 
 The completed actual-snake results include the sharp $012032$ pair
 inequality, its equality geometry and parity consequence, the parity-free
@@ -9444,7 +9558,7 @@ At radius four, a forest exists with interior endpoint budget two. At radius fiv
 
 A Boolean encoding of the radius-five, budget-two model records the exact cycle cuts. Removing irrelevant clauses and replacing auxiliary counters by direct restrictions on triples of endpoint indicators gives a 567-clause core involving 252 Boolean variables. Its certificate consists of 398 derived clauses obtained by reverse unit propagation: assume the negation of the proposed clause, propagate the cited clauses, and obtain a contradiction. The resulting Boolean contradiction has been independently machine-checked through ordinary logical proof steps. This certifies the explicit formula; no geometric exclusion is asserted without the remaining interpretation proof.
 
-The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the project interval $191\le a(9)\le235$, whose upper bound retains the archived-proof qualification.
+The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the then-maintained interval $191\le a(9)\le235$, whose upper bound retained the archived-proof qualification. The current contributor bound is recorded in Section~\ref{sec:bound233}.
 
 \subsection{An auxiliary conditional singleton estimate}
 \begin{proposition}[Conditional estimate from a singleton surplus]
@@ -9616,7 +9730,7 @@ A five-vertex induced window has, up to translation and permutation of coordinat
 
 For prescribed counts $(2,2,3)$, both window shapes admit assignments at radius two. At radius three, the repeated-coordinate model is infeasible using square-cycle exclusions alone; the distinct-coordinate model becomes infeasible after seven additional cycle cuts. Independent checks confirm feasible radius-two assignments and acceptance of restrictions of known snakes. Both radius-three Boolean encodings have contradiction certificates replayed by a separate Python checker. For the repeated-coordinate case, the explicit Boolean contradiction has now been checked in Lean, using a sequence of smaller proofs after the single-file translation exceeded available memory. At that stage the distinct-coordinate certificate and the complete geometric assembly were unfinished. Those earlier checks therefore did not establish the premise of Proposition~\ref{prop:conditional244}. The later complete window proof establishes it independently.
 
-The missing-corner identity, the threshold-counter equivalence, and their connection for each normalized center have been checked in Lean. The finite corner lists have 21 distinct entries and agree with the eligible coordinate pairs. Generic endpoint-count and degree clauses, together with all 112 distinct cycle cuts retained by the two Boolean cores, have also been checked. Completing this particular approach would still require assembling the exact input clauses under one assignment and establishing the reduction from arbitrary five-vertex windows. This earlier route left the geometric assembly incomplete. The later archived contributor six-centre argument in Section~\ref{sec:upper-proof} supplies the project interval $191\le a(9)\le235$, with the complete independent rebuild still pending.
+The missing-corner identity, the threshold-counter equivalence, and their connection for each normalized center have been checked in Lean. The finite corner lists have 21 distinct entries and agree with the eligible coordinate pairs. Generic endpoint-count and degree clauses, together with all 112 distinct cycle cuts retained by the two Boolean cores, have also been checked. Completing this particular approach would still require assembling the exact input clauses under one assignment and establishing the reduction from arbitrary five-vertex windows. This earlier route left the geometric assembly incomplete. The later archived contributor six-centre argument in Section~\ref{sec:upper-proof} supplied the then-maintained interval $191\le a(9)\le235$, with the complete independent rebuild still pending. Section~\ref{sec:bound233} records the subsequently completed contributor bound 233.
 
 \section{Explicit transition sequences and blockers}\label{app:witness}
 All coordinates are numbered from zero. Spaces only separate groups; start at the zero vertex unless another initial vertex is stated, and apply each coordinate flip in order.
@@ -9968,6 +10082,14 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Sharp outer-transition pair inequality, c
 \bibitem{endpointarchive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Endpoint demand and the sharp endpoint-free pair bound}. Archived research record, 25 October 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/c0a672d7d314317bf69332fc7029e00853e16b04/milestones/45-pair-endpoint-demand}.
+
+\bibitem{bound233archive}
+Snake-in-the-box project contributors. \emph{Completed share-weighted bound
+233: final assembly, standard-axiom audit and verification limitations}.
+Contributor revision \texttt{b0521e1d14fd52c62db4cdeccc356b70a623eb82};
+audit revision \texttt{b65d30ca15441420b8f4538f671e589c2502674f},
+14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/b0521e1d14fd52c62db4cdeccc356b70a623eb82/milestones/33-233-lean}.
 
 \bibitem{bound235archive}
 Snake-in-the-box project contributors. \emph{Completed six-centre bound of 235: proof assembly and dependency audit}. Pinned audit revision \texttt{b20346ee}; later source state \texttt{74ca83db}.
@@ -10385,6 +10507,11 @@ six-coordinate history search}. Research record 211, November 2026.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Spare capacity and partner support
 in whole-coordinate history searches}. Research record 212, November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/212-spare-support}.
+
+\bibitem{research213}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Indexed-path geometry and
+source-specific partner restrictions}. Research record 213, November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/213-interval-geometry}.
 
 \end{thebibliography}
 \end{document}

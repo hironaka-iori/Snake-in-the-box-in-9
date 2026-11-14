@@ -1,0 +1,166 @@
+import Square209
+import IndexedCriterion206
+
+/-!
+Source prepared for checking; not compiled by its author.
+
+The path is an indexed induced cube path with a two-coordinate base.
+The free word is constant on each group. Consecutive group identifiers
+stay equal or increase by one. No literal interval extraction, native
+model, or traversal is certified here.
+-/
+
+namespace IntervalGeometry213
+
+open IndexedCriterion206
+
+/-- The indexed path condition already includes injectivity. -/
+theorem indexed_path_injective {N width : Nat} (p : Fin N → Word)
+    (hp : IndexedCubePath width p) : ∀ i j, p i = p j → i = j := by
+  intro i j heq
+  apply Fin.ext
+  by_cases hij : i.val < j.val
+  · have hne := ((indexed_graph_iff p).mp hp).2 i j hij
+    exact False.elim (hne.1 heq)
+  · by_cases hji : j.val < i.val
+    · have hne := ((indexed_graph_iff p).mp hp).2 j i hji
+      exact False.elim (hne.1 heq.symm)
+    · omega
+
+private theorem ordered_shared_base_opposite {N r : Nat}
+    (z : Fin N → Square209.Vertex) (group : Fin N → Nat)
+    (values : Nat → List Bool)
+    (hp : IndexedCubePath (2 + r)
+      (fun i => [(z i).1, (z i).2] ++ values (group i)))
+    (hstep : ∀ i j : Fin N, i.val < j.val → j.val = i.val + 1 →
+      group j = group i ∨ group j = group i + 1)
+    (i j : Fin N) (hij : i.val < j.val)
+    (hne : group i ≠ group j)
+    (hparity : group i % 2 = group j % 2)
+    (hword : values (group i) = values (group j)) :
+    z i = Square209.opposite (z j) := by
+  have hnonconsecutive : j.val ≠ i.val + 1 := by
+    intro hnext
+    rcases hstep i j hij hnext with hsame | hone
+    · exact hne hsame.symm
+    · omega
+  have hsep := hp.2 i j hij
+  rw [if_neg hnonconsecutive] at hsep
+  have hadd := hamming_append [(z i).1, (z i).2] [(z j).1, (z j).2]
+    (values (group i)) (values (group j)) (by rfl)
+  have hzero : hamming (values (group i)) (values (group j)) = 0 :=
+    (hamming_eq_zero_iff _ _).mpr hword
+  rw [hadd, hzero] at hsep
+  have hbase :
+      hamming [(z i).1, (z i).2] [(z j).1, (z j).2]
+        = Square209.distance (z i) (z j) := by
+    simp [hamming, Square209.distance]
+  apply (Square209.far_iff_opposite (z i) (z j)).mp
+  simpa [hbase] using hsep
+
+/-- Different groups of equal identifier parity sharing a free word
+must have opposite base corners, in either original index order. -/
+theorem shared_base_opposite {N r : Nat}
+    (z : Fin N → Square209.Vertex) (group : Fin N → Nat)
+    (values : Nat → List Bool)
+    (hp : IndexedCubePath (2 + r)
+      (fun i => [(z i).1, (z i).2] ++ values (group i)))
+    (hstep : ∀ i j : Fin N, i.val < j.val → j.val = i.val + 1 →
+      group j = group i ∨ group j = group i + 1)
+    (i j : Fin N)
+    (hne : group i ≠ group j)
+    (hparity : group i % 2 = group j % 2)
+    (hword : values (group i) = values (group j)) :
+    z i = Square209.opposite (z j) := by
+  by_cases hij : i.val < j.val
+  · exact ordered_shared_base_opposite z group values hp hstep
+      i j hij hne hparity hword
+  · by_cases hji : j.val < i.val
+    · have hrev := ordered_shared_base_opposite z group values hp hstep
+        j i hji (Ne.symm hne) hparity.symm hword.symm
+      have h := congrArg Square209.opposite hrev
+      simpa only [Square209.opposite_involutive] using h.symm
+    · have heq : i = j := Fin.ext (by omega)
+      exact False.elim (hne (congrArg group heq))
+
+/-- A nonopposite representative pair certifies unequal group words
+when its two group identifiers are different and have equal parity. -/
+theorem shared_word_conflict {N r : Nat}
+    (z : Fin N → Square209.Vertex) (group : Fin N → Nat)
+    (values : Nat → List Bool)
+    (hp : IndexedCubePath (2 + r)
+      (fun i => [(z i).1, (z i).2] ++ values (group i)))
+    (hstep : ∀ i j : Fin N, i.val < j.val → j.val = i.val + 1 →
+      group j = group i ∨ group j = group i + 1)
+    (i j : Fin N)
+    (hne : group i ≠ group j)
+    (hparity : group i % 2 = group j % 2)
+    (hbase : z i ≠ Square209.opposite (z j)) :
+    values (group i) ≠ values (group j) := by
+  intro hword
+  exact hbase (shared_base_opposite z group values hp hstep
+    i j hne hparity hword)
+
+/-- A group sharing a word with a different group of equal identifier
+parity has exactly one original index: its chosen representative. -/
+theorem sharing_group_single_index {N r : Nat}
+    (z : Fin N → Square209.Vertex) (group : Fin N → Nat)
+    (values : Nat → List Bool)
+    (hp : IndexedCubePath (2 + r)
+      (fun i => [(z i).1, (z i).2] ++ values (group i)))
+    (hstep : ∀ i j : Fin N, i.val < j.val → j.val = i.val + 1 →
+      group j = group i ∨ group j = group i + 1)
+    (i j : Fin N)
+    (hne : group i ≠ group j)
+    (hparity : group i % 2 = group j % 2)
+    (hword : values (group i) = values (group j)) :
+    ∀ k : Fin N, group k = group i → k = i := by
+  have hi := shared_base_opposite z group values hp hstep
+    i j hne hparity hword
+  intro k hk
+  have hkn : group k ≠ group j := by simpa [hk] using hne
+  have hkp : group k % 2 = group j % 2 := by simpa [hk] using hparity
+  have hkw : values (group k) = values (group j) := by simpa [hk] using hword
+  have hz := shared_base_opposite z group values hp hstep k j hkn hkp hkw
+  have hbase : z k = z i := hz.trans hi.symm
+  apply indexed_path_injective _ hp
+  simp [hbase, hk]
+
+/-- Three pairwise different groups of one identifier parity cannot
+share one free word in an induced path. -/
+theorem no_three_sharing_groups {N r : Nat}
+    (z : Fin N → Square209.Vertex) (group : Fin N → Nat)
+    (values : Nat → List Bool)
+    (hp : IndexedCubePath (2 + r)
+      (fun i => [(z i).1, (z i).2] ++ values (group i)))
+    (hstep : ∀ i j : Fin N, i.val < j.val → j.val = i.val + 1 →
+      group j = group i ∨ group j = group i + 1)
+    (i j k : Fin N)
+    (hij : group i ≠ group j)
+    (hjk : group j ≠ group k)
+    (hik : group i ≠ group k)
+    (hpij : group i % 2 = group j % 2)
+    (hpjk : group j % 2 = group k % 2)
+    (hwij : values (group i) = values (group j))
+    (hwjk : values (group j) = values (group k)) : False := by
+  have hab := shared_base_opposite z group values hp hstep i j hij hpij hwij
+  have hbc := shared_base_opposite z group values hp hstep j k hjk hpjk hwjk
+  have hbase : z i = z k := by
+    calc
+      z i = Square209.opposite (z j) := hab
+      _ = Square209.opposite (Square209.opposite (z k)) :=
+        congrArg Square209.opposite hbc
+      _ = z k := Square209.opposite_involutive (z k)
+  have hword : values (group i) = values (group k) := hwij.trans hwjk
+  have heq : i = k := by
+    apply indexed_path_injective _ hp
+    simp [hbase, hword]
+  exact hik (congrArg group heq)
+
+#print axioms indexed_path_injective
+#print axioms shared_base_opposite
+#print axioms shared_word_conflict
+#print axioms sharing_group_single_index
+#print axioms no_three_sharing_groups
+
+end IntervalGeometry213
