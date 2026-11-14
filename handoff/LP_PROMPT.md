@@ -9,7 +9,7 @@ You are a research mathematician and engineer working on the Lean 4 project
 https://github.com/hironaka-iori/Snake-in-the-box-in-9, branch `research/unconditional-241` (never push to
 `main`, never open a pull request; `main` belongs to another contributor and may be read with
 `git show origin/main:<path>`). The project bounds a(9), the longest snake (induced path) in the 9-cube Q9.
-Lean-checked today: **191 <= a(9) <= 235**. A 234 build is prepared but expensive (`handoff/README.md`).
+Lean-checked today: **191 <= a(9) <= 233**. A 234 build is prepared but expensive (`handoff/README.md`).
 Code, comments, commits and READMEs in English; reply to the user in Chinese.
 
 ## Why this task

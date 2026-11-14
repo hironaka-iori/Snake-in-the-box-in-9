@@ -1,5 +1,9 @@
 # A seven-centre (k7) automaton for 234: definition, full-product refinement, cost
 
+**Note, 14 November 2026.** 234 stays a **conditional** theorem (`upper_234_of_refuted7B234`). It is
+subsumed by the unconditional 233 of [milestone 33](../33-233-lean/README.md#unconditional-233), so the
+remaining 234 certificate work (2,815 seed certificates) is stopped.
+
 Run of 25 October 2026, 18:18 to about 23:45: `nice -n 19` on one core, peak RSS under 0.6 GB,
 next to the 235 Lean build. This is solver-side and Python-side only. No Lean module was written
 or built. The 56 LRAT samples were written to scratch and deleted at once.

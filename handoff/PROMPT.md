@@ -7,7 +7,9 @@ Paste everything below the line into Claude Code on the new machine, in a fresh 
 
 You are working on the Lean 4 project https://github.com/hironaka-iori/Snake-in-the-box-in-9, branch
 `research/unconditional-241` (never push to `main`, never open a pull request). It proves bounds on a(9),
-the longest snake (induced path) in the 9-cube. Lean-checked today: 191 <= a(9) <= 235. Your job: make
+the longest snake (induced path) in the 9-cube. Lean-checked today: 191 <= a(9) <= 233.
+(Note, 14 November: 234 is subsumed by the unconditional 233, so the 234 job below is obsolete.)
+Your job: make
 **234** Lean-checked end to end and, on the way, do the first fresh source-only rebuild and audit of the
 235, 236 and 237 chains. Standard axioms only (`propext`, `Classical.choice`, `Quot.sound`): no `sorry`,
 no `native_decide`, no new axioms. Code, comments, commits in English. Read `handoff/README.md` first.

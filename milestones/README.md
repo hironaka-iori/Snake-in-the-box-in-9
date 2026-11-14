@@ -1,6 +1,6 @@
 # Research milestones
 
-The exact optimum remains unresolved. The strongest checked global interval is 191 <= a(9) <=245 edges.
+The exact optimum remains unresolved. The strongest checked global interval is 191 <= a(9) <= 233 edges.
 
 - [Foundations, witnesses, and numerical hypotheses](01-foundations/README.md)
 - [Layer constructions](02-layer-constructions/README.md)

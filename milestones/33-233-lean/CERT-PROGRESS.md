@@ -204,3 +204,23 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
 - 14:19 UTC: read-only preflight of post233.sh steps 0-2 while S012301A35344 builds: mathlib pin ok; floors port present; NEWDIR free; status 2,636/2,637 seed and 490/490 share replays built (Cnf all built); `final` dry run wrote 30 modules, 0 differ from work/final_lean (1 replay missing: S012301A35344); no sorry/native_decide/axiom in the generated modules or UpperBound233.lean; staleness simulation: closure 26,425 modules, 24 stale = the expected 23 plus LocalWindowUnsat.S012301A35344.
 - 15:00 UTC: 3,126 / 3,127 built, 2.3 GB free. Only S012301A35344 left: local big-stack build at 2 h 54 min, no errors; redundant copy on build worker 2 since 12:43. Remote T012304A35346K47 installed at 14:07.
 - 15:33 UTC: ALL 3,127 certificates built. S012301A35344 passed locally with the big-stack wrapper (12,360 s, peak 6.91 GB, status ok), just past the 12,089 s where the 8 MB-stack run had failed. prod233 logged {"done": "all certificates built"}. post233.sh started (with LEAN=/home/user/leanbig.sh). The three gen worker sessions are archived; build worker 2 was asked to stop its redundant copy and delete the xfer/233* branches.
+
+## Final summary (14 November 2026)
+
+- All **3,127** certificates (2,637 seeds + 490 share thresholds; 6,254 modules) are built, 0 failed in
+  the end: 3,108 on this machine and 19 on cloud workers (`data/remotebuild6SB233.jsonl`). Production ran
+  from 10 November 14:45 UTC to 14 November 15:32 UTC, in 114 `prod233.py` batches.
+- Replay hints: 3,336,107,358 (seeds 2,337,826,384, share 998,280,974); 69,839,929 lemmas; largest
+  certificate 38,914,860 hints.
+- Replay modules: 209.84 kernel-hours (seeds 131.48, share 78.35; 168.08 h local, 41.76 h on cloud
+  workers), 8.87 GB of `.olean`. Clause-soundness modules: 12.63 h over the 3,108 built locally,
+  429.8 MB of `.olean`. Replay sources: about 17.0 GB, deleted after building.
+- `post233.sh` (`LEAN_BIN=/home/user/leanbig.sh AGG_RSS_CAP_GB=12.5`) built the two aggregates
+  (`LocalWindowDirUnsat6SB233` 264.8 s, 11.36 GB; `LocalWindowShareUnsat6SB233` 6.3 s, 3.12 GB; standard
+  axioms) and ran `chain_audit.py --target UpperBound233 --reuse`: 173 modules, 172 reused,
+  `UpperBound233` 567 s and 12.61 GB, chain wall time 761 s. `Snake9.upper_bound_233` and
+  `Snake9.verified_interval_191_233` depend on `propext`, `Classical.choice`, `Quot.sound` only
+  (`outputs/upper-bound-233-audit-linux.log`, commit `b65d30ca`). **233 is unconditional.** Write-up:
+  [README.md, "Unconditional 233"](README.md#unconditional-233).
+- Note: the total "3,118" in the earlier lines of this log (up to 12 November) should read 3,127, as the
+  correction of 13 November 00:35 says. ("3,118 / 3,127 built" at 08:56 on 14 November is a real count.)
