@@ -1,3 +1,11 @@
+# Current result after round 202
+
+A controlled square reflection now has an exact criterion preserving every edge and nonedge of a whole snake. Three Lean modules pass with 21 dependency reports and a concrete example beyond cube isometry. The native census shows rigidity of the saved 98-edge Q8 parent under this family, and closure of the saved Q9 bank under its arbitrary iterations. A separate written proof restricts one omission in the saturated overlap-five construction to index 3 or 95.
+
+No new Q9 witness or global bound was obtained. The goal remains active. Read [round202](milestones/202-parent-compatibility/README.md), [the argument](milestones/202-parent-compatibility/MATHEMATICAL_NOTE.md), [verification](milestones/202-parent-compatibility/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 201
 
 General two-parent accounting gives L+k<=2a(n)+2+2A, linking final length, face crossings and added vertices. It excludes a deletion-only two-parent representation of the displayed98-edge Q8 witness and sharply restricts196-edge constructions. Six Lean modules pass with24 reports; full geometric interpretation and the exact one-deletion classification retain explicit written-proof scope.

@@ -1,0 +1,29 @@
+E:\Snake-in-a-box\milestones\202-parent-compatibility\lean\ControlledSymmetry202.lean:29:72: error: failed to synthesize
+  Decidable (∀ (epsilon c a b : Bool), active epsilon (twist epsilon c (a, b)) ↔ active epsilon (a, b))
+
+Additional diagnostic information may be available using the `set_option diagnostics true` command.
+E:\Snake-in-a-box\milestones\202-parent-compatibility\lean\ControlledSymmetry202.lean:33:34: error: failed to synthesize
+  Decidable
+    (∀ (epsilon c a b d e : Bool),
+      squareAdj (twist epsilon c (a, b)) (twist epsilon c (d, e)) ↔ squareAdj (a, b) (d, e))
+
+Additional diagnostic information may be available using the `set_option diagnostics true` command.
+E:\Snake-in-a-box\milestones\202-parent-compatibility\lean\ControlledSymmetry202.lean:37:66: error: failed to synthesize
+  Decidable
+    (∀ (epsilon c d a b e f : Bool),
+      (twist epsilon c (a, b) = twist epsilon d (e, f) ↔ (a, b) = (e, f)) ↔
+        c = d ∨ ¬(active epsilon (a, b) ∧ active epsilon (e, f)))
+
+Additional diagnostic information may be available using the `set_option diagnostics true` command.
+E:\Snake-in-a-box\milestones\202-parent-compatibility\lean\ControlledSymmetry202.lean:69:4: warning: try 'simp' instead of 'simpa'
+note: this linter can be disabled with `set_option linter.unnecessarySimpa false`
+'ControlledSymmetry202.fibreInvolution' does not depend on any axioms
+'ControlledSymmetry202.fibreActive' depends on axioms: [sorryAx]
+'ControlledSymmetry202.fibreAdjacency' depends on axioms: [sorryAx]
+'ControlledSymmetry202.matchingCriterion' depends on axioms: [sorryAx]
+'ControlledSymmetry202.composition' does not depend on any axioms
+'ControlledSymmetry202.involution' does not depend on any axioms
+'ControlledSymmetry202.injective' does not depend on any axioms
+'ControlledSymmetry202.pairCriterion' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ControlledSymmetry202.wholeSetCriterion' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'ControlledSymmetry202.imagePath' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

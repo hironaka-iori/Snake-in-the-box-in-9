@@ -74,6 +74,9 @@ A general two-parent identity gives $L+k\le2a(n)+2+2A$, where
 $k$ counts crossings and $A$ counts added vertices. It excludes a
 deletion-only two-parent representation of the displayed 98-edge snake
 and sharply restricts such constructions of a 196-edge snake.
+Controlled square reflections give a whole-snake preservation criterion
+and a checked example beyond cube isometry. Their native census also
+identifies a closed family within the saved 191-edge witness bank.
 No longer $Q_9$ snake or improved unconditional numerical bound is
 obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
@@ -7985,6 +7988,144 @@ $C=5$ attachment conclusion have the written proofs above; their full
 geometric assembly has not been checked in Lean. None of these results
 gives a longer $Q_9$ snake or a new global numerical bound.
 
+
+\subsection{Controlled reflections of the whole snake}
+\label{sec:controlled202}
+An automorphism of a finite snake is either identity
+or reversal: an endpoint has only two possible images, and distance
+along the path from that endpoint determines every other image.
+A transformation into a different cube embedding allows more freedom.
+The following map acts on every selected vertex and has an exact
+criterion preserving every pair relation of the entire snake.
+
+Choose two coordinates and write a cube vertex as $(z,u)$, where
+$z\in Q_{n-2}$ and $u\in\{00,01,10,11\}$. For
+$\epsilon\in\{0,1\}$, let $\tau_\epsilon$ interchange the two
+words of parity $\epsilon$ and fix the other two. Thus $\tau_1$
+exchanges $01,10$, while $\tau_0$ exchanges $00,11$; both are square
+reflections. For a Boolean function $f$ on $Q_{n-2}$, define the
+\emph{controlled square reflection}
+\[
+F_f(z,u)=(z,\tau_\epsilon^{f(z)}(u)).
+\]
+It is an involution on the entire cube, although it need not preserve
+the entire cube graph. Controlled swaps already occur in reversible
+logic, including the Fredkin gate~\cite{fredkin}; no historical novelty
+is claimed for the operation.
+
+\begin{theorem}[Whole-snake preservation criterion]
+\label{thm:controlled202}
+For a selected set $S\subseteq Q_n$, let $B$ be the set of base words
+$z$ for which some $(z,u)\in S$ has $u$ of parity $\epsilon$.
+The map $F_f$ preserves adjacency and nonadjacency for every pair
+in $S$ if and only if $f$ is constant on each connected component
+of $Q_{n-2}[B]$. Under this condition, an ordered snake
+$(v_0,\ldots,v_L)$ maps to the snake $(F_f(v_0),\ldots,F_f(v_L))$.
+\end{theorem}
+\begin{proof}
+In a common base fibre, both vertices receive the same square isometry.
+Distinct base fibres at distance at least two cannot supply an edge.
+Across neighbouring base words $z,w$, adjacency means that the two-bit
+words agree. Equal selectors preserve this equality. Different selectors
+reverse it whenever both words have parity $\epsilon$, since there are
+only two such words and the reflection interchanges them. Words of
+different parities cannot become equal, and both inactive words are fixed.
+Thus a pair relation changes exactly when neighbouring members of $B$
+receive different selectors. Constancy on edges is equivalent to constancy
+on components. Involutivity also preserves distinctness of all vertices.
+\end{proof}
+
+The active base set $B$ does not change under these maps. A subset
+of its components can therefore be selected for reflection, and
+composition takes the symmetric difference of the chosen subsets.
+Reflecting all components agrees on $S$ with the ordinary global
+square reflection. Complementary subsets give cube-isometric images.
+If $B$ has at most three components, the unchanged image and the
+single-component images consequently cover all choices up to cube
+isometry. At four components, choices of two components require
+additional consideration.
+
+If this controlled map preserves the same snake as a set and acts
+nontrivially, it agrees on that snake with the global square reflection.
+Indeed, its restriction must be reversal. Every moved vertex changes
+exactly two bits, so an even number of vertices is impossible: reversal
+would exchange the adjacent middle pair. With an odd number of vertices,
+every noncentral vertex moves and hence lies on the active diagonal.
+The two neighbours of the centre are exchanged and share a base word.
+Their common cube neighbours lie on the inactive diagonal, so the
+centre is also fixed by the global reflection. The two maps therefore
+agree on every selected vertex. This distinguishes a new embedding
+from an additional intrinsic symmetry of the same snake.
+
+\paragraph{A concrete whole-snake transformation.}
+The two 13-edge $Q_5$ paths
+\[
+\begin{split}
+P={}&(0,1,3,7,15,14,10,26,18,22,20,28,29,25),\\
+P'={}&(0,1,3,7,15,14,10,26,18,22,20,21,29,25)
+\end{split}
+\]
+are related by the controlled reflection in coordinates 0 and 3,
+with $\epsilon=1$ and the single active base component encoded by 20.
+It exchanges 21 with 28 and fixes the other $Q_5$ vertices.
+Both complete paths and the positionwise image relation pass Lean.
+The Hamming-distance matrices disagree under both forward and reversed
+alignment, also checked in Lean, so the two paths are not cube-isometric.
+For example, the distance between positions 1 and 11 changes from four
+to two. Preservation of the whole path does not require preservation
+of every Hamming distance.
+
+\paragraph{Consequences for the saved parents and witness bank.}
+The native census examines every coordinate pair and both diagonal
+parities. All active graphs are connected for the saved $Q_6$, $Q_7$
+and $Q_8$ representatives, over 30, 42 and 56 choices respectively.
+Every admissible map in this family therefore acts on each of those
+snakes as identity or a global square reflection. This conclusion is
+restricted to those representatives.
+
+For the 131 saved 191-edge $Q_9$ snakes, the 9432 pair/parity choices
+give 9248 connected active graphs, 144 graphs with two components and
+40 with three. Their 408 single-component images represent 111 cube
+isometry classes, all already in the saved bank. Every resulting path
+was checked in full by the native calculation.
+
+These finite results imply closure of the bank's cube-isometry classes
+under arbitrary iterations of the controlled reflections. Complementary
+subsets cover every one-step choice because there are at most three
+components. Cube isometries transport the move family: a coordinate
+permutation transports the selected pair, and a translation in one
+chosen coordinate exchanges the two parity cases. Both cases were
+included. Thus each step remains in the bank's classes, and induction
+handles any finite number of steps, with changing coordinate pairs.
+This is no classification of all 191-edge snakes and no global bound.
+
+Lean checks the preservation criterion in an arbitrary product graph
+$G\square Q_2$, constructs the whole image path, and checks the
+composition, complement and compatibility deductions. The concrete
+census remains native. Its closure consequence additionally uses the
+written component and equivariance arguments above; no full-bank Lean
+replay is claimed. Exact inputs and evidence are in~\cite{research202}.
+
+\paragraph{A sharper parent restriction.}
+For the 195-edge, three-crossing predecessor in
+Section~\ref{sec:crossing-deletion201}, one internal vertex must be
+omitted from each 98-edge parent: the three crossings leave exactly
+two components in each face. If their deletion indices are $i,j$,
+and their base-colour imbalances are $\delta_P,\delta_Q\in\{-1,1\}$,
+the final colour balance gives
+\[
+\delta_P(1-(-1)^i)=\delta_Q(1-(-1)^j).
+\]
+Hence $i,j$ have equal parity; if odd, the parent endpoints have the
+same base colour. In the saturated $C=5$ one-addition case, the new
+endpoint attaches at an original endpoint of one parent. Both exposed
+neighbours of its omitted vertex are then crossing ports. The retained
+opposite copy of that omitted vertex joins them into an entire two-edge
+component in the other face. That other parent's deletion index is
+therefore 3 or 95. Both indices are odd and the parent endpoint colours
+agree. This is a written geometric deduction; its complete Lean assembly
+and existence of the construction remain open.
+
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
 
@@ -9210,5 +9351,15 @@ research record 200, 13 November 2026. Complete trimming census,
 repair models, counting proofs and source-review reports:
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/200-overlap-repair}.
 
+\bibitem{fredkin}
+E. Fredkin and T. Toffoli,
+\emph{Conservative Logic}, International Journal of Theoretical Physics
+21 (1982), 219--253, Section 2.
+\url{https://doi.org/10.1007/BF01857727}.
+\bibitem{research202}
+I. Hironaka, T. Ma and S. Zhan,
+\emph{Controlled reflections and whole-snake compatibility},
+research record 202, 14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/202-parent-compatibility}.
 \end{thebibliography}
 \end{document}

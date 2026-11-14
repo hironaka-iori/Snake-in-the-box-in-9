@@ -1,0 +1,680 @@
+diff --git a/milestones/33-233-lean/CERT-PROGRESS.md b/milestones/33-233-lean/CERT-PROGRESS.md
+index 79452ba8..8efc19fd 100644
+--- a/milestones/33-233-lean/CERT-PROGRESS.md
++++ b/milestones/33-233-lean/CERT-PROGRESS.md
+@@ -165,3 +165,26 @@ Resumable log of the certificate run for the two premises `AllRefuted6SB233` and
+ - 03:44 UTC: 2,991 / 3,127 built, 5.2 GB free, MemAvailable 5.4 GB. Batch 14 build started about 02:50 (gen about 26 min while the missing sources were made), 4 lean jobs running. Supervisor: worker 2 was started and retired twice (03:00 and 03:12), because `--seed-jobs auto` replays briefly run up to 10 cadicals; mild, left as is. 2 workers, pregen logs clean, no stale claims.
+ - 04:46 UTC: 2,998 / 3,127 built (129 left, 2.60 G est. hints), 4.9 GB free, MemAvailable 10.3 GB. Batch 14: gen 1,555 s, build 5,829 s, 0 failed. Batch 15 started its guarded build at 04:46 (sources ready). Worker 2 start/retire repeats about every 20 min (03:00, 03:12, 04:17, 04:39); harmless churn, left as is. No stale claims, pregen logs clean. S012301A34354 (first of the six large-RSS modules) is about 120 modules away.
+ - 05:49 UTC: 3,005 / 3,127 built, 5.0 GB free. Batch 15 still building (4 lean jobs at 2.1-2.5 GB RSS each, started 04:46). MemAvailable is low at 2.1 GB (4 lean + 2 worker replays). There are no OOM kills in dmesg, and earlier batches with the same mix peaked below 3 GB per lean, so this is left as is but watched. No stale claims, pregen logs clean, no supervisor churn since 04:39.
++- 06:52 UTC: 3,009 / 3,127 built, 4.8 GB free. Batch 15 (12 modules): 11 ok, 1 lost to the cgroup OOM killer (T012034A36435K55, lean at 3.1 GB anon RSS, dmesg 34241 s), so prod queued it for regeneration (one of its two attempts is used). Cause: 4 lean jobs plus 2 worker replays, and the supervisor's memory kill rule could not fire because it requires more than --min-workers (2) workers. Fix: restarted supervisor233.py with `--min-workers 1 --kill-mem-gb 1.5` (PID 8797). Workers 0/1 count as legacy for it and are swapped at their next item boundary. Batch 16 is building (4 lean jobs), MemAvailable 7.7 GB.
++- 07:56 UTC: 3,017 / 3,127 built, 4.8 GB free, MemAvailable 4.7 GB. T012034A36435K55 (the OOM loss) rebuilt fine on its second attempt. No new OOM kill. The new supervisor stopped legacy workers 1 (07:27) and 0 (07:40) at item boundaries. It started worker 0 again only at 07:52, because its start rule needs MemAvailable >= 4 GB, so pregeneration ran with 0 workers for about 12 min. Now: 3 lean jobs, 1 worker, no stale claims, pregen logs clean.
++- 08:59 UTC: 3,024 / 3,127 built, 4.5 GB free, MemAvailable 6.8 GB. Batch 16 (11 modules): gen 1,242 s, build 5,092 s, 0 failed. Batch 17 has been building since about 08:13 (4 lean jobs). No new OOM. The supervisor keeps 1-2 workers during builds (it retires down to 1 when busy > 5). Cores stay full, so --start-mem-gb is left at 4. No stale claims, pregen logs clean.
++- 10:06 UTC: 3,029 / 3,127 built, 4.1 GB free. Batch 17: 9 ok, 1 more OOM loss (T012301A24643K15, lean at 2.7 GB anon RSS, dmesg 46615 s). Prod requeued it in batch 18, which is generating now. Root cause: the memory cgroup of these processes has a 13.35 GiB limit (memory.limit_in_bytes 14337294336, failcnt in the millions), below the 16 GB that MemAvailable reflects, so the supervisor overestimated headroom by about 2.7 GB. Fix: `mem_avail_gb()` in supervisor233.py and cert233.py (for `--seed-jobs auto`) now returns min(MemAvailable, cgroup limit − usage + inactive_file). Supervisor restarted as PID 1594 with `--min-workers 1 --kill-mem-gb 2.0`. The six large-RSS modules must be planned against 13.35 GiB, not 16 GB: --jobs 2 at most, and no workers while one of them builds.
++- 10:39 UTC: the container restarted (uptime 0). 3,029 / 3,127 built, 5.2 GB free after cleanup. Cleared 101 claims, the stop file and leftover scratch in $CERT233_SCR/{pregen*,}/replay. Relaunched prod (PID 286, same args); its guarded build started at once (batch 18 sources were ready), with T012301A24643K15 retried and the in-memory failure count reset. Then the supervisor (PID 323, `--min-workers 1 --kill-mem-gb 2.0`), which started worker 0. The memory cgroup path changed with the restart (the limit is still 14337294336 B); mem_avail_gb() reads it from /proc/self/cgroup.
++- 2026-11-13 11:43 UTC: 3,037 / 3,127 built, 4.6 GB free. Batch 18 guarded build running since 10:39 (T012301A24643K15 still compiling, no OOM kill so far; cgroup at its limit with page reclaim). Supervisor PID 323 with worker 0.
++- 2026-11-13 12:48 UTC: 3,042 / 3,127 built, 4.7 GB free. Batch 18 done 25/25 in 4,943 s, 0 failed (T012301A24643K15 built, peak RSS 3.47 GB). Batch 19 building; no OOM kills. 85 left (2.11 G est. hints), 79 of them before idx 151.
++- 2026-11-13 14:31 UTC: 3,049 / 3,127 built, 4.4 GB free. Batch 19 done 27/27 in 4,067 s, 0 failed; next batch building; no OOM kills. (The 13:50 check-in did not fire; re-armed.)
++- 2026-11-13 16:00 UTC: speed-up: replay-source generation for 58 of the remaining modules moved to three cloud sessions (xfer233.py gen; worker lists are round-robin in prod order; local claims written so pregen233 skips them). They push each gzipped source to a throwaway branch xfer/233/<name>; a local daemon (xfer233.py pull, log logs/xfer_pull.log) materialises them just in time (at most 14 unbuilt sources ahead, disk floor 2.3 GB) and deletes the branch. The kernel checks every source again when it is built here, so nothing generated remotely is trusted. The local 4 cores now go almost entirely to Lean builds (~97 core-h left).
++- 2026-11-13 17:00 UTC: 3,060 / 3,127 built, 4.3 GB free. Remote generation works and is fast (16 sources pushed in the first hour, 6-17 min each on 4 cores). The pull daemon died at 16:03 because this session's git proxy refuses branch deletion (HTTP 403); fixed (deletion best effort, consumed names in $CERT233_SCR/xfer_consumed) and restarted 16:59; it materialised the first sources at once. Leftover xfer/233/* branches to be removed at the end from a session that may delete them.
++- 18:02 UTC: 3,067 / 3,127 built, 3.9 GB free, no OOM. Remote workers: 31 of 58 sources pushed, no failures; xfer pull materialised 14 so far (prod keeps ~14 ready, local build is now the bottleneck). prod, supervisor, pull daemon alive.
++- 19:08 UTC: 3,072 / 3,127 built, 3.8 GB free, no OOM; last batch 25/25 ok (gen_s 8). Remote: 41 of 58 sources pushed, 17 materialised. All daemons alive.
++- 20:15 UTC: 3,079 / 3,127 built, 3.5 GB free, no OOM; remote 49 of 58 pushed, 24 materialised. Built peaks follow pred_rss_pow (2.7-3.8 GB), well below pred_rss_lemlin. Guard script ($CERT233_SCR/bigsix_guard.sh) restarts prod with --jobs 2 --rss-cap-gb 11 and stops supervisor/pregen as soon as a batch includes one of the six largest modules.
++- 21:00 UTC: container restart at about 20:45 stopped everything (3,080 built). Recovery: claims reset (47 remote names), replay scratch cleared; prod's reset_failed deleted the sources of the 3 interrupted modules, so they were un-consumed and re-fetched from their xfer branches instead of regenerated locally. Relaunched prod (PID 967, --jobs 4), xfer pull, big-six guard; supervisor/pregen not restarted (all remaining sources come from remote workers).
++- 21:13 UTC: 3,080 / 3,127 built (batch of 5 running since 21:00), 3.7 GB free, no OOM; remote 53 of 58 pushed. prod 967, guard 979, pull 1026 alive.
++- 22:00 UTC: second container restart at about 21:40 (3,083 built). Recovery is now scripted: $CERT233_SCR/recover233.sh (claims reset, scratch cleared, unbuilt sources touched so reset_failed keeps them, consumed-but-missing sources re-fetched from xfer branches, then prod --jobs 4 or --jobs 2 --rss-cap-gb 11 once the big six started, pull and guard). prod 911, pull 333, guard 923.
++- 22:17 UTC: 3,083 / 3,127 built (4 modules building since 22:00, 2.5-3.4 GB each), 3.6 GB free, no OOM, no regeneration; remote 55 of 58 pushed. prod 911, guard 923, pull 333 alive.
++- 23:22 UTC: 3,087 / 3,127 built, 3.1 GB free, no OOM; all 58 remote sources pushed. T012034A46434K39 (remote source, re-fetched after the 21:40 restart) failed its build at 23:05 after 1,976 s (peak 3.53 GB, empty build log), so prod is regenerating it locally (~55 min, then ~1 h build). Fixed remote name lists that lacked trailing newlines (recover233.sh had merged two names per file boundary). prod 911, guard 923, pull 333 alive.
++- 00:23 UTC: 3,089 / 3,127 built, 3.3 GB free. Memory-cgroup OOM at 00:04 killed two lean builds (3.3 GB each, 4 parallel jobs + local regeneration exceeded 13.35 GiB): T012034A46434K39 (second time; its 23:05 failure was also an OOM, not a bad source) and T012304A33436K87. Sources touched so reset_failed keeps them; switch_jobs3.sh restarts prod with --jobs 3 (and the big-six guard) when the current batch ends; recover233.sh now also uses --jobs 3.
++- 01:23 UTC: 3,090 / 3,127 built, 3.3 GB free. Switch done at 00:49 (prod 10805 --jobs 3, guard 10817); 3 lean jobs at 3.3-3.9 GB, no new OOM, no regeneration; the batch includes the two OOM-killed modules (T012034A46434K39 building now, T012304A33436K87 queued).
++- 02:00 UTC: container restart at about 01:44 (3,091 built); recovered with recover233.sh (prod 789 --jobs 3). Remote Lean builds approved by the user: the 20 largest remaining certificates (incl. the big six) go to the three cloud workers (`xfer233.py build`: same guarded_lake_build --direct command, Lean 4.19.0 commit 6caaee842e94; both .olean files pushed to xfer/233o/<name> with sha256), installed locally by `xfer233.py opull` (record in data/remotebuild6SB233.jsonl); prod233.py and xfer pull skip the names in $CERT233_SCR/remote_build. Local keeps the 16 smallest. Final build and the UpperBound233 audit stay local.
++- 02:53 UTC: 3,094 / 3,127 built (local batch since 01:46, 3 jobs), 2.9 GB free, no OOM since the 01:44 restart. Remote: all three build workers compiling since about 01:58 (Lean 4.19.0 commit 6caaee842e94 from the release .zip, python-sat installed for cert233.py cnf; 4 cores, 15 GB each); no xfer/233o branch yet; T012304A35346K47 source still being regenerated by gen worker 2.
++- 03:53 UTC: 3,098 / 3,127 built, 3.1 GB free, no OOM. Local batch of 21 finished at about 03:30 with 0 failures (peak 4.63 GB for T012304A33436K87); next local batch running (3 jobs). Remote: 2 of 20 installed by opull (S0123104A435446 from build worker 1, S012301A34344 from build worker 0); build worker 2 restarted its build after a container restart at 02:58; T012304A35346K47 source pushed at 03:22 and its build started on build worker 0.
+diff --git a/milestones/33-233-lean/certify/cert233.py b/milestones/33-233-lean/certify/cert233.py
+index 9aa65de0..f58099c6 100644
+--- a/milestones/33-233-lean/certify/cert233.py
++++ b/milestones/33-233-lean/certify/cert233.py
+@@ -156,10 +156,24 @@ def disk_free_mb():
+ 
+ 
+ def mem_avail_gb():
++    """MemAvailable, capped by the headroom of this process's memory cgroup (v1).  The cgroup limit
++    (about 13.4 GiB here) is below the machine's RAM, so MemAvailable alone overstates what is left."""
++    avail = 0.0
+     for line in open('/proc/meminfo'):
+         if line.startswith('MemAvailable:'):
+-            return int(line.split()[1]) / (1 << 20)
+-    return 0.0
++            avail = int(line.split()[1]) / 2 ** 20
++            break
++    try:
++        rel = [l.split(':', 2)[2].strip() for l in open('/proc/self/cgroup') if l.split(':')[1] == 'memory'][0]
++        d = '/sys/fs/cgroup/memory' + rel
++        lim = int(open(d + '/memory.limit_in_bytes').read())
++        use = int(open(d + '/memory.usage_in_bytes').read())
++        st = dict(l.split() for l in open(d + '/memory.stat'))
++        if lim < 1 << 50:
++            avail = min(avail, (lim - use + int(st.get('total_inactive_file', 0))) / 2 ** 30)
++    except (OSError, IndexError, ValueError):
++        pass
++    return avail
+ 
+ 
+ def seed_jobs(h, a):
+diff --git a/milestones/33-233-lean/certify/data/prod6SB233.jsonl b/milestones/33-233-lean/certify/data/prod6SB233.jsonl
+index bcd29955..252b7c81 100644
+--- a/milestones/33-233-lean/certify/data/prod6SB233.jsonl
++++ b/milestones/33-233-lean/certify/data/prod6SB233.jsonl
+@@ -96,3 +96,20 @@
+ {"batch": 7, "hints_est": 58504980, "closure": 25, "stale": 14, "built": 7, "swept_sources": 14, "gen_s": 622, "build_s": 2461, "rc": 0, "tail": "odule\": \"LocalWindowUnsat.S0120345A365354\", \"status\": \"ok\", \"seconds\": 1269.3, \"peak_rss_gb\": 2.43, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012301A26434\", \"status\": \"ok\", \"seconds\": 1497.1, \"peak_rss_gb\": 2.59, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123042A344365\", \"status\": \"ok\", \"seconds\": 1020.4, \"peak_rss_gb\": 2.31, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123042A553355\", \"status\": \"ok\", \"seconds\": 1160.1, \"peak_rss_gb\": 2.63, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A63246K75\", \"status\": \"ok\", \"seconds\": 1168.8, \"peak_rss_gb\": 2.9, \"note\": \"\"}\ndone 25/25 in 2459s; failed 0\n", "disk_free_mb": 5901, "first": "T012304A63246K75", "last": "S0120340A643356", "t": 1794530072}
+ {"batch": 13, "hints_est": 113859622, "closure": 37, "stale": 21, "built": 13, "swept_sources": 26, "gen_s": 5, "build_s": 3509, "rc": 0, "tail": "module\": \"LocalWindowUnsat.S0123104A446443\", \"status\": \"ok\", \"seconds\": 753.9, \"peak_rss_gb\": 2.3, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012314A44444\", \"status\": \"ok\", \"seconds\": 916.1, \"peak_rss_gb\": 2.93, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012034A46335K59\", \"status\": \"ok\", \"seconds\": 1023.4, \"peak_rss_gb\": 2.85, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A36436K31\", \"status\": \"ok\", \"seconds\": 1121.6, \"peak_rss_gb\": 2.91, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A63443K95\", \"status\": \"ok\", \"seconds\": 777.7, \"peak_rss_gb\": 2.77, \"note\": \"\"}\ndone 37/37 in 3506s; failed 0\n", "disk_free_mb": 5507, "first": "T012304A36436K31", "last": "S0123014A445345", "t": 1794536681}
+ {"batch": 13, "hints_est": 119424686, "closure": 37, "stale": 26, "built": 13, "swept_sources": 26, "gen_s": 1555, "build_s": 5829, "rc": 0, "tail": ": \"LocalWindowUnsat.S0123104A554345\", \"status\": \"ok\", \"seconds\": 1553.8, \"peak_rss_gb\": 2.35, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012034A36535K23\", \"status\": \"ok\", \"seconds\": 1857.8, \"peak_rss_gb\": 2.84, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A26246K63\", \"status\": \"ok\", \"seconds\": 1591.5, \"peak_rss_gb\": 2.54, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012034A55434K23\", \"status\": \"ok\", \"seconds\": 1814.5, \"peak_rss_gb\": 2.82, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012314A24653K67\", \"status\": \"ok\", \"seconds\": 1394.7, \"peak_rss_gb\": 2.85, \"note\": \"\"}\ndone 37/37 in 5826s; failed 0\n", "disk_free_mb": 5116, "first": "T012304A26246K63", "last": "S0123014A556335", "t": 1794544067}
++{"batch": 12, "hints_est": 117687257, "closure": 35, "stale": 24, "built": 11, "swept_sources": 23, "gen_s": 1100, "build_s": 6073, "rc": 1, "tail": "ed\", \"seconds\": 1516.9, \"peak_rss_gb\": 3.02, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012301A24633K71\", \"status\": \"ok\", \"seconds\": 1852.8, \"peak_rss_gb\": 2.68, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A43346K31\", \"status\": \"ok\", \"seconds\": 1766.3, \"peak_rss_gb\": 2.63, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A64236K79\", \"status\": \"ok\", \"seconds\": 1618.3, \"peak_rss_gb\": 2.51, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012314A24644K87\", \"status\": \"ok\", \"seconds\": 1457.5, \"peak_rss_gb\": 3.04, \"note\": \"\"}\ndone 34/35 in 6070s; failed 1\nFAILED LocalWindowUnsat.T012034A36435K55 failed \n", "disk_free_mb": 4696, "first": "S0123104A345534", "last": "T012034A36435K55", "t": 1794551243}
++{"regenerate": ["LocalWindowUnsat.T012034A36435K55"], "t": 1794551244}
++{"batch": 11, "hints_est": 114629309, "closure": 33, "stale": 21, "built": 11, "swept_sources": 21, "gen_s": 1242, "build_s": 5092, "rc": 0, "tail": ": \"LocalWindowUnsat.T012304A26426K95\", \"status\": \"ok\", \"seconds\": 1593.0, \"peak_rss_gb\": 2.67, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012034A36435K55\", \"status\": \"ok\", \"seconds\": 2105.2, \"peak_rss_gb\": 3.21, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A43355K39\", \"status\": \"ok\", \"seconds\": 1350.4, \"peak_rss_gb\": 3.26, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A45236K79\", \"status\": \"ok\", \"seconds\": 1338.5, \"peak_rss_gb\": 2.8, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012310A35544K15\", \"status\": \"ok\", \"seconds\": 1506.4, \"peak_rss_gb\": 3.69, \"note\": \"\"}\ndone 33/33 in 5089s; failed 0\n", "disk_free_mb": 4583, "first": "T012034A36435K55", "last": "T012304A45236K79", "t": 1794557579}
++{"batch": 10, "hints_est": 113811278, "closure": 31, "stale": 20, "built": 9, "swept_sources": 19, "gen_s": 12, "build_s": 6028, "rc": 1, "tail": "ailed\", \"seconds\": 1906.4, \"peak_rss_gb\": 2.67, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123014A544444\", \"status\": \"ok\", \"seconds\": 2154.8, \"peak_rss_gb\": 2.59, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123014A545444\", \"status\": \"ok\", \"seconds\": 2189.9, \"peak_rss_gb\": 2.55, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012301A26534K15\", \"status\": \"ok\", \"seconds\": 2101.9, \"peak_rss_gb\": 2.9, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A35246K51\", \"status\": \"ok\", \"seconds\": 1461.7, \"peak_rss_gb\": 3.04, \"note\": \"\"}\ndone 30/31 in 6023s; failed 1\nFAILED LocalWindowUnsat.T012301A24643K15 failed \n", "disk_free_mb": 4594, "first": "T012304A35246K51", "last": "S012034A55443", "t": 1794563621}
++{"regenerate": ["LocalWindowUnsat.T012301A24643K15"], "t": 1794563623}
++{"batch": 9, "hints_est": 110531470, "closure": 25, "stale": 9, "built": 9, "swept_sources": 17, "gen_s": 4, "build_s": 4953, "rc": 0, "tail": "module\": \"LocalWindowUnsat.S012310A24644\", \"status\": \"ok\", \"seconds\": 1527.9, \"peak_rss_gb\": 2.48, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123104A454444\", \"status\": \"ok\", \"seconds\": 2094.7, \"peak_rss_gb\": 3.64, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123104A554435\", \"status\": \"ok\", \"seconds\": 1906.3, \"peak_rss_gb\": 3.14, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012314A44454\", \"status\": \"ok\", \"seconds\": 1784.4, \"peak_rss_gb\": 2.89, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012301A24643K15\", \"status\": \"ok\", \"seconds\": 1546.5, \"peak_rss_gb\": 3.47, \"note\": \"\"}\ndone 25/25 in 4943s; failed 0\n", "disk_free_mb": 4899, "first": "T012301A24643K15", "last": "S012310A24644", "t": 1794571361}
++{"batch": 8, "hints_est": 106385389, "closure": 27, "stale": 16, "built": 8, "swept_sources": 16, "gen_s": 11, "build_s": 4073, "rc": 0, "tail": "dule\": \"LocalWindowUnsat.S0123014A443544\", \"status\": \"ok\", \"seconds\": 1975.7, \"peak_rss_gb\": 2.72, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123014A454345\", \"status\": \"ok\", \"seconds\": 1726.2, \"peak_rss_gb\": 2.52, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123014A543544\", \"status\": \"ok\", \"seconds\": 1747.2, \"peak_rss_gb\": 2.8, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123104A655335\", \"status\": \"ok\", \"seconds\": 1839.5, \"peak_rss_gb\": 3.1, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A52446K59\", \"status\": \"ok\", \"seconds\": 1860.2, \"peak_rss_gb\": 3.01, \"note\": \"\"}\ndone 27/27 in 4067s; failed 0\n", "disk_free_mb": 4692, "first": "S0123014A543544", "last": "S0123014A454345", "t": 1794575448}
++{"batch": 8, "hints_est": 112633635, "closure": 27, "stale": 16, "built": 8, "swept_sources": 16, "gen_s": 2548, "build_s": 5251, "rc": 0, "tail": "dule\": \"LocalWindowUnsat.S012304A34445\", \"status\": \"ok\", \"seconds\": 2074.2, \"peak_rss_gb\": 2.72, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012310A54345\", \"status\": \"ok\", \"seconds\": 1891.5, \"peak_rss_gb\": 3.05, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012310A33643K39\", \"status\": \"ok\", \"seconds\": 1994.2, \"peak_rss_gb\": 3.31, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A44444K39\", \"status\": \"ok\", \"seconds\": 2514.3, \"peak_rss_gb\": 3.71, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012314A33663K43\", \"status\": \"ok\", \"seconds\": 2009.5, \"peak_rss_gb\": 3.53, \"note\": \"\"}\ndone 27/27 in 5248s; failed 0\n", "disk_free_mb": 4209, "first": "S01203A2454", "last": "S012304A34445", "t": 1794583249}
++{"batch": 7, "hints_est": 104887147, "closure": 25, "stale": 14, "built": 7, "swept_sources": 14, "gen_s": 1251, "build_s": 4525, "rc": 0, "tail": "dule\": \"LocalWindowUnsat.S01203A2455\", \"status\": \"ok\", \"seconds\": 2191.6, \"peak_rss_gb\": 2.63, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012301A33534K23\", \"status\": \"ok\", \"seconds\": 2389.3, \"peak_rss_gb\": 3.0, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A45246K51\", \"status\": \"ok\", \"seconds\": 2561.2, \"peak_rss_gb\": 3.45, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A45335K75\", \"status\": \"ok\", \"seconds\": 1959.8, \"peak_rss_gb\": 3.16, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012314A33653K71\", \"status\": \"ok\", \"seconds\": 2192.5, \"peak_rss_gb\": 3.68, \"note\": \"\"}\ndone 25/25 in 4522s; failed 0\n", "disk_free_mb": 4400, "first": "T012314A33653K71", "last": "T012304A45335K75", "t": 1794589028}
++{"batch": 7, "hints_est": 110932142, "closure": 25, "stale": 14, "built": 7, "swept_sources": 14, "gen_s": 8, "build_s": 3976, "rc": 0, "tail": "e\": \"LocalWindowUnsat.S012314A34554\", \"status\": \"ok\", \"seconds\": 1854.1, \"peak_rss_gb\": 2.92, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012301A24634K15\", \"status\": \"ok\", \"seconds\": 1989.7, \"peak_rss_gb\": 3.41, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A46335K55\", \"status\": \"ok\", \"seconds\": 1876.7, \"peak_rss_gb\": 3.31, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A63256K83\", \"status\": \"ok\", \"seconds\": 2102.4, \"peak_rss_gb\": 2.92, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012310A35644K15\", \"status\": \"ok\", \"seconds\": 2040.1, \"peak_rss_gb\": 3.59, \"note\": \"\"}\ndone 25/25 in 3972s; failed 0\n", "disk_free_mb": 4142, "first": "S012310A33454", "last": "S012314A34554", "t": 1794593013}
++{"batch": 6, "hints_est": 105437114, "closure": 19, "stale": 12, "built": 6, "swept_sources": 12, "gen_s": 8, "build_s": 3914, "rc": 0, "tail": "\"module\": \"LocalWindowUnsat.S012301A34353\", \"status\": \"ok\", \"seconds\": 1793.0, \"peak_rss_gb\": 2.92, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123014A545345\", \"status\": \"ok\", \"seconds\": 1865.1, \"peak_rss_gb\": 2.89, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123014A453544\", \"status\": \"ok\", \"seconds\": 2149.1, \"peak_rss_gb\": 3.06, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012310A24645\", \"status\": \"ok\", \"seconds\": 2050.3, \"peak_rss_gb\": 3.24, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123104A545435\", \"status\": \"ok\", \"seconds\": 2257.4, \"peak_rss_gb\": 4.05, \"note\": \"\"}\ndone 19/19 in 3911s; failed 0\n", "disk_free_mb": 3954, "first": "S012301A34353", "last": "S01203A3535", "t": 1794596937}
++{"batch": 6, "hints_est": 112347602, "closure": 23, "stale": 12, "built": 6, "swept_sources": 12, "gen_s": 8, "build_s": 4592, "rc": 0, "tail": "\"module\": \"LocalWindowUnsat.S012301A34334\", \"status\": \"ok\", \"seconds\": 1918.3, \"peak_rss_gb\": 2.83, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012301A35334\", \"status\": \"ok\", \"seconds\": 2102.1, \"peak_rss_gb\": 2.79, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012034A46533\", \"status\": \"ok\", \"seconds\": 2222.9, \"peak_rss_gb\": 3.07, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012301A36334K11\", \"status\": \"ok\", \"seconds\": 2492.5, \"peak_rss_gb\": 3.76, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A34336K75\", \"status\": \"ok\", \"seconds\": 2660.5, \"peak_rss_gb\": 3.81, \"note\": \"\"}\ndone 23/23 in 4589s; failed 0\n", "disk_free_mb": 3741, "first": "S012314A44435", "last": "S012301A34334", "t": 1794601539}
++{"regenerate": ["LocalWindowUnsat.T012034A46434K39"], "t": 1794603097}
++{"batch": 5, "hints_est": 103242154, "closure": 21, "stale": 8, "built": 4, "swept_sources": 9, "gen_s": 6, "build_s": 4351, "rc": 1, "tail": ": \"failed\", \"seconds\": 1975.5, \"peak_rss_gb\": 3.53, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012301A43345\", \"status\": \"ok\", \"seconds\": 2162.5, \"peak_rss_gb\": 3.05, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012034A54534\", \"status\": \"ok\", \"seconds\": 2516.7, \"peak_rss_gb\": 3.27, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123014A543445\", \"status\": \"ok\", \"seconds\": 2772.7, \"peak_rss_gb\": 3.31, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012310A33664K23\", \"status\": \"ok\", \"seconds\": 2366.2, \"peak_rss_gb\": 3.99, \"note\": \"\"}\ndone 20/21 in 4343s; failed 1\nFAILED LocalWindowUnsat.T012034A46434K39 failed \n", "disk_free_mb": 3518, "first": "T012310A33664K23", "last": "S012301A43345", "t": 1794611151}
++{"regenerate": ["LocalWindowUnsat.T012034A46434K39"], "t": 1794611153}
++{"batch": 5, "hints_est": 108080405, "closure": 21, "stale": 9, "built": 3, "swept_sources": 7, "gen_s": 1948, "build_s": 4285, "rc": 1, "tail": "e\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A33436K87\", \"status\": \"failed\", \"seconds\": 1409.2, \"peak_rss_gb\": 3.21, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S012301A43344\", \"status\": \"ok\", \"seconds\": 2201.3, \"peak_rss_gb\": 3.19, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123104A346444\", \"status\": \"ok\", \"seconds\": 2642.2, \"peak_rss_gb\": 3.33, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012310A33663K47\", \"status\": \"ok\", \"seconds\": 2694.0, \"peak_rss_gb\": 3.82, \"note\": \"\"}\ndone 19/21 in 4279s; failed 2\nFAILED LocalWindowUnsat.T012034A46434K39 failed \nFAILED LocalWindowUnsat.T012304A33436K87 failed \n", "disk_free_mb": 3373, "first": "T012034A46434K39", "last": "S0123104A346444", "t": 1794617387}
++{"batch": 5, "hints_est": 113148955, "closure": 21, "stale": 6, "built": 5, "swept_sources": 8, "gen_s": 5, "build_s": 6209, "rc": 0, "tail": "\": \"LocalWindowUnsat.S0123104A435536\", \"status\": \"ok\", \"seconds\": 2690.9, \"peak_rss_gb\": 3.68, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012034A46434K39\", \"status\": \"ok\", \"seconds\": 2995.1, \"peak_rss_gb\": 4.35, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.S0123014A443545\", \"status\": \"ok\", \"seconds\": 3218.1, \"peak_rss_gb\": 3.97, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012304A33436K87\", \"status\": \"ok\", \"seconds\": 3174.2, \"peak_rss_gb\": 4.63, \"note\": \"\"}\n{\"module\": \"LocalWindowUnsat.T012301A26264K59\", \"status\": \"ok\", \"seconds\": 3490.6, \"peak_rss_gb\": 3.94, \"note\": \"\"}\ndone 21/21 in 6201s; failed 0\n", "disk_free_mb": 3162, "first": "T012034A46434K39", "last": "S0123104A435536", "t": 1794627141}
+diff --git a/milestones/33-233-lean/certify/data/remotebuild6SB233.jsonl b/milestones/33-233-lean/certify/data/remotebuild6SB233.jsonl
+new file mode 100644
+index 00000000..f538897f
+--- /dev/null
++++ b/milestones/33-233-lean/certify/data/remotebuild6SB233.jsonl
+@@ -0,0 +1,2 @@
++{"name": "S0123104A435446", "lean_version": "Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)", "seconds": 5211.6, "peak_rss_gb": 4.73, "jobs": null, "host_cpus": 4, "files": [{"path": "LocalWindowCnf/S0123104A435446.olean", "bytes": 134360, "sha256": "4af9fbfb753c6c331b40636b4c35c590816fcfae1de1c9d588b8ecd9ba562059", "parts": 1}, {"path": "LocalWindowUnsat/S0123104A435446.olean", "bytes": 45282928, "sha256": "61ea3f5eb53b941dd937f600e4d855d472ae4059612e2a9b7bb1b0fe2e16ff88", "parts": 1}]}
++{"name": "S012301A34344", "lean_version": "Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)", "seconds": 6693.5, "peak_rss_gb": 4.73, "jobs": null, "host_cpus": 4, "files": [{"path": "LocalWindowCnf/S012301A34344.olean", "bytes": 143488, "sha256": "d331e319aa8447c6c4ef0dc438eb432087dff8e839f79f9e825a26888fa0cda0", "parts": 1}, {"path": "LocalWindowUnsat/S012301A34344.olean", "bytes": 58332272, "sha256": "eb7dc29599fd2b9bb7cf8157e29ffed431eb26e682581a6a138603363e392237", "parts": 1}]}
+diff --git a/milestones/33-233-lean/certify/data/replay6SB233.jsonl b/milestones/33-233-lean/certify/data/replay6SB233.jsonl
+index 16f1e28f..612383bf 100644
+--- a/milestones/33-233-lean/certify/data/replay6SB233.jsonl
++++ b/milestones/33-233-lean/certify/data/replay6SB233.jsonl
+@@ -3024,3 +3024,99 @@
+ {"case": "T012310A35544K15", "kind": "share", "variables": 6722, "core": 14799, "est_hints": 10464692, "core_lrat_hints": 5667535, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1715.4, "name": "T012310A35544K15", "module": "T012310A35544K15", "lemmas": 154517, "hints": 5667535, "segments": 96, "wbits": 14, "off": 7000, "table_entries": 466287, "max_local": 3997, "max_entry": 6660, "warm_blocks": 826, "lean_bytes": 30392842}
+ {"case": "T012034A45544K23", "kind": "share", "variables": 7837, "core": 16212, "est_hints": 10484642, "core_lrat_hints": 5865364, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1474.7, "name": "T012034A45544K23", "module": "T012034A45544K23", "lemmas": 151487, "hints": 5865364, "segments": 99, "wbits": 14, "off": 8000, "table_entries": 450301, "max_local": 3998, "max_entry": 6559, "warm_blocks": 903, "lean_bytes": 30398933}
+ {"case": "S012034A46524", "kind": "seed", "variables": 3358, "core": 5041, "est_hints": 10587676, "core_lrat_hints": 5677491, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1133.7, "name": "S012034A46524", "module": "S012034A46524", "lemmas": 124633, "hints": 5677491, "segments": 95, "wbits": 13, "off": 4000, "table_entries": 253686, "max_local": 3995, "max_entry": 3856, "warm_blocks": 224, "lean_bytes": 26418488}
++{"case": "S012301A25444", "kind": "seed", "variables": 3484, "core": 6122, "est_hints": 10609140, "core_lrat_hints": 6259482, "producer": "cadical --lrat --no-binary --seed=1 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 999.7, "name": "S012301A25444", "module": "S012301A25444", "lemmas": 96057, "hints": 6259482, "segments": 105, "wbits": 13, "off": 4000, "table_entries": 242795, "max_local": 2058, "max_entry": 3306, "warm_blocks": 202, "lean_bytes": 27671574}
++{"case": "T012304A45236K79", "kind": "share", "variables": 12164, "core": 25097, "est_hints": 10776935, "core_lrat_hints": 5763785, "producer": "cadical --lrat --no-binary --seed=6 --chrono=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 975.1, "name": "T012304A45236K79", "module": "T012304A45236K79", "lemmas": 69910, "hints": 5763785, "segments": 99, "wbits": 15, "off": 13000, "table_entries": 386235, "max_local": 3981, "max_entry": 6030, "warm_blocks": 1409, "lean_bytes": 30182991}
++{"case": "T012304A35246K51", "kind": "share", "variables": 9988, "core": 20545, "est_hints": 10839678, "core_lrat_hints": 6170374, "producer": "cadical --lrat --no-binary --seed=1 --unsat (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1118.8, "name": "T012304A35246K51", "module": "T012304A35246K51", "lemmas": 102474, "hints": 6170374, "segments": 104, "wbits": 15, "off": 10000, "table_entries": 442342, "max_local": 3989, "max_entry": 8331, "warm_blocks": 1232, "lean_bytes": 31002109}
++{"case": "T012301A24643K15", "kind": "share", "variables": 6727, "core": 14702, "est_hints": 11125076, "core_lrat_hints": 6731522, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 976.6, "name": "T012301A24643K15", "module": "T012301A24643K15", "lemmas": 158839, "hints": 6731522, "segments": 114, "wbits": 14, "off": 7000, "table_entries": 460746, "max_local": 3996, "max_entry": 6985, "warm_blocks": 1024, "lean_bytes": 34091689}
++{"case": "S0123014A444355", "kind": "seed", "variables": 4040, "core": 6944, "est_hints": 11213020, "core_lrat_hints": 6720152, "producer": "cadical --lrat --no-binary --seed=1 --unsat --chrono=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 814.6, "name": "S0123014A444355", "module": "S0123014A444355", "lemmas": 111845, "hints": 6720152, "segments": 112, "wbits": 14, "off": 5000, "table_entries": 319480, "max_local": 3180, "max_entry": 4720, "warm_blocks": 352, "lean_bytes": 31790197}
++{"case": "S0120324A454444", "kind": "seed", "variables": 4000, "core": 6796, "est_hints": 11131246, "core_lrat_hints": 1817451, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1136.1, "name": "S0120324A454444", "module": "S0120324A454444", "lemmas": 59103, "hints": 1817451, "segments": 31, "wbits": 14, "off": 5000, "table_entries": 114001, "max_local": 2965, "max_entry": 4599, "warm_blocks": 131, "lean_bytes": 11330074}
++{"case": "T012301A26534K15", "kind": "share", "variables": 6703, "core": 14813, "est_hints": 11236626, "core_lrat_hints": 6388031, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1181.7, "name": "T012301A26534K15", "module": "T012301A26534K15", "lemmas": 147332, "hints": 6388031, "segments": 108, "wbits": 14, "off": 7000, "table_entries": 440969, "max_local": 3997, "max_entry": 6087, "warm_blocks": 930, "lean_bytes": 31924434}
++{"case": "T012034A36435K55", "kind": "share", "variables": 10385, "core": 21961, "est_hints": 10124538, "core_lrat_hints": 6491745, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1221.1, "name": "T012034A36435K55", "module": "T012034A36435K55", "lemmas": 141368, "hints": 6491745, "segments": 111, "wbits": 15, "off": 11000, "table_entries": 524556, "max_local": 3997, "max_entry": 6505, "warm_blocks": 1300, "lean_bytes": 38748577}
++{"case": "S0123014A544435", "kind": "seed", "variables": 4040, "core": 6321, "est_hints": 11513621, "core_lrat_hints": 6193169, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 947.1, "name": "S0123014A544435", "module": "S0123014A544435", "lemmas": 134477, "hints": 6193169, "segments": 104, "wbits": 14, "off": 5000, "table_entries": 364522, "max_local": 3999, "max_entry": 5257, "warm_blocks": 342, "lean_bytes": 34040250}
++{"case": "S0123014A545444", "kind": "seed", "variables": 4040, "core": 6644, "est_hints": 11455804, "core_lrat_hints": 6855669, "producer": "cadical --lrat --no-binary --seed=1 --unsat (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 979.4, "name": "S0123014A545444", "module": "S0123014A545444", "lemmas": 124847, "hints": 6855669, "segments": 115, "wbits": 14, "off": 5000, "table_entries": 367291, "max_local": 3294, "max_entry": 4684, "warm_blocks": 354, "lean_bytes": 33778916}
++{"case": "S0123014A544444", "kind": "seed", "variables": 4040, "core": 6731, "est_hints": 11615925, "core_lrat_hints": 6632430, "producer": "cadical --lrat --no-binary --seed=2 --chrono=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1188.6, "name": "S0123014A544444", "module": "S0123014A544444", "lemmas": 112608, "hints": 6632430, "segments": 111, "wbits": 14, "off": 5000, "table_entries": 337342, "max_local": 3996, "max_entry": 4895, "warm_blocks": 433, "lean_bytes": 33792271}
++{"case": "S012031A54334", "kind": "seed", "variables": 3484, "core": 6068, "est_hints": 11815897, "core_lrat_hints": 6319273, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1709.6, "name": "S012031A54334", "module": "S012031A54334", "lemmas": 143823, "hints": 6319273, "segments": 106, "wbits": 14, "off": 4000, "table_entries": 304119, "max_local": 3998, "max_entry": 4303, "warm_blocks": 281, "lean_bytes": 32099602}
++{"case": "S012034A55443", "kind": "seed", "variables": 3484, "core": 6114, "est_hints": 11864385, "core_lrat_hints": 6412499, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1472.2, "name": "S012034A55443", "module": "S012034A55443", "lemmas": 146782, "hints": 6412499, "segments": 107, "wbits": 14, "off": 4000, "table_entries": 385256, "max_local": 3666, "max_entry": 5634, "warm_blocks": 277, "lean_bytes": 35043933}
++{"case": "S012034A36534", "kind": "seed", "variables": 3358, "core": 6368, "est_hints": 11920948, "core_lrat_hints": 6210778, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1281.2, "name": "S012034A36534", "module": "S012034A36534", "lemmas": 133595, "hints": 6210778, "segments": 104, "wbits": 14, "off": 4000, "table_entries": 287217, "max_local": 2893, "max_entry": 4288, "warm_blocks": 314, "lean_bytes": 31277179}
++{"case": "S0123104A554435", "kind": "seed", "variables": 4000, "core": 6080, "est_hints": 12181276, "core_lrat_hints": 6633493, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1230.9, "name": "S0123104A554435", "module": "S0123104A554435", "lemmas": 168925, "hints": 6633493, "segments": 111, "wbits": 14, "off": 5000, "table_entries": 451968, "max_local": 3568, "max_entry": 5878, "warm_blocks": 361, "lean_bytes": 38413561}
++{"case": "S0123104A346543", "kind": "seed", "variables": 3874, "core": 7318, "est_hints": 12312160, "core_lrat_hints": 7723517, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 2166.8, "name": "S0123104A346543", "module": "S0123104A346543", "lemmas": 164465, "hints": 7723517, "segments": 129, "wbits": 14, "off": 4000, "table_entries": 403009, "max_local": 3346, "max_entry": 4783, "warm_blocks": 409, "lean_bytes": 38823319}
++{"case": "S012034A45444", "kind": "seed", "variables": 3484, "core": 6130, "est_hints": 12522174, "core_lrat_hints": 6941068, "producer": "cadical --lrat --no-binary --seed=5 --chrono=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 2121.3, "name": "S012034A45444", "module": "S012034A45444", "lemmas": 133111, "hints": 6941068, "segments": 116, "wbits": 14, "off": 4000, "table_entries": 357274, "max_local": 3986, "max_entry": 4532, "warm_blocks": 319, "lean_bytes": 37530389}
++{"case": "S012314A44454", "kind": "seed", "variables": 3444, "core": 5858, "est_hints": 12524181, "core_lrat_hints": 6311057, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 2204.8, "name": "S012314A44454", "module": "S012314A44454", "lemmas": 158008, "hints": 6311057, "segments": 106, "wbits": 14, "off": 4000, "table_entries": 425622, "max_local": 3999, "max_entry": 5458, "warm_blocks": 414, "lean_bytes": 39702241}
++{"case": "S0120342A464343", "kind": "seed", "variables": 3914, "core": 6894, "est_hints": 12625858, "core_lrat_hints": 7443473, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1877.3, "name": "S0120342A464343", "module": "S0120342A464343", "lemmas": 155039, "hints": 7443473, "segments": 124, "wbits": 14, "off": 4000, "table_entries": 412016, "max_local": 3660, "max_entry": 4791, "warm_blocks": 378, "lean_bytes": 38128618}
++{"case": "S0123104A454444", "kind": "seed", "variables": 4000, "core": 6682, "est_hints": 12580257, "core_lrat_hints": 6761155, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 2712.6, "name": "S0123104A454444", "module": "S0123104A454444", "lemmas": 187172, "hints": 6761155, "segments": 113, "wbits": 14, "off": 5000, "table_entries": 497438, "max_local": 3998, "max_entry": 6773, "warm_blocks": 450, "lean_bytes": 40149347}
++{"case": "S012310A24644", "kind": "seed", "variables": 3318, "core": 5515, "est_hints": 12739540, "core_lrat_hints": 6423086, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 891.0, "name": "S012310A24644", "module": "S012310A24644", "lemmas": 123885, "hints": 6423086, "segments": 107, "wbits": 14, "off": 4000, "table_entries": 326887, "max_local": 3456, "max_entry": 5245, "warm_blocks": 244, "lean_bytes": 33475373}
++{"case": "S0123014A543544", "kind": "seed", "variables": 4040, "core": 6729, "est_hints": 12787268, "core_lrat_hints": 7544523, "producer": "cadical --lrat --no-binary --seed=4 --chrono=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 596.3, "name": "S0123014A543544", "module": "S0123014A543544", "lemmas": 135933, "hints": 7544523, "segments": 126, "wbits": 14, "off": 5000, "table_entries": 376878, "max_local": 3791, "max_entry": 4157, "warm_blocks": 491, "lean_bytes": 38445789}
++{"case": "S0123014A443445", "kind": "seed", "variables": 4040, "core": 6864, "est_hints": 13271249, "core_lrat_hints": 7657367, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 645.6, "name": "S0123014A443445", "module": "S0123014A443445", "lemmas": 158195, "hints": 7657367, "segments": 128, "wbits": 14, "off": 5000, "table_entries": 420895, "max_local": 3997, "max_entry": 4661, "warm_blocks": 483, "lean_bytes": 38557436}
++{"case": "T012304A52446K59", "kind": "share", "variables": 11161, "core": 22825, "est_hints": 13065444, "core_lrat_hints": 7134021, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1014.0, "name": "T012304A52446K59", "module": "T012304A52446K59", "lemmas": 111361, "hints": 7134021, "segments": 122, "wbits": 15, "off": 12000, "table_entries": 504636, "max_local": 3996, "max_entry": 5698, "warm_blocks": 1532, "lean_bytes": 35653084}
++{"case": "T012301A24643K15", "kind": "share", "variables": 6727, "core": 14702, "est_hints": 11125076, "core_lrat_hints": 6731522, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1153.6, "name": "T012301A24643K15", "module": "T012301A24643K15", "lemmas": 158839, "hints": 6731522, "segments": 114, "wbits": 14, "off": 7000, "table_entries": 460746, "max_local": 3996, "max_entry": 6985, "warm_blocks": 1024, "lean_bytes": 34091689}
++{"case": "S01203A2554", "kind": "seed", "variables": 2928, "core": 5574, "est_hints": 13421787, "core_lrat_hints": 7609217, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1260.5, "name": "S01203A2554", "module": "S01203A2554", "lemmas": 144670, "hints": 7609217, "segments": 127, "wbits": 13, "off": 3000, "table_entries": 262250, "max_local": 3900, "max_entry": 2825, "warm_blocks": 305, "lean_bytes": 33398328}
++{"case": "S0123014A443544", "kind": "seed", "variables": 4040, "core": 7246, "est_hints": 13355226, "core_lrat_hints": 7342162, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1318.7, "name": "S0123014A443544", "module": "S0123014A443544", "lemmas": 149627, "hints": 7342162, "segments": 123, "wbits": 14, "off": 5000, "table_entries": 441809, "max_local": 3999, "max_entry": 4788, "warm_blocks": 476, "lean_bytes": 37535165}
++{"case": "S0120345A365355", "kind": "seed", "variables": 3914, "core": 6745, "est_hints": 13450521, "core_lrat_hints": 7311623, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1678.8, "name": "S0120345A365355", "module": "S0120345A365355", "lemmas": 168061, "hints": 7311623, "segments": 123, "wbits": 14, "off": 4000, "table_entries": 383484, "max_local": 3998, "max_entry": 4887, "warm_blocks": 475, "lean_bytes": 37741642}
++{"case": "S0123104A655335", "kind": "seed", "variables": 3874, "core": 5544, "est_hints": 13478743, "core_lrat_hints": 7853312, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 920.4, "name": "S0123104A655335", "module": "S0123104A655335", "lemmas": 180410, "hints": 7853312, "segments": 131, "wbits": 14, "off": 4000, "table_entries": 397593, "max_local": 3937, "max_entry": 5032, "warm_blocks": 348, "lean_bytes": 40340210}
++{"case": "S0123014A454345", "kind": "seed", "variables": 4040, "core": 7041, "est_hints": 13555151, "core_lrat_hints": 7710200, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 447.3, "name": "S0123014A454345", "module": "S0123014A454345", "lemmas": 141510, "hints": 7710200, "segments": 129, "wbits": 14, "off": 5000, "table_entries": 359366, "max_local": 3718, "max_entry": 4124, "warm_blocks": 395, "lean_bytes": 37283464}
++{"case": "S01203A2454", "kind": "seed", "variables": 2928, "core": 5892, "est_hints": 13704010, "core_lrat_hints": 7104324, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1079.3, "name": "S01203A2454", "module": "S01203A2454", "lemmas": 142739, "hints": 7104324, "segments": 119, "wbits": 13, "off": 3000, "table_entries": 274023, "max_local": 2711, "max_entry": 3329, "warm_blocks": 214, "lean_bytes": 31478697}
++{"case": "T012314A33663K43", "kind": "share", "variables": 9573, "core": 19951, "est_hints": 13708020, "core_lrat_hints": 7552136, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1136.0, "name": "T012314A33663K43", "module": "T012314A33663K43", "lemmas": 169200, "hints": 7552136, "segments": 128, "wbits": 15, "off": 10000, "table_entries": 575417, "max_local": 3989, "max_entry": 6538, "warm_blocks": 1406, "lean_bytes": 41681968}
++{"case": "S012301A33443", "kind": "seed", "variables": 3484, "core": 6385, "est_hints": 13888201, "core_lrat_hints": 7256073, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1259.0, "name": "S012301A33443", "module": "S012301A33443", "lemmas": 138374, "hints": 7256073, "segments": 121, "wbits": 14, "off": 4000, "table_entries": 413864, "max_local": 3984, "max_entry": 5216, "warm_blocks": 458, "lean_bytes": 39399766}
++{"case": "S012310A54345", "kind": "seed", "variables": 3444, "core": 5002, "est_hints": 14088411, "core_lrat_hints": 6808288, "producer": "cadical --lrat --no-binary --seed=6 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1363.1, "name": "S012310A54345", "module": "S012310A54345", "lemmas": 174384, "hints": 6808288, "segments": 114, "wbits": 14, "off": 4000, "table_entries": 348448, "max_local": 3997, "max_entry": 4370, "warm_blocks": 249, "lean_bytes": 39235562}
++{"case": "S012034A44356", "kind": "seed", "variables": 3358, "core": 4810, "est_hints": 14201026, "core_lrat_hints": 6723218, "producer": "cadical --lrat --no-binary --seed=1 --chrono=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 900.8, "name": "S012034A44356", "module": "S012034A44356", "lemmas": 132952, "hints": 6723218, "segments": 112, "wbits": 14, "off": 4000, "table_entries": 305531, "max_local": 3996, "max_entry": 4575, "warm_blocks": 268, "lean_bytes": 36170829}
++{"case": "S012034A44356", "kind": "seed", "variables": 3358, "core": 4810, "est_hints": 14201026, "core_lrat_hints": 6723218, "producer": "cadical --lrat --no-binary --seed=1 --chrono=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1070.0, "name": "S012034A44356", "module": "S012034A44356", "lemmas": 132952, "hints": 6723218, "segments": 112, "wbits": 14, "off": 4000, "table_entries": 305531, "max_local": 3996, "max_entry": 4575, "warm_blocks": 268, "lean_bytes": 36170829}
++{"case": "S012304A34445", "kind": "seed", "variables": 3484, "core": 6195, "est_hints": 14392217, "core_lrat_hints": 8288967, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1093.6, "name": "S012304A34445", "module": "S012304A34445", "lemmas": 155994, "hints": 8288967, "segments": 139, "wbits": 13, "off": 4000, "table_entries": 405275, "max_local": 2692, "max_entry": 3869, "warm_blocks": 413, "lean_bytes": 38082649}
++{"case": "T012304A44444K39", "kind": "share", "variables": 8637, "core": 17124, "est_hints": 14280401, "core_lrat_hints": 7905866, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1469.2, "name": "T012304A44444K39", "module": "T012304A44444K39", "lemmas": 184471, "hints": 7905866, "segments": 134, "wbits": 14, "off": 9000, "table_entries": 640287, "max_local": 3998, "max_entry": 6066, "warm_blocks": 1352, "lean_bytes": 41479976}
++{"case": "T012310A33643K39", "kind": "share", "variables": 8966, "core": 18047, "est_hints": 14371349, "core_lrat_hints": 6594280, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1310.1, "name": "T012310A33643K39", "module": "T012310A33643K39", "lemmas": 167863, "hints": 6594280, "segments": 112, "wbits": 15, "off": 9000, "table_entries": 445843, "max_local": 3978, "max_entry": 5597, "warm_blocks": 1018, "lean_bytes": 37371574}
++{"case": "T012314A33653K71", "kind": "share", "variables": 11308, "core": 22631, "est_hints": 14699815, "core_lrat_hints": 8437124, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 683.7, "name": "T012314A33653K71", "module": "T012314A33653K71", "lemmas": 181628, "hints": 8437124, "segments": 144, "wbits": 15, "off": 12000, "table_entries": 569832, "max_local": 3992, "max_entry": 5756, "warm_blocks": 1643, "lean_bytes": 46502111}
++{"case": "S012301A33453", "kind": "seed", "variables": 3484, "core": 6102, "est_hints": 14713783, "core_lrat_hints": 7456629, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 803.7, "name": "S012301A33453", "module": "S012301A33453", "lemmas": 143864, "hints": 7456629, "segments": 125, "wbits": 14, "off": 4000, "table_entries": 401066, "max_local": 3929, "max_entry": 5260, "warm_blocks": 366, "lean_bytes": 40105354}
++{"case": "T012304A44444K39", "kind": "share", "variables": 8637, "core": 17124, "est_hints": 14280401, "core_lrat_hints": 7905866, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1448.8, "name": "T012304A44444K39", "module": "T012304A44444K39", "lemmas": 184471, "hints": 7905866, "segments": 134, "wbits": 14, "off": 9000, "table_entries": 640287, "max_local": 3998, "max_entry": 6066, "warm_blocks": 1352, "lean_bytes": 41479976}
++{"case": "S01203A2455", "kind": "seed", "variables": 2928, "core": 5657, "est_hints": 14838357, "core_lrat_hints": 8961059, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1073.3, "name": "S01203A2455", "module": "S01203A2455", "lemmas": 164202, "hints": 8961059, "segments": 150, "wbits": 14, "off": 3000, "table_entries": 392939, "max_local": 3398, "max_entry": 4801, "warm_blocks": 443, "lean_bytes": 47204684}
++{"case": "T012301A33534K23", "kind": "share", "variables": 7456, "core": 15920, "est_hints": 15083401, "core_lrat_hints": 7894822, "producer": "cadical --lrat --no-binary --seed=3 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1440.9, "name": "T012301A33534K23", "module": "T012301A33534K23", "lemmas": 137811, "hints": 7894822, "segments": 134, "wbits": 14, "off": 8000, "table_entries": 551400, "max_local": 3979, "max_entry": 6132, "warm_blocks": 1228, "lean_bytes": 42056085}
++{"case": "S0120324A454445", "kind": "seed", "variables": 4000, "core": 7168, "est_hints": 15132794, "core_lrat_hints": 2267222, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 2394.9, "name": "S0120324A454445", "module": "S0120324A454445", "lemmas": 75565, "hints": 2267222, "segments": 40, "wbits": 14, "off": 5000, "table_entries": 152317, "max_local": 3999, "max_entry": 5415, "warm_blocks": 157, "lean_bytes": 14082656}
++{"case": "T012304A45246K51", "kind": "share", "variables": 10442, "core": 22231, "est_hints": 15156642, "core_lrat_hints": 8744943, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 906.8, "name": "T012304A45246K51", "module": "T012304A45246K51", "lemmas": 136914, "hints": 8744943, "segments": 148, "wbits": 15, "off": 11000, "table_entries": 680034, "max_local": 3998, "max_entry": 7285, "warm_blocks": 1924, "lean_bytes": 48294256}
++{"case": "S012310A33454", "kind": "seed", "variables": 3444, "core": 5647, "est_hints": 15425132, "core_lrat_hints": 7188164, "producer": "cadical --lrat --no-binary --seed=7 --chrono=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 657.4, "name": "S012310A33454", "module": "S012310A33454", "lemmas": 127954, "hints": 7188164, "segments": 120, "wbits": 14, "off": 4000, "table_entries": 335561, "max_local": 3455, "max_entry": 4535, "warm_blocks": 221, "lean_bytes": 37246711}
++{"case": "T012304A45335K75", "kind": "share", "variables": 9846, "core": 15973, "est_hints": 15262355, "core_lrat_hints": 8461273, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1207.8, "name": "T012304A45335K75", "module": "T012304A45335K75", "lemmas": 172362, "hints": 8461273, "segments": 143, "wbits": 15, "off": 10000, "table_entries": 474109, "max_local": 3997, "max_entry": 5613, "warm_blocks": 978, "lean_bytes": 45080040}
++{"case": "T012304A46335K55", "kind": "share", "variables": 9413, "core": 17942, "est_hints": 15714080, "core_lrat_hints": 7928345, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1269.2, "name": "T012304A46335K55", "module": "T012304A46335K55", "lemmas": 161119, "hints": 7928345, "segments": 134, "wbits": 15, "off": 10000, "table_entries": 505644, "max_local": 3998, "max_entry": 5604, "warm_blocks": 1324, "lean_bytes": 42944096}
++{"case": "T012304A45335K75", "kind": "share", "variables": 9846, "core": 15973, "est_hints": 15262355, "core_lrat_hints": 8461273, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1229.3, "name": "T012304A45335K75", "module": "T012304A45335K75", "lemmas": 172362, "hints": 8461273, "segments": 143, "wbits": 15, "off": 10000, "table_entries": 474109, "max_local": 3997, "max_entry": 5613, "warm_blocks": 978, "lean_bytes": 45080040}
++{"case": "S0120340A453366", "kind": "seed", "variables": 3788, "core": 5133, "est_hints": 15848886, "core_lrat_hints": 7114632, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1529.8, "name": "S0120340A453366", "module": "S0120340A453366", "lemmas": 174445, "hints": 7114632, "segments": 119, "wbits": 14, "off": 4000, "table_entries": 392579, "max_local": 3196, "max_entry": 4692, "warm_blocks": 228, "lean_bytes": 37652608}
++{"case": "T012310A35644K15", "kind": "share", "variables": 6823, "core": 16713, "est_hints": 15431466, "core_lrat_hints": 8082115, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1838.1, "name": "T012310A35644K15", "module": "T012310A35644K15", "lemmas": 181285, "hints": 8082115, "segments": 136, "wbits": 14, "off": 7000, "table_entries": 632345, "max_local": 3997, "max_entry": 6528, "warm_blocks": 1257, "lean_bytes": 41742400}
++{"case": "S0123014A545345", "kind": "seed", "variables": 4040, "core": 6892, "est_hints": 17162704, "core_lrat_hints": 8576083, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 375.4, "name": "S0123014A545345", "module": "S0123014A545345", "lemmas": 152429, "hints": 8576083, "segments": 143, "wbits": 14, "off": 5000, "table_entries": 472912, "max_local": 3996, "max_entry": 5754, "warm_blocks": 586, "lean_bytes": 45750093, "generated_on": "remote"}
++{"case": "T012301A24634K15", "kind": "share", "variables": 6765, "core": 15128, "est_hints": 15932732, "core_lrat_hints": 8386688, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1843.5, "name": "T012301A24634K15", "module": "T012301A24634K15", "lemmas": 195305, "hints": 8386688, "segments": 141, "wbits": 14, "off": 7000, "table_entries": 582328, "max_local": 3998, "max_entry": 6329, "warm_blocks": 1223, "lean_bytes": 42572804}
++{"case": "T012304A63256K83", "kind": "share", "variables": 12986, "core": 28125, "est_hints": 16252361, "core_lrat_hints": 9172767, "producer": "cadical --lrat --no-binary --seed=2 --chrono=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1047.4, "name": "T012304A63256K83", "module": "T012304A63256K83", "lemmas": 98742, "hints": 9172767, "segments": 156, "wbits": 15, "off": 13000, "table_entries": 626927, "max_local": 3999, "max_entry": 5959, "warm_blocks": 2357, "lean_bytes": 46770110}
++{"case": "S012301A34353", "kind": "seed", "variables": 3484, "core": 6694, "est_hints": 16947861, "core_lrat_hints": 8358838, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 844.9, "name": "S012301A34353", "module": "S012301A34353", "lemmas": 143533, "hints": 8358838, "segments": 140, "wbits": 14, "off": 4000, "table_entries": 480837, "max_local": 3929, "max_entry": 5622, "warm_blocks": 581, "lean_bytes": 45870360}
++{"case": "S012314A34554", "kind": "seed", "variables": 3444, "core": 6072, "est_hints": 16327485, "core_lrat_hints": 8663004, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1171.8, "name": "S012314A34554", "module": "S012314A34554", "lemmas": 181475, "hints": 8663004, "segments": 145, "wbits": 14, "off": 4000, "table_entries": 486041, "max_local": 3998, "max_entry": 5045, "warm_blocks": 547, "lean_bytes": 49778674}
++{"case": "S0123014A453544", "kind": "seed", "variables": 4040, "core": 7605, "est_hints": 17441287, "core_lrat_hints": 9956039, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 557.8, "name": "S0123014A453544", "module": "S0123014A453544", "lemmas": 193544, "hints": 9956039, "segments": 166, "wbits": 14, "off": 5000, "table_entries": 550260, "max_local": 3065, "max_entry": 5042, "warm_blocks": 518, "lean_bytes": 49272413, "generated_on": "remote"}
++{"case": "S012310A24645", "kind": "seed", "variables": 3318, "core": 6505, "est_hints": 17940189, "core_lrat_hints": 10856497, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 588.4, "name": "S012310A24645", "module": "S012310A24645", "lemmas": 205847, "hints": 10856497, "segments": 181, "wbits": 14, "off": 4000, "table_entries": 481530, "max_local": 3491, "max_entry": 4139, "warm_blocks": 680, "lean_bytes": 53159040, "generated_on": "remote"}
++{"case": "S0123104A545435", "kind": "seed", "variables": 4000, "core": 6837, "est_hints": 17956400, "core_lrat_hints": 9440669, "producer": "cadical --lrat --no-binary --seed=1 --unsat --chrono=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 970.3, "name": "S0123104A545435", "module": "S0123104A545435", "lemmas": 234467, "hints": 9440669, "segments": 158, "wbits": 14, "off": 5000, "table_entries": 641398, "max_local": 3999, "max_entry": 6946, "warm_blocks": 643, "lean_bytes": 51665750, "generated_on": "remote"}
++{"case": "S01203A3535", "kind": "seed", "variables": 2928, "core": 5695, "est_hints": 17988673, "core_lrat_hints": 7578195, "producer": "cadical --lrat --no-binary --seed=5 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 552.5, "name": "S01203A3535", "module": "S01203A3535", "lemmas": 155298, "hints": 7578195, "segments": 127, "wbits": 14, "off": 3000, "table_entries": 397279, "max_local": 3991, "max_entry": 5091, "warm_blocks": 255, "lean_bytes": 46643009, "generated_on": "remote"}
++{"case": "S012314A44435", "kind": "seed", "variables": 3444, "core": 5927, "est_hints": 18009120, "core_lrat_hints": 3565382, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 798.6, "name": "S012314A44435", "module": "S012314A44435", "lemmas": 97414, "hints": 3565382, "segments": 60, "wbits": 14, "off": 4000, "table_entries": 252325, "max_local": 3973, "max_entry": 5406, "warm_blocks": 191, "lean_bytes": 21509511, "generated_on": "remote"}
++{"case": "S012301A35334", "kind": "seed", "variables": 3484, "core": 6344, "est_hints": 18317258, "core_lrat_hints": 10424226, "producer": "cadical --lrat --no-binary --seed=1 --chrono=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 440.1, "name": "S012301A35334", "module": "S012301A35334", "lemmas": 161323, "hints": 10424226, "segments": 174, "wbits": 14, "off": 4000, "table_entries": 519758, "max_local": 2581, "max_entry": 4272, "warm_blocks": 490, "lean_bytes": 53627990, "generated_on": "remote"}
++{"case": "T012304A34336K75", "kind": "share", "variables": 11029, "core": 21294, "est_hints": 18426348, "core_lrat_hints": 10135661, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 620.2, "name": "T012304A34336K75", "module": "T012304A34336K75", "lemmas": 203627, "hints": 10135661, "segments": 172, "wbits": 15, "off": 12000, "table_entries": 687453, "max_local": 3995, "max_entry": 5795, "warm_blocks": 1980, "lean_bytes": 55912192, "generated_on": "remote"}
++{"case": "T012301A36334K11", "kind": "share", "variables": 6300, "core": 14525, "est_hints": 18915197, "core_lrat_hints": 10222468, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 665.7, "name": "T012301A36334K11", "module": "T012301A36334K11", "lemmas": 221600, "hints": 10222468, "segments": 172, "wbits": 14, "off": 7000, "table_entries": 680811, "max_local": 3989, "max_entry": 6772, "warm_blocks": 1551, "lean_bytes": 51156455, "generated_on": "remote"}
++{"case": "S012034A46533", "kind": "seed", "variables": 3358, "core": 6605, "est_hints": 19338433, "core_lrat_hints": 10571546, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 587.1, "name": "S012034A46533", "module": "S012034A46533", "lemmas": 210674, "hints": 10571546, "segments": 177, "wbits": 14, "off": 4000, "table_entries": 526752, "max_local": 3887, "max_entry": 4741, "warm_blocks": 674, "lean_bytes": 52299062, "generated_on": "remote"}
++{"case": "S012301A34334", "kind": "seed", "variables": 3484, "core": 6625, "est_hints": 19341246, "core_lrat_hints": 9397661, "producer": "cadical --lrat --no-binary --seed=3 --chrono=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 495.3, "name": "S012301A34334", "module": "S012301A34334", "lemmas": 156125, "hints": 9397661, "segments": 157, "wbits": 14, "off": 4000, "table_entries": 484612, "max_local": 3918, "max_entry": 4542, "warm_blocks": 618, "lean_bytes": 49380588, "generated_on": "remote"}
++{"case": "T012310A33664K23", "kind": "share", "variables": 7895, "core": 17486, "est_hints": 19539811, "core_lrat_hints": 9390342, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 635.1, "name": "T012310A33664K23", "module": "T012310A33664K23", "lemmas": 207373, "hints": 9390342, "segments": 159, "wbits": 14, "off": 8000, "table_entries": 660103, "max_local": 3995, "max_entry": 6252, "warm_blocks": 1607, "lean_bytes": 47628083, "generated_on": "remote"}
++{"case": "T012304A64246K63", "kind": "share", "variables": 11577, "core": 25247, "est_hints": 19927570, "core_lrat_hints": 10558633, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 432.4, "name": "T012304A64246K63", "module": "T012304A64246K63", "lemmas": 154693, "hints": 10558633, "segments": 178, "wbits": 15, "off": 12000, "table_entries": 762787, "max_local": 3999, "max_entry": 6651, "warm_blocks": 2435, "lean_bytes": 54233044, "generated_on": "remote"}
++{"case": "S0123104A465343", "kind": "seed", "variables": 3874, "core": 5994, "est_hints": 19990454, "core_lrat_hints": 9052653, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 793.1, "name": "S0123104A465343", "module": "S0123104A465343", "lemmas": 194532, "hints": 9052653, "segments": 152, "wbits": 14, "off": 4000, "table_entries": 486863, "max_local": 3999, "max_entry": 4685, "warm_blocks": 437, "lean_bytes": 45945440, "generated_on": "remote"}
++{"case": "T012034A46434K39", "kind": "share", "variables": 9433, "core": 20990, "est_hints": 20287007, "core_lrat_hints": 10852817, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 715.8, "name": "T012034A46434K39", "module": "T012034A46434K39", "lemmas": 230933, "hints": 10852817, "segments": 184, "wbits": 15, "off": 10000, "table_entries": 847079, "max_local": 3992, "max_entry": 7437, "warm_blocks": 2088, "lean_bytes": 60598770, "generated_on": "remote"}
++{"case": "S012314A34536", "kind": "seed", "variables": 3318, "core": 5490, "est_hints": 20863068, "core_lrat_hints": 9491404, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 527.5, "name": "S012314A34536", "module": "S012314A34536", "lemmas": 225593, "hints": 9491404, "segments": 159, "wbits": 14, "off": 4000, "table_entries": 506926, "max_local": 3987, "max_entry": 5177, "warm_blocks": 385, "lean_bytes": 48899966, "generated_on": "remote"}
++{"case": "S012034A54534", "kind": "seed", "variables": 3484, "core": 6761, "est_hints": 20892053, "core_lrat_hints": 11280387, "producer": "cadical --lrat --no-binary --seed=4 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 944.5, "name": "S012034A54534", "module": "S012034A54534", "lemmas": 205562, "hints": 11280387, "segments": 188, "wbits": 14, "off": 4000, "table_entries": 620797, "max_local": 3992, "max_entry": 5160, "warm_blocks": 766, "lean_bytes": 60914493, "generated_on": "remote"}
++{"case": "S0123014A543445", "kind": "seed", "variables": 4040, "core": 7005, "est_hints": 21247880, "core_lrat_hints": 12423337, "producer": "cadical --lrat --no-binary --seed=3 --chrono=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 734.3, "name": "S0123014A543445", "module": "S0123014A543445", "lemmas": 209587, "hints": 12423337, "segments": 207, "wbits": 14, "off": 5000, "table_entries": 611136, "max_local": 2669, "max_entry": 4241, "warm_blocks": 614, "lean_bytes": 65544283, "generated_on": "remote"}
++{"case": "S012301A43345", "kind": "seed", "variables": 3484, "core": 6014, "est_hints": 21275403, "core_lrat_hints": 10545660, "producer": "cadical --lrat --no-binary --seed=6 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 445.4, "name": "S012301A43345", "module": "S012301A43345", "lemmas": 187024, "hints": 10545660, "segments": 176, "wbits": 14, "off": 4000, "table_entries": 465655, "max_local": 3630, "max_entry": 4595, "warm_blocks": 470, "lean_bytes": 57115399, "generated_on": "remote"}
++{"case": "S012301A43344", "kind": "seed", "variables": 3484, "core": 6288, "est_hints": 21384194, "core_lrat_hints": 10423481, "producer": "cadical --lrat --no-binary --seed=8 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 540.3, "name": "S012301A43344", "module": "S012301A43344", "lemmas": 193142, "hints": 10423481, "segments": 174, "wbits": 13, "off": 4000, "table_entries": 475852, "max_local": 2911, "max_entry": 3910, "warm_blocks": 487, "lean_bytes": 53096232, "generated_on": "remote"}
++{"case": "T012310A33663K47", "kind": "share", "variables": 10548, "core": 24150, "est_hints": 22017544, "core_lrat_hints": 10253295, "producer": "cadical --lrat --no-binary --seed=2 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 653.6, "name": "T012310A33663K47", "module": "T012310A33663K47", "lemmas": 178494, "hints": 10253295, "segments": 174, "wbits": 15, "off": 11000, "table_entries": 707912, "max_local": 3996, "max_entry": 5675, "warm_blocks": 2098, "lean_bytes": 57984277, "generated_on": "remote"}
++{"case": "T012304A33436K87", "kind": "share", "variables": 11917, "core": 21725, "est_hints": 22107213, "core_lrat_hints": 11848173, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 566.0, "name": "T012304A33436K87", "module": "T012304A33436K87", "lemmas": 220775, "hints": 11848173, "segments": 200, "wbits": 15, "off": 12000, "table_entries": 716205, "max_local": 3992, "max_entry": 6572, "warm_blocks": 2587, "lean_bytes": 62942715, "generated_on": "remote"}
++{"case": "S0123104A346444", "kind": "seed", "variables": 3874, "core": 7612, "est_hints": 22284447, "core_lrat_hints": 10779372, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1038.7, "name": "S0123104A346444", "module": "S0123104A346444", "lemmas": 232318, "hints": 10779372, "segments": 180, "wbits": 14, "off": 4000, "table_entries": 670686, "max_local": 3724, "max_entry": 5855, "warm_blocks": 660, "lean_bytes": 59882394, "generated_on": "remote"}
++{"case": "S0123014A443545", "kind": "seed", "variables": 4040, "core": 7379, "est_hints": 23199539, "core_lrat_hints": 13476711, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 731.7, "name": "S0123014A443545", "module": "S0123014A443545", "lemmas": 271331, "hints": 13476711, "segments": 225, "wbits": 14, "off": 5000, "table_entries": 817710, "max_local": 3561, "max_entry": 5808, "warm_blocks": 696, "lean_bytes": 67799468, "generated_on": "remote"}
++{"case": "T012301A26264K59", "kind": "share", "variables": 11352, "core": 27326, "est_hints": 23321536, "core_lrat_hints": 13413583, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 554.6, "name": "T012301A26264K59", "module": "T012301A26264K59", "lemmas": 180717, "hints": 13413583, "segments": 226, "wbits": 15, "off": 12000, "table_entries": 1024951, "max_local": 3998, "max_entry": 7193, "warm_blocks": 3591, "lean_bytes": 67128877, "generated_on": "remote"}
++{"case": "S0123014A434346", "kind": "seed", "variables": 3914, "core": 6857, "est_hints": 23421445, "core_lrat_hints": 10128430, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 714.2, "name": "S0123014A434346", "module": "S0123014A434346", "lemmas": 197339, "hints": 10128430, "segments": 169, "wbits": 14, "off": 4000, "table_entries": 537791, "max_local": 3238, "max_entry": 4926, "warm_blocks": 512, "lean_bytes": 50471128, "generated_on": "remote"}
++{"case": "T012034A46434K39", "kind": "share", "variables": 9433, "core": 20990, "est_hints": 20287007, "core_lrat_hints": 10852817, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 715.8, "name": "T012034A46434K39", "module": "T012034A46434K39", "lemmas": 230933, "hints": 10852817, "segments": 184, "wbits": 15, "off": 10000, "table_entries": 847079, "max_local": 3992, "max_entry": 7437, "warm_blocks": 2088, "lean_bytes": 60598770, "generated_on": "remote"}
++{"case": "S0123104A435536", "kind": "seed", "variables": 3874, "core": 6263, "est_hints": 24233660, "core_lrat_hints": 12066931, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 828.9, "name": "S0123104A435536", "module": "S0123104A435536", "lemmas": 277916, "hints": 12066931, "segments": 202, "wbits": 14, "off": 4000, "table_entries": 659366, "max_local": 3999, "max_entry": 4920, "warm_blocks": 577, "lean_bytes": 61685816, "generated_on": "remote"}
++{"case": "S0120310A634436", "kind": "seed", "variables": 3788, "core": 5581, "est_hints": 25125230, "core_lrat_hints": 11418286, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 763.5, "name": "S0120310A634436", "module": "S0120310A634436", "lemmas": 275761, "hints": 11418286, "segments": 191, "wbits": 14, "off": 4000, "table_entries": 684311, "max_local": 3106, "max_entry": 5972, "warm_blocks": 382, "lean_bytes": 60206986, "generated_on": "remote"}
++{"case": "S012301A33454", "kind": "seed", "variables": 3484, "core": 6292, "est_hints": 25186396, "core_lrat_hints": 14079868, "producer": "cadical --lrat --no-binary --seed=3 --chrono=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 770.5, "name": "S012301A33454", "module": "S012301A33454", "lemmas": 233379, "hints": 14079868, "segments": 235, "wbits": 14, "off": 4000, "table_entries": 656665, "max_local": 3288, "max_entry": 5019, "warm_blocks": 672, "lean_bytes": 73869979, "generated_on": "remote"}
++{"case": "S012301A33444", "kind": "seed", "variables": 3484, "core": 6390, "est_hints": 25683012, "core_lrat_hints": 13559867, "producer": "cadical --lrat --no-binary --seed=7 --chrono=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 701.3, "name": "S012301A33444", "module": "S012301A33444", "lemmas": 213543, "hints": 13559867, "segments": 226, "wbits": 14, "off": 4000, "table_entries": 613105, "max_local": 3430, "max_entry": 4180, "warm_blocks": 650, "lean_bytes": 70121525, "generated_on": "remote"}
++{"case": "S012314A43455", "kind": "seed", "variables": 3444, "core": 6081, "est_hints": 25720072, "core_lrat_hints": 13205641, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1018.0, "name": "S012314A43455", "module": "S012314A43455", "lemmas": 329085, "hints": 13205641, "segments": 221, "wbits": 14, "off": 4000, "table_entries": 1028343, "max_local": 3984, "max_entry": 7885, "warm_blocks": 880, "lean_bytes": 78856869, "generated_on": "remote"}
++{"case": "S0123014A543455", "kind": "seed", "variables": 4040, "core": 7123, "est_hints": 26526717, "core_lrat_hints": 15039220, "producer": "cadical --lrat --no-binary --seed=8 --chrono=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 902.4, "name": "S0123014A543455", "module": "S0123014A543455", "lemmas": 264096, "hints": 15039220, "segments": 251, "wbits": 14, "off": 5000, "table_entries": 776192, "max_local": 3997, "max_entry": 6024, "warm_blocks": 1012, "lean_bytes": 78203430, "generated_on": "remote"}
++{"case": "S0120342A465343", "kind": "seed", "variables": 3914, "core": 7320, "est_hints": 27674018, "core_lrat_hints": 14830697, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1033.0, "name": "S0120342A465343", "module": "S0120342A465343", "lemmas": 299426, "hints": 14830697, "segments": 248, "wbits": 14, "off": 4000, "table_entries": 935489, "max_local": 3999, "max_entry": 5823, "warm_blocks": 952, "lean_bytes": 76678868, "generated_on": "remote"}
++{"case": "T012034A46434K39", "kind": "share", "variables": 9433, "core": 20990, "est_hints": 20287007, "core_lrat_hints": 10852817, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1924.3, "name": "T012034A46434K39", "module": "T012034A46434K39", "lemmas": 230933, "hints": 10852817, "segments": 184, "wbits": 15, "off": 10000, "table_entries": 847079, "max_local": 3992, "max_entry": 7437, "warm_blocks": 2088, "lean_bytes": 60598770}
++{"case": "T012301A34363K39", "kind": "share", "variables": 8875, "core": 18937, "est_hints": 27700410, "core_lrat_hints": 13875456, "producer": "cadical --lrat --no-binary --seed=7 --chrono=0 (core round 2) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 652.2, "name": "T012301A34363K39", "module": "T012301A34363K39", "lemmas": 190200, "hints": 13875456, "segments": 234, "wbits": 15, "off": 9000, "table_entries": 892793, "max_local": 3999, "max_entry": 5619, "warm_blocks": 2620, "lean_bytes": 76487288, "generated_on": "remote"}
++{"case": "S012314A43544", "kind": "seed", "variables": 3444, "core": 6533, "est_hints": 28244324, "core_lrat_hints": 10069226, "producer": "cadical --lrat --no-binary --seed=1 --unsat --shrink=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1462.0, "name": "S012314A43544", "module": "S012314A43544", "lemmas": 256965, "hints": 10069226, "segments": 170, "wbits": 14, "off": 4000, "table_entries": 741514, "max_local": 3999, "max_entry": 6941, "warm_blocks": 888, "lean_bytes": 59904119, "generated_on": "remote"}
++{"case": "S012034A35436", "kind": "seed", "variables": 3358, "core": 5814, "est_hints": 28581363, "core_lrat_hints": 13746108, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 4) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1017.3, "name": "S012034A35436", "module": "S012034A35436", "lemmas": 329933, "hints": 13746108, "segments": 230, "wbits": 14, "off": 4000, "table_entries": 809805, "max_local": 3999, "max_entry": 6037, "warm_blocks": 666, "lean_bytes": 72246125, "generated_on": "remote"}
++{"case": "T012304A43336K59", "kind": "share", "variables": 10986, "core": 24150, "est_hints": 28888928, "core_lrat_hints": 15478191, "producer": "cadical --lrat --no-binary --seed=8 --chrono=0 (core round 5) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 811.2, "name": "T012304A43336K59", "module": "T012304A43336K59", "lemmas": 191151, "hints": 15478191, "segments": 261, "wbits": 15, "off": 11000, "table_entries": 1087086, "max_local": 3993, "max_entry": 6031, "warm_blocks": 3230, "lean_bytes": 83373267, "generated_on": "remote"}
++{"case": "T012301A33633K15", "kind": "share", "variables": 6802, "core": 16406, "est_hints": 29520323, "core_lrat_hints": 16588418, "producer": "cadical --lrat --no-binary --seed=1 --unsat --subsume=0 (core round 3) on the core CNF, trimmed to the dependencies of the empty clause, ids remapped to the committed CNF", "lrat_s": 1337.9, "name": "T012301A33633K15", "module": "T012301A33633K15", "lemmas": 367360, "hints": 16588418, "segments": 278, "wbits": 14, "off": 7000, "table_entries": 1192302, "max_local": 3997, "max_entry": 6312, "warm_blocks": 2347, "lean_bytes": 84617060, "generated_on": "remote"}
+diff --git a/milestones/33-233-lean/certify/prod233.py b/milestones/33-233-lean/certify/prod233.py
+index 23cbc459..3864cfc1 100644
+--- a/milestones/33-233-lean/certify/prod233.py
++++ b/milestones/33-233-lean/certify/prod233.py
+@@ -82,6 +82,13 @@ def last_status():
+     return st
+ 
+ 
++def remote_build_names():
++    """Certificates built on other machines (`xfer233.py build`/`opull`), listed one per line in
++    $CERT233_SCR/remote_build: left out here, their .olean files arrive through xfer/233o/* branches."""
++    p = os.path.join(os.environ.get('CERT233_SCR', ''), 'remote_build')
++    return set(open(p).read().split()) if os.path.exists(p) else set()
++
++
+ def reset_failed(names):
+     """Delete the source of every module of `names` whose last guarded build failed (or was
+     killed) after the source was written, so `cert233.py cnf`/`replay` (which skip existing
+@@ -128,8 +135,9 @@ def main():
+         if a.until and time.time() > a.until:
+             log({'stop': 'until'})
+             return
++        skip = remote_build_names()
+         items = [(h, it) for h, it, m in C.work_items(ns, set(a.kinds.split(',')))
+-                 if not built('LocalWindowUnsat', it[2]) and fails.get(it[2], 0) < 2]
++                 if not built('LocalWindowUnsat', it[2]) and fails.get(it[2], 0) < 2 and it[2] not in skip]
+         if not items:
+             log({'done': 'all certificates built'})
+             return
+diff --git a/milestones/33-233-lean/certify/supervisor233.py b/milestones/33-233-lean/certify/supervisor233.py
+index 774abd27..918688b5 100644
+--- a/milestones/33-233-lean/certify/supervisor233.py
++++ b/milestones/33-233-lean/certify/supervisor233.py
+@@ -33,10 +33,24 @@ def log(**r):
+ 
+ 
+ def mem_avail_gb():
++    """MemAvailable, capped by the headroom of this process's memory cgroup (v1).  The cgroup limit
++    (about 13.4 GiB here) is below the machine's RAM, so MemAvailable alone overstates what is left."""
++    avail = 0.0
+     for line in open('/proc/meminfo'):
+         if line.startswith('MemAvailable:'):
+-            return int(line.split()[1]) / 2 ** 20
+-    return 0.0
++            avail = int(line.split()[1]) / 2 ** 20
++            break
++    try:
++        rel = [l.split(':', 2)[2].strip() for l in open('/proc/self/cgroup') if l.split(':')[1] == 'memory'][0]
++        d = '/sys/fs/cgroup/memory' + rel
++        lim = int(open(d + '/memory.limit_in_bytes').read())
++        use = int(open(d + '/memory.usage_in_bytes').read())
++        st = dict(l.split() for l in open(d + '/memory.stat'))
++        if lim < 1 << 50:
++            avail = min(avail, (lim - use + int(st.get('total_inactive_file', 0))) / 2 ** 30)
++    except (OSError, IndexError, ValueError):
++        pass
++    return avail
+ 
+ 
+ def procs():
+diff --git a/milestones/33-233-lean/certify/xfer233.py b/milestones/33-233-lean/certify/xfer233.py
+new file mode 100644
+index 00000000..a628972d
+--- /dev/null
++++ b/milestones/33-233-lean/certify/xfer233.py
+@@ -0,0 +1,415 @@
++#!/usr/bin/env python3
++"""Generate replay sources of the 233 certificates on other machines (cloud sessions) and hand them to
++the production machine through short-lived git branches.
++
++Generation (cadical 8 seeds x 5 rounds, trimming, `gen_lean_lrat_v3.py`) is about half of the
++remaining cost; the production machine has 4 cores shared by generation and the Lean kernel.  The
++sources are deterministic (`cert233.py replay` docstring), and every one is checked again by the Lean
++kernel when the production machine builds it, so a source made elsewhere needs no trust.
++
++  gen  (remote machine): for each name in --names (in order), unless branch xfer/233/<name> exists:
++       `cert233.py replay` into a scratch directory, gzip -9 the source, split it into parts under
++       45 MiB (GitHub's limit is 100 MB), and push one orphan commit holding the parts and the replay
++       record (record.json) to refs/heads/xfer/233/<name>.  The cadical binary comes from branch
++       xfer/233/cadical (the Lean 4.19.0 toolchain's) when it is not installed.
++  pull (production machine, a daemon): every --every seconds, for the xfer/233/<name> branches whose
++       certificate has neither source nor .olean in work/final_lean, lowest prod order first, while
++       free disk stays above --min-disk-mb plus the source size: fetch that single branch into a
++       throwaway bare repository, write the source atomically into work/final_lean/LocalWindowUnsat
++       (where prod233.py and pregen233.py look for it), append record.json to data/replay6SB233.jsonl,
++       try to delete the remote branch (this session's proxy refuses that; consumed names are kept in
++       $CERT233_SCR/xfer_consumed), delete the bare repository.  At most --ahead unbuilt sources are kept.
++       A claim file in $CERT233_SCR/pregen_claims is written for every name that has a branch, so
++       pregen233.py workers leave those names alone.
++
++  python3 xfer233.py gen --names A B C ...            (CERT233_SCR: scratch directory)
++  python3 xfer233.py pull [--every 300] [--ahead 14]
++"""
++import argparse, gzip, json, os, shutil, subprocess, sys, tempfile, time
++
++HERE = os.path.dirname(os.path.abspath(__file__))
++ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
++LEAN = os.path.join(ROOT, 'work', 'final_lean')
++DATA = os.path.join(HERE, 'data')
++URL = 'https://github.com/hironaka-iori/Snake-in-the-box-in-9'
++PFX = 'refs/heads/xfer/233/'
++CADICAL = '/home/user/lean-deps/toolchain/lean-4.19.0-linux/bin/cadical'
++PART = 45 << 20
++
++
++def log(**r):
++    print(json.dumps({'t': round(time.time()), **r}), flush=True)
++
++
++def git(*args, cwd=ROOT, check=True, inp=None):
++    r = subprocess.run(['git', *args], cwd=cwd, capture_output=True, text=True, input=inp)
++    if check and r.returncode != 0:
++        raise RuntimeError(f'git {args[0]} failed: {r.stderr[-500:]}')
++    return r.stdout
++
++
++def retry(f, n=5):
++    for i in range(n):
++        try:
++            return f()
++        except RuntimeError as e:
++            if i == n - 1:
++                raise
++            log(retry=str(e)[:200])
++            time.sleep(5 * 2 ** i)
++
++
++def remote_names():
++    out = retry(lambda: git('ls-remote', URL, PFX + '*'))
++    return {line.split('\t')[1][len(PFX):]: line.split('\t')[0] for line in out.splitlines() if '\t' in line}
++
++
++def bare(tmp):
++    git('init', '-q', '--bare', tmp)
++    return tmp
++
++
++def ensure_cadical(scr):
++    if os.path.exists(CADICAL):
++        return
++    b = bare(os.path.join(scr, 'cad.git'))
++    retry(lambda: git('fetch', '-q', URL, PFX + 'cadical:refs/x/c', cwd=b))
++    os.makedirs(os.path.dirname(CADICAL), exist_ok=True)
++    data = subprocess.run(['git', 'cat-file', 'blob', 'refs/x/c:cadical'], cwd=b, capture_output=True).stdout
++    open(CADICAL, 'wb').write(data)
++    os.chmod(CADICAL, 0o755)
++    shutil.rmtree(b)
++    log(cadical='installed', bytes=len(data))
++
++
++def gen(a):
++    scr = os.environ.setdefault('CERT233_SCR', os.path.join(os.path.expanduser('~'), 'xfer233scr'))
++    os.makedirs(scr, exist_ok=True)
++    ensure_cadical(scr)
++    out = os.path.join(scr, 'out')
++    for name in a.names:
++        if name in remote_names():
++            log(name=name, skip='branch exists')
++            continue
++        t0 = time.time()
++        r = subprocess.run([sys.executable, os.path.join(HERE, 'cert233.py'), 'replay', '--kinds', 'seed,share',
++                            '--min-disk-mb', str(a.min_disk_mb), '--seed-jobs', a.seed_jobs, '--cores', str(a.cores),
++                            '--out', out, name], capture_output=True, text=True)
++        src = os.path.join(out, 'LocalWindowUnsat', name + '.lean')
++        if r.returncode != 0 or not os.path.exists(src):
++            log(name=name, failed=r.returncode, stderr=r.stderr[-1500:])
++            continue
++        rec = [json.loads(line) for line in r.stdout.splitlines() if line.startswith('{"case"')]
++        gen_s = round(time.time() - t0)
++        b = bare(tempfile.mkdtemp(dir=scr, prefix='push'))
++        raw = open(src, 'rb').read()
++        z = gzip.compress(raw, 9)
++        entries = []
++        for i in range(0, len(z), PART):
++            p = os.path.join(b, 'part')
++            open(p, 'wb').write(z[i:i + PART])
++            sha = git('hash-object', '-w', p, cwd=b).strip()
++            entries.append(f'100644 blob {sha}\tpart{i // PART:02d}')
++        meta = {'name': name, 'bytes': len(raw), 'gz_bytes': len(z), 'parts': len(entries), 'gen_s': gen_s,
++                'records': rec}
++        p = os.path.join(b, 'part')
++        open(p, 'w').write(json.dumps(meta))
++        sha = git('hash-object', '-w', p, cwd=b).strip()
++        entries.append(f'100644 blob {sha}\trecord.json')
++        tree = git('mktree', cwd=b, inp='\n'.join(entries) + '\n').strip()
++        commit = subprocess.run(['git', '-c', 'user.name=xfer233', '-c', 'user.email=xfer233@localhost',
++                                 'commit-tree', tree, '-m', f'xfer 233 source {name}'], cwd=b, capture_output=True,
++                                text=True, check=True).stdout.strip()
++        retry(lambda: git('push', '-q', URL, f'{commit}:{PFX}{name}', cwd=b))
++        shutil.rmtree(b)
++        os.remove(src)
++        log(name=name, pushed=commit, gen_s=gen_s, bytes=len(raw), gz=len(z))
++
++
++def disk_free_mb():
++    st = os.statvfs(LEAN)
++    return st.f_bavail * st.f_frsize // (1 << 20)
++
++
++def pull(a):
++    scr = os.environ.get('CERT233_SCR', '/home/user/cert233work')
++    claims = os.path.join(scr, 'pregen_claims')
++    os.makedirs(claims, exist_ok=True)
++    sys.path.insert(0, HERE)
++    import cert233 as C
++    ns = C.argparse.Namespace(keys_from='', plan=C.PLAN, core=C.CORE, names=[])
++    olean = lambda n: os.path.exists(os.path.join(LEAN, '.lake/build/lib/lean/LocalWindowUnsat', n + '.olean'))  # noqa
++    src = lambda n: os.path.join(LEAN, 'LocalWindowUnsat', n + '.lean')  # noqa
++    done_p = os.path.join(scr, 'xfer_consumed')
++    done = set(open(done_p).read().split()) if os.path.exists(done_p) else set()
++
++    def consume(n):
++        # The session's git proxy refuses branch deletion (HTTP 403), so deletion is best effort and the
++        # consumed names are remembered locally; leftover xfer/233/* branches are removed at the end.
++        done.add(n)
++        with open(done_p, 'a') as f:
++            f.write(n + '\n')
++        r = subprocess.run(['git', 'push', '-q', 'origin', '--delete', PFX + n], cwd=ROOT, capture_output=True)
++        log(name=n, consumed=True, branch_deleted=r.returncode == 0)
++
++    while True:
++        order = [it[2] for h, it, m in C.work_items(ns, {'seed', 'share'})]
++        left = [n for n in order if not olean(n)]
++        if not left:
++            log(done='all built')
++            return
++        try:
++            have = remote_names()
++        except RuntimeError as e:
++            log(error=str(e)[:300])
++            time.sleep(a.every)
++            continue
++        for n in have:
++            if n != 'cadical':
++                try:
++                    os.close(os.open(os.path.join(claims, n), os.O_CREAT | os.O_EXCL | os.O_WRONLY))
++                except FileExistsError:
++                    pass
++        for n in [n for n in order if n in have and n not in done and (olean(n) or os.path.exists(src(n)))]:
++            # built or already materialized (prod or pregen got there first): the branch is no longer needed
++            consume(n)
++        ready = sum(1 for n in left if os.path.exists(src(n)))
++        rb = os.path.join(scr, 'remote_build')   # built elsewhere: their .olean files come through opull
++        skip = set(open(rb).read().split()) if os.path.exists(rb) else set()
++        for n in [n for n in left if n in have and n not in done and n not in skip and not os.path.exists(src(n))]:
++            if ready >= a.ahead:
++                break
++            b = bare(tempfile.mkdtemp(dir=scr, prefix='pull'))
++            try:
++                retry(lambda: git('fetch', '-q', URL, f'{PFX}{n}:refs/x/s', cwd=b))
++                meta = json.loads(subprocess.run(['git', 'cat-file', 'blob', 'refs/x/s:record.json'], cwd=b,
++                                                 capture_output=True, check=True).stdout)
++                if disk_free_mb() < a.min_disk_mb + (meta['bytes'] >> 20):
++                    log(wait='disk', free_mb=disk_free_mb(), need_mb=meta['bytes'] >> 20)
++                    break
++                z = b''.join(subprocess.run(['git', 'cat-file', 'blob', f'refs/x/s:part{i:02d}'], cwd=b,
++                                            capture_output=True, check=True).stdout for i in range(meta['parts']))
++                raw = gzip.decompress(z)
++                assert len(raw) == meta['bytes'], 'size mismatch'
++                if olean(n) or os.path.exists(src(n)):
++                    log(name=n, dropped='appeared meanwhile')
++                else:
++                    tmp = src(n) + '.xfer'
++                    open(tmp, 'wb').write(raw)
++                    os.replace(tmp, src(n))
++                    with open(os.path.join(DATA, 'replay6SB233.jsonl'), 'a') as f:
++                        for rec in meta['records']:
++                            f.write(json.dumps({**rec, 'generated_on': 'remote'}) + '\n')
++                    ready += 1
++                    log(name=n, materialized=len(raw), gen_s=meta['gen_s'])
++                consume(n)
++            except (RuntimeError, subprocess.CalledProcessError, AssertionError, OSError) as e:
++                log(name=n, error=str(e)[:300])
++            finally:
++                shutil.rmtree(b, ignore_errors=True)
++        time.sleep(a.every)
++
++
++OPFX = 'refs/heads/xfer/233o/'
++LIB = os.path.join(LEAN, '.lake', 'build', 'lib', 'lean')
++GLB = os.path.join(ROOT, 'work', 'guarded_lake_build.py')
++LEANBIN = os.path.dirname(CADICAL)
++LEAN_COMMIT = '6caaee842e94'   # `lean --version` of the production machine (Lean 4.19.0)
++
++
++def ls_branches(pfx):
++    out = retry(lambda: git('ls-remote', URL, pfx + '*'))
++    return {line.split('\t')[1][len(pfx):] for line in out.splitlines() if '\t' in line}
++
++
++def fetch_blobs(ref, b):
++    """Fetch the single branch `ref` into the bare repository `b`; return (record, parts reader)."""
++    retry(lambda: git('fetch', '-q', URL, f'{ref}:refs/x/s', cwd=b))
++    blob = lambda p: subprocess.run(['git', 'cat-file', 'blob', f'refs/x/s:{p}'], cwd=b,  # noqa
++                                    capture_output=True, check=True).stdout
++    return json.loads(blob('record.json')), blob
++
++
++def push_blobs(ref, files, meta, scr, msg):
++    """One orphan commit holding gzip -9 parts (< 45 MiB) of each file and record.json."""
++    b = bare(tempfile.mkdtemp(dir=scr, prefix='push'))
++    entries, p = [], os.path.join(b, 'part')
++    for k, data in enumerate(files):
++        z = gzip.compress(data, 9)
++        meta['files'][k]['parts'] = 0
++        for i in range(0, len(z), PART):
++            open(p, 'wb').write(z[i:i + PART])
++            sha = git('hash-object', '-w', p, cwd=b).strip()
++            entries.append(f'100644 blob {sha}\tf{k}part{i // PART:02d}')
++            meta['files'][k]['parts'] += 1
++    open(p, 'w').write(json.dumps(meta))
++    sha = git('hash-object', '-w', p, cwd=b).strip()
++    entries.append(f'100644 blob {sha}\trecord.json')
++    tree = git('mktree', cwd=b, inp='\n'.join(entries) + '\n').strip()
++    commit = subprocess.run(['git', '-c', 'user.name=xfer233', '-c', 'user.email=xfer233@localhost', 'commit-tree',
++                             tree, '-m', msg], cwd=b, capture_output=True, text=True, check=True).stdout.strip()
++    retry(lambda: git('push', '-q', URL, f'{commit}:{ref}', cwd=b))
++    shutil.rmtree(b)
++    return commit
++
++
++def build(a):
++    """Remote machine: build LocalWindowCnf.<n> and LocalWindowUnsat.<n> for --names with the production
++    machine's exact command (guarded_lake_build --direct, Lean 4.19.0 commit LEAN_COMMIT), push both
++    .olean files of each built certificate to xfer/233o/<n>.  Sources come from xfer/233/<n> (replay)
++    and `cert233.py cnf` (core).  Modules that fail are retried once with --jobs 1."""
++    import hashlib
++    scr = os.environ.setdefault('CERT233_SCR', os.path.join(os.path.expanduser('~'), 'xfer233scr'))
++    os.makedirs(scr, exist_ok=True)
++    ver = subprocess.run([os.path.join(LEANBIN, 'lean'), '--version'], capture_output=True, text=True).stdout
++    if LEAN_COMMIT not in ver:
++        raise SystemExit(f'need Lean 4.19.0 commit {LEAN_COMMIT} in {LEANBIN}, found: {ver.strip()}')
++    done = ls_branches(OPFX)
++    todo = [n for n in a.names if n not in done]
++    for n in todo:
++        s = os.path.join(LEAN, 'LocalWindowUnsat', n + '.lean')
++        if os.path.exists(s):
++            continue
++        b = bare(tempfile.mkdtemp(dir=scr, prefix='src'))
++        meta, blob = fetch_blobs(PFX + n, b)
++        raw = gzip.decompress(b''.join(blob(f'part{i:02d}') for i in range(meta['parts'])))
++        assert len(raw) == meta['bytes'], 'size mismatch'
++        open(s + '.xfer', 'wb').write(raw)
++        os.replace(s + '.xfer', s)
++        shutil.rmtree(b)
++        log(name=n, source=len(raw))
++    env = dict(os.environ, PATH=LEANBIN + ':' + os.environ['PATH'])
++    if todo:
++        r = subprocess.run([sys.executable, os.path.join(HERE, 'cert233.py'), 'cnf', '--kinds', 'seed,share', *todo],
++                           env=env, capture_output=True, text=True)
++        if r.returncode:
++            raise SystemExit('cnf failed: ' + r.stderr[-1500:])
++    glog = os.path.join(scr, 'guarded_remote.jsonl')
++    pushed = set()
++
++    def push_ready():
++        st = {}
++        if os.path.exists(glog):
++            for line in open(glog):
++                try:
++                    r = json.loads(line)
++                except ValueError:
++                    continue
++                if 'module' in r:
++                    st[r['module']] = r
++        for n in todo:
++            r = st.get('LocalWindowUnsat.' + n)
++            if n in pushed or not r or r['status'] != 'ok':
++                continue
++            paths = [os.path.join(LIB, d, n + '.olean') for d in ('LocalWindowCnf', 'LocalWindowUnsat')]
++            data = [open(p, 'rb').read() for p in paths]
++            meta = {'name': n, 'lean_version': ver.strip(), 'seconds': r['seconds'], 'peak_rss_gb': r['peak_rss_gb'],
++                    'jobs': r.get('jobs'), 'host_cpus': os.cpu_count(),
++                    'files': [{'path': os.path.relpath(p, LIB), 'bytes': len(d), 'sha256': hashlib.sha256(d).hexdigest()}
++                              for p, d in zip(paths, data)]}
++            commit = push_blobs(OPFX + n, data, meta, scr, f'xfer 233 olean {n}')
++            pushed.add(n)
++            log(name=n, olean_pushed=commit, seconds=r['seconds'], peak_rss_gb=r['peak_rss_gb'])
++
++    for jobs in (a.jobs, 1):
++        left = [n for n in todo if n not in pushed]
++        if not left:
++            break
++        p = subprocess.Popen(['nice', '-n', '10', sys.executable, GLB, '--root', LEAN, '--direct', '--trust-mtime',
++                              '--no-ilean', '--jobs', str(jobs), '--heavy', r'^LocalWindow(Unsat|Cnf)\.(S|T)',
++                              '--heavy-jobs', str(jobs), '--rss-cap-gb', str(a.rss_cap_gb), '--min-free-gb', '3.0',
++                              '--min-disk-mb', '800', '--log', glog, *['LocalWindowUnsat.' + n for n in left]],
++                             env=env, cwd=LEAN, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
++        log(build=left, jobs=jobs, pid=p.pid)
++        while p.poll() is None:
++            push_ready()
++            time.sleep(30)
++        push_ready()
++    failed = [n for n in todo if n not in pushed]
++    log(done=sorted(pushed), failed=failed)
++
++
++def opull(a):
++    """Production machine (daemon): install the .olean files of xfer/233o/<n> for the names in
++    $CERT233_SCR/remote_build (sha256 and Lean commit checked; LocalWindowCnf first, each written
++    atomically), delete the local sources of <n> as prod233's sweep does, log the build record to
++    data/remotebuild6SB233.jsonl, remember <n> in $CERT233_SCR/oxfer_consumed."""
++    import hashlib
++    scr = os.environ.get('CERT233_SCR', '/home/user/cert233work')
++    done_p = os.path.join(scr, 'oxfer_consumed')
++    done = set(open(done_p).read().split()) if os.path.exists(done_p) else set()
++    olean = lambda n: os.path.exists(os.path.join(LIB, 'LocalWindowUnsat', n + '.olean'))  # noqa
++    while True:
++        names = open(os.path.join(scr, 'remote_build')).read().split()
++        left = [n for n in names if not olean(n)]
++        if not left:
++            log(done='all remote .olean files installed')
++            return
++        try:
++            have = ls_branches(OPFX)
++        except RuntimeError as e:
++            log(error=str(e)[:300])
++            time.sleep(a.every)
++            continue
++        for n in [n for n in left if n in have]:
++            b = bare(tempfile.mkdtemp(dir=scr, prefix='opull'))
++            try:
++                meta, blob = fetch_blobs(OPFX + n, b)
++                assert LEAN_COMMIT in meta['lean_version'], 'Lean version ' + meta['lean_version']
++                need = sum(f['bytes'] for f in meta['files']) >> 20
++                if disk_free_mb() < a.min_disk_mb + need:
++                    log(wait='disk', free_mb=disk_free_mb(), need_mb=need)
++                    break
++                datas = []
++                for k, f in enumerate(meta['files']):
++                    d = gzip.decompress(b''.join(blob(f'f{k}part{i:02d}') for i in range(f['parts'])))
++                    assert len(d) == f['bytes'] and hashlib.sha256(d).hexdigest() == f['sha256'], 'checksum ' + f['path']
++                    datas.append(d)
++                for f, d in zip(meta['files'], datas):   # LocalWindowCnf first, LocalWindowUnsat last
++                    dst = os.path.join(LIB, f['path'])
++                    os.makedirs(os.path.dirname(dst), exist_ok=True)
++                    open(dst + '.xfer', 'wb').write(d)
++                    os.replace(dst + '.xfer', dst)
++                for d in ('LocalWindowCnf', 'LocalWindowUnsat'):
++                    s = os.path.join(LEAN, d, n + '.lean')
++                    if os.path.exists(s):
++                        os.remove(s)
++                with open(os.path.join(DATA, 'remotebuild6SB233.jsonl'), 'a') as f:
++                    f.write(json.dumps({k: v for k, v in meta.items()}) + '\n')
++                if n not in done:
++                    done.add(n)
++                    with open(done_p, 'a') as f:
++                        f.write(n + '\n')
++                log(name=n, installed=[f['path'] for f in meta['files']], seconds=meta['seconds'])
++            except (RuntimeError, subprocess.CalledProcessError, AssertionError, OSError, ValueError, KeyError) as e:
++                log(name=n, error=str(e)[:300])
++            finally:
++                shutil.rmtree(b, ignore_errors=True)
++        time.sleep(a.every)
++
++
++def main():
++    ap = argparse.ArgumentParser()
++    sp = ap.add_subparsers(dest='cmd', required=True)
++    bp = sp.add_parser('build')
++    bp.add_argument('--names', nargs='+', required=True)
++    bp.add_argument('--jobs', type=int, default=3)
++    bp.add_argument('--rss-cap-gb', type=float, default=11)
++    op = sp.add_parser('opull')
++    op.add_argument('--every', type=int, default=300)
++    op.add_argument('--min-disk-mb', type=int, default=1500)
++    g = sp.add_parser('gen')
++    g.add_argument('--names', nargs='+', required=True)
++    g.add_argument('--seed-jobs', default='auto')
++    g.add_argument('--cores', type=int, default=os.cpu_count() or 4)
++    g.add_argument('--min-disk-mb', type=int, default=3000)
++    p = sp.add_parser('pull')
++    p.add_argument('--every', type=int, default=300)
++    p.add_argument('--ahead', type=int, default=14)
++    p.add_argument('--min-disk-mb', type=int, default=2300)
++    a = ap.parse_args()
++    {'gen': gen, 'pull': pull, 'build': build, 'opull': opull}[a.cmd](a)
++
++
++if __name__ == '__main__':
++    main()

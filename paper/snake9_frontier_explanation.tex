@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 201}
+\date{Research state after round 202}
 \begin{document}
 \maketitle
 
@@ -998,6 +998,55 @@ placed 98-edge parents satisfy the exact one-deletion criterion, or
 produce the necessary 195-edge predecessor. No new witness or global
 bound follows from the restrictions alone.
 
+
+\paragraph{A symmetry acting on the whole snake.}
+Choose two coordinates, write a vertex as $(z,u)$, and let
+$\tau_\epsilon$ interchange the two square words of parity
+$\epsilon$, fixing the other two. For a Boolean selector $f$, define
+\[
+F_f(z,u)=(z,\tau_\epsilon^{f(z)}(u)).
+\]
+This is a single involution defined on every cube vertex. For a snake,
+collect the base words $z$ having a selected word of parity $\epsilon$.
+Then $F_f$ preserves every edge and every nonedge of the entire snake
+exactly when $f$ is constant on each component of the cube graph on
+those base words. The reason is that a selector change across adjacent
+base words reverses equality of the two active square words, changing
+an edge into a nonedge or conversely. All other pairs keep their status.
+Lean checks this criterion and constructs the full induced image path.
+
+The components can be reflected independently. Reflecting a subset or
+its complement gives images related by a global square reflection.
+With at most three components, the unchanged image and the individual
+component images therefore cover every choice up to cube isometry.
+A checked 13-edge $Q_5$ example changes one selected vertex and gives
+a whole snake inequivalent under cube isometries, including reversal.
+
+The saved 98-edge $Q_8$ parent has a connected active graph for all
+56 coordinate-pair/parity choices. This particular family therefore
+cannot change its shape beyond ordinary cube symmetries.
+For the 131 saved 191-edge $Q_9$ snakes, all 9432 choices have at most
+three components. The 408 single-component images all belong to the
+existing bank. Complement symmetry and invariance under cube isometries
+then imply closure under arbitrary iterations of these maps. These
+finite census premises remain native computations.
+
+A self-symmetry preserving the same finite snake as a set is identity
+or reversal. Within this controlled-reflection family, a nontrivial
+self-map agrees on the whole snake with a global square reflection.
+More varied embeddings are possible, as the checked example shows.
+Thus the definition is useful, but this family does not escape the
+saved $Q_9$ bank or produce a new $Q_8$ parent from the saved one.
+
+The parent analysis also sharpens the saturated $C=5$ case above.
+The 195-edge predecessor has one omission in each parent. Their indices
+have equal parity. In the one-addition case with $C=5$, at least one
+omission lies exactly three edges from an original parent endpoint,
+so its index is 3 or 95. Both indices are odd. The short reason is
+that the two exposed ports and the retained opposite copy of the
+omitted vertex form a complete two-edge component in the other face.
+This last conclusion has a written proof and remains necessary only.
+
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
 share packing and conditional arithmetic are Lean-checked. The actual-cube
@@ -1051,5 +1100,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--201.}
+\texttt{snake9\_research.tex} and research records 175--202.}
 \end{document}
