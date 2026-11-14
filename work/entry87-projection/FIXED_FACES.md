@@ -14,6 +14,8 @@ Every subgraph of an induced path is acyclic. The exact formula therefore prohib
 
 Together the three refutations prove the theorem. A possible 192-edge snake could have a different 98-edge face path, another face shape, or cross differently when its face is disconnected.
 
+An independent single formula also allows either one or two crossings without specifying the endpoints in advance. Its opposite face contains exactly 94 vertices. Write u for the number of selected copies of the two fixed endpoints. The opposite face must supply u global endpoints because the fixed face has 2−u global endpoints. At a selected root copy, count its one crossing in the selected degree. Local degree conditions, the vertex counts and proper-cycle exclusions then apply jointly. The complete root formula is UNSAT in 1,283,649 conflicts. The extracted proof verified in 28,716,623 resolution steps. [Unified encoder](fixed_face.py) and [certificate receipt](fixed-face-seed-0-99-checked.json).
+
 ### Faces extracted from the published 191-edge bank
 
 Twenty-five of the 131 bank paths use a coordinate exactly once. In every such instance the two faces carry paths of 96 and 94 edges. Normalize the rooted transition sequence of each face starting at the crossing. Coordinate names are determined by first occurrence. This gives five rooted 96-edge face classes and five rooted 94-edge classes, each represented by five of the bank occurrences. They supply ten existing path shapes with an exhibited one-crossing join of length 191.
