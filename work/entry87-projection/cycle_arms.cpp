@@ -67,13 +67,17 @@ struct Extension {
     }
 };
 int main(int argc,char**argv){
-    if(argc!=4)return 2;
+    if(argc!=4 && argc!=5)return 2;
     int start=stoi(argv[1]),end=stoi(argv[2]);
     uint64_t limit=stoull(argv[3]);
     vector<int> q;
     for(int v;cin>>v;)q.push_back(v);
-    if(q.size()!=193)return 3;
-    vector<int> cycle(q.begin()+7,q.end());
+    bool explicit_cycle=argc==5 && string(argv[4])=="--cycle";
+    if(argc==5 && !explicit_cycle)return 2;
+    if(!explicit_cycle && q.size()!=193)return 3;
+    vector<int> cycle=explicit_cycle?q:vector<int>(q.begin()+7,q.end());
+    if(cycle.size()<4 || cycle.size()>512)return 3;
+    for(int v:cycle)if(v<0 || v>=512)return 3;
     if(!induced(cycle,true))throw logic_error("invalid source cycle");
     int n=cycle.size();
     if(start<1||end>=n-1||start>end)return 4;
