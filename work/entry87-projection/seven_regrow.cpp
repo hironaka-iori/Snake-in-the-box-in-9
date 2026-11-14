@@ -8,22 +8,23 @@
 #include <unordered_set>
 #include <vector>
 using namespace std;
-struct Mask{uint64_t a=0,b=0;};
-void mark(Mask&m,int v){if(v<64)m.a|=1ull<<v;else m.b|=1ull<<(v-64);}
-bool has(const Mask&m,int v){return v<64?(m.a>>v)&1:(m.b>>(v-64))&1;}
-Mask merge(Mask a,Mask b){return {a.a|b.a,a.b|b.b};}
-Mask hood[128];
+struct Mask{array<uint64_t,4> data{};};
+void mark(Mask&m,int v){m.data[v>>6]|=uint64_t(1)<<(v&63);}
+bool has(const Mask&m,int v){return (m.data[v>>6]>>(v&63))&1;}
+Mask merge(Mask a,const Mask& b){for(int i=0;i<4;i++)a.data[i]|=b.data[i];return a;}
+Mask hood[256];
 string normalize(const string&s){
-    array<int,7> name{};name.fill(-1);int next=0;string out=s;
+    array<int,8> name{};name.fill(-1);int next=0;string out=s;
     for(char& c:out){int b=c-'0';if(name[b]<0)name[b]=next++;c=char('0'+name[b]);}
     return out;
 }
 string reversed(string s){reverse(s.begin(),s.end());return s;}
 string canon(const string&s){return min(normalize(s),normalize(reversed(s)));}
 int main(int argc,char**argv){
-    if(argc!=5)return 2;int size=stoi(argv[1]),trim=stoi(argv[2]),limit=stoi(argv[3]);
+    if(argc!=5&&argc!=6)return 2;int size=stoi(argv[1]),trim=stoi(argv[2]),limit=stoi(argv[3]);
+    int d=argc==6?stoi(argv[5]):7;if(d!=7&&d!=8)return 2;
     uint64_t maxnodes=stoull(argv[4]),nodes=0;bool cutoff=false;
-    for(int v=0;v<128;++v){mark(hood[v],v);for(int b=0;b<7;++b)mark(hood[v],v^(1<<b));}
+    for(int v=0;v<(1<<d);++v){mark(hood[v],v);for(int b=0;b<d;++b)mark(hood[v],v^(1<<b));}
     unordered_set<string> paths,roots;deque<string> todo;
     auto keep=[&](const string&s){auto k=canon(s);if(paths.insert(k).second)todo.push_back(k);};
     for(string s;cin>>s;)if(int(s.size())==size-1)keep(s);
@@ -40,7 +41,7 @@ int main(int argc,char**argv){
                 if(++nodes>maxnodes||int(paths.size())>=limit){cutoff=true;return;}
                 if(!remaining){keep(word);return;}
                 Mask next=merge(fixed,hood[at]);
-                for(int b=0;b<7&&!cutoff;++b){
+                for(int b=0;b<d&&!cutoff;++b){
                     int w=at^(1<<b);if(has(fixed,w))continue;
                     word.push_back(char('0'+b));self(self,w,next,remaining-1);word.pop_back();
                 }

@@ -25,3 +25,17 @@ The independent small-cube control grew every induced path with at least three v
 On the 1,179 nine-cube projections, the pinned kernel dimension was zero in 1,012 cases, one in 136, two in 24 and three in seven. In total, 253,438 compatible endpoint choices produced 411,703 phase assignments. Each projection yielded exactly one solution after the face normalization. Its full transition sequence agreed with its source up to coordinate relabelling and reversal. Since the source is itself a lift of the labelled multiset, uniqueness gives the stated labelled result. [Decision procedure](fibre_laplacian.py), [bank driver](fibre_phase_bank.py), [all results](fibre-phase-bank.json).
 
 Run `python fibre_laplacian.py --control` and `python fibre_phase_bank.py` from this directory. The next constructive application changes occupied addresses before solving for both faces and the order. This permits the whole path to rearrange after a small change in its projection.
+
+## Keeping just the set of addresses
+
+Now forget which addresses occurred twice as well. There are 1,043 distinct labelled address sets among the 1,179 projections. At length 191 edges the exact multiplicities of full labelled paths, up to reversal and face exchange, are as follows.
+
+| Number of lifts | Number of address sets |
+|---:|---:|
+| 1 | 916 |
+| 2 | 95 |
+| 3 | 1 |
+| 4 | 30 |
+| 6 | 1 |
+
+In 475 sets the number of possible doubled sites already equals the number required. For each of the other 568 sets, an exact degree-and-connectivity solver searches for further doubled sets, blocking each complete choice after enumeration. The Laplacian method independently enumerates every lift of each feasible choice. This recovered 56 additional labelled placements beyond those originally registered against those exact sets. Every placement is cube-isometric to a member of the original bank, allowing reversal. For example, the address set obtained from source 2 by erasing coordinate 3 also admits a placement equivalent to source 20. Thus the finite bank is closed under this operation at 191 edges even though unweighted projections can have multiple lifts. [Enumeration and all-pairs checks](unweighted_fibres.py), [0–260](unweighted-fibres-0-261-150000.json), [261–521](unweighted-fibres-261-522-150000.json), [522–782](unweighted-fibres-522-783-150000.json), [783–1042](unweighted-fibres-783-1043-150000.json).

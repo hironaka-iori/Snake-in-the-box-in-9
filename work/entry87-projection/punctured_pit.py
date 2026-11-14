@@ -12,7 +12,8 @@ from punctured_lift import project
 from solve import BANK,BANK_HASH,sha256,defects,save
 
 
-def examine(P,tag,budget,checker=None,desired=193):
+def examine(P,tag,budget,checker=None,desired=193,forbidden_doubles=(),proof_dir=None,
+            rebuild_cnf=None,recorded_cycles=()):
     sites=sorted(set(P));S=set(sites)
     adj={v:sorted({v^(1<<b) for b in range(8)}&S) for v in sites}
     k=desired-len(sites);candidates={v for v,g in adj.items() if len(g)<=2}
@@ -25,10 +26,13 @@ def examine(P,tag,budget,checker=None,desired=193):
     with Solver(name="cadical195",with_proof=checker is not None) as sat:
         def add(c):
             sat.add_clause(c)
-            if checker:clauses.append(c)
+            if checker or rebuild_cnf:clauses.append(c)
         def eq(lits,k):
             for c in CardEnc.equals(lits,bound=k,vpool=pool,encoding=EncType.totalizer).clauses:add(c)
         eq(list(d.values()),k);eq(list(e.values()),2)
+        for excluded in forbidden_doubles:
+            assert len(excluded)==k and set(excluded)<=set(d)
+            add([-d[v] for v in sorted(excluded)])
         # Swapping the two layers preserves the constraints, so layer zero
         # may be chosen at the least address even if this address is doubled.
         add([s[sites[0],0]])
@@ -62,6 +66,15 @@ def examine(P,tag,budget,checker=None,desired=193):
                 q=(v,v^(1<<a),v^(1<<b),v^mask)
                 if set(q)<=S:
                     for z in (0,1):add([-s[x,z] for x in q]);square+=1
+        if rebuild_cnf:
+            for cycle in recorded_cycles:
+                component=set(cycle)
+                assert len(component)<desired and all(sum((v^(1<<j)) in component for j in range(9))==2 for v in component)
+                add([-s[v&255,v>>8] for v in sorted(component)])
+            with rebuild_cnf.open("w",newline="\n") as out:
+                out.write(f"p cnf {max(abs(v) for c in clauses for v in c)} {len(clauses)}\n")
+                for c in clauses:out.write(" ".join(map(str,c))+" 0\n")
+            return
         status="OPEN";witness=None
         while True:
             remain=budget-sat.accum_stats()["conflicts"]
@@ -87,7 +100,9 @@ def examine(P,tag,budget,checker=None,desired=193):
                 add([-s[v&255,v>>8] for v in sorted(component)]);cuts.append(sorted(component))
         result=dict(status=status,possible=len(candidates),required=k,squares=square,budget=budget,
                     stats=sat.accum_stats(),dynamic=cuts,witness=witness)
-        if checker and status=="UNSAT":result.update(checked_export(sat,clauses,Path("punctured-pit-proof-"+tag),checker))
+        if checker and status=="UNSAT":
+            prefix=Path(proof_dir or ".")/("punctured-pit-proof-"+tag)
+            result.update(checked_export(sat,clauses,prefix,checker))
     return result
 
 

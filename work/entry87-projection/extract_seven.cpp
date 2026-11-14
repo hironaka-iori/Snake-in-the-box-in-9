@@ -12,19 +12,21 @@ string normalized(string s){
     return s;
 }
 int main(int argc,char**argv){
-    if(argc!=2)return 2;int minimum=stoi(argv[1]),dim,id;string line;
+    if(argc<2||argc>3)return 2;int minimum=stoi(argv[1]),dim,id;string line;
+    const int kept=argc==3?stoi(argv[2]):7;
+    if(kept<1||kept>9)return 2;
     map<string,array<int,3>> bank;
     while(cin>>dim>>id>>line){
         array<int,20> count{};int active=0,start=0;
         for(int j=0;j<int(line.size());++j){
             int bit=line[j]-'A';if(bit<0||bit>=dim)return 3;
-            if(!count[bit]&&active==7){
+            if(!count[bit]&&active==kept){
                 if(j-start>=minimum){
                     string raw=line.substr(start,j-start);string a=normalized(raw);
                     reverse(raw.begin(),raw.end());string b=normalized(raw);
                     bank.try_emplace(min(a,b),array<int,3>{dim,id,start});
                 }
-                while(active==7){int old=line[start++]-'A';if(!--count[old])--active;}
+                while(active==kept){int old=line[start++]-'A';if(!--count[old])--active;}
             }
             if(!count[bit]++)++active;
         }
