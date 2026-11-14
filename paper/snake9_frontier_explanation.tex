@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 214}
+\date{Research state after round 215}
 \begin{document}
 \maketitle
 
@@ -405,8 +405,8 @@ $J$ and have an intersecting current domain. With spare allowance $s$,
 \]
 Shared members inject into distinct partners; at most $s$ members
 remain unshared. This generic counting consequence is also checked in
-Lean. Its group rule is a possible stronger search step; only the
-zero-support and exhausted-allowance rules are implemented here.
+Lean. At round 212, only the zero-support and exhausted-allowance rules
+were implemented; the group rule is incorporated in round 214 below.
 
 At the round-212 cutoff, the model remains open after 120 saved
 steps and 1,051,511 nodes, with 11 unfinished regions.
@@ -462,10 +462,30 @@ Lean checks the counting argument and assignment preservation.
 This can strengthen individual support when several intervals compete
 for a small partner set. A matching discovers candidate subsets;
 matching success alone does not establish a realizable snake.
-The new continuation examines 749,506 additional nodes and records
-3,054 value removals by this rule. Thirteen regions remain unfinished;
+The round-214 continuation examines 749,506 additional nodes and records
+3,054 value removals by this rule. Thirteen regions remain unfinished
+at that cutoff;
 the known lower bound and the number of unresolved coordinate choices
 are unchanged.
+
+
+\paragraph{Actual words must also fit.}
+Possible partners do not resolve competition for word labels.
+Within any one chosen or outside family, a subset $J$ requires
+distinct words in its domain union $U$. Thus $|J|\le|U|$; equality
+reserves all of $U$ for $J$, and the other members of that family
+must avoid it. The geometric path condition supplies the distinctness.
+Lean now checks this composition and preservation of the same assignment
+for all four families, without requiring a saturated parity alphabet.
+The new continuation combines this rule with partner capacity.
+It examines 2,650,260 additional nodes and records 29,311,693 word-removal operations by the added rule.
+The case remains open with 5 unfinished regions.
+
+The four maximal distinct-word families of each parity supply a
+possible extension. On the thirteen inherited regions, however,
+their apparent additional deletions disappear after the existing
+family and binary rules reach closure. This comparison gives no
+evidence that adding those families improves the search.
 
 \section{What would resolve the question}
 The current upper bound is 233. A smaller bound requires a stronger
@@ -484,7 +504,7 @@ universal 197-edge exclusion would settle the proposed value exactly.
 
 \smallskip
 {\small Detailed proofs, explicit witnesses and verification records are
-retained in the companion manuscript and milestones through round 214.
+retained in the companion manuscript and milestones through round 215.
 The known small-dimensional values are listed in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

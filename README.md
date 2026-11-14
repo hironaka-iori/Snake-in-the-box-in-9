@@ -1,3 +1,11 @@
+# Current result after round 215
+
+Actual-word subset capacity is now derived from the source-specific induced path and combined with partner capacity. The new native continuation examines 2,650,260 nodes and records 29,311,693 word-removal operations. Case[0,6] remains open with5 regions. No new snake, global bound or complete coordinate-case exclusion is obtained. The recorded interval remains191<=a(9)<=233; the contributor proof's independent full rebuild is pending.
+
+Read [the mathematical argument](milestones/215-word-partner-capacity/MATHEMATICAL_NOTE.md), [evidence](milestones/215-word-partner-capacity/data/completion.json), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex). The goal remains active under the user's pause policy.
+
+## Earlier checkpoints
+
 # Current result after round 214
 
 The normalized reconstructed path now supplies the32-word parity alphabets, and a tight partner-subset theorem gives a stronger assignment-preserving restriction. The native continuation records3,054 value removals by the added rule and749,506 new nodes, while case[0,6] remains open with13 regions. No new snake, numerical bound or complete coordinate-case exclusion is obtained. The recorded interval remains191<=a(9)<=233, with the contributor proof's independent full rebuild pending.

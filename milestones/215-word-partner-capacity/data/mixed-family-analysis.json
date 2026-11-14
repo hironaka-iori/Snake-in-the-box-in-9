@@ -1,0 +1,2416 @@
+{
+  "scope": "Frozen-state matching/tight-closure analysis and bounded branch-free four-family/binary fixed point; no solver or search.",
+  "inputs": {
+    "model": {
+      "path": "E:\\Snake-in-a-box\\milestones\\215-word-partner-capacity\\data\\case-22\\model.json",
+      "sha256": "1a4d81c600d104347a501cfc9bf82db91a3aa04a6ebfd3ea20fcb1ca283aa95b"
+    },
+    "state": {
+      "path": "E:\\Snake-in-a-box\\milestones\\215-word-partner-capacity\\data\\case-22\\transfer214-state.json",
+      "sha256": "eb74f9a59a537ee1ac0a7bd9bd3e8dd283c0ca6d5172cc648b6d5aaa6cb6c027"
+    },
+    "families": {
+      "path": "E:\\Snake-in-a-box\\milestones\\215-word-partner-capacity\\data\\case-22\\support-constraints.json",
+      "sha256": "0362c97affd2b4b19405f2a05747327a703b55459b6f1cb3d7bc455c72bce040"
+    }
+  },
+  "source_jobs": 240,
+  "frontier_regions": 13,
+  "geometry": [
+    {
+      "parity": 0,
+      "intervals": 39,
+      "multi_count": 12,
+      "singleton_counts": [
+        5,
+        4,
+        9,
+        9
+      ],
+      "model_conflict_edges": 660,
+      "geometry_mismatches": [],
+      "maximal_families": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "indices": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            52,
+            54,
+            56,
+            58,
+            70,
+            72,
+            74
+          ],
+          "size": 21
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "indices": [
+            0,
+            4,
+            6,
+            8,
+            10,
+            12,
+            16,
+            20,
+            22,
+            24,
+            30,
+            32,
+            44,
+            46,
+            48,
+            50,
+            52,
+            54,
+            56,
+            58,
+            60,
+            68,
+            70,
+            72,
+            74,
+            76
+          ],
+          "size": 26
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "indices": [
+            0,
+            2,
+            4,
+            14,
+            16,
+            18,
+            20,
+            24,
+            26,
+            28,
+            30,
+            34,
+            36,
+            38,
+            40,
+            42,
+            52,
+            54,
+            58,
+            62,
+            64,
+            66,
+            70,
+            72,
+            74
+          ],
+          "size": 25
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "indices": [
+            0,
+            4,
+            12,
+            14,
+            16,
+            20,
+            24,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40,
+            42,
+            44,
+            46,
+            48,
+            50,
+            52,
+            54,
+            58,
+            60,
+            62,
+            64,
+            66,
+            68,
+            70,
+            72,
+            74,
+            76
+          ],
+          "size": 30
+        }
+      ]
+    },
+    {
+      "parity": 1,
+      "intervals": 39,
+      "multi_count": 9,
+      "singleton_counts": [
+        8,
+        9,
+        6,
+        7
+      ],
+      "model_conflict_edges": 631,
+      "geometry_mismatches": [],
+      "maximal_families": [
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "indices": [
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            17,
+            19,
+            21,
+            23,
+            25,
+            27,
+            29,
+            31,
+            33,
+            43,
+            51,
+            53,
+            55,
+            57,
+            61,
+            67,
+            71,
+            73,
+            75
+          ],
+          "size": 26
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "indices": [
+            5,
+            7,
+            9,
+            11,
+            13,
+            21,
+            23,
+            31,
+            33,
+            43,
+            45,
+            47,
+            49,
+            51,
+            55,
+            57,
+            59,
+            61,
+            67,
+            69,
+            71,
+            75,
+            77
+          ],
+          "size": 23
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "indices": [
+            1,
+            3,
+            11,
+            13,
+            15,
+            17,
+            19,
+            25,
+            27,
+            29,
+            31,
+            33,
+            35,
+            37,
+            39,
+            41,
+            43,
+            51,
+            53,
+            61,
+            63,
+            65,
+            67,
+            73,
+            75
+          ],
+          "size": 25
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "indices": [
+            11,
+            13,
+            15,
+            31,
+            33,
+            35,
+            37,
+            39,
+            41,
+            43,
+            45,
+            47,
+            49,
+            51,
+            59,
+            61,
+            63,
+            65,
+            67,
+            69,
+            75,
+            77
+          ],
+          "size": 22
+        }
+      ]
+    }
+  ],
+  "regions": [
+    {
+      "region_id": 20,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 20,
+      "mixed_removed_value_count": 25,
+      "additional_removed_values": [
+        [
+          6,
+          15
+        ],
+        [
+          8,
+          15
+        ],
+        [
+          10,
+          15
+        ],
+        [
+          22,
+          15
+        ],
+        [
+          56,
+          15
+        ]
+      ],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 89,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              6,
+              15
+            ],
+            [
+              8,
+              15
+            ],
+            [
+              10,
+              15
+            ],
+            [
+              22,
+              15
+            ],
+            [
+              56,
+              15
+            ],
+            [
+              58,
+              15
+            ],
+            [
+              70,
+              15
+            ]
+          ],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              6,
+              15
+            ],
+            [
+              8,
+              15
+            ],
+            [
+              10,
+              15
+            ],
+            [
+              12,
+              15
+            ],
+            [
+              22,
+              15
+            ],
+            [
+              32,
+              15
+            ],
+            [
+              44,
+              15
+            ],
+            [
+              46,
+              15
+            ],
+            [
+              48,
+              15
+            ],
+            [
+              50,
+              15
+            ],
+            [
+              56,
+              15
+            ],
+            [
+              58,
+              15
+            ],
+            [
+              60,
+              15
+            ],
+            [
+              68,
+              15
+            ],
+            [
+              70,
+              15
+            ],
+            [
+              76,
+              15
+            ]
+          ],
+          "tight_count": 2
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              14,
+              15
+            ],
+            [
+              34,
+              15
+            ],
+            [
+              36,
+              15
+            ],
+            [
+              38,
+              15
+            ],
+            [
+              40,
+              15
+            ],
+            [
+              42,
+              15
+            ],
+            [
+              58,
+              15
+            ],
+            [
+              62,
+              15
+            ],
+            [
+              64,
+              15
+            ],
+            [
+              66,
+              15
+            ],
+            [
+              70,
+              15
+            ]
+          ],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              12,
+              15
+            ],
+            [
+              14,
+              15
+            ],
+            [
+              32,
+              15
+            ],
+            [
+              34,
+              15
+            ],
+            [
+              36,
+              15
+            ],
+            [
+              38,
+              15
+            ],
+            [
+              40,
+              15
+            ],
+            [
+              42,
+              15
+            ],
+            [
+              44,
+              15
+            ],
+            [
+              46,
+              15
+            ],
+            [
+              48,
+              15
+            ],
+            [
+              50,
+              15
+            ],
+            [
+              58,
+              15
+            ],
+            [
+              60,
+              15
+            ],
+            [
+              62,
+              15
+            ],
+            [
+              64,
+              15
+            ],
+            [
+              66,
+              15
+            ],
+            [
+              68,
+              15
+            ],
+            [
+              70,
+              15
+            ],
+            [
+              76,
+              15
+            ]
+          ],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 0
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 0
+        }
+      ]
+    },
+    {
+      "region_id": 19,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 0,
+      "mixed_removed_value_count": 0,
+      "additional_removed_values": [],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 2,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 1
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 0
+        }
+      ]
+    },
+    {
+      "region_id": 18,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 14,
+      "mixed_removed_value_count": 20,
+      "additional_removed_values": [
+        [
+          45,
+          26
+        ],
+        [
+          47,
+          26
+        ],
+        [
+          49,
+          26
+        ],
+        [
+          59,
+          26
+        ],
+        [
+          69,
+          26
+        ],
+        [
+          77,
+          26
+        ]
+      ],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 61,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 4
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              13,
+              26
+            ],
+            [
+              17,
+              26
+            ],
+            [
+              19,
+              26
+            ],
+            [
+              25,
+              26
+            ],
+            [
+              27,
+              26
+            ],
+            [
+              29,
+              26
+            ],
+            [
+              33,
+              26
+            ],
+            [
+              43,
+              26
+            ],
+            [
+              51,
+              26
+            ],
+            [
+              53,
+              26
+            ],
+            [
+              61,
+              26
+            ],
+            [
+              67,
+              26
+            ],
+            [
+              73,
+              26
+            ],
+            [
+              75,
+              26
+            ]
+          ],
+          "tight_count": 4
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              13,
+              26
+            ],
+            [
+              33,
+              26
+            ],
+            [
+              43,
+              26
+            ],
+            [
+              45,
+              26
+            ],
+            [
+              47,
+              26
+            ],
+            [
+              49,
+              26
+            ],
+            [
+              51,
+              26
+            ],
+            [
+              59,
+              26
+            ],
+            [
+              61,
+              26
+            ],
+            [
+              67,
+              26
+            ],
+            [
+              69,
+              26
+            ],
+            [
+              75,
+              26
+            ],
+            [
+              77,
+              26
+            ]
+          ],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 0
+        }
+      ]
+    },
+    {
+      "region_id": 17,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 3,
+      "mixed_removed_value_count": 15,
+      "additional_removed_values": [
+        [
+          12,
+          27
+        ],
+        [
+          16,
+          27
+        ],
+        [
+          32,
+          27
+        ],
+        [
+          44,
+          27
+        ],
+        [
+          46,
+          27
+        ],
+        [
+          48,
+          27
+        ],
+        [
+          50,
+          27
+        ],
+        [
+          52,
+          27
+        ],
+        [
+          60,
+          27
+        ],
+        [
+          68,
+          27
+        ],
+        [
+          74,
+          27
+        ],
+        [
+          76,
+          27
+        ]
+      ],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 45,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              16,
+              27
+            ],
+            [
+              18,
+              27
+            ],
+            [
+              26,
+              27
+            ],
+            [
+              28,
+              27
+            ],
+            [
+              52,
+              27
+            ],
+            [
+              74,
+              27
+            ]
+          ],
+          "tight_count": 5
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              12,
+              27
+            ],
+            [
+              16,
+              27
+            ],
+            [
+              32,
+              27
+            ],
+            [
+              44,
+              27
+            ],
+            [
+              46,
+              27
+            ],
+            [
+              48,
+              27
+            ],
+            [
+              50,
+              27
+            ],
+            [
+              52,
+              27
+            ],
+            [
+              60,
+              27
+            ],
+            [
+              68,
+              27
+            ],
+            [
+              74,
+              27
+            ],
+            [
+              76,
+              27
+            ]
+          ],
+          "tight_count": 4
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 4
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 0
+        }
+      ]
+    },
+    {
+      "region_id": 16,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 14,
+      "mixed_removed_value_count": 20,
+      "additional_removed_values": [
+        [
+          45,
+          25
+        ],
+        [
+          47,
+          25
+        ],
+        [
+          49,
+          25
+        ],
+        [
+          59,
+          25
+        ],
+        [
+          69,
+          25
+        ],
+        [
+          77,
+          25
+        ]
+      ],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 51,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 4
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              13,
+              25
+            ],
+            [
+              17,
+              25
+            ],
+            [
+              19,
+              25
+            ],
+            [
+              25,
+              25
+            ],
+            [
+              27,
+              25
+            ],
+            [
+              29,
+              25
+            ],
+            [
+              33,
+              25
+            ],
+            [
+              43,
+              25
+            ],
+            [
+              51,
+              25
+            ],
+            [
+              53,
+              25
+            ],
+            [
+              61,
+              25
+            ],
+            [
+              67,
+              25
+            ],
+            [
+              73,
+              25
+            ],
+            [
+              75,
+              25
+            ]
+          ],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              13,
+              25
+            ],
+            [
+              33,
+              25
+            ],
+            [
+              43,
+              25
+            ],
+            [
+              45,
+              25
+            ],
+            [
+              47,
+              25
+            ],
+            [
+              49,
+              25
+            ],
+            [
+              51,
+              25
+            ],
+            [
+              59,
+              25
+            ],
+            [
+              61,
+              25
+            ],
+            [
+              67,
+              25
+            ],
+            [
+              69,
+              25
+            ],
+            [
+              75,
+              25
+            ],
+            [
+              77,
+              25
+            ]
+          ],
+          "tight_count": 3
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 0
+        }
+      ]
+    },
+    {
+      "region_id": 201,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 0,
+      "mixed_removed_value_count": 0,
+      "additional_removed_values": [],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 39,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 0
+        }
+      ]
+    },
+    {
+      "region_id": 252,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 12,
+      "mixed_removed_value_count": 12,
+      "additional_removed_values": [],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 77,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              16,
+              60
+            ],
+            [
+              52,
+              60
+            ],
+            [
+              74,
+              60
+            ]
+          ],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              14,
+              60
+            ],
+            [
+              16,
+              60
+            ],
+            [
+              34,
+              60
+            ],
+            [
+              36,
+              60
+            ],
+            [
+              38,
+              60
+            ],
+            [
+              40,
+              60
+            ],
+            [
+              42,
+              60
+            ],
+            [
+              52,
+              60
+            ],
+            [
+              62,
+              60
+            ],
+            [
+              64,
+              60
+            ],
+            [
+              66,
+              60
+            ],
+            [
+              74,
+              60
+            ]
+          ],
+          "tight_count": 3
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 4
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 1
+        }
+      ]
+    },
+    {
+      "region_id": 251,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 0,
+      "mixed_removed_value_count": 0,
+      "additional_removed_values": [],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 29,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 4
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 1
+        }
+      ]
+    },
+    {
+      "region_id": 250,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 2,
+      "mixed_removed_value_count": 2,
+      "additional_removed_values": [],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 3,
+        "removed_value_count": 23,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              14,
+              18
+            ],
+            [
+              14,
+              58
+            ]
+          ],
+          "tight_count": 4
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 7
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 4
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        }
+      ]
+    },
+    {
+      "region_id": 249,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 0,
+      "mixed_removed_value_count": 0,
+      "additional_removed_values": [],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 41,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 4
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 7
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 4
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 2
+        }
+      ]
+    },
+    {
+      "region_id": 248,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 0,
+      "mixed_removed_value_count": 0,
+      "additional_removed_values": [],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 5,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 7
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 7
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 8
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        }
+      ]
+    },
+    {
+      "region_id": 247,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 0,
+      "mixed_removed_value_count": 0,
+      "additional_removed_values": [],
+      "four_family_binary_closure": {
+        "status": "FIXED_POINT",
+        "iterations": 2,
+        "removed_value_count": 5,
+        "initial_additional_values_still_present": [],
+        "mixed_deficient_after_baseline_closure": false,
+        "mixed_additional_removals_after_baseline_closure": []
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 7
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 7
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 8
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        }
+      ]
+    },
+    {
+      "region_id": 246,
+      "baseline_deficient": false,
+      "mixed_deficient": false,
+      "baseline_removed_value_count": 7,
+      "mixed_removed_value_count": 13,
+      "additional_removed_values": [
+        [
+          35,
+          59
+        ],
+        [
+          37,
+          59
+        ],
+        [
+          39,
+          59
+        ],
+        [
+          41,
+          59
+        ],
+        [
+          63,
+          59
+        ],
+        [
+          65,
+          59
+        ]
+      ],
+      "four_family_binary_closure": {
+        "status": "DEFICIENT_HALL",
+        "iterations": 2
+      },
+      "family_scans": [
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 8
+        },
+        {
+          "parity": 0,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 7
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 0,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 6
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            1
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              21,
+              59
+            ],
+            [
+              33,
+              59
+            ],
+            [
+              43,
+              59
+            ],
+            [
+              51,
+              59
+            ],
+            [
+              61,
+              59
+            ],
+            [
+              67,
+              59
+            ],
+            [
+              75,
+              59
+            ]
+          ],
+          "tight_count": 9
+        },
+        {
+          "parity": 1,
+          "corners": [
+            0,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 5
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            1
+          ],
+          "deficient": false,
+          "removals": [
+            [
+              33,
+              59
+            ],
+            [
+              35,
+              59
+            ],
+            [
+              37,
+              59
+            ],
+            [
+              39,
+              59
+            ],
+            [
+              41,
+              59
+            ],
+            [
+              43,
+              59
+            ],
+            [
+              51,
+              59
+            ],
+            [
+              61,
+              59
+            ],
+            [
+              63,
+              59
+            ],
+            [
+              65,
+              59
+            ],
+            [
+              67,
+              59
+            ],
+            [
+              75,
+              59
+            ]
+          ],
+          "tight_count": 7
+        },
+        {
+          "parity": 1,
+          "corners": [
+            3,
+            2
+          ],
+          "deficient": false,
+          "removals": [],
+          "tight_count": 3
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "baseline_deficient_regions": 0,
+    "mixed_deficient_regions": 0,
+    "regions_with_additional_removals": 5,
+    "additional_removed_value_occurrences": 35
+  },
+  "limitation": "Native saved-data analysis, not a Lean certificate or current-frontier result."
+}

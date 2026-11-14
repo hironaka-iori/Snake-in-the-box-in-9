@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 214, 15 November 2026}
+\date{Research state after round 215, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -7057,6 +7057,64 @@ open, with thirteen saved regions and 1,801,017 cumulative nodes.
 No controlled comparison establishes a speed improvement, and no new
 snake or complete six-coordinate exclusion follows.
 
+
+\subsection{Actual word capacity in every interval family}
+\label{sec:word215}
+Partner capacity counts possible sharing relations. It can overlook
+competition for the actual word labels. The chosen and outside
+families each have distinct words, so a second necessary condition
+applies separately to all four parity families.
+
+\begin{proposition}[Domain capacity from the reconstructed path]\label{prop:word215}
+Let $F$ be one of the chosen or outside families in the saved $(0,6)$
+construction, let $J\subseteq F$, and let $U$ contain every currently
+allowed word of each interval in $J$. Every reconstructed induced
+path fitting these domains satisfies $|J|\le |U|$.
+If $|J|=|U|$, every interval of $F\setminus J$ must avoid $U$.
+Removing those words preserves the same complete assignment.
+\end{proposition}
+\begin{proof}
+The geometric partner argument gives distinct assigned words throughout
+$F$. In particular, the words assigned to $J$ inject into $U$, proving
+the inequality. At equality they use all of $U$. Each remaining member
+of $F$ has a word distinct from all of them, so its value survives
+the stated deletion. Other values and all path conditions are unchanged.
+\end{proof}
+
+The checked composition derives both subset distinctness and the required
+conflicts from the actual indexed-path premise. Unlike the spare-capacity
+argument, this implication requires no normalization at zero, raw-value
+bound, fixed alphabet cardinality or assumption that a full parity
+alphabet is occupied. Current-domain fitting and containment in $U$
+remain explicit. It applies when a small part of an otherwise
+unsaturated family has exhausted its available words.
+
+The native engine combines this condition with tight partner capacity.
+A word matching proposes a subset. A deficient union is counted
+directly before rejection; for a tight subset, the current domain
+union is recomputed before deletion. Filtering remains within one
+chosen or outside family, because words may legitimately be shared
+between the two families. Previously proved finite counting lemmas
+are reused; this is an application of established distinct-value
+reasoning, with a checked connection to the specific snake construction.
+Native execution and complete traversal retain their separate
+verification status~\cite{research215}.
+
+The separate continuation accepted 500 new jobs and examined 2,650,260 additional nodes. The added word-capacity rule recorded 29,311,693 value-removal operations and 841,841 contradiction returns. These are repeated operations across branches; they do not establish a speed improvement.
+The case remains open with 5 unfinished regions. No new parent class, longer snake or complete coordinate-case exclusion is obtained.
+
+A further comparison considers all maximal same-parity families whose
+words must be distinct. Each contains every multi-visit interval and
+one complete singleton family from each opposite corner pair. The saved
+model has four such families per parity. On the thirteen inherited
+regions, a single pass appears to give 35 extra deletions. After the
+existing four-family and binary rules reach closure, twelve regions
+admit no further deletion by these maximal families; the remaining
+region is already deficient under the existing rules. Thus this
+snapshot supplies no evidence of additional propagation strength.
+The comparison is a separate finite-domain calculation, without a
+new path exclusion or a checked implementation of mixed-family rules.
+
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
 from the explicit witness. The completed contributor upper theorem and
@@ -10601,6 +10659,13 @@ Snake-in-the-box project. \emph{Parity alphabets and tight partner
 capacity: checked deductions and native continuation}. Research
 milestone 214, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/214-parity-partner-capacity}.
+
+
+\bibitem{research215}
+Snake-in-the-box project. \emph{Combining actual-word capacity and partner
+capacity in the retained-coordinate construction}. Research milestone
+215, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/215-word-partner-capacity}.
 
 \end{thebibliography}
 \end{document}
