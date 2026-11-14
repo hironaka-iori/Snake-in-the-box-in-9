@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 213}
+\date{Research state after round 214}
 \begin{document}
 \maketitle
 
@@ -443,7 +443,29 @@ connected to the actual reconstructed path. A checked composition
 also justifies support filtering when two even or six odd exceptions
 exhaust the allowance in a 32-word pool. Alphabet membership,
 current domains and the complete native search certificate remain
-separate. No construction search state changes in this round.
+separate at the end of round 213.
+
+
+\paragraph{The next restriction: a tight partner subset.}
+Starting the free word at zero fixes its parity: each group change
+flips one free coordinate, so group $g$ uses parity $g\bmod2$.
+The saved group boundaries and the two 32-word alphabets are now
+checked in Lean, with six-bit integer range stated explicitly.
+
+For one parity let $s=32-|C|$. If a subset $J$ of outside intervals
+has only $N(J)$ possible chosen partners, then
+$|J|\le |N(J)|+s$. At equality, the words used by $J$ exhaust both
+those partner values and every unused-word allowance. All other
+outside intervals have distinct words, so they must share with
+partners outside $N(J)$. Their domains can be restricted accordingly.
+Lean checks the counting argument and assignment preservation.
+This can strengthen individual support when several intervals compete
+for a small partner set. A matching discovers candidate subsets;
+matching success alone does not establish a realizable snake.
+The new continuation examines 749,506 additional nodes and records
+3,054 value removals by this rule. Thirteen regions remain unfinished;
+the known lower bound and the number of unresolved coordinate choices
+are unchanged.
 
 \section{What would resolve the question}
 The current upper bound is 233. A smaller bound requires a stronger
@@ -462,7 +484,7 @@ universal 197-edge exclusion would settle the proposed value exactly.
 
 \smallskip
 {\small Detailed proofs, explicit witnesses and verification records are
-retained in the companion manuscript and milestones through round 213.
+retained in the companion manuscript and milestones through round 214.
 The known small-dimensional values are listed in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

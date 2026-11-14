@@ -1,0 +1,71 @@
+import ConcreteParity214
+
+set_option Elab.async false
+
+namespace PathParity214
+open ConcreteGeometry213 ConcreteParity214
+open WordParity214 IndexedCriterion206
+
+theorem free_adjacent (values : Nat → Nat)
+    (hp : IndexedCubePath 8
+      (fun i => [(z i).1, (z i).2] ++ word (values (group i))))
+    (g : Nat) (hg : g < 77) :
+    hamming (word (values g)) (word (values (g+1))) = 1 := by
+  have hc := List.all_eq_true.mp boundary_certificate g (List.mem_range.mpr hg)
+  have hb : boundary[g]! < 98 ∧ groups[boundary[g]!]! = g ∧
+      groups[boundary[g]!+1]! = g+1 ∧
+      baseRaw (boundary[g]!) = baseRaw (boundary[g]!+1) := by simpa using hc
+  let i : Fin 99 := ⟨boundary[g]!, by omega⟩
+  let j : Fin 99 := ⟨boundary[g]!+1, by omega⟩
+  have hz : z i = z j := hb.2.2.2
+  have hd := hp.2 i j (by simp [i,j])
+  simp only [j, i, if_pos rfl] at hd
+  have ha := hamming_append [(z i).1,(z i).2] [(z j).1,(z j).2]
+    (word (values (group i))) (word (values (group j))) (by rfl)
+  have hzero : hamming [(z i).1,(z i).2] [(z j).1,(z j).2] = 0 := by
+    rw [hz]
+    exact (hamming_eq_zero_iff _ _).mpr rfl
+  have hd' : hamming (word (values (group i))) (word (values (group j))) = 1 := by
+    change hamming ([(z i).1,(z i).2] ++ word (values (group i)))
+      ([(z j).1,(z j).2] ++ word (values (group j))) = 1 at hd
+    rw [ha,hzero] at hd
+    simpa using hd
+  simpa only [group,i,j,hb.2.1,hb.2.2.1] using hd'
+
+theorem normalized_group_parity (values : Nat → Nat)
+    (hp : IndexedCubePath 8
+      (fun i => [(z i).1, (z i).2] ++ word (values (group i))))
+    (hzero : values 0 = 0) :
+    ∀ g, g < 78 → parity (word (values g)) = decide (g%2=1) := by
+  intro g
+  induction g with
+  | zero => intro _; simp [hzero,word,parity,List.range_succ]
+  | succ g ih =>
+      intro hg
+      have hprev := ih (by omega)
+      have hd := free_adjacent values hp g (by omega)
+      have hf := adjacent_parity (word (values g)) (word (values (g+1)))
+        (by simp [word]) hd
+      rw [hprev] at hf
+      exact hf.trans (index_parity_step g).symm
+
+theorem normalized_pool_membership (values : Nat → Nat)
+    (hp : IndexedCubePath 8
+      (fun i => [(z i).1, (z i).2] ++ word (values (group i))))
+    (hzero : values 0 = 0)
+    (hbounded : ∀ g, g < 78 → values g < 64) :
+    ∀ g, g < 78 → values g ∈ pool (decide (g%2=1)) := by
+  intro g hg
+  have hpar := normalized_group_parity values hp hzero g hg
+  simp [pool,hpar,hbounded g hg]
+
+theorem mask_membership (b : Bool) (u : Nat) (hu : u < 64) :
+    (parityMask b).testBit u = true ↔ u ∈ pool b := by
+  have hc := List.all_eq_true.mp mask_certificate u (List.mem_range.mpr hu)
+  cases b <;> simp_all [pool]
+
+#print axioms free_adjacent
+#print axioms normalized_group_parity
+#print axioms normalized_pool_membership
+#print axioms mask_membership
+end PathParity214

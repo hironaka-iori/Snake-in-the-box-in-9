@@ -1,0 +1,19 @@
+E:\Snake-in-a-box\milestones\214-parity-partner-capacity\lean\PathParity214.lean:32:4: error: type mismatch
+  hd
+has type
+  0 + hamming (word (values (group i))) (word (values (group j))) = 1 : Prop
+but is expected to have type
+  hamming (word (values (group i))) (word (values (group j))) = 1 : Prop
+E:\Snake-in-a-box\milestones\214-parity-partner-capacity\lean\PathParity214.lean:60:49: error: unknown constant 'Bool.beq_eq_true_eq'
+E:\Snake-in-a-box\milestones\214-parity-partner-capacity\lean\PathParity214.lean:61:23: error: application type mismatch
+  ⟨hbounded g hg, hpar⟩
+argument
+  hpar
+has type
+  parity (word (values g)) = decide (g % 2 = 1) : Prop
+but is expected to have type
+  (parity (word (values g)) == decide (g % 2 = 1)) = true : Prop
+'PathParity214.free_adjacent' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'PathParity214.normalized_group_parity' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'PathParity214.normalized_pool_membership' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'PathParity214.mask_membership' depends on axioms: [propext, Quot.sound]

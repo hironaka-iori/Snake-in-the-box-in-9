@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 213, 15 November 2026}
+\date{Research state after round 214, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -6973,7 +6973,89 @@ Alphabet membership, current domain containment, coordinate
 normalization and the complete native search certificate remain separate.
 Decoding an arbitrary natural number into six bits alone does not prove
 membership in the intended parity alphabet. The saved search states and
-construction lower bound are unchanged in this round.
+construction lower bound were unchanged in round 213.
+
+
+\subsection{Parity alphabets and tight partner subsets}
+\label{sec:tight214}
+The next question is whether competition for partners gives deductions
+even when every outside interval has an individually supported word.
+The answer is affirmative at a tight subset. It supplies a stronger
+necessary restriction, without asserting that a partner matching can
+be assigned consistent word labels.
+
+First, the parity alphabet follows from the normalized reconstructed
+path. Between group $g$ and group $g+1$, the retained base is unchanged
+and one free coordinate changes. Hence the parity of the free word
+flips. If the first free word is zero, induction gives
+\[
+\operatorname{wt}(u_g)\equiv g\pmod 2.
+\]
+Each parity class of $Q_6$ contains 32 words: toggling a fixed coordinate
+pairs the even and odd classes. The checked literal boundary witnesses
+establish every group transition for the saved $(0,6)$ source. The
+six-bit parity masks and their cardinalities are also checked.
+The raw integer representation is required to lie below 64; six-bit
+decoding alone would permit larger integers with identical decoded bits.
+
+For one parity, let $C$ and $O$ be the chosen and outside interval
+families, with distinct assigned words within each family. Put
+$s=32-|C|$. For $J\subseteq O$, let $N(J)\subseteq C$ contain every
+listed partner of a member of $J$ whose current domain intersects that
+member's domain. The earlier capacity argument gives
+$|J|\le |N(J)|+s$.
+
+\begin{proposition}[Tight partner capacity]\label{prop:tight214}
+If $|J|=|N(J)|+s$, every interval in $O\setminus J$ shares its word
+with a chosen interval in $C\setminus N(J)$. Consequently its domain
+may be restricted to the union of its listed partners' domains outside
+$N(J)$, preserving every complete assignment that satisfies the path
+and current-domain conditions.
+\end{proposition}
+\begin{proof}
+Let $E$ be the outside intervals whose assigned words do not occur in
+$C$. The chosen words and these distinct additional words fit in 32
+positions, so $|E|\le s$. Every word assigned to $J$ occurs either
+among the values on $N(J)$ or among the values on $E$. Therefore
+\[
+|J|\le |N(J)|+|E|\le |N(J)|+s=|J|.
+\]
+All inequalities are equalities. Thus the words on $J$ exhaust both
+the partner values on $N(J)$ and all exceptional values. An interval
+of $O\setminus J$ has a different word from every interval of $J$.
+Its word is consequently nonexceptional and cannot equal a value on
+$N(J)$, proving the assertion. Its actual partner's word belongs to
+that partner's current domain, which proves preservation under the
+stated restriction.
+\end{proof}
+
+The rule can strengthen individual support even when no interval is
+forced to be exceptional. For example, use four words $\{0,1,2,3\}$
+and three chosen values fixed to $0,1,2$. Suppose outside intervals
+$x,y$ both have domain $\{0,3\}$ and can share only with the chosen
+value $0$. They consume that word and the one spare word. An outside
+interval $z$ with domain $\{0,1,2,3\}$ must therefore use $1$ or $2$.
+Each of $x,y,z$ initially has partner support, so the earlier rule
+counting individually unsupported intervals makes no such deduction.
+
+Lean checks Proposition~\ref{prop:tight214}, preservation of the
+same complete assignment, and the composition from the normalized
+reconstructed path for both parity families. Current-domain fitting,
+candidate coverage and support containment remain explicit.
+A matching with $s$ additional partner slots
+is used only to discover deficient or tight subsets; every native
+deduction recomputes and checks the required neighbor cardinality.
+The native search and its saved traversal retain their separate
+verification status~\cite{research214}.
+
+The separate continuation preserves the eleven saved regions before
+applying the stronger engine. Its 120 new jobs examine 749,506 nodes:
+105 subtrees are exhausted and 15 return unfinished regions. The added
+rule records 3,054 value removals and 120 contradiction returns.
+These count repeated operations across branches. The case remains
+open, with thirteen saved regions and 1,801,017 cumulative nodes.
+No controlled comparison establishes a speed improvement, and no new
+snake or complete six-coordinate exclusion follows.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
@@ -10512,6 +10594,13 @@ in whole-coordinate history searches}. Research record 212, November 2026.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Indexed-path geometry and
 source-specific partner restrictions}. Research record 213, November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/213-interval-geometry}.
+
+
+\bibitem{research214}
+Snake-in-the-box project. \emph{Parity alphabets and tight partner
+capacity: checked deductions and native continuation}. Research
+milestone 214, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/214-parity-partner-capacity}.
 
 \end{thebibliography}
 \end{document}

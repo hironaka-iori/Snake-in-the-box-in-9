@@ -1,3 +1,11 @@
+# Current result after round 214
+
+The normalized reconstructed path now supplies the32-word parity alphabets, and a tight partner-subset theorem gives a stronger assignment-preserving restriction. The native continuation records3,054 value removals by the added rule and749,506 new nodes, while case[0,6] remains open with13 regions. No new snake, numerical bound or complete coordinate-case exclusion is obtained. The recorded interval remains191<=a(9)<=233, with the contributor proof's independent full rebuild pending.
+
+Read [the mathematical argument](milestones/214-parity-partner-capacity/MATHEMATICAL_NOTE.md), [evidence](milestones/214-parity-partner-capacity/data/completion.json), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex). The goal remains active under the clarified pause instruction.
+
+## Earlier checkpoints
+
 # Current result after round 213
 
 The contributor branch has completed the unconditional bound233, supported by a saved assembly/axiom audit; independent full rebuilding remains pending. The recorded interval is191<=a(9)<=233. The construction proof now derives [0,6] partner restrictions from the actual reconstructed path and composes the spare-capacity filter. No new snake or construction-search exclusion is obtained.
