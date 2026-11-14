@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 208}
+\date{Research state after round 209}
 \begin{document}
 \maketitle
 
@@ -1300,10 +1300,45 @@ model are still outside the Lean coverage proof.
 
 This excludes one particular pair of retained histories. It does not
 raise the general requirement from six changed histories to seven.
-The pairs $(0,4)$ and $(3,4)$ have saved unfinished regions, and the
-other 25 pairs remain unresolved after their initial limited searches.
-Continuing these exact regions is the next step. A successful different
-parent would still need a separate $Q_9$ joining construction.
+The pairs $(0,4)$ and $(3,4)$ still have saved unfinished regions.
+
+A stronger geometric restriction arises from the two retained
+coordinates. Split the path into constant-free-word intervals.
+For distinct intervals of the same free-word parity, equal free
+words force every base pair to have distance two. Otherwise a
+vertex repeats or a chord appears. In a square each vertex has
+only one opposite corner, so both intervals must visit singleton
+base vertices at opposite corners.
+
+For one parity, let $M$ count intervals visiting several base
+vertices and $N_z$ those visiting only $z$. Choosing all multi-visit
+intervals and the larger singleton family from each opposite pair
+therefore gives distinct free words, proving
+\[
+M+\max(N_{00},N_{11})+\max(N_{01},N_{10})\le 2^{r-1}.
+\]
+For retained coordinates $(0,5)$ in the saved parent, the even
+counts are $M=12$ and $(N_{00},N_{01},N_{10},N_{11})=(5,4,10,10)$.
+The selected 32 intervals use every even word of $Q_6$.
+Thus each of the five singleton intervals at $00$ shares a word
+with one at $11$, and each of the four at $01$ shares with one at
+$10$. Exactly nine words are shared by pairs of intervals.
+
+In a branch, every even word must have a possible carrier in the
+32 selected intervals. A sole possible carrier is forced. Each
+outside singleton must also retain a word available to one of its
+opposite-corner partners. These deductions strengthen the search
+without prescribing which partner is chosen.
+
+Three Lean modules pass with thirteen reports: the square geometry,
+generic capacity and support implications, and extraction of the
+81 intervals and counts directly from the literal source. The full
+model assembly and native exclusion proof remain pending.
+The strengthened $(0,5)$ search remains open, as do $(0,4)$ and
+$(3,4)$. The other 24 unresolved pairs retain their initial limited
+searches. No new parent or global bound has been obtained.
+A successful different parent would still need a separate $Q_9$
+joining construction.
 
 \textbf{7. What is proved, and what remains.}
 The local count exclusions, new boundary counts, physical loss identity,
@@ -1358,5 +1393,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--208.}
+\texttt{snake9\_research.tex} and research records 175--209.}
 \end{document}

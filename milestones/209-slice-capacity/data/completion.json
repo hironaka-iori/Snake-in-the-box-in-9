@@ -1,0 +1,104 @@
+{
+  "round": 209,
+  "status": "PROGRESS",
+  "goal_state": "ACTIVE",
+  "pause_requested": false,
+  "utc": "2026-11-14T11:05:26.744654+00:00",
+  "base_head": "57966d6f53843064e96360f232a1cd12bc3e69eb",
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "new_exhausted_coordinate_pairs": 0,
+  "accepted_lean_modules": 3,
+  "theorem_reports": 13,
+  "proofs": [
+    {
+      "module": "Capacity209",
+      "receipt": "data\\Capacity209-audit.json",
+      "sha256": "af41450228bcf3608e68f7718d9a7f765c780065572f7f09213f98730f51c261",
+      "source_sha256": "70f9b06815716432b38c89b7bd2955f6551b593d869bb61116ed0fbf4329c2ac",
+      "olean_sha256": "98f347a92aec362a8df9b5ef9297b129ce926e68ab3adf2c4adabd9bb764c8c3",
+      "reports": 5
+    },
+    {
+      "module": "Square209",
+      "receipt": "data\\Square209-audit.json",
+      "sha256": "aa3d5d8eba071ec9192712007bbf1948e5f70f2fa8bab7e894041c6057663027",
+      "source_sha256": "3cf0de2d62f26ce2f3322e538c46457543f089553b70e399c714766d4a92c7bd",
+      "olean_sha256": "e8499fea6ee0c7a57b2c9a96801e3fce136a7dd24469393aeda6260881b1e6d9",
+      "reports": 4
+    },
+    {
+      "module": "ConcreteCapacity209",
+      "receipt": "data\\ConcreteCapacity209-audit.json",
+      "sha256": "c7439a3f6703731a0dcfecb35db5eb56af5b06dc158c0ce0530904584b790700",
+      "source_sha256": "c28d473101ccff1eb2df3ae8725d13246160be034474b22349ebeee30113b071",
+      "olean_sha256": "c110489e1633c1fb08a2ac8691797d698aa6480cfdc02cc78d5d3264134b02e0",
+      "reports": 4
+    }
+  ],
+  "cases": [
+    {
+      "index": 24,
+      "base": [
+        0,
+        4
+      ],
+      "status": "OPEN",
+      "committed_jobs": 150,
+      "pending": 8,
+      "nodes": 9625900,
+      "solver_seconds": 297.28900000000004,
+      "state": "data/case-24/state.json",
+      "state_sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "capacity_removals": 0,
+      "partner_removals": 0,
+      "capacity_failures": 0
+    },
+    {
+      "index": 9,
+      "base": [
+        3,
+        4
+      ],
+      "status": "OPEN",
+      "committed_jobs": 150,
+      "pending": 3,
+      "nodes": 8142891,
+      "solver_seconds": 253.36299999999994,
+      "state": "data/case-9/state.json",
+      "state_sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "capacity_removals": 0,
+      "partner_removals": 0,
+      "capacity_failures": 0
+    },
+    {
+      "index": 23,
+      "base": [
+        0,
+        5
+      ],
+      "status": "OPEN",
+      "committed_jobs": 100,
+      "pending": 7,
+      "nodes": 2683356,
+      "solver_seconds": 245.65499999999994,
+      "state": "data/case-23/state.json",
+      "state_sha256": "ec3701961111ed7af971295d4512853adaa4f26dc120bc559e70e39b4176d32e",
+      "capacity_removals": 2253129,
+      "partner_removals": 10136052,
+      "capacity_failures": 893000
+    }
+  ],
+  "six_coordinate_total_exhausted": 1,
+  "six_coordinate_total_unresolved": 27,
+  "capacity_result": "Case23 fixed[0,5] even capacity12+10+10=32, forcing nine antipodal singleton word sharings.",
+  "scope": "Written whole-path geometric argument; Lean checks square geometry, generic capacity consequences, and literal source-derived interval counts. Complete geometric-model assembly and concrete search certification remain pending.",
+  "contributor_ref": "7f549f144f5dae2ef9f6164757afd3f1e7bdbc25",
+  "resources": {
+    "startup_free_bytes": 1073741824,
+    "reserve_free_bytes": 805306368,
+    "private_limit_bytes": 268435456
+  },
+  "next": "Whole-paper review at round210; then continue preserved open frontiers with unchanged engines.",
+  "contributor_report": "data/contributor-update.json"
+}

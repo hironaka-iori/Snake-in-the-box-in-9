@@ -91,6 +91,10 @@ class unchanged. A different class therefore requires at least six
 changed histories at fixed length and index matching. The general
 pair criterion and residual-symmetry reduction pass Lean; the complete
 finite exclusion certificate remains pending.
+A square-base capacity inequality forces nine shared free words
+at opposite singleton slices for one retained-coordinate pair.
+Its geometric core, counting implications and source-derived
+interval counts receive separate Lean checks.
 No longer $Q_9$ snake or improved unconditional numerical bound is
 obtained. The optimum and the conjectured value 196 remain unresolved.
 \end{abstract}
@@ -8836,9 +8840,84 @@ Thus, at the native-enumeration evidence level, every induced 98-edge
 path retaining those two particular indexed histories is cube-isometric
 to the source. The general requirement of six changed histories remains
 unchanged: the other 27 retained-coordinate pairs are unresolved.
-The searches retaining $(0,4)$ and $(3,4)$ have saved open frontiers;
-the other 25 pairs retain only their initial limited searches. No new
+At that checkpoint, the searches retaining $(0,4)$ and $(3,4)$ had
+saved open frontiers; the other 25 pairs retained only their initial
+limited searches. No new
 parent, longer $Q_9$ snake or global numerical bound follows.
+
+
+\subsection{Square-base capacity and forced shared words}
+\label{sec:capacity209}
+Retain two coordinates and write each path vertex as $(z,u)$ with
+$z\in Q_2$ and $u\in Q_r$, where $r\ge1$. Divide the path into maximal
+intervals on which $u$ is constant. Their free-word parities alternate.
+Two distinct intervals of the same parity have no consecutive pair
+of original path indices.
+
+\begin{proposition}[Square-base capacity]
+For one free-word parity, let $M$ count intervals visiting more than
+one base vertex and let $N_z$ count intervals visiting only $z\in Q_2$.
+Then
+\[
+M+\max(N_{00},N_{11})+\max(N_{01},N_{10})\le 2^{r-1}.
+\]
+\end{proposition}
+\begin{proof}
+If two such intervals have the same free word, every base pair across
+them must have distance at least two. A repeated base word would repeat
+a full vertex, and base distance one would give a chord. Each square
+vertex has a unique vertex at distance two, its opposite corner.
+Nonempty visit sets with all cross pairs at distance two must therefore
+both be singletons at opposite corners.
+
+Every multi-visit interval consequently has a word distinct from every
+other interval of its parity. Choose all of these intervals and the
+larger singleton family from each opposite-corner pair. Their words
+are pairwise distinct, and only $2^{r-1}$ words have the chosen parity.
+\end{proof}
+
+The displayed demand is exact for the equal-word conflicts within
+one parity: pair singleton intervals across opposite corners as far
+as possible, give each pair one word, and give separate words to the
+unpaired and multi-visit intervals. Constraints between opposite
+free-word parities still have to be satisfied.
+
+For the saved 98-edge parent, retaining coordinates 0 and 5 gives
+81 intervals. Among the even intervals the counts are
+\[
+M=12,\qquad (N_{00},N_{01},N_{10},N_{11})=(5,4,10,10).
+\]
+The 12 multi-visit intervals and the ten singleton intervals at each
+of $10$ and $11$ therefore use all 32 even words of $Q_6$ exactly once.
+Every singleton at $00$ must share its word with a singleton at $11$;
+every singleton at $01$ must share with one at $10$. These give exactly
+nine words used by two intervals, with no word used by three intervals.
+The other 23 even words belong to one interval each. A multi-visit
+interval may contain more than one full vertex with its word.
+The shared partners are existential choices, not prescribed pairings.
+
+This saturation has consequences within every unfinished branch.
+Each even word must remain available in some selected clique domain.
+If only one such domain contains it, that variable must take it.
+An outside singleton domain may be intersected with the union of its
+opposite-corner partners' domains. These follow from the requirement
+that the 32 selected variables use all 32 words, and preserve every
+completion of the original model.
+
+Lean checks the square's opposite-corner property, generic finite
+capacity and saturation deductions, and the unique-carrier and
+partner-support implications. A separate kernel calculation derives
+the 81 intervals, both parity count vectors, and the 32 selected
+indices directly from the literal 99-vertex source. Three modules
+pass with thirteen dependency reports~\cite{research209}. The complete
+geometry-to-model assembly and native search remain separate proof
+obligations.
+
+The added deductions are active in a separately reviewed native
+search. Retained pairs $(0,4)$, $(3,4)$ and $(0,5)$ all remain open.
+The other 24 unresolved pairs retain only their initial limited
+searches. The previously exhausted pair $(1,4)$ remains the sole
+six-coordinate exclusion. No new parent or global $Q_9$ bound follows.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
@@ -10110,6 +10189,12 @@ I. Hironaka, T. Ma and S. Zhan, \emph{Continuing exact coordinate-history
 searches with preserved frontier coverage}. Research record 208,
 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/208-resumable-history}.
+
+\bibitem{research209}
+I. Hironaka, T. Ma and S. Zhan, \emph{Square-base capacity and forced
+shared words in coordinate-history searches}. Research record 209,
+14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/209-slice-capacity}.
 
 \end{thebibliography}
 \end{document}

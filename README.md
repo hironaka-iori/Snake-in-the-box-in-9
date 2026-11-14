@@ -1,3 +1,13 @@
+# Current result after round 209
+
+Square-base geometry gives a capacity inequality for whole coordinate histories. The retained pair [0,5] saturates the capacity of 32 even words, forcing nine shared words at opposite singleton slices. Three Lean modules pass with 13 reports, covering the geometric core, capacity and support implications, and source-derived interval counts. The full model and native exclusions remain separate.
+
+The strengthened search and continued pairs [0,4] and [3,4] remain open. No new Q9 witness or global bound is obtained. The goal remains active.
+
+Read [the argument](milestones/209-slice-capacity/MATHEMATICAL_NOTE.md), [completion and current states](milestones/209-slice-capacity/data/completion.json), [independent geometric review](milestones/209-slice-capacity/logs/capacity-review.md), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 208
 
 The six-coordinate model retaining histories 1 and 4 of the saved 98-edge Q8 parent is exhausted in native enumeration. Every target in that fixed indexed family is source-isometric. The other 27 retained pairs remain unresolved, so the general six-changed-history restriction is unchanged. Two open cases have saved continuations.
