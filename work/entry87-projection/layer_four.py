@@ -7,7 +7,7 @@ from ortools.sat.python import cp_model
 from solve import save,defects
 
 
-def find(dim,sizes,seconds,seed,hint=None,radius=None,flexible=False,desired=None):
+def find(dim,sizes,seconds,seed,hint=None,radius=None,flexible=False,desired=None,fixed_layers=()):
     size=1<<dim;order=[0,1,3,2];model=cp_model.CpModel()
     target=desired if desired is not None else sum(sizes)
     x={(l,v):model.new_bool_var(f"x{l}_{v}") for l in range(4) for v in range(size)}
@@ -15,6 +15,14 @@ def find(dim,sizes,seconds,seed,hint=None,radius=None,flexible=False,desired=Non
     # The first cross can be translated to address zero. The inner-coordinate
     # permutation group can place the second cross at a prefix of one's bits.
     sites=[[0],[(1<<i)-1 for i in range(1,dim+1)],list(range(size))]
+    if fixed_layers:
+        # A labelled fixed set generally breaks the translation and permutation
+        # symmetries. In particular the crossings may move relative to it.
+        assert hint is not None
+        sites=[range(size)]*3
+        for layer in fixed_layers:
+            for v in range(size):
+                model.add(x[layer,v]==int(v in hint[layer]))
     joints=[]
     for j,(l,r) in enumerate(zip(order,order[1:])):
         flags={}
