@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 216, 15 November 2026}
+\date{Research state after round 217, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -7182,7 +7182,48 @@ and the actual-path composition retain explicit domain and outer-relation
 premises. Native table interpretation and complete execution remain
 separate verification obligations~\cite{research216}.
 
-The continuation accepts 400 new jobs and examines 2,044,830 additional nodes. The new rule records 3,706,395 pair-removal operations. These repeated operations do not establish a speed improvement. The case remains open with 9 unfinished regions; no new parent, longer snake or complete coordinate-case exclusion is obtained.
+The continuation accepts 400 new jobs and examines 2,044,830 additional nodes. The new rule records 3,706,395 pair-removal operations. These repeated operations do not establish a speed improvement. At the round-216 cutoff, the case remains open with nine unfinished regions; no new parent, longer snake or complete coordinate-case exclusion is obtained.
+
+
+\subsection{A direct compatible-path target}
+\label{sec:direct217}
+Longer submitted jobs continue the same retained-coordinate model and
+the same joint-support engine. The nine inherited regions and all model
+files are unchanged at transfer; the new ledger links the cumulative
+predecessor totals explicitly. No additional propagation rule is introduced.
+The continuation accepts 120 jobs and examines 5,228,502 additional nodes. The case remains open with 8 unfinished regions. No different parent or complete coordinate-case exclusion is obtained. Longer job limits alone do not establish a speed improvement.
+
+
+The earlier layer records leave a more direct target for improving the
+lower bound. Fix the saved 98-edge path $P\subset Q_8$ and one of its
+endpoints $t\in\{0,78\}$. Search for a 93-edge induced path starting at
+$t$ in
+\[
+Q_8\bigl[V(Q_8)\setminus(V(P)\setminus\{t\})\bigr].
+\]
+Its other endpoint is unrestricted. The two paths then have exactly one
+common projected vertex, which is an endpoint of each. Placing them in
+opposite faces and joining at that vertex gives $98+93+1=192$ edges:
+cross-face cube edges occur only between equal projected vertices.
+The general joining implication was already checked in Lean.
+
+For this fixed parent, the earlier arbitrary 97-edge partner queries
+returned infeasible at both endpoints. These are solver exclusions
+without Lean contradiction certificates. In contrast, the 93-edge
+queries both remained unresolved after approximately 30 seconds.
+Thus finding a different optimal parent is an additional discovery
+stage that is unnecessary for the still-open 192-edge target.
+Neither outcome settles the conjectured value 196.
+
+Both allowed graphs have 158 vertices, 337 edges and 79 vertices of
+each parity. The saved enumeration finds that each graph is connected
+and has no articulation vertex. These facts give no elementary
+connectivity or parity obstruction to a 93-edge partner. The next
+search will consider all such partners, using selected-vertex degree
+conditions and cycle exclusions as an alternative to the earlier
+circuit formulation. Its runtime advantage is unproved.
+The source review, graph data and continuation records are retained
+in milestone 217~\cite{research217}.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
@@ -10742,6 +10783,12 @@ Snake-in-the-box project. \emph{Joint word support and two-step geometry
 in the retained-coordinate construction}. Research milestone 216,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/216-joint-word-support}.
+
+
+\bibitem{research217}
+Snake-in-the-box project. \emph{Longer parent-search jobs and the direct
+93-edge compatible-path target}. Research milestone 217, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/217-long-parent-search}.
 
 \end{thebibliography}
 \end{document}

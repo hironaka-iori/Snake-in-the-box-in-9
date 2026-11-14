@@ -1,3 +1,13 @@
+# Current result after round 217
+
+The longer continuation examines 5,228,502 additional nodes; case[0,6] remains open with 8 regions. Review identifies a direct unresolved target: a93-edge partner for the saved98-edge Q8 path would give192 edges in Q9. This route does not first require a different optimal parent. Both endpoint queries remain unresolved; the next search will use degree conditions and cycle exclusions.
+
+The interval remains191<=a(9)<=233. No new construction or numerical bound was obtained. The contributor233 proof's independent full rebuild remains pending. The goal is active.
+
+Read [the argument](milestones/217-long-parent-search/MATHEMATICAL_NOTE.md), [evidence](milestones/217-long-parent-search/data/completion.json), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 216
 
 Joint word-pair support is checked in Lean and retained at each submitted search root. The new continuation examines 2,044,830 nodes and records 3,706,395 repeated pair removals. Case[0,6] remains open with 9 regions. The recorded interval remains191<=a(9)<=233; no numerical bound or new construction is obtained, and the contributor proof's independent full rebuild is pending.

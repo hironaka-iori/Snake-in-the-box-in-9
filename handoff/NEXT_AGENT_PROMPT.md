@@ -1,24 +1,24 @@
-# Current state after round 216
+# Current state after round 217
 
 Goal ACTIVE. Continue across rounds; contributor work alone cannot trigger a pause. Honor direct user pauses and the stated own-work substantial-result or prolonged-stall condition. No email sent; no sending connector is available.
 
-Read milestones/216-joint-word-support/MATHEMATICAL_NOTE.md and data/completion.json. Four new Lean modules pass with 11 reports: two-step distance geometry and its actual-path consequence; simultaneous pair preservation and descendant containment; actual-path support composition; a concrete missing-common-neighbour example. Domain/relation premises and native interpretation/execution boundaries remain explicit.
+Read milestones/217-long-parent-search/MATHEMATICAL_NOTE.md, logs/compatible-parent-review.md and data/completion.json. No new Lean theorem or numerical bound this round. The native engine and accepted216 propagation proofs are unchanged. The saved transition audit is distinct from a complete native execution certificate.
 
-The recorded interval remains191<=a(9)<=233. Contributor b0521e1d and saved audit b65d30ca are unchanged. Independent full rebuilding of233 remains pending. No new snake, parent or complete coordinate-case exclusion was obtained.
+The interval remains191<=a(9)<=233. Contributor b0521e1d and final audit b65d30ca are unchanged; independent full rebuild of233 remains pending. No different parent or longer snake was obtained.
 
-| Case | Pair | Saved milestone | Cumulative jobs | Pending | Cumulative nodes |
+| Case | Retained pair | Saved milestone | Cumulative jobs | Pending | Cumulative nodes |
 |---|---|---|---:|---:|---:|
-|22|[0,6]|216-joint-word-support|1140|9|6,496,107|
+|22|[0,6]|217-long-parent-search|1260|8|11,724,609|
 |23|[0,5]|211-subset-capacity|296|11|3,721,372|
 |24|[0,4]|209-slice-capacity|150|8|9,625,900|
 |9|[3,4]|209-slice-capacity|150|3|8,142,891|
 
-Case22 state hash: 4599f3f699d81ee7e14295d537715d621db8a9bb5584ea8a9121d4f2ed592480. IMPORTANT: version2 state counters and receipt paths are local to216. The summary jobs/nodes/seconds are cumulative; new_jobs/local_nodes/local_seconds are local. history_parent links the immutable215 baseline740jobs/4,451,277nodes. Future transfers should take cumulative totals from the checked summary and preserve this explicit provenance, without treating local counters as lifetime totals. All new transitions and 740 predecessor receipt hashes were audited. The original model is unchanged; per-job root relation restrictions are not carried into other jobs.
+Case22 hash: 79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452. IMPORTANT: version2 state counters and receipt paths are local to217. The summary is cumulative and links216's cumulative1140-job baseline. Only retained[1,4] is exhausted among28 choices;27 remain unresolved.
 
-Next: Continue the retained(0,6) search with the current joint engine using longer bounded jobs, initially 30 seconds, to spend less time reloading and journaling small subtrees. Preserve the same resource limits and exact saved-frontier accounting. Assess completed cases or an actual new parent before adding further propagation. Pair information is demonstrably stricter in the saved comparison, but a controlled speed gain remains unproved. For any further mathematical extension, require an explicit relation or geometric witness beyond the existing root projections.
+Next: Prioritize the direct 93-edge partner of the saved 98-edge Q8 parent at both endpoints 0 and 78. Use exactly the 158 allowed vertices, one prescribed endpoint and the other endpoint free. Adapt the selected-degree and cycle-cut approach from rounds190/192, removing every replacement-specific overlap, omission and crossing constraint. Select94 vertices with47 of each parity; exactly two endpoint indicators, each bounded by its selection indicator; conditional selected-degree=2-endpoint. Use valid square/six-cycle cuts and add disconnected-cycle cuts as needed. A connected witness gives192 Q9 edges through the existing Lean-checked joining theorem. Inspect and Lean-check any new witness; UNKNOWN or a resource stop gives no exclusion. Do not repeat the already excluded fixed-parent97 query or assume this alternative is faster.
 
-Only[1,4] is exhausted among 28 six-coordinate choices; 27 remain unresolved. Saved comparison has940 unsupported pair occurrences but no immediate unary deletion, and omits some native rules. Runtime operation counts do not establish speed improvement.
+Exact sources: outputs/snake8_witness.json; work/layer_search.py and work/exact_search.py; outputs/layer_search.json and layer_threshold.json. Do not call layer_search.seed(), which rewrites the archived witness. Read the immutable JSON. Candidate replacement code: milestones/190-exchange-constraints/scripts/cycle_cuts.py and milestones/192-moving-ports/scripts/joint_replacement.py. Graph lists and static cycle vertex sets are in217/data/complement-graph.json. Existing joining proofs are in outputs/LayerJoining.lean and IntegerLayerBridge.lean, with later checked copies in188/189. Preserve endpoint orientation when constructing Q9.
 
-Keep one heavy worker; startup>=1GiBfree, reserve>=768MiB, private<=256MiB, Lean60s with -j1 -s8192,55s startupwait. Preserve failed attempts and assertions. No software tests unless requested. Never restart a live job on an observation timeout. Do not modify frozen216 evidence or accepted proofs. Preserve unrelated .gitignore and milestone50 edits.
+One heavy worker only; startup>=1GiB free, reserve>=768MiB, private<=256MiB; Lean60s,-j1,-s8192,55s startupwait. No software tests unless requested. Never restart a live process after an observation timeout. Preserve frozen evidence and unrelated .gitignore/milestone50 edits. Keep assertion checks enabled.
 
-Editor originals remain D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and snake9_frontier_explanation.tex. Both compile and match paper mirrors. Preserve author order and hypersetup. Last full-paper review210; next220. Publish only the exact scoped manifest.
+Editor originals: D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and snake9_frontier_explanation.tex. Both compile and match paper mirrors. Preserve all authors and hypersetup. Compile frontier first, main last. Full-paper review next220. Publish only the exact scoped manifest.

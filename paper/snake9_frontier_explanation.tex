@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 216}
+\date{Research state after round 217}
 \begin{document}
 \maketitle
 
@@ -508,16 +508,37 @@ establishes no speed advantage. The continuation therefore retains
 the pair information during later branching, deriving it only at each
 job's start and reloading the original relations for every new job.
 Native execution and full search certification remain separate.
-The new continuation examines 2,044,830 nodes and records 3,706,395 repeated pair-removal operations. The model remains open with 9 unfinished regions.
+The new continuation examines 2,044,830 nodes and records 3,706,395 repeated pair-removal operations. At the round-216 cutoff, the model remains open with nine unfinished regions.
+
+
+\paragraph{A direct target for 192 edges.}
+The saved 98-edge $Q_8$ path can still be used directly. At either
+endpoint $t$, remove its other 98 vertices and seek a 93-edge induced
+path starting at $t$, with its other endpoint free. The paths share
+only $t$, so their copies in opposite faces join to give
+$98+93+1=192$ edges. The reason is that a cross-face cube edge requires
+equal projected vertices. This is an application of the previously
+checked joining theorem.
+
+The old 93-edge queries at both endpoints remain unresolved. The
+97-edge queries for the same parent have solver exclusions, without
+Lean contradiction certificates. The 192-edge target therefore does
+not require a new optimal parent. Each allowed graph has 158 vertices,
+337 edges and equal parity classes of size 79; neither has an
+articulation vertex. The next direct search will use degree conditions
+and cycle exclusions, with no assumed speed improvement.
+
+The longer continuation of the different-parent search examines 5,228,502 additional nodes. It remains open with 8 unfinished regions and produces no new parent.
 
 \section{What would resolve the question}
 The current upper bound is 233. A smaller bound requires a stronger
 argument. The alternative comparisons above retain their own local
 certificates, geometric interpretations and complete graph-to-snake
 requirements, despite being numerically superseded.
-The construction route needs a genuinely different compatible parent
-or face arrangement and a checked joining construction. Finding a new
-$Q_8$ parent alone would not prove a longer $Q_9$ snake.
+A compatible 93-edge partner for the saved parent would improve the
+lower bound to 192. Other constructions may use a different parent
+or face arrangement. Finding a new $Q_8$ parent alone would still
+require a compatible joining construction.
 
 If every remaining six-coordinate model exhausts, the source-specific
 requirement rises to seven changed histories. If one yields a new
@@ -527,7 +548,7 @@ universal 197-edge exclusion would settle the proposed value exactly.
 
 \smallskip
 {\small Detailed proofs, explicit witnesses and verification records are
-retained in the companion manuscript and milestones through round 216.
+retained in the companion manuscript and milestones through round 217.
 The known small-dimensional values are listed in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
