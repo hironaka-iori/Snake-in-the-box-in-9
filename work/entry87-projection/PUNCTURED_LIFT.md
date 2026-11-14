@@ -1,0 +1,15 @@
+# Reassigning every crossing of a coordinate at once
+
+Delete one coordinate of a nine-cube snake. Consecutive copies of the same projected Q8 address are compressed into one. The resulting address sequence P is a simple path, although it may have chords. Indeed if an address occurred in nonconsecutive runs, the two selected cube vertices above it would coincide or be adjacent, contradicting inducedness. Each projected address is used either once or twice. A twice-used address is a crossing of the deleted coordinate.
+
+**Parity characterization.** Write zᵢ for the indicator that address i is doubled. A lift of the fixed ordered P to an induced snake exists exactly when the following three conditions hold.
+
+1. Every endpoint of a nonconsecutive projected edge has zᵢ=0. A doubled address uses both layers, so a nonconsecutive neighbour would meet it in some layer.
+2. For each nonconsecutive projected edge with indices i<j, the sum of zₖ for i<k<j is odd. This puts its two endpoints in different layers, avoiding the chord.
+3. Two consecutive addresses may not both be doubled. Their four lifted sites would fill a square.
+
+For sufficiency, start in layer zero and switch layer at exactly the doubled addresses. Within-column steps and consecutive projected edges provide the prescribed path. Consecutive columns have just one horizontal joining edge because at most one of the columns is doubled. Nonconsecutive columns with nonadjacent projections never touch. For adjacent projections the first two conditions put them in different layers. This checks all pairs. The number of lifted vertices equals |P| plus the number of crossings. All nonconsecutive-edge equations are linear modulo two, leaving only the consecutive-double prohibition after Gaussian elimination.
+
+Across the 131 bank snakes in all nine coordinate choices there are 1,179 ordered projections. Their affine systems have nullity zero in 792 cases, one in 194, two in 87, three in 58, four in 24, five in four, and six in 20. The complete enumeration has just **2,866 valid crossing patterns** across all indexed traces, fixing the starting layer. In **every** case the original crossing count is the maximum. Thus arbitrarily moving, deleting and inserting crossings of one axis while retaining the order and addresses of all other transitions cannot improve any bank snake past 191 edges.
+
+Next interchange two consecutive nondeleted coordinate steps. This replaces one internal projected address by the opposite corner of its square. A new address already present elsewhere is impossible by the simplicity assertion above. The 111,900 admissible replacements all fail to give one extra edge even when every crossing of the deleted coordinate is reconsidered. In 55,547 cases too few sites admit a crossing, and 55,511 have inconsistent parity equations. The remaining 842 are settled by enumerating the entire affine system. [Characterization and Gaussian elimination](punctured_lift.py), [fixed projections](punctured-fixed-0-131.json), [square replacements](punctured-square-0-131.json).
