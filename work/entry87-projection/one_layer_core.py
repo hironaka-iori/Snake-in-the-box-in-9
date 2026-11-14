@@ -49,9 +49,10 @@ def parity_bound(domain,root,tip=None):
     return min(51,2*min(n,m) if (root^tip).bit_count()%2 else 2*min(n-1,m)+1)
 
 
-def study(paths,trim,limit,nodes,write_index=False):
+def study(paths,trim,limit,nodes,write_index=False,candidate_data=None):
     A,B0,C0,D0=paths;allv=set(range(128));ac=set(A);bset=set(B0);dset=set(D0)
-    forms,generation=mutations(A,C0,trim);assert tuple(C0) in forms
+    forms,generation=candidate_data if candidate_data is not None else mutations(A,C0,trim)
+    if candidate_data is None:assert tuple(C0) in forms
     selected=[];viable=0
     for order,C in enumerate(forms):
         u=allv-ac-set(C);lb={A[-1],C[0]}|u;ld={C[-1]}|u
