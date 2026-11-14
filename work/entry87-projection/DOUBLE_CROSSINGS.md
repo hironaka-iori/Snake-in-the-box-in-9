@@ -1,0 +1,15 @@
+# A shared 95-edge middle in 84 of the 88 two-crossing snakes
+
+Eighty-eight bank snakes have a coordinate that changes exactly twice. That coordinate is unique in every one of these 88. Cutting the two crossing edges leaves two outer arms in one Q8 face and a single middle path in the other face. Normalize the middle path by translating its start to zero and renaming coordinates in order of first appearance. Also allow reversal. Equality of canonical transition words is equivalent to cube isometry of the ordered paths up to reversal.
+
+The 88 sources yield precisely three middle shapes. **Eighty-four have the same 95-edge middle.** The others split into two occurrences each of a 93-edge middle and a 92-edge middle. The complete path in the opposite face is allowed to change in the following result.
+
+**Theorem.** No 192-edge snake crossing a coordinate exactly twice has any of those three paths as its middle, up to cube isometry. For the 95-edge path there is a stronger conclusion. No 192-edge snake has this path as its entire intersection with an eight-dimensional face, even if it crosses the coordinate only once.
+
+The proof fixes the middle and allows both outer arms to range over every geometrically possible vertex. Only the copies of the two middle endpoints can cross, since all other middle vertices already have degree two. The two arms can have any lengths, including a single-vertex arm. Exactly two global endpoints lie on the opposite face when both roots cross. The selected degrees there include the crossing edge at either root.
+
+The 95- and 93-edge middles have opposite-parity roots. An even-length arm in vertices contributes equal numbers of both parities; an odd-length arm contributes one extra site of its root parity. The outside total is odd, so precisely one arm has odd size. Its endpoint parity is shared by both global endpoints, and the outside majority parity is their parity. The 92-edge middle has two even roots after normalization and even outside size. The even-minus-odd vertex difference is then the number of even global endpoints, which is zero or two. These restrictions are exact consequences of the arm decomposition.
+
+The 95-edge two-crossing formula is immediately contradictory after its static clauses. The other two require two extra closed-component clauses each. For every added clause the program reconstructs the full selected cycle, checks degree two at each of its vertices, and forbids simultaneous selection of its mutable outside vertices. A path cannot contain the entire cycle. A separate unified formula excludes either crossing count for the 95-edge shape and has no dynamic clauses. Its checked proof uses 46,411,874 resolution steps.
+
+[Source classification and full paths](double-cross-bank.json), [classifier](double_cross_bank.py), [two-arm encoding](bank_two_arms.py), [95-edge receipt](bank-two-doublebank-0-95-checked.json), [93-edge receipt](bank-two-doublebank-1-93-checked.json), [92-edge receipt](bank-two-doublebank-2-92-checked.json), [unified 95-edge refutation](fixed-face-doublebank-0-95-checked.json).
