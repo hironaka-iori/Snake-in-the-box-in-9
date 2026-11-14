@@ -40,7 +40,18 @@ if __name__=="__main__":
         receipt=json.loads(old.read_text())
         for f,s in [(cnf,"cnf"),(proof,"drat")]:
             if not f.exists() or digest(f)!=receipt[s+"_sha256"]:
-                with gzip.open(str(f)+".gz","rb") as src,f.open("wb") as dst:shutil.copyfileobj(src,dst)
+                archive=Path(str(f)+".gz")
+                parts=sorted(f.parent.glob(archive.name+".part*"))
+                if archive.exists():
+                    archives=[archive]
+                elif parts:
+                    # Parts are independent, ordered gzip members.
+                    archives=parts
+                else:
+                    raise FileNotFoundError(archive)
+                with f.open("wb") as dst:
+                    for a in archives:
+                        with gzip.open(a,"rb") as src:shutil.copyfileobj(src,dst)
             assert digest(f)==receipt[s+"_sha256"]
     else:
         result=model(q,bits,anchor_families=families,certificate=prefix)
