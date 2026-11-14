@@ -1,0 +1,9 @@
+# Two copies of a 96-edge arc
+
+Write P for the transition sequence of an induced 96-edge arc. Translate its first vertex to zero and permute its coordinate labels. Following P by a coordinate-permuted copy of P gives exactly 192 steps. Every successive pair is an edge. The only possible defects are cross-contacts between the two arms, excluding their common hinge. Count every such vertex equality or adjacency. The known permuted-block construction motivates this family. [Wynn, 2012](https://arxiv.org/abs/1201.1647).
+
+Take all 12,576 windows of 96 consecutive transitions in the 131 bank snakes. Each source path has 191−96+1=96 windows. Normalize each window and its reversal by first-use coordinate names, then keep the smaller word. This gives 2,187 classes. This normalization preserves the minimum over all permutations of the second block: reversing the entire doubled walk exchanges the two arms and inverts their relative isometry.
+
+For every class, exhaust the 9! coordinate permutations and count cross-contacts. That is **793,618,560** exact placements. The least possible count is **three forbidden pairs**, attained by 96 window classes. No 192-edge snake in this doubled-block family comes within two forbidden pairs of inducedness. The minimum counts contacts with their multiplicity as vertex pairs, including a repeated vertex if one occurs.
+
+The native program accumulates contributions from each vertex in the second arm against the closed neighbourhood of the first arm excluding the hinge. The partial score is nondecreasing, so it can stop examining a placement once it exceeds the best known score. All permutations still enter the comparison. For the minimizing permutation of every class a separate verifier constructs all 193 vertices and counts every forbidden pair directly. [Enumeration](phase_glue.cpp), [normalization and independent check](phase_glue.py), and `phase-*.json` hold the results.

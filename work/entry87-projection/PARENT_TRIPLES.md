@@ -19,3 +19,9 @@ For arbitrary triples, intersect each permitted binary relation with what is pos
 **The next comparison should test single-word probing first.** Fix each surviving word of each nonsingleton variable, run the original propagation once to closure, and restore the input. An immediate contradiction excludes that value in that region. The 57 reported region/group/word candidates include all three arbitrary-triple deductions. Compare propagation cost and search nodes at an equal node budget on copies of the same five roots. These are root-level decisions, not complete region exclusions or measured end-to-end speedups.
 
 [Reproducer](parent_triples.py), [binary-relation closure](pair_consistency.cpp), and [per-region results and candidate lists](parent-triples-215.json). With a C++20 build of `pair_consistency.cpp`, run `python parent_triples.py --cc /path/to/clang --pairs /path/to/pair-consistency.exe --probe-all` in the branch checkout.
+
+### Matched run
+
+The identical round-215 search engine was run on copies of all five input regions, once with their original domains and once with the 57 contradicted choices deleted at the root. Each run received the same 250,000-node budget. Region 738 exhausted in both versions, taking 61,626 and 58,021 nodes respectively. The other four hit the limit in both versions. Search-only elapsed totals were 121.531 and 121.703 seconds, respectively, before charging for the probes. This comparison gives no reason to install probing as the default. [Paired results](parent-probe-comparison.json) and [reproducer](probe_comparison.py).
+
+The independent [round-216 main checkpoint](https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/cfa2e8ed386259be99cd2564361591cd92a3b7bc/handoff/CURRENT_STATUS.md) has since integrated joint pair support and saved nine current regions. Continue those current regions using its 30-second job recommendation. The five round-215 roots above constitute the frozen comparison set.
