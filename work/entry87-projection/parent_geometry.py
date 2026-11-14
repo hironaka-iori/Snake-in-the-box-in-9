@@ -10,12 +10,16 @@ def word(vertex,coords):
     return sum(((vertex>>p)&1)<<i for i,p in enumerate(coords))
 
 
-def verify(case):
-    prefix=PIN+":milestones/"+MILESTONES[case]+"/"
+def verify(case,generated=False):
+    prefix=PIN+":milestones/"+MILESTONES.get(case,"216-joint-word-support")+"/"
     def get(p):return json.loads(subprocess.check_output(["git","show",prefix+p]))
     source=get("data/lower-dimensional-input.json")["8"]["vertices"]
-    m=get(f"data/case-{case}/model.json")
-    perms=get(f"data/case-{case}/permutations.json")
+    if generated:
+        from parent_family import construct
+        m,perms=construct(case)
+    else:
+        m=get(f"data/case-{case}/model.json")
+        perms=get(f"data/case-{case}/permutations.json")
     assert len(source)==99 and source[0]==0 and all(x<256 for x in source) and not defects(source)
     z=[word(x,m["base"]) for x in source]
     group=[0]
@@ -63,4 +67,5 @@ def verify(case):
 if __name__=="__main__":
     import argparse
     parser=argparse.ArgumentParser();parser.add_argument("case",type=int)
-    print(verify(parser.parse_args().case))
+    parser.add_argument("--generated",action="store_true")
+    a=parser.parse_args();print(verify(a.case,a.generated))

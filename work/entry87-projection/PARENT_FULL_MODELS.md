@@ -17,3 +17,15 @@
 [Encoder](parent_sat.py) builds the word formula from the untouched root model at commit `cfa2e8ed386259be99cd2564361591cd92a3b7bc`. CaDiCaL produces a refutation, then drat-trim checks it and writes its essential clauses. A second drat-trim run verifies the extracted proof against the full starting formula. The compressed inputs and extracted proofs use the prefix `parent-proof-CASE--1`. The numeric -1 denotes the full root. [Case 22 receipt](parent-sat-22--1-checked.json) and [Case 23 receipt](parent-sat-23--1-checked.json) identify the exact hashes. The root refutations took 729,687 and 658,789 solver conflicts respectively. The original project recorded Case 22 as open across nine native regions at round 216. [Round 216 comparison point](https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/cfa2e8ed386259be99cd2564361591cd92a3b7bc/handoff/CURRENT_STATUS.md).
 
 To reproduce a geometric check run `python parent_geometry.py 22`. To recreate the root certificate run `python parent_sat.py 22 -1 --full --budget 6000000 --checker /path/to/drat-trim` in the branch checkout on Windows with PySAT 1.9.dev17; substitute the second case number as needed. The written implication from hypercube geometry and the independently checked Boolean proofs give the stated finite exclusions. The longest known nine-cube path is unchanged by them.
+
+### Five further checked root proofs
+
+| Case | Retained pair | Input | Conflicts |
+|---:|---|---|---:|
+| 9 | 3, 4 | Saved root | 1,006,122 |
+| 24 | 0, 4 | Saved root | 1,708,961 |
+| 0 | 6, 7 | Generated from the seed | 232,440 |
+| 3 | 4, 7 | Generated from the seed | 189,077 |
+| 4 | 4, 6 | Generated from the seed | 271,113 |
+
+All five compressed core refutations were checked against their complete starting formulas. The independently written [model generator](parent_family.py) agrees on the exact binary relation tables, normalized domains and forbidden assignment sets for all four available saved root models. For generated cases, pass `--generated` to the encoder and the geometry verifier. The original archive excluded the separate pair {1,4} in its native traversal. These seven checked root proofs plus that existing result bring the combined recorded coverage to **eight of 28**, including all four unfinished cases listed in the [round-217 handoff](https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/8931c1efdf9397211b2047b7fea8e446c5d642d3/handoff/CURRENT_STATUS.md).
