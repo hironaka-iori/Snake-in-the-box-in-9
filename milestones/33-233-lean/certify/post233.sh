@@ -140,7 +140,7 @@ t0=$(date +%s)
 ( cd "$LEAN" && LEAN_PATH=$CHAIN nice -n 10 python3 "$GLB" --root "$LEAN" --direct --trust-mtime --no-ilean \
     --lean "${LEAN_BIN:-$LEANBIN/lean}" \
     --jobs 3 --heavy '^LocalWindow(DirUnsat|ShareUnsat)6SB233$' --heavy-jobs 1 \
-    --rss-cap-gb 10 --min-free-gb 4 --floor-gb 1.5 --min-disk-mb 1500 \
+    --rss-cap-gb "${AGG_RSS_CAP_GB:-10}" --min-free-gb 4 --floor-gb 1.5 --min-disk-mb 1500 \
     --log "$GLOG" LocalWindowDirUnsat6SB233 LocalWindowShareUnsat6SB233 )
 echo "guarded build: $(( $(date +%s) - t0 )) s"
 for m in LocalWindowDirUnsat6SB233 LocalWindowShareUnsat6SB233; do
