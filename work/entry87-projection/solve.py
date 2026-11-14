@@ -35,7 +35,8 @@ def defects(path):
             if ((v^path[i]).bit_count()!=1 if i+1==j else (v^path[i]).bit_count()<2)]
 
 
-def model(path, bits, conflict_budget=None, anchors=None, certificate=None, anchor_families=()):
+def model(path, bits, conflict_budget=None, anchors=None, certificate=None, anchor_families=(),
+          strengthened=False,distance_table=None):
     mask=sum(1<<b for b in bits)
     dim=len(bits)
     size=1<<dim
@@ -66,6 +67,31 @@ def model(path, bits, conflict_budget=None, anchors=None, certificate=None, anch
                 if not s:
                     return dict(status="UNSAT",reason="empty relation",runs=n)
                 relations[a,b]=s
+    if strengthened:
+        # At run r, at most r coordinates have appeared. In canonical first-use
+        # order every current word therefore uses only the first r coordinates.
+        for r in range(min(dim,n)):
+            domains[r]=[w for w in domains[r] if w < (1<<r)]
+        # Run-order steps are cube edges. Thus the free distance is at most
+        # the chronological gap, and same-parity pairs with an existing
+        # inequality are exactly distance two at gap two.
+        for a in range(n):
+            for b in range(a+1,min(n,a+dim)):
+                all_dist=sum(1<<d for d in range((b-a)%2,dim+1,2))
+                s=relations.get((a,b),all_dist) & ((1<<(b-a+1))-1)
+                if not s:
+                    return dict(status="UNSAT",reason="chronological distance",runs=n)
+                if s!=all_dist:
+                    relations[a,b]=s
+    if distance_table is not None:
+        assert len(distance_table)==n
+        for a,b in combinations(range(n),2):
+            s=distance_table[a][b]
+            full=sum(1<<k for k in range((a^b)&1,dim+1,2))
+            assert s & ~relations.get((a,b),full)==0
+            if s==0:return dict(status="UNSAT",reason="triangle closure",runs=n)
+            if s!=full:
+                relations[a,b]=s
     def lit(r,w):
         return 1+size*r+w
     def decode(chosen):
@@ -93,6 +119,17 @@ def model(path, bits, conflict_budget=None, anchors=None, certificate=None, anch
                 if c and r:
                     add([-seen,seen-dim-1])
         for (a,b),s in relations.items():
+            if strengthened:
+                # For a dense relation, binary forbidden pairs propagate each
+                # incompatibility at once and avoid long support clauses.
+                example=domains[a][0]
+                incompatible=sum(not (s>>(example^y).bit_count()&1) for y in domains[b])
+                if incompatible*3 < len(domains[b]):
+                    for x in domains[a]:
+                        for y in domains[b]:
+                            if not s>>(x^y).bit_count()&1:
+                                add([-lit(a,x),-lit(b,y)])
+                    continue
             for left,right in [(a,b),(b,a)]:
                 for x in domains[left]:
                     add([-lit(left,x)]+[lit(right,y) for y in domains[right]
