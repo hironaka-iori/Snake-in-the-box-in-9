@@ -31,6 +31,10 @@ The driver runs a positive control at every crossing count using a known 192-ver
 
 Extract the [207 original runs](projection-ball-inputs.zip) in this directory before running `python projection_ball.py`.
 
+**The full fourth shell is also excluded.** Exactly four changed addresses can give a positive crossing count in three ways. Removing two and adding two gives two crossings, removing three and adding one gives four, and removing four and adding none gives six. All three cases fail on every one of the 25 sources. The 75 fourth-shell cases represent 4,144,318,000 indexed support changes. Including the smaller shells gives 4,213,084,425 indexed choices with positive crossing count. A 193-vertex snake therefore differs in at least five addresses from every one of the 25 labelled source projections. Cube symmetries transport the statement to their images.
+
+The audit checked all eligible least-crossing addresses against their defining degree bound. For the balanced exchange, seven initially unfinished least-address cases were split by the possible second address using the separately verified crossing-pair filter. One four-crossing least-address case required a larger run. All 6,607 final decisions completed without a dynamic cycle cut. [Audit](projection_ball_four.py), [results](projection-ball-four.json), [83 original runs](projection-ball-four-inputs.zip).
+
 The first balanced exchange outside this radius removes two addresses and adds two. There are 37,741,600 indexed choices per source. The target still has 191 projected addresses and must therefore cross twice. Its two endpoints lie in the same face, and its segment in the other face joins the two doubled addresses. Solving for both crossing addresses and every face assignment allows all three projected segments to move.
 
 ## The middle arm must have 65 through 99 vertices
