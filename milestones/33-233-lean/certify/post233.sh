@@ -14,7 +14,8 @@
 #      then the real `final` (it only rewrites files whose text changed) and an mtime check;
 #   2. staleness simulation of the closure of the two aggregates (guarded_lake_build's own
 #      closure()/uptodate() with --trust-mtime): only the 23 expected modules may be stale;
-#   3. guarded build (--direct --trust-mtime --no-ilean) of LocalWindowDirUnsat6SB233 and
+#   3. guarded build (--direct --trust-mtime --no-ilean; lean binary $LEAN_BIN, default the toolchain's,
+#      e.g. LEAN_BIN=/home/user/leanbig.sh for `ulimit -s unlimited; lean -s 1048576`) of LocalWindowDirUnsat6SB233 and
 #      LocalWindowShareUnsat6SB233; their `#print axioms` lines are checked;
 #   4. floors overlay (symlinks) in a NEW directory; the two port top-level .olean files that the core
 #      also has (byte-identical copies, `cp -p` of 10 Nov) are removed from it, otherwise
@@ -137,6 +138,7 @@ echo "--- 3. guarded build of LocalWindowDirUnsat6SB233 and LocalWindowShareUnsa
 need_disk 1700
 t0=$(date +%s)
 ( cd "$LEAN" && LEAN_PATH=$CHAIN nice -n 10 python3 "$GLB" --root "$LEAN" --direct --trust-mtime --no-ilean \
+    --lean "${LEAN_BIN:-$LEANBIN/lean}" \
     --jobs 3 --heavy '^LocalWindow(DirUnsat|ShareUnsat)6SB233$' --heavy-jobs 1 \
     --rss-cap-gb 10 --min-free-gb 4 --floor-gb 1.5 --min-disk-mb 1500 \
     --log "$GLOG" LocalWindowDirUnsat6SB233 LocalWindowShareUnsat6SB233 )
