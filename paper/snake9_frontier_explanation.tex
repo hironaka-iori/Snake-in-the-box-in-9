@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 207}
+\date{Research state after round 208}
 \begin{document}
 \maketitle
 
@@ -1269,9 +1269,9 @@ All 56 models exhaust after excluding the witnessed source-isometric
 assignments. A different class of this saved parent therefore requires
 at least \emph{six} changed coordinate histories at fixed length and
 index matching, at the native-enumeration evidence level. The complete
-Lean certificate for the concrete searches remains pending. All 28
-six-coordinate choices reach their initial two-second limits and
-remain unresolved. No new parent is found.
+Lean certificate for the concrete searches remains pending. Of the 28
+six-coordinate choices, one now exhausts and 27 remain unresolved.
+No new parent is found.
 
 There is also a short checked obstruction to reversing this whole
 parent. Its edges $(1,3)$ and $(15,13)$ have equal bitwise differences.
@@ -1280,8 +1280,29 @@ coordinate directions. A cube isometry preserves equality of edge
 differences, so it cannot perform that reversal. Lean checks the
 argument and the relevant indices in the entire saved source.
 
-The next construction step is to retain unfinished branches of the
-six-coordinate models across resource stops. A successful different
+The continuation argument preserves progress across search limits.
+For a selected variable with domain $D$ and value $a\in D$, the two
+domains $\{a\}$ and $D\setminus\{a\}$ partition its possibilities.
+On interruption, retain the unfinished descendants and every ancestor's
+unexamined remaining values. Soundly exhausted branches contain no
+solution. Induction therefore preserves coverage of all unfinished
+assignments. Replacing a covered region by its covering descendants
+preserves global coverage; an empty frontier excludes solutions only
+when the propagation and exhaustion steps are sound. Lean checks
+these generic implications, with six dependency reports.
+
+For this source, retaining coordinate histories 1 and 4 now forces
+the original cube-isometry class, at the native-enumeration evidence
+level. The search resolves 52 interval variables in 51 committed
+steps and 1,713,998 nodes. An independent audit finds the complete
+receipt chain consistent. The actual native traversal and concrete
+model are still outside the Lean coverage proof.
+
+This excludes one particular pair of retained histories. It does not
+raise the general requirement from six changed histories to seven.
+The pairs $(0,4)$ and $(3,4)$ have saved unfinished regions, and the
+other 25 pairs remain unresolved after their initial limited searches.
+Continuing these exact regions is the next step. A successful different
 parent would still need a separate $Q_9$ joining construction.
 
 \textbf{7. What is proved, and what remains.}
@@ -1337,5 +1358,5 @@ No unconditional numerical bound or longer construction has been added.
 
 \smallskip
 {\small Full proofs and evidence are in the companion manuscript
-\texttt{snake9\_research.tex} and research records 175--207.}
+\texttt{snake9\_research.tex} and research records 175--208.}
 \end{document}

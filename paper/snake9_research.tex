@@ -8767,8 +8767,8 @@ finite families and the fixed-prefix deletion argument. The concrete
 coordinate action, normalization, exact tables, search coverage and
 isometry exclusions still require their assembled Lean certificate.
 The finite census retains its separate native status. The first
-six-coordinate screen reaches its time limits in all 28 cases;
-all remain unresolved and no new parent is found.
+six-coordinate screen reached its limits in all 28 cases. The
+continued calculation below resolves one of those cases.
 
 \begin{proposition}[Obstruction to reversing the saved parent]
 No cube isometry reverses the entire saved 98-edge parent.
@@ -8786,6 +8786,59 @@ Lean checks this argument and its index identities in the literal
 that is not assumed bijective. Transformations producing a different
 whole embedding remain available; the proposition concerns the
 specified reversal of this parent.
+
+
+\subsection{Continuing six-coordinate searches without losing coverage}
+\label{sec:history208}
+The six-coordinate models retain two indexed histories and allow the
+other six coordinates to vary. Their exact pair constraints and global
+lexicographic representative conditions are fixed throughout the search.
+A restricted branch need not itself be invariant under the residual
+coordinate permutations.
+
+\begin{proposition}[Coverage under continuation]
+Suppose a list of domain regions covers every acceptable assignment of
+a finite model. Replacing one region by regions that cover all its
+acceptable assignments preserves this property. A soundly exhausted
+region may be removed. If the resulting list is empty, the model has
+no acceptable assignment.
+\end{proposition}
+\begin{proof}
+Every acceptable assignment belongs to some old region. If that region
+is retained, it remains covered. Otherwise it belongs to one of the
+replacement regions by hypothesis. An exhausted region contains no
+acceptable assignment. An empty list covers none.
+\end{proof}
+
+The required split has an elementary justification. If variable $j$
+has domain $D_j$ and $a\in D_j$, replace that domain by either
+$\{a\}$ or $D_j\setminus\{a\}$. The two resulting regions are
+disjoint and cover the original one. When depth-first search is
+interrupted, save the unfinished descendants and the unexamined
+remaining-value region at every ancestor. Previously exhausted
+children have no acceptable assignment. Induction along the recursion
+stack proves coverage of the unfinished part, assuming sound propagation.
+All regions are intersected with the same original model conditions.
+
+Lean checks the domain split, disjointness, region replacement and
+empty-list implication, in six theorem dependency reports. The native
+propagation, recorded branch vectors, concrete model interpretation and
+numerical exhaustions remain separate verification obligations.
+
+For the saved 98-edge parent, the model retaining coordinates 1 and 4
+now exhausts. Coordinates are zero-based in the saved source. Its 52
+interval variables were resolved in 51 committed search steps totaling
+1,713,998 nodes. Independent audit of all linked records found a
+consistent chain from the root domains to an empty frontier, including
+six interrupted refinements and 45 exhausted regions~\cite{research208}.
+
+Thus, at the native-enumeration evidence level, every induced 98-edge
+path retaining those two particular indexed histories is cube-isometric
+to the source. The general requirement of six changed histories remains
+unchanged: the other 27 retained-coordinate pairs are unresolved.
+The searches retaining $(0,4)$ and $(3,4)$ have saved open frontiers;
+the other 25 pairs retain only their initial limited searches. No new
+parent, longer $Q_9$ snake or global numerical bound follows.
 
 \section{Construction experiments and their scope}\label{app:experiments}
 The experiments below record the tested search spaces and their outcomes. Their exclusions apply only to the stated fixed boundaries, templates, or resource-limited runs. They supply no additional premise in the proof of the global interval.
@@ -10051,6 +10104,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Residual coordinate symmetry,
 five-coordinate rigidity and a whole-parent reversal obstruction}.
 Research record 207, 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/207-five-history}.
+
+\bibitem{research208}
+I. Hironaka, T. Ma and S. Zhan, \emph{Continuing exact coordinate-history
+searches with preserved frontier coverage}. Research record 208,
+14 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/208-resumable-history}.
 
 \end{thebibliography}
 \end{document}

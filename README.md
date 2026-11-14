@@ -1,3 +1,13 @@
+# Current result after round 208
+
+The six-coordinate model retaining histories 1 and 4 of the saved 98-edge Q8 parent is exhausted in native enumeration. Every target in that fixed indexed family is source-isometric. The other 27 retained pairs remain unresolved, so the general six-changed-history restriction is unchanged. Two open cases have saved continuations.
+
+Lean accepts the generic split and coverage argument with six dependency reports. An independent audit verifies the completed 51-step receipt chain. Concrete search soundness remains outside the Lean proof. No new Q9 witness or global numerical bound is obtained; the goal remains active.
+
+Read [the argument](milestones/208-resumable-history/MATHEMATICAL_NOTE.md), [completion and continuation states](milestones/208-resumable-history/data/completion.json), [chain audit](milestones/208-resumable-history/logs/case18-chain-review.md), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 207
 
 All 56 five-coordinate models of the saved 98-edge Q8 parent now exhaust in native enumeration. Under fixed length and indexed comparison, a different cube-isometry class requires at least six changed coordinate histories. No new Q9 witness or global bound is obtained. All 28 six-coordinate choices remain unresolved after their initial two-second screens.

@@ -1,0 +1,85 @@
+{
+  "round": 208,
+  "status": "PROGRESS",
+  "goal_state": "ACTIVE",
+  "pause_requested": false,
+  "utc": "2026-11-14T10:46:07.624992+00:00",
+  "base_head": "cb3eeb2a0fff86e1150fc609113b39fa12d71d92",
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "accepted_lean_modules": 1,
+  "theorem_reports": 6,
+  "proof": {
+    "receipt": "data/Frontier208-audit.json",
+    "receipt_sha256": "69db30d42f045eae9994615cd0572ac7812627990020705ed6dad88ee5d90f59",
+    "source_sha256": "a49bea8bbda8b23eb9832e51990520be6fa741d0bd10dc68dba2b6417d925301",
+    "olean_sha256": "411491d63807ef489ffacc704a914f471cfde646ce69ceef5c1dde307119d2b0",
+    "scope": "Generic domain split and coverage preservation; concrete native enumeration uncertified."
+  },
+  "six_coordinate_cases": [
+    {
+      "index": 18,
+      "fixed_coordinates": [
+        1,
+        4
+      ],
+      "variables": 52,
+      "status": "EXHAUSTED",
+      "committed_jobs": 51,
+      "pending": 0,
+      "nodes": 1713998,
+      "solver_seconds": 41.90799999999998,
+      "state": "data/case-18/state.json",
+      "state_sha256": "b0de23c26f2ec3e2745ac6b7afc3983d28ba9e70063c2f88e5cedfac160fa585",
+      "model_sha256": "fbde0047ba311c9f9f591148b6d20d1d9223da52360ea551a135ab7da7db6efd"
+    },
+    {
+      "index": 24,
+      "fixed_coordinates": [
+        0,
+        4
+      ],
+      "variables": 59,
+      "status": "OPEN",
+      "committed_jobs": 100,
+      "pending": 5,
+      "nodes": 3430077,
+      "solver_seconds": 108.97500000000001,
+      "state": "data/case-24/state.json",
+      "state_sha256": "833ca39676a024c245971b7d9d714a4990164121a78f9e09d5144a9b6c78fcfa",
+      "model_sha256": "23b75b3fc57e53bbbdb563732fed1c4034a27d50a1fb9e09f7df25bd542ea068"
+    },
+    {
+      "index": 9,
+      "fixed_coordinates": [
+        3,
+        4
+      ],
+      "variables": 60,
+      "status": "OPEN",
+      "committed_jobs": 100,
+      "pending": 6,
+      "nodes": 3177434,
+      "solver_seconds": 99.18800000000003,
+      "state": "data/case-9/state.json",
+      "state_sha256": "4d57547675175d726ed112c23cb3bc7c623f1e0735132b635796db382b5ee3f6",
+      "model_sha256": "fbf0e20edc2c76c5417bc16c8ad9101d319ad605314a0751ad2a31491975bf97"
+    }
+  ],
+  "exhausted_pairs": 1,
+  "unresolved_pairs": 27,
+  "other_pairs": "25 pairs retain only their round207 initial limited searches.",
+  "resource_thresholds": {
+    "startup_free_bytes": 1073741824,
+    "reserve_free_bytes": 805306368,
+    "private_limit_bytes": 268435456
+  },
+  "limitations": [
+    "Native exhaustion remains outside the Lean proof.",
+    "The generic six-changed-history restriction is unchanged.",
+    "Single continuation writer; full power-loss durability not established.",
+    "A manual per-job STOP marker does not promise whole-batch cancellation."
+  ],
+  "contributor_ref": "997f188fc2ca893b4738081943a9f6f32cb11a23",
+  "next": "Continue frozen open frontiers from unchanged copies in the next milestone."
+}

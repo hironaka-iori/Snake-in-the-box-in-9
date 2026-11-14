@@ -1,0 +1,113 @@
+{
+  "status": "PASS",
+  "module": "Frontier208",
+  "source": "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\lean\\Frontier208.lean",
+  "source_sha256": "a49bea8bbda8b23eb9832e51990520be6fa741d0bd10dc68dba2b6417d925301",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\data\\Frontier208-execution.json": "7449f933377e7f512d5210bfae49dacc952bd40f38447e1e44a9c3515ac6c9e6",
+    "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\lean\\Frontier208.lean": "a49bea8bbda8b23eb9832e51990520be6fa741d0bd10dc68dba2b6417d925301",
+    "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\logs\\Frontier208-1794652203856867200\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\lean\\Frontier208.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\logs\\Frontier208-1794652203856867200\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2678374400,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 83,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2662748160,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 51384,
+          "ParentProcessId": 4744,
+          "PrivatePageCount": 48115712,
+          "WorkingSetSize": 24842240
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 83,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 2470354944,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 51384,
+          "ParentProcessId": 4744,
+          "PrivatePageCount": 56172544,
+          "WorkingSetSize": 211255296
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 85,
+      "snapshot_seconds": 0.01600000000325963
+    }
+  ],
+  "compiler_pid": 51384,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0780000000086147,
+  "axioms": [
+    {
+      "theorem": "Frontier208.fits_replace_iff",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Frontier208.domain_split",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Frontier208.domain_split_disjoint",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Frontier208.replace_covered_region",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "Frontier208.exhausted_region_cover",
+      "axioms": []
+    },
+    {
+      "theorem": "Frontier208.empty_frontier_excludes",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "2a01ec0d1327fa6f49754f3e62138d2e47307049dfcd0838fbb1c2610e7d0494",
+  "object": "E:\\Snake-in-a-box\\milestones\\208-resumable-history\\build\\Frontier208.olean",
+  "olean_sha256": "411491d63807ef489ffacc704a914f471cfde646ce69ceef5c1dde307119d2b0"
+}
