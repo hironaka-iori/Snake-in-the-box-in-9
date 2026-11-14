@@ -8,9 +8,11 @@ from collections import Counter
 from hashlib import sha256
 from itertools import combinations
 import json
+import os
 from pathlib import Path
 import time
-from pysat.solvers import Cadical195
+from pysat.solvers import Cadical195, pysolvers
+from pysat.card import CardEnc, EncType
 
 HERE = Path(__file__).resolve().parent
 BANK = HERE.parents[1] / "milestones/204-cyclic-symmetry/data/bank9-input.json"
@@ -33,7 +35,7 @@ def defects(path):
             if ((v^path[i]).bit_count()!=1 if i+1==j else (v^path[i]).bit_count()<2)]
 
 
-def model(path, bits, conflict_budget=None, anchors=None, certificate=None):
+def model(path, bits, conflict_budget=None, anchors=None, certificate=None, anchor_families=()):
     mask=sum(1<<b for b in bits)
     dim=len(bits)
     size=1<<dim
@@ -95,19 +97,37 @@ def model(path, bits, conflict_budget=None, anchors=None, certificate=None):
                 for x in domains[left]:
                     add([-lit(left,x)]+[lit(right,y) for y in domains[right]
                                                    if s>>(x^y).bit_count()&1])
+        next_id=n*(size+dim)
+        families=list(anchor_families)
         if anchors is not None:
+            families.append(anchors)
+        for anchors in families:
             assert 0<len(anchors)<=size//2 and len(set(anchors))==len(anchors)
             for a,b in combinations(sorted(anchors),2):
                 assert a%2==b%2 and not (relations.get((a,b),1)&1)
             # These distinct words exhaust all words of that parity at equality.
+            used=[]
             for w in range(size):
                 if w.bit_count()%2!=anchors[0]%2:
                     continue
                 literals=[lit(r,w) for r in anchors if w in domains[r]]
                 if len(anchors)==size//2:
                     add(literals)
+                else:
+                    next_id+=1
+                    occ=next_id
+                    used.append(occ)
+                    add([-occ,*literals])
+                    for v in literals:
+                        add([-v,occ])
                 for l1,l2 in combinations(literals,2):
                     add([-l1,-l2])
+            if used:
+                cap=CardEnc.atmost(lits=[-x for x in used],bound=size//2-len(anchors),
+                                   top_id=next_id,encoding=EncType.seqcounter)
+                for clause in cap.clauses:
+                    add(clause)
+                next_id=max(next_id,cap.nv)
         if conflict_budget is None:
             answer=sat.solve()
         else:
@@ -121,9 +141,40 @@ def model(path, bits, conflict_budget=None, anchors=None, certificate=None):
                 f.write(f"p cnf {nvar} {len(clauses)}\n")
                 for clause in clauses:
                     f.write(" ".join(map(str,clause))+" 0\n")
-            with certificate.with_suffix(".drat").open("w",encoding="ascii",newline="\n") as f:
-                for line in sat.get_proof():
-                    f.write(line+"\n")
+            proof=certificate.with_suffix(".drat")
+            if os.name=="nt":
+                # PySAT supplies CaDiCaL's packed proof stream through an open
+                # temporary file; decode incrementally to avoid a list of all
+                # clauses and a second copy of the binary proof in RAM.
+                pysolvers.flushpr(sat.prfp)
+                sat.prfile.seek(0)
+                with proof.open("wb") as f:
+                    mode=None; number=0; shift=0; tokens=[]
+                    for block in iter(lambda:sat.prfile.read(1<<20),b""):
+                        for char in block:
+                            if mode is None:
+                                if char not in (97,100):
+                                    raise ValueError(("bad DRAT mode",char))
+                                mode=char
+                                continue
+                            if not char:
+                                if shift: raise ValueError("unterminated literal")
+                                if mode==100: f.write(b"d ")
+                                if tokens: f.write(b" ".join(tokens)+b" ")
+                                f.write(b"0\n")
+                                mode=None; tokens.clear()
+                                continue
+                            number|=(char&127)<<shift
+                            if char&128:
+                                shift+=7
+                            else:
+                                literal=-(number>>1) if number&1 else number>>1
+                                tokens.append(str(literal).encode("ascii"));number=0;shift=0
+                    if mode is not None: raise ValueError("unfinished proof")
+            else:
+                with proof.open("w",encoding="ascii",newline="\n") as f:
+                    for line in sat.get_proof():
+                        f.write(line+"\n")
         if answer:
             positive=set(v for v in sat.get_model() if v>0)
             chosen=[next(w for w in domain if lit(r,w) in positive) for r,domain in enumerate(domains)]
