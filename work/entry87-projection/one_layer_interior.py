@@ -7,10 +7,10 @@ from one_layer_core import N,mutations,study
 from solve import defects,save
 
 
-def bridges(a,c,width):
+def bridges(a,c,width,starts=None,exclude_end_core=True):
     out={};nodes=0
     oldcores={tuple(c[i:i+len(c)-15]) for i in range(16)}
-    for i in range(1,len(c)-width-1):
+    for i in range(1,len(c)-width-1) if starts is None else starts:
         prefix=c[:i+1];suffix=c[i+width:];target=suffix[0]
         fixed=set(prefix+suffix);inside=set(prefix);route=prefix.copy()
         def grow(left):
@@ -21,7 +21,8 @@ def bridges(a,c,width):
             if distance==1:
                 if left!=1 or N[target]&inside!={v}:return
                 q=tuple(route+suffix)
-                if any(q[j:j+len(c)-15] in oldcores for j in range(len(q)-(len(c)-15)+1)):return
+                if q==tuple(c):return
+                if exclude_end_core and any(q[j:j+len(c)-15] in oldcores for j in range(len(q)-(len(c)-15)+1)):return
                 assert not defects(q);out[q]=None;return
             for w in N[v]-fixed-inside-{a[-1]}:
                 if N[w]&inside!={v} or N[w]&set(suffix[1:]):continue
