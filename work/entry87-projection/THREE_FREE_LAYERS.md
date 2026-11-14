@@ -35,3 +35,12 @@ A full follow-up excluded all 1,570 forward row-0 candidates by the independent-
 Both window interiors are removed before either is regrown, so a new first bridge can pass through a site vacated by the old second bridge. With at least four original transitions between the windows, the forward row-0 pilot exhausted every pair of ten-edge windows (231 placements, 39 changed C paths) and every pair of fourteen-edge windows (91 placements, 239 changed C paths). [Ten-edge results](two-layer-windows-0-0-10-4-5000-750000.json), [fourteen-edge results](two-layer-windows-0-0-14-4-5000-750000.json). The other source placements and unequal window lengths give distinct experiments.
 
 The first unequal-window pilot used row 4 in its forward orientation. Its original sizes are 48,48,47,48. Growing the third layer to 49 would suffice if the other three retain their lengths. Replacing ten and sixteen original edges in one joint search across 120 placements generated 152 distinct third-layer paths; all 152 were excluded by arm bounds. The same generator accepts other source rows, orientations and window widths. [Row 4 pilot](two-layer-windows-4-0-10x16-4-500-750000.json).
+
+**Complete two-window result.** For all fifteen sources and both orientations, changing two separated interior sections of C in either of the following menus and rebuilding B and D exhaustively yields no 193-vertex snake. Each window keeps its endpoints and allows its length to change by minus two, zero, two or four edges. At least four original edges separate the windows. The generator admits third-layer paths of 40 through 51 vertices.
+
+| Original window lengths | Window placements | Candidate occurrences | Resolved by initial bounds | Remaining occurrences |
+|---|---:|---:|---:|---:|
+| 14 and 14 | 2,940 | 8,943 | 8,855 | 88 |
+| 10 and 16 | 3,840 | 2,139 | 2,062 | 77 |
+
+The remaining 165 occurrences reduced to 18 distinct placed anchor pairs. All feasible length splits failed. Nineteen independently replayed DRAT cores verified in 333,793 resolution steps. No dynamic cycle clauses were needed for these cores. [Audit and sixty input filenames](two-window-campaign.json), [proof archive](two-window-certificates.zip), [decision and replay procedure](window_campaign.py).
