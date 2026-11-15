@@ -299,6 +299,13 @@ class World231(E.World):
     def share_cost(self, i, lv):
         if lv <= self.sF[i]:
             return 0.0, 'lean_floor' if i < self.nS and lv <= L.share_floor_level(self, i) else 'free233'
+        lf = getattr(self, 'levelfit', None)
+        if lf:                                    # measured fit: h = A s^b (lv / T)^c, cheapest call T >= lv
+            f = lf[self.kind_of(i)]
+            cs = [(T, s_) for T, s_ in self.scalls[i] if T >= lv and s_ is not None]
+            if cs:
+                return max(8111.0, min(f['A'] * max(s_, 0.01) ** f['b'] * max(lv / T, 0.4) ** f['c']
+                                       for T, s_ in cs)), 'fit'
         if i < self.nS:
             h, b = E.World.share_cost(self, i, lv)
             return h * self.ctx_factor('5', h), b
@@ -928,7 +935,20 @@ def cmd_cost(a):
     for kind in ('plain', '5', 'c7', 'c8'):
         pr = [r for r in (d['plain'] if kind == 'plain' else d['share']) if (kind == 'plain' or r['kind'] == kind) and not r['free']]
         fr = [r for r in (d['plain'] if kind == 'plain' else d['share']) if (kind == 'plain' or r['kind'] == kind) and r['free']]
-        h, (lo, mid, hi) = calibrated(pr, cal, kind)
+        if kind != 'plain' and pr and all(r['basis'] == 'fit' for r in pr if r['source']):
+            h = np.array([r['est_hints'] for r in pr], float)
+            tots = []
+            rng = np.random.default_rng(2)
+            for _ in range(100):           # bootstrap of the level fit
+                rr = [res[int(x)] for x in rng.integers(0, len(res), len(res))]
+                f = level_fit(rr)[kind]
+                tots.append(sum(max(8111.0, f['A'] * max(r['source']['seconds'] or 0.01, 0.01) ** f['b'] *
+                                    max(r['level'] / r['source']['T'], 0.4) ** f['c']) if r['source'] else r['est_hints']
+                                for r in pr))
+            tots.sort()
+            lo, mid, hi = tots[5], float(h.sum()), tots[94]
+        else:
+            h, (lo, mid, hi) = calibrated(pr, cal, kind)
         n = len(pr)
         if kind == 'plain':                       # families L1/L2 among the new keys, at 233's ratios
             n_cert = int(round(n * FAM_COUNT)); fam = FAM_HINTS
@@ -980,9 +1000,44 @@ def cmd_cost(a):
 
 
 
-def apply_calibration(W, cal):
-    """Costs on the calibrated basis: per kind, measured/model by log10 bin (calib_factors)."""
+
+def level_fit(res, c_fixed=None):
+    """Per share kind: log h = log A + b log s + c log(L / T) on the sampled records (s = solver seconds
+    of the source call at level T, L = the level re-solved); c is fitted jointly over the three kinds
+    (the 5-window sample has almost no record with L < T)."""
+    rows = {k: [r for r in res if r['kind'] == k and r.get('status') == 'UNSAT' and r.get('hints')
+                and (r.get('seconds') or 0) > 0.05 and r.get('source_T')] for k in ('5', 'c7', 'c8')}
+    if c_fixed is None:
+        X, y = [], []
+        ks = list(rows)
+        for ki, k in enumerate(ks):
+            for r in rows[k]:
+                v = [0.0] * (2 * len(ks) + 1)
+                v[2 * ki] = 1.0; v[2 * ki + 1] = math.log(r['seconds']); v[-1] = math.log(r['level'] / r['source_T'])
+                X.append(v); y.append(math.log(r['hints']))
+        co, *_ = np.linalg.lstsq(np.array(X), np.array(y), rcond=None)
+        c_fixed = float(co[-1])
+    out = {}
+    for k, rs in rows.items():
+        s_ = np.array([r['seconds'] for r in rs]); h = np.array([r['hints'] for r in rs], float)
+        q = np.array([r['level'] / r['source_T'] for r in rs])
+        A = np.vstack([np.ones(len(rs)), np.log(s_)]).T
+        co, *_ = np.linalg.lstsq(A, np.log(h) - c_fixed * np.log(q), rcond=None)
+        pred = np.exp(A @ co + c_fixed * np.log(q))
+        # bias correction: scale so that the sample's total is reproduced
+        sc = float(h.sum() / pred.sum())
+        out[k] = dict(A=float(np.exp(co[0])) * sc, b=float(co[1]), c=c_fixed, n=len(rs),
+                      log_sd=float(np.std(np.log(h) - np.log(pred))), total_scale=sc)
+    return out
+
+
+def apply_calibration(W, cal, res=None):
+    """Costs on the calibrated basis: plain keys by measured/model per log10 bin (calib_factors);
+    share certificates by the level-aware fit (level_fit) when results are given."""
     W.cbins = {k: {int(b): f for b, f in v['bins'].items()} for k, v in cal.items()}
+    if res:
+        W.levelfit = level_fit(res)
+        L.log(f'level fit: {W.levelfit}')
     for j in range(W.nK):
         if not W.kfree[j]:
             W.khints[j] *= W.calf('plain', W.khints[j])
@@ -1056,9 +1111,11 @@ def cmd_full(a):
     W = make_world(P, Q, B)
     res = load_results(a.results) if os.path.exists(a.results or os.path.join(DATA, 'certsample231_results.jsonl.gz')) else []
     cal = calib_factors(res) if res else {}
-    apply_calibration(W, cal)
+    apply_calibration(W, cal, res)
+    hist_fit = getattr(W, 'levelfit', None)
     L.log(f'calibration bins: { {k: v["bins"] for k, v in cal.items()} }')
-    hist = dict(target=TARGET, calibration={k: {x: v[x] for x in ('n', 'pooled', 'bins')} for k, v in cal.items()})
+    hist = dict(target=TARGET, calibration={k: {x: v[x] for x in ('n', 'pooled', 'bins')} for k, v in cal.items()},
+                level_fit=hist_fit)
     if a.tag0:
         s0, miss = load_plan(W, a.tag0)
         hist['loaded'] = a.tag0
