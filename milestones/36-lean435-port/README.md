@@ -257,6 +257,64 @@ Interface-only audit of both 232 certificates (`lean435/audit232.log`):
   instead.
 - **Free keys:** `lean435/data/free_*.jsonl.gz`.
 
+## Free keys, the 232 chain and the assembly
+
+### Free keys (`--free` mode)
+
+`lean435/tools/freeplan435.py` turns a plan's free keys into a job list for `prod435.py`. For the 232
+plan (1b) the list holds 4,215 plain certificates and 210 share certificates, about 4.78 G hints:
+
+| certificates | what they are |
+|---:|---|
+| 2,570 | 233 seeds, with their widened bounds |
+| 1,383 | keys of the 235–237 replays |
+| 262 | H8 cuts |
+| 210 | free233 share keys, each with its 233 cap |
+
+The 7,289 keys derived by L1 or L2 get no certificate of their own; the 2,832 reuse233 keys that are L1 or L2 of a 233 seed are glue too. They are glued with
+`Families.refuted_key_of_wide` or `Families.refuted_key_sub`, as `cert233.proof_term` does. The table of
+which seed each key comes from is `lean435/data/freederive_*.json.gz`.
+
+### The 232 chain in 4.35
+
+`lean435/tools/chain435.sh PLAN TAG BOUND` runs the generators read-only, then `port.py`, then
+`build.py`. For plan `certplan231_m232_541_1b` with tag `M232B541`:
+
+- 427 modules, 3,483 CPU-s in all.
+- The 204 shards took 1,628 CPU-s, 5.1–10.0 s each; in 4.19 they took 3,097 s.
+- The ctx cover is split into 12 parts of about 46 s each, each at most 0.54 GB.
+- No new fixes were needed.
+- `upper_232_of_refuted6SCM232B541 : AllRefuted6S… → AllRefutedShare6S… → AllRefutedCtx6SC… → Floors233 → m ≤ 232`
+  prints `[propext, Classical.choice, Quot.sound]`.
+
+### Assembly
+
+`glue435.py` writes one glue module per chunk of the chain's key lists. Each one privately imports the
+certificate modules of its keys and publicly states that chunk:
+
+| glue module | statement |
+|---|---|
+| `Glue6SC<T>D<c>` | `AllRefutedList dirChunk…` |
+| `…H8` | the H8 cuts |
+| `…S<i>` | the share chunk |
+| `…C7_<i>`, `…C8_<i>` | the ctx chunks |
+
+For 232 that makes 218 modules. They need 12,507 certificate modules: 8,082 paid, 4,215 free plain and
+210 free share. The top module `Glue6SC<T>` combines the chunks through the lemmas in
+`lean435/glue/Glue435.lean` (`allRefutedList_flatten`, `allRefutedShareList_flatten`, `allP_flatten`).
+
+`assemble435.py` compiles every glue module from the certificate interfaces alone. It uses
+`audit.py final --out-olean`: a `--setup` file that lists only the public `.olean` of each
+certificate, with `strace` running. It then compiles the top module. Last, it audits
+`upper_232_435 := upper_232_of_refuted6SC… allRefuted… allRefutedShare… allRefutedCtx…
+Floors233Port.floors233` against the axiom whitelist.
+
+**Tested on 4 chunks.** Chunks D57, D61, S24 and C7_50 need 36 certificates, which were produced locally
+by `prod435.py run --no-sync` and gathered by `prod435.py collect`. D61 includes L2 terms. All four
+glue modules built and all printed `[propext, Classical.choice, Quot.sound]`. Only public `.olean`
+files of the certificates were opened. The full top module and the final theorem wait for all the
+certificates.
+
 ## Not done, and what the floors would need
 
 - **Floors** (`Floors233`, milestone 33 FLOORS.md; 1,044 modules fetched from main, 2.3 CPU-hours in 4.19
