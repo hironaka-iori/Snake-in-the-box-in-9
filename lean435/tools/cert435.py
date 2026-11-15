@@ -21,8 +21,10 @@ if sys.argv[1:2] == ['to435']:
 sys.path.insert(0, CERT)
 sys.dont_write_bytecode = True
 import cert231  # noqa: E402
-cert231.DATA = os.path.join(ROOT, 'lean435', 'data')
-cert231.CORE = os.path.join(ROOT, 'lean435', 'cores')
+cert231.DATA = os.environ.get('CERT435_DATA', os.path.join(ROOT, 'lean435', 'data'))
+cert231.CORE = os.environ.get('CERT435_CORE', os.path.join(ROOT, 'lean435', 'cores'))
+if os.environ.get('CERT435_SEEDS'):                 # a seed plan of our own (prod435.py: every key a seed)
+    cert231.seeds_path = lambda a: os.environ['CERT435_SEEDS']
 # the parser's --core default was bound at import time of main(): pass it explicitly
 args = sys.argv[1:]
 if '--core' not in args:

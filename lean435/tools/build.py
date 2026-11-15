@@ -73,6 +73,7 @@ def main():
     ap.add_argument('--min-free-gb', type=float, default=3.0)
     ap.add_argument('-D', action='append', default=[], help='extra lean option name=value')
     ap.add_argument('--lean', default=LEAN, help='lean binary (4.19 for comparisons)')
+    ap.add_argument('--lib', action='append', default=[], help='extra LEAN_PATH dir of built modules (e.g. the core stack)')
     ap.add_argument('--keep-going', action='store_true', help='build what does not depend on a failure')
     ap.add_argument('--allow-sorry', action='store_true', help='for the bad-certificate tests only')
     ap.add_argument('targets', nargs='+')
@@ -80,7 +81,7 @@ def main():
     src, bld = os.path.abspath(a.src), os.path.abspath(a.build)
     os.makedirs(bld, exist_ok=True)
     big = {k: float(v) for k, v in (x.split('=') for x in a.big)}
-    lp = [bld] + [os.path.join(a.mathlib, '.lake/build/lib/lean')]
+    lp = [bld] + [os.path.abspath(x) for x in a.lib] + [os.path.join(a.mathlib, '.lake/build/lib/lean')]
     pk = os.path.join(a.mathlib, '.lake/packages')
     if os.path.isdir(pk):
         lp += [os.path.join(pk, p, '.lake/build/lib/lean') for p in sorted(os.listdir(pk))]
