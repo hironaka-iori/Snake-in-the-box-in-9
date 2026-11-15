@@ -73,6 +73,7 @@ def main():
     ap.add_argument('--min-free-gb', type=float, default=3.0)
     ap.add_argument('-D', action='append', default=[], help='extra lean option name=value')
     ap.add_argument('--lean', default=LEAN, help='lean binary (4.19 for comparisons)')
+    ap.add_argument('--keep-going', action='store_true', help='build what does not depend on a failure')
     ap.add_argument('--allow-sorry', action='store_true', help='for the bad-certificate tests only')
     ap.add_argument('targets', nargs='+')
     a = ap.parse_args()
@@ -118,7 +119,7 @@ def main():
     logf = open(os.path.join(bld, 'build-log.jsonl'), 'a')
     pending = list(order)
     running = {}  # module -> (proc, t0, peak_anon, peak_rss, outfile)
-    done, failed = set(), None
+    done, failed, bad = set(), None, set()
     built = skipped = 0
     while running or (pending and failed is None):
         # start what can start
@@ -126,6 +127,13 @@ def main():
             alone = any(m in big for m in running)
             if alone or len(running) >= a.jobs:
                 break
+            while True:
+                skip = [m for m in pending if any(d in bad for d in deps[m])]
+                if not skip:
+                    break
+                for m in skip:
+                    bad.add(m)
+                    pending.remove(m)
             ready = [m for m in pending if all(d in done for d in deps[m])]
             if not ready:
                 break
@@ -201,7 +209,9 @@ def main():
             del running[m]
             if code != 0 or (rec['sorry'] and not a.allow_sorry) or 'error:' in txt:
                 print(f'FAILED {m} (exit {code}, {rec["wall"]} s, {rec["anon_gb"]} GB)\n{txt[-4000:]}', flush=True)
-                failed = m
+                bad.add(m)
+                if not a.keep_going:
+                    failed = m
                 continue
             with open(out + '.stamp', 'w') as f:
                 f.write(want + '\n')
@@ -209,8 +219,10 @@ def main():
             done.add(m)
             built += 1
             print(f'ok {m}: {rec["wall"]} s, cpu {rec["cpu"]} s, anon {rec["anon_gb"]} GB', flush=True)
-    print(f'built {built}, up to date {skipped}, of {len(order)}' + (f'; FAILED at {failed}' if failed else ''))
-    sys.exit(1 if failed else 0)
+    nf = sorted(m for m in bad if m not in done)
+    print(f'built {built}, up to date {skipped}, of {len(order)}' + (f'; FAILED at {failed}' if failed else '')
+          + (f'; failed or skipped: {len(nf)}' if nf else ''))
+    sys.exit(1 if (failed or nf) else 0)
 
 
 if __name__ == '__main__':

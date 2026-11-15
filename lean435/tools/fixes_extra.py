@@ -9,4 +9,13 @@ FIXES = [
     ('LocalWindowBridge', "      · rw [if_neg h0, show j = m - 1 by omega]; simp)\n  simpa using h\n",
      "      · rw [if_neg h0, show j = m - 1 by omega]; simp)\n  simpa [cnt] using h\n", 1,
      'same (frame_deg_end)'),
+    ('DirectionWindowBridge7', "    CoverH T hkeys := by\n  simpa [coverHb] using h\n",
+     "    CoverH T hkeys := by\n  simpa [coverHb, CoverH] using h\n", 1,
+     '`simpa using h` no longer unfolds the goal definition `CoverH`'),
+    ('DirectionWindowBridge6S', "    CoverH8 T hkeys := by\n  simpa [coverH8b] using h\n",
+     "    CoverH8 T hkeys := by\n  simpa [coverH8b, CoverH8] using h\n", 1,
+     '`simpa using h` no longer unfolds the goal definition `CoverH8`'),
+    ('SharedOuterSwitch', "simpa only [mirror,Finset.pair_comm h.y h.x] using hF",
+     "simpa only [mirror,MissingAtNeighbor.mirror,Finset.pair_comm h.y h.x] using hF", 1,
+     'simp no longer unfolds `MissingAtNeighbor.mirror` through the ambiguous `mirror`'),
 ]

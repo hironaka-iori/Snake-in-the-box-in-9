@@ -55,6 +55,19 @@ if os.path.exists(EXTRA_FIXES_FILE):
     exec(open(EXTRA_FIXES_FILE).read(), _ns)
     FIXES += _ns['FIXES']
 
+# R6: renames of mathlib/core lemmas between the 4.19 mathlib and v4.35.0, applied by regex to every
+# support/chain file (pattern, replacement, reason). Counts per rule are printed and kept in the manifest.
+RENAMES = [
+    (r'Finset\.card_sdiff (?=[\w(])', 'Finset.card_sdiff_of_subset ',
+     '`Finset.card_sdiff` lost its subset hypothesis; the old statement is `card_sdiff_of_subset`'),
+]
+EXTRA_RENAMES_FILE = os.path.join(HERE, 'renames_extra.py')
+if os.path.exists(EXTRA_RENAMES_FILE):
+    _ns = {}
+    exec(open(EXTRA_RENAMES_FILE).read(), _ns)
+    RENAMES += _ns['RENAMES']
+RENAME_COUNTS = {}
+
 IMPORT_RX = re.compile(r'^import\s+(.*)$')
 
 
@@ -158,6 +171,10 @@ def port_support(mod, text):
             out.append(ln)
     out += ['', '@[expose] public section', '']
     body = '\n'.join(lines[hend:])
+    for (pat, rep, _why) in RENAMES:
+        body, n = re.subn(pat, rep, body)
+        if n:
+            RENAME_COUNTS[pat] = RENAME_COUNTS.get(pat, 0) + n
     body = re.sub(r'TagsSW\.refutedShareFrom_of_sat ([\w.]+)\.sat \1\.unsat', r'\1.refuted', body)
     return '\n'.join(out) + body
 
@@ -221,7 +238,7 @@ def main():
         f.write('module\toriginal\tsha256_original\tsha256_port\n')
         for r in man:
             f.write('\t'.join(r) + '\n')
-    print(f'ported {len(order)} modules to {a.out}; fixes applied: {len(used)}; external: {sorted(ext)}')
+    print(f'ported {len(order)} modules to {a.out}; fixes applied: {len(used)}; renames: {RENAME_COUNTS}; external: {sorted(ext)}')
 
 
 if __name__ == '__main__':
