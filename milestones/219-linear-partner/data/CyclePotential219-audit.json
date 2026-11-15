@@ -1,0 +1,124 @@
+{
+  "status": "PASS",
+  "module": "CyclePotential219",
+  "source": "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\CyclePotential219.lean",
+  "source_sha256": "663713a78b8ed88bd889d98e0077e81b526a8a622a36522561185c4d1a0d8a56",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\data\\CyclePotential219-execution.json": "b48ecba33402bf74830e8a4c5163d51fc6fc9107f8f75b0942e60402be9ee442",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\CyclePotential219.lean": "663713a78b8ed88bd889d98e0077e81b526a8a622a36522561185c4d1a0d8a56",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\logs\\CyclePotential219-1794707988489114300\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\CyclePotential219.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\logs\\CyclePotential219-1794707988489114300\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1147748352,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 93,
+    "snapshot_seconds": 0.02253499999642372
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1158029312,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 50160,
+          "ParentProcessId": 54164,
+          "PrivatePageCount": 48177152,
+          "WorkingSetSize": 26591232
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.018102699978044257
+    },
+    {
+      "free_bytes": 956014592,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 50160,
+          "ParentProcessId": 54164,
+          "PrivatePageCount": 56098816,
+          "WorkingSetSize": 206475264
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 94,
+      "snapshot_seconds": 0.021283499983837828
+    },
+    {
+      "free_bytes": 928342016,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 50160,
+          "ParentProcessId": 54164,
+          "PrivatePageCount": 88207360,
+          "WorkingSetSize": 273690624
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 94,
+      "snapshot_seconds": 0.025466300023254007
+    }
+  ],
+  "compiler_pid": 50160,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.115952699998161,
+  "axioms": [
+    {
+      "theorem": "CyclePotential219.path_potential_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "CyclePotential219.closing_edge_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "CyclePotential219.cycle_cost_identity",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "CyclePotential219.cycle_occupancy_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "8668965d8fec23666861daac0b9fbccfa6b3142fc97ae5ac75215d9de5caeac0",
+  "object": "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\build\\CyclePotential219.olean",
+  "olean_sha256": "bb32ad9b65f219ec2ab81038d4c38e109390fd6da26d7355d4019e3001b1413b"
+}

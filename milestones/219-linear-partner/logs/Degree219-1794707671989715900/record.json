@@ -1,0 +1,101 @@
+{
+  "status": "FAILED",
+  "module": "Degree219",
+  "source": "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\Degree219.lean",
+  "source_sha256": "4fea4e6f6802bfbed0e2e6de02a70a15e96cba407a9199bc7e366f006fd989f1",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\data\\Degree219-execution.json": "9ce6fb8b0609c27eaaf18b71d8f55e308d7194b8aa522ca1c0c3d72adda15adf",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\Degree219.lean": "4fea4e6f6802bfbed0e2e6de02a70a15e96cba407a9199bc7e366f006fd989f1",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\logs\\Degree219-1794707671989715900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\Degree219.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\logs\\Degree219-1794707671989715900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1361805312,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 91,
+    "snapshot_seconds": 0.02252640001825057
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1341476864,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 54368,
+          "ParentProcessId": 52728,
+          "PrivatePageCount": 34205696,
+          "WorkingSetSize": 38375424
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.024786100024357438
+    },
+    {
+      "free_bytes": 1185390592,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 54368,
+          "ParentProcessId": 52728,
+          "PrivatePageCount": 54906880,
+          "WorkingSetSize": 197664768
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.024367400008486584
+    }
+  ],
+  "compiler_pid": 54368,
+  "exit_code": 1,
+  "stop_reason": null,
+  "seconds": 2.11433740000939,
+  "axioms": [
+    {
+      "theorem": "Degree219.selected_degree_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Degree219.edge_product_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Degree219.residual_term_le",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "5564de1e9418f281cae2118be32e86d5ff4ca62f40f76268a293d4a7b83cb34e"
+}

@@ -1,3 +1,11 @@
+# Current result after round 219
+
+Exact rational certificates show that both fixed-parent continuous partner models admit 94 selected vertices even with every simple-cycle occupancy inequality. Thus adding cycle occupancy inequalities alone cannot exclude the 192-edge joining target in this model. Two new Lean modules check eight supporting implications; the finite arrays have independent exact audits. No longer snake or new global bound. Goal ACTIVE; subset forest inequalities are next.
+
+Read [the argument](milestones/219-linear-partner/MATHEMATICAL_NOTE.md), [evidence](milestones/219-linear-partner/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [frontier explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 218
 
 Two new Lean modules check necessary cycle and parity constraints for the direct93-edge compatible-partner target. Endpoint queries return 0:UNKNOWN, 78:UNKNOWN. No longer snake or global bound is obtained. The goal remains active; next is an explicit linear relaxation and, if strong enough, an exact weighted inequality certificate.
@@ -10,7 +18,7 @@ Read [the argument](milestones/218-direct-partner/MATHEMATICAL_NOTE.md), [eviden
 
 The longer continuation examines 5,228,502 additional nodes; case[0,6] remains open with 8 regions. Review identifies a direct unresolved target: a93-edge partner for the saved98-edge Q8 path would give192 edges in Q9. This route does not first require a different optimal parent. Both endpoint queries remain unresolved; the next search will use degree conditions and cycle exclusions.
 
-The interval remains191<=a(9)<=233. No new construction or numerical bound was obtained. The contributor233 proof's independent full rebuild remains pending. The goal is active.
+The interval remains191<=a(9)<=233. No new construction or numerical bound was obtained. The contributor 233 proof's independent full rebuild remains pending. The goal is active.
 
 Read [the argument](milestones/217-long-parent-search/MATHEMATICAL_NOTE.md), [evidence](milestones/217-long-parent-search/data/completion.json), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex).
 
@@ -44,7 +52,7 @@ Read [the mathematical argument](milestones/214-parity-partner-capacity/MATHEMAT
 
 The contributor branch has completed the unconditional bound233, supported by a saved assembly/axiom audit; independent full rebuilding remains pending. The recorded interval is191<=a(9)<=233. The construction proof now derives [0,6] partner restrictions from the actual reconstructed path and composes the spare-capacity filter. No new snake or construction-search exclusion is obtained.
 
-Read [the argument](milestones/213-interval-geometry/MATHEMATICAL_NOTE.md), [accepted proofs](milestones/213-interval-geometry/data/completion.json), [contributor review](milestones/213-interval-geometry/logs/contributor233-review.md), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex). The user authorized pausing at this significant review point.
+Read [the argument](milestones/213-interval-geometry/MATHEMATICAL_NOTE.md), [accepted proofs](milestones/213-interval-geometry/data/completion.json), [contributor review](milestones/213-interval-geometry/logs/contributor 233-review.md), [handoff](handoff/CURRENT_STATUS.md) and [frontier explanation](paper/snake9_frontier_explanation.tex). The user authorized pausing at this significant review point.
 
 ## Earlier checkpoints
 

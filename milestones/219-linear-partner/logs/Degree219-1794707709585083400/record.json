@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "module": "Degree219",
+  "source": "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\Degree219.lean",
+  "source_sha256": "a3fc1ff1d763184c1331d0b9841edad92873738d46a0b0753727c4e709400a6e",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\data\\Degree219-execution.json": "8fc6f066708f5d2890e213b57ec9257f8597cafa45c8c0ff751c0730f3c8fe13",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\Degree219.lean": "a3fc1ff1d763184c1331d0b9841edad92873738d46a0b0753727c4e709400a6e",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\logs\\Degree219-1794707709585083400\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\lean\\Degree219.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\logs\\Degree219-1794707709585083400\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1661419520,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.02012749999994412
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1686360064,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 51736,
+          "ParentProcessId": 22620,
+          "PrivatePageCount": 48160768,
+          "WorkingSetSize": 32149504
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.021608899987768382
+    },
+    {
+      "free_bytes": 1439657984,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 51736,
+          "ParentProcessId": 22620,
+          "PrivatePageCount": 120426496,
+          "WorkingSetSize": 275722240
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01766800001496449
+    }
+  ],
+  "compiler_pid": 51736,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0864333000208717,
+  "axioms": [
+    {
+      "theorem": "Degree219.selected_degree_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Degree219.edge_product_iff",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Degree219.residual_term_le",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Degree219.residual_certificate_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "6c2f37994e0a43677b9524258eadf925c54d3809437738ccd97b33be4411b3da",
+  "object": "E:\\Snake-in-a-box\\milestones\\219-linear-partner\\build\\Degree219.olean",
+  "olean_sha256": "909cf525957b698c949d93f7c2eceeeb6a2742e194651094b54aa8ff293aa4fc"
+}

@@ -1,0 +1,147 @@
+{
+  "status": "PASS_EXACT_PRIMAL_AND_ALL_SIMPLE_CYCLE_CERTIFICATES",
+  "scope": "All rational coordinates, saved rows, bounds and edge-deleted potential inequalities checked exactly. No optimizer, basis elimination, proof compiler, or software tests run. No Boolean-path or exact-optimality conclusion.",
+  "conclusion": "For each fixed root, the continuous edge formulation augmented by every simple-cycle occupancy inequality admits both a feasible objective greater than 94 and an exact feasible point with objective 94. These constraints alone cannot exclude target cardinality 94.",
+  "models": [
+    {
+      "root": 0,
+      "model_rows": 1845,
+      "variable_bounds_checked": 574,
+      "exact_objective": [
+        43286778654,
+        441499285
+      ],
+      "excess_above_94": [
+        1785845864,
+        441499285
+      ],
+      "exact_upper": [
+        49022513,
+        500000
+      ],
+      "upper_minus_primal": [
+        3022280641,
+        44149928500000
+      ],
+      "nonintegral_coordinates": 405,
+      "tight_model_rows": 516,
+      "edge_potential_count": 337,
+      "potential_edge_inequalities": 113232,
+      "all_deleted_edge_targets_reachable": true,
+      "all_simple_cycle_inequalities_certified": true,
+      "minimum_cycle_cost": [
+        1,
+        1
+      ],
+      "attained_cycle_index": 86,
+      "attained_cycle_vertices": [
+        102,
+        110,
+        118,
+        126
+      ],
+      "target94": {
+        "short_path": [
+          0,
+          2
+        ],
+        "mixing_weight": [
+          10154483555,
+          10600945021
+        ],
+        "objective": [
+          94,
+          1
+        ],
+        "nonintegral_coordinates": 416,
+        "all_rows_and_bounds_checked": true,
+        "all_simple_cycles": "Inherited by convexity from the checked point and the actual one-edge path."
+      },
+      "basis_reconstruction_repeated": false,
+      "pins": {
+        "model.json": "297926619f372480ea9b3e0d965dc19e79a2bb7e5329775676f2e92eff1c8c1a",
+        "primal-certificate.json": "5bde33a3fa02f9324de4715056c7d8d1d1fd70da284f2b43776e8c145e7e0a3f",
+        "basis.json": "b5148b70ec6290acb51cc7611c2796271e904ba52e524c7e4ddcce3fe62792d2",
+        "target94-certificate.json": "a1b13cd4fd4a9a2015faaf72bdf4a2e597c7874aeeb4f6709577ddbd91c9fc12"
+      }
+    },
+    {
+      "root": 78,
+      "model_rows": 1840,
+      "variable_bounds_checked": 574,
+      "exact_objective": [
+        75253867064343,
+        770614508036
+      ],
+      "excess_above_94": [
+        2816103308959,
+        770614508036
+      ],
+      "exact_upper": [
+        3051701,
+        31250
+      ],
+      "upper_minus_primal": [
+        859513625243,
+        12040851688062500
+      ],
+      "nonintegral_coordinates": 405,
+      "tight_model_rows": 545,
+      "edge_potential_count": 337,
+      "potential_edge_inequalities": 113232,
+      "all_deleted_edge_targets_reachable": true,
+      "all_simple_cycle_inequalities_certified": true,
+      "minimum_cycle_cost": [
+        1,
+        1
+      ],
+      "attained_cycle_index": 3,
+      "attained_cycle_vertices": [
+        4,
+        6,
+        20,
+        22
+      ],
+      "target94": {
+        "short_path": [
+          78,
+          14
+        ],
+        "mixing_weight": [
+          70896534739312,
+          73712638048271
+        ],
+        "objective": [
+          94,
+          1
+        ],
+        "nonintegral_coordinates": 422,
+        "all_rows_and_bounds_checked": true,
+        "all_simple_cycles": "Inherited by convexity from the checked point and the actual one-edge path."
+      },
+      "basis_reconstruction_repeated": false,
+      "pins": {
+        "model.json": "75cdce2633f5737f8259c0a4181bb444074b2101b7e8ec84a3fc3532aab9c8fe",
+        "primal-certificate.json": "5f99d51c7af315e49a6bbed295576ac5a52d216c0146444d2910f62a46295711",
+        "basis.json": "51fc9370df16e667d49a23e584bac1528336d33b1bddfc8201d32c072c4c2f35",
+        "target94-certificate.json": "b064ac2266d9cbab315af5a15efe3b7c47f76323fbdcf78232608dd3f2780255"
+      }
+    }
+  ],
+  "execution": {
+    "seconds": 3.7960000000020955,
+    "exit_code": 0,
+    "stop_reason": null,
+    "peak_sampled_private_bytes": 46342144,
+    "minimum_sampled_free_bytes": 1052721152
+  },
+  "pins": {
+    "scripts\\audit_rational.py": "a540aa7e07d1156a51bae0570ca7b49acd158cd8d81cd4c1e4c39492f16af05f",
+    "scripts\\rational_basis.py": "cbd410b689f4e812cc9ba4ca88e50b7c292de78b9ded710ddb66e625f3c1514b",
+    "scripts\\run_rational.py": "7926120d76b06346c1131610451c473ca587a46cd0d435ab36034a3ff5379c64",
+    "scripts\\target_point.py": "e2ea948b3c82a6c77eae80107b6684c102f37d82f8e0e75d6465f4b551c82fc6",
+    "data\\linear-audit.json": "b408c13775470f5bf903db4bdd52aa5d3444b0d7268847ff728018eaf5e11d37",
+    "data\\rational-execution.json": "1bc610f51906cd0185a306f15c0538c2b91cab21212a422b1efac7a4f31fc929",
+    "data\\rational-summary.json": "a7c46523ff087653c888eb35d536386ddc7dce652744475c3dc51b94c81976cf"
+  }
+}

@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 218}
+\date{Research state after round 219}
 \begin{document}
 \maketitle
 
@@ -548,6 +548,42 @@ extraction and solver exhaustion remain separate verification obligations.
 
 The two new 240-second endpoint queries return \texttt{UNKNOWN} at 0, \texttt{UNKNOWN} at 78. Every unresolved query remains open. No new global bound or longer snake is obtained.
 
+
+\paragraph{Why more cycle inequalities are insufficient by themselves.}
+The degree model was relaxed by allowing selection and endpoint variables
+to lie between zero and one. Adding edge variables for products of
+Boolean selections improves its numerical bounds substantially.
+Exact certificates now place the maximum fractional cardinality between
+$98.044957$ and $98.045026$ at root 0, and between
+$97.654360$ and $97.654432$ at root 78.
+
+Both lower endpoints come from saved rational assignments satisfying
+every simple-cycle inequality. This was checked without enumerating
+all cycles. With $w_u=1-x_u$, each deleted edge $ab$ has a potential
+with $p_a=0$, $|p_u-p_v|\le w_u+w_v$ on other edges and
+$p_b+w_a+w_b\ge2$. Summing along a cycle minus $ab$, then restoring
+that edge, gives $2\sum_{u\in C}w_u\ge2$. Hence at least one unit
+of fractional nonselection occurs on every cycle.
+
+Mixing either assignment with the corresponding one-edge path gives
+an exact feasible cardinality of 94. The mixing weight is
+$92/(q-2)$ when the larger cardinality is $q>94$.
+Therefore even all cycle occupancy inequalities cannot exclude the
+93-edge partner target in this continuous model. These fractional
+assignments establish a limitation of the method; they are not paths.
+The finite rational data have independent exact audits. Lean checks
+the degree encoding, integer weighted-bound argument and telescoping
+cycle implication, with numerical array assembly kept separate.
+
+A stronger candidate uses any subset $U$ and $v\in U$:
+\[
+\sum_{ab\in E(U)}y_{ab}\le\sum_{u\in U}x_u-x_v.
+\]
+This holds because the part of a path inside $U$ is a forest, with
+at most one fewer edge than selected vertices when $v$ is selected.
+The next calculation will determine whether these subset inequalities
+exclude the saved fractional assignments or lower the bound below 94.
+
 \section{What would resolve the question}
 The current upper bound is 233. A smaller bound requires a stronger
 argument. The alternative comparisons above retain their own local
@@ -566,7 +602,7 @@ universal 197-edge exclusion would settle the proposed value exactly.
 
 \smallskip
 {\small Detailed proofs, explicit witnesses and verification records are
-retained in the companion manuscript and milestones through round 218.
+retained in the companion manuscript and milestones through round 219.
 The known small-dimensional values are listed in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

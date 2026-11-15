@@ -1,0 +1,25 @@
+E:\Snake-in-a-box\milestones\219-linear-partner\lean\Degree219.lean:75:58: error: unsolved goals
+ι κ τ : Type
+variables : List ι
+inequalities : List κ
+equalities : List τ
+value residual : ι → Int
+Y left bound : κ → Int
+Z eqleft eqbound : τ → Int
+scale objective : Int
+hvalue : ∀ (j : ι), j ∈ variables → 0 ≤ value j ∧ value j ≤ 1
+hY : ∀ (i : κ), i ∈ inequalities → 0 ≤ Y i
+hrows : ∀ (i : κ), i ∈ inequalities → left i ≤ bound i
+hequalities : ∀ (i : τ), i ∈ equalities → eqleft i = eqbound i
+identity :
+  scale * objective =
+    (List.map (fun i => Y i * left i) inequalities).sum + (List.map (fun i => Z i * eqleft i) equalities).sum +
+      (List.map (fun j => residual j * value j) variables).sum
+hineq : (List.map (fun i => Y i * left i) inequalities).sum ≤ (List.map (fun i => Y i * bound i) inequalities).sum
+i : τ
+hi : i ∈ equalities
+⊢ Z i * eqbound i ≤ Z i * eqbound i
+'Degree219.selected_degree_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Degree219.edge_product_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Degree219.residual_term_le' depends on axioms: [propext, Quot.sound]
+'Degree219.residual_certificate_bound' depends on axioms: [propext, sorryAx, Quot.sound]

@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 218, 15 November 2026}
+\date{Research state after round 219, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -66,6 +66,10 @@ shared free words in one remaining six-coordinate case. Its geometric
 core, counting implications and literal source counts have separate
 Lean checks; the complete finite search certificates and geometric
 assembly retain their stated limitations.
+
+Exact fractional certificates show that the fixed-parent degree
+formulation, even with every simple-cycle occupancy inequality,
+cannot exclude the 94-vertex compatible-partner target.
 
 The paper separates written proofs, checked implications, native
 enumerations and unresolved premises. The contributor bound improves
@@ -7274,6 +7278,125 @@ The unresolved cases remain open. No longer snake or global numerical bound is o
 
 An initial invocation exceeded the memory limit before producing a model or mathematical result. Limiting the numerical-library thread counts allowed the same model to run within the recorded resource limits. The failed invocation and subsequent receipts are retained separately.
 
+
+\subsection{Exact limits of degree and cycle inequalities}
+\label{sec:linear219}
+The next calculation concerns the same fixed parent and the same two
+joining endpoints. Its purpose is to determine whether linear degree
+and cycle inequalities can exclude the 94-vertex partner target.
+For each allowed vertex $u$, let $x_u$ indicate selection and let $e_u$
+indicate the free endpoint; $e_u=0$ at even vertices other than the root.
+The root is selected with degree one, and the odd endpoint indicators
+sum to one. Selection has equal totals in the two parity classes.
+All variables are subsequently allowed to range over $[0,1]$.
+
+At a nonroot vertex of available degree $d_u$, put
+$s_u=\sum_{v\sim u}x_v$. Conditional selected degree has the exact
+Boolean encoding
+\[
+2x_u-e_u\le s_u\le d_u-(d_u-2)x_u-e_u,
+\qquad 0\le e_u\le x_u\le1.
+\]
+If $x_u=0$, then $e_u=0$ and these reduce to $0\le s_u\le d_u$.
+If $x_u=1$, both bounds equal $2-e_u$. Signed arithmetic is intended.
+The stronger formulation introduces $y_{uv}$ for each allowed edge, with
+\[
+0\le y_{uv},\qquad y_{uv}\le x_u,\qquad y_{uv}\le x_v,
+\qquad y_{uv}\ge x_u+x_v-1.
+\]
+For Boolean $x$, these force $y_{uv}=x_ux_v$. Impose
+$\sum_{v\sim t}y_{tv}=1$ at the root and
+$\sum_{v\sim u}y_{uv}=2x_u-e_u$ elsewhere. Thus every actual odd-edge
+partner gives a feasible assignment. Lean checks the signed-integer
+degree and Boolean-product equivalences. The serialized finite models
+have a separate exact-arithmetic audit.
+
+\paragraph{Upper certificates.}
+For inequalities $Az\le b$, equalities $Ez=f$, bounds $0\le z\le1$,
+and objective $c\cdot z$, choose a positive integer $D$, nonnegative
+integer weights $Y$ and signed integer weights $Z$. Set
+$r=Dc-A^{\mathsf T}Y-E^{\mathsf T}Z$. Then
+\[
+D\,c\cdot z\le b\cdot Y+f\cdot Z+\sum_i\max(r_i,0).
+\]
+This follows by expanding the objective, summing the weighted rows,
+and using $r_i z_i\le\max(r_i,0)$. Exact residual compensation makes
+the bound independent of numerical dual feasibility or optimality.
+All saved coefficients and multipliers were audited with exact integers.
+Lean checks the corresponding integer-variable implication with the
+coefficient expansion explicit; it does not check every saved array.
+
+The vertex-only bounds are $108.36883$ and $107.110383$ at roots 0 and 78.
+For the stronger edge formulation, the following values enclose the
+maximum fractional cardinality, even after every cycle occupancy
+inequality is imposed:
+\[
+\begin{array}{c|c|c}
+\text{Root}&\text{Exact feasible cardinality}&\text{Exact upper certificate}\\\hline
+0&\displaystyle\frac{43286778654}{441499285}
+ &\displaystyle\frac{49022513}{500000}\\[6pt]
+78&\displaystyle\frac{75253867064343}{770614508036}
+ &\displaystyle\frac{3051701}{31250}
+\end{array}
+\]
+The feasible values are approximately $98.044958$ and $97.654361$;
+the upper bounds are $98.045026$ and $97.654432$.
+The upper certificate at root 78 limits an actual odd-edge partner to
+96 vertices, hence 95 edges, using even integral cardinality. This is
+a fixed-parent statement and does not exclude the 93-edge target.
+
+\paragraph{Why the fractional points satisfy every cycle inequality.}
+For one exact rational point put $w_u=1-x_u$. For each deleted edge
+$ab$, a saved rational potential $p$ satisfies
+\[
+p_a=0,\qquad |p_u-p_v|\le w_u+w_v\quad(uv\ne ab),
+\qquad p_b+w_a+w_b\ge2.
+\]
+Take any simple cycle containing $ab$ and follow its remaining path
+from $a$ to $b$. Summing potential differences bounds $p_b-p_a$ by
+the sum of its edge costs. Adding the deleted edge counts every
+cycle vertex twice, so $2\sum_{u\in C}w_u\ge2$. Consequently
+\[
+\sum_{u\in C}x_u\le |C|-1
+\]
+for every simple cycle. The exact audit checks all 337 deleted-edge
+potentials at each root, including 113232 edge inequalities per root.
+It also checks all 574 variable bounds and every model row.
+Lean checks the telescoping and cycle-counting implication with integer
+scaling; the rational data and their assembly remain independently
+audited native arithmetic.
+
+\begin{proposition}[Limitation of the continuous cycle formulation]
+\label{prop:cycle-relaxation219}
+For either joining endpoint of the saved 98-edge parent, the continuous
+edge formulation admits a selection of exactly 94 vertices satisfying
+every simple-cycle occupancy inequality.
+\end{proposition}
+\begin{proof}
+The exact feasible cardinality $q$ in the table exceeds 94. The one-edge
+paths $(0,2)$ and $(78,14)$ respectively give feasible cardinality two.
+Mix the corresponding two assignments with weight $92/(q-2)$ on the
+larger one. This weight lies between zero and one, and the resulting
+cardinality is exactly 94. All model and cycle inequalities are linear,
+so the mixture preserves them. Both resulting rational assignments
+and their exact model constraints have also been audited directly.
+\end{proof}
+Thus adding cycle occupancy inequalities alone cannot exclude the target
+in this continuous formulation. Integrality remains essential; the
+fractional assignments provide no snake. No global bound changes.
+The certificates and verification limits are recorded in milestone
+219~\cite{research219}.
+
+The next candidate strengthening uses arbitrary vertex subsets $U$.
+An actual path induces a forest on $U$. Therefore, for each $v\in U$,
+\[
+\sum_{ab\in E(U)}y_{ab}\le\sum_{u\in U}x_u-x_v.
+\]
+If $v$ is selected, the nonempty forest has at most its vertex count
+minus one edges; if $v$ is unselected, the weaker bound follows as well.
+These inequalities couple all selected edges of a subset. Their effect
+on the saved fractional points has not yet been computed.
+
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
 from the explicit witness. The completed contributor upper theorem and
@@ -10844,6 +10967,13 @@ Snake-in-the-box project. \emph{Longer parent-search jobs and the direct
 Snake-in-the-box project. \emph{Direct compatible-partner queries, parity
 and cycle-cut preservation}. Research milestone 218, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/218-direct-partner}.
+
+
+\bibitem{research219}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Exact degree relaxations and
+the limitation of all cycle occupancy inequalities}. Research milestone
+219, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/219-linear-partner}.
 
 \end{thebibliography}
 \end{document}
