@@ -520,8 +520,8 @@ hints, 6.91 GB RSS). Kernel-hours and `.olean` use the MEASURED 233 ratios (209.
 | plan | lambda_t, bits, range | certificates (plain seeds / 5-win / ctx-7 / ctx-8) | hints (90 % range) | kernel-h | new .olean | .olean files |
 |---|---|---|---|---|---|---|
 | **232** | 541/1 (4.508 alpha), B = 10, 852 of 1,023 | **4,515** (3,099 / 948 / 404 / 64) | **8.2 G** (8.1-9.5) | 518 (509-595) | **21.9 GB** (21.5-25.2) | ~9,000 |
-| **231** | 566/1 (4.717 alpha), B = 10, 1,021 of 1,023 | **13,454** (7,697 / 1,668 / 3,475 / 614) | **40.5 G** (40.5-46.6) | 2,547 (2,544-2,929) | **108 GB** (108-124) | ~26,900 |
-| 231 fallback | 563/1, B = 10 | see `data/certplan231_563_1_cap_summary.json` | | | | |
+| **231** | 563/1 (4.692 alpha), B = 10, 1,022 of 1,023 | **12,084** (7,266 / 1,581 / 2,797 / 440) | **33.0 G** (32.8-37.9) | 2,075 (2,063-2,385) | **87.7 GB** (87.2-101) | ~24,200 |
+| 231 alt. | 566/1 (4.717 alpha), B = 10, 1,021 of 1,023 | 13,454 (7,697 / 1,668 / 3,475 / 614) | 40.5 G (40.5-46.6) | 2,547 | 108 GB | ~26,900 |
 | 233 (built) | 520/1 | 3,127 | 3.34 G | 209.84 | 8.87 GB | 6,254 |
 
 Plain counts are seeds: the paid plain keys (231: 16,559; 232: 6,666) reduced by 233's measured
@@ -530,14 +530,15 @@ certificates each chain imports what it reuses from 233 (up to 8.87 GB, 6,254 fi
 floor modules).
 
 **Consequence.** The single-process audit of 233 imported 8.87 GB of `.olean` at 11-12.6 GB RSS on
-a 13.35 GiB machine. 231 needs about 12 times that, 232 about 2.5 times. Neither fits one audit
+a 13.35 GiB machine. 231 needs about 10 times that, 232 about 2.5 times. Neither fits one audit
 process on this machine. 232 might fit a machine with about 48-64 GB of memory; 231 needs a
 different audit structure (separately audited premise modules) or far more records.
 
-Breakdown by kind (calibrated G hints): 231: plain 19.2, 5-window 7.1, ctx-7 9.0, ctx-8 5.2;
-232: plain 6.1, 5-window 1.6, ctx-7 0.45, ctx-8 0.15. Distribution (231): 14,968 certificates under
-1 M hold 3.0 G, 6,694 of 1-10 M hold 27.2 G, 654 of 10-60 M hold 12.7 G; the top 1 % / 5 % /
-20 % hold 16 % / 39 % / 81 %. The bulk is thousands of 1-10 M certificates, not a tail: splitting
+Breakdown by kind (calibrated G hints): 231 at 563/1: plain 17.5, 5-window 6.1, ctx-7 6.2,
+ctx-8 3.3 (at 566/1: 19.2, 7.1, 9.0, 5.2); 232: plain 6.1, 5-window 1.6, ctx-7 0.45, ctx-8 0.15.
+Distribution (231 at 563/1, before the family factor): 14,157 certificates under 1 M hold 2.8 G,
+5,811 of 1-10 M hold 23.3 G, 481 of 10-60 M hold 9.1 G; the top 1 % / 5 % / 20 % hold 16 % /
+38 % / 82 %. The bulk is thousands of 1-10 M certificates, not a tail: splitting
 the tail does not make 231 cheap.
 
 ### Method (`certplan231.py`)
@@ -571,7 +572,7 @@ key, warm Bellman-Ford with undo, dual reverse-delete, exact drops), extended:
 
 Level semantics: "UNSAT at T" proves share >= T, so every level <= T is implied; a lower level needs
 a new solve at that level (cap = level - 1). The level-aware cost below assumes exactly these
-re-solves; `data/split231_jobs_resolve232.jsonl.gz` (1,182) and `..._resolve231.jsonl.gz` (4,500)
+re-solves; `data/split231_jobs_resolve232.jsonl.gz` (1,182) and `..._resolve231.jsonl.gz` (563/1 plan)
 list them (split231 jobs, limit twice the source call). Nothing assumes a never-tried level above
 a proved one.
 
@@ -606,8 +607,9 @@ a proved one.
 - lambda_t: on the dual pass (before exact) the cost is flat over 1125/2 .. 15268/27 (85-89 G,
   `data/certplan231_scan.json`), slightly cheaper at lower lambda_t. What decides is the slack:
   under the 60 M cap only lambda_t <= 566/1 works on the final data (the capped minimum cycle mean is
-  about 4.722 alpha), and 566/1 ends with range 1,021 of 1,023: the plan has no spare range.
-  563/1 is the fallback with more room. More farm refinement helps mainly through slack (it moved
+  about 4.722 alpha). The exact pass uses the whole range either way (1,021-1,022 of 1,023), and
+  the lower lambda_t is cheaper: 563/1 costs 33.0 G against 40.5 G at 566/1 (fewer critical
+  transitions, the same 10-bit potential); lambda_t below 563 was not run. More farm refinement helps mainly through slack (it moved
   the capped plan from infeasible to feasible between 07:03 and 08:10).
 - 231 vs 232: one step of the bound costs a factor of about 5 in hints.
 - ctx-7 only: infeasible. Without ctx-8 records the minimum cycle mean was 1640/3 = 4.556 alpha
