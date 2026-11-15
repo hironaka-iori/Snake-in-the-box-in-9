@@ -24,6 +24,10 @@ import cert231  # noqa: E402
 import shutil  # noqa: E402
 _cad = os.environ.get('CADICAL') or shutil.which('cadical') or '/usr/local/bin/cadical'
 cert231.C.K.TOOLCHAIN_CADICAL = _cad          # gen_k7_core's wrapper reads it at call time (4.19 default path)
+# the 4.19 wrapper limits CaDiCaL's output files to 900 MB (ulimit -f): the full-proof LRAT of a key above
+# ~40 M hints is larger and CaDiCaL dies with SIGXFSZ. Raise the limit (MB, env CADICAL_FSIZE_MB).
+_fs = int(os.environ.get('CADICAL_FSIZE_MB', '8000'))
+cert231.C.cadical = lambda work: cert231.C.K.cadical_wrapper(work, _fs)
 cert231.DATA = os.environ.get('CERT435_DATA', os.path.join(ROOT, 'lean435', 'data'))
 cert231.CORE = os.environ.get('CERT435_CORE', os.path.join(ROOT, 'lean435', 'cores'))
 if os.environ.get('CERT435_SEEDS'):                 # a seed plan of our own (prod435.py: every key a seed)
