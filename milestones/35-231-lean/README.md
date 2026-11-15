@@ -113,6 +113,22 @@ The modules (identifiers carry the tag `L15268Q27`; `…` = `L15268Q27`):
 All of the kernel checks print `propext`, `Classical.choice`, `Quot.sound` (or a subset): `stepOK6SC…`,
 `windows6SC…`, `cover6S…k6`, `coverH8_6S…`, `shareCover6S…`, `ctxCover7_6SC…`, `ctxCover8_6SC…`.
 
+## The 232 chain (tag `M232L541`, first target)
+
+Plan `milestones/28-combined-identities/data/certplan231_m232_541_1.json.gz` (sha256 `849ff970…`), the same
+generators with `--expect-bound 232`:
+
+| item | value |
+|---|---|
+| λ_t, bits | 541/1, B = 10. Bellman–Ford from zero: 44 rounds, **range 852** (the plan says 852); bound `4741 m ≤ 1104610`, so **m ≤ 232** |
+| plain k6 keys | 20,756 (13,983 with a certificate already: 5,402 from 233, 1,383 replays, 7,198 by L1/L2 from 233 seeds; **6,773 new**); 203 exclusion rows, 67 chunks, 5 key parts |
+| H8 | 262 (the 233 chain's) |
+| 5-window | 24,242 fields, 8 bits; 23,173 on floors, **1,069 share keys** (846 new, 223 the 233 chain's own); 40 chunks (≤ 116 keys) |
+| ctx | **283 ctx 7** (66 rows, 25 shapes) and **48 ctx 8** (22 rows, 16 shapes) keys, 7-bit fields (max level 125) |
+| witness codes | 13 (ctx 7): 727; 14 (ctx 8): 63; of 10,404,288 re-checked transitions |
+
+__R232__
+
 ## Measurements
 
 Scratch build, `nice -n 10`, at most 2 of these `lean` processes at a time, next to 3 Python cost
@@ -178,6 +194,48 @@ the cores and up to 2,120 s of LRAT search for the largest (8 seeds × 5 rounds,
 sources: 16.6 kB to 48.8 MB (4.2 to 7.6 B per hint); replay `.olean` 3.2 B per hint for the 2 M one.
 The glue test `CtxGlueTest231` (`TagsSW.refutedShareFrom_of_sat <name>.sat <name>.unsat`) states each
 certificate as `RefutedCtx7 (dirs, t, level − 1)` / `RefutedCtx8 (…)` of its plan row: __GLUE__
+
+## For the Lean 4.35 port (layout and parameters)
+
+The generators are deterministic: the same plan file and parameters give byte-identical sources
+(`gen_lean_chain6sc.py --check` verifies that), and the sha256 of the data module and the shards is
+written by `--sha256`. Names depend only on the tag `T` and the plan.
+
+| parameter | default | effect |
+|---|---|---|
+| `gen_lean_automaton6sc.py --plan` | required | the certplan231 plan (`summary.P/Q/B`, `plain`, `share` rows; optional top-level `h8`) |
+| `--tag T` | required | suffix of every identifier and module name (`L15268Q27`, `M232L541` here) |
+| `--lam P/Q`, `--bits B` | plan's | arithmetic override |
+| `--expect-bound N` | 231 | the bound the plan must give |
+| `--cbits` | from the levels | ctx field width |
+| `--chunk` | 400 | plain keys per k6 chunk (whole exclusion rows) |
+| `--part-chunks` | 16 | k6 chunks per key part module `LocalWindowDirKeys6SC<T>P<g>` |
+| `--shards`, `--stub-shards` | all | which shards are real |
+| `gen_lean_chain6sc.py --rows-per-part` | 40 | exclusion rows per k6 cover part `DirectionWindowBridge6SC<T>R<g>` |
+| `--ctx-shapes-per-part` | 0 | 0: one ctx cover module `…C`; K > 0: parts `…C7_<g>`, `…C8_<g>` of K shapes |
+
+Module graph (core Lean unless noted; framework modules first):
+
+```
+LocalWindowShareCtx            WindowAutomaton6SCDefs -> WindowAutomaton6SCV2
+DirectionWindowBridge6SC (imports DirectionWindowBridge6S, WindowAutomaton6SCDefs, LocalWindowShareCtx)
+DirectionWindowBridge6SCChunks (imports DirectionWindowBridge6SC)
+AggregateDirection6SCConditional (mathlib)
+LocalWindowDirKeys6SC<T>P<g>      (no imports)          -> LocalWindowDirKeys6SC<T> (+ DirectionWindowBridge6SC)
+WindowAutomaton6SC<T>Data         (WindowAutomaton6SCDefs)
+WindowAutomaton6SC<T>Shard<i>_<t0> (Data, V2), i < 34, t0 = 1..6 -> WindowAutomaton6SC<T>Sequence
+DirectionWindowBridge6SC<T>R<g>, …S, …C (DirectionWindowBridge6SC, Data, Keys; S and C also …Chunks)
+DirectionWindowBridge6SC<T> -> AggregateDirection6SC<T> (mathlib) -> Audit6SC<T>
+```
+
+Certificates (`cert231.py`): per certificate `LocalWindowCtxCnf.<N>` + `LocalWindowCtxUnsat.<N>` for ctx
+keys (`N = C<ctx><dirs>A<t>K<cap>`), `LocalWindowCnf.T…`/`LocalWindowUnsat.T…` for 5-window keys and
+`LocalWindowCnf.S…`/`LocalWindowUnsat.S…` for plain seeds, as in 233. `cert231.py merge` writes the
+**one-module-per-certificate** layout (AUDIT-SCALING.md, the 4.35 target): `LocalWindowCtxCert.<N>` (or
+`LocalWindowCert.<N>`), the two sources' imports merged (the replay's import of the Cnf module dropped)
+and the two `namespace Snake9.LocalWindow.<N>` bodies concatenated, with a check that no declaration
+name repeats; the theorems keep their names (`<N>.sat`, `<N>.unsat`). `cert231.py build --merged`
+builds that layout. The glue term per ctx key is `TagsSW.refutedShareFrom_of_sat <N>.sat <N>.unsat`.
 
 ## What is still missing for the unconditional 231
 
