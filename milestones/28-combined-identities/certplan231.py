@@ -1059,9 +1059,8 @@ def apply_cap(W, cap):
         lv = int(W.lvl[i])
         if W.share_cost(i, lv)[0] <= cap:
             continue
-        ok = [T for T, s_ in W.scalls[i] if s_ is not None and T <= lv and W.share_cost(i, T)[0] <= cap]
-        new = max(ok + [int(W.sF[i])])
-        # the cheapest call >= new must be <= cap: walk down
+        # the largest level <= lv whose certificate (re-solved there, priced by the cost model) is <= cap
+        new = lv
         while new > W.sF[i] and W.share_cost(i, new)[0] > cap:
             new -= 1
         capped.append((int(i), lv, new)); W.lvl[i] = new; nl += 1
@@ -1124,6 +1123,7 @@ def cmd_full(a):
         L.log(f'infeasible at {P}/{Q}/{B}: {hist["dual0"]}'); return
     if True:                                  # feasibility under the cap on the full data, before any pruning
         lv_b, ch_b = W.lvl.copy(), W.chosen.copy()
+        W.chosen[:] = True; W.recount(); W.lvl = np.maximum(W.lvl0, W.sF)
         nf0, cap0 = apply_cap(W, a.max_cert_hints)
         ok0, _, r0 = W.check()
         hist['cap_full_data'] = dict(ok=bool(ok0), range=r0, plain_forbidden=nf0, share_capped=len(cap0))
