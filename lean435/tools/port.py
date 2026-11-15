@@ -209,8 +209,11 @@ def port_replay(mod, text, cnf_text):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=os.path.join(ROOT, 'lean435', 'src'))
+    ap.add_argument('--extra-root', action='append', default=[],
+                    help='another source root searched first (e.g. generated chain modules in a scratch dir)')
     ap.add_argument('targets', nargs='+')
     a = ap.parse_args()
+    SRC_ROOTS[:0] = [os.path.abspath(x) for x in a.extra_root]
     order, seen, ext = closure(a.targets)
     bad = [e for e in ext if not e.split('.')[0] in ('Mathlib', 'Std', 'Init', 'Lean')]
     if bad:

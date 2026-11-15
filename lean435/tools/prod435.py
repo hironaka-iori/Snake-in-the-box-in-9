@@ -585,6 +585,34 @@ def cmd_merge(a):
     print(f'merged {n} certificate interfaces from {len(ws)} workers into {a.out}')
 
 
+def cmd_collect(a):
+    """Like `merge`, from local job directories (runs with --no-sync --keep; tests)."""
+    jd = os.path.join(HOME, 'jobs')
+    os.makedirs(a.out, exist_ok=True)
+    lines = {}
+    mp = os.path.join(a.out, 'manifest.jsonl')
+    if os.path.exists(mp):
+        for l in open(mp):
+            if l.strip():
+                lines[json.loads(l)['module']] = l.strip()
+    for n in sorted(os.listdir(jd)):
+        try:
+            r = json.load(open(os.path.join(jd, n, 'result.json')))
+        except (OSError, ValueError):
+            continue
+        if 'error' in r or (a.names and n not in a.names):
+            continue
+        src = os.path.join(jd, n, 'build', r['module'].replace('.', '/') + '.olean')
+        if sha(src) != r['parts']['.olean']:
+            continue
+        dst = os.path.join(a.out, r['module'].replace('.', '/') + '.olean')
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copyfile(src, dst)
+        lines[r['module']] = json.dumps(r, sort_keys=True)
+    open(mp, 'w').write('\n'.join(lines[k] for k in sorted(lines)) + '\n')
+    print(f'collected {len(lines)} certificate interfaces into {a.out}')
+
+
 def cmd_free(a):
     """The plan's free keys: what is reused from earlier (4.19) certificates and must be rebuilt in 4.35."""
     d = json.load(gzip.open(a.plan, 'rt'))
@@ -660,6 +688,9 @@ def main():
     p.add_argument('--plan', default=None)
     p = sub.add_parser('merge')
     p.add_argument('--out', required=True)
+    p = sub.add_parser('collect')
+    p.add_argument('--out', required=True)
+    p.add_argument('--names', nargs='*', default=None)
     p = sub.add_parser('free')
     p.add_argument('--plan', required=True)
     p.add_argument('--out', default=None)
@@ -671,7 +702,7 @@ def main():
     if hasattr(a, 'plan') and a.plan:
         a.plan = os.path.abspath(a.plan)
     r = {'setup': cmd_setup, 'run': cmd_run, 'one': cmd_one, 'status': cmd_status, 'merge': cmd_merge,
-         'free': cmd_free, 'ctl': cmd_ctl}[a.cmd](a)
+         'free': cmd_free, 'ctl': cmd_ctl, 'collect': cmd_collect}[a.cmd](a)
     sys.exit(r or 0)
 
 

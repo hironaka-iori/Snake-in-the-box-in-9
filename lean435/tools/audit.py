@@ -78,7 +78,9 @@ class Resolver:
     """Where the source and the build outputs of a module are."""
 
     def __init__(self, src, spec_build, iface, mathlib):
-        self.src, self.spec, self.iface = src, spec_build, iface
+        # src / spec_build: lists of paired source roots and build directories (spec layer, glue, ...)
+        self.srcs = list(zip(src, spec_build))
+        self.src, self.spec, self.iface = src[0], spec_build[0], iface
         self.ml = mathlib_roots(mathlib)
         self.core = os.path.join(os.path.dirname(os.path.dirname(LEAN)), 'lib', 'lean')
 
@@ -87,9 +89,10 @@ class Resolver:
         if self.iface and os.path.exists(os.path.join(self.iface, rel(m) + '.olean')):
             s = os.path.join(self.src, rel(m) + '.lean')
             return 'iface', (s if os.path.exists(s) else None), os.path.join(self.iface, rel(m) + '.olean')
-        s = os.path.join(self.src, rel(m) + '.lean')
-        if os.path.exists(s):
-            return 'spec', s, os.path.join(self.spec, rel(m) + '.olean')
+        for src, spec in self.srcs:
+            s = os.path.join(src, rel(m) + '.lean')
+            if os.path.exists(s):
+                return 'spec', s, os.path.join(spec, rel(m) + '.olean')
         for sroot, broot in self.ml:
             s = os.path.join(sroot, rel(m) + '.lean')
             if os.path.exists(s):
@@ -167,7 +170,10 @@ def cmd_final(a):
     t0 = time.time()
     fails = []
     man = load_manifests(a.manifest)
-    res = Resolver(os.path.abspath(a.src), os.path.abspath(a.spec_build), os.path.abspath(a.iface),
+    if len(a.src) != len(a.spec_build):
+        raise SystemExit('final: give one --spec-build per --src')
+    res = Resolver([os.path.abspath(x) for x in a.src], [os.path.abspath(x) for x in a.spec_build],
+                   os.path.abspath(a.iface),
                    os.path.abspath(a.mathlib))
     res.manifest_imports = {m: [tuple(x) for x in r['imports']] for m, r in man.items()}
     order, seen = loaded_closure(res, header(a.final))
@@ -192,7 +198,7 @@ def cmd_final(a):
             nspec += 1
             if m in man and sha(o) != man[m]['parts']['.olean']:
                 fails.append(f'spec module {m}: local rebuild .olean differs from worker manifest')
-            elif m not in man and a.require_spec_manifest:
+            elif m not in man and a.require_spec_manifest and o.startswith(res.spec + '/'):
                 fails.append(f'spec module {m}: no worker manifest line to compare with')
     print(f'hash checks: {nif} interface files, {nspec} locally rebuilt spec modules')
     # 3: clean directory of public .olean files only
@@ -233,7 +239,7 @@ def cmd_final(a):
     leftovers = [f for r, _, fs in os.walk(od) for f in fs if not f.endswith(('.olean', '.ir', '.ir.sig'))]
     assert not leftovers
     ifaces = {os.path.realpath(os.path.join(od, rel(m))) for m in order if seen[m][0] == 'iface'}
-    name = os.path.splitext(os.path.basename(a.final))[0]
+    name = a.module_name or os.path.splitext(os.path.basename(a.final))[0]
     setup = dict(name=name, isModule=True, importArts=arts, dynlibs=[], plugins=[], options={})
     sp = os.path.join(w, 'setup.json')
     json.dump(setup, open(sp, 'w'))
@@ -242,6 +248,9 @@ def cmd_final(a):
     # 4: compile
     env = dict(os.environ, LEAN_PATH='/nonexistent')
     cmd = [LEAN, '--setup', sp, a.final]
+    if a.out_olean:
+        os.makedirs(os.path.dirname(os.path.abspath(a.out_olean)), exist_ok=True)
+        cmd[1:1] = ['-o', os.path.abspath(a.out_olean)]
     tr = os.path.join(w, 'strace.txt')
     if shutil.which('strace') and not a.no_strace:
         cmd = ['strace', '-f', '-qq', '-e', 'trace=openat,open', '-o', tr] + cmd
@@ -307,13 +316,15 @@ def main():
     p.add_argument('--iface', required=True)
     p.add_argument('modules', nargs='+')
     p = sub.add_parser('final')
-    p.add_argument('--src', required=True)
-    p.add_argument('--spec-build', required=True)
+    p.add_argument('--src', action='append', required=True)
+    p.add_argument('--spec-build', action='append', required=True)
+    p.add_argument('--module-name', default=None, help='module name of --final (default: its file name)')
+    p.add_argument('--out-olean', default=None, help='also write the module (-o): glue built from interfaces')
     p.add_argument('--iface', required=True)
     p.add_argument('--manifest', action='append', required=True)
     p.add_argument('--mathlib', default=os.path.expanduser('~/l435/mathlib4'))
     p.add_argument('--final', required=True)
-    p.add_argument('--theorem', action='append', required=True)
+    p.add_argument('--theorem', action='append', default=[])
     p.add_argument('--work', required=True)
     p.add_argument('--require-spec-manifest', action='store_true')
     p.add_argument('--no-strace', action='store_true')
