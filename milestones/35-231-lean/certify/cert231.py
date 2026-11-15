@@ -26,7 +26,8 @@ across machines with `--index I --workers W`: item belongs to worker I iff sha1(
   python3 cert231.py plan    --plan P                          seed plan of the new plain keys
   python3 cert231.py cnf     --plan P [--kinds ctx,share,seed] [--index I --workers W] [--limit N] [--budget-hints H] [NAME ...]
   nice -n 10 python3 cert231.py replay --plan P [--kinds ...] [...]
-  python3 cert231.py build   --plan P --build DIR [--jobs 2] NAME ...    compile both modules (build231.py)
+  python3 cert231.py merge   --plan P [--remove-parts] NAME ...   one module per certificate (AUDIT-SCALING.md)
+  python3 cert231.py build   --plan P --build DIR [--jobs 2] [--merged] NAME ...    compile (build231.py)
   python3 cert231.py publish --plan P [--dry-run] NAME ...     push both sources to xfer/231/<name>
   python3 cert231.py status  --plan P
 
@@ -100,6 +101,47 @@ def built(a, sub, name):
 
 def subdirs(kind):
     return ('LocalWindowCtxCnf', 'LocalWindowCtxUnsat') if kind == 'ctx' else ('LocalWindowCnf', 'LocalWindowUnsat')
+
+
+def merged_dir(kind):
+    return 'LocalWindowCtxCert' if kind == 'ctx' else 'LocalWindowCert'
+
+
+def merge_sources(cnf_src, unsat_src, cnf_module):
+    """One module from the Cnf and replay sources of a certificate (AUDIT-SCALING.md: one .olean per
+    certificate, because every imported .olean is one memory mapping).  The imports are merged (the
+    replay's import of the Cnf module is dropped) and the two bodies concatenated; both bodies are
+    closed `namespace Snake9.LocalWindow.<name>` sections with disjoint declaration names."""
+    def split(src):
+        lines = src.split('\n')
+        imps = [l for l in lines if l.startswith('import ')]
+        body = '\n'.join(l for l in lines if not l.startswith('import '))
+        return imps, body
+    ci, cb = split(cnf_src)
+    ui, ub = split(unsat_src)
+    assert f'import {cnf_module}' in ui, cnf_module
+    imps = ci + [l for l in ui if l != f'import {cnf_module}' and l not in ci]
+    out = '\n'.join(imps) + '\n' + cb.rstrip() + '\n\n' + ub.lstrip()
+    for d in ('def ', 'theorem '):
+        names = [l.split()[1 if l.startswith(d) else 2] for l in out.split('\n')
+                 if l.startswith(d) or l.startswith('noncomputable ' + d)]
+        assert len(names) == len(set(names)), ('duplicate declaration names', d)
+    return out
+
+
+def merge(a):
+    """Write <out>/<LocalWindowCtxCert|LocalWindowCert>/<name>.lean from the two sources of each name."""
+    kind_of = {name: kind for kind, k, name, est in items(a)}
+    for n in a.names:
+        kd = kind_of[n]
+        cs, us = src_path(a.out, kd, 0, n), src_path(a.out, kd, 1, n)
+        txt = merge_sources(open(cs).read(), open(us).read(), f'{subdirs(kd)[0]}.{n}')
+        d = os.path.join(a.out, merged_dir(kd))
+        os.makedirs(d, exist_ok=True)
+        open(os.path.join(d, n + '.lean'), 'w').write(txt)
+        rec(a, 'merge', {'name': n, 'kind': kd, 'bytes': len(txt.encode())})
+        if a.remove_parts:
+            os.remove(cs); os.remove(us)
 
 
 def load_meta(a, name):
@@ -417,7 +459,7 @@ def build(a):
     tg = []
     for n in a.names:
         kd = kind_of.get(n, 'ctx' if n.startswith('C') else 'share' if n.startswith('T') else 'plain')
-        tg.append(f'{subdirs(kd)[1]}.{n}')
+        tg.append(f'{merged_dir(kd)}.{n}' if a.merged else f'{subdirs(kd)[1]}.{n}')
     cmd = [sys.executable, BUILD, '--src', a.out, '--build', a.build, '--jobs', str(a.jobs),
            '--rss-cap-gb', str(a.rss_cap_gb), '--allow-sorry', '^$',
            '--log', os.path.join(DATA, f'build231_{tag_of(a.plan)}.jsonl')]
@@ -496,7 +538,7 @@ def status(a):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest='cmd', required=True)
-    ps = {c: sub.add_parser(c) for c in ('keys', 'cores', 'plan', 'cnf', 'replay', 'build', 'publish', 'status')}
+    ps = {c: sub.add_parser(c) for c in ('keys', 'cores', 'plan', 'cnf', 'replay', 'merge', 'build', 'publish', 'status')}
     for p in ps.values():
         p.add_argument('--plan', required=True)
         p.add_argument('--core', default=CORE)
@@ -516,6 +558,8 @@ def main():
     ps['replay'].add_argument('--big', type=float, default=5e6)
     ps['replay'].add_argument('--seed-jobs', default='1', help="parallel cadical runs per round, or 'auto'")
     ps['replay'].add_argument('--cores', type=int, default=4, help='for --seed-jobs auto')
+    ps['merge'].add_argument('--remove-parts', action='store_true')
+    ps['build'].add_argument('--merged', action='store_true', help='build the merged one-module certificates')
     ps['build'].add_argument('--jobs', type=int, default=1)
     ps['build'].add_argument('--rss-cap-gb', type=float, default=10.0)
     ps['build'].add_argument('--lean-bin', default=None)

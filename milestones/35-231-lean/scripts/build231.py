@@ -86,7 +86,7 @@ def main():
         for f in os.listdir(d):
             if f.endswith('.lean'):
                 src[f[:-5]] = os.path.join(d, f)
-        for sub in ('LocalWindowCtxCnf', 'LocalWindowCtxUnsat'):
+        for sub in ('LocalWindowCtxCnf', 'LocalWindowCtxUnsat', 'LocalWindowCtxCert'):
             if os.path.isdir(os.path.join(d, sub)):
                 for f in os.listdir(os.path.join(d, sub)):
                     if f.endswith('.lean'):
