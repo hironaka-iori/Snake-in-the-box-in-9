@@ -133,8 +133,9 @@ def derivable_from_seeds(cands, seeds):
 class World231(E.World):
     """eng233.World with the context share sources and the 233 chain's free certificates."""
 
-    def __init__(self, P, Q, B, pool=None, verbose=True):
+    def __init__(self, P, Q, B, pool=None, verbose=True, no_c8=False):
         self.ctx_loaded = False
+        self.no_c8 = no_c8
         super().__init__(P, Q, B, pool=pool, verbose=verbose)
         self.add_ctx(verbose)
         self.add_free233(verbose)
@@ -147,7 +148,7 @@ class World231(E.World):
         I = S7.ctx_index(self.Pr, C.canon)
         rows = {7: [], 8: []}
         for (ctx, c, t), s in X.st.items():
-            if s['lb'] > 0:
+            if s['lb'] > 0 and not (ctx == 8 and self.no_c8):
                 rows[ctx].append(((ctx, c, t), s['lb']))
         calls = collections.defaultdict(list)
         for r in S7.records():
@@ -374,8 +375,11 @@ def share_floor_level(W, i):
 L.share_floor_level = share_floor_level
 
 
+NO_C8 = os.environ.get('NO_C8') == '1'          # ctx-7-only variant (no ctx-8 certificates)
+
+
 def make_world(P, Q, B, verbose=True):
-    W = World231(P, Q, B, verbose=verbose)
+    W = World231(P, Q, B, verbose=verbose, no_c8=NO_C8)
     return W
 
 
@@ -527,7 +531,7 @@ def exact_pass(W, budget, log_every=500):
 def cmd_scan(a):
     W = make_world(*LAM_MAX, 15)
     out = []
-    path = a.out or os.path.join(DATA, 'certplan231_scan.json')
+    path = a.out or os.path.join(DATA, 'certplan231_scan%s.json' % ('_noc8' if NO_C8 else ''))
     for lt in candidates():
         P, Q = lt.numerator, lt.denominator
         B = bits_of(P, Q)
@@ -658,6 +662,161 @@ def cmd_calib233(a=None):
     return out
 
 
+
+def load_plan(W, tag):
+    """Restore chosen keys and share levels of a saved plan into a fresh world."""
+    d = json.load(gzip.open(os.path.join(DATA, f'certplan231_{tag}.json.gz'), 'rt'))
+    for r in d['plain']:
+        if r['basis'].startswith('derive233'):
+            j = W.kid.get((tuple(r['key'][0]), tuple(r['key'][1])))
+            if j is not None:
+                W.kfree[j] = True; W.kcost[j] = 0.0; W.kbasis[j] = r['basis']
+    ch = W.kfree.copy(); miss = 0
+    for r in d['plain']:
+        j = W.kid.get((tuple(r['key'][0]), tuple(r['key'][1])))
+        if j is None:
+            miss += 1
+        else:
+            ch[j] = True
+    W.set_chosen(ch)
+    xid = {k: i for i, k in enumerate(W.xkeys) if k is not None}
+    W.lvl = W.sF.copy()
+    for r in d['share']:
+        if r['kind'] == '5':
+            i = W.k5id[(tuple(r['key'][0]), tuple(r['key'][1]))]
+        else:
+            i = xid[(7 if r['kind'] == 'c7' else 8, tuple(r['key'][0]), tuple(r['key'][1]))]
+        W.lvl[i] = max(W.lvl[i], r['level'])
+    return d['summary'], miss
+
+
+OPL_CP = os.path.join(DATA, 'oracle_plain_cp231.jsonl')
+
+
+def decide_plain(lk, tl=20.0):
+    sys.path.insert(0, os.path.join(MS, '11-local-ceiling', 's0_share_loop'))
+    import wincert_share as ws
+    k = C.rkey_of(lk)
+    enc = ws.from_key(k)
+    st, sel, cuts, sec = ws.solve(enc, tl)
+    r = dict(dirs=list(k[0]), alpha=[list(x) for x in k[1]], kind='plain', k=len(k[1]), result=st,
+             witness=ws.share_exact(enc, sel, 12) if sel else None, cuts=cuts, seconds=round(sec, 3),
+             nv=enc.nv, ncl=len(enc.clauses), src='certplan231 giants')
+    with open(OPL_CP, 'a') as f:
+        f.write(json.dumps(r) + '\n')
+    return st, sec
+
+
+def add_keys(W, ks, hints, basis):
+    segs = [W.Pr.edges_of(k).astype(np.int32) for k in ks]
+    W.kg = np.concatenate([W.kg] + segs)
+    W.kptr = np.concatenate([W.kptr, W.kptr[-1] + np.cumsum([len(x) for x in segs])])
+    for k in ks:
+        W.kid[k] = len(W.keys); W.keys.append(k)
+    n = len(ks); W.nK = len(W.keys)
+    W.khints = np.concatenate([W.khints, hints]); W.kcore = np.concatenate([W.kcore, np.full(n, 2000.0)])
+    W.kbasis += [basis] * n
+    W.kfree = np.concatenate([W.kfree, np.zeros(n, bool)])
+    W.kcost = np.concatenate([W.kcost, np.array(hints) + OVH_CERT])
+    W.chosen = np.concatenate([W.chosen, np.ones(n, bool)])
+    for s_ in segs:
+        np.add.at(W.cnt, s_, 1)
+    return list(range(W.nK - n, W.nK))
+
+
+def cmd_giants(a):
+    """milestone 31's step 3 on a saved plan: replace kept plain keys above --min hints by longer
+    suffix windows of the critical transitions only they cover (decided here at 20 s, retry 90 s)."""
+    from fractions import Fraction as Fr
+    lt = Fr(a.lam); P, Q = lt.numerator, lt.denominator
+    B = a.bits or bits_of(P, Q)
+    W = make_world(P, Q, B)
+    s0, miss = load_plan(W, a.tag0)
+    ok, it, rng = W.check(); assert ok, rng
+    L.log(f'loaded {a.tag0} ({miss} missing), range {rng}')
+    C.fp.K6.OPLAIN = os.path.join(C.MS, '11-local-ceiling', 'k6_loop', 'oracle_plain.jsonl')   # comb's trap
+    S = dict(C.fp.Status().st)
+    for f in sorted(__import__('glob').glob(os.path.join(DATA, 'oracle_plain*.jsonl*'))):
+        for l in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f)):
+            r = json.loads(l)
+            if all(x[0] == x[1] or tuple(x) == (6, 21) for x in r['alpha']):
+                k = fp.lkey(tuple(r['dirs']), tuple(GA.sym_of(tuple(x)) for x in r['alpha']))
+                if S.get(k) != 'UNSAT':
+                    S[k] = r['result']
+    for k in W.keys:
+        if len(k) == 2:
+            S[k] = 'UNSAT'
+    PC = L.PlainCosts()
+    psec = plain_seconds()
+    big = [int(j) for j in np.argsort(-W.kcost) if W.chosen[j] and not W.kfree[j] and W.khints[j] >= a.min]
+    L.log(f'{len(big)} kept keys above {a.min:.0f} hints')
+    t0 = time.time(); logs = []
+    for j in big:
+        if time.time() - t0 > a.budget:
+            break
+        crit, need = W.critical()
+        gs = W.hits(j).astype(np.int64)
+        gc = gs[crit[gs]]
+        U = gc[(W.cnt[gc] == 1) & (W.S(gc) < need[gc])]
+        wj = len(W.keys[j][1])
+        cand = {}; rem = set(range(len(U))); dec = dict(tested=0, unsat=0, timeout=0, sat=0)
+        for tl in (20.0, 90.0):
+            for w in range(wj + 1, 7):
+                if not rem:
+                    break
+                groups = {}
+                for q in rem:
+                    groups.setdefault(W.Pr.windows(int(U[q]))[w - 2], []).append(q)
+                for k, qs in groups.items():
+                    s_ = S.get(k)
+                    if s_ is None or (s_ == 'TIMEOUT' and tl > 20 and w == 6 and psec.get(k, 0) < tl - 1):
+                        s_, sec = decide_plain(k, tl); S[k] = s_; psec[k] = sec
+                        dec['tested'] += 1; dec[{'UNSAT': 'unsat', 'TIMEOUT': 'timeout'}.get(s_, 'sat')] += 1
+                    if s_ == 'UNSAT':
+                        cand[k] = set(qs); rem -= set(qs)
+        opts = []
+        for k, qs in cand.items():
+            jj = W.kid.get(k)
+            if jj is not None:
+                c = 0.0 if (W.chosen[jj] or W.kfree[jj]) else W.kcost[jj]
+            else:
+                t = psec.get(k, 1.0) * PC.scale
+                c = PC.C4.cls(f'k6_{len(k[1])}_{L.P4.sbin(t)}', (1.49e6 * max(t, 0.01) ** 0.843, 2000.0, 'fit'))[0] + OVH_CERT
+            opts.append((k, c, qs))
+        left = set(range(len(U))); pick = []; tot = 0.0
+        while left and opts:
+            best = min(opts, key=lambda o: (o[1] + 1e-9) / len(o[2] & left) if o[2] & left else float('inf'))
+            if not (best[2] & left):
+                break
+            pick.append(best); tot += best[1]; left -= best[2]
+        rec = dict(key=[list(W.keys[j][0]), list(W.keys[j][1])], cost=round(float(W.khints[j])), U=len(U), decided=dec,
+                   uncovered=len(left), replacement_cost=round(tot), n_new=len(pick), replaced=False)
+        if tot < W.kcost[j]:
+            newk = [p[0] for p in pick if p[0] not in W.kid]
+            hs = [p[1] - OVH_CERT for p in pick if p[0] not in W.kid]
+            added = add_keys(W, newk, np.array(hs, float), 'giants231') if newk else []
+            turned = list(added)
+            for p in pick:                       # existing pool keys used by the cover: re-choose
+                jj = W.kid[p[0]]
+                if not W.chosen[jj]:
+                    W.chosen[jj] = True; np.add.at(W.cnt, W.hits(jj), 1); turned.append(jj)
+            a_, b_, _ = W.exact_plain([j])
+            if b_:
+                rec['replaced'] = True
+            else:                                # undo: the cover alone did not let the key go
+                for jj in turned:
+                    W.chosen[jj] = False; np.subtract.at(W.cnt, W.hits(jj), 1)
+        L.log(json.dumps(rec)); logs.append(rec)
+    ok, it, rng = W.check(); assert ok
+    hist = dict(giants=logs)
+    hist['dual'] = run_dual(W)
+    if a.exact_s > 0:
+        hist['exact'] = exact_pass(W, a.exact_s)
+        ok, it, rng = W.check(); assert ok
+    s = save_plan(W, a.tag, dict(steps=hist, before=s0))
+    L.log(json.dumps(s))
+
+
 def _test():
     t0 = time.time()
     W = make_world(15268, 27, 15)
@@ -675,10 +834,11 @@ if __name__ == '__main__' and sys.argv[1:2] == ['_samplelist']:
     sample_list(sys.argv[2], sys.argv[3])
 if __name__ == '__main__' and sys.argv[1:2] == ['calib233']:
     cmd_calib233()
-if __name__ == '__main__' and sys.argv[1:2] in (['scan'], ['plan']):
+if __name__ == '__main__' and sys.argv[1:2] in (['scan'], ['plan'], ['giants']):
     ap = argparse.ArgumentParser()
     ap.add_argument('cmd'); ap.add_argument('lam', nargs='?')
     ap.add_argument('--out'); ap.add_argument('--bits', type=int); ap.add_argument('--exact-s', type=float, default=0)
-    ap.add_argument('--tag'); ap.add_argument('--calib')
+    ap.add_argument('--tag'); ap.add_argument('--calib'); ap.add_argument('--tag0')
+    ap.add_argument('--min', type=float, default=1e8); ap.add_argument('--budget', type=float, default=3600)
     a = ap.parse_args()
-    {'scan': cmd_scan, 'plan': cmd_plan}[a.cmd](a)
+    {'scan': cmd_scan, 'plan': cmd_plan, 'giants': cmd_giants}[a.cmd](a)
