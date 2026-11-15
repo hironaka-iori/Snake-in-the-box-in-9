@@ -176,8 +176,62 @@ void marked_seven(int t,const std::array<Catalogue,4>& six){
     }
     std::cout<<"marked_seven "<<64-t<<' '<<marked<<' '<<placements<<std::endl;
 }
-void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std::vector<F>,9>& four,int min_edges=0){
-    std::string prefix=min_edges?"rich-"+std::to_string(min_edges)+"-marked-seven-":"stream-marked-seven-";
+// Index opposite five-cube layers by three possible site states: absent,
+// occupied and able to cross, or occupied and already at its full degree.
+struct LayerIndex {
+    struct Node {
+        U all_sites=~U(0),all_blocked=~U(0),possible_tips=0,split=0;
+        int min_residual=100,child[3]={-1,-1,-1};
+        std::vector<const Layer*> leaf;
+    };
+    U lower;
+    std::vector<Node> tree;
+    U blocked(const Layer& y)const{return y.f.sat|(y.nonisolated&lower);}
+    int build(const std::vector<const Layer*>& values){
+        if(values.empty())return -1;
+        const int id=int(tree.size());tree.emplace_back();
+        U any_sites=0,any_blocked=0;
+        for(auto p:values){
+            auto& node=tree[id];U bad=blocked(*p);
+            node.all_sites&=p->f.s;node.all_blocked&=bad;
+            node.possible_tips|=p->f.s&~bad;
+            node.min_residual=std::min(node.min_residual,p->residual);
+            any_sites|=p->f.s;any_blocked|=bad;
+        }
+        U varying=(any_sites^tree[id].all_sites)|(any_blocked^tree[id].all_blocked);
+        if(values.size()<=20||!varying){tree[id].leaf=values;return id;}
+        int best=-1;U split=0;
+        for(U bits=varying;bits;bits&=bits-1){
+            U bit=bits&-bits;int occ=0,bad=0;
+            for(auto p:values){occ+=bool(p->f.s&bit);bad+=bool(blocked(*p)&bit);}
+            int score=int(values.size())-std::max({int(values.size())-occ,occ-bad,bad});
+            if(score>best){best=score;split=bit;}
+        }
+        tree[id].split=split;
+        std::array<std::vector<const Layer*>,3> parts;
+        for(auto p:values)parts[!(p->f.s&split)?0:((blocked(*p)&split)?2:1)].push_back(p);
+        for(int j=0;j<3;++j){int child=build(parts[j]);tree[id].child[j]=child;}
+        return id;
+    }
+    explicit LayerIndex(const std::vector<Layer>& values,U fixed):lower(fixed){
+        std::vector<const Layer*> refs;for(auto& y:values)refs.push_back(&y);build(refs);
+    }
+    template<class Visit>
+    void query(int id,U xsites,U xbad,int residual,int max_c,const Visit& visit)const{
+        if(id<0)return;const auto& node=tree[id];
+        if((xbad&node.all_sites)||(xsites&node.all_blocked))return;
+        if(residual+node.min_residual-std::popcount(xsites&~xbad&node.possible_tips)>max_c)return;
+        if(!node.split){
+            for(auto y:node.leaf)if(!(xbad&y->f.s)&&!(xsites&blocked(*y)))visit(*y);
+            return;
+        }
+        query(node.child[0],xsites,xbad,residual,max_c,visit);
+        if(!(xbad&node.split))query(node.child[1],xsites,xbad,residual,max_c,visit);
+        if(!(xsites&node.split))query(node.child[2],xsites,xbad,residual,max_c,visit);
+    }
+};
+void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std::vector<F>,9>& four,int min_edges=0,bool indexed=false){
+    std::string prefix=min_edges?(std::string(indexed?"richfast-":"rich-")+std::to_string(min_edges)+"-marked-seven-"):"stream-marked-seven-";
     std::ofstream out(prefix+std::to_string(64-t)+".txt");
     std::size_t marked=0,placements=0;
     for(int h=0;h<=t/2;++h)for(const auto& a:six[h].representatives){
@@ -186,14 +240,21 @@ void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std
         auto R=compatible_layers(high,a.sat>>32,t-h,four);
         auto group=stabilizer6(a.s);
         std::unordered_set<U> seen;
-        for(int k=0;k<=t-h;++k)for(const auto& x:L[k])for(const auto& y:R[t-h-k]){
+        for(int k=0;k<=t-h;++k){
+          const auto& right=R[t-h-k];
+          if(L[k].empty()||right.empty())continue;
+          bool use_index=indexed&&right.size()>20&&L[k].size()>20;
+          const std::vector<Layer> empty;
+          LayerIndex search(use_index?right:empty,high);
+          for(const auto& x:L[k]){
+           auto join=[&](const Layer& y){
             U cross=x.f.s&y.f.s;
             int c=a.c+x.residual+y.residual-std::popcount(cross);
-            if(c<=0||c>64-t-min_edges)continue;
-            if(!admissible(x.f,y.f)||(cross&((x.nonisolated&low)|(y.nonisolated&high))))continue;
+            if(c<=0||c>64-t-min_edges)return;
+            if(!admissible(x.f,y.f)||(cross&((x.nonisolated&low)|(y.nonisolated&high))))return;
             U s=x.f.s|(y.f.s<<32);
-            if(seen.count(s))continue;
-            if(!forest_pair(a,F{s,0,0},c))continue;
+            if(seen.count(s))return;
+            if(!forest_pair(a,F{s,0,0},c))return;
             auto before=seen.size();
             for(const auto& map:group)seen.insert(transform6(s,map));
             auto orbit=seen.size()-before;
@@ -201,6 +262,10 @@ void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std
             auto count=(46080/group.size())*orbit*(2*h==t?1:2);
             out<<a.s<<' '<<s<<' '<<c<<' '<<count<<'\n';
             ++marked;placements+=count;
+           };
+           if(use_index)search.query(0,x.f.s,x.f.sat|(x.nonisolated&low),a.c+x.residual,64-t-min_edges,join);
+           else for(const auto& y:right)join(y);
+          }
         }
     }
     std::cout<<"stream_marked_seven "<<64-t<<' '<<marked<<' '<<placements<<std::endl;
@@ -274,12 +339,12 @@ int main(int argc,char**argv){
         int last=std::stoi(argv[3]);if(last<0||last>2*deficit+1)return 2;
         for(auto& cat:six){cat.seen.clear();cat.labelled.clear();cat.labelled.shrink_to_fit();}
         for(int t=0;t<=last;++t)stream_marked(t,six,four);
-    }else if(argc==6 && std::string(argv[2])=="richedges"){
+    }else if(argc==6 && (std::string(argv[2])=="richedges"||std::string(argv[2])=="richfast")){
         int first=std::stoi(argv[3]),last=std::stoi(argv[4]),min_edges=std::stoi(argv[5]);
         if(deficit!=2||first<0||last<first||last>7||min_edges<1||min_edges>64)return 2;
         for(auto& cat:six){cat.seen.clear();cat.labelled.clear();cat.labelled.shrink_to_fit();}
         if(last>=6){marked_six_three(six[3],five,four);deduplicate_odd_six(six[3]);}
-        for(int t=first;t<=last;++t)stream_marked(t,six,four,min_edges);
+        for(int t=first;t<=last;++t)stream_marked(t,six,four,min_edges,std::string(argv[2])=="richfast");
     }else if(argc>2){
         int last=std::stoi(argv[2]);if(last>7||(last>2*deficit+1&&deficit!=2))return 2;
         for(auto& cat:six){cat.seen.clear();cat.labelled.clear();cat.labelled.shrink_to_fit();}
