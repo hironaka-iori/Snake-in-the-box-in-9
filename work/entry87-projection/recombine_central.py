@@ -10,7 +10,7 @@ from three_cross_faces import normalize
 from solve import save
 
 
-def build(trim=0,reverse=False):
+def build(trim=0,reverse=False,grow=False):
     bank={tuple(row["middle"]) for row in catalogue()}
     shapes=set()
     for pair in bank:
@@ -20,6 +20,14 @@ def build(trim=0,reverse=False):
                     run=oriented[:len(oriented)-cut]
                     assert len(run)>=2
                     shapes.add(normalize(run,run)[0])
+                    if grow:
+                        forbidden=set(run)
+                        forbidden.update(v^(1<<k) for v in run[:-1] for k in range(8))
+                        for k in range(8):
+                            new=run[-1]^(1<<k)
+                            if new not in forbidden:
+                                extended=tuple(run)+(new,)
+                                shapes.add(normalize(extended,extended)[0])
     forms=sorted(shapes,key=lambda p:(len(p),p))
     axes=np.array(list(permutations(range(8))),dtype=np.uint8)
     table=np.zeros((len(axes),256),dtype=np.uint8)
@@ -67,10 +75,12 @@ if __name__=="__main__":
     p.add_argument("--budget",type=int,default=200000);p.add_argument("--target",type=int,choices=(192,193),default=193)
     p.add_argument("--checker",type=Path)
     p.add_argument("--trim",type=int,default=0);p.add_argument("--reverse",action="store_true")
+    p.add_argument("--grow",action="store_true")
     a=p.parse_args();suffix=f"-{a.trim}-{int(a.reverse)}" if a.trim or a.reverse else ""
+    if a.grow:suffix+="-grow"
     file=Path("recombined-central"+suffix+"-menu.json")
     if not a.stop:
-        data=build(a.trim,a.reverse);save(file,data)
+        data=build(a.trim,a.reverse,a.grow);save(file,data)
         print(len(data["forms"]),data["counts"],len(data["rows"]),
               sum(r["available"]>=r["needed"] for r in data["rows"]))
     else:
