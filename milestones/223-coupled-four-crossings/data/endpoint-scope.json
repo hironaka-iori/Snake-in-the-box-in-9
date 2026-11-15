@@ -1,0 +1,9 @@
+{
+  "query": "endpoint80-d12",
+  "scope": "Root0 and endpoint80 fixed; vertex88 retained internally. Both faces change, at most12 original vertices omitted, exactly193 selected vertices, exactlyfour bit8 crossings. All port locations variable.",
+  "metadata_note": "The inherited free-endpoint phrase in the base scope string is superseded by the explicit endpoint argument and the specialized equality end[80]=1. The result scope also states this specialization. No ambiguity in the saved model constraints.",
+  "required_deletion": {
+    "vertex": 208,
+    "reason": "80 XOR 88 = 8 and 80 XOR 208 = 128. Retaining both neighbours would give endpoint80 degree at least2."
+  }
+}

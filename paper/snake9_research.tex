@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 222, 15 November 2026}
+\date{Research state after round 223, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -78,6 +78,10 @@ cycle occupancy, subset forest and disagreement-cycle parity inequalities.
 The exclusion uses a complete finite division into actual path prefixes.
 Generic Lean implications and independent exact numerical certificates
 have separate verification records.
+
+A checked five-component constructor supports a joint four-crossing
+search. The first small neighbourhood is computationally excluded;
+larger neighbourhoods remain unresolved, with no new construction.
 
 The paper separates written proofs, checked implications, native
 enumerations and unresolved premises. The contributor bound improves
@@ -7708,6 +7712,107 @@ remain valid in the unconditioned relaxation: splitting into actual
 prefixes adds restrictions that those fractional points need not satisfy.
 The global interval $191\le a(9)\le233$ is unchanged.
 
+\subsection{Joint four-crossing construction}
+\label{sec:coupled223}
+The lower-dimensional examples suggest optimizing the components in both
+faces together. The displayed constructions have component lengths
+\[
+18+24+6+2=50,\qquad 8+25+10+25+26+4=98.
+\]
+The final summands count crossings. In the second example, two 25-edge
+paths occupy 52 vertices of one $Q_7$ face, exceeding the 51 vertices
+available in a single longest $Q_7$ path. Compatibility between separated
+components is therefore essential construction data.
+
+\begin{proposition}[Five-component joining]\label{prop:five-join223}
+Let $P_0,\ldots,P_4$ be oriented induced paths in $Q_n$, with edge
+lengths $\ell_0,\ldots,\ell_4$. Consecutive paths intersect exactly at
+the terminal vertex of the first and the initial vertex of the second.
+Assume that every nonconsecutive pair assigned to the same face is
+disjoint and nonadjacent, and every nonconsecutive pair assigned to
+opposite faces is disjoint. Placing the paths in faces $0,1,0,1,0$
+and joining the four consecutive pairs produces an induced path in
+$Q_{n+1}$ of length $\sum_{i=0}^{4}\ell_i+4$.
+\end{proposition}
+\begin{proof}
+Within each component, the selected adjacencies are precisely its path
+edges. The same-face hypotheses exclude every contact between different
+components in that face. Opposite-face cube vertices are adjacent exactly
+when their projections agree. The intersection hypotheses therefore give
+exactly the four intended crossing edges and no others. The ordered
+concatenation has no repeated vertex and has precisely its consecutive
+adjacencies. Its edge count is the sum of the five component lengths
+plus four. Singleton outer components are allowed.
+\end{proof}
+The indexed constructor underlying this proposition has passed Lean,
+using the existing append and layer constructions. This checks the
+assembly implication under its compatibility premises. It does not
+supply components of the required lengths or certify solver infeasibility.
+
+\paragraph{Joint selection of both faces.}
+The chosen 191-edge seed has five consecutive component lengths
+\[
+46,83,32,13,13,
+\]
+and face occupancies 94 and 98. Its normalized endpoints are 0 and 88,
+and coordinate 8 is the crossing direction. All 512 vertices are
+available to a new selection. The target has 193 vertices, four
+crossings and endpoint 0; the other endpoint and all four port locations
+are variable. At least one original vertex must be removed in each face.
+No face occupancy or component-exchanging symmetry is imposed.
+
+A 192-edge path from 0 ends at an even vertex, and four crossings put
+that endpoint in the lower face. Its colour counts are 97 even and
+96 odd vertices. The old endpoint 88 can remain internally, but cannot
+remain the final endpoint. For a selected vertex $v$, the model imposes
+\[
+\sum_{w\sim v}x_w=2-e_v,\qquad e_v\le x_v,
+\]
+with exactly two endpoint indicators. The degree equality is imposed
+only when $x_v=1$. Each vertical-edge indicator is the conjunction of
+its two endpoint selections, and their sum is four. All coordinate
+squares exclude selection of all four corners. A disconnected feasible
+selection can contain cycle components; each observed cycle is excluded
+by requiring at least one of its vertices to be absent. A construction
+is accepted only after connectedness and all unordered adjacency pairs
+are checked.
+
+\paragraph{Restricted computational results.}
+Let $d$ be the number of omitted seed vertices. The new selection must
+add $d+1$ vertices because the seed has 192 vertices and the target has
+193. The recorded runs are:
+\begin{center}
+\begin{tabular}{rll}
+Maximum $d$ & Native outcome & Seconds\\\hline
+4 & \texttt{INFEASIBLE} & 3.204\\
+8 & \texttt{UNKNOWN} & 120.063\\
+12 & \texttt{UNKNOWN} & 150.031\\
+\end{tabular}
+\end{center}
+The four-omission result excludes only the specified seed alignment,
+retained endpoint, crossing coordinate and both-face changes. It gives
+a computational requirement of at least five omissions in that class,
+without a Lean contradiction certificate. Larger unknown queries remain
+unresolved. No new snake or global numerical bound is obtained.
+Models, execution records, the checked constructor and independent
+source reviews are retained in milestone 223~\cite{research223}.
+
+\paragraph{Endpoint-directed construction.}
+If a vertex $w$ is the endpoint of an induced path and an adjacent
+vertex $u$ is retained, every other neighbour of $w$ must be absent.
+Indeed, any selected neighbour occupies the unique preceding path
+index. This uniqueness and its exclusion consequence have passed Lean
+for actual indexed paths in an irreflexive undirected graph.
+For the chosen seed, retaining 88 and making 80 the new endpoint
+therefore requires deletion of 208: the exclusive-or differences are
+$80\mathbin{\mathrm{xor}}88=8$ and
+$80\mathbin{\mathrm{xor}}208=128$, each a single coordinate bit.
+Vertex 208 is an old crossing port, so this construction necessarily
+changes a port. The twelve-omission query with these endpoint choices
+remains unknown after 75 seconds. The generic endpoint result is
+checked separately from these elementary coordinate calculations and
+the unresolved search.
+
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
 from the explicit witness. The completed contributor upper theorem and
@@ -7874,6 +7979,9 @@ coverage, concrete model validity and exact coefficient arithmetic have
 separate independent audits, with end-to-end Lean assembly of those
 numerical records still absent. These scopes are distinguished in
 Sections~\ref{sec:linear219}--\ref{sec:prefix222}.
+The five-component assembly in Section~\ref{sec:coupled223} now
+has a checked indexed constructor. Its restricted native search results
+retain separate verification limits.
 The round-220 full-source review corrects historical proof references,
 notation and current-status statements; it does not rebuild the entire
 archived contributor chain.
@@ -11327,6 +11435,11 @@ Research milestone 222, 15 November 2026.
 F.~Barahona and A.~R.~Mahjoub. On the cut polytope.
 \emph{Mathematical Programming} \textbf{36} (1986), 157--173.
 \url{https://www.lamsade.dauphine.fr/~mahjoub/Papers/BM86.pdf}.
+
+\bibitem{research223}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Joint four-crossing construction
+and five-component joining}. Research milestone 223, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/223-coupled-four-crossings}.
 
 \end{thebibliography}
 \end{document}

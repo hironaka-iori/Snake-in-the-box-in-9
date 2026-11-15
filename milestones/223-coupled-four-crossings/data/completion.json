@@ -1,0 +1,137 @@
+{
+  "round": 223,
+  "status": "PROGRESS",
+  "goal_status": "ACTIVE",
+  "utc": "2026-11-15T06:46:07.325766+00:00",
+  "previous_research_round": 222,
+  "previous_research_result": "PROGRESS",
+  "previous_interactive_turn": "ROUTE_SELECTION_ONLY",
+  "interval": [
+    191,
+    233
+  ],
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "constructor_checked": true,
+  "endpoint_exclusion_checked": true,
+  "accepted_new_modules": 2,
+  "theorem_reports": 3,
+  "proofs": [
+    {
+      "module": "FourCrossings223",
+      "receipt": "milestones\\223-coupled-four-crossings\\data\\FourCrossings223-audit.json",
+      "sha256": "2d097d2c788ee5cc678dcb753fb676a602b4c6a5452778c76f6e861da531f553",
+      "reports": 1
+    },
+    {
+      "module": "Endpoint223",
+      "receipt": "milestones\\223-coupled-four-crossings\\data\\Endpoint223-audit.json",
+      "sha256": "efd33141be46ced29f03f71d31971f960b700582f266735f8bcdbc6663b4d6d5",
+      "reports": 2
+    }
+  ],
+  "search_results": {
+    "joint-d4": {
+      "status": "INFEASIBLE",
+      "seconds": 3.2039999999979045,
+      "iterations": [
+        {
+          "status": "INFEASIBLE",
+          "seconds": 3.1683964000000002,
+          "branches": 220530,
+          "conflicts": 45558
+        }
+      ],
+      "cycle_cuts": 0,
+      "witness": null,
+      "result_sha256": "3df4967aaf726c4db222d577f13507b227425c82a57607a46354905cd2f91932",
+      "execution_sha256": "fb1a9f04f0eff9a6c0fe23be6e2bbf51e4c5ac5a3d1cdcb9e915c46a6fbef4b0"
+    },
+    "joint-d8": {
+      "status": "UNKNOWN",
+      "seconds": 120.06299999999464,
+      "iterations": [
+        {
+          "status": "UNKNOWN",
+          "seconds": 120.0531316,
+          "branches": 7531442,
+          "conflicts": 2238098
+        }
+      ],
+      "cycle_cuts": 0,
+      "witness": null,
+      "result_sha256": "fd1591f8a2301cb95c0597ca843cfddd0b7502cf8a4cc3efcd6be8c198920d8b",
+      "execution_sha256": "08907164589c8ddf417f06d4461bc30e2da77b5b3d9c7f5258c6b0b70bffaf59"
+    },
+    "joint-d12": {
+      "status": "UNKNOWN",
+      "seconds": 150.03099999998813,
+      "iterations": [
+        {
+          "status": "UNKNOWN",
+          "seconds": 150.0227673,
+          "branches": 10108977,
+          "conflicts": 3094110
+        }
+      ],
+      "cycle_cuts": 0,
+      "witness": null,
+      "result_sha256": "7060e0cec756bfd2852610ce54facc1d07d1ef4a527cdda3d22780d9b259d1c1",
+      "execution_sha256": "bc0216254cba3df9300790b7cfe94f968ea9fe3c4add511191dcde83eb95adc5"
+    },
+    "endpoint80-d12": {
+      "status": "UNKNOWN",
+      "seconds": 75.0,
+      "iterations": [
+        {
+          "status": "UNKNOWN",
+          "seconds": 75.0021844,
+          "branches": 5462875,
+          "conflicts": 1653373
+        }
+      ],
+      "cycle_cuts": 0,
+      "witness": null,
+      "result_sha256": "be87785f0f2e7d7d437c79ec7d92fd26d238782b17fbfb575054f794689f2999",
+      "execution_sha256": "f14273f863b22d0c9d351a0a44a9a81c5656cdd324d68cfa74431d8be685094b"
+    }
+  },
+  "native_infeasibility_lean_certified": false,
+  "contributor_revision": "4b6b73907af9d76d7a8f3ca592a13dc89c8ad21d",
+  "contributor_231_completed_or_rebuilt": false,
+  "independent_233_rebuild": false,
+  "frozen_parent_search_states": {
+    "22": {
+      "path": "milestones\\217-long-parent-search\\data\\case-22\\state.json",
+      "sha256": "79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452"
+    },
+    "23": {
+      "path": "milestones\\211-subset-capacity\\data\\case-23\\state.json",
+      "sha256": "3b7733ba9ad904608c050ed63199b13a295c56db6d3b1ded909ef13be38d5e7d",
+      "state_jobs": 296,
+      "pending": 11,
+      "state_nodes": 3721372,
+      "counter_scope": "historical cumulative"
+    },
+    "24": {
+      "path": "milestones\\209-slice-capacity\\data\\case-24\\state.json",
+      "sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "state_jobs": 150,
+      "pending": 8,
+      "state_nodes": 9625900,
+      "counter_scope": "historical cumulative"
+    },
+    "9": {
+      "path": "milestones\\209-slice-capacity\\data\\case-9\\state.json",
+      "sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "state_jobs": 150,
+      "pending": 3,
+      "state_nodes": 8142891,
+      "counter_scope": "historical cumulative"
+    }
+  },
+  "software_tests_created_or_run": false,
+  "compile_success": true,
+  "next_full_paper_review": 230,
+  "next_step": "Continue the four-crossing construction route with explicit endpoint choices and mandatory omissions. Endpoint24, retaining88, requires deletion of seed vertices28 and56 at indices7 and143. Use the resulting retained intervals as path components in a reduced reconnection model. Do not repeat unchanged d8/d12/endpoint80 timeouts or claim they exclude any path. A fresh balanced seed is an alternative. Keep both faces and crossing locations variable; do not impose a symmetry exchanging the unequal83/13 components."
+}

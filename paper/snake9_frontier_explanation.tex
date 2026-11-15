@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 222}
+\date{Research state after round 223}
 \begin{document}
 \maketitle
 
@@ -365,11 +365,54 @@ independent exact audits, with concrete model necessity reviewed separately.
 The numerical tree and coefficient arrays have no end-to-end Lean assembly.
 All evidence is retained in milestone 222~\cite{research222}.
 
+\section{Joint construction across four crossings}
+The selected constructive route places three paths in one $Q_8$ face
+and two in the other. It follows the saved lower-dimensional patterns
+\[
+18+24+6+2=50,\qquad 8+25+10+25+26+4=98.
+\]
+The second pattern places 52 vertices in one face as two paths, more
+than a single longest $Q_7$ path can occupy. This is why both faces and
+their joining endpoints should be optimized together.
+
+Five oriented paths in alternating faces join to an induced path when
+consecutive projections meet only at their joining endpoint,
+nonconsecutive same-face components are disjoint and nonadjacent, and
+nonconsecutive opposite-face projections are disjoint. Indeed, a crossing
+edge exists exactly when two projections coincide; these conditions
+leave precisely the intended path edges. The resulting length is the
+sum of the five lengths plus four. This assembly constructor has now
+passed Lean under those premises; existence of large compatible
+components is still the main difficulty.
+
+The chosen 191-edge seed has component lengths $46,83,32,13,13$.
+Both face selections and all four crossing locations are variable in a
+search for 192 edges. Endpoint 0 is retained and the other endpoint is
+free. Parity forces the new endpoint to be even, and four crossings
+place it in the starting face. Keeping both old endpoints would be
+incompatible with the target length.
+
+The native query allowing at most four seed omissions, with at least
+one in each face, is infeasible. Thus a successful change in this
+restricted class needs at least five omissions and six additions.
+This exclusion has no Lean contradiction certificate. The eight- and
+twelve-omission queries are unresolved at their recorded time limits;
+neither provides an impossibility result. No longer snake has been
+obtained. The checked joining theorem and the computational records
+have separate scopes~\cite{research223}.
+
+An endpoint-directed variant retains the old endpoint 88 internally
+and seeks endpoint 80. Since both 88 and the old crossing vertex 208
+are adjacent to 80, vertex 208 must be removed. Otherwise the proposed
+endpoint has two selected neighbours. The general endpoint exclusion
+argument has passed Lean. The corresponding twelve-omission search
+remains unresolved after 75 seconds. This gives a concrete way to
+force a crossing change without fixing the rest of either face.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
-Further construction work can use a different parent isometry class,
-a shorter parent with a sufficiently long compatible partner, or multiple
-crossings. Finding a new parent still requires a compatible joining construction.
+The current route varies both faces in a four-crossing construction.
+Different parent classes and shorter compatible parents remain alternatives. Finding a new parent still requires a compatible joining construction.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
 The maintained global interval remains $191\le a(9)\le233$, with an
@@ -379,7 +422,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 222.
+in the companion manuscript and milestones through round 223.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -416,6 +459,11 @@ Research milestone 222, 15 November 2026.
 F.~Barahona and A.~R.~Mahjoub. On the cut polytope.
 \emph{Mathematical Programming} \textbf{36} (1986), 157--173.
 \url{https://www.lamsade.dauphine.fr/~mahjoub/Papers/BM86.pdf}.
+
+\bibitem{research223}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Joint four-crossing construction
+and five-component joining}. Research milestone 223, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/223-coupled-four-crossings}.
 
 \end{thebibliography}
 \end{document}
