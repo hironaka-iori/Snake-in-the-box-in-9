@@ -223,7 +223,9 @@ def cmd_one(a):
     k2 = {'ctx': 'ctx', 'share': 'share', 'plain': 'seed'}[kind]
     for step, kinds in (('cores', k1), ('cnf', k2), ('replay', k2)):
         t0 = time.time()
-        r = subprocess.run(['nice', '-n', '10'] + c435 + [step, '--plan', a.plan, '--kinds', kinds, name],
+        extra = (['--seed-jobs', os.environ['PROD435_SEED_JOBS']]
+                 if step == 'replay' and os.environ.get('PROD435_SEED_JOBS') else [])
+        r = subprocess.run(['nice', '-n', '10'] + c435 + [step, '--plan', a.plan, '--kinds', kinds] + extra + [name],
                            env=env, capture_output=True, text=True)
         secs[step] = round(time.time() - t0, 1)
         open(os.path.join(D, f'{step}.log'), 'w').write(r.stdout + r.stderr)
@@ -236,7 +238,7 @@ def cmd_one(a):
     if r.returncode != 0:
         return fail(D, mod, f'to435 failed: {r.stdout[-400:]}{r.stderr[-800:]}')
     secs['to435'] = round(time.time() - t0, 1)
-    cap = min(13.0, max(a.rss_cap_gb, predict_gb(est) * 2))
+    cap = min(a.max_cap_gb, max(a.rss_cap_gb, predict_gb(est) * 2))
     # memory is controlled at the build only (generation above runs without a limit): builds are
     # admitted while the predicted RssAnon of the running builds stays within --mem-gb
     budget = Budget(predict_gb(est), a.mem_gb)
@@ -480,7 +482,7 @@ def cmd_run(a):
                 os.remove(os.path.join(D, 'result.json'))
             cmd = [sys.executable, os.path.abspath(__file__), 'one', '--plan', a.plan, '--name', it[5], '--job-dir', D,
                    '--seeds', seeds, '--rss-cap-gb', str(a.rss_cap_gb), '--cadical', a.cadical,
-                   '--mem-gb', str(a.mem_gb)]
+                   '--mem-gb', str(a.mem_gb), '--max-cap-gb', str(a.max_cap_gb)]
             pr = subprocess.Popen(cmd, stdout=open(os.path.join(D, 'one.out'), 'w'), stderr=subprocess.STDOUT)
             running[it[0]] = (pr, it, g, time.time())
             log(f'start {it[0]} ({it[1]}, plan {it[4] / 1e6:.2f} M hints, predicted {g:.1f} GB)')
@@ -693,6 +695,7 @@ def main():
     p.add_argument('--mem-gb', type=float, default=12, help='budget of predicted RssAnon of concurrent Lean builds')
     p.add_argument('--alone-gb', type=float, default=None, help='(not used any more; see --mem-gb)')
     p.add_argument('--rss-cap-gb', type=float, default=7, help='kill a lean above this (raised for big predictions)')
+    p.add_argument('--max-cap-gb', type=float, default=13, help='upper limit of the per-build watchdog cap')
     p.add_argument('--min-free-gb', type=float, default=3)
     p.add_argument('--publish-every', type=float, default=600)
     p.add_argument('--seeds', default=None)
@@ -710,6 +713,7 @@ def main():
     p.add_argument('--seeds', default=None)
     p.add_argument('--rss-cap-gb', type=float, default=7)
     p.add_argument('--mem-gb', type=float, default=12)
+    p.add_argument('--max-cap-gb', type=float, default=13)
     p.add_argument('--cadical', default=os.environ.get('CADICAL') or shutil.which('cadical') or '/usr/local/bin/cadical')
     p = sub.add_parser('status')
     p.add_argument('--plan', action='append', default=None, help='plan(s) to count against (paid or free list)')
