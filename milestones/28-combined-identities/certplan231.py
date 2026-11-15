@@ -72,13 +72,20 @@ CNF_H_PER_CERT = 12.63 / 3108
 CNF_GB_PER_CERT = 0.4298 / 3108
 
 
+TARGET = int(os.environ.get('TARGET', 231))      # the bound certified: m <= TARGET
+
+
 def bits_of(P, Q):
-    g = 225 * P - 125400 * Q
+    g = (TARGET - 6) * P - (1099800 - 4200 * (TARGET + 1)) * Q
     return None if g < 2 else g.bit_length() - 1 if 2 ** (g.bit_length() - 1) <= g else None
 
 
 def bound231(P, Q, B):
     return int(C.bound_m(P, Q, 2 ** B - 1, 1, 0, 0))
+
+
+def slack_of(P, Q, B):
+    return (TARGET - 6) * P - (1099800 - 4200 * (TARGET + 1)) * Q - (2 ** B - 1)
 
 
 # ------------------------------------------------------------------ free certificates of the 233 chain
@@ -267,19 +274,28 @@ class World231(E.World):
         return len(d), n
 
     # ---- costs
-    def ctx_factor(self, kind):
-        return getattr(self, 'cfac', {}).get(kind, 1.0)
+    def calf(self, kind, h):
+        """Calibration factor (measured replay / model, by log10 bin of the model hints) or 1."""
+        cb = getattr(self, 'cbins', {}).get(kind)
+        if not cb:
+            return 1.0
+        return cb[min(8, max(3, int(math.floor(math.log10(max(h, 1.0))))))]
+
+    def ctx_factor(self, kind, h=1e6):
+        return self.calf(kind, h)
 
     def share_cost(self, i, lv):
         if lv <= self.sF[i]:
             return 0.0, 'lean_floor' if i < self.nS and lv <= L.share_floor_level(self, i) else 'free233'
         if i < self.nS:
             h, b = E.World.share_cost(self, i, lv)
-            return h * self.ctx_factor('5'), b
+            return h * self.ctx_factor('5', h), b
         cs = [s for T, s in self.scalls[i] if T >= lv]
         if not cs:
-            return L.share_hints(1.0, self.cal) * self.ctx_factor(self.kind_of(i)), 'noseconds'
-        return L.share_hints(min(cs), self.cal) * self.ctx_factor(self.kind_of(i)), 'model'
+            h = L.share_hints(1.0, self.cal)
+            return h * self.ctx_factor(self.kind_of(i), h), 'noseconds'
+        h = L.share_hints(min(cs), self.cal)
+        return h * self.ctx_factor(self.kind_of(i), h), 'model'
 
     def share_obj(self, i, lv):
         h, b = self.share_cost(i, lv)
@@ -348,7 +364,7 @@ class World231(E.World):
         plain, share = self.rows()
         out = dict(P=self.P, Q=self.Q, B=self.B, lam=self.P / self.Q, lam_alpha=self.P / self.Q / 120,
                    Rmax=self.Rmax, range=int(-self.pi.min()), bound=bound231(self.P, self.Q, self.B),
-                   slack=225 * self.P - 125400 * self.Q - (2 ** self.B - 1))
+                   slack=slack_of(self.P, self.Q, self.B), target=TARGET)
         pp = [r for r in plain if not r['free']]
         out['plain'] = dict(keys=len(plain), free=len(plain) - len(pp), paid=len(pp),
                             hints=sum(r['est_hints'] for r in pp),
@@ -724,16 +740,7 @@ def add_keys(W, ks, hints, basis):
     return list(range(W.nK - n, W.nK))
 
 
-def cmd_giants(a):
-    """milestone 31's step 3 on a saved plan: replace kept plain keys above --min hints by longer
-    suffix windows of the critical transitions only they cover (decided here at 20 s, retry 90 s)."""
-    from fractions import Fraction as Fr
-    lt = Fr(a.lam); P, Q = lt.numerator, lt.denominator
-    B = a.bits or bits_of(P, Q)
-    W = make_world(P, Q, B)
-    s0, miss = load_plan(W, a.tag0)
-    ok, it, rng = W.check(); assert ok, rng
-    L.log(f'loaded {a.tag0} ({miss} missing), range {rng}')
+def giants_step(W, a):
     C.fp.K6.OPLAIN = os.path.join(C.MS, '11-local-ceiling', 'k6_loop', 'oracle_plain.jsonl')   # comb's trap
     S = dict(C.fp.Status().st)
     for f in sorted(__import__('glob').glob(os.path.join(DATA, 'oracle_plain*.jsonl*'))):
@@ -748,7 +755,7 @@ def cmd_giants(a):
             S[k] = 'UNSAT'
     PC = L.PlainCosts()
     psec = plain_seconds()
-    big = [int(j) for j in np.argsort(-W.kcost) if W.chosen[j] and not W.kfree[j] and W.khints[j] >= a.min]
+    big = [int(j) for j in np.argsort(-W.kcost) if W.chosen[j] and not W.kfree[j] and W.khints[j] >= a.min and int(j) not in getattr(W, 'forbidden', ())]
     L.log(f'{len(big)} kept keys above {a.min:.0f} hints')
     t0 = time.time(); logs = []
     for j in big:
@@ -807,6 +814,20 @@ def cmd_giants(a):
                 for jj in turned:
                     W.chosen[jj] = False; np.subtract.at(W.cnt, W.hits(jj), 1)
         L.log(json.dumps(rec)); logs.append(rec)
+    return logs
+
+
+def cmd_giants(a):
+    """milestone 31's step 3 on a saved plan: replace kept plain keys above --min hints by longer
+    suffix windows of the critical transitions only they cover (decided here at 20 s, retry 90 s)."""
+    from fractions import Fraction as Fr
+    lt = Fr(a.lam); P, Q = lt.numerator, lt.denominator
+    B = a.bits or bits_of(P, Q)
+    W = make_world(P, Q, B)
+    s0, miss = load_plan(W, a.tag0)
+    ok, it, rng = W.check(); assert ok, rng
+    L.log(f'loaded {a.tag0} ({miss} missing), range {rng}')
+    logs = giants_step(W, a)
     ok, it, rng = W.check(); assert ok
     hist = dict(giants=logs)
     hist['dual'] = run_dual(W)
@@ -925,6 +946,116 @@ def cmd_cost(a):
               r.get('proj_replay_rss_GB'))
 
 
+
+def apply_calibration(W, cal):
+    """Costs on the calibrated basis: per kind, measured/model by log10 bin (calib_factors)."""
+    W.cbins = {k: {int(b): f for b, f in v['bins'].items()} for k, v in cal.items()}
+    for j in range(W.nK):
+        if not W.kfree[j]:
+            W.khints[j] *= W.calf('plain', W.khints[j])
+            W.kcost[j] = W.khints[j] + OVH_CERT
+
+
+def apply_cap(W, cap):
+    """Forbid every certificate above `cap` calibrated hints: plain keys leave the pool (unchosen,
+    never re-chosen), share ids get the largest level whose cheapest call costs <= cap."""
+    W.cap = cap
+    forb = np.flatnonzero(~W.kfree & (W.khints > cap))
+    for j in forb:
+        if W.chosen[j]:
+            W.chosen[j] = False
+    W.forbidden = set(int(j) for j in forb)
+    W.recount()
+    nl = 0; capped = []
+    for i in np.flatnonzero(W.lvl > W.sF):
+        lv = int(W.lvl[i])
+        if W.share_cost(i, lv)[0] <= cap:
+            continue
+        ok = [T for T, s_ in W.scalls[i] if s_ is not None and T <= lv and W.share_cost(i, T)[0] <= cap]
+        new = max(ok + [int(W.sF[i])])
+        # the cheapest call >= new must be <= cap: walk down
+        while new > W.sF[i] and W.share_cost(i, new)[0] > cap:
+            new -= 1
+        capped.append((int(i), lv, new)); W.lvl[i] = new; nl += 1
+    W.slb_cap = W.lvl.copy()
+    return len(forb), capped
+
+
+def missing_tests(W, capped, tl_plain=60, tl_thr=600, maxjobs=20000):
+    """Solver tests that could restore feasibility under the cap: for the critical transitions that a
+    capped share id or a forbidden plain key leaves uncovered, (a) untested longer plain windows,
+    (b) ctx-7 / ctx-8 thresholds at the needed level with no UNSAT record (loop4.work job format)."""
+    crit, need = W.critical()
+    Sx = W.S(np.arange(W.N))
+    unc = crit & (W.cnt == 0) & (Sx < need)
+    es = np.flatnonzero(unc)
+    jobs = {}
+    X = S7.Ctx()
+    for e in es[:200000]:
+        ds, t, k5, k6 = C.step_windows(int(e), W.Pr)
+        T = int(need[e]) - 0
+        for ctx in (7, 8):
+            c = C.canon(ds[8 - ctx:])
+            sx = X.st.get((ctx, c, tuple(t)))
+            if sx and sx['lb'] >= T:
+                continue
+            if sx and sx['ub'] < T:
+                continue                          # a witness: this ctx cannot reach T
+            key = (ctx, c, tuple(t))
+            jobs[('c', key)] = max(jobs.get(('c', key), 0), T)
+            break
+    out = [dict(kind='c', key=[k[1][0], list(k[1][1]), list(k[1][2])], T=int(T), tl=tl_thr) for k, T in jobs.items()]
+    return out[:maxjobs], int(len(es))
+
+
+def cmd_full(a):
+    """dual -> derive -> giants -> cap -> dual -> exact, on calibrated costs."""
+    from fractions import Fraction as Fr
+    lt = Fr(a.lam); P, Q = lt.numerator, lt.denominator
+    B = a.bits or bits_of(P, Q)
+    W = make_world(P, Q, B)
+    res = load_results(a.results) if os.path.exists(a.results or os.path.join(DATA, 'certsample231_results.jsonl.gz')) else []
+    cal = calib_factors(res) if res else {}
+    apply_calibration(W, cal)
+    L.log(f'calibration bins: { {k: v["bins"] for k, v in cal.items()} }')
+    hist = dict(target=TARGET, calibration={k: {x: v[x] for x in ('n', 'pooled', 'bins')} for k, v in cal.items()})
+    if a.tag0:
+        s0, miss = load_plan(W, a.tag0)
+        hist['loaded'] = a.tag0
+    hist['dual0'] = run_dual(W)
+    if not hist['dual0']['ok']:
+        L.log(f'infeasible at {P}/{Q}/{B}: {hist["dual0"]}'); return
+    if not a.tag0:
+        js = np.flatnonzero(W.chosen & ~W.kfree)
+        nd, ncand = W.mark_derivable(js)
+        hist['derivable'] = dict(derived=nd, checked=len(js))
+        run_dual(W)
+    # giants: every kept plain key above a third of the cap
+    a.min = a.max_cert_hints / 3; a.budget = a.giants_s
+    hist['giants'] = giants_step(W, a)
+    nforb, capped = apply_cap(W, a.max_cert_hints)
+    ok, it, rng = W.check()
+    hist['cap'] = dict(cap=a.max_cert_hints, plain_forbidden=nforb, share_capped=len(capped), ok=bool(ok), range=rng)
+    L.log(f'cap {a.max_cert_hints:.3g}: {nforb} plain keys forbidden, {len(capped)} share ids capped; ok {ok} range {rng}')
+    if not ok:
+        jobs, nunc = missing_tests(W, capped)
+        hist['cap']['uncovered_transitions'] = nunc; hist['cap']['missing_jobs'] = len(jobs)
+        p = os.path.join(DATA, f'split231_jobs_{a.tag}.jsonl.gz')
+        with gzip.GzipFile(p, 'wb', mtime=0) as g:
+            g.write(''.join(json.dumps(j) + '\n' for j in jobs).encode())
+        L.log(f'infeasible under the cap: {nunc} uncovered critical transitions, {len(jobs)} missing ctx tests -> {p}')
+        # keep the capped levels for the report, restore feasibility without the cap for the rest
+        save_plan(W, a.tag + '_capfail', dict(steps=hist))
+        return
+    hist['dual1'] = run_dual(W)
+    if a.exact_s > 0:
+        hist['exact'] = exact_pass(W, a.exact_s)
+        ok, it, rng = W.check(); assert ok
+        hist['dual2'] = run_dual(W)
+    s = save_plan(W, a.tag, dict(steps=hist))
+    L.log(json.dumps(s))
+
+
 def _test():
     t0 = time.time()
     W = make_world(15268, 27, 15)
@@ -945,11 +1076,13 @@ if __name__ == '__main__' and sys.argv[1:2] == ['cost']:
     cmd_cost(ap.parse_args())
 if __name__ == '__main__' and sys.argv[1:2] == ['calib233']:
     cmd_calib233()
-if __name__ == '__main__' and sys.argv[1:2] in (['scan'], ['plan'], ['giants']):
+if __name__ == '__main__' and sys.argv[1:2] in (['scan'], ['plan'], ['giants'], ['full']):
     ap = argparse.ArgumentParser()
     ap.add_argument('cmd'); ap.add_argument('lam', nargs='?')
     ap.add_argument('--out'); ap.add_argument('--bits', type=int); ap.add_argument('--exact-s', type=float, default=0)
     ap.add_argument('--tag'); ap.add_argument('--calib'); ap.add_argument('--tag0')
     ap.add_argument('--min', type=float, default=1e8); ap.add_argument('--budget', type=float, default=3600)
+    ap.add_argument('--max-cert-hints', type=float, default=6e7); ap.add_argument('--giants-s', type=float, default=3600)
+    ap.add_argument('--results')
     a = ap.parse_args()
-    {'scan': cmd_scan, 'plan': cmd_plan, 'giants': cmd_giants}[a.cmd](a)
+    {'scan': cmd_scan, 'plan': cmd_plan, 'giants': cmd_giants, 'full': cmd_full}[a.cmd](a)
