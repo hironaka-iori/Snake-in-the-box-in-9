@@ -491,6 +491,173 @@ def sample_list(tag, out, per_kind=None, tail_s=100.0, seed='231'):
     return len(out_rows)
 
 
+
+LAM_MAX = (15268, 27)                       # minimum cycle mean of the farm data (eval232.py)
+
+
+def candidates(qs=(1, 2, 3, 4, 5, 6, 8, 9, 12, 16, 27)):
+    from fractions import Fraction as Fr
+    hi = Fr(*LAM_MAX); lo = Fr(1125, 2)
+    out = set()
+    for Q in qs:
+        for P in range(math.ceil(lo * Q), math.floor(hi * Q) + 1):
+            out.add(Fr(P, Q))
+    return sorted(out)
+
+
+def exact_pass(W, budget, log_every=500):
+    """milestone 31's exact step: plain drops and share lowerings interleaved by decreasing cost."""
+    items = [(W.kcost[j], 0, int(j)) for j in np.flatnonzero(W.chosen & ~W.kfree)]
+    items += [(W.share_obj(i, W.lvl[i]), 1, int(i)) for i in np.flatnonzero(W.lvl > W.sF)]
+    items.sort(key=lambda t: -t[0])
+    t0 = time.time(); st = dict(items=len(items), plain_tried=0, plain_dropped=0, share_tried=0, share_lowered=0)
+    for n, (c, kind, j) in enumerate(items):
+        if time.time() - t0 > budget:
+            st['stopped_at'] = n; st['stopped_cost'] = float(c); break
+        if kind == 0:
+            a, b, _ = W.exact_plain([j]); st['plain_tried'] += a; st['plain_dropped'] += b
+        else:
+            a, b, _ = W.exact_share([j]); st['share_tried'] += a; st['share_lowered'] += b
+        if n % log_every == log_every - 1:
+            L.log(f'  exact {n + 1}/{len(items)} (cost {c / 1e6:.2f} M): {st}, hints {W.summary()["hints"] / 1e9:.3f} G')
+    st['seconds'] = round(time.time() - t0)
+    return st
+
+
+def cmd_scan(a):
+    W = make_world(*LAM_MAX, 15)
+    out = []
+    path = a.out or os.path.join(DATA, 'certplan231_scan.json')
+    for lt in candidates():
+        P, Q = lt.numerator, lt.denominator
+        B = bits_of(P, Q)
+        if B is None:
+            continue
+        set_lambda(W, P, Q, B)
+        t0 = time.time()
+        r = run_dual(W, log=False)
+        row = dict(P=P, Q=Q, lam_alpha=P / Q / 120, B=B, Rmax=2 ** B - 1)
+        if not r['ok']:
+            row.update(ok=False, range_at_fail=r['range'])
+        else:
+            s = W.summary()
+            row.update(ok=True, range=s['range'], bound=s['bound'], slack=s['slack'],
+                       range_fits_B_minus_1=s['range'] <= 2 ** (B - 1) - 1,
+                       plain_paid=s['plain']['paid'], plain_free=s['plain']['free'], plain_hints=s['plain']['hints'],
+                       **{f'{k}_{x}': s['share' + k][x] for k in ('5', 'c7', 'c8') for x in ('used', 'free', 'paid', 'hints')},
+                       paid=s['paid_certificates'], hints=s['hints'], critical=r['passes'][0]['critical'])
+        row['s'] = round(time.time() - t0, 1)
+        L.log(json.dumps(row))
+        out.append(row)
+        json.dump(out, open(path, 'w'), indent=0)
+
+
+def cmd_plan(a):
+    from fractions import Fraction as Fr
+    lt = Fr(a.lam); P, Q = lt.numerator, lt.denominator
+    B = a.bits or bits_of(P, Q)
+    W = make_world(P, Q, B)
+    if a.calib and os.path.exists(a.calib):
+        W.cfac = json.load(open(a.calib)).get('factors', {})
+        L.log(f'cost factors {W.cfac}')
+    hist = dict(dual0=run_dual(W))
+    s0 = W.summary(); L.log('after dual: ' + json.dumps(s0))
+    t0 = time.time()
+    js = np.flatnonzero(W.chosen & ~W.kfree)
+    nd, ncand = W.mark_derivable(js)
+    L.log(f'{nd} of {len(js)} paid plain keys derivable from 233 seeds ({ncand} candidate checks, {time.time() - t0:.0f}s)')
+    hist['derivable'] = dict(derived=nd, checked=len(js), candidates=ncand)
+    hist['dual1'] = run_dual(W)
+    s1 = W.summary(); L.log('after dual 2: ' + json.dumps(s1))
+    save_plan(W, f'{P}_{Q}_dual', dict(steps=hist))
+    if a.exact_s > 0:
+        hist['exact'] = exact_pass(W, a.exact_s)
+        ok, it, rng = W.check(); assert ok
+        hist['dual2'] = run_dual(W)
+    s = save_plan(W, a.tag or f'{P}_{Q}', dict(steps=hist, after_dual=s0, after_derive=s1))
+    L.log(json.dumps(s))
+
+
+
+def cmd_calib233(a=None):
+    """Milestone 31's model against what milestone 33 measured, per certificate, and the measured
+    kernel time / RSS / .olean of the replay modules as a function of the hints (for the tail)."""
+    d = json.load(gzip.open(os.path.join(M31, 'data', 'keys233_best.json.gz'), 'rt'))
+    rep = {}
+    for l in open(os.path.join(M33, 'certify', 'data', 'replay6SB233.jsonl')):
+        r = json.loads(l); rep[r['module']] = r
+    gb = {}
+    gp = os.path.join(ROOT, 'work', 'final_lean', '.lake', 'guarded_build_233cert.jsonl')
+    if os.path.exists(gp):
+        for l in open(gp):
+            x = json.loads(l)
+            if x['status'] == 'ok':
+                gb[x['module']] = x
+    for l in open(os.path.join(M33, 'certify', 'data', 'remotebuild6SB233.jsonl')):
+        x = json.loads(l)
+        gb['LocalWindowUnsat.' + x['name']] = dict(seconds=x['seconds'], peak_rss_gb=x['peak_rss_gb'], remote=True)
+    lib = os.path.join(ROOT, 'work', 'final_lean', '.lake', 'build', 'lib', 'lean', 'LocalWindowUnsat')
+    out = {}
+    # share: per key
+    sh = []
+    for ds, sy, T, lb, b, h in d['share']:
+        if b == 'lean_floor':
+            continue
+        m = 'T' + ''.join(map(str, ds)) + 'A' + ''.join(map(str, sy)) + 'K' + str(T - 1)
+        r = rep.get(m)
+        if r:
+            sh.append((h, r['hints'], r['est_hints']))
+    sh = np.array(sh, float)
+    out['share'] = dict(n=len(sh), model=sh[:, 0].sum(), measured=sh[:, 1].sum(), est=sh[:, 2].sum(),
+                        ratio_total=sh[:, 1].sum() / sh[:, 0].sum(),
+                        median_ratio=float(np.median(sh[:, 1] / sh[:, 0])),
+                        log_sd=float(np.std(np.log(sh[:, 1] / sh[:, 0]))),
+                        replay_over_est=sh[:, 1].sum() / sh[:, 2].sum())
+    # plain: totals (seeds certify families, so per key only the seeds are comparable)
+    pm = sum(h for ds, sy, b, h in d['plain'] if b != 'reuse') + sum(h for _, _, h in d['h8'])
+    seeds = [r for r in rep.values() if r['kind'] == 'seed']
+    pr = []
+    model = {('S' + ''.join(map(str, ds)) + 'A' + ''.join(map(str, sy))): h for ds, sy, b, h in d['plain']}
+    for r in seeds:
+        if r['module'] in model and model[r['module']] > 0:
+            pr.append((model[r['module']], r['hints']))
+    pr = np.array(pr, float)
+    out['plain'] = dict(model_all_paid_keys=pm, measured_seeds=sum(r['hints'] for r in seeds), n_seeds=len(seeds),
+                        ratio_total=sum(r['hints'] for r in seeds) / pm,
+                        seed_own_model=pr[:, 0].sum(), seed_own_measured=pr[:, 1].sum(),
+                        seed_ratio=pr[:, 1].sum() / pr[:, 0].sum(), seed_median_ratio=float(np.median(pr[:, 1] / pr[:, 0])),
+                        seed_log_sd=float(np.std(np.log(pr[:, 1] / pr[:, 0]))))
+    # kernel seconds, RSS and .olean bytes against hints
+    rows = []
+    for m, r in rep.items():
+        x = gb.get('LocalWindowUnsat.' + m)
+        if not x:
+            continue
+        f = os.path.join(lib, m + '.olean')
+        rows.append((r['hints'], x['seconds'], x['peak_rss_gb'], os.path.getsize(f) if os.path.exists(f) else np.nan,
+                     r['kind'] == 'share'))
+    R = np.array(rows, float)
+    bins = []
+    for lo, hi in ((0, 1e5), (1e5, 1e6), (1e6, 3e6), (3e6, 1e7), (1e7, 2e7), (2e7, 1e9)):
+        m = (R[:, 0] >= lo) & (R[:, 0] < hi)
+        if m.any():
+            bins.append(dict(lo=lo, hi=hi, n=int(m.sum()), hints=R[m, 0].sum(),
+                             ms_per_hint=1e3 * R[m, 1].sum() / R[m, 0].sum(),
+                             max_rss_gb=float(R[m, 2].max()), mean_rss_gb=float(R[m, 2].mean()),
+                             olean_B_per_hint=float(np.nansum(R[m, 3]) / R[m, 0][~np.isnan(R[m, 3])].sum())
+                             if (~np.isnan(R[m, 3])).any() else None))
+    big = R[R[:, 0] >= 3e6]
+    fit_rss = np.polyfit(np.log(big[:, 0]), np.log(big[:, 2]), 1) if len(big) > 5 else None
+    fit_t = np.polyfit(np.log(big[:, 0]), np.log(big[:, 1]), 1) if len(big) > 5 else None
+    out['kernel'] = dict(n=len(R), total_hours=R[:, 1].sum() / 3600, total_hints=R[:, 0].sum(), bins=bins,
+                         rss_fit_loglog=list(fit_rss) if fit_rss is not None else None,
+                         time_fit_loglog=list(fit_t) if fit_t is not None else None,
+                         top=[dict(hints=int(r[0]), seconds=r[1], rss_gb=r[2]) for r in R[np.argsort(-R[:, 0])][:8]])
+    json.dump(out, open(os.path.join(DATA, 'certplan231_calib233.json'), 'w'), indent=1, default=float)
+    print(json.dumps(out, indent=1, default=float))
+    return out
+
+
 def _test():
     t0 = time.time()
     W = make_world(15268, 27, 15)
@@ -506,3 +673,12 @@ if __name__ == '__main__' and sys.argv[1:2] == ['_test']:
     _test()
 if __name__ == '__main__' and sys.argv[1:2] == ['_samplelist']:
     sample_list(sys.argv[2], sys.argv[3])
+if __name__ == '__main__' and sys.argv[1:2] == ['calib233']:
+    cmd_calib233()
+if __name__ == '__main__' and sys.argv[1:2] in (['scan'], ['plan']):
+    ap = argparse.ArgumentParser()
+    ap.add_argument('cmd'); ap.add_argument('lam', nargs='?')
+    ap.add_argument('--out'); ap.add_argument('--bits', type=int); ap.add_argument('--exact-s', type=float, default=0)
+    ap.add_argument('--tag'); ap.add_argument('--calib')
+    a = ap.parse_args()
+    {'scan': cmd_scan, 'plan': cmd_plan}[a.cmd](a)
