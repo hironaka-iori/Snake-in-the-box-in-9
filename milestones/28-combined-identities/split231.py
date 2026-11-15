@@ -160,7 +160,10 @@ def merge(a):
         old = set()
         if os.path.exists(p):
             old = {l for l in gzip.open(p, 'rt').read().split('\n') if l.strip()}
-        ls = sorted(old | out[k])
+        ls = sorted(l for l in old | out[k] if l.strip())
+        if not ls:
+            print('no', k, 'records: nothing written')
+            continue
         with gzip.GzipFile(p, 'wb', mtime=0) as g:
             g.write(('\n'.join(ls) + '\n').encode())
         print('wrote', p, len(ls))
