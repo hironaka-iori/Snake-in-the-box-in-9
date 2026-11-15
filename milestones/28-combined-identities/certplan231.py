@@ -1195,3 +1195,32 @@ if __name__ == '__main__' and sys.argv[1:2] in (['scan'], ['plan'], ['giants'], 
     ap.add_argument('--results')
     a = ap.parse_args()
     {'scan': cmd_scan, 'plan': cmd_plan, 'giants': cmd_giants, 'full': cmd_full}[a.cmd](a)
+
+
+def resolve_jobs(tags, out):
+    """split231.py jobs: every paid share certificate of the plans `tags` whose level is below its
+    source call's level (the level-aware cost assumes a re-solve there), at that level, with a time
+    limit of twice the source call's seconds (60 s .. 1800 s).  Deduplicated per (window, level)."""
+    jobs = {}
+    for tag in tags:
+        d = json.load(gzip.open(os.path.join(DATA, f'certplan231_{tag}.json.gz'), 'rt'))
+        for r in d['share']:
+            if r['free'] or not r['source'] or r['level'] >= r['source']['T']:
+                continue
+            tl = min(1800, max(60, 2 * (r['source']['seconds'] or 30)))
+            if r['kind'] == '5':
+                j = dict(kind='t', key=r['key'], T=r['level'], tl=tl)
+            else:
+                j = dict(kind='c', key=[7 if r['kind'] == 'c7' else 8] + r['key'], T=r['level'], tl=tl)
+            k = json.dumps([j['kind'], j['key'], j['T']])
+            if k not in jobs or jobs[k]['tl'] < tl:
+                jobs[k] = dict(j, est_hints=r['est_hints'], plan=tag)
+    rows = sorted(jobs.values(), key=lambda j: -j['est_hints'])
+    with gzip.GzipFile(out, 'wb', mtime=0) as g:
+        g.write(''.join(json.dumps(j) + '\n' for j in rows).encode())
+    L.log(f'{len(rows)} re-solve jobs -> {out} ({sum(j["tl"] for j in rows) / 3600:.1f} h of limits)')
+    return rows
+
+
+if __name__ == '__main__' and sys.argv[1:2] == ['resolve']:
+    resolve_jobs(sys.argv[3:], sys.argv[2])
