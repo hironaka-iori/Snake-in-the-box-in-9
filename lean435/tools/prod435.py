@@ -132,10 +132,7 @@ def predict_gb(est):
 def cmd_setup(a):
     t0 = time.time()
     os.makedirs(HOME, exist_ok=True)
-    if not os.path.exists(CAD_PATH):
-        os.makedirs(os.path.dirname(CAD_PATH), exist_ok=True)
-        os.symlink(shutil.which('cadical') or '/usr/local/bin/cadical', CAD_PATH)
-        log(f'symlinked {CAD_PATH} -> cadical (the 4.19 generators use that path)')
+    # no symlink needed: cert435.py points the generators at $CADICAL or `cadical` on PATH
     roots = open(os.path.join(ROOT, 'lean435', 'core-roots.txt')).read().split()
     src = os.path.join(HOME, 'core-src')
     subprocess.run([sys.executable, os.path.join(HERE, 'port.py'), '--out', src] + roots, check=True)
@@ -158,7 +155,7 @@ def cmd_one(a):
     os.makedirs(D, exist_ok=True)
     items = {it[5]: it for it in plan_items(a.plan)}
     mod, kind, key, level, est, name = items[a.name]
-    env = dict(os.environ, CERT231_SCR=os.path.join(D, 'scr'), CERT435_DATA=os.path.join(D, 'data'),
+    env = dict(os.environ, CADICAL=a.cadical, CERT231_SCR=os.path.join(D, 'scr'), CERT435_DATA=os.path.join(D, 'data'),
                CERT435_CORE=os.path.join(HOME, 'cores'), CERT435_SEEDS=a.seeds or seeds_file(a.plan))
     c435 = [sys.executable, os.path.join(HERE, 'cert435.py')]
     secs = {}
@@ -404,7 +401,7 @@ def cmd_run(a):
             shutil.rmtree(D, ignore_errors=True)
             os.makedirs(D)
             cmd = [sys.executable, os.path.abspath(__file__), 'one', '--plan', a.plan, '--name', it[5], '--job-dir', D,
-                   '--seeds', seeds, '--rss-cap-gb', str(a.rss_cap_gb)]
+                   '--seeds', seeds, '--rss-cap-gb', str(a.rss_cap_gb), '--cadical', a.cadical]
             pr = subprocess.Popen(cmd, stdout=open(os.path.join(D, 'one.out'), 'w'), stderr=subprocess.STDOUT)
             running[it[0]] = (pr, it, g, time.time())
             log(f'start {it[0]} ({it[1]}, plan {it[4] / 1e6:.2f} M hints, predicted {g:.1f} GB)')
@@ -568,12 +565,14 @@ def main():
     p.add_argument('--names', nargs='*', default=None)
     p.add_argument('--keep', action='store_true', help='keep the job directories (sources, private .olean)')
     p.add_argument('--no-sync', action='store_true', help='no git (tests)')
+    p.add_argument('--cadical', default=os.environ.get('CADICAL') or shutil.which('cadical') or '/usr/local/bin/cadical')
     p = sub.add_parser('one')
     p.add_argument('--plan', required=True)
     p.add_argument('--name', required=True)
     p.add_argument('--job-dir', required=True)
     p.add_argument('--seeds', default=None)
     p.add_argument('--rss-cap-gb', type=float, default=7)
+    p.add_argument('--cadical', default=os.environ.get('CADICAL') or shutil.which('cadical') or '/usr/local/bin/cadical')
     p = sub.add_parser('status')
     p.add_argument('--plan', default=None)
     p = sub.add_parser('merge')

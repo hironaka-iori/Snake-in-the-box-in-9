@@ -21,6 +21,9 @@ if sys.argv[1:2] == ['to435']:
 sys.path.insert(0, CERT)
 sys.dont_write_bytecode = True
 import cert231  # noqa: E402
+import shutil  # noqa: E402
+_cad = os.environ.get('CADICAL') or shutil.which('cadical') or '/usr/local/bin/cadical'
+cert231.C.K.TOOLCHAIN_CADICAL = _cad          # gen_k7_core's wrapper reads it at call time (4.19 default path)
 cert231.DATA = os.environ.get('CERT435_DATA', os.path.join(ROOT, 'lean435', 'data'))
 cert231.CORE = os.environ.get('CERT435_CORE', os.path.join(ROOT, 'lean435', 'cores'))
 if os.environ.get('CERT435_SEEDS'):                 # a seed plan of our own (prod435.py: every key a seed)
