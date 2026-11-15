@@ -52,7 +52,7 @@ def catalogue():
     return [dict(forest=key, occurrences=occ) for key, occ in cases.items()]
 
 
-def decide(row, index, target, budget, checker=None, new=False):
+def decide(row, index, target, budget, checker=None, new=False, endpoint=None):
     a,b = row["forest"]
     fixed = set(a) | set(b)
     tips = {a[0],a[-1],b[0],b[-1]}
@@ -67,6 +67,12 @@ def decide(row, index, target, budget, checker=None, new=False):
     exact(list(use.values()),target-len(fixed))
     exact([use[v] for v in sorted(tips)],3)
     exact(list(end.values()),1)
+    if endpoint is not None:
+        tip=sorted(tips)[endpoint]
+        clauses.append([-use[tip]])
+        for w in end:
+            if (tip.bit_count()+w.bit_count())%2 != target%2:
+                clauses.append([-end[w]])
     fixed_odd = sum(v.bit_count()%2 for v in fixed)
     evens = [use[v] for v in use if v.bit_count()%2 == 0]
     if target%2:
@@ -86,6 +92,8 @@ def decide(row, index, target, budget, checker=None, new=False):
         for group in combinations(degree,len(degree)-needed+1):
             clauses.append([-use[v],*group])
     name = f"three-cross-face-{index}-{target}-{budget}" + ("-new" if new else "")
+    if endpoint is not None:
+        name+=f"-tip{endpoint}"
     known = {canonical_word(r["vertex_sequence"]):i for i,r in enumerate(json.loads(BANK.read_bytes()))} if new else {}
     blocked_known = []
     status = "OPEN"
@@ -132,6 +140,8 @@ def decide(row, index, target, budget, checker=None, new=False):
                 sat.add_clause(cut);clauses.append(cut);removed.append(outer)
         report=dict(index=index,target=target,status=status,forest=row["forest"],
                     stats=sat.accum_stats(),cycles=removed,witness=witness,blocked_known=blocked_known)
+        if endpoint is not None:
+            report["fixed_endpoint"]=sorted(tips)[endpoint]
         if checker and status=="UNSAT":
             from export_drat import checked_export
             report.update(checked_export(sat,clauses,Path(name+"-proof"),checker))
@@ -147,10 +157,11 @@ if __name__ == "__main__":
     parser.add_argument("--budget",type=int,default=400000)
     parser.add_argument("--checker",type=Path)
     parser.add_argument("--new",action="store_true")
+    parser.add_argument("--endpoint",type=int,choices=range(4))
     args=parser.parse_args()
     rows=catalogue()
     if not args.stop:
         save(Path("three-cross-faces-menu.json"),rows)
         print(len(rows),sum(len(row["occurrences"]) for row in rows))
     for i in range(args.start,min(args.stop,len(rows))):
-        decide(rows[i], i, args.target, args.budget, args.checker.resolve() if args.checker else None,args.new)
+        decide(rows[i], i, args.target, args.budget, args.checker.resolve() if args.checker else None,args.new,args.endpoint)
