@@ -48,3 +48,6 @@ FIXES += [
      '    CoverH T hkeys := by\n  simpa [coverHb, CoverH] using h\n', 1,
      '`simpa` no longer unfolds the `def` `CoverH` in the goal'),
 ]
+FIXES.append(('DirectionWindowBridge6S', '    CoverH8 T hkeys := by\n  simpa [coverH8b] using h\n',
+              '    CoverH8 T hkeys := by\n  simpa [coverH8b, CoverH8] using h\n', 1,
+              '`simpa` no longer unfolds the `def` `CoverH8` in the goal'))

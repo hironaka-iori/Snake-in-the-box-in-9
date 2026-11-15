@@ -46,10 +46,18 @@ for m in branch:
 used = {}
 
 
-def fix(m, text):
+superseded = []
+
+
+def fix(m, text, lead=False):
     for (fm, old, new, count, _why) in FIXES:
         if fm == m:
             n = text.count(old)
+            if lead and n == 0:
+                # port.py (the port lead's rules) already repairs this spot: keep its version
+                superseded.append((fm, old))
+                used[(fm, old)] = 0
+                continue
             if n != count:
                 raise SystemExit(f'fix for {m}: expected {count} match(es), found {n}: {old[:60]!r}')
             text = text.replace(old, new)
@@ -61,7 +69,7 @@ for l in open(os.path.join(out, 'PORT-MANIFEST.tsv')).read().splitlines()[1:]:
     m, _o, so, sp = l.split('\t')
     q = os.path.join(out, rel(m))
     t = open(q, encoding='utf-8').read()
-    t2 = fix(m, t)
+    t2 = fix(m, t, lead=True)
     if t2 != t:
         open(q, 'w', encoding='utf-8').write(t2)
     man.append((m, 'port.py' + ('+fix' if t2 != t else ''), so, sha(t2.encode())))
@@ -99,4 +107,5 @@ with open(os.path.join(out, 'FLOORS-PORT-MANIFEST.tsv'), 'w') as f:
     for r in sorted(man):
         f.write('\t'.join(r) + '\n')
 print(f'{len(man)} modules in {out}: {sum(1 for r in man if r[1] == "port.py")} by port.py, '
-      f'{len(main)} by rule F1, {len(used)} fixes applied')
+      f'{len(main)} by rule F1, {len(used) - len(superseded)} fixes applied, '
+      f'{len(superseded)} superseded by port.py: {sorted(set(m for m, _ in superseded))}')
