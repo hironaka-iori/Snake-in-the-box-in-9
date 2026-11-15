@@ -10,9 +10,17 @@ from three_cross_faces import normalize
 from solve import save
 
 
-def build():
+def build(trim=0,reverse=False):
     bank={tuple(row["middle"]) for row in catalogue()}
-    forms=sorted({normalize(path,path)[0] for pair in bank for path in pair},key=lambda p:(len(p),p))
+    shapes=set()
+    for pair in bank:
+        for path in pair:
+            for oriented in ((path,path[::-1]) if reverse else (path,)):
+                for cut in range(trim+1):
+                    run=oriented[:len(oriented)-cut]
+                    assert len(run)>=2
+                    shapes.add(normalize(run,run)[0])
+    forms=sorted(shapes,key=lambda p:(len(p),p))
     axes=np.array(list(permutations(range(8))),dtype=np.uint8)
     table=np.zeros((len(axes),256),dtype=np.uint8)
     for v in range(1,256):
@@ -58,9 +66,11 @@ if __name__=="__main__":
     p.add_argument("--start",type=int,default=0);p.add_argument("--stop",type=int,default=0)
     p.add_argument("--budget",type=int,default=200000);p.add_argument("--target",type=int,choices=(192,193),default=193)
     p.add_argument("--checker",type=Path)
-    a=p.parse_args();file=Path("recombined-central-menu.json")
+    p.add_argument("--trim",type=int,default=0);p.add_argument("--reverse",action="store_true")
+    a=p.parse_args();suffix=f"-{a.trim}-{int(a.reverse)}" if a.trim or a.reverse else ""
+    file=Path("recombined-central"+suffix+"-menu.json")
     if not a.stop:
-        data=build();save(file,data)
+        data=build(a.trim,a.reverse);save(file,data)
         print(len(data["forms"]),data["counts"],len(data["rows"]),
               sum(r["available"]>=r["needed"] for r in data["rows"]))
     else:
@@ -68,4 +78,4 @@ if __name__=="__main__":
         for i in range(a.start,min(a.stop,len(data["rows"]))):
             row=data["rows"][i]
             if row["available"]>=a.target-sum(map(len,row["middle"])):
-                decide(row,f"mix{i}",a.target,a.budget,a.checker.resolve() if a.checker else None)
+                decide(row,f"mix{suffix}-{i}" if suffix else f"mix{i}",a.target,a.budget,a.checker.resolve() if a.checker else None)
