@@ -1,0 +1,104 @@
+{
+  "status": "PASS_EXACT_SQUARE_SUBSET_ROWS_AND_UPPER_CERTIFICATES",
+  "scope": "All coordinate squares enumerated from frozen allowed cube vertices; all eight odd-subset rows per square reconstructed; inherited rows and new subset rows checked; exact residual certificates recomputed. No optimizer, compiler, search, or software tests.",
+  "models": [
+    {
+      "root": 0,
+      "base_rows": 1870,
+      "coordinate_squares": 156,
+      "square_parity_rows": 1248,
+      "new_subset_rows": 0,
+      "total_rows": 3118,
+      "variables": 574,
+      "exact_upper": [
+        48000361,
+        500000
+      ],
+      "numerical_objective_not_exact_optimality": 96.00061076711225,
+      "upper_below94": false,
+      "old220_square_violations": [
+        {
+          "point": "primal",
+          "violating_square_rows": 56,
+          "largest_violation": [
+            1,
+            1
+          ],
+          "largest_row_index": 2367
+        },
+        {
+          "point": "target94",
+          "violating_square_rows": 49,
+          "largest_violation": [
+            21239798966440,
+            22126523341933
+          ],
+          "largest_row_index": 2367
+        }
+      ],
+      "pins": {
+        "data\\square-0\\model.json": "bbc446ff8686caaf97f8015b5bdb7b32d10615060107b8c6bcdca1cd129dded2",
+        "data\\square-0\\upper-certificate.json": "ca3bf4d0fb1a0ceb84823a194f2b48b3104c73eefbf6463229fbbad5ac3e28be",
+        "data\\square-0\\native-result.json": "f2a4c565d472119c4daf13dd4e50ca084a077dc6a964e2e9ef5cd6ce4292dd3b"
+      }
+    },
+    {
+      "root": 78,
+      "base_rows": 1865,
+      "coordinate_squares": 154,
+      "square_parity_rows": 1232,
+      "new_subset_rows": 4,
+      "total_rows": 3101,
+      "variables": 574,
+      "exact_upper": [
+        95779317,
+        1000000
+      ],
+      "numerical_objective_not_exact_optimality": 95.77921468244666,
+      "upper_below94": false,
+      "old220_square_violations": [
+        {
+          "point": "primal",
+          "violating_square_rows": 51,
+          "largest_violation": [
+            31275760554,
+            36419686519
+          ],
+          "largest_row_index": 2992
+        },
+        {
+          "point": "target94",
+          "violating_square_rows": 44,
+          "largest_violation": [
+            359671246371,
+            434121316811
+          ],
+          "largest_row_index": 3037
+        }
+      ],
+      "pins": {
+        "data\\square-78\\model.json": "8e76ed966fd6a7c5421e77ea9b8b7d2547d9a4cf18383adce324c7ddeaab76b1",
+        "data\\square-78\\upper-certificate.json": "cba1317dc2f9c53c840059d7ba7ab93dda952ecd9934dca4a74b4c3810ce67cb",
+        "data\\square-78\\native-result.json": "761fa920e74336c28536735ec6e417e8a93316a50cb050619fa8ad9c2f069a53"
+      }
+    }
+  ],
+  "execution": {
+    "seconds": 3.1410000000032596,
+    "exit_code": 0,
+    "stop_reason": null,
+    "peak_sampled_private_bytes": 32104448,
+    "minimum_sampled_free_bytes": 1426313216,
+    "execution_sha256": "0b7fdc8a8213ef7e07da82225558a02644b36545c8c5ff8675778438e7835be6",
+    "summary_sha256": "6ae255e0ddaeffabf07c73cab93407f686a3dafdebd260a7e1d006f1b17462db"
+  },
+  "rational_status": "Not included in this baseline audit; requires separately confirmed terminal records.",
+  "reviewer_repair": "First audit reached report serialization after substantive checks, then failed because a predecessor file is outside this milestone. Pin keys now use absolute paths; no producer evidence changed.",
+  "pins": {
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\audit_square.py": "7ab3b56a9220487b99ed08c3df28ba0d21513191434b6a32b40cecf6c56eb244",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\prepare_square.py": "d4506f1d299e764286c3c44980127c401bb5bf6f874495b108fc9c6880d8b86d",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\square_separation.py": "91f5da0c935078b8c12ca20388abd6389524d2f1a01bb0fd4c3e7160a18c7335",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\run_square.py": "8a1b52c34cd9ce663a4fc6455e2180439940c124cd9fba3517361b3ec4f49696",
+    "E:\\Snake-in-a-box\\milestones\\220-subset-forest\\data\\forest-audit.json": "57ace9b15ef58fccaa716bf7c3167b39dd842c5f44f148fcc625c3e22c51ffad"
+  }
+}

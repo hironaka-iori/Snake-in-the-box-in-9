@@ -1,0 +1,298 @@
+{
+  "round": 221,
+  "status": "PROGRESS",
+  "previous_goal_turn": "PROGRESS",
+  "started_utc": "2026-11-15T02:19:56.652894+00:00",
+  "utc": "2026-11-15T02:34:32.917526+00:00",
+  "goal_state": "ACTIVE",
+  "pause_policy": "Continue; user authorizes a pause for an exceptional result or prolonged stagnation in her work and this investigation. Contributor work alone cannot trigger a pause. No trigger this round.",
+  "email_sent": false,
+  "email_limitation": "No sending connection available.",
+  "interval": [
+    191,
+    233
+  ],
+  "contributor_revision": "b0521e1d14fd52c62db4cdeccc356b70a623eb82",
+  "contributor_changed": false,
+  "independent_233_rebuild": false,
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "fixed_parent_95_edge_exclusions_with_exact_weights": true,
+  "fixed_parent_one_crossing_ceiling": 193,
+  "exact_target94_both_roots": true,
+  "complete_occupancy_forest_and_parity_barrier": true,
+  "first_step_branches": 14,
+  "excluded_first_step_branches": [
+    [
+      0,
+      16
+    ],
+    [
+      78,
+      14
+    ],
+    [
+      78,
+      74
+    ]
+  ],
+  "unresolved_first_step_branches": 11,
+  "accepted_new_modules": 1,
+  "theorem_reports": 2,
+  "proofs": [
+    {
+      "module": "CutParity221",
+      "receipt": "milestones\\221-square-parity\\data\\CutParity221-audit.json",
+      "sha256": "646a74bc6c58db9579e2dca092e2960b4923e7bb72b2d9e27d6ee9dc8e4d3483",
+      "reports": 2
+    }
+  ],
+  "audit_hashes": {
+    "square": "cc4c44f77167f7daa681d03de7ab28c2714f2c60307945511ff078353e534993",
+    "rational": "e852d65841e1027075eec54ada3a71071a72515858afcf029ac1ebc4e8ea21d0",
+    "long": "a4c93e83583eb9abcc80f56118cbf8fa82e8de52255b2851dc7bc56f463cec54",
+    "long-primal": "052a591cf1b89023fcb844744988fc594bffd19054225e4bbee56e3df823a88b",
+    "first": "84283463d10dc79cc5e375ac1968c562b3e38c47a1a29f5ced842c4ac52b8562"
+  },
+  "long_summary": [
+    {
+      "root": 0,
+      "status": "OPTIMAL_NATIVE",
+      "objective": 95.95510912936322,
+      "exact_upper": [
+        95955197,
+        1000000
+      ],
+      "seconds": 0.6560000000172295,
+      "inherited_square_rows": 1248,
+      "added_parity_cycles": 27,
+      "added_subset_count": 0,
+      "model_sha256": "a4f0aa53fe7a8c06969643cd7a5b09c50459d6d5013e6568708b42a8ad76ce67",
+      "solver_version": "Glop solver v9.15.6755",
+      "no_new_violations_at_tolerance": true
+    },
+    {
+      "root": 78,
+      "status": "OPTIMAL_NATIVE",
+      "objective": 95.7638584303357,
+      "exact_upper": [
+        95763979,
+        1000000
+      ],
+      "seconds": 0.6719999999913853,
+      "inherited_square_rows": 1232,
+      "added_parity_cycles": 8,
+      "added_subset_count": 1,
+      "model_sha256": "d0151302ca6cc914f5331befb72dcd00f22e9c0b06c46cc25da8efa8e8896dd3",
+      "solver_version": "Glop solver v9.15.6755",
+      "no_new_violations_at_tolerance": true
+    }
+  ],
+  "first_summary": [
+    {
+      "root": 0,
+      "first_vertex": 2,
+      "objective": 94.48883267154471,
+      "upper_bound": [
+        94488969,
+        1000000
+      ],
+      "upper_float": 94.488969,
+      "seconds": 0.07800000000861473,
+      "sha256": "840f84fd25a7485d8be2f47f2e56ab287a2979c27fad73fa8ab9961c1984e76c"
+    },
+    {
+      "root": 0,
+      "first_vertex": 4,
+      "objective": 94.61296421785258,
+      "upper_bound": [
+        18922619,
+        200000
+      ],
+      "upper_float": 94.613095,
+      "seconds": 0.07800000000861473,
+      "sha256": "fed3e3ed5a564de8cf19c0d0784c58a7840ee3d04cfa65044fc595d42a193c6f"
+    },
+    {
+      "root": 0,
+      "first_vertex": 8,
+      "objective": 94.55861454487815,
+      "upper_bound": [
+        23639693,
+        250000
+      ],
+      "upper_float": 94.558772,
+      "seconds": 0.10899999999674037,
+      "sha256": "f5d18b6d97d3e40c85d153c7863e27a9f53abb5250348147b9805ed779dbadd8"
+    },
+    {
+      "root": 0,
+      "first_vertex": 16,
+      "objective": 92.56948899435577,
+      "upper_bound": [
+        9256961,
+        100000
+      ],
+      "upper_float": 92.56961,
+      "seconds": 0.09400000001187436,
+      "sha256": "dd19b95ca394c0a6a74873fab5b1c51aaeb1eb588d8ba1e22b4b89065a31ec62"
+    },
+    {
+      "root": 0,
+      "first_vertex": 32,
+      "objective": 95.01874626263327,
+      "upper_bound": [
+        19003769,
+        200000
+      ],
+      "upper_float": 95.018845,
+      "seconds": 0.07899999999790452,
+      "sha256": "63522d5a082d4482bd6eaeec3154f962db0082cd14add34e3ee63b8d543e5035"
+    },
+    {
+      "root": 0,
+      "first_vertex": 64,
+      "objective": 95.67993370910841,
+      "upper_bound": [
+        95680069,
+        1000000
+      ],
+      "upper_float": 95.680069,
+      "seconds": 0.10999999998603016,
+      "sha256": "53f0dd530c8e91453cceec3caec77898dd05b31f83baf6f661f1ce71a0a80b24"
+    },
+    {
+      "root": 0,
+      "first_vertex": 128,
+      "objective": 94.18820637646839,
+      "upper_bound": [
+        94188343,
+        1000000
+      ],
+      "upper_float": 94.188343,
+      "seconds": 0.10999999998603016,
+      "sha256": "c69476c81fd4d4e63b3792bdd76227c29e2b46e353d18d536ec03462324f11b0"
+    },
+    {
+      "root": 78,
+      "first_vertex": 14,
+      "objective": 93.51722894396092,
+      "upper_bound": [
+        93517327,
+        1000000
+      ],
+      "upper_float": 93.517327,
+      "seconds": 0.09400000001187436,
+      "sha256": "33b93efebe7ef38f3446a4f7d7d7cfe177126ebf1c1f89ba9461cfc5e81f1e2b"
+    },
+    {
+      "root": 78,
+      "first_vertex": 74,
+      "objective": 93.9274681646199,
+      "upper_bound": [
+        46963779,
+        500000
+      ],
+      "upper_float": 93.927558,
+      "seconds": 0.09299999999348074,
+      "sha256": "c919c578ca9903c0519833eb59ebce97457512f75db97ac827946fc8531258fa"
+    },
+    {
+      "root": 78,
+      "first_vertex": 76,
+      "objective": 94.46382181883956,
+      "upper_bound": [
+        94463971,
+        1000000
+      ],
+      "upper_float": 94.463971,
+      "seconds": 0.09399999998277053,
+      "sha256": "cbfd641fe02f62f9ac41fcea4bf22aff8effb281a3dd74dc0683e34d7609ff04"
+    },
+    {
+      "root": 78,
+      "first_vertex": 79,
+      "objective": 94.40647745170389,
+      "upper_bound": [
+        94406607,
+        1000000
+      ],
+      "upper_float": 94.406607,
+      "seconds": 0.0779999999795109,
+      "sha256": "12e84796cb7924b3b8a33cf8d81031ffe254e8e27c9123e39abf26281b3dc96a"
+    },
+    {
+      "root": 78,
+      "first_vertex": 94,
+      "objective": 94.22909818672038,
+      "upper_bound": [
+        94229213,
+        1000000
+      ],
+      "upper_float": 94.229213,
+      "seconds": 0.09299999999348074,
+      "sha256": "c0b35871b2dfb5fa50be6606b70926c8c7d1acf37640aa177047f389b5fa6a20"
+    },
+    {
+      "root": 78,
+      "first_vertex": 110,
+      "objective": 94.89268358539022,
+      "upper_bound": [
+        11861599,
+        125000
+      ],
+      "upper_float": 94.892792,
+      "seconds": 0.09399999998277053,
+      "sha256": "2a868b8f1d9d4da7063ed594e45a439445b635bebfd6d6ceaf1a305a9dbf5bdd"
+    },
+    {
+      "root": 78,
+      "first_vertex": 206,
+      "objective": 94.95144852143764,
+      "upper_bound": [
+        47475783,
+        500000
+      ],
+      "upper_float": 94.951566,
+      "seconds": 0.09299999999348074,
+      "sha256": "b874cab59439d9b4541bb949a6f764d1a273c6e82c2409c149219f3dbf71a676"
+    }
+  ],
+  "frozen_parent_search_states": {
+    "22": {
+      "path": "milestones\\217-long-parent-search\\data\\case-22\\state.json",
+      "sha256": "79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452"
+    },
+    "23": {
+      "path": "milestones\\211-subset-capacity\\data\\case-23\\state.json",
+      "sha256": "3b7733ba9ad904608c050ed63199b13a295c56db6d3b1ded909ef13be38d5e7d",
+      "state_jobs": 296,
+      "pending": 11,
+      "state_nodes": 3721372,
+      "counter_scope": "historical cumulative"
+    },
+    "24": {
+      "path": "milestones\\209-slice-capacity\\data\\case-24\\state.json",
+      "sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "state_jobs": 150,
+      "pending": 8,
+      "state_nodes": 9625900,
+      "counter_scope": "historical cumulative"
+    },
+    "9": {
+      "path": "milestones\\209-slice-capacity\\data\\case-9\\state.json",
+      "sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "state_jobs": 150,
+      "pending": 3,
+      "state_nodes": 8142891,
+      "counter_scope": "historical cumulative"
+    }
+  },
+  "six_coordinate_unresolved": 27,
+  "software_tests_created_or_run": false,
+  "compile_success": true,
+  "document_review_sha256": "a4d23a683b7162b0ad3c360ee4d599ab0f21a3db0da8597638d5109b65ad17f9",
+  "next_full_paper_review": 230,
+  "scope": "Generic Lean results and independent exact numerical audits; end-to-end Lean assembly of concrete arrays remains separate.",
+  "next_step": "Extend the eleven remaining first-step branches to short induced prefixes in the two frozen allowed graphs. Enumerate every permissible next vertex, retain explicit parent-child coverage, and fix all prefix vertex selections to1 in the frozen long models. Save exact weighted-residual upper certificates; prune a branch only when its certified bound is below94. Preserve unresolved or failed cases explicitly. Keep the complete-family fractional limitation separate from these actual-path disjunctions. A bounded depth census is preferable to an unchanged long Boolean query. Full-paper review completed220; next230."
+}

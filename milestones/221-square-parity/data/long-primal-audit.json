@@ -1,0 +1,250 @@
+{
+  "status": "PASS_EXACT_LONG_PRIMALS_ALL_THREE_FAMILIES_AND_TARGET94",
+  "scope": "Independent saved integer/rational arithmetic. All model rows, bounds, occupancy potentials, feasible flows, degree identities, two-copy parity potentials and target mixtures checked. No optimizer, compiler, search, basis reconstruction, or software tests.",
+  "conclusion": "For each fixed root, the saved continuous model plus all occupancy-cycle, subset-forest, and odd-marked disagreement-cycle inequalities admits an exact cardinality-94 point. No Boolean partner or global snake conclusion follows.",
+  "baseline_dependency": "Added-row validity and exact upper certificates are the separately frozen long-audit.json review; their sources and model bytes are matched here, without repeating that audit.",
+  "lean_scope": "This is exact native-array arithmetic. Generic Lean results are separate; no end-to-end Lean assembly of these concrete vectors, flows and potentials is asserted.",
+  "models": [
+    {
+      "root": 0,
+      "rows": 3145,
+      "variables": 574,
+      "tight_rows": 597,
+      "exact_primal": [
+        2507137819890885477,
+        26128236866583647
+      ],
+      "previously_audited_exact_upper": [
+        95955197,
+        1000000
+      ],
+      "upper_minus_primal": [
+        2295904811087863459,
+        26128236866583647000000
+      ],
+      "nonintegral_primal_coordinates": 424,
+      "maximum_denominator_bits": 59,
+      "occupancy": {
+        "potentials": 337,
+        "edge_inequalities": 113232,
+        "minimum_cost": [
+          1,
+          1
+        ],
+        "attaining_static_cycle": [
+          20,
+          22,
+          84,
+          86
+        ]
+      },
+      "forest": {
+        "flows": 158,
+        "directed_arcs": 832,
+        "capacity_checks": 131456,
+        "degree_equations": 158,
+        "scale": 313538842399003764,
+        "scale_bits": 59,
+        "total_arc_capacity": 60171307677381251448,
+        "total_arc_capacity_bits": 66,
+        "nonzero_flow_entries": 13694,
+        "minimum_supply_surplus": 0,
+        "all_subset_inequalities_certified": true,
+        "integer_arithmetic": "Unbounded Python integers throughout the independent audit."
+      },
+      "disagreement_parity": {
+        "potentials": 158,
+        "states": 316,
+        "directed_arcs": 2696,
+        "directed_arc_inequalities": 425968,
+        "minimum_cost": [
+          1,
+          1
+        ],
+        "attaining_square": {
+          "cycle": [
+            0,
+            2,
+            6,
+            4
+          ],
+          "odd_edge_indices": [
+            0,
+            1,
+            3
+          ],
+          "scaled_cost": 313538842399003764
+        },
+        "all_cycle_odd_subset_inequalities_certified": true
+      },
+      "target94": {
+        "objective": [
+          94,
+          1
+        ],
+        "short_path": [
+          0,
+          2
+        ],
+        "mixing_weight": [
+          2403797791725695524,
+          2454881346157718183
+        ],
+        "nonintegral_coordinates": 434,
+        "all_saved_rows_and_bounds": true,
+        "complete_families": "Occupancy cycles, subset-forest inequalities, and odd-marked disagreement cycles are inherited by convexity from the audited point and actual one-edge path."
+      },
+      "pins": {
+        "data\\long-0\\model.json": "a4f0aa53fe7a8c06969643cd7a5b09c50459d6d5013e6568708b42a8ad76ce67",
+        "data\\rational-long-0\\primal-certificate.json": "788f581fa6dd982824b80252467a5495e448a2b710ea64aba4490c7d33bccc05",
+        "data\\rational-long-0\\forest-flow-certificate.json": "8b335ee8be64deccddfa4c93c1e4116d85361335f8bb747df6400f49918f7907",
+        "data\\cut-long-0.json": "f7b7ed4a8476457f8214d5d72e53aa5d6288a26eb859b1296b2f62f75271d7f5",
+        "data\\rational-long-0\\target94-certificate.json": "be785a8f24db863b815d6dbd78d0028fc09fd628a8478f853547b13a487f22d6"
+      }
+    },
+    {
+      "root": 78,
+      "rows": 3110,
+      "variables": 574,
+      "tight_rows": 581,
+      "exact_primal": [
+        388107824092577,
+        4052758842992
+      ],
+      "previously_audited_exact_upper": [
+        95763979,
+        1000000
+      ],
+      "upper_minus_primal": [
+        30539985824073,
+        253297427687000000
+      ],
+      "nonintegral_primal_coordinates": 425,
+      "maximum_denominator_bits": 43,
+      "occupancy": {
+        "potentials": 337,
+        "edge_inequalities": 113232,
+        "minimum_cost": [
+          1,
+          1
+        ],
+        "attaining_static_cycle": [
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "forest": {
+        "flows": 158,
+        "directed_arcs": 832,
+        "capacity_checks": 131456,
+        "degree_equations": 158,
+        "scale": 8105517685984,
+        "scale_bits": 43,
+        "total_arc_capacity": 1552431296370308,
+        "total_arc_capacity_bits": 51,
+        "nonzero_flow_entries": 12222,
+        "minimum_supply_surplus": 0,
+        "all_subset_inequalities_certified": true,
+        "integer_arithmetic": "Unbounded Python integers throughout the independent audit."
+      },
+      "disagreement_parity": {
+        "potentials": 158,
+        "states": 316,
+        "directed_arcs": 2696,
+        "directed_arc_inequalities": 425968,
+        "minimum_cost": [
+          1,
+          1
+        ],
+        "attaining_square": {
+          "cycle": [
+            2,
+            6,
+            14,
+            10
+          ],
+          "odd_edge_indices": [
+            0,
+            1,
+            3
+          ],
+          "scaled_cost": 8105517685984
+        },
+        "all_cycle_odd_subset_inequalities_certified": true
+      },
+      "target94": {
+        "objective": [
+          94,
+          1
+        ],
+        "short_path": [
+          78,
+          14
+        ],
+        "mixing_weight": [
+          372853813555264,
+          380002306406593
+        ],
+        "nonintegral_coordinates": 438,
+        "all_saved_rows_and_bounds": true,
+        "complete_families": "Occupancy cycles, subset-forest inequalities, and odd-marked disagreement cycles are inherited by convexity from the audited point and actual one-edge path."
+      },
+      "pins": {
+        "data\\long-78\\model.json": "d0151302ca6cc914f5331befb72dcd00f22e9c0b06c46cc25da8efa8e8896dd3",
+        "data\\rational-long-78\\primal-certificate.json": "3740abc3067260e16627c2f613ad46887cc0ee4a9bf464171ac99a138c15ce9a",
+        "data\\rational-long-78\\forest-flow-certificate.json": "53a033966baf9b86e687e06ecf339579881572dc0a9579c3a810b58dfc398e80",
+        "data\\cut-long-78.json": "9711ba73a28f654eb8b174c34f133e88a7f8517f0161570fb59ece07412b70ff",
+        "data\\rational-long-78\\target94-certificate.json": "8ecd3eda8855011479b0ac0a222edcb42e662b4b6bc7fd7e19b682b84da9266f"
+      }
+    }
+  ],
+  "executions": {
+    "rational-long": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "seconds": 2.85999999998603,
+      "peak_sampled_private_bytes": 50573312,
+      "minimum_sampled_free_bytes": 1512849408,
+      "receipt_sha256": "d8d61af5e7f8ea6f6b953024a97aacd0cd2e304932de4c04257429ed85f36cb4",
+      "summary_sha256": "f7470894fb537beb8cb4380ba8779124c6844a1b4e3bd038f9f3e047516b22fb"
+    },
+    "flow-long": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "seconds": 1.2339999999967404,
+      "peak_sampled_private_bytes": 37220352,
+      "minimum_sampled_free_bytes": 1408958464,
+      "receipt_sha256": "116671ebdaf360e2b269f33a56f092d57c0c818c6bfb2f6d795250a1ab39f9b1",
+      "summary_sha256": "693504ebcc85bfa624677a8d977516887daa3c9e3e8db13a33def538d987fb2a"
+    }
+  },
+  "pins": {
+    "data\\long-0\\model.json": "a4f0aa53fe7a8c06969643cd7a5b09c50459d6d5013e6568708b42a8ad76ce67",
+    "data\\rational-long-0\\primal-certificate.json": "788f581fa6dd982824b80252467a5495e448a2b710ea64aba4490c7d33bccc05",
+    "data\\rational-long-0\\forest-flow-certificate.json": "8b335ee8be64deccddfa4c93c1e4116d85361335f8bb747df6400f49918f7907",
+    "data\\cut-long-0.json": "f7b7ed4a8476457f8214d5d72e53aa5d6288a26eb859b1296b2f62f75271d7f5",
+    "data\\rational-long-0\\target94-certificate.json": "be785a8f24db863b815d6dbd78d0028fc09fd628a8478f853547b13a487f22d6",
+    "data\\long-78\\model.json": "d0151302ca6cc914f5331befb72dcd00f22e9c0b06c46cc25da8efa8e8896dd3",
+    "data\\rational-long-78\\primal-certificate.json": "3740abc3067260e16627c2f613ad46887cc0ee4a9bf464171ac99a138c15ce9a",
+    "data\\rational-long-78\\forest-flow-certificate.json": "53a033966baf9b86e687e06ecf339579881572dc0a9579c3a810b58dfc398e80",
+    "data\\cut-long-78.json": "9711ba73a28f654eb8b174c34f133e88a7f8517f0161570fb59ece07412b70ff",
+    "data\\rational-long-78\\target94-certificate.json": "8ecd3eda8855011479b0ac0a222edcb42e662b4b6bc7fd7e19b682b84da9266f",
+    "scripts\\audit_long_primal.py": "504b5e2f5afe84df9f8b400433058d2e0f46e3e0a06e9d1452b24263fb23a4e1",
+    "data\\long-audit.json": "a4c93e83583eb9abcc80f56118cbf8fa82e8de52255b2851dc7bc56f463cec54",
+    "data\\square-audit.json": "cc4c44f77167f7daa681d03de7ab28c2714f2c60307945511ff078353e534993",
+    "data\\rational-audit.json": "e852d65841e1027075eec54ada3a71071a72515858afcf029ac1ebc4e8ea21d0",
+    "scripts\\rational_long.py": "9e4faf2e357b9708e985ed181ae3624d37160ac48a8dd8f5035c7332ffbabaed",
+    "scripts\\flow_long.py": "00ea0ac855dfd6b4b1d00f81e8504aa9e9d8e882c43bff389a3ff1c5ec036862",
+    "scripts\\cut_long.py": "fcdf01ef4e6cbc5b96aa9f52d90b98252984c1af185f8f4690e2b064500045b1",
+    "scripts\\target_point_long.py": "bf61202657b9e28b8d33c48ba3d984d578e66f6d7c5bb1cae3803d1f8d063fa6",
+    "scripts\\run_rational_long.py": "909ee19fd6b3ba14a689cc385a319818b2f39a80add853d5e3f6f17a97311261",
+    "scripts\\run_flow_long.py": "2c11b2488428ed91fedbbaa5032ca438b63382cd226196ac42480730daceb733",
+    "data\\rational-long-execution.json": "d8d61af5e7f8ea6f6b953024a97aacd0cd2e304932de4c04257429ed85f36cb4",
+    "data\\flow-long-execution.json": "116671ebdaf360e2b269f33a56f092d57c0c818c6bfb2f6d795250a1ab39f9b1",
+    "data\\rational-long-summary.json": "f7470894fb537beb8cb4380ba8779124c6844a1b4e3bd038f9f3e047516b22fb",
+    "data\\flow-long-summary.json": "693504ebcc85bfa624677a8d977516887daa3c9e3e8db13a33def538d987fb2a",
+    "data\\cut-long-summary.json": "79b0a7b39c871ac2a76ae0a7d8ec9a7f7ba7bb0725ff486bd9a8667c47bc1702"
+  }
+}

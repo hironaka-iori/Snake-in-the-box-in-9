@@ -1,0 +1,134 @@
+{
+  "status": "PASS_EXACT_SQUARE_MODEL_PRIMALS_AND_OCCUPANCY_CYCLE_POTENTIALS",
+  "scope": "Exact saved-row, variable-bound, and occupancy-potential arithmetic only. No optimizer, compiler, search, flow computation, basis elimination, or software tests.",
+  "conclusion": "The saved square models and all simple-cycle occupancy inequalities admit exact rational points and reviewer-derived mixtures of cardinality94. The entire subset family and longer disagreement-parity inequalities remain outside this audit.",
+  "models": [
+    {
+      "root": 0,
+      "rows": 3118,
+      "coordinates": 574,
+      "tight_rows": 585,
+      "exact_objective": [
+        24143609460502861609,
+        251494331833708890
+      ],
+      "exact_upper": [
+        48000361,
+        500000
+      ],
+      "gap": [
+        1398722038788440929,
+        12574716591685444500000
+      ],
+      "nonintegral_coordinates": 424,
+      "maximum_denominator_bits": 59,
+      "all_occupancy_cycle_inequalities": true,
+      "potentials": 337,
+      "potential_edge_inequalities": 113232,
+      "minimum_cycle_cost": [
+        1,
+        1
+      ],
+      "attaining_static_cycle": [
+        20,
+        22,
+        84,
+        86
+      ],
+      "reviewer_target94": {
+        "short_path": [
+          0,
+          2
+        ],
+        "mixing_weight": [
+          23137478528701217880,
+          23640620796835443829
+        ],
+        "objective": [
+          94,
+          1
+        ],
+        "nonintegral_coordinates": 434,
+        "all_saved_rows_and_bounds": true,
+        "all_occupancy_cycles": "Inherited by convexity from the certified point and actual one-edge path."
+      },
+      "full_subset_family": "Not certified by this audit; only the saved subset rows are checked.",
+      "longer_disagreement_parity_cycles": "Not covered by occupancy-cycle potentials.",
+      "pins": {
+        "model.json": "bbc446ff8686caaf97f8015b5bdb7b32d10615060107b8c6bcdca1cd129dded2",
+        "primal-certificate.json": "b3cab4687c3d4c145c2ecdb3c3f96b9a08b53a7fb71d912fd538a7c316df93ab"
+      }
+    },
+    {
+      "root": 78,
+      "rows": 3101,
+      "coordinates": 574,
+      "tight_rows": 581,
+      "exact_objective": [
+        20431726624023570157,
+        213321091551694027
+      ],
+      "exact_upper": [
+        95779317,
+        1000000
+      ],
+      "gap": [
+        21826492153942039559,
+        213321091551694027000000
+      ],
+      "nonintegral_coordinates": 424,
+      "maximum_denominator_bits": 59,
+      "all_occupancy_cycle_inequalities": true,
+      "potentials": 337,
+      "potential_edge_inequalities": 113232,
+      "minimum_cycle_cost": [
+        1,
+        1
+      ],
+      "attaining_static_cycle": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "reviewer_target94": {
+        "short_path": [
+          78,
+          14
+        ],
+        "mixing_weight": [
+          19625540422755850484,
+          20005084440920182103
+        ],
+        "objective": [
+          94,
+          1
+        ],
+        "nonintegral_coordinates": 438,
+        "all_saved_rows_and_bounds": true,
+        "all_occupancy_cycles": "Inherited by convexity from the certified point and actual one-edge path."
+      },
+      "full_subset_family": "Not certified by this audit; only the saved subset rows are checked.",
+      "longer_disagreement_parity_cycles": "Not covered by occupancy-cycle potentials.",
+      "pins": {
+        "model.json": "8e76ed966fd6a7c5421e77ea9b8b7d2547d9a4cf18383adce324c7ddeaab76b1",
+        "primal-certificate.json": "cd62c4a2d63ad8968e18539691c6bc87813d9b13328cb2f14149b66cd3ef4b56"
+      }
+    }
+  ],
+  "execution": {
+    "seconds": 2.98499999998603,
+    "exit_code": 0,
+    "stop_reason": null,
+    "peak_sampled_private_bytes": 51593216,
+    "minimum_sampled_free_bytes": 1350664192
+  },
+  "pins": {
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\audit_rational.py": "5985e76cfc4c33cb095f32a485c633a21f7fed8c6f8370b32b0513d98d8509f3",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\rational_basis.py": "32d5af9514e128b13ae83be39b59b45a5fb25f7120136e40fba43d97e521f5e2",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\run_rational.py": "5d496996d643d7eca2fb241216fca2f84b86922f8b76026cf2d631ced040eca8",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\rational-execution.json": "364f086a7211b06eae04d08be5e19be1156691f9018f55cce356b9258a19a3de",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\rational-summary.json": "e6a5e6a8e5954011b1f4b0cd18ac7275b45784e6546557d7db66442019970ca4",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\square-audit.json": "cc4c44f77167f7daa681d03de7ab28c2714f2c60307945511ff078353e534993"
+  }
+}

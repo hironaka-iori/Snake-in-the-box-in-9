@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 220, 15 November 2026}
+\date{Research state after round 221, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -67,12 +67,14 @@ core, counting implications and literal source counts have separate
 Lean checks; the complete finite search certificates and geometric
 assembly retain their stated limitations.
 
-Exact fractional certificates show that the fixed-parent degree
-formulation, even with every cycle occupancy and subset forest inequality,
-cannot exclude the 94-vertex compatible-partner target. The subset
-inequalities nevertheless give exact certificates excluding a 97-edge
-partner for this representative. Explicit failures of Boolean product
-consistency identify a further class of valid inequalities.
+Exact certificates exclude a 95-edge compatible partner at either
+endpoint of the saved 98-edge parent. Its one-crossing construction
+therefore has at most 193 edges. The 93-edge partner needed for 192
+remains unresolved. Exact fractional points satisfy the degree and
+linear product constraints together with every cycle occupancy,
+subset forest and disagreement-cycle parity inequality at total weight
+94. Fixing an actual first step excludes three of fourteen branches;
+the other eleven remain open.
 
 The paper separates written proofs, checked implications, native
 enumerations and unresolved premises. The contributor bound improves
@@ -7470,7 +7472,7 @@ arrays have independent exact audits; the generic Lean implications and
 actual-path forest bound do not constitute an end-to-end numerical proof.
 All data and proof receipts are retained in~\cite{research220}.
 
-\subsection{The next missing constraint: consistency of edge products}
+\subsection{Consistency of edge products}
 \label{sec:product220}
 For Boolean vertex selections and their edge products, put
 $d_{uv}=x_u+x_v-2y_{uv}$. This is one exactly when the two selections
@@ -7485,7 +7487,7 @@ inequalities for the cut polytope~\cite{barahona1986}. Their use here
 concerns consistency of the selected-edge products, rather than the
 number of selected vertices on a cycle.
 
-The new root-0 fractional point assigns the following disagreement values
+The round-220 root-0 fractional point assigns the following disagreement values
 to a coordinate square:
 \[
 \begin{array}{ccc}
@@ -7500,11 +7502,102 @@ contradicting the remaining value one. The square violates
 satisfies every forest and occupancy inequality. The exact-weight-94
 mixture also violates it. An independent audit finds square violations
 at root 78 as well. These are concrete reasons to strengthen the model.
-The two square parity forms have a separate Boolean Lean check;
-the general cycle assertion has the elementary proof above.
-No strengthened linear program containing these parity rows has yet
-been solved in this round, and no improved bound is inferred from them.
+The two square parity forms have a separate Boolean Lean check.
+The subsequent computation below adds these constraints and longer
+cycle inequalities; it also checks the general parity argument in Lean.
 
+
+
+\subsection{Parity-strengthened bounds and first-step restrictions}
+\label{sec:parity221}
+Every closed Boolean walk changes value an even number of times, as
+induction on the walk proves. If $F$ is an odd marked edge set, the
+disagreement pattern must differ from its indicator on at least one edge.
+The left side of~\eqref{eq:cut-parity220} equals $|F|$ minus the number
+of mismatches, proving the inequality. Lean checks this argument for
+an arbitrary closed Boolean walk, with closure explicit and even parity
+derived from its successive vertex values.
+
+The allowed graphs at roots 0 and 78 have 156 and 154 coordinate squares.
+All eight odd-subset inequalities on each square are added. Their exact
+upper certificates are 96.000722 and 95.779317. Rational points still
+violate longer cycle inequalities. Adding 27 such rows at root 0 and
+eight at root 78, together with one further subset row at root 78, gives
+\[
+\begin{array}{c|c|c}
+\text{Root}&\text{Exact feasible total weight}&\text{Exact upper bound}\\\hline
+0&\displaystyle\frac{2507137819890885477}{26128236866583647}&95.955197\\[6pt]
+78&\displaystyle\frac{388107824092577}{4052758842992}&95.763979.
+\end{array}
+\]
+The upper bounds follow from integer weighted rows and residual bounds
+on variables in $[0,1]$, as in Section~\ref{sec:linear219}. Every new row
+and the exact arithmetic have independent audits. Numerical optimality
+of the linear programs is unnecessary for the upper-bound deduction.
+
+\begin{proposition}[Restriction for the saved parent]\label{prop:parent193}
+For the specified 98-edge parent, any compatible path beginning at either
+endpoint has at most 94 edges. Its one-crossing join has at most 193 edges.
+\end{proposition}
+\begin{proof}
+A 95-edge partner has 96 vertices and satisfies the odd-edge model.
+Both upper certificates are strictly below 96, so such a partner is
+excluded. Any longer partner contains a compatible 95-edge prefix.
+Thus its length is at most 94, and the join has length at most
+$98+94+1=193$. The argument uses this parent and these two roots only.
+\end{proof}
+
+\paragraph{A complete-family fractional obstruction.}
+The two rational points in the table satisfy every occupancy-cycle
+inequality and every subset forest inequality. This follows from 337
+edge-deleted potential systems and 158 feasible flows per root, by the
+arguments of Sections~\ref{sec:linear219} and~\ref{sec:forest220}.
+They also satisfy every disagreement-cycle parity inequality, including
+those absent from the finite model. To certify this, replace each vertex
+by two copies. Each original edge has layer-preserving cost $d_{uv}$
+and layer-switching cost $1-d_{uv}$, in both directions. For each original
+vertex $v$, a saved rational potential is zero at its first copy and
+at least one at its second; every directed arc satisfies
+$p(b)-p(a)\le c_{ab}$. A cycle marked on an odd set $F$ lifts to a walk
+between these two copies. Summing the arc inequalities yields
+\[
+\sum_{e\in F}(1-d_e)+\sum_{e\in E(C)\setminus F}d_e\ge1,
+\]
+which rearranges to~\eqref{eq:cut-parity220}. All 158 potential systems
+are checked exactly at each root. The argument needs feasible potentials,
+without a claim of shortest-path optimality.
+
+Mixing either point of weight $q$ with the corresponding one-edge path,
+with weight $92/(q-2)$ on the larger point, gives weight exactly 94.
+Every asserted family is linear and persists under this mixture.
+Independent exact audits therefore establish that the continuous model
+with all three complete families still admits the target weight.
+These fractional assignments provide no induced path. The generic Lean
+implications remain separate from the concrete numerical assembly.
+
+\paragraph{Requiring an actual first step.}
+The root must choose exactly one of its seven allowed neighbours.
+Adding $x_w=1$ for each possible first neighbour $w$ gives the exact
+cardinality upper bounds below. The root degree equation then sets
+the other six neighbour variables to zero.
+\[
+\begin{array}{c|r|r@{\qquad}c|r|r}
+\text{Root}&w&\text{Upper bound}&\text{Root}&w&\text{Upper bound}\\\hline
+0&2&94.488969&78&14&93.517327\\
+0&4&94.613095&78&74&93.927558\\
+0&8&94.558772&78&76&94.463971\\
+0&16&92.569610&78&79&94.406607\\
+0&32&95.018845&78&94&94.229213\\
+0&64&95.680069&78&110&94.892792\\
+0&128&94.188343&78&206&94.951566
+\end{array}
+\]
+Every 93-edge partner occurs in one of these branches. Since it has
+94 vertices, the branches $0\to16$, $78\to14$ and $78\to74$ are excluded.
+The other eleven remain unresolved: their upper bounds alone do not
+prove feasibility. Extending these remaining prefixes is a concrete
+next step. All certificates and scope records are retained in
+milestone 221~\cite{research221}.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
@@ -7659,13 +7752,15 @@ their explicit table and domain premises. Their native traversal has
 no complete proof certificate. No different parent or longer snake
 has been obtained.
 
-For the fixed 98-edge parent, the exact subset-weight certificates now
-exclude a 97-edge partner at either endpoint. The 93-edge targets remain
-open. Exact fractional assignments satisfy every cycle occupancy and
-subset forest inequality at total weight 94, but fail Boolean product
-consistency on explicit squares. The corresponding generic Lean
-results, exact finite audits and unresolved numerical assembly are
-distinguished in Sections~\ref{sec:linear219}--\ref{sec:product220}.
+For the fixed 98-edge parent, exact parity-strengthened certificates
+exclude a 95-edge partner at either endpoint, giving a one-crossing
+ceiling of 193. The 93-edge targets remain open. Exact fractional
+assignments satisfy every occupancy-cycle, subset-forest and
+disagreement-cycle parity inequality at total weight 94. Requiring an
+actual first step excludes three of fourteen branches. The corresponding
+generic Lean results, exact finite audits and the remaining Lean
+assembly of the numerical arrays are distinguished in
+Sections~\ref{sec:linear219}--\ref{sec:parity221}.
 The round-220 full-source review corrects historical proof references,
 notation and current-status statements; it does not rebuild the entire
 archived contributor chain.
@@ -11103,6 +11198,11 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Subset forest bounds,
 fractional feasibility and product consistency}. Research milestone 220,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/220-subset-forest}.
+
+\bibitem{research221}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Cycle parity, exact partner bounds
+and first-step restrictions}. Research milestone 221, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/221-square-parity}.
 
 \bibitem{barahona1986}
 F.~Barahona and A.~R.~Mahjoub. On the cut polytope.
