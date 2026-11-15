@@ -757,6 +757,8 @@ def giants_step(W, a):
     S = dict(C.fp.Status().st)
     for f in sorted(__import__('glob').glob(os.path.join(DATA, 'oracle_plain*.jsonl*'))):
         for l in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f)):
+            if not l.strip():
+                continue
             r = json.loads(l)
             if all(x[0] == x[1] or tuple(x) == (6, 21) for x in r['alpha']):
                 k = fp.lkey(tuple(r['dirs']), tuple(GA.sym_of(tuple(x)) for x in r['alpha']))
