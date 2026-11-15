@@ -18,4 +18,9 @@ FIXES = [
     ('SharedOuterSwitch', "simpa only [mirror,Finset.pair_comm h.y h.x] using hF",
      "simpa only [mirror,MissingAtNeighbor.mirror,Finset.pair_comm h.y h.x] using hF", 1,
      'simp no longer unfolds `MissingAtNeighbor.mirror` through the ambiguous `mirror`'),
+    ('SharedFiniteClassification',
+     "  simp only [sharedFiniteEdges,Finset.mem_insert,Finset.mem_singleton] at ht\n",
+     "  simp only [sharedFiniteEdges,Finset.mem_insert,Finset.mem_singleton] at ht\n  simp only [sharedFiniteR] at hcount\n", 21,
+     'simp unfolded `ordinaryGoodIndices` before `sharedFiniteR`, leaving a Classical decidability instance for the old '
+     'predicate; 4.35 no longer matches `Finset.filter_insert` across that mismatch. Unfolding `sharedFiniteR` first restores it'),
 ]

@@ -46,7 +46,7 @@ def header(path):
     """[(module, exported, meta, all)] of a source header."""
     out, blk = [], 0
     for line in open(path, encoding='utf-8'):
-        s = line.strip()
+        s = line.split('--')[0].strip() if not line.strip().startswith('/-') else line.strip()
         if blk:
             blk += s.count('/-') - s.count('-/')
             continue
@@ -121,7 +121,9 @@ def loaded_closure(res, root_imports):
         else:
             imps = header(s)
         for (i, exported, _meta, _all) in imps:
-            if exported:
+            # a worker module's private imports (its certificates) are never loaded by lean;
+            # for the locally rebuilt spec layer and mathlib, list every import (harmless, all local)
+            if exported or kind != 'iface':
                 stack.append(i)
     return order, seen
 
@@ -204,23 +206,35 @@ def cmd_final(a):
         kind, o = seen[m]
         if kind == 'core':
             continue
-        d = os.path.join(od, rel(m) + '.olean')
-        os.makedirs(os.path.dirname(d), exist_ok=True)
-        try:
-            os.link(o, d)
-        except OSError:
-            shutil.copyfile(o, d)
+        def put(src, ext):
+            d = os.path.join(od, rel(m) + ext)
+            os.makedirs(os.path.dirname(d), exist_ok=True)
+            try:
+                os.link(src, d)
+            except OSError:
+                shutil.copyfile(src, d)
+            return d
+        d = put(o, '.olean')
         nbytes += os.path.getsize(d)
-        arts[m] = [[d], []]
+        ir = []
+        if kind != 'iface' and not a.olean_only:
+            # spec layer and mathlib (rebuilt locally): their compiler IR, needed by `meta` imports
+            # of tactic code; never .olean.private or .olean.server
+            base = o[:-len('.olean')]
+            if os.path.exists(base + '.ir.sig') and os.path.exists(base + '.ir'):
+                ir = [put(base + '.ir.sig', '.ir.sig'), put(base + '.ir', '.ir')]
+        arts[m] = [[d], ir]
     # core modules: the toolchain's own files (lake lists them the same way)
     for m in order:
         kind, o = seen[m]
         if kind == 'core':
-            arts[m] = [[o], []]
-    leftovers = [f for r, _, fs in os.walk(od) for f in fs if not f.endswith('.olean')]
+            b = o[:-len('.olean')]
+            arts[m] = [[o], [b + '.ir.sig', b + '.ir'] if os.path.exists(b + '.ir') and not a.olean_only else []]
+    leftovers = [f for r, _, fs in os.walk(od) for f in fs if not f.endswith(('.olean', '.ir', '.ir.sig'))]
     assert not leftovers
+    ifaces = {os.path.realpath(os.path.join(od, rel(m))) for m in order if seen[m][0] == 'iface'}
     name = os.path.splitext(os.path.basename(a.final))[0]
-    setup = dict(name=name, isModule=True, importArts=arts)
+    setup = dict(name=name, isModule=True, importArts=arts, dynlibs=[], plugins=[], options={})
     sp = os.path.join(w, 'setup.json')
     json.dump(setup, open(sp, 'w'))
     print(f'setup: {len(arts)} import artifacts, {sum(1 for m in arts if seen[m][0] != "core")} public .olean '
@@ -247,9 +261,15 @@ def cmd_final(a):
                 opened.add(os.path.realpath(mm.group(1)))
         outside = sorted(f for f in opened if not f.startswith(os.path.realpath(od) + '/')
                          and not f.startswith(os.path.realpath(res.core) + '/'))
-        bad_parts = sorted(f for f in opened if not f.endswith('.olean'))
-        print(f'strace: {len(opened)} Lean data files opened; outside the clean directory and the '
-              f'toolchain: {len(outside)}; non-.olean parts: {len(bad_parts)}')
+        bad_parts = sorted(f for f in opened if not f.endswith('.olean')
+                           and not f.startswith(os.path.realpath(res.core) + '/')
+                           and (not f.endswith(('.ir', '.ir.sig')) or f.rsplit('.ir', 1)[0] in ifaces))
+        opened_if = sorted(f for f in opened if f.endswith('.olean') and f[:-6] in ifaces)
+        print(f'interface files opened: {len(opened_if)} (' + ', '.join(os.path.basename(f) for f in opened_if) + ')')
+        ncore = sum(1 for f in opened if f.startswith(os.path.realpath(res.core) + '/'))
+        print(f'strace: {len(opened)} Lean data files opened ({ncore} of them the toolchain\'s own Init/Std/Lean '
+              f'files); outside the clean directory and the toolchain: {len(outside)}; non-.olean parts '
+              f'outside the toolchain, other than spec-layer IR: {len(bad_parts)}')
         if outside:
             fails.append('opened files outside the clean directory: ' + ', '.join(outside[:5]))
         if bad_parts:
@@ -297,6 +317,7 @@ def main():
     p.add_argument('--work', required=True)
     p.add_argument('--require-spec-manifest', action='store_true')
     p.add_argument('--no-strace', action='store_true')
+    p.add_argument('--olean-only', action='store_true', help='list no IR at all (fails if a meta import needs it)')
     a = ap.parse_args()
     {'manifest': cmd_manifest, 'publish': cmd_publish, 'final': cmd_final}[a.cmd](a)
 

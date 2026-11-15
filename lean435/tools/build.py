@@ -24,7 +24,7 @@ PARTS = ('.olean', '.olean.server', '.olean.private', '.ir', '.ir.sig')
 def header_imports(path):
     out, in_block = [], 0
     for line in open(path, encoding='utf-8'):
-        s = line.strip()
+        s = line.split('--')[0].strip() if not line.strip().startswith('/-') else line.strip()
         if in_block:
             in_block += s.count('/-') - s.count('-/')
             continue

@@ -77,6 +77,15 @@ echo "== final audit (good chain)"
 python3 "$T/audit.py" final --src "$SRC" --spec-build "$W/spec" --iface "$W/iface" --manifest "$W/worker.jsonl" \
   --require-spec-manifest --final "$W/Audit6SC435.lean" $TA --work "$W/audit" | tee "$W/audit.txt"
 
+printf '%s\n' 'module' 'import LocalWindowCtxUnsat.C70123412A236664K15' 'import LocalWindowCtxUnsat.C801234032A544643K15' \
+  '#print axioms Snake9.LocalWindow.C70123412A236664K15.refuted' '#print axioms Snake9.LocalWindow.C801234032A544643K15.refuted' \
+  > "$W/AuditCerts435.lean"
+echo "== final audit of the two certificate interfaces imported directly (olean only, no IR at all)"
+python3 "$T/audit.py" final --src "$SRC" --spec-build "$W/spec" --iface "$W/iface" --manifest "$W/worker.jsonl" \
+  --require-spec-manifest --final "$W/AuditCerts435.lean" --olean-only \
+  --theorem Snake9.LocalWindow.C70123412A236664K15.refuted --theorem Snake9.LocalWindow.C801234032A544643K15.refuted \
+  --work "$W/audit-certs" | tee "$W/audit-certs.txt"
+
 # ---- bad certificates: the worker cheats in the ctx 7 certificate
 bad() {  # name, python transformation of the replay source
   local n=$1 code=$2
@@ -115,4 +124,14 @@ EOF
 bad sorry sorry
 bad native native
 bad axiom axiom
+# ---- swapped interface: the bad bridge .olean under the good manifest must fail the hash check
+rm -rf "$W/swap"; mkdir -p "$W/swap"; cp -r "$W/iface" "$W/swap/iface"
+cp "$W/bad-sorry/iface/DirectionWindowBridge6SCToy.olean" "$W/swap/iface/DirectionWindowBridge6SCToy.olean"
+echo "== final audit (swapped interface .olean, good manifest); must FAIL"
+if python3 "$T/audit.py" final --src "$SRC" --spec-build "$W/spec" --iface "$W/swap/iface" --manifest "$W/worker.jsonl" \
+     --require-spec-manifest --final "$W/Audit6SC435.lean" $TA --work "$W/swap/audit" > "$W/swap/audit.txt"; then
+  echo "SWAPPED INTERFACE NOT CAUGHT"; exit 1
+fi
+grep -A3 "AUDIT FAILED" "$W/swap/audit.txt" | grep -i "sha256\|FAILED"
+echo "swapped interface: caught"
 echo "TOY AUDIT DEMONSTRATION COMPLETE"

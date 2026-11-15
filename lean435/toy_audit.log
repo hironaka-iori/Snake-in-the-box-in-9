@@ -1,0 +1,96 @@
+== port
+ported 269 modules to /home/user/Snake-in-the-box-in-9/lean435/src; fixes applied: 12; renames: {'\\bFinset\\.(\\w*?)not_mem': 12, 'Finset\\.card_sdiff (?=[\\w(])': 33, '\\bFinset\\.filter_card_add_filter_neg_card_eq_card\\b': 2, '(?m)^(\\s*)dsimp only at (\\w+)\\s*$': 14, '(f k=localAlpha p ⟨k,hk⟩ :=) by simp \\[f,hk\\]': 1, '\\bNat\\.add_left_eq_self\\b': 1, '\\bList\\.length_eq_zero\\b': 2}; external: ['Mathlib.Algebra.BigOperators.Fin', 'Mathlib.Data.Fintype.EquivFin', 'Mathlib.Order.Interval.Finset.Fin', 'Mathlib.Tactic', 'Std']
+== worker build
+built 0, up to date 201, of 201
+worker build: 0 s
+closure: 201 repository modules, spec layer 195
+== worker manifest + publish
+manifest: 201 lines -> /root/l435/toy/worker.jsonl
+published 4 interface files to /root/l435/toy/iface
+4152 /root/l435/toy/iface/AggregateDirection6SCToy.olean
+29656 /root/l435/toy/iface/DirectionWindowBridge6SCToy.olean
+7840 /root/l435/toy/iface/LocalWindowCtxUnsat/C70123412A236664K15.olean
+8616 /root/l435/toy/iface/LocalWindowCtxUnsat/C801234032A544643K15.olean
+== auditor: rebuild of the spec layer from source
+built 0, up to date 195, of 195
+spec rebuild: 1 s
+== final audit (good chain)
+loaded modules: core 212, iface 2, mathlib 3121, spec 191
+hash checks: 2 interface files, 191 locally rebuilt spec modules
+setup: 3526 import artifacts, 3314 public .olean files outside the toolchain (771.8 MB)
+'Snake9.LocalWindow.TagsSW.soundSC' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.refuted_share_from_dir' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.DirectionWindow6SC.ctxOK7_of_refuted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.DirectionWindow6SC.ctxOK8_of_refuted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.DirectionWindow6SC.ctx_windows6SC' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.WindowAutomaton.total_bound6SC' depends on axioms: [propext, Quot.sound]
+'Snake9.WindowAutomaton.check6SCAt_of_W' depends on axioms: [propext, Quot.sound]
+'Snake9.upper_of_refuted6SC' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.DirectionWindow6SC.ctx7_C70123412A236664K15' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.DirectionWindow6SC.ctx8_C801234032A544643K15' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.DirectionWindow6SC.label6SCToy' depends on axioms: [propext, Quot.sound]
+'Snake9.upper_254_toy6SC' depends on axioms: [propext, Classical.choice, Quot.sound]
+interface files opened: 2 (AggregateDirection6SCToy.olean, DirectionWindowBridge6SCToy.olean)
+strace: 15221 Lean data files opened (8042 of them the toolchain's own Init/Std/Lean files); outside the clean directory and the toolchain: 0; non-.olean parts outside the toolchain, other than spec-layer IR: 0
+axioms of Snake9.LocalWindow.TagsSW.soundSC: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.LocalWindow.refuted_share_from_dir: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.DirectionWindow6SC.ctxOK7_of_refuted: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.DirectionWindow6SC.ctxOK8_of_refuted: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.DirectionWindow6SC.ctx_windows6SC: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.WindowAutomaton.total_bound6SC: ['Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.WindowAutomaton.check6SCAt_of_W: ['Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.upper_of_refuted6SC: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.DirectionWindow6SC.ctx7_C70123412A236664K15: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.DirectionWindow6SC.ctx8_C801234032A544643K15: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.DirectionWindow6SC.label6SCToy: ['Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.upper_254_toy6SC: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+final compile 5.5 s; audit 6.2 s
+AUDIT PASSED
+== final audit of the two certificate interfaces imported directly (olean only, no IR at all)
+loaded modules: core 1, iface 2, spec 14
+hash checks: 2 interface files, 14 locally rebuilt spec modules
+setup: 17 import artifacts, 16 public .olean files outside the toolchain (4.7 MB)
+'Snake9.LocalWindow.C70123412A236664K15.refuted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.LocalWindow.C801234032A544643K15.refuted' depends on axioms: [propext, Classical.choice, Quot.sound]
+interface files opened: 2 (C70123412A236664K15.olean, C801234032A544643K15.olean)
+strace: 4868 Lean data files opened (4852 of them the toolchain's own Init/Std/Lean files); outside the clean directory and the toolchain: 0; non-.olean parts outside the toolchain, other than spec-layer IR: 0
+axioms of Snake9.LocalWindow.C70123412A236664K15.refuted: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.LocalWindow.C801234032A544643K15.refuted: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+final compile 1.7 s; audit 1.8 s
+AUDIT PASSED
+ok AggregateDirection6SCToy: 1.4 s, cpu 1.34 s, anon 0.232 GB
+built 3, up to date 198, of 201
+manifest: 201 lines -> /root/l435/toy/bad-sorry/worker.jsonl
+published 4 interface files to /root/l435/toy/bad-sorry/iface
+== final audit (bad certificate: sorry); must FAIL
+axioms of Snake9.DirectionWindow6SC.ctx7_C70123412A236664K15: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']  NOT IN WHITELIST: ['sorryAx']
+axioms of Snake9.upper_254_toy6SC: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']  NOT IN WHITELIST: ['sorryAx']
+AUDIT FAILED:
+  Snake9.upper_254_toy6SC depends on axioms outside the whitelist: ['sorryAx']
+bad certificate (sorry): caught
+ok AggregateDirection6SCToy: 1.4 s, cpu 1.29 s, anon 0.235 GB
+built 3, up to date 198, of 201
+manifest: 201 lines -> /root/l435/toy/bad-native/worker.jsonl
+published 4 interface files to /root/l435/toy/bad-native/iface
+== final audit (bad certificate: native); must FAIL
+axioms of Snake9.DirectionWindow6SC.ctx7_C70123412A236664K15: ['Classical.choice', 'Quot.sound', '_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.hoff_nd._native.native_decide.ax_1', 'propext']  NOT IN WHITELIST: ['_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.hoff_nd._native.native_decide.ax_1']
+axioms of Snake9.upper_254_toy6SC: ['Classical.choice', 'Quot.sound', '_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.hoff_nd._native.native_decide.ax_1', 'propext']  NOT IN WHITELIST: ['_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.hoff_nd._native.native_decide.ax_1']
+AUDIT FAILED:
+  Snake9.upper_254_toy6SC depends on axioms outside the whitelist: ['_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.hoff_nd._native.native_decide.ax_1']
+bad certificate (native): caught
+ok AggregateDirection6SCToy: 1.81 s, cpu 1.66 s, anon 0.232 GB
+built 3, up to date 198, of 201
+manifest: 201 lines -> /root/l435/toy/bad-axiom/worker.jsonl
+published 4 interface files to /root/l435/toy/bad-axiom/iface
+== final audit (bad certificate: axiom); must FAIL
+axioms of Snake9.DirectionWindow6SC.ctx7_C70123412A236664K15: ['Classical.choice', 'Quot.sound', '_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.cheat', 'propext']  NOT IN WHITELIST: ['_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.cheat']
+axioms of Snake9.upper_254_toy6SC: ['Classical.choice', 'Quot.sound', '_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.cheat', 'propext']  NOT IN WHITELIST: ['_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.cheat']
+AUDIT FAILED:
+  Snake9.upper_254_toy6SC depends on axioms outside the whitelist: ['_private.LocalWindowCtxUnsat.C70123412A236664K15.0.Snake9.LocalWindow.C70123412A236664K15.cheat']
+bad certificate (axiom): caught
+== final audit (swapped interface .olean, good manifest); must FAIL
+AUDIT FAILED:
+  interface DirectionWindowBridge6SCToy.olean: sha256 differs from manifest
+swapped interface: caught
+TOY AUDIT DEMONSTRATION COMPLETE
+exit 0
