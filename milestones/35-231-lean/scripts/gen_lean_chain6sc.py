@@ -112,7 +112,7 @@ theorem zeroS6S{T} : allRGS 6 0 (zeroOutsideS tables6SC{T}.s sshapes6SC{T}) = tr
 ''' + ''.join(rows_t0(T, f'srow6S{T}', k, c, stmt(c), s['share_chunk_index'][k]) for k, c in enumerate(shapes)) + f'''set_option maxRecDepth 100000 in
 theorem srows6S{T}_lit : AllP {gen(None)}
     [{', '.join(lst(c) for c in shapes)}] :=
-  ⟨{', '.join(f'srow6S{T}_{k}' for k in range(len(shapes)))}{', ' if shapes else ''}trivial⟩
+  {f"⟨{', '.join(f'srow6S{T}_{k}' for k in range(len(shapes)))}, trivial⟩" if shapes else 'trivial'}
 
 /-- Every 5-window share field is backed by a share key (its row's chunk) or a floor theorem. -/
 theorem shareCover6S{T} : ShareCover tables6SC{T}.s shareKeys6S{T} :=
@@ -136,7 +136,7 @@ theorem ctxZero{n}_6SC{T} : allRGS {n} 0 (zeroOutsideC ({rf}) ctx{n}Shapes6SC{T}
 ''' + ''.join(rows_t0(T, f'ctxRow{n}_6SC{T}', k, c, stmt(c), s[f'ctx{n}_chunk_index'][k]) for k, c in enumerate(shapes)) + f'''set_option maxRecDepth 100000 in
 theorem ctxRows{n}_6SC{T}_lit : AllP (fun c : List Nat => ∀ t0, 1 ≤ t0 → t0 ≤ 6 → ∃ i, ctxRowOK tables6SC{T}.cbits ({rf} c) (ctx{n}Chunks6SC{T}.getD i []) c t0 = true)
     [{', '.join(lst(c) for c in shapes)}] :=
-  ⟨{', '.join(f'ctxRow{n}_6SC{T}_{k}' for k in range(len(shapes)))}{', ' if shapes else ''}trivial⟩
+  {f"⟨{', '.join(f'ctxRow{n}_6SC{T}_{k}' for k in range(len(shapes)))}, trivial⟩" if shapes else 'trivial'}
 
 theorem ctxCover{n}_6SC{T} : CtxCover {n} tables6SC{T}.cbits ({rf}) ctx{n}Keys6SC{T} :=
   ctxCover_chunks ctx{n}Shapes6SC{T} ctxZero{n}_6SC{T} (by
