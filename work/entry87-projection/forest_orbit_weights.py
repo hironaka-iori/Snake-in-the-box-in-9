@@ -64,8 +64,18 @@ def bound(fixed,size,cert=None):
         A=coo_matrix((coeff,(row,col)),shape=(len(rhs),var)).tocsr()
         obj=np.zeros(var);obj[:n]=[-sizes[k]*costs[k] for k in range(n)]
         lp=linprog(obj,A_eq=A,b_eq=rhs,bounds=(0,None),method="highs")
+        penalty=None
+        if lp.status==2:
+            # A dense opposite side may already be impossible by population.
+            # Reward each chosen vertex strongly, remove the population
+            # equality, and subtract its known reward in the integer check.
+            penalty=10000
+            for k in vertex:obj[k]-=penalty*sizes[k]
+            lp=linprog(obj,A_eq=A[:-1],b_eq=rhs[:-1],bounds=(0,None),method="highs")
         assert lp.success,lp.message
-        dual=lp.eqlin.marginals;D=1000000;t=int(round(-dual[-1]*D));weights=[]
+        dual=lp.eqlin.marginals;D=1000000
+        t=-penalty*D if penalty is not None else int(round(-dual[-1]*D))
+        weights=[]
         for (start,length),group in zip(moment,classes.values()):
             weights.append([int(round(v*D/len(group))) for v in dual[start:start+length]])
         cert=dict(scale=D,per_vertex=t,weights=weights)

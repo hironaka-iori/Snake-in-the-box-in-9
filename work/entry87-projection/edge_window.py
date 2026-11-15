@@ -24,7 +24,8 @@ def read(name):
 def check(size, target, replay, packed, mode, checker=None):
     labels = hole_labels()
     archive = {}
-    if packed and packed.exists():
+    sealed = packed is not None and packed.exists()
+    if sealed:
         with gzip.open(packed, "rt", encoding="utf-8") as stream:
             archive = dict(json.loads(line) for line in stream)
     used = {}
@@ -34,7 +35,7 @@ def check(size, target, replay, packed, mode, checker=None):
     resolutions = []
 
     def proof(name):
-        return archive.get(name) if name in archive else read(name)
+        return archive.get(name) if sealed else read(name)
 
     def accept(name, record, test):
         if replay and name not in checked:
@@ -116,7 +117,7 @@ def check(size, target, replay, packed, mode, checker=None):
     # [size-60,60]. Seven edges incidences per eight-cube edge force one
     # face above the all-faces threshold, or one denser face above the
     # dense-faces threshold when each opposite face has at most 48 edges.
-    if size <= 120:
+    if size <= 120 and mode != "facets":
         if mode == "dense":
             minimum = (7*target+7)//8 - 48
             low = (size+1)//2
@@ -130,7 +131,9 @@ def check(size, target, replay, packed, mode, checker=None):
                     open_cases.append((n, i))
     else:
         minimum, low = None, None
-    record = dict(size=size, excluded_edge_target=target, choice=mode, minimum_face_edges=minimum,
+    record = dict(size=size, excluded_edge_target=target, choice=mode,
+                  scope="faces of population at least 61" if mode=="facets" else "all forests",
+                  minimum_face_edges=minimum,
                   minimum_face_population=low, methods=dict(counts), resolution_receipts=resolutions,
                   open_cases=open_cases)
     if packed and not open_cases and not packed.exists():
@@ -144,7 +147,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("size", type=int, choices=range(117,129))
     parser.add_argument("target", type=int, choices=range(104,111))
-    parser.add_argument("--choice", choices=("dense","all"), default="dense")
+    parser.add_argument("--choice", choices=("dense","all","facets"), default="dense")
     parser.add_argument("--archive", type=Path)
     parser.add_argument("--replay", action="store_true")
     parser.add_argument("--checker", type=Path)
