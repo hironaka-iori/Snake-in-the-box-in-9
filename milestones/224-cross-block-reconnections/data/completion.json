@@ -1,0 +1,81 @@
+{
+  "round": 224,
+  "status": "PROGRESS",
+  "previous_goal_turn": "PROGRESS",
+  "goal_status": "ACTIVE",
+  "started_utc": "2026-11-15 06:48:55 UTC",
+  "finished_utc": "2026-11-15T07:07:14.298919+00:00",
+  "interval": [
+    191,
+    233
+  ],
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "accepted_new_modules": 2,
+  "theorem_reports": 2,
+  "proofs": [
+    {
+      "module": "TwoBlocks224",
+      "receipt": "milestones\\224-cross-block-reconnections\\data\\TwoBlocks224-audit.json",
+      "sha256": "1b7a23680905edeaff44326e5779c43fe350b3e33fc3dafcd47222bba01e5a32",
+      "reports": 1
+    },
+    {
+      "module": "TwoBlockEscape224",
+      "receipt": "milestones\\224-cross-block-reconnections\\data\\TwoBlockEscape224-audit.json",
+      "sha256": "e7820f93aa7c4d0419591cfb5755a4f556e74318e9399ce1165c4a3b8438b899",
+      "reports": 1
+    }
+  ],
+  "short_contexts": 224,
+  "short_static": 171,
+  "short_native_infeasible": 53,
+  "short_unresolved": 0,
+  "short_numerical_exclusion_requires_bank_closure": false,
+  "long_contexts": 301,
+  "long_static": 107,
+  "long_native_infeasible": 102,
+  "long_unresolved": 92,
+  "flow_retries": 16,
+  "flow_all_unknown": true,
+  "biconnected_new_exclusions": 0,
+  "solver_infeasibility_lean_certified": false,
+  "model_archive_sha256": "797a1f9df3a5b1232b93d3a5bbff35b5b50332e3e047438a40e640e9858d0278",
+  "search_summary_sha256": "ed4b86207fbc6ef339bd798a4b5c7172d9c0d6611d0fd367dfa30c7e41b27280",
+  "contributor_revision": "e3c7bfcd37d4a0c54a348533fa696addefebbbd5",
+  "independent_233_rebuild": false,
+  "frozen_parent_search_states": {
+    "22": {
+      "path": "milestones\\217-long-parent-search\\data\\case-22\\state.json",
+      "sha256": "79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452"
+    },
+    "23": {
+      "path": "milestones\\211-subset-capacity\\data\\case-23\\state.json",
+      "sha256": "3b7733ba9ad904608c050ed63199b13a295c56db6d3b1ded909ef13be38d5e7d",
+      "state_jobs": 296,
+      "pending": 11,
+      "state_nodes": 3721372,
+      "counter_scope": "historical cumulative"
+    },
+    "24": {
+      "path": "milestones\\209-slice-capacity\\data\\case-24\\state.json",
+      "sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "state_jobs": 150,
+      "pending": 8,
+      "state_nodes": 9625900,
+      "counter_scope": "historical cumulative"
+    },
+    "9": {
+      "path": "milestones\\209-slice-capacity\\data\\case-9\\state.json",
+      "sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "state_jobs": 150,
+      "pending": 3,
+      "state_nodes": 8142891,
+      "counter_scope": "historical cumulative"
+    }
+  },
+  "software_tests_created_or_run": false,
+  "compile_success": true,
+  "next_full_paper_review": 230,
+  "next_step": "Continue the endpoint24 two-region construction. Prepare width34 maximal contexts first, using combined crossing counts and correct odd vertex parity counts. In particular [130,164] contains both old crossing edges130/163, so never reuse width33 fixed0/1 allocation. Locate the smallest unresolved width in34\u201343. For its open contexts, enumerate actual connected replacement paths and solve the other path in the remaining compatible graph; retain incomplete enumeration states. Do not repeat unchanged44 degree/flow timeouts. The33-edge family is closed by the contact-free native calculation; no general192-edge exclusion is claimed."
+}

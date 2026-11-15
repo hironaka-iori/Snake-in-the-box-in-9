@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 223}
+\date{Research state after round 224}
 \begin{document}
 \maketitle
 
@@ -409,6 +409,32 @@ argument has passed Lean. The corresponding twelve-omission search
 remains unresolved after 75 seconds. This gives a concrete way to
 force a crossing change without fixing the rest of either face.
 
+\subsection{Why simultaneous changes must interact}
+Suppose a family is closed under individual length-preserving block
+replacements of at most $K$ edges, and none of its paths can be extended.
+A simultaneous change of two such blocks with disjoint interiors can
+enable extension only if each new interior contains a vertex equal or
+adjacent to an original interior vertex of the other block. Otherwise the noninteracting replacement can be
+performed first, followed by the other; closure would keep the final
+path in the blocked family. The actual intermediate-path construction
+and this conditional implication have now passed Lean.
+
+Appending endpoint 24 to the chosen seed requires changing positions
+7 and 143, whose original vertices are 28 and 56. All pairs of blocks
+of at most 33 edges containing those positions are covered by 224
+maximal window pairs. Geometry excludes 171 and native solver queries
+exclude the other 53, even without imposing the interaction condition.
+Thus this particular route is computationally closed without relying
+on the earlier closure census. Its solver contradictions are not checked
+in Lean.
+
+Allowing 44-edge blocks gives 301 maximal contexts: 107 are geometrically
+excluded, 102 are solver-excluded and 92 remain unresolved. Connectivity
+flows did not resolve 16 selected retries. These results concern the
+fixed seed, fixed outside indices, endpoint 24 and four crossings.
+They give no global optimality conclusion; larger or differently
+arranged changes remain possible~\cite{research224}.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The current route varies both faces in a four-crossing construction.
@@ -422,7 +448,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 223.
+in the companion manuscript and milestones through round 224.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -464,6 +490,12 @@ F.~Barahona and A.~R.~Mahjoub. On the cut polytope.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Joint four-crossing construction
 and five-component joining}. Research milestone 223, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/223-coupled-four-crossings}.
+
+\bibitem{research224}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Interaction between simultaneous
+replacements and two-region construction searches}.
+Research milestone 224, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/224-cross-block-reconnections}.
 
 \end{thebibliography}
 \end{document}

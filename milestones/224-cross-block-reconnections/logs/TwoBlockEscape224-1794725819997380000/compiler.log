@@ -1,0 +1,75 @@
+E:\Snake-in-a-box\milestones\224-cross-block-reconnections\lean\TwoBlockEscape224.lean:61:8: error: unsolved goals
+case pos
+V : Type
+R : V → V → Prop
+n : Nat
+family extension : InducedPath V R n → Prop
+K : Nat
+closed :
+  ∀ (u v : InducedPath V R n) (left right : Nat),
+    family u →
+      left ≤ right →
+        right ≤ n →
+          right - left ≤ K → (∀ (i : Fin (n + 1)), ↑i ≤ left ∨ right ≤ ↑i → v.vertex i = u.vertex i) → family v
+blocked : ∀ (u : InducedPath V R n), family u → ¬extension u
+p q : InducedPath V R n
+a b c d : Nat
+ordered : a ≤ b ∧ b ≤ c ∧ c ≤ d
+within_path : d ≤ n
+short_first : b - a ≤ K
+short_second : d - c ≤ K
+agreement : ∀ (i : Fin (n + 1)), ¬(a < ↑i ∧ ↑i < b) → ¬(c < ↑i ∧ ↑i < d) → q.vertex i = p.vertex i
+initial : family p
+escape : extension q
+hab : a ≤ b
+hbc : b ≤ c
+hcd : c ≤ d
+not_final : ¬family q
+contact : ¬∃ i j, (a < ↑i ∧ ↑i < b) ∧ (c < ↑j ∧ ↑j < d) ∧ (q.vertex i = p.vertex j ∨ R (q.vertex i) (p.vertex j))
+separation :
+  ∀ (i j : Fin (n + 1)), a < ↑i ∧ ↑i < b → c < ↑j ∧ ↑j < d → q.vertex i ≠ p.vertex j ∧ ¬R (q.vertex i) (p.vertex j)
+middle : InducedPath V R n := firstIntermediate p q a b c d ordered agreement separation
+in_middle : family middle
+i : Fin (n + 1)
+outside : ↑i ≤ c ∨ d ≤ ↑i
+not_second : ¬(c < ↑i ∧ ↑i < d)
+first : a < ↑i ∧ ↑i < b
+⊢ q.vertex i = if True ∧ True then q.vertex i else p.vertex i
+E:\Snake-in-a-box\milestones\224-cross-block-reconnections\lean\TwoBlockEscape224.lean:89:8: error: unsolved goals
+case pos
+V : Type
+R : V → V → Prop
+n : Nat
+family extension : InducedPath V R n → Prop
+K : Nat
+closed :
+  ∀ (u v : InducedPath V R n) (left right : Nat),
+    family u →
+      left ≤ right →
+        right ≤ n →
+          right - left ≤ K → (∀ (i : Fin (n + 1)), ↑i ≤ left ∨ right ≤ ↑i → v.vertex i = u.vertex i) → family v
+blocked : ∀ (u : InducedPath V R n), family u → ¬extension u
+p q : InducedPath V R n
+a b c d : Nat
+ordered : a ≤ b ∧ b ≤ c ∧ c ≤ d
+within_path : d ≤ n
+short_first : b - a ≤ K
+short_second : d - c ≤ K
+agreement : ∀ (i : Fin (n + 1)), ¬(a < ↑i ∧ ↑i < b) → ¬(c < ↑i ∧ ↑i < d) → q.vertex i = p.vertex i
+initial : family p
+escape : extension q
+hab : a ≤ b
+hbc : b ≤ c
+hcd : c ≤ d
+not_final : ¬family q
+contact : ¬∃ i j, (a < ↑i ∧ ↑i < b) ∧ (c < ↑j ∧ ↑j < d) ∧ (p.vertex i = q.vertex j ∨ R (p.vertex i) (q.vertex j))
+separation :
+  ∀ (i j : Fin (n + 1)), a < ↑i ∧ ↑i < b → c < ↑j ∧ ↑j < d → p.vertex i ≠ q.vertex j ∧ ¬R (p.vertex i) (q.vertex j)
+reverse_agreement : ∀ (i : Fin (n + 1)), ¬(a < ↑i ∧ ↑i < b) → ¬(c < ↑i ∧ ↑i < d) → p.vertex i = q.vertex i
+middle : InducedPath V R n := firstIntermediate q p a b c d ordered reverse_agreement separation
+i : Fin (n + 1)
+outside : ↑i ≤ c ∨ d ≤ ↑i
+not_second : ¬(c < ↑i ∧ ↑i < d)
+first : a < ↑i ∧ ↑i < b
+⊢ (if True ∧ True then p.vertex i else q.vertex i) = p.vertex i
+'TwoBlockEscape224.escape_requires_cross_contacts' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

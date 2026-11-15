@@ -1,3 +1,11 @@
+# Current result after round 224
+
+A checked interaction theorem explains why simultaneous replacements must interfere to escape a family closed under separate changes. The endpoint-24 construction using two blocks of at most 33 edges is computationally excluded across all 224 maximal contexts, without relying on that closure premise. At 44 edges, 209 of 301 contexts are excluded and 92 remain unresolved. No longer snake or new global bound. Goal ACTIVE; next is the smallest unresolved two-region width and explicit compatible replacement paths.
+
+Read [the argument](milestones/224-cross-block-reconnections/MATHEMATICAL_NOTE.md), [evidence](milestones/224-cross-block-reconnections/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 223
 
 The constructive route now varies both Q8 faces and all four crossings. A five-component joining constructor and the endpoint-neighbour exclusion rule passed Lean, with three public results. The neighbourhood allowing at most four omissions from the selected 191-edge seed is natively infeasible; eight/twelve omissions and an endpoint-80 specialization remain unresolved at their limits. No longer snake or new global bound. The goal remains ACTIVE; next is endpoint-directed reconnection of retained components.

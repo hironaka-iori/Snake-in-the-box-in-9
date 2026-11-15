@@ -1,0 +1,101 @@
+import TwoBlocks224
+
+set_option Elab.async false
+
+namespace TwoBlockEscape224
+open LayerJoining TwoBlocks224
+
+/-- A simultaneous two-block change that enables an excluded extension
+must have new/old cross-contact in both directions, provided the family
+is closed under each individual permitted block replacement. -/
+theorem escape_requires_cross_contacts {V : Type} {R : V → V → Prop} {n : Nat}
+    (family extension : InducedPath V R n → Prop) (K : Nat)
+    (closed : ∀ (u v : InducedPath V R n) (left right : Nat),
+      family u → left ≤ right → right ≤ n → right - left ≤ K →
+      (∀ i, i.val ≤ left ∨ right ≤ i.val → v.vertex i = u.vertex i) → family v)
+    (blocked : ∀ u, family u → ¬extension u)
+    (p q : InducedPath V R n) (a b c d : Nat)
+    (ordered : a ≤ b ∧ b ≤ c ∧ c ≤ d) (within_path : d ≤ n)
+    (short_first : b - a ≤ K) (short_second : d - c ≤ K)
+    (agreement : ∀ i, ¬(a < i.val ∧ i.val < b) →
+      ¬(c < i.val ∧ i.val < d) → q.vertex i = p.vertex i)
+    (initial : family p) (escape : extension q) :
+    (∃ i j : Fin (n + 1), (a < i.val ∧ i.val < b) ∧
+      (c < j.val ∧ j.val < d) ∧
+      (q.vertex i = p.vertex j ∨ R (q.vertex i) (p.vertex j))) ∧
+    (∃ i j : Fin (n + 1), (a < i.val ∧ i.val < b) ∧
+      (c < j.val ∧ j.val < d) ∧
+      (p.vertex i = q.vertex j ∨ R (p.vertex i) (q.vertex j))) := by
+  classical
+  have hab := ordered.1
+  have hbc := ordered.2.1
+  have hcd := ordered.2.2
+  have not_final : ¬family q := fun h => blocked q h escape
+  constructor
+  · by_cases contact : ∃ i j : Fin (n + 1),
+        (a < i.val ∧ i.val < b) ∧ (c < j.val ∧ j.val < d) ∧
+        (q.vertex i = p.vertex j ∨ R (q.vertex i) (p.vertex j))
+    · exact contact
+    · have separation : ∀ i j, (a < i.val ∧ i.val < b) →
+          (c < j.val ∧ j.val < d) →
+          q.vertex i ≠ p.vertex j ∧ ¬R (q.vertex i) (p.vertex j) := by
+        intro i j hi hj
+        constructor
+        · intro equal
+          exact contact ⟨i, j, hi, hj, Or.inl equal⟩
+        · intro edge
+          exact contact ⟨i, j, hi, hj, Or.inr edge⟩
+      let middle := firstIntermediate p q a b c d ordered agreement separation
+      have in_middle : family middle := by
+        apply closed p middle a b initial hab (by omega) short_first
+        intro i outside
+        have not_first : ¬(a < i.val ∧ i.val < b) := by omega
+        change (if a < i.val ∧ i.val < b then q.vertex i else p.vertex i) = p.vertex i
+        simp only [not_first, if_false]
+      have in_final : family q := by
+        apply closed middle q c d in_middle hcd within_path short_second
+        intro i outside
+        have not_second : ¬(c < i.val ∧ i.val < d) := by omega
+        change q.vertex i = (if a < i.val ∧ i.val < b then q.vertex i else p.vertex i)
+        by_cases first : a < i.val ∧ i.val < b
+        · simp [first]
+        · simp only [first, if_false]
+          exact agreement i first not_second
+      exact False.elim (not_final in_final)
+  · by_cases contact : ∃ i j : Fin (n + 1),
+        (a < i.val ∧ i.val < b) ∧ (c < j.val ∧ j.val < d) ∧
+        (p.vertex i = q.vertex j ∨ R (p.vertex i) (q.vertex j))
+    · exact contact
+    · have separation : ∀ i j, (a < i.val ∧ i.val < b) →
+          (c < j.val ∧ j.val < d) →
+          p.vertex i ≠ q.vertex j ∧ ¬R (p.vertex i) (q.vertex j) := by
+        intro i j hi hj
+        constructor
+        · intro equal
+          exact contact ⟨i, j, hi, hj, Or.inl equal⟩
+        · intro edge
+          exact contact ⟨i, j, hi, hj, Or.inr edge⟩
+      have reverse_agreement : ∀ i, ¬(a < i.val ∧ i.val < b) →
+          ¬(c < i.val ∧ i.val < d) → p.vertex i = q.vertex i := by
+        intro i hi hj
+        exact (agreement i hi hj).symm
+      let middle := firstIntermediate q p a b c d ordered reverse_agreement separation
+      have in_middle : family middle := by
+        apply closed p middle c d initial hcd within_path short_second
+        intro i outside
+        have not_second : ¬(c < i.val ∧ i.val < d) := by omega
+        change (if a < i.val ∧ i.val < b then p.vertex i else q.vertex i) = p.vertex i
+        by_cases first : a < i.val ∧ i.val < b
+        · simp [first]
+        · simp only [first, if_false]
+          exact agreement i first not_second
+      have in_final : family q := by
+        apply closed middle q a b in_middle hab (by omega) short_first
+        intro i outside
+        have not_first : ¬(a < i.val ∧ i.val < b) := by omega
+        change q.vertex i = (if a < i.val ∧ i.val < b then p.vertex i else q.vertex i)
+        simp only [not_first, if_false]
+      exact False.elim (not_final in_final)
+
+#print axioms escape_requires_cross_contacts
+end TwoBlockEscape224
