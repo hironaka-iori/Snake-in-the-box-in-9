@@ -319,7 +319,10 @@ def retry(f, n=4, base=5):
 class Repo:
     """A persistent bare repository of this worker; only xfer/c435/* refs are ever fetched."""
 
-    def __init__(self):
+    def __init__(self, pfx=None):
+        self.pfx = pfx or PFX
+        # local ref namespace: unchanged for the default prefix (workers), separate per other family
+        self.ns = '' if self.pfx == PFX else 'f' + hashlib.sha1(self.pfx.encode()).hexdigest()[:8] + '/'
         self.b = os.path.join(HOME, 'git')
         if not os.path.exists(os.path.join(self.b, 'HEAD')):
             os.makedirs(self.b, exist_ok=True)
@@ -327,17 +330,17 @@ class Repo:
         self.url = url()
 
     def ls(self):
-        out = retry(lambda: git('ls-remote', self.url, PFX + '*', cwd=self.b, timeout=120))
-        return {l.split('\t')[1][len(PFX):]: l.split('\t')[0] for l in out.splitlines() if '\t' in l}
+        out = retry(lambda: git('ls-remote', self.url, self.pfx + '*', cwd=self.b, timeout=120))
+        return {l.split('\t')[1][len(self.pfx):]: l.split('\t')[0] for l in out.splitlines() if '\t' in l}
 
     def fetch(self, names):
         if names:
             retry(lambda: git('fetch', '-q', '--depth', '1', self.url,
-                              *[f'+{PFX}{n}:refs/x/{n}' for n in names], cwd=self.b))
+                              *[f'+{self.pfx}{n}:refs/x/{self.ns}{n}' for n in names], cwd=self.b))
 
     def files(self, name, only=None):
         out = {}
-        for l in git('ls-tree', f'refs/x/{name}', cwd=self.b).splitlines():
+        for l in git('ls-tree', f'refs/x/{self.ns}{name}', cwd=self.b).splitlines():
             meta, path = l.split('\t')
             if only is None or path in only:
                 out[path] = git('cat-file', 'blob', meta.split()[2], cwd=self.b, binary=True)
@@ -345,7 +348,7 @@ class Repo:
 
     def entries(self, name):
         return {l.split('\t')[1]: l.split('\t')[0].split()[2]
-                for l in git('ls-tree', f'refs/x/{name}', cwd=self.b).splitlines()}
+                for l in git('ls-tree', f'refs/x/{self.ns}{name}', cwd=self.b).splitlines()}
 
     def push(self, name, add, parent, msg):
         """New commit = parent's tree + `add` ({path: bytes}); pushed without force (fast-forward)."""
@@ -357,8 +360,8 @@ class Repo:
         if parent:
             cmd[-2:-2] = ['-p', parent]
         commit = git(*cmd, cwd=self.b).strip()
-        retry(lambda: git('push', '-q', self.url, f'{commit}:{PFX}{name}', cwd=self.b))
-        git('update-ref', f'refs/x/{name}', commit, cwd=self.b)
+        retry(lambda: git('push', '-q', self.url, f'{commit}:{self.pfx}{name}', cwd=self.b))
+        git('update-ref', f'refs/x/{self.ns}{name}', commit, cwd=self.b)
         return commit
 
 
@@ -535,54 +538,78 @@ def worker_manifests(repo, names):
 
 
 def cmd_status(a):
-    repo = Repo()
-    tips = repo.ls()
-    ws = sorted((n for n in tips if n.startswith('w')), key=lambda n: int(n[1:]))
-    if 'ctl' in tips:
-        repo.fetch(['ctl'])
-        print('ctl:', repo.files('ctl', only={'record.json'}).get('record.json', b'').decode())
-    ms = worker_manifests(repo, ws)
     tot = dict(n=0, hints=0, cpu=0.0)
-    for n in ws:
-        man, rec = ms[n]
-        h = sum(r.get('hints') or 0 for r in man)
-        c = sum(r.get('lean_cpu_s') or 0 for r in man)
-        tot['n'] += len(man); tot['hints'] += h; tot['cpu'] += c
-        print(f'{n}: {len(man)} certificates, {h / 1e6:.1f} M hints, lean {c / 3600:.2f} CPU-h; '
-              f'todo {rec.get("todo")}, failed {rec.get("failed")}, host {rec.get("host")}, at {rec.get("t")}')
-    print(f'all: {tot["n"]} certificates, {tot["hints"] / 1e6:.1f} M hints, lean {tot["cpu"] / 3600:.2f} CPU-h')
-    if a.plan:
-        items = plan_items(a.plan)
-        have = {r['module'] for n in ws for r in ms[n][0]}
+    have = set()
+    for pfx in a.pfx or [PFX]:
+        repo = Repo(pfx)
+        tips = repo.ls()
+        ws = sorted((n for n in tips if n.startswith('w')), key=lambda n: int(n[1:]))
+        print(f'== {pfx}: {len(ws)} worker branches')
+        if 'ctl' in tips:
+            repo.fetch(['ctl'])
+            print('ctl:', repo.files('ctl', only={'record.json'}).get('record.json', b'').decode())
+        ms = worker_manifests(repo, ws)
+        for n in ws:
+            man, rec = ms[n]
+            h = sum(r.get('hints') or 0 for r in man)
+            c = sum(r.get('lean_cpu_s') or 0 for r in man)
+            tot['n'] += len(man); tot['hints'] += h; tot['cpu'] += c
+            have |= {r['module'] for r in man}
+            print(f'{n}: {len(man)} certificates, {h / 1e6:.1f} M hints, lean {c / 3600:.2f} CPU-h; '
+                  f'todo {rec.get("todo")}, failed {rec.get("failed")}, host {rec.get("host")}, at {rec.get("t")}')
+    print(f'all: {tot["n"]} certificates ({len(have)} distinct modules), {tot["hints"] / 1e6:.1f} M hints, '
+          f'lean {tot["cpu"] / 3600:.2f} CPU-h')
+    for plan in a.plan or []:
+        items = plan_items(os.path.abspath(plan))
         left = [it for it in items if it[0] not in have]
-        print(f'plan {os.path.basename(a.plan)}: {len(items)} paid certificates, {len(left)} not published '
+        print(f'plan {os.path.basename(plan)}: {len(items)} certificates, {len(left)} not published '
               f'({sum(it[4] for it in left) / 1e6:.0f} M plan hints)')
 
 
 def cmd_merge(a):
-    repo = Repo()
-    tips = repo.ls()
-    ws = [n for n in tips if n.startswith('w')]
-    repo.fetch(ws)
+    """All published interfaces of the given branch families into one directory and one manifest.
+    A module published twice must have the same .olean sha256; otherwise it is rejected (left out,
+    listed, exit 1)."""
     os.makedirs(a.out, exist_ok=True)
-    lines, n = {}, 0
-    for w in ws:
-        f = repo.files(w)
-        for l in f.get('manifest.jsonl', b'').decode().splitlines():
-            if not l.strip():
-                continue
-            r = json.loads(l)
-            data = f.get(r['module'] + '.olean')
-            if data is None or hashlib.sha256(data).hexdigest() != r['parts']['.olean']:
-                print(f'{w}: {r["module"]}.olean missing or not matching its manifest line', file=sys.stderr)
-                continue
-            p = os.path.join(a.out, r['module'].replace('.', '/') + '.olean')
-            os.makedirs(os.path.dirname(p), exist_ok=True)
-            open(p, 'wb').write(data)
-            lines[r['module']] = json.dumps(r, sort_keys=True)
-            n += 1
+    lines, where, conflict, bad, nbr = {}, {}, set(), 0, 0
+    for pfx in a.pfx or [PFX]:
+        repo = Repo(pfx)
+        tips = repo.ls()
+        ws = sorted(n for n in tips if n.startswith('w'))
+        nbr += len(ws)
+        repo.fetch(ws)
+        for w in ws:
+            f = repo.files(w)
+            for l in f.get('manifest.jsonl', b'').decode().splitlines():
+                if not l.strip():
+                    continue
+                r = json.loads(l)
+                m = r['module']
+                data = f.get(m + '.olean')
+                if data is None or hashlib.sha256(data).hexdigest() != r['parts']['.olean']:
+                    print(f'{pfx}{w}: {m}.olean missing or not matching its manifest line', file=sys.stderr)
+                    bad += 1
+                    continue
+                if m in lines:
+                    if json.loads(lines[m])['parts']['.olean'] != r['parts']['.olean']:
+                        conflict.add(m)
+                        print(f'CONFLICT {m}: {where[m]} and {pfx}{w} published different .olean', file=sys.stderr)
+                    continue
+                p = os.path.join(a.out, m.replace('.', '/') + '.olean')
+                os.makedirs(os.path.dirname(p), exist_ok=True)
+                open(p, 'wb').write(data)
+                lines[m] = json.dumps(r, sort_keys=True)
+                where[m] = pfx + w
+    for m in conflict:
+        lines.pop(m, None)
+        p = os.path.join(a.out, m.replace('.', '/') + '.olean')
+        if os.path.exists(p):
+            os.remove(p)
     open(os.path.join(a.out, 'manifest.jsonl'), 'w').write('\n'.join(lines[k] for k in sorted(lines)) + '\n')
-    print(f'merged {n} certificate interfaces from {len(ws)} workers into {a.out}')
+    print(f'merged {len(lines)} certificate interfaces from {nbr} branches into {a.out}; '
+          f'{len(conflict)} conflicting modules rejected, {bad} lines without a matching .olean')
+    if conflict:
+        sys.exit(1)
 
 
 def cmd_collect(a):
@@ -685,9 +712,11 @@ def main():
     p.add_argument('--mem-gb', type=float, default=12)
     p.add_argument('--cadical', default=os.environ.get('CADICAL') or shutil.which('cadical') or '/usr/local/bin/cadical')
     p = sub.add_parser('status')
-    p.add_argument('--plan', default=None)
+    p.add_argument('--plan', action='append', default=None, help='plan(s) to count against (paid or free list)')
+    p.add_argument('--pfx', nargs='+', default=None, help='branch families, default refs/heads/xfer/c435/')
     p = sub.add_parser('merge')
     p.add_argument('--out', required=True)
+    p.add_argument('--pfx', nargs='+', default=None, help='branch families, default refs/heads/xfer/c435/')
     p = sub.add_parser('collect')
     p.add_argument('--out', required=True)
     p.add_argument('--names', nargs='*', default=None)
@@ -699,7 +728,7 @@ def main():
     g.add_argument('--stop', action='store_true')
     g.add_argument('--clear', action='store_true')
     a = ap.parse_args()
-    if hasattr(a, 'plan') and a.plan:
+    if hasattr(a, 'plan') and isinstance(a.plan, str) and a.plan:
         a.plan = os.path.abspath(a.plan)
     r = {'setup': cmd_setup, 'run': cmd_run, 'one': cmd_one, 'status': cmd_status, 'merge': cmd_merge,
          'free': cmd_free, 'ctl': cmd_ctl, 'collect': cmd_collect}[a.cmd](a)
