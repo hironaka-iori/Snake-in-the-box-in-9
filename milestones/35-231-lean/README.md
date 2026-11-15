@@ -41,6 +41,7 @@ audited module and no existing `.olean` was touched. The only new file under `wo
 | `work/spectral/stronger/DirectionWindowBridge6SCChunks.lean` | new framework module (core Lean, 90 lines): `keyLevel_mono`, `shareRowOK_mono`, `shareCover_chunks`, `ctxCover_chunks` (see "Problems found") |
 | `certify/cert231.py` | certificate driver (ctx, new 5-window share and new plain keys of the plan) |
 | `certify/cores/*.json.gz` | core JSONs of the 5 test ctx certificates |
+| `lean/CtxGlueTest231.lean` | glue test: 4 certificates as `RefutedCtx7`/`RefutedCtx8` of their plan keys |
 | `certify/data/*231_certplan231_15268_27_dual.jsonl` | records of the test certificates (cores, cnf, replay, build) |
 | `data/auto6sc_L15268Q27.json` | summary of the generation (read by `gen_lean_chain6sc.py`) |
 | `data/shards6sc_L15268Q27.sha256` | sha256 of the data module and the 204 shards (not committed, regenerated) |
@@ -127,7 +128,23 @@ generators with `--expect-bound 232`:
 | ctx | **283 ctx 7** (66 rows, 25 shapes) and **48 ctx 8** (22 rows, 16 shapes) keys, 7-bit fields (max level 125) |
 | witness codes | 13 (ctx 7): 727; 14 (ctx 8): 63; of 10,404,288 re-checked transitions |
 
-__R232__
+**Built, every module real (no stub), run of 15 November, one `lean` at a time:**
+
+```
+Snake9.upper_232_of_refuted6SCM232L541 : Snake9.LocalWindow.AllRefuted6SM232L541 →
+  Snake9.LocalWindow.AllRefutedShare6SM232L541 →
+    Snake9.LocalWindow.AllRefutedCtx6SCM232L541 →
+      Snake9.DirectionWindow6S.Floors233 → ∀ {m : ℕ}, Snake9.Snake m → m ≤ 232
+'Snake9.upper_232_of_refuted6SCM232L541' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+The kernel checks `stepOK6SCM232L541`, `windows6SCM232L541`, `cover6SM232L541k6`, `shareCover6SM232L541`,
+`ctxCover7_6SCM232L541`, `ctxCover8_6SCM232L541` print the same three axioms (`coverH8_6SM232L541`:
+`propext`, `Quot.sound`). No module printed `declaration uses 'sorry'`; no source contains `sorry`,
+`native_decide` or `axiom`. CPU seconds / peak RSS: 204 shards 3,097 s in all (11.0–17.7 each, ≤ 0.61 GB,
+13.5 MB of `.olean`); ctx cover `…C` 954 s / 1.74 GB; share cover `…S` 72 s / 1.37 GB; keys parts
+4–31 s each (≤ 0.99 GB); data 9.9 s; Sequence 35 s / 1.34 GB; bridge 11 s; aggregate 3.4 s / 2.65 GB
+(mathlib). About 1.15 CPU-hours in all, 55 min of wall time for the shards and the rest.
 
 ## Measurements
 
@@ -187,13 +204,20 @@ directory; one `lean` job, `nice -n 10`; core JSONs in `certify/cores/`):
 | `C801234523A652633K78` (ctx 8, cap 78) | 76,282 | 54,275 | 31,928 | 2,548 | 22.6 / 1.58 / 0.20 MB | 4.7 / 0.87 / 0.10 MB | 0.15 |
 | `C70123425A656534K23` (ctx 7, cap 23) | 532,341 | 789,594 | 280,476 | 9,381 | 37.1 / 1.67 / 0.28 MB | 48.9 / 1.64 / 0.81 MB | 0.17 |
 | `C70123412A632634K91` (ctx 7, cap 91) | 2,415,855 | 5,013,713 | 2,160,950 | 18,924 | 130.2 / 1.53 / 0.78 MB | 447.1 / 2.62 / 6.94 MB | 0.21 |
-__BIG__
+| `C801203402A535643K45` (ctx 8, cap 45) | 8,857,147 | 18,775,386 | 8,346,843 | 21,420 | 88.1 / 1.21 / 0.66 MB | not finished: stopped by the coordinator when the owner paused all work, after more than 32 CPU-min at 3.2–3.5 GB (expected about 30–40 min at 0.21–0.25 ms per hint) | |
 
 (CPU seconds of the `lean` process.) Generation (core, Cnf source, LRAT and v3 source) took 0.8 to 74 s for
 the cores and up to 2,120 s of LRAT search for the largest (8 seeds × 5 rounds, one CaDiCaL job). Replay
 sources: 16.6 kB to 48.8 MB (4.2 to 7.6 B per hint); replay `.olean` 3.2 B per hint for the 2 M one.
 The glue test `CtxGlueTest231` (`TagsSW.refutedShareFrom_of_sat <name>.sat <name>.unsat`) states each
-certificate as `RefutedCtx7 (dirs, t, level − 1)` / `RefutedCtx8 (…)` of its plan row: __GLUE__
+certificate as `RefutedCtx7 (dirs, t, level − 1)` / `RefutedCtx8 (…)` of its plan row; it compiled for the four
+finished ones (`milestones/35-231-lean/lean/CtxGlueTest231.lean`; each theorem `propext`, `Classical.choice`,
+`Quot.sound`).
+
+**One module per certificate.** `cert231.py merge` was run on three of them and the merged modules
+`LocalWindowCtxCert.<N>` built: `C70123412A365354K11` 6.7 CPU-s / 0.86 GB / 117 kB `.olean` (separately
+7.3 s, 0.85 GB, 139 kB in two files), `C801234523A652633K78` 25.1 s / 1.68 GB / 277 kB (separately 27.3 s,
+1.58 GB, 299 kB), `C70123425A656534K23` 87.0 s / 2.08 GB / 1.06 MB (separately 86.0 s, peak 1.67 GB, 1.09 MB). Time and `.olean` size are unchanged; the peak RSS of the merged module is higher, since one process checks both halves.
 
 ## For the Lean 4.35 port (layout and parameters)
 
@@ -291,6 +315,10 @@ builds that layout. The glue term per ctx key is `TagsSW.refutedShareFrom_of_sat
 - **`free233` 5-window rows.** For these 64 rows the Lean key is the 233 key with its own cap
   (T233 − 1 ≥ level − 1), so the 233 certificate is reused as it is; the generator asserts that such a key
   exists for each row.
+- **OOM kill at 08:08 UTC.** The kernel's memory-cgroup killer took pid 20855, a `lean` with 8.2 GB of
+  anonymous memory. It was not one of this session's: the only `lean` of this work running then was pid
+  16071, the replay of `C801203402A535643K45`, at 3.2–3.5 GB (it kept running). Since then this work runs
+  one `lean` at a time with `build231.py --rss-cap-gb 6`.
 - The plan's model hints were above the measured replay hints for the five ctx certificates (ratio 0.27 to
   0.94), and the full-proof estimate (`est_hints`) was 1.7 to 2.8 times the replay.
 
