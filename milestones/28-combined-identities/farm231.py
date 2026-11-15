@@ -302,20 +302,25 @@ def candidates(st, lam, cyc, a, exclude_ids, busy=()):
         ids.add(jid)
         rank = {'p6': 0, 'p5': 1, 't': 2, 'c': 2}[job[0]]
         out.append(((d, rank, len(out)), job))
-    if not out:
-        for e, d in edges[:200000]:
-            if not st.ok[e]:
-                continue
-            lj = long_job(st, e, a.tl_long)
-            if lj is None:
-                continue
-            job, lt = lj
-            ks = keystr(job[0], job[1])
-            if owner(ks, a.workers) != a.index or job_id(job) in exclude_ids or ks in busy:
-                continue
-            longs.append((job, lt))
-            if len(longs) >= a.procs - 1:
-                break
+    # Phase D.  The steps of the minimum cycle come first and are returned even when candidates
+    # are left: once every step of the cycle has only timed-out levels, nothing else can raise
+    # lambda.  Other edges are scanned only when no candidate is left (as before).
+    ncyc = sum(1 for _, d in edges if d == -1)
+    for e, d in (edges[:ncyc] if out else edges[:200000]):
+        if not st.ok[e]:
+            continue
+        lj = long_job(st, e, a.tl_long)
+        if lj is None:
+            continue
+        job, lt = lj
+        ks = keystr(job[0], job[1])
+        if owner(ks, a.workers) != a.index or job_id(job) in exclude_ids or ks in busy:
+            continue
+        if any(lt == x[1] for x in longs):
+            continue
+        longs.append((job, lt))
+        if len(longs) >= a.procs - 1:
+            break
     out.sort(key=lambda z: z[0])
     return out, longs, dict(bf_s=round(tbf, 2), cand_s=round(time.time() - t0, 2), scanned=scanned,
                             edges=len(edges))
@@ -620,10 +625,10 @@ def run(a):
         nres_since = 0
         while time.time() < min(t_epoch, t_end) and not STOPPING and not os.path.exists(stopf):
             nlong = sum(1 for v in inflight.values() if v[2])
-            # fill free slots: candidates first, long retries only when no candidate is left
+            # fill free slots: long retries (minimum cycle first) on up to procs-1 slots, then candidates
             busy = {x[1] for x in inflight}          # window keys in flight
             while len(inflight) < a.procs and (cands or longs):
-                if cands:
+                if cands and not (longs and nlong < a.procs - 1):
                     _, job = cands.pop(0)
                     jid = job_id(job)
                     if jid in done or jid in inflight or jid[1] in busy:
