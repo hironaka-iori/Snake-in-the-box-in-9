@@ -4,8 +4,9 @@
 
 Input: a job file written by `certplan231.py full` (data/split231_jobs*.jsonl.gz), one JSON per line:
   {"kind": "c", "key": [ctx, dirs, t], "T": level, "tl": seconds}   ctx-7/ctx-8 share threshold
+  {"kind": "t", "key": [dirs (6), lumped syms (5)], "T": level, "tl": seconds}   5-window threshold
   {"kind": "p", "key": [dirs, lumped syms], "tl": seconds}          plain window
-Each job runs exactly as the farm runs it (share7.thr for thresholds, solvers.plain for plain
+Each job runs exactly as the farm runs it (share7.thr for ctx thresholds, solvers.share_thr for 5-window thresholds, solvers.plain for plain
 windows: the same encodings and record formats).  Worker I of W runs the jobs with
 int(sha1(json key).hexdigest(), 16) % W == I, in file order (the file is sorted by priority), and
 appends the records to data/split231/{ctx,plain}_w<I>.jsonl; they are published every
@@ -15,7 +16,7 @@ first and skips jobs already done.
 
   nice -n 10 python3 split231.py run --index I --workers W --hours H [--procs 4] [--jobs FILE]
   python3 split231.py status
-  python3 split231.py merge        # all branches -> data/ctxshare_s231.jsonl.gz, data/oracle_plain_s231.jsonl.gz
+  python3 split231.py merge        # all branches -> data/{ctxshare,oracle_share,oracle_plain}_s231.jsonl.gz
 
 Setup: the farm231.py worker setup (same sparse checkout, numpy, python-sat), plus this file and the
 job file.
@@ -53,7 +54,7 @@ def run(a):
     if not os.path.exists(gi):
         open(gi, 'w').write('# worker files of split231.py (published on xfer/231x/*)\n*\n!.gitignore\n')
     me = f'w{a.index}'
-    paths = {k: os.path.join(OUTD, f'{k}_{me}.jsonl') for k in ('ctx', 'plain')}
+    paths = {k: os.path.join(OUTD, f'{k}_{me}.jsonl') for k in ('ctx', 'share', 'plain')}
     try:
         if me in F.ls_remote():
             tr = F.fetch_trees([me], {}).get(me, {})
@@ -67,6 +68,9 @@ def run(a):
     done = set()
     for l in F.read_lines(paths['ctx']):
         done.add(rec_key('ctx', json.loads(l)))
+    for l in F.read_lines(paths['share']):
+        r = json.loads(l)
+        done.add(json.dumps(['t', [r['dirs'], [C.GA.sym_of(tuple(x)) for x in r['alpha']]], r['T']], separators=(',', ':')))
     for l in F.read_lines(paths['plain']):
         r = json.loads(l); done.add(json.dumps(['p', [r['dirs'], [C.GA.sym_of(tuple(x)) for x in r['alpha']]], None],
                                               separators=(',', ':')))
@@ -100,6 +104,9 @@ def work(j):
     if j['kind'] == 'c':
         ctx, c, t = j['key']
         r = S7.thr(tuple(c), tuple(t), int(j['T']), int(ctx), tl=tl, path=paths['ctx'])
+    elif j['kind'] == 't':
+        SV.OSH = paths['share']
+        r = SV.share_thr(C.fp.lkey(tuple(j['key'][0]), tuple(j['key'][1])), int(j['T']), tl=tl)
     else:
         SV.OPL = paths['plain']
         r = SV.plain(C.fp.lkey(tuple(j['key'][0]), tuple(j['key'][1])), tl=tl)
@@ -127,7 +134,7 @@ def collect():
     tips = F.ls_remote()
     names = sorted(n for n in tips if n.startswith('w'))
     trees = F.fetch_trees(names, tips)
-    out = {'ctx': set(), 'plain': set()}
+    out = {'ctx': set(), 'share': set(), 'plain': set()}
     for n in names:
         for k in out:
             raw = trees.get(n, {}).get(f'{k}.jsonl.gz')
@@ -147,7 +154,8 @@ def status(a):
 
 def merge(a):
     names, out = collect()
-    for k, fn in (('ctx', 'ctxshare_s231.jsonl.gz'), ('plain', 'oracle_plain_s231.jsonl.gz')):
+    for k, fn in (('ctx', 'ctxshare_s231.jsonl.gz'), ('share', 'oracle_share_s231.jsonl.gz'),
+                  ('plain', 'oracle_plain_s231.jsonl.gz')):
         p = os.path.join(HERE, 'data', fn)
         old = set()
         if os.path.exists(p):

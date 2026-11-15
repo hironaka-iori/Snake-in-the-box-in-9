@@ -60,6 +60,18 @@ np = L.np
 C, fp, GA = L.C, L.fp, L.GA
 NT, NC = L.NT, L.NC
 import share7 as S7                                     # noqa: E402
+_s7_records = S7.records
+
+
+def _records_plus():
+    out = _s7_records()
+    p = os.path.join(HERE, 'data', 'ctxshare_s231.jsonl.gz')     # split231.py merge
+    if os.path.exists(p):
+        out += [json.loads(l) for l in gzip.open(p, 'rt') if l.strip()]
+    return out
+
+
+S7.records = _records_plus
 DATA = os.path.join(HERE, 'data')
 OVH_CERT = E.OVH_CERT
 # measured 233 ratios (milestone 33, "Certificates: counts and sizes"): 3,336,107,358 replay hints,
@@ -1000,30 +1012,37 @@ def apply_cap(W, cap):
     return len(forb), capped
 
 
-def missing_tests(W, capped, tl_plain=60, tl_thr=600, maxjobs=20000):
-    """Solver tests that could restore feasibility under the cap: for the critical transitions that a
-    capped share id or a forbidden plain key leaves uncovered, (a) untested longer plain windows,
-    (b) ctx-7 / ctx-8 thresholds at the needed level with no UNSAT record (loop4.work job format)."""
+def missing_tests(W, tl=300, maxjobs=20000):
+    """Solver tests that could restore feasibility under the cap.  For every critical transition that
+    is left uncovered (no plain key, every share source below its need T, with the potential of the
+    uncapped plan): the 5-window threshold at T (unless a witness shows share < T), the ctx-7 and
+    the ctx-8 threshold at T (same rule).  A test that is UNSAT within `tl` seconds is priced near or
+    under the cap.  Jobs are deduplicated per window (max T), sorted by the number of transitions."""
     crit, need = W.critical()
     Sx = W.S(np.arange(W.N))
-    unc = crit & (W.cnt == 0) & (Sx < need)
-    es = np.flatnonzero(unc)
-    jobs = {}
+    es = np.flatnonzero(crit & (W.cnt == 0) & (Sx < need))
     X = S7.Ctx()
-    for e in es[:200000]:
+    O = L.share_records28()
+    jobs, cnt = {}, collections.Counter()
+    for e in es:
         ds, t, k5, k6 = C.step_windows(int(e), W.Pr)
-        T = int(need[e]) - 0
+        T = int(need[e])
+        st5 = O.st.get(C.rkey_of(k5))
+        if not (st5 and (st5['ub'] < T or st5.get('excl'))):
+            jobs[('t', k5)] = max(jobs.get(('t', k5), 0), T); cnt[('t', k5)] += 1
         for ctx in (7, 8):
             c = C.canon(ds[8 - ctx:])
-            sx = X.st.get((ctx, c, tuple(t)))
-            if sx and sx['lb'] >= T:
-                continue
-            if sx and sx['ub'] < T:
-                continue                          # a witness: this ctx cannot reach T
             key = (ctx, c, tuple(t))
-            jobs[('c', key)] = max(jobs.get(('c', key), 0), T)
-            break
-    out = [dict(kind='c', key=[k[1][0], list(k[1][1]), list(k[1][2])], T=int(T), tl=tl_thr) for k, T in jobs.items()]
+            sx = X.st.get(key)
+            if sx and (sx['lb'] >= T or sx['ub'] < T):
+                continue
+            jobs[('c', key)] = max(jobs.get(('c', key), 0), T); cnt[('c', key)] += 1
+    out = []
+    for k, T in sorted(jobs.items(), key=lambda kv: -cnt[kv[0]]):
+        if k[0] == 't':
+            out.append(dict(kind='t', key=[list(k[1][0]), list(k[1][1])], T=int(T), tl=tl, transitions=cnt[k]))
+        else:
+            out.append(dict(kind='c', key=[k[1][0], list(k[1][1]), list(k[1][2])], T=int(T), tl=tl, transitions=cnt[k]))
     return out[:maxjobs], int(len(es))
 
 
@@ -1060,7 +1079,7 @@ def cmd_full(a):
     L.log(f'cap {a.max_cert_hints:.3g}: {nforb} plain keys forbidden, {len(capped)} share ids capped; ok {ok} range {rng}')
     if not ok:
         W.pi = pi0
-        jobs, nunc = missing_tests(W, capped)
+        jobs, nunc = missing_tests(W)
         hist['cap']['uncovered_transitions'] = nunc; hist['cap']['missing_jobs'] = len(jobs)
         p = os.path.join(DATA, f'split231_jobs_{a.tag}.jsonl.gz')
         with gzip.GzipFile(p, 'wb', mtime=0) as g:
