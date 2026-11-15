@@ -24,7 +24,7 @@ def components(selected, dimension):
     return parts
 
 
-def facet_completion(fixed,size,limit,budget,tag,checker=None):
+def facet_completion(fixed,size,limit,budget,tag,checker=None,deficits=False):
     # Vertices of the opposite seven-face are the only undetermined sites.
     fixed=set(fixed)
     old=components(fixed,7)
@@ -38,18 +38,53 @@ def facet_completion(fixed,size,limit,budget,tag,checker=None):
         if k<0 or k>len(ls):clauses.append([]);return
         clauses.extend(CardEnc.equals(ls,bound=k,vpool=pool,encoding=EncType.totalizer).clauses)
     equal(list(select.values()),take)
-    edge_flags=[]
+    edge_flags=[];shortfall=[];static=0
     for v in allowed:
         adj=[w for w in sorted(neighbours[v]) if w in select]
         for group in combinations(adj,2 if v in fixed else 3):
             clauses.append([-select[v],*[-select[w] for w in group]])
-        for w in adj:
-            if w<=v:continue
-            flag=pool.id(("edge",v,w));edge_flags.append(flag)
-            clauses.extend([[-flag,select[v]],[-flag,select[w]],[-select[v],-select[w],flag]])
-        if v in fixed:edge_flags.append(select[v])
+        if deficits:
+            ns=[select[w] for w in adj]
+            missing=pool.id(("degree_one",v));shortfall.append(missing)
+            clauses.append([-missing,select[v]])
+            if v in fixed:
+                clauses.append([-select[v],missing,*ns]);shortfall.append(-select[v])
+            else:
+                isolated=pool.id(("isolated",v));shortfall.append(isolated)
+                clauses.extend([[-isolated,missing],[-select[v],isolated,*ns]])
+                for j in range(len(ns)):clauses.append([-select[v],missing,*ns[:j],*ns[j+1:]])
+        else:
+            for w in adj:
+                if w<=v:continue
+                flag=pool.id(("edge",v,w));edge_flags.append(flag)
+                clauses.extend([[-flag,select[v]],[-flag,select[w]],[-select[v],-select[w],flag]])
+            if v in fixed:edge_flags.append(select[v])
     needed=size-limit-initial_edges
-    if needed>len(edge_flags):clauses.append([])
+    if deficits:
+        bound=2*limit-2*len(old)+len(fixed&set(allowed))
+        if bound<0:clauses.append([])
+        elif bound<len(shortfall):
+            clauses.extend(CardEnc.atmost(shortfall,bound=bound,vpool=pool,encoding=EncType.totalizer).clauses)
+        for v in allowed:
+            for j,k in combinations(range(7),2):
+                square=[v,v^(1<<j),v^(1<<k),v^(1<<j)^(1<<k)]
+                if v==min(square) and all(x in select for x in square):
+                    clauses.append([-select[x] for x in square]);static+=1
+        for e,part in old:
+            if not e:continue
+            pset=set(part)
+            x,y=[v for v in part if len(neighbours[v]&pset)==1]
+            def connect(path):
+                nonlocal static
+                v=path[-1]
+                if v==y:
+                    clauses.append([-select[z] for z in path]);static+=1;return
+                if len(path)+(v^y).bit_count()>8:return
+                for w in sorted(neighbours[v]):
+                    if w in select and w not in path and not (neighbours[w]&set(path[:-1])):
+                        connect(path+[w])
+            connect([x])
+    elif needed>len(edge_flags):clauses.append([])
     elif needed>0:clauses.extend(CardEnc.atleast(edge_flags,bound=needed,vpool=pool,encoding=EncType.totalizer).clauses)
     cuts=[];witness=None;status="OPEN"
     with Solver(name="cadical195",bootstrap_with=clauses,with_proof=checker is not None) as sat:
@@ -69,6 +104,7 @@ def facet_completion(fixed,size,limit,budget,tag,checker=None):
                 cut=[-select[v] for v in upper];clauses.append(cut);sat.add_clause(cut);cuts.append(cycle)
         row=dict(fixed=sorted(fixed),size=size,component_limit=limit,status=status,
                  conflicts=sat.accum_stats()["conflicts"],cycles=cuts,witness=witness)
+        if deficits:row["deficit_encoding"]=True;row["static_cycles"]=static
         if checker and status=="UNSAT":
             from export_drat import checked_export
             row.update(checked_export(sat,clauses,Path(tag+"-proof"),checker))

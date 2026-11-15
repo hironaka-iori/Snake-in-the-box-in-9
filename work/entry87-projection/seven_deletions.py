@@ -1,8 +1,8 @@
 """Classify dense seven-cube forests by extending to half occupancy and marking deletions."""
 from argparse import ArgumentParser
-from collections import Counter, deque
+from collections import deque
 from itertools import combinations
-from math import comb, factorial
+from math import comb
 from pathlib import Path
 
 from dense_eight import components, facet_completion
@@ -102,7 +102,8 @@ if __name__=="__main__":
     p=ArgumentParser();p.add_argument("--last",type=int,default=2)
     p.add_argument("--population",type=int);p.add_argument("--start",type=int,default=0)
     p.add_argument("--stop",type=int);p.add_argument("--budget",type=int,default=500000)
-    p.add_argument("--checker",type=Path);a=p.parse_args()
+    p.add_argument("--checker",type=Path);p.add_argument("--deficits",action="store_true")
+    p.add_argument("--skip-weight",action="store_true");a=p.parse_args()
     if a.population is None:
         rows=classify(a.last);save(Path("seven-deletion-classes.json"),rows)
         print({n:(len(v),sum(r["labelled"] for r in v)) for n,v in rows.items()})
@@ -110,5 +111,8 @@ if __name__=="__main__":
         import json
         rows=json.loads(Path("seven-deletion-classes.json").read_bytes())[str(a.population)]
         for i in range(a.start,min(a.stop if a.stop is not None else len(rows),len(rows))):
-            tag=f"dense8-class-{a.population}-{i}-{a.budget}"+("-checked" if a.checker else "")
-            facet_completion(rows[i]["forest"],117,13,a.budget,tag,a.checker.resolve() if a.checker else None)
+            if a.skip_weight:
+                source=Path(f"forest-role-weight-{a.population}-{i}.json")
+                if source.exists() and json.loads(source.read_bytes())["max_edges"]<104:continue
+            tag=f"dense8-class-{a.population}-{i}-{a.budget}"+("-deficit" if a.deficits else "")+("-checked" if a.checker else "")
+            facet_completion(rows[i]["forest"],117,13,a.budget,tag,a.checker.resolve() if a.checker else None,a.deficits)
