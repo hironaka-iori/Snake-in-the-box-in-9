@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 225, 15 November 2026}
+\date{Research state after round 226, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -84,8 +84,9 @@ search. The first small neighbourhood is computationally excluded;
 larger neighbourhoods remain unresolved, with no new construction.
 A checked interaction theorem explains when simultaneous block changes
 can escape a family closed under separate changes. A complete restricted
-two-block search through length 42 is excluded natively; width 43
-retains unresolved cases. The direct simultaneous-replacement constructor
+two-block search through length 43 is excluded natively; width 44
+retains 42 unresolved contexts. Seven share one explicit induced-path
+construction problem in an eight-dimensional subgraph. The direct simultaneous-replacement constructor
 and coordinate-crossing parity relation have also passed Lean.
 
 The paper separates written proofs, checked implications, native
@@ -7972,6 +7973,96 @@ for the second. A further 30-second search pruned 249,163 partial
 branches using that necessary condition. Both searches remain incomplete
 and retain their frontiers. These restrictions give no longer snake or global upper bound~\cite{research225}.
 
+\subsection{Residual capacity, boundary changes and a common eight-dimensional path}
+\label{sec:residual226}
+The two replacement intervals considered here have at least one retained
+index between them. Thus their complete selected paths, including anchors,
+must be disjoint and nonadjacent. After selecting any prefix of the first
+path, remove its vertices and neighbours from the second allowed graph.
+A compatible second path must lie entirely in the component containing
+its initial anchor. That component must also contain the terminal anchor,
+enough vertices for the prescribed length, and enough vertices of each
+alternating parity. The justification is induction along the second path:
+every allowed adjacent step stays in the component. Path injectivity
+then supplies the size inequalities. Extending the first prefix only
+deletes more vertices, so a shortage cannot be repaired. These general
+containment, capacity and monotonicity statements have passed Lean.
+
+A path with zero crossings of a coordinate stays in its initial face.
+Induction over coordinate changes proves this, and injectivity bounds
+its size by the available vertices of that face. This implication has
+passed Lean. In 24 of the 25 formerly unresolved width-43 contexts,
+the second anchors are in the upper face, which contains only 13 or
+14 allowed vertices, whereas the replacement needs 44. The concrete
+24 face counts have also passed kernel checks. The second path must
+therefore use two crossings, forcing allocation $(0,2)$; its zero-crossing
+alternative is impossible. The 24 resulting native queries are infeasible.
+The remaining context has intervals $[2,45]$ and $[131,174]$ and allocation
+$(0,1)$. Its first path starts at 17 and must next visit 19 or 49.
+Both branches are infeasible. Together with the prior 269 exclusions,
+this covers all 294 contexts. The specified two-block construction is
+therefore computationally excluded through width 43.
+
+\begin{proposition}[Necessary boundary changes]
+\label{prop:boundary226}
+Fix an original path and the complete-path requirements of a construction.
+Suppose every candidate differing only within two replacement intervals
+of at most $K$ edges has been excluded. If a candidate succeeds with two
+intervals $[a,b]$ and $[c,d]$, each of $K+1$ edges, then at least one
+replacement changes both original vertices immediately beside its anchors:
+\[
+\bigl(q_{a+1}\ne p_{a+1}\ \land\ q_{b-1}\ne p_{b-1}\bigr)
+\quad\text{or}\quad
+\bigl(q_{c+1}\ne p_{c+1}\ \land\ q_{d-1}\ne p_{d-1}\bigr).
+\]
+\end{proposition}
+\begin{proof}
+If each block retains one of these vertices, shorten that block at the
+corresponding end. The new anchor still equals its original vertex,
+and the complete candidate is unchanged. Both intervals now have $K$
+edges, contradicting their exclusion. In the present application, a trim
+cannot move blocker 7 or 143 onto an anchor: retaining its original vertex
+would create a chord to endpoint 24. Thus the shortened candidate remains
+within the covered family. The outside-agreement contraction and its
+conditional contrapositive have passed Lean. The width-43 exclusion used
+in this application retains its native numerical status.
+\end{proof}
+
+For an induced replacement, selecting an original anchor-neighbour forces
+it into the adjacent path position. Hence the proposition is encoded by
+requiring at least one block to omit both of its original anchor-neighbours.
+Together with coordinate parity and face capacity, this excludes 46 of
+the 92 previously open width-44 contexts, leaving 46 initially unresolved.
+
+The 11 remaining contexts whose first anchors are in different faces
+have first anchors 18 and 480. Crossing parity and, where needed, the
+second-face shortage force exactly one first crossing. The component
+of 480 in the allowed upper-face graph is precisely $\{480,488\}$.
+Consequently the upper suffix is either $(480)$ or $(488,480)$.
+Their lower crossing vertices are 224 and 232, requiring first lower-face
+paths of 43 and 42 edges respectively. These two cases are exhaustive.
+The port queries exclude four complete contexts; 42 width-44 contexts
+remain unresolved.
+
+Seven surviving contexts all require the first alternative. They share
+exactly the same 109-vertex lower-face domain, endpoints 18 and 224,
+and required length 43. Appending 480 then gives the first replacement.
+This reduces their common construction task to one induced-path search
+in $Q_8$, coupled to seven possible second replacements. A shared prefix
+may be rejected only when all seven compatible second graphs fail.
+No such compatible pair or 192-edge snake has yet been obtained.
+
+The native direct searches remain incomplete. A block-chain refinement
+removes vertices that cannot lie on a simple path between the second
+anchors: an excursion into an off-chain block would repeat its attachment
+vertex. Bounds on successive block segments add along that chain; adjacent
+entry and exit vertices force a one-edge induced segment, and otherwise
+bipartite colour counts bound its length. These written arguments support
+the native pruning, without a complete Lean verification of the graph
+decomposition or search traversal. All numerical exclusions above remain
+restricted to the specified seed, endpoint 24, retained outside positions
+and four total crossings~\cite{research226}.
+
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
 from the explicit witness. The completed contributor upper theorem and
@@ -8147,6 +8238,9 @@ coverage recorded separately from unresolved cases.
 Section~\ref{sec:replacement225} adds the checked direct constructor,
 interval enlargement and endpoint parity. Its width-42 exclusion remains
 a native calculation, including the complete two-allocation split.
+Section~\ref{sec:residual226} adds checked residual capacity, zero-face
+counts and interval contraction. The completed width-43 cover and the
+width-44 exclusions retain native solver dependencies.
 The round-220 full-source review corrects historical proof references,
 notation and current-status statements; it does not rebuild the entire
 archived contributor chain.
@@ -11617,6 +11711,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Simultaneous replacement criteria,
 containment transfer and crossing-parity search}. Research milestone 225,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/225-replacement-widths}.
+
+\bibitem{research226}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Residual capacity, boundary changes
+and shared eight-dimensional replacement paths}. Research milestone 226,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/226-connected-replacement-search}.
 
 \end{thebibliography}
 \end{document}

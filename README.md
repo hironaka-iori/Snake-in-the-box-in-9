@@ -1,3 +1,11 @@
+# Current result after round 226
+
+The selected endpoint-24 construction is computationally excluded for two replacement blocks of at most 43 edges. Width 44 leaves 42 contexts unresolved. A conditional boundary-change rule and face/port restrictions remove 50 of the previous 92 cases. Seven survivors share exactly one 109-vertex Q8 domain: the next target is a 43-edge induced path from 18 to 224, followed by 480 and a compatible second replacement. Five Lean modules check supporting implications and literal face counts; numerical solver exclusions retain their native status. No new snake or global bound. Goal ACTIVE.
+
+Read [the argument](milestones/226-connected-replacement-search/MATHEMATICAL_NOTE.md), [evidence](milestones/226-connected-replacement-search/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 225
 
 The selected endpoint-24 construction is computationally excluded for two replacement blocks of at most42edges. Width43 leaves25contexts unresolved. Crossing parity resolves the seven difficult width42cases by splitting allocations(0,2)/(2,0). The direct replacement criterion, interval enlargement and coordinate parity have accepted Lean receipts; native numerical exclusions retain their separate scope. Connected-path search now has resumable frontiers. No new snake or global bound. Goal ACTIVE.

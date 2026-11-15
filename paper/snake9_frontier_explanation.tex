@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 225}
+\date{Research state after round 226}
 \begin{document}
 \maketitle
 
@@ -428,14 +428,14 @@ Thus this particular route is computationally closed without relying
 on the earlier closure census. Its solver contradictions are not checked
 in Lean.
 
-Allowing 44-edge blocks gives 301 maximal contexts: 107 are geometrically
-excluded, 102 are solver-excluded and 92 remain unresolved. Connectivity
+The initial search with 44-edge blocks considered 301 maximal contexts:
+107 were geometrically excluded, 102 were solver-excluded and 92 were unresolved. Connectivity
 flows did not resolve 16 selected retries. These results concern the
 fixed seed, fixed outside indices, endpoint 24 and four crossings.
 They give no global optimality conclusion; larger or differently
 arranged changes remain possible~\cite{research224}.
 
-\subsection{The replacement frontier after round 225}
+\subsection{The current replacement frontier}
 Two local replacement paths construct a full snake when each is induced,
 each new interior is disjoint and nonadjacent to retained vertices
 outside its own closed interval, and the
@@ -450,21 +450,40 @@ containing context therefore excludes the smaller one with the same
 target. The outside-agreement implication has passed Lean; numerical
 exclusions still rely on the saved native calculations.
 
-The restricted exclusion now reaches two blocks of at most 42 edges.
-Of its 287 maximal contexts, 211 inherit exclusions, 69 are excluded by
-the initial solver queries and seven require a split. In those seven,
-each anchor pair has equal coordinate bits, so each replacement crosses
-that coordinate an even number of times. Their total is two, leaving
-only $(0,2)$ and $(2,0)$. Both allocations are infeasible in all seven
-cases. The parity relation follows because each crossing flips the bit;
-it has passed Lean.
+The restricted exclusion now reaches two blocks of at most 43 edges.
+Of the 25 cases left by the preceding search, 24 have only 13 or 14
+available vertices in the second anchors' face, whereas that path needs
+44 vertices. Zero crossings would keep it in that face, so the only
+possible allocation is $(0,2)$. The zero-crossing implication and the
+concrete face counts have passed Lean. All 24 native queries are infeasible.
+The final case permits only $(0,1)$; its first step from 17 must go to 19
+or 49, and both branches are infeasible. All 294 width-43 contexts are covered.
 
-Width 43 has 294 contexts, of which 25 remain unresolved after
-the initial search. These finite exclusions concern the selected seed,
-unchanged outside indices, endpoint 24 and four crossings. Their solver
-contradictions have no Lean certificates and do not prove global
-optimality. The construction search now considers actual connected
-path pairs in the unresolved contexts~\cite{research225}.
+This exclusion constrains width 44. At least one replacement must change
+both original vertices immediately beside its anchors. Otherwise shorten
+each interval at an unchanged neighbour: the full candidate stays the
+same and both intervals now have 43 edges, contradicting their exclusion.
+The interval-contraction argument has passed Lean. Its numerical premise
+remains the native width-43 calculation. Using this restriction and face
+capacity leaves 46 width-44 cases open; a further crossing-port division
+excludes four, leaving 42 unresolved.
+
+Seven surviving cases share a concrete lower-dimensional task: construct
+a 43-edge induced path from 18 to 224 in one fixed 109-vertex subgraph of
+$Q_8$, then cross to 480. Their first upper suffix is forced to be $(480)$;
+the alternative $(488,480)$ has been excluded. The same lower path must
+then admit one of seven compatible second replacements. No such pair
+has been found. A common-prefix search can address all seven contexts,
+rejecting a prefix only if every second context is impossible.
+
+For separated replacement intervals, a selected first prefix removes
+itself and its neighbours from every second allowed graph. Any compatible
+second path stays in its anchor's remaining component and needs enough
+vertices of both parities. Extending the prefix only shrinks that graph.
+These general statements have passed Lean; native component enumeration,
+block-chain pruning and search traversal retain separate verification
+limits. The finite exclusions give no global optimality conclusion
+or longer snake~\cite{research226}.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
@@ -479,7 +498,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 225.
+in the companion manuscript and milestones through round 226.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -533,6 +552,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Simultaneous replacement criteria,
 containment transfer and crossing-parity search}. Research milestone 225,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/225-replacement-widths}.
+
+\bibitem{research226}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Residual capacity, boundary changes
+and shared eight-dimensional replacement paths}. Research milestone 226,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/226-connected-replacement-search}.
 
 \end{thebibliography}
 \end{document}

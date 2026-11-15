@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "module": "FaceCounts226",
+  "source": "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\lean\\FaceCounts226.lean",
+  "source_sha256": "fd93ada86ff98f6600e7ad38722721654eb4542e9f45b6050d9ef634861c4b2b",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\data\\FaceCounts226-execution.json": "bf218c6067e883b21ac403f5cf3b64471e8e661f6e4b182eff3b1a08b1e63879",
+    "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\lean\\FaceCounts226.lean": "fd93ada86ff98f6600e7ad38722721654eb4542e9f45b6050d9ef634861c4b2b",
+    "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init\\Data\\Nat\\Bitwise\\Basic.olean": "8f01e5e6af6b3366171fb8f21ba8a336c0ddef11a2a180b0fc033ef53757a69a"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\logs\\FaceCounts226-1794728846711659000\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\lean\\FaceCounts226.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\logs\\FaceCounts226-1794728846711659000\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1984151552,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 88,
+    "snapshot_seconds": 0.014999999984866008
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1968271360,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 54176,
+          "ParentProcessId": 16920,
+          "PrivatePageCount": 48168960,
+          "WorkingSetSize": 29515776
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.014999999984866008
+    },
+    {
+      "free_bytes": 1614270464,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 54176,
+          "ParentProcessId": 16920,
+          "PrivatePageCount": 119390208,
+          "WorkingSetSize": 297148416
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1604947968,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 54176,
+          "ParentProcessId": 16920,
+          "PrivatePageCount": 196599808,
+          "WorkingSetSize": 345788416
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1615089664,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 54176,
+          "ParentProcessId": 16920,
+          "PrivatePageCount": 196603904,
+          "WorkingSetSize": 345792512
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.015000000013969839
+    }
+  ],
+  "compiler_pid": 54176,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 4.155999999988126,
+  "axioms": [
+    {
+      "theorem": "FaceCounts226.upper_counts",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "FaceCounts226.upper_count_lt_44",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "log_sha256": "7926461908a4bd5ebc2c44cc1c688fd719398ffb17db73641c59cb4969f28603",
+  "object": "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\build\\FaceCounts226.olean",
+  "olean_sha256": "ee508e24d99956346ba84bfe8cba9d9b67f2dd284cd967192c965063dd09f48c"
+}

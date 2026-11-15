@@ -1,0 +1,54 @@
+{
+  "status": "COMPLETE_COVERAGE",
+  "arguments": {
+    "first_neighbour": 49,
+    "ids": "114",
+    "first_crossings": 0,
+    "width": 43,
+    "tag": "first114-49",
+    "seconds": 40.0,
+    "per_query": 30.0
+  },
+  "source_sha256": "b1cf54d596bcd8e04162fef9741dca90eed03ab03e78089318614215d1b9b3da",
+  "script_sha256": "ea2c93b06696d829147ef64823d46246f24525fd6834e55a72d115eb5e192e02",
+  "results": [
+    {
+      "id": 114,
+      "intervals": [
+        [
+          2,
+          45
+        ],
+        [
+          131,
+          174
+        ]
+      ],
+      "status": "INFEASIBLE",
+      "allowed_sizes": [
+        108,
+        105
+      ],
+      "cross_conflicts": 435,
+      "model_sha256": "ee5804ad7da22b560046149959a70008babac57643696fe44e51cb21697f426a",
+      "model": "first114-49-114.pbtxt",
+      "iterations": [
+        {
+          "status": "INFEASIBLE",
+          "seconds": 1.0630667,
+          "branches": 92493,
+          "conflicts": 20192
+        }
+      ],
+      "cycle_cuts": [],
+      "seconds": 1.062000000005355
+    }
+  ],
+  "witness": null,
+  "total_contexts": 1,
+  "scope": "Two specified equal-width replacements of the specified seed, retaining all outside indices and anchors, then append24. Only the context IDs in the arguments are searched; they cover the specified blocker positions7/143. The final snake hasfour bit8crossings. No mutualcontact restriction or short-move closure premise. The first replacement crossing count is fixed to the supplied argument; only that allocation and the specified first neighbour are searched. Native solver exclusions are not Lean-certified.",
+  "seconds": 1.187999999994645,
+  "statuses": {
+    "INFEASIBLE": 1
+  }
+}
