@@ -72,6 +72,8 @@ def main():
     ap.add_argument('--big', action='append', default=[], help='MODULE=GB: own cap, runs alone')
     ap.add_argument('--min-free-gb', type=float, default=3.0)
     ap.add_argument('-D', action='append', default=[], help='extra lean option name=value')
+    ap.add_argument('--lean', default=LEAN, help='lean binary (4.19 for comparisons)')
+    ap.add_argument('--allow-sorry', action='store_true', help='for the bad-certificate tests only')
     ap.add_argument('targets', nargs='+')
     a = ap.parse_args()
     src, bld = os.path.abspath(a.src), os.path.abspath(a.build)
@@ -146,7 +148,7 @@ def main():
             for ext in PARTS + ('.stamp',):
                 if os.path.exists(out + ext):
                     os.remove(out + ext)
-            cmd = ['nice', '-n', '10', LEAN, '-R', src, '-o', out + '.olean']
+            cmd = ['nice', '-n', '10', a.lean, '-R', src, '-o', out + '.olean']
             for d in a.D:
                 cmd += ['-D', d]
             cmd.append(os.path.join(src, m.replace('.', '/') + '.lean'))
@@ -197,7 +199,7 @@ def main():
             logf.write(json.dumps(rec) + '\n')
             logf.flush()
             del running[m]
-            if code != 0 or rec['sorry'] or 'error:' in txt:
+            if code != 0 or (rec['sorry'] and not a.allow_sorry) or 'error:' in txt:
                 print(f'FAILED {m} (exit {code}, {rec["wall"]} s, {rec["anon_gb"]} GB)\n{txt[-4000:]}', flush=True)
                 failed = m
                 continue

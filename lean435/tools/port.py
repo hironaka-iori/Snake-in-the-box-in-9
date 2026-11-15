@@ -132,6 +132,20 @@ def apply_fixes(mod, text, used):
     return text
 
 
+def refuted_decl(cnf_text):
+    """Statement (literal parameters) and proof of the public `refuted` theorem of a certificate,
+    from the parameter definitions of its Cnf part: ctx (`first`), share (`cap`), or plain."""
+    has = lambda n: re.search(r'^noncomputable def ' + n + r' : ', cnf_text, re.M) is not None
+    w, b = lit_def(cnf_text, 'window'), lit_def(cnf_text, 'bounds')
+    if has('first'):
+        return (f'RefutedShareFrom ({w}) ({b}) {lit_def(cnf_text, "resolution")} {lit_def(cnf_text, "cap")} '
+                f'{lit_def(cnf_text, "first")}', 'TagsSW.refutedShareFrom_of_sat sat unsat')
+    if has('cap'):
+        return (f'RefutedShare ({w}) ({b}) {lit_def(cnf_text, "resolution")} {lit_def(cnf_text, "cap")}',
+                'Tags.refutedShare_of_sat sat unsat')
+    return f'Refuted ({w}) ({b})', 'Tags.refuted_of_sat sat unsat'
+
+
 def port_support(mod, text):
     lines, hend, imports = split_header(text)
     out = ['module', '']
@@ -159,18 +173,12 @@ def port_replay(mod, text, cnf_text):
         raise SystemExit(f'port: {mod} imports {len(cnf)} Cnf modules')
     out = ['module', '']
     ctx = mod.startswith('LocalWindowCtxUnsat.')
-    out.append('public import ' + ('LocalWindowShareCtx' if ctx else 'LocalWindowTagsShare'))
+    out.append('public import LocalWindowShareCtx')  # RefutedShareFrom, RefutedShare, Refuted, winOf
     for imp in imports:
         out.append(('import all ' if imp == cnf[0] else 'import ') + imp)
     body = '\n'.join(lines[hend:])
     ns = re.search(r'^namespace (\S+)\s*$', body, re.M).group(1)
-    if ctx:
-        window = lit_def(cnf_text, 'window')
-        stmt = (f'RefutedShareFrom ({window}) {lit_def(cnf_text, "bounds")} '
-                f'{lit_def(cnf_text, "resolution")} {lit_def(cnf_text, "cap")} {lit_def(cnf_text, "first")}')
-        proof = 'TagsSW.refutedShareFrom_of_sat sat unsat'
-    else:
-        raise SystemExit(f'port: replay kind of {mod} not supported yet')
+    stmt, proof = refuted_decl(cnf_text)
     tail = (f'\n/-- The certificate, stated with literal parameters (lean435/tools/port.py, rule R4). -/\n'
             f'public theorem refuted : {stmt} :=\n  {proof}\n\n')
     endl = f'end {ns}'
