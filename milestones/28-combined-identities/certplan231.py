@@ -424,6 +424,73 @@ def save_plan(W, tag, extra=None):
     return s
 
 
+
+def plain_seconds():
+    sec = dict(L.PR.seconds_map())
+    sec.update(L.m28_seconds())
+    return sec
+
+
+def sample_list(tag, out, per_kind=None, tail_s=100.0, seed='231'):
+    """A deterministic stratified sample of the paid certificates of plan TAG for certsample231.py:
+    per kind, log2 strata of the source solve seconds, an equal share per stratum (sha1 order), and
+    every record with source seconds >= tail_s (the whole slow tail)."""
+    import hashlib
+    per_kind = per_kind or {'plain': 400, '5': 400, 'c7': 500, 'c8': 400}
+    d = json.load(gzip.open(os.path.join(DATA, f'certplan231_{tag}.json.gz'), 'rt'))
+    psec = plain_seconds()
+    rows = []
+    for r in d['plain']:
+        if not r['free']:
+            k = (tuple(r['key'][0]), tuple(r['key'][1]))
+            rows.append(dict(kind='plain', key=r['key'], level=None, seconds=psec.get(k), model_hints=r['est_hints'],
+                             basis=r['basis']))
+    for r in d['share']:
+        if not r['free']:
+            rows.append(dict(kind=r['kind'], key=r['key'], level=r['level'], proved=r['proved'],
+                             source_T=r['source']['T'] if r['source'] else None,
+                             seconds=r['source']['seconds'] if r['source'] else None,
+                             model_hints=r['est_hints'], basis=r['basis']))
+    hk = lambda r: hashlib.sha1((seed + json.dumps([r['kind'], r['key'], r['level']])).encode()).hexdigest()
+    out_rows = []
+    for kind, n in per_kind.items():
+        rs = [r for r in rows if r['kind'] == kind]
+        if kind == 'plain':                  # plain: strata of the model hints, tail = the 60 largest
+            rs.sort(key=lambda r: -r['model_hints'])
+            for r in rs:
+                r['_x'] = r['model_hints'] / 1e4
+            tail = rs[:60]; rest = rs[60:]
+        else:
+            for r in rs:
+                r['_x'] = r['seconds']
+            tail = [r for r in rs if (r['seconds'] or 0) >= tail_s]
+            rest = [r for r in rs if (r['seconds'] or 0) < tail_s]
+        strata = collections.defaultdict(list)
+        for r in rest:
+            sv = r['_x']
+            strata[-99 if sv is None else int(math.floor(math.log2(max(sv, 1e-3))))].append(r)
+        take = list(tail)
+        left = max(0, n - len(take))
+        keys = sorted(strata)
+        while left > 0 and any(strata.values()):
+            for b in keys:
+                if strata[b] and left > 0:
+                    strata[b].sort(key=hk)
+                    take.append(strata[b].pop(0)); left -= 1
+        tl = {id(r) for r in tail}
+        for r in take:
+            x = r.pop('_x')
+            r['stratum'] = 'tail' if id(r) in tl else ('none' if x is None else int(math.floor(math.log2(max(x, 1e-3)))))
+            r['population'] = len(rs)
+        for r in rs:
+            r.pop('_x', None)
+        out_rows += take
+        L.log(f'sample {kind}: {len(take)} of {len(rs)} ({len(tail)} in the tail >= {tail_s} s)')
+    with gzip.GzipFile(out, 'wb', mtime=0) as g:
+        g.write(''.join(json.dumps(r, separators=(',', ':')) + '\n' for r in out_rows).encode())
+    return len(out_rows)
+
+
 def _test():
     t0 = time.time()
     W = make_world(15268, 27, 15)
@@ -437,3 +504,5 @@ def _test():
 
 if __name__ == '__main__' and sys.argv[1:2] == ['_test']:
     _test()
+if __name__ == '__main__' and sys.argv[1:2] == ['_samplelist']:
+    sample_list(sys.argv[2], sys.argv[3])
