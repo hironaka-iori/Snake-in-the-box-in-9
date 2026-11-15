@@ -25,6 +25,7 @@ FRAMEWORK = {
     'WindowAutomaton6SCV2': os.path.join(S, 'WindowAutomaton6SCV2.lean'),
     'DirectionWindowBridge6SC': os.path.join(S, 'DirectionWindowBridge6SC.lean'),
     'AggregateDirection6SCConditional': os.path.join(S, 'AggregateDirection6SCConditional.lean'),
+    'DirectionWindowBridge6SCChunks': os.path.join(S, 'DirectionWindowBridge6SCChunks.lean'),
 }
 LEAN_PATH = [os.path.join(ROOT, 'work', 'final_lean', '.lake', 'build', 'lib', 'lean'),
              os.path.join(ROOT, 'work', 'spectral', '.verification', 'chain')]
@@ -117,6 +118,10 @@ def main():
     env = dict(os.environ)
     env['PATH'] = TOOL + ':' + env['PATH']
     env['LEAN_PATH'] = ':'.join(LEAN_PATH + [B])
+    # mathlib's search path as `lake env` sets it (then ours), so that `lean` runs as a direct child
+    lp = subprocess.run(['lake', 'env', 'printenv', 'LEAN_PATH'], cwd=MATHLIB, env=env, capture_output=True,
+                        text=True, check=True).stdout.strip()
+    env['LEAN_PATH'] = ':'.join(os.path.normpath(os.path.join(MATHLIB, x)) for x in lp.split(':'))
     done = {m for m in order if not stale[m]}
     running = {}
     failed = []
@@ -136,7 +141,7 @@ def main():
             os.makedirs(os.path.dirname(p), exist_ok=True)
             shutil.copyfile(src[m], p)
             out = open(p[:-5] + '.out', 'w')
-            cmd = ['nice', '-n', '10', 'lake', 'env', a.lean_bin, f'--root={B}', '-o', olean(m), p]
+            cmd = ['nice', '-n', '10', a.lean_bin, f'--root={B}', '-o', olean(m), p]
             pr = subprocess.Popen(cmd, cwd=MATHLIB, stdout=out, stderr=subprocess.STDOUT, env=env)
             running[pr.pid] = (m, pr, time.time(), 0, out, p)
         time.sleep(0.5)

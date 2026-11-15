@@ -7,10 +7,11 @@ Reads the summary `milestones/35-231-lean/data/auto6sc_<T>.json` and writes (cor
   DirectionWindowBridge6SC<T>R<g>.lean   k6 part g: keysOK6 of its key chunks and `rowOK6` of the
                                          exclusion rows whose chunk is in the part (one declaration each)
   DirectionWindowBridge6SC<T>S.lean      H8 (keysOKH8, CoverH8) and the 5-window ShareCover
-                                         (one declaration per share shape and first count)
+                                         (`shareCover_chunks`, DirectionWindowBridge6SCChunks: one declaration
+                                         per share shape and first count, against that row's key chunk)
   DirectionWindowBridge6SC<T>C.lean      the two CtxCover (ctx 7 on 7 directions, ctx 8 on 8):
                                          one `allRGS` zero check each, one declaration per shape and first
-                                         count against the shape's key chunk, `ctxCover_rows`
+                                         count against that row's key chunk, `ctxCover_chunks`
   DirectionWindowBridge6SC<T>.lean       keysOK6, Cover6 (cover6_chunks), `windows6SC<T>`
   AggregateDirection6SC<T>.lean          mathlib: `upper_<N>_of_refuted6SC<T>` :
       AllRefuted6S<T> → AllRefutedShare6S<T> → AllRefutedCtx6SC<T> → Floors233 → ∀ snake, m ≤ N
@@ -80,9 +81,25 @@ theorem row6S{T}_{k} : rowOK6 tables6SC{T}.s.k6 (dirChunks6S{T}.getD {rows[k][2]
     return mods
 
 
+def rows_t0(T, name, k, c, stmt_of, idx):
+    """Six row declarations (one per first count) and the shape lemma `∀ t0, ∃ i, ...`."""
+    out = ''.join(f'''set_option maxRecDepth 100000 in
+theorem {name}_{k}_{t0} : {stmt_of(idx[t0 - 1], t0)} = true := by
+  decide +kernel
+
+''' for t0 in range(1, 7))
+    return out + f'''theorem {name}_{k} : ∀ t0, 1 ≤ t0 → t0 ≤ 6 → ∃ i, {stmt_of('i', 't0')} = true := by
+  intro t0 h1 h6
+  have : t0 = 1 ∨ t0 = 2 ∨ t0 = 3 ∨ t0 = 4 ∨ t0 = 5 ∨ t0 = 6 := by omega
+  rcases this with rfl | rfl | rfl | rfl | rfl | rfl
+''' + ''.join(f'  · exact ⟨{idx[t0 - 1]}, {name}_{k}_{t0}⟩\n' for t0 in range(1, 7)) + '\n'
+
+
 def share_mod(T, s):
     shapes = s['share_shapes']
-    return head(T, f'H8 cover and 5-window share cover of `tables6SC{T}`.', BASE(T)) + f'''theorem keysOKH8_6S{T} : keysOKH8 h8Keys6S{T} = true := by decide +kernel
+    stmt = lambda c: (lambda i, t0: f'shareRowOK tables6SC{T}.s (shareChunks6S{T}.getD {i} []) {lst(c)} {t0}')  # noqa: E731
+    gen = lambda c: f'(fun c : List Nat => ∀ t0, 1 ≤ t0 → t0 ≤ 6 → ∃ i, shareRowOK tables6SC{T}.s (shareChunks6S{T}.getD i []) c t0 = true)'  # noqa: E731
+    return head(T, f'H8 cover and 5-window share cover of `tables6SC{T}`.', BASE(T) + ['DirectionWindowBridge6SCChunks']) + f'''theorem keysOKH8_6S{T} : keysOKH8 h8Keys6S{T} = true := by decide +kernel
 
 set_option maxRecDepth 100000 in
 theorem coverH8_6S{T} : CoverH8 tables6SC{T}.s h8Keys6S{T} := coverH8_of (by decide +kernel)
@@ -90,21 +107,14 @@ theorem coverH8_6S{T} : CoverH8 tables6SC{T}.s h8Keys6S{T} := coverH8_of (by dec
 set_option maxRecDepth 100000 in
 theorem zeroS6S{T} : allRGS 6 0 (zeroOutsideS tables6SC{T}.s sshapes6SC{T}) = true := by decide +kernel
 
-''' + ''.join(''.join(f'''set_option maxRecDepth 100000 in
-theorem srow6S{T}_{k}_{t0} : shareRowOK tables6SC{T}.s shareKeys6S{T} {lst(c)} {t0} = true := by
-  decide +kernel
-
-''' for t0 in range(1, 7)) + f'''theorem srow6S{T}_{k} : allSym (shareRowOK tables6SC{T}.s shareKeys6S{T} {lst(c)}) = true :=
-  allSym_of6 _ {' '.join(f'srow6S{T}_{k}_{t0}' for t0 in range(1, 7))}
-
-''' for k, c in enumerate(shapes)) + f'''set_option maxRecDepth 100000 in
-theorem srows6S{T}_lit : AllP (fun c : List Nat => allSym (shareRowOK tables6SC{T}.s shareKeys6S{T} c) = true)
+''' + ''.join(rows_t0(T, f'srow6S{T}', k, c, stmt(c), s['share_chunk_index'][k]) for k, c in enumerate(shapes)) + f'''set_option maxRecDepth 100000 in
+theorem srows6S{T}_lit : AllP {gen(None)}
     [{', '.join(lst(c) for c in shapes)}] :=
-  ⟨{', '.join(f'srow6S{T}_{k}' for k in range(len(shapes)))}, trivial⟩
+  ⟨{', '.join(f'srow6S{T}_{k}' for k in range(len(shapes)))}{', ' if shapes else ''}trivial⟩
 
-/-- Every 5-window share field is backed by a share key or a floor theorem. -/
+/-- Every 5-window share field is backed by a share key (its row's chunk) or a floor theorem. -/
 theorem shareCover6S{T} : ShareCover tables6SC{T}.s shareKeys6S{T} :=
-  shareCover_rows sshapes6SC{T} zeroS6S{T} (by
+  shareCover_chunks sshapes6SC{T} zeroS6S{T} (by
     unfold sshapes6SC{T}
     exact AllP.mem srows6S{T}_lit)
 
@@ -113,27 +123,21 @@ end Snake9.DirectionWindow6SC
 
 
 def ctx_mod(T, s):
-    out = head(T, f'The ctx 7 and ctx 8 covers of `tables6SC{T}`.', BASE(T))
+    out = head(T, f'The ctx 7 and ctx 8 covers of `tables6SC{T}`.', BASE(T) + ['DirectionWindowBridge6SCChunks'])
     for n in (7, 8):
         shapes = s[f'ctx{n}_shapes']
         rf = f'rowf{n} tables6SC{T}'
+        stmt = lambda c: (lambda i, t0: f'ctxRowOK tables6SC{T}.cbits ({rf} {lst(c)}) (ctx{n}Chunks6SC{T}.getD {i} []) {lst(c)} {t0}')  # noqa: E731
         out += f'''set_option maxRecDepth 100000 in
 theorem ctxZero{n}_6SC{T} : allRGS {n} 0 (zeroOutsideC ({rf}) ctx{n}Shapes6SC{T}) = true := by decide +kernel
 
-''' + ''.join(''.join(f'''set_option maxRecDepth 100000 in
-theorem ctxRow{n}_6SC{T}_{k}_{t0} : ctxRowOK tables6SC{T}.cbits ({rf} {lst(c)}) (ctx{n}Chunks6SC{T}.getD {k} []) {lst(c)} {t0} = true := by
-  decide +kernel
-
-''' for t0 in range(1, 7)) + f'''theorem ctxRow{n}_6SC{T}_{k} : allSym (ctxRowOK tables6SC{T}.cbits ({rf} {lst(c)}) (ctx{n}Chunks6SC{T}.getD {k} []) {lst(c)}) = true :=
-  allSym_of6 _ {' '.join(f'ctxRow{n}_6SC{T}_{k}_{t0}' for t0 in range(1, 7))}
-
-''' for k, c in enumerate(shapes)) + f'''set_option maxRecDepth 100000 in
-theorem ctxRows{n}_6SC{T}_lit : AllP (fun c : List Nat => ∃ i, allSym (ctxRowOK tables6SC{T}.cbits ({rf} c) (ctx{n}Chunks6SC{T}.getD i []) c) = true)
+''' + ''.join(rows_t0(T, f'ctxRow{n}_6SC{T}', k, c, stmt(c), s[f'ctx{n}_chunk_index'][k]) for k, c in enumerate(shapes)) + f'''set_option maxRecDepth 100000 in
+theorem ctxRows{n}_6SC{T}_lit : AllP (fun c : List Nat => ∀ t0, 1 ≤ t0 → t0 ≤ 6 → ∃ i, ctxRowOK tables6SC{T}.cbits ({rf} c) (ctx{n}Chunks6SC{T}.getD i []) c t0 = true)
     [{', '.join(lst(c) for c in shapes)}] :=
-  ⟨{', '.join(f'⟨{k}, ctxRow{n}_6SC{T}_{k}⟩' for k in range(len(shapes)))}{', ' if shapes else ''}trivial⟩
+  ⟨{', '.join(f'ctxRow{n}_6SC{T}_{k}' for k in range(len(shapes)))}{', ' if shapes else ''}trivial⟩
 
 theorem ctxCover{n}_6SC{T} : CtxCover {n} tables6SC{T}.cbits ({rf}) ctx{n}Keys6SC{T} :=
-  ctxCover_rows ctx{n}Shapes6SC{T} ctxZero{n}_6SC{T} (by
+  ctxCover_chunks ctx{n}Shapes6SC{T} ctxZero{n}_6SC{T} (by
     unfold ctx{n}Shapes6SC{T}
     exact AllP.mem ctxRows{n}_6SC{T}_lit)
 
