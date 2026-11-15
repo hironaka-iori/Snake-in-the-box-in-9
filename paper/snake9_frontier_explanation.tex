@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 221}
+\date{Research state after round 222}
 \begin{document}
 \maketitle
 
@@ -251,100 +251,125 @@ $D\setminus\{a\}$ partitions assignments. Saving unfinished descendants and
 unexamined ancestor values preserves the unexplored region. Lean checks this
 generic implication; saved-state audits do not certify the entire native search.
 
-\section{A direct partner target and the fractional obstruction}
-Let $P$ be the saved 98-edge $Q_8$ path and $t$ either endpoint, 0 or 78.
-Remove $V(P)\setminus\{t\}$ and seek a 93-edge induced path beginning at $t$,
-with its other endpoint free. The joining argument would give
-$98+93+1=192$ edges in $Q_9$. This route does not require a different parent.
-Each allowed graph has 158 vertices and 337 edges. Both direct searches
-remain unresolved; the degree-and-cycle queries returned \texttt{UNKNOWN}.
+\section{The completed fixed-parent exclusion}
+Let $P$ be the saved 98-edge $Q_8$ parent and $t$ either endpoint, 0 or 78.
+A 93-edge induced path beginning at $t$ and avoiding $V(P)\setminus\{t\}$
+would give $98+93+1=192$ edges after one crossing. Each permitted graph
+has 158 vertices and 337 edges. Earlier degree-and-cycle searches returned
+\texttt{UNKNOWN}; the prefix certificates below now exclude both targets.
 
-A 93-edge partner starting at an even vertex has 47 vertices of each parity
-and an odd final endpoint, as Lean derives from consecutive cube edges.
-The model requires degree one at the two selected endpoints and degree two
-at other selected vertices. It also uses the induced-edge relation
-$y_{ab}=x_ax_b$ for Boolean vertex selections $x$.
-Degree equations can admit separate cycles. An actual induced path must omit
-a vertex of every cycle: its last cycle vertex cannot have two distinct
-earlier cycle neighbours, since both would be its immediate predecessor.
-Lean checks this argument and the resulting cycle occupancy inequality.
+A 93-edge partner has 47 vertices of each parity and an odd free endpoint.
+The model gives degree one to the two selected endpoints and degree two
+to other selected vertices, with $y_{ab}=x_ax_b$ for Boolean selections.
+An induced path omits a vertex of every cycle: its last cycle vertex
+cannot have two distinct earlier cycle neighbours, since both would be
+its immediate predecessor. Lean checks the parity and cycle implications.
 
-For any allowed vertex subset $U$ and $v\in U$, a stronger necessary inequality is
+For every allowed subset $U$ and $v\in U$, selected edges also satisfy
 \[
-\sum_{ab\in E(U)}y_{ab}\le\sum_{u\in U}x_u-x_v,
+\sum_{ab\in E(U)}y_{ab}\le\sum_{u\in U}x_u-x_v.
 \]
-where $E(U)$ consists of allowed edges with both endpoints in $U$.
-The selected part of an actual path has fewer edges than vertices when
-$v$ is selected; when it is unselected, the weaker inequality still holds.
-Lean derives this from inducedness by assigning each selected edge to a
-distinct selected path index, avoiding a selected marked index.
-Writing $X,Y,B,E$ for selected vertices, internal edges, boundary edges
-and selected endpoints in $U$, the degree sum gives
-$2X-E=2Y+B$. Thus the same inequality is $B+E\ge2x_v$.
+Here $E(U)$ contains the allowed edges within $U$. Inducedness assigns
+each selected edge to a distinct selected path index, avoiding a selected
+marked index. This proves the inequality; the unselected case is weaker.
+If $X,Y,B,E$ count selected vertices, internal edges, boundary edges and
+selected endpoints in $U$, degree accounting gives $2X-E=2Y+B$.
+Thus the same inequality is $B+E\ge2x_v$. These deductions pass Lean.
 
-Relax the Boolean variables to $[0,1]$ and retain the linear product
-inequalities and degree equations. Boolean product consistency gives
-another necessary family. Put $\delta_{ab}=x_a+x_b-2y_{ab}$.
-For Boolean selections this is one exactly when the endpoint selections
-differ, so a closed cycle has an even number of changes. For any odd
-subset $F$ of its edges, at least one edge must disagree with the marked
-pattern $F$. Hence
+For Boolean products, $\delta_{ab}=x_a+x_b-2y_{ab}$ records endpoint
+disagreement. A closed cycle changes value an even number of times.
+An odd marked edge set $F$ must differ from that pattern somewhere, giving
 \[
 \sum_{e\in F}\delta_e-\sum_{e\in E(C)\setminus F}\delta_e\le|F|-1.
 \]
-Lean checks this argument for arbitrary closed Boolean walks. The
-inequalities are classical~\cite{barahona1986}.
+Lean checks the arbitrary closed-walk argument. These inequalities are
+classical~\cite{barahona1986}. The preceding finite comparison gave exact
+cardinality bounds 95.955197 and 95.763979, excluding 95-edge partners.
 
-Adding square and longer parity inequalities to the subset model gives
-exact cardinality upper certificates 95.955197 at root 0 and 95.763979
-at root 78. Both are below 96, excluding a 95-edge partner. Every longer
-partner has such a prefix; therefore arbitrary compatible partners
-at these two roots have at most 94 edges. This particular parent's
-one-crossing construction consequently has at most $98+94+1=193$ edges.
-The 93-edge partner needed for 192 remains unresolved.
-
+\paragraph{Why the continuous model alone remains insufficient.}
 The exact fractional feasible cardinalities are
 \[
 q_0=\frac{2507137819890885477}{26128236866583647},\qquad
 q_{78}=\frac{388107824092577}{4052758842992}.
 \]
-Both exceed 94 and satisfy three complete families, beyond the finite
-rows explicitly added to the model. For occupancy cycles, put $w_u=1-x_u$.
-For each deleted edge $ab$, a potential has $p_a=0$,
-$|p_u-p_v|\le w_u+w_v$ on other edges and $p_b+w_a+w_b\ge2$.
-Summing around any cycle gives $\sum_{u\in C}w_u\ge1$.
-For subset inequalities, 158 feasible flows per root send at least
-$2x_v$ from $v$ to an added sink. Conservation bounds this supply by
-every separating cut, whose capacity is exactly $B+E$ above.
+Both exceed 94 and satisfy all three complete inequality families.
+For occupancy cycles, put $w_u=1-x_u$. For each deleted edge $ab$,
+a potential satisfies $p_a=0$, $|p_u-p_v|\le w_u+w_v$ on other edges,
+and $p_b+w_a+w_b\ge2$. Summing around any cycle gives
+$\sum_{u\in C}w_u\ge1$. For subset inequalities, 158 feasible flows
+per root send at least $2x_v$ from $v$ to an added sink. Conservation
+bounds the supply by every separating cut, whose capacity is $B+E$.
 
-For parity cycles, make two copies of every allowed vertex. An edge
-preserving the copy label costs $\delta_{ab}$, and one switching it
-costs $1-\delta_{ab}$. For each vertex, a saved potential increases
-by at least one between its two copies, with every arc satisfying
-$p(b)-p(a)\le c_{ab}$. Following a cycle while switching on its odd
-marked subset ends at the opposite copy. Telescoping gives total cost
-at least one, which is the displayed parity inequality.
-All these rational potential and flow certificates pass independent
-exact arithmetic audits. Their generic arguments and the concrete
-numerical arrays retain separate verification records.
+For parity cycles, make two copies of each vertex. Edges preserving
+the copy label cost $\delta_{ab}$; switching edges cost $1-\delta_{ab}$.
+For each vertex, a saved potential increases by at least one between
+its copies and satisfies $p(b)-p(a)\le c_{ab}$ on every directed arc.
+A cycle switching on an odd marked set ends at the opposite copy.
+Telescoping gives cost at least one, the required parity inequality.
+Independent exact arithmetic audits verify these rational potentials and flows.
 
-Mix either point with the corresponding one-edge path using weight
-$92/(q_t-2)$ on the larger point. The mixture has weight exactly 94,
-and linearity preserves all three complete families. Thus this full
-continuous relaxation cannot exclude the target. No path is constructed
-by these fractional assignments~\cite{research220,research221}.
+Mix either point with a one-edge path, using weight $92/(q_t-2)$ on
+the larger point. The mixture has weight 94 and preserves all three
+linear families. Thus this continuous relaxation still admits the target;
+these fractional points supply no path~\cite{research220,research221}.
 
-An actual path also chooses one definite first neighbour. Each root
-has seven choices. Exact conditional upper certificates below 94 exclude
-$0\to16$, $78\to14$ and $78\to74$ from any 93-edge partner.
-The remaining eleven choices are unresolved. Extending their prefixes
-is the next finite search; an upper bound above 94 does not establish
-the existence of a branch completion.
+\paragraph{Complete division by actual prefixes.}
+For a hypothetical path $q_0,\ldots,q_{93}$, each proper prefix with
+$k<93$ requires $x_{q_i}=1$ for $0\le i\le k$ and $e_{q_i}=0$ for
+$0<i\le k$. Injectivity makes every nonroot prefix vertex different
+from both full endpoints, including the current last prefix vertex.
+Its next vertex is allowed, adjacent to the last vertex, unused, and
+nonadjacent to every earlier prefix vertex. Enumerating all such vertices
+covers every possible continuation. Lean derives these necessities.
+
+Each branch adds its prefix equalities to the model. Each exact
+certificate combines inequality rows with nonnegative weights and equality
+rows with signed weights, then bounds the remaining coefficients using
+$0\le z_j\le1$; numerical optimality is unnecessary. Cardinality bounds
+below 94 exclude branches; every other branch is expanded completely.
+The audited counts, with depth measured in prefix edges, are
+\[
+\begin{array}{c|rrrrrr|r}
+\text{Depth}&1&2&3&4&5&6&\text{Total}\\\hline
+\text{Nodes}&14&33&21&9&1&2&80\\
+\text{Excluded}&3&23&17&8&0&2&53\\
+\text{Expanded}&11&10&4&1&1&0&27
+\end{array}
+\]
+There are no pending leaves. Root 0 has 31 excluded leaves and root 78
+has 22; their largest exact bounds are 93.963070 and 93.984077.
+The unique depth-four survivor was $(78,206,198,196,197)$, followed
+necessarily by 213 and then by either 215 or 221. The final bounds are
+93.979475 and 93.414818. The initial low-memory interruption preserved
+45 completed new queries and 20 pending prefixes; continuation completed
+the cover. The failed batch remains recorded separately.
+
+Every actual 93-edge partner must follow this complete tree to a leaf
+of depth at most six. Its 94 selected vertices contradict that leaf's
+bound below 94; all used prefixes are proper because $6<93$.
+Every longer partner has a compatible 93-edge prefix. Therefore
+\[
+\boxed{\text{partner length}\le92,\qquad
+\text{one-crossing joining length}\le98+92+1=191.}
+\]
+An inverse cube isometry preserves length, inducedness, the joining
+endpoint and parent avoidance, so the ceiling holds for the full
+cube-isometry class of this parent. This pullback is also checked in Lean.
+No compatible 92-edge witness or attainment of 191 by this construction
+is established. Different parent classes and other face arrangements
+are outside the exclusion.
+
+Four generic results in two Lean modules support the prefix and isometry
+arguments. Complete finite coverage and numerical certificates have
+independent exact audits, with concrete model necessity reviewed separately.
+The numerical tree and coefficient arrays have no end-to-end Lean assembly.
+All evidence is retained in milestone 222~\cite{research222}.
 
 \section{Remaining questions}
-A compatible 93-edge partner would improve the lower bound to 192.
-A different parent or face arrangement remains possible, but finding a
-new $Q_8$ parent alone does not supply a compatible $Q_9$ construction.
+A one-crossing join using the full saved parent class cannot improve 191.
+Further construction work can use a different parent isometry class,
+a shorter parent with a sufficiently long compatible partner, or multiple
+crossings. Finding a new parent still requires a compatible joining construction.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
 The maintained global interval remains $191\le a(9)\le233$, with an
@@ -354,7 +379,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 221.
+in the companion manuscript and milestones through round 222.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -380,6 +405,12 @@ fractional feasibility and product consistency}. Research milestone 220,
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Cycle parity, exact partner bounds
 and first-step restrictions}. Research milestone 221, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/221-square-parity}.
+
+\bibitem{research222}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Complete prefix certificates
+and a one-crossing ceiling for the saved parent class}.
+Research milestone 222, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/222-prefix-certificates}.
 
 \bibitem{barahona1986}
 F.~Barahona and A.~R.~Mahjoub. On the cut polytope.

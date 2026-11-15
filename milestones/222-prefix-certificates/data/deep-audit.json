@@ -1,0 +1,315 @@
+{
+  "status": "PASS_EXACT_COMPLETE_FIXED_ROOT_PREFIX_EXCLUSION",
+  "scope": "Independent saved-data arithmetic and complete child coverage. Three new certificates checked, frozen stage1 receipt and all its pins reused. No optimizer, compiler, search, software tests, or numerical primal assumptions.",
+  "initial": {
+    "nodes": 77,
+    "queries": 74,
+    "unique_pending_prefix": [
+      78,
+      206,
+      198,
+      196,
+      197
+    ],
+    "prior_ledger_sha256": "323d5c00de98df6bdfdcd03e23ba1692acf98c15ee6e8d45aa125804ac9f3253"
+  },
+  "continuation": {
+    "new_queries": 3,
+    "cumulative_queries": 77,
+    "total_nodes": 80,
+    "counts": {
+      "EXCLUDED_BOUND": 50,
+      "EXCLUDED_INHERITED": 3,
+      "EXPANDED": 27
+    },
+    "unresolved_leaves": 0,
+    "unchanged_inherited_nodes": 76,
+    "only_inherited_change": "The unique depth4 pending leaf becomes EXPANDED; its original certificate and all other fields are retained.",
+    "forced_next": 213,
+    "following_choices": [
+      215,
+      221
+    ],
+    "all_child_sets_recomputed": true,
+    "byte_exact_final_ledger": true
+  },
+  "certificates": [
+    {
+      "prefix": [
+        78,
+        206,
+        198,
+        196,
+        197,
+        213
+      ],
+      "appended_rows": 8,
+      "nonzero_weights": 458,
+      "weighted_rhs": 91969245,
+      "positive_residual_sum": 2673235,
+      "exact_upper": [
+        1183031,
+        12500
+      ],
+      "excludes_93_edges": false,
+      "sha256": "f415d0e4deafe188bc06a8dc6b736d7db5522bee897a125a0e43ce140f623a79",
+      "file": "data\\deep-cases\\78-206-198-196-197-213.json"
+    },
+    {
+      "prefix": [
+        78,
+        206,
+        198,
+        196,
+        197,
+        213,
+        215
+      ],
+      "appended_rows": 9,
+      "nonzero_weights": 453,
+      "weighted_rhs": 92860583,
+      "positive_residual_sum": 1118892,
+      "exact_upper": [
+        3759179,
+        40000
+      ],
+      "excludes_93_edges": true,
+      "sha256": "a8f74b7dc32d11c060510bcaf5936d54e4b1fdeb834a9f490fc824636b10f4ae",
+      "file": "data\\deep-cases\\78-206-198-196-197-213-215.json"
+    },
+    {
+      "prefix": [
+        78,
+        206,
+        198,
+        196,
+        197,
+        213,
+        221
+      ],
+      "appended_rows": 9,
+      "nonzero_weights": 454,
+      "weighted_rhs": 91247553,
+      "positive_residual_sum": 2167265,
+      "exact_upper": [
+        46707409,
+        500000
+      ],
+      "excludes_93_edges": true,
+      "sha256": "cfc3ef11316753e588b02826d14aeddcfae4d2dff73f788419b1cd9313f5c593",
+      "file": "data\\deep-cases\\78-206-198-196-197-213-221.json"
+    }
+  ],
+  "root_results": [
+    {
+      "root": 0,
+      "nodes": 46,
+      "excluded_leaves": 31,
+      "maximum_leaf_upper": [
+        9396307,
+        100000
+      ],
+      "margin_below94": [
+        3693,
+        100000
+      ],
+      "maximizing_prefixes": [
+        [
+          0,
+          32,
+          48,
+          112,
+          120
+        ]
+      ]
+    },
+    {
+      "root": 78,
+      "nodes": 34,
+      "excluded_leaves": 22,
+      "maximum_leaf_upper": [
+        93984077,
+        1000000
+      ],
+      "margin_below94": [
+        15923,
+        1000000
+      ],
+      "maximizing_prefixes": [
+        [
+          78,
+          76,
+          92,
+          84
+        ]
+      ]
+    }
+  ],
+  "conclusion": "Within the frozen allowed graphs at roots0 and78 of the saved98-edge parent, every possible93-edge induced path is excluded. Any longer partner would have such a prefix; hence each arbitrary partner has at most92 edges and a one-crossing join with this parent at most98+1+92=191 edges. Global bounds are unchanged.",
+  "actual_path_scope": "Uses the previously reviewed necessity of the fixed-parent model rows, proper-prefix selection and nonendpoint facts, and the complete finite branching cover. No Boolean witness or exclusion for other parents or different join constructions is asserted.",
+  "lean_scope": {
+    "generic_receipt_status": "PASS",
+    "theorems": [
+      {
+        "theorem": "Prefix222.prefix_next",
+        "axioms": [
+          "propext",
+          "Quot.sound"
+        ]
+      },
+      {
+        "theorem": "Prefix222.prefix_nonroot_not_endpoints",
+        "axioms": [
+          "propext",
+          "Quot.sound"
+        ]
+      },
+      {
+        "theorem": "Prefix222.prefix_free_endpoint_zero",
+        "axioms": [
+          "propext",
+          "Quot.sound"
+        ]
+      }
+    ],
+    "source_log_object_hashes_checked": true,
+    "limitation": "Generic Prefix222 results remain separate from an end-to-end Lean assembly of the concrete prefix tree and weighted certificates. No independent compiler run performed."
+  },
+  "execution": {
+    "status": "ACCEPTED_NATIVE_RESULT",
+    "exit_code": 0,
+    "stop_reason": null,
+    "seconds": 0.7340000000258442,
+    "peak_sampled_private_bytes": 27496448,
+    "minimum_sampled_free_bytes": 1081765888
+  },
+  "pins": {
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\audit_prefix.py": "18233a04e77650df97841a5736bb0abe5dafa132fe04c3f55586890e3c410bcb",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\prefix-audit.json": "8a070ed47d2d6192ab371ed3b96c78fd24763c89417ae83b95477af97209d2b6",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\prefix-review.md": "0a51b3678cb9cf3c03c87b96d0d490db2ffd6087080794b64cbb0766084bf5bd",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\prefix-ledger.json": "59b4f6b316b7c5713c87810412198ecae00f010cd1e9f5fdafa5471093129d50",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-ledger.json": "323d5c00de98df6bdfdcd03e23ba1692acf98c15ee6e8d45aa125804ac9f3253",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\first-audit.json": "84283463d10dc79cc5e375ac1968c562b3e38c47a1a29f5ced842c4ac52b8562",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\audit_first.py": "2a15548a8d3f843310320aa99eeb28b0646153a59f5d62c62d9c456173ddc899",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\long-audit.json": "a4c93e83583eb9abcc80f56118cbf8fa82e8de52255b2851dc7bc56f463cec54",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\first-summary.json": "fde80edbbc439321b297303ffabdab6ce330f3c017da6ef70ed0719b504ac2bb",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\first-execution.json": "17945518296c6c7cfb5da424c606cdeeae7e981219e0aa38db2400b72e0997c5",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\first_step.py": "6591e0f4bd1dba82c7a84aec6cf610d300512fa8ba3b6414fa4ec4a099da4fa3",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\run_first.py": "d83db77e87e098db043d8a17b46c809ab374a830d7074869cc5a31086d1b8103",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\long-0\\model.json": "a4f0aa53fe7a8c06969643cd7a5b09c50459d6d5013e6568708b42a8ad76ce67",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\long-78\\model.json": "d0151302ca6cc914f5331befb72dcd00f22e9c0b06c46cc25da8efa8e8896dd3",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\prefix-execution.json": "094fe81798ef768f4da95536c5fffd26a6724baad8eed9a0fbd2aeec6533a610",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\run_prefix.py": "04deb3d08e962a94f415aafc096b02e91ebcde19bdcbc5ae3780c2edc48b7e1d",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\prefix_search.py": "a337d739bcf179f6565e76166cf52df85558979a4a45456bf4eef1e4aa6dc873",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\..\\221-square-parity\\data\\long-0\\model.json": "a4f0aa53fe7a8c06969643cd7a5b09c50459d6d5013e6568708b42a8ad76ce67",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\..\\221-square-parity\\data\\long-78\\model.json": "d0151302ca6cc914f5331befb72dcd00f22e9c0b06c46cc25da8efa8e8896dd3",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\..\\221-square-parity\\data\\first-summary.json": "fde80edbbc439321b297303ffabdab6ce330f3c017da6ef70ed0719b504ac2bb",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\..\\221-square-parity\\data\\first-audit.json": "84283463d10dc79cc5e375ac1968c562b3e38c47a1a29f5ced842c4ac52b8562",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\prefix-stdout.log": "2fc5acc19a735e01d6ea400f797c4c16378cb8dc509498ca2eae89b6567a379a",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\prefix-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-execution.json": "b0d67f569fb3352046d8140ef5a0ff8df04577c0c2db516a1f747d81d33c6f6c",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\run_continuation.py": "afdf0d6e4c36170100167afac86578544da22380a97fd01079d9bac79b8d35d8",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\prefix_continue.py": "63e855618b414ee411c43bb7359b7d1fa4d4e362dddfec3d72b50ce2cecdc916",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\continuation-stdout.log": "6d356d35ce3d3d18dffe00333ffd84c017fab49eb40957e86741600946db8b95",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\continuation-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-summary.json": "4450c73cd1e400f6305e830efdf6f168d9e31f6c7d137ba185d0aed2f9b45eb8",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-input.json": "d6f60228ef293b1081f33c966eceb1483d5ab579a58278ddc57afb0452f25dab",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\first-0\\vertex-16.json": "dd19b95ca394c0a6a74873fab5b1c51aaeb1eb588d8ba1e22b4b89065a31ec62",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\first-78\\vertex-14.json": "33b93efebe7ef38f3446a4f7d7d7cfe177126ebf1c1f89ba9461cfc5e81f1e2b",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\first-78\\vertex-74.json": "c919c578ca9903c0519833eb59ebce97457512f75db97ac827946fc8531258fa",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-2.json": "38becef2128751c6bd0503cb1e62fca5b8106b606fc4e5f52787f9c7dfe95e17",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-4.json": "69b5ad760a28aee920ecf6d8939d84a98c53af95b50d48ab68970298fc6c8e97",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-8.json": "a0f52defeb2e0c42a08eec16ab3616d899d8b03e07510b0e0e8ffa86a50f5fd8",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-32.json": "df90dd3789f99c74811b6e8e8447da6758289e849a48af5f1139db21fa694033",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-64.json": "eb2c1ff7b7abf536cc5a14e06bb2fad7a1f0c911b433de576fc9a31ecc303090",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-128.json": "8c1650128247d8f1d627ffbed6e953bbd948633c8ed62bc0b835dfa9af0c4265",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-76.json": "b817bacf4ec229447bf05182590062070542a850bc9e8dd80902860cb8e61e44",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-79.json": "48aff45551d364ac848020e72dba730d3bf177376eb0fff1c22b56383ff58212",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-94.json": "90360e9ce969ecffa8802e70b27f7f4f246384df520e359d5caa10695844e458",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-110.json": "d44f6b97297d1bb8a9c4928e6ebd58cbf9c3510bf6b96b3500e943c34c5bc6a7",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-206.json": "b1c8cb2f5e3549bffbda828b5a7ecf6781c6e008cdd054af565cfd29c586b025",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-2-6.json": "8656f69016f4f85eb793b273674dbea88cff0cee5a889d7ee4a3254932849200",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-2-10.json": "45cfdee4c7a05c0d5a4f33a96e1bb1ffe90cc40faedc4b5de6c9c5b25ee01206",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-2-34.json": "260473c3864cd0e7ef087bb5af945fddd31d11733a3e377e3bae145e5544a52b",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-2-66.json": "a99d2a6dae712c95df1a1edcf3dfdee8a2529edf4f1922126f6520eb77343a88",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-2-130.json": "717a0569f4055e400f6398ebf5546d9e970f8672b93025417268228502ec24b7",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-4-5.json": "db7d14e7c078e20d5aed9b0b6b2be446d2f2f472474c72cbb4e31ae1a5dbfd3f",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-4-6.json": "b37702ec61ef089df4084d1a179080dbbd810e747459e412e60a1ddfee5bf642",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-4-20.json": "5f7cae4ea890c1d825a1775253907d4be255abe329b3b196fb1b2fd2fa3b9c12",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-8-9.json": "9f74d62a0432a90c837add3f6190f161bb6aa5b2185957f22f3403654952361f",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-8-10.json": "de8bde2b47cb2883e347c5ce6963d685240d4fcad3a9a0e2b4ab504a4c0d6489",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-8-24.json": "b6a3cd271a5e042d15b1565dda1ec3e7d9df46335d42e4a2ab826b01d16648f2",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-32-33.json": "f5e8595bcfd60c44745cb7b63585b567f490b6de14278c0e8b162fb045d08b1a",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-32-34.json": "6f1e269fcce3be9a469612f885eb0e5c3cd35ed25bb2691604a68ec7e53b0652",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-32-48.json": "8d39cc09a7b4f530da63d03fc7661bf12df0f156f336bda6c5433719163072fc",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-64-65.json": "c0f0396f6df2bb259863a82e712fda9552321f17200c2a65355926d24de0136a",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-64-66.json": "2965795a81f8789879e2d95b50a5177a00cf2b79e9939ea230c009b5cf765267",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-128-129.json": "f0751596472c53d2b86375a378c825ab7ba143ae6bd92f84f53023eaa17709a7",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-128-130.json": "1f73739c344d2539fddef66955edcc48e68162b8ae2ebbabc2062a7bf92e2aa6",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-128-144.json": "1068e00b9ebe940829678b0eda2560e6c802dd9fc52b90616515584667f72a20",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-76-77.json": "bad1ffb1725b8cc3ec00b16a05e10d34d207b28b067f72b8e35c477c81487b67",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-76-92.json": "c9e065bb3965fdc84f871637f68035f10e6c8a9022f11c353a550352f9a69ff6",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-79-71.json": "b3951982568677725fa273e76034737833c8331e93269fb946a0007e23088864",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-79-77.json": "53f787ee891074b56a05b05885afe70c49a8541cebe9f69f2bc6a9ffe178f7c0",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-94-86.json": "1967b20e9d38f3d88b1e090161b45fe932dea1c7c5a353e74a89224fe9ca23db",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-94-90.json": "9b7ebbcc8da697b9a151ac1d7f6a33ec4e77a21aabc468abddc9cb63a55f8ee3",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-94-92.json": "26a80567a258cbbf2454dba2c8354647b5d8fcfabaddae3c608f9e132436be39",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-94-126.json": "a2c62c70437eefdcd3f0b62e2b2879814b5560bb4a81556c96c3bcb913389a1e",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-94-222.json": "70758551c8f7a5bd192d6affef7135a212174f6d68d8f802a192f418f632a6d0",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-110-102.json": "21abd9da79f4d2cf8d3fbace84aefcbe98a9d3ee58d3ff408382a16205a7eb17",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-110-126.json": "ef7ded7c0fb0b8ee5817916fd294debe73941df2987e59d70c7b70bdaa34a25f",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-206-142.json": "3ef14b4ec6fb9bed08994c90812921ed4b65fe9ccaee8db3629199a5b4d619e0",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-206-198.json": "513faab56c2bc403b144862a3cadf16e4ac4813a95865bb8c243584c6e18ed46",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\78-206-222.json": "268678c857b29025dee0fab2cda7daeaf606acf8844405b8bbaaf7358578ccb8",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\cases\\0-4-6-14.json": "f0411631f76c890eafd98f9e2c45f963bd0928cda41afb56719be9cb5c05e50a",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-4-6-22.json": "d6996e2f125440b2d66a632d0e06cc91b8537b50e2a3b6163ec4884dfc74caae",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-8-9-11.json": "ef4d4bfc667977df19a1008a8e0fbcce830c9f73e9fa5019ff691dde7cb1e09f",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-8-9-25.json": "85ca1a68c9ee2a9fb4210b9112cde7bc1d4402a4f73c648a8914ea5f4462cd9e",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-32-34-35.json": "b0ea98aab40371729df6dc1f53691b297008d83d96ac75b188bedca7c11122b7",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-32-34-42.json": "fb9933f062af7d1ae959c455f8e9b769abf38ea2242fdc49ae229b8ede268bba",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-32-48-112.json": "bb6aa88a1c646dbb3351a469ae539f87e9340de1255c0624be7f473fc432b3b2",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-32-48-176.json": "a557b0a52926a5125b7a5e0d845a81686a2c54a196f707d792e3e613e99a9b36",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-65-67.json": "68f0484a0a12dbe4eb46c973e7c319d4c0a557bf96d0875534f9f593924b60d2",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-65-81.json": "ebf352d9758d55dd2d4581e21620d064a72349381238e46f5ff223dd5d252f09",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-66-67.json": "ad05507e128d8cecd87f049ddd2f3c6d913853f5e2d6f6a6005477a599c655e0",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-66-74.json": "e246280a4edd8a45916833b6ce78461f8827f019f78a075c2da091113b2bb985",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-76-92-84.json": "903a5bab8392d5670483c2c5f789eee0b3f58c11b460a549b47ba8ed4338a5ae",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-76-92-93.json": "165fd0aa29deb073d65ac23a74fc1942be9726104a06767484ead26efea0cef6",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-79-71-67.json": "bedc023ba5d4d6f28b663b4e5b089912dc1f754be23f5ef5a951619333e78dd0",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-79-71-87.json": "7eb8aaa949c071a65e82c629c29d11cd417e221abc90dbb333db6f8c3913ad2f",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-79-71-199.json": "c3668402de06761b93027c740f7924a3416b0a87690a39ddb011746f3ad9df93",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-110-102-100.json": "cecc26310030da7ab6bbc2d67bd80628fdd11926d125462d24565dde7d550397",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-110-102-118.json": "d50db95e9055119cd14205ab1b43f7996d49d0de4709c3d969fafb573dbf6af0",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-206-198-196.json": "7a7e67da944ef3dbbf91cd31fa1cec9cb0879208cac022f83fcf9d0669256aef",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-206-198-199.json": "1cfda4b0fff1d7a32983d0bcf6b76b8a7e70166e975b67402838c7c3fd974ab7",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-32-48-112-114.json": "75560a42e32e67828d733d4be0c3ea7678f6ac8befe07ab60e2dceb0af1e1bc5",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-32-48-112-120.json": "be473efe479eaf62228a815f22832621573dce87e994561500bd6c2857f664f2",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-32-48-112-240.json": "5ab340f49e2eff439222141181f8fdcbc57f84f46cce07baf11eecd961acd218",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-65-81-17.json": "ca6aba6f8f58bbcbeefd4624293892407c8b5c03a8c8a27a98942ede1d1657f8",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-65-81-83.json": "b22baf2fe7a46ddbd3959c1956c00937211165fd571ac1dacdcd47a5ef7a134f",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-65-81-89.json": "fddf9baa29aba37a0371709307b3a56ce4b4675518cf7aa6d37c1ad41f50eafc",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-66-74-10.json": "fe69c53e162b5b89ff6ab33970f89d5f2f624353b0f4cdbb99946e8d8c8f1c30",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\0-64-66-74-90.json": "b085bd10ac279c04636e94d9c93b53931f5056e93b4ebc589c283bb9d728b82e",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\continuation-cases\\78-206-198-196-197.json": "e3f45c0679c2a7c5278d45219bdd8f07a668af0111d1cf500b66f2d2e302c9db",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\prepare_continuation.py": "c100bf9c2b1a47866531ea528152c4659b668a7e39198c2b95794e61a1225394",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\prepare_round.py": "cb1f3c2f50a3008d7ca16c1a2dfa67691a81eca6b39a390eb153fea445e28841",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\prepare_run.py": "7d20d4ce2ba6e91be0ce60298c9993dcaed2c3bf7c2606138a4fbd209b458fe3",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\deep-ledger.json": "58c66c01369e5108a6b411268668d70a078d2e2b83cf41a1bbb631e65248a0c8",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\deep-cases\\78-206-198-196-197-213.json": "f415d0e4deafe188bc06a8dc6b736d7db5522bee897a125a0e43ce140f623a79",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\prefix_deep.py": "2d0a90a81d80c0c9c1b4b24c95494dc48ddabb76b882b588ab3d363ff764b09e",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\deep-cases\\78-206-198-196-197-213-215.json": "a8f74b7dc32d11c060510bcaf5936d54e4b1fdeb834a9f490fc824636b10f4ae",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\deep-cases\\78-206-198-196-197-213-221.json": "cfc3ef11316753e588b02826d14aeddcfae4d2dff73f788419b1cd9313f5c593",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\run_deep.py": "080adebc497c269fa06013bad6437df2ead374e54f6b68d8bd1570806abdda73",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\deep-stdout.log": "c9b060f8495508a21896f69f5730a28620de031af855b0192f5bb61910e626a6",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\deep-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\deep-summary.json": "1f58c32253b678c8d8c417ab60387f46546b77e8b54126a3ea29de1e71f48456",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\lean\\Prefix222.lean": "e8913aad9ca17c8614c87157a74ba014e3148f9ea80c4ede9ed2427b32203aea",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\build\\Prefix222.olean": "da080af1b1a372285351a1c966e79e4d6426d37a1fb14c5351e5950defa1eb0c",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\Prefix222-1794710267981108100\\compiler.log": "ed80fc00450747f1de67200a4da69fb89234138057c8316a58371c817d13b5b7",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\audit_deep.py": "7a9d5c5d49a36b85a35d54ba684e778f03930b1d79355e4bf0b8afadf1869d0f",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\prepare_deep.py": "ad5c422ba21b41c83272384bcc33aea610e143b6b175b1fe0f02fb51bdbfaf32",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\deep-execution.json": "9b652983177824410e6cb23aceef3f715c228a377ef97f16be220974fc451ff5",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\Prefix222-audit.json": "fa3c84224d5fb0965f49070ae35a96c2695868e361b1e1dc0a944612fd1f8228"
+  }
+}

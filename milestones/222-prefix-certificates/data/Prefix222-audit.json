@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "module": "Prefix222",
+  "source": "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\lean\\Prefix222.lean",
+  "source_sha256": "e8913aad9ca17c8614c87157a74ba014e3148f9ea80c4ede9ed2427b32203aea",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\data\\Prefix222-execution.json": "897f2effaad3bcb8dad1445afd0cf35b1e5f6ec57f17ecaa47f2db9bf99bb75f",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\lean\\Prefix222.lean": "e8913aad9ca17c8614c87157a74ba014e3148f9ea80c4ede9ed2427b32203aea",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\Prefix222-1794710267981108100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\lean\\Prefix222.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\logs\\Prefix222-1794710267981108100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1428180992,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 91,
+    "snapshot_seconds": 0.016647799988277256
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1415176192,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16604,
+          "ParentProcessId": 30700,
+          "PrivatePageCount": 48168960,
+          "WorkingSetSize": 25321472
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.016024199983803555
+    },
+    {
+      "free_bytes": 1241522176,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 16604,
+          "ParentProcessId": 30700,
+          "PrivatePageCount": 58273792,
+          "WorkingSetSize": 221351936
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.01991400000406429
+    }
+  ],
+  "compiler_pid": 16604,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.080142100021476,
+  "axioms": [
+    {
+      "theorem": "Prefix222.prefix_next",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Prefix222.prefix_nonroot_not_endpoints",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "Prefix222.prefix_free_endpoint_zero",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "ed80fc00450747f1de67200a4da69fb89234138057c8316a58371c817d13b5b7",
+  "object": "E:\\Snake-in-a-box\\milestones\\222-prefix-certificates\\build\\Prefix222.olean",
+  "olean_sha256": "da080af1b1a372285351a1c966e79e4d6426d37a1fb14c5351e5950defa1eb0c"
+}

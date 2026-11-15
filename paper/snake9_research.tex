@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 221, 15 November 2026}
+\date{Research state after round 222, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -67,14 +67,17 @@ core, counting implications and literal source counts have separate
 Lean checks; the complete finite search certificates and geometric
 assembly retain their stated limitations.
 
-Exact certificates exclude a 95-edge compatible partner at either
-endpoint of the saved 98-edge parent. Its one-crossing construction
-therefore has at most 193 edges. The 93-edge partner needed for 192
-remains unresolved. Exact fractional points satisfy the degree and
-linear product constraints together with every cycle occupancy,
-subset forest and disagreement-cycle parity inequality at total weight
-94. Fixing an actual first step excludes three of fourteen branches;
-the other eleven remain open.
+Complete prefix coverage and exact certificates exclude every 93-edge
+compatible partner at either endpoint of the saved 98-edge parent.
+Any longer partner would contain such a prefix, so arbitrary compatible
+partners have at most 92 edges. A one-crossing join using this parent,
+or any cube-isometric copy, consequently has at most 191 edges.
+This ceiling is not an attainment claim. The unconditioned continuous
+model still has exact fractional points of weight 94 satisfying all
+cycle occupancy, subset forest and disagreement-cycle parity inequalities.
+The exclusion uses a complete finite division into actual path prefixes.
+Generic Lean implications and independent exact numerical certificates
+have separate verification records.
 
 The paper separates written proofs, checked implications, native
 enumerations and unresolved premises. The contributor bound improves
@@ -7510,6 +7513,8 @@ cycle inequalities; it also checks the general parity argument in Lean.
 
 \subsection{Parity-strengthened bounds and first-step restrictions}
 \label{sec:parity221}
+This subsection records the round-221 comparison. The stronger prefix
+exclusion in Section~\ref{sec:prefix222} resolves its remaining branches.
 Every closed Boolean walk changes value an even number of times, as
 induction on the walk proves. If $F$ is an odd marked edge set, the
 disagreement pattern must differ from its indicator on at least one edge.
@@ -7594,10 +7599,114 @@ the other six neighbour variables to zero.
 \]
 Every 93-edge partner occurs in one of these branches. Since it has
 94 vertices, the branches $0\to16$, $78\to14$ and $78\to74$ are excluded.
-The other eleven remain unresolved: their upper bounds alone do not
-prove feasibility. Extending these remaining prefixes is a concrete
-next step. All certificates and scope records are retained in
-milestone 221~\cite{research221}.
+At this stage the other eleven were unresolved: their upper bounds alone
+did not prove feasibility. Section~\ref{sec:prefix222} completes their
+prefix division. The first-step certificates and their scope records
+remain in milestone 221~\cite{research221}.
+
+\subsection{Complete prefix exclusion for the saved parent}
+\label{sec:prefix222}
+Let $P$ be the specified 98-edge parent and let $t\in\{0,78\}$ be its
+joining endpoint. Compatibility requires an induced partner beginning
+at $t$ and avoiding every vertex of $P$ except $t$. The permitted graph
+therefore remains $Q_8\setminus(V(P)\setminus\{t\})$; no neighbour of
+a parent vertex is additionally forbidden.
+
+\paragraph{Necessary rows and complete continuation.}
+Suppose $q_0,\ldots,q_{93}$ were a compatible 93-edge path. At a proper
+prefix $q_0,\ldots,q_k$, with $k<93$, the selection and free-endpoint
+indicators satisfy
+\[
+x_{q_i}=1\quad(0\le i\le k),\qquad
+e_{q_i}=0\quad(0<i\le k).
+\]
+Injectivity excludes equality of these nonroot prefix vertices with
+either full-path endpoint. In particular, the current last prefix vertex
+is still internal to the complete path. The endpoint equality is imposed
+where that variable exists; even vertices already have endpoint value zero.
+
+The next vertex must be allowed, adjacent to $q_k$, distinct from every
+prefix vertex, and nonadjacent to $q_i$ for $i<k$. Injectivity and
+inducedness give these restrictions directly. Enumerating every allowed
+vertex satisfying them therefore covers every possible next step.
+The restrictions are necessary; an enumerated child need not have a completion.
+Each branch retains the fixed model and adds its proper-prefix equalities.
+An exact weighted-row cardinality bound below 94 excludes that branch.
+Every remaining branch is divided into all of its induced next-step children.
+
+\paragraph{The complete finite cover.}
+The resulting tree has the following counts, with depth measured in prefix edges:
+\[
+\begin{array}{c|r|r|r}
+\text{Depth}&\text{Nodes}&\text{Excluded}&\text{Expanded}\\\hline
+1&14&3&11\\
+2&33&23&10\\
+3&21&17&4\\
+4&9&8&1\\
+5&1&0&1\\
+6&2&2&0\\\hline
+\text{Total}&80&53&27
+\end{array}
+\]
+No leaf remains pending. There are 31 excluded leaves at root 0 and 22
+at root 78. Their largest exact cardinality bounds are respectively
+93.963070 and 93.984077, both strictly below 94.
+The unique prefix surviving depth four was
+\[
+(78,206,198,196,197).
+\]
+Its only allowed next vertex is 213, after which the only possibilities
+are 215 and 221. The two depth-six certificates give exact bounds
+93.979475 and 93.414818, respectively.
+
+The original native batch stopped for low free memory after 45 completed
+new queries. Its three inherited exclusions and all completed records
+were retained, with 20 queued prefixes saved for continuation. The resumed
+and deeper calculations completed the cover. The interruption remains
+recorded as an interrupted run; successful individual certificates are
+supported by their independent arithmetic audits.
+
+\begin{proposition}[One-crossing ceiling for the saved parent class]
+\label{prop:parent191}
+For the specified 98-edge parent, or any cube-isometric copy, every
+compatible induced partner beginning at either endpoint has at most
+92 edges. A one-crossing join using the entire parent therefore has
+at most 191 edges.
+\end{proposition}
+\begin{proof}
+Every hypothetical 93-edge partner begins in one of the fourteen
+first-step branches. At each expanded prefix, its next vertex belongs
+to the complete child list. It must consequently reach an excluded leaf
+at depth at most six. Since $6<93$, all prefix nonendpoint equalities
+used there are valid. Its Boolean assignment would have 94 selected
+vertices, contradicting that leaf's exact upper bound below 94.
+Any longer compatible partner contains a compatible 93-edge prefix,
+so arbitrary partner length is at most 92. The joining length is then
+at most $98+92+1=191$.
+
+If a cube isometry sends the parent to another copy, apply its inverse
+to a hypothetical partner for that copy. The inverse preserves inducedness,
+length, the designated joining endpoint and avoidance of all other parent
+vertices. It would therefore produce a forbidden partner for the original
+parent. The same bound holds throughout this cube-isometry class.
+\end{proof}
+
+Independent exact audits reconstruct the finite child cover, prefix rows
+and weighted-row certificates; a separate mathematical review verifies
+that every actual compatible path satisfies the model. Two Lean modules
+check four generic results covering proper-prefix continuation, nonendpoint
+facts and the isometry pullback. The complete numerical tree and coefficient
+arrays have no end-to-end Lean assembly. All records, including the resource
+interruption, are retained in milestone 222~\cite{research222}.
+
+No compatible 92-edge witness or attainment of this 191-edge ceiling is
+established. The result excludes improvement by a one-crossing join using
+this full parent class. Different parent classes, shorter parents and
+constructions with multiple crossings remain outside its scope.
+The exact fractional weight-94 points of Section~\ref{sec:parity221}
+remain valid in the unconditioned relaxation: splitting into actual
+prefixes adds restrictions that those fractional points need not satisfy.
+The global interval $191\le a(9)\le233$ is unchanged.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
@@ -7752,15 +7861,19 @@ their explicit table and domain premises. Their native traversal has
 no complete proof certificate. No different parent or longer snake
 has been obtained.
 
-For the fixed 98-edge parent, exact parity-strengthened certificates
-exclude a 95-edge partner at either endpoint, giving a one-crossing
-ceiling of 193. The 93-edge targets remain open. Exact fractional
-assignments satisfy every occupancy-cycle, subset-forest and
-disagreement-cycle parity inequality at total weight 94. Requiring an
-actual first step excludes three of fourteen branches. The corresponding
-generic Lean results, exact finite audits and the remaining Lean
-assembly of the numerical arrays are distinguished in
-Sections~\ref{sec:linear219}--\ref{sec:parity221}.
+For the fixed 98-edge parent, the complete prefix cover and exact
+leaf certificates exclude every 93-edge partner at both endpoints.
+Thus arbitrary compatible partners have at most 92 edges, and a
+one-crossing join using this full parent or any cube-isometric copy
+has at most 191 edges. No compatible 92-edge witness or attainment is
+claimed. Exact fractional assignments still satisfy every occupancy-cycle,
+subset-forest and disagreement-cycle parity inequality at total weight
+94 in the unconditioned model. The actual-path prefix division excludes
+the Boolean completions. Four new generic results pass Lean; finite
+coverage, concrete model validity and exact coefficient arithmetic have
+separate independent audits, with end-to-end Lean assembly of those
+numerical records still absent. These scopes are distinguished in
+Sections~\ref{sec:linear219}--\ref{sec:prefix222}.
 The round-220 full-source review corrects historical proof references,
 notation and current-status statements; it does not rebuild the entire
 archived contributor chain.
@@ -11203,6 +11316,12 @@ fractional feasibility and product consistency}. Research milestone 220,
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Cycle parity, exact partner bounds
 and first-step restrictions}. Research milestone 221, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/221-square-parity}.
+
+\bibitem{research222}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Complete prefix certificates
+and a one-crossing ceiling for the saved parent class}.
+Research milestone 222, 15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/222-prefix-certificates}.
 
 \bibitem{barahona1986}
 F.~Barahona and A.~R.~Mahjoub. On the cut polytope.
