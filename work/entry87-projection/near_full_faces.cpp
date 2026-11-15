@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <fstream>
 #include <iostream>
+#include <string>
 #include <unordered_set>
 #include <vector>
 using U=std::uint64_t;
@@ -129,6 +130,78 @@ void marked_six_three(Catalogue& result,const std::array<Catalogue,3>& five,cons
     }
     std::cout<<"marked_six 3 "<<result.representatives.size()<<std::endl;
 }
+using Permutation6=std::array<unsigned char,64>;
+U transform6(U s,const Permutation6& map){
+    U result=0;
+    for(;s;s&=s-1)result|=U(1)<<map[std::countr_zero(s)];
+    return result;
+}
+std::vector<Permutation6> stabilizer6(U mask){
+    std::array<int,6> axes{0,1,2,3,4,5};
+    std::vector<Permutation6> group;
+    do{
+        Permutation6 perm{};
+        for(unsigned v=1;v<64;++v)perm[v]=perm[v&(v-1)]|(1<<axes[std::countr_zero(v)]);
+        U rotated=transform6(mask,perm);
+        std::array<U,64> moved{};moved[0]=rotated;
+        for(unsigned shift=0;shift<64;++shift){
+            if(shift)moved[shift]=flip(moved[shift&(shift-1)],std::countr_zero(shift));
+            if(moved[shift]!=mask)continue;
+            auto map=perm;for(auto& dest:map)dest^=shift;
+            group.push_back(map);
+        }
+    }while(std::next_permutation(axes.begin(),axes.end()));
+    return group;
+}
+void marked_seven(int t,const std::array<Catalogue,4>& six){
+    std::ofstream out("marked-seven-"+std::to_string(64-t)+".txt");
+    std::size_t marked=0,placements=0;
+    for(int h=0;h<=t/2;++h)for(const auto& a:six[h].representatives){
+        auto group=stabilizer6(a.s);
+        std::unordered_set<U> seen;
+        for(const auto& b:six[t-h].labelled){
+            if(!admissible(a,b)||seen.count(b.s))continue;
+            int c=a.c+b.c-std::popcount(a.s&b.s);
+            if(c<=0||!forest_pair(a,b,c))continue;
+            auto before=seen.size();
+            for(const auto& map:group)seen.insert(transform6(b.s,map));
+            auto orbit=seen.size()-before;
+            if(!orbit||group.size()%orbit)std::abort();
+            auto first_orbit=46080/group.size();
+            auto count=first_orbit*orbit*(2*h==t?1:2);
+            out<<a.s<<' '<<b.s<<' '<<c<<' '<<count<<'\n';
+            ++marked;placements+=count;
+        }
+    }
+    std::cout<<"marked_seven "<<64-t<<' '<<marked<<' '<<placements<<std::endl;
+}
+void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std::vector<F>,9>& four){
+    std::ofstream out("stream-marked-seven-"+std::to_string(64-t)+".txt");
+    std::size_t marked=0,placements=0;
+    for(int h=0;h<=t/2;++h)for(const auto& a:six[h].representatives){
+        U low=a.s&0xffffffffu,high=a.s>>32;
+        auto L=compatible_layers(low,a.sat&0xffffffffu,t-h,four);
+        auto R=compatible_layers(high,a.sat>>32,t-h,four);
+        auto group=stabilizer6(a.s);
+        std::unordered_set<U> seen;
+        for(int k=0;k<=t-h;++k)for(const auto& x:L[k])for(const auto& y:R[t-h-k]){
+            U cross=x.f.s&y.f.s;
+            if(!admissible(x.f,y.f)||(cross&((x.nonisolated&low)|(y.nonisolated&high))))continue;
+            U s=x.f.s|(y.f.s<<32);
+            if(seen.count(s))continue;
+            int c=a.c+x.residual+y.residual-std::popcount(cross);
+            if(c<=0||!forest_pair(a,F{s,0,0},c))continue;
+            auto before=seen.size();
+            for(const auto& map:group)seen.insert(transform6(s,map));
+            auto orbit=seen.size()-before;
+            if(!orbit||group.size()%orbit)std::abort();
+            auto count=(46080/group.size())*orbit*(2*h==t?1:2);
+            out<<a.s<<' '<<s<<' '<<c<<' '<<count<<'\n';
+            ++marked;placements+=count;
+        }
+    }
+    std::cout<<"stream_marked_seven "<<64-t<<' '<<marked<<' '<<placements<<std::endl;
+}
 int main(int argc,char**argv){
     int deficit=argc>1?std::stoi(argv[1]):1;
     if(deficit<0||deficit>2)return 2;
@@ -169,7 +242,13 @@ int main(int argc,char**argv){
             }
         std::cout<<"seven "<<64-t<<' '<<best<<' '<<witness_a<<' '<<witness_b<<std::endl;
     }
-    if(argc>2){
+    if(argc>2 && std::string(argv[2])=="marked"){
+        for(int t=0;t<=deficit;++t)marked_seven(t,six);
+    }else if(argc>3 && std::string(argv[2])=="streammarked"){
+        int last=std::stoi(argv[3]);if(last<0||last>2*deficit+1)return 2;
+        for(auto& cat:six){cat.seen.clear();cat.labelled.clear();cat.labelled.shrink_to_fit();}
+        for(int t=0;t<=last;++t)stream_marked(t,six,four);
+    }else if(argc>2){
         int last=std::stoi(argv[2]);if(last>7||(last>2*deficit+1&&deficit!=2))return 2;
         for(auto& cat:six){cat.seen.clear();cat.labelled.clear();cat.labelled.shrink_to_fit();}
         if(last>=6)marked_six_three(six[3],five,four);
