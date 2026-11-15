@@ -1,0 +1,114 @@
+{
+  "status": "SOURCE_PREPARED_NOT_COMPILED",
+  "input_pins": {
+    "E:\\Snake-in-a-box\\milestones\\227-shared-q8-construction\\data\\regions44.json": "c2c5b1465726c4e8c2ab142a1524e171cfeb992cb66d906475e9d1e2e766ec0b",
+    "E:\\Snake-in-a-box\\milestones\\227-shared-q8-construction\\data\\companions.json": "301a7bc1fd4aac979d86729d9ecde695be39a808b9dbb6617a3e33390eade8dd",
+    "E:\\Snake-in-a-box\\milestones\\227-shared-q8-construction\\data\\remaining-companions.json": "5116f98679a453bf59283246c3499712ad01b5638ad60d0983ff916be251603a",
+    "E:\\Snake-in-a-box\\milestones\\226-connected-replacement-search\\data\\search-summary.json": "7846398a8dcf8dfafca5c78229c30ed152760dafec6e11ac2a5afb8f7ea13e40"
+  },
+  "generator": "E:\\Snake-in-a-box\\milestones\\227-shared-q8-construction\\scripts\\prepare_template_facts.py",
+  "generator_sha256": "59fd77b6571ffc093ec48a998841d825a8b111eb788b1afb5c15b0e2b35c882e",
+  "source": "E:\\Snake-in-a-box\\milestones\\227-shared-q8-construction\\lean\\TemplateFacts227.lean",
+  "source_sha256": "e220c40a967fbed8242aca22be69d302b0384acd69895fbb8282b6ad47694b4e",
+  "source_bytes": 31042,
+  "source_imports": [
+    "Std"
+  ],
+  "context_ids": [
+    19,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    56,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    105,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117
+  ],
+  "initial_configuration_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "equality_groups": [
+    [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12
+    ],
+    [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13
+    ]
+  ],
+  "domination": [
+    17,
+    0
+  ],
+  "extraction": {
+    "contexts": "regions44.contexts[id].parts anchors and replacement_crossings",
+    "upper_lists": "regions44.contexts[id].parts[1].allowed filtered by v>=256, preserving order",
+    "first_anchors_and_edges": "companions.first_lower_anchors and first_lower_edges",
+    "initial_tasks": "companions.configurations[id] first_domain, lower_anchors, lower_edges, lower_domain"
+  },
+  "reports": [
+    "TemplateFacts227.remaining_face_budgets",
+    "TemplateFacts227.first_literal_class",
+    "TemplateFacts227.second_literal_class",
+    "TemplateFacts227.task17_contained_in_task0"
+  ],
+  "data_extraction_lean_checked": false,
+  "literal_facts_lean_checked": false,
+  "proof_method": "Boolean all for face/budget facts; literal equality by membership cases and reflexivity; domain containment through exact filtering of vertex212.",
+  "scope": "Prepared concrete finite facts only. No compiler, solver or traversal was run. Kernel acceptance remains pending. Extraction from JSON, enumeration coverage, solver infeasibility, and the complete snake interpretation remain separate obligations."
+}

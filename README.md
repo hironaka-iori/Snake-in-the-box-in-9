@@ -1,3 +1,11 @@
+# Current result after round 227
+
+The selected endpoint-24 construction is computationally excluded for two length-preserving replacement blocks of at most 44 edges. All 301 maximal width-44 contexts are covered. Fixing small upper-face portions reduces the last 42 contexts to 57 Q8 path-pair queries, all natively infeasible. Literal face and crossing conditions, repeated-task equalities and one domain containment are kernel checked; enumeration and solver contradictions retain native status. No new snake or global bound. The user requested a pause after publication.
+
+Read [the argument](milestones/227-shared-q8-construction/MATHEMATICAL_NOTE.md), [complete cover](milestones/227-shared-q8-construction/data/coverage44.json), [evidence](milestones/227-shared-q8-construction/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 226
 
 The selected endpoint-24 construction is computationally excluded for two replacement blocks of at most 43 edges. Width 44 leaves 42 contexts unresolved. A conditional boundary-change rule and face/port restrictions remove 50 of the previous 92 cases. Seven survivors share exactly one 109-vertex Q8 domain: the next target is a 43-edge induced path from 18 to 224, followed by 480 and a compatible second replacement. Five Lean modules check supporting implications and literal face counts; numerical solver exclusions retain their native status. No new snake or global bound. Goal ACTIVE.

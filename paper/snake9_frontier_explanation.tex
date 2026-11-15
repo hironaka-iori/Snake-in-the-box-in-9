@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 226}
+\date{Research state after round 227}
 \begin{document}
 \maketitle
 
@@ -450,44 +450,54 @@ containing context therefore excludes the smaller one with the same
 target. The outside-agreement implication has passed Lean; numerical
 exclusions still rely on the saved native calculations.
 
-The restricted exclusion now reaches two blocks of at most 43 edges.
-Of the 25 cases left by the preceding search, 24 have only 13 or 14
-available vertices in the second anchors' face, whereas that path needs
-44 vertices. Zero crossings would keep it in that face, so the only
-possible allocation is $(0,2)$. The zero-crossing implication and the
-concrete face counts have passed Lean. All 24 native queries are infeasible.
-The final case permits only $(0,1)$; its first step from 17 must go to 19
-or 49, and both branches are infeasible. All 294 width-43 contexts are covered.
+The restricted exclusion now covers two replacement blocks of at most
+44 edges. The earlier width-43 cover and boundary-change argument left
+42 of the 301 maximal width-44 contexts open. The final reduction fixes
+the short upper-face portions and solves the remaining path-pair problems
+inside $Q_8$.
 
-This exclusion constrains width 44. At least one replacement must change
-both original vertices immediately beside its anchors. Otherwise shorten
-each interval at an unchanged neighbour: the full candidate stays the
-same and both intervals now have 43 edges, contradicting their exclusion.
-The interval-contraction argument has passed Lean. Its numerical premise
-remains the native width-43 calculation. Using this restriction and face
-capacity leaves 46 width-44 cases open; a further crossing-port division
-excludes four, leaving 42 unresolved.
+The justification is direct. An induced path starting in the upper face
+and crossing that coordinate exactly twice has an induced upper prefix,
+one contiguous induced lower path and an induced upper suffix.
+The two upper pieces must be disjoint and nonadjacent. Across opposite
+faces, adjacency is equality of the lower projections, so the lower path
+must avoid every upper projection except its two joining endpoints.
+A separate lower path must avoid all those upper projections and must
+be disjoint and nonadjacent to the lower excursion. These conditions
+are sufficient as well as necessary, by checking pairs within and between
+the three pieces. The general gluing constructor was already checked
+in Lean.
 
-Seven surviving cases share a concrete lower-dimensional task: construct
-a 43-edge induced path from 18 to 224 in one fixed 109-vertex subgraph of
-$Q_8$, then cross to 480. Their first upper suffix is forced to be $(480)$;
-the alternative $(488,480)$ has been excluded. The same lower path must
-then admit one of seven compatible second replacements. No such pair
-has been found. A common-prefix search can address all seven contexts,
-rejecting a prefix only if every second context is impossible.
+In seven contexts the first lower path has 43 edges from 18 to 224,
+followed by 480. Enumerating the second upper portions gives 18
+configurations, which reduce to five representative lower-path tasks.
+All five are natively infeasible. Two task groups occur in all seven
+contexts and give exactly the same full vertex sequence when assembled;
+the differing interval boundaries are duplicate representations.
 
-For separated replacement intervals, a selected first prefix removes
-itself and its neighbours from every second allowed graph. Any compatible
-second path stays in its anchor's remaining component and needs enough
-vertices of both parities. Extending the prefix only shrinks that graph.
-These general statements have passed Lean; native component enumeration,
-block-chain pruning and search traversal retain separate verification
-limits. The finite exclusions give no global optimality conclusion
-or longer snake~\cite{research226}.
+In the other 35 contexts the first anchors are lower. Endpoint parity
+and the total crossing budget force zero first crossings: with budget
+two, the second path must use both crossings because its upper domain
+has fewer than the required 45 vertices. The first lower path now has
+44 edges. Complete upper enumeration gives 230 configurations, 79 exact
+groups and 52 representatives after domain containment. All 52 native
+queries are infeasible. The 42 new exclusions complete the 301-context
+cover; smaller blocks are included by padding with unchanged vertices.
+
+The new concrete face conditions, repeated task equalities and one
+domain containment passed Lean kernel checks. Data extraction, upper
+enumeration, domain preparation and the 57 solver contradictions retain
+their separate native status. An earlier two-minute direct search
+remained incomplete; its checkpoint is preserved and superseded by this
+cover. These results concern one fixed seed, endpoint 24, two
+length-preserving blocks and four coordinate crossings. They give no
+new snake or global optimality conclusion~\cite{research227}.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
-The current route varies both faces in a four-crossing construction.
+The completed two-block search excludes widths through 44 for the chosen
+endpoint and seed. Wider blocks, another endpoint or another seed are
+the next construction choices.
 Different parent classes and shorter compatible parents remain alternatives. Finding a new parent still requires a compatible joining construction.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
@@ -498,7 +508,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 226.
+in the companion manuscript and milestones through round 227.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -558,6 +568,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Residual capacity, boundary changes
 and shared eight-dimensional replacement paths}. Research milestone 226,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/226-connected-replacement-search}.
+
+\bibitem{research227}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Fixed upper portions and exact
+lower-dimensional replacement tasks}. Research milestone 227,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/227-shared-q8-construction}.
 
 \end{thebibliography}
 \end{document}

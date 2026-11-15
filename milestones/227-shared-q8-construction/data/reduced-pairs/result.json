@@ -1,0 +1,131 @@
+{
+  "status": "COMPLETE_QUERY_BATCH",
+  "source_sha256": "301a7bc1fd4aac979d86729d9ecde695be39a808b9dbb6617a3e33390eade8dd",
+  "script_sha256": "ec05c49bb0ea401d65457155f5b5420aa7c6132b62aabd76da44546c18703412",
+  "arguments": {
+    "tag": "reduced-pairs",
+    "seconds": 155.0,
+    "per_query": 30.0,
+    "ids": "0,1,14,15,16"
+  },
+  "results": [
+    {
+      "id": 0,
+      "status": "INFEASIBLE",
+      "domains": [
+        99,
+        99
+      ],
+      "edges": [
+        43,
+        33
+      ],
+      "model_sha256": "4f6b0268581e821beb58bc777f55f37444ee68191c7e0b710d301a2d58e7f517",
+      "iterations": [
+        {
+          "status": "INFEASIBLE",
+          "seconds": 2.3534034000000004,
+          "branches": 112137,
+          "conflicts": 37261
+        }
+      ],
+      "cycle_cuts": [],
+      "seconds": 2.39000000001397
+    },
+    {
+      "id": 1,
+      "status": "INFEASIBLE",
+      "domains": [
+        98,
+        99
+      ],
+      "edges": [
+        43,
+        32
+      ],
+      "model_sha256": "31bb8ae4bb5a504c87b34d030aea735ce823f030fa0d4b8040c2c71a0b9c960f",
+      "iterations": [
+        {
+          "status": "INFEASIBLE",
+          "seconds": 1.0206814,
+          "branches": 81827,
+          "conflicts": 20835
+        }
+      ],
+      "cycle_cuts": [],
+      "seconds": 1.0150000000139698
+    },
+    {
+      "id": 14,
+      "status": "INFEASIBLE",
+      "domains": [
+        98,
+        99
+      ],
+      "edges": [
+        43,
+        39
+      ],
+      "model_sha256": "047588b24f696b0ac815fd0e20b6b7b4c82e11ed1ca535dfaa66fbd71c7f3b69",
+      "iterations": [
+        {
+          "status": "INFEASIBLE",
+          "seconds": 0.32992330000000003,
+          "branches": 26448,
+          "conflicts": 7135
+        }
+      ],
+      "cycle_cuts": [],
+      "seconds": 0.34400000001187436
+    },
+    {
+      "id": 15,
+      "status": "INFEASIBLE",
+      "domains": [
+        98,
+        98
+      ],
+      "edges": [
+        43,
+        38
+      ],
+      "model_sha256": "612bb31a27889af330d0872045fc02e8ff02c57ae180691155c4117b40d15a8c",
+      "iterations": [
+        {
+          "status": "INFEASIBLE",
+          "seconds": 0.6492424,
+          "branches": 73607,
+          "conflicts": 14592
+        }
+      ],
+      "cycle_cuts": [],
+      "seconds": 0.6559999999881256
+    },
+    {
+      "id": 16,
+      "status": "INFEASIBLE",
+      "domains": [
+        97,
+        97
+      ],
+      "edges": [
+        43,
+        35
+      ],
+      "model_sha256": "6eb4c2fa1fa2927a4bd0c84c6157b0fd0aae3966a6adf042f739fbc70cf7016a",
+      "iterations": [
+        {
+          "status": "INFEASIBLE",
+          "seconds": 0.5586739000000001,
+          "branches": 65010,
+          "conflicts": 10796
+        }
+      ],
+      "cycle_cuts": [],
+      "seconds": 0.5629999999946449
+    }
+  ],
+  "witness": null,
+  "scope": "Only specified reduced Q8 pair tasks. Selected degree constraints are relaxed by disconnected cycles; cycles are cut whenever found. Native infeasibility, no Lean contradiction certificate.",
+  "seconds": 5.35899999999674
+}
