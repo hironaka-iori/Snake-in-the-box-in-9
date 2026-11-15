@@ -515,9 +515,9 @@ def sample_list(tag, out, per_kind=None, tail_s=100.0, seed='231'):
 LAM_MAX = (15268, 27)                       # minimum cycle mean of the farm data (eval232.py)
 
 
-def candidates(qs=(1, 2, 3, 4, 5, 6, 8, 9, 12, 16, 27)):
+def candidates(qs=tuple(int(x) for x in os.environ.get('QS', '1,2,3,4,5,6,8,9,12,16,27').split(','))):
     from fractions import Fraction as Fr
-    hi = Fr(*LAM_MAX); lo = Fr(1125, 2)
+    hi = Fr(*LAM_MAX); lo = Fr(os.environ.get('LAM_LO', '1125/2'))
     out = set()
     for Q in qs:
         for P in range(math.ceil(lo * Q), math.floor(hi * Q) + 1):
@@ -547,7 +547,7 @@ def exact_pass(W, budget, log_every=500):
 def cmd_scan(a):
     W = make_world(*LAM_MAX, 15)
     out = []
-    path = a.out or os.path.join(DATA, 'certplan231_scan%s.json' % ('_noc8' if NO_C8 else ''))
+    path = a.out or os.path.join(DATA, 'certplan231_scan%s%s.json' % ('_noc8' if NO_C8 else '', '' if TARGET == 231 else f'_m{TARGET}'))
     for lt in candidates():
         P, Q = lt.numerator, lt.denominator
         B = bits_of(P, Q)
@@ -931,6 +931,18 @@ def cmd_cost(a):
         for r, x in zip(pr, h):
             rows.append(dict(r, kind=kind if kind != 'plain' else 'plain', cal_hints=float(x * fam if kind != 'plain' else x)))
     rows.sort(key=lambda r: -r['cal_hints'])
+    dist = {}
+    for kind in ('plain', '5', 'c7', 'c8', 'all'):
+        hs = np.array([r['cal_hints'] for r in rows if kind == 'all' or r['kind'] == kind])
+        if not len(hs):
+            continue
+        bands = {}
+        for nm, lo, hi in (('<1M', 0, 1e6), ('1-10M', 1e6, 1e7), ('10-60M', 1e7, 6e7), ('>60M', 6e7, 1e30)):
+            m = (hs >= lo) & (hs < hi)
+            bands[nm] = [int(m.sum()), float(hs[m].sum())]
+        hs = np.sort(hs)[::-1]; T_ = hs.sum()
+        top = {f'top{p}%': float(hs[:max(1, int(round(len(hs) * p / 100)))].sum() / T_) for p in (1, 5, 20)}
+        dist[kind] = dict(n=len(hs), total=float(T_), bands=bands, **top)
     for r in rows[:40]:
         r['proj_replay_rss_GB'] = round(0.6 + (RSS_233[1] - 0.6) * r['cal_hints'] / 1e6 / RSS_233[0], 2)
         r['proj_kernel_h'] = round(r['cal_hints'] * KH_PER_HINT * 1.4, 1)   # large certs ran 1.4x the mean ms/hint
@@ -938,9 +950,16 @@ def cmd_cost(a):
                total_kernel_hours=[x * KH_PER_HINT for x in tot], total_olean_GB=[x * GB_PER_HINT for x in tot],
                total_certificates=sum(t['certificates'] for t in tab.values()),
                cnf_hours=sum(t['cnf_hours'] for t in tab.values()),
-               vs_233=dict(hints=tot[1] / H233), top=rows[:40], n_results=len(res))
+               vs_233=dict(hints=tot[1] / H233), distribution=dist, top=rows[:40], n_results=len(res))
     json.dump(out, open(os.path.join(DATA, f'certplan231_{a.lam}_cost.json'), 'w'), indent=1, default=float)
-    print(json.dumps({k: v for k, v in out.items() if k != 'top'}, indent=1, default=float))
+    print(json.dumps(dict(certificates=out['total_certificates'], hints_G=[round(x / 1e9, 2) for x in tot],
+                          olean_GB=[round(x, 1) for x in out['total_olean_GB']],
+                          kernel_h=[round(x) for x in out['total_kernel_hours']], cnf_h=round(out['cnf_hours']),
+                          kinds={k: dict(paid=v['paid_keys'], certs=v['certificates'], G=[round(x / 1e9, 2) for x in v['hints']])
+                                 for k, v in tab.items()}), default=float))
+    for k, v in dist.items():
+        print(k, v['n'], round(v['total'] / 1e9, 2), {b: [x[0], round(x[1] / 1e9, 2)] for b, x in v['bands'].items()},
+              {x: round(v[x], 3) for x in ('top1%', 'top5%', 'top20%')})
     for r in rows[:25]:
         print(r['kind'], r['key'], r.get('level'), r.get('source'), round(r['est_hints'] / 1e6, 1), round(r['cal_hints'] / 1e6, 1),
               r.get('proj_replay_rss_GB'))
@@ -1033,11 +1052,14 @@ def cmd_full(a):
     # giants: every kept plain key above a third of the cap
     a.min = a.max_cert_hints / 3; a.budget = a.giants_s
     hist['giants'] = giants_step(W, a)
+    ok, it, rng = W.check(); assert ok
+    pi0 = W.pi.copy()
     nforb, capped = apply_cap(W, a.max_cert_hints)
     ok, it, rng = W.check()
     hist['cap'] = dict(cap=a.max_cert_hints, plain_forbidden=nforb, share_capped=len(capped), ok=bool(ok), range=rng)
     L.log(f'cap {a.max_cert_hints:.3g}: {nforb} plain keys forbidden, {len(capped)} share ids capped; ok {ok} range {rng}')
     if not ok:
+        W.pi = pi0
         jobs, nunc = missing_tests(W, capped)
         hist['cap']['uncovered_transitions'] = nunc; hist['cap']['missing_jobs'] = len(jobs)
         p = os.path.join(DATA, f'split231_jobs_{a.tag}.jsonl.gz')
