@@ -1122,6 +1122,13 @@ def cmd_full(a):
     hist['dual0'] = run_dual(W)
     if not hist['dual0']['ok']:
         L.log(f'infeasible at {P}/{Q}/{B}: {hist["dual0"]}'); return
+    if True:                                  # feasibility under the cap on the full data, before any pruning
+        lv_b, ch_b = W.lvl.copy(), W.chosen.copy()
+        nf0, cap0 = apply_cap(W, a.max_cert_hints)
+        ok0, _, r0 = W.check()
+        hist['cap_full_data'] = dict(ok=bool(ok0), range=r0, plain_forbidden=nf0, share_capped=len(cap0))
+        L.log(f'cap on the full data: ok {ok0} range {r0}')
+        W.forbidden = set(); W.lvl = lv_b; W.set_chosen(ch_b); W.check()
     if not a.tag0:
         js = np.flatnonzero(W.chosen & ~W.kfree)
         nd, ncand = W.mark_derivable(js)
@@ -1132,6 +1139,8 @@ def cmd_full(a):
     hist['giants'] = giants_step(W, a)
     ok, it, rng = W.check(); assert ok
     pi0 = W.pi.copy()
+    # the cap acts on the full data: every pool key chosen again, every share id at its proved level
+    W.chosen[:] = True; W.recount(); W.lvl = np.maximum(W.lvl0, W.sF)
     nforb, capped = apply_cap(W, a.max_cert_hints)
     ok, it, rng = W.check()
     hist['cap'] = dict(cap=a.max_cert_hints, plain_forbidden=nforb, share_capped=len(capped), ok=bool(ok), range=rng)
