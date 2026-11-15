@@ -10,7 +10,7 @@ FIXES = [
     ('CanonicalShareAdapter', 'interval_cases i <;> simpa [broadBounds] using upper)',
      _RC5.format(v='i', p='omega') + ' <;> simpa [broadBounds] using upper)', 1, _IC),
     ('CriticalShareAdapter154', 'interval_cases i <;> simp [Nat.add_assoc,h1,h2,h3,h4,h5])',
-     _RC5.format(v='i', p='simp at hi; omega') + ' <;> simp [Nat.add_assoc,h1,h2,h3,h4,h5])', 2, _IC),
+     _RC5.format(v='i', p='first | omega | (simp at hi; omega)') + ' <;> simp [Nat.add_assoc,h1,h2,h3,h4,h5])', 2, _IC),
 ]
 for _c in ('7300', '7304', '7306'):
     FIXES += [
@@ -33,3 +33,18 @@ FIXES += [
 for _n in ('150', '153'):
     FIXES.append((f'ReplayRawChunks{_n}', 'List.all_map, ', 'List.all_map, Function.comp_def, ', 1,
                   '`List.all_map` now produces `f ∘ g`; unfold the composition so `h` matches the goal'))
+_W = ('`winOf` reduces through `Nat.xor`, which 4.35 core does not expose, so `simp` no longer '
+      'evaluates `winOf [0,1,2,0,3,2]`; the window is rewritten first by a kernel evaluation')
+FIXES += [
+    ('ShareFromCore150', '  have href : RefutedShare (winOf [0,1,2,0,3,2]) broadBounds 12 15 := by\n',
+     '  have href : RefutedShare (winOf [0,1,2,0,3,2]) broadBounds 12 15 := by\n'
+     '    rw [show winOf [0,1,2,0,3,2] = [0,1,3,7,6,14,10] by decide +kernel,\n'
+     '      show broadBounds = [(0,21),(0,21),(0,21),(0,21),(0,21)] from rfl]\n', 1,
+     _W + '; likewise `simp only [broadBounds]` stops at `List.replicate 5 (0,21)`'),
+    ('CriticalShareAdapter154', '      [(4,4),(0,4),(4,4),(0,5),(3,3)] 12 16 := by\n    simpa only',
+     '      [(4,4),(0,4),(4,4),(0,5),(3,3)] 12 16 := by\n'
+     '    rw [show winOf [0,1,2,0,3,2] = [0,1,3,7,6,14,10] by decide +kernel]\n    simpa only', 1, _W),
+    ('DirectionWindowBridge7', '    CoverH T hkeys := by\n  simpa [coverHb] using h\n',
+     '    CoverH T hkeys := by\n  simpa [coverHb, CoverH] using h\n', 1,
+     '`simpa` no longer unfolds the `def` `CoverH` in the goal'),
+]
