@@ -52,7 +52,7 @@ def catalogue():
     return [dict(forest=key, occurrences=occ) for key, occ in cases.items()]
 
 
-def decide(row, index, target, budget, checker=None, new=False, endpoint=None):
+def decide(row, index, target, budget, checker=None, new=False, endpoint=None, far_low=None):
     a,b = row["forest"]
     fixed = set(a) | set(b)
     tips = {a[0],a[-1],b[0],b[-1]}
@@ -73,6 +73,10 @@ def decide(row, index, target, budget, checker=None, new=False, endpoint=None):
         for w in end:
             if (tip.bit_count()+w.bit_count())%2 != target%2:
                 clauses.append([-end[w]])
+    if far_low is not None:
+        mask,value=far_low
+        for w in end:
+            if w&mask!=value:clauses.append([-end[w]])
     fixed_odd = sum(v.bit_count()%2 for v in fixed)
     evens = [use[v] for v in use if v.bit_count()%2 == 0]
     if target%2:
@@ -94,6 +98,8 @@ def decide(row, index, target, budget, checker=None, new=False, endpoint=None):
     name = f"three-cross-face-{index}-{target}-{budget}" + ("-new" if new else "")
     if endpoint is not None:
         name+=f"-tip{endpoint}"
+    if far_low is not None:
+        name+=f"-far{mask}-{value}"
     known = {canonical_word(r["vertex_sequence"]):i for i,r in enumerate(json.loads(BANK.read_bytes()))} if new else {}
     blocked_known = []
     status = "OPEN"
@@ -142,6 +148,8 @@ def decide(row, index, target, budget, checker=None, new=False, endpoint=None):
                     stats=sat.accum_stats(),cycles=removed,witness=witness,blocked_known=blocked_known)
         if endpoint is not None:
             report["fixed_endpoint"]=sorted(tips)[endpoint]
+        if far_low is not None:
+            report["far_low"]=list(far_low)
         if checker and status=="UNSAT":
             from export_drat import checked_export
             report.update(checked_export(sat,clauses,Path(name+"-proof"),checker))
