@@ -1,0 +1,180 @@
+{
+  "round": 220,
+  "status": "PROGRESS",
+  "previous_goal_turn": "PROGRESS",
+  "started_utc": "2026-11-15T02:05:05.165125+00:00",
+  "utc": "2026-11-15T02:16:57.816243+00:00",
+  "goal_state": "ACTIVE",
+  "pause_policy": "Continue; respect direct user pause instructions. Contributor changes alone cannot trigger a pause.",
+  "email_sent": false,
+  "email_limitation": "No sending connection available.",
+  "interval": [
+    191,
+    233
+  ],
+  "contributor_revision": "b0521e1d14fd52c62db4cdeccc356b70a623eb82",
+  "contributor_changed": false,
+  "independent_233_rebuild": false,
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "fixed_parent_97_edge_exclusions_with_exact_weights": true,
+  "fixed_parent_one_crossing_ceiling": 195,
+  "exact_target94_both_roots": true,
+  "all_cycle_and_forest_barrier": true,
+  "parity_strengthened_lp_solved": false,
+  "accepted_new_modules": 2,
+  "theorem_reports": 7,
+  "proofs": [
+    {
+      "module": "Forest220",
+      "receipt": "milestones\\220-subset-forest\\data\\Forest220-audit.json",
+      "sha256": "d3783042fef8077362851b4e362d3729fc45357cd6ba0eff212a52d06d968bc8",
+      "reports": 4
+    },
+    {
+      "module": "SquareParity220",
+      "receipt": "milestones\\220-subset-forest\\data\\SquareParity220-audit.json",
+      "sha256": "464870411e01bc0f926b84f3fc85ce3698c1069c4698fab2a1b106f6d52ccccc",
+      "reports": 3
+    }
+  ],
+  "audit_hashes": {
+    "forest": "57ace9b15ef58fccaa716bf7c3167b39dd842c5f44f148fcc625c3e22c51ffad",
+    "parity": "62df13a4449fe21e1c12628f9b62acae3c49a94cc6b05c65d980575ecbba34f8"
+  },
+  "forest_summary": [
+    {
+      "root": 0,
+      "status": "OPTIMAL_NATIVE",
+      "objective": 97.8408387327137,
+      "exact_upper": [
+        97840921,
+        1000000
+      ],
+      "seconds": 0.35899999999674037,
+      "added_subset_count": 25,
+      "model_sha256": "f7be7bead12ad911b045ec2dbb48854163c0348f0a895efd4442cfad17b7918a",
+      "solver_version": "Glop solver v9.15.6755",
+      "no_new_violations_at_tolerance": true
+    },
+    {
+      "root": 78,
+      "status": "OPTIMAL_NATIVE",
+      "objective": 97.35970422689293,
+      "exact_upper": [
+        97359759,
+        1000000
+      ],
+      "seconds": 0.3129999999946449,
+      "added_subset_count": 25,
+      "model_sha256": "45e8964ec7f46585538279d7783f638763f78ca5b085d5f334603366419166eb",
+      "solver_version": "Glop solver v9.15.6755",
+      "no_new_violations_at_tolerance": true
+    }
+  ],
+  "rational_summary": [
+    {
+      "root": 0,
+      "objective": [
+        22588258102073,
+        230867380070
+      ],
+      "objective_float": 97.84083873271373,
+      "basic_variable_count": 444,
+      "minimum_cycle_cost": [
+        1,
+        1
+      ],
+      "all_cycle_inequalities": true,
+      "maximum_denominator_bits": 39,
+      "seconds": 1.0939999999827705,
+      "certificate_sha256": "88b7901e1b2aaf0fa3628b50fc6c230b355064836fcf17e1b36b2d9a237334e7"
+    },
+    {
+      "root": 78,
+      "objective": [
+        3545809907526,
+        36419686519
+      ],
+      "objective_float": 97.35970422689293,
+      "basic_variable_count": 447,
+      "minimum_cycle_cost": [
+        1,
+        1
+      ],
+      "all_cycle_inequalities": true,
+      "maximum_denominator_bits": 36,
+      "seconds": 1.172000000020489,
+      "certificate_sha256": "6e985b0231b6c91521eb00b3279eee6da00a026ff004fd08e005bc29b7692a0b"
+    }
+  ],
+  "flow_summary": [
+    {
+      "root": 0,
+      "all_subset_inequalities": true,
+      "flow_count": 158,
+      "violations": 0,
+      "scale": 461734760140,
+      "seconds": 0.2029999999795109,
+      "certificate_sha256": "fc54ad761dc91070a8e8eab47d2cdbdc9386fff54712a8a2b9df6c7b732f097b"
+    },
+    {
+      "root": 78,
+      "all_subset_inequalities": true,
+      "flow_count": 158,
+      "violations": 0,
+      "scale": 36419686519,
+      "seconds": 0.17199999999138527,
+      "certificate_sha256": "13fbb73f7de539912c786b78a743fe2392df223fbdb31be3e254ca67ce277fa0"
+    }
+  ],
+  "frozen_parent_search_states": {
+    "22": {
+      "path": "milestones\\217-long-parent-search\\data\\case-22\\state.json",
+      "sha256": "79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452"
+    },
+    "23": {
+      "path": "milestones\\211-subset-capacity\\data\\case-23\\state.json",
+      "sha256": "3b7733ba9ad904608c050ed63199b13a295c56db6d3b1ded909ef13be38d5e7d",
+      "state_jobs": 296,
+      "pending": 11,
+      "state_nodes": 3721372,
+      "counter_scope": "historical cumulative"
+    },
+    "24": {
+      "path": "milestones\\209-slice-capacity\\data\\case-24\\state.json",
+      "sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "state_jobs": 150,
+      "pending": 8,
+      "state_nodes": 9625900,
+      "counter_scope": "historical cumulative"
+    },
+    "9": {
+      "path": "milestones\\209-slice-capacity\\data\\case-9\\state.json",
+      "sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "state_jobs": 150,
+      "pending": 3,
+      "state_nodes": 8142891,
+      "counter_scope": "historical cumulative"
+    }
+  },
+  "six_coordinate_unresolved": 27,
+  "software_tests_created_or_run": false,
+  "compile_success": true,
+  "full_paper_review": {
+    "before_main_lines": 10979,
+    "before_frontier_lines": 620,
+    "reports": {
+      "review-upper-paper.md": "c7492e5b4ee38feedd4fb4843aa9a93f31f16b6fe328da02820720b5e4b61378",
+      "review-construction-paper.md": "55006b566581f19e8e133fa3b5206572950fa15a19206aead2c1736c097aab5c",
+      "review-frontier.md": "587ad3ca3cb02577b1b3bcae75959c6b8d957dfa2190015a6a848a971346ad3f",
+      "review-final-documents.md": "fc0328b52efd5c22744dc40d45b0ceebb1870ba2a3082260aac69e98fb47485e",
+      "forest-proof-review.md": "8c9ebe0a0b114113c32bb7cb2cc1cf656f8690a93748f5020240cd0e4ece70e1",
+      "forest-audit-review.md": "b6873bcf2a164659120ddcf2b2ff8764aa6e3ca9de8e8280b5f7587ba5b7f0c1",
+      "parity-review.md": "efa45e4a51520fae7c55130b9b5bc226f985a95b9e606d74030e3aab187ca8e1"
+    },
+    "next_scheduled_round": 230
+  },
+  "scope": "Generic Lean results and independent exact numerical audits; concrete array assembly remains separate.",
+  "next_step": "Add all eight Boolean square-parity inequalities on each allowed coordinate square to both round-220 forest models, using d_uv=x_u+x_v-2y_uv. Preserve original rows and input certificates. Reoptimize both roots under the existing resource guard and separate newly violated subset constraints. Check an exact residual upper certificate. If the bound still exceeds 94, reconstruct an exact rational point and verify every asserted complete inequality family before claiming another limitation. Removing the present weight-94 points does not exclude every such point. Consider longer cut-parity cycles after the square calculation, using the classical two-copy shortest-path separation. SquareParity220 checks generic square validity; numerical row assembly is new work. Full-paper review completed in round 220; the next scheduled review is round 230. Avoid repeating an unchanged long Boolean query."
+}

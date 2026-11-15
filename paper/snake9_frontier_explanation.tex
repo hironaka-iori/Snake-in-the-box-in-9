@@ -10,604 +10,339 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 219}
+\date{Research state after round 220}
 \begin{document}
 \maketitle
 
 \section{Question and evidence}
 Let $a(n)$ be the largest edge length of an induced path in the binary
-hypercube $Q_n$. An induced path has distinct vertices, with adjacency
-exactly between consecutive indices. A length-$m$ snake has $m+1$ vertices.
+hypercube $Q_n$. Its vertices are distinct, and two are adjacent exactly
+when their path indices are consecutive. A length-$m$ snake has $m+1$ vertices.
 
-The verified $Q_9$ construction has 191 edges. The contributor's completed
-theorem gives $a(9)\le233$, with no remaining certificate or floor premise
-and a successful saved final assembly and axiom audit. Thus the maintained
-interval is $191\le a(9)\le233$. An independent full rebuild remains
-pending. The source is pinned to \texttt{b0521e1d}, with the audit at
-\texttt{b65d30ca}~\cite{bound233archive}. The alternative conditional 234
-and relaxed 233 arguments below retain their own unproved premises.
-
-The known values through dimension eight are
+The maintained interval is
 \[
-1,2,4,7,13,26,50,98.
+\boxed{191\le a(9)\le233.}
 \]
-The prediction $a(9)=196$ comes from a numerical continuation of these
-values. Another continuation agrees through dimension eight and predicts
-195; the recent relations $50=2\cdot26-2$ and $98=2\cdot50-2$ instead
-suggest 194 as a construction target. None is a recurrence theorem.
-A proof of 196 would require a 196-edge witness and exclusion of every
-197-edge snake: any longer snake would contain a 197-edge prefix.
+The lower bound comes from a verified construction. The contributor's
+completed 233 theorem has a saved final assembly and standard-axiom audit,
+with no remaining certificate or share-floor premise. Its source is pinned
+to \texttt{b0521e1d} and audit to \texttt{b65d30ca}; a fresh independent
+full rebuild remains pending~\cite{bound233archive}.
 
-The argument below has two branches. Counting coordinate squares seeks
-a universal upper bound. Compatible lower-dimensional paths and changes
-to their entire embeddings seek a better construction. Restricted
-search failures do not join these branches into an optimality proof.
+The known values $1,2,4,7,13,26,50,98$ do not determine the next term.
+Numerical continuations suggest 194, 195 or 196, without proving a recurrence.
+To establish 196 exactly requires both a 196-edge witness and exclusion
+of every 197-edge snake; every longer snake contains such a prefix.
+The following counting and construction arguments address different parts
+of this task. Restricted search exclusions do not establish the global optimum.
 
-\section{The exact square budget}
-Assume $m\ge1$ and put $v=m+1$. Let $s_j$ count coordinate squares
-containing exactly $j$ selected vertices, and put $T=s_1$.
-There are $4608$ squares, and each selected vertex belongs to 36.
-A snake contains no fully selected square. Its three-selected-corner
-squares correspond exactly to its internal vertices, so $s_3=v-2$.
-The two counts
+\section{The square budget and the completed upper bound}
+For a nontrivial snake put $v=m+1$, and let $s_j$ count coordinate squares
+containing exactly $j$ selected vertices. Write $T=s_1$.
+There are 4608 squares, each selected vertex lies in 36, and no square
+is fully selected. Three-selected-corner squares correspond exactly to
+internal path vertices, so $s_3=v-2$. Consequently
 \[
-s_0+s_1+s_2+s_3=4608,\qquad s_1+2s_2+3s_3=36v
+s_0+s_1+s_2+s_3=4608,\qquad s_1+2s_2+3s_3=36v,
 \]
-therefore give
+and subtraction gives the exact identity
 \[
 \boxed{T+2s_0+35(m+1)=9214.}
 \]
-This is an exact identity for every nontrivial snake.
 
-Write $\alpha_i$ for the singleton-square count at path vertex $i$.
-The established local geometry gives positive counts, endpoint counts
-at least four, internal neighbours of a count one at least four, and
-excludes three consecutive internal twos. These imply sums at least
-14 and 16 for six and seven consecutive internal counts.
+If $\alpha_i$ counts singleton squares at path vertex $i$, local geometry
+gives positive counts, endpoint counts at least four, internal neighbours
+of a count one at least four, and no three consecutive internal twos.
+These restrictions imply sums at least 14 and 16 on six and seven
+consecutive internal vertices. For example, every triple sums to at least
+six, with equality only at $(1,4,1)$; the neighbouring count restriction
+handles that exceptional triple when combining blocks.
+The archived count-only potential and omitted boundary counts yield
+$T\ge4m-13$, hence $39m+2s_0\le9192$. This historical route gives 235;
+its potential retains a separate independent-rebuild requirement.
 
-For the brief count argument, adjacent pairs contribute at least four.
-A triple contributes at least six, with equality only at $(1,4,1)$;
-four counts contribute at least nine. Split six counts into two triples.
-If one is $(1,4,1)$, the next count contributes at least four and the
-remaining pair at least four; otherwise the triples contribute seven
-each. For seven counts, use a four-plus-three split and the same
-neighbour restriction in the exceptional triple case.
-
-The archived count-only potential supplies
-\[
-4(m-7)\le\sum_{j=7}^{m-1}\min(6,\alpha_j)+7
-\]
-for $m\ge7$. Adding the six omitted internal counts and the two endpoints
-gives $T\ge4m-13$. Shorter nontrivial paths satisfy this weaker estimate
-directly. Hence
-\[
-\boxed{39m+2s_0\le9192.}
-\]
-This historical argument yields 235, numerically superseded by the
-completed bound 233. Under its own premises, a hypothetical 235-edge
-snake must have $s_0\le13$.
-Proving at least fourteen empty squares in that case would yield 234.
-That assertion was an unresolved premise of this historical route; the
-completed 233 theorem excludes length 235 independently. The strengthened boundary deduction
-is checked in Lean; the archived walk premise retains its separate
-independent-rebuild requirement.
-
-\section{Empty-square shares and upper bounds}
-Let $S$ be the selected vertex set. For a cube vertex $q$, let $e(q)$ count its incident empty squares and
-$d(q)$ its selected neighbours. A selected vertex $x$ receives the share
+Empty squares retain information discarded by that count-only estimate.
+For a cube vertex $q$, let $e(q)$ count its incident empty squares and
+$d(q)$ its selected neighbours. Each selected vertex $x$ receives
 \[
 \sigma_{12}(x)=\sum_{q\sim x}
  \left\lfloor\frac{12e(q)}{d(q)}\right\rfloor.
 \]
-Every denominator in this sum is positive. Let $L$ be the sum of
-$12e(q)\bmod d(q)$ where $d(q)>0$, and of $12e(q)$ where $d(q)=0$.
-The division algorithm and the four corners of each empty square give
+All denominators appearing here are positive. Let $L$ sum the remainders
+$12e(q)\bmod d(q)$ for $d(q)>0$, and $12e(q)$ for $d(q)=0$.
+Division with remainder and the four corners of every empty square give
 \[
-\sum_{x\in S}\sigma_{12}(x)+L=48s_0.
+\sum_{x\in S}\sigma_{12}(x)+L=48s_0,\qquad
+G+840(m+1)+L=221136,
 \]
-With $G=24T+\sum_{x\in S}\sigma_{12}(x)$, the square identity becomes
-\[
-G+840(m+1)+L=221136.
-\]
+where $S$ is the selected vertex set and $G=24T+\sum_{x\in S}\sigma_{12}(x)$.
 
-\subsection{The completed contributor comparison}
-For $m\ge7$, let $W$ be the original B233 total window weight. The completed
-local certificates, share floors and finite potential give
+In the completed contributor comparison, its total window weight $W$
+satisfies, for $m\ge7$,
 \[
 520(m-7)\le W+1023,\qquad W+4200m\le1099800.
 \]
-Therefore
+The checked local certificates, share floors and finite potential therefore give
 \[
 4720m\le1104463<4720\cdot234=1104480,
 \]
-so $m\le233$; shorter snakes satisfy the bound directly.
-The final audit reports only Lean's standard axioms. It reused 172 of 173
-chain modules, with external floor objects and nineteen cloud-built
-certificates. A fresh independent rebuild and recheck of imported objects
-remain pending~\cite{bound233archive}.
+so $m\le233$. Shorter paths already satisfy this bound. The saved assembly
+reuses imported objects and cloud-built certificates; their fresh independent
+rebuild remains distinct from the successful saved audit~\cite{bound233archive}.
 
-\subsection{A separate retained comparison}
-For $m\ge9$ in the retained nine-transition comparison, let $W$ be the total
-window weight. Assume that each window weight is bounded by its stated
-physical singleton and share contributions. Seven omitted internal
-counts and the two endpoints contribute at least 24, and each share
-occurs in at most five windows. Thus
+The alternative retained comparison uses $m-8$ windows. Under its own
+local-weight and state-walk hypotheses, boundary counting and telescoping give
 \[
-W+2880\le5G,\qquad W+4200m+5L\le1098600.
+(4200+\mu)m+5L\le1098600+8\mu+R,
 \]
-If every edge of the actual state walk satisfies
-$w(u,v)+p(u)-p(v)\ge\mu$, with potential range at most $R$, telescoping gives
-$\mu(m-8)\le W+R$. Consequently
+where every state edge has weight plus potential drop at least $\mu$,
+and the potential has range at most $R$. Its conditional 234 result,
+and a separate relaxed 233 comparison, still require their stated local
+certificates and geometric and graph interpretations. Neither improves the
+maintained interval. Their unresolved premises do not belong to the completed
+contributor theorem; detailed profiles remain in the companion manuscript.
+
+\section{Joining lower-dimensional paths}
+Cutting at the $k$ edges in one coordinate leaves $k+1$ path components
+in the two faces, with total internal length $m-k$.
+The saved representatives have decompositions
 \[
-\boxed{(4200+\mu)m+5L\le1098600+8\mu+R.}
+26=2+13+9+2,\quad 50=18+24+6+2,\quad
+98=8+25+10+25+26+4,
 \]
+where each final term counts crossings. These describe particular witnesses.
 
-The sufficient pending share floors on
-$012034,012301,012340,012345$ are $(15,14,14,14)$.
-For the specified retained graph, exact integer scans support
-$\mu=4454/9$ and $R=5421/9$, giving
+Paths of lengths $p,q$ in opposite faces join into a snake of length
+$p+q+1$ if their projections meet only at their designated joining endpoint.
+Cross-face adjacency requires identical projections, which proves the claim.
+For a two-crossing construction, take disjoint, nonadjacent outer paths
+$P,R$ in one face and a middle path $Q$ in the other. Each projected
+intersection must consist of one endpoint of the corresponding outer path
+and a different endpoint of $Q$. The resulting length is
+$|E(P)|+|E(Q)|+|E(R)|+2$, explaining the checked $18+24+6+2=50$ example.
+
+There is a restriction on modifying two positive-length parents $p,q$.
+Delete $D$ original vertices and add $A$ new ones. Let $b$ count deleted
+original endpoints, $e$ original edges deleted at both ends, and $H$ final
+within-face edges touching a new vertex. If the result has length $m$
+and $k$ crossings, vertex and edge counting give
 \[
-42254m+45L\le9928453.
+m+k+b+e+H=p+q+2+2A,\qquad m+k\le2a(n)+2+2A.
 \]
-Since $235\cdot42254=9928453+1237$, these premises imply $m\le234$.
-The local Boolean refutations do not yet supply every required Lean
-contradiction, geometric interpretation, count restriction, reference
-exclusion and complete graph certificate. The conclusion remains
-conditional and is numerically superseded by the completed 233 theorem.
-The older accepted-key graph uses a different catalogue
-and potential; its outstanding obligations must not be substituted
-for this retained graph's own requirements.
-Snakes with fewer than nine edges already satisfy these candidate bounds.
+Indeed, deletion removes $2D-b-e$ original edges, and the final vertex
+count is $p+q+2-D+A=m+1$.
+Without additions, a 196-edge lift from parents of length at most 98
+uses lengths 98 and 97 without deletion, or two lengths 98 with one
+deletion; it permits at most two crossings. These are necessary conditions.
 
-Uniform floors fourteen instead give
-$42248m+45L\le9928364$. At $m=235$ this forces $L\le1$.
-A universal proof of $L\ge2$ would complete that alternative, but the
-loss-zero and loss-one cases remain unresolved. Small-loss geometry
-does show that $L\le95$ forces every cube vertex to have a selected
-neighbour; domination alone does not exclude either case.
+The saved 98-edge $Q_8$ representative crosses every coordinate at least
+four times. Its only four-crossing split has two 25-edge components in
+one face, using 52 vertices, whereas a single $Q_7$ snake has at most 51.
+The counting restriction excludes all other splits from a deletion-only
+two-parent lift. This representative therefore already requires a more
+general construction than deletion from two $Q_7$ parents.
 
-A separate relaxation of the completed contributor comparison uses
-$m-7$ windows and
-$520(m-7)\le W+1023$. The stronger boundary permits each table share
-to exceed its physical counterpart by at most four while still giving
-\[
-4716m+5L\le1103475.
-\]
-At $m=234$ the left side is at least $1103544$, so the stated premises
-would also give 233. The relaxed share coverage and its actual-snake
-integration remain separate obligations. These unresolved requirements
-belong to this modified argument; the original contributor theorem is complete.
-
-\section{What transfers from dimensions six and seven}
-Cutting a snake at its $k$ edges in one coordinate gives $k+1$ path
-components in the two faces, with total internal length $m-k$.
-For the saved lower-dimensional representatives,
-\[
-26=2+13+9+2,\quad
-50=18+24+6+2,\quad
-98=8+25+10+25+26+4.
-\]
-The final term in each expression counts crossings. These are
-decompositions of particular witnesses, without a classification of
-all optimal lower-dimensional snakes.
-
-Two paths placed in opposite faces have a cross-edge exactly where
-their projections coincide. Therefore paths of lengths $p,q$ sharing
-only their designated joining endpoint give $p+q+1$ edges after one
-crossing. More generally, place paths $P,R$ in one face and $Q$ in the
-other. Suppose $P,R$ are disjoint and nonadjacent. Require the projected
-intersections of $Q$ with them to be singletons consisting of the two
-distinct endpoints of $Q$ and one endpoint of each outer path. The result has
-$|E(P)|+|E(Q)|+|E(R)|+2$ edges. Within-face separation and the two
-prescribed projected intersections exclude every chord.
-This explains the checked $18+24+6+2=50$ construction.
-
-The 98-edge representative crosses every coordinate at least four
-times. At its four-crossing split, one face has two 25-edge paths,
-hence 52 vertices. A single $Q_7$ snake has at most 51 vertices.
-This is why passing to higher dimension requires compatible collections
-of paths rather than simply placing two maximum parents together.
-
-There is also a general accounting restriction. Start with two
-positive-length parents of lengths $p,q\le a(n)$ in opposite faces.
-Delete $D$ original vertices and add $A$ new vertices. Suppose the
-final induced graph is a snake of length $m$ with $k$ crossings.
-Let $b$ count deleted original endpoints, $e$ original within-face
-parent edges deleted at both ends, and $H$ final within-face edges
-touching a new vertex.
-Then
-\[
-m+k+b+e+H=p+q+2+2A,\qquad
-\boxed{m+k\le2a(n)+2+2A.}
-\]
-Indeed, deletion removes $2D-b-e$ original edges, while the final vertex
-count gives $p+q+2-D+A=m+1$. Substitute this into the final edge count.
-
-Without additions, a 196-edge $Q_9$ construction from two parents of
-length at most 98 permits at most one deletion and two crossings.
-It must use lengths 98 and 97 without deletion, or two lengths 98
-with one deletion. An internal deletion splits one parent into two
-pieces; the other must join them at exactly two retained projected
-intersections. This is a necessary compatibility problem, not an
-existence result.
-
-For the saved 98-edge $Q_8$ path, deletion from two $Q_7$ parents would
-require $k\le4$. Every split except one violates this; the remaining
-split has the impossible 52-vertex face. Thus that particular
-$7\to8$ construction already lies outside deletion-only two-parent lifts.
-These restrictions explain why the numerical doubling pattern does not
-supply an $8\to9$ construction.
-
-\section{Whole-snake transformations and their limits}
-Write a vertex as $(z,u)$ for a coordinate partition. Assign an
-isometry $g_z$ of the free-coordinate cube to each retained-coordinate
-slice, and map $(z,u)$ to $(z,g_z(u))$. This is one map on the whole
-cube. Within a slice it preserves distances; between non-neighbouring
-slices no edge can arise.
-
+\section{Changing the embedding of an entire snake}
+Partition coordinates and write vertices as $(z,u)$. Assign an isometry
+$g_z$ of the free-coordinate cube to each retained slice, and map
+$(z,u)$ to $(z,g_z(u))$. Within-slice distances are preserved, and
+nonadjacent slices cannot produce cube edges.
 For adjacent slices with selected free-word sets $B_z,B_w$, put
-$h=g_z^{-1}g_w$. Every path edge and nonedge is preserved exactly when
+$h=g_z^{-1}g_w$. All remaining edges and nonedges are preserved exactly when
 \[
 h(u)=u\quad(u\in B_z\cap B_w),\qquad
 h(B_w\setminus B_z)\cap B_z=\varnothing.
 \]
-The first condition retains the existing crossings. The second
-prevents new projected coincidences. These account for all remaining
-pairs, proving the whole-snake criterion.
+The conditions retain old crossings and forbid new projected coincidences.
 
-Controlled reflections and block involutions are subfamilies.
-They can change a saved 50-edge $Q_7$ parent to a different cube class.
-For the saved 98-edge $Q_8$ parent, a complete native census over all
-254 nontrivial coordinate partitions finds no new class even when
-each slice has an arbitrary isometry. Lean has checked the generic
-criterion and complete coverage of the literal finite tables.
-Connecting those tables and all surviving leaves to the geometry
-remains unfinished; the geometric census conclusion retains native status.
+This family produces a different cube class from the saved 50-edge parent.
+For the saved 98-edge parent, the complete native census over all 254
+nontrivial coordinate partitions produces no new class. Lean checks the
+generic criterion and coverage of the literal finite tables. Their complete
+geometric interpretation and the surviving leaves retain native status.
 
-With two free coordinates, a written classification uses a possible
-uniform parity offset followed by independent component switches to
-describe every target with the same indexed retained words. Its complete
-Lean assembly remains pending. Connected active graphs force one global
-free-coordinate isometry. In three free coordinates, every injective
-map on a selected subset that preserves parity, adjacency and nonadjacency
-extends to an isometry: its action is an injective partial permutation
-of the four antipodal-pair labels. Thus these changes are included in
-the slice-isometry family. The extension principle fails in four
-coordinates, where induced paths with the same indexed parity can
-have different endpoint distances. This motivates unrestricted
-coordinate-history searches.
+With two free coordinates, a written classification uses a uniform parity
+offset followed by component switches; its complete Lean assembly is pending.
+With three free coordinates, an injective partial map preserving parity,
+adjacency and nonadjacency extends to an isometry: it permutes antipodal-pair
+labels consistently. This extension fails in four coordinates, where equal
+indexed parity patterns can have different endpoint distances. Arbitrary
+coordinate histories therefore allow changes beyond slice isometries.
 
-\section{The current construction frontier}
-For the saved source, retain the base word $z_i$ at each index and
-allow arbitrary free words $u_i$. The exact condition is
+\section{Coordinate histories and finite capacity}
+Retain the source base word $z_i$ and choose arbitrary free words $u_i$.
+For Hamming distance $d$, the exact path conditions are
 \[
 d(z_i,z_j)+d(u_i,u_j)
-\begin{cases}
-=1,&j=i+1,\\
-\ge2,&j\ge i+2.
-\end{cases}
+\begin{cases}=1,&j=i+1,\\ \ge2,&j\ge i+2.\end{cases}
 \]
-Hamming distance adds across the blocks. The second condition excludes
-both repeats and chords. Consecutive retained-coordinate edges force
-one constant free word, so their indices can be merged into maximal
-intervals while keeping every pair constraint. Successive intervals
-are joined by a free-coordinate edge, so their word parities alternate.
+They exclude both repeats and chords. Consecutive retained-coordinate steps
+force a constant free word, so merge their maximal index intervals while
+retaining every pair constraint. Each interval change flips one free bit;
+interval word parities alternate. Translation, coordinate permutation and
+lexicographic representatives remove symmetry without losing an orbit.
 
-Translation and coordinate permutation normalize the initial free
-word and first free transition. Every residual permutation orbit has
-a lexicographically least tuple, so selecting these representatives
-preserves all possibilities up to the allowed symmetry. All 70
-four-free-coordinate models and all 56 five-free-coordinate models
-exhaust after explicitly source-isometric assignments are excluded.
-At the native-enumeration evidence level, a different class of this
-particular source requires at least six changed histories, with the
-same length and index matching. This does not classify all 98-edge
-snakes.
+For this indexed 98-edge source, all 70 four-free-coordinate and all 56
+five-free-coordinate models exhaust after source-isometric assignments are
+excluded. This native result concerns the specified source and index matching.
+For six free coordinates, retained pair $(1,4)$ also exhausts; 27 choices
+remain unresolved. Four have saved unfinished searches, at $(0,4)$,
+$(3,4)$, $(0,5)$ and $(0,6)$; the other 23 have only limited initial runs.
+The latest $(0,6)$ continuation retains eight unfinished regions and no new parent.
 
-For six free coordinates, preserving histories $(1,4)$ also forces the
-original class in the completed native search. The other 27 choices
-remain unresolved. Four have saved unfinished searches:
-$(0,4)$, $(3,4)$, $(0,5)$ and $(0,6)$; the remaining 23 have only initial
-limited runs. Exhausted individual branches do not exclude an open whole model.
+With two retained coordinates, the base is a square. Distinct intervals of
+the same free-word parity cannot have consecutive original indices.
+If they share a word, every cross-interval base pair must be opposite.
+A square corner has a unique opposite, so path injectivity forces both
+intervals to be singletons at opposite corners. No three can share one word.
 
-\paragraph{A capacity deduction for the whole path.}
-With two retained coordinates, the base is a square. Distinct intervals
-of the same free-word parity have no consecutive original indices.
-If they share a free word, every base pair across them must have
-distance two. Otherwise a full vertex repeats or a chord appears.
-A square vertex has one opposite corner, so both visit sets must be
-singletons at opposite corners.
-
-For one parity, let $M$ count intervals visiting multiple base vertices
-and $N_z$ count singleton intervals at $z$. Choose all multi-visit intervals
-and the larger singleton family from each opposite pair. Their words
-are distinct, proving
+For one parity, let $M$ count intervals visiting multiple base vertices and
+$N_z$ singleton intervals at corner $z$. Their distinct-word capacity gives
 \[
-\boxed{M+\max(N_{00},N_{11})+\max(N_{01},N_{10})\le2^{r-1},}
+\boxed{M+\max(N_{00},N_{11})+\max(N_{01},N_{10})\le2^{r-1}}
 \]
-where $r\ge1$ is the number of free coordinates.
+for $r\ge1$ free coordinates: choose all multi-visit intervals and the larger
+singleton family from each opposite pair. Every two chosen words differ.
+For retained pair $(0,5)$ the even counts are $M=12$ and
+$(N_{00},N_{01},N_{10},N_{11})=(5,4,10,10)$.
+The chosen 32 intervals use every even word of $Q_6$; each of the nine
+outside intervals must share with a chosen antipodal partner.
 
-For retained coordinates $(0,5)$, the even counts are
-$M=12$ and $(N_{00},N_{01},N_{10},N_{11})=(5,4,10,10)$.
-Thus 32 selected intervals use all 32 even words of $Q_6$.
-Every remaining singleton at $00$ must share with one at $11$,
-and each at $01$ with one at $10$. Exactly nine words are shared by
-pairs of intervals. Individual partners remain choices.
+For a distinct-word family and a subset $J$, let $D_j$ be current domains
+and $U=\bigcup_{j\in J}D_j$. Necessarily $|J|\le|U|$.
+At equality, injectivity uses every word of $U$ within $J$, so other
+members of that family must avoid $U$. Such removal requires the stated
+distinctness and cannot automatically be applied across partner families.
 
-Each even word must therefore remain available in at least one of
-the 32 domains. A sole possible carrier is forced. An outside
-singleton's domain may be intersected with the union of its possible
-partners' domains. These are consequences of the original model.
-Lean checks the square geometry, generic capacity implications, and
-the interval counts derived directly from the literal source.
-The complete geometry-to-model assembly and native search remain
-outside those checks.
+The outside singleton family also has distinct words: its corners are equal
+or adjacent. If $C$ is the chosen family and $O$ the outside family of one
+parity in $Q_6$, at most $s=32-|C|$ outside values are absent from $C$.
+For $(0,6)$, $s=2$ in even parity and $s=6$ in odd parity. Thus at least
+seven of nine even and seven of thirteen odd outside intervals must share.
+An outside interval with no domain intersection with any permitted partner
+must consume one spare word. Once $s$ such intervals are forced, every
+other outside interval must retain support in its partners' domains.
 
-\paragraph{Subset capacity.}
-For any set $J$ of intervals required to have distinct words, let $D_j$
-be the current allowed words and $U=\bigcup_{j\in J}D_j$. Then
-\[
-|U|\ge |J|.
-\]
-If equality holds, every word of $U$ is assigned within $J$. Therefore
-those words can be removed from every other interval in the same
-distinct-word family. The reason is finite counting: an injection
-between equally sized finite sets uses the entire target set.
-The nine outside singleton intervals can share partner words, so
-this removal must not be applied to them without further conflicts.
+More generally, let $N(J)$ contain the chosen partners of outside intervals
+$J$ whose domains intersect. Shared members inject into distinct partners,
+so $|J|\le|N(J)|+s$. At equality, $J$ uses every value assigned to $N(J)$
+and exhausts the spare allowance. Other outside intervals must therefore
+share with chosen partners outside $N(J)$.
 
-Four Lean deductions check these implications and preservation of
-every complete assignment. A separate native engine uses matching
-to find subsets and checks their explicit union sizes before pruning.
-All seven unfinished regions were transferred unchanged from round 209.
-The matching implementation and complete traversal retain native status;
-the generic Lean result does not certify a whole-model exclusion.
-The $(0,5)$ case remains open after 196 new continuation steps,
-with 11 unfinished regions and 3,721,372 cumulative nodes. The latest
-resource stop retained its pending regions. The round-212 search below addresses $(0,6)$; the remaining saved
-cases are unchanged.
+Lean checks the generic counting and assignment-preservation arguments.
+For the literal $(0,6)$ source, checked index witnesses connect the actual
+path to chosen/outside distinctness and complete partner lists. The normalized
+initial word, explicit six-bit range and group boundaries also yield the
+two 32-word parity pools. Current domain fitting remains an explicit premise;
+native relation tables, matching discovery and complete traversal remain
+separate from these checked path and filtering implications.
 
-\paragraph{When the chosen family leaves spare words.}
-The outside singleton intervals themselves require distinct words:
-their base corners are either equal or adjacent. Let $C$ and $O$
-be the word sets assigned to the chosen and outside families of one
-parity. Both lie in an alphabet of 32 words, hence
-\[
-|C|+|O\setminus C|\le32,\qquad
-|C\cap O|\ge |C|+|O|-32.
-\]
-The first inequality counts two disjoint word sets; the second follows
-by splitting $O$ into its shared and unshared words. Consequently,
-for retained pair $(4,7)$ at least one of its two even outside intervals
-must share. For $(0,6)$ at least seven of nine even outside intervals,
-and seven of thirteen odd outside intervals, must share with antipodal
-partners. Which intervals share remains undetermined.
-
-\paragraph{When the spare allowance is exhausted.}
-For an outside interval $x$, take the union $P_x$ of its allowed
-partners' current domains. If $D_x\cap P_x=\varnothing$, its value must
-be absent from the chosen family. Distinct outside values consume
-different unused words. Thus there can be at most two such even
-intervals or six such odd intervals for $(0,6)$.
-
-Once this allowance is reached, every other outside interval must
-share; intersecting its domain with $P_x$ preserves every solution.
-The forced unshared intervals keep their options. Lean checks the
-counting argument and the link from partner domains to actual
-exceptions under explicit distinctness and partner hypotheses.
-The complete geometric assembly and native traversal remain separate.
-
-More generally, for a set $J$ of outside intervals let $N(J)$ contain
-the chosen-family intervals that are listed partners of a member of
-$J$ and have an intersecting current domain. With spare allowance $s$,
-\[
-|J|\le |N(J)|+s.
-\]
-Shared members inject into distinct partners; at most $s$ members
-remain unshared. This generic counting consequence is also checked in
-Lean. At round 212, only the zero-support and exhausted-allowance rules
-were implemented; the group rule is incorporated in round 214 below.
-
-At the round-212 cutoff, the model remains open after 120 saved
-steps and 1,051,511 nodes, with 11 unfinished regions.
-The other saved cases are unchanged, and 27 six-coordinate choices
-remain unresolved.
-
-
+Consecutive triples supply another restriction. Two free steps leave the
+outer words at distance zero or two, and each retained pair needs a compatible
+third value in its current domain. For example, words 5 and 6 have only
+common neighbours 4 and 7; removing both excludes that pair.
+Lean checks preservation of every fitting assignment and validity under
+smaller domains. The native continuation retains projected pair relations
+within a job and reloads original relations for each new job.
 No controlled comparison establishes a speed improvement.
 
-\paragraph{Why continuation does not discard unfinished cases.}
-Splitting a domain $D$ into $\{a\}$ and $D\setminus\{a\}$ partitions its
-assignments. On interruption, save the unfinished descendants and
-each ancestor's unexamined remaining values. Replacing one covered
-region by covering descendants preserves coverage; soundly exhausted
-regions can be removed. An empty frontier excludes solutions only
-under those soundness premises. Lean checks the generic reasoning.
-Saved hashes and independently audited state transitions identify
-the native calculation; they do not certify its entire traversal.
+Continuation itself relies on coverage: splitting $D$ into $\{a\}$ and
+$D\setminus\{a\}$ partitions assignments. Saving unfinished descendants and
+unexamined ancestor values preserves the unexplored region. Lean checks this
+generic implication; saved-state audits do not certify the entire native search.
 
+\section{A direct partner target and the fractional obstruction}
+Let $P$ be the saved 98-edge $Q_8$ path and $t$ either endpoint, 0 or 78.
+Remove $V(P)\setminus\{t\}$ and seek a 93-edge induced path beginning at $t$,
+with its other endpoint free. The joining argument would give
+$98+93+1=192$ edges in $Q_9$. This route does not require a different parent.
+Each allowed graph has 158 vertices and 337 edges. Both direct searches
+remain unresolved; the degree-and-cycle queries returned \texttt{UNKNOWN}.
 
-\paragraph{Why the partner restrictions follow from a path.}
-Different interval identifiers of the same parity cannot occur at
-consecutive indices, because an identifier changes by at most one per
-step. If their free words agree, the path condition forces their base
-corners to be opposite. Fixing one opposite corner fixes the entire
-other vertex, so injectivity permits only one index in either sharing
-interval. Three sharing intervals would repeat a full vertex.
+A 93-edge partner starting at an even vertex has 47 vertices of each parity
+and an odd final endpoint, as Lean derives from consecutive cube edges.
+The model requires degree one at the two selected endpoints and degree two
+at other selected vertices. It also uses the induced-edge relation
+$y_{ab}=x_ax_b$ for Boolean vertex selections $x$.
+Degree equations can admit separate cycles. An actual induced path must omit
+a vertex of every cycle: its last cycle vertex cannot have two distinct
+earlier cycle neighbours, since both would be its immediate predecessor.
+Lean checks this argument and the resulting cycle occupancy inequality.
 
-Lean now checks this argument from the indexed-path definition.
-For the saved $(0,6)$ model, checked original-index witnesses also
-derive distinctness within the chosen and outside families and the
-completeness of their partner lists. Thus these restrictions are
-connected to the actual reconstructed path. A checked composition
-also justifies support filtering when two even or six odd exceptions
-exhaust the allowance in a 32-word pool. Alphabet membership,
-current domains and the complete native search certificate remain
-separate at the end of round 213.
-
-
-\paragraph{The next restriction: a tight partner subset.}
-Starting the free word at zero fixes its parity: each group change
-flips one free coordinate, so group $g$ uses parity $g\bmod2$.
-The saved group boundaries and the two 32-word alphabets are now
-checked in Lean, with six-bit integer range stated explicitly.
-
-For one parity let $s=32-|C|$. If a subset $J$ of outside intervals
-has only $N(J)$ possible chosen partners, then
-$|J|\le |N(J)|+s$. At equality, the words used by $J$ exhaust both
-those partner values and every unused-word allowance. All other
-outside intervals have distinct words, so they must share with
-partners outside $N(J)$. Their domains can be restricted accordingly.
-Lean checks the counting argument and assignment preservation.
-This can strengthen individual support when several intervals compete
-for a small partner set. A matching discovers candidate subsets;
-matching success alone does not establish a realizable snake.
-The round-214 continuation examines 749,506 additional nodes and records
-3,054 value removals by this rule. Thirteen regions remain unfinished
-at that cutoff;
-the known lower bound and the number of unresolved coordinate choices
-are unchanged.
-
-
-\paragraph{Actual words must also fit.}
-Possible partners do not resolve competition for word labels.
-Within any one chosen or outside family, a subset $J$ requires
-distinct words in its domain union $U$. Thus $|J|\le|U|$; equality
-reserves all of $U$ for $J$, and the other members of that family
-must avoid it. The geometric path condition supplies the distinctness.
-Lean now checks this composition and preservation of the same assignment
-for all four families, without requiring a saturated parity alphabet.
-The new continuation combines this rule with partner capacity.
-It examines 2,650,260 additional nodes and records 29,311,693 word-removal operations by the added rule.
-At the round-215 cutoff, the case remains open with five unfinished regions.
-
-The four maximal distinct-word families of each parity supply a
-possible extension. On the thirteen inherited regions, however,
-their apparent additional deletions disappear after the existing
-family and binary rules reach closure. This comparison gives no
-evidence that adding those families improves the search.
-
-
-\paragraph{Pairs need a common third value.}
-Two successive free-coordinate steps leave the outer words at distance
-zero or two: the two flipped coordinates are equal or different.
-The reconstructed path supplies these successive edges, and Lean checks
-the resulting implication. Distinct decoded outer words force distance two.
-
-More information comes from the middle domain. Outer words 5 and 6
-have only common neighbours 4 and 7. If both are unavailable, the pair
-cannot occur, even when each outer word has other available neighbours.
-For each of three pair relations, retaining only pairs with a compatible
-third value preserves every fitting assignment: its actual third value
-is the witness. The same restriction remains valid in smaller domains.
-This reasoning and the concrete support example are checked in Lean.
-
-The five-region comparison finds 940 unsupported pair occurrences
-without removing an individual word. It omits some native rules and
-establishes no speed advantage. The continuation therefore retains
-the pair information during later branching, deriving it only at each
-job's start and reloading the original relations for every new job.
-Native execution and full search certification remain separate.
-The new continuation examines 2,044,830 nodes and records 3,706,395 repeated pair-removal operations. At the round-216 cutoff, the model remains open with nine unfinished regions.
-
-
-\paragraph{A direct target for 192 edges.}
-The saved 98-edge $Q_8$ path can still be used directly. At either
-endpoint $t$, remove its other 98 vertices and seek a 93-edge induced
-path starting at $t$, with its other endpoint free. The paths share
-only $t$, so their copies in opposite faces join to give
-$98+93+1=192$ edges. The reason is that a cross-face cube edge requires
-equal projected vertices. This is an application of the previously
-checked joining theorem.
-
-The old 93-edge queries at both endpoints remain unresolved. The
-97-edge queries for the same parent have solver exclusions, without
-Lean contradiction certificates. The 192-edge target therefore does
-not require a new optimal parent. Each allowed graph has 158 vertices,
-337 edges and equal parity classes of size 79; neither has an
-articulation vertex. The next direct search will use degree conditions
-and cycle exclusions, with no assumed speed improvement.
-
-The longer continuation of the different-parent search examines 5,228,502 additional nodes. It remains open with 8 unfinished regions and produces no new parent.
-
-
-\paragraph{The partner model and its cycle cuts.}
-A 93-edge partner beginning at an even vertex uses 47 vertices of each
-parity and ends at an odd vertex. Lean derives these facts from actual
-consecutive cube edges. The new model leaves that odd endpoint free
-and requires degree one at the two selected endpoints and degree two
-at every other selected vertex.
-
-Separate cycles can satisfy these degree conditions. For every cycle
-$C$, an induced path must omit at least one vertex of $C$.
-Indeed, the last cycle vertex along the path cannot have two distinct
-earlier cycle neighbours: both would have to be its immediate predecessor.
-Lean checks this argument and the inequality $|S\cap C|\le |C|-1$
-for a selection $S$ drawn from an actual induced path. Numerical cycle
-extraction and solver exhaustion remain separate verification obligations.
-
-The two new 240-second endpoint queries return \texttt{UNKNOWN} at 0, \texttt{UNKNOWN} at 78. Every unresolved query remains open. No new global bound or longer snake is obtained.
-
-
-\paragraph{Why more cycle inequalities are insufficient by themselves.}
-The degree model was relaxed by allowing selection and endpoint variables
-to lie between zero and one. Adding edge variables for products of
-Boolean selections improves its numerical bounds substantially.
-Exact certificates now place the maximum fractional cardinality between
-$98.044957$ and $98.045026$ at root 0, and between
-$97.654360$ and $97.654432$ at root 78.
-
-Both lower endpoints come from saved rational assignments satisfying
-every simple-cycle inequality. This was checked without enumerating
-all cycles. With $w_u=1-x_u$, each deleted edge $ab$ has a potential
-with $p_a=0$, $|p_u-p_v|\le w_u+w_v$ on other edges and
-$p_b+w_a+w_b\ge2$. Summing along a cycle minus $ab$, then restoring
-that edge, gives $2\sum_{u\in C}w_u\ge2$. Hence at least one unit
-of fractional nonselection occurs on every cycle.
-
-Mixing either assignment with the corresponding one-edge path gives
-an exact feasible cardinality of 94. The mixing weight is
-$92/(q-2)$ when the larger cardinality is $q>94$.
-Therefore even all cycle occupancy inequalities cannot exclude the
-93-edge partner target in this continuous model. These fractional
-assignments establish a limitation of the method; they are not paths.
-The finite rational data have independent exact audits. Lean checks
-the degree encoding, integer weighted-bound argument and telescoping
-cycle implication, with numerical array assembly kept separate.
-
-A stronger candidate uses any subset $U$ and $v\in U$:
+For any allowed vertex subset $U$ and $v\in U$, a stronger necessary inequality is
 \[
-\sum_{ab\in E(U)}y_{ab}\le\sum_{u\in U}x_u-x_v.
+\sum_{ab\in E(U)}y_{ab}\le\sum_{u\in U}x_u-x_v,
 \]
-This holds because the part of a path inside $U$ is a forest, with
-at most one fewer edge than selected vertices when $v$ is selected.
-The next calculation will determine whether these subset inequalities
-exclude the saved fractional assignments or lower the bound below 94.
+where $E(U)$ consists of allowed edges with both endpoints in $U$.
+The selected part of an actual path has fewer edges than vertices when
+$v$ is selected; when it is unselected, the weaker inequality still holds.
+Lean derives this from inducedness by assigning each selected edge to a
+distinct selected path index, avoiding a selected marked index.
+Writing $X,Y,B,E$ for selected vertices, internal edges, boundary edges
+and selected endpoints in $U$, the degree sum gives
+$2X-E=2Y+B$. Thus the same inequality is $B+E\ge2x_v$.
 
-\section{What would resolve the question}
-The current upper bound is 233. A smaller bound requires a stronger
-argument. The alternative comparisons above retain their own local
-certificates, geometric interpretations and complete graph-to-snake
-requirements, despite being numerically superseded.
-A compatible 93-edge partner for the saved parent would improve the
-lower bound to 192. Other constructions may use a different parent
-or face arrangement. Finding a new $Q_8$ parent alone would still
-require a compatible joining construction.
+Relax the Boolean variables to $[0,1]$ and retain the linear product
+inequalities, degree equations, cycle inequalities and subset inequalities.
+Exact finite certificates give cardinality upper bounds 97.840921 at
+root 0 and 97.359759 at root 78. Both are below 98, excluding a 97-edge
+partner in this fixed-parent model; the conclusion is source-specific.
+The old solver exclusions had no Lean contradiction certificate.
 
-If every remaining six-coordinate model exhausts, the source-specific
-requirement rises to seven changed histories. If one yields a new
-parent, its compatibility must still be established. Neither outcome
-settles the global optimum. A 196-edge witness together with a
-universal 197-edge exclusion would settle the proposed value exactly.
+The new exact rational feasible cardinalities are
+\[
+q_0=\frac{22588258102073}{230867380070},\qquad
+q_{78}=\frac{3545809907526}{36419686519}.
+\]
+Both exceed 94. To check all cycle inequalities, put $w_u=1-x_u$.
+For each deleted edge $ab$, a rational potential has $p_a=0$,
+$|p_u-p_v|\le w_u+w_v$ on other edges, and $p_b+w_a+w_b\ge2$.
+Summing along the rest of any cycle gives $2\sum_{u\in C}w_u\ge2$,
+which is the required occupancy bound. Separately, 158 feasible flows
+per root certify every subset inequality: a flow of at least $2x_v$
+from $v$ to an added sink is bounded by every cut separating them.
+The cut capacity is exactly $B+E$. Mixing with the corresponding one-edge path
+using weight $92/(q_t-2)$ gives total selection weight exactly 94.
+All these linear inequalities are preserved by the mixture.
+Thus even the full forest-and-cycle continuous model cannot exclude the
+93-edge target. These fractional assignments do not construct a path.
+The saved arrays have independent exact arithmetic audits; Lean checks the
+generic degree, bound, cycle and forest arguments. Their numerical array
+assembly remains separate~\cite{research220}.
+
+Boolean consistency gives a further direction. On an allowed edge define
+$\delta_{ab}=x_a+x_b-2y_{ab}$. For Boolean selections this records whether
+the endpoint selections differ, so any cycle has an even number of such changes.
+For a cycle $C$ and an odd subset $F$ of its edges, this implies
+\[
+\sum_{e\in F}\delta_e-\sum_{e\in E(C)\setminus F}\delta_e\le|F|-1.
+\]
+The saved root-0 point has disagreements $(0,1,0,0)$ around the square
+$(44,45,61,60)$ and violates this inequality. These classical cycle-parity
+constraints test consistency absent from the current relaxation~\cite{barahona1986}.
+They have not yet been added to the linear model. Their effect on the best
+bound, or on feasibility at 94 after reoptimization, remains unknown.
+
+\section{Remaining questions}
+A compatible 93-edge partner would improve the lower bound to 192.
+A different parent or face arrangement remains possible, but finding a
+new $Q_8$ parent alone does not supply a compatible $Q_9$ construction.
+Exhausting all remaining six-coordinate models would establish only a
+source-specific requirement of seven changed histories.
+The maintained global interval remains $191\le a(9)\le233$, with an
+independent rebuild of the completed upper-bound assembly pending.
+Resolving the proposed value 196 still requires both its witness and
+a universal 197-edge exclusion.
 
 \smallskip
-{\small Detailed proofs, explicit witnesses and verification records are
-retained in the companion manuscript and milestones through round 219.
-The known small-dimensional values are listed in
+{\small Detailed proofs, witnesses and verification records are retained
+in the companion manuscript and milestones through round 220.
+The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
 \href{https://arxiv.org/html/2607.15270v3}{Orland et al., arXiv:2607.15270v3}.}
-\begin{thebibliography}{1}
+
+\begin{thebibliography}{9}
 \bibitem{bound233archive}
 Snake-in-the-box project contributors. \emph{Completed share-weighted bound
 233: final assembly, standard-axiom audit and verification limitations}.
@@ -615,6 +350,18 @@ Contributor revision \texttt{b0521e1d14fd52c62db4cdeccc356b70a623eb82};
 audit revision \texttt{b65d30ca15441420b8f4538f671e589c2502674f},
 14 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/b0521e1d14fd52c62db4cdeccc356b70a623eb82/milestones/33-233-lean}.
+
+
+\bibitem{research220}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Subset forest bounds,
+fractional feasibility and product consistency}. Research milestone 220,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/220-subset-forest}.
+
+\bibitem{barahona1986}
+F.~Barahona and A.~R.~Mahjoub. On the cut polytope.
+\emph{Mathematical Programming} \textbf{36} (1986), 157--173.
+\url{https://www.lamsade.dauphine.fr/~mahjoub/Papers/BM86.pdf}.
 
 \end{thebibliography}
 \end{document}

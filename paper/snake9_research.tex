@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 219, 15 November 2026}
+\date{Research state after round 220, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -68,8 +68,11 @@ Lean checks; the complete finite search certificates and geometric
 assembly retain their stated limitations.
 
 Exact fractional certificates show that the fixed-parent degree
-formulation, even with every simple-cycle occupancy inequality,
-cannot exclude the 94-vertex compatible-partner target.
+formulation, even with every cycle occupancy and subset forest inequality,
+cannot exclude the 94-vertex compatible-partner target. The subset
+inequalities nevertheless give exact certificates excluding a 97-edge
+partner for this representative. Explicit failures of Boolean product
+consistency identify a further class of valid inequalities.
 
 The paper separates written proofs, checked implications, native
 enumerations and unresolved premises. The contributor bound improves
@@ -367,8 +370,9 @@ In particular, $m\le235$.
 Substitute $T\ge4m-13$ into $T+2s_0+35(m+1)=9214$.
 This gives $39m+2s_0\le9192$. Since $39\cdot236=9204>9192$,
 integrality gives $m\le235$. The zero-edge path satisfies the length
-bound directly. Together with Theorem~\ref{thm:lower}, this proves
-Theorem~\ref{thm:main}, with the archived-proof qualification already stated.
+bound directly. This completes the archived upper bound 235. The stronger
+upper bound in Theorem~\ref{thm:main} is supplied by the separate
+contributor argument in Section~\ref{sec:bound233}.
 \end{proof}
 
 \begin{corollary}[Fourteen-empty-square target]\label{cor:eighteen-empty}\label{cor:fourteen-empty}
@@ -381,7 +385,7 @@ $2s_0\le9192-39\cdot235=27$, so $s_0\le13$.
 Conversely, $s_0\ge14$ gives $39m\le9164<39\cdot235$.
 The count and census implications have passed Lean under their stated
 premises. This improves the former target of eighteen empty squares;
-the numerical length upper bound remains 235.
+the numerical conclusion of this archived count-only argument remains 235.
 \end{proof}
 
 The following sections retain the empty-square term through local share inequalities. They also describe restrictions on singleton counts needed to interpret those inequalities. The earlier 236 proof is preserved in Appendix~\ref{app:bound236}.
@@ -901,8 +905,8 @@ length reduction are now checked with the physical loss and global budget.
 These conclusions describe the earlier boundary-21 argument. The stronger
 boundary-24 argument below excludes length 235 under the same potential
 premise without any separate lower bound on $L$. The local share and graph
-premises remain unresolved; consequently this does not exclude a
-235-edge snake unconditionally.
+premises remain unresolved, so this alternative argument does not
+independently supply that exclusion.
 
 \begin{lemma}[Weighted window packing]\label{lem:share-packing}
 Let $\sigma_j\ge0$ be shares at finitely many positions. Suppose that a family of windows $I_t$ has bounds $b_t\le\sum_{j\in I_t}\sigma_j$. If rational weights $w_t\ge0$ satisfy
@@ -2709,7 +2713,7 @@ $012032,012034,012301,012340,012345$. The first is established by
 Theorem~\ref{thm:countfree-completed}; the other four remain unresolved.
 
 \begin{theorem}[Actual edge weight and total charge]\label{thm:actual-weight-budget}
-For the completed floor choice, every fitting window of a snake satisfies
+For the archived baseline floor choice, every fitting window of a snake satisfies
 \[
 w_r=120b_{r+8}+L_r
 \le120\alpha_{r+8}+\sum_{j=4}^{8}\sigma_{12}(x_{r+j}).
@@ -2720,7 +2724,7 @@ W+2880\le5G_{12},\qquad W+4200m+5L\le1098600,
 \]
 where $L=\sum_qr_{12}(q)\ge0$ is the total loss.
 The same statements hold for the conditional floor choice under the five
-local share bounds just stated. Neither total-weight assertion requires
+stated local bounds, four of which remain unresolved. Neither total-weight assertion requires
 the reference-catalogue premise. The earlier boundary-21 totals follow
 as weaker consequences.
 \end{theorem}
@@ -2754,8 +2758,8 @@ the local-share premises remain exactly those of the chosen floor profile.
 \end{proof}
 
 \begin{corollary}[Upper bounds from the remaining certificates]\label{cor:reference-potential-bounds}
-Use either the completed floors, or the conditional floors under their five
-local share premises. Assume every local system in the exact reference union
+Use either the archived baseline floors, or the conditional floors under
+the five stated local bounds, four of which remain unresolved. Assume every local system in the exact reference union
 is refuted. Suppose the chosen graph weights admit a potential with
 $0\le\pi\le R$ and
 \[
@@ -2766,7 +2770,7 @@ For $m\ge9$ the corresponding snake satisfies
 \[
 (4200+p)m\le1098960+8p+R.
 \]
-With the completed floors, $(p,R)=(483,551)$ implies $m\le235$.
+With the archived baseline floors, $(p,R)=(483,551)$ implies $m\le235$.
 With the conditional floors and their five local share premises,
 $(p,R)=(496,602)$ implies $m\le234$.
 \end{corollary}
@@ -3322,10 +3326,11 @@ Appendix~\ref{app:historical-verification-records} preserves the native
 certificate counts and the earlier assembly attempts.
 
 Broadening the count conditions does not add credit to the retained graph
-used for the saved critical cycles. That graph already requires
-$\alpha_{r+2}+\alpha_{r+4}\ge9$ in this context. Together with
-$\alpha_{r+2}\le4$ and $\alpha_{r+4}\le5$, this forces the two counts
-to equal 4 and 5. An inventory finds 100 additional matching rows in the
+used for the saved critical cycles. Its retained rows require the two
+stored count symbols to sum to at least nine. The tested caps are four
+and five, so both symbols are unsaturated and must equal four and five.
+For an actual snake tracing such a row, the corresponding actual counts
+therefore have those same values. An inventory finds 100 additional matching rows in the
 source graph, all already excluded from the retained graph. This
 calculation concerns that graph and its removal hypotheses.
 
@@ -3456,9 +3461,9 @@ Lean checks. The all-edge potential check is a separate exact-integer
 computation, and the inherited local floors, count and parity restrictions,
 reference exclusions, and interpretation for actual snakes remain
 obligations~\cite{loss164archive,threshold165archive}.
-Together with the maintained upper bound 235, it suffices to exclude
-length 235. Its odd parity supplies this particular graph premise;
-the other premises still require proof.
+In this earlier argument, the archived upper bound 235 reduced the task
+to excluding length 235. Its odd parity supplies this particular graph
+premise; the other premises remain explicit.
 
 \paragraph{Tests of the former positive-loss target.}
 An independent enumeration of coordinate squares gives loss 163 for the
@@ -3692,8 +3697,10 @@ to a window's rational-to-integer deficit is therefore at most $2/5$.
 Thus a strict rational share bound greater than $72/5$ suffices for
 integer share at least fifteen; at $L=0$, a strict bound greater than
 fourteen suffices. Equality at $72/5$ does not suffice by this argument.
-Clearing denominators by 2520 gives $A=2520S+B$, with $B\le1008$,
-so $A>36288$ implies $S\ge15$. These arithmetic statements pass Lean.
+After multiplication by 2520, the rational share exceeds 36288 and the
+rounding deficit is at most 1008. The scaled integer share therefore
+exceeds $36288-1008=35280=2520\cdot14$, so the integer share is at least
+fifteen. These arithmetic implications pass Lean.
 The required rational lower bound remains an open local proof target.
 
 \paragraph{Path restrictions for the remaining window.}
@@ -7222,10 +7229,10 @@ Neither outcome settles the conjectured value 196.
 Both allowed graphs have 158 vertices, 337 edges and 79 vertices of
 each parity. The saved enumeration finds that each graph is connected
 and has no articulation vertex. These facts give no elementary
-connectivity or parity obstruction to a 93-edge partner. The next
-search will consider all such partners, using selected-vertex degree
-conditions and cycle exclusions as an alternative to the earlier
-circuit formulation. Its runtime advantage is unproved.
+connectivity or parity obstruction to a 93-edge partner.
+Section~\ref{sec:partner218} reports the subsequent degree-and-cycle
+queries. They leave both endpoints unresolved, and no runtime advantage
+over the earlier circuit formulation is established.
 The source review, graph data and continuation records are retained
 in milestone 217~\cite{research217}.
 
@@ -7285,7 +7292,8 @@ The next calculation concerns the same fixed parent and the same two
 joining endpoints. Its purpose is to determine whether linear degree
 and cycle inequalities can exclude the 94-vertex partner target.
 For each allowed vertex $u$, let $x_u$ indicate selection and let $e_u$
-indicate the free endpoint; $e_u=0$ at even vertices other than the root.
+indicate the free endpoint; extend $e_u$ by zero at every even vertex,
+including the root.
 The root is selected with degree one, and the odd endpoint indicators
 sum to one. Selection has equal totals in the two parity classes.
 All variables are subsequently allowed to range over $[0,1]$.
@@ -7369,8 +7377,8 @@ audited native arithmetic.
 \begin{proposition}[Limitation of the continuous cycle formulation]
 \label{prop:cycle-relaxation219}
 For either joining endpoint of the saved 98-edge parent, the continuous
-edge formulation admits a selection of exactly 94 vertices satisfying
-every simple-cycle occupancy inequality.
+edge formulation admits a fractional assignment with total selection
+weight exactly 94, satisfying every simple-cycle occupancy inequality.
 \end{proposition}
 \begin{proof}
 The exact feasible cardinality $q$ in the table exceeds 94. The one-edge
@@ -7387,15 +7395,116 @@ fractional assignments provide no snake. No global bound changes.
 The certificates and verification limits are recorded in milestone
 219~\cite{research219}.
 
-The next candidate strengthening uses arbitrary vertex subsets $U$.
-An actual path induces a forest on $U$. Therefore, for each $v\in U$,
-\[
+\subsection{Subset forest inequalities and their remaining limitation}
+\label{sec:forest220}
+For any vertex subset $U$, an induced path restricts to a forest.
+Writing $E(U)$ for allowed edges with both endpoints in $U$, its Boolean
+vertex and induced-edge indicators therefore satisfy, for every $v\in U$,
+\begin{equation}\label{eq:forest220}
 \sum_{ab\in E(U)}y_{ab}\le\sum_{u\in U}x_u-x_v.
+\end{equation}
+If $v$ is selected, the nonempty forest has at least one component and
+at most one fewer edge than vertices. If $v$ is unselected, the weaker
+bound follows, including when no vertex is selected.
+
+Lean derives the counting bound directly from an indexed induced path.
+Every selected ambient edge joins consecutive indices. Given a marked
+selected index, assign each edge its endpoint farther from that index.
+These assigned indices are distinct and avoid the marked index. This
+injection proves the one-unit saving, with the empty case handled separately.
+The concrete variable and edge-enumeration interpretation remains separate.
+
+\paragraph{Separation by endpoint flow.}
+Put $\eta_t=1$ at the root and $\eta_u=e_u$ elsewhere. Summing degree
+equations over $U$ gives
+\[
+2\sum_{u\in U}x_u-\sum_{u\in U}\eta_u
+=2\sum_{ab\in E(U)}y_{ab}+\sum_{ab\in\delta(U)}y_{ab},
 \]
-If $v$ is selected, the nonempty forest has at most its vertex count
-minus one edges; if $v$ is unselected, the weaker bound follows as well.
-These inequalities couple all selected edges of a subset. Their effect
-on the saved fractional points has not yet been computed.
+where $\delta(U)$ consists of edges leaving $U$. Hence
+\eqref{eq:forest220} is equivalent to
+\begin{equation}\label{eq:forest-cut220}
+\sum_{ab\in\delta(U)}y_{ab}+\sum_{u\in U}\eta_u\ge2x_v.
+\end{equation}
+The signed algebraic equivalence is checked in Lean under the displayed
+degree identity. Give each original undirected edge capacity $y_{ab}$
+and add an edge of capacity $\eta_u$ from each vertex to a new sink.
+A minimum cut from $v$ to the sink finds a most violated subset for $v$.
+
+The round-219 rational points violate this stronger condition.
+The two new computations each add 25 explicit subset inequalities.
+Exact weighted-row certificates then give
+\[
+\begin{array}{c|c|c}
+\text{Root}&\text{Exact feasible total weight}&\text{Exact upper bound}\\\hline
+0&\displaystyle\frac{22588258102073}{230867380070}&97.840921\\[6pt]
+78&\displaystyle\frac{3545809907526}{36419686519}&97.359759
+\end{array}
+\]
+The feasible values are approximately $97.840839$ and $97.359704$.
+Both upper bounds are below 98. An actual odd-edge partner has an even
+number of vertices, so it has at most 96 vertices and 95 edges.
+In particular, both 97-edge partner targets are excluded. Any partner
+with at least 97 edges would have such a prefix, so arbitrary partners
+at these roots have at most 96 edges. A one-crossing join using this
+particular 98-edge parent consequently has at most 195 edges.
+This recovers the earlier native 97-edge exclusions with explicit exact
+weighted inequalities. It does not cover other parents or arrangements.
+
+\paragraph{Why the complete subset family still permits the target.}
+Each exact rational point in the table satisfies every cycle occupancy
+inequality by the deleted-edge potentials of Section~\ref{sec:linear219}.
+For every vertex $v$, a separate feasible flow to the new sink carries
+at least $2x_v$. Summing flow conservation over any $U$ containing $v$
+bounds this supply by its outward cut capacity, proving
+\eqref{eq:forest-cut220} for every such $U$ simultaneously.
+The exact audit verifies all 158 flow systems at each root, their 832
+directed arc capacities, conservation equations and degree identities.
+No numerical maximum-flow optimality assertion is needed for this deduction.
+
+Mixing either point with the corresponding one-edge path again gives
+total selection weight exactly 94. Convexity preserves every cycle and
+subset inequality. Thus the complete stated continuous formulation
+still cannot exclude the 93-edge partner target. The flows and numerical
+arrays have independent exact audits; the generic Lean implications and
+actual-path forest bound do not constitute an end-to-end numerical proof.
+All data and proof receipts are retained in~\cite{research220}.
+
+\subsection{The next missing constraint: consistency of edge products}
+\label{sec:product220}
+For Boolean vertex selections and their edge products, put
+$d_{uv}=x_u+x_v-2y_{uv}$. This is one exactly when the two selections
+differ. A closed cycle $C$ has an even number of such changes. Therefore,
+for any odd-sized subset $F$ of its edges,
+\begin{equation}\label{eq:cut-parity220}
+\sum_{e\in F}d_e-\sum_{e\in E(C)\setminus F}d_e\le |F|-1.
+\end{equation}
+Indeed, matching the odd pattern $F$ on every edge would violate even
+parity; at least one mismatch is necessary. These are classical cycle
+inequalities for the cut polytope~\cite{barahona1986}. Their use here
+concerns consistency of the selected-edge products, rather than the
+number of selected vertices on a cycle.
+
+The new root-0 fractional point assigns the following disagreement values
+to a coordinate square:
+\[
+\begin{array}{ccc}
+44&\overset{0}{\longleftrightarrow}&45\\
+0\,\updownarrow&&\updownarrow\,1\\
+60&\underset{0}{\longleftrightarrow}&61.
+\end{array}
+\]
+Three zero disagreements require all four Boolean selections to agree,
+contradicting the remaining value one. The square violates
+\eqref{eq:cut-parity220} by one, although the same fractional point
+satisfies every forest and occupancy inequality. The exact-weight-94
+mixture also violates it. An independent audit finds square violations
+at root 78 as well. These are concrete reasons to strengthen the model.
+The two square parity forms have a separate Boolean Lean check;
+the general cycle assertion has the elementary proof above.
+No strengthened linear program containing these parity rows has yet
+been solved in this round, and no improved bound is inferred from them.
+
 
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
@@ -7539,21 +7648,34 @@ matching optimality theorem has been obtained. The numerical conjecture
 the remaining requirements.
 
 \paragraph{Construction and history verification.}
-The two-parent identities and whole-snake preservation criteria have the
-written proofs given above. Their checked arithmetic and finite geometric
-components retain the explicit assembly limits stated in each subsection.
-For the saved 98-edge parent, Lean checks literal coverage of 254 stored
-slice-isometry models; the connections from their tables to arbitrary
-geometric choices remain pending. The exhaustive four- and five-history
-exclusions are native calculations, with complete finite exclusion
-certificates still pending. At the round-209 cutoff, only retained pair
-$(1,4)$ among the 28 six-history cases is exhausted. The other 27 remain
-unresolved. The capacity inequality and source counts add sound necessary
-conditions, without producing a different parent or a longer $Q_9$ snake.
-The whole-paper review in round 210 changes presentation and proof-status
-accounting; it makes no new search or numerical-bound claim.
+The joining identities and whole-snake preservation criteria retain
+their written proofs and stated checked components. Literal coverage of
+254 stored slice-isometry models is checked; transfer to all geometric
+choices and complete native exclusion certificates remain separate.
+Only the retained pair $(1,4)$ among 28 six-history cases is exhausted;
+the other 27 choices remain unresolved. Later capacity, partner and
+joint-support deductions preserve actual fitting assignments under
+their explicit table and domain premises. Their native traversal has
+no complete proof certificate. No different parent or longer snake
+has been obtained.
+
+For the fixed 98-edge parent, the exact subset-weight certificates now
+exclude a 97-edge partner at either endpoint. The 93-edge targets remain
+open. Exact fractional assignments satisfy every cycle occupancy and
+subset forest inequality at total weight 94, but fail Boolean product
+consistency on explicit squares. The corresponding generic Lean
+results, exact finite audits and unresolved numerical assembly are
+distinguished in Sections~\ref{sec:linear219}--\ref{sec:product220}.
+The round-220 full-source review corrects historical proof references,
+notation and current-status statements; it does not rebuild the entire
+archived contributor chain.
+
 
 \appendix
+The bounds in the following historical appendices retain their original
+models and premises. They are successive earlier results, numerically
+superseded by the maintained interval in Theorem~\ref{thm:main}.
+
 \section{Earlier fixed-graph comparison results}\label{app:historical-comparisons}
 The results in this appendix retain their original graph, weight and boundary
 hypotheses. They include the earlier seven-centre calculation, three
@@ -8482,7 +8604,7 @@ If a state potential of range at most $R$ satisfies $p+\pi(w)\le d(120b+H)+\pi(u
 \begin{proof}
 Each position lies in at most five of the windows, so $\sum_i H_i\le5\Sigma$. The six omitted internal counts and two endpoints give $B+14\le T$. Thus
 \[
-W+1680=120B+\sum_iL_i+120\cdot14\le120T+5\Sigma=5G_{12}.
+W+1680=120B+\sum_iH_i+120\cdot14\le120T+5\Sigma=5G_{12}.
 \]
 Telescoping the potential inequalities gives $p(m-7)\le dW+R$. Equation~\eqref{eq:share-budget-12} and the preceding bound give $W+4200m\le1099800$. Combining yields~\eqref{eq:five-potential-bound}. The overlap, algebraic, and conditional path implications have been checked in Lean; the hypotheses still require a complete graph-to-snake assembly for each generated model.
 \end{proof}
@@ -10974,6 +11096,18 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Exact degree relaxations and
 the limitation of all cycle occupancy inequalities}. Research milestone
 219, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/219-linear-partner}.
+
+
+\bibitem{research220}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Subset forest bounds,
+fractional feasibility and product consistency}. Research milestone 220,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/220-subset-forest}.
+
+\bibitem{barahona1986}
+F.~Barahona and A.~R.~Mahjoub. On the cut polytope.
+\emph{Mathematical Programming} \textbf{36} (1986), 157--173.
+\url{https://www.lamsade.dauphine.fr/~mahjoub/Papers/BM86.pdf}.
 
 \end{thebibliography}
 \end{document}

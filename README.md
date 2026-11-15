@@ -1,3 +1,12 @@
+# Current result after round 220
+
+Exact subset forest inequalities exclude 97-edge partners for the saved 98-edge parent at either endpoint. The 93-edge target remains open: fractional assignments of total weight 94 satisfy every cycle occupancy and subset forest inequality. Explicit square product-consistency violations identify the next strengthening. Two Lean modules supply seven supporting results; exact numerical audits and the full manuscript review are saved. No new global bound or construction. Goal ACTIVE.
+
+Read [the mathematical explanation](milestones/220-subset-forest/MATHEMATICAL_NOTE.md), [evidence](milestones/220-subset-forest/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
+
 # Current result after round 219
 
 Exact rational certificates show that both fixed-parent continuous partner models admit 94 selected vertices even with every simple-cycle occupancy inequality. Thus adding cycle occupancy inequalities alone cannot exclude the 192-edge joining target in this model. Two new Lean modules check eight supporting implications; the finite arrays have independent exact audits. No longer snake or new global bound. Goal ACTIVE; subset forest inequalities are next.
