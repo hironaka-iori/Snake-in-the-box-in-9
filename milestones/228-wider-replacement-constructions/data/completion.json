@@ -1,0 +1,122 @@
+{
+  "round": 228,
+  "status": "PROGRESS",
+  "previous_round_status": "PROGRESS",
+  "goal_status": "ACTIVE",
+  "started_utc": "2026-11-15 14:12:54 UTC",
+  "finished_utc": "2026-11-15T14:31:01.006800+00:00",
+  "interval": [
+    191,
+    233
+  ],
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "complete_replacement_width": 45,
+  "width45_contexts": 308,
+  "unresolved45": [],
+  "counts": {
+    "STATIC_EXCLUDED": 107,
+    "PARTIAL_BATCH_EXCLUDED": 34,
+    "REDUCED_PAIR_EXCLUDED": 85,
+    "DIRECT_PAIR_EXCLUDED": 13,
+    "BOUNDARY_TEMPLATE_EXCLUDED": 69
+  },
+  "reduced_queries": 331,
+  "direct_queries": 13,
+  "partial_batch_terminal_exclusions": 34,
+  "interrupted_initial_batch": {
+    "status": "INTERRUPTED",
+    "reason": "LOW_FREE_MEMORY"
+  },
+  "solver_exclusions_lean_certified": false,
+  "proofs": [
+    {
+      "module": "AllocationFacts228",
+      "reports": 3,
+      "receipt_sha256": "c9d424a51282cafbd63cbc3f7358f7cd77fbd211ff805ff1eb0049b797762446"
+    }
+  ],
+  "native_runs": [
+    {
+      "tag": "reduced45",
+      "status": "COMPLETE_QUERY_BATCH",
+      "seconds": 89.31200000000536,
+      "statuses": {
+        "INFEASIBLE": 321,
+        "UNKNOWN": 10
+      },
+      "receipt_sha256": "afca2956eefe619b3d28335a4a0121e8d3021d857804073cf63c7779077e4c98",
+      "result_sha256": "85bdc37fef64c62b213d9a82b10e6cf8ff86b0618dee308a678057f09ed74e0e"
+    },
+    {
+      "tag": "reduced45-long",
+      "status": "COMPLETE_QUERY_BATCH",
+      "seconds": 33.796999999991385,
+      "statuses": {
+        "INFEASIBLE": 10
+      },
+      "receipt_sha256": "4a221434f1469b9c9959087c328231ecb50eed3b38984ecdb5bcb6c3ca97cbb1",
+      "result_sha256": "3589e7a379d85e110e1c6ec1e933b1e793d205aae2f2a36b3f8d04971a3a94d7"
+    },
+    {
+      "tag": "complex45",
+      "status": "COMPLETE_COVERAGE",
+      "seconds": 16.46799999999348,
+      "statuses": {
+        "INFEASIBLE": 13
+      },
+      "receipt_sha256": "c82eab5e3bed2906299276ddf6cc91cb05ba6560b52cc6d7308949d7e60d208d",
+      "result_sha256": "6607b5ebc61d955360b28e69f24497d375e49ec989717178c7f40f00cd956227"
+    }
+  ],
+  "model_count": 416,
+  "model_archive_sha256": "3e272cb6e86336b68d13d59ae3ddb09da420fc9b3df507dce1afa4211b942353",
+  "coverage45_sha256": "7587d552787e38de6ec877c6517b87b9a6d301bb5e500a64c42465d24a5d5eef",
+  "documents": {
+    "snake9_frontier_explanation.tex": {
+      "editor": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_frontier_explanation.tex",
+      "mirror": "E:\\Snake-in-a-box\\paper\\snake9_frontier_explanation.tex",
+      "sha256": "1f13b26b016ea551642dfc1febb0bc03ded6dbffb3593d1ab5e4edeb4680f507",
+      "compile_sha256": "2071e07f15345ab13b6fffd8138634bfe9de109f0869ca029fe80dabbf347a45"
+    },
+    "snake9_research.tex": {
+      "editor": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_research.tex",
+      "mirror": "E:\\Snake-in-a-box\\paper\\snake9_research.tex",
+      "sha256": "43d61f680d480369d9fad76fe2b5b6642b5e720479ff3c94f98777a61c49b227",
+      "compile_sha256": "f6b0b6c3d52aaccdd78c538b9113634a1a0b5edd2d0cb0eb12368ac8a06b5052"
+    }
+  },
+  "contributor_revision": "55915593bebeef90db684a89b6196025f82a3e03",
+  "independent_233_rebuild": false,
+  "greedy_experiment_executed": false,
+  "frozen_parent_search_states": {
+    "22": {
+      "path": "milestones\\217-long-parent-search\\data\\case-22\\state.json",
+      "sha256": "79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452"
+    },
+    "23": {
+      "path": "milestones\\211-subset-capacity\\data\\case-23\\state.json",
+      "sha256": "3b7733ba9ad904608c050ed63199b13a295c56db6d3b1ded909ef13be38d5e7d",
+      "state_jobs": 296,
+      "pending": 11,
+      "state_nodes": 3721372,
+      "counter_scope": "historical cumulative"
+    },
+    "24": {
+      "path": "milestones\\209-slice-capacity\\data\\case-24\\state.json",
+      "sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "state_jobs": 150,
+      "pending": 8,
+      "state_nodes": 9625900,
+      "counter_scope": "historical cumulative"
+    },
+    "9": {
+      "path": "milestones\\209-slice-capacity\\data\\case-9\\state.json",
+      "sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "state_jobs": 150,
+      "pending": 3,
+      "state_nodes": 8142891,
+      "counter_scope": "historical cumulative"
+    }
+  }
+}

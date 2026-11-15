@@ -1,0 +1,64 @@
+{
+  "round": 228,
+  "status": "PROGRESS",
+  "complete_through": 45,
+  "width45_contexts": 308,
+  "width45_unresolved": [],
+  "counts": {
+    "STATIC_EXCLUDED": 107,
+    "PARTIAL_BATCH_EXCLUDED": 34,
+    "REDUCED_PAIR_EXCLUDED": 85,
+    "DIRECT_PAIR_EXCLUDED": 13,
+    "BOUNDARY_TEMPLATE_EXCLUDED": 69
+  },
+  "reduced_contexts": 154,
+  "empty_reduced_contexts": 69,
+  "reduced_configurations": 672,
+  "reduced_queries": 331,
+  "reduced_initial_unknown": 10,
+  "direct_queries": 13,
+  "partial_batch_exclusions": 34,
+  "all_current_terminal_infeasible_queries": 378,
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "runs": [
+    {
+      "tag": "reduced45",
+      "status": "COMPLETE_QUERY_BATCH",
+      "seconds": 89.31200000000536,
+      "statuses": {
+        "INFEASIBLE": 321,
+        "UNKNOWN": 10
+      },
+      "receipt_sha256": "afca2956eefe619b3d28335a4a0121e8d3021d857804073cf63c7779077e4c98",
+      "result_sha256": "85bdc37fef64c62b213d9a82b10e6cf8ff86b0618dee308a678057f09ed74e0e"
+    },
+    {
+      "tag": "reduced45-long",
+      "status": "COMPLETE_QUERY_BATCH",
+      "seconds": 33.796999999991385,
+      "statuses": {
+        "INFEASIBLE": 10
+      },
+      "receipt_sha256": "4a221434f1469b9c9959087c328231ecb50eed3b38984ecdb5bcb6c3ca97cbb1",
+      "result_sha256": "3589e7a379d85e110e1c6ec1e933b1e793d205aae2f2a36b3f8d04971a3a94d7"
+    },
+    {
+      "tag": "complex45",
+      "status": "COMPLETE_COVERAGE",
+      "seconds": 16.46799999999348,
+      "statuses": {
+        "INFEASIBLE": 13
+      },
+      "receipt_sha256": "c82eab5e3bed2906299276ddf6cc91cb05ba6560b52cc6d7308949d7e60d208d",
+      "result_sha256": "6607b5ebc61d955360b28e69f24497d375e49ec989717178c7f40f00cd956227"
+    }
+  ],
+  "interrupted_initial_batch": {
+    "status": "INTERRUPTED",
+    "reason": "LOW_FREE_MEMORY",
+    "accepted_terminal_rows": 34
+  },
+  "coverage_sha256": "7587d552787e38de6ec877c6517b87b9a6d301bb5e500a64c42465d24a5d5eef",
+  "scope": "All308 maximal width45 contexts of fixed normalized bank123, append24, two length-preserving replacements retaining outside indices and anchors, exactly four bit8crossings. The boundary cut depends on the complete native44cover. Static preparation, upper enumeration, transfer assembly and solver contradictions are native, not Lean certified. Padding covers smaller blocks. No global upper bound or new witness."
+}

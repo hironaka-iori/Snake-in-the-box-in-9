@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 227}
+\date{Research state after round 228}
 \begin{document}
 \maketitle
 
@@ -451,51 +451,54 @@ target. The outside-agreement implication has passed Lean; numerical
 exclusions still rely on the saved native calculations.
 
 The restricted exclusion now covers two replacement blocks of at most
-44 edges. The earlier width-43 cover and boundary-change argument left
-42 of the 301 maximal width-44 contexts open. The final reduction fixes
-the short upper-face portions and solves the remaining path-pair problems
-inside $Q_8$.
+45 edges for the chosen seed and appended vertex 24. The 308 maximal
+contexts retain all outside vertices and both pairs of anchors, preserve
+the two block lengths, and require four crossings of the chosen coordinate.
 
-The justification is direct. An induced path starting in the upper face
-and crossing that coordinate exactly twice has an induced upper prefix,
-one contiguous induced lower path and an induced upper suffix.
-The two upper pieces must be disjoint and nonadjacent. Across opposite
-faces, adjacency is equality of the lower projections, so the lower path
-must avoid every upper projection except its two joining endpoints.
-A separate lower path must avoid all those upper projections and must
-be disjoint and nonadjacent to the lower excursion. These conditions
-are sufficient as well as necessary, by checking pairs within and between
-the three pieces. The general gluing constructor was already checked
-in Lean.
+The reduction fixes the short induced upper-face pieces before searching for
+the two long lower-face paths in $Q_8$. The lower paths must be induced,
+disjoint and nonadjacent. Across opposite faces, adjacency occurs exactly
+when the eight remaining coordinates agree. Therefore a lower path may
+meet an upper projection only at its intended vertical joining endpoint;
+it must avoid all upper projections belonging to the other replacement.
+Together with separation of the upper pieces, these conditions account
+for every possible repetition or chord. A replacement with $w$ edges
+and $u$ upper vertices needs a lower segment of $w-u$ edges.
 
-In seven contexts the first lower path has 43 edges from 18 to 224,
-followed by 480. Enumerating the second upper portions gives 18
-configurations, which reduce to five representative lower-path tasks.
-All five are natively infeasible. Two task groups occur in all seven
-contexts and give exactly the same full vertex sequence when assembled;
-the differing interval boundaries are duplicate representations.
+Endpoint faces determine whether the crossing count is even or odd.
+Zero crossings is impossible if the anchor face has fewer than the
+required 46 allowed vertices. These observations force the allocations
+$(0,1)$, $(0,2)$, $(1,1)$ or $(1,2)$ in 154 contexts. Each replacement
+then has exactly one lower segment. The other thirteen contexts are
+searched directly because their crossing arrangements are different.
 
-In the other 35 contexts the first anchors are lower. Endpoint parity
-and the total crossing budget force zero first crossings: with budget
-two, the second path must use both crossings because its upper domain
-has fewer than the required 45 vertices. The first lower path now has
-44 edges. Complete upper enumeration gives 230 configurations, 79 exact
-groups and 52 representatives after domain containment. All 52 native
-queries are infeasible. The 42 new exclusions complete the 301-context
-cover; smaller blocks are included by padding with unchanged vertices.
+The width-44 result also constrains width 45. If each replacement kept
+an old anchor neighbour, one could shorten that end of each interval
+and obtain the same candidate in the excluded width-44 family. At least
+one replacement must therefore omit both old anchor neighbours.
+This deduction retains the computational dependency on the width-44 cover.
 
-The new concrete face conditions, repeated task equalities and one
-domain containment passed Lean kernel checks. Data extraction, upper
-enumeration, domain preparation and the 57 solver contradictions retain
-their separate native status. An earlier two-minute direct search
-remained incomplete; its checkpoint is preserved and superseded by this
-cover. These results concern one fixed seed, endpoint 24, two
-length-preserving blocks and four coordinate crossings. They give no
-new snake or global optimality conclusion~\cite{research227}.
+Enumerating the upper pieces gives 2,141 configurations. Imposing the
+boundary condition and necessary lower-domain connectivity leaves 672.
+They give 392 exact tasks and 331 representatives after domain containment.
+Sixty-nine contexts have no surviving configuration; all 331 remaining
+representative queries return infeasibility, covering the other 85
+reduced contexts. Thirteen direct queries also return infeasibility.
+Together with 107 initial geometric exclusions and 34 completed initial
+queries, this accounts for all 308 contexts. The initial batch was
+interrupted by low available memory; only completed infeasibility rows
+were retained. Timeouts and incomplete rows supplied no exclusions.
+
+Lean checked the arithmetic for the 154 literal crossing-allocation
+records. The general joining arguments reuse earlier checked constructors.
+The extraction of the records, finite enumeration, prepared domains,
+cover assembly and solver contradictions retain their separate native
+status. No 192-edge witness or global optimality result follows from
+this fixed construction family~\cite{research227,research228}.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
-The completed two-block search excludes widths through 44 for the chosen
+The completed two-block search excludes widths through 45 for the chosen
 endpoint and seed. Wider blocks, another endpoint or another seed are
 the next construction choices.
 Different parent classes and shorter compatible parents remain alternatives. Finding a new parent still requires a compatible joining construction.
@@ -508,7 +511,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 227.
+in the companion manuscript and milestones through round 228.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -574,6 +577,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Fixed upper portions and exact
 lower-dimensional replacement tasks}. Research milestone 227,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/227-shared-q8-construction}.
+
+\bibitem{research228}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Two lower-dimensional replacement
+paths and the width-45 construction cover}. Research milestone 228,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/228-wider-replacement-constructions}.
 
 \end{thebibliography}
 \end{document}

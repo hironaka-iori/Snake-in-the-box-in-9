@@ -1,3 +1,11 @@
+# Current result after round 228
+
+The selected endpoint-24 construction is computationally excluded for two length-preserving replacement blocks of at most 45 edges. All 308 maximal contexts are covered. Fixing the small upper-face portions reduces 154 contexts to lower-dimensional tasks, including cases where both replacements cross the chosen coordinate. All 331 representative tasks and thirteen direct queries are natively infeasible. Lean checks the 154 literal crossing-allocation records and their arithmetic implication; enumeration and solver contradictions retain native status. No new snake or global bound. The construction goal remains active, with partial greedy growth reserved for later use.
+
+Read [the argument](milestones/228-wider-replacement-constructions/MATHEMATICAL_NOTE.md), [complete cover](milestones/228-wider-replacement-constructions/data/coverage45.json), [evidence](milestones/228-wider-replacement-constructions/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 227
 
 The selected endpoint-24 construction is computationally excluded for two length-preserving replacement blocks of at most 44 edges. All 301 maximal width-44 contexts are covered. Fixing small upper-face portions reduces the last 42 contexts to 57 Q8 path-pair queries, all natively infeasible. Literal face and crossing conditions, repeated-task equalities and one domain containment are kernel checked; enumeration and solver contradictions retain native status. No new snake or global bound. The user requested a pause after publication.
