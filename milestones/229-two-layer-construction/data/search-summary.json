@@ -1,0 +1,59 @@
+{
+  "round": 229,
+  "status": "PROGRESS",
+  "complete_through": 46,
+  "width46_contexts": 315,
+  "width46_unresolved": [],
+  "counts": {
+    "STATIC_EXCLUDED": 106,
+    "REDUCED_PAIR_EXCLUDED": 96,
+    "DIRECT_PAIR_EXCLUDED": 24,
+    "BOUNDARY_TEMPLATE_EXCLUDED": 89
+  },
+  "reduced_contexts": 185,
+  "empty_reduced_contexts": 89,
+  "reduced_configurations": 886,
+  "reduced_representatives": 496,
+  "reused_representatives": 1,
+  "new_reduced_queries": 495,
+  "reduced_initial_unknown": 8,
+  "direct_queries": 24,
+  "current_terminal_infeasible_queries": 519,
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "runs": [
+    {
+      "tag": "reduced46",
+      "status": "COMPLETE_QUERY_BATCH",
+      "seconds": 122.375,
+      "statuses": {
+        "INFEASIBLE": 487,
+        "UNKNOWN": 8
+      },
+      "receipt_sha256": "e2f72ab4a047c201e0288ea513d27ec1b8b0daa506505497272d2ffc0b4b619a",
+      "result_sha256": "8f8742befcc73e7f1f3cc9905b6fa2ef9e3980a33bc1823277aa7d91ae1a6efd"
+    },
+    {
+      "tag": "reduced46-long",
+      "status": "COMPLETE_QUERY_BATCH",
+      "seconds": 31.344000000011874,
+      "statuses": {
+        "INFEASIBLE": 8
+      },
+      "receipt_sha256": "996ec5cead2d62989349df65d52798d754dfdb36bee8267b35bd5262b0bb509b",
+      "result_sha256": "2ca17c6b3a21f0e7234d3f41c5f2f6e3450dd3a14e4a793276cd93fd50022924"
+    },
+    {
+      "tag": "complex46",
+      "status": "COMPLETE_COVERAGE",
+      "seconds": 44.187000000005355,
+      "statuses": {
+        "INFEASIBLE": 24
+      },
+      "receipt_sha256": "68b5be1f47b439aaea84912ad62ce30e3bd2c46fb34869e154d88f6631adcd8d",
+      "result_sha256": "7de0db96b6b439950e113c014fa72b05fef602ba69a79aa976b806fdd0296a7a"
+    }
+  ],
+  "coverage_sha256": "ee942f3ecc3bd7b1fbf665f5d345db10d0ef8153c62ea9c87dfff8189347d6a2",
+  "scope": "All315 maximal width46 contexts: fixed normalized bank123, append24, two length-preserving replacements retaining outside positions and anchors, exactlyfour bit8crossings. The boundary cut depends on complete native45closure. Smaller blocks included by padding. Static preparation, upper enumeration, transfer assembly and solver contradictions are native, not Lean-certified. No new snake or global bound. This cover says nothing about six-crossing replacements."
+}

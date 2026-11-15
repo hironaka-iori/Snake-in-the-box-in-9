@@ -1,0 +1,187 @@
+{
+  "round": 229,
+  "status": "PROGRESS",
+  "previous_round_status": "PROGRESS",
+  "goal_status": "ACTIVE",
+  "started_utc": "2026-11-15 14:32:06 UTC",
+  "finished_utc": "2026-11-15T14:59:45.994553+00:00",
+  "interval": [
+    191,
+    233
+  ],
+  "new_q9_record": false,
+  "new_global_bound": false,
+  "complete_four_crossing_width": 46,
+  "four_crossing_contexts": 315,
+  "variable_crossing_status": "PARTIAL_NATIVE_EXCLUSION",
+  "variable_crossing_counts": {
+    "STATIC_EXCLUDED": 106,
+    "NATIVE_EXCLUDED": 198,
+    "OPEN": 11
+  },
+  "variable_crossing_unresolved": [
+    34,
+    38,
+    39,
+    40,
+    79,
+    83,
+    84,
+    124,
+    126,
+    128,
+    129
+  ],
+  "proofs": [
+    {
+      "module": "ProjectionPorts229",
+      "reports": 3,
+      "receipt_sha256": "16f6985b7a6ed811be4440796714bc9f91c0dffbc2c6b010718ccf56130fa1a2"
+    },
+    {
+      "module": "CrossingAllocation229",
+      "reports": 2,
+      "receipt_sha256": "fd07ee3fa937e090c4ef8843cbb743d7ae3351e794b870590f63503775935fc2"
+    }
+  ],
+  "native_runs": [
+    {
+      "tag": "reduced46",
+      "status": "COMPLETE_QUERY_BATCH",
+      "seconds": 122.375,
+      "statuses": {
+        "INFEASIBLE": 487,
+        "UNKNOWN": 8
+      },
+      "receipt_sha256": "e2f72ab4a047c201e0288ea513d27ec1b8b0daa506505497272d2ffc0b4b619a",
+      "result_sha256": "8f8742befcc73e7f1f3cc9905b6fa2ef9e3980a33bc1823277aa7d91ae1a6efd"
+    },
+    {
+      "tag": "reduced46-long",
+      "status": "COMPLETE_QUERY_BATCH",
+      "seconds": 31.344000000011874,
+      "statuses": {
+        "INFEASIBLE": 8
+      },
+      "receipt_sha256": "996ec5cead2d62989349df65d52798d754dfdb36bee8267b35bd5262b0bb509b",
+      "result_sha256": "2ca17c6b3a21f0e7234d3f41c5f2f6e3450dd3a14e4a793276cd93fd50022924"
+    },
+    {
+      "tag": "complex46",
+      "status": "COMPLETE_COVERAGE",
+      "seconds": 44.187000000005355,
+      "statuses": {
+        "INFEASIBLE": 24
+      },
+      "receipt_sha256": "68b5be1f47b439aaea84912ad62ce30e3bd2c46fb34869e154d88f6631adcd8d",
+      "result_sha256": "7de0db96b6b439950e113c014fa72b05fef602ba69a79aa976b806fdd0296a7a"
+    },
+    {
+      "tag": "six46",
+      "status": "COMPLETE_COVERAGE",
+      "seconds": 80.95300000000861,
+      "statuses": {
+        "INFEASIBLE": 200,
+        "UNKNOWN": 9
+      },
+      "receipt_sha256": "8ade1250c827e8cddf089a7d05d8e3eb900077c07fbf0c5643bba2022442aadd",
+      "result_sha256": "264151fb16f02911a84eaedd98d86603c794536a94a0748136068c2600293256"
+    },
+    {
+      "tag": "free46",
+      "status": "COMPLETE_COVERAGE",
+      "seconds": 308.5789999999979,
+      "statuses": {
+        "INFEASIBLE": 77,
+        "UNKNOWN": 132
+      },
+      "receipt_sha256": "73b16b81710b16aa140ac370ac45785832d5ed77fa1d39942f4bb9524ab2e904",
+      "result_sha256": "989bd19af02982e01a4c5c41246b5db907dc0c72c703518db3c0d7faeeb91460"
+    },
+    {
+      "tag": "counts46",
+      "status": "COMPLETE_COVERAGE",
+      "seconds": 76.78099999998813,
+      "statuses": {
+        "INFEASIBLE": 101,
+        "UNKNOWN": 31
+      },
+      "receipt_sha256": "db9d7cc2197cbe82a33a6f2d9492a803366e18a122c45ce6c10706b83c73c1aa",
+      "result_sha256": "51684ec7d346a965ae18b8a7f5dc0c4eb4d0d427d4aa5be5d66c749b9a175f6a"
+    },
+    {
+      "tag": "counts46-long",
+      "status": "COMPLETE_COVERAGE",
+      "seconds": 182.3289999999979,
+      "statuses": {
+        "INFEASIBLE": 20,
+        "UNKNOWN": 11
+      },
+      "receipt_sha256": "64bfd8f9aa9011c6528c007a6b7af013d8abd19bb0da66dc9c0dca0f81e1a448",
+      "result_sha256": "769f4a3ddd0e2369e7f46ba954caeaf9ff8288415efeb43a40f2f200da637264"
+    }
+  ],
+  "preparations": [
+    {
+      "tag": "lower-preparation",
+      "receipt_sha256": "3e1cf5fa588911f6b8023c5fe57402514196832d836ee5e6d49317c6949a6d00"
+    },
+    {
+      "tag": "boundary-preparation",
+      "receipt_sha256": "bb094a037c99eeff5d7d376b74239c88145e9ddc664b238dc4a7926573a0dfb6"
+    }
+  ],
+  "model_count": 1108,
+  "model_archive_sha256": "9919e786415b5d3ea82d4a698f57ef1e2ad43532538e5bcb31fb3a0ebec6b07b",
+  "coverage46_sha256": "ee942f3ecc3bd7b1fbf665f5d345db10d0ef8153c62ea9c87dfff8189347d6a2",
+  "free_summary_sha256": "9b3273c9c0b091d05926effa0165553c7e974f78776fb69b4019de0bca9861bb",
+  "documents": {
+    "snake9_frontier_explanation.tex": {
+      "editor": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_frontier_explanation.tex",
+      "mirror": "E:\\Snake-in-a-box\\paper\\snake9_frontier_explanation.tex",
+      "sha256": "f8e2767d7ea5d93e0e6c0799e65194b0d36f3634d513d0e96b61b0fb1e8a71f4",
+      "compile_sha256": "2071e07f15345ab13b6fffd8138634bfe9de109f0869ca029fe80dabbf347a45"
+    },
+    "snake9_research.tex": {
+      "editor": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_research.tex",
+      "mirror": "E:\\Snake-in-a-box\\paper\\snake9_research.tex",
+      "sha256": "b573c89528302c48b8e1964517fb85ed9330a7b6ef50787e7af91f5ea214e00a",
+      "compile_sha256": "f6b0b6c3d52aaccdd78c538b9113634a1a0b5edd2d0cb0eb12368ac8a06b5052"
+    }
+  },
+  "contributor_revision": "55915593bebeef90db684a89b6196025f82a3e03",
+  "independent_233_rebuild": false,
+  "solver_exclusions_lean_certified": false,
+  "frozen_parent_search_states": {
+    "22": {
+      "path": "milestones\\217-long-parent-search\\data\\case-22\\state.json",
+      "sha256": "79d48c05cfc33461671656122c3fa003b2488cc344fc6adf89dd532fb6502452"
+    },
+    "23": {
+      "path": "milestones\\211-subset-capacity\\data\\case-23\\state.json",
+      "sha256": "3b7733ba9ad904608c050ed63199b13a295c56db6d3b1ded909ef13be38d5e7d",
+      "state_jobs": 296,
+      "pending": 11,
+      "state_nodes": 3721372,
+      "counter_scope": "historical cumulative"
+    },
+    "24": {
+      "path": "milestones\\209-slice-capacity\\data\\case-24\\state.json",
+      "sha256": "e35e024400554a7d69a481700d8aee3dd858c0828b9a00d414ca6883526b3795",
+      "state_jobs": 150,
+      "pending": 8,
+      "state_nodes": 9625900,
+      "counter_scope": "historical cumulative"
+    },
+    "9": {
+      "path": "milestones\\209-slice-capacity\\data\\case-9\\state.json",
+      "sha256": "51d429a7bf57aab2fc7f80e4b59b8ecac1318282f7ec704b14a593b087755fad",
+      "state_jobs": 150,
+      "pending": 3,
+      "state_nodes": 8142891,
+      "counter_scope": "historical cumulative"
+    }
+  },
+  "complete_six_crossing_width": 46,
+  "two_crossing_frontier_sha256": "4a3d9f837bbd05eabe92b33b1614e21955e15414b466d64aba1abf4960fe28df"
+}

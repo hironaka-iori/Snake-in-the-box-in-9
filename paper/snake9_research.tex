@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 228, 15 November 2026}
+\date{Research state after round 229, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -84,10 +84,10 @@ search. The first small neighbourhood is computationally excluded;
 larger neighbourhoods remain unresolved, with no new construction.
 A checked interaction theorem explains when simultaneous block changes
 can escape a family closed under separate changes. A complete restricted
-two-block search through length 45 is excluded natively. Fixing small
-upper-face portions and using crossing parity reduces 154 width-45
-contexts to lower-dimensional tasks; direct queries cover thirteen
-additional cases, completing the 308-context cover. The direct simultaneous-replacement constructor
+two-block four-crossing search through length 46 is excluded natively.
+General projection-filter and crossing-allocation implications have passed
+Lean. The wider search also permits arbitrary crossing counts; its
+remaining scope and dependencies are stated explicitly. The direct simultaneous-replacement constructor
 and coordinate-crossing parity relation have also passed Lean.
 
 The paper separates written proofs, checked implications, native
@@ -8258,6 +8258,107 @@ four crossings. It supplies no new snake or global upper bound.
 Wider blocks and different seeds or endpoints remain construction
 possibilities~\cite{research228}.
 
+\subsection{Exact projection restrictions and variable crossing counts}
+\label{sec:projection229}
+The projection restriction can be stated independently of the dimension.
+Let $D$ be a lower-face domain, $U$ the projections of the replacement's
+own upper pieces, $P$ its intended vertical joining projections, and $O$
+the projections of upper pieces belonging to other replacements. The
+correct filtered domain is
+\[
+D\setminus\bigl((U\setminus P)\cup O\bigr).
+\]
+Membership says exactly that an own upper adjacency is possible only
+at a prescribed joining projection, and that no adjacency to another
+replacement's upper vertices is possible. This follows because adjacency
+between the two faces is equality of the lower coordinates.
+
+For a single crossing, suppose two actual induced paths have equal
+projected joining endpoints. The filtered-domain condition with that
+one exemption is equivalent to the exact indexed compatibility of the
+joining constructor. Indeed, any common projection must equal the
+exempted endpoint. Injectivity of each path then fixes both indices,
+so no additional joining edge occurs. Conversely, exact compatibility
+permits only this coincidence. If the lower segment has positive length,
+its fixed opposite endpoint differs from the joining endpoint and cannot
+be exempted. The zero-length case is different because the two endpoints
+coincide. These general statements have passed Lean kernel checks.
+For two crossings, the two actual joining equalities and separation of
+the upper pieces remain necessary, as in Proposition~\ref{prop:twofixedupper228}.
+
+The crossing-allocation argument also admits a general arithmetic proof.
+Let $A,B\in\{0,1,2\}$ count the upper anchors of two replacements, and let
+$a,b$ be their crossing counts. Suppose
+\[
+a\equiv A\pmod2,\qquad b\equiv B\pmod2,
+\qquad a+b=A+B,
+\]
+and require $a>0$ when $A=2$, and $b>0$ when $B=2$.
+Then $a\ge A$ and $b\ge B$: targets zero and one follow from
+nonnegativity and parity; target two follows from positive evenness.
+Equality of the totals forces $a=A$ and $b=B$. This implication has
+passed Lean for arbitrary natural counts. In the construction, endpoint
+faces supply parity, and an insufficient upper-face domain excludes
+zero crossings when both anchors are upper. Extraction of these premises
+from each finite domain is a separate calculation.
+
+At width 46 the first interval starts at $0,\ldots,6$ and the second at
+$98,\ldots,142$, giving 315 contexts. Initial necessary geometry excludes
+106. The preceding width-45 four-crossing cover supplies the boundary
+condition for the four-crossing search. The remaining contexts comprise
+185 with allocations $(0,1),(0,2),(1,1),(1,2)$ in counts
+$20,13,100,52$, and 24 with other allocations.
+Complete upper enumeration gives 3,535 configurations. After imposing
+the boundary condition, 5,866 fixed-neighbour contradictions and 318
+disconnections remove branches; 886 survive, forming 538 exact groups
+and 496 representatives. One representative is contained in a previously
+excluded task, while 495 new native queries are infeasible. Eight required
+longer runs after initial timeouts. The direct queries exclude all 24
+other contexts. Thus
+\[
+106+\underbrace{89+96}_{185\text{ reduced contexts}}+24=315.
+\]
+This completes the native four-crossing exclusion through width 46.
+The corrected filter exempts only actual joining projections throughout
+the new preparation. The finite enumeration and numerical contradictions
+remain outside the Lean proofs above.
+
+The crossing restriction was then removed from the construction search.
+An intermediate six-crossing search returned 200 infeasibility results
+and nine timeouts among the 209 nonstatic contexts. It used no boundary
+condition inherited from the four-crossing family. A subsequent model
+prescribed no total crossing count, while retaining the same intervals,
+anchors, outside positions and length requirements. Its crossing-parity
+variables are bounded by the available vertical edges, so the former
+four-crossing budget imposes no hidden cap.
+
+Completed exclusions can strengthen this larger search. If $f$ counts
+unchanged crossings and $c$ counts crossings inside the two replacements,
+the complete same-context four-crossing cover forbids $f+c=4$.
+In each of the 200 contexts excluded at six crossings, it also forbids
+$f+c=6$. The nine unresolved six-crossing contexts receive no such
+six-count restriction. These deductions preserve every actual candidate
+under the explicit native premises, even though they can remove
+disconnected-cycle solutions of the degree relaxation.
+
+The search with unrestricted crossing count excludes 304 of the
+315 maximal contexts and leaves 11 unresolved.
+All nine initially unresolved six-crossing contexts are excluded by these
+broader queries, which imposed no six-count exclusion on those nine.
+Consequently the same construction family is now excluded at six
+crossings as well. Each of the eleven remaining unrestricted contexts
+permits a total of two crossings at the level of parity and face capacity:
+four force replacement allocation $(0,0)$ and seven force $(1,0)$.
+These give the next lower-dimensional construction targets. They supply
+no witness, and counts of eight or more remain possible in the unresolved
+family.
+Every timeout remains unresolved until separately excluded. These
+calculations concern the fixed seed, appended endpoint 24 and two
+length-preserving blocks; they give no new snake or global upper bound.
+The general projection and allocation implications are kernel checked;
+finite extraction, cover assembly and solver exclusions retain their
+native status~\cite{research229}.
+
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
 from the explicit witness. The completed contributor upper theorem and
@@ -8443,6 +8544,10 @@ remain native.
 Section~\ref{sec:width45} extends the native cover to width 45.
 The 154 crossing-allocation records have kernel-checked arithmetic;
 all finite reduction and solver dependencies remain explicit.
+Section~\ref{sec:projection229} adds general kernel-checked projection
+compatibility and crossing-allocation implications, a native width-46
+four-crossing cover, and a search without a prescribed crossing count.
+The computational exclusions retain their stated native dependencies.
 The round-220 full-source review corrects historical proof references,
 notation and current-status statements; it does not rebuild the entire
 archived contributor chain.
@@ -11931,6 +12036,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Two lower-dimensional replacement
 paths and the width-45 construction cover}. Research milestone 228,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/228-wider-replacement-constructions}.
+
+\bibitem{research229}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Exact projection restrictions and
+variable-crossing replacement constructions}. Research milestone 229,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/229-two-layer-construction}.
 
 \end{thebibliography}
 \end{document}
