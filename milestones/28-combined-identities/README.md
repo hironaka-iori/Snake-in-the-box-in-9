@@ -483,3 +483,21 @@ the three `*_r231.jsonl.gz` files.
 | `data/oracle_plain*.jsonl`, `data/oracle_share*.jsonl`, `data/oracle_w3.jsonl` | every new solver call |
 | `data/loop_rounds.jsonl`, `data/bulk_rounds.jsonl` | rounds |
 | `data/b_*.json`, `data/k7_*.json`, `data/c_*.json`, `data/certplan_*.json` | results |
+
+### Result of the farm run (2026-11-15): solver bound m <= 231
+
+Fourteen workers (56 solver processes; one local machine and 13 cloud containers) ran
+`farm231.py` for about 2.6 hours. The minimum cycle mean rose from 7154/13 (4.5859 alpha) to
+**15268/27 (4.7123 alpha)**, and `eval232.py`, run on the merged record files alone, gives the
+exact bound **m <= 231** at every one of its 13 test values of lambda_t (best: lambda_t = 15268/27,
+R = 26450, slack 23050). The merged files hold 30,818 plain, 2,971 five-window share and 25,903
+context-share records (`data/*_r231.jsonl.gz`).
+
+This is a SAT-solver statement only. Nothing here is certified in Lean: the formal result of
+this repository remains the unconditional bound 233.
+
+One scheduling fault was found and fixed during the run (commit f743ca9e): phase-D long retries
+ran only when no speculative candidate was left, which never happens, so the farm stalled at
+1678/3 for 40 minutes once every step of the minimum cycle had only timed-out levels. Long
+retries on the minimum cycle now take priority. Known open fault: a worker does not exit on
+SIGTERM (use the STOP flag, or SIGKILL by PID).
