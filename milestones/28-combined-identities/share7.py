@@ -134,7 +134,8 @@ def thr(dirs, t, T, ctx, tl=60, path=None):
 def records():
     out = []
     B = FILE.replace('_r232.', '_r232b.')            # second run (toward 231)
-    for f in (FILE + '.gz', FILE, B + '.gz', B):
+    F = FILE.replace('_r232.', '_r231.')             # farm toward 231 (farm231.py merge)
+    for f in (FILE + '.gz', FILE, B + '.gz', B, F + '.gz'):
         if os.path.exists(f):
             for l in (gzip.open(f, 'rt') if f.endswith('.gz') else open(f)):
                 out.append(json.loads(l))

@@ -342,6 +342,7 @@ second-`Status` reader. New records are in `data/*_r232b.jsonl.gz`, rounds in
 |---|---|
 | `share7.py` | context share encoding (`SubShareEncoding`), records, application to the product |
 | `loop3.py`, `loop4.py` | the refinement with context thresholds (one core; 2 workers) |
+| `farm231.py` | the refinement on several machines (section "Farm toward 231") |
 | `eval232.py` | exact bound (*) with lambda_t search |
 | `level_needs.py` | key and threshold sets of one potential |
 | `stall232.py`, `ceilctx232.py` | binding-cycle census and the ctx-7 test of the 5-window ceiling cycle |
@@ -353,6 +354,107 @@ Caveats specific to this section: every number below 233 rests on solver answers
 and context thresholds). Context thresholds need a centre-range version of the RefutedShare bridge,
 which does not exist yet. `loop3.State` inherits the second-`Status` reader bug, which only causes
 repeated tests, never wrong exclusions. Bounds are always computed in a fresh process (`eval232.py`).
+
+## Farm toward 231
+
+`farm231.py` runs loop4's tests on several machines at once (this machine plus cloud containers). It is
+a symmetric worker with no coordinator; the workers exchange their result files through git branches.
+
+### Design
+
+- **Epoch** (`--epoch-min`, default 8). Sync (below), then `loop4.State` is rebuilt from every record:
+  the committed data files that loop4 reads, plus every file in `data/farm231/` (the farm records are
+  hooked into `comb.own_plain_unsat`, `comb.share_records`, `share7.records` and loop4's
+  second-`Status` reader). The rebuild takes 6-8 s and 0.3 GB, so it is done from scratch every epoch.
+  Then Howard (0.5-1 s), a line in `data/farm231/rounds_w<I>.jsonl`, and the publish of this worker's
+  files.
+- **Candidates.** Integer Bellman-Ford (`comb.bellman_ford`) at lambda on the live core gives a potential
+  phi (0.4-0.6 s) and reduced costs rc(e) = Q w(e) - P + phi(u) - phi(v) >= 0. Small rc alone means
+  little: every edge of the shortest-path forest has rc = 0 (77,655 such edges at 7154/13). So the
+  order is: the minimum cycle's steps first, then the edges of the **live core of {rc <= d Q}** for
+  d = 0, 1, 2, 3, 4, 6, 8, 12, ... weight units (an edge in that core lies on near-cycles of mean about
+  lambda + d), and inside a level the cheap kinds first, then rc. Each edge gets loop4's first open
+  test of its step: (A) untested 6-window plain, (B) never-solved 5-window plain, (C) when
+  lambda + `--margin` (default 12, i.e. the 231 level) - 120 A > S5, one threshold: the 5-window at its
+  next level, else ctx 7, else ctx 8 (`loop.next_T`, `loop3.next_level`). The list stops at
+  `procs * epoch_min * 60 / 8 * 3` owned tests (720 for 4 x 8 min); building it takes about 1 s.
+- **Partition.** A test is run only by worker `int(sha1(key).hexdigest(), 16) % W`, where the key is
+  the window (k6, k5, or (ctx, dirs, t)) without the level. One worker owns the whole ladder of a
+  window, so two workers never run the same test, even when they are out of sync.
+- **Run.** A fork pool of `--procs` processes runs `loop4.work`; the solver processes append their
+  records to `data/farm231/{plain,share,ctx}_w<I>.jsonl` (loop4's formats) and the results are applied
+  to the in-memory state as they arrive. Every `--regen-s` seconds (60), lambda, phi and the candidate
+  list are recomputed from the updated state, so the next level of a window is queued right after a
+  success and a test made moot by an exclusion is dropped. Long retries (1,800 s, loop4's phase D)
+  start only when a worker has no owned candidate, at most procs - 1 at a time. The worker exits when
+  `--hours` is over, free disk is below 300 MB, or `data/farm231/STOP` exists or arrives through sync.
+- **Sync through git** (the `xfer233.py` approach: temporary bare repositories under `$FARM_SCR`,
+  default `~/.farm231`, the working tree's branch is never touched). Worker I pushes
+  `refs/heads/xfer/231/w<I>`; each commit holds `plain/share/ctx/rounds.jsonl.gz` and `record.json`,
+  with the previous tip as parent (fast-forward only, never forced). Each epoch the worker runs
+  `git ls-remote` on `refs/heads/xfer/231/*` and fetches (depth 1, one call, exactly those refs) the
+  branches whose tip changed; the peers' files go to `data/farm231/<kind>_w<J>.jsonl.gz`. At start a
+  worker merges its own branch's files into its local files (union of lines), so a restart, or a fresh
+  machine with the same index, continues where its predecessor stopped; a foreign tip of its own
+  branch is merged the same way before the next push. Network and push errors are logged and retried
+  (3 tries, backoff), and the worker carries on.
+- **Control.** `farm231.py stop` pushes `record.json {"stop": true}` to `xfer/231/ctl`; every worker
+  stops at its next epoch. `farm231.py stop --clear` pushes `{"stop": false}`. A local
+  `data/farm231/STOP` that came from ctl is re-decided at the next start; a hand-made one blocks.
+- `farm231.py status`: sync, rebuild, lambda, m_real, the exact bound (`eval232.exact_best`, about
+  10 s), per-worker record counts and the latest round line of each worker.
+  `farm231.py merge`: all farm records, sorted and deduplicated, into
+  `data/oracle_plain_r231.jsonl.gz`, `data/oracle_share_r231.jsonl.gz`, `data/ctxshare_r231.jsonl.gz`.
+  `comb.share_records` and `share7.records` read these two share files (the plain glob already matches
+  the first), so the merged data loads without the farm directory.
+
+### Worker setup (fresh clone)
+
+This machine can push `xfer/231/*` branches through the session's proxy (tested: create, fast-forward,
+ctl). Branch deletion is refused here (HTTP 403), so the branches stay after the run. Everything
+`farm231.py run` reads is tracked in git (checked with a Python audit hook in a sparse worktree that
+held only the paths below: every file opened was tracked, and lambda matched). No cache needs a
+rebuild. Python packages: `numpy` and `python-sat` (`pysat.solvers.Cadical153`, the CaDiCaL 1.5.3
+library inside the wheel; no solver binary is called). `git` must be installed.
+
+```
+# full clone (1.7 GB checkout) or the sparse one (8 MB):
+git clone --depth 1 --filter=blob:none --sparse -b research/unconditional-241 \
+    https://github.com/hironaka-iori/Snake-in-the-box-in-9 snake && cd snake
+git sparse-checkout set --no-cone /milestones/28-combined-identities/ /milestones/23-k6-lean/full_product/ \
+    /milestones/23-k6-lean/scripts/ /milestones/11-local-ceiling/ /milestones/10-window-aggregate/scripts/ \
+    /milestones/10-window-aggregate/data/oracle_cache.jsonl /milestones/22-global-arguments/
+pip install numpy python-sat
+cd milestones/28-combined-identities
+nice -n 10 python3 farm231.py run --index I --workers 7 --hours H      # I = 1..6 on the cloud machines
+```
+
+This machine runs `--index 0`. Each worker needs about 0.4 GB for the main process plus the solver
+processes (well under 1 GB each); 4 cores x 4 processes. Run `farm231.py status` anywhere to watch.
+At the end: `farm231.py stop`, wait one epoch, `farm231.py status`, `farm231.py merge`, and commit
+the three `*_r231.jsonl.gz` files.
+
+### Test runs (15 November, this machine, 4 processes, `nice -n 10`, about 55 min in total)
+
+| run | settings | lambda (alpha) |
+|---|---|---|
+| start | | 4.5859 (7154/13), loop4's last value |
+| 1 | W = 1, 0.2 h, 3-min epochs | 4.5905 (12119/22) |
+| 2 | restart of 1, 0.05 h | 4.5920 (12674/23); no test repeated (0 duplicate keys) |
+| 3 | W = 7, index 0, sparse worktree, 0.04 h | 4.5931 (3307/6); every new test owned by worker 0 |
+| 4, 5 | W = 1, 0.33 h and 0.17 h, 5-min epochs | **4.6012** (3865/7), m_real 232.246 |
+
+- Exact bound at the end (`status`, and `eval232.py` on the merged files without the farm
+  directory): **m <= 232** at lambda_t = 3865/7, R = 7.83 alpha; 231 needs 4.679 alpha.
+- 1,741 tests, 2.74 solver hours: 6-window plain 1,420 (68 % UNSAT, 31 % SAT, 1 % timeout, mean 2.1 s),
+  5-window plain 71 (all SAT), 5-window thresholds 88 (81 % UNSAT, 5 % SAT, 15 % timeout, mean 34 s),
+  ctx-7 thresholds 151 (95 % UNSAT, 5 % timeout), ctx-8 11 (10 UNSAT). New records are in
+  `data/*_r231.jsonl.gz` and on `xfer/231/w0`.
+- Throughput: 16-40 tests/min with 4 processes (about 40 when 6-windows dominate, 16 when thresholds
+  do); lambda rose at about 0.019 alpha/h, twice loop4's 0.0094 alpha/h on 2 processes. Most tests
+  were speculative (off the minimum cycle: with W = 1, 23 of the 270 candidates of the first epoch were
+  minimum-cycle steps). Whether 7 machines scale this further depends on how useful the tests far from
+  the minimum cycle are; the rounds files will show it.
 
 ## Caveats
 
