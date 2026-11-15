@@ -14,4 +14,6 @@ For the 84 sources, the two crossing addresses are at Hamming distance three. Ex
 
 **At least 64 of the original 96 outer vertices must be trimmed before any of the 594 alternatives can fit.** This lower bound is attained as a prefix-compatibility result. With source entry 38, candidate middles 982 and 983 each permit 32 original outer vertices to be retained, after removing 50 vertices from one free end and 14 from the other. Any full completion still has to rebuild the rest of both arms. [All minimum-trim results and placements](anchored-middle-trade--1-193-1-0-595.json), [enumerator](anchored_middle_trade.cpp), [witness verification](anchored_middle_trade.py).
 
+The 47 unrestricted exclusions at 191 edges have separately checked original and trimmed proofs. The 47 extracted proofs contain 62,306,929 resolution steps with no dynamic cycle clauses. [Proof index](strong96-census.json), [archive verifier](middle_audit.py).
+
 The separate search keeping the original crossings and replacing the middle by an arbitrary longer path after trimming the outer ends also has a complete exclusion. [Parity-preserving replacements](PARITY_MIDDLE_REPLACEMENTS.md).
