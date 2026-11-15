@@ -21,8 +21,9 @@ def jobs():
     return list(work.items())
 
 
-def decide(domain,target,budget,tag,checker,tip=None):
-    S=set(domain);graph={v:{v^(1<<b) for b in range(7)}&S for v in S}
+def decide(domain,target,budget,tag,checker,tip=None,dimension=7):
+    S=set(domain);assert 0 in S and min(S)>=0 and max(S)<1<<dimension
+    graph={v:{v^(1<<b) for b in range(dimension)}&S for v in S}
     reach={0};todo=[0]
     while todo:
         new=graph[todo.pop()]-reach;reach|=new;todo.extend(new)
@@ -49,7 +50,7 @@ def decide(domain,target,budget,tag,checker,tip=None):
             for a,b in combinations(ns,2):add([-e,-a,-b])
             for j in range(len(ns)):add([-x,e,*ns[:j],*ns[j+1:]])
             if v and ((target-1-v.bit_count())%2):add([-e])
-            for a,b in combinations(range(7),2):
+            for a,b in combinations(range(dimension),2):
                 mask=(1<<a)|(1<<b)
                 if v&mask:continue
                 square=(v,v^1<<a,v^1<<b,v^mask)
