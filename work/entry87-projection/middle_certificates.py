@@ -10,16 +10,22 @@ from solve import save
 
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("start",type=int);p.add_argument("stop",type=int)
-    p.add_argument("--budget",type=int,default=3000000);p.add_argument("--checker",type=Path,default=Path("drat-check.exe"));a=p.parse_args()
-    home=Path.cwd();checker=a.checker.resolve();paths=middle_menu()
-    for i in range(a.start,min(a.stop,len(paths))):
-        report=home/f"middle-certified-{i}.json";archive=home/f"middle-certified-{i}.zip"
+    p.add_argument("--budget",type=int,default=3000000);p.add_argument("--checker",type=Path,default=Path("drat-check.exe"))
+    p.add_argument("--strong96",action="store_true");a=p.parse_args()
+    home=Path.cwd();checker=a.checker.resolve()
+    if a.strong96:
+        from promising_96 import ranked
+        cases=[(r["index"],r["parent"]) for r in ranked()]
+    else:cases=list(enumerate(middle_menu()))
+    for i,parent in cases[a.start:a.stop]:
+        name=f"strong96-certified-{i}" if a.strong96 else f"middle-certified-{i}"
+        report=home/(name+".json");archive=home/(name+".zip")
         if report.exists():
             saved=json.loads(report.read_bytes())
             if saved["status"]=="UNSAT" and sha256(archive.read_bytes()).hexdigest()==saved["archive_sha256"]:continue
         with TemporaryDirectory(dir=home) as temp:
             try:
-                os.chdir(temp);tag=f"middle{i}";r=examine(dict(parent=paths[i]),tag,a.budget,checker)
+                os.chdir(temp);tag=f"middle{i}";r=examine(dict(parent=parent),tag,a.budget,checker,192 if a.strong96 else 193)
                 if r["status"]=="UNSAT":
                     with ZipFile(archive,"w",ZIP_STORED) as z:
                         for kind in ("cnf","core"):

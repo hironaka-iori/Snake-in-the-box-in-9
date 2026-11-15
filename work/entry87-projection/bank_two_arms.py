@@ -10,10 +10,10 @@ from bank_partner import families
 from solve import defects,save
 
 
-def examine(row,tag,budget,checker):
+def examine(row,tag,budget,checker,desired=193):
     p=row["parent"];roots={p[0],p[-1]}
     assert len(roots)==2 and p[0]==0
-    allowed=set(range(256))-(set(p)-roots);count=193-len(p)
+    allowed=set(range(256))-(set(p)-roots);count=desired-len(p)
     graph={v:[w for w in sorted(allowed) if (v^w).bit_count()==1] for v in sorted(allowed)}
     ids=IDPool();sel={v:ids.id(("s",v)) for v in graph};end={v:ids.id(("e",v)) for v in graph}
     clauses=[]
@@ -31,7 +31,10 @@ def examine(row,tag,budget,checker):
         # vertex precisely when its global endpoint is even.
         evens=[sel[v] for v in graph if v.bit_count()%2==0]
         even_ends=[end[v] for v in graph if v.bit_count()%2==0]
-        if p[-1].bit_count()%2:
+        if desired%2==0:
+            # The full path has equal parity counts, and one endpoint of each parity.
+            eq(evens,desired//2-sum(v.bit_count()%2 for v in p));eq(even_ends,1)
+        elif p[-1].bit_count()%2:
             # An odd root contributes the opposite imbalance. In the
             # odd-sized outside set exactly one of the two arms is odd-sized.
             assert count%2==1
@@ -86,11 +89,11 @@ def examine(row,tag,budget,checker):
             full=set(p)|{v|256 for v in chosen}
             ns={v:{v^(1<<b) for b in range(9)}&full for v in full}
             tips=[v for v in full if len(ns[v])==1]
-            assert len(full)==193 and len(tips)==2 and all(len(g) in (1,2) for g in ns.values())
+            assert len(full)==desired and len(tips)==2 and all(len(g) in (1,2) for g in ns.values())
             path=[tips[0]];used=set(path)
             while ns[path[-1]]-used:
                 v=(ns[path[-1]]-used).pop();used.add(v);path.append(v)
-            if len(path)==193:
+            if len(path)==desired:
                 assert not defects(path);q=path;status="FOUND";break
             rest=full-used
             while rest:
