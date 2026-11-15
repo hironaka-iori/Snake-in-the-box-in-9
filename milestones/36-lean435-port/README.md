@@ -256,6 +256,15 @@ Interface-only audit of both 232 certificates (`lean435/audit232.log`):
 - **Plain keys** are certified one by one ("every key a seed"). `--seeds FILE` takes a real seed plan
   instead.
 - **Free keys:** `lean435/data/free_*.jsonl.gz`.
+- **Big jobs of the 231 plan (`certplan231_563_1_cap`).** 62 paid certificates are above 30 M plan hints
+  (2.53 G hints in all), 23 above 40 M (1.20 G) and 20 above 47 M (1.07 G).
+  - The largest, `T012345A44456K29` (share, 57.7 M plan hints), was run end to end with `--no-sync`. It
+    gave 51.4 M replay hints, cores 428 s, an LRAT search of 4,065 s and a Lean build of 19,039 CPU-s
+    (0.37 ms/hint), 6.6 h in all.
+  - Peak RssAnon was 9.06 GB (VmHWM 9.86 GB). That fits the default 13 GB cap, so no plan change is
+    needed.
+  - `predict_gb` is now 1.9 + 0.14 GB per M plan hints (was 1.2 + 0.25), so such a job no longer
+    reserves the whole 12 GB budget.
 
 ## Free keys, the 232 chain and the assembly
 

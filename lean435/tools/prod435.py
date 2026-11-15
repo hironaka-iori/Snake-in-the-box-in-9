@@ -38,7 +38,7 @@ and LRAT, single-threaded) is not limited further. Lean builds are admitted unde
 the predicted RssAnon of the running builds stays within --mem-gb (default 12 GB); a build predicted
 above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit).
 A restart reuses a finished generation of the same certificate (job directory kept until published).
-Prediction: 1.2 GB + 0.25 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
+Prediction: 1.9 GB + 0.14 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
 
 Work directory: $PROD435_HOME (default ~/l435/prod). Core stack: $PROD435_HOME/core.
 """
@@ -128,9 +128,10 @@ def seeds_file(plan):
 def predict_gb(est):
     # peak RssAnon of the merged-module build, 4.35, by plan hints. Measured: 0.21 GB at 0.01 M,
     # 0.76 at 0.13, 1.16 at 0.23 (ctx), 1.52 at 0.38 (share), 1.51 at 1.62 (ctx), 1.66 at 3.93 (plain,
-    # worker w0), 2.90 at 8.26 (share T012034A46536K21); 4.19: 6.9 GB RSS at 38.8 M replay hints.
-    # Upper envelope: 1.2 GB + 0.25 GB per M.
-    return 1.2 + 0.25 * est / 1e6
+    # worker w0), 2.90 at 8.26 (share T012034A46536K21), 9.06 at 57.73 (share T012345A44456K29, the
+    # largest 563/1 job: 51.4 M hints, lean 19,039 s); 4.19: 6.9 GB RSS at 38.8 M replay hints.
+    # Upper envelope with ~10% margin: 1.9 GB + 0.14 GB per M (was 1.2 + 0.25, 15.6 GB at 57.7 M).
+    return 1.9 + 0.14 * est / 1e6
 
 
 class Budget:
