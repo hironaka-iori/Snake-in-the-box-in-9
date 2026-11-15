@@ -21,7 +21,7 @@ Reads the summary `milestones/35-231-lean/data/auto6sc_<T>.json` and writes (cor
 The arithmetic is `upper_of_refuted6SC` (AggregateDirection6SCConditional):
 (P + 4200 Q) m ≤ 1099800 Q + 7 P + (2^B - 1).
 
-  python gen_lean_chain6sc.py --tag T --out-stronger DIR [--summary FILE] [--rows-per-part 40] [--check]
+  python gen_lean_chain6sc.py --tag T --out-stronger DIR [--summary FILE] [--rows-per-part 40] [--ctx-shapes-per-part 0] [--check]
 """
 import argparse, json, os, sys
 
@@ -124,16 +124,30 @@ end Snake9.DirectionWindow6SC
 '''
 
 
-def ctx_mod(T, s):
-    out = head(T, f'The ctx 7 and ctx 8 covers of `tables6SC{T}`.', BASE(T) + ['DirectionWindowBridge6SCChunks'])
+def ctx_mod(T, s, shapes_per_part=0):
+    """The ctx covers.  With `shapes_per_part` > 0 the row declarations go to part modules
+    `DirectionWindowBridge6SC<T>C<n>_<g>` (that many shapes each; they build in parallel) and the
+    module `…C` keeps the zero checks and the two covers; with 0, everything is in `…C`."""
+    parts = {}
+    out = None
+    imps = []
+    body = ''
     for n in (7, 8):
         shapes = s[f'ctx{n}_shapes']
         rf = f'rowf{n} tables6SC{T}'
         stmt = lambda c: (lambda i, t0: f'ctxRowOK tables6SC{T}.cbits ({rf} {lst(c)}) (ctx{n}Chunks6SC{T}.getD {i} []) {lst(c)} {t0}')  # noqa: E731
-        out += f'''set_option maxRecDepth 100000 in
+        rows = [rows_t0(T, f'ctxRow{n}_6SC{T}', k, c, stmt(c), s[f'ctx{n}_chunk_index'][k]) for k, c in enumerate(shapes)]
+        if shapes_per_part > 0:
+            for g in range(0, len(rows), shapes_per_part):
+                m = f'DirectionWindowBridge6SC{T}C{n}_{g // shapes_per_part}'
+                parts[m] = head(T, f'ctx {n} row declarations {g} .. {min(len(rows), g + shapes_per_part) - 1} of `tables6SC{T}`.',
+                                BASE(T)) + ''.join(rows[g:g + shapes_per_part]) + 'end Snake9.DirectionWindow6SC\n'
+                imps.append(m)
+            rows = []
+        body += f'''set_option maxRecDepth 100000 in
 theorem ctxZero{n}_6SC{T} : allRGS {n} 0 (zeroOutsideC ({rf}) ctx{n}Shapes6SC{T}) = true := by decide +kernel
 
-''' + ''.join(rows_t0(T, f'ctxRow{n}_6SC{T}', k, c, stmt(c), s[f'ctx{n}_chunk_index'][k]) for k, c in enumerate(shapes)) + f'''set_option maxRecDepth 100000 in
+''' + ''.join(rows) + f'''set_option maxRecDepth 100000 in
 theorem ctxRows{n}_6SC{T}_lit : AllP (fun c : List Nat => ∀ t0, 1 ≤ t0 → t0 ≤ 6 → ∃ i, ctxRowOK tables6SC{T}.cbits ({rf} c) (ctx{n}Chunks6SC{T}.getD i []) c t0 = true)
     [{', '.join(lst(c) for c in shapes)}] :=
   {f"⟨{', '.join(f'ctxRow{n}_6SC{T}_{k}' for k in range(len(shapes)))}, trivial⟩" if shapes else 'trivial'}
@@ -144,7 +158,9 @@ theorem ctxCover{n}_6SC{T} : CtxCover {n} tables6SC{T}.cbits ({rf}) ctx{n}Keys6S
     exact AllP.mem ctxRows{n}_6SC{T}_lit)
 
 '''
-    return out + 'end Snake9.DirectionWindow6SC\n'
+    out = head(T, f'The ctx 7 and ctx 8 covers of `tables6SC{T}`.', BASE(T) + ['DirectionWindowBridge6SCChunks'] + imps) + body
+    parts[f'DirectionWindowBridge6SC{T}C'] = out + 'end Snake9.DirectionWindow6SC\n'
+    return parts
 
 
 def bridge(T, s, nparts):
@@ -236,6 +252,8 @@ def main():
     ap.add_argument('--summary')
     ap.add_argument('--out-stronger', required=True)
     ap.add_argument('--rows-per-part', type=int, default=40)
+    ap.add_argument('--ctx-shapes-per-part', type=int, default=0,
+                    help='split the ctx row declarations into part modules of this many shapes (0: one module)')
     ap.add_argument('--check', action='store_true', help='fail if a module would change')
     a = ap.parse_args()
     s = json.load(open(a.summary or os.path.join(DATA, f'auto6sc_{a.tag}.json')))
@@ -246,7 +264,8 @@ def main():
     parts = k6_parts(T, s, a.rows_per_part)
     files = {f'{m}.lean': t for m, t in parts.items()}
     files[f'DirectionWindowBridge6SC{T}S.lean'] = share_mod(T, s)
-    files[f'DirectionWindowBridge6SC{T}C.lean'] = ctx_mod(T, s)
+    for m, t in ctx_mod(T, s, a.ctx_shapes_per_part).items():
+        files[f'{m}.lean'] = t
     files[f'DirectionWindowBridge6SC{T}.lean'] = bridge(T, s, len(parts))
     files[f'AggregateDirection6SC{T}.lean'] = aggregate(T, s)
     D = 'Snake9.DirectionWindow6SC'
