@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 229}
+\date{Research state after round 230}
 \begin{document}
 \maketitle
 
@@ -33,8 +33,9 @@ The known values $1,2,4,7,13,26,50,98$ do not determine the next term.
 Numerical continuations suggest 194, 195 or 196, without proving a recurrence.
 To establish 196 exactly requires both a 196-edge witness and exclusion
 of every 197-edge snake; every longer snake contains such a prefix.
-The following counting and construction arguments address different parts
-of this task. Restricted search exclusions do not establish the global optimum.
+The counting argument supplies the upper bound. The construction arguments
+seek any improvement above 191, beginning with a 192-edge snake. Their
+restricted exclusions do not establish the global optimum.
 
 \section{The square budget and the completed upper bound}
 For a nontrivial snake put $v=m+1$, and let $s_j$ count coordinate squares
@@ -277,7 +278,7 @@ selected endpoints in $U$, degree accounting gives $2X-E=2Y+B$.
 Thus the same inequality is $B+E\ge2x_v$. These deductions pass Lean.
 
 For Boolean products, $\delta_{ab}=x_a+x_b-2y_{ab}$ records endpoint
-disagreement. A closed cycle changes value an even number of times.
+disagreement. A closed cycle $C$ changes value an even number of times.
 An odd marked edge set $F$ must differ from that pattern somewhere, giving
 \[
 \sum_{e\in F}\delta_e-\sum_{e\in E(C)\setminus F}\delta_e\le|F|-1.
@@ -365,9 +366,10 @@ independent exact audits, with concrete model necessity reviewed separately.
 The numerical tree and coefficient arrays have no end-to-end Lean assembly.
 All evidence is retained in milestone 222~\cite{research222}.
 
-\section{Joint construction across four crossings}
-The selected constructive route places three paths in one $Q_8$ face
-and two in the other. It follows the saved lower-dimensional patterns
+\section{Joint construction across coordinate faces}
+The initial four-crossing route places three paths in one $Q_8$ face
+and two in the other; the later replacement search also permits other
+crossing counts. It follows the saved lower-dimensional patterns
 \[
 18+24+6+2=50,\qquad 8+25+10+25+26+4=98.
 \]
@@ -492,25 +494,63 @@ The earlier results still provide valid count exclusions in each matching
 context: total four is impossible, and total six is impossible in the
 200 cases with completed six-crossing results. Adding these exclusions
 to the larger model removes only cases already covered by native evidence.
-The search with unrestricted crossing count excludes 304 of the
-315 maximal contexts and leaves 11 unresolved.
-All nine earlier six-crossing unknowns are now excluded by the broader
-queries, so the exact-six family is also completely covered. In the
-eleven remaining unrestricted cases, a total of two crossings would
-force replacement allocations $(0,0)$ in four cases and $(1,0)$ in seven.
-This is the next construction route. It is only a necessary allocation
-calculation; a compatible pair of paths still has to be found or excluded.
-Even totals of at least eight also remain possible in the unresolved family.
-This is a construction-family result, with no new snake or global
-optimality claim. Numerical exclusions, enumeration and data extraction
-remain separate from the checked general implications~\cite{research229}.
+At the end of round 229, the search with unrestricted crossing count
+excluded 304 of the 315 maximal contexts. All nine earlier six-crossing
+unknowns were excluded by broader queries that had imposed no six-count
+restriction on those nine. The exact-six family was therefore covered
+without circular reasoning~\cite{research229}.
+
+In the eleven residual contexts, two total crossings force replacement
+allocations $(0,0)$ in four cases and $(1,0)$ in seven. Enumerating the
+short upper pieces gives fifteen pairs of paths to find in $Q_8$.
+All fifteen native queries are infeasible. This excludes two crossings
+throughout the selected family.
+
+\section{Why repeated face visits require space}
+Split a snake at every crossing of one chosen coordinate. Each remaining
+piece is a consecutive visit to one of the two faces. An internal visit
+has a crossing before and after it. It needs at least three vertices:
+with one vertex, the two flanking vertices would coincide; with two,
+the flanking vertices would be adjacent at nonconsecutive positions.
+Both violate the snake condition.
+
+Suppose there are $c>0$ crossings, $u$ vertices in the upper face and
+$r$ endpoints there. If the path makes $k$ upper visits, exactly $r$
+are endpoint visits. Counting their incident crossings and vertices gives
+\[
+c=2k-r,\qquad u\ge3(k-r)+r.
+\]
+Eliminating $k$, and then repeating the argument for the lower face, gives
+\[
+\boxed{3c\le2u+r,\qquad 3c\le2l+2-r.}
+\]
+Here $l$ counts lower vertices. The inequalities are immediate when
+$c=0$. For a path of $m$ edges, adding them gives $3c\le m+2$.
+A 46-edge replacement therefore crosses any chosen coordinate at most
+16 times. Lean checked the local obstruction and the finite counting
+implications. Extracting the visits from an arbitrary whole path remains
+a written proof.
+
+Every full candidate in the eleven residual cases has endpoints in the
+same face and retains a crossing. Its total crossing count is therefore
+positive and even. Since two, four and six are excluded, it must have at
+least eight. The last search adds this requirement and the face-visit
+inequalities while allowing every remaining crossing count.
+All eleven queries are infeasible. Together with the earlier results,
+this excludes all 315 maximal contexts and, by padding, every shorter
+replacement in the same two-block family. This remains a native
+computational exclusion with explicit seed, endpoint, anchor and
+length-preservation restrictions~\cite{research230}.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
-The four-crossing two-block search excludes widths through 46 for the
-chosen endpoint and seed. The unrestricted-crossing search has the scope
-and remaining cases stated above. Wider blocks, different seeds or
-endpoints, and changed block lengths remain construction choices.
+The selected two-block family is excluded through width 46 for every
+crossing count. A new construction search must change a restriction.
+A useful next preparation is to compare extension endpoints across
+inequivalent seeds and count the retained vertices that conflict with
+each extension. Fewer or more closely placed conflicts may require less
+structure to change; this expectation is unproved. Wider blocks and
+changed block lengths remain construction choices.
 Different parent classes and shorter compatible parents remain alternatives. Finding a new parent still requires a compatible joining construction.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
@@ -521,7 +561,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 229.
+in the companion manuscript and milestones through round 230.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -599,6 +639,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Exact projection restrictions and
 variable-crossing replacement constructions}. Research milestone 229,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/229-two-layer-construction}.
+
+\bibitem{research230}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Face visits and completion of the
+two-block construction exclusion}. Research milestone 230,
+16 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/230-two-crossing-frontier}.
 
 \end{thebibliography}
 \end{document}

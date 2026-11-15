@@ -1,0 +1,18 @@
+E:\Snake-in-a-box\milestones\230-two-crossing-frontier\lean\FaceVisits230.lean:23:3: error: unknown tactic
+E:\Snake-in-a-box\milestones\230-two-crossing-frontier\lean\FaceVisits230.lean:17:17: error: unsolved goals
+V : Type
+R : V → V → Prop
+a b c : Nat
+p : InducedPath V R a
+q : InducedPath V R b
+r : InducedPath V R c
+hpq : Compatible p q
+hqr : Compatible q r
+hpr : ∀ (i : Fin (a + 1)) (j : Fin (c + 1)), p.vertex i ≠ r.vertex j ∧ ¬R (p.vertex i) (r.vertex j)
+hleft : p.vertex ⟨a, ⋯⟩ = q.vertex ⟨0, ⋯⟩
+hright : q.vertex ⟨b, ⋯⟩ = r.vertex ⟨0, ⋯⟩
+hsep : p.vertex ⟨a, ⋯⟩ ≠ r.vertex ⟨0, ⋯⟩ ∧ ¬R (p.vertex ⟨a, ⋯⟩) (r.vertex ⟨0, ⋯⟩)
+⊢ 3 ≤ b + 1
+'FaceVisits230.interior_piece_three_vertices' depends on axioms: [propext, sorryAx, Quot.sound]
+'FaceVisits230.run_vertex_budget' depends on axioms: [propext, Quot.sound]
+'FaceVisits230.face_crossing_budget' depends on axioms: [propext, Quot.sound]

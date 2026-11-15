@@ -1,0 +1,85 @@
+import LayerJoining
+
+set_option Elab.async false
+
+namespace FaceVisits230
+open LayerJoining
+
+/-- An interior face piece between two vertical joins has at least three
+vertices when the two outer pieces are disjoint and nonadjacent. -/
+theorem interior_piece_three_vertices {V : Type} {R : V → V → Prop}
+    {a b c : Nat}
+    (p : InducedPath V R a) (q : InducedPath V R b)
+    (r : InducedPath V R c)
+    (hpq : Compatible p q) (hqr : Compatible q r)
+    (hpr : ∀ i j, p.vertex i ≠ r.vertex j ∧
+      ¬ R (p.vertex i) (r.vertex j)) :
+    3 ≤ b + 1 := by
+  have hleft : p.vertex ⟨a, by omega⟩ = q.vertex ⟨0, by omega⟩ :=
+    (hpq ⟨a, by omega⟩ ⟨0, by omega⟩).mpr ⟨rfl, rfl⟩
+  have hright : q.vertex ⟨b, by omega⟩ = r.vertex ⟨0, by omega⟩ :=
+    (hqr ⟨b, by omega⟩ ⟨0, by omega⟩).mpr ⟨rfl, rfl⟩
+  have hsep := hpr ⟨a, by omega⟩ ⟨0, by omega⟩
+  by_cases hlarge : 3 ≤ b + 1
+  · exact hlarge
+  · apply False.elim
+    have hcases : b = 0 ∨ b = 1 := by omega
+    rcases hcases with rfl | rfl
+    · exact hsep.1 (hleft.trans hright)
+    · have hmiddle : R (q.vertex ⟨0, by omega⟩) (q.vertex ⟨1, by omega⟩) :=
+        (q.induced ⟨0, by omega⟩ ⟨1, by omega⟩ (by omega)).mpr rfl
+      apply hsep.2
+      rw [hleft, ← hright]
+      exact hmiddle
+
+/-- Each pair records a run's number of vertices and whether it meets an
+endpoint. Endpoint runs require one vertex; all other runs require three. -/
+theorem run_vertex_budget (runs : List (Nat × Bool))
+    (hsizes : ∀ run, run ∈ runs →
+      if run.2 then 1 ≤ run.1 else 3 ≤ run.1) :
+    3 * runs.length ≤ (runs.map Prod.fst).sum +
+      2 * (runs.filter (fun run => run.2)).length := by
+  revert hsizes
+  induction runs with
+  | nil =>
+      intro _
+      simp
+  | cons run rest ih =>
+      intro hsizes
+      have hhead := hsizes run (by simp)
+      have htail : ∀ x, x ∈ rest →
+          if x.2 then 1 ≤ x.1 else 3 ≤ x.1 := by
+        intro x hx
+        exact hsizes x (by simp [hx])
+      have hrest := ih htail
+      rcases run with ⟨n, endpoint⟩
+      cases endpoint with
+      | false =>
+          have hn : 3 ≤ n := by simpa using hhead
+          have hstep : 3 * (rest.length + 1) ≤
+              n + (rest.map Prod.fst).sum +
+              2 * (rest.filter (fun run => run.2)).length := by omega
+          simpa using hstep
+      | true =>
+          have hn : 1 ≤ n := by simpa using hhead
+          have hstep : 3 * (rest.length + 1) ≤
+              n + (rest.map Prod.fst).sum +
+              2 * ((rest.filter (fun run => run.2)).length + 1) := by omega
+          simpa using hstep
+
+/-- The incidence identity and endpoint-run count convert the run budget
+to a crossing bound. Constructing the run list from a path is separate. -/
+theorem face_crossing_budget (runs : List (Nat × Bool)) (crossings anchors : Nat)
+    (hsizes : ∀ run, run ∈ runs →
+      if run.2 then 1 ≤ run.1 else 3 ≤ run.1)
+    (hendpoints : (runs.filter (fun run => run.2)).length = anchors)
+    (hincidence : 2 * runs.length = crossings + anchors) :
+    3 * crossings ≤ 2 * (runs.map Prod.fst).sum + anchors := by
+  have hbudget := run_vertex_budget runs hsizes
+  omega
+
+#print axioms interior_piece_three_vertices
+#print axioms run_vertex_budget
+#print axioms face_crossing_budget
+
+end FaceVisits230

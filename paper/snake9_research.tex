@@ -32,69 +32,39 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 229, 15 November 2026}
+\date{Research state after round 230, 16 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $a(9)$ denote the maximum edge length of an induced path in the
+Let $a(9)$ be the maximum edge length of an induced path in the
 nine-dimensional binary hypercube. An explicit checked construction and
-a completed contributor theorem give $191\le a(9)\le233$.
-The pinned contributor source has no remaining certificate or floor
-premise, and its saved final assembly and axiom audit are successful.
-A complete independent rebuild remains pending~\cite{bound233archive}.
+a completed contributor theorem give $191\le a(9)\le233$. The upper
+theorem has a successful saved final assembly and axiom audit, with no
+remaining certificate or share-floor premise; a complete independent
+rebuild remains pending~\cite{bound233archive}.
 
-For a snake of length $m$, singleton-square count $T$ and empty-square
-count $s_0$, the exact census is $T+2s_0+35(m+1)=9214$.
-Local count restrictions strengthen the archived argument to
-$39m+2s_0\le9192$. Thus fourteen empty squares would suffice to exclude
-length 235. Integer shares retain the empty-square contribution in
-stronger conditional comparisons. Four unresolved local share floors,
-$(15,14,14,14)$, together with specified graph and certificate premises,
-would give $a(9)\le234$. This alternative comparison is numerically
-superseded by the completed contributor bound 233; its own premises
-remain unresolved.
+The upper-bound analysis combines an exact coordinate-square census,
+local count and empty-square share inequalities, and finite potentials.
+Earlier bounds and alternative conditional comparisons retain their
+original hypotheses and verification limits.
 
-The construction analysis derives restrictions on joining paths in
-opposite coordinate faces and gives criteria for changing an entire
-snake while preserving all selected adjacencies and nonadjacencies.
-For the saved 98-edge parent in dimension eight, exhaustive native
-searches over four and five free coordinate histories find no different
-cube-isometry class at the same length and fixed index matching.
-At least six histories must therefore change within that comparison.
-A capacity inequality for a square of fixed coordinates forces nine
-shared free words in one remaining six-coordinate case. Its geometric
-core, counting implications and literal source counts have separate
-Lean checks; the complete finite search certificates and geometric
-assembly retain their stated limitations.
+The construction analysis gives criteria for joining lower-dimensional
+paths, changing coordinate histories, and replacing separated portions
+of a known snake. A complete prefix cover with exact weighted-inequality
+certificates excludes every 93-edge compatible partner of the saved
+98-edge parent. Its full cube-isometry class therefore has a
+one-crossing joining ceiling of 191 edges, without an attainment claim.
+The unconditioned continuous model nevertheless admits exact fractional
+weight 94 under all cycle occupancy, subset forest and cycle parity
+inequalities. Native searches exclude the specified two-block construction through
+46-edge replacements for every crossing count. A necessary face-visit
+inequality strengthens the last queries; its combinatorial proof and
+the scope of its checked components are stated separately.
 
-Complete prefix coverage and exact certificates exclude every 93-edge
-compatible partner at either endpoint of the saved 98-edge parent.
-Any longer partner would contain such a prefix, so arbitrary compatible
-partners have at most 92 edges. A one-crossing join using this parent,
-or any cube-isometric copy, consequently has at most 191 edges.
-This ceiling is not an attainment claim. The unconditioned continuous
-model still has exact fractional points of weight 94 satisfying all
-cycle occupancy, subset forest and disagreement-cycle parity inequalities.
-The exclusion uses a complete finite division into actual path prefixes.
-Generic Lean implications and independent exact numerical certificates
-have separate verification records.
-
-A checked five-component constructor supports a joint four-crossing
-search. The first small neighbourhood is computationally excluded;
-larger neighbourhoods remain unresolved, with no new construction.
-A checked interaction theorem explains when simultaneous block changes
-can escape a family closed under separate changes. A complete restricted
-two-block four-crossing search through length 46 is excluded natively.
-General projection-filter and crossing-allocation implications have passed
-Lean. The wider search also permits arbitrary crossing counts; its
-remaining scope and dependencies are stated explicitly. The direct simultaneous-replacement constructor
-and coordinate-crossing parity relation have also passed Lean.
-
-The paper separates written proofs, checked implications, native
-enumerations and unresolved premises. The contributor bound improves
-the archived upper bound from 235 to 233; no construction above 191
-is obtained. The value 196
-remains a conjecture requiring both a construction and an upper bound.
+Written proofs, Lean-checked implications and independently audited
+numerical evidence are distinguished throughout. No construction above
+191 or matching global upper bound is obtained. The numerical conjecture
+$a(9)=196$ remains separate from every proved result.
 \end{abstract}
 
 \clearpage
@@ -152,18 +122,34 @@ along every actual snake. Section~\ref{sec:bound233} records the completed
 233 chain. Section~\ref{sec:upper-proof} preserves the earlier 235 argument
 and its empty-square refinement with their original constants.
 
-The argument has two parts. The first develops the square census,
-local count restrictions and empty-square shares, then states the precise
-completed contributor bound 233 and the remaining conditions for
-alternative 234 and relaxed 233 comparisons. The seven-count boundary
-allows the current retained comparison to use nonnegative loss alone.
-The second examines numerical conjectures, constructions across
-dimensions, transformations of whole snakes and restrictions obtained
-by fixing coordinate histories. The final section records verification
-scope and the unresolved extremal problem. Historical comparison models,
-restricted construction experiments and explicit witnesses are retained
-in the appendices. Every historical comparison keeps its original graph,
-weights and boundary; later improvements do not silently change its premises.
+\paragraph{Reading order and status.}
+The strongest conclusions can be read before the chronological development:
+\begin{itemize}
+\item Section~\ref{sec:bound233} gives the completed contributor bound 233.
+The square census and local inequalities preceding it explain its methods;
+the alternative conditional 234 and relaxed 233 comparisons retain their
+own unresolved premises.
+\item Section~\ref{sec:prefix222} gives the exact fixed-parent ceiling of
+191 for a one-crossing join. It covers the specified full parent and its
+cube-isometry class, and asserts no compatible witness attaining that ceiling.
+\item Sections~\ref{sec:replacement225}--\ref{sec:facevisits230} give the
+simultaneous-replacement criteria and the successive restricted construction
+results. Their native exclusions concern the stated seed, endpoint,
+intervals and length-preservation conditions. The latest cover permits
+every crossing count.
+\item Section~\ref{sec:verification} separates completed implications,
+numerical evidence and remaining verification obligations. The conjecture
+in Section~\ref{sec:hypothesis} is used in none of these results.
+\end{itemize}
+The two parts retain the upper-bound and construction developments in
+their mathematical order. Intermediate search outcomes are historical
+records at their named cutoffs; a later exclusion supersedes an earlier
+timeout only within the same covered family. The appendices retain earlier
+comparison models, experiments and explicit witnesses. Every comparison
+keeps its original graph, weights and boundary.
+
+The following table records the upper-bound development and selected
+local results. The construction conclusions are located by the guide above.
 
 
 \begin{center}
@@ -3274,7 +3260,7 @@ implications. A separate saved-cycle calculation checks the edge weights
 and their source identities~\cite{share145archive}.
 \end{proof}
 
-Three consequences guide the next computation. First, keeping the effective
+Three consequences describe this historical comparison. First, keeping the effective
 $012340$ floor at $4$, even increasing $F$ to $19$ leaves the comparison at least
 \[
 \frac{7723775}{32866}=235+\frac{265}{32866}.
@@ -3684,7 +3670,7 @@ The finite arithmetic classification passes Lean; the geometric
 count bound is the direct pair-counting argument just given.
 This identifies the possible exceptional corner, without excluding it.
 
-A useful next local target is to exploit this restricted rounding loss.
+This restricted rounding loss gives a separate local proof target.
 For a set $C$ of selected window centres, let $k(q)$ count its neighbours
 in $C$. Double counting the rational shares gives
 \[
@@ -3984,8 +3970,8 @@ Substitution of the exact physical share identity gives
 \begin{equation}\label{eq:slack-budget233}
 W+4200m+5L\le1098840+q(m-7).
 \end{equation}
-The omitted-count contribution improves from fourteen in the contributor's
-present accounting to twenty-two, a gain of $120\cdot8=960$.
+The omitted-count contribution improves from fourteen in the original
+contributor accounting to twenty-two, a gain of $120\cdot8=960$.
 
 \begin{proposition}[Four-unit allowance in the share requirements]
 Suppose the original potential gives $520(m-7)\le W+1023$ and the
@@ -4108,58 +4094,6 @@ transition checks~\cite{conditional234archive}. It is distinct from the present
 five-centre share argument and supplies no stronger main theorem here.
 
 \part{Constructions and whole-snake restrictions}
-\section{A numerical conjecture and its limitations}\label{sec:hypothesis}
-\begin{center}
-\begin{tabular}{rrrr}
-\toprule
-$n$ & $a(n)$ & $3\cdot2^{n-3}$ & correction\\
-\midrule
-3&4&3&1\\4&7&6&1\\5&13&12&1\\
-6&26&24&2\\7&50&48&2\\8&98&96&2\\
-\bottomrule
-\end{tabular}
-\end{center}
-The baseline coefficient is also recovered from successive differences within the two triples:
-\[
-\frac{7-4}{2^4-2^3}=\frac{13-7}{2^5-2^4}
-=\frac{50-26}{2^7-2^6}=\frac{98-50}{2^8-2^7}=\frac38.
-\]
-Continuing the correction as $1,1,1,2,2,2,4,4,4,\ldots$ gives
-\begin{equation}\label{eq:model}
-\widehat a(n)=3\cdot2^{n-3}+2^{\lfloor(n-3)/3\rfloor},\qquad n\ge3.
-\end{equation}
-The terms at dimensions one and two are assigned separately as 1 and 2.
-
-\begin{conjecture}\label{conj:196}
-The maximum snake length in $\Q_9$ is $196$ edges.
-\end{conjecture}
-This numerical conjecture is motivated only by the displayed extrapolation; it is not used in any theorem in this paper. Equation~\eqref{eq:model} predicts $3\cdot64+4=196$.
-
-\begin{proposition}[Model recurrence]
-For $n\ge3$, the model satisfies
-\[
-\widehat a(n+3)+6\cdot2^{\lfloor(n-3)/3\rfloor}=8\widehat a(n).
-\]
-\end{proposition}
-\begin{proof}
-Put $t=n-3$ and $c=2^{\lfloor t/3\rfloor}$. Since $\lfloor(t+3)/3\rfloor=\lfloor t/3\rfloor+1$, the left side is
-$24\cdot2^t+2c+6c=8(3\cdot2^t+c)$.
-\end{proof}
-At $n=6$ the recurrence predicts $8\cdot26-12=196$. This is the same evidence as the correction table, not an independent argument.
-
-\begin{proposition}[The known terms do not determine the ninth prediction]
-The model
-\[
-\widetilde a(n)=3\cdot2^{n-3}+1+\left\lfloor\frac{n-3}{3}\right\rfloor
-\qquad(n\ge3)
-\]
-agrees with every known term, after assigning the first two terms separately, and gives $\widetilde a(9)=195\ne196$.
-\end{proposition}
-\begin{proof}
-For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, the corrections are respectively 3 and 4. Direct substitution proves the claim.
-\end{proof}
-Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
-
 \section{Construction and the requirements for optimality}\label{sec:optimality}
 \subsection{The next-length criterion}
 \begin{lemma}[Prefix restriction]\label{lem:prefix}
@@ -4417,6 +4351,9 @@ archived in~\cite{construction188archive}.
 
 \subsection{Replacement restrictions in the common 95-edge component}
 \label{sec:middle-replacements}
+This subsection records the round-189 replacement restrictions. The later
+eight-omission requirement in Section~\ref{sec:attachment-colour} strengthens
+their numerical conclusion for the same fixed middle path.
 The common construction family has lengths $47,95,191$, corresponding
 to 48, 96 and 192 selected vertices. Its two-crossing decompositions
 double the selected-vertex count at each of these steps:
@@ -4604,9 +4541,9 @@ interval structure. For example, five separated deletions require the
 seven added vertices to induce exactly two edges and five components.
 
 \paragraph{Completing the five-omission cases computationally.}
-The unrestricted five-omission circuit search remains unresolved after
-120 seconds, and a separate two-interval circuit search remains unresolved
-after 60 seconds. A direct enumeration resolves the latter case.
+The initial unrestricted five-omission circuit query returned unknown
+after 120 seconds, as did the separate two-interval query after 60 seconds.
+The direct enumeration below then resolved the latter case.
 There are four ordered interval-size splits, $(1,4),(2,3),(3,2),(4,1)$,
 and 4005 placements for each, giving 16020 interval pairs.
 Deleting the intervals leaves three retained chains. The endpoint
@@ -4999,10 +4936,10 @@ i<r\le s<j,\qquad j-i\ge s-r+2.
 Indeed, each retained blocker would still violate distinctness or
 create a chord with $w$. The interior requirement and the span
 inequality pass Lean under explicit agreement and separation premises.
-This condition can restrict the larger-block search before enumeration;
-it does not ensure that a replacement exists. The next construction
-search can impose all these blocker requirements and target a
-192-edge path directly. Evidence and remaining scopes are recorded
+This condition restricts the larger-block search before enumeration;
+it does not ensure that a replacement exists. The subsequent search in
+Section~\ref{sec:target194} imposes these blocker requirements and targets
+a 192-edge path directly. Evidence and remaining scopes are recorded
 in~\cite{block193archive}.
 
 
@@ -5500,8 +5437,8 @@ exclusion. No numerical bound changes.
 
 The concrete triangle data and Boolean occupancy implication pass Lean. The endpoint transport theorem passes Lean. The complete concrete paired-path checks pass Lean. The concrete triangle noncontainment theorem also passes Lean. The exact three-orbit classification has the written proof above. Finite search outcomes remain native computations.
 Exact inputs, witnesses, restricted searches and proof receipts appear
-in~\cite{symmetry198archive}. The next unrestricted construction search
-can use the three endpoint cases. The simpler family avoiding all matching
+in~\cite{symmetry198archive}. The three endpoint cases were subsequently
+queried in Section~\ref{sec:symmetry199}. The simpler family avoiding all matching
 steps may also be searched separately; in that family ordinary cube
 parity balance is valid and $S\cap h(S)=\varnothing$ is required.
 
@@ -7214,6 +7151,9 @@ The continuation accepts 400 new jobs and examines 2,044,830 additional nodes. T
 
 \subsection{A direct compatible-path target}
 \label{sec:direct217}
+This subsection records the round-217 search state. The fixed-parent
+target introduced here was later excluded in Section~\ref{sec:prefix222};
+the separate coordinate-history search remains unresolved.
 Longer submitted jobs continue the same retained-coordinate model and
 the same joint-support engine. The nine inherited regions and all model
 files are unchanged at transfer; the new ledger links the cumulative
@@ -7238,8 +7178,8 @@ For this fixed parent, the earlier arbitrary 97-edge partner queries
 returned infeasible at both endpoints. These are solver exclusions
 without Lean contradiction certificates. In contrast, the 93-edge
 queries both remained unresolved after approximately 30 seconds.
-Thus finding a different optimal parent is an additional discovery
-stage that is unnecessary for the still-open 192-edge target.
+At that cutoff, finding a different optimal parent was an additional
+discovery stage, unnecessary for the then-open fixed-parent target.
 Neither outcome settles the conjectured value 196.
 
 Both allowed graphs have 158 vertices, 337 edges and 79 vertices of
@@ -7247,8 +7187,9 @@ each parity. The saved enumeration finds that each graph is connected
 and has no articulation vertex. These facts give no elementary
 connectivity or parity obstruction to a 93-edge partner.
 Section~\ref{sec:partner218} reports the subsequent degree-and-cycle
-queries. They leave both endpoints unresolved, and no runtime advantage
-over the earlier circuit formulation is established.
+queries. Those queries also returned unknown at both endpoints; the later
+prefix exclusion supersedes these timeouts. No runtime advantage over the
+earlier circuit formulation is established.
 The source review, graph data and continuation records are retained
 in milestone 217~\cite{research217}.
 
@@ -7297,7 +7238,7 @@ or native solver exhaustion~\cite{research218}.
 
 At endpoint 0, the 240-second query returns \texttt{UNKNOWN}, after 240.042 reported solver seconds; 0 dynamic cycle cuts are added.
 At endpoint 78, the 240-second query returns \texttt{UNKNOWN}, after 240.002 reported solver seconds; 0 dynamic cycle cuts are added.
-The unresolved cases remain open. No longer snake or global numerical bound is obtained, and no speed comparison is established.
+Both cases were unresolved at the round-218 cutoff; Section~\ref{sec:prefix222} later excludes them. These queries gave no longer snake or global numerical bound, and established no speed comparison.
 
 An initial invocation exceeded the memory limit before producing a model or mathematical result. Limiting the numerical-library thread counts allowed the same model to run within the recorded resource limits. The failed invocation and subsequent receipts are retained separately.
 
@@ -7883,8 +7824,8 @@ For the 33-edge family, geometry excludes 171 maximal contexts and
 native solver queries exclude the other 53. A final run omits the
 interaction restriction entirely, so this numerical exclusion does
 not depend on the bank-closure premise. It has no complete Lean
-contradiction certificate. For 44-edge blocks, the 301 maximal contexts
-give 107 geometric exclusions, 102 solver exclusions and 92 unresolved
+contradiction certificate. At the round-224 cutoff, the 301 maximal width-44 contexts
+gave 107 geometric exclusions, 102 solver exclusions and 92 unresolved
 cases. These models impose only the combined crossing count and use
 no interaction restriction or short-move closure premise.
 
@@ -7894,8 +7835,9 @@ made. Sixteen selected contexts were then strengthened by connectivity
 flows. An actual 44-edge path supports these constraints by sending
 $44,43,\ldots,1$ units along its successive oriented edges: the root
 supplies 44 units and every other selected vertex receives one net unit.
-All 16 remain unknown, leaving 92 unresolved contexts. No new snake or
-global bound is obtained~\cite{research224}.
+All 16 queries returned unknown, leaving 92 unresolved contexts at that
+cutoff. Section~\ref{sec:lowerpair227} later completes this family. No new
+snake or global bound was obtained~\cite{research224}.
 
 \subsection{Constructing two replacements and transferring exclusions}
 \label{sec:replacement225}
@@ -7968,11 +7910,11 @@ allocation queries are infeasible, closing these seven contexts.
 The restricted exclusion reaches width 42; width 43 leaves 25
 contexts unresolved after the initial search. Timeout establishes
 neither existence nor impossibility. Direct enumeration of connected
-replacement paths is the next construction step. A direct search in one width-43 context processed 15,013 complete
+replacement paths was the subsequent construction step. A direct search in one width-43 context processed 15,013 complete
 first paths in 30 seconds; each left insufficient connected capacity
 for the second. A further 30-second search pruned 249,163 partial
-branches using that necessary condition. Both searches remain incomplete
-and retain their frontiers. These restrictions give no longer snake or global upper bound~\cite{research225}.
+branches using that necessary condition. Both searches stopped incomplete and retained their frontiers;
+Section~\ref{sec:residual226} later excludes their width-43 family. These restrictions give no longer snake or global upper bound~\cite{research225}.
 
 \subsection{Residual capacity, boundary changes and a common eight-dimensional path}
 \label{sec:residual226}
@@ -8053,7 +7995,9 @@ in $Q_8$, coupled to seven possible second replacements. A shared prefix
 may be rejected only when all seven compatible second graphs fail.
 No such compatible pair or 192-edge snake has yet been obtained.
 
-The native direct searches remain incomplete. A block-chain refinement
+The direct searches stopped incomplete; the later reduced queries in
+Section~\ref{sec:lowerpair227} supersede the relevant width-44 frontier.
+A block-chain refinement
 removes vertices that cannot lie on a simple path between the second
 anchors: an excursion into an off-chain block would repeat its attachment
 vertex. Bounds on successive block segments add along that chain; adjacent
@@ -8160,8 +8104,10 @@ the intended paths. Its contradictions and the complete finite upper
 enumerations have no Lean certificates. The independent direct search
 processed 5,157,314 first prefixes before its time limit and proved no
 exclusion; its preserved frontier is superseded by the native cover.
-Future construction searches must change the scope, for example by
-allowing wider blocks, another endpoint or another seed~\cite{research227}.
+This exclusion required subsequent searches to change the scope.
+Sections~\ref{sec:width45} and~\ref{sec:projection229} treat wider blocks
+and variable crossing counts; other endpoints and seeds remain possible
+choices~\cite{research227}.
 
 \subsection{Two lower paths when both replacements cross the face}
 \label{sec:width45}
@@ -8255,8 +8201,8 @@ Padding smaller replacements with unchanged original vertices extends
 the cover to two blocks of at most 45 edges each. This excludes the
 specified fixed-seed, endpoint-24, length-preserving construction with
 four crossings. It supplies no new snake or global upper bound.
-Wider blocks and different seeds or endpoints remain construction
-possibilities~\cite{research228}.
+The width-46 continuation appears in Section~\ref{sec:projection229};
+different seeds or endpoints remain construction possibilities~\cite{research228}.
 
 \subsection{Exact projection restrictions and variable crossing counts}
 \label{sec:projection229}
@@ -8341,23 +8287,158 @@ six-count restriction. These deductions preserve every actual candidate
 under the explicit native premises, even though they can remove
 disconnected-cycle solutions of the degree relaxation.
 
-The search with unrestricted crossing count excludes 304 of the
-315 maximal contexts and leaves 11 unresolved.
+At the round-229 cutoff, the search with unrestricted crossing count
+excluded 304 of the 315 maximal contexts and left 11 unresolved.
+Section~\ref{sec:facevisits230} subsequently excludes all eleven.
 All nine initially unresolved six-crossing contexts are excluded by these
 broader queries, which imposed no six-count exclusion on those nine.
 Consequently the same construction family is now excluded at six
 crossings as well. Each of the eleven remaining unrestricted contexts
 permits a total of two crossings at the level of parity and face capacity:
 four force replacement allocation $(0,0)$ and seven force $(1,0)$.
-These give the next lower-dimensional construction targets. They supply
-no witness, and counts of eight or more remain possible in the unresolved
-family.
+These were the next lower-dimensional construction targets. At that
+cutoff they supplied no witness, and counts of eight or more remained
+possible in the unresolved family.
 Every timeout remains unresolved until separately excluded. These
 calculations concern the fixed seed, appended endpoint 24 and two
 length-preserving blocks; they give no new snake or global upper bound.
 The general projection and allocation implications are kernel checked;
 finite extraction, cover assembly and solver exclusions retain their
 native status~\cite{research229}.
+
+\subsection{Face visits and completion of the two-block family}
+\label{sec:facevisits230}
+The eleven residual contexts of Section~\ref{sec:projection229} allow a
+particularly small two-crossing reduction. Four have two retained
+crossings and hence allocation $(0,0)$ between the replacements; seven
+have one retained crossing and allocation $(1,0)$. Complete enumeration
+of their upper pieces leaves fifteen pairs of lower-dimensional path
+problems. Each native query is infeasible. The reduction uses only actual
+joining projections as exemptions and imposes no boundary-change
+condition. Combined with the 304 prior unrestricted exclusions, it
+excludes two crossings throughout the same 315-context family.
+
+The following necessary condition treats arbitrary crossing counts.
+It applies to every coordinate and in every dimension.
+
+\begin{proposition}[Face-visit inequality]\label{prop:facevisits230}
+Let a nontrivial induced path in $Q_n$ cross a chosen coordinate $c$
+times. Let $u$ and $l$ be its numbers of vertices in the two coordinate
+faces, and let $r\in\{0,1,2\}$ be its number of endpoints in the first
+face. Then
+\begin{equation}\label{eq:facevisits230}
+3c\le 2u+r,\qquad 3c\le 2l+2-r.
+\end{equation}
+In particular, a path of $m$ edges satisfies $3c\le m+2$.
+\end{proposition}
+\begin{proof}
+For $c=0$ both inequalities are immediate. Suppose $c>0$, and partition
+the path into maximal consecutive visits to the two faces. The visits
+containing the endpoints are distinct. Every other visit contains at
+least three vertices: a single-vertex visit would have the same vertex
+immediately before and after its two crossing edges, and a two-vertex
+visit would have adjacent flanking vertices at nonconsecutive path
+positions. These violate injectivity and inducedness, respectively.
+
+If there are $k$ visits to the first face, exactly $r$ meet an endpoint.
+Each other visit meets two crossing edges and each endpoint visit meets
+one. Hence $c=2k-r$. Since internal visits contain at least three
+vertices and endpoint visits contain at least one,
+\[
+u\ge 3(k-r)+r=3k-2r.
+\]
+Thus $2u+r\ge 6k-3r=3c$. The other face has $2-r$ endpoint visits,
+giving the second inequality. Adding them and using $u+l=m+1$ gives
+$6c\le2m+4$, as required.
+\end{proof}
+
+Lean checked the internal-visit obstruction for actual compatible
+induced pieces, a finite-list version of the vertex count, and its
+conversion to the crossing inequality under explicit incidence and
+endpoint-count identities. Extracting maximal visits and proving those
+identities from a whole path remains the written argument above. The
+general checked components do not certify numerical search exclusions.
+
+Both endpoints of every complete candidate in the selected family lie
+in the same face, so the total crossing count is even. Each of the eleven
+residual contexts retains at least one crossing, excluding zero. The
+completed same-context exclusions for two, four and six therefore imply
+at least eight crossings. A final native query imposes this minimum and
+\eqref{eq:facevisits230} on both replacement paths, without fixing an
+exact crossing count or adding a boundary-change restriction. Each
+replacement has 46 edges, so the proposition also gives $c\le16$ for
+that replacement. Every actual candidate satisfies these conditions.
+
+All eleven final queries are infeasible. Together with the earlier
+106 geometric and 198 native exclusions, they cover all 315 maximal
+contexts. Padding shorter replacements with their unchanged seed
+vertices transfers the result to blocks of at most 46 edges. The
+conclusion concerns the normalized bank123 seed, the appended endpoint
+24, two separated length-preserving replacements, and retained anchors
+and outside positions. It covers every crossing count within these
+restrictions. Native finite enumeration, data extraction and solver
+contradictions remain separate from the checked general lemmas. No
+longer snake or global upper bound follows~\cite{research230}.
+
+Continuing the construction search requires a change of scope. Comparing
+extension endpoints and the positions of their conflicting retained
+vertices across inequivalent seeds is a concrete next preparation.
+Fewer or more closely placed conflicts may reduce the amount of retained
+structure that must change. This is a research hypothesis; no such new
+seed survey was carried out in this round. Wider or length-changing
+replacements remain possible alternatives.
+
+\section{A numerical conjecture and its limitations}\label{sec:hypothesis}
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$n$ & $a(n)$ & $3\cdot2^{n-3}$ & correction\\
+\midrule
+3&4&3&1\\4&7&6&1\\5&13&12&1\\
+6&26&24&2\\7&50&48&2\\8&98&96&2\\
+\bottomrule
+\end{tabular}
+\end{center}
+The baseline coefficient is also recovered from successive differences within the two triples:
+\[
+\frac{7-4}{2^4-2^3}=\frac{13-7}{2^5-2^4}
+=\frac{50-26}{2^7-2^6}=\frac{98-50}{2^8-2^7}=\frac38.
+\]
+Continuing the correction as $1,1,1,2,2,2,4,4,4,\ldots$ gives
+\begin{equation}\label{eq:model}
+\widehat a(n)=3\cdot2^{n-3}+2^{\lfloor(n-3)/3\rfloor},\qquad n\ge3.
+\end{equation}
+The terms at dimensions one and two are assigned separately as 1 and 2.
+
+\begin{conjecture}\label{conj:196}
+The maximum snake length in $\Q_9$ is $196$ edges.
+\end{conjecture}
+This numerical conjecture is motivated only by the displayed extrapolation; it is not used in any theorem in this paper. Equation~\eqref{eq:model} predicts $3\cdot64+4=196$.
+
+\begin{proposition}[Model recurrence]
+For $n\ge3$, the model satisfies
+\[
+\widehat a(n+3)+6\cdot2^{\lfloor(n-3)/3\rfloor}=8\widehat a(n).
+\]
+\end{proposition}
+\begin{proof}
+Put $t=n-3$ and $c=2^{\lfloor t/3\rfloor}$. Since $\lfloor(t+3)/3\rfloor=\lfloor t/3\rfloor+1$, the left side is
+$24\cdot2^t+2c+6c=8(3\cdot2^t+c)$.
+\end{proof}
+At $n=6$ the recurrence predicts $8\cdot26-12=196$. This is the same evidence as the correction table, not an independent argument.
+
+\begin{proposition}[The known terms do not determine the ninth prediction]
+The model
+\[
+\widetilde a(n)=3\cdot2^{n-3}+1+\left\lfloor\frac{n-3}{3}\right\rfloor
+\qquad(n\ge3)
+\]
+agrees with every known term, after assigning the first two terms separately, and gives $\widetilde a(9)=195\ne196$.
+\end{proposition}
+\begin{proof}
+For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, the corrections are respectively 3 and 4. Direct substitution proves the claim.
+\end{proof}
+Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
@@ -8548,9 +8629,13 @@ Section~\ref{sec:projection229} adds general kernel-checked projection
 compatibility and crossing-allocation implications, a native width-46
 four-crossing cover, and a search without a prescribed crossing count.
 The computational exclusions retain their stated native dependencies.
-The round-220 full-source review corrects historical proof references,
-notation and current-status statements; it does not rebuild the entire
-archived contributor chain.
+Section~\ref{sec:facevisits230} completes the two-crossing reduction and
+the unrestricted width-46 family. Three general face-visit components
+passed Lean; whole-path run extraction, finite coverage and numerical
+contradictions retain the explicit limits stated there.
+Full-source reviews at rounds 220 and 230 check the written argument,
+historical status, dependencies and presentation. They do not rebuild the
+archived contributor chain or replay every numerical certificate.
 
 
 \appendix
@@ -10942,7 +11027,7 @@ Six subsequent maximization runs changed the free face while retaining the new s
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
 
-For the fixed eight-dimensional seed, searches for partner lengths 93, 92, and 91 at both endpoints were each unresolved after 30 seconds. A relaxation imposing only induced degree at most two admits 106 vertices in the permitted region, so that local degree condition alone is insufficient. Retaining 50 initial seed vertices in either orientation and exhaustively completing to length 98 recovered only the original completion, after 1,926,810 nodes in total. Retaining 42 vertices reached its twenty-million-node limit in both orientations. Neither result classifies all length-98 snakes.
+For the fixed eight-dimensional seed, the early searches for partner lengths 93, 92, and 91 at both endpoints each returned unknown after 30 seconds. Section~\ref{sec:prefix222} later excludes length 93; no compatible length-92 witness is established. A relaxation imposing only induced degree at most two admits 106 vertices in the permitted region, so that local degree condition alone is insufficient. Retaining 50 initial seed vertices in either orientation and exhaustively completing to length 98 recovered only the original completion, after 1,926,810 nodes in total. Retaining 42 vertices reached its twenty-million-node limit in both orientations. Neither result classifies all length-98 snakes.
 
 \subsection{Joint search with both layer paths variable}
 The fixed-seed obstruction does not exclude other pairs. A joint model therefore selects both projected paths, requires each to start at zero, and forbids every shared nonzero projected vertex. A circuit constraint with one auxiliary vertex enforces a single connected path in each layer; selected adjacent cube vertices must be consecutive in that path. The only cross-layer edge is then the intended join at zero.
@@ -11000,7 +11085,7 @@ Substituting $T\ge2v-92$ yields $148v\le37\,224$. Since $148\cdot252=37\,296$, i
 A Hamming ball of radius two in $\Q_9$ contains $1+9+\binom92=46$ vertices. Thus, if every vertex with exactly one singleton square were proved to lie within distance two of an endpoint, at most 92 vertices could be exceptional. Lemma~\ref{lem:one-square} would then suggest the required aggregate inequality: nonexceptional vertices contribute at least two singleton incidences and exceptional vertices at least one. The endpoint statement and its checked aggregation remain open. This conditional estimate is weaker than the archived upper bound 235 in Theorem~\ref{thm:upper235}. It records the quantitative consequence originally motivating the endpoint-proximity investigation.
 
 \subsection{Fixed-seed two-layer tests}
-The length-98 seed in Appendix~\ref{app:witness} is taken from \cite{records} and independently checked against all pairwise conditions. Two tests were performed. First, truncate either endpoint of an isometric copy to length 97, choose both joining endpoints, and enumerate all $8!$ coordinate permutations. Translation is forced by identifying the chosen endpoints. The $2\cdot2\cdot2\cdot8!=322\,560$ placements, counted with possible duplication, have minimum overlap 15. Theorem~\ref{thm:join} requires overlap one. Second, a constraint solver searched for an arbitrary length-97 partner avoiding every seed vertex except the chosen endpoint. Both endpoint instances were infeasible. These restricted computational exclusions have not been independently certified; other length-98 seeds and multiple-crossing constructions remain possible.
+The length-98 seed in Appendix~\ref{app:witness} is taken from \cite{records} and independently checked against all pairwise conditions. Two tests were performed. First, truncate either endpoint of an isometric copy to length 97, choose both joining endpoints, and enumerate all $8!$ coordinate permutations. Translation is forced by identifying the chosen endpoints. The $2\cdot2\cdot2\cdot8!=322\,560$ placements, counted with possible duplication, have minimum overlap 15. Theorem~\ref{thm:join} requires overlap one. Second, a constraint solver searched for an arbitrary length-97 partner avoiding every seed vertex except the chosen endpoint. Both endpoint instances were infeasible. These initial solver exclusions had no independent contradiction certificates. Sections~\ref{sec:forest220}--\ref{sec:prefix222} later supply exact weighted-inequality certificates and a stronger ceiling for this parent class; other parent classes and multiple-crossing constructions remain possible.
 
 \section{Local-model diagnostics and incomplete searches}\label{app:diagnostics}
 The first subsection records the earlier seven-centre finite-model result discussed in Appendix~\ref{app:historical-comparisons}; the second preserves its preceding cycle. The remaining subsections retain earlier diagnostics in their order of development. In those earlier tables, a local-witness value is attainable by one local assignment, and a lower-table value retains the verification status stated with it. Checking the mean of a saved cycle alone does not prove a minimum over all cycles. None of these computations supplies a new universal bound on snake length.
@@ -12042,6 +12127,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Exact projection restrictions and
 variable-crossing replacement constructions}. Research milestone 229,
 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/229-two-layer-construction}.
+
+\bibitem{research230}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Face visits and completion of the
+two-block construction exclusion}. Research milestone 230,
+16 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/230-two-crossing-frontier}.
 
 \end{thebibliography}
 \end{document}

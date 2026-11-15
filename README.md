@@ -1,3 +1,11 @@
+# Current result after round 230
+
+The selected endpoint-24 construction is computationally excluded through two length-preserving replacement blocks of 46 edges for every crossing count. All 315 maximal contexts are covered. Fifteen exact-two path-pair queries and eleven final face-visit queries close the last cases. Three general face-visit components passed Lean; extraction, enumeration and native solver contradictions retain their stated limits. No longer snake or global bound is obtained. The user requested a pause after this round.
+
+Read [the argument](milestones/230-two-crossing-frontier/MATHEMATICAL_NOTE.md), [complete cover](milestones/230-two-crossing-frontier/data/coverage-free46.json), [evidence](milestones/230-two-crossing-frontier/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 229
 
 The fixed endpoint-24 two-block construction is computationally excluded through width46 when the final snake has four coordinate-8 crossings. All315 maximal contexts are covered. General projection compatibility and crossing-allocation implications passed Lean. A broader search removes the prescribed crossing count: 304 contexts are excluded and 11 remain unresolved. These are native construction-family exclusions, with no new snake or global bound. The goal remains active.
