@@ -1,6 +1,6 @@
 # How many vertices can the two outer paths occupy?
 
-**Two mutually nonadjacent induced paths in one eight-dimensional face occupy at most 119 vertices in total.** Consequently a 192-edge nine-cube snake that crosses a coordinate exactly twice must put at least **74 vertices** in the middle path in the opposite face. This bound applies to every such snake, with arbitrary roots and endpoints.
+**Two mutually nonadjacent induced paths in one eight-dimensional face occupy at most 114 vertices in total.** Consequently a 192-edge nine-cube snake that crosses a coordinate exactly twice must put at least **79 vertices** in the middle path in the opposite face. This bound applies to every such snake, with arbitrary roots and endpoints.
 
 The local calculation counts the minimum number of components in an induced linear forest in a seven-cube. Isolated vertices count as components. For 58 through 64 selected vertices the respective minima are **10, 11, 12, 13, 14, 15 and 16**. Equivalently, at each of these seven occupancies the maximum number of edges is exactly 48. A 7-face has at most 64 occupied sites by partition into four-cubes and the eight-site four-cube lemma. For smaller populations above 51 we use the fact that at least two components are required, since one Q7 induced path has at most 51 vertices. [Four-cube lemma](PROJECTION_BALL.md#the-middle-arm-must-have-65-through-99-vertices), [seven-cube path maximum, Table 1](https://plouffe.fr/OEIS/archive_in_pdf/kochut.pdf).
 
@@ -10,7 +10,9 @@ Let the two outer paths together have m vertices. They have m−2 edges. Sum the
 
     8m − 7(m−2) = m+14.
 
-On each of the eight coordinate splits, the two populations add to m and are at most 64 each. For m=120 the possible unordered splits are 56+64, 57+63, 58+62, 59+61 and 60+60. The minimum component counts of the two halves sum to at least 18, 17, 24, 24 and 24, respectively. The sixteen faces would then contribute at least 8×17=136 components, while the identity gives 134. This excludes 120. Any pair of paths with more than 120 vertices can be shortened to exactly 120 while keeping both components nonempty, so it too is excluded. An independent arithmetic check also evaluates every occupancy from 120 through 128 individually. [Component counts, witnesses and calculation](face-component-bound.json), [witness and bound verifier](face_component_bound.py).
+Along a single path, cut its vertex sequence into maximal runs on each side of a coordinate. Each run is one face component because the path is induced. The runs alternate sides, so their counts differ by at most one. Two mutually nonadjacent paths contribute disjoint components, and their combined counts differ by at most two. This also covers a path consisting of a single vertex.
+
+Suppose the two paths use 115 vertices. On every coordinate split, one seven-face contains at least 58 vertices. Its component count is at least ten throughout the possible range of 58 to 64. The opposite seven-face must then contain at least eight components. All sixteen faces together would contribute at least 8×18=144 components, whereas the identity gives 115+14=129. This excludes 115. Any larger pair of paths can be shortened to 115 vertices while keeping both components nonempty. Subtraction from 193 now gives the middle bound of 79. The arithmetic verifier also checks every excluded occupancy separately. [Component counts, witnesses and calculation](face-component-bound.json), [witness and bound verifier](face_component_bound.py).
 
 ## Exhaustion of the small cube geometries
 

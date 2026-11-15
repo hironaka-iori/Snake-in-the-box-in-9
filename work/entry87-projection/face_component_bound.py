@@ -30,7 +30,12 @@ if __name__=="__main__":
     def lower(n):return minima.get(n,2 if n>51 else int(n>0))
     rows=[]
     for m in range(2,129):
-        pair=min(lower(j)+lower(m-j) for j in range(max(0,m-64),min(64,m)+1))
+        # Every global path contributes at most one to the imbalance of
+        # the two face component counts, by alternation of its face runs.
+        def pair_bound(j):
+            a,b=lower(j),lower(m-j)
+            return max(a+b,2*max(a,b)-2)
+        pair=min(pair_bound(j) for j in range(max(0,m-64),min(64,m)+1))
         if 8*pair>m+14:rows.append(dict(vertices=m,components_per_parallel_pair_at_least=pair,sum_at_least=8*pair,required=m+14))
     upper=min(r["vertices"] for r in rows)-1
     assert set(r["vertices"] for r in rows)==set(range(upper+1,129))
