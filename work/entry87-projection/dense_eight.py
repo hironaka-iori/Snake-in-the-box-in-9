@@ -115,6 +115,7 @@ def facet_completion(fixed,size,limit,budget,tag,checker=None,deficits=False):
             from export_drat import checked_export
             row.update(checked_export(sat,clauses,Path(tag+"-proof"),checker))
     save(Path(tag+".json"),row);print(tag,status,row["conflicts"],len(cuts),flush=True)
+    return row
 
 
 if __name__=="__main__":

@@ -55,19 +55,18 @@ def check(size, target, replay, packed, mode, checker=None):
                 accept(name, r, lambda: bound(set(vertices), 117, cert))
                 counts["fixed integer inequalities"] += 1
                 return True
-        if size == 117:
-            prefix = "individual-facet" if n == 61 else "edge-rich"
-            for file in sorted(Path(".").glob(f"{prefix}-{n}-{i}-*-checked.json")):
-                receipt = read(file.name)
-                if receipt["status"] != "UNSAT" or receipt["component_limit"] < size-target:
-                    continue
-                assert receipt["fixed"] == vertices and receipt["size"] == size
-                assert "s VERIFIED" in receipt["checker"]
-                if replay or checker:
-                    verify_resolution(file, vertices, size, size-target, checker)
-                resolutions.append(file.name)
-                counts["resolution"] += 1
-                return True
+        prefix = ("individual-facet" if n == 61 else "edge-rich") if size == 117 else f"population{size}"
+        for file in sorted(Path(".").glob(f"{prefix}-{n}-{i}-*-checked.json")):
+            receipt = read(file.name)
+            if receipt["status"] != "UNSAT" or receipt["component_limit"] < size-target:
+                continue
+            assert receipt["fixed"] == vertices and receipt["size"] == size
+            assert "s VERIFIED" in receipt["checker"]
+            if replay or checker:
+                verify_resolution(file, vertices, size, size-target, checker)
+            resolutions.append(file.name)
+            counts["resolution"] += 1
+            return True
         return False
 
     def template(n, base, i):
@@ -96,8 +95,7 @@ def check(size, target, replay, packed, mode, checker=None):
     previous = read("dense-facet-audit.json")
     for n in range(61, 65):
         rows = rows61 if n == 61 else deletions[str(n)]
-        if n >= 62 and size == 117:
-            assert target >= 104
+        if n >= 62 and size == 117 and target >= 104:
             assert previous[str(n)]["excluded"] == previous[str(n)]["classes"] == len(rows)
             counts["previous 62-64 proof"] += len(rows)
             continue
@@ -119,12 +117,13 @@ def check(size, target, replay, packed, mode, checker=None):
     # dense-faces threshold when each opposite face has at most 48 edges.
     if size <= 120 and mode != "facets":
         if mode == "dense":
+            assert size-60 >= 57
             minimum = (7*target+7)//8 - 48
             low = (size+1)//2
         else:
             minimum = (7*target+15)//16
             low = size-60
-        assert low >= 57
+        assert low >= 56
         for n in range(low, 61):
             for i, vertices, edges in read_shapes(n, minimum):
                 if not fixed(n, i, vertices):
@@ -145,8 +144,8 @@ def check(size, target, replay, packed, mode, checker=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("size", type=int, choices=range(117,129))
-    parser.add_argument("target", type=int, choices=range(104,111))
+    parser.add_argument("size", type=int, choices=range(116,129))
+    parser.add_argument("target", type=int, choices=range(103,111))
     parser.add_argument("--choice", choices=("dense","all","facets"), default="dense")
     parser.add_argument("--archive", type=Path)
     parser.add_argument("--replay", action="store_true")

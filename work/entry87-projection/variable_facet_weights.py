@@ -94,13 +94,15 @@ def marked_template(index,base_size=64):
     return h,g
 
 
-def solve(index,n,dim,replay=None,base_size=64):
+def solve(index,n,dim,replay=None,base_size=64,edge_floor=0,size=117):
     h,g=marked_template(index,base_size);features,blocks=blocks_and_features(h,g,dim)
     lookup={f:k for k,group in enumerate(features) for f in group}
     lowids=[k for k,group in enumerate(features) if len(group[0])==1 and group[0][0]<128]
     hiids=[k for k,group in enumerate(features) if len(group[0])==1 and group[0][0]>=128]
     local=[patterns(h,b,len(h)-n,lookup) for b in blocks]
-    nfeat=len(features);need=117-n
+    nfeat=len(features);need=size-n
+    low_edges=[k for k,group in enumerate(features)
+               if len(group[0])==2 and max(group[0])<128]
     cost=[len(group) if len(group[0])==2 else 0 for group in features]
     if replay is None:
         R=[];C=[];V=[];rhs=[];offset=nfeat;moments=[]
@@ -115,15 +117,35 @@ def solve(index,n,dim,replay=None,base_size=64):
             R.append(np.full(len(domain),len(rhs)));C.append(np.array(domain));V.append(np.array([len(features[i]) for i in domain]));rhs.append(k)
         A=coo_matrix((np.concatenate(V),(np.concatenate(R),np.concatenate(C))),shape=(len(rhs),offset)).tocsr()
         obj=np.zeros(offset);obj[:nfeat]=-np.array(cost)
-        lp=linprog(obj,A_eq=A,b_eq=rhs,method="highs")
+        extra={}
+        floor_price=0
+        if edge_floor:
+            terms=np.array([-len(features[i]) for i in low_edges])
+            lower_row=coo_matrix((terms,(np.zeros(len(low_edges),dtype=int),low_edges)),shape=(1,offset)).tocsr()
+            extra=dict(A_ub=lower_row,b_ub=[-edge_floor])
+        lp=linprog(obj,A_eq=A,b_eq=rhs,method="highs",**extra)
+        if edge_floor and lp.status==2:
+            # Replace an infeasible edge-floor row by a finite reward and use
+            # its exact integer contribution in the final inequality.
+            for i in low_edges:obj[i]-=1000*len(features[i])
+            lp=linprog(obj,A_eq=A,b_eq=rhs,method="highs")
+            floor_price=-1000
+        elif edge_floor and lp.success:
+            floor_price=lp.ineqlin.marginals[0]
         assert lp.success,lp.message
         D=1000000;dual=lp.eqlin.marginals;weights=[]
         for start,num in moments:weights.append([int(round(x*D)) for x in dual[start:start+num]])
         replay=dict(scale=D,lower=int(round(-D*dual[-2])),upper=int(round(-D*dual[-1])),weights=weights)
+        if edge_floor:replay["lower_edges"]=min(0,int(round(D*floor_price)))
     D=replay["scale"];lo=replay["lower"];hi=replay["upper"];weights=replay["weights"]
     numer=n*lo+need*hi;balance=[0]*len(features)
     for domain,charge in ((lowids,lo),(hiids,hi)):
         for i in domain:balance[i]+=charge*len(features[i])
+    if edge_floor:
+        q=replay["lower_edges"]
+        assert q<=0
+        numer+=q*edge_floor
+        for i in low_edges:balance[i]+=q*len(features[i])
     assert len(local)==len(weights) and D>0
     for (labels,valid),ws in zip(local,weights):
         assert len(labels)==len(ws)
@@ -132,18 +154,22 @@ def solve(index,n,dim,replay=None,base_size=64):
         assert sum(abs(w) for w in ws)<2**62
         numer+=int((valid@np.array(ws,dtype=np.int64)).max())
     numer+=sum(max(0,D*v-b) for v,b in zip(cost,balance))
-    return dict(template=index,lower_size=n,upper_size=need,dimension=dim,edge_upper=numer//D,
+    record=dict(template=index,lower_size=n,upper_size=need,dimension=dim,edge_upper=numer//D,
                 numerator=numer,certificate=replay,feature_orbits=len(features),block_orbits=len(blocks))
+    if edge_floor:record["minimum_lower_edges"]=edge_floor
+    return record
 
 
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("index",type=int);p.add_argument("population",type=int)
     p.add_argument("--dimension",type=int,default=3,choices=(2,3));p.add_argument("--replay",action="store_true")
     p.add_argument("--base",type=int,default=64,choices=(62,63,64))
+    p.add_argument("--edges",type=int,default=0);p.add_argument("--size",type=int,default=117)
     a=p.parse_args();prefix="variable-facet" if a.base==64 else f"variable-mark-{a.base}"
-    file=Path(f"{prefix}-{a.index}-{a.population}-{a.dimension}.json")
+    extra=(f"-edges{a.edges}" if a.edges else "")+(f"-size{a.size}" if a.size!=117 else "")
+    file=Path(f"{prefix}-{a.index}-{a.population}-{a.dimension}{extra}.json")
     cert=json.loads(file.read_bytes())["certificate"] if a.replay else None
-    r=solve(a.index,a.population,a.dimension,cert,a.base)
+    r=solve(a.index,a.population,a.dimension,cert,a.base,a.edges,a.size)
     if a.base!=64:r["base_size"]=a.base
     if cert:assert r==json.loads(file.read_bytes())
     else:save(file,r)
