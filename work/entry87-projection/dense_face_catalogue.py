@@ -28,7 +28,7 @@ def parents():
     return kinds,by_site
 
 
-def list_classes(n):
+def list_classes(n,with_parent=False):
     kinds,by_site=parents();rows=[]
     for line in Path(f"seven-face-classes-{n}.txt").read_text().splitlines():
         a,b,c,weight,stab=map(int,line.split());mask=a|(b<<64)
@@ -38,7 +38,11 @@ def list_classes(n):
             v=(mask&-mask).bit_length()-1;mask&=mask-1;possible&=by_site[v];V.append(v)
         assert possible.bit_count()<=1
         fi=kinds[possible.bit_length()-1] if possible else -1
-        rows.append(dict(forest=V,full_class=fi,labelled=weight,components=c))
+        row=dict(forest=V,full_class=fi,labelled=weight,components=c)
+        if with_parent and possible:
+            row["parent_mask"]=sum(1<<v for v,flags in enumerate(by_site) if flags&possible)
+            assert row["parent_mask"].bit_count()==64
+        rows.append(row)
     return rows
 
 

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <map>
 #include <unordered_set>
 #include <vector>
 using U=std::uint64_t;
@@ -175,8 +176,9 @@ void marked_seven(int t,const std::array<Catalogue,4>& six){
     }
     std::cout<<"marked_seven "<<64-t<<' '<<marked<<' '<<placements<<std::endl;
 }
-void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std::vector<F>,9>& four){
-    std::ofstream out("stream-marked-seven-"+std::to_string(64-t)+".txt");
+void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std::vector<F>,9>& four,int min_edges=0){
+    std::string prefix=min_edges?"rich-"+std::to_string(min_edges)+"-marked-seven-":"stream-marked-seven-";
+    std::ofstream out(prefix+std::to_string(64-t)+".txt");
     std::size_t marked=0,placements=0;
     for(int h=0;h<=t/2;++h)for(const auto& a:six[h].representatives){
         U low=a.s&0xffffffffu,high=a.s>>32;
@@ -186,11 +188,12 @@ void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std
         std::unordered_set<U> seen;
         for(int k=0;k<=t-h;++k)for(const auto& x:L[k])for(const auto& y:R[t-h-k]){
             U cross=x.f.s&y.f.s;
+            int c=a.c+x.residual+y.residual-std::popcount(cross);
+            if(c<=0||c>64-t-min_edges)continue;
             if(!admissible(x.f,y.f)||(cross&((x.nonisolated&low)|(y.nonisolated&high))))continue;
             U s=x.f.s|(y.f.s<<32);
             if(seen.count(s))continue;
-            int c=a.c+x.residual+y.residual-std::popcount(cross);
-            if(c<=0||!forest_pair(a,F{s,0,0},c))continue;
+            if(!forest_pair(a,F{s,0,0},c))continue;
             auto before=seen.size();
             for(const auto& map:group)seen.insert(transform6(s,map));
             auto orbit=seen.size()-before;
@@ -201,6 +204,29 @@ void stream_marked(int t,const std::array<Catalogue,4>& six,const std::array<std
         }
     }
     std::cout<<"stream_marked_seven "<<64-t<<' '<<marked<<' '<<placements<<std::endl;
+}
+void deduplicate_odd_six(Catalogue& cat){
+    // An odd population gives a unique majority orientation on every axis.
+    // After orienting, enumerate all 6! axis permutations for the canonical key.
+    std::array<int,6> axes{0,1,2,3,4,5};
+    std::vector<Permutation6> perms;
+    do{
+        Permutation6 p{};
+        for(unsigned v=1;v<64;++v)p[v]=p[v&(v-1)]|(1<<axes[std::countr_zero(v)]);
+        perms.push_back(p);
+    }while(std::next_permutation(axes.begin(),axes.end()));
+    std::map<U,F> unique;
+    for(const auto& a:cat.representatives){
+        U s=a.s;int n=std::popcount(s);
+        if(!(n&1))std::abort();
+        for(int j=0;j<6;++j)if(2*std::popcount(s&lo[j])<n)s=flip(s,j);
+        U key=~U(0);
+        for(const auto& perm:perms)key=std::min(key,transform6(s,perm));
+        unique.emplace(key,a);
+    }
+    cat.representatives.clear();
+    for(const auto& [key,a]:unique)cat.representatives.push_back(a);
+    std::cout<<"unmarked_six_three "<<unique.size()<<std::endl;
 }
 int main(int argc,char**argv){
     int deficit=argc>1?std::stoi(argv[1]):1;
@@ -248,6 +274,12 @@ int main(int argc,char**argv){
         int last=std::stoi(argv[3]);if(last<0||last>2*deficit+1)return 2;
         for(auto& cat:six){cat.seen.clear();cat.labelled.clear();cat.labelled.shrink_to_fit();}
         for(int t=0;t<=last;++t)stream_marked(t,six,four);
+    }else if(argc==6 && std::string(argv[2])=="richedges"){
+        int first=std::stoi(argv[3]),last=std::stoi(argv[4]),min_edges=std::stoi(argv[5]);
+        if(deficit!=2||first<0||last<first||last>7||min_edges<1||min_edges>64)return 2;
+        for(auto& cat:six){cat.seen.clear();cat.labelled.clear();cat.labelled.shrink_to_fit();}
+        if(last>=6){marked_six_three(six[3],five,four);deduplicate_odd_six(six[3]);}
+        for(int t=first;t<=last;++t)stream_marked(t,six,four,min_edges);
     }else if(argc>2){
         int last=std::stoi(argv[2]);if(last>7||(last>2*deficit+1&&deficit!=2))return 2;
         for(auto& cat:six){cat.seen.clear();cat.labelled.clear();cat.labelled.shrink_to_fit();}

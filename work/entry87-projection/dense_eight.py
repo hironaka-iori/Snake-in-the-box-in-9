@@ -24,7 +24,7 @@ def components(selected, dimension):
     return parts
 
 
-def facet_completion(fixed,size,limit,budget,tag,checker=None,deficits=False):
+def facet_formula(fixed,size,limit,deficits):
     # Vertices of the opposite seven-face are the only undetermined sites.
     fixed=set(fixed)
     old=components(fixed,7)
@@ -86,6 +86,12 @@ def facet_completion(fixed,size,limit,budget,tag,checker=None,deficits=False):
             connect([x])
     elif needed>len(edge_flags):clauses.append([])
     elif needed>0:clauses.extend(CardEnc.atleast(edge_flags,bound=needed,vpool=pool,encoding=EncType.totalizer).clauses)
+    return clauses, allowed, select, static
+
+
+def facet_completion(fixed,size,limit,budget,tag,checker=None,deficits=False):
+    fixed=set(fixed)
+    clauses,allowed,select,static=facet_formula(fixed,size,limit,deficits)
     cuts=[];witness=None;status="OPEN"
     with Solver(name="cadical195",bootstrap_with=clauses,with_proof=checker is not None) as sat:
         while (remain:=budget-sat.accum_stats()["conflicts"])>0:
