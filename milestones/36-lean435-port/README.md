@@ -231,6 +231,32 @@ Interface-only audit of both 232 certificates (`lean435/audit232.log`):
 - Both print `[propext, Classical.choice, Quot.sound]`: AUDIT PASSED.
 - The 14 spec modules come from the step-4 auditor rebuild and match this worker build's hashes.
 
+## Production runner `prod435.py` (added after the six steps)
+
+`lean435/tools/prod435.py` is a distributed runner for the paid certificates of a certplan231 plan
+(`--help` has the full description).
+
+- **Setup.** Run `prod435.py setup` once per machine. It builds the core stack into `~/l435/prod/core` in
+  65 s.
+- **Run.** `prod435.py run --plan P --index I --workers W --hours H` has worker I take the certificates
+  with `sha1(module) % W == I`, largest first. For each one it does:
+  - core, Cnf and replay (`cert231.py` through `cert435.py`);
+  - one merged module (`to435.py`);
+  - a build against the core;
+  - a manifest line.
+- **Publication.** It publishes only the public `.olean` files, `manifest.jsonl` and `record.json`,
+  fast-forward only, to `refs/heads/xfer/c435/w<I>`.
+- **Other commands:** `status`, `merge` (checks every sha256), `free` (the plan's reused keys) and `ctl --stop|--clear`.
+- **Test.** 8 certificates of `certplan231_m232_541_1b` were run: ctx 7 ×2, ctx 8, share ×2, plain ×3.
+  - Lean CPU per hint was 0.09 (plain), 0.15-0.17 (ctx) and 0.29 (share) ms.
+  - Peak RssAnon was ≤ 1.52 GB.
+  - The interface-only audit of the 8 merged interfaces passed.
+- **Test branches.** The test published to `refs/heads/xfer/c435test/{w0,ctl}` (`PROD435_PFX`). They were
+  left in place, since no branch may be deleted in this task.
+- **Plain keys** are certified one by one ("every key a seed"). `--seeds FILE` takes a real seed plan
+  instead.
+- **Free keys:** `lean435/data/free_*.jsonl.gz`.
+
 ## Not done, and what the floors would need
 
 - **Floors** (`Floors233`, milestone 33 FLOORS.md; 1,044 modules fetched from main, 2.3 CPU-hours in 4.19
