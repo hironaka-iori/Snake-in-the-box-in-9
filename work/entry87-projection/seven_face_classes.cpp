@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <string>
 #include <vector>
 using U=std::uint64_t;
 using Mask=std::array<U,2>;
@@ -13,7 +14,8 @@ using Axes=std::array<int,7>;
 struct Perm {Axes axes;std::array<unsigned char,128> image;};
 struct Count {U weight=0;int stabilizer=0,components=0;};
 int main(int argc,char**argv){
-    if(argc!=3)return 2;
+    bool incidences=argc==4&&std::string(argv[3])=="--incidences";
+    if(argc!=3&&!incidences)return 2;
     std::ifstream in(argv[1]);std::ofstream out(argv[2]);
     if(!in||!out)return 3;
     std::vector<Perm> perms;Axes axes{0,1,2,3,4,5,6};
@@ -69,7 +71,9 @@ int main(int argc,char**argv){
         r.weight+=weight;r.stabilizer=stab;r.components=c;total+=weight;++marked;
     }
     for(const auto& [mask,r]:classes){
-        if(r.weight*r.stabilizer!=645120)return 5;
+        if(645120%r.stabilizer)return 5;
+        U orbit=645120/r.stabilizer;
+        if(incidences ? r.weight%orbit!=0 : r.weight!=orbit)return 5;
         out<<mask[0]<<' '<<mask[1]<<' '<<r.components<<' '<<r.weight<<' '<<r.stabilizer<<'\n';
     }
     std::cout<<marked<<' '<<classes.size()<<' '<<total<<std::endl;
