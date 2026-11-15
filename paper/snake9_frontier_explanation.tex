@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 224}
+\date{Research state after round 225}
 \begin{document}
 \maketitle
 
@@ -435,6 +435,37 @@ fixed seed, fixed outside indices, endpoint 24 and four crossings.
 They give no global optimality conclusion; larger or differently
 arranged changes remain possible~\cite{research224}.
 
+\subsection{The replacement frontier after round 225}
+Two local replacement paths construct a full snake when each is induced,
+each new interior is disjoint and nonadjacent to retained vertices
+outside its own closed interval, and the
+two new interiors are disjoint and nonadjacent. Every pair of vertices
+then lies in one local path, is retained, or is separated by one of these
+conditions. This proves distinctness and exactly consecutive adjacency.
+The direct constructor has passed Lean.
+
+Enlarging a replacement interval keeps the same complete candidate:
+the extra positions retain their original vertices. An excluded
+containing context therefore excludes the smaller one with the same
+target. The outside-agreement implication has passed Lean; numerical
+exclusions still rely on the saved native calculations.
+
+The restricted exclusion now reaches two blocks of at most 42 edges.
+Of its 287 maximal contexts, 211 inherit exclusions, 69 are excluded by
+the initial solver queries and seven require a split. In those seven,
+each anchor pair has equal coordinate bits, so each replacement crosses
+that coordinate an even number of times. Their total is two, leaving
+only $(0,2)$ and $(2,0)$. Both allocations are infeasible in all seven
+cases. The parity relation follows because each crossing flips the bit;
+it has passed Lean.
+
+Width 43 has 294 contexts, of which 25 remain unresolved after
+the initial search. These finite exclusions concern the selected seed,
+unchanged outside indices, endpoint 24 and four crossings. Their solver
+contradictions have no Lean certificates and do not prove global
+optimality. The construction search now considers actual connected
+path pairs in the unresolved contexts~\cite{research225}.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The current route varies both faces in a four-crossing construction.
@@ -448,7 +479,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 224.
+in the companion manuscript and milestones through round 225.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -496,6 +527,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Interaction between simultaneous
 replacements and two-region construction searches}.
 Research milestone 224, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/224-cross-block-reconnections}.
+
+\bibitem{research225}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Simultaneous replacement criteria,
+containment transfer and crossing-parity search}. Research milestone 225,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/225-replacement-widths}.
 
 \end{thebibliography}
 \end{document}

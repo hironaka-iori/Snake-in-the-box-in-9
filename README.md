@@ -1,3 +1,11 @@
+# Current result after round 225
+
+The selected endpoint-24 construction is computationally excluded for two replacement blocks of at most42edges. Width43 leaves25contexts unresolved. Crossing parity resolves the seven difficult width42cases by splitting allocations(0,2)/(2,0). The direct replacement criterion, interval enlargement and coordinate parity have accepted Lean receipts; native numerical exclusions retain their separate scope. Connected-path search now has resumable frontiers. No new snake or global bound. Goal ACTIVE.
+
+Read [the argument](milestones/225-replacement-widths/MATHEMATICAL_NOTE.md), [evidence](milestones/225-replacement-widths/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 224
 
 A checked interaction theorem explains why simultaneous replacements must interfere to escape a family closed under separate changes. The endpoint-24 construction using two blocks of at most 33 edges is computationally excluded across all 224 maximal contexts, without relying on that closure premise. At 44 edges, 209 of 301 contexts are excluded and 92 remain unresolved. No longer snake or new global bound. Goal ACTIVE; next is the smallest unresolved two-region width and explicit compatible replacement paths.

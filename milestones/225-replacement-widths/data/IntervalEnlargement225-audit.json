@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "module": "IntervalEnlargement225",
+  "source": "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean\\IntervalEnlargement225.lean",
+  "source_sha256": "ba5dd0ccf2a509b3891988f719bc3fbc779c297f271cd7fd3dffd9628a21644d",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\data\\IntervalEnlargement225-execution.json": "35ffa4477bf9282d8e22010ec06dd7c7947195596b5cf7bc2a9005706be6b442",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean\\IntervalEnlargement225.lean": "ba5dd0ccf2a509b3891988f719bc3fbc779c297f271cd7fd3dffd9628a21644d",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\data\\ReplacementIndices225-audit.json": "f4522f740509eacaebab2ba9d2ceed486d99d50650ce0ca4a7e57fa91698b5dc",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\data\\ReplacementIndices225-execution.json": "9dbd42f64db044e733a546d9d720e163e755c7d8cd77126572906408a5cec335",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean\\ReplacementIndices225.lean": "69a50aa3aa3900d31f95ff68a9256405f9d908705b67241959b59cd07bc599fd",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\build\\ReplacementIndices225.olean": "7b6bc8edf31b10386695631c99ed848ea20629443dd09ad0de911389f530f396",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\logs\\ReplacementIndices225-1794727005522704600\\compiler.log": "0b7ae4060fc994ddd853bb934010c7f2f823079e9534cb496c60c23a050e215e"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\logs\\IntervalEnlargement225-1794727584142201100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean\\IntervalEnlargement225.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\logs\\IntervalEnlargement225-1794727584142201100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1743437824,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.01600000000325963
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1734094848,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 56904,
+          "ParentProcessId": 59688,
+          "PrivatePageCount": 48164864,
+          "WorkingSetSize": 32022528
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.01600000000325963
+    }
+  ],
+  "compiler_pid": 56904,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.062999999994645,
+  "axioms": [
+    {
+      "theorem": "IntervalEnlargement225.agreement_of_enlarged_intervals",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "347250e5e1956817d765b68c5dc805b03f28ab34652aa4ee8b1829e79289a5e8",
+  "object": "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\build\\IntervalEnlargement225.olean",
+  "olean_sha256": "efd0f3806557d8bde7185b43ac234d5219a47840f1fd1cb2e92f1100be645834"
+}

@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 224, 15 November 2026}
+\date{Research state after round 225, 15 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -84,8 +84,9 @@ search. The first small neighbourhood is computationally excluded;
 larger neighbourhoods remain unresolved, with no new construction.
 A checked interaction theorem explains when simultaneous block changes
 can escape a family closed under separate changes. A complete restricted
-two-block search through length 33 is excluded natively; longer blocks
-retain unresolved cases.
+two-block search through length 42 is excluded natively; width 43
+retains unresolved cases. The direct simultaneous-replacement constructor
+and coordinate-crossing parity relation have also passed Lean.
 
 The paper separates written proofs, checked implications, native
 enumerations and unresolved premises. The contributor bound improves
@@ -7894,6 +7895,83 @@ supplies 44 units and every other selected vertex receives one net unit.
 All 16 remain unknown, leaving 92 unresolved contexts. No new snake or
 global bound is obtained~\cite{research224}.
 
+\subsection{Constructing two replacements and transferring exclusions}
+\label{sec:replacement225}
+\begin{proposition}[Simultaneous replacement criterion]
+\label{prop:simultaneous225}
+Let $P=(p_0,\ldots,p_n)$ be an induced path and let
+$0\le a\le b\le c\le d\le n$. Let $q_0,\ldots,q_n$ agree with $P$
+outside $(a,b)\cup(c,d)$. Suppose the sequences on $[a,b]$ and $[c,d]$
+are induced paths. Suppose each new interior is disjoint and nonadjacent
+to every retained vertex outside its own closed interval, and the two
+new interiors are disjoint and nonadjacent. Then $(q_0,\ldots,q_n)$ is
+an induced path.
+\end{proposition}
+\begin{proof}
+A pair within one closed replacement interval has the required relation
+from its local path. A pair of retained vertices has its relation from
+$P$. Every remaining pair joins two new interiors, or a new interior
+to a retained vertex outside its closed interval. Separation excludes
+equality and adjacency. These indices cannot be consecutive because
+the anchors are retained. This proves distinctness and precisely
+consecutive adjacency, including shared anchors and empty interiors.
+Neither intermediate replacement needs to be valid on its own.
+\end{proof}
+
+Enlarging both replacement intervals leaves the same candidate agreeing
+with $P$ outside them: the extra positions keep their original vertices.
+Thus an excluded containing context excludes the smaller context with
+the same complete-path conditions. Only excluded width-44 contexts are
+used; an unresolved outcome supplies no exclusion. The constructor and
+outside-agreement implication have passed Lean. Numerical exclusions
+still depend on the saved native calculations.
+
+For a replacement with endpoints $u,v$, the number $r$ of crossings of
+coordinate $h$ satisfies $r=\varepsilon+2k$ for an integer $k\ge0$,
+where $\varepsilon=0$ for equal endpoint bits and $\varepsilon=1$
+otherwise. Each crossing flips that bit, proving the relation; this
+argument has also passed Lean. Crossing allocation remains variable
+subject to these parities and the combined total.
+
+For $34\le w\le43$, the $7(w-1)$ maximal contexts are
+\[
+[a,a+w],\ [c,c+w],\qquad0\le a\le6,\quad144-w\le c\le142.
+\]
+They cover all pairs of blocks of at most $w$ edges containing positions
+7 and 143 in their interiors. The seed, outside indices, anchors,
+endpoint 24 and four-crossing target remain fixed. The results are
+\begin{center}
+\begin{tabular}{rrrrrr}
+\toprule
+$w$&Contexts&Inherited&Geometric&New solver exclusions&Unresolved\\
+\midrule
+34&231&197&12&22&0\\
+35&238&199&15&24&0\\
+36&245&201&13&31&0\\
+37&252&203&8&41&0\\
+38&259&205&0&54&0\\
+39&266&207&0&59&0\\
+40&273&209&0&64&0\\
+41&280&210&0&70&0\\
+42&287&211&0&76&0\\
+43&294&211&0&58&25\\
+\bottomrule
+\end{tabular}
+\end{center}
+At width 42, seven initial timeouts have first interval $[1,43]$ and
+second interval $[c,c+42]$, $124\le c\le130$. Both anchor pairs have
+equal coordinate bits and the total replacement crossing count is two.
+The only allocations are therefore $(0,2)$ and $(2,0)$. All fourteen
+allocation queries are infeasible, closing these seven contexts.
+The restricted exclusion reaches width 42; width 43 leaves 25
+contexts unresolved after the initial search. Timeout establishes
+neither existence nor impossibility. Direct enumeration of connected
+replacement paths is the next construction step. A direct search in one width-43 context processed 15,013 complete
+first paths in 30 seconds; each left insufficient connected capacity
+for the second. A further 30-second search pruned 249,163 partial
+branches using that necessary condition. Both searches remain incomplete
+and retain their frontiers. These restrictions give no longer snake or global upper bound~\cite{research225}.
+
 \section{Verification scope and remaining problem}\label{sec:verification}
 The maintained interval is $191\le a(9)\le233$. The lower bound follows
 from the explicit witness. The completed contributor upper theorem and
@@ -8066,6 +8144,9 @@ retain separate verification limits.
 Section~\ref{sec:twoblock224} adds checked simultaneous-replacement
 logic. The finite two-region exclusions remain native, with complete
 coverage recorded separately from unresolved cases.
+Section~\ref{sec:replacement225} adds the checked direct constructor,
+interval enlargement and endpoint parity. Its width-42 exclusion remains
+a native calculation, including the complete two-allocation split.
 The round-220 full-source review corrects historical proof references,
 notation and current-status statements; it does not rebuild the entire
 archived contributor chain.
@@ -11530,6 +11611,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Interaction between simultaneous
 replacements and two-region construction searches}.
 Research milestone 224, 15 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/224-cross-block-reconnections}.
+
+\bibitem{research225}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Simultaneous replacement criteria,
+containment transfer and crossing-parity search}. Research milestone 225,
+15 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/225-replacement-widths}.
 
 \end{thebibliography}
 \end{document}

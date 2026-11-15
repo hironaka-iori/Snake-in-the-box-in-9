@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "module": "EndpointParity225",
+  "source": "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean\\EndpointParity225.lean",
+  "source_sha256": "f8fc9fa62313f890ee791524d1c421fc85ae2270e4f2e11d663d5055413aacf7",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\data\\EndpointParity225-execution.json": "c91a4869115956231fd8de27f41cbd2b6399ff6c0ab2ad7d72904bbbc061c947",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean\\EndpointParity225.lean": "f8fc9fa62313f890ee791524d1c421fc85ae2270e4f2e11d663d5055413aacf7",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\data\\CutParity221-audit.json": "646a74bc6c58db9579e2dca092e2960b4923e7bb72b2d9e27d6ee9dc8e4d3483",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\data\\CutParity221-execution.json": "d947f8df854455753601109293abe44b9382b611178952a3cba66341796714cd",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\lean\\CutParity221.lean": "24f789fd4c9f293925c190debe679ba4e535948c01bb664e061ac2a3cde37912",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\build\\CutParity221.olean": "062be3bbbec8002589f784760847be6c28d3db8e151a2b8a7696b9820eb373de",
+    "E:\\Snake-in-a-box\\milestones\\221-square-parity\\logs\\CutParity221-1794709372270127600\\compiler.log": "9c63f74966de2483828ce8b82a9ed2fed8fe89cd91b657582d757ccb22660211",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\build\\CutParity221.olean": "062be3bbbec8002589f784760847be6c28d3db8e151a2b8a7696b9820eb373de"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\logs\\EndpointParity225-1794727131492269900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\lean\\EndpointParity225.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\logs\\EndpointParity225-1794727131492269900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1856274432,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 88,
+    "snapshot_seconds": 0.014999999984866008
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1852010496,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 60360,
+          "ParentProcessId": 34768,
+          "PrivatePageCount": 48201728,
+          "WorkingSetSize": 24170496
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.015000000013969839
+    }
+  ],
+  "compiler_pid": 60360,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.062999999994645,
+  "axioms": [
+    {
+      "theorem": "EndpointParity225.path_change_parity",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "EndpointParity225.coordinate_crossing_count",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "3ccaf5f5c03d6ef8c1ce108e0339ca3c35c5f33abbc47aa7e175a98f4662b3c3",
+  "object": "E:\\Snake-in-a-box\\milestones\\225-replacement-widths\\build\\EndpointParity225.olean",
+  "olean_sha256": "408251b800eb373025b0124189099929d6dde5c880f73219128faf96d6b4052b"
+}
