@@ -501,3 +501,162 @@ ran only when no speculative candidate was left, which never happens, so the far
 1678/3 for 40 minutes once every step of the minimum cycle had only timed-out levels. Long
 retries on the minimum cycle now take priority. Known open fault: a worker does not exit on
 SIGTERM (use the STOP flag, or SIGKILL by PID).
+
+## Certificate plan for 231
+
+Stage B of the Lean 231 (15 November). The question: which certificates does a Lean chain for
+m <= 231 with ONE potential need, how many, and what do they cost? Scripts: `certplan231.py`
+(plan), `certsample231.py` (measured LRAT sizes, on cloud workers), `split231.py` (farm runner for
+the solver tests that the plan asks for). Data: `data/certplan231_*`, `data/certsample231_*`,
+`data/split231_jobs*`, `data/oracle_plain_cp231.jsonl`, `data/*_s231.jsonl.gz`.
+
+### Answer
+
+All figures are on the final data (farm round 2 merged, 615cc86f; split rounds 1-2), calibrated by
+1,301 measured proofs, with every certificate at most 60 M replay hints (233's largest was 38.8 M
+hints, 6.91 GB RSS). Kernel-hours and `.olean` use the MEASURED 233 ratios (209.84 kernel-h and
+8.87 GB for 3.34 G hints).
+
+| plan | lambda_t, bits, range | certificates (plain seeds / 5-win / ctx-7 / ctx-8) | hints (90 % range) | kernel-h | new .olean | .olean files |
+|---|---|---|---|---|---|---|
+| **232** | 541/1 (4.508 alpha), B = 10, 852 of 1,023 | **4,515** (3,099 / 948 / 404 / 64) | **8.2 G** (8.1-9.5) | 518 (509-595) | **21.9 GB** (21.5-25.2) | ~9,000 |
+| **231** | 566/1 (4.717 alpha), B = 10, 1,021 of 1,023 | **13,454** (7,697 / 1,668 / 3,475 / 614) | **40.5 G** (40.5-46.6) | 2,547 (2,544-2,929) | **108 GB** (108-124) | ~26,900 |
+| 231 fallback | 563/1, B = 10 | see `data/certplan231_563_1_cap_summary.json` | | | | |
+| 233 (built) | 520/1 | 3,127 | 3.34 G | 209.84 | 8.87 GB | 6,254 |
+
+Plain counts are seeds: the paid plain keys (231: 16,559; 232: 6,666) reduced by 233's measured
+L1/L2 family ratio (2,637 seeds for 5,673 keys, 0.888 of the hints). On top of the new
+certificates each chain imports what it reuses from 233 (up to 8.87 GB, 6,254 files, and the 1,042
+floor modules).
+
+**Consequence.** The single-process audit of 233 imported 8.87 GB of `.olean` at 11-12.6 GB RSS on
+a 13.35 GiB machine. 231 needs about 12 times that, 232 about 2.5 times. Neither fits one audit
+process on this machine. 232 might fit a machine with about 48-64 GB of memory; 231 needs a
+different audit structure (separately audited premise modules) or far more records.
+
+Breakdown by kind (calibrated G hints): 231: plain 19.2, 5-window 7.1, ctx-7 9.0, ctx-8 5.2;
+232: plain 6.1, 5-window 1.6, ctx-7 0.45, ctx-8 0.15. Distribution (231): 14,968 certificates under
+1 M hold 3.0 G, 6,694 of 1-10 M hold 27.2 G, 654 of 10-60 M hold 12.7 G; the top 1 % / 5 % /
+20 % hold 16 % / 39 % / 81 %. The bulk is thousands of 1-10 M certificates, not a tail: splitting
+the tail does not make 231 cheap.
+
+### Method (`certplan231.py`)
+
+milestone 31's engine (`eng233.World`: full k6 product, 6,158,592 transitions, every known plain
+key, warm Bellman-Ford with undo, dual reverse-delete, exact drops), extended:
+
+- **Three share sources.** Step weight `120 s + max(L5(k5), L7(k7), L8(k8))`: `k5 = lkey(ds[2:8],
+  t[1:6])` (both orientations, as share6), `k7 = (canon(ds[1:8]), t)`, `k8 = (canon(ds[0:8]), t)`
+  (oriented). One share id space; per transition the three ids. The dual pass visits share ids by
+  decreasing cost and lowers each to the largest need of the critical transitions that no plain key
+  excludes and no OTHER source covers at its current level; the exact pass lowers by binary search
+  against a warm Bellman-Ford. So one ctx record covers all its transitions, the kept level is the
+  max over those that still depend on it, and the optimiser chooses per transition between
+  "exclude by a plain key" and "raise a share level" (a plain key is dropped when its critical
+  transitions are share-covered, and vice versa).
+- **Free certificates** of the 233 chain: its 6,794 plain keys (5,402 of them in the pool here, plus
+  the 1,383 replays), 9,498 keys L1/L2-derivable from its 2,637 widened seeds (families_k7 mirror),
+  its 262 H8 cuts (exclusions), its 490 share thresholds up to their level, and main's floors 16/17.
+- **Arithmetic.** m <= TARGET iff `(TARGET - 6) P - (1099800 - 4200 (TARGET + 1)) Q >= 2^B`
+  (231: `225 P - 125400 Q`; 232: `226 P - 121200 Q`); B is the largest such bits value.
+- **Pipeline** (`full P/Q`): calibration -> cap check on the full data -> dual -> derivable ->
+  giants (milestone 31 step 3: longer suffix windows of the critical transitions only a big key
+  covers, decided here at 20 s / 90 s, `data/oracle_plain_cp231.jsonl`) -> cap -> dual -> exact
+  (all items, by decreasing calibrated cost) -> dual; the result is re-checked by a fresh full
+  Bellman-Ford and saved as `data/certplan231_<tag>.json.gz` (production list: kind, key, level,
+  proved level, source call (T, seconds), basis, est. hints) and `_summary.json`; `cost TAG` writes
+  `_cost.json` (calibrated totals, bands, top 40).
+- **Cap** (`--max-cert-hints`, default 6e7): plain keys above it leave the pool; a share id keeps the
+  largest level whose certificate (re-solved there, priced by the level fit) is under the cap.
+
+Level semantics: "UNSAT at T" proves share >= T, so every level <= T is implied; a lower level needs
+a new solve at that level (cap = level - 1). The level-aware cost below assumes exactly these
+re-solves; `data/split231_jobs_resolve232.jsonl.gz` (1,182) and `..._resolve231.jsonl.gz` (4,500)
+list them (split231 jobs, limit twice the source call). Nothing assumes a never-tried level above
+a proved one.
+
+### Calibration (measured, not fitted from old plans)
+
+- **233 against milestone 31's model** (`calib233`, `data/certplan231_calib233.json`): share
+  thresholds measured/model 1.27 in total (median 1.16, log-sd 0.43, 479 keys); plain seeds 1.06 on
+  their own model (median 1.00), and 0.89 for all paid keys once families are counted. Replay hints
+  are 0.54 of the trimmed full-proof hints (`est_hints`). Kernel: 0.13-0.17 ms/hint below 3 M hints,
+  0.24-0.32 ms/hint above; replay RSS about 4-5 GB at 15 M hints and 6.9 GB at 39 M.
+- **The 231 sample** (`certsample231.py`, 1,301 records on 10 cloud workers, all UNSAT, no timeout;
+  stratified by source seconds with the whole slow tail; same toolchain as 233: CaDiCaL 2.1.3
+  `--lrat --no-binary --unsat` on the full CNF, trimmed, then the replay portfolio on the core):
+
+  | kind | n | measured / model (median) | replay / est | max hints | max CaDiCaL RSS |
+  |---|---|---|---|---|---|
+  | plain | 396 | 1.00 | 0.60 | 111 M (the 01203 giant: model 5.4 G) | 2.1 GB |
+  | 5-window | 325 | 1.00 | 0.61 | 125 M | 2.2 GB |
+  | ctx-7 | 396 | 0.82 | 0.59 | 106 M | 1.7 GB |
+  | ctx-8 | 184 | 0.89 | 0.58 | 75 M | 1.3 GB |
+
+  Share certificates follow `hints = A s^b (L/T)^c` (s = solver seconds of the source call at
+  level T, L = the level re-solved): b = 0.93-1.04, **c = 3.41** (joint), log-sd 0.45-0.58 per
+  certificate; A = 3.7e5 (5-window), 2.6e5 (ctx-7), 4.6e5 (ctx-8). Lowering a level is therefore
+  worth a lot (L/T = 0.8 costs half). Plain keys use milestone 25's model with measured/model per
+  log10 bin. The range is a bootstrap of the fit (5-95 %); per-certificate scatter averages out, so
+  the range is narrow, and the systematic risk is the extrapolation of `(L/T)^c` below the sampled
+  L/T (clamped at 0.4).
+
+### Sensitivity and robustness
+
+- lambda_t: on the dual pass (before exact) the cost is flat over 1125/2 .. 15268/27 (85-89 G,
+  `data/certplan231_scan.json`), slightly cheaper at lower lambda_t. What decides is the slack:
+  under the 60 M cap only lambda_t <= 566/1 works on the final data (the capped minimum cycle mean is
+  about 4.722 alpha), and 566/1 ends with range 1,021 of 1,023: the plan has no spare range.
+  563/1 is the fallback with more room. More farm refinement helps mainly through slack (it moved
+  the capped plan from infeasible to feasible between 07:03 and 08:10).
+- 231 vs 232: one step of the bound costs a factor of about 5 in hints.
+- ctx-7 only: infeasible. Without ctx-8 records the minimum cycle mean was 1640/3 = 4.556 alpha
+  (data of 06:15) < 4.644 needed.
+- Levels: maximum 200 (5-window), 150 (ctx), all <= 255 (8-bit fields).
+- ctx families: of the 4,089 ctx certificates of the 231 plan, 3,172 distinct (ctx, dirs, t1..t5)
+  groups: a lemma that widens the first count would save at most 22 % of the ctx certificate count
+  (fewer if the cores do not allow the widening); 232: 429 groups for 468.
+
+### The expensive tail and the long solver calls
+
+Under the cap the largest certificates are 50-60 M (231: 654 between 10 and 60 M; 232: 78, the
+largest 30 M). The top of the 231 plan are ctx-8 and 5-window shares from source calls of
+160-280 s at level 35-72 (projected replay RSS 9-10 GB each, at the 233 trend). One needed level
+rests on a source call over 600 s (5-window [[0,1,2,3,0,1],[4,4,5,4,5]] at 10, source T = 16 in
+844 s); none rests on an 1,800 s call. Without the cap, 7 plain giants (model 0.7-5.4 G) and 15-18
+share thresholds above 60 M were in the plan; the giants step replaced all plain giants by 6-window
+keys (several hundred keys, ~0.5 G), and the cap plus split rounds 1-2 (452 solver tests on 7
+machines) the shares.
+
+### What the Lean chain must check for ctx records
+
+For a ctx-c record (c = 7 or 8) with canonical directions `dirs` (c of them), counts `t` (the 6
+lumped counts of the step's vertices n+2..n+7) and level L:
+
+1. `RefutedShare` with a centre range: on the window `winOf dirs` with bounds `boundsOf t` (ctx 7) or
+   `[(1,21)] ++ boundsOf t` (ctx 8; the count of vertex n+1 is free), M = 12, cap L - 1, the share
+   totalizer over the TRAILING 5 centres only (share7.SubShareEncoding; certsample231's
+   TaggedShareCtx is share233.TaggedShare with that centre filter). UNSAT means: every fitting
+   window has share sum >= L over those 5 centres.
+2. The bridge: for every step n of a snake, the ctx-7 window is the snake's directions d(n+1)..d(n+7)
+   (ctx 8: d(n)..d(n+7)), relabelled by first occurrence, with the counts of n+2..n+7; its trailing 5
+   centres are n+3..n+7, exactly the centres of S5(n) in milestone 28's (*). So `S5(n) >= L`, and
+   the arithmetic of (*) is unchanged. The ctx-8 bound (1,21) needs `1 <= coreAlpha p (n+1) <= 21`.
+3. Tables: one 8-bit level per (ctx, dirs, t), forward lookups only (no reversal); the step check is
+   `P + pot(next) <= Q (120 s + max(share6, ctx7, ctx8)) + pot(current)` with the same potential and
+   automaton as 233; each nonzero table field must be backed by a certificate at a level >= it
+   (`RefutedShareFrom.anti` gives the lower levels).
+
+### Assumed, not verified
+
+- Plain families: the count and hint reduction of L1/L2 among the NEW plain keys is 233's ratio,
+  not computed (it needs a widened core per key).
+- Share costs below the proved level come from the level fit; the re-solves of the job files have
+  not been run yet. A re-solve that times out marks an underestimated certificate.
+- Kernel-hours and `.olean` scale linearly with hints at the 233 means; large certificates ran at
+  1.5-2 times the mean ms/hint in 233.
+- The greedy exact pass depends on its order: the counts are upper bounds for one potential, not
+  minima. Every saved plan was re-checked by a full Bellman-Ford on all transitions, but not yet by
+  the Lean generator's re-check on all labels.
+- Records are solver answers; the farm's plain keys and thresholds still need their certificates
+  (that is what is costed here).
