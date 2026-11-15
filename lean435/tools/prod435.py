@@ -323,7 +323,9 @@ def cmd_run(a):
             log(f'restored {len(done)} certificates from {PFX[11:]}{me} ({tip[:10]})')
     seeds = a.seeds or seeds_file(a.plan)
     todo = [it for it in plan_items(a.plan) if mine(it[0], I, W) and it[0] not in done]
-    if a.names:
+    if a.names is not None:
+        if not a.names:
+            raise SystemExit('--names given without names')
         todo = [it for it in todo if it[5] in a.names or it[0] in a.names]
     if a.kinds:
         todo = [it for it in todo if it[1] in a.kinds.split(',')]
@@ -336,6 +338,13 @@ def cmd_run(a):
             r = json.loads(l)
             failed[r['module']] = failed.get(r['module'], 0) + 1
     todo = [it for it in todo if failed.get(it[0], 0) < 2]
+    if a.min_plan_hints:
+        todo = [it for it in todo if it[4] >= a.min_plan_hints]
+    if a.max_plan_hints:
+        big = [it for it in todo if it[4] > a.max_plan_hints]
+        todo = [it for it in todo if it[4] <= a.max_plan_hints]
+        if big:
+            log(f'{len(big)} certificates above --max-plan-hints {a.max_plan_hints:.3g} left out')
     running = {}                                        # module -> (proc, item, predicted GB, start)
     pending_pub = []
     t_end = time.time() + a.hours * 3600
@@ -419,9 +428,13 @@ def cmd_run(a):
             if 'error' in res:
                 failed[mod] = failed.get(mod, 0) + 1
                 with open(fp, 'a') as f:
-                    f.write(json.dumps(dict(module=mod, error=res['error'][-1500:])) + '\n')
+                    f.write(json.dumps(dict(module=mod, plan_est_hints=it[4], memory='KILLED: RssAnon' in res['error'],
+                                            error=res['error'][-1500:])) + '\n')
                 log(f'FAILED {mod}: {res["error"][-300:]}')
-                if failed[mod] < 2:
+                if 'KILLED: RssAnon' in res['error']:
+                    failed[mod] = 99                      # memory: no retry on this machine
+                    log(f'{mod} is too big for this machine (memory cap); listed in {fp}, not retried')
+                elif failed[mod] < 2:
                     todo.append(it)
                 continue
             log(f'done {mod}: {res["hints"]} hints, lean {res["lean_cpu_s"]} s, {res["peak_anon_gb"]} GB, '
@@ -562,6 +575,8 @@ def main():
     p.add_argument('--publish-every', type=float, default=600)
     p.add_argument('--seeds', default=None)
     p.add_argument('--kinds', default=None, help='ctx,share,plain (default all)')
+    p.add_argument('--max-plan-hints', type=float, default=0, help='leave out certificates above this plan estimate')
+    p.add_argument('--min-plan-hints', type=float, default=0, help='leave out certificates below this plan estimate')
     p.add_argument('--names', nargs='*', default=None)
     p.add_argument('--keep', action='store_true', help='keep the job directories (sources, private .olean)')
     p.add_argument('--no-sync', action='store_true', help='no git (tests)')
