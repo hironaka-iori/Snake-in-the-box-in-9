@@ -21,3 +21,15 @@ for _c in ('7300', '7304', '7306'):
          _RC5.format(v='i', p='omega') + ' <;> simpa [bounds] using hu)', 1, _IC),
         (f'Share{_c}.Reversal', 'interval_cases j <;> rfl)', _RC6.format(v='j') + ' <;> rfl)', 1, _IC),
     ]
+# Fixes to branch modules after the port lead's port.py (applied to its output; modules the port
+# lead's 86-module core stack does not contain).
+FIXES += [
+    ('WindowAutomatonBridge', 'simp only [List.length_cons, Nat.add_left_eq_self, List.length_eq_zero,',
+     'simp only [List.length_cons, Nat.add_eq_right, List.length_eq_zero_iff,', 1,
+     '4.35 renames: `Nat.add_left_eq_self` -> `Nat.add_eq_right`, `List.length_eq_zero` -> `List.length_eq_zero_iff`'),
+    ('WindowAutomatonBridge', 'rw [List.length_eq_zero, List.filter_eq_nil_iff] at h',
+     'rw [List.length_eq_zero_iff, List.filter_eq_nil_iff] at h', 1, 'same'),
+]
+for _n in ('150', '153'):
+    FIXES.append((f'ReplayRawChunks{_n}', 'List.all_map, ', 'List.all_map, Function.comp_def, ', 1,
+                  '`List.all_map` now produces `f ∘ g`; unfold the composition so `h` matches the goal'))

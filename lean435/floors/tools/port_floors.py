@@ -7,7 +7,8 @@ ORIG is the output of fetch.py (4.19 sources, verified by git blob sha). SRC get
 - the 19 branch modules and the closure of `Floors233Bridge` (23 modules, no certificate):
   ported by the port lead's lean435/tools/port.py (rules R1/R2, its fix table), run with --out SRC;
   the 19 branch sources it reads are checked to be byte-identical to ORIG;
-- the 1,042 main modules: rule F1 below plus the fix table fixes_floors.py;
+- the 1,042 main modules: rule F1 below plus the fix table fixes_floors.py (which also has
+  fixes applied to port.py's output, for branch modules outside the port lead's core stack);
 - `Floors233Port` from lean435/floors/src (hand-written bridge).
 Rule F1 (main modules): `module` on the first line, every `import X` -> `public import X`, and
 `@[expose] public section` after the header. Inside the floor closure every definition is
@@ -42,14 +43,10 @@ man = []
 for m in branch:
     p = PL.find(m)
     assert open(p, 'rb').read() == open(os.path.join(orig, rel(m)), 'rb').read(), m
-for l in open(os.path.join(out, 'PORT-MANIFEST.tsv')).read().splitlines()[1:]:
-    m, _o, so, sp = l.split('\t')
-    man.append((m, 'port.py', so, sp))
-
-# 2. main modules: rule F1 + fixes
 used = {}
-for m in main:
-    text = open(os.path.join(orig, rel(m)), encoding='utf-8').read().replace('\r\n', '\n')
+
+
+def fix(m, text):
     for (fm, old, new, count, _why) in FIXES:
         if fm == m:
             n = text.count(old)
@@ -57,6 +54,21 @@ for m in main:
                 raise SystemExit(f'fix for {m}: expected {count} match(es), found {n}: {old[:60]!r}')
             text = text.replace(old, new)
             used[(fm, old)] = n
+    return text
+
+
+for l in open(os.path.join(out, 'PORT-MANIFEST.tsv')).read().splitlines()[1:]:
+    m, _o, so, sp = l.split('\t')
+    q = os.path.join(out, rel(m))
+    t = open(q, encoding='utf-8').read()
+    t2 = fix(m, t)
+    if t2 != t:
+        open(q, 'w', encoding='utf-8').write(t2)
+    man.append((m, 'port.py' + ('+fix' if t2 != t else ''), so, sha(t2.encode())))
+
+# 2. main modules: rule F1 + fixes
+for m in main:
+    text = fix(m, open(os.path.join(orig, rel(m)), encoding='utf-8').read().replace('\r\n', '\n'))
     lines, hend, imports = PL.split_header(text)
     hdr = ['module', '']
     for ln in lines[:hend]:
