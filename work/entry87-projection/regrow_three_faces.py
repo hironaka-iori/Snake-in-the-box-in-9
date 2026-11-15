@@ -47,6 +47,7 @@ if __name__ == "__main__":
     parser.add_argument("--stop",type=int,default=0)
     parser.add_argument("--target",type=int,default=193,choices=(192,193))
     parser.add_argument("--budget",type=int,default=400000)
+    parser.add_argument("--endpoint",type=int,choices=range(4))
     args=parser.parse_args()
     originals=catalogue()
     if args.source == -1:
@@ -62,4 +63,4 @@ if __name__ == "__main__":
         save(Path(f"three-regrow-{args.source}-menu.json"),rows)
         print(len(rows))
     for i in range(args.start,min(args.stop,len(rows))):
-        decide(rows[i],f"r{args.source}-{i}",args.target,args.budget,new=(args.target==192))
+        decide(rows[i],f"r{args.source}-{i}",args.target,args.budget,new=(args.target==192),endpoint=args.endpoint)
