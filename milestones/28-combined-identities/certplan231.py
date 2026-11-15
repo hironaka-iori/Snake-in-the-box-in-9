@@ -817,6 +817,114 @@ def cmd_giants(a):
     L.log(json.dumps(s))
 
 
+
+# ------------------------------------------------------------------ calibrated cost of a plan
+SHARE_CNF_S = 9.36 * 3600 / 490          # 233: share Cnf modules, 68.8 s each (ctx and 5-window certs)
+SEED_CNF_S = 3.26 * 3600 / 2637          # 233: seed Cnf modules, 4.45 s each
+FAM_COUNT = 2637 / 5673                  # 233 seed plan: seeds / new plain+H8 keys
+FAM_HINTS = 4351076366 / 4900186189      # 233 seed plan: est. hints of the seeds / of all new keys
+RSS_233 = (38.84, 6.91)                  # 233's largest replay: 38.8 M hints, 6.91 GB, 12,360 s (1 GB stack)
+
+
+def load_results(path=None):
+    path = path or os.path.join(DATA, 'certsample231_results.jsonl.gz')
+    return [json.loads(l) for l in gzip.open(path, 'rt') if l.strip()]
+
+
+def calib_factors(res, nboot=400, seed=1):
+    """Per kind: measured replay hints / model hints of the sampled records, by log10(model) bin
+    (bins with < 5 records fall back to the kind's pooled ratio), with bootstrap replicates."""
+    rng = np.random.default_rng(seed)
+    out = {}
+    for kind in ('plain', '5', 'c7', 'c8'):
+        rs = [r for r in res if r['kind'] == kind and r.get('status') == 'UNSAT' and r.get('hints') and r.get('model_hints')]
+        if not rs:
+            continue
+        m = np.array([r['model_hints'] for r in rs], float); h = np.array([r['hints'] for r in rs], float)
+        b = np.clip(np.floor(np.log10(m)).astype(int), 3, 8)
+        sec = np.array([r.get('seconds') or np.nan for r in rs], float)
+        boots = []
+        for _ in range(nboot):
+            ix = rng.integers(0, len(rs), len(rs))
+            boots.append(bin_ratio(m[ix], h[ix], b[ix]))
+        fit = None
+        ok = np.isfinite(sec) & (sec > 0)
+        if ok.sum() > 10:
+            A = np.vstack([np.ones(ok.sum()), np.log(sec[ok])]).T
+            co, *_ = np.linalg.lstsq(A, np.log(h[ok]), rcond=None)
+            resid = np.log(h[ok]) - A @ co
+            fit = dict(A=float(np.exp(co[0])), B=float(co[1]), log_sd=float(resid.std()), n=int(ok.sum()))
+        out[kind] = dict(n=len(rs), pooled=float(h.sum() / m.sum()), median=float(np.median(h / m)),
+                         bins=bin_ratio(m, h, b), boots=boots, fit_seconds=fit,
+                         timeouts=sum(1 for r in res if r['kind'] == kind and r.get('status') == 'TIMEOUT'),
+                         file_limit=sum(1 for r in res if r['kind'] == kind and r.get('status') == 'FILE_LIMIT'),
+                         errors=sum(1 for r in res if r['kind'] == kind and r.get('status') == 'ERROR'),
+                         max_rss_mb=max(r.get('peak_rss_mb') or 0 for r in rs),
+                         max_hints=float(h.max()))
+    return out
+
+
+def bin_ratio(m, h, b):
+    pooled = h.sum() / m.sum()
+    out = {}
+    for x in range(3, 9):
+        sel = b == x
+        out[x] = float(h[sel].sum() / m[sel].sum()) if sel.sum() >= 5 else float(pooled)
+    return out
+
+
+def calibrated(plan_rows, cal, kind, which='bins'):
+    hs = np.array([r['est_hints'] for r in plan_rows], float)
+    if kind not in cal or not len(hs):
+        return hs, [hs.sum()] * 3
+    b = np.clip(np.floor(np.log10(np.maximum(hs, 1))).astype(int), 3, 8)
+    f = np.array([cal[kind]['bins'][int(x)] for x in b])
+    tots = sorted(float((hs * np.array([bt[int(x)] for x in b])).sum()) for bt in cal[kind]['boots'])
+    lo, hi = tots[int(0.05 * len(tots))], tots[int(0.95 * len(tots)) - 1]
+    return hs * f, [lo, float((hs * f).sum()), hi]
+
+
+def cmd_cost(a):
+    d = json.load(gzip.open(os.path.join(DATA, f'certplan231_{a.lam}.json.gz'), 'rt'))
+    res = load_results(a.results)
+    cal = calib_factors(res)
+    rows, tab = [], {}
+    tot = np.zeros(3)
+    for kind in ('plain', '5', 'c7', 'c8'):
+        pr = [r for r in (d['plain'] if kind == 'plain' else d['share']) if (kind == 'plain' or r['kind'] == kind) and not r['free']]
+        fr = [r for r in (d['plain'] if kind == 'plain' else d['share']) if (kind == 'plain' or r['kind'] == kind) and r['free']]
+        h, (lo, mid, hi) = calibrated(pr, cal, kind)
+        n = len(pr)
+        if kind == 'plain':                       # families L1/L2 among the new keys, at 233's ratios
+            n_cert = int(round(n * FAM_COUNT)); fam = FAM_HINTS
+        else:
+            n_cert = n; fam = 1.0
+        lo, mid, hi = lo * fam, mid * fam, hi * fam
+        tot += [lo, mid, hi]
+        cnf_h = n_cert * (SEED_CNF_S if kind == 'plain' else SHARE_CNF_S) / 3600
+        tab[kind] = dict(used=n + len(fr), free=len(fr), paid_keys=n, certificates=n_cert, model_hints=float(sum(r['est_hints'] for r in pr)),
+                         hints=[lo, mid, hi], kernel_hours=[x * KH_PER_HINT for x in (lo, mid, hi)],
+                         olean_GB=[x * GB_PER_HINT for x in (lo, mid, hi)], cnf_hours=cnf_h,
+                         cnf_GB=n_cert * CNF_GB_PER_CERT,
+                         calib=({k: v for k, v in cal[kind].items() if k != 'boots'} if kind in cal else None))
+        for r, x in zip(pr, h):
+            rows.append(dict(r, kind=kind if kind != 'plain' else 'plain', cal_hints=float(x * fam if kind != 'plain' else x)))
+    rows.sort(key=lambda r: -r['cal_hints'])
+    for r in rows[:40]:
+        r['proj_replay_rss_GB'] = round(0.6 + (RSS_233[1] - 0.6) * r['cal_hints'] / 1e6 / RSS_233[0], 2)
+        r['proj_kernel_h'] = round(r['cal_hints'] * KH_PER_HINT * 1.4, 1)   # large certs ran 1.4x the mean ms/hint
+    out = dict(plan=a.lam, summary=d['summary'], kinds=tab, total_hints=list(tot),
+               total_kernel_hours=[x * KH_PER_HINT for x in tot], total_olean_GB=[x * GB_PER_HINT for x in tot],
+               total_certificates=sum(t['certificates'] for t in tab.values()),
+               cnf_hours=sum(t['cnf_hours'] for t in tab.values()),
+               vs_233=dict(hints=tot[1] / H233), top=rows[:40], n_results=len(res))
+    json.dump(out, open(os.path.join(DATA, f'certplan231_{a.lam}_cost.json'), 'w'), indent=1, default=float)
+    print(json.dumps({k: v for k, v in out.items() if k != 'top'}, indent=1, default=float))
+    for r in rows[:25]:
+        print(r['kind'], r['key'], r.get('level'), r.get('source'), round(r['est_hints'] / 1e6, 1), round(r['cal_hints'] / 1e6, 1),
+              r.get('proj_replay_rss_GB'))
+
+
 def _test():
     t0 = time.time()
     W = make_world(15268, 27, 15)
@@ -832,6 +940,9 @@ if __name__ == '__main__' and sys.argv[1:2] == ['_test']:
     _test()
 if __name__ == '__main__' and sys.argv[1:2] == ['_samplelist']:
     sample_list(sys.argv[2], sys.argv[3])
+if __name__ == '__main__' and sys.argv[1:2] == ['cost']:
+    ap = argparse.ArgumentParser(); ap.add_argument('cmd'); ap.add_argument('lam'); ap.add_argument('--results')
+    cmd_cost(ap.parse_args())
 if __name__ == '__main__' and sys.argv[1:2] == ['calib233']:
     cmd_calib233()
 if __name__ == '__main__' and sys.argv[1:2] in (['scan'], ['plan'], ['giants']):
