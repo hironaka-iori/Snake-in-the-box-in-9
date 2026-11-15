@@ -33,9 +33,12 @@ generator commit). A restarted worker restores its manifest from its branch and 
 STOP: a file STOP in the work directory, or `prod435.py ctl --stop` (record.json {"stop": true} on
 xfer/c435/ctl); running jobs finish, no new job starts.
 
-Scheduling: at most --procs jobs (default 3); the sum of the predicted peak RssAnon of the running jobs
-stays under --mem-gb; a job predicted above --alone-gb runs alone. Prediction: 0.8 GB + 0.9 GB per
-million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
+Scheduling: at most --procs jobs (default 4) run at once, largest first; generation (CaDiCaL cores
+and LRAT, single-threaded) is not limited further. Lean builds are admitted under a memory budget:
+the predicted RssAnon of the running builds stays within --mem-gb (default 12 GB); a build predicted
+above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit).
+A restart reuses a finished generation of the same certificate (job directory kept until published).
+Prediction: 1.2 GB + 0.25 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
 
 Work directory: $PROD435_HOME (default ~/l435/prod). Core stack: $PROD435_HOME/core.
 """
@@ -123,9 +126,66 @@ def seeds_file(plan):
 
 
 def predict_gb(est):
-    # measured (4.35, merged module): 0.21 GB at 0.01 M plan hints, 0.76 at 0.13, 1.16 at 0.23 (ctx),
-    # 1.52 at 0.38 (share), 1.51 at 1.62 (ctx); 4.19 replays reached 7.4 GB at the largest 233 sizes
-    return 0.8 + 0.9 * est / 1e6
+    # peak RssAnon of the merged-module build, 4.35, by plan hints. Measured: 0.21 GB at 0.01 M,
+    # 0.76 at 0.13, 1.16 at 0.23 (ctx), 1.52 at 0.38 (share), 1.51 at 1.62 (ctx), 1.66 at 3.93 (plain,
+    # worker w0), 2.90 at 8.26 (share T012034A46536K21); 4.19: 6.9 GB RSS at 38.8 M replay hints.
+    # Upper envelope: 1.2 GB + 0.25 GB per M.
+    return 1.2 + 0.25 * est / 1e6
+
+
+class Budget:
+    """Admission of Lean builds under a memory budget shared by the jobs of this machine
+    (HOME/budget.json under an flock). Fair: a build that does not fit registers as waiting; a later
+    build is admitted past it only if both fit together (so a big build is never starved)."""
+
+    def __init__(self, gb, limit):
+        import fcntl
+        self.fcntl, self.gb, self.limit = fcntl, gb, limit
+        self.path = os.path.join(HOME, 'budget.json')
+        self.lockf = open(os.path.join(HOME, 'budget.lock'), 'a')
+        self.me = str(os.getpid())
+
+    def _edit(self, f):
+        self.fcntl.flock(self.lockf, self.fcntl.LOCK_EX)
+        try:
+            try:
+                st = json.load(open(self.path))
+            except (OSError, ValueError):
+                st = {'run': {}, 'wait': {}}
+            for k in ('run', 'wait'):
+                st[k] = {p: v for p, v in st[k].items() if os.path.exists(f'/proc/{p}')}
+            r = f(st)
+            tmp = self.path + '.tmp'
+            json.dump(st, open(tmp, 'w'))
+            os.replace(tmp, self.path)
+            return r
+        finally:
+            self.fcntl.flock(self.lockf, self.fcntl.LOCK_UN)
+
+    def acquire(self):
+        t0 = time.time()
+
+        def try_(st):
+            used = sum(st['run'].values())
+            need = min(self.gb, self.limit)                  # a build above the budget runs alone
+            bigger = [min(v, self.limit) for p, v in st['wait'].items() if p != self.me and v > self.gb]
+            fits = not st['run'] or used + need <= self.limit
+            fair = not bigger or used + need + max(bigger) <= self.limit   # never delays a bigger waiter
+            if fits and fair:
+                st['wait'].pop(self.me, None)
+                st['run'][self.me] = need
+                return True
+            st['wait'][self.me] = self.gb
+            return False
+        while not self._edit(try_):
+            time.sleep(3)
+        return round(time.time() - t0, 1)
+
+    def release(self):
+        def rel(st):
+            st['run'].pop(self.me, None)
+            st['wait'].pop(self.me, None)
+        self._edit(rel)
 
 
 # ------------------------------------------------------------------ setup
@@ -177,11 +237,16 @@ def cmd_one(a):
         return fail(D, mod, f'to435 failed: {r.stdout[-400:]}{r.stderr[-800:]}')
     secs['to435'] = round(time.time() - t0, 1)
     cap = min(13.0, max(a.rss_cap_gb, predict_gb(est) * 2))
+    # memory is controlled at the build only (generation above runs without a limit): builds are
+    # admitted while the predicted RssAnon of the running builds stays within --mem-gb
+    budget = Budget(predict_gb(est), a.mem_gb)
+    secs['build_wait'] = budget.acquire()
     t0 = time.time()
     r = subprocess.run([sys.executable, os.path.join(HERE, 'build.py'), '--src', os.path.join(D, 'src'), '--build',
                         os.path.join(D, 'build'), '--lib', CORE, '--jobs', '1', '--big', f'{mod}={cap}', mod],
                        capture_output=True, text=True)
     secs['build'] = round(time.time() - t0, 1)
+    budget.release()
     open(os.path.join(D, 'build.log'), 'w').write(r.stdout + r.stderr)
     if r.returncode != 0:
         return fail(D, mod, f'build failed: {(r.stdout + r.stderr)[-1500:]}')
@@ -391,26 +456,28 @@ def cmd_run(a):
                 log(f'ctl check failed: {str(e)[:200]}')
         stop = os.path.exists(stopf) or now > t_end
         # start jobs
-        while not stop and todo and len(running) < a.procs:
-            alone = any(g > a.alone_gb for (_, _, g, _) in running.values())
-            if alone:
-                break
+        def waiting():
+            try:
+                w = json.load(open(os.path.join(HOME, 'budget.json'))).get('wait', {})
+            except (OSError, ValueError):
+                return 0
+            return sum(1 for x in running.values() if str(x[0].pid) in w)
+        # a job whose build waits for memory does not hold a core: another job may start (up to 2 x procs)
+        while not stop and todo and len(running) - waiting() < a.procs and len(running) < 2 * a.procs:
             it = todo[0]
             g = predict_gb(it[4])
-            if g > a.alone_gb and running:
-                break
-            if running and sum(x[2] for x in running.values()) + g > a.mem_gb:
-                break
             st = os.statvfs(HOME)
             if st.f_bavail * st.f_frsize < a.min_free_gb * 2**30:
                 log('disk below the floor: not starting new jobs')
                 break
             todo.pop(0)
             D = os.path.join(HOME, 'jobs', it[5])
-            shutil.rmtree(D, ignore_errors=True)
-            os.makedirs(D)
+            os.makedirs(D, exist_ok=True)                 # a finished generation of an earlier run is reused
+            if os.path.exists(os.path.join(D, 'result.json')):
+                os.remove(os.path.join(D, 'result.json'))
             cmd = [sys.executable, os.path.abspath(__file__), 'one', '--plan', a.plan, '--name', it[5], '--job-dir', D,
-                   '--seeds', seeds, '--rss-cap-gb', str(a.rss_cap_gb), '--cadical', a.cadical]
+                   '--seeds', seeds, '--rss-cap-gb', str(a.rss_cap_gb), '--cadical', a.cadical,
+                   '--mem-gb', str(a.mem_gb)]
             pr = subprocess.Popen(cmd, stdout=open(os.path.join(D, 'one.out'), 'w'), stderr=subprocess.STDOUT)
             running[it[0]] = (pr, it, g, time.time())
             log(f'start {it[0]} ({it[1]}, plan {it[4] / 1e6:.2f} M hints, predicted {g:.1f} GB)')
@@ -567,9 +634,9 @@ def main():
     p.add_argument('--index', type=int, required=True)
     p.add_argument('--workers', type=int, required=True)
     p.add_argument('--hours', type=float, default=24)
-    p.add_argument('--procs', type=int, default=3)
-    p.add_argument('--mem-gb', type=float, default=12)
-    p.add_argument('--alone-gb', type=float, default=6)
+    p.add_argument('--procs', type=int, default=4, help='jobs at once (generation is single-threaded)')
+    p.add_argument('--mem-gb', type=float, default=12, help='budget of predicted RssAnon of concurrent Lean builds')
+    p.add_argument('--alone-gb', type=float, default=None, help='(not used any more; see --mem-gb)')
     p.add_argument('--rss-cap-gb', type=float, default=7, help='kill a lean above this (raised for big predictions)')
     p.add_argument('--min-free-gb', type=float, default=3)
     p.add_argument('--publish-every', type=float, default=600)
@@ -587,6 +654,7 @@ def main():
     p.add_argument('--job-dir', required=True)
     p.add_argument('--seeds', default=None)
     p.add_argument('--rss-cap-gb', type=float, default=7)
+    p.add_argument('--mem-gb', type=float, default=12)
     p.add_argument('--cadical', default=os.environ.get('CADICAL') or shutil.which('cadical') or '/usr/local/bin/cadical')
     p = sub.add_parser('status')
     p.add_argument('--plan', default=None)
