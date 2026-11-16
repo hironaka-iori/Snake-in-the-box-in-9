@@ -40,8 +40,9 @@ the predicted RssAnon of the running builds stays within --mem-gb (default 12 GB
 above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit).
 A restart reuses a finished generation of the same certificate (job directory kept until published).
 Prediction: 1.9 GB + 0.14 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
-The replay step of a job from 5 M plan hints on (generation, Python, several GB) also runs under the budget,
-with 1.0 GB + 0.15 GB per million plan hints (gen_gb): two such jobs next to builds were OOM-killed. Its
+The generation phase of the replay step of a job from 5 M plan hints on (gen_lean_lrat_v3, Python, several GB)
+also runs under the budget, with 1.0 GB + 0.15 GB per million plan hints (gen_gb): it is paused when it starts
+until the budget admits it (its CaDiCaL phase before stays at ~0.4 GB). Such jobs were OOM-killed next to builds. Its
 CaDiCaL seeds run with --seed-jobs auto (idle cores only; $PROD435_SEED_JOBS overrides), same proof.
 
 Work stealing (helpers). `run --steal --index J --plan P` (no --workers) is helper J: it takes items
@@ -59,6 +60,7 @@ to <family>help/w<J> (xfer/c435help/w<J>). Coordination, all on the remote:
     --heartbeat s, kept 1 h after publication, and expire after --claim-ttl h (default 2) without
     renewal: a dead machine's items go back. A claim write that keeps failing never stops a run (the
     item goes unclaimed; a duplicate is harmless).
+  - `--ignore-claims` (helpers, with --names): build the named items even if claimed (a stuck owner).
   - a helper ends its run once no unclaimed, unpublished item has been available for --steal-idle s
     (default 600; logged as 'helper idle'), so a chain of plans moves on to the next one.
   - families are separate: the paid family c435 never reads c435free (names do not clash today, but a
@@ -250,6 +252,68 @@ def cmd_setup(a):
 
 
 # ------------------------------------------------------------------ one certificate
+GEN_PROC = 'gen_lean_lrat_v3'   # the LRAT -> Lean generation of the replay step: the only phase that needs GBs
+
+
+def descendants(pid):
+    kids = {}
+    for d in os.listdir('/proc'):
+        if d.isdigit():
+            try:
+                f = open(f'/proc/{d}/stat').read()
+                kids.setdefault(int(f[f.rindex(')') + 2:].split()[1]), []).append(int(d))
+            except (OSError, ValueError, IndexError):
+                pass
+    out, todo = [], [pid]
+    while todo:
+        for c in kids.get(todo.pop(), []):
+            out.append(c)
+            todo.append(c)
+    return out
+
+
+def run_step(cmd, env, D, step, budget, secs):
+    """Run a step; with a budget, its generation process is paused (SIGSTOP) when it appears until the
+    budget admits it, then resumed, and the budget is released when the step ends. The CaDiCaL phase
+    before it stays small (0.4 GB for 2.6 h at 39 M hints; generation peak 4.5-5 GB), so it holds no budget."""
+    import signal
+    import types
+    fo, fe = open(os.path.join(D, f'{step}.out.tmp'), 'w+'), open(os.path.join(D, f'{step}.err.tmp'), 'w+')
+    pr = subprocess.Popen(cmd, env=env, stdout=fo, stderr=fe, text=True)
+    held = False
+    try:
+        while pr.poll() is None:
+            if budget is not None and not held:
+                for c in descendants(pr.pid):
+                    try:
+                        cl = open(f'/proc/{c}/cmdline', 'rb').read()
+                    except OSError:
+                        continue
+                    if GEN_PROC.encode() in cl:
+                        try:
+                            os.kill(c, signal.SIGSTOP)
+                        except OSError:
+                            break
+                        try:
+                            secs['gen_wait'] = budget.acquire()
+                            held = True
+                        finally:
+                            try:
+                                os.kill(c, signal.SIGCONT)
+                            except OSError:
+                                pass
+                        break
+            time.sleep(2)
+    finally:
+        if held:
+            budget.release()
+    fo.seek(0); fe.seek(0)
+    r = types.SimpleNamespace(returncode=pr.returncode, stdout=fo.read(), stderr=fe.read())
+    fo.close(); fe.close()
+    os.remove(fo.name); os.remove(fe.name)
+    return r
+
+
 def cmd_one(a):
     """Generate, convert and build one certificate in --job-dir; writes JOB/result.json."""
     D = os.path.abspath(a.job_dir)
@@ -268,19 +332,9 @@ def cmd_one(a):
         # limited by memory and disk); the proof chosen does not depend on it (same source sha256 measured)
         sj = os.environ.get('PROD435_SEED_JOBS') or ('auto' if est >= GEN_BUDGET_HINTS else None)
         extra = ['--seed-jobs', sj] if step == 'replay' and sj else []
-        gb = None
-        if step == 'replay' and est >= GEN_BUDGET_HINTS:
-            # a big generation holds GBs (no cap of its own): it takes its share of the build budget, so
-            # it cannot be OOM-killed next to lean builds (memory cgroup of the machine)
-            gb = Budget(gen_gb(est), a.mem_gb)
-            secs['replay_wait'] = gb.acquire()
-            t0 = time.time()
-        try:
-            r = subprocess.run(['nice', '-n', '10'] + c435 + [step, '--plan', a.plan, '--kinds', kinds] + extra + [name],
-                               env=env, capture_output=True, text=True)
-        finally:
-            if gb is not None:
-                gb.release()
+        big = step == 'replay' and est >= GEN_BUDGET_HINTS
+        r = run_step(['nice', '-n', '10'] + c435 + [step, '--plan', a.plan, '--kinds', kinds] + extra + [name],
+                     env, D, step, Budget(gen_gb(est), a.mem_gb) if big else None, secs)
         secs[step] = round(time.time() - t0, 1)
         open(os.path.join(D, f'{step}.log'), 'w').write(r.stdout + r.stderr)
         if r.returncode != 0 or '"error"' in r.stdout:
@@ -721,9 +775,9 @@ def cmd_run(a):
         if force or now - last_claims > a.claims_every:
             claims.read()
             last_claims = now
-            busy = claims.busy() | running_elsewhere
+            busy = set() if a.ignore_claims else claims.busy() | running_elsewhere
             # an item claimed twice: the loser drops it (queued), or stops its job if it is running
-            lost = [m for m in list(claims.mine) if not claims.wins(m)]
+            lost = [] if a.ignore_claims else [m for m in list(claims.mine) if not claims.wins(m)]
             for m in lost:
                 if m in running:
                     pr = running.pop(m)[0]
@@ -758,6 +812,8 @@ def cmd_run(a):
         if not got:
             return []
         keep = set(claims.claim([it[0] for it in got]))
+        if a.ignore_claims:
+            keep = {it[0] for it in got}
         busy.update(it[0] for it in got if it[0] not in keep)
         g = {it[0] for it in got}
         todo = [it for it in todo if it[0] not in g]
@@ -1124,6 +1180,8 @@ def main():
     p.add_argument('--claim-ttl', type=float, default=2, help='hours a helper claim stays fresh without renewal')
     p.add_argument('--heartbeat', type=float, default=1200, help='s between renewals of a helper\'s claims')
     p.add_argument('--claims-every', type=float, default=120, help='s between reads of the claim refs')
+    p.add_argument('--ignore-claims', action='store_true', help='helpers: build items even if another machine '
+                   'claims them (a stuck owner; with --names; a duplicate publication is harmless)')
     p.add_argument('--steal-idle', type=float, default=600, help='helpers: end after this many s without an '
                    'unclaimed unpublished item')
     p.add_argument('--claim-batch-hints', type=float, default=5e6, help='helpers claim at least this much work at once')
