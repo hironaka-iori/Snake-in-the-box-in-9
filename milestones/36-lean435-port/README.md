@@ -269,10 +269,15 @@ Interface-only audit of both 232 certificates (`lean435/audit232.log`):
   smallest first and publishes to `xfer/c435help/w<J>`.
   - Owners and helpers scan every `w*` branch of `c435` and `c435help` (manifest and record blobs only,
     by partial fetch: 29 s the first time on 32 branches, then 2 s; 1.7 MB) and skip what is published.
-  - Claims live in `xfer/c435help/claims` and are changed by compare-and-swap. Helpers claim batches;
-    owners claim each item before starting it. A claim lasts 2 h unless renewed every 20 min, so a dead
-    helper's items go back to their owner.
-  - Tested against a local bare remote: an owner and two helpers on 16 shared items built each one
+  - Claims: one ref per machine with a single writer, `xfer/c435claim/o<I>` and `xfer/c435claim/h<J>`;
+    readers take the union. (The first version's single compare-and-swap ref `xfer/c435help/claims`
+    failed under contention and is no longer used.) Ties: the earlier claim wins; within 5 s, owners
+    before helpers, then the lower index. A claimant waits 15 s after its write before reading, so both
+    sides agree. Claims are renewed every 20 min, kept 1 h after publication and expire after 2 h; a
+    failing claim write never stops a run.
+  - Stress test, 60 writers (30 owners, 30 helpers) on a 300-item pool against a bare remote for 4 min:
+    1,948 holds, 0 overlapping, 0 failed writes.
+  - Tested against a local bare remote: an owner and three helpers on 16 shared items built each one
     once; a killed helper's 3 claimed items were taken back by the owner after the claim lifetime;
     `merge` over both families had no conflicts.
 

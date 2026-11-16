@@ -47,11 +47,15 @@ to <family>help/w<J> (xfer/c435help/w<J>). Coordination, all on the remote:
   - every run (owner or helper) scans the published set of the family and of its helpers
     (manifest.jsonl / record.json of every w* branch, partial fetch, every --scan-every s) and drops
     what is published there;
-  - claims: <family>help/claims holds claims.json {module: [who, time]}, changed by compare-and-swap
-    (push without force). Helpers claim a batch (>= free slots, >= --claim-batch-hints) before
-    starting; owners claim each item just before starting it and skip it while a helper's claim is
-    fresh (< --claim-ttl h, default 2). Holders renew their claims every --heartbeat s; a failed helper
-    job is unclaimed at once; a dead machine's claims expire and the owner takes the items back.
+  - claims: one ref per machine, single writer: <family>claim/o<I> (owners) and <family>claim/h<J>
+    (helpers), each holding claims.json of what that machine holds (class Claims); readers take the
+    union. Helpers claim a batch before starting it; owners claim the next items for their free
+    slots. Ties: the earlier claim wins, within 5 s the lower (kind, index) (owners first); a claimant
+    waits 15 s after writing before it reads, so both sides agree, and the rule is re-applied at every
+    read of the claims (--claims-every s; a losing running job is stopped). Claims are renewed every
+    --heartbeat s, kept 1 h after publication, and expire after --claim-ttl h (default 2) without
+    renewal: a dead machine's items go back. A claim write that keeps failing never stops a run (the
+    item goes unclaimed; a duplicate is harmless).
   - families are separate: the paid family c435 never reads c435free (names do not clash today, but a
     free plain seed has widened bounds), and a helper of the free family would use c435freehelp.
 status / merge read the family and its helpers by default; the same module published twice must have
@@ -60,7 +64,7 @@ the same .olean sha256 (deterministic builds), a different one is a CONFLICT.
 
 Work directory: $PROD435_HOME (default ~/l435/prod). Core stack: $PROD435_HOME/core.
 """
-import argparse, gzip, hashlib, json, os, shutil, socket, subprocess, sys, tempfile, time
+import argparse, gzip, hashlib, json, os, re, shutil, socket, subprocess, sys, tempfile, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -68,7 +72,8 @@ HOME = os.environ.get('PROD435_HOME', os.path.expanduser('~/l435/prod'))
 CORE = os.path.join(HOME, 'core')
 LEAN = '/opt/lean-4.35.0-linux/bin/lean'
 PFX = os.environ.get('PROD435_PFX', 'refs/heads/xfer/c435/')
-HELP_PFX = PFX.rstrip('/') + 'help/'          # helpers (`run --steal`) of this family: xfer/c435help/w<J>, claims
+HELP_PFX = PFX.rstrip('/') + 'help/'          # helpers (`run --steal`) of this family: xfer/c435help/w<J>
+CLAIM_PFX = PFX.rstrip('/') + 'claim/'        # claims, one ref per machine: xfer/c435claim/o<I>, h<J>
 PARTS = ('.olean', '.olean.server', '.olean.private', '.ir', '.ir.sig')
 CAD_PATH = '/home/user/lean-deps/toolchain/lean-4.19.0-linux/bin/cadical'   # hard-coded by the 4.19 generators
 sys.dont_write_bytecode = True
@@ -453,63 +458,164 @@ class Scan:
 
 
 class Claims:
-    """The helpers' claims: `claims.json` {module: [helper, unix time]} on the ref <help family>claims,
-    changed by compare-and-swap (a push without force on top of the tip just read; a rejected push is
-    re-read and retried). A claim is fresh for --claim-ttl hours; a helper renews its claims while it
-    holds them (every --heartbeat s) and drops a claim when its job fails."""
+    """Claims, one ref per machine and a single writer per ref: <family>claim/o<I> (owner I) or
+    <family>claim/h<J> (helper J), holding claims.json {module: [first claim time, renewal time]} of what
+    that machine holds now (running or queued). The writer replaces it fast-forward on top of its own
+    tip; no two machines ever write the same ref. Readers take the union of all claim refs (one
+    ls-remote, then a fetch of the tips that moved).
 
-    def __init__(self, pfx, who):
-        self.ref, self.who = pfx + 'claims', who
-        self.prune = set()                                # published modules: their claims are dropped
+    A claim is fresh while its renewal is younger than --claim-ttl h. Who keeps an item claimed twice:
+    the earlier first claim (by more than WINDOW s); within WINDOW, the lower (kind, index), owners
+    before helpers. A claimant writes its claim (re-stamped and written again if the push took more
+    than 3 s, so a claim's time is when it became visible), waits SETTLE s and only then reads the
+    union: two claims made within WINDOW are then seen by both sides, and a later claim always sees the
+    earlier one, so both sides reach the same verdict. The rule is applied again at every refresh
+    (a delayed push), and a loser drops the item (a running loser job is stopped). Nothing here can end a run: a write
+    that keeps failing is given up (the item goes unclaimed; a duplicate is harmless, same .olean)."""
+
+    WINDOW = 5
+    SETTLE = 15
+
+    def __init__(self, pfx, kind, index, ttl_h):
+        self.pfx, self.kind, self.index, self.ttl = pfx, kind, index, ttl_h * 3600
+        self.name = f'{kind}{index}'
+        self.ref = pfx + self.name
+        self.rank = (0 if kind == 'o' else 1, index)
         self.b = os.path.join(HOME, 'scan.git')
         if not os.path.exists(os.path.join(self.b, 'HEAD')):
             os.makedirs(self.b, exist_ok=True)
             git('init', '-q', '--bare', self.b)
         self.url = url()
+        self.mine = {}                                    # module -> first claim time
+        self.kept = {}                                    # published by me: claim kept until this time
+        self.tip = None                                   # my ref's tip as last pushed / read
+        self.cache = {}                                   # other ref -> (tip, {module: [t0, t1]})
+        self.others = {}                                  # module -> [(rank, t0, t1)] fresh, other machines
+        self.ok = 0                                       # time of the last good read
+
+    @staticmethod
+    def _rank(name):
+        return (0 if name[0] == 'o' else 1, int(name[1:]))
 
     def read(self):
-        out = retry(lambda: git('ls-remote', self.url, self.ref, cwd=self.b, timeout=120))
-        tip = next((l.split('\t')[0] for l in out.splitlines() if l.endswith('\t' + self.ref)), None)
-        if not tip:
-            return None, {}
-        retry(lambda: git('fetch', '-q', '--depth', '1', self.url, tip, cwd=self.b))
+        """Refresh the union of the other machines' fresh claims (kept as is on a failure)."""
         try:
-            return tip, json.loads(git('cat-file', 'blob', f'{tip}:claims.json', cwd=self.b) or '{}')
-        except (RuntimeError, ValueError):
-            return tip, {}
+            out = git('ls-remote', self.url, self.pfx + '*', cwd=self.b, timeout=120)
+            tips = {}
+            for l in out.splitlines():
+                if '\t' in l:
+                    t, ref = l.split('\t')
+                    nm = ref[len(self.pfx):]
+                    if re.fullmatch(r'[oh]\d+', nm):
+                        tips[nm] = t
+            if self.name in tips and self.tip is None:
+                self.tip = tips[self.name]
+            new = sorted({t for nm, t in tips.items() if nm != self.name and self.cache.get(nm, (None,))[0] != t})
+            for i in range(0, len(new), 100):
+                git('fetch', '-q', '--depth', '1', self.url, *new[i:i + 100], cwd=self.b, timeout=300)
+            for nm, t in tips.items():
+                if nm == self.name or self.cache.get(nm, (None,))[0] == t:
+                    continue
+                try:
+                    c = json.loads(git('cat-file', 'blob', f'{t}:claims.json', cwd=self.b) or '{}')
+                except (RuntimeError, ValueError):
+                    c = {}
+                self.cache[nm] = (t, c)
+            for nm in list(self.cache):
+                if nm not in tips:
+                    del self.cache[nm]
+            now = time.time()
+            oth = {}
+            for nm, (t, c) in self.cache.items():
+                for m, v in c.items():
+                    if now - v[1] < self.ttl:
+                        oth.setdefault(m, []).append((self._rank(nm), v[0], v[1]))
+            self.others = oth
+            self.ok = now
+            return True
+        except (RuntimeError, subprocess.TimeoutExpired, OSError, ValueError) as e:
+            log(f'claims: read failed (kept the last union): {str(e)[:160]}')
+            return False
 
-    def fresh(self, ttl_h, others_only=False):
-        _, cl = self.read()
+    def busy(self):
+        """Modules another machine holds a fresh claim on."""
+        return set(self.others)
+
+    def wins(self, m):
+        t0 = self.mine.get(m, time.time())
+        for rk, o0, _ in self.others.get(m, ()):
+            if o0 < t0 - self.WINDOW or (abs(o0 - t0) <= self.WINDOW and rk < self.rank):
+                return False
+        return True
+
+    def write(self):
+        """Push my current claims (fast-forward on my own ref). False if it kept failing."""
         now = time.time()
-        return {m for m, (w, t) in cl.items() if now - t < ttl_h * 3600 and not (others_only and w == self.who)}
-
-    def update(self, f, tries=40):
-        """f(claims) edits the dict in place and returns a result (None: nothing to write)."""
-        import random
-        for i in range(tries):
+        for m, t in list(self.kept.items()):
+            if t < now:
+                del self.kept[m]
+                self.mine.pop(m, None)
+        body = {m: [t0, now] for m, t0 in sorted(self.mine.items())}
+        for i in range(4):
             try:
-                tip, cl = self.read()
-                now = time.time()
-                cl = {m: v for m, v in cl.items() if now - v[1] < 24 * 3600 and m not in self.prune}
-                r = f(cl)
-                if r is None:
-                    return None
                 blob = git('hash-object', '-w', '--stdin', cwd=self.b,
-                           inp=json.dumps(cl, sort_keys=True, separators=(',', ':')).encode(), binary=True)
-                tree = git('mktree', cwd=self.b, inp=f'100644 blob {blob.decode().strip()}\tclaims.json\n').strip()
+                           inp=json.dumps(body, separators=(',', ':')).encode(), binary=True).decode().strip()
+                tree = git('mktree', cwd=self.b, inp=f'100644 blob {blob}\tclaims.json\n').strip()
                 cmd = ['-c', 'user.name=prod435', '-c', 'user.email=prod435@localhost', 'commit-tree', tree,
-                       '-m', f'prod435 claims {self.who}']
-                if tip:
-                    cmd[-2:-2] = ['-p', tip]
+                       '-m', f'prod435 claims {self.name}: {len(body)}']
+                if self.tip:
+                    cmd[-2:-2] = ['-p', self.tip]
                 c = git(*cmd, cwd=self.b).strip()
-                git('push', '-q', self.url, f'{c}:{self.ref}', cwd=self.b, timeout=120)   # no force: CAS
-                return r
+                git('push', '-q', self.url, f'{c}:{self.ref}', cwd=self.b, timeout=120)
+                self.tip = c
+                return True
             except (RuntimeError, subprocess.TimeoutExpired, OSError) as e:
-                if i == tries - 1:
-                    raise
-                if i >= 3:
-                    log(f'claims: retry {i + 1}: {str(e)[:160]}')
-                time.sleep(random.uniform(1, 4 + i))
+                # rejected: my ref moved (a restart with an older tip, or a second machine with my index):
+                # take its tip as the parent and retry; network errors: back off
+                try:
+                    out = git('ls-remote', self.url, self.ref, cwd=self.b, timeout=120)
+                    t = next((l.split('\t')[0] for l in out.splitlines() if l.endswith('\t' + self.ref)), None)
+                    if t and t != self.tip:
+                        git('fetch', '-q', '--depth', '1', self.url, t, cwd=self.b, timeout=120)
+                        self.tip = t
+                except (RuntimeError, subprocess.TimeoutExpired, OSError):
+                    pass
+                log(f'claims: write {i + 1} failed: {str(e)[:160]}')
+                time.sleep(min(60, 3 * 2 ** i))
+        log('claims: write given up (items stay unclaimed until the next write)')
+        return False
+
+    def claim(self, mods):
+        """Claim modules, then keep those this machine wins; the rest are dropped again."""
+        for _ in range(3):
+            t = time.time()
+            for m in mods:
+                self.mine[m] = t
+            if not self.write():
+                return list(mods)                         # could not claim: go on unclaimed (harmless duplicate)
+            if time.time() - t <= 3:
+                break
+        time.sleep(self.SETTLE)
+        self.read()
+        lost = [m for m in mods if not self.wins(m)]
+        if lost:
+            for m in lost:
+                self.mine.pop(m, None)
+            self.write()
+        return [m for m in mods if m not in lost]
+
+    def published(self, mods, keep_s=3600):
+        # a published item keeps its claim for a while: until every scan has seen the publication
+        for m in mods:
+            if m in self.mine:
+                self.kept[m] = time.time() + keep_s
+
+    def drop(self, mods):
+        mods = [m for m in mods if m in self.mine]
+        for m in mods:
+            del self.mine[m]
+        if mods:
+            self.write()
 
 
 # ------------------------------------------------------------------ run
@@ -559,100 +665,86 @@ def cmd_run(a):
     who = f'{fam}@{socket.gethostname()}'
     log(('helper ' + fam if steal else f'worker {I}/{W}') +
         f': {len(todo)} certificates to do, {sum(it[4] for it in todo) / 1e6:.1f} M plan hints')
-    # work stealing: the published set of this family and of its helpers, and the helpers' claims
+    # work stealing: the published set of this family and of its helpers, and the claims of all machines
     scan = claims = None
     published, running_elsewhere, busy = set(), set(), set()
     last_scan = last_claims = last_beat = last_try = 0
     queue = []                                           # helpers: claimed, not started yet
     if not a.no_sync and not a.no_steal_check:
         scan = Scan([PFX, HELP_PFX], skip_ref=pub_pfx + me)
-        claims = Claims(HELP_PFX, who)
-        claims.prune = published
+        claims = Claims(CLAIM_PFX, 'h' if steal else 'o', I, a.claim_ttl)
 
     def rescan(force=False):
-        # published (anywhere in the family or its helpers): dropped for good; claimed by a helper or
-        # running at an owner: skipped while that lasts (a stale claim gives the item back)
+        # published (anywhere in the family or its helpers): dropped for good; claimed by another machine
+        # or running at an owner: skipped while that lasts (a stale claim gives the item back)
         nonlocal busy, last_scan, last_claims, todo, queue
         if scan is None:
             return
         now = time.time()
-        try:
-            if force or now - last_scan > a.scan_every:
+        if force or now - last_scan > a.scan_every:
+            try:
                 pub, run = scan.refresh()
-                last_scan = now
                 published.clear(); published.update(pub)
                 running_elsewhere.clear(); running_elsewhere.update(run if steal else ())
-            if force or now - last_claims > 120:
-                busy = claims.fresh(a.claim_ttl, others_only=True) | running_elsewhere
-                last_claims = now
-        except Exception as e:  # noqa: BLE001
-            log(f'scan failed (kept the last one): {str(e)[:200]}')
-            return
+            except Exception as e:  # noqa: BLE001
+                log(f'scan failed (kept the last one): {str(e)[:200]}')
+            last_scan = now
+        if force or now - last_claims > a.claims_every:
+            claims.read()
+            last_claims = now
+            busy = claims.busy() | running_elsewhere
+            # an item claimed twice: the loser drops it (queued), or stops its job if it is running
+            lost = [m for m in list(claims.mine) if not claims.wins(m)]
+            for m in lost:
+                if m in running:
+                    pr = running.pop(m)[0]
+                    try:
+                        os.killpg(pr.pid, 9)
+                    except OSError:
+                        pass
+                    pr.wait()
+                    log(f'{m}: claimed earlier by another machine: job stopped')
+            queue[:] = [it for it in queue if it[0] not in lost]
+            if lost:
+                claims.drop(lost)
         n0 = len(todo) + len(queue)
         todo = [it for it in todo if it[0] not in published]
-        dropped = [it for it in queue if it[0] in published or it[0] in busy]
-        queue = [it for it in queue if it not in dropped]
-        if dropped:
-            try:
-                claims.update(lambda cl: [cl.pop(it[0]) for it in dropped if cl.get(it[0], [''])[0] == who] or None)
-            except Exception as e:  # noqa: BLE001
-                log(f'unclaim failed: {str(e)[:200]}')
+        gone = [it[0] for it in queue if it[0] in published]
+        queue = [it for it in queue if it[0] not in published]
+        if gone:
+            claims.drop(gone)
         if n0 - len(todo) - len(queue):
             log(f'{n0 - len(todo) - len(queue)} certificates published elsewhere: skipped')
 
     def claim_batch(free):
-        # take the next smallest unclaimed items: at least `free` items and --claim-batch-hints of work
+        # helpers: the next smallest items nobody holds: at least `free` items and --claim-batch-hints of work
         nonlocal todo
-        def f(cl):
-            now = time.time()
-            got = []
-            for it in todo:
-                c = cl.get(it[0])
-                if it[0] in published or it[0] in running_elsewhere or (c and c[0] != who and now - c[1] < a.claim_ttl * 3600):
-                    continue
-                got.append(it)
-                if (len(got) >= free and sum(x[4] for x in got) >= a.claim_batch_hints) or len(got) >= 200:
-                    break
-            for it in got:
-                cl[it[0]] = [who, now]
-            return got or None
-        got = claims.update(f) or []
+        got = []
+        for it in todo:
+            if it[0] in published or it[0] in busy or it[0] in claims.mine:
+                continue
+            got.append(it)
+            if (len(got) >= free and sum(x[4] for x in got) >= a.claim_batch_hints) or len(got) >= 200:
+                break
+        if not got:
+            return []
+        keep = set(claims.claim([it[0] for it in got]))
+        busy.update(it[0] for it in got if it[0] not in keep)
         g = {it[0] for it in got}
         todo = [it for it in todo if it[0] not in g]
-        queue.extend(got)
-        if got:
-            log(f'claimed {len(got)} certificates ({sum(it[4] for it in got) / 1e6:.2f} M plan hints)')
-        return got
+        mine_ = [it for it in got if it[0] in keep]
+        queue.extend(mine_)
+        log(f'claimed {len(mine_)} certificates ({sum(it[4] for it in mine_) / 1e6:.2f} M plan hints)'
+            + (f'; {len(got) - len(mine_)} lost to other claims' if len(got) > len(mine_) else ''))
+        return mine_
 
     def heartbeat():
         nonlocal last_beat
         if claims is None or time.time() - last_beat < a.heartbeat:
             return
-        mine_ = {it[0] for it in queue} | set(running)
-        def f(cl):
-            now = time.time()
-            for m in mine_:
-                cl[m] = [who, now]
-            return True if mine_ else None
-        try:
-            claims.update(f)
-            last_beat = time.time()
-        except Exception as e:  # noqa: BLE001
-            log(f'heartbeat failed: {str(e)[:200]}')
-
-    def claim_one(it):
-        # owners: claim the item just before starting it (CAS); False if a helper holds a fresh claim
-        def f(cl):
-            c = cl.get(it[0])
-            if c and c[0] != who and time.time() - c[1] < a.claim_ttl * 3600:
-                return 'taken'
-            cl[it[0]] = [who, time.time()]
-            return 'ok'
-        try:
-            return claims.update(f, tries=8) != 'taken'
-        except Exception as e:  # noqa: BLE001
-            log(f'claim of {it[0]} failed ({str(e)[:120]}): starting it anyway')
-            return True
+        last_beat = time.time()
+        if claims.mine:
+            claims.write()
 
     if steal and claims is None:
         raise SystemExit('--steal needs git (no --no-sync)')
@@ -699,6 +791,8 @@ def cmd_run(a):
         for res, D in pending_pub:
             if not a.keep:
                 shutil.rmtree(D, ignore_errors=True)
+        if claims is not None:
+            claims.published([res['module'] for res, D in pending_pub])
         pending_pub.clear()
         last_pub = time.time()
 
@@ -734,8 +828,7 @@ def cmd_run(a):
                         if claim_batch(a.procs - (len(running) - waiting())):
                             last_try = 0
                     except Exception as e:  # noqa: BLE001
-                        log(f'claim failed: {str(e)[:200]}')
-                        break
+                        log(f'claim failed (continuing): {str(e)[:200]}')
                 src = queue
             else:
                 src = todo
@@ -743,10 +836,17 @@ def cmd_run(a):
             if k is None:
                 break
             it = src[k]
-            if claims is not None and not steal and not claim_one(it):
-                busy.add(it[0])
-                log(f'{it[0]} is claimed by a helper: later')
-                continue
+            if claims is not None and not steal and it[0] not in claims.mine:
+                # owners: claim the next items for all free slots at once (one settle wait)
+                nfree = max(1, a.procs - (len(running) - waiting()))
+                batch = [x for x in src if x[0] not in busy and x[0] not in claims.mine][:nfree]
+                keep = set(claims.claim([x[0] for x in batch]))
+                lost = [x[0] for x in batch if x[0] not in keep]
+                busy.update(lost)
+                if lost:
+                    log(f'{len(lost)} certificates claimed by another machine: later')
+                if it[0] not in keep:
+                    continue
             g = predict_gb(it[4])
             st = os.statvfs(HOME)
             if st.f_bavail * st.f_frsize < a.min_free_gb * 2**30:
@@ -760,7 +860,8 @@ def cmd_run(a):
             cmd = [sys.executable, os.path.abspath(__file__), 'one', '--plan', a.plan, '--name', it[5], '--job-dir', D,
                    '--seeds', seeds, '--rss-cap-gb', str(a.rss_cap_gb), '--cadical', a.cadical,
                    '--mem-gb', str(a.mem_gb), '--max-cap-gb', str(a.max_cap_gb)]
-            pr = subprocess.Popen(cmd, stdout=open(os.path.join(D, 'one.out'), 'w'), stderr=subprocess.STDOUT)
+            pr = subprocess.Popen(cmd, stdout=open(os.path.join(D, 'one.out'), 'w'), stderr=subprocess.STDOUT,
+                                  start_new_session=True)     # its own process group (stopped as a whole)
             running[it[0]] = (pr, it, g, time.time())
             log(f'start {it[0]} ({it[1]}, plan {it[4] / 1e6:.2f} M hints, predicted {g:.1f} GB)')
         # collect
@@ -785,11 +886,8 @@ def cmd_run(a):
                     log(f'{mod} is too big for this machine (memory cap); listed in {fp}, not retried')
                 elif failed[mod] < 2:
                     (queue if steal else todo).append(it)
-                if steal and failed[mod] >= 2:
-                    try:                                  # give the item back to its owner at once
-                        claims.update(lambda cl: cl.pop(mod, None) and True)
-                    except Exception as e:  # noqa: BLE001
-                        log(f'unclaim failed: {str(e)[:200]}')
+                if claims is not None and (failed[mod] >= 2 or not steal):
+                    claims.drop([mod])                    # give the item back at once
                 continue
             log(f'done {mod}: {res["hints"]} hints, lean {res["lean_cpu_s"]} s, {res["peak_anon_gb"]} GB, '
                 f'{sum(res["seconds"].values()):.0f} s in all')
@@ -828,11 +926,7 @@ def cmd_status(a):
         repo = Repo(pfx)
         tips = repo.ls()
         ws = sorted((n for n in tips if n.startswith('w')), key=lambda n: int(n[1:]))
-        if 'claims' in tips:
-            cl = Claims(pfx[:-len('help/')] + 'help/' if pfx.endswith('help/') else pfx.rstrip('/') + 'help/', '')
-            _, c = cl.read()
-            now = time.time()
-            print(f'claims: {len(c)} ({sum(1 for v in c.values() if now - v[1] < 2 * 3600)} fresh < 2 h)')
+        pass
         print(f'== {pfx}: {len(ws)} worker branches')
         if 'ctl' in tips:
             repo.fetch(['ctl'])
@@ -846,6 +940,13 @@ def cmd_status(a):
             have |= {r['module'] for r in man}
             print(f'{n}: {len(man)} certificates, {h / 1e6:.1f} M hints, lean {c / 3600:.2f} CPU-h; '
                   f'todo {rec.get("todo")}, failed {rec.get("failed")}, host {rec.get("host")}, at {rec.get("t")}')
+    try:
+        cl = Claims(CLAIM_PFX, 'x', 0, 2)
+        cl.name = ''
+        cl.read()
+        print(f'claims: {len(cl.cache)} claim refs, {len(cl.others)} modules with a fresh claim (< 2 h)')
+    except Exception as e:  # noqa: BLE001
+        print(f'claims: unreadable ({str(e)[:100]})')
     print(f'all: {tot["n"]} certificates ({len(have)} distinct modules), {tot["hints"] / 1e6:.1f} M hints, '
           f'lean {tot["cpu"] / 3600:.2f} CPU-h')
     for plan in a.plan or []:
@@ -978,11 +1079,12 @@ def main():
     p.add_argument('--index', type=int, required=True)
     p.add_argument('--workers', type=int, default=None, help='W (owners); not used with --steal')
     p.add_argument('--steal', action='store_true', help='helper: take unpublished, unclaimed items of the whole '
-                   'plan, smallest first, publish to <family>help/w<INDEX> (claims on <family>help/claims)')
+                   'plan, smallest first, publish to <family>help/w<INDEX> (claims on <family>claim/h<INDEX>)')
     p.add_argument('--no-steal-check', action='store_true', help='owners: do not skip what helpers published or claimed')
     p.add_argument('--scan-every', type=float, default=600, help='s between scans of the published set')
     p.add_argument('--claim-ttl', type=float, default=2, help='hours a helper claim stays fresh without renewal')
     p.add_argument('--heartbeat', type=float, default=1200, help='s between renewals of a helper\'s claims')
+    p.add_argument('--claims-every', type=float, default=120, help='s between reads of the claim refs')
     p.add_argument('--claim-batch-hints', type=float, default=5e6, help='helpers claim at least this much work at once')
     p.add_argument('--hours', type=float, default=24)
     p.add_argument('--procs', type=int, default=4, help='jobs at once (generation is single-threaded)')
