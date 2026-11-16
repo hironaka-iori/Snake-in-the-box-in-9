@@ -40,6 +40,8 @@ the predicted RssAnon of the running builds stays within --mem-gb (default 12 GB
 above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit).
 A restart reuses a finished generation of the same certificate (job directory kept until published).
 Prediction: 1.9 GB + 0.14 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
+The replay step of a job from 5 M plan hints on (generation, Python, several GB) also runs under the budget,
+with 1.0 GB + 0.15 GB per million plan hints (gen_gb): two such jobs next to builds were OOM-killed.
 
 Work stealing (helpers). `run --steal --index J --plan P` (no --workers) is helper J: it takes items
 of the WHOLE plan, smallest first (owners go largest first, so they meet at the end), and publishes
@@ -153,6 +155,15 @@ def seeds_file(plan):
     return p
 
 
+GEN_BUDGET_HINTS = float(os.environ.get('PROD435_GEN_BUDGET_HINTS', 5e6))   # replay generations from this plan estimate on are admitted under the memory budget
+
+
+def gen_gb(est):
+    # peak RSS of the replay step's generation (LRAT -> Lean, Python), by plan hints: a python3 of
+    # 5.03 GB anon was OOM-killed at 39.33 M (ctx8 C801230140A453564K42, owner w1, next to a lean build)
+    return 1.0 + 0.15 * est / 1e6
+
+
 def predict_gb(est):
     # peak RssAnon of the merged-module build, 4.35, by plan hints. Measured: 0.21 GB at 0.01 M,
     # 0.76 at 0.13, 1.16 at 0.23 (ctx), 1.52 at 0.38 (share), 1.51 at 1.62 (ctx), 1.66 at 3.93 (plain,
@@ -254,12 +265,25 @@ def cmd_one(a):
         t0 = time.time()
         extra = (['--seed-jobs', os.environ['PROD435_SEED_JOBS']]
                  if step == 'replay' and os.environ.get('PROD435_SEED_JOBS') else [])
-        r = subprocess.run(['nice', '-n', '10'] + c435 + [step, '--plan', a.plan, '--kinds', kinds] + extra + [name],
-                           env=env, capture_output=True, text=True)
+        gb = None
+        if step == 'replay' and est >= GEN_BUDGET_HINTS:
+            # a big generation holds GBs (no cap of its own): it takes its share of the build budget, so
+            # it cannot be OOM-killed next to lean builds (memory cgroup of the machine)
+            gb = Budget(gen_gb(est), a.mem_gb)
+            secs['replay_wait'] = gb.acquire()
+            t0 = time.time()
+        try:
+            r = subprocess.run(['nice', '-n', '10'] + c435 + [step, '--plan', a.plan, '--kinds', kinds] + extra + [name],
+                               env=env, capture_output=True, text=True)
+        finally:
+            if gb is not None:
+                gb.release()
         secs[step] = round(time.time() - t0, 1)
         open(os.path.join(D, f'{step}.log'), 'w').write(r.stdout + r.stderr)
         if r.returncode != 0 or '"error"' in r.stdout:
-            return fail(D, mod, f'{step} failed: {(r.stdout + r.stderr)[-800:]}')
+            return fail(D, mod, f'{step} failed (exit {r.returncode}): {(r.stdout + r.stderr)[-800:]}'
+                        + ('' if 'Traceback' in r.stderr or step != 'replay' else
+                           ' [no traceback: probably killed, e.g. OOM; see dmesg]'))
     t0 = time.time()
     out = os.path.join(D, 'scr', 'out')
     r = subprocess.run([sys.executable, os.path.join(HERE, 'to435.py'), '--in', out, '--out', os.path.join(D, 'src'),
