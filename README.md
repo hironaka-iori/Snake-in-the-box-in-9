@@ -1,3 +1,11 @@
+# Current result after round 231
+
+Parity-class contraction gives an exact Hamiltonian-path construction criterion. All 23,127 distinct 97-vertex majority classes obtained by enlarging one saved seed class are computationally excluded. Forty-five of the final 49 graphs also have elementary separator explanations. Four general constructor/converse statements passed Lean. The fixed-minority-class case remains open; the global interval remains 191--233. The goal is active, with a user-requested pause after round 233.
+
+Read [the argument](milestones/231-endpoint-exchanges/MATHEMATICAL_NOTE.md), [evidence](milestones/231-endpoint-exchanges/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 230
 
 The selected endpoint-24 construction is computationally excluded through two length-preserving replacement blocks of 46 edges for every crossing count. All 315 maximal contexts are covered. Fifteen exact-two path-pair queries and eleven final face-visit queries close the last cases. Three general face-visit components passed Lean; extraction, enumeration and native solver contradictions retain their stated limits. No longer snake or global bound is obtained. The user requested a pause after this round.

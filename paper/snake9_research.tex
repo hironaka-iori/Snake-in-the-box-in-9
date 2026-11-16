@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 230, 16 November 2026}
+\date{Research state after round 231, 16 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -59,7 +59,10 @@ weight 94 under all cycle occupancy, subset forest and cycle parity
 inequalities. Native searches exclude the specified two-block construction through
 46-edge replacements for every crossing count. A necessary face-visit
 inequality strengthens the last queries; its combinatorial proof and
-the scope of its checked components are stated separately.
+the scope of its checked components are stated separately. A contraction
+of one parity class gives an exact Hamiltonian-path construction criterion
+and excludes all 97-vertex majority classes obtained by enlarging one
+parity class of the saved seed bank.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -137,6 +140,9 @@ simultaneous-replacement criteria and the successive restricted construction
 results. Their native exclusions concern the stated seed, endpoint,
 intervals and length-preservation conditions. The latest cover permits
 every crossing count.
+Section~\ref{sec:colour231} then treats a different family: a saved parity
+class is enlarged to become the majority class, with endpoints, order,
+crossings and the opposite class free.
 \item Section~\ref{sec:verification} separates completed implications,
 numerical evidence and remaining verification obligations. The conjecture
 in Section~\ref{sec:hypothesis} is used in none of these results.
@@ -8388,6 +8394,73 @@ structure that must change. This is a research hypothesis; no such new
 seed survey was carried out in this round. Wider or length-changing
 replacements remain possible alternatives.
 
+\subsection{Contracting a fixed parity class}\label{sec:colour231}
+The preceding replacement family retains much of the original order.
+A different reduction permits complete reordering and unrestricted changes
+to the other parity class.
+
+\begin{proposition}\label{prop:colour231}
+Let $U$ be a nonempty set in one parity class of $Q_n$. Form a labelled
+graph on $U$: each opposite-parity vertex $z$ with exactly two neighbours
+in $U$ labels an edge joining those neighbours. There is an induced path
+whose vertices in the first parity class are exactly $U$ and whose two
+endpoints lie in $U$ if and only if this graph has a Hamiltonian path.
+The induced path has $2|U|-2$ edges.
+\end{proposition}
+\begin{proof}
+An induced path of the required kind alternates between $U$ and the
+opposite class. Each intervening vertex is adjacent to its predecessor
+and successor in $U$, and to no other member of $U$, since an additional
+adjacency would be a chord. The order of $U$ therefore gives a Hamiltonian
+path in the labelled graph.
+
+Conversely, interleave a Hamiltonian ordering of $U$ with the labels of
+its successive edges. A physical label cannot repeat: its unordered pair
+of neighbours is fixed, whereas a simple Hamiltonian path cannot use
+the same pair twice. The interleaving has distinct vertices. Same-parity
+pairs are nonadjacent, and the exact neighbour condition for each label
+permits only consecutive cross-parity adjacencies. It is therefore induced.
+There are $|U|$ first-class vertices and $|U|-1$ labels. For $|U|=1$,
+the singleton path gives the same conclusion.
+\end{proof}
+
+Parallel labels may be collapsed for the Hamiltonian existence question:
+any one label for a selected pair has the same neighbour relation within
+$U$. Lean checked the indexed interleaving constructor and converse
+statements about exact adjacency, injectivity, disjointness and
+same-parity nonadjacency. Identifying the cube colour classes and
+generating the finite graphs remain separate steps.
+
+For a constructive target of 192 edges, take a 96-vertex parity class
+from a saved 191-edge seed and add one same-parity vertex. All 131 saved
+seeds were checked. Their 262 parity classes give 145 distinct labelled
+sets. Each admits 160 possible additions, giving 23,200 descriptions,
+23,127 distinct 97-vertex sets, and 73 exact duplicates. No claim of
+complete isometry reduction is made. Their associated simple graphs have
+17,271 isolated-vertex obstructions and 5,807 cases with more than two
+degree-one vertices. A Hamiltonian path cannot satisfy either condition.
+
+All 49 surviving graphs are natively infeasible in a circuit model with
+one mandatory dummy vertex. Removing that vertex from a circuit through
+every vertex is exactly a Hamiltonian path. Independently reconstructed
+graphs and models agree with the saved coverage and outcomes. In 34 cases,
+a separator $S$ of size one or two leaves more than $|S|+1$ components,
+which is impossible after deleting $S$ from a Hamiltonian path. Eleven
+more have endpoint-sensitive separator certificates: graph leaves force
+the two endpoints, and their common surviving component requires two
+separate path pieces, exceeding the available count.
+These give written elementary explanations of 45 cases. The remaining
+four retain their native solver evidence; the finite certificates and
+solver contradictions are outside the checked constructor.
+
+Thus the specified 97-vertex majority classes cannot occur in a
+192-edge snake. Endpoints, order, coordinate crossing counts and the
+opposite vertex class were free throughout this search. The conclusion
+does not exclude retaining a 96-vertex \emph{minority} class: then the
+opposite class contains both endpoints, which have exactly one neighbour
+in the fixed class. That distinct construction case is the next target.
+No longer snake or global bound follows~\cite{research231}.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -8633,6 +8706,15 @@ Section~\ref{sec:facevisits230} completes the two-crossing reduction and
 the unrestricted width-46 family. Three general face-visit components
 passed Lean; whole-path run extraction, finite coverage and numerical
 contradictions retain the explicit limits stated there.
+Section~\ref{sec:colour231} adds four checked interleaving and converse
+results and a native majority-class survey. Its graph extraction,
+separator certificates and numerical exclusions retain the stated limits.
+A bounded review of contributor revision \texttt{5309471b} finds a
+231-target chain whose arithmetic is $4763m\le1104764$, but its inspected
+interface retains plain/H8, share, contextual-refutation and floor
+premises. No completed unconditional 231 final assembly or final theorem
+audit was found in that review~\cite{research231}; the maintained interval
+is unchanged.
 Full-source reviews at rounds 220 and 230 check the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
@@ -12133,6 +12215,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Face visits and completion of the
 two-block construction exclusion}. Research milestone 230,
 16 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/230-two-crossing-frontier}.
+
+\bibitem{research231}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Parity-class contraction and
+Hamiltonian construction searches}. Research milestone 231,
+16 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/231-endpoint-exchanges}.
 
 \end{thebibliography}
 \end{document}

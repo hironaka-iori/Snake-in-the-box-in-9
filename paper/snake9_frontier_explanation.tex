@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 230}
+\date{Research state after round 231}
 \begin{document}
 \maketitle
 
@@ -542,15 +542,45 @@ replacement in the same two-block family. This remains a native
 computational exclusion with explicit seed, endpoint, anchor and
 length-preservation restrictions~\cite{research230}.
 
+\section{Reorder one colour class freely}
+Cube vertices have even or odd parity according to their number of one
+bits. Neighbours always have different parity. Choose a set $U$ of one
+parity. Each opposite-parity vertex with exactly two neighbours in $U$
+can act as a connection between those two vertices.
+
+Make a graph of these connections on $U$. A path visiting every vertex
+of this graph exactly once, a Hamiltonian path, expands into a snake by
+inserting the corresponding connection vertex between each pair.
+There are no chords: each inserted vertex has precisely its two intended
+neighbours in $U$, and same-parity vertices are never adjacent.
+Conversely, every snake with both endpoints in $U$ and this exact parity
+class gives such an ordering. The resulting length is $2|U|-2$.
+Lean checked the general interleaving construction and converse adjacency
+and distinctness statements. The finite cube-data extraction remains separate.
+
+For 192 edges, $|U|=97$. The 131 saved 191-edge snakes have 145 distinct
+96-vertex parity classes. Adding every possible new same-parity vertex
+gives 23,127 distinct candidate sets. Simple degree obstructions remove
+23,078, leaving 49 associated graphs. All 49 Hamiltonian searches are
+infeasible. Small separators give additional elementary explanations for
+45 of them: deleting a few vertices leaves too many disconnected pieces
+for a single path, sometimes after accounting for its forced endpoints.
+The four remaining cases retain their native solver evidence.
+
+This excludes every candidate whose 97-vertex majority class contains
+one entire saved 96-vertex class. It allows a completely new order,
+new endpoints and unrestricted opposite-parity vertices. Keeping the
+96-vertex minority class is a different case: its opposite-parity
+endpoint vertices need only one neighbour in the fixed class. That case
+remains the next construction target~\cite{research231}.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
 crossing count. A new construction search must change a restriction.
-A useful next preparation is to compare extension endpoints across
-inequivalent seeds and count the retained vertices that conflict with
-each extension. Fewer or more closely placed conflicts may require less
-structure to change; this expectation is unproved. Wider blocks and
-changed block lengths remain construction choices.
+The parity-class comparison above supplies a broader exclusion while
+leaving the fixed-minority construction open. Wider blocks, changed
+block lengths and changes to both colour classes remain possible.
 Different parent classes and shorter compatible parents remain alternatives. Finding a new parent still requires a compatible joining construction.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
@@ -561,7 +591,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 230.
+in the companion manuscript and milestones through round 231.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -645,6 +675,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Face visits and completion of the
 two-block construction exclusion}. Research milestone 230,
 16 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/230-two-crossing-frontier}.
+
+\bibitem{research231}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Parity-class contraction and
+Hamiltonian construction searches}. Research milestone 231,
+16 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/231-endpoint-exchanges}.
 
 \end{thebibliography}
 \end{document}
