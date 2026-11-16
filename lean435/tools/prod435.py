@@ -801,6 +801,15 @@ def cmd_run(a):
             queue[:] = [it for it in queue if it[0] not in lost]
             if lost:
                 claims.drop(lost)
+        for m in [m for m in running if m in published]:
+            # published elsewhere meanwhile (a duplicate, e.g. --ignore-claims or an expired claim): stop it
+            pr = running.pop(m)[0]
+            try:
+                os.killpg(pr.pid, 9)
+            except OSError:
+                pass
+            pr.wait()
+            log(f'{m}: published elsewhere: job stopped')
         n0 = len(todo) + len(queue)
         todo = [it for it in todo if it[0] not in published]
         gone = [it[0] for it in queue if it[0] in published]
