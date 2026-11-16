@@ -265,6 +265,16 @@ Interface-only audit of both 232 certificates (`lean435/audit232.log`):
     needed.
   - `predict_gb` is now 1.9 + 0.14 GB per M plan hints (was 1.2 + 0.25), so such a job no longer
     reserves the whole 12 GB budget.
+- **Work stealing.** `run --steal --index J` is a helper: it takes the plan's unpublished, unclaimed items
+  smallest first and publishes to `xfer/c435help/w<J>`.
+  - Owners and helpers scan every `w*` branch of `c435` and `c435help` (manifest and record blobs only,
+    by partial fetch: 29 s the first time on 32 branches, then 2 s; 1.7 MB) and skip what is published.
+  - Claims live in `xfer/c435help/claims` and are changed by compare-and-swap. Helpers claim batches;
+    owners claim each item before starting it. A claim lasts 2 h unless renewed every 20 min, so a dead
+    helper's items go back to their owner.
+  - Tested against a local bare remote: an owner and two helpers on 16 shared items built each one
+    once; a killed helper's 3 claimed items were taken back by the owner after the claim lifetime;
+    `merge` over both families had no conflicts.
 
 ## Free keys, the 232 chain and the assembly
 

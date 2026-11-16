@@ -3,7 +3,8 @@
 milestones/28-combined-identities/certplan231.py (milestone 36).
 
     prod435.py setup                                    port + build the 86-module core stack (once per machine)
-    prod435.py run --plan P --index I --workers W --hours H [--procs 3] [--mem-gb 12] [--alone-gb 6]
+    prod435.py run --plan P --index I --workers W --hours H [--procs 4] [--mem-gb 12]   owner I of W
+    prod435.py run --steal --plan P --index J --hours H                                helper J (work stealing)
     prod435.py status [--plan P]                        per-worker counts from the xfer/c435/w* branches
     prod435.py merge --out DIR                          all published interfaces + one manifest
     prod435.py free --plan P [--out F]                  the plan's free keys (233-era certificates, to rebuild in 4.35)
@@ -40,6 +41,23 @@ above it runs alone; a waiting big build keeps its room (smaller builds pass it 
 A restart reuses a finished generation of the same certificate (job directory kept until published).
 Prediction: 1.9 GB + 0.14 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
 
+Work stealing (helpers). `run --steal --index J --plan P` (no --workers) is helper J: it takes items
+of the WHOLE plan, smallest first (owners go largest first, so they meet at the end), and publishes
+to <family>help/w<J> (xfer/c435help/w<J>). Coordination, all on the remote:
+  - every run (owner or helper) scans the published set of the family and of its helpers
+    (manifest.jsonl / record.json of every w* branch, partial fetch, every --scan-every s) and drops
+    what is published there;
+  - claims: <family>help/claims holds claims.json {module: [who, time]}, changed by compare-and-swap
+    (push without force). Helpers claim a batch (>= free slots, >= --claim-batch-hints) before
+    starting; owners claim each item just before starting it and skip it while a helper's claim is
+    fresh (< --claim-ttl h, default 2). Holders renew their claims every --heartbeat s; a failed helper
+    job is unclaimed at once; a dead machine's claims expire and the owner takes the items back.
+  - families are separate: the paid family c435 never reads c435free (names do not clash today, but a
+    free plain seed has widened bounds), and a helper of the free family would use c435freehelp.
+status / merge read the family and its helpers by default; the same module published twice must have
+the same .olean sha256 (deterministic builds), a different one is a CONFLICT.
+`--no-steal-check` turns the scan and claims off for an owner. $PROD435_URL replaces the remote (tests).
+
 Work directory: $PROD435_HOME (default ~/l435/prod). Core stack: $PROD435_HOME/core.
 """
 import argparse, gzip, hashlib, json, os, shutil, socket, subprocess, sys, tempfile, time
@@ -50,6 +68,7 @@ HOME = os.environ.get('PROD435_HOME', os.path.expanduser('~/l435/prod'))
 CORE = os.path.join(HOME, 'core')
 LEAN = '/opt/lean-4.35.0-linux/bin/lean'
 PFX = os.environ.get('PROD435_PFX', 'refs/heads/xfer/c435/')
+HELP_PFX = PFX.rstrip('/') + 'help/'          # helpers (`run --steal`) of this family: xfer/c435help/w<J>, claims
 PARTS = ('.olean', '.olean.server', '.olean.private', '.ir', '.ir.sig')
 CAD_PATH = '/home/user/lean-deps/toolchain/lean-4.19.0-linux/bin/cadical'   # hard-coded by the 4.19 generators
 sys.dont_write_bytecode = True
@@ -74,6 +93,8 @@ def sha(p):
 
 
 def url():
+    if os.environ.get('PROD435_URL'):                     # tests: a local bare repository as the remote
+        return os.environ['PROD435_URL']
     return subprocess.run(['git', 'config', '--get', 'remote.origin.url'], cwd=ROOT, capture_output=True,
                           text=True).stdout.strip()
 
@@ -368,17 +389,147 @@ class Repo:
         return commit
 
 
+class Scan:
+    """What is published on the branches of some families: the module names of every `manifest.jsonl`
+    and the `running` lists of every `record.json`. Only those blobs are fetched (partial fetch by
+    object id, --filter=blob:none), into a separate bare repository; a branch is re-read only when its
+    tip moved."""
+
+    def __init__(self, pfxs, skip_ref=None):
+        self.pfxs, self.skip_ref = pfxs, skip_ref
+        self.b = os.path.join(HOME, 'scan.git')
+        if not os.path.exists(os.path.join(self.b, 'HEAD')):
+            os.makedirs(self.b, exist_ok=True)
+            git('init', '-q', '--bare', self.b)
+        self.url = url()
+        self.cache = {}                                   # ref -> (tip, modules, running)
+
+    def _blobs(self, shas):
+        miss = [x for x in shas if subprocess.run(['git', 'cat-file', '-e', x], cwd=self.b,
+                                                   capture_output=True).returncode != 0]
+        for i in range(0, len(miss), 200):
+            retry(lambda: git('fetch', '-q', '--filter=blob:none', self.url, *miss[i:i + 200], cwd=self.b))
+
+    def refresh(self):
+        """-> (published modules, modules running at their owners) over all branches w* of the families."""
+        tips = {}
+        for pfx in self.pfxs:
+            out = retry(lambda: git('ls-remote', self.url, pfx + 'w*', cwd=self.b, timeout=120))
+            for l in out.splitlines():
+                if '\t' in l:
+                    t, ref = l.split('\t')
+                    if ref != self.skip_ref and ref[len(pfx):].startswith('w'):
+                        tips[ref] = t
+        new = sorted({t for ref, t in tips.items() if self.cache.get(ref, (None,))[0] != t})
+        for i in range(0, len(new), 100):
+            retry(lambda: git('fetch', '-q', '--depth', '1', '--filter=blob:none', self.url, *new[i:i + 100],
+                              cwd=self.b))
+        want = {}
+        for ref, t in tips.items():
+            if self.cache.get(ref, (None,))[0] == t:
+                continue
+            ent = {l.split('\t')[1]: l.split()[2] for l in git('ls-tree', t, cwd=self.b).splitlines()}
+            want[ref] = (t, ent.get('manifest.jsonl'), ent.get('record.json'))
+        self._blobs([x for v in want.values() for x in v[1:] if x])
+        for ref, (t, man, rec) in want.items():
+            mods = set()
+            if man:
+                for l in git('cat-file', 'blob', man, cwd=self.b).splitlines():
+                    if l.strip():
+                        mods.add(json.loads(l)['module'])
+            run = set()
+            if rec:
+                try:
+                    run = set(json.loads(git('cat-file', 'blob', rec, cwd=self.b) or '{}').get('running') or [])
+                except ValueError:
+                    pass
+            self.cache[ref] = (t, mods, run)
+        for ref in list(self.cache):
+            if ref not in tips:
+                del self.cache[ref]
+        pub = set().union(*[v[1] for v in self.cache.values()]) if self.cache else set()
+        run = set().union(*[v[2] for v in self.cache.values()]) if self.cache else set()
+        return pub, run
+
+
+class Claims:
+    """The helpers' claims: `claims.json` {module: [helper, unix time]} on the ref <help family>claims,
+    changed by compare-and-swap (a push without force on top of the tip just read; a rejected push is
+    re-read and retried). A claim is fresh for --claim-ttl hours; a helper renews its claims while it
+    holds them (every --heartbeat s) and drops a claim when its job fails."""
+
+    def __init__(self, pfx, who):
+        self.ref, self.who = pfx + 'claims', who
+        self.prune = set()                                # published modules: their claims are dropped
+        self.b = os.path.join(HOME, 'scan.git')
+        if not os.path.exists(os.path.join(self.b, 'HEAD')):
+            os.makedirs(self.b, exist_ok=True)
+            git('init', '-q', '--bare', self.b)
+        self.url = url()
+
+    def read(self):
+        out = retry(lambda: git('ls-remote', self.url, self.ref, cwd=self.b, timeout=120))
+        tip = next((l.split('\t')[0] for l in out.splitlines() if l.endswith('\t' + self.ref)), None)
+        if not tip:
+            return None, {}
+        retry(lambda: git('fetch', '-q', '--depth', '1', self.url, tip, cwd=self.b))
+        try:
+            return tip, json.loads(git('cat-file', 'blob', f'{tip}:claims.json', cwd=self.b) or '{}')
+        except (RuntimeError, ValueError):
+            return tip, {}
+
+    def fresh(self, ttl_h, others_only=False):
+        _, cl = self.read()
+        now = time.time()
+        return {m for m, (w, t) in cl.items() if now - t < ttl_h * 3600 and not (others_only and w == self.who)}
+
+    def update(self, f, tries=40):
+        """f(claims) edits the dict in place and returns a result (None: nothing to write)."""
+        import random
+        for i in range(tries):
+            try:
+                tip, cl = self.read()
+                now = time.time()
+                cl = {m: v for m, v in cl.items() if now - v[1] < 24 * 3600 and m not in self.prune}
+                r = f(cl)
+                if r is None:
+                    return None
+                blob = git('hash-object', '-w', '--stdin', cwd=self.b,
+                           inp=json.dumps(cl, sort_keys=True, separators=(',', ':')).encode(), binary=True)
+                tree = git('mktree', cwd=self.b, inp=f'100644 blob {blob.decode().strip()}\tclaims.json\n').strip()
+                cmd = ['-c', 'user.name=prod435', '-c', 'user.email=prod435@localhost', 'commit-tree', tree,
+                       '-m', f'prod435 claims {self.who}']
+                if tip:
+                    cmd[-2:-2] = ['-p', tip]
+                c = git(*cmd, cwd=self.b).strip()
+                git('push', '-q', self.url, f'{c}:{self.ref}', cwd=self.b, timeout=120)   # no force: CAS
+                return r
+            except (RuntimeError, subprocess.TimeoutExpired, OSError) as e:
+                if i == tries - 1:
+                    raise
+                if i >= 3:
+                    log(f'claims: retry {i + 1}: {str(e)[:160]}')
+                time.sleep(random.uniform(1, 4 + i))
+
+
 # ------------------------------------------------------------------ run
 def cmd_run(a):
     os.makedirs(HOME, exist_ok=True)
     I, W = a.index, a.workers
     me = f'w{I}'
+    steal = a.steal
+    pub_pfx = HELP_PFX if steal else PFX
+    if steal and W is None:
+        W = 0
+    elif W is None:
+        raise SystemExit('--workers is required (except with --steal)')
+    fam = f'{pub_pfx[11:]}{me}'
     if not os.path.exists(os.path.join(CORE, 'LocalWindowShareCtx.olean')):
         raise SystemExit(f'no core stack in {CORE}: run `prod435.py setup` first')
     stopf = os.path.join(HOME, 'STOP')
     if os.path.exists(stopf):
         os.remove(stopf) if open(stopf).read().startswith('ctl') else None
-    repo = Repo()
+    repo = Repo(pub_pfx)
     done = {}
     tip = None
     if not a.no_sync:
@@ -391,17 +542,120 @@ def cmd_run(a):
                 if l.strip():
                     r = json.loads(l)
                     done[r['module']] = r
-            log(f'restored {len(done)} certificates from {PFX[11:]}{me} ({tip[:10]})')
+            log(f'restored {len(done)} certificates from {fam} ({tip[:10]})')
     seeds = a.seeds or seeds_file(a.plan)
-    todo = [it for it in plan_items(a.plan) if mine(it[0], I, W) and it[0] not in done]
+    allitems = plan_items(a.plan)
+    todo = [it for it in allitems if (steal or mine(it[0], I, W)) and it[0] not in done]
     if a.names is not None:
         if not a.names:
             raise SystemExit('--names given without names')
         todo = [it for it in todo if it[5] in a.names or it[0] in a.names]
     if a.kinds:
         todo = [it for it in todo if it[1] in a.kinds.split(',')]
-    todo.sort(key=lambda it: (-it[4], it[0]))           # largest first
-    log(f'worker {I}/{W}: {len(todo)} certificates to do, {sum(it[4] for it in todo) / 1e6:.1f} M plan hints')
+    if steal:
+        todo.sort(key=lambda it: (it[4], it[0]))        # helpers: smallest first (owners go largest first)
+    else:
+        todo.sort(key=lambda it: (-it[4], it[0]))       # largest first
+    who = f'{fam}@{socket.gethostname()}'
+    log(('helper ' + fam if steal else f'worker {I}/{W}') +
+        f': {len(todo)} certificates to do, {sum(it[4] for it in todo) / 1e6:.1f} M plan hints')
+    # work stealing: the published set of this family and of its helpers, and the helpers' claims
+    scan = claims = None
+    published, running_elsewhere, busy = set(), set(), set()
+    last_scan = last_claims = last_beat = last_try = 0
+    queue = []                                           # helpers: claimed, not started yet
+    if not a.no_sync and not a.no_steal_check:
+        scan = Scan([PFX, HELP_PFX], skip_ref=pub_pfx + me)
+        claims = Claims(HELP_PFX, who)
+        claims.prune = published
+
+    def rescan(force=False):
+        # published (anywhere in the family or its helpers): dropped for good; claimed by a helper or
+        # running at an owner: skipped while that lasts (a stale claim gives the item back)
+        nonlocal busy, last_scan, last_claims, todo, queue
+        if scan is None:
+            return
+        now = time.time()
+        try:
+            if force or now - last_scan > a.scan_every:
+                pub, run = scan.refresh()
+                last_scan = now
+                published.clear(); published.update(pub)
+                running_elsewhere.clear(); running_elsewhere.update(run if steal else ())
+            if force or now - last_claims > 120:
+                busy = claims.fresh(a.claim_ttl, others_only=True) | running_elsewhere
+                last_claims = now
+        except Exception as e:  # noqa: BLE001
+            log(f'scan failed (kept the last one): {str(e)[:200]}')
+            return
+        n0 = len(todo) + len(queue)
+        todo = [it for it in todo if it[0] not in published]
+        dropped = [it for it in queue if it[0] in published or it[0] in busy]
+        queue = [it for it in queue if it not in dropped]
+        if dropped:
+            try:
+                claims.update(lambda cl: [cl.pop(it[0]) for it in dropped if cl.get(it[0], [''])[0] == who] or None)
+            except Exception as e:  # noqa: BLE001
+                log(f'unclaim failed: {str(e)[:200]}')
+        if n0 - len(todo) - len(queue):
+            log(f'{n0 - len(todo) - len(queue)} certificates published elsewhere: skipped')
+
+    def claim_batch(free):
+        # take the next smallest unclaimed items: at least `free` items and --claim-batch-hints of work
+        nonlocal todo
+        def f(cl):
+            now = time.time()
+            got = []
+            for it in todo:
+                c = cl.get(it[0])
+                if it[0] in published or it[0] in running_elsewhere or (c and c[0] != who and now - c[1] < a.claim_ttl * 3600):
+                    continue
+                got.append(it)
+                if (len(got) >= free and sum(x[4] for x in got) >= a.claim_batch_hints) or len(got) >= 200:
+                    break
+            for it in got:
+                cl[it[0]] = [who, now]
+            return got or None
+        got = claims.update(f) or []
+        g = {it[0] for it in got}
+        todo = [it for it in todo if it[0] not in g]
+        queue.extend(got)
+        if got:
+            log(f'claimed {len(got)} certificates ({sum(it[4] for it in got) / 1e6:.2f} M plan hints)')
+        return got
+
+    def heartbeat():
+        nonlocal last_beat
+        if claims is None or time.time() - last_beat < a.heartbeat:
+            return
+        mine_ = {it[0] for it in queue} | set(running)
+        def f(cl):
+            now = time.time()
+            for m in mine_:
+                cl[m] = [who, now]
+            return True if mine_ else None
+        try:
+            claims.update(f)
+            last_beat = time.time()
+        except Exception as e:  # noqa: BLE001
+            log(f'heartbeat failed: {str(e)[:200]}')
+
+    def claim_one(it):
+        # owners: claim the item just before starting it (CAS); False if a helper holds a fresh claim
+        def f(cl):
+            c = cl.get(it[0])
+            if c and c[0] != who and time.time() - c[1] < a.claim_ttl * 3600:
+                return 'taken'
+            cl[it[0]] = [who, time.time()]
+            return 'ok'
+        try:
+            return claims.update(f, tries=8) != 'taken'
+        except Exception as e:  # noqa: BLE001
+            log(f'claim of {it[0]} failed ({str(e)[:120]}): starting it anyway')
+            return True
+
+    if steal and claims is None:
+        raise SystemExit('--steal needs git (no --no-sync)')
     failed = {}
     fp = os.path.join(HOME, f'failed_{me}.jsonl')
     if os.path.exists(fp):
@@ -434,13 +688,14 @@ def cmd_run(a):
         lines = sorted(json.dumps(r, sort_keys=True) for r in done.values())
         add['manifest.jsonl'] = ('\n'.join(lines) + '\n').encode()
         add['record.json'] = json.dumps(dict(index=I, workers=W, plan=os.path.basename(a.plan), host=socket.gethostname(),
-                                             done=len(done), todo=len(todo) + len(running), failed=len(failed),
+                                             helper=steal, done=len(done), todo=len(todo) + len(queue) + len(running),
+                                             failed=len(failed), running=sorted(running),
                                              t=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))).encode()
         cur = repo.ls().get(me)
         if cur != tip:
-            raise SystemExit(f'{PFX[11:]}{me} moved to {cur} under us (another worker with index {I}?): stopping')
+            raise SystemExit(f'{fam} moved to {cur} under us (another worker with index {I}?): stopping')
         tip = repo.push(me, add, tip, f'prod435 {me}: {len(done)} certificates')
-        log(f'published {len(pending_pub)} -> {PFX[11:]}{me} ({len(done)} in all, {tip[:10]})')
+        log(f'published {len(pending_pub)} -> {fam} ({len(done)} in all, {tip[:10]})')
         for res, D in pending_pub:
             if not a.keep:
                 shutil.rmtree(D, ignore_errors=True)
@@ -461,6 +716,8 @@ def cmd_run(a):
             except Exception as e:  # noqa: BLE001
                 log(f'ctl check failed: {str(e)[:200]}')
         stop = os.path.exists(stopf) or now > t_end
+        rescan()
+        heartbeat()
         # start jobs
         def waiting():
             try:
@@ -469,14 +726,33 @@ def cmd_run(a):
                 return 0
             return sum(1 for x in running.values() if str(x[0].pid) in w)
         # a job whose build waits for memory does not hold a core: another job may start (up to 2 x procs)
-        while not stop and todo and len(running) - waiting() < a.procs and len(running) < 2 * a.procs:
-            it = todo[0]
+        while not stop and len(running) - waiting() < a.procs and len(running) < 2 * a.procs:
+            if steal:
+                if not queue and todo and time.time() - last_try > 120:
+                    last_try = time.time()
+                    try:
+                        if claim_batch(a.procs - (len(running) - waiting())):
+                            last_try = 0
+                    except Exception as e:  # noqa: BLE001
+                        log(f'claim failed: {str(e)[:200]}')
+                        break
+                src = queue
+            else:
+                src = todo
+            k = next((i for i, x in enumerate(src) if x[0] not in busy), None)   # claimed elsewhere: later
+            if k is None:
+                break
+            it = src[k]
+            if claims is not None and not steal and not claim_one(it):
+                busy.add(it[0])
+                log(f'{it[0]} is claimed by a helper: later')
+                continue
             g = predict_gb(it[4])
             st = os.statvfs(HOME)
             if st.f_bavail * st.f_frsize < a.min_free_gb * 2**30:
                 log('disk below the floor: not starting new jobs')
                 break
-            todo.pop(0)
+            src.pop(k)
             D = os.path.join(HOME, 'jobs', it[5])
             os.makedirs(D, exist_ok=True)                 # a finished generation of an earlier run is reused
             if os.path.exists(os.path.join(D, 'result.json')):
@@ -508,7 +784,12 @@ def cmd_run(a):
                     failed[mod] = 99                      # memory: no retry on this machine
                     log(f'{mod} is too big for this machine (memory cap); listed in {fp}, not retried')
                 elif failed[mod] < 2:
-                    todo.append(it)
+                    (queue if steal else todo).append(it)
+                if steal and failed[mod] >= 2:
+                    try:                                  # give the item back to its owner at once
+                        claims.update(lambda cl: cl.pop(mod, None) and True)
+                    except Exception as e:  # noqa: BLE001
+                        log(f'unclaim failed: {str(e)[:200]}')
                 continue
             log(f'done {mod}: {res["hints"]} hints, lean {res["lean_cpu_s"]} s, {res["peak_anon_gb"]} GB, '
                 f'{sum(res["seconds"].values()):.0f} s in all')
@@ -520,12 +801,12 @@ def cmd_run(a):
                 raise
             except Exception as e:  # noqa: BLE001
                 log(f'publish failed (kept for the next try): {str(e)[:300]}')
-        if not running and (stop or not todo):
+        if not running and (stop or not (todo or queue)):
             if pending_pub:
                 publish()
             break
         time.sleep(2)
-    log(f'worker {I}/{W} ends: {len(done)} published, {len(todo)} left, {len(failed)} failed'
+    log(('helper ' + fam if steal else f'worker {I}/{W}') + f' ends: {len(done)} published, {len(todo) + len(queue)} left, {len(failed)} failed'
         + (' (STOP)' if os.path.exists(stopf) else ''))
 
 
@@ -543,10 +824,15 @@ def worker_manifests(repo, names):
 def cmd_status(a):
     tot = dict(n=0, hints=0, cpu=0.0)
     have = set()
-    for pfx in a.pfx or [PFX]:
+    for pfx in a.pfx or [PFX, HELP_PFX]:
         repo = Repo(pfx)
         tips = repo.ls()
         ws = sorted((n for n in tips if n.startswith('w')), key=lambda n: int(n[1:]))
+        if 'claims' in tips:
+            cl = Claims(pfx[:-len('help/')] + 'help/' if pfx.endswith('help/') else pfx.rstrip('/') + 'help/', '')
+            _, c = cl.read()
+            now = time.time()
+            print(f'claims: {len(c)} ({sum(1 for v in c.values() if now - v[1] < 2 * 3600)} fresh < 2 h)')
         print(f'== {pfx}: {len(ws)} worker branches')
         if 'ctl' in tips:
             repo.fetch(['ctl'])
@@ -575,7 +861,7 @@ def cmd_merge(a):
     listed, exit 1)."""
     os.makedirs(a.out, exist_ok=True)
     lines, where, conflict, bad, nbr = {}, {}, set(), 0, 0
-    for pfx in a.pfx or [PFX]:
+    for pfx in a.pfx or [PFX, HELP_PFX]:
         repo = Repo(pfx)
         tips = repo.ls()
         ws = sorted(n for n in tips if n.startswith('w'))
@@ -690,7 +976,14 @@ def main():
     p = sub.add_parser('run')
     p.add_argument('--plan', required=True)
     p.add_argument('--index', type=int, required=True)
-    p.add_argument('--workers', type=int, required=True)
+    p.add_argument('--workers', type=int, default=None, help='W (owners); not used with --steal')
+    p.add_argument('--steal', action='store_true', help='helper: take unpublished, unclaimed items of the whole '
+                   'plan, smallest first, publish to <family>help/w<INDEX> (claims on <family>help/claims)')
+    p.add_argument('--no-steal-check', action='store_true', help='owners: do not skip what helpers published or claimed')
+    p.add_argument('--scan-every', type=float, default=600, help='s between scans of the published set')
+    p.add_argument('--claim-ttl', type=float, default=2, help='hours a helper claim stays fresh without renewal')
+    p.add_argument('--heartbeat', type=float, default=1200, help='s between renewals of a helper\'s claims')
+    p.add_argument('--claim-batch-hints', type=float, default=5e6, help='helpers claim at least this much work at once')
     p.add_argument('--hours', type=float, default=24)
     p.add_argument('--procs', type=int, default=4, help='jobs at once (generation is single-threaded)')
     p.add_argument('--mem-gb', type=float, default=12, help='budget of predicted RssAnon of concurrent Lean builds')
