@@ -167,6 +167,15 @@ def gen_gb(est):
     return 1.0 + 0.15 * est / 1e6
 
 
+def build_gb(src_bytes):
+    # peak RssAnon of the build by the size of its merged Lean source (known when the build starts), fit on
+    # 21,670 published 231/232 builds: p99 0.36 GB below 0.1 MB, 0.88 at 0.1-0.5, 1.29 at 0.5-2, 1.71 at 2-5,
+    # 2.35 at 5-20 MB; from 20 MB the upper envelope 3.0 + 0.0253 GB per MB (9.06 GB at 304 MB, 7.33 at 193).
+    # The plan estimate can be 200x too low (S01203A4443: 6.6 GB built against 1.9 predicted).
+    m = src_bytes / 1e6
+    return max(min(0.8 + 0.2 * m, 3.5), 3.0 + 0.0253 * m if m >= 20 else 0)
+
+
 def predict_gb(est):
     # peak RssAnon of the merged-module build, 4.35, by plan hints. Measured: 0.21 GB at 0.01 M,
     # 0.76 at 0.13, 1.16 at 0.23 (ctx), 1.52 at 0.38 (share), 1.51 at 1.62 (ctx), 1.66 at 3.93 (plain,
@@ -359,10 +368,13 @@ def cmd_one(a):
     if r.returncode != 0:
         return fail(D, mod, f'to435 failed: {r.stdout[-400:]}{r.stderr[-800:]}')
     secs['to435'] = round(time.time() - t0, 1)
-    cap = min(a.max_cap_gb, max(a.rss_cap_gb, predict_gb(est) * 2))
-    # memory is controlled at the build only (generation above runs without a limit): builds are
-    # admitted while the predicted RssAnon of the running builds stays within --mem-gb
-    budget = Budget(predict_gb(est), a.mem_gb)
+    srcf = os.path.join(D, 'src', mod.replace('.', '/') + '.lean')
+    bgb = build_gb(os.path.getsize(srcf))
+    secs['build_pred_gb'] = round(bgb, 2)
+    cap = min(a.max_cap_gb, max(a.rss_cap_gb, bgb * 2))
+    # builds are admitted while the predicted RssAnon of the running builds (and admitted generations)
+    # stays within --mem-gb
+    budget = Budget(bgb, a.mem_gb)
     secs['build_wait'] = budget.acquire()
     t0 = time.time()
     r = subprocess.run([sys.executable, os.path.join(HERE, 'build.py'), '--src', os.path.join(D, 'src'), '--build',
@@ -938,14 +950,22 @@ def cmd_run(a):
                 src = queue
             else:
                 src = todo
-            k = next((i for i, x in enumerate(src) if x[0] not in busy), None)   # claimed elsewhere: later
+            free_ = [i for i, x in enumerate(src) if x[0] not in busy]            # claimed elsewhere: later
+            fill = not steal and bool(waiting()) and bool(free_)
+            if fill:
+                # owners: a build of mine waits for memory, so another big job would wait too: fill the
+                # free core with my smallest item (small builds fit beside big ones)
+                k = min(free_, key=lambda i: (src[i][4], src[i][0]))
+            else:
+                k = free_[0] if free_ else None
             if k is None:
                 break
             it = src[k]
             if claims is not None and not steal and it[0] not in claims.mine:
                 # owners: claim the next items for all free slots at once (one settle wait)
                 nfree = max(1, a.procs - (len(running) - waiting()))
-                batch = [x for x in src if x[0] not in busy and x[0] not in claims.mine][:nfree]
+                batch = [it] + ([] if fill else [x for x in src if x[0] not in busy and x[0] not in claims.mine
+                                                 and x is not it][:nfree - 1])
                 keep = set(claims.claim([x[0] for x in batch]))
                 lost = [x[0] for x in batch if x[0] not in keep]
                 busy.update(lost)
