@@ -1,0 +1,18 @@
+E:\Snake-in-a-box\milestones\233-parity-lift-construction\lean\ParityLift233.lean:23:25: error: expected type must not contain free variables
+  (y, !false).snd ≠ (y, false).snd
+Use the '+revert' option to automatically cleanup and revert free variables.
+E:\Snake-in-a-box\milestones\233-parity-lift-construction\lean\ParityLift233.lean:23:25: error: expected type must not contain free variables
+  (y, !true).snd ≠ (y, true).snd
+Use the '+revert' option to automatically cleanup and revert free variables.
+E:\Snake-in-a-box\milestones\233-parity-lift-construction\lean\ParityLift233.lean:42:4: error: tactic 'subst' failed, did not find equation for eliminating 'y'
+case refine_3
+V : Type
+colour : V → Bool
+x y : V
+equal : (x, colour x) = (y, !colour y)
+base : (x, colour x).fst = (y, !colour y).fst
+⊢ False
+'ParityLift233.opposite_label_neighbours' depends on axioms: [propext, sorryAx]
+'ParityLift233.lift_injective_and_disjoint' depends on axioms: [sorryAx]
+'ParityLift233.lifted_classes_nonadjacent' depends on axioms: [propext]
+'ParityLift233.retained_label_two_neighbours_iff' depends on axioms: [propext, sorryAx]

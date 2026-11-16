@@ -1,0 +1,113 @@
+import LayerJoining
+
+set_option Elab.async false
+
+namespace ParityLift233
+open LayerJoining
+
+/-- Opposite lifted labels see the closed base neighbourhood. -/
+theorem opposite_label_neighbours {V : Type} {R : V → V → Prop}
+    (colour : V → Bool) (proper : ∀ y x, R y x → colour y ≠ colour x)
+    (y x : V) :
+    LayerAdj R (y, !(colour y)) (x, colour x) ↔ y = x ∨ R y x := by
+  constructor
+  · intro h
+    rcases h with ⟨_, edge⟩ | ⟨_, equal⟩
+    · exact Or.inr edge
+    · exact Or.inl equal
+  · intro h
+    rcases h with equal | edge
+    · subst x
+      apply Or.inr
+      refine ⟨?_, rfl⟩
+      change (!(colour y)) ≠ colour y
+      cases colour y <;> decide
+    · apply Or.inl
+      refine ⟨?_, edge⟩
+      have different := proper y x edge
+      cases hy : colour y <;> cases hx : colour x <;> simp_all
+
+/-- Both lifts preserve distinct base vertices and their images are
+disjoint. These are injective maps, without an isometry assertion. -/
+theorem lift_injective_and_disjoint {V : Type} (colour : V → Bool) :
+    (∀ x y : V, (x, colour x) = (y, colour y) → x = y) ∧
+    (∀ x y : V, (x, !(colour x)) = (y, !(colour y)) → x = y) ∧
+    (∀ x y : V, (x, colour x) ≠ (y, !(colour y))) := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro x y equal
+    exact congrArg Prod.fst equal
+  · intro x y equal
+    exact congrArg Prod.fst equal
+  · intro x y equal
+    have base : x = y := congrArg Prod.fst equal
+    subst y
+    have face := congrArg Prod.snd equal
+    cases hc : colour x <;> simp_all
+
+/-- Proper colouring makes each of the two lifted classes independent. -/
+theorem lifted_classes_nonadjacent {V : Type} {R : V → V → Prop}
+    (colour : V → Bool) (proper : ∀ y x, R y x → colour y ≠ colour x) :
+    (∀ y x, ¬ LayerAdj R (y, colour y) (x, colour x)) ∧
+    (∀ y x, ¬ LayerAdj R (y, !(colour y)) (x, !(colour x))) := by
+  constructor
+  · intro y x h
+    rcases h with ⟨same, edge⟩ | ⟨different, equal⟩
+    · exact proper y x edge same
+    · exact different (congrArg colour equal)
+  · intro y x h
+    rcases h with ⟨same, edge⟩ | ⟨different, equal⟩
+    · have unequal := proper y x edge
+      cases hy : colour y <;> cases hx : colour x <;> simp_all
+    · exact different (congrArg (fun v => !(colour v)) equal)
+
+/-- For a retained vertex y, having exactly two selected lifted neighbours
+is equivalent to having exactly one retained base neighbour. The distinct
+second neighbour is exhibited explicitly, without finite-cardinality APIs. -/
+theorem retained_label_two_neighbours_iff {V : Type} {R : V → V → Prop}
+    (colour : V → Bool) (proper : ∀ y x, R y x → colour y ≠ colour x)
+    (selected : V → Prop) (y : V) (_retained : selected y) :
+    (∃ x, selected x ∧ x ≠ y ∧
+      ∀ v, selected v →
+        (LayerAdj R (y, !(colour y)) (v, colour v) ↔ v = y ∨ v = x)) ↔
+    (∃ x, selected x ∧ ∀ v, selected v → (R y v ↔ v = x)) := by
+  constructor
+  · rintro ⟨x, hx, different, neighbours⟩
+    refine ⟨x, hx, ?_⟩
+    intro v hv
+    constructor
+    · intro edge
+      have lifted := (opposite_label_neighbours colour proper y v).mpr (Or.inr edge)
+      have possible := (neighbours v hv).mp lifted
+      rcases possible with equal | equal
+      · have loop : R y y := by simpa only [equal] using edge
+        exact False.elim (proper y y loop rfl)
+      · exact equal
+    · intro equal
+      subst v
+      have lifted := (neighbours x hx).mpr (Or.inr rfl)
+      have possible := (opposite_label_neighbours colour proper y x).mp lifted
+      rcases possible with equal | edge
+      · exact False.elim (different equal.symm)
+      · exact edge
+  · rintro ⟨x, hx, neighbours⟩
+    have different : x ≠ y := by
+      intro equal
+      have edge := (neighbours x hx).mpr rfl
+      exact proper y x edge (congrArg colour equal.symm)
+    refine ⟨x, hx, different, ?_⟩
+    intro v hv
+    rw [opposite_label_neighbours colour proper y v, neighbours v hv]
+    constructor
+    · rintro (equal | equal)
+      · exact Or.inl equal.symm
+      · exact Or.inr equal
+    · rintro (equal | equal)
+      · exact Or.inl equal.symm
+      · exact Or.inr equal
+
+#print axioms opposite_label_neighbours
+#print axioms lift_injective_and_disjoint
+#print axioms lifted_classes_nonadjacent
+#print axioms retained_label_two_neighbours_iff
+
+end ParityLift233

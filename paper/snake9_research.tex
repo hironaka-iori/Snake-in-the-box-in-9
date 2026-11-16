@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 232, 16 November 2026}
+\date{Research state after round 233, 16 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -65,7 +65,9 @@ and excludes all 97-vertex majority classes obtained by enlarging one
 parity class of the saved seed bank. The complementary fixed-minority
 case is also excluded. Thus a 192-edge construction must change both
 parity classes relative to each saved seed, under the stated native
-finite evidence.
+finite evidence. A parity lift gives a universal closed-neighbour
+construction criterion, while a local deletion obstruction excludes
+near-doubling by deleting from the saved parents of lengths 26, 50 and 98.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -8526,6 +8528,103 @@ opposite-parity neighbours: selected-neighbour counts zero, one and two
 become one, two and three. This gives a local update of endpoint and
 internal labels. No complete search of that enlarged family is claimed.
 
+\subsection{Parity lift and the limits of deleting from one base path}
+\label{sec:parity233}
+Let $c(x)$ be the parity of $x\in Q_n$ and let $N[y]$ denote its closed
+neighbourhood. For $S\subseteq Q_n$, select
+$U=\{(x,c(x)):x\in S\}$ in $Q_{n+1}$. These vertices have even parity.
+Every odd vertex is uniquely $(y,1-c(y))$, whose neighbours in $U$
+project exactly to $N[y]\cap S$. Equality of the base vertices gives
+a vertical edge; base adjacency gives an edge within one face.
+
+\begin{proposition}\label{prop:projection233}
+For $k\ge2$, a snake of $2k-2$ edges exists in $Q_{n+1}$ if and only if
+some $k$-vertex subset $S\subseteq Q_n$ has a Hamiltonian path in the
+graph whose labelled edges are the two-element sets $N[y]\cap S$.
+\end{proposition}
+\begin{proof}
+Each such Hamiltonian ordering lifts by inserting the indicated odd
+labels. Distinct consecutive pairs cannot reuse one label, whose
+selected-neighbour pair is fixed. Both lifted parity classes are
+independent, and every label has exactly its intended two neighbours.
+Thus Proposition~\ref{prop:colour231} gives an induced path of $2k-2$
+edges. Conversely, an even-length snake has $k$ vertices in its endpoint
+parity class. Flip the last coordinate if that class is odd. Every even
+vertex $(x,b)$ satisfies $b=c(x)$, so projection is injective on the
+class and gives a $k$-set $S$. Its intervening odd vertices supply exactly
+the required labelled Hamiltonian path.
+\end{proof}
+
+In particular, a 192-edge snake in $Q_9$ is equivalent to a suitable
+97-set in $Q_8$. The Hamiltonian requirement retains the full difficulty
+of the existence problem. The representation is universal; restricting
+$S$ to vertices of one old induced path is an additional hypothesis.
+The map $x\mapsto(x,c(x))$ is not a cube isometry.
+
+If the base path has $m$ edges and $r$ vertices are deleted, a successful
+lift would have $2m-2r$ edges. The numerical pattern with $r=1$ gives
+$26\to50$, $50\to98$ and $98\to194$; $r=0$ and $r=2$ would give 196 and
+192 from a 98-edge parent. The complete zero-, one- and two-deletion
+survey used the saved parents of lengths 13, 26, 50 and 98. Its 6763
+cases comprise 6698 isolated-vertex exclusions, 27 excess-leaf
+exclusions, two disconnected graphs, eight native infeasible queries,
+and 28 verified paths. Those paths all lie in $Q_6$: two have 24 edges
+and 26 have 22. All 6657 cases from the parents in dimensions 6, 7 and 8
+have an isolated vertex. These are complete covers of the four saved
+parents, with no exhaustive claim over other parent paths~\cite{research233}.
+
+\begin{lemma}\label{lem:deletion233}
+Let $I$ be the isolated vertices of the closed-neighbour contraction on
+a base set $P$. If deleting $D\subseteq P$ leaves a Hamiltonian
+contraction with at least two vertices, then
+\[
+ I\subseteq\bigcup_{d\in D} B_2(d),\qquad
+ |I|\le\sum_{d\in D}|I\cap B_2(d)|,
+\]
+where $B_2(d)$ is the Hamming ball of radius two in the base cube.
+\end{lemma}
+\begin{proof}
+Consider $x\in I$ outside every displayed ball. It is retained. A label
+$y$ incident to $x$ lies in $N[x]$, so every vertex of $N[y]$ is within
+distance two of $x$. None is deleted. Its selected-neighbour set is
+unchanged and cannot become a two-element set incident to $x$.
+Therefore $x$ remains isolated, contrary to a Hamiltonian path on at
+least two vertices. The cardinality inequality follows by counting
+the covering incidences; overlaps can only increase the sum.
+\end{proof}
+
+The saved $Q_8$ parent has $|I|=69$, and each allowed deletion covers
+at most 17 members of $I$. Four deletions cover at most $68<69$, so
+at least five are necessary. Its entire deletion-only lift family has
+length at most $196-10=186$. For the saved $Q_7$ parent, the corresponding
+counts 37 and 12 require at least four deletions and give a restricted
+ceiling of 92. For the saved $Q_6$ parent, any pair of deletions covers
+at most nine of ten initially isolated vertices; at least three are
+required, giving a restricted ceiling of 46. These necessary conditions
+do not assert attainability or bound arbitrary snakes in the larger cubes.
+
+A retained label is eligible exactly when it has one retained base
+neighbour. For an induced base path these labels are the ends of
+nonsingleton retained components. There are at most $r+1$ components
+after $r$ deletions, hence at most $2(r+1)$ eligible retained labels.
+Each used retained label contributes one vertical crossing, while
+labels outside the retained set contribute none. The resulting lifts
+therefore have at most $2(r+1)$ crossings.
+
+Four new checked statements establish exact lift adjacency, injection
+and disjointness, independence, and the retained-label characterization.
+Two further checked statements establish transfer of an unchanged
+two-neighbour witness and preservation of isolation. Cube projection,
+radius-two interpretation, incidence counting and the component bound
+remain written bridges. Independent finite reconstruction covered all
+6763 graphs, all 36 circuit models and all 28 witnesses. The eight native
+infeasibility reports were not replayed as Lean certificates.
+
+The next constructive family replaces one vertex of a saved minority
+class, with its opposite class and ordering free. It has not been
+searched. This permits additions outside the old base path while
+retaining the exact contraction criterion.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -8784,6 +8883,9 @@ Section~\ref{sec:minority232} adds four checked endpoint and minority
 construction results and three colour-count length implications.
 Its 145-class exclusion and 33 separator
 certificates retain their native extraction and verification scope.
+Section~\ref{sec:parity233} adds six checked general lift and local-deletion
+statements. Its whole-cube and counting bridges remain written, and
+the four-parent finite cover retains its native verification scope.
 Full-source reviews at rounds 220 and 230 check the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
@@ -12296,6 +12398,11 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Minority-class contraction and
 the need to change both parity classes}. Research milestone 232,
 16 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/232-minority-contraction}.
+
+\bibitem{research233}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Parity lift and deletion obstruction}.
+Research milestone 233, 16 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/233-parity-lift-construction}.
 
 \end{thebibliography}
 \end{document}

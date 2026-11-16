@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 232}
+\date{Research state after round 233}
 \begin{document}
 \maketitle
 
@@ -600,8 +600,52 @@ selected colour class to equal a saved 96-set permits at most 191 edges. Alterna
 allows at most 192; that case is excluded, and the saved seed attains 191.
 Three further Lean counting statements check this length deduction under
 its explicit count and exclusion premises.
-The next route allows one vertex of the minority class to change, with
-the other class still free. This enlarged family has not been exhausted.
+A possible next route replaces one vertex of the minority class, with
+the other class still free. This family has not been searched. The
+following round first examines a smaller family built from old paths.
+
+\section{Why the simple dimensional lift fails}
+Project the even vertices of $Q_9$ onto their first eight coordinates.
+The missing bit is forced by parity, so every chosen even class is
+equivalent to a subset $S\subseteq Q_8$. An odd vertex over $y$ sees
+exactly the selected vertices in the closed neighbourhood $N[y]$.
+Whenever $N[y]\cap S$ has exactly two vertices, join them by an edge
+labelled $y$. A Hamiltonian path, which visits every vertex of $S$
+once, then lifts to a snake of $2|S|-2$ edges. Extra adjacencies are
+excluded by the exact two-neighbour condition. Conversely, every
+even-length snake has this representation, after a coordinate flip
+if needed. Thus 192 edges are equivalent to finding a suitable
+97-vertex subset of $Q_8$.
+
+One proposed source of $S$ was an old $m$-edge snake with $r$ vertices
+deleted. It would give $2m-2r$ edges. With $r=1$ the arithmetic reproduces
+$26\to50$ and $50\to98$, then predicts $98\to194$ if the required path
+exists. The full survey of zero, one and two deletions found that every
+case from the saved 26-, 50- and 98-edge parents has an isolated vertex
+in its contraction. Such a vertex cannot belong to a Hamiltonian path
+with other vertices. The numerical pattern therefore does not describe
+this construction for those parents.
+
+There is also a short explanation that covers more deletions. An
+initially isolated vertex can change only if a vertex within Hamming
+distance two is deleted; otherwise every potentially useful label sees
+the same selected neighbours. For the saved 98-edge parent, 69 vertices
+are initially isolated, and one deletion can affect at most 17 of them.
+Four deletions cover at most $4\cdot17=68$. Hence at least five are
+necessary, so this entire family has length at most $196-10=186$.
+For the saved 50- and 26-edge parents, corresponding finite covering
+arguments require at least four and three deletions respectively.
+These are restrictions on specific construction families; they do not
+give upper bounds for arbitrary snakes~\cite{research233}.
+
+Six new general Lean statements support the lift and local-deletion
+arguments. The whole-cube projection and counting bridges are written
+proofs. The independent finite audit checked all 6763 graphs, 36 circuit
+models and 28 successful shorter witnesses. Eight native infeasibility
+reports remain separate from Lean. No longer $Q_9$ snake was found.
+The useful next family allows additions as well as deletions in a saved
+parity class, while leaving the opposite class and ordering free.
+Research pauses after round 233.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
@@ -620,7 +664,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 232.
+in the companion manuscript and milestones through round 233.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -716,6 +760,11 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Minority-class contraction and
 the need to change both parity classes}. Research milestone 232,
 16 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/232-minority-contraction}.
+
+\bibitem{research233}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Parity lift and deletion obstruction}.
+Research milestone 233, 16 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/233-parity-lift-construction}.
 
 \end{thebibliography}
 \end{document}
