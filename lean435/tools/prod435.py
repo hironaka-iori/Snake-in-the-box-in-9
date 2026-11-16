@@ -56,6 +56,8 @@ to <family>help/w<J> (xfer/c435help/w<J>). Coordination, all on the remote:
     --heartbeat s, kept 1 h after publication, and expire after --claim-ttl h (default 2) without
     renewal: a dead machine's items go back. A claim write that keeps failing never stops a run (the
     item goes unclaimed; a duplicate is harmless).
+  - a helper ends its run once no unclaimed, unpublished item has been available for --steal-idle s
+    (default 600; logged as 'helper idle'), so a chain of plans moves on to the next one.
   - families are separate: the paid family c435 never reads c435free (names do not clash today, but a
     free plain seed has widened bounds), and a helper of the free family would use c435freehelp.
 status / merge read the family and its helpers by default; the same module published twice must have
@@ -796,6 +798,7 @@ def cmd_run(a):
         pending_pub.clear()
         last_pub = time.time()
 
+    last_avail, idle_end = time.time(), False
     while True:
         now = time.time()
         if not a.no_sync and now - last_ctl > 300:
@@ -899,13 +902,22 @@ def cmd_run(a):
                 raise
             except Exception as e:  # noqa: BLE001
                 log(f'publish failed (kept for the next try): {str(e)[:300]}')
-        if not running and (stop or not (todo or queue)):
+        if steal:
+            # a helper ends when nothing unclaimed and unpublished has been available for --steal-idle s
+            # (items claimed elsewhere only come back if those claims expire), so chained plans advance
+            if running or queue or any(it[0] not in busy and it[0] not in published for it in todo):
+                last_avail = time.time()
+            elif time.time() - last_avail > a.steal_idle:
+                log(f'helper idle: no unclaimed unpublished item for {a.steal_idle:.0f} s '
+                    f'({len(todo)} left, all claimed elsewhere): ending')
+                idle_end = True
+        if not running and (stop or idle_end or not (todo or queue)):
             if pending_pub:
                 publish()
             break
         time.sleep(2)
     log(('helper ' + fam if steal else f'worker {I}/{W}') + f' ends: {len(done)} published, {len(todo) + len(queue)} left, {len(failed)} failed'
-        + (' (STOP)' if os.path.exists(stopf) else ''))
+        + (' (STOP)' if os.path.exists(stopf) else '') + (' (idle)' if idle_end else ''))
 
 
 # ------------------------------------------------------------------ status / merge / free / ctl
@@ -1085,6 +1097,8 @@ def main():
     p.add_argument('--claim-ttl', type=float, default=2, help='hours a helper claim stays fresh without renewal')
     p.add_argument('--heartbeat', type=float, default=1200, help='s between renewals of a helper\'s claims')
     p.add_argument('--claims-every', type=float, default=120, help='s between reads of the claim refs')
+    p.add_argument('--steal-idle', type=float, default=600, help='helpers: end after this many s without an '
+                   'unclaimed unpublished item')
     p.add_argument('--claim-batch-hints', type=float, default=5e6, help='helpers claim at least this much work at once')
     p.add_argument('--hours', type=float, default=24)
     p.add_argument('--procs', type=int, default=4, help='jobs at once (generation is single-threaded)')
