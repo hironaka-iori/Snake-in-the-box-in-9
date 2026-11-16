@@ -41,7 +41,8 @@ above it runs alone; a waiting big build keeps its room (smaller builds pass it 
 A restart reuses a finished generation of the same certificate (job directory kept until published).
 Prediction: 1.9 GB + 0.14 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
 The replay step of a job from 5 M plan hints on (generation, Python, several GB) also runs under the budget,
-with 1.0 GB + 0.15 GB per million plan hints (gen_gb): two such jobs next to builds were OOM-killed.
+with 1.0 GB + 0.15 GB per million plan hints (gen_gb): two such jobs next to builds were OOM-killed. Its
+CaDiCaL seeds run with --seed-jobs auto (idle cores only; $PROD435_SEED_JOBS overrides), same proof.
 
 Work stealing (helpers). `run --steal --index J --plan P` (no --workers) is helper J: it takes items
 of the WHOLE plan, smallest first (owners go largest first, so they meet at the end), and publishes
@@ -263,8 +264,10 @@ def cmd_one(a):
     k2 = {'ctx': 'ctx', 'share': 'share', 'plain': 'seed'}[kind]
     for step, kinds in (('cores', k1), ('cnf', k2), ('replay', k2)):
         t0 = time.time()
-        extra = (['--seed-jobs', os.environ['PROD435_SEED_JOBS']]
-                 if step == 'replay' and os.environ.get('PROD435_SEED_JOBS') else [])
+        # big replays run their CaDiCaL seeds in parallel on idle cores ('auto': idle cores + 1, at most 8,
+        # limited by memory and disk); the proof chosen does not depend on it (same source sha256 measured)
+        sj = os.environ.get('PROD435_SEED_JOBS') or ('auto' if est >= GEN_BUDGET_HINTS else None)
+        extra = ['--seed-jobs', sj] if step == 'replay' and sj else []
         gb = None
         if step == 'replay' and est >= GEN_BUDGET_HINTS:
             # a big generation holds GBs (no cap of its own): it takes its share of the build budget, so
