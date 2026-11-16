@@ -71,7 +71,7 @@ the same .olean sha256 (deterministic builds), a different one is a CONFLICT.
 
 Work directory: $PROD435_HOME (default ~/l435/prod). Core stack: $PROD435_HOME/core.
 """
-import argparse, gzip, hashlib, json, os, re, shutil, socket, subprocess, sys, tempfile, time
+import argparse, gzip, hashlib, json, os, random, re, shutil, socket, subprocess, sys, tempfile, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -831,28 +831,36 @@ def cmd_run(a):
         if n0 - len(todo) - len(queue):
             log(f'{n0 - len(todo) - len(queue)} certificates published elsewhere: skipped')
 
+    rng = random.Random(f'{I}-{os.getpid()}-{time.time()}')
+
     def claim_batch(free):
-        # helpers: the next smallest items nobody holds: at least `free` items and --claim-batch-hints of work
+        # helpers: a batch of small items nobody holds: at least `free` items and --claim-batch-hints of work.
+        # All helpers sort alike (smallest first), so taking the very first candidates made them all race for
+        # the same few items, and the 5 s tie rule (lower index wins) starved the high-index helpers (h17: no
+        # build for 3 h, "claimed 0, 8-10 lost" every round). Now each helper draws its batch at random from a
+        # wide window of the smallest unclaimed candidates, then runs it smallest first.
         nonlocal todo
+        cands = [it for it in todo if it[0] not in published and it[0] not in busy and it[0] not in claims.mine]
+        win = cands[:max(400, 50 * free)]
+        rng.shuffle(win)
         got = []
-        for it in todo:
-            if it[0] in published or it[0] in busy or it[0] in claims.mine:
-                continue
+        for it in win:
             got.append(it)
             if (len(got) >= free and sum(x[4] for x in got) >= a.claim_batch_hints) or len(got) >= 200:
                 break
         if not got:
             return []
+        got.sort(key=lambda it: (it[4], it[0]))
         keep = set(claims.claim([it[0] for it in got]))
         if a.ignore_claims:
             keep = {it[0] for it in got}
-        busy.update(it[0] for it in got if it[0] not in keep)
-        g = {it[0] for it in got}
-        todo = [it for it in todo if it[0] not in g]
+        busy.update(it[0] for it in got if it[0] not in keep)   # lost: stays in todo, skipped while claimed
+        todo = [it for it in todo if it[0] not in keep]
         mine_ = [it for it in got if it[0] in keep]
         queue.extend(mine_)
         log(f'claimed {len(mine_)} certificates ({sum(it[4] for it in mine_) / 1e6:.2f} M plan hints)'
-            + (f'; {len(got) - len(mine_)} lost to other claims' if len(got) > len(mine_) else ''))
+            + (f'; {len(got) - len(mine_)} lost to other claims' if len(got) > len(mine_) else '')
+            + f' (window {len(win)} of {len(cands)} unclaimed)')
         return mine_
 
     def heartbeat():
