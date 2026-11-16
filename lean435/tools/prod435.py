@@ -326,7 +326,18 @@ def cmd_one(a):
     secs = {}
     k1 = {'ctx': 'ctx', 'share': 'share', 'plain': 'plain'}[kind]
     k2 = {'ctx': 'ctx', 'share': 'share', 'plain': 'seed'}[kind]
+    plan_est = est
     for step, kinds in (('cores', k1), ('cnf', k2), ('replay', k2)):
+        if step == 'cnf':
+            # the plan's estimate can be far too low (193 published items had real proofs > 5x it, e.g.
+            # T012301A36425K28: plan 0.31 M, cores estimate 67.7 M); the cores step's full-proof estimate
+            # x 0.6 is the plan-equivalent size (real proofs are 0.28-0.72 of it): use the larger one for
+            # the generation budget, parallel seeds and the build's memory prediction and cap
+            try:
+                cp = os.path.join(D, 'data', 'cores231_' + os.path.basename(a.plan).replace('.json.gz', '') + '.jsonl')
+                est = max(est, 0.6 * json.loads(open(cp).read().strip().splitlines()[-1]).get('est_hints', 0))
+            except (OSError, ValueError, IndexError):
+                pass
         t0 = time.time()
         # big replays run their CaDiCaL seeds in parallel on idle cores ('auto': idle cores + 1, at most 8,
         # limited by memory and disk); the proof chosen does not depend on it (same source sha256 measured)
@@ -376,7 +387,7 @@ def cmd_one(a):
     txt = open(srcf, encoding='utf-8').read()
     stmt = txt[txt.index('public theorem refuted'):].split(':=')[0].split(' : ', 1)[1].strip()
     res = dict(module=mod, kind=kind, key=key, level=level, name=name, plan=os.path.basename(a.plan),
-               plan_est_hints=est, full_proof_hints=core.get('est_hints'), hints=rep.get('hints'),
+               plan_est_hints=plan_est, sched_est_hints=round(est), full_proof_hints=core.get('est_hints'), hints=rep.get('hints'),
                lemmas=rep.get('lemmas'), segments=rep.get('segments'), core_clauses=rep.get('core'),
                statement=stmt, imports=audit_header(srcf), source_sha256=sha(srcf), source_bytes=os.path.getsize(srcf),
                parts={e: sha(base + e) for e in PARTS if os.path.exists(base + e)},
