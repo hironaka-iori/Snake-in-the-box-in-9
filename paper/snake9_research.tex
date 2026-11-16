@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 231, 16 November 2026}
+\date{Research state after round 232, 16 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -62,7 +62,10 @@ inequality strengthens the last queries; its combinatorial proof and
 the scope of its checked components are stated separately. A contraction
 of one parity class gives an exact Hamiltonian-path construction criterion
 and excludes all 97-vertex majority classes obtained by enlarging one
-parity class of the saved seed bank.
+parity class of the saved seed bank. The complementary fixed-minority
+case is also excluded. Thus a 192-edge construction must change both
+parity classes relative to each saved seed, under the stated native
+finite evidence.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -142,7 +145,8 @@ intervals and length-preservation conditions. The latest cover permits
 every crossing count.
 Section~\ref{sec:colour231} then treats a different family: a saved parity
 class is enlarged to become the majority class, with endpoints, order,
-crossings and the opposite class free.
+crossings and the opposite class free. Section~\ref{sec:minority232}
+completes the complementary fixed-minority case.
 \item Section~\ref{sec:verification} separates completed implications,
 numerical evidence and remaining verification obligations. The conjecture
 in Section~\ref{sec:hypothesis} is used in none of these results.
@@ -8458,8 +8462,69 @@ Thus the specified 97-vertex majority classes cannot occur in a
 opposite vertex class were free throughout this search. The conclusion
 does not exclude retaining a 96-vertex \emph{minority} class: then the
 opposite class contains both endpoints, which have exactly one neighbour
-in the fixed class. That distinct construction case is the next target.
+in the fixed class. That distinct construction case is addressed next.
 No longer snake or global bound follows~\cite{research231}.
+
+\subsection{The complementary fixed-minority construction}
+\label{sec:minority232}
+For a fixed minority class $U$, internal labels still have exactly two
+neighbours in $U$, while endpoint labels have exactly one. A member of
+$U$ is an eligible contracted endpoint if a singleton-neighbour label
+exists there.
+
+\begin{proposition}\label{prop:minority232}
+For $|U|\ge2$, an induced path with minority class exactly $U$ exists if
+and only if its two-neighbour contraction graph has a Hamiltonian path
+whose two ends are eligible. Its edge length is $2|U|$.
+\end{proposition}
+\begin{proof}
+Interleave the Hamiltonian order with its internal labels as in
+Proposition~\ref{prop:colour231}, then attach singleton-neighbour labels
+at its two ends. Those labels differ because their unique neighbours
+differ. They differ from internal labels, whose selected-neighbour sets
+have size two. Same-parity pairs are nonadjacent and the exact neighbour
+sets permit only intended cross-parity adjacencies. The path has $|U|$
+fixed vertices, $|U|-1$ internal labels and two endpoint labels.
+Conversely, deleting the endpoints of an induced path with minority
+class $U$ gives precisely such an interleaving, and each deleted endpoint
+has one neighbour in $U$.
+\end{proof}
+
+Four further Lean results check endpoint/internal label distinction,
+two-endpoint attachment to an actual induced path, the minority
+constructor, and the singleton-neighbour property extracted from actual
+path endpoints. Literal cube classes and graphs remain separate inputs.
+
+Of the 145 saved labelled classes of size 96, two have fewer than two
+eligible ends and 62 have an ineligible leaf. A Hamiltonian path must end
+at every graph leaf. All other 81 cases are natively infeasible in a
+circuit model with a dummy vertex adjacent only to eligible ends.
+In 33 augmented graphs, deleting a set $S$ of one or two vertices leaves
+more than $|S|$ components. A Hamiltonian cycle can leave at most $|S|$
+path pieces after such a deletion. These are elementary explanations;
+the other 48 cases retain their native circuit evidence.
+
+Combining the two finite covers, any 192-edge snake must omit at least
+one vertex of each parity from every saved seed. Otherwise an entire
+96-vertex seed class would be its minority class or a subset of its
+97-vertex majority class, both excluded. The conclusion transports to
+cube-isometric seed copies by applying the inverse automorphism, which
+preserves parity classes up to exchange. It depends on the native finite
+exclusions and gives no global upper bound~\cite{research232}.
+
+For each saved 96-set, the maximum length with that complete parity
+class held fixed is exactly 191, under the finite exclusion above.
+Alternation allows at most 97 vertices in the other class, hence at most
+192 edges. The 192-edge case is excluded, while the saved seed attains
+191. Three additional Lean counting results establish the implication
+from a fixed colour count to the length bound and its strict version;
+the numerical exclusion and witness supply the separate premises.
+
+The next search may change the minority class by one vertex. Starting
+with 95 retained vertices, inserting a new vertex changes only its nine
+opposite-parity neighbours: selected-neighbour counts zero, one and two
+become one, two and three. This gives a local update of endpoint and
+internal labels. No complete search of that enlarged family is claimed.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -8715,6 +8780,10 @@ interface retains plain/H8, share, contextual-refutation and floor
 premises. No completed unconditional 231 final assembly or final theorem
 audit was found in that review~\cite{research231}; the maintained interval
 is unchanged.
+Section~\ref{sec:minority232} adds four checked endpoint and minority
+construction results and three colour-count length implications.
+Its 145-class exclusion and 33 separator
+certificates retain their native extraction and verification scope.
 Full-source reviews at rounds 220 and 230 check the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
@@ -12221,6 +12290,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Parity-class contraction and
 Hamiltonian construction searches}. Research milestone 231,
 16 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/231-endpoint-exchanges}.
+
+\bibitem{research232}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Minority-class contraction and
+the need to change both parity classes}. Research milestone 232,
+16 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/232-minority-contraction}.
 
 \end{thebibliography}
 \end{document}

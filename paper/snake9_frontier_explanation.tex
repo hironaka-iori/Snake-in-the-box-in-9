@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 231}
+\date{Research state after round 232}
 \begin{document}
 \maketitle
 
@@ -572,15 +572,44 @@ one entire saved 96-vertex class. It allows a completely new order,
 new endpoints and unrestricted opposite-parity vertices. Keeping the
 96-vertex minority class is a different case: its opposite-parity
 endpoint vertices need only one neighbour in the fixed class. That case
-remains the next construction target~\cite{research231}.
+is addressed below~\cite{research231}.
+
+\section{Why both colour classes must change}
+Now keep a saved 96-vertex class as the minority class. An internal
+opposite-parity vertex still needs two neighbours there, while an
+endpoint needs exactly one. The contracted Hamiltonian path must start
+and end at vertices admitting those endpoint labels. Inserting the
+internal labels and endpoints gives $96+95+2=193$ vertices and 192 edges,
+with no additional adjacency.
+
+All 145 classes were covered. Two lack two eligible ends, 62 have an
+ineligible leaf, and the other 81 queries are infeasible. In 33 of those
+cases a small separator splits the augmented cycle graph into too many
+components. The other 48 retain native solver evidence. Lean checked
+the endpoint attachment, minority construction and supporting neighbour
+statements; the finite survey remains separate.
+
+Together with the majority result, this means every 192-edge snake must
+omit at least one vertex of each parity relative to every saved seed.
+Keeping a whole 96-set would put it in one of the excluded cases. The
+conclusion also holds for cube-isometric copies by transforming a
+proposed candidate back to the saved coordinates. It retains the native
+finite-evidence qualification and gives no new global bound~\cite{research232}.
+There is an exact restricted optimum as well: requiring one complete
+selected colour class to equal a saved 96-set permits at most 191 edges. Alternation
+allows at most 192; that case is excluded, and the saved seed attains 191.
+Three further Lean counting statements check this length deduction under
+its explicit count and exclusion premises.
+The next route allows one vertex of the minority class to change, with
+the other class still free. This enlarged family has not been exhausted.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
 crossing count. A new construction search must change a restriction.
-The parity-class comparison above supplies a broader exclusion while
-leaving the fixed-minority construction open. Wider blocks, changed
-block lengths and changes to both colour classes remain possible.
+The parity-class comparisons exclude keeping either entire class of a
+saved seed. Changes to both classes, wider blocks and changed block
+lengths remain possible.
 Different parent classes and shorter compatible parents remain alternatives. Finding a new parent still requires a compatible joining construction.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
@@ -591,7 +620,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 231.
+in the companion manuscript and milestones through round 232.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -681,6 +710,12 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Parity-class contraction and
 Hamiltonian construction searches}. Research milestone 231,
 16 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/231-endpoint-exchanges}.
+
+\bibitem{research232}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Minority-class contraction and
+the need to change both parity classes}. Research milestone 232,
+16 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/232-minority-contraction}.
 
 \end{thebibliography}
 \end{document}

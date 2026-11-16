@@ -1,3 +1,11 @@
+# Current result after round 232
+
+All 145 saved minority classes are computationally excluded for 192 edges, complementing the majority-class cover. A 192-edge snake must change both parity classes relative to every saved seed or cube-isometric copy. Keeping one complete 96-vertex class fixed has exact restricted maximum 191. Seven new general Lean reports support the construction and counting arguments; finite graphs and contradictions retain their stated native scope. The global interval remains 191--233. Goal active; pause after round 233.
+
+Read [the argument](milestones/232-minority-contraction/MATHEMATICAL_NOTE.md), [evidence](milestones/232-minority-contraction/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [short explanation](paper/snake9_frontier_explanation.tex).
+
+## Earlier checkpoints
+
 # Current result after round 231
 
 Parity-class contraction gives an exact Hamiltonian-path construction criterion. All 23,127 distinct 97-vertex majority classes obtained by enlarging one saved seed class are computationally excluded. Forty-five of the final 49 graphs also have elementary separator explanations. Four general constructor/converse statements passed Lean. The fixed-minority-class case remains open; the global interval remains 191--233. The goal is active, with a user-requested pause after round 233.

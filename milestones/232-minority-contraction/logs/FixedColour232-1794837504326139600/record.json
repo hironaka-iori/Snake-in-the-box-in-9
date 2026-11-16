@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "module": "FixedColour232",
+  "source": "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\lean\\FixedColour232.lean",
+  "source_sha256": "eb6b5aac45b3cee0261a9486419407deea71f2901c6d1e82f413842b692e214f",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\data\\FixedColour232-execution.json": "548e2979e9b977824b31f784c776bbb1ab52310797c6391e9e044c6470131dea",
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\lean\\FixedColour232.lean": "eb6b5aac45b3cee0261a9486419407deea71f2901c6d1e82f413842b692e214f",
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\data\\AlternatingCounts191-audit.json": "648a9f0949a20d24a92d9453f8cd82db74d180191aab8ce8587a0e9f5f590fcd",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\data\\AlternatingCounts191-execution.json": "8bb77e75acf246cc23cb3a2ffa151c3a3e564bc1b596a1474604419e19e79737",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\lean\\AlternatingCounts191.lean": "ab94d9f93ec76301f0fe8624c19992e677e2e0b98682c6d56f6f507dc4a82f85",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\scripts\\check_core.py": "7f6b6594d8d109bade8765195afbbd9ddae8fc2242ba1143bfa359d9033e7168",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\data\\middle95.json": "ef95ff8a6006b94db004f185bffa7285385700040a220280f02c49950a5b1b0e",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\build\\AlternatingCounts191.olean": "8ea3d86d2cd46cd636d52c9f01b419f2f42e9f3f0f4b7cc3aa798981571c2645",
+    "E:\\Snake-in-a-box\\milestones\\191-coloured-replacements\\logs\\AlternatingCounts191-1794372177544663700\\compiler.log": "c408733d05493d00e07dd043b5e31ea5ce9b4f977b74ddacf80c831737f2c6cb",
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\build\\AlternatingCounts191.olean": "8ea3d86d2cd46cd636d52c9f01b419f2f42e9f3f0f4b7cc3aa798981571c2645"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\logs\\FixedColour232-1794837504326139600\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\lean\\FixedColour232.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\logs\\FixedColour232-1794837504326139600\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1160835072,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 92,
+    "snapshot_seconds": 0.01599999999962165
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1153900544,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 48404,
+          "ParentProcessId": 46452,
+          "PrivatePageCount": 48099328,
+          "WorkingSetSize": 25214976
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 93,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 48404,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.0630000000019209,
+  "axioms": [
+    {
+      "theorem": "FixedColour232.length_le_twice_colour",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "FixedColour232.strict_length_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "FixedColour232.fixed_96_bound",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "8981c2425e5ec6e6006c036c3b96f84c0f737568bec5f8a851518530d0190fd6",
+  "object": "E:\\Snake-in-a-box\\milestones\\232-minority-contraction\\build\\FixedColour232.olean",
+  "olean_sha256": "380a5a78f82888f7e34fb7608769e2052d36aa687708411b8288958172b61cd3"
+}
