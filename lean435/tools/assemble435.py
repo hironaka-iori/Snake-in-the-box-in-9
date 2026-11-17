@@ -128,7 +128,9 @@ def main():
     fin = os.path.join(a.work, f'UpperBound{B}_435.lean')
     thm = f'Snake9.upper_{B}_435'
     open(fin, 'w').write('\n'.join([
-        'module', '', f'import AggregateDirection6SC{T}', f'import {top}', 'import Floors233Port', '',
+        # the statement mentions `Snake`, so Snake9 must be a public import of the final module;
+        # everything else is used only in the proof and stays private
+        'module', '', 'public import Snake9', f'import AggregateDirection6SC{T}', f'import {top}', 'import Floors233Port', '',
         f'/-! The bound {B} in Lean 4.35, assembled from certificate interfaces (lean435/tools/assemble435.py). -/',
         '', 'namespace Snake9', '',
         f'public theorem upper_{B}_435 : ∀ {{m : Nat}}, Snake m → m ≤ {B} :=',
