@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 233}
+\date{Research state after round 234}
 \begin{document}
 \maketitle
 
@@ -600,9 +600,8 @@ selected colour class to equal a saved 96-set permits at most 191 edges. Alterna
 allows at most 192; that case is excluded, and the saved seed attains 191.
 Three further Lean counting statements check this length deduction under
 its explicit count and exclusion premises.
-A possible next route replaces one vertex of the minority class, with
-the other class still free. This family has not been searched. The
-following round first examines a smaller family built from old paths.
+The one-replacement route is addressed below. The intervening round
+first examined a smaller family built from old paths.
 
 \section{Why the simple dimensional lift fails}
 Project the even vertices of $Q_9$ onto their first eight coordinates.
@@ -643,9 +642,44 @@ arguments. The whole-cube projection and counting bridges are written
 proofs. The independent finite audit checked all 6763 graphs, 36 circuit
 models and 28 successful shorter witnesses. Eight native infeasibility
 reports remain separate from Lean. No longer $Q_9$ snake was found.
-The useful next family allows additions as well as deletions in a saved
-parity class, while leaving the opposite class and ordering free.
-Research pauses after round 233.
+This motivated allowing additions as well as deletions in a saved parity
+class, while leaving the opposite class and ordering free. Research
+resumed after the round-233 pause.
+
+\section{One replacement is still insufficient}
+Replace one vertex of a saved 96-vertex minority class, leaving its
+opposite class, endpoints and ordering free. The exact neighbour update
+removes the old vertex and adds the new one wherever adjacent. A label
+that sees both has the same degree but different neighbours; those
+identities must be updated. Four general Lean statements check the
+update and its relevant special cases.
+
+All $2\,227\,200$ descriptions were examined and independently
+reconstructed. Elementary isolated-vertex, leaf, endpoint and connectivity
+conditions leave 1381 descriptions, representing 1325 distinct classes.
+Of these, 1244 have independently replayed elementary contradictions.
+For example, a vertex with only two available edges forces both into
+the proposed spanning cycle; successive forced choices may close a
+smaller cycle and prevent a single cycle through all vertices. The
+remaining 81 classes retain native infeasibility evidence. Every case
+is covered, with no 192-edge construction~\cite{research234}.
+
+This sharpens the distance from every saved seed. A candidate's
+96-vertex minority class can share at most 94 vertices with the
+corresponding seed class: sharing 95 would be one replacement, and
+sharing 96 would be the already excluded unchanged class. Its
+97-vertex majority class can share at most 95 by the earlier cover.
+Thus the candidate shares at most $94+95=189$ vertices with the seed.
+Since the seed has 192 vertices and the candidate has 193, at least
+three old vertices must be omitted and four new vertices introduced.
+The argument also applies to cube-isometric seed copies, with the same
+finite-evidence qualification. These changes are necessary and need
+not be sufficient.
+
+The next proposed experiment allows two replacements in a minority
+class and chooses all other vertices and their ordering together.
+It has not been run. The global interval is unchanged, and the goal
+remains active.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
@@ -664,7 +698,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 233.
+in the companion manuscript and milestones through round 234.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -765,6 +799,11 @@ the need to change both parity classes}. Research milestone 232,
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Parity lift and deletion obstruction}.
 Research milestone 233, 16 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/233-parity-lift-construction}.
+
+\bibitem{research234}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Replacing one member of a parity class}.
+Research milestone 234, 17 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/234-single-colour-exchange}.
 
 \end{thebibliography}
 \end{document}

@@ -1,0 +1,132 @@
+{
+  "status": "PASS",
+  "module": "ColourExchange234",
+  "source": "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\lean\\ColourExchange234.lean",
+  "source_sha256": "c1dd8395871f7203a1a7231171c91ea414be0c63705356a66285b356232cc702",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\data\\ColourExchange234-execution.json": "f4d39e54a7e81a166eb80a2009dd6acad7da32d0572d3224d0f6030407105a07",
+    "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\lean\\ColourExchange234.lean": "c1dd8395871f7203a1a7231171c91ea414be0c63705356a66285b356232cc702",
+    "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\logs\\ColourExchange234-1794916118571462100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\lean\\ColourExchange234.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\logs\\ColourExchange234-1794916118571462100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1994264576,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 87,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1900785664,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 53616,
+          "ParentProcessId": 29168,
+          "PrivatePageCount": 48091136,
+          "WorkingSetSize": 25251840
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1861509120,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 53616,
+          "ParentProcessId": 29168,
+          "PrivatePageCount": 37064704,
+          "WorkingSetSize": 39178240
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 88,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1812037632,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 53616,
+          "ParentProcessId": 29168,
+          "PrivatePageCount": 39780352,
+          "WorkingSetSize": 41291776
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.015999999988707714
+    },
+    {
+      "free_bytes": 1743728640,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 53616,
+          "ParentProcessId": 29168,
+          "PrivatePageCount": 51085312,
+          "WorkingSetSize": 125161472
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 53616,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 4.125,
+  "axioms": [
+    {
+      "theorem": "ColourExchange234.singleton_after_exchange",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "ColourExchange234.two_neighbours_after_exchange",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "ColourExchange234.exchanged_neighbours_iff",
+      "axioms": []
+    },
+    {
+      "theorem": "ColourExchange234.neighbours_unchanged_iff",
+      "axioms": []
+    }
+  ],
+  "log_sha256": "9fa4bd8fdabc73ad5f8a6f329f56173571958007f664be4e97e205727cc5c81d",
+  "object": "E:\\Snake-in-a-box\\milestones\\234-single-colour-exchange\\build\\ColourExchange234.olean",
+  "olean_sha256": "c199f1b64c5c6a8df707c7fea18ea31ebdd8cbfc43947adfe012dbbb97f5950d"
+}

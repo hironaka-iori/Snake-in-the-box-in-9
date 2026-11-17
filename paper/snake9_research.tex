@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 233, 16 November 2026}
+\date{Research state after round 234, 17 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -68,6 +68,9 @@ parity classes relative to each saved seed, under the stated native
 finite evidence. A parity lift gives a universal closed-neighbour
 construction criterion, while a local deletion obstruction excludes
 near-doubling by deleting from the saved parents of lengths 26, 50 and 98.
+A complete one-replacement minority-class cover further shows that any
+192-edge snake shares at most 189 vertices with each saved 191-edge seed,
+under the stated finite and native evidence.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -8522,11 +8525,12 @@ Alternation allows at most 97 vertices in the other class, hence at most
 from a fixed colour count to the length bound and its strict version;
 the numerical exclusion and witness supply the separate premises.
 
-The next search may change the minority class by one vertex. Starting
+Section~\ref{sec:exchange234} considers changing the minority class by
+one vertex. Starting
 with 95 retained vertices, inserting a new vertex changes only its nine
 opposite-parity neighbours: selected-neighbour counts zero, one and two
 become one, two and three. This gives a local update of endpoint and
-internal labels. No complete search of that enlarged family is claimed.
+internal labels. The complete cover of this enlarged family is given there.
 
 \subsection{Parity lift and the limits of deleting from one base path}
 \label{sec:parity233}
@@ -8620,10 +8624,86 @@ remain written bridges. Independent finite reconstruction covered all
 6763 graphs, all 36 circuit models and all 28 witnesses. The eight native
 infeasibility reports were not replayed as Lean certificates.
 
-The next constructive family replaces one vertex of a saved minority
-class, with its opposite class and ordering free. It has not been
-searched. This permits additions outside the old base path while
-retaining the exact contraction criterion.
+The next subsection replaces one vertex of a saved minority class,
+with its opposite class and ordering free. This permits additions
+outside the old base path while retaining the exact contraction criterion.
+
+\subsection{Changing one member of a parity class}
+\label{sec:exchange234}
+For a selected class $U$, remove $d\in U$ and insert a same-parity
+vertex $a\notin U$. Let $U'=(U\setminus\{d\})\cup\{a\}$. Each label $z$
+has the exact updated neighbour set
+\[
+ N_{U'}(z)=(N_U(z)\setminus\{d\})\cup(\{a\}\cap N(z)).
+\]
+This follows directly by considering membership of each vertex. The
+complete set is unchanged precisely when $z$ sees neither $d$ nor $a$.
+If it sees both, its degree is unchanged but the neighbour identities
+change. Previously unusable labels must also be considered: a label
+of degree zero can become a singleton, while a label of degree three
+can become an internal two-neighbour label. Four new checked statements
+establish this exact update, its locality equivalence, and its singleton
+and pair specializations. The finite degree-count consequences remain
+written deductions.
+
+The 145 saved labelled classes give
+$145\cdot96\cdot160=2\,227\,200$ exchange descriptions. The static cover
+has $1\,603\,284$ isolated-vertex exclusions, $616\,230$ excess-leaf
+exclusions, 274 cases with fewer than two supported ends, 6019 with an
+unsupported leaf, and 12 disconnected cases. The remaining 1381
+descriptions represent 1325 distinct selected classes. An independent
+reconstruction checked every complete resulting 96-set and every
+decision, without using the producer's incremental graph updates.
+
+Join a dummy vertex to all supported ends. A desired Hamiltonian path
+is equivalent to a spanning cycle in this augmented graph. At a vertex
+with two available edges, both must belong to a spanning cycle. Once
+two incident edges are forced, all other incident edges are excluded.
+Repeating these deductions gives four elementary contradictions: fewer
+than two available edges, more than two forced edges, a forced cycle
+on a proper subset, or multiple components after deletion of one vertex.
+The last condition is impossible because deleting one vertex from a
+spanning cycle leaves a connected path through all remaining vertices.
+
+Exactly 1244 of the 1325 classes have these finite certificates, all
+independently replayed from the literal cube graph. The other 81 retain
+native circuit infeasibility evidence. The initial native batch excluded
+771 classes before its time limit; the unfinished suffix was left open.
+After the elementary certificates were applied, the final 22 uncovered
+classes were excluded in a second native batch. Their union covers all
+1325 classes. The elementary replay and native contradictions are
+distinct from Lean certificate checking~\cite{research234}.
+
+\begin{proposition}\label{prop:overlap234}
+Under the stated finite covers, every 192-edge snake shares at most
+189 vertices with each saved 191-edge seed and each cube-isometric
+copy of such a seed. It omits at least three seed vertices and introduces
+at least four vertices outside that seed.
+\end{proposition}
+\begin{proof}
+The candidate's minority class has 96 vertices. An intersection of 96
+with the corresponding seed class is excluded by the fixed-minority
+cover; an intersection of 95 is exactly one replacement and is excluded
+by the present cover. Thus this intersection is at most 94. The earlier
+majority cover limits the intersection of its 97-vertex class with the
+other seed class to 95. Their sum is at most 189. The seed and candidate
+contain 192 and 193 vertices respectively, giving the stated omissions
+and additions. For a cube-isometric seed copy, apply the inverse
+automorphism; parity classes are preserved up to exchange.
+\end{proof}
+
+There is also an exact restricted maximum. If one complete parity class
+has size 96 and differs from a saved class by at most one replacement,
+alternation gives edge length at most 192. The top case would make that
+class the minority class and is excluded. The maximum over this family is 191,
+attained by an original seed in the zero-replacement case. This gives
+no global upper bound.
+
+The next construction allows two replacements in a saved minority
+class. A joint optional-vertex circuit model can select the class and
+ordering together, with exact selected-neighbour degrees excluding
+chords. This avoids enumerating billions of descriptions individually.
+That model is proposed and has not yet been run.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -8886,6 +8966,10 @@ certificates retain their native extraction and verification scope.
 Section~\ref{sec:parity233} adds six checked general lift and local-deletion
 statements. Its whole-cube and counting bridges remain written, and
 the four-parent finite cover retains its native verification scope.
+Section~\ref{sec:exchange234} adds four checked exact-neighbour update
+statements. Its complete static reconstruction, 1244 elementary replayed
+certificates and 81 remaining native contradictions have separate scopes;
+the overlap deduction is written from those finite premises.
 Full-source reviews at rounds 220 and 230 check the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
@@ -12403,6 +12487,11 @@ the need to change both parity classes}. Research milestone 232,
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Parity lift and deletion obstruction}.
 Research milestone 233, 16 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/233-parity-lift-construction}.
+
+\bibitem{research234}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Replacing one member of a parity class}.
+Research milestone 234, 17 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/234-single-colour-exchange}.
 
 \end{thebibliography}
 \end{document}
