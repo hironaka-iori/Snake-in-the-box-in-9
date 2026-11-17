@@ -1,0 +1,94 @@
+{
+  "status": "COMPLETE_QUERY_BATCH",
+  "arguments": {
+    "tag": "degree",
+    "seconds": 260.0,
+    "per_base": 60.0,
+    "per_query": 20.0,
+    "bases": "139,7,6,0",
+    "exchanges": 2
+  },
+  "source_sha256": "ff2356155763cb4bf8f2d1eff80f893021793deca4c76e9183f990ecb6b3297b",
+  "script_sha256": "ea4685761c79ae140d07023477c0bd9cbc67ac5301a6c4176079a5f923e59e60",
+  "results": [
+    {
+      "base": 139,
+      "exchanges": 2,
+      "status": "INFEASIBLE",
+      "iterations": [
+        {
+          "iteration": 0,
+          "status": "INFEASIBLE",
+          "model": "degree-139-0000.pbtxt",
+          "model_sha256": "68248dfeff793e243d3cbaca595d8a9a5c9df44d693029d0e8f7d7b5d0b91df3",
+          "seconds": 0.231605,
+          "branches": 71216,
+          "conflicts": 4151,
+          "cut_count_before": 0
+        }
+      ],
+      "cuts": [],
+      "seconds": 0.25
+    },
+    {
+      "base": 7,
+      "exchanges": 2,
+      "status": "INFEASIBLE",
+      "iterations": [
+        {
+          "iteration": 0,
+          "status": "INFEASIBLE",
+          "model": "degree-007-0000.pbtxt",
+          "model_sha256": "11b35b79c2bb40d828bd9b2c10034e9482193f7fbc1764fabaa4e061a74b612b",
+          "seconds": 0.3235757,
+          "branches": 68276,
+          "conflicts": 6800,
+          "cut_count_before": 0
+        }
+      ],
+      "cuts": [],
+      "seconds": 0.3590000000112923
+    },
+    {
+      "base": 6,
+      "exchanges": 2,
+      "status": "INFEASIBLE",
+      "iterations": [
+        {
+          "iteration": 0,
+          "status": "INFEASIBLE",
+          "model": "degree-006-0000.pbtxt",
+          "model_sha256": "fcf24e8ed5e8ab1f80368a19b47d570666149c8f97b2ac1022ddbb76f70df947",
+          "seconds": 0.439991,
+          "branches": 131780,
+          "conflicts": 9287,
+          "cut_count_before": 0
+        }
+      ],
+      "cuts": [],
+      "seconds": 0.45300000000861473
+    },
+    {
+      "base": 0,
+      "exchanges": 2,
+      "status": "INFEASIBLE",
+      "iterations": [
+        {
+          "iteration": 0,
+          "status": "INFEASIBLE",
+          "model": "degree-000-0000.pbtxt",
+          "model_sha256": "b158389543d948f636fb4b678d2a7898275033583d69222992e961481f3b5970",
+          "seconds": 0.2768641,
+          "branches": 69275,
+          "conflicts": 5290,
+          "cut_count_before": 0
+        }
+      ],
+      "cuts": [],
+      "seconds": 0.2970000000059372
+    }
+  ],
+  "witness": null,
+  "scope": "Exact selected degrees and two majority endpoints produce one path plus zero or more disjoint induced cycles. Every observed cycle yields a valid occupancy inequality. Only a connected193vertex sequence is a witness. INFEASIBLE excludes this prescribed minority exchange family; UNKNOWN or budget exhaustion remains unresolved.",
+  "seconds": 1.5
+}

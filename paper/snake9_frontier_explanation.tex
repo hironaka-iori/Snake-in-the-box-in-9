@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 234}
+\date{Research state after round 235}
 \begin{document}
 \maketitle
 
@@ -678,8 +678,41 @@ not be sufficient.
 
 The next proposed experiment allows two replacements in a minority
 class and chooses all other vertices and their ordering together.
-It has not been run. The global interval is unchanged, and the goal
-remains active.
+The following round implements this approach. The global interval
+remains unchanged.
+
+\section{Two replacements also fail the degree conditions}
+The next model chooses 96 minority and 97 majority vertices together,
+retaining exactly 94 vertices of a saved minority class. Four direct
+circuit queries remained unresolved after a minute each.
+
+A smaller model asks only for the necessary neighbour counts. Each
+selected vertex must have two selected cube neighbours, except the two
+majority endpoints, which have one. Unselected vertices are unrestricted.
+Any actual snake satisfies these conditions. A feasible disconnected
+selection would consist of one path and some cycles; verified cycle
+inequalities could then remove those cycles.
+
+All 145 saved classes were infeasible with two replacements even in
+this smaller model, before any cycle inequality was needed. The models
+jointly cover $8\,410\,464\,000$ replacement descriptions. Independent
+inspection verified every model and its positive selection guards.
+The infeasibility conclusions remain native solver evidence. Four new
+Lean statements support the separate circuit-to-path argument; the
+finite contradictions are not Lean certificate replays~\cite{research235}.
+
+The important consequence is that the candidate's minority class can
+now share at most 93 vertices with the corresponding saved class.
+Its majority class can share at most 95 by the earlier result, so the
+total overlap is at most $93+95=188$. A saved seed has 192 vertices and
+a proposed 192-edge snake has 193. At least four old vertices must
+therefore be omitted and five new ones introduced. This applies to
+each saved seed and its cube-isometric copies under the same finite
+evidence, and does not establish a global upper bound.
+
+The next unsearched family permits three replacements in the minority
+class. The degree formulation and cycle-separation code are saved for
+that attempt. Research pauses after round 235 as requested.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
@@ -698,7 +731,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 234.
+in the companion manuscript and milestones through round 235.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -804,6 +837,11 @@ Research milestone 233, 16 November 2026.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Replacing one member of a parity class}.
 Research milestone 234, 17 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/234-single-colour-exchange}.
+
+\bibitem{research235}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Joint construction and the
+two-replacement obstruction}. Research milestone 235, 17 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/235-joint-two-exchange}.
 
 \end{thebibliography}
 \end{document}
