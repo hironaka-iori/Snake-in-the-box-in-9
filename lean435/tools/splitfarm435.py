@@ -237,8 +237,20 @@ def write_record(a, man, src, bld, kl, flog, got):
     publish(a, res, os.path.join(D, 'build', rel(fin) + '.olean'))
 
 
+def published_elsewhere(mod):
+    """Branches (owners and helpers of the family) on which `mod` is already published."""
+    sc = P.Scan([P.PFX, P.HELP_PFX])
+    sc.refresh()
+    return sorted(ref for ref, (_t, mods, _r) in sc.cache.items() if mod in mods)
+
+
 def publish(a, res, olean):
-    """Append res to the helper branch <family>help/w<J> (fast-forward), as prod435 run --steal publishes."""
+    """Append res to the helper branch <family>help/w<J> (fast-forward), as prod435 run --steal publishes.
+    Refuses when the module is already published on any owner or helper branch (a second, different
+    .olean of the same module would be a merge CONFLICT)."""
+    where = published_elsewhere(res['module'])
+    if where:
+        raise SystemExit(f'{res["module"]} is already published on {where}: NOT publishing')
     repo = P.Repo(P.HELP_PFX)
     me = f'w{a.index}'
     tips = repo.ls()
