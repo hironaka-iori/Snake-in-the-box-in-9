@@ -90,7 +90,7 @@ def fetch_src(name):
 
 
 def base_modules(man):
-    pre = f'LocalWindowCertSplit.{man["name"]}'
+    pre = man.get('prefix', f'LocalWindowCertSplit.{man["name"]}')
     return [f'{pre}.Cnf'] + [d[0] for d in man['data']] + [f'{pre}.Ps']
 
 

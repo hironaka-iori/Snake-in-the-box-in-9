@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The replay step of cert231.py for ONE share certificate, with the proof search and generator options
+"""The replay step of cert231.py for ONE share or ctx certificate, with the proof search and generator options
 exposed (milestone 36, very large certificates; used for `T012301A36264K45`).
 
     bigreplay435.py --plan P --core COREDIR --work DIR --out GENOUT NAME
@@ -48,12 +48,13 @@ def main():
     certs, jd = os.path.join(work, 'certs'), os.path.join(work, 'json')
     os.makedirs(certs, exist_ok=True)
     m = C.load_meta(a.core, name)
-    assert m is not None and m.get('kind') == 'share', 'share core JSON needed'
+    assert m is not None and m.get('kind') in ('share', 'ctxshare'), 'share or ctx core JSON needed'
+    ctx = m['kind'] == 'ctxshare'
     meta = dict(m)
     rec = {'name': name, 'variables': meta['variables'], 'core': len(meta['core_ids'])}
     if not a.gen_only:
         t0 = time.time()
-        enc, ren, core, tags, used_c = C.share_regen(m)
+        enc, ren, core, tags, used_c = cert231.X.regen(m) if ctx else C.share_regen(m)
         rl = lambda x: (1 if x > 0 else -1) * ren[abs(x)]   # noqa: E731
         gz = os.path.join(certs, name + '.cnf.gz')
         C.write_cnf_gz(len(ren), [[rl(x) for x in c] for c in core], gz)
@@ -82,6 +83,14 @@ def main():
         print(r.stderr[-3000:], file=sys.stderr)
         raise SystemExit('generation failed')
     g = json.loads(r.stdout.strip().splitlines()[-1])
+    if ctx:                                     # as cert231.replay: the ctx replay imports LocalWindowCtxCnf.NAME
+        p = os.path.join(a.out, 'LocalWindowUnsat', name + '.lean')
+        src = open(p).read()
+        assert src.count('import LocalWindowCnf.' + name) == 1
+        q = os.path.join(a.out, 'LocalWindowCtxUnsat', name + '.lean')
+        os.makedirs(os.path.dirname(q), exist_ok=True)
+        open(q, 'w').write(src.replace('import LocalWindowCnf.' + name, 'import LocalWindowCtxCnf.' + name))
+        os.remove(p)
     g['gen_s'] = round(time.time() - t0, 1)
     rec.update(g)
     json.dump(rec, open(os.path.join(work, name + '.replay.json'), 'w'))

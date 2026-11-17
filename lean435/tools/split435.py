@@ -6,6 +6,7 @@
 Reads the same 4.19 generator output as to435.py (Cnf source and checker-v3 replay source of NAME) and
 writes, instead of ONE merged module `LocalWindowCert.NAME`:
 
+  (ctx certificates: LocalWindowCtxCertSplit.NAME.* and LocalWindowCtxCert.NAME)
   LocalWindowCertSplit.NAME.Cnf     the Cnf body (raw, cnf, tags, check_*, sat), everything public+exposed
   LocalWindowCertSplit.NAME.D<j>    proof data: the segment definitions p<c>, t<c> of a range of segments
   LocalWindowCertSplit.NAME.Ps      `Ps := [p0, p1, ...]` (imports Cnf and every D<j>)
@@ -63,9 +64,11 @@ def chunks(ws, k):
     return out
 
 
-def split(name, cnf_text, unsat_text, nparts, data_mb, cnf_mod='LocalWindowCnf.'):
+def split(name, cnf_text, unsat_text, nparts, data_mb, ctx=False):
     ns = f'Snake9.LocalWindow.{name}'
-    pre = f'LocalWindowCertSplit.{name}'
+    cnf_mod = 'LocalWindowCtxCnf.' if ctx else 'LocalWindowCnf.'
+    fdir = 'LocalWindowCtxCert' if ctx else 'LocalWindowCert'
+    pre = f'{fdir}Split.{name}'
     cl, ce, ci = port.split_header(cnf_text)
     ul, ue, ui = port.split_header(unsat_text)
     cmod = cnf_mod + name
@@ -139,14 +142,14 @@ def split(name, cnf_text, unsat_text, nparts, data_mb, cnf_mod='LocalWindowCnf.'
     steps = ''.join(D[n] + '\n' for n in names if n.startswith('steps'))
     tail = (f'/-- The certificate, stated with literal parameters (lean435/tools/to435.py). -/\n'
             f'public theorem refuted : {stmt} :=\n  {proof}\n\n')
-    fin = (['module', '', f'-- LocalWindowCert.{name}: the final module of a split certificate '
+    fin = (['module', '', f'-- {fdir}.{name}: the final module of a split certificate '
             '(lean435/tools/split435.py); its parts are private imports', 'public import LocalWindowShareCtx'] +
            ['import ' + i for i in imps] + [f'import {pre}.Cnf', f'import {pre}.Ps'] + ['import ' + m for m in kmods] +
            ['', O, '', f'namespace {ns}', '', steps + D['unsat'], tail + f'end {ns}', ''])
-    files[f'LocalWindowCert.{name}'] = '\n'.join(fin)
+    files[f'{fdir}.{name}'] = '\n'.join(fin)
     info = dict(name=name, segments=nseg, data=[[m, a, b] for m, (a, b) in zip(dmods, dr)],
                 parts=[[m, a, b, sum(wk[a:b])] for m, (a, b) in zip(kmods, kr)],
-                final=f'LocalWindowCert.{name}', statement=stmt,
+                final=f'{fdir}.{name}', prefix=pre, statement=stmt,
                 inputs={'cnf_sha256': sha_t(cnf_text), 'unsat_sha256': sha_t(unsat_text)},
                 sources={m: sha_t(t) for m, t in files.items()})
     return files, info
@@ -160,10 +163,11 @@ def main():
     ap.add_argument('--data-mb', type=float, default=40.0)
     ap.add_argument('name')
     a = ap.parse_args()
-    cp = os.path.join(a.inp, 'LocalWindowCnf', a.name + '.lean')
-    up = os.path.join(a.inp, 'LocalWindowUnsat', a.name + '.lean')
+    ctx = os.path.exists(os.path.join(a.inp, 'LocalWindowCtxCnf', a.name + '.lean'))
+    cp = os.path.join(a.inp, 'LocalWindowCtxCnf' if ctx else 'LocalWindowCnf', a.name + '.lean')
+    up = os.path.join(a.inp, 'LocalWindowCtxUnsat' if ctx else 'LocalWindowUnsat', a.name + '.lean')
     files, info = split(a.name, open(cp, encoding='utf-8').read(), open(up, encoding='utf-8').read(),
-                        a.parts, a.data_mb)
+                        a.parts, a.data_mb, ctx)
     for m, t in files.items():
         q = os.path.join(a.out, m.replace('.', '/') + '.lean')
         os.makedirs(os.path.dirname(q), exist_ok=True)
