@@ -442,7 +442,7 @@ On a fresh 4-core, 15 GB machine of environment `snake-in-the-box-9-lean435` (Le
   Quot.sound}`.
   - A `sorry` anywhere below would show up as `sorryAx`.
   - A `native_decide` would show up as a `._native.native_decide.ax_*` axiom.
-  - So would any declared `axiom`. Step 4 above showed each of these three cases being caught.
+  - So would any declared `axiom`. Step 4 of the Status table at the top showed each of these three cases being caught.
 
 ### First run failed, and the fix
 
