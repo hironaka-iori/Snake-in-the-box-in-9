@@ -89,8 +89,8 @@ The scratch refs are:
 That is 120 heads. They hold coordination state only (who builds what), or a test, or an unpublished split.
 No audit reads them.
 
-Optionally, after a decision about from-source re-checks, the 64 part refs of the five published split
-certificates are also scratch. Their `src-*` refs are small; keep them.
+The 64 part refs and the 5 `src-*` refs of the five published split certificates are **not** scratch. SPLIT.md
+("What an independent re-check needs") asks to keep them as the record of what was checked where.
 
 The agents do not delete branches (an agent session's git proxy refused branch deletion with HTTP 403 in
 milestone 33, CERT-PROGRESS, 13 November). Deletion is for the owner.
