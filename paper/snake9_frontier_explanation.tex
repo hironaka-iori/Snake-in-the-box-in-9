@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 235}
+\date{Research state after round 236}
 \begin{document}
 \maketitle
 
@@ -710,9 +710,47 @@ therefore be omitted and five new ones introduced. This applies to
 each saved seed and its cube-isometric copies under the same finite
 evidence, and does not establish a global upper bound.
 
-The next unsearched family permits three replacements in the minority
-class. The degree formulation and cycle-separation code are saved for
-that attempt. Research pauses after round 235 as requested.
+The following round applies the saved degree formulation to three
+replacements and investigates the conditions on larger changes.
+
+\section{Three replacements and the next construction}
+All 145 saved three-replacement families also fail the necessary degree
+conditions. The exported models and the complete coverage were checked
+independently. Their infeasibility remains native solver evidence.
+Combining the covers through three replacements bounds the minority
+intersection by 92. The majority intersection remains at most 95, so
+the total overlap with any saved seed or its cube-isometric copy is at
+most $92+95=187$. Thus a 192-edge candidate must omit at least five old
+vertices and introduce at least six new ones.
+
+The first four searches with exactly four replacements gave:
+class 139: \texttt{INFEASIBLE}; class 7: \texttt{UNKNOWN}; class 6: \texttt{UNKNOWN}; class 0: \texttt{UNKNOWN}. These are only four saved classes; an unresolved result
+does not establish impossibility.
+
+There is a useful rule for choosing the changes. At an old internal
+vertex that stays internal, every added neighbour must be balanced by
+a removed neighbour. An old endpoint that becomes internal needs one
+extra neighbour. This follows by subtracting its old and new degree
+equations. After proposing majority-side changes, every old internal minority
+vertex with unbalanced neighbour counts must be deleted, since all
+retained minority vertices are internal in the candidate. This can identify required deletions before a complete search.
+
+Nine-dimensional neighbour counts also have an exact inverse. If $b(v)$
+is the change in the number of selected neighbours, the weighted sum of
+all these changes around a vertex, with weights $35,-10,8,-16,128$ at
+distances $1,3,5,7,9$, equals 315 times that vertex's selection change.
+The proof counts how each cube step increases or decreases distance;
+all coefficients cancel except the coefficient at the vertex itself.
+Therefore complete neighbour counts determine the selected set uniquely.
+Counts outside the retained snake are essential unknowns in this formula.
+
+Six supporting statements passed Lean, while the full cube matrix was
+checked separately by exact integer arithmetic. The geometric connection
+and native exclusions have the stated separate scopes~\cite{research236}.
+No longer snake or new global bound was obtained. The open construction
+problem now starts with at least four minority replacements. Research
+pauses after round 236; unresolved searches and the balance-guided route
+are saved for resumption.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
@@ -731,7 +769,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 235.
+in the companion manuscript and milestones through round 236.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -842,6 +880,11 @@ Research milestone 234, 17 November 2026.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Joint construction and the
 two-replacement obstruction}. Research milestone 235, 17 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/235-joint-two-exchange}.
+
+\bibitem{research236}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Larger parity exchanges and
+neighbour-count reconstruction}. Research milestone 236, 18 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/236-parity-exchange-frontier}.
 
 \end{thebibliography}
 \end{document}

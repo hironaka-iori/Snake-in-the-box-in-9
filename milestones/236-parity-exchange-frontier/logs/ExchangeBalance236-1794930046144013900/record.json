@@ -1,0 +1,140 @@
+{
+  "status": "PASS",
+  "module": "ExchangeBalance236",
+  "source": "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\lean\\ExchangeBalance236.lean",
+  "source_sha256": "1b8a0c7aacf66a97fb1b9f4a13eb0a3bc786d5f0e5eb4b3a9e5380cd290b9fb4",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\data\\ExchangeBalance236-execution.json": "db26cea4b65695bed7770d05aa3fb98e6cf66d6ddff2cb571c92026c124e0b3e",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\lean\\ExchangeBalance236.lean": "1b8a0c7aacf66a97fb1b9f4a13eb0a3bc786d5f0e5eb4b3a9e5380cd290b9fb4",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\logs\\ExchangeBalance236-1794930046144013900\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\lean\\ExchangeBalance236.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\logs\\ExchangeBalance236-1794930046144013900\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1716744192,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.0
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1676386304,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 27728,
+          "ParentProcessId": 7624,
+          "PrivatePageCount": 48164864,
+          "WorkingSetSize": 25399296
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1648189440,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 27728,
+          "ParentProcessId": 7624,
+          "PrivatePageCount": 38178816,
+          "WorkingSetSize": 39997440
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.0
+    },
+    {
+      "free_bytes": 1648558080,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 27728,
+          "ParentProcessId": 7624,
+          "PrivatePageCount": 42139648,
+          "WorkingSetSize": 42893312
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.01600000000325963
+    },
+    {
+      "free_bytes": 1480667136,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 27728,
+          "ParentProcessId": 7624,
+          "PrivatePageCount": 72847360,
+          "WorkingSetSize": 252174336
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 27728,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 4.109000000011292,
+  "axioms": [
+    {
+      "theorem": "ExchangeBalance236.retained_degree_balance",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ExchangeBalance236.unchanged_status_equal_counts",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ExchangeBalance236.endpoint_becomes_internal",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "ExchangeBalance236.internal_addition_iff_removal",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "eebcbaaae131f298c7c26edea554e581d29edaa26821a87947391cd054ec4413",
+  "object": "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\build\\ExchangeBalance236.olean",
+  "olean_sha256": "7303d04c51bc37007cc104b932f6bf963cfa05457a7011573f9b672c9082cac0"
+}

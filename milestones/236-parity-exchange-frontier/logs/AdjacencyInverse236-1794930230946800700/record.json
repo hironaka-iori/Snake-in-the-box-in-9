@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "module": "AdjacencyInverse236",
+  "source": "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\lean\\AdjacencyInverse236.lean",
+  "source_sha256": "08825a8122cb00594f661df757051789ae1941629cd933c3e8377e8c7b6f4a3f",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\data\\AdjacencyInverse236-execution.json": "62629501333c90a67f6e5e5cb6f7a146025c85923d59542d6b33956c465a01ea",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\lean\\AdjacencyInverse236.lean": "08825a8122cb00594f661df757051789ae1941629cd933c3e8377e8c7b6f4a3f",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\logs\\AdjacencyInverse236-1794930230946800700\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\lean\\AdjacencyInverse236.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\logs\\AdjacencyInverse236-1794930230946800700\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1756319744,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 89,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1740533760,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 23756,
+          "ParentProcessId": 17820,
+          "PrivatePageCount": 48103424,
+          "WorkingSetSize": 25104384
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 89,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 1544011776,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 23756,
+          "ParentProcessId": 17820,
+          "PrivatePageCount": 65228800,
+          "WorkingSetSize": 230731776
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.01600000000325963
+    }
+  ],
+  "compiler_pid": 23756,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.062999999994645,
+  "axioms": [
+    {
+      "theorem": "AdjacencyInverse236.distance_recurrence",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "AdjacencyInverse236.reconstruct",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "4ee03aa05efae51f09c1044cf0b35499e21d635f4ef22fc36a87881fc48a5ce6",
+  "object": "E:\\Snake-in-a-box\\milestones\\236-parity-exchange-frontier\\build\\AdjacencyInverse236.olean",
+  "olean_sha256": "be30a51491d551d79896c9f61ca70c6ab0634513518bbd8a13a914db8433c052"
+}

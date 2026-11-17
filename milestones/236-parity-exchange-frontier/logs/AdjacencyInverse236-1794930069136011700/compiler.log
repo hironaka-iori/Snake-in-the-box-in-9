@@ -1,0 +1,34 @@
+E:\Snake-in-a-box\milestones\236-parity-exchange-frontier\lean\AdjacencyInverse236.lean:63:8: error: unsolved goals
+case nil
+V W : Type
+columns : List W
+f : V → W → Int
+⊢ 0 = (List.map (fun w => 0) columns).sum
+E:\Snake-in-a-box\milestones\236-parity-exchange-frontier\lean\AdjacencyInverse236.lean:90:21: error: unsolved goals
+W : Type
+inst✝ : DecidableEq W
+a : W
+c : Int
+columns : List W
+ih : columns.Nodup → a ∈ columns → (List.map (fun t => if t = a then c else 0) columns).sum = c
+nodup : columns.Nodup
+hn : (a :: columns).Nodup
+ha : a ∈ a :: columns
+absent : ¬a ∈ columns
+⊢ (List.map (fun x => 0) columns).sum = 0
+E:\Snake-in-a-box\milestones\236-parity-exchange-frontier\lean\AdjacencyInverse236.lean:80:6: error: unsolved goals
+case pos
+W : Type
+inst✝ : DecidableEq W
+a : W
+c : Int
+columns : List W
+ih : columns.Nodup → a ∈ columns → (List.map (fun t => if t = a then c else 0) columns).sum = c
+nodup : columns.Nodup
+hn : (a :: columns).Nodup
+ha : a ∈ a :: columns
+absent : ¬a ∈ columns
+zero : (List.map (fun t => if t = a then c else 0) columns).sum = 0
+⊢ (if True then c else 0) = c
+'AdjacencyInverse236.distance_recurrence' depends on axioms: [propext]
+'AdjacencyInverse236.reconstruct' depends on axioms: [propext, sorryAx, Quot.sound]
