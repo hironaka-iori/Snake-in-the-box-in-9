@@ -556,9 +556,9 @@ privately and which were built on several machines. How they were checked:
   `S13`, `S14`) compiled from interfaces with strace clean. A separate interface-only test at 19:55 UTC that
   imported `T012301A36264K45` and `T012301A46246K33` passed with 17 import artifacts: no part module and no
   `.olean.private`/`.olean.server` was needed or opened.
-- The axioms of a split certificate's `refuted` include those of its private part modules (Lean's
-  `#print axioms` follows the stored constants), so a `sorry` or `native_decide` in a part would show in the
-  final whitelist check.
+- The axiom list stored with a split certificate's `refuted` was computed when its final module was compiled
+  against all its parts, so a `sorry` or `native_decide` in a part would show in that list and hence in the
+  final whitelist check (the same trust model as for stock certificates).
 
 ### Caveats
 
