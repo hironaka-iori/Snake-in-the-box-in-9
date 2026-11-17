@@ -567,3 +567,15 @@ privately and which were built on several machines. How they were checked:
   farm and trusted through the public `.olean`.
 - For the five split certificates, the kernel checks of their parts ran on several farm machines; this audit
   sees only the final public `.olean`.
+
+### Lessons for future plans (details in SPLIT.md)
+
+- Plan hint estimates of unmeasured share items were off by up to 124x (real core proof against plan estimate;
+  the cores step's full-proof estimate was up to 219x the plan). Run the cores step of every item early and
+  schedule on its estimate (x ~0.55 for the core proof), not on the plan's.
+- Above ~5 M estimated hints, the stock replay search (21 CaDiCaL runs x up to 5 shrinking rounds, one at a time
+  under the memory gate) is the wrong default: use `bigreplay435.py` (3 configurations in parallel, one round).
+- The stock generator `gen_lean_lrat_v3.py` runs out of memory near 90 M hints on 15 GB machines; use
+  `genv3stream.py` (same output bytes, < 0.4 GB).
+- Above ~20 M core-proof hints, build a split certificate (`splitfarm435.py prepare / part / final`, 8-16 parts of
+  3-6 M hints, 2-6 GB each) instead of one module of 6-10+ h.

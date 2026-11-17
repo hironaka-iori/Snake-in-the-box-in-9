@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Build a split certificate (split435.py) on several machines and publish it like prod435.py.
 
+    splitfarm435.py prepare --plan P --name N --parts K [--no-pack]   generation, as run for the 231 plan:
+                          cert435 cores + cnf, bigreplay435 (3 CaDiCaL configurations in parallel, one round,
+                          genv3stream, pack chunk 2048), split435 (--data-mb 40), then pack
     splitfarm435.py pack  --src SRC --name N                 push the split sources to xfer/c435split/src-N
     splitfarm435.py part  --name N --k K [--k K2 ...] [--rss-gb 14]   (part machine) fetch the sources, check
                           their sha256, build Cnf, D*, Ps and the parts K, push them to xfer/c435split/N-k<K>
@@ -142,6 +145,38 @@ def cmd_part(a):
         P.log(f'published {m} -> {SPFX}{ref} {c[:10]}')
 
 
+def cmd_prepare(a):
+    """cores -> cnf -> fast replay -> split -> pack, in wd(N)/prep (exactly the steps run by hand for the five
+    231 split certificates; see SPLIT.md). The LRAT and the replay record stay in prep/rw."""
+    items = {it[5]: it for it in P.plan_items(a.plan)}
+    mod, kind, key, level, est, name = items[a.name]
+    if kind not in ('share', 'ctx'):
+        raise SystemExit(f'{a.name}: kind {kind} is not supported (share and ctx only)')
+    D = os.path.join(wd(a.name), 'prep')
+    env = dict(os.environ, CADICAL=a.cadical, CERT231_SCR=os.path.join(D, 'scr'), CERT435_DATA=os.path.join(D, 'data'),
+               CERT435_CORE=os.path.join(D, 'cores'))
+    c435 = [sys.executable, os.path.join(HERE, 'cert435.py')]
+    t0 = time.time()
+    for step in ('cores', 'cnf'):
+        subprocess.run(c435 + [step, '--plan', os.path.abspath(a.plan), '--kinds', kind, a.name], env=env, check=True)
+        P.log(f'{a.name}: {step} done ({time.time() - t0:.0f} s)')
+    cdir = 'LocalWindowCtxCnf' if kind == 'ctx' else 'LocalWindowCnf'
+    gen = os.path.join(D, 'gen')
+    os.makedirs(os.path.join(gen, cdir), exist_ok=True)
+    shutil.copyfile(os.path.join(D, 'scr', 'out', cdir, a.name + '.lean'), os.path.join(gen, cdir, a.name + '.lean'))
+    subprocess.run([sys.executable, os.path.join(HERE, 'bigreplay435.py'), '--plan', os.path.abspath(a.plan),
+                    '--core', os.path.join(D, 'cores'), '--work', os.path.join(D, 'rw'), '--out', gen,
+                    '--jobs', str(a.jobs), '--configs', a.configs, '--stream', '--pack-chunk', str(a.pack_chunk),
+                    '--cadical', a.cadical, a.name], env=env, check=True)
+    P.log(f'{a.name}: replay + generation done ({time.time() - t0:.0f} s)')
+    src = os.path.join(D, 'split')
+    subprocess.run([sys.executable, os.path.join(HERE, 'split435.py'), '--in', gen, '--out', src, '--parts',
+                    str(a.parts), '--data-mb', str(a.data_mb), a.name], check=True)
+    if not a.no_pack:
+        cmd_pack(argparse.Namespace(src=src, name=a.name))
+    P.log(f'{a.name}: prepared in {time.time() - t0:.0f} s; replay record {os.path.join(D, "rw", a.name + ".replay.json")}')
+
+
 def cmd_status(a):
     tips = P.Repo(SPFX).ls()
     for k in sorted(tips):
@@ -202,7 +237,16 @@ def write_record(a, man, src, bld, kl, flog, got):
     txt = open(srcf, encoding='utf-8').read()
     stmt = txt[txt.index('public theorem refuted'):].split(':=')[0].split(' : ', 1)[1].strip()
     assert stmt == man['statement']
-    rep = json.load(open(a.replay_json)) if a.replay_json else {}
+    prep = os.path.join(wd(a.name), 'prep')
+    rj = a.replay_json or os.path.join(prep, 'rw', name + '.replay.json')
+    rep = json.load(open(rj)) if os.path.exists(rj) else {}
+    if a.full_proof_hints is None:                  # the cores record of `prepare`, if it ran here
+        import glob
+        for f in glob.glob(os.path.join(prep, 'data', 'cores231_*.jsonl')):
+            for l in open(f):
+                r = json.loads(l)
+                if r.get('name') == name and 'est_hints' in r:
+                    a.full_proof_hints = r['est_hints']
     last = {}
     for r in flog:
         last[r['module']] = r
@@ -278,6 +322,16 @@ def publish(a, res, olean):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest='cmd', required=True)
+    p = sub.add_parser('prepare')
+    p.add_argument('--plan', required=True)
+    p.add_argument('--name', required=True)
+    p.add_argument('--parts', type=int, default=16)
+    p.add_argument('--data-mb', type=float, default=40.0)
+    p.add_argument('--jobs', type=int, default=3)
+    p.add_argument('--configs', default='--unsat;--unsat --subsume=0;')
+    p.add_argument('--pack-chunk', type=int, default=2048)
+    p.add_argument('--cadical', default='/usr/local/bin/cadical')
+    p.add_argument('--no-pack', action='store_true')
     p = sub.add_parser('pack')
     p.add_argument('--src', required=True)
     p.add_argument('--name', required=True)
@@ -298,7 +352,7 @@ def main():
     p = sub.add_parser('status')
     p.add_argument('--name', required=True)
     a = ap.parse_args()
-    {'pack': cmd_pack, 'part': cmd_part, 'final': cmd_final, 'status': cmd_status}[a.cmd](a)
+    {'prepare': cmd_prepare, 'pack': cmd_pack, 'part': cmd_part, 'final': cmd_final, 'status': cmd_status}[a.cmd](a)
 
 
 if __name__ == '__main__':
