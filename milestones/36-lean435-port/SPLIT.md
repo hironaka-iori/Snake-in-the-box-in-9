@@ -69,3 +69,23 @@ declaration) and grows with how far a segment's hints reach back (decoded segmen
 third peaked at 2.06 GB against 2.13 GB for the whole. Smaller ProofPack chunks (2048 instead of 16384 bytes)
 cut the toy part's peak from 2.06 to 1.67 GB and its time by ~10 %. Probes of this certificate (two segments
 each): 2.06 GB (segments 100-101), 4.26 GB (1100-1101), 3.60 GB (1543-1544), 0.2-0.4 ms per hint.
+
+## Results (published to `refs/heads/xfer/c435help/w150`)
+
+| certificate | core LRAT hints | segments | parts | part CPU s (min-max) | peak RssAnon | lean CPU in all | final module | public `.olean` |
+|---|---:|---:|---:|---|---:|---:|---:|---|
+| `LocalWindowCert.T012301A36264K45` | 92,617,148 | 1,545 | 16 | 1,465-4,412 | 5.60 GB | 44,854 s (12.5 h) | 2.0 s | 8,664 B, sha256 `2b46265af9cdf5b5…` |
+| `LocalWindowCert.T012301A46246K33` | 47,597,174 | 794 | 8 | 1,470-2,966 | 3.98 GB | 19,580 s (5.4 h) | 1.2 s | 7,832 B, sha256 `af4922f31f0c99be…` |
+
+- Statements: `RefutedShare (winOf [0, 1, 2, 3, 0, 1]) (boundsOf [3, 6, 2, 6, 4]) 12 45` and
+  `RefutedShare (winOf [0, 1, 2, 3, 0, 1]) (boundsOf [4, 6, 2, 4, 6]) 12 33`, identical to what `to435.py`
+  writes for the same generator output (checked by diff).
+- Parts were built two per machine on 15 GB machines (cap 7 GB each); the 16 parts of K45 ran on 7 helper
+  machines and this one, 18:01-19:21 UTC. Every part's base modules (Cnf, D*, Ps) had the same `.olean`
+  sha256 as the final machine's.
+- Interface-only audit of each published `.olean` (`audit.py final --olean-only`, a module importing the
+  certificate and printing its axioms): only that `.olean` of ours opened, `[propext, Classical.choice,
+  Quot.sound]`, AUDIT PASSED.
+- The records carry a `split` field: every module of the split with its source and part sha256, CPU s and peak.
+- A stock duplicate of either module published later would have a different `.olean` (another proof), and
+  `prod435.py merge` would report a CONFLICT; both are valid certificates of the same statement.
