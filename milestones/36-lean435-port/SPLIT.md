@@ -76,10 +76,17 @@ each): 2.06 GB (segments 100-101), 4.26 GB (1100-1101), 3.60 GB (1543-1544), 0.2
 |---|---:|---:|---:|---|---:|---:|---:|---|
 | `LocalWindowCert.T012301A36264K45` | 92,617,148 | 1,545 | 16 | 1,465-4,412 | 5.60 GB | 44,854 s (12.5 h) | 2.0 s | 8,664 B, sha256 `2b46265af9cdf5b5…` |
 | `LocalWindowCert.T012301A46246K33` | 47,597,174 | 794 | 8 | 1,470-2,966 | 3.98 GB | 19,580 s (5.4 h) | 1.2 s | 7,832 B, sha256 `af4922f31f0c99be…` |
+| `LocalWindowCert.T012301A33436K47` | 44,154,462 | 739 | 8 | 1,060-2,320 | 4.38 GB | 15,274 s (4.2 h) | seconds | 7,832 B, sha256 `249d7c184c900e8b…` |
+| `LocalWindowCert.T012301A35353K20` | 65,898,672 | 1,102 | 16 | 1,021-2,732 | 5.98 GB | 30,636 s (8.5 h) | seconds | 8,496 B, sha256 `2fc0915b7d8e9994…` |
+| `LocalWindowCert.T012301A26346K35` | 78,758,795 | 1,315 | 16 | 824-2,260 | 5.18 GB | 26,975 s (7.5 h) | seconds | 8,664 B, sha256 `8b24f3e14b339851…` |
 
-- Statements: `RefutedShare (winOf [0, 1, 2, 3, 0, 1]) (boundsOf [3, 6, 2, 6, 4]) 12 45` and
-  `RefutedShare (winOf [0, 1, 2, 3, 0, 1]) (boundsOf [4, 6, 2, 4, 6]) 12 33`, identical to what `to435.py`
-  writes for the same generator output (checked by diff).
+- Statements (caps 45, 33, 47, 20, 35): e.g. `RefutedShare (winOf [0, 1, 2, 3, 0, 1]) (boundsOf [3, 6, 2, 6, 4]) 12 45`,
+  identical to what `to435.py` writes for the same generator output (checked by diff for K45).
+- The last three were stragglers of the stock route (cores estimates 68.0 M, 116.9 M, 147.6 M full-proof
+  hints); each went cores -> fast replay -> stream generation -> split in 15-20 min, then parts on 4-7 machines.
+- `splitfarm435.py final` refuses to publish a module that any owner or helper branch already has
+  (added after `T012304A44356K33`, which had been published by the stock route meanwhile; its split parts
+  were stopped and nothing of it was published on w150).
 - Parts were built two per machine on 15 GB machines (cap 7 GB each); the 16 parts of K45 ran on 7 helper
   machines and this one, 18:01-19:21 UTC. Every part's base modules (Cnf, D*, Ps) had the same `.olean`
   sha256 as the final machine's.
