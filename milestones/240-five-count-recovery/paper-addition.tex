@@ -1,0 +1,121 @@
+\subsection{Recovery after five missing neighbour counts}
+\label{sec:five-erasure240}
+The four-count result can be extended by a finite calculation involving
+five missing positions. The calculation concerns arbitrary binary vertex
+selections; it does not require the selected vertices to form a snake.
+
+\begin{lemma}\label{lem:five-matrix240}
+Let $p_0,\ldots,p_4$ be distinct vertices of one parity in $Q_9$,
+and suppose that some pair has Hamming distance eight. Define $M$ by
+\[
+M_{ii}=128,\qquad
+M_{ij}=\begin{cases}
+-16,&\Ham(p_i,p_j)=2,\\
+8,&\Ham(p_i,p_j)=4,\\
+-10,&\Ham(p_i,p_j)=6,\\
+35,&\Ham(p_i,p_j)=8
+\end{cases}\quad(i\ne j).
+\]
+If $w\in\mathbb Z^5$, $s\in\{-1,0,1\}^5$, and $Mw=315s$, then $w=0$.
+\end{lemma}
+\begin{proof}
+We give the geometric reduction and the finite arithmetic certificate.
+Translate one endpoint of a distance-eight pair to zero and permute
+coordinates so that the other is $(1,1,1,1,1,1,1,1,0)$. The remaining
+three positions have even weight. In the first eight coordinates,
+record their three bits as one of the eight possible columns. Permuting
+these coordinates preserves the fixed pair, so their multiplicities
+give all required representatives. The ninth bit of each position is
+determined by even parity. Consequently the $\binom{15}{7}=6435$
+compositions of eight into eight parts cover every configuration in
+the lemma. Removing repeated positions leaves 5160 descriptions.
+Relabelling the five positions gives 372 distinct distance matrices.
+Only the distance matrix is needed to determine $M$; this reduction
+does not assert that every equal-distance configuration is cube-isometric.
+
+For each of these 372 matrices, the saved calculation gives an integer
+adjugate $B$ and a positive determinant $D$ satisfying
+\[
+BM=DI.
+\]
+Thus $Dw_i=315(Bs)_i$. Put $q=D/\gcd(D,315)$. Since the two remaining
+factors are coprime after division by the gcd, integrality requires
+\[
+q\mid(Bs)_i\quad(0\le i\le4).
+\]
+In particular, if $q>\sum_j|B_{ij}|$, the ternary restriction on $s$
+forces $(Bs)_i=0$, and hence $w_i=0$.
+
+The finite matrices separate as follows:
+\begin{center}
+\begin{tabular}{rrl}
+\toprule
+Matrices & Rows with $q>\sum_j|B_{ij}|$ & Remaining argument\\
+\midrule
+334 & 5 & All coordinates of $w$ vanish.\\
+5 & 4 & The last diagonal equation forces zero.\\
+33 & 0 & Check the 243 ternary right-hand sides.\\
+\bottomrule
+\end{tabular}
+\end{center}
+For the middle row, four unknowns already vanish. The remaining row is
+$128w_i=315s_i$. Parity and $s_i\in\{-1,0,1\}$ force $s_i=0$, and then
+$w_i=0$.
+
+For each of the last 33 matrices, direct integer evaluation of the
+five divisibility conditions for all $3^5=243$ vectors $s$ leaves only
+$s=0$. The adjugate identity then gives $w=0$. The saved certificate
+lists every matrix, determinant, and adjugate, so these are explicit
+finite statements rather than an assumption about an optimizer.
+The complete native calculation also checks all
+$372\cdot243=90396$ matrix/right-hand-side combinations, with no bound
+imposed on the integer unknowns $w$~\cite{research240}.
+\end{proof}
+
+\begin{proposition}\label{prop:five-erasure240}
+The neighbour counts at any 507 of the 512 vertices of $Q_9$ determine
+a binary vertex selection uniquely. If the selected parity side is
+known, any 251 of the 256 opposite-side counts suffice.
+\end{proposition}
+\begin{proof}
+Subtract the indicators of two selections agreeing on the observed
+counts. Their difference $f$ takes values in $\{-1,0,1\}$, and $Af$
+vanishes outside at most five positions. At most four positions are
+handled by Proposition~\ref{prop:four-erasure239}.
+
+If the five positions have mixed parity, restrict $f$ to each parity
+side. Adjacency sends each restriction to the opposite side, where
+its count differences are supported on at most four positions.
+The four-count result makes both restrictions zero.
+
+It remains to consider five positions of one parity. If they contain
+no distance-eight pair, Proposition~\ref{prop:eight-erasure239} applies.
+Otherwise evaluate the cube inverse at their antipodes. With
+$w_i=Af(p_i)$ and $s_i=f(\overline{p_i})$, its coefficients give exactly
+$Mw=315s$ from Lemma~\ref{lem:five-matrix240}. Therefore $Af=0$, and the
+inverse gives $f=0$. For a selection on a known parity side, the 256
+counts on that side are automatically zero, leaving only the five
+unobserved opposite-side counts.
+\end{proof}
+
+The arithmetic and geometric verification have different scopes.
+The native audit covers the 6435 column descriptions and the 90396
+exact arithmetic cases. An independent enumeration of all
+$\binom{254}{3}=2699004$ triples of actual even vertices outside the
+fixed pair gives exactly the same 372 distance matrices. A separate source comparison confirms that
+the generated 372 Lean statements have the matrices and coefficients
+of this catalogue. Each generated proof checks its adjugate identities
+and finite divisibility implication, then concludes that every integer
+solution is zero. All 372 implications have passed Lean checking, with their
+source-bound proof receipts retained. The catalogue coverage, its connection to arbitrary cube
+positions, and the mixed-parity reduction remain written arguments
+supported by native computation. The fully assembled Lean theorem on
+the actual cube still covers three missing counts.
+
+Consequently two different binary selections must change at least six
+neighbour counts. Changing one selected vertex changes exactly nine
+counts, so the minimum lies between six and nine. A possible failure
+with six through eight missing counts must contain a distance-eight
+pair, by Proposition~\ref{prop:eight-erasure239}. These are constraints
+on reconstruction of vertex selections. They produce neither a longer
+snake nor an improved global snake-length bound.

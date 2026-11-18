@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 239}
+\date{Research state after round 240}
 \begin{document}
 \maketitle
 
@@ -38,7 +38,7 @@ seek any improvement above 191, beginning with a 192-edge snake. Their
 restricted exclusions do not establish the global optimum.
 
 The current reconstruction argument recovers a binary selection from
-any 508 labelled neighbour counts. It also permits up to eight missing
+any 507 labelled neighbour counts. It also permits up to eight missing
 counts when no pair of missing positions is at distance eight. These
 are written cube deductions with checked arithmetic; the fully assembled
 Lean cube theorem currently covers three missing counts.
@@ -297,8 +297,9 @@ An odd marked edge set $F$ must differ from that pattern somewhere, giving
 \sum_{e\in F}\delta_e-\sum_{e\in E(C)\setminus F}\delta_e\le|F|-1.
 \]
 Lean checks the arbitrary closed-walk argument. These inequalities are
-classical~\cite{barahona1986}. The preceding finite comparison gave exact
-cardinality bounds 95.955197 and 95.763979, excluding 95-edge partners.
+classical~\cite{barahona1986}. The preceding finite comparison gave saved exact rational
+cardinality bounds approximately 95.955197 and 95.763979, excluding
+95-edge partners.
 
 \paragraph{Why the continuous model alone remains insufficient.}
 The exact fractional feasible cardinalities are
@@ -351,9 +352,10 @@ The audited counts, with depth measured in prefix edges, are
 \end{array}
 \]
 There are no pending leaves. Root 0 has 31 excluded leaves and root 78
-has 22; their largest exact bounds are 93.963070 and 93.984077.
+has 22; their largest saved rational bounds are approximately
+93.963070 and 93.984077.
 The unique depth-four survivor was $(78,206,198,196,197)$, followed
-necessarily by 213 and then by either 215 or 221. The final bounds are
+necessarily by 213 and then by either 215 or 221. The final bounds are approximately
 93.979475 and 93.414818. The initial low-memory interruption preserved
 45 completed new queries and 20 pending prefixes; continuation completed
 the cover. The failed batch remains recorded separately.
@@ -893,10 +895,10 @@ on the missing positions is required by this argument.
 
 Eight is sharp under that condition. The nine neighbours of one vertex
 have pairwise distance two, yet losing all nine counts conceals whether
-that vertex is selected. The unrestricted result above remains four
-missing counts; whether every set of five through eight missing counts
-can be tolerated is unresolved. Any failure in that range must contain
-a pair of missing positions at distance eight.
+that vertex is selected. The unrestricted result at this stage covers four missing counts;
+the following section extends it to five. Whether every set of six
+through eight missing counts can be tolerated remains unresolved. Any
+failure in that range must contain a pair at distance eight.
 
 The classification was also checked independently. Grouping the nine
 coordinate columns by their three-bit patterns gives 1149 valid
@@ -915,9 +917,80 @@ Lean theorem.
 
 Thus two different selections must alter at least five neighbour
 counts. Changing one selected vertex alters nine, so the smallest
-possible number remains between five and nine. Recovery alone does
+possible number at this stage is between five and nine; the following
+section raises the lower value to six. Recovery alone does
 not ensure that a selection is a connected induced path. No longer
 snake or new global bound follows from this result.
+
+\section{Why five missing counts can be recovered}
+The neighbour counts at any 507 of the 512 vertices of $Q_9$ determine
+the selected vertices uniquely. If the selection lies on a known
+parity side, any 251 of the 256 counts on the opposite side suffice.
+This extends the preceding four-count result.
+
+Subtract two selections that agree on the known counts. The difference
+$f$ has entries $-1,0,1$, and its neighbour sums can be nonzero only
+at the five missing positions. If the positions have mixed parity,
+split $f$ by parity: each part has at most four missing counts, already
+covered. If the five positions contain no pair at distance eight,
+the preceding eight-count result applies.
+
+The remaining case has five positions of one parity and a pair at
+distance eight. Move one endpoint of that pair to zero and the other
+to $(1,1,1,1,1,1,1,1,0)$. The remaining three positions give one of eight
+three-bit patterns in each of the first eight coordinates. Count the
+occurrences of each pattern; even parity fixes their ninth bits.
+This describes every possible configuration with 6435 finite choices.
+Discarding repeated positions and identifying equal distance matrices
+leaves 372 matrices to consider~\cite{research240}.
+
+Apply the inverse formula at the five antipodes. The unknown missing
+count differences $w$ satisfy
+\[
+Mw=315s,\qquad w\in\mathbb Z^5,\qquad s\in\{-1,0,1\}^5.
+\]
+The diagonal of $M$ is 128, and the other coefficients are
+$-16,8,-10,35$ at distances $2,4,6,8$. Multiplication by its adjugate
+$B$ gives $Dw_i=315(Bs)_i$, where $D>0$ is its determinant. Hence
+$q=D/\gcd(D,315)$ must divide every $(Bs)_i$. If
+\[
+q>\sum_j|B_{ij}|,
+\]
+then the permitted values of $s$ make $(Bs)_i$ too small to be a nonzero
+multiple of $q$, forcing $w_i=0$.
+
+This inequality settles all five unknowns for 334 matrices. It settles
+four unknowns for another five matrices; the last equation becomes
+$128w_i=315s_i$, which vanishes by parity. For the remaining 33 matrices,
+the 243 possible ternary vectors can be checked directly: only zero
+satisfies all five divisibility conditions. Thus every missing count
+difference vanishes, and the inverse gives $f=0$ everywhere.
+
+The saved native calculation covers all 90396 matrix/right-hand-side
+cases using exact integers. The 372 corresponding Lean statements
+match the saved matrices and all passed Lean checking. A separate
+enumeration of all 2699004 triples of actual vertices outside the fixed
+pair recovers the same 372 matrix types. The passage from arbitrary cube positions to those
+matrices and the parity reduction remain written arguments with
+native computational support. The complete actual-cube Lean theorem
+still covers three missing counts.
+
+Two different selections must therefore change at least six neighbour
+counts. A single-vertex change alters nine, leaving the minimum between
+six and nine. A failure with six, seven, or eight missing counts would
+have to contain a pair at distance eight. This reconstruction result
+does not supply a longer snake or change the global length bound.
+
+
+The integer argument cannot be extended to eight positions without
+further restrictions. One explicit eight-point configuration has a
+nonzero integer solution whose count differences all have absolute
+value 21. The displayed matrix solution passed Lean. Actual differences
+of neighbour counts cannot exceed nine, so this is no recovery
+counterexample. A separate written symmetry argument excludes every
+nonzero solution for that configuration whose count differences are
+bounded by nine. It explains why subsequent
+arguments should retain the count limit or use further inverse equations.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
@@ -933,15 +1006,17 @@ The maintained global interval is $191\le a(9)\le231$, with an
 independent rebuild of the completed upper-bound assembly pending.
 Resolving the proposed value 196 still requires both its witness and
 a universal 197-edge exclusion. For reconstruction, the next unresolved
-case has five missing positions of one parity containing a distance-eight
-pair. Fixing that pair by cube symmetry reduces a complete description
-cover to $\binom{15}{7}=6435$ coordinate-column multiplicities. This
-reduction is proposed for the next investigation; it has not been searched.
-Research is paused after round 239.
+sizes are six through eight missing counts. The structural note reduces
+each connected distance-eight component to generator coordinates in a
+smaller cube. A complete argument must retain actual count bounds and
+account for nonzero couplings between disconnected components. Completing
+the cube-level Lean assembly for four and five missing counts is also
+valuable. Full written-source review was completed in round 240.
+Research is paused after round 240.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 239.
+in the companion manuscript and milestones through round 240.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1079,6 +1154,12 @@ counts}. Research milestone 238, 18 November 2026.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Four missing neighbour counts and a
 conditional eight-count theorem}. Research milestone 239, 18 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/239-four-count-recovery}.
+
+\bibitem{research240}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Five-count recovery and structural
+limits of the antipodal matrix method}. Research milestone 240,
+18 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/240-five-count-recovery}.
 
 \end{thebibliography}
 \end{document}

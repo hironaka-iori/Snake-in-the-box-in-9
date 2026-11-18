@@ -1,0 +1,58 @@
+\section{Why five missing counts can be recovered}
+The neighbour counts at any 507 of the 512 vertices of $Q_9$ determine
+the selected vertices uniquely. If the selection lies on a known
+parity side, any 251 of the 256 counts on the opposite side suffice.
+This extends the preceding four-count result.
+
+Subtract two selections that agree on the known counts. The difference
+$f$ has entries $-1,0,1$, and its neighbour sums can be nonzero only
+at the five missing positions. If the positions have mixed parity,
+split $f$ by parity: each part has at most four missing counts, already
+covered. If the five positions contain no pair at distance eight,
+the preceding eight-count result applies.
+
+The remaining case has five positions of one parity and a pair at
+distance eight. Move one endpoint of that pair to zero and the other
+to $(1,1,1,1,1,1,1,1,0)$. The remaining three positions give one of eight
+three-bit patterns in each of the first eight coordinates. Count the
+occurrences of each pattern; even parity fixes their ninth bits.
+This describes every possible configuration with 6435 finite choices.
+Discarding repeated positions and identifying equal distance matrices
+leaves 372 matrices to consider~\cite{research240}.
+
+Apply the inverse formula at the five antipodes. The unknown missing
+count differences $w$ satisfy
+\[
+Mw=315s,\qquad w\in\mathbb Z^5,\qquad s\in\{-1,0,1\}^5.
+\]
+The diagonal of $M$ is 128, and the other coefficients are
+$-16,8,-10,35$ at distances $2,4,6,8$. Multiplication by its adjugate
+$B$ gives $Dw_i=315(Bs)_i$, where $D>0$ is its determinant. Hence
+$q=D/\gcd(D,315)$ must divide every $(Bs)_i$. If
+\[
+q>\sum_j|B_{ij}|,
+\]
+then the permitted values of $s$ make $(Bs)_i$ too small to be a nonzero
+multiple of $q$, forcing $w_i=0$.
+
+This inequality settles all five unknowns for 334 matrices. It settles
+four unknowns for another five matrices; the last equation becomes
+$128w_i=315s_i$, which vanishes by parity. For the remaining 33 matrices,
+the 243 possible ternary vectors can be checked directly: only zero
+satisfies all five divisibility conditions. Thus every missing count
+difference vanishes, and the inverse gives $f=0$ everywhere.
+
+The saved native calculation covers all 90396 matrix/right-hand-side
+cases using exact integers. The 372 corresponding Lean statements
+match the saved matrices and all passed Lean checking. A separate
+enumeration of all 2699004 triples of actual vertices outside the fixed
+pair recovers the same 372 matrix types. The passage from arbitrary cube positions to those
+matrices and the parity reduction remain written arguments with
+native computational support. The complete actual-cube Lean theorem
+still covers three missing counts.
+
+Two different selections must therefore change at least six neighbour
+counts. A single-vertex change alters nine, leaving the minimum between
+six and nine. A failure with six, seven, or eight missing counts would
+have to contain a pair at distance eight. This reconstruction result
+does not supply a longer snake or change the global length bound.

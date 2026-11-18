@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "module": "FiveMatrix240_048",
+  "source": "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\lean\\FiveMatrix240_048.lean",
+  "source_sha256": "60bb61ba9fa7712f7ff3d086009be5a8a3f232246b03ebf390aefe0752b9c240",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\data\\FiveMatrix240_048-execution.json": "e46705a4dfcdc5d588ace7a877fded03a73ad602ae81cc0d5ddd6571a98dba23",
+    "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\lean\\FiveMatrix240_048.lean": "60bb61ba9fa7712f7ff3d086009be5a8a3f232246b03ebf390aefe0752b9c240",
+    "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\logs\\FiveMatrix240_048-1795012197196384400\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\lean\\FiveMatrix240_048.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\logs\\FiveMatrix240_048-1795012197196384400\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2524278784,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 84,
+    "snapshot_seconds": 0.0
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2516008960,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 41548,
+          "ParentProcessId": 7288,
+          "PrivatePageCount": 48095232,
+          "WorkingSetSize": 24293376
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 84,
+      "snapshot_seconds": 0.015999999988707714
+    },
+    {
+      "free_bytes": 2295955456,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 41548,
+          "ParentProcessId": 7288,
+          "PrivatePageCount": 109236224,
+          "WorkingSetSize": 270147584
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 86,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 41548,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.1089999999967404,
+  "axioms": [
+    {
+      "theorem": "FiveRecovery240.zero_solution_048",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "885617f3d76ce98bf1502922c49d197caa3c3988ccc47f4b53f839777fefaab7",
+  "object": "E:\\Snake-in-a-box\\milestones\\240-five-count-recovery\\build\\FiveMatrix240_048.olean",
+  "olean_sha256": "7dd81b1acc13ce9204d991bde3a76c5eeb4d8b87881dfb79ac2c8b079e981347"
+}

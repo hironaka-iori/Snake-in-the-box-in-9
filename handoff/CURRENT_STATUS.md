@@ -1,38 +1,80 @@
-# Round 239: stop after publication
+Artifact paths below are relative to milestones/240-five-count-recovery unless stated otherwise.
 
-The requested rounds 237, 238 and 239 are complete. Publish this checkpoint and pause the goal. Do not begin round 240 without a new resumption request.
+# Round 240 handoff: publish, then pause
+
+The user instructed a pause after Round 240. Finish this round's verification and publication, record the actual receipts, and pause the goal. Do not begin Round 241 without an explicit resumption request.
+
+All 372 matrix implications and the explicit eight-point witness passed Lean. The separate direct enumeration covered 2,699,004 vertex triples and recovered the same 372 classes. Source-bound receipts are retained. Publish the checkpoint, then use the goal tool to record the requested pause.
 
 ## Mathematical frontier
 
-- Round 237 excludes the next majority exchange family relative to every saved seed: remove one vertex from a saved 96-vertex parity class and add two. The recorded enumerations cover 177,062,400 descriptions, with 623 distinct final survivors excluded by explicit cuts. All 623 numerical cut inequalities passed Lean. Coverage and the complete numerical-cut-to-path connection retain their stated native/written scope. Together with earlier minority covers, a 192-edge candidate shares at most 186 vertices with every saved 191-edge seed or its cube-isometric copies. It must omit at least six old vertices and add at least seven new ones.
-- Round 238 proves recovery of a binary selection in Q9 from any 509 of its 512 labelled neighbour counts. The complete actual-cube theorem is Lean-checked. The known-parity specialization needs 253 of 256 opposite-side counts and is a written corollary.
-- Round 239 proves, in a complete written argument, recovery from any 508 counts. A known parity side needs 252 of 256 counts. Two independent geometric enumerations agree on 87 distance matrices, and all 87 integer zero-solution implications passed Lean. The geometric classification, parity decomposition and final cube assembly remain written, with native coverage evidence.
-- Up to eight missing counts are recoverable if no missing pair is at Hamming distance eight. The supporting list-sum and integer-row arguments passed Lean; their cube application remains written. Nine missing counts can conceal a change, even under that distance condition: the nine neighbours of one vertex conceal its addition to a binary selection.
+- Any 507 of the 512 labelled neighbour counts of \(Q_9\) determine a binary selection uniquely. If the selected parity side is known, any 251 of the 256 opposite-side counts suffice. This is a written deduction supported by a complete native geometric and exact arithmetic audit.
+- The geometric reduction fixes a distance-eight pair at 0 and 255. It covers 6,435 coordinate-column descriptions, 5,160 valid descriptions, and 372 distance matrices. The saved arithmetic evaluates all 90,396 ternary right-hand sides and finds no nonzero integer solution, with no bound imposed on the integer unknowns.
+- The independent source review confirms all 372 generated literal systems and adjugate identities. A cofactor argument settles 334 matrices in all five coordinates and five matrices in four coordinates; parity settles the fifth coordinate in those five. The remaining 33 matrices were independently checked over 8,019 ternary cases.
+- All 372 literal matrix implications passed Lean checking. The geometric catalogue cover, its connection to arbitrary missing positions, and the final five-count cube assembly remain written/native steps.
+- The fully assembled theorem in Lean on the actual cube still covers three missing counts: recovery from 509 of 512 counts. The Round 239 four-count theorem has a complete written proof, two native geometric enumerations, and 87 accepted matrix implications. Its complete cube assembly also remains open.
+- Up to eight missing counts are recoverable if no pair of missing positions has Hamming distance eight. This is a written cube deduction supported by the generic list-sum and integer-row Lean results recorded in Round 239.
+- The minimum number of changed neighbour counts between two different binary selections is now between six and nine. One selected-vertex change alters exactly nine counts. The unrestricted six-, seven-, and eight-count questions remain unresolved.
 
-The smallest possible number of altered neighbour counts for two distinct binary selections is therefore between five and nine. The working conjecture is nine, with sizes five through eight unresolved in general. These are reconstruction properties; they provide no connectivity guarantee, longer snake, or new snake-length bound.
+These reconstruction results give no new snake witness or global snake-length bound.
 
-## Current bounds and retained searches
+## Structural findings that constrain continuation
 
-The maintained interval is 191 <= a(9) <= 231. The contributor theorem at revision 478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088 has a successful saved final assembly and standard-axiom audit. A fresh independent full rebuild remains pending. The 196 conjecture is unresolved. Global upper-bound research remains with the collaborators.
+Read ../milestones/240-five-count-recovery/STRUCTURAL_NOTE.md before proposing a larger unbounded matrix enumeration.
 
-At exactly four minority replacements, class 139 is natively excluded; classes 7, 6 and 0 remain UNKNOWN after their recorded 40-second runs; 141 classes are unqueried. The next majority family removes two old vertices and inserts three. No current reconstruction result upgrades an unresolved search outcome. All frozen earlier states are inherited and hash-checked in data/completion.json.
+The distance-eight graph within one parity side is the folded cube generated by \(g_i=J+e_i\). The only nonempty relation among distinct generators uses all nine. Consequently its odd girth is nine, and every induced subgraph with at most eight vertices is bipartite.
 
-## Next step after resumption
+A connected set of \(k\le8\) missing positions admits generator coordinates from a spanning tree, using at most \(k-1\) independent labels. Its entire distance-eight graph embeds in an ordinary cube on those labels. A difference involving \(t\) generator coordinates has original Hamming distance \(t\) for even \(t\), and \(9-t\) for odd \(t\).
 
-Read NEXT_STEP.md. The next five-count question reduces to five positions of one parity containing a distance-eight pair. Fixing that pair by cube symmetry yields a complete cover of 6,435 coordinate-column descriptions. This cover is derived but has not been searched. Any surviving antipodal system requires full reconstruction and direct adjacency verification at all 512 vertices. Singular matrices need separate treatment. A counterexample to count recovery would not automatically give a longer snake.
+The stronger unbounded-integer exclusion fails already at eight positions. The positions
 
-Another useful task is the remaining Lean geometric bridge for the four-count theorem. Full manuscript review last occurred at round 230 and is due at round 240.
+\[
+(0,510,509,3,507,5,6,504)
+\]
 
-## Saved evidence and documents
+form a three-dimensional generator cube. With
 
-- MATHEMATICAL_NOTE.md: complete written proof, arithmetic cases and scope.
-- data/four-count-audit.json: 11,440 column compositions, 1,149 valid ordered descriptions, 105 point-set orbits, 87 metric classes and 7,047 right-hand-side cases.
-- data/independent-geometry.json: independent direct enumeration of 2,731,135 triples, with the same 87 metric classes.
-- data/matrices-replay.json: all 87 matrix statements accepted.
-- data/dominance-replay.json: the three supporting arithmetic modules accepted.
-- logs/source-review.json and logs/final-document-review.json: bounded reviews, with authorship limits stated.
-- data/completion.json and data/publication-manifest.json: completion evidence and exact publication bytes.
+\[
+\chi=(1,-1,-1,1,-1,1,1,-1),
+\]
 
-The authoritative originals remain D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and snake9_frontier_explanation.tex, with exact paper/ mirrors. Both compiled successfully. All three authors and the original hypersetup are preserved. The editor tab remains open.
+their antipodal matrix satisfies \(H\chi=-15\chi\). Thus \(w=21\chi\), \(s=-\chi\) solve \(Hw=315s\). Every amplitude is 21, exceeding the required bound \(|w_i|\le9\) for an actual selection difference. This is not a recovery counterexample or a snake witness.
 
-Retain one heavy worker/compiler, 1 GiB startup free memory, 768 MiB reserve, and a 256 MiB private-memory ceiling. Lean uses one thread and 60 seconds per module. Failed attempts and accepted source-bound receipts are separate. Preserve unrelated edits to .gitignore and milestone 50. Use the saved guarded replay scripts rather than raising limits. No round 240 search is running.
+The written Walsh argument classifies every integer solution with ternary right-hand side for that matrix: only zero and the two displayed sign choices with amplitudes 21 occur. Hence this eight-point configuration remains recoverable under the actual amplitude bound. A separate written argument excludes an entire distance-eight star with one centre and at most seven leaves, even without an amplitude bound.
+
+The finite source lean/EightCubeObstruction240.lean concerns the explicit oversized solution only. It passed Lean with eight axiom reports; its receipt is data/EightCubeObstruction240-audit.json. The Walsh classification and star-family deduction are written arguments without a new Lean assembly. Disconnected distance-eight components retain nonzero even matrix couplings; a proof for an isolated component cannot be applied without accounting for them.
+
+## Bounds and inherited search states
+
+The maintained interval is \(191\le a(9)\le231\). The contributor result at revision 478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088 has a saved successful final assembly and standard-axiom audit. A fresh independent complete rebuild remains pending. The conjectured value 196 remains unresolved. Global upper-bound work remains with the collaborators.
+
+Use ../239-four-count-recovery/data/completion.json as the frozen source of inherited statuses. In particular:
+
+- At exactly four minority replacements, class 139 is natively excluded; classes 7, 6, and 0 remain UNKNOWN; 141 classes are unqueried.
+- The next majority exchange family removes two old vertices and inserts three. Its status is not changed by count recovery.
+- The saved-seed overlap ceiling remains 186 under the previously stated native/written family covers and 623 accepted numerical cut inequalities. The complete family-to-path Lean assembly remains separate.
+
+Do not reinterpret an UNKNOWN run as an exclusion, or a reconstruction theorem as a completed construction search.
+
+## Files and publication duties
+
+- MATHEMATICAL_NOTE.md: geometric reduction, cofactor proof, recovery deduction, and verification boundaries.
+- STRUCTURAL_NOTE.md: connected generator coordinates, the amplitude-21 obstruction, bounded Walsh classification, and star family.
+- paper-addition.tex and short-addition.tex: accepted arithmetic and written cube argument with explicit verification scope.
+- data/five-count-audit.json: complete primary catalogue and exact native arithmetic.
+- data/independent-geometry.json: separate direct enumeration of all 2,699,004 actual vertex triples, matching all 372 classes.
+- logs/five-source-review.md and .json: independent source comparison and residual arithmetic.
+- logs/full-review-part2.md and .json: complete manuscript review of immutable lines 4401--8800; the root worker combines the assigned review parts.
+
+All acceptance claims above are backed by the corresponding completed receipts. Keep the distinction between literal algebra, native geometry, written cube deductions, and the assembled three-count Lean theorem. Preserve all frozen older files. Publication metadata, document compilation, authoritative-original updates, and the goal pause are owned by the root worker.
+
+After the pause, follow ../milestones/240-five-count-recovery/NEXT_STEP.md only upon explicit resumption. No Round 241 work is authorized by this handoff.
+
+
+## Publication and review record
+
+The complete written source was reviewed at Round 240: all 13,254 pre-edit main lines and all 1,084 pre-edit explanation lines, followed by review of the integrated changes. The next full review is due at Round 250. This does not independently rebuild the archived upper-bound dependency chain. All three authors and local hypersetup settings are retained. The original editor files and paper mirrors match. Compilation outcomes are recorded separately in data/.
+
+The contributor branch was refreshed at revision d32557fb4eec570dd69267ffc23768517541f9ae. Its new trackB report explicitly claims no new bound or Lean build. It investigates local-floor limitations toward conditional 220; these numerical observations were read without independent replay. The completed 231 source is unchanged.
+
+Use one heavy worker/compiler, at least 1 GiB free memory at startup, 768 MiB reserve, 256 MiB private-memory ceiling, and one Lean thread with 60 seconds per module. Preserve unrelated edits to .gitignore and milestone 50. No Round 241 search is running.
