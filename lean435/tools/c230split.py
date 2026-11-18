@@ -24,7 +24,7 @@ so no unit is done twice and a dead machine's units come back. Order: finals, th
 sources this machine already has first, then largest item first), then preps (largest first) when fewer
 than 2 x --cpus x (stealers seen in the claims) unclaimed parts are left in the farm; then preps go
 before parts. Cost per unit: prep 2 cores and 3 GB (bigreplay --jobs 3), part 1 core and
-its predicted peak (1.3 x the largest RssAnon of the item's published parts, 2.5-6.5 GB; 6.0 GB while
+its predicted peak (1.3 x the largest RssAnon of the item's published parts, 4.4-6.5 GB; 6.0 GB while
 fewer than 2 are published; measured max 5.81 GB over 304 parts), final 1 core and 4 GB, one final at a time.
 Units start while the cores (--cpus) and the predicted memory (--mem-gb) allow; beyond --mem-gb, up to
 --over-n parts may start while MemAvailable covers them + --over-free-gb (2), and the youngest of them is
@@ -70,7 +70,6 @@ def steal(a):
     running = {}                                         # unit -> (Popen, cpus, gb, t0, logfile)
     failed = {}
     preempted, cooldown = set(), {}
-    low_n = 0
     published, tips = set(), {}
     local_items = {n for n, _e in items if os.path.isdir(SF.wd(n))}
     last = dict(tips=0, pub=0, claims=0, beat=0)
@@ -126,7 +125,8 @@ def steal(a):
 
     def part_gb(n):
         # 1.3 x the largest peak of ALL its published parts (later parts are often larger: V012034A45436
-        # k10 3.9 GB against 3.7 for k0-k9), at least 2.5 GB, at most 6.5; 6.0 GB with fewer than 2 published
+        # k10 3.9 GB against 3.7 for k0-k9; V012314A43645 k6 4.1 GB against 3.1 predicted), at least 4.4 GB
+        # (p90 of 304 measured parts), at most 6.5; 6.0 GB with fewer than 2 published
         refs = sorted(r for r in tips if r.startswith(n + '-k'))
         key = tuple(tips[r] for r in refs)
         if peak_cache.get(n, (None,))[0] != key:
@@ -139,7 +139,7 @@ def steal(a):
                     peaks[tips[r]] = max(json.loads(l)['anon_gb'] for l in blob(ent['build-log.jsonl']).splitlines() if l.strip())
                 except Exception:  # noqa: BLE001
                     pass
-            g = min(6.5, max(2.5, 1.3 * max(peaks.values()))) if len(peaks) >= 2 else 6.0
+            g = min(6.5, max(4.4, 1.3 * max(peaks.values()))) if len(peaks) >= 2 else 6.0   # floor: p90 of 304 parts
             peak_cache[n] = (key, g, peaks)
         return peak_cache[n][1]
 
@@ -182,6 +182,50 @@ def steal(a):
                 out.append(('final:' + n, 'final', n, None))
         return out
 
+    # memory watchdog, every second, independent of the main loop (which blocks in claim settles and git):
+    # two readings in a row below --over-kill-gb free (cgroup-aware) -> kill the youngest over part, else the
+    # youngest part, else the youngest adopted part; it is requeued by the main loop (not a failure). The
+    # kernel's OOM killer would take the largest process; unit processes also get oom_score_adj (over parts
+    # 900, parts 300, prep/final 100) so that, if it fires first anyway, it takes an over part.
+    import threading
+    mx = threading.Lock()
+    adopt_killed = set()
+
+    def watchdog():
+        n = 0
+        while True:
+            time.sleep(1)
+            try:
+                n = n + 1 if P.mem_available_gb() < a.over_kill_gb else 0
+            except Exception:  # noqa: BLE001
+                n = 0
+            if n < 2:
+                continue
+            n = 0
+            pids, u = [], None
+            with mx:
+                ov = [x for x, v in running.items() if v[5] and x not in preempted]
+                pa = [x for x in running if x.startswith('part:') and x not in preempted]
+                if ov or pa:
+                    u = max(ov or pa, key=lambda x: running[x][3])
+                    preempted.add(u)
+                    pids = P.descendants(running[u][0].pid) + [running[u][0].pid]
+                else:
+                    ad = [x for x in adopted if x.startswith('part:') and x not in adopt_killed]
+                    if ad:
+                        u = max(ad, key=lambda x: adopted[x])
+                        adopt_killed.add(u)
+                        pids = P.descendants(adopted[u]) + [adopted[u]]
+            for c_ in pids:
+                try:
+                    os.kill(c_, 9)
+                except OSError:
+                    pass
+            if u:
+                log(f'{u}: {P.mem_available_gb():.1f} GiB free: preempted')
+                time.sleep(5)                            # let the memory come back before the next decision
+    threading.Thread(target=watchdog, daemon=True).start()
+
     while True:
         now = time.time()
         try:
@@ -214,7 +258,8 @@ def steal(a):
             pr, c, g, t0, lf, ov = running[u]
             if pr.poll() is None:
                 continue
-            del running[u]
+            with mx:
+                del running[u]
             if u in preempted:
                 preempted.discard(u)
                 log(f'{u}: stopped (preempted or lost its claim)')
@@ -232,42 +277,17 @@ def steal(a):
             last['tips'] = 0
         for u, pid in list(adopted.items()):
             if not os.path.exists(f'/proc/{pid}'):
-                del adopted[u]
-                log(f'{u}: adopted unit ended')
-                claims.published([u])                  # failed or not: its outputs decide (tips) after the keep time
-                last['tips'] = 0
-        # over units (started beyond --mem-gb on measured free memory): below --over-kill-gb MemAvailable the
-        # youngest is killed and goes back to the queue (not counted as a failure)
-        # (if no over unit runs: the youngest part, adopted or not, rather than the kernel's OOM killer, which
-        # takes the largest process, i.e. usually the oldest part)
-        low = P.mem_available_gb() < a.over_kill_gb
-        low_n = low_n + 1 if low else 0                   # two readings in a row (5 s apart): no transients
-        if low_n >= 2:
-            low_n = 0
-            ov = [u for u, v in running.items() if v[5] and u not in preempted]
-            parts_ = [u for u in running if u.startswith('part:') and u not in preempted]
-            if ov or parts_:
-                u = max(ov or parts_, key=lambda x: running[x][3])
-                preempted.add(u)
-                for c_ in P.descendants(running[u][0].pid) + [running[u][0].pid]:
-                    try:
-                        os.kill(c_, 9)
-                    except OSError:
-                        pass
-                log(f'{u}: {P.mem_available_gb():.1f} GiB free: preempting this unit')
-            else:
-                ad = [u for u in adopted if u.startswith('part:')]
-                if ad:
-                    u = max(ad, key=lambda x: adopted[x])           # youngest (highest pid)
-                    for c_ in P.descendants(adopted[u]) + [adopted[u]]:
-                        try:
-                            os.kill(c_, 9)
-                        except OSError:
-                            pass
+                with mx:
                     del adopted[u]
+                if u in adopt_killed:
+                    adopt_killed.discard(u)
                     claims.drop([u])
                     cooldown[u] = time.time() + 900
-                    log(f'{u}: {P.mem_available_gb():.1f} GiB free: preempting this adopted unit')
+                    log(f'{u}: adopted unit preempted, back in the queue')
+                else:
+                    log(f'{u}: adopted unit ended')
+                    claims.published([u])              # failed or not: its outputs decide (tips) after the keep time
+                last['tips'] = 0
         stop = os.path.exists(stopf) or now > t_end
         avail = [x for x in units() if x[0] not in running and x[0] not in adopted and failed.get(x[0], 0) < 2]
         if not avail and not running and not adopted:
@@ -339,8 +359,11 @@ def steal(a):
                                 '--require-remote']
                 lf = os.path.join(logdir, u.replace(':', '_') + '.log')
                 local_items.add(n)
-                running[u] = (subprocess.Popen(cmd, stdout=open(lf, 'a'), stderr=subprocess.STDOUT), c, g, time.time(), lf,
-                              over)
+                adj = 900 if over else 300 if kind == 'part' else 100
+                cmd = ['sh', '-c', f'echo {adj} > /proc/self/oom_score_adj; exec "$@"', 'sh'] + cmd
+                pr = subprocess.Popen(cmd, stdout=open(lf, 'a'), stderr=subprocess.STDOUT)
+                with mx:
+                    running[u] = (pr, c, g, time.time(), lf, over)
                 log(f'{u}: started ({c} core(s), {g:.1f} GB predicted{", over the budget, preemptible" if over else ""})')
         time.sleep(5)
 
