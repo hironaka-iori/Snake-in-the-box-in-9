@@ -237,17 +237,33 @@ def steal(a):
                 last['tips'] = 0
         # over units (started beyond --mem-gb on measured free memory): below --over-kill-gb MemAvailable the
         # youngest is killed and goes back to the queue (not counted as a failure)
+        # (if no over unit runs: the youngest part, adopted or not, rather than the kernel's OOM killer, which
+        # takes the largest process, i.e. usually the oldest part)
         if P.mem_available_gb() < a.over_kill_gb:
             ov = [u for u, v in running.items() if v[5] and u not in preempted]
-            if ov:
-                u = max(ov, key=lambda x: running[x][3])
+            parts_ = [u for u in running if u.startswith('part:') and u not in preempted]
+            if ov or parts_:
+                u = max(ov or parts_, key=lambda x: running[x][3])
                 preempted.add(u)
                 for c_ in P.descendants(running[u][0].pid) + [running[u][0].pid]:
                     try:
                         os.kill(c_, 9)
                     except OSError:
                         pass
-                log(f'{u}: MemAvailable {P.mem_available_gb():.1f} GB: preempting this over unit')
+                log(f'{u}: {P.mem_available_gb():.1f} GiB free: preempting this unit')
+            else:
+                ad = [u for u in adopted if u.startswith('part:')]
+                if ad:
+                    u = max(ad, key=lambda x: adopted[x])           # youngest (highest pid)
+                    for c_ in P.descendants(adopted[u]) + [adopted[u]]:
+                        try:
+                            os.kill(c_, 9)
+                        except OSError:
+                            pass
+                    del adopted[u]
+                    claims.drop([u])
+                    cooldown[u] = time.time() + 900
+                    log(f'{u}: {P.mem_available_gb():.1f} GiB free: preempting this adopted unit')
         stop = os.path.exists(stopf) or now > t_end
         avail = [x for x in units() if x[0] not in running and x[0] not in adopted and failed.get(x[0], 0) < 2]
         if not avail and not running and not adopted:
