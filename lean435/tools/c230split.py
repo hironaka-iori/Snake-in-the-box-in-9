@@ -26,7 +26,9 @@ than 2 x --cpus x (stealers seen in the claims) unclaimed parts are left in the 
 before parts. Cost per unit: prep 2 cores and 3 GB (bigreplay --jobs 3), part 1 core and
 its predicted peak (1.3 x the largest RssAnon of the item's published parts, 2.5-6.5 GB; 6.0 GB while
 fewer than 2 are published; measured max 5.81 GB over 304 parts), final 1 core and 4 GB, one final at a time.
-Units start while the cores (--cpus) and the predicted memory (--mem-gb) allow. Finals publish to
+Units start while the cores (--cpus) and the predicted memory (--mem-gb) allow; beyond --mem-gb, up to
+--over-n parts may start while MemAvailable covers them + --over-free-gb (2), and the youngest of them is
+killed and requeued when MemAvailable falls below --over-kill-gb (1). Finals publish to
 xfer/c230help/w<600+K>. Several part processes of one item share its base modules (Cnf, D*, Ps), built
 once under a lock (splitfarm435.base_lock). The static mode above does not claim: stop the static
 machines and relaunch them with --steal (their published sources and parts are kept and reused). Until
@@ -64,6 +66,7 @@ def steal(a):
     nparts, peak_cache, push_time = {}, {}, {}
     running = {}                                         # unit -> (Popen, cpus, gb, t0, logfile)
     failed = {}
+    preempted, cooldown = set(), {}
     published, tips = set(), {}
     local_items = {n for n, _e in items if os.path.isdir(SF.wd(n))}
     last = dict(tips=0, pub=0, claims=0, beat=0)
@@ -187,6 +190,16 @@ def steal(a):
             if now - last['claims'] > 60:
                 claims.read()
                 last['claims'] = now
+                # the tie rule again at every read (a delayed push): a unit of mine that another machine
+                # claimed first is stopped and dropped (as prod435 run does)
+                for u in [u for u in running if u not in preempted and not claims.wins(u)]:
+                    preempted.add(u)
+                    for c_ in P.descendants(running[u][0].pid) + [running[u][0].pid]:
+                        try:
+                            os.kill(c_, 9)
+                        except OSError:
+                            pass
+                    log(f'{u}: claimed earlier by another machine: stopped')
             if now - last['beat'] > 300 and claims.mine:
                 claims.write()
                 last['beat'] = now
@@ -194,11 +207,16 @@ def steal(a):
             log(f'refresh failed (kept the last state): {str(e)[:200]}')
         # collect
         for u in list(running):
-            pr, c, g, t0, lf = running[u]
+            pr, c, g, t0, lf, ov = running[u]
             if pr.poll() is None:
                 continue
             del running[u]
-            if pr.returncode == 0:
+            if u in preempted:
+                preempted.discard(u)
+                log(f'{u}: stopped (preempted or lost its claim)')
+                claims.drop([u])
+                cooldown[u] = time.time() + 900          # not retried here for 15 min (no thrash)
+            elif pr.returncode == 0:
                 log(f'{u}: done in {time.time() - t0:.0f} s')
                 claims.published([u])
                 if u.startswith('prep:'):               # sources pushed: the LRAT and generation files go
@@ -214,6 +232,19 @@ def steal(a):
                 log(f'{u}: adopted unit ended')
                 claims.published([u])                  # failed or not: its outputs decide (tips) after the keep time
                 last['tips'] = 0
+        # over units (started beyond --mem-gb on measured free memory): below --over-kill-gb MemAvailable the
+        # youngest is killed and goes back to the queue (not counted as a failure)
+        if P.mem_available_gb() < a.over_kill_gb:
+            ov = [u for u, v in running.items() if v[5] and u not in preempted]
+            if ov:
+                u = max(ov, key=lambda x: running[x][3])
+                preempted.add(u)
+                for c_ in P.descendants(running[u][0].pid) + [running[u][0].pid]:
+                    try:
+                        os.kill(c_, 9)
+                    except OSError:
+                        pass
+                log(f'{u}: MemAvailable {P.mem_available_gb():.1f} GB: preempting this over unit')
         stop = os.path.exists(stopf) or now > t_end
         avail = [x for x in units() if x[0] not in running and x[0] not in adopted and failed.get(x[0], 0) < 2]
         if not avail and not running and not adopted:
@@ -229,10 +260,10 @@ def steal(a):
         busy = claims.busy()
         st = os.statvfs(P.HOME)
         disk_gb = st.f_bavail * st.f_frsize / 2**30
-        free = [x for x in avail if x[0] not in busy and x[0] not in claims.mine]
+        free = [x for x in avail if x[0] not in busy and x[0] not in claims.mine and cooldown.get(x[0], 0) < now]
         cost = lambda u: (2, 3.0) if u.startswith('prep:') else (1, 4.0 if u.startswith('final:') else 6.0)  # noqa: E731
         cpus = a.cpus - sum(v[1] for v in running.values()) - sum(cost(u)[0] for u in adopted)
-        mem = a.mem_gb - sum(v[2] for v in running.values()) - sum(cost(u)[1] for u in adopted)
+        mem = a.mem_gb - sum(v[2] for v in running.values() if not v[5]) - sum(cost(u)[1] for u in adopted)
         nfinal = sum(1 for u in list(running) + list(adopted) if u.startswith('final:'))
         nparts_free = sum(1 for x in free if x[1] == 'part')
         # preps gate everything (most items have no sources yet): they go before parts while the farm's
@@ -254,14 +285,24 @@ def steal(a):
                 continue
             if disk_gb < a.min_disk_gb:
                 continue
-            if c > cpus or (g > mem and (running or batch)):
+            over = False
+            if c > cpus:
                 continue
-            batch.append((u, kind, n, k, c, g))
+            if g > mem and (running or batch):
+                # over admission (parts only): measured free memory covers it, the other over units' predictions
+                # and --over-free-gb; preemptible (see above)
+                nover = sum(1 for v in running.values() if v[5]) + sum(1 for b in batch if b[6])
+                over_gb = sum(v[2] for v in running.values() if v[5]) + sum(b[5] for b in batch if b[6])
+                if kind != 'part' or nover >= a.over_n or P.mem_available_gb() < g + over_gb + a.over_free_gb:
+                    continue
+                over = True
+            batch.append((u, kind, n, k, c, g, over))
             cpus -= c
-            mem -= g
+            if not over:
+                mem -= g
         if batch:
             keep = set(claims.claim([b[0] for b in batch]))
-            for u, kind, n, k, c, g in batch:
+            for u, kind, n, k, c, g, over in batch:
                 if u not in keep:
                     log(f'{u}: claimed by another machine')
                     continue
@@ -275,8 +316,9 @@ def steal(a):
                                 '--require-remote']
                 lf = os.path.join(logdir, u.replace(':', '_') + '.log')
                 local_items.add(n)
-                running[u] = (subprocess.Popen(cmd, stdout=open(lf, 'a'), stderr=subprocess.STDOUT), c, g, time.time(), lf)
-                log(f'{u}: started ({c} core(s), {g:.1f} GB predicted)')
+                running[u] = (subprocess.Popen(cmd, stdout=open(lf, 'a'), stderr=subprocess.STDOUT), c, g, time.time(), lf,
+                              over)
+                log(f'{u}: started ({c} core(s), {g:.1f} GB predicted{", over the budget, preemptible" if over else ""})')
         time.sleep(5)
 
 
@@ -294,6 +336,9 @@ def main():
     ap.add_argument('--no-avoid-static', dest='avoid_static', action='store_false',
                     help='do not skip items a static (non-claiming) machine is working on')
     ap.add_argument('--static-window', type=float, default=60, help='minutes (see static_active)')
+    ap.add_argument('--over-free-gb', type=float, default=2.0, help='MemAvailable kept beyond an over part')
+    ap.add_argument('--over-kill-gb', type=float, default=1.0, help='preempt the youngest over part below this')
+    ap.add_argument('--over-n', type=int, default=2, help='at most this many over parts at once')
     ap.add_argument('--parts', type=int, default=8)
     ap.add_argument('--big-parts', type=int, default=16)
     ap.add_argument('--big', type=float, default=35e6)
