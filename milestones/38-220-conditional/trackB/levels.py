@@ -22,13 +22,13 @@ class LevelEnc(ws.ShareEncoding):
                    if a not in used and b not in used]
         self.atmost(al, self.asum, 'alphaSum')
 
-def item(dirs, Y, a, tl=300, M=12):
+def item(dirs, Y, a, tl=300, M=12, R=4):
     w = window_from_dirs(list(dirs))
     cap = Y - 1 - 2 * M * a
     t0 = time.time()
-    enc = LevelEnc(w, 4, M, cap, a)
+    enc = LevelEnc(w, R, M, cap, a)
     st, sel, cuts, sec = ws.solve(enc, tl)
-    r = dict(dirs=list(dirs), Y=Y, a=a, cap=cap, result=st, seconds=round(time.time() - t0, 1), cuts=cuts)
+    r = dict(dirs=list(dirs), Y=Y, a=a, R=R, cap=cap, result=st, seconds=round(time.time() - t0, 1), cuts=cuts)
     if sel:
         A, SH = exact(w, sel, M); r.update(alpha=sum(A), share=sum(SH), W=24 * sum(A) + sum(SH), sel=sel)
     return r
@@ -36,6 +36,6 @@ def item(dirs, Y, a, tl=300, M=12):
 if __name__ == '__main__':
     dirs = json.loads(sys.argv[1]); Y = int(sys.argv[2]); a = int(sys.argv[3])
     tl = float(sys.argv[4]) if len(sys.argv) > 4 else 300
-    r = item(dirs, Y, a, tl)
+    r = item(dirs, Y, a, tl, R=int(os.environ.get('R', 4)))
     with open(os.path.join(HERE, 'data', 'levels.jsonl'), 'a') as f: f.write(json.dumps(r) + '\n')
     print(json.dumps(r), flush=True)
