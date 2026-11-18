@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "module": "ThreeCoeffCase238_440",
+  "source": "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\lean\\ThreeCoeffCase238_440.lean",
+  "source_sha256": "d4dda6390da30fb41cb8fa3698ef2ec8874989788061fc2cfa13fb071dd4e438",
+  "checker_sha256": "ab40c48c7cc6a66541bd349de64eb911e40933a51529a5659e00fb9714cac462",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\data\\ThreeCoeffCase238_440-execution.json": "ff7abc5876ff6554d8f9ff3edc6f86de403876e320d158f3b35da5c8366b1d6a",
+    "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\lean\\ThreeCoeffCase238_440.lean": "d4dda6390da30fb41cb8fa3698ef2ec8874989788061fc2cfa13fb071dd4e438",
+    "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\scripts\\check_core.py": "ab40c48c7cc6a66541bd349de64eb911e40933a51529a5659e00fb9714cac462",
+    "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\scripts\\native_resources.py": "ba617f091451a08894d487f9fb5d6268dd31483af9c948f91b9b750677812c20",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\logs\\ThreeCoeffCase238_440-1795000463586937000\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\lean\\ThreeCoeffCase238_440.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\logs\\ThreeCoeffCase238_440-1795000463586937000\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1638699008,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 90,
+    "snapshot_seconds": 0.01599999999598367
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1612652544,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 44000,
+          "ParentProcessId": 29216,
+          "PrivatePageCount": 36679680,
+          "WorkingSetSize": 38797312
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.01599999999598367
+    },
+    {
+      "free_bytes": 1383120896,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 44000,
+          "ParentProcessId": 29216,
+          "PrivatePageCount": 121528320,
+          "WorkingSetSize": 276320256
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 91,
+      "snapshot_seconds": 0.01600000000325963
+    }
+  ],
+  "compiler_pid": 44000,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.125,
+  "axioms": [
+    {
+      "theorem": "CubeInverse.coeff_440",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "106653e478cbd187124c8d0ca4b27f72d561ea310be642cc837cd3dcc59fe64a",
+  "object": "E:\\Snake-in-a-box\\milestones\\238-three-count-recovery\\build\\ThreeCoeffCase238_440.olean",
+  "olean_sha256": "4ac768f99890f4d72cfe8ba3b93c71e5a966b5c382b007b06e76553dd42f5de4"
+}

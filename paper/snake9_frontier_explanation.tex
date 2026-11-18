@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 237}
+\date{Research state after round 238}
 \begin{document}
 \maketitle
 
@@ -813,6 +813,33 @@ No longer snake was obtained. The current interval is $191\le a(9)\le231$
 using the separately cited contributor theorem. Research continues
 through rounds 238 and 239 as requested.
 
+
+\section{Three missing observations can also be recovered}
+The recovery result now tolerates three missing counts: any 509 of the
+512 neighbour counts determine the selected set. When one parity side
+is known in advance, 253 of the 256 opposite-side counts suffice.
+
+For the reasoning, compare two selections with the same observed
+counts. Their selection difference is always $-1$, zero or one, and
+their count difference is confined to three positions. Apply the inverse
+formula at the three antipodes. This gives three integer equations with
+diagonal coefficient 128 and off-diagonal coefficients among
+$0,35,-10,8,-16$. The right sides are $-315$, zero or 315.
+Parity and divisibility rule out every nonzero solution: the proof
+separates the cases according to how many off-diagonal coefficients are
+the odd number 35. Thus all three missing count differences vanish,
+and the inverse makes the selections equal.
+
+The 509-count statement and its connection to the actual cube passed
+Lean. The 253-count parity specialization is a written corollary.
+The main paper includes the short mathematical argument; the archive
+also contains the exact coefficient calculations~\cite{research238}.
+It supplies a necessary consistency condition for proposed constructions.
+It does not decide whether a selection is one connected snake.
+Two distinct selections must differ in at least four neighbour counts.
+Whether four missing counts are also recoverable is the next question.
+No longer snake or new global bound was obtained in this round.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
@@ -830,7 +857,7 @@ a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 237.
+in the companion manuscript and milestones through round 238.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -958,6 +985,11 @@ neighbour-count reconstruction}. Research milestone 236, 18 November 2026.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Majority exchanges and reconstruction
 with missing neighbour counts}. Research milestone 237, 18 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/237-parity-reconstruction}.
+
+\bibitem{research238}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Recovery from three missing neighbour
+counts}. Research milestone 238, 18 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/238-three-count-recovery}.
 
 \end{thebibliography}
 \end{document}

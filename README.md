@@ -1,3 +1,13 @@
+# Current result after round 238
+
+Any 509 of the 512 neighbour counts determine a binary selection in Q9. The actual-cube recovery theorem passed Lean, including all125 coefficient triples and the binary-selection corollary. The paper gives a shorter parity-and-divisibility proof. This supplies a construction consistency condition; connectedness and the existence of a longer snake remain unresolved.
+
+The interval remains191--231. Round237's restricted seed-overlap ceiling186 is unchanged. Continue to239, investigate four missing counts using cube symmetry, and stop after239.
+
+Read [the argument](milestones/238-three-count-recovery/THREE_COUNT_REVIEW.md), [evidence](milestones/238-three-count-recovery/data/completion.json), and [handoff](handoff/CURRENT_STATUS.md).
+
+## Earlier checkpoints
+
 # Current result after round 237
 
 The majority-exchange construction is excluded for all 145 saved parity sets: remove one old majority vertex and insert two others. Two archived independent enumerations cover 177,062,400 descriptions and agree on 679 survivors representing 623 distinct sets. The current audit reconstructs their graphs and cuts. All 623 numerical cut inequalities passed Lean; the complete numerical-cut-to-path assembly remains open. The separate native degree exclusions retain their solver-evidence scope.

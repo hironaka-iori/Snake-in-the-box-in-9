@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "module": "CubeInverseBase237",
+  "source": "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean\\CubeInverseBase237.lean",
+  "source_sha256": "8743ae37d0d7b51247957874adab6129ecc9ff2e266435845c1b9c92848ce4c0",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\data\\CubeInverseBase237-execution.json": "93957e83926800e76d1ba3ea7202c4c977a2da751517308aebbe4d9e5a33b7ee",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean\\CubeInverseBase237.lean": "8743ae37d0d7b51247957874adab6129ecc9ff2e266435845c1b9c92848ce4c0",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\logs\\CubeInverseBase237-1794999140313090100\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean\\CubeInverseBase237.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\logs\\CubeInverseBase237-1794999140313090100\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2789785600,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 83,
+    "snapshot_seconds": 0.014999999999417923
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2784387072,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 18948,
+          "ParentProcessId": 47304,
+          "PrivatePageCount": 48123904,
+          "WorkingSetSize": 24793088
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 83,
+      "snapshot_seconds": 0.014999999999417923
+    }
+  ],
+  "compiler_pid": 18948,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 1.0470000000059372,
+  "axioms": [
+    {
+      "theorem": "CubeInverse.self_adjoint",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "CubeInverse.inner_spike",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "theorem": "CubeInverse.of_every",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "log_sha256": "560b5cb077433b046723edabc60b6eb760932af55c41bf14bf93c7727d3ce97e",
+  "object": "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\build\\CubeInverseBase237.olean",
+  "olean_sha256": "ea9ee14c3b0b69697204d8caf30db005236879eadb83cef71783809d9122dd32"
+}
