@@ -69,6 +69,9 @@ if os.path.exists(EXTRA_RENAMES_FILE):
 RENAME_COUNTS = {}
 
 IMPORT_RX = re.compile(r'^import\s+(.*)$')
+# A `meta import X` header line (4.35 syntax, so in no 4.19 source; only a FIXES entry can add one)
+# is kept in the header verbatim: needed where `nat_lit%` runs imported code at elaboration time.
+META_IMPORT_RX = re.compile(r'^meta import\s+[\w.]+$')
 
 
 def find(m):
@@ -100,6 +103,10 @@ def split_header(text):
         m = IMPORT_RX.match(s)
         if m:
             imports += m.group(1).split('--')[0].split()
+            last_imp = i
+            i += 1
+            continue
+        if META_IMPORT_RX.match(s):
             last_imp = i
             i += 1
             continue
