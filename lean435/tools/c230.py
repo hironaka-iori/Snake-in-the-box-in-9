@@ -6,6 +6,7 @@ pipeline through a small adapter.
     c230.py plan [--src milestones/37-230-feasibility/data/k7_uncovered.json.gz] [--out PLAN]
     c230.py cert STEP [cert231 args...]      (what prod435 runs instead of cert435.py; PROD435_CERT)
     c230.py names PLAN [--min-est H]         list the plan's module names (largest first)
+    c230.py shareplan [--src SHAPES.jsonl] [--out PLAN]   the 132 corner-share items (share route of prod435)
 
 Statement of every certificate (the public theorem of module `LocalWindowCert.<NAME>`):
 
@@ -34,13 +35,17 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 DEFAULT_SRC = os.path.join(ROOT, 'milestones', '37-230-feasibility', 'data', 'k7_uncovered.json.gz')
 DEFAULT_PLAN = os.path.join(ROOT, 'milestones', '37-230-feasibility', 'data', 'c230plan.json.gz')
+DEFAULT_SHAPES = os.path.join(ROOT, 'milestones', '37-230-feasibility', 'data', 'k7_shapes_parallel_X26.jsonl')
+DEFAULT_SHAREPLAN = os.path.join(ROOT, 'milestones', '37-230-feasibility', 'data', 'c230share.json.gz')
 HINTS_PER_DRUP_LINE = 8.8          # milestone 37: 14.7 trimmed full-proof hints per DRUP line x 0.6 replay
 SPLIT_HINTS = 20e6                 # SPLIT.md: split above ~20 M core-proof hints
 
 CODE_OF = {(s, s): s for s in range(1, 6)}
-CODE_OF.update({(6, 21): 6, (6, 6): 16, (7, 7): 17, (8, 21): 18})
+CODE_OF.update({(6, 21): 6, (6, 6): 16, (7, 7): 17, (8, 21): 18, (1, 21): 19})
 BOUND_OF = {v: k for k, v in CODE_OF.items()}
-CH = {1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: 'G', 16: '6', 17: '7', 18: 'H'}
+CH = {1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: 'G', 16: '6', 17: '7', 18: 'H', 19: 'F'}
+SHARE_CAP = 29                     # corner share of the 7 centres <= 29 is refuted: share >= 30 (README, item 3)
+FREE_CODE = 19                     # the free count interval (1, 21) of the share keys
 
 
 def decode(syms):
@@ -49,6 +54,27 @@ def decode(syms):
 
 def name_of(k):
     return 'V' + ''.join(map(str, k[0])) + 'A' + ''.join(CH[s] for s in k[1])
+
+
+def share_name(k):
+    """Module name of a corner-share key (dirs, codes, cap): 'W' + dirs + 'A' + codes + 'K' + cap."""
+    return 'W' + ''.join(map(str, k[0])) + 'A' + ''.join(CH[s] for s in k[1]) + 'K' + str(k[2])
+
+
+def cmd_shareplan(src, out):
+    """The 132 corner-share items: every 8-direction (7-centre) shape of the chain, counts free (1, 21),
+    statement `RefutedShare (winOf dirs) [(1, 21)] x 7 12 29` (share >= 30 on every such window)."""
+    shapes = [json.loads(l)['dirs'] for l in open(src)]
+    assert len(shapes) == 132 and all(len(d) == 8 for d in shapes)
+    rows = [dict(kind='5', key=[list(d), [FREE_CODE] * 7], level=SHARE_CAP + 1, free=False, est_hints=200000,
+                 basis='k7c7-corner') for d in shapes]
+    d = dict(summary=dict(target=230, route='K7 corner-share floor: RefutedShare (winOf dirs) [(1,21)]x7 12 29',
+                          share=len(rows), source=os.path.relpath(src, ROOT)),
+             plain=[], share=rows,
+             format=dict(share='kind 5: key [dirs, codes] with code 19 = (1, 21); level = cap + 1'))
+    with gzip.GzipFile(out, 'wb', mtime=0) as g:
+        g.write(json.dumps(d, separators=(',', ':')).encode())
+    print(json.dumps(d['summary']))
 
 
 # ------------------------------------------------------------------ plan
@@ -110,6 +136,24 @@ def apply():
     FK.bound_of = lambda s: BOUND_OF[s]
     C.pname = name_of
     cert231.C.pname = name_of
+    orig_sname = C.sname
+    C.sname = lambda k: share_name(k) if FREE_CODE in k[1] else orig_sname(k)
+    # corner-share keys: the Cnf module states its bounds as the literal intervals (cert233.emit_share writes
+    # `boundsOf syms`, whose meaning for code 19 would be (6, 21), a weaker statement)
+    orig_emit_share = C.emit_share
+
+    def emit_share(meta, out):
+        r = orig_emit_share(meta, out)
+        if FREE_CODE in meta['syms']:
+            p = os.path.join(out, 'LocalWindowCnf', meta['name'] + '.lean')
+            old = 'noncomputable def bounds : List (Nat × Nat) := boundsOf %s' % meta['syms']
+            new = 'noncomputable def bounds : List (Nat × Nat) := %s' % (
+                '[' + ', '.join('(%d, %d)' % BOUND_OF[x] for x in meta['syms']) + ']')
+            t = open(p, encoding='utf-8').read()
+            assert t.count(old) == 1, (p, old)
+            open(p, 'w', encoding='utf-8').write(t.replace(old, new))
+        return r
+    C.emit_share = emit_share
     # the radius of the key being processed (one key per cert231 call in prod435): K.encoding reads
     # K.RADIUS at call time
     orig_enc = K.encoding
@@ -160,6 +204,10 @@ if __name__ == '__main__':
         cmd_plan(src, out)
     elif sys.argv[1:2] == ['cert']:
         cmd_cert(sys.argv[2:])
+    elif sys.argv[1:2] == ['shareplan']:
+        a = sys.argv[2:]
+        cmd_shareplan(a[a.index('--src') + 1] if '--src' in a else DEFAULT_SHAPES,
+                      a[a.index('--out') + 1] if '--out' in a else DEFAULT_SHAREPLAN)
     elif sys.argv[1:2] == ['names']:
         a = sys.argv[2:]
         cmd_names(a[0], float(a[a.index('--min-est') + 1]) if '--min-est' in a else 0)

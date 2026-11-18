@@ -81,4 +81,40 @@ theorem no_window_of_list {L : List (List Nat × List (Nat × Nat))} (hL : AllRe
       coreAlpha p (r + i + 1) ≤ (b.getD i (0, 21)).2) : False :=
   refuted_dir_iv (hL.get _ hk) p r hlen hr hu hu9 hcs hb
 
+/-! ## Key tables of one shape (the K7 cover) -/
+
+/-- A table entry: a canonical shape and its key intervals. -/
+abbrev Entry := List Nat × List (List (Nat × Nat))
+
+/-- Every key of a list of intervals is refuted on the shape `s` (one conjunct per key). -/
+def AllRB (s : List Nat) : List (List (Nat × Nat)) → Prop
+  | [] => True
+  | b :: l => Refuted (winOf s) b ∧ AllRB s l
+
+theorem AllRB.mem {s : List Nat} : ∀ {L : List (List (Nat × Nat))}, AllRB s L → ∀ b ∈ L, Refuted (winOf s) b
+  | [], _, _, hb => absurd hb List.not_mem_nil
+  | _ :: _, ⟨h, hL⟩, b, hb => by
+    rcases List.mem_cons.1 hb with rfl | hb
+    · exact h
+    · exact AllRB.mem hL b hb
+
+theorem allRB_append {s : List Nat} : ∀ {a b : List (List (Nat × Nat))}, AllRB s a → AllRB s b → AllRB s (a ++ b)
+  | [], _, _, hb => hb
+  | _ :: _, _, ⟨h, ha⟩, hb => ⟨h, allRB_append ha hb⟩
+
+/-- Every key of every table entry is refuted. -/
+def AllTab (T : List Entry) : Prop := ∀ e ∈ T, ∀ b ∈ e.2, Refuted (winOf e.1) b
+
+/-- The conjunction form of `AllTab` (one conjunct per entry). -/
+def AllE : List Entry → Prop
+  | [] => True
+  | e :: l => AllRB e.1 e.2 ∧ AllE l
+
+theorem allTab_of : ∀ {T : List Entry}, AllE T → AllTab T
+  | [], _, _, he => absurd he List.not_mem_nil
+  | _ :: _, ⟨h, hT⟩, e, he => by
+    rcases List.mem_cons.1 he with rfl | he
+    · exact AllRB.mem h
+    · exact allTab_of hT e he
+
 end Snake9.C230
