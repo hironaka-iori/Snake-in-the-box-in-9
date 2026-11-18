@@ -21,11 +21,11 @@ even known to be true.
 2. **The best feasible candidate is 229**, by the 230 machinery with the uniform 7-window
    corner-share floor raised from 30 to **60**. Its window premise is *the same table* `tab230`
    that the 230 farm is certifying; only the 132 share certificates change (level 60 instead of 30).
-   - Truth: 7 of a stratified sample of 14 shapes were tested at level 60 with CaDiCaL; 6 are
-     UNSAT (4 to 637 s) and 1 timed out at 900 s. No SAT answer at any level up to 81 on any of
-     the 132 shapes; the lowest validated witness has share 165.
-   - Cost: of order 10^3 G replay hints for the 132 share keys, against about 80 G for the whole
-     230 plan; the hard shapes would need count-splitting. See "Cost".
+   - Truth: a stratified sample of 14 shapes was tested at level 60 with CaDiCaL; 7 are UNSAT
+     (4 to 740 s) and 7 timed out at 900 s. No SAT answer at any level up to 81 on any of the
+     132 shapes; the lowest validated witness has share 165.
+   - Cost: of order 1,000-4,000 G replay hints for the 132 share keys if the measured growth holds,
+     against about 80 G for the whole 230 plan; the hard shapes would need count-splitting. See "Cost".
 3. **Lean:** `Snake9.upper_229_of_refutedK7 : AllTab tab230 → AllShareK 59 shares230 → ∀ {m}, Snake m → m ≤ 229`
    (Lean 4.35, `lean435/c229/C229Final.lean`), an instance of the parametrised count
    `Snake9.upper_of_refutedK7_share`. Status of the build and audit: see "Lean".
@@ -76,9 +76,11 @@ Measurements behind the table:
 - **Per-shape free-count ladder** (`trackA/ladder7.py`, `data/shapes_free_ladder.jsonl`; levels 31, 46,
   61, 81, 101, ...; 40 s per level, 2 workers beside a Lean build): the largest level proved is below
   31 for 20 shapes, 31 for 48, 46 for 40, 61 for 20 and 81 for 4. No SAT answer.
-- **Level 60, free counts, 900 s limit** (`data/free7_levels.jsonl`; shapes ordered by their solve time
-  at level 30): 0 s → 4.2 s, 0.1 → 16.0, 0.1 → 4.8, 0.2 → 329, 0.3 → TIMEOUT at 900, 0.4 → 637,
-  1.3 → 258. The 7 harder sample shapes (2 to 316 s at level 30) were not run to the end.
+- **Level 60, free counts, 900 s limit** (`data/free7_levels.jsonl`; 14 shapes, one per stratum of the
+  solve time at level 30, `data/sample60_shapes.jsonl`). Level-30 time → level-60 result: 0 s → 4.2 s,
+  0.1 → 4.8, 0.1 → 16.0, 0.2 → 329, 0.3 → TIMEOUT, 0.4 → 637, 1.3 → 258, 2.0 → 740, and TIMEOUT at
+  900 s for the six shapes of 3.9, 8.6, 22.2, 49.5, 119 and 316 s. (The first seven ran 2 at a time
+  beside a Lean build, the last seven 4 at a time.)
 - **Count-fixed floors on the binding cycle** (`data/cycle0_ladder.jsonl`): for the 16 windows of
   the minimum cycle (counts fixed, lumped 8 = [8, 21]), the largest level proved in 40 s is 31 for
   3 windows, 46 for 11 and 81 for 2; level 61 times out on 11 of them. 229 needs +30 per window on
@@ -94,11 +96,12 @@ relaxed-keller line; 33,628 are being certified by the 230 farm and 25,189 follo
 certificates) plus 132 share keys `RefutedShare (winOf s) [(1,21)] x 7 12 59`.
 
 - The window part needs no new truth check.
-- Share keys: 132 in all, so "a few hundred" could not be sampled; a stratified sample of 14 (by
-  solve time at level 30) was started with a 900 s limit and stopped after 7 results (6 UNSAT, 1
-  TIMEOUT) when the cost picture was clear. In the 40 s ladder, 24 of the 132 shapes are UNSAT at
-  level 61. **No key came out SAT**, and the lowest known model (165) is far above 60, but 125 keys
-  are untested or unfinished at level 60. The premise is plausible, not established.
+- Share keys: there are only 132, so "a few hundred" could not be sampled. A stratified sample of
+  14 (by solve time at level 30) ran with a 900 s limit: 7 UNSAT, 7 TIMEOUT, 0 SAT. In the 40 s
+  ladder, 24 of the 132 shapes are UNSAT at level 61. **No key came out SAT**, and the lowest known
+  model (165) is far above 60, but about 100 of the 132 keys have no answer at level 60 (every
+  sampled shape that needs more than 2 s at level 30 timed out). The premise is plausible, not
+  established.
 
 ## Cost
 
@@ -106,10 +109,11 @@ Calibration: about 1 M trimmed LRAT hints per CaDiCaL second for share threshold
 kernel 0.3-0.5 ms per hint for share certificates (milestone 36).
 
 - The 132 share keys at level 30 took 2,328 s in all (median 1.2 s, max 316 s).
-- At level 60 the seven finished or timed-out sample shapes took 40 to more than 3,000 times their
-  level-30 time (4.2 s / 0 s to > 900 s / 0.3 s). With a factor of the order of 10^3 on the whole
-  set: about 2 × 10^6 solver seconds, i.e. **about 2,000 G hints (range 500-5,000 G) for 132 keys**,
-  against about 80 G for the whole 230 plan.
+- At level 60 the seven shapes that finished took 50 to 1,600 times their level-30 time (median
+  about 370); the seven that timed out give only lower bounds (3 to 3,000 times). If the factor of
+  the finished shapes (300-1,600) holds for the whole set, the 132 keys need 0.7-3.7 × 10^6 solver
+  seconds, i.e. **of order 1,000-4,000 G hints**, against about 80 G for the whole 230 plan. The
+  hard half of the shapes is unmeasured, so this is not an upper estimate.
 - The distribution is the real obstacle: the shapes that take 100-316 s at level 30 would be single
   proofs of 10^11 hints or more, far above the 60 M cap of one certificate and beyond the split
   route. They would have to be split by counts (one certificate per count box and a cover lemma),
