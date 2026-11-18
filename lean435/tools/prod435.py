@@ -37,7 +37,9 @@ xfer/c435/ctl); running jobs finish, no new job starts.
 Scheduling: at most --procs jobs (default 4) run at once, largest first; generation (CaDiCaL cores
 and LRAT, single-threaded) is not limited further. Lean builds are admitted under a memory budget:
 the predicted RssAnon of the running builds stays within --mem-gb (default 12 GB); a build predicted
-above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit).
+above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit, or,
+while it is blocked anyway by running builds too big to run beside it, if the other running builds plus
+the passing one leave room for it: small builds fill the idle cores beside a long big build).
 A restart reuses a finished generation of the same certificate (job directory kept until published).
 Prediction: 1.9 GB + 0.14 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
 The generation phase of the replay step of a job from 5 M plan hints on (gen_lean_lrat_v3, Python, several GB)
@@ -237,6 +239,18 @@ class Budget:
             bigger = [min(v, self.limit) for p, v in st['wait'].items() if p != self.me and v > self.gb]
             fits = not st['run'] or used + need <= self.limit
             fair = not bigger or used + need + max(bigger) <= self.limit   # never delays a bigger waiter
+            if fits and not fair:
+                # Fill beside a running big build (18 Nov, 230 farm: owners sat at load 1.0 on 4 cores for
+                # hours: one 2-3 h build of ~8 GB predicted ran, the next big build waited, and every small
+                # fill build waited behind it, since 8 + 1 + 8 > 12). The bigger waiter B cannot start before
+                # the running builds that do not fit beside it (v > limit - B, 'large') end, whatever the small
+                # ones do; so a build may pass it if the non-large running builds plus this one still leave
+                # room for B: when the large ones end, B starts at once. If B is blocked only by small
+                # builds, the strict rule above applies (they drain).
+                B = max(bigger)
+                large = sum(v for v in st['run'].values() if v > self.limit - B)
+                rest = used - large
+                fair = large + B > self.limit and rest + need + B <= self.limit
             if fits and fair:
                 st['wait'].pop(self.me, None)
                 st['run'][self.me] = need
