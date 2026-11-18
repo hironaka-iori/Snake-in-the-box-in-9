@@ -1,0 +1,40 @@
+loaded modules: core 213, mathlib 3121, spec 418
+hash checks: 0 interface files, 418 locally rebuilt spec modules
+setup: 3752 import artifacts, 3539 public .olean files outside the toolchain (1967.9 MB)
+Snake9.upper_229_of_refutedK7 : Snake9.C230.AllTab Snake9.C230.tab230 →
+  Snake9.C230.AllShareK 59 Snake9.C230.shares230 → ∀ {m : ℕ} (a : Snake9.Snake m), m ≤ 229
+@Snake9.upper_of_refutedK7_share : ∀ {K : ℕ},
+  Snake9.C230.AllTab Snake9.C230.tab230 →
+    Snake9.C230.AllShareK K Snake9.C230.shares230 →
+      ∀ {m : ℕ} (a : Snake9.Snake m), 9 ≤ m → (126672 + 19 * (K + 1)) * m ≤ 29387736 + 133 * (K + 1)
+Snake9.upper_228_of_refutedK7 : Snake9.C230.AllTab Snake9.C230.tab230 →
+  Snake9.C230.AllShareK 90 Snake9.C230.shares230 → ∀ {m : ℕ} (a : Snake9.Snake m), m ≤ 228
+Snake9.upper_227_of_refutedK7 : Snake9.C230.AllTab Snake9.C230.tab230 →
+  Snake9.C230.AllShareK 120 Snake9.C230.shares230 → ∀ {m : ℕ} (a : Snake9.Snake m), m ≤ 227
+Snake9.upper_230_of_refutedK7' : Snake9.C230.AllTab Snake9.C230.tab230 →
+  Snake9.C230.AllShareL Snake9.C230.shares230 → ∀ {m : ℕ} (a : Snake9.Snake m), m ≤ 230
+@Snake9.C230.upper_of_tables_shareK : ∀ {m K : ℕ} (p : Snake9.Snake m),
+  9 ≤ m →
+    Snake9.C230.AllTab Snake9.C230.tab230 →
+      Snake9.C230.AllShareK K Snake9.C230.shares230 → (126672 + 19 * (K + 1)) * m ≤ 29387736 + 133 * (K + 1)
+@Snake9.C230.window_shareK : ∀ {m : ℕ} (p : Snake9.Snake m) {K : ℕ},
+  Snake9.C230.AllShareK K Snake9.C230.shares230 →
+    3 ≤ m → ∀ (j : ℕ), j + 8 ≤ m → K + 1 ≤ ∑ i ∈ Finset.range 7, Snake9.LocalWindow.coreShare 12 p (j + i + 1)
+'Snake9.upper_229_of_refutedK7' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.upper_of_refutedK7_share' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.upper_228_of_refutedK7' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.upper_227_of_refutedK7' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.upper_230_of_refutedK7'' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.C230.upper_of_tables_shareK' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Snake9.C230.window_shareK' depends on axioms: [propext, Classical.choice, Quot.sound]
+interface files opened: 0 ()
+strace: 17229 Lean data files opened (9825 of them the toolchain's own Init/Std/Lean files); outside the clean directory and the toolchain: 0; non-.olean parts outside the toolchain, other than spec-layer IR: 0
+axioms of Snake9.upper_229_of_refutedK7: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.upper_of_refutedK7_share: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.upper_228_of_refutedK7: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.upper_227_of_refutedK7: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.upper_230_of_refutedK7': ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.C230.upper_of_tables_shareK: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+axioms of Snake9.C230.window_shareK: ['Classical.choice', 'Quot.sound', 'propext']  (whitelist ok)
+final compile 7.2 s; audit 8.0 s
+AUDIT PASSED
