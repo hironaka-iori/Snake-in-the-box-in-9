@@ -121,6 +121,20 @@ kernel 0.3-0.5 ms per hint for share certificates (milestone 36).
 - **228** (level 91) and below: no shape reached level 101 in 40 s and only 4 reached 81; no
   estimate is possible beyond "at least another factor of 10 to 100".
 
+### Count-split prototype (negative)
+
+`trackA/split7.py` splits a level-60 key adaptively by counts: a box that CaDiCaL does not refute in
+20 s is split on its widest centre (`[lo, 4] | [5, hi]`, then the lowest count peeled off). On shape
+`0,1,2,3,4,1,2,5` (3.9 s at level 30, TIMEOUT at 900 s at level 60), 82 boxes were tried on 4 cores
+(1,754 solver seconds, depth 21) and **none was refuted** (`data/split60_01234125.jsonl`; the run
+was stopped). Uniform boxes of the same shape at level 60 with a 100 s limit
+(`data/split60_diag.jsonl`): all counts <= 5 TIMEOUT, all >= 6 TIMEOUT, all >= 9 TIMEOUT, all >= 12
+UNSAT in 17 s. So the difficulty is not concentrated in a count region that a split could isolate;
+only the very-high-count corner is easy. This agrees with track B's finding on its level items
+(cube splits do not help; the share cardinality is the hard part). No farm plan for the level-60
+share keys is proposed: their cost stays at the estimate above, with single keys beyond one
+certificate.
+
 For comparison, the historical cost per bound: 233: 3.3 G hints; 232: 13.5 G; 231: 41.5 G; 230: about
 80 G (in production). 229 by any route measured here is 500 G or more.
 
@@ -178,6 +192,7 @@ level 59 (`SHARE_CAP` in `lean435/tools/c230.py`, `AllShareK 59` in place of `Al
 | `bounds.py` | the parametrised count |
 | `tier7.py` | corner-share threshold test of a 7-centre window with count bounds (CaDiCaL, lazy cycle cuts) |
 | `ladder7.py` | largest level of a ladder proved in a time limit (free or fixed counts) |
+| `split7.py` | adaptive count split of one level key (prototype, negative result) |
 | `sharemin.py` | CP-SAT search for low-share local models, hinted with track B's witnesses |
 | `lpsym.py`, `lpshape.py` | exact minimum cycle mean of the K7 product under symbol-penalty and per-shape weights (run inside a checkout of relaxed-keller's `milestones/10-window-aggregate/scripts`) |
 | `data/` | every record quoted above |
