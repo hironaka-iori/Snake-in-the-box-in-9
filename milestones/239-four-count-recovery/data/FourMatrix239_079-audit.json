@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "module": "FourMatrix239_079",
+  "source": "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\lean\\FourMatrix239_079.lean",
+  "source_sha256": "447ae89f934be60280ed464a500c9e19436e90683853a11453a7ab2fc5dce879",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\data\\FourMatrix239_079-execution.json": "1416c29b47c51106e5f2c825804099f3ca48a18f116468a230bc5e98bf021c1c",
+    "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\lean\\FourMatrix239_079.lean": "447ae89f934be60280ed464a500c9e19436e90683853a11453a7ab2fc5dce879",
+    "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\logs\\FourMatrix239_079-1795001023669558400\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\lean\\FourMatrix239_079.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\logs\\FourMatrix239_079-1795001023669558400\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 1565290496,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 90,
+    "snapshot_seconds": 0.0
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 1557934080,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 37536,
+          "ParentProcessId": 10460,
+          "PrivatePageCount": 48103424,
+          "WorkingSetSize": 24711168
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 90,
+      "snapshot_seconds": 0.01599999999598367
+    },
+    {
+      "free_bytes": 1309204480,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 37536,
+          "ParentProcessId": 10460,
+          "PrivatePageCount": 94916608,
+          "WorkingSetSize": 278564864
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 92,
+      "snapshot_seconds": 0.0
+    }
+  ],
+  "compiler_pid": 37536,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 2.0469999999986612,
+  "axioms": [
+    {
+      "theorem": "FourRecovery239.zero_solution_079",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "log_sha256": "cba4692a71853367f34c3a8858c210b0c96a29ac812be365bfa82bad40b334a7",
+  "object": "E:\\Snake-in-a-box\\milestones\\239-four-count-recovery\\build\\FourMatrix239_079.olean",
+  "olean_sha256": "267ddbd94d258a875ddae612ee979c4dfc34eaea32e9b6c9f03aabd91e1dffa3"
+}

@@ -1,0 +1,1167 @@
+{
+  "status": "PASS_BOUNDED_DOCUMENT_REVIEW",
+  "reviewed_at_utc": "2026-11-18T11:30:41.555430+00:00",
+  "reviewer": "audit237_sources",
+  "baseline_HEAD": "626d4c7be0a4b973f421281a74296f090941b082",
+  "scope": "Complete Round 239 manuscript diffs, mathematical note, next-step reduction, and current matrix/dominance proof receipts.",
+  "documents": {
+    "paper\\snake9_research.tex": {
+      "sha256": "d5f1bfd6d1c3be3de4afabf81d4bb5c81d070e147a45f1c9d499bb8355529f3a",
+      "authoritative_path": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_research.tex",
+      "authoritative_sha256": "d5f1bfd6d1c3be3de4afabf81d4bb5c81d070e147a45f1c9d499bb8355529f3a",
+      "byte_identical_to_authoritative": true,
+      "author_preserved_vs_HEAD": true,
+      "hypersetup_preserved_vs_HEAD": true,
+      "label_count": 391,
+      "duplicate_labels": [],
+      "unresolved_refs": [],
+      "duplicate_bibitems": [],
+      "unresolved_citations": [],
+      "current_interval_191_231_present": true
+    },
+    "paper\\snake9_frontier_explanation.tex": {
+      "sha256": "689050097ee05b6ff50afd02780baf02b14be81ee566ce13f87c9b663d6cf900",
+      "authoritative_path": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_frontier_explanation.tex",
+      "authoritative_sha256": "689050097ee05b6ff50afd02780baf02b14be81ee566ce13f87c9b663d6cf900",
+      "byte_identical_to_authoritative": true,
+      "author_preserved_vs_HEAD": true,
+      "hypersetup_preserved_vs_HEAD": true,
+      "label_count": 0,
+      "duplicate_labels": [],
+      "unresolved_refs": [],
+      "duplicate_bibitems": [],
+      "unresolved_citations": [],
+      "current_interval_191_231_present": true
+    }
+  },
+  "source_and_input_hashes": {
+    "milestones\\239-four-count-recovery\\MATHEMATICAL_NOTE.md": "ccc2aaf19279852024ded0d35d99e17b76287b1961f2eb12d02fe983440e0c00",
+    "milestones\\239-four-count-recovery\\NEXT_STEP.md": "bd2f94735ccc7b179deec3be94756ff6d3a7aacda5932a870a03b792602a0322",
+    "milestones\\239-four-count-recovery\\scripts\\update_documents.py": "122205bf73d85061a5dcba942c66e30fcc3dffdef9b406368b75921a57fd3092",
+    "milestones\\239-four-count-recovery\\scripts\\audit_four.py": "762113eb2a8490d0a4a57fd45f25aad69a0f4a68f38541f4a8968a01a3cb0ce6",
+    "milestones\\239-four-count-recovery\\scripts\\make_four_proofs.py": "a46650272fbff9b64e404cadde875fa42d2e7ee76087f66711547b82897b80b7",
+    "milestones\\239-four-count-recovery\\scripts\\independent_geometry.py": "da257e6f8a30429c8d5e587173ba18aa333d84fbaad1856f2ba797c91594e9fa",
+    "milestones\\239-four-count-recovery\\data\\four-count-audit.json": "02e3aa94c435277760f31f8df5606d9eac11e4d8aeecd9e3032679b2812bec8f",
+    "milestones\\239-four-count-recovery\\data\\independent-geometry.json": "a9980c024f515e4169723f4d571dd5c59d922e0cdb3da3fd5c12f6182047c0fa",
+    "milestones\\239-four-count-recovery\\logs\\source-review.json": "23ad77d3494abd881ed689aed9bb4498b24be5a4f4f5baa1cc2bb0be89026eaa",
+    "milestones\\239-four-count-recovery\\logs\\four-matrix-plan.json": "bff547116991d6145b49fd418b0054c0c13096158a48da003c5797a3a9f0f686",
+    "milestones\\239-four-count-recovery\\logs\\eight-count-split-plan.json": "2b8a059983475d4f95f5e2d456e3e483cae6457eebf04c7c66df2b6f2555e8b6"
+  },
+  "replay_summaries": {
+    "matrices-replay.json": {
+      "status": "PASS",
+      "sha256": "9254109f96ab2fb80784380989160fed4c7b1d0da9bb72f7f10b02c2ad0f4388",
+      "module_count": 87
+    },
+    "dominance-replay.json": {
+      "status": "PASS",
+      "sha256": "3eefc24feb2c52fa7d5d329133b668e973369b2339074f0ddf1910eb8ce891cc",
+      "module_count": 3
+    }
+  },
+  "accepted_module_count": 90,
+  "accepted_modules": {
+    "FourMatrix239_000": {
+      "receipt_sha256": "3fc24c3abf0343a2baa943d7ea95ffb1760a0cd864efd1c2151abe9968c631c5",
+      "source_sha256": "8b3a784c4e92a27e658ffb23134f0772e371e267895d0d9572ceb09061786b16",
+      "theorems": [
+        "FourRecovery239.zero_solution_000"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_001": {
+      "receipt_sha256": "b3d6ea66b7ca310120d0fd4ec2b04dbee9be23c7eb11725f8452b034d63d06ee",
+      "source_sha256": "f4f57621e5f541b3c41efb6547082b8e4bf1ccc8fa0b255cc29ce0bc55d4ebe9",
+      "theorems": [
+        "FourRecovery239.zero_solution_001"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_002": {
+      "receipt_sha256": "79004b35f99ed385af57ca45602a5db038abe1510966fab5afb5e97f3da36a5f",
+      "source_sha256": "eec949a078cad26b09697c62cc5149a44aa15b9c48ae194c8eb02f913bd72ea2",
+      "theorems": [
+        "FourRecovery239.zero_solution_002"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_003": {
+      "receipt_sha256": "59aa4e6ae5eaf8b349654295a72e35390de552888f253b0f50748777e292410e",
+      "source_sha256": "042e6c34c986ebc039d27de1930f52ff2e231d8ff5c348e3b7026eaa9e62c312",
+      "theorems": [
+        "FourRecovery239.zero_solution_003"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_004": {
+      "receipt_sha256": "95f2c331adba15386e0b35230b368dd88afe25855cd8a5ee6c5b9087de5e4f06",
+      "source_sha256": "02f50ed08e13578c1e50d81e4b1cc4a3f1dad56b08b2ec7bbe9adeeae1000036",
+      "theorems": [
+        "FourRecovery239.zero_solution_004"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_005": {
+      "receipt_sha256": "ec564b67453856db35f1e600c29e2bf4802380f021f420dadbebc4afda6ac109",
+      "source_sha256": "2e81aed9668bbf5f5ef60c63bb1b1ef37a394c9b4204e312f361f828dca059a6",
+      "theorems": [
+        "FourRecovery239.zero_solution_005"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_006": {
+      "receipt_sha256": "da76e7c06e037d93862be0f9d49ab1202aaa182b0ba52be9e331a01a694e928e",
+      "source_sha256": "8177cd46bf24ccbcf6274cdc164876bf53bddd0928abe79745b58c5dc01fc2ef",
+      "theorems": [
+        "FourRecovery239.zero_solution_006"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_007": {
+      "receipt_sha256": "273bc3f5dda7a6556eeafac6097753e4d966bb61d6594af885041a0b17fab825",
+      "source_sha256": "9d93eca8e0c5fa0e19e95f36206dbae4097e653a5baec805bee7ece0ae144e00",
+      "theorems": [
+        "FourRecovery239.zero_solution_007"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_008": {
+      "receipt_sha256": "91c1bb68762f3ebc43727bc32b726ab10c4e6e248cd4520ecf96867849d8b4ed",
+      "source_sha256": "d8d6658e1fb6bc37daccd9fc9e4973da762bfce4a547d70f773a01fad6d6e125",
+      "theorems": [
+        "FourRecovery239.zero_solution_008"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_009": {
+      "receipt_sha256": "94df8ef8e8167828ac914f665695c29549ab4a7bafd0b5db7e1fc9435276c111",
+      "source_sha256": "7f17aa306a4be883e1ff3efb0e2082f87bc10688a7a1f30b7286e8c969aeb240",
+      "theorems": [
+        "FourRecovery239.zero_solution_009"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_010": {
+      "receipt_sha256": "6d7da9b851271c960e32c9ad1d17813bb02cfd62ec6949a9820c3cc1539caa66",
+      "source_sha256": "9f884a61aba6703c0449fcf64bc5efe27dd96f7cfa63eaa8c1d3054050a03b5a",
+      "theorems": [
+        "FourRecovery239.zero_solution_010"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_011": {
+      "receipt_sha256": "709f0f5c58798a6daf967c8ff72918c03c8f5e70ab5cf3fecdfbb91148e33642",
+      "source_sha256": "79d64628186b8373adf07d17d6f7b79a25ac5cd3f69a2f799287dc5db7b501cb",
+      "theorems": [
+        "FourRecovery239.zero_solution_011"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_012": {
+      "receipt_sha256": "4ee3399de6bf888c871d86896eaadeffcf75ecac499f2bb077414e56beef92e1",
+      "source_sha256": "eb243fb37b12581db54ea7f8d1b9dedd8170950da6853925d9d8f80741ddd9a6",
+      "theorems": [
+        "FourRecovery239.zero_solution_012"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_013": {
+      "receipt_sha256": "5ad96206d5feb43d29922ac5e7ff46ae9158e7bfec9b651ca7ef143646e4a68d",
+      "source_sha256": "a5b069f3966677d07250dbf2f0d71516f0e6722dd4446d5e10294f2024c528fd",
+      "theorems": [
+        "FourRecovery239.zero_solution_013"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_014": {
+      "receipt_sha256": "22162b15d354ced32e764d8534e65e56c65414c2d23d5116141d46035b2e0589",
+      "source_sha256": "39a554bc01aa5d761a073f689c6881605e57d0e076f59197fbb61e0361bb62ed",
+      "theorems": [
+        "FourRecovery239.zero_solution_014"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_015": {
+      "receipt_sha256": "642b407c9cc38d9179debdead498f4f308a92f3531ae3d44a664bcf0b7f6fd1c",
+      "source_sha256": "ceca08cb1a27bfa0fd12a549f89660a14806dfb6bddf3689c209c45b2fd8bbc1",
+      "theorems": [
+        "FourRecovery239.zero_solution_015"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_016": {
+      "receipt_sha256": "df85114b5be3fde122842a4f82cb8110efc1d395441f9718ab87bc2a1702cffe",
+      "source_sha256": "7c1e1732dbeabcc3b03ba5d6ae3c16ea1b99e8d9eda9e7a2d632cd95436b5141",
+      "theorems": [
+        "FourRecovery239.zero_solution_016"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_017": {
+      "receipt_sha256": "26ed2f9c006b87307cd029b3461ff944136afaccea9224b7c606fea92aed2a8a",
+      "source_sha256": "4f15c28eb16760a51499a6fa47f1840938c997ad083ac23c967fbb261b761e6b",
+      "theorems": [
+        "FourRecovery239.zero_solution_017"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_018": {
+      "receipt_sha256": "8828b44b7d25ae061b6cd032ef60bdf467e653a4bc6e9580b15afb321b37fb16",
+      "source_sha256": "a0bc1c5e4c94b8e06fb3f3639f1d225cc3a23f9022f9c0453cc1745c073bbba1",
+      "theorems": [
+        "FourRecovery239.zero_solution_018"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_019": {
+      "receipt_sha256": "f334cd15cfea9aff6b993c38408b9ff99f611a0802e048d637bea45d2cb0feb0",
+      "source_sha256": "166bf067903007bf4ca87e8ae68f932acd9b6dbd19e15fc95c446ede1caaaccd",
+      "theorems": [
+        "FourRecovery239.zero_solution_019"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_020": {
+      "receipt_sha256": "c7baa260fee93b8e533fce6c226ba27d74b7bb474867ff8ed881ca9eb23ca710",
+      "source_sha256": "208ac56270d4e7cb1c6599517136a53d8ba899b9081feaa06ae30cc8698c1425",
+      "theorems": [
+        "FourRecovery239.zero_solution_020"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_021": {
+      "receipt_sha256": "47460e449e963ecc80aa0c79f70e2950393e06fa58c862c2ffb8a603fc6907f5",
+      "source_sha256": "ef90b080cca203b6f9561fee0130d204f81ce539181737128d1798b3784b5592",
+      "theorems": [
+        "FourRecovery239.zero_solution_021"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_022": {
+      "receipt_sha256": "b0acbd6dcadb1f3982fb87b40bdfc678d63d5f1279e5aa2ad46f531d9cd732c2",
+      "source_sha256": "8cdf34c3c8da5506ef5ff58a67feaffbf51318e9cdb34ecba626bbde277ab44f",
+      "theorems": [
+        "FourRecovery239.zero_solution_022"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_023": {
+      "receipt_sha256": "91cd26606d0c40603783c03f227dde96afe98f350650131119fc14367a3e51c3",
+      "source_sha256": "700a3e13e5cf30f35e24d22dac1e7df91ef98d71b1e3640cf80a5bc682cd6373",
+      "theorems": [
+        "FourRecovery239.zero_solution_023"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_024": {
+      "receipt_sha256": "8fb4759b9e6c31196ea474084f250bf26b02095b139b9e13486a0689e03a2f47",
+      "source_sha256": "02cceffe9bb65fbe610912dbcd3ae4b8b276700110514ba9f39f806dbf571802",
+      "theorems": [
+        "FourRecovery239.zero_solution_024"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_025": {
+      "receipt_sha256": "92e00edfb55ce8c5162ae53447851554ad45d897f61fb61af35f7ee994c45d5a",
+      "source_sha256": "15715c0d1aa741793d92511dd6125a13923644e6b6c9b2cdb54bbab3f7803cec",
+      "theorems": [
+        "FourRecovery239.zero_solution_025"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_026": {
+      "receipt_sha256": "4d7dd65a3e3e2a012df41c72193b1dca471adae5d073f8f2c2d84602f235df71",
+      "source_sha256": "6f0e3cd876b427238d6bec559f19ba73e7d21ae716d69d9601bd634e832138c3",
+      "theorems": [
+        "FourRecovery239.zero_solution_026"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_027": {
+      "receipt_sha256": "9e3c4f6912c1c5aa7cefc18f0a3e94cb7fb802da0d2f7ded1fe13e6d91f7f1a6",
+      "source_sha256": "28186b4a5f19dcaaceb4e44ee8dafc5492ef68e7c9bec8c2b3259e5294e57049",
+      "theorems": [
+        "FourRecovery239.zero_solution_027"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_028": {
+      "receipt_sha256": "3dc60d41919f0366ce31a0c5383bc70197ffc093376af81ef77389bf47e7be6b",
+      "source_sha256": "de7733c6f33f6aed3fa7312a23d2243b594f635e058d746ba38d6035741efeb1",
+      "theorems": [
+        "FourRecovery239.zero_solution_028"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_029": {
+      "receipt_sha256": "da171cf936d390d3ef19d88d8fa0befd513a01af48d56c710874f7e438bec0a7",
+      "source_sha256": "481ce498e35846a3c7cd01b8777dccab7bcb1710865049eb24d63edb5b4b8f16",
+      "theorems": [
+        "FourRecovery239.zero_solution_029"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_030": {
+      "receipt_sha256": "083ce14f8574647f0c2293a016f7c05f453d890a44f0b5de52838c264202f155",
+      "source_sha256": "de75ffa8e4f8f88bc5c3ba0c3182ab3a381415457d5a01b9e721e3ea95c8e007",
+      "theorems": [
+        "FourRecovery239.zero_solution_030"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_031": {
+      "receipt_sha256": "543011ff39f34e15928d93c839e940c697658cb21c7615398d2cf6af0328bd32",
+      "source_sha256": "c3646fd86dcc387606ad4b46de5f52aa86b8e6e79b322f6f90751d4ad63583eb",
+      "theorems": [
+        "FourRecovery239.zero_solution_031"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_032": {
+      "receipt_sha256": "cee6c6b07606a11497630f1af5829d70d7f05a69a086dc538c3089cf8e374732",
+      "source_sha256": "9d99944379b6e31dd468b0b3ea8de1eae0923e4c77e5b961cec4cd3e87415855",
+      "theorems": [
+        "FourRecovery239.zero_solution_032"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_033": {
+      "receipt_sha256": "a472521899d2873c9a7e1989a3fe0c239cf15d17202f4fe8b07067965498c971",
+      "source_sha256": "edf65daed55dfa22bbd4a0cea2925ee22fdf6ddad2a770ee008381d3c89dfe1e",
+      "theorems": [
+        "FourRecovery239.zero_solution_033"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_034": {
+      "receipt_sha256": "a9e6616ecf7ff7fce6acbd570f80a69b1c55205df1265d2f1d945b2618908b0a",
+      "source_sha256": "a907097550e51d8edeaa560eb1de55333ee1eee5c6bba3ac7421cc8d19a88bf3",
+      "theorems": [
+        "FourRecovery239.zero_solution_034"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_035": {
+      "receipt_sha256": "c270892f0129b9c713d5ae7b9d9002e5cd183ffad373f5cb31bc91fb3d115bef",
+      "source_sha256": "32dd15a139c0824ebd891d01a794a3490750258363364b4df58158472ddeca2a",
+      "theorems": [
+        "FourRecovery239.zero_solution_035"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_036": {
+      "receipt_sha256": "7efd1b805848ca6f831893879461fd8091ceb83ddeebcddc948cfacfe2f9cc74",
+      "source_sha256": "897eecbb86d1b5a747a1990f7655efc7649952e7055749573b2fd547732c66b4",
+      "theorems": [
+        "FourRecovery239.zero_solution_036"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_037": {
+      "receipt_sha256": "5cd97cc5a31dcb91c1e746ba8abb7434d31f042f30fce58f2df2048639492665",
+      "source_sha256": "7ce385af6e3df2cbc2791481eb287c810d2fd1ad5e03ad3cdca39696ed9538d2",
+      "theorems": [
+        "FourRecovery239.zero_solution_037"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_038": {
+      "receipt_sha256": "2663ec87443bf96d3a77e0389db395a334b641e68a52dd7014c971c910d84226",
+      "source_sha256": "adef3160643095e9d150e1276bd1497be60c6f712c2c1154504f766fc7b512a4",
+      "theorems": [
+        "FourRecovery239.zero_solution_038"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_039": {
+      "receipt_sha256": "8645d7110e208820e45eee3ff321f9aa1f0c97b073a49b7589fef7ea6f10c67e",
+      "source_sha256": "0cb0deb8e21dee5853beb80a7e4f082bff3a20a16838dda16ed67659307ea73f",
+      "theorems": [
+        "FourRecovery239.zero_solution_039"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_040": {
+      "receipt_sha256": "e7521e580e93c8c2cf88a800efd0574bb6fd48cb70962fa096f90e3def8e75ae",
+      "source_sha256": "f93043a3f54434b0ad864c265d31a91a907f7414ec12b516d020d9e78bf150a0",
+      "theorems": [
+        "FourRecovery239.zero_solution_040"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_041": {
+      "receipt_sha256": "537970a09d0fa5eac56e7aa94d71427e61c7c2e006d32289ad63b8cc7ea2d5f2",
+      "source_sha256": "741518d54eafe775e648e5f6ebd35fca7d983112f8de658aa3b2ddfefa079942",
+      "theorems": [
+        "FourRecovery239.zero_solution_041"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_042": {
+      "receipt_sha256": "8b09ec9ee07cdb10bf7295daaef7effabf8621637b540d34346045df2701135c",
+      "source_sha256": "54f220b5b2c295580f125e512b0b1b6abcc4af4551cc64ef1f45e2a08ad7e09b",
+      "theorems": [
+        "FourRecovery239.zero_solution_042"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_043": {
+      "receipt_sha256": "654b964088fda8d3520a5db03393f375804491c85be52707bd3e7495f282fac6",
+      "source_sha256": "2d5882ae26bba7508f64534a0eb2ef3be1980571abfa48db0f896303a6928afd",
+      "theorems": [
+        "FourRecovery239.zero_solution_043"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_044": {
+      "receipt_sha256": "726484c8745ba05c75aa04968ac8fcc8a15c21b754a4564700cf8980ebe43440",
+      "source_sha256": "6b752c6ea6f664c7fd0eddc3edea9c740603cb5e6519d49bc01ecfc370a7585a",
+      "theorems": [
+        "FourRecovery239.zero_solution_044"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_045": {
+      "receipt_sha256": "16d76468500b9c04708cc303b6775123c3259ed2b70e406bb5c8159e427ddac8",
+      "source_sha256": "d955df369d5db8fcf9af9827221822f33ef2c24b146e368b4d184d172f8e6e69",
+      "theorems": [
+        "FourRecovery239.zero_solution_045"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_046": {
+      "receipt_sha256": "f0118a4a044a8633112a0eeb76222fd53ea07f3f334a9cd043ab2801ed77c544",
+      "source_sha256": "e106128fd255ce76ad7c00b296929e6aca3e75868f164b495b87a11927b37bbd",
+      "theorems": [
+        "FourRecovery239.zero_solution_046"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_047": {
+      "receipt_sha256": "9a31dc51e2f7781ff25a7787f1523589e33bd44e261ca78863b6f65ab75a77ec",
+      "source_sha256": "5f71b717fba118cc2310d36d8ee93dbe060331a4028cf88dfc7759e2dd59f34c",
+      "theorems": [
+        "FourRecovery239.zero_solution_047"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_048": {
+      "receipt_sha256": "a40c6f58226f4f1681bd8ec5af0feabf4658333ec64d7a3b334924f1f81618e7",
+      "source_sha256": "8b31911138a2e7c7899fab39f79d6207cf68778db10ae35c6f643931ae2d9585",
+      "theorems": [
+        "FourRecovery239.zero_solution_048"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_049": {
+      "receipt_sha256": "0f1250be7008d6ec3daa7734d50ce1baa26334280f030cab3215113b4952f641",
+      "source_sha256": "9077f6c1bf4264dd7a115fc10f3316ed1d7dc55546f4607d57cb070c0b36f708",
+      "theorems": [
+        "FourRecovery239.zero_solution_049"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_050": {
+      "receipt_sha256": "f053d8ab53d1ad3ad3d5a6c18c6c114c1d3101a0788168d1d56841d393fb7870",
+      "source_sha256": "256b77520d5205b29f3475aa06cbe6084d0cac556222a5ea2ab3910b9fe39c3b",
+      "theorems": [
+        "FourRecovery239.zero_solution_050"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_051": {
+      "receipt_sha256": "386753ff5c8ec6deb3b6042b03b0b7854d572ca89fe005e87422ee3506662ebc",
+      "source_sha256": "7b2b2f86205b5a7e09f21938e88ff53646cb8c7cf8c2e21834af7ec2b880f2f8",
+      "theorems": [
+        "FourRecovery239.zero_solution_051"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_052": {
+      "receipt_sha256": "a2ed567c5ffe71dc1a69ea50ffcb8c41019a68dbfe8d98dc4920303dabe2c2ef",
+      "source_sha256": "926456dccf4dac4719b54aeed522d17efd7af0757ea23da0ceb98aeb4f3cf418",
+      "theorems": [
+        "FourRecovery239.zero_solution_052"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_053": {
+      "receipt_sha256": "00cb5c09b4973617b3f2699811e3c82b7a19614265a679360bced37b9ff5d061",
+      "source_sha256": "b77acdbd0e24d836a194bf220bb1bddbda291ff955009f369881fa7cdee38be1",
+      "theorems": [
+        "FourRecovery239.zero_solution_053"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_054": {
+      "receipt_sha256": "3f004472afca4e3b4fb3be4b80e8295051908e055737ae331c48f1634ea6a78d",
+      "source_sha256": "0959c7acff8c9921e2dda54f0df2cc995d40bd569b329d6d7e07e8842e6b8b7b",
+      "theorems": [
+        "FourRecovery239.zero_solution_054"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_055": {
+      "receipt_sha256": "ac67e0cb3f66f6a0e3261b0feaae22008c26ad9b91320e0ced68ee071ea415be",
+      "source_sha256": "7c01ece0447df1630f15f24b7cb543552c6d548bb2d3a085aa1c598d43de1355",
+      "theorems": [
+        "FourRecovery239.zero_solution_055"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_056": {
+      "receipt_sha256": "52b2cef516813688b32de05fa3b2a9bf2aabf0a9bb398aedf687e9f38b7a683c",
+      "source_sha256": "bba2b5c11a3dda74b1fe374080ad9fdec182b60fc64b66249548550d3c8d16c1",
+      "theorems": [
+        "FourRecovery239.zero_solution_056"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_057": {
+      "receipt_sha256": "47333d0aaea368a36ce4517f568e19efa8273844c0c3454aa7a62eb9529576cd",
+      "source_sha256": "12572a8e221851b8c8bcf9249de4c120361a8e112627df90410515c9009702a3",
+      "theorems": [
+        "FourRecovery239.zero_solution_057"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_058": {
+      "receipt_sha256": "a84e16500ed5dd9703967c823baac788fdaa7039825b4b2511a92716da7ab804",
+      "source_sha256": "dd00db85f7cfb02f76e3256942a0c64811f065005eb02f27770b324506e15754",
+      "theorems": [
+        "FourRecovery239.zero_solution_058"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_059": {
+      "receipt_sha256": "3f05c93e2c46c8a2fef5199d9f12c4f3b81d3d3eea85688574091aada0f089ae",
+      "source_sha256": "c539a3583f724d50773191ffa83afe9db7aec84f82fec6178df4dd71ec211a99",
+      "theorems": [
+        "FourRecovery239.zero_solution_059"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_060": {
+      "receipt_sha256": "7da9f07cb3c82daf2b333c5a0f5721eae3f59b38755cfdb16db0785caa02d254",
+      "source_sha256": "d960b953832b695f89aa3320541074aec89fbfca27a449ed2efec55adcf7c16f",
+      "theorems": [
+        "FourRecovery239.zero_solution_060"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_061": {
+      "receipt_sha256": "94c839a8f25da35a458a91485681ba668b41ca95948803d0317dffe9df49fbfc",
+      "source_sha256": "cfaf7c42ef3bd2d475357602fcbd93ffacbb31d39374f1f2d7a361bed7e707d6",
+      "theorems": [
+        "FourRecovery239.zero_solution_061"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_062": {
+      "receipt_sha256": "ac258b6e72440a319a212cba0b8e9fa9bf49bf0349f8b05dfb6e2921e57d5762",
+      "source_sha256": "f0aa003692be64f21b7c7a3e99cc57ff7d3af8c8e0dd3e458cbc8cd2edb5cddd",
+      "theorems": [
+        "FourRecovery239.zero_solution_062"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_063": {
+      "receipt_sha256": "6d979bd9c0a0de664a165d9c5a54a0c5128601677bb89d69106f819c0293d084",
+      "source_sha256": "96a9d7430d3072c91a3df230971e5ee128da41365c695c1f2539d9b2dad47ba3",
+      "theorems": [
+        "FourRecovery239.zero_solution_063"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_064": {
+      "receipt_sha256": "f843864cd12cab6e60ad77743ab372732cee01b979dcbfa64b5c00150d5100f9",
+      "source_sha256": "a1170a4d00ec72a9e4e571c1dccfefbb31761fd2e44e87ac3be990c0311e5e42",
+      "theorems": [
+        "FourRecovery239.zero_solution_064"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_065": {
+      "receipt_sha256": "1917af47abeb090b43d34944f1682f3787e8f4a2818ddb8ec801398b535f77c3",
+      "source_sha256": "863cc0ef0ea88e6c3d45f3bb09e540d9f5df9660847bb84f3c5a024fbca92a8a",
+      "theorems": [
+        "FourRecovery239.zero_solution_065"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_066": {
+      "receipt_sha256": "5ed3abb80ddf26d71ba134769dcddc2ccef9bd896e079496009cd93bb3447712",
+      "source_sha256": "f902248ee9404a1a9a77bb2675c8926f2e8d4ef5ddb65b95ba4eb85344989799",
+      "theorems": [
+        "FourRecovery239.zero_solution_066"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_067": {
+      "receipt_sha256": "698bd1f083ad762a3870b7ecba784453fd6c4714a4cc46d259c9c51364f9d55c",
+      "source_sha256": "8405d3331a4f3183032876171da8558268f8e6b974a1b7c82c99094ebe435ba5",
+      "theorems": [
+        "FourRecovery239.zero_solution_067"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_068": {
+      "receipt_sha256": "3e6f096f243c7bec36bc2f9bbbc67baa89799fcbe0db200b05a6394867faec32",
+      "source_sha256": "c3c22c364e75439a91f7e46d5d6ed5ebf8ba92685e672018b8415f6ab48f5d58",
+      "theorems": [
+        "FourRecovery239.zero_solution_068"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_069": {
+      "receipt_sha256": "2061c51e4fdb601816e9a03e7083993fa5867191e44e25041ecf6bdbd1954069",
+      "source_sha256": "924be73207b14f4a1f18180af67d0631d5a5fc2b33f83ec0484c3420f14823fd",
+      "theorems": [
+        "FourRecovery239.zero_solution_069"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_070": {
+      "receipt_sha256": "7bc90da48d46dc169cb7812237a3a4eaa0e5a9f6b90c2ec1a8adef1946f83aa3",
+      "source_sha256": "4a5d078c82d0329c7085b359d71ec6089ea8a438acc99516a5f2276a73b81430",
+      "theorems": [
+        "FourRecovery239.zero_solution_070"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_071": {
+      "receipt_sha256": "f35b11df2bea26247a397daeb66605554be587f25bb9f44cb1013211ef76a5a6",
+      "source_sha256": "d444c8253830fd5e2d80c057b344531dd8a2dbb0555ea107ebe6a4c8a042b154",
+      "theorems": [
+        "FourRecovery239.zero_solution_071"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_072": {
+      "receipt_sha256": "e295e8059f3f095b0fff0ecb6f8c39ba66daa2252d61db6dd5509deb201e04d7",
+      "source_sha256": "27f2a3202c1f09e9afb1d7fafc408c40af99241f78908bf6096b9e58fdd0edb8",
+      "theorems": [
+        "FourRecovery239.zero_solution_072"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_073": {
+      "receipt_sha256": "3b77d86bb474b3a87d6ac058557fbb6d88b46f3560853e59cdd6fb5741fd659e",
+      "source_sha256": "9d86e67bde4f588a5bd9d3c89e6b020751adfbbb26798c96a4328a5452c97c42",
+      "theorems": [
+        "FourRecovery239.zero_solution_073"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_074": {
+      "receipt_sha256": "18f9d5ac15473610d402f9e79dc5bd5660b0440a10b687cf6ff4feb2eca7cc79",
+      "source_sha256": "26302d701b080e151639b15be1814b8bbf342011a89caa31558d1285d1445902",
+      "theorems": [
+        "FourRecovery239.zero_solution_074"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_075": {
+      "receipt_sha256": "b3c33011b90e733e0ee12328bb358003db00e8356bd6c1f7b46debca3f13948b",
+      "source_sha256": "66ca392dcae7338c633dd6990cb96f04146b321342ba3e5cbfd342d404633673",
+      "theorems": [
+        "FourRecovery239.zero_solution_075"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_076": {
+      "receipt_sha256": "089aa03c885b7b69606742cb8b5e204ce3710a9ca8ad35448d6da739aafe8ae3",
+      "source_sha256": "43ab94ffe2d43e84b4abcbb63a7ee48bb1d7a69a4d4fd759c453ab30e0c94af7",
+      "theorems": [
+        "FourRecovery239.zero_solution_076"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_077": {
+      "receipt_sha256": "e1f25656aa4310b37b167195a384b9994cfdf0f33c05316b69022f6bcbf57c95",
+      "source_sha256": "4d2e64f434b75679d069ed05f121a293ef8be1a017e239d52d76d7520fbe1b42",
+      "theorems": [
+        "FourRecovery239.zero_solution_077"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_078": {
+      "receipt_sha256": "e08ed53c36dc3c85bb50ebdee689c70d38e9b94a46a4f4211ff5a94e40f00f30",
+      "source_sha256": "576f994146dc8c7858b000a271e3b6f09173ca192c13f1427bb809576925b0cc",
+      "theorems": [
+        "FourRecovery239.zero_solution_078"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_079": {
+      "receipt_sha256": "91175e1543191576b068c9101a413101396da9a05288c55f3637acbb3b2cf4f1",
+      "source_sha256": "447ae89f934be60280ed464a500c9e19436e90683853a11453a7ab2fc5dce879",
+      "theorems": [
+        "FourRecovery239.zero_solution_079"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_080": {
+      "receipt_sha256": "01b50af112a0fc4542cb3acbd52bed0325ceb3ed02a2247ff4e0e03af105c7c7",
+      "source_sha256": "a5d2554bb60d82c90e73c22886bb44e3eaf511bceee7c2c190982b3542e827c8",
+      "theorems": [
+        "FourRecovery239.zero_solution_080"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_081": {
+      "receipt_sha256": "0fff8c1f21ac5de898cf3cb8155f786997e44412af858ebcec392c945bda84e1",
+      "source_sha256": "dfd8409046d84c0bf921e684b671b2ea35787fd2dcbfda007d852bdd9423c395",
+      "theorems": [
+        "FourRecovery239.zero_solution_081"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_082": {
+      "receipt_sha256": "347186f6cbdf2f1c2175e2b8ffa3271e698d7508c756a0ef858e6411791fb23a",
+      "source_sha256": "d8c427211b1f9798b151261bb769784cbc1b931652003da74fae544ddfe1839b",
+      "theorems": [
+        "FourRecovery239.zero_solution_082"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_083": {
+      "receipt_sha256": "86e813f0462efbe82a3202b0744b502f65a20dbec2d4bc14e05fa16377a906a2",
+      "source_sha256": "7c6bcbba501a9866328dc4b327fc357f246543d52bbff814413c4389fdb93a20",
+      "theorems": [
+        "FourRecovery239.zero_solution_083"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_084": {
+      "receipt_sha256": "e0876b361eaa82493ee7e04b6ef180c844f9448bd338fe16b0c2234e179152a5",
+      "source_sha256": "a021532c27a8a07e38d611834ce6888fc3c45369e3c23edb826311bd3e0c5a63",
+      "theorems": [
+        "FourRecovery239.zero_solution_084"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_085": {
+      "receipt_sha256": "01738067c65e0bcfdf75260062b985de389849565ceeba0d56d515d5b2a1e440",
+      "source_sha256": "a1c6b8647d8a565c0f1a8fa111951c7ef2879d8ee1985e37770442ddcbb36a62",
+      "theorems": [
+        "FourRecovery239.zero_solution_085"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "FourMatrix239_086": {
+      "receipt_sha256": "2733e14840660b5cab9ca3a4a7243a7cac0a9d1ca379e8ba9db7976c331f5499",
+      "source_sha256": "a9d2ae12cfaf0b6605078cab330acb7602f2b821b71a8d6a7247c349d516f993",
+      "theorems": [
+        "FourRecovery239.zero_solution_086"
+      ],
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "EightCountList239": {
+      "receipt_sha256": "1122f9e1f0268fcf16a23dfa163af647c7e5f4587f5f6de73e59ba5ee0d40bdc",
+      "source_sha256": "ac31905d9318c2905b8411f25ff08be5f76d3c69705d7750e4b74e661c58eb14",
+      "theorems": [
+        "EightCountDominance239.list_sum_bounds"
+      ],
+      "axioms": [
+        "propext"
+      ]
+    },
+    "EightCountBounds239": {
+      "receipt_sha256": "b906d19c1b266f396d2fc69421c252ff43717ff88d62f8189493ca5f410c8777",
+      "source_sha256": "f4a8ab2a39433ca6c3b76ddc6156536900d401aed3d6e15d51789a6e4eca1245",
+      "theorems": [
+        "EightCountDominance239.seven_term_bounds"
+      ],
+      "axioms": [
+        "propext"
+      ]
+    },
+    "EightCountDominance239": {
+      "receipt_sha256": "e7c8d6676ecec1be9b9caaece721a114fe7856b33d89b1c492833baac849ab3f",
+      "source_sha256": "6826a1e91d5fb5b9052ab754bfc0526476c5a3807c2db08b7c0327827820ad16",
+      "theorems": [
+        "EightCountDominance239.ternary_even_row",
+        "EightCountDominance239.bounded_extreme_zero",
+        "EightCountDominance239.even_row_zero"
+      ],
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  },
+  "mathematical_review": {
+    "four_missing_counts": "The seven-type classification and arithmetic are valid and match the prior source review. Mixed-parity missing positions reduce each restricted profile to at most three unknown observations. For one parity, inverse evaluation at antipodes gives one of the 87 matrix classes. The 508-count and known-parity 252-count deductions are correct.",
+    "conditional_eight_counts": "For missing points with no distance-eight pair, every off-diagonal antipodal coefficient is in {0,-10,8,-16}. Ternary RHS and parity force zero RHS. Choosing the largest absolute exceptional count M yields 128M <= 16(k-1)M <= 112M for k<=8. The argument permits mixed parity and handles the empty missing set by injectivity.",
+    "sharpness": "The nine neighbours of a vertex have pairwise distance two. Empty versus singleton selections agree off those neighbours. Their nine-row antipodal matrix is 144I-16J and annihilates the all-ones vector. Thus the conditional threshold eight is sharp.",
+    "coverage_and_arithmetic": "Native weak-composition enumeration gives 1149 valid ordered descriptions, 105 point-set orbits and 87 metric classes. Direct enumeration independently confirms the same 87 metrics from 2731135 triples. All 87 unbounded integer matrix implications have accepted kernel receipts.",
+    "current_and_historical_status": "Earlier 238 support bounds are labelled as the state at that stage and linked to the new four-count section. Both manuscripts retain the unchanged 191--231 snake interval. No longer snake, global-bound improvement or novelty claim is made.",
+    "next_step_6435": {
+      "count": 6435,
+      "proof": "A possible five-supported profile has one parity, since a mixed-parity split has parts of size at most four. It contains a distance-eight pair by the conditional theorem. Translation and a coordinate permutation send this pair to 0 and 255. On the first eight coordinates the other three ordered vertices have eight possible column patterns; their nonnegative multiplicities sum to eight, giving C(15,7)=6435 descriptions. For each vertex the ninth bit is uniquely determined by even parity. A common permutation of the first eight coordinates fixes both normalized endpoints, proving coverage. Removing repeated vertices preserves all five-distinct-position cases.",
+      "scope": "A complete proposed description cover, not 6435 distinct isometry classes and not a completed five-support search.",
+      "singular_case": "The proposal correctly retains singular matrices for separate bounded analysis and requires full-cube inverse validation of any arithmetic survivor."
+    }
+  },
+  "issues": [],
+  "nonblocking_editorial_notes": [],
+  "release_recommendation": "Release the reviewed text at the pinned hashes within the explicitly stated evidence scope.",
+  "limits": [
+    "This is a bounded review of Round 239 additions, not the full-source review scheduled for round 240.",
+    "No compiler, solver or long enumeration was run by this reviewer for the final document review. Existing accepted source/log/object hashes were checked.",
+    "The reviewer authored the original generic dominance module and its split proofs; the parent supplied the final constant-equality rfl repair. Their source review is not an independently authored proof.",
+    "The reviewer authored the direct-vertex geometry script. It is independent of the root weak-composition implementation, but its review is not independent authorship.",
+    "The fully assembled actual-cube Lean recovery theorem still covers three missing counts. The four-count geometric interpretation and conditional eight-count cube application remain written deductions with checked arithmetic.",
+    "The five-position 6435-description cover is proposed and unsearched.",
+    "No LaTeX compiler or PDF visual review was performed by this reviewer; parent compilation is separate."
+  ]
+}

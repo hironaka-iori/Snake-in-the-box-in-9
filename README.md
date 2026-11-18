@@ -1,3 +1,13 @@
+# Current result after round 239
+
+Four arbitrary missing neighbour counts can be recovered in Q9. The complete written proof is supported by two independent geometric enumerations and 87 Lean-checked matrix implications. The fully assembled Lean cube theorem covers three missing counts. A separate result permits eight missing counts when no missing pair is at distance eight; its supporting integer inequalities passed Lean. Nine neighbours of one vertex give a sharp failure at nine under that condition.
+
+No longer snake or new global snake-length bound was found. The maintained interval is 191--231, and the saved-seed overlap ceiling remains 186. Rounds 237, 238 and 239 are complete; pause at this checkpoint.
+
+Read [the proof](milestones/239-four-count-recovery/MATHEMATICAL_NOTE.md), [evidence](milestones/239-four-count-recovery/data/completion.json), [handoff](handoff/CURRENT_STATUS.md), and [next step](milestones/239-four-count-recovery/NEXT_STEP.md).
+
+## Earlier checkpoints
+
 # Current result after round 238
 
 Any 509 of the 512 neighbour counts determine a binary selection in Q9. The actual-cube recovery theorem passed Lean, including all125 coefficient triples and the binary-selection corollary. The paper gives a shorter parity-and-divisibility proof. This supplies a construction consistency condition; connectedness and the existence of a longer snake remain unresolved.

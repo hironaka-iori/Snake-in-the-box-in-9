@@ -1,0 +1,877 @@
+{
+  "status": "PASS_SOURCE_REVIEW_KERNEL_PENDING",
+  "reviewed_at_utc": "2026-11-18T11:22:35.610853+00:00",
+  "source_and_input_hashes": {
+    "milestones\\239-four-count-recovery\\scripts\\audit_four.py": "762113eb2a8490d0a4a57fd45f25aad69a0f4a68f38541f4a8968a01a3cb0ce6",
+    "milestones\\239-four-count-recovery\\scripts\\make_four_proofs.py": "a46650272fbff9b64e404cadde875fa42d2e7ee76087f66711547b82897b80b7",
+    "milestones\\239-four-count-recovery\\scripts\\independent_geometry.py": "da257e6f8a30429c8d5e587173ba18aa333d84fbaad1856f2ba797c91594e9fa",
+    "milestones\\239-four-count-recovery\\data\\four-count-audit.json": "02e3aa94c435277760f31f8df5606d9eac11e4d8aeecd9e3032679b2812bec8f",
+    "milestones\\239-four-count-recovery\\data\\independent-geometry.json": "a9980c024f515e4169723f4d571dd5c59d922e0cdb3da3fd5c12f6182047c0fa",
+    "milestones\\239-four-count-recovery\\logs\\four-matrix-plan.json": "bff547116991d6145b49fd418b0054c0c13096158a48da003c5797a3a9f0f686",
+    "milestones\\238-three-count-recovery\\FOUR_COUNT_PLAN.md": "0db10c9a887b3f7121789596c3ebc01fdd58cdd087cec847a62b2021529f538d"
+  },
+  "metric_classes": 87,
+  "exact_rhs_cases_reviewed": 7047,
+  "nonzero_integer_survivors": [],
+  "odd_graph_type_counts": {
+    "empty": 48,
+    "one_edge": 24,
+    "two_edge_path_and_isolate": 7,
+    "three_leaf_star": 1,
+    "two_disjoint_edges": 5,
+    "three_edge_path": 1,
+    "four_cycle": 1
+  },
+  "metric_indices_by_odd_graph": {
+    "empty": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      16,
+      17,
+      19,
+      24,
+      25,
+      26,
+      28,
+      29,
+      30,
+      32,
+      33,
+      34,
+      35,
+      36,
+      40,
+      41,
+      42,
+      44,
+      45,
+      46,
+      54,
+      55,
+      56,
+      65,
+      66,
+      68,
+      70,
+      71,
+      73,
+      74,
+      76,
+      82,
+      83,
+      86
+    ],
+    "one_edge": [
+      14,
+      18,
+      20,
+      22,
+      27,
+      31,
+      37,
+      38,
+      39,
+      43,
+      47,
+      48,
+      51,
+      52,
+      57,
+      58,
+      67,
+      69,
+      72,
+      75,
+      77,
+      78,
+      79,
+      84
+    ],
+    "two_edge_path_and_isolate": [
+      15,
+      23,
+      49,
+      50,
+      53,
+      59,
+      60
+    ],
+    "three_leaf_star": [
+      21
+    ],
+    "two_disjoint_edges": [
+      61,
+      62,
+      80,
+      81,
+      85
+    ],
+    "three_edge_path": [
+      63
+    ],
+    "four_cycle": [
+      64
+    ]
+  },
+  "P3_couplings": [
+    {
+      "coupling": [
+        -16,
+        -10,
+        -10
+      ],
+      "metric_indices": [
+        59
+      ]
+    },
+    {
+      "coupling": [
+        -10,
+        -16,
+        -16
+      ],
+      "metric_indices": [
+        15
+      ]
+    },
+    {
+      "coupling": [
+        -10,
+        -16,
+        8
+      ],
+      "metric_indices": [
+        23
+      ]
+    },
+    {
+      "coupling": [
+        -10,
+        8,
+        8
+      ],
+      "metric_indices": [
+        50
+      ]
+    },
+    {
+      "coupling": [
+        8,
+        -10,
+        -10
+      ],
+      "metric_indices": [
+        60
+      ]
+    },
+    {
+      "coupling": [
+        8,
+        -10,
+        8
+      ],
+      "metric_indices": [
+        53
+      ]
+    },
+    {
+      "coupling": [
+        8,
+        8,
+        8
+      ],
+      "metric_indices": [
+        49
+      ]
+    }
+  ],
+  "P3_divisibility_table": [
+    {
+      "coupling": [
+        -16,
+        -10,
+        -10
+      ],
+      "D": 214493184,
+      "gcd": 9,
+      "reduced_divisor": 23832576,
+      "numerator_bound": 364608,
+      "strictly_exceeds": true
+    },
+    {
+      "coupling": [
+        8,
+        8,
+        8
+      ],
+      "D": 216981504,
+      "gcd": 9,
+      "reduced_divisor": 24109056,
+      "numerator_bound": 262656,
+      "strictly_exceeds": true
+    },
+    {
+      "coupling": [
+        8,
+        -10,
+        8
+      ],
+      "D": 215926884,
+      "gcd": 9,
+      "reduced_divisor": 23991876,
+      "numerator_bound": 353052,
+      "strictly_exceeds": true
+    },
+    {
+      "coupling": [
+        8,
+        -10,
+        -10
+      ],
+      "D": 212751360,
+      "gcd": 45,
+      "reduced_divisor": 4727808,
+      "numerator_bound": 679104,
+      "strictly_exceeds": true
+    },
+    {
+      "coupling": [
+        -10,
+        -16,
+        -16
+      ],
+      "D": 211258368,
+      "gcd": 9,
+      "reduced_divisor": 23473152,
+      "numerator_bound": 489024,
+      "strictly_exceeds": true
+    },
+    {
+      "coupling": [
+        -10,
+        8,
+        -16
+      ],
+      "D": 214263360,
+      "gcd": 45,
+      "reduced_divisor": 4761408,
+      "numerator_bound": 406224,
+      "strictly_exceeds": true
+    },
+    {
+      "coupling": [
+        -10,
+        8,
+        8
+      ],
+      "D": 213497856,
+      "gcd": 9,
+      "reduced_divisor": 23721984,
+      "numerator_bound": 637632,
+      "strictly_exceeds": true
+    }
+  ],
+  "matching_blocks": [
+    {
+      "block": [
+        [
+          -16,
+          -10
+        ],
+        [
+          -10,
+          -16
+        ]
+      ],
+      "plus": {
+        "determinant": 11919,
+        "gcd": 3,
+        "reduced_divisor": 3973,
+        "numerator_bound": 274,
+        "strictly_exceeds": true
+      },
+      "minus": {
+        "determinant": 18711,
+        "gcd": 63,
+        "reduced_divisor": 297,
+        "numerator_bound": 189,
+        "strictly_exceeds": true
+      }
+    },
+    {
+      "block": [
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "plus": {
+        "determinant": 16647,
+        "gcd": 3,
+        "reduced_divisor": 5549,
+        "numerator_bound": 358,
+        "strictly_exceeds": true
+      },
+      "minus": {
+        "determinant": 13671,
+        "gcd": 63,
+        "reduced_divisor": 217,
+        "numerator_bound": 147,
+        "strictly_exceeds": true
+      }
+    },
+    {
+      "block": [
+        [
+          8,
+          -10
+        ],
+        [
+          -10,
+          8
+        ]
+      ],
+      "plus": {
+        "determinant": 17871,
+        "gcd": 21,
+        "reduced_divisor": 851,
+        "numerator_bound": 322,
+        "strictly_exceeds": true
+      },
+      "minus": {
+        "determinant": 12375,
+        "gcd": 45,
+        "reduced_divisor": 275,
+        "numerator_bound": 165,
+        "strictly_exceeds": true
+      }
+    },
+    {
+      "block": [
+        [
+          -16,
+          -10
+        ],
+        [
+          -10,
+          8
+        ]
+      ],
+      "plus": {
+        "determinant": 14607,
+        "gcd": 9,
+        "reduced_divisor": 1623,
+        "numerator_bound": 322,
+        "strictly_exceeds": true
+      },
+      "minus": {
+        "determinant": 15255,
+        "gcd": 45,
+        "reduced_divisor": 339,
+        "numerator_bound": 189,
+        "strictly_exceeds": true
+      }
+    },
+    {
+      "block": [
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          -10
+        ]
+      ],
+      "plus": {
+        "determinant": 14199,
+        "gcd": 3,
+        "reduced_divisor": 4733,
+        "numerator_bound": 358,
+        "strictly_exceeds": true
+      },
+      "minus": {
+        "determinant": 15831,
+        "gcd": 9,
+        "reduced_divisor": 1759,
+        "numerator_bound": 165,
+        "strictly_exceeds": true
+      }
+    }
+  ],
+  "metric_sources": [
+    {
+      "index": 0,
+      "source_sha256": "8b3a784c4e92a27e658ffb23134f0772e371e267895d0d9572ceb09061786b16",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 1,
+      "source_sha256": "f4f57621e5f541b3c41efb6547082b8e4bf1ccc8fa0b255cc29ce0bc55d4ebe9",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 2,
+      "source_sha256": "eec949a078cad26b09697c62cc5149a44aa15b9c48ae194c8eb02f913bd72ea2",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 3,
+      "source_sha256": "042e6c34c986ebc039d27de1930f52ff2e231d8ff5c348e3b7026eaa9e62c312",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 4,
+      "source_sha256": "02f50ed08e13578c1e50d81e4b1cc4a3f1dad56b08b2ec7bbe9adeeae1000036",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 5,
+      "source_sha256": "2e81aed9668bbf5f5ef60c63bb1b1ef37a394c9b4204e312f361f828dca059a6",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 6,
+      "source_sha256": "8177cd46bf24ccbcf6274cdc164876bf53bddd0928abe79745b58c5dc01fc2ef",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 7,
+      "source_sha256": "9d93eca8e0c5fa0e19e95f36206dbae4097e653a5baec805bee7ece0ae144e00",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 8,
+      "source_sha256": "d8d6658e1fb6bc37daccd9fc9e4973da762bfce4a547d70f773a01fad6d6e125",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 9,
+      "source_sha256": "7f17aa306a4be883e1ff3efb0e2082f87bc10688a7a1f30b7286e8c969aeb240",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 10,
+      "source_sha256": "9f884a61aba6703c0449fcf64bc5efe27dd96f7cfa63eaa8c1d3054050a03b5a",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 11,
+      "source_sha256": "79d64628186b8373adf07d17d6f7b79a25ac5cd3f69a2f799287dc5db7b501cb",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 12,
+      "source_sha256": "eb243fb37b12581db54ea7f8d1b9dedd8170950da6853925d9d8f80741ddd9a6",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 13,
+      "source_sha256": "a5b069f3966677d07250dbf2f0d71516f0e6722dd4446d5e10294f2024c528fd",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 14,
+      "source_sha256": "39a554bc01aa5d761a073f689c6881605e57d0e076f59197fbb61e0361bb62ed",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 15,
+      "source_sha256": "ceca08cb1a27bfa0fd12a549f89660a14806dfb6bddf3689c209c45b2fd8bbc1",
+      "odd_graph": "two_edge_path_and_isolate"
+    },
+    {
+      "index": 16,
+      "source_sha256": "7c1e1732dbeabcc3b03ba5d6ae3c16ea1b99e8d9eda9e7a2d632cd95436b5141",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 17,
+      "source_sha256": "4f15c28eb16760a51499a6fa47f1840938c997ad083ac23c967fbb261b761e6b",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 18,
+      "source_sha256": "a0bc1c5e4c94b8e06fb3f3639f1d225cc3a23f9022f9c0453cc1745c073bbba1",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 19,
+      "source_sha256": "166bf067903007bf4ca87e8ae68f932acd9b6dbd19e15fc95c446ede1caaaccd",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 20,
+      "source_sha256": "208ac56270d4e7cb1c6599517136a53d8ba899b9081feaa06ae30cc8698c1425",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 21,
+      "source_sha256": "ef90b080cca203b6f9561fee0130d204f81ce539181737128d1798b3784b5592",
+      "odd_graph": "three_leaf_star"
+    },
+    {
+      "index": 22,
+      "source_sha256": "8cdf34c3c8da5506ef5ff58a67feaffbf51318e9cdb34ecba626bbde277ab44f",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 23,
+      "source_sha256": "700a3e13e5cf30f35e24d22dac1e7df91ef98d71b1e3640cf80a5bc682cd6373",
+      "odd_graph": "two_edge_path_and_isolate"
+    },
+    {
+      "index": 24,
+      "source_sha256": "02cceffe9bb65fbe610912dbcd3ae4b8b276700110514ba9f39f806dbf571802",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 25,
+      "source_sha256": "15715c0d1aa741793d92511dd6125a13923644e6b6c9b2cdb54bbab3f7803cec",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 26,
+      "source_sha256": "6f0e3cd876b427238d6bec559f19ba73e7d21ae716d69d9601bd634e832138c3",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 27,
+      "source_sha256": "28186b4a5f19dcaaceb4e44ee8dafc5492ef68e7c9bec8c2b3259e5294e57049",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 28,
+      "source_sha256": "de7733c6f33f6aed3fa7312a23d2243b594f635e058d746ba38d6035741efeb1",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 29,
+      "source_sha256": "481ce498e35846a3c7cd01b8777dccab7bcb1710865049eb24d63edb5b4b8f16",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 30,
+      "source_sha256": "de75ffa8e4f8f88bc5c3ba0c3182ab3a381415457d5a01b9e721e3ea95c8e007",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 31,
+      "source_sha256": "c3646fd86dcc387606ad4b46de5f52aa86b8e6e79b322f6f90751d4ad63583eb",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 32,
+      "source_sha256": "9d99944379b6e31dd468b0b3ea8de1eae0923e4c77e5b961cec4cd3e87415855",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 33,
+      "source_sha256": "edf65daed55dfa22bbd4a0cea2925ee22fdf6ddad2a770ee008381d3c89dfe1e",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 34,
+      "source_sha256": "a907097550e51d8edeaa560eb1de55333ee1eee5c6bba3ac7421cc8d19a88bf3",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 35,
+      "source_sha256": "32dd15a139c0824ebd891d01a794a3490750258363364b4df58158472ddeca2a",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 36,
+      "source_sha256": "897eecbb86d1b5a747a1990f7655efc7649952e7055749573b2fd547732c66b4",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 37,
+      "source_sha256": "7ce385af6e3df2cbc2791481eb287c810d2fd1ad5e03ad3cdca39696ed9538d2",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 38,
+      "source_sha256": "adef3160643095e9d150e1276bd1497be60c6f712c2c1154504f766fc7b512a4",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 39,
+      "source_sha256": "0cb0deb8e21dee5853beb80a7e4f082bff3a20a16838dda16ed67659307ea73f",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 40,
+      "source_sha256": "f93043a3f54434b0ad864c265d31a91a907f7414ec12b516d020d9e78bf150a0",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 41,
+      "source_sha256": "741518d54eafe775e648e5f6ebd35fca7d983112f8de658aa3b2ddfefa079942",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 42,
+      "source_sha256": "54f220b5b2c295580f125e512b0b1b6abcc4af4551cc64ef1f45e2a08ad7e09b",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 43,
+      "source_sha256": "2d5882ae26bba7508f64534a0eb2ef3be1980571abfa48db0f896303a6928afd",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 44,
+      "source_sha256": "6b752c6ea6f664c7fd0eddc3edea9c740603cb5e6519d49bc01ecfc370a7585a",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 45,
+      "source_sha256": "d955df369d5db8fcf9af9827221822f33ef2c24b146e368b4d184d172f8e6e69",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 46,
+      "source_sha256": "e106128fd255ce76ad7c00b296929e6aca3e75868f164b495b87a11927b37bbd",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 47,
+      "source_sha256": "5f71b717fba118cc2310d36d8ee93dbe060331a4028cf88dfc7759e2dd59f34c",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 48,
+      "source_sha256": "8b31911138a2e7c7899fab39f79d6207cf68778db10ae35c6f643931ae2d9585",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 49,
+      "source_sha256": "9077f6c1bf4264dd7a115fc10f3316ed1d7dc55546f4607d57cb070c0b36f708",
+      "odd_graph": "two_edge_path_and_isolate"
+    },
+    {
+      "index": 50,
+      "source_sha256": "256b77520d5205b29f3475aa06cbe6084d0cac556222a5ea2ab3910b9fe39c3b",
+      "odd_graph": "two_edge_path_and_isolate"
+    },
+    {
+      "index": 51,
+      "source_sha256": "7b2b2f86205b5a7e09f21938e88ff53646cb8c7cf8c2e21834af7ec2b880f2f8",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 52,
+      "source_sha256": "926456dccf4dac4719b54aeed522d17efd7af0757ea23da0ceb98aeb4f3cf418",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 53,
+      "source_sha256": "b77acdbd0e24d836a194bf220bb1bddbda291ff955009f369881fa7cdee38be1",
+      "odd_graph": "two_edge_path_and_isolate"
+    },
+    {
+      "index": 54,
+      "source_sha256": "0959c7acff8c9921e2dda54f0df2cc995d40bd569b329d6d7e07e8842e6b8b7b",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 55,
+      "source_sha256": "7c01ece0447df1630f15f24b7cb543552c6d548bb2d3a085aa1c598d43de1355",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 56,
+      "source_sha256": "bba2b5c11a3dda74b1fe374080ad9fdec182b60fc64b66249548550d3c8d16c1",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 57,
+      "source_sha256": "12572a8e221851b8c8bcf9249de4c120361a8e112627df90410515c9009702a3",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 58,
+      "source_sha256": "dd00db85f7cfb02f76e3256942a0c64811f065005eb02f27770b324506e15754",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 59,
+      "source_sha256": "c539a3583f724d50773191ffa83afe9db7aec84f82fec6178df4dd71ec211a99",
+      "odd_graph": "two_edge_path_and_isolate"
+    },
+    {
+      "index": 60,
+      "source_sha256": "d960b953832b695f89aa3320541074aec89fbfca27a449ed2efec55adcf7c16f",
+      "odd_graph": "two_edge_path_and_isolate"
+    },
+    {
+      "index": 61,
+      "source_sha256": "cfaf7c42ef3bd2d475357602fcbd93ffacbb31d39374f1f2d7a361bed7e707d6",
+      "odd_graph": "two_disjoint_edges"
+    },
+    {
+      "index": 62,
+      "source_sha256": "f0aa003692be64f21b7c7a3e99cc57ff7d3af8c8e0dd3e458cbc8cd2edb5cddd",
+      "odd_graph": "two_disjoint_edges"
+    },
+    {
+      "index": 63,
+      "source_sha256": "96a9d7430d3072c91a3df230971e5ee128da41365c695c1f2539d9b2dad47ba3",
+      "odd_graph": "three_edge_path"
+    },
+    {
+      "index": 64,
+      "source_sha256": "a1170a4d00ec72a9e4e571c1dccfefbb31761fd2e44e87ac3be990c0311e5e42",
+      "odd_graph": "four_cycle"
+    },
+    {
+      "index": 65,
+      "source_sha256": "863cc0ef0ea88e6c3d45f3bb09e540d9f5df9660847bb84f3c5a024fbca92a8a",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 66,
+      "source_sha256": "f902248ee9404a1a9a77bb2675c8926f2e8d4ef5ddb65b95ba4eb85344989799",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 67,
+      "source_sha256": "8405d3331a4f3183032876171da8558268f8e6b974a1b7c82c99094ebe435ba5",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 68,
+      "source_sha256": "c3c22c364e75439a91f7e46d5d6ed5ebf8ba92685e672018b8415f6ab48f5d58",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 69,
+      "source_sha256": "924be73207b14f4a1f18180af67d0631d5a5fc2b33f83ec0484c3420f14823fd",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 70,
+      "source_sha256": "4a5d078c82d0329c7085b359d71ec6089ea8a438acc99516a5f2276a73b81430",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 71,
+      "source_sha256": "d444c8253830fd5e2d80c057b344531dd8a2dbb0555ea107ebe6a4c8a042b154",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 72,
+      "source_sha256": "27f2a3202c1f09e9afb1d7fafc408c40af99241f78908bf6096b9e58fdd0edb8",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 73,
+      "source_sha256": "9d86e67bde4f588a5bd9d3c89e6b020751adfbbb26798c96a4328a5452c97c42",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 74,
+      "source_sha256": "26302d701b080e151639b15be1814b8bbf342011a89caa31558d1285d1445902",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 75,
+      "source_sha256": "66ca392dcae7338c633dd6990cb96f04146b321342ba3e5cbfd342d404633673",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 76,
+      "source_sha256": "43ab94ffe2d43e84b4abcbb63a7ee48bb1d7a69a4d4fd759c453ab30e0c94af7",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 77,
+      "source_sha256": "4d2e64f434b75679d069ed05f121a293ef8be1a017e239d52d76d7520fbe1b42",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 78,
+      "source_sha256": "576f994146dc8c7858b000a271e3b6f09173ca192c13f1427bb809576925b0cc",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 79,
+      "source_sha256": "447ae89f934be60280ed464a500c9e19436e90683853a11453a7ab2fc5dce879",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 80,
+      "source_sha256": "a5d2554bb60d82c90e73c22886bb44e3eaf511bceee7c2c190982b3542e827c8",
+      "odd_graph": "two_disjoint_edges"
+    },
+    {
+      "index": 81,
+      "source_sha256": "dfd8409046d84c0bf921e684b671b2ea35787fd2dcbfda007d852bdd9423c395",
+      "odd_graph": "two_disjoint_edges"
+    },
+    {
+      "index": 82,
+      "source_sha256": "d8c427211b1f9798b151261bb769784cbc1b931652003da74fae544ddfe1839b",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 83,
+      "source_sha256": "7c6bcbba501a9866328dc4b327fc357f246543d52bbff814413c4389fdb93a20",
+      "odd_graph": "empty"
+    },
+    {
+      "index": 84,
+      "source_sha256": "a021532c27a8a07e38d611834ce6888fc3c45369e3c23edb826311bd3e0c5a63",
+      "odd_graph": "one_edge"
+    },
+    {
+      "index": 85,
+      "source_sha256": "a1c6b8647d8a565c0f1a8fa111951c7ef2879d8ee1985e37770442ddcbb36a62",
+      "odd_graph": "two_disjoint_edges"
+    },
+    {
+      "index": 86,
+      "source_sha256": "a9d2ae12cfaf0b6605078cab330acb7602f2b821b71a8d6a7247c349d516f993",
+      "odd_graph": "empty"
+    }
+  ],
+  "issues": [],
+  "arithmetic_runtime_ns": 392199100,
+  "kernel_stage": "Parent compilation of the 87 exact matrix theorems is ongoing; no complete acceptance claim is made here.",
+  "written_proof_review": {
+    "seven_graph_types": "Complete: distance-eight pairs are triangle-free because two distinct distance-eight neighbours of a vertex are at distance two. Degree sequences distinguish the seven possible triangle-free four-vertex types. All seven occur among the 87 metrics.",
+    "P3_isolate": "Exactly seven coupling triples occur up to leaf interchange. The independent matrix extraction agrees with the geometric weight/membership derivation and every displayed divisibility-table value.",
+    "matching": "Exactly five cross-block classes occur under independent endpoint swaps and swapping the edges. The five displayed symmetric representatives cover them. Both reduced-determinant tables and strict numerator bounds are correct.",
+    "other_types": "The parity and maximum-norm arguments, star leaf subtraction, forced path distances, reversed-pair equations, and cycle opposite-row subtraction are mathematically valid.",
+    "mixed_parity": "Restrict the signed selection difference to either parity side. Its neighbour counts are supported on the opposite side, with at most three exceptional positions in each part of a mixed-parity four-set. The checked three-erasure theorem, padding smaller supports if necessary, annihilates both restrictions."
+  },
+  "scope": [
+    "Each generated zero_solution theorem concerns a literal 4-by-4 integer matrix, with ternary RHS and no bounds on the four unknown integers.",
+    "The direct vertex enumeration independently covers exactly the same 87 metric classes as the weak-composition enumeration.",
+    "The witness representative for a canonical metric need only match after point permutation; the audit correctly confirms that relation.",
+    "Geometry coverage, coordinate relabelling, the mixed-parity reduction, and inverse application to arbitrary missing positions remain written/native bridges; these 87 Lean statements alone are not a full actual-cube four-erasure theorem."
+  ],
+  "limits": [
+    "No compiler or solver was run by this reviewer.",
+    "Only small exact integer matrix calculations and source inspection were performed; the long direct vertex enumeration was run separately by the parent.",
+    "The reviewer authored independent_geometry.py, so the inspection of that script is not independent authorship; it is independent of the root weak-composition method.",
+    "Final manuscript review remains pending the parent release."
+  ]
+}

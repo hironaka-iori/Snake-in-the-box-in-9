@@ -1,0 +1,11 @@
+E:\Snake-in-a-box\milestones\239-four-count-recovery\lean\EightCountBounds239.lean:20:21: error: unsolved goals
+M : Int
+hM : 0 ≤ M
+xs : List Int
+hlen : xs.length ≤ 7
+hxs : ∀ (x : Int), x ∈ xs → -(16 * M) ≤ x ∧ x ≤ 16 * M
+h : -(↑xs.length * (16 * M)) ≤ xs.sum ∧ xs.sum ≤ ↑xs.length * (16 * M)
+hcast : ↑xs.length ≤ 7
+hnonneg : 0 ≤ 16 * M
+⊢ 7 * 16 * M = 112 * M
+'EightCountDominance239.seven_term_bounds' depends on axioms: [propext, sorryAx]

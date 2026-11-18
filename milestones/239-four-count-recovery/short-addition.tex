@@ -1,0 +1,74 @@
+% Publication gate: retain the 87-matrix Lean claim only after the root
+% worker obtains the complete PASS receipt for all 87 FourMatrix239 modules.
+\section{Why four missing counts can also be recovered}
+The neighbour counts at any 508 of the 512 vertices of $Q_9$ determine
+a binary vertex selection uniquely. If the selection lies on a known
+parity side, any 252 of the 256 opposite-side counts suffice. The counts
+on the selected side are automatically zero.
+
+To compare two selections, subtract their indicators. Their difference
+$f$ takes values $-1,0,1$. If the observed counts agree, the neighbour
+sums of $f$ can be nonzero only at the four missing positions. When
+those positions have mixed parity, splitting $f$ by parity reduces
+each part to at most three missing counts, already covered by the
+preceding result.
+
+For four positions of one parity, apply the inverse formula at their
+antipodes. If $w$ lists the four missing count differences, the resulting
+integer equations are
+\[
+Mw=315s,\qquad s\in\{-1,0,1\}^4.
+\]
+The diagonal entries of $M$ are 128. Its other entries are $-16,8,-10,35$
+when the corresponding missing positions are at distance $2,4,6,8$.
+
+Only 35 is odd. Join positions at distance eight. Two such neighbours
+of one position have distance two from each other, so this graph has
+no triangle. There are seven possible graph types on four vertices.
+Parity, subtraction of equations and divisibility settle five types
+directly. The other two reduce to seven triples of coefficients and
+five small block matrices. In each case, elimination produces
+$Dx=315N$; the integer $D/\gcd(D,315)$ must divide $N$, while the allowed
+right-hand sides make $|N|$ too small unless $N=0$. The full paper gives
+the matrices and numerical bounds. These arguments force $w=0$, and
+the inverse then forces the entire selection difference $f$ to vanish.
+
+A further result permits up to eight missing counts when no pair of
+missing positions has Hamming distance eight. In that case every
+off-diagonal coefficient in the antipodal equations is even, with
+absolute value at most 16. Parity forces every right-hand side to zero.
+If $k\le8$ counts are missing and $M$ is the largest absolute missing
+count difference, a row attaining it gives
+\[
+128M\le16(k-1)M\le112M,
+\]
+so $M=0$. This is a written deduction from the inverse. The condition
+on the missing positions is required by this argument.
+
+Eight is sharp under that condition. The nine neighbours of one vertex
+have pairwise distance two, yet losing all nine counts conceals whether
+that vertex is selected. The unrestricted result above remains four
+missing counts; whether every set of five through eight missing counts
+can be tolerated is unresolved. Any failure in that range must contain
+a pair of missing positions at distance eight.
+
+The classification was also checked independently. Grouping the nine
+coordinate columns by their three-bit patterns gives 1149 valid
+ordered descriptions, 105 cube-isometry classes of four-point sets,
+and 87 distinct distance matrices. A second enumeration checks all
+2,731,135 triples after fixing one vertex at zero and obtains exactly
+the same 87 matrices. All 7047 matrix/right-hand-side combinations have
+no nonzero integer solution~\cite{research239}.
+
+All 87 matrix implications passed Lean checking, including their
+adjugate identities and divisibility calculations. The connection from
+arbitrary cube positions to this catalogue, and the parity reduction,
+remain written arguments with independent computational support. The
+complete four-count recovery statement has not been assembled as one
+Lean theorem.
+
+Thus two different selections must alter at least five neighbour
+counts. Changing one selected vertex alters nine, so the smallest
+possible number remains between five and nine. Recovery alone does
+not ensure that a selection is a connected induced path. No longer
+snake or new global bound follows from this result.

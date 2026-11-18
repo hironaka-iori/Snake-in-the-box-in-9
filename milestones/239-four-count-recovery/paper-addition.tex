@@ -1,0 +1,281 @@
+% Publication gate: retain the 87-matrix Lean claim only after the root
+% worker obtains the complete PASS receipt for all 87 FourMatrix239 modules.
+\subsection{Recovery after four missing neighbour counts}
+\label{sec:four-erasure239}
+The three-count result extends to four missing observations. The next
+lemma supplies the additional arithmetic. Its hypothesis uses the
+positions of the missing counts, independently of any snake ordering.
+
+\begin{lemma}\label{lem:four-matrix239}
+Let $p_0,p_1,p_2,p_3$ be distinct vertices of one parity in $Q_9$.
+Let $M$ be the symmetric matrix with diagonal entries 128 and
+\[
+M_{ij}=\begin{cases}
+-16,&\Ham(p_i,p_j)=2,\\
+8,&\Ham(p_i,p_j)=4,\\
+-10,&\Ham(p_i,p_j)=6,\\
+35,&\Ham(p_i,p_j)=8
+\end{cases}\qquad(i\ne j).
+\]
+If $w\in\mathbb Z^4$, $s\in\{-1,0,1\}^4$, and $Mw=315s$, then $w=0$.
+\end{lemma}
+\begin{proof}
+We repeatedly use the following elementary divisibility fact:
+if $Dx=315N$ with $D>0$ and integers $x,N$, then
+$D/\gcd(D,315)$ divides $N$. If $|N|<D/\gcd(D,315)$, both $N$ and $x$
+vanish. This also applies to each coordinate of an adjugate identity.
+
+Join two missing positions when their distance is eight, so the
+corresponding coefficient is 35. Translate one position to zero.
+Its distance-eight neighbours are $J\oplus e_i$, where $J$ is the
+all-ones word and $e_i$ has just its $i$th coordinate equal to one.
+Two distinct such neighbours have distance two. The resulting graph
+is therefore triangle-free. On four vertices its seven possible
+unlabelled types are the empty graph, one edge, two disjoint edges,
+a two-edge path with an isolated vertex, a three-leaf star, a
+three-edge path, and a four-cycle. We treat these cases below.
+
+\smallskip\noindent\emph{Empty graph.}
+All coefficients are even. Parity forces $s=0$. If $m$ is the largest
+absolute unknown, its row gives $128m\le48m$, hence $w=0$.
+
+\smallskip\noindent\emph{One edge.}
+Call its unknowns $x,y$ and the other two $z,t$. The last two right-hand
+sides vanish by parity. Put $m=\max(|x|,|y|)$ and
+$h=\max(|z|,|t|)$. Since every other coefficient has absolute value at
+most 16, the equations imply
+\[
+112h\le32m,\qquad93m\le315+32h.
+\]
+Thus $587m\le2205$, giving $m\le3$ and $h\le6/7$. Integrality forces
+$z=t=0$. The remaining coefficient-35 two-variable system vanishes by
+the argument in Section~\ref{sec:three-erasure238}.
+
+\smallskip\noindent\emph{Three-leaf star.}
+Every leaf pair has coefficient $-16$. Subtracting two leaf rows gives
+$144(y-z)=315(t-u)$. Since $|t-u|\le2$ and 144 divides neither 315 nor
+630, the leaf unknowns and right-hand sides agree. The remaining
+system has matrix
+\[
+\begin{pmatrix}128&105\\35&96\end{pmatrix}.
+\]
+Its determinant is 8613, with gcd 9 with 315. Hence 957 divides
+$128t-35s$, whose absolute value is at most 163. It vanishes; since
+$|s|,|t|\le1$, this forces $s=t=0$ and all unknowns zero.
+
+\smallskip\noindent\emph{Three-edge path.}
+Successive positions can be written
+$0,J\oplus e_i,e_i\oplus e_j,J\oplus e_i\oplus e_j\oplus e_k$.
+Distinctness and the absence of a closing distance-eight edge force
+$i,j,k$ to be distinct. Thus the nonconsecutive distances are $2,2,6$,
+and, in path order,
+\[
+M=\begin{pmatrix}
+128&35&-16&-10\\35&128&35&-16\\
+-16&35&128&35\\-10&-16&35&128
+\end{pmatrix}.
+\]
+Adding and subtracting reversed pairs of rows yields the two matrices
+\[
+\begin{pmatrix}118&19\\19&163\end{pmatrix},\qquad
+\begin{pmatrix}138&51\\51&93\end{pmatrix}.
+\]
+Their right-hand sides are 315 times integers of absolute value at
+most two. Their determinants are 18873 and 10233, each with gcd 9 with
+315. The reduced divisors 2097 and 1137 exceed the corresponding
+adjugate numerator bounds 364 and 378. All sums and differences of
+unknowns therefore vanish.
+
+\smallskip\noindent\emph{Four-cycle.}
+Opposite vertices have distance two. Subtracting their rows, again
+with coefficient 144, makes opposite unknowns and right-hand sides
+agree. The remaining matrix is
+\[
+\begin{pmatrix}112&70\\70&112\end{pmatrix}.
+\]
+Adding gives $182(x+y)=315(s+t)$. Since $\gcd(182,315)=7$ and
+$|s+t|\le2$, we have $x+y=s+t=0$. The first row reduces to
+$2x=15s$. Parity and $|s|\le1$ force $s=x=0$.
+
+\smallskip\noindent\emph{Two-edge path and an isolated vertex.}
+Put the centre at zero and the leaves at $J\oplus e_i,J\oplus e_j$.
+The isolated position $q$ has weight $k\in\{2,4,6\}$. Its distance to
+a leaf is $10-k$ when the corresponding coordinate belongs to $q$,
+and $8-k$ otherwise. Excluding any additional distance-eight edge
+gives the seven coupling triples $(\alpha,\beta,\gamma)$ in the table
+below, up to interchange of the leaves.
+
+The centre-and-leaves block $K$ and its adjugate are
+\[
+K=\begin{pmatrix}128&35&35\\35&128&-16\\35&-16&128\end{pmatrix},
+\qquad
+\operatorname{adj}K=
+\begin{pmatrix}
+16128&-5040&-5040\\-5040&15159&3273\\-5040&3273&15159
+\end{pmatrix},
+\]
+with $\det K=1711584$. Put
+$v=(\alpha,\beta,\gamma)^{\mathsf T}$ and $L=(\operatorname{adj}K)v$.
+The isolated right-hand side is zero by parity. If $h$ is its unknown,
+block elimination gives
+\[
+D h=-315L^{\mathsf T}(s,t,u),\qquad
+D=128\det K-v^{\mathsf T}L.
+\]
+The seven exact calculations are
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$(\alpha,\beta,\gamma)$ & $D$ & $\gcd(D,315)$ & $\sum_i|L_i|$\\
+\midrule
+$(-16,-10,-10)$ & 214493184 & 9 & 364608\\
+$(8,8,8)$ & 216981504 & 9 & 262656\\
+$(8,-10,8)$ & 215926884 & 9 & 353052\\
+$(8,-10,-10)$ & 212751360 & 45 & 679104\\
+$(-10,-16,-16)$ & 211258368 & 9 & 489024\\
+$(-10,8,-16)$ & 214263360 & 45 & 406224\\
+$(-10,8,8)$ & 213497856 & 9 & 637632\\
+\bottomrule
+\end{tabular}
+\end{center}
+In every row, $D/\gcd(D,315)$ exceeds the last column. The scalar
+product and $h$ vanish. The remaining three unknowns vanish by
+Section~\ref{sec:three-erasure238}.
+
+\smallskip\noindent\emph{Two disjoint edges.}
+Write the first edge as $0,J\oplus e_i$ and the second as
+$q,q\oplus J\oplus e_j$. Set $k=\operatorname{wt}(q)$, and let
+$a,b\in\{0,1\}$ indicate membership of $i,j$ in the support of $q$.
+For $i\ne j$, the four cross distances are
+\[
+\begin{pmatrix}k&8-k+2b\\8-k+2a&k+2-2(a+b)\end{pmatrix}.
+\]
+For $i=j$, the bottom-right entry is $k$ and $a=b$. Requiring all four
+entries to belong to $\{2,4,6\}$, and interchanging the two edges or
+their endpoints, leaves five symmetric cross-coefficient matrices:
+\[
+C_1=\begin{pmatrix}-16&-10\\-10&-16\end{pmatrix},\quad
+C_2=\begin{pmatrix}8&8\\8&8\end{pmatrix},\quad
+C_3=\begin{pmatrix}8&-10\\-10&8\end{pmatrix},
+\]
+\[
+C_4=\begin{pmatrix}-16&-10\\-10&8\end{pmatrix},\qquad
+C_5=\begin{pmatrix}8&8\\8&-10\end{pmatrix}.
+\]
+The cases $i=j$ give $C_1,C_2,C_3$; the cases $i\ne j$ give $C_4,C_5$
+and endpoint permutations. For instance,
+$\left(\begin{smallmatrix}-10&-16\\8&-10\end{smallmatrix}\right)$
+becomes $C_4$ by interchanging the second edge's endpoints.
+
+Put $B=\left(\begin{smallmatrix}128&35\\35&128\end{smallmatrix}\right)$.
+The full matrix is $\left(\begin{smallmatrix}B&C\\C&B\end{smallmatrix}\right)$.
+Adding its block equations gives $(B+C)X=315S$, where $X$ contains
+sums of corresponding unknowns and $|S_i|\le2$. In the next table,
+$q_\pm=\det(B\pm C)/\gcd(\det(B\pm C),315)$;
+$R_+$ bounds each adjugate numerator for right-hand-side entries at
+most two in absolute value, and $R_-$ does so for ternary entries.
+\begin{center}
+\begin{tabular}{rrrrr}
+\toprule
+$C$ & $q_+$ & $R_+$ & $q_-$ & $R_-$\\
+\midrule
+$C_1$ & 3973 & 274 & 297 & 189\\
+$C_2$ & 5549 & 358 & 217 & 147\\
+$C_3$ & 851 & 322 & 275 & 165\\
+$C_4$ & 1623 & 322 & 339 & 189\\
+$C_5$ & 4733 & 358 & 1759 & 165\\
+\bottomrule
+\end{tabular}
+\end{center}
+Since $q_+>R_+$, the sums of unknowns vanish, as do their right-hand
+sides. The second block is now the negative of the first, so the first
+block equation becomes $(B-C)(x,y)^{\mathsf T}=315(s,t)^{\mathsf T}$
+with ternary $s,t$. Since $q_->R_-$, these unknowns also vanish.
+This completes all seven cases.
+\end{proof}
+
+\begin{proposition}\label{prop:four-erasure239}
+The neighbour counts at any 508 of the 512 vertices of $Q_9$ determine
+a binary vertex selection uniquely. If the selected parity side is
+known, any 252 of the 256 opposite-side counts suffice.
+\end{proposition}
+\begin{proof}
+Let $f$ be the difference of two binary selection indicators, and
+write $Af(v)=\sum_{u\sim v}f(u)$ for its neighbour sums. Then $f$ is
+ternary and $Af$ vanishes outside the four missing positions.
+If those positions have mixed parity, restrict $f$ to each parity
+side. Adjacency sends each restriction to the opposite side, where
+its neighbour sums have support at most three. The three-erasure
+result makes both restrictions zero.
+
+If the four positions have one parity, apply the inverse formula at
+their antipodes. Its diagonal coefficient is 128; at pairwise distances
+$2,4,6,8$ its off-diagonal coefficients are $-16,8,-10,35$.
+Lemma~\ref{lem:four-matrix239} makes all four exceptional neighbour
+sums zero. The inverse then gives $f=0$ everywhere. For the parity
+specialization, all 256 counts on the selected side are already zero,
+so knowing 252 opposite-side counts leaves just four observations
+unspecified.
+\end{proof}
+
+\begin{proposition}\label{prop:eight-erasure239}
+Let $E\subseteq V(Q_9)$ have at most eight vertices, with no two at
+Hamming distance eight. The neighbour counts outside $E$ determine a
+binary selection uniquely. The number eight is sharp under this
+condition on $E$.
+\end{proposition}
+\begin{proof}
+Subtract two binary selection indicators and call their difference
+$f$. Suppose $Af$ vanishes outside $E=\{p_1,\ldots,p_k\}$.
+The case $k=0$ follows from the inverse. Otherwise put $w_i=Af(p_i)$
+and apply the inverse at the antipodes of these positions. Its diagonal
+entries are 128. Excluding distance eight leaves off-diagonal entries
+in $\{0,-10,8,-16\}$, all even and of absolute value at most 16.
+Every equation has right-hand side $315s_i$ with
+$s_i\in\{-1,0,1\}$. Parity therefore forces every $s_i=0$.
+If $M=\max_i|w_i|$, a row attaining the maximum gives
+\[
+128M\le16(k-1)M\le112M.
+\]
+Thus every exceptional count is zero, and the inverse gives $f=0$.
+This proof permits both parities among the missing positions.
+
+For sharpness, let $E$ consist of the nine neighbours of a single
+vertex $v$. Every pair in $E$ has distance two. The empty selection
+and the selection $\{v\}$ have identical counts outside $E$.
+Equivalently, the nine-position antipodal matrix is $144I-16J$,
+where $J$ is the all-ones matrix, and it annihilates the all-ones vector.
+\end{proof}
+
+Proposition~\ref{prop:eight-erasure239} is a written consequence of the
+cube inverse, parity and the displayed scalar inequality. Its geometric
+hypothesis is essential to the argument: for arbitrary missing
+positions, Proposition~\ref{prop:four-erasure239} gives the established
+four-count result. Any nonzero difference hidden at five through eight
+positions must include a distance-eight pair among those positions.
+
+The finite audit independently covers the geometry. After translating
+one position to zero, record the multiplicities of the eight possible
+three-bit coordinate columns. The $\binom{16}{7}=11440$ compositions of
+nine columns contain 1149 valid ordered descriptions, giving 105
+four-point set orbits under cube isometries and 87 distinct distance
+matrices up to point relabelling. Exact adjugate calculations over all
+$87\cdot81=7047$ ternary right-hand sides find no nonzero integer
+solution, with no bound on the unknowns. A separate direct enumeration
+of all $\binom{255}{3}=2731135$ triples of nonzero even-weight vertices
+recovers exactly the same 87 matrix classes~\cite{research239}.
+
+All 87 literal matrix implications have passed Lean checking. Each
+checks its adjugate identities and finite divisibility calculation,
+then concludes that every integer solution is zero. The geometric
+classification, its connection to the matrix catalogue, and the
+mixed-parity reduction in Proposition~\ref{prop:four-erasure239} remain
+written arguments supported by the independent native coverage audit.
+The complete four-erasure statement on the cube has no single assembled
+Lean theorem in this record.
+
+Two distinct binary selections must consequently differ in their
+neighbour counts at at least five positions. A one-vertex change alters
+nine counts, leaving the minimum number between five and nine. These
+recovery results impose no connectedness condition and yield no longer
+snake or new global snake-length bound.

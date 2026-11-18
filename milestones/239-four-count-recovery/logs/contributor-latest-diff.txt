@@ -1,0 +1,106 @@
+diff --git a/lean435/tools/c230.py b/lean435/tools/c230.py
+index 7ff105f1..733e344d 100644
+--- a/lean435/tools/c230.py
++++ b/lean435/tools/c230.py
+@@ -108,6 +108,26 @@ def cmd_plan(src, out):
+ 
+ 
+ # ------------------------------------------------------------------ adapter
++# Peak RssAnon of the Lean build by merged-source size, for prod435's memory budget (prod435 uses this
++# instead of its generic build_gb, which was fit on the 231/232 share/ctx certificates). Upper envelope,
++# with 10-20 % margin, of 17,370 published c230 builds (18 Nov): max 0.63 GB at 0.1-0.2 MB of source,
++# 0.81 at 0.2-0.5, 1.00 at 1-2, 1.41 at 3-5, 1.37 at 7-10, 1.59 at 15-20, 3.17 at 30-50, 5.25 at
++# 75-100, 6.28 at 125-150, 6.30 at 175-260 MB. The generic fit predicted 2-3.5 GB for 5-15 MB sources
++# (real <= 1.6), so medium builds queued for memory beside a big one.
++BUILD_GB_KNOTS = [(0, 0.3), (0.2, 0.75), (0.5, 0.95), (2, 1.15), (5, 1.55), (10, 1.75), (20, 2.6), (50, 3.9),
++                  (100, 6.0), (150, 7.0), (250, 7.6)]
++
++
++def build_gb(src_bytes):
++    m = src_bytes / 1e6
++    K = BUILD_GB_KNOTS
++    if m >= K[-1][0]:
++        return K[-1][1] + 0.0253 * (m - K[-1][0])
++    for (x0, y0), (x1, y1) in zip(K, K[1:]):
++        if m < x1:
++            return y0 + (y1 - y0) * (m - x0) / (x1 - x0)
++
++
+ _PLAN_RADIUS = {}
+ 
+ 
+diff --git a/lean435/tools/prod435.py b/lean435/tools/prod435.py
+index ed311d93..9929dcfe 100644
+--- a/lean435/tools/prod435.py
++++ b/lean435/tools/prod435.py
+@@ -37,7 +37,9 @@ xfer/c435/ctl); running jobs finish, no new job starts.
+ Scheduling: at most --procs jobs (default 4) run at once, largest first; generation (CaDiCaL cores
+ and LRAT, single-threaded) is not limited further. Lean builds are admitted under a memory budget:
+ the predicted RssAnon of the running builds stays within --mem-gb (default 12 GB); a build predicted
+-above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit).
++above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit, or,
++while it is blocked anyway by running builds too big to run beside it, if the other running builds plus
++the passing one leave room for it: small builds fill the idle cores beside a long big build).
+ A restart reuses a finished generation of the same certificate (job directory kept until published).
+ Prediction: 1.9 GB + 0.14 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
+ The generation phase of the replay step of a job from 5 M plan hints on (gen_lean_lrat_v3, Python, several GB)
+@@ -123,6 +125,14 @@ def adapt():
+         m = importlib.util.module_from_spec(spec)
+         spec.loader.exec_module(m)
+         m.apply()
++        return m
++    return None
++
++
++def family_build_gb(src_bytes):
++    """build_gb, or the adapter's own fit (`build_gb(src_bytes)` of $PROD435_ADAPTER) when it has one."""
++    m = adapt()
++    return m.build_gb(src_bytes) if m is not None and hasattr(m, 'build_gb') else build_gb(src_bytes)
+ 
+ 
+ def plan_items(plan):
+@@ -237,6 +247,18 @@ class Budget:
+             bigger = [min(v, self.limit) for p, v in st['wait'].items() if p != self.me and v > self.gb]
+             fits = not st['run'] or used + need <= self.limit
+             fair = not bigger or used + need + max(bigger) <= self.limit   # never delays a bigger waiter
++            if fits and not fair:
++                # Fill beside a running big build (18 Nov, 230 farm: owners sat at load 1.0 on 4 cores for
++                # hours: one 2-3 h build of ~8 GB predicted ran, the next big build waited, and every small
++                # fill build waited behind it, since 8 + 1 + 8 > 12). The bigger waiter B cannot start before
++                # the running builds that do not fit beside it (v > limit - B, 'large') end, whatever the small
++                # ones do; so a build may pass it if the non-large running builds plus this one still leave
++                # room for B: when the large ones end, B starts at once. If B is blocked only by small
++                # builds, the strict rule above applies (they drain).
++                B = max(bigger)
++                large = sum(v for v in st['run'].values() if v > self.limit - B)
++                rest = used - large
++                fair = large + B > self.limit and rest + need + B <= self.limit
+             if fits and fair:
+                 st['wait'].pop(self.me, None)
+                 st['run'][self.me] = need
+@@ -384,7 +406,7 @@ def cmd_one(a):
+         return fail(D, mod, f'to435 failed: {r.stdout[-400:]}{r.stderr[-800:]}')
+     secs['to435'] = round(time.time() - t0, 1)
+     srcf = os.path.join(D, 'src', mod.replace('.', '/') + '.lean')
+-    bgb = build_gb(os.path.getsize(srcf))
++    bgb = family_build_gb(os.path.getsize(srcf))
+     secs['build_pred_gb'] = round(bgb, 2)
+     cap = min(a.max_cap_gb, max(a.rss_cap_gb, bgb * 2))
+     # builds are admitted while the predicted RssAnon of the running builds (and admitted generations)
+diff --git a/milestones/37-230-feasibility/WORKER.md b/milestones/37-230-feasibility/WORKER.md
+index b5140006..62efa101 100644
+--- a/milestones/37-230-feasibility/WORKER.md
++++ b/milestones/37-230-feasibility/WORKER.md
+@@ -35,3 +35,12 @@ Observed: containers are restarted between turns (machine "up 0 min", job gone),
+   and immediately issue the next one. Every ~30 minutes also check free memory and that the log grows.
+ - If a wait shows the job gone (or uptime says the machine just booted), re-run the setup-and-launch block at once.
+ - Keep the 30-minute send_later self check-in as a safety net only (it brings you back if the turn does end).
++
++## Relaunch for the scheduler fix 87fbd8e5 (18 Nov 11:30 UTC; owners and helpers only, NOT split machines)
++Machines used ~1 of 4 cores (memory-budget fairness rule + over-predicted build memory). Fixed in 87fbd8e5. Do this once, in one Bash call where possible:
++1. `ps -eo pid,etime,args | grep "[b]in/lean -R /root/l435/prod/jobs"` - OWNERS only: if a lean build has run > 90 min, first wait for that PID to exit (`while kill -0 PID; do sleep 60; done`, <= 9 min per Bash call, chained).
++2. `P=$(pgrep -f "prod435.py (run|one)|/l435/prod/jobs/|c230.py cert|genv3stream" | tr '\n' ' '); [ -n "$P" ] && kill -9 $P; sleep 3`
++3. `git fetch origin research/unconditional-241 && git checkout -B research/unconditional-241 FETCH_HEAD && git log --oneline -1`  (must be 87fbd8e5 or later)
++4. `[ -f ~/l435/prod/core/LocalWindowShareCtx.olean ] || python3 lean435/tools/prod435.py setup`
++5. the four exports (plus your C230_PLAN override if you are a share helper), then your LAUNCH line unchanged (>> keeps the log).
++Generation already done is reused, only in-progress Lean builds are lost. After ~15 min: `uptime` should show load ~3-4 and `cat ~/l435/prod/budget.json` usually more than one entry under "run". Then continue holding the turn open (wait chain, 15-min send_later safety net).
