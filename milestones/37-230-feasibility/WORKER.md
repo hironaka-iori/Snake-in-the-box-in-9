@@ -27,3 +27,11 @@ Sessions that end their turn get their container reclaimed after a while, which 
 - Right after launching (and after every check), arm ONE self check-in with the claude-code-remote `send_later` tool (delay_minutes 30, initiation own_followup), message: "Self check-in (230 farm): check the job per milestones/37-230-feasibility/WORKER.md (pgrep, tail the log); if it is not running and not finished, re-run the setup-and-launch block (it resumes); then arm the next 30-minute self check-in with send_later."
 - Keep exactly one such check-in pending; when one fires, do the check, then arm the next. Stop arming only when the job has finished (no work left).
 - Split machines must run commit >= 63f10efb of research/unconditional-241 (parts 2 at a time with a memory cap). If an older c230split.py is running, kill it by PID and relaunch after the fetch/checkout.
+
+## Hold the turn open (added 18 Nov 06:00 UTC; overrides anything above that suggests ending the turn)
+Observed: containers are restarted between turns (machine "up 0 min", job gone), so an idle session loses its job within ~30 min.
+- NEVER end your turn while the job runs. Chain foreground Bash waits back to back, each at most ~9 minutes, e.g.
+  `timeout 540 bash -c 'while pgrep -f "PGREP" >/dev/null; do sleep 60; done'; date; tail -3 LOGFILE; uptime`
+  and immediately issue the next one. Every ~30 minutes also check free memory and that the log grows.
+- If a wait shows the job gone (or uptime says the machine just booted), re-run the setup-and-launch block at once.
+- Keep the 30-minute send_later self check-in as a safety net only (it brings you back if the turn does end).
