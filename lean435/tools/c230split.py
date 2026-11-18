@@ -11,8 +11,28 @@ line number % N == S (largest first). For each item that is not yet published on
     splitfarm435.py final --index (publish-index + S) --require-remote
 The environment of the c230 workers is required ($PROD435_ADAPTER, $PROD435_CERT, $PROD435_PFX,
 $C230_PLAN); this script checks it. A failed item is logged and skipped (re-run the script to retry).
+
+Work stealing (18 Nov): any number of machines run
+
+    c230split.py --steal --index K [--cpus 4] [--mem-gb 12] [--hours 48]
+
+The work is cut into UNITS: prep:N (prepare + pack, one machine), part:N:k (one part module), final:N.
+A unit is available when its inputs are on the remote: prep when src-N is missing, part k when src-N is
+there and N-k<k> is not, final when every part is there and N is not published. Units are claimed on
+xfer/c230splitclaim/h<K> (prod435 Claims: TTL --claim-ttl h, renewed every 5 min, the earlier claim wins),
+so no unit is done twice and a dead machine's units come back. Order: finals, then parts (items whose
+sources this machine already has first, then largest item first), then preps (largest first) when fewer
+than 2 x --cpus unclaimed parts are left in the farm. Cost per unit: prep 2 cores and 3 GB (bigreplay --jobs 3), part 1 core and
+its predicted peak (1.3 x the largest RssAnon of the item's published parts, 2.5-6.5 GB; 6.0 GB while
+fewer than 2 are published; measured max 5.81 GB over 304 parts), final 1 core and 4 GB, one final at a time.
+Units start while the cores (--cpus) and the predicted memory (--mem-gb) allow. Finals publish to
+xfer/c230help/w<600+K>. Several part processes of one item share its base modules (Cnf, D*, Ps), built
+once under a lock (splitfarm435.base_lock). The static mode above does not claim: stop the static
+machines and relaunch them with --steal (their published sources and parts are kept and reused). Until
+then a stealer skips the parts of an item with a part pushed in the last --static-window min (60) and no
+stealer claim on it (a static machine is on it); preps are not protected that way.
 """
-import argparse, os, subprocess, sys, time
+import argparse, os, shutil, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -25,22 +45,230 @@ def log(msg):
     print(time.strftime('%H:%M:%S ') + msg, flush=True)
 
 
+def steal(a):
+    import json, re
+    import splitfarm435 as SF
+    P = SF.P
+    items = sorted(((n, float(e)) for n, e, _r in (l.split() for l in open(LIST) if l.strip())), key=lambda x: -x[1])
+    est = dict(items)
+    order = {n: i for i, (n, _e) in enumerate(items)}
+    claims = P.Claims(P.PFX.rstrip('/') + 'splitclaim/', 'h', a.index, a.claim_ttl)
+    repo = P.Repo(SF.SPFX)
+    scan = P.Scan([P.PFX, P.HELP_PFX])
+    gb_dir = claims.b                                    # scan.git: partial fetches of trees and small blobs
+    sf = [sys.executable, os.path.join(HERE, 'splitfarm435.py')]
+    plan = os.environ['C230_PLAN']
+    nparts, peak_cache, push_time = {}, {}, {}
+    running = {}                                         # unit -> (Popen, cpus, gb, t0, logfile)
+    failed = {}
+    published, tips = set(), {}
+    local_items = {n for n, _e in items if os.path.isdir(SF.wd(n))}
+    last = dict(tips=0, pub=0, claims=0, beat=0)
+    t_end = time.time() + a.hours * 3600
+    stopf = os.path.join(P.HOME, 'STOP_SPLIT')
+    logdir = os.path.join(P.HOME, 'split-logs')
+    os.makedirs(logdir, exist_ok=True)
+    log(f'split stealer h{a.index}: {len(items)} split items, --cpus {a.cpus}, --mem-gb {a.mem_gb}')
+
+    def tree(t):
+        P.git('fetch', '-q', '--depth', '1', '--filter=blob:none', repo.url, t, cwd=gb_dir, timeout=300)
+        return {l.split('\t')[1]: l.split()[2] for l in P.git('ls-tree', t, cwd=gb_dir).splitlines()}
+
+    def blob(x):
+        if subprocess.run(['git', 'cat-file', '-e', x], cwd=gb_dir, capture_output=True).returncode != 0:
+            P.git('fetch', '-q', '--filter=blob:none', repo.url, x, cwd=gb_dir, timeout=300)
+        return P.git('cat-file', 'blob', x, cwd=gb_dir)
+
+    def parts_of(n):
+        if n not in nparts:
+            ent = tree(tips[f'src-{n}'])
+            nparts[n] = len([p for p in ent if re.search(r'\.K\d+\.lean\.gz$', p)])
+        return nparts[n]
+
+    def part_gb(n):
+        # 1.3 x the largest peak of ALL its published parts (later parts are often larger: V012034A45436
+        # k10 3.9 GB against 3.7 for k0-k9), at least 2.5 GB, at most 6.5; 6.0 GB with fewer than 2 published
+        refs = sorted(r for r in tips if r.startswith(n + '-k'))
+        key = tuple(tips[r] for r in refs)
+        if peak_cache.get(n, (None,))[0] != key:
+            peaks = dict(peak_cache.get(n, (None, None, {}))[2])
+            for r in refs:
+                if tips[r] in peaks:
+                    continue
+                try:
+                    ent = tree(tips[r])
+                    peaks[tips[r]] = max(json.loads(l)['anon_gb'] for l in blob(ent['build-log.jsonl']).splitlines() if l.strip())
+                except Exception:  # noqa: BLE001
+                    pass
+            g = min(6.5, max(2.5, 1.3 * max(peaks.values()))) if len(peaks) >= 2 else 6.0
+            peak_cache[n] = (key, g, peaks)
+        return peak_cache[n][1]
+
+    def static_active(n):
+        # a static machine (no claims) is building parts of n: a part of n was pushed in the last
+        # --static-window min and no unit of n is claimed by a stealer; time-bounded, so nothing starves
+        if not a.avoid_static or any(u.split(':')[1] == n for u in list(claims.busy()) + list(claims.mine)):
+            return False
+        refs = [tips[r] for r in tips if r.startswith(n + '-k')]
+        if not refs:
+            return False
+        key = tuple(sorted(refs))
+        if push_time.get(n, (None,))[0] != key:
+            try:
+                P.git('fetch', '-q', '--depth', '1', '--filter=blob:none', repo.url, *refs, cwd=gb_dir, timeout=300)
+                push_time[n] = (key, max(int(P.git('log', '-1', '--format=%ct', x, cwd=gb_dir).strip()) for x in refs))
+            except Exception:  # noqa: BLE001
+                return True
+        return time.time() - push_time[n][1] < a.static_window * 60
+
+    def units():
+        out = []
+        for n, _e in items:
+            if 'LocalWindowCert.' + n in published:
+                continue
+            if f'src-{n}' not in tips:
+                out.append(('prep:' + n, 'prep', n, None))
+                continue
+            try:
+                K = parts_of(n)
+            except Exception as e:  # noqa: BLE001
+                log(f'{n}: cannot list its sources ({str(e)[:120]})')
+                continue
+            miss = [k for k in range(K) if f'{n}-k{k}' not in tips]
+            if miss and static_active(n):
+                continue
+            if miss:
+                out += [(f'part:{n}:{k}', 'part', n, k) for k in miss]
+            else:
+                out.append(('final:' + n, 'final', n, None))
+        return out
+
+    while True:
+        now = time.time()
+        try:
+            if now - last['tips'] > 60:
+                tips = repo.ls()
+                last['tips'] = now
+            if now - last['pub'] > 300:
+                published = scan.refresh()[0]
+                last['pub'] = now
+            if now - last['claims'] > 60:
+                claims.read()
+                last['claims'] = now
+            if now - last['beat'] > 300 and claims.mine:
+                claims.write()
+                last['beat'] = now
+        except Exception as e:  # noqa: BLE001
+            log(f'refresh failed (kept the last state): {str(e)[:200]}')
+        # collect
+        for u in list(running):
+            pr, c, g, t0, lf = running[u]
+            if pr.poll() is None:
+                continue
+            del running[u]
+            if pr.returncode == 0:
+                log(f'{u}: done in {time.time() - t0:.0f} s')
+                claims.published([u])
+                if u.startswith('prep:'):               # sources pushed: the LRAT and generation files go
+                    shutil.rmtree(os.path.join(SF.wd(u[5:]), 'prep'), ignore_errors=True)
+            else:
+                failed[u] = failed.get(u, 0) + 1
+                log(f'{u}: FAILED (exit {pr.returncode}, try {failed[u]}); log {lf}')
+                claims.drop([u])
+            last['tips'] = 0
+        stop = os.path.exists(stopf) or now > t_end
+        avail = [x for x in units() if x[0] not in running and failed.get(x[0], 0) < 2]
+        if not avail and not running:
+            log('no split unit left: ending')
+            break
+        if stop and not running:
+            log('stop: ending')
+            break
+        for n in list(local_items):                        # published items: their local files go
+            if 'LocalWindowCert.' + n in published and not any(u.split(':')[1] == n for u in running):
+                shutil.rmtree(SF.wd(n), ignore_errors=True)
+                local_items.discard(n)
+        busy = claims.busy()
+        st = os.statvfs(P.HOME)
+        disk_gb = st.f_bavail * st.f_frsize / 2**30
+        free = [x for x in avail if x[0] not in busy and x[0] not in claims.mine]
+        cpus = a.cpus - sum(v[1] for v in running.values())
+        mem = a.mem_gb - sum(v[2] for v in running.values())
+        nfinal = sum(1 for u in running if u.startswith('final:'))
+        nparts_free = sum(1 for x in free if x[1] == 'part')
+        local = lambda n: os.path.exists(os.path.join(SF.wd(n), 'src'))  # noqa: E731
+        pick = sorted(free, key=lambda x: ({'final': 0, 'part': 1, 'prep': 2}[x[1]], not local(x[2]), order[x[2]],
+                                           x[3] or 0))
+        batch = []
+        for u, kind, n, k in pick:
+            if stop:
+                break
+            c, g = {'prep': (2, 3.0), 'final': (1, 4.0)}.get(kind) or (1, part_gb(n))
+            if kind == 'final' and (nfinal or any(b[1] == 'final' for b in batch)):
+                continue
+            if kind == 'prep' and (nparts_free >= 2 * a.cpus or disk_gb < a.prep_disk_gb):
+                continue
+            if disk_gb < a.min_disk_gb:
+                continue
+            if c > cpus or (g > mem and (running or batch)):
+                continue
+            batch.append((u, kind, n, k, c, g))
+            cpus -= c
+            mem -= g
+        if batch:
+            keep = set(claims.claim([b[0] for b in batch]))
+            for u, kind, n, k, c, g in batch:
+                if u not in keep:
+                    log(f'{u}: claimed by another machine')
+                    continue
+                if kind == 'prep':
+                    cmd = sf + ['prepare', '--plan', plan, '--name', n, '--jobs', '3',
+                                '--parts', str(a.big_parts if est[n] > a.big else a.parts)]
+                elif kind == 'part':
+                    cmd = sf + ['part', '--name', n, '--jobs', '2', '--rss-gb', str(a.rss_gb), '--k', str(k)]
+                else:
+                    cmd = sf + ['final', '--name', n, '--plan', plan, '--index', str(a.publish_index + a.index),
+                                '--require-remote']
+                lf = os.path.join(logdir, u.replace(':', '_') + '.log')
+                local_items.add(n)
+                running[u] = (subprocess.Popen(cmd, stdout=open(lf, 'a'), stderr=subprocess.STDOUT), c, g, time.time(), lf)
+                log(f'{u}: started ({c} core(s), {g:.1f} GB predicted)')
+        time.sleep(5)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--index', type=int, required=True)
-    ap.add_argument('--of', type=int, required=True)
+    ap.add_argument('--of', type=int, default=None, help='static mode: machine --index of --of')
+    ap.add_argument('--steal', action='store_true', help='work stealing over units (see the docstring)')
+    ap.add_argument('--cpus', type=int, default=4)
+    ap.add_argument('--mem-gb', type=float, default=12)
+    ap.add_argument('--hours', type=float, default=48)
+    ap.add_argument('--claim-ttl', type=float, default=2.0)
+    ap.add_argument('--prep-disk-gb', type=float, default=12, help='start a prep only with this much free disk')
+    ap.add_argument('--min-disk-gb', type=float, default=4)
+    ap.add_argument('--no-avoid-static', dest='avoid_static', action='store_false',
+                    help='do not skip items a static (non-claiming) machine is working on')
+    ap.add_argument('--static-window', type=float, default=60, help='minutes (see static_active)')
     ap.add_argument('--parts', type=int, default=8)
     ap.add_argument('--big-parts', type=int, default=16)
     ap.add_argument('--big', type=float, default=35e6)
     ap.add_argument('--jobs', type=int, default=2, help='parts built at once (one lean each)')
     ap.add_argument('--rss-gb', type=float, default=6.5, help='RssAnon cap per part (pilot peak 3.7 GB at 30.8 M hints)')
-    ap.add_argument('--publish-index', type=int, default=500)
+    ap.add_argument('--publish-index', type=int, default=None, help='finals publish to <help>/w<this + index> '
+                    '(default 500 static, 600 --steal)')
     a = ap.parse_args()
     for v in ('PROD435_ADAPTER', 'PROD435_CERT', 'PROD435_PFX', 'C230_PLAN'):
         if not os.environ.get(v):
             raise SystemExit(f'set ${v} (see milestones/37-230-feasibility/PILOT.md)')
     if 'c230' not in os.environ['PROD435_PFX']:
         raise SystemExit('PROD435_PFX is not the c230 family')
+    if a.publish_index is None:
+        a.publish_index = 600 if a.steal else 500
+    if a.steal:
+        return steal(a)
+    if a.of is None:
+        raise SystemExit('--of is required without --steal')
     import splitfarm435 as SF
     items = [l.split() for l in open(LIST) if l.strip()]
     mine = [(n, float(e)) for i, (n, e, _r) in enumerate(items) if i % a.of == a.index]

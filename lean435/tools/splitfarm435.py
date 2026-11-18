@@ -105,16 +105,29 @@ def build(src, bld, targets, rss_gb, jobs, big=()):
         raise SystemExit(f'build failed: {targets}')
 
 
+def base_lock(name):
+    """An exclusive lock on wd(name) for fetching the sources and building the base modules: several part
+    processes of one item may run at once on a machine (c230split.py --steal) and share wd(name)/build."""
+    import fcntl
+    os.makedirs(wd(name), exist_ok=True)
+    f = open(os.path.join(wd(name), 'base.lock'), 'a')
+    fcntl.flock(f, fcntl.LOCK_EX)
+    return f
+
+
 def audit_manifest(src, bld, mods):
-    out = os.path.join(bld, 'split-manifest.jsonl')
+    out = os.path.join(bld, f'split-manifest.{os.getpid()}.jsonl')    # per process (concurrent part processes)
     if os.path.exists(out):
         os.remove(out)
     subprocess.run([sys.executable, os.path.join(HERE, 'audit.py'), 'manifest', '--src', src, '--build', bld,
                     '--out', out] + mods, check=True, capture_output=True)
-    return [json.loads(l) for l in open(out) if l.strip()]
+    lines = [json.loads(l) for l in open(out) if l.strip()]
+    os.remove(out)
+    return lines
 
 
 def cmd_part(a):
+    lk = base_lock(a.name)
     man = fetch_src(a.name)
     src, bld = os.path.join(wd(a.name), 'src'), os.path.join(wd(a.name), 'build')
     names = {int(p[0].rsplit('.K', 1)[1]): p[0] for p in man['parts']}
@@ -122,6 +135,7 @@ def cmd_part(a):
     base = base_modules(man)
     t0 = time.time()
     build(src, bld, base, 6.0, a.jobs)
+    lk.close()
     P.log(f'{a.name}: base modules (Cnf, {len(man["data"])} data, Ps) built in {time.time() - t0:.0f} s')
     t1 = time.time()
     build(src, bld, ks, a.rss_gb, len(ks))         # the parts of this machine in parallel, each under --rss-gb
@@ -189,6 +203,7 @@ def cmd_status(a):
 
 
 def cmd_final(a):
+    lk = base_lock(a.name)                  # held to the end: no part process of this item meanwhile
     man = fetch_src(a.name)
     src, bld = os.path.join(wd(a.name), 'src'), os.path.join(wd(a.name), 'build')
     base = base_modules(man)
