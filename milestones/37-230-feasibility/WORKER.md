@@ -44,3 +44,10 @@ Machines used ~1 of 4 cores (memory-budget fairness rule + over-predicted build 
 4. `[ -f ~/l435/prod/core/LocalWindowShareCtx.olean ] || python3 lean435/tools/prod435.py setup`
 5. the four exports (plus your C230_PLAN override if you are a share helper), then your LAUNCH line unchanged (>> keeps the log).
 Generation already done is reused, only in-progress Lean builds are lost. After ~15 min: `uptime` should show load ~3-4 and `cat ~/l435/prod/budget.json` usually more than one entry under "run". Then continue holding the turn open (wait chain, 15-min send_later safety net).
+
+## Relaunch for the "over builds" fix 6ecaa06f (18 Nov 17:55 UTC; owners and helpers only, NOT split machines)
+Small builds may now run beside big ones when RAM is free (preemptible). Same steps as the 87fbd8e5 section, with these rules:
+- `ps -eo pid,etime,args | grep "[b]in/lean -R /root/l435/prod/jobs"`: if NO lean build has run longer than ~45 min, relaunch now. Otherwise wait for that big build to end (`while kill -0 PID; do sleep 60; done`, <= 9 min per Bash call), then relaunch.
+- Machines still on 478869ee/46b11be3 (never did the 87fbd8e5 relaunch): relaunch NOW regardless.
+- After checkout, `git log --oneline -1` must show 6ecaa06f or later. After ~15 min `cat ~/l435/prod/budget.json` should show entries under "over" while big builds run; load ~3.5-4.
+Then keep holding the turn open.
