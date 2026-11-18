@@ -135,6 +135,57 @@ only the very-high-count corner is easy. This agrees with track B's finding on i
 share keys is proposed: their cost stays at the estimate above, with single keys beyond one
 certificate.
 
+### Share cardinality: encodings, decompositions, symmetry, options (a factor of 2-3, not 10)
+
+Requested follow-up: can a different treatment of the share sum bring the level-60 keys into farm
+range (<= 200 G hints for the 132 keys, i.e. at least 10 times cheaper)? CaDiCaL 2.1.3 binary, cold
+solves with lazy cycle cuts (`trackA/binsolve.py`); reference shape `0,1,2,3,4,0,1,5` at level 60
+(258 s in the production run). Conflicts are the proof-size proxy (`data/enc_expt.jsonl`,
+`data/cubes_expt.jsonl`, `data/subwin.jsonl`).
+
+| variant (`trackA/enc2.py`, `expt.py`) | conflicts | seconds (4 jobs at once) |
+|---|---|---|
+| production counter: one totalizer over the 2,940 `u` literals (37,074 variables, 319,995 clauses) | 1,015,228 | 272 |
+| merge tree of the 49 per-corner unary numbers, grouped by centre (19,690 variables, 215,881 clauses) | 1,007,145 | 192 |
+| the same as a left-deep chain (sequential counter) | same size; equal on the easy test shape | |
+| merge + ordering clauses `u[t+1] → u[t]` (auxiliary symmetry removed) | 942,308 | 170 |
+| merge, `--unsat` | 958,652 | 176 |
+| merge + order, `--sat` | 1,008,289 | 295 |
+| merge + order, `--chrono=0` | 984,963 | 295 |
+| merge + order + lex-leader for the transpositions of the 3 unused coordinates | 557,297 | 208 |
+| coarser count (only `u[q,t]` with 3 \| t), easy shape `0,1,2,0,3,4,2,5` | TIMEOUT at 120 s (2 s in every other variant) | |
+| 7 per-centre cubes "centre c has share <= 8" (cover by pigeonhole) | 2,873,782 in all (205 k - 632 k each) | 505 in all |
+
+- **(b) Counter encodings** change the clause count (1.5 times fewer) and the time per conflict, not
+  the number of conflicts. The counter is not where the proof is long.
+- **(a) Per-centre distribution.** The pigeonhole cubes triple the total work; they only make the
+  largest single proof smaller (632 k conflicts against 942 k). Additivity over sub-windows fails
+  outright: the same wall exists on short windows. With 45 s per query, the largest uniform floor
+  proved is 0 for 2 centres (`0,1,2`: even "share >= 1" is neither refuted nor satisfied), 4-6 for
+  3 centres, 8-11 for 4 centres and 16-24 for the three 5-centre shapes that finished; a 1-centre
+  window has a model of share 0. The cost per unit of level is about the same for every window
+  length; longer windows only start from a higher free floor.
+- **(c) Symmetry.** Lex-leader clauses for the coordinate transpositions that fix the window give
+  1.7 times fewer conflicts on a shape with 3 unused coordinates. The hard shapes use 7 or 8
+  directions and have 2 or 1 unused coordinates, so at most a factor 2 there, or none. Lean glue it
+  would need: the bridge would have to normalise the snake by the stabiliser of the window before
+  reading the assignment (a `cubeMap` by the chosen permutation, as `D239Lex` did for the 239
+  windows), plus clause soundness for a new clause kind.
+- **(d) Options.** `--unsat`, `--sat`, `--chrono=0` are within 7 % of the default in conflicts.
+  CaDiCaL has no lookahead cube generator; the count and per-centre cubes above are the
+  cube-and-conquer attempts.
+- **Best combination** (merge + order + lex-leader + `--unsat`) on two of the shapes that timed out
+  at 900 s: `0,1,2,3,4,5,2,4` is now UNSAT in 557 s (2.79 M conflicts; the production encoding again
+  TIMEOUT at 900 s), `0,1,2,3,4,1,2,5` still TIMEOUT at 900 s (4.29 M conflicts).
+
+**Verdict:** about 2-3 times in solve time and at most 1.7 times in proof size, where 10 times or
+more is needed, and the gain is smallest on the hardest shapes. The 132-key estimate stays far
+outside farm range, and every variant other than the production counter would need new clause
+soundness in Lean. The measurements point to the model, not the encoding: a low share needs almost
+all of the 49 corners to have no empty square, and refuting that is a counting argument that
+resolution handles badly. A proof route would need a different certificate kind (counting or
+pseudo-Boolean reasoning), which is outside the existing premise kinds.
+
 For comparison, the historical cost per bound: 233: 3.3 G hints; 232: 13.5 G; 231: 41.5 G; 230: about
 80 G (in production). 229 by any route measured here is 500 G or more.
 
@@ -193,6 +244,7 @@ level 59 (`SHARE_CAP` in `lean435/tools/c230.py`, `AllShareK 59` in place of `Al
 | `tier7.py` | corner-share threshold test of a 7-centre window with count bounds (CaDiCaL, lazy cycle cuts) |
 | `ladder7.py` | largest level of a ladder proved in a time limit (free or fixed counts) |
 | `split7.py` | adaptive count split of one level key (prototype, negative result) |
+| `enc2.py`, `binsolve.py`, `expt.py`, `cubes.py`, `subwin.py` | alternative share counters, binary-solver harness, encoding / option / symmetry runs, per-centre cubes, short-window floors |
 | `sharemin.py` | CP-SAT search for low-share local models, hinted with track B's witnesses |
 | `lpsym.py`, `lpshape.py` | exact minimum cycle mean of the K7 product under symbol-penalty and per-shape weights (run inside a checkout of relaxed-keller's `milestones/10-window-aggregate/scripts`) |
 | `data/` | every record quoted above |
