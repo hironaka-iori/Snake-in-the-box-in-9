@@ -281,7 +281,9 @@ def main():
                 L[L.index('namespace Snake9.C230') + 2:L.index('namespace Snake9.C230') + 2] = [
                     f'/-- The bits `qpos [a, b]` read by `wforb` on two-centre windows. -/',
                     f'def v2 : Nat := {V2}', '',
-                    'theorem v2_ok : ∀ a b, a < 8 → b < 8 → v2.testBit (qpos [a + 1, b + 1]) = true := by decide +kernel', '']
+                    'theorem v2_ok\' : ∀ a, a < 8 → ∀ b, b < 8 → v2.testBit (qpos [a + 1, b + 1]) = true := by decide +kernel',
+                    'theorem v2_ok : ∀ a b, a < 8 → b < 8 → v2.testBit (qpos [a + 1, b + 1]) = true :=',
+                    '  fun a b ha hb => v2_ok\' a ha b hb', '']
             L.append('end Snake9.C230')
             write(mod, L, 'spec', ['C230K7', 'C230Keys'])
             row_mods.append((mod, n, list(range(p0, min(p0 + per, len(sl))))))
@@ -361,9 +363,9 @@ def main():
          '', 'end Snake9.LocalWindow']
     write('G230S', L, 'glue', ['C230Shares'] + ['LocalWindowCert.' + n for n in sh_names])
     needs['G230S'] = ['LocalWindowCert.' + n for n in sh_names]
-    L = ['module', '', 'public import C230Cover', '', '@[expose] public section', '',
+    L = ['module', '', 'public import C230Cover', 'public import LocalWindowShareModel', '', '@[expose] public section', '',
          '/-! The shapes of the 132 corner-share keys, in the order of `shapes8` (lean435/tools/c230gen.py). -/', ''] + HDR + \
-        ['namespace Snake9.C230', '',
+        ['namespace Snake9.C230', 'open Snake9.LocalWindow', '',
          'def shares230 : List (List Nat) := [' + ', '.join(lst(s) for s in shapes_n[8]) + ']', '',
          '/-- Every listed 8-direction shape has corner share at least 30 on its 7 centres. -/',
          'def AllShareL : List (List Nat) → Prop',
@@ -377,7 +379,7 @@ def main():
          '    rcases List.mem_cons.1 hs with rfl | hs',
          '    · exact h',
          '    · exact AllShareL.mem hL s hs', '', 'end Snake9.C230']
-    write('C230Shares', L, 'spec', ['C230Cover'])
+    write('C230Shares', L, 'spec', ['C230Cover', 'LocalWindowShareModel'])
     # ---- top glue
     L = ['module', '', 'public import C230Keys', 'public import C230Shares'] + [f'import {m}' for _, _, m in G] + ['import G230S'] + \
         ['', '/-! The certificate premises of the 230 assembly from the glue chunks (lean435/tools/c230gen.py). -/', ''] + HDR + \

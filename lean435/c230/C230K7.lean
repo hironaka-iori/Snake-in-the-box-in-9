@@ -4,6 +4,8 @@ public import C230Mask
 public import C230Cover
 public import WindowAutomatonK7R34C7W16Data
 public import DirectionWindowBridge
+public import WindowAutomatonCode
+public import WindowAutomatonRGS
 
 @[expose] public section
 
@@ -81,7 +83,7 @@ theorem code_inj : ∀ (l l' : List Nat), l.length = l'.length → Digits l → 
     have h1 := code_lt l hdl
     have h2 := code_lt l' hdl'
     rw [← hl1] at h2
-    have hP : 0 < 8 ^ l.length := Nat.pos_pow_of_pos _ (by decide)
+    have hP : 0 < 8 ^ l.length := Nat.pow_pos (by decide)
     have e1 : ((a - 1) * 8 ^ l.length + codeK7R34C7W16 l 0) / 8 ^ l.length = a - 1 := by
       rw [Nat.mul_comm, Nat.mul_add_div hP, Nat.div_eq_of_lt h1, Nat.add_zero]
     have e2 : ((b - 1) * 8 ^ l.length + codeK7R34C7W16 l' 0) / 8 ^ l.length = b - 1 := by
@@ -159,7 +161,7 @@ theorem goodT_of {T : List Entry} {s : List Nat} {n : Nat} (hn : n + 1 = s.lengt
     exact ⟨e, he, b, hb, Or.inr ⟨h1, h2⟩⟩
 
 theorem getD_mem {T : List Entry} {i : Nat} (hi : i < T.length) : T.getD i ([], []) ∈ T := by
-  rw [List.getD_eq_getElem _ _ hi]
+  rw [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem hi, Option.getD_some]
   exact List.getElem_mem hi
 
 /-- Forward row checked against the keys of entry `i` of shape `s`. -/
@@ -243,7 +245,7 @@ theorem AllGood.get {T : List Entry} : ∀ {L : List (List Nat)}, AllGood T L �
 
 theorem canon_canon (ds : List Nat) : canon (canon ds) = canon ds := by
   have := canon_canon_take ds ds.length
-  rwa [List.take_of_length_le (by rw [length_canon]), List.take_of_length_le (Nat.le_refl _)] at this
+  rwa [List.take_of_length_le (by simp [length_canon]), List.take_of_length_le (Nat.le_refl _)] at this
 
 theorem canon_canon_reverse' (ds : List Nat) : canon (canon ds).reverse = canon ds.reverse := by
   have := canon_canon_drop_reverse ds 0
@@ -356,10 +358,10 @@ theorem window_refute {r n : Nat} (hn : 3 ≤ n) (hr : r + n ≤ m) {b : List (N
     have hs := boxOK_getD _ _ hbox i (by rw [length_symsK]; omega)
     rw [getD_symsK p (by omega)] at hs
     have hpos : 1 ≤ coreAlpha p (r + i + 1) := by
-      by_contra h0
-      have h0' : coreAlpha p (r + i + 1) = 0 := by omega
-      rw [h0'] at hs
-      simp [symOK, symK] at hs
+      rcases Nat.eq_zero_or_pos (coreAlpha p (r + i + 1)) with h0 | h0
+      · rw [h0] at hs
+        simp [symOK, symK] at hs
+      · exact h0
     have h21 := coreAlpha_le_21 p (k := r + i + 1) (by omega) (by omega)
     unfold symOK symK at hs
     simp only [Bool.or_eq_true, Bool.and_eq_true, decide_eq_true_eq] at hs

@@ -25,7 +25,7 @@ public import ShareBridge
 -/
 
 namespace Snake9.C230
-open Snake9 Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow Finset
+open Snake9 Snake9.LocalWindow Snake9.WindowAutomaton Snake9.DirectionWindow Snake9.WindowAggregate Finset
 
 /-! ## The walk inequality -/
 
@@ -105,10 +105,12 @@ theorem window_share (hS : AllShareL shares230) (hm : 3 ≤ m) (j : Nat) (hj : j
     apply mem_seenAfter
     rw [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem (by omega)]
     exact List.getElem_mem _
-  have h := refuted_share_dir_iv p href j (u := seenAfter [] (dsOf p j 8)) (by rw [length_canon]; omega)
-    (by rw [length_canon]; omega) (seenAfter_nodup [] _ List.nodup_nil) ?_ ?_ ?_
-  · rw [← List.sum_range_succ_comm] at h
-    simpa [List.sum_range_succ, Finset.sum_range_succ] using h
+  have h := refuted_share_dir_iv p href j (u := seenAfter [] (dsOf p j 8)) (by rw [length_canon, length_dsOf]; rfl)
+    (by rw [length_canon, length_dsOf]; omega) (seenAfter_nodup [] _ List.nodup_nil) ?_ ?_ ?_
+  · simp only [List.length_cons, List.length_nil, List.range_succ, List.range_zero, List.nil_append,
+      List.map_append, List.map_cons, List.map_nil, List.sum_append, List.sum_cons, List.sum_nil] at h
+    simp only [Finset.sum_range_succ, Finset.sum_range_zero]
+    omega
   · intro d hd
     rcases mem_seenAfter_cases [] _ d hd with h | h
     · simp at h
@@ -136,7 +138,7 @@ theorem shift_sum_le (f : Nat → Nat) (c N M : Nat) (h : c + N ≤ M) :
     ∑ j ∈ range N, f (j + c) ≤ ∑ k ∈ range M, f k := by
   have e := Finset.sum_range_add f c N
   have hs : ∑ k ∈ range (c + N), f k ≤ ∑ k ∈ range M, f k :=
-    Finset.sum_le_sum_of_subset (Finset.range_subset.2 h)
+    Finset.sum_le_sum_of_subset (Finset.range_mono h)
   have : ∑ j ∈ range N, f (j + c) = ∑ x ∈ range N, f (c + x) := by
     apply Finset.sum_congr rfl; intro x _; rw [Nat.add_comm]
   omega
@@ -162,12 +164,12 @@ theorem psum_eq_sum (h : Nat → Nat) : ∀ n, psum h n = ∑ k ∈ range n, h k
 
 theorem alpha_split (hm : 1 ≤ m) : ∑ k ∈ range (m + 1), coreAlpha p k =
     coreAlpha p 0 + sumA (coreAlpha p) (m - 1) + coreAlpha p m := by
-  rw [sumA_eq_psum, psum_eq_sum, Finset.sum_range_succ, Finset.sum_range_succ']
+  rw [sumA_eq_psum, psum_eq_sum, Finset.sum_range_succ]
   obtain ⟨k, rfl⟩ : ∃ k, m = k + 1 := ⟨m - 1, by omega⟩
-  simp only [Nat.add_sub_cancel]
+  rw [Finset.sum_range_succ', Nat.add_sub_cancel]
   omega
 
-theorem upper_230_of_tables (hT : AllTab tab230) (hS : AllShareL shares230) : m ≤ 230 := by
+theorem upper_230_of_tables (p : Snake m) (hT : AllTab tab230) (hS : AllShareL shares230) : m ≤ 230 := by
   by_cases hm : m < 9
   · omega
   have hwalk := walk230 p hT (by omega)
