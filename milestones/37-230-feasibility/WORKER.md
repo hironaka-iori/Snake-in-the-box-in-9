@@ -59,3 +59,6 @@ The 109 split items are the critical path. Machines told to become SPLIT STEALER
 3. LAUNCH: `nohup python3 lean435/tools/c230split.py --steal --index K >> ~/c230_steal$K.log 2>&1 &`   (LOGFILE ~/c230_steal$K.log, PGREP "c230split.py --steal")
 4. Keep holding the turn open (chained <= 9-min waits, 15-min send_later). To stop: `touch ~/l435/prod/STOP_SPLIT` (finishes running units).
 Indices: static split machines S0..S5 -> K = 1..6; helpers -> K = 7 and up (the orchestrator assigns K).
+
+## Stealer relaunch for bd7e3cac (18 Nov 20:20 UTC; split stealers only, no work lost)
+`kill $(pgrep -f "c230split.py --steal")` (ONLY the stealer; do NOT kill splitfarm435/lean children), then fetch/checkout research/unconditional-241 (>= bd7e3cac), the four exports, and the same LAUNCH line (`--steal --index K`). The log shows "adopted N running unit(s)". Keep holding the turn open.
