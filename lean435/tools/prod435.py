@@ -125,6 +125,14 @@ def adapt():
         m = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(m)
         m.apply()
+        return m
+    return None
+
+
+def family_build_gb(src_bytes):
+    """build_gb, or the adapter's own fit (`build_gb(src_bytes)` of $PROD435_ADAPTER) when it has one."""
+    m = adapt()
+    return m.build_gb(src_bytes) if m is not None and hasattr(m, 'build_gb') else build_gb(src_bytes)
 
 
 def plan_items(plan):
@@ -398,7 +406,7 @@ def cmd_one(a):
         return fail(D, mod, f'to435 failed: {r.stdout[-400:]}{r.stderr[-800:]}')
     secs['to435'] = round(time.time() - t0, 1)
     srcf = os.path.join(D, 'src', mod.replace('.', '/') + '.lean')
-    bgb = build_gb(os.path.getsize(srcf))
+    bgb = family_build_gb(os.path.getsize(srcf))
     secs['build_pred_gb'] = round(bgb, 2)
     cap = min(a.max_cap_gb, max(a.rss_cap_gb, bgb * 2))
     # builds are admitted while the predicted RssAnon of the running builds (and admitted generations)

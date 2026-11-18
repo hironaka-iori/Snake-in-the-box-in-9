@@ -108,6 +108,26 @@ def cmd_plan(src, out):
 
 
 # ------------------------------------------------------------------ adapter
+# Peak RssAnon of the Lean build by merged-source size, for prod435's memory budget (prod435 uses this
+# instead of its generic build_gb, which was fit on the 231/232 share/ctx certificates). Upper envelope,
+# with 10-20 % margin, of 17,370 published c230 builds (18 Nov): max 0.63 GB at 0.1-0.2 MB of source,
+# 0.81 at 0.2-0.5, 1.00 at 1-2, 1.41 at 3-5, 1.37 at 7-10, 1.59 at 15-20, 3.17 at 30-50, 5.25 at
+# 75-100, 6.28 at 125-150, 6.30 at 175-260 MB. The generic fit predicted 2-3.5 GB for 5-15 MB sources
+# (real <= 1.6), so medium builds queued for memory beside a big one.
+BUILD_GB_KNOTS = [(0, 0.3), (0.2, 0.75), (0.5, 0.95), (2, 1.15), (5, 1.55), (10, 1.75), (20, 2.6), (50, 3.9),
+                  (100, 6.0), (150, 7.0), (250, 7.6)]
+
+
+def build_gb(src_bytes):
+    m = src_bytes / 1e6
+    K = BUILD_GB_KNOTS
+    if m >= K[-1][0]:
+        return K[-1][1] + 0.0253 * (m - K[-1][0])
+    for (x0, y0), (x1, y1) in zip(K, K[1:]):
+        if m < x1:
+            return y0 + (y1 - y0) * (m - x0) / (x1 - x0)
+
+
 _PLAN_RADIUS = {}
 
 
