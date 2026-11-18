@@ -35,3 +35,12 @@ Observed: containers are restarted between turns (machine "up 0 min", job gone),
   and immediately issue the next one. Every ~30 minutes also check free memory and that the log grows.
 - If a wait shows the job gone (or uptime says the machine just booted), re-run the setup-and-launch block at once.
 - Keep the 30-minute send_later self check-in as a safety net only (it brings you back if the turn does end).
+
+## Relaunch for the scheduler fix 87fbd8e5 (18 Nov 11:30 UTC; owners and helpers only, NOT split machines)
+Machines used ~1 of 4 cores (memory-budget fairness rule + over-predicted build memory). Fixed in 87fbd8e5. Do this once, in one Bash call where possible:
+1. `ps -eo pid,etime,args | grep "[b]in/lean -R /root/l435/prod/jobs"` - OWNERS only: if a lean build has run > 90 min, first wait for that PID to exit (`while kill -0 PID; do sleep 60; done`, <= 9 min per Bash call, chained).
+2. `P=$(pgrep -f "prod435.py (run|one)|/l435/prod/jobs/|c230.py cert|genv3stream" | tr '\n' ' '); [ -n "$P" ] && kill -9 $P; sleep 3`
+3. `git fetch origin research/unconditional-241 && git checkout -B research/unconditional-241 FETCH_HEAD && git log --oneline -1`  (must be 87fbd8e5 or later)
+4. `[ -f ~/l435/prod/core/LocalWindowShareCtx.olean ] || python3 lean435/tools/prod435.py setup`
+5. the four exports (plus your C230_PLAN override if you are a share helper), then your LAUNCH line unchanged (>> keeps the log).
+Generation already done is reused, only in-progress Lean builds are lost. After ~15 min: `uptime` should show load ~3-4 and `cat ~/l435/prod/budget.json` usually more than one entry under "run". Then continue holding the turn open (wait chain, 15-min send_later safety net).
