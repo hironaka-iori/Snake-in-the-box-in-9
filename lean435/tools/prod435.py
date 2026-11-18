@@ -324,14 +324,60 @@ OVER_KILL_GB = float(os.environ.get('PROD435_OVER_KILL_GB', 1.0))   # preempt be
 OVER_N = int(os.environ.get('PROD435_OVER_N', 4))                   # at most this many over builds at once
 
 
+def _cgroup_avail():
+    """Bytes still available under the memory cgroup limits of this process and its ancestors (v1 or v2):
+    limit - usage + inactive file cache, the smallest over the levels that have a limit; None if none.
+    The cloud machines run every session's processes under a memory cgroup (14.3 GB on the 15 GB
+    machines), which /proc/meminfo does not show: MemAvailable read ~2 GB too high, and a part over the
+    budget was OOM-killed by the cgroup (18 Nov, 21:00)."""
+    best = None
+    try:
+        lines = open('/proc/self/cgroup').read().splitlines()
+    except OSError:
+        return None
+    for l in lines:
+        hid, ctrl, path = l.split(':', 2)
+        if 'memory' in ctrl.split(','):
+            root, lim_f, use_f, stat_f, key = '/sys/fs/cgroup/memory', 'memory.limit_in_bytes', \
+                'memory.usage_in_bytes', 'memory.stat', 'total_inactive_file'
+        elif hid == '0' and ctrl == '':
+            root, lim_f, use_f, stat_f, key = '/sys/fs/cgroup', 'memory.max', 'memory.current', 'memory.stat', \
+                'inactive_file'
+        else:
+            continue
+        d = os.path.join(root, path.lstrip('/'))
+        while d.startswith(root):
+            try:
+                lim = open(os.path.join(d, lim_f)).read().strip()
+                if lim != 'max' and int(lim) < 2**60:
+                    use = int(open(os.path.join(d, use_f)).read())
+                    inact = 0
+                    for x in open(os.path.join(d, stat_f)):
+                        if x.split()[0] == key:
+                            inact = int(x.split()[1])
+                    v = int(lim) - use + inact
+                    best = v if best is None else min(best, v)
+            except (OSError, ValueError, IndexError):
+                pass
+            if d == root:
+                break
+            d = os.path.dirname(d)
+    return best
+
+
 def mem_available_gb():
+    """Free memory for new work, GiB: MemAvailable, or less if a memory cgroup limit is closer."""
+    v = None
     try:
         for l in open('/proc/meminfo'):
             if l.startswith('MemAvailable:'):
-                return int(l.split()[1]) / 2**20
+                v = int(l.split()[1]) * 1024
     except OSError:
         pass
-    return 0.0
+    c = _cgroup_avail()
+    if c is not None:
+        v = c if v is None else min(v, c)
+    return (v or 0) / 2**30
 
 
 # ------------------------------------------------------------------ setup
