@@ -3,9 +3,10 @@ module
 public import C230Cover
 import LocalWindowCert.V012034A2H644
 import LocalWindowCert.V012031A33555
+import LocalWindowCert.V0120342A664435
 
 /-! Toy instance of the K7 cover (milestone 37 pilot): the published pilot certificate
-`LocalWindowCert.V012034A2H644` and `LocalWindowCert.V012031A33555` consumed through `C230Cover`, and a main-style lumped key derived from
+`LocalWindowCert.V012034A2H644` `LocalWindowCert.V012031A33555` and the split certificate `LocalWindowCert.V0120342A664435` consumed through `C230Cover`, and a main-style lumped key derived from
 it by narrowing. No sorry; the certificate module is a private import. -/
 
 @[expose] public section
@@ -15,10 +16,12 @@ open Snake9 Snake9.LocalWindow Snake9.LocalWindow.Families Snake9.C230
 
 def toyKeys : List (List Nat × List (Nat × Nat)) :=
   [([0, 1, 2, 0, 3, 4], [(2, 2), (8, 21), (6, 6), (4, 4), (4, 4)]),
-   ([0, 1, 2, 0, 3, 1], [(3, 3), (3, 3), (5, 5), (5, 5), (5, 5)])]
+   ([0, 1, 2, 0, 3, 1], [(3, 3), (3, 3), (5, 5), (5, 5), (5, 5)]),
+   ([0, 1, 2, 0, 3, 4, 2], [(6, 6), (6, 6), (4, 4), (4, 4), (3, 3), (5, 5)])]
 
 theorem toy_all : AllRefutedIV toyKeys :=
-  ⟨Snake9.LocalWindow.V012034A2H644.refuted, Snake9.LocalWindow.V012031A33555.refuted, trivial⟩
+  ⟨Snake9.LocalWindow.V012034A2H644.refuted, Snake9.LocalWindow.V012031A33555.refuted,
+    Snake9.LocalWindow.V0120342A664435.refuted, trivial⟩
 
 /-- On every snake, a window with directions `0,1,2,0,3,4` (after relabelling) cannot carry the
 counts 2, 8+, 6, 4, 4. -/
