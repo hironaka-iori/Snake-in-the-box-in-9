@@ -133,3 +133,40 @@ It is **not pushed**. The owner's rules for this work allow commits to `research
 so pushing a new branch needs the owner's explicit approval. Until it is pushed, the 113 worker branches
 remain **required**. Once it is pushed and checked, they are redundant for the 232/231 audits. Nothing is
 to be deleted except by the owner.
+
+### Rebuilding the archive commit elsewhere
+
+The push from the assembly session was refused twice by that session's permission guard ("Permission for
+this action was denied by the Claude Code auto mode classifier. Reason: [Destructive or Unwanted Actions]"),
+even after the owner's approval was relayed. Any session allowed to push the branch can rebuild the
+commit from the 113 worker branches. It fetches single refs at depth 1 and never runs a plain fetch.
+
+```
+python3 lean435/tools/prod435.py merge --out ~/l435/arch-iface \
+  --pfx refs/heads/xfer/c435/ refs/heads/xfer/c435help/ refs/heads/xfer/c435free/ refs/heads/xfer/c435freehelp/
+# expect 27,402 interfaces, 0 conflicts; then verify against the committed manifests:
+python3 - <<'PY'
+import json,gzip,hashlib,os
+I=os.path.expanduser('~/l435/arch-iface'); want={}
+for f in ['milestones/36-lean435-port/audit232/manifest232.jsonl.gz','milestones/36-lean435-port/audit231/manifest231.jsonl.gz']:
+    for l in gzip.open(f,'rt'):
+        r=json.loads(l); assert want.setdefault(r['module'],r['parts']['.olean'])==r['parts']['.olean']
+have={}
+for d in ['LocalWindowCert','LocalWindowCtxCert']:
+    for x in os.listdir(f'{I}/{d}'):
+        have[f'{d}.{x[:-6]}']=hashlib.sha256(open(f'{I}/{d}/{x}','rb').read()).hexdigest()
+assert have==want, 'mismatch'; print(len(have),'ok')
+PY
+A=~/l435/archive231; mkdir -p $A; cp -al ~/l435/arch-iface/LocalWindowCert ~/l435/arch-iface/LocalWindowCtxCert $A/
+gzip -9 -c ~/l435/arch-iface/manifest.jsonl > $A/manifest.jsonl.gz
+(cd $A && find LocalWindowCert LocalWindowCtxCert -name '*.olean' | LC_ALL=C sort | xargs sha256sum) > $A/OLEAN-SHA256.txt
+# add README.md (text: the archive README in this session's record, or a short description)
+export GIT_INDEX_FILE=$(mktemp); git --work-tree=$A add -A .; T=$(git write-tree); unset GIT_INDEX_FILE
+C=$(git commit-tree $T -m "Archive of the 27,402 certificate interfaces of the Lean 4.35 bounds 232 and 231")
+git push origin $C:refs/heads/research/c435-interfaces-231      # once, no force
+```
+
+The `.olean` tree (`LocalWindowCert`, `LocalWindowCtxCert`) and `OLEAN-SHA256.txt` are byte-identical to
+this session's build: list sha256 `06a6955c1e8b95e0bfdf97fc25507a6370a687297284fabb41c98ee7d2aaab52`.
+The commit hash and the tree hash differ unless `README.md` and the gzip output are identical too. The gzip
+output depends only on its input bytes with `gzip -9 -c`: the name and mtime are not stored with stdin input.
