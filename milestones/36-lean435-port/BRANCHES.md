@@ -123,20 +123,27 @@ All 27,402 needed interfaces plus the merged manifest would fit one orphan branc
 - 27,403 files, each far below GitHub's 100 MB file limit.
 
 This is practical, and it would let the owner delete the 113 worker branches after checking the archive
-against the committed manifests. The orchestrator agreed, and the archive was built and verified (18 November, 00:00 UTC):
-- orphan commit `e82d6b68cbc10ad9f80f918eb595d04154d49c39`, tree `89fa780c`;
-- 27,402 `.olean` files, every one equal to `parts[".olean"]` of the committed audit manifests;
-- `manifest.jsonl.gz`, `OLEAN-SHA256.txt` and a README with the exact `assemble435.py --iface … --manifest …`
-  command.
+against the committed manifests. **Pushed** (18 November 2026, about 00:05 UTC, by the orchestrator session with the owner's approval,
+rebuilt there with the recipe below): `refs/heads/research/c435-interfaces-231` = commit
+`e82ff5dd29ce01927ba3e86df573db33fc27aa3d`, tree `346a6f7a3e594b42a62796bffdecc14bf5e3b312`.
 
-It is **not pushed**. The owner's rules for this work allow commits to `research/unconditional-241` only,
-so pushing a new branch needs the owner's explicit approval. Until it is pushed, the 113 worker branches
-remain **required**. Once it is pushed and checked, they are redundant for the 232/231 audits. Nothing is
-to be deleted except by the owner.
+Checked here after a depth-1 fetch of that single ref:
+- all 27,402 `.olean` files equal `parts[".olean"]` of the committed audit232/audit231 manifests;
+- the module set is exactly their union;
+- `OLEAN-SHA256.txt` has sha256 `06a6955c…aab52`;
+- `README.md` is identical to `ARCHIVE-README.md`;
+- the archive's own manifest decompresses to the merged manifest (sha256 `ac2ea1cb…52b2f`, 27,402 lines)
+  and agrees with the committed ones on every `.olean` hash.
+
+A tree built in the assembly session (`89fa780c`, never pushed, discarded) differs from the pushed one only
+in the gzip bytes of `manifest.jsonl.gz`. The decompressed manifests are byte-identical.
+
+**The 113 worker branches are now redundant for reproducing the 232/231 audits.** They remain the original
+farm record. Deleting them is the owner's decision; nothing has been deleted.
 
 ### Rebuilding the archive commit elsewhere
 
-The push from the assembly session was refused twice by that session's permission guard ("Permission for
+(Kept for the record.) The push from the assembly session was refused twice by that session's permission guard ("Permission for
 this action was denied by the Claude Code auto mode classifier. Reason: [Destructive or Unwanted Actions]"),
 even after the owner's approval was relayed. Any session allowed to push the branch can rebuild the
 commit from the 113 worker branches. It fetches single refs at depth 1 and never runs a plain fetch.
@@ -168,5 +175,5 @@ git push origin $C:refs/heads/research/c435-interfaces-231      # once, no force
 
 The `.olean` tree (`LocalWindowCert`, `LocalWindowCtxCert`) and `OLEAN-SHA256.txt` are byte-identical to
 this session's build: list sha256 `06a6955c1e8b95e0bfdf97fc25507a6370a687297284fabb41c98ee7d2aaab52`.
-With that README and the same `gzip` build, the tree hash should be `89fa780cd29ef502cadb5f9912797bfbe018cec8` (check it); the commit hash differs (author, time). The gzip
+With that README the `.olean` tree, `OLEAN-SHA256.txt` and `README.md` come out identical. The bytes of `manifest.jsonl.gz` may depend on the gzip build, so the tree hash can differ (`89fa780c` here, `346a6f7a` pushed). Compare the decompressed manifest instead (sha256 `ac2ea1cb…52b2f`). The gzip
 output depends only on its input bytes with `gzip -9 -c`: the name and mtime are not stored with stdin input.
