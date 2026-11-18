@@ -123,5 +123,13 @@ All 27,402 needed interfaces plus the merged manifest would fit one orphan branc
 - 27,403 files, each far below GitHub's 100 MB file limit.
 
 This is practical, and it would let the owner delete the 113 worker branches after checking the archive
-against the committed manifests. As requested, this branch is **proposed, not pushed**: it is built from
-`~/l435/asm231/iface` only after the orchestrator agrees.
+against the committed manifests. The orchestrator agreed, and the archive was built and verified (18 November, 00:00 UTC):
+- orphan commit `e82d6b68cbc10ad9f80f918eb595d04154d49c39`, tree `89fa780c`;
+- 27,402 `.olean` files, every one equal to `parts[".olean"]` of the committed audit manifests;
+- `manifest.jsonl.gz`, `OLEAN-SHA256.txt` and a README with the exact `assemble435.py --iface … --manifest …`
+  command.
+
+It is **not pushed**. The owner's rules for this work allow commits to `research/unconditional-241` only,
+so pushing a new branch needs the owner's explicit approval. Until it is pushed, the 113 worker branches
+remain **required**. Once it is pushed and checked, they are redundant for the 232/231 audits. Nothing is
+to be deleted except by the owner.

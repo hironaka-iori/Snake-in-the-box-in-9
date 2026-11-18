@@ -579,3 +579,45 @@ privately and which were built on several machines. How they were checked:
   `genv3stream.py` (same output bytes, < 0.4 GB).
 - Above ~20 M core-proof hints, build a split certificate (`splitfarm435.py prepare / part / final`, 8-16 parts of
   3-6 M hints, 2-6 GB each) instead of one module of 6-10+ h.
+
+## Second-kernel checks of the assembly (17–18 November 2026)
+
+The caveat "no second kernel" above is now narrowed. Some parts were re-checked by a second pass of Lean's
+C++ kernel, and the assembly (glue, top module, final module) by an **independent** kernel, nanoda
+(Rust). The certificates' own proofs were **not** re-checked: their kernel checks stay single runs on the
+farm. Re-checking them means rebuilding them from source (about 2,600 Lean CPU-hours for 231), or
+sampling. The tools are in `lean435/tools`. The 4.35 toolchain here ships `leanchecker`, `nanoda_bin`
+0.4.19, `leanexport` and `lean4lean`.
+
+| what | kernel | 231 | 232 | record |
+|---|---|---|---|---|
+| final module recompiled with `-o` (`audit.py final --out-olean`) | C++ (compile) | AUDIT PASSED again | AUDIT PASSED again | `audit*/final-audit-rerun-out-olean.txt` |
+| glue chunks, `Glue435`, top module, final module: kernel replay at interface level (`ifacecheck.lean`) | C++, second pass | 376 modules, 14,746 constants, 0 failures, 340 s | 221 modules, 12,394 constants, 0 failures, 226 s | `audit*/ifacecheck.log` |
+| the same modules, exported (`exportiface.lean`) and checked from the export (`xkernel435.sh`) | **nanoda** (independent) and `leanchecker --from-export` (C++) | 376 modules, 208,119 declarations, both kernels accept all | 221 modules, 124,819 declarations, both accept all | `audit*/xkernel.log`, `audit*/assumptions.txt.gz` |
+| spec layer: core, chain, floors (1,553 modules), stock `leanchecker`, one module per process | C++, second pass | in progress | (same core and floors; 232 chain not run) | see below |
+
+**Why a custom script.** Stock `leanchecker` loads the `.olean.server` and `.olean.private` of every import.
+The certificates publish only their public `.olean`, so on a glue module it stops at the first certificate
+import. `ifacecheck.lean` is leanchecker's `replayFromImports` with the imports loaded at the exported level.
+Each certificate gets its public `.olean` as its only artifact.
+
+**What the independent check assumes.** `exportiface.lean` exports the closure of a module's own constants.
+Imported constants whose bodies are not exported become axioms of the export, and nanoda's
+`permitted_axioms` names every one of them, so nothing else can be assumed. Over all 231 modules these
+assumptions are:
+- the 24,797 certificate theorems `…refuted` (exactly the plan's certificates, pinned by the manifest);
+- 389 theorems and definitions of the spec layer and, in the top and final modules, the glue chunk theorems
+  that those modules combine (each chunk is checked separately);
+- 30 toolchain constants without exported bodies, such as `Eq.symm`, `Nat.mod_lt`, `Nat.xor` and `Nat.repr`.
+
+For 232 the counts are 12,507, 234 and 30. So the independent kernel checks the assembly *given* the
+certificate statements and the spec-layer theorems. The spec layer has only the C++ second pass. The final
+module's export assumes `upper_231_of_refuted6SC563B1` (the chain) and `Floors233Port.floors233`, and checks
+that the theorem follows.
+
+**Negative test.** In the export of chunk S14 of 231, the statement of the chunk's theorem was replaced by
+another proposition. nanoda failed (exit 101) and `leanchecker --from-export` rejected the export.
+
+**lean4lean.** The `lean4lean` binary in this toolchain was built for a 4.35 nightly
+(`4.35.0-nightly-2026-09-06`). It refuses every 4.35.0 `.olean` ("incompatible header"), and it has no
+export mode. It was not used.
