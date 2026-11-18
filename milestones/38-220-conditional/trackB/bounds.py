@@ -5,12 +5,12 @@
 (iii) uniform combined 7-window floor Y: sum_{internal} (24 alpha + share) >= (m-8) Y / 7
 m is impossible iff the lower bound of the left side exceeds 221136."""
 from fractions import Fraction as F
-def lhs(m, P=None, Q=None, C=0, X=0, Y=0):
+def lhs(m, P=None, Q=None, C=0, X=0, Y=0, k=7):
     v = F(840 * (m + 1) + 192)
     a = F(0)
     if P: a = max(a, 24 * F(P * m - C, Q))
-    a = a + F((m - 8) * X, 7)
-    a = max(a, F((m - 8) * Y, 7))
+    a = a + F((m - k - 1) * X, k)
+    a = max(a, F((m - k - 1) * Y, k))
     return v + a
 def bound(**kw):
     m = 300
