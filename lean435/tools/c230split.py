@@ -60,7 +60,10 @@ def steal(a):
     claims = P.Claims(P.PFX.rstrip('/') + 'splitclaim/', 'h', a.index, a.claim_ttl)
     repo = P.Repo(SF.SPFX)
     scan = P.Scan([P.PFX, P.HELP_PFX])
-    gb_dir = claims.b                                    # scan.git: partial fetches of trees and small blobs
+    gb_dir = os.path.join(P.HOME, 'splitsteal.git')      # partial fetches of trees and small blobs (own repo:
+    if not os.path.exists(os.path.join(gb_dir, 'HEAD')):  # scan.git is also fetched into by unit processes)
+        os.makedirs(gb_dir, exist_ok=True)
+        P.git('init', '-q', '--bare', gb_dir)
     sf = [sys.executable, os.path.join(HERE, 'splitfarm435.py')]
     plan = os.environ['C230_PLAN']
     nparts, peak_cache, push_time = {}, {}, {}
