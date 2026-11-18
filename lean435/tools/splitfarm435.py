@@ -31,7 +31,7 @@ sys.path.insert(0, HERE)
 sys.dont_write_bytecode = True
 import prod435 as P  # noqa: E402
 
-SPFX = 'refs/heads/xfer/c435split/'
+SPFX = P.PFX.rstrip('/') + 'split/'           # xfer/c435split/ for the default family, xfer/c230split/ for c230
 PARTS = P.PARTS + ('.stamp',)
 
 
@@ -150,15 +150,19 @@ def cmd_prepare(a):
     231 split certificates; see SPLIT.md). The LRAT and the replay record stay in prep/rw."""
     items = {it[5]: it for it in P.plan_items(a.plan)}
     mod, kind, key, level, est, name = items[a.name]
-    if kind not in ('share', 'ctx'):
-        raise SystemExit(f'{a.name}: kind {kind} is not supported (share and ctx only)')
+    if kind not in ('share', 'ctx', 'plain'):
+        raise SystemExit(f'{a.name}: kind {kind} is not supported (share, ctx and plain seeds only)')
     D = os.path.join(wd(a.name), 'prep')
     env = dict(os.environ, CADICAL=a.cadical, CERT231_SCR=os.path.join(D, 'scr'), CERT435_DATA=os.path.join(D, 'data'),
                CERT435_CORE=os.path.join(D, 'cores'))
-    c435 = [sys.executable, os.path.join(HERE, 'cert435.py')]
+    if kind == 'plain':                         # every key its own seed, as prod435 (seeds_self_<plan>.json.gz)
+        env['CERT435_SEEDS'] = P.seeds_file(a.plan)
+    c435 = [sys.executable] + (os.environ['PROD435_CERT'].split() if os.environ.get('PROD435_CERT') else
+                               [os.path.join(HERE, 'cert435.py')])
     t0 = time.time()
     for step in ('cores', 'cnf'):
-        subprocess.run(c435 + [step, '--plan', os.path.abspath(a.plan), '--kinds', kind, a.name], env=env, check=True)
+        kinds = kind if step == 'cores' or kind != 'plain' else 'seed'
+        subprocess.run(c435 + [step, '--plan', os.path.abspath(a.plan), '--kinds', kinds, a.name], env=env, check=True)
         P.log(f'{a.name}: {step} done ({time.time() - t0:.0f} s)')
     cdir = 'LocalWindowCtxCnf' if kind == 'ctx' else 'LocalWindowCnf'
     gen = os.path.join(D, 'gen')

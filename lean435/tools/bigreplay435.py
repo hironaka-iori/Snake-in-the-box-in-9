@@ -22,6 +22,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'milestones', '35-231-lean', 'certify'))
 sys.dont_write_bytecode = True
+if os.environ.get('PROD435_ADAPTER'):          # interval keys of the 230 route (c230.py): patch the generators first
+    import importlib.util
+    _sp = importlib.util.spec_from_file_location('prod435_adapter', os.environ['PROD435_ADAPTER'])
+    _ad = importlib.util.module_from_spec(_sp)
+    _sp.loader.exec_module(_ad)
+    _ad.apply()
 import cert231  # noqa: E402
 C, GC = cert231.C, cert231.GC
 
@@ -48,16 +54,21 @@ def main():
     certs, jd = os.path.join(work, 'certs'), os.path.join(work, 'json')
     os.makedirs(certs, exist_ok=True)
     m = C.load_meta(a.core, name)
-    assert m is not None and m.get('kind') in ('share', 'ctxshare'), 'share or ctx core JSON needed'
+    assert m is not None, 'core JSON needed'
+    plain = m.get('kind') in ('k6', 'H')        # a plain seed (cert233.core_plain), e.g. the 230 interval keys
+    assert plain or m.get('kind') in ('share', 'ctxshare'), 'plain, share or ctx core JSON needed'
     ctx = m['kind'] == 'ctxshare'
     meta = dict(m)
     rec = {'name': name, 'variables': meta['variables'], 'core': len(meta['core_ids'])}
     if not a.gen_only:
         t0 = time.time()
-        enc, ren, core, tags, used_c = cert231.X.regen(m) if ctx else C.share_regen(m)
-        rl = lambda x: (1 if x > 0 else -1) * ren[abs(x)]   # noqa: E731
-        gz = os.path.join(certs, name + '.cnf.gz')
-        C.write_cnf_gz(len(ren), [[rl(x) for x in c] for c in core], gz)
+        if plain:                               # as cert231.replay for a seed: the full CNF, core ids of it
+            C.regen_plain(meta, certs)
+        else:
+            enc, ren, core, tags, used_c = cert231.X.regen(m) if ctx else C.share_regen(m)
+            rl = lambda x: (1 if x > 0 else -1) * ren[abs(x)]   # noqa: E731
+            gz = os.path.join(certs, name + '.cnf.gz')
+            C.write_cnf_gz(len(ren), [[rl(x) for x in c] for c in core], gz)
         C.plain_json(meta, jd)
         GC.PORTFOLIO[:] = [c.split() for c in a.configs.split(';')]
         C.K.TOOLCHAIN_CADICAL = a.cadical

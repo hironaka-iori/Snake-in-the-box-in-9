@@ -112,9 +112,23 @@ def url():
 
 
 # ------------------------------------------------------------------ plan items
+def adapt():
+    """$PROD435_ADAPTER (a script path, e.g. lean435/tools/c230.py): its apply() patches the generators
+    (key encoding, names, statement bounds) in this process; the certificate steps then run through
+    $PROD435_CERT (default cert435.py)."""
+    p = os.environ.get('PROD435_ADAPTER')
+    if p:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('prod435_adapter', p)
+        m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(m)
+        m.apply()
+
+
 def plan_items(plan):
     """[(module, kind, key, level, est, name)] of the paid certificates (cert231.items)."""
     sys.path.insert(0, os.path.join(ROOT, 'milestones', '35-231-lean', 'certify'))
+    adapt()
     import cert231
 
     class A:
@@ -331,7 +345,8 @@ def cmd_one(a):
     mod, kind, key, level, est, name = items[a.name]
     env = dict(os.environ, CADICAL=a.cadical, CERT231_SCR=os.path.join(D, 'scr'), CERT435_DATA=os.path.join(D, 'data'),
                CERT435_CORE=os.path.join(HOME, 'cores'), CERT435_SEEDS=a.seeds or seeds_file(a.plan))
-    c435 = [sys.executable, os.path.join(HERE, 'cert435.py')]
+    c435 = [sys.executable] + (os.environ['PROD435_CERT'].split() if os.environ.get('PROD435_CERT') else
+                               [os.path.join(HERE, 'cert435.py')])
     secs = {}
     k1 = {'ctx': 'ctx', 'share': 'share', 'plain': 'plain'}[kind]
     k2 = {'ctx': 'ctx', 'share': 'share', 'plain': 'seed'}[kind]
