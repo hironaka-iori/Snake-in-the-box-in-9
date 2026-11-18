@@ -51,3 +51,11 @@ Small builds may now run beside big ones when RAM is free (preemptible). Same st
 - Machines still on 478869ee/46b11be3 (never did the 87fbd8e5 relaunch): relaunch NOW regardless.
 - After checkout, `git log --oneline -1` must show 6ecaa06f or later. After ~15 min `cat ~/l435/prod/budget.json` should show entries under "over" while big builds run; load ~3.5-4.
 Then keep holding the turn open.
+
+## Split work stealing (18 Nov 20:00 UTC, commit 3fa46a11): converting a machine to a split stealer
+The 109 split items are the critical path. Machines told to become SPLIT STEALER K do this once:
+1. Stop the old job by PID: split machines kill their c230split.py / splitfarm435.py / lean PIDs; helpers kill their `prod435.py run` tree (and its lean / c230.py cert / genv3stream children). Pushed sources and parts are reused.
+2. `git fetch origin research/unconditional-241 && git checkout -B research/unconditional-241 FETCH_HEAD && git log --oneline -1` (>= 3fa46a11); `[ -f ~/l435/prod/core/LocalWindowShareCtx.olean ] || python3 lean435/tools/prod435.py setup`; the four exports.
+3. LAUNCH: `nohup python3 lean435/tools/c230split.py --steal --index K >> ~/c230_steal$K.log 2>&1 &`   (LOGFILE ~/c230_steal$K.log, PGREP "c230split.py --steal")
+4. Keep holding the turn open (chained <= 9-min waits, 15-min send_later). To stop: `touch ~/l435/prod/STOP_SPLIT` (finishes running units).
+Indices: static split machines S0..S5 -> K = 1..6; helpers -> K = 7 and up (the orchestrator assigns K).
