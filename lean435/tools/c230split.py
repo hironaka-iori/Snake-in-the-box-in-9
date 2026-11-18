@@ -70,6 +70,7 @@ def steal(a):
     running = {}                                         # unit -> (Popen, cpus, gb, t0, logfile)
     failed = {}
     preempted, cooldown = set(), {}
+    low_n = 0
     published, tips = set(), {}
     local_items = {n for n, _e in items if os.path.isdir(SF.wd(n))}
     last = dict(tips=0, pub=0, claims=0, beat=0)
@@ -239,7 +240,10 @@ def steal(a):
         # youngest is killed and goes back to the queue (not counted as a failure)
         # (if no over unit runs: the youngest part, adopted or not, rather than the kernel's OOM killer, which
         # takes the largest process, i.e. usually the oldest part)
-        if P.mem_available_gb() < a.over_kill_gb:
+        low = P.mem_available_gb() < a.over_kill_gb
+        low_n = low_n + 1 if low else 0                   # two readings in a row (5 s apart): no transients
+        if low_n >= 2:
+            low_n = 0
             ov = [u for u, v in running.items() if v[5] and u not in preempted]
             parts_ = [u for u in running if u.startswith('part:') and u not in preempted]
             if ov or parts_:

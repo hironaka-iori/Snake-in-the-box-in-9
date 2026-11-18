@@ -326,10 +326,12 @@ OVER_N = int(os.environ.get('PROD435_OVER_N', 4))                   # at most th
 
 def _cgroup_avail():
     """Bytes still available under the memory cgroup limits of this process and its ancestors (v1 or v2):
-    limit - usage + inactive file cache, the smallest over the levels that have a limit; None if none.
-    The cloud machines run every session's processes under a memory cgroup (14.3 GB on the 15 GB
-    machines), which /proc/meminfo does not show: MemAvailable read ~2 GB too high, and a part over the
-    budget was OOM-killed by the cgroup (18 Nov, 21:00)."""
+    limit - (usage - page cache + shmem + mapped files), i.e. only anon, shmem, mapped files and kernel
+    memory count as used (the rest of the page cache is reclaimable); the smallest over the levels that
+    have a limit; None if none. The cloud machines run every session's processes under a memory cgroup
+    (14.3 GB on the 15 GB machines), which /proc/meminfo does not show: MemAvailable read ~2 GB too high,
+    and a part over the budget was OOM-killed by the cgroup (18 Nov, 21:00). Counting all active file
+    pages as used gave false lows (git fetches, .olean reads)."""
     best = None
     try:
         lines = open('/proc/self/cgroup').read().splitlines()
@@ -338,11 +340,10 @@ def _cgroup_avail():
     for l in lines:
         hid, ctrl, path = l.split(':', 2)
         if 'memory' in ctrl.split(','):
-            root, lim_f, use_f, stat_f, key = '/sys/fs/cgroup/memory', 'memory.limit_in_bytes', \
-                'memory.usage_in_bytes', 'memory.stat', 'total_inactive_file'
+            root, lim_f, use_f, keys = '/sys/fs/cgroup/memory', 'memory.limit_in_bytes', 'memory.usage_in_bytes', \
+                ('total_cache', 'total_shmem', 'total_mapped_file')
         elif hid == '0' and ctrl == '':
-            root, lim_f, use_f, stat_f, key = '/sys/fs/cgroup', 'memory.max', 'memory.current', 'memory.stat', \
-                'inactive_file'
+            root, lim_f, use_f, keys = '/sys/fs/cgroup', 'memory.max', 'memory.current', ('file', 'shmem', 'file_mapped')
         else:
             continue
         d = os.path.join(root, path.lstrip('/'))
@@ -351,12 +352,15 @@ def _cgroup_avail():
                 lim = open(os.path.join(d, lim_f)).read().strip()
                 if lim != 'max' and int(lim) < 2**60:
                     use = int(open(os.path.join(d, use_f)).read())
-                    inact = 0
-                    for x in open(os.path.join(d, stat_f)):
-                        if x.split()[0] == key:
-                            inact = int(x.split()[1])
-                    v = int(lim) - use + inact
-                    best = v if best is None else min(best, v)
+                    st = {}
+                    for x in open(os.path.join(d, 'memory.stat')):
+                        f = x.split()
+                        if len(f) == 2 and f[0] in keys:
+                            st[f[0]] = int(f[1])
+                    if len(st) == 3:
+                        cache, shm, mapped = (st[k] for k in keys)
+                        v = int(lim) - (use - cache + shm + mapped)
+                        best = v if best is None else min(best, v)
             except (OSError, ValueError, IndexError):
                 pass
             if d == root:
