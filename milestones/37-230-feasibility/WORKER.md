@@ -21,3 +21,9 @@ Then keep this session alive and watch the job:
 - If the log says the job finished (no work left / time limit / all items done or published elsewhere), report and stop.
 - Do not change the commands or flags. If something fails repeatedly in the same way (3 times), stop retrying and report the exact error lines.
 Report at the end in one short message: role, items published (count from the log), anything that failed.
+
+## Self check-ins (added 18 Nov 04:30 UTC; required)
+Sessions that end their turn get their container reclaimed after a while, which kills the nohup job. So, in addition to the above:
+- Right after launching (and after every check), arm ONE self check-in with the claude-code-remote `send_later` tool (delay_minutes 30, initiation own_followup), message: "Self check-in (230 farm): check the job per milestones/37-230-feasibility/WORKER.md (pgrep, tail the log); if it is not running and not finished, re-run the setup-and-launch block (it resumes); then arm the next 30-minute self check-in with send_later."
+- Keep exactly one such check-in pending; when one fires, do the check, then arm the next. Stop arming only when the job has finished (no work left).
+- Split machines must run commit >= 63f10efb of research/unconditional-241 (parts 2 at a time with a memory cap). If an older c230split.py is running, kill it by PID and relaunch after the fetch/checkout.
