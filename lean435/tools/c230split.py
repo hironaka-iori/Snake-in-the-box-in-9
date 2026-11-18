@@ -22,7 +22,8 @@ there and N-k<k> is not, final when every part is there and N is not published. 
 xfer/c230splitclaim/h<K> (prod435 Claims: TTL --claim-ttl h, renewed every 5 min, the earlier claim wins),
 so no unit is done twice and a dead machine's units come back. Order: finals, then parts (items whose
 sources this machine already has first, then largest item first), then preps (largest first) when fewer
-than 2 x --cpus unclaimed parts are left in the farm. Cost per unit: prep 2 cores and 3 GB (bigreplay --jobs 3), part 1 core and
+than 2 x --cpus x (stealers seen in the claims) unclaimed parts are left in the farm; then preps go
+before parts. Cost per unit: prep 2 cores and 3 GB (bigreplay --jobs 3), part 1 core and
 its predicted peak (1.3 x the largest RssAnon of the item's published parts, 2.5-6.5 GB; 6.0 GB while
 fewer than 2 are published; measured max 5.81 GB over 304 parts), final 1 core and 4 GB, one final at a time.
 Units start while the cores (--cpus) and the predicted memory (--mem-gb) allow. Finals publish to
@@ -30,7 +31,9 @@ xfer/c230help/w<600+K>. Several part processes of one item share its base module
 once under a lock (splitfarm435.base_lock). The static mode above does not claim: stop the static
 machines and relaunch them with --steal (their published sources and parts are kept and reused). Until
 then a stealer skips the parts of an item with a part pushed in the last --static-window min (60) and no
-stealer claim on it (a static machine is on it); preps are not protected that way.
+stealer claim on it (a static machine is on it); preps are not protected that way. A stealer restarted
+by PID (its unit processes left running) adopts them: keeps them claimed while they live, and does not
+start them again.
 """
 import argparse, os, shutil, subprocess, sys, time
 
@@ -69,6 +72,35 @@ def steal(a):
     logdir = os.path.join(P.HOME, 'split-logs')
     os.makedirs(logdir, exist_ok=True)
     log(f'split stealer h{a.index}: {len(items)} split items, --cpus {a.cpus}, --mem-gb {a.mem_gb}')
+
+    def unit_pids():
+        # live splitfarm435 unit processes on this machine (e.g. left running by a stealer restarted by PID)
+        out = {}
+        for d in os.listdir('/proc'):
+            if not d.isdigit():
+                continue
+            try:
+                c = open(f'/proc/{d}/cmdline', 'rb').read().split(b'\0')
+            except OSError:
+                continue
+            c = [x.decode('utf-8', 'replace') for x in c if x]
+            if not any(x.endswith('splitfarm435.py') for x in c):
+                continue
+            i = next(j for j, x in enumerate(c) if x.endswith('splitfarm435.py'))
+            kind, n = c[i + 1] if len(c) > i + 1 else '', c[c.index('--name') + 1] if '--name' in c else ''
+            if kind == 'prepare':
+                out['prep:' + n] = int(d)
+            elif kind == 'final':
+                out['final:' + n] = int(d)
+            elif kind == 'part' and '--k' in c:
+                out[f'part:{n}:{c[c.index("--k") + 1]}'] = int(d)
+        return out
+    adopted = unit_pids()                                # unit -> pid: kept claimed (renewed) while alive
+    if adopted:
+        for u in adopted:
+            claims.mine[u] = time.time()
+        claims.write()
+        log(f'adopted {len(adopted)} running unit(s) of an earlier run: {sorted(adopted)}')
 
     def tree(t):
         P.git('fetch', '-q', '--depth', '1', '--filter=blob:none', repo.url, t, cwd=gb_dir, timeout=300)
@@ -176,12 +208,18 @@ def steal(a):
                 log(f'{u}: FAILED (exit {pr.returncode}, try {failed[u]}); log {lf}')
                 claims.drop([u])
             last['tips'] = 0
+        for u, pid in list(adopted.items()):
+            if not os.path.exists(f'/proc/{pid}'):
+                del adopted[u]
+                log(f'{u}: adopted unit ended')
+                claims.published([u])                  # failed or not: its outputs decide (tips) after the keep time
+                last['tips'] = 0
         stop = os.path.exists(stopf) or now > t_end
-        avail = [x for x in units() if x[0] not in running and failed.get(x[0], 0) < 2]
-        if not avail and not running:
+        avail = [x for x in units() if x[0] not in running and x[0] not in adopted and failed.get(x[0], 0) < 2]
+        if not avail and not running and not adopted:
             log('no split unit left: ending')
             break
-        if stop and not running:
+        if stop and not running and not adopted:
             log('stop: ending')
             break
         for n in list(local_items):                        # published items: their local files go
@@ -192,13 +230,19 @@ def steal(a):
         st = os.statvfs(P.HOME)
         disk_gb = st.f_bavail * st.f_frsize / 2**30
         free = [x for x in avail if x[0] not in busy and x[0] not in claims.mine]
-        cpus = a.cpus - sum(v[1] for v in running.values())
-        mem = a.mem_gb - sum(v[2] for v in running.values())
-        nfinal = sum(1 for u in running if u.startswith('final:'))
+        cost = lambda u: (2, 3.0) if u.startswith('prep:') else (1, 4.0 if u.startswith('final:') else 6.0)  # noqa: E731
+        cpus = a.cpus - sum(v[1] for v in running.values()) - sum(cost(u)[0] for u in adopted)
+        mem = a.mem_gb - sum(v[2] for v in running.values()) - sum(cost(u)[1] for u in adopted)
+        nfinal = sum(1 for u in list(running) + list(adopted) if u.startswith('final:'))
         nparts_free = sum(1 for x in free if x[1] == 'part')
+        # preps gate everything (most items have no sources yet): they go before parts while the farm's
+        # backlog of unclaimed parts is below 2 parts per core of the stealers seen in the claims
+        nstealers = 1 + sum(1 for nm, (_t, c) in claims.cache.items()
+                            if any(now - v[1] < claims.ttl for v in c.values()))
+        prep_first = nparts_free < 2 * a.cpus * nstealers
         local = lambda n: os.path.exists(os.path.join(SF.wd(n), 'src'))  # noqa: E731
-        pick = sorted(free, key=lambda x: ({'final': 0, 'part': 1, 'prep': 2}[x[1]], not local(x[2]), order[x[2]],
-                                           x[3] or 0))
+        rank = {'final': 0, 'prep': 1, 'part': 2} if prep_first else {'final': 0, 'part': 1, 'prep': 2}
+        pick = sorted(free, key=lambda x: (rank[x[1]], not local(x[2]), order[x[2]], x[3] or 0))
         batch = []
         for u, kind, n, k in pick:
             if stop:
@@ -206,7 +250,7 @@ def steal(a):
             c, g = {'prep': (2, 3.0), 'final': (1, 4.0)}.get(kind) or (1, part_gb(n))
             if kind == 'final' and (nfinal or any(b[1] == 'final' for b in batch)):
                 continue
-            if kind == 'prep' and (nparts_free >= 2 * a.cpus or disk_gb < a.prep_disk_gb):
+            if kind == 'prep' and (not prep_first or disk_gb < a.prep_disk_gb):
                 continue
             if disk_gb < a.min_disk_gb:
                 continue
