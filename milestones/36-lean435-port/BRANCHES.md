@@ -160,7 +160,7 @@ PY
 A=~/l435/archive231; mkdir -p $A; cp -al ~/l435/arch-iface/LocalWindowCert ~/l435/arch-iface/LocalWindowCtxCert $A/
 gzip -9 -c ~/l435/arch-iface/manifest.jsonl > $A/manifest.jsonl.gz
 (cd $A && find LocalWindowCert LocalWindowCtxCert -name '*.olean' | LC_ALL=C sort | xargs sha256sum) > $A/OLEAN-SHA256.txt
-# add README.md (text: the archive README in this session's record, or a short description)
+cp milestones/36-lean435-port/ARCHIVE-README.md $A/README.md
 export GIT_INDEX_FILE=$(mktemp); git --work-tree=$A add -A .; T=$(git write-tree); unset GIT_INDEX_FILE
 C=$(git commit-tree $T -m "Archive of the 27,402 certificate interfaces of the Lean 4.35 bounds 232 and 231")
 git push origin $C:refs/heads/research/c435-interfaces-231      # once, no force
@@ -168,5 +168,5 @@ git push origin $C:refs/heads/research/c435-interfaces-231      # once, no force
 
 The `.olean` tree (`LocalWindowCert`, `LocalWindowCtxCert`) and `OLEAN-SHA256.txt` are byte-identical to
 this session's build: list sha256 `06a6955c1e8b95e0bfdf97fc25507a6370a687297284fabb41c98ee7d2aaab52`.
-The commit hash and the tree hash differ unless `README.md` and the gzip output are identical too. The gzip
+With that README and the same `gzip` build, the tree hash should be `89fa780cd29ef502cadb5f9912797bfbe018cec8` (check it); the commit hash differs (author, time). The gzip
 output depends only on its input bytes with `gzip -9 -c`: the name and mtime are not stored with stdin input.
