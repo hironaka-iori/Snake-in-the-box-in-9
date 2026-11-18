@@ -1,0 +1,131 @@
+{
+  "status": "PASS",
+  "module": "CutBatch455",
+  "source": "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean\\CutBatch455.lean",
+  "source_sha256": "577ceb915fcbd27983747f3d01c61063f32d7a2364a85cb742ac67f4e689ae67",
+  "checker_sha256": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+  "dependencies": {
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\data\\CutBatch455-execution.json": "ba81aabfe273133d26b4c04d9b327a0597ef871343bfcc78aa2f0277cf249a62",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean\\CutBatch455.lean": "577ceb915fcbd27983747f3d01c61063f32d7a2364a85cb742ac67f4e689ae67",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\scripts\\check_core.py": "d14448880be86dbd61ca617f5e722f2fa93f92cadc2f5214567917a91638ad98",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\scripts\\native_resources.py": "2e9e7d499ef7068d10d7ca7e31c9a9dc7ef19abb72b0396d3eab9824376b4413",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\data\\CubeCut-audit.json": "30ab3532915e262961203cbf54424f6dc597ca3aa80db6b5dde3faa12e7fd58a",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\data\\CubeCut-execution.json": "ecf9e40a85c4d8823fcb35abe8117db60a00b24a766bdb91f388424d2c5eb928",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean\\CubeCut.lean": "1c4b7f92de0f5528fc7c3b6ef9a7750d659be6a6778cabf181e3294619cb5e8f",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Init.olean": "f14f6c9ea0d9eb2a6fe7bdad84a6610657db3d006805708c1a62ac72b676e944",
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\lib\\lean\\Std.olean": "7d3771da25b893da62564bf8198487ff28f01af5cbd410be88d493a4921b2bb1",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\build\\CubeCut.olean": "522b5034d9d84fecf218e74c5e1507e2357c654cba78a07c083d71e3d2ca1e4b",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\logs\\CubeCut-1794998620421276900\\compiler.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "command": [
+    "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+    "-j",
+    "1",
+    "-s",
+    "8192",
+    "-R",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean",
+    "-o",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\logs\\CutBatch455-1794999000766997800\\module.olean",
+    "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\lean\\CutBatch455.lean"
+  ],
+  "log": "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\logs\\CutBatch455-1794999000766997800\\compiler.log",
+  "resource_gate": {
+    "free_bytes": 2843987968,
+    "total_bytes": 16573128704,
+    "processes": [],
+    "errors": [],
+    "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+    "memory_load_percent": 82,
+    "snapshot_seconds": 0.01599999999598367
+  },
+  "resource_samples": [
+    {
+      "free_bytes": 2830888960,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 49880,
+          "ParentProcessId": 32484,
+          "PrivatePageCount": 48128000,
+          "WorkingSetSize": 30580736
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 82,
+      "snapshot_seconds": 0.0
+    },
+    {
+      "free_bytes": 2501074944,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 49880,
+          "ParentProcessId": 32484,
+          "PrivatePageCount": 186720256,
+          "WorkingSetSize": 355115008
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 84,
+      "snapshot_seconds": 0.014999999999417923
+    },
+    {
+      "free_bytes": 2701324288,
+      "total_bytes": 16573128704,
+      "processes": [
+        {
+          "ProcessId": 49880,
+          "ParentProcessId": 32484,
+          "PrivatePageCount": 7610368,
+          "WorkingSetSize": 54566912
+        }
+      ],
+      "errors": [],
+      "provider": "GlobalMemoryStatusEx+Toolhelp32+GetProcessMemoryInfo",
+      "memory_load_percent": 83,
+      "snapshot_seconds": 0.01599999999598367
+    }
+  ],
+  "compiler_pid": 49880,
+  "exit_code": 0,
+  "stop_reason": null,
+  "seconds": 3.0780000000013388,
+  "axioms": [
+    {
+      "theorem": "cut237_455",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "cut237_456",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "cut237_457",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "cut237_458",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "theorem": "cut237_459",
+      "axioms": [
+        "propext"
+      ]
+    }
+  ],
+  "log_sha256": "e775525f5e2c67a895e471d01795076247adfdd5b5dd499ecdafaa44e87aca14",
+  "object": "E:\\Snake-in-a-box\\milestones\\237-parity-reconstruction\\build\\CutBatch455.olean",
+  "olean_sha256": "4b3af4ba650de7b2645603f819ab903262d63b9343ef8d42f34222556dea3d42"
+}

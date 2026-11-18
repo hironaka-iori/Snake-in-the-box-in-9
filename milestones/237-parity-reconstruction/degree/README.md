@@ -1,0 +1,11 @@
+# Retaining 95 vertices of a saved class on the majority side
+
+A path of 192 edges has 193 vertices. Its two endpoints belong to its 97-vertex parity class. Fix one of the 145 distinct labelled 96-vertex parity sets $S$ of the saved 191-edge paths. Select 97 vertices on the parity side containing $S$, exactly 95 in $S$, and 96 on the opposite side. This covers one deletion and two insertions in the candidate majority class. There are 177,062,400 choices over all 145 sets before counting duplicates. The opposite selection is free.
+
+Choose two distinct endpoints among the selected majority vertices. Each selected endpoint must have precisely one selected cube neighbour. Every other selected vertex must have precisely two. The model leaves the degrees of unselected vertices unrestricted. Every induced 192-edge path with the prescribed overlap satisfies these conditions. Disjoint cycles could occur in a feasible degree selection.
+
+With one worker and a two-second limit per class, OR-Tools CP-SAT 9.15.6755 reported `INFEASIBLE` on the initial query for each of the 145 classes. No cycle exclusion was necessary. Total reported solver time was 23.69 seconds. The slowest solve took 0.411 seconds rounded up. These are solver-reported finite exclusions. Each source class retains its original cube labels.
+
+`majority-one.json` contains the per-class outcomes, elapsed times, model names and SHA-256 digests. `majority-one-models.zip` contains the complete text models. `audit_majority.py` reconstructs each linear constraint, selection guard and variable domain from the saved vertex lists and Hamming distance. Its output is `audit.json`. The model audit covers all 145 models. A Lean replay of the infeasibility results remains open.
+
+With the existing exclusion at overlap 96, any 192-edge path shares at most 94 majority vertices with the corresponding parity set of each seed. Combining this with the previous bound of 92 on minority overlap gives at most 186 shared vertices in a 192-vertex seed. This forces at least six seed deletions and seven new vertices. Cube isometries preserve these conclusions by pulling a candidate back to the labelled seed. These statements use the recorded current and prior finite exclusions.

@@ -1,0 +1,51 @@
+E:\Snake-in-a-box\milestones\237-parity-reconstruction\lean\ContractedExample237.lean:34:74: error: unsolved goals
+⊢ List.filterMap
+                    (fun z =>
+                      match cubeNeighboursInExample z with
+                      | [a, b] => some (z, a, b)
+                      | x => none)
+                    (List.range' 0 64) ++
+                  List.filterMap
+                    (fun z =>
+                      match cubeNeighboursInExample z with
+                      | [a, b] => some (z, a, b)
+                      | x => none)
+                    (List.range' 64 64) ++
+                List.filterMap
+                  (fun z =>
+                    match cubeNeighboursInExample z with
+                    | [a, b] => some (z, a, b)
+                    | x => none)
+                  (List.range' 128 64) ++
+              List.filterMap
+                (fun z =>
+                  match cubeNeighboursInExample z with
+                  | [a, b] => some (z, a, b)
+                  | x => none)
+                (List.range' 192 64) ++
+            List.filterMap
+              (fun z =>
+                match cubeNeighboursInExample z with
+                | [a, b] => some (z, a, b)
+                | x => none)
+              (List.range' 256 64) ++
+          List.filterMap
+            (fun z =>
+              match cubeNeighboursInExample z with
+              | [a, b] => some (z, a, b)
+              | x => none)
+            (List.range' 320 64) ++
+        List.filterMap
+          (fun z =>
+            match cubeNeighboursInExample z with
+            | [a, b] => some (z, a, b)
+            | x => none)
+          (List.range' 384 64) ++
+      List.filterMap
+        (fun z =>
+          match cubeNeighboursInExample z with
+          | [a, b] => some (z, a, b)
+          | x => none)
+        (List.range' 448 64) =
+    [(2, 3, 10), (7, 3, 23), (8, 9, 10), (21, 17, 23), (26, 10, 27), (31, 23, 27)]
+'ContractedDegrees237.example_label_table' depends on axioms: [propext, sorryAx]

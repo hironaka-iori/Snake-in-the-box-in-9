@@ -1,0 +1,131 @@
+% Unfinished round 237 draft. The cut replay was stopped after 300 of 623 statements.
+% Update verification claims from a final receipt before using this passage.
+\subsection{An exchange in the larger parity class}\label{sec:majority237}
+A working hypothesis is that $a(9)=191$. A longer snake would have a
+192-edge prefix. To look for such a prefix, let $B$ be either 96-vertex
+parity class of a saved 191-edge path. Choose $d\in B$ and distinct
+$a,b$ of the same parity outside $B$. Set
+\[
+ U=(B\setminus\{d\})\cup\{a,b\}.
+\]
+Can these 97 vertices occur at all even positions of a 192-edge snake?
+The other 96 vertices, both endpoints and the ordering are free. This
+question tests one consequence of the working hypothesis. The numerical
+conjecture in Section~\ref{sec:hypothesis} makes a different prediction.
+
+For any one-parity set $W$, form the simple graph $G(W)$ on $W$.
+Join $v$ and $w$ if some opposite-parity vertex has exactly $v$ and $w$
+as neighbours in $W$. Multiple such labels give one edge.
+Section~\ref{sec:majority237} uses the following equivalence. A snake
+with its even positions equal to $U$ orders $U$ along a Hamiltonian
+path of $G(U)$, since every intervening odd vertex has exactly its two
+path neighbours in $U$. Conversely, interleave a Hamiltonian order
+with one label per edge. Distinct edges in the order require distinct
+labels, and the two-neighbour condition excludes every chord.
+
+\begin{lemma}\label{lem:partial237}
+If $G(U)$ admits a Hamiltonian path, $W\subseteq U$, and $r=|U\setminus W|$,
+then $2I(W)+L(W)\le 2r+2$, where $I(W)$ and $L(W)$ count the isolated
+vertices and the vertices of degree one in $G(W)$.
+\end{lemma}
+\begin{proof}
+Delete the $r$ missing positions from a Hamiltonian order. At most
+$r+1$ nonempty runs remain. Every consecutive old pair within a run
+retains its label when restricted to $W$. The runs thus form a spanning
+union of paths in $G(W)$. In this union the sum of $2-\deg(v)$ is twice
+the number of nonempty runs, including singleton runs. Additional edges
+can only lower the sum of $\max(0,2-\deg(v))$, which in $G(W)$ is
+$2I(W)+L(W)$.
+\end{proof}
+
+\begin{lemma}\label{lem:cut237}
+Suppose $G(U)$ admits a Hamiltonian path. For arbitrary subsets
+$S,T\subseteq U$, let $e(S,U\setminus T)$ count ordered adjacent pairs
+$(u,v)$ with $u\in S$ and $v\in U\setminus T$. Then
+\[
+ 2|S|\le 2|T|+2+e(S,U\setminus T).
+\]
+\end{lemma}
+\begin{proof}
+Sum the path degrees at the vertices in $S$. Only the two endpoints can
+have degree one, so the sum is at least $2|S|-2$. Count these incidences
+by their destinations. Each vertex of $T$ receives at most two; every
+remaining incidence gives a different ordered edge counted by $e$.
+This also covers overlapping $S$ and $T$.
+\end{proof}
+
+The 145 distinct saved classes give
+$145\cdot96\binom{160}{2}=177\,062\,400$ descriptions before
+deduplication. With $a<b$, removing $b$ from the proposed order requires
+$2I+L\le4$ at $W=(B\setminus\{d\})\cup\{a\}$. This excludes
+$170\,560\,947$ descriptions. At the final set, an isolated vertex or
+more than two leaves excludes another $6\,500\,774$. The remaining
+679 descriptions represent 623 distinct sets. A separate enumeration
+applied the single-addition condition to both $a$ and $b$ and reconstructed
+the surviving graphs directly. It returned exactly the same descriptions.
+
+Every one of the 623 sets violates Lemma~\ref{lem:cut237} for explicit
+$S$ and $T$. For example, take saved class 43, remove vertex 138 and add
+8 and 158. With the integer cube labels of this paper, choose
+\[
+ S=\{56,88,158,188,280,440,446,472\},\qquad T=\{176,336\}.
+\]
+Exactly eight ordered edges leave $S$ for $U\setminus T$. The required
+inequality becomes $16\le14$. Across all 623 sets, the excess of the
+left side over the right side is 2, 4, 6 or 8, with respective
+frequencies 161, 291, 167 and 4. Each count can be checked within the
+cube: from a source $u$, enumerate the 36 unordered pairs of distinct
+axes, giving targets $w$ at distance two. There are exactly two
+intermediate cube vertices; either gives an edge if its selected
+neighbours are exactly $u$ and $w$. Count the target once even if both
+labels work. The finite enumeration was independently reproduced, and
+all 623 displayed-by-data inequalities have individual kernel checks.
+An independent necessary-degree search excludes the same 145 families
+before imposing connectivity~\cite{research237}. The correspondence from
+the complete enumeration to the saved bank is computational evidence.
+
+\begin{corollary}
+Under the finite covers above and those of the preceding three rounds,
+a 192-edge snake shares at most 186 vertices with each saved 191-edge
+snake or any cube-isometric copy.
+\end{corollary}
+\begin{proof}
+The candidate has parity classes of sizes 97 and 96. The larger class
+cannot retain 96 seed vertices by the fixed-class survey, or exactly 95
+by the present exclusion. The smaller class retains at most 92 by the
+earlier covers. Thus the intersection has size at most $94+92=186$.
+The seed has 192 vertices, the candidate 193, giving at least six
+deletions and seven additions. Applying an inverse cube isometry gives
+the same conclusion for each copy.
+\end{proof}
+
+\subsection{Recovering a selection with two missing counts}\label{sec:erasure237}
+\begin{proposition}
+For any two distinct vertices of $\Q_9$, the neighbour counts at the
+remaining 510 vertices uniquely determine a binary vertex selection.
+\end{proposition}
+\begin{proof}
+Let $z$ be the difference of two selection indicators and let $b(v)$
+be the sum of $z$ at the neighbours of $v$. Suppose $b$ vanishes off
+$\{p,q\}$. Write $x=b(p)$ and $y=b(q)$. Apply the inverse from
+Proposition~\ref{prop:inverse236} at the antipodes of $p$ and $q$.
+Its distance-nine coefficient is 128. The two off-diagonal distances
+are equal and below nine, so their common coefficient $c$ belongs to
+$\{0,35,-10,8,-16\}$. For some $s,t\in\{-1,0,1\}$ this gives
+\[
+ 128x+cy=315s,\qquad cx+128y=315t.
+\]
+If exactly one of $s,t$ is nonzero, the corresponding unknown has
+absolute value $315\cdot128/(128^2-c^2)$, strictly between two and
+three. This contradicts integrality. If both are nonzero, then $t=s$
+or $t=-s$. Inverting the two equations gives
+$|x|=315/(128+c)$ or $315/(128-c)$, respectively. The possible
+denominators are $93,112,118,120,128,136,138,144,163$, none of which
+divides 315. Hence $s=t=0$. Since $|c|<128$, we get $x=y=0$.
+The complete profile now vanishes, and the inverse gives $z=0$.
+\end{proof}
+The inverse and this two-erasure result were checked on the full
+nine-dimensional cube. The result concerns binary selections; the proof
+uses the three possible values of their difference. Retained path
+vertices alone generally leave many more than two counts unknown.
+

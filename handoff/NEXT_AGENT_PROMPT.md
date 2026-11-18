@@ -1,23 +1,60 @@
-# Current state after round 236
+# Current state after round 237
 
-The user resumed round 236 and explicitly requested a pause after it. Publish this checkpoint, set the goal to paused, and do not start another round until she resumes. Work in E:/Snake-in-a-box. Read this milestone's MATHEMATICAL_NOTE.md and data/completion.json first.
+The goal is ACTIVE. Complete publication of round 237, continue with full rounds 238 and 239, and pause after round 239. The earlier interruption in milestones/237-parity-reconstruction/PAUSED.md is historical and superseded by the resumption. Work in E:/Snake-in-a-box. Read the current mathematical note and source-bound receipts before continuing.
 
-The maintained interval is 191 <= a(9) <= 233. No new Q9 snake or global bound was obtained. The contributor's completed 233 theorem has a saved assembly and standard-axiom audit; a fresh independent full rebuild remains pending. The 196 conjecture is unresolved. Coworkers handle upper bounds. The contributor branch remains at 61e6655e7a8aa16ed6f4f56399c381d753a46f5d after this round's fetch; no new completed unconditional 231 assembly was inspected.
+The maintained interval is \(191\le a(9)\le231\). The contributor theorem at revision 478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088 has a successful saved final assembly and standard-axiom audit in milestones/36-lean435-port/audit231. Its source states the universal 231-edge conclusion without a remaining certificate or share-floor premise. A fresh independent rebuild of the entire contributor proof remains pending. No longer snake or new global bound was obtained in this construction round. The conjecture \(a(9)=196\) is unresolved. Coworkers handle upper bounds; continue construction and structural work.
 
-All 145 saved exact-three-replacement families were natively infeasible in the initial degree model. The model selects 96 minority and 97 majority vertices, retaining 93 of the saved 96-set. Each selected vertex has degree two except two majority endpoints of degree one. Unselected vertices are unrestricted. All 145 models, selection guards, execution arguments and source/input pins passed independent reconstruction. No cycle cuts were needed. The implicit description count is 13,879,134,592,000 before duplicates. This is native solver evidence, without a Lean contradiction replay.
+## Majority exchange and its evidence
 
-Combining the zero-, one-, two- and three-replacement covers gives minority overlap at most 92. The earlier majority result gives at most 95, so any 192-edge candidate shares at most 187 vertices with every saved seed or cube-isometric copy. At least five old vertices are omitted and six new vertices introduced. The restricted family with one complete 96-vertex parity class within three replacements of a saved class has exact maximum 191, attained by an original seed. These statements depend on the recorded finite/native premises and give no global bound.
+A 192-edge snake has 193 vertices, split into majority and minority classes of sizes 97 and 96. For each of the 145 saved 96-vertex parity sets, this round considers removing one old vertex and inserting two different same-parity vertices. The opposite class, ordering and endpoints remain free. These are 177,062,400 descriptions before deduplication.
 
-At exactly four replacements, class 139 was INFEASIBLE in about 8.45 seconds. Classes 7, 6 and 0 were UNKNOWN after 40 seconds each; the remaining 141 were unqueried. The four models passed the same independent audit. There were no feasible selections and no cycle cuts. Preserve those statuses. Do not call the entire four-replacement family excluded.
+The contraction graph joins two selected majority vertices when some opposite-parity vertex has exactly those two selected neighbours. Parallel labels count once. A snake with that majority set exists exactly when the simple contraction graph has a Hamiltonian path. The mathematical equivalence is explained in MATHEMATICAL_NOTE.md and spectral/BRIDGE_REVIEW.md.
 
-Six supporting statements passed Lean. ExchangeBalance236 derives the retained-neighbour balance identity and its endpoint/internal consequences from actual Boolean-filter counts. AdjacencyInverse236 checks five distance recurrences and proves generic finite-sum reconstruction under an explicit matrix coefficient identity. Its first compile failed on list-zero simplification; the source was repaired and the second compilation passed. Failed and accepted records remain saved separately. Actual graph degree interpretation and the full cube instantiation remain written or separately computational obligations.
+Deleting r positions from a Hamiltonian order leaves at most r+1 runs. Consequently every partial selection satisfies \(2I+L\le2r+2\), where I counts isolated vertices and L counts leaves in its contraction graph. For a completed selection U and arbitrary subsets S,T, the necessary directed-cut inequality is
 
-The inverse uses weights 35, -10, 8, -16, 128 at cube distances 1, 3, 5, 7, 9. Their weighted sum of all neighbour-count changes equals 315 times the selection change at a vertex. An exact calculation verifies all 262,144 entries of the labelled Q9 matrix product. The complete count profile determines the vertex set uniquely. For changes only in the majority side, all 256 minority-side counts are needed; unknown counts outside retained minority vertices cannot be set to zero. Their total is eight if the old minority endpoint is retained and nine otherwise. The inverse is a linear recombination of complete neighbour equations, with no automatic improvement to the model or connectivity guarantee.
+\[
+2|S|\le2|T|+2+e(S,U\setminus T).
+\]
 
-After resumption, the immediate construction frontier is at least four minority replacements. The three unresolved four-replacement classes are 7, 6 and 0; 141 others remain unqueried at that count. A proposed alternative is to choose majority additions and deletions first, count old internal minority vertices whose added and removed neighbour counts differ, and delete all such vertices. More than r mismatches rejects a proposal with r minority replacements. The old minority endpoint has its separate one-extra-addition condition. Full inverse consistency can then constrain the still-unknown counts. This generator is not implemented or benchmarked. Partial greedy growth remains optional.
+The last term counts distinct ordered graph edges. The two endpoint deficits account for the additive 2; each destination in T receives at most two path incidences. Overlap between S and T is allowed.
 
-Preserve the round-235 two-replacement cover, round-234 one-replacement cover, round-233 saved-parent deletion ceilings 46/92/186, round-230 two-block exclusions, round-222 one-crossing ceiling, and frozen historical search states inherited in completion.json. Round 193 already closes all repeated length-preserving contiguous replacements of at most 33 edges within the saved bank; do not propose ordinary square reroutings as an unsearched escape from that closure.
+Two archived independent enumerations agree on 679 surviving descriptions, representing 623 distinct sets. Every set has an explicit violated cut. The current finite-input audit reconstructs all 679 descriptions, all 623 contraction graphs, their cuts, their original Lean declaration inputs, and all 145 archived necessary-degree models. The full enumeration and solver executions were not rerun. The independent executable's archived binary digest was not revalidated against a located executable; its source and saved output remain available.
 
-The two authoritative TeX originals remain in D:/Codex/2026-10-13/new-chat/outputs/ and have exact paper/ mirrors. Authors and local hypersetup are preserved. Both final sources compiled successfully. Full-source review last occurred at round 230 and is due at round 240; current additions receive bounded independent review. All 149 raw models remain local and are archived in data/solver-models.zip.
+All 623 literal numerical cut inequalities now have accepted Lean receipts, compiled in 125 sequential modules of at most five statements. The path-index inequality, partial-deficit statements, and geometric helper lemmas have separate accepted receipts. Their complete proof-assistant assembly remains open: the escapes computation still needs its distinct-target counting identity and reindexing to the actual path positions. Thus the numerical cut checks alone do not establish a complete Lean saved-family exclusion. The written bridge is recorded in spectral/BRIDGE_REVIEW.md.
 
-Use one heavy worker/compiler at a time; startup free memory at least 1 GiB, reserve 768 MiB, private memory at most 256 MiB, native threads one. Lean uses 60 seconds, -j1 and -s8192. Keep publication narrow and Git pack memory bounded. Preserve the unrelated .gitignore and milestone-50 tracked edits. All workers are terminal before publication. Pause after publishing this checkpoint.
+A separate necessary-degree model reports INFEASIBLE for every one of the 145 families, before connectivity cuts. All unselected degrees are unrestricted. Its constraints and selection guards were independently reconstructed. These native contradictions have no Lean replay. The archived circuit results exclude the same 623 final graphs and retain the same solver-evidence limitation.
+
+Combining these covers with the preceding ones gives majority overlap at most 94 and minority overlap at most 92. Under the recorded finite/native evidence, any 192-edge snake shares at most 186 vertices with each saved 191-edge seed or cube-isometric copy. It must omit at least six old vertices and introduce at least seven new ones. This is a proximity restriction relative to the saved collection; it gives no global upper bound.
+
+## Actual-cube reconstruction
+
+The complete recursive Q9 inverse and its two-missing-count theorem passed the guarded Lean rebuild. Sixteen 32-case coefficient modules replace the memory-exceeding monolithic calculation without changing the statement. The inverse weights are 35, -10, 8, -16 and 128 at distances 1, 3, 5, 7 and 9, with factor 315.
+
+Neighbour counts at any 510 of the 512 vertices determine a binary vertex selection uniquely. The proof applies the inverse at the antipodes of the two missing positions and eliminates the resulting integer equations. This is a theorem about arbitrary binary selections, with no snake or symmetry assumption. For a selection confined to one parity side, the counts on that side are zero automatically; any 254 of the 256 opposite-side counts therefore suffice. This last statement is a written specialization of the checked theorem.
+
+Counts at retained snake vertices leave many other counts unspecified. Never replace these unknown counts by zero. Reconstruction does not itself guarantee connectivity or supply a longer snake.
+
+## Continuation and frozen search states
+
+At exactly four minority replacements, class 139 remains INFEASIBLE. Classes 7, 6 and 0 remain UNKNOWN after their recorded 40-second runs; 141 classes remain unqueried. The current majority result changes none of these statuses. The next open majority family removes two old vertices and inserts three, giving overlap 94. Neither that family nor the complete four-replacement minority family is excluded.
+
+Continue a single construction route at a time. A useful next approach is to combine the retained-neighbour balance equations with the new majority and minority overlap restrictions. A proposed majority change forces removal of every old internal minority vertex whose added and removed neighbour counts differ; the old minority endpoint has its separate one-extra-addition condition. Use these necessary conditions to select candidates before ordering them. Full neighbour-count consistency can constrain unknown counts once they are represented explicitly. This proposed generator has no established performance improvement. Partial greedy growth remains an optional local method.
+
+Preserve the round-235 two-replacement cover, round-234 one-replacement cover, round-233 saved-parent deletion ceilings 46/92/186, round-230 two-block exclusions, round-222 one-crossing ceiling, and all frozen historical outcomes in the prior completion records. Round 193 already closes repeated length-preserving contiguous replacements of at most 33 edges within the saved bank. Ordinary square reroutings are included in that closure.
+
+## Evidence and publication discipline
+
+The main evidence is in milestones/237-parity-reconstruction:
+
+- MATHEMATICAL_NOTE.md: written argument and limitations.
+- data/finite-input-audit.json: reconstruction of saved finite inputs, native models and numerical cuts.
+- majority/kernel-cuts.json: all 623 accepted literal cut inequalities.
+- data/inverse-replay.json: actual-cube inverse and two-erasure proof.
+- data/spectral-replay.json and data/axis-replay.json: path criteria and geometric helpers.
+- data/example-replay.json: checked supporting finite example.
+- spectral/BRIDGE_REVIEW.md: complete written bridge and remaining Lean obligations.
+- logs/: retained failed and successful source-bound compilation records.
+
+The authoritative manuscripts are D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and snake9_frontier_explanation.tex, with exact paper/ mirrors. Preserve all three authors and the original hypersetup. Both updated manuscripts compiled successfully with the desktop compiler; their saved receipts and exact mirror hashes are in data/completion.json. The publication manifest records the checkpoint files. The full-source review last occurred at round 230 and is due at round 240.
+
+Use one heavy worker/compiler at a time. Retain the existing resource limits: at least 1 GiB startup free memory, 768 MiB reserve, 256 MiB private-memory ceiling, one native thread, and Lean with 60 seconds, -j1 and -s8192. Preserve failed logs and exact dependency hashes. Keep publication narrow and Git pack memory bounded. Preserve the unrelated .gitignore and milestone-50 tracked edits. The root worker owns completion.json, final compilation, commit and push. Do not pause at round 237; continue through round 239 unless the user changes the instruction.

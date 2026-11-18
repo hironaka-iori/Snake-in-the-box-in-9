@@ -32,16 +32,16 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 236, 18 November 2026}
+\date{Research state after round 237, 18 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
 Let $a(9)$ be the maximum edge length of an induced path in the
 nine-dimensional binary hypercube. An explicit checked construction and
-a completed contributor theorem give $191\le a(9)\le233$. The upper
-theorem has a successful saved final assembly and axiom audit, with no
-remaining certificate or share-floor premise; a complete independent
-rebuild remains pending~\cite{bound233archive}.
+a completed contributor theorem give $191\le a(9)\le231$. The upper
+theorem has a successful saved final assembly and standard-axiom audit,
+with no remaining certificate or share-floor premise; a complete
+independent rebuild remains pending~\cite{bound231archive}.
 
 The upper-bound analysis combines an exact coordinate-square census,
 local count and empty-square share inequalities, and finite potentials.
@@ -68,8 +68,9 @@ parity classes relative to each saved seed, under the stated native
 finite evidence. A parity lift gives a universal closed-neighbour
 construction criterion, while a local deletion obstruction excludes
 near-doubling by deleting from the saved parents of lengths 26, 50 and 98.
-Complete covers through three replacements of a minority class further
-show that any 192-edge snake shares at most 187 vertices with each saved
+Complete covers through three replacements of a minority class and a
+majority-exchange cover show that any 192-edge snake shares at most 186
+vertices with each saved
 191-edge seed, under the stated finite and native evidence.
 
 Written proofs, Lean-checked implications and independently audited
@@ -118,28 +119,29 @@ Thus $\alpha_i=b_i+\delta_i$ with $\delta_i\ge0$. A count symbol $b_i<6$ specifi
 The explicit construction and the archived contributor upper-bound argument
 give the project interval
 \[
-\boxed{191\le a(9)\le233.}
+\boxed{191\le a(9)\le231.}
 \]
-The upper bound is the completed contributor theorem at revision
-\texttt{b0521e1d}, with its final assembly and axiom audit recorded at
-\texttt{b65d30ca}~\cite{bound233archive}. Its theorem has no remaining
+The upper bound is the completed contributor theorem and saved final
+assembly at revision \texttt{478869ee}~\cite{bound231archive}. Its audit
+reports only the standard axioms, and its theorem has no remaining
 certificate or floor premise. A complete independent rebuild of its
 dependency closure remains pending.
 \end{theorem}
 The lower bound is verified from the explicit transition sequence in
 Theorem~\ref{thm:lower}. The completed upper bound combines the square
 census, local count and share certificates, and a finite potential summed
-along every actual snake. Section~\ref{sec:bound233} records the completed
-233 chain. Section~\ref{sec:upper-proof} preserves the earlier 235 argument
+along every actual snake. Section~\ref{sec:bound231} records the current
+231 theorem. Section~\ref{sec:bound233} preserves the earlier completed
+233 chain, and Section~\ref{sec:upper-proof} preserves the 235 argument
 and its empty-square refinement with their original constants.
 
 \paragraph{Reading order and status.}
 The strongest conclusions can be read before the chronological development:
 \begin{itemize}
-\item Section~\ref{sec:bound233} gives the completed contributor bound 233.
-The square census and local inequalities preceding it explain its methods;
-the alternative conditional 234 and relaxed 233 comparisons retain their
-own unresolved premises.
+\item Section~\ref{sec:bound231} gives the completed contributor bound 231.
+The square census and local inequalities explain the upper-bound methods.
+The earlier completed 233 argument and the alternative conditional 234
+and relaxed 233 comparisons retain their own constants and proof status.
 \item Section~\ref{sec:prefix222} gives the exact fixed-parent ceiling of
 191 for a one-crossing join. It covers the specified full parent and its
 cube-isometry class, and asserts no compatible witness attaining that ceiling.
@@ -172,12 +174,13 @@ local results. The construction conclusions are located by the guide above.
 \toprule
 Claim & Evidence and scope\\\midrule
 $a(9)\ge191$ & An explicit snake with every vertex pair checked.\\
-$a(9)\le233$ & Completed contributor theorem with saved final assembly and standard-axiom audit; full independent rebuild pending.\\
+$a(9)\le231$ & Completed contributor theorem with saved final assembly and standard-axiom audit; full independent rebuild pending.\\
+Historical bound 233 & Earlier completed share-weighted contributor argument; its original arithmetic and audit limitations are retained.\\
 Historical bound 235 & Archived proof using 1287 local keys and a potential; its count identities remain useful, while the numerical bound is superseded.\\
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
-Relaxed 233 comparison & The original contributor chain is complete. The separate four-unit share allowance retains its own relaxed coverage and actual-snake integration premises.\\
-Alternative conditional 234 & Numerically superseded by 233. Profile $(15,14,14,14)$ and boundary contribution 24 give $42254m+45L\le9928453$. Complete local-share proofs, reference exclusions, count restrictions and the graph certificate remain pending.\\
+Relaxed 233 comparison & The earlier 233 contributor chain is complete. The separate four-unit share allowance retains its own relaxed coverage and actual-snake integration premises.\\
+Alternative conditional 234 & Numerically superseded by 231. Profile $(15,14,14,14)$ and boundary contribution 24 give $42254m+45L\le9928453$. Complete local-share proofs, reference exclusions, count restrictions and the graph certificate remain pending.\\
 Actual-state construction and weight accounting & State construction, non-reference filters and baseline weights are checked. Reference retention remains conditional on 1358 entries of the 1378-key union.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
 New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
@@ -312,7 +315,7 @@ The two specified neighbors exhaust the selected neighbors of $v$, since a verte
 \section{The upper bound 235 and the retained empty-square term}\label{sec:upper-proof}
 This section preserves the earlier count-only argument and its original
 constants. Its numerical upper bound is superseded by the completed
-contributor theorem in Section~\ref{sec:bound233}; the identities and
+contributor theorem in Section~\ref{sec:bound231}; the identities and
 conditional refinements below retain their stated mathematical scope.
 The square identity reduces the upper-bound problem to a lower estimate for $T$. We obtain that estimate from necessary conditions on short path segments. The local conditions exclude configurations, the finite potential combines the exclusions, and the final summation accounts for the ends of the path.
 \subsection{Normalization and necessary local conditions}
@@ -389,7 +392,7 @@ This gives $39m+2s_0\le9192$. Since $39\cdot236=9204>9192$,
 integrality gives $m\le235$. The zero-edge path satisfies the length
 bound directly. This completes the archived upper bound 235. The stronger
 upper bound in Theorem~\ref{thm:main} is supplied by the separate
-contributor argument in Section~\ref{sec:bound233}.
+contributor argument in Section~\ref{sec:bound231}.
 \end{proof}
 
 \begin{corollary}[Fourteen-empty-square target]\label{cor:eighteen-empty}\label{cor:fourteen-empty}
@@ -3923,7 +3926,22 @@ it does not establish a new numerical upper bound.
 
 At the end of round 187, 93 of 98 complete clause batches (11904 of 12,424 clauses) have passed Lean. The initial-database truth theorem remains incomplete. The full critical contradiction and the actual-snake floor-fifteen theorem remain pending.
 
-\section{Completed contributor bound 233}\label{sec:bound233}
+\section{Current contributor bound 231}\label{sec:bound231}
+The completed contributor theorem at revision \texttt{478869ee} states
+that every snake in $\Q_9$ has at most 231 edges~\cite{bound231archive}.
+The final argument supplies its local-refutation aggregates and required
+share floors. No certificate, floor or conditional-model premise remains
+in the stated universal upper bound.
+
+The saved audit records successful final assembly, checks of the imported
+proof records and only the standard axioms \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}. A fresh independent
+rebuild of the entire proof dependency closure remains pending. The
+current interval is therefore $191\le a(9)\le231$, with that verification
+qualification. This later result numerically supersedes the 233 and 235
+bounds; their original proofs and constants are retained below.
+
+\section{Earlier completed contributor bound 233}\label{sec:bound233}
 The contributor theorem at revision \texttt{b0521e1d} states that every
 snake in $Q_9$ has at most 233 edges~\cite{bound233archive}. Its final source
 applies the two completed local-certificate aggregates to the B233
@@ -4031,10 +4049,10 @@ requirements for this relaxed route remain unchanged. This alternative
 route to 233 remains conditional; the original contributor route is complete.
 
 \section{Remaining requirements for alternative comparisons}\label{sec:closure}
-The completed contributor bound 233 numerically supersedes the proposed
-234 comparisons and matches the relaxed 233 target. The requirements
-below concern those separate arguments; they do not qualify the completed
-theorem of Section~\ref{sec:bound233}.
+The current contributor bound 231 numerically supersedes the proposed
+234 comparisons and relaxed 233 target. The requirements below concern
+those separate arguments; they do not qualify the completed theorem of
+Section~\ref{sec:bound231}.
 
 \paragraph{Current retained graph.}
 The sufficient profile is $(15,14,14,14)$ on
@@ -4047,7 +4065,7 @@ exclusions, graph coverage and the complete finite-edge certificate.
 These premises are separate from the accepted-key package below.
 
 
-The maintained interval is $191\le a(9)\le233$, with the contributor-proof
+The maintained interval is $191\le a(9)\le231$, with the contributor-proof
 and independent-rebuild distinction stated in Section~\ref{sec:verification}.
 The boundary-24 argument removes the additional positive-loss requirement
 from the retained finite comparison. Completing this alternative argument requires establishing the weakened
@@ -7673,7 +7691,8 @@ constructions with multiple crossings remain outside its scope.
 The exact fractional weight-94 points of Section~\ref{sec:parity221}
 remain valid in the unconditioned relaxation: splitting into actual
 prefixes adds restrictions that those fractional points need not satisfy.
-The global interval $191\le a(9)\le233$ is unchanged.
+At that checkpoint, the maintained global interval remained
+$191\le a(9)\le233$.
 
 \subsection{Joint four-crossing construction}
 \label{sec:coupled223}
@@ -8891,6 +8910,147 @@ bridge. A separate exact integer calculation verifies all 262144 entries
 of the full labelled-cube matrix identity. No complete cube instantiation
 or native infeasibility replay is attributed to the new Lean checks.
 
+\subsection{An exchange in the larger parity class}\label{sec:majority237}
+A longer snake would have a 192-edge prefix. The construction hypothesis
+examined here is that a small change in the larger parity class might
+permit such a prefix. Let $B$ be either 96-vertex parity class of a saved
+191-edge path. Choose $d\in B$ and distinct
+$a,b$ of the same parity outside $B$. Set
+\[
+ U=(B\setminus\{d\})\cup\{a,b\}.
+\]
+Can these 97 vertices occur at all even positions of a 192-edge snake?
+The other 96 vertices, both endpoints and the ordering are free. This
+question concerns the specified construction family and makes no global
+optimality claim.
+
+For any one-parity set $W$, form the simple graph $G(W)$ on $W$.
+Join $v$ and $w$ if some opposite-parity vertex has exactly $v$ and $w$
+as neighbours in $W$. Multiple such labels give one edge.
+The following equivalence guides the search. A snake
+with its even positions equal to $U$ orders $U$ along a Hamiltonian
+path of $G(U)$, since every intervening odd vertex has exactly its two
+path neighbours in $U$. Conversely, interleave a Hamiltonian order
+with one label per edge. Distinct edges in the order require distinct
+labels, and the two-neighbour condition excludes every chord.
+
+\begin{lemma}\label{lem:partial237}
+If $G(U)$ admits a Hamiltonian path, $W\subseteq U$, and $r=|U\setminus W|$,
+then $2I(W)+L(W)\le 2r+2$, where $I(W)$ and $L(W)$ count the isolated
+vertices and the vertices of degree one in $G(W)$.
+\end{lemma}
+\begin{proof}
+Delete the $r$ missing positions from a Hamiltonian order. At most
+$r+1$ nonempty runs remain. Every consecutive old pair within a run
+retains its label when restricted to $W$. The runs thus form a spanning
+union of paths in $G(W)$. In this union the sum of $2-\deg(v)$ is twice
+the number of nonempty runs, including singleton runs. Additional edges
+can only lower the sum of $\max(0,2-\deg(v))$, which in $G(W)$ is
+$2I(W)+L(W)$.
+\end{proof}
+
+\begin{lemma}\label{lem:cut237}
+Suppose $G(U)$ admits a Hamiltonian path. For arbitrary subsets
+$S,T\subseteq U$, let $e(S,U\setminus T)$ count ordered adjacent pairs
+$(u,v)$ with $u\in S$ and $v\in U\setminus T$. Then
+\[
+ 2|S|\le 2|T|+2+e(S,U\setminus T).
+\]
+\end{lemma}
+\begin{proof}
+Sum the path degrees at the vertices in $S$. Only the two endpoints can
+have degree one, so the sum is at least $2|S|-2$. Count these incidences
+by their destinations. Each vertex of $T$ receives at most two; every
+remaining incidence gives a different ordered edge counted by $e$.
+This also covers overlapping $S$ and $T$.
+\end{proof}
+
+The 145 distinct saved classes give
+$145\cdot96\binom{160}{2}=177\,062\,400$ descriptions before
+deduplication. With $a<b$, removing $b$ from the proposed order requires
+$2I+L\le4$ at $W=(B\setminus\{d\})\cup\{a\}$. This excludes
+$170\,560\,947$ descriptions. At the final set, an isolated vertex or
+more than two leaves excludes another $6\,500\,774$. The remaining
+679 descriptions represent 623 distinct sets. A separate enumeration
+applied the single-addition condition to both $a$ and $b$ and reconstructed
+the surviving graphs directly. It returned exactly the same descriptions.
+
+Every one of the 623 sets violates Lemma~\ref{lem:cut237} for explicit
+$S$ and $T$. For example, take saved class 43, remove vertex 138 and add
+8 and 158. With the integer cube labels of this paper, choose
+\[
+ S=\{56,88,158,188,280,440,446,472\},\qquad T=\{176,336\}.
+\]
+Exactly eight ordered edges leave $S$ for $U\setminus T$. The required
+inequality becomes $16\le14$. Across all 623 sets, the excess of the
+left side over the right side is 2, 4, 6 or 8, with respective
+frequencies 161, 291, 167 and 4. Each count can be checked within the
+cube: from a source $u$, enumerate the 36 unordered pairs of distinct
+axes, giving targets $w$ at distance two. There are exactly two
+intermediate cube vertices; either gives an edge if its selected
+neighbours are exactly $u$ and $w$. Count the target once even if both
+labels work. The finite enumeration was independently reproduced, and
+all 623 literal inequalities have individual kernel checks, rebuilt in
+small sequential modules. The correspondence between the numerical row
+counts and the path-index cut theorem is given by the mathematical
+argument above; its complete proof-assistant assembly remains open.
+A separate audited necessary-degree model reports infeasibility for all
+145 families before imposing connectivity~\cite{research237}. The
+complete enumeration and its correspondence to the saved bank remain
+computational evidence, separate from the numerical kernel checks.
+
+\begin{corollary}
+Under the finite covers above and those of the preceding three rounds,
+a 192-edge snake shares at most 186 vertices with each saved 191-edge
+snake or any cube-isometric copy.
+\end{corollary}
+\begin{proof}
+The candidate has parity classes of sizes 97 and 96. The larger class
+cannot retain 96 seed vertices by the fixed-class survey, or exactly 95
+by the present exclusion. The smaller class retains at most 92 by the
+earlier covers. Thus the intersection has size at most $94+92=186$.
+The seed has 192 vertices, the candidate 193, giving at least six
+deletions and seven additions. Applying an inverse cube isometry gives
+the same conclusion for each copy.
+\end{proof}
+
+\subsection{Recovering a selection with two missing counts}\label{sec:erasure237}
+\begin{proposition}
+For any two distinct vertices of $\Q_9$, the neighbour counts at the
+remaining 510 vertices uniquely determine a binary vertex selection.
+\end{proposition}
+\begin{proof}
+Let $z$ be the difference of two selection indicators and let $b(v)$
+be the sum of $z$ at the neighbours of $v$. Suppose $b$ vanishes off
+$\{p,q\}$. Write $x=b(p)$ and $y=b(q)$. Apply the inverse from
+Proposition~\ref{prop:inverse236} at the antipodes of $p$ and $q$.
+Its distance-nine coefficient is 128. The two off-diagonal distances
+are equal and below nine, so their common coefficient $c$ belongs to
+$\{0,35,-10,8,-16\}$. For some $s,t\in\{-1,0,1\}$ this gives
+\[
+ 128x+cy=315s,\qquad cx+128y=315t.
+\]
+If exactly one of $s,t$ is nonzero, the corresponding unknown has
+absolute value $315\cdot128/(128^2-c^2)$, strictly between two and
+three. This contradicts integrality. If both are nonzero, then $t=s$
+or $t=-s$. Inverting the two equations gives
+$|x|=315/(128+c)$ or $315/(128-c)$, respectively. The possible
+denominators are $93,112,118,120,128,136,138,144,163$, none of which
+divides 315. Hence $s=t=0$. Since $|c|<128$, we get $x=y=0$.
+The complete profile now vanishes, and the inverse gives $z=0$.
+\end{proof}
+The inverse and this two-erasure result were checked on the full
+nine-dimensional cube. The result concerns binary selections; the proof
+uses the three possible values of their difference. Retained path
+vertices alone generally leave many more than two counts unknown.
+
+
+The original single-file cube check exceeded the retained memory limit.
+Splitting its 512-case coefficient calculation into exhaustive prefix
+cases allowed the same actual-cube theorem to be recompiled. The
+accepted reconstruction and two-erasure statements have only standard
+axiom dependencies. No symmetry assumption on the selected set is used.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -8944,14 +9104,19 @@ For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, 
 Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
-The maintained interval is $191\le a(9)\le233$. The lower bound follows
+The maintained interval is $191\le a(9)\le231$. The lower bound follows
 from the explicit witness. The completed contributor upper theorem and
-its saved final assembly and axiom audit are pinned to revisions
-\texttt{b0521e1d} and \texttt{b65d30ca}~\cite{bound233archive}.
-Section~\ref{sec:bound233} gives the original B233 charge and potential
-deduction. No certificate or floor premise remains in that theorem.
-The audit reused 172 chain modules and depended on external floor and
-cloud-built objects; an independent full rebuild remains pending.
+its saved final assembly and standard-axiom audit are pinned to revision
+\texttt{478869ee}~\cite{bound231archive}. Section~\ref{sec:bound231}
+records this current result. No certificate or floor premise remains in
+the theorem; a fresh independent rebuild of the entire dependency closure
+remains pending.
+
+Section~\ref{sec:bound233} retains the earlier B233 charge and potential
+deduction and its source and audit revisions \texttt{b0521e1d} and
+\texttt{b65d30ca}~\cite{bound233archive}. That historical audit reused
+172 chain modules and depended on external floor and cloud-built objects;
+its independent full rebuild remains a separate pending task.
 The earlier 235 theorem, its independent numerical potential reconstruction
 and its retained empty-square argument are preserved as historical results
 in Section~\ref{sec:upper-proof}~\cite{bound235archive}.
@@ -9139,12 +9304,13 @@ contradictions retain the explicit limits stated there.
 Section~\ref{sec:colour231} adds four checked interleaving and converse
 results and a native majority-class survey. Its graph extraction,
 separator certificates and numerical exclusions retain the stated limits.
-A bounded review of contributor revision \texttt{5309471b} finds a
-231-target chain whose arithmetic is $4763m\le1104764$, but its inspected
-interface retains plain/H8, share, contextual-refutation and floor
-premises. No completed unconditional 231 final assembly or final theorem
-audit was found in that review~\cite{research231}; the maintained interval
-is unchanged.
+An earlier bounded review of contributor revision \texttt{5309471b}
+found a 231-target chain whose arithmetic is $4763m\le1104764$, while its
+then-inspected interface retained plain/H8, share, contextual-refutation
+and floor premises. No completed unconditional 231 final assembly or
+final theorem audit was found in that review~\cite{research231}. The later
+completed assembly and audit at \texttt{478869ee} supersede that historical
+pending status, as recorded in Section~\ref{sec:bound231}.
 Section~\ref{sec:minority232} adds four checked endpoint and minority
 construction results and three colour-count length implications.
 Its 145-class exclusion and 33 separator
@@ -9164,6 +9330,10 @@ Section~\ref{sec:exchange236} adds six checked supporting statements,
 an exact full-cube inverse calculation and an audited native cover of
 all three-replacement families. The stated geometric bridges and native
 contradictions retain their separate scope.
+Sections~\ref{sec:majority237} and~\ref{sec:erasure237} add checked path
+criteria, 623 checked numerical cuts, and actual-cube reconstruction with
+two missing observations. Enumeration coverage and the complete
+numerical-cut-to-path assembly retain their stated separate scopes.
 Full-source reviews at rounds 220 and 230 check the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
@@ -11213,7 +11383,7 @@ If every nontrivial snake satisfies $G_{12}\ge114v-191$, then $a(9)\le230$. If t
 \begin{proof}
 Proposition~\ref{prop:share-loss} gives $G_{12}+840v\le221136$. The first hypothesis gives $954v\le221327<954\cdot232$, hence $v\le231$. The second gives $954v\le222281<954\cdot233$, hence $v\le232$. Subtract one to count edges. The one-vertex case satisfies both conclusions directly.
 \end{proof}
-These conditional implications have been checked in Lean. Neither hypothesis has been proved for all snakes. A complete improvement requires verified local share bounds, coverage of every allowed sequence, and control of the initial and terminal contributions. Weighted packing is valid under the stated capacities; it supplies no additional credit on the zero-credit cycle of Proposition~\ref{prop:zero-credit}. The targets 230 and 231 remain longer-term conditional estimates.
+These conditional implications have been checked in Lean. Neither hypothesis has been proved for all snakes. A complete improvement requires verified local share bounds, coverage of every allowed sequence, and control of the initial and terminal contributions. Weighted packing is valid under the stated capacities; it supplies no additional credit on the zero-credit cycle of Proposition~\ref{prop:zero-credit}. The target 230 would improve the current global bound. The target 231 would provide a separate proof under its still-unproved charge hypothesis.
 
 \subsection{A candidate restriction on consecutive counts of four}\label{sec:four-run}
 A direction-independent exclusion of six consecutive counts equal to four would replace several special direction cases by one restriction on the count sequence.
@@ -11600,7 +11770,7 @@ At radius four, a forest exists with interior endpoint budget two. At radius fiv
 
 A Boolean encoding of the radius-five, budget-two model records the exact cycle cuts. Removing irrelevant clauses and replacing auxiliary counters by direct restrictions on triples of endpoint indicators gives a 567-clause core involving 252 Boolean variables. Its certificate consists of 398 derived clauses obtained by reverse unit propagation: assume the negation of the proposed clause, propagate the cited clauses, and obtain a contradiction. The resulting Boolean contradiction has been independently machine-checked through ordinary logical proof steps. This certifies the explicit formula; no geometric exclusion is asserted without the remaining interpretation proof.
 
-The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the then-maintained interval $191\le a(9)\le235$, whose upper bound retained the archived-proof qualification. The current contributor bound is recorded in Section~\ref{sec:bound233}.
+The remaining verification boundary is explicit. The interpretation of each input clause as a necessary consequence of the geometric model must be checked. Generic degree and endpoint clause implications, and all recorded cycle cuts, have been checked separately. The reduction from an arbitrary one-singleton vertex to the normalized selection $F$ also remains to be completed. Until these steps are established, the experiment does not prove endpoint proximity or improve the then-maintained interval $191\le a(9)\le235$, whose upper bound retained the archived-proof qualification. The current contributor bound is recorded in Section~\ref{sec:bound231}.
 
 \subsection{An auxiliary conditional singleton estimate}
 \begin{proposition}[Conditional estimate from a singleton surplus]
@@ -12124,6 +12294,13 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Sharp outer-transition pair inequality, c
 \bibitem{endpointarchive}
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Endpoint demand and the sharp endpoint-free pair bound}. Archived research record, 25 October 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/c0a672d7d314317bf69332fc7029e00853e16b04/milestones/45-pair-endpoint-demand}.
+
+\bibitem{bound231archive}
+Snake-in-the-box project contributors. \emph{Completed upper bound 231:
+final assembly and standard-axiom audit}. Contributor revision
+\texttt{478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088}, 18 November 2026.
+A fresh independent whole-proof rebuild remains pending.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088/milestones/36-lean435-port/audit231}.
 
 \bibitem{bound233archive}
 Snake-in-the-box project contributors. \emph{Completed share-weighted bound
@@ -12696,6 +12873,11 @@ two-replacement obstruction}. Research milestone 235, 17 November 2026.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Larger parity exchanges and
 neighbour-count reconstruction}. Research milestone 236, 18 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/236-parity-exchange-frontier}.
+
+\bibitem{research237}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Majority exchanges and reconstruction
+with missing neighbour counts}. Research milestone 237, 18 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/237-parity-reconstruction}.
 
 \end{thebibliography}
 \end{document}

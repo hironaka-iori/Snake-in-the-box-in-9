@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 236}
+\date{Research state after round 237}
 \begin{document}
 \maketitle
 
@@ -21,13 +21,13 @@ when their path indices are consecutive. A length-$m$ snake has $m+1$ vertices.
 
 The maintained interval is
 \[
-\boxed{191\le a(9)\le233.}
+\boxed{191\le a(9)\le231.}
 \]
 The lower bound comes from a verified construction. The contributor's
-completed 233 theorem has a saved final assembly and standard-axiom audit,
-with no remaining certificate or share-floor premise. Its source is pinned
-to \texttt{b0521e1d} and audit to \texttt{b65d30ca}; a fresh independent
-full rebuild remains pending~\cite{bound233archive}.
+completed 231 theorem and saved final assembly are pinned to revision
+\texttt{478869ee}. Its standard-axiom audit passed, and no certificate or
+share-floor premise remains in the theorem. A fresh independent full
+rebuild remains pending~\cite{bound231archive}.
 
 The known values $1,2,4,7,13,26,50,98$ do not determine the next term.
 Numerical continuations suggest 194, 195 or 196, without proving a recurrence.
@@ -78,7 +78,7 @@ G+840(m+1)+L=221136,
 \]
 where $S$ is the selected vertex set and $G=24T+\sum_{x\in S}\sigma_{12}(x)$.
 
-In the completed contributor comparison, its total window weight $W$
+In the earlier completed 233 comparison, its total window weight $W$
 satisfies, for $m\ge7$,
 \[
 520(m-7)\le W+1023,\qquad W+4200m\le1099800.
@@ -90,6 +90,13 @@ The checked local certificates, share floors and finite potential therefore give
 so $m\le233$. Shorter paths already satisfy this bound. The saved assembly
 reuses imported objects and cloud-built certificates; their fresh independent
 rebuild remains distinct from the successful saved audit~\cite{bound233archive}.
+
+The later contributor theorem at revision \texttt{478869ee} supplies the
+current upper bound 231. Its final argument includes the required local
+refutations and share floors. The saved final assembly and standard-axiom
+audit passed; a fresh independent whole-proof rebuild remains pending
+~\cite{bound231archive}. The displayed 233 calculation is retained as the
+earlier argument and is not used to derive 231.
 
 The alternative retained comparison uses $m-8$ windows. Under its own
 local-weight and state-walk hypotheses, boundary counting and telescoping give
@@ -748,9 +755,63 @@ Six supporting statements passed Lean, while the full cube matrix was
 checked separately by exact integer arithmetic. The geometric connection
 and native exclusions have the stated separate scopes~\cite{research236}.
 No longer snake or new global bound was obtained. The open construction
-problem now starts with at least four minority replacements. Research
-pauses after round 236; unresolved searches and the balance-guided route
-are saved for resumption.
+problem now starts with at least four minority replacements. The following round examines a complementary change on the majority
+side; unresolved four-replacement searches remain saved.
+
+\section{Changing the majority class and recovering missing counts}
+The complementary construction removes one vertex from a saved
+96-vertex parity set and inserts two others of the same parity. These
+97 vertices would be the majority class of a 192-edge snake. The other
+96 vertices and the entire ordering remain free.
+
+Join two majority vertices when some opposite-parity vertex has exactly
+those two selected neighbours. A snake gives a path visiting every
+majority vertex once in this simple graph. Conversely, such an ordering
+can be interleaved with its witnessing vertices to give the snake.
+
+This gives two useful necessary conditions. If $r$ majority vertices are
+still missing from a partial proposal, its isolated vertices and leaves
+satisfy $2I+L\le2r+2$. Removing $r$ positions from a spanning path leaves
+at most $r+1$ runs, each contributing two missing incidences; additional
+graph edges can only reduce the deficit. For a complete proposal and
+arbitrary subsets $S,T$, counting the two directions along the path gives
+\[
+2|S|\le2|T|+2+e(S,U\setminus T).
+\]
+Here $e$ counts ordered edges from $S$ to vertices outside $T$. Only two
+directions can end at path endpoints; vertices of $T$ receive at most two.
+
+Two independent enumerations agree on all surviving proposals among
+177,062,400 descriptions. There are 679 survivors representing 623
+distinct sets. Each violates the displayed cut inequality for saved
+explicit subsets. All 623 numerical inequalities passed kernel checking.
+The full connection from numerical counts to the path theorem remains
+a written argument, with its proof-assistant assembly incomplete. A
+separate audited degree model also reports all 145 starting families
+infeasible. Those native exclusions have no Lean contradiction replay.
+
+Under these finite covers and the earlier ones, the majority overlap
+with a saved seed is at most 94. Combined with the minority overlap
+bound 92, the total is at most $94+92=186$.
+A 192-edge candidate must therefore omit at least six old vertices and
+introduce at least seven new ones, relative to every saved seed or its
+cube-isometric copy. This remains a restriction on proximity to the
+saved collection.
+
+The cube reconstruction theorem has also been strengthened: neighbour
+counts at any 510 of the 512 vertices determine a binary selection
+uniquely. To see why two missing counts cannot conceal a change, apply
+the inverse formula at their antipodes. Two integer equations result,
+with diagonal coefficient 128 and a short list of possible off-diagonal
+coefficients. The selection difference is $-1$, zero or one. The only
+integer solution consistent with these equations has both missing
+count changes zero. The inverse then makes the entire selection change
+zero. This actual-cube statement passed Lean after the large finite
+calculation was divided into smaller modules~\cite{research237}.
+
+No longer snake was obtained. The current interval is $191\le a(9)\le231$
+using the separately cited contributor theorem. Research continues
+through rounds 238 and 239 as requested.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
@@ -762,20 +823,27 @@ lengths remain possible.
 Different parent classes and shorter compatible parents remain alternatives. Finding a new parent still requires a compatible joining construction.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
-The maintained global interval remains $191\le a(9)\le233$, with an
+The maintained global interval is $191\le a(9)\le231$, with an
 independent rebuild of the completed upper-bound assembly pending.
 Resolving the proposed value 196 still requires both its witness and
 a universal 197-edge exclusion.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 236.
+in the companion manuscript and milestones through round 237.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
 \href{https://arxiv.org/html/2607.15270v3}{Orland et al., arXiv:2607.15270v3}.}
 
 \begin{thebibliography}{9}
+\bibitem{bound231archive}
+Snake-in-the-box project contributors. \emph{Completed upper bound 231:
+final assembly and standard-axiom audit}. Contributor revision
+\texttt{478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088}, 18 November 2026.
+A fresh independent whole-proof rebuild remains pending.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088/milestones/36-lean435-port/audit231}.
+
 \bibitem{bound233archive}
 Snake-in-the-box project contributors. \emph{Completed share-weighted bound
 233: final assembly, standard-axiom audit and verification limitations}.
@@ -885,6 +953,11 @@ two-replacement obstruction}. Research milestone 235, 17 November 2026.
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Larger parity exchanges and
 neighbour-count reconstruction}. Research milestone 236, 18 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/236-parity-exchange-frontier}.
+
+\bibitem{research237}
+I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Majority exchanges and reconstruction
+with missing neighbour counts}. Research milestone 237, 18 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/237-parity-reconstruction}.
 
 \end{thebibliography}
 \end{document}

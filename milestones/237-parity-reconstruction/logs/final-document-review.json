@@ -1,0 +1,1500 @@
+{
+  "status": "PASS_BOUNDED_DOCUMENT_REVIEW",
+  "reviewed_at_utc": "2026-11-18T11:04:24.277995+00:00",
+  "reviewer": "audit237_sources",
+  "baseline_HEAD": "75b2f41e284d793c0435264a9a58ea262096cdce",
+  "scope": "Complete current diff against HEAD for both manuscripts, complete MATHEMATICAL_NOTE, relevant bridge and proof receipts; no manuscript edits.",
+  "documents": {
+    "paper\\snake9_research.tex": {
+      "sha256": "a3378181dcd543dbe79efbab2ff24e635fd04447a601b1c3b0cb868fd06e336b",
+      "authoritative_path": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_research.tex",
+      "authoritative_sha256": "a3378181dcd543dbe79efbab2ff24e635fd04447a601b1c3b0cb868fd06e336b",
+      "byte_identical_to_authoritative": true,
+      "author_preserved_vs_HEAD": true,
+      "hypersetup_preserved_vs_HEAD": true,
+      "author_command": [
+        "\\author{Iori Hironaka \\and Tommy Ma \\and Steven Zhan}"
+      ],
+      "label_count": 386,
+      "duplicate_labels": [],
+      "unresolved_refs": [],
+      "duplicate_bibitems": [],
+      "unresolved_citations": []
+    },
+    "paper\\snake9_frontier_explanation.tex": {
+      "sha256": "e60cc52343d9a19aaf37f28822417fffad6712c60188f12c5aec557a9cce29d3",
+      "authoritative_path": "D:\\Codex\\2026-10-13\\new-chat\\outputs\\snake9_frontier_explanation.tex",
+      "authoritative_sha256": "e60cc52343d9a19aaf37f28822417fffad6712c60188f12c5aec557a9cce29d3",
+      "byte_identical_to_authoritative": true,
+      "author_preserved_vs_HEAD": true,
+      "hypersetup_preserved_vs_HEAD": true,
+      "author_command": [
+        "\\author{Iori Hironaka \\quad Tommy Ma \\quad Steven Zhan}"
+      ],
+      "label_count": 0,
+      "duplicate_labels": [],
+      "unresolved_refs": [],
+      "duplicate_bibitems": [],
+      "unresolved_citations": []
+    }
+  },
+  "evidence": {
+    "cut-replay-progress.json": {
+      "sha256": "699cd5bc95a8e467d7670e9fcbb52e68a37d6a58b2659f02a974666cfaa24b19",
+      "status": "PASS",
+      "modules": 125
+    },
+    "inverse-replay.json": {
+      "sha256": "425bff905b9e40543b408386613a30dae257639ae8498af23ed889710f81327b",
+      "status": "PASS",
+      "modules": 20
+    },
+    "spectral-replay.json": {
+      "sha256": "554bf67a2430e0b763cc0e8282806e3fba553db362d25a27b76658f60d0a3ec1",
+      "status": "PASS",
+      "modules": 4
+    },
+    "example-replay.json": {
+      "sha256": "0ad5e45c757fb09891993c357105364df7e98d6e24db015a2f278d136c2b2093",
+      "status": "PASS",
+      "modules": 11
+    },
+    "axis-replay.json": {
+      "sha256": "da61d6a0f918a7b238f0bf85169fa25df457f5c4a94ac2471e92b247ccaf9375",
+      "status": "PASS",
+      "modules": 10
+    },
+    "MATHEMATICAL_NOTE.md": {
+      "sha256": "ea7c2c8164e6f8a117a156c5f58d82da4c3eb764b759d1f804a674140b4ffb6a"
+    },
+    "spectral/BRIDGE_REVIEW.md": {
+      "sha256": "2bbe9278d0c8e678b83128b981bef8d75466fdae03e4feb3e9abb118b3db9cbb"
+    },
+    "data/finite-input-audit.json": {
+      "sha256": "8cf399c770d87f08c9c493ac1f9ffcb345dbeb2538ca3c7f3c2c5ab1c78f8f2b"
+    },
+    "data/contributor231/source-record.json": {
+      "sha256": "c29a206d12ba8d4d80d45ea7cf4954ff9475871e669491c8efaa4d6c1fed2603"
+    },
+    "data/contributor231/UpperBound231_435.lean": {
+      "sha256": "69ab256391f0b00a5c3e1000a4ed7e21e19394cecf8435ea327fdf44a2f23c05"
+    },
+    "data/contributor231/final-audit.txt": {
+      "sha256": "aeae11af6a8873cd93a4f5e824f63f31f90f0824531ca6448ee7fee1f874b14a"
+    },
+    "data/contributor231/final-audit-rerun-out-olean.txt": {
+      "sha256": "37a4f1b61486ef90772170c71522d1b72b4188aa445df8c0c28ed0d5a4f02384"
+    }
+  },
+  "current_accepted_modules": {
+    "CutBatch000": {
+      "receipt_sha256": "001cbeda9df0694dbe7a4d141d36cc2233da46c8380f6d19dc864d7e65dce352",
+      "source_sha256": "7a424a43e12104e511f2b8f1cd53d0e5bb4b46779b34b2c318e03a2a616ee094",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch005": {
+      "receipt_sha256": "6b8761e9b313e1b089deb436210e6dd59574f7a76d877778f9ab85a0677b0fbb",
+      "source_sha256": "e7038e7a0cd0e8d7861e9c18b57c14b10c9111e8264d5d934c22a786f5571344",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch010": {
+      "receipt_sha256": "5f2a2df45407200ee386bed736d18d860455f99fefa90e6d11f4fa0c381b2fa8",
+      "source_sha256": "c1a8a3cdae8db746e8b778b023b8973fc3b64bfe32a422f32c57b456b8bb3dda",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch015": {
+      "receipt_sha256": "a99f0b783c2a74f8fedb1784b1e967a01d714fb034740969cebf30fcbe115681",
+      "source_sha256": "f8f4c2a70635ad3bc7631b2cf54f8222f199299665dd752b3e1fba2cd37b50b4",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch020": {
+      "receipt_sha256": "390a0c6aecbfea992fbe5e1e20d6b8d33d56044a664162fdd3cd4e3f7aa63cf3",
+      "source_sha256": "74df3ca909fd42af65587cfa6ed6d553f2658098f5668b1d41cf789bbb9e4d15",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch025": {
+      "receipt_sha256": "f5c140595966ebe818b2e00982f4eaedff43bdf4eb6d2afdec8767e7a47c4918",
+      "source_sha256": "c1725d5229b4d5686676a1029f0a9276aa91800a7851459f80c6b8d13808b229",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch030": {
+      "receipt_sha256": "5465fa1422a0294f759d8ebe9c456d98e640cfff34e5ba96ce0a8f0e06ec7c79",
+      "source_sha256": "36abc86a1603b2f9b1b91010978e4091372d71ca083521b9397dc94c7ba34447",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch035": {
+      "receipt_sha256": "e330b9ec6d645b50077621b2023f1d5d6e01819b7bf80c81b6aae26a16dd4572",
+      "source_sha256": "bec7b0b89d2c7532d5fd42627667631daf34db4d2eb668b5c5e58ba8f2ea8f86",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch040": {
+      "receipt_sha256": "3ed156f553ab61d9f37fbf3202a51d6fd8fd1d0d710dba1c12c213eecb7c46c9",
+      "source_sha256": "c02a689bfed9958bf4ab3329ec241a3e0fe71207af7942d3891a9f082537475f",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch045": {
+      "receipt_sha256": "e0a04541b0047dfcf2162e00c2cb88eedd1cbf03151e496c5e6e2860c434650a",
+      "source_sha256": "acd222f63ea836d25ab2f4300de595cb202f1f411a236c3972fc83549a325d5f",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch050": {
+      "receipt_sha256": "20825575e744eec5f48ae473a34c12a7abaaa7aab82270ab9dd25ca3cb7eed6b",
+      "source_sha256": "b86119c8f0103af77097b6d8fad646ad21fd96e0209834c7f836ab7b70fdaaf9",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch055": {
+      "receipt_sha256": "dc0bc29e7e7874f93eac1ade24ab8dc0ee5c1fd3b2ed47d43c57650e3e196023",
+      "source_sha256": "3fbcac7a9a91a0e0e44c529b22094cb73203c57cddc6479915f77fcad8c1324d",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch060": {
+      "receipt_sha256": "f2735449f2a5ef9ebe05b9fe80ad2750054c3e9b187a9f173b4e04ba411c84fe",
+      "source_sha256": "4506f8fc7d0dfc92a1fdb30af8902b197bddc84100304631fa69a4ed6639fc6e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch065": {
+      "receipt_sha256": "1df22fedf10752de5d5c230eadea0865c58cb705f54e1abef049f096a4df24ab",
+      "source_sha256": "b41c5d6ca6f02832025d915bac3aee68b2c6db8aa8c155fc11b0a8177b56a0a0",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch070": {
+      "receipt_sha256": "155c3e0ef64e3cdd9e1f995c5a7a9ab6417f3871acd942f8031dc9a5b8b4b881",
+      "source_sha256": "c7caf3c8cb88f2cbf9fc0b1ae5eac588d22447061edd5cc87ca11208ffa89fba",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch075": {
+      "receipt_sha256": "e39043ccfded510634afbfeeb97db4c66cd580362c6da044f31781ea00168442",
+      "source_sha256": "c76cefb8b1ab6517d06e92d32fe6cd50d2b483a9f314ef0ba166135c2120c32a",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch080": {
+      "receipt_sha256": "31834a6658fb7a851d4e9b90431d4e9e009ae6fdbec8aaa91e059b4bdc27a958",
+      "source_sha256": "219e73ff23f43d5491cae039cf112ecf58efba3387c1123da783308eac3a2e24",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch085": {
+      "receipt_sha256": "bc97965b1daae5563f01324b8fefc6cf1214850a4005ff776c23d3b6ed387a8c",
+      "source_sha256": "871c619f1f5f7696684f5de709e61ed3fe939c5b3c1d7ce84ee71c7b7112610e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch090": {
+      "receipt_sha256": "061bd95ff2fe6556dd4749144c6c04cf595fe1ee69705273dbf1355f5952e639",
+      "source_sha256": "4ad982b9548084ccb013ca306df0d2cdcfc20278b6098b8372a7c698aa48dde5",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch095": {
+      "receipt_sha256": "491e74b7a9a86bbb133c4183a0e09c8953878e4a9ce03ce1d13d85fb46bea15d",
+      "source_sha256": "4f1b15850131e2081210df4542cc47c64668fb25e0f6a22a4844e64551016004",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch100": {
+      "receipt_sha256": "061e85eb23947eb88c645711c96bb176e8ceede97c9f636e194f7b05ad1f42cc",
+      "source_sha256": "ff3862b166f57fa447856e126dcf69211718bc6151652e039c1ef8315860a08a",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch105": {
+      "receipt_sha256": "53aab975f81357a917522145411465e0383647969a5d5948705b7642f3264665",
+      "source_sha256": "cb60cabaf92aa9cd904ea3d23e7da20b74b62f24299afbf7ee6eb3a89a355901",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch110": {
+      "receipt_sha256": "78fafdb6d13d53b5b1351b5a83904b8fffc19e927442f2247ce6565f5998b795",
+      "source_sha256": "0f24a0ad7868235b3bfce75a2eec5cb1eb5667c72f13fbf4738201b3680b6b24",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch115": {
+      "receipt_sha256": "e8f1ce1910bf080a88db31ba2fb32099ad152194171cbd2868b7f4c917d7daa1",
+      "source_sha256": "5cb545fabe9043780e0aef8b87f2ffd08c6630914feedda60ad8d345e38d798e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch120": {
+      "receipt_sha256": "8951c32787b1722be800fa5487de2335b5b8281510334b3573063c420b999c09",
+      "source_sha256": "532d8fb4f769fda370a01c707458490356e37c27a1a18943a1abfb2b6a4b33c5",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch125": {
+      "receipt_sha256": "871a99d4cec9182acb633f5937ed138c77a8a9b9110bf8b7e4f12aae89eba76a",
+      "source_sha256": "9128fe7bcd1318957a5ccb8804e1ede40905dd4d83a4a903a8b95116067a439d",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch130": {
+      "receipt_sha256": "0109cce24423ddff4c1ed2e2e3c3e80deddccec225c7b9018c76f73310f7498b",
+      "source_sha256": "7eff35473ed96e8ff92afbc975c2e3d39ce5d8928e8520d2eec43317faa7698b",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch135": {
+      "receipt_sha256": "58b5085d1a7b10e26dd105716c2ba26215dc47119f3afc5af915f09b9b8a878d",
+      "source_sha256": "041d41f86ac1927dcc83af5a8831f4f73cf51bef6b80521c171089beb2dcd2ed",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch140": {
+      "receipt_sha256": "5f59092638dcaab485ab53e8981a729dc8b68269fe3ca847d0bdef2ddbd647ce",
+      "source_sha256": "a081fdefb1eac4e53a16db1078d597f442dce4e302a3ed2bae8e01a9f42e379b",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch145": {
+      "receipt_sha256": "1d5b17d3e1811c6afa02cad25a1ded6d9e62528c6f5fa304b7a27f902e9147e0",
+      "source_sha256": "63c19f25f2428780a7799406a47298cd3cad64fae04a78e259b26944df88ac44",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch150": {
+      "receipt_sha256": "d3d950070ff1ed91a1d8b207ce8922e605360bc51079a9bd987c86be79b243ab",
+      "source_sha256": "92e0cb065cebc0edcef9bfe275f5d028a0c86c98761c15861e2bd1d1738e5415",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch155": {
+      "receipt_sha256": "6433fcc2cecdddd756bdd70cfcc6d07e0903933d43af13b51bbb57592fd763fb",
+      "source_sha256": "6007e8f8779bed124fcc93fdbc134dcffb81dc20e152f1b7757cbc51781e3a7a",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch160": {
+      "receipt_sha256": "adcabc94fb403514ff36a381f9c1e72a2f20cea118b5338b4e9426b0f006d8cc",
+      "source_sha256": "dadcd56bb636d2785da4933ee27bd242f8f34273fc62af069b7e88a76a90217b",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch165": {
+      "receipt_sha256": "d329a3891ce17ae9a47a76aeb64429fcf80faa0430644029caf6a0878372334f",
+      "source_sha256": "f5a90ec5f58587201adec74dc34fbb3eeb9dd9546de17d2d32f3a8389d49e89b",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch170": {
+      "receipt_sha256": "ec07e417faa0bd6064d5f392620baff98dad3ab5c96122e7f7ebebe688d72965",
+      "source_sha256": "1c65294fe14344aa5a8bb4b4518a71d9275cb10a595fdb66b7336c0523020c71",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch175": {
+      "receipt_sha256": "20729bc536449e75c2e10e03e65bd8494bc905b7a2067f6fc8b6fa8c00ab4bac",
+      "source_sha256": "4f653425ccaaba1f1218f1b6602e1d1bac3164a7cc3c238b22bdb8de09268483",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch180": {
+      "receipt_sha256": "4433f76ee67e55f42976b8251048eeb493d295332eeb013222b659e0a2ba5cab",
+      "source_sha256": "3c88b3695d80e3b7dc58b3d49291ed239151db1697bd47dc598903bcf0403199",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch185": {
+      "receipt_sha256": "472d84f5514d2799f7f0fe84a6bb59fe631e6668d23ac4138767d76f63a503be",
+      "source_sha256": "8d7208a7cdddd2b03e0d9d1545d390eef25b97aea8424464aba96be13871b658",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch190": {
+      "receipt_sha256": "d7d4494d5a4b4cc1ac4eb5f51162436e13f4d8341e29158d0eb9653aec6a2fc3",
+      "source_sha256": "a8f456b5ada527e132019c37acd88bbe6ddf52de1c47997601a017c14a092435",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch195": {
+      "receipt_sha256": "ea360f0e90b090829cc4ee3a478a19b62dccfe96948c0b6c0f27fd99e27cf4f6",
+      "source_sha256": "6844c12cd790713af9f365a52a2c5d331d6df378421ca4aa7b556a294cb1a536",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch200": {
+      "receipt_sha256": "99c04563d4ddba79b99953b0129b5914e78ca5f91c0981bfbf3f49ab2332066e",
+      "source_sha256": "500c7c2f276727c60424cd1dddcae674cdcda260ab0fdaf0a7b3c753d4a83f78",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch205": {
+      "receipt_sha256": "7525afda4d0b348ed2dd8ec51cd29545288e45432b29d976cfee143717965dff",
+      "source_sha256": "a4bc25e6755e74022851b912537b1f1164279469d06cd904c783e9843d85745e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch210": {
+      "receipt_sha256": "4ed17a39c89f08575397a101ea3802da85eecabcfb4644d6b0ce8b9a4c95a810",
+      "source_sha256": "678eec1b4c46cb1a04e22790185aa1e29d6f48286fff3d2e613df2d04bff42e8",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch215": {
+      "receipt_sha256": "c1e43079a8af713c8161e96212970754f5d35aaf120a0327a07df79103c19f8e",
+      "source_sha256": "6dd0b1c29d32d6ee21d6148fa978b3b683632c0f9d82987e74f8770a71855b03",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch220": {
+      "receipt_sha256": "40ede13e3e712a8d74fb273d22284c9d9d60423efb3444497adac6b1995ea74b",
+      "source_sha256": "fe3dfe4ed6f5b80caa24474b4f91287f4ceef9b7a325d808b214d2ddc7f80cde",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch225": {
+      "receipt_sha256": "0c8a32ec320f21a4e41a81f22da70124c50d28ef1567b0266e04b5f4daf6e624",
+      "source_sha256": "58521b2ffdb038f1d0775c1b17fa6500d27a3f6513811340fdc0668395a0bb8d",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch230": {
+      "receipt_sha256": "e84b658f01edeb358f472eee9bc8d13e6903b553e29ba832e73f64566e717e51",
+      "source_sha256": "005aa556f67899e3095ee77b4cb1a46464373af384b165d89576ce37785ef9ec",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch235": {
+      "receipt_sha256": "4e45b2d6654b7fcf341bca85981787fd618841b10e22db50242334fce52c2bc0",
+      "source_sha256": "2e76aa28102d6c2e9562542f1ba97480d556e7723c3bc7f4eabc66e3df28182b",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch240": {
+      "receipt_sha256": "725739423886b03532cf9380a81dcc3ee429482e0f8a093224f673239eeb790a",
+      "source_sha256": "019ede663d62770388c4b339346caaf693b7ac714ec4d1a4900a05aeb153d42a",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch245": {
+      "receipt_sha256": "79781a7ad65adf60bab684ef6a121303b13e73a725085fa86cc32af11a21fccd",
+      "source_sha256": "d3d7969e14bf2d9885338d4a27f16baa279cc3c88766c1a74a27eab491c85737",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch250": {
+      "receipt_sha256": "b686f96e9634a6618055fce2c6dc22aa7ad0c22b3732f56830ed4225748b36de",
+      "source_sha256": "135776217b71290e12591bdc76df2196114e427a8aefc546bd8046827d3f4206",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch255": {
+      "receipt_sha256": "8693a96333a5a7f2833843249497f97a49ea94a99f68d6ad32f9f5d9f05632f7",
+      "source_sha256": "231a83fce0218638d45e6ce413091b4a1fb33a6cd754dd9578b5d1d99db05194",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch260": {
+      "receipt_sha256": "bfdc9d0735dc43bbc23928b9702ed1e5ed9074a336f8d7a704fec41bc4987cdb",
+      "source_sha256": "c31a95ef4f41c9920884fa7b3220114920695ce5616b81ee04d99d81f04c67f3",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch265": {
+      "receipt_sha256": "78df0198ec2f17a8555620873e34ade11807cc4c8550f084ed18d7c517a39d48",
+      "source_sha256": "3d4d2d9884f0ec95f7f2b65ca078c1afa67ba55f8cfdeac3cc478ca889d6ccdc",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch270": {
+      "receipt_sha256": "6e1b4b598ba7a578e3bad3b27cead9241e7e776d55514aca53026d34d410da53",
+      "source_sha256": "78a4a024e0b8ea5dfbfed63c1751e6754b909a1713e006421137b7b9498dba93",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch275": {
+      "receipt_sha256": "05562247e1026eb468f7c2f2f35f1e4cb120e5fd36305f5026eeb6c3b9b58554",
+      "source_sha256": "ab3cbfc884a8c488882df90c14d4602e8c75f7ee39613a94f7df0dd9f1c50934",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch280": {
+      "receipt_sha256": "dcd5cd17ea69203d2b037419e47483e5e831af82c5b8babe2eb585322d554c2a",
+      "source_sha256": "cbbb359f696c963ae379ee9a89ff11da1030f78cac8adc90dbcb646e6569db9e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch285": {
+      "receipt_sha256": "7eaa1d3633b73df7b96ab5dbc8531445c07d8f90ddcb3a56e65bad6eebe91ad1",
+      "source_sha256": "dad660078812d39e83c35899367bfba47ce3bf1061658c22f304028658d1b528",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch290": {
+      "receipt_sha256": "e548d80e3207749533f82d2fb407699d3f333afd8ce43bf20a3a2df49b758a00",
+      "source_sha256": "b325241d9e4f24ff6be0870dd45a4450e1f3b410afd3b95b3e279ef43f51a23d",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch295": {
+      "receipt_sha256": "28a49832cf3b36a6c340c0f87c4f4a4415c21180452ff072c1651505d557d3db",
+      "source_sha256": "94ab57300ff3cea3ae05cccb80801a094c21e5ce8f027e093dc9972653796bbb",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch300": {
+      "receipt_sha256": "c8662bc4d62b986f4ffb99c385ad62a281b1858e17d030e1d6645b623fa7a528",
+      "source_sha256": "e744fbdcddf2dd6ea789cd6fb80ec910b9b43d561d3df50372113d8eaa73c7c4",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch305": {
+      "receipt_sha256": "f675c4d26b3626b1a3fe6dba5f8097477e9388f1659f95404da12cafe269735c",
+      "source_sha256": "06d3c53f3587c7905ee4b103e2b674743ea50f869594777d68800e0052160a40",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch310": {
+      "receipt_sha256": "aa4a1d404c29811e480482573fb1d92de6eafe608394ba77522e939eb61b15e0",
+      "source_sha256": "34441b56226f99134a91fad34379320834a4c58a7c2fbe6361adb62adaab8016",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch315": {
+      "receipt_sha256": "2e0c29cffe01251d416b2edcd7a5a7453496935aa8b08aa4088dc17c896b9a67",
+      "source_sha256": "87cf3404b5291ef8cb381e6c1ac43f1bcf74ca253a87550628b94e9390b7c6d8",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch320": {
+      "receipt_sha256": "1b0697c8d8dd2a46adedd4053960eaa2cb84d89cdfbb362b35f194ac69763aba",
+      "source_sha256": "4f8868be2fb19d690d940b73190f701b4108cd6d3cae28b009bce38e32cf7ca0",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch325": {
+      "receipt_sha256": "128c877c8092c54090b7c4206704e443176d39f114894037ad01be45192a3af1",
+      "source_sha256": "6d4ef8200fd6bc2adfbee7938719f863b1cd3773bb141a5a3ac5f74b944424b9",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch330": {
+      "receipt_sha256": "c3b60146c82c1f01a676097e80f878dd5c8394f9a4d2be0effbe0a14d83722d7",
+      "source_sha256": "ce2c34292e10ee8c364d58dceeaf128041b6f868523fb3fa2e2a8307ec011f6c",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch335": {
+      "receipt_sha256": "cc76469e4ca4dd9b6704c4233b9f4acdbcb2dfc28e71bb7ddabd625271bff7d0",
+      "source_sha256": "d42c4c936e77845d6cee5aea5c143b31dcf0bf8fd17d371f3922aa1ff5d10eac",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch340": {
+      "receipt_sha256": "42b0a1a15a16d71dbb7e971ad42b6103d12f5b8b6eee34d1a6c4f19397a2a5d6",
+      "source_sha256": "0659e1b93f4907668944ac421d9909c8ec88951e90a3d5b8a95a9882ca2b95c7",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch345": {
+      "receipt_sha256": "f850d8dba66799fa0e97a3b35446b60337ae92d3120690da50f7d7e61d693c6d",
+      "source_sha256": "a882b6d4f044cb7c87db93b799ff221cdb55c9cea612ed4047c34f4137e2149b",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch350": {
+      "receipt_sha256": "45aed2ae4f8e299f1bbd64b0caf62862d91b288080b85569728d90f6971cda3a",
+      "source_sha256": "a84a26d2b07bebee0de88aedca2e6d4e39115cdf2f4265aaa19113b35c5af8f7",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch355": {
+      "receipt_sha256": "684edf04a138d6f8b74d477f98070fb50a7c8783679b32b4a6ed864504e73837",
+      "source_sha256": "144602b62554f067e8c3f379cd43d47ac8cb6cfe413055ffcfa497cb2f40f33c",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch360": {
+      "receipt_sha256": "fb1575cf6a7d3cf80461cca1f415dbe37029fe06a12454b6ede5ccf2f80be051",
+      "source_sha256": "cae62076eeec564e32ef894ac91d251b7de5e87ae7700fb0698e6780007218c0",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch365": {
+      "receipt_sha256": "b9f22a9bea2e472e9a76d43dd21e545b5b54d050127dd7d557bc5b057092c3b8",
+      "source_sha256": "38a2343efb4cae53631499257e85964272b5f434d1ec1bdce9fb19e55781347a",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch370": {
+      "receipt_sha256": "c74e0757e3de9b64d4e20fef0e6bcefb0e9d1268a317211050aa043d4dbca55d",
+      "source_sha256": "7112a17630a9e7dadaa1b616b0836558517f7351261f68afe3e281e921343457",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch375": {
+      "receipt_sha256": "188d8cfa49c2bd5f893a8ebe63cebdab3db89e81fc684fcf6585e0deff8edb50",
+      "source_sha256": "ba48561a4107727cdb20b0ace16da5b2278d2f8be23c464aee2f895805dc38ab",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch380": {
+      "receipt_sha256": "a160c3ba67206dbe8c004d04761a6766dc3f1af34591419ed28f7e77369f3505",
+      "source_sha256": "65a9573cbbb43a31357a08c3d446298aa6187014f0cbc40b5d933865db6b955e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch385": {
+      "receipt_sha256": "b56252c1728b4ea6d017f87c121bdb50430ba91a8a6c2bc1443706211406e69a",
+      "source_sha256": "1d664b8fb334477080f5b238d47292efb2f9d40777d1be9f4ee5d453d827ea2a",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch390": {
+      "receipt_sha256": "37b524709bc213303fb8d0a0de48aad711a7e3de733013b77f8ae441e1c5c35a",
+      "source_sha256": "6d49fda0967b09400cd435006640a514526f4006a103860d4e77b562671f92c8",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch395": {
+      "receipt_sha256": "9c485fd238c1327073ad4c88b76fd708e6e67b8b043a0b6e040167d2fc8bc6a0",
+      "source_sha256": "2938fc771070c17a4e8515a9fbd12c06afa492ba00d686c157065bc524a73c0e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch400": {
+      "receipt_sha256": "5f904c520ba5e21c250b64427c2ec0f81e082226a68cf83acd109346887b526e",
+      "source_sha256": "dc99bfc8575f9e4c52b81c518eb121ce7b42e52e47449ced57249beb717efbdb",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch405": {
+      "receipt_sha256": "c74e438245b4b55e3b42ee3df3b4f3100d062645482c6003528d619924c67eb2",
+      "source_sha256": "08defa290ea25a074fd8489477c548888e3659afd84cd9a429b191db5329d5e0",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch410": {
+      "receipt_sha256": "0d0bc94fddfc0b7c8564fdf7ab5a5a68c6f8ebf7fc98d5dbc3e8f53b04eafc08",
+      "source_sha256": "91e79d11fdc6546323634145eb68b25c23f21caf246a0cdbae0ecabcd8799a4f",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch415": {
+      "receipt_sha256": "e7cceb3f008b545c7562d0a60170cfd3179cbab804081ed83f3595263f30273e",
+      "source_sha256": "c707c03e7e9c672fbb8fdd48ffa62d7d8e22f3b01e1b17ee87f85470e335ca7f",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch420": {
+      "receipt_sha256": "5d6540b52c2f0e29130929959227a79b7c2105b27ec3caf5100546def1fd0ef0",
+      "source_sha256": "86896d09f1e33924ab561b772f56191b6cde216efe65ecab3b2c7b044c579d8a",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch425": {
+      "receipt_sha256": "94e8f820c65d437c888be3bea67f3ea2ff658bc98e5c1bc0b9c14551ce6860af",
+      "source_sha256": "3e30d2d465a6b04c5e6a3805ddb484873d86a9c37dd9268c03e861aa00834145",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch430": {
+      "receipt_sha256": "e036b4e3ac577dcaa442583863ac3f3c13b871f187dcf11cb0ae55a59956460d",
+      "source_sha256": "d50121d5a22775b1926490bcccab267778160a0d55c84e9c6f7d7673cf6d2535",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch435": {
+      "receipt_sha256": "5fb3947e26ee9b0bdac967fc782ed7d4ba20f8905b0d0bb5ba3b19504e407bfa",
+      "source_sha256": "badc2f4f8422053292689a81a30d3917a979c38eb7389dfeb06e4368c36515d2",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch440": {
+      "receipt_sha256": "90bf8153dee8644bd0d86097a649de5fe5edfbcf4bef5f39248ff6ffc6f9caa8",
+      "source_sha256": "53edbce312bd3de94ffe600e2bfdb69ff0b5d08a0e8f1306c2f7c459b2d191d5",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch445": {
+      "receipt_sha256": "2f7000f007935f01d87d6388df119af765f1892e158dd7cb436ac368fbe5d6e4",
+      "source_sha256": "de747247626a6ede4b81f0116d7d2fd9e7dc1141475030691db0894977f7c98e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch450": {
+      "receipt_sha256": "9cfa4b1fac9fe0c7bbea5e537df42c99dff4b228f9897bac36cc7a77e49e0b5a",
+      "source_sha256": "423845b9ab59474ac444e521d18324cab69d698fe31be3202148491bab9446c7",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch455": {
+      "receipt_sha256": "8764ba088af8c0770038588644dce5d0d9592d9ff76fb74a9217c7395ff5fd76",
+      "source_sha256": "577ceb915fcbd27983747f3d01c61063f32d7a2364a85cb742ac67f4e689ae67",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch460": {
+      "receipt_sha256": "fb8061a8283c1ba5f7425a4e64feb088f38e4f95b58bf9e6c87d2ff59cbbbc3f",
+      "source_sha256": "8e37ef9754c7cb05353bae030b1680fa744ffc7d80072d997834abf0149c122d",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch465": {
+      "receipt_sha256": "100264369edd40fd660d925a12d3764d05c6c9090f70a924f5bbc38dc3ff0360",
+      "source_sha256": "b978a5d21c13ccfdc651fe97d53ec1e4e53a13ed92b9db27182a43435b738820",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch470": {
+      "receipt_sha256": "fee86a6c53b12b6d08fab955dd929c163df5ca7e28bb1efceba461f4a70e4317",
+      "source_sha256": "c095202a9d18b1e4c4c66cb56dfb3d1643e5213a12665307542f839e633c3e97",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch475": {
+      "receipt_sha256": "294185ef9b50b8fdfe3572af27a90f54341bb5d06550913e6278754c940da22c",
+      "source_sha256": "62ee535efd9a0139cde7bb5ceb87593748d99c8104e033cc5f08b5e8cf5a3a9d",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch480": {
+      "receipt_sha256": "6204465c141a8e74dd4a02419f4460677024b35191098b39c0af43bb831266d6",
+      "source_sha256": "c020f392cf775b33f52ab44b53b9519ccf16abb6456c43c8402373ac1cd899b8",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch485": {
+      "receipt_sha256": "4a16968c17fc72a4f4e66aac44b015d9a06d6b65b03f0fc7ced54cd724d5f6ac",
+      "source_sha256": "7dea8983de300742d6f24fc02c6d02118f59caf21be6a0aae5484975f3838932",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch490": {
+      "receipt_sha256": "62ad86f93d9abf564e7f904245aab740e229eabe7da4b0593adf03474fbbeeb0",
+      "source_sha256": "de2898327ecd42cab4fb3b587d0eb676c2857a3f5de84ab42b8674c0dd9f228e",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch495": {
+      "receipt_sha256": "8bc8a8d8b14288411df79a1bac4752b76aff98ad49eaf1b2435898f7fdd7a4b0",
+      "source_sha256": "a5106af1ed2b19ad096732ae0b9cd443798780cc3442114a3fbd7a7bc64ea160",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch500": {
+      "receipt_sha256": "3bf2e9d5bafce01e4ee4475aa1a0abc4952958095cdaa94d7bd8dd2f817e2391",
+      "source_sha256": "f7823c26dce871a1903166092f9b0ba168e1473ffc8756eb28f27765f2a6be7c",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch505": {
+      "receipt_sha256": "ec13c4edea01ed57a2ad1f5132db9fad652b0b686bf6c56f84df6dc585f26ff3",
+      "source_sha256": "bdc831e2ea6308889e293d00ec2820f9a67adb9182f38e057789aa20ff0512f1",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch510": {
+      "receipt_sha256": "e8008ae8578916044965a00705e1ced039db7b58737b73212eabb1243569840e",
+      "source_sha256": "5b971241bf3c2580a200893fe47ef926efc21c08efd113e3c97f1b14babadaaf",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch515": {
+      "receipt_sha256": "7541c37aed9ec0655700917140378d8926d05205e52603692cfbf25594ef6508",
+      "source_sha256": "64bff0a334e1ed55585aeab94f3614b7c103bf8ce0388772f1c26e0faaa81aaf",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch520": {
+      "receipt_sha256": "e668772d4c74e9c38f32e362edac776c5f880faee56a0a7aa2278e9e23463cf9",
+      "source_sha256": "b04386574fcf2437be56314d3354495f713271f34341abcab7266e77634c0303",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch525": {
+      "receipt_sha256": "4bc86b1560421743d3509571af73144b7ddf7dae3c37b85063fd2cd231e476aa",
+      "source_sha256": "a9e34066477e0705275b07cfb2e9670db4fc330431502856fe9c7362fc382cfb",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch530": {
+      "receipt_sha256": "c878b6c5f68c59632c7f6ebc0662c89ea5d708ad5bdc1d6e8a57af30c6b66b9c",
+      "source_sha256": "cec10b6e80907d7784e01a0945ebab8938407002f15ee1e2630ef19df983f143",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch535": {
+      "receipt_sha256": "cac370cad6e61328b78810ad0d5ed83a9f776e1c6009e1c86e5d77d03f99324c",
+      "source_sha256": "7190ac307daf262733f5b345a1f7fdd4c15641690a53a95f9861fb7683bb03a0",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch540": {
+      "receipt_sha256": "8e64c849b369b9f3f25ce5bde73d9f8c18712eb02164f050e7332b21897022ad",
+      "source_sha256": "b82889242bb1d24956471c41f83f43333a8e0bc6a55ac59395ccf4f25cb2d947",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch545": {
+      "receipt_sha256": "2cace2f3f349b592be77ed60bbf923a96c5db77f0fe5fbde7633a31b880a0f90",
+      "source_sha256": "6b4d79dc14aaa8e80744dcef5f649d8d1a5cf051f4b5ccb7c26ab66a66e2ab48",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch550": {
+      "receipt_sha256": "277298f226197ebb013c9966572124e2a3c59ceccb6ca2fbb5abcc9cc95442ec",
+      "source_sha256": "f842a2c301e3c4df13b39daa8edfbbd223b955508817de060d37fc792f0c9995",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch555": {
+      "receipt_sha256": "8f6cb45ba0e7a5a1e9de5576e64c8ac88719a83ef26e9c856504daa22e782288",
+      "source_sha256": "e7334877ea71526abea911d0d273c2b3721532b5929e96b9ba1f681ae3b6cda8",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch560": {
+      "receipt_sha256": "31582e9649153564e2eaf325999ea66286f6ab17609acb7b6d4493a7b78cf471",
+      "source_sha256": "b08153b96dc034507fe7f2cdd1b38d837e36fd55b1d3a1bd9feec20fe7dbf482",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch565": {
+      "receipt_sha256": "7cf8a4ea1db96b51f63d37a705f44411b8a76dcb69b514215eafc523ddefdf73",
+      "source_sha256": "86065da36433c15bce446613f8d064c727792bf3bedd6f472d0db848e000d6b3",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch570": {
+      "receipt_sha256": "8e84b0976df3018d06240060d7abb42f8925a55e7f0a59f62a48d7274b351cca",
+      "source_sha256": "df1a5c29b078830e7cb496d66823a6206b8b396d8aac2d912927b0420bafdf37",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch575": {
+      "receipt_sha256": "33944f44da99bb865a12f383cd44c0627fd561070c130126c14c2b52df6090af",
+      "source_sha256": "42b4068c4cb302abb2770e55c860b629237004a2dcf06491d2fda1e56de20af6",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch580": {
+      "receipt_sha256": "400a0881f2daa7411b01843841a1680c993dc59137a8e4d1362f12ebe0cb928d",
+      "source_sha256": "001ab8a71eda26baf2f2ac6f7e4ee33cc857d45e398962a89c9a66d33e78d130",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch585": {
+      "receipt_sha256": "882237a25e314a9f0b14c4688864c29afe4de094ee9f4c5a13fe02004c79dfbf",
+      "source_sha256": "465def832df0e1c38c1a59cced7611ffdb6e8613e84ceb481fcd9279f3003e81",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch590": {
+      "receipt_sha256": "38ce72f18a7f4adb542d3d7fb1bb84089e32789f4b897b82602dd847ab9215d0",
+      "source_sha256": "ce9b4543504bfcae3914a68b0faca3094d997358f93d6e9a2d89912169cabcdf",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch595": {
+      "receipt_sha256": "e1fa6167801983aeea9ad0a31d437e266f8fe28c1fdbc83095d2885af24f1b49",
+      "source_sha256": "d2997499bf6d688749637aecfbc23b871966b19c363031d748f4b1c6e0096d20",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch600": {
+      "receipt_sha256": "47a2167f1fb14e109e287266c29061e60348b901c73cfabcc71dbc5cd1962e83",
+      "source_sha256": "5b1538fa674f66c8c54206904bdbe1e31b3dce66706ddd68c1cf7f8adbfc1a3c",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch605": {
+      "receipt_sha256": "660b39ce986f61805eb3cb6e37a051af8833e7a62c6b6e8d1a03ac13ee642513",
+      "source_sha256": "141cec957c19d37c7d58c60fae0f7b89116fb95da22b8732dc450da4cd1b9869",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch610": {
+      "receipt_sha256": "2abf9f35c692b19c381359ac409c29051bf138a8a5f7cdeaaa0a862a87caf440",
+      "source_sha256": "a396e72564de6c620e96b25e0d1a13a043142b0343bb13b911d90f800496322d",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch615": {
+      "receipt_sha256": "d57310d8eb60d7827edd3c8661d1d644ed9f7f1f0b4bcb56f8b95b84a5d8c0f2",
+      "source_sha256": "51c70f33761b1da4ccc2d1e9a57fbecaf60bacc67bb60ad654030662be660834",
+      "theorems": 5,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutBatch620": {
+      "receipt_sha256": "254a4b57b275ba087981545672943a28bb9668d8ca8538a01f41a5bdca124339",
+      "source_sha256": "925c6dc1771063c5f575307162ead4c82510e50352632faa7f75d9b9dc19bbe5",
+      "theorems": 3,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CubeInverseBase237": {
+      "receipt_sha256": "136b17806c0072698448458dcb4f43d0bc36905a11464d3a25e9a8304e1d34d1",
+      "source_sha256": "8743ae37d0d7b51247957874adab6129ecc9ff2e266435845c1b9c92848ce4c0",
+      "theorems": 3,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_00": {
+      "receipt_sha256": "e488ddd18bad53fcd1018ccd4ed366c802331172f4b3f1d22a48f6c199839a1e",
+      "source_sha256": "7e029bfe4ab57b37d862cba8964b5591d93b61d71d46f176270d887018e716d5",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_01": {
+      "receipt_sha256": "745bbeb67d3afeffcfc76277180c684f476987ecddcabb5fbc6ebb9aa7ec0662",
+      "source_sha256": "760949beaf1e3900c24c3939997966606bfabd5318ed5853496a756b4c38458f",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_02": {
+      "receipt_sha256": "235524375e1e90fccfd76a17e86adf763bc052c6935e00c89a40980d431162e6",
+      "source_sha256": "b0ad4e3cff77b578b2a5ad232c798e3fd04d7bf9c0148910abd484f90094771e",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_03": {
+      "receipt_sha256": "606d07175247658dbdfbd8fdfa782793640394ca7923755bbc37dc8873cb0ad1",
+      "source_sha256": "035e97c17d4a6773cd96689af7bbd70937a89dd131347e46ae0d3814c6fa6028",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_04": {
+      "receipt_sha256": "6479414a89bd0ac3188c1fbcc9da4b6ec4bbf3c008a1932b15d15baa9793783b",
+      "source_sha256": "cfbd98060dcbc2a0c49f6d4b62f5841d9f9a766a5a057621ba195e3561731fa4",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_05": {
+      "receipt_sha256": "ff16b379b3348e91fd8344340ceba6606198508e941f776458766dd7ee4e3d0a",
+      "source_sha256": "2760df4f361446bfdfbeb0281fc38f63592452bfb0d6a652590c0ab1b2d45a72",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_06": {
+      "receipt_sha256": "de7a32e1c6c6be48684624af63558eec9d045fc247e1362e4a6cca70dee0fd3e",
+      "source_sha256": "a1e9f81d533ad7c05f4fc741aa533a72545a27ac54b79230c87b4706a0767045",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_07": {
+      "receipt_sha256": "c147eb5e89a751f7cb32aa80e1612053190bef0f2abd3e37660688009498c21d",
+      "source_sha256": "da105e2f63d1acf9e658c162cac8888c94fd42afab3220bcdb536e729b81205c",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_08": {
+      "receipt_sha256": "34b86e3b56ce0a0a8939022b6615c82015c0fe07c143f5b40003327fbd6a0eda",
+      "source_sha256": "99b0969ae93bcf9d9e9328bc45ca371428a6bcc2e64f39ac8ba93e68ac574ae0",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_09": {
+      "receipt_sha256": "0bd0198aa5f1a8c45b7ff390ab8fdbbc3a47c44509d353803b36c2be9cd8f866",
+      "source_sha256": "a7c426b739a943e42b89e8f523b854963e158b70f07c8ee3d7ab945671e612f8",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_10": {
+      "receipt_sha256": "c51fbd02b0a5d3fdd5cea420bbbe0fe32a9f27dc2d40273afddc1d5943c31f94",
+      "source_sha256": "95120f15382ac8c68a821ca992b0cba90e5f3e919abf64811ee910a7073d8e0e",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_11": {
+      "receipt_sha256": "899fe8ae52732acac86405fae82d4371e003c8fecff05de1e2680bd9e24b9181",
+      "source_sha256": "96030cc5afc03258c36acb5cd99a1b4180abb02d4b8b0c90df474e5e2d467253",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_12": {
+      "receipt_sha256": "b4e23c99ba32ba6f5353d3aa8c610fde05e959dc663e430436236baade310f5a",
+      "source_sha256": "aedfbd2994a1b11cb7649859a7aa56bec511e3b7649f5f3b221d1ba0c07db522",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_13": {
+      "receipt_sha256": "d18b184687d13100a5aa66c9e483233fe9f2d4e00a4ceee99bf5258b4f449aaa",
+      "source_sha256": "21c181f81f7093078e65bf6042a25b86f8c257ff28600f00f4a5ecc24d621550",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_14": {
+      "receipt_sha256": "ffb4ba3b3ec0d12cb51790ede71319153abbdbbb855f37bc7bdd979006f2ca09",
+      "source_sha256": "744d96b52d69953f43140720634556d7f495692a5c8722d25419491fbd0e84c9",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseKernel237_15": {
+      "receipt_sha256": "99b9d148c72219182e8ae346f51647814a8ab62926816c528f9d5437140ea594",
+      "source_sha256": "91215e4a6eb1ade0c70b19196ac7376090ddb8c8dbc03b7127ed017549105387",
+      "theorems": 1,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseReconstruct237": {
+      "receipt_sha256": "af78409cfd6588abad353c1c4089007aedd5f5ba94570f497af69acac9bd6c3b",
+      "source_sha256": "ba7f2c4ec6767a40c388996512ac31469ce751981b7c1cf33d9bd3cf020c7950",
+      "theorems": 2,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverseRecovery237": {
+      "receipt_sha256": "73fe5af4db3c8d47acccca5f085e7e77bb566c6dda8099924921976fef4f7232",
+      "source_sha256": "f5abcc7320008539d23ce81e8569c16c0d46a9bee2f5e173f7c45b7edaebe99d",
+      "theorems": 2,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CubeInverse": {
+      "receipt_sha256": "c636599bfcb30c5f76dc40838c68358fb9be6b178230fbe70270e1f043340edc",
+      "source_sha256": "e918d6355beae3d3cb117295efb1f3b7158a8ef7f250678e9dc066ff1b14b8b2",
+      "theorems": 2,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "ContractedDegrees237": {
+      "receipt_sha256": "039ef2250dd31e0a81ec29483953da220f2061634589dd142c6dd72880d3e9cc",
+      "source_sha256": "65698da9344484472a2d571d25294dd064b20fd2b39b73f64ef2d032623de8e9",
+      "theorems": 8,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "PartialDeficit237": {
+      "receipt_sha256": "cf497cf6af06622c9122ddab0b53757f5576f9523f434f729652399ecc085a2a",
+      "source_sha256": "a67686e439acc847d1227c23fcec976bc82beb6a393e615fa5309a5fb59706f7",
+      "theorems": 2,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "Cut237": {
+      "receipt_sha256": "1ec41de583ab7f1352e439d111224ce859c674bf03dcfc88350d15768b3fee00",
+      "source_sha256": "7b99e328419b9cf910cc501358a057df3e59ef5b6300847893d8eed46f837a62",
+      "theorems": 2,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "CutGeometry237": {
+      "receipt_sha256": "7eab21ebb959f18528b4f6ca85baf1b26135fa4829bdea5291cf88f7f6448f5b",
+      "source_sha256": "7353e3bcb62937ce1e74addbc8f0b3233af53be5f203e9353d1c23d63d96d0b4",
+      "theorems": 6,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "ContractedExampleBase237": {
+      "receipt_sha256": "29c241c1c7e85fc1eb5d38959434003592640ed2ae93e979f3624ca5e06328c7",
+      "source_sha256": "d8610bfa23ad93baf04b1385b72416557f9d708a1ac1395e4fc646612d846c35",
+      "theorems": 0,
+      "axioms": []
+    },
+    "ContractedExample237_0": {
+      "receipt_sha256": "4d29fb8eefb254f75bac1f522c86d8878fa2cecda2a3950be6e255bcae797b02",
+      "source_sha256": "430d61c4823696f5c10a59b730427c76aaa6d6f9d98eb6fe65561bc7e5a6f967",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "ContractedExample237_1": {
+      "receipt_sha256": "9af325bd42fa922d6960145bfa3a18af759657cd4c4981582cc5efe9cb07c389",
+      "source_sha256": "989011f2fba198686008c2c161492f2aa8c7374e235bf2d56103f283584ff354",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "ContractedExample237_2": {
+      "receipt_sha256": "c7111999612ab83b726a6ec46a1b1d587359318016e521309d413dd7b9dc0c52",
+      "source_sha256": "6fb2a41e7578144fbf56b0144dffd602ad17893eee9448f918ee096fab819e07",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "ContractedExample237_3": {
+      "receipt_sha256": "78148893e70b1c0b8596514efe120fd4a7bfd6e5bc3b7875ca7938ef07f96725",
+      "source_sha256": "a03462fc24ba289db1ee74f454df4dcf7be7e66272ed93d576c64fea7948d1e1",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "ContractedExample237_4": {
+      "receipt_sha256": "84cc709dfed6dcec4bce0da7df7053dfec5c94e74f06f2e06d5908165b0a9d39",
+      "source_sha256": "8c9600aea10fd22d56be0b6ae93222f04c3dab9e49e01d9f5efc0ebbda41011a",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "ContractedExample237_5": {
+      "receipt_sha256": "5ed4e82eb6f10ab3b0c716fb4c0d173d3c1b08bd464768ee7aa58975d0fd4a0f",
+      "source_sha256": "017859da27044544e6290dd886d3afb961a5d97e12e9368b7c103181931e0ba0",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "ContractedExample237_6": {
+      "receipt_sha256": "5d07ec86ca9369fd09e129f0fcc16112f8c4c25f273acccf52e28443f6ad9012",
+      "source_sha256": "31abb869a920b4b9cd442002eb02e8dee7428c843f5e3011871f0ea7f64e159a",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "ContractedExample237_7": {
+      "receipt_sha256": "90e2488367a69918db4043334ab4cfa0756484cdb64707ce73d4daa0901c4398",
+      "source_sha256": "118b9eee5686e9979d5b49685df9461d6822f158338536113228656bbbe01844",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "ContractedExample237": {
+      "receipt_sha256": "3c938fe7c794098c49260f3f6109ecd1c67793989ff7de7a89326de5243984f4",
+      "source_sha256": "c85bad5a23d329ec9ac33faf18fc7bb2b3e70aa95d229d962ebda0272143620b",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_001": {
+      "receipt_sha256": "e69c90dfea0fa3cb422e98f74fc8f38bb78cafbc4e120b0711354a05832f221a",
+      "source_sha256": "d8a8dc1954e740dce74376b7ff658ea1c28d0382b3170f2fa47f4325136ec10d",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_002": {
+      "receipt_sha256": "2bbacd379203b2d7b162826a167baf6b79af51ad5ae6de6ab8349e89ffee36d0",
+      "source_sha256": "e77ae70b0dd23a11cbcd3ccde9ee330acc039b466abb8b028528de022bb27531",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_004": {
+      "receipt_sha256": "4961931cc412588edf5baad297705630ad56555ee54fe6df9a356d044e112892",
+      "source_sha256": "9cd4432b18945fbe2910a5a7956d5278875e2dd3c8a3df5617ef0d72303c874f",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_008": {
+      "receipt_sha256": "d404f03489eae463948bbeaca8eba8fdb55a7547bf891382e9b90ee47a37b7c3",
+      "source_sha256": "19c87dbff942d90f7e6b098208b63deb5113018e4d64ffaa270d15093ade0e22",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_016": {
+      "receipt_sha256": "1cfc2392afd2f753b313cd68a5056785eb4720aa72d13f62e32b6b095b692465",
+      "source_sha256": "da31c9ffa745bc391b09bde6f47a4d5eebede233d4ce052ae6fbb1bef1321995",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_032": {
+      "receipt_sha256": "1ac39114881d50666595a958b8cba82039d69d364f0d2f3bc22dc05b9460099e",
+      "source_sha256": "a25b15a35fef156a16099e82e1f9be683cc11688ec7e0085f85f3e1c85593299",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_064": {
+      "receipt_sha256": "cfe1976fce2d5d5bd67e49de087f7233e0d533d16876c7352b26808ecefb0925",
+      "source_sha256": "950e6d43534ab8e63af005115af81e3e7b9319e188ffbe1e85739be4af194a01",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_128": {
+      "receipt_sha256": "87e27c6b3e054dc540ad12c8650aa3d92ecf8181c340a3dc969526485a73f9c1",
+      "source_sha256": "99e0b01fcc2e170f12d4bbd9b92989434cdf9dc6dc15b608c2dde5162df72910",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    },
+    "CutAxis237_256": {
+      "receipt_sha256": "e9c3b2a67d6cdea57a379a775232d878eb8df3fa4f041f347140c1d976168a64",
+      "source_sha256": "cd18358af94b66776493c1013cbcc49098944db618c64bf35ac0f7c09f2421af",
+      "theorems": 1,
+      "axioms": [
+        "propext"
+      ]
+    }
+  },
+  "checks": {
+    "cut_indices_exactly_0_through_622": true,
+    "original_and_split_cut_statements_identical": true,
+    "cut_declaration_count": 623,
+    "finite_input_pins_match": true,
+    "contributor_saved_objects_match_pinned_Git_revision": true,
+    "author_and_hypersetup_exact_vs_HEAD": true
+  },
+  "mathematical_review": {
+    "partial_deficit": "The retained Hamiltonian runs span the partial set. Retained pair labels remain valid and extra simple edges only decrease degree deficit. The stated 2I+L <= 2r+2 follows.",
+    "directed_cut": "Summing path degrees over S gives at least 2|S|-2. At most 2|T| incidences end in T; remaining distinct ordered edges are counted. Overlapping S and T cause no problem.",
+    "overlap186": "The statement explicitly depends on the saved finite covers and prior native evidence; 94+92=186 gives six omissions and seven additions for 192- and 193-vertex sets. Cube isometries preserve the restriction.",
+    "two_erasures": "The displayed inverse system covers c in {0,35,-10,8,-16}. If exactly one RHS sign is nonzero, 315*128/(128^2-c^2) lies strictly between 2 and 3. If both are nonzero, none of the nine possible denominators divides 315. Thus only zero is integral. This agrees with the accepted actual-cube statements.",
+    "upper231": "Universal contributor theorem and successful standard-axiom audit are accurately reported; the independent whole-proof rebuild remains explicitly pending. Older 233 and 235 arguments are labelled historical."
+  },
+  "compile_records_inspected": {
+    "snake9_research": {
+      "sha256": "f6b0b6c3d52aaccdd78c538b9113634a1a0b5edd2d0cb0eb12368ac8a06b5052",
+      "recorded_kind": "success",
+      "scope": "Existing parent compile output inspected; reviewer did not compile or view PDF."
+    },
+    "snake9_frontier_explanation": {
+      "sha256": "2071e07f15345ab13b6fffd8138634bfe9de109f0869ca029fe80dabbf347a45",
+      "recorded_kind": "success",
+      "scope": "Existing parent compile output inspected; reviewer did not compile or view PDF."
+    }
+  },
+  "issues": [],
+  "release_recommendation": "Release the reviewed text at the pinned hashes within the stated evidence scope.",
+  "limits": [
+    "This is a bounded review of additions and current-bound edits, not a fresh full-source review of the long manuscript. The planned full review remains round 240.",
+    "No compiler, solver, enumeration or software test was run by this review. Existing accepted receipt sources, logs and objects were hash-checked.",
+    "The complete numerical-cut-to-path reindexing theorem remains unproved in Lean, as stated in the manuscripts.",
+    "The complete 177062400-description enumeration and native infeasibility results remain computational evidence; the finite-input receipt audits saved models and survivors.",
+    "The contributor 231 proof was not independently rebuilt from all dependencies. Its pinned source and saved audit were inspected.",
+    "The compiler-success records do not include manuscript hashes themselves. They were inspected separately; no PDF visual review was performed."
+  ]
+}
