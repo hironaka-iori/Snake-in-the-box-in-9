@@ -232,6 +232,25 @@ under one cap. A cutting-planes pseudo-Boolean solver is the natural next attemp
 (Exact) was refused by this session's permission policy, so it was not tried. A Lean route would
 also need its proofs translated to clausal LRAT.
 
+### Uniform 7-window share floor at level 60 (Track A's missing premise for 229)
+
+`cubeshare.py`: corner share12 of the 7 centres >= T, counts free, as in milestone 37. CaDiCaL,
+optionally with the same per-centre alpha cube split.
+
+| shape | T | variant | result |
+|---|---|---|---|
+| `0,1,2,3,4,5,0,1` | 30 | monolithic, radius 4 | UNSAT 344 s |
+| `0,1,2,3,4,5,0,1` | 30 | monolithic, radius 3 | UNSAT 335 s |
+| `0,1,2,3,4,5,0,1` | 30 | cube split t = 5 | first cube (all alpha_c >= 6) TIMEOUT 300 s |
+| `0,1,2,3,4,5,0,1` | 60 | monolithic, radius 4 | TIMEOUT 1200 s |
+| `0,1,2,3,4,5,0,1` | 60 | monolithic, radius 3 | TIMEOUT 900 s |
+| `0,1,2,3,4,5,0,1` | 60 | cube split t = 4 and t = 6 | first cube (all high alpha) TIMEOUT 300 s |
+| `0,1,2,3,4,5,0,2` | 60 | monolithic, radius 3 and 4 | TIMEOUT 900 s |
+
+The cube split does not help here either. In these windows the high-alpha cube is the hard one,
+because a high singleton count does not force a large corner share: its neighbours can have many
+selected neighbours of their own. Radius 3 is not faster.
+
 ## Lean (deliverable 3): not attempted
 
 No Track B candidate is live for 220 with a feasible premise set:
