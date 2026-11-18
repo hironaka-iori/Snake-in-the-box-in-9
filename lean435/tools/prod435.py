@@ -40,6 +40,10 @@ the predicted RssAnon of the running builds stays within --mem-gb (default 12 GB
 above it runs alone; a waiting big build keeps its room (smaller builds pass it only if both fit, or,
 while it is blocked anyway by running builds too big to run beside it, if the other running builds plus
 the passing one leave room for it: small builds fill the idle cores beside a long big build).
+Over builds: a small build (predicted <= 2.5 GB) that the budget does not admit may still start while the
+machine's MemAvailable >= its prediction + those of the other over builds + 2 GB; it is outside the budget
+and preemptible: below 1 GB MemAvailable the youngest over build kills its lean and builds again inside the
+budget ($PROD435_OVER_MAX_GB / _FREE_GB / _KILL_GB / _N; $PROD435_NO_OVER=1 turns it off).
 A restart reuses a finished generation of the same certificate (job directory kept until published).
 Prediction: 1.9 GB + 0.14 GB per million plan hints (see predict_gb); the watchdog kills a lean above max(7, 2 x prediction), at most 13 GB.
 The generation phase of the replay step of a job from 5 M plan hints on (gen_lean_lrat_v3, Python, several GB)
@@ -228,7 +232,8 @@ class Budget:
                 st = json.load(open(self.path))
             except (OSError, ValueError):
                 st = {'run': {}, 'wait': {}}
-            for k in ('run', 'wait'):
+            st.setdefault('over', {})
+            for k in ('run', 'wait', 'over'):
                 st[k] = {p: v for p, v in st[k].items() if os.path.exists(f'/proc/{p}')}
             r = f(st)
             tmp = self.path + '.tmp'
@@ -238,8 +243,24 @@ class Budget:
         finally:
             self.fcntl.flock(self.lockf, self.fcntl.LOCK_UN)
 
-    def acquire(self):
+    def acquire(self, over_ok=False):
+        """Wait until admitted; -> seconds waited. With over_ok, a small build (<= OVER_MAX_GB) that the
+        budget does not admit yet may run as an OVER build (self.over) when the machine's MemAvailable
+        leaves room for it, for the predicted peaks of the other over builds and OVER_FREE_GB more. Over
+        builds are not counted in the budget (normal admissions ignore them) and are preemptible: see
+        preempt_me()."""
         t0 = time.time()
+        self.over = False
+
+        def try_over(st):
+            if not over_ok or self.gb > OVER_MAX_GB or len(st['over']) >= OVER_N:
+                return False
+            if mem_available_gb() < self.gb + OVER_FREE_GB + sum(v[0] for v in st['over'].values()):
+                return False
+            st['wait'].pop(self.me, None)
+            st['over'][self.me] = [self.gb, time.time()]
+            self.over = True
+            return True
 
         def try_(st):
             used = sum(st['run'].values())
@@ -263,17 +284,54 @@ class Budget:
                 st['wait'].pop(self.me, None)
                 st['run'][self.me] = need
                 return True
+            if try_over(st):
+                return True
             st['wait'][self.me] = self.gb
             return False
         while not self._edit(try_):
             time.sleep(3)
         return round(time.time() - t0, 1)
 
+    def preempt_me(self):
+        """An over build asks whether to stop: True (and it leaves the over set) when MemAvailable is below
+        OVER_KILL_GB and it is the youngest over build of the machine (one at a time, every 2 s)."""
+        def f(st):
+            if self.me not in st['over'] or mem_available_gb() >= OVER_KILL_GB:
+                return False
+            if max(st['over'], key=lambda p: st['over'][p][1]) != self.me:
+                return False
+            st['over'].pop(self.me)
+            return True
+        return self._edit(f)
+
     def release(self):
         def rel(st):
             st['run'].pop(self.me, None)
             st['wait'].pop(self.me, None)
+            st['over'].pop(self.me, None)
         self._edit(rel)
+
+
+# Over (preemptible) builds, 18 Nov: the budget counts every running build at its predicted PEAK, but a big
+# build grows slowly (a 14 M-hint c230 build: 3.2 GB anon at 34 min, 3.5 at 1.6 h, 4.8 at 2.2 h, 5.3 at 3.2 h),
+# so beside one or two big builds the budget was full while ~9 GB were free and small builds waited (owner 4).
+# Small builds may now run beyond the budget while MemAvailable allows; when it falls below OVER_KILL_GB the
+# youngest over build kills its lean and builds again later inside the budget (a few minutes lost), so the
+# big builds are never put at risk.
+OVER_MAX_GB = float(os.environ.get('PROD435_OVER_MAX_GB', 2.5))     # only builds predicted up to this run over
+OVER_FREE_GB = float(os.environ.get('PROD435_OVER_FREE_GB', 2.0))   # MemAvailable kept beyond the over builds' predictions
+OVER_KILL_GB = float(os.environ.get('PROD435_OVER_KILL_GB', 1.0))   # preempt below this MemAvailable
+OVER_N = int(os.environ.get('PROD435_OVER_N', 4))                   # at most this many over builds at once
+
+
+def mem_available_gb():
+    try:
+        for l in open('/proc/meminfo'):
+            if l.startswith('MemAvailable:'):
+                return int(l.split()[1]) / 2**20
+    except OSError:
+        pass
+    return 0.0
 
 
 # ------------------------------------------------------------------ setup
@@ -412,16 +470,39 @@ def cmd_one(a):
     # builds are admitted while the predicted RssAnon of the running builds (and admitted generations)
     # stays within --mem-gb
     budget = Budget(bgb, a.mem_gb)
-    secs['build_wait'] = budget.acquire()
-    t0 = time.time()
-    r = subprocess.run([sys.executable, os.path.join(HERE, 'build.py'), '--src', os.path.join(D, 'src'), '--build',
-                        os.path.join(D, 'build'), '--lib', CORE, '--jobs', '1', '--big', f'{mod}={cap}', mod],
-                       capture_output=True, text=True)
-    secs['build'] = round(time.time() - t0, 1)
-    budget.release()
-    open(os.path.join(D, 'build.log'), 'w').write(r.stdout + r.stderr)
-    if r.returncode != 0:
-        return fail(D, mod, f'build failed: {(r.stdout + r.stderr)[-1500:]}')
+    secs['build_wait'] = 0
+    over_ok = not os.environ.get('PROD435_NO_OVER')
+    while True:
+        secs['build_wait'] += budget.acquire(over_ok=over_ok)
+        if budget.over:
+            secs['build_over'] = 1
+        t0 = time.time()
+        bl = open(os.path.join(D, 'build.log'), 'w+')
+        pr = subprocess.Popen([sys.executable, os.path.join(HERE, 'build.py'), '--src', os.path.join(D, 'src'), '--build',
+                               os.path.join(D, 'build'), '--lib', CORE, '--jobs', '1', '--big', f'{mod}={cap}', mod],
+                              stdout=bl, stderr=subprocess.STDOUT, text=True)
+        preempted = False
+        while pr.poll() is None:
+            time.sleep(2)
+            if budget.over and budget.preempt_me():
+                for c in descendants(pr.pid) + [pr.pid]:
+                    try:
+                        os.kill(c, 9)
+                    except OSError:
+                        pass
+                pr.wait()
+                preempted = True
+        secs['build'] = round(time.time() - t0, 1)
+        budget.release()
+        bl.seek(0)
+        out = bl.read()
+        bl.close()
+        if not preempted:
+            break
+        secs['build_preempted'] = secs.get('build_preempted', 0) + 1
+        over_ok = False                                   # the next try waits inside the budget
+    if pr.returncode != 0:
+        return fail(D, mod, f'build failed: {out[-1500:]}')
     b = [json.loads(l) for l in open(os.path.join(D, 'build', 'build-log.jsonl'))][-1]
     srcf = os.path.join(D, 'src', mod.replace('.', '/') + '.lean')
     base = os.path.join(D, 'build', mod.replace('.', '/'))
