@@ -568,6 +568,7 @@ privately and which were built on several machines. How they were checked:
   farm and trusted through the public `.olean`.
 - For the five split certificates, the kernel checks of their parts ran on several farm machines; this audit
   sees only the final public `.olean`.
+- Sampling rebuild (18 Nov): a seeded, size-stratified random sample of 275 of the 24,797 certificates was rebuilt and kernel-checked again from the committed plans; all 275 gave the manifest's `.olean` sha256 (and source sha256): [`audit231/sample-rebuild/`](audit231/sample-rebuild/README.md).
 
 ### Lessons for future plans (details in SPLIT.md)
 
