@@ -18,7 +18,7 @@ observation, as labelled.
 | (b) alpha-only chain, cap 8 (`symK 8`) | chain only | real snakes average min(alpha, 8) = 7.357, floor 216 | not excluded in principle; frontier at 4.68 needs 6.68 |
 | (a) uniform combined 7-window floor Y on `24 alpha + share12`, **no chain** | 132 shape items | 220 needs Y >= 1133. A validated local model of shape `0,1,2,3,0,1,4,0` has W = 983, so the route **caps at 225** | **dead** |
 | (a') shape-only automaton, 7 centres, per-shape combined floors | 132 items | witnessed min cycle mean 1119.7 < 1133: **caps at 221** | **dead** |
-| (a'') shape-only automaton, 9 centres, per-shape combined floors | <= 2,332 items | witnessed min cycle mean 1660.7 after 16 rounds (220 needs 1471); open | ceiling open, **premises out of solver reach** (TIMEOUT at 600-1200 s) |
+| (a'') shape-only automaton, 9 centres, per-shape combined floors | <= 2,332 items | witnessed min cycle mean plateaus at 1579.2 (220 needs 1471; the witness level would give 218) | ceiling open, **premises out of solver reach** (TIMEOUT at 600-1200 s) |
 | (a) 3-cube census mixed with the corner share | + census lemma (not in Lean) | on the W = 1089 witness both identities are below the 220 need (0.969 and 0.961) | no help on the binding windows |
 | (b) count-dependent shares in the K7 chain (full LP over the table) | chain + per-(shape, counts) floors | witnesses at alpha ~4.9 with share ~24 per vertex (140 per vertex in total) suggest a cap near 225; the count-consistent test was not conclusive | probably capped at 7 centres |
 | (c) literature (Snevily, Zemor, Solov'eva, Emelyanov-Lukito type) | none | all >= 250 at n = 9 (milestone 22 recomputed them) | dead |
@@ -172,7 +172,20 @@ Witnessed ceiling (`ceilk.py 10`, log `data/ceilk10.log`):
   W <= 1470 (level split, alpha-sum <= 42 and <= 48) found none in 1,200 s each (TIMEOUT). At
   7 centres the same kind of search found its SAT models in 2-4 min.
 
-**Verdict: open at the ceiling level, and the only Track B candidate not yet capped below 220.**
+**Follow-up run (`data/ceilk10b.log`, `data/ceilk10c.log`).** 15 more rounds at 240 s took the
+min cycle mean from 1660.7 to **1579.2**, with the shapes on that cycle at 1461-1676. Then the
+search stalled:
+
+- three consecutive CP-SAT attempts at 600 s (+300 s for cuts, 4 workers, hinted) found nothing;
+- a CaDiCaL level hunt for a model with W <= 1519 (alpha-sum <= 54 or <= 50) on the three highest
+  shapes of the cycle found none in 900 s each (4 TIMEOUT).
+
+So the witnessed ceiling **plateaus at 1579.2 per 9-centre window, above the 1471 that 220 needs**.
+If every per-shape floor could be certified at its witnessed value, this level would give 218.
+This is a plateau of the search, not a proof. Lower models may exist, and the 1,916 shapes absent
+from real snakes still carry no witness (random ones measure 2284-2730).
+
+**Verdict: alive at the ceiling level. It is the only Track B candidate not capped below 220.**
 The 1,916 shapes that never occur in a real snake still carry no witness. Since random shapes are
 high, they are unlikely to create a lower cycle.
 
@@ -218,6 +231,25 @@ others. The hardness is the share cardinality: 63 neighbours and about 9,500 una
 under one cap. A cutting-planes pseudo-Boolean solver is the natural next attempt. Installing one
 (Exact) was refused by this session's permission policy, so it was not tried. A Lean route would
 also need its proofs translated to clausal LRAT.
+
+### Uniform 7-window share floor at level 60 (Track A's missing premise for 229)
+
+`cubeshare.py`: corner share12 of the 7 centres >= T, counts free, as in milestone 37. CaDiCaL,
+optionally with the same per-centre alpha cube split.
+
+| shape | T | variant | result |
+|---|---|---|---|
+| `0,1,2,3,4,5,0,1` | 30 | monolithic, radius 4 | UNSAT 344 s |
+| `0,1,2,3,4,5,0,1` | 30 | monolithic, radius 3 | UNSAT 335 s |
+| `0,1,2,3,4,5,0,1` | 30 | cube split t = 5 | first cube (all alpha_c >= 6) TIMEOUT 300 s |
+| `0,1,2,3,4,5,0,1` | 60 | monolithic, radius 4 | TIMEOUT 1200 s |
+| `0,1,2,3,4,5,0,1` | 60 | monolithic, radius 3 | TIMEOUT 900 s |
+| `0,1,2,3,4,5,0,1` | 60 | cube split t = 4 and t = 6 | first cube (all high alpha) TIMEOUT 300 s |
+| `0,1,2,3,4,5,0,2` | 60 | monolithic, radius 3 and 4 | TIMEOUT 900 s |
+
+The cube split does not help here either. In these windows the high-alpha cube is the hard one,
+because a high singleton count does not force a large corner share: its neighbours can have many
+selected neighbours of their own. Radius 3 is not faster.
 
 ## Lean (deliverable 3): not attempted
 
