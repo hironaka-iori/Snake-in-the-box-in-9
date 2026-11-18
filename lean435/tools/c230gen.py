@@ -21,7 +21,8 @@ Glue (imports certificate interfaces privately):
                  `Families.refuted_sub (mkPerm v) s <231 term> (by decide +kernel)`
   G230S          the 132 corner-share keys `RefutedShare (winOf s) [(1, 21)] x 7 12 29`
   G230           `allTab230 : AllTab tab230`, `allShare230 : AllShare230`
-Writes DIR/glue-needs.json (certificate modules per glue module) and DIR/modules.json.
+Spec modules are written to DIR/spec, glue modules to DIR/glue; also DIR/glue-needs.json (certificate
+modules per glue module) and DIR/modules.json.
 """
 import argparse, gzip, json, os, pickle, re, sys, itertools, collections
 
@@ -172,8 +173,13 @@ def main():
         chunks[i] = [es[j:j + a.chunk] for j in range(0, len(es), a.chunk)]
     mods = collections.OrderedDict()     # module -> dict(layer, imports)
 
+    for sub in ('spec', 'glue'):
+        os.makedirs(os.path.join(O, sub), exist_ok=True)
+
     def write(mod, lines, layer, imports):
-        open(os.path.join(O, mod + '.lean'), 'w', encoding='utf-8').write('\n'.join(lines) + '\n')
+        # spec modules go to OUT/spec (rebuilt from source with the chain), glue modules to OUT/glue
+        # (compiled from certificate interfaces by assemble230.py)
+        open(os.path.join(O, layer, mod + '.lean'), 'w', encoding='utf-8').write('\n'.join(lines) + '\n')
         mods[mod] = dict(layer=layer, imports=imports)
 
     # ---- keys modules
@@ -259,16 +265,16 @@ def main():
                 else:
                     L.append(f'theorem rowF{t} : rowCheck qpos {c} {dep} (sfwdK7R34C7W16 {c} (wshK7R34C7W16 {S}){mask}) '
                              f'(tab230.getD {f_i} ([], [])).2 = true := by decide +kernel')
-                    hf = (f'fwdOK_of_mask (i := {f_i}) (by decide) (by decide) v2_ok rowF{t}' if c == 2 else
-                          f'fwdOK_of (i := {f_i}) (by decide) (by decide) rowF{t}')
+                    hf = (f'fwdOK_of_mask (i := {f_i}) (by decide +kernel) (by decide +kernel) v2_ok rowF{t}' if c == 2 else
+                          f'fwdOK_of (i := {f_i}) (by decide +kernel) (by decide +kernel) rowF{t}')
                 if r_i is None:
                     L.append(f'theorem rowR{t} : srevK7R34C7W16 {c} (wshK7R34C7W16 {S}.reverse) = 0 := by decide +kernel')
                     hr = f'revOK_zero rowR{t}'
                 else:
                     L.append(f'theorem rowR{t} : rowCheck qposR {c} {dep} (srevK7R34C7W16 {c} (wshK7R34C7W16 {S}.reverse){mask}) '
                              f'(tab230.getD {r_i} ([], [])).2 = true := by decide +kernel')
-                    hr = (f'revOK_of_mask (i := {r_i}) (by decide) (by decide) v2_ok rowR{t}' if c == 2 else
-                          f'revOK_of (i := {r_i}) (by decide) (by decide) rowR{t}')
+                    hr = (f'revOK_of_mask (i := {r_i}) (by decide +kernel) (by decide +kernel) v2_ok rowR{t}' if c == 2 else
+                          f'revOK_of (i := {r_i}) (by decide +kernel) (by decide +kernel) rowR{t}')
                 L.append(f'theorem good{t} : GoodT tab230 {S} := goodT_of (n := {c}) rfl ({hf}) ({hr})')
                 L.append('')
             if n == 3:
@@ -328,7 +334,8 @@ def main():
                 else:
                     t, nm = T231.term((tuple(e['key'][0]), tuple(e['key'][1])))
                     certs.add('LocalWindowCert.' + nm)
-                    terms.append(f'Families.refuted_sub (mkPerm {lst(e["perm"])}) {e["s"]} {t} (by decide +kernel)')
+                    ks = f'Refuted (winOf {lst(e["key"][0])}) (boundsOf {lst(e["key"][1])})'
+                    terms.append(f'Families.refuted_sub (mkPerm {lst(e["perm"])}) {e["s"]} ({t} : {ks}) (by decide +kernel)')
                     fam = True
             mod = f'G230_{i}_{k}'
             L = ['module', '', f'public import {where[i]}'] + (['import LocalWindowFamilies'] if fam else []) + \
