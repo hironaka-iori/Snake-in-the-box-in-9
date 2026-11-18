@@ -472,7 +472,8 @@ Note: A public declaration `Snake` exists but is imported privately; consider ad
   - The audit reads only public `.olean` files of the shared and certificate layers.
   - Check 4, run by hand, gave the same result as recorded: `audit_floors` depends on the three whitelisted
     axioms and opens 24 interfaces.
-- **No second kernel.** No `leanchecker` or other second-kernel run was made on the assembled theorem.
+- **No second kernel (at the time of this audit).** No `leanchecker` or other second-kernel run was made on the assembled theorem.
+  Later re-checks are in [Second-kernel checks](#second-kernel-checks-of-the-assembly-1718-november-2026).
 - **Kernel checks happened on the farm.** Certificates were kernel-checked where they were built: on the farm
   machines, when their modules were compiled. The auditor trusts that compile through the public `.olean` and
   its stored axiom list, as designed in the Audit section above.
@@ -563,7 +564,7 @@ privately and which were built on several machines. How they were checked:
 ### Caveats
 
 - The caveats of the 232 audit apply unchanged: non-deterministic `.olean.server`/`.olean.private` of three
-  floors modules (public `.olean` all match), no second-kernel (`leanchecker`) run, and kernel checks done on the
+  floors modules (public `.olean` all match), no second-kernel (`leanchecker`) run at the time of the audit (since narrowed, see [Second-kernel checks](#second-kernel-checks-of-the-assembly-1718-november-2026)), and kernel checks done on the
   farm and trusted through the public `.olean`.
 - For the five split certificates, the kernel checks of their parts ran on several farm machines; this audit
   sees only the final public `.olean`.
@@ -594,7 +595,7 @@ sampling. The tools are in `lean435/tools`. The 4.35 toolchain here ships `leanc
 | final module recompiled with `-o` (`audit.py final --out-olean`) | C++ (compile) | AUDIT PASSED again | AUDIT PASSED again | `audit*/final-audit-rerun-out-olean.txt` |
 | glue chunks, `Glue435`, top module, final module: kernel replay at interface level (`ifacecheck.lean`) | C++, second pass | 376 modules, 14,746 constants, 0 failures, 340 s | 221 modules, 12,394 constants, 0 failures, 226 s | `audit*/ifacecheck.log` |
 | the same modules, exported (`exportiface.lean`) and checked from the export (`xkernel435.sh`) | **nanoda** (independent) and `leanchecker --from-export` (C++) | 376 modules, 208,119 declarations, both kernels accept all | 221 modules, 124,819 declarations, both accept all | `audit*/xkernel.log`, `audit*/assumptions.txt.gz` |
-| spec layer: core, chain, floors (1,553 modules), stock `leanchecker`, one module per process | C++, second pass | in progress | (same core and floors; 232 chain not run) | see below |
+| spec layer: core, chain, floors, stock `leanchecker`, one module per process | C++, second pass | 1,553 modules (86 core, 423 chain, 1,044 floors), all accepted, 2.36 h | the same core and floors, plus the 235 chain modules of 232 not shared with 231: all accepted, 0.56 h | `audit231/spec-leanchecker.log`, `audit232/spec-leanchecker.log` |
 
 **Why a custom script.** Stock `leanchecker` loads the `.olean.server` and `.olean.private` of every import.
 The certificates publish only their public `.olean`, so on a glue module it stops at the first certificate
@@ -611,9 +612,16 @@ assumptions are:
 - 30 toolchain constants without exported bodies, such as `Eq.symm`, `Nat.mod_lt`, `Nat.xor` and `Nat.repr`.
 
 For 232 the counts are 12,507, 234 and 30. So the independent kernel checks the assembly *given* the
-certificate statements and the spec-layer theorems. The spec layer has only the C++ second pass. The final
+certificate statements and the spec-layer theorems. The spec layer has only the C++ second pass (next paragraph). The final
 module's export assumes `upper_231_of_refuted6SC563B1` (the chain) and `Floors233Port.floors233`, and checks
 that the theorem follows.
+
+**The spec layer.** Stock `leanchecker MODULE` replays the constants of one module against its imports,
+read from the full `.olean` files of the rebuilt core, chain, floors and mathlib. The spec layer is built
+locally, so all its parts exist. Each module ran in its own process (`LEAN_PATH` = core, chain, floors,
+mathlib and its packages). Mathlib itself and the Lean core library were not replayed. The slowest modules
+were the floors' `LocalWindowUnsat.ShareWindow73**` proof checks (up to 277 s) and `RowWindowGeometry`
+(141 s). Nanoda was not run on the spec layer.
 
 **Negative test.** In the export of chunk S14 of 231, the statement of the chunk's theorem was replaced by
 another proposition. nanoda failed (exit 101) and `leanchecker --from-export` rejected the export.
