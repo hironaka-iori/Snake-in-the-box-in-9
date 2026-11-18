@@ -201,6 +201,24 @@ least 10^7 CPU-seconds even if every item finished at the measured timeout, and 
 items that never finish. That is not competitive with Track A's route, where every premise is
 either already a DRUP-verified plain window or a share floor of a few dozen.
 
+## Cheaper encodings for the level items (follow-up, all negative so far)
+
+Tested on the 9-centre shape `0,1,2,3,4,1,2,0,1,3`, items "alpha-sum <= a and share12 <= 1470 - 24a".
+The ceiling loop was running on 4 workers at the same time.
+
+| variant | a = 55 | a = 50 |
+|---|---|---|
+| monolithic CaDiCaL, radius 4 (`levels.py`) | TIMEOUT 600 s | TIMEOUT 600 s |
+| monolithic CaDiCaL, radius 3 (sound, smaller ball) | TIMEOUT 600 s | TIMEOUT 600 s |
+| per-centre cube split (`cubesplit.py`): 2^9 cubes alpha_c <= 5 / >= 6, one incremental CaDiCaL under assumptions, shared cuts | 7 of 512 cubes in 13 min: 3 UNSAT (86-103 s), 4 TIMEOUT at 120 s | 7 of 512: 4 UNSAT (72-114 s), 3 TIMEOUT |
+| CP-SAT as prover (minimise share subject to alpha-sum <= 55) | lb 0 after 600 s | - |
+
+The low-alpha cube (every alpha_c <= 5) is not the hard part: it takes about 100 s, like the
+others. The hardness is the share cardinality: 63 neighbours and about 9,500 unary share literals
+under one cap. A cutting-planes pseudo-Boolean solver is the natural next attempt. Installing one
+(Exact) was refused by this session's permission policy, so it was not tried. A Lean route would
+also need its proofs translated to clausal LRAT.
+
 ## Lean (deliverable 3): not attempted
 
 No Track B candidate is live for 220 with a feasible premise set:
