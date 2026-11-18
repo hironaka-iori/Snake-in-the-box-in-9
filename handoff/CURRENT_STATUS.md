@@ -1,3 +1,11 @@
+# Chat-transfer status, 19 November 2026
+
+Round 240 was published at cdc9efe96c837f28b9c0d6b305320218444e8b5b, and the goal is paused. The publication instructions in the historical record below have already been completed. No new research round was started during this handoff.
+
+For the next chat, use [the goal prompt](2026-11-19-chat-transfer/GOAL_PROMPT.md) and [verified starting record](2026-11-19-chat-transfer/START_HERE.md). Further thoughts are stored separately in [the research-directions folder](../further-research/2026-11-19-post-round-240/README.md).
+
+---
+
 Artifact paths below are relative to milestones/240-five-count-recovery unless stated otherwise.
 
 # Round 240 handoff: publish, then pause

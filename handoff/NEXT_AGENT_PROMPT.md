@@ -1,9 +1,9 @@
-# Resume only on explicit instruction
+# New-chat handoff after Round 240
 
-Research pauses after Round 240. Do not begin Round 241 until the user resumes it.
+The existing goal remains paused. No Round 241 work was performed during this transfer.
 
-Read CURRENT_STATUS.md, ../milestones/240-five-count-recovery/MATHEMATICAL_NOTE.md, STRUCTURAL_NOTE.md, NEXT_STEP.md, and data/completion.json in that milestone. All 372 five-point matrix implications passed Lean, while the full cube assembly still covers three missing counts. Five-count recovery is a written theorem with native geometric coverage and accepted literal arithmetic. The minimum nonzero neighbour-count support is six through nine. No new longer snake or global length bound was obtained; the maintained interval is 191--231 with the contributor's full independent rebuild pending.
+Use [the goal prompt](2026-11-19-chat-transfer/GOAL_PROMPT.md) when creating the goal in the next chat. Read [START_HERE.md](2026-11-19-chat-transfer/START_HERE.md) and its [pinned state](2026-11-19-chat-transfer/STATE.json) before beginning.
 
-The preferred continuation uses the actual bound on count differences, at most 9, and generator-coordinate structure. The explicit eight-point matrix has nonzero unrestricted integer solutions of magnitude 21, so do not extrapolate an unbounded zero-solution lemma. The symmetric eight-point configuration and entire-support stars are excluded by written arguments, but disconnected components have nonzero even couplings. Six-count recovery remains open. See NEXT_STEP.md for possible outcomes and precise scope. Alternatively complete the missing four/five-count Lean cube bridge. Preserve the frozen construction searches and unrelated local edits.
+Further proposals are in the separate folder [further-research/2026-11-19-post-round-240](../further-research/2026-11-19-post-round-240/README.md). They include the six-count structural question, seed-dependent count-change restrictions, symmetry limits, and proof-completion alternatives. They are not completed Round 241 results.
 
-Keep research in E:/Snake-in-a-box. Edit the existing D:/Codex/2026-10-13/new-chat/outputs/snake9_research.tex and snake9_frontier_explanation.tex in place, retaining the editor and exact paper mirrors. Preserve all three authors and local hypersetup. The full written manuscript review was completed at 240; next due 250. Respect the single-heavy-worker and recorded memory/compiler limits. Mathematical deductions, native finite computations, literal Lean implications and cube-level assembly must remain distinguishable.
+The dated handoff supersedes this file's previous resumption instructions. Historical milestone records remain unchanged. Refresh contributor branches before treating the last reviewed interval as the latest project result.
