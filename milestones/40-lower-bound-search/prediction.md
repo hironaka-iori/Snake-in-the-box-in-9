@@ -50,12 +50,62 @@ Observations.
 
 ## (A2) 192 search exposure
 
-(updated as the search runs)
+About 13.5 core-hours of Q9 surgery annealing up to 19:00-21:00 UTC (10-minute restarts after the
+first 4.5 hours; one third of the later runs started from bank 191 snakes). 0 hits at 192.
+Bank-start runs never left the 191 level upwards. Fresh-start runs: 3 hits at 191 in total.
 
 ## (B) Density of states (Wang-Landau)
 
-(pending)
+`src/wl.c`: Wang-Landau on directed snakes with end moves only (add or delete a vertex at either end,
+Metropolis-Hastings corrected), normalised by N(0) = 2^n. Validation against exact enumeration
+(`src/enum_exact.py`): Q4 within 0.005 and Q5 within 0.003 in ln N at every length. Runs (one core):
+Q5 120 s, Q6 900 s, Q7 1800 s, Q8 2400 s, Q9 2400 s. Converged range (final ln f): Q6 up to 25 of 26
+(5e-7), Q7 up to 46 of 50 (1e-6), Q8 up to ~79 of 98 (6e-5; bins 80-83 are unconverged),
+Q9 up to 142 (2.4e-4, not well converged). Data: `results/wl*.txt`.
+
+Criterion: the maximum is where ln N(L) falls to ln(2^n n!), the size of one free orbit.
+
+Method 1, polynomial extrapolation of S(L) = ln N(L) from the peak to a cut-off, then solving for
+the crossing (`src/extrap.py`). Validation with the cut at 75% of the known optimum (the Q9 data end
+at 143/191 = 75%): degree 2 gives Q7 54.6 (opt 50, +9%), Q8 108 (opt 98, +10%); degree 3 gives
+Q7 54.2 (+8%), Q8 92.7 (-5%); Q5, Q6 and lower cut-offs often give no crossing. Q9: degree 3 gives
+194 (cut 135) or 166 (cut 142), degree 2 gives 214 (cut 142). The method is unstable at the
++-10% level, i.e. +-20 edges in Q9. It cannot separate 191 from 192.
+
+Method 2, ratio opt / L_peak (L_peak = most numerous length): Q5 13/10 = 1.30, Q6 26/18 = 1.44,
+Q7 50/32 = 1.56, Q8 98/60 = 1.63. Q9: L_peak about 124 (flat 124-134 and not fully converged).
+Continuing the slowing trend (+0.14, +0.12, +0.07, then +0.03 to +0.07) gives ratio 1.66-1.70 and
+a(9) about 206-211 for L_peak = 124, or 191-196 if the true peak is at 115 (where L_peak/2^n would
+continue its decreasing trend 0.313, 0.281, 0.250, 0.234). The L_peak uncertainty alone moves
+the prediction by about 15 edges.
+
+Conclusion (B): the density-of-states extrapolation predicts a(9) in roughly 190-215, centred
+somewhat above 191, with an error bar (from the Q7/Q8 validation) of about +-10%. It does not
+discriminate between 191, 192, 193 or 194. Better convergence near the top in Q8 and Q9 would need
+moves other than end moves (e.g. surgery moves with a proper reverse-move probability).
 
 ## (C) Inequivalent snakes found per length
 
-(pending)
+Canonical form: transition sequence with coordinates relabelled in order of first use, minimised over
+both directions (`src/canon.py`). Counts are of improvement records only (each run logs a length the
+first time it reaches it), so they are biased toward the first snake found per run.
+
+| | opt-5 | opt-4 | opt-3 | opt-2 | opt-1 | opt |
+|---|---|---|---|---|---|---|
+| Q8 (opt 98), 30 runs | 93: 23 | 94: 26 | 95: 27 | 96: 20 | 97: 15 | 98: **1 class in 13 hits** |
+
+| Q9 | 188 | 189 | 190 | 191 |
+|---|---|---|---|---|
+| classes (hits) | 35 (35) | 25 (25) | 39 (50) | 3 (3), all in the 131-entry bank |
+
+Reading: in Q8 every one of the 13 hits at the optimum is the same class. The Q9 top level behaves
+differently: 3 hits gave 3 different classes, and the bank already holds 131 inequivalent 191s.
+A large, diverse top plateau looks more like Q8's opt-1 level (15 classes in 26 hits) than like its
+optimum. This is the one signal that points toward a(9) > 191, but it rests on one comparison
+dimension and on biased sampling, so it is weak.
+
+## Overall (heuristic)
+
+(A) favours 191 weakly (steep last step); (B) is centred a little above 191 but uncertain by +-20;
+(C) favours a(9) > 191 weakly (diverse top plateau). Together: no method here separates 191 from 192.
+
