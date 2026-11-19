@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 243, 19 November 2026}
+\date{Research state after round 244, 19 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -9856,6 +9856,45 @@ remaining cases. The majority class, endpoints and ordering were free.
 Thus at least two minority vertices must be replaced relative to this
 coil for a 192-edge path. The general maximum remains open.
 
+\subsection{Reconstructing from 190-edge parents}\label{sec:parents244}
+The source archive contains a separate collection of 1042 inequivalent
+190-edge snakes in $Q_9$. Direct all-pairs verification passed for
+each. A complete two-step endpoint-extension search recovered exactly
+the 131 saved 191-edge classes at the intermediate length. None of
+these extends to 192. The parent has 96 vertices on the parity side
+of its endpoints and 95 on the other side.
+
+If its 96-set becomes the target minority, the entire opposite side
+and order can be recomputed using Section~\ref{sec:minority232}. The
+parents give 588 distinct labelled 96-sets. Of these, 302 fail the
+leaf condition, seven have too few eligible ends, 211 give
+contradictory forced degrees and 68 have native circuit contradictions.
+Thus no 192-edge path has any of these exact 96-sets as its minority.
+The 71,124,480 signed eight-count comparisons against these sets
+have at least five conflicting memberships in every case.
+
+In this orientation both parity classes must consequently change.
+The balanced side affects at least ten counts by
+Section~\ref{sec:seedtrade242}. The gaining side has $\sum f=2$,
+hence $\sum w=18$. The nonzero scalar moment matrix modulo five
+forces at least nine positions. At equality the same square-matrix
+argument gives the support $N(q)$. Its antipodal inverse on every
+position $p$ now gives $0=144w(p)-16\cdot18$, so $w(p)=2$.
+Invertibility would give $f=2\mathbf1_{\{q\}}$, contradicting
+ternarity. Thus at least twenty labelled counts differ in total.
+The argument uses the stated native input families~\cite{parents244}.
+
+In the other orientation, extend the parent's 96-set to a 97-vertex
+majority class and retain both original endpoints. A minority vertex
+must label an internal link and have exactly two neighbours in that
+majority class. Join the pairs so labelled. A target would supply a
+Hamiltonian path between the two designated endpoints. Conversely,
+one label per traversed pair constructs such a snake. There are 774
+distinct labelled base and endpoint pairs and 160 additions per pair.
+Every one of the 123840 graphs has a vertex of degree below its
+required degree (one at an endpoint and two elsewhere). This excludes
+every such reconstruction even with all minority vertices free.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -13734,6 +13773,11 @@ from the closest eight-count changes}. Research milestone 242, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Opening the 192-vertex coil
 in nine dimensions}. Research milestone 243, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/243-coil-opening}.
+
+\bibitem{parents244}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Reconstructing a 192-edge path
+from published 190-edge paths}. Research milestone 244, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/244-190-path-construction}.
 
 \end{thebibliography}
 \end{document}

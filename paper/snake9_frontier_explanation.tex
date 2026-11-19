@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 243}
+\date{Research state after round 244}
 \begin{document}
 \maketitle
 
@@ -1078,6 +1078,21 @@ All 30,722 classes across both parities were excluded. Thus a
 These are restrictions on openings of the specified coil and its
 isometric copies~\cite{coilopening243}.
 
+\section{Using 190-edge paths as construction parents}
+The published collection contains 1,042 distinct 190-edge paths in
+nine dimensions. Trying all additions at either end recovered exactly
+the 131 saved 191-edge classes. A second endpoint addition failed in
+every case. Allowing the opposite class and traversal order to change
+still excluded preserving the parents' 96-vertex class as the target
+minority, across all 588 distinct labelled inputs. In that orientation
+the target must differ from every parent in at least twenty labelled
+neighbour counts~\cite{parents244}.
+
+In the other orientation we kept both endpoints and all 96 original
+majority vertices, added any one vertex to that class and allowed the
+entire minority class to change. All 123,840 choices leave at least
+one vertex without enough possible links for the required path.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
@@ -1099,7 +1114,7 @@ Full written-source review was completed at round 240 and is next due at 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 243.
+in the companion manuscript and milestones through round 244.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1259,6 +1274,11 @@ from the closest eight-count changes}. Research milestone 242, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Opening the 192-vertex coil
 in nine dimensions}. Research milestone 243, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/243-coil-opening}.
+
+\bibitem{parents244}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Reconstructing a 192-edge path
+from published 190-edge paths}. Research milestone 244, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/244-190-path-construction}.
 
 \end{thebibliography}
 \end{document}
