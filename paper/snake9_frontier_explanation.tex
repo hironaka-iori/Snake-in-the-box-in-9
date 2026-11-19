@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 247}
+\date{Research state after round 248}
 \begin{document}
 \maketitle
 
@@ -1178,6 +1178,25 @@ longer arm would begin with 95 edges, and an explicit 94-edge partner
 is known. Thus 94 is its exact partner limit, giving \(96+1+94=191\)
 in nine dimensions.
 
+\section{Which partners attain 191?}
+
+Keep a complete 96-edge eight-dimensional arm and put its joining
+endpoint at zero. A partner in the other face may visit any vertices
+except the other 96 projected vertices of that arm. The only
+intersection of the projections must be zero.
+
+For all five 96-edge shapes from the published one-crossing joins, both endpoints have now been
+checked with the other arm free. A 95-edge partner is impossible
+at either end. At the end used by the published examples there are
+exactly five 94-edge partners for each labelled parent. At the opposite
+end there are none. Thus the best join from each shape has
+\(96+1+94=191\) edges, and these maxima give the 25 recorded examples.
+The saved 98-edge parent also gives an upper bound of 191 when kept
+intact. To attain it, that parent would need a 92-edge partner.
+Whether such a partner exists at either endpoint remains open.
+Six other recorded 96-edge shapes remain candidates for a lift to
+192 edges: each would need a 95-edge partner~\cite{root248}.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
@@ -1199,7 +1218,7 @@ Full written-source review was completed at round 240 and is next due at 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 247.
+in the companion manuscript and milestones through round 248.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1379,6 +1398,11 @@ parents and their nine-dimensional joins}. Research milestone 246, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Disjoint middle paths in a
 nine-dimensional crossing construction}. Research milestone 247, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/247-relative-middle-placements}.
+
+\bibitem{root248}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Extremal partners of five intact
+96-edge arms}. Research milestone 248, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/248-rooted-arm-capacity}.
 
 \end{thebibliography}
 \end{document}

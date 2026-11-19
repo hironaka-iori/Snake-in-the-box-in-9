@@ -1,6 +1,6 @@
 # Research handoffs
 
-Use the [current handoff](CURRENT_STATUS.md) for the Round 247 pause, the remaining construction cases and links to their evidence.
+Use the [current handoff](CURRENT_STATUS.md) for the Round 248 pause and the [marked route](../further-research/routes/ACTIVE.md) for the next construction cases.
 
 | Earlier transfer | Contents |
 |---|---|

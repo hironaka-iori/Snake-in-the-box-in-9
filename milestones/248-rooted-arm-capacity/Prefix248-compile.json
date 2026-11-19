@@ -1,0 +1,57 @@
+{
+  "status": "pass",
+  "compiler": "D:\\Codex\\2026-10-01\\it-should-have-a-property-of\\work\\lean-research\\lean-4.19.0-windows\\bin\\lean.exe",
+  "compiler_sha256": "f59b0c515f65dbf96526279d77fb43152f76bdd77f5fb94f387b75139fafe68c",
+  "thread_limit": 1,
+  "deadline_seconds_per_module": 60,
+  "private_memory_limit": "Windows Job Object PROCESS_MEMORY hard commit limit",
+  "modules": [
+    {
+      "module": "LayerJoining",
+      "source_sha256": "30687e190d96818b64569e90faaff50eba28acf7698e4ffa8c6d89d8fe640a74",
+      "object_sha256": "afd32c6da92896046c6fcb18bf563c9ca40b68630a89384a53d38d8d59568817",
+      "arguments": [
+        "-j",
+        "1",
+        "-s",
+        "8192",
+        "-o",
+        "LayerJoining.olean",
+        "LayerJoining.lean"
+      ],
+      "run": {
+        "seconds": 1.1634969000006095,
+        "exit_code": 0,
+        "startup_free_bytes": 2265231360,
+        "minimum_sampled_free_bytes": 1978609664,
+        "peak_private_bytes": 175017984,
+        "log_sha256": "d2a05866845d5448c0955304f133543bf184de8918f6649e8d34bf8e01d9a243"
+      },
+      "compiler_output": "'LayerJoining.join' depends on axioms: [propext, Classical.choice, Quot.sound]\n'LayerJoining.compatibility_necessary' depends on axioms: [propext, Classical.choice, Quot.sound]\n'LayerJoining.lengths_for_196' depends on axioms: [propext, Classical.choice, Quot.sound]\n'LayerJoining.lengths_for_197' depends on axioms: [propext, Classical.choice, Quot.sound]\n'LayerJoining.single_crossing_upper' depends on axioms: [propext, Quot.sound]\n"
+    },
+    {
+      "module": "Prefix248",
+      "source_sha256": "7d7db2a808258e4142fa82ef37fcb4b7b1e59fc5a958fda1425b6f291abf39b7",
+      "object_sha256": "11546395b707e616b711416c26805384f84a6c5a0242257a1b3cbd564968bf49",
+      "arguments": [
+        "-j",
+        "1",
+        "-s",
+        "8192",
+        "-o",
+        "Prefix248.olean",
+        "Prefix248.lean"
+      ],
+      "run": {
+        "seconds": 1.162824900005944,
+        "exit_code": 0,
+        "startup_free_bytes": 2225197056,
+        "minimum_sampled_free_bytes": 1953366016,
+        "peak_private_bytes": 155631616,
+        "log_sha256": "3577ca1d73a8b60418f827e2383fea4d258c383e6fd0e5465ff8b0102a330226"
+      },
+      "compiler_output": "'Prefix248.takePrefix' depends on axioms: [propext, Quot.sound]\n'Prefix248.rooted_prefix' depends on axioms: [propext, Quot.sound]\n'Prefix248.compatible_prefix' depends on axioms: [propext, Quot.sound]\n'Prefix248.exact_splits' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Prefix248.trim_to_192' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    }
+  ],
+  "finished_utc": "2026-11-19T15:12:19.511773+00:00"
+}

@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 247, 19 November 2026}
+\date{Research state after round 248, 20 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -10166,9 +10166,70 @@ has seven possible directions. For representative 8 in the archived
 class numbering, both choices of joining endpoint were excluded. Any
 longer partner would have a rooted prefix of length 95. Since this parent
 already has a 94-edge partner, its longest partner is exactly 94 and its
-largest single-crossing join is exactly 191. Across the five parent
-classes, five of the ten labelled endpoints have checked exclusions,
-and 16 first-step cases at the remaining five endpoints are open.
+largest single-crossing join is exactly 191. At the end of round 247,
+five of the ten labelled endpoints had checked exclusions, leaving
+16 first-step cases for the following classification.
+
+\subsection{Extremal partners of five intact 96-edge arms}\label{sec:root248}
+
+Consider the five 96-edge parent shapes in
+Section~\ref{sec:q8parents246}. Fix a labelled representative of each
+and call its endpoint in the published join the first endpoint.
+With either endpoint translated to zero, a partner starts at zero and
+must avoid the other 96 projected parent vertices. There is no
+restriction on its internal coordinate crossings.
+
+\begin{theorem}
+For each of these five parents, the maximum single-crossing join has
+191 edges. All maximizers join at the first endpoint. For the fixed
+labelling and joining endpoint there are precisely five 94-edge partners
+per parent. They give the 25 previously recorded joins.
+\end{theorem}
+
+\begin{proof}
+A partner of length at least 95 would have a rooted prefix of length
+95 with 48 vertices of each parity. There are seven possible first
+steps per endpoint. Four whole-endpoint exclusions cover 28 first steps, and
+26 more first steps were previously excluded separately. In the
+remaining 16 cases the degree, cardinality and face constraints are
+inconsistent. A separate checker replayed all 16 new refutations.
+This covers all 70 first steps at the ten labelled endpoints.
+
+A 94-edge partner uses 48 even and 47 odd vertices. Its free endpoint
+is even. At each second endpoint this query was excluded. At each first
+endpoint the five published partners pass direct pairwise verification.
+Block each complete 95-vertex set. Since the size is fixed, such a clause
+removes exactly that set. A disconnected degree solution contains an
+induced cycle, which can also be blocked. At each first endpoint two
+cycle cuts sufficed before the remaining formula was refuted. All ten
+exclusion and exhaustion certificates for length 94 were replayed.
+Consequently \(96+1+94=191\) is attained exactly as stated.
+The labelled sequences, formulas and verification records are archived in
+milestone 248~\cite{root248}.
+\end{proof}
+
+The choice of endpoint also affects shorter partners. At the second
+endpoints of parents 0, 3, 4 and 8, the longest partners have 90, 91,
+91 and 89 edges respectively. Each value has a verified path and a
+checked exclusion at the next length. At the second endpoint of
+parent 5, a 75-edge partner is known and a 91-edge partner has
+been excluded, giving a maximum between 75 and 90 inclusive.
+For the saved 98-edge parent
+in Section~\ref{sec:prefix222}, the earlier exclusion of a 93-edge
+partner at both ends gives the same 191-edge ceiling. Attainment of
+that ceiling remains open for the 98-edge parent.
+
+The scope is a five-shape family. For a general one-crossing path of
+length at least 192, keep the first arm and the crossing, and shorten
+the second arm from its free end to give length exactly 192.
+The arms then sum to 191. Since each has length at
+most 98, the unordered splits are \((96,95)\), \((97,94)\) and
+\((98,93)\). Lean checked this deduction for two compatible indexed
+paths under the assumed 98-edge arm bounds, including preservation of
+the joining endpoint and compatibility under truncation.
+The archived collection of long donor shapes contains six
+other 96-edge parents and three 97-edge parents. Exhausting those
+records would still leave parent shapes outside the collection.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -14068,6 +14129,11 @@ parents and their nine-dimensional joins}. Research milestone 246, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Disjoint middle paths in a
 nine-dimensional crossing construction}. Research milestone 247, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/247-relative-middle-placements}.
+
+\bibitem{root248}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Extremal partners of five intact
+96-edge arms}. Research milestone 248, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/248-rooted-arm-capacity}.
 
 \end{thebibliography}
 \end{document}

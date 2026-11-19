@@ -1,0 +1,10 @@
+# Parity, symmetry and reconstruction
+
+| Approach | Evidence and next question |
+|---|---|
+| Exchange vertices on one or both parity sides | Distinguish changing the entire 191-edge seed from prescribing a change on just one side while freeing the other. The saved overlap ceiling requires a 192-edge candidate to omit at least six old vertices. The four-minority-replacement family retains unresolved cases. [Exchange frontier](../../milestones/236-parity-exchange-frontier/MATHEMATICAL_NOTE.md) · [Seed overlap and parity reconstruction](../../milestones/237-parity-reconstruction/MATHEMATICAL_NOTE.md) |
+| Use neighbour counts to select trades | The smallest nonzero count difference between binary selections has support eight. Seven missing counts can therefore be recovered. The closest translated trades have been checked against the saved 191-edge seeds. A new construction would need a different trade or a different seed. [Exact count distance](../../milestones/241-exact-count-distance/MATHEMATICAL_NOTE.md) · [Seed trade search](../../milestones/242-seed-trade-construction/README.md) |
+| Reassign a projected union between two faces | Both faces can change simultaneously. Preserve the induced-degree, parity and connectivity conditions of the joined path while allowing the projection to grow or lose vertices. [Projected-union search](../../milestones/246-eight-dimensional-parents/README.md#free-assignment-of-the-two-arms-on-a-fixed-projection) |
+| Compare feasible first steps using symmetry | Normalize a continuation at its current endpoint. A map of its full allowed domain into an excluded one transfers a length bound. A permutation that moves a fixed parent must also move the rest of the instance. [Rooted domains in Round 248](../../milestones/248-rooted-arm-capacity/README.md) |
+
+Counts, cuts and face capacities can support the [active construction route](ACTIVE.md). A successful relaxation gives a necessary condition; a positive construction still requires an ordered path.

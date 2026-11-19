@@ -2,7 +2,7 @@
 
 Open a round to read its account and supporting material. The [milestone guide](README.md) groups the recent rounds by research question. The index follows the numbered folders published on the main branch. Round 26 has no separate published folder.
 
-[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–247](#rounds-240-to-247)
+[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–248](#rounds-240-to-248)
 
 ## Rounds 1 to 49
 
@@ -267,7 +267,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 238 | [Recovery from three missing counts](238-three-count-recovery/MATHEMATICAL_NOTE.md) |
 | 239 | [Recovery after four missing counts](239-four-count-recovery/MATHEMATICAL_NOTE.md) |
 
-## Rounds 240 to 247
+## Rounds 240 to 248
 
 | Round | Research record |
 |---:|---|
@@ -279,3 +279,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 245 | [Reconstruction from 190-edge parents with both endpoints free](245-free-endpoint-reconstruction/README.md) |
 | 246 | [Comparing eight-dimensional parents and their nine-dimensional joins](246-eight-dimensional-parents/README.md) |
 | 247 | [Disjoint middle paths in a nine-dimensional crossing construction](247-relative-middle-placements/README.md) |
+| 248 | [Extremal partners of five intact 96-edge arms](248-rooted-arm-capacity/README.md) |
