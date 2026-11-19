@@ -62,3 +62,18 @@ Indices: static split machines S0..S5 -> K = 1..6; helpers -> K = 7 and up (the 
 
 ## Stealer relaunch for bd7e3cac (18 Nov 20:20 UTC; split stealers only, no work lost)
 `kill $(pgrep -f "c230split.py --steal")` (ONLY the stealer; do NOT kill splitfarm435/lean children), then fetch/checkout research/unconditional-241 (>= bd7e3cac), the four exports, and the same LAUNCH line (`--steal --index K`). The log shows "adopted N running unit(s)". Keep holding the turn open.
+
+## Cheap keep-alive (replaces "Hold the turn open", 19 Nov 03:20 UTC)
+
+The account hit its 5-hour usage limit because ~50 sessions made a model
+call every 9 minutes. A harness-tracked background task keeps the container
+alive while the turn is ended (tested by the efficiency session). So:
+
+1. Start ONE Bash call with `run_in_background: true`, `timeout: 2400000`:
+   `timeout 1800 bash -c 'while pgrep -f "PGREP" >/dev/null; do sleep 120; done'; date; tail -3 LOGFILE; uptime -s`
+2. Arm a `send_later` safety check-in 40 minutes ahead.
+3. END THE TURN (no text needed). Never end a turn without such a tracked
+   background task running: an idle session without one loses its container.
+4. On every wake (task finished, or the check-in): if the job died, redo the
+   setup block and the same LAUNCH line; then repeat steps 1-3. No other
+   commands, no text.
