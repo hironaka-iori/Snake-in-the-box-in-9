@@ -12,10 +12,17 @@ n, c, L, k = map(int, sys.argv[1:5]); Af = sys.argv[5]; out = sys.argv[6]; T0 = 
 extra = sys.argv[9:]
 os.makedirs(out, exist_ok=True)
 A = set(json.load(open(Af)))
+# GEN=lean: split the Lean-exported cubeCnfC4 (the certified CNF)
 base = os.path.join(out, 'base.cnf')
 if not os.path.exists(base):
-    subprocess.run(['python3', os.path.join(HERE, 'dimacs29.py'), str(n), str(c), str(L), base, '--nosym', '--fix', str(k), Af] + extra,
-                   check=True, capture_output=True)
+    if os.environ.get('GEN') == 'lean':
+        lean = os.path.join(HERE, '..', 'lean')
+        mask = '%016x' % sum(1 << u for u in A)
+        subprocess.run(['/opt/lean-4.35.0-linux/bin/lean', '--run', 'Export.lean', str(c), str(L), mask, str(len(A)), base, 'c4'],
+                       check=True, capture_output=True, cwd=lean, env=dict(os.environ, LEAN_PATH=os.path.join(lean, 'build')))
+    else:
+        subprocess.run(['python3', os.path.join(HERE, 'dimacs29.py'), str(n), str(c), str(L), base, '--nosym', '--fix', str(k), Af] + extra,
+                       check=True, capture_output=True)
 hdr = open(base).readline().split(); NV, NC = int(hdr[2]), int(hdr[3])
 body = open(base).read().split('\n', 1)[1]
 V = 1 << n; K = 1 << k
