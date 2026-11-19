@@ -95,8 +95,9 @@ Consequences:
 - In Q7 the Q5-local ceiling is 51 edges, one above the truth. The gap between local and global
   closes fast with the ratio k/n.
 - Q6-local fibre sets in Q9 have at most about 176 vertices, below the truth. Whether non-fibre
-  Q6-locally snake-like sets beat 192 vertices is open. A CP-SAT search for one long cycle of span
-  >= 8 plus a path in Q8 is in `data/q8_cycle7_path.txt`.
+  Q6-locally snake-like sets beat 192 vertices is open. A CP-SAT search for one cycle of span
+  >= 7 plus one path in Q8 found only 91 vertices in 2,400 s (`data/q8_cycle7_path.txt`), below the
+  99 of a real snake, so it gives no obstruction; the question stays open.
 
 ## 2. LP and SDP numbers
 
@@ -135,6 +136,7 @@ LRAT-certifiable refutation. The Lean bridge is much simpler than the window bri
 | 7 | 60 | UNSAT | 86 |
 | 7 | 58 | UNSAT | 2,268 |
 | 7 | 56 | TIMEOUT | 3,600 |
+| 7 | 54 | not finished (the run was lost in a worker restart) | |
 
 The cost grows by a factor of 7 to 26 per 2 vertices. Proving a(7) <= 50 (V = 52) extrapolates to
 10^6 s or more. Q9 at 220 lies as far below Huang (256) as Q7 at 55 lies below 64, and has 4 times
