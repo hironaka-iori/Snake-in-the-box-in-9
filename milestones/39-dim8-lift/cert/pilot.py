@@ -32,16 +32,27 @@ vs = sorted({abs(l) for c in clauses.values() for l in c})
 new = {v: k + 1 for k, v in enumerate(vs)}
 ren = lambda l: new[abs(l)] if l > 0 else -new[abs(l)]
 enc = lambda l: 2 * abs(l) + (0 if l > 0 else 1)
-rows = ['[' + ', '.join(str(enc(ren(l))) for l in clauses[c]) + ']' for c in core_ids]
-CH = 4000
+def natpack(xs):
+    """NatPack chunks (work/final_lean/NatPack.lean): n + 2^8 (w + 2^16 (z + 2^n st))."""
+    out = []
+    for k in range(0, len(xs), 255):
+        ch = xs[k:k + 255]; n = len(ch)
+        w = max([x.bit_length() for x in ch] + [1])
+        z = 0; st = 0; pos = 0
+        for i, x in enumerate(ch):
+            if x == 0: z |= 1 << i
+            else: st |= x << pos; pos += w
+        out.append(n + (w << 8) + (z << 24) + (st << (24 + n)))
+    return out
+flat = []
+for c in core_ids:
+    flat += [enc(ren(l)) for l in reversed(clauses[c])] + [0]
+chunks = natpack(flat)
 with open(os.path.join(out, 'LocalWindowCnf', mod + '.lean'), 'w') as f:
-    f.write("import LocalWindowModel\n/-! Compacted UNSAT core of cube %s: %d of %d clauses, %d variables (renamed). -/\n"
+    f.write("import LocalWindowModel\nimport SplitZ\n/-! Compacted UNSAT core of cube %s: %d of %d clauses, %d variables (renamed), NatPack-packed. -/\n"
             "set_option maxRecDepth 100000\nset_option maxHeartbeats 0\nnamespace Snake9.LocalWindow.%s\n" % (mod, len(core_ids), ncls, len(vs), mod))
-    names = []
-    for k in range(0, len(rows), CH):
-        nm = 'raw%d' % (k // CH); names.append(nm)
-        f.write("def %s : List (List Nat) := [\n%s]\n" % (nm, ",\n".join(rows[k:k + CH])))
-    f.write("def raw : List (List Nat) := %s\ndef cnf : List (List Int) := raw.map (·.map decodeLit)\nend Snake9.LocalWindow.%s\n" % (" ++ ".join(names), mod))
+    f.write("noncomputable def raw : List (List Nat) := Snake9.SplitZ.splitZ (Snake9.NatPack.unpackL [\n%s])\n" % ",\n".join(map(str, chunks)))
+    f.write("noncomputable def cnf : List (List Int) := raw.map (·.map decodeLit)\nend Snake9.LocalWindow.%s\n" % mod)
 # renamed LRAT, keeping only needed lemmas (others dropped; ids unchanged)
 with open(os.path.join(out, mod + '.lrat'), 'w') as f:
     for cid in order:
