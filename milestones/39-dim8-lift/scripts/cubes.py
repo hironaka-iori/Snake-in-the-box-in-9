@@ -27,7 +27,7 @@ def run(i):
     sz, p, A = R[i]
     af = os.path.join(out, 'A%d.json' % i); json.dump(A, open(af, 'w'))
     cnf = os.path.join(out, 'c%d.cnf' % i)
-    subprocess.run(['python3', os.path.join(HERE, 'dimacs29.py'), str(n), str(c), str(L), cnf, '--nosym', '--fix', str(k), af],
+    subprocess.run(['python3', os.path.join(HERE, 'dimacs29.py'), str(n), str(c), str(L), cnf, '--nosym', '--fix', str(k), af] + os.environ.get('DIMACS_EXTRA', '').split(),
                    check=True, capture_output=True)
     t = time.time()
     try:
@@ -40,5 +40,6 @@ def run(i):
     rec = dict(idx=i, size=sz, pieces=p, status=st, sec=round(time.time() - t, 1))
     with open(res, 'a') as f: f.write(json.dumps(rec) + '\n')
     print(rec, flush=True)
+stride = int(os.environ.get('STRIDE', '1'))
 with ThreadPoolExecutor(jobs) as ex:
-    list(ex.map(run, range(len(R))))
+    list(ex.map(run, range(0, len(R), stride)))
