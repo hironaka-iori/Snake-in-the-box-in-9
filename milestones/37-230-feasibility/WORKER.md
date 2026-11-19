@@ -105,3 +105,17 @@ command line, so they report the job as alive even when it has died. Use a
 bracket pattern everywhere, e.g. `pgrep -f "[p]rod435.py run"` or
 `pgrep -f "[c]230split.py --steal"`, in the background wait and in every
 check. A dead job otherwise goes unnoticed until its claim refs go stale.
+
+## Longer keep-alive: 110 minutes (19 Nov 19:10 UTC)
+
+The account is close to its weekly usage limit. A 110-minute idle stretch
+with a tracked background task was tested and keeps the container. From now
+on every worker uses:
+
+- background wait: `run_in_background: true`, `timeout: 7000000`, command
+  `timeout 6600 bash -c 'while pgrep -f "[p]rod435.py run" >/dev/null; do sleep 120; done'; date; tail -3 LOGFILE; uptime -s`
+  (adapt the bracket pattern to your job);
+- safety `send_later` 125 minutes ahead (not 40);
+- on each wake: one check, relaunch only if the job died, re-arm both, end
+  the turn with no text. No other commands or messages unless the job
+  finished or failed.

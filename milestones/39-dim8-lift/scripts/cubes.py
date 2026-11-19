@@ -4,7 +4,10 @@ a copy with >= ceil(L / 2^(n-k)) vertices; translate it to copy 0 and normalise 
 one of the orbit representatives of enumk (forests of Q_k with >= that many vertices), and every other
 copy has at most as many vertices.  One CNF per representative (milestone 29 encoding with levels, no
 other symmetry breaking).
-usage: python3 cubes.py n c L k reps.txt outdir timeout jobs"""
+usage: python3 cubes.py n c L k reps.txt outdir timeout jobs
+env: DIMACS_EXTRA="--allmax" (fixed copy is a largest k-subcube over all direction sets; WLOG),
+     SHARD=s/N (this worker's share), STRIDE=d (sample every d-th representative).
+Resumable: representatives already in outdir/results.jsonl are skipped."""
 import sys, os, json, subprocess, time
 from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -41,5 +44,11 @@ def run(i):
     with open(res, 'a') as f: f.write(json.dumps(rec) + '\n')
     print(rec, flush=True)
 stride = int(os.environ.get('STRIDE', '1'))
+shard = os.environ.get('SHARD')          # 's/N': only indices with idx % N == s
+todo = list(range(0, len(R), stride))
+if shard:
+    s_, N_ = map(int, shard.split('/')); todo = [x for x in todo if x % N_ == s_]
+# hardest first (larger fixed copies take longer), so stragglers do not end the run
+todo.sort(key=lambda x: -R[x][0])
 with ThreadPoolExecutor(jobs) as ex:
-    list(ex.map(run, range(0, len(R), stride)))
+    list(ex.map(run, todo))
