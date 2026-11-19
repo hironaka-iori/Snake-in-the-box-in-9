@@ -29,11 +29,11 @@ log line `done:` appears or the script stops.
 3. Runs `cert/pilot.py`:
    - extracts the core (75,503 clauses) and compacts its 54,398 variables;
    - renames the LRAT;
-   - writes the core module, NatPack-packed: about 0.7 GB RSS to elaborate, against more than 9 GB
-     unpacked.
+   - writes the core module as 19 data modules of 4,000 clauses each (plain literals). A single module
+     needed more than 9 GB to elaborate, and the NatPack-packed form decodes superlinearly in the kernel.
 4. Runs `genv3stream.py --off 65536`: 40 segments, 17-bit words, about 15.6 MB of Lean.
 5. Builds the prerequisites: `LocalWindowModel`, `LratV3` (with the one 4.35 fix of `lean435/tools/port.py`),
-   `NatPack`, `ProofPack`, `SplitZ` and the core module.
+   `NatPack`, `ProofPack` and the core modules.
 6. Builds the replay module `LocalWindowUnsat/CubeP0.lean`. All kernel checks happen in this step, and
    the step is timed and its peak RSS recorded.
 7. Writes `milestones/39-dim8-lift/cert/results/pilot_<host>.json` and commits and pushes it to

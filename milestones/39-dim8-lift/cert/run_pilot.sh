@@ -24,14 +24,16 @@ python3 $M/cert/pilot.py $W/p0.cnf $W/p0.lrat CubeP0 $W/gen > $W/core.json; cat 
 log "4. v3 replay modules (genv3stream, offset 65536)"
 python3 $ROOT/lean435/tools/genv3stream.py --work $W/gen --data $W/gen/core --out $W/gen --off 65536 CubeP0 > $W/gen.json
 cat $W/gen.json | tee -a $W/pilot.log
-log "5. build: LocalWindowModel, LratV3 (4.35 fix), NatPack, ProofPack, SplitZ, core, replay"
+log "5. build: LocalWindowModel, LratV3 (4.35 fix), NatPack, ProofPack, core parts, replay"
 R=$W/root; mkdir -p $R/LocalWindowCnf $R/LocalWindowUnsat $R/build/LocalWindowCnf $R/build/LocalWindowUnsat
-cp $ROOT/work/final_lean/LocalWindowModel.lean $ROOT/work/final_lean/NatPack.lean $ROOT/work/final_lean/ProofPack.lean $M/cert/SplitZ.lean $R/
+cp $ROOT/work/final_lean/LocalWindowModel.lean $ROOT/work/final_lean/NatPack.lean $ROOT/work/final_lean/ProofPack.lean $R/
 sed 's/rw \[Option.mem_toList, Option.mem_def, Option.some.injEq\] at hy/simp only [Option.mem_toList, Option.mem_def, Option.some.injEq] at hy/' \
   $ROOT/work/final_lean/LratV3.lean > $R/LratV3.lean
-cp $W/gen/LocalWindowCnf/CubeP0.lean $R/LocalWindowCnf/; cp $W/gen/LocalWindowUnsat/CubeP0.lean $R/LocalWindowUnsat/
+cp -r $W/gen/LocalWindowCnf/CubeP0 $W/gen/LocalWindowCnf/CubeP0.lean $R/LocalWindowCnf/; cp $W/gen/LocalWindowUnsat/CubeP0.lean $R/LocalWindowUnsat/
+mkdir -p $R/build/LocalWindowCnf/CubeP0
 cd $R
-for m in LocalWindowModel LratV3 NatPack ProofPack SplitZ LocalWindowCnf/CubeP0; do
+PARTS=$(for p in $(cat $W/gen/LocalWindowCnf/CubeP0.parts); do echo LocalWindowCnf/CubeP0/$p; done)
+for m in LocalWindowModel LratV3 NatPack ProofPack $PARTS LocalWindowCnf/CubeP0; do
   LEAN_PATH=build $L --root=. -o build/$m.olean $m.lean > $W/b_$(basename $m).log 2>&1 || { log "FAILED $m"; cat $W/b_$(basename $m).log | head; }
 done
 log "   building the replay module (all kernel checks happen here)"
