@@ -96,3 +96,12 @@ main plan. The coordinating session tells each stealer its helper index J
    LOGFILE `~/c230_hJ.log`.
 
 Stealers K1-K4 stay on split work until all 109 items are published.
+
+## pgrep self-match in the keep-alive wait (19 Nov 14:45 UTC)
+
+`bash -c 'while pgrep -f "c230split.py --steal" ...'` and a bare
+`pgrep -f "prod435.py run"` typed through a shell both match the shell's own
+command line, so they report the job as alive even when it has died. Use a
+bracket pattern everywhere, e.g. `pgrep -f "[p]rod435.py run"` or
+`pgrep -f "[c]230split.py --steal"`, in the background wait and in every
+check. A dead job otherwise goes unnoticed until its claim refs go stale.
