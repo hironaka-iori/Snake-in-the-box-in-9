@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 241}
+\date{Research state after round 242}
 \begin{document}
 \maketitle
 
@@ -1032,6 +1032,29 @@ saved majority-class comparison excludes. The other class must also
 change and therefore affects at least eight further counts. This
 lower bound of 18 inherits the two finite saved-seed exclusions.
 
+\section{Searching for a 192-edge path from the closest changes}
+The classified change removes twenty vertices and adds twenty on one
+parity side. The 131 saved 191-edge paths contain 145 distinct labelled
+parity classes. Comparing all signed placements with the appropriate
+classes gives 17,539,200 comparisons. Every placement conflicts with
+at least six memberships of the seed. Exactly 28 attain six.
+
+For these 28 placements, retain every allowed deletion and choose an
+equal number of allowed insertions in all possible ways. This gives
+56,406 different proposed minority classes of size 96, with the entire
+97-vertex majority class and path order free. The graph of possible
+successive minority vertices has an isolated vertex in 56,168 cases.
+Each remaining graph has too many forced ends or an end that cannot
+receive a majority endpoint. Thus none can give a 192-edge path.
+
+The full proof also excludes exactly nine changed counts on the side
+of unchanged size, and exactly ten on the side gaining one vertex.
+Together with the saved exclusions and the finite placement census,
+this raises the minimum number of counts a 192-edge candidate must
+change relative to each saved seed to 21. The 56,406 exclusions and
+the placement census are native calculations. The two count exclusions
+have written proofs~\cite{research242}.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
@@ -1045,15 +1068,15 @@ source-specific requirement of seven changed histories.
 The maintained global interval is $191\le a(9)\le231$, with an
 independent rebuild of the completed upper-bound assembly pending.
 Resolving the proposed value 196 still requires both its witness and
-a universal 197-edge exclusion. For construction, the next question is
-whether a minimum eight-count change on the side of unchanged cardinality
-can respect the selected and unselected vertices of a saved seed.
+a universal 197-edge exclusion. A different construction starts from
+the published 192-vertex coil, retains a consecutive arc and grows a
+path at both ends of that arc.
 The universal seven-erasure proof still awaits Lean verification.
 Full written-source review was completed at round 240 and is next due at 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 241.
+in the companion manuscript and milestones through round 242.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1203,6 +1226,11 @@ I.~Hironaka, T.~Ma and S.~Zhan, \emph{The exact distance between
 neighbour-count profiles in the nine-cube}. Research milestone 241,
 19 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/241-exact-count-distance}.
+
+\bibitem{research242}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Direct 192-edge construction
+from the closest eight-count changes}. Research milestone 242, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/242-seed-trade-construction}.
 
 \end{thebibliography}
 \end{document}

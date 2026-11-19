@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 241, 19 November 2026}
+\date{Research state after round 242, 19 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -76,7 +76,7 @@ Two distinct binary selections differ in at least eight labelled neighbour
 counts, and an explicit pair attains eight. Thus any 505 of 512 counts
 determine the selection. The universal bound has a written proof and the
 explicit witness passed Lean checking. Under the saved finite exclusions,
-a 192-edge candidate must differ from each seed in at least 18 counts.
+a 192-edge candidate must differ from each seed in at least 21 counts.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -9719,8 +9719,91 @@ The fixed-minority exclusion forces a nonzero change in the other
 class, contributing at least eight disjoint counts by
 Theorem~\ref{thm:count-distance241}.
 \end{proof}
-The bound of 18 is necessary for comparison with the saved seeds.
-Its attainability and the existence of a 192-edge snake remain open.
+The next comparison strengthens this necessary bound.
+
+\subsection{A 192-edge search using the eight-count change}
+\label{sec:seedtrade242}
+Against a saved 96-vertex parity class $U$, a trade with deletion set
+$D$ and insertion set $B$ has $|D\setminus U|+|B\cap U|$ conflicting
+memberships. The block pattern $4,2,2,1$ has
+$\binom94\cdot5\cdot3=1890$ coordinate partitions. Each has 32
+translated supports per parity (the support subgroup has order eight)
+and two signs. The 131 verified paths have 78 distinct even and 67
+distinct odd classes. Among all $120960\cdot145=17539200$ signed
+comparisons, the least conflict count is six, attained in 28 comparisons.
+In fourteen, five proposed deletions are absent and one proposed
+insertion is occupied. In the other fourteen these counts are four and two.
+
+For each closest placement, make all available deletions and choose the
+same number of available insertions in every possible way. This gives
+$14\binom{19}{15}+14\binom{18}{16}=56406$ distinct minority classes.
+The opposite class is entirely free. In the contraction graph of
+Section~\ref{sec:minority232}, 56168 classes have an isolated vertex.
+The other 238 have too many leaves or a leaf ineligible as an end.
+Thus none of these repaired classes can occur in a 192-edge snake.
+These are native finite calculations~\cite{research242}.
+
+\begin{proposition}
+Every 192-edge snake differs from each saved seed in at least 21
+labelled neighbour counts, under the finite exclusions of
+Sections~\ref{sec:colour231} and~\ref{sec:minority232} and the
+signed placement calculation above.
+\end{proposition}
+\begin{proof}
+On the balanced parity side, $\sum w=0$. Suppose the support has size
+nine. The moment argument of Theorem~\ref{thm:count-distance241}
+forces either zero or at least eight nonzero residues modulo five.
+Nine surviving residues are impossible: a totally isotropic sign row
+space in dimension nine has dimension at most four, allowing only
+eight distinct columns up to sign. Zero surviving residues would give
+nine amplitudes $\pm5$ summing to zero. Thus eight survive and the ninth
+is $\pm5$. The eight surviving positions have the four-block form by
+the same moment argument. Within each block subtract two weight-one
+character sums modulo seven. The eight positions cancel, forcing the
+two signs at the ninth position to agree there as well. All eight
+block-constant words of that parity are already occupied. This
+excludes nine; the signed placement calculation excludes eight.
+
+On the gaining side $\sum w=9$. Suppose ten positions change. For the
+matrix $X$ of sign columns and the diagonal $D$ of weights surviving
+modulo five, $XDX^{\mathsf T}=9I$, so at least nine residues survive.
+If exactly nine survive, the square argument above makes these $N(q)$
+with residual weights one. For the tenth point $t$, $f-\mathbf1_{\{q\}}$
+is then in the adjacency kernel modulo five and is supported in
+$N(N(q))\cup N(t)$ by ternarity and $f=Aw\bmod2$. This set has at most
+46 points. The antipodally even extension of a nonzero such difference
+over $\mathbb F_5$ has twice its support and has degree two: the only
+singular eigenvalue levels are two and seven, and symmetrization removes
+seven. A nonzero quadratic on nine signs has at least 128 support
+points, by fixing all variables outside a highest-degree monomial.
+Thus the difference vanishes modulo five and hence exactly, since its
+values lie between $-2$ and $1$. This would give only nine counts.
+
+If ten residues survive, $9D^{-1}-X^{\mathsf T}X$ is symmetric of
+rank one since $DX^{\mathsf T}X/9$ is a rank-nine projection.
+Write the former matrix as $a h h^{\mathsf T}$. It annihilates
+$DX^{\mathsf T}$, so $h$ has at least two nonzero entries.
+Off the diagonal the dot product vanishes modulo five exactly at
+distance two. The zero entries of $h$ index points at distance
+two from every other point, whereas distinct points corresponding
+to nonzero entries are never at distance two. Translating a zero-entry
+point to zero would make the nonzero-entry points disjoint two-subsets,
+at most four. The other six or more are pairwise at distance two and
+lie in a single neighbourhood by the intersecting-pairs argument above.
+Any further point at distance two from all six also belongs to that
+neighbourhood: relative to its centre, a weight-three vertex reaches
+at most three unit vectors at distance two. This would put ten points
+in one nine-vertex neighbourhood. Thus $h$ has no zero entry. The ten
+points now have disjoint neighbourhoods. If an amplitude is even,
+$f=Aw\bmod2$ forces $f$ to vanish on its entire neighbourhood, making
+that amplitude zero. Ten odd amplitudes cannot sum to nine.
+
+The saved exclusions require a change on the balanced side and rule
+out the single addition corresponding to nine changes on the gaining
+side. At least ten and eleven counts, respectively, must therefore
+change on disjoint sides.
+\end{proof}
+Attainability at 21 and the existence of a 192-edge snake remain open.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -13590,6 +13673,11 @@ H.~H. L\'opez, C. Renter\'ia-M\'arquez and R.~H. Villarreal,
 A. Valyuzhenich and K. Vorob'ev, \emph{Minimum supports of functions
 on the Hamming graphs with spectral constraints}, Section~3.
 \url{https://arxiv.org/abs/1807.09139}.
+
+\bibitem{research242}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Direct 192-edge construction
+from the closest eight-count changes}. Research milestone 242, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/242-seed-trade-construction}.
 
 \end{thebibliography}
 \end{document}
