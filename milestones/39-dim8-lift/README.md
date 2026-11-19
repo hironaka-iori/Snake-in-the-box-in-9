@@ -6,38 +6,45 @@ premise is solver or enumeration evidence and is labelled as such.
 
 ## Summary
 
-1. **Reduction, Lean-checked.** `Dim8Lift.snake_le_of_noPit` (core Lean 4.35, no mathlib;
-   axioms `propext`, `Classical.choice`, `Quot.sound`; no `sorry`, no `native_decide`) states:
-   if no induced linear forest of Q8 with at most 13 paths has L vertices, then every snake of
-   Q9 has at most 2L - 3 edges (2 <= L <= 116).
-   - Corollaries: `upper_229_of_noPit` (L = 116), `upper_227_of_noPit` (L = 115),
-     `upper_225_of_noPit` (L = 114) and `upper_223_of_noPit` (L = 113).
-   - It does **not** use the Lean cap 231: the proof cuts a prefix of 2L - 2 edges, so the
-     least-used coordinate is crossed at most 25 times.
-   - The premise `NoPit 13 L 64` is the semantics of milestone 29's level-encoded CNF, without
-     its auxiliary variables.
-2. **Where the route bottoms out.**
-   - The best known forests have g8(13) = 112 (eight P7 plus four P14). Even if that is exact,
-     the route gives 223 at best (221-223, depending on forests with an exact path count).
-     Nothing near 220 is reachable this way.
-   - Proved before this milestone (milestone 29, SAT, not certified): g8(13) <= 121.
-3. **Q7 validation (solver evidence).** g7(8) = 56: no induced linear forest of Q7 with at most
-   8 paths has 57 vertices.
-   - This was open: milestone 29 reported "unknown after 2400 s".
-   - It was settled by 2,161 cubes, all UNSAT, 1,655 s in total and at most 5.4 s each.
-4. **Q8, level 115 (worth 229; solver evidence, partial).** All 21 completed sample cubes are
-   UNSAT; four were stopped by hand, none came out SAT. The per-cube time grows steeply with the size of the fixed copy (table below).
-   - Extrapolated cost of the full level: about 4-5 x 10^5 core-seconds of solving, which is
-     110-140 core-hours, or 1-1.5 days on these 4 cores.
-   - Levels 114 / 113 / 112 use the same 2,161 cubes, but each is harder; a sample is running.
-5. **Certification.**
-   - Done: the reduction (machine-checked).
-   - Missing, in Lean:
-     - the cube CNF bridge (a `Pit` gives a satisfying assignment of the cube CNF);
-     - the B8 symmetry transport;
-     - the verified orbit cover;
-     - the LRAT replay of each cube.
-   - Sizes are estimated below; the bulk is about 120-300 G LRAT hints for level 115.
+Status at 21:30 UTC. **No new bound on a(9) is claimed.** The whole route below is a
+machine-checked Lean theorem whose premises are finite certificates. Those certificates are
+not built yet; the solver evidence for them is partial and labelled as such.
+
+1. **The route, as one Lean theorem.** `Dim8Lift.upper_of_certs` (`lean/Final.lean`; core Lean
+   4.35 plus the repository's `LocalWindowModel`; axioms `propext`, `Classical.choice`,
+   `Quot.sound`; no `sorry`, no `native_decide`). For 113 <= L <= 116 its premises are:
+   - two cover tables that pass a Bool check: `t5` (54,604 entries) and `t6` (187,002 entries);
+   - `Unsat` of the Q5 cover CNF and of the 35 Q6 cover CNFs;
+   - `Unsat (cubeCnfC4 13 L r.mask r.size)` for each of the 2,161 representatives in `reps`.
+
+   Its conclusion is that every snake of Q9 has at most 2L - 3 edges. **L = 116 gives 229**,
+   independently of the K7 window machinery.
+2. **The pieces.** They are in sections 1 and 4.
+   - The reduction `snake_le_of_noPit`: no 13-path induced linear forest of Q8 on L vertices
+     implies m <= 2L - 3. It needs no cap: a prefix with 2L - 2 edges is cut.
+   - The cube bridge `no_pit_of_unsat`.
+   - The glue `noPit_of_cubes`: a largest 6-subcube is moved to copy 0 by stored generator
+     words, and the forest is transported along Aut(Q8).
+   - The orbit cover `coverOK_of`: two levels (Q5 halves, then Q6 copies), each a cover CNF with
+     a Lean bridge plus a table of generator words.
+3. **Where the route bottoms out.** The best known forests have g8(13) = 112. Even if that is
+   exact the route gives 223 at best (221-223), never ~220.
+4. **Q7 validation (solver evidence).** g7(8) = 56: all 2,161 cubes are UNSAT, 1,655 s in all.
+   This was open after milestone 29.
+5. **Q8, level 116, i.e. L = 116 (worth 229).**
+   - The full run is in progress: `data/q8_L116_c4_results.jsonl` is pushed every ~30 min. It
+     uses the Lean-exported CNF `cubeCnfC4`. Every cube finished so far is UNSAT; none is SAT.
+   - Size-29 cubes take a median of ~107 s and up to ~1,000 s (4 jobs on 4 cores).
+   - The 24 cubes whose fixed copy has 31 or 32 vertices are much harder. One of size 31 took
+     2,179 s. Those of size 32 are unknown after 30 min, even with 300 lex-leader clauses. They
+     need adaptive splitting (`scripts/split.py`).
+6. **Cost.**
+   - Solving takes ~190 core-hours for level 116.
+   - LRAT: measured 77 k trimmed hints per solver-second (25 s solve: 1.88 M hints; 104 s:
+     8.0 M), so ~50 G hints and ~3,000-3,500 Lean CPU-hours.
+   - Lower levels: the same cubes are 2-3.4 times harder at L = 115 (227) and 4.5-6.6 times
+     harder at L = 114 (225).
+   - The table checks need ~1.5 CPU-hours of kernel time. Each cover CNF solves in under 30 s.
 
 ## 1. The reduction (`lean/`)
 
@@ -159,52 +166,67 @@ Stratified sample (`data/q8_c13_L116_sample.jsonl`, 4 jobs on 4 cores, CaDiCaL 2
   (`data/q8_L116_split_rep2154_partial.jsonl`). Splitting is for bounding certificate size, not
   for speed.
 
-## 4. Certification path and sizes
+## 4. The Lean chain and what is left to certify
 
-The pieces and their status:
+All modules are in `lean/` and are built with `bash lean/build.sh` (core Lean 4.35; it takes
+`LocalWindowModel` and `LratV3` from `work/final_lean`).
 
-1. **Reduction.** Done: `snake_le_of_noPit`, Lean-checked, standard axioms.
-2. **Cube bridge** (to write). The CNF must be a Lean definition (as for the window
-   certificates) with a theorem: from `Pit 13 L 64 S ℓ` with copy 0 = A and all 6-subcubes
-   <= |A|, a satisfying assignment exists. The assignment is:
-   - the selection, pair, `two`, `any`, `e0`, `e1` and `d1` variables, read off S;
-   - levels o(u,j) = [ℓ u >= j] with the `a` variables;
-   - the sequential-counter auxiliaries, read off the prefix counts;
-   - the 4-cycle and 6-cycle clauses, which follow from degree <= 2 and levels (on a cycle, a
-     vertex of least level has no smaller neighbour).
+| module | content | key theorem |
+|---|---|---|
+| `Sums`, `Bits`, `Lift1`-`Lift5`, `Dim8Lift` | the facet-split reduction | `snake_le_of_noPit` |
+| `Counter` | sequential counter (Sinz) and its soundness | `atMost_sound` |
+| `CubeCnf` | the cube CNF as a Lean definition (`cubeCnfC4 c L A k`, 857 k clauses); `Export.lean` writes it as DIMACS | |
+| `CubeBridge1`-`5` | a `Pit` with copy 0 = A and all other 6-subcubes <= k satisfies it | `no_pit_of_unsat` |
+| `Sym`, `SymPit` | 36 generators of Aut(Q8) (28 coordinate transpositions, 8 flips; bit facts by `decide`); a `Pit` is transported along each | `pit_gen` |
+| `Glue1`, `Moves`, `Glue2` | subcube counts and their transport; a largest 6-subcube is moved to copy 0 by 112 stored words (checked by `decide`) | `noPit_of_cubes` |
+| `CoverCnf`, `CoverBridge` | generic cover CNF on Q5/Q6 (degree, selection-conditioned levels, counters, blocking clauses) | `cover_of_unsat` |
+| `TabDefs`, `CoverDefs`, `Cover2` | the two-level orbit cover | `coverOK_of` |
+| `Final` | everything together | `upper_of_certs` |
 
-   Then `LratV3.unsat_of_raw` and a kernel replay per cube close each cube. The existing checker
-   kinds suffice; only the bridge and the CNF generator are new.
-3. **Symmetry transport** (to write, about 300 lines). Coordinate permutations and translations
-   of Q8 map a `Pit` to a `Pit` (sum reindexing by a bijection of [0,256)). A largest 6-subcube
-   exists and can be moved to copy 0 of coordinates (6,7).
-4. **Verified cover** (to write; certificates are small). Every Q6 set A with >= 29 vertices,
-   degree <= 2 and a level function on A is B6-equivalent to one of the 2,161 representatives.
-   - Two levels, each certified by one CNF UNSAT plus stored group elements checked by `decide`:
-     1. Q5 completeness: one CNF with 54,604 blocking clauses of 32 literals.
-     2. Per Q5 representative, the completeness of its extension list: 35 CNFs, 187,002
-        blocking clauses in all.
-   - Then each listed (half, extension) pair maps to its Q6 representative by a stored element
-     of B6: 187,002 x 64 bit operations under `decide`.
-   - The cover is thus checked, not trusted. The enumerators only produce the lists.
-5. **Cube certificates**:
-   - LRAT rate measured on a Q7 cube: 1.23 M hints for a 1.9 s solve, about 0.6 M hints per
-     solver-second, untrimmed.
-   - Level 115 at 4-5 x 10^5 solver-seconds: **about 250-300 G hints untrimmed**. If trimming
-     halves it as on the window certificates, about 120-150 G.
-   - For comparison, 231 took 41.5 G and 230 about 80 G.
-   - Kernel cost at milestone 36's rate (about 0.23 ms per hint): roughly 8,000-20,000 Lean
-     CPU-hours.
-   - Cubes above about 100 s exceed the 60 M-hint cap of one certificate. They are split by
-     `split.py` into 60 s leaves (at most about 36 M hints each), and the cover lemma for a split
-     is a literal case split.
-   - Count: about 1,700 single cubes plus about 450 cubes split into, say, 10-50 leaves each:
-     **about 10^4 certificates**.
+The orbit cover works as follows.
 
-The bound 229 from this route would be independent of the K7 window machinery. It would cost
-roughly 2-4 times the 230 farm in Lean CPU, versus 1,000-4,000 G hints for 229 by the K7 share
-route (milestone 38). Each further level (227, 225, 223) is harder by a factor still being
-measured.
+- The copy-0 forest has >= 29 vertices. Flip coordinate 5 if needed, so that the low half is the
+  larger one; it then has >= 15 vertices.
+- By `c5Cnf` (UNSAT) the low half is one of the 54,604 raw Q5 forests. A stored word in B5 maps
+  it to one of the 35 representatives r5.
+- By `c6Cnf r5` (UNSAT) the copy is one of the listed extensions of r5. A stored word in B6 maps
+  it to one of the 2,161 representatives, whose size equals the copy size k.
+- The tables are checked by a Bool function (`chk`), so they are not trusted:
+  - each word consists of B_n generators;
+  - each entry maps its raw set exactly onto its representative;
+  - each representative is in `reps`.
+
+Still to produce (all finite):
+
+1. **Table checks.**
+   - `scripts/gentables.py` and `scripts/genlean_tables.py` write 122 data modules of 2,000
+     entries each into `lean/gen/`. They are not committed: 17 MB, regenerable from the
+     enumerators.
+   - Each chunk is checked by `decide +kernel`; a t6 chunk took 48 s.
+   - Then `t5.all chk = true` and `t6.all (...) = true` follow by concatenation.
+2. **36 cover certificates.** The cover CNFs are small (99 k-181 k clauses) and each solves in
+   under 30 s (`scripts/cover.py`, `data/cover_check.json`; same CNFs as the Lean definitions up
+   to counter numbering).
+3. **2,161 cube certificates at L = 116, `Unsat (cubeCnfC4 13 116 A |A|)`.**
+   - Measured on a 25 s cube: the LRAT core has 75.5 k of the 858 k input clauses and uses 54 k
+     distinct variables (maximum variable 1.03 M). The trimmed proof has 1.88 M hints.
+   - The repository's replay (`gen_lean_lrat.py`, LratFast2F up to 17-bit words) replays a
+     core. To use it, three pieces are needed:
+     - variable compaction plus a renaming lemma (injective renaming preserves
+       unsatisfiability);
+     - a check that each core clause is the clause of the stated index in `cubeCnfC4`: one
+       ordered walk over the generated list;
+     - the per-certificate `Unsat (core)`.
+   - No new checker kind is needed, but this integration is new glue.
+   - Cubes over ~780 s exceed the 60 M-hint cap and are split into literal-cube leaves
+     (`split.py`), each a separate certificate with a literal case-split cover.
+
+| item | count | size | Lean cost (at 0.23 ms per hint) |
+|---|---|---|---|
+| table chunks | 122 | 2,000 entries each | ~1.5 CPU-h of kernel time |
+| cover certificates | 36 | < 30 s solves, a few M hints each | < 100 CPU-h |
+| cube certificates, size-29/30 | 2,137 | ~77 k hints per solver-second, ~35 G in all | ~2,200 CPU-h |
+| size-31/32 cubes | 24 | unmeasured tail, split into leaves, ~10-20 G | ~1,000 CPU-h |
 
 ## 5. The owner's questions 2(a) and 2(b) (moved to milestone 41 by the coordinator)
 
@@ -246,17 +268,22 @@ These were measured before the scope change:
 | `data/q7_c8_L57_cubes.jsonl` | the Q7 plateau run |
 | `data/q8_c13_L116_sample.jsonl`, `data/q8_sample_reps.txt` | the Q8 level-115 sample |
 
-## Worker command (level 115, for farm machines)
+## Worker command (level 116 = bound 229, for farm machines)
 
-On a machine with CaDiCaL 2.1.3 on PATH and `pip install python-sat`, in a checkout of this
-branch:
+On a machine with Lean 4.35 at `/opt/lean-4.35.0-linux` and CaDiCaL 2.1.3 on PATH, in a checkout
+of this branch:
 
 ```bash
-cd milestones/39-dim8-lift/scripts
-SHARD=$S/$N DIMACS_EXTRA=--allmax nohup python3 cubes.py 8 13 116 6 ../data/q6_29.txt ~/q8L116 20000 4 > ~/q8L116.log 2>&1 &
+cd milestones/39-dim8-lift && bash lean/build.sh >/dev/null    # builds lean/build/CubeCnf.olean (~3 min)
+cd scripts
+SKIP=../data/q8_L116_c4_results.jsonl SHARD=$S/$N GEN=lean ORDER=small \
+  nohup python3 cubes.py 8 13 116 6 ../data/q6_29.txt ~/q8L116 20000 4 > ~/q8L116.log 2>&1 &
 ```
 
-- Here S = 0..N-1 is the worker's share.
-- Results go to `~/q8L116/results.jsonl`, one JSON line per representative.
-- Representatives are processed largest first; the run is resumable.
+- S = 0..N-1 is the worker's share.
+- `SKIP` drops the cubes already UNSAT in the committed results.
+- `GEN=lean` solves the Lean-exported `cubeCnfC4`, i.e. exactly the CNF that the certificates
+  refer to.
+- Results go to `~/q8L116/results.jsonl`; the run is resumable.
 - Memory is about 0.5 GB per job.
+- The 24 size-31/32 cubes should go to `split.py` instead (60-300 s leaves).
