@@ -77,3 +77,22 @@ alive while the turn is ended (tested by the efficiency session). So:
 4. On every wake (task finished, or the check-in): if the job died, redo the
    setup block and the same LAUNCH line; then repeat steps 1-3. No other
    commands, no text.
+
+## Stealer to main-plan helper conversion (19 Nov 14:20 UTC)
+
+The split backlog is nearly drained (97 of 109 items published, the rest
+claimed), so the repository owner's plan is to move split stealers to the
+main plan. The coordinating session tells each stealer its helper index J
+(J = 20 + K). When told to convert:
+
+1. `touch ~/l435/prod/STOP_SPLIT` (the stealer finishes its running units
+   and exits).
+2. Wait until `pgrep -f "c230split.py --steal"` is empty, with tracked
+   background waits as in "Cheap keep-alive", ending the turn between waits.
+3. `rm -f ~/l435/prod/STOP_SPLIT`, then with the four exports of the setup
+   block (`C230_PLAN` = `c230plan.json.gz`):
+   `nohup python3 lean435/tools/prod435.py run --steal --plan $C230_PLAN --index J --hours 48 --max-plan-hints 2e7 > ~/c230_hJ.log 2>&1 &`
+4. Continue the cheap keep-alive with PGREP `prod435.py run --steal` and
+   LOGFILE `~/c230_hJ.log`.
+
+Stealers K1-K4 stay on split work until all 109 items are published.
