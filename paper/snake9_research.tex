@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 242, 19 November 2026}
+\date{Research state after round 243, 19 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -77,6 +77,9 @@ counts, and an explicit pair attains eight. Thus any 505 of 512 counts
 determine the selection. The universal bound has a written proof and the
 explicit witness passed Lean checking. Under the saved finite exclusions,
 a 192-edge candidate must differ from each seed in at least 21 counts.
+Direct searches from a published 192-vertex coil also exclude retaining
+a 121-vertex arc or exchanging at most one vertex of the prospective
+minority class, with the opposite class free in the latter search.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -9805,6 +9808,54 @@ change on disjoint sides.
 \end{proof}
 Attainability at 21 and the existence of a 192-edge snake remain open.
 
+\subsection{Opening a record coil to seek a longer path}
+\label{sec:coilopening243}
+The published $Q_9$ coil has 192 vertices. Deleting one gives a
+190-edge path. We retained a consecutive arc and searched for
+continuations at both ends with 193 vertices in total. The first
+vertex at each end may meet its attachment vertex only. Subsequent
+vertices avoid the closed neighbourhood of the retained arc and all
+earlier nonconsecutive contacts, including contacts between the tails.
+Vertices of the omitted part of the coil may occur in the new tails.
+The identity and a verified half-turn put the 192 starts into 96 pairs.
+
+With 160 vertices retained, the complete two-ended enumeration
+exhausted 2,946,409 nodes over all 96 representatives. It reached
+191 edges. A separate enumeration of that length produced 1,030
+placements over the representatives, giving 49 isometry classes up to
+reversal. All 49 belong to the saved bank. At 148 retained vertices
+71 representatives were exhausted, while 25 reached their node limit.
+A simultaneous degree-and-cardinality model returned a native
+contradiction for each of those 25. It leaves both ends free and
+uses cycle cuts when a degree-feasible assignment is disconnected.
+Any connected candidate must pass the full cube adjacency check.
+
+An excluded arc excludes every longer arc containing it. At 112
+vertices, native solver runs excluded 57 representatives and left 39
+unfinished. The exclusions already cover 158 of the 192 starts at
+length 128. All 17 remaining representative queries were infeasible.
+Thus a 192-edge snake cannot contain a 128-vertex arc of this coil.
+At length 120 the shorter-arc exclusions cover 142 starts. Of the
+other 25 representatives, 23 were excluded. Only starts 86, 88, 182
+and 184 remain unresolved in the authors' vertex ordering, starting at
+zero. These starts are pairwise nonconsecutive, and any 121-vertex arc
+contains two adjacent 120-vertex subarcs. Thus retaining even 121
+consecutive vertices of this coil is impossible for a 192-edge snake.
+The geometric deductions are written and the finite contradictions are
+native. They transport to cube-isometric copies~\cite{coilopening243}.
+
+We also freed the arc and path order entirely. On each parity side
+the coil has 96 vertices. Using this set or replacing exactly one
+vertex gives $1+96\cdot160=15361$ proposed minority classes on each
+side. All 30,722 were excluded by the contraction criterion of
+Section~\ref{sec:minority232}. There were 22,234 isolated-vertex
+cases, 8,458 leaf obstructions, six cases with too few eligible ends
+and 19 contradictions from forcing degree two in the graph augmented
+by a dummy endpoint vertex. Native circuit decisions settled the five
+remaining cases. The majority class, endpoints and ordering were free.
+Thus at least two minority vertices must be replaced relative to this
+coil for a 192-edge path. The general maximum remains open.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -13678,6 +13729,11 @@ on the Hamming graphs with spectral constraints}, Section~3.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Direct 192-edge construction
 from the closest eight-count changes}. Research milestone 242, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/242-seed-trade-construction}.
+
+\bibitem{coilopening243}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Opening the 192-vertex coil
+in nine dimensions}. Research milestone 243, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/243-coil-opening}.
 
 \end{thebibliography}
 \end{document}

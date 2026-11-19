@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 242}
+\date{Research state after round 243}
 \begin{document}
 \maketitle
 
@@ -1055,6 +1055,29 @@ change relative to each saved seed to 21. The 56,406 exclusions and
 the placement census are native calculations. The two count exclusions
 have written proofs~\cite{research242}.
 
+\section{Can the published coil be opened into a longer path?}
+The published nine-dimensional coil is an induced cycle on 192
+vertices. Deleting one vertex leaves a 190-edge path. We kept a
+consecutive arc and allowed both ends to grow, including through
+vertices from the omitted section. The target was a path on
+193 vertices with no repeated vertices or chords.
+
+Keeping 160 vertices allowed 191 edges. The 49 different shapes
+of that length all occur in the saved bank. Shorter arcs give
+the two tails more freedom. Complete searches and native solver
+exclusions establish that a 192-edge path cannot retain a
+121-vertex arc of this coil. At 120 vertices only four starting
+positions remain unresolved. No two are consecutive around the cycle,
+which rules out every arc with 121 vertices.
+
+A second search allowed arbitrary order and arbitrary choice of all
+97 majority vertices. We kept the coil's 96-vertex class on one
+side, or replaced a single member by any other vertex of that parity.
+All 30,722 classes across both parities were excluded. Thus a
+192-edge path must change at least two of these minority vertices.
+These are restrictions on openings of the specified coil and its
+isometric copies~\cite{coilopening243}.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
@@ -1068,15 +1091,15 @@ source-specific requirement of seven changed histories.
 The maintained global interval is $191\le a(9)\le231$, with an
 independent rebuild of the completed upper-bound assembly pending.
 Resolving the proposed value 196 still requires both its witness and
-a universal 197-edge exclusion. A different construction starts from
-the published 192-vertex coil, retains a consecutive arc and grows a
-path at both ends of that arc.
+a universal 197-edge exclusion. Constructions can change several
+separated pieces of the coil, permitting both parity classes and the
+path order to change. The unrestricted 192-edge question remains open.
 The universal seven-erasure proof still awaits Lean verification.
 Full written-source review was completed at round 240 and is next due at 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 242.
+in the companion manuscript and milestones through round 243.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1231,6 +1254,11 @@ neighbour-count profiles in the nine-cube}. Research milestone 241,
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Direct 192-edge construction
 from the closest eight-count changes}. Research milestone 242, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/242-seed-trade-construction}.
+
+\bibitem{coilopening243}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Opening the 192-vertex coil
+in nine dimensions}. Research milestone 243, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/243-coil-opening}.
 
 \end{thebibliography}
 \end{document}
