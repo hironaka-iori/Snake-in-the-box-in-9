@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 245}
+\date{Research state after round 246}
 \begin{document}
 \maketitle
 
@@ -1110,6 +1110,41 @@ cases some reconnection reached 191 edges. None reached 192. Thus
 any 192-edge target must omit at least two vertices from each recorded
 190-edge parent and introduce at least four new ones~\cite{free245}.
 
+\section{Which eight-dimensional paths fit together?}
+The maximum in eight dimensions is 98 edges. The particular optimal
+path we studied has no legal extension at either end. The five
+96-edge shapes that appear as arms of known 191-edge snakes also have
+no legal endpoint extension. Each is therefore maximal despite falling
+two edges short of the eight-dimensional maximum. For comparison,
+cutting two end vertices off the displayed 98-edge path produces
+96-edge paths that grow back to 98.
+
+Choose a coordinate that the path crosses as few times as possible.
+The displayed 98-edge path crosses it four times, leaving five
+pieces. Each of the five 96-edge shapes crosses a coordinate only
+twice, leaving three pieces. In every case the middle piece is the
+same 47-edge path in seven dimensions, up to cube symmetry.
+The two outer pieces have lengths 31 and 16, or 25 and 22.
+
+In nine dimensions, a 96-edge arm and a 94-edge arm can lie in
+opposite eight-dimensional faces. When they meet in projection only at
+their common endpoint, one crossing produces $96+1+94=191$ edges.
+For the displayed 98-edge path, the one-crossing partner has at most
+92 edges. Each of the five shorter arms therefore admits a longer
+partner than the displayed optimum does.
+Twenty of the 25 recorded joins contain the same \emph{pair} of
+47-edge pieces, in the same relative positions up to symmetry. Their
+four outer pieces contribute 92 edges. Increasing this total to 93
+while maintaining the required contacts would give 192 edges.
+With the two middles in their recorded positions and all four outer
+pieces free, the exact ceiling is 191. The possible crossing vertices
+reduce to 18 cases by symmetry. Each has 21 ordered arm-length pairs
+that could reach or exceed 192. All 378 cases were excluded. A longer
+path must change at least one middle, their relative placement, or the
+crossing pattern. In a separate search over 3,128 pairs of complete
+arms, two of the closest placements closed into the published
+192-vertex cycle~\cite{q8parents246}.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
@@ -1131,7 +1166,7 @@ Full written-source review was completed at round 240 and is next due at 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 245.
+in the companion manuscript and milestones through round 246.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1301,6 +1336,11 @@ from published 190-edge paths}. Research milestone 244, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Reconstruction from 190-edge
 parents with both endpoints free}. Research milestone 245, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/245-free-endpoint-reconstruction}.
+
+\bibitem{q8parents246}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Comparing eight-dimensional
+parents and their nine-dimensional joins}. Research milestone 246, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/246-eight-dimensional-parents}.
 
 \end{thebibliography}
 \end{document}

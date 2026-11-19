@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 245, 19 November 2026}
+\date{Research state after round 246, 19 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -83,6 +83,10 @@ minority class, with the opposite class free in the latter search.
 Relative to each of 1,042 published 190-edge parents, a 192-edge path
 must omit at least two parent vertices. If the endpoint parity is
 unchanged, it must omit a vertex of each parity.
+Twenty known 191-edge paths with one crossing have the same relative
+placement of two 47-edge paths in the seven-cube. The maximum is
+exactly 191 with these middle paths and the specified crossing pattern,
+even when all four outer paths vary.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -9956,6 +9960,134 @@ Cube isometries preserve this conclusion. The enumeration makes no
 assumption about the endpoints or the order of the two blocks in
 the target. Longer-range changes remain open~\cite{free245}.
 
+\subsection{The 98-edge path, the 96-edge arms, and their lifts}\label{sec:q8parents246}
+The displayed optimal $Q_8$ path and the five 96-edge arm classes in
+the 25 one-crossing examples are all blocked at both ends. No one of
+these 96-edge arms can occur as a contiguous piece of a longer induced
+path in $Q_8$, since such a path supplies a legal first endpoint
+addition. By contrast, each of the three 96-edge windows of the
+displayed 98-edge path extends back to 98. The latter path uses every
+coordinate at least four times. Each of the five 96-edge arms has a
+coordinate used exactly twice. The endpoint distances of the five
+arms are $2,2,2,4,2$ in bank-class order $0,3,4,5,8$. The displayed
+98-edge path has endpoint distance four. All distances count
+coordinates on which the endpoints differ.
+
+Cutting a 96-edge arm in its twice-used coordinate produces either
+\[
+ 31+47+16+2=96 \qquad\text{or}\qquad 25+47+22+2=96.
+\]
+The 47-edge middle is the same induced $Q_7$ path up to translation,
+coordinate permutation and reversal in all five classes. It also occurs
+in four of the five 94-edge partner classes and in the 95-edge middle
+arm of 84 saved two-crossing examples. In the one-crossing family,
+each of the five 96-edge shapes pairs with each of the five 94-edge
+shapes, accounting for the 25 recorded paths~\cite{q8parents246}.
+Consequently each of these five 96-edge paths has a compatible partner
+of at least 94 edges. Proposition~\ref{prop:parent191} bounds every
+partner of the displayed 98-edge path by 92. The shorter paths
+therefore admit strictly longer partners in a one-crossing lift.
+By comparison, the least-used coordinate of the displayed 98-edge
+path gives five pieces of lengths $8,25,10,25,26$ and four crossings.
+
+In 20 of the 25 examples both arms use the same twice-crossed
+coordinate. Write the nine-cube coordinates as $(u,y,x)$ with
+$u\in Q_7$, where $x$ is the one-crossing coordinate and $y$ is
+the common twice-crossed coordinate within each arm. The two 47-edge
+paths appear in $y=1$, one at each value of $x$. All 20 have the
+\emph{same relative placement}: one cube isometry of $Q_7$ takes
+both paths to a single recorded pair, allowing traversal reversal.
+This is stronger than identifying their shapes separately. On the
+reference pair, the coordinate permutation $(0\ 3)(2\ 4)$ followed
+by XOR with 22 exchanges the two middle paths. It is an involution
+without a fixed vertex, as its displacement in coordinate 1 is always
+one. The four remaining pieces lie in $y=0$. Their combined edge
+length is 92. With four $y$-crossings and one $x$-crossing, a
+192-edge path in this arrangement requires their lengths to sum to 93.
+This requirement permits all four pieces to change.
+
+Recombining the outer paths extracted from the donor data, including
+one possible new terminal step on each path, gives 198 labelled
+eight-dimensional arms of lengths 92 through 96 on the reference
+middle. Checking all compatible pairs of those arms on the five labelled
+placements recovered 191. For a separate search, every contiguous
+93- through 98-edge single-face path of every coordinate cut of
+the 1,042 saved 190-edge and 131 saved 191-edge paths was extracted,
+together with the corresponding windows of the displayed 98-edge
+path. Closing under endpoint additions through length 98 gave 903
+shapes up to isometry and reversal. A 192-edge join using one crossing
+requires the arm lengths to be $(98,93),(97,94)$ or $(96,95)$.
+Among the 3,128 pairs of these sizes, all $504\,483\,840$ relative
+placements of chosen endpoints and coordinate permutations have
+an extra projected common vertex. Exactly five pairs attain a single
+extra vertex, each in one placement. The resulting 193-vertex walks
+have precisely one chord. Two close a 192-cycle isometric to the
+published coil of Round~243. The other three close cycles of lengths
+180, 186 and 186. None of these joins is a 192-edge snake.
+
+One can also change the assignment to the two arms completely while
+keeping the crossing at the origin. The projected union of each
+96-and-94 pair has 191 vertices. A target that retains them must
+add one odd vertex because its two arm lengths sum to 191.
+Of the 33 unused odd vertices, six would give a third occupied
+neighbour of the root. This leaves 27 possible additions per pair.
+For the projected graph $G$ off the root, colour vertices by their
+arm signs $c_v\in\{-1,1\}$, and write $a_v$ for adjacency to the
+root. If the two outer endpoints are $p,q$ with signs $+1,-1$,
+the required degrees imply
+\[
+ \bigl(A_G+\operatorname{diag}(\deg_G(v)+2a_v-4)\bigr)c
+       =-2(e_p-e_q).
+\]
+Indeed the degree within an arm equals
+$(\deg_G(v)+c_v(A_Gc)_v)/2+a_v$. The two signs are distinct
+nonzero residues modulo three. Exact elimination and enumeration
+of the remaining sign choices, with a direct induced-path check
+where needed, excluded every endpoint pair for all 660 distinct
+enlarged sets. These finite computations and the cut identifications
+are native results~\cite{q8parents246}.
+
+\begin{proposition}[Ceiling for the pair of 47-edge middles]
+Fix the relative placement of the two middle paths above, up to cube
+isometry. Require an induced path with one $x$-crossing, the two
+displayed middles in $y=1$, and a $y$-crossing at each of their four
+endpoints. Allow arbitrary outer paths in $y=0$. The largest length
+in this family is 191, under the finite certificate computation below.
+\end{proposition}
+\begin{proof}
+The reconstructed 191-edge join attains the bound. Write $a,b$ for
+the lengths of its two prospective eight-dimensional arms in a general
+member. Both are at most 98. A counterexample thus has $a+b\ge191$,
+giving 21 ordered pairs with $93\le a,b\le98$. This covers every
+length from 192 to 197 directly. The $x$-crossing projects to a
+vertex $q\in Q_7$ outside the interiors of both middles, leaving
+$128-2\cdot46=36$ choices. The involution above exchanges the
+$x$-faces and pairs these sites without fixing one. It interchanges
+the two arm lengths, so all 21 ordered pairs are needed at each of
+18 representative sites.
+
+For an arm of length $a$, exactly $a-47$ vertices lie in $y=0$.
+Indeed the arm has $a+1$ vertices and its fixed middle has 48.
+The middle is balanced by parity, so an odd outer count has one
+extra vertex of the parity of $q$, measured in $Q_7$. The other
+arm obeys the corresponding rule with $b$. The lower copy of every
+middle endpoint is selected, as are both copies of $q$.
+Opposite $x$-copies may both be selected only at $q$.
+Each arm has one outer endpoint of its required parity. In the full
+cube its selected degree is one there and two at every other selected
+vertex. All constraints follow from the definition of an induced path.
+A selected square or six-cycle is forbidden, as is any other identified
+cycle whose vertices would retain every edge of that cycle.
+
+The 378 Boolean formulas for these crossing and length choices were
+infeasible. Their input hashes and LRAT refutations are archived.
+An independent checker rebuilt each formula and replayed every
+refutation to the empty clause.
+The witness of length 191 was checked on all $\binom{192}{2}=18\,336$
+pairs. The encoding deduction is written and the finite verification
+is native~\cite{q8parents246}.
+\end{proof}
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -13844,6 +13976,11 @@ from published 190-edge paths}. Research milestone 244, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Reconstruction from 190-edge
 parents with both endpoints free}. Research milestone 245, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/245-free-endpoint-reconstruction}.
+
+\bibitem{q8parents246}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Comparing eight-dimensional
+parents and their nine-dimensional joins}. Research milestone 246, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/246-eight-dimensional-parents}.
 
 \end{thebibliography}
 \end{document}
