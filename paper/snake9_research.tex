@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 244, 19 November 2026}
+\date{Research state after round 245, 19 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -80,6 +80,9 @@ a 192-edge candidate must differ from each seed in at least 21 counts.
 Direct searches from a published 192-vertex coil also exclude retaining
 a 121-vertex arc or exchanging at most one vertex of the prospective
 minority class, with the opposite class free in the latter search.
+Relative to each of 1,042 published 190-edge parents, a 192-edge path
+must omit at least two parent vertices. If the endpoint parity is
+unchanged, it must omit a vertex of each parity.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -9895,6 +9898,64 @@ Every one of the 123840 graphs has a vertex of degree below its
 required degree (one at an endpoint and two elsewhere). This excludes
 every such reconstruction even with all minority vertices free.
 
+\subsection{Reconstruction with both endpoints free}\label{sec:free245}
+Fix a 190-edge parent in the collection of Section~\ref{sec:parents244}.
+When a 192-edge target has endpoints of the same parity as the parent's
+endpoints, the two class sizes increase from 96 and 95 to 97 and 96,
+respectively. If the target retains either class in full, its new
+class on that side consists of the parent class and one additional
+vertex. We allow any choice on the opposite side and any traversal order.
+
+For a fixed enlarged class $S$, join $u,v\in S$ if some opposite-parity
+vertex has exactly $\{u,v\}$ as its neighbours in $S$. If $|S|=97$,
+we need a Hamiltonian path in this graph. If $|S|=96$, each end of the
+Hamiltonian path must also have a label whose only neighbour in $S$
+is that end. These conditions are sufficient. Every traversed pair has
+its own label, the two singleton labels have distinct neighbours, and
+interleaving the chosen labels gives exactly the adjacencies of a path
+in $Q_9$. Adding a dummy vertex adjacent to the eligible endpoints
+reduces both decisions to the existence of a Hamiltonian cycle.
+
+The 588 distinct old 96-sets admit $588\cdot160=94\,080$ additions,
+and the 581 old 95-sets admit $581\cdot161=93\,541$. Identifying equal
+enlarged classes gives 93,603 and 93,117 distinct vertex sets,
+respectively. All are excluded. Sixty were first decided by a native
+solver. An independent graph construction and 60 saved exclusion
+trees verify these cases by requiring degree two at every vertex,
+forbidding disconnected solutions and branching on undecided edges.
+Together the trees have 270 branch positions and 330 terminal
+contradictions~\cite{free245}.
+
+Consequently a 192-edge target with the same endpoint parity omits
+at least one vertex of \emph{each} parent class. On each side the
+indicator sum grows by one. The rank-nine moment identity gives at
+least nine changed neighbour counts. Equality forces a single
+addition, and ten is impossible by the growing-side argument of
+Round~242. Each side therefore changes at least eleven counts. The
+two supports are disjoint, giving at least 22 changed labelled
+counts. With the opposite endpoint parity the lower bound from
+Section~\ref{sec:parents244} is 20.
+
+An independent direct enumeration covers both endpoint parities.
+Suppose the target omits exactly one of a parent's 191 vertices.
+Deleting it leaves one or two path components. Each component occurs
+as a consecutive block in any induced completion because all its
+existing edges persist. Three new vertices are available. For two
+components, enumerate both orientations of each, up to reversal of
+the whole path, and all bridges using one to three new vertices.
+The remaining new vertices extend the two outer ends. For one component
+all three extend its ends. At each insertion we check its neighbours
+among the vertices already retained. Among $1\,042\cdot191=199\,022$
+deletions, 3,519 admit a 191-edge completion and none admits 192.
+Keeping the entire parent was excluded by the two-step enumeration.
+Thus for each recorded parent $P$ and any 192-edge target $T$,
+\[
+ |P\cap T|\le189,\qquad |P\setminus T|\ge2,\qquad |T\setminus P|\ge4.
+\]
+Cube isometries preserve this conclusion. The enumeration makes no
+assumption about the endpoints or the order of the two blocks in
+the target. Longer-range changes remain open~\cite{free245}.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -13778,6 +13839,11 @@ in nine dimensions}. Research milestone 243, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Reconstructing a 192-edge path
 from published 190-edge paths}. Research milestone 244, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/244-190-path-construction}.
+
+\bibitem{free245}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Reconstruction from 190-edge
+parents with both endpoints free}. Research milestone 245, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/245-free-endpoint-reconstruction}.
 
 \end{thebibliography}
 \end{document}
