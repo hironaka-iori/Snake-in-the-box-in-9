@@ -24,6 +24,7 @@ def negLit (l : Int) : Int := -l
 
 /-- Sinz clauses for `at most k` (k ≥ 1) of `xs`, registers from `base`. -/
 def atMost (base k : Nat) (xs : List Int) : List (List Int) :=
+  if xs = [] then [] else
   let n := xs.length
   let x := fun i => xs.getD (i - 1) 0
   ([negLit (x 1), pos (reg base k 1 1)] :: (List.range (k - 1)).map (fun j => [neg (reg base k 1 (j + 2))])) ++
@@ -64,7 +65,7 @@ theorem cl_mono (τ : Nat → Bool) (xs : List Int) {i i' : Nat} (h : i ≤ i') 
 
 theorem cl_zero (τ : Nat → Bool) (xs : List Int) : cl τ xs 0 = 0 := by simp [cl]
 
-theorem atMost_sound (τ : Nat → Bool) (base k : Nat) (xs : List Int) (hk : 1 ≤ k) (hb : 1 ≤ base) (hn : 1 ≤ xs.length)
+theorem atMost_sound (τ : Nat → Bool) (base k : Nat) (xs : List Int) (hk : 1 ≤ k) (hb : 1 ≤ base)
     (hlits : ∀ l ∈ xs, l ≠ 0)
     (hR : ∀ i j, 1 ≤ i → i ≤ xs.length → 1 ≤ j → j ≤ k → τ (reg base k i j) = decide (j ≤ cl τ xs i))
     (hbound : cl τ xs xs.length ≤ k) :
@@ -82,6 +83,13 @@ theorem atMost_sound (τ : Nat → Bool) (base k : Nat) (xs : List Int) (hk : 1 
   have hrp : ∀ i j, 0 < reg base k i j := by intro i j; unfold reg; omega
   intro c hc
   unfold atMost at hc
+  split at hc
+  · simp at hc
+  rename_i hne
+  have hn : 1 ≤ xs.length := by
+    cases xs with
+    | nil => exact absurd rfl hne
+    | cons _ _ => simp
   simp only [List.mem_append, List.mem_cons, List.mem_map, List.mem_range, List.mem_flatMap] at hc
   rcases hc with (hc | ⟨j0, hj0, rfl⟩) | ⟨i0, hi0, hc⟩
   · -- [¬x1, R(1,1)]
