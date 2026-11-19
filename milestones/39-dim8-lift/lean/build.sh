@@ -9,6 +9,6 @@ mkdir -p build gen
 cp ../../../work/final_lean/LocalWindowModel.lean gen/
 sed 's/rw \[Option.mem_toList, Option.mem_def, Option.some.injEq\] at hy/simp only [Option.mem_toList, Option.mem_def, Option.some.injEq] at hy/' \
   ../../../work/final_lean/LratV3.lean > gen/LratV3.lean
-for m in gen/LocalWindowModel gen/LratV3 Snake9Core Sums Bits Premise Lift1 Lift2 Lift3 Lift4 Lift5 Dim8Lift ${EXTRA:-}; do
+for m in gen/LocalWindowModel gen/LratV3 Snake9Core Sums Bits Premise Lift1 Lift2 Lift3 Lift4 Lift5 Dim8Lift Counter CubeCnf CubeBridge1 CubeBridge2 CubeBridge3 CubeBridge4 CubeBridge5 ${EXTRA:-}; do
   b=$(basename $m); echo "== $b"; LEAN_PATH=build $L -o build/$b.olean $m.lean 2>&1 | grep -E "error|axioms" || true
 done

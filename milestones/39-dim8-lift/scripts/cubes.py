@@ -30,8 +30,15 @@ def run(i):
     sz, p, A = R[i]
     af = os.path.join(out, 'A%d.json' % i); json.dump(A, open(af, 'w'))
     cnf = os.path.join(out, 'c%d.cnf' % i)
-    subprocess.run(['python3', os.path.join(HERE, 'dimacs29.py'), str(n), str(c), str(L), cnf, '--nosym', '--fix', str(k), af] + os.environ.get('DIMACS_EXTRA', '').split(),
-                   check=True, capture_output=True)
+    if os.environ.get('GEN') == 'lean':
+        # the Lean-defined CNF Dim8Lift.Cube.cubeCnfC4 13 L A |A| (the one the certificates refer to)
+        mask = '%016x' % sum(1 << u for u in A)
+        lean = os.path.join(HERE, '..', 'lean')
+        subprocess.run(['/opt/lean-4.35.0-linux/bin/lean', '--run', 'Export.lean', str(c), str(L), mask, str(sz), cnf, 'c4'],
+                       check=True, capture_output=True, cwd=lean, env=dict(os.environ, LEAN_PATH=os.path.join(lean, 'build')))
+    else:
+        subprocess.run(['python3', os.path.join(HERE, 'dimacs29.py'), str(n), str(c), str(L), cnf, '--nosym', '--fix', str(k), af] + os.environ.get('DIMACS_EXTRA', '').split(),
+                       check=True, capture_output=True)
     t = time.time()
     try:
         r = subprocess.run(['cadical', '-q', '-t', str(tmo), cnf], capture_output=True, text=True)
@@ -48,7 +55,7 @@ shard = os.environ.get('SHARD')          # 's/N': only indices with idx % N == s
 todo = list(range(0, len(R), stride))
 if shard:
     s_, N_ = map(int, shard.split('/')); todo = [x for x in todo if x % N_ == s_]
-# hardest first (larger fixed copies take longer), so stragglers do not end the run
-todo.sort(key=lambda x: -R[x][0])
+# ORDER=small: smallest fixed copies first (default: largest first)
+todo.sort(key=lambda x: (R[x][0], x) if os.environ.get('ORDER') == 'small' else (-R[x][0], x))
 with ThreadPoolExecutor(jobs) as ex:
     list(ex.map(run, todo))
