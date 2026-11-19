@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 246}
+\date{Research state after round 247}
 \begin{document}
 \maketitle
 
@@ -1145,6 +1145,39 @@ crossing pattern. In a separate search over 3,128 pairs of complete
 arms, two of the closest placements closed into the published
 192-vertex cycle~\cite{q8parents246}.
 
+\section{Can a longer middle give a longer join?}
+
+The five 96-edge arms above share a 47-edge middle path \(P\) in
+\(Q_7\). The opposite middle must avoid all 48 vertices of \(P\),
+since a coinciding vertex would add a second edge between the two arms.
+There are \(7!\cdot128=645{,}120\) ways to place a congruent copy of
+\(P\). Exactly one avoids \(P\). It is the placement for which the
+previous section gives a maximum of 191.
+
+Changing the shape gives more freedom. Among the remaining 80 vertices
+of \(Q_7\), exactly five paths reach 48 edges, with reversal counted
+once, and none reaches 49. Each of the five can therefore gain one edge
+in the middle. There are 35 possible joining sites for each. Allowing
+all four outer pieces and both endpoints to vary at each of the 175 sites
+still excludes a total of 192 or more edges. The extra middle edge does
+not yield a longer snake in this construction. A different 47-edge
+shape, a shorter middle that leaves more space for the outer pieces,
+or a different crossing pattern remains possible~\cite{middle247}.
+There are exactly 1,108 disjoint 47-edge partners in the fixed labelling,
+including the unique congruent mate.
+Of these, four exchange just one vertex of the mate. All four were
+excluded at every possible joining site. None exchanges exactly two
+vertices. An improving 47-edge replacement must therefore change at
+least three of the mate's 48 vertices. A verified example using a
+48-edge partner reaches 179 edges. Its family's exact maximum is open.
+
+For one of the five 96-edge shapes, representative 8, the opposite
+eight-dimensional arm can also be left entirely free. At either endpoint
+it is impossible to attach a 95-edge arm across a single crossing. A
+longer arm would begin with 95 edges, and an explicit 94-edge partner
+is known. Thus 94 is its exact partner limit, giving \(96+1+94=191\)
+in nine dimensions.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
@@ -1166,7 +1199,7 @@ Full written-source review was completed at round 240 and is next due at 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 246.
+in the companion manuscript and milestones through round 247.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1341,6 +1374,11 @@ parents with both endpoints free}. Research milestone 245, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Comparing eight-dimensional
 parents and their nine-dimensional joins}. Research milestone 246, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/246-eight-dimensional-parents}.
+
+\bibitem{middle247}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Disjoint middle paths in a
+nine-dimensional crossing construction}. Research milestone 247, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/247-relative-middle-placements}.
 
 \end{thebibliography}
 \end{document}

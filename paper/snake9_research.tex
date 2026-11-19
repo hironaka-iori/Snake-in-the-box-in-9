@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 246, 19 November 2026}
+\date{Research state after round 247, 19 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -10088,6 +10088,88 @@ pairs. The encoding deduction is written and the finite verification
 is native~\cite{q8parents246}.
 \end{proof}
 
+\subsection{Disjoint partners for the common 47-edge middle}\label{sec:middle247}
+
+Let \(P\subset Q_7\) be the vertex set of the 47-edge middle of the five
+96-edge arms in Section~\ref{sec:q8parents246}. A single crossing between
+the two \(Q_8\) arms requires their upper middles to have disjoint
+projections. Fix \(P\) in its recorded coordinates. For an axis permutation
+\(\pi\), the translated copy \(t\oplus\pi(P)\) meets \(P\) exactly when
+\[
+ t\in\{u\oplus\pi(v):u,v\in P\}.
+\]
+Of the \(7!\) permutations, 5,039 give all 128 translations in this
+set. The remaining permutation exchanges axes \(0,3\) and \(2,4\).
+Its difference set omits only \(t=22\), with axis zero the least
+significant bit. Direct intersection counts over all \(645{,}120\) cube
+isometries give the same result. The unique disjoint copy is the mate in
+Section~\ref{sec:q8parents246}. Thus the maximum in the construction
+with two congruent copies of \(P\) is 191 even when their relative
+placement is free. These finite counts and the labelled paths are
+archived in milestone 247~\cite{middle247}.
+
+When the second middle may change shape, it is an induced path in the
+80-vertex graph \(Q_7\setminus P\). Its maximum length is 48. With the
+first path fixed, exactly five vertex sets attain that length. Two have
+25 even vertices and three have 25 odd vertices. To enumerate them, select
+49 vertices with the requisite colour counts, prescribe induced degrees
+one at two endpoints and two elsewhere, and exclude any disconnected
+cycle component. After removing each accepted path set, the corresponding
+parity case is exhausted. A separate balanced 50-vertex query excludes
+length 49. Every longer path would contain a 49-edge prefix. The labelled
+paths and the Boolean refutations are archived with the calculation.
+An independent enumeration from all 40 even starting vertices gives
+1,108 partners of length 47. Their endpoint distances are three in 691
+cases and five in 417. Extending both ends of these paths recovers the same
+five 48-edge paths, two of endpoint distance four and three of distance six.
+Every 48-edge path has two such trims, so retaining the extension that
+introduces its smaller endpoint counts it once.
+
+For each 48-edge partner, the two middles have 46 and 47 interior
+vertices, leaving \(128-46-47=35\) possible crossing sites in the lower
+face, including middle endpoints. Let \(a\) be the length of the arm
+starting at a crossing site \(q\). At parity \(p\) the arm must select
+\[
+ \left\lfloor (a+1)/2\right\rfloor+
+ \mathbf 1_{\{a\ {\rm even},\ \mathrm{wt}(q)\equiv p\pmod 2\}}
+\]
+vertices. A middle vertex \(v\) in the upper face contributes to parity
+\(\mathrm{wt}(v)+1\bmod 2\). Subtracting these fixed counts gives the
+required lower-face counts for either middle length. Lean checked this
+colour quota and the endpoint colour for an abstract alternating arm.
+The two arm lengths
+satisfy \(a,b\le98\). At each of the 175 sites we allowed all ordered
+pairs with \(a+b+1\ge192\), both endpoints and all four outer paths to
+vary. All 175 cases were excluded. In this crossing pattern, taking the
+longest possible partner for \(P\) thus gives a nine-dimensional snake of
+at most 191 edges. Attainment of this bound with a 48-edge partner is a
+separate question from its attainment with the congruent 47-edge mate.
+A mixed example with \(a=b=89\) gives 179 edges. Its 180 vertices
+passed all 16,110 pairwise adjacency checks. The verified interval for
+the maximum over the five mixed families is consequently \([179,191]\).
+
+The 47-edge census also permits a local comparison. Relative to the
+original congruent mate, four of the 1,108 paths replace exactly one
+vertex, none replaces exactly two and four replace exactly three.
+All 36 crossing sites for each one-vertex replacement were excluded
+at target 192 or above, with all four outer pieces free. These 144
+additional refutations were replayed independently. Thus a 47-edge
+partner producing an improvement in this construction must replace at
+least three vertices of the original mate. There are 1,103 disjoint
+47-edge partners left after this exclusion and the congruent case.
+
+There is also an exclusion that fixes a whole 96-edge parent and imposes
+no middle pattern on its partner. With a chosen joining endpoint
+translated to zero, a partner of length 95 needs 48 vertices of each
+parity and must avoid the other 96 vertices of the parent. Its next edge
+has seven possible directions. For representative 8 in the archived
+class numbering, both choices of joining endpoint were excluded. Any
+longer partner would have a rooted prefix of length 95. Since this parent
+already has a 94-edge partner, its longest partner is exactly 94 and its
+largest single-crossing join is exactly 191. Across the five parent
+classes, five of the ten labelled endpoints have checked exclusions,
+and 16 first-step cases at the remaining five endpoints are open.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -13981,6 +14063,11 @@ parents with both endpoints free}. Research milestone 245, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Comparing eight-dimensional
 parents and their nine-dimensional joins}. Research milestone 246, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/246-eight-dimensional-parents}.
+
+\bibitem{middle247}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Disjoint middle paths in a
+nine-dimensional crossing construction}. Research milestone 247, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/247-relative-middle-placements}.
 
 \end{thebibliography}
 \end{document}
