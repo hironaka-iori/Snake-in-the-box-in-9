@@ -50,6 +50,11 @@ def run(i):
     rec = dict(idx=i, size=sz, pieces=p, status=st, sec=round(time.time() - t, 1))
     with open(res, 'a') as f: f.write(json.dumps(rec) + '\n')
     print(rec, flush=True)
+# SKIP=f1,f2: results.jsonl files of other machines (e.g. the copy committed in data/); their ids are skipped
+for f in filter(None, os.environ.get('SKIP', '').split(',')):
+    for l in open(f):
+        r = json.loads(l)
+        if r.get('status') == 'UNSATISFIABLE': done.add(r['idx'])
 stride = int(os.environ.get('STRIDE', '1'))
 shard = os.environ.get('SHARD')          # 's/N': only indices with idx % N == s
 todo = list(range(0, len(R), stride))
