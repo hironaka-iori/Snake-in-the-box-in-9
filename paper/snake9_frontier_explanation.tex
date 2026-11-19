@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 240}
+\date{Research state after round 241}
 \begin{document}
 \maketitle
 
@@ -37,11 +37,11 @@ The counting argument supplies the upper bound. The construction arguments
 seek any improvement above 191, beginning with a 192-edge snake. Their
 restricted exclusions do not establish the global optimum.
 
-The current reconstruction argument recovers a binary selection from
-any 507 labelled neighbour counts. It also permits up to eight missing
-counts when no pair of missing positions is at distance eight. These
-are written cube deductions with checked arithmetic; the fully assembled
-Lean cube theorem currently covers three missing counts.
+A binary selection is uniquely determined by any 505 of its 512 labelled
+neighbour counts. This guarantee is sharp. Two explicit selections agree
+at the other 504 positions when eight particular counts are missing.
+The seven-erasure guarantee has a written proof. Lean checks the
+explicit counterexample and the earlier universal three-erasure result.
 
 \section{The square budget and the completed upper bound}
 For a nontrivial snake put $v=m+1$, and let $s_j$ count coordinate squares
@@ -896,9 +896,8 @@ on the missing positions is required by this argument.
 Eight is sharp under that condition. The nine neighbours of one vertex
 have pairwise distance two, yet losing all nine counts conceals whether
 that vertex is selected. The unrestricted result at this stage covers four missing counts;
-the following section extends it to five. Whether every set of six
-through eight missing counts can be tolerated remains unresolved. Any
-failure in that range must contain a pair at distance eight.
+the following section extends it to five. The sharp guarantee of seven
+is proved below. A failure at eight includes a distance-eight pair.
 
 The classification was also checked independently. Grouping the nine
 coordinate columns by their three-bit patterns gives 1149 valid
@@ -976,8 +975,8 @@ native computational support. The complete actual-cube Lean theorem
 still covers three missing counts.
 
 Two different selections must therefore change at least six neighbour
-counts. A single-vertex change alters nine, leaving the minimum between
-six and nine. A failure with six, seven, or eight missing counts would
+counts. A single-vertex change alters nine, giving the Round 240 interval
+from six to nine. A failure with six, seven, or eight missing counts would
 have to contain a pair at distance eight. This reconstruction result
 does not supply a longer snake or change the global length bound.
 
@@ -992,6 +991,47 @@ nonzero solution for that configuration whose count differences are
 bounded by nine. It explains why subsequent
 arguments should retain the count limit or use further inverse equations.
 
+\section{Why the sharp guarantee is seven missing counts}
+Two distinct selections must differ in at least eight neighbour counts.
+Any 505 labelled counts therefore determine the selection. If its
+parity side is known, any 249 counts on the opposite side suffice.
+
+The proof uses the sign of each coordinate, $x_j=(-1)^{p_j}$. Flipping
+each of the nine coordinates in turn gives a product of $r$ signs
+the eigenvalue $9-2r$. In particular, products of two signs give
+eigenvalue five. For a difference of count profiles supported at
+fewer than nine positions, its matrix of second moments modulo five
+is a scalar multiple of the nine-dimensional identity. Its rank is
+less than nine, so this matrix is zero. On one parity side, the signs
+$x_jx_9$ distinguish the positions. A nonzero weighting whose moments
+through degree two vanish modulo five needs at least eight positions,
+as follows by splitting on a varying sign. With at most seven positions,
+each count difference is therefore divisible by five. Its absolute
+value is at most nine, leaving only the two nonzero values $\pm5$.
+The weight-one and weight-three equations rule these out as well.
+The full argument applies to any arrangement of the missing counts.
+
+Equality has a direct example. Two selections of twenty odd vertices
+each give exactly the same counts at 504 vertices. Their count
+differences are $+3$ at $0,63,207,240$ and $-3$ at $15,48,192,255$.
+In particular, hiding those eight even vertices can prevent recovery
+even when the parity side is known. The explicit profile passed Lean
+checking and a separate count from the two vertex lists. The general
+lower bound is a written proof~\cite{research241}.
+
+The equality classification reduces the possible supports to six ways
+of dividing nine coordinates into four blocks. Exact integer calculations
+leave only the displayed $4,2,2,1$ pattern, up to cube symmetry and
+interchanging the selections. Every eight-count change therefore
+removes twenty vertices and adds twenty others on a single parity side.
+
+For a 192-edge candidate relative to a saved 191-edge seed, the parity
+class gaining one vertex changes at least ten counts on the opposite
+side. Exactly nine would force a single vertex addition, which the
+saved majority-class comparison excludes. The other class must also
+change and therefore affects at least eight further counts. This
+lower bound of 18 inherits the two finite saved-seed exclusions.
+
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
 The selected two-block family is excluded through width 46 for every
@@ -1005,18 +1045,15 @@ source-specific requirement of seven changed histories.
 The maintained global interval is $191\le a(9)\le231$, with an
 independent rebuild of the completed upper-bound assembly pending.
 Resolving the proposed value 196 still requires both its witness and
-a universal 197-edge exclusion. For reconstruction, the next unresolved
-sizes are six through eight missing counts. The structural note reduces
-each connected distance-eight component to generator coordinates in a
-smaller cube. A complete argument must retain actual count bounds and
-account for nonzero couplings between disconnected components. Completing
-the cube-level Lean assembly for four and five missing counts is also
-valuable. Full written-source review was completed in round 240.
-Research is paused after round 240.
+a universal 197-edge exclusion. For construction, the next question is
+whether a minimum eight-count change on the side of unchanged cardinality
+can respect the selected and unselected vertices of a saved seed.
+The universal seven-erasure proof still awaits Lean verification.
+Full written-source review was completed at round 240 and is next due at 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 240.
+in the companion manuscript and milestones through round 241.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1160,6 +1197,12 @@ I.~Hironaka, T.~Ma and S.~Zhan, \emph{Five-count recovery and structural
 limits of the antipodal matrix method}. Research milestone 240,
 18 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/240-five-count-recovery}.
+
+\bibitem{research241}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{The exact distance between
+neighbour-count profiles in the nine-cube}. Research milestone 241,
+19 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/241-exact-count-distance}.
 
 \end{thebibliography}
 \end{document}

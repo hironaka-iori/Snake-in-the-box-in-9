@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 240, 18 November 2026}
+\date{Research state after round 241, 19 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -72,10 +72,11 @@ Complete covers through three replacements of a minority class and a
 majority-exchange cover show that any 192-edge snake shares at most 186
 vertices with each saved
 191-edge seed, under the stated finite and native evidence.
-Neighbour-count reconstruction tolerates five arbitrary missing
-observations, and eight when no missing pair has Hamming distance eight.
-The geometric deductions, their checked arithmetic, and the remaining
-proof-assistant assembly are identified separately.
+Two distinct binary selections differ in at least eight labelled neighbour
+counts, and an explicit pair attains eight. Thus any 505 of 512 counts
+determine the selection. The universal bound has a written proof and the
+explicit witness passed Lean checking. Under the saved finite exclusions,
+a 192-edge candidate must differ from each seed in at least 18 counts.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -9530,7 +9531,7 @@ the actual cube still covers three missing counts.
 
 Consequently two different binary selections must change at least six
 neighbour counts. Changing one selected vertex changes exactly nine
-counts, so the minimum lies between six and nine. A possible failure
+counts, giving the Round 240 interval from six to nine. A possible failure
 with six through eight missing counts must contain a distance-eight
 pair, by Proposition~\ref{prop:eight-erasure239}. These are constraints
 on reconstruction of vertex selections. They produce neither a longer
@@ -9568,7 +9569,8 @@ It therefore excludes this configuration under $|w_i|\le9$.
 It also excludes entire-support distance-eight stars of at most eight
 positions. These classifications remain written proofs; the checked
 explicit matrix witness has the narrower scope stated above.
-General six-, seven- and eight-position recovery remains unresolved.
+At Round 240 the general six-, seven- and eight-position cases were open.
+Section~\ref{sec:exact-count241} resolves all three.
 Any failure in that range is supported on one parity side: if both
 parity restrictions of $f$ were nonzero, Proposition~\ref{prop:five-erasure240}
 would force at least six changed counts on each of the two disjoint
@@ -9576,6 +9578,149 @@ opposite sides, giving at least twelve in total.
 Disconnected distance-eight components retain nonzero even matrix
 entries between them, so a connected-component argument alone does
 not settle the question~\cite{research240}.
+
+\subsection{The exact number of count changes}\label{sec:exact-count241}
+\begin{theorem}\label{thm:count-distance241}
+Two distinct binary selections of $Q_9$ differ in at least eight
+labelled neighbour counts. Equality occurs for two sets of twenty odd
+vertices. Thus any 505 of the 512 counts determine a selection, and
+some 504 counts fail. On a known parity side the corresponding sharp
+guarantee is 249 of the 256 opposite-side counts.
+\end{theorem}
+\begin{proof}
+Let $f$ be the difference of the indicators and $w=Af$. The two parity
+restrictions of $f$ contribute to disjoint sides of $w$. Take a nonzero
+restriction, still denoted $f$. For a cube vertex $p$ write
+$x_j=(-1)^{p_j}$ and $\chi_I(p)=\prod_{j\in I}x_j$. Summing over
+coordinate flips and using symmetry of adjacency gives
+\[
+\sum_p w(p)\chi_I(p)=(9-2|I|)\sum_p f(p)\chi_I(p).
+\]
+All nine-dimensional eigenvalues are nonzero, so $w\ne0$.
+Put $P=\operatorname{supp}w$ and $v(p)=(x_1,\ldots,x_9)^{\mathsf T}$.
+Over $\mathbb F_5$ the weight-two equations give
+\[
+\sum_{p\in P} w(p)v(p)v(p)^{\mathsf T}=\Big(\sum_p w(p)\Big)I_9 .
+\]
+The left side has rank at most $|P|$, so $|P|<9$ implies
+$\sum w=0$ in $\mathbb F_5$.
+
+The signs $z_j=x_jx_9$, $1\le j\le8$, identify each position on
+the chosen side: only antipodes have the same signs at distinct
+vertices, and antipodes have opposite parity. The weights $w(p)$
+on these sign vectors have zero moments in degrees zero, one and
+two over $\mathbb F_5$. Their linear moments are the original
+$x_jx_9$ sums and their squarefree quadratic moments are $x_jx_k$ sums.
+
+A nonzero weighting on a sign cube over a field of odd characteristic
+that annihilates all squarefree monomials of degree at most $d$ has
+at least $2^{d+1}$ support points. For $d=0$ the weights sum to zero.
+For $d>0$ split on a coordinate $z_j$ that varies on the support.
+Multiplying a monomial in the other signs by $(1\pm z_j)/2$ shows
+that each nonempty slice annihilates all monomials of degree at most
+$d-1$. Induction proves the bound. See also the Cartesian-code
+minimum-distance theorem in~\cite{cartesian241}.
+
+Suppose $|P|\le7$. The degree-two bound forces all $w(p)$ to be
+divisible by five. Since actual differences have $|w(p)|\le9$,
+write $w=5u$ with $u=\pm1$ on $P$. The weight-zero equation gives
+$9\mid\sum u$, hence $\sum u=0$ and $|P|$ is even and at most six.
+The weight-one sums $\sum ux_j$ are divisible by seven, so all vanish.
+The weight-three sums $\sum ux_jx_kx_l$ are divisible by three.
+Over $\mathbb F_3$, weight the sign vectors $z$ by $u x_9$.
+Their moments of degrees zero and one are the original weight-one sums.
+Those of degrees two and three are weight-three sums. The degree-three
+bound requires at least 16 positions, a contradiction.
+
+For equality let $g_r=\mathbf1_{\{0^r\}}-\mathbf1_{\{1^r\}}$.
+The cube adjacency $A_r$ satisfies $A_2g_2=0$.
+On $Q_4$, $A_4g_4$ is $+1$ at weight one, $-1$ at weight three,
+and zero elsewhere. Thus $A_4^2g_4=4g_4$ since the two positive
+and two negative contributions at weight two cancel. Write the
+coordinates in blocks $(y,b,c,t)$ of sizes $4,2,2,1$ and define
+\[
+\begin{aligned}
+ f(y,b,c,0)&=(A_4g_4)(y)g_2(b)g_2(c),\\
+ f(y,b,c,1)&=-g_4(y)g_2(b)g_2(c).
+\end{aligned}
+\]
+The positive and negative supports have twenty vertices each, all odd.
+The two pair blocks contribute zero to $Af$. The four-bit block and
+the final flip give $3g_4(y)g_2(b)g_2(c)$ on $t=0$ and zero on $t=1$.
+Exactly eight counts differ. Omitting them leaves identical observations,
+including on the even side alone. The signed two-coordinate factor
+and the product adjacency rule also appear in~\cite{tensor241}.
+\end{proof}
+
+In least-significant-block-first vertex numbering, the count differences
+are $+3$ at $0,63,207,240$ and $-3$ at $15,48,192,255$. The
+distance-eight graph on these positions consists of four disjoint edges.
+The explicit ternary function and its nine-neighbour sums at every
+vertex passed Lean checking. A separate direct count from the two
+selection lists agreed at all 512 vertices. The universal lower bound
+above is a written proof~\cite{research241}.
+
+The equality classification in~\cite{research241} also determines the
+signed membership change up to cube isometry and overall sign. For eight
+positions the all-divisible-by-five case is impossible: each weight-one
+sum of the eight signs $u$ is even, has absolute value at most eight and
+is divisible by seven, so the same degree-three contradiction applies.
+The degree-two moment bound then forces all eight weights to survive
+modulo five. Their diagonal form is nondegenerate. The physical sign
+rows span a subspace orthogonal to itself under this form, of dimension
+at most four. Eight distinct sign columns up to negation require at
+least four independent rows. All eight four-sign patterns up to negation
+therefore occur. Each other row is a linear form in these four signs
+whose square is one at all sixteen sign choices. Comparing its pair
+coefficients shows it is a single signed coordinate. After translation,
+the nine coordinates thus fall into four nonempty constant blocks.
+
+There are six unordered block-size partitions. In each, the eight even
+block-constant vertices form a subgroup $P$. Modulo two $A^2=I$, so
+the ternary inverse of a profile on $P$ must vanish outside $N(P)$.
+Character projection averages translations by $P$, which preserve this
+exterior and commute with the inverse. Each nonzero character component
+must therefore have inverse zero on the exterior. Exact native evaluations
+exclude 47 of the 48 partition-character combinations. The surviving
+character is the displayed one on blocks $4,2,2,1$; invertibility and
+ternarity fix the scale up to sign. Every minimum change consequently
+removes twenty vertices and adds twenty on one parity side. The finite
+character calculation and the general classification lie outside the
+Lean witness theorem.
+
+\begin{corollary}
+Under the finite saved-seed exclusions in
+Sections~\ref{sec:colour231} and~\ref{sec:minority232}, every
+192-edge snake differs in at least 18 labelled neighbour counts
+from each of the 131 saved 191-edge seeds.
+\end{corollary}
+\begin{proof}
+On the parity side gaining one vertex, $\sum f=1$, so $\sum w=9$.
+The rank identity gives at least nine changed counts on the opposite
+side. At equality let $X$ have the nine sign vectors as columns and
+$D=\operatorname{diag}(w(p))$. Over $\mathbb F_5$,
+$XDX^{\mathsf T}=9I$ gives $X^{\mathsf T}X=9D^{-1}$.
+Distinct columns therefore have dot product $9-2d=0\bmod5$.
+The only possible positive even distance $d$ is two. Translate one
+position to zero. The eight resulting two-element subsets pairwise
+intersect and have a common coordinate: given $\{a,b\},\{a,c\}$,
+a set avoiding $a$ must equal $\{b,c\}$, leaving no fourth distinct
+set meeting all three. Thus $P$ is the full neighbourhood of one vertex $q$.
+
+Modulo two, $A^2=I$ since distinct double flips occur in pairs and
+there are nine ways to flip one coordinate twice. Hence $f=Aw\bmod2$.
+For $p\in P$ its antipode has no neighbour in $P$, so ternarity gives
+$f(\bar p)=0$. The cube inverse at $\bar p$ now yields
+$0=128w(p)-16\sum_{s\ne p}w(s)=144w(p)-144$.
+Thus $w=\mathbf1_{N(q)}$ and invertibility gives $f=\mathbf1_{\{q\}}$.
+The saved majority-class exclusion rules out this single addition,
+so at least ten counts change on this side of the profile.
+The fixed-minority exclusion forces a nonzero change in the other
+class, contributing at least eight disjoint counts by
+Theorem~\ref{thm:count-distance241}.
+\end{proof}
+The bound of 18 is necessary for comparison with the saved seeds.
+Its attainability and the existence of a 192-edge snake remain open.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -9867,6 +10012,8 @@ four- and five-count cube assemblies remain written. The conditional
 eight-count theorem has checked generic arithmetic and a written cube
 application. The explicit eight-point matrix limitation has a separate
 checked witness, with its bounded classification remaining written.
+Section~\ref{sec:exact-count241} gives a written proof of the exact count
+distance. The actual eight-position witness has a separate kernel check.
 Full-source reviews at rounds 220, 230 and 240 check the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
@@ -13427,6 +13574,22 @@ I.~Hironaka, T.~Ma and S.~Zhan, \emph{Five-count recovery and structural
 limits of the antipodal matrix method}. Research milestone 240,
 18 November 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/240-five-count-recovery}.
+
+\bibitem{research241}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{The exact distance between
+neighbour-count profiles in the nine-cube}. Research milestone 241,
+19 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/241-exact-count-distance}.
+
+\bibitem{cartesian241}
+H.~H. L\'opez, C. Renter\'ia-M\'arquez and R.~H. Villarreal,
+\emph{Affine Cartesian codes}, Theorem~3.8.
+\url{https://arxiv.org/abs/1202.0085}.
+
+\bibitem{tensor241}
+A. Valyuzhenich and K. Vorob'ev, \emph{Minimum supports of functions
+on the Hamming graphs with spectral constraints}, Section~3.
+\url{https://arxiv.org/abs/1807.09139}.
 
 \end{thebibliography}
 \end{document}
