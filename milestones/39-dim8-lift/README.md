@@ -228,6 +228,26 @@ Still to produce (all finite):
 | cube certificates, size-29/30 | 2,137 | ~77 k hints per solver-second, ~35 G in all | ~2,200 CPU-h |
 | size-31/32 cubes | 24 | unmeasured tail, split into leaves, ~10-20 G | ~1,000 CPU-h |
 
+
+### Pilot certificate (`cert/pilot.py`, partial)
+
+Measured on the 25 s cube (representative line 5 of `data/q8_sample_reps.txt`):
+
+- The LRAT core has 75,503 of 858,582 clauses. Compacting its variables leaves 54,398 of them.
+  The trimmed proof has 103,202 lemmas and 1.88 M hints.
+- `lean435/tools/genv3stream.py --off 65536` turns it into a v3 replay module: 40 segments,
+  17-bit words, 15.6 MB, generated in 7 s.
+- The core module as plain numeral list literals needed more than 9 GB to elaborate, and was
+  OOM-killed next to the running solver jobs. Certificates must pack the core the way the repo
+  packs checkpoints (`NatPack`).
+- The kernel time per hint at offset 65,536 is **not yet measured**. Clause masks are
+  ~130k-bit numbers, against ≤ 8k bits for the window certificates, so the 0.23 ms per hint of
+  milestone 36 may not hold. This is the main open cost question.
+- The glue lemmas `CertGlue.unsat_of_rename` and `CertGlue.unsat_of_walk` (Lean, standard
+  axioms) carry `Unsat (compacted core)` to `Unsat (cubeCnfC4 ...)`:
+  - the first by a Bool check of the renaming;
+  - the second by an ordered walk of the core's clause indices through the generated CNF.
+
 ## 5. The owner's questions 2(a) and 2(b) (moved to milestone 41 by the coordinator)
 
 These were measured before the scope change:

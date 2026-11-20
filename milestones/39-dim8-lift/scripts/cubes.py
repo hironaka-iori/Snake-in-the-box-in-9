@@ -24,7 +24,8 @@ res = os.path.join(out, 'results.jsonl')
 done = set()
 if os.path.exists(res):
     for l in open(res):
-        done.add(json.loads(l)['idx'])
+        r = json.loads(l)
+        if r['status'] in ('UNSATISFIABLE', 'SATISFIABLE'): done.add(r['idx'])   # UNKNOWN/ERR are retried
 def run(i):
     if i in done: return
     sz, p, A = R[i]
