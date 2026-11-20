@@ -33,8 +33,8 @@ with open(os.path.join(G, 'Final229.lean'), 'w') as f:
             + ", ".join(x.lower() + '_ok' for x in n6) + ", Bool.and_self]\n\n"
             "theorem upper_229_of_unsat (hU5 : Unsat (c5Cnf (t5.map (·.1))))\n"
             "    (hU6 : ∀ e ∈ t5, Unsat (c6Cnf e.2.2 ((t6.filter (·.1 == e.2.2)).map (·.2.1))))\n"
-            "    (hcubes : ∀ r ∈ reps, Unsat (cubeCnfC4 13 116 r.2 r.1)) : ∀ {m : Nat}, Snake9.Snake m → m ≤ 229 :=\n"
-            "  Dim8Lift.upper_of_certs (L := 116) (by decide) (by decide) t5 t6 reps t5_ok t6_ok hU5 hU6 hcubes\n\n"
+            "    (hcubes : ∀ r ∈ reps, Unsat (cubeCnfQ 13 116 r.2 r.1)) : ∀ {m : Nat}, Snake9.Snake m → m ≤ 229 :=\n"
+            "  Dim8Lift.upper_of_certsQ (L := 116) (by decide) (by decide) t5 t6 reps t5_ok t6_ok hU5 hU6 hcubes\n\n"
             "end Dim8Lift.Tab\n\n#print axioms Dim8Lift.Tab.upper_229_of_unsat\n")
 open(os.path.join(G, 'checks.txt'), 'w').write(' '.join(chk + ['Final229']))
 print(len(chk))

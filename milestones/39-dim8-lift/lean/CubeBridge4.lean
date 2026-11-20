@@ -9,40 +9,43 @@ def b1 (c : Nat) : Nat := cbase + 512 * (2 * c)
 def b2 (c L : Nat) : Nat := b1 c + 256 * (256 - L)
 def subLits (q : Nat) : List Int := (subcubes.getD q []).map fun u => pos (sV u)
 
-def tauF (S : Nat → Bool) (ℓ : Nat → Nat) (c L k v : Nat) : Bool :=
-  if v < cbase then tau0 S ℓ v
-  else if v < b1 c then decide ((v - cbase) % (2 * c) + 1 ≤ cl (tau0 S ℓ) endLits ((v - cbase) / (2 * c) + 1))
+def tauF (S : Nat → Bool) (ℓ : Nat → Nat) (qm : Bool) (c L k v : Nat) : Bool :=
+  if v < cbase then tau0 S ℓ qm v
+  else if v < b1 c then decide ((v - cbase) % (2 * c) + 1 ≤ cl (tau0 S ℓ qm) endLits ((v - cbase) / (2 * c) + 1))
   else if v < b2 c L then
-    decide ((v - b1 c) % (256 - L) + 1 ≤ cl (tau0 S ℓ) unselLits ((v - b1 c) / (256 - L) + 1))
+    decide ((v - b1 c) % (256 - L) + 1 ≤ cl (tau0 S ℓ qm) unselLits ((v - b1 c) / (256 - L) + 1))
   else
     decide ((v - b2 c L) % (256 * k) % k + 1 ≤
-      cl (tau0 S ℓ) (subLits ((v - b2 c L) / (256 * k))) ((v - b2 c L) % (256 * k) / k + 1))
+      cl (tau0 S ℓ qm) (subLits ((v - b2 c L) / (256 * k))) ((v - b2 c L) % (256 * k) / k + 1))
 
-variable {S : Nat → Bool} {ℓ : Nat → Nat}
+variable {S : Nat → Bool} {ℓ : Nat → Nat} {qm : Bool}
 
-theorem dec_tau0 : Dec (tau0 S ℓ) S ℓ :=
-  ⟨fun _ hu => t_s hu, fun _ _ hu h1 h2 => t_o hu h1 h2, fun _ _ _ hu hi h1 h2 => t_a hu hi h1 h2,
+theorem dec0_tau0 : Dec0 (tau0 S ℓ qm) S ℓ :=
+  ⟨fun _ hu => t_s hu, fun _ _ hu h1 h2 => t_o hu h1 h2,
    fun _ _ _ hu ha hb => t_p hu ha hb, fun _ hu => t_two hu, fun _ hu => t_any hu, fun _ hu => t_e1 hu,
    fun _ hu => t_e0 hu⟩
 
-theorem tauF_lo {c L k v : Nat} (h : v < cbase) : tauF S ℓ c L k v = tau0 S ℓ v := by
+theorem tauF_lo {c L k v : Nat} (h : v < cbase) : tauF S ℓ qm c L k v = tau0 S ℓ qm v := by
   unfold tauF; rw [if_pos h]
 
-theorem dec_tauF (c L k : Nat) : Dec (tauF S ℓ c L k) S ℓ := by
-  have d := dec_tau0 (S := S) (ℓ := ℓ)
-  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+theorem dec0_tauF (c L k : Nat) : Dec0 (tauF S ℓ qm c L k) S ℓ := by
+  have d := dec0_tau0 (S := S) (ℓ := ℓ) (qm := qm)
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro u hu; rw [tauF_lo (by unfold sV cbase; omega)]; exact d.s u hu
   · intro u j hu h1 h2; rw [tauF_lo (by unfold oV cbase; omega)]; exact d.o u j hu h1 h2
-  · intro u i j hu hi h1 h2; rw [tauF_lo (by unfold aV cbase; omega)]; exact d.a u i j hu hi h1 h2
   · intro u a b hu ha hb; rw [tauF_lo (by unfold pV cbase; omega)]; exact d.p u a b hu ha hb
   · intro u hu; rw [tauF_lo (by unfold twoV cbase; omega)]; exact d.two u hu
   · intro u hu; rw [tauF_lo (by unfold anyV cbase; omega)]; exact d.any u hu
   · intro u hu; rw [tauF_lo (by unfold e1V cbase; omega)]; exact d.e1 u hu
   · intro u hu; rw [tauF_lo (by unfold e0V cbase; omega)]; exact d.e0 u hu
 
+theorem dec_tauF (c L k : Nat) : Dec (tauF S ℓ false c L k) S ℓ :=
+  { dec0_tauF (qm := false) c L k with
+    a := fun u i j hu hi h1 h2 => by rw [tauF_lo (by unfold aV cbase; omega)]; exact t_a hu hi h1 h2 }
+
 /-- literals whose variable lies below `cbase` read the same under `tauF` and `tau0` -/
 theorem cl_lo {c L k : Nat} (xs : List Int) (hx : ∀ l ∈ xs, l.natAbs < cbase) (i : Nat) :
-    cl (tauF S ℓ c L k) xs i = cl (tau0 S ℓ) xs i := by
+    cl (tauF S ℓ qm c L k) xs i = cl (tau0 S ℓ qm) xs i := by
   unfold cl; congr 1
   apply List.filter_congr; intro l hl
   have h := hx l (List.mem_of_mem_take hl)
@@ -100,7 +103,7 @@ theorem flat_count (n : Nat) (f : Nat → List Int) (p : Int → Bool) :
   | zero => simp
   | succ n ih => rw [List.range_succ, List.flatMap_append, List.filter_append, List.length_append, ih]; simp
 
-theorem ends_count : (endLits.filter (litTrue (tau0 S ℓ))).length = sm 256 (endW S) := by
+theorem ends_count : (endLits.filter (litTrue (tau0 S ℓ qm))).length = sm 256 (endW S) := by
   unfold endLits R256; rw [flat_count]
   apply sm_congr; intro u hu
   have v1 : 0 < e1V u := by unfold e1V; omega
@@ -110,7 +113,7 @@ theorem ends_count : (endLits.filter (litTrue (tau0 S ℓ))).length = sm 256 (en
   unfold endW
   cases S u <;> cases twoB S u <;> cases anyB S u <;> simp
 
-theorem unsel_count : (unselLits.filter (litTrue (tau0 S ℓ))).length + cnt 256 S = 256 := by
+theorem unsel_count : (unselLits.filter (litTrue (tau0 S ℓ qm))).length + cnt 256 S = 256 := by
   have e : unselLits = (List.range 256).flatMap fun u => [neg (sV u)] := by
     unfold unselLits R256; exact List.map_eq_flatMap
   rw [e, flat_count]
@@ -124,7 +127,7 @@ theorem unsel_count : (unselLits.filter (litTrue (tau0 S ℓ))).length + cnt 256
     rw [litTrue_neg _ vs, t_s hu]
     cases S u <;> simp
 
-theorem sub_count (q : Nat) : ((subLits q).filter (litTrue (tau0 S ℓ))).length =
+theorem sub_count (q : Nat) : ((subLits q).filter (litTrue (tau0 S ℓ qm))).length =
     ((subcubes.getD q []).filter S).length := by
   unfold subLits
   rw [List.filter_map, List.length_map]
