@@ -12,6 +12,6 @@ while true; do
     echo "any >=192 lines: $(grep -h 'edges=19[2-9]' logs/s192*/*.txt 2>/dev/null | wc -l)"
     cd src && python3 canon.py 190 ../logs/cal1/*.txt ../logs/s192a/*.txt ../logs/s192b/*.txt ../logs/s192[c-z]/f*.txt 2>&1 | tail -4; cd ..
   } > results/search_summary.txt
-  git add results/search_summary.txt >/dev/null 2>&1 && git commit -qm "Milestone 40: periodic search summary" >/dev/null 2>&1 && git push -q origin research/unconditional-241 >/dev/null 2>&1
+  git add results/search_summary.txt >/dev/null 2>&1 && git commit -qm "Milestone 40: periodic search summary" >/dev/null 2>&1 && { git fetch -q origin research/unconditional-241 && git merge -q --no-edit FETCH_HEAD; git push -q origin research/unconditional-241; } >/dev/null 2>&1
   sleep 7200
 done
