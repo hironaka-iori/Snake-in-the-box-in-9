@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 250 handoff records the endpoint exclusions and the next search using 80-edge reference segments. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 251 handoff records the completed 72-edge segment census and the current construction route. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

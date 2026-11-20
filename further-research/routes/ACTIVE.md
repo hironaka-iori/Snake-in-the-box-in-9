@@ -6,11 +6,9 @@
 
 Translate the two joining endpoints to zero in their respective faces. The joined path is induced exactly when the projected arms share only zero. A join with arms of lengths $a,b$ has $a+b+1$ edges. Since each arm has at most 98 edges, any one-crossing path of length at least 192 can be shortened at its free ends to 192 while retaining the crossing. Its unordered arm lengths are then $(96,95)$, $(97,94)$ or $(98,93)$.
 
-## Where to resume after Round 250
+## Current checkpoint
 
-**Next case after the pause.** Retain 80 consecutive edges of a reference parent and regrow both ends in eight dimensions. Use the same 22 reference shapes as in Round 250. Identify equal segments and resulting parent shapes up to cube isometry and path reversal. Among the resulting parents of lengths 96, 97 and 98, start with a shape outside the catalogue obtained using 84-edge segments. [Reference parents](../../milestones/249-long-parent-joins/geometry.json) · [84-edge catalogue](../../milestones/250-corner-partners/cores-84.json)
-
-For each new shape, retain the full first arm. Check both joining endpoints against all compatible induced partners in the opposite face. A 96-edge parent needs a 95-edge partner to reach 192. The corresponding partner lengths for 97- and 98-edge parents are 94 and 93. Record each endpoint, its strongest verified bound or witness, and any unfinished branches before moving to the next shape.
+Round 251 completed the classification of all long arms retaining 72 consecutive edges of the 22 reference parents. The 205 distinct segments give 28 long shapes. Exactly five attain 191 and the other 23 give at most 190. A 192-edge single-crossing snake must therefore avoid every one of these 205 segments in any arm of at least 96 edges. The local working note holds the next experiment. [Round 251](../../milestones/251-eighty-edge-segments/README.md) · [Long-term goal](RESEARCH_GOAL.md)
 
 ## Completed cases
 

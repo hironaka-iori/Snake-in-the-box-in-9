@@ -6,13 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 250
+## Latest result · Round 251
 
-The seven new eight-dimensional parents obtained by changing individual interior vertices were checked at both endpoints. None of the 14 endpoints allows a single-crossing join reaching 191 in nine dimensions. Among all 22 reference shapes, exactly five reach 191. All five have 96 edges. The saved 98-edge parent can reach at least 179 and at most 187. [Round 250 evidence](milestones/250-corner-partners/README.md) · [98-edge parent](milestones/249-long-parent-joins/README.md) · [Five parents attaining 191](milestones/248-rooted-arm-capacity/README.md)
+Among single-crossing joins whose long arm retains 72 consecutive edges of one of the 22 reference paths, the exact maximum is **191 edges**. The 557 possible segment positions reduce to 205 distinct shapes. Regrowing both ends gives exactly 28 possible long arms. Five reach 191. At each endpoint of the three newly found 96-edge arms, a certificate excludes even a 94-edge partner. [Round 251 result and evidence](milestones/251-eighty-edge-segments/README.md)
 
-Regrowing both ends of the 134 distinct 84-edge segments from those references gives exactly 25 parent shapes of lengths 96–98. All six endpoints of the three additional 96-edge shapes exclude joins of 191 and 192. **Exactly five of the 25 shapes reach 191. A 192-edge single-crossing snake must avoid all 134 reference segments in every arm of length at least 96.** [Regrowth and endpoint evidence](milestones/250-corner-partners/README.md)
-
-Research pauses after Round 250. On resumption, keep the same construction and use 80-edge reference segments to find parents outside the 84-edge catalogue. [Active route](further-research/routes/ACTIVE.md) · [Continuing goal](further-research/routes/RESEARCH_GOAL.md) · [Other research routes](further-research/routes/README.md)
+Research is paused after Round 251. The single-crossing construction remains the active route. [Marked route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

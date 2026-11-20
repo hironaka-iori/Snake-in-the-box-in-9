@@ -2,7 +2,7 @@
 
 Open a round to read its account and supporting material. The [milestone guide](README.md) groups the recent rounds by research question. The index follows the numbered folders published on the main branch. Round 26 has no separate published folder.
 
-[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–250](#rounds-240-to-250)
+[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–251](#rounds-240-to-251)
 
 ## Rounds 1 to 49
 
@@ -267,7 +267,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 238 | [Recovery from three missing counts](238-three-count-recovery/MATHEMATICAL_NOTE.md) |
 | 239 | [Recovery after four missing counts](239-four-count-recovery/MATHEMATICAL_NOTE.md) |
 
-## Rounds 240 to 250
+## Rounds 240 to 251
 
 | Round | Research record |
 |---:|---|
@@ -282,3 +282,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 248 | [Extremal partners of five intact 96-edge arms](248-rooted-arm-capacity/README.md) |
 | 249 | [Long parents and movable crossings](249-long-parent-joins/README.md) |
 | 250 | [The 25 long parents containing an 84-edge reference segment and their one-crossing joins](250-corner-partners/README.md) |
+| 251 | [One-crossing joins retaining 72 reference edges](251-eighty-edge-segments/README.md) |

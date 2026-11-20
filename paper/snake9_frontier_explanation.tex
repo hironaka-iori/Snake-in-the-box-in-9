@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 250}
+\date{Research state after round 251}
 \begin{document}
 \maketitle
 
@@ -1276,6 +1276,32 @@ of 96 or more edges cannot contain any of those 134 segments. Shorter
 shared segments and snakes crossing between the faces several times
 remain possible.
 
+Allowing more of the old arm to change strengthens this result.
+Keeping 80 consecutive edges or even 76 still gives just the same
+25 long shapes. Keeping 72 gives 205 distinct starting segments and
+28 long shapes. The three extra shapes all have 96 edges. Each was
+checked at both ends. None admits even a 94-edge partner, so none
+can improve the 191-edge example. A 192-edge single-crossing snake
+must therefore avoid all 205 of these 72-edge shapes in every arm
+of at least 96 edges~\cite{segment251}.
+
+A particular example explains how the saved 98-edge path can still
+help with a shorter arm. With one of the new 96-edge arms, suppose
+the opposite path starts at 72 and reaches 0 via 64 or 8. To reach
+192, that opposite path needs 93 more edges after 0. The old bound
+at 0 forces it to visit either 1 or 73. Visiting 73 would create an
+extra edge back to 72. Visiting 1 later would create an extra edge
+back to 0. Thus 1 must come next. The full endpoint exclusions also
+cover paths beginning in other ways~\cite{segment251}.
+
+Partner choice matters even at a fixed endpoint. At endpoint 72 of one
+new 96-edge arm, the longest compatible segment of any of the 903
+archived eight-dimensional donor paths has 34 edges. This includes
+every position and direction in each donor and every way to relabel
+coordinates. A separately constructed 84-edge partner fits at the
+same endpoint, yielding a verified join of $96+1+84=181$
+edges~\cite{segment251}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1297,7 +1323,7 @@ The latest full written-source review was completed at round 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 250.
+in the companion manuscript and milestones through round 251.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1493,6 +1519,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{One-crossing joins retaining an 84-edge segment}.
 Research milestone 250, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/250-corner-partners}.
+
+\bibitem{segment251}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{One-crossing joins retaining 72 reference edges}.
+Research milestone 251, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/251-eighty-edge-segments}.
 
 \end{thebibliography}
 \end{document}

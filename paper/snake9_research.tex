@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 250, 20 November 2026}
+\date{Research state after round 251, 20 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -89,7 +89,7 @@ even when all four outer paths vary.
 For single-crossing joins with an unrestricted opposite arm, only five
 of the fifteen archived 96- through 98-edge parents attain 191. All
 five have 96 edges. A complete search also excludes length 192 when
-an arm of at least 96 edges retains any 84-edge segment of the 22
+an arm of at least 96 edges retains any 72-edge segment of the 22
 reference parents, up to cube isometry and reversal. For the saved 98-edge parent the
 maximum single-crossing join lies between 179 and 187 inclusive.
 
@@ -167,6 +167,7 @@ the saved 98-edge parent between 179 and 187 edges. Among the fifteen
 originally archived shapes with 96 to 98 edges, exactly five attain 191.
 Section~\ref{sec:corner250} extends the 192-edge exclusion to all
 long arms retaining an 84-edge segment of any of the 22 reference parents.
+Section~\ref{sec:segment251} strengthens this to 72 edges.
 Section~\ref{sec:prefix222} gives the earlier exclusion of a 93-edge partner.
 \item Sections~\ref{sec:replacement225}--\ref{sec:facevisits230} give the
 simultaneous-replacement criteria and the successive restricted construction
@@ -10390,7 +10391,96 @@ recorded in milestone 250~\cite{corner250}.
 The family attains 191 through the five 96-edge parents described in
 Section~\ref{sec:long249}. For a 192-edge single-crossing construction,
 a long arm must therefore avoid every one of the 134 segment shapes.
-The existence of a join with an 83-edge common segment remains open.
+The next result permits a shorter common segment.
+
+\subsection{One-crossing joins retaining 72 reference edges}\label{sec:segment251}
+
+\begin{proposition}[Finite 72-edge segment exclusion]\label{prop:segment251}
+Among single-crossing joins in $Q_9$ with an arm of at least 96 edges
+containing a 72-edge segment of one of the 22 reference parents, up to
+cube isometry and reversal, the exact maximum is 191. Exactly five of
+the 28 possible shapes of that arm attain the maximum.
+\end{proposition}
+\begin{proof}
+Repeat the two complete extension enumerations of
+Proposition~\ref{prop:core250}, starting from shorter segments.
+The columns count occurrences in the reference parents, distinct
+segment shapes, and distinct completions of lengths 96 through 98.
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+Retained edges & Occurrences & Segment shapes & Long completions\\
+\midrule
+80 & 381 & 165 & 25\\
+76 & 469 & 189 & 25\\
+72 & 557 & 205 & 28\\
+\bottomrule
+\end{tabular}
+\end{center}
+At 72 edges there are 22 completions of length 96, five of length 97
+and one of length 98. The three additions to the earlier catalogue each
+have 96 edges. The longest common segment with any reference parent
+has exactly 75 edges for one addition and 74 edges for each of the
+other two. A calculation on their complete rooted domains excludes a
+94-edge partner at all six endpoints. A longer partner would have a
+94-edge prefix. The five earlier examples of length 191 supply the
+lower bound. Both census procedures agree class by class, and all six
+contradiction certificates were replayed~\cite{segment251}.
+\end{proof}
+
+In particular, keeping 76 through 84 edges gives exactly the same
+25 completed shapes. Keeping 75 gives 26, and keeping 72 through 74
+gives 28. These intermediate counts follow by nesting the families
+and using the three exact longest matches.
+
+The older rooted bounds can also restrict a partner after a cut at
+position $t$. Suppose an old parent, placed with joining root at the
+current vertex, has partner cap $c$. A partner of length $n>t+c$ must
+visit a vertex of the placed old parent, outside the new parent and
+different from the cut vertex, at some index $j$ with
+$t<j\le t+c+1$. Otherwise the next $c+1$ edges fit the old parent.
+Every vertex after the cut avoids the closed neighbourhood of each
+vertex strictly before the cut, by distinctness and inducedness.
+Lean checked the segment and suffix implications with the old cap
+as a premise. The numerical caps and placements are verified separately.
+
+For example, in the new parent whose canonical hash starts
+\texttt{460cdd57}, a proposed 95-edge partner starting at 72 may
+begin $(72,64,0)$ or $(72,8,0)$. The remaining suffix from 0 would
+need 93 edges. The saved 98-edge parent at 0 has partner cap 88 and
+leaves only 1 and 73 as exceptional sites in this placement.
+Vertex 73 is adjacent to 72. Vertex 1 is adjacent to 0. Thus 73 is
+already forbidden and 1 must be the immediate next vertex. This
+rules out five otherwise legal next steps after each of those
+prefixes~\cite{segment251}.
+
+For the three new parents we also measured the effect of requiring
+the partner to be one contiguous segment of one of the 903 archived
+eight-dimensional donor paths. We allowed all segment positions,
+directions, translations and coordinate permutations, fixing the
+joining vertex. The parent column uses canonical hash prefixes.
+The last column gives the interval for the largest unrestricted
+partner at this root, from an explicit witness and a certified upper
+bound~\cite{segment251}.
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Parent & Root & Exact donor maximum & Unrestricted partner\\
+\midrule
+\texttt{f0fcfd23} & 0  & 37 & $82$--$91$\\
+\texttt{f0fcfd23} & 78 & 42 & $70$--$93$\\
+\texttt{460cdd57} & 78 & 36 & $75$--$91$\\
+\texttt{460cdd57} & 72 & 33 & $74$--$93$\\
+\texttt{ff535588} & 78 & 39 & $72$--$93$\\
+\texttt{ff535588} & 72 & 34 & $84$--$93$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Each donor maximum has a witness. At the next length two independent
+enumerations exclude every donor segment at that root. Consequently,
+even the initial segment of a longer partner cannot coincide with a
+donor segment beyond the corresponding maximum. The explicit 84-edge
+partner in the last row gives a 181-edge join.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -10695,7 +10785,8 @@ original long parent shapes. Exactly five shapes reach 191, with five
 labelled partners each, and none reaches 192. These finite exclusions
 use the archived calculations. The Lean results on truncating partners
 and moving the crossing apply under their stated geometric hypotheses.
-Section~\ref{sec:corner250} gives the complete 84-edge segment calculation.
+Sections~\ref{sec:corner250} and~\ref{sec:segment251} give the complete
+84-edge and 72-edge segment calculations.
 Full-source reviews at rounds 220, 230, 240 and 250 check the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
@@ -14318,6 +14409,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{One-crossing joins retaining an 84-edge segment}.
 Research milestone 250, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/250-corner-partners}.
+
+\bibitem{segment251}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{One-crossing joins retaining 72 reference edges}.
+Research milestone 251, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/251-eighty-edge-segments}.
 
 \end{thebibliography}
 \end{document}
