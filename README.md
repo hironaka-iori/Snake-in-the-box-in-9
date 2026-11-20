@@ -4,13 +4,15 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 **The exact maximum is open. The reviewed bounds are $191 \le a(9) \le 231$.** The 191-edge witness contains 192 distinct vertices. The upper bound comes from a contributor's completed proof and saved audit. An independent rebuild of its full dependency chain is pending. [191-edge witness](outputs/snake9_witness.json) · [Upper-bound proof revision](https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088)
 
-**Start with the [short explanation (PDF, 21 pages)](paper/pdf/snake9_frontier_explanation.pdf).** Page 18 compares the 96- and 98-edge parents. The [full paper (PDF, 240 pages)](paper/pdf/snake9_research.pdf) gives the classification and its proof on pages 154–155. [Manuscript sources and build records](paper/README.md)
+The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 249
+## Latest result · Round 250
 
-A 192-edge snake crossing once between two eight-dimensional faces needs a long parent outside the original fifteen recorded shapes. Of the eleven recorded 96-edge parents, five attain 191 and the six others give at most 190. The three recorded 97-edge parents give at most 190. The saved 98-edge parent gives between 179 and 187. The five shorter parents therefore account for every 191-edge join in the collection. [Argument and checked evidence](milestones/249-long-parent-joins/README.md) · [Five parents attaining 191](milestones/248-rooted-arm-capacity/README.md)
+The seven new eight-dimensional parents obtained by changing individual interior vertices were checked at both endpoints. None of the 14 endpoints allows a single-crossing join reaching 191 in nine dimensions. Among all 22 reference shapes, exactly five reach 191. All five have 96 edges. The saved 98-edge parent can reach at least 179 and at most 187. [Round 250 evidence](milestones/250-corner-partners/README.md) · [98-edge parent](milestones/249-long-parent-joins/README.md) · [Five parents attaining 191](milestones/248-rooted-arm-capacity/README.md)
 
-Research is paused after Round 249. Seven new long parents were found by changing one interior vertex. The next case is donor 16 at position 72. Any 95-edge partner at either end must visit the freed vertex 82. [Active route and ordered cases](further-research/routes/ACTIVE.md) · [Continuing goal](further-research/routes/RESEARCH_GOAL.md) · [Other research routes](further-research/routes/README.md)
+Regrowing both ends of the 134 distinct 84-edge segments from those references gives exactly 25 parent shapes of lengths 96–98. All six endpoints of the three additional 96-edge shapes exclude joins of 191 and 192. **Exactly five of the 25 shapes reach 191. A 192-edge single-crossing snake must avoid all 134 reference segments in every arm of length at least 96.** [Regrowth and endpoint evidence](milestones/250-corner-partners/README.md)
+
+Research pauses after Round 250. On resumption, keep the same construction and use 80-edge reference segments to find parents outside the 84-edge catalogue. [Active route](further-research/routes/ACTIVE.md) · [Continuing goal](further-research/routes/RESEARCH_GOAL.md) · [Other research routes](further-research/routes/README.md)
 
 ## Explore the repository
 

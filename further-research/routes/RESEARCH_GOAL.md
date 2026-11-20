@@ -4,7 +4,7 @@ Find and verify an induced path of at least 192 edges in the nine-dimensional cu
 
 ## Where to start
 
-1. Read the [marked route](ACTIVE.md) and [current handoff](../../handoff/CURRENT_STATUS.md). Check the latest milestone, local changes and published branch before choosing the next round number. Start at the first unresolved case in the marked route.
+1. Read the marked route and current handoff. After Round 250, regrow both ends of 80-edge segments from the same 22 reference parents, and begin with a resulting 96–98-edge shape outside the 84-edge catalogue. At later pauses, use the latest recorded resumption point. Check the latest milestone, local changes and published branch before choosing a round number. [Marked route](ACTIVE.md) · [Current handoff](../../handoff/CURRENT_STATUS.md) · [Round 250 catalogue](../../milestones/250-corner-partners/cores-84.json)
 2. Follow single-crossing joins of two eight-dimensional paths across successive rounds. Use the 98-edge optimum and shorter parents to compare endpoint choices, parity, coordinate symmetry and which projected vertices a partner must avoid. Keep alternative approaches in the [route index](README.md). The local working note `thoughts.txt` is a source of suggestions.
 3. If all recorded parents close, generate new parent shapes on this route, compare them up to cube isometry and reversal, and retain explicit representatives. Record both choices of joining endpoint unless an explicit symmetry identifies them.
 
@@ -14,7 +14,7 @@ For a longer snake, save its ordered vertices or transitions and verify the dime
 
 ## How to finish a round
 
-Save the question, reasoning, inputs, results, verification records and next case in the round's milestone folder. Update the marked route and handoff. When the research frontier changes, update both manuscripts in `D:/Codex/2026-10-13/new-chat/outputs`, keep exact mirrors under `E:/Snake-in-a-box/paper`, and compile both. Preserve Iori Hironaka, Tommy Ma and Steven Zhan as authors and retain the existing hyperlink settings. The Round 250 review covers the full written sources.
+Save the question, reasoning, inputs, results, verification records and next case in the round's milestone folder. Update the marked route and handoff. When the research frontier changes, update both manuscripts in `D:/Codex/2026-10-13/new-chat/outputs`, keep exact mirrors under `E:/Snake-in-a-box/paper`, and compile both. Preserve Iori Hironaka, Tommy Ma and Steven Zhan as authors and retain the existing hyperlink settings. Keep the ten-round review of the full written sources. [Round 250 source review](../../milestones/250-corner-partners/review/)
 
 Run one heavy search or compiler at a time. Require at least 1 GiB of free memory to start, retain a 768 MiB reserve, and enforce the 256 MiB private-memory limit. Use one Lean thread and at most 60 seconds per module. Software tests require an explicit request. Mathematical certificate checks and Lean compilation are part of the research.
 

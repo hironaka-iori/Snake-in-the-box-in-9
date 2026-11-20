@@ -4,13 +4,14 @@
 \usepackage[margin=22mm]{geometry}
 \usepackage{amsmath,amssymb,amsthm,microtype}
 \usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt}
 \setlength{\emergencystretch}{2em}
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 249}
+\date{Research state after round 250}
 \begin{document}
 \maketitle
 
@@ -371,9 +372,10 @@ Every longer partner has a compatible 93-edge prefix. Therefore
 An inverse cube isometry preserves length, inducedness, the joining
 endpoint and parent avoidance, so the ceiling holds for the full
 cube-isometry class of this parent. This pullback is also checked in Lean.
-The later comparison of long parents excludes a 92-edge partner at
-both ends of this saved path. Different parent classes and other face
-arrangements are outside this exclusion.
+Later results lowered the partner ceiling at both ends of this saved
+path to 88 edges. Explicit 80-edge partners at both ends give a
+join of 179 edges, so the best single-crossing join using this parent
+lies between 179 and 187 edges~\cite{long249}.
 
 Four generic results in two Lean modules support the prefix and isometry
 arguments. Complete finite coverage and numerical certificates have
@@ -996,10 +998,13 @@ Two distinct selections must differ in at least eight neighbour counts.
 Any 505 labelled counts therefore determine the selection. If its
 parity side is known, any 249 counts on the opposite side suffice.
 
-The proof uses the sign of each coordinate, $x_j=(-1)^{p_j}$. Flipping
-each of the nine coordinates in turn gives a product of $r$ signs
-the eigenvalue $9-2r$. In particular, products of two signs give
-eigenvalue five. For a difference of count profiles supported at
+Each parity class affects counts only on the opposite side, so it
+suffices to consider a selection difference on one parity side.
+Write $x_j=(-1)^{p_j}$ for the sign of coordinate $j$. A product of
+$r$ distinct signs changes sign under $r$ of the nine coordinate
+flips. Summing over all flips therefore multiplies it by $9-2r$.
+In particular, products of two signs have eigenvalue five.
+For a difference of count profiles supported at
 fewer than nine positions, its matrix of second moments modulo five
 is a scalar multiple of the nine-dimensional identity. Its rank is
 less than nine, so this matrix is zero. On one parity side, the signs
@@ -1121,17 +1126,20 @@ cutting two end vertices off the displayed 98-edge path produces
 
 Choose a coordinate that the path crosses as few times as possible.
 The displayed 98-edge path crosses it four times, leaving five
-pieces. Each of the five 96-edge shapes crosses a coordinate only
-twice, leaving three pieces. In every case the middle piece is the
-same 47-edge path in seven dimensions, up to cube symmetry.
+pieces with lengths $8,25,10,25,26$. Each of the five 96-edge shapes
+crosses a coordinate only twice, leaving three pieces. In all five
+96-edge shapes the middle is the same 47-edge path in seven dimensions,
+up to cube symmetry.
 The two outer pieces have lengths 31 and 16, or 25 and 22.
 
 In nine dimensions, a 96-edge arm and a 94-edge arm can lie in
 opposite eight-dimensional faces. When they meet in projection only at
 their common endpoint, one crossing produces $96+1+94=191$ edges.
-For the displayed 98-edge path, the one-crossing partner has at most
-92 edges. Each of the five shorter arms therefore admits a longer
-partner than the displayed optimum does.
+For the displayed 98-edge path, the prefix calculation initially
+bounded the one-crossing partner by 92 edges. The later direct
+bound is 88 edges~\cite{long249}. Each of the five shorter arms
+therefore admits a partner at least six edges longer than any
+partner for the displayed optimum.
 Twenty of the 25 recorded joins contain the same \emph{pair} of
 47-edge pieces, in the same relative positions up to symmetry. Their
 four outer pieces contribute 92 edges. Increasing this total to 93
@@ -1156,8 +1164,9 @@ previous section gives a maximum of 191.
 
 Changing the shape gives more freedom. Among the remaining 80 vertices
 of \(Q_7\), exactly five paths reach 48 edges, with reversal counted
-once, and none reaches 49. Each of the five can therefore gain one edge
-in the middle. There are 35 possible joining sites for each. Allowing
+once, and none reaches 49. Replacing the old 47-edge mate by any of
+the five gains one middle edge. There are 35 possible joining sites
+for each. Allowing
 all four outer pieces and both endpoints to vary at each of the 175 sites
 still excludes a total of 192 or more edges. The extra middle edge does
 not yield a longer snake in this construction. A different 47-edge
@@ -1191,9 +1200,8 @@ at either end. At the end used by the published examples there are
 exactly five 94-edge partners for each labelled parent. At the opposite
 end there are none. Thus the best join from each shape has
 \(96+1+94=191\) edges, and these maxima give the 25 recorded examples.
-The earlier 191-edge ceiling for the saved 98-edge parent would
-require a 92-edge partner for equality. The next section resolves
-this question.
+For the saved 98-edge parent to attain 191, it would require a
+92-edge partner. The next section gives its tighter partner bound.
 Six other recorded 96-edge shapes would each need a 95-edge partner
 to reach 192~\cite{root248}.
 
@@ -1209,8 +1217,11 @@ rule out partners of length 93 at both ends of the three 97-edge
 parents, and of length 92 at both ends of the saved 98-edge parent.
 Those four parents therefore give at most 190. Across all fifteen
 recorded long parents, only the five 96-edge parents of the previous
-section attain 191. A single-crossing construction of 192 needs a
-different long parent.
+section attain 191. The two arm lengths of any single-crossing
+192-edge snake must sum to 191. Each arm has at most 98 edges in
+$Q_8$, so their unordered lengths must be $(96,95)$, $(97,94)$,
+or $(98,93)$. The longer arm must therefore be outside the fifteen
+recorded shapes.
 
 For the saved 98-edge parent the direct bound is stronger. At either
 end there is an 80-edge partner and every partner has at most 88
@@ -1224,24 +1235,55 @@ position 72. The changed path still has 96 edges. A partner of 95
 edges must now visit the freed vertex 82, since avoiding it would
 also make the partner fit the original parent. Repeating legal
 one-vertex changes in the interiors of the fifteen paths gives seven
-new shapes in total. Both endpoints of the example can be tried.
+new shapes in total. The next section records the result at both endpoints.
 
-Moving the crossing along a fixed projected path has an exact rule.
-Every pair of nonconsecutive projected neighbours must have one
-vertex strictly before the crossing and the other strictly after it.
+For a projected path with distinct vertices, a crossing position is
+legal exactly when it separates every pair of nonconsecutive
+projected neighbours strictly. One must lie before the crossing
+position and the other after it, so the two vertices lie in different
+faces of $Q_9$.
 Among the 25 single-crossing examples of length 191, each projection
 allows only its original crossing. Adding a vertex at either end and
 allowing the crossing to move still gives no 192-edge path from
 those projections~\cite{long249}.
 
+\section{How much of an old arm can a new construction keep?}
+
+Replacing vertex 82 in the 96-edge example frees that vertex for use
+by the opposite arm. A partner that improves on the old bound must
+use it early. Otherwise its initial portion fits beside the old arm
+and already exceeds the old bound. At joining endpoints 1 and 70, a
+95-edge partner would have to reach vertex 82 by its 93rd or 92nd
+edge, respectively. Each step changes parity, and both roots have the
+same parity as 82. The visit must therefore occur by edge 92 in both
+cases. The certificates exclude a 95-edge partner at
+both ends. The same calculation for all seven shapes obtained by
+changing one vertex rules out both 191 and 192 edges.
+
+We then kept 84 consecutive edges from a reference arm and allowed
+either end to change freely. Across the 22 reference arms there are
+293 places to choose that segment, or 134 different shapes after
+symmetries and reversal. Extending both ends in every legal way gives
+exactly 25 shapes with 96 to 98 edges. Three are new, each with 96
+edges. None of the three can be joined to a 95-edge partner at either
+endpoint. All three also exclude a 94-edge partner. Among all 25
+shapes, exactly the five original 96-edge examples attain a total of
+191 edges~\cite{corner250}.
+
+This limits how closely a longer construction can follow these examples.
+In a 192-edge snake that crosses between two faces just once, an arm
+of 96 or more edges cannot contain any of those 134 segments. Shorter
+shared segments and snakes crossing between the faces several times
+remain possible.
+
 \section{Remaining questions}
-A one-crossing join using the full saved parent class cannot improve 191.
+A one-crossing join using any of the fifteen original long parent
+shapes as an intact arm cannot improve 191.
 The selected two-block family is excluded through width 46 for every
 crossing count. A new construction search must change a restriction.
 The parity-class comparisons exclude keeping either entire class of a
 saved seed. Changes to both classes, wider blocks and changed block
 lengths remain possible.
-Different parent classes and shorter compatible parents remain alternatives. Finding a new parent still requires a compatible joining construction.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
 The maintained global interval is $191\le a(9)\le231$, with an
@@ -1251,11 +1293,11 @@ a universal 197-edge exclusion. Constructions can change several
 separated pieces of the coil, permitting both parity classes and the
 path order to change. The unrestricted 192-edge question remains open.
 The universal seven-erasure proof still awaits Lean verification.
-Full written-source review was completed at round 240 and is next due at 250.
+The latest full written-source review was completed at round 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 249.
+in the companion manuscript and milestones through round 250.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1445,6 +1487,12 @@ I.~Hironaka, T.~Ma and S.~Zhan, \emph{Extremal partners of five intact
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Long parents and movable crossings}.
 Research milestone 249, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/249-long-parent-joins}.
+
+\bibitem{corner250}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{One-crossing joins retaining an 84-edge segment}.
+Research milestone 250, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/250-corner-partners}.
 
 \end{thebibliography}
 \end{document}

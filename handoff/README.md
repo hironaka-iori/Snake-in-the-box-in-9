@@ -1,6 +1,6 @@
 # Research handoffs
 
-Use the [current handoff](CURRENT_STATUS.md) for the Round 249 pause and the [marked route](../further-research/routes/ACTIVE.md) for the next construction cases.
+The Round 250 handoff records the endpoint exclusions and the next search using 80-edge reference segments. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

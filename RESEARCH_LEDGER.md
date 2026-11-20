@@ -6,4 +6,4 @@ The [milestone index](milestones/CATALOG.md) lists every published numbered fold
 |---|---|
 | [Original research ledger](docs/history/research-ledger.md) | The accumulated proof, search and continuation notes from earlier rounds. |
 | [Project checkpoint reports through Round 240](docs/history/project-checkpoints.md) | The original front-page sequence of project updates. |
-| [Handoff after Round 249](handoff/CURRENT_STATUS.md) | The state of the research at the latest pause and the [marked route](further-research/routes/ACTIVE.md). |
+| [Handoff after Round 250](handoff/CURRENT_STATUS.md) | The new parent catalogue and the [next search using 80-edge segments](further-research/routes/ACTIVE.md). |
