@@ -10,7 +10,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 248}
+\date{Research state after round 249}
 \begin{document}
 \maketitle
 
@@ -371,9 +371,9 @@ Every longer partner has a compatible 93-edge prefix. Therefore
 An inverse cube isometry preserves length, inducedness, the joining
 endpoint and parent avoidance, so the ceiling holds for the full
 cube-isometry class of this parent. This pullback is also checked in Lean.
-No compatible 92-edge witness or attainment of 191 by this construction
-is established. Different parent classes and other face arrangements
-are outside the exclusion.
+The later comparison of long parents excludes a 92-edge partner at
+both ends of this saved path. Different parent classes and other face
+arrangements are outside this exclusion.
 
 Four generic results in two Lean modules support the prefix and isometry
 arguments. Complete finite coverage and numerical certificates have
@@ -1191,11 +1191,48 @@ at either end. At the end used by the published examples there are
 exactly five 94-edge partners for each labelled parent. At the opposite
 end there are none. Thus the best join from each shape has
 \(96+1+94=191\) edges, and these maxima give the 25 recorded examples.
-The saved 98-edge parent also gives an upper bound of 191 when kept
-intact. To attain it, that parent would need a 92-edge partner.
-Whether such a partner exists at either endpoint remains open.
-Six other recorded 96-edge shapes remain candidates for a lift to
-192 edges: each would need a 95-edge partner~\cite{root248}.
+The earlier 191-edge ceiling for the saved 98-edge parent would
+require a 92-edge partner for equality. The next section resolves
+this question.
+Six other recorded 96-edge shapes would each need a 95-edge partner
+to reach 192~\cite{root248}.
+
+\section{Which parent must change to reach 192?}
+
+All six other recorded 96-edge parents have now been checked at both
+ends. None can accept even a 94-edge partner. Their best joins have
+at most 190 edges, and two of these parents have examples attaining
+190. Each end of every recorded 97-edge parent starts with a copy of
+one of those six 96-edge paths. Adding one parent vertex can only
+reduce the space available for the partner. The shorter subpaths
+rule out partners of length 93 at both ends of the three 97-edge
+parents, and of length 92 at both ends of the saved 98-edge parent.
+Those four parents therefore give at most 190. Across all fifteen
+recorded long parents, only the five 96-edge parents of the previous
+section attain 191. A single-crossing construction of 192 needs a
+different long parent.
+
+For the saved 98-edge parent the direct bound is stronger. At either
+end there is an 80-edge partner and every partner has at most 88
+edges. Its longest single-crossing join is therefore between
+\(98+1+80=179\) and \(98+1+88=187\). Even the upper end is four
+edges shorter than the 191 attained by five of the 96-edge parents.
+
+A small change produces a specific next candidate. In parent 16,
+keep both neighbours of vertex 82 and replace 82 by vertex 16 at
+position 72. The changed path still has 96 edges. A partner of 95
+edges must now visit the freed vertex 82, since avoiding it would
+also make the partner fit the original parent. Repeating legal
+one-vertex changes in the interiors of the fifteen paths gives seven
+new shapes in total. Both endpoints of the example can be tried.
+
+Moving the crossing along a fixed projected path has an exact rule.
+Every pair of nonconsecutive projected neighbours must have one
+vertex strictly before the crossing and the other strictly after it.
+Among the 25 single-crossing examples of length 191, each projection
+allows only its original crossing. Adding a vertex at either end and
+allowing the crossing to move still gives no 192-edge path from
+those projections~\cite{long249}.
 
 \section{Remaining questions}
 A one-crossing join using the full saved parent class cannot improve 191.
@@ -1218,7 +1255,7 @@ Full written-source review was completed at round 240 and is next due at 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 248.
+in the companion manuscript and milestones through round 249.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1403,6 +1440,11 @@ nine-dimensional crossing construction}. Research milestone 247, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Extremal partners of five intact
 96-edge arms}. Research milestone 248, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/248-rooted-arm-capacity}.
+
+\bibitem{long249}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Long parents and movable crossings}.
+Research milestone 249, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/249-long-parent-joins}.
 
 \end{thebibliography}
 \end{document}

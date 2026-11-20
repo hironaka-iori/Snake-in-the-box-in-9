@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. The research is paused after Round 248. Use the [complete numeric index](CATALOG.md) to open any published round, or follow the [marked route](../further-research/routes/ACTIVE.md).
+Each numbered folder holds the mathematical argument and evidence for one round. The research is paused after Round 249. Use the [complete numeric index](CATALOG.md) to open any published round, or follow the [marked route](../further-research/routes/ACTIVE.md).
 
 | Question | Where to read |
 |---|---|
+| Can any of the fifteen archived long parents reach 192? | [249 · Complete parent coverage and seven new shapes](249-long-parent-joins/README.md) |
 | Which partners attain 191 for the five intact 96-edge parents? | [248 · Endpoint limits and complete list of extremal joins](248-rooted-arm-capacity/README.md) |
 | How do a 98-edge snake and a 96-edge snake differ as parents of a nine-dimensional path? | [246 · Eight-dimensional parents and their joins](246-eight-dimensional-parents/README.md) |
 | Can a different placement or a longer middle produce a 192-edge join? | [247 · Disjoint middle paths, replacement counts and remaining cases](247-relative-middle-placements/README.md) |

@@ -280,3 +280,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 246 | [Comparing eight-dimensional parents and their nine-dimensional joins](246-eight-dimensional-parents/README.md) |
 | 247 | [Disjoint middle paths in a nine-dimensional crossing construction](247-relative-middle-placements/README.md) |
 | 248 | [Extremal partners of five intact 96-edge arms](248-rooted-arm-capacity/README.md) |
+| 249 | [Long parents and movable crossings](249-long-parent-joins/README.md) |

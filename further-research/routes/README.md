@@ -1,6 +1,6 @@
 # Research routes for the nine-dimensional snake
 
-**[Active route and resumption point](ACTIVE.md)** is the place to start each research round. A pause ends the computation for that round. The marked route carries forward when research resumes.
+**[Active route and resumption point](ACTIVE.md)** is the place to start each research round. The [continuing goal](RESEARCH_GOAL.md) gives the research objective and working rules. A pause ends the computation for that round. The marked route carries forward when research resumes.
 
 | Route | Working question | Status |
 |---|---|---|

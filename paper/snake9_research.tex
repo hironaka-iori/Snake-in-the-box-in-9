@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 248, 20 November 2026}
+\date{Research state after round 249, 20 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -87,6 +87,11 @@ Twenty known 191-edge paths with one crossing have the same relative
 placement of two 47-edge paths in the seven-cube. The maximum is
 exactly 191 with these middle paths and the specified crossing pattern,
 even when all four outer paths vary.
+For single-crossing joins with an unrestricted opposite arm, only five
+of the fifteen archived 96- through 98-edge parents attain 191. All
+five have 96 edges. Seven further parent shapes are obtained by
+changing single interior vertices. For the saved 98-edge parent the
+maximum single-crossing join lies between 179 and 187 inclusive.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -7699,8 +7704,8 @@ facts and the isometry pullback. The complete numerical tree and coefficient
 arrays have no end-to-end Lean assembly. All records, including the resource
 interruption, are retained in milestone 222~\cite{research222}.
 
-No compatible 92-edge witness or attainment of this 191-edge ceiling is
-established. The result excludes improvement by a one-crossing join using
+Section~\ref{sec:long249} subsequently excludes length 92 at both endpoints.
+The present result excludes improvement by a one-crossing join using
 this full parent class. Different parent classes, shorter parents and
 constructions with multiple crossings remain outside its scope.
 The exact fractional weight-94 points of Section~\ref{sec:parity221}
@@ -10216,8 +10221,8 @@ parent 5, a 75-edge partner is known and a 91-edge partner has
 been excluded, giving a maximum between 75 and 90 inclusive.
 For the saved 98-edge parent
 in Section~\ref{sec:prefix222}, the earlier exclusion of a 93-edge
-partner at both ends gives the same 191-edge ceiling. Attainment of
-that ceiling remains open for the 98-edge parent.
+partner at both ends gave the same 191-edge ceiling. Section~\ref{sec:long249}
+strengthens the bound for this parent.
 
 The scope is a five-shape family. For a general one-crossing path of
 length at least 192, keep the first arm and the crossing, and shorten
@@ -10227,9 +10232,85 @@ most 98, the unordered splits are \((96,95)\), \((97,94)\) and
 \((98,93)\). Lean checked this deduction for two compatible indexed
 paths under the assumed 98-edge arm bounds, including preservation of
 the joining endpoint and compatibility under truncation.
-The archived collection of long donor shapes contains six
-other 96-edge parents and three 97-edge parents. Exhausting those
-records would still leave parent shapes outside the collection.
+The six other recorded 96-edge parents and the three recorded 97-edge
+parents are treated in Section~\ref{sec:long249}.
+
+\subsection{Long parents, transferable exclusions and movable crossings}\label{sec:long249}
+
+\begin{theorem}
+None of the fifteen recorded eight-dimensional parent shapes of lengths
+96 through 98 admits a single-crossing join of length 192 or greater.
+Across all fifteen shapes, exactly five reach 191. All five have 96
+edges. Their 25 maximizing joins are those of Section~\ref{sec:root248}.
+\end{theorem}
+\begin{proof}
+For each of the six remaining 96-edge parents, fix either endpoint and
+allow any induced partner in the opposite face. At length 95, eleven
+root exclusions and all seven first steps of the twelfth root cover the
+twelve endpoints. At length 94, eleven roots again close directly.
+For the remaining root of donor 16, five first steps close directly and
+the other two have five admissible second steps between them. All five
+close. The corresponding 18 and 21 contradiction certificates were
+replayed independently. Prefix truncation now bounds each of these
+six joins by \(96+1+93=190\). Donors 99 and 114 both attain 190.
+Section~\ref{sec:root248} treats the other five 96-edge parents.
+
+For each end of each recorded 97-edge parent, its first 96 edges
+give a rooted copy of one of the six just checked. Every partner
+avoiding the longer parent also avoids the shorter one. At the six
+roots needed for these three parents, the shorter subpaths exclude
+a 93-edge partner. Each 97-edge parent gives at most
+\(97+1+92=190\). For the saved 98-edge parent, donor 15 at its
+first endpoint and donor 17 at its last endpoint exclude even a
+92-edge partner. This strengthens Section~\ref{sec:prefix222}
+to an upper bound of \(98+1+91=190\).
+Direct searches with the full 98-edge parent exclude partner
+lengths 91, 90 and 89 at both endpoints. By truncation its maximum
+partner length is at most 88. An explicit 80-edge partner at each
+end gives \(179\le L\le187\) for its largest single-crossing join
+\(L\). Attainment of 187 remains open.
+Every longer candidate keeping one of the fifteen parents would
+contain a partner prefix giving exactly 192. The ordered sequences,
+root-preserving coordinate maps and proof records are archived in
+milestone 249~\cite{long249}.
+\end{proof}
+
+\begin{proposition}
+Let \(w_0,\ldots,w_m\) be distinct vertices of a cube, with consecutive
+vertices adjacent. Lift the prefix through \(w_k\) into one face of the
+next cube and the suffix from \(w_k\) into the other, duplicating
+\(w_k\) across the crossing. The lift is induced exactly when every
+nonconsecutive adjacent pair \(w_i,w_j\), with \(i<j\), satisfies
+\(i<k<j\). The admissible crossing positions form an integer interval,
+possibly empty.
+\end{proposition}
+\begin{proof}
+Simplicity makes the two copies of \(w_k\) the sole projected
+intersection. A chord survives precisely when both ends lie in the
+prefix or both lie in the suffix. Thus each chord restricts the cut
+to the open interval between its indices. Intersect these intervals
+with the available indices. Lean checked the equivalence and interval
+property for the ordered path in the binary product graph.
+\end{proof}
+
+All 25 single-crossing projections in the bank of 131 recorded
+191-edge paths have a unique admissible cut. Among the 373 projections
+from the 190-edge bank, 372 have one cut and one has two. Allowing an
+extra projected vertex at either free end and all possible new cuts
+recovers exactly the 25 known single-crossing 191-edge classes from
+the shorter bank. The same operation gives no 192-edge lift from the
+longer bank.
+
+To obtain new parents, replace an interior vertex of an induced path
+by the other common neighbour of its predecessor and successor.
+Verify the changed path and identify cube isometries and reversals.
+Starting from the fifteen archived shapes, repeated replacements
+give exactly 22 shapes, including five new 96-edge parents and two
+new 97-edge parents. For donor 16 the change at position 72 replaces
+vertex 82 by 16. Any 95-edge partner of the changed parent must pass
+through 82: otherwise it also fits the previously excluded parent.
+The vertex occurs internally by parity. This gives a concrete
+restriction at each joining endpoint of the new shape.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -12917,7 +12998,7 @@ Six subsequent maximization runs changed the free face while retaining the new s
 \subsection{Other searches and unresolved cases}
 Four structured searches for a 194-vertex coil used quotient-cube constructions with extra generators of weights 2, 4, 6, and 8. All were unresolved at their time limits; a small control lifted to a valid 14-vertex coil. No coil improvement follows.
 
-For the fixed eight-dimensional seed, the early searches for partner lengths 93, 92, and 91 at both endpoints each returned unknown after 30 seconds. Section~\ref{sec:prefix222} later excludes length 93; no compatible length-92 witness is established. A relaxation imposing only induced degree at most two admits 106 vertices in the permitted region, so that local degree condition alone is insufficient. Retaining 50 initial seed vertices in either orientation and exhaustively completing to length 98 recovered only the original completion, after 1,926,810 nodes in total. Retaining 42 vertices reached its twenty-million-node limit in both orientations. Neither result classifies all length-98 snakes.
+For the fixed eight-dimensional seed, the early searches for partner lengths 93, 92, and 91 at both endpoints each returned unknown after 30 seconds. Section~\ref{sec:prefix222} later excludes length 93, and Section~\ref{sec:long249} excludes length 92. A relaxation imposing only induced degree at most two admits 106 vertices in the permitted region, so that local degree condition alone is insufficient. Retaining 50 initial seed vertices in either orientation and exhaustively completing to length 98 recovered only the original completion, after 1,926,810 nodes in total. Retaining 42 vertices reached its twenty-million-node limit in both orientations. Neither result classifies all length-98 snakes.
 
 \subsection{Joint search with both layer paths variable}
 The fixed-seed obstruction does not exclude other pairs. A joint model therefore selects both projected paths, requires each to start at zero, and forbids every shared nonzero projected vertex. A circuit constraint with one auxiliary vertex enforces a single connected path in each layer; selected adjacent cube vertices must be consecutive in that path. The only cross-layer edge is then the intended join at zero.
@@ -14134,6 +14215,11 @@ nine-dimensional crossing construction}. Research milestone 247, 2026.
 I.~Hironaka, T.~Ma and S.~Zhan, \emph{Extremal partners of five intact
 96-edge arms}. Research milestone 248, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/248-rooted-arm-capacity}.
+
+\bibitem{long249}
+I.~Hironaka, T.~Ma and S.~Zhan, \emph{Long parents and movable crossings}.
+Research milestone 249, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/249-long-parent-joins}.
 
 \end{thebibliography}
 \end{document}
