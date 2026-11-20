@@ -5,15 +5,17 @@ set_option linter.deprecated false
 namespace Dim8Lift.Cube
 open Dim8Lift.Cnf Snake9.LocalWindow
 
-structure Dec (τ : Nat → Bool) (S : Nat → Bool) (ℓ : Nat → Nat) : Prop where
+structure Dec0 (τ : Nat → Bool) (S : Nat → Bool) (ℓ : Nat → Nat) : Prop where
   s : ∀ u, u < 256 → τ (sV u) = S u
   o : ∀ u j, u < 256 → 1 ≤ j → j ≤ 64 → τ (oV u j) = decide (j ≤ ℓ u)
-  a : ∀ u i j, u < 256 → i < 8 → 1 ≤ j → j ≤ 64 → τ (aV u i j) = (S (fx u i) && !decide (j ≤ ℓ (fx u i)))
   p : ∀ u a b, u < 256 → a < 8 → b < 8 → τ (pV u a b) = (S (fx u a) && S (fx u b))
   two : ∀ u, u < 256 → τ (twoV u) = twoB S u
   any : ∀ u, u < 256 → τ (anyV u) = anyB S u
   e1 : ∀ u, u < 256 → τ (e1V u) = (S u && !twoB S u)
   e0 : ∀ u, u < 256 → τ (e0V u) = (S u && !anyB S u)
+
+structure Dec (τ : Nat → Bool) (S : Nat → Bool) (ℓ : Nat → Nat) : Prop extends Dec0 τ S ℓ where
+  a : ∀ u i j, u < 256 → i < 8 → 1 ≤ j → j ≤ 64 → τ (aV u i j) = (S (fx u i) && !decide (j ≤ ℓ (fx u i)))
 
 theorem mem_R256 {u : Nat} : u ∈ R256 ↔ u < 256 := by simp [R256]
 theorem mem_pairs8 {a b : Nat} : (a, b) ∈ pairs8 ↔ a < b ∧ b < 8 := by
@@ -38,7 +40,7 @@ variable {τ : Nat → Bool} {S : Nat → Bool} {ℓ : Nat → Nat}
 theorem lp {v : Nat} (h : 0 < v) : litTrue τ (pos v) = τ v := litTrue_pos τ h
 theorem ln {v : Nat} (h : 0 < v) : litTrue τ (neg v) = !τ v := litTrue_neg τ h
 
-theorem fam_fix (hd : Dec τ S ℓ) (A : Nat) (hA : ∀ u, u < 64 → S u = A.testBit u) :
+theorem fam_fix (hd : Dec0 τ S ℓ) (A : Nat) (hA : ∀ u, u < 64 → S u = A.testBit u) :
     ∀ c ∈ famFix A, clauseTrue τ c = true := by
   intro c hc
   simp only [famFix, List.mem_map, List.mem_range] at hc
@@ -46,7 +48,7 @@ theorem fam_fix (hd : Dec τ S ℓ) (A : Nat) (hA : ∀ u, u < 64 → S u = A.te
   have hs := hd.s u (by omega); rw [hA u hu] at hs
   split <;> simp_all [clauseTrue, lp, ln, sV]
 
-theorem fam_deg {c' L D : Nat} (hp : Pit c' L D S ℓ) (hd : Dec τ S ℓ) : ∀ c ∈ famDeg, clauseTrue τ c = true := by
+theorem fam_deg {c' L D : Nat} (hp : Pit c' L D S ℓ) (hd : Dec0 τ S ℓ) : ∀ c ∈ famDeg, clauseTrue τ c = true := by
   intro c hc
   simp only [famDeg, List.mem_flatMap, List.mem_map] at hc
   obtain ⟨u, hu, ⟨a, b, d⟩, ht, rfl⟩ := hc

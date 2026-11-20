@@ -4,7 +4,7 @@ set_option linter.deprecated false
 namespace Dim8Lift.Cube
 open Dim8Lift.Cnf Snake9.LocalWindow
 
-variable {S : Nat → Bool} {ℓ : Nat → Nat}
+variable {S : Nat → Bool} {ℓ : Nat → Nat} {qm : Bool}
 
 theorem lt_block {i j K N : Nat} (hK : 0 < K) (hi1 : 1 ≤ i) (hi : i ≤ N) (hj1 : 1 ≤ j) (hj : j ≤ K) :
     (i - 1) * K + (j - 1) < N * K := by
@@ -38,7 +38,7 @@ theorem subLits_len (q : Nat) : (subLits q).length ≤ 256 := by
       exact Nat.le_trans (List.length_filter_le _ _) (by simp [R256])
 
 theorem hR_end {c L k : Nat} (hc : 1 ≤ c) : ∀ i j, 1 ≤ i → i ≤ endLits.length → 1 ≤ j → j ≤ 2 * c →
-    tauF S ℓ c L k (reg cbase (2 * c) i j) = decide (j ≤ cl (tauF S ℓ c L k) endLits i) := by
+    tauF S ℓ qm c L k (reg cbase (2 * c) i j) = decide (j ≤ cl (tauF S ℓ qm c L k) endLits i) := by
   intro i j hi1 hi hj1 hj
   rw [endLits_len] at hi
   have hb := lt_block (K := 2 * c) (N := 512) (by omega) hi1 hi hj1 hj
@@ -49,7 +49,7 @@ theorem hR_end {c L k : Nat} (hc : 1 ≤ c) : ∀ i j, 1 ≤ i → i ≤ endLits
     (i - 1) * (2 * c) + (j - 1) by omega, hd.1, hd.2, show j - 1 + 1 = j by omega, show i - 1 + 1 = i by omega]
 
 theorem hR_unsel {c L k : Nat} (hL : L ≤ 255) : ∀ i j, 1 ≤ i → i ≤ unselLits.length → 1 ≤ j → j ≤ 256 - L →
-    tauF S ℓ c L k (reg (b1 c) (256 - L) i j) = decide (j ≤ cl (tauF S ℓ c L k) unselLits i) := by
+    tauF S ℓ qm c L k (reg (b1 c) (256 - L) i j) = decide (j ≤ cl (tauF S ℓ qm c L k) unselLits i) := by
   intro i j hi1 hi hj1 hj
   rw [unselLits_len] at hi
   have hb := lt_block (K := 256 - L) (N := 256) (by omega) hi1 hi hj1 hj
@@ -61,7 +61,7 @@ theorem hR_unsel {c L k : Nat} (hL : L ≤ 255) : ∀ i j, 1 ≤ i → i ≤ uns
     hd.1, hd.2, show j - 1 + 1 = j by omega, show i - 1 + 1 = i by omega]
 
 theorem hR_sub {c L k : Nat} (hk : 1 ≤ k) (q : Nat) : ∀ i j, 1 ≤ i → i ≤ (subLits q).length → 1 ≤ j → j ≤ k →
-    tauF S ℓ c L k (reg (b2 c L + q * 256 * k) k i j) = decide (j ≤ cl (tauF S ℓ c L k) (subLits q) i) := by
+    tauF S ℓ qm c L k (reg (b2 c L + q * 256 * k) k i j) = decide (j ≤ cl (tauF S ℓ qm c L k) (subLits q) i) := by
   intro i j hi1 hi hj1 hj
   have hi' := Nat.le_trans hi (subLits_len q)
   have hb := lt_block (K := k) (N := 256) (by omega) hi1 hi' hj1 hj
@@ -76,7 +76,7 @@ theorem hR_sub {c L k : Nat} (hk : 1 ≤ k) (q : Nat) : ∀ i j, 1 ≤ i → i �
 
 theorem fam_cnt {c L k : Nat} (hp : Pit c L 64 S ℓ) (hc : 1 ≤ c) (hL : L ≤ 255) (hk : 1 ≤ k)
     (hsub : ∀ q, ((subcubes.getD q []).filter S).length ≤ k) :
-    ∀ cl' ∈ famCnt c L k, clauseTrue (tauF S ℓ c L k) cl' = true := by
+    ∀ cl' ∈ famCnt c L k, clauseTrue (tauF S ℓ qm c L k) cl' = true := by
   intro cl' hcl
   unfold famCnt at hcl
   simp only [List.mem_append, List.mem_flatMap, List.mem_range] at hcl
@@ -87,7 +87,7 @@ theorem fam_cnt {c L k : Nat} (hp : Pit c L 64 S ℓ) (hc : 1 ≤ c) (hL : L ≤
   · refine atMost_sound _ (b1 c) (256 - L) unselLits (by omega) (by unfold b1 cbase; omega)
       (fun l hl => (unselLits_lt l hl).2) (hR_unsel hL) ?_ _ h
     rw [cl_lo unselLits (fun l hl => (unselLits_lt l hl).1), cl_full]
-    have := unsel_count (S := S) (ℓ := ℓ); have := hp.card; omega
+    have := unsel_count (S := S) (ℓ := ℓ) (qm := qm); have := hp.card; omega
   · refine atMost_sound _ (b2 c L + q * 256 * k) k (subLits q) hk (by unfold b2 b1 cbase; omega)
       (fun l hl => (subLits_lt q l hl).2) (hR_sub hk q) ?_ _ h
     rw [cl_lo (subLits q) (fun l hl => (subLits_lt q l hl).1), cl_full, sub_count]; exact hsub q
@@ -96,18 +96,18 @@ theorem fam_cnt {c L k : Nat} (hp : Pit c L 64 S ℓ) (hc : 1 ≤ c) (hL : L ≤
 vertices satisfies the cube CNF. -/
 theorem bridge {c L A k : Nat} (hp : Pit c L 64 S ℓ) (hc : 1 ≤ c) (hL : L ≤ 255) (hk : 1 ≤ k)
     (hA : ∀ u, u < 64 → S u = A.testBit u) (hsub : ∀ q, ((subcubes.getD q []).filter S).length ≤ k) :
-    cnfTrue (tauF S ℓ c L k) (cubeCnfC4 c L A k) = true := by
+    cnfTrue (tauF S ℓ false c L k) (cubeCnfC4 c L A k) = true := by
   have hd := dec_tauF (S := S) (ℓ := ℓ) c L k
   unfold cnfTrue cubeCnfC4
   rw [List.all_eq_true]
   intro cl' hcl
   simp only [List.mem_append] at hcl
   rcases hcl with ((((h | h) | h) | h) | h) | h
-  · exact fam_fix hd A hA cl' h
-  · exact fam_deg hp hd cl' h
+  · exact fam_fix hd.toDec0 A hA cl' h
+  · exact fam_deg hp hd.toDec0 cl' h
   · exact fam_lvl hp hd cl' h
-  · exact fam_def hd cl' h
-  · exact fam_c4 hp hd cl' h
+  · exact fam_def hd.toDec0 cl' h
+  · exact fam_c4 hp hd.toDec0 cl' h
   · exact fam_cnt hp hc hL hk hsub cl' h
 
 theorem no_pit_of_unsat {c L A k : Nat} (hu : Unsat (cubeCnfC4 c L A k)) (hc : 1 ≤ c) (hL : L ≤ 255)

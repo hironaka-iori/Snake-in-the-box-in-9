@@ -9,7 +9,7 @@ variable {τ : Nat → Bool} {S : Nat → Bool} {ℓ : Nat → Nat}
 
 theorem pos_v {v : Nat} (h : 0 < v) : litTrue τ (pos v) = τ v := litTrue_pos τ h
 
-theorem defU_ok (hd : Dec τ S ℓ) {u : Nat} (hu : u < 256) : ∀ c ∈ defU u, clauseTrue τ c = true := by
+theorem defU_ok (hd : Dec0 τ S ℓ) {u : Nat} (hu : u < 256) : ∀ c ∈ defU u, clauseTrue τ c = true := by
   have vp : ∀ a b, 0 < pV u a b := by intro a b; unfold pV; omega
   have vs : ∀ i, 0 < sV i := by intro i; unfold sV; omega
   have vt : 0 < twoV u := by unfold twoV; omega
@@ -67,7 +67,7 @@ theorem defU_ok (hd : Dec τ S ℓ) {u : Nat} (hu : u < 256) : ∀ c ∈ defU u,
           hd.e1 u hu, hd.e0 u hu, hd.s u hu, hd.two u hu, hd.any u hu] <;>
         cases S u <;> cases twoB S u <;> cases anyB S u <;> simp
 
-theorem fam_def (hd : Dec τ S ℓ) : ∀ c ∈ famDef, clauseTrue τ c = true := by
+theorem fam_def (hd : Dec0 τ S ℓ) : ∀ c ∈ famDef, clauseTrue τ c = true := by
   intro c hc
   simp only [famDef, List.mem_flatMap] at hc
   obtain ⟨u, hu, hc⟩ := hc
@@ -127,7 +127,7 @@ theorem xx (u a : Nat) : (u ^^^ 2 ^ a) ^^^ 2 ^ a = u := by rw [Nat.xor_assoc, Na
 theorem xsw (u a b : Nat) : (u ^^^ 2 ^ a) ^^^ 2 ^ b = (u ^^^ 2 ^ b) ^^^ 2 ^ a := by
   rw [Nat.xor_assoc, Nat.xor_assoc, Nat.xor_comm (2 ^ a)]
 
-theorem fam_c4 {c' L D : Nat} (hp : Pit c' L D S ℓ) (hd : Dec τ S ℓ) : ∀ c ∈ famC4, clauseTrue τ c = true := by
+theorem fam_c4 {c' L D : Nat} (hp : Pit c' L D S ℓ) (hd : Dec0 τ S ℓ) : ∀ c ∈ famC4, clauseTrue τ c = true := by
   intro c hc
   simp only [famC4, List.mem_flatMap, List.mem_filterMap] at hc
   obtain ⟨u, hu, ⟨a, b⟩, hab, hc⟩ := hc

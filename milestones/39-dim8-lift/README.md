@@ -248,6 +248,34 @@ Measured on the 25 s cube (representative line 5 of `data/q8_sample_reps.txt`):
   - the first by a Bool check of the renaming;
   - the second by an ordered walk of the core's clause indices through the generated CNF.
 
+### Certificate encoding: parent-pointer levels (`cubeCnfQ`), 20 Nov
+
+The first pilot used `cubeCnfC4` and was far too slow: more than 3.4 ms per hint on the pilot
+machine, and 0.8-1.7 ms per segment here.
+
+- **Cause.** Its core has 54,398 variables, 40k of them the auxiliary `a(u,i,j)` variables of the
+  level encoding. At literal offset 65,536 every clause mask is ~130k bits. With offset 262,144 one
+  segment exceeded memory.
+- **Fix.** `cubeCnfQ` replaces the `a` variables by 2,048 parent pointers `q(u,i)`, with clauses
+  `two -> OR q`, `q -> s(nb)`, `q -> o(u,1)`, `q and o(nb,j) -> o(u,j+1)`, and
+  `q -> not o(nb,64)`.
+- **Lean.** The bridge is `CubeBridgeQ.no_pit_of_unsatQ`, the glue is `GlueQ.noPit_of_cubesQ`, and
+  the final theorem is `Final.upper_of_certsQ`. All use standard axioms.
+
+On the same cube (`cert/results/encoding_q_local.json`):
+
+| | `cubeCnfC4` | `cubeCnfQ` |
+|---|---|---|
+| solve | 25 s | 18 s |
+| core clauses | 75,503 | 14,015 |
+| core variables | 54,398 | 9,050 |
+| trimmed hints | 1,880,307 | 1,044,305 |
+| replay | > 6,400 s on the pilot machine | **214 s**, 21 segments, peak 3.3 GB |
+| ms per hint | > 3.4 | **0.205** |
+
+Level 116 therefore costs ~12 Lean seconds per solver second, so ~2,300 Lean CPU-hours, plus the
+per-certificate glue (renaming check, walk over the generated CNF), which is not yet measured.
+
 ## 5. The owner's questions 2(a) and 2(b) (moved to milestone 41 by the coordinator)
 
 These were measured before the scope change:

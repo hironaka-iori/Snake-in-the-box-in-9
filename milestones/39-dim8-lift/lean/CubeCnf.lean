@@ -116,3 +116,21 @@ namespace Dim8Lift.Cube
 def cubeCnfC4 (c L A k : Nat) : List (List Int) :=
   famFix A ++ famDeg ++ famLvl ++ famDef ++ famC4 ++ famCnt c L k
 end Dim8Lift.Cube
+
+namespace Dim8Lift.Cube
+open Dim8Lift.Cnf
+/-! Parent-pointer level encoding (fewer variables): `qV u i` = the selected neighbour `u ^^^ 2^i` has
+smaller level than `u`.  two → some q; q → neighbour selected; q ∧ level(nb) ≥ j → level(u) ≥ j+1;
+q → level(u) ≥ 1; q ∧ level(nb) ≥ 64 → false. -/
+def qV (u i : Nat) : Nat := 16641 + 8 * u + i
+def lvlQU (u : Nat) : List (List Int) :=
+  lvlMono u ++
+  (neg (twoV u) :: (List.range 8).map fun i => pos (qV u i)) ::
+  ((List.range 8).flatMap fun i =>
+    [neg (qV u i), pos (sV (fx u i))] :: [neg (qV u i), pos (oV u 1)] ::
+    [neg (qV u i), neg (oV (fx u i) 64)] ::
+    (List.range 63).map fun j0 => [neg (qV u i), neg (oV (fx u i) (j0 + 1)), pos (oV u (j0 + 2))])
+def famLvlQ : List (List Int) := R256.flatMap lvlQU
+def cubeCnfQ (c L A k : Nat) : List (List Int) :=
+  famFix A ++ famDeg ++ famLvlQ ++ famDef ++ famC4 ++ famCnt c L k
+end Dim8Lift.Cube

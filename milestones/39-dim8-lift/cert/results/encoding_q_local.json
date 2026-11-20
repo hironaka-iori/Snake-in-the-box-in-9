@@ -1,0 +1,42 @@
+{
+ "cube": "036cbc13bc5243ac (size 29), L = 116, c = 13",
+ "old_encoding_cubeCnfC4": {
+  "solve_s": 25,
+  "core_clauses": 75503,
+  "core_vars": 54398,
+  "hints": 1880307,
+  "off": 65536,
+  "segment_kernel_s": {
+   "seg0 (9887 hints)": 17,
+   "seg10 (60011 hints)": 50,
+   "seg39 (46957 hints)": 45
+  },
+  "ms_per_hint_segments": "0.8-1.7 (local, 1 core); full replay on the pilot machine > 6400 s (> 3.4 ms/hint)",
+  "off_262144": "segment 10 killed for memory (> 9 GB) after 77 s"
+ },
+ "new_encoding_cubeCnfQ_parent_pointer_levels": {
+  "solve_s": 18,
+  "core_clauses": 14015,
+  "core_vars": 9050,
+  "hints": 1044305,
+  "off": 9051,
+  "segments": 21,
+  "lean_bytes": 7584516,
+  "full_replay_build_s": 214,
+  "peak_rss_mb": 3322,
+  "ms_per_hint": 0.205,
+  "axioms": "Snake9.LocalWindow.CubeP0.unsat depends on axioms: [propext, Classical.choice, Quot.sound]"
+ },
+ "machine": "4-core shared machine, 4 solver jobs running alongside",
+ "provenance_glue": {
+  "theorem": "Dim8Lift.Prov.unsat_of_prov (tags regenerate each core clause; genQ_mem proves membership in cubeCnfQ)",
+  "core_entries": 14015,
+  "data_elaboration_s": 70,
+  "data_peak_mb": 3047,
+  "data_plus_kernel_check_s": 101,
+  "check_peak_mb": 6809,
+  "note": "Int literals in data cost ~30 ms per clause to elaborate; Nat codes (decodeLit) are used instead",
+  "walk_over_full_generated_cnf": "> 30 min (stopped): not usable"
+ },
+ "per_certificate_total_s_estimate": "replay 214 + provenance ~101 + renaming check (small) = ~320 s for an 18 s solve, ~18 Lean s per solver s"
+}
