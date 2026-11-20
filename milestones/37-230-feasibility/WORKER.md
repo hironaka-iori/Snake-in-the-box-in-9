@@ -119,3 +119,23 @@ on every worker uses:
 - on each wake: one check, relaunch only if the job died, re-arm both, end
   the turn with no text. No other commands or messages unless the job
   finished or failed.
+
+## Share split parts (20 Nov 07:30 UTC; helper machines)
+
+The five last share certificates (W01234501, W01234560, W01234561, W01234564, W01234567) take hours as one
+Lean build and keep being lost to container restarts, so they go by the split route: one owner machine (the
+Lean engineer's) prepares each item and builds its final; any machine may build unpublished parts. Each
+part takes ~20-30 min (1 core, peak <= 6.5 GB) and is published at once to xfer/c230split/<item>-k<K>, so
+a restart loses at most the part in progress. Setup and launch:
+
+  cd ~/Snake-in-the-box-in-9 2>/dev/null || cd /home/user/Snake-in-the-box-in-9
+  git fetch origin research/unconditional-241 && git checkout -B research/unconditional-241 FETCH_HEAD
+  [ -f ~/l435/prod/core/LocalWindowShareCtx.olean ] || python3 lean435/tools/prod435.py setup
+  for j in 1 2; do setsid nohup python3 lean435/tools/c230sharesplit.py help --rss-gb 6.5 >> ~/c230ss$j.log 2>&1 < /dev/null & done
+
+(two part processes on a 16 GB / 4-core machine; one on smaller machines). LOGFILE ~/c230ss1.log, PGREP
+"c230sharesplit.py help". The tool sets the c230 environment itself, picks unpublished parts of items whose
+sources are published in random order (no claims; a duplicate part is harmless), and ends with "no
+unpublished part ... done". Status of one item:
+`PROD435_PFX=refs/heads/xfer/c230/ python3 lean435/tools/splitfarm435.py status --name W01234501AFFFFFFFK29`.
+Keep the session alive as in "Cheap keep-alive"; relaunch the same line after a restart.
