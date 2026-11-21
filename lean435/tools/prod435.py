@@ -676,12 +676,13 @@ class Scan:
 
     def __init__(self, pfxs, skip_ref=None):
         self.pfxs, self.skip_ref = pfxs, skip_ref
+        self.RUN_TTL = float(os.environ.get('PROD435_RUN_TTL_H', '2')) * 3600
         self.b = os.path.join(HOME, 'scan.git')
         if not os.path.exists(os.path.join(self.b, 'HEAD')):
             os.makedirs(self.b, exist_ok=True)
             git('init', '-q', '--bare', self.b)
         self.url = url()
-        self.cache = {}                                   # ref -> (tip, modules, running)
+        self.cache = {}                                   # ref -> (tip, modules, running, tip commit time)
 
     def _blobs(self, shas):
         miss = [x for x in shas if subprocess.run(['git', 'cat-file', '-e', x], cwd=self.b,
@@ -722,12 +723,20 @@ class Scan:
                     run = set(json.loads(git('cat-file', 'blob', rec, cwd=self.b) or '{}').get('running') or [])
                 except ValueError:
                     pass
-            self.cache[ref] = (t, mods, run)
+            try:
+                ct = int(git('log', '-1', '--format=%ct', t, cwd=self.b).strip() or 0)
+            except (RuntimeError, ValueError):
+                ct = 0
+            self.cache[ref] = (t, mods, run, ct)
         for ref in list(self.cache):
             if ref not in tips:
                 del self.cache[ref]
         pub = set().union(*[v[1] for v in self.cache.values()]) if self.cache else set()
-        run = set().union(*[v[2] for v in self.cache.values()]) if self.cache else set()
+        # a `running` list is only as fresh as its branch tip: a machine that died (container lost, usage
+        # stop) leaves it behind for good, so it counts for RUN_TTL s only. A live machine also holds claims
+        # on what it runs (renewed every --heartbeat s), so its long builds stay skipped through those.
+        now = time.time()
+        run = set().union(*[v[2] for v in self.cache.values() if now - v[3] < self.RUN_TTL]) if self.cache else set()
         return pub, run
 
 
