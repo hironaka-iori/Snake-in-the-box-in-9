@@ -208,6 +208,10 @@ theorem genQ_mem {c L A k : Nat} {t : List Nat} {cl : List Int} (h : genQ c L A 
 def coreOk (c L A k : Nat) (core : List (List Nat × List Nat)) : Bool :=
   core.all fun p => genQ c L A k p.1 == some (p.2.map Snake9.LocalWindow.decodeLit)
 
+theorem coreOk_append (c L A k : Nat) (a b : List (List Nat × List Nat)) :
+    coreOk c L A k (a ++ b) = (coreOk c L A k a && coreOk c L A k b) := by
+  simp [coreOk, List.all_append]
+
 theorem unsat_of_prov {c L A k : Nat} (core : List (List Nat × List Nat)) (h : coreOk c L A k core = true)
     (hU : Snake9.LocalWindow.Unsat (core.map fun p => p.2.map Snake9.LocalWindow.decodeLit)) :
     Snake9.LocalWindow.Unsat (cubeCnfQ c L A k) := by

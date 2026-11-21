@@ -335,3 +335,63 @@ SKIP=../data/q8_L116_c4_results.jsonl SHARD=$S/$N GEN=lean ORDER=small \
 - Results go to `~/q8L116/results.jsonl`; the run is resumable.
 - Memory is about 0.5 GB per job.
 - The 24 size-31/32 cubes should go to `split.py` instead (60-300 s leaves).
+
+### Per-cube certificate, end to end (21 Nov, measured)
+
+`cert/make_cert.py L Ahex k OUT` writes one complete certificate `Unsat (cubeCnfQ 13 L A k)` as Lean
+4.35 `module` files; `cert/build_cert.sh OUT MOD` builds them (STACK = the ported stack, made by
+`lean435/tools/port.py LocalWindowModel LratV3 Snake9 ProofPack` plus `cert/port39.py RenN Split Final`;
+`port39.py` replaces `Snake9Core` by the audited `Snake9`, whose definition block it copies verbatim).
+
+- Pipeline: Lean export -> CaDiCaL LRAT -> core compaction (`pilot.py`) -> v3 replay (`genv3stream.py`)
+  -> provenance chunks (`coreOk`, per 4,000 clauses) -> renaming check per chunk (`RenN.renN`, variables
+  looked up in a balanced tree, ~14 `Nat` divisions per literal) -> top module.
+- The earlier one-shot renaming check (`CertGlue.renChk`, linear `List.getD`) ran out of memory at 12.9 GB.
+- Only `public theorem unsat` is exported. Its public `.olean` is 9 KB. An importer given only that file
+  (`lean --setup`, `importArts`, as in `audit.py`) checks `#print axioms` in 0.26 s:
+  `[propext, Classical.choice, Quot.sound]`.
+
+Pilot cube `036cbc13bc5243ac` (k = 29, solve 14 s; core 14,015 clauses, 9,050 variables, 1.04 M hints):
+
+| module | s | peak RSS |
+|---|---|---|
+| generation (export, solve, compaction, replay data) | 35 | small |
+| 4 core-data chunks + parent | 31 | 0.7 GB |
+| v3 replay (21 segments) | 187 | 3.0 GB |
+| tree, 4 provenance+renaming chunks | 148 | 2.6 GB |
+| top module | 67 | 3.7 GB |
+| **total** | **~470 s CPU** | **3.7 GB** |
+
+About 29 Lean s per solver s on this cube; the earlier estimate (18 Lean s per solver s, ~3,400 Lean CPU-h
+for level 116) may be low by up to 1.6x. More cubes are needed before revising it.
+
+`lean/Split.lean` (`unsat_of_split`, `coreOkU`, `unsat_of_provU`): a cube split by a binary tree of
+variable literals is UNSAT if every leaf CNF `units path ++ cubeCnfQ` is; a leaf certificate tags its
+unit clauses with `[]`. Compiles; generator support for split leaves is not written yet.
+
+Batch of 4 more level-116 cubes (k = 29, module form, ported stack; 2 jobs in parallel next to the
+3-process solve run):
+
+| cube | Q solve s | core clauses | hints | Lean s | Lean s / solve s | ms / hint | peak RSS |
+|---|---|---|---|---|---|---|---|
+| 036cbc13bc5243ac | 14 | 14,015 | 1.04 M | 433 | 30 | 0.41 | 3.7 GB |
+| 03699c169cc3633c | 22 | 16,089 | 1.34 M | 614 | 28 | 0.46 | 3.9 GB |
+| 033c6996c2699669 | 71 | 22,256 | 5.29 M | 2,321 | 33 | 0.44 | 6.05 GB |
+| 035a78a57ca18356 | 94 | 21,781 | 9.75 M | 4,093 | 44 | 0.42 | 7.6 GB |
+| 06b1b946b9464639 | 124 | 37,532 | 9.65 M | ~5,700 | 46 | 0.59 | 9.7 GB |
+
+- Kernel cost per hint is stable at 0.41-0.46 ms (all modules, including the provenance and renaming
+  chunks). Per solver second it varies from 28 to 44, so estimates should be made in hints.
+- 06b1b946b9464639's replay module was OOM-killed after 2,875 s at 7.7 GB, while the other job's replay
+  (6 GB) and 3 CaDiCaL processes ran: the container total went over the cgroup limit. It is being rebuilt
+  alone (`build_cert.sh` now skips built modules). Alone it built: replay 5,087 s at 9.7 GB (23,382
+  core variables: clause masks are wider, so 0.53 ms per replay hint).
+- Two generator fixes came out of this cube: the renaming tree is now split into 128 subtree
+  definitions (one nested literal of 23 k leaves hit maxRecDepth), and the renaming chain in the top
+  module is built left-associatively like `++` itself. Before, the top module proved the
+  re-association by unfolding the data (67-85 s, maxRecDepth at 10 chunks); now it takes about 1 s.
+- All five public .olean files (9-12 KB) give `unsat` from a clean `lean --setup` directory with
+  axioms [propext, Classical.choice, Quot.sound].
+- Peak RSS is about 3.1 GB + 0.55 GB per million hints (the replay module dominates). `prod_d8.py`
+  reserves memory with that prediction (times sqrt(vars / 14,000) above 14 k variables) once the hint
+  count is known, so at --mem-gb 12 two ~10 M-hint jobs never run together.
