@@ -131,7 +131,10 @@ def job1(a, k, h, res):
         res.append(rec); return
     g = json.loads(r.stdout.strip().splitlines()[-1]); rec.update(gen_s=g['gen_s'], solve_s=g['solve_s'], hints=g['replay']['hints'],
                                                                   core=g['core']['core'], vars=g['core']['vars'])
-    pg = pred_gb(g['replay']['hints'], g['core']['vars']); reserve(GEN_GB, pg); BUDGET_OF[me] = pg; rec['pred_gb'] = round(pg, 1)
+    pg = pred_gb(g['replay']['hints'], g['core']['vars']); rec['pred_gb'] = round(pg, 1)
+    if pg > a.mem_gb:   # cannot build here (k = 30 cubes reach 133 M hints, ~100 GB): left to a bigger machine
+        rec.update(status='TOO_BIG', mem_gb=a.mem_gb); res.append(rec); return
+    reserve(GEN_GB, pg); BUDGET_OF[me] = pg
     tb = time.time()
     r = sh(['bash', os.path.join(HERE, 'build_cert.sh'), wd, 'Q' + h.upper()], env=dict(os.environ, STACK=os.path.join(a.stack, 'build')))
     rss = [int(x.split()[0]) for x in r.stdout.split(' s ')[1:] if x.split()[0].isdigit()]
@@ -178,7 +181,8 @@ def run(a):
     a.commit = sh(['git', 'rev-parse', 'HEAD'], cwd=ROOT).stdout.strip()
     man = os.path.join(a.work, 'manifest.jsonl')
     # only certified (or SAT?) items count as done: a failed item is retried by the next run
-    done = {r['module'] for r in map(json.loads, open(man)) if r['status'] in ('OK', 'SAT?')} if os.path.exists(man) else set()
+    done = {r['module'] for r in map(json.loads, open(man)) if r['status'] in ('OK', 'SAT?')
+            or (r['status'] == 'TOO_BIG' and r.get('mem_gb', 0) >= a.mem_gb)} if os.path.exists(man) else set()
     its = items(a.L)
     if a.only: its = [x for x in its if x[1] in a.only.split(',')]
     else: its = [x for x in its if x[0] <= a.max_k and int(hashlib.sha1(modname(x[1]).encode()).hexdigest(), 16) % a.workers in a.indices]
