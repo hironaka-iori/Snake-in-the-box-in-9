@@ -304,7 +304,7 @@ def published_elsewhere(mod):
     """Branches (owners and helpers of the family) on which `mod` is already published."""
     sc = P.Scan([P.PFX, P.HELP_PFX])
     sc.refresh()
-    return sorted(ref for ref, (_t, mods, _r) in sc.cache.items() if mod in mods)
+    return sorted(ref for ref, (_t, mods, *_r) in sc.cache.items() if mod in mods)
 
 
 def publish(a, res, olean):
