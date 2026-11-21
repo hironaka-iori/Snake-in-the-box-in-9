@@ -124,7 +124,12 @@ def job1(a, k, h, res):
     me = threading.get_ident(); BUDGET_OF[me] = GEN_GB   # the main loop has added GEN_GB to BUDGET['used']
     mod = modname(h); wd = os.path.join(a.work, 'jobs', mod); shutil.rmtree(wd, ignore_errors=True); os.makedirs(wd)
     t = time.time(); rec = dict(module=mod, A=h, k=k, L=a.L, host=socket.gethostname(), commit=a.commit)
-    r = sh([sys.executable, os.path.join(HERE, 'make_cert.py'), str(a.L), h, str(k), wd], cwd=HERE)
+    # solve-time cap: hints <= (mem_gb - 3.1) / 0.55 M fit; at >= 28 k hints per solver second a longer solve cannot fit
+    lim = max(300.0, (a.mem_gb - 3.1) / 0.55 * 1e6 / 28000)
+    r = sh([sys.executable, os.path.join(HERE, 'make_cert.py'), str(a.L), h, str(k), wd], cwd=HERE,
+           env=dict(os.environ, SOLVE_LIMIT=str(round(lim))))
+    if r.returncode == 11:   # solve cap reached: too big for this machine, left to a bigger one
+        rec.update(status='TOO_BIG', mem_gb=a.mem_gb, solve_limit=round(lim)); res.append(rec); return
     if r.returncode != 0:
         rec.update(status='SAT?' if r.returncode == 10 else 'GEN_FAILED',
                    log=(r.stdout + r.stderr)[-1500:])

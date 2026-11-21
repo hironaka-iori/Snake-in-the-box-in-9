@@ -14,7 +14,15 @@ cnf = os.path.join(W, 'f.cnf'); tags = os.path.join(W, 'tags.txt'); lrat = os.pa
 subprocess.run([LEAN, '--run', 'Export.lean', '13', str(L), Ahex, str(k), cnf, 'q'], cwd=LEANDIR, env=env, check=True)
 subprocess.run([LEAN, '--run', 'ExportTags.lean', '13', str(L), Ahex, str(k), tags], cwd=LEANDIR, env=env, check=True)
 s = time.time()
-r = subprocess.run(['cadical', '-q', '--lrat', '--binary=false', cnf, lrat], capture_output=True, text=True)
+# SOLVE_LIMIT (s, from prod_d8.py): a longer solve means a certificate too big for this machine's memory
+# (~28-52 k hints per solver second); stop, delete the partial LRAT, exit 11 (recorded as TOO_BIG)
+lim = float(os.environ.get('SOLVE_LIMIT', '0'))
+try:
+    r = subprocess.run(['cadical', '-q', '--lrat', '--binary=false', cnf, lrat], capture_output=True, text=True, timeout=lim or None)
+except subprocess.TimeoutExpired:
+    for f_ in (lrat, cnf, tags):
+        if os.path.exists(f_): os.remove(f_)
+    print(json.dumps(dict(stats, status='TOO_BIG', solve_limit=lim))); sys.exit(11)
 stats['solve_s'] = round(time.time() - s, 1)
 if 's SATISFIABLE' in r.stdout:
     print(json.dumps(dict(stats, status='SATISFIABLE'))); sys.exit(10)   # a SAT cube: report, never certify
