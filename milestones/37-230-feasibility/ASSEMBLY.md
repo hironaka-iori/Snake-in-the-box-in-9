@@ -1,7 +1,15 @@
 # Lean glue and assembly of the bound 230 (K7 route)
 
-Status: **in progress** (18 November 2026). Nothing here claims the bound: the claim needs a passing
-final audit of `Snake9.upper_230_435`.
+Status: **done** (21 November 2026, 09:22 UTC). The final audit of `Snake9.upper_230_435` passed:
+
+```
+public theorem upper_230_435 : ∀ {m : Nat}, Snake m → m ≤ 230
+'Snake9.upper_230_435' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+assembled from certificate interfaces only (audit230/final-audit.txt, audit230/UpperBound230_435.lean,
+audit230/final-manifest.jsonl.gz = the 61,162 manifest lines of the 43,846 certificate interfaces used:
+230 families xfer/c230*, plus the 231 archive research/c435-interfaces-231).
 
 ## The theorem and its premises
 
@@ -71,7 +79,24 @@ python3 lean435/tools/assemble230.py --spec-src ~/l435/prod/core-src --spec-buil
 directory, strace), then `UpperBound230_435.lean` with `audit.py final`; the axioms of
 `Snake9.upper_230_435` must be within `[propext, Classical.choice, Quot.sound]`.
 
-## Tests so far
+## Final audit (21 Nov, 09:22 UTC)
+
+`await230.py` (spec layer of c230chain.sh, the merged xfer/c230 and xfer/c230help families including the
+share split finals on w690, the 231 archive) built all 305 glue chunks, `G230S` and `G230`, then
+`UpperBound230_435` with `audit.py final`:
+- loaded modules: core 213, interfaces 43,846, mathlib 3,121, spec 728; every interface and every locally
+  rebuilt spec module hash-checked against its manifest;
+- strace: 17,229 Lean data files opened, none outside the clean directory and the toolchain; no
+  `.olean.private`/`.olean.server` of a certificate opened;
+- `#print axioms Snake9.upper_230_435`: `[propext, Classical.choice, Quot.sound]` (whitelist ok); no `sorry`,
+  no `native_decide`;
+- final compile 150 s, audit 178 s. **AUDIT PASSED.**
+
+Share certificates: 127 of 132 by prod435's share route, the five largest (W01234501, …560, …561, …564,
+…567; up to 40 M hints and 8 GB as one Lean module, repeatedly lost to container restarts) by
+splitfarm435's split route (`lean435/tools/c230sharesplit.py`: 16 or 8 parts, final on xfer/c230help/w690).
+
+## Tests before the final audit
 
 - **Conditional 230 (18 Nov, 03:40 UTC):** the whole spec layer (417 modules: core, ported K7 chain,
   main-line bridges, `C230*` incl. all 85 row-check modules and the shape covers) built on this machine;
