@@ -22,3 +22,10 @@ Report to the coordinating session (send_message) only: a `SAT?` record, the pub
 (`publish failed` in the log), a build failing twice, or `worker finished` with the final counts
 (`python3 milestones/39-dim8-lift/cert/prod_d8.py status --work ~/d8work`). Do not edit code, do not
 push anywhere else, stop only when the coordinating session says so (`touch ~/d8work/STOP`, kill by PID).
+
+## Code update (when the coordinating session says "update to <commit>")
+
+Kill the worker and its children by PID (`pgrep -f "[p]rod_d8.py run"`, `pgrep -f "[m]ake_cert.py"`,
+`pgrep -f "[b]uild_cert.sh"`, `pgrep -f "[l]ean.*--root"`; `kill` those PIDs), then rerun the two
+lines at the top. Finished certificates are kept; failed and interrupted items are retried. The
+built stacks in `~/d8stack` and the plain stack are reused (only rebuilt if missing).
