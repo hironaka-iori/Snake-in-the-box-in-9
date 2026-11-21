@@ -139,3 +139,7 @@ sources are published in random order (no claims; a duplicate part is harmless),
 unpublished part ... done". Status of one item:
 `PROD435_PFX=refs/heads/xfer/c230/ python3 lean435/tools/splitfarm435.py status --name W01234501AFFFFFFFK29`.
 Keep the session alive as in "Cheap keep-alive"; relaunch the same line after a restart.
+A part that fails in a helper (e.g. "KILLED: RssAnon above 6.5 GB") is skipped by that process from then on
+(fetch >= the commit adding this line). Such BIG parts are built by ONE helper alone on a 16 GB machine:
+  setsid nohup python3 lean435/tools/c230sharesplit.py help --rss-gb 12 --first W01234501:14 >> ~/c230ssbig.log 2>&1 < /dev/null &
+(--first lists the known big parts, item prefix:K; it then continues with any part).

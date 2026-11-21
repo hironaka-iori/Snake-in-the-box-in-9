@@ -5,9 +5,14 @@ Lean build takes hours and keeps being lost to container restarts.
     c230sharesplit.py own  NAME [--parts 16] [--index 690]   prepare (once), every unpublished part 2 at a
                                                              time, then the final (published to
                                                              xfer/c230help/w<index>); rerunnable
-    c230sharesplit.py help [--hours 12] [--rss-gb 6.5]        helper: build unpublished parts of the items in
+    c230sharesplit.py help [--hours 12] [--rss-gb 6.5] [--first W01234501:14 ...]
+                                                             helper: build unpublished parts of the items in
                                                              ITEMS (sources published, part not yet), one
-                                                             part at a time, until none is left
+                                                             part at a time, until none is left; a part that
+                                                             fails here (e.g. above --rss-gb) is skipped by this
+                                                             process from then on. Parts above 6.5 GB: one
+                                                             helper alone on a 16 GB machine with --rss-gb 12
+                                                             and --first <those parts>
 
 Each part is a separate module, published to xfer/c230split/NAME-k<K> as soon as it is built, so a
 restart loses at most the parts in progress. There are no claims: a helper takes the parts in a random
@@ -74,6 +79,7 @@ def cmd_own(a):
 
 def cmd_help(a):
     end = time.time() + a.hours * 3600
+    failed = set()       # parts that failed here (e.g. above --rss-gb): left to a --rss-gb 12 helper
     while time.time() < end:
         t = tips()
         cand = []
@@ -81,14 +87,17 @@ def cmd_help(a):
             if f'src-{n}' not in t:
                 continue
             for k in nparts(n):
-                if f'{n}-k{k}' not in t:
+                if f'{n}-k{k}' not in t and (n, k) not in failed:
                     cand.append((n, k))
         if not cand:
-            log('no unpublished part of a share split item with published sources: done')
+            log('no unpublished part of a share split item with published sources: done'
+                + (f' ({len(failed)} failed here: {sorted(failed)})' if failed else ''))
             return
-        n, k = random.choice(cand)
+        first = [c for c in cand if f'{c[0][:9]}:{c[1]}' in a.first]
+        n, k = first[0] if first else random.choice(cand)
         if run(SF + ['part', '--name', n, '--jobs', '1', '--rss-gb', str(a.rss_gb), '--k', str(k)]):
-            log(f'{n} part {k} FAILED')
+            log(f'{n} part {k} FAILED (skipped from now on in this process)')
+            failed.add((n, k))
             time.sleep(60)
 
 
@@ -103,6 +112,7 @@ def main():
     p = sub.add_parser('help')
     p.add_argument('--hours', type=float, default=12)
     p.add_argument('--rss-gb', type=float, default=6.5)
+    p.add_argument('--first', nargs='*', default=[], help='parts to take first, e.g. W01234501:14 (big parts)')
     a = ap.parse_args()
     {'own': cmd_own, 'help': cmd_help}[a.cmd](a)
 
