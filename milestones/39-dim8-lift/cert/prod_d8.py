@@ -31,7 +31,8 @@ import argparse, hashlib, json, os, shutil, socket, subprocess, sys, threading, 
 
 HERE = os.path.dirname(os.path.abspath(__file__)); M = os.path.abspath(os.path.join(HERE, '..'))
 ROOT = os.path.abspath(os.path.join(M, '..', '..')); LEAN = '/opt/lean-4.35.0-linux/bin/lean'
-GEN_GB = 1.5        # generation (CaDiCaL, compaction, genv3stream) before the hint count is known
+GEN_GB = 4.0        # generation (CaDiCaL, compaction, genv3stream) before the hint count is known;
+                    # 1.5 GB let pilot.py be OOM-killed on k = 30 cubes next to 2 other jobs (16 GB sessions)
 def pred_gb(hints, nvars):
     # measured peaks (hints, core vars -> GB): 1.0 M, 9 k -> 3.7; 1.3 M, 11 k -> 3.9; 5.3 M, 14 k -> 6.05;
     # 9.75 M, 14 k -> 7.6; 9.65 M, 23 k -> 9.7 (clause masks grow with the variable count)
@@ -155,6 +156,7 @@ def publish(a):
         os.makedirs(pub, exist_ok=True); sh(['git', 'init', '-q'], cwd=pub)
         url = sh(['git', 'remote', 'get-url', 'origin'], cwd=ROOT).stdout.strip(); sh(['git', 'remote', 'add', 'origin', url], cwd=pub)
         if sh(['git', 'fetch', '-q', 'origin', ref], cwd=pub).returncode == 0: sh(['git', 'reset', '-q', '--hard', 'FETCH_HEAD'], cwd=pub)
+    os.makedirs(os.path.join(a.work, 'olean'), exist_ok=True)   # no certificate yet: publish the manifest alone
     for f in os.listdir(os.path.join(a.work, 'olean')): shutil.copyfile(os.path.join(a.work, 'olean', f), os.path.join(pub, f))
     shutil.copyfile(os.path.join(a.work, 'manifest.jsonl'), os.path.join(pub, 'manifest.jsonl'))
     sh(['git', 'add', '-A'], cwd=pub)
@@ -175,7 +177,8 @@ def run(a):
     a.name = a.name or 'w%d' % min(a.indices)
     a.commit = sh(['git', 'rev-parse', 'HEAD'], cwd=ROOT).stdout.strip()
     man = os.path.join(a.work, 'manifest.jsonl')
-    done = {json.loads(l)['module'] for l in open(man)} if os.path.exists(man) else set()
+    # only certified (or SAT?) items count as done: a failed item is retried by the next run
+    done = {r['module'] for r in map(json.loads, open(man)) if r['status'] in ('OK', 'SAT?')} if os.path.exists(man) else set()
     its = items(a.L)
     if a.only: its = [x for x in its if x[1] in a.only.split(',')]
     else: its = [x for x in its if x[0] <= a.max_k and int(hashlib.sha1(modname(x[1]).encode()).hexdigest(), 16) % a.workers in a.indices]
