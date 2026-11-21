@@ -395,3 +395,22 @@ Batch of 4 more level-116 cubes (k = 29, module form, ported stack; 2 jobs in pa
 - Peak RSS is about 3.1 GB + 0.55 GB per million hints (the replay module dominates). `prod_d8.py`
   reserves memory with that prediction (times sqrt(vars / 14,000) above 14 k variables) once the hint
   count is known, so at --mem-gb 12 two ~10 M-hint jobs never run together.
+
+### Farm worker (level 116)
+
+`cert/d8_machine.sh` sets up and launches one worker on a fresh Ubuntu machine or cloud session, and is
+idempotent (rerun after a reboot; finished certificates are skipped):
+
+    INDEX=0-15 WORKERS=200 bash milestones/39-dim8-lift/cert/d8_machine.sh
+
+- Installs CaDiCaL 2.1.3 and Lean 4.35.0 if missing, clones or updates `research/unconditional-241`
+  (fetched by name), builds the plain stack (`lean/build.sh`, ~4 min) and the module stack
+  (`prod_d8.py setup`, ~5 min), then starts `prod_d8.py run` with `--procs min(cores-1, mem/5)` and
+  `--mem-gb` 85% of RAM. Logs: `~/d8_setup.log`, `~/d8.log`; stop with `touch ~/d8work/STOP`.
+- Shares: 200 (`--workers 200`); a machine takes a range in proportion to its size (a 4-core / 16 GB
+  session about 1-2 shares, a 64-core / 256 GB machine about 30). With 20 shares the 2,137 cubes split
+  87-129 per share, too unevenly. The 24 size-31/32 cubes are excluded (`--max-k 30`): split route.
+- Tested from a fresh clone of 478f1990 (publishing off): setup 9 min, then the pilot cube in 443 s, peak
+  3.0 GB. The public .olean has the same sha256 as the earlier build on this machine (730b9489...), so
+  the certificates are reproducible.
+- `--publish` pushes `<ref-prefix>/<name>` (default `refs/heads/xfer/d8/w<first index>`). Not yet tested.

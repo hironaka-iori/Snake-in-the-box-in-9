@@ -2,12 +2,14 @@
 """Distributed production of the level-L cube certificates `Unsat (cubeCnfQ 13 L A k)` (milestone 39).
 
     prod_d8.py setup --stack DIR                          port + build the module stack (once per machine)
-    prod_d8.py run --stack DIR --work DIR --index I --workers W [--hours H] [--procs 3] [--mem-gb 12]
-                   [--L 116] [--only A,A,...] [--publish] [--ref-prefix refs/heads/xfer/d8]
+    prod_d8.py run --stack DIR --work DIR --index I[,J|-K] --workers W [--hours H] [--procs 3] [--mem-gb 12]
+                   [--L 116] [--max-k 30] [--only A,A,...] [--publish] [--ref-prefix refs/heads/xfer/d8] [--name N]
     prod_d8.py status --work DIR                          counts from the local manifest
 
 Work item: one representative (k, A) of data/q6_29.txt with k >= ceil(L/4). Worker I of W owns the items
-with sha1(module) % W == I (module = CubeQ<AHEX>), largest k first. Per item, in its own job directory:
+with sha1(module) % W == I (module = CubeQ<AHEX>), largest k first; a big machine may own several indices
+(--index 0-15 or 0,5,9), so shares can follow machine size. Items with k > --max-k (default 30: the 24
+size-31/32 cubes, which go through the split route) are left out. Per item, in its own job directory:
   1. make_cert.py   Lean export, CaDiCaL LRAT, compaction, v3 replay, provenance and renaming chunks
   2. build_cert.sh  builds every module against the stack (peak RSS per module is recorded)
   3. check          compiles `#print axioms unsat` from a clean directory holding only the public
@@ -16,7 +18,7 @@ with sha1(module) % W == I (module = CubeQ<AHEX>), largest k first. Per item, in
                     generator commit, host
 Only the public .olean (about 9 KB; the statement `unsat` alone) is kept; the job directory is deleted.
 
-Publication (only with --publish): fast-forward pushes of <ref-prefix>/w<I> holding the public .olean files
+Publication (only with --publish): fast-forward pushes of <ref-prefix>/<name> (default w<first index>) holding the public .olean files
 and manifest.jsonl. Without --publish everything stays in --work. A restarted worker skips every module
 already in its manifest. STOP: a file STOP in --work; running jobs finish, no new job starts.
 Scheduling: at most --procs jobs at once. A job reserves 1.5 GB for generation; once its hint count is
@@ -148,7 +150,7 @@ def job1(a, k, h, res):
 
 def publish(a):
     """fast-forward push of olean/ and manifest.jsonl to <ref-prefix>/w<I> (only with --publish)."""
-    pub = os.path.join(a.work, 'pub'); ref = '%s/w%d' % (a.ref_prefix, a.index)
+    pub = os.path.join(a.work, 'pub'); ref = '%s/%s' % (a.ref_prefix, a.name)
     if not os.path.exists(os.path.join(pub, '.git')):
         os.makedirs(pub, exist_ok=True); sh(['git', 'init', '-q'], cwd=pub)
         url = sh(['git', 'remote', 'get-url', 'origin'], cwd=ROOT).stdout.strip(); sh(['git', 'remote', 'add', 'origin', url], cwd=pub)
@@ -157,7 +159,7 @@ def publish(a):
     shutil.copyfile(os.path.join(a.work, 'manifest.jsonl'), os.path.join(pub, 'manifest.jsonl'))
     sh(['git', 'add', '-A'], cwd=pub)
     if sh(['git', 'diff', '--cached', '--quiet'], cwd=pub).returncode == 0: return
-    sh(['git', '-c', 'user.name=prod_d8', '-c', 'user.email=prod_d8@localhost', 'commit', '-q', '-m', 'd8 w%d: %s' % (a.index, time.ctime())], cwd=pub)
+    sh(['git', '-c', 'user.name=prod_d8', '-c', 'user.email=prod_d8@localhost', 'commit', '-q', '-m', 'd8 %s: %s' % (a.name, time.ctime())], cwd=pub)
     for i in range(4):
         if sh(['git', 'push', '-q', 'origin', 'HEAD:' + ref], cwd=pub).returncode == 0: return
         time.sleep(2 ** (i + 1))
@@ -166,15 +168,20 @@ def publish(a):
 
 def run(a):
     a.work = os.path.abspath(a.work); a.stack = os.path.abspath(a.stack); os.makedirs(a.work, exist_ok=True)
+    a.indices = set()
+    for part in a.index.split(','):
+        lo, _, hi = part.partition('-'); a.indices.update(range(int(lo), int(hi or lo) + 1))
+    assert a.indices and max(a.indices) < a.workers, 'indices must be < --workers'
+    a.name = a.name or 'w%d' % min(a.indices)
     a.commit = sh(['git', 'rev-parse', 'HEAD'], cwd=ROOT).stdout.strip()
     man = os.path.join(a.work, 'manifest.jsonl')
     done = {json.loads(l)['module'] for l in open(man)} if os.path.exists(man) else set()
     its = items(a.L)
     if a.only: its = [x for x in its if x[1] in a.only.split(',')]
-    else: its = [x for x in its if int(hashlib.sha1(modname(x[1]).encode()).hexdigest(), 16) % a.workers == a.index]
+    else: its = [x for x in its if x[0] <= a.max_k and int(hashlib.sha1(modname(x[1]).encode()).hexdigest(), 16) % a.workers in a.indices]
     its = [x for x in its if modname(x[1]) not in done]
     its.sort(key=lambda x: (-x[0], x[1]))
-    print('worker %d/%d: %d items to do, %d done' % (a.index, a.workers, len(its), len(done)), flush=True)
+    print('worker %s (indices %s of %d): %d items to do, %d done' % (a.name, a.index, a.workers, len(its), len(done)), flush=True)
     BUDGET['cap'] = a.mem_gb
     end = time.time() + a.hours * 3600; res = []; running = []; lock = threading.Lock()
     while its or running:
@@ -209,7 +216,7 @@ if __name__ == '__main__':
     s = sp.add_parser('setup'); s.add_argument('--stack', required=True)
     r = sp.add_parser('run')
     for x, d in (('--stack', None), ('--work', None)): r.add_argument(x, required=True)
-    r.add_argument('--index', type=int, default=0); r.add_argument('--workers', type=int, default=1)
+    r.add_argument('--index', default='0'); r.add_argument('--name', default=''); r.add_argument('--max-k', type=int, default=30); r.add_argument('--workers', type=int, default=1)
     r.add_argument('--hours', type=float, default=1e6); r.add_argument('--procs', type=int, default=3)
     r.add_argument('--mem-gb', type=float, default=12); r.add_argument('--L', type=int, default=116)
     r.add_argument('--only', default=''); r.add_argument('--publish', action='store_true')
