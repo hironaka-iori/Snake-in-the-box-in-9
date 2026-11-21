@@ -2,7 +2,7 @@
 
 Open a round to read its account and supporting material. The [milestone guide](README.md) groups the recent rounds by research question. The index follows the numbered folders published on the main branch. Round 26 has no separate published folder.
 
-[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–254](#rounds-240-to-254)
+[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–255](#rounds-240-to-255)
 
 ## Rounds 1 to 49
 
@@ -267,7 +267,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 238 | [Recovery from three missing counts](238-three-count-recovery/MATHEMATICAL_NOTE.md) |
 | 239 | [Recovery after four missing counts](239-four-count-recovery/MATHEMATICAL_NOTE.md) |
 
-## Rounds 240 to 254
+## Rounds 240 to 255
 
 | Round | Research record |
 |---:|---|
@@ -286,3 +286,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 252 | [Long arms retaining 68 reference edges](252-shorter-reference-segments/README.md) |
 | 253 | [Repeated changes retaining 68 edges](253-repeated-segment-growth/README.md) |
 | 254 | [Changing a parity class of a distant 96-edge arm](254-distant-arm-partners/README.md) |
+| 255 | [Repeated parity exchanges and the 46-vertex overlap bound](255-parity-exchange-arms/README.md) |

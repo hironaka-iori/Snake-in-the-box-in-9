@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 254, 21 November 2026}
+\date{Research state after round 255, 21 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -10654,8 +10654,96 @@ A checked contradiction rules out the partner with both visits.
 Twelve rooted cases give at most 190 joined edges and the other four
 at most 191. The eight-arm maximum is between 181 and 191. Four
 previously unresolved shapes and four new shapes are covered.
-Of the enlarged catalogue of 241 shapes, 152 still require a
+At the end of round 254, 152 of the 241 catalogue shapes required a
 192-edge exclusion or witness~\cite{distant254}.
+
+\subsection{Exchanging one vertex of the smaller parity class}\label{sec:parityexchange255}
+
+A 96-edge arm in $\Q_8$ has 48 vertices of one parity and 49 of
+the other. Keep at least 47 of the smaller class's 48 vertices,
+and require the resulting arm to have 96 edges. Its traversal,
+endpoints and all vertices of the opposite parity may change.
+For a fixed labelled arm, this gives $1+48(128-48)=3841$
+candidate smaller classes. Relabelling the coordinates, translating,
+or reversing the arm preserves the move~\cite{exchange255}.
+
+Starting at \texttt{e6e522b8}, exactly five of these classes admit
+a completion. Keeping the class gives the starting arm. The four
+successful replacements are $17\mapsto177$, $83\mapsto209$,
+$132\mapsto149$ and $216\mapsto80$. The first has four labelled
+completions and each of the other three has one. The eight arms
+represent eight distinct shapes, four outside the previous catalogue
+of 241. None admits a further edge at either end in $\Q_8$.
+Nevertheless, the new shape \texttt{3216dc7f} admits an 84-edge
+opposite partner when it crosses at vertex 161, giving a verified
+181-edge snake in $\Q_9$~\cite{exchange255}.
+
+When the move may be repeated, the component of \texttt{e6e522b8}
+contains exactly 41 shapes. Their numbers at distances zero through
+four from the starting shape are $1,7,14,13,6$. Of the 41 shapes,
+23 lie outside the previous catalogue. Starting at any of the five
+96-edge parents known to join to 191 gives a different component of
+six shapes, exactly the six reached by repeatedly retaining 68
+consecutive edges in Section~\ref{sec:repeat253}. Either operation
+therefore stays within those six shapes, even if the two operations
+alternate. With an arbitrary opposite arm, the maximum join for
+this component is 191 edges. Exactly five shapes attain it and the
+sixth gives at most 190~\cite{root248,repeat253,exchange255}.
+
+For both components the calculation examined every candidate
+smaller class at each shape. One program searched for spanning
+orders in the two-neighbour graph. A second added one auxiliary
+vertex adjacent to each possible endpoint, enumerated the spanning
+cycles through that vertex and expanded each edge into its permitted
+cube labels. The resulting neighbourhoods and component distances
+agreed. In both components every successful change of one smaller-class
+vertex replaced it by a vertex at Hamming distance two. This restriction
+has been verified for these two components~\cite{exchange255}.
+
+An endpoint check in $\Q_8$ rules out a one-edge extension at
+either end of every one of the 47 shapes in the two components.
+This yields a restriction on \emph{every} consecutive 96-edge
+segment of either arm of a single-crossing snake of length at least
+192. Let $T$ be the smaller parity class of that segment and let
+$S$ be the smaller class of any of the six shapes in the component
+of the attaining parents. For every cube isometry $g$,
+\[
+  |T\cap g(S)|\le 46.
+\]
+Indeed, an overlap of 47 or 48 would place the segment one permitted
+move from the six-shape component, hence in that component. If the
+segment is the entire arm, its unrestricted join bound is 191.
+If the arm is longer, the preceding or following edge extends the
+segment in $\Q_8$, contradicting the endpoint check. This argument
+also covers segments touching the crossing or the free
+endpoint~\cite{repeat253,exchange255}.
+
+The same overlap bound holds when $S$ is the smaller class of
+\texttt{e6e522b8}. Its eight immediate shapes have no endpoint
+extension. The four shapes inherited from round 254 have certified
+join ceilings of 191 or less. For the other four, contradiction
+certificates rule out a 95-edge partner at all eight endpoints.
+A first-step exclusion for one parent applies to another whenever
+the proposed partner takes that step and avoids every vertex freed
+by the change of parent. Replaying these implications and the
+certificates gives 12 excluded shapes in the 41-shape component.
+The other 29 still allow an unrestricted partner as far as these
+results establish~\cite{exchange255}.
+
+The complementary construction starts from the 25 labelled 94-edge
+partners attaining the 191-edge joins of the five saved parents.
+They have six distinct sets of 48 even vertices after the crossing
+is translated to zero. Keeping each set or replacing one even
+vertex gives 22,782 distinct candidate sets. Enumerating 95-edge
+paths with those even sets gives 230 labelled paths, representing
+72 shapes. Place any consecutive segment of any of the 72 shapes
+at either end of any of the 264 catalogued long arms, allowing both
+directions and all $8!$ coordinate permutations. The longest join
+has 191 edges, attained at exactly five of the 528 rooted parents.
+Within the 41-shape component of \texttt{e6e522b8}, the corresponding
+maximum is 133. A different partner gives 181 in this component, so
+the 133-edge bound applies specifically to the segments of the
+72 shapes~\cite{root248,exchange255}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -14614,6 +14702,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{Changing a parity class of a distant 96-edge arm}.
 Research milestone 254, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/254-distant-arm-partners}.
+
+\bibitem{exchange255}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{One-vertex exchanges in the smaller parity class of a 96-edge arm}.
+Research milestone 255, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/255-parity-exchange-arms}.
 
 \end{thebibliography}
 \end{document}

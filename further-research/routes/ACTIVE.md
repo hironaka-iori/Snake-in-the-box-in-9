@@ -8,9 +8,11 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Paused after Round 254. Holding one parity class of either distant arm gives eight long arms. Four escape the earlier 68-edge catalogue. All 16 endpoints exclude a 192-edge join, and a verified example attains 181. The enlarged 241-shape catalogue has 152 unresolved shapes. The local working note holds the resumption point. [Round 254](../../milestones/254-distant-arm-partners/README.md) · [Standing goal](RESEARCH_GOAL.md)
+Paused after Round 255. The single-crossing route remains active for resumption. The exact six-shape maximum is 191. A second component contains 41 shapes, including 23 new shapes. Twelve exclude a 192-edge join at either end. The other 29 remain open with an unrestricted partner. The full inventory contains 264 shapes, of which 171 remain open. [Round 255](../../milestones/255-parity-exchange-arms/README.md) · [Standing goal](RESEARCH_GOAL.md)
 
 ## Completed cases
+
+Round 255 excluded a 192-edge single-crossing snake containing any 96-edge segment whose smaller parity class retains at least 47 vertices of any of seven reference arms under cube isometry. [Seven reference arms](../../milestones/255-parity-exchange-arms/summary.json)
 
 Round 254 ruled out 192 at both ends of eight arms obtained by keeping a complete parity class of one of two distant examples. Four arms lie outside the earlier 237-shape catalogue even though each shares 96 vertices with a member. The enlarged catalogue contains 241 shapes, 152 of which remain open. [Parity changes and checked upper bounds](../../milestones/254-distant-arm-partners/README.md)
 

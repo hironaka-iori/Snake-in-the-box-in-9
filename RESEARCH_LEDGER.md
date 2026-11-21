@@ -6,4 +6,4 @@ The [milestone index](milestones/CATALOG.md) lists every published numbered fold
 |---|---|
 | [Original research ledger](docs/history/research-ledger.md) | The accumulated proof, search and continuation notes from earlier rounds. |
 | [Project checkpoint reports through Round 240](docs/history/project-checkpoints.md) | The original front-page sequence of project updates. |
-| [Handoff after Round 254](handoff/CURRENT_STATUS.md) | Changing a parity class of a distant 96-edge arm. [Construction route](further-research/routes/ACTIVE.md) |
+| [Handoff after Round 255](handoff/CURRENT_STATUS.md) | Repeated parity exchanges, the exact six-shape maximum and the seven reference arms. [Construction route](further-research/routes/ACTIVE.md) |

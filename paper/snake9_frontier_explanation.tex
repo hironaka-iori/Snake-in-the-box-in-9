@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 254}
+\date{Research state after round 255}
 \begin{document}
 \maketitle
 
@@ -1384,7 +1384,57 @@ Both ends of all eight shapes rule out a 95-edge partner. This
 places the maximum for these eight shapes between 181 and 191 joined
 edges. Accounting for the four new shapes and the four previously
 unresolved ones gives 241 shapes in the enlarged list. Of those,
-152 are still possible long arms for a 192-edge single-crossing join.
+152 remained possible long arms for a 192-edge single-crossing join
+at the end of round 254.
+
+\section{Changing one of the 48 vertices}
+
+A 96-edge arm visits 48 vertices of one parity and 49 of the other.
+Keep at least 47 of the 48, and allow both endpoints, all other
+vertices and the entire order to change. For the arm that gave the
+181-edge example in the previous section, exactly four of the
+$48\cdot80=3840$ replacements work. Those replacements and the
+unchanged class give eight distinct 96-edge shapes. None can be
+extended by one edge at either end in the eight-dimensional cube.
+One of the four newly recorded shapes does give a 181-edge snake
+when joined across the ninth coordinate~\cite{exchange255}.
+
+Repeating this change from the same arm reaches exactly 41 shapes,
+including 23 outside the previous list. Starting from any of the five
+saved 96-edge arms that give a 191-edge join reaches exactly six. These are
+the same six reached by retaining 68 consecutive edges. Even
+alternating the two methods keeps the arm within this group. Its
+longest single-crossing join has 191 edges, and five of the six
+shapes attain it. Across both groups, every successful replacement
+changed exactly two coordinates of the replaced vertex. Two
+independent enumerations checked all possible replacements at each
+shape~\cite{root248,repeat253,exchange255}.
+
+None of the 47 shapes in the two groups can gain an edge at either
+end in the eight-dimensional cube. Consider any consecutive 96
+edges of either arm of a single-crossing snake with at least 192
+edges. Even after any cube isometry, the smaller parity class of
+this segment can share at most 46 of its 48 vertices with the
+smaller class of each of the six shapes. Sharing 47 or 48 would
+put the segment in that group. If it were the whole arm, the join
+would have at most 191 edges. If it were part of a longer arm, the
+edge immediately before or after it would extend it~\cite{exchange255}.
+
+The same limit of 46 applies to the starting arm of the 41-shape
+group. Its eight immediate shapes all exclude a 95-edge partner at
+both endpoints. The endpoint certificates now cover 12 of the 41
+shapes. The other 29 still require a witness or an exclusion for
+an unrestricted partner~\cite{exchange255}.
+
+We also changed the opposite arms. The 94-edge partners of the five
+attaining parents supply six sets of 48 even vertices. Keeping each
+set or replacing one vertex gives 22,782 distinct sets to examine.
+They yield 230 labelled 95-edge paths in 72 shapes. Using any
+consecutive part of any of those shapes as a partner, the longest
+join across all 264 catalogued parents is 191, at exactly five
+endpoints. Among the 41 shapes in the other group, this collection
+gives at most 133 edges, whereas a partner outside the collection
+gives 181~\cite{root248,exchange255}.
 
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
@@ -1407,7 +1457,7 @@ The latest full written-source review was completed at round 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 254.
+in the companion manuscript and milestones through round 255.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1634,6 +1684,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{Changing a parity class of a distant 96-edge arm}.
 Research milestone 254, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/254-distant-arm-partners}.
+
+\bibitem{exchange255}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{One-vertex exchanges in the smaller parity class of a 96-edge arm}.
+Research milestone 255, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/255-parity-exchange-arms}.
 
 \end{thebibliography}
 \end{document}

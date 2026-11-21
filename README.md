@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 254
+## Latest result · Round 255
 
-Holding one parity class of either distant arm gives eight long arms. Four escape the earlier 68-edge catalogue. All 16 endpoints exclude a 192-edge join, and a verified example attains 181. The enlarged 241-shape catalogue has 152 unresolved shapes. [Results and evidence](milestones/254-distant-arm-partners/README.md)
+Repeated changes from the five long arms known to give 191 reach exactly six shapes, even when alternated with regrowth around 68 retained edges. Their maximum join is 191. Any 96-edge segment in a single-crossing snake of at least 192 edges must replace at least two of the 48 smaller-parity vertices of each of seven reference arms. [Result and proof](milestones/255-parity-exchange-arms/README.md)
 
-Paused after Round 254. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Paused after Round 255. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

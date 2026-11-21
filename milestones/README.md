@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 254. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 255. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| Which parity classes must a 192-edge single-crossing snake avoid? | [255 · Seven reference arms and the 46-vertex overlap bound](255-parity-exchange-arms/README.md) |
 | Can a parity-preserving change escape the 68-edge catalogue and reach 192? | [254 · Changing a parity class of a distant 96-edge arm](254-distant-arm-partners/README.md) |
 | Which long arms can repeated changes reach, and which can still support a 192-edge join? | [253 · Repeated changes retaining 68 edges](253-repeated-segment-growth/README.md) |
 | What is the longest join when an arm keeps 68 reference edges? | [252 · Long arms retaining 68 reference edges](252-shorter-reference-segments/README.md) |
