@@ -5,6 +5,6 @@ The project seeks a verified induced path longer than 191 edges in the nine-dime
 | To review | Source |
 |---|---|
 | The 191-edge lower bound | [Explicit witness and pair count](outputs/snake9_witness.json) |
-| The reviewed 231-edge upper bound | [Contributor theorem and saved audit, revision 478869ee](https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/478869ee1ec6ff3a10ddb6ba7a2a1d89fbb82088). An independent full rebuild of the dependency chain is pending. |
-| The latest restricted construction ceilings | [Round 253: Repeated changes retaining 68 edges](milestones/253-repeated-segment-growth/README.md) · [Earlier result](milestones/252-shorter-reference-segments/README.md) |
+| The reviewed 230-edge upper bound | [Contributor’s final theorem](https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/062f86981cc6ee1e34577d6cbe600b3b057309c8/milestones/37-230-feasibility/audit230/UpperBound230_435.lean) · [Standard-axiom audit](https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/062f86981cc6ee1e34577d6cbe600b3b057309c8/milestones/37-230-feasibility/audit230/final-audit.txt). An independent full rebuild remains pending. |
+| The latest restricted construction ceilings | [Round 254: Changing a parity class of a distant 96-edge arm](milestones/254-distant-arm-partners/README.md) · [Earlier result](milestones/253-repeated-segment-growth/README.md) |
 | Earlier branch reviews and collaboration notes | [Historical contributor notes](docs/history/collaborator-notes.md) |

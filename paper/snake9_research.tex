@@ -32,16 +32,16 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 253, 21 November 2026}
+\date{Research state after round 254, 21 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
 Let $a(9)$ be the maximum edge length of an induced path in the
 nine-dimensional binary hypercube. An explicit checked construction and
-a completed contributor theorem give $191\le a(9)\le231$. The upper
-theorem has a successful saved final assembly and standard-axiom audit,
-with no remaining certificate or share-floor premise; a complete
-independent rebuild remains pending~\cite{bound231archive}.
+a completed contributor theorem give $191\le a(9)\le230$. The upper
+bound uses certified local exclusions and seven-centre share bounds.
+The saved final assembly passed its standard-axiom audit. A complete
+independent rebuild remains pending~\cite{bound230archive}.
 
 The upper-bound analysis combines an exact coordinate-square census,
 local count and empty-square share inequalities, and finite potentials.
@@ -140,26 +140,24 @@ Thus $\alpha_i=b_i+\delta_i$ with $\delta_i\ge0$. A count symbol $b_i<6$ specifi
 The explicit construction and the archived contributor upper-bound argument
 give the project interval
 \[
-\boxed{191\le a(9)\le231.}
+\boxed{191\le a(9)\le230.}
 \]
-The upper bound is the completed contributor theorem and saved final
-assembly at revision \texttt{478869ee}~\cite{bound231archive}. Its audit
-reports only the standard axioms, and its theorem has no remaining
-certificate or floor premise. A complete independent rebuild of its
-dependency closure remains pending.
+The final assembly at contributor revision \texttt{24bbb049} supplies
+the full table of local exclusions and the seven-centre share bounds.
+Its audit reports only the standard axioms. A complete independent
+rebuild of its dependencies remains pending~\cite{bound230archive}.
 \end{theorem}
 The lower bound is verified from the explicit transition sequence in
 Theorem~\ref{thm:lower}. The completed upper bound combines the square
 census, local count and share certificates, and a finite potential summed
-along every actual snake. Section~\ref{sec:bound231} records the current
-231 theorem. Section~\ref{sec:bound233} preserves the earlier completed
+along every actual snake. Section~\ref{sec:bound231} records the 230 theorem and the earlier bound of 231. Section~\ref{sec:bound233} preserves the earlier completed
 233 chain, and Section~\ref{sec:upper-proof} preserves the 235 argument
 and its empty-square refinement with their original constants.
 
 \paragraph{Reading order and status.}
 The strongest conclusions can be read before the chronological development:
 \begin{itemize}
-\item Section~\ref{sec:bound231} gives the completed contributor bound 231.
+\item Section~\ref{sec:bound231} gives the completed contributor bound 230.
 The square census and local inequalities explain the upper-bound methods.
 The earlier completed 233 argument and the alternative conditional 234
 and relaxed 233 comparisons retain their own constants and proof status.
@@ -199,13 +197,13 @@ local results. The construction conclusions are located by the guide above.
 \toprule
 Claim & Evidence and scope\\\midrule
 $a(9)\ge191$ & An explicit snake with every vertex pair checked.\\
-$a(9)\le231$ & Completed contributor theorem with saved final assembly and standard-axiom audit; full independent rebuild pending.\\
+$a(9)\le230$ & Final contributor theorem with the local-exclusion and share certificates assembled. The saved standard-axiom audit passed. An independent full rebuild is pending.\\
 Historical bound 233 & Earlier completed share-weighted contributor argument; its original arithmetic and audit limitations are retained.\\
 Historical bound 235 & Archived proof using 1287 local keys and a potential; its count identities remain useful, while the numerical bound is superseded.\\
 Pair bounds seven and eight & Complete Lean checks, explicit sharpness witnesses, and an endpoint-distance criterion.\\
 Local empty-square bounds & Arbitrary-snake proofs from forced absence, neighbour choices and count saturation.\\
 Relaxed 233 comparison & The earlier 233 contributor chain is complete. The separate four-unit share allowance retains its own relaxed coverage and actual-snake integration premises.\\
-Alternative conditional 234 & Numerically superseded by 231. Profile $(15,14,14,14)$ and boundary contribution 24 give $42254m+45L\le9928453$. Complete local-share proofs, reference exclusions, count restrictions and the graph certificate remain pending.\\
+Alternative conditional 234 & Numerically superseded by 230. Profile $(15,14,14,14)$ and boundary contribution 24 give $42254m+45L\le9928453$. Complete local-share proofs, reference exclusions, count restrictions and the graph certificate remain pending.\\
 Actual-state construction and weight accounting & State construction, non-reference filters and baseline weights are checked. Reference retention remains conditional on 1358 entries of the 1378-key union.\\
 Direct six-count criteria & Universal floors 25 and 26 would give 234 and 233. The shortfall criterion retains $2s_0$. These extra premises remain unresolved.\\
 New local count restrictions & The six-count floor 25 is proved for $0123041$. On $0120324$, fourth count three forces a six-count sum at least 23.\\
@@ -3951,22 +3949,28 @@ it does not establish a new numerical upper bound.
 
 At the end of round 187, 93 of 98 complete clause batches (11904 of 12,424 clauses) have passed Lean. The initial-database truth theorem remains incomplete. The full critical contradiction and the actual-snake floor-fifteen theorem remain pending.
 
-\section{Current contributor bound 231}\label{sec:bound231}
-The completed contributor theorem at revision \texttt{478869ee} states
-that every snake in $\Q_9$ has at most 231 edges~\cite{bound231archive}.
-The final argument supplies its local-refutation aggregates and required
-share floors. No certificate, floor or conditional-model premise remains
-in the stated universal upper bound.
+\section{Current contributor bound 230}\label{sec:bound231}
+The contributor's 21 November 2026 final assembly proves
+$\forall m,\ \operatorname{Snake}(m)\Rightarrow m\le230$, where $m$
+counts the edges of any induced path in $\Q_9$. At audit revision
+\texttt{24bbb049}, the theorem \texttt{Snake9.upper\_230\_435}
+applies the earlier conditional implication to both certified
+aggregates, \texttt{LocalWindow.allTab230} and
+\texttt{LocalWindow.allShare230}. They supply the table of local
+exclusions and the share bounds over seven consecutive centres,
+respectively. For $m\ge9$ the combined inequalities give
+\[
+127242m\le29391726<127242\cdot231=29392902.
+\]
+Shorter snakes already satisfy the claimed bound~\cite{bound230archive}.
 
-The saved audit records successful final assembly, checks of the imported
-proof records and only the standard axioms \texttt{propext},
-\texttt{Classical.choice} and \texttt{Quot.sound}. A fresh independent
-rebuild of the entire proof dependency closure remains pending. The
-current interval is therefore $191\le a(9)\le231$, with that verification
-qualification. The contributor's subsequent
-\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/e0ddaefcd2cc520c9fa81ef2df37f49952e6656d/milestones/37-230-feasibility/ASSEMBLY.md}{assembly record at revision \texttt{e0ddaefc}}
-reports a conditional theorem for 230. Its audit assumes the full
-table of local exclusions and the required share inequalities.
+The contributor's Lean 4.35 final audit reports hash checks on
+43,846 certificate interfaces and 728 rebuilt specification modules.
+The final theorem depends on \texttt{propext}, \texttt{Classical.choice}
+and \texttt{Quot.sound}. This paper cites that saved audit. A fresh
+independent rebuild of the full dependency chain remains pending.
+The earlier completed theorem at revision \texttt{478869ee} gave
+231 edges~\cite{bound231archive}.
 
 \section{Earlier completed contributor bound 233}\label{sec:bound233}
 The contributor theorem at revision \texttt{b0521e1d} states that every
@@ -4076,7 +4080,7 @@ requirements for this relaxed route remain unchanged. This alternative
 route to 233 remains conditional; the original contributor route is complete.
 
 \section{Remaining requirements for alternative comparisons}\label{sec:closure}
-The current contributor bound 231 numerically supersedes the proposed
+The current contributor bound 230 numerically supersedes the proposed
 234 comparisons and relaxed 233 target. The requirements below concern
 those separate arguments; they do not qualify the completed theorem of
 Section~\ref{sec:bound231}.
@@ -4092,7 +4096,7 @@ exclusions, graph coverage and the complete finite-edge certificate.
 These premises are separate from the accepted-key package below.
 
 
-The maintained interval is $191\le a(9)\le231$, with the contributor-proof
+The maintained interval is $191\le a(9)\le230$, with the contributor-proof
 and independent-rebuild distinction stated in Section~\ref{sec:verification}.
 The boundary-24 argument removes the additional positive-loss requirement
 from the retained finite comparison. Completing this alternative argument requires establishing the weakened
@@ -10598,6 +10602,61 @@ components leaves 156 of the 237 shapes as possible fixed arms for
 a 192-edge join. All have 96 edges and both endpoints remain open
 in this calculation~\cite{segment251,short252,repeat253}.
 
+\subsection{Changing one parity class of distant arms}\label{sec:distant254}
+
+Two 96-edge arms from Section~\ref{sec:repeat253} share the same
+endpoints, 67 and 161, and differ at one interior vertex. Keep
+the labelled vertices of one parity and allow every order, every
+opposite-parity vertex and both endpoints to vary. Applying the
+two-neighbour contraction and the singleton-neighbour endpoint
+criterion of Section~\ref{sec:minority232} gives exactly eight
+long arm shapes~\cite{distant254}.
+
+The common 49-vertex class has 57 admissible pairs and four spanning
+orders up to reversal. Each order admits two connecting labels at
+one corner. The other two classes, of size 48, have 53 admissible
+pairs and one spanning order apiece, recovering the two starting
+arms. None of the three fixed classes permits a path of 97 or 98
+edges. A second enumeration fixed the two endpoints, exhausted the
+edge sets satisfying the required degrees, and discarded disconnected
+solutions. It recovered every labelled cube path.
+
+The eight vertex sets consist of 94 common vertices and one choice
+from each of $\{83,209\}$, $\{17,177\}$ and $\{132,149\}$.
+The first two choices reverse portions of the traversal and change
+its endpoints. The third changes one interior vertex. Four resulting
+shapes are outside the complete 237-shape catalogue. Each shares 96
+of its 97 vertices with an earlier arm, yet its longest consecutive
+match with any of the 237 is exactly 64 edges under arbitrary cube
+isometry and reversal~\cite{distant254}.
+
+Four parents can cross at each of the four possible endpoints. After
+root translation their obstacles consist of 94 common nonzero vertices
+and one choice from each of two disjoint pairs. A rooted opposite arm
+fits some parent exactly when it avoids the common vertices and omits
+at least one vertex in each pair. Lean checks this equivalence and its
+interpretation as a join. The cube supplies the actual obstacles.
+For the new shape beginning \texttt{e6e522b8} at vertex 161, a
+constructed 84-edge partner yields a 181-edge join. All 16,471 vertex
+pairs were checked. Retaining the first 37 edges of its previous
+83-edge partner forces a maximum of 83. A longer construction retains
+the first 31. For the original shape at vertex 161, a partner of
+81 edges gives a 178-edge join. A replayed exclusion at 92 partner
+edges bounds that rooted join by 188. These lower and upper bounds
+allow the opposite arm to have any shape~\cite{distant254}.
+
+All sixteen rooted cases exclude a 95-edge partner, so none of
+the eight shapes gives a 192-edge join or any longer single-crossing
+join. At the final 95-edge case, crossing from shape
+\texttt{2792454c} at vertex 1, earlier exclusions for two parents
+differing at one vertex require visits to 83 and 149, respectively.
+A checked contradiction rules out the partner with both visits.
+Twelve rooted cases give at most 190 joined edges and the other four
+at most 191. The eight-arm maximum is between 181 and 191. Four
+previously unresolved shapes and four new shapes are covered.
+Of the enlarged catalogue of 241 shapes, 152 still require a
+192-edge exclusion or witness~\cite{distant254}.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -10651,14 +10710,13 @@ For $n=3,4,5$, both corrections equal 1. For $n=6,7,8$, both equal 2. At $n=9$, 
 Only two correction blocks have been observed. No construction currently explains why either proposed correction should describe the actual extremal function.
 
 \section{Verification scope and remaining problem}\label{sec:verification}
-The maintained interval is $191\le a(9)\le231$. The lower bound follows
-from the explicit witness. The completed contributor upper theorem and
-its saved final assembly and standard-axiom audit are pinned to revision
-\texttt{478869ee}~\cite{bound231archive}. Section~\ref{sec:bound231}
-records this current result. No certificate or floor premise remains in
-the theorem. A fresh independent rebuild of the entire dependency closure
-remains pending. The separate proposed bound 230 still assumes certificate
-families, as recorded in Section~\ref{sec:bound231}.
+The maintained interval is $191\le a(9)\le230$. The lower bound
+follows from the explicit witness. The contributor's saved final
+assembly at revision \texttt{24bbb049} supplies both aggregate
+premises of the seven-centre argument and passes the standard-axiom
+audit~\cite{bound230archive}. Section~\ref{sec:bound231} records its
+scope. An independent rebuild of the entire dependency chain remains
+pending.
 
 Section~\ref{sec:bound233} retains the earlier B233 charge and potential
 deduction and its source and audit revisions \texttt{b0521e1d} and
@@ -12952,7 +13010,7 @@ If every nontrivial snake satisfies $G_{12}\ge114v-191$, then $a(9)\le230$. If t
 \begin{proof}
 Proposition~\ref{prop:share-loss} gives $G_{12}+840v\le221136$. The first hypothesis gives $954v\le221327<954\cdot232$, hence $v\le231$. The second gives $954v\le222281<954\cdot233$, hence $v\le232$. Subtract one to count edges. The one-vertex case satisfies both conclusions directly.
 \end{proof}
-These conditional implications have been checked in Lean. Neither hypothesis has been proved for all snakes. A complete improvement requires verified local share bounds, coverage of every allowed sequence, and control of the initial and terminal contributions. Weighted packing is valid under the stated capacities; it supplies no additional credit on the zero-credit cycle of Proposition~\ref{prop:zero-credit}. The target 230 would improve the current global bound. The target 231 would provide a separate proof under its still-unproved charge hypothesis.
+These conditional implications have been checked in Lean. Neither hypothesis has been proved for all snakes. A complete improvement requires verified local share bounds, coverage of every allowed sequence, and control of the initial and terminal contributions. Weighted packing is valid under the stated capacities; it supplies no additional credit on the zero-credit cycle of Proposition~\ref{prop:zero-credit}. The first estimate would give another proof of the current 230 bound. The second would give 231 under its still-unproved charge hypothesis.
 
 \subsection{A candidate restriction on consecutive counts of four}\label{sec:four-run}
 A direction-independent exclusion of six consecutive counts equal to four would replace several special direction cases by one restriction on the count sequence.
@@ -13864,6 +13922,13 @@ I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Sharp outer-transition pair inequality, c
 I.~Hironaka, T.~Ma, and S.~Zhan. \emph{Endpoint demand and the sharp endpoint-free pair bound}. Archived research record, 25 October 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/c0a672d7d314317bf69332fc7029e00853e16b04/milestones/45-pair-endpoint-demand}.
 
+\bibitem{bound230archive}
+Snake-in-the-box project contributors. \emph{Completed upper bound 230:
+seven-centre proof, final theorem and certificate-interface audit}.
+Contributor audit revision \texttt{24bbb0494b485e6bad9fba8f98c25c6372838934},
+21 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/24bbb0494b485e6bad9fba8f98c25c6372838934/milestones/37-230-feasibility/audit230}.
+
 \bibitem{bound231archive}
 Snake-in-the-box project contributors. \emph{Completed upper bound 231:
 final assembly and standard-axiom audit}. Contributor revision
@@ -14543,6 +14608,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{Repeated changes retaining 68 edges}.
 Research milestone 253, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/253-repeated-segment-growth}.
+
+\bibitem{distant254}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{Changing a parity class of a distant 96-edge arm}.
+Research milestone 254, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/254-distant-arm-partners}.
 
 \end{thebibliography}
 \end{document}

@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 253 handoff records the latest single-crossing result and the evidence supporting it. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 254 handoff records the latest single-crossing result and the evidence supporting it. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

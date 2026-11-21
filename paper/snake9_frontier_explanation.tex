@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 253}
+\date{Research state after round 254}
 \begin{document}
 \maketitle
 
@@ -22,13 +22,13 @@ when their path indices are consecutive. A length-$m$ snake has $m+1$ vertices.
 
 The maintained interval is
 \[
-\boxed{191\le a(9)\le231.}
+\boxed{191\le a(9)\le230.}
 \]
-The lower bound comes from a verified construction. The contributor's
-completed 231 theorem and saved final assembly are pinned to revision
-\texttt{478869ee}. Its standard-axiom audit passed, and no certificate or
-share-floor premise remains in the theorem. A fresh independent full
-rebuild remains pending~\cite{bound231archive}.
+The lower bound comes from a verified 191-edge path. The contributor's
+completed proof applies to every snake in nine dimensions. Its final
+assembly at revision \texttt{24bbb049} supplies the required local
+exclusions and share bounds. The saved audit passed. A fresh independent
+rebuild of the full proof remains pending~\cite{bound230archive}.
 
 The known values $1,2,4,7,13,26,50,98$ do not determine the next term.
 Numerical continuations suggest 194, 195 or 196, without proving a recurrence.
@@ -98,12 +98,17 @@ so $m\le233$. Shorter paths already satisfy this bound. The saved assembly
 reuses imported objects and cloud-built certificates; their fresh independent
 rebuild remains distinct from the successful saved audit~\cite{bound233archive}.
 
-The later contributor theorem at revision \texttt{478869ee} supplies the
-current upper bound 231. Its final argument includes the required local
-refutations and share floors. The saved final assembly and standard-axiom
-audit passed; a fresh independent whole-proof rebuild remains pending
-~\cite{bound231archive}. The displayed 233 calculation is retained as the
-earlier argument and is not used to derive 231.
+The contributor's subsequent proof at revision \texttt{478869ee}
+gave 231~\cite{bound231archive}. The 21 November 2026 assembly gives
+230. It combines an exhaustive table of local exclusions with a bound
+on the share contributed by each window of seven consecutive centres.
+For a snake of $m\ge9$ edges, these imply
+\[
+127242m\le29391726<127242\cdot231,
+\]
+hence $m\le230$. Shorter paths already meet the bound. The saved
+Lean audit records both required certificate collections in the
+completed proof~\cite{bound230archive}.
 
 The alternative retained comparison uses $m-8$ windows. Under its own
 local-weight and state-walk hypotheses, boundary counting and telescoping give
@@ -819,7 +824,7 @@ count changes zero. The inverse then makes the entire selection change
 zero. This actual-cube statement passed Lean after the large finite
 calculation was divided into smaller modules~\cite{research237}.
 
-No longer snake was obtained. The current interval is $191\le a(9)\le231$
+No longer snake was obtained. At that stage the interval was $191\le a(9)\le231$
 using the separately cited contributor theorem. The following sections develop the reconstruction argument further.
 
 
@@ -1349,9 +1354,37 @@ compatible path. The 53 original shapes already had an upper bound.
 Each of the other 18 has 96 edges. A 192-edge join would need a
 95-edge partner, and every longer partner would contain one. The
 certificates exclude that partner at both ends of all 18 shapes.
-Across all 237 reachable shapes, a 192-edge join would have to use
-one of 156 remaining 96-edge shapes. Both endpoints of each remain
-open when the opposite arm is unrestricted~\cite{repeat253}.
+At the end of that calculation, both endpoints of 156 of the 237
+shapes remained open for a 192-edge join with an unrestricted
+opposite arm~\cite{repeat253}.
+
+\section{Keeping nearly every vertex and changing the order}
+
+Two eight-dimensional arms from the previous section share 96
+of their 97 vertices. They have the same endpoints and differ at one
+interior corner. Keeping the vertices of either parity fixed, we
+tried every possible order and every connecting vertex. This gives
+eight long shapes, each with 96 edges. Four are outside the previous
+list of 237. Each of the four shares 96 vertices with a path on that
+list, yet no path on the list shares more than 64 consecutive edges
+with it. A change at an endpoint can reverse a long portion of the
+traversal while changing just one occupied vertex.
+
+One of these four shapes admits an 84-edge opposite arm. Together
+with the crossing, this gives a verified 181-edge path. For the
+original arm at vertex 161, a different partner gives 178 edges,
+and a proof rules out every join longer than 188 at that endpoint. At each
+possible crossing vertex there are four available parent shapes.
+They all forbid the same 94 nonzero vertices. If an opposite path
+avoids those vertices, it fits at least one parent exactly when it
+leaves at least one vertex unused in each of two designated
+pairs~\cite{distant254}.
+
+Both ends of all eight shapes rule out a 95-edge partner. This
+places the maximum for these eight shapes between 181 and 191 joined
+edges. Accounting for the four new shapes and the four previously
+unresolved ones gives 241 shapes in the enlarged list. Of those,
+152 are still possible long arms for a 192-edge single-crossing join.
 
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
@@ -1363,7 +1396,7 @@ saved seed. Changes to both classes, wider blocks and changed block
 lengths remain possible.
 Exhausting all remaining six-coordinate models would establish only a
 source-specific requirement of seven changed histories.
-The maintained global interval is $191\le a(9)\le231$, with an
+The maintained global interval is $191\le a(9)\le230$, with an
 independent rebuild of the completed upper-bound assembly pending.
 Resolving the proposed value 196 still requires both its witness and
 a universal 197-edge exclusion. Constructions can change several
@@ -1374,13 +1407,20 @@ The latest full written-source review was completed at round 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 253.
+in the companion manuscript and milestones through round 254.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
 \href{https://arxiv.org/html/2607.15270v3}{Orland et al., arXiv:2607.15270v3}.}
 
 \begin{thebibliography}{9}
+\bibitem{bound230archive}
+Snake-in-the-box project contributors. \emph{Completed upper bound 230:
+seven-centre proof, final theorem and certificate-interface audit}.
+Contributor audit revision \texttt{24bbb0494b485e6bad9fba8f98c25c6372838934},
+21 November 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/24bbb0494b485e6bad9fba8f98c25c6372838934/milestones/37-230-feasibility/audit230}.
+
 \bibitem{bound231archive}
 Snake-in-the-box project contributors. \emph{Completed upper bound 231:
 final assembly and standard-axiom audit}. Contributor revision
@@ -1588,6 +1628,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{Repeated changes retaining 68 edges}.
 Research milestone 253, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/253-repeated-segment-growth}.
+
+\bibitem{distant254}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{Changing a parity class of a distant 96-edge arm}.
+Research milestone 254, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/254-distant-arm-partners}.
 
 \end{thebibliography}
 \end{document}
