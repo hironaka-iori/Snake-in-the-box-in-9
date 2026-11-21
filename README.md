@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 251
+## Latest result · Round 252
 
-Among single-crossing joins whose long arm retains 72 consecutive edges of one of the 22 reference paths, the exact maximum is **191 edges**. The 557 possible segment positions reduce to 205 distinct shapes. Regrowing both ends gives exactly 28 possible long arms. Five reach 191. At each endpoint of the three newly found 96-edge arms, a certificate excludes even a 94-edge partner. [Round 251 result and evidence](milestones/251-eighty-edge-segments/README.md)
+The 68-edge segments of 22 reference paths generate exactly 63 long arms in the eight-dimensional cube. The longest single-crossing join using these arms has 191 edges. The 98-edge reference and twelve shorter references each generate the same 53 shapes. [Results and evidence](milestones/252-shorter-reference-segments/README.md)
 
-Research is paused after Round 251. The single-crossing construction remains the active route. [Marked route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Round 252 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

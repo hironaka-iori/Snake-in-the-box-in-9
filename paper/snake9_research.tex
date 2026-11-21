@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 251, 20 November 2026}
+\date{Research state after round 252, 21 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -89,7 +89,7 @@ even when all four outer paths vary.
 For single-crossing joins with an unrestricted opposite arm, only five
 of the fifteen archived 96- through 98-edge parents attain 191. All
 five have 96 edges. A complete search also excludes length 192 when
-an arm of at least 96 edges retains any 72-edge segment of the 22
+an arm of at least 96 edges retains any 68-edge segment of the 22
 reference parents, up to cube isometry and reversal. For the saved 98-edge parent the
 maximum single-crossing join lies between 179 and 187 inclusive.
 
@@ -167,7 +167,7 @@ the saved 98-edge parent between 179 and 187 edges. Among the fifteen
 originally archived shapes with 96 to 98 edges, exactly five attain 191.
 Section~\ref{sec:corner250} extends the 192-edge exclusion to all
 long arms retaining an 84-edge segment of any of the 22 reference parents.
-Section~\ref{sec:segment251} strengthens this to 72 edges.
+Sections~\ref{sec:segment251} and~\ref{sec:short252} strengthen this to 72 and then 68 edges.
 Section~\ref{sec:prefix222} gives the earlier exclusion of a 93-edge partner.
 \item Sections~\ref{sec:replacement225}--\ref{sec:facevisits230} give the
 simultaneous-replacement criteria and the successive restricted construction
@@ -10482,6 +10482,49 @@ even the initial segment of a longer partner cannot coincide with a
 donor segment beyond the corresponding maximum. The explicit 84-edge
 partner in the last row gives a 181-edge join.
 
+\subsection{Two-ended growth from 68-edge reference segments}\label{sec:short252}
+
+Across the same 22 reference parents there are 645 occurrences of
+68-edge segments. These give 212 shapes up to symmetry and reversal.
+The long completions comprise 55 shapes of length 96, seven of length
+97 and one of length 98. Of the 35 additions to the 72-edge catalogue,
+33 have length 96 and two have length 97. For retained lengths
+72, 71, 70, 69 and 68 the successive class counts are
+28, 37, 42, 52 and 63. The intermediate counts follow by checking the
+longest segment that each new parent shares with any reference.
+
+For an independent verification, consider two tails grown separately
+from the two ends of a common segment. Suppose each tail together
+with that segment is induced. In the complete word, a pair of vertices
+either lies in one of those two induced paths or has one vertex
+strictly outside each end of the common segment. The full word is
+induced exactly when these last pairs are distinct and nonadjacent.
+This gives a second enumeration by pairing independently grown tails
+of admissible lengths. Both procedures recover the same 63 shape
+identifiers~\cite{short252}. The indexed two-tail criterion also passed Lean
+checking, with both tails allowed to be empty.
+
+The reference segment incidence gives a second comparison. The saved
+98-edge parent generates exactly the same 53 long shapes as each of
+twelve other references, including the 96-edge donors 15, 16 and 17.
+All 35 new shapes occur in this common set. Donors 15, 69, 99 and
+114, each of length 96, suffice to generate all 63 shapes. Four
+references are necessary. Deleting duplicate and contained rows from
+the incidence table leaves six maximal rows, none of whose twenty
+triples covers the catalogue~\cite{short252}.
+
+For a single crossing with one of these 63 long arms, the exact
+maximum is 191 edges. To obtain the upper bound it suffices to
+exclude a join of exactly 192 at each endpoint. Any longer join
+could be shortened to 192 by deleting edges from the opposite arm.
+The previous certificates cover 28 arm shapes. Of the 70 newly
+considered endpoints, 69 admit a direct exclusion. The last has
+seven legal first steps on the opposite side, each excluded by a
+separate certificate. An earlier 191-edge example supplies the
+lower bound. Among the 35 added shapes the longest explicit join
+found in this round has 178 edges, with arms of 96 and 81 edges
+and one crossing~\cite{short252}.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -10786,7 +10829,7 @@ labelled partners each, and none reaches 192. These finite exclusions
 use the archived calculations. The Lean results on truncating partners
 and moving the crossing apply under their stated geometric hypotheses.
 Sections~\ref{sec:corner250} and~\ref{sec:segment251} give the complete
-84-edge and 72-edge segment calculations.
+84-edge and 72-edge segment calculations. Section~\ref{sec:short252} gives the 68-edge result.
 Full-source reviews at rounds 220, 230, 240 and 250 check the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
@@ -14415,6 +14458,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{One-crossing joins retaining 72 reference edges}.
 Research milestone 251, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/251-eighty-edge-segments}.
+
+\bibitem{short252}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{Two-ended growth from 68-edge reference segments}.
+Research milestone 252, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/252-shorter-reference-segments}.
 
 \end{thebibliography}
 \end{document}

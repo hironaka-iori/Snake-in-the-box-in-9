@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Round 251 completed the classification of all long arms retaining 72 consecutive edges of the 22 reference parents. The 205 distinct segments give 28 long shapes. Exactly five attain 191 and the other 23 give at most 190. A 192-edge single-crossing snake must therefore avoid every one of these 205 segments in any arm of at least 96 edges. The local working note holds the next experiment. [Round 251](../../milestones/251-eighty-edge-segments/README.md) · [Long-term goal](RESEARCH_GOAL.md)
+Round 252 is complete. The 68-edge segments of 22 reference paths generate exactly 63 long arms in the eight-dimensional cube. The longest single-crossing join using these arms has 191 edges. The 98-edge reference and twelve shorter references each generate the same 53 shapes. The local working note holds the resumption point. [Round 252](../../milestones/252-shorter-reference-segments/README.md) · [Standing goal](RESEARCH_GOAL.md)
 
 ## Completed cases
 

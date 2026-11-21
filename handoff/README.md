@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 251 handoff records the completed 72-edge segment census and the current construction route. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 252 handoff records the latest single-crossing result and the evidence supporting it. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

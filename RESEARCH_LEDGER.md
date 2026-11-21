@@ -6,4 +6,4 @@ The [milestone index](milestones/CATALOG.md) lists every published numbered fold
 |---|---|
 | [Original research ledger](docs/history/research-ledger.md) | The accumulated proof, search and continuation notes from earlier rounds. |
 | [Project checkpoint reports through Round 240](docs/history/project-checkpoints.md) | The original front-page sequence of project updates. |
-| [Handoff after Round 251](handoff/CURRENT_STATUS.md) | The 72-edge segment classification and the [active construction route](further-research/routes/ACTIVE.md). |
+| [Handoff after Round 252](handoff/CURRENT_STATUS.md) | Long arms retaining 68 reference edges. [Construction route](further-research/routes/ACTIVE.md) |

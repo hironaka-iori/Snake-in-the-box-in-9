@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 251}
+\date{Research state after round 252}
 \begin{document}
 \maketitle
 
@@ -1302,6 +1302,26 @@ coordinates. A separately constructed 84-edge partner fits at the
 same endpoint, yielding a verified join of $96+1+84=181$
 edges~\cite{segment251}.
 
+Retaining 68 consecutive edges of the same references gives more
+room to change the two ends. The 212 possible middle shapes now
+grow into 63 different long arms. Of the 35 additions, 33 have
+96 edges and two have 97 edges. Two enumerations found the same
+complete list. One grows the left end and then the right. The
+other grows the two parts separately and checks whether they
+overlap or touch when attached to the middle~\cite{short252}.
+The saved 98-edge parent and twelve other examples each produce
+exactly the same 53 long shapes in this search, including all 35
+additions. Four carefully chosen 96-edge references suffice to
+recover all 63 shapes. No three references suffice.
+
+Even with the other arm free, the longest single-crossing join
+in this enlarged family has 191 edges. Each added shape has two
+possible crossing ends. The search ruled out 192 at 69 of those
+ends directly. At the remaining end it ruled out all seven possible
+first steps. Trimming the free end would reduce any longer join
+to 192. A previously saved example attains 191. The best explicit
+join found for an added shape has 178 edges~\cite{short252}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1323,7 +1343,7 @@ The latest full written-source review was completed at round 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 251.
+in the companion manuscript and milestones through round 252.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1525,6 +1545,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{One-crossing joins retaining 72 reference edges}.
 Research milestone 251, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/251-eighty-edge-segments}.
+
+\bibitem{short252}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{Two-ended growth from 68-edge reference segments}.
+Research milestone 252, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/252-shorter-reference-segments}.
 
 \end{thebibliography}
 \end{document}

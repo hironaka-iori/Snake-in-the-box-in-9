@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. The research pauses after Round 251. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Round 252 is complete. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| What is the longest join when an arm keeps 68 reference edges? | [252 · Long arms retaining 68 reference edges](252-shorter-reference-segments/README.md) |
 | Can a 192-edge join retain 72 consecutive edges of a reference arm? | [251 · Complete census and endpoint certificates](251-eighty-edge-segments/README.md) |
 | Which parents retaining an 84-edge reference segment reach 191 or 192? | [250 · Five of 25 parents reach 191, and all exclude 192](250-corner-partners/README.md) |
 | Can any of the fifteen archived long parents reach 192? | [249 · Complete parent coverage and seven new shapes](249-long-parent-joins/README.md) |
