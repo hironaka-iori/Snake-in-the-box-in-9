@@ -26,6 +26,9 @@ push anywhere else, stop only when the coordinating session says so (`touch ~/d8
 ## Code update (when the coordinating session says "update to <commit>")
 
 Kill the worker and its children by PID (`pgrep -f "[p]rod_d8.py run"`, `pgrep -f "[m]ake_cert.py"`,
-`pgrep -f "[b]uild_cert.sh"`, `pgrep -f "[l]ean.*--root"`; `kill` those PIDs), then rerun the two
-lines at the top. Finished certificates are kept; failed and interrupted items are retried. The
+`pgrep -f "[b]uild_cert.sh"`, `pgrep -f "[l]ean.*--root"`, `pgrep -f "[p]ilot.py"`, `pgrep -x cadical`;
+`kill` those PIDs, then check that `pgrep -x cadical` and `pgrep -f "[l]ean.*--root"` print nothing),
+then rerun the two lines at the top. Orphans left by an earlier update (parent PID 1, e.g.
+`ps -o pid,ppid,etime,cmd -C cadical`) compete for the cores and write into the new run's job
+directories: kill them too. Finished certificates are kept; failed and interrupted items are retried. The
 built stacks in `~/d8stack` and the plain stack are reused (only rebuilt if missing).
