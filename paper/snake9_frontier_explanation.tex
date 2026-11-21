@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 252}
+\date{Research state after round 253}
 \begin{document}
 \maketitle
 
@@ -1322,6 +1322,37 @@ first steps. Trimming the free end would reduce any longer join
 to 192. A previously saved example attains 191. The best explicit
 join found for an added shape has 178 edges~\cite{short252}.
 
+\section{What can repeated changes reach?}
+
+Keep 68 consecutive edges, regrow both ends, and then choose a fresh
+68-edge segment for the next change. Starting from the 22 reference
+shapes, repeated changes reach 237 long shapes in total. The search
+checked every next move from each of the 237. The saved 98-edge
+parent can reach 227 of them. The five 96-edge parents known to
+give a 191-edge join all lie in a separate group of six. Each of the
+five directly shares a segment of only 12 edges at most with the
+98-edge parent, even after relabelling or reversal. Starting from any of
+the five, arbitrarily many changes can reach only six long shapes.
+The sixth gives a join of at most 190 edges.
+
+The length of an intermediate arm matters. With 98 edges required
+at each intermediate step, the same 98-edge parent reaches 53 possible
+final arms. Lowering the intermediate minimum to 97 gives 71, and
+lowering it to 96 gives 227. In each case the final arm can have
+96, 97 or 98 edges. Exactly two 97-edge shapes account for the
+increase from 53 to 71. Each contributes nine new final arms,
+with no overlap between the two sets~\cite{repeat253}.
+
+For those 71 terminal shapes the best single-crossing join lies
+between 181 and 191 edges, even when the opposite arm can be any
+compatible path. The 53 original shapes already had an upper bound.
+Each of the other 18 has 96 edges. A 192-edge join would need a
+95-edge partner, and every longer partner would contain one. The
+certificates exclude that partner at both ends of all 18 shapes.
+Across all 237 reachable shapes, a 192-edge join would have to use
+one of 156 remaining 96-edge shapes. Both endpoints of each remain
+open when the opposite arm is unrestricted~\cite{repeat253}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1343,7 +1374,7 @@ The latest full written-source review was completed at round 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 252.
+in the companion manuscript and milestones through round 253.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
@@ -1551,6 +1582,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{Two-ended growth from 68-edge reference segments}.
 Research milestone 252, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/252-shorter-reference-segments}.
+
+\bibitem{repeat253}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{Repeated changes retaining 68 edges}.
+Research milestone 253, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/253-repeated-segment-growth}.
 
 \end{thebibliography}
 \end{document}

@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 252, 21 November 2026}
+\date{Research state after round 253, 21 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -90,7 +90,8 @@ For single-crossing joins with an unrestricted opposite arm, only five
 of the fifteen archived 96- through 98-edge parents attain 191. All
 five have 96 edges. A complete search also excludes length 192 when
 an arm of at least 96 edges retains any 68-edge segment of the 22
-reference parents, up to cube isometry and reversal. For the saved 98-edge parent the
+reference parents, up to cube isometry and reversal. Repeating this growth
+operation reaches exactly 237 long arms in three components. For the saved 98-edge parent the
 maximum single-crossing join lies between 179 and 187 inclusive.
 
 Written proofs, Lean-checked implications and independently audited
@@ -167,7 +168,7 @@ the saved 98-edge parent between 179 and 187 edges. Among the fifteen
 originally archived shapes with 96 to 98 edges, exactly five attain 191.
 Section~\ref{sec:corner250} extends the 192-edge exclusion to all
 long arms retaining an 84-edge segment of any of the 22 reference parents.
-Sections~\ref{sec:segment251} and~\ref{sec:short252} strengthen this to 72 and then 68 edges.
+Sections~\ref{sec:segment251} and~\ref{sec:short252} strengthen this to 72 and then 68 edges. Section~\ref{sec:repeat253} describes all repeated changes at 68 edges.
 Section~\ref{sec:prefix222} gives the earlier exclusion of a 93-edge partner.
 \item Sections~\ref{sec:replacement225}--\ref{sec:facevisits230} give the
 simultaneous-replacement criteria and the successive restricted construction
@@ -10525,6 +10526,78 @@ lower bound. Among the 35 added shapes the longest explicit join
 found in this round has 178 edges, with arms of 96 and 81 edges
 and one crossing~\cite{short252}.
 
+\subsection{Repeated changes retaining 68 edges}\label{sec:repeat253}
+
+A move between two long arms in $Q_8$ preserves a common contiguous
+segment of 68 edges up to cube isometry and reversal. The retained
+segment can change at every move. Starting from the 22 reference arms,
+the complete set reachable by finitely many moves consists of 237 shapes:
+229 have 96 edges, seven have 97 and one has 98. At distances zero
+through nine from the reference set the layer sizes are respectively
+22, 41, 22, 15, 15, 34, 52, 21, 10 and 5. Extending all 2,269 distinct
+segments produces no shape outside this catalogue. Each discovery
+records its predecessor, which proves attainability. Closure under
+one move then proves completeness by induction. An independent two-tail
+enumeration reproduces the catalogue and every distance layer.
+Lean checks the abstract closure and predecessor argument~\cite{repeat253}.
+
+At 68 edges the components have sizes 227, 6 and 4. The recorded
+98-edge parent lies in the largest. The five known 96-edge parents
+attaining a 191-edge join lie in the six-shape component. Each shares
+at most 12 edges in a contiguous segment with the 98-edge parent.
+The five stay connected if every step retains 76 edges. At 77 edges
+one separates. Allowing an arbitrary terminal arm of length 96--98,
+the 98-edge parent reaches 53, 71 or 227 shapes when intermediates
+must have at least 98, 97 or 96 edges respectively. Any stricter
+retention threshold uses a subgraph of the certified 68-edge graph,
+so it suffices to compute those component sizes within the 237
+shapes~\cite{repeat253}.
+All six shapes in the component of the five attaining parents, and
+all four in the other small component, belong to the earlier 72-edge
+catalogue. Its unrestricted partner bounds show that the six-shape
+component has maximum 191, attained by exactly those five parents.
+The four-shape component has exact maximum 190, attained by
+donors 99 and 114~\cite{segment251,repeat253}.
+
+
+Of the eight available intermediate shapes with 97 or 98 edges,
+only the two newly found 97-edge shapes enlarge the 53-shape
+terminal set on a second step. Each adds nine 96-edge shapes and
+the two sets are disjoint. Every eligible intermediate is already
+reachable in one move. A third step cannot enlarge this
+71-shape set.
+
+For the 174 shapes beyond the first move from any of the 22 references,
+all of length 96, consider any consecutive portion of a reachable
+shape as the opposite arm. The maximum join over both ends and all
+coordinate permutations is 155 edges. Four rooted parents attain
+it, with 58-edge partners. Using any consecutive portion of the
+903 archived donor shapes and two further saved partner shapes gives
+a maximum of 149 edges~\cite{repeat253}.
+
+Two shapes reachable in seven moves from the recorded 98-edge parent
+share a longest direct segment of only 30 edges with it. Keeping
+one of these shapes fixed and growing a partner outside the two
+banks gave a 176-edge join, including a partner of 79 edges.
+The best bank segment at that endpoint has 50 edges. All pairs
+of vertices in the constructed join were checked~\cite{repeat253}.
+
+There is no 192-edge single-crossing join with any of the 71
+terminal shapes reached from the 98-edge reference using
+intermediate arms of at least 97 edges. The earlier certificates
+cover 53 shapes. The other 18 each have 96 edges. A 95-edge partner
+at either endpoint would need to avoid every nonzero vertex of the
+rooted arm. It therefore avoids any subset of these forbidden vertices.
+Replaying 27 refutations for such subsets excludes all 36 new rooted
+cases. A longer partner would contain a 95-edge prefix. A recorded
+181-edge example supplies a lower bound within the family, leaving
+its exact maximum between 181 and 191 inclusive. Transporting all
+27 forbidden sets under all $8!$ coordinate permutations to the other
+roots excludes no further root. Combining this with the two small
+components leaves 156 of the 237 shapes as possible fixed arms for
+a 192-edge join. All have 96 edges and both endpoints remain open
+in this calculation~\cite{segment251,short252,repeat253}.
+
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
 \begin{tabular}{rrrr}
@@ -14464,6 +14537,12 @@ I. Hironaka, T. Ma and S. Zhan.
 \emph{Two-ended growth from 68-edge reference segments}.
 Research milestone 252, 2026.
 \url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/252-shorter-reference-segments}.
+
+\bibitem{repeat253}
+I. Hironaka, T. Ma and S. Zhan.
+\emph{Repeated changes retaining 68 edges}.
+Research milestone 253, 2026.
+\url{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/253-repeated-segment-growth}.
 
 \end{thebibliography}
 \end{document}

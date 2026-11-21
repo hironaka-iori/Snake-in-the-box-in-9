@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 252
+## Latest result · Round 253
 
-The 68-edge segments of 22 reference paths generate exactly 63 long arms in the eight-dimensional cube. The longest single-crossing join using these arms has 191 edges. The 98-edge reference and twelve shorter references each generate the same 53 shapes. [Results and evidence](milestones/252-shorter-reference-segments/README.md)
+Repeated changes preserving 68 consecutive edges split the 237 reachable long arms into components of 227, 6 and 4 shapes. The five known 191-attaining parents lie in the six-shape component. The saved 98-edge parent lies in the 227-shape component. A 192-edge join within the catalogue would require one of 156 still-unclassified 96-edge arms. [Results and evidence](milestones/253-repeated-segment-growth/README.md)
 
-Round 252 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Paused after Round 253. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 
