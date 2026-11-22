@@ -60,6 +60,27 @@ theorem unsat_of_split (f : List (List Int)) (t : ST) (hp : t.pos = true)
   have := unsat_pre f t [] hp (by simpa using h)
   simpa [units] using this
 
+/-- one certificate per leaf path, as a nested conjunction (built with `⟨c₁, c₂, …, trivial⟩`) -/
+def AllU (f : List (List Int)) : List (List Int) → Prop
+  | [] => True
+  | p :: ps => Unsat (units p ++ f) ∧ AllU f ps
+
+theorem allU_mem (f : List (List Int)) : ∀ (ls : List (List Int)), AllU f ls → ∀ ps ∈ ls, Unsat (units ps ++ f)
+  | [], _, ps, h => by simp at h
+  | q :: qs, ⟨h, hs⟩, ps, hm => by
+    rcases List.mem_cons.mp hm with rfl | hm
+    · exact h
+    · exact allU_mem f qs hs ps hm
+
+theorem allU_append (f : List (List Int)) : ∀ (a b : List (List Int)), AllU f a → AllU f b → AllU f (a ++ b)
+  | [], _, _, hb => hb
+  | _ :: as, b, ⟨h, ha⟩, hb => ⟨h, allU_append f as b ha hb⟩
+
+/-- the split certificate of a cube: the tree, its leaf list, and one certificate per leaf -/
+theorem unsat_of_leaves (f : List (List Int)) (t : ST) (hp : t.pos = true) (ls : List (List Int))
+    (hl : t.leaves = ls) (h : AllU f ls) : Unsat f :=
+  unsat_of_split f t hp (fun ps hps => allU_mem f ls h ps (hl ▸ hps))
+
 /-- leaf provenance: tag `[]` marks one of the unit clauses -/
 def coreOkU (us : List Int) (c L A k : Nat) (core : List (List Nat × List Nat)) : Bool :=
   core.all fun p => if p.1 = [] then (units us).contains (p.2.map decodeLit)

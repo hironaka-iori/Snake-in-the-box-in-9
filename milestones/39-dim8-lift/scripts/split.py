@@ -3,7 +3,8 @@ A node is a list of unit literals on vertex variables s_u (DIMACS ids u+1).  Eac
 CaDiCaL under a time limit T0; an unfinished node is split on the next vertex of a fixed order:
 vertices outside copy 0 whose copy-0 neighbour is an end vertex of A first, then the other vertices
 adjacent to A, then the rest.  The leaves form a complete binary case split (every assignment of the
-branch variables is covered), so leaf UNSATs imply the cube's UNSAT.
+branch variables is covered), so leaf UNSATs imply the cube's UNSAT. FORCE=D splits the top D levels
+without solving (2^D pieces).
 usage: python3 split.py n c L k A.json outdir T0 jobs [extra dimacs29 flags...]"""
 import sys, os, json, subprocess, time, threading
 from concurrent.futures import ThreadPoolExecutor
@@ -12,13 +13,13 @@ n, c, L, k = map(int, sys.argv[1:5]); Af = sys.argv[5]; out = sys.argv[6]; T0 = 
 extra = sys.argv[9:]
 os.makedirs(out, exist_ok=True)
 A = set(json.load(open(Af)))
-# GEN=lean: split the Lean-exported cubeCnfC4 (the certified CNF)
+# GEN=lean: split the Lean-exported cube CNF (ENC=q: cubeCnfQ, the certified encoding; default c4)
 base = os.path.join(out, 'base.cnf')
 if not os.path.exists(base):
     if os.environ.get('GEN') == 'lean':
         lean = os.path.join(HERE, '..', 'lean')
         mask = '%016x' % sum(1 << u for u in A)
-        subprocess.run(['/opt/lean-4.35.0-linux/bin/lean', '--run', 'Export.lean', str(c), str(L), mask, str(len(A)), base, 'c4'],
+        subprocess.run(['/opt/lean-4.35.0-linux/bin/lean', '--run', 'Export.lean', str(c), str(L), mask, str(len(A)), base, os.environ.get('ENC', 'c4')],
                        check=True, capture_output=True, cwd=lean, env=dict(os.environ, LEAN_PATH=os.path.join(lean, 'build')))
     else:
         subprocess.run(['python3', os.path.join(HERE, 'dimacs29.py'), str(n), str(c), str(L), base, '--nosym', '--fix', str(k), Af] + extra,
@@ -48,7 +49,13 @@ def solve(lits):
     return (st[0][2:] if st else 'UNKNOWN'), time.time() - t
 pending = [[]]
 ex = ThreadPoolExecutor(jobs)
+FORCE = int(os.environ.get('FORCE', '0'))   # FORCE=D: nodes above depth D are split without solving
 def work(lits):
+    if len(lits) < FORCE:
+        u = order[len(lits)]
+        with lock:
+            log.write(json.dumps(dict(lits=lits, status='FORCED', sec=0)) + '\n'); log.flush()
+        return [lits + [u + 1], lits + [-(u + 1)]]
     st, dt = solve(lits)
     with lock:
         stats['cpu'] += dt

@@ -7,12 +7,20 @@ import sys, os, subprocess, json, time
 L, Ahex, k, out = int(sys.argv[1]), sys.argv[2], int(sys.argv[3]), sys.argv[4]
 HERE = os.path.dirname(os.path.abspath(__file__)); M = os.path.join(HERE, '..'); LEANDIR = os.path.join(M, 'lean')
 ROOT = os.path.abspath(os.path.join(M, '..', '..')); LEAN = '/opt/lean-4.35.0-linux/bin/lean'
-mod = 'Q' + Ahex.upper(); W = os.path.join(out, 'work', mod); os.makedirs(W, exist_ok=True)
+# split leaves: UNITS="l1,l2,..." (vertex literals of the leaf's path) and LEAF=<i> give
+#   Unsat (Dim8Lift.Split.units [l1, l2, ...] ++ cubeCnfQ 13 L A k)   as module CubeQ<A>L<i>
+US = [int(x) for x in os.environ.get('UNITS', '').split(',') if x.strip()]; LEAF = os.environ.get('LEAF', '')
+assert bool(US) == bool(LEAF), 'UNITS and LEAF go together'
+mod = 'Q' + Ahex.upper() + ('L' + LEAF if LEAF else ''); W = os.path.join(out, 'work', mod); os.makedirs(W, exist_ok=True)
+USL = '[%s]' % ', '.join('(%d : Int)' % x for x in US)
 env = dict(os.environ, LEAN_PATH=os.path.join(LEANDIR, 'build'))
 t0 = time.time(); stats = dict(module=mod, L=L, A=Ahex, k=k)
 cnf = os.path.join(W, 'f.cnf'); tags = os.path.join(W, 'tags.txt'); lrat = os.path.join(W, 'f.lrat')
 subprocess.run([LEAN, '--run', 'Export.lean', '13', str(L), Ahex, str(k), cnf, 'q'], cwd=LEANDIR, env=env, check=True)
 subprocess.run([LEAN, '--run', 'ExportTags.lean', '13', str(L), Ahex, str(k), tags], cwd=LEANDIR, env=env, check=True)
+if US:   # the leaf CNF: the cube CNF followed by the unit clauses (tag [] in the provenance data)
+    body = open(cnf).read().split('\n', 1); hd = body[0].split()
+    open(cnf, 'w').write('p cnf %s %d\n' % (hd[2], int(hd[3]) + len(US)) + body[1] + ''.join('%d 0\n' % x for x in US))
 s = time.time()
 # SOLVE_LIMIT (s, from prod_d8.py): a longer solve means a certificate too big for this machine's memory
 # (~28-52 k hints per solver second); stop, delete the partial LRAT, exit 11 (recorded as TOO_BIG)
@@ -70,9 +78,16 @@ for line in open(cnf):
     i += 1
     if i in cs:
         lits = line.split()[:-1]
-        rows[i] = '([%s], [%s])' % (', '.join(tagof[tuple(lits)]), ', '.join(str(enc(int(x))) for x in lits))
+        tg = [] if (US and len(lits) == 1 and int(lits[0]) in US) else tagof[tuple(lits)]
+        rows[i] = '([%s], [%s])' % (', '.join(tg), ', '.join(str(enc(int(x))) for x in lits))
 os.remove(cnf); os.remove(tags)
 CH = 4000   # must equal pilot.py's chunk size: P_i is renamed-checked against R_i
+OK = ('Dim8Lift.Split.coreOkU %s' % USL) if US else 'coreOk'
+STMT = ('Dim8Lift.Split.units %s ++ ' % USL) if US else ''
+PROVT = 'Dim8Lift.Split.unsat_of_provU' if US else 'unsat_of_prov'
+PROVMOD = 'Split' if US else 'Prov'
+OKA = 'Dim8Lift.Split.coreOkU_append' if US else 'coreOk_append'
+def F(s): return s.replace('@OKA@', OKA).replace('@OK@', OK).replace('@STMT@', STMT).replace('@PROVT@', PROVT)
 rparts = open(os.path.join(gen, 'LocalWindowCnf', mod + '.parts')).read().split()
 pd = os.path.join(gen, 'CubeProv', mod); os.makedirs(pd, exist_ok=True)
 ordered = [rows[c_] for c_ in core]
@@ -90,26 +105,26 @@ NS = 'Snake9.CubeProv.' + mod; LW = 'Snake9.LocalWindow.' + mod
 HDR = "set_option maxRecDepth 100000\nset_option maxHeartbeats 0\n"
 open(os.path.join(pd, 'Tree.lean'), 'w').write("import RenN\n%snamespace %s\nopen Dim8Lift.RenN\n%s\nend %s\n" % (HDR, NS, (lambda top: '\n'.join(SUB) + '\ndef tree : BT := ' + top)(tree(0, 1)), NS))
 for j, nm in enumerate(parts):
-    open(os.path.join(pd, nm + '.lean'), 'w').write(
+    open(os.path.join(pd, nm + '.lean'), 'w').write(F(
         "import Prov\nimport CubeProv.%s.Tree\nimport LocalWindowCnf.%s.%s\n%snamespace %s\nopen Dim8Lift.Prov Dim8Lift.RenN\n"
         "def p%d : List (List Nat × List Nat) := [\n%s]\n"
-        "theorem p%d_ok : coreOk 13 %d 0x%s %d p%d = true := by decide +kernel\n"
+        "theorem p%d_ok : @OK@ 13 %d 0x%s %d p%d = true := by decide +kernel\n"
         "theorem n%d : renN tree.get %s.r%d (p%d.map Prod.snd) = true := by decide +kernel\nend %s\n"
-        % (mod, mod, rparts[j], HDR, NS, j, ",\n".join(ordered[j * CH:(j + 1) * CH]), j, L, Ahex, k, j, j, LW, j, j, NS))
+        % (mod, mod, rparts[j], HDR, NS, j, ",\n".join(ordered[j * CH:(j + 1) * CH]), j, L, Ahex, k, j, j, LW, j, j, NS)))
 P = ' ++ '.join('p%d' % j for j in range(len(parts)))
 # `++` is left-associative: raw = ((r0 ++ r1) ++ r2) ..., so the chain is built left to right
 ren = 'n0'
 for j in range(1, len(parts)): ren = 'renN_app _ (%s) n%d' % (ren, j)
-open(os.path.join(gen, 'Cube' + mod + '.lean'), 'w').write(
+open(os.path.join(gen, 'Cube' + mod + '.lean'), 'w').write(F(
     "import LocalWindowUnsat.%s\n%s%snamespace %s\nopen Dim8Lift.Prov Dim8Lift.RenN Snake9.LocalWindow\n"
     "def core : List (List Nat × List Nat) := %s\n"
-    "theorem core_ok : coreOk 13 %d 0x%s %d core = true := by\n  simp only [core, coreOk_append, %s, Bool.and_self]\n"
+    "theorem core_ok : @OK@ 13 %d 0x%s %d core = true := by\n  simp only [core, @OKA@, %s, Bool.and_self]\n"
     "theorem ren_ok : renN tree.get %s.raw (core.map Prod.snd) = true := by\n  simp only [%s.raw, core, List.map_append]\n  exact %s\n"
-    "/-- the certificate -/\ntheorem unsat : Unsat (Dim8Lift.Cube.cubeCnfQ 13 %d 0x%s %d) := by\n"
-    "  have h := unsat_of_renN tree.get _ _ ren_ok %s.unsat\n  rw [List.map_map] at h\n  exact unsat_of_prov core core_ok h\nend %s\n"
+    "/-- the certificate -/\ntheorem unsat : Unsat (@STMT@Dim8Lift.Cube.cubeCnfQ 13 %d 0x%s %d) := by\n"
+    "  have h := unsat_of_renN tree.get _ _ ren_ok %s.unsat\n  rw [List.map_map] at h\n  exact @PROVT@ core core_ok h\nend %s\n"
     "#print axioms %s.unsat\n"
     % (mod, ''.join('import CubeProv.%s.%s\n' % (mod, p) for p in parts), HDR, NS, P, L, Ahex, k,
-       ', '.join('p%d_ok' % j for j in range(len(parts))), LW, LW, ren, L, Ahex, k, LW, NS, NS))
+       ', '.join('p%d_ok' % j for j in range(len(parts))), LW, LW, ren, L, Ahex, k, LW, NS, NS)))
 open(os.path.join(gen, mod + '.modules'), 'w').write(' '.join(
     ['LocalWindowCnf/%s/%s' % (mod, p) for p in rparts] +
     ['LocalWindowCnf/' + mod, 'LocalWindowUnsat/' + mod, 'CubeProv/%s/Tree' % mod] + ['CubeProv/%s/%s' % (mod, p) for p in parts] + ['Cube' + mod]))
@@ -130,8 +145,8 @@ if not os.environ.get('NOMOD'):
     modz(os.path.join(gen, 'LocalWindowUnsat', mod + '.lean'), priv=['LratV3', 'ProofPack'], allimp=['LocalWindowCnf.' + mod])
     modz(os.path.join(pd, 'Tree.lean'), priv=['RenN'])
     for j, nm in enumerate(parts):
-        modz(os.path.join(pd, nm + '.lean'), priv=['Prov'], allimp=['CubeProv.%s.Tree' % mod, 'LocalWindowCnf.%s.%s' % (mod, rparts[j])])
-    modz(os.path.join(gen, 'Cube' + mod + '.lean'), pub=['CubeCnf'], priv=['RenN', 'Prov'],
+        modz(os.path.join(pd, nm + '.lean'), priv=[PROVMOD], allimp=['CubeProv.%s.Tree' % mod, 'LocalWindowCnf.%s.%s' % (mod, rparts[j])])
+    modz(os.path.join(gen, 'Cube' + mod + '.lean'), pub=['CubeCnf'] + (['Split'] if US else []), priv=['RenN', PROVMOD],
          allimp=['CubeProv.%s.%s' % (mod, p_) for p_ in parts] + ['LocalWindowUnsat.' + mod, 'LocalWindowCnf.' + mod],
          public='theorem unsat :')
 stats['gen_s'] = round(time.time() - t0, 1)
