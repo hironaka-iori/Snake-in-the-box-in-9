@@ -130,7 +130,7 @@ def job1(a, k, h, res):
     # solve-time cap: hints <= (mem_gb - 3.1) / 0.55 M fit; at >= 28 k hints per solver second a longer solve cannot fit
     lim = max(300.0, (a.mem_gb - 3.1) / 0.55 * 1e6 / 28000)
     r = sh([sys.executable, os.path.join(HERE, 'make_cert.py'), str(a.L), h, str(k), wd], cwd=HERE,
-           env=dict(os.environ, SOLVE_LIMIT=str(round(lim))))
+           env=dict(os.environ, SOLVE_LIMIT=str(round(lim)), MEM_GB=str(a.mem_gb)))
     if r.returncode == 11:   # solve cap reached: too big for this machine, left to a bigger one
         rec.update(status='TOO_BIG', mem_gb=a.mem_gb, solve_limit=round(lim)); res.append(rec); return
     if r.returncode != 0:
@@ -141,7 +141,7 @@ def job1(a, k, h, res):
                                                                   core=g['core']['core'], vars=g['core']['vars'])
     pg = pred_gb(g['replay']['hints'], g['core']['vars']); rec['pred_gb'] = round(pg, 1)
     if pg > a.mem_gb:   # cannot build here (k = 30 cubes reach 133 M hints, ~100 GB): left to a bigger machine
-        rec.update(status='TOO_BIG', mem_gb=a.mem_gb); res.append(rec); return
+        rec.update(status='TOO_BIG', mem_gb=a.mem_gb, portfolio=g.get('portfolio')); res.append(rec); return
     reserve(GEN_GB, pg); BUDGET_OF[me] = pg
     tb = time.time()
     r = sh(['bash', os.path.join(HERE, 'build_cert.sh'), wd, 'Q' + h.upper()], env=dict(os.environ, STACK=os.path.join(a.stack, 'build')))
@@ -190,7 +190,9 @@ def run(a):
     man = os.path.join(a.work, 'manifest.jsonl')
     # only certified (or SAT?) items count as done: a failed item is retried by the next run
     done = {r['module'] for r in map(json.loads, open(man)) if r['status'] in ('OK', 'SAT?')
-            or (r['status'] == 'TOO_BIG' and r.get('mem_gb', 0) >= a.mem_gb)} if os.path.exists(man) else set()
+            or (r['status'] == 'TOO_BIG' and r.get('mem_gb', 0) >= a.mem_gb
+                # a borderline proof (<= 35% over) not yet tried with the solver portfolio is retried once
+                and ('solve_limit' in r or r.get('portfolio') or r.get('pred_gb', 1e9) > 1.35 * a.mem_gb))} if os.path.exists(man) else set()
     its = items(a.L)
     if a.only: its = [x for x in its if x[1] in a.only.split(',')]
     else: its = [x for x in its if x[0] <= a.max_k and int(hashlib.sha1(modname(x[1]).encode()).hexdigest(), 16) % a.workers in a.indices]

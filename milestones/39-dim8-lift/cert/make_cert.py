@@ -29,11 +29,34 @@ if 's SATISFIABLE' in r.stdout:
 assert 's UNSATISFIABLE' in r.stdout, r.stdout[:200]
 gen = os.path.join(out, 'gen'); os.makedirs(gen, exist_ok=True)
 c = json.loads(subprocess.run(['python3', os.path.join(HERE, 'pilot.py'), cnf, lrat, mod, gen], capture_output=True, text=True, check=True).stdout)
+# proof portfolio: when MEM_GB is set (prod_d8.py passes --mem-gb) and the default proof's predicted peak exceeds
+# it, re-solve with each CaDiCaL configuration of PORTFOLIO (within SOLVE_LIMIT) and keep the smallest proof.
+# Measured on k = 29 cube 037c7c837c83831c: default 15.13 M hints / 24,017 vars (14.0 GB predicted), --unsat
+# 13.31 M / 22,881 (12.5 GB: fits 13 GB), --seed=7 23.85 M. Any UNSAT proof is acceptable to the checker.
+pred = lambda c_: 3.1 + 0.55 * c_['hints'] / 1e6 * max(1.0, c_['vars'] / 14000) ** 0.5
+MEMGB = float(os.environ.get('MEM_GB', '0')); stats['portfolio'] = {'default': c['hints']}
+if MEMGB and pred(c) > MEMGB:
+    import shutil
+    for opt in [o_ for o_ in os.environ.get('PORTFOLIO', '--unsat,--seed=1').split(',') if o_]:
+        if os.path.exists(lrat): os.remove(lrat)
+        try:
+            r2 = subprocess.run(['cadical', '-q', '--lrat', '--binary=false', opt, cnf, lrat], capture_output=True, text=True, timeout=lim or None)
+        except subprocess.TimeoutExpired:
+            stats['portfolio'][opt] = 'timeout'; continue
+        if 's UNSATISFIABLE' not in r2.stdout: stats['portfolio'][opt] = 'no proof'; continue
+        g2 = os.path.join(W, 'gen_alt'); shutil.rmtree(g2, ignore_errors=True); os.makedirs(g2)
+        c2 = json.loads(subprocess.run(['python3', os.path.join(HERE, 'pilot.py'), cnf, lrat, mod, g2], capture_output=True, text=True, check=True).stdout)
+        stats['portfolio'][opt] = c2['hints']
+        if pred(c2) < pred(c):   # keep the smaller proof: its compaction replaces the generated files
+            shutil.rmtree(gen); shutil.move(g2, gen); c = c2; stats['portfolio']['chosen'] = opt
+        else:
+            shutil.rmtree(g2)
+        if pred(c) <= MEMGB: break
 stats.update(core=c)
 g = json.loads(subprocess.run(['python3', os.path.join(ROOT, 'lean435', 'tools', 'genv3stream.py'), '--work', gen, '--data', os.path.join(gen, 'core'),
                                '--out', gen, '--off', str(c['vars'] + 1), mod], capture_output=True, text=True, check=True).stdout.strip().splitlines()[-1])
 stats['replay'] = {x: g[x] for x in ('lemmas', 'hints', 'segments', 'wbits', 'off', 'lean_bytes')}
-os.remove(lrat)
+if os.path.exists(lrat): os.remove(lrat)
 # provenance data, in core order, Nat codes
 glue = json.load(open(os.path.join(gen, mod + '.glue.json')))
 core = glue['core_ids']; cs = set(core)
