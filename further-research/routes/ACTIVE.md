@@ -8,7 +8,9 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Paused after Round 255. The single-crossing route remains active for resumption. The exact six-shape maximum is 191. A second component contains 41 shapes, including 23 new shapes. Twelve exclude a 192-edge join at either end. The other 29 remain open with an unrestricted partner. The full inventory contains 264 shapes, of which 171 remain open. [Round 255](../../milestones/255-parity-exchange-arms/README.md) · [Standing goal](RESEARCH_GOAL.md)
+Round 256 completed the two-exchange enumeration around all six attaining-component arms. The six remain closed, and each gives an overlap ceiling of 45 for a 96-edge window. Round 257 will examine three exchanges on the same route. [Round 256](../../milestones/256-two-exchange-parents/README.md)
+
+At Round 255 the exact six-shape maximum was 191. A second component contains 41 shapes, including 23 new shapes. Twelve exclude a 192-edge join at either end. The other 29 remain open with an unrestricted partner. The Round 255 inventory contains 264 shapes, of which 171 remained open. [Round 255](../../milestones/255-parity-exchange-arms/README.md) · [Standing goal](RESEARCH_GOAL.md)
 
 ## Completed cases
 

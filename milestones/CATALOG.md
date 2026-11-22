@@ -287,3 +287,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 253 | [Repeated changes retaining 68 edges](253-repeated-segment-growth/README.md) |
 | 254 | [Changing a parity class of a distant 96-edge arm](254-distant-arm-partners/README.md) |
 | 255 | [Repeated parity exchanges and the 46-vertex overlap bound](255-parity-exchange-arms/README.md) |
+| 256 | [All two-vertex exchanges around the six attaining-component arms](256-two-exchange-parents/README.md) |

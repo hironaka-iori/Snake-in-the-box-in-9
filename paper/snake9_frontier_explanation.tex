@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 255}
+\date{Research state after round 256}
 \begin{document}
 \maketitle
 
@@ -1436,6 +1436,25 @@ endpoints. Among the 41 shapes in the other group, this collection
 gives at most 133 edges, whereas a partner outside the collection
 gives 181~\cite{root248,exchange255}.
 
+\section{Replacing two of the 48 vertices}
+A 96-edge arm has 48 vertices on its smaller parity side. From each
+of the six shapes containing the five 191-edge attaining parents, remove
+two of those vertices and insert any two others of the same parity.
+All other vertices and the order may change. This gives 3,564,480 choices
+per reference. Two enumerations agreed on every completion. Three
+references give five labelled paths each and three give none. Every
+successful path belongs to the original six shapes. The data and the
+two constructions are in \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/256-two-exchange-parents}{milestone 256}.
+
+Thus even repeated two-vertex exchanges stay within those six shapes.
+In a single-crossing snake of at least 192 edges, every 96-edge window
+in either arm must omit at least three smaller-class vertices of each
+of the six references, after every cube isometry. If it omitted fewer,
+it would be one of those six. As a whole arm its join could reach only
+191 edges, and as a proper segment it would have an endpoint extension
+forbidden by the eight-dimensional checks.
+
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1457,7 +1476,7 @@ The latest full written-source review was completed at round 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 255.
+in the companion manuscript and milestones through round 256.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

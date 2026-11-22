@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 255, 21 November 2026}
+\date{Research state after round 256, 22 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -10744,6 +10744,36 @@ Within the 41-shape component of \texttt{e6e522b8}, the corresponding
 maximum is 133. A different partner gives 181 in this component, so
 the 133-edge bound applies specifically to the segments of the
 72 shapes~\cite{root248,exchange255}.
+
+\subsection{Two simultaneous smaller-class exchanges}\label{sec:two256}
+Fix one of the six reference arms in the component of the five
+191-edge attaining parents. Replace exactly two of its 48 smaller-class
+vertices by two of the remaining 80 sites of that parity. All 49
+opposite-class vertices and the traversal are free. There are
+\(\binom{48}{2}\binom{80}{2}=3{,}564{,}480\) candidate sets per reference.
+
+Every class vertex needs two distinct opposite neighbours with at most
+two neighbours in the final class. As sites are inserted, the latter
+counts can only increase. This gives a necessary filter before enumerating
+all spanning orders and connector labels as in Section~\ref{sec:parityexchange255}.
+A second implementation updated the opposite-neighbour counts directly
+and selected spanning cycles through the auxiliary endpoint vertex.
+The two enumerations agreed on every labelled completion. Three references
+gave five completions each and three gave none. The same three shapes
+occur in each positive row, all in the original six. The numerical
+classification is a native finite computation. The complete lists and
+replay are in \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/256-two-exchange-parents}{milestone 256}.
+
+Consequently the six shapes are closed under arbitrarily many exchanges
+of up to two vertices. With an arbitrary partner their maximum join
+is still 191. For every 96-edge window of either arm of a single-crossing
+snake of at least 192 edges, its smaller class can share at most 45 sites
+with any of these six references under any isometry. A larger overlap
+puts the window in the six-shape component. An entire arm then violates
+its partner ceiling. A proper window would have a one-edge extension,
+which the endpoint checks exclude. The separate seventh reference of
+Section~\ref{sec:parityexchange255} retains its own bound.
+
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
