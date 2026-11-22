@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Paused after Round 257. The six attaining-component arms are closed under exchanges of up to three smaller-class vertices per step. The single-crossing overlap ceiling is 44 for each of the six and 46 for the distant reference. The 29 shapes at distances two and three from the distant reference and their unrestricted partner searches are recorded separately. [Round 257](../../milestones/257-three-exchange-parents/README.md) · [Round 256](../../milestones/256-two-exchange-parents/README.md)
+Paused after Round 259. Exchanges of up to four of the 48 smaller-class sites reach exactly twelve 96-edge parent shapes from the original six. Their exact one-crossing maximum is 191. Any 96-edge window in a one-crossing snake of at least 192 edges shares at most 43 such sites with each of the twelve under every cube isometry. The earlier ceiling of 46 still applies to the separate distant reference. [Twelve-shape component](../../milestones/259-four-exchange-component/README.md) · [First four-site escape](../../milestones/258-four-exchange-parents/README.md) · [Distant reference and its open partners](../../milestones/257-three-exchange-parents/README.md)
 
 At Round 255 the exact six-shape maximum was 191. A second component contains 41 shapes, including 23 new shapes. Twelve exclude a 192-edge join at either end. The other 29 remain open with an unrestricted partner. The Round 255 inventory contains 264 shapes, of which 171 remained open. [Round 255](../../milestones/255-parity-exchange-arms/README.md) · [Standing goal](RESEARCH_GOAL.md)
 

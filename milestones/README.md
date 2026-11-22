@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 257. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 259. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| What is the longest one-crossing join reachable by repeated exchanges of four sites? | [259 · Twelve shapes with exact maximum 191](259-four-exchange-component/README.md) · [258 · The first exchange leaving the six reference shapes](258-four-exchange-parents/README.md) |
 | What changes are forced in the six attaining-component references? | [257 · Three exchanges and the 44-site overlap ceiling](257-three-exchange-parents/README.md) · [256 · All two-exchange cases](256-two-exchange-parents/README.md) |
 | Which parity classes must a 192-edge single-crossing snake avoid? | [255 · Seven reference arms and the 46-vertex overlap bound](255-parity-exchange-arms/README.md) |
 | Can a parity-preserving change escape the 68-edge catalogue and reach 192? | [254 · Changing a parity class of a distant 96-edge arm](254-distant-arm-partners/README.md) |

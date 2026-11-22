@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 257 handoff records the latest single-crossing result and the evidence supporting it. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 259 handoff records the twelve-shape single-crossing result, its attaining snake and the remaining construction cases. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

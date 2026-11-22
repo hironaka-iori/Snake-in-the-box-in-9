@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 258, 22 November 2026}
+\date{Research state after round 259, 22 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -10851,6 +10851,43 @@ at least 95 edges. As positive examples for the new shape, two fixed
 donor prefixes extend to partners of 77 and 70 edges, giving verified
 joins of 174 and 167 edges.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/258-four-exchange-parents}{Exchange records, rooted certificates and both constructions}.
+
+\subsection{The twelve arms reachable by repeated four-site exchanges}
+An exchange acts on the class of 48 vertices of a 96-edge arm.
+In one step at most four of these vertices may be replaced by the
+same number of sites of the same parity. The 49 sites of the other
+parity and the path order may vary freely, including when the
+smaller class is fixed. Shapes are identified up to cube isometry and
+path reversal. Since isometries preserve the exchange relation,
+expanding one representative per shape enumerates every possible
+next shape.
+
+Starting with the six attaining-component references gives exactly
+twelve shapes under arbitrarily many steps. For the six further shapes,
+the five exact radii \(0,\ldots,4\) cover 1,855,010,664,486
+reference--candidate pairs. At positive radius a separate
+deletion-requirement calculation recovered the same surviving labelled
+sets. If each step replaces at most three sites, the twelve shapes
+separate into connected groups of sizes \(6,4,2\). At radius four
+exactly one pair of distinct shapes joins the first and second groups,
+and exactly one joins the second and third. Thus reaching the group of
+two from the original six requires two steps of size four, and two
+such steps suffice when smaller steps are allowed between them.
+The abstract chain inequality was checked in Lean. The component
+memberships and transitions were verified by finite enumeration.
+
+The longest one-crossing join with a parent in this twelve-shape
+family has exactly \(191\) edges. An explicit join has arm lengths 96
+and 94. Every additional shape has a replayed exclusion of a 95-edge
+partner at each end. All twelve parents are unextendible at both ends
+in \(Q_8\). Therefore, if a one-crossing snake reaches 192 edges, the
+48-site smaller class of every 96-edge window in either arm must meet
+every isometric copy of each of the twelve reference classes in at
+most 43 sites. A larger intersection would yield a single exchange to
+one of the twelve shapes. The endpoint and partner arguments then give
+a contradiction. The unrestricted project interval remains
+\(191\leq a(9)\leq230\).
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/259-four-exchange-component}{Complete graph, attaining join and rooted exclusions}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
