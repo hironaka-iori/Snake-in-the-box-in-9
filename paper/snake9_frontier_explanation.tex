@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 256}
+\date{Research state after round 257}
 \begin{document}
 \maketitle
 
@@ -1455,6 +1455,30 @@ it would be one of those six. As a whole arm its join could reach only
 forbidden by the eight-dimensional checks.
 
 
+\section{How close can a successful arm be to the attaining parents?}
+A third simultaneous replacement allows over 1.42 billion possible
+smaller classes from each of the six reference arms. All endpoint and
+ordering choices are free. Two enumerations found just one labelled
+completion across the six searches. It exchanges coordinates 5 and 6
+of one parent and gives the same path shape. Thus even a sequence of
+three-at-a-time exchanges cannot leave these six shapes.
+
+A 96-edge window in either arm of a single-crossing snake of length at
+least 192 must therefore differ from each of the six reference smaller
+classes on at least four of its 48 sites, under every isometry. This is
+specific to these six arms. Three exchanges from the distant reference
+produce 15 shapes, two outside its previous 41-shape component.
+The cases are listed in \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/257-three-exchange-parents}{milestone 257}.
+
+From the distant reference, exactly two or exactly three exchanges
+produce 29 distinct shapes in total. Both shapes outside its earlier
+component exclude a 192-edge join, including when kept as a segment
+inside a longer arm. For the 29 shapes, starting the other arm with
+any 51-edge segment from 95 donor shapes and allowing its entire tail
+to change gives an exact maximum of 178 edges. With an unrestricted
+opposite arm, 21 of these 29 shapes remain open.
+
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1476,7 +1500,7 @@ The latest full written-source review was completed at round 250.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 256.
+in the companion manuscript and milestones through round 257.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

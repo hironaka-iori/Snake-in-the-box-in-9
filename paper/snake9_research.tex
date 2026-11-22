@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 256, 22 November 2026}
+\date{Research state after round 257, 22 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -93,6 +93,11 @@ an arm of at least 96 edges retains any 68-edge segment of the 22
 reference parents, up to cube isometry and reversal. Repeating this growth
 operation reaches exactly 237 long arms in three components. For the saved 98-edge parent the
 maximum single-crossing join lies between 179 and 187 inclusive.
+The six-shape family containing the five 191-edge attaining parents stays
+closed when up to three smaller-class vertices are exchanged at each
+step. Any 96-edge window in a single-crossing construction of at least
+192 edges must omit at least four of the 48 smaller-class vertices of
+each of those six references under every cube isometry.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -10773,6 +10778,54 @@ puts the window in the six-shape component. An entire arm then violates
 its partner ceiling. A proper window would have a one-edge extension,
 which the endpoint checks exclude. The separate seventh reference of
 Section~\ref{sec:parityexchange255} retains its own bound.
+
+
+\subsection{Three simultaneous exchanges and the 44-site overlap bound}
+\label{sec:three257}
+From each of the same six arms, there are
+\(\binom{48}{3}\binom{80}{3}=1{,}421{,}039{,}360\) labelled
+smaller-class sets at exchange distance exactly three. The physical
+neighbour condition in Section~\ref{sec:two256} applies after every
+insertion, since the opposite-site counts are monotone.
+The spanning-order enumeration and the independent spanning-cycle
+enumeration agreed. Among the six reference searches combined,
+one labelled completion occurred. For reference 4 of milestone 248,
+it removes \(47,69,94\) and inserts \(37,62,79\). Interchanging
+coordinates 5 and 6, indexed from zero, carries the original ordered
+arm to the new one. The construction has produced the same shape.
+
+It follows that the move component of the five attaining arms still
+contains exactly six shapes when up to three replacements may be made
+simultaneously at every step. For any consecutive 96-edge segment of
+either arm of a single-crossing snake with at least 192 edges, its
+smaller class has overlap at most 44 with each of the six reference
+classes under every cube isometry. Indeed, overlap at least 45 would
+give a member of the component by one permitted move. The whole-arm
+ceiling and the proper-segment extension argument of
+Section~\ref{sec:two256} apply.
+
+For the distant reference \texttt{e6e522b8}, two simultaneous
+replacements give 14 shapes and three give 15 other shapes. Two of the
+latter escape its 41-shape one-exchange component. Both were already
+in the 264-shape inventory. Thus closure under three exchanges is a
+property of the six specified arms. The separate 46-site bound still
+applies to this distant reference.
+The labelled classes and independent computations are in
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/257-three-exchange-parents}{milestone 257}.
+
+For those 29 distant-shell shapes, place any rooted 51-edge segment
+of the 95 specified donor shapes at either endpoint, and allow every
+legal continuation of its free end. Exactly 61 prefixes fit at 34 of
+the 58 endpoints. Two tail enumerations agree on the restricted maximum
+of \(96+1+81=178\). With arbitrary partners, eight of the 29 shapes
+have certified 191-edge ceilings at both ends, including both escape
+shapes. Only one of the 29 extends at either endpoint. Its unique
+97-edge extension has no further extension and earlier certificates
+exclude 192 at both ends. The other 21 shapes have unresolved
+unrestricted partners. The numerical ceilings use native replay.
+Lean separately checks the insertion rule that an eventual internal
+vertex needs two distinct neighbours, each adjacent to at most one
+previously selected site before insertion.
 
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}

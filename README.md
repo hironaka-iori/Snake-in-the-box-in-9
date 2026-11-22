@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 255
+## Latest result · Rounds 256 and 257
 
-Repeated changes from the five long arms known to give 191 reach exactly six shapes, even when alternated with regrowth around 68 retained edges. Their maximum join is 191. Any 96-edge segment in a single-crossing snake of at least 192 edges must replace at least two of the 48 smaller-parity vertices of each of seven reference arms. [Result and proof](milestones/255-parity-exchange-arms/README.md)
+Every 96-edge window in either arm of a single-crossing snake of at least 192 edges must replace at least four of the 48 smaller-parity sites of each of six reference arms, under every cube isometry. The six shapes remain closed under repeated exchanges of up to three vertices, and their maximum join is 191. From a seventh reference, three simultaneous exchanges can leave its previous component. [Two exchanges](milestones/256-two-exchange-parents/README.md) · [Three exchanges and partner constructions](milestones/257-three-exchange-parents/README.md)
 
-Paused after Round 255. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Paused after Round 257. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

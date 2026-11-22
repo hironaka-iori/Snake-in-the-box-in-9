@@ -288,3 +288,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 254 | [Changing a parity class of a distant 96-edge arm](254-distant-arm-partners/README.md) |
 | 255 | [Repeated parity exchanges and the 46-vertex overlap bound](255-parity-exchange-arms/README.md) |
 | 256 | [All two-vertex exchanges around the six attaining-component arms](256-two-exchange-parents/README.md) |
+| 257 | [Three simultaneous exchanges and the 44-site overlap bound](257-three-exchange-parents/README.md) |
