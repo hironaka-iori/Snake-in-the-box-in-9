@@ -47,3 +47,10 @@ Log `~/d8tail.log`; it resumes after a restart (rerun the same two lines). Keep-
 `[t]ail_d8.py run` in place of `[p]rod_d8.py run` and `~/d8tail.log`. Report to the coordinating session:
 a `SAT?` record, the first OK or BUILD_FAILED/CHECK_FAILED record of a cube (with its log tail), and
 `tail worker finished`.
+
+The tail item list is read once, at start, from the manifests published then. So on `tail worker finished`
+rerun the same two lines at once: the new run picks up TOO_BIG cubes published since. Keep rerunning until a
+run starts with `0 cubes to do` twice in a row, then report and stay idle (keep-alive off).
+
+A pre-assigned tail share (given while your cube share is still running) means: when `prod_d8.py` reports
+`worker finished`, switch to tail mode with that `T` right away, without waiting for the coordinating session.
