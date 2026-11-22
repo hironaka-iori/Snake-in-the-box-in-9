@@ -14,6 +14,8 @@
 #   REPO      checkout directory      default: the repository this script is in, else ~/Snake-in-the-box-in-9
 #   HOURS     stop taking new jobs after this many hours                         default unlimited
 #   ONLY      comma list of cube masks to certify instead of the shares (tests)
+#   MODE      cubes (default: prod_d8.py) | tail (tail_d8.py: the TOO_BIG cubes of every published manifest,
+#             by recursive vertex splitting; work ~/d8tail, log ~/d8tail.log, ref xfer/d8/t<first index>)
 # Logs: ~/d8.log (worker), ~/d8_setup.log. Stop gracefully: touch ~/d8work/STOP.
 set -euo pipefail
 : "${INDEX:?set INDEX, e.g. INDEX=0-15}"
@@ -67,6 +69,16 @@ if [ ! -f $STACK/build/Final.olean ]; then
 fi
 
 # 4. launch (resumes from ~/d8work/manifest.jsonl)
+if [ "${MODE:-cubes}" = tail ]; then   # tail worker: run it on a session whose cube share is finished
+  if pgrep -f "tail_d8.py run" >/dev/null; then log "tail worker already running"; exit 0; fi
+  if pgrep -f "prod_d8.py run" >/dev/null; then log "prod_d8.py worker still running: stop it first (touch ~/d8work/STOP)"; exit 1; fi
+  MEMT=$(awk '/MemTotal/{print int($2/1048576)}' /proc/meminfo); MEM_GB=${MEM_GB:-$((MEMT * 85 / 100))}
+  ARGS=(run --stack "$STACK" --work "$HOME/d8tail" --index "$INDEX" --workers "$WORKERS" --procs "${PROCS:-3}" --mem-gb "$MEM_GB" --hours "$HOURS")
+  [ -n "${NAME:-}" ] && ARGS+=(--name "$NAME"); [ -n "${ONLY:-}" ] && ARGS+=(--only "$ONLY"); [ "$PUBLISH" = 1 ] && ARGS+=(--publish)
+  log "launch: tail_d8.py ${ARGS[*]}"
+  nohup python3 $M/cert/tail_d8.py "${ARGS[@]}" >> "$HOME/d8tail.log" 2>&1 &
+  log "tail worker pid $!"; exit 0
+fi
 if pgrep -f "prod_d8.py run" >/dev/null; then log "worker already running"; exit 0; fi
 CORES=$(nproc); MEMT=$(awk '/MemTotal/{print int($2/1048576)}' /proc/meminfo)
 MEM_GB=${MEM_GB:-$((MEMT * 85 / 100))}

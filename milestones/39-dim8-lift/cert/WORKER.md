@@ -32,3 +32,18 @@ then rerun the two lines at the top. Orphans left by an earlier update (parent P
 `ps -o pid,ppid,etime,cmd -C cadical`) compete for the cores and write into the new run's job
 directories: kill them too. Finished certificates are kept; failed and interrupted items are retried. The
 built stacks in `~/d8stack` and the plain stack are reused (only rebuilt if missing).
+
+## Tail mode (TOO_BIG cubes), after your cube share has finished
+
+When the coordinating session gives you a tail share `T` (of `TW` tail shares), make sure no
+`prod_d8.py run` is running, then from the repository root:
+
+    git fetch origin research/unconditional-241 && git checkout -B research/unconditional-241 FETCH_HEAD
+    MODE=tail INDEX=<T> WORKERS=<TW> bash milestones/39-dim8-lift/cert/d8_machine.sh
+
+It certifies the TOO_BIG cubes of the published manifests by recursive vertex splitting (each piece small
+enough for this machine) and pushes OK records and public .olean files to `refs/heads/xfer/d8/t<T>` only.
+Log `~/d8tail.log`; it resumes after a restart (rerun the same two lines). Keep-alive as above, with
+`[t]ail_d8.py run` in place of `[p]rod_d8.py run` and `~/d8tail.log`. Report to the coordinating session:
+a `SAT?` record, the first OK or BUILD_FAILED/CHECK_FAILED record of a cube (with its log tail), and
+`tail worker finished`.
