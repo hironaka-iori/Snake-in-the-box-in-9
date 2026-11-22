@@ -289,3 +289,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 255 | [Repeated parity exchanges and the 46-vertex overlap bound](255-parity-exchange-arms/README.md) |
 | 256 | [All two-vertex exchanges around the six attaining-component arms](256-two-exchange-parents/README.md) |
 | 257 | [Three simultaneous exchanges and the 44-site overlap bound](257-three-exchange-parents/README.md) |
+| 258 | [The first four-site exchange leaving the six reference shapes](258-four-exchange-parents/README.md) |

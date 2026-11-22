@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 257, 22 November 2026}
+\date{Research state after round 258, 22 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -10827,6 +10827,30 @@ Lean separately checks the insertion rule that an eventual internal
 vertex needs two distinct neighbours, each adjacent to at most one
 previously selected site before insertion.
 
+
+\subsection{The first four-site escape}
+\label{sec:four-site-escape}
+Replacing four of the 48 smaller-class sites of a 96-edge arm gives
+\(\binom{48}{4}\binom{80}{4}=307{,}743{,}836{,}400\) candidate sets
+per labelled reference. Across the six references, 16,707 sets pass
+the neighbour count. Two independent completions of every surviving
+set give 12 sets supporting 17 labelled arms up to reversal, counting
+each reference separately. Two completions from reference 0 give the
+same shape outside the preceding 264-shape catalogue. All other
+completions are isometric to one of the six earlier arms. This is the
+first exchange radius at which the six shapes admit an exit.
+
+At the two ends of the new arm, certificates exclude an arbitrary
+95-edge partner. Direct inspection of the eight neighbours of each end
+excludes a one-edge extension of the parent itself. Together with the
+earlier six cases, this bounds the overlap with each reference by 43 of
+its 48 sites for every 96-edge window in either arm of a prospective
+192-edge one-crossing snake. A proper window would admit an extension
+in its containing arm. An entire 96-edge arm would need a partner of
+at least 95 edges. As positive examples for the new shape, two fixed
+donor prefixes extend to partners of 77 and 70 edges, giving verified
+joins of 174 and 167 edges.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/258-four-exchange-parents}{Exchange records, rooted certificates and both constructions}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
