@@ -42,10 +42,13 @@ BUDGET = dict(used=0.0, cap=12.0); BLOCK = threading.Condition()
 
 def reserve(old, new):
     """change this job's reservation from old to new GB; waits until it fits (or the job would run alone)"""
+    # release the old reservation first, then wait: two jobs that both held GEN_GB and both needed more
+    # than the rest waited on each other forever (seen at --procs 2 --mem-gb 12 with two ~11 GB jobs)
     with BLOCK:
-        while new > old and BUDGET['used'] - old + new > BUDGET['cap'] and BUDGET['used'] - old > 0:
+        BUDGET['used'] -= old; BLOCK.notify_all()
+        while BUDGET['used'] + new > BUDGET['cap'] and BUDGET['used'] > 0:
             BLOCK.wait(10)
-        BUDGET['used'] += new - old; BLOCK.notify_all()
+        BUDGET['used'] += new; BLOCK.notify_all()
 
 
 def sh(cmd, **kw):
