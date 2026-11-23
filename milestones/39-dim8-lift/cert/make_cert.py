@@ -64,9 +64,20 @@ if MEMGB and pred(c) > MEMGB:
             shutil.rmtree(g2)
         if pred(c) <= MEMGB: break
 stats.update(core=c)
-g = json.loads(subprocess.run(['python3', os.path.join(ROOT, 'lean435', 'tools', 'genv3stream.py'), '--work', gen, '--data', os.path.join(gen, 'core'),
-                               '--out', gen, '--off', str(c['vars'] + 1), mod], capture_output=True, text=True, check=True).stdout.strip().splitlines()[-1])
-stats['replay'] = {x: g[x] for x in ('lemmas', 'hints', 'segments', 'wbits', 'off', 'lean_bytes')}
+# CHAIN=H (hints per piece): segmented checkpoint replay (lean435/tools/genchain.py, lean/LratChain.lean) for
+# proofs too big for one LocalWindowUnsat module; same `unsat : Unsat cnf` statement, pieces build in parallel
+CHAIN = int(os.environ.get('CHAIN', '0'))
+if CHAIN:
+    g = json.loads(subprocess.run(['python3', os.path.join(ROOT, 'lean435', 'tools', 'genchain.py'), '--work', gen, '--data', os.path.join(gen, 'core'),
+                                   '--out', gen, '--off', str(c['vars'] + 1), '--piece-hints', str(CHAIN), mod],
+                                  capture_output=True, text=True, check=True).stdout.strip().splitlines()[-1])
+    stats['replay'] = {x: g[x] for x in ('lemmas', 'hints', 'pieces', 'wbits', 'off', 'max_boundary')}
+    UNSATMODS = g['modules']   # B<i>, P<i>, then LocalWindowUnsat/MOD
+else:
+    g = json.loads(subprocess.run(['python3', os.path.join(ROOT, 'lean435', 'tools', 'genv3stream.py'), '--work', gen, '--data', os.path.join(gen, 'core'),
+                                   '--out', gen, '--off', str(c['vars'] + 1), mod], capture_output=True, text=True, check=True).stdout.strip().splitlines()[-1])
+    stats['replay'] = {x: g[x] for x in ('lemmas', 'hints', 'segments', 'wbits', 'off', 'lean_bytes')}
+    UNSATMODS = ['LocalWindowUnsat/' + mod]
 if os.path.exists(lrat): os.remove(lrat)
 # provenance data, in core order, Nat codes
 glue = json.load(open(os.path.join(gen, mod + '.glue.json')))
@@ -130,7 +141,7 @@ open(os.path.join(gen, 'Cube' + mod + '.lean'), 'w').write(F(
        ', '.join('p%d_ok' % j for j in range(len(parts))), LW, LW, ren, L, Ahex, k, LW, NS, NS)))
 open(os.path.join(gen, mod + '.modules'), 'w').write(' '.join(
     ['LocalWindowCnf/%s/%s' % (mod, p) for p in rparts] +
-    ['LocalWindowCnf/' + mod, 'LocalWindowUnsat/' + mod, 'CubeProv/%s/Tree' % mod] + ['CubeProv/%s/%s' % (mod, p) for p in parts] + ['Cube' + mod]))
+    ['LocalWindowCnf/' + mod] + UNSATMODS + ['CubeProv/%s/Tree' % mod] + ['CubeProv/%s/%s' % (mod, p) for p in parts] + ['Cube' + mod]))
 # Lean 4.35 module form (the default; NOMOD=1 keeps plain files for the unported stack). All imports are
 # private; certificate data is reached by `import all`. Only `unsat` of the top module is public, so its
 # public .olean holds just that statement and an importer never loads the certificate data.
@@ -145,7 +156,13 @@ if not os.environ.get('NOMOD'):
     cw = os.path.join(gen, 'LocalWindowCnf', mod)
     for r in rparts: modz(os.path.join(cw, r + '.lean'))
     modz(cw + '.lean', priv=['LocalWindowModel'], allimp=['LocalWindowCnf.%s.%s' % (mod, r) for r in rparts])
-    modz(os.path.join(gen, 'LocalWindowUnsat', mod + '.lean'), priv=['LratV3', 'ProofPack'], allimp=['LocalWindowCnf.' + mod])
+    if CHAIN:   # chain modules: library imports private, data modules (LocalWindowCnf / LocalWindowChain) by `import all`
+        for m_ in UNSATMODS:
+            f_ = os.path.join(gen, m_ + '.lean'); im = [l.split()[1] for l in open(f_) if l.startswith('import ')]
+            modz(f_, priv=[x for x in im if not x.startswith(('LocalWindowCnf', 'LocalWindowChain'))],
+                 allimp=[x for x in im if x.startswith(('LocalWindowCnf', 'LocalWindowChain'))])
+    else:
+        modz(os.path.join(gen, 'LocalWindowUnsat', mod + '.lean'), priv=['LratV3', 'ProofPack'], allimp=['LocalWindowCnf.' + mod])
     modz(os.path.join(pd, 'Tree.lean'), priv=['RenN'])
     for j, nm in enumerate(parts):
         modz(os.path.join(pd, nm + '.lean'), priv=[PROVMOD], allimp=['CubeProv.%s.Tree' % mod, 'LocalWindowCnf.%s.%s' % (mod, rparts[j])])

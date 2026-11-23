@@ -63,7 +63,7 @@ def setup(a):
     # covers (cover_d8.py) and assembly also need Walk, WalkSplit and TabAll: only where scripts/make_tables.sh has
     # generated the tables (lean/gen)
     cov = ['Walk', 'WalkSplit', 'TabAll'] if os.path.exists(os.path.join(M, 'lean', 'gen', 'TabAll.lean')) else []
-    r = sh([sys.executable, os.path.join(HERE, 'port39.py'), st, 'RenN', 'Split', 'Final'] + cov)
+    r = sh([sys.executable, os.path.join(HERE, 'port39.py'), st, 'RenN', 'Split', 'Final', 'LratChain'] + cov)   # LratChain: CHAIN replays
     assert r.returncode == 0, r.stderr
     order = ['LocalWindowModel', 'LratV3', 'Snake9', 'ProofPack'] + r.stdout.split()
     os.makedirs(os.path.join(st, 'build'), exist_ok=True)
