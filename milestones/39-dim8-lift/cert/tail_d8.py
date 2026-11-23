@@ -274,6 +274,10 @@ def cmd_run(a):
     stop = lambda: os.path.exists(os.path.join(a.work, 'STOP')) or time.time() > end
     for pg, k, h in its:
         if stop(): break
+        if not a.only:   # certified elsewhere since this list was read (e.g. a hard cube given out with --only): skip
+            try: st_ = {r['status'] for r in published(a).get(P.modname(h), [])}
+            except Exception: st_ = set()   # noqa: a failed fetch only loses the skip
+            if st_ & {'OK', 'SAT?'}: print('cube', h, 'certified elsewhere: skipped', flush=True); continue
         print('cube', h, 'k', k, 'pred_gb', pg if pg < 1e9 else ('?' if pg < 2e9 else 'hard'), time.ctime(), flush=True)
         rec = tail_cube(a, k, h, stop, pg)
         if rec is None: break
