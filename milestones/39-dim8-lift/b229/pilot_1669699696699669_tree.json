@@ -1,0 +1,262 @@
+{
+ "cube": "1669699696699669",
+ "k": 31,
+ "L": 116,
+ "solver": "CaDiCaL 2.1.3 --unsat --lrat --binary=false -t 45",
+ "export": "lean --run Export.lean 13 116 1669699696699669 31 parent.cnf q (commit 613569c61 tree)",
+ "timings": {
+  "export_s": 2.32,
+  "up_parent_s": 0.2,
+  "up_probe16_s": 0.41
+ },
+ "nodes": [
+  {
+   "path": [],
+   "cnf": "parent.cnf",
+   "sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "header": "p cnf 1089216 743416",
+   "F_sha256": "fd8c7e24b03c96dc4b25d3abaa0ed47e2c8ee50abb20f5d1071721cf5d7ab171",
+   "C_sha256": "b5e48e515fd8b940e6e9357cc5cc5dd802ba49fe22d01119c9f6b6ea1622ca25",
+   "C": "64 unit clauses famFix A (copy-0 vertices sV(u)=u+1, u<64)",
+   "up": {
+    "tag": "parent",
+    "conflict": false,
+    "assigned": 71442,
+    "rem_clauses": 524010,
+    "rem_vars": 224814,
+    "rem_bin": 264100,
+    "rem_ter": 252102
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.02,
+    "peak_rss_mb": 295
+   }
+  },
+  {
+   "path": [
+    224
+   ],
+   "branch_var": 224,
+   "var_semantics": "sV(u) selection of outer vertex u=223 (Q8 vertex, not in copy 0)",
+   "cnf": "child/x+224.cnf",
+   "sha256": "4efb1d1ec54d2015c1cf4610bdb8096b8a794cd8b20191e8ec84a8c78264444d",
+   "header": "p cnf 1089216 743417",
+   "parent_sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "on_disk_utc": "12:06:59Z",
+   "write_s": 0.033,
+   "up": {
+    "tag": "224",
+    "conflict": false,
+    "assigned": 73225,
+    "rem_clauses": 520207,
+    "rem_vars": 223031,
+    "rem_bin": 262778,
+    "rem_ter": 249868
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.03,
+    "peak_rss_mb": 295,
+    "conflicts": 206916
+   }
+  },
+  {
+   "path": [
+    -224
+   ],
+   "branch_var": 224,
+   "var_semantics": "sV(u) selection of outer vertex u=223 (Q8 vertex, not in copy 0)",
+   "cnf": "child/x-224.cnf",
+   "sha256": "60477116b55f07860e68f9c89c449336c030e0ead3b4b6e32568350df80c13b9",
+   "header": "p cnf 1089216 743417",
+   "parent_sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "on_disk_utc": "12:06:59Z",
+   "write_s": 0.022,
+   "up": {
+    "tag": "-224",
+    "conflict": false,
+    "assigned": 71764,
+    "rem_clauses": 521676,
+    "rem_vars": 224492,
+    "rem_bin": 263627,
+    "rem_ter": 250480
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.02,
+    "peak_rss_mb": 295,
+    "conflicts": 196395
+   }
+  },
+  {
+   "path": [
+    239
+   ],
+   "branch_var": 239,
+   "var_semantics": "sV(u) selection of outer vertex u=238 (Q8 vertex, not in copy 0)",
+   "cnf": "child/x+239.cnf",
+   "sha256": "90f257a755abd3118276ec8f5225cc3e89216e86f020a7a32b85ccffbf9e0c8b",
+   "header": "p cnf 1089216 743417",
+   "parent_sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "on_disk_utc": "12:07:00Z",
+   "write_s": 0.024,
+   "up": {
+    "tag": "239",
+    "conflict": false,
+    "assigned": 73225,
+    "rem_clauses": 520123,
+    "rem_vars": 223031,
+    "rem_bin": 262770,
+    "rem_ter": 249792
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.06,
+    "peak_rss_mb": 295,
+    "conflicts": 215789
+   }
+  },
+  {
+   "path": [
+    -239
+   ],
+   "branch_var": 239,
+   "var_semantics": "sV(u) selection of outer vertex u=238 (Q8 vertex, not in copy 0)",
+   "cnf": "child/x-239.cnf",
+   "sha256": "e519b00d27afeaeb1bc50c450b8a421be4b784f22dd99e302ae68fd0a58e3396",
+   "header": "p cnf 1089216 743417",
+   "parent_sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "on_disk_utc": "12:07:00Z",
+   "write_s": 0.022,
+   "up": {
+    "tag": "-239",
+    "conflict": false,
+    "assigned": 71764,
+    "rem_clauses": 521680,
+    "rem_vars": 224492,
+    "rem_bin": 263627,
+    "rem_ter": 250484
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.02,
+    "peak_rss_mb": 295,
+    "conflicts": 215554
+   }
+  },
+  {
+   "path": [
+    208
+   ],
+   "branch_var": 208,
+   "var_semantics": "sV(u) selection of outer vertex u=207 (Q8 vertex, not in copy 0)",
+   "cnf": "child/x+208.cnf",
+   "sha256": "173b46b92fcdabdce0fb3a9fdd9b8764577f74746e651bbde0f7d9e1f25d6377",
+   "header": "p cnf 1089216 743417",
+   "parent_sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "on_disk_utc": "12:07:00Z",
+   "write_s": 0.021,
+   "up": {
+    "tag": "208",
+    "conflict": false,
+    "assigned": 73225,
+    "rem_clauses": 520153,
+    "rem_vars": 223031,
+    "rem_bin": 262770,
+    "rem_ter": 249822
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.03,
+    "peak_rss_mb": 295,
+    "conflicts": 204054
+   }
+  },
+  {
+   "path": [
+    -208
+   ],
+   "branch_var": 208,
+   "var_semantics": "sV(u) selection of outer vertex u=207 (Q8 vertex, not in copy 0)",
+   "cnf": "child/x-208.cnf",
+   "sha256": "21390ce365d4e2dc3d145c8aa23a946533ce3c1eeb164ac3d5299244656e0e8a",
+   "header": "p cnf 1089216 743417",
+   "parent_sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "on_disk_utc": "12:07:00Z",
+   "write_s": 0.02,
+   "up": {
+    "tag": "-208",
+    "conflict": false,
+    "assigned": 71764,
+    "rem_clauses": 521680,
+    "rem_vars": 224492,
+    "rem_bin": 263627,
+    "rem_ter": 250484
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.02,
+    "peak_rss_mb": 292,
+    "conflicts": 195765
+   }
+  },
+  {
+   "path": [
+    233
+   ],
+   "branch_var": 233,
+   "var_semantics": "sV(u) selection of outer vertex u=232 (Q8 vertex, not in copy 0)",
+   "cnf": "child/x+233.cnf",
+   "sha256": "c88d0c25d549dbf4ac9978e399e0b762126bd63015d04e10dc28ef852f3806ab",
+   "header": "p cnf 1089216 743417",
+   "parent_sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "on_disk_utc": "12:07:00Z",
+   "write_s": 0.024,
+   "up": {
+    "tag": "233",
+    "conflict": false,
+    "assigned": 73225,
+    "rem_clauses": 520128,
+    "rem_vars": 223031,
+    "rem_bin": 262760,
+    "rem_ter": 249807
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.02,
+    "peak_rss_mb": 294,
+    "conflicts": 196217
+   }
+  },
+  {
+   "path": [
+    -233
+   ],
+   "branch_var": 233,
+   "var_semantics": "sV(u) selection of outer vertex u=232 (Q8 vertex, not in copy 0)",
+   "cnf": "child/x-233.cnf",
+   "sha256": "96d5b11fa8f928824b8e464d9f73696bf5166da34a96c23adf38e6629e847202",
+   "header": "p cnf 1089216 743417",
+   "parent_sha256": "02f69b9b96422b0fe4332b0aeac12864929918f2135e6a8d25f6b3a7cf15cdf9",
+   "on_disk_utc": "12:07:00Z",
+   "write_s": 0.021,
+   "up": {
+    "tag": "-233",
+    "conflict": false,
+    "assigned": 71764,
+    "rem_clauses": 521685,
+    "rem_vars": 224492,
+    "rem_bin": 263627,
+    "rem_ter": 250489
+   },
+   "solve45": {
+    "status": "UNKNOWN",
+    "wall_s": 45.01,
+    "peak_rss_mb": 388,
+    "conflicts": 186505
+   }
+  }
+ ],
+ "verdict": "split undecided: no vertex cut closes a side by propagation; both sides of 4 cuts UNKNOWN at 45 s, conflicts comparable to the parent"
+}
