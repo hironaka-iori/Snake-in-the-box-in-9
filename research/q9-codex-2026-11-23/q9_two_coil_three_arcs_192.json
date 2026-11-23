@@ -1,0 +1,121 @@
+{
+  "source": "search_q9_two_coil_three_arcs.cpp",
+  "input_file": "q9_coil_open_191_witness.json",
+  "input_key": "cycle",
+  "control_file": "q9_two_coil_three_arcs_191.json",
+  "description": "Three nonempty consecutive cyclic arcs in the order C, image(C), C. First and third C arcs are disjoint and nonadjacent as sets. Each switch is one nine-cube edge.",
+  "runs": [
+    {
+      "args": [
+        192,
+        "local",
+        18944,
+        1,
+        3
+      ],
+      "status": "NO_JOIN",
+      "placements": 18944,
+      "middle_arcs_passing_first_attachment": 420919664,
+      "eligible_endpoint_pairs": 47146,
+      "interval_checks": 457954
+    },
+    {
+      "args": [
+        192,
+        "random",
+        5000,
+        910333,
+        3
+      ],
+      "status": "NO_JOIN",
+      "placements": 5000,
+      "middle_arcs_passing_first_attachment": 111845913,
+      "eligible_endpoint_pairs": 2581,
+      "interval_checks": 55213
+    },
+    {
+      "args": [
+        192,
+        "local",
+        18944,
+        1,
+        1
+      ],
+      "status": "NO_JOIN",
+      "placements": 18944,
+      "middle_arcs_passing_first_attachment": 428173232,
+      "eligible_endpoint_pairs": 853882,
+      "interval_checks": 76699110
+    },
+    {
+      "args": [
+        192,
+        "random",
+        5000,
+        910333,
+        1
+      ],
+      "status": "NO_JOIN",
+      "placements": 5000,
+      "middle_arcs_passing_first_attachment": 113762192,
+      "eligible_endpoint_pairs": 208404,
+      "interval_checks": 19961569
+    },
+    {
+      "args": [
+        192,
+        "three_cycle",
+        86016,
+        1,
+        1
+      ],
+      "status": "NO_JOIN",
+      "placements": 86016,
+      "middle_arcs_passing_first_attachment": 1948294208,
+      "eligible_endpoint_pairs": 3727472,
+      "interval_checks": 347454232
+    }
+  ],
+  "small_check": {
+    "cycle": [
+      0,
+      1,
+      3,
+      7,
+      15,
+      14,
+      12,
+      8
+    ],
+    "shifts": [
+      0,
+      1,
+      3,
+      5,
+      8,
+      11,
+      15,
+      16,
+      18,
+      26,
+      31
+    ],
+    "targets": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "method": "Independent Python enumeration of all three oriented arcs checked pairwise incompatibility directly and agreed with the C++ solver compiled for eight cycle vertices.",
+    "positive": 48,
+    "negative": 73
+  },
+  "source_sha256": "d5fcd3d10709ee542374bd31320a4ff9ab97d0ed6d4835b03fafd081b593dda1"
+}
