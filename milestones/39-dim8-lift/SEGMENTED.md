@@ -64,6 +64,8 @@ modules exist. Nothing about references or boundary data is trusted: wrong data 
   7.0 GB per piece) and built: record `route tail-chain, chain 5, peak_mb 6681, status OK`, public check
   passed, 6,607 s in all. Disk: raw LRAT ~13 B per hint (so a 900 s solve writes ≤ ~3.5 GB), build
   directory ~0.8 GB per 9 M compacted hints.
+* First farm certificate by the chain route (23 Nov, t7, 4180cdb6): cube 06b9b942b9464699, `route tail-chain,
+  chain 9`, 16.38 M hints, peak 7.2 GB (one module would need ~14 GB), 9,036 s, published on xfer/d8/t7.
 
 ## Open points
 
