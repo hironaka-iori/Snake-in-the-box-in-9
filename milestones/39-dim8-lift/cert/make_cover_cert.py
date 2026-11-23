@@ -94,6 +94,9 @@ CH = 4000   # pilot.py's chunk size
 rparts = open(os.path.join(gen, 'LocalWindowCnf', mod + '.parts')).read().split()
 pd = os.path.join(gen, 'CoverCert', mod); os.makedirs(pd, exist_ok=True)
 ordered = [rows[c_] for c_ in core]
+# largest chunk in literals: its W / R module dominates the build peak (c6 leaf KC6R1019462460 [34,35]: W chunks of
+# 157 / 199 / 256 k literals peaked at 5.2 / 6.6 / 8.1 GB); cover_d8.py reserves memory from it
+stats['max_chunk_lits'] = max(sum(r_.count(',') for r_ in ordered[j_:j_ + CH]) for j_ in range(0, len(ordered), CH))
 parts = ['W%d' % (j // CH) for j in range(0, len(ordered), CH)]
 assert len(parts) == len(rparts), (parts, rparts)
 back = glue['back']; N = len(back)
@@ -108,12 +111,18 @@ HDR = "set_option maxRecDepth 100000\nset_option maxHeartbeats 0\n"
 top = tree(0, 1)
 open(os.path.join(pd, 'Tree.lean'), 'w').write("module\n\nimport RenN\n\n%snamespace %s\nopen Dim8Lift.RenN\n%s\ndef tree : BT := %s\nend %s\n"
                                               % (HDR, NS, '\n'.join(SUB), top, NS))
+def wdef(j, rs, rows=500):
+    # as subsplit below: a chunk of more than 500 clauses is written as 500-row sub-lists w<j>_<i>
+    if len(rs) <= rows: return "def w%d : List (Nat × List Nat) := [\n%s]\n" % (j, ",\n".join(rs))
+    sub = [rs[i_:i_ + rows] for i_ in range(0, len(rs), rows)]
+    return (''.join("def w%d_%d : List (Nat × List Nat) := [\n%s]\n" % (j, i_, ",\n".join(x_)) for i_, x_ in enumerate(sub))
+            + "def w%d : List (Nat × List Nat) := %s\n" % (j, ' ++ '.join('w%d_%d' % (j, i_) for i_ in range(len(sub)))))
 for j, nm in enumerate(parts):
     open(os.path.join(pd, nm + '.lean'), 'w').write(
         "module\n\nimport RenN\nimport all CoverCert.%s.Tree\nimport all LocalWindowCnf.%s.%s\n\n%snamespace %s\nopen Dim8Lift.RenN\n"
-        "def w%d : List (Nat × List Nat) := [\n%s]\n"
+        "%s"
         "theorem n%d : renN tree.get %s.r%d (w%d.map Prod.snd) = true := by decide +kernel\nend %s\n"
-        % (mod, mod, rparts[j], HDR, NS, j, ",\n".join(ordered[j * CH:(j + 1) * CH]), j, LW, j, j, NS))
+        % (mod, mod, rparts[j], HDR, NS, wdef(j, ordered[j * CH:(j + 1) * CH]), j, LW, j, j, NS))
 ren = 'n0'
 for j in range(1, len(parts)): ren = 'renN_app _ (%s) n%d' % (ren, j)
 P = ' ++ '.join('w%d' % j for j in range(len(parts)))
@@ -167,8 +176,22 @@ def modz(path, priv=(), allimp=()):
     while i < len(ls) and (ls[i].startswith('import ') or not ls[i].strip()): i += 1
     open(path, 'w').write('\n'.join(['module', ''] + ['import ' + x for x in priv] + ['import all ' + x for x in allimp])
                           + '\n\nset_option maxHeartbeats 0   -- long clauses: data chunks exceed the default\n' + '\n'.join(ls[i:]))
+def subsplit(path, rows=500):
+    # a 4,000-clause chunk of long clauses (c6 blocks: 64 literals) can exceed maxRecDepth as one list literal
+    # (c6 leaves [34,+-35]: R0 on two farm covers, R1 of 199 k literals here, W2 of 86 k literals on k5), so
+    # every chunk becomes 500-clause sub-lists r<j>_<i> and r<j> := r<j>_0 ++ ... (same value; the kernel checks
+    # unfold it; 500 x 64-literal sub-lists measured fine)
+    s_ = open(path).read()
+    m_ = re.search(r'^def (r\d+) : List \(List Nat\) := \[\n(.*?)\]\n', s_, re.M | re.S)
+    if not m_: return
+    nm, rs = m_.group(1), m_.group(2).rstrip(',\n').split(',\n')
+    if len(rs) <= rows: return
+    sub = [rs[i_:i_ + rows] for i_ in range(0, len(rs), rows)]
+    d_ = ''.join('def %s_%d : List (List Nat) := [\n%s]\n' % (nm, i_, ',\n'.join(x_)) for i_, x_ in enumerate(sub))
+    d_ += 'def %s : List (List Nat) := %s\n' % (nm, ' ++ '.join('%s_%d' % (nm, i_) for i_ in range(len(sub))))
+    open(path, 'w').write(s_[:m_.start()] + d_ + s_[m_.end():])
 cw = os.path.join(gen, 'LocalWindowCnf', mod)
-for r_ in rparts: modz(os.path.join(cw, r_ + '.lean'))
+for r_ in rparts: modz(os.path.join(cw, r_ + '.lean')); subsplit(os.path.join(cw, r_ + '.lean'))
 modz(cw + '.lean', priv=['LocalWindowModel'], allimp=['LocalWindowCnf.%s.%s' % (mod, r_) for r_ in rparts])
 modz(os.path.join(gen, 'LocalWindowUnsat', mod + '.lean'), priv=['LratV3', 'ProofPack'], allimp=['LocalWindowCnf.' + mod])
 open(os.path.join(gen, mod + '.modules'), 'w').write(' '.join(

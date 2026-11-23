@@ -81,7 +81,9 @@ def leaf_job(a, w, cd, p, held):
         g = json.loads(r.stdout.strip().splitlines()[-1])
         info = dict(hints=g['replay']['hints'], vars=g['core']['vars'], core=g['core']['core'], solve_s=g['solve_s'], gen_s=g['gen_s'])
         # measured: leaf c5 [2,3] (3.54 M hints, 12.5 k vars) replay 5.66 GB (model 5.1), walk modules <= 5.7 GB
-        info['pred_gb'] = round(max(6.0, 1.25 * P.pred_gb(info['hints'], info['vars'])), 1)
+        # c6 leaves: few hints but 64-literal block clauses; a W chunk takes ~1 GB + 28 GB per M literals
+        info['max_chunk_lits'] = g.get('max_chunk_lits', 0)
+        info['pred_gb'] = round(max(6.0, 1.25 * P.pred_gb(info['hints'], info['vars']), 1.0 + 28e-6 * info['max_chunk_lits']), 1)
         if info['pred_gb'] > a.mem_gb: shutil.rmtree(d, ignore_errors=True); return 'split', info
         json.dump(info, open(gj, 'w'))
     info = json.load(open(gj))
