@@ -52,13 +52,16 @@ modules exist. Nothing about references or boundary data is trusted: wrong data 
 * Review (dim-8 session, f5553b24): no soundness flaw; the chain statement, unchecked pointers checked by
   `zipChk`, and shared raw are sound. A per-piece raw is needed only if a compacted core reaches several
   100 k clauses. Follow-up in fbfb523be: an assert that every own-lemma export chunk resolves into one segment.
-* Module stack: `port39.py … LratChain` ports and builds (prod_d8 `setup`). The module-form `CHAIN=` run of
-  `make_cert.py` + `build_cert.sh` is the next test.
+* Module stack (the farm route), end to end: `prod_d8.py setup` ports and builds `LratChain`;
+  `CHAIN=2000000 SOLVE_OPT=--unsat make_cert.py 116 0661999699966669 29` (same proof, 8,923,427 hints)
+  then `build_cert.sh`: P0-P4 1,149 / 1,061 / 1,054 / 964 / 395 s, peaks 6.68 / 6.58 / 6.43 / 5.99 /
+  5.27 GB; provenance and glue modules as for any cube. prod_d8's public check (statement read from the
+  .olean alone): `Snake9.CubeProv.Q0661999699966669.unsat : Unsat (cubeCnfQ 13 116 459817509069416041 29)`
+  (= 0x0661999699966669), axioms `[propext, Classical.choice, Quot.sound]`. So a chain certificate is an
+  ordinary cube certificate for assembly.
 
 ## Open points
 
-* Module stack: chain modules converted like `make_cert.py`'s `modz` (only `piece` public per P module) must
-  build with `build_cert.sh`; test running.
 * Scale: a stuck cube's full LRAT may be tens of GB of text (6996…: 5 GB after 1,800 s), more than a farm
   machine's free disk. Options: binary LRAT, or a streaming pass that cuts pieces while CaDiCaL writes.
 * Solve time: both whole-cube solves (6996966996696996, 1669966996966996) timed out at 7,000 s with
