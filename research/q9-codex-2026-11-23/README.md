@@ -36,3 +36,5 @@ python3 -B verify_q9_record_facet_profile.py
 
 `snapshot-manifest.tsv` 按文件标出已纳入、需要独立归档、以及跳过的构建缓存。原目录的大体量求解器产物仍保留在本地。部分脚本需恢复清单中的归档输入才能完整重跑。快照记录现有研究，未重新启动计算。
 
+
+[完整大型产物的 Release 下载、校验与恢复说明](large-artifacts/README.md)。
