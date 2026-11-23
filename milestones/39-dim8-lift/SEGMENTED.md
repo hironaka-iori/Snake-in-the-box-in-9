@@ -40,13 +40,28 @@ modules exist. Nothing about references or boundary data is trusted: wrong data 
   boundary stays around 5 % of the lemmas and does not grow with the number of pieces.
 * After `pilot.py`: core 36,025 clauses, 21,890 vars, 468,335 lemmas, 8.92 M hints. `genchain.py
   --piece-hints 2000000`: 5 pieces, boundaries 38.6 k / 48.2 k / 45.9 k / 26.8 k lemmas, word width 16.
-* Plain-stack builds: boundary modules 3-4 s / 0.45 GB each. Piece builds: see the status section.
+* Plain-stack builds: boundary modules 3-4 s / 0.45 GB each.
+
+## Status
+
+* Plain stack, end to end (23 Nov, this machine, one module at a time): P0 1,409 s / 6.93 GB, P1 1,270 s /
+  6.85 GB, P2 1,251 s / 6.70 GB, P3 884 s / 6.24 GB, P4 501 s / 5.53 GB; top `LocalWindowUnsat` 5 s /
+  0.73 GB. `#print axioms Snake9.LocalWindow.Q0661999699966669.unsat`: `[propext, Classical.choice,
+  Quot.sound]`. The same proof as one genv3stream module would replay 8.92 M hints in one context; here the
+  peak is 6.9 GB, set by the piece size (2 M hints) and not by the whole proof.
+* Review (dim-8 session, f5553b24): no soundness flaw; the chain statement, unchecked pointers checked by
+  `zipChk`, and shared raw are sound. A per-piece raw is needed only if a compacted core reaches several
+  100 k clauses. Follow-up in fbfb523be: an assert that every own-lemma export chunk resolves into one segment.
+* Module stack: `port39.py … LratChain` ports and builds (prod_d8 `setup`). The module-form `CHAIN=` run of
+  `make_cert.py` + `build_cert.sh` is the next test.
 
 ## Open points
 
-* Module stack: `LratChain` must be ported (port39.py) and the chain modules converted like
-  `make_cert.py`'s `modz`, so they build with `build_cert.sh` on the farm.
+* Module stack: chain modules converted like `make_cert.py`'s `modz` (only `piece` public per P module) must
+  build with `build_cert.sh`; test running.
 * Scale: a stuck cube's full LRAT may be tens of GB of text (6996…: 5 GB after 1,800 s), more than a farm
   machine's free disk. Options: binary LRAT, or a streaming pass that cuts pieces while CaDiCaL writes.
-* Solve time: both whole-cube solves were still running at 30+ min; their totals decide the piece count
-  (about one piece per 10 M compacted hints, ~1 h and ≤ 8 GB per piece on the measured rate).
+* Solve time: both whole-cube solves (6996966996696996, 1669966996966996) timed out at 7,000 s with
+  1.46 B / 0.49 B raw hints and 14.4 / 5.8 GB of LRAT text. Uncapped solves without proof output of
+  1669966996966996 and 1669699696699669 (k = 31) started 23 Nov 16:08 UTC on t9 (24 h cap) to get the real
+  totals. These totals decide whether an LRAT run (disk, `pilot.py` memory at ~4 B per raw hint) is feasible.
