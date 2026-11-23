@@ -60,7 +60,10 @@ def setup(a):
     r = sh([sys.executable, os.path.join(ROOT, 'lean435', 'tools', 'port.py'), '--out', st,
             'LocalWindowModel', 'LratV3', 'Snake9', 'ProofPack'])
     assert r.returncode == 0, r.stderr
-    r = sh([sys.executable, os.path.join(HERE, 'port39.py'), st, 'RenN', 'Split', 'Final'])
+    # covers (cover_d8.py) and assembly also need Walk, WalkSplit and TabAll: only where scripts/make_tables.sh has
+    # generated the tables (lean/gen)
+    cov = ['Walk', 'WalkSplit', 'TabAll'] if os.path.exists(os.path.join(M, 'lean', 'gen', 'TabAll.lean')) else []
+    r = sh([sys.executable, os.path.join(HERE, 'port39.py'), st, 'RenN', 'Split', 'Final'] + cov)
     assert r.returncode == 0, r.stderr
     order = ['LocalWindowModel', 'LratV3', 'Snake9', 'ProofPack'] + r.stdout.split()
     os.makedirs(os.path.join(st, 'build'), exist_ok=True)
