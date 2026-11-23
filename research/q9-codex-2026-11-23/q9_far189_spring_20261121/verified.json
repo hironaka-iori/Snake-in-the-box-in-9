@@ -1,0 +1,140 @@
+{
+  "seed_previously_known": true,
+  "earlier_standalone": {
+    "file": "q9_novel189_seeds.jsonl",
+    "line": 10,
+    "field": "path",
+    "vertices": 190,
+    "pairwise_distances": 17955
+  },
+  "older_parent": {
+    "file": "q9_detour_mixed_starters.txt",
+    "line": 4904,
+    "zero_based_vertex_slice": [
+      1,
+      191
+    ],
+    "chords": [
+      [
+        0,
+        177
+      ],
+      [
+        176,
+        191
+      ]
+    ]
+  },
+  "baseline_class_counts": {
+    "189": 3479,
+    "190": 1042,
+    "191": 131
+  },
+  "source_scope": {
+    "selected_files": 16162,
+    "scanned_text_streams": 15753,
+    "binary_skipped": 433,
+    "unreadable": {
+      "/private/tmp/q9_highdim_record_head19.zip": "File is not a zip file",
+      "/private/tmp/q9_highdim_records_prefix8m_n20.zip": "File is not a zip file"
+    }
+  },
+  "additional_scope": {
+    "selected_disk_files": 59813,
+    "unique_text_streams": 7670,
+    "duplicate_streams_by_sha256": 68019,
+    "skipped_binary": 27,
+    "errors": {}
+  },
+  "complete_record_archive_contains_prefixes": {
+    "q9_highdim_records_prefix8m_n20.zip": true,
+    "q9_highdim_record_head19.zip": true
+  },
+  "generated": {
+    "189": {
+      "total": 109,
+      "outside_reference": 31
+    },
+    "190": {
+      "total": 208,
+      "outside_reference": 0
+    },
+    "191": {
+      "total": 34,
+      "outside_reference": 0
+    }
+  },
+  "sat": {
+    "done": 10025,
+    "cores": 3190,
+    "counts": {
+      "(192, 'UNSAT')": 2445,
+      "(191, 'UNSAT')": 2432,
+      "(190, 'UNSAT')": 2339,
+      "(189, 'UNSAT')": 245,
+      "(192, 'UNKNOWN')": 745,
+      "(191, 'UNKNOWN')": 758,
+      "(190, 'UNKNOWN')": 851,
+      "(189, 'UNKNOWN')": 101,
+      "(189, 'FOUND')": 109
+    },
+    "any190": 51
+  },
+  "two_ended": {
+    "tips": {
+      "runs": 1,
+      "eligible_per_length": {
+        "190": 65,
+        "191": 8
+      },
+      "two_tip_roots": 389,
+      "nodes": 440527,
+      "cutoffs": 4
+    },
+    "novel_tips": {
+      "runs": 31,
+      "eligible_per_length": {
+        "190": 175,
+        "191": 32
+      },
+      "two_tip_roots": 24840,
+      "nodes": 28517854,
+      "cutoffs": 186
+    }
+  },
+  "variable_gaps": {
+    "190": {
+      "trials": 400000,
+      "budget_cutoffs": 5237,
+      "branch_nodes": 10131288,
+      "known_completions": 504455
+    },
+    "191": {
+      "trials": 420000,
+      "budget_cutoffs": 19113,
+      "branch_nodes": 11177705,
+      "known_completions": 139355
+    },
+    "192": {
+      "trials": 300000,
+      "budget_cutoffs": 24127,
+      "branch_nodes": 8619725,
+      "known_completions": 0
+    }
+  },
+  "parity": {
+    "source189": 31,
+    "min_degree_half_enumeration": "DONE 31 276830 9528102 145684 104121",
+    "hamilton_layer": "DONE 104121 352 91419 12350 0",
+    "sat": {
+      "done": true,
+      "states": {
+        "(192, 'UNSAT')": 352,
+        "(191, 'UNSAT')": 352,
+        "(190, 'UNSAT')": 352
+      },
+      "novel": {}
+    }
+  },
+  "found192": false
+}

@@ -1,0 +1,19 @@
+{"status": "GENERATED", "counts": [3, 14, 15], "orbits": 5921}
+{"status": "VERIFIED", "counts": [3, 14, 15], "orbits": 5921, "local_exclusions": 5917, "remaining": 4}
+{"counts": [3, 14, 15], "excluded": 0, "remaining": 4}
+Traceback (most recent call last):
+  File "/Users/yichenzhan/Documents/ChatGPT/snake-in-the-box/q9_replay_frequency_delta.py", line 133, in <module>
+    run(args.prefix,args.table,args.checker,args.reduced_geometry,args.local_replay,args.auxiliary,
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args.auxiliary_only)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yichenzhan/Documents/ChatGPT/snake-in-the-box/q9_replay_frequency_delta.py", line 26, in run
+    reduced = json.loads(reduced_geometry.read_text())
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'q9_endpoint_distance_checks/q9_pair_3_14_15_geometry_after_two_odd32_seams.json'

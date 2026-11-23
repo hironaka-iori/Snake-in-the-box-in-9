@@ -1,0 +1,170 @@
+{
+  "lp_snapshots": {
+    "q9_facet_bank_primal.jsonl": 52,
+    "q9_facet_191_donors_four.jsonl": 10
+  },
+  "distinct_donors": 31,
+  "known_reference_placements": 25,
+  "input_and_best_sets_verified": 1510,
+  "search": {
+    "damage": {
+      "seeds": 75,
+      "max_steps": 120,
+      "pairs": 1012527,
+      "best": 0,
+      "start_range": [
+        12,
+        311
+      ],
+      "hits": 75,
+      "hit_classes": 25,
+      "dmg_hits": {
+        "1": 25,
+        "3": 25,
+        "5": 25
+      },
+      "exact_reference_recoveries": 70,
+      "close_profiles": [
+        [
+          "(1, 0, ((1, 2), (2, 190)), 0)",
+          75
+        ]
+      ]
+    },
+    "cold": {
+      "seeds": 280,
+      "max_steps": 240,
+      "pairs": 292634160,
+      "best": 12,
+      "start_range": [
+        256,
+        924
+      ],
+      "hits": 0,
+      "hit_classes": 0,
+      "dmg_hits": {},
+      "exact_reference_recoveries": 0,
+      "close_profiles": [
+        [
+          "(1, 0, ((1, 3), (2, 189), (3, 1)), 12)",
+          5
+        ]
+      ]
+    },
+    "warm": {
+      "seeds": 200,
+      "max_steps": 240,
+      "pairs": 215577600,
+      "best": 12,
+      "start_range": [
+        12,
+        30
+      ],
+      "hits": 0,
+      "hit_classes": 0,
+      "dmg_hits": {},
+      "exact_reference_recoveries": 0,
+      "close_profiles": [
+        [
+          "(1, 0, ((1, 3), (2, 189), (3, 1)), 12)",
+          199
+        ]
+      ]
+    },
+    "blend": {
+      "seeds": 200,
+      "max_steps": 240,
+      "pairs": 215577600,
+      "best": 12,
+      "start_range": [
+        12,
+        286
+      ],
+      "hits": 0,
+      "hit_classes": 0,
+      "dmg_hits": {},
+      "exact_reference_recoveries": 0,
+      "close_profiles": [
+        [
+          "(1, 0, ((1, 3), (2, 189), (3, 1)), 12)",
+          193
+        ]
+      ]
+    }
+  },
+  "distinct_elites": 615,
+  "repair": {
+    "exactcontrol": {
+      "radius": 3,
+      "domains": 50,
+      "results": {
+        "FOUND": 50
+      },
+      "removal_sets": 1934,
+      "linear_residues": 92,
+      "addition_leaves": 68
+    },
+    "r2": {
+      "radius": 2,
+      "domains": 615,
+      "results": {
+        "EXHAUSTED": 615
+      },
+      "removal_sets": 927991,
+      "linear_residues": 106469,
+      "addition_leaves": 1090
+    },
+    "r3": {
+      "radius": 3,
+      "domains": 123,
+      "results": {
+        "EXHAUSTED": 123
+      },
+      "removal_sets": 7563154,
+      "linear_residues": 1190787,
+      "addition_leaves": 27842
+    },
+    "r4": {
+      "radius": 4,
+      "domains": 24,
+      "results": {
+        "EXHAUSTED": 24
+      },
+      "removal_sets": 19869975,
+      "linear_residues": 15605860,
+      "addition_leaves": 89601
+    },
+    "radius6": {
+      "radius": 6,
+      "domains": 615,
+      "results": {
+        "UNKNOWN": 418,
+        "UNSAT": 197
+      }
+    },
+    "radius15": {
+      "radius": 15,
+      "domains": 123,
+      "results": {
+        "UNKNOWN": 123
+      }
+    },
+    "radius_control": {
+      "radius": 5,
+      "domains": 25,
+      "results": {
+        "FOUND": 25
+      }
+    }
+  },
+  "salvage": {
+    "valid": 350,
+    "classes": 33,
+    "new": 0,
+    "different_from_input_classes": 31,
+    "modes": {
+      "warm": 171,
+      "blend": 179
+    }
+  }
+}
