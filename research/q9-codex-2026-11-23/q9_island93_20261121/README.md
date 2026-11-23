@@ -1,0 +1,30 @@
+# Exact lower layer with a 93-edge mother and an isolated edge
+
+This experiment starts from the 1,577 geometric placements in q9_lower_island_edge_20261121/cases.jsonl. Among the 1,514 placements with a 93-edge mother, four with pre-existing closed certificates are excluded (rows 1249–1252). The subject here is the remaining 1,510 placements, each with a fixed lower set of 96 vertices. The upper layer is unrestricted in the certified search.
+
+All 6,040 port assignments have a saved integer root below 193 vertices. The first, second and third propagation passes supplied 5,323, 415 and 65 selected certificates. The priority and final LP runs supplied 16 and 221. Twelve face families sufficed for every LP-priced cell. The largest numerator is 1,929,999 at scale 10,000, one integer unit below the threshold. This excludes a 192-edge snake for every one of the 1,510 exact lower placements. Together with the four previous 93-edge cases and the 94- and 95-edge cases, all 1,577 placements in the source list exclude 192 edges. Longer paths with odd lengths use a different endpoint balance.
+
+## Branches and bounds
+
+Every lower component needs at least one crossing. Crossing both ends of the additional lower edge forces an induced square, so exactly one of its ends crosses. At least one end of the long mother crosses. A 192-edge path has two endpoints of the same colour. Once the end of the isolated edge that crosses is chosen, a two-crossing path must leave the same-colour end of the long mother as its other endpoint. A three-crossing path uses both ends of the mother, leaving one endpoint above it. These alternatives give four port assignments for each placement. All four are enumerated independently from their degree-one vertices in geom.py.
+
+On the upper cube, a selected vertex has total degree one or two, including its mandatory crossing if any. Its local pattern records its incident upper edges. A coordinate 3-face records an induced linear forest containing its mandatory crossings; each of its selected vertices must have a pattern compatible with its allowed upper degree. The same integer price on an incidence signature is added in its vertex table and subtracted in its face table. The full degree-one counts and the even-minus-odd occupancy difference of the upper layer supply two further exact integer terms. Thus summing the local maxima gives an upper bound on the total number of vertices. The common scale is 10,000. A numerator below 1,930,000 excludes 192 edges in the specified port branch. All paths with even length and the same exact lower set obey these endpoint and balance equations.
+
+The first three passes use signed integer updates between the vertex and face tables. The number of passes and the coordinate choices influence search effort. The final bound uses only the saved integer prices. adapt.py specializes the producer from q9_three_cross_same_repriced_20261121 for the additional lower edge and both port counts. check_numeric.cpp independently enumerates degree states, three-cube forests, and all signs of the resulting bound. It shares no headers with the producer. verify.py reconstructs the exact lower geometry and ports and feeds every selected price certificate to the independent executable. python_check.py provides a third implementation check on a stratified sample including near-threshold prices.
+
+## Actual constructions
+
+The two previously constructed 189-edge geometries ranked first. Their eight branches were closed by integer prices. To seek new paths, construct.py selected 32 as-yet-open placements and tried long upper terminal arms observed in other geometries under all coordinate permutations. For each viable fixed arm it searched free bridges and free extensions. It performed 14,559,068,160 mask comparisons and reached 180 edges. A second batch selected 32 placements still having an open branch after the three integer-propagation passes, grew fully free upper tails with a beam of width 650, and searched further after releasing parts of their ends. The two lists can overlap. The best new result has 182 edges in case 965, compared with 173 in the previous constructive files for that case. In order, its layer runs contain 2, 4, 94 and 83 vertices. The 86 saved paths were checked by all pairwise Hamming distances and by their exact lower set and three crossings. See construction_summary.json, deep.paths and regrow.paths.
+
+## Local replay
+
+The selected certificate manifest is chosen.jsonl and the full audit is audit.json. Each certificate file contains a line of face masks, the numerical header and sparse integer prices. The manifest identifies every cell with its original placement row and its port code. The file audit_pass1.json preserves the independent first-pass checkpoint. No optimization packages are required to replay existing certificates. Run from this directory with a C++20 compiler and Python 3:
+
+```sh
+clang++ -O3 -std=c++20 check_numeric.cpp -o fast_check
+python3 -B verify.py
+python3 -B python_check.py
+python3 -B check_construction.py
+```
+
+The source data and the earlier positive paths are in the sibling q9_lower_island_edge_20261121 directory. For generation, compile diffuse.cpp as diffuse and diffuse20, and begin with an empty results directory. The first job sets used three residue classes with run.py 12 180 PART 3 pass1 403215, then prioritized 16 open high-scoring cells with strong.py pass_hot 0 16. Subsequent stages used run.py 12 500 PART 3 pass2 443810 and run.py 20 420 PART 2 pass3 403215. Files may close the same case if concurrently running stages see different completion times. Each cell's generator seeds its own permutation order. The manifest and lp_jobs.json freeze the actual outputs and remaining cells used in this run. hard.py runs LP pricing only on its frozen 221 jobs and independently evaluates the integerized results. It uses SciPy locally. LP values by themselves do not enter the check. The chosen manifest resolves any overlapping outputs by keeping the smallest independently replayed valid numerator.
