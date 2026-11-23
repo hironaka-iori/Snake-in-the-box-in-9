@@ -59,6 +59,11 @@ modules exist. Nothing about references or boundary data is trusted: wrong data 
   .olean alone): `Snake9.CubeProv.Q0661999699966669.unsat : Unsat (cubeCnfQ 13 116 459817509069416041 29)`
   (= 0x0661999699966669), axioms `[propext, Classical.choice, Quot.sound]`. So a chain certificate is an
   ordinary cube certificate for assembly.
+* Farm route `tail_d8.py --chain H` (af7feaa77): `run --only 0661999699966669 --mem-gb 8 --procs 1 --chain
+  2000000`: the whole proof (pred 9.2 GB) does not fit 8 GB, so it is regenerated as a 5-piece chain (pred
+  7.0 GB per piece) and built: record `route tail-chain, chain 5, peak_mb 6681, status OK`, public check
+  passed, 6,607 s in all. Disk: raw LRAT ~13 B per hint (so a 900 s solve writes ≤ ~3.5 GB), build
+  directory ~0.8 GB per 9 M compacted hints.
 
 ## Open points
 
