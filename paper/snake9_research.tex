@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 259, 22 November 2026}
+\date{Research state after round 263, 24 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -93,11 +93,12 @@ an arm of at least 96 edges retains any 68-edge segment of the 22
 reference parents, up to cube isometry and reversal. Repeating this growth
 operation reaches exactly 237 long arms in three components. For the saved 98-edge parent the
 maximum single-crossing join lies between 179 and 187 inclusive.
-The six-shape family containing the five 191-edge attaining parents stays
-closed when up to three smaller-class vertices are exchanged at each
-step. Any 96-edge window in a single-crossing construction of at least
-192 edges must omit at least four of the 48 smaller-class vertices of
-each of those six references under every cube isometry.
+Starting from the five attaining parents, repeated changes of at most four
+smaller-class sites reach exactly twelve shapes with one-crossing maximum
+191. Any 96-edge window in a one-crossing snake of at least 192 edges
+must omit at least five of the 48 smaller-class sites of each of these
+twelve references under every cube isometry. For the separate distant
+reference, at least four omissions are necessary.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -10732,8 +10733,8 @@ A first-step exclusion for one parent applies to another whenever
 the proposed partner takes that step and avoids every vertex freed
 by the change of parent. Replaying these implications and the
 certificates gives 12 excluded shapes in the 41-shape component.
-The other 29 still allow an unrestricted partner as far as these
-results establish~\cite{exchange255}.
+At the end of round 255, the remaining 29 shapes had unresolved
+unrestricted partners~\cite{exchange255}.
 
 The complementary construction starts from the 25 labelled 94-edge
 partners attaining the 191-edge joins of the five saved parents.
@@ -10808,8 +10809,8 @@ For the distant reference \texttt{e6e522b8}, two simultaneous
 replacements give 14 shapes and three give 15 other shapes. Two of the
 latter escape its 41-shape one-exchange component. Both were already
 in the 264-shape inventory. Thus closure under three exchanges is a
-property of the six specified arms. The separate 46-site bound still
-applies to this distant reference.
+property of the six specified arms. At this stage the separate 46-site bound
+applied to this distant reference.
 The labelled classes and independent computations are in
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/257-three-exchange-parents}{milestone 257}.
 
@@ -10821,7 +10822,7 @@ of \(96+1+81=178\). With arbitrary partners, eight of the 29 shapes
 have certified 191-edge ceilings at both ends, including both escape
 shapes. Only one of the 29 extends at either endpoint. Its unique
 97-edge extension has no further extension and earlier certificates
-exclude 192 at both ends. The other 21 shapes have unresolved
+exclude 192 at both ends. At the end of round 257, the other 21 shapes had unresolved
 unrestricted partners. The numerical ceilings use native replay.
 Lean separately checks the insertion rule that an eventual internal
 vertex needs two distinct neighbours, each adjacent to at most one
@@ -10888,6 +10889,52 @@ one of the twelve shapes. The endpoint and partner arguments then give
 a contradiction. The unrestricted project interval remains
 \(191\leq a(9)\leq230\).
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/259-four-exchange-component}{Complete graph, attaining join and rooted exclusions}.
+
+\subsection{Distant parents and 95-edge partners}
+For the 21 unresolved shapes at exchange distances two and three from
+the distant reference, take both endpoints of each 96-edge parent.
+The donor collection contained 270 previously constructed arms
+of lengths 96 through 98 and 72 shapes of length 95. Their directed
+95-edge segments give 1,008 rooted words up to coordinate permutation.
+All use eight directions. Over all \(1{,}008\cdot8!\cdot42
+=1{,}706{,}987{,}520\) placements, the least number of common
+projected vertices in addition to the crossing was seven. The
+endpoint-wise minima of \(7,8,9,10,11,12\) occurred at
+\(5,12,16,3,3,3\) endpoints respectively. A prefix calculation and
+a separate binary sum of the 95 intersection indicators gave the same
+189 minimizing placements. Any compatible partner derived from a
+placed donor must omit all of its extra common vertices.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/260-donor-intersections}{Donor census and an explicit seven-chord placement}.
+
+Allowing the partner prefix to change improved constructions at 27
+of the 42 endpoints. One join increased from 128 to 175 edges. The
+best recorded join in these runs was 178. At 28 endpoints the resulting
+partner has its first 51 transitions outside the earlier donor family.
+For 42 chosen seeds, replacing an interval of two through eight edges
+between its fixed ends by an induced interval at most six edges longer
+gave no improvement. Separate enumerations in opposite directions
+agreed on all 21,112 intervals.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/261-rerouted-partners}{Constructions and interval replays}.
+
+The six parents rooted at vertex 67 share a set \(F\) of 92 forbidden
+vertices after normalization. A checked contradiction excludes every
+95-edge path from zero avoiding \(F\). Among the 262 catalogued
+96-edge shapes, exactly 12 of the 524 rooted cases contain a
+root-preserving image of \(F\).
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/262-common-forbidden-sites}{Common forbidden sites and coordinate placements}.
+
+For several parents with common forbidden set \(F\), write \(E_i\)
+for the additional sites forbidden by parent \(i\). Among paths
+avoiding \(F\), the selected vertices are compatible with some parent
+if and only if they contain no set meeting every \(E_i\). It suffices
+to forbid the inclusion-minimal sets meeting every \(E_i\). A second
+constraint comes from an earlier obstruction \(S\): if every 95-edge
+rooted path must meet \(S\), a path avoiding \(F\) must meet
+\(S\setminus F\). These implications were checked in Lean. The
+numerical exclusions were checked separately against the Boolean
+formulas, including complete first-step partitions where required.
+The exclusions now cover 42 of the 42 endpoints and both endpoints of 21 of the 21 previously unresolved shapes. Together with the eight earlier exclusions this covers all 14 two-exchange and all 15 three-exchange shapes. Only one of the 29 can extend in its own face, and its unique 97-edge extension already excludes a 192-edge join at either end. Consequently, every 96-edge window of a one-crossing snake of at least 192 edges shares at most 44 of its 48 smaller-class sites with any isometric copy of the distant reference. An overlap of 45 or more would put the window at exchange distance at most three. The zero- and one-exchange cases were excluded earlier.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/263-distant-family-certificates}{Family certificates, root coverage and remaining cases}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
@@ -11193,7 +11240,7 @@ use the archived calculations. The Lean results on truncating partners
 and moving the crossing apply under their stated geometric hypotheses.
 Sections~\ref{sec:corner250} and~\ref{sec:segment251} give the complete
 84-edge and 72-edge segment calculations. Section~\ref{sec:short252} gives the 68-edge result.
-Full-source reviews at rounds 220, 230, 240 and 250 check the written argument,
+Full-source reviews at rounds 220, 230, 240, 250 and 260 cover the written argument,
 historical status, dependencies and presentation. They do not rebuild the
 archived contributor chain or replay every numerical certificate.
 

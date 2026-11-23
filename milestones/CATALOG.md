@@ -2,7 +2,7 @@
 
 Open a round to read its account and supporting material. The [milestone guide](README.md) groups the recent rounds by research question. The index follows the numbered folders published on the main branch. Round 26 has no separate published folder.
 
-[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–259](#rounds-240-to-259)
+[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–263](#rounds-240-to-263)
 
 ## Rounds 1 to 49
 
@@ -267,7 +267,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 238 | [Recovery from three missing counts](238-three-count-recovery/MATHEMATICAL_NOTE.md) |
 | 239 | [Recovery after four missing counts](239-four-count-recovery/MATHEMATICAL_NOTE.md) |
 
-## Rounds 240 to 259
+## Rounds 240 to 263
 
 | Round | Research record |
 |---:|---|
@@ -291,3 +291,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 257 | [Three simultaneous exchanges and the 44-site overlap bound](257-three-exchange-parents/README.md) |
 | 258 | [The first four-site exchange leaving the six reference shapes](258-four-exchange-parents/README.md) |
 | 259 | [The twelve reachable shapes and their exact 191-edge one-crossing maximum](259-four-exchange-component/README.md) |
+| 260 | [Unavoidable extra intersections with 95-edge donor segments](260-donor-intersections/README.md) |
+| 261 | [Improved partner constructions and limits on short interval replacements](261-rerouted-partners/README.md) |
+| 262 | [A shared 92-site obstruction to a 95-edge partner](262-common-forbidden-sites/README.md) |
+| 263 | [Unrestricted partners in the distant two- and three-exchange shells](263-distant-family-certificates/README.md) |

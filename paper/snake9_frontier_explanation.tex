@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 259}
+\date{Research state after round 263}
 \begin{document}
 \maketitle
 
@@ -1423,7 +1423,7 @@ edge immediately before or after it would extend it~\cite{exchange255}.
 The same limit of 46 applies to the starting arm of the 41-shape
 group. Its eight immediate shapes all exclude a 95-edge partner at
 both endpoints. The endpoint certificates now cover 12 of the 41
-shapes. The other 29 still require a witness or an exclusion for
+shapes. At the end of round 255, the other 29 still required a witness or an exclusion for
 an unrestricted partner~\cite{exchange255}.
 
 We also changed the opposite arms. The 94-edge partners of the five
@@ -1475,8 +1475,8 @@ produce 29 distinct shapes in total. Both shapes outside its earlier
 component exclude a 192-edge join, including when kept as a segment
 inside a longer arm. For the 29 shapes, starting the other arm with
 any 51-edge segment from 95 donor shapes and allowing its entire tail
-to change gives an exact maximum of 178 edges. With an unrestricted
-opposite arm, 21 of these 29 shapes remain open.
+to change gives an exact maximum of 178 edges. At the end of round 257, 21 of these 29 shapes still had an unresolved
+unrestricted opposite arm.
 
 
 \subsection{Four changes in the smaller parity class}
@@ -1509,6 +1509,24 @@ smaller-class sites of each reference, under every cube symmetry.
 Other arms and constructions with multiple crossings remain open.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/259-four-exchange-component}{Round 259 evidence and the explicit 191-edge join}.
 
+\subsection{Partners for a second reference family}
+For 21 further 96-edge parent shapes, both endpoints had previously
+been considered and the 192-edge target was still open for at least
+one endpoint of each. Every placement of a 95-edge partner segment
+from a catalogue of 342 donor arms shared at least seven vertices
+with the parent in addition to the crossing. Each extra common vertex
+gives a chord. Changing the partner improved the recorded join at
+27 endpoints. The best of the new searches reached 178 edges.
+
+At one crossing, six parents share 92 forbidden vertices. A checked
+certificate shows that every 95-edge partner must use at least one of
+those vertices. Thus one computation rules out all six cases, even
+when every other site is available to the partner. Further
+certificates allow the parent to vary and check which first steps
+remain possible.
+The two- and three-exchange shells of this second reference are now fully excluded. Its zero- and one-exchange shells were already excluded. A 96-edge segment in a 192-edge one-crossing snake must therefore omit at least four of its 48 smaller-class sites, in every placement of this reference. The earlier family of twelve has the stronger requirement of five omissions.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/263-distant-family-certificates}{Exact scope and checked constructions}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1526,11 +1544,12 @@ a universal 197-edge exclusion. Constructions can change several
 separated pieces of the coil, permitting both parity classes and the
 path order to change. The unrestricted 192-edge question remains open.
 The universal seven-erasure proof still awaits Lean verification.
-The latest full written-source review was completed at round 250.
+The ten-round written-source review at round 260 and its checkpoint
+addendum cover both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 259.
+in the companion manuscript and milestones through round 263.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

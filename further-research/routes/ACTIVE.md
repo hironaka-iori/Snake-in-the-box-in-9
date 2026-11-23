@@ -8,9 +8,9 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Paused after Round 259. Exchanges of up to four of the 48 smaller-class sites reach exactly twelve 96-edge parent shapes from the original six. Their exact one-crossing maximum is 191. Any 96-edge window in a one-crossing snake of at least 192 edges shares at most 43 such sites with each of the twelve under every cube isometry. The earlier ceiling of 46 still applies to the separate distant reference. [Twelve-shape component](../../milestones/259-four-exchange-component/README.md) · [First four-site escape](../../milestones/258-four-exchange-parents/README.md) · [Distant reference and its open partners](../../milestones/257-three-exchange-parents/README.md)
+Paused after Round 263. Both ends of all 29 shapes at exchange distances two and three from the distant reference exclude a 192-edge one-crossing join. Taking account of the only longer extension gives a ceiling of 44 common smaller-class sites in every 96-edge window under every cube isometry. The twelve shapes reachable from the original six by repeated exchanges of up to four sites have one-crossing maximum 191 and overlap ceiling 43. Six shapes outside the completed distant shells remain unresolved in the 41-shape component. [Distant-reference certificates](../../milestones/263-distant-family-certificates/README.md) · [Explicit joins](../../milestones/261-rerouted-partners/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 
-At Round 255 the exact six-shape maximum was 191. A second component contains 41 shapes, including 23 new shapes. Twelve exclude a 192-edge join at either end. The other 29 remain open with an unrestricted partner. The Round 255 inventory contains 264 shapes, of which 171 remained open. [Round 255](../../milestones/255-parity-exchange-arms/README.md) · [Standing goal](RESEARCH_GOAL.md)
+At Round 255 the exact six-shape maximum was 191. A second component contained 41 shapes, including 23 new shapes. Twelve then excluded a 192-edge join at either end. The other 29 were open with an unrestricted partner. The Round 255 inventory contains 264 shapes, of which 171 remained open. [Round 255](../../milestones/255-parity-exchange-arms/README.md) · [Standing goal](RESEARCH_GOAL.md)
 
 ## Completed cases
 
