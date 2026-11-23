@@ -271,7 +271,8 @@ def ensure_stack(a):
     if os.path.exists(sp) and 'unsat_of_leaves' not in open(sp).read():
         for f in os.listdir(os.path.join(a.stack, 'build')):
             if f.split('.')[0] == 'Split': os.remove(os.path.join(a.stack, 'build', f))
-    if not os.path.exists(os.path.join(a.stack, 'build', 'Split.olean')) or not os.path.exists(os.path.join(a.stack, 'build', 'Final.olean')):
+    need = ['Split', 'Final'] + (['LratChain'] if a.chain else [])   # --chain: stacks set up before 6c8db375e lack LratChain
+    if not all(os.path.exists(os.path.join(a.stack, 'build', m + '.olean')) for m in need):
         r = P.sh([sys.executable, os.path.join(HERE, 'prod_d8.py'), 'setup', '--stack', a.stack]); assert r.returncode == 0, r.stdout[-2000:] + r.stderr[-2000:]
     assert 'unsat_of_leaves' in open(sp).read()
 
