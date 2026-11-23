@@ -25,8 +25,11 @@ s = time.time()
 # SOLVE_LIMIT (s, from prod_d8.py): a longer solve means a certificate too big for this machine's memory
 # (~28-52 k hints per solver second); stop, delete the partial LRAT, exit 11 (recorded as TOO_BIG)
 lim = float(os.environ.get('SOLVE_LIMIT', '0'))
+# SOLVE_OPT (from tail_d8.py: --unsat): the CaDiCaL option of the first solve; empty = CaDiCaL's default.
+# Farm data (t13, t15, a TOO_BIG cube): --unsat gave 0.36-0.55x the default's hints every time.
+OPT = os.environ.get('SOLVE_OPT', '').strip(); copt = lambda o_: [o_] if o_ and o_ != 'default' else []
 try:
-    r = subprocess.run(['cadical', '-q', '--lrat', '--binary=false', cnf, lrat], capture_output=True, text=True, timeout=lim or None)
+    r = subprocess.run(['cadical', '-q', '--lrat', '--binary=false'] + copt(OPT) + [cnf, lrat], capture_output=True, text=True, timeout=lim or None)
 except subprocess.TimeoutExpired:
     for f_ in (lrat, cnf, tags):
         if os.path.exists(f_): os.remove(f_)
@@ -42,13 +45,13 @@ c = json.loads(subprocess.run(['python3', os.path.join(HERE, 'pilot.py'), cnf, l
 # Measured on k = 29 cube 037c7c837c83831c: default 15.13 M hints / 24,017 vars (14.0 GB predicted), --unsat
 # 13.31 M / 22,881 (12.5 GB: fits 13 GB), --seed=7 23.85 M. Any UNSAT proof is acceptable to the checker.
 pred = lambda c_: 3.1 + 0.55 * c_['hints'] / 1e6 * max(1.0, c_['vars'] / 14000) ** 0.5
-MEMGB = float(os.environ.get('MEM_GB', '0')); stats['portfolio'] = {'default': c['hints']}
+MEMGB = float(os.environ.get('MEM_GB', '0')); stats['portfolio'] = {OPT or 'default': c['hints']}
 if MEMGB and pred(c) > MEMGB:
     import shutil
-    for opt in [o_ for o_ in os.environ.get('PORTFOLIO', '--unsat,--seed=1').split(',') if o_]:
+    for opt in [o_ for o_ in os.environ.get('PORTFOLIO', '--unsat,--seed=1' if not OPT else 'default,--seed=1').split(',') if o_ and o_ != (OPT or 'default')]:
         if os.path.exists(lrat): os.remove(lrat)
         try:
-            r2 = subprocess.run(['cadical', '-q', '--lrat', '--binary=false', opt, cnf, lrat], capture_output=True, text=True, timeout=lim or None)
+            r2 = subprocess.run(['cadical', '-q', '--lrat', '--binary=false'] + copt(opt) + [cnf, lrat], capture_output=True, text=True, timeout=lim or None)
         except subprocess.TimeoutExpired:
             stats['portfolio'][opt] = 'timeout'; continue
         if 's UNSATISFIABLE' not in r2.stdout: stats['portfolio'][opt] = 'no proof'; continue

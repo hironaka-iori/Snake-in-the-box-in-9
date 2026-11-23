@@ -107,7 +107,7 @@ def leaf_job(a, h, k, cd, p, held):
         if p: env.update(UNITS=','.join(map(str, p)), LEAF=bits(p))   # no portfolio for a leaf: a big leaf is split instead
         else: env.update(MEM_GB=str(a.mem_gb))                       # the whole cube: portfolio
         r = P.sh([sys.executable, os.path.join(HERE, 'make_cert.py'), str(a.L), h, str(k), d], cwd=HERE,
-                 env=dict(env, SOLVE_LIMIT=str(round(lim))))
+                 env=dict(env, SOLVE_LIMIT=str(round(lim)), SOLVE_OPT=a.solve_opt))
         if r.returncode == 10: return 'SAT', {}
         if r.returncode == 11: shutil.rmtree(d, ignore_errors=True); return 'split', {'solve_limit': round(lim)}
         if r.returncode != 0: return 'failed', {'log': (r.stdout + r.stderr)[-1500:]}
@@ -296,5 +296,6 @@ if __name__ == '__main__':
     r.add_argument('--hours', type=float, default=1e6); r.add_argument('--ref-prefix', default='refs/heads/xfer/d8')
     r.add_argument('--max-k', type=int, default=30); r.add_argument('--hard-depth', type=int, default=3)
     r.add_argument('--whole-factor', type=float, default=1.6)
+    r.add_argument('--solve-opt', default='--unsat')   # first-solve CaDiCaL option ('default' = none); see make_cert.py
     a = ap.parse_args()
     {'list': cmd_list, 'run': cmd_run}[a.cmd](a)
