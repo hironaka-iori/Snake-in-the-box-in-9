@@ -54,3 +54,24 @@ run starts with `0 cubes to do` twice in a row, then report and stay idle (keep-
 
 A pre-assigned tail share (given while your cube share is still running) means: when `prod_d8.py` reports
 `worker finished`, switch to tail mode with that `T` right away, without waiting for the coordinating session.
+
+## Cover mode (one cover certificate, then back to your previous job)
+
+When the coordinating session gives you a cover item `X` (`c5` or a Q5 representative number) and a name `kN`:
+
+1. Reach a boundary without losing work. Tail worker: wait until `~/d8tail.log` shows a new `cube ...` line,
+   then kill tail_d8.py and its children by PID (as in "Code update"). Cube worker: `touch ~/d8work/STOP`
+   and wait until prod_d8.py exits (running jobs finish; then `rm ~/d8work/STOP`).
+2. From the repository root:
+
+       git fetch origin research/unconditional-241 && git checkout -B research/unconditional-241 FETCH_HEAD
+       bash milestones/39-dim8-lift/scripts/make_tables.sh
+       nohup python3 milestones/39-dim8-lift/cert/cover_d8.py run --stack ~/d8stack --work ~/d8cover \
+         --only X --mem-gb 12 --procs 2 --publish --name kN >> ~/d8cover.log 2>&1 &
+
+   (make_tables.sh takes ~10 min; cover_d8.py ports Walk, WalkSplit and TabAll into ~/d8stack itself.)
+   One cover is 4 leaves of ~1.7 h each, built one at a time: ~6-7 h. It resumes after a restart (same lines).
+   Keep-alive as above with `[c]over_d8.py run` and `~/d8cover.log`.
+3. Report to the coordinating session: the OK record (or SAT?, BUILD_FAILED, CHECK_FAILED, FAILED with log tail).
+4. On `cover worker finished`: rerun your previous worker with its usual line (tail: MODE=tail ...; cube:
+   INDEX=... d8_machine.sh). Both resume from their own state.
