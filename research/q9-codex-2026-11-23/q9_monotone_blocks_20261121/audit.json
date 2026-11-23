@@ -1,0 +1,565 @@
+{
+  "seed_rows_zero_based": [
+    401,
+    435,
+    436,
+    439,
+    440,
+    442,
+    444
+  ],
+  "viable_cuts": [
+    [
+      401,
+      2,
+      6
+    ],
+    [
+      401,
+      2,
+      7
+    ],
+    [
+      401,
+      2,
+      8
+    ],
+    [
+      401,
+      6,
+      7
+    ],
+    [
+      401,
+      7,
+      8
+    ],
+    [
+      435,
+      4,
+      6
+    ],
+    [
+      436,
+      4,
+      6
+    ],
+    [
+      439,
+      3,
+      5
+    ],
+    [
+      440,
+      3,
+      5
+    ],
+    [
+      442,
+      3,
+      6
+    ],
+    [
+      444,
+      3,
+      5
+    ]
+  ],
+  "positive_replay": {
+    "faces_control": {
+      "checked": 24,
+      "examples": [
+        {
+          "file": "faces_control.log",
+          "line": 1,
+          "source": 25,
+          "cut": [
+            4,
+            7
+          ],
+          "vertices": 192,
+          "pairs": 18336,
+          "first": 45,
+          "last": 74
+        }
+      ],
+      "run": {
+        "cases": 24,
+        "degree_impossible": 0,
+        "layouts": 45,
+        "relative_isometries": 92897280,
+        "retained_relative": 647,
+        "wedges": 162,
+        "matched_wedges": 29,
+        "degree_compatible": 24,
+        "disconnected": 0,
+        "hits": 24
+      }
+    },
+    "partition_control": {
+      "checked": 18,
+      "examples": [
+        {
+          "file": "partition_control.log",
+          "line": 1,
+          "source": 62,
+          "cut": [
+            7,
+            8
+          ],
+          "vertices": 192,
+          "pairs": 18336,
+          "first": 413,
+          "last": 261
+        }
+      ],
+      "run": {
+        "cases": 18,
+        "degree_impossible": 0,
+        "pair_isometries": 38707200,
+        "retained_pairs": 430,
+        "forest_pairs": 326,
+        "feasible_port_counts": 89,
+        "eight_axis_permutations": 3258068,
+        "eight_dimensional_placements": 193554197,
+        "passed_right_ports": 127,
+        "degree_compatible": 18,
+        "disconnected": 0,
+        "hits": 18
+      }
+    },
+    "parallel_adaptive": {
+      "checked": 1,
+      "examples": [
+        {
+          "file": "parallel_adaptive.log",
+          "line": 1,
+          "source": 64,
+          "cut": [
+            7,
+            8
+          ],
+          "vertices": 192,
+          "pairs": 18336,
+          "first": 182,
+          "last": 30
+        }
+      ],
+      "run": {
+        "cases": 18,
+        "degree_impossible": 0,
+        "layouts": 53,
+        "relative_isometries": 69672960,
+        "retained_relative": 489,
+        "wedges": 4,
+        "matched_wedges": 1,
+        "degree_compatible": 1,
+        "disconnected": 0,
+        "hits": 1
+      }
+    },
+    "overlap_control": {
+      "checked": 8,
+      "examples": [
+        {
+          "file": "overlap_control.log",
+          "line": 1,
+          "source": 62,
+          "cut": [
+            7,
+            8
+          ],
+          "vertices": 192,
+          "pairs": 18336,
+          "first": 413,
+          "last": 261
+        }
+      ],
+      "run": {
+        "cases": 8,
+        "rejected_internal": 0,
+        "relative_maps": 309657600,
+        "passed_first_filter": 336,
+        "forests": 274,
+        "nonparallel_forests": 0,
+        "coincident_face_forests": 0,
+        "forest_pairs": 180,
+        "feasible_port_counts": 74,
+        "eight_dimensional_placements": 172054084,
+        "valid_degrees": 8,
+        "disconnected": 0,
+        "hits": 8
+      }
+    },
+    "intersects_control": {
+      "checked": 3,
+      "examples": [
+        {
+          "file": "intersects_control.log",
+          "line": 1,
+          "source": 130,
+          "cut": [
+            7,
+            8
+          ],
+          "vertices": 169,
+          "pairs": 14196,
+          "first": 394,
+          "last": 18
+        }
+      ],
+      "run": {
+        "cases": 3,
+        "rejected_internal": 0,
+        "relative_maps": 61931520,
+        "passed_first_filter": 36,
+        "forests": 22,
+        "nonparallel_forests": 3,
+        "coincident_face_forests": 0,
+        "forest_pairs": 3,
+        "feasible_port_counts": 3,
+        "eight_dimensional_placements": 229125,
+        "valid_degrees": 3,
+        "disconnected": 0,
+        "hits": 3
+      }
+    },
+    "ordered_control": {
+      "checked": 24,
+      "examples": [
+        {
+          "file": "ordered_control.log",
+          "line": 1,
+          "source": 25,
+          "cut": [
+            4,
+            7
+          ],
+          "vertices": 192,
+          "pairs": 18336,
+          "first": 383,
+          "last": 336
+        }
+      ],
+      "run": {
+        "rows": 24,
+        "capped": 0,
+        "roots": 24,
+        "chart_calls": 73,
+        "coordinate_states": 1225,
+        "complete_placements": 73,
+        "full_solutions": 24,
+        "hits": 24
+      }
+    },
+    "ordered_adaptive": {
+      "checked": 18,
+      "examples": [
+        {
+          "file": "ordered_adaptive.log",
+          "line": 1,
+          "source": 62,
+          "cut": [
+            7,
+            8
+          ],
+          "vertices": 192,
+          "pairs": 18336,
+          "first": 383,
+          "last": 499
+        }
+      ],
+      "run": {
+        "rows": 18,
+        "capped": 0,
+        "roots": 18,
+        "chart_calls": 55,
+        "coordinate_states": 482,
+        "complete_placements": 55,
+        "full_solutions": 18,
+        "hits": 18
+      }
+    },
+    "holes1_control": {
+      "checked": 18,
+      "examples": [
+        {
+          "file": "holes1_control.log",
+          "line": 1,
+          "source": 62,
+          "cut": [
+            7,
+            8
+          ],
+          "vertices": 192,
+          "pairs": 18336,
+          "first": 413,
+          "last": 261
+        }
+      ],
+      "run": {
+        "cases": 18,
+        "degree_impossible": 0,
+        "pair_isometries": 38707200,
+        "retained_pairs": 602,
+        "forest_pairs": 653,
+        "feasible_port_counts": 274,
+        "eight_axis_permutations": 10717268,
+        "eight_dimensional_placements": 629722285,
+        "passed_right_ports": 114,
+        "degree_compatible": 18,
+        "disconnected": 0,
+        "fill_nodes": 44,
+        "hits": 18
+      }
+    },
+    "ordered_holes_control": {
+      "checked": 108,
+      "examples": [
+        {
+          "file": "ordered_holes_control.log",
+          "line": 1,
+          "source": 62,
+          "cut": [
+            7,
+            8
+          ],
+          "vertices": 192,
+          "pairs": 18336,
+          "first": 383,
+          "last": 499
+        }
+      ],
+      "run": {
+        "rows": 108,
+        "capped": 0,
+        "roots": 108,
+        "chart_calls": 328,
+        "coordinate_states": 2888,
+        "complete_placements": 328,
+        "finished_charts": 108,
+        "fill_nodes": 328,
+        "hits": 108
+      }
+    }
+  },
+  "faces_target": {
+    "cases": 252,
+    "degree_impossible": 241,
+    "layouts": 33,
+    "relative_isometries": 42577920,
+    "retained_relative": 95,
+    "wedges": 4,
+    "matched_wedges": 2,
+    "degree_compatible": 0,
+    "disconnected": 0,
+    "hits": 0
+  },
+  "ordered_target": {
+    "rows": 7,
+    "capped": 0,
+    "roots": 7,
+    "chart_calls": 19,
+    "coordinate_states": 194,
+    "complete_placements": 12,
+    "full_solutions": 0,
+    "hits": 0
+  },
+  "partition_target": {
+    "cases": 252,
+    "degree_impossible": 241,
+    "pair_isometries": 42577920,
+    "retained_pairs": 95,
+    "forest_pairs": 26,
+    "feasible_port_counts": 0,
+    "eight_axis_permutations": 0,
+    "eight_dimensional_placements": 0,
+    "passed_right_ports": 0,
+    "degree_compatible": 0,
+    "disconnected": 0,
+    "hits": 0
+  },
+  "overlap_target": {
+    "cases": 252,
+    "rejected_internal": 241,
+    "relative_maps": 681246720,
+    "passed_first_filter": 95,
+    "forests": 92,
+    "nonparallel_forests": 0,
+    "coincident_face_forests": 0,
+    "forest_pairs": 22,
+    "feasible_port_counts": 0,
+    "eight_dimensional_placements": 0,
+    "valid_degrees": 0,
+    "disconnected": 0,
+    "hits": 0
+  },
+  "pair_screen": {
+    "rows": 252,
+    "viable_source_cuts": 11,
+    "intersecting_face_isometries": 4811304960,
+    "passed_B_degrees": 0,
+    "both_degree_le_two": 0,
+    "acyclic_forests": 0
+  },
+  "independent_intersections": {
+    "source_cases": 252,
+    "viable": 11,
+    "injection_choices": 11975040,
+    "ambient_intersection_placements": 4811304960,
+    "surviving_preliminary_geometry": 0
+  },
+  "independent_ports": {
+    "cases": 252,
+    "viable": 11,
+    "relative_maps": 42577920,
+    "obey_degree": 95,
+    "feasible_half_forests": 92,
+    "half_combinations": 22,
+    "compatible_connection_counts": 0
+  },
+  "all_half": {
+    "cases": 252,
+    "viable": 11,
+    "relative_maps": 42577920,
+    "obey_degree": 95,
+    "feasible_half_forests": 92,
+    "half_combinations": 22,
+    "compatible_connection_counts": 0
+  },
+  "forest_join": {
+    "complementary_forests": 22,
+    "interhalf_relative_isometries": 227082240,
+    "maximum_degree_two": 0,
+    "acyclic_forests": 0,
+    "minimum_components": -1
+  },
+  "direct_forest": {
+    "complementary_forests": 22,
+    "interhalf_relative_isometries": 227082240,
+    "maximum_degree_two": 0,
+    "acyclic_forests": 0,
+    "minimum_components": -1
+  },
+  "holes1": {
+    "cases": 7,
+    "degree_impossible": 0,
+    "pair_isometries": 27095040,
+    "retained_pairs": 83,
+    "forest_pairs": 84,
+    "feasible_port_counts": 68,
+    "eight_axis_permutations": 2741760,
+    "eight_dimensional_placements": 197240584,
+    "passed_right_ports": 115,
+    "degree_compatible": 20,
+    "disconnected": 20,
+    "fill_nodes": 20,
+    "hits": 0
+  },
+  "holes2": {
+    "cases": 42,
+    "degree_impossible": 0,
+    "pair_isometries": 162570240,
+    "retained_pairs": 512,
+    "forest_pairs": 542,
+    "feasible_port_counts": 833,
+    "eight_axis_permutations": 33586560,
+    "eight_dimensional_placements": 3003592364,
+    "passed_right_ports": 2560,
+    "degree_compatible": 122,
+    "disconnected": 122,
+    "fill_nodes": 300,
+    "hits": 0
+  },
+  "strict_holes1": {
+    "rows": 252,
+    "capped": 0,
+    "roots": 252,
+    "chart_calls": 1638,
+    "coordinate_states": 1366420,
+    "complete_placements": 1954,
+    "finished_charts": 568,
+    "fill_nodes": 568,
+    "hits": 0
+  },
+  "strict_holes2": {
+    "rows": 1512,
+    "capped": 0,
+    "roots": 1512,
+    "chart_calls": 9844,
+    "coordinate_states": 8913348,
+    "complete_placements": 11740,
+    "finished_charts": 3408,
+    "fill_nodes": 6000,
+    "hits": 0
+  },
+  "connector1": {
+    "cases": 252,
+    "degree_impossible": 241,
+    "pair_isometries": 42577920,
+    "retained_pairs": 95,
+    "forest_pairs": 26,
+    "feasible_port_counts": 0,
+    "eight_axis_permutations": 0,
+    "eight_dimensional_placements": 0,
+    "passed_right_ports": 0,
+    "degree_compatible": 0,
+    "disconnected": 0,
+    "fill_nodes": 0,
+    "hits": 0
+  },
+  "connector2": {
+    "cases": 252,
+    "degree_impossible": 241,
+    "pair_isometries": 42577920,
+    "retained_pairs": 95,
+    "forest_pairs": 26,
+    "feasible_port_counts": 22,
+    "eight_axis_permutations": 887040,
+    "eight_dimensional_placements": 103736256,
+    "passed_right_ports": 0,
+    "degree_compatible": 0,
+    "disconnected": 0,
+    "fill_nodes": 0,
+    "hits": 0
+  },
+  "connector3": {
+    "cases": 252,
+    "degree_impossible": 241,
+    "pair_isometries": 42577920,
+    "retained_pairs": 95,
+    "forest_pairs": 26,
+    "feasible_port_counts": 44,
+    "eight_axis_permutations": 1774080,
+    "eight_dimensional_placements": 222507584,
+    "passed_right_ports": 0,
+    "degree_compatible": 0,
+    "disconnected": 0,
+    "fill_nodes": 0,
+    "hits": 0
+  },
+  "connector4": {
+    "cases": 252,
+    "degree_impossible": 241,
+    "pair_isometries": 42577920,
+    "retained_pairs": 95,
+    "forest_pairs": 26,
+    "feasible_port_counts": 66,
+    "eight_axis_permutations": 2661120,
+    "eight_dimensional_placements": 357114400,
+    "passed_right_ports": 0,
+    "degree_compatible": 0,
+    "disconnected": 0,
+    "fill_nodes": 0,
+    "hits": 0
+  },
+  "forest_positive": {
+    "complementary_forests": 2,
+    "interhalf_relative_isometries": 20643840,
+    "maximum_degree_two": 2,
+    "acyclic_forests": 2,
+    "minimum_components": 1
+  },
+  "three_168_edge_controls_form_geometrically_intersecting_faces": 3,
+  "positive_minimum_components": 1
+}
