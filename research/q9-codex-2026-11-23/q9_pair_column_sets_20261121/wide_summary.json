@@ -1,0 +1,71 @@
+{
+  "frozen_gzip_sha256": "29f4c5c7dac7080e53186eb4b1bac5d0b987cf6d3b3f60fad526dd327023e02c",
+  "axis_pairs": 288,
+  "sources": [
+    0,
+    13,
+    37,
+    58,
+    71,
+    94,
+    113,
+    130
+  ],
+  "target": "at least 193 vertices",
+  "required_new_columns": false,
+  "native": {
+    "initial": {
+      "UNKNOWN": 36,
+      "UNSAT": 252
+    },
+    "retry": {
+      "UNSAT": 36
+    }
+  },
+  "independent_cnfcadical": {
+    "initial": {
+      "UNKNOWN": 12,
+      "UNSAT": 276
+    },
+    "retry": {
+      "UNSAT": 12
+    }
+  },
+  "joint": {
+    "UNSAT+UNSAT": 288
+  },
+  "single_open_exact": {
+    "UNKNOWN": 48,
+    "UNSAT": 24
+  },
+  "single_open_atleast": {
+    "UNKNOWN": 64,
+    "UNSAT": 8
+  },
+  "initial_independent_without_cell_bound": {
+    "UNKNOWN": 32
+  },
+  "independent_positive_vertices": 192,
+  "octagon_check": {
+    "unique_induced_8cycles": 26880,
+    "axis_pair": [
+      0,
+      1
+    ],
+    "count_factors": [
+      35,
+      32,
+      24
+    ]
+  },
+  "small_atleast": {
+    "exhaustive_vertex_subsets": 65535,
+    "pathsets": 2400,
+    "cases": 90,
+    "results": {
+      "SIZE": 6,
+      "FOUND": 56,
+      "UNSAT": 28
+    }
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "q9_parent_classes": 131,
+  "minimum_Q9_edges": 192,
+  "parity_weights": {
+    "9": {
+      "cases": 262,
+      "outcomes": {
+        "UNSAT": 262
+      },
+      "logs": [
+        "q9_cut_fullparity_atleast192.jsonl"
+      ]
+    },
+    "8": {
+      "cases": 2358,
+      "outcomes": {
+        "UNSAT": 2358
+      },
+      "logs": [
+        "q9_cut_edges_atleast192.jsonl"
+      ]
+    },
+    "7": {
+      "cases": 9432,
+      "outcomes": {
+        "UNSAT": 9432
+      },
+      "logs": [
+        "q9_cut_squares_atleast192.jsonl",
+        "q9_cut_squares_atleast_vertex.jsonl"
+      ]
+    },
+    "6": {
+      "cases": 22008,
+      "outcomes": {
+        "UNSAT": 22008
+      },
+      "logs": [
+        "q9_cut_eight_all_atleast192.jsonl",
+        "q9_cut_eight_all_deep_atleast192.jsonl"
+      ]
+    },
+    "5": {
+      "cases": 33012,
+      "outcomes": {
+        "UNSAT": 33012
+      },
+      "logs": [
+        "q9_cut_weight5_atleast192.jsonl",
+        "q9_cut_weight5_deep_atleast192.jsonl",
+        "q9_cut_weight5_last_atleast192.jsonl"
+      ]
+    },
+    "4": {
+      "cases": 33012,
+      "outcomes": {
+        "UNSAT": 28451,
+        "UNKNOWN": 4561
+      },
+      "logs": [
+        "q9_cut_weight4_atleast192.jsonl"
+      ]
+    },
+    "3": {
+      "cases": 22008,
+      "outcomes": {
+        "UNSAT": 12168,
+        "UNKNOWN": 9840
+      },
+      "logs": [
+        "q9_cut_weight3_atleast192.jsonl"
+      ]
+    },
+    "2": {
+      "cases": 9432,
+      "outcomes": {
+        "UNSAT": 1586,
+        "UNKNOWN": 7846
+      },
+      "logs": [
+        "q9_cut_weight2_atleast192.jsonl"
+      ]
+    },
+    "1": {
+      "cases": 2358,
+      "outcomes": {
+        "UNSAT": 265,
+        "UNKNOWN": 2093
+      },
+      "logs": [
+        "q9_cut_weight1_atleast192.jsonl"
+      ]
+    }
+  },
+  "Q8_classes": 1863,
+  "Q8_placements": [
+    {
+      "target": 192,
+      "min_parent": 96,
+      "external": 2,
+      "file": "q8_two_external_192_long.log",
+      "bank": 22,
+      "pairs": 253,
+      "placements": 2611445760,
+      "eligible": 3350,
+      "deletion_nodes": 2350117
+    },
+    {
+      "target": 195,
+      "min_parent": 93,
+      "external": 2,
+      "file": "q8_two_external_195.log",
+      "bank": 1863,
+      "pairs": 1716,
+      "placements": 17712414720,
+      "eligible": 25,
+      "deletion_nodes": 189
+    },
+    {
+      "target": 196,
+      "min_parent": 93,
+      "external": 2,
+      "file": "q8_two_external_196.log",
+      "bank": 1863,
+      "pairs": 320,
+      "placements": 3303014400,
+      "eligible": 5,
+      "deletion_nodes": 17
+    },
+    {
+      "target": 192,
+      "min_parent": 96,
+      "external": 3,
+      "file": "q8_three_external_192_long.log",
+      "bank": 22,
+      "pairs": 253,
+      "placements": 2611445760,
+      "eligible": 10637,
+      "deletion_nodes": 367840844
+    },
+    {
+      "target": 195,
+      "min_parent": 93,
+      "external": 3,
+      "file": "q8_three_external_195.log",
+      "bank": 1863,
+      "pairs": 8820,
+      "placements": 91039334400,
+      "eligible": 244,
+      "deletion_nodes": 2840
+    },
+    {
+      "target": 196,
+      "min_parent": 93,
+      "external": 3,
+      "file": "q8_three_external_196.log",
+      "bank": 1863,
+      "pairs": 1716,
+      "placements": 17712414720,
+      "eligible": 25,
+      "deletion_nodes": 189
+    }
+  ],
+  "independent_models": {
+    "FOUND/FOUND": 55,
+    "UNSAT/UNSAT": 44,
+    "UNKNOWN/FOUND": 5,
+    "UNKNOWN/UNSAT": 16
+  },
+  "above_threshold_controls": 20,
+  "extra_vertex_controls": {
+    "two": {
+      "domains": 72,
+      "decisions": 144,
+      "gain_counts": {
+        "1": 70,
+        "2": 2
+      }
+    },
+    "three": {
+      "domains": 12,
+      "decisions": 24,
+      "gain_counts": {
+        "1": 9,
+        "2": 3
+      }
+    }
+  }
+}
