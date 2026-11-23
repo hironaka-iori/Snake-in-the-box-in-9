@@ -246,14 +246,18 @@ def export(name, work, data, outroot, piece_hints, seg_hints, OFF, chunk=16384, 
             # references for the next boundary, chunk by chunk
             refs = []
             for ch in bchunks[p + 1]:
-                rr = []
+                rr, segs = [], set()
                 for j in ch:
                     s, jj = where[ids[j]]
-                    rr.append((jj << 12) | (s + 1))
+                    rr.append((jj << 12) | (s + 1)); segs.add(s)
+                # chunks of own lemmas of piece p point into one own segment; only pass-through chunks
+                # (lemmas of B[p]) may span several boundary segments
+                assert len(segs) == 1 or max(segs) < nb, (p, sorted(segs)[:5])
                 refs.append(rr)
             # one reference list per boundary chunk, as 500-element sub-lists joined by ++ (a 4,000-element
             # list literal exceeds maxRecDepth when elaborated; the value is the same), and one check per
-            # chunk: its references all point into one segment of Ps, so the check decodes only that segment
+            # chunk: a chunk of own lemmas points into one own segment of Ps, so its check decodes only that
+            # segment (a pass-through chunk may decode several boundary segments, which are small)
             nxt = '%s.Chain.B%d' % (ns, p + 1)
             for s, rr in enumerate(refs):
                 sub = [rr[a:a + 500] for a in range(0, len(rr), 500)] or [[]]
