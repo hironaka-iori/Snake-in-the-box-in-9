@@ -77,7 +77,7 @@ def tail_items(a):
             out.append((pg, rs[0]['k'], rs[0]['A']))
     for k, h in P.items(a.L):   # the hard cubes: never given a record by prod_d8.py (--max-k)
         st = {r['status'] for r in recs.get(P.modname(h), [])}
-        if k > a.max_k and not st & {'OK', 'SAT?', 'TOO_BIG'}: out.append((2e9, k, h))
+        if getattr(a, 'hard', False) and k > a.max_k and not st & {'OK', 'SAT?', 'TOO_BIG'}: out.append((2e9, k, h))
     return sorted(out)
 
 
@@ -292,6 +292,7 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser(); sp = ap.add_subparsers(dest='cmd', required=True)
     l = sp.add_parser('list'); l.add_argument('--work', required=True); l.add_argument('--ref-prefix', default='refs/heads/xfer/d8')
     l.add_argument('--L', type=int, default=116); l.add_argument('--max-k', type=int, default=30)
+    l.add_argument('--hard', action='store_true')
     r = sp.add_parser('run')
     for x in ('--stack', '--work'): r.add_argument(x, required=True)
     r.add_argument('--index', default='0'); r.add_argument('--workers', type=int, default=1); r.add_argument('--name', default='')
@@ -300,6 +301,7 @@ if __name__ == '__main__':
     r.add_argument('--hours', type=float, default=1e6); r.add_argument('--ref-prefix', default='refs/heads/xfer/d8')
     r.add_argument('--max-k', type=int, default=30); r.add_argument('--hard-depth', type=int, default=3)
     r.add_argument('--whole-factor', type=float, default=1.6)
+    r.add_argument('--hard', action='store_true')   # also take the k > --max-k cubes (off: vertex splits do not converge on them)
     r.add_argument('--solve-opt', default='--unsat')   # first-solve CaDiCaL option ('default' = none); see make_cert.py
     a = ap.parse_args()
     {'list': cmd_list, 'run': cmd_run}[a.cmd](a)
