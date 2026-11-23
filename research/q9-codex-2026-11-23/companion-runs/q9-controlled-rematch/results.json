@@ -1,0 +1,243 @@
+{
+  "scope": "Full Q9 vertex sets from 25 public 191-edge snakes, one 192-vertex coil and its opened snake. In the control-bit 1 layer rotate two or three axes and optionally conjugate by a single-coordinate translation. Enumerate all subsets of up to k deletions with the required number of arbitrary additions to achieve exactly the target edge count. The broad SAT searches leave all non-anchor cube vertices available.",
+  "small_edit_runs": [
+    {
+      "target_edges": 192,
+      "max_deleted": 1,
+      "row_stop": 27,
+      "row_start": 0,
+      "excluded_bank": null,
+      "inputs": 27,
+      "transforms": 68040,
+      "cross_changed": 68040,
+      "distinct_images": 68026,
+      "stars_pruned": 67735,
+      "admissible_deletion_sets": 114,
+      "complete_additions": 0,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_edges": 192,
+      "max_deleted": 2,
+      "row_stop": 27,
+      "row_start": 0,
+      "excluded_bank": null,
+      "inputs": 27,
+      "transforms": 68040,
+      "cross_changed": 68040,
+      "distinct_images": 68026,
+      "stars_pruned": 67173,
+      "admissible_deletion_sets": 22591,
+      "complete_additions": 172,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_edges": 192,
+      "max_deleted": 3,
+      "row_stop": 27,
+      "row_start": 0,
+      "excluded_bank": null,
+      "inputs": 27,
+      "transforms": 68040,
+      "cross_changed": 68040,
+      "distinct_images": 68026,
+      "stars_pruned": 65823,
+      "admissible_deletion_sets": 2229655,
+      "complete_additions": 20594,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_edges": 192,
+      "max_deleted": 4,
+      "row_stop": 5,
+      "row_start": 4,
+      "excluded_bank": null,
+      "inputs": 1,
+      "transforms": 2520,
+      "cross_changed": 2520,
+      "distinct_images": 2520,
+      "stars_pruned": 2384,
+      "admissible_deletion_sets": 14431828,
+      "complete_additions": 251110,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_edges": 192,
+      "max_deleted": 4,
+      "row_stop": 27,
+      "row_start": 25,
+      "excluded_bank": null,
+      "inputs": 2,
+      "transforms": 5040,
+      "cross_changed": 5040,
+      "distinct_images": 5037,
+      "stars_pruned": 4706,
+      "admissible_deletion_sets": 1071206,
+      "complete_additions": 9721,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_edges": 191,
+      "max_deleted": 3,
+      "row_stop": 27,
+      "row_start": 0,
+      "excluded_bank": "known191.txt",
+      "inputs": 27,
+      "transforms": 68040,
+      "cross_changed": 68040,
+      "distinct_images": 68026,
+      "stars_pruned": 65823,
+      "admissible_deletion_sets": 2229655,
+      "complete_additions": 109687,
+      "already_known_hits": 82,
+      "status": "NO_WITNESS_OUTSIDE_EXCLUSIONS"
+    },
+    {
+      "target_edges": 193,
+      "max_deleted": 3,
+      "row_stop": 27,
+      "row_start": 0,
+      "excluded_bank": null,
+      "inputs": 27,
+      "transforms": 68040,
+      "cross_changed": 68040,
+      "distinct_images": 68026,
+      "stars_pruned": 65823,
+      "admissible_deletion_sets": 2229655,
+      "complete_additions": 9985,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_edges": 194,
+      "max_deleted": 3,
+      "row_stop": 27,
+      "row_start": 0,
+      "excluded_bank": null,
+      "inputs": 27,
+      "transforms": 68040,
+      "cross_changed": 68040,
+      "distinct_images": 68026,
+      "stars_pruned": 65823,
+      "admissible_deletion_sets": 2229655,
+      "complete_additions": 103490,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_edges": 195,
+      "max_deleted": 3,
+      "row_stop": 27,
+      "row_start": 0,
+      "excluded_bank": null,
+      "inputs": 27,
+      "transforms": 68040,
+      "cross_changed": 68040,
+      "distinct_images": 68026,
+      "stars_pruned": 65823,
+      "admissible_deletion_sets": 2229655,
+      "complete_additions": 291506,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_edges": 192,
+      "max_deleted": 4,
+      "row_stop": 27,
+      "row_start": 0,
+      "excluded_bank": null,
+      "inputs": 27,
+      "transforms": 68040,
+      "cross_changed": 68040,
+      "distinct_images": 68026,
+      "stars_pruned": 63493,
+      "admissible_deletion_sets": 146117728,
+      "complete_additions": 1439116,
+      "already_known_hits": 0,
+      "status": "NO_WITNESS"
+    }
+  ],
+  "control": "small_controls.json",
+  "sources": "sources.txt",
+  "scripts": [
+    "small_repairs.cpp",
+    "search.py",
+    "retry.py"
+  ],
+  "sat": {
+    "tiny192": {
+      "initial_exact": {
+        "UNSAT": 904,
+        "UNKNOWN": 68
+      },
+      "secondary_at_least_on_unknown": {
+        "UNSAT": 64,
+        "UNKNOWN": 4
+      },
+      "secondary_deep_at_least_on_unknown": {
+        "UNSAT": 4
+      }
+    },
+    "near192": {
+      "initial_exact": {
+        "UNSAT": 101,
+        "UNKNOWN": 169
+      },
+      "secondary_at_least_on_unknown": {
+        "UNSAT": 83,
+        "UNKNOWN": 86
+      }
+    },
+    "strata192": {
+      "initial_exact": {
+        "UNKNOWN": 136,
+        "UNSAT": 4
+      },
+      "secondary_at_least_on_unknown": {
+        "UNKNOWN": 117,
+        "UNSAT": 19
+      }
+    },
+    "combined_exact_192": {
+      "UNSAT": 1179,
+      "UNKNOWN": 203
+    }
+  },
+  "checksums": {
+    "sources.txt": "102232b58decd5da173883554d1e04f5ddd944049ac2e6314f7f9f30a9f2d9c0",
+    "small_repairs.cpp": "973b8e8ed46199565d2880a39a34f530e3d4a609210f2eb193f28b7b63348ee8",
+    "search.py": "42bcdc9844861c12568368ba70954ccd1ab69490e4abb9fd0112394634c1b01e",
+    "retry.py": "1d65d754b986ee2e498ace915df5c4d7f31880de1f0d8e38b1b46cfb1c8937a4",
+    "known191.txt": "0c926f5bcab7777e875a786ff141813b925c18c9d3485b4f0473028b5fc6ecb9",
+    "small_controls.json": "5b1dfb7cc7e38efe09b52d1345e94fb421ff9446df424f2c0d050f6619e7366b"
+  },
+  "unbounded_additions": [
+    {
+      "target_at_least": 192,
+      "max_deleted": 2,
+      "rows": 27,
+      "distinct_images": 68026,
+      "degree_pruned_images": 67173,
+      "deletion_candidates": 22591,
+      "disconnected": 22557,
+      "complete_additions": 0,
+      "status": "NO_WITNESS"
+    },
+    {
+      "target_at_least": 192,
+      "max_deleted": 3,
+      "rows": 27,
+      "distinct_images": 68026,
+      "degree_pruned_images": 65823,
+      "deletion_candidates": 2229655,
+      "disconnected": 2229359,
+      "complete_additions": 0,
+      "status": "NO_WITNESS"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "method": "Four consecutive cyclic arcs alternating C,D,C,D with one Q9 edge at each switch; D is an isometric image of C. Source cycle and controls are stored separately.",
+  "args": [
+    "target_edges",
+    "left_two_arc_vertex_count (0 exhausts all)",
+    "minimum_each_arc_vertices",
+    "mode",
+    "count_or_specific_index",
+    "rng_seed",
+    "optional --exclusive (each arc contains a vertex absent from the other coil)"
+  ],
+  "source": "search.cpp",
+  "source_sha256": "c2887009fcd84d29b7d792fc88d704e65ee5b414b9ba74d1495a6d826f6e0e48",
+  "input": "cycle.txt",
+  "input_sha256": "4dff59b146679a6a065211a1879f4d127e73c533a57ec0528206a1e4d248e5c9",
+  "controls": "controls.json",
+  "no_join_runs": [
+    {
+      "args": [
+        192,
+        96,
+        8,
+        "local",
+        64,
+        1
+      ],
+      "placement_cut_combinations": 64,
+      "left_halves": 47040,
+      "right_halves": 44304,
+      "adjacent_tip_pairs": 10310910,
+      "overlap_filter_survivors": 0
+    },
+    {
+      "args": [
+        192,
+        64,
+        3,
+        "local",
+        512,
+        1
+      ],
+      "placement_cut_combinations": 512,
+      "left_halves": 2346392,
+      "right_halves": 141124,
+      "adjacent_tip_pairs": 17207608,
+      "overlap_filter_survivors": 0
+    },
+    {
+      "args": [
+        192,
+        80,
+        3,
+        "local",
+        512,
+        1
+      ],
+      "placement_cut_combinations": 512,
+      "left_halves": 1570788,
+      "right_halves": 154768,
+      "adjacent_tip_pairs": 17601864,
+      "overlap_filter_survivors": 0
+    },
+    {
+      "args": [
+        192,
+        96,
+        3,
+        "random",
+        2048,
+        444501
+      ],
+      "placement_cut_combinations": 2048,
+      "left_halves": 707312,
+      "right_halves": 632040,
+      "adjacent_tip_pairs": 3284525,
+      "overlap_filter_survivors": 0
+    },
+    {
+      "args": [
+        192,
+        96,
+        3,
+        "local",
+        18944,
+        1
+      ],
+      "placement_cut_combinations": 18944,
+      "left_halves": 12727208,
+      "right_halves": 11223292,
+      "adjacent_tip_pairs": 175657850,
+      "overlap_filter_survivors": 0
+    },
+    {
+      "args": [
+        192,
+        0,
+        1,
+        "specific",
+        46,
+        1
+      ],
+      "placement_cut_combinations": 190,
+      "left_halves": 894184,
+      "right_halves": 894184,
+      "adjacent_tip_pairs": 30251316,
+      "overlap_filter_survivors": 16
+    },
+    {
+      "args": [
+        192,
+        0,
+        1,
+        "specific",
+        11,
+        1
+      ],
+      "placement_cut_combinations": 190,
+      "left_halves": 930682,
+      "right_halves": 930682,
+      "adjacent_tip_pairs": 23540960,
+      "overlap_filter_survivors": 76
+    },
+    {
+      "args": [
+        192,
+        0,
+        1,
+        "specific",
+        480,
+        1
+      ],
+      "placement_cut_combinations": 190,
+      "left_halves": 1316708,
+      "right_halves": 1316708,
+      "adjacent_tip_pairs": 86701976,
+      "overlap_filter_survivors": 240
+    },
+    {
+      "args": [
+        191,
+        96,
+        3,
+        "local",
+        5000,
+        1,
+        "--exclusive"
+      ],
+      "placement_cut_combinations": 5000,
+      "left_halves": 4157184,
+      "right_halves": 4157184,
+      "adjacent_tip_pairs": 72294603,
+      "overlap_filter_survivors": 779
+    },
+    {
+      "args": [
+        190,
+        96,
+        3,
+        "local",
+        5000,
+        1,
+        "--exclusive"
+      ],
+      "placement_cut_combinations": 5000,
+      "left_halves": 4157184,
+      "right_halves": 4927001,
+      "adjacent_tip_pairs": 82001342,
+      "overlap_filter_survivors": 3224834
+    },
+    {
+      "args": [
+        188,
+        88,
+        8,
+        "local",
+        512,
+        1,
+        "--exclusive"
+      ],
+      "placement_cut_combinations": 512,
+      "left_halves": 480232,
+      "right_halves": 95732,
+      "adjacent_tip_pairs": 10940486,
+      "overlap_filter_survivors": 2411072
+    },
+    {
+      "args": [
+        184,
+        88,
+        8,
+        "local",
+        512,
+        1,
+        "--exclusive"
+      ],
+      "placement_cut_combinations": 512,
+      "left_halves": 480232,
+      "right_halves": 170440,
+      "adjacent_tip_pairs": 12201714,
+      "overlap_filter_survivors": 2300736
+    },
+    {
+      "args": [
+        192,
+        0,
+        1,
+        "local",
+        512,
+        1
+      ],
+      "placement_cut_combinations": 97280,
+      "left_halves": 478179836,
+      "right_halves": 478179836,
+      "adjacent_tip_pairs": 15094214884,
+      "overlap_filter_survivors": 36930,
+      "distinct_xor_translations": 512,
+      "cuts_per_translation": 190
+    }
+  ],
+  "small_cross_check": {
+    "replay": "check_small.py",
+    "cases": 324,
+    "positive": 85,
+    "negative": 239,
+    "method": "Independent Python brute-force all four ordered arcs and all-pairs validation on the eight-vertex test cycle."
+  }
+}

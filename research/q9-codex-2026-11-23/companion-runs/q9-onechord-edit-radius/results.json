@@ -1,0 +1,278 @@
+{
+  "rows": 340,
+  "distinct_vertex_sets": 302,
+  "distinct_oriented_walks_up_to_isometry_and_reversal": 340,
+  "input": "walks.txt",
+  "input_sha256": "f5c62b9b417c3fe83c677d6e350d22f8f5a596e84d0624694b269af97885b25d",
+  "verification": "Each input independently verified to have 193 distinct Q9 vertices, consecutive Hamming distance 1 and exactly one nonconsecutive adjacent pair.",
+  "cpp": [
+    {
+      "family": "global",
+      "source": "small.cpp",
+      "args": [
+        3,
+        0,
+        340,
+        192
+      ],
+      "unique_sets": 302,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 15815440,
+      "completed_addition_candidates": 1729290
+    },
+    {
+      "family": "seams",
+      "source": "seams.cpp",
+      "args": [
+        0,
+        0,
+        340,
+        192
+      ],
+      "unique_sets": 302,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 18198,
+      "completed_addition_candidates": 0
+    },
+    {
+      "family": "seams",
+      "source": "seams.cpp",
+      "args": [
+        1,
+        0,
+        340,
+        192
+      ],
+      "unique_sets": 302,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 1411846,
+      "completed_addition_candidates": 694
+    },
+    {
+      "family": "windows",
+      "source": "windows.cpp",
+      "args": [
+        3,
+        0,
+        340,
+        192,
+        6
+      ],
+      "unique_sets": 302,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 9325492,
+      "completed_addition_candidates": 9518
+    },
+    {
+      "family": "windows",
+      "source": "windows.cpp",
+      "args": [
+        4,
+        0,
+        340,
+        192,
+        6
+      ],
+      "unique_sets": 302,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 40345224,
+      "completed_addition_candidates": 38022
+    },
+    {
+      "family": "windows",
+      "source": "windows.cpp",
+      "args": [
+        3,
+        0,
+        340,
+        192,
+        7
+      ],
+      "unique_sets": 302,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 19854241,
+      "completed_addition_candidates": 3164
+    },
+    {
+      "family": "windows",
+      "source": "windows.cpp",
+      "args": [
+        3,
+        0,
+        340,
+        192,
+        8
+      ],
+      "unique_sets": 302,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 35090880,
+      "completed_addition_candidates": 318
+    },
+    {
+      "family": "global",
+      "source": "small.cpp",
+      "args": [
+        4,
+        0,
+        4,
+        192
+      ],
+      "unique_sets": 3,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 11944786,
+      "completed_addition_candidates": 1135944
+    },
+    {
+      "family": "global",
+      "source": "small.cpp",
+      "args": [
+        4,
+        0,
+        340,
+        192
+      ],
+      "unique_sets": 302,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 1035735000,
+      "completed_addition_candidates": 85700776
+    }
+  ],
+  "counters": "Search counters may revisit one deletion set across different seam decompositions. For a restricted construction the first encountered ordering of each vertex set is retained.",
+  "window_constraints": "Delete k arbitrary indices in the union of index-radius r neighborhoods of both ends and both chord incidences. Add k arbitrary points from the complement of the entire original set.",
+  "seam_constraints": "Delete six vertices in at most two disjoint consecutive intervals. At least one interval contains a chord incidence; mode 0 also anchors the other interval on the other incidence when two intervals are used. Mode 1 allows the second interval anywhere. Add arbitrary six exterior vertices.",
+  "unrestricted_k6": {
+    "Cadical195": {
+      "counts": {
+        "UNKNOWN": 340
+      },
+      "files": [
+        "six_0.jsonl",
+        "six_1.jsonl",
+        "six_2.jsonl",
+        "six_3.jsonl"
+      ]
+    },
+    "Minicard": {
+      "counts": {
+        "UNKNOWN": 340
+      },
+      "files": [
+        "six_native.jsonl"
+      ]
+    },
+    "Minicard_sample_deep": {
+      "indices": [
+        3,
+        86,
+        169,
+        252,
+        335
+      ],
+      "budget": 120000,
+      "counts": {
+        "UNKNOWN": 5
+      },
+      "file": "full_six_budget120k_sample.jsonl"
+    }
+  },
+  "small_controls": [
+    "control14_reference.json",
+    "control14_native.json",
+    "control14_cadical.json",
+    "q9_onechord_six_seams_control.json",
+    "q9_onechord_k_windows_control.json"
+  ],
+  "all_walk_order_runs": [
+    {
+      "source": "seams.cpp",
+      "args": [
+        1,
+        0,
+        340,
+        192
+      ],
+      "rows": 340,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 1554232,
+      "completed_addition_candidates": 910
+    },
+    {
+      "source": "windows.cpp",
+      "args": [
+        4,
+        0,
+        340,
+        192,
+        6
+      ],
+      "rows": 340,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 41287704,
+      "completed_addition_candidates": 38022
+    },
+    {
+      "source": "windows.cpp",
+      "args": [
+        3,
+        0,
+        340,
+        192,
+        7
+      ],
+      "rows": 340,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 20098771,
+      "completed_addition_candidates": 3164
+    },
+    {
+      "source": "windows.cpp",
+      "args": [
+        3,
+        0,
+        340,
+        192,
+        8
+      ],
+      "rows": 340,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 35335410,
+      "completed_addition_candidates": 318
+    },
+    {
+      "source": "windows.cpp",
+      "args": [
+        3,
+        0,
+        340,
+        192,
+        6,
+        "--unbounded-additions"
+      ],
+      "rows": 340,
+      "status": "NO_WITNESS",
+      "deletion_candidates": 9515682,
+      "completed_addition_candidates": 0
+    }
+  ],
+  "six_radius6_sample": {
+    "source": "windows.cpp",
+    "args": [
+      6,
+      0,
+      32,
+      192,
+      6
+    ],
+    "indices": "six_window6_indices.json",
+    "selection": "Python random.Random(20261120).sample(range(340),32)",
+    "status": "NO_WITNESS",
+    "deletion_candidates": 34973680,
+    "completed_addition_candidates": 8689
+  },
+  "source_hashes": {
+    "small.cpp": "c1d6e53cd790969f1b77163ae93707bc0cc9185f576337f411d304bb9f25add8",
+    "windows.cpp": "5643f0770ca10c7ef2835e90f56b557acbdea6913c8ab238bb79285c9009515e",
+    "seams.cpp": "d7cf19f03fa725f7adeb373fcd42fccd50fcdb91c50fc26f78e29c0c920bad8f",
+    "search.py": "61415fabb9cfd0f4778de08eec1816f90b82492ea54788d090cdd30481c9d11e"
+  }
+}
