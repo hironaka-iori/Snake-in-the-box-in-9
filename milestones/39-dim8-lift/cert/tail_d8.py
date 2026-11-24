@@ -300,6 +300,7 @@ def cmd_run(a):
     else:
         its = [x for x in tail_items(a) if int(hashlib.sha1(P.modname(x[2]).encode()).hexdigest(), 16) % a.workers in a.indices]
     its = [x for x in its if P.modname(x[2]) not in done]
+    if a.skip: its = [x for x in its if x[2].lower() not in {h.lower() for h in a.skip.split(',')}]   # parked cubes
     if a.reverse: its.reverse()   # a helper on a share whose owner still runs it: work from the other end; each skips what the other published
     print('tail worker %s (indices %s of %d): %d cubes to do, %d done' % (a.name, a.index, a.workers, len(its), len(done)), flush=True)
     P.BUDGET['cap'] = a.mem_gb; end = time.time() + a.hours * 3600
@@ -335,6 +336,7 @@ if __name__ == '__main__':
     r.add_argument('--whole-factor', type=float, default=1.6)
     r.add_argument('--chain', type=int, default=0)   # hints per chain piece (0 = off; 2000000 tested, SEGMENTED.md)
     r.add_argument('--chain-over', type=int, default=0)   # with --chain: also chain any proof with more hints than this (0 = off)
+    r.add_argument('--skip', default='')   # A,A,...: cubes to leave out (parked hard cubes, b229/PARKED.md)
     r.add_argument('--reverse', action='store_true')   # take the share's cubes in reverse order (helper beside the owner)
     r.add_argument('--chain-solve', type=float, default=1800)   # solve cap (s) of a whole-cube chain attempt (LRAT on disk: ~1 GB per 100 M raw hints)
     r.add_argument('--hard', action='store_true')   # also take the k > --max-k cubes (off: vertex splits do not converge on them)
