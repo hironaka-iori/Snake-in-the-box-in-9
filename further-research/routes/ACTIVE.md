@@ -1,6 +1,6 @@
 # Active route · One crossing between two eight-dimensional arms
 
-**Continue this route across successive rounds.** Seek a 192-edge snake in the ninth-dimensional cube by placing one induced path in each eight-dimensional face and joining their endpoints across one edge. Use fixed-parent searches and constructions that can change both arms. Record the distinguished crossing, endpoint orientations, case coverage and longest verified path.
+**Continue this route across successive rounds.** Seek a 192-edge snake in the ninth-dimensional cube by placing one induced path in each eight-dimensional face and joining their endpoints across one edge. Focus on rebuilding one whole opposite arm while its parent and crossing endpoint stay fixed. Record the distinguished crossing, endpoint orientations, case coverage and longest verified path.
 
 ## Why these three length splits suffice
 
@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Paused after Round 265. Keep the single-crossing construction as the active route. Among 25 archived 191-edge examples, retaining the crossing and the first 38 edges of each arm gives exact maximum 191, even when both tails are rebuilt. Among the 398 archived one-crossing examples at 190 or 191, all 4,423 allowed paired changes that keep the length at least 190 stay in the same set. An escape with the same local operation must pass through a shorter join. Another 96-edge parent has a checked 182-edge join. [Round 265 and the precise move](../../milestones/265-joint-arm-regrowth/README.md) · [182-edge path](../../milestones/265-joint-arm-regrowth/best-open-join.json)
+Round 266 is complete. The selected route holds one arm and its crossing endpoint fixed and rebuilds the opposite arm throughout its eight-dimensional face. For all 25 archived one-crossing 191-edge examples, retaining either whole arm gives maximum 191. The five short arms occur inside eleven 95-edge shapes and two 96-edge shapes, whose other placements supply further fixed parents. [Round 266](../../milestones/266-rebuilding-one-arm/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 265}
+\date{Research state after round 266}
 \begin{document}
 \maketitle
 
@@ -1589,6 +1589,28 @@ gave 182. The 96-edge arm stayed fixed throughout this construction.
 The maximum in the full nine-cube remains open.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/265-joint-arm-regrowth}{Round 265 paths and finite enumerations}.
 
+\section{Can one whole arm of a record snake be rebuilt?}
+The 25 archived examples that cross a coordinate once join an arm of
+94 edges to an arm of 96. Keeping the shorter arm fixed leaves the whole
+opposite eight-cube available, apart from vertices that would create
+a second intersection between the projected arms. A partner of 97 edges
+would give $94+1+97=192$.
+
+The five distinct shorter-arm shapes were searched at both endpoints.
+At the published end, each allows exactly five 96-edge partners and no
+97-edge partner. The 25 attaining joins are precisely the archived
+examples. At the other end of each shape, the join has at most 188 edges.
+Together with the earlier calculation holding the 96-edge arm fixed,
+this gives an exact maximum of 191 whenever either entire arm of one
+of the 25 examples is kept at its original crossing. A different
+one-crossing construction can still use a different pair of arms.
+
+An eight-dimensional path that keeps one of these shorter arms as an
+interval can grow to 95 or 96 edges in eleven or two different shapes,
+respectively, up to symmetry. None grows further. These shapes provide
+additional fixed arms for the construction search.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/266-rebuilding-one-arm}{Round 266 constructions and certificate replay}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1611,7 +1633,7 @@ addendum cover both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 265.
+in the companion manuscript and milestones through round 266.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

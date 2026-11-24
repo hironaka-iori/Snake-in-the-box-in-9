@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 265 handoff covers the 77-edge central segments of the known one-crossing 191-edge snakes, simultaneous changes to both arms, and a fixed-parent improvement to 182. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 266 handoff covers the exact 191-edge maximum when either arm of the 25 one-crossing examples is fixed. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

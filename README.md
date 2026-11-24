@@ -6,13 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 265
+## Latest result · Round 266
 
-Of the 131 archived snakes of length 191, 25 cross a coordinate once. Even when both free tails are rebuilt, 191 is the exact maximum if the central 77 edges and the same single crossing are retained. The nine central segments up to symmetry give 56 completions of length 190 and 25 of length 191, all already in the published archives. [Enumeration and paths](milestones/265-joint-arm-regrowth/README.md)
+Each of the 25 archived 191-edge snakes that cross a coordinate once has a 94-edge arm and a 96-edge arm. Hold either arm at its published crossing and rebuild the other without restriction. The maximum is exactly 191. Fixing one of the five shapes of the shorter arm gives exactly five attaining partners at the published endpoint. The opposite endpoint gives at most 188. [Evidence](milestones/266-rebuilding-one-arm/README.md)
 
-The 398 archived one-crossing examples of lengths 190 and 191 also form a closed set under the specified simultaneous changes of one vertex and the free tip of each arm, as long as the join stays at or above 190. On a different 96-edge parent, direct regrowth improved the saved join from 132 to 182. [Exchange closure and independent verification](milestones/265-joint-arm-regrowth/summary.json) · [182-edge path](milestones/265-joint-arm-regrowth/best-open-join.json)
-
-Paused after Round 265. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Round 266 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

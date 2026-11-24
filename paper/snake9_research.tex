@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 265, 24 November 2026}
+\date{Research state after round 266, 24 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11063,6 +11063,45 @@ of all 16,653 vertex pairs verified the resulting path. Its ordered
 vertices, the complete lists for the 77-edge segments, and both exchange
 enumerations accompany the
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/265-joint-arm-regrowth}{Round 265 construction record}.
+
+\section{Rebuilding the long arm of a record example}
+Each of the 25 archived one-crossing snakes of length 191 has a 94-edge
+arm and a 96-edge arm. The earlier extremal census fixed the longer arm.
+Here the shorter arm and its crossing endpoint are held fixed. The entire
+opposite face is available for constructing the other arm.
+
+\paragraph{Finite enumeration.}
+For each of the five distinct 94-edge shapes, a 97-edge partner is
+impossible at either endpoint. At the published crossing endpoint, exactly
+five labelled partners have length 96. Their 25 joins are the 25 archived
+examples. At the other endpoint there is no 94-edge partner, so its maximum
+join is at most $94+1+93=188$. In particular, changing either whole arm of
+one of these 25 snakes while keeping the other at its published crossing
+has exact maximum 191.
+
+To see the coverage, translate the fixed endpoint to zero. Select $n+1$
+vertices in the opposite eight-cube outside the projected nonzero parent
+sites. A rooted path of $n$ edges has $\lfloor n/2\rfloor+1$ even vertices
+and $\lceil n/2\rceil$ odd vertices. Require zero and one vertex of
+parity $n\bmod 2$ other than zero to have induced degree one.
+All other selected vertices must have induced degree two. The component
+of zero is then an induced path. Every further component is a cycle
+and can be excluded by a clause forbidding its complete vertex set.
+To count partners of length 96, forbid each of the known attaining
+vertex sets individually at its root. An induced path has a unique
+order once its initial endpoint is fixed. Replayed contradiction
+certificates close all ten roots. Each positive construction was checked
+against the adjacency relation on every pair of its vertices.
+
+There are exactly eleven 95-edge and two 96-edge eight-dimensional shapes
+containing any of these five 94-edge shapes as a consecutive interval.
+There are none of length 97 or 98. Extend each reference at either
+end by each unoccupied neighbour touching only the old tip and identify
+paths up to cube isometry and reversal. Conversely, any longer path
+containing the interval can be shortened back to that interval at its
+two ends. An independent enumeration first grew one end and then the
+other, obtaining the same shapes.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/266-rebuilding-one-arm}{Round 266 rooted census, paths and certificates}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 265. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Round 266 is complete. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| Can a 191-edge example reach 192 by replacing its entire long arm? | [266 · Exact partners when either arm of a 191-edge example is fixed](266-rebuilding-one-arm/README.md) |
 | Can changing both arms extend a known 191-edge construction? | [265 · Exact 77-edge central segments, 398 pairs closed under local changes, and a different parent reaching 182](265-joint-arm-regrowth/README.md) |
 | How can a parity class reconstruct a snake, and can any arm in the distant one-exchange component reach 192? | [264 · Parity constructions and all 82 endpoints](264-distant-component/README.md) |
 | Can a distant-reference arm from the two- or three-exchange shell join to 192 edges? | [263 · Rooted partners and family certificates](263-distant-family-certificates/README.md) · [262 · Common forbidden sites](262-common-forbidden-sites/README.md) |
