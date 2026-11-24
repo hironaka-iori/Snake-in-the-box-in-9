@@ -125,7 +125,10 @@ def leaf_job(a, h, k, cd, p, held):
         g = json.loads(r.stdout.strip().splitlines()[-1])
         info = dict(hints=g['replay']['hints'], vars=g['core']['vars'], solve_s=g['solve_s'], gen_s=g['gen_s'], portfolio=g.get('portfolio'))
         info['pred_gb'] = round(P.pred_gb(info['hints'], info['vars']), 1)
-        if info['pred_gb'] > a.mem_gb and a.chain and not chain:   # same proof again (deterministic solve), as a chain
+        # --chain-over H: also a proof that fits but has more than H hints is built as a chain, so that no single build
+        # step outlives a container (farm containers restarted every ~25-30 min on 24 Nov; finished pieces are reused)
+        big = info['pred_gb'] > a.mem_gb or (a.chain_over and info['hints'] > a.chain_over)
+        if big and a.chain and not chain:   # same proof again (deterministic solve), as a chain
             shutil.rmtree(d, ignore_errors=True); os.makedirs(d); env.pop('MEM_GB', None)
             r = gen(max(lim, a.chain_solve), dict(CHAIN=str(a.chain))); chain = True
             if r.returncode == 10: return 'SAT', {}
@@ -326,6 +329,7 @@ if __name__ == '__main__':
     r.add_argument('--max-k', type=int, default=30); r.add_argument('--hard-depth', type=int, default=3)
     r.add_argument('--whole-factor', type=float, default=1.6)
     r.add_argument('--chain', type=int, default=0)   # hints per chain piece (0 = off; 2000000 tested, SEGMENTED.md)
+    r.add_argument('--chain-over', type=int, default=0)   # with --chain: also chain any proof with more hints than this (0 = off)
     r.add_argument('--chain-solve', type=float, default=1800)   # solve cap (s) of a whole-cube chain attempt (LRAT on disk: ~1 GB per 100 M raw hints)
     r.add_argument('--hard', action='store_true')   # also take the k > --max-k cubes (off: vertex splits do not converge on them)
     r.add_argument('--solve-opt', default='--unsat')   # first-solve CaDiCaL option ('default' = none); see make_cert.py
