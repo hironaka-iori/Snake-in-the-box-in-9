@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 263}
+\date{Research state after round 264}
 \begin{document}
 \maketitle
 
@@ -1527,6 +1527,38 @@ remain possible.
 The two- and three-exchange shells of this second reference are now fully excluded. Its zero- and one-exchange shells were already excluded. A 96-edge segment in a 192-edge one-crossing snake must therefore omit at least four of its 48 smaller-class sites, in every placement of this reference. The earlier family of twelve has the stronger requirement of five omissions.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/263-distant-family-certificates}{Exact scope and checked constructions}.
 
+\subsection{Keeping every other vertex}
+A 192-edge snake has 96 vertices of one parity and 97 of the other.
+Write the 96 in their order along the path. Between each consecutive
+pair there must be a cube vertex adjacent to those two and to no other
+one of the 96. Each end needs a vertex adjacent only to the first
+or last of the 96. Once the order is fixed these choices are
+independent. Their prescribed neighbours differ, and vertices of
+the same parity cannot create a chord.
+
+For example, take \(000,110\) as the ordered smaller class in
+\(Q_3\). Either \(010\) or \(100\) can go between them. The two
+outer vertices are \(001\) and \(111\), giving exactly two paths with
+this ordering. In \(Q_9\), the same rule checks a proposed ordering of
+96 vertices. The difficulty is finding a set and ordering for which
+every position has an available vertex.
+
+Applying this rule to the opposite arm of a one-crossing construction
+allowed every odd vertex of a donor segment to change. Six of twelve
+endpoints improved in the fixed collection of 1,008 donor words. At one
+endpoint the longest partner rose from 28 to 35 edges. A full 95-edge
+partner would have to change at least three of the donor's 48 even
+vertices, even with complete freedom to reorder them.
+
+A separate unrestricted calculation excluded a 95-edge partner at
+all 82 endpoints of the 41 shapes reachable from the distant reference
+by repeated single-site exchanges. None of these arms extends in its
+own face. A 192-edge one-crossing snake must therefore omit at least
+two of the 48 smaller-parity sites of every one of these shapes, under
+every placement. The earlier restriction for the starting shape
+requires four omissions.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/264-distant-component}{Ordered parity constructions and the 41-shape component}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1549,7 +1581,7 @@ addendum cover both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 263.
+in the companion manuscript and milestones through round 264.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

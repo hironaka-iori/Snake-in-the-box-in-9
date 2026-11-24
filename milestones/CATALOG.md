@@ -295,3 +295,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 261 | [Improved partner constructions and limits on short interval replacements](261-rerouted-partners/README.md) |
 | 262 | [A shared 92-site obstruction to a 95-edge partner](262-common-forbidden-sites/README.md) |
 | 263 | [Unrestricted partners in the distant two- and three-exchange shells](263-distant-family-certificates/README.md) |
+| 264 | [Restoring the other parity class and excluding all 41 distant-component arms](264-distant-component/README.md) |

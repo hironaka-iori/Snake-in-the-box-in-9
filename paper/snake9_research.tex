@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 263, 24 November 2026}
+\date{Research state after round 264, 24 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -98,7 +98,9 @@ smaller-class sites reach exactly twelve shapes with one-crossing maximum
 191. Any 96-edge window in a one-crossing snake of at least 192 edges
 must omit at least five of the 48 smaller-class sites of each of these
 twelve references under every cube isometry. For the separate distant
-reference, at least four omissions are necessary.
+reference, at least four omissions are necessary. Every one of the 41 shapes reached
+from that reference by repeated single-site exchanges requires at least
+two omissions.
 
 Written proofs, Lean-checked implications and independently audited
 numerical evidence are distinguished throughout. No construction above
@@ -10935,6 +10937,66 @@ numerical exclusions were checked separately against the Boolean
 formulas, including complete first-step partitions where required.
 The exclusions now cover 42 of the 42 endpoints and both endpoints of 21 of the 21 previously unresolved shapes. Together with the eight earlier exclusions this covers all 14 two-exchange and all 15 three-exchange shapes. Only one of the 29 can extend in its own face, and its unique 97-edge extension already excludes a 192-edge join at either end. Consequently, every 96-edge window of a one-crossing snake of at least 192 edges shares at most 44 of its 48 smaller-class sites with any isometric copy of the distant reference. An overlap of 45 or more would put the window at exchange distance at most three. The zero- and one-exchange cases were excluded earlier.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/263-distant-family-certificates}{Family certificates, root coverage and remaining cases}.
+
+\subsection{Counting the ways to restore the other parity class}
+A 192-edge path has 193 vertices. Its smaller parity class has 96
+vertices. Fix their order \(x_1,\ldots,x_{96}\) and write
+\(S=\{x_1,\ldots,x_{96}\}\). For each \(i<96\), let \(c_i\) count
+opposite-parity vertices whose neighbours in \(S\) are exactly
+\(x_i,x_{i+1}\). Let \(t_1\) and \(t_{96}\) count opposite-parity
+vertices with sole neighbour \(x_1\) and \(x_{96}\), respectively.
+The exact number of oriented expansions of this ordered class is
+\[
+             t_1t_{96}\prod_{i=1}^{95}c_i .
+\]
+Each intermediate vertex must have the indicated two neighbours, and
+the two endpoints must each have only the indicated neighbour.
+Conversely, the prescribed neighbour sets are distinct, so choices
+for different positions cannot use the same vertex. Bipartiteness
+excludes every remaining possible chord. In particular, existence for
+a fixed ordering requires only that each factor be positive. If the
+order is unknown, the pairs with a positive connector count define a
+graph on \(S\); a spanning path in this graph must start and end at
+vertices admitting endpoint attachments. Selecting \(S\) and finding
+such a spanning path remain the unrestricted search problems.
+
+For a rooted 95-edge partner in \(Q_8\), the crossing is fixed at
+\(x_1=0\), the side containing it has 48 sites, and only the last
+site needs an endpoint attachment. Delete the projected parent sites
+other than the crossing before counting connectors. This gives the
+same product with 47 internal factors and one endpoint factor,
+provided the even-order sites themselves are available. The same
+argument applies to each shorter rooted prefix, omitting the last
+attachment when the partner length is even.
+At the twelve ends of the last six unresolved parent shapes, we used
+1,008 rooted donor words of length 95 and all \(8!\) permutations of
+the coordinates. Partners could keep a prefix of a donor's ordered even
+sites while changing all intermediate odd sites and, for odd length,
+the final odd endpoint. Freeing the odd sites improved the maximum
+at six endpoints. The largest gain was from 28 to 35 partner edges.
+For a full 95-edge partner, at least three of the donor's 48 even sites
+must change, even if they can be reordered and the odd sites chosen
+freely. The minimum was three at five endpoints, four at three and
+five at four. Enlarging the source to 5,570 distinct rooted words from
+previous constructions gave a best join of 175 edges. In this larger
+catalogue freeing the odd sites gave the same maximum length as keeping
+the donor at each of the twelve roots.
+
+The repeated one-site exchange from the distant reference reaches 41
+shapes. At their 82 endpoints, 72 exclusions followed from earlier
+certificates by checking containment after a cube isometry. The other
+ten had new exclusions for an unrestricted 95-edge partner. Seven used
+a contradiction at the root, and three used all seven possible first
+edges. All 28 contradiction certificates were replayed. Directly
+examining all \(41\cdot2\cdot8\) one-edge extensions found none. Thus
+a 96-edge window in a one-crossing snake of length at least 192 cannot
+be any of the 41 shapes, even inside a longer arm. Sharing 47 of 48
+smaller-parity sites with any placement of any member would put the
+window in the same closed component. Its overlap is consequently at
+most 46 with each member. For the starting reference the earlier
+bound of 44 is stronger. The component admits a checked 181-edge join
+and all its joins have at most 191 edges. Its exact maximum is open.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/264-distant-component}{Round 264 constructions, counts and endpoint certificates}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

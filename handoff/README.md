@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 263 handoff records the one-crossing results for the distant reference, the new constructions and the remaining cases. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 264 handoff covers reconstruction from one parity class and the completed 41-shape family. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|
