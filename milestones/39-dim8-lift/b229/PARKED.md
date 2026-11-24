@@ -26,4 +26,5 @@ CNF sha256: `summary8.txt` and `cubes/<hex>/hashes.txt`.
 Diverging (todo grew faster than leaves were built): 1669966996966969, 1be4e41be41b1be4, 19e3e61ce61c19e3,
 1669699696699696, 06b9b946b94646b9, 19e6e619e61919e6, 07787887b44b4bb4, 035e7ca17ca1835e, 1669969696966969.
 Converging when parked (resume first): 1669969699666996, 1669969696996966, 16698778a55a7887,
-037c7c837c83837c, 1669699687787887. Still running to completion: 06b5b94ab94a46b5 (2 leaves left).
+037c7c837c83837c, 1669699687787887, 06b5b94ab94a46b5 (split again at 2 leaves left).
+No hard cube is running.
