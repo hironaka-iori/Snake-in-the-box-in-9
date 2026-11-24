@@ -194,7 +194,8 @@ def tail_cube(a, k, h, stop, pg=1e9):
         fut = {}
         while True:
             for s_, v_ in list(st.items()):
-                if v_ == 'todo' and s_ not in fut.values() and not stop():
+                # at most --procs leaves in flight, so STOP (checked here) takes effect when a running leaf ends
+                if v_ == 'todo' and s_ not in fut.values() and len(fut) < a.procs and not stop():
                     fut[ex.submit(run_leaf, a, h, k, cd, path(s_))] = s_
             if not fut: break
             dn, _ = wait(list(fut), return_when=FIRST_COMPLETED)
