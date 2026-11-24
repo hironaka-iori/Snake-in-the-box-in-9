@@ -1,6 +1,6 @@
 # Active route · One crossing between two eight-dimensional arms
 
-**Continue this route across successive rounds.** Seek a 192-edge snake in the ninth-dimensional cube by placing one induced path in each eight-dimensional face and joining their endpoints across one edge. Fix a long parent and search over the entire other face. Keep the first arm, endpoint orientation, case coverage and strongest checked result identifiable at every pause.
+**Continue this route across successive rounds.** Seek a 192-edge snake in the ninth-dimensional cube by placing one induced path in each eight-dimensional face and joining their endpoints across one edge. Use fixed-parent searches and constructions that can change both arms. Record the distinguished crossing, endpoint orientations, case coverage and longest verified path.
 
 ## Why these three length splits suffice
 
@@ -8,7 +8,9 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Paused after Round 264. All 41 shapes in the distant one-site exchange component exclude a 192-edge join at both ends, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. For every one of these shapes a prospective 96-edge window shares at most 46 smaller-parity sites, with the stronger ceiling of 44 for the starting reference. The separate twelve-shape family has maximum 191 and ceiling 43. The one-crossing construction route continues outside these families. [Completed component and parity reconstruction](../../milestones/264-distant-component/README.md) · [Distant starting reference](../../milestones/263-distant-family-certificates/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
+Paused after Round 265. Keep the single-crossing construction as the active route. Among 25 archived 191-edge examples, retaining the crossing and the first 38 edges of each arm gives exact maximum 191, even when both tails are rebuilt. Among the 398 archived one-crossing examples at 190 or 191, all 4,423 allowed paired changes that keep the length at least 190 stay in the same set. An escape with the same local operation must pass through a shorter join. Another 96-edge parent has a checked 182-edge join. [Round 265 and the precise move](../../milestones/265-joint-arm-regrowth/README.md) · [182-edge path](../../milestones/265-joint-arm-regrowth/best-open-join.json)
+
+Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 
 At Round 255 the exact six-shape maximum was 191. A second component contained 41 shapes, including 23 new shapes. Twelve then excluded a 192-edge join at either end. The other 29 were open with an unrestricted partner. The Round 255 inventory contains 264 shapes, of which 171 remained open. [Round 255](../../milestones/255-parity-exchange-arms/README.md) · [Standing goal](RESEARCH_GOAL.md)
 

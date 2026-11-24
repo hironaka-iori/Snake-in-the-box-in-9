@@ -6,13 +6,13 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 264
+## Latest result · Round 265
 
-All 41 eight-dimensional arm shapes reachable from the distant reference by repeated exchanges of one smaller-parity site exclude a 192-edge one-crossing join. This covers all 82 endpoints and every 96-edge segment inside a longer arm. A join of length 181 is known in the family. Its maximum is at most 191. [Proof, witness and endpoint coverage](milestones/264-distant-component/README.md)
+Of the 131 archived snakes of length 191, 25 cross a coordinate once. Even when both free tails are rebuilt, 191 is the exact maximum if the central 77 edges and the same single crossing are retained. The nine central segments up to symmetry give 56 completions of length 190 and 25 of length 191, all already in the published archives. [Enumeration and paths](milestones/265-joint-arm-regrowth/README.md)
 
-A 192-edge snake can also be specified by choosing and ordering the 96 vertices of its smaller parity class. Each consecutive pair needs a connector with exactly those two neighbours in the class, and each end needs a neighbour attached only there. The paper applies this description to reconstruct and count opposite arms. [Parity construction and counts](milestones/264-distant-component/README.md#turning-the-192-edge-question-into-a-graph-on-one-parity-class) · [Earlier distant-reference bound](milestones/263-distant-family-certificates/README.md)
+The 398 archived one-crossing examples of lengths 190 and 191 also form a closed set under the specified simultaneous changes of one vertex and the free tip of each arm, as long as the join stays at or above 190. On a different 96-edge parent, direct regrowth improved the saved join from 132 to 182. [Exchange closure and independent verification](milestones/265-joint-arm-regrowth/summary.json) · [182-edge path](milestones/265-joint-arm-regrowth/best-open-join.json)
 
-Paused after Round 264. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Paused after Round 265. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

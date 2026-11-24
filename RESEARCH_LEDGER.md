@@ -6,4 +6,4 @@ The [milestone index](milestones/CATALOG.md) lists every published numbered fold
 |---|---|
 | [Original research ledger](docs/history/research-ledger.md) | The accumulated proof, search and continuation notes from earlier rounds. |
 | [Project checkpoint reports through Round 240](docs/history/project-checkpoints.md) | The original front-page sequence of project updates. |
-| [Handoff after Round 264](handoff/CURRENT_STATUS.md) | Parity reconstruction, the 41 completed arm shapes and the remaining one-crossing construction route. [Active route](further-research/routes/ACTIVE.md) |
+| [Handoff after Round 265](handoff/CURRENT_STATUS.md) | Regrowth about 77 central edges, closure of 398 one-crossing examples, and a verified 182-edge join at another parent. [Active route](further-research/routes/ACTIVE.md) |

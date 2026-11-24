@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 264, 24 November 2026}
+\date{Research state after round 265, 24 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -10997,6 +10997,72 @@ most 46 with each member. For the starting reference the earlier
 bound of 44 is stronger. The component admits a checked 181-edge join
 and all its joins have at most 191 edges. Its exact maximum is open.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/264-distant-component}{Round 264 constructions, counts and endpoint certificates}.
+
+\section{Regrowing both arms about a single crossing}
+Consider a path in $Q_9$ that crosses a chosen coordinate exactly once.
+Translate its crossing endpoints to zero in their respective copies of $Q_8$.
+The resulting ordered arms $A,B$ start at zero. They join to an induced
+path precisely when each is induced and their projected vertex sets meet
+only at zero. All path lengths below count edges.
+
+Among 131 archived shapes of length 191, exactly 25 admit such a crossing.
+Each has arm lengths 96 and 94. Retain the first 38 edges of each arm,
+measured outwards from the crossing. Together with the crossing edge
+these form a 77-edge segment. Simultaneous permutations of the eight
+face coordinates and interchange of the two faces give nine distinct
+pairs of retained prefixes.
+
+\paragraph{Finite enumeration.}
+For each of these nine pairs, the maximum one-crossing completion has
+length 191. Across one representative of each pair there are exactly
+56 completions of length 190 and 25 of length 191. All 81 represent
+distinct shapes under cube isometry and reversal, and every shape occurs
+in the corresponding source archive.
+
+To enumerate the completions of length at least 190, first extend one
+prefix in its face, avoiding the other prefix except at zero. Its final
+length $a$ must satisfy $91\leq a\leq98$, since the other arm has at
+most 98 edges. At each eligible stopping point extend the second prefix
+while avoiding the entire first arm except at zero. Retain its completions
+of length at least $189-a$. At each step a new site must be unused and its
+only occupied neighbour in its own arm must be the preceding tip.
+These conditions generate every admissible ordered extension exactly once
+for the fixed face order. The remaining suffix lies in the connected
+available component of its tip. Its parity populations must accommodate
+an alternating sequence, and any degree-one vertex there other than
+the current tip can only be the final vertex. These necessary conditions
+justify the search cuts. A separate enumeration matched disjoint pairs
+of tail masks and independently excluded length 192 for six of the nine
+77-edge segments. At 36 retained edges per side, the enumeration down to
+length 190 finished for six of the nine pairs.
+
+\paragraph{Exchanges at arbitrary positions in both arms.}
+The two archives contain 1,042 shapes of length 190 and 131 of length 191.
+Distinguishing a coordinate crossed exactly once gives 373 rooted pairs
+at length 190 and 25 at length 191, up to coordinate permutation and
+face interchange. Keep the crossing fixed. In each arm independently,
+replace at most one occupied vertex with an unused vertex, preserving an
+induced path rooted at zero. Then append, delete or keep the free tip.
+Require the resulting pair to be a valid join of length at least 190.
+An interior replacement may reverse the suffix when the new vertex
+reconnects the prefix to the old free tip.
+
+The 398 pairs are closed under repetitions of this operation.
+The direct enumeration gives 4,423 ordered transitions, of which 2,230
+change both arms. A separate enumeration deleted each nonroot vertex,
+inserted candidate vertices adjacent to the remaining path ends,
+and reconstructed the order by following the induced graph from zero.
+It recovered the same transitions. Thus any sequence of the specified
+moves from these examples that attains 192 must first pass below 190.
+This conclusion assumes the same distinguished crossing throughout.
+
+A separate constructive search screened 284 endpoints of 96-edge parents.
+At one endpoint the archived join had length 132. Placing a donor raised
+it to 172 and regrowing the partner gave $96+1+85=182$. Direct inspection
+of all 16,653 vertex pairs verified the resulting path. Its ordered
+vertices, the complete lists for the 77-edge segments, and both exchange
+enumerations accompany the
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/265-joint-arm-regrowth}{Round 265 construction record}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

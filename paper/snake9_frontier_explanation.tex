@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 264}
+\date{Research state after round 265}
 \begin{document}
 \maketitle
 
@@ -1559,6 +1559,36 @@ every placement. The earlier restriction for the starting shape
 requires four omissions.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/264-distant-component}{Ordered parity constructions and the 41-shape component}.
 
+\section{What can change near a 191-edge construction?}
+Of the 131 archived nine-dimensional snakes of length 191, exactly 25
+cross a coordinate just once. Each splits at that crossing into arms
+of lengths 96 and 94. Keep the crossing and the first 38 edges on each
+side of it. The resulting central segment has 77 edges. Both free tails
+can now be rebuilt in any way that preserves a single crossing of this
+coordinate. How long can the result be?
+
+The maximum is 191 for every one of the 25 examples. The retained
+segments have nine distinct forms up to symmetry. Extending the first
+arm in every possible way and then extending the second around it gives
+exactly 56 paths of length 190 and 25 of length 191 across the nine
+representatives. The published archives contain all 81 shapes.
+
+There is also a restriction when the middle is free to change. Across
+the 190- and 191-edge archives there are 398 ways, up to symmetry, to
+select a snake and a coordinate it crosses once. In each arm, replace
+at most one vertex while keeping a rooted induced path, then append,
+delete or keep its free tip. Both arms may change in the same move.
+Exactly 4,423 ordered moves keep the join valid and its length at least
+190. Every one returns to the same collection. To reach 192 from these
+examples by these moves with the same crossing, some intermediate join
+must therefore have at most 189 edges.
+
+A different starting arm gave a constructive gain. Its saved join had
+length 132. A new placement gave 172, and rebuilding the opposite arm
+gave 182. The 96-edge arm stayed fixed throughout this construction.
+The maximum in the full nine-cube remains open.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/265-joint-arm-regrowth}{Round 265 paths and finite enumerations}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1581,7 +1611,7 @@ addendum cover both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 264.
+in the companion manuscript and milestones through round 265.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
