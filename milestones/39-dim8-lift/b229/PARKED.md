@@ -26,7 +26,8 @@ CNF sha256: `summary8.txt` and `cubes/<hex>/hashes.txt`.
 Diverging (todo grew faster than leaves were built): 1669966996966969, 1be4e41be41b1be4, 19e3e61ce61c19e3,
 1669699696699696, 06b9b946b94646b9, 19e6e619e61919e6, 07787887b44b4bb4, 035e7ca17ca1835e, 1669969696966969,
 0669699696696996 (k = 30, t8, parked 24 Nov 17:55 UTC: depth 7, no leaf solved in 6 h),
-0778788678878778 (k = 30, t32, parked 24 Nov 21:25 UTC: depth 6, 60 todo, none done in 6.5 h).
+0778788678878778 (k = 30, t32, parked 24 Nov 21:25 UTC: depth 6, 60 todo, none done in 6.5 h),
+16696996833c3cc3 (k = 30, T13/t13r, parked 24 Nov 23:27 UTC: depth 7, 63 todo, none done in 3.7 h).
 Failed at --max-depth 12: 06b1b14eb14e4eb1 (k = 30, T0/w15, 11 leaves done, one leaf still too big at depth 12).
 A share is relaunched past a parked cube with `tail_d8.py run ... --skip A,A,...` (9ef29b22d).
 Converging when parked (resume first): 1669969699666996, 1669969696996966, 16698778a55a7887,
