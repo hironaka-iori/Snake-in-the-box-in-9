@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 266, 24 November 2026}
+\date{Research state after round 267, 24 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11102,6 +11102,49 @@ containing the interval can be shortened back to that interval at its
 two ends. An independent enumeration first grew one end and then the
 other, obtaining the same shapes.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/266-rebuilding-one-arm}{Round 266 rooted census, paths and certificates}.
+
+\section{A 94-edge interval inside a fixed arm}
+Let $\mathcal S$ be the five shapes of the 94-edge arms in the archived
+one-crossing 191-edge examples. Among one-crossing snakes for which either
+arm contains a member of $\mathcal S$ as a consecutive interval, the
+maximum length is 191. The interval may occur at either tip or strictly
+inside its arm. Isometric copies and both orientations are included.
+
+Indeed, the preceding two-ended enumeration gives exactly five possible
+whole arms of length 94, eleven of length 95 and two of length 96.
+For every fixed whole arm, a long enough opposite arm can be shortened at
+its free end until their join has exactly 192 edges. The length-94 cases
+were excluded in the preceding section. The two 96-edge shapes belong
+to the earlier catalogue excluded by the 68-edge interval census.
+For the 95-edge parents, eleven of the 22 rooted cases retain a 94-edge
+reference starting at the crossing. Its exact 96-edge partner census
+excludes every continuation after the extra parent site is forbidden.
+The other eleven cases were decided by exact searches of the opposite
+eight-cube. The 25 original examples supply attainment.
+
+The construction search also used 95-edge parents from archived 190-edge
+snakes. At 63 rooted parents there are 329 distinct initial labelled
+partners of length 94. Fix the parent. In its opposite arm replace at
+most one occupied vertex, preserving an induced path rooted at the
+crossing, then append, remove or retain the free tip. At each completed
+move require the resulting partner to avoid the parent except at zero.
+Allow the partner to shorten to 88 edges. The reachable sets comprise
+102,669 labelled parent--partner pairs. Exactly 329 pairs have a
+94-edge partner, all present among the starts, and none has a longer one.
+Reaching 192 by those moves from these examples would require an
+intermediate partner of at most 87 edges, giving a join of at most 183.
+
+A separate placement search generated candidate opposite arms before
+imposing a parent. From 418 eight-dimensional shapes, allowing the same
+operation at either end while keeping at least 95 edges gives a closed
+collection of 2,760 shapes. It contains 2,318 of length 95, 434 of length
+96, seven of length 97 and one of length 98. Each possible segment long
+enough for the target was considered in both directions under every
+coordinate permutation, at 148 fixed endpoints. The largest join in this
+placement search has 191 edges. These finite enumerations leave the
+unrestricted nine-dimensional maximum open.
+For the 62 shapes of 95-edge arms drawn from 329 archived 190-edge snakes, all 124 choices of crossing endpoint also exclude length 192 with an unrestricted opposite arm. Here the entire 95-edge parent is fixed.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/267-fixed-arm-extensions}{Round 267 witness, fixed-arm coverage and independent enumerations}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

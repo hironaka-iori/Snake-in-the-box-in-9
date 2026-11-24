@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 266}
+\date{Research state after round 267}
 \begin{document}
 \maketitle
 
@@ -1611,6 +1611,30 @@ respectively, up to symmetry. None grows further. These shapes provide
 additional fixed arms for the construction search.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/266-rebuilding-one-arm}{Round 266 constructions and certificate replay}.
 
+\section{How much of a record arm can a longer snake keep?}
+Take any of the five 94-edge arms from the known one-crossing 191-edge
+examples. Let it occur anywhere inside a longer eight-dimensional arm,
+choose either end of that arm for the crossing, and rebuild the entire
+opposite arm. The maximum across all these choices is still 191.
+Consequently, a one-crossing construction of 192 must avoid all five
+94-edge intervals in both arms.
+
+There are only eleven possible 95-edge shapes and two 96-edge shapes
+containing one of the five intervals. Testing the two crossing endpoints
+of every such shape closes all 26 cases at 192. The shorter 94-edge
+parents were resolved in the previous section. A known 191-edge example
+attains the family maximum.
+
+A separate construction tried temporarily shortening the opposite arm.
+It started with 329 joins of length 190, each with a fixed 95-edge
+parent and a 94-edge partner. Each move could replace one site of the
+partner and change its free tip. Even when partners of only 88 edges
+were allowed, all 102,669 reachable pairs had at most 190 joined edges.
+With this move, an improvement requires either a shorter intermediate
+partner or a different starting pair.
+For the 62 shapes of 95-edge arms drawn from 329 archived 190-edge snakes, all 124 choices of crossing endpoint also exclude length 192 with an unrestricted opposite arm. Here the entire 95-edge parent is fixed.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/267-fixed-arm-extensions}{Round 267 constructions and exact coverage}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1633,7 +1657,7 @@ addendum cover both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 266.
+in the companion manuscript and milestones through round 267.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

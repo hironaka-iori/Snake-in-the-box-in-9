@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 266 handoff covers the exact 191-edge maximum when either arm of the 25 one-crossing examples is fixed. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 267 handoff covers the five 94-edge intervals excluded from every one-crossing construction of 192 or more edges. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|
