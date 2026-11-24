@@ -78,3 +78,7 @@ modules exist. Nothing about references or boundary data is trusted: wrong data 
   Result: both were killed by a container restart after 7 h 47 m without an answer, so each needs more than
   28,045 s with `cadical --unsat -q` on one core. Farm containers restart about every 8 h and CaDiCaL cannot
   checkpoint, so such solves are not feasible on the farm; they need a machine that stays up.
+* Restarts (24 Nov): farm containers restarted in waves (00:00-01:20, ~05:30). With `tail_d8 --chain-over 3000000`
+  every proof above 3 M hints is a chain of ~20-min pieces, reused after a restart: cube 06B5B94AB94A46B4
+  (17 pieces, 33.2 M hints) was interrupted at piece P7 and finished OK after relaunch. Largest chain
+  certificates so far: 33.5 M hints / 17 pieces / 7.7 GB peak (0669B496B4964B69).
