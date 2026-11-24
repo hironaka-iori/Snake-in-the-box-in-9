@@ -105,6 +105,9 @@ def leaf_job(a, h, k, cd, p, held):
     olean = os.path.join(d, 'build', 'Cube' + m + '.olean')
     if os.path.exists(olean) and os.path.exists(gj): return 'done', json.load(open(gj))
     P.reserve(held[0], P.GEN_GB); held[0] = P.GEN_GB
+    if a.chain and a.chain_over and os.path.exists(gj):   # generated before --chain-over: regenerate as a chain
+        g0 = json.load(open(gj))
+        if not g0.get('chain') and g0.get('hints', 0) > a.chain_over: os.remove(gj)
     if not (os.path.exists(gj) and os.path.exists(os.path.join(d, 'gen', m + '.modules'))):
         shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
         lim = max(300.0, (a.mem_gb - 3.1) / 0.55 * 1e6 / 28000)
