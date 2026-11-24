@@ -75,3 +75,6 @@ modules exist. Nothing about references or boundary data is trusted: wrong data 
   1.46 B / 0.49 B raw hints and 14.4 / 5.8 GB of LRAT text. Uncapped solves without proof output of
   1669966996966996 and 1669699696699669 (k = 31) started 23 Nov 16:08 UTC on t9 (24 h cap) to get the real
   totals. These totals decide whether an LRAT run (disk, `pilot.py` memory at ~4 B per raw hint) is feasible.
+  Result: both were killed by a container restart after 7 h 47 m without an answer, so each needs more than
+  28,045 s with `cadical --unsat -q` on one core. Farm containers restart about every 8 h and CaDiCaL cannot
+  checkpoint, so such solves are not feasible on the farm; they need a machine that stays up.
