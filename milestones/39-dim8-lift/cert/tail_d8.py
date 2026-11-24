@@ -274,8 +274,11 @@ def tail_cube(a, k, h, stop, pg=1e9):
 
 def ensure_stack(a):
     """the stack must have the split-route Split.lean (unsat_of_leaves, ea5ecf379); stacks built earlier do not"""
-    sp = os.path.join(a.stack, 'Split.lean')
-    if os.path.exists(sp) and 'unsat_of_leaves' not in open(sp).read():
+    sp = os.path.join(a.stack, 'Split.lean'); so = os.path.join(a.stack, 'build', 'Split.olean')
+    # also a Split.olean built from the old source: `prod_d8.py setup` copies the new Split.lean but keeps an existing
+    # .olean (t27r, 24 Nov: BUILD_FAILED, unknown identifier unsat_of_leaves). No stack module imports Split.
+    stale = os.path.exists(so) and b'unsat_of_leaves' not in open(so, 'rb').read()
+    if stale or (os.path.exists(sp) and 'unsat_of_leaves' not in open(sp).read()):
         for f in os.listdir(os.path.join(a.stack, 'build')):
             if f.split('.')[0] == 'Split': os.remove(os.path.join(a.stack, 'build', f))
     need = ['Split', 'Final'] + (['LratChain'] if a.chain else [])   # --chain: stacks set up before 6c8db375e lack LratChain
