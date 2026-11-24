@@ -55,6 +55,17 @@ run starts with `0 cubes to do` twice in a row, then report and stay idle (keep-
 A pre-assigned tail share (given while your cube share is still running) means: when `prod_d8.py` reports
 `worker finished`, switch to tail mode with that `T` right away, without waiting for the coordinating session.
 
+## Disk (tail mode)
+
+* Flags: `--chain 2000000 --chain-solve 0 --chain-over 3000000` while free disk is >= 8 GB when a cube
+  starts; below 8 GB, relaunch without `--chain` at the next cube boundary (never mid-cube).
+* Below 2.5 GB free: `touch ~/d8tail/STOP` (the worker ends cleanly and resumes on rerun), then report.
+* Standing permission: once your cube share (`prod_d8.py`, `~/d8work`) has finished and every OK record of
+  `~/d8work/manifest.jsonl` is on your `refs/heads/xfer/d8/w<N>` (its .olean and manifest line, sha256
+  matching), you may delete `~/d8work/jobs`. Never delete `~/d8tail`, a parked hard cube's state
+  (`b229/PARKED.md`) or anything a running worker uses.
+* A share is relaunched past a parked cube with `--skip A,A,...`.
+
 ## Cover mode (one cover certificate, then back to your previous job)
 
 When the coordinating session gives you a cover item `X` (`c5` or a Q5 representative number) and a name `kN`:
