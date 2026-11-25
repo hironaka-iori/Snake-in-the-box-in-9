@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-All 398 archived one-crossing snakes of lengths 190 and 191 have now been checked. Keeping either complete arm caps the join at 191, even if the crossing moves to its other end. For the 44 examples whose arms have lengths 93 and 96, all 20 endpoints of the ten shorter-arm shapes exclude a 98-edge partner. The next construction uses different eight-dimensional parents containing optimal seven-dimensional segments. [Round 269](../../milestones/269-archived-93-arms/README.md)
+At a single crossing between two seven-dimensional faces, an intact 50-edge arm gives exactly 36 eight-dimensional shapes of length 96 and 17 of length 97, up to cube symmetry and reversal. None reaches 98. A one-crossing 98-edge snake in the eight-cube would have to split into arms of 48 and 49 edges. Rebuild unrestricted partners for these parents in the nine-cube. [Round 270](../../milestones/270-optimal-seven-dimensional-arms/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

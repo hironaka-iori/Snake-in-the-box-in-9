@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 269
+## Latest result · Round 270
 
-All 398 archived one-crossing snakes of lengths 190 and 191 have now been checked. Keeping either complete arm caps the join at 191, even if the crossing moves to its other end. For the 44 examples whose arms have lengths 93 and 96, all 20 endpoints of the ten shorter-arm shapes exclude a 98-edge partner. [Evidence](milestones/269-archived-93-arms/README.md)
+At a single crossing between two seven-dimensional faces, an intact 50-edge arm gives exactly 36 eight-dimensional shapes of length 96 and 17 of length 97, up to cube symmetry and reversal. None reaches 98. A one-crossing 98-edge snake in the eight-cube would have to split into arms of 48 and 49 edges. The nine-dimensional construction tried both endpoints of 54 shapes and reached 187 edges. [Evidence](milestones/270-optimal-seven-dimensional-arms/README.md)
 
-Round 269 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Round 270 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

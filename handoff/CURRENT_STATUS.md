@@ -1,6 +1,6 @@
 # Current research handoff
 
-**Round 269 is complete.** All 398 archived one-crossing snakes of lengths 190 and 191 have now been checked. Keeping either complete arm caps the join at 191, even if the crossing moves to its other end. For the 44 examples whose arms have lengths 93 and 96, all 20 endpoints of the ten shorter-arm shapes exclude a 98-edge partner. Every 93-edge parent considered here gives at most 190, using either endpoint as the crossing. The archived examples attain 190 at all ten published endpoints. [Evidence](../milestones/269-archived-93-arms/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
+**Round 270 is complete.** At a single crossing between two seven-dimensional faces, an intact 50-edge arm gives exactly 36 eight-dimensional shapes of length 96 and 17 of length 97, up to cube symmetry and reversal. None reaches 98. A one-crossing 98-edge snake in the eight-cube would have to split into arms of 48 and 49 edges. The nine-dimensional construction tried both endpoints of 54 shapes and reached 187 edges. [Evidence](../milestones/270-optimal-seven-dimensional-arms/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 The reviewed global interval is $191\le a(9)\le230$. Both certificate families are assembled in the final contributor theorem. The saved audit passed. A fresh independent rebuild of the full dependency chain remains pending. [Audited theorem and source review](../milestones/264-distant-component/contributor.json)
 

@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 269, 25 November 2026}
+\date{Research state after round 270, 25 November 2026}
 \begin{document}
 \maketitle
 
@@ -1524,7 +1524,7 @@ those vertices. Thus one computation rules out all six cases, even
 when every other site is available to the partner. Further
 certificates allow the parent to vary and check which first steps
 remain possible.
-The two- and three-exchange shells of this second reference are now fully excluded. Its zero- and one-exchange shells were already excluded. A 96-edge segment in a 192-edge one-crossing snake must therefore omit at least four of its 48 smaller-class sites, in every placement of this reference. The earlier family of twelve has the stronger requirement of five omissions.
+The two- and three-exchange shells of this second reference are now fully excluded. Its zero- and one-exchange shells were already excluded. A 96-edge segment inside either arm of a 192-edge one-crossing snake must therefore omit at least four of its 48 smaller-class sites, in every placement of this reference. The earlier family of twelve has the stronger requirement of five omissions.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/263-distant-family-certificates}{Exact scope and checked constructions}.
 
 \subsection{Keeping every other vertex}
@@ -1553,10 +1553,11 @@ vertices, even with complete freedom to reorder them.
 A separate unrestricted calculation excluded a 95-edge partner at
 all 82 endpoints of the 41 shapes reachable from the distant reference
 by repeated single-site exchanges. None of these arms extends in its
-own face. A 192-edge one-crossing snake must therefore omit at least
-two of the 48 smaller-parity sites of every one of these shapes, under
-every placement. The earlier restriction for the starting shape
-requires four omissions.
+own face. Consider any 96-edge segment inside either arm of a
+one-crossing snake with at least 192 edges. Its smaller parity class
+must omit at least two of the 48 smaller-parity sites of each of the
+41 shapes under every placement in that face. For the starting shape,
+at least four omissions are necessary.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/264-distant-component}{Ordered parity constructions and the 41-shape component}.
 
 \section{What can change near a 191-edge construction?}
@@ -1645,7 +1646,7 @@ geometric explanation for one failed construction. All placements of its
 97-edge segments had at least eight extra intersections with the parent,
 even in the best orientation. Every such intersection would join two
 nonconsecutive vertices of the proposed snake.
- At their archived crossings, 35 of the 329 starting snakes with split 94 and 95 can reach 191 by replacing the other arm, 273 have exact maximum 190, and 21 have maximum 190 or 191.
+With the 94-edge arm fixed at its archived crossing, 35 of the 329 starting snakes can reach 191, 273 have exact maximum 190, and the remaining 21 have maximum 190 or 191.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/268-archived-94-arms}{Round 268 results and explicit paths}.
 
 \section{Which parts of the archived snakes must a longer construction change?}
@@ -1660,6 +1661,23 @@ these 398 examples. A one-crossing snake reaching 192 must use two
 arm shapes outside this collection. It can still contain long segments
 of the archived arms. Every 93-edge parent considered here gives at most 190, using either endpoint as the crossing. The archived examples attain 190 at all ten published endpoints.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/269-archived-93-arms}{Round 269 arm census}.
+
+\section{Which long arms can an optimal seven-dimensional snake produce?}
+The longest seven-dimensional snake has 50 edges. Cross once into a
+second seven-cube and keep all 50 edges. The opposite arm must avoid
+the projected vertices of the first arm except at the crossing.
+Starting at both ends of all six optimal shapes gave exactly
+36 eight-dimensional shapes of length 96 and 17 of length 97,
+and none of length 98. Kinny had already reported that the
+optimal seven-dimensional starting paths cannot grow to 98. A
+98-edge snake that crosses a coordinate only
+once must therefore split into 48 and 49 edges on either side.
+
+Seventeen of the 97-edge shapes also occur in earlier published work.
+A further published 97-edge shape uses every coordinate at least
+twice. These arms give a separate starting family in nine dimensions.
+The nine-dimensional construction tried both endpoints of 54 shapes and reached 187 edges.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/270-optimal-seven-dimensional-arms}{Round 270 parent shapes and constructions}.
 
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
@@ -1678,12 +1696,11 @@ a universal 197-edge exclusion. Constructions can change several
 separated pieces of the coil, permitting both parity classes and the
 path order to change. The unrestricted 192-edge question remains open.
 The universal seven-erasure proof still awaits Lean verification.
-The ten-round written-source review at round 260 and its checkpoint
-addendum cover both manuscripts.
+The Round 270 written-source review covers both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 269.
+in the companion manuscript and milestones through round 270.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

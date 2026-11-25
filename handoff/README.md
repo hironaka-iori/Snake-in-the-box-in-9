@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 269 handoff covers the whole arms in the one-crossing archives. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 270 handoff covers eight-dimensional arms built from an optimal seven-dimensional snake. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

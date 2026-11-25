@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 269, 25 November 2026}
+\date{Research state after round 270, 25 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -95,7 +95,7 @@ operation reaches exactly 237 long arms in three components. For the saved 98-ed
 maximum single-crossing join lies between 179 and 187 inclusive.
 Starting from the five attaining parents, repeated changes of at most four
 smaller-class sites reach exactly twelve shapes with one-crossing maximum
-191. Any 96-edge window in a one-crossing snake of at least 192 edges
+191. Any 96-edge window in either arm of a one-crossing snake of at least 192 edges
 must omit at least five of the 48 smaller-class sites of each of these
 twelve references under every cube isometry. For the separate distant
 reference, at least four omissions are necessary. Every one of the 41 shapes reached
@@ -10935,7 +10935,7 @@ rooted path must meet \(S\), a path avoiding \(F\) must meet
 \(S\setminus F\). These implications were checked in Lean. The
 numerical exclusions were checked separately against the Boolean
 formulas, including complete first-step partitions where required.
-The exclusions now cover 42 of the 42 endpoints and both endpoints of 21 of the 21 previously unresolved shapes. Together with the eight earlier exclusions this covers all 14 two-exchange and all 15 three-exchange shapes. Only one of the 29 can extend in its own face, and its unique 97-edge extension already excludes a 192-edge join at either end. Consequently, every 96-edge window of a one-crossing snake of at least 192 edges shares at most 44 of its 48 smaller-class sites with any isometric copy of the distant reference. An overlap of 45 or more would put the window at exchange distance at most three. The zero- and one-exchange cases were excluded earlier.
+The exclusions now cover 42 of the 42 endpoints and both endpoints of 21 of the 21 previously unresolved shapes. Together with the eight earlier exclusions this covers all 14 two-exchange and all 15 three-exchange shapes. Only one of the 29 can extend in its own face, and its unique 97-edge extension already excludes a 192-edge join at either end. Consequently, every 96-edge window in either arm of a one-crossing snake of at least 192 edges shares at most 44 of its 48 smaller-class sites with any isometric copy of the distant reference. An overlap of 45 or more would put the window at exchange distance at most three. The zero- and one-exchange cases were excluded earlier.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/263-distant-family-certificates}{Family certificates, root coverage and remaining cases}.
 
 \subsection{Counting the ways to restore the other parity class}
@@ -10989,7 +10989,7 @@ ten had new exclusions for an unrestricted 95-edge partner. Seven used
 a contradiction at the root, and three used all seven possible first
 edges. All 28 contradiction certificates were replayed. Directly
 examining all \(41\cdot2\cdot8\) one-edge extensions found none. Thus
-a 96-edge window in a one-crossing snake of length at least 192 cannot
+a 96-edge window in either arm of a one-crossing snake of length at least 192 cannot
 be any of the 41 shapes, even inside a longer arm. Sharing 47 of 48
 smaller-parity sites with any placement of any member would put the
 window in the same closed component. Its overlap is consequently at
@@ -11179,7 +11179,7 @@ an unwanted adjacency across the faces. Eight is attained at two
 published endpoints. At the reverse ends, rebuilding the opposite arm
 from the saved placements raised the best explicit join from 158 to 182.
 The largest constructed join in this search remained 190.
- At their archived crossings, 35 of the 329 starting snakes with split 94 and 95 can reach 191 by replacing the other arm, 273 have exact maximum 190, and 21 have maximum 190 or 191.
+With the 94-edge arm fixed at its archived crossing, 35 of the 329 starting snakes can reach 191, 273 have exact maximum 190, and the remaining 21 have maximum 190 or 191.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/268-archived-94-arms}{Round 268 endpoint catalogue, constructions and certificate replay}.
 
 \section{Rebuilding either arm of the archived one-crossing snakes}
@@ -11220,6 +11220,62 @@ at least 192 must use two whole arm shapes outside the union of these
 archived shapes. This still allows a construction to keep a proper
 segment of an archived arm.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/269-archived-93-arms}{Round 269 catalogue and certificate replays}.
+
+\section{Joining an optimal seven-dimensional arm to construct eight-dimensional parents}
+A snake in the eight-cube that crosses one coordinate once consists
+of two seven-dimensional arms sharing only their root in projection.
+If one arm has length 50, the other needs at least 45 edges for the
+join to reach 96. Palani's Tables 5.1 and 5.2 list twelve directed
+optimal seven-dimensional snakes. Checking both the vertex sequences
+and the transition sequences gives six pairs related by reversal.
+For each of the six shapes we fixed each crossing endpoint and
+enumerated all opposite arms of length at least 45.
+
+A search extends a partial path only to a site outside the fixed arm
+and the visited path, adjacent to its current tip and to no earlier
+vertex. Any completion must fit in the accessible component with
+enough sites of each parity for the remaining alternating steps.
+Separate enumerations based on occupancy masks and nearest-neighbour
+counts yielded exactly the same labelled paths. The final check
+reconstructed the prefix partitions independently and tested all pairs
+of vertices of each lifted eight-dimensional path.
+
+Up to cube isometry and reversal the enumeration gives 36 snakes
+of length 96 and 17 of length 97. None has length 98. Consequently
+the only possible split of a 98-edge eight-dimensional snake across
+a coordinate it uses once is \(48+1+49\). Indeed, each arm has length
+at most 50, and the only other possible pair is 47 and 50.
+
+Kinny previously reported the impossibility of growing an optimal
+seven-dimensional starting path to 98 edges. The present enumeration
+also supplies the complete labelled partner lists at lengths 45 and 46.
+
+Three primary sources supplied 21 explicit observations of 97-edge
+paths. They give 18 shapes after allowing the same symmetries.
+Seventeen were independently recovered by this census. The other
+shape crosses every axis at least twice and is outside the
+one-crossing class. All eighteen were absent from the earlier
+2,760-shape collection. The full census also gives 36 shapes
+of length 96 outside the earlier 2,760. Thirteen occur as endpoint
+truncations of the historical 97-edge paths, leaving 23 outside both
+collections even after including those truncations. All 23 are blocked at both endpoints.
+The other thirteen extend to the 97-edge family, all of whose
+members are blocked at both endpoints.
+Two of the historical parents occur in explicit nine-dimensional joins
+of lengths 182 and 186. For Atluri's printed list we used the first
+98 vertices. Including the final listed vertex would create two chords.
+
+As a direct nine-dimensional construction we placed donor segments
+in the opposite face at 108 endpoints of the 54 fixed shapes.
+Both directions and all coordinate permutations were permitted; the
+partner could be shortened to fit or regrown at selected endpoints.
+At one fixed 96-edge endpoint the donor placement gave 144 edges.
+Rebuilding its opposite arm produced a 90-edge partner and a
+187-edge join. This was the largest explicit join obtained. The direct placement
+check found no member of this finite donor family reaching 192.
+The separate manuscript review covers the full source changes and
+makes explicit that the earlier 96-edge windows lie inside a single arm.
+\href{https://ai.uga.edu/sites/default/files/inline-files/theses/palani_ananta.pdf}{Palani, Tables 5.1 and 5.2}. \href{https://ebooks.iospress.nl/pdf/doi/10.3233/978-1-61499-098-7-462}{Kinny, Section 4}. \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/270-optimal-seven-dimensional-arms}{Round 270 paths, primary sources and independent enumerations}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
