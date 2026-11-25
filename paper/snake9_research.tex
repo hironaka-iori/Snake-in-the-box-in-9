@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 270, 25 November 2026}
+\date{Research state after round 271, 25 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11276,6 +11276,60 @@ check found no member of this finite donor family reaching 192.
 The separate manuscript review covers the full source changes and
 makes explicit that the earlier 96-edge windows lie inside a single arm.
 \href{https://ai.uga.edu/sites/default/files/inline-files/theses/palani_ananta.pdf}{Palani, Tables 5.1 and 5.2}. \href{https://ebooks.iospress.nl/pdf/doi/10.3233/978-1-61499-098-7-462}{Kinny, Section 4}. \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/270-optimal-seven-dimensional-arms}{Round 270 paths, primary sources and independent enumerations}.
+
+\section{Rebuilding partners of the optimal-primer and historical eight-dimensional arms}
+Both ends of the 36 nested 96-edge arms and the 18 historical 97-edge
+arms give 108 distinct rooted parents. In a pair giving a 192-edge
+join, a fixed 96-edge parent needs a 95-edge partner and a 97-edge
+parent needs a 94-edge partner. The parent endpoints can be aligned
+in 35 groups. Each search allows a complete path in the opposite face
+that avoids all nonzero sites of at least one parent in the group.
+Regenerating the formulas and checking their contradictions against
+the archived coordinate assignments gives the following conclusions.
+All 108 rooted parents exclude a 192-edge join, with the opposite arm unrestricted. The fixed-endpoint maximum is exactly 189 at 2 endpoints.
+
+For a given consecutive segment of an arm, a larger containing arm
+can be reduced to that segment by deleting one free endpoint at a time.
+Conversely, enumerating every legal addition at either end covers all
+containing arms. The extension search found no containing shapes outside
+the union of 54. Of the 36 length-96 shapes, 13 extend to members of
+the nested length-97 family. The other 23 and all 18 historical
+length-97 shapes are blocked at both ends. A one-crossing snake of at least 192 edges cannot contain any of these 54 shapes as a consecutive segment of either arm.
+
+The unrestricted opposite-face search constructed two different
+189-edge shapes with arm lengths 96 and 92. After aligning the two
+fixed parents the very same 92-edge partner works at both. Neither
+snake can be extended at either endpoint in the full nine-cube. At both fixed roots the
+previously saved join had length 133. A separate placement of the
+common 92-edge partner, using either end and all coordinate
+permutations at all 108 roots, found exactly the two attaining
+placements among 8,709,120 trials. Independent canonical transition-word
+comparison found neither result as a consecutive interval of the
+1,042 archived length-190 paths or the 131 archived length-191 paths.
+
+The original Casella construction has 186 edges and a single crossing
+after its 97-edge arm. We kept that arm and its crossing endpoint and
+rebuilt the partner from 88 to 90 edges. The fixed arm uses an internal
+coordinate once. We required the new partner to use that coordinate
+once as well, split it into two seven-dimensional paths, and matched
+them at their common projected endpoint. The new partner splits into
+44 and 45 edges with one internal crossing. All 17,766 unordered
+pairs of vertices of the 188-edge join satisfy the induced-path
+condition.
+
+A second 188-edge construction keeps the 96-edge parent of the
+previous round's 187-edge snake. Its rebuilt partner retains 82 of the
+previous 91 vertices. It omits nine and adds ten. The two constructions
+are inequivalent. A nine-dimensional snake with two coordinates
+used only once would split at those two edges into three
+seven-dimensional paths, so its length would be at most
+\(3\cdot 50+2=152\). The two 188-edge examples have a unique
+once-crossed coordinate and distinct unordered arm-length pairs. The largest verified join in this round has 189 edges.
+
+With this 96-edge parent and the original 90-edge partner as a reference, growing the partner to 91 edges requires omitting at least 9 of its old vertices. A checked path attains that minimum.
+
+At Casella's archived crossing, requiring the rebuilt arm to cross the same internal coordinate once gives an exact maximum of 188 edges. Two exhaustive traversals exclude 189 and all longer joins under that restriction.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/271-rebuilt-historical-partners}{Round 271 explicit snakes and endpoint verification}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

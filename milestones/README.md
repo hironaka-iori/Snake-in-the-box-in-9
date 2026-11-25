@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. Round 270 is complete. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 271. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| What can the 54 distinct optimal-primer and historical parents support in nine dimensions? | [271 · Rebuilding partners for 54 independently sourced long arms](271-rebuilt-historical-partners/README.md) |
 | Can a 50-edge seven-dimensional arm build a useful long eight-dimensional parent? | [270 · Building eight-dimensional arms from the longest seven-dimensional snakes](270-optimal-seven-dimensional-arms/README.md) |
 | Can one complete arm of any archived one-crossing example be reused to reach 192? | [269 · Rebuilding either arm of the 398 archived one-crossing snakes](269-archived-93-arms/README.md) |
 | Can the shorter arm of a 190-edge example be kept while rebuilding the other arm to 97 edges? | [268 · Rebuilding partners for the other archived 94-edge arms](268-archived-94-arms/README.md) |

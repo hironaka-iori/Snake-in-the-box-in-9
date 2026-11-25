@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-At a single crossing between two seven-dimensional faces, an intact 50-edge arm gives exactly 36 eight-dimensional shapes of length 96 and 17 of length 97, up to cube symmetry and reversal. None reaches 98. A one-crossing 98-edge snake in the eight-cube would have to split into arms of 48 and 49 edges. Rebuild unrestricted partners for these parents in the nine-cube. [Round 270](../../milestones/270-optimal-seven-dimensional-arms/README.md)
+Paused after four rounds, 268 through 271. All 108 rooted parents exclude a 192-edge join, with the opposite arm unrestricted. A one-crossing snake of at least 192 edges cannot contain any of these 54 shapes as a consecutive segment of either arm. The largest verified join in this round has 189 edges. The marked route remains rebuilding the opposite arm at a fixed crossing. [Round 271](../../milestones/271-rebuilt-historical-partners/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 270, 25 November 2026}
+\date{Research state after round 271, 25 November 2026}
 \begin{document}
 \maketitle
 
@@ -1679,6 +1679,21 @@ twice. These arms give a separate starting family in nine dimensions.
 The nine-dimensional construction tried both endpoints of 54 shapes and reached 187 edges.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/270-optimal-seven-dimensional-arms}{Round 270 parent shapes and constructions}.
 
+\section{What did rebuilding the historical arms produce?}
+Two distinct 96-edge parents each accept a 92-edge partner, producing inequivalent 189-edge snakes. Neither occurs as a consecutive segment of the 1,173 archived paths of length 190 or 191.
+
+A published 186-edge snake consists of a 97-edge arm, the crossing
+edge and an 88-edge opposite arm. Keeping its 97-edge arm and crossing,
+we found a 90-edge replacement. This gives a verified 188-edge snake.
+The 96-edge parent that reached 187 in the previous round also reaches
+188 after replacing nine partner vertices with ten. The largest verified join in this round has 189 edges.
+
+All 108 rooted parents exclude a 192-edge join, with the opposite arm unrestricted. The endpoint checks also establish bounds for larger
+arms that contain one of these shapes. A one-crossing snake of at least 192 edges cannot contain any of these 54 shapes as a consecutive segment of either arm.
+
+At Casella's archived crossing, requiring the rebuilt arm to cross the same internal coordinate once gives an exact maximum of 188 edges. Two exhaustive traversals exclude 189 and all longer joins under that restriction.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/271-rebuilt-historical-partners}{Round 271 constructions and scope}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1700,7 +1715,7 @@ The Round 270 written-source review covers both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 270.
+in the companion manuscript and milestones through round 271.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in
