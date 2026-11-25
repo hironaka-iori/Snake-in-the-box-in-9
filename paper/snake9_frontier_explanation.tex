@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 267}
+\date{Research state after round 269, 25 November 2026}
 \begin{document}
 \maketitle
 
@@ -1648,6 +1648,19 @@ nonconsecutive vertices of the proposed snake.
  At their archived crossings, 35 of the 329 starting snakes with split 94 and 95 can reach 191 by replacing the other arm, 273 have exact maximum 190, and 21 have maximum 190 or 191.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/268-archived-94-arms}{Round 268 results and explicit paths}.
 
+\section{Which parts of the archived snakes must a longer construction change?}
+Among the two archives, 373 snakes of length 190 and 25 of length 191
+have a coordinate they cross exactly once. Cutting there leaves two
+eight-dimensional arms. For the last ten shapes to check, a 93-edge
+arm would need a 98-edge partner to reach 192. Every such pairing
+is impossible, at both possible crossing endpoints.
+
+Together the endpoint calculations cover every whole arm occurring in
+these 398 examples. A one-crossing snake reaching 192 must use two
+arm shapes outside this collection. It can still contain long segments
+of the archived arms. Every 93-edge parent considered here gives at most 190, using either endpoint as the crossing. The archived examples attain 190 at all ten published endpoints.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/269-archived-93-arms}{Round 269 arm census}.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1670,7 +1683,7 @@ addendum cover both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 268.
+in the companion manuscript and milestones through round 269.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

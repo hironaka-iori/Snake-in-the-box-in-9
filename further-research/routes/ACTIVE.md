@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Round 268 examined the 63 further 94-edge shapes. All 126 choices of crossing endpoint exclude a partner of 97 edges. At 54 published endpoints the maximum join is exactly 190 because a 95-edge partner is known and a partner of 96 edges is impossible. The separate 93-edge arm family from the remaining archived 190-edge examples is the next construction. [Round 268](../../milestones/268-archived-94-arms/README.md)
+All 398 archived one-crossing snakes of lengths 190 and 191 have now been checked. Keeping either complete arm caps the join at 191, even if the crossing moves to its other end. For the 44 examples whose arms have lengths 93 and 96, all 20 endpoints of the ten shorter-arm shapes exclude a 98-edge partner. The next construction uses different eight-dimensional parents containing optimal seven-dimensional segments. [Round 269](../../milestones/269-archived-93-arms/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

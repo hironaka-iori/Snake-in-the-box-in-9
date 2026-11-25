@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 268, 25 November 2026}
+\date{Research state after round 269, 25 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11181,6 +11181,45 @@ from the saved placements raised the best explicit join from 158 to 182.
 The largest constructed join in this search remained 190.
  At their archived crossings, 35 of the 329 starting snakes with split 94 and 95 can reach 191 by replacing the other arm, 273 have exact maximum 190, and 21 have maximum 190 or 191.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/268-archived-94-arms}{Round 268 endpoint catalogue, constructions and certificate replay}.
+
+\section{Rebuilding either arm of the archived one-crossing snakes}
+The remaining 44 one-crossing examples in the 190-edge archive have
+arm lengths 93 and 96. Their shorter arms represent ten shapes. For each
+we kept the whole 93-edge arm, placed the crossing at either endpoint,
+and sought a new path in the opposite eight-dimensional face. All 20
+endpoints exclude a partner of length 98. Every 93-edge parent considered here gives at most 190, using either endpoint as the crossing. The archived examples attain 190 at all ten published endpoints.
+The enumeration began with 44 archived partners of length 96 and found 0 additional labelled partners. Its partner lists are exhaustive at 5 endpoints.
+
+The search partitions the 20 endpoints into eight groups. In common
+coordinates, each selected partner must avoid every nonzero site of
+one complete parent in its group. The exclusions are certified
+contradictions for prescribed lengths. Shortening a partner at its
+free end shows why an exclusion applies to longer joins as well.
+
+In a separate construction the two directions of the archived 98-edge
+donor were placed at each of the 20 endpoints under all \(8!\) axis
+permutations. Every one of the 1,612,800 placements had at least
+13 extra common sites between the projected arms. Any one of these
+sites gives an unwanted edge across the faces. Regrowth at one reverse
+endpoint raised its explicit join from 129 to 181.
+
+Combining the new endpoint bounds with the earlier arm censuses
+covers all 373 one-crossing examples in the 190-edge archive and all
+25 in the 191-edge archive. The direct recount verified the splitting
+coordinate and the two rooted versions of both arms in each example,
+giving 1,592 endpoint occurrences. These are 294 distinct rooted
+ends of 147 shapes. For one constructive example, the saved replacement
+keeps the right arm of archive path 190-140 in its original coordinates
+and reaches 191. All 18,336 pairs of vertices were verified.
+With the crossing retained, 75 of the 373 length-190 examples can use
+a partner from the 191-edge archive. Forty of the 44 examples containing
+a 93-edge arm can do this by retaining their longer 96-edge arm. The
+other four have maximum 190 with either arm retained at either end.
+Any one-crossing snake of length
+at least 192 must use two whole arm shapes outside the union of these
+archived shapes. This still allows a construction to keep a proper
+segment of an archived arm.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/269-archived-93-arms}{Round 269 catalogue and certificate replays}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

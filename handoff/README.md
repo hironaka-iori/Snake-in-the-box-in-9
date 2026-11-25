@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 268 handoff covers rebuilding partners for the other archived 94-edge arms. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 269 handoff covers the whole arms in the one-crossing archives. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

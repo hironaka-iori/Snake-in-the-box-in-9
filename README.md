@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 268
+## Latest result · Round 269
 
-The 63 shorter-arm shapes in 294 archived 190-edge snakes were held fixed while the opposite arm was rebuilt. All 126 choices of crossing endpoint exclude a partner of 97 edges. At 54 published endpoints the maximum join is exactly 190 because a 95-edge partner is known and a partner of 96 edges is impossible. At their archived crossings, 35 of the 329 starting snakes with split 94 and 95 can reach 191 by replacing the other arm, 273 have exact maximum 190, and 21 have maximum 190 or 191. [Evidence](milestones/268-archived-94-arms/README.md)
+All 398 archived one-crossing snakes of lengths 190 and 191 have now been checked. Keeping either complete arm caps the join at 191, even if the crossing moves to its other end. For the 44 examples whose arms have lengths 93 and 96, all 20 endpoints of the ten shorter-arm shapes exclude a 98-edge partner. [Evidence](milestones/269-archived-93-arms/README.md)
 
-Round 268 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Round 269 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

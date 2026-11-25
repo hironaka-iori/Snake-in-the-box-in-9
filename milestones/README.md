@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. Round 268 is complete. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Round 269 is complete. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| Can one complete arm of any archived one-crossing example be reused to reach 192? | [269 · Rebuilding either arm of the 398 archived one-crossing snakes](269-archived-93-arms/README.md) |
 | Can the shorter arm of a 190-edge example be kept while rebuilding the other arm to 97 edges? | [268 · Rebuilding partners for the other archived 94-edge arms](268-archived-94-arms/README.md) |
 | Can a longer join keep a published 94-edge arm as an interval inside a different parent? | [267 · Exact maximum for five 94-edge intervals at any position in an arm](267-fixed-arm-extensions/README.md) |
 | Can a 191-edge example reach 192 by replacing its entire long arm? | [266 · Exact partners when either arm of a 191-edge example is fixed](266-rebuilding-one-arm/README.md) |
