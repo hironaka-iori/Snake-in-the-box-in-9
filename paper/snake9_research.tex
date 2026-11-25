@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 267, 24 November 2026}
+\date{Research state after round 268, 25 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11145,6 +11145,42 @@ placement search has 191 edges. These finite enumerations leave the
 unrestricted nine-dimensional maximum open.
 For the 62 shapes of 95-edge arms drawn from 329 archived 190-edge snakes, all 124 choices of crossing endpoint also exclude length 192 with an unrestricted opposite arm. Here the entire 95-edge parent is fixed.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/267-fixed-arm-extensions}{Round 267 witness, fixed-arm coverage and independent enumerations}.
+
+\section{Rebuilding the partner of a 94-edge arm from the 190-edge archive}
+The one-crossing 190-edge archive contains 329 examples with arm lengths
+94 and 95. In 35 examples the shorter arm has one of the five shapes
+already classified. The other 294 supply 63 further 94-edge shapes.
+Each end of each shape can serve as a crossing. All 126 choices of crossing endpoint exclude a partner of 97 edges.
+A longer partner could be shortened at its free end to length 97.
+At 54 published endpoints the maximum join is exactly 190 because a 95-edge partner is known and a partner of 96 edges is impossible.
+
+For each query, translate the crossing to zero. A candidate induced path
+starts at zero and avoids every other site of the fixed arm. Several
+parents can be aligned in common coordinates. One selector per parent
+allows a solution if it works with at least one complete parent. The
+126 rooted cases were partitioned into 38 groups with between 88 and
+94 common forbidden sites.
+
+A degree count gives a second encoding. For a partner of length 97,
+each parity has 49 sites. The root and the other 48 even sites contribute
+a degree sum of 97. The 49 odd sites have capacity 98 if each has degree
+at most two. Their total deficit is exactly one, which identifies the
+second endpoint. For length 96, the 48 odd sites have degree two. The
+49 even sites have two units of total deficit. One is already at the root.
+Connected selections therefore have the required endpoints, and a
+disconnected solution contains a cycle that can be excluded.
+Independent replay regenerated the formulas and checked the saved contradictions.
+
+A separate construction used the fourteen rooted 97-edge transition
+sequences extracted from the previous round's eight-dimensional
+collection. Among 71,124,480 placements against the 126 endpoints,
+every placement had at least eight extra common vertices. Each produces
+an unwanted adjacency across the faces. Eight is attained at two
+published endpoints. At the reverse ends, rebuilding the opposite arm
+from the saved placements raised the best explicit join from 158 to 182.
+The largest constructed join in this search remained 190.
+ At their archived crossings, 35 of the 329 starting snakes with split 94 and 95 can reach 191 by replacing the other arm, 273 have exact maximum 190, and 21 have maximum 190 or 191.
+\href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/268-archived-94-arms}{Round 268 endpoint catalogue, constructions and certificate replay}.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

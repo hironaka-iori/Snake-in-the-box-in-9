@@ -6,4 +6,4 @@ The [milestone index](milestones/CATALOG.md) lists every published numbered fold
 |---|---|
 | [Original research ledger](docs/history/research-ledger.md) | The accumulated proof, search and continuation notes from earlier rounds. |
 | [Project checkpoint reports through Round 240](docs/history/project-checkpoints.md) | The original front-page sequence of project updates. |
-| [Handoff after Round 267](handoff/CURRENT_STATUS.md) | Exact maximum for five 94-edge intervals at any position in an arm. [Active route](further-research/routes/ACTIVE.md) |
+| [Handoff after Round 268](handoff/CURRENT_STATUS.md) | Rebuilding partners for the other archived 94-edge arms. [Active route](further-research/routes/ACTIVE.md) |

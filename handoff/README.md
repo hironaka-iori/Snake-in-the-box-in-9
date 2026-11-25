@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 267 handoff covers the five 94-edge intervals excluded from every one-crossing construction of 192 or more edges. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 268 handoff covers rebuilding partners for the other archived 94-edge arms. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

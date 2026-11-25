@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Paused after Round 267. Stay on the route that fixes one whole arm and rebuilds its opposite in the other face. The family containing any of the five published 94-edge intervals has exact maximum 191, including placements away from the crossing. At 63 other fixed endpoints, one-site and free-tip changes to the opposite arm must pass through an arm of at most 87 edges to improve the archived 190-edge joins. All 148 selected endpoints now exclude 192 for an unrestricted opposite arm. A further search must choose a different fixed endpoint or parent. [Round 267](../../milestones/267-fixed-arm-extensions/README.md)
+Round 268 examined the 63 further 94-edge shapes. All 126 choices of crossing endpoint exclude a partner of 97 edges. At 54 published endpoints the maximum join is exactly 190 because a 95-edge partner is known and a partner of 96 edges is impossible. The separate 93-edge arm family from the remaining archived 190-edge examples is the next construction. [Round 268](../../milestones/268-archived-94-arms/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

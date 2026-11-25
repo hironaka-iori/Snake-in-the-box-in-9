@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 267
+## Latest result · Round 268
 
-The 25 archived 191-edge snakes that cross once between two eight-dimensional faces have five distinct 94-edge arm shapes. If either arm of a one-crossing snake contains any one of these shapes as a consecutive section, the snake has at most 191 edges. The archived snakes attain this bound. A separate search covered the 62 shapes of 95-edge arms from 329 archived 190-edge snakes. Keeping any one of these as a whole arm also gives at most 191 edges, whichever endpoint is chosen for the crossing and however the opposite arm is rebuilt. [Evidence and an explicit attaining path](milestones/267-fixed-arm-extensions/README.md)
+The 63 shorter-arm shapes in 294 archived 190-edge snakes were held fixed while the opposite arm was rebuilt. All 126 choices of crossing endpoint exclude a partner of 97 edges. At 54 published endpoints the maximum join is exactly 190 because a 95-edge partner is known and a partner of 96 edges is impossible. At their archived crossings, 35 of the 329 starting snakes with split 94 and 95 can reach 191 by replacing the other arm, 273 have exact maximum 190, and 21 have maximum 190 or 191. [Evidence](milestones/268-archived-94-arms/README.md)
 
-Paused after Round 267. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Round 268 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 
