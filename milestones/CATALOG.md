@@ -2,7 +2,7 @@
 
 Open a round to read its account and supporting material. The [milestone guide](README.md) groups the recent rounds by research question. The index follows the numbered folders published on the main branch. Round 26 has no separate published folder.
 
-[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–273](#rounds-240-to-273)
+[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–274](#rounds-240-to-274)
 
 ## Rounds 1 to 49
 
@@ -267,7 +267,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 238 | [Recovery from three missing counts](238-three-count-recovery/MATHEMATICAL_NOTE.md) |
 | 239 | [Recovery after four missing counts](239-four-count-recovery/MATHEMATICAL_NOTE.md) |
 
-## Rounds 240 to 273
+## Rounds 240 to 274
 
 | Round | Research record |
 |---:|---|
@@ -305,3 +305,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 271 | [Rebuilding partners for 54 independently sourced long arms](271-rebuilt-historical-partners/README.md) |
 | 272 | [Lifting 49-edge seven-dimensional arms](272-forty-nine-edge-parents/README.md) |
 | 273 | [Rebuilding opposite arms at 168 crossings](273-partners-of-rebuilt-arms/README.md) |
+| 274 | [How many sites of a long arm can be kept?](274-rebuilding-near-a-fixed-arm/README.md) |

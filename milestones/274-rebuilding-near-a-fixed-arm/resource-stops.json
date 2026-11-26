@@ -1,0 +1,19 @@
+{
+  "startup_minimum_bytes": 1073741824,
+  "runtime_reserve_bytes": 805306368,
+  "private_limit_bytes": 268435456,
+  "interrupted_batches": [
+    {
+      "log": "runs/face274-20261126T144325048722Z.log",
+      "last_saved_group": 75,
+      "status": "guarded invocation interrupted before a completion receipt; later groups were resumed separately"
+    },
+    {
+      "log": "runs/face274-20261126T144555367116Z.log",
+      "last_saved_group": 122,
+      "observed_free_bytes": 783433728,
+      "observed_peak_private_bytes": 71081984,
+      "status": "the runtime memory reserve stopped this invocation; persisted individual rows are eligible only after independent replay"
+    }
+  ]
+}

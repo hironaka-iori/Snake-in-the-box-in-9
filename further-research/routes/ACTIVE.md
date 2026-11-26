@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Every 96-edge arm from Round 272 has now been tried at both ends with an unrestricted opposite face. All 168 crossings exclude 192, and the exclusion extends to every containing arm. Four distinct 187-edge joins were constructed. Extending the free tips produced two 188-edge joins. [Round 273](../../milestones/273-partners-of-rebuilt-arms/README.md)
+Tested every 93-to-98-edge reconstruction after at most two omissions from the specified 94- and 97-edge seeds. The union contains 313 shapes and 626 fixed endpoints. There are 203 certified exclusions at 192 and 423 open cases. Both original 97-edge crossings from Round 273 have exact maximum 188. The explicit inward move from 188 to 189 is recorded. [Round 274](../../milestones/274-rebuilding-near-a-fixed-arm/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 273 handoff covers opposite-face bounds for the 84 rebuilt eight-dimensional arms. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 274 handoff covers reconstructions around the arms of archived 191-edge snakes. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

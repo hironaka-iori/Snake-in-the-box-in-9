@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 273, 26 November 2026}
+\date{Research state after round 274, 27 November 2026}
 \begin{document}
 \maketitle
 
@@ -1700,6 +1700,15 @@ A 98-edge snake crossing one coordinate exactly once in \(Q_8\) would need two s
 \section{Which partners fit the 84 rebuilt arms?}
 Each 96-edge arm from Round 272 would need a 95-edge partner to reach 192 in nine dimensions. Four of the arms accept the same 90-edge partner and each gives 187 edges. The unrestricted search considers all opposite paths and both possible crossing ends. It excludes 192 for all 168 crossings. One of the four joins attaining 187 is best possible at its fixed crossing. The other three could each reach at most 188. Following every legal extension shows that the 191-edge ceiling also holds whenever any one of the 84 shapes appears as a consecutive interval inside either arm. Extending the free tips yields two inequivalent 188-edge snakes. Both use a 97-edge arm. One was absent from the earlier comparison paths.
 
+\section{Changing the occupied sites of an arm}
+The 92-edge arm shared by two earlier 189-edge snakes cannot reach 93 even if any three of its occupied vertices are discarded. When the discarded positions form at most two runs along the old path, even 16 removals are insufficient. Both statements allow the endpoints and the crossing to change.
+
+The five shorter arms of the known one-crossing 191-edge snakes behave differently. Keeping all but two sites of any one of these 94-edge arms permits 297 different shapes of length at least 93. Five reach 96, and none reaches 97. These exact counts give a complete collection of candidates for this way of modifying the known paths.
+
+Two endpoints can be settled exactly. Keeping Casella's published 97-edge arm permits at most 188 edges. Trimming its last edge would turn any 189-edge join into a prohibited 188-edge join at its 96-edge prefix. The recorded construction attains 188. A separate search establishes the same exact maximum for the other 97-edge arm constructed in Round 273.
+
+Moving the crossing inward by one edge changes the split from \(97+1+90=188\) to \(96+1+92=189\). The longer join recovers a Round 271 example. Across all 626 reconstructed endpoints, 203 exclude 192. The verified ceiling for the full retained family is 193 edges. The eight constructions at length 191 reproduce archived shapes.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1721,7 +1730,7 @@ The Round 270 written-source review covers both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 273.
+in the companion manuscript and milestones through round 274.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

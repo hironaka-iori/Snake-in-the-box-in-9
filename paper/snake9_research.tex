@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 273, 26 November 2026}
+\date{Research state after round 274, 27 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11350,6 +11350,21 @@ All 168 fixed endpoints exclude 192. The four 187-edge joins are inequivalent, a
 A parent appearing inside a longer arm may change its crossing endpoint. Enumerating all possible end extensions handles this distinction. Sixty-seven parents are blocked at both ends. The other 17 extend into 97-edge shapes already covered by the interval theorem of Round 271. Consequently all 84 shapes exclude 192 even when they occur as a consecutive interval anywhere in either arm of a one-crossing snake. This restriction supplies no upper bound for a snake avoiding these intervals.
 
 The four 187-edge paths also allow a direct constructive check at both free nine-dimensional tips. Extending them yields exactly two inequivalent 188-edge snakes with split \(97+1+90\). One matches a previously saved path. The other is absent from the compared Round 271 constructions and from the intervals of the archived 190- and 191-edge paths. The added edge lies on the original 96-edge side. Thus this improvement is compatible with the exact fixed-parent result above.
+
+\section{How many sites of a long arm can be kept?}
+Fix an eight-dimensional snake \(S\) in literal cube coordinates. For a replacement arm \(P\) let \(r=|V(S)\setminus V(P)|\). The endpoints and crossing of \(P\) may change and its surviving pieces can occur in any order or orientation. A replacement of length \(p\) around a seed of length \(s\) introduces \(p-s+r\) vertices. A one-crossing 192-edge snake must have at least 93 edges in each arm, since \(a(8)=98\).
+
+The common 92-edge partner of the two Round 271 constructions cannot be replaced by a path of length 93 or more while retaining all but three of its vertices. Every one of the 134,138 choices of up to three omitted sites was checked. When the omissions form at most two contiguous intervals of seed positions, the same conclusion holds for up to 16 omitted vertices. For four through 16 omissions this adds 394,576 choices. Thus any arm of a 192-edge join in these coordinates must omit at least four vertices of this seed, and at least 17 if the omissions are confined to two intervals.
+
+The shorter sides of all 25 archived one-crossing nine-dimensional snakes of length 191 give five shapes of length 94. Omitting at most two vertices from any one of these five yields exactly 297 inequivalent replacement arms between 93 and 98 edges. There are 91 of length 93, 148 of length 94, 53 of length 95, and five of length 96. The maximum of 96 is attained. All 25 source examples are covered, and this classification places no restriction on the opposite arm. Around the 97-edge side of the additional Round 273 construction of length 188, the corresponding calculation gives 16 further shapes. Taken together the two families have 313 distinct shapes and 626 crossing endpoints.
+
+To enumerate a replacement, delete the chosen sites from \(S\). Each connected component of the remaining vertices is a mandatory consecutive path in \(P\). Enumerate component orders, orientations, bridges of unused vertices, and end extensions, enforcing inducedness against every reserved vertex. A second enumeration grows the occupied set and reconstructs the ordered path from its endpoint. Both methods agree on every labelled path digest.
+
+An unrestricted opposite-face result can be transferred to a fixed extension without another global search. Suppose \(C\) is a crossing-rooted prefix of \(P\), and \(P\) has \(d\) extra edges on its free end. Trimming these edges from any joined snake shortens the join by \(d\) and preserves the entire opposite arm. If the ceiling for \(C\) is \(U\), the ceiling for \(P\) is \(U+d\). For Casella's published 97-edge arm, the preceding 96-edge prefix has exact maximum 187. The explicit 188-edge join therefore attains the exact unrestricted maximum for that 97-edge arm at its published crossing. The second 97-edge arm from Round 273 also has exact maximum 188. Its witness attains 188, and a separate verified contradiction excludes a 91-edge opposite path.
+
+The best construction among these endpoints has 191 edges. The 9 attaining rooted placements give 8 distinct paths, all in the 131-shape archive. At target 192, 203 of the 626 endpoints are excluded by independent certificate replay, transferred bounds, or both. The other 423 are open at 192. The verified ceiling for the full retained family is 193 edges. The limits refer to one-crossing snakes with a specified retained arm.
+
+The 188-edge construction from Round 273 can also be improved inside these coordinates. Delete its original crossing vertex from the 97-edge arm and move the crossing to the next vertex. The remaining arm has 96 edges. A 92-edge partner gives 189 in place of the original 90-edge partner and join of 188. This recovers one of the two previously checked Round 271 paths. Both fixed crossings now have matching lower and upper bounds, 188 before the move and 189 afterwards.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
