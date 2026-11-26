@@ -1,0 +1,66 @@
+{
+  "contributor_branch": "research/unconditional-241",
+  "contributor_head": "5ea6190e291aefcb9eea3c3b2a3636bd0e0972ee",
+  "comparison_round": 264,
+  "comparison_revision": "3e156b298f1a5ae9aa699965f5b76aff3e6b956e",
+  "proof_status": "Contributors' assembled unconditional theorem and their saved passing final audit. No independent rebuild in this round.",
+  "unconditional_upper_bound_edges": 230,
+  "lower_bound_edges": 191,
+  "theorem_name": "upper_230_435",
+  "theorem": "forall m, Snake m implies m <= 230",
+  "proof_application": "upper_230_of_refutedK7 LocalWindow.allTab230 LocalWindow.allShare230",
+  "saved_audit": {
+    "conclusion": "PASS",
+    "reported_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "source_interfaces": 43846,
+    "locally_rebuilt_specification_modules": 728
+  },
+  "receipts": {
+    "milestones/37-230-feasibility/audit230/UpperBound230_435.lean": {
+      "url": "https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/5ea6190e291aefcb9eea3c3b2a3636bd0e0972ee/milestones/37-230-feasibility/audit230/UpperBound230_435.lean",
+      "sha256": "c59b4aa8620a75b801a2f6a8f66bb076b497b3136347cc73e9c0ca22caed4545",
+      "same_bytes_as_r264": true
+    },
+    "milestones/37-230-feasibility/audit230/final-audit.txt": {
+      "url": "https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/5ea6190e291aefcb9eea3c3b2a3636bd0e0972ee/milestones/37-230-feasibility/audit230/final-audit.txt",
+      "sha256": "2c934b5e95aece4f3df182f18b07d39f39b9c9ad7d4aff5c237f0b911b03aa28",
+      "same_bytes_as_r264": true
+    },
+    "milestones/39-dim8-lift/b229/PARKED.md": {
+      "url": "https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/5ea6190e291aefcb9eea3c3b2a3636bd0e0972ee/milestones/39-dim8-lift/b229/PARKED.md",
+      "sha256": "b00de459c4792a7ecc25e056f8d6ceb55e0ed0410e7508375c69f7af27878644",
+      "same_bytes_as_r264": false
+    },
+    "README.md": {
+      "url": "https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/5ea6190e291aefcb9eea3c3b2a3636bd0e0972ee/README.md",
+      "sha256": "3922d2834db20ec58b44583a7f1772a770cae5b92ee9ed28f50ad45474c5ff6a",
+      "same_bytes_as_r264": true
+    }
+  },
+  "next_claim": {
+    "proposed_upper_bound_edges": 229,
+    "status": "parked subcases remain open in the contributor research route",
+    "url": "https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/5ea6190e291aefcb9eea3c3b2a3636bd0e0972ee/milestones/39-dim8-lift/b229/PARKED.md"
+  },
+  "related_primary_sources": [
+    {
+      "title": "The Snake in the Box Problem: Mathematical Conjecture and a Genetic Algorithm Approach",
+      "authors": "Pedro A. Diaz-Gomez and Dean F. Hougen",
+      "year": 2006,
+      "url": "https://gpbib.pmacs.upenn.edu/gecco2006/docs/p1409.pdf",
+      "location": "Sections 2.1 and 2.2",
+      "observation": "The authors seeded one face of Q8 with a reported 49-edge Q7 snake and kept that seed fixed. They report an 81-edge Q8 snake. This supplies a precedent for lifting length-49 Q7 parents. It does not supply an explicit 49+48 construction or an exhaustive catalogue of the 49-edge parents."
+    },
+    {
+      "title": "Using the Genetic Algorithm to Find Snake-in-the-Box Codes",
+      "year": 1994,
+      "url": "https://static.aminer.org/pdf/PDF/000/374/720/using_the_genetic_algorithm_to_find_snake_in_the_box.pdf",
+      "observation": "Results describes a companion exhaustive search in Q7, reports an optimum of 50 and gives an example in Figure 3. This report of exhaustive enumeration is distinct from an accessible list of representatives of all 49-edge snakes."
+    }
+  ],
+  "catalogue_search_scope": "No exhaustive published catalogue of Q7 49-edge representatives or verified 49+48 Q8 transition sequence was identified in the checked sources. No global absence or novelty claim."
+}

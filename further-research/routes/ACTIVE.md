@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Paused after four rounds, 268 through 271. All 108 rooted parents exclude a 192-edge join, with the opposite arm unrestricted. A one-crossing snake of at least 192 edges cannot contain any of these 54 shapes as a consecutive segment of either arm. The largest verified join in this round has 189 edges. The marked route remains rebuilding the opposite arm at a fixed crossing. [Round 271](../../milestones/271-rebuilt-historical-partners/README.md)
+At both ends of 38 selected 49-edge seven-dimensional parents, the longest possible one-crossing eight-dimensional join has 96 edges. The 84 attaining shapes supply eight-dimensional parents for the marked nine-dimensional route. [Round 272](../../milestones/272-forty-nine-edge-parents/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

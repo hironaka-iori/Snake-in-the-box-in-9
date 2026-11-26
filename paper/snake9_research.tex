@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 271, 25 November 2026}
+\date{Research state after round 272, 26 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11330,6 +11330,15 @@ With this 96-edge parent and the original 90-edge partner as a reference, growin
 
 At Casella's archived crossing, requiring the rebuilt arm to cross the same internal coordinate once gives an exact maximum of 188 edges. Two exhaustive traversals exclude 189 and all longer joins under that restriction.
 \href{https://github.com/hironaka-iori/Snake-in-the-box-in-9/tree/main/milestones/271-rebuilt-historical-partners}{Round 271 explicit snakes and endpoint verification}.
+
+\section{Lifting 49-edge seven-dimensional arms}
+A once-crossed coordinate in a 98-edge path in \(Q_8\) can separate arms of lengths 49 and 48. Indeed the other possible split, 50 and 47, was excluded in Round 270. To investigate 49 and 48, fix a 49-edge path in \(Q_7\), translate the proposed crossing endpoint to zero, and require the opposite induced path to avoid all its occupied vertices except zero. These are exactly the cross-face constraints, since the only edge between opposite faces with any given projection is the matching edge.
+
+The parent catalogue combines paths containing a 20-edge interval of a published optimal seven-dimensional path, paths from archived long snakes, and every 49-edge path having a once-crossed coordinate. It is closed under replacement of a single vertex by another while preserving an induced path of the same length. This yields 38 shapes up to cube isometry and reversal. To obtain the last seed family, enumerate the larger \(Q_6\) arm of a one-crossing path of length at least 48. Its length is at least 24, and complete rooted enumeration attains a maximum of 26. Processing all opposite arms gives 570, 28 and three inequivalent \(Q_7\) shapes of lengths 48, 49 and 50, respectively. Two adjacency calculations reproduce the same lists.
+
+At both ends of all 38 parents, the set of opposite paths of length at least 46 was enumerated twice. Exactly eight crossing endpoints produce a join of length at least 96. Their 84 resulting shapes all have length \(49+1+46=96\). Thus 96 is attained and is the maximum for these fixed parents. Each ordered witness has been checked against every vertex pair. Compared with the Round 267 and 271 collections, 83 are absent as whole shapes and 66 are absent even as consecutive intervals. Seventeen admit a single-edge extension to previously recorded 97-edge shapes. The other 67 cannot be extended at either tip. These 84 parental shapes can now be used in \(Q_9\). The 38-parent catalogue does not exhaust unrestricted 49-edge paths in \(Q_7\).
+
+The contributor's updated branch retains the assembled unconditional upper bound of 230 for \(Q_9\). The final theorem and its saved audit match the Round 264 copies byte for byte. The proposed bound of 229 has unresolved cases. The independent rebuild of the full dependency chain remains pending.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

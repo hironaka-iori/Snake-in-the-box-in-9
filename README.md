@@ -2,15 +2,15 @@
 
 A snake is a path through a hypercube in which two vertices are neighbours exactly when they are consecutive on the path. Its length counts edges. The question is how long such a path can be in the nine-dimensional cube.
 
-**The exact maximum is open. The reviewed bounds are $191 \le a(9) \le 230$.** The 191-edge witness contains 192 distinct vertices. The upper bound comes from a contributor's completed proof and saved audit. An independent rebuild of its full dependency chain is pending. [191-edge witness](outputs/snake9_witness.json) · [Contributor’s 230-edge audit](https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/3e156b298f1a5ae9aa699965f5b76aff3e6b956e/milestones/37-230-feasibility/audit230/final-audit.txt)
+**The exact maximum is open. The reviewed bounds are $191 \le a(9) \le 230$.** The 191-edge witness contains 192 distinct vertices. The upper bound comes from a contributor's completed proof and saved audit. An independent rebuild of its full dependency chain is pending. [191-edge witness](outputs/snake9_witness.json) · [Contributor’s 230-edge audit](https://github.com/hironaka-iori/Snake-in-the-box-in-9/blob/5ea6190e291aefcb9eea3c3b2a3636bd0e0972ee/milestones/37-230-feasibility/audit230/final-audit.txt)
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 271
+## Latest result · Round 272
 
-Two distinct 96-edge parents each accept a 92-edge partner, producing inequivalent 189-edge snakes. Neither occurs as a consecutive segment of the 1,173 archived paths of length 190 or 191. All 108 rooted parents exclude a 192-edge join, with the opposite arm unrestricted. A one-crossing snake of at least 192 edges cannot contain any of these 54 shapes as a consecutive segment of either arm. [Evidence](milestones/271-rebuilt-historical-partners/README.md)
+Two enumerations found exactly 84 inequivalent 96-edge snakes from 38 selected 49-edge seven-dimensional parents. The maximum for these parents is 96. Sixty-six of the 84 shapes are absent even as consecutive segments in the previous comparison collections. [Evidence](milestones/272-forty-nine-edge-parents/README.md)
 
-Paused after Round 271. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Round 272 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 
