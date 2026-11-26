@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-At both ends of 38 selected 49-edge seven-dimensional parents, the longest possible one-crossing eight-dimensional join has 96 edges. The 84 attaining shapes supply eight-dimensional parents for the marked nine-dimensional route. [Round 272](../../milestones/272-forty-nine-edge-parents/README.md)
+Every 96-edge arm from Round 272 has now been tried at both ends with an unrestricted opposite face. All 168 crossings exclude 192, and the exclusion extends to every containing arm. Four distinct 187-edge joins were constructed. Extending the free tips produced two 188-edge joins. [Round 273](../../milestones/273-partners-of-rebuilt-arms/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

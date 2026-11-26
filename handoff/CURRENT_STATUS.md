@@ -1,6 +1,6 @@
 # Current research handoff
 
-**Round 272 is complete.** The full 38-parent search generated 84 eight-dimensional arms of length 96. Both endpoint enumerations agree on every partner. The complete lists include every 49-edge seven-dimensional shape with a once-crossed coordinate. [Evidence](../milestones/272-forty-nine-edge-parents/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
+**Round 273 is complete.** All 84 parent intervals exclude 192 anywhere within either arm of a one-crossing snake. Four 187-edge paths are recorded, including one whose fixed-endpoint maximum is exactly 187. Two free-tip extensions reach 188 with 97-edge parents. [Evidence](../milestones/273-partners-of-rebuilt-arms/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 The reviewed global interval is $191\le a(9)\le230$. Both certificate families are assembled in the final contributor theorem. The saved audit passed. A fresh independent rebuild of the full dependency chain remains pending. [Audited theorem and source review](../milestones/272-forty-nine-edge-parents/contributor.json)
 

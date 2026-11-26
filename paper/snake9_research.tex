@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 272, 26 November 2026}
+\date{Research state after round 273, 26 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11339,6 +11339,17 @@ The parent catalogue combines paths containing a 20-edge interval of a published
 At both ends of all 38 parents, the set of opposite paths of length at least 46 was enumerated twice. Exactly eight crossing endpoints produce a join of length at least 96. Their 84 resulting shapes all have length \(49+1+46=96\). Thus 96 is attained and is the maximum for these fixed parents. Each ordered witness has been checked against every vertex pair. Compared with the Round 267 and 271 collections, 83 are absent as whole shapes and 66 are absent even as consecutive intervals. Seventeen admit a single-edge extension to previously recorded 97-edge shapes. The other 67 cannot be extended at either tip. These 84 parental shapes can now be used in \(Q_9\). The 38-parent catalogue does not exhaust unrestricted 49-edge paths in \(Q_7\).
 
 The contributor's updated branch retains the assembled unconditional upper bound of 230 for \(Q_9\). The final theorem and its saved audit match the Round 264 copies byte for byte. The proposed bound of 229 has unresolved cases. The independent rebuild of the full dependency chain remains pending.
+
+\section{Rebuilding opposite arms at 168 crossings}
+Fix each of the 84 inequivalent 96-edge eight-dimensional snakes of Round 272 in turn. Either endpoint may be the crossing. A 192-edge path in \(Q_9\) would require a \(192-96-1=95\)-edge path on the opposite face. Of 5,074 directed 95-edge patterns from the specified donor collection, none fits at any of the 168 crossings under any of the \(8!\) coordinate permutations. Shorter donor segments do produce four joins of length \(96+1+90=187\). In these four constructions the same 90-edge partner fits four different 96-edge parents.
+
+For each crossing, the unrestricted problem allows all induced opposite paths rooted at the crossing and avoiding the projected parent at every other site. Grouped searches use different fixed parents as alternatives. A contradiction on a whole group therefore rules out the target for every group member. Where necessary the group was split and the smaller groups were solved separately. An independent replay reconstructs the constraints and checks the saved contradiction certificates.
+
+All 168 fixed endpoints exclude 192. The four 187-edge joins are inequivalent, and none is a consecutive interval of the comparison bank of 1,173 paths of lengths 190 and 191. Each witness has 188 distinct vertices and passes all 17,578 pair checks. One of the four fixed endpoints has exact maximum 187. Each of the other three has maximum between 187 and 188. An improvement to 188 at any of the four would require omitting at least eight of the occupied sites of its current 90-edge partner.
+
+A parent appearing inside a longer arm may change its crossing endpoint. Enumerating all possible end extensions handles this distinction. Sixty-seven parents are blocked at both ends. The other 17 extend into 97-edge shapes already covered by the interval theorem of Round 271. Consequently all 84 shapes exclude 192 even when they occur as a consecutive interval anywhere in either arm of a one-crossing snake. This restriction supplies no upper bound for a snake avoiding these intervals.
+
+The four 187-edge paths also allow a direct constructive check at both free nine-dimensional tips. Extending them yields exactly two inequivalent 188-edge snakes with split \(97+1+90\). One matches a previously saved path. The other is absent from the compared Round 271 constructions and from the intervals of the archived 190- and 191-edge paths. The added edge lies on the original 96-edge side. Thus this improvement is compatible with the exact fixed-parent result above.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

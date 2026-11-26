@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 272 handoff covers 84 eight-dimensional shapes obtained from 49-edge parents. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 273 handoff covers opposite-face bounds for the 84 rebuilt eight-dimensional arms. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|
