@@ -27,9 +27,12 @@ Diverging (todo grew faster than leaves were built): 1669966996966969, 1be4e41be
 1669699696699696, 06b9b946b94646b9, 19e6e619e61919e6, 07787887b44b4bb4, 035e7ca17ca1835e, 1669969696966969,
 0669699696696996 (k = 30, t8, parked 24 Nov 17:55 UTC: depth 7, no leaf solved in 6 h),
 0778788678878778 (k = 30, t32, parked 24 Nov 21:25 UTC: depth 6, 60 todo, none done in 6.5 h),
-16696996833c3cc3 (k = 30, T13/t13r, parked 24 Nov 23:27 UTC: depth 7, 63 todo, none done in 3.7 h).
+16696996833c3cc3 (k = 30, T13/t13r, parked 24 Nov 23:27 UTC: depth 7, 63 todo, none done in 3.7 h),
+0669699669969669 (k = 30, t1/w5, at the 24 Nov stop: depth 7, 163 todo, 0 done in 9 h),
+1668699669969669 (k = 30, t19/w25, at the 24 Nov stop: depth 8, 210 todo, 0 done in 14 h).
 Failed at --max-depth 12: 06b1b14eb14e4eb1 (k = 30, T0/w15, 11 leaves done, one leaf still too big at depth 12).
-A share is relaunched past a parked cube with `tail_d8.py run ... --skip A,A,...` (9ef29b22d).
+A share is relaunched past a parked cube with `tail_d8.py run ... --skip A,A,...` (9ef29b22d); `tail_d8.py run` also skips every
+cube listed in `b229/skip.txt` (one hex per line), so parking a cube is a commit there.
 Converging when parked (resume first): 1669969699666996, 1669969696996966, 16698778a55a7887,
 037c7c837c83837c, 1669699687787887, 06b5b94ab94a46b5 (split again at 2 leaves left).
 No hard cube is running.

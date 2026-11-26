@@ -303,7 +303,10 @@ def cmd_run(a):
     else:
         its = [x for x in tail_items(a) if int(hashlib.sha1(P.modname(x[2]).encode()).hexdigest(), 16) % a.workers in a.indices]
     its = [x for x in its if P.modname(x[2]) not in done]
-    if a.skip: its = [x for x in its if x[2].lower() not in {h.lower() for h in a.skip.split(',')}]   # parked cubes
+    sk = {h.lower() for h in a.skip.split(',') if h}   # parked cubes: --skip and b229/skip.txt (one hex per line)
+    sf = os.path.join(HERE, '..', 'b229', 'skip.txt')
+    if not a.only and os.path.exists(sf): sk |= {l.split()[0].lower() for l in open(sf) if l.strip() and not l.startswith('#')}
+    if sk: its = [x for x in its if x[2].lower() not in sk]
     if a.reverse: its.reverse()   # a helper on a share whose owner still runs it: work from the other end; each skips what the other published
     print('tail worker %s (indices %s of %d): %d cubes to do, %d done' % (a.name, a.index, a.workers, len(its), len(done)), flush=True)
     P.BUDGET['cap'] = a.mem_gb; end = time.time() + a.hours * 3600
