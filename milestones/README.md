@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 274. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Round 275 is complete. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| What is the exact limit at the saved crossing, and what can change beyond it? | [275 · The exact limit at two 93-edge arms](275-rebuilding-the-saved-arm/README.md) |
 | Which long arms survive when one or two occupied vertices are allowed to change? | [274 · How many sites of a long arm can be kept?](274-rebuilding-near-a-fixed-arm/README.md) |
 | Can any of the 84 rebuilt 96-edge arms support a 192-edge nine-dimensional join? | [273 · Rebuilding opposite arms at 168 crossings](273-partners-of-rebuilt-arms/README.md) |
 | How many long eight-dimensional snakes can be built from the selected 49-edge arms? | [272 · Lifting 49-edge seven-dimensional arms](272-forty-nine-edge-parents/README.md) |

@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Tested every 93-to-98-edge reconstruction after at most two omissions from the specified 94- and 97-edge seeds. The union contains 313 shapes and 626 fixed endpoints. There are 203 certified exclusions at 192 and 423 open cases. Both original 97-edge crossings from Round 273 have exact maximum 188. The explicit inward move from 188 to 189 is recorded. [Round 274](../../milestones/274-rebuilding-near-a-fixed-arm/README.md)
+Both selected 93-edge arms close at 189. Their common 90-edge segment already excludes a 96-edge partner at the specified root. Allowing changes to the whole path recovers 191. [Round 275](../../milestones/275-rebuilding-the-saved-arm/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 

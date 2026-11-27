@@ -1,6 +1,6 @@
 # Current research handoff
 
-**Paused after Round 274.** The 313 reconstructed arm shapes supply 626 crossings. Their verified bounds exclude 192 at 203 endpoints and give a family-wide upper bound of 193. Eight known 191-edge shapes were recovered. The common 92-edge arm rules out all replacements of length 93 or greater with at most three omissions. [Evidence](../milestones/274-rebuilding-near-a-fixed-arm/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
+**Round 275 is complete.** Two selected 93-edge arms have exact maximum 189 at their saved crossing. Releasing parts of the full path reaches 22 distinct shapes of length 191 in two steps. [Evidence](../milestones/275-rebuilding-the-saved-arm/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 The reviewed global interval is $191\le a(9)\le230$. Both certificate families are assembled in the final contributor theorem. The saved audit passed. A fresh independent rebuild of the full dependency chain remains pending. [Audited theorem and source review](../milestones/272-forty-nine-edge-parents/contributor.json)
 

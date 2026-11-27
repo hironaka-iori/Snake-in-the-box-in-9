@@ -1,0 +1,15 @@
+# Rebuilding the partner at the saved crossing
+
+The primary fixed arm is the 93-edge arm with rooted identifier `f89b051110af`. It was reconstructed in Round 274 from two of the five shorter arms of archived 191-edge snakes. In its original eight-dimensional coordinates the crossing is vertex 44. A verified partner of 95 edges gives a 189-edge join. The sibling rooted arm beginning `948d466cded0` accepts exactly the same labelled partner after translating the crossing to zero. Two further starting constructions have 94-edge fixed arms and a common 94-edge partner at crossing 237. [All starting arms](saved-paths.json) · [Rooted donors](saved-placements.json)
+
+## Fixing the entire arm
+
+An opposite arm $B$ is an induced path in $Q_8$ rooted at zero that avoids the nonzero vertices of the fixed arm $A$. Reverse $A$, cross to vertex 256, then follow $256+B$. This gives $|E(A)|+1+|E(B)|$ edges, and the avoidance condition rules out every undesired edge between the two faces. At the primary 93-edge arm the target lengths 190, 191 and 192 require opposite arms of 96, 97 and 98 edges respectively.
+
+The unrestricted search allowed all of the opposite face. After a prescribed prefix, its earlier vertices and their neighbours become unavailable, and translating its tip to zero gives a shorter equivalent rooted problem. The verifier rebuilt the permitted sites using Hamming distances, reconstructed the clauses, replayed the LRAT contradictions, and checked that the prohibited prefixes cover every legal next move. Positive paths were transported back to the original coordinates and checked for adjacency at every unordered pair of vertices. [Certificates and rooted bounds](opposite/summary.json) · [Original-coordinate geometry](constructions.json) · [Search and independent replay](rebuild_saved.py)
+
+## Allowing two sites of the nine-dimensional path to change
+
+For the entire 189-edge snake, prescribe zero, one or two original vertices to omit. The 190 original vertices give $1+190+\binom{190}{2}=18{,}146$ choices. Each retained interval of original vertices must be traversed consecutively in any resulting induced path because its internal vertices already have both neighbours. The first enumeration orders and orients these intervals, connects them, and grows both free ends. Exactly the specified original vertices must remain absent. The second enumeration starts with the set of retained sites and adds adjacent sites in arbitrary order. It tracks induced degrees and connected components, rejecting cycles or a third neighbour. The two enumerations compared their complete labelled path sets at every omission pattern. An exhaustive comparison through length 192 is restricted to the reported search range. [Enumeration and comparison](repair_whole.py) · [Original paths, omissions and every output shape](whole-path-repairs.json)
+
+The search may change the crossing, both faces and the order of the retained pieces. A result that still has a once-crossed coordinate can have a different whole fixed arm. [Archive comparison and coordinate-use counts](classified.json)

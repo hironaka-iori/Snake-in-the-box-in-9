@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 274 handoff covers reconstructions around the arms of archived 191-edge snakes. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 275 handoff covers the exact fixed-crossing maximum of 189 and the two-step constructions of length 191. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

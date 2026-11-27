@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 274, 27 November 2026}
+\date{Research state after round 275, 27 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11365,6 +11365,15 @@ An unrestricted opposite-face result can be transferred to a fixed extension wit
 The best construction among these endpoints has 191 edges. The 9 attaining rooted placements give 8 distinct paths, all in the 131-shape archive. At target 192, 203 of the 626 endpoints are excluded by independent certificate replay, transferred bounds, or both. The other 423 are open at 192. The verified ceiling for the full retained family is 193 edges. The limits refer to one-crossing snakes with a specified retained arm.
 
 The 188-edge construction from Round 273 can also be improved inside these coordinates. Delete its original crossing vertex from the 97-edge arm and move the crossing to the next vertex. The remaining arm has 96 edges. A 92-edge partner gives 189 in place of the original 90-edge partner and join of 188. This recovers one of the two previously checked Round 271 paths. Both fixed crossings now have matching lower and upper bounds, 188 before the move and 189 afterwards.
+
+\section{The exact limit at two 93-edge arms}
+Two distinct eight-dimensional snakes of length 93, each with a prescribed crossing endpoint, accept the same 95-edge opposite arm in the translated coordinates. Their maximum one-crossing join in nine dimensions is exactly \(93+1+95=189\). Any longer join could be shortened from the free end of the opposite arm to length 190. This would require an opposite arm of length 96. The opposite-face proof covers all first steps and refines the remaining branches by their next step. The independent checker reconstructs the formulas and replays the contradiction certificates.
+
+A stronger obstruction is visible in the common geometry. The two fixed arms approach a shared 90-edge segment by different routes. Its 91 occupied vertices alone preclude a rooted 96-edge partner in the opposite face. Thus the two exceptional sites of each arm can both be released without admitting the missing edge at this crossing.
+
+Allowing changes throughout the nine-dimensional path gives a different outcome. From four starting paths of length 189, enumerate replacements omitting at most two sites of the starting path. A retained consecutive interval has to be traversed as a single path, with either orientation. Enumerating ways to connect the retained intervals, and independently growing a set of vertices subject to the induced-degree constraints, give the same labelled paths. The first step yields ten inequivalent 190-edge paths. Four of these yield 191 after a second step of at most two omissions, producing 22 distinct 191-edge shapes.
+
+All ten 190-edge shapes occur in the full archive at that length. The 22 resulting 191-edge shapes also occur in the archive and 19 of them use every coordinate at least twice. Searching every one of the 22 for a 192-edge path after any two omissions gave no solution. The same conclusion holds when the omitted set consists of a single interval of three through ten positions. These are restrictions on returning to the target from the specified 22 paths.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
