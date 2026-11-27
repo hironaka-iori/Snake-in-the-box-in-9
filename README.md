@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 277
+## Latest result · Round 278
 
-The exact eight-dimensional maximum for the 570 internally single-crossing 48-edge parents is 96. Eleven shapes attain it. Any 98-edge path using one coordinate once must use each other coordinate at least twice in each of its two arms. [Evidence](milestones/277-shorter-seven-dimensional-arms/README.md)
+The exact two-crossing family maximum is 191 for the 22 middle shapes observed across 625 archived crossings, with both outer arms free. In the full nine-cube a 192-edge snake could share at most 153 consecutive edges with any archived 191 or 159 with any archived 190. [Evidence](milestones/278-regrowing-two-free-ends/README.md)
 
-Round 277 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Paused after Round 278. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

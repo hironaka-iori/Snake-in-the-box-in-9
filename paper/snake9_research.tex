@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 277, 27 November 2026}
+\date{Research state after round 278, 27 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11398,6 +11398,23 @@ The two traversals examined 5,942,876,074 and 4,789,708,708 search nodes respect
 Consequently, a 98-edge eight-dimensional snake with a once-used coordinate must split as \(48+1+49\), and each of the other seven coordinates occurs at least twice in each arm. Both arms use all seven coordinates because a path omitting one would lie in the six-cube, whose maximum is 26. The 49-edge side cannot have a once-used coordinate by Round 272. The result above excludes a once-used coordinate on the 48-edge side as well. Thus every other coordinate occurs at least four times in the full path. Existence under these necessary conditions remains open.
 
 Rebuilding after up to two arbitrary site omissions from each of the eleven literal 96-edge paths produces no path of length 97 or 98. Since cube isometries carry additions and omissions to additions and omissions, at least three sites must be omitted in any alignment with one of those two target lengths.
+
+\section{Rebuilding outer arms around a retained interval}
+There are 625 choices of a twice-used coordinate among the two nine-dimensional archives, 537 in snakes of length 190 and 88 in snakes of length 191. Their eight-dimensional middle paths have lengths 92 through 95. To see what fixing a middle actually entails, write \(M\) for this path and \(A,B\) for the two outer paths, oriented away from the crossing ports. The three paths have total joined length \(|E(A)|+|E(M)|+|E(B)|+2\). Both outer paths lie in one face. They avoid the interior of \(M\), touch only their own ports, and are mutually disjoint and nonadjacent in that face.
+
+When \(M\) and \(B\) are fixed, the entire other arm \(A\) can be searched as a single rooted eight-dimensional path. Its forbidden sites are the interior of \(M\) and the closed neighbourhood of \(B\). A larger construction would contain a free-arm prefix attaining the target.
+
+Exactly 49 archived crossing charts have an outer arm of at most three edges: nine charts of length 191 and 40 of length 190. Keeping their middle, ports and short arm gives 22 distinct fixed configurations. Five have maximum 191 and seventeen have maximum 190, with all 39 whole-root contradictions independently replayed. Sixteen of the length-190 charts can reach 191 by replacing only the longer outer arm. The thirty recorded replacements represent nine archived 191-edge shapes.
+
+The earlier 187-edge one-crossing upper bound at both ports of Carlson's 98-edge middle places a separate restriction on a two-crossing lift. Removing one outer arm of length \(t\) and its crossing from a 192-edge join gives a one-crossing join of length \(191-t\). Thus both outer arms of a 192-edge two-crossing lift of this particular middle must have at least four edges.
+
+The three previously uncatalogued 96-edge arms from Round 277 give six directed one-crossing placements. Direct regrowth reaches 181 edges at one, and the unrestricted opposite-face search excludes 192 at all six. Combining these certificates with the four earlier shapes having adequate bounds and a further eight-port search covers both endpoints of all eleven Round 277 shapes. No eight-dimensional path of length 97 or 98 can contain any one of them, by the omission theorem of Round 277. It follows that a one-crossing nine-dimensional snake having any of the eleven as a consecutive interval of either arm has at most 191 edges. The placement of the interval and the opposite arm can both vary.
+
+A less restricted calculation fixes only the middle \(M\). Both outer arms may be rebuilt from scratch. In the lower face select both ports, impose total degree two except at the two endpoints, and subtract the already selected upper vertices from the required parity counts. A selected component which forms a cycle cannot belong to an induced path. The 95-edge middle shared by 84 archived 191-edge snakes has exact maximum 191 in this family. The literal 96-vertex sequence is the Round 188 unresolved example, under a coordinate permutation and translation. The 93-edge middle of another two archived 191-edge snakes has the same exact maximum. These statements allow either outer arm to have zero edges.
+
+Across all 22 archived middle shapes the exact family maximum is 191. For target 192, 42 of the 44 combinations of middle and endpoint parity have whole-model contradictions. For the remaining two combinations, partitioning by the lower neighbour of a selected middle port completes the exclusion in five searched branches each, after the geometric cases are accounted for. Replaying the combined table covers all 625 archived crossing occurrences. All three middle shapes used by the 88 twice-crossed 191-edge examples attain the family ceiling. The individual maxima of the remaining shapes need only lie between their constructive lower bounds and 191.
+
+A separate nine-dimensional result allows arbitrary coordinate crossings. Any 192-edge snake shares at most 153 consecutive edges with each of the 131 archived 191-edge snakes, and at most 159 consecutive edges with each of the 1,042 archived 190-edge snakes, up to cube symmetry and reversal. Thus every one of the 4,978 windows of length 154 in the former archive and every one of the 32,302 windows of length 160 in the latter archive is excluded. To prove the statements, take a retained interval of \(c\) edges. Its internal vertices already have their two required neighbours. Enumerate permitted left and right tails with the entire interval held fixed. A pair with combined length \(192-c\) fits exactly when every cross-tail pair of new vertices has Hamming distance at least two. Independent enumerations and checks of matching pairs exclude the required extensions. A second source of exclusions comes from branching on the active tip and bounding the size and parity of each reachable component. The final calculation reconstructs 29,710 literal occurrences of certificates used to cover all archive windows. This result places no restriction on the number of crossings of a coordinate.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

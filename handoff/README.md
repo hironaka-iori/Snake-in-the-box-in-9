@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 277 handoff covers the complete shorter-arm census for a one-crossing 98-edge candidate. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 278 handoff covers the exact maximum for the 22 archived two-crossing middles and the full-cube overlap bounds. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

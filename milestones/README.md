@@ -1,9 +1,10 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. Round 277 is complete. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 278. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| How much of an archived snake can a 192-edge construction retain? | [278 · Rebuilding outer arms around a retained interval](278-regrowing-two-free-ends/README.md) |
 | Can the shorter side of a possible 98-edge one-crossing construction use a coordinate only once? | [277 · The shorter arm of a one-crossing optimal candidate](277-shorter-seven-dimensional-arms/README.md) |
 | Can a different optimal eight-dimensional arm or a better partner be constructed? | [276 · Reconstructing partners of an optimal eight-dimensional arm](276-partners-of-optimal-arms/README.md) |
 | What is the exact limit at the saved crossing, and what can change beyond it? | [275 · The exact limit at two 93-edge arms](275-rebuilding-the-saved-arm/README.md) |

@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-The shorter-arm census closes at 96 and supplies eleven 96-edge shapes, including three absent from previous catalogues. A one-crossing 98 would require the split 48 and 49 with each remaining coordinate used at least twice in each half. [Round 277](../../milestones/277-shorter-seven-dimensional-arms/README.md)
+All 22 archived two-crossing middle shapes exclude 192, including the 95-edge middle of 84 archived 191s. Rebuilding both ends in the full cube proves consecutive-overlap ceilings of 153 against every archived 191 and 159 against every archived 190. All eleven Round 277 shapes also exclude 192 when contained in a one-crossing arm. [Round 278](../../milestones/278-regrowing-two-free-ends/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 
