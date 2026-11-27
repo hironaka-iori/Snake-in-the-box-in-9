@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 276
+## Latest result · Round 277
 
-The closest different 99-vertex set inducing a 98-edge snake to Carlson’s example requires seven replacements. Its unique nearest neighbour is a symmetric copy. Any inequivalent optimum requires at least nine replacements. [Evidence](milestones/276-partners-of-optimal-arms/README.md)
+The exact eight-dimensional maximum for the 570 internally single-crossing 48-edge parents is 96. Eleven shapes attain it. Any 98-edge path using one coordinate once must use each other coordinate at least twice in each of its two arms. [Evidence](milestones/277-shorter-seven-dimensional-arms/README.md)
 
-Round 276 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Round 277 is complete. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

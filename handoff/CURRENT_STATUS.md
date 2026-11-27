@@ -1,6 +1,6 @@
 # Current research handoff
 
-**Round 276 is complete.** Carlson’s and Snakepits’ 98-edge examples have the same shape. Its unique nearest alternative replaces seven sites. A separate check excludes every inequivalent optimum within eight site replacements. Both rooted nine-dimensional joins lie in the interval 180–187. [Evidence](../milestones/276-partners-of-optimal-arms/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
+**Round 277 is complete.** Eleven 96-edge shapes attain the maximum for the 570 specified seven-dimensional parents. Both sides of a hypothetical 98-edge one-crossing snake must use every remaining coordinate at least twice. [Evidence](../milestones/277-shorter-seven-dimensional-arms/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 The reviewed global interval is $191\le a(9)\le230$. Both certificate families are assembled in the final contributor theorem. The saved audit passed. A fresh independent rebuild of the full dependency chain remains pending. [Audited theorem and source review](../milestones/272-forty-nine-edge-parents/contributor.json)
 

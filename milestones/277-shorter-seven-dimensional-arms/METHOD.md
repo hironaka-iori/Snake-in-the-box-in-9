@@ -1,0 +1,25 @@
+# The 48-edge seven-dimensional arm
+
+Cut an eight-dimensional snake at the only edge in coordinate 7. Translate its projection so that the crossing is at zero. The two resulting seven-dimensional paths $P,Q$ joined at zero lift to an induced path in $Q_8$ exactly when $V(P)\cap V(Q)=\{0\}$. A second projected coincidence would give a second edge between the two faces. Conversely, equality of projected vertices is the only way an edge can run between the faces. With $|E(P)|=48$, an opposite path of 47, 48 or 49 edges gives 96, 97 or 98 edges, respectively.
+
+Round 272 enumerated every 48-edge path in $Q_7$ that crosses at least one coordinate exactly once. Cutting such a coordinate splits the path into two six-dimensional paths, one having at least 24 edges. The enumeration covered all longer halves of 24, 25 and 26 edges, and both independent traversals produced the same 570 undirected shapes. Both orientations of each shape are distinct after translating the crossing to zero and renaming axes by order of first appearance. [Seven-dimensional classification and labelled pairs](../272-forty-nine-edge-parents/README.md)
+
+## Grouping compatible partners
+
+For each of the 382 saved groups of rooted shapes, intersect their occupied sets with zero removed. This gives a set $C$ of at least 45 forbidden sites. Every opposite path compatible with some member must avoid $C$. The enumeration first finds all rooted paths of length at least 47 avoiding $C$, then checks each against every group member. There is no bound on how far the path can continue after reaching the target. Within a group, every compatible root and its labelled opposite path are retained before cube isometries and reversal are removed. The union of group memberships equals all 1,140 oriented shapes. [Rooted partition](../272-forty-nine-edge-parents/short-arm-groups.json) · [Enumeration and reconstruction](enumerate_groups.py)
+
+The first traversal stores two 64-bit masks for the available vertices. After choosing a child, it removes the neighbours of the previous tip from all subsequent choices. Every few steps it bounds each parity count in the connected region reachable from the new tip. The other traversal chooses unused neighbours with exactly one occupied neighbour, its current tip, using explicit occupied-neighbour counts and the opposite order of coordinate candidates. The two traversals compare the complete sorted lists of labelled paths before filtering, then compare the filtered labelled joins. A separate all-pairs Hamming-distance check verifies each resulting eight-dimensional path. [First traversal](../270-optimal-seven-dimensional-arms/PrimerPartners.cs) · [Independent traversal](ContactReplay.cpp)
+
+## Four-dimensional face bound
+
+Given a search prefix with tip $t$, let $S$ contain all immediately legal next vertices together with all unoccupied, unblocked vertices that have no neighbour in the prefix. Every potential continuation lies in $S$. The first vertex must be immediately legal. Every later vertex must avoid contact with the entire current prefix because any such contact would be a chord. Restricting $S$ to the vertices reachable from at least one legal next step preserves this property.
+
+Partition $Q_7$ into the eight $Q_4$ faces obtained by fixing bits 4, 5 and 6. Every vertex belongs to exactly one face. In any face $F$, the vertices used by a continuation induce a forest of maximum degree at most two, since their graph is an induced subgraph of a path. For each set of available sites $S\cap F$, compute the maximum of each of the three quantities
+$$
+e+o,\qquad 2e+o,\qquad e+2o
+$$
+over all induced forests of maximum degree two inside that set. Here $e,o$ count the even and odd selected sites. Each of the $2^{16}$ masks of a face has a table entry. The parity convention swaps in faces whose three fixed bits have odd weight.
+
+A continuation of $h$ more edges adds $h$ new vertices. At depth $d$, measured from an even root, its first $h$ vertices include $e=\lfloor(h+(d\bmod 2))/2\rfloor$ even vertices and $o=h-e$ odd ones. The sums of the eight face maxima must therefore be at least $h$, $h+e$ and $h+o$. If one sum is smaller, even the first $h$ vertices of a continuation are impossible, so the prefix cannot reach the target. The searches use $h=47-d$ whenever the bound is applied.
+
+One implementation identifies forests by rejecting vertices of degree greater than two and detecting cycles by joining connected components as edges are inserted. A second checks every allowed degree explicitly, counts connected components by graph traversal, and uses the identity $|E|=|V|-c$ for a forest with $c$ components. The first implements the subset maximum recursively by deleting one site. The second propagates scores from subsets by sweeping over all 16 site indices. The resulting 196,608 numerical capacities must agree byte for byte. This bound is specific to proof pruning and imposes no additional shape requirement on the opposite path. [Independent table computation](capacity.py)

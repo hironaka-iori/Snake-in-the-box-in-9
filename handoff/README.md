@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 276 handoff covers the geometry and opposite partners of the published 98-edge arm. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 277 handoff covers the complete shorter-arm census for a one-crossing 98-edge candidate. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

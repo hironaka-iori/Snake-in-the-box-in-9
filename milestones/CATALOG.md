@@ -2,7 +2,7 @@
 
 Open a round to read its account and supporting material. The [milestone guide](README.md) groups the recent rounds by research question. The index follows the numbered folders published on the main branch. Round 26 has no separate published folder.
 
-[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–276](#rounds-240-to-276)
+[1–49](#rounds-1-to-49) · [50–99](#rounds-50-to-99) · [100–149](#rounds-100-to-149) · [150–199](#rounds-150-to-199) · [200–239](#rounds-200-to-239) · [240–277](#rounds-240-to-277)
 
 ## Rounds 1 to 49
 
@@ -267,7 +267,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 238 | [Recovery from three missing counts](238-three-count-recovery/MATHEMATICAL_NOTE.md) |
 | 239 | [Recovery after four missing counts](239-four-count-recovery/MATHEMATICAL_NOTE.md) |
 
-## Rounds 240 to 276
+## Rounds 240 to 277
 
 | Round | Research record |
 |---:|---|
@@ -308,3 +308,4 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 274 | [How many sites of a long arm can be kept?](274-rebuilding-near-a-fixed-arm/README.md) |
 | 275 | [The exact limit at two 93-edge arms](275-rebuilding-the-saved-arm/README.md) |
 | 276 | [Reconstructing partners of an optimal eight-dimensional arm](276-partners-of-optimal-arms/README.md) |
+| 277 | [The shorter arm of a one-crossing optimal candidate](277-shorter-seven-dimensional-arms/README.md) |

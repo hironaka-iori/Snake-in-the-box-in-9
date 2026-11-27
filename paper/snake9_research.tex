@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 276, 27 November 2026}
+\date{Research state after round 277, 27 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11385,6 +11385,19 @@ Let \(S\) be the published set of 99 occupied vertices. For a second 98-edge pat
 The search fixes the number of missing old sites and the number of selected new sites, requires exactly two degree-one vertices and degree two at all other selected sites, and removes disconnected cycles. Each valid occupied set is recorded, then excluded from the next search at the same distance. A contradiction after this exclusion certifies the completeness of the list.
 
 A separate constructive search used 25 archived 97-edge shapes and the published 98-edge shape. It retained two separated seed segments, rebuilt a middle gap of up to 17 edges and regrew a free end after trimming up to seven edges. Searching in opposite orders agreed on all 598,272 cases in this family. The only resulting 98-edge shape was the published one.
+
+\section{The shorter arm of a one-crossing optimal candidate}
+A 98-edge snake in the eight-cube crossing a chosen coordinate once would split into two seven-dimensional arms whose lengths sum to 97. Since the seven-dimensional maximum is 50, the only unordered splits are \(47+50\) and \(48+49\). The Round 270 census, using all optimal seven-dimensional shapes from Palani's classification at both crossing endpoints, rules out \(47+50\). Round 272 rules out \(48+49\) whenever the 49-edge arm uses one of its seven coordinates exactly once.
+
+We now consider the other side of the remaining split. The saved complete catalogue of 48-edge seven-dimensional shapes with an internally once-used coordinate has 570 members. Both choices of crossing give 1,140 rooted cases. Their search reduces to 382 groups of shared forbidden sites. A candidate produced for the less restrictive common domain is checked against each actual parent in its group. At a prescribed crossing, a join of length 98 needs a partner of length 49. The traversal also records partners of lengths 47 and 48, which would give 96 and 97 edges respectively.
+
+One traversal extends ordered paths with occupied-site masks. The replay maintains neighbour-contact counts, bounding the number of vertices that any completion can select inside each four-cube. The intersection of an induced path with a subcube is a forest of maximum degree two. The two computations of the local capacities agree for every one of the 65,536 allowed-site masks and each of three parity weight choices.
+
+The two traversals examined 5,942,876,074 and 4,789,708,708 search nodes respectively. Across the relaxed groups, nine labelled opposite paths reached 47 edges and none reached 48. After checking the actual forbidden sites, five rooted parents give eleven distinct 96-edge eight-dimensional shapes. Three of these shapes are absent from the earlier catalogue, its intervals and the eight-dimensional windows in the 1,173 archived nine-dimensional paths of lengths 190 and 191. Thus the exact maximum for this 570-shape family is 96.
+
+Consequently, a 98-edge eight-dimensional snake with a once-used coordinate must split as \(48+1+49\), and each of the other seven coordinates occurs at least twice in each arm. Both arms use all seven coordinates because a path omitting one would lie in the six-cube, whose maximum is 26. The 49-edge side cannot have a once-used coordinate by Round 272. The result above excludes a once-used coordinate on the 48-edge side as well. Thus every other coordinate occurs at least four times in the full path. Existence under these necessary conditions remains open.
+
+Rebuilding after up to two arbitrary site omissions from each of the eleven literal 96-edge paths produces no path of length 97 or 98. Since cube isometries carry additions and omissions to additions and omissions, at least three sites must be omitted in any alignment with one of those two target lengths.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}
