@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 275, 27 November 2026}
+\date{Research state after round 276, 27 November 2026}
 \begin{document}
 \maketitle
 
@@ -1714,6 +1714,11 @@ The saved 93-edge arm permits exactly 95 edges on the opposite side, giving a ni
 
 Changing up to two sites of the whole nine-dimensional path lets the crossing change as well. Four starting paths of length 189 give ten distinct shapes of length 190. Four of those ten reach 191 after another change of at most two sites, giving 22 distinct shapes. All 22 agree with archived snakes, and 19 use every coordinate at least twice. None of the 22 reaches 192 by omitting at most two sites, or by omitting one consecutive run of three through ten sites.
 
+\section{How an optimal arm lifts to nine dimensions}
+Two independently constructed eight-dimensional snakes of length 98 turn out to have the same shape. The coordinate map can be checked on all 99 vertices. Rebuilding the opposite arm at either end of this shape gives a nine-dimensional snake of 180 edges. Both ports have a certified upper bound of 187. The threshold for reaching 192 with one crossing would be a 93-edge partner.
+
+To get a different occupied set of length 98, at least seven of Carlson's 99 vertices have to move. Exactly one set occurs at distance seven, and a cube symmetry takes it back to Carlson's path. No set occurs at distance eight. A different shape therefore needs at least nine replacements however its coordinates are chosen.
+
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
 shapes as an intact arm cannot improve 191.
@@ -1735,7 +1740,7 @@ The Round 270 written-source review covers both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 275.
+in the companion manuscript and milestones through round 276.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

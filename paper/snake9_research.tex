@@ -32,7 +32,7 @@
 \title{Bounds and Constructions for the\\
 Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
-\date{Research state after round 275, 27 November 2026}
+\date{Research state after round 276, 27 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -11374,6 +11374,17 @@ A stronger obstruction is visible in the common geometry. The two fixed arms app
 Allowing changes throughout the nine-dimensional path gives a different outcome. From four starting paths of length 189, enumerate replacements omitting at most two sites of the starting path. A retained consecutive interval has to be traversed as a single path, with either orientation. Enumerating ways to connect the retained intervals, and independently growing a set of vertices subject to the induced-degree constraints, give the same labelled paths. The first step yields ten inequivalent 190-edge paths. Four of these yield 191 after a second step of at most two omissions, producing 22 distinct 191-edge shapes.
 
 All ten 190-edge shapes occur in the full archive at that length. The 22 resulting 191-edge shapes also occur in the archive and 19 of them use every coordinate at least twice. Searching every one of the 22 for a 192-edge path after any two omissions gave no solution. The same conclusion holds when the omitted set consists of a single interval of three through ten positions. These are restrictions on returning to the target from the specified 22 paths.
+
+\section{Reconstructing partners of an optimal eight-dimensional arm}
+Carlson's 98-edge snake and the independently generated Snakepits example determine the same shape under translations, coordinate permutations and reversal. For Carlson's 99 printed node labels \(j\), the reflected Gray image of \(j-1\) recovers the ordered cube vertices. Rokicki's published transition string gives the same order. Tracing the selected sites of the Snakepits example from endpoint 91 to endpoint 97 gives a different labelling. The recorded isometry matches its path with Carlson's. This comparison of examples provides no classification of all 98-edge snakes.
+
+A one-crossing nine-dimensional snake that retains this entire eight-dimensional parent needs a 93-edge opposite arm to reach 192. At each endpoint, rebuilding the opposite arm produced a concrete join of 180 edges. An 81-edge partner attains each construction, improving both earlier lower bounds by one edge. The certified one-crossing upper bound at each endpoint is 187. The two attaining constructions represent different nine-dimensional shapes. The parent and partner are induced and intersect only at the crossing after projection.
+
+Let \(S\) be the published set of 99 occupied vertices. For a second 98-edge path with occupied set \(T\), count replacements by \(d=|S\setminus T|=|T\setminus S|\). At distances \(1,\ldots,6\) there are no such sets. There is exactly one at distance seven, and its induced order has endpoints 137 and 199. It is obtained by interchanging coordinates 2 and 6 (numbered from zero) and then translating by exclusive-or with 137. Enumeration of all 10,321,920 cube isometries independently finds exactly one occupied set at distance seven. Distance eight contains no set. Thus a geometrically inequivalent optimum must differ in at least nine occupied sites in every alignment with this example. The computations count occupied sets, so the reverse order of a path is counted once.
+
+The search fixes the number of missing old sites and the number of selected new sites, requires exactly two degree-one vertices and degree two at all other selected sites, and removes disconnected cycles. Each valid occupied set is recorded, then excluded from the next search at the same distance. A contradiction after this exclusion certifies the completeness of the list.
+
+A separate constructive search used 25 archived 97-edge shapes and the published 98-edge shape. It retained two separated seed segments, rebuilt a middle gap of up to 17 edges and regrew a free end after trimming up to seven edges. Searching in opposite orders agreed on all 598,272 cases in this family. The only resulting 98-edge shape was the published one.
 
 \section{A numerical conjecture and its limitations}\label{sec:hypothesis}
 \begin{center}

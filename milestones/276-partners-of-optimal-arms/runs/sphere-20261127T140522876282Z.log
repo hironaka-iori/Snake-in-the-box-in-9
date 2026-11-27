@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "E:\Snake-in-a-box\milestones\276-partners-of-optimal-arms\sphere.py", line 98, in <module>
+    if __name__=="__main__":main()
+                            ~~~~^^
+  File "E:\Snake-in-a-box\milestones\276-partners-of-optimal-arms\sphere.py", line 50, in main
+    a=cli.parse_args();h=hunt();g=h.rebuild.geometry;old=set(read(HERE/"input-arms.json")["known_endpoints"]["0"]["parent"])
+                         ~~~~^^
+  File "E:\Snake-in-a-box\milestones\276-partners-of-optimal-arms\partners.py", line 71, in hunt
+    import hunt as h
+  File "E:\Snake-in-a-box\milestones\271-rebuilt-historical-partners\hunt.py", line 13, in <module>
+    from opposite import translate_domains,legal_next,aligned,family_model,rebuild,read,write,bank,pack
+  File "E:\Snake-in-a-box\milestones\269-archived-93-arms\opposite.py", line 10, in <module>
+    import search as original
+  File "E:\Snake-in-a-box\milestones\268-archived-94-arms\search.py", line 12, in <module>
+    import rebuild
+  File "E:\Snake-in-a-box\milestones\266-rebuilding-one-arm\rebuild.py", line 14, in <module>
+    import masks
+  File "E:\Snake-in-a-box\milestones\262-common-forbidden-sites\masks.py", line 14, in <module>
+    import fixed
+  File "E:\Snake-in-a-box\milestones\254-distant-arm-partners\fixed.py", line 15, in <module>
+    from partners import previous as p, file_hash, read, require, rooted
+ImportError: cannot import name 'previous' from 'partners' (E:\Snake-in-a-box\milestones\276-partners-of-optimal-arms\partners.py)

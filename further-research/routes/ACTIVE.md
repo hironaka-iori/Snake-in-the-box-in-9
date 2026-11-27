@@ -8,7 +8,7 @@ Translate the two joining endpoints to zero in their respective faces. The joine
 
 ## Current checkpoint
 
-Both selected 93-edge arms close at 189. Their common 90-edge segment already excludes a 96-edge partner at the specified root. Allowing changes to the whole path recovers 191. [Round 275](../../milestones/275-rebuilding-the-saved-arm/README.md)
+The nearest different occupied set at length 98 replaces seven sites and is a symmetric copy. Inequivalent optimal arms require at least nine replacements in any alignment. The available one-crossing constructions improve at both ports. [Round 276](../../milestones/276-partners-of-optimal-arms/README.md)
 
 Round 264 excluded 192 at both ends of all 41 shapes in the distant one-site exchange component, including their appearances as windows in longer arms. Their one-crossing maximum lies between 181 and 191. The separate twelve-shape family has maximum 191. [Distant component](../../milestones/264-distant-component/README.md) · [Twelve-shape component](../../milestones/259-four-exchange-component/README.md)
 
