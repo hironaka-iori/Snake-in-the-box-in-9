@@ -1,6 +1,8 @@
-# Active route · One crossing between two eight-dimensional arms
+# Active route · Rebuild both ends of a retained nine-dimensional interval
 
-**Continue this route across successive rounds.** Seek a 192-edge snake in the ninth-dimensional cube by placing one induced path in each eight-dimensional face and joining their endpoints across one edge. Focus on rebuilding one whole opposite arm while its parent and crossing endpoint stay fixed. Record the distinguished crossing, endpoint orientations, case coverage and longest verified path.
+**Current construction.** Keep an interval of an archived snake and allow both ends to grow in all nine coordinates. Start with archive path `191-0`. Record the literal retained indices, the directions each tip can use and the verified length of every claimed construction. Round 279 locates the first newly available step at the left tip. [Prefix search](../../milestones/279-prefix-tail-spectrum/README.md)
+
+## Earlier one-crossing construction
 
 ## Why these three length splits suffice
 
