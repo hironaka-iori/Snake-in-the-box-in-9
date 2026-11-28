@@ -9,7 +9,9 @@
 \usepackage{xurl}
 \usepackage{enumitem}
 \setlist{itemsep=3pt,topsep=5pt}
-\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{15pt}
+\setlength{\parskip}{0pt}
+\allowdisplaybreaks
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -36,6 +38,8 @@ Nine-Dimensional Snake-in-the-Box Problem}
 \author{Iori Hironaka \and Tommy Ma \and Steven Zhan}
 \date{Research state after round 282, 28 November 2026}
 \begin{document}
+\hypersetup{pageanchor=false}
+\pagenumbering{gobble}
 \maketitle
 \begin{abstract}
 Let $a(9)$ be the maximum edge length of an induced path in the
@@ -111,9 +115,12 @@ $a(9)=196$ remains separate from every proved result.
 \end{abstract}
 
 \clearpage
-\setcounter{tocdepth}{1}
+\hypersetup{pageanchor=true}
+\pagenumbering{Roman}
+\setcounter{tocdepth}{4}
 \tableofcontents
 \clearpage
+\pagenumbering{arabic}
 
 \section{Problem, notation, and principal result}\label{sec:problem}
 \begin{definition}
