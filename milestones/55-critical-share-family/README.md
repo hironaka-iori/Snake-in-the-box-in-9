@@ -8,7 +8,7 @@ The ordinary radius-four model has an independently checked forest witness with 
 
 ## Selecting one inequality for an entire critical family
 
-Milestone 54's strongest exploratory model has exact minimum normalized charge 53/13. All transitions on minimum-mean cycles lie in one strongly connected component with 57 states and 83 edges. There are 26 distinct five-centre windows up to reversal; every critical edge has zero credited share under the previous rules.
+Milestone 54's strongest exploratory model has exact minimum normalised charge 53/13. All transitions on minimum-mean cycles lie in one strongly connected component with 57 states and 83 edges. There are 26 distinct five-centre windows up to reversal; every critical edge has zero credited share under the previous rules.
 
 Twenty-five of these windows have independently verified ordinary local forest witnesses. Share-cap-95 screening gives nine INFEASIBLE results and sixteen UNKNOWN results. The remaining ordinary window is UNSAT and receives no share test. UNKNOWN is not an exclusion. Only the selected pattern is sent for certificate replay in this round.
 
@@ -20,14 +20,14 @@ The minimum-cardinality claim is also independently checked: one selected patter
 
 Adding the selected share bound in both orientations raises the exact exploratory mean from 53/13 to 102/25. A replacement 25-step cycle attains the new mean, and an integer potential verifies it on every allowed transition. The ordinary-control comparison reaches the same mean.
 
-| Additional premise | Allowed transitions | Normalized mean | Scaled potential range |
+| Additional premise | Allowed transitions | Normalised mean | Scaled potential range |
 | --- | ---: | ---: | ---: |
 | Selected share bound in both orientations | 3,042,328 | 102/25 | 3,216 |
 | Ordinary exclusion found during controls | 3,042,286 | 102/25 | 3,216 |
 
 Both models give the conditional edge estimate 229973/977, whose integer part is 235. The numerical rules inherited from milestone 54 are still premises of these models. A successful local Lean replay does not certify those inherited rules or complete the global graph-to-snake proof.
 
-The coverage calculation proves that the selected local inequality affects every previously minimizing cycle. It does not prove that those cycles occur in a complete snake, or that all replacement cycles have enough charge for 234. The next mathematical target is the new minimum-charge family, with priority given to inequalities that affect the entire family.
+The coverage calculation proves that the selected local inequality affects every previously minimising cycle. It does not prove that those cycles occur in a complete snake, or that all replacement cycles have enough charge for 234. The next mathematical target is the new minimum-charge family, with priority given to inequalities that affect the entire family.
 
 ## Evidence and reproduction
 

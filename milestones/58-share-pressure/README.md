@@ -34,7 +34,7 @@ The independent verifier enumerates all 4,608 square faces, reconstructs every f
 
 The new geometric credit is combined with each existing five-centre share lower bound by taking their maximum. Adding the two bounds would charge the same share twice without justification.
 
-| Model | Exact normalized minimum | Potential range | Attaining cycle length | Conditional integer bound |
+| Model | Exact normalised minimum | Potential range | Attaining cycle length | Conditional integer bound |
 |---|---:|---:|---:|---:|
 | Previous combined model | 49/12 | 650 | 12 | 235 |
 | New numerical count-specific candidate | 94/23 | 15,240 | 23 | 235 |
@@ -74,7 +74,7 @@ Thus every fixed weighting in this relaxation has minimum cycle mean at most 989
 \mu>\frac{9400}{19}>\frac{989}{2}
 \]
 
-even if the potential range were zero. The finite coefficients are independently checked, and Lean checks the convex-combination ceiling and the boundary arithmetic. This rules out obtaining 234 solely by optimizing these fixed weights under the current accounting. It does not rule out stronger geometric information, count-dependent weights with additional accounting, or a sharper boundary argument.
+even if the potential range were zero. The finite coefficients are independently checked, and Lean checks the convex-combination ceiling and the boundary arithmetic. This rules out obtaining 234 solely by optimising these fixed weights under the current accounting. It does not rule out stronger geometric information, count-dependent weights with additional accounting, or a sharper boundary argument.
 
 ## Reproduction and continuation
 
@@ -86,6 +86,6 @@ even if the potential range were zero. The finite coefficients are independently
 - `scripts/weighted_ceiling.py`, `lean/WeightedCeiling.lean`: the restricted weighting ceiling and its conditional arithmetic.
 - `data/verification-geometry.json`, `data/lean-audit.json`: verification receipts with explicit scope.
 
-The next research target is to strengthen the forced-absence information on the replacement family at mean 617/150. The most direct extension is to retain one additional transition of the known segment, while continuing to charge its last five internal centres. This preserves the fivefold overlap budget and can expose additional absent vertices and empty squares. The weighted ceiling above makes this a better next test than optimizing the same five-centre coefficients alone.
+The next research target is to strengthen the forced-absence information on the replacement family at mean 617/150. The most direct extension is to retain one additional transition of the known segment, while continuing to charge its last five internal centres. This preserves the fivefold overlap budget and can expose additional absent vertices and empty squares. The weighted ceiling above makes this a better next test than optimising the same five-centre coefficients alone.
 
-This is research round 2 of 10 after manuscript revision 56. The paper and its open editor mirror remain unchanged and synchronized; the next scheduled full paper revision is milestone 66. The compilation limitation recorded in milestone 56 remains unresolved.
+This is research round 2 of 10 after manuscript revision 56. The paper and its open editor mirror remain unchanged and synchronised; the next scheduled full paper revision is milestone 66. The compilation limitation recorded in milestone 56 remains unresolved.

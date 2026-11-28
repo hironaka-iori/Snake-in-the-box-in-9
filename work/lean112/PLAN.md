@@ -36,7 +36,7 @@ If the runner is active and making progress, leave it running quietly.
 If a group fails, inspect its exact error in `bank-proof.json` and
 `bank-logs/`, finish any missing Lean proof, and resume the runner after
 its lock is released. Successful modules are reused against source,
-artifact and direct-import hashes. The final aggregate `Bank112Results`
+artefact and direct-import hashes. The final aggregate `Bank112Results`
 is required before declaring the 112 stage complete. After all checks,
 document and commit/push on the existing research branch and disable the
 heartbeat. Do not imply that completing this stage solves the global
@@ -49,21 +49,21 @@ the whole stage unless all 262 entries and the aggregate pass.
 
 ## Earlier stage context
 
-The user authorized continued proof work, background execution and a live
+The user authorised continued proof work, background execution and a live
 monitor. Work only in this checkout, on research/dfs-lean-completion. Do not
 alter main or claim global optimality. Do not spawn agents unless separately
-authorized. Preserve the completed KEEP=144 evidence.
+authorised. Preserve the completed KEEP=144 evidence.
 
 The local service.py runs two resumable tasks: the first Boolean certificate
 and a bounded SAT survey of all 262 oriented entries. It serves dashboard.html
 on localhost; outputs/lean112/server.json records the actual URL and process.
 Every completed module and survey entry is saved atomically and recorded in
-events.jsonl. Cached Lean artifacts are reused only against recorded source
+events.jsonl. Cached Lean artefacts are reused only against recorded source
 hashes, with a fresh final import/axiom audit. Solver UNSAT is explicitly not a
 geometric exclusion theorem. A SAT relaxation is not a longer snake.
 
 The unfinished reasoning work is the geometric bridge and scaling the complete
-formal proof to all entries. Continue this during authorized heartbeat runs:
+formal proof to all entries. Continue this during authorised heartbeat runs:
 
 1. Read outputs/lean112/first-certificate.json, survey.json, reasoning.json and
    recent events. Check service liveness without starting duplicate workers.
@@ -73,7 +73,7 @@ formal proof to all entries. Continue this during authorized heartbeat runs:
 3. Connect exact CNF clauses to the geometric path, including region coverage,
    degree, endpoints, parity counts, square exclusions and all counter wires.
    Formula identity must be checked before reusing any LRAT/Lean certificate.
-4. Finish a full first-instance geometric exclusion. Then prioritize hard or
+4. Finish a full first-instance geometric exclusion. Then prioritise hard or
    structurally distinct survey entries; strengthen SAT relaxations where
    necessary. Generate and kernel-check remaining certificates with bounded
    memory. No sorry, native_decide, unchecked axioms or weakened goal.

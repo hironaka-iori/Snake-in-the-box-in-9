@@ -1,6 +1,6 @@
 # Manuscript revision after the endpoint-demand theorem
 
-The full manuscript has been reviewed and reorganized around proof dependencies. Counting notation now precedes the main theorem. The direct proof of 191 <= a(9) <= 236 remains intact, including the square identity, catalogue interpretation, potential summation, and boundary constants. The numerical hypothesis now precedes the optimality criteria that use it.
+The full manuscript has been reviewed and reorganised around proof dependencies. Counting notation now precedes the main theorem. The direct proof of 191 <= a(9) <= 236 remains intact, including the square identity, catalogue interpretation, potential summation, and boundary constants. The numerical hypothesis now precedes the optimality criteria that use it.
 
 The new section develops the sharp outer-transition pair bound seven, its 19-corner endpoint demand, and the sharp bound eight when both endpoints are at distance at least three. It places the existing weighted endpoint principle directly after the new demand sets. Complete 140-, 146-, and 148-edge witnesses are printed, distinguishing sharpness, the shorter-context counterexample, and the endpoint-distance condition.
 

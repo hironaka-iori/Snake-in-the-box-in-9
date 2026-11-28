@@ -26,7 +26,7 @@ An optional circuit model enforces connectivity from the start.
 | Fixed connected 28-edge path | Accepted |
 | All cells variable, 196 edges, local cuts | UNKNOWN after 120 seconds |
 | All cells variable, 196 edges, circuit connectivity | UNKNOWN after 120 seconds |
-| Maximize connected path, starting with the 28-edge control | FEASIBLE, 101 edges after 120 seconds |
+| Maximise connected path, starting with the 28-edge control | FEASIBLE, 101 edges after 120 seconds |
 
 The 101-edge path passed all pairwise adjacency checks. It is a construction
 control, below the known 191-edge witness. Solver timeouts do not establish
@@ -42,7 +42,7 @@ acyclic. The maximum selected size is 10, 14, or 14 when the number of
 nonconnector internal endpoints is zero, one, or two, respectively.
 
 Thus each enumerated acyclic state satisfies c <= 10 + 4e. A nonconnector
-cannot have an external neighbor under this palette. In a single path,
+cannot have an external neighbour under this palette. In a single path,
 the sum of these endpoint counts is at most two. Across sixteen cells,
 the census therefore permits at most 160 + 4*2 = 168 selected vertices.
 The target requires 197 vertices. This is a diagnosis of an overly
@@ -76,7 +76,7 @@ python milestones/17-global-cell-construction/scripts/search.py --connected --ma
 The first command regenerates the capacity JSON and Lean source. Compile
 both Lean modules with the pinned Lean 4.19/mathlib environment from milestone
 14 before running the verifier. `data/verification.json` records source and
-result hashes normalized to LF. The verifier checks witnesses, cell masks,
+result hashes normalised to LF. The verifier checks witnesses, cell masks,
 components, all recorded cuts, source versions, and all seven Lean audits;
 it does not turn solver exclusions into proof certificates.
 

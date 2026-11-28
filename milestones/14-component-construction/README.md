@@ -8,13 +8,13 @@ below is disconnected and gives no improved snake lower bound.
 Select 197 vertices in Q9. Exactly two selected vertices have selected degree
 one, and every other selected vertex has selected degree two. Such a finite
 graph consists of one path and zero or more cycles. The solver does not retain
-a bank prefix. An endpoint is translated to zero and its neighbor is mapped
+a bank prefix. An endpoint is translated to zero and its neighbour is mapped
 to one by a coordinate permutation.
 
 When a candidate has a cyclic component C, add the constraint that at most
 |C|-1 of its vertices remain selected. The existing `CycleExclusion` theorem
 proves that no induced path can contain a nonempty vertex set with two distinct
-neighbors at every vertex. `lean/CycleCuts.lean` derives the exact cardinality
+neighbours at every vertex. `lean/CycleCuts.lean` derives the exact cardinality
 inequality used here and connects it to the existing Boolean cycle checker.
 Its three Lean axiom audits passed using only the standard foundations.
 
@@ -29,14 +29,14 @@ A small solver found two disjoint 26-vertex sets in Q6, each inducing a
 second in each odd-parity layer. Since the base sets are disjoint, there are
 no edges between different layers. The result has eight disjoint 26-cycles,
 208 vertices, and 208 edges. Delete eleven consecutive vertices from one
-cycle, then normalize one endpoint and its neighbor.
+cycle, then normalise one endpoint and its neighbour.
 
 The saved seed has:
 
 - 197 distinct vertices and 196 induced edges;
 - one path on 15 vertices, hence 14 edges;
 - seven induced cycles on 26 vertices each;
-- endpoints 0 and 39, with the neighbor of 0 equal to 1.
+- endpoints 0 and 39, with the neighbour of 0 equal to 1.
 
 An independent Python audit checked all 19,306 unordered vertex pairs, the
 component partition, and the ordered path. The generated Lean certificate

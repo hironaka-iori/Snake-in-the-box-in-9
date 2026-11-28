@@ -23,7 +23,7 @@ The 28 rejected extensions have 27 distinct direction words. Each would select a
 
 Each restricted graph is evaluated twice: first with the inherited nine-transition weights, then with the stronger forced-empty-square credits. The old and new credits are combined by taking their maximum on the same five centres.
 
-| Context | Credits used | Exact normalized minimum |
+| Context | Credits used | Exact normalised minimum |
 |---|---|---:|
 | Ten transitions | Inherited nine-transition credits | 3297/800 |
 | Ten transitions | Extended geometric credits | 2477/600 |
@@ -38,7 +38,7 @@ In particular, every closed walk of length ell in the eleven-transition graph wi
 10\sum_{i=0}^{\ell-1}w_i\ge4961\ell.
 \]
 
-The exact normalized increase over the source minimum is
+The exact normalised increase over the source minimum is
 
 \[
 \frac{4961}{1200}-\frac{3297}{800}=\frac{31}{2400}.
@@ -73,4 +73,4 @@ The next test is to combine the entire recorded count vector with forced-absence
 - `scripts/singleton_pilot.py`: explicitly unproved count-conditioned pilot.
 - `data/verification.json`, `data/lean-audit.json`: verification receipts and scope.
 
-This is research round 5 of 10 after manuscript revision 56. The paper and its open editor mirror remain unchanged and synchronized. The next scheduled full revision is milestone 66. The compilation limitation recorded in milestone 56 remains unresolved.
+This is research round 5 of 10 after manuscript revision 56. The paper and its open editor mirror remain unchanged and synchronised. The next scheduled full revision is milestone 66. The compilation limitation recorded in milestone 56 remains unresolved.

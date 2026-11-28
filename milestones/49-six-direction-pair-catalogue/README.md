@@ -34,11 +34,11 @@ For distinct coordinates $a,b,c$, the transition pattern $(a,b,c,a)$ satisfies
 
 $$\alpha_{r+1}+\alpha_{r+3}\geq5.$$
 
-This strengthens the basis exclusion that both counts cannot be at most two. The proof assumes the sum is at most four, represents the two opposite-corner counts with a multiplicity-preserving joint counter, and derives a checked contradiction. It then applies the arbitrary-snake geometric bridge and coordinate normalization. A complete 146-edge snake attains the bound: at segment start $r=95$, its counts are $\alpha_{96}=2$ and $\alpha_{98}=3$. Lean checks all vertex pairs, the transition pattern, the two counts, and the implication that any universal constant for this pattern is at most five. Thus five is the exact best constant for this inequality. This sharpness result does not determine the longest snake in $Q_9$. In the 131-path bank, 8,982 oriented occurrences have minimum observed sum 12; that observation does not justify a stronger universal constant.
+This strengthens the basis exclusion that both counts cannot be at most two. The proof assumes the sum is at most four, represents the two opposite-corner counts with a multiplicity-preserving joint counter, and derives a checked contradiction. It then applies the arbitrary-snake geometric bridge and coordinate normalisation. A complete 146-edge snake attains the bound: at segment start $r=95$, its counts are $\alpha_{96}=2$ and $\alpha_{98}=3$. Lean checks all vertex pairs, the transition pattern, the two counts, and the implication that any universal constant for this pattern is at most five. Thus five is the exact best constant for this inequality. This sharpness result does not determine the longest snake in $Q_9$. In the 131-path bank, 8,982 oriented occurrences have minimum observed sum 12; that observation does not justify a stronger universal constant.
 
 ## Effect on the finite graph
 
-Applying the complete low-cap catalogue in both orientations and at every represented subsegment removes 528,610 additional transitions from the milestone 48 graph. There remain 3,855,773 transitions on the same 1,586,304 states. The exact normalized minimum remains **42/11**, attained by a new eleven-step cycle. A matching integer potential has range 7,728 and satisfies
+Applying the complete low-cap catalogue in both orientations and at every represented subsegment removes 528,610 additional transitions from the milestone 48 graph. There remain 3,855,773 transitions on the same 1,586,304 states. The exact normalised minimum remains **42/11**, attained by a new eleven-step cycle. A matching integer potential has range 7,728 and satisfies
 
 $$7056+\pi(v)\leq11w(u,v)+\pi(u)$$
 
@@ -54,7 +54,7 @@ The attaining cycle has 330 pair-position occurrences across its six-direction s
 
 Within this precise necessary-condition model, no valid exclusion of the form $\alpha_i\leq A$ and $\alpha_j\leq B$ on a six-direction window can eliminate one of these cycle occurrences: any such upper-bound rectangle containing the cycle values also contains the recorded witness counts. This conclusion is about the stated local model and monotone pair-cap exclusions. It does not cover stronger connected-path conditions, exact-value exclusions, arbitrary weighted inequalities, or longer segments. The positive local witnesses may have several components and are not complete snakes.
 
-The result redirects the next investigation toward restrictions involving three counts or longer windows. It does not establish a limitation on all mathematical methods.
+The result redirects the next investigation towards restrictions involving three counts or longer windows. It does not establish a limitation on all mathematical methods.
 
 ## Comparison for the next round
 

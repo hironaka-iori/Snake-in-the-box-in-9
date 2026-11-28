@@ -49,11 +49,11 @@ Adjacent fibres carry disjoint sets, so `S` induces exactly 16 disjoint 14-cycle
 
 **Consequence for count automata.** Consider an automaton whose states are direction shapes plus singleton counts, with transitions excluded only by refuted radius-3 windows of at most four centres. This is the construction behind the conditional 239. Its periodic walks include those of the 14-cycles of `S`, so its minimum cycle mean is at most 30/7. That caps such a method at about **233 edges** with singleton weights only, and at **223 edges** even if `s0` were counted exactly. The current conditional 239 uses mean 10/3. The levers that remain open are five-centre windows, radius four, and the `s0` term.
 
-**Caveat.** For four-centre windows, the radius-3 ball already contains a whole 14-cycle of `S` (`scripts/ball_cycles.py`). The windows are satisfiable only because the same counts are realized by other local configurations. So the cap applies to arguments that see counts and directions window by window. It does not apply to arguments that keep the joint local configuration.
+**Caveat.** For four-centre windows, the radius-3 ball already contains a whole 14-cycle of `S` (`scripts/ball_cycles.py`). The windows are satisfiable only because the same counts are realised by other local configurations. So the cap applies to arguments that see counts and directions window by window. It does not apply to arguments that keep the joint local configuration.
 
 ## A stronger adversary: 208 vertices of 26-cycles
 
-The randomized search `scripts/q6pairs.c` finds two vertex-disjoint induced 26-cycles in `Q6` (`data/fibre_pair_q6.json`). The same fibre rule over `Q9 = Q6 × Q3` (`u + 64*y`) gives `data/adversary208.json`:
+The randomised search `scripts/q6pairs.c` finds two vertex-disjoint induced 26-cycles in `Q6` (`data/fibre_pair_q6.json`). The same fibre rule over `Q9 = Q6 × Q3` (`u + 64*y`) gives `data/adversary208.json`:
 
 - 8 disjoint induced 26-cycles, `|S| = 208`;
 - `T = 1328`, `s0 = 304`, and `T + 2*s0 = 1936 = 9216 - 35*208`;

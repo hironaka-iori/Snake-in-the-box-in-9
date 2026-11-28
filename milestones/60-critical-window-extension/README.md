@@ -80,4 +80,4 @@ Files:
 - `scripts/verify.py`: separate exhaustive checks.
 - `data/verification.json`, `data/lean-audit.json`: verification receipts and scope.
 
-This is research round 4 of 10 after manuscript revision 56. The paper and its editor mirror remain unchanged and synchronized. The next scheduled full revision is milestone 66. The compilation limitation recorded in milestone 56 remains unresolved.
+This is research round 4 of 10 after manuscript revision 56. The paper and its editor mirror remain unchanged and synchronised. The next scheduled full revision is milestone 66. The compilation limitation recorded in milestone 56 remains unresolved.

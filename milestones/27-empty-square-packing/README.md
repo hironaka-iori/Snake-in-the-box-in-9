@@ -17,7 +17,7 @@ not been independently rebuilt here; main's integrated bound remains 238.
 ## Checked mathematics
 
 Write e(q) for the number of empty squares through q, d(q) for its selected
-neighbors, and s_M(x) = sum over q adjacent to x of floor(M e(q)/d(q)). Set a
+neighbours, and s_M(x) = sum over q adjacent to x of floor(M e(q)/d(q)). Set a
 zero-denominator contribution to zero. The collaborator's double count is
 
     sum over selected x of s_M(x) = sum_q d(q) floor(M e(q)/d(q)).
@@ -100,7 +100,7 @@ the pinned ShareCharge source; `-ReuseDependency` is only an incremental option.
 1. Generate and replay the local share refutations supplying the strongest
    useful windows, starting with the 163 and 301 pair and the 245 window.
 2. Incorporate the disjoint-window recurrence into a finite-state lower-bound
-   proof over every allowed direction/count sequence. Optimizing weights on
+   proof over every allowed direction/count sequence. Optimising weights on
    selected cycles alone does not provide that coverage.
 3. Track the finite initial/end loss and test the exact 191/1145 allowances above.
 

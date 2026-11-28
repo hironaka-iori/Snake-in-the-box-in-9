@@ -14,11 +14,11 @@ The third statement is directional: the excluded pair of upper bounds is $(3,2)$
 
 ## Proof structure and scope
 
-Each argument starts with an arbitrary snake, selects the indicated segment, and normalizes its distinct coordinate labels by a cube automorphism. Its selected vertices satisfy the radius-four geometric constraints: prescribed segment membership, degree at most two, degree at least one where all neighbors are represented, at most two interior endpoints, absence of selected cycles, and the specified opposite-corner counts.
+Each argument starts with an arbitrary snake, selects the indicated segment, and normalises its distinct coordinate labels by a cube automorphism. Its selected vertices satisfy the radius-four geometric constraints: prescribed segment membership, degree at most two, degree at least one where all neighbours are represented, at most two interior endpoints, absence of selected cycles, and the specified opposite-corner counts.
 
-For the first two rows, assume respectively that the sum is at most four or five. A joint cardinality counter represents the sum exactly, preserving multiplicity when a vertex is counted at both centres. The resulting Boolean clauses have a replayed contradiction. For the third row, imposing both upper bounds three and two gives the contradiction directly. The arbitrary-coordinate statements then follow by undoing the normalization and using integer arithmetic.
+For the first two rows, assume respectively that the sum is at most four or five. A joint cardinality counter represents the sum exactly, preserving multiplicity when a vertex is counted at both centres. The resulting Boolean clauses have a replayed contradiction. For the third row, imposing both upper bounds three and two gives the contradiction directly. The arbitrary-coordinate statements then follow by undoing the normalisation and using integer arithmetic.
 
-The joint proofs include 289 and 16 additional selected-cycle exclusions, respectively. Every added set is checked to be a cycle, and its clause receives the same geometric interpretation as the ordinary clauses. The third proof needs no additional cycles beyond the ordinary encoding. The generated semantic proofs, replay, arbitrary-snake bridges and coordinate normalization are checked in Lean. See `data/verification.json` for the completed build and dependency audit; no claim rests solely on the search solver returning UNSAT.
+The joint proofs include 289 and 16 additional selected-cycle exclusions, respectively. Every added set is checked to be a cycle, and its clause receives the same geometric interpretation as the ordinary clauses. The third proof needs no additional cycles beyond the ordinary encoding. The generated semantic proofs, replay, arbitrary-snake bridges and coordinate normalisation are checked in Lean. See `data/verification.json` for the completed build and dependency audit; no claim rests solely on the search solver returning UNSAT.
 
 | Result | Core clauses | Active variables | Derived clauses | Replay hints | Additional cycle cuts |
 |---|---:|---:|---:|---:|---:|
@@ -34,7 +34,7 @@ Independent geometry checks cover 38 saved positive local configurations and all
 
 The saved local configurations attain sums five and six for the first two restrictions. They can contain several path components and are not full-snake sharpness examples. The solver controls also show that some proposed symmetric pair-sum strengthening of the directional exclusion would fail in the local model.
 
-Applying the three restrictions to every represented subsegment in both orientations excludes another 109,510 transitions from the milestone 47 graph. The graph has 1,586,304 states and 4,384,383 retained transitions. Its minimum normalized charge mean remains **42/11**. A new eleven-step cycle attains it. An integer potential satisfies
+Applying the three restrictions to every represented subsegment in both orientations excludes another 109,510 transitions from the milestone 47 graph. The graph has 1,586,304 states and 4,384,383 retained transitions. Its minimum normalised charge mean remains **42/11**. A new eleven-step cycle attains it. An integer potential satisfies
 
 $$7056+\pi(v)\leq 11w(u,v)+\pi(u)$$
 
@@ -54,6 +54,6 @@ The next focused task is a complete two-count survey on six-direction segments. 
 
 `scripts/probe.py`, `pairs.py` and `shorten.py` generate the numerical discoveries. `certify.py` extracts the clause cores and generates replay sources; `wrappers.py` supplies the arbitrary-coordinate statements. `replay.py` builds in a fresh directory and supports source-checked resume. `archive.py --unpack` restores the lossless proof files.
 
-`controls.py` checks the positive configurations and bank. `graph.py` updates the finite graph and finds a candidate cycle and potential. `verify.py` reconstructs the clauses and graph restrictions and verifies the proof provenance and exact finite-model certificate without rerunning the optimizer. `scout.py` records numerical tests of the replacement cycle.
+`controls.py` checks the positive configurations and bank. `graph.py` updates the finite graph and finds a candidate cycle and potential. `verify.py` reconstructs the clauses and graph restrictions and verifies the proof provenance and exact finite-model certificate without rerunning the optimiser. `scout.py` records numerical tests of the replacement cycle.
 
 This is research round **2 of 5** after manuscript revision 46. The paper and existing editor source remain unchanged; the new mathematical statements will be integrated at the next scheduled revision.

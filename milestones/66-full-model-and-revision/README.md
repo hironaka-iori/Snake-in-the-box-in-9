@@ -4,7 +4,7 @@
 
 ## Complete-model effect
 
-The milestone-65 terminal-count restriction has been integrated into the complete recorded nine-transition model using additional direction history. Its exact integer minimum rises from 9891/20 to **18823/38**, an increase of **301/380**. The normalized mean is **18823/4560**.
+The milestone-65 terminal-count restriction has been integrated into the complete recorded nine-transition model using additional direction history. Its exact integer minimum rises from 9891/20 to **18823/38**, an increase of **301/380**. The normalised mean is **18823/4560**.
 
 The construction tracks prefixes of the three successive canonical nine-direction windows forming the relevant eleven-direction pattern. Enumeration of all **11,162** canonical induced eleven-direction words verifies that the three-window signature identifies that pattern uniquely. It adds 15,552 states, rather than retaining every eleven-direction word in every state. This recognition has an exhaustive computational check; its arbitrary-snake proof bridge remains unfinished.
 
@@ -38,7 +38,7 @@ All named coordinates in each of the following words are distinct. Two new arbit
 | (a,b,c,d,e,f,d,c,a,b,d) | 8 | 3 |
 | (a,b,c,d,e,f,d,c,a,f,d) | 10 | 3 |
 
-Each proof exhibits three opposite corners forced absent by selected vertices that already have their two path neighbours. With the coordinates normalized to 0 through 5, the first proof uses vertex 51 and corners 17, 27, 33; the second uses vertex 18 and corners 6, 17, 23. No count assumptions at other positions are required. The finite corner witnesses were independently reconstructed.
+Each proof exhibits three opposite corners forced absent by selected vertices that already have their two path neighbours. With the coordinates normalised to 0 through 5, the first proof uses vertex 51 and corners 17, 27, 33; the second uses vertex 18 and corners 6, 17, 23. No count assumptions at other positions are required. The finite corner witnesses were independently reconstructed.
 
 These restrictions exclude two windows of the first replacement cycle. Integrating them excludes 17,161 lifted transitions in total, including the original terminal restriction. Another minimum-mean cycle survives, so the mean stays 18823/38.
 

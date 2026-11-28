@@ -13,7 +13,7 @@ scope, evidence and reproduction commands. This was the 16 October checkpoint.
 Update, 18 October: the integrated KEEP=112 work has a PASSED receipt for all
 262 oriented bank entries and the aggregate `Bank112Results`, recorded in
 `outputs/lean112/bank-proof.json`. The earlier statement that KEEP=112 remained
-uncertified is superseded. This receipt was inspected during synchronization;
+uncertified is superseded. This receipt was inspected during synchronisation;
 the large certificate was not independently rebuilt in that round. The result
 excludes 192-edge regrowth retaining those particular 112-vertex prefixes,
 with the recorded both-end and longer-length consequences. The global optimum

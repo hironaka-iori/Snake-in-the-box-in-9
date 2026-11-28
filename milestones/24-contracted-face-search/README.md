@@ -8,13 +8,13 @@ Contracting fixed outside path components may make coordinate-face repair more t
 
 For a free region U and seed S, the selected vertices outside U remain exactly S minus U. Their induced components are paths. Remove their internal vertices from the solver and forbid every candidate inside vertex adjacent to a removed vertex. Replace each component with at least three vertices by a mandatory connection between its retained endpoints. Components of one or two vertices remain unchanged.
 
-If c retained vertices are selected and r fixed internal vertices were removed, the expanded snake has c+r-1 edges. The solver maximizes this quantity. The fixed 191-edge seed supplies both a feasibility control and a complete hint.
+If c retained vertices are selected and r fixed internal vertices were removed, the expanded snake has c+r-1 edges. The solver maximises this quantity. The fixed 191-edge seed supplies both a feasibility control and a complete hint.
 
 ## Mathematical checks
 
 `lean/Rigidity.lean` proves five results: an injective sequence of integer positions with unit steps has constant direction; an adjacent embedding in a snake has that property; a selected subpath is contiguous in either direction; the expanded edge-count identity; and the impossibility of closing an injective unit-step chain of at least three positions. All five axiom audits passed with only `propext`, `Classical.choice`, and `Quot.sound`.
 
-The manuscript gives the contraction argument. The full Python model, expansion correspondence and optimizer are not certified in Lean. The general graph contraction argument remains a written proof supported by the checked contiguity and counting results.
+The manuscript gives the contraction argument. The full Python model, expansion correspondence and optimiser are not certified in Lean. The general graph contraction argument remains a written proof supported by the checked contiguity and counting results.
 
 ## Experiments
 
@@ -23,9 +23,9 @@ The seed is milestone 18's aligned 191-edge bank example. The ten Q8 faces and t
 | Model | Small-cube oracle comparisons | Q9 runs | Best expanded length |
 |---|---:|---:|---:|
 | Contracted circuit model | 592 passed | 10 | 191 |
-| Added edge linearization and short-cycle cuts | 592 passed | 10 | 191 |
+| Added edge linearisation and short-cycle cuts | 592 passed | 10 | 191 |
 
-Each Q9 run used two workers, random seed 192 and a 20-second limit. Each was preceded by a separate fixed-seed control, which returned OPTIMAL at 191. All twenty unrestricted optimization runs returned FEASIBLE at 191. None proved optimality. Their weak objective bounds are restricted solver bounds and do not supersede known global theorems.
+Each Q9 run used two workers, random seed 192 and a 20-second limit. Each was preceded by a separate fixed-seed control, which returned OPTIMAL at 191. All twenty unrestricted optimisation runs returned FEASIBLE at 191. None proved optimality. Their weak objective bounds are restricted solver bounds and do not supersede known global theorems.
 
 The strengthened model adds explicit upper bounds on selected edge variables, the path edge-count equality, and 193 to 551 triangle or four-cycle inequalities in the contracted graph. Artificial connections are included, so a cut can exclude a cycle whose expansion contains a long fixed outside segment. These are redundant constraints; this short comparison found no construction gain.
 

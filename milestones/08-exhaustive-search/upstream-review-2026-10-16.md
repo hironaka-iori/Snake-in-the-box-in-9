@@ -33,7 +33,7 @@ auxiliary variable an explicit count meaning, prove each retained input
 clause, construct the exact imported constraint record, and only then invoke
 the Boolean contradiction. The window-(2,2,3) work is following the same
 verification boundary. Its corner-counter bridge is now checked; full clause
-assembly and arbitrary-window normalization remain open.
+assembly and arbitrary-window normalisation remain open.
 
 These regrowth results concern specified bank end segments. They neither
 exclude all 192-edge snakes nor improve the global upper bound of 245.

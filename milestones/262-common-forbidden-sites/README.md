@@ -1,6 +1,6 @@
 # Round 262 · A 92-site obstruction for an unrestricted partner
 
-At crossing vertex 67, the six unresolved 96-edge parent cases share 92 of their 96 forbidden projected sites. A 95-edge induced path from the crossing cannot avoid those 92 sites, even when every other vertex of the eight-dimensional face is available. This single obstruction therefore excludes a 192-edge join for all six rooted parents. [The 92 normalized vertices and contradiction certificate](groups.json)
+At crossing vertex 67, the six unresolved 96-edge parent cases share 92 of their 96 forbidden projected sites. A 95-edge induced path from the crossing cannot avoid those 92 sites, even when every other vertex of the eight-dimensional face is available. This single obstruction therefore excludes a 192-edge join for all six rooted parents. [The 92 normalised vertices and contradiction certificate](groups.json)
 
 For a fixed crossing vertex, translate the crossing to zero and remove it from each projected parent's occupied set. The intersection \(F\) of the resulting forbidden sets is contained in each of them. Any partner compatible with one of the parents must avoid \(F\). Conversely, a 95-edge path avoiding \(F\) would still have to be checked against each full parent to yield a join.
 

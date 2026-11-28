@@ -16,7 +16,7 @@ Both cases give 5,760 alignments.
 The single-segment census checks every pair of shared anchors, in either
 donor order, with positive length gain. An adjacent recipient anchor pair
 cannot accept a nonempty interior because its existing edge becomes a chord.
-Closed-neighborhood bit masks test distinctness and all cross-adjacencies.
+Closed-neighbourhood bit masks test distinctness and all cross-adjacencies.
 There were 7,232,848 remaining candidates and 5,760 accepted exchanges.
 Every accepted exchange replaces the entire recipient with the donor.
 No partial positive exchange survived. `verify.py` independently rechecks
@@ -46,7 +46,7 @@ Each run used a six-second limit, two workers and random seed 196. Solver
 exclusions are restricted to the stated union and have no Lean certificates.
 UNKNOWN does not exclude a witness.
 
-Three 30-second optimization runs at length 190 maximize the smaller of the
+Three 30-second optimisation runs at length 190 maximise the smaller of the
 numbers of selected vertices exclusive to each parent. Each returned the
 donor, with objective zero and a positive unresolved objective bound. Thus
 the experiment found no mixed 190-edge seed; it did not prove none exists.

@@ -1,6 +1,6 @@
 # Geometric, incidence and spectral upper bounds
 
-The strongest maintained theorem is **191 <= a(9) <= 245 edges**. The 191-edge witness is in the core project; the global 245-edge upper bound is in `stronger/UpperBound245.lean`. It combines endpoint singleton counts at least four, count-one neighbors at least four, and exclusion of three consecutive internal count-two vertices. A finite potential argument bounds the total singleton incidences, and the four-corner identity bounds the length. No search output is assumed. The earlier 247-, 248-, and 251-edge strengthenings are preserved. `EndpointFourWitness.lean` checks a 120-edge path attaining the endpoint estimate.
+The strongest maintained theorem is **191 <= a(9) <= 245 edges**. The 191-edge witness is in the core project; the global 245-edge upper bound is in `stronger/UpperBound245.lean`. It combines endpoint singleton counts at least four, count-one neighbours at least four, and exclusion of three consecutive internal count-two vertices. A finite potential argument bounds the total singleton incidences, and the four-corner identity bounds the length. No search output is assumed. The earlier 247-, 248-, and 251-edge strengthenings are preserved. `EndpointFourWitness.lean` checks a 120-edge path attaining the endpoint estimate.
 
 `SpectralUpperBound.lean` proves the upper bound 255 using the same `Snake9.Snake` definition as the core project. It imports mathlib's proof of Huang's degree theorem.
 
@@ -70,10 +70,10 @@ The separate radius-three forest certificate is part of the standard-library cor
 
 ## General cycle exclusion
 
-`CycleExclusion.lean` checks that every nonempty finite subset of a snake has a vertex with at most one neighbor in the subset. It then checks all 41 recorded cycle cuts from the radius-five experiment. Reproduce with:
+`CycleExclusion.lean` checks that every nonempty finite subset of a snake has a vertex with at most one neighbour in the subset. It then checks all 41 recorded cycle cuts from the radius-five experiment. Reproduce with:
 
 ```sh
 python work/spectral/verify_incidence.py --module CycleExclusion --mathlib-dir /path/to/mathlib
 ```
 
-The finite Boolean contradiction is in the standard-library core project. Its complete connection to the normalized geometric model remains pending; see `milestones/06-radius-five/ball_certificate_investigation.md`.
+The finite Boolean contradiction is in the standard-library core project. Its complete connection to the normalised geometric model remains pending; see `milestones/06-radius-five/ball_certificate_investigation.md`.

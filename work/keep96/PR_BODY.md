@@ -20,7 +20,7 @@ were not changed or run.
   executable verification. Other certificates were not replayed. This is not
   Lean verification and does not establish the global optimum.
 
-Includes resumable generation/solving, configuration and artifact hashes, all
+Includes resumable generation/solving, configuration and artefact hashes, all
 262 compressed formulas with mappings and clause provenance, solver logs,
 machine-readable tables, and a concise report. Small certificates are included;
 large certificates are retained in the isolated local clone and indexed by
@@ -39,5 +39,5 @@ slower RUP replay of entry 133 was stopped after all three native checks passed;
 its interruption is explicitly recorded, not counted as RUP success.
 
 Start with `outputs/keep96/REPORT.md` and `work/keep96/README.md`. Full KEEP=96 Lean
-formalization remains premature until UNKNOWN cases and certificate scalability
+formalisation remains premature until UNKNOWN cases and certificate scalability
 are addressed. This PR does not merge or modify the running KEEP=112 campaign.

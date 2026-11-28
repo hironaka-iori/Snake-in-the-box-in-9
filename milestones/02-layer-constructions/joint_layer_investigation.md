@@ -2,11 +2,11 @@
 
 Date: 15 October 2026. Verified bounds remain 191 <= a(9) <= 254; the conjecture 196 is unresolved.
 
-`work/joint_layer_search.py` selects both Q8 induced paths jointly, with exact lengths and a common endpoint at zero. Their projected vertex sets may intersect only at zero. A circuit constraint with an auxiliary vertex enforces connectivity; all selected adjacent cube vertices must be consecutive. The first directions can be normalized to coordinates 0 and 1 because they must differ.
+`work/joint_layer_search.py` selects both Q8 induced paths jointly, with exact lengths and a common endpoint at zero. Their projected vertex sets may intersect only at zero. A circuit constraint with an auxiliary vertex enforces connectivity; all selected adjacent cube vertices must be consecutive. The first directions can be normalised to coordinates 0 and 1 because they must differ.
 
 The final implementation matched all 42 independent exhaustive comparisons in Q2 and Q3, including both feasible and infeasible cases with and without symmetry. A fixed Q8 benchmark also passed. These controls are evidence about the implementation, not a Lean proof of the solver model.
 
-The benchmark comes from bank index 0. Its Q9 path crosses coordinate 5 once, at edge index 96. Its projections have 96 and 94 edges and intersect only at their joining endpoint. `JointLayerSeed.lean` checks the two paths, every cross-pair equality, normalization, and the 191-edge join through the existing integer layer theorem. It also proves that the two neighbors adjacent to a compatible join cannot coincide. This is a decomposition of a published example, not a new record.
+The benchmark comes from bank index 0. Its Q9 path crosses coordinate 5 once, at edge index 96. Its projections have 96 and 94 edges and intersect only at their joining endpoint. `JointLayerSeed.lean` checks the two paths, every cross-pair equality, normalisation, and the 191-edge join through the existing integer layer theorem. It also proves that the two neighbours adjacent to a compatible join cannot coincide. This is a decomposition of a published example, not a new record.
 
 | Layer lengths | Joined target | Hint | Time limit | Outcome |
 |---|---:|---|---:|---|

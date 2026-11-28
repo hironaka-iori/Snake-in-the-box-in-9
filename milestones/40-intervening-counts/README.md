@@ -1,6 +1,6 @@
 # Intervening-count restrictions
 
-This milestone tests the surviving 29-period lower-table cycle from milestone36. At phase18, reversing and normalizing gives directions `(0,1,2,3,4,2,0,3)` and seven singleton counts `(3,4,4,5,5,3,3)`. The two distant counts obey the earlier distance-four inequalities. The intervening counts provide additional restrictions.
+This milestone tests the surviving 29-period lower-table cycle from milestone36. At phase18, reversing and normalising gives directions `(0,1,2,3,4,2,0,3)` and seven singleton counts `(3,4,4,5,5,3,3)`. The two distant counts obey the earlier distance-four inequalities. The intervening counts provide additional restrictions.
 
 ## Geometric statements
 
@@ -10,7 +10,7 @@ For distinct coordinates a,b,c,d,e and the eight transitions `(a,b,c,d,e,c,a,d)`
 \alpha_{r+3}\ge5,\qquad \alpha_{r+6}\ge5.
 \]
 
-The source development supplies arbitrary coordinate normalization and both implications. The completion gate `data/verification.json` passed: both full kernel replays, four refutation/interpretation audits and four normalization/consequence audits use only standard axioms. All 23 saved local forests passed independent checks.
+The source development supplies arbitrary coordinate normalisation and both implications. The completion gate `data/verification.json` passed: both full kernel replays, four refutation/interpretation audits and four normalization/consequence audits use only standard axioms. All 23 saved local forests passed independent checks.
 
 The statements exclude the identified occurrence in the saved cycle. No replacement minimum cycle mean has been certified, and no new global upper bound follows. The paper's interval remains 191 <= a(9) <= 236, using the pinned contributor theorem documented in milestone39.
 
@@ -42,8 +42,8 @@ Unconditional triple-sum estimates were also tested. The local model admits coun
 
 ## Reproduction and scope
 
-Run `scripts/probe.py` and `scripts/extend_probes.py` for the 40 numerical probes. `scripts/certify.py` reuses milestone38's ordinary-core generator and adds the explicitly saved cycle cuts. Run `scripts/replay.ps1 -Case 401`, then case402, then `scripts/check.ps1` for the normalized statements. Run `scripts/archive.py --pack` and `scripts/verify.py` for the final evidence gate.
+Run `scripts/probe.py` and `scripts/extend_probes.py` for the 40 numerical probes. `scripts/certify.py` reuses milestone38's ordinary-core generator and adds the explicitly saved cycle cuts. Run `scripts/replay.ps1 -Case 401`, then case402, then `scripts/check.ps1` for the normalised statements. Run `scripts/archive.py --pack` and `scripts/verify.py` for the final evidence gate.
 
 The scripts reuse the existing Lean4.19 support environment. They do not claim a clean rebuild of all imported support. The independent geometry checker verifies the saved positive configurations, all cycle cuts, core extraction, archive hashes, and the exact saved critical-cycle occurrence. Native solver exclusions outside the two replayed cores retain their numerical status.
 
-The current manuscript and existing editor source are synchronized. The desktop editor compiler succeeded on the revised source; data/compiler-diagnostic.json records its source hash. This confirms compilation, without claiming a visual audit of every page.
+The current manuscript and existing editor source are synchronised. The desktop editor compiler succeeded on the revised source; data/compiler-diagnostic.json records its source hash. This confirms compilation, without claiming a visual audit of every page.

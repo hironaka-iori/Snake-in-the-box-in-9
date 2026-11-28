@@ -15,7 +15,7 @@ The four tested eight-transition patterns are:
 
 Every one is excluded by the ordinary radius-four window constraints, without a share cap and without added cycle cuts. Each finite refutation and its interpretation for arbitrary snakes passed Lean. The combined classification, selective-history lemmas, and all fifteen axiom audits also passed. **The completed gate is recorded in `data/verification.json`, with the individual axiom audits in `logs/`.**
 
-The relevant five-centre direction types are A = 012304 and B = 012301, considered up to coordinate renaming and reversal. The collaborator's all-counts-four period-three cycle uses two A windows and one B window. Joining them produces the four patterns above. Python enumerates all 132 normalized induced eight-transition shapes. Independently, `JoinClassification.lean` checks the four-way classification for the three possible normalized first-six prefixes and all two-coordinate suffixes in Fin 8. `JointObstruction.lean` combines that finite classification with the four geometric exclusions. The coordinate-normalization hypothesis remains explicit in the combined theorem.
+The relevant five-centre direction types are A = 012304 and B = 012301, considered up to coordinate renaming and reversal. The collaborator's all-counts-four period-three cycle uses two A windows and one B window. Joining them produces the four patterns above. Python enumerates all 132 normalised induced eight-transition shapes. Independently, `JoinClassification.lean` checks the four-way classification for the three possible normalised first-six prefixes and all two-coordinate suffixes in Fin 8. `JointObstruction.lean` combines that finite classification with the four geometric exclusions. The coordinate-normalisation hypothesis remains explicit in the combined theorem.
 
 This result removes the particular period-three obstruction once seven-centre consistency is retained. It does not contradict the collaborator's ceiling for its original five-centre table, since that table allows independently chosen local configurations.
 
@@ -32,7 +32,7 @@ The exclusion triggers precisely when the old value is six, the new count is fou
 
 All states whose last four counts are not `(4,4,4,4)` already determine this run length. Only that one count tuple needs three versions, representing runs of length four, five, and at least six. With 34 direction states, the total increases from 34·6^4 = 44,064 to 34·(6^4+2) = **44,132**, adding **68** states.
 
-The diagnostic graph incorporates the radius-four oracle and share-loop records pinned to `8ad204ffa32bb3bb114891ab089a50b83d0fc10e`. It has 212,394 pruned edges before the four exclusions and 212,390 afterward. Saved cycles have these exactly checked means:
+The diagnostic graph incorporates the radius-four oracle and share-loop records pinned to `8ad204ffa32bb3bb114891ab089a50b83d0fc10e`. It has 212,394 pruned edges before the four exclusions and 212,390 afterwards. Saved cycles have these exactly checked means:
 
 | Table | Before | After |
 |---|---|---|

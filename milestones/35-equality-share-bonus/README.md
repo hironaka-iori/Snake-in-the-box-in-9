@@ -12,7 +12,7 @@ These statements are checked in Lean for arbitrary snakes and coordinate labels.
 
 ## Geometric explanation
 
-The internal path vertices already have their two selected neighbors. Their other neighbors are absent. This forces three empty coordinate squares. At four neighbors of the charged pair, those squares supply empty-square counts 1,2,2,1. Each of these neighbors has at most six selected neighbors. Their integer share contributions are therefore at least 2,4,4,2.
+The internal path vertices already have their two selected neighbours. Their other neighbours are absent. This forces three empty coordinate squares. At four neighbours of the charged pair, those squares supply empty-square counts 1,2,2,1. Each of these neighbours has at most six selected neighbours. Their integer share contributions are therefore at least 2,4,4,2.
 
 The extracted certificate uses only the segment and the selected-vertex degree restriction. It contains no count-counter clause and no cycle cut. The result also holds for selected sets containing cycles; it cannot alone remove the cycle obstruction to purely local methods. The same geometric enumeration supports pattern 0123410, but the new arbitrary-snake Lean wrapper in this milestone concerns 0123415.
 
@@ -33,7 +33,7 @@ Use Lean 4.19.0 and the existing pinned mathlib environment. The PowerShell buil
 3. `scripts/build.ps1`, then `scripts/check.ps1`, check all new modules in fresh build directories.
 4. `scripts/archive.py --pack` records lossless certificate hashes. `scripts/verify.py` checks provenance, proof receipts, source hashes, archives, and controls. The result is `data/verification.json`.
 
-The paper and the existing editor source are synchronized. The built-in preview compiler failed before TeX because the Windows restricted-token runner cannot enforce the split writable roots. The current PDF has not been verified.
+The paper and the existing editor source are synchronised. The built-in preview compiler failed before TeX because the Windows restricted-token runner cannot enforce the split writable roots. The current PDF has not been verified.
 
 ## Next direction
 

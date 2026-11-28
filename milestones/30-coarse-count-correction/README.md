@@ -4,7 +4,7 @@ Research checkpoint: 23 October 2026. This continues the requested empty-square 
 
 ## Checked geometric results
 
-All coordinates below are normalized by renaming. H denotes an independently chosen integer from 6 through 21.
+All coordinates below are normalised by renaming. H denotes an independently chosen integer from 6 through 21.
 
 | Case | Eight directions | Seven internal singleton counts | Result |
 |---|---|---|---|
@@ -13,7 +13,7 @@ All coordinates below are normalized by renaming. H denotes an independently cho
 | 2 | 01234120 | 6,3,3,6,3,3,6 | Excluded in Lean |
 | 3 | 01234125 | 6,3,3,6,3,3,6 | Excluded in Lean |
 
-The two interval exclusions also exclude their exact-six specializations. Cases 2 and 3 imply that if the counts are `(a,3,3,b,3,3,c)` with a,b,c >= 6, then a+b+c >= 19. Thus the seven-count sum is at least 31, and the three high positions carry at least one unit of excess beyond their coarse labels.
+The two interval exclusions also exclude their exact-six specialisations. Cases 2 and 3 imply that if the counts are `(a,3,3,b,3,3,c)` with a,b,c >= 6, then a+b+c >= 19. Thus the seven-count sum is at least 31, and the three high positions carry at least one unit of excess beyond their coarse labels.
 
 The four Boolean cores have 1,273, 1,223, 4,017 and 2,856 clauses, and 1,020, 987, 1,711 and 1,533 active variables respectively. They use **2,220,545 LRAT hints**. They have no share caps and no added cycle cuts. Native solver proofs were independently checked by drat-trim, then the extracted cores were re-solved for LRAT and replayed in Lean. Clause soundness and the geometric bridges were checked too.
 

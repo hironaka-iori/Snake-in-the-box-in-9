@@ -1,6 +1,6 @@
 # Milestone 62: empty-square share under a vertex case split
 
-Eight stronger local empty-square bounds have been checked in Lean for arbitrary matching snake segments. They require only the direction word and the snake axioms; no singleton-count assumptions are needed. Applied to the existing eleven-transition critical family, they raise its exact normalized minimum from **4961/1200 to 2483/600**, a gain of **1/240**.
+Eight stronger local empty-square bounds have been checked in Lean for arbitrary matching snake segments. They require only the direction word and the snake axioms; no singleton-count assumptions are needed. Applied to the existing eleven-transition critical family, they raise its exact normalised minimum from **4961/1200 to 2483/600**, a gain of **1/240**.
 
 The global interval recorded by the project remains **191 <= a(9) <= 235**. This milestone does not improve that interval or establish the exact optimum. The graph result is restricted to the family extracted in milestone 61. The full graph-to-snake assembly and inherited numerical premises remain unresolved.
 
@@ -53,7 +53,7 @@ For example, transition 8 has direction word (0,1,2,0,3,4,2,0,5), using zero-bas
 
 The improved nine-transition bound is applied to the final nine transitions of each longer context. Its five charged centres then coincide with those of the longer window. Credits on those same centres are combined by their maximum.
 
-| Context | Improved graph edges | Previous exact normalized minimum | New exact normalized minimum |
+| Context | Improved graph edges | Previous exact normalised minimum | New exact normalised minimum |
 |---|---:|---:|---:|
 | Nine transitions | 8 | 3297/800 | 9923/2400 |
 | Ten transitions | 7 | 2477/600 | 397/96 |

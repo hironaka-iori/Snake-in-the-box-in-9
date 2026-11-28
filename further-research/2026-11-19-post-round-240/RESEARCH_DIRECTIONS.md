@@ -14,7 +14,7 @@ The distance-eight graph on that support is an induced subgraph of the folded cu
 d=\begin{cases}t,&t\text{ even},\\9-t,&t\text{ odd}.\end{cases}
 \]
 
-Use this to organize the connected six-point configurations. Start with row differences, repeated neighbourhoods, and actual automorphisms of the distance matrix. The whole-support stars are already excluded in the structural note. Avoid assuming that every abstract bipartite graph is realizable by these cube coordinates.
+Use this to organise the connected six-point configurations. Start with row differences, repeated neighbourhoods, and actual automorphisms of the distance matrix. The whole-support stars are already excluded in the structural note. Avoid assuming that every abstract bipartite graph is realisable by these cube coordinates.
 
 For missing positions p_i, write w_i=(Af)(p_i). The necessary antipodal equations are
 
@@ -63,13 +63,13 @@ There is a lower starting point specific to these saved seeds. The recorded fixe
 
 This is a written consequence of the existing five-count theorem and the saved native/written construction exclusions. It inherits those evidence limits and has no new Lean assembly in this handoff. It is specific to comparing a 192-edge candidate with a saved seed, and it does not raise the general six-to-nine support interval for arbitrary binary selections. No search for a seed-compatible improvement with at most eleven changed counts is needed under these premises. If unrestricted six-count recovery were proved, the same argument would raise this seed-comparison threshold to fourteen.
 
-This suggests a bounded future experiment: investigate count-change supports starting at twelve while enforcing the seed-specific signs, the sum conditions, and the full inverse. Compare its effectiveness with direct vertex replacement. A count-profile parameterization may improve a search, but that has not been demonstrated.
+This suggests a bounded future experiment: investigate count-change supports starting at twelve while enforcing the seed-specific signs, the sum conditions, and the full inverse. Compare its effectiveness with direct vertex replacement. A count-profile parameterisation may improve a search, but that has not been demonstrated.
 
 Do not identify the size of the support of f with the size of the support of w. The inverse can spread a sparse count change across many vertex changes. The existing saved-seed comparison requires at least six deletions and seven additions for a 192-edge candidate, so at least thirteen changed memberships. It gives no equality between those thirteen changes and the number of affected neighbour counts. Conversely, a longer snake need not have a sparse count change relative to any saved seed. Excluding all small supports therefore excludes only that construction family.
 
 ## 3. Use symmetry at the correct scope
 
-For a fixed seed, cube automorphisms that preserve the seed as a set also preserve its neighbour-count profile and the seed-comparison conditions. They can identify equivalent proposed changes. A cube isometry that moves the seed to a different set cannot be used to identify two changes while keeping the seed fixed. Either move the seed and change together or use the seed's stabilizing automorphisms.
+For a fixed seed, cube automorphisms that preserve the seed as a set also preserve its neighbour-count profile and the seed-comparison conditions. They can identify equivalent proposed changes. A cube isometry that moves the seed to a different set cannot be used to identify two changes while keeping the seed fixed. Either move the seed and change together or use the seed's stabilising automorphisms.
 
 Path reversal does not change a vertex set or its count profile. It can reduce redundancy in ordered path searches, but it contributes no new count-profile equivalence by itself.
 
@@ -79,7 +79,7 @@ The useful lesson from the eight-point example is specific: symmetry can reduce 
 
 ## 4. A proof-completion alternative
 
-The literal arithmetic for four and five missing counts is already accepted in Lean. The missing whole-cube proof must extract and index the exceptional positions, split parity cases, identify the inverse coefficients at antipodes, and establish coverage by the accepted matrices. Prioritize a small complete bridge, beginning with four counts if that makes the classification manageable.
+The literal arithmetic for four and five missing counts is already accepted in Lean. The missing whole-cube proof must extract and index the exceptional positions, split parity cases, identify the inverse coefficients at antipodes, and establish coverage by the accepted matrices. Prioritise a small complete bridge, beginning with four counts if that makes the classification manageable.
 
 A successful bridge changes the verification status of an existing numerical threshold. It does not by itself improve the threshold or construct a longer snake. Avoid regenerating hundreds of accepted arithmetic cases merely because a new chat begins.
 
@@ -107,4 +107,4 @@ Partial greedy growth remains an optional completion heuristic after a structura
 
 My qualitative expectation is that additional structural exclusions are more immediately attainable than a longer snake. The eight-point bounded classification supports investigating the minimum-nine conjecture, but it is insufficient evidence to predict a universal proof. The probability of a 192-edge construction cannot be inferred from these local results. No numerical probability or target date is justified.
 
-Finish one coherent question per round, save both successful and unsuccessful evidence with its scope, and retain a concrete reason for the next step. No work in this file is authorized to start in the paused old chat.
+Finish one coherent question per round, save both successful and unsuccessful evidence with its scope, and retain a concrete reason for the next step. No work in this file is authorised to start in the paused old chat.

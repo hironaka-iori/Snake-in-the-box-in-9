@@ -19,7 +19,7 @@ A clean independent rebuild of the complete 236 proof has not been performed her
 
 The paper preserves the full 238 derivation as an introduction to the method, then proves the 236 refinement using the exact exclusion family, potential step, telescoping sum, endpoint estimates, and square census. The complete 732-row catalogue is saved as JSON and cited as supplementary proof data. Earlier statements and the witness appendix are retained; only the principal interval is strengthened. Authors and hyperlink settings are unchanged.
 
-The existing editor source is synchronized. The built-in compiler still fails before TeX because its Windows restricted-token runner cannot prepare the split writable roots. Source integrity checks therefore do not imply successful typesetting or visual inspection.
+The existing editor source is synchronised. The built-in compiler still fails before TeX because its Windows restricted-token runner cannot prepare the split writable roots. Source integrity checks therefore do not imply successful typesetting or visual inspection.
 
 ## Reproduction
 
@@ -32,4 +32,4 @@ The existing editor source is synchronized. The built-in compiler still fails be
 
 ## Research continuation
 
-The new distance-four theorem in milestone 38 remains useful for empty-square accounting. Its low singleton condition forces at least three units of count excess. A global improvement requires coverage of every admitted sequence and one common overlap budget. The current low-mean diagnostic cycle survives the new pair restrictions, so future restrictions should involve intervening counts or additional shapes. The collaborator's work toward 234/235 remains distinct until its complete final theorem and dependency audit are available.
+The new distance-four theorem in milestone 38 remains useful for empty-square accounting. Its low singleton condition forces at least three units of count excess. A global improvement requires coverage of every admitted sequence and one common overlap budget. The current low-mean diagnostic cycle survives the new pair restrictions, so future restrictions should involve intervening counts or additional shapes. The collaborator's work towards 234/235 remains distinct until its complete final theorem and dependency audit are available.

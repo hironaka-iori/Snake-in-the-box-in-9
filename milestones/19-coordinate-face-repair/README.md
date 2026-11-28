@@ -36,7 +36,7 @@ the solver models and their exclusions are not Lean-certified.
 ## A smaller constructive problem
 
 For the remaining face, the two possible attachments to the fixed outside
-path are 53 and 44. Forbidding neighbors of the outside path's interior
+path are 53 and 44. Forbidding neighbours of the outside path's interior
 leaves 78 available vertices and 147 cube edges. The two-arm model seeks
 two mutually nonadjacent induced paths, one attached at each endpoint.
 It replaces the fixed 142-vertex path temporarily by an artificial edge
@@ -49,7 +49,7 @@ The two arms need 55 selected vertices for 196 edges, or 51 for 192 edges.
 | Two selected attachment vertices, expanded control | Valid 143-edge path |
 | Target 196 | INFEASIBLE after about 25 seconds |
 | Target 192 | UNKNOWN after 60 seconds |
-| Maximize length, cap 196, 120 seconds | FEASIBLE, 186 edges |
+| Maximise length, cap 196, 120 seconds | FEASIBLE, 186 edges |
 
 The 186-edge construction uses 45 face vertices and the 142 fixed vertices.
 Its endpoints are 67 and 41. Its compressed path passes through the
@@ -80,7 +80,7 @@ python milestones/19-coordinate-face-repair/scripts/verify.py
 Compile `lean/FaceRepair.lean` from the pinned mathlib working directory,
 using the same Lean 4.19 dependency paths as the prior milestone. Its
 successful receipt is `logs/face-repair.log`. Source snapshots retain the
-versions used before targeted retries and length maximization were added.
+versions used before targeted retries and length maximisation were added.
 The independent verifier checks face coverage, source hashes, all witnesses,
 the compressed graph and expansion, bank-subpath comparison, and eight
 Lean audits. It does not turn solver INFEASIBLE into a proof certificate.

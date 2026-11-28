@@ -3,7 +3,7 @@
 Baseline: `acee575f181b8a6d35775f985169ec15cb2cf021`, fetched from
 `research/dfs-lean-completion`. Work branch: `research/keep96-feasibility`.
 Independent full clone: `E:/codex-research/keep96-feasibility`; no shared checkout,
-linked worktree, object alternates, or synchronized active KEEP=112 directory.
+linked worktree, object alternates, or synchronised active KEEP=112 directory.
 No applicable AGENTS.md was found in the repository or its local parent directories.
 The repository README was read. Only `work/keep96/` and `outputs/keep96/` are changed.
 KEEP=112 worker scripts are not imported, executed, or edited.
@@ -11,7 +11,7 @@ KEEP=112 worker scripts are not imported, executed, or edited.
 ## Encoding and evidence boundary
 
 The unchanged baseline `work/build_regrowth_cnf.py` supplies the encoder. For a
-prefix of 96 vertices, the head is vertex index 95. Closed neighborhoods of the
+prefix of 96 vertices, the head is vertex index 95. Closed neighbourhoods of the
 first 95 vertices are forbidden to all **new** vertices. The head is retained
 explicitly; all remaining candidates must be reachable from it through allowed
 vertices. A genuine extension necessarily lies in this region.
@@ -64,7 +64,7 @@ python work/keep96/run.py --phase pilot --seconds 300 --memory-mib 2048
 `prepare.py` checks 131 bank paths in both orientations (262 entries), each a
 191-edge induced path. The unchanged witness is also checked to fail the 193-vertex
 target. Selection is deterministic, outcome-blind farthest-point sampling on eight
-min-max normalized structural features: region vertices/edges, head degree, degree
+min-max normalised structural features: region vertices/edges, head degree, degree
 one/two counts, parity imbalance, squared prefix coordinate counts, and prefix
 endpoint Hamming distance. Start at the largest forward region, alternate
 orientations, disallow duplicate bank indices, break ties by smallest entry.
@@ -74,7 +74,7 @@ Solver: Glucose 4.1 (`g4`) through pinned python-sat, proof logging on, otherwis
 default parameters (no custom seed, incremental mode, or extra clauses). The solver
 extension binary SHA256, package/Python/platform versions, source hashes and full
 configuration are saved. The parent enforces **300 seconds per worker**, including
-startup, solving and evidence serialization. Poll interval is 0.1 seconds. Windows
+startup, solving and evidence serialisation. Poll interval is 0.1 seconds. Windows
 workers use a hard 2048 MiB per-process committed-memory limit via a Job Object;
 the parent additionally watches RSS. On POSIX the worker uses RLIMIT_AS. A worker
 failure that cannot be distinguished from an allocation failure is conservatively
@@ -89,7 +89,7 @@ are saved after each entry. The JSON and CSV summary are machine-readable.
 ## Resume and scale
 
 Rerun the same command to resume. Reuse requires identical formula/configuration
-identity and matching artifact hashes. Completed SAT/UNSAT records are reused.
+identity and matching artefact hashes. Completed SAT/UNSAT records are reused.
 UNKNOWN attempts are retained and skipped by default; `--retry-unknown` explicitly
 requests another bounded attempt. An interrupted attempt with only `started.json`
 is not a completed result and cannot be reused. Different limits/code/formulas
@@ -115,7 +115,7 @@ budgets separately. Full certificates remain in the original isolated clone;
 Git includes only certificates at most one MiB each, with a combined twenty MiB
 budget. `outputs/keep96/certificate-index.json` identifies every omitted proof by
 path and hash. Transfer omitted proofs from the original clone, or rerun their
-recorded configurations. A fresh checkout cannot reuse missing proof artifacts.
+recorded configurations. A fresh checkout cannot reuse missing proof artefacts.
 
 For a saved UNSAT attempt, an optional executable RUP replay is:
 
@@ -149,7 +149,7 @@ python work/keep96/native_audit.py
 python work/keep96/finalize.py
 ```
 
-Unmodified upstream DRAT-trim sources and license are vendored at commit
+Unmodified upstream DRAT-trim sources and licence are vendored at commit
 `2e3b2dc0ecf938addbd779d42877b6ed69d9a985` from
 https://github.com/marijnheule/drat-trim. Compilation uses `zig cc -O2 -std=c99
 -Dgetc_unlocked=getc`; the macro supplies the standard locked character reader

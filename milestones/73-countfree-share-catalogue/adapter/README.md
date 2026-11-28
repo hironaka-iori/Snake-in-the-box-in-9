@@ -12,7 +12,7 @@ Its conclusion is `K + 1 <= ((List.range 5).map (fun i => coreShare 12 p (r+i+1)
 
 Thus a cap-11 refutation yields a share lower bound of 12 for the five internal centres. A cap-15 refutation yields 16 through the same theorem. The coordinate shape is the only matching condition. The count bounds follow from `coreAlpha_le_21`, since all five centres lie strictly inside the snake.
 
-`canonical_share_bound` implements direct matching. It reuses the first-occurrence coordinate realization from `DirectionWindowBridge.window_refute`: `seenAfter`, `idx`, `getD_idx` and `mkPerm_spec`. It then invokes `LocalWindowShareBridge.refuted_share_bridge`.
+`canonical_share_bound` implements direct matching. It reuses the first-occurrence coordinate realisation from `DirectionWindowBridge.window_refute`: `seenAfter`, `idx`, `getD_idx` and `mkPerm_spec`. It then invokes `LocalWindowShareBridge.refuted_share_bridge`.
 
 `reversed_canonical_share_bound` invokes the direct result on `revSnake p` starting at `m-r-6`, then transports the five-centre sum through `dsOf_rev` and `coreShare_window_rev`. `blockList_eq_dsOf` connects the direction representation used by `coverage/lean/SixShapeCoverage.lean` to the representation used here, for any valid block length.
 
@@ -44,7 +44,7 @@ Run the scripts in this order using Python: `scripts/prepare_support.py`, `scrip
 
 The ten printed theorem axiom sets contain only `propext`, `Classical.choice` and `Quot.sound`. The new source and pinned support sources have no proof placeholders or native decision shortcut.
 
-Nine normalization modules are pinned against the existing milestone32 normalization receipt, with the maintained sources checked for LF-equivalent content. The local-share bridge is pinned against the successful milestone72 `critical-current/share-proof/data/proof-audit.json` receipt. `SixShapeCoverage` is pinned against milestone73's successful coverage receipt. `data/support.json` identifies the eleven exact inherited compiled objects and historical successful logs, with hashes. Their source snapshots are retained under `upstream/`. These dependencies were reused; this task does not claim to have rebuilt the entire inherited library.
+Nine normalisation modules are pinned against the existing milestone32 normalisation receipt, with the maintained sources checked for LF-equivalent content. The local-share bridge is pinned against the successful milestone72 `critical-current/share-proof/data/proof-audit.json` receipt. `SixShapeCoverage` is pinned against milestone73's successful coverage receipt. `data/support.json` identifies the eleven exact inherited compiled objects and historical successful logs, with hashes. Their source snapshots are retained under `upstream/`. These dependencies were reused; this task does not claim to have rebuilt the entire inherited library.
 
 ## Scope remaining
 

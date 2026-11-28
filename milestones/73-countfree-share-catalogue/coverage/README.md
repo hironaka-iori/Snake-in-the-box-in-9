@@ -19,13 +19,13 @@ c\in R\quad\text{or}\quad\operatorname{canon}(\operatorname{reverse}(c))\in R.
 
 `snake_window_coverage` applies the result to every actual six-transition window of every `Snake m`, with start \(r\) satisfying \(r+6\le m\). It proves that the canonical actual direction block, or the canonical reverse of that actual block, lies in \(R\). The theorem uses the established `snake_inducedPattern_block`, `canon_isRGS`, `length_canon`, `inducedPattern_canon`, and `canon_canon_drop_reverse` lemmas.
 
-The four printed theorems are in `lean/SixShapeCoverage.lean`. They use only `propext`, `Classical.choice`, and `Quot.sound`, or no axioms. `data/proof-audit.json` records the successful source-matched build, compiled artifact hash, catalogue correspondence, and printed axioms.
+The four printed theorems are in `lean/SixShapeCoverage.lean`. They use only `propext`, `Classical.choice`, and `Quot.sound`, or no axioms. `data/proof-audit.json` records the successful source-matched build, compiled artefact hash, catalogue correspondence, and printed axioms.
 
 ## Reproduction and provenance
 
 Run `scripts/prepare_support.py`, `scripts/check.py`, then `scripts/audit.py` with the repository's configured Python runtime. The build uses Lean 4.19.0 and one Lean process.
 
-Five existing normalization modules are copied to `upstream/` for source preservation. Their sources match both milestone 32's pinned normalization-support receipt and the current maintained sources after line-ending normalization. Existing compiled modules are reused; their hashes and original log hashes are recorded in `data/support.json`. This is not a fresh rebuild of the entire inherited cube and normalization dependency tree.
+Five existing normalisation modules are copied to `upstream/` for source preservation. Their sources match both milestone 32's pinned normalisation-support receipt and the current maintained sources after line-ending normalisation. Existing compiled modules are reused; their hashes and original log hashes are recorded in `data/support.json`. This is not a fresh rebuild of the entire inherited cube and normalisation dependency tree.
 
 ## Scope
 

@@ -40,7 +40,7 @@ Transition 24 of the saved family requires a terminal count of two, so it is imp
 
 ## Separate effects of the two improvements
 
-Retaining all 218 transitions and applying only the nine share gains gives exact normalized minimum cycle mean
+Retaining all 218 transitions and applying only the nine share gains gives exact normalised minimum cycle mean
 
 \[
 \frac{9961}{2400}=\frac{1991}{480}+\frac{1}{400}.

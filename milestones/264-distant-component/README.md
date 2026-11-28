@@ -18,7 +18,7 @@ The construction compares donor prefixes with the same ordered even sites. The r
 
 | Comparison at the twelve ends of the six outstanding shapes | Result |
 |---|---|
-| 1,008 normalized rooted donor words of length 95 | Six endpoints improve. The largest gain in partner length is 28 to 35. The largest partner in this collection has 39 edges. |
+| 1,008 normalised rooted donor words of length 95 | Six endpoints improve. The largest gain in partner length is 28 to 35. The largest partner in this collection has 39 edges. |
 | Full 48-site even class of the same donors, with arbitrary order and odd sites | At least three donor even sites must change at every endpoint. The minimum is three at five endpoints, four at three, and five at four. |
 | 5,570 rooted words after adding directed suffixes of earlier constructed partners | The largest join has 175 edges. At each endpoint both construction rules attain the same maximum length. |
 
@@ -26,7 +26,7 @@ The first calculation intersects the allowable coordinate permutations at each s
 
 ## Exclusion for an unrestricted partner
 
-A 96-edge arm would need a 95-edge opposite arm to reach 192. A longer partner can be shortened at its free end. Normalized forbidden sets from earlier proofs cover 72 of the 82 endpoints by explicit coordinate permutations. At the ten remaining endpoints, seven have a contradiction for the whole root and three have certificates for all seven possible first edges. The 28 new contradiction certificates were checked against their regenerated Boolean formulas. Every qualifying 95-edge induced path satisfies the encoded constraints. One time-limited whole-root computation was subsequently resolved by its seven first-edge cases. [Root data and source pins](endpoints.json) · [Proof archive](proofs/) · [Solver and replay](endpoints.py)
+A 96-edge arm would need a 95-edge opposite arm to reach 192. A longer partner can be shortened at its free end. Normalised forbidden sets from earlier proofs cover 72 of the 82 endpoints by explicit coordinate permutations. At the ten remaining endpoints, seven have a contradiction for the whole root and three have certificates for all seven possible first edges. The 28 new contradiction certificates were checked against their regenerated Boolean formulas. Every qualifying 95-edge induced path satisfies the encoded constraints. One time-limited whole-root computation was subsequently resolved by its seven first-edge cases. [Root data and source pins](endpoints.json) · [Proof archive](proofs/) · [Solver and replay](endpoints.py)
 
 All \(41\cdot2\cdot8=656\) possible one-edge extensions in the parent face fail. Thus a 96-edge window inside a longer arm cannot be one of the 41 shapes. If the window shared at least 47 of its 48 smaller-parity vertices with any member under a cube isometry, one allowed exchange would place the window in the same closed component. The resulting ceiling is 46 common sites for every member. The previously proved ceiling of 44 for the starting reference is stronger. [Extension and root coverage](summary.json) · [Starting-reference ceiling](../263-distant-family-certificates/README.md)
 

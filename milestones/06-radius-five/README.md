@@ -2,7 +2,7 @@
 
 Checkpoint: 16 October 2026.
 
-The 567-clause Boolean core is checked in Lean. The full geometric interpretation and normalization remain unfinished.
+The 567-clause Boolean core is checked in Lean. The full geometric interpretation and normalisation remain unfinished.
 
 Sources and evidence: work/final_lean/BallCertificate.lean; work/final_lean/BallClauseLogic.lean; outputs/ball_*
 

@@ -1,6 +1,6 @@
 # Historical overview
 
-Archived during the16 October2026 organization. Numerical bounds and paths below describe earlier checkpoints; consult the root README for current status.
+Archived during the16 October2026 organisation. Numerical bounds and paths below describe earlier checkpoints; consult the root README for current status.
 
 # Nine-dimensional snake-in-the-box investigation
 
@@ -106,7 +106,7 @@ Each search targeted 193 total vertices. The 48-vertex runs had a one-million-no
 
 ## Independent counterexample route
 
-A new vertex-set neighborhood model allows both endpoints and internal segments to change. For each of the 131 published examples, it excluded a 192-edge target retaining at least 190 of the 192 seed vertices. All 131 runs returned INFEASIBLE, in about 241 seconds total. These solver exclusions lack Lean certificates. Allowing eight removed vertices returned UNKNOWN for the first three seeds at 30 seconds each. The files `neighborhood_2.json`, `neighborhood_8.json`, and `neighborhood_controls.json` preserve the results and controls.
+A new vertex-set neighbourhood model allows both endpoints and internal segments to change. For each of the 131 published examples, it excluded a 192-edge target retaining at least 190 of the 192 seed vertices. All 131 runs returned INFEASIBLE, in about 241 seconds total. These solver exclusions lack Lean certificates. Allowing eight removed vertices returned UNKNOWN for the first three seeds at 30 seconds each. The files `neighborhood_2.json`, `neighborhood_8.json`, and `neighborhood_controls.json` preserve the results and controls.
 
 The competing hypothesis is that a 192-edge snake exists outside the published collection. One sufficient construction would be an induced cycle with 194 vertices. Deleting one vertex would leave 193 vertices and 192 edges in an induced path.
 

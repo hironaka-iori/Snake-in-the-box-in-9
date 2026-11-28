@@ -1,6 +1,6 @@
 # Round 244. Reconstructing a 192-edge path from published 190-edge paths
 
-The construction source is the authors' separate collection of 1,042 nine-dimensional 190-edge paths. The [computation](parents.py) reads the member named snakes_dim9_190.csv in the published archive; its exact hash is in the [result](results.json). Each order is checked for range, distinct vertices, consecutive adjacency and absence of nonconsecutive adjacency. Transition words normalized up to coordinate renaming and reversal give 1,042 distinct classes. [Orland et al.](https://arxiv.org/abs/2607.15270) · [Source archive at the inspected revision](https://github.com/Math-AI-Caltech/Snake-in-the-Box/blob/46c765399353a588ea50444a5d6610f53102b1c2/record_snakes.csv.zip)
+The construction source is the authors' separate collection of 1,042 nine-dimensional 190-edge paths. The [computation](parents.py) reads the member named snakes_dim9_190.csv in the published archive; its exact hash is in the [result](results.json). Each order is checked for range, distinct vertices, consecutive adjacency and absence of nonconsecutive adjacency. Transition words normalised up to coordinate renaming and reversal give 1,042 distinct classes. [Orland et al.](https://arxiv.org/abs/2607.15270) · [Source archive at the inspected revision](https://github.com/Math-AI-Caltech/Snake-in-the-Box/blob/46c765399353a588ea50444a5d6610f53102b1c2/record_snakes.csv.zip)
 
 ## Extensions and free opposite-side reconstruction
 

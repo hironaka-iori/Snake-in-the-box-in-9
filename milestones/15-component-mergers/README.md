@@ -8,7 +8,7 @@ constructive restrictions, not a global upper bound.
 
 The input is milestone 14's 197-vertex state: a 40-edge path and six 26-cycles.
 Both accumulated cycle exclusions are retained. Freeze all but one or two
-cycles, forbid their closed neighborhoods to the new path, and replace the old
+cycles, forbid their closed neighbourhoods to the new path, and replace the old
 path plus the released cycles by one connected induced path. Both endpoints
 are free. The required replacement lengths are 66 or 92 edges.
 

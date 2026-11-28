@@ -13,4 +13,6 @@
 
 ## Editing the manuscripts
 
+Use British English in manuscripts and other project prose. Keep the original spelling of quoted titles and technical identifiers.
+
 The editing copies are in `D:/Codex/2026-10-13/new-chat/outputs/`. The matching repository sources are in `paper/`. The published PDFs are in `paper/pdf/`. For each revision, the manuscript guide links to the corresponding source and PDF hashes. [Manuscript guide](paper/README.md)

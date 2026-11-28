@@ -12,7 +12,7 @@ Seventeen Lean dependency audits establish:
 - Consequently, X+Y is at least 5, 2X+Y is at least 8, and X+6Y is at least 15.
 - If Y=1, the excess of X above its truncated value min(6,X) is at least 3. For distinct starts in one orientation, summing these excesses counts each charged position once.
 
-No condition is imposed on the five intervening counts. The asymmetric conditions strictly strengthen the exact seven-count exclusion from milestone36. The initial four-position generalization, also checked here, is retained as an intermediate result.
+No condition is imposed on the five intervening counts. The asymmetric conditions strictly strengthen the exact seven-count exclusion from milestone36. The initial four-position generalisation, also checked here, is retained as an intermediate result.
 
 ## Evidence
 
@@ -22,9 +22,9 @@ No condition is imposed on the five intervening counts. The asymmetric condition
 | (2,3) | 1464 | 1066 | 73621 |
 | (8,1) | 1152 | 966 | 23622 |
 
-Every core is extracted from necessary radius-four conditions for an arbitrary snake. The clause interpretation, certificate replay, coordinate normalization, and final deductions are Lean-checked. The 17 dependency audits use only propext, Classical.choice, and Quot.sound. The positivity bridge reuses the mathematical identification from the existing aggregate development; it is rebuilt here without importing the unfinished direction-bound chain.
+Every core is extracted from necessary radius-four conditions for an arbitrary snake. The clause interpretation, certificate replay, coordinate normalisation, and final deductions are Lean-checked. The 17 dependency audits use only propext, Classical.choice, and Quot.sound. The positivity bridge reuses the mathematical identification from the existing aggregate development; it is rebuilt here without importing the unfinished direction-bound chain.
 
-The first inequality also has a short geometric explanation. Relative to the first counted vertex, the opposite corners in coordinate pairs (c,d) and (d,e) are absent neighbors of already saturated internal segment vertices. They give two singleton squares. At the seventh counted vertex, pair (c,e) similarly gives one.
+The first inequality also has a short geometric explanation. Relative to the first counted vertex, the opposite corners in coordinate pairs (c,d) and (d,e) are absent neighbours of already saturated internal segment vertices. They give two singleton squares. At the seventh counted vertex, pair (c,e) similarly gives one.
 
 An independent census checks 17 positive local configurations among 36 probes. In particular:
 

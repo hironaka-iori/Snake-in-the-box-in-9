@@ -13,7 +13,7 @@ For six consecutive transition directions, the following rows force the sum of t
 
 The Lean statements are in `lean/ShareInSnake0.lean` and `lean/ShareInSnake5.lean`. Their two proof certificates have 14,471 and 11,582 core clauses and 1,245,746 and 716,736 replayed hints. Each original formula has 445,111 clauses. Eight independent assignment checks exercise the complete formulas, including positive controls and recorded snake witnesses. The ordinary local witnesses for the two selected patterns have shares 378 and 855; neither establishes the minimum or extension to a full snake.
 
-On the saved sixteen-step obstruction, the forward occurrences ending at phases 1 and 10 occupy disjoint sets of five centres: {13,14,15,0,1} and {6,7,8,9,10}. Their cyclic share contribution is at least 192. Consequently the normalized charge for this repeating pattern increases from 65/16 to
+On the saved sixteen-step obstruction, the forward occurrences ending at phases 1 and 10 occupy disjoint sets of five centres: {13,14,15,0,1} and {6,7,8,9,10}. Their cyclic share contribution is at least 192. Consequently the normalised charge for this repeating pattern increases from 65/16 to
 
 \[
 \frac{24\cdot65+192}{24\cdot16}=\frac{73}{16}.

@@ -46,18 +46,18 @@ outside vertices. UNKNOWN excludes nothing.
 
 The same ten Q8 faces remain unresolved at both targets. Their selected
 outside vertices form disjoint fixed paths. Any internal vertex of one of
-these paths already has two selected neighbors, so its other neighbors must
+these paths already has two selected neighbours, so its other neighbours must
 be absent. The fourth Lean theorem checks this exclusion rule.
 
 `data/boundary-inventory.json` records the components and forbidden inside
 vertices. The smallest proposed contracted model is face 3: 99 fixed outside
 vertices in two paths, of which 95 are internal; after removing their forbidden
-inside neighbors, 161 inside vertices and four outside endpoints remain.
+inside neighbours, 161 inside vertices and four outside endpoints remain.
 This would give a 165-vertex model instead of the original 512-vertex model.
 The other unresolved models would have 166 through 212 vertices.
 
 The next task is to implement and validate this contraction, expand every
-accepted result back to Q9, and maximize length rather than requiring one
+accepted result back to Q9, and maximise length rather than requiring one
 exact target. That allows the solver to retain a 191-edge control while
 seeking any longer path. The contraction model is not yet implemented or
 certified; the current inventory is a preparation step only.

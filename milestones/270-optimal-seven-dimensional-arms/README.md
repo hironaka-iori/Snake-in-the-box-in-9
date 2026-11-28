@@ -25,7 +25,7 @@ The two traversals returned identical ordered partners in all 72 first-step case
 | 8 | 11 | 5 | 0 | 4 | 0 |
 | 9 | 12 | 0 | 0 | 4 | 0 |
 
-Four of the twelve crossing endpoints produce an eight-dimensional snake with at least 96 edges. Only the last vertex of row 10 allows a 46-edge partner, and no endpoint allows 47. The complete list of 53 labelled pairs also gives 53 distinct eight-dimensional shapes after canonicalization. [Eight-dimensional paths and endpoint assignments](q8-primer-arms.json)
+Four of the twelve crossing endpoints produce an eight-dimensional snake with at least 96 edges. Only the last vertex of row 10 allows a 46-edge partner, and no endpoint allows 47. The complete list of 53 labelled pairs also gives 53 distinct eight-dimensional shapes after canonicalisation. [Eight-dimensional paths and endpoint assignments](q8-primer-arms.json)
 
 ## Previously published 97-edge arms
 

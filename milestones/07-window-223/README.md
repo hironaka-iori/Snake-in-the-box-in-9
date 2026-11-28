@@ -1,4 +1,4 @@
-# Three-center pattern(2,2,3)
+# Three-centre pattern(2,2,3)
 
 Checkpoint: 16 October 2026.
 
@@ -25,7 +25,7 @@ The completed repeated-coordinate receipt is `data/repeated-lean-manifest.json`;
 - `lean/WindowGeometry.lean` proves positive degree for a nontrivial snake and the endpoint-prefix counter rules from the two-endpoint bound.
 - `lean/WindowCycles.lean` checks all 112 distinct retained cycles and excludes their complete selection by an induced path.
 - `lean/WindowCornerData.lean` proves the 21-pair enumeration, checks the four corner configurations, and proves that the complete threshold-counter system is satisfiable exactly at the intended missing count.
-- `lean/WindowSingletons.lean` identifies missing eligible corners with the actual singleton-square count. It verifies the ordered corner lists and proves that an actual snake supplies the counter assignment at each normalized center.
+- `lean/WindowSingletons.lean` identifies missing eligible corners with the actual singleton-square count. It verifies the ordered corner lists and proves that an actual snake supplies the counter assignment at each normalised centre.
 
 To rebuild these support modules, first reproduce the strengthened bound as documented in milestone 05. Then run, from the repository root:
 
@@ -35,4 +35,4 @@ python milestones/07-window-223/scripts/verify_window_support.py --mathlib PATH_
 
 This reuses the checked upstream dependencies, verifies their Lean source hashes, and recompiles the five support modules, including the shared cycle lemma. Its result is `data/geometry-support-manifest.json`. It is not a new source-only rebuild of all upstream dependencies.
 
-The remaining obligations are the exact clause-by-clause construction of the imported Boolean constraint records, completion of the distinct-coordinate Boolean proof, and coordinate-permutation normalization for arbitrary windows. The bound remains 245 edges.
+The remaining obligations are the exact clause-by-clause construction of the imported Boolean constraint records, completion of the distinct-coordinate Boolean proof, and coordinate-permutation normalisation for arbitrary windows. The bound remains 245 edges.

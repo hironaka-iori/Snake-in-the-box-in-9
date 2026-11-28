@@ -2,17 +2,17 @@
 
 The selected route remains **empty-square charging**. The mathematical and manuscript-source checks pass: two Lean modules, ten dependency audits, and independent checks of the graph cycle and all thirteen printed snake witnesses. The contributor-checked interval remains **191 <= a(9) <= 235**. The complete contributor dependency closure has not been independently rebuilt locally.
 
-This is research round 10 of 10 after manuscript revision 46. The scheduled revision is saved in `paper/snake9_research.tex` and synchronized with the existing editor source. The next scheduled revision is after ten further rounds, at milestone 66.
+This is research round 10 of 10 after manuscript revision 46. The scheduled revision is saved in `paper/snake9_research.tex` and synchronised with the existing editor source. The next scheduled revision is after ten further rounds, at milestone 66.
 
 ## Mathematical finding
 
 Before constructing a larger state space for exact interval packing, the replacement cycle from milestone 55 was checked for a decisive limitation. It has 25 transitions, appended truncated-count sum 102, and zero recorded share credit on every transition.
 
-Summing a potential inequality around this cycle cancels the potential. Thus a count-normalized lower mean cannot exceed 102/25 while this cycle remains admitted and receives only the existing zero credits. Every selection or nonnegative weighting of those credits still sums to zero. Even with zero potential loss, this ceiling cannot exclude 235 through the present charge accounting.
+Summing a potential inequality around this cycle cancels the potential. Thus a count-normalised lower mean cannot exceed 102/25 while this cycle remains admitted and receives only the existing zero credits. Every selection or nonnegative weighting of those credits still sums to zero. Even with zero potential loss, this ceiling cannot exclude 235 through the present charge accounting.
 
 Lean checks the count sum, general telescoping implication, zero-credit packing identity, and the arithmetic limitation. An independent verifier identifies each saved transition in the actual graph arrays and checks the array hashes against the preceding model archive. The claim concerns the finite relaxation and the recorded lower bounds. It does not assert that the cycle extends to a complete snake or that the actual empty-square shares vanish.
 
-This result rules out spending the next round merely optimizing the packing of the same catalogue. The useful next step is to extract the entire replacement minimum-charge family and seek a new share inequality that applies to it, using ordinary feasibility as a control. A valid additional restriction on its transitions could also remove the obstruction, within the selected route.
+This result rules out spending the next round merely optimising the packing of the same catalogue. The useful next step is to extract the entire replacement minimum-charge family and seek a new share inequality that applies to it, using ordinary feasibility as a control. A valid additional restriction on its transitions could also remove the obstruction, within the selected route.
 
 ## Paper revision
 

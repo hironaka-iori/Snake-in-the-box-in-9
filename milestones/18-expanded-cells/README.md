@@ -35,7 +35,7 @@ The selected map assigns source bits 1,5,4,2,7,0,3,6,8 to output bits
 0 through 8, then XORs by 7. `lean/Alignment.lean` checks its inverse and
 coordinate-flip identities, derives injectivity and adjacency equivalence,
 and constructs a snake of the same length from any snake. Seven audits pass
-with only standard axioms. The finite bank-wide optimization is not a Lean
+with only standard axioms. The finite bank-wide optimisation is not a Lean
 completeness result.
 
 ## Searches and controls
@@ -81,12 +81,12 @@ compilation receipt in `logs/alignment.log`.
 Then run `scripts/verify.py`. It checks all 131 aligned witnesses,
 the solver witnesses and recorded repair scopes, source hashes, the neutral
 comparison, and all seven Lean audits. It does not certify solver UNSAT or
-bank-optimization completeness. `scripts/snapshots/repair-cells-v1.py`
+bank-optimisation completeness. `scripts/snapshots/repair-cells-v1.py`
 preserves the version used for the first 48 repair experiments.
 
 ## Next construction step
 
-Change the coordinate partition or resynthesize connections across more
+Change the coordinate partition or resynthesise connections across more
 than two cells. The current fixed-partition two-cell searches found no
 192-edge improvement, and the first neutral move stayed within the known
 bank. These results guide where to enlarge the search; they do not justify

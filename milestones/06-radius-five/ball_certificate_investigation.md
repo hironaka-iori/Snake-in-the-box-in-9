@@ -4,20 +4,20 @@ Checkpoint: 15 October 2026. The current global interval is 191 <= a(9) <= 245 a
 
 ## Exact scope
 
-The finite Boolean contradiction has been translated into ordinary Lean proofs. The final core has **567 clauses, 252 Boolean variables, and 398 derived clauses**. It has no auxiliary prefix-counter variables. Its endpoint restrictions concern 33 candidate vertices. This result certifies the explicit formula, not yet the geometric exclusion for all normalized snakes.
+The finite Boolean contradiction has been translated into ordinary Lean proofs. The final core has **567 clauses, 252 Boolean variables, and 398 derived clauses**. It has no auxiliary prefix-counter variables. Its endpoint restrictions concern 33 candidate vertices. This result certifies the explicit formula, not yet the geometric exclusion for all normalised snakes.
 
 The source `work/final_lean/BallCertificate.lean` contains the formula, one proof for each reverse-unit-propagation step, and the final unsatisfiability theorem. The proof generator is untrusted: Lean checks its output. No native evaluation axiom or proof placeholder is used. The standard LRAT checker was not used in the final proof because its implementation did not reduce directly in the kernel in this environment. The exported proof uses elementary Boolean equalities and propositional reasoning instead.
 
 ## Geometric obligations
 
-`work/spectral/CycleExclusion.lean` proves that every nonempty finite subset of an induced path has a vertex with at most one neighbor in the subset. Therefore a nonempty set with two distinct internal neighbors at every vertex cannot be contained in a snake. All 41 recorded cycle cuts are checked against this theorem.
+`work/spectral/CycleExclusion.lean` proves that every nonempty finite subset of an induced path has a vertex with at most one neighbour in the subset. Therefore a nonempty set with two distinct internal neighbours at every vertex cannot be contained in a snake. All 41 recorded cycle cuts are checked against this theorem.
 
-`work/final_lean/BallClauseLogic.lean` checks the general degree-at-most-two clause, the exclusion of three distinct endpoints, endpoint degree at most one, and the existence of another selected neighbor when a vertex does not have degree at most one. The neighbor-list forms for internal vertices are also checked. These are the clause families needed for the remaining bridge. An independent Python audit checked all 567 concrete clause shapes against their recorded geometric meaning; its result is `outputs/ball-encoding-audit.json`. This supplementary audit does not replace the Lean interpretation proof.
+`work/final_lean/BallClauseLogic.lean` checks the general degree-at-most-two clause, the exclusion of three distinct endpoints, endpoint degree at most one, and the existence of another selected neighbour when a vertex does not have degree at most one. The neighbour-list forms for internal vertices are also checked. These are the clause families needed for the remaining bridge. An independent Python audit checked all 567 concrete clause shapes against their recorded geometric meaning; its result is `outputs/ball-encoding-audit.json`. This supplementary audit does not replace the Lean interpretation proof.
 
 Still required:
 
-1. Define a Boolean assignment from the vertices and endpoints of a snake and prove that each of the 567 concrete input clauses follows under the normalized local assumptions. Proven generic clause rules and recorded cycle cuts are available, but this complete instantiation is unfinished.
-2. Derive the normalized radius-two selection and its internal-vertex premises from a general one-singleton configuration with both endpoints outside radius two. The existing split-arm theorem retains explicit premises.
+1. Define a Boolean assignment from the vertices and endpoints of a snake and prove that each of the 567 concrete input clauses follows under the normalised local assumptions. Proven generic clause rules and recorded cycle cuts are available, but this complete instantiation is unfinished.
+2. Derive the normalised radius-two selection and its internal-vertex premises from a general one-singleton configuration with both endpoints outside radius two. The existing split-arm theorem retains explicit premises.
 3. Establish any aggregate consequence needed to improve the global upper bound.
 
 Neither endpoint proximity nor exact optimality is claimed.

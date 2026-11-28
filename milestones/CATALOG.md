@@ -14,7 +14,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 4 | [Singleton geometry and counterexamples](04-singleton-geometry/README.md) |
 | 5 | [Unconditional upper bound 245](05-upper-bound-245/README.md) |
 | 6 | [Radius-five Boolean obstruction](06-radius-five/README.md) |
-| 7 | [Three-center pattern(2,2,3)](07-window-223/README.md) |
+| 7 | [Three-centre pattern(2,2,3)](07-window-223/README.md) |
 | 8 | [Exhaustive search and regrowth certificates](08-exhaustive-search/README.md) |
 | 9 | [Method limits and endpoint accounting](09-research-directions/README.md) |
 | 10 | [Window exclusions and stronger aggregate bounds](10-window-aggregate/README.md) |

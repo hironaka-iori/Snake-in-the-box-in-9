@@ -16,7 +16,7 @@ There are no additional conditions on the intervening counts. A saved complete 1
 
 The proof excludes a sum at most 12 in the necessary radius-four model, replays an ordinary LRAT refutation, and transports the exclusion to arbitrary coordinate labels in an arbitrary snake. The core has 3,593 clauses and 1,354 active variables. Its replay contains 253,680 derived clauses and 10,807,572 hints. `TripleWitness.lean` checks the complete witness and sharpness. `TripleDemand.lean` converts the inequality into a common seven-centre excess demand without adding overlapping demands independently.
 
-With counts clipped at six, an occurrence below total 13 either is impossible when all three counts are exact, or requires excess above six. The graph consequently loses 430,797 transitions and strengthens 148,609 retained demands. Its 3,424,976 remaining transitions still have exact normalized minimum mean 42/11. A cycle and an integer potential establish this finite-model statement. The universal graph-to-snake Lean bridge remains pending.
+With counts clipped at six, an occurrence below total 13 either is impossible when all three counts are exact, or requires excess above six. The graph consequently loses 430,797 transitions and strengthens 148,609 retained demands. Its 3,424,976 remaining transitions still have exact normalised minimum mean 42/11. A cycle and an integer potential establish this finite-model statement. The universal graph-to-snake Lean bridge remains pending.
 
 ## Prioritising an actual improvement of the interval
 
@@ -39,7 +39,7 @@ Retaining the empty-square term in the existing completed charge argument gives
 
 Thus 19 empty squares would suffice to exclude a 236-edge snake. Corresponding sufficient empty-square counts for upper bounds 234, 233, 232, 231 and 230 are 38, 58, 77, 97 and 116. Both initial direct tests of at most 18 empty squares returned UNKNOWN; they supply no exclusion.
 
-For the present graph charge and boundary accounting, a hypothetical 236-edge snake has transition-charge budget 152,040. The improved potential supplies only 146,748, leaving 5,293 additional integer charge units needed for exclusion. Keeping potential range 728, the normalized mean would need to exceed 2728/687, approximately 3.970888. A convenient alternative sufficient target is mean four with potential range at most 1,847. `RangeTargets.lean` checks the arithmetic implications under their explicit premises; the universal graph and boundary premises remain separate obligations.
+For the present graph charge and boundary accounting, a hypothetical 236-edge snake has transition-charge budget 152,040. The improved potential supplies only 146,748, leaving 5,293 additional integer charge units needed for exclusion. Keeping potential range 728, the normalised mean would need to exceed 2728/687, approximately 3.970888. A convenient alternative sufficient target is mean four with potential range at most 1,847. `RangeTargets.lean` checks the arithmetic implications under their explicit premises; the universal graph and boundary premises remain separate obligations.
 
 The next priority is to strengthen the 41-window replacement family, including exact bucket lower bounds, common excess and empty-square charges. Continue screening before replaying 160 premises whose present combined effect still gives only 236. A successful candidate must improve the mean or finite-path charge enough to cross the stated threshold, then receive proof replay and a complete geometric bridge.
 

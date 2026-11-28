@@ -4,15 +4,15 @@ Checkpoint: 15 October 2026. Historical local checkpoint: 191 <= a(9) <= 254; th
 
 ## Checked necessary condition
 
-`work/spectral/LowSingletonArms.lean` proves a structural restriction under explicit geometric premises. Translate the selected root to zero, with selected unit neighbors in directions a and b. Outside these directions, suppose all pair vertices except possibly the pair {u,v} are selected and all selected pair vertices are internal in the path. If the second selected neighbors of the two unit vertices have directions i and j, then (i,j) must equal (u,v) or (v,u).
+`work/spectral/LowSingletonArms.lean` proves a structural restriction under explicit geometric premises. Translate the selected root to zero, with selected unit neighbours in directions a and b. Outside these directions, suppose all pair vertices except possibly the pair {u,v} are selected and all selected pair vertices are internal in the path. If the second selected neighbours of the two unit vertices have directions i and j, then (i,j) must equal (u,v) or (v,u).
 
-The argument first excludes a continuation coordinate outside the exceptional pair: two ordinary pair vertices then force two additional neighbors at a vertex that already has a selected neighbor. It next excludes both continuations using the same exceptional coordinate: three pair vertices need support from two vertices whose remaining degree capacity is only two in total. The implementation proves these steps and their combination. Axiom audits contain only propext, Classical.choice, and Quot.sound.
+The argument first excludes a continuation coordinate outside the exceptional pair: two ordinary pair vertices then force two additional neighbours at a vertex that already has a selected neighbour. It next excludes both continuations using the same exceptional coordinate: three pair vertices need support from two vertices whose remaining degree capacity is only two in total. The implementation proves these steps and their combination. Axiom audits contain only propext, Classical.choice, and Quot.sound.
 
-In the proposed application, exactly one singleton square supplies the exceptional pair, and endpoints at Hamming distance at least three imply that the selected pair vertices are internal. The formalized theorem is stated through the explicit coordinate, membership, and internal-vertex premises above. It is not a proof of the full assertion that every one-singleton vertex lies within distance two of an endpoint.
+In the proposed application, exactly one singleton square supplies the exceptional pair, and endpoints at Hamming distance at least three imply that the selected pair vertices are internal. The formalised theorem is stated through the explicit coordinate, membership, and internal-vertex premises above. It is not a proof of the full assertion that every one-singleton vertex lies within distance two of an endpoint.
 
 ## Checked obstruction to a purely local proof
 
-`work/low_singleton_radius3.py` searches a radius-three relaxation in the remaining split configuration: root directions 0 and 1, exceptional pair 2 and 3, and selected second neighbors 5 and 10. It forces degree two at selected vertices of weight at most two and forbids degree above two; cycle cuts exclude cyclic components.
+`work/low_singleton_radius3.py` searches a radius-three relaxation in the remaining split configuration: root directions 0 and 1, exceptional pair 2 and 3, and selected second neighbours 5 and 10. It forces degree two at selected vertices of weight at most two and forbids degree above two; cycle cuts exclude cyclic components.
 
 The result is a 60-vertex induced linear forest with 14 components, all vertices of weight at most three, degree two at every selected vertex of weight at most two, and exactly one singleton square at zero. `work/final_lean/RadiusThreeForest.lean` independently checks the explicit component paths, pairwise disjointness and absence of intercomponent edges, radius bounds, degree counts, and the singleton-square enumeration. The finite certificates depend only on propext. The paper prints all 14 paths.
 
@@ -36,7 +36,7 @@ The static Lean certificate is the authoritative evidence for the displayed fore
 
 ## Uncertified radius-four to radius-six experiments
 
-The additional program `work/low_singleton_ball.py` fixes the same normalized radius-two selection. Selected vertices strictly inside the ball have degree one or two, with no endpoints at weight at most two; the total number of interior endpoints is bounded by the stated budget. Boundary vertices may have degree zero, one, or two. Global connectivity is not required. Forest runs remove cyclic components through valid cycle cuts.
+The additional program `work/low_singleton_ball.py` fixes the same normalised radius-two selection. Selected vertices strictly inside the ball have degree one or two, with no endpoints at weight at most two; the total number of interior endpoints is bounded by the stated budget. Boundary vertices may have degree zero, one, or two. Global connectivity is not required. Forest runs remove cyclic components through valid cycle cuts.
 
 | Radius | Interior endpoint budget | Cycles | Solver status | Cycle cuts |
 |---|---|---|---|---|
@@ -48,11 +48,11 @@ The additional program `work/low_singleton_ball.py` fixes the same normalized ra
 | 5 | 4 | Forbidden | OPTIMAL | 24 |
 | 6 | 2 | Forbidden | INFEASIBLE | 53 |
 
-All seven records use one worker and seed 29; time limits, elapsed times, and per-iteration solver statistics are saved in `outputs/low_singleton_ball_*.json`. For a feasibility problem, OPTIMAL means a feasible assignment was found; it does not mean that a longest snake was found. The four saved feasible assignments were independently checked during the publication audit for the normalized selection, degrees, endpoint budget, and, where required, absence of cycles.
+All seven records use one worker and seed 29; time limits, elapsed times, and per-iteration solver statistics are saved in `outputs/low_singleton_ball_*.json`. For a feasibility problem, OPTIMAL means a feasible assignment was found; it does not mean that a longest snake was found. The four saved feasible assignments were independently checked during the publication audit for the normalised selection, degrees, endpoint budget, and, where required, absence of cycles.
 
 The radius-five model is infeasible with at most three interior endpoints and feasible with four, according to the solver. Allowing cycles makes the radius-five model feasible with budget two. This identifies a concrete candidate obstruction involving both acyclicity and endpoint count. These exclusions have no Lean-checked certificate. The saved records contain cycle-cut counts, not the actual cycle clauses, so they do not by themselves reconstruct an impossibility proof.
 
-The most focused next proof task is to certify the radius-five, budget-two exclusion and prove that the normalized restriction of an actual snake satisfies the encoded constraints. The earlier arm theorem still requires its explicit geometric premises; deriving those premises and the normalization from a general one-singleton vertex must also be checked. Only after those steps could this support an endpoint-proximity theorem. No improved global bound follows from the present records.
+The most focused next proof task is to certify the radius-five, budget-two exclusion and prove that the normalised restriction of an actual snake satisfies the encoded constraints. The earlier arm theorem still requires its explicit geometric premises; deriving those premises and the normalisation from a general one-singleton vertex must also be checked. Only after those steps could this support an endpoint-proximity theorem. No improved global bound follows from the present records.
 
 Reproduce a representative run with the pinned solver dependency, preserving the old output first:
 

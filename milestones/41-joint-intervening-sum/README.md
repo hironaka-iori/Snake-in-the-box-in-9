@@ -14,7 +14,7 @@ This strengthens the sum 10 obtained by adding the two individual lower bounds f
 2. The ordinary radius-four encoding imposes upper bound 3 at the first and seventh internal centres. The other counts retain their full range 0..21. A joint counter imposes the hypothetical upper sum 11 at centres 3 and 6.
 3. The joint counter receives a semantic proof of its actual count bound. Its temporary encoder tag does not make it an endpoint counter: the generated proof separates it from the ordinary counters and applies the checked generic joint-counter soundness theorem.
 4. Every retained degree, endpoint, count, and cycle clause is derived from the geometric assumptions. A native refutation is checked, the extracted core is independently refuted, and the latter resolution proof is replayed in Lean.
-5. The exact frame-count bridge transfers both counts to an arbitrary snake. Coordinate normalization is proved for any five distinct coordinate labels.
+5. The exact frame-count bridge transfers both counts to an arbitrary snake. Coordinate normalisation is proved for any five distinct coordinate labels.
 
 The extracted core has 4097 clauses and 1401 active variables. Its replay has 5222602 resolution hints, divided into 174 segments and 29 check modules. All 208 modules in the recorded replay build completed. Data-module dependencies were built in order, with at most two independent check modules running alongside them. Imported support is reused; this is not a clean rebuild of the entire project.
 

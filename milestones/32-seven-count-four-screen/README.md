@@ -1,14 +1,14 @@
 # Consecutive singleton counts equal to four
 
-Research date: 23 October 2026. The six-centre statement remains a hypothesis. Normalization, conditional density, and four individual geometric exclusions are checked; no new global bound is claimed.
+Research date: 23 October 2026. The six-centre statement remains a hypothesis. Normalisation, conditional density, and four individual geometric exclusions are checked; no new global bound is claimed.
 
-The successive witness-table cycles in milestones 29 and 30 repeatedly use counts equal to four. After two further seven-centre shapes were solver-excluded, the investigation tested the direction-independent hypothesis that a snake cannot have seven consecutive internal singleton counts all equal to four. All 132 normalized induced eight-transition shapes returned UNSAT in the radius-four model. Testing one fewer centre then gave UNSAT for all **34** normalized induced seven-transition shapes.
+The successive witness-table cycles in milestones 29 and 30 repeatedly use counts equal to four. After two further seven-centre shapes were solver-excluded, the investigation tested the direction-independent hypothesis that a snake cannot have seven consecutive internal singleton counts all equal to four. All 132 normalised induced eight-transition shapes returned UNSAT in the radius-four model. Testing one fewer centre then gave UNSAT for all **34** normalised induced seven-transition shapes.
 
 The resulting stronger hypothesis is:
 
 > No snake in Q9 has six consecutive internal vertices whose singleton-square counts all equal four.
 
-Eighteen Lean audits now check the finite coverage, the reduction from arbitrary snakes to the 34 normalized cases, the implication from all 34 refutations to the conjecture, its conditional frequency consequence, and four individual refutations (cases 0, 1, 14, 22). The frequency consequence is that at least floor(N/6) of N consecutive internal counts differ from four.
+Eighteen Lean audits now check the finite coverage, the reduction from arbitrary snakes to the 34 normalised cases, the implication from all 34 refutations to the conjecture, its conditional frequency consequence, and four individual refutations (cases 0, 1, 14, 22). The frequency consequence is that at least floor(N/6) of N consecutive internal counts differ from four.
 
 All 34 native certificates have been generated and simulated; `data/native-inventory.json` records their sizes and replay status. Only the four completed cases are published as Lean proof sources and lossless certificate archives. The remaining generated proof sources are local intermediates excluded by this milestone's ignore rules. Their kernel replays remain open. `data/proof-verification.json` records the completed source hashes and checks; numerical generation does not certify the other 30 cases.
 
@@ -32,7 +32,7 @@ The new distance-three inequalities in [milestone 33](../33-distance-three-singl
 
 ## Proof reproduction and diagnostic
 
-`scripts/prepare_support.py` pins the normalization support, and `build_support.ps1` builds it in a fresh directory. `check_bridge.ps1` checks classification and the arbitrary-snake bridge; also run it with `-Modules RunDensity,SnakeRunDensity` for the conditional density statements. `certify.py` generates the numerical certificates; `replay.ps1 -Case N` performs each Lean replay. `optimize_export.py --case N` omits executable copies of proof-data constants while preserving their kernel checks. The published cases 14 and 22 use this option. `archive.py` packs or restores the four published certificates. `verify_proofs.py` audits these completed proofs separately from `verify.py`, which checks the earlier experimental evidence.
+`scripts/prepare_support.py` pins the normalisation support, and `build_support.ps1` builds it in a fresh directory. `check_bridge.ps1` checks classification and the arbitrary-snake bridge; also run it with `-Modules RunDensity,SnakeRunDensity` for the conditional density statements. `certify.py` generates the numerical certificates; `replay.ps1 -Case N` performs each Lean replay. `optimize_export.py --case N` omits executable copies of proof-data constants while preserving their kernel checks. The published cases 14 and 22 use this option. `archive.py` packs or restores the four published certificates. `verify_proofs.py` audits these completed proofs separately from `verify.py`, which checks the earlier experimental evidence.
 
 The export width is selected from the maximum number of simultaneously live proof clauses. Case 2 exposed an insufficient 13-bit choice; its export was regenerated with 14-bit words. Larger exports remain pending Lean replay and require the corresponding checker variant.
 

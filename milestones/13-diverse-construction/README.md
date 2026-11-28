@@ -21,7 +21,7 @@ output speed. The original milestone 12 sources and records remain unchanged.
 | 113 | 1 | 9 | 6 |
 | 113 | 32 | 7 | 7 |
 
-The shorter runs initially favored the population variant; the longer runs do
+The shorter runs initially favoured the population variant; the longer runs do
 not establish a consistent benefit. All saved best walks have distinct vertices,
 so their scores count forbidden chords. Every run's longest reported valid
 segment has 191 edges. The larger archive ultimately held only two best-score
@@ -80,13 +80,13 @@ exclusions. A control fixing the known 191-edge path succeeded, and all 18,336
 unordered pairs of its returned witness passed independent checks.
 
 `data/verification.json` checks all saved scores, pool keys, minimum chord
-covers, monotone relaxations, and the control witness. It records LF-normalized
+covers, monotone relaxations, and the control witness. It records LF-normalised
 source hashes. It does not certify solver impossibility results.
 
 ## Reproduction and next experiment
 
 Use the Lean, Python, and OR-Tools versions recorded in milestone 12. Build
-`scripts/population_search.cpp` with a C++17 compiler, optimization, and assertions
+`scripts/population_search.cpp` with a C++17 compiler, optimisation, and assertions
 enabled. This run used MSVC 19.44 with `/O2 /EHsc /std:c++17`. Create `build/`
 and generate the bank input as described in milestone 12. From the repository root:
 

@@ -20,7 +20,7 @@ These are **numerical candidate inequalities**, with no Lean refutation replay y
 
 ## Exact finite-model comparison
 
-The first candidate, applied in both orientations, strengthens the charge while leaving all ordinary transitions unchanged. The model's exact normalized minimum rises from 102/25 to **49/12**. Adding all three candidates gives the same minimum. Both comparisons have all-edge integer-potential checks and attaining twelve-step cycles.
+The first candidate, applied in both orientations, strengthens the charge while leaving all ordinary transitions unchanged. The model's exact normalised minimum rises from 102/25 to **49/12**. Adding all three candidates gives the same minimum. Both comparisons have all-edge integer-potential checks and attaining twelve-step cycles.
 
 Each model has 3,042,328 transitions, integer weight mean 490 and potential range 650. The resulting conditional edge estimate is 110388/469, whose integer part remains 235. The inherited numerical exclusions and the new candidate shares remain explicit premises. A full graph-to-snake Lean assembly has not been completed.
 
@@ -34,11 +34,11 @@ The independent verifier checks all source graph hashes, nonnegative potential s
 
 ## Files and continuation
 
-- `scripts/critical.py`, `prioritize.py`: extract the complete critical family and prioritize patterns that individually meet all its cycles.
+- `scripts/critical.py`, `prioritize.py`: extract the complete critical family and prioritise patterns that individually meet all its cycles.
 - `scripts/probe.py`: ordinary controls followed by share-cap tests for those nine patterns.
 - `scripts/apply_candidate.py`, with optional `--all`: reproduce the single-candidate and combined numerical models.
 - `scripts/prepare_rank.py`, `check_lean.py`: generate and check the finite coverage proof.
 - `scripts/verify.py`: independent finite and geometric verification.
 - `candidate/` and `combined/`: exact finite-model evidence, with generated arrays excluded from Git.
 
-This is research round 1 of 10 after manuscript revision 56. The paper and editor mirror remain at the synchronized 235 revision, with unchanged authors and hyperlink settings. The next scheduled paper revision is milestone 66. The compiler limitation recorded in milestone 56 remains unresolved.
+This is research round 1 of 10 after manuscript revision 56. The paper and editor mirror remain at the synchronised 235 revision, with unchanged authors and hyperlink settings. The next scheduled paper revision is milestone 66. The compiler limitation recorded in milestone 56 remains unresolved.

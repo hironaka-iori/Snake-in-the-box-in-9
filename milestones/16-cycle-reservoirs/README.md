@@ -14,8 +14,8 @@ B: 3,11,9,8,24,26,30,14,6,4,5,21,23,19
 
 Lean checked both cyclic adjacency equivalences, distinctness, lengths, and
 disjointness. Placing A or B in the sixteen Q5 cells of Q4 x Q5 according to
-outer parity gives sixteen nonadjacent 14-cycles, totaling 224 vertices. The
-checked disjoint-color lemma explains why equal projected vertices cannot
+outer parity gives sixteen nonadjacent 14-cycles, totalling 224 vertices. The
+checked disjoint-colour lemma explains why equal projected vertices cannot
 create cross-cell edges. The concrete product was independently checked.
 No novelty claim is made for this product principle.
 
@@ -56,10 +56,10 @@ these experiments; none gives a global impossibility result.
 
 The common unused base vertices are $U=\{7,10,16,29\}$. In the restricted cell
 family, an $A$-cell allows $A\cup U$, and a $B$-cell allows $B\cup U$. Each cell
-has 18 allowed vertices. The only common projected vertices in neighboring
+has 18 allowed vertices. The only common projected vertices in neighbouring
 cells are the four vertices in U, so all cross-cell connections use them.
 
-| Connector | Neighbors on A | Neighbors on B |
+| Connector | Neighbours on A | Neighbours on B |
 |---|---:|---:|
 | 7 | 1 | 4 |
 | 10 | 1 | 4 |
@@ -67,9 +67,9 @@ cells are the four vertices in U, so all cross-cell connections use them.
 | 29 | 4 | 1 |
 
 These counts were checked in Lean. If a selected connector has an external
-selected neighbor, at most one of four internal cycle neighbors may remain
+selected neighbour, at most one of four internal cycle neighbours may remain
 selected, because a snake has selected degree at most two. The resulting
-omission of at least three neighbors is proved in `four_neighbor_connector_cost`.
+omission of at least three neighbours is proved in `four_neighbor_connector_cost`.
 Costs can overlap between connectors, so they must not be summed as independent
 global losses. This local interaction motivates explicit cell states.
 
@@ -109,6 +109,6 @@ manifest also covers the two frozen-cut theorems from milestone 15.
 The global model and its controls are now implemented in
 [milestone 17](../17-global-cell-construction/README.md). That investigation
 found a restrictive capacity in the acyclic cell tables and redirects the
-construction toward allowing opposite-base vertices. The final target
+construction towards allowing opposite-base vertices. The final target
 remains a single 196-edge induced path; global upper-bound work remains with
 the separate investigations.

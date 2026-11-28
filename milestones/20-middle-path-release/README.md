@@ -6,7 +6,7 @@ No witness longer than 191 edges has been found.
 ## Growth from the two-arm seed
 
 The milestone 19 seed has 186 edges and endpoints 67 and 41. The growth
-driver releases coordinate faces, prioritizing those crossing both former
+driver releases coordinate faces, prioritising those crossing both former
 fixed coordinates, and rebuilds its model after each accepted improvement.
 The one-edge growth run accepted lengths 187, 188, 189, 190 and 191. All
 passed independent pairwise checks. No accepted change removed a vertex

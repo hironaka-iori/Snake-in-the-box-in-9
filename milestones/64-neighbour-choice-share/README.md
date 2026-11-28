@@ -56,4 +56,4 @@ The count-conditioned route is therefore the stronger next test. It should be as
 
 The next task is to prove the count-conditioned deductions, beginning with the saturation rule that converts a tight absence-count bound into further selected vertices. The preliminary gains and contradictions remain excluded from this milestone's checked graph. Full graph-to-snake assembly and inherited numerical premises remain unresolved; these local and restricted-graph results do not establish a new global upper bound.
 
-This completes research round **8 of 10** after manuscript revision 56. The next full manuscript rewrite remains scheduled for milestone 66. The repository paper and existing editor mirror remain unchanged and synchronized. The compiler limitation recorded at milestone 56 remains unresolved.
+This completes research round **8 of 10** after manuscript revision 56. The next full manuscript rewrite remains scheduled for milestone 66. The repository paper and existing editor mirror remain unchanged and synchronised. The compiler limitation recorded at milestone 56 remains unresolved.

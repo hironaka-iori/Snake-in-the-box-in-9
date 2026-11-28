@@ -8,7 +8,7 @@ For the next chat, use [the goal prompt](GOAL_PROMPT.md) and [verified starting 
 
 ---
 
-Artifact paths below are relative to milestones/240-five-count-recovery unless stated otherwise.
+Artefact paths below are relative to milestones/240-five-count-recovery unless stated otherwise.
 
 # Round 240 handoff: publish, then pause
 
@@ -78,13 +78,13 @@ Do not reinterpret an UNKNOWN run as an exclusion, or a reconstruction theorem a
 
 All acceptance claims above are backed by the corresponding completed receipts. Keep the distinction between literal algebra, native geometry, written cube deductions, and the assembled three-count Lean theorem. Preserve all frozen older files. Publication metadata, document compilation, authoritative-original updates, and the goal pause are owned by the root worker.
 
-After the pause, follow ../milestones/240-five-count-recovery/NEXT_STEP.md only upon explicit resumption. No Round 241 work is authorized by this handoff.
+After the pause, follow ../milestones/240-five-count-recovery/NEXT_STEP.md only upon explicit resumption. No Round 241 work is authorised by this handoff.
 
 
 ## Publication and review record
 
 The complete written source was reviewed at Round 240: all 13,254 pre-edit main lines and all 1,084 pre-edit explanation lines, followed by review of the integrated changes. The next full review is due at Round 250. This does not independently rebuild the archived upper-bound dependency chain. All three authors and local hypersetup settings are retained. The original editor files and paper mirrors match. Compilation outcomes are recorded separately in data/.
 
-The contributor branch was refreshed at revision d32557fb4eec570dd69267ffc23768517541f9ae. Its new trackB report explicitly claims no new bound or Lean build. It investigates local-floor limitations toward conditional 220; these numerical observations were read without independent replay. The completed 231 source is unchanged.
+The contributor branch was refreshed at revision d32557fb4eec570dd69267ffc23768517541f9ae. Its new trackB report explicitly claims no new bound or Lean build. It investigates local-floor limitations towards conditional 220; these numerical observations were read without independent replay. The completed 231 source is unchanged.
 
 Use one heavy worker/compiler, at least 1 GiB free memory at startup, 768 MiB reserve, 256 MiB private-memory ceiling, and one Lean thread with 60 seconds per module. Preserve unrelated edits to .gitignore and milestone 50. No Round 241 search is running.

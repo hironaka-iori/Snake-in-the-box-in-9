@@ -1,6 +1,6 @@
 # Long-term goal for the nine-dimensional snake
 
-Determine the maximum number of edges in a snake in the nine-dimensional hypercube. Seek longer snakes and verify each construction. Use the structure of lower-dimensional snakes to prove which constructions can succeed and which are impossible. Work toward an explicit snake and a proof that every longer snake is impossible. Draw on collaborators’ verified upper bounds and state precisely which cases each result covers.
+Determine the maximum number of edges in a snake in the nine-dimensional hypercube. Seek longer snakes and verify each construction. Use the structure of lower-dimensional snakes to prove which constructions can succeed and which are impossible. Work towards an explicit snake and a proof that every longer snake is impossible. Draw on collaborators’ verified upper bounds and state precisely which cases each result covers.
 
 ## How to continue the research
 

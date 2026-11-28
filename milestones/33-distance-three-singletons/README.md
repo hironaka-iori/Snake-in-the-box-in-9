@@ -6,7 +6,7 @@ For a seven-edge segment with directions `(a,b,c,d,e,b,a)` and five distinct coo
 
 ## Geometric explanation
 
-The two centres differ in exactly the three coordinates c,d,e. Three opposite corners at each centre are forbidden because they are non-path neighbors of the other centre. For each coordinate outside the incident directions and c,d,e, six further opposite corners form an induced six-cycle. At least one vertex is absent from each cycle. The cycles are disjoint. There are four such cycles for the first pattern and three for the second, giving 6+4 and 6+3.
+The two centres differ in exactly the three coordinates c,d,e. Three opposite corners at each centre are forbidden because they are non-path neighbours of the other centre. For each coordinate outside the incident directions and c,d,e, six further opposite corners form an induced six-cycle. At least one vertex is absent from each cycle. The cycles are disjoint. There are four such cycles for the first pattern and three for the second, giving 6+4 and 6+3.
 
 The maintained paper gives this proof in mathematical notation. No historical novelty is claimed.
 

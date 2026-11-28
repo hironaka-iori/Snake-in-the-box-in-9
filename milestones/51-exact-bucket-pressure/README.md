@@ -16,7 +16,7 @@ The native formula has 182,516 clauses and 22,809 variables. Its trimmed core ha
 
 ## Exploratory range pressure
 
-The previous count-only sweep completed five stages before the user's route selection. Its normalized minimum means were 27/7, 58/15, 147/38, 31/8, and 66/17. Those stages are retained as inputs, not continued as a separate research direction. Pass 6 is partial and has no completed graph; its ordinary witness supplies the positive control above.
+The previous count-only sweep completed five stages before the user's route selection. Its normalised minimum means were 27/7, 58/15, 147/38, 31/8, and 66/17. Those stages are retained as inputs, not continued as a separate research direction. Pass 6 is partial and has no completed graph; its ordinary witness supplies the positive control above.
 
 The pass-5 critical family has 26 distinct five-centre windows. Independent share screening with cap 95 returned 17 INFEASIBLE, three FEASIBLE, and six UNKNOWN. The positive shares 95, 95, and 93 rule out a uniform lower bound of 96 over the entire family. Neither numerical INFEASIBLE nor UNKNOWN is represented as a Lean theorem.
 

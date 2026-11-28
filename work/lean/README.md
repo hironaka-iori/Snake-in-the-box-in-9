@@ -26,7 +26,7 @@ python milestones/07-window-223/scripts/split_rup_proof.py --source work/lean/sa
 
 The remaining files preserve alternative encodings, timing probes and solver
 outputs for comparison. They do not establish formal exclusions. `DfsFast.lean`
-is an experimental optimization that showed no useful speed improvement and
+is an experimental optimisation that showed no useful speed improvement and
 is not part of the maintained certificate pipeline. The general encoder
 `work/build_regrowth_cnf.py` has additional provenance information; its output
 must be compared with the experimental formula before reusing a certificate.

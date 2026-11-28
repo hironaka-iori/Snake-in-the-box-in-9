@@ -32,7 +32,7 @@ Subtracting the resulting baseline produces a simple correction:
 | 6 | 26 | 24 | 2 |
 | 7 | 50 | 48 | 2 |
 | 8 | 98 | 96 | 2 |
-| 9 | **196, predicted** | 192 | **4, hypothesized** |
+| 9 | **196, predicted** | 192 | **4, hypothesised** |
 
 The proposed continuation keeps the correction constant within each three-dimension block and doubles it between successive blocks:
 

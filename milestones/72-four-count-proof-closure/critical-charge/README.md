@@ -24,9 +24,9 @@ With the established integer-share notation, the proved local inequality is
 \sum_{i=1}^{5}\sigma_{12}(x_i)\ge120.
 \]
 
-The radius-four local model has a verified acyclic witness with counts $(4,5,4,2,11)$ and individual shares $(28,31,21,11,123)$, totaling 214. It contains 111 selected vertices in 13 components. Its extension to a complete snake is unknown. The witness establishes that the ordinary local conditions are feasible; it does not establish sharpness of 120.
+The radius-four local model has a verified acyclic witness with counts $(4,5,4,2,11)$ and individual shares $(28,31,21,11,123)$, totalling 214. It contains 111 selected vertices in 13 components. Its extension to a complete snake is unknown. The witness establishes that the ordinary local conditions are feasible; it does not establish sharpness of 120.
 
-The independent CP-SAT model rejects share at most 95. The separate tagged CNF model has native refutations at caps 95 and 119, both checked by DRAT-trim. The cap-119 core has 7,534 clauses, including empty-square, quotient-counter and share-cap clauses. The subsequent [share proof](share-proof/README.md) completes Lean replay, all 59 clause batches, their composition, and arbitrary-snake normalization, with 72 theorem audits across 99 modules. No new global upper bound is claimed.
+The independent CP-SAT model rejects share at most 95. The separate tagged CNF model has native refutations at caps 95 and 119, both checked by DRAT-trim. The cap-119 core has 7,534 clauses, including empty-square, quotient-counter and share-cap clauses. The subsequent [share proof](share-proof/README.md) completes Lean replay, all 59 clause batches, their composition, and arbitrary-snake normalisation, with 72 theorem audits across 99 modules. No new global upper bound is claimed.
 
 ## Effect and next priority
 
@@ -36,11 +36,11 @@ The next priority is to cover the other surviving critical components. The share
 
 ## Reproduction and evidence
 
-- `scripts/critical.py` and `scripts/verify.py` use the frozen graph, metadata and potential. The graph is a local build artifact; it can be reconstructed from the six-case checkpoint using its recorded model generator and compared against `data/source-proved-model.json`.
+- `scripts/critical.py` and `scripts/verify.py` use the frozen graph, metadata and potential. The graph is a local build artefact; it can be reconstructed from the six-case checkpoint using its recorded model generator and compared against `data/source-proved-model.json`.
 - `scripts/screen.py` performs bounded independent CP-SAT probes; `scripts/ordinary.py` performs separate native SAT checks with cycle cuts.
-- `scripts/check_witness.py` independently checks adjacency, counts, shares, acyclicity and the complete-neighborhood endpoint budget.
+- `scripts/check_witness.py` independently checks adjacency, counts, shares, acyclicity and the complete-neighbourhood endpoint budget.
 - `scripts/certify_candidate.py 119` regenerates the stronger native candidate. The default cap is 95. Proof generation and checking have bounded runtimes; a timeout establishes no exclusion.
-- `scripts/archive_candidates.py --restore` restores or matches the archived CNFs and refutations with byte-hash checks. The original cap-95 archive uses the name `share0`; the generalized generator names new runs by cap.
+- `scripts/archive_candidates.py --restore` restores or matches the archived CNFs and refutations with byte-hash checks. The original cap-95 archive uses the name `share0`; the generalised generator names new runs by cap.
 - `scripts/candidate_effect.py` checks all current potential inequalities and the unchanged attaining cycle under the share-120 premise.
 
 The main manuscript is unchanged pending the scheduled revision. The current checkpoint remains ten Lean-completed count cases, 32 count theorem audits, and 14,143 additional premises for conditional 234.

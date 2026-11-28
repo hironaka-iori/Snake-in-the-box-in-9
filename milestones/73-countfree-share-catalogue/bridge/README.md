@@ -30,7 +30,7 @@ The compiled theorem names are `Snake9.CountFreeBridge.shareN_eq_coreShare`, `co
 
 The essential bridge was already supplied by the contributor branch `research/unconditional-241`, in `work/spectral/stronger/ShareBridge.lean`, introduced by commit `fcf16838`. This checkpoint recovers that work rather than claiming a new mathematical discovery. Exact sources are pinned at `cd0c90fddf12170d735ee34fcc501e99c60632a6`, with hashes in `data/provenance.json`.
 
-The original contributor modules are preserved under `upstream/`. `CoreShareBudget.lean` extracts their elementary identifications into a separate namespace and adds a small wrapper. It avoids importing the unrelated aggregate-bound certificate chain. The pinned `ShareCharge.lean` agrees, after line-ending normalization, with the source previously retained in milestone 27.
+The original contributor modules are preserved under `upstream/`. `CoreShareBudget.lean` extracts their elementary identifications into a separate namespace and adds a small wrapper. It avoids importing the unrelated aggregate-bound certificate chain. The pinned `ShareCharge.lean` agrees, after line-ending normalisation, with the source previously retained in milestone 27.
 
 `ShareCharge`, `CoreShareBudget`, and `FiveCentreOverlap` were freshly compiled with Lean 4.19.0. All sixteen printed theorem audits list only `propext`, `Classical.choice`, and `Quot.sound`. The audit rejects unchecked proof placeholders and native evaluation shortcuts. Cached cube and local-window support is reused; this checkpoint does not claim a fresh rebuild of every inherited dependency.
 
@@ -49,7 +49,7 @@ Here subtraction in the index bound is truncated at zero, so the statement also 
 
 The relevant precedent is milestone 27's general `weighted_window_packing`. Its exact reference source and hash are retained in `data/overlap-reference.json`; that module is not an additional compilation dependency. The interval proof supplies the capacity calculation directly.
 
-Both finite-set and list forms are checked, together with the specialization `core_share_five_centre_overlap`. Combining this with the resolution-12 budget proves
+Both finite-set and list forms are checked, together with the specialisation `core_share_five_centre_overlap`. Combining this with the resolution-12 budget proves
 
 \[
 120T+

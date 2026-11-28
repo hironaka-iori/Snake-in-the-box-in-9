@@ -23,7 +23,7 @@ Position zero denotes the joining endpoint. The solver used the necessary visit 
 
 ## Keeping one segment and regrowing both ends
 
-A legal extension adds an unused neighbour of the chosen end that touches no other vertex of the path. Every induced completion containing a fixed segment can be constructed by first adding all missing vertices at the left and then those at the right. Each partial path is a consecutive part of the final induced path. One representative of each segment suffices because cube isometries and path reversal preserve the legal extensions. The ordered edge-coordinate sequence, standardized by first occurrence in both orientations, identifies these isometry classes exactly.
+A legal extension adds an unused neighbour of the chosen end that touches no other vertex of the path. Every induced completion containing a fixed segment can be constructed by first adding all missing vertices at the left and then those at the right. Each partial path is a consecutive part of the final induced path. One representative of each segment suffices because cube isometries and path reversal preserve the legal extensions. The ordered edge-coordinate sequence, standardised by first occurrence in both orientations, identifies these isometry classes exactly.
 
 | Length kept | Occurrences in the 22 reference paths | Distinct segment shapes | Long parent shapes obtained | Additions to the 22 |
 |---:|---:|---:|---:|---:|

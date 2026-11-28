@@ -15,7 +15,7 @@ The final gate is `data/verification.json`. **All 20 axiom audits passed**, usin
 
 The generic counter argument is in `lean/JointCountTags.lean`. It checks counter clauses assuming primitive input literals and an actual bound on their true occurrences. `valid_append` combines previously checked per-centre counters with an additional joint counter. `three_centre_count` proves that the concatenation of three opposite-corner lists gives the sum of their singleton counts. Shared vertices retain their multiplicities; removing duplicates would change the counted quantity.
 
-`lean/JointCountBridge.lean` exposes exact preservation of each centre's count under translation and coordinate permutation. The generated `SumWindow2.lean` and `SumWindow3.lean` use that equality to transfer the joint-sum refutations to arbitrary snakes. The direction normalization hypothesis is explicit through a coordinate permutation; no normalization existence is assumed as an axiom.
+`lean/JointCountBridge.lean` exposes exact preservation of each centre's count under translation and coordinate permutation. The generated `SumWindow2.lean` and `SumWindow3.lean` use that equality to transfer the joint-sum refutations to arbitrary snakes. The direction normalisation hypothesis is explicit through a coordinate permutation; no normalisation existence is assumed as an axiom.
 
 ## Certificates
 

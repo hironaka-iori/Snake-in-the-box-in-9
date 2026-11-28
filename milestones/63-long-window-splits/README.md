@@ -1,6 +1,6 @@
 # Milestone 63: vertex splits on eleven-transition windows
 
-Direct vertex splits on longer windows give **38 stronger local empty-square bounds**, each checked in Lean for arbitrary matching snake segments. The exact normalized minimum of the existing eleven-transition critical-family graph rises from **2483/600 to 4973/1200**, an increase of **7/1200**.
+Direct vertex splits on longer windows give **38 stronger local empty-square bounds**, each checked in Lean for arbitrary matching snake segments. The exact normalised minimum of the existing eleven-transition critical-family graph rises from **2483/600 to 4973/1200**, an increase of **7/1200**.
 
 The project interval remains **191 <= a(9) <= 235**. The new result concerns the restricted critical family. It supplies neither a new global upper bound nor the exact optimum.
 
@@ -26,7 +26,7 @@ The resulting integer-weight mean is 4973/10. An integer potential valid on ever
 10\sum_{i=0}^{\ell-1}w_i\ge4973\ell.
 \]
 
-In normalized units the improvement is
+In normalised units the improvement is
 
 \[
 \frac{4973}{1200}-\frac{2483}{600}=\frac7{1200}.
@@ -57,7 +57,7 @@ Relevant receipts are `data/lean-audit.json`, `data/verification.json`, and the 
 
 Two further computations were made on the saved twenty-edge attaining cycle. Neither is included in the certified weights above.
 
-1. Retain the chosen first split and optimize a second split in each branch. This gives a candidate total improvement of 8 integer-weight units over the cycle.
+1. Retain the chosen first split and optimise a second split in each branch. This gives a candidate total improvement of 8 integer-weight units over the cycle.
 2. Enumerate all possible additional selected neighbours at the two ends of each window. Each end already has one selected neighbour inside the window, so it can have at most one additional selected neighbour. For each joint choice, declare the unchosen neighbours absent and derive its empty-square credit. This gives a candidate total improvement of 19 units over the same cycle.
 
 The second computation currently has no Lean case-coverage proof and has not been evaluated over the complete family. Its use of the window ends concerns local degree and empty-square credit only; it introduces no charge based on the number or position of snake endpoints.
@@ -68,6 +68,6 @@ The raw pilots are `data/two-split-pilot.json` and `data/neighbour-pilot.json`. 
 
 ## Repository and manuscript
 
-This is research round **7 of 10** after manuscript revision 56. The paper and existing editor mirror remain unchanged and synchronized. The next scheduled full rewrite is milestone 66. The compiler limitation recorded in milestone 56 remains unresolved.
+This is research round **7 of 10** after manuscript revision 56. The paper and existing editor mirror remain unchanged and synchronised. The next scheduled full rewrite is milestone 66. The compiler limitation recorded in milestone 56 remains unresolved.
 
 The next research task is to prove the neighbour-choice case coverage, certify its empty-square bounds, and evaluate the complete restricted family. This continues the selected empty-square route.

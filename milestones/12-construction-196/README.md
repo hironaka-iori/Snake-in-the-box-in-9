@@ -59,7 +59,7 @@ pairs were checked. INFEASIBLE concerns only the specified fixed vertex set;
 these solver exclusions have no Lean certificate. UNKNOWN establishes neither
 existence nor impossibility. Machine-readable inputs and outputs are in `data/`.
 `data/pilot-summary.json` records independent checks and source hashes.
-Hashes normalize CRLF to LF so a fresh Git checkout gives the same identity.
+Hashes normalise CRLF to LF so a fresh Git checkout gives the same identity.
 Repair records also preserve their original raw source hash as provenance.
 
 ## Reproduction
@@ -91,14 +91,14 @@ directory to `LEAN_PATH` and run `lake env lean` on the absolute path to
 `lean/DefectCriterion.lean`. The recorded check reused the already checked core
 library from the strengthened-proof reproduction; it was not a new full core build.
 
-The manuscript and existing editor source were synchronized with identical
+The manuscript and existing editor source were synchronised with identical
 hashes. The built-in LaTeX preview failed before compilation because of a
 Windows sandbox configuration error; see `logs/latex-preview-status.txt`.
 No successful PDF compilation or visual layout check is claimed for this update.
 
 ## Collaborator review and next direction
 
-The synchronization integrated main through `807941e`, preserved the local
+The synchronisation integrated main through `807941e`, preserved the local
 window-counter checkpoint `c63878c`, and published merge `e40b970`.
 
 - KEEP=112 has a PASSED aggregate receipt for all 262 oriented bank entries.

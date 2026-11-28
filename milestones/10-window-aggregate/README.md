@@ -10,17 +10,17 @@ The incidence identity gives `T + 2*s0 = 9214 - 35*v`. Here `T` is the total sin
 
 This milestone asks which count windows a local ball model allows. It then derives the best aggregate inequality those windows support.
 
-1. **Local model** (`scripts/wincert.py`). Fix consecutive path vertices `x_0..x_{k+1}` with internal centers `x_1..x_k` and prescribed counts. The model is the radius-three Hamming ball around the centers. Every clause is a necessary condition on `S ∩ B` for an induced path `S`:
+1. **Local model** (`scripts/wincert.py`). Fix consecutive path vertices `x_0..x_{k+1}` with internal centres `x_1..x_k` and prescribed counts. The model is the radius-three Hamming ball around the centres. Every clause is a necessary condition on `S ∩ B` for an induced path `S`:
    - the window vertices are selected;
    - every ball vertex has at most two selected neighbours;
    - a vertex whose whole neighbourhood lies in the ball has one or two, and one means endpoint;
    - at most two endpoints occur;
-   - each center's count equals its prescribed value: count the absent opposite corners over the 21 coordinate pairs avoiding its path directions;
+   - each centre's count equals its prescribed value: count the absent opposite corners over the 21 coordinate pairs avoiding its path directions;
    - there are no 4-cycles, no 6-cycles inside 3-faces, and no cycle cuts found lazily.
 
-   Up to coordinate relabelling and reversal, there are two 3-center window shapes, with directions `0,1,2,0` and `0,1,2,3`. There are three 4-center shapes: `0,1,2,0,3`, `0,1,2,3,0`, and `0,1,2,3,4`.
-2. **Survey** (`scripts/survey.py`, `data/survey_*.json`). Every 3-center count triple with entries 1..6 was decided in both shapes. CaDiCaL with this encoding and an independent CP-SAT model agree on all 432 cases. Of the 216 triples, 144 are feasible in some shape. The minimum mean count over sequences whose consecutive triples are feasible is **14/5**. The worst cycle is `2,3,3,2,4`. The current Lean premises give **7/3**.
-3. **Ceiling with four windows** (`data/survey_c4_r3_k5.json`). Every count quadruple in 1..5 was decided in each 4-center shape whose 3-center subwindows are feasible: 654 cases, 293 infeasible. A window `x_0..x_5` with counts `(2,4,2,3)` or `(3,2,4,2)` is infeasible in all three 4-center shapes, and adding only this exclusion raises the minimum mean to **3**. With the complete table the shape-blind minimum mean is still exactly 3, since for example `(3,3,3,3)` is feasible in shape `0,1,2,3,0`. So **241 edges is the limit of shape-blind radius-three windows of length at most four.**
+   Up to coordinate relabelling and reversal, there are two 3-centre window shapes, with directions `0,1,2,0` and `0,1,2,3`. There are three 4-centre shapes: `0,1,2,0,3`, `0,1,2,3,0`, and `0,1,2,3,4`.
+2. **Survey** (`scripts/survey.py`, `data/survey_*.json`). Every 3-centre count triple with entries 1..6 was decided in both shapes. CaDiCaL with this encoding and an independent CP-SAT model agree on all 432 cases. Of the 216 triples, 144 are feasible in some shape. The minimum mean count over sequences whose consecutive triples are feasible is **14/5**. The worst cycle is `2,3,3,2,4`. The current Lean premises give **7/3**.
+3. **Ceiling with four windows** (`data/survey_c4_r3_k5.json`). Every count quadruple in 1..5 was decided in each 4-centre shape whose 3-centre subwindows are feasible: 654 cases, 293 infeasible. A window `x_0..x_5` with counts `(2,4,2,3)` or `(3,2,4,2)` is infeasible in all three 4-centre shapes, and adding only this exclusion raises the minimum mean to **3**. With the complete table the shape-blind minimum mean is still exactly 3, since for example `(3,3,3,3)` is feasible in shape `0,1,2,3,0`. So **241 edges is the limit of shape-blind radius-three windows of length at most four.**
 4. **Certificates** (`scripts/certify.py`, `certificates/`, `data/certificates.json`). There are 22 cases:
    - 16 for the triples, in both shapes and both orientations: `(2,2,3)`, `(2,2,4)`, `(2,3,2)`, `(3,2,3)`, and `(4,1,c)` with `4<=c<=6`;
    - 6 for `(2,4,2,3)` and its reversal.

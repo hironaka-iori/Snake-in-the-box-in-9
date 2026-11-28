@@ -4,11 +4,11 @@ Checkpoint: 20 October 2026. No snake above 191 edges was found.
 
 ## Hypothesis and method
 
-An alternative filling of a known snake, possibly after a one-edge retreat, may permit improvement when the free region changes. The prior contracted maximization runs all returned the original selected set.
+An alternative filling of a known snake, possibly after a one-edge retreat, may permit improvement when the free region changes. The prior contracted maximisation runs all returned the original selected set.
 
-This experiment fixes expanded length at 191 or 190 and maximizes the number of selected vertices outside the original seed set. It uses the same fixed-outside contraction as milestone 24. A selected set determines an induced path's order up to reversal, so this objective measures an actual change of vertices.
+This experiment fixes expanded length at 191 or 190 and maximises the number of selected vertices outside the original seed set. It uses the same fixed-outside contraction as milestone 24. A selected set determines an induced path's order up to reversal, so this objective measures an actual change of vertices.
 
-Four Q8 faces are tested: indices 3, 0, 4 and 5 of milestone 23. Each search uses two workers, random seed 193 and a 20-second limit. The two most changed feasible seeds are subsequently repaired in the other three faces, maximizing expanded length with the milestone 24 solver. Those six runs use that solver's random seed 192.
+Four Q8 faces are tested: indices 3, 0, 4 and 5 of milestone 23. Each search uses two workers, random seed 193 and a 20-second limit. The two most changed feasible seeds are subsequently repaired in the other three faces, maximising expanded length with the milestone 24 solver. Those six runs use that solver's random seed 192.
 
 ## Outcomes
 
@@ -40,7 +40,7 @@ The six follow-up growth runs returned two 190-edge paths and four 191-edge path
 - All thirteen feasible paths in the first two phases pass independent unordered-pair checks. Outside membership and exchange counts are also checked.
 - Three Lean results pass: equal selected sets give equal path order up to reversal; equal-size exchanges add and remove equally many vertices; a one-vertex deficit removes one more vertex than it adds.
 - The prerequisite contiguity module was rebuilt and its five axiom audits passed.
-- The full optimization model and the bank-comparison program remain finite computational checks, without an end-to-end Lean proof.
+- The full optimisation model and the bank-comparison program remain finite computational checks, without an end-to-end Lean proof.
 
 The proof runner writes each rebuilt prerequisite into a fresh build directory because Windows rejected replacement of an existing compiled module. Those local build products are excluded from version control.
 

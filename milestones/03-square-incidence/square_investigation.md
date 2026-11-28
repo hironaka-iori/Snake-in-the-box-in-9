@@ -12,13 +12,13 @@ This refutes a direct extension to all open paths of a local condition used in c
 
 ## Fully checked incidence refinement
 
-`work/spectral/SquareIncidence.lean` imports the general singleton-square theorem from the standard-library core and uses pinned mathlib for finite sums. Let E count empty squares from their corners, T count singleton incidences at selected vertices, and W count selected centers with two selected coordinate neighbors. The module derives
+`work/spectral/SquareIncidence.lean` imports the general singleton-square theorem from the standard-library core and uses pinned mathlib for finite sums. Let E count empty squares from their corners, T count singleton incidences at selected vertices, and W count selected centres with two selected coordinate neighbours. The module derives
 
 `2*E + 4*T + 144*v = 36864 + 4*W`.
 
 The proof verifies that coordinate flips are involutive permutations, excludes fully selected squares, checks the local four-corner identity, sums it over all 36 coordinate pairs and 512 cube vertices, and proves that the selected-vertex indicator sums to v.
 
-The singleton-square lemma gives T >= v. A selected two-edge corner determines an internal path vertex, and at most one coordinate pair contributes at each center. This gives W <= v-2 for v >= 2. The resulting bound is at most 255 vertices and 254 edges. The final theorem uses `Snake9.Snake` and supplies the paired lower and upper bounds.
+The singleton-square lemma gives T >= v. A selected two-edge corner determines an internal path vertex, and at most one coordinate pair contributes at each centre. This gives W <= v-2 for v >= 2. The resulting bound is at most 255 vertices and 254 edges. The final theorem uses `Snake9.Snake` and supplies the paired lower and upper bounds.
 
 Axiom audits list only `propext`, `Classical.choice`, and `Quot.sound`. There are no proof placeholders, added mathematical axioms, unchecked native computations, or assumed census premises. The portable reproduction driver is `work/spectral/verify_incidence.py`; `--fresh-core` rebuilds all 14 core modules from source in a new directory. Its output is recorded in `outputs/incidence-reproduction.log`.
 
@@ -26,7 +26,7 @@ The original unoriented census identity `2*A0 + A1 + 35*v + 2 = 9216` remains a 
 
 ## Solver evidence
 
-The local search fixes a selected internal vertex at zero with selected neighbors 1 and 2. An alpha value of zero forces every pair of unused coordinates into the selected set; an alpha value at most one permits only the pair (2,3) to be absent, using coordinate symmetry. The model enforces one connected induced path, with variable length and free endpoints.
+The local search fixes a selected internal vertex at zero with selected neighbours 1 and 2. An alpha value of zero forces every pair of unused coordinates into the selected set; an alpha value at most one permits only the pair (2,3) to be absent, using coordinate symmetry. The model enforces one connected induced path, with variable length and free endpoints.
 
 - Alpha at most one: feasible 123-edge witness.
 - Alpha at most one and both endpoints at Hamming distance at least two from zero: feasible 137-edge witness, checked in Lean as above.
