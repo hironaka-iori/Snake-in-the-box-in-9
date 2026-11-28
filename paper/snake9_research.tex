@@ -309,6 +309,73 @@ By Section~\ref{sec:forbidden-q8-intervals}, each face component of such
 a pair must avoid the 22 specified eight-dimensional paths as consecutive
 segments. The inequality for all compatible pairs remains open.
 
+\subsection{The \texorpdfstring{$L/n$}{L/n} theorem}\label{sec:length-normalization}
+For a snake of length $L$ in $\Q_n$, the ratio $L/n$ is the mean number
+of flips per coordinate. \emph{Normalization} here means permuting a
+least-used coordinate into the splitting position. This preserves the
+snake and its endpoint distance.
+
+\begin{theorem}[Length/normalization]\label{thm:length-normalization}
+Let $P$ be a snake of length $L$ in $\Q_n$, with $n\ge2$, and let $h$ be
+the Hamming distance between its endpoints. After normalization, let $c$
+be the number of crossings between the two $(n-1)$-dimensional faces.
+Then
+\[
+ \left\lceil\frac{L-a(n-1)}{a(n-1)+1}\right\rceil
+ \ \le\ c\ \le\ \left\lfloor\frac{L}{n}\right\rfloor .
+\]
+The endpoint distance further requires
+\[
+ L-nc\ \ge\
+ \begin{cases}
+ h,   & c\text{ even},\\
+ n-h, & c\text{ odd}.
+ \end{cases}
+\]
+\end{theorem}
+\begin{proof}
+Each edge flips one coordinate, so the $n$ flip counts sum to $L$.
+Their minimum $c$ is at most $\lfloor L/n\rfloor$. Cutting at its $c$
+crossings leaves $c+1$ consecutive runs, including single vertices when
+appropriate. Each run is an induced path in one face, so its length is
+at most $a(n-1)$. Together the runs contain $L-c$ edges. Rearranging
+$L-c\le(c+1)a(n-1)$ gives the lower bound.
+
+A coordinate has odd flip count exactly when the endpoints differ there.
+Hence $h$ counts are odd and $n-h$ are even. Every count is at least
+$c$, and each count of the opposite parity to $c$ is at least $c+1$.
+Summing these contributions proves the second inequality.
+\end{proof}
+
+\begin{corollary}[Crossing counts at 192 edges]\label{cor:length-normalization-192}
+For a 192-edge snake in $\Q_9$, a normalized TRiEDGE split has
+$1\le c\le21$. If the endpoints have Hamming distance two or four,
+then $c\le20$. For $c=21$, the table lists the only possible flip counts, up to
+permutation. Each entry under a flip count gives the number of coordinates
+with that count.
+\[
+\begin{array}{c|rrrr}
+\text{Endpoint distance} & \text{21 flips} & \text{22 flips}
+                         & \text{23 flips} & \text{24 flips}\\ \hline
+6 & 6 & 3 & 0 & 0\\
+8 & 7 & 1 & 1 & 0\\
+8 & 8 & 0 & 0 & 1
+\end{array}
+\]
+\end{corollary}
+\begin{proof}
+Substitute $a(8)=98$~\cite{ostergard} and $192=9\cdot21+3$ in
+Theorem~\ref{thm:length-normalization}. If $c=21$, the parity inequality
+gives $9-h\le3$. The three flips beyond the initial 21 per coordinate
+are distributed as $1+1+1$, $2+1$, or $3$. Counting the odd totals in
+each case gives the displayed endpoint distances.
+\end{proof}
+In the criterion of Corollary~\ref{cor:triedge-191}, the $c=21$ case
+therefore requires only these three profiles. A construction must
+still satisfy all three compatibility conditions of
+Theorem~\ref{thm:triedge}.
+
+\clearpage
 \part{Square counts and upper-bound deductions}
 \section{The exact square census}\label{sec:incidence}
 \begin{theorem}[Exact square identity]\label{thm:exact-square}
