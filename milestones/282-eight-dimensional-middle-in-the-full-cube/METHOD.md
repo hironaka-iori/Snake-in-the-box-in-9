@@ -1,0 +1,25 @@
+# Two free ends of a path in an eight-dimensional face
+
+Write the nine-cube as two eight-cubes with corresponding vertices joined. Fix one ordered path $M$ in the first face. Its two ends can grow in any of the nine directions. Call a vertex of the first face undominated if it lies outside $M$ and has no neighbour on $M$.
+
+## When a return must end the snake
+
+Let $C$ be the maximal consecutive run in the first face containing $M$ in a completed snake. An occupied vertex of that face outside $C$ cannot be adjacent to a vertex of $M$. Such an adjacency would be a chord. If the two vertices were consecutive they would instead be part of one consecutive run. Hence every such additional vertex belongs to the undominated set of $M$. It also has no neighbour on the whole of $C$, by the same argument.
+
+Suppose that the undominated set is independent. A selected vertex there, outside $C$, has no selected neighbour in the first face. Its only possible neighbour is its corresponding vertex in the opposite face. It therefore has degree one and is an endpoint. Each tail can depart from $C$ across the distinguished coordinate at most once and can later return only at its last vertex. If there are $u$ undominated vertices, there are at most $2+\min(2,u)$ crossings. This deduction applies to any induced interval with this property in a coordinate face.
+
+For the 22 specified intervals the nine, six and seven shapes with respectively zero, one and two undominated sites all satisfy independence. Extending an end in the first face can only decrease the undominated set. For the 95-edge middle present in 84 archived 191s, the undominated set is empty. Its left end cannot grow within the face. Its right end can stop or append vertex 29 or 12 in the stored coordinates. Those three runs exhaust this case in the first face.
+
+## Exhausting the opposite face
+
+Enumerate every possible run $C$ by extending its two ends in the first face, including stopping either end immediately. Choose at most two undominated vertices of $C$ as terminal returns. The calculation enumerates 59 pairs of a run and a return set across the 22 original intervals. A second calculation generates the same list by taking every possible additional upper-face subset, computing literal Hamming adjacencies and identifying its nontrivial path component. [Geometry](geometry.json) ﾂｷ [Independent enumeration](audit_middle.py)
+
+For a 192-edge target at least one end of $C$ must depart to the other face, since the face runs enumerated here are shorter than the target. With $d$ departures there can be at most $d$ returns. The endpoints already fixed in the first face consist of the nondeparting ends of $C$ and all returns. Both endpoints of an even-length snake have the majority parity. These conditions discard impossible choices. If both ends depart, there are no returns and the run is one of the 22 original middles, the checked Round 278 theorem applies.
+
+In the remaining cases choose the sites in the opposite face. Its copies of every departure and return site are mandatory. All other copies of selected first-face sites are forbidden. At each selected opposite-face site count every selected neighbour in its face and its possible vertical neighbour. The total degree must be two except at a global endpoint, where it is one. The number of vertices of each parity and the remaining endpoint count are fixed. Square, three-cube and four-cube capacities give necessary inequalities. The four-cube capacities come from the independently checked Round 278 table of induced unions of paths.
+
+Any solution of the resulting conditions has a path and possibly disjoint cycles. We check the selected vertices in the literal nine-cube and exclude any cycle from subsequent selections. An unsatisfiable formula gives a certified upper bound. At a crossing port the vertical edge uses one degree, so there can be at most one neighbour in the opposite face. The remaining branches enumerate that neighbour and the empty option whenever it could yield a global endpoint. If the port corresponds to a terminal return, an empty choice would isolate its vertical edge from $C$ and is impossible. [Port partitions](neighbours.py) ﾂｷ [Opposite-face model](returns.py)
+
+With one departure the opposite-face portion is a single eight-dimensional snake. For example, a 92-edge run, one departure and no return would require \(192-92-1=99\) opposite-face edges. The exact eight-cube maximum is 98. This provides a separate arithmetic exclusion wherever the required opposite arm exceeds 98. [Östergård and Pettersson, *Exhaustive Search for Snake-in-the-Box Codes*](https://link.springer.com/article/10.1007/s00373-014-1423-3)
+
+The full-cube calculation can also settle a whole endpoint parity before making these partitions. A 191-edge target has opposite endpoint parities. If it is impossible, trimming from the free ends excludes 192 as well. Every accepted construction is checked on all vertex pairs. Results from interrupted or allowance-limited branches enter the exclusions only when another complete argument covers them.

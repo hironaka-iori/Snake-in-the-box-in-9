@@ -4,7 +4,8 @@
 
 | Route | Working question | Status |
 |---|---|---|
-| [Single-crossing joins of eight-dimensional arms](ACTIVE.md) | Which long parents leave space for a partner that reaches a total of 192 edges? | Active across rounds |
+| [Two free ends of a retained interval](ACTIVE.md) | Which pieces of a long path can be kept while both ends grow freely to 192 edges? | Marked route, paused after Round 282 |
+| [Single-crossing joins of eight-dimensional arms](ACTIVE.md#earlier-one-crossing-construction) | Which long parents leave space for a partner that reaches a total of 192 edges? | Earlier construction and exclusions |
 | [Other constructions](alternative-constructions.md) | Can multiple crossings, a changed middle, local rerouting, a coil or a different seed produce a longer snake? | Recorded alternatives |
 | [Parity, symmetry and neighbour counts](structural-routes.md) | Which changes to the two parity classes or to their neighbour counts are compatible with a path? | Recorded alternatives and supporting methods |
 | [Proof completion and the global upper bound](proof-routes.md) | Which written results can be assembled in Lean, and what has the contributor proved for all snakes? | Separate proof work and contributor work |

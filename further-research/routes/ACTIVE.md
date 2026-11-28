@@ -1,14 +1,14 @@
 # Active route · Rebuild both ends of a retained nine-dimensional interval
 
-**Current construction.** Keep an interval of an archived snake and allow both ends to grow in all nine coordinates. Start with archive path `191-0`. Record the literal retained indices, the directions each tip can use and the verified length of every claimed construction. Round 279 locates the first newly available step at the left tip. [Prefix search](../../milestones/279-prefix-tail-spectrum/README.md)
+**Paused after Round 282.** Keep a consecutive part of an archived snake and allow both ends to grow in all nine coordinates. Every 100-edge interval of `191-0` excludes 192. The 22 long eight-dimensional middles also exclude 192 wherever they occur. The next retained piece is the first 93 edges of the 95-edge middle shared by 84 archived 191s. [Moving the interval](../../milestones/281-moving-the-retained-interval/README.md) · [Full-cube result](../../milestones/282-eight-dimensional-middle-in-the-full-cube/README.md)
 
 ## Earlier one-crossing construction
 
-## Why these three length splits suffice
+### Why these three length splits suffice
 
 Translate the two joining endpoints to zero in their respective faces. The joined path is induced exactly when the projected arms share only zero. A join with arms of lengths $a,b$ has $a+b+1$ edges. Since each arm has at most 98 edges, any one-crossing path of length at least 192 can be shortened at its free ends to 192 while retaining the crossing. Its unordered arm lengths are then $(96,95)$, $(97,94)$ or $(98,93)$.
 
-## Current checkpoint
+### Round 278 checkpoint
 
 All 22 archived two-crossing middle shapes exclude 192, including the 95-edge middle of 84 archived 191s. Rebuilding both ends in the full cube proves consecutive-overlap ceilings of 153 against every archived 191 and 159 against every archived 190. All eleven Round 277 shapes also exclude 192 when contained in a one-crossing arm. [Round 278](../../milestones/278-regrowing-two-free-ends/README.md)
 

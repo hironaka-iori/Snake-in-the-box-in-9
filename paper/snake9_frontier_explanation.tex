@@ -11,7 +11,7 @@
 \newtheorem{lemma}{Lemma}
 \title{The Nine-Dimensional Snake Problem:\\A Short Explanation of the Current Argument}
 \author{Iori Hironaka \quad Tommy Ma \quad Steven Zhan}
-\date{Research state after round 278, 27 November 2026}
+\date{Research state after round 282, 28 November 2026}
 \begin{document}
 \maketitle
 
@@ -1731,7 +1731,14 @@ The archives contain 49 such cases with a short arm of at most three edges. The 
 
 The 95-edge middle shared by 84 archived snakes of length 191 can be settled even when both outer arms change completely. Its exact maximum is 191. This resolves the fixed-middle case left open in Round 188. With a single crossing instead, none of the eleven 96-edge paths from Round 277 can occur as an interval of either arm in a 192-edge snake.
 
-Repeating the unrestricted middle calculation for all 22 shapes found in the archives gives an exact maximum of 191 for their entire two-crossing family. All 625 recorded crossings are covered. A different calculation allows any number of crossings and compares consecutive intervals. Any 192-edge snake could share at most 153 consecutive edges with an archived 191-edge snake and at most 159 with an archived 190-edge snake, even after renaming coordinates, translating, or reversing the paths.
+Repeating the unrestricted middle calculation for all 22 shapes found in the archives gives an exact maximum of 191 for their entire two-crossing family. All 625 choices of an archived path and a twice-used coordinate are covered. A different calculation allows any number of crossings and compares consecutive intervals. Any 192-edge snake could share at most 153 consecutive edges with an archived 191-edge snake and at most 159 with an archived 190-edge snake, even after renaming coordinates, translating, or reversing the paths.
+
+\section{Which old pieces must a longer snake change?}
+The 22 eight-dimensional shapes from the two-crossing study can now be excluded as consecutive pieces anywhere in a 192-edge snake. The two ends may use all nine directions and may cross back into the original face. Across all snakes containing one of these shapes, the exact maximum is 191 edges.
+
+The geometry explains how the extra crossings were handled. Mark the sites of the original face that lie outside the retained piece and have no neighbour on it. For all 22 shapes there are at most two such sites, and when there are two, they are nonadjacent. Once a tail leaves the original face, returning there uses one of those sites. Its only possible neighbour on the snake is the vertex directly across the crossing, so the snake must end there. Enumerating the possible terminal returns and checking the opposite-face paths settles the longer target.
+
+For the archived snake \texttt{191-0}, every 100-edge consecutive piece is too restrictive to reach 192 even if both ends are drawn afresh. Different separated pieces may still survive. Keeping the first 127 edges illustrates why freeing an end need not improve the result. The newly available step from 0 to 32 leads to an exact maximum of 186 if it is taken.
 
 \section{Remaining questions}
 A one-crossing join using any of the fifteen original long parent
@@ -1750,11 +1757,11 @@ a universal 197-edge exclusion. Constructions can change several
 separated pieces of the coil, permitting both parity classes and the
 path order to change. The unrestricted 192-edge question remains open.
 The universal seven-erasure proof still awaits Lean verification.
-The Round 270 written-source review covers both manuscripts.
+The written-source review through Round 282 covers both manuscripts.
 
 \smallskip
 {\small Detailed proofs, witnesses and verification records are retained
-in the companion manuscript and milestones through round 278.
+in the companion manuscript and milestones through round 282.
 The small-dimensional values appear in
 \href{https://oeis.org/A099155}{OEIS A099155}; the published 191-edge
 construction is in

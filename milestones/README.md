@@ -1,9 +1,13 @@
 # Research milestones
 
-Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 278. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
+Each numbered folder holds the mathematical argument and evidence for one round. Paused after Round 282. [Complete numeric index](CATALOG.md) · [Marked construction route](../further-research/routes/ACTIVE.md)
 
 | Question | Where to read |
 |---|---|
+| Can any of the 22 old middles occur anywhere in a 192-edge snake? | [282 · Eight-dimensional intervals in the full cube](282-eight-dimensional-middle-in-the-full-cube/README.md) |
+| Can any 100 consecutive edges of archive path `191-0` survive? | [281 · Moving the retained interval](281-moving-the-retained-interval/README.md) |
+| What does taking the newly available step at the left tip permit? | [280 · Rebuilding both ends after the tip opens](280-unlocking-the-first-tip/README.md) |
+| How many 191-edge completions share the first 134 edges? | [279 · Exact completions of a record prefix](279-prefix-tail-spectrum/README.md) |
 | How much of an archived snake can a 192-edge construction retain? | [278 · Rebuilding outer arms around a retained interval](278-regrowing-two-free-ends/README.md) |
 | Can the shorter side of a possible 98-edge one-crossing construction use a coordinate only once? | [277 · The shorter arm of a one-crossing optimal candidate](277-shorter-seven-dimensional-arms/README.md) |
 | Can a different optimal eight-dimensional arm or a better partner be constructed? | [276 · Reconstructing partners of an optimal eight-dimensional arm](276-partners-of-optimal-arms/README.md) |

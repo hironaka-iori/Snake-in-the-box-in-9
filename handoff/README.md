@@ -1,6 +1,6 @@
 # Research handoffs
 
-The Round 278 handoff covers the exact maximum for the 22 archived two-crossing middles and the full-cube overlap bounds. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
+The Round 282 handoff covers the 22 forbidden intervals in the full nine-cube, the overlap bound for archive path `191-0` and the marked interval for resumption. [Current handoff](CURRENT_STATUS.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 | Earlier transfer | Contents |
 |---|---|

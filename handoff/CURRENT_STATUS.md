@@ -1,6 +1,6 @@
 # Current research handoff
 
-**Paused after Round 278.** The exact maximum across the 22 observed two-crossing middle shapes is 191 with both arms unrestricted. Every 154-edge interval of the archived 191s and every 160-edge interval of the archived 190s exclude 192 even in the full cube. All eleven Round 277 shapes are excluded as intervals of one-crossing arms. [Evidence](../milestones/278-regrowing-two-free-ends/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
+**Paused after the four completed rounds 279–282.** The exact maximum is 191 for a snake containing any of the 22 archived eight-dimensional middles anywhere as a consecutive interval. All coordinate crossings are free. A 192-edge snake can share at most 99 consecutive edges with archive path `191-0`. On resumption use the first 93 edges of the frequent 95-edge middle. This shorter piece has three undominated sites which form a path. [Round 282 evidence](../milestones/282-eight-dimensional-middle-in-the-full-cube/README.md) · [Marked route](../further-research/routes/ACTIVE.md)
 
 The reviewed global interval is $191\le a(9)\le230$. Both certificate families are assembled in the final contributor theorem. The saved audit passed. A fresh independent rebuild of the full dependency chain remains pending. [Audited theorem and source review](../milestones/272-forty-nine-edge-parents/contributor.json)
 

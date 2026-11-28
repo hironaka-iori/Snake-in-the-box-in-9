@@ -6,11 +6,11 @@ A snake is a path through a hypercube in which two vertices are neighbours exact
 
 The short explanation compares 96- and 98-edge parents. The full paper gives the construction and the proofs. [Short explanation (PDF)](paper/pdf/snake9_frontier_explanation.pdf) · [Full paper (PDF)](paper/pdf/snake9_research.pdf) · [Manuscript sources and verification](paper/README.md)
 
-## Latest result · Round 278
+## Latest result · Round 282
 
-The exact two-crossing family maximum is 191 for the 22 middle shapes observed across 625 archived crossings, with both outer arms free. In the full nine-cube a 192-edge snake could share at most 153 consecutive edges with any archived 191 or 159 with any archived 190. [Evidence](milestones/278-regrowing-two-free-ends/README.md)
+The maximum is 191 for any nine-dimensional snake containing one of the 22 specified eight-dimensional paths as a consecutive piece, even when both ends and every coordinate crossing are free. The shapes occur in 98 of the 131 archived 191-edge snakes. A separate calculation rules out all 100-edge intervals of the archived snake `191-0` as pieces of a 192-edge snake. [Eight-dimensional intervals](milestones/282-eight-dimensional-middle-in-the-full-cube/README.md) · [Moving the interval](milestones/281-moving-the-retained-interval/README.md)
 
-Paused after Round 278. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
+Paused after Round 282. [Active route](further-research/routes/ACTIVE.md) · [Long-term goal](further-research/routes/RESEARCH_GOAL.md) · [Other routes](further-research/routes/README.md)
 
 ## Explore the repository
 

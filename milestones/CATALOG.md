@@ -310,3 +310,7 @@ Open a round to read its account and supporting material. The [milestone guide](
 | 276 | [Reconstructing partners of an optimal eight-dimensional arm](276-partners-of-optimal-arms/README.md) |
 | 277 | [The shorter arm of a one-crossing optimal candidate](277-shorter-seven-dimensional-arms/README.md) |
 | 278 | [Rebuilding outer arms around a retained interval](278-regrowing-two-free-ends/README.md) |
+| 279 | [Exact completions of the first 134 edges of a 191-edge snake](279-prefix-tail-spectrum/README.md) |
+| 280 | [Rebuilding both ends after the first tip opens](280-unlocking-the-first-tip/README.md) |
+| 281 | [Moving the retained interval through every position](281-moving-the-retained-interval/README.md) |
+| 282 | [The 22 eight-dimensional middle shapes anywhere in the nine-cube](282-eight-dimensional-middle-in-the-full-cube/README.md) |
