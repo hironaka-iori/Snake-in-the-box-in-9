@@ -165,6 +165,9 @@ and its empty-square refinement with their original constants.
 \paragraph{Reading order and status.}
 The strongest conclusions can be read before the chronological development:
 \begin{itemize}
+\item Theorem~\ref{thm:triedge} characterises all nine-dimensional snakes
+by paths in two eight-dimensional faces and gives an exact criterion
+for a 192-edge construction.
 \item Section~\ref{sec:bound231} gives the completed contributor bound 230.
 The square census and local inequalities explain the upper-bound methods.
 The earlier completed 233 argument and the alternative conditional 234
@@ -231,6 +234,80 @@ A 191-edge snake exists in $\Q_9$.
 \begin{proof}
 The first transition sequence in Appendix~\ref{app:witness} is the published Appendix E example of \cite{orland}. Starting at zero reconstructs 192 vertices. For each $0\le i<j\le191$, direct calculation gives $v_i\ne v_j$ and $\Ham(v_i,v_j)=1$ exactly when $j=i+1$. This is a finite verification of $\binom{192}{2}=18\,336$ unordered pairs using the displayed transition sequence, and establishes a snake of length 191.
 \end{proof}
+
+\subsection{The TRiEDGE theorem}\label{sec:triedge}
+Split $\Q_9$ along one coordinate into two copies of $\Q_8$.
+Let $A,B\subseteq V(\Q_8)$ be the sets of positions occupied in the two faces,
+respectively, with $A\cup B\ne\varnothing$. The occupied vertices in $\Q_9$ are
+$(A\times\{0\})\cup(B\times\{1\})$. For each $x\in A\cap B$, the edge
+from $(x,0)$ to $(x,1)$ is a crossing.
+
+\begin{theorem}[TRiEDGE]\label{thm:triedge}
+The occupied vertices induce a snake in $\Q_9$ if and only if the following
+three conditions hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The induced subgraphs $\Q_8[A]$ and $\Q_8[B]$ are disjoint unions
+of paths, allowing single vertices as components.
+\item Each $x\in A\cap B$ has degree at most one in each of
+$\Q_8[A]$ and $\Q_8[B]$.
+\item Contract each face component to a point and retain one edge for
+each crossing. The resulting multigraph is a path, allowing a single
+point. Two crossings between the same pair of components give parallel
+edges and violate this condition.
+\end{enumerate}
+Call a pair satisfying these conditions compatible. Let
+$u=256-|A\cup B|$ count the positions occupied in neither face and
+$c=|A\cap B|$ count the positions occupied in both. Then
+\[
+  \boxed{\displaystyle a(9)=255-\min_{(A,B)\ \mathrm{compatible}}(u-c).}
+\]
+\end{theorem}
+\begin{proof}
+Cut a snake at every crossing. Each remaining segment is a path in one
+face. An edge joining two different segments in that face would be a
+chord, so the segments are precisely the face components. Each crossing
+uses an end of each incident segment, and contraction leaves the segments
+in their order along the snake. This proves necessity.
+
+Conversely, follow the face components in the order prescribed by
+\textup{(iii)}. An internal component has two crossings. They attach to
+distinct vertices because each position supplies only one crossing.
+By \textup{(ii)} those vertices are its two ends, so the component can
+be traversed from one to the other. The same traversal starts or finishes
+at the free end of each terminal component. A lone component is already
+a path. By \textup{(i)} these traversals account for every induced edge
+within either face. Across the faces two vertices are adjacent exactly
+when their positions agree, and every such edge was retained in
+\textup{(iii)}. Hence the resulting path is induced.
+
+There are $256-u$ positions occupied at least once. The $c$ shared
+positions each supply one additional vertex, giving $256-u+c$ vertices
+and $255-u+c$ edges. Every snake yields a compatible pair for the chosen
+coordinate split, so maximising this length proves the formula.
+\end{proof}
+
+\begin{corollary}[The 191-edge optimality criterion]\label{cor:triedge-191}
+The equality $a(9)=191$ holds if and only if $u\ge c+64$ for every
+compatible pair. A 192-edge snake exists if and only if there is a
+compatible pair with $u-c=63$ and $1\le c\le21$.
+\end{corollary}
+\begin{proof}
+The verified 191-edge snake of Theorem~\ref{thm:lower} attains $u-c=64$.
+The minimum in Theorem~\ref{thm:triedge} therefore equals 64 exactly
+when the stated universal inequality holds. A pair with $u-c=63$
+constructs a snake of length 192. Conversely, among the nine coordinates
+of a 192-edge snake, one is flipped at most $\lfloor192/9\rfloor=21$
+times. Each coordinate is flipped at least once, since a snake confined
+to one eight-dimensional face has at most 98 edges~\cite{ostergard}.
+Permute a least-used coordinate into the splitting position. Its flip
+count is $c$.
+\end{proof}
+
+Every longer snake contains a 192-edge prefix. Thus excluding the
+pairs in the second assertion would settle optimality at 191.
+By Section~\ref{sec:forbidden-q8-intervals}, each face component of such
+a pair must avoid the 22 specified eight-dimensional paths as consecutive
+segments. The inequality for all compatible pairs remains open.
 
 \part{Square counts and upper-bound deductions}
 \section{The exact square census}\label{sec:incidence}
@@ -11416,7 +11493,7 @@ Across all 22 archived middle shapes the exact family maximum is 191. For target
 
 A separate nine-dimensional result allows arbitrary coordinate crossings. Any 192-edge snake shares at most 153 consecutive edges with each of the 131 archived 191-edge snakes, and at most 159 consecutive edges with each of the 1,042 archived 190-edge snakes, up to cube symmetry and reversal. Thus every one of the 4,978 windows of length 154 in the former archive and every one of the 32,302 windows of length 160 in the latter archive is excluded. To prove the statements, take a retained interval of \(c\) edges. Its internal vertices already have their two required neighbours. Enumerate permitted left and right tails with the entire interval held fixed. A pair with combined length \(192-c\) fits exactly when every cross-tail pair of new vertices has Hamming distance at least two. Independent enumerations and checks of matching pairs exclude the required extensions. A second source of exclusions comes from branching on the active tip and bounding the size and parity of each reachable component. The final calculation reconstructs 29,710 literal occurrences of certificates used to cover all archive windows. This result places no restriction on the number of crossings of a coordinate.
 
-\section{Forbidden eight-dimensional intervals in the full nine-cube}
+\section{Forbidden eight-dimensional intervals in the full nine-cube}\label{sec:forbidden-q8-intervals}
 Fix one of the 22 eight-dimensional middle shapes extracted from the archived 190- and 191-edge snakes. Among all nine-dimensional snakes containing any one of these ordered shapes as a consecutive interval, the exact maximum is 191 edges. The containing snake may use all nine coordinates at either end and may cross the distinguished coordinate any number of times. The archived constructions give the lower bound. Any longer example could be shortened to 192 by trimming free ends while retaining the specified interval.
 
 Let \(M\) be the fixed interval in one eight-dimensional face and let \(U\) consist of vertices of that face outside \(M\) with no neighbour on \(M\). Let \(C\) be the entire consecutive run in the face that contains \(M\). Any occupied vertex of this face outside \(C\) has no neighbour on \(C\), since such an edge would be a chord. If \(U\) is independent, any such vertex has at most one neighbour on the full snake, its copy in the opposite face. It must therefore be a global endpoint. In particular the distinguished coordinate occurs at most \(2+\min(2,|U|)\) times. Nine of the 22 intervals have an empty \(U\), six have one undominated vertex and seven have two nonadjacent undominated vertices.
